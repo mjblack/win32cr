@@ -1,0 +1,9 @@
+name: win32cr
+version: 0.2.0
+
+authors:
+  - Matthew J. Black <mjblack@gmail.com>
+
+crystal: 1.8.1
+
+license: MIT
