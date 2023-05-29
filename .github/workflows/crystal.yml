@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: crystal version
+      run: crystal version
     - name: Install dependencies
       run: shards install
     - name: Run tests
