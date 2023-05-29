@@ -11,10 +11,14 @@ jobs:
 
     runs-on: windows-latest
 
-    container:
-      image: crystallang/crystal
 
     steps:
+    - name: Scoop Installer
+      uses: MinoruSekine/setup-scoop@main
+    - name: Scoop Bucket Add
+      run: scoop bucket add crystal-preview https://github.com/neatorobito/scoop-crystal
+    - name: Scoop Crystal Install
+      run: scoop install crystal
     - uses: actions/checkout@v3
     - name: crystal version
       run: crystal version
