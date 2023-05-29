@@ -567,62 +567,62 @@ lib LibWin32
     FILTERSPEC_END = 6
   end
 
-union RSVP_SESSION_sess_u_e__Union
-  sess_ipv4 : Session_IPv4
-end
-union RSVP_HOP_hop_u_e__Union
-  hop_ipv4 : Rsvp_Hop_IPv4
-end
-union FILTER_SPEC_filt_u_e__Union
-  filt_ipv4 : Filter_Spec_IPv4
-  filt_ipv4gpi : Filter_Spec_IPv4GPI
-end
-union RSVP_SCOPE_scope_u_e__Union
-  scopl_ipv4 : Scope_list_ipv4
-end
-union ERROR_SPEC_errs_u_e__Union
-  errs_ipv4 : Error_Spec_IPv4
-end
-union IntServTspecBody_tspec_u_e__Union
-  gen_stspec : GenTspec
-  qual_stspec : QualTspec
-end
-union IntServFlowSpec_spec_u_e__Union
-  cl_spec : CtrlLoadFlowspec
-  g_spec : GuarFlowSpec
-  q_spec : QualAppFlowSpec
-end
-union Flow_desc_u1_e__Union
-  stspec : SENDER_TSPEC*
-  isflow : IS_FLOWSPEC*
-end
-union Flow_desc_u2_e__Union
-  stemp : FILTER_SPEC*
-  fspec : FILTER_SPEC*
-end
-union IP_PATTERN_S_un_e__Union
-  s_un_ports : IP_PATTERN_S_un_e__Union_S_un_ports_e__Struct
-  s_un_icmp : IP_PATTERN_S_un_e__Union_S_un_icmp_e__Struct
-  s_spi : UInt32
-end
-union IN_ADDR_IPV4
-  addr : UInt32
-  addr_bytes : UInt8[4]*
-end
-union RSVP_FILTERSPEC_Anonymous_e__Union
-  filter_spec_v4 : RSVP_FILTERSPEC_V4
-  filter_spec_v6 : RSVP_FILTERSPEC_V6
-  filter_spec_v6_flow : RSVP_FILTERSPEC_V6_FLOW
-  filter_spec_v4_gpi : RSVP_FILTERSPEC_V4_GPI
-  filter_spec_v6_gpi : RSVP_FILTERSPEC_V6_GPI
-end
-union CONTROL_SERVICE_Anonymous_e__Union
-  guaranteed : AD_GUARANTEED
-  param_buffer : PARAM_BUFFER[0]*
-end
-union Tag_sipaevent_vsm_idk_info_payload_Anonymous_e__Union
-  rsa_key_info : Tag_sipaevent_vsm_idk_rsa_info
-end
+  union RSVP_SESSION_sess_u_e__Union
+    sess_ipv4 : Session_IPv4
+  end
+  union RSVP_HOP_hop_u_e__Union
+    hop_ipv4 : Rsvp_Hop_IPv4
+  end
+  union FILTER_SPEC_filt_u_e__Union
+    filt_ipv4 : Filter_Spec_IPv4
+    filt_ipv4gpi : Filter_Spec_IPv4GPI
+  end
+  union RSVP_SCOPE_scope_u_e__Union
+    scopl_ipv4 : Scope_list_ipv4
+  end
+  union ERROR_SPEC_errs_u_e__Union
+    errs_ipv4 : Error_Spec_IPv4
+  end
+  union IntServTspecBody_tspec_u_e__Union
+    gen_stspec : GenTspec
+    qual_stspec : QualTspec
+  end
+  union IntServFlowSpec_spec_u_e__Union
+    cl_spec : CtrlLoadFlowspec
+    g_spec : GuarFlowSpec
+    q_spec : QualAppFlowSpec
+  end
+  union Flow_desc_u1_e__Union
+    stspec : SENDER_TSPEC*
+    isflow : IS_FLOWSPEC*
+  end
+  union Flow_desc_u2_e__Union
+    stemp : FILTER_SPEC*
+    fspec : FILTER_SPEC*
+  end
+  union IP_PATTERN_S_un_e__Union
+    s_un_ports : IP_PATTERN_S_un_e__Union_S_un_ports_e__Struct
+    s_un_icmp : IP_PATTERN_S_un_e__Union_S_un_icmp_e__Struct
+    s_spi : UInt32
+  end
+  union IN_ADDR_IPV4
+    addr : UInt32
+    addr_bytes : UInt8[4]*
+  end
+  union RSVP_FILTERSPEC_Anonymous_e__Union
+    filter_spec_v4 : RSVP_FILTERSPEC_V4
+    filter_spec_v6 : RSVP_FILTERSPEC_V6
+    filter_spec_v6_flow : RSVP_FILTERSPEC_V6_FLOW
+    filter_spec_v4_gpi : RSVP_FILTERSPEC_V4_GPI
+    filter_spec_v6_gpi : RSVP_FILTERSPEC_V6_GPI
+  end
+  union CONTROL_SERVICE_Anonymous_e__Union
+    guaranteed : AD_GUARANTEED
+    param_buffer : PARAM_BUFFER[0]*
+  end
+  union Tag_sipaevent_vsm_idk_info_payload_Anonymous_e__Union
+    rsa_key_info : Tag_sipaevent_vsm_idk_rsa_info
+  end
 
   struct FLOWSPEC
     token_rate : UInt32

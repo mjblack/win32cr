@@ -1311,121 +1311,121 @@ lib LibWin32
     MaximumFileIdType = 3
   end
 
-union NTMS_OBJECTINFORMATIONA_Info_e__Union
-  drive : NTMS_DRIVEINFORMATIONA
-  drive_type : NTMS_DRIVETYPEINFORMATIONA
-  library : NTMS_LIBRARYINFORMATION
-  changer : NTMS_CHANGERINFORMATIONA
-  changer_type : NTMS_CHANGERTYPEINFORMATIONA
-  storage_slot : NTMS_STORAGESLOTINFORMATION
-  ie_door : NTMS_IEDOORINFORMATION
-  ie_port : NTMS_IEPORTINFORMATION
-  physical_media : NTMS_PMIDINFORMATIONA
-  logical_media : NTMS_LMIDINFORMATION
-  partition : NTMS_PARTITIONINFORMATIONA
-  media_pool : NTMS_MEDIAPOOLINFORMATION
-  media_type : NTMS_MEDIATYPEINFORMATION
-  lib_request : NTMS_LIBREQUESTINFORMATIONA
-  op_request : NTMS_OPREQUESTINFORMATIONA
-  computer : NTMS_COMPUTERINFORMATION
-end
-union NTMS_OBJECTINFORMATIONW_Info_e__Union
-  drive : NTMS_DRIVEINFORMATIONW
-  drive_type : NTMS_DRIVETYPEINFORMATIONW
-  library : NTMS_LIBRARYINFORMATION
-  changer : NTMS_CHANGERINFORMATIONW
-  changer_type : NTMS_CHANGERTYPEINFORMATIONW
-  storage_slot : NTMS_STORAGESLOTINFORMATION
-  ie_door : NTMS_IEDOORINFORMATION
-  ie_port : NTMS_IEPORTINFORMATION
-  physical_media : NTMS_PMIDINFORMATIONW
-  logical_media : NTMS_LMIDINFORMATION
-  partition : NTMS_PARTITIONINFORMATIONW
-  media_pool : NTMS_MEDIAPOOLINFORMATION
-  media_type : NTMS_MEDIATYPEINFORMATION
-  lib_request : NTMS_LIBREQUESTINFORMATIONW
-  op_request : NTMS_OPREQUESTINFORMATIONW
-  computer : NTMS_COMPUTERINFORMATION
-end
-union NTMS_I1_OBJECTINFORMATIONA_Info_e__Union
-  drive : NTMS_DRIVEINFORMATIONA
-  drive_type : NTMS_DRIVETYPEINFORMATIONA
-  library : NTMS_I1_LIBRARYINFORMATION
-  changer : NTMS_CHANGERINFORMATIONA
-  changer_type : NTMS_CHANGERTYPEINFORMATIONA
-  storage_slot : NTMS_STORAGESLOTINFORMATION
-  ie_door : NTMS_IEDOORINFORMATION
-  ie_port : NTMS_IEPORTINFORMATION
-  physical_media : NTMS_I1_PMIDINFORMATIONA
-  logical_media : NTMS_LMIDINFORMATION
-  partition : NTMS_I1_PARTITIONINFORMATIONA
-  media_pool : NTMS_MEDIAPOOLINFORMATION
-  media_type : NTMS_MEDIATYPEINFORMATION
-  lib_request : NTMS_I1_LIBREQUESTINFORMATIONA
-  op_request : NTMS_I1_OPREQUESTINFORMATIONA
-end
-union NTMS_I1_OBJECTINFORMATIONW_Info_e__Union
-  drive : NTMS_DRIVEINFORMATIONW
-  drive_type : NTMS_DRIVETYPEINFORMATIONW
-  library : NTMS_I1_LIBRARYINFORMATION
-  changer : NTMS_CHANGERINFORMATIONW
-  changer_type : NTMS_CHANGERTYPEINFORMATIONW
-  storage_slot : NTMS_STORAGESLOTINFORMATION
-  ie_door : NTMS_IEDOORINFORMATION
-  ie_port : NTMS_IEPORTINFORMATION
-  physical_media : NTMS_I1_PMIDINFORMATIONW
-  logical_media : NTMS_LMIDINFORMATION
-  partition : NTMS_I1_PARTITIONINFORMATIONW
-  media_pool : NTMS_MEDIAPOOLINFORMATION
-  media_type : NTMS_MEDIATYPEINFORMATION
-  lib_request : NTMS_I1_LIBREQUESTINFORMATIONW
-  op_request : NTMS_I1_OPREQUESTINFORMATIONW
-end
-union CLFS_MGMT_POLICY_PolicyParameters_e__Union
-  maximum_size : CLFS_MGMT_POLICY_PolicyParameters_e__Union_MaximumSize_e__Struct
-  minimum_size : CLFS_MGMT_POLICY_PolicyParameters_e__Union_MinimumSize_e__Struct
-  new_container_size : CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSize_e__Struct
-  growth_rate : CLFS_MGMT_POLICY_PolicyParameters_e__Union_GrowthRate_e__Struct
-  log_tail : CLFS_MGMT_POLICY_PolicyParameters_e__Union_LogTail_e__Struct
-  auto_shrink : CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoShrink_e__Struct
-  auto_grow : CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoGrow_e__Struct
-  new_container_prefix : CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerPrefix_e__Struct
-  new_container_suffix : CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSuffix_e__Struct
-  new_container_extension : CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerExtension_e__Struct
-end
-union IORING_HANDLE_REFHandleUnion
-  handle : LibC::HANDLE
-  index : UInt32
-end
-union IORING_BUFFER_REFBufferUnion
-  address : Void*
-  index_and_offset : IORING_REGISTERED_BUFFER
-end
-union FILE_SEGMENT_ELEMENT
-  buffer : Void*
-  alignment : UInt64
-end
-union COPYFILE2_MESSAGE_Info_e__Union
-  chunk_started : COPYFILE2_MESSAGE_Info_e__Union_ChunkStarted_e__Struct
-  chunk_finished : COPYFILE2_MESSAGE_Info_e__Union_ChunkFinished_e__Struct
-  stream_started : COPYFILE2_MESSAGE_Info_e__Union_StreamStarted_e__Struct
-  stream_finished : COPYFILE2_MESSAGE_Info_e__Union_StreamFinished_e__Struct
-  poll_continue : COPYFILE2_MESSAGE_Info_e__Union_PollContinue_e__Struct
-  error : COPYFILE2_MESSAGE_Info_e__Union_Error_e__Struct
-end
-union FILE_RENAME_INFO_Anonymous_e__Union
-  replace_if_exists : BOOLEAN
-  flags : UInt32
-end
-union FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union
-  smb2 : FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct
-  reserved : UInt32[16]*
-end
-union FILE_ID_DESCRIPTOR_Anonymous_e__Union
-  file_id : LARGE_INTEGER
-  object_id : Guid
-  extended_file_id : FILE_ID_128
-end
+  union NTMS_OBJECTINFORMATIONA_Info_e__Union
+    drive : NTMS_DRIVEINFORMATIONA
+    drive_type : NTMS_DRIVETYPEINFORMATIONA
+    library : NTMS_LIBRARYINFORMATION
+    changer : NTMS_CHANGERINFORMATIONA
+    changer_type : NTMS_CHANGERTYPEINFORMATIONA
+    storage_slot : NTMS_STORAGESLOTINFORMATION
+    ie_door : NTMS_IEDOORINFORMATION
+    ie_port : NTMS_IEPORTINFORMATION
+    physical_media : NTMS_PMIDINFORMATIONA
+    logical_media : NTMS_LMIDINFORMATION
+    partition : NTMS_PARTITIONINFORMATIONA
+    media_pool : NTMS_MEDIAPOOLINFORMATION
+    media_type : NTMS_MEDIATYPEINFORMATION
+    lib_request : NTMS_LIBREQUESTINFORMATIONA
+    op_request : NTMS_OPREQUESTINFORMATIONA
+    computer : NTMS_COMPUTERINFORMATION
+  end
+  union NTMS_OBJECTINFORMATIONW_Info_e__Union
+    drive : NTMS_DRIVEINFORMATIONW
+    drive_type : NTMS_DRIVETYPEINFORMATIONW
+    library : NTMS_LIBRARYINFORMATION
+    changer : NTMS_CHANGERINFORMATIONW
+    changer_type : NTMS_CHANGERTYPEINFORMATIONW
+    storage_slot : NTMS_STORAGESLOTINFORMATION
+    ie_door : NTMS_IEDOORINFORMATION
+    ie_port : NTMS_IEPORTINFORMATION
+    physical_media : NTMS_PMIDINFORMATIONW
+    logical_media : NTMS_LMIDINFORMATION
+    partition : NTMS_PARTITIONINFORMATIONW
+    media_pool : NTMS_MEDIAPOOLINFORMATION
+    media_type : NTMS_MEDIATYPEINFORMATION
+    lib_request : NTMS_LIBREQUESTINFORMATIONW
+    op_request : NTMS_OPREQUESTINFORMATIONW
+    computer : NTMS_COMPUTERINFORMATION
+  end
+  union NTMS_I1_OBJECTINFORMATIONA_Info_e__Union
+    drive : NTMS_DRIVEINFORMATIONA
+    drive_type : NTMS_DRIVETYPEINFORMATIONA
+    library : NTMS_I1_LIBRARYINFORMATION
+    changer : NTMS_CHANGERINFORMATIONA
+    changer_type : NTMS_CHANGERTYPEINFORMATIONA
+    storage_slot : NTMS_STORAGESLOTINFORMATION
+    ie_door : NTMS_IEDOORINFORMATION
+    ie_port : NTMS_IEPORTINFORMATION
+    physical_media : NTMS_I1_PMIDINFORMATIONA
+    logical_media : NTMS_LMIDINFORMATION
+    partition : NTMS_I1_PARTITIONINFORMATIONA
+    media_pool : NTMS_MEDIAPOOLINFORMATION
+    media_type : NTMS_MEDIATYPEINFORMATION
+    lib_request : NTMS_I1_LIBREQUESTINFORMATIONA
+    op_request : NTMS_I1_OPREQUESTINFORMATIONA
+  end
+  union NTMS_I1_OBJECTINFORMATIONW_Info_e__Union
+    drive : NTMS_DRIVEINFORMATIONW
+    drive_type : NTMS_DRIVETYPEINFORMATIONW
+    library : NTMS_I1_LIBRARYINFORMATION
+    changer : NTMS_CHANGERINFORMATIONW
+    changer_type : NTMS_CHANGERTYPEINFORMATIONW
+    storage_slot : NTMS_STORAGESLOTINFORMATION
+    ie_door : NTMS_IEDOORINFORMATION
+    ie_port : NTMS_IEPORTINFORMATION
+    physical_media : NTMS_I1_PMIDINFORMATIONW
+    logical_media : NTMS_LMIDINFORMATION
+    partition : NTMS_I1_PARTITIONINFORMATIONW
+    media_pool : NTMS_MEDIAPOOLINFORMATION
+    media_type : NTMS_MEDIATYPEINFORMATION
+    lib_request : NTMS_I1_LIBREQUESTINFORMATIONW
+    op_request : NTMS_I1_OPREQUESTINFORMATIONW
+  end
+  union CLFS_MGMT_POLICY_PolicyParameters_e__Union
+    maximum_size : CLFS_MGMT_POLICY_PolicyParameters_e__Union_MaximumSize_e__Struct
+    minimum_size : CLFS_MGMT_POLICY_PolicyParameters_e__Union_MinimumSize_e__Struct
+    new_container_size : CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSize_e__Struct
+    growth_rate : CLFS_MGMT_POLICY_PolicyParameters_e__Union_GrowthRate_e__Struct
+    log_tail : CLFS_MGMT_POLICY_PolicyParameters_e__Union_LogTail_e__Struct
+    auto_shrink : CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoShrink_e__Struct
+    auto_grow : CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoGrow_e__Struct
+    new_container_prefix : CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerPrefix_e__Struct
+    new_container_suffix : CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSuffix_e__Struct
+    new_container_extension : CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerExtension_e__Struct
+  end
+  union IORING_HANDLE_REF_HandleUnion
+    handle : LibC::HANDLE
+    index : UInt32
+  end
+  union IORING_BUFFER_REF_BufferUnion
+    address : Void*
+    index_and_offset : IORING_REGISTERED_BUFFER
+  end
+  union FILE_SEGMENT_ELEMENT
+    buffer : Void*
+    alignment : UInt64
+  end
+  union COPYFILE2_MESSAGE_Info_e__Union
+    chunk_started : COPYFILE2_MESSAGE_Info_e__Union_ChunkStarted_e__Struct
+    chunk_finished : COPYFILE2_MESSAGE_Info_e__Union_ChunkFinished_e__Struct
+    stream_started : COPYFILE2_MESSAGE_Info_e__Union_StreamStarted_e__Struct
+    stream_finished : COPYFILE2_MESSAGE_Info_e__Union_StreamFinished_e__Struct
+    poll_continue : COPYFILE2_MESSAGE_Info_e__Union_PollContinue_e__Struct
+    error : COPYFILE2_MESSAGE_Info_e__Union_Error_e__Struct
+  end
+  union FILE_RENAME_INFO_Anonymous_e__Union
+    replace_if_exists : BOOLEAN
+    flags : UInt32
+  end
+  union FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union
+    smb2 : FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct
+    reserved : UInt32[16]*
+  end
+  union FILE_ID_DESCRIPTOR_Anonymous_e__Union
+    file_id : LARGE_INTEGER
+    object_id : Guid
+    extended_file_id : FILE_ID_128
+  end
 
   struct WIN32_FIND_DATAA
     dw_file_attributes : UInt32
@@ -2662,11 +2662,11 @@ end
   end
   struct IORING_HANDLE_REF
     kind : IORING_REF_KIND
-    handle : IORING_HANDLE_REFHandleUnion
+    handle : IORING_HANDLE_REF_HandleUnion
   end
   struct IORING_BUFFER_REF
     kind : IORING_REF_KIND
-    buffer : IORING_BUFFER_REFBufferUnion
+    buffer : IORING_BUFFER_REF_BufferUnion
   end
   struct IORING_CQE
     user_data : LibC::UINT_PTR

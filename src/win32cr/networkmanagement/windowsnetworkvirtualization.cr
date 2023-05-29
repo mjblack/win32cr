@@ -32,15 +32,15 @@ lib LibWin32
     WnvCustomerAddressMax = 3
   end
 
-union WNV_IP_ADDRESS_IP_e__Union
-  v4 : IN_ADDR
-  v6 : IN6_ADDR
-  addr : UInt8[16]*
-end
-union WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union
-  provider_address_change : WNV_PROVIDER_ADDRESS_CHANGE_PARAM
-  customer_address_change : WNV_CUSTOMER_ADDRESS_CHANGE_PARAM
-end
+  union WNV_IP_ADDRESS_IP_e__Union
+    v4 : IN_ADDR
+    v6 : IN6_ADDR
+    addr : UInt8[16]*
+  end
+  union WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union
+    provider_address_change : WNV_PROVIDER_ADDRESS_CHANGE_PARAM
+    customer_address_change : WNV_CUSTOMER_ADDRESS_CHANGE_PARAM
+  end
 
   struct WNV_OBJECT_HEADER
     major_version : UInt8

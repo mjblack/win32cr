@@ -2243,14 +2243,14 @@ lib LibWin32
     IndicationTypeLinkQuality = 4
   end
 
-union NDIS_802_11_TEST_Anonymous_e__Union
-  authentication_event : NDIS_802_11_AUTHENTICATION_EVENT
-  rssi_trigger : Int32
-end
-union NDIS_GUID_Anonymous_e__Union
-  oid : UInt32
-  status : Int32
-end
+  union NDIS_802_11_TEST_Anonymous_e__Union
+    authentication_event : NDIS_802_11_AUTHENTICATION_EVENT
+    rssi_trigger : Int32
+  end
+  union NDIS_GUID_Anonymous_e__Union
+    oid : UInt32
+    status : Int32
+  end
 
   struct NDIS_STATISTICS_VALUE
     oid : UInt32

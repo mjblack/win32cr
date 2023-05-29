@@ -182,55 +182,55 @@ lib LibWin32
     GNSS_Ni_UserResponseTimeout = 3
   end
 
-union GNSS_FIXSESSION_PARAM_Anonymous_e__Union
-  single_shot_param : GNSS_SINGLESHOT_PARAM
-  distance_param : GNSS_DISTANCETRACKING_PARAM
-  continuous_param : GNSS_CONTINUOUSTRACKING_PARAM
-  lkg_fix_param : GNSS_LKGFIX_PARAM
-  unused_param : UInt8[268]*
-end
-union GNSS_BREADCRUMB_LIST_Anonymous_e__Union
-  v1 : GNSS_BREADCRUMB_V1[50]*
-end
-union GNSS_GEOREGION_Anonymous_e__Union
-  circle : GNSS_GEOREGION_CIRCLE
-  unused : UInt8[512]*
-end
-union GNSS_NI_REQUEST_PARAM_Anonymous_e__Union
-  supl_ni_info : GNSS_SUPL_NI_INFO
-  cp_ni_info : GNSS_CP_NI_INFO
-  v2_upl_ni_info : GNSS_V2UPL_NI_INFO
-end
-union GNSS_EVENT_Anonymous_e__Union
-  fix_data : GNSS_FIXDATA
-  agnss_request : GNSS_AGNSS_REQUEST_PARAM
-  ni_request : GNSS_NI_REQUEST_PARAM
-  error_information : GNSS_ERRORINFO
-  nmea_data : GNSS_NMEA_DATA
-  geofence_alert_data : GNSS_GEOFENCE_ALERT_DATA
-  breadcrumb_alert_data : GNSS_BREADCRUMBING_ALERT_DATA
-  geofences_tracking_status : GNSS_GEOFENCES_TRACKINGSTATUS_DATA
-  driver_request_data : GNSS_DRIVER_REQUEST_DATA
-  custom_data : UInt8[0]*
-end
-union GNSS_EVENT_2_Anonymous_e__Union
-  fix_data : GNSS_FIXDATA
-  fix_data2 : GNSS_FIXDATA_2
-  agnss_request : GNSS_AGNSS_REQUEST_PARAM
-  ni_request : GNSS_NI_REQUEST_PARAM
-  error_information : GNSS_ERRORINFO
-  nmea_data : GNSS_NMEA_DATA
-  geofence_alert_data : GNSS_GEOFENCE_ALERT_DATA
-  breadcrumb_alert_data : GNSS_BREADCRUMBING_ALERT_DATA
-  geofences_tracking_status : GNSS_GEOFENCES_TRACKINGSTATUS_DATA
-  driver_request_data : GNSS_DRIVER_REQUEST_DATA
-  custom_data : UInt8[0]*
-end
-union GNSS_AGNSS_INJECT_Anonymous_e__Union
-  time : GNSS_AGNSS_INJECTTIME
-  position : GNSS_AGNSS_INJECTPOSITION
-  blob_data : GNSS_AGNSS_INJECTBLOB
-end
+  union GNSS_FIXSESSION_PARAM_Anonymous_e__Union
+    single_shot_param : GNSS_SINGLESHOT_PARAM
+    distance_param : GNSS_DISTANCETRACKING_PARAM
+    continuous_param : GNSS_CONTINUOUSTRACKING_PARAM
+    lkg_fix_param : GNSS_LKGFIX_PARAM
+    unused_param : UInt8[268]*
+  end
+  union GNSS_BREADCRUMB_LIST_Anonymous_e__Union
+    v1 : GNSS_BREADCRUMB_V1[50]*
+  end
+  union GNSS_GEOREGION_Anonymous_e__Union
+    circle : GNSS_GEOREGION_CIRCLE
+    unused : UInt8[512]*
+  end
+  union GNSS_NI_REQUEST_PARAM_Anonymous_e__Union
+    supl_ni_info : GNSS_SUPL_NI_INFO
+    cp_ni_info : GNSS_CP_NI_INFO
+    v2_upl_ni_info : GNSS_V2UPL_NI_INFO
+  end
+  union GNSS_EVENT_Anonymous_e__Union
+    fix_data : GNSS_FIXDATA
+    agnss_request : GNSS_AGNSS_REQUEST_PARAM
+    ni_request : GNSS_NI_REQUEST_PARAM
+    error_information : GNSS_ERRORINFO
+    nmea_data : GNSS_NMEA_DATA
+    geofence_alert_data : GNSS_GEOFENCE_ALERT_DATA
+    breadcrumb_alert_data : GNSS_BREADCRUMBING_ALERT_DATA
+    geofences_tracking_status : GNSS_GEOFENCES_TRACKINGSTATUS_DATA
+    driver_request_data : GNSS_DRIVER_REQUEST_DATA
+    custom_data : UInt8[0]*
+  end
+  union GNSS_EVENT_2_Anonymous_e__Union
+    fix_data : GNSS_FIXDATA
+    fix_data2 : GNSS_FIXDATA_2
+    agnss_request : GNSS_AGNSS_REQUEST_PARAM
+    ni_request : GNSS_NI_REQUEST_PARAM
+    error_information : GNSS_ERRORINFO
+    nmea_data : GNSS_NMEA_DATA
+    geofence_alert_data : GNSS_GEOFENCE_ALERT_DATA
+    breadcrumb_alert_data : GNSS_BREADCRUMBING_ALERT_DATA
+    geofences_tracking_status : GNSS_GEOFENCES_TRACKINGSTATUS_DATA
+    driver_request_data : GNSS_DRIVER_REQUEST_DATA
+    custom_data : UInt8[0]*
+  end
+  union GNSS_AGNSS_INJECT_Anonymous_e__Union
+    time : GNSS_AGNSS_INJECTTIME
+    position : GNSS_AGNSS_INJECTPOSITION
+    blob_data : GNSS_AGNSS_INJECTBLOB
+  end
 
   struct GNSS_SUPL_VERSION
     major_version : UInt32

@@ -304,11 +304,11 @@ lib LibWin32
     PRIORITY_HIGH = 2
   end
 
-union CProperty_Anonymous_e__Union
-  lpszw_data : LibC::LPWSTR
-  lpv_data : Void*
-  dw_value : UInt32
-end
+  union CProperty_Anonymous_e__Union
+    lpszw_data : LibC::LPWSTR
+    lpv_data : Void*
+    dw_value : UInt32
+  end
 
   struct HHN_NOTIFY
     hdr : NMHDR

@@ -1143,10 +1143,10 @@ lib LibWin32
     D3DBUSIMPL_MODIFIER_NON_STANDARD = -2147483648
   end
 
-union D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union
-  anonymous : D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
+  union D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union
+    anonymous : D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
 
   struct D3DCOLORVALUE
     r : Float32

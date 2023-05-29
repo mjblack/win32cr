@@ -548,21 +548,21 @@ lib LibWin32
     EAP_AUTHENTICATOR_SEND_TIMEOUT_INTERACTIVE = 2
   end
 
-union EAP_UI_DATA_FORMAT
-  cred_data : EAP_CONFIG_INPUT_FIELD_ARRAY*
-  cred_expiry_data : EAP_CRED_EXPIRY_REQ*
-  cred_logon_data : EAP_CONFIG_INPUT_FIELD_ARRAY*
-end
-union EAP_METHOD_PROPERTY_VALUE
-  empv_bool : EAP_METHOD_PROPERTY_VALUE_BOOL
-  empv_dword : EAP_METHOD_PROPERTY_VALUE_DWORD
-  empv_string : EAP_METHOD_PROPERTY_VALUE_STRING
-end
-union EapCredentialTypeData
-  username_password : EapUsernamePasswordCredential
-  certificate : EapCertificateCredential
-  sim : EapSimCredential
-end
+  union EAP_UI_DATA_FORMAT
+    cred_data : EAP_CONFIG_INPUT_FIELD_ARRAY*
+    cred_expiry_data : EAP_CRED_EXPIRY_REQ*
+    cred_logon_data : EAP_CONFIG_INPUT_FIELD_ARRAY*
+  end
+  union EAP_METHOD_PROPERTY_VALUE
+    empv_bool : EAP_METHOD_PROPERTY_VALUE_BOOL
+    empv_dword : EAP_METHOD_PROPERTY_VALUE_DWORD
+    empv_string : EAP_METHOD_PROPERTY_VALUE_STRING
+  end
+  union EapCredentialTypeData
+    username_password : EapUsernamePasswordCredential
+    certificate : EapCertificateCredential
+    sim : EapSimCredential
+  end
 
   struct NgcTicketContext
     wsz_ticket : Char[45]*

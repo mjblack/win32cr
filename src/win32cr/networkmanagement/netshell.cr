@@ -79,14 +79,14 @@ lib LibWin32
     NETSH_SAVE = 4
   end
 
-union NS_HELPER_ATTRIBUTES_Anonymous_e__Union
-  anonymous : NS_HELPER_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct
-  _ull_align : UInt64
-end
-union NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union
-  anonymous : NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct
-  _ull_align : UInt64
-end
+  union NS_HELPER_ATTRIBUTES_Anonymous_e__Union
+    anonymous : NS_HELPER_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct
+    _ull_align : UInt64
+  end
+  union NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union
+    anonymous : NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct
+    _ull_align : UInt64
+  end
 
   struct TOKEN_VALUE
     pwsz_token : LibC::LPWSTR

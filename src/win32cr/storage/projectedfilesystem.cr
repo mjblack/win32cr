@@ -101,18 +101,18 @@ lib LibWin32
     PRJ_COMPLETE_COMMAND_TYPE_ENUMERATION = 2
   end
 
-union PRJ_EXTENDED_INFO_Anonymous_e__Union
-  symlink : PRJ_EXTENDED_INFO_Anonymous_e__Union_Symlink_e__Struct
-end
-union PRJ_NOTIFICATION_PARAMETERS
-  post_create : PRJ_NOTIFICATION_PARAMETERS_PostCreate_e__Struct
-  file_renamed : PRJ_NOTIFICATION_PARAMETERS_FileRenamed_e__Struct
-  file_deleted_on_handle_close : PRJ_NOTIFICATION_PARAMETERS_FileDeletedOnHandleClose_e__Struct
-end
-union PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union
-  notification : PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Notification_e__Struct
-  enumeration : PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Enumeration_e__Struct
-end
+  union PRJ_EXTENDED_INFO_Anonymous_e__Union
+    symlink : PRJ_EXTENDED_INFO_Anonymous_e__Union_Symlink_e__Struct
+  end
+  union PRJ_NOTIFICATION_PARAMETERS
+    post_create : PRJ_NOTIFICATION_PARAMETERS_PostCreate_e__Struct
+    file_renamed : PRJ_NOTIFICATION_PARAMETERS_FileRenamed_e__Struct
+    file_deleted_on_handle_close : PRJ_NOTIFICATION_PARAMETERS_FileDeletedOnHandleClose_e__Struct
+  end
+  union PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union
+    notification : PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Notification_e__Struct
+    enumeration : PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS_Anonymous_e__Union_Enumeration_e__Struct
+  end
 
   struct PRJ_EXTENDED_INFO
     info_type : PRJ_EXT_INFO_TYPE

@@ -802,38 +802,38 @@ lib LibWin32
     WLDP_POLICY_SETTING_AV_PERF_MODE = 1000
   end
 
-union IMAGE_THUNK_DATA64_u1_e__Union
-  forwarder_string : UInt64
-  function : UInt64
-  ordinal : UInt64
-  address_of_data : UInt64
-end
-union IMAGE_THUNK_DATA32_u1_e__Union
-  forwarder_string : UInt32
-  function : UInt32
-  ordinal : UInt32
-  address_of_data : UInt32
-end
-union IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union
-  all_attributes : UInt32
-  anonymous : IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union_Anonymous_e__Struct
-end
-union LDR_DATA_TABLE_ENTRY_Anonymous_e__Union
-  check_sum : UInt32
-  reserved6 : Void*
-end
-union IO_STATUS_BLOCK_Anonymous_e__Union
-  status : NTSTATUS
-  pointer : Void*
-end
-union TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union
-  io_control_code : UInt32
-  option_name : UInt32
-end
-union DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union
-  name : PSTR
-  ordinal : UInt32
-end
+  union IMAGE_THUNK_DATA64_u1_e__Union
+    forwarder_string : UInt64
+    function : UInt64
+    ordinal : UInt64
+    address_of_data : UInt64
+  end
+  union IMAGE_THUNK_DATA32_u1_e__Union
+    forwarder_string : UInt32
+    function : UInt32
+    ordinal : UInt32
+    address_of_data : UInt32
+  end
+  union IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union
+    all_attributes : UInt32
+    anonymous : IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union_Anonymous_e__Struct
+  end
+  union LDR_DATA_TABLE_ENTRY_Anonymous_e__Union
+    check_sum : UInt32
+    reserved6 : Void*
+  end
+  union IO_STATUS_BLOCK_Anonymous_e__Union
+    status : NTSTATUS
+    pointer : Void*
+  end
+  union TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union
+    io_control_code : UInt32
+    option_name : UInt32
+  end
+  union DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union
+    name : PSTR
+    ordinal : UInt32
+  end
 
   struct IMAGE_THUNK_DATA64
     u1 : IMAGE_THUNK_DATA64_u1_e__Union

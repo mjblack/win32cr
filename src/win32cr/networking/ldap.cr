@@ -228,14 +228,14 @@ lib LibWin32
     LDAP_REFERRAL_LIMIT_EXCEEDED = 97
   end
 
-union Ldapmodw_mod_vals_e__Union
-  modv_strvals : LibC::LPWSTR*
-  modv_bvals : LDAP_BERVAL**
-end
-union Ldapmoda_mod_vals_e__Union
-  modv_strvals : PSTR*
-  modv_bvals : LDAP_BERVAL**
-end
+  union Ldapmodw_mod_vals_e__Union
+    modv_strvals : LibC::LPWSTR*
+    modv_bvals : LDAP_BERVAL**
+  end
+  union Ldapmoda_mod_vals_e__Union
+    modv_strvals : PSTR*
+    modv_bvals : LDAP_BERVAL**
+  end
 
   struct Ldap
     ld_sb : Ldap_ld_sb_e__Struct

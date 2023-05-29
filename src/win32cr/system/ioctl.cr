@@ -1914,152 +1914,152 @@ lib LibWin32
     FSBPIO_OUTFL_COMPATIBLE_STORAGE_DRIVER = 8
   end
 
-union DEVICE_MEDIA_INFO_DeviceSpecific_e__Union
-  disk_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_DiskInfo_e__Struct
-  removable_disk_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_RemovableDiskInfo_e__Struct
-  tape_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct
-end
-union DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union
-  scsi_information : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union_ScsiInformation_e__Struct
-end
-union STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union
-  anonymous : STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union_Anonymous_e__Struct
-  as_byte : UInt8
-end
-union STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE
-  anonymous : STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE_Anonymous_e__Struct
-  as_ulong : UInt32
-end
-union STORAGE_SPEC_VERSION
-  anonymous : STORAGE_SPEC_VERSION_Anonymous_e__Struct
-  as_ulong : UInt32
-end
-union STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union
-  anonymous : STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union_Anonymous_e__Struct
-  as_ushort : UInt16
-end
-union STORAGE_OPERATIONAL_REASON_RawBytes_e__Union
-  scsi_sense_key : STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_ScsiSenseKey_e__Struct
-  nvdimm_n : STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_NVDIMM_N_e__Struct
-  as_ulong : UInt32
-end
-union STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union
-  sequential_required_zone : STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialRequiredZone_e__Struct
-  sequential_preferred_zone : STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialPreferredZone_e__Struct
-end
-union DEVICE_LOCATION_Anonymous_e__Union
-  anonymous1 : DEVICE_LOCATION_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : DEVICE_LOCATION_Anonymous_e__Union_Anonymous2_e__Struct
-end
-union STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union
-  storage_offload_zero_data_token : STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union_StorageOffloadZeroDataToken_e__Struct
-  token : UInt8[504]*
-end
-union DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union
-  all_flags : UInt32
-  anonymous : DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union
-  pr_in : PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_IN_e__Struct
-  pr_out : PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_OUT_e__Struct
-end
-union DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union
-  external_stack : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_ExternalStack_e__Struct
-  ata_port : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_AtaPort_e__Struct
-  stor_port : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_StorPort_e__Struct
-end
-union STORAGE_COUNTER_Value_e__Union
-  manufacture_date : STORAGE_COUNTER_Value_e__Union_ManufactureDate_e__Struct
-  as_ulonglong : UInt64
-end
-union SET_PARTITION_INFORMATION_EX_Anonymous_e__Union
-  mbr : SET_PARTITION_INFORMATION
-  gpt : PARTITION_INFORMATION_GPT
-end
-union CREATE_DISK_Anonymous_e__Union
-  mbr : CREATE_DISK_MBR
-  gpt : CREATE_DISK_GPT
-end
-union PARTITION_INFORMATION_EX_Anonymous_e__Union
-  mbr : PARTITION_INFORMATION_MBR
-  gpt : PARTITION_INFORMATION_GPT
-end
-union DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union
-  mbr : DRIVE_LAYOUT_INFORMATION_MBR
-  gpt : DRIVE_LAYOUT_INFORMATION_GPT
-end
-union DISK_DETECTION_INFO_Anonymous_e__Union
-  anonymous : DISK_DETECTION_INFO_Anonymous_e__Union_Anonymous_e__Struct
-end
-union DISK_PARTITION_INFO_Anonymous_e__Union
-  mbr : DISK_PARTITION_INFO_Anonymous_e__Union_Mbr_e__Struct
-  gpt : DISK_PARTITION_INFO_Anonymous_e__Union_Gpt_e__Struct
-end
-union DISK_CACHE_INFORMATION_Anonymous_e__Union
-  scalar_prefetch : DISK_CACHE_INFORMATION_Anonymous_e__Union_ScalarPrefetch_e__Struct
-  block_prefetch : DISK_CACHE_INFORMATION_Anonymous_e__Union_BlockPrefetch_e__Struct
-end
-union USN_RECORD_UNION
-  header : USN_RECORD_COMMON_HEADER
-  v2 : USN_RECORD_V2
-  v3 : USN_RECORD_V3
-  v4 : USN_RECORD_V4
-end
-union MARK_HANDLE_INFO_Anonymous_e__Union
-  usn_source_info : UInt32
-  copy_number : UInt32
-end
-union MARK_HANDLE_INFO32_Anonymous_e__Union
-  usn_source_info : UInt32
-  copy_number : UInt32
-end
-union FILE_OBJECTID_BUFFER_Anonymous_e__Union
-  anonymous : FILE_OBJECTID_BUFFER_Anonymous_e__Union_Anonymous_e__Struct
-  extended_info : UInt8[48]*
-end
-union TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union
-  buffer_length : UInt32
-  buffer : UInt8[0]*
-end
-union STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union
-  lev1_depends : STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY[0]*
-  lev2_depends : STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY[0]*
-end
-union SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union
-  sd_change : SD_CHANGE_MACHINE_SID_INPUT
-  sd_query_stats : SD_QUERY_STATS_INPUT
-  sd_enum_sds : SD_ENUM_SDS_INPUT
-end
-union SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union
-  sd_change : SD_CHANGE_MACHINE_SID_OUTPUT
-  sd_query_stats : SD_QUERY_STATS_OUTPUT
-  sd_enum_sds : SD_ENUM_SDS_OUTPUT
-end
-union QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union
-  filter_entry_count : UInt32
-  number_of_pairs : UInt32
-end
-union QUERY_FILE_LAYOUT_INPUT_Filter_e__Union
-  cluster_ranges : CLUSTER_RANGE[0]*
-  file_reference_ranges : FILE_REFERENCE_RANGE[0]*
-  storage_reserve_ids : STORAGE_RESERVE_ID[0]*
-end
-union STREAM_EXTENT_ENTRY_ExtentInformation_e__Union
-  retrieval_pointers : RETRIEVAL_POINTERS_BUFFER
-end
-union STREAM_INFORMATION_ENTRY_StreamInformation
-  desired_storage_class : STREAM_INFORMATION_ENTRY_StreamInformation_DesiredStorageClass
-  data_stream : STREAM_INFORMATION_ENTRY_StreamInformation_DataStream
-  reparse : STREAM_INFORMATION_ENTRY_StreamInformation_Reparse
-  ea : STREAM_INFORMATION_ENTRY_StreamInformation_Ea
-end
-union FS_BPIO_OUTPUT_Anonymous_e__Union
-  enable : FS_BPIO_RESULTS
-  query : FS_BPIO_RESULTS
-  volume_stack_resume : FS_BPIO_RESULTS
-  stream_resume : FS_BPIO_RESULTS
-  get_info : FS_BPIO_INFO
-end
+  union DEVICE_MEDIA_INFO_DeviceSpecific_e__Union
+    disk_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_DiskInfo_e__Struct
+    removable_disk_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_RemovableDiskInfo_e__Struct
+    tape_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct
+  end
+  union DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union
+    scsi_information : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union_ScsiInformation_e__Struct
+  end
+  union STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union
+    anonymous : STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union_Anonymous_e__Struct
+    as_byte : UInt8
+  end
+  union STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE
+    anonymous : STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE_Anonymous_e__Struct
+    as_ulong : UInt32
+  end
+  union STORAGE_SPEC_VERSION
+    anonymous : STORAGE_SPEC_VERSION_Anonymous_e__Struct
+    as_ulong : UInt32
+  end
+  union STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union
+    anonymous : STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union_Anonymous_e__Struct
+    as_ushort : UInt16
+  end
+  union STORAGE_OPERATIONAL_REASON_RawBytes_e__Union
+    scsi_sense_key : STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_ScsiSenseKey_e__Struct
+    nvdimm_n : STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_NVDIMM_N_e__Struct
+    as_ulong : UInt32
+  end
+  union STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union
+    sequential_required_zone : STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialRequiredZone_e__Struct
+    sequential_preferred_zone : STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialPreferredZone_e__Struct
+  end
+  union DEVICE_LOCATION_Anonymous_e__Union
+    anonymous1 : DEVICE_LOCATION_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : DEVICE_LOCATION_Anonymous_e__Union_Anonymous2_e__Struct
+  end
+  union STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union
+    storage_offload_zero_data_token : STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union_StorageOffloadZeroDataToken_e__Struct
+    token : UInt8[504]*
+  end
+  union DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union
+    all_flags : UInt32
+    anonymous : DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union
+    pr_in : PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_IN_e__Struct
+    pr_out : PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_OUT_e__Struct
+  end
+  union DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union
+    external_stack : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_ExternalStack_e__Struct
+    ata_port : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_AtaPort_e__Struct
+    stor_port : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_StorPort_e__Struct
+  end
+  union STORAGE_COUNTER_Value_e__Union
+    manufacture_date : STORAGE_COUNTER_Value_e__Union_ManufactureDate_e__Struct
+    as_ulonglong : UInt64
+  end
+  union SET_PARTITION_INFORMATION_EX_Anonymous_e__Union
+    mbr : SET_PARTITION_INFORMATION
+    gpt : PARTITION_INFORMATION_GPT
+  end
+  union CREATE_DISK_Anonymous_e__Union
+    mbr : CREATE_DISK_MBR
+    gpt : CREATE_DISK_GPT
+  end
+  union PARTITION_INFORMATION_EX_Anonymous_e__Union
+    mbr : PARTITION_INFORMATION_MBR
+    gpt : PARTITION_INFORMATION_GPT
+  end
+  union DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union
+    mbr : DRIVE_LAYOUT_INFORMATION_MBR
+    gpt : DRIVE_LAYOUT_INFORMATION_GPT
+  end
+  union DISK_DETECTION_INFO_Anonymous_e__Union
+    anonymous : DISK_DETECTION_INFO_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union DISK_PARTITION_INFO_Anonymous_e__Union
+    mbr : DISK_PARTITION_INFO_Anonymous_e__Union_Mbr_e__Struct
+    gpt : DISK_PARTITION_INFO_Anonymous_e__Union_Gpt_e__Struct
+  end
+  union DISK_CACHE_INFORMATION_Anonymous_e__Union
+    scalar_prefetch : DISK_CACHE_INFORMATION_Anonymous_e__Union_ScalarPrefetch_e__Struct
+    block_prefetch : DISK_CACHE_INFORMATION_Anonymous_e__Union_BlockPrefetch_e__Struct
+  end
+  union USN_RECORD_UNION
+    header : USN_RECORD_COMMON_HEADER
+    v2 : USN_RECORD_V2
+    v3 : USN_RECORD_V3
+    v4 : USN_RECORD_V4
+  end
+  union MARK_HANDLE_INFO_Anonymous_e__Union
+    usn_source_info : UInt32
+    copy_number : UInt32
+  end
+  union MARK_HANDLE_INFO32_Anonymous_e__Union
+    usn_source_info : UInt32
+    copy_number : UInt32
+  end
+  union FILE_OBJECTID_BUFFER_Anonymous_e__Union
+    anonymous : FILE_OBJECTID_BUFFER_Anonymous_e__Union_Anonymous_e__Struct
+    extended_info : UInt8[48]*
+  end
+  union TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union
+    buffer_length : UInt32
+    buffer : UInt8[0]*
+  end
+  union STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union
+    lev1_depends : STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY[0]*
+    lev2_depends : STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY[0]*
+  end
+  union SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union
+    sd_change : SD_CHANGE_MACHINE_SID_INPUT
+    sd_query_stats : SD_QUERY_STATS_INPUT
+    sd_enum_sds : SD_ENUM_SDS_INPUT
+  end
+  union SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union
+    sd_change : SD_CHANGE_MACHINE_SID_OUTPUT
+    sd_query_stats : SD_QUERY_STATS_OUTPUT
+    sd_enum_sds : SD_ENUM_SDS_OUTPUT
+  end
+  union QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union
+    filter_entry_count : UInt32
+    number_of_pairs : UInt32
+  end
+  union QUERY_FILE_LAYOUT_INPUT_Filter_e__Union
+    cluster_ranges : CLUSTER_RANGE[0]*
+    file_reference_ranges : FILE_REFERENCE_RANGE[0]*
+    storage_reserve_ids : STORAGE_RESERVE_ID[0]*
+  end
+  union STREAM_EXTENT_ENTRY_ExtentInformation_e__Union
+    retrieval_pointers : RETRIEVAL_POINTERS_BUFFER
+  end
+  union STREAM_INFORMATION_ENTRY_StreamInformation
+    desired_storage_class : STREAM_INFORMATION_ENTRY_StreamInformation_DesiredStorageClass
+    data_stream : STREAM_INFORMATION_ENTRY_StreamInformation_DataStream
+    reparse : STREAM_INFORMATION_ENTRY_StreamInformation_Reparse
+    ea : STREAM_INFORMATION_ENTRY_StreamInformation_Ea
+  end
+  union FS_BPIO_OUTPUT_Anonymous_e__Union
+    enable : FS_BPIO_RESULTS
+    query : FS_BPIO_RESULTS
+    volume_stack_resume : FS_BPIO_RESULTS
+    stream_resume : FS_BPIO_RESULTS
+    get_info : FS_BPIO_INFO
+  end
 
   struct STORAGE_HOTPLUG_INFO
     size : UInt32

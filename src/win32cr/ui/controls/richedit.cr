@@ -1375,22 +1375,22 @@ lib LibWin32
     MOPENA = 12
   end
 
-union CHARFORMAT2W_Anonymous_e__Union
-  dw_reserved : UInt32
-  dw_cookie : UInt32
-end
-union CHARFORMAT2A_Anonymous_e__Union
-  dw_reserved : UInt32
-  dw_cookie : UInt32
-end
-union PARAFORMAT_Anonymous_e__Union
-  w_reserved : UInt16
-  w_effects : UInt16
-end
-union CARET_INFO
-  hbitmap : HBITMAP
-  caret_flags : CARET_FLAGS
-end
+  union CHARFORMAT2W_Anonymous_e__Union
+    dw_reserved : UInt32
+    dw_cookie : UInt32
+  end
+  union CHARFORMAT2A_Anonymous_e__Union
+    dw_reserved : UInt32
+    dw_cookie : UInt32
+  end
+  union PARAFORMAT_Anonymous_e__Union
+    w_reserved : UInt16
+    w_effects : UInt16
+  end
+  union CARET_INFO
+    hbitmap : HBITMAP
+    caret_flags : CARET_FLAGS
+  end
 
   struct IMECOMPTEXT
     cb : Int32

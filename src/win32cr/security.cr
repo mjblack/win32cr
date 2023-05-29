@@ -391,31 +391,31 @@ lib LibWin32
     MandatoryLevelCount = 6
   end
 
-union LLFILETIME_Anonymous_e__Union
-  ll : Int64
-  ft : FILETIME
-end
-union SE_SID
-  sid : SID
-  buffer : UInt8[68]*
-end
-union CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union
-  p_int64 : Int64*
-  p_uint64 : UInt64*
-  pp_string : LibC::LPWSTR*
-  p_fqbn : CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE*
-  p_octet_string : CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*
-end
-union CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union
-  p_int64 : UInt32[0]*
-  p_uint64 : UInt32[0]*
-  pp_string : UInt32[0]*
-  p_fqbn : UInt32[0]*
-  p_octet_string : UInt32[0]*
-end
-union CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union
-  p_attribute_v1 : CLAIM_SECURITY_ATTRIBUTE_V1*
-end
+  union LLFILETIME_Anonymous_e__Union
+    ll : Int64
+    ft : FILETIME
+  end
+  union SE_SID
+    sid : SID
+    buffer : UInt8[68]*
+  end
+  union CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union
+    p_int64 : Int64*
+    p_uint64 : UInt64*
+    pp_string : LibC::LPWSTR*
+    p_fqbn : CLAIM_SECURITY_ATTRIBUTE_FQBN_VALUE*
+    p_octet_string : CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*
+  end
+  union CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union
+    p_int64 : UInt32[0]*
+    p_uint64 : UInt32[0]*
+    pp_string : UInt32[0]*
+    p_fqbn : UInt32[0]*
+    p_octet_string : UInt32[0]*
+  end
+  union CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union
+    p_attribute_v1 : CLAIM_SECURITY_ATTRIBUTE_V1*
+  end
 
   struct SECURITY_ATTRIBUTES
     n_length : UInt32

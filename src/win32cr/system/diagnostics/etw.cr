@@ -777,168 +777,168 @@ lib LibWin32
     TDH_CONTEXT_MAXIMUM = 5
   end
 
-union WNODE_HEADER_Anonymous2_e__Union
-  count_lost : UInt32
-  kernel_handle : LibC::HANDLE
-  time_stamp : LARGE_INTEGER
-end
-union WNODE_HEADER_Anonymous1_e__Union
-  historical_context : UInt64
-  anonymous : WNODE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union WNODE_ALL_DATA_Anonymous_e__Union
-  fixed_instance_size : UInt32
-  offset_instance_data_and_length : OFFSETINSTANCEDATAANDLENGTH[0]*
-end
-union WNODE_EVENT_REFERENCE_Anonymous_e__Union
-  target_instance_index : UInt32
-  target_instance_name : Char[0]*
-end
-union WMIREGGUIDW_Anonymous_e__Union
-  instance_name_list : UInt32
-  base_name_offset : UInt32
-  pdo : LibC::UINT_PTR
-  instance_info : LibC::UINT_PTR
-end
-union EVENT_TRACE_HEADER_Anonymous4_e__Union
-  anonymous1 : EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous1_e__Struct
-  processor_time : UInt64
-  anonymous2 : EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous2_e__Struct
-end
-union EVENT_TRACE_HEADER_Anonymous2_e__Union
-  version : UInt32
-  class : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
-end
-union EVENT_TRACE_HEADER_Anonymous1_e__Union
-  field_type_flags : UInt16
-  anonymous : EVENT_TRACE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union EVENT_TRACE_HEADER_Anonymous3_e__Union
-  guid : Guid
-  guid_ptr : UInt64
-end
-union EVENT_INSTANCE_HEADER_Anonymous3_e__Union
-  anonymous1 : EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous1_e__Struct
-  processor_time : UInt64
-  anonymous2 : EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous2_e__Struct
-end
-union EVENT_INSTANCE_HEADER_Anonymous2_e__Union
-  version : UInt32
-  class : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
-end
-union EVENT_INSTANCE_HEADER_Anonymous1_e__Union
-  field_type_flags : UInt16
-  anonymous : EVENT_INSTANCE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union TRACE_LOGFILE_HEADER_Anonymous2_e__Union
-  log_instance_guid : Guid
-  anonymous : TRACE_LOGFILE_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union TRACE_LOGFILE_HEADER_Anonymous1_e__Union
-  version : UInt32
-  version_detail : TRACE_LOGFILE_HEADER_Anonymous1_e__Union_VersionDetail_e__Struct
-end
-union TRACE_LOGFILE_HEADER32_Anonymous2_e__Union
-  log_instance_guid : Guid
-  anonymous : TRACE_LOGFILE_HEADER32_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union TRACE_LOGFILE_HEADER32_Anonymous1_e__Union
-  version : UInt32
-  version_detail : TRACE_LOGFILE_HEADER32_Anonymous1_e__Union_VersionDetail_e__Struct
-end
-union TRACE_LOGFILE_HEADER64_Anonymous2_e__Union
-  log_instance_guid : Guid
-  anonymous : TRACE_LOGFILE_HEADER64_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union TRACE_LOGFILE_HEADER64_Anonymous1_e__Union
-  version : UInt32
-  version_detail : TRACE_LOGFILE_HEADER64_Anonymous1_e__Union_VersionDetail_e__Struct
-end
-union EVENT_TRACE_PROPERTIES_Anonymous_e__Union
-  age_limit : Int32
-  flush_threshold : Int32
-end
-union EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union
-  anonymous : EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union_Anonymous_e__Struct
-  v2_options : UInt64
-end
-union EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union
-  anonymous : EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union_Anonymous_e__Struct
-  v2_control : UInt32
-end
-union EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union
-  age_limit : Int32
-  flush_threshold : Int32
-end
-union ETW_BUFFER_CONTEXT_Anonymous_e__Union
-  anonymous : ETW_BUFFER_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
-  processor_index : UInt16
-end
-union EVENT_TRACE_Anonymous_e__Union
-  client_context : UInt32
-  buffer_context : ETW_BUFFER_CONTEXT
-end
-union EVENT_TRACE_LOGFILEW_Anonymous1_e__Union
-  log_file_mode : UInt32
-  process_trace_mode : UInt32
-end
-union EVENT_TRACE_LOGFILEW_Anonymous2_e__Union
-  event_callback : PEVENT_CALLBACK
-  event_record_callback : PEVENT_RECORD_CALLBACK
-end
-union EVENT_TRACE_LOGFILEA_Anonymous1_e__Union
-  log_file_mode : UInt32
-  process_trace_mode : UInt32
-end
-union EVENT_TRACE_LOGFILEA_Anonymous2_e__Union
-  event_callback : PEVENT_CALLBACK
-  event_record_callback : PEVENT_RECORD_CALLBACK
-end
-union EVENT_DATA_DESCRIPTOR_Anonymous_e__Union
-  reserved : UInt32
-  anonymous : EVENT_DATA_DESCRIPTOR_Anonymous_e__Union_Anonymous_e__Struct
-end
-union EVENT_HEADER_Anonymous_e__Union
-  anonymous : EVENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct
-  processor_time : UInt64
-end
-union EVENT_MAP_ENTRY_Anonymous_e__Union
-  value : UInt32
-  input_offset : UInt32
-end
-union EVENT_MAP_INFO_Anonymous_e__Union
-  map_entry_value_type : MAP_VALUETYPE
-  format_string_offset : UInt32
-end
-union EVENT_PROPERTY_INFO_Anonymous4_e__Union
-  reserved : UInt32
-  anonymous : EVENT_PROPERTY_INFO_Anonymous4_e__Union_Anonymous_e__Struct
-end
-union EVENT_PROPERTY_INFO_Anonymous2_e__Union
-  count : UInt16
-  count_property_index : UInt16
-end
-union EVENT_PROPERTY_INFO_Anonymous1_e__Union
-  non_struct_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_nonStructType
-  struct_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_structType
-  custom_schema_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_customSchemaType
-end
-union EVENT_PROPERTY_INFO_Anonymous3_e__Union
-  length : UInt16
-  length_property_index : UInt16
-end
-union TRACE_EVENT_INFO_Anonymous3_e__Union
-  flags : TEMPLATE_FLAGS
-  anonymous : TRACE_EVENT_INFO_Anonymous3_e__Union_Anonymous_e__Struct
-end
-union TRACE_EVENT_INFO_Anonymous1_e__Union
-  event_name_offset : UInt32
-  activity_id_name_offset : UInt32
-end
-union TRACE_EVENT_INFO_Anonymous2_e__Union
-  event_attributes_offset : UInt32
-  related_activity_id_name_offset : UInt32
-end
+  union WNODE_HEADER_Anonymous2_e__Union
+    count_lost : UInt32
+    kernel_handle : LibC::HANDLE
+    time_stamp : LARGE_INTEGER
+  end
+  union WNODE_HEADER_Anonymous1_e__Union
+    historical_context : UInt64
+    anonymous : WNODE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union WNODE_ALL_DATA_Anonymous_e__Union
+    fixed_instance_size : UInt32
+    offset_instance_data_and_length : OFFSETINSTANCEDATAANDLENGTH[0]*
+  end
+  union WNODE_EVENT_REFERENCE_Anonymous_e__Union
+    target_instance_index : UInt32
+    target_instance_name : Char[0]*
+  end
+  union WMIREGGUIDW_Anonymous_e__Union
+    instance_name_list : UInt32
+    base_name_offset : UInt32
+    pdo : LibC::UINT_PTR
+    instance_info : LibC::UINT_PTR
+  end
+  union EVENT_TRACE_HEADER_Anonymous4_e__Union
+    anonymous1 : EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous1_e__Struct
+    processor_time : UInt64
+    anonymous2 : EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous2_e__Struct
+  end
+  union EVENT_TRACE_HEADER_Anonymous2_e__Union
+    version : UInt32
+    class : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
+  end
+  union EVENT_TRACE_HEADER_Anonymous1_e__Union
+    field_type_flags : UInt16
+    anonymous : EVENT_TRACE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union EVENT_TRACE_HEADER_Anonymous3_e__Union
+    guid : Guid
+    guid_ptr : UInt64
+  end
+  union EVENT_INSTANCE_HEADER_Anonymous3_e__Union
+    anonymous1 : EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous1_e__Struct
+    processor_time : UInt64
+    anonymous2 : EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous2_e__Struct
+  end
+  union EVENT_INSTANCE_HEADER_Anonymous2_e__Union
+    version : UInt32
+    class : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
+  end
+  union EVENT_INSTANCE_HEADER_Anonymous1_e__Union
+    field_type_flags : UInt16
+    anonymous : EVENT_INSTANCE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union TRACE_LOGFILE_HEADER_Anonymous2_e__Union
+    log_instance_guid : Guid
+    anonymous : TRACE_LOGFILE_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union TRACE_LOGFILE_HEADER_Anonymous1_e__Union
+    version : UInt32
+    version_detail : TRACE_LOGFILE_HEADER_Anonymous1_e__Union_VersionDetail_e__Struct
+  end
+  union TRACE_LOGFILE_HEADER32_Anonymous2_e__Union
+    log_instance_guid : Guid
+    anonymous : TRACE_LOGFILE_HEADER32_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union TRACE_LOGFILE_HEADER32_Anonymous1_e__Union
+    version : UInt32
+    version_detail : TRACE_LOGFILE_HEADER32_Anonymous1_e__Union_VersionDetail_e__Struct
+  end
+  union TRACE_LOGFILE_HEADER64_Anonymous2_e__Union
+    log_instance_guid : Guid
+    anonymous : TRACE_LOGFILE_HEADER64_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union TRACE_LOGFILE_HEADER64_Anonymous1_e__Union
+    version : UInt32
+    version_detail : TRACE_LOGFILE_HEADER64_Anonymous1_e__Union_VersionDetail_e__Struct
+  end
+  union EVENT_TRACE_PROPERTIES_Anonymous_e__Union
+    age_limit : Int32
+    flush_threshold : Int32
+  end
+  union EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union
+    anonymous : EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union_Anonymous_e__Struct
+    v2_options : UInt64
+  end
+  union EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union
+    anonymous : EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union_Anonymous_e__Struct
+    v2_control : UInt32
+  end
+  union EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union
+    age_limit : Int32
+    flush_threshold : Int32
+  end
+  union ETW_BUFFER_CONTEXT_Anonymous_e__Union
+    anonymous : ETW_BUFFER_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
+    processor_index : UInt16
+  end
+  union EVENT_TRACE_Anonymous_e__Union
+    client_context : UInt32
+    buffer_context : ETW_BUFFER_CONTEXT
+  end
+  union EVENT_TRACE_LOGFILEW_Anonymous1_e__Union
+    log_file_mode : UInt32
+    process_trace_mode : UInt32
+  end
+  union EVENT_TRACE_LOGFILEW_Anonymous2_e__Union
+    event_callback : PEVENT_CALLBACK
+    event_record_callback : PEVENT_RECORD_CALLBACK
+  end
+  union EVENT_TRACE_LOGFILEA_Anonymous1_e__Union
+    log_file_mode : UInt32
+    process_trace_mode : UInt32
+  end
+  union EVENT_TRACE_LOGFILEA_Anonymous2_e__Union
+    event_callback : PEVENT_CALLBACK
+    event_record_callback : PEVENT_RECORD_CALLBACK
+  end
+  union EVENT_DATA_DESCRIPTOR_Anonymous_e__Union
+    reserved : UInt32
+    anonymous : EVENT_DATA_DESCRIPTOR_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union EVENT_HEADER_Anonymous_e__Union
+    anonymous : EVENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct
+    processor_time : UInt64
+  end
+  union EVENT_MAP_ENTRY_Anonymous_e__Union
+    value : UInt32
+    input_offset : UInt32
+  end
+  union EVENT_MAP_INFO_Anonymous_e__Union
+    map_entry_value_type : MAP_VALUETYPE
+    format_string_offset : UInt32
+  end
+  union EVENT_PROPERTY_INFO_Anonymous4_e__Union
+    reserved : UInt32
+    anonymous : EVENT_PROPERTY_INFO_Anonymous4_e__Union_Anonymous_e__Struct
+  end
+  union EVENT_PROPERTY_INFO_Anonymous2_e__Union
+    count : UInt16
+    count_property_index : UInt16
+  end
+  union EVENT_PROPERTY_INFO_Anonymous1_e__Union
+    non_struct_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_nonStructType
+    struct_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_structType
+    custom_schema_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_customSchemaType
+  end
+  union EVENT_PROPERTY_INFO_Anonymous3_e__Union
+    length : UInt16
+    length_property_index : UInt16
+  end
+  union TRACE_EVENT_INFO_Anonymous3_e__Union
+    flags : TEMPLATE_FLAGS
+    anonymous : TRACE_EVENT_INFO_Anonymous3_e__Union_Anonymous_e__Struct
+  end
+  union TRACE_EVENT_INFO_Anonymous1_e__Union
+    event_name_offset : UInt32
+    activity_id_name_offset : UInt32
+  end
+  union TRACE_EVENT_INFO_Anonymous2_e__Union
+    event_attributes_offset : UInt32
+    related_activity_id_name_offset : UInt32
+  end
 
   struct WNODE_HEADER
     buffer_size : UInt32

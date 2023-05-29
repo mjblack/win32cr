@@ -281,14 +281,14 @@ lib LibWin32
     CredsspCredEx = 100
   end
 
-union SCARD_T0_REQUEST_Anonymous_e__Union
-  cmd_bytes : SCARD_T0_COMMAND
-  rgb_header : UInt8[5]*
-end
-union READER_SEL_REQUEST_Anonymous_e__Union
-  reader_and_container_parameter : READER_SEL_REQUEST_Anonymous_e__Union_ReaderAndContainerParameter_e__Struct
-  serial_number_parameter : READER_SEL_REQUEST_Anonymous_e__Union_SerialNumberParameter_e__Struct
-end
+  union SCARD_T0_REQUEST_Anonymous_e__Union
+    cmd_bytes : SCARD_T0_COMMAND
+    rgb_header : UInt8[5]*
+  end
+  union READER_SEL_REQUEST_Anonymous_e__Union
+    reader_and_container_parameter : READER_SEL_REQUEST_Anonymous_e__Union_ReaderAndContainerParameter_e__Struct
+    serial_number_parameter : READER_SEL_REQUEST_Anonymous_e__Union_SerialNumberParameter_e__Struct
+  end
 
   struct KeyCredentialManagerInfo
     container_id : Guid

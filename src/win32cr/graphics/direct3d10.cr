@@ -1208,63 +1208,63 @@ lib LibWin32
     D3D10_SHADER_DEBUG_VAR_FORCE_DWORD = 2147483647
   end
 
-union D3D10_BUFFER_SRV_Anonymous1_e__Union
-  first_element : UInt32
-  element_offset : UInt32
-end
-union D3D10_BUFFER_SRV_Anonymous2_e__Union
-  num_elements : UInt32
-  element_width : UInt32
-end
-union D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
-  buffer : D3D10_BUFFER_SRV
-  texture1_d : D3D10_TEX1D_SRV
-  texture1_d_array : D3D10_TEX1D_ARRAY_SRV
-  texture2_d : D3D10_TEX2D_SRV
-  texture2_d_array : D3D10_TEX2D_ARRAY_SRV
-  texture2_dms : D3D10_TEX2DMS_SRV
-  texture2_dms_array : D3D10_TEX2DMS_ARRAY_SRV
-  texture3_d : D3D10_TEX3D_SRV
-  texture_cube : D3D10_TEXCUBE_SRV
-end
-union D3D10_BUFFER_RTV_Anonymous2_e__Union
-  num_elements : UInt32
-  element_width : UInt32
-end
-union D3D10_BUFFER_RTV_Anonymous1_e__Union
-  first_element : UInt32
-  element_offset : UInt32
-end
-union D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
-  buffer : D3D10_BUFFER_RTV
-  texture1_d : D3D10_TEX1D_RTV
-  texture1_d_array : D3D10_TEX1D_ARRAY_RTV
-  texture2_d : D3D10_TEX2D_RTV
-  texture2_d_array : D3D10_TEX2D_ARRAY_RTV
-  texture2_dms : D3D10_TEX2DMS_RTV
-  texture2_dms_array : D3D10_TEX2DMS_ARRAY_RTV
-  texture3_d : D3D10_TEX3D_RTV
-end
-union D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
-  texture1_d : D3D10_TEX1D_DSV
-  texture1_d_array : D3D10_TEX1D_ARRAY_DSV
-  texture2_d : D3D10_TEX2D_DSV
-  texture2_d_array : D3D10_TEX2D_ARRAY_DSV
-  texture2_dms : D3D10_TEX2DMS_DSV
-  texture2_dms_array : D3D10_TEX2DMS_ARRAY_DSV
-end
-union D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union
-  buffer : D3D10_BUFFER_SRV
-  texture1_d : D3D10_TEX1D_SRV
-  texture1_d_array : D3D10_TEX1D_ARRAY_SRV
-  texture2_d : D3D10_TEX2D_SRV
-  texture2_d_array : D3D10_TEX2D_ARRAY_SRV
-  texture2_dms : D3D10_TEX2DMS_SRV
-  texture2_dms_array : D3D10_TEX2DMS_ARRAY_SRV
-  texture3_d : D3D10_TEX3D_SRV
-  texture_cube : D3D10_TEXCUBE_SRV
-  texture_cube_array : D3D10_TEXCUBE_ARRAY_SRV1
-end
+  union D3D10_BUFFER_SRV_Anonymous1_e__Union
+    first_element : UInt32
+    element_offset : UInt32
+  end
+  union D3D10_BUFFER_SRV_Anonymous2_e__Union
+    num_elements : UInt32
+    element_width : UInt32
+  end
+  union D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
+    buffer : D3D10_BUFFER_SRV
+    texture1_d : D3D10_TEX1D_SRV
+    texture1_d_array : D3D10_TEX1D_ARRAY_SRV
+    texture2_d : D3D10_TEX2D_SRV
+    texture2_d_array : D3D10_TEX2D_ARRAY_SRV
+    texture2_dms : D3D10_TEX2DMS_SRV
+    texture2_dms_array : D3D10_TEX2DMS_ARRAY_SRV
+    texture3_d : D3D10_TEX3D_SRV
+    texture_cube : D3D10_TEXCUBE_SRV
+  end
+  union D3D10_BUFFER_RTV_Anonymous2_e__Union
+    num_elements : UInt32
+    element_width : UInt32
+  end
+  union D3D10_BUFFER_RTV_Anonymous1_e__Union
+    first_element : UInt32
+    element_offset : UInt32
+  end
+  union D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
+    buffer : D3D10_BUFFER_RTV
+    texture1_d : D3D10_TEX1D_RTV
+    texture1_d_array : D3D10_TEX1D_ARRAY_RTV
+    texture2_d : D3D10_TEX2D_RTV
+    texture2_d_array : D3D10_TEX2D_ARRAY_RTV
+    texture2_dms : D3D10_TEX2DMS_RTV
+    texture2_dms_array : D3D10_TEX2DMS_ARRAY_RTV
+    texture3_d : D3D10_TEX3D_RTV
+  end
+  union D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
+    texture1_d : D3D10_TEX1D_DSV
+    texture1_d_array : D3D10_TEX1D_ARRAY_DSV
+    texture2_d : D3D10_TEX2D_DSV
+    texture2_d_array : D3D10_TEX2D_ARRAY_DSV
+    texture2_dms : D3D10_TEX2DMS_DSV
+    texture2_dms_array : D3D10_TEX2DMS_ARRAY_DSV
+  end
+  union D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union
+    buffer : D3D10_BUFFER_SRV
+    texture1_d : D3D10_TEX1D_SRV
+    texture1_d_array : D3D10_TEX1D_ARRAY_SRV
+    texture2_d : D3D10_TEX2D_SRV
+    texture2_d_array : D3D10_TEX2D_ARRAY_SRV
+    texture2_dms : D3D10_TEX2DMS_SRV
+    texture2_dms_array : D3D10_TEX2DMS_ARRAY_SRV
+    texture3_d : D3D10_TEX3D_SRV
+    texture_cube : D3D10_TEXCUBE_SRV
+    texture_cube_array : D3D10_TEXCUBE_ARRAY_SRV1
+  end
 
   struct D3D10_INPUT_ELEMENT_DESC
     semantic_name : PSTR

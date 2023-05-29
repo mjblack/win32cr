@@ -82,11 +82,11 @@ lib LibWin32
     SCALE_500_PERCENT = 500
   end
 
-union STRRET_Anonymous_e__Union
-  p_ole_str : LibC::LPWSTR
-  u_offset : UInt32
-  c_str : UInt8[260]*
-end
+  union STRRET_Anonymous_e__Union
+    p_ole_str : LibC::LPWSTR
+    u_offset : UInt32
+    c_str : UInt8[260]*
+  end
 
   struct SHITEMID
     cb : UInt16

@@ -4363,72 +4363,72 @@ lib LibWin32
     COPP_BusType_ForceDWORD = 2147483647
   end
 
-union REGFILTER2_Anonymous_e__Union
-  anonymous1 : REGFILTER2_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : REGFILTER2_Anonymous_e__Union_Anonymous2_e__Struct
-end
-union DVD_TitleAttributes_Anonymous_e__Union
-  app_mode : DVD_TITLE_APPMODE
-  title_length : DVD_HMSF_TIMECODE
-end
-union VIDEOINFO_Anonymous_e__Union
-  bmi_colors : RGBQUAD[256]*
-  dw_bit_masks : UInt32[3]*
-  true_color_info : TRUECOLORINFO
-end
-union VIDEOINFOHEADER2_Anonymous_e__Union
-  dw_control_flags : UInt32
-  dw_reserved1 : UInt32
-end
-union SECTION_Header_e__Union
-  s : MPEG_HEADER_BITS_MIDL
-  w : UInt16
-end
-union LONG_SECTION_Header_e__Union
-  s : MPEG_HEADER_BITS_MIDL
-  w : UInt16
-end
-union LONG_SECTION_Version_e__Union
-  s : MPEG_HEADER_VERSION_BITS_MIDL
-  b : UInt8
-end
-union DSMCC_SECTION_Header_e__Union
-  s : MPEG_HEADER_BITS_MIDL
-  w : UInt16
-end
-union DSMCC_SECTION_Version_e__Union
-  s : MPEG_HEADER_VERSION_BITS_MIDL
-  b : UInt8
-end
-union MPEG2_FILTER2_Anonymous_e__Union
-  anonymous : MPEG2_FILTER2_Anonymous_e__Union_Anonymous_e__Struct
-  b_version1_bytes : UInt8[124]*
-end
-union MPEG_CONTEXT_U_e__Union
-  demux : MPEG_BCS_DEMUX
-  winsock : MPEG_WINSOCK
-end
-union TRANSPORT_PROPERTIES_Fields_e__Union
-  others : TRANSPORT_PROPERTIES_Fields_e__Union_Others
-  value : Int64
-end
-union KSM_BDA_PIN_Anonymous_e__Union
-  pin_id : UInt32
-  pin_type : UInt32
-end
-union KSM_BDA_PIN_PAIR_Anonymous1_e__Union
-  input_pin_id : UInt32
-  input_pin_type : UInt32
-end
-union KSM_BDA_PIN_PAIR_Anonymous2_e__Union
-  output_pin_id : UInt32
-  output_pin_type : UInt32
-end
-union ChannelInfo_Anonymous_e__Union
-  dvb : ChannelInfo_Anonymous_e__Union_DVB_e__Struct
-  dc : ChannelInfo_Anonymous_e__Union_DC_e__Struct
-  atsc : ChannelInfo_Anonymous_e__Union_ATSC_e__Struct
-end
+  union REGFILTER2_Anonymous_e__Union
+    anonymous1 : REGFILTER2_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : REGFILTER2_Anonymous_e__Union_Anonymous2_e__Struct
+  end
+  union DVD_TitleAttributes_Anonymous_e__Union
+    app_mode : DVD_TITLE_APPMODE
+    title_length : DVD_HMSF_TIMECODE
+  end
+  union VIDEOINFO_Anonymous_e__Union
+    bmi_colors : RGBQUAD[256]*
+    dw_bit_masks : UInt32[3]*
+    true_color_info : TRUECOLORINFO
+  end
+  union VIDEOINFOHEADER2_Anonymous_e__Union
+    dw_control_flags : UInt32
+    dw_reserved1 : UInt32
+  end
+  union SECTION_Header_e__Union
+    s : MPEG_HEADER_BITS_MIDL
+    w : UInt16
+  end
+  union LONG_SECTION_Header_e__Union
+    s : MPEG_HEADER_BITS_MIDL
+    w : UInt16
+  end
+  union LONG_SECTION_Version_e__Union
+    s : MPEG_HEADER_VERSION_BITS_MIDL
+    b : UInt8
+  end
+  union DSMCC_SECTION_Header_e__Union
+    s : MPEG_HEADER_BITS_MIDL
+    w : UInt16
+  end
+  union DSMCC_SECTION_Version_e__Union
+    s : MPEG_HEADER_VERSION_BITS_MIDL
+    b : UInt8
+  end
+  union MPEG2_FILTER2_Anonymous_e__Union
+    anonymous : MPEG2_FILTER2_Anonymous_e__Union_Anonymous_e__Struct
+    b_version1_bytes : UInt8[124]*
+  end
+  union MPEG_CONTEXT_U_e__Union
+    demux : MPEG_BCS_DEMUX
+    winsock : MPEG_WINSOCK
+  end
+  union TRANSPORT_PROPERTIES_Fields_e__Union
+    others : TRANSPORT_PROPERTIES_Fields_e__Union_Others
+    value : Int64
+  end
+  union KSM_BDA_PIN_Anonymous_e__Union
+    pin_id : UInt32
+    pin_type : UInt32
+  end
+  union KSM_BDA_PIN_PAIR_Anonymous1_e__Union
+    input_pin_id : UInt32
+    input_pin_type : UInt32
+  end
+  union KSM_BDA_PIN_PAIR_Anonymous2_e__Union
+    output_pin_id : UInt32
+    output_pin_type : UInt32
+  end
+  union ChannelInfo_Anonymous_e__Union
+    dvb : ChannelInfo_Anonymous_e__Union_DVB_e__Struct
+    dc : ChannelInfo_Anonymous_e__Union_DC_e__Struct
+    atsc : ChannelInfo_Anonymous_e__Union_ATSC_e__Struct
+  end
 
   struct AMVPSIZE
     dw_width : UInt32

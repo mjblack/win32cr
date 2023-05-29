@@ -389,40 +389,40 @@ lib LibWin32
     MaximumPeerDistClientInfoByHandlesClass = 1
   end
 
-union PNRPINFO_V2_Anonymous_e__Union
-  blob_payload : BLOB
-  pwsz_payload : LibC::LPWSTR
-end
-union PEER_GRAPH_EVENT_DATA_Anonymous_e__Union
-  dw_status : PEER_GRAPH_STATUS_FLAGS
-  incoming_data : PEER_EVENT_INCOMING_DATA
-  record_change_data : PEER_EVENT_RECORD_CHANGE_DATA
-  connection_change_data : PEER_EVENT_CONNECTION_CHANGE_DATA
-  node_change_data : PEER_EVENT_NODE_CHANGE_DATA
-  synchronized_data : PEER_EVENT_SYNCHRONIZED_DATA
-end
-union PEER_GROUP_EVENT_DATA_Anonymous_e__Union
-  dw_status : PEER_GROUP_STATUS
-  incoming_data : PEER_EVENT_INCOMING_DATA
-  record_change_data : PEER_EVENT_RECORD_CHANGE_DATA
-  connection_change_data : PEER_EVENT_CONNECTION_CHANGE_DATA
-  member_change_data : PEER_EVENT_MEMBER_CHANGE_DATA
-  hr_connection_failed_reason : HRESULT
-end
-union PEER_COLLAB_EVENT_DATA_Anonymous_e__Union
-  watch_list_changed_data : PEER_EVENT_WATCHLIST_CHANGED_DATA
-  presence_changed_data : PEER_EVENT_PRESENCE_CHANGED_DATA
-  application_changed_data : PEER_EVENT_APPLICATION_CHANGED_DATA
-  object_changed_data : PEER_EVENT_OBJECT_CHANGED_DATA
-  endpoint_changed_data : PEER_EVENT_ENDPOINT_CHANGED_DATA
-  people_near_me_changed_data : PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA
-  request_status_changed_data : PEER_EVENT_REQUEST_STATUS_CHANGED_DATA
-end
-union DRT_EVENT_DATA_Anonymous_e__Union
-  leafset_key_change : DRT_EVENT_DATA_Anonymous_e__Union_leafsetKeyChange_e__Struct
-  registration_state_change : DRT_EVENT_DATA_Anonymous_e__Union_registrationStateChange_e__Struct
-  status_change : DRT_EVENT_DATA_Anonymous_e__Union_statusChange_e__Struct
-end
+  union PNRPINFO_V2_Anonymous_e__Union
+    blob_payload : BLOB
+    pwsz_payload : LibC::LPWSTR
+  end
+  union PEER_GRAPH_EVENT_DATA_Anonymous_e__Union
+    dw_status : PEER_GRAPH_STATUS_FLAGS
+    incoming_data : PEER_EVENT_INCOMING_DATA
+    record_change_data : PEER_EVENT_RECORD_CHANGE_DATA
+    connection_change_data : PEER_EVENT_CONNECTION_CHANGE_DATA
+    node_change_data : PEER_EVENT_NODE_CHANGE_DATA
+    synchronized_data : PEER_EVENT_SYNCHRONIZED_DATA
+  end
+  union PEER_GROUP_EVENT_DATA_Anonymous_e__Union
+    dw_status : PEER_GROUP_STATUS
+    incoming_data : PEER_EVENT_INCOMING_DATA
+    record_change_data : PEER_EVENT_RECORD_CHANGE_DATA
+    connection_change_data : PEER_EVENT_CONNECTION_CHANGE_DATA
+    member_change_data : PEER_EVENT_MEMBER_CHANGE_DATA
+    hr_connection_failed_reason : HRESULT
+  end
+  union PEER_COLLAB_EVENT_DATA_Anonymous_e__Union
+    watch_list_changed_data : PEER_EVENT_WATCHLIST_CHANGED_DATA
+    presence_changed_data : PEER_EVENT_PRESENCE_CHANGED_DATA
+    application_changed_data : PEER_EVENT_APPLICATION_CHANGED_DATA
+    object_changed_data : PEER_EVENT_OBJECT_CHANGED_DATA
+    endpoint_changed_data : PEER_EVENT_ENDPOINT_CHANGED_DATA
+    people_near_me_changed_data : PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA
+    request_status_changed_data : PEER_EVENT_REQUEST_STATUS_CHANGED_DATA
+  end
+  union DRT_EVENT_DATA_Anonymous_e__Union
+    leafset_key_change : DRT_EVENT_DATA_Anonymous_e__Union_leafsetKeyChange_e__Struct
+    registration_state_change : DRT_EVENT_DATA_Anonymous_e__Union_registrationStateChange_e__Struct
+    status_change : DRT_EVENT_DATA_Anonymous_e__Union_statusChange_e__Struct
+  end
 
   struct PNRP_CLOUD_ID
     address_family : Int32

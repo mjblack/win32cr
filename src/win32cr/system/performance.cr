@@ -458,31 +458,31 @@ lib LibWin32
     Sysmonbatchaddfilesautocounters = 3
   end
 
-union PDH_FMT_COUNTERVALUE_Anonymous_e__Union
-  long_value : Int32
-  double_value : Float64
-  large_value : Int64
-  ansi_string_value : PSTR
-  wide_string_value : LibC::LPWSTR
-end
-union PDH_COUNTER_INFO_A_Anonymous_e__Union
-  data_item_path : PDH_DATA_ITEM_PATH_ELEMENTS_A
-  counter_path : PDH_COUNTER_PATH_ELEMENTS_A
-  anonymous : PDH_COUNTER_INFO_A_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PDH_COUNTER_INFO_W_Anonymous_e__Union
-  data_item_path : PDH_DATA_ITEM_PATH_ELEMENTS_W
-  counter_path : PDH_COUNTER_PATH_ELEMENTS_W
-  anonymous : PDH_COUNTER_INFO_W_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union
-  anonymous1 : PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous2_e__Struct
-end
-union PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union
-  anonymous1 : PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous2_e__Struct
-end
+  union PDH_FMT_COUNTERVALUE_Anonymous_e__Union
+    long_value : Int32
+    double_value : Float64
+    large_value : Int64
+    ansi_string_value : PSTR
+    wide_string_value : LibC::LPWSTR
+  end
+  union PDH_COUNTER_INFO_A_Anonymous_e__Union
+    data_item_path : PDH_DATA_ITEM_PATH_ELEMENTS_A
+    counter_path : PDH_COUNTER_PATH_ELEMENTS_A
+    anonymous : PDH_COUNTER_INFO_A_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PDH_COUNTER_INFO_W_Anonymous_e__Union
+    data_item_path : PDH_DATA_ITEM_PATH_ELEMENTS_W
+    counter_path : PDH_COUNTER_PATH_ELEMENTS_W
+    anonymous : PDH_COUNTER_INFO_W_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union
+    anonymous1 : PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous2_e__Struct
+  end
+  union PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union
+    anonymous1 : PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous2_e__Struct
+  end
 
   struct PERF_COUNTERSET_INFO
     counter_set_guid : Guid

@@ -84,26 +84,26 @@ lib LibWin32
     DEFAULT_COMPARTMENT_ID = 1
   end
 
-union QUAD_Anonymous_e__Union
-  use_this_field_to_copy : Int64
-  do_not_use_this_field : Float64
-end
-union RTL_BALANCED_NODE_Anonymous2_e__Union
-  _bitfield : UInt8
-  parent_value : LibC::UINT_PTR
-end
-union RTL_BALANCED_NODE_Anonymous1_e__Union
-  children : RTL_BALANCED_NODE[2]**
-  anonymous : RTL_BALANCED_NODE_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union NT_TIB_Anonymous_e__Union
-  fiber_data : Void*
-  version : UInt32
-end
-union SLIST_HEADER
-  anonymous : SLIST_HEADER_Anonymous_e__Struct
-  header_x64 : SLIST_HEADER_HeaderX64_e__Struct
-end
+  union QUAD_Anonymous_e__Union
+    use_this_field_to_copy : Int64
+    do_not_use_this_field : Float64
+  end
+  union RTL_BALANCED_NODE_Anonymous2_e__Union
+    _bitfield : UInt8
+    parent_value : LibC::UINT_PTR
+  end
+  union RTL_BALANCED_NODE_Anonymous1_e__Union
+    children : RTL_BALANCED_NODE[2]**
+    anonymous : RTL_BALANCED_NODE_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union NT_TIB_Anonymous_e__Union
+    fiber_data : Void*
+    version : UInt32
+  end
+  union SLIST_HEADER
+    anonymous : SLIST_HEADER_Anonymous_e__Struct
+    header_x64 : SLIST_HEADER_HeaderX64_e__Struct
+  end
 
   struct SLIST_ENTRY
     next : SLIST_ENTRY*

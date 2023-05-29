@@ -347,33 +347,33 @@ lib LibWin32
     CF_PLACEHOLDER_RANGE_INFO_MODIFIED = 3
   end
 
-union CF_CALLBACK_PARAMETERS_Anonymous_e__Union
-  cancel : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct
-  fetch_data : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchData_e__Struct
-  validate_data : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_ValidateData_e__Struct
-  fetch_placeholders : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchPlaceholders_e__Struct
-  open_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_OpenCompletion_e__Struct
-  close_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_CloseCompletion_e__Struct
-  dehydrate : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Dehydrate_e__Struct
-  dehydrate_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DehydrateCompletion_e__Struct
-  delete : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Delete_e__Struct
-  delete_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DeleteCompletion_e__Struct
-  rename : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Rename_e__Struct
-  rename_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_RenameCompletion_e__Struct
-end
-union CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union
-  fetch_data : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union_FetchData_e__Struct
-end
-union CF_OPERATION_PARAMETERS_Anonymous_e__Union
-  transfer_data : CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferData_e__Struct
-  retrieve_data : CF_OPERATION_PARAMETERS_Anonymous_e__Union_RetrieveData_e__Struct
-  ack_data : CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckData_e__Struct
-  restart_hydration : CF_OPERATION_PARAMETERS_Anonymous_e__Union_RestartHydration_e__Struct
-  transfer_placeholders : CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferPlaceholders_e__Struct
-  ack_dehydrate : CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDehydrate_e__Struct
-  ack_rename : CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckRename_e__Struct
-  ack_delete : CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDelete_e__Struct
-end
+  union CF_CALLBACK_PARAMETERS_Anonymous_e__Union
+    cancel : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct
+    fetch_data : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchData_e__Struct
+    validate_data : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_ValidateData_e__Struct
+    fetch_placeholders : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchPlaceholders_e__Struct
+    open_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_OpenCompletion_e__Struct
+    close_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_CloseCompletion_e__Struct
+    dehydrate : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Dehydrate_e__Struct
+    dehydrate_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DehydrateCompletion_e__Struct
+    delete : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Delete_e__Struct
+    delete_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DeleteCompletion_e__Struct
+    rename : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Rename_e__Struct
+    rename_completion : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_RenameCompletion_e__Struct
+  end
+  union CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union
+    fetch_data : CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union_FetchData_e__Struct
+  end
+  union CF_OPERATION_PARAMETERS_Anonymous_e__Union
+    transfer_data : CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferData_e__Struct
+    retrieve_data : CF_OPERATION_PARAMETERS_Anonymous_e__Union_RetrieveData_e__Struct
+    ack_data : CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckData_e__Struct
+    restart_hydration : CF_OPERATION_PARAMETERS_Anonymous_e__Union_RestartHydration_e__Struct
+    transfer_placeholders : CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferPlaceholders_e__Struct
+    ack_dehydrate : CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDehydrate_e__Struct
+    ack_rename : CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckRename_e__Struct
+    ack_delete : CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDelete_e__Struct
+  end
 
   struct CF_FS_METADATA
     basic_info : FILE_BASIC_INFO

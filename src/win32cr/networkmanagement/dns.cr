@@ -420,225 +420,225 @@ lib LibWin32
     TAG_DNS_CONNECTION_POLICY_TAG_WWWPT = 2
   end
 
-union IP6_ADDRESS
-  ip6_qword : UInt64[2]*
-  ip6_dword : UInt32[4]*
-  ip6_word : UInt16[8]*
-  ip6_byte : UInt8[16]*
-end
-union DNS_ADDR_Data_e__Union
-  dns_addr_user_dword : UInt32[8]*
-end
-union DNS_RECORDW_Flags_e__Union
-  dw : UInt32
-  s : DNS_RECORD_FLAGS
-end
-union DNS_RECORDW_Data_e__Union
-  a : DNS_A_DATA
-  soa : DNS_SOA_DATAW
-  soa : DNS_SOA_DATAW
-  ptr : DNS_PTR_DATAW
-  ptr : DNS_PTR_DATAW
-  ns : DNS_PTR_DATAW
-  ns : DNS_PTR_DATAW
-  cname : DNS_PTR_DATAW
-  cname : DNS_PTR_DATAW
-  dname : DNS_PTR_DATAW
-  dname : DNS_PTR_DATAW
-  mb : DNS_PTR_DATAW
-  mb : DNS_PTR_DATAW
-  md : DNS_PTR_DATAW
-  md : DNS_PTR_DATAW
-  mf : DNS_PTR_DATAW
-  mf : DNS_PTR_DATAW
-  mg : DNS_PTR_DATAW
-  mg : DNS_PTR_DATAW
-  mr : DNS_PTR_DATAW
-  mr : DNS_PTR_DATAW
-  minfo : DNS_MINFO_DATAW
-  minfo : DNS_MINFO_DATAW
-  rp : DNS_MINFO_DATAW
-  rp : DNS_MINFO_DATAW
-  mx : DNS_MX_DATAW
-  mx : DNS_MX_DATAW
-  afsdb : DNS_MX_DATAW
-  afsdb : DNS_MX_DATAW
-  rt : DNS_MX_DATAW
-  rt : DNS_MX_DATAW
-  hinfo : DNS_TXT_DATAW
-  hinfo : DNS_TXT_DATAW
-  isdn : DNS_TXT_DATAW
-  isdn : DNS_TXT_DATAW
-  txt : DNS_TXT_DATAW
-  txt : DNS_TXT_DATAW
-  x25 : DNS_TXT_DATAW
-  null : DNS_NULL_DATA
-  wks : DNS_WKS_DATA
-  wks : DNS_WKS_DATA
-  aaaa : DNS_AAAA_DATA
-  key : DNS_KEY_DATA
-  key : DNS_KEY_DATA
-  sig : DNS_SIG_DATAW
-  sig : DNS_SIG_DATAW
-  atma : DNS_ATMA_DATA
-  atma : DNS_ATMA_DATA
-  nxt : DNS_NXT_DATAW
-  nxt : DNS_NXT_DATAW
-  srv : DNS_SRV_DATAW
-  srv : DNS_SRV_DATAW
-  naptr : DNS_NAPTR_DATAW
-  naptr : DNS_NAPTR_DATAW
-  opt : DNS_OPT_DATA
-  opt : DNS_OPT_DATA
-  ds : DNS_DS_DATA
-  ds : DNS_DS_DATA
-  rrsig : DNS_SIG_DATAW
-  rrsig : DNS_SIG_DATAW
-  nsec : DNS_NSEC_DATAW
-  nsec : DNS_NSEC_DATAW
-  dnskey : DNS_KEY_DATA
-  dnskey : DNS_KEY_DATA
-  tkey : DNS_TKEY_DATAW
-  tkey : DNS_TKEY_DATAW
-  tsig : DNS_TSIG_DATAW
-  tsig : DNS_TSIG_DATAW
-  wins : DNS_WINS_DATA
-  wins : DNS_WINS_DATA
-  winsr : DNS_WINSR_DATAW
-  wins_r : DNS_WINSR_DATAW
-  nbstat : DNS_WINSR_DATAW
-  nbstat : DNS_WINSR_DATAW
-  dhcid : DNS_DHCID_DATA
-  nsec3 : DNS_NSEC3_DATA
-  nsec3 : DNS_NSEC3_DATA
-  nsec3_param : DNS_NSEC3PARAM_DATA
-  nsec3_param : DNS_NSEC3PARAM_DATA
-  tlsa : DNS_TLSA_DATA
-  tlsa : DNS_TLSA_DATA
-  unknown : DNS_UNKNOWN_DATA
-  unknown : DNS_UNKNOWN_DATA
-  p_data_ptr : UInt8*
-end
-union DnsRecordOptW_Flags_e__Union
-  dw : UInt32
-  s : DNS_RECORD_FLAGS
-end
-union DnsRecordOptW_Data_e__Union
-  opt : DNS_OPT_DATA
-  opt : DNS_OPT_DATA
-end
-union DNS_RECORDA_Flags_e__Union
-  dw : UInt32
-  s : DNS_RECORD_FLAGS
-end
-union DNS_RECORDA_Data_e__Union
-  a : DNS_A_DATA
-  soa : DNS_SOA_DATAA
-  soa : DNS_SOA_DATAA
-  ptr : DNS_PTR_DATAA
-  ptr : DNS_PTR_DATAA
-  ns : DNS_PTR_DATAA
-  ns : DNS_PTR_DATAA
-  cname : DNS_PTR_DATAA
-  cname : DNS_PTR_DATAA
-  dname : DNS_PTR_DATAA
-  dname : DNS_PTR_DATAA
-  mb : DNS_PTR_DATAA
-  mb : DNS_PTR_DATAA
-  md : DNS_PTR_DATAA
-  md : DNS_PTR_DATAA
-  mf : DNS_PTR_DATAA
-  mf : DNS_PTR_DATAA
-  mg : DNS_PTR_DATAA
-  mg : DNS_PTR_DATAA
-  mr : DNS_PTR_DATAA
-  mr : DNS_PTR_DATAA
-  minfo : DNS_MINFO_DATAA
-  minfo : DNS_MINFO_DATAA
-  rp : DNS_MINFO_DATAA
-  rp : DNS_MINFO_DATAA
-  mx : DNS_MX_DATAA
-  mx : DNS_MX_DATAA
-  afsdb : DNS_MX_DATAA
-  afsdb : DNS_MX_DATAA
-  rt : DNS_MX_DATAA
-  rt : DNS_MX_DATAA
-  hinfo : DNS_TXT_DATAA
-  hinfo : DNS_TXT_DATAA
-  isdn : DNS_TXT_DATAA
-  isdn : DNS_TXT_DATAA
-  txt : DNS_TXT_DATAA
-  txt : DNS_TXT_DATAA
-  x25 : DNS_TXT_DATAA
-  null : DNS_NULL_DATA
-  wks : DNS_WKS_DATA
-  wks : DNS_WKS_DATA
-  aaaa : DNS_AAAA_DATA
-  key : DNS_KEY_DATA
-  key : DNS_KEY_DATA
-  sig : DNS_SIG_DATAA
-  sig : DNS_SIG_DATAA
-  atma : DNS_ATMA_DATA
-  atma : DNS_ATMA_DATA
-  nxt : DNS_NXT_DATAA
-  nxt : DNS_NXT_DATAA
-  srv : DNS_SRV_DATAA
-  srv : DNS_SRV_DATAA
-  naptr : DNS_NAPTR_DATAA
-  naptr : DNS_NAPTR_DATAA
-  opt : DNS_OPT_DATA
-  opt : DNS_OPT_DATA
-  ds : DNS_DS_DATA
-  ds : DNS_DS_DATA
-  rrsig : DNS_SIG_DATAA
-  rrsig : DNS_SIG_DATAA
-  nsec : DNS_NSEC_DATAA
-  nsec : DNS_NSEC_DATAA
-  dnskey : DNS_KEY_DATA
-  dnskey : DNS_KEY_DATA
-  tkey : DNS_TKEY_DATAA
-  tkey : DNS_TKEY_DATAA
-  tsig : DNS_TSIG_DATAA
-  tsig : DNS_TSIG_DATAA
-  wins : DNS_WINS_DATA
-  wins : DNS_WINS_DATA
-  winsr : DNS_WINSR_DATAA
-  wins_r : DNS_WINSR_DATAA
-  nbstat : DNS_WINSR_DATAA
-  nbstat : DNS_WINSR_DATAA
-  dhcid : DNS_DHCID_DATA
-  nsec3 : DNS_NSEC3_DATA
-  nsec3 : DNS_NSEC3_DATA
-  nsec3_param : DNS_NSEC3PARAM_DATA
-  nsec3_param : DNS_NSEC3PARAM_DATA
-  tlsa : DNS_TLSA_DATA
-  tlsa : DNS_TLSA_DATA
-  unknown : DNS_UNKNOWN_DATA
-  unknown : DNS_UNKNOWN_DATA
-  p_data_ptr : UInt8*
-end
-union DnsRecordOptA_Flags_e__Union
-  dw : UInt32
-  s : DNS_RECORD_FLAGS
-end
-union DnsRecordOptA_Data_e__Union
-  opt : DNS_OPT_DATA
-  opt : DNS_OPT_DATA
-end
-union DNS_CUSTOM_SERVER_Anonymous1_e__Union
-  pwsz_template : LibC::LPWSTR
-end
-union DNS_CUSTOM_SERVER_Anonymous2_e__Union
-  max_sa : CHAR[32]*
-end
-union DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union
-  config : DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_CONFIG
-  script : DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_SCRIPT
-end
-union DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union
-  p_browse_callback : PDNS_SERVICE_BROWSE_CALLBACK
-  p_browse_callback_v2 : PDNS_QUERY_COMPLETION_ROUTINE
-end
+  union IP6_ADDRESS
+    ip6_qword : UInt64[2]*
+    ip6_dword : UInt32[4]*
+    ip6_word : UInt16[8]*
+    ip6_byte : UInt8[16]*
+  end
+  union DNS_ADDR_Data_e__Union
+    dns_addr_user_dword : UInt32[8]*
+  end
+  union DNS_RECORDW_Flags_e__Union
+    dw : UInt32
+    s : DNS_RECORD_FLAGS
+  end
+  union DNS_RECORDW_Data_e__Union
+    a : DNS_A_DATA
+    soa : DNS_SOA_DATAW
+    soa : DNS_SOA_DATAW
+    ptr : DNS_PTR_DATAW
+    ptr : DNS_PTR_DATAW
+    ns : DNS_PTR_DATAW
+    ns : DNS_PTR_DATAW
+    cname : DNS_PTR_DATAW
+    cname : DNS_PTR_DATAW
+    dname : DNS_PTR_DATAW
+    dname : DNS_PTR_DATAW
+    mb : DNS_PTR_DATAW
+    mb : DNS_PTR_DATAW
+    md : DNS_PTR_DATAW
+    md : DNS_PTR_DATAW
+    mf : DNS_PTR_DATAW
+    mf : DNS_PTR_DATAW
+    mg : DNS_PTR_DATAW
+    mg : DNS_PTR_DATAW
+    mr : DNS_PTR_DATAW
+    mr : DNS_PTR_DATAW
+    minfo : DNS_MINFO_DATAW
+    minfo : DNS_MINFO_DATAW
+    rp : DNS_MINFO_DATAW
+    rp : DNS_MINFO_DATAW
+    mx : DNS_MX_DATAW
+    mx : DNS_MX_DATAW
+    afsdb : DNS_MX_DATAW
+    afsdb : DNS_MX_DATAW
+    rt : DNS_MX_DATAW
+    rt : DNS_MX_DATAW
+    hinfo : DNS_TXT_DATAW
+    hinfo : DNS_TXT_DATAW
+    isdn : DNS_TXT_DATAW
+    isdn : DNS_TXT_DATAW
+    txt : DNS_TXT_DATAW
+    txt : DNS_TXT_DATAW
+    x25 : DNS_TXT_DATAW
+    null : DNS_NULL_DATA
+    wks : DNS_WKS_DATA
+    wks : DNS_WKS_DATA
+    aaaa : DNS_AAAA_DATA
+    key : DNS_KEY_DATA
+    key : DNS_KEY_DATA
+    sig : DNS_SIG_DATAW
+    sig : DNS_SIG_DATAW
+    atma : DNS_ATMA_DATA
+    atma : DNS_ATMA_DATA
+    nxt : DNS_NXT_DATAW
+    nxt : DNS_NXT_DATAW
+    srv : DNS_SRV_DATAW
+    srv : DNS_SRV_DATAW
+    naptr : DNS_NAPTR_DATAW
+    naptr : DNS_NAPTR_DATAW
+    opt : DNS_OPT_DATA
+    opt : DNS_OPT_DATA
+    ds : DNS_DS_DATA
+    ds : DNS_DS_DATA
+    rrsig : DNS_SIG_DATAW
+    rrsig : DNS_SIG_DATAW
+    nsec : DNS_NSEC_DATAW
+    nsec : DNS_NSEC_DATAW
+    dnskey : DNS_KEY_DATA
+    dnskey : DNS_KEY_DATA
+    tkey : DNS_TKEY_DATAW
+    tkey : DNS_TKEY_DATAW
+    tsig : DNS_TSIG_DATAW
+    tsig : DNS_TSIG_DATAW
+    wins : DNS_WINS_DATA
+    wins : DNS_WINS_DATA
+    winsr : DNS_WINSR_DATAW
+    wins_r : DNS_WINSR_DATAW
+    nbstat : DNS_WINSR_DATAW
+    nbstat : DNS_WINSR_DATAW
+    dhcid : DNS_DHCID_DATA
+    nsec3 : DNS_NSEC3_DATA
+    nsec3 : DNS_NSEC3_DATA
+    nsec3_param : DNS_NSEC3PARAM_DATA
+    nsec3_param : DNS_NSEC3PARAM_DATA
+    tlsa : DNS_TLSA_DATA
+    tlsa : DNS_TLSA_DATA
+    unknown : DNS_UNKNOWN_DATA
+    unknown : DNS_UNKNOWN_DATA
+    p_data_ptr : UInt8*
+  end
+  union DnsRecordOptW_Flags_e__Union
+    dw : UInt32
+    s : DNS_RECORD_FLAGS
+  end
+  union DnsRecordOptW_Data_e__Union
+    opt : DNS_OPT_DATA
+    opt : DNS_OPT_DATA
+  end
+  union DNS_RECORDA_Flags_e__Union
+    dw : UInt32
+    s : DNS_RECORD_FLAGS
+  end
+  union DNS_RECORDA_Data_e__Union
+    a : DNS_A_DATA
+    soa : DNS_SOA_DATAA
+    soa : DNS_SOA_DATAA
+    ptr : DNS_PTR_DATAA
+    ptr : DNS_PTR_DATAA
+    ns : DNS_PTR_DATAA
+    ns : DNS_PTR_DATAA
+    cname : DNS_PTR_DATAA
+    cname : DNS_PTR_DATAA
+    dname : DNS_PTR_DATAA
+    dname : DNS_PTR_DATAA
+    mb : DNS_PTR_DATAA
+    mb : DNS_PTR_DATAA
+    md : DNS_PTR_DATAA
+    md : DNS_PTR_DATAA
+    mf : DNS_PTR_DATAA
+    mf : DNS_PTR_DATAA
+    mg : DNS_PTR_DATAA
+    mg : DNS_PTR_DATAA
+    mr : DNS_PTR_DATAA
+    mr : DNS_PTR_DATAA
+    minfo : DNS_MINFO_DATAA
+    minfo : DNS_MINFO_DATAA
+    rp : DNS_MINFO_DATAA
+    rp : DNS_MINFO_DATAA
+    mx : DNS_MX_DATAA
+    mx : DNS_MX_DATAA
+    afsdb : DNS_MX_DATAA
+    afsdb : DNS_MX_DATAA
+    rt : DNS_MX_DATAA
+    rt : DNS_MX_DATAA
+    hinfo : DNS_TXT_DATAA
+    hinfo : DNS_TXT_DATAA
+    isdn : DNS_TXT_DATAA
+    isdn : DNS_TXT_DATAA
+    txt : DNS_TXT_DATAA
+    txt : DNS_TXT_DATAA
+    x25 : DNS_TXT_DATAA
+    null : DNS_NULL_DATA
+    wks : DNS_WKS_DATA
+    wks : DNS_WKS_DATA
+    aaaa : DNS_AAAA_DATA
+    key : DNS_KEY_DATA
+    key : DNS_KEY_DATA
+    sig : DNS_SIG_DATAA
+    sig : DNS_SIG_DATAA
+    atma : DNS_ATMA_DATA
+    atma : DNS_ATMA_DATA
+    nxt : DNS_NXT_DATAA
+    nxt : DNS_NXT_DATAA
+    srv : DNS_SRV_DATAA
+    srv : DNS_SRV_DATAA
+    naptr : DNS_NAPTR_DATAA
+    naptr : DNS_NAPTR_DATAA
+    opt : DNS_OPT_DATA
+    opt : DNS_OPT_DATA
+    ds : DNS_DS_DATA
+    ds : DNS_DS_DATA
+    rrsig : DNS_SIG_DATAA
+    rrsig : DNS_SIG_DATAA
+    nsec : DNS_NSEC_DATAA
+    nsec : DNS_NSEC_DATAA
+    dnskey : DNS_KEY_DATA
+    dnskey : DNS_KEY_DATA
+    tkey : DNS_TKEY_DATAA
+    tkey : DNS_TKEY_DATAA
+    tsig : DNS_TSIG_DATAA
+    tsig : DNS_TSIG_DATAA
+    wins : DNS_WINS_DATA
+    wins : DNS_WINS_DATA
+    winsr : DNS_WINSR_DATAA
+    wins_r : DNS_WINSR_DATAA
+    nbstat : DNS_WINSR_DATAA
+    nbstat : DNS_WINSR_DATAA
+    dhcid : DNS_DHCID_DATA
+    nsec3 : DNS_NSEC3_DATA
+    nsec3 : DNS_NSEC3_DATA
+    nsec3_param : DNS_NSEC3PARAM_DATA
+    nsec3_param : DNS_NSEC3PARAM_DATA
+    tlsa : DNS_TLSA_DATA
+    tlsa : DNS_TLSA_DATA
+    unknown : DNS_UNKNOWN_DATA
+    unknown : DNS_UNKNOWN_DATA
+    p_data_ptr : UInt8*
+  end
+  union DnsRecordOptA_Flags_e__Union
+    dw : UInt32
+    s : DNS_RECORD_FLAGS
+  end
+  union DnsRecordOptA_Data_e__Union
+    opt : DNS_OPT_DATA
+    opt : DNS_OPT_DATA
+  end
+  union DNS_CUSTOM_SERVER_Anonymous1_e__Union
+    pwsz_template : LibC::LPWSTR
+  end
+  union DNS_CUSTOM_SERVER_Anonymous2_e__Union
+    max_sa : CHAR[32]*
+  end
+  union DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union
+    config : DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_CONFIG
+    script : DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_SCRIPT
+  end
+  union DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union
+    p_browse_callback : PDNS_SERVICE_BROWSE_CALLBACK
+    p_browse_callback_v2 : PDNS_QUERY_COMPLETION_ROUTINE
+  end
 
   struct IP4_ARRAY
     addr_count : UInt32

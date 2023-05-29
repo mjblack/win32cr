@@ -2240,26 +2240,26 @@ lib LibWin32
     SL_GEN_STATE_LAST = 4
   end
 
-union LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union
-  top_level_name : UNICODE_STRING
-  domain_info : LSA_FOREST_TRUST_DOMAIN_INFO
-  data : LSA_FOREST_TRUST_BINARY_DATA
-end
-union SEC_WINNT_AUTH_IDENTITY_INFO
-  auth_id_exw : SEC_WINNT_AUTH_IDENTITY_EXW
-  auth_id_exa : SEC_WINNT_AUTH_IDENTITY_EXA
-  auth_id_a : SEC_WINNT_AUTH_IDENTITY_A
-  auth_id_w : SEC_WINNT_AUTH_IDENTITY_W
-  auth_id_ex2 : SEC_WINNT_AUTH_IDENTITY_EX2
-end
-union SECPKG_EXTENDED_INFORMATION_Info_e__Union
-  gss_info : SECPKG_GSS_INFO
-  context_thunks : SECPKG_CONTEXT_THUNKS
-  mutual_auth_level : SECPKG_MUTUAL_AUTH_LEVEL
-  wow_client_dll : SECPKG_WOW_CLIENT_DLL
-  extra_oids : SECPKG_EXTRA_OIDS
-  nego2_info : SECPKG_NEGO2_INFO
-end
+  union LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union
+    top_level_name : UNICODE_STRING
+    domain_info : LSA_FOREST_TRUST_DOMAIN_INFO
+    data : LSA_FOREST_TRUST_BINARY_DATA
+  end
+  union SEC_WINNT_AUTH_IDENTITY_INFO
+    auth_id_exw : SEC_WINNT_AUTH_IDENTITY_EXW
+    auth_id_exa : SEC_WINNT_AUTH_IDENTITY_EXA
+    auth_id_a : SEC_WINNT_AUTH_IDENTITY_A
+    auth_id_w : SEC_WINNT_AUTH_IDENTITY_W
+    auth_id_ex2 : SEC_WINNT_AUTH_IDENTITY_EX2
+  end
+  union SECPKG_EXTENDED_INFORMATION_Info_e__Union
+    gss_info : SECPKG_GSS_INFO
+    context_thunks : SECPKG_CONTEXT_THUNKS
+    mutual_auth_level : SECPKG_MUTUAL_AUTH_LEVEL
+    wow_client_dll : SECPKG_WOW_CLIENT_DLL
+    extra_oids : SECPKG_EXTRA_OIDS
+    nego2_info : SECPKG_NEGO2_INFO
+  end
 
   struct LSA_TRUST_INFORMATION
     name : UNICODE_STRING

@@ -1587,71 +1587,71 @@ lib LibWin32
     ProviderInfoAudit = 1
   end
 
-union IN_ADDR_S_un_e__Union
-  s_un_b : IN_ADDR_S_un_e__Union_S_un_b_e__Struct
-  s_un_w : IN_ADDR_S_un_e__Union_S_un_w_e__Struct
-  s_addr : UInt32
-end
-union SCOPE_ID_Anonymous_e__Union
-  anonymous : SCOPE_ID_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union Addrinfo_dns_server_Anonymous_e__Union
-  ai_template : LibC::LPWSTR
-end
-union WSACOMPLETION_Parameters_e__Union
-  window_message : WSACOMPLETION_Parameters_e__Union_WindowMessage_e__Struct
-  event : WSACOMPLETION_Parameters_e__Union_Event_e__Struct
-  apc : WSACOMPLETION_Parameters_e__Union_Apc_e__Struct
-  port : WSACOMPLETION_Parameters_e__Union_Port_e__Struct
-end
-union IN6_ADDR_u_e__Union
-  byte : UInt8[16]*
-  word : UInt16[8]*
-end
-union Sockaddr_gen
-  address : SOCKADDR
-  address_in : SOCKADDR_IN
-  address_in6 : Sockaddr_in6_old
-end
-union SOCKADDR_IN6_Anonymous_e__Union
-  sin6_scope_id : UInt32
-  sin6_scope_struct : SCOPE_ID
-end
-union SOCKADDR_INET
-  ipv4 : SOCKADDR_IN
-  ipv6 : SOCKADDR_IN6
-  si_family : UInt16
-end
-union WINDOWS_IAS_SET_irdaAttribute_e__Union
-  irda_attrib_int : Int32
-  irda_attrib_octet_seq : WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct
-  irda_attrib_usr_str : WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct
-end
-union WINDOWS_IAS_QUERY_irdaAttribute_e__Union
-  irda_attrib_int : Int32
-  irda_attrib_octet_seq : WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct
-  irda_attrib_usr_str : WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct
-end
-union AAL_PARAMETERS_IE_AALSpecificParameters_e__Union
-  aal5_parameters : AAL5_PARAMETERS
-  aal_user_parameters : AALUSER_PARAMETERS
-end
-union TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union
-  anonymous : TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union_Anonymous_e__Struct
-  p_buffer : Void*
-end
-union NLA_BLOB_data_e__Union
-  raw_data : CHAR[0]*
-  interface_data : NLA_BLOB_data_e__Union_interfaceData_e__Struct
-  location_data : NLA_BLOB_data_e__Union_locationData_e__Struct
-  connectivity : NLA_BLOB_data_e__Union_connectivity_e__Struct
-  ics : NLA_BLOB_data_e__Union_ICS_e__Struct
-end
-union RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union
-  event : RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Event_e__Struct
-  iocp : RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Iocp_e__Struct
-end
+  union IN_ADDR_S_un_e__Union
+    s_un_b : IN_ADDR_S_un_e__Union_S_un_b_e__Struct
+    s_un_w : IN_ADDR_S_un_e__Union_S_un_w_e__Struct
+    s_addr : UInt32
+  end
+  union SCOPE_ID_Anonymous_e__Union
+    anonymous : SCOPE_ID_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union Addrinfo_dns_server_Anonymous_e__Union
+    ai_template : LibC::LPWSTR
+  end
+  union WSACOMPLETION_Parameters_e__Union
+    window_message : WSACOMPLETION_Parameters_e__Union_WindowMessage_e__Struct
+    event : WSACOMPLETION_Parameters_e__Union_Event_e__Struct
+    apc : WSACOMPLETION_Parameters_e__Union_Apc_e__Struct
+    port : WSACOMPLETION_Parameters_e__Union_Port_e__Struct
+  end
+  union IN6_ADDR_u_e__Union
+    byte : UInt8[16]*
+    word : UInt16[8]*
+  end
+  union Sockaddr_gen
+    address : SOCKADDR
+    address_in : SOCKADDR_IN
+    address_in6 : Sockaddr_in6_old
+  end
+  union SOCKADDR_IN6_Anonymous_e__Union
+    sin6_scope_id : UInt32
+    sin6_scope_struct : SCOPE_ID
+  end
+  union SOCKADDR_INET
+    ipv4 : SOCKADDR_IN
+    ipv6 : SOCKADDR_IN6
+    si_family : UInt16
+  end
+  union WINDOWS_IAS_SET_irdaAttribute_e__Union
+    irda_attrib_int : Int32
+    irda_attrib_octet_seq : WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct
+    irda_attrib_usr_str : WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct
+  end
+  union WINDOWS_IAS_QUERY_irdaAttribute_e__Union
+    irda_attrib_int : Int32
+    irda_attrib_octet_seq : WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct
+    irda_attrib_usr_str : WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct
+  end
+  union AAL_PARAMETERS_IE_AALSpecificParameters_e__Union
+    aal5_parameters : AAL5_PARAMETERS
+    aal_user_parameters : AALUSER_PARAMETERS
+  end
+  union TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union
+    anonymous : TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union_Anonymous_e__Struct
+    p_buffer : Void*
+  end
+  union NLA_BLOB_data_e__Union
+    raw_data : CHAR[0]*
+    interface_data : NLA_BLOB_data_e__Union_interfaceData_e__Struct
+    location_data : NLA_BLOB_data_e__Union_locationData_e__Struct
+    connectivity : NLA_BLOB_data_e__Union_connectivity_e__Struct
+    ics : NLA_BLOB_data_e__Union_ICS_e__Struct
+  end
+  union RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union
+    event : RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Event_e__Struct
+    iocp : RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Iocp_e__Struct
+  end
 
   struct IN_ADDR
     s_un : IN_ADDR_S_un_e__Union

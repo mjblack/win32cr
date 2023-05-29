@@ -121,18 +121,18 @@ lib LibWin32
     ED_DEVCAP_RTC_READ = 5050
   end
 
-union MMTIME_u_e__Union
-  ms : UInt32
-  sample : UInt32
-  cb : UInt32
-  ticks : UInt32
-  smpte : MMTIME_u_e__Union_smpte_e__Struct
-  midi : MMTIME_u_e__Union_midi_e__Struct
-end
-union TIMECODE
-  anonymous : TIMECODE_Anonymous_e__Struct
-  qw : UInt64
-end
+  union MMTIME_u_e__Union
+    ms : UInt32
+    sample : UInt32
+    cb : UInt32
+    ticks : UInt32
+    smpte : MMTIME_u_e__Union_smpte_e__Struct
+    midi : MMTIME_u_e__Union_midi_e__Struct
+  end
+  union TIMECODE
+    anonymous : TIMECODE_Anonymous_e__Struct
+    qw : UInt64
+  end
 
   struct MMTIME
     w_type : UInt32

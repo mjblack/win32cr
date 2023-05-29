@@ -155,35 +155,35 @@ lib LibWin32
     MaxJobObjectInfoClass = 48
   end
 
-union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union
-  rate_control_tolerance_interval : JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
-  cpu_rate_control_tolerance_interval : JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
-end
-union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union
-  job_high_memory_limit : UInt64
-  job_memory_limit : UInt64
-end
-union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union
-  rate_control_tolerance : JOBOBJECT_RATE_CONTROL_TOLERANCE
-  cpu_rate_control_tolerance : JOBOBJECT_RATE_CONTROL_TOLERANCE
-end
-union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union
-  rate_control_tolerance : JOBOBJECT_RATE_CONTROL_TOLERANCE
-  cpu_rate_control_tolerance : JOBOBJECT_RATE_CONTROL_TOLERANCE
-end
-union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union
-  rate_control_tolerance_limit : JOBOBJECT_RATE_CONTROL_TOLERANCE
-  cpu_rate_control_tolerance_limit : JOBOBJECT_RATE_CONTROL_TOLERANCE
-end
-union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union
-  job_high_memory_limit : UInt64
-  job_memory_limit : UInt64
-end
-union JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union
-  cpu_rate : UInt32
-  weight : UInt32
-  anonymous : JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct
-end
+  union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous3_e__Union
+    rate_control_tolerance_interval : JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
+    cpu_rate_control_tolerance_interval : JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL
+  end
+  union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous1_e__Union
+    job_high_memory_limit : UInt64
+    job_memory_limit : UInt64
+  end
+  union JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_Anonymous2_e__Union
+    rate_control_tolerance : JOBOBJECT_RATE_CONTROL_TOLERANCE
+    cpu_rate_control_tolerance : JOBOBJECT_RATE_CONTROL_TOLERANCE
+  end
+  union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous2_e__Union
+    rate_control_tolerance : JOBOBJECT_RATE_CONTROL_TOLERANCE
+    cpu_rate_control_tolerance : JOBOBJECT_RATE_CONTROL_TOLERANCE
+  end
+  union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous3_e__Union
+    rate_control_tolerance_limit : JOBOBJECT_RATE_CONTROL_TOLERANCE
+    cpu_rate_control_tolerance_limit : JOBOBJECT_RATE_CONTROL_TOLERANCE
+  end
+  union JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_Anonymous1_e__Union
+    job_high_memory_limit : UInt64
+    job_memory_limit : UInt64
+  end
+  union JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union
+    cpu_rate : UInt32
+    weight : UInt32
+    anonymous : JOBOBJECT_CPU_RATE_CONTROL_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct
+  end
 
   struct JOBOBJECT_IO_RATE_CONTROL_INFORMATION
     max_iops : Int64

@@ -697,10 +697,10 @@ lib LibWin32
     D3D_PF_FORCE_DWORD = 2147483647
   end
 
-union D3DMATRIX_Anonymous_e__Union
-  anonymous : D3DMATRIX_Anonymous_e__Union_Anonymous_e__Struct
-  m : Float32[16]*
-end
+  union D3DMATRIX_Anonymous_e__Union
+    anonymous : D3DMATRIX_Anonymous_e__Union_Anonymous_e__Struct
+    m : Float32[16]*
+  end
 
   struct D3D_SHADER_MACRO
     name : PSTR

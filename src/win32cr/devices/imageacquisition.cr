@@ -994,28 +994,28 @@ lib LibWin32
     WIAVIDEO_DESTROYING_VIDEO = 6
   end
 
-union WIA_PROPERTY_INFO_ValidVal_e__Union
-  range : WIA_PROPERTY_INFO_ValidVal_e__Union_Range_e__Struct
-  range_float : WIA_PROPERTY_INFO_ValidVal_e__Union_RangeFloat_e__Struct
-  list : WIA_PROPERTY_INFO_ValidVal_e__Union_List_e__Struct
-  list_float : WIA_PROPERTY_INFO_ValidVal_e__Union_ListFloat_e__Struct
-  list_guid : WIA_PROPERTY_INFO_ValidVal_e__Union_ListGuid_e__Struct
-  list_b_str : WIA_PROPERTY_INFO_ValidVal_e__Union_ListBStr_e__Struct
-  flag : WIA_PROPERTY_INFO_ValidVal_e__Union_Flag_e__Struct
-  none : WIA_PROPERTY_INFO_ValidVal_e__Union_None_e__Struct
-end
-union WIAS_CHANGED_VALUE_INFO_Old_e__Union
-  l_val : Int32
-  flt_val : Float32
-  bstr_val : UInt8
-  guid_val : Guid
-end
-union WIAS_CHANGED_VALUE_INFO_Current_e__Union
-  l_val : Int32
-  flt_val : Float32
-  bstr_val : UInt8
-  guid_val : Guid
-end
+  union WIA_PROPERTY_INFO_ValidVal_e__Union
+    range : WIA_PROPERTY_INFO_ValidVal_e__Union_Range_e__Struct
+    range_float : WIA_PROPERTY_INFO_ValidVal_e__Union_RangeFloat_e__Struct
+    list : WIA_PROPERTY_INFO_ValidVal_e__Union_List_e__Struct
+    list_float : WIA_PROPERTY_INFO_ValidVal_e__Union_ListFloat_e__Struct
+    list_guid : WIA_PROPERTY_INFO_ValidVal_e__Union_ListGuid_e__Struct
+    list_b_str : WIA_PROPERTY_INFO_ValidVal_e__Union_ListBStr_e__Struct
+    flag : WIA_PROPERTY_INFO_ValidVal_e__Union_Flag_e__Struct
+    none : WIA_PROPERTY_INFO_ValidVal_e__Union_None_e__Struct
+  end
+  union WIAS_CHANGED_VALUE_INFO_Old_e__Union
+    l_val : Int32
+    flt_val : Float32
+    bstr_val : UInt8
+    guid_val : Guid
+  end
+  union WIAS_CHANGED_VALUE_INFO_Current_e__Union
+    l_val : Int32
+    flt_val : Float32
+    bstr_val : UInt8
+    guid_val : Guid
+  end
 
   struct WIA_DITHER_PATTERN_DATA
     l_size : Int32

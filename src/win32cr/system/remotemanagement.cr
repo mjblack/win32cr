@@ -687,20 +687,20 @@ lib LibWin32
     WSManFlagProxyAuthenticationUseDigest = 4
   end
 
-union WSMAN_DATA_Anonymous_e__Union
-  text : WSMAN_DATA_TEXT
-  binary_data : WSMAN_DATA_BINARY
-  number : UInt32
-end
-union WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union
-  user_account : WSMAN_USERNAME_PASSWORD_CREDS
-  certificate_thumbprint : LibC::LPWSTR
-end
-union WSMAN_RESPONSE_DATA
-  receive_data : WSMAN_RECEIVE_DATA_RESULT
-  connect_data : WSMAN_CONNECT_DATA
-  create_data : WSMAN_CREATE_SHELL_DATA
-end
+  union WSMAN_DATA_Anonymous_e__Union
+    text : WSMAN_DATA_TEXT
+    binary_data : WSMAN_DATA_BINARY
+    number : UInt32
+  end
+  union WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union
+    user_account : WSMAN_USERNAME_PASSWORD_CREDS
+    certificate_thumbprint : LibC::LPWSTR
+  end
+  union WSMAN_RESPONSE_DATA
+    receive_data : WSMAN_RECEIVE_DATA_RESULT
+    connect_data : WSMAN_CONNECT_DATA
+    create_data : WSMAN_CREATE_SHELL_DATA
+  end
 
   struct WSMAN_DATA_TEXT
     buffer_length : UInt32

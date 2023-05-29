@@ -2686,100 +2686,100 @@ lib LibWin32
     D3D12_SHVER_RESERVED0 = 65520
   end
 
-union D3D12_CLEAR_VALUE_Anonymous_e__Union
-  color : Float32[4]*
-  depth_stencil : D3D12_DEPTH_STENCIL_VALUE
-end
-union D3D12_RESOURCE_BARRIER_Anonymous_e__Union
-  transition : D3D12_RESOURCE_TRANSITION_BARRIER
-  aliasing : D3D12_RESOURCE_ALIASING_BARRIER
-  uav : D3D12_RESOURCE_UAV_BARRIER
-end
-union D3D12_TEXTURE_COPY_LOCATION_Anonymous_e__Union
-  placed_footprint : D3D12_PLACED_SUBRESOURCE_FOOTPRINT
-  subresource_index : UInt32
-end
-union D3D12_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
-  buffer : D3D12_BUFFER_SRV
-  texture1_d : D3D12_TEX1D_SRV
-  texture1_d_array : D3D12_TEX1D_ARRAY_SRV
-  texture2_d : D3D12_TEX2D_SRV
-  texture2_d_array : D3D12_TEX2D_ARRAY_SRV
-  texture2_dms : D3D12_TEX2DMS_SRV
-  texture2_dms_array : D3D12_TEX2DMS_ARRAY_SRV
-  texture3_d : D3D12_TEX3D_SRV
-  texture_cube : D3D12_TEXCUBE_SRV
-  texture_cube_array : D3D12_TEXCUBE_ARRAY_SRV
-  raytracing_acceleration_structure : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV
-end
-union D3D12_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union
-  buffer : D3D12_BUFFER_UAV
-  texture1_d : D3D12_TEX1D_UAV
-  texture1_d_array : D3D12_TEX1D_ARRAY_UAV
-  texture2_d : D3D12_TEX2D_UAV
-  texture2_d_array : D3D12_TEX2D_ARRAY_UAV
-  texture3_d : D3D12_TEX3D_UAV
-end
-union D3D12_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
-  buffer : D3D12_BUFFER_RTV
-  texture1_d : D3D12_TEX1D_RTV
-  texture1_d_array : D3D12_TEX1D_ARRAY_RTV
-  texture2_d : D3D12_TEX2D_RTV
-  texture2_d_array : D3D12_TEX2D_ARRAY_RTV
-  texture2_dms : D3D12_TEX2DMS_RTV
-  texture2_dms_array : D3D12_TEX2DMS_ARRAY_RTV
-  texture3_d : D3D12_TEX3D_RTV
-end
-union D3D12_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
-  texture1_d : D3D12_TEX1D_DSV
-  texture1_d_array : D3D12_TEX1D_ARRAY_DSV
-  texture2_d : D3D12_TEX2D_DSV
-  texture2_d_array : D3D12_TEX2D_ARRAY_DSV
-  texture2_dms : D3D12_TEX2DMS_DSV
-  texture2_dms_array : D3D12_TEX2DMS_ARRAY_DSV
-end
-union D3D12_ROOT_PARAMETER_Anonymous_e__Union
-  descriptor_table : D3D12_ROOT_DESCRIPTOR_TABLE
-  constants : D3D12_ROOT_CONSTANTS
-  descriptor : D3D12_ROOT_DESCRIPTOR
-end
-union D3D12_ROOT_PARAMETER1_Anonymous_e__Union
-  descriptor_table : D3D12_ROOT_DESCRIPTOR_TABLE1
-  constants : D3D12_ROOT_CONSTANTS
-  descriptor : D3D12_ROOT_DESCRIPTOR1
-end
-union D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union
-  desc_1_0 : D3D12_ROOT_SIGNATURE_DESC
-  desc_1_1 : D3D12_ROOT_SIGNATURE_DESC1
-end
-union D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union
-  vertex_buffer : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_VertexBuffer_e__Struct
-  constant : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_Constant_e__Struct
-  constant_buffer_view : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_ConstantBufferView_e__Struct
-  shader_resource_view : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_ShaderResourceView_e__Struct
-  unordered_access_view : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_UnorderedAccessView_e__Struct
-end
-union D3D12_RAYTRACING_GEOMETRY_DESC_Anonymous_e__Union
-  triangles : D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC
-  aab_bs : D3D12_RAYTRACING_GEOMETRY_AABBS_DESC
-end
-union D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_Anonymous_e__Union
-  instance_descs : UInt64
-  p_geometry_descs : D3D12_RAYTRACING_GEOMETRY_DESC*
-  pp_geometry_descs : D3D12_RAYTRACING_GEOMETRY_DESC**
-end
-union D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union
-  dred_1_0 : D3D12_DEVICE_REMOVED_EXTENDED_DATA
-  dred_1_1 : D3D12_DEVICE_REMOVED_EXTENDED_DATA1
-  dred_1_2 : D3D12_DEVICE_REMOVED_EXTENDED_DATA2
-  dred_1_3 : D3D12_DEVICE_REMOVED_EXTENDED_DATA3
-end
-union D3D12_RENDER_PASS_BEGINNING_ACCESS_Anonymous_e__Union
-  clear : D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS
-end
-union D3D12_RENDER_PASS_ENDING_ACCESS_Anonymous_e__Union
-  resolve : D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS
-end
+  union D3D12_CLEAR_VALUE_Anonymous_e__Union
+    color : Float32[4]*
+    depth_stencil : D3D12_DEPTH_STENCIL_VALUE
+  end
+  union D3D12_RESOURCE_BARRIER_Anonymous_e__Union
+    transition : D3D12_RESOURCE_TRANSITION_BARRIER
+    aliasing : D3D12_RESOURCE_ALIASING_BARRIER
+    uav : D3D12_RESOURCE_UAV_BARRIER
+  end
+  union D3D12_TEXTURE_COPY_LOCATION_Anonymous_e__Union
+    placed_footprint : D3D12_PLACED_SUBRESOURCE_FOOTPRINT
+    subresource_index : UInt32
+  end
+  union D3D12_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
+    buffer : D3D12_BUFFER_SRV
+    texture1_d : D3D12_TEX1D_SRV
+    texture1_d_array : D3D12_TEX1D_ARRAY_SRV
+    texture2_d : D3D12_TEX2D_SRV
+    texture2_d_array : D3D12_TEX2D_ARRAY_SRV
+    texture2_dms : D3D12_TEX2DMS_SRV
+    texture2_dms_array : D3D12_TEX2DMS_ARRAY_SRV
+    texture3_d : D3D12_TEX3D_SRV
+    texture_cube : D3D12_TEXCUBE_SRV
+    texture_cube_array : D3D12_TEXCUBE_ARRAY_SRV
+    raytracing_acceleration_structure : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV
+  end
+  union D3D12_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union
+    buffer : D3D12_BUFFER_UAV
+    texture1_d : D3D12_TEX1D_UAV
+    texture1_d_array : D3D12_TEX1D_ARRAY_UAV
+    texture2_d : D3D12_TEX2D_UAV
+    texture2_d_array : D3D12_TEX2D_ARRAY_UAV
+    texture3_d : D3D12_TEX3D_UAV
+  end
+  union D3D12_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
+    buffer : D3D12_BUFFER_RTV
+    texture1_d : D3D12_TEX1D_RTV
+    texture1_d_array : D3D12_TEX1D_ARRAY_RTV
+    texture2_d : D3D12_TEX2D_RTV
+    texture2_d_array : D3D12_TEX2D_ARRAY_RTV
+    texture2_dms : D3D12_TEX2DMS_RTV
+    texture2_dms_array : D3D12_TEX2DMS_ARRAY_RTV
+    texture3_d : D3D12_TEX3D_RTV
+  end
+  union D3D12_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
+    texture1_d : D3D12_TEX1D_DSV
+    texture1_d_array : D3D12_TEX1D_ARRAY_DSV
+    texture2_d : D3D12_TEX2D_DSV
+    texture2_d_array : D3D12_TEX2D_ARRAY_DSV
+    texture2_dms : D3D12_TEX2DMS_DSV
+    texture2_dms_array : D3D12_TEX2DMS_ARRAY_DSV
+  end
+  union D3D12_ROOT_PARAMETER_Anonymous_e__Union
+    descriptor_table : D3D12_ROOT_DESCRIPTOR_TABLE
+    constants : D3D12_ROOT_CONSTANTS
+    descriptor : D3D12_ROOT_DESCRIPTOR
+  end
+  union D3D12_ROOT_PARAMETER1_Anonymous_e__Union
+    descriptor_table : D3D12_ROOT_DESCRIPTOR_TABLE1
+    constants : D3D12_ROOT_CONSTANTS
+    descriptor : D3D12_ROOT_DESCRIPTOR1
+  end
+  union D3D12_VERSIONED_ROOT_SIGNATURE_DESC_Anonymous_e__Union
+    desc_1_0 : D3D12_ROOT_SIGNATURE_DESC
+    desc_1_1 : D3D12_ROOT_SIGNATURE_DESC1
+  end
+  union D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union
+    vertex_buffer : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_VertexBuffer_e__Struct
+    constant : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_Constant_e__Struct
+    constant_buffer_view : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_ConstantBufferView_e__Struct
+    shader_resource_view : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_ShaderResourceView_e__Struct
+    unordered_access_view : D3D12_INDIRECT_ARGUMENT_DESC_Anonymous_e__Union_UnorderedAccessView_e__Struct
+  end
+  union D3D12_RAYTRACING_GEOMETRY_DESC_Anonymous_e__Union
+    triangles : D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC
+    aab_bs : D3D12_RAYTRACING_GEOMETRY_AABBS_DESC
+  end
+  union D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_Anonymous_e__Union
+    instance_descs : UInt64
+    p_geometry_descs : D3D12_RAYTRACING_GEOMETRY_DESC*
+    pp_geometry_descs : D3D12_RAYTRACING_GEOMETRY_DESC**
+  end
+  union D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_Anonymous_e__Union
+    dred_1_0 : D3D12_DEVICE_REMOVED_EXTENDED_DATA
+    dred_1_1 : D3D12_DEVICE_REMOVED_EXTENDED_DATA1
+    dred_1_2 : D3D12_DEVICE_REMOVED_EXTENDED_DATA2
+    dred_1_3 : D3D12_DEVICE_REMOVED_EXTENDED_DATA3
+  end
+  union D3D12_RENDER_PASS_BEGINNING_ACCESS_Anonymous_e__Union
+    clear : D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS
+  end
+  union D3D12_RENDER_PASS_ENDING_ACCESS_Anonymous_e__Union
+    resolve : D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS
+  end
 
   struct D3D12_COMMAND_QUEUE_DESC
     type : D3D12_COMMAND_LIST_TYPE

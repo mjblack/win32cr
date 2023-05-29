@@ -732,10 +732,10 @@ lib LibWin32
     Repauthorization = 1
   end
 
-union RADIUS_ATTRIBUTE_Anonymous_e__Union
-  dw_value : UInt32
-  lp_value : UInt8*
-end
+  union RADIUS_ATTRIBUTE_Anonymous_e__Union
+    dw_value : UInt32
+    lp_value : UInt8*
+  end
 
   struct RADIUS_ATTRIBUTE
     dw_attr_type : UInt32

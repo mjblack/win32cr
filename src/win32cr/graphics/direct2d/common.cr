@@ -105,23 +105,23 @@ lib LibWin32
     D2D1_COMPOSITE_MODE_FORCE_DWORD = 4294967295
   end
 
-union D2D_MATRIX_3X2_F_Anonymous_e__Union
-  anonymous1 : D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous2_e__Struct
-  m : Float32[6]*
-end
-union D2D_MATRIX_4X3_F_Anonymous_e__Union
-  anonymous : D2D_MATRIX_4X3_F_Anonymous_e__Union_Anonymous_e__Struct
-  m : Float32[12]*
-end
-union D2D_MATRIX_4X4_F_Anonymous_e__Union
-  anonymous : D2D_MATRIX_4X4_F_Anonymous_e__Union_Anonymous_e__Struct
-  m : Float32[16]*
-end
-union D2D_MATRIX_5X4_F_Anonymous_e__Union
-  anonymous : D2D_MATRIX_5X4_F_Anonymous_e__Union_Anonymous_e__Struct
-  m : Float32[20]*
-end
+  union D2D_MATRIX_3X2_F_Anonymous_e__Union
+    anonymous1 : D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : D2D_MATRIX_3X2_F_Anonymous_e__Union_Anonymous2_e__Struct
+    m : Float32[6]*
+  end
+  union D2D_MATRIX_4X3_F_Anonymous_e__Union
+    anonymous : D2D_MATRIX_4X3_F_Anonymous_e__Union_Anonymous_e__Struct
+    m : Float32[12]*
+  end
+  union D2D_MATRIX_4X4_F_Anonymous_e__Union
+    anonymous : D2D_MATRIX_4X4_F_Anonymous_e__Union_Anonymous_e__Struct
+    m : Float32[16]*
+  end
+  union D2D_MATRIX_5X4_F_Anonymous_e__Union
+    anonymous : D2D_MATRIX_5X4_F_Anonymous_e__Union_Anonymous_e__Struct
+    m : Float32[20]*
+  end
 
   struct D2D_COLOR_F
     r : Float32

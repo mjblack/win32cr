@@ -3720,239 +3720,239 @@ lib LibWin32
     KTMOBJECT_INVALID = 4
   end
 
-union Userclipformat_u_e__Struct
-  dw_value : UInt32
-  pwsz_name : LibC::LPWSTR
-end
-union GDI_NONREMOTE_u_e__Struct
-  h_inproc : Int32
-  h_remote : DWORD_BLOB*
-end
-union Userhglobal_u_e__Struct
-  h_inproc : Int32
-  h_remote : FLAGGED_BYTE_BLOB*
-  h_inproc64 : Int64
-end
-union Userhmetafile_u_e__Struct
-  h_inproc : Int32
-  h_remote : BYTE_BLOB*
-  h_inproc64 : Int64
-end
-union Userhmetafilepict_u_e__Struct
-  h_inproc : Int32
-  h_remote : Remotemetafilepict*
-  h_inproc64 : Int64
-end
-union Userhenhmetafile_u_e__Struct
-  h_inproc : Int32
-  h_remote : BYTE_BLOB*
-  h_inproc64 : Int64
-end
-union Userhbitmap_u_e__Struct
-  h_inproc : Int32
-  h_remote : Userbitmap*
-  h_inproc64 : Int64
-end
-union Userhpalette_u_e__Struct
-  h_inproc : Int32
-  h_remote : LOGPALETTE*
-  h_inproc64 : Int64
-end
-union RemotableHandle_u_e__Struct
-  h_inproc : Int32
-  h_remote : Int32
-end
-union KERNEL_CET_CONTEXT_Anonymous_e__Union
-  all_flags : UInt16
-  anonymous : KERNEL_CET_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
-end
-union DISPATCHER_CONTEXT_NONVOLREG_ARM64
-  buffer : UInt8[152]*
-  anonymous : DISPATCHER_CONTEXT_NONVOLREG_ARM64_Anonymous_e__Struct
-end
-union SE_TOKEN_USER_Anonymous2_e__Union
-  sid : SID
-  buffer : UInt8[68]*
-end
-union SE_TOKEN_USER_Anonymous1_e__Union
-  token_user : TOKEN_USER
-  user : SID_AND_ATTRIBUTES
-end
-union NT_TIB32_Anonymous_e__Union
-  fiber_data : UInt32
-  version : UInt32
-end
-union NT_TIB64_Anonymous_e__Union
-  fiber_data : UInt64
-  version : UInt32
-end
-union RATE_QUOTA_LIMIT
-  rate_data : UInt32
-  anonymous : RATE_QUOTA_LIMIT_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union
-  flags : UInt32
-  anonymous : PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PROCESSOR_IDLESTATE_POLICY_Flags_e__Union
-  as_word : UInt16
-  anonymous : PROCESSOR_IDLESTATE_POLICY_Flags_e__Union_Anonymous_e__Struct
-end
-union PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union
-  spare : UInt8
-  flags : PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union
-end
-union PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union
-  as_byte : UInt8
-  anonymous : PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union_Anonymous_e__Struct
-end
-union IMAGE_SYMBOL_N_e__Union
-  short_name : UInt8[8]*
-  name : IMAGE_SYMBOL_N_e__Union_Name_e__Struct
-  long_name : UInt32[2]*
-end
-union IMAGE_SYMBOL_EX_N_e__Union
-  short_name : UInt8[8]*
-  name : IMAGE_SYMBOL_EX_N_e__Union_Name_e__Struct
-  long_name : UInt32[2]*
-end
-union IMAGE_AUX_SYMBOL
-  sym : IMAGE_AUX_SYMBOL_Sym_e__Struct
-  file : IMAGE_AUX_SYMBOL_File_e__Struct
-  section : IMAGE_AUX_SYMBOL_Section_e__Struct
-  token_def : IMAGE_AUX_SYMBOL_TOKEN_DEF
-  crc : IMAGE_AUX_SYMBOL_CRC_e__Struct
-end
-union IMAGE_AUX_SYMBOL_Sym_e__Struct_FcnAry_e__Union
-  function : IMAGE_AUX_SYMBOL_Sym_e__Struct_FcnAry_e__Union_Function_e__Struct
-  array : IMAGE_AUX_SYMBOL_Sym_e__Struct_FcnAry_e__Union_Array_e__Struct
-end
-union IMAGE_AUX_SYMBOL_Sym_e__Struct_Misc_e__Union
-  ln_sz : IMAGE_AUX_SYMBOL_Sym_e__Struct_Misc_e__Union_LnSz_e__Struct
-  total_size : UInt32
-end
-union IMAGE_AUX_SYMBOL_EX
-  sym : IMAGE_AUX_SYMBOL_EX_Sym_e__Struct
-  file : IMAGE_AUX_SYMBOL_EX_File_e__Struct
-  section : IMAGE_AUX_SYMBOL_EX_Section_e__Struct
-  anonymous : IMAGE_AUX_SYMBOL_EX_Anonymous_e__Struct
-  crc : IMAGE_AUX_SYMBOL_EX_CRC_e__Struct
-end
-union IMAGE_RELOCATION_Anonymous_e__Union
-  virtual_address : UInt32
-  reloc_count : UInt32
-end
-union IMAGE_LINENUMBER_Type_e__Union
-  symbol_table_index : UInt32
-  virtual_address : UInt32
-end
-union IMAGE_TLS_DIRECTORY64_Anonymous_e__Union
-  characteristics : UInt32
-  anonymous : IMAGE_TLS_DIRECTORY64_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IMAGE_TLS_DIRECTORY32_Anonymous_e__Union
-  characteristics : UInt32
-  anonymous : IMAGE_TLS_DIRECTORY32_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union
-  characteristics : UInt32
-  original_first_thunk : UInt32
-end
-union IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union
-  offset_to_data : UInt32
-  anonymous : IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union
-  anonymous : IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union_Anonymous_e__Struct
-  name : UInt32
-  id : UInt16
-end
-union IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
-  unwind_data : UInt32
-  anonymous : IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA
-  header_data : UInt32
-  anonymous : IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_Anonymous_e__Struct
-end
-union IMPORT_OBJECT_HEADER_Anonymous_e__Union
-  ordinal : UInt16
-  hint : UInt16
-end
-union IMAGE_POLICY_ENTRY_u_e__Union
-  none : Void*
-  bool_value : BOOLEAN
-  int8_value : Int8
-  u_int8_value : UInt8
-  int16_value : Int16
-  u_int16_value : UInt16
-  int32_value : Int32
-  u_int32_value : UInt32
-  int64_value : Int64
-  u_int64_value : UInt64
-  ansi_string_value : PSTR
-  unicode_string_value : LibC::LPWSTR
-end
+  union Userclipformat_u_e__Struct
+    dw_value : UInt32
+    pwsz_name : LibC::LPWSTR
+  end
+  union GDI_NONREMOTE_u_e__Struct
+    h_inproc : Int32
+    h_remote : DWORD_BLOB*
+  end
+  union Userhglobal_u_e__Struct
+    h_inproc : Int32
+    h_remote : FLAGGED_BYTE_BLOB*
+    h_inproc64 : Int64
+  end
+  union Userhmetafile_u_e__Struct
+    h_inproc : Int32
+    h_remote : BYTE_BLOB*
+    h_inproc64 : Int64
+  end
+  union Userhmetafilepict_u_e__Struct
+    h_inproc : Int32
+    h_remote : Remotemetafilepict*
+    h_inproc64 : Int64
+  end
+  union Userhenhmetafile_u_e__Struct
+    h_inproc : Int32
+    h_remote : BYTE_BLOB*
+    h_inproc64 : Int64
+  end
+  union Userhbitmap_u_e__Struct
+    h_inproc : Int32
+    h_remote : Userbitmap*
+    h_inproc64 : Int64
+  end
+  union Userhpalette_u_e__Struct
+    h_inproc : Int32
+    h_remote : LOGPALETTE*
+    h_inproc64 : Int64
+  end
+  union RemotableHandle_u_e__Struct
+    h_inproc : Int32
+    h_remote : Int32
+  end
+  union KERNEL_CET_CONTEXT_Anonymous_e__Union
+    all_flags : UInt16
+    anonymous : KERNEL_CET_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union DISPATCHER_CONTEXT_NONVOLREG_ARM64
+    buffer : UInt8[152]*
+    anonymous : DISPATCHER_CONTEXT_NONVOLREG_ARM64_Anonymous_e__Struct
+  end
+  union SE_TOKEN_USER_Anonymous2_e__Union
+    sid : SID
+    buffer : UInt8[68]*
+  end
+  union SE_TOKEN_USER_Anonymous1_e__Union
+    token_user : TOKEN_USER
+    user : SID_AND_ATTRIBUTES
+  end
+  union NT_TIB32_Anonymous_e__Union
+    fiber_data : UInt32
+    version : UInt32
+  end
+  union NT_TIB64_Anonymous_e__Union
+    fiber_data : UInt64
+    version : UInt32
+  end
+  union RATE_QUOTA_LIMIT
+    rate_data : UInt32
+    anonymous : RATE_QUOTA_LIMIT_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union
+    flags : UInt32
+    anonymous : PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PROCESSOR_IDLESTATE_POLICY_Flags_e__Union
+    as_word : UInt16
+    anonymous : PROCESSOR_IDLESTATE_POLICY_Flags_e__Union_Anonymous_e__Struct
+  end
+  union PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union
+    spare : UInt8
+    flags : PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union
+  end
+  union PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union
+    as_byte : UInt8
+    anonymous : PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union_Anonymous_e__Struct
+  end
+  union IMAGE_SYMBOL_N_e__Union
+    short_name : UInt8[8]*
+    name : IMAGE_SYMBOL_N_e__Union_Name_e__Struct
+    long_name : UInt32[2]*
+  end
+  union IMAGE_SYMBOL_EX_N_e__Union
+    short_name : UInt8[8]*
+    name : IMAGE_SYMBOL_EX_N_e__Union_Name_e__Struct
+    long_name : UInt32[2]*
+  end
+  union IMAGE_AUX_SYMBOL
+    sym : IMAGE_AUX_SYMBOL_Sym_e__Struct
+    file : IMAGE_AUX_SYMBOL_File_e__Struct
+    section : IMAGE_AUX_SYMBOL_Section_e__Struct
+    token_def : IMAGE_AUX_SYMBOL_TOKEN_DEF
+    crc : IMAGE_AUX_SYMBOL_CRC_e__Struct
+  end
+  union IMAGE_AUX_SYMBOL_Sym_e__Struct_FcnAry_e__Union
+    function : IMAGE_AUX_SYMBOL_Sym_e__Struct_FcnAry_e__Union_Function_e__Struct
+    array : IMAGE_AUX_SYMBOL_Sym_e__Struct_FcnAry_e__Union_Array_e__Struct
+  end
+  union IMAGE_AUX_SYMBOL_Sym_e__Struct_Misc_e__Union
+    ln_sz : IMAGE_AUX_SYMBOL_Sym_e__Struct_Misc_e__Union_LnSz_e__Struct
+    total_size : UInt32
+  end
+  union IMAGE_AUX_SYMBOL_EX
+    sym : IMAGE_AUX_SYMBOL_EX_Sym_e__Struct
+    file : IMAGE_AUX_SYMBOL_EX_File_e__Struct
+    section : IMAGE_AUX_SYMBOL_EX_Section_e__Struct
+    anonymous : IMAGE_AUX_SYMBOL_EX_Anonymous_e__Struct
+    crc : IMAGE_AUX_SYMBOL_EX_CRC_e__Struct
+  end
+  union IMAGE_RELOCATION_Anonymous_e__Union
+    virtual_address : UInt32
+    reloc_count : UInt32
+  end
+  union IMAGE_LINENUMBER_Type_e__Union
+    symbol_table_index : UInt32
+    virtual_address : UInt32
+  end
+  union IMAGE_TLS_DIRECTORY64_Anonymous_e__Union
+    characteristics : UInt32
+    anonymous : IMAGE_TLS_DIRECTORY64_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IMAGE_TLS_DIRECTORY32_Anonymous_e__Union
+    characteristics : UInt32
+    anonymous : IMAGE_TLS_DIRECTORY32_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union
+    characteristics : UInt32
+    original_first_thunk : UInt32
+  end
+  union IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union
+    offset_to_data : UInt32
+    anonymous : IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union
+    anonymous : IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union_Anonymous_e__Struct
+    name : UInt32
+    id : UInt16
+  end
+  union IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
+    unwind_data : UInt32
+    anonymous : IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA
+    header_data : UInt32
+    anonymous : IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_Anonymous_e__Struct
+  end
+  union IMPORT_OBJECT_HEADER_Anonymous_e__Union
+    ordinal : UInt16
+    hint : UInt16
+  end
+  union IMAGE_POLICY_ENTRY_u_e__Union
+    none : Void*
+    bool_value : BOOLEAN
+    int8_value : Int8
+    u_int8_value : UInt8
+    int16_value : Int16
+    u_int16_value : UInt16
+    int32_value : Int32
+    u_int32_value : UInt32
+    int64_value : Int64
+    u_int64_value : UInt64
+    ansi_string_value : PSTR
+    unicode_string_value : LibC::LPWSTR
+  end
 
   struct RemHGLOBAL
     f_null_h_global : Int32

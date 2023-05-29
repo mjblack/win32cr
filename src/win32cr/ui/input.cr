@@ -54,20 +54,20 @@ lib LibWin32
     IMO_SYSTEM = 4
   end
 
-union RAWMOUSE_Anonymous_e__Union
-  ul_buttons : UInt32
-  anonymous : RAWMOUSE_Anonymous_e__Union_Anonymous_e__Struct
-end
-union RAWINPUT_data_e__Union
-  mouse : RAWMOUSE
-  keyboard : RAWKEYBOARD
-  hid : RAWHID
-end
-union RID_DEVICE_INFO_Anonymous_e__Union
-  mouse : RID_DEVICE_INFO_MOUSE
-  keyboard : RID_DEVICE_INFO_KEYBOARD
-  hid : RID_DEVICE_INFO_HID
-end
+  union RAWMOUSE_Anonymous_e__Union
+    ul_buttons : UInt32
+    anonymous : RAWMOUSE_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union RAWINPUT_data_e__Union
+    mouse : RAWMOUSE
+    keyboard : RAWKEYBOARD
+    hid : RAWHID
+  end
+  union RID_DEVICE_INFO_Anonymous_e__Union
+    mouse : RID_DEVICE_INFO_MOUSE
+    keyboard : RID_DEVICE_INFO_KEYBOARD
+    hid : RID_DEVICE_INFO_HID
+  end
 
   struct RAWINPUTHEADER
     dw_type : UInt32

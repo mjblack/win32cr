@@ -430,11 +430,11 @@ lib LibWin32
     AXIS_MAX = 3
   end
 
-union MATRIX3X3_Anonymous_e__Union
-  anonymous1 : MATRIX3X3_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : MATRIX3X3_Anonymous_e__Union_Anonymous2_e__Struct
-  m : Float32[9]*
-end
+  union MATRIX3X3_Anonymous_e__Union
+    anonymous1 : MATRIX3X3_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : MATRIX3X3_Anonymous_e__Union_Anonymous2_e__Struct
+    m : Float32[9]*
+  end
 
   struct SENSOR_VALUE_PAIR
     key : PROPERTYKEY

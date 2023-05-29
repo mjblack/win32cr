@@ -281,48 +281,48 @@ lib LibWin32
     EvtEventPropertyIdEND = 2
   end
 
-union EVT_VARIANT_Anonymous_e__Union
-  boolean_val : LibC::BOOL
-  s_byte_val : Int8
-  int16_val : Int16
-  int32_val : Int32
-  int64_val : Int64
-  byte_val : UInt8
-  u_int16_val : UInt16
-  u_int32_val : UInt32
-  u_int64_val : UInt64
-  single_val : Float32
-  double_val : Float64
-  file_time_val : UInt64
-  sys_time_val : SYSTEMTIME*
-  guid_val : Guid*
-  string_val : LibC::LPWSTR
-  ansi_string_val : PSTR
-  binary_val : UInt8*
-  sid_val : PSID
-  size_t_val : LibC::UINT_PTR
-  boolean_arr : LibC::BOOL*
-  s_byte_arr : Int8*
-  int16_arr : Int16*
-  int32_arr : Int32*
-  int64_arr : Int64*
-  byte_arr : UInt8*
-  u_int16_arr : UInt16*
-  u_int32_arr : UInt32*
-  u_int64_arr : UInt64*
-  single_arr : Float32*
-  double_arr : Float64*
-  file_time_arr : FILETIME*
-  sys_time_arr : SYSTEMTIME*
-  guid_arr : Guid*
-  string_arr : LibC::LPWSTR*
-  ansi_string_arr : PSTR*
-  sid_arr : PSID*
-  size_t_arr : LibC::UINT_PTR*
-  evt_handle_val : LibC::IntPtrT
-  xml_val : LibC::LPWSTR
-  xml_val_arr : LibC::LPWSTR*
-end
+  union EVT_VARIANT_Anonymous_e__Union
+    boolean_val : LibC::BOOL
+    s_byte_val : Int8
+    int16_val : Int16
+    int32_val : Int32
+    int64_val : Int64
+    byte_val : UInt8
+    u_int16_val : UInt16
+    u_int32_val : UInt32
+    u_int64_val : UInt64
+    single_val : Float32
+    double_val : Float64
+    file_time_val : UInt64
+    sys_time_val : SYSTEMTIME*
+    guid_val : Guid*
+    string_val : LibC::LPWSTR
+    ansi_string_val : PSTR
+    binary_val : UInt8*
+    sid_val : PSID
+    size_t_val : LibC::UINT_PTR
+    boolean_arr : LibC::BOOL*
+    s_byte_arr : Int8*
+    int16_arr : Int16*
+    int32_arr : Int32*
+    int64_arr : Int64*
+    byte_arr : UInt8*
+    u_int16_arr : UInt16*
+    u_int32_arr : UInt32*
+    u_int64_arr : UInt64*
+    single_arr : Float32*
+    double_arr : Float64*
+    file_time_arr : FILETIME*
+    sys_time_arr : SYSTEMTIME*
+    guid_arr : Guid*
+    string_arr : LibC::LPWSTR*
+    ansi_string_arr : PSTR*
+    sid_arr : PSID*
+    size_t_arr : LibC::UINT_PTR*
+    evt_handle_val : LibC::IntPtrT
+    xml_val : LibC::LPWSTR
+    xml_val_arr : LibC::LPWSTR*
+  end
 
   struct EVT_VARIANT
     anonymous : EVT_VARIANT_Anonymous_e__Union

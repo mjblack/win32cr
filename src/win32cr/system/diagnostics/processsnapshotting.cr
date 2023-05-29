@@ -92,14 +92,14 @@ lib LibWin32
     PSS_THREAD_FLAGS_TERMINATED = 1
   end
 
-union PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union
-  process : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Process_e__Struct
-  thread : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Thread_e__Struct
-  mutant : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Mutant_e__Struct
-  event : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Event_e__Struct
-  section : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Section_e__Struct
-  semaphore : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Semaphore_e__Struct
-end
+  union PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union
+    process : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Process_e__Struct
+    thread : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Thread_e__Struct
+    mutant : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Mutant_e__Struct
+    event : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Event_e__Struct
+    section : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Section_e__Struct
+    semaphore : PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Semaphore_e__Struct
+  end
 
   struct PSS_PROCESS_INFORMATION
     exit_status : UInt32

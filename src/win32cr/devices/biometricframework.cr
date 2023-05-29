@@ -301,73 +301,73 @@ lib LibWin32
     WINBIO_ASYNC_NOTIFY_MAXIMUM_VALUE = 3
   end
 
-union WINBIO_IDENTITY_Value_e__Union
-  null : UInt32
-  wildcard : UInt32
-  template_guid : Guid
-  account_sid : WINBIO_IDENTITY_Value_e__Union_AccountSid_e__Struct
-  secure_id : UInt8[32]*
-end
-union WINBIO_EVENT_Parameters_e__Union
-  unclaimed : WINBIO_EVENT_Parameters_e__Union_Unclaimed_e__Struct
-  unclaimed_identify : WINBIO_EVENT_Parameters_e__Union_UnclaimedIdentify_e__Struct
-  error : WINBIO_EVENT_Parameters_e__Union_Error_e__Struct
-end
-union WINBIO_PRESENCE_PROPERTIES
-  facial_features : WINBIO_PRESENCE_PROPERTIES_FacialFeatures_e__Struct
-  iris : WINBIO_PRESENCE_PROPERTIES_Iris_e__Struct
-end
-union WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union
-  null : UInt32
-  facial_features : WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_FacialFeatures_e__Struct
-  fingerprint : WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Fingerprint_e__Struct
-  iris : WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Iris_e__Struct
-  voice : WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Voice_e__Struct
-end
-union WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union
-  null : UInt32
-  facial_features : WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_FacialFeatures_e__Struct
-  fingerprint : WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Fingerprint_e__Struct
-  iris : WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Iris_e__Struct
-  voice : WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Voice_e__Struct
-end
-union WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union
-  null : UInt32
-  facial_features : WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_FacialFeatures_e__Struct
-  fingerprint : WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Fingerprint_e__Struct
-  iris : WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Iris_e__Struct
-  voice : WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Voice_e__Struct
-end
-union WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union
-  null : UInt32
-  facial_features : WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_FacialFeatures_e__Struct
-  fingerprint : WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Fingerprint_e__Struct
-  iris : WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Iris_e__Struct
-  voice : WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Voice_e__Struct
-end
-union WINBIO_ASYNC_RESULT_Parameters_e__Union
-  verify : WINBIO_ASYNC_RESULT_Parameters_e__Union_Verify_e__Struct
-  identify : WINBIO_ASYNC_RESULT_Parameters_e__Union_Identify_e__Struct
-  enroll_begin : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollBegin_e__Struct
-  enroll_capture : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCapture_e__Struct
-  enroll_commit : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCommit_e__Struct
-  enum_enrollments : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumEnrollments_e__Struct
-  capture_sample : WINBIO_ASYNC_RESULT_Parameters_e__Union_CaptureSample_e__Struct
-  delete_template : WINBIO_ASYNC_RESULT_Parameters_e__Union_DeleteTemplate_e__Struct
-  get_property : WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProperty_e__Struct
-  set_property : WINBIO_ASYNC_RESULT_Parameters_e__Union_SetProperty_e__Struct
-  get_event : WINBIO_ASYNC_RESULT_Parameters_e__Union_GetEvent_e__Struct
-  control_unit : WINBIO_ASYNC_RESULT_Parameters_e__Union_ControlUnit_e__Struct
-  enum_service_providers : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumServiceProviders_e__Struct
-  enum_biometric_units : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumBiometricUnits_e__Struct
-  enum_databases : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumDatabases_e__Struct
-  verify_and_release_ticket : WINBIO_ASYNC_RESULT_Parameters_e__Union_VerifyAndReleaseTicket_e__Struct
-  identify_and_release_ticket : WINBIO_ASYNC_RESULT_Parameters_e__Union_IdentifyAndReleaseTicket_e__Struct
-  enroll_select : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollSelect_e__Struct
-  monitor_presence : WINBIO_ASYNC_RESULT_Parameters_e__Union_MonitorPresence_e__Struct
-  get_protection_policy : WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProtectionPolicy_e__Struct
-  notify_unit_status_change : WINBIO_ASYNC_RESULT_Parameters_e__Union_NotifyUnitStatusChange_e__Struct
-end
+  union WINBIO_IDENTITY_Value_e__Union
+    null : UInt32
+    wildcard : UInt32
+    template_guid : Guid
+    account_sid : WINBIO_IDENTITY_Value_e__Union_AccountSid_e__Struct
+    secure_id : UInt8[32]*
+  end
+  union WINBIO_EVENT_Parameters_e__Union
+    unclaimed : WINBIO_EVENT_Parameters_e__Union_Unclaimed_e__Struct
+    unclaimed_identify : WINBIO_EVENT_Parameters_e__Union_UnclaimedIdentify_e__Struct
+    error : WINBIO_EVENT_Parameters_e__Union_Error_e__Struct
+  end
+  union WINBIO_PRESENCE_PROPERTIES
+    facial_features : WINBIO_PRESENCE_PROPERTIES_FacialFeatures_e__Struct
+    iris : WINBIO_PRESENCE_PROPERTIES_Iris_e__Struct
+  end
+  union WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union
+    null : UInt32
+    facial_features : WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_FacialFeatures_e__Struct
+    fingerprint : WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Fingerprint_e__Struct
+    iris : WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Iris_e__Struct
+    voice : WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union_Voice_e__Struct
+  end
+  union WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union
+    null : UInt32
+    facial_features : WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_FacialFeatures_e__Struct
+    fingerprint : WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Fingerprint_e__Struct
+    iris : WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Iris_e__Struct
+    voice : WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union_Voice_e__Struct
+  end
+  union WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union
+    null : UInt32
+    facial_features : WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_FacialFeatures_e__Struct
+    fingerprint : WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Fingerprint_e__Struct
+    iris : WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Iris_e__Struct
+    voice : WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union_Voice_e__Struct
+  end
+  union WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union
+    null : UInt32
+    facial_features : WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_FacialFeatures_e__Struct
+    fingerprint : WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Fingerprint_e__Struct
+    iris : WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Iris_e__Struct
+    voice : WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union_Voice_e__Struct
+  end
+  union WINBIO_ASYNC_RESULT_Parameters_e__Union
+    verify : WINBIO_ASYNC_RESULT_Parameters_e__Union_Verify_e__Struct
+    identify : WINBIO_ASYNC_RESULT_Parameters_e__Union_Identify_e__Struct
+    enroll_begin : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollBegin_e__Struct
+    enroll_capture : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCapture_e__Struct
+    enroll_commit : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollCommit_e__Struct
+    enum_enrollments : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumEnrollments_e__Struct
+    capture_sample : WINBIO_ASYNC_RESULT_Parameters_e__Union_CaptureSample_e__Struct
+    delete_template : WINBIO_ASYNC_RESULT_Parameters_e__Union_DeleteTemplate_e__Struct
+    get_property : WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProperty_e__Struct
+    set_property : WINBIO_ASYNC_RESULT_Parameters_e__Union_SetProperty_e__Struct
+    get_event : WINBIO_ASYNC_RESULT_Parameters_e__Union_GetEvent_e__Struct
+    control_unit : WINBIO_ASYNC_RESULT_Parameters_e__Union_ControlUnit_e__Struct
+    enum_service_providers : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumServiceProviders_e__Struct
+    enum_biometric_units : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumBiometricUnits_e__Struct
+    enum_databases : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnumDatabases_e__Struct
+    verify_and_release_ticket : WINBIO_ASYNC_RESULT_Parameters_e__Union_VerifyAndReleaseTicket_e__Struct
+    identify_and_release_ticket : WINBIO_ASYNC_RESULT_Parameters_e__Union_IdentifyAndReleaseTicket_e__Struct
+    enroll_select : WINBIO_ASYNC_RESULT_Parameters_e__Union_EnrollSelect_e__Struct
+    monitor_presence : WINBIO_ASYNC_RESULT_Parameters_e__Union_MonitorPresence_e__Struct
+    get_protection_policy : WINBIO_ASYNC_RESULT_Parameters_e__Union_GetProtectionPolicy_e__Struct
+    notify_unit_status_change : WINBIO_ASYNC_RESULT_Parameters_e__Union_NotifyUnitStatusChange_e__Struct
+  end
 
   struct WINBIO_VERSION
     major_version : UInt32

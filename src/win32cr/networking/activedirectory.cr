@@ -975,39 +975,39 @@ lib LibWin32
     DsRoleOperationNeedReboot = 2
   end
 
-union OPENQUERYWINDOW_Anonymous_e__Union
-  p_form_parameters : Void*
-  ppb_form_parameters : IPropertyBag
-end
-union ADSVALUE_Anonymous_e__Union
-  dn_string : UInt16*
-  case_exact_string : UInt16*
-  case_ignore_string : UInt16*
-  printable_string : UInt16*
-  numeric_string : UInt16*
-  boolean : UInt32
-  integer : UInt32
-  octet_string : ADS_OCTET_STRING
-  utc_time : SYSTEMTIME
-  large_integer : LARGE_INTEGER
-  class_name : UInt16*
-  provider_specific : ADS_PROV_SPECIFIC
-  p_case_ignore_list : ADS_CASEIGNORE_LIST*
-  p_octet_list : ADS_OCTET_LIST*
-  p_path : ADS_PATH*
-  p_postal_address : ADS_POSTALADDRESS*
-  timestamp : ADS_TIMESTAMP
-  back_link : ADS_BACKLINK
-  p_typed_name : ADS_TYPEDNAME*
-  hold : ADS_HOLD
-  p_net_address : ADS_NETADDRESS*
-  p_replica_pointer : ADS_REPLICAPOINTER*
-  p_fax_number : ADS_FAXNUMBER*
-  email : ADS_EMAIL
-  security_descriptor : ADS_NT_SECURITY_DESCRIPTOR
-  p_dn_with_binary : ADS_DN_WITH_BINARY*
-  p_dn_with_string : ADS_DN_WITH_STRING*
-end
+  union OPENQUERYWINDOW_Anonymous_e__Union
+    p_form_parameters : Void*
+    ppb_form_parameters : IPropertyBag
+  end
+  union ADSVALUE_Anonymous_e__Union
+    dn_string : UInt16*
+    case_exact_string : UInt16*
+    case_ignore_string : UInt16*
+    printable_string : UInt16*
+    numeric_string : UInt16*
+    boolean : UInt32
+    integer : UInt32
+    octet_string : ADS_OCTET_STRING
+    utc_time : SYSTEMTIME
+    large_integer : LARGE_INTEGER
+    class_name : UInt16*
+    provider_specific : ADS_PROV_SPECIFIC
+    p_case_ignore_list : ADS_CASEIGNORE_LIST*
+    p_octet_list : ADS_OCTET_LIST*
+    p_path : ADS_PATH*
+    p_postal_address : ADS_POSTALADDRESS*
+    timestamp : ADS_TIMESTAMP
+    back_link : ADS_BACKLINK
+    p_typed_name : ADS_TYPEDNAME*
+    hold : ADS_HOLD
+    p_net_address : ADS_NETADDRESS*
+    p_replica_pointer : ADS_REPLICAPOINTER*
+    p_fax_number : ADS_FAXNUMBER*
+    email : ADS_EMAIL
+    security_descriptor : ADS_NT_SECURITY_DESCRIPTOR
+    p_dn_with_binary : ADS_DN_WITH_BINARY*
+    p_dn_with_string : ADS_DN_WITH_STRING*
+  end
 
   struct CQFORM
     cb_struct : UInt32

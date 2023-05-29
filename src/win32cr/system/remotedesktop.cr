@@ -712,36 +712,36 @@ lib LibWin32
     KeyCombinationScroll = 5
   end
 
-union WTSINFOEX_LEVEL_W
-  wts_info_ex_level1 : WTSINFOEX_LEVEL1_W
-end
-union WTSINFOEX_LEVEL_A
-  wts_info_ex_level1 : WTSINFOEX_LEVEL1_A
-end
-union WTS_SOCKADDR_u_e__Union
-  ipv4 : WTS_SOCKADDR_u_e__Union_ipv4_e__Struct
-  ipv6 : WTS_SOCKADDR_u_e__Union_ipv6_e__Struct
-end
-union WTS_CACHE_STATS_UN
-  protocol_cache : WTS_PROTOCOL_CACHE[4]*
-  t_share_cache_stats : UInt32
-  reserved : UInt32[20]*
-end
-union WTS_PROPERTY_VALUE_u_e__Union
-  ul_val : UInt32
-  str_val : WTS_PROPERTY_VALUE_u_e__Union_strVal_e__Struct
-  b_val : WTS_PROPERTY_VALUE_u_e__Union_bVal_e__Struct
-  guid_val : Guid
-end
-union WRDS_LISTENER_SETTING
-  w_rds_listener_settings1 : WRDS_LISTENER_SETTINGS_1
-end
-union WRDS_CONNECTION_SETTING
-  w_rds_connection_settings1 : WRDS_CONNECTION_SETTINGS_1
-end
-union WRDS_SETTING
-  w_rds_settings1 : WRDS_SETTINGS_1
-end
+  union WTSINFOEX_LEVEL_W
+    wts_info_ex_level1 : WTSINFOEX_LEVEL1_W
+  end
+  union WTSINFOEX_LEVEL_A
+    wts_info_ex_level1 : WTSINFOEX_LEVEL1_A
+  end
+  union WTS_SOCKADDR_u_e__Union
+    ipv4 : WTS_SOCKADDR_u_e__Union_ipv4_e__Struct
+    ipv6 : WTS_SOCKADDR_u_e__Union_ipv6_e__Struct
+  end
+  union WTS_CACHE_STATS_UN
+    protocol_cache : WTS_PROTOCOL_CACHE[4]*
+    t_share_cache_stats : UInt32
+    reserved : UInt32[20]*
+  end
+  union WTS_PROPERTY_VALUE_u_e__Union
+    ul_val : UInt32
+    str_val : WTS_PROPERTY_VALUE_u_e__Union_strVal_e__Struct
+    b_val : WTS_PROPERTY_VALUE_u_e__Union_bVal_e__Struct
+    guid_val : Guid
+  end
+  union WRDS_LISTENER_SETTING
+    w_rds_listener_settings1 : WRDS_LISTENER_SETTINGS_1
+  end
+  union WRDS_CONNECTION_SETTING
+    w_rds_connection_settings1 : WRDS_CONNECTION_SETTINGS_1
+  end
+  union WRDS_SETTING
+    w_rds_settings1 : WRDS_SETTINGS_1
+  end
 
   struct AE_CURRENT_POSITION
     u64_device_position : UInt64

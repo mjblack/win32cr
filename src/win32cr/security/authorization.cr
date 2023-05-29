@@ -419,41 +419,41 @@ lib LibWin32
     AZ_CLIENT_CONTEXT_GET_GROUPS_STORE_LEVEL_ONLY = 2
   end
 
-union ACTRL_OVERLAPPED_Anonymous_e__Union
-  provider : Void*
-  reserved1 : UInt32
-end
-union AUDIT_PARAM_Anonymous1_e__Union
-  data0 : LibC::UINT_PTR
-  string : LibC::LPWSTR
-  u : LibC::UINT_PTR
-  psid : SID*
-  pguid : Guid*
-  logon_id_low_part : UInt32
-  p_object_types : AUDIT_OBJECT_TYPES*
-  p_ip_address : AUDIT_IP_ADDRESS*
-end
-union AUDIT_PARAM_Anonymous2_e__Union
-  data1 : LibC::UINT_PTR
-  logon_id_high_part : Int32
-end
-union AUTHZ_AUDIT_EVENT_TYPE_UNION
-  legacy : AUTHZ_AUDIT_EVENT_TYPE_LEGACY
-end
-union AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union
-  p_int64 : Int64*
-  p_uint64 : UInt64*
-  pp_string : LibC::LPWSTR*
-  p_fqbn : AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE*
-  p_octet_string : AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*
-end
-union AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union
-  p_attribute_v1 : AUTHZ_SECURITY_ATTRIBUTE_V1*
-end
-union AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union
-  p_reserved : Void*
-  p_provider_guid : Guid*
-end
+  union ACTRL_OVERLAPPED_Anonymous_e__Union
+    provider : Void*
+    reserved1 : UInt32
+  end
+  union AUDIT_PARAM_Anonymous1_e__Union
+    data0 : LibC::UINT_PTR
+    string : LibC::LPWSTR
+    u : LibC::UINT_PTR
+    psid : SID*
+    pguid : Guid*
+    logon_id_low_part : UInt32
+    p_object_types : AUDIT_OBJECT_TYPES*
+    p_ip_address : AUDIT_IP_ADDRESS*
+  end
+  union AUDIT_PARAM_Anonymous2_e__Union
+    data1 : LibC::UINT_PTR
+    logon_id_high_part : Int32
+  end
+  union AUTHZ_AUDIT_EVENT_TYPE_UNION
+    legacy : AUTHZ_AUDIT_EVENT_TYPE_LEGACY
+  end
+  union AUTHZ_SECURITY_ATTRIBUTE_V1_Values_e__Union
+    p_int64 : Int64*
+    p_uint64 : UInt64*
+    pp_string : LibC::LPWSTR*
+    p_fqbn : AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE*
+    p_octet_string : AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*
+  end
+  union AUTHZ_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union
+    p_attribute_v1 : AUTHZ_SECURITY_ATTRIBUTE_V1*
+  end
+  union AUTHZ_SOURCE_SCHEMA_REGISTRATION_Anonymous_e__Union
+    p_reserved : Void*
+    p_provider_guid : Guid*
+  end
 
   struct OBJECTS_AND_SID
     objects_present : SYSTEM_AUDIT_OBJECT_ACE_FLAGS

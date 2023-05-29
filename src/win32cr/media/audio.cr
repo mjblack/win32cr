@@ -769,51 +769,51 @@ lib LibWin32
     Full = 2
   end
 
-union WAVEFORMATEXTENSIBLE_Samples_e__Union
-  w_valid_bits_per_sample : UInt16
-  w_samples_per_block : UInt16
-  w_reserved : UInt16
-end
-union MIXERCONTROLA_Bounds_e__Union
-  anonymous1 : MIXERCONTROLA_Bounds_e__Union_Anonymous1_e__Struct
-  anonymous2 : MIXERCONTROLA_Bounds_e__Union_Anonymous2_e__Struct
-  dw_reserved : UInt32[6]*
-end
-union MIXERCONTROLA_Metrics_e__Union
-  c_steps : UInt32
-  cb_custom_data : UInt32
-  dw_reserved : UInt32[6]*
-end
-union MIXERCONTROLW_Bounds_e__Union
-  anonymous1 : MIXERCONTROLW_Bounds_e__Union_Anonymous1_e__Struct
-  anonymous2 : MIXERCONTROLW_Bounds_e__Union_Anonymous2_e__Struct
-  dw_reserved : UInt32[6]*
-end
-union MIXERCONTROLW_Metrics_e__Union
-  c_steps : UInt32
-  cb_custom_data : UInt32
-  dw_reserved : UInt32[6]*
-end
-union MIXERLINECONTROLSA_Anonymous_e__Union
-  dw_control_id : UInt32
-  dw_control_type : UInt32
-end
-union MIXERLINECONTROLSW_Anonymous_e__Union
-  dw_control_id : UInt32
-  dw_control_type : UInt32
-end
-union MIXERCONTROLDETAILS_Anonymous_e__Union
-  hwnd_owner : HANDLE
-  c_multiple_items : UInt32
-end
-union SpatialAudioHrtfDirectivityUnion
-  cone : SpatialAudioHrtfDirectivityCone
-  cardiod : SpatialAudioHrtfDirectivityCardioid
-  omni : SpatialAudioHrtfDirectivity
-end
-union AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union
-  process_loopback_params : AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS
-end
+  union WAVEFORMATEXTENSIBLE_Samples_e__Union
+    w_valid_bits_per_sample : UInt16
+    w_samples_per_block : UInt16
+    w_reserved : UInt16
+  end
+  union MIXERCONTROLA_Bounds_e__Union
+    anonymous1 : MIXERCONTROLA_Bounds_e__Union_Anonymous1_e__Struct
+    anonymous2 : MIXERCONTROLA_Bounds_e__Union_Anonymous2_e__Struct
+    dw_reserved : UInt32[6]*
+  end
+  union MIXERCONTROLA_Metrics_e__Union
+    c_steps : UInt32
+    cb_custom_data : UInt32
+    dw_reserved : UInt32[6]*
+  end
+  union MIXERCONTROLW_Bounds_e__Union
+    anonymous1 : MIXERCONTROLW_Bounds_e__Union_Anonymous1_e__Struct
+    anonymous2 : MIXERCONTROLW_Bounds_e__Union_Anonymous2_e__Struct
+    dw_reserved : UInt32[6]*
+  end
+  union MIXERCONTROLW_Metrics_e__Union
+    c_steps : UInt32
+    cb_custom_data : UInt32
+    dw_reserved : UInt32[6]*
+  end
+  union MIXERLINECONTROLSA_Anonymous_e__Union
+    dw_control_id : UInt32
+    dw_control_type : UInt32
+  end
+  union MIXERLINECONTROLSW_Anonymous_e__Union
+    dw_control_id : UInt32
+    dw_control_type : UInt32
+  end
+  union MIXERCONTROLDETAILS_Anonymous_e__Union
+    hwnd_owner : HANDLE
+    c_multiple_items : UInt32
+  end
+  union SpatialAudioHrtfDirectivityUnion
+    cone : SpatialAudioHrtfDirectivityCone
+    cardiod : SpatialAudioHrtfDirectivityCardioid
+    omni : SpatialAudioHrtfDirectivity
+  end
+  union AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union
+    process_loopback_params : AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS
+  end
 
   struct AUDIO_VOLUME_NOTIFICATION_DATA
     guid_event_context : Guid

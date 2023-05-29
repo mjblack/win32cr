@@ -1052,46 +1052,46 @@ lib LibWin32
     VDS_RT_RAID61 = 27
   end
 
-union VDS_NOTIFICATION_Anonymous_e__Union
-  pack : VDS_PACK_NOTIFICATION
-  disk : VDS_DISK_NOTIFICATION
-  volume : VDS_VOLUME_NOTIFICATION
-  partition : VDS_PARTITION_NOTIFICATION
-  letter : VDS_DRIVE_LETTER_NOTIFICATION
-  file_system : VDS_FILE_SYSTEM_NOTIFICATION
-  mount_point : VDS_MOUNT_POINT_NOTIFICATION
-  sub_system : VDS_SUB_SYSTEM_NOTIFICATION
-  controller : VDS_CONTROLLER_NOTIFICATION
-  drive : VDS_DRIVE_NOTIFICATION
-  lun : VDS_LUN_NOTIFICATION
-  port : VDS_PORT_NOTIFICATION
-  portal : VDS_PORTAL_NOTIFICATION
-  target : VDS_TARGET_NOTIFICATION
-  portal_group : VDS_PORTAL_GROUP_NOTIFICATION
-  service : VDS_SERVICE_NOTIFICATION
-end
-union VDS_ASYNC_OUTPUT_Anonymous_e__Union
-  cp : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cp
-  cv : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cv
-  bvp : VDS_ASYNC_OUTPUT_Anonymous_e__Union_bvp
-  sv : VDS_ASYNC_OUTPUT_Anonymous_e__Union_sv
-  cl : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cl
-  ct : VDS_ASYNC_OUTPUT_Anonymous_e__Union_ct
-  cpg : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cpg
-  cvd : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cvd
-end
-union VDS_PATH_INFO_Anonymous2_e__Union
-  hba_port_id : Guid
-  initiator_adapter_id : Guid
-end
-union VDS_PATH_INFO_Anonymous1_e__Union
-  controller_port_id : Guid
-  target_portal_id : Guid
-end
-union VDS_PATH_INFO_Anonymous3_e__Union
-  p_hba_port_prop : VDS_HBAPORT_PROP*
-  p_initiator_portal_ip_addr : VDS_IPADDRESS*
-end
+  union VDS_NOTIFICATION_Anonymous_e__Union
+    pack : VDS_PACK_NOTIFICATION
+    disk : VDS_DISK_NOTIFICATION
+    volume : VDS_VOLUME_NOTIFICATION
+    partition : VDS_PARTITION_NOTIFICATION
+    letter : VDS_DRIVE_LETTER_NOTIFICATION
+    file_system : VDS_FILE_SYSTEM_NOTIFICATION
+    mount_point : VDS_MOUNT_POINT_NOTIFICATION
+    sub_system : VDS_SUB_SYSTEM_NOTIFICATION
+    controller : VDS_CONTROLLER_NOTIFICATION
+    drive : VDS_DRIVE_NOTIFICATION
+    lun : VDS_LUN_NOTIFICATION
+    port : VDS_PORT_NOTIFICATION
+    portal : VDS_PORTAL_NOTIFICATION
+    target : VDS_TARGET_NOTIFICATION
+    portal_group : VDS_PORTAL_GROUP_NOTIFICATION
+    service : VDS_SERVICE_NOTIFICATION
+  end
+  union VDS_ASYNC_OUTPUT_Anonymous_e__Union
+    cp : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cp
+    cv : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cv
+    bvp : VDS_ASYNC_OUTPUT_Anonymous_e__Union_bvp
+    sv : VDS_ASYNC_OUTPUT_Anonymous_e__Union_sv
+    cl : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cl
+    ct : VDS_ASYNC_OUTPUT_Anonymous_e__Union_ct
+    cpg : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cpg
+    cvd : VDS_ASYNC_OUTPUT_Anonymous_e__Union_cvd
+  end
+  union VDS_PATH_INFO_Anonymous2_e__Union
+    hba_port_id : Guid
+    initiator_adapter_id : Guid
+  end
+  union VDS_PATH_INFO_Anonymous1_e__Union
+    controller_port_id : Guid
+    target_portal_id : Guid
+  end
+  union VDS_PATH_INFO_Anonymous3_e__Union
+    p_hba_port_prop : VDS_HBAPORT_PROP*
+    p_initiator_portal_ip_addr : VDS_IPADDRESS*
+  end
 
   struct VDS_STORAGE_IDENTIFIER
     m_code_set : VDS_STORAGE_IDENTIFIER_CODE_SET

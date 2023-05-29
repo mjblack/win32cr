@@ -978,30 +978,30 @@ lib LibWin32
     RTM_CHANGE_NOTIFICATION = 3
   end
 
-union RASTUNNELENDPOINT_Anonymous_e__Union
-  ipv4 : IN_ADDR
-  ipv6 : IN6_ADDR
-end
-union RAS_PROJECTION_INFO_Anonymous_e__Union
-  ppp : RASPPP_PROJECTION_INFO
-  ikev2 : RASIKEV2_PROJECTION_INFO
-end
-union PROJECTION_INFO_Anonymous_e__Union
-  ppp_projection_info : PPP_PROJECTION_INFO
-  ikev2_projection_info : IKEV2_PROJECTION_INFO
-end
-union PROJECTION_INFO2_Anonymous_e__Union
-  ppp_projection_info : PPP_PROJECTION_INFO2
-  ikev2_projection_info : IKEV2_PROJECTION_INFO2
-end
-union VPN_TS_IP_ADDRESS_Anonymous_e__Union
-  v4 : IN_ADDR
-  v6 : IN6_ADDR
-end
-union RTM_ENTITY_ID_Anonymous_e__Union
-  anonymous : RTM_ENTITY_ID_Anonymous_e__Union_Anonymous_e__Struct
-  entity_id : UInt64
-end
+  union RASTUNNELENDPOINT_Anonymous_e__Union
+    ipv4 : IN_ADDR
+    ipv6 : IN6_ADDR
+  end
+  union RAS_PROJECTION_INFO_Anonymous_e__Union
+    ppp : RASPPP_PROJECTION_INFO
+    ikev2 : RASIKEV2_PROJECTION_INFO
+  end
+  union PROJECTION_INFO_Anonymous_e__Union
+    ppp_projection_info : PPP_PROJECTION_INFO
+    ikev2_projection_info : IKEV2_PROJECTION_INFO
+  end
+  union PROJECTION_INFO2_Anonymous_e__Union
+    ppp_projection_info : PPP_PROJECTION_INFO2
+    ikev2_projection_info : IKEV2_PROJECTION_INFO2
+  end
+  union VPN_TS_IP_ADDRESS_Anonymous_e__Union
+    v4 : IN_ADDR
+    v6 : IN6_ADDR
+  end
+  union RTM_ENTITY_ID_Anonymous_e__Union
+    anonymous : RTM_ENTITY_ID_Anonymous_e__Union_Anonymous_e__Struct
+    entity_id : UInt64
+  end
 
   struct RASIPADDR
     a : UInt8

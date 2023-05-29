@@ -2480,140 +2480,140 @@ lib LibWin32
     KS_MemoryTypeAnyHost = 6
   end
 
-union KSIDENTIFIER_Anonymous_e__Union
-  anonymous : KSIDENTIFIER_Anonymous_e__Union_Anonymous_e__Struct
-  alignment : Int64
-end
-union KSPROPERTY_BOUNDS_LONG
-  anonymous1 : KSPROPERTY_BOUNDS_LONG_Anonymous1_e__Struct
-  anonymous2 : KSPROPERTY_BOUNDS_LONG_Anonymous2_e__Struct
-end
-union KSPROPERTY_BOUNDS_LONGLONG
-  anonymous1 : KSPROPERTY_BOUNDS_LONGLONG_Anonymous1_e__Struct
-  anonymous2 : KSPROPERTY_BOUNDS_LONGLONG_Anonymous2_e__Struct
-end
-union KSEVENTDATA_Anonymous_e__Union
-  event_handle : KSEVENTDATA_Anonymous_e__Union_EventHandle_e__Struct
-  semaphore_handle : KSEVENTDATA_Anonymous_e__Union_SemaphoreHandle_e__Struct
-  alignment : KSEVENTDATA_Anonymous_e__Union_Alignment_e__Struct
-end
-union KSRELATIVEEVENT_Anonymous_e__Union
-  object_handle : LibC::HANDLE
-  object_pointer : Void*
-end
-union KSP_PIN_Anonymous_e__Union
-  reserved : UInt32
-  flags : UInt32
-end
-union KSDATAFORMAT
-  anonymous : KSDATAFORMAT_Anonymous_e__Struct
-  alignment : Int64
-end
-union KSALLOCATOR_FRAMING_Anonymous2_e__Union
-  file_alignment : UInt32
-  frame_pitch : Int32
-end
-union KSALLOCATOR_FRAMING_Anonymous1_e__Union
-  options_flags : UInt32
-  requirements_flags : UInt32
-end
-union KS_FRAMING_ITEM_Anonymous_e__Union
-  file_alignment : UInt32
-  frame_pitch : Int32
-end
-union KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union
-  anonymous : KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union_Anonymous_e__Struct
-  scr_token : UInt16
-end
-union MF_MDL_SHARED_PAYLOAD_KEY
-  combined : MF_MDL_SHARED_PAYLOAD_KEY_combined_e__Struct
-  gmdl_handle : Guid
-end
-union DS3DVECTOR_Anonymous2_e__Union
-  y : Float32
-  dv_y : Float32
-end
-union DS3DVECTOR_Anonymous1_e__Union
-  x : Float32
-  dv_x : Float32
-end
-union DS3DVECTOR_Anonymous3_e__Union
-  z : Float32
-  dv_z : Float32
-end
-union KSAUDIO_MIX_CAPS_Anonymous_e__Union
-  reset : Int32
-  resolution : Int32
-end
-union KS_VIDEOINFO_Anonymous_e__Union
-  bmi_colors : KS_RGBQUAD[256]*
-  dw_bit_masks : UInt32[3]*
-  true_color_info : KS_TRUECOLORINFO
-end
-union KS_VIDEOINFOHEADER2_Anonymous_e__Union
-  dw_control_flags : UInt32
-  dw_reserved1 : UInt32
-end
-union KS_FRAME_INFO_Anonymous2_e__Union
-  anonymous : KS_FRAME_INFO_Anonymous2_e__Union_Anonymous_e__Struct
-  frame_completion_number : UInt64
-end
-union KS_FRAME_INFO_Anonymous1_e__Union
-  l_surface_pitch : Int32
-  reserved1 : UInt32
-end
-union KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union
-  capabilities : UInt32
-  configuration : UInt32
-end
-union KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union
-  dbl : Float64
-  ull : UInt64
-  ul : UInt32
-  ratio : ULARGE_INTEGER
-  l : Int32
-  ll : Int64
-end
-union KSCAMERA_PROFILE_PININFO_Anonymous_e__Union
-  anonymous : KSCAMERA_PROFILE_PININFO_Anonymous_e__Union_Anonymous_e__Struct
-  reserved : UInt32
-end
-union KSDEVICE_PROFILE_INFO_Anonymous_e__Union
-  camera : KSDEVICE_PROFILE_INFO_Anonymous_e__Union_Camera_e__Struct
-end
-union KSPROPERTY_EXTDEVICE_S_u_e__Union
-  capabilities : DEVCAPS
-  dev_port : UInt32
-  power_state : UInt32
-  pawch_string : Char[260]*
-  node_unique_id : UInt32[2]*
-end
-union KSPROPERTY_EXTXPORT_S_u_e__Union
-  capabilities : UInt32
-  signal_mode : UInt32
-  load_medium : UInt32
-  medium_info : MEDIUM_INFO
-  x_prt_state : TRANSPORT_STATE
-  timecode : KSPROPERTY_EXTXPORT_S_u_e__Union_Timecode_e__Struct
-  dw_timecode : UInt32
-  dw_abs_track_number : UInt32
-  raw_avc : KSPROPERTY_EXTXPORT_S_u_e__Union_RawAVC_e__Struct
-end
-union KSPROPERTY_EXTXPORT_NODE_S_u_e__Union
-  capabilities : UInt32
-  signal_mode : UInt32
-  load_medium : UInt32
-  medium_info : MEDIUM_INFO
-  x_prt_state : TRANSPORT_STATE
-  timecode : KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_Timecode_e__Struct
-  dw_timecode : UInt32
-  dw_abs_track_number : UInt32
-  raw_avc : KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_RawAVC_e__Struct
-end
-union KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union
-  provider_id : KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union_ProviderId_e__Struct
-  alignment : Int64
-end
+  union KSIDENTIFIER_Anonymous_e__Union
+    anonymous : KSIDENTIFIER_Anonymous_e__Union_Anonymous_e__Struct
+    alignment : Int64
+  end
+  union KSPROPERTY_BOUNDS_LONG
+    anonymous1 : KSPROPERTY_BOUNDS_LONG_Anonymous1_e__Struct
+    anonymous2 : KSPROPERTY_BOUNDS_LONG_Anonymous2_e__Struct
+  end
+  union KSPROPERTY_BOUNDS_LONGLONG
+    anonymous1 : KSPROPERTY_BOUNDS_LONGLONG_Anonymous1_e__Struct
+    anonymous2 : KSPROPERTY_BOUNDS_LONGLONG_Anonymous2_e__Struct
+  end
+  union KSEVENTDATA_Anonymous_e__Union
+    event_handle : KSEVENTDATA_Anonymous_e__Union_EventHandle_e__Struct
+    semaphore_handle : KSEVENTDATA_Anonymous_e__Union_SemaphoreHandle_e__Struct
+    alignment : KSEVENTDATA_Anonymous_e__Union_Alignment_e__Struct
+  end
+  union KSRELATIVEEVENT_Anonymous_e__Union
+    object_handle : LibC::HANDLE
+    object_pointer : Void*
+  end
+  union KSP_PIN_Anonymous_e__Union
+    reserved : UInt32
+    flags : UInt32
+  end
+  union KSDATAFORMAT
+    anonymous : KSDATAFORMAT_Anonymous_e__Struct
+    alignment : Int64
+  end
+  union KSALLOCATOR_FRAMING_Anonymous2_e__Union
+    file_alignment : UInt32
+    frame_pitch : Int32
+  end
+  union KSALLOCATOR_FRAMING_Anonymous1_e__Union
+    options_flags : UInt32
+    requirements_flags : UInt32
+  end
+  union KS_FRAMING_ITEM_Anonymous_e__Union
+    file_alignment : UInt32
+    frame_pitch : Int32
+  end
+  union KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union
+    anonymous : KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union_Anonymous_e__Struct
+    scr_token : UInt16
+  end
+  union MF_MDL_SHARED_PAYLOAD_KEY
+    combined : MF_MDL_SHARED_PAYLOAD_KEY_combined_e__Struct
+    gmdl_handle : Guid
+  end
+  union DS3DVECTOR_Anonymous2_e__Union
+    y : Float32
+    dv_y : Float32
+  end
+  union DS3DVECTOR_Anonymous1_e__Union
+    x : Float32
+    dv_x : Float32
+  end
+  union DS3DVECTOR_Anonymous3_e__Union
+    z : Float32
+    dv_z : Float32
+  end
+  union KSAUDIO_MIX_CAPS_Anonymous_e__Union
+    reset : Int32
+    resolution : Int32
+  end
+  union KS_VIDEOINFO_Anonymous_e__Union
+    bmi_colors : KS_RGBQUAD[256]*
+    dw_bit_masks : UInt32[3]*
+    true_color_info : KS_TRUECOLORINFO
+  end
+  union KS_VIDEOINFOHEADER2_Anonymous_e__Union
+    dw_control_flags : UInt32
+    dw_reserved1 : UInt32
+  end
+  union KS_FRAME_INFO_Anonymous2_e__Union
+    anonymous : KS_FRAME_INFO_Anonymous2_e__Union_Anonymous_e__Struct
+    frame_completion_number : UInt64
+  end
+  union KS_FRAME_INFO_Anonymous1_e__Union
+    l_surface_pitch : Int32
+    reserved1 : UInt32
+  end
+  union KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union
+    capabilities : UInt32
+    configuration : UInt32
+  end
+  union KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union
+    dbl : Float64
+    ull : UInt64
+    ul : UInt32
+    ratio : ULARGE_INTEGER
+    l : Int32
+    ll : Int64
+  end
+  union KSCAMERA_PROFILE_PININFO_Anonymous_e__Union
+    anonymous : KSCAMERA_PROFILE_PININFO_Anonymous_e__Union_Anonymous_e__Struct
+    reserved : UInt32
+  end
+  union KSDEVICE_PROFILE_INFO_Anonymous_e__Union
+    camera : KSDEVICE_PROFILE_INFO_Anonymous_e__Union_Camera_e__Struct
+  end
+  union KSPROPERTY_EXTDEVICE_S_u_e__Union
+    capabilities : DEVCAPS
+    dev_port : UInt32
+    power_state : UInt32
+    pawch_string : Char[260]*
+    node_unique_id : UInt32[2]*
+  end
+  union KSPROPERTY_EXTXPORT_S_u_e__Union
+    capabilities : UInt32
+    signal_mode : UInt32
+    load_medium : UInt32
+    medium_info : MEDIUM_INFO
+    x_prt_state : TRANSPORT_STATE
+    timecode : KSPROPERTY_EXTXPORT_S_u_e__Union_Timecode_e__Struct
+    dw_timecode : UInt32
+    dw_abs_track_number : UInt32
+    raw_avc : KSPROPERTY_EXTXPORT_S_u_e__Union_RawAVC_e__Struct
+  end
+  union KSPROPERTY_EXTXPORT_NODE_S_u_e__Union
+    capabilities : UInt32
+    signal_mode : UInt32
+    load_medium : UInt32
+    medium_info : MEDIUM_INFO
+    x_prt_state : TRANSPORT_STATE
+    timecode : KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_Timecode_e__Struct
+    dw_timecode : UInt32
+    dw_abs_track_number : UInt32
+    raw_avc : KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_RawAVC_e__Struct
+  end
+  union KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union
+    provider_id : KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union_ProviderId_e__Struct
+    alignment : Int64
+  end
 
   struct KSPRIORITY
     priority_class : UInt32

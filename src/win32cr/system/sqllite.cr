@@ -493,10 +493,10 @@ lib LibWin32
   end
   struct Sqlite3_index_info
     n_constraint : Int32
-    a_constraint : Sqlite3_index_infosqlite3_index_constraint*
+    a_constraint : Sqlite3_index_info_sqlite3_index_constraint*
     n_order_by : Int32
-    a_order_by : Sqlite3_index_infosqlite3_index_orderby*
-    a_constraint_usage : Sqlite3_index_infosqlite3_index_constraint_usage*
+    a_order_by : Sqlite3_index_info_sqlite3_index_orderby*
+    a_constraint_usage : Sqlite3_index_info_sqlite3_index_constraint_usage*
     idx_num : Int32
     idx_str : PSTR
     need_to_free_idx_str : Int32
@@ -506,15 +506,15 @@ lib LibWin32
     idx_flags : Int32
     col_used : UInt64
   end
-  struct Sqlite3_index_infosqlite3_index_orderby
+  struct Sqlite3_index_info_sqlite3_index_orderby
     i_column : Int32
     desc : UInt8
   end
-  struct Sqlite3_index_infosqlite3_index_constraint_usage
+  struct Sqlite3_index_info_sqlite3_index_constraint_usage
     argv_index : Int32
     omit : UInt8
   end
-  struct Sqlite3_index_infosqlite3_index_constraint
+  struct Sqlite3_index_info_sqlite3_index_constraint
     i_column : Int32
     op : UInt8
     usable : UInt8

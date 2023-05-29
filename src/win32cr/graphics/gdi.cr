@@ -1869,22 +1869,22 @@ lib LibWin32
     DISPLAYCONFIG_COLOR_ENCODING_FORCE_UINT32 = -1
   end
 
-union DEVMODEA_Anonymous1_e__Union
-  anonymous1 : DEVMODEA_Anonymous1_e__Union_Anonymous1_e__Struct
-  anonymous2 : DEVMODEA_Anonymous1_e__Union_Anonymous2_e__Struct
-end
-union DEVMODEA_Anonymous2_e__Union
-  dm_display_flags : UInt32
-  dm_nup : UInt32
-end
-union DEVMODEW_Anonymous1_e__Union
-  anonymous1 : DEVMODEW_Anonymous1_e__Union_Anonymous1_e__Struct
-  anonymous2 : DEVMODEW_Anonymous1_e__Union_Anonymous2_e__Struct
-end
-union DEVMODEW_Anonymous2_e__Union
-  dm_display_flags : UInt32
-  dm_nup : UInt32
-end
+  union DEVMODEA_Anonymous1_e__Union
+    anonymous1 : DEVMODEA_Anonymous1_e__Union_Anonymous1_e__Struct
+    anonymous2 : DEVMODEA_Anonymous1_e__Union_Anonymous2_e__Struct
+  end
+  union DEVMODEA_Anonymous2_e__Union
+    dm_display_flags : UInt32
+    dm_nup : UInt32
+  end
+  union DEVMODEW_Anonymous1_e__Union
+    anonymous1 : DEVMODEW_Anonymous1_e__Union_Anonymous1_e__Struct
+    anonymous2 : DEVMODEW_Anonymous1_e__Union_Anonymous2_e__Struct
+  end
+  union DEVMODEW_Anonymous2_e__Union
+    dm_display_flags : UInt32
+    dm_nup : UInt32
+  end
 
   struct XFORM
     e_m11 : Float32

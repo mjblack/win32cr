@@ -1157,55 +1157,55 @@ lib LibWin32
     POLICY_EXTENSION_VERSION1 = 1
   end
 
-union INTERNET_PER_CONN_OPTIONA_Value_e__Union
-  dw_value : UInt32
-  psz_value : PSTR
-  ft_value : FILETIME
-end
-union INTERNET_PER_CONN_OPTIONW_Value_e__Union
-  dw_value : UInt32
-  psz_value : LibC::LPWSTR
-  ft_value : FILETIME
-end
-union GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union
-  admin : GOPHER_ADMIN_ATTRIBUTE_TYPE
-  mod_date : GOPHER_MOD_DATE_ATTRIBUTE_TYPE
-  ttl : GOPHER_TTL_ATTRIBUTE_TYPE
-  score : GOPHER_SCORE_ATTRIBUTE_TYPE
-  score_range : GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE
-  site : GOPHER_SITE_ATTRIBUTE_TYPE
-  organization : GOPHER_ORGANIZATION_ATTRIBUTE_TYPE
-  location : GOPHER_LOCATION_ATTRIBUTE_TYPE
-  geographical_location : GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE
-  time_zone : GOPHER_TIMEZONE_ATTRIBUTE_TYPE
-  provider : GOPHER_PROVIDER_ATTRIBUTE_TYPE
-  version : GOPHER_VERSION_ATTRIBUTE_TYPE
-  abstract : GOPHER_ABSTRACT_ATTRIBUTE_TYPE
-  view : GOPHER_VIEW_ATTRIBUTE_TYPE
-  veronica : GOPHER_VERONICA_ATTRIBUTE_TYPE
-  ask : GOPHER_ASK_ATTRIBUTE_TYPE
-  unknown : GOPHER_UNKNOWN_ATTRIBUTE_TYPE
-end
-union INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union
-  dw_reserved : UInt32
-  dw_exempt_delta : UInt32
-end
-union INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union
-  dw_reserved : UInt32
-  dw_exempt_delta : UInt32
-end
-union INTERNET_CREDENTIALS_Anonymous_e__Union
-  anonymous : INTERNET_CREDENTIALS_Anonymous_e__Union_Anonymous_e__Struct
-  p_auth_identity_opaque : Void*
-end
-union INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union
-  anonymous : INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union_Anonymous_e__Struct
-  cache_paths : INTERNET_CACHE_CONFIG_PATH_ENTRYA[0]*
-end
-union INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union
-  anonymous : INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union_Anonymous_e__Struct
-  cache_paths : INTERNET_CACHE_CONFIG_PATH_ENTRYW[0]*
-end
+  union INTERNET_PER_CONN_OPTIONA_Value_e__Union
+    dw_value : UInt32
+    psz_value : PSTR
+    ft_value : FILETIME
+  end
+  union INTERNET_PER_CONN_OPTIONW_Value_e__Union
+    dw_value : UInt32
+    psz_value : LibC::LPWSTR
+    ft_value : FILETIME
+  end
+  union GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union
+    admin : GOPHER_ADMIN_ATTRIBUTE_TYPE
+    mod_date : GOPHER_MOD_DATE_ATTRIBUTE_TYPE
+    ttl : GOPHER_TTL_ATTRIBUTE_TYPE
+    score : GOPHER_SCORE_ATTRIBUTE_TYPE
+    score_range : GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE
+    site : GOPHER_SITE_ATTRIBUTE_TYPE
+    organization : GOPHER_ORGANIZATION_ATTRIBUTE_TYPE
+    location : GOPHER_LOCATION_ATTRIBUTE_TYPE
+    geographical_location : GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE
+    time_zone : GOPHER_TIMEZONE_ATTRIBUTE_TYPE
+    provider : GOPHER_PROVIDER_ATTRIBUTE_TYPE
+    version : GOPHER_VERSION_ATTRIBUTE_TYPE
+    abstract : GOPHER_ABSTRACT_ATTRIBUTE_TYPE
+    view : GOPHER_VIEW_ATTRIBUTE_TYPE
+    veronica : GOPHER_VERONICA_ATTRIBUTE_TYPE
+    ask : GOPHER_ASK_ATTRIBUTE_TYPE
+    unknown : GOPHER_UNKNOWN_ATTRIBUTE_TYPE
+  end
+  union INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union
+    dw_reserved : UInt32
+    dw_exempt_delta : UInt32
+  end
+  union INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union
+    dw_reserved : UInt32
+    dw_exempt_delta : UInt32
+  end
+  union INTERNET_CREDENTIALS_Anonymous_e__Union
+    anonymous : INTERNET_CREDENTIALS_Anonymous_e__Union_Anonymous_e__Struct
+    p_auth_identity_opaque : Void*
+  end
+  union INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union
+    anonymous : INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union_Anonymous_e__Struct
+    cache_paths : INTERNET_CACHE_CONFIG_PATH_ENTRYA[0]*
+  end
+  union INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union
+    anonymous : INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union_Anonymous_e__Struct
+    cache_paths : INTERNET_CACHE_CONFIG_PATH_ENTRYW[0]*
+  end
 
   struct INTERNET_ASYNC_RESULT
     dw_result : LibC::UINT_PTR

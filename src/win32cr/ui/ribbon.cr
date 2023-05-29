@@ -131,10 +131,10 @@ lib LibWin32
     UI_OWNERSHIP_COPY = 1
   end
 
-union UI_EVENTPARAMS_Anonymous_e__Union
-  modes : Int32
-  params : UI_EVENTPARAMS_COMMAND
-end
+  union UI_EVENTPARAMS_Anonymous_e__Union
+    modes : Int32
+    params : UI_EVENTPARAMS_COMMAND
+  end
 
   struct UI_EVENTPARAMS_COMMAND
     command_id : UInt32

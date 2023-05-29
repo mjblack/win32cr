@@ -1166,58 +1166,58 @@ lib LibWin32
     WBEM_FLAG_USE_MULTIPLE_CHALLENGES = 16
   end
 
-union MI_Datetime_u_e__Union
-  timestamp : MI_Timestamp
-  interval : MI_Interval
-end
-union MI_Value
-  boolean : UInt8
-  uint8 : UInt8
-  sint8 : Int8
-  uint16 : UInt16
-  sint16 : Int16
-  uint32 : UInt32
-  sint32 : Int32
-  uint64 : UInt64
-  sint64 : Int64
-  real32 : Float32
-  real64 : Float64
-  char16 : UInt16
-  datetime : MI_Datetime
-  string : UInt16*
-  instance : MI_Instance*
-  reference : MI_Instance*
-  booleana : MI_BooleanA
-  uint8a : MI_Uint8A
-  sint8a : MI_Sint8A
-  uint16a : MI_Uint16A
-  sint16a : MI_Sint16A
-  uint32a : MI_Uint32A
-  sint32a : MI_Sint32A
-  uint64a : MI_Uint64A
-  sint64a : MI_Sint64A
-  real32a : MI_Real32A
-  real64a : MI_Real64A
-  char16a : MI_Char16A
-  datetimea : MI_DatetimeA
-  stringa : MI_StringA
-  referencea : MI_ReferenceA
-  instancea : MI_InstanceA
-  array : MI_Array
-end
-union MI_UserCredentials_credentials_e__Union
-  username_password : MI_UsernamePasswordCreds
-  certificate_thumbprint : UInt16*
-end
-union SWbemRpnConst
-  m_psz_str_val : LibC::LPWSTR
-  m_b_bool_val : LibC::BOOL
-  m_l_long_val : Int32
-  m_u_long_val : UInt32
-  m_dbl_val : Float64
-  m_l_val64 : Int64
-  m_u_val64 : Int64
-end
+  union MI_Datetime_u_e__Union
+    timestamp : MI_Timestamp
+    interval : MI_Interval
+  end
+  union MI_Value
+    boolean : UInt8
+    uint8 : UInt8
+    sint8 : Int8
+    uint16 : UInt16
+    sint16 : Int16
+    uint32 : UInt32
+    sint32 : Int32
+    uint64 : UInt64
+    sint64 : Int64
+    real32 : Float32
+    real64 : Float64
+    char16 : UInt16
+    datetime : MI_Datetime
+    string : UInt16*
+    instance : MI_Instance*
+    reference : MI_Instance*
+    booleana : MI_BooleanA
+    uint8a : MI_Uint8A
+    sint8a : MI_Sint8A
+    uint16a : MI_Uint16A
+    sint16a : MI_Sint16A
+    uint32a : MI_Uint32A
+    sint32a : MI_Sint32A
+    uint64a : MI_Uint64A
+    sint64a : MI_Sint64A
+    real32a : MI_Real32A
+    real64a : MI_Real64A
+    char16a : MI_Char16A
+    datetimea : MI_DatetimeA
+    stringa : MI_StringA
+    referencea : MI_ReferenceA
+    instancea : MI_InstanceA
+    array : MI_Array
+  end
+  union MI_UserCredentials_credentials_e__Union
+    username_password : MI_UsernamePasswordCreds
+    certificate_thumbprint : UInt16*
+  end
+  union SWbemRpnConst
+    m_psz_str_val : LibC::LPWSTR
+    m_b_bool_val : LibC::BOOL
+    m_l_long_val : Int32
+    m_u_long_val : UInt32
+    m_dbl_val : Float64
+    m_l_val64 : Int64
+    m_u_val64 : Int64
+  end
 
   struct MI_Timestamp
     year : UInt32

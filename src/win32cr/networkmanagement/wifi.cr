@@ -1418,23 +1418,23 @@ lib LibWin32
     DOT11_ADHOC_CONNECT_FAIL_OTHER = 2
   end
 
-union DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union
-  dot11_phy_type : DOT11_PHY_TYPE
-  u_phy_id : UInt32
-end
-union DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO
-  u_ch_center_frequency : UInt32
-  fhss : DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO_FHSS_e__Struct
-end
-union DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union
-  hrdsss_attributes : DOT11_HRDSSS_PHY_ATTRIBUTES
-  ofdm_attributes : DOT11_OFDM_PHY_ATTRIBUTES
-  erp_attributes : DOT11_ERP_PHY_ATTRIBUTES
-end
-union DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union
-  ul_channel : UInt32
-  ul_frequency : UInt32
-end
+  union DOT11_RECV_SENSITIVITY_LIST_Anonymous_e__Union
+    dot11_phy_type : DOT11_PHY_TYPE
+    u_phy_id : UInt32
+  end
+  union DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO
+    u_ch_center_frequency : UInt32
+    fhss : DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO_FHSS_e__Struct
+  end
+  union DOT11_PHY_ATTRIBUTES_PhySpecificAttributes_e__Union
+    hrdsss_attributes : DOT11_HRDSSS_PHY_ATTRIBUTES
+    ofdm_attributes : DOT11_OFDM_PHY_ATTRIBUTES
+    erp_attributes : DOT11_ERP_PHY_ATTRIBUTES
+  end
+  union DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS_Anonymous_e__Union
+    ul_channel : UInt32
+    ul_frequency : UInt32
+  end
 
   struct DOT11_SSID
     u_ssid_length : UInt32

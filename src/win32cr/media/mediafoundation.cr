@@ -5470,83 +5470,83 @@ lib LibWin32
     OPM_HDCP_STATUS_OFF = 1
   end
 
-union D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union
-  p_configuration_cqp : D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP*
-  p_configuration_cbr : D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR*
-  p_configuration_vbr : D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR*
-  p_configuration_qvbr : D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR*
-end
-union D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union
-  p_h264_profile : D3D12_VIDEO_ENCODER_PROFILE_H264*
-  p_hevc_profile : D3D12_VIDEO_ENCODER_PROFILE_HEVC*
-end
-union D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union
-  p_h264_level_setting : D3D12_VIDEO_ENCODER_LEVELS_H264*
-  p_hevc_level_setting : D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC*
-end
-union D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union
-  p_h264_support : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264*
-  p_hevc_support : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC*
-end
-union D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union
-  p_h264_support : D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264*
-  p_hevc_support : D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC*
-end
-union D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union
-  p_h264_config : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264*
-  p_hevc_config : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC*
-end
-union D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union
-  p_h264_group_of_pictures : D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264*
-  p_hevc_group_of_pictures : D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC*
-end
-union D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union
-  p_h264_pic_data : D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264*
-  p_hevc_pic_data : D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC*
-end
-union D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union
-  max_bytes_per_slice : UInt32
-  number_of_coding_units_per_slice : UInt32
-  number_of_rows_per_slice : UInt32
-  number_of_slices_per_frame : UInt32
-end
-union D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union
-  p_slices_partition_h264 : D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*
-  p_slices_partition_hevc : D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*
-end
-union DXVAHD_COLOR
-  rgb : DXVAHD_COLOR_RGBA
-  y_cb_cr : DXVAHD_COLOR_YCbCrA
-end
-union DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union
-  anonymous : DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union
-  anonymous : DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DXVA2_ExtendedFormat_Anonymous_e__Union
-  anonymous : DXVA2_ExtendedFormat_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DXVA2_Fixed32_Anonymous_e__Union
-  anonymous : DXVA2_Fixed32_Anonymous_e__Union_Anonymous_e__Struct
-  ll : Int32
-end
-union MFPaletteEntry
-  argb : MFARGB
-  ay_cb_cr : MFAYUVSample
-end
-union MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union
-  u32 : UInt32
-  u64 : UInt64
-  d : Float64
-end
-union MFVideoAlphaBitmap_bitmap_e__Union
-  hdc : HDC
-  p_dds : IDirect3DSurface9
-end
+  union D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union
+    p_configuration_cqp : D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP*
+    p_configuration_cbr : D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR*
+    p_configuration_vbr : D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR*
+    p_configuration_qvbr : D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR*
+  end
+  union D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union
+    p_h264_profile : D3D12_VIDEO_ENCODER_PROFILE_H264*
+    p_hevc_profile : D3D12_VIDEO_ENCODER_PROFILE_HEVC*
+  end
+  union D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union
+    p_h264_level_setting : D3D12_VIDEO_ENCODER_LEVELS_H264*
+    p_hevc_level_setting : D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC*
+  end
+  union D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union
+    p_h264_support : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264*
+    p_hevc_support : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC*
+  end
+  union D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union
+    p_h264_support : D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264*
+    p_hevc_support : D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC*
+  end
+  union D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union
+    p_h264_config : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264*
+    p_hevc_config : D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC*
+  end
+  union D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union
+    p_h264_group_of_pictures : D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264*
+    p_hevc_group_of_pictures : D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC*
+  end
+  union D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union
+    p_h264_pic_data : D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264*
+    p_hevc_pic_data : D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC*
+  end
+  union D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union
+    max_bytes_per_slice : UInt32
+    number_of_coding_units_per_slice : UInt32
+    number_of_rows_per_slice : UInt32
+    number_of_slices_per_frame : UInt32
+  end
+  union D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union
+    p_slices_partition_h264 : D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*
+    p_slices_partition_hevc : D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES*
+  end
+  union DXVAHD_COLOR
+    rgb : DXVAHD_COLOR_RGBA
+    y_cb_cr : DXVAHD_COLOR_YCbCrA
+  end
+  union DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union
+    anonymous : DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union
+    anonymous : DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DXVA2_ExtendedFormat_Anonymous_e__Union
+    anonymous : DXVA2_ExtendedFormat_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DXVA2_Fixed32_Anonymous_e__Union
+    anonymous : DXVA2_Fixed32_Anonymous_e__Union_Anonymous_e__Struct
+    ll : Int32
+  end
+  union MFPaletteEntry
+    argb : MFARGB
+    ay_cb_cr : MFAYUVSample
+  end
+  union MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union
+    u32 : UInt32
+    u64 : UInt64
+    d : Float64
+  end
+  union MFVideoAlphaBitmap_bitmap_e__Union
+    hdc : HDC
+    p_dds : IDirect3DSurface9
+  end
 
   struct CodecAPIEventData
     guid : Guid

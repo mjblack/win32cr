@@ -551,112 +551,112 @@ lib LibWin32
     SYS_WIN64 = 3
   end
 
-union CY
-  anonymous : CY_Anonymous_e__Struct
-  int64 : Int64
-end
-union Uclsspec_tagged_union_e__Struct
-  clsid : Guid
-  p_file_ext : LibC::LPWSTR
-  p_mime_type : LibC::LPWSTR
-  p_prog_id : LibC::LPWSTR
-  p_file_name : LibC::LPWSTR
-  by_name : Uclsspec_tagged_union_e__Struct_ByName_e__Struct
-  by_object_id : Uclsspec_tagged_union_e__Struct_ByObjectId_e__Struct
-end
-union STGMEDIUM_Anonymous_e__Union
-  h_bitmap : HBITMAP
-  h_meta_file_pict : Void*
-  h_enh_meta_file : HENHMETAFILE
-  h_global : LibC::IntPtrT
-  lpsz_file_name : LibC::LPWSTR
-  pstm : IStream
-  pstg : IStorage
-end
-union GDI_OBJECT_u_e__Struct
-  h_bitmap : Userhbitmap*
-  h_palette : Userhpalette*
-  h_generic : Userhglobal*
-end
-union Userstgmedium_STGMEDIUM_UNION_u_e__Struct
-  h_meta_file_pict : Userhmetafilepict*
-  h_h_enh_meta_file : Userhenhmetafile*
-  h_gdi_handle : GDI_OBJECT*
-  h_global : Userhglobal*
-  lpsz_file_name : LibC::LPWSTR
-  pstm : BYTE_BLOB*
-  pstg : BYTE_BLOB*
-end
-union VARIANT_Anonymous_e__Union
-  anonymous : VARIANT_Anonymous_e__Union_Anonymous_e__Struct
-  dec_val : DECIMAL
-end
-union VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
-  ll_val : Int64
-  l_val : Int32
-  b_val : UInt8
-  i_val : Int16
-  flt_val : Float32
-  dbl_val : Float64
-  bool_val : Int16
-  __obsolete__variant_bool : Int16
-  scode : Int32
-  cy_val : CY
-  date : Float64
-  bstr_val : UInt8
-  punk_val : IUnknown
-  pdisp_val : IDispatch
-  parray : SAFEARRAY*
-  pb_val : UInt8*
-  pi_val : Int16*
-  pl_val : Int32*
-  pll_val : Int64*
-  pflt_val : Float32*
-  pdbl_val : Float64*
-  pbool_val : Int16*
-  __obsolete__variant_pbool : Int16*
-  pscode : Int32*
-  pcy_val : CY*
-  pdate : Float64*
-  pbstr_val : UInt8*
-  ppunk_val : IUnknown*
-  ppdisp_val : IDispatch*
-  pparray : SAFEARRAY**
-  pvar_val : VARIANT*
-  byref : Void*
-  c_val : CHAR
-  ui_val : UInt16
-  ul_val : UInt32
-  ull_val : UInt64
-  int_val : Int32
-  uint_val : UInt32
-  pdec_val : DECIMAL*
-  pc_val : PSTR
-  pui_val : UInt16*
-  pul_val : UInt32*
-  pull_val : UInt64*
-  pint_val : Int32*
-  puint_val : UInt32*
-  anonymous : VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
-end
-union TYPEDESC_Anonymous_e__Union
-  lptdesc : TYPEDESC*
-  lpadesc : ARRAYDESC*
-  hreftype : UInt32
-end
-union ELEMDESC_Anonymous_e__Union
-  idldesc : IDLDESC
-  paramdesc : PARAMDESC
-end
-union VARDESC_Anonymous_e__Union
-  o_inst : UInt32
-  lpvar_value : VARIANT*
-end
-union BINDPTR
-  lpfuncdesc : FUNCDESC*
-  lpvardesc : VARDESC*
-  lptcomp : ITypeComp
-end
+  union CY
+    anonymous : CY_Anonymous_e__Struct
+    int64 : Int64
+  end
+  union Uclsspec_tagged_union_e__Struct
+    clsid : Guid
+    p_file_ext : LibC::LPWSTR
+    p_mime_type : LibC::LPWSTR
+    p_prog_id : LibC::LPWSTR
+    p_file_name : LibC::LPWSTR
+    by_name : Uclsspec_tagged_union_e__Struct_ByName_e__Struct
+    by_object_id : Uclsspec_tagged_union_e__Struct_ByObjectId_e__Struct
+  end
+  union STGMEDIUM_Anonymous_e__Union
+    h_bitmap : HBITMAP
+    h_meta_file_pict : Void*
+    h_enh_meta_file : HENHMETAFILE
+    h_global : LibC::IntPtrT
+    lpsz_file_name : LibC::LPWSTR
+    pstm : IStream
+    pstg : IStorage
+  end
+  union GDI_OBJECT_u_e__Struct
+    h_bitmap : Userhbitmap*
+    h_palette : Userhpalette*
+    h_generic : Userhglobal*
+  end
+  union Userstgmedium_STGMEDIUM_UNION_u_e__Struct
+    h_meta_file_pict : Userhmetafilepict*
+    h_h_enh_meta_file : Userhenhmetafile*
+    h_gdi_handle : GDI_OBJECT*
+    h_global : Userhglobal*
+    lpsz_file_name : LibC::LPWSTR
+    pstm : BYTE_BLOB*
+    pstg : BYTE_BLOB*
+  end
+  union VARIANT_Anonymous_e__Union
+    anonymous : VARIANT_Anonymous_e__Union_Anonymous_e__Struct
+    dec_val : DECIMAL
+  end
+  union VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
+    ll_val : Int64
+    l_val : Int32
+    b_val : UInt8
+    i_val : Int16
+    flt_val : Float32
+    dbl_val : Float64
+    bool_val : Int16
+    __obsolete__variant_bool : Int16
+    scode : Int32
+    cy_val : CY
+    date : Float64
+    bstr_val : UInt8
+    punk_val : IUnknown
+    pdisp_val : IDispatch
+    parray : SAFEARRAY*
+    pb_val : UInt8*
+    pi_val : Int16*
+    pl_val : Int32*
+    pll_val : Int64*
+    pflt_val : Float32*
+    pdbl_val : Float64*
+    pbool_val : Int16*
+    __obsolete__variant_pbool : Int16*
+    pscode : Int32*
+    pcy_val : CY*
+    pdate : Float64*
+    pbstr_val : UInt8*
+    ppunk_val : IUnknown*
+    ppdisp_val : IDispatch*
+    pparray : SAFEARRAY**
+    pvar_val : VARIANT*
+    byref : Void*
+    c_val : CHAR
+    ui_val : UInt16
+    ul_val : UInt32
+    ull_val : UInt64
+    int_val : Int32
+    uint_val : UInt32
+    pdec_val : DECIMAL*
+    pc_val : PSTR
+    pui_val : UInt16*
+    pul_val : UInt32*
+    pull_val : UInt64*
+    pint_val : Int32*
+    puint_val : UInt32*
+    anonymous : VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union TYPEDESC_Anonymous_e__Union
+    lptdesc : TYPEDESC*
+    lpadesc : ARRAYDESC*
+    hreftype : UInt32
+  end
+  union ELEMDESC_Anonymous_e__Union
+    idldesc : IDLDESC
+    paramdesc : PARAMDESC
+  end
+  union VARDESC_Anonymous_e__Union
+    o_inst : UInt32
+    lpvar_value : VARIANT*
+  end
+  union BINDPTR
+    lpfuncdesc : FUNCDESC*
+    lpvardesc : VARDESC*
+    lptcomp : ITypeComp
+  end
 
   struct CY_Anonymous_e__Struct
     lo : UInt32

@@ -107,50 +107,50 @@ lib LibWin32
     D3D12 = 2
   end
 
-union WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union
-  p_strings : LibC::LPWSTR*
-  p_ints : Int64*
-  p_floats : Float32*
-  p_doubles : Float64*
-end
-union WINML_MAP_BINDING_DESC_Anonymous2_e__Union
-  p_string_fields : LibC::LPWSTR*
-  p_int_fields : Int64*
-  p_float_fields : Float32*
-  p_double_fields : Float64*
-end
-union WINML_MAP_BINDING_DESC_Anonymous1_e__Union
-  p_string_keys : LibC::LPWSTR*
-  p_int_keys : Int64*
-end
-union WINML_BINDING_DESC_Anonymous_e__Union
-  tensor : WINML_TENSOR_BINDING_DESC
-  sequence : WINML_SEQUENCE_BINDING_DESC
-  map : WINML_MAP_BINDING_DESC
-  image : WINML_IMAGE_BINDING_DESC
-  resource : WINML_RESOURCE_BINDING_DESC
-end
-union WINML_VARIABLE_DESC_Anonymous_e__Union
-  tensor : WINML_TENSOR_VARIABLE_DESC
-  sequence : WINML_SEQUENCE_VARIABLE_DESC
-  map : WINML_MAP_VARIABLE_DESC
-  image : WINML_IMAGE_VARIABLE_DESC
-end
-union MLOperatorEdgeDescription_Anonymous_e__Union
-  reserved : UInt64
-  tensor_data_type : MLOperatorTensorDataType
-end
-union MLOperatorSchemaEdgeDescription_Anonymous_e__Union
-  reserved : Void*
-  type_label : PSTR
-  edge_description : MLOperatorEdgeDescription
-end
-union MLOperatorAttributeNameValue_Anonymous_e__Union
-  reserved : Void*
-  ints : Int64*
-  strings : Int8**
-  floats : Float32*
-end
+  union WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union
+    p_strings : LibC::LPWSTR*
+    p_ints : Int64*
+    p_floats : Float32*
+    p_doubles : Float64*
+  end
+  union WINML_MAP_BINDING_DESC_Anonymous2_e__Union
+    p_string_fields : LibC::LPWSTR*
+    p_int_fields : Int64*
+    p_float_fields : Float32*
+    p_double_fields : Float64*
+  end
+  union WINML_MAP_BINDING_DESC_Anonymous1_e__Union
+    p_string_keys : LibC::LPWSTR*
+    p_int_keys : Int64*
+  end
+  union WINML_BINDING_DESC_Anonymous_e__Union
+    tensor : WINML_TENSOR_BINDING_DESC
+    sequence : WINML_SEQUENCE_BINDING_DESC
+    map : WINML_MAP_BINDING_DESC
+    image : WINML_IMAGE_BINDING_DESC
+    resource : WINML_RESOURCE_BINDING_DESC
+  end
+  union WINML_VARIABLE_DESC_Anonymous_e__Union
+    tensor : WINML_TENSOR_VARIABLE_DESC
+    sequence : WINML_SEQUENCE_VARIABLE_DESC
+    map : WINML_MAP_VARIABLE_DESC
+    image : WINML_IMAGE_VARIABLE_DESC
+  end
+  union MLOperatorEdgeDescription_Anonymous_e__Union
+    reserved : UInt64
+    tensor_data_type : MLOperatorTensorDataType
+  end
+  union MLOperatorSchemaEdgeDescription_Anonymous_e__Union
+    reserved : Void*
+    type_label : PSTR
+    edge_description : MLOperatorEdgeDescription
+  end
+  union MLOperatorAttributeNameValue_Anonymous_e__Union
+    reserved : Void*
+    ints : Int64*
+    strings : Int8**
+    floats : Float32*
+  end
 
   struct WINML_TENSOR_BINDING_DESC
     data_type : WINML_TENSOR_DATA_TYPE

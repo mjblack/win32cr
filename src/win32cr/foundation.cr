@@ -1,3 +1,4 @@
+
 @[Link("delayimp")]
 @[Link("user32")]
 @[Link(ldflags: "/IGNORE:4199")]
@@ -9799,24 +9800,24 @@ lib LibWin32
     HANDLE_FLAG_PROTECT_FROM_CLOSE = 2
   end
 
-union DECIMAL_Anonymous2_e__Union
-  anonymous : DECIMAL_Anonymous2_e__Union_Anonymous_e__Struct
-  lo64 : UInt64
-end
-union DECIMAL_Anonymous1_e__Union
-  anonymous : DECIMAL_Anonymous1_e__Union_Anonymous_e__Struct
-  signscale : UInt16
-end
-union LARGE_INTEGER
-  anonymous : LARGE_INTEGER_Anonymous_e__Struct
-  u : LARGE_INTEGER_u_e__Struct
-  quad_part : Int64
-end
-union ULARGE_INTEGER
-  anonymous : ULARGE_INTEGER_Anonymous_e__Struct
-  u : ULARGE_INTEGER_u_e__Struct
-  quad_part : UInt64
-end
+  union DECIMAL_Anonymous2_e__Union
+    anonymous : DECIMAL_Anonymous2_e__Union_Anonymous_e__Struct
+    lo64 : UInt64
+  end
+  union DECIMAL_Anonymous1_e__Union
+    anonymous : DECIMAL_Anonymous1_e__Union_Anonymous_e__Struct
+    signscale : UInt16
+  end
+  union LARGE_INTEGER
+    anonymous : LARGE_INTEGER_Anonymous_e__Struct
+    u : LARGE_INTEGER_u_e__Struct
+    quad_part : Int64
+  end
+  union ULARGE_INTEGER
+    anonymous : ULARGE_INTEGER_Anonymous_e__Struct
+    u : ULARGE_INTEGER_u_e__Struct
+    quad_part : UInt64
+  end
 
   struct SYSTEMTIME
     w_year : UInt16

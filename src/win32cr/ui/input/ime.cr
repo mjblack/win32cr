@@ -789,42 +789,42 @@ lib LibWin32
     IFED_REL_ALL = 24
   end
 
-union WDD_Anonymous2_e__Union
-  cch_read : UInt16
-  cch_comp : UInt16
-end
-union WDD_Anonymous1_e__Union
-  w_read_pos : UInt16
-  w_comp_pos : UInt16
-end
-union MORRSLT_Anonymous2_e__Union
-  cch_read : UInt16
-  cch_comp : UInt16
-end
-union MORRSLT_Anonymous3_e__Union
-  pch_read_idx_wdd : UInt16*
-  pch_comp_idx_wdd : UInt16*
-end
-union MORRSLT_Anonymous1_e__Union
-  pwch_read : LibC::LPWSTR
-  pwch_comp : LibC::LPWSTR
-end
-union IMEWRD_Anonymous_e__Union
-  ul_pos : UInt32
-  anonymous : IMEWRD_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IMEKMSKEY_Anonymous1_e__Union
-  dw_control : UInt32
-  dw_not_used : UInt32
-end
-union IMEKMSKEY_Anonymous2_e__Union
-  pwsz_dscr : Char[31]*
-  pwsz_no_use : Char[31]*
-end
-union INPUTCONTEXT_lfFont_e__Union
-  a : LOGFONTA
-  w : LOGFONTW
-end
+  union WDD_Anonymous2_e__Union
+    cch_read : UInt16
+    cch_comp : UInt16
+  end
+  union WDD_Anonymous1_e__Union
+    w_read_pos : UInt16
+    w_comp_pos : UInt16
+  end
+  union MORRSLT_Anonymous2_e__Union
+    cch_read : UInt16
+    cch_comp : UInt16
+  end
+  union MORRSLT_Anonymous3_e__Union
+    pch_read_idx_wdd : UInt16*
+    pch_comp_idx_wdd : UInt16*
+  end
+  union MORRSLT_Anonymous1_e__Union
+    pwch_read : LibC::LPWSTR
+    pwch_comp : LibC::LPWSTR
+  end
+  union IMEWRD_Anonymous_e__Union
+    ul_pos : UInt32
+    anonymous : IMEWRD_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IMEKMSKEY_Anonymous1_e__Union
+    dw_control : UInt32
+    dw_not_used : UInt32
+  end
+  union IMEKMSKEY_Anonymous2_e__Union
+    pwsz_dscr : Char[31]*
+    pwsz_no_use : Char[31]*
+  end
+  union INPUTCONTEXT_lfFont_e__Union
+    a : LOGFONTA
+    w : LOGFONTW
+  end
 
   struct COMPOSITIONFORM
     dw_style : UInt32

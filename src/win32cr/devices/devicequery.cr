@@ -92,10 +92,10 @@ lib LibWin32
     DevQueryResultRemove = 3
   end
 
-union DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD
-  state : DEV_QUERY_STATE
-  device_object : DEV_OBJECT
-end
+  union DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD
+    state : DEV_QUERY_STATE
+    device_object : DEV_OBJECT
+  end
 
   struct DEVPROP_FILTER_EXPRESSION
     operator : DEVPROP_OPERATOR

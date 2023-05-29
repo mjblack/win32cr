@@ -804,113 +804,113 @@ lib LibWin32
     PFFT_SPOOF = 3
   end
 
-union NET_LUID_LH
-  value : UInt64
-  info : NET_LUID_LH_Info_e__Struct
-end
-union MIB_IPPATH_ROW_Anonymous_e__Union
-  last_reachable : UInt32
-  last_unreachable : UInt32
-end
-union MIB_IPNET_ROW2_Anonymous_e__Union
-  anonymous : MIB_IPNET_ROW2_Anonymous_e__Union_Anonymous_e__Struct
-  flags : UInt8
-end
-union MIB_IPNET_ROW2_ReachabilityTime_e__Union
-  last_reachable : UInt32
-  last_unreachable : UInt32
-end
-union DNS_SERVER_PROPERTY_TYPES
-  doh_settings : DNS_DOH_SERVER_SETTINGS*
-end
-union MIB_IPFORWARDROW_Anonymous1_e__Union
-  dw_forward_type : UInt32
-  forward_type : MIB_IPFORWARD_TYPE
-end
-union MIB_IPFORWARDROW_Anonymous2_e__Union
-  dw_forward_proto : UInt32
-  forward_proto : NL_ROUTE_PROTOCOL
-end
-union MIB_IPNETROW_LH_Anonymous_e__Union
-  dw_type : UInt32
-  type : MIB_IPNET_TYPE
-end
-union MIB_IPSTATS_LH_Anonymous_e__Union
-  dw_forwarding : UInt32
-  forwarding : MIB_IPSTATS_FORWARDING
-end
-union MIB_TCPROW_LH_Anonymous_e__Union
-  dw_state : UInt32
-  state : MIB_TCP_STATE
-end
-union MIB_TCPSTATS_LH_Anonymous_e__Union
-  dw_rto_algorithm : UInt32
-  rto_algorithm : TCP_RTO_ALGORITHM
-end
-union MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union
-  anonymous : MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct
-  dw_flags : Int32
-end
-union MIB_UDPROW2_Anonymous_e__Union
-  anonymous : MIB_UDPROW2_Anonymous_e__Union_Anonymous_e__Struct
-  dw_flags : Int32
-end
-union MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union
-  anonymous : MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct
-  dw_flags : Int32
-end
-union MIB_UDP6ROW2_Anonymous_e__Union
-  anonymous : MIB_UDP6ROW2_Anonymous_e__Union_Anonymous_e__Struct
-  dw_flags : Int32
-end
-union MIB_OPAQUE_INFO_Anonymous_e__Union
-  ull_align : UInt64
-  rgby_data : UInt8[0]*
-end
-union IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_PREFIX_XP_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_PREFIX_XP_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union
-  flags : UInt32
-  anonymous : IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union
-  alignment : UInt64
-  anonymous : IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union_Anonymous_e__Struct
-end
+  union NET_LUID_LH
+    value : UInt64
+    info : NET_LUID_LH_Info_e__Struct
+  end
+  union MIB_IPPATH_ROW_Anonymous_e__Union
+    last_reachable : UInt32
+    last_unreachable : UInt32
+  end
+  union MIB_IPNET_ROW2_Anonymous_e__Union
+    anonymous : MIB_IPNET_ROW2_Anonymous_e__Union_Anonymous_e__Struct
+    flags : UInt8
+  end
+  union MIB_IPNET_ROW2_ReachabilityTime_e__Union
+    last_reachable : UInt32
+    last_unreachable : UInt32
+  end
+  union DNS_SERVER_PROPERTY_TYPES
+    doh_settings : DNS_DOH_SERVER_SETTINGS*
+  end
+  union MIB_IPFORWARDROW_Anonymous1_e__Union
+    dw_forward_type : UInt32
+    forward_type : MIB_IPFORWARD_TYPE
+  end
+  union MIB_IPFORWARDROW_Anonymous2_e__Union
+    dw_forward_proto : UInt32
+    forward_proto : NL_ROUTE_PROTOCOL
+  end
+  union MIB_IPNETROW_LH_Anonymous_e__Union
+    dw_type : UInt32
+    type : MIB_IPNET_TYPE
+  end
+  union MIB_IPSTATS_LH_Anonymous_e__Union
+    dw_forwarding : UInt32
+    forwarding : MIB_IPSTATS_FORWARDING
+  end
+  union MIB_TCPROW_LH_Anonymous_e__Union
+    dw_state : UInt32
+    state : MIB_TCP_STATE
+  end
+  union MIB_TCPSTATS_LH_Anonymous_e__Union
+    dw_rto_algorithm : UInt32
+    rto_algorithm : TCP_RTO_ALGORITHM
+  end
+  union MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union
+    anonymous : MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct
+    dw_flags : Int32
+  end
+  union MIB_UDPROW2_Anonymous_e__Union
+    anonymous : MIB_UDPROW2_Anonymous_e__Union_Anonymous_e__Struct
+    dw_flags : Int32
+  end
+  union MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union
+    anonymous : MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct
+    dw_flags : Int32
+  end
+  union MIB_UDP6ROW2_Anonymous_e__Union
+    anonymous : MIB_UDP6ROW2_Anonymous_e__Union_Anonymous_e__Struct
+    dw_flags : Int32
+  end
+  union MIB_OPAQUE_INFO_Anonymous_e__Union
+    ull_align : UInt64
+    rgby_data : UInt8[0]*
+  end
+  union IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_PREFIX_XP_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_PREFIX_XP_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union
+    flags : UInt32
+    anonymous : IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union
+    alignment : UInt64
+    anonymous : IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union_Anonymous_e__Struct
+  end
 
   struct Ip_option_information
     ttl : UInt8

@@ -437,11 +437,11 @@ lib LibWin32
     VK_OEM_CLEAR = 254
   end
 
-union INPUT_Anonymous_e__Union
-  mi : MOUSEINPUT
-  ki : KEYBDINPUT
-  hi : HARDWAREINPUT
-end
+  union INPUT_Anonymous_e__Union
+    mi : MOUSEINPUT
+    ki : KEYBDINPUT
+    hi : HARDWAREINPUT
+  end
 
   struct VK_TO_BIT
     vk : UInt8

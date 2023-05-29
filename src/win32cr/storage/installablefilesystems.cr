@@ -154,18 +154,18 @@ lib LibWin32
     InstanceAggregateStandardInformation = 3
   end
 
-union FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union
-  mini_filter : FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_MiniFilter_e__Struct
-  legacy_filter : FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_LegacyFilter_e__Struct
-end
-union FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union
-  mini_filter : FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct
-  legacy_filter : FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct
-end
-union INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union
-  mini_filter : INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct
-  legacy_filter : INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct
-end
+  union FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union
+    mini_filter : FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_MiniFilter_e__Struct
+    legacy_filter : FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union_LegacyFilter_e__Struct
+  end
+  union FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union
+    mini_filter : FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct
+    legacy_filter : FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct
+  end
+  union INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union
+    mini_filter : INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_MiniFilter_e__Struct
+    legacy_filter : INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union_LegacyFilter_e__Struct
+  end
 
   struct FILTER_FULL_INFORMATION
     next_entry_offset : UInt32

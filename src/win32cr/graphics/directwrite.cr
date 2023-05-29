@@ -803,14 +803,14 @@ lib LibWin32
     DWRITE_FONT_SOURCE_TYPE_REMOTE_FONT_PROVIDER = 4
   end
 
-union DWRITE_PANOSE
-  values : UInt8[10]*
-  family_kind : UInt8
-  text : DWRITE_PANOSE_text_e__Struct
-  script : DWRITE_PANOSE_script_e__Struct
-  decorative : DWRITE_PANOSE_decorative_e__Struct
-  symbol : DWRITE_PANOSE_symbol_e__Struct
-end
+  union DWRITE_PANOSE
+    values : UInt8[10]*
+    family_kind : UInt8
+    text : DWRITE_PANOSE_text_e__Struct
+    script : DWRITE_PANOSE_script_e__Struct
+    decorative : DWRITE_PANOSE_decorative_e__Struct
+    symbol : DWRITE_PANOSE_symbol_e__Struct
+  end
 
   struct DWRITE_COLOR_F
     r : Float32

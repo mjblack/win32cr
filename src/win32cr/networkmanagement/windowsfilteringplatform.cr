@@ -1287,549 +1287,549 @@ lib LibWin32
     FallbackIndexMax = 1
   end
 
-union FWP_VALUE0_Anonymous_e__Union
-  uint8 : UInt8
-  uint16 : UInt16
-  uint32 : UInt32
-  uint64 : UInt64*
-  int8 : Int8
-  int16 : Int16
-  int32 : Int32
-  int64 : Int64*
-  float32 : Float32
-  double64 : Float64*
-  byte_array16 : FWP_BYTE_ARRAY16*
-  byte_blob : FWP_BYTE_BLOB*
-  sid : SID*
-  sd : FWP_BYTE_BLOB*
-  token_information : FWP_TOKEN_INFORMATION*
-  token_access_information : FWP_BYTE_BLOB*
-  unicode_string : LibC::LPWSTR
-  byte_array6 : FWP_BYTE_ARRAY6*
-end
-union FWP_CONDITION_VALUE0_Anonymous_e__Union
-  uint8 : UInt8
-  uint16 : UInt16
-  uint32 : UInt32
-  uint64 : UInt64*
-  int8 : Int8
-  int16 : Int16
-  int32 : Int32
-  int64 : Int64*
-  float32 : Float32
-  double64 : Float64*
-  byte_array16 : FWP_BYTE_ARRAY16*
-  byte_blob : FWP_BYTE_BLOB*
-  sid : SID*
-  sd : FWP_BYTE_BLOB*
-  token_information : FWP_TOKEN_INFORMATION*
-  token_access_information : FWP_BYTE_BLOB*
-  unicode_string : LibC::LPWSTR
-  byte_array6 : FWP_BYTE_ARRAY6*
-  v4_addr_mask : FWP_V4_ADDR_AND_MASK*
-  v6_addr_mask : FWP_V6_ADDR_AND_MASK*
-  range_value : FWP_RANGE0*
-end
-union IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union
-  anonymous : IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union_Anonymous_e__Struct
-  outbound_enterprise_store_config : IKEEXT_CERT_ROOT_CONFIG0*
-  outbound_trusted_root_store_config : IKEEXT_CERT_ROOT_CONFIG0*
-end
-union IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union
-  anonymous : IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union_Anonymous_e__Struct
-  inbound_enterprise_store_config : IKEEXT_CERT_ROOT_CONFIG0*
-  inbound_trusted_root_store_config : IKEEXT_CERT_ROOT_CONFIG0*
-end
-union IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union
-  anonymous : IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union_Anonymous_e__Struct
-  outbound_enterprise_store_config : IKEEXT_CERT_ROOT_CONFIG0*
-  outbound_trusted_root_store_config : IKEEXT_CERT_ROOT_CONFIG0*
-end
-union IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union
-  anonymous : IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union_Anonymous_e__Struct
-  inbound_enterprise_store_config : IKEEXT_CERT_ROOT_CONFIG0*
-  inbound_trusted_root_store_config : IKEEXT_CERT_ROOT_CONFIG0*
-end
-union IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union
-  anonymous1 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous1_e__Struct
-  anonymous2 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous2_e__Struct
-  anonymous3 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous3_e__Struct
-end
-union IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union
-  anonymous1 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous1_e__Struct
-  anonymous2 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous2_e__Struct
-  anonymous3 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous3_e__Struct
-end
-union IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union
-  preshared_key_authentication : IKEEXT_PRESHARED_KEY_AUTHENTICATION0
-  certificate_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION0
-  kerberos_authentication : IKEEXT_KERBEROS_AUTHENTICATION0
-  ntlm_v2_authentication : IKEEXT_NTLM_V2_AUTHENTICATION0
-  ssl_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION0
-  cga_authentication : IKEEXT_IPV6_CGA_AUTHENTICATION0
-end
-union IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union
-  preshared_key_authentication : IKEEXT_PRESHARED_KEY_AUTHENTICATION1
-  certificate_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION1
-  kerberos_authentication : IKEEXT_KERBEROS_AUTHENTICATION0
-  ntlm_v2_authentication : IKEEXT_NTLM_V2_AUTHENTICATION0
-  ssl_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION1
-  cga_authentication : IKEEXT_IPV6_CGA_AUTHENTICATION0
-  eap_authentication : IKEEXT_EAP_AUTHENTICATION0
-end
-union IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union
-  preshared_key_authentication : IKEEXT_PRESHARED_KEY_AUTHENTICATION1
-  certificate_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION2
-  kerberos_authentication : IKEEXT_KERBEROS_AUTHENTICATION1
-  reserved_authentication : IKEEXT_RESERVED_AUTHENTICATION0
-  ntlm_v2_authentication : IKEEXT_NTLM_V2_AUTHENTICATION0
-  ssl_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION2
-  cga_authentication : IKEEXT_IPV6_CGA_AUTHENTICATION0
-  eap_authentication : IKEEXT_EAP_AUTHENTICATION0
-end
-union IKEEXT_TRAFFIC0_Anonymous2_e__Union
-  remote_v4_address : UInt32
-  remote_v6_address : UInt8[16]*
-end
-union IKEEXT_TRAFFIC0_Anonymous1_e__Union
-  local_v4_address : UInt32
-  local_v6_address : UInt8[16]*
-end
-union IKEEXT_CREDENTIAL0_Anonymous_e__Union
-  preshared_key : IKEEXT_PRESHARED_KEY_AUTHENTICATION0*
-  certificate : IKEEXT_CERTIFICATE_CREDENTIAL0*
-  name : IKEEXT_NAME_CREDENTIAL0*
-end
-union IKEEXT_SA_DETAILS0_Anonymous_e__Union
-  v4_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
-end
-union IKEEXT_CREDENTIAL1_Anonymous_e__Union
-  preshared_key : IKEEXT_PRESHARED_KEY_AUTHENTICATION1*
-  certificate : IKEEXT_CERTIFICATE_CREDENTIAL1*
-  name : IKEEXT_NAME_CREDENTIAL0*
-end
-union IKEEXT_SA_DETAILS1_Anonymous_e__Union
-  v4_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
-end
-union IKEEXT_CREDENTIAL2_Anonymous_e__Union
-  preshared_key : IKEEXT_PRESHARED_KEY_AUTHENTICATION1*
-  certificate : IKEEXT_CERTIFICATE_CREDENTIAL1*
-  name : IKEEXT_NAME_CREDENTIAL0*
-end
-union IKEEXT_SA_DETAILS2_Anonymous_e__Union
-  v4_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
-end
-union IPSEC_SA_TRANSFORM0_Anonymous_e__Union
-  ah_transform : IPSEC_AUTH_TRANSFORM0*
-  esp_auth_transform : IPSEC_AUTH_TRANSFORM0*
-  esp_cipher_transform : IPSEC_CIPHER_TRANSFORM0*
-  esp_auth_and_cipher_transform : IPSEC_AUTH_AND_CIPHER_TRANSFORM0*
-  esp_auth_fw_transform : IPSEC_AUTH_TRANSFORM0*
-end
-union IPSEC_TRAFFIC_SELECTOR0__Anonymous1_e__Union
-  start_v4_address : UInt32
-  start_v6_address : UInt8[16]*
-end
-union IPSEC_TRAFFIC_SELECTOR0__Anonymous2_e__Union
-  end_v4_address : UInt32
-  end_v6_address : UInt8[16]*
-end
-union IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union
-  local_v4_address : UInt32
-  local_v6_address : UInt8[16]*
-end
-union IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union
-  remote_v4_address : UInt32
-  remote_v6_address : UInt8[16]*
-end
-union IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union
-  v4_address : UInt32
-  v6_address : UInt8[16]*
-end
-union IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union
-  remote_v4_address : UInt32
-  remote_v6_address : UInt8[16]*
-end
-union IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union
-  local_v4_address : UInt32
-  local_v6_address : UInt8[16]*
-end
-union IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union
-  remote_v4_address : UInt32
-  remote_v6_address : UInt8[16]*
-end
-union IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union
-  local_v4_address : UInt32
-  local_v6_address : UInt8[16]*
-end
-union IPSEC_SA0_Anonymous_e__Union
-  ah_information : IPSEC_SA_AUTH_INFORMATION0*
-  esp_auth_information : IPSEC_SA_AUTH_INFORMATION0*
-  esp_cipher_information : IPSEC_SA_CIPHER_INFORMATION0*
-  esp_auth_and_cipher_information : IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0*
-  esp_auth_fw_information : IPSEC_SA_AUTH_INFORMATION0*
-end
-union IPSEC_SA_BUNDLE0_Anonymous_e__Union
-  peer_v4_private_address : UInt32
-end
-union IPSEC_SA_BUNDLE1_Anonymous_e__Union
-  peer_v4_private_address : UInt32
-end
-union IPSEC_TRAFFIC0_Anonymous3_e__Union
-  ipsec_filter_id : UInt64
-  tunnel_policy_id : UInt64
-end
-union IPSEC_TRAFFIC0_Anonymous1_e__Union
-  local_v4_address : UInt32
-  local_v6_address : UInt8[16]*
-end
-union IPSEC_TRAFFIC0_Anonymous2_e__Union
-  remote_v4_address : UInt32
-  remote_v6_address : UInt8[16]*
-end
-union IPSEC_TRAFFIC1_Anonymous2_e__Union
-  remote_v4_address : UInt32
-  remote_v6_address : UInt8[16]*
-end
-union IPSEC_TRAFFIC1_Anonymous3_e__Union
-  ipsec_filter_id : UInt64
-  tunnel_policy_id : UInt64
-end
-union IPSEC_TRAFFIC1_Anonymous1_e__Union
-  local_v4_address : UInt32
-  local_v6_address : UInt8[16]*
-end
-union IPSEC_GETSPI0_Anonymous_e__Union
-  inbound_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
-end
-union IPSEC_GETSPI1_Anonymous_e__Union
-  inbound_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
-end
-union IPSEC_SA_DETAILS0_Anonymous_e__Union
-  udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
-end
-union IPSEC_SA_DETAILS1_Anonymous_e__Union
-  udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
-end
-union FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union
-  keying_policy : IPSEC_KEYING_POLICY0*
-  ike_qm_transport_policy : IPSEC_TRANSPORT_POLICY0*
-  ike_qm_tunnel_policy : IPSEC_TUNNEL_POLICY0*
-  authip_qm_transport_policy : IPSEC_TRANSPORT_POLICY0*
-  authip_qm_tunnel_policy : IPSEC_TUNNEL_POLICY0*
-  ike_mm_policy : IKEEXT_POLICY0*
-  auth_ip_mm_policy : IKEEXT_POLICY0*
-  data_buffer : FWP_BYTE_BLOB*
-  classify_options : FWPM_CLASSIFY_OPTIONS0*
-end
-union FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union
-  keying_policy : IPSEC_KEYING_POLICY0*
-  ike_qm_transport_policy : IPSEC_TRANSPORT_POLICY1*
-  ike_qm_tunnel_policy : IPSEC_TUNNEL_POLICY1*
-  authip_qm_transport_policy : IPSEC_TRANSPORT_POLICY1*
-  authip_qm_tunnel_policy : IPSEC_TUNNEL_POLICY1*
-  ike_mm_policy : IKEEXT_POLICY1*
-  auth_ip_mm_policy : IKEEXT_POLICY1*
-  data_buffer : FWP_BYTE_BLOB*
-  classify_options : FWPM_CLASSIFY_OPTIONS0*
-  ike_v2_qm_tunnel_policy : IPSEC_TUNNEL_POLICY1*
-  ike_v2_mm_policy : IKEEXT_POLICY1*
-  idp_options : IPSEC_DOSP_OPTIONS0*
-end
-union FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union
-  keying_policy : IPSEC_KEYING_POLICY1*
-  ike_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
-  ike_qm_tunnel_policy : IPSEC_TUNNEL_POLICY2*
-  authip_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
-  authip_qm_tunnel_policy : IPSEC_TUNNEL_POLICY2*
-  ike_mm_policy : IKEEXT_POLICY2*
-  auth_ip_mm_policy : IKEEXT_POLICY2*
-  data_buffer : FWP_BYTE_BLOB*
-  classify_options : FWPM_CLASSIFY_OPTIONS0*
-  ike_v2_qm_tunnel_policy : IPSEC_TUNNEL_POLICY2*
-  ike_v2_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
-  ike_v2_mm_policy : IKEEXT_POLICY2*
-  idp_options : IPSEC_DOSP_OPTIONS0*
-end
-union FWPM_PROVIDER_CONTEXT3__Anonymous_e__Union
-  keying_policy : IPSEC_KEYING_POLICY1*
-  ike_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
-  ike_qm_tunnel_policy : IPSEC_TUNNEL_POLICY3_*
-  authip_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
-  authip_qm_tunnel_policy : IPSEC_TUNNEL_POLICY3_*
-  ike_mm_policy : IKEEXT_POLICY2*
-  auth_ip_mm_policy : IKEEXT_POLICY2*
-  data_buffer : FWP_BYTE_BLOB*
-  classify_options : FWPM_CLASSIFY_OPTIONS0*
-  ike_v2_qm_tunnel_policy : IPSEC_TUNNEL_POLICY3_*
-  ike_v2_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
-  ike_v2_mm_policy : IKEEXT_POLICY2*
-  idp_options : IPSEC_DOSP_OPTIONS0*
-end
-union FWPM_ACTION0_Anonymous_e__Union
-  filter_type : Guid
-  callout_key : Guid
-end
-union FWPM_FILTER0_Anonymous_e__Union
-  raw_context : UInt64
-  provider_context_key : Guid
-end
-union FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union
-  local_addr_v4 : UInt32
-  local_addr_v6 : FWP_BYTE_ARRAY16
-end
-union FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union
-  remote_addr_v4 : UInt32
-  remote_addr_v6 : FWP_BYTE_ARRAY16
-end
-union FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union
-  anonymous : FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct
-end
-union FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union
-  anonymous : FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
-end
-union FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union
-  local_addr_v4 : UInt32
-  local_addr_v6 : FWP_BYTE_ARRAY16
-end
-union FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union
-  remote_addr_v4 : UInt32
-  remote_addr_v6 : FWP_BYTE_ARRAY16
-end
-union FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union
-  local_addr_v4 : UInt32
-  local_addr_v6 : FWP_BYTE_ARRAY16
-end
-union FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union
-  remote_addr_v4 : UInt32
-  remote_addr_v6 : FWP_BYTE_ARRAY16
-end
-union FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union
-  local_addr_v4 : UInt32
-  local_addr_v6 : FWP_BYTE_ARRAY16
-end
-union FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union
-  remote_addr_v4 : UInt32
-  remote_addr_v6 : FWP_BYTE_ARRAY16
-end
-union FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union
-  local_sub_net : FWP_CONDITION_VALUE0
-end
-union FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union
-  remote_sub_net : FWP_CONDITION_VALUE0
-end
-union FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous1_e__Union
-  local_sub_net : FWP_CONDITION_VALUE0
-end
-union FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous2_e__Union
-  remote_sub_net : FWP_CONDITION_VALUE0
-end
-union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union
-  public_host_v4_addr : UInt32
-  public_host_v6_addr : UInt8[16]*
-end
-union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union
-  internal_host_v4_addr : UInt32
-  internal_host_v6_addr : UInt8[16]*
-end
-union FWPM_NET_EVENT0_Anonymous_e__Union
-  ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE0*
-  ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
-  ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE0*
-  classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP0*
-  ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
-  idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
-end
-union FWPM_NET_EVENT1_Anonymous_e__Union
-  ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
-  ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
-  ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
-  classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP1*
-  ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
-  idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
-end
-union FWPM_NET_EVENT2_Anonymous_e__Union
-  ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
-  ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
-  ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
-  classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP2*
-  ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
-  idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
-  classify_allow : FWPM_NET_EVENT_CLASSIFY_ALLOW0*
-  capability_drop : FWPM_NET_EVENT_CAPABILITY_DROP0*
-  capability_allow : FWPM_NET_EVENT_CAPABILITY_ALLOW0*
-  classify_drop_mac : FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
-end
-union FWPM_NET_EVENT3_Anonymous_e__Union
-  ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
-  ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
-  ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
-  classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP2*
-  ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
-  idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
-  classify_allow : FWPM_NET_EVENT_CLASSIFY_ALLOW0*
-  capability_drop : FWPM_NET_EVENT_CAPABILITY_DROP0*
-  capability_allow : FWPM_NET_EVENT_CAPABILITY_ALLOW0*
-  classify_drop_mac : FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
-end
-union FWPM_NET_EVENT4__Anonymous_e__Union
-  ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*
-  ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*
-  ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
-  classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP2*
-  ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
-  idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
-  classify_allow : FWPM_NET_EVENT_CLASSIFY_ALLOW0*
-  capability_drop : FWPM_NET_EVENT_CAPABILITY_DROP0*
-  capability_allow : FWPM_NET_EVENT_CAPABILITY_ALLOW0*
-  classify_drop_mac : FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
-end
-union FWPM_NET_EVENT5__Anonymous_e__Union
-  ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*
-  ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*
-  ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
-  classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP2*
-  ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
-  idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
-  classify_allow : FWPM_NET_EVENT_CLASSIFY_ALLOW0*
-  capability_drop : FWPM_NET_EVENT_CAPABILITY_DROP0*
-  capability_allow : FWPM_NET_EVENT_CAPABILITY_ALLOW0*
-  classify_drop_mac : FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
-  lpm_packet_arrival : FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0_*
-end
-union FWPM_CONNECTION0_Anonymous1_e__Union
-  local_v4_address : UInt32
-  local_v6_address : UInt8[16]*
-end
-union FWPM_CONNECTION0_Anonymous2_e__Union
-  remote_v4_address : UInt32
-  remote_v6_address : UInt8[16]*
-end
-union FWPM_VSWITCH_EVENT0_Anonymous_e__Union
-  position_info : FWPM_VSWITCH_EVENT0_Anonymous_e__Union_positionInfo_e__Struct
-  reorder_info : FWPM_VSWITCH_EVENT0_Anonymous_e__Union_reorderInfo_e__Struct
-end
-union DL_OUI
-  byte : UInt8[3]*
-  anonymous : DL_OUI_Anonymous_e__Struct
-end
-union DL_EI48
-  byte : UInt8[3]*
-end
-union DL_EUI48
-  byte : UInt8[6]*
-  anonymous : DL_EUI48_Anonymous_e__Struct
-end
-union DL_EI64
-  byte : UInt8[5]*
-end
-union DL_EUI64
-  byte : UInt8[8]*
-  value : UInt64
-  anonymous : DL_EUI64_Anonymous_e__Struct
-end
-union DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union
-  ei64 : DL_EI64
-  anonymous : DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
-end
-union ETHERNET_HEADER_Anonymous_e__Union
-  type : UInt16
-  length : UInt16
-end
-union VLAN_TAG_Anonymous_e__Union
-  tag : UInt16
-  anonymous : VLAN_TAG_Anonymous_e__Union_Anonymous_e__Struct
-end
-union ICMP_MESSAGE_Data_e__Union
-  data32 : UInt32[0]*
-  data16 : UInt16[2]*
-  data8 : UInt8[4]*
-end
-union IPV4_HEADER_Anonymous3_e__Union
-  flags_and_offset : UInt16
-  anonymous : IPV4_HEADER_Anonymous3_e__Union_Anonymous_e__Struct
-end
-union IPV4_HEADER_Anonymous2_e__Union
-  type_of_service_and_ecn_field : UInt8
-  anonymous : IPV4_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union IPV4_HEADER_Anonymous1_e__Union
-  version_and_header_length : UInt8
-  anonymous : IPV4_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union IPV4_OPTION_HEADER_Anonymous_e__Union
-  option_type : UInt8
-  anonymous : IPV4_OPTION_HEADER_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IPV4_TIMESTAMP_OPTION_Anonymous_e__Union
-  flags_overflow : UInt8
-  anonymous : IPV4_TIMESTAMP_OPTION_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IGMP_HEADER_Anonymous1_e__Union
-  anonymous : IGMP_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-  version_type : UInt8
-end
-union IGMP_HEADER_Anonymous2_e__Union
-  reserved : UInt8
-  max_resp_time : UInt8
-  code : UInt8
-end
-union IGMPV3_QUERY_HEADER_Anonymous2_e__Union
-  queriers_query_interface_code : UInt8
-  anonymous : IGMPV3_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union IGMPV3_QUERY_HEADER_Anonymous1_e__Union
-  max_resp_code : UInt8
-  anonymous : IGMPV3_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union IPV6_HEADER_Anonymous_e__Union
-  version_class_flow : UInt32
-  anonymous : IPV6_HEADER_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IPV6_FRAGMENT_HEADER_Anonymous_e__Union
-  anonymous : IPV6_FRAGMENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct
-  offset_and_flags : UInt16
-end
-union IPV6_ROUTER_ADVERTISEMENT_FLAGS
-  anonymous : IPV6_ROUTER_ADVERTISEMENT_FLAGS_Anonymous_e__Struct
-  value : UInt8
-end
-union IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS
-  anonymous : IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS_Anonymous_e__Struct
-  value : UInt32
-end
-union Nd_opt_prefix_info_Anonymous2_e__Union
-  nd_opt_pi_reserved2 : UInt32
-  anonymous : Nd_opt_prefix_info_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union Nd_opt_prefix_info_Anonymous1_e__Union
-  nd_opt_pi_flags_reserved : UInt8
-  flags : Nd_opt_prefix_info_Anonymous1_e__Union_Flags_e__Struct
-end
-union Nd_opt_route_info_Anonymous_e__Union
-  nd_opt_ri_flags_reserved : UInt8
-  flags : Nd_opt_route_info_Anonymous_e__Union_Flags_e__Struct
-end
-union MLDV2_QUERY_HEADER_Anonymous2_e__Union
-  queriers_query_interface_code : UInt8
-  anonymous : MLDV2_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union MLDV2_QUERY_HEADER_Anonymous1_e__Union
-  max_resp_code : UInt16
-  anonymous : MLDV2_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union DL_TEREDO_ADDRESS_Anonymous_e__Union
-  eui64 : DL_EUI64
-  anonymous : DL_TEREDO_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct
-end
-union DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union
-  eui64 : DL_EUI64
-  anonymous : DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union_Anonymous_e__Struct
-end
-union NPI_MODULEID_Anonymous_e__Union
-  guid : Guid
-  if_luid : LUID
-end
+  union FWP_VALUE0_Anonymous_e__Union
+    uint8 : UInt8
+    uint16 : UInt16
+    uint32 : UInt32
+    uint64 : UInt64*
+    int8 : Int8
+    int16 : Int16
+    int32 : Int32
+    int64 : Int64*
+    float32 : Float32
+    double64 : Float64*
+    byte_array16 : FWP_BYTE_ARRAY16*
+    byte_blob : FWP_BYTE_BLOB*
+    sid : SID*
+    sd : FWP_BYTE_BLOB*
+    token_information : FWP_TOKEN_INFORMATION*
+    token_access_information : FWP_BYTE_BLOB*
+    unicode_string : LibC::LPWSTR
+    byte_array6 : FWP_BYTE_ARRAY6*
+  end
+  union FWP_CONDITION_VALUE0_Anonymous_e__Union
+    uint8 : UInt8
+    uint16 : UInt16
+    uint32 : UInt32
+    uint64 : UInt64*
+    int8 : Int8
+    int16 : Int16
+    int32 : Int32
+    int64 : Int64*
+    float32 : Float32
+    double64 : Float64*
+    byte_array16 : FWP_BYTE_ARRAY16*
+    byte_blob : FWP_BYTE_BLOB*
+    sid : SID*
+    sd : FWP_BYTE_BLOB*
+    token_information : FWP_TOKEN_INFORMATION*
+    token_access_information : FWP_BYTE_BLOB*
+    unicode_string : LibC::LPWSTR
+    byte_array6 : FWP_BYTE_ARRAY6*
+    v4_addr_mask : FWP_V4_ADDR_AND_MASK*
+    v6_addr_mask : FWP_V6_ADDR_AND_MASK*
+    range_value : FWP_RANGE0*
+  end
+  union IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union
+    anonymous : IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous2_e__Union_Anonymous_e__Struct
+    outbound_enterprise_store_config : IKEEXT_CERT_ROOT_CONFIG0*
+    outbound_trusted_root_store_config : IKEEXT_CERT_ROOT_CONFIG0*
+  end
+  union IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union
+    anonymous : IKEEXT_CERTIFICATE_AUTHENTICATION0_Anonymous1_e__Union_Anonymous_e__Struct
+    inbound_enterprise_store_config : IKEEXT_CERT_ROOT_CONFIG0*
+    inbound_trusted_root_store_config : IKEEXT_CERT_ROOT_CONFIG0*
+  end
+  union IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union
+    anonymous : IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous2_e__Union_Anonymous_e__Struct
+    outbound_enterprise_store_config : IKEEXT_CERT_ROOT_CONFIG0*
+    outbound_trusted_root_store_config : IKEEXT_CERT_ROOT_CONFIG0*
+  end
+  union IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union
+    anonymous : IKEEXT_CERTIFICATE_AUTHENTICATION1_Anonymous1_e__Union_Anonymous_e__Struct
+    inbound_enterprise_store_config : IKEEXT_CERT_ROOT_CONFIG0*
+    inbound_trusted_root_store_config : IKEEXT_CERT_ROOT_CONFIG0*
+  end
+  union IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union
+    anonymous1 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous1_e__Struct
+    anonymous2 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous2_e__Struct
+    anonymous3 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous2_e__Union_Anonymous3_e__Struct
+  end
+  union IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union
+    anonymous1 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous1_e__Struct
+    anonymous2 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous2_e__Struct
+    anonymous3 : IKEEXT_CERTIFICATE_AUTHENTICATION2_Anonymous1_e__Union_Anonymous3_e__Struct
+  end
+  union IKEEXT_AUTHENTICATION_METHOD0_Anonymous_e__Union
+    preshared_key_authentication : IKEEXT_PRESHARED_KEY_AUTHENTICATION0
+    certificate_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION0
+    kerberos_authentication : IKEEXT_KERBEROS_AUTHENTICATION0
+    ntlm_v2_authentication : IKEEXT_NTLM_V2_AUTHENTICATION0
+    ssl_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION0
+    cga_authentication : IKEEXT_IPV6_CGA_AUTHENTICATION0
+  end
+  union IKEEXT_AUTHENTICATION_METHOD1_Anonymous_e__Union
+    preshared_key_authentication : IKEEXT_PRESHARED_KEY_AUTHENTICATION1
+    certificate_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION1
+    kerberos_authentication : IKEEXT_KERBEROS_AUTHENTICATION0
+    ntlm_v2_authentication : IKEEXT_NTLM_V2_AUTHENTICATION0
+    ssl_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION1
+    cga_authentication : IKEEXT_IPV6_CGA_AUTHENTICATION0
+    eap_authentication : IKEEXT_EAP_AUTHENTICATION0
+  end
+  union IKEEXT_AUTHENTICATION_METHOD2_Anonymous_e__Union
+    preshared_key_authentication : IKEEXT_PRESHARED_KEY_AUTHENTICATION1
+    certificate_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION2
+    kerberos_authentication : IKEEXT_KERBEROS_AUTHENTICATION1
+    reserved_authentication : IKEEXT_RESERVED_AUTHENTICATION0
+    ntlm_v2_authentication : IKEEXT_NTLM_V2_AUTHENTICATION0
+    ssl_authentication : IKEEXT_CERTIFICATE_AUTHENTICATION2
+    cga_authentication : IKEEXT_IPV6_CGA_AUTHENTICATION0
+    eap_authentication : IKEEXT_EAP_AUTHENTICATION0
+  end
+  union IKEEXT_TRAFFIC0_Anonymous2_e__Union
+    remote_v4_address : UInt32
+    remote_v6_address : UInt8[16]*
+  end
+  union IKEEXT_TRAFFIC0_Anonymous1_e__Union
+    local_v4_address : UInt32
+    local_v6_address : UInt8[16]*
+  end
+  union IKEEXT_CREDENTIAL0_Anonymous_e__Union
+    preshared_key : IKEEXT_PRESHARED_KEY_AUTHENTICATION0*
+    certificate : IKEEXT_CERTIFICATE_CREDENTIAL0*
+    name : IKEEXT_NAME_CREDENTIAL0*
+  end
+  union IKEEXT_SA_DETAILS0_Anonymous_e__Union
+    v4_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
+  end
+  union IKEEXT_CREDENTIAL1_Anonymous_e__Union
+    preshared_key : IKEEXT_PRESHARED_KEY_AUTHENTICATION1*
+    certificate : IKEEXT_CERTIFICATE_CREDENTIAL1*
+    name : IKEEXT_NAME_CREDENTIAL0*
+  end
+  union IKEEXT_SA_DETAILS1_Anonymous_e__Union
+    v4_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
+  end
+  union IKEEXT_CREDENTIAL2_Anonymous_e__Union
+    preshared_key : IKEEXT_PRESHARED_KEY_AUTHENTICATION1*
+    certificate : IKEEXT_CERTIFICATE_CREDENTIAL1*
+    name : IKEEXT_NAME_CREDENTIAL0*
+  end
+  union IKEEXT_SA_DETAILS2_Anonymous_e__Union
+    v4_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
+  end
+  union IPSEC_SA_TRANSFORM0_Anonymous_e__Union
+    ah_transform : IPSEC_AUTH_TRANSFORM0*
+    esp_auth_transform : IPSEC_AUTH_TRANSFORM0*
+    esp_cipher_transform : IPSEC_CIPHER_TRANSFORM0*
+    esp_auth_and_cipher_transform : IPSEC_AUTH_AND_CIPHER_TRANSFORM0*
+    esp_auth_fw_transform : IPSEC_AUTH_TRANSFORM0*
+  end
+  union IPSEC_TRAFFIC_SELECTOR0__Anonymous1_e__Union
+    start_v4_address : UInt32
+    start_v6_address : UInt8[16]*
+  end
+  union IPSEC_TRAFFIC_SELECTOR0__Anonymous2_e__Union
+    end_v4_address : UInt32
+    end_v6_address : UInt8[16]*
+  end
+  union IPSEC_TUNNEL_ENDPOINTS0_Anonymous1_e__Union
+    local_v4_address : UInt32
+    local_v6_address : UInt8[16]*
+  end
+  union IPSEC_TUNNEL_ENDPOINTS0_Anonymous2_e__Union
+    remote_v4_address : UInt32
+    remote_v6_address : UInt8[16]*
+  end
+  union IPSEC_TUNNEL_ENDPOINT0_Anonymous_e__Union
+    v4_address : UInt32
+    v6_address : UInt8[16]*
+  end
+  union IPSEC_TUNNEL_ENDPOINTS2_Anonymous2_e__Union
+    remote_v4_address : UInt32
+    remote_v6_address : UInt8[16]*
+  end
+  union IPSEC_TUNNEL_ENDPOINTS2_Anonymous1_e__Union
+    local_v4_address : UInt32
+    local_v6_address : UInt8[16]*
+  end
+  union IPSEC_TUNNEL_ENDPOINTS1_Anonymous2_e__Union
+    remote_v4_address : UInt32
+    remote_v6_address : UInt8[16]*
+  end
+  union IPSEC_TUNNEL_ENDPOINTS1_Anonymous1_e__Union
+    local_v4_address : UInt32
+    local_v6_address : UInt8[16]*
+  end
+  union IPSEC_SA0_Anonymous_e__Union
+    ah_information : IPSEC_SA_AUTH_INFORMATION0*
+    esp_auth_information : IPSEC_SA_AUTH_INFORMATION0*
+    esp_cipher_information : IPSEC_SA_CIPHER_INFORMATION0*
+    esp_auth_and_cipher_information : IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0*
+    esp_auth_fw_information : IPSEC_SA_AUTH_INFORMATION0*
+  end
+  union IPSEC_SA_BUNDLE0_Anonymous_e__Union
+    peer_v4_private_address : UInt32
+  end
+  union IPSEC_SA_BUNDLE1_Anonymous_e__Union
+    peer_v4_private_address : UInt32
+  end
+  union IPSEC_TRAFFIC0_Anonymous3_e__Union
+    ipsec_filter_id : UInt64
+    tunnel_policy_id : UInt64
+  end
+  union IPSEC_TRAFFIC0_Anonymous1_e__Union
+    local_v4_address : UInt32
+    local_v6_address : UInt8[16]*
+  end
+  union IPSEC_TRAFFIC0_Anonymous2_e__Union
+    remote_v4_address : UInt32
+    remote_v6_address : UInt8[16]*
+  end
+  union IPSEC_TRAFFIC1_Anonymous2_e__Union
+    remote_v4_address : UInt32
+    remote_v6_address : UInt8[16]*
+  end
+  union IPSEC_TRAFFIC1_Anonymous3_e__Union
+    ipsec_filter_id : UInt64
+    tunnel_policy_id : UInt64
+  end
+  union IPSEC_TRAFFIC1_Anonymous1_e__Union
+    local_v4_address : UInt32
+    local_v6_address : UInt8[16]*
+  end
+  union IPSEC_GETSPI0_Anonymous_e__Union
+    inbound_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
+  end
+  union IPSEC_GETSPI1_Anonymous_e__Union
+    inbound_udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
+  end
+  union IPSEC_SA_DETAILS0_Anonymous_e__Union
+    udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
+  end
+  union IPSEC_SA_DETAILS1_Anonymous_e__Union
+    udp_encapsulation : IPSEC_V4_UDP_ENCAPSULATION0*
+  end
+  union FWPM_PROVIDER_CONTEXT0_Anonymous_e__Union
+    keying_policy : IPSEC_KEYING_POLICY0*
+    ike_qm_transport_policy : IPSEC_TRANSPORT_POLICY0*
+    ike_qm_tunnel_policy : IPSEC_TUNNEL_POLICY0*
+    authip_qm_transport_policy : IPSEC_TRANSPORT_POLICY0*
+    authip_qm_tunnel_policy : IPSEC_TUNNEL_POLICY0*
+    ike_mm_policy : IKEEXT_POLICY0*
+    auth_ip_mm_policy : IKEEXT_POLICY0*
+    data_buffer : FWP_BYTE_BLOB*
+    classify_options : FWPM_CLASSIFY_OPTIONS0*
+  end
+  union FWPM_PROVIDER_CONTEXT1_Anonymous_e__Union
+    keying_policy : IPSEC_KEYING_POLICY0*
+    ike_qm_transport_policy : IPSEC_TRANSPORT_POLICY1*
+    ike_qm_tunnel_policy : IPSEC_TUNNEL_POLICY1*
+    authip_qm_transport_policy : IPSEC_TRANSPORT_POLICY1*
+    authip_qm_tunnel_policy : IPSEC_TUNNEL_POLICY1*
+    ike_mm_policy : IKEEXT_POLICY1*
+    auth_ip_mm_policy : IKEEXT_POLICY1*
+    data_buffer : FWP_BYTE_BLOB*
+    classify_options : FWPM_CLASSIFY_OPTIONS0*
+    ike_v2_qm_tunnel_policy : IPSEC_TUNNEL_POLICY1*
+    ike_v2_mm_policy : IKEEXT_POLICY1*
+    idp_options : IPSEC_DOSP_OPTIONS0*
+  end
+  union FWPM_PROVIDER_CONTEXT2_Anonymous_e__Union
+    keying_policy : IPSEC_KEYING_POLICY1*
+    ike_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
+    ike_qm_tunnel_policy : IPSEC_TUNNEL_POLICY2*
+    authip_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
+    authip_qm_tunnel_policy : IPSEC_TUNNEL_POLICY2*
+    ike_mm_policy : IKEEXT_POLICY2*
+    auth_ip_mm_policy : IKEEXT_POLICY2*
+    data_buffer : FWP_BYTE_BLOB*
+    classify_options : FWPM_CLASSIFY_OPTIONS0*
+    ike_v2_qm_tunnel_policy : IPSEC_TUNNEL_POLICY2*
+    ike_v2_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
+    ike_v2_mm_policy : IKEEXT_POLICY2*
+    idp_options : IPSEC_DOSP_OPTIONS0*
+  end
+  union FWPM_PROVIDER_CONTEXT3__Anonymous_e__Union
+    keying_policy : IPSEC_KEYING_POLICY1*
+    ike_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
+    ike_qm_tunnel_policy : IPSEC_TUNNEL_POLICY3_*
+    authip_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
+    authip_qm_tunnel_policy : IPSEC_TUNNEL_POLICY3_*
+    ike_mm_policy : IKEEXT_POLICY2*
+    auth_ip_mm_policy : IKEEXT_POLICY2*
+    data_buffer : FWP_BYTE_BLOB*
+    classify_options : FWPM_CLASSIFY_OPTIONS0*
+    ike_v2_qm_tunnel_policy : IPSEC_TUNNEL_POLICY3_*
+    ike_v2_qm_transport_policy : IPSEC_TRANSPORT_POLICY2*
+    ike_v2_mm_policy : IKEEXT_POLICY2*
+    idp_options : IPSEC_DOSP_OPTIONS0*
+  end
+  union FWPM_ACTION0_Anonymous_e__Union
+    filter_type : Guid
+    callout_key : Guid
+  end
+  union FWPM_FILTER0_Anonymous_e__Union
+    raw_context : UInt64
+    provider_context_key : Guid
+  end
+  union FWPM_NET_EVENT_HEADER0_Anonymous1_e__Union
+    local_addr_v4 : UInt32
+    local_addr_v6 : FWP_BYTE_ARRAY16
+  end
+  union FWPM_NET_EVENT_HEADER0_Anonymous2_e__Union
+    remote_addr_v4 : UInt32
+    remote_addr_v6 : FWP_BYTE_ARRAY16
+  end
+  union FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union
+    anonymous : FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct
+  end
+  union FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union
+    anonymous : FWPM_NET_EVENT_HEADER1_Anonymous3_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union FWPM_NET_EVENT_HEADER1_Anonymous1_e__Union
+    local_addr_v4 : UInt32
+    local_addr_v6 : FWP_BYTE_ARRAY16
+  end
+  union FWPM_NET_EVENT_HEADER1_Anonymous2_e__Union
+    remote_addr_v4 : UInt32
+    remote_addr_v6 : FWP_BYTE_ARRAY16
+  end
+  union FWPM_NET_EVENT_HEADER2_Anonymous1_e__Union
+    local_addr_v4 : UInt32
+    local_addr_v6 : FWP_BYTE_ARRAY16
+  end
+  union FWPM_NET_EVENT_HEADER2_Anonymous2_e__Union
+    remote_addr_v4 : UInt32
+    remote_addr_v6 : FWP_BYTE_ARRAY16
+  end
+  union FWPM_NET_EVENT_HEADER3_Anonymous1_e__Union
+    local_addr_v4 : UInt32
+    local_addr_v6 : FWP_BYTE_ARRAY16
+  end
+  union FWPM_NET_EVENT_HEADER3_Anonymous2_e__Union
+    remote_addr_v4 : UInt32
+    remote_addr_v6 : FWP_BYTE_ARRAY16
+  end
+  union FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous1_e__Union
+    local_sub_net : FWP_CONDITION_VALUE0
+  end
+  union FWPM_NET_EVENT_IKEEXT_QM_FAILURE0_Anonymous2_e__Union
+    remote_sub_net : FWP_CONDITION_VALUE0
+  end
+  union FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous1_e__Union
+    local_sub_net : FWP_CONDITION_VALUE0
+  end
+  union FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous2_e__Union
+    remote_sub_net : FWP_CONDITION_VALUE0
+  end
+  union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous1_e__Union
+    public_host_v4_addr : UInt32
+    public_host_v6_addr : UInt8[16]*
+  end
+  union FWPM_NET_EVENT_IPSEC_DOSP_DROP0_Anonymous2_e__Union
+    internal_host_v4_addr : UInt32
+    internal_host_v6_addr : UInt8[16]*
+  end
+  union FWPM_NET_EVENT0_Anonymous_e__Union
+    ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE0*
+    ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
+    ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE0*
+    classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP0*
+    ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+  end
+  union FWPM_NET_EVENT1_Anonymous_e__Union
+    ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
+    ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
+    ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP1*
+    ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+  end
+  union FWPM_NET_EVENT2_Anonymous_e__Union
+    ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
+    ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
+    ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP2*
+    ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    classify_allow : FWPM_NET_EVENT_CLASSIFY_ALLOW0*
+    capability_drop : FWPM_NET_EVENT_CAPABILITY_DROP0*
+    capability_allow : FWPM_NET_EVENT_CAPABILITY_ALLOW0*
+    classify_drop_mac : FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+  end
+  union FWPM_NET_EVENT3_Anonymous_e__Union
+    ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE1*
+    ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE0*
+    ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP2*
+    ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    classify_allow : FWPM_NET_EVENT_CLASSIFY_ALLOW0*
+    capability_drop : FWPM_NET_EVENT_CAPABILITY_DROP0*
+    capability_allow : FWPM_NET_EVENT_CAPABILITY_ALLOW0*
+    classify_drop_mac : FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+  end
+  union FWPM_NET_EVENT4__Anonymous_e__Union
+    ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*
+    ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*
+    ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP2*
+    ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    classify_allow : FWPM_NET_EVENT_CLASSIFY_ALLOW0*
+    capability_drop : FWPM_NET_EVENT_CAPABILITY_DROP0*
+    capability_allow : FWPM_NET_EVENT_CAPABILITY_ALLOW0*
+    classify_drop_mac : FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+  end
+  union FWPM_NET_EVENT5__Anonymous_e__Union
+    ike_mm_failure : FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_*
+    ike_qm_failure : FWPM_NET_EVENT_IKEEXT_QM_FAILURE1_*
+    ike_em_failure : FWPM_NET_EVENT_IKEEXT_EM_FAILURE1*
+    classify_drop : FWPM_NET_EVENT_CLASSIFY_DROP2*
+    ipsec_drop : FWPM_NET_EVENT_IPSEC_KERNEL_DROP0*
+    idp_drop : FWPM_NET_EVENT_IPSEC_DOSP_DROP0*
+    classify_allow : FWPM_NET_EVENT_CLASSIFY_ALLOW0*
+    capability_drop : FWPM_NET_EVENT_CAPABILITY_DROP0*
+    capability_allow : FWPM_NET_EVENT_CAPABILITY_ALLOW0*
+    classify_drop_mac : FWPM_NET_EVENT_CLASSIFY_DROP_MAC0*
+    lpm_packet_arrival : FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0_*
+  end
+  union FWPM_CONNECTION0_Anonymous1_e__Union
+    local_v4_address : UInt32
+    local_v6_address : UInt8[16]*
+  end
+  union FWPM_CONNECTION0_Anonymous2_e__Union
+    remote_v4_address : UInt32
+    remote_v6_address : UInt8[16]*
+  end
+  union FWPM_VSWITCH_EVENT0_Anonymous_e__Union
+    position_info : FWPM_VSWITCH_EVENT0_Anonymous_e__Union_positionInfo_e__Struct
+    reorder_info : FWPM_VSWITCH_EVENT0_Anonymous_e__Union_reorderInfo_e__Struct
+  end
+  union DL_OUI
+    byte : UInt8[3]*
+    anonymous : DL_OUI_Anonymous_e__Struct
+  end
+  union DL_EI48
+    byte : UInt8[3]*
+  end
+  union DL_EUI48
+    byte : UInt8[6]*
+    anonymous : DL_EUI48_Anonymous_e__Struct
+  end
+  union DL_EI64
+    byte : UInt8[5]*
+  end
+  union DL_EUI64
+    byte : UInt8[8]*
+    value : UInt64
+    anonymous : DL_EUI64_Anonymous_e__Struct
+  end
+  union DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union
+    ei64 : DL_EI64
+    anonymous : DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union ETHERNET_HEADER_Anonymous_e__Union
+    type : UInt16
+    length : UInt16
+  end
+  union VLAN_TAG_Anonymous_e__Union
+    tag : UInt16
+    anonymous : VLAN_TAG_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union ICMP_MESSAGE_Data_e__Union
+    data32 : UInt32[0]*
+    data16 : UInt16[2]*
+    data8 : UInt8[4]*
+  end
+  union IPV4_HEADER_Anonymous3_e__Union
+    flags_and_offset : UInt16
+    anonymous : IPV4_HEADER_Anonymous3_e__Union_Anonymous_e__Struct
+  end
+  union IPV4_HEADER_Anonymous2_e__Union
+    type_of_service_and_ecn_field : UInt8
+    anonymous : IPV4_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union IPV4_HEADER_Anonymous1_e__Union
+    version_and_header_length : UInt8
+    anonymous : IPV4_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union IPV4_OPTION_HEADER_Anonymous_e__Union
+    option_type : UInt8
+    anonymous : IPV4_OPTION_HEADER_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IPV4_TIMESTAMP_OPTION_Anonymous_e__Union
+    flags_overflow : UInt8
+    anonymous : IPV4_TIMESTAMP_OPTION_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IGMP_HEADER_Anonymous1_e__Union
+    anonymous : IGMP_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
+    version_type : UInt8
+  end
+  union IGMP_HEADER_Anonymous2_e__Union
+    reserved : UInt8
+    max_resp_time : UInt8
+    code : UInt8
+  end
+  union IGMPV3_QUERY_HEADER_Anonymous2_e__Union
+    queriers_query_interface_code : UInt8
+    anonymous : IGMPV3_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union IGMPV3_QUERY_HEADER_Anonymous1_e__Union
+    max_resp_code : UInt8
+    anonymous : IGMPV3_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union IPV6_HEADER_Anonymous_e__Union
+    version_class_flow : UInt32
+    anonymous : IPV6_HEADER_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IPV6_FRAGMENT_HEADER_Anonymous_e__Union
+    anonymous : IPV6_FRAGMENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct
+    offset_and_flags : UInt16
+  end
+  union IPV6_ROUTER_ADVERTISEMENT_FLAGS
+    anonymous : IPV6_ROUTER_ADVERTISEMENT_FLAGS_Anonymous_e__Struct
+    value : UInt8
+  end
+  union IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS
+    anonymous : IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS_Anonymous_e__Struct
+    value : UInt32
+  end
+  union Nd_opt_prefix_info_Anonymous2_e__Union
+    nd_opt_pi_reserved2 : UInt32
+    anonymous : Nd_opt_prefix_info_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union Nd_opt_prefix_info_Anonymous1_e__Union
+    nd_opt_pi_flags_reserved : UInt8
+    flags : Nd_opt_prefix_info_Anonymous1_e__Union_Flags_e__Struct
+  end
+  union Nd_opt_route_info_Anonymous_e__Union
+    nd_opt_ri_flags_reserved : UInt8
+    flags : Nd_opt_route_info_Anonymous_e__Union_Flags_e__Struct
+  end
+  union MLDV2_QUERY_HEADER_Anonymous2_e__Union
+    queriers_query_interface_code : UInt8
+    anonymous : MLDV2_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union MLDV2_QUERY_HEADER_Anonymous1_e__Union
+    max_resp_code : UInt16
+    anonymous : MLDV2_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union DL_TEREDO_ADDRESS_Anonymous_e__Union
+    eui64 : DL_EUI64
+    anonymous : DL_TEREDO_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union
+    eui64 : DL_EUI64
+    anonymous : DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union NPI_MODULEID_Anonymous_e__Union
+    guid : Guid
+    if_luid : LUID
+  end
 
   struct FWP_BYTE_ARRAY6
     byte_array6 : UInt8[6]*
@@ -3638,9 +3638,9 @@ end
   struct Tcp_opt_sack
     kind : UInt8
     length : UInt8
-    block : Tcp_opt_sacktcp_opt_sack_block[0]*
+    block : Tcp_opt_sack_tcp_opt_sack_block[0]*
   end
-  struct Tcp_opt_sacktcp_opt_sack_block
+  struct Tcp_opt_sack_tcp_opt_sack_block
     left : UInt32
     right : UInt32
   end

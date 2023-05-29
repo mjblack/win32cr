@@ -454,21 +454,21 @@ lib LibWin32
     HttpFeaturemax = -1
   end
 
-union HTTP_DATA_CHUNK_Anonymous_e__Union
-  from_memory : HTTP_DATA_CHUNK_Anonymous_e__Union_FromMemory_e__Struct
-  from_file_handle : HTTP_DATA_CHUNK_Anonymous_e__Union_FromFileHandle_e__Struct
-  from_fragment_cache : HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCache_e__Struct
-  from_fragment_cache_ex : HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCacheEx_e__Struct
-  trailers : HTTP_DATA_CHUNK_Anonymous_e__Union_Trailers_e__Struct
-end
-union HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union
-  http2_window_size_param : HTTP2_WINDOW_SIZE_PARAM
-  http2_settings_limits_param : HTTP2_SETTINGS_LIMITS_PARAM
-  http_performance_param : HTTP_PERFORMANCE_PARAM
-  http_tls_restrictions_param : HTTP_TLS_RESTRICTIONS_PARAM
-  http_error_headers_param : HTTP_ERROR_HEADERS_PARAM
-  http_tls_session_ticket_keys_param : HTTP_TLS_SESSION_TICKET_KEYS_PARAM
-end
+  union HTTP_DATA_CHUNK_Anonymous_e__Union
+    from_memory : HTTP_DATA_CHUNK_Anonymous_e__Union_FromMemory_e__Struct
+    from_file_handle : HTTP_DATA_CHUNK_Anonymous_e__Union_FromFileHandle_e__Struct
+    from_fragment_cache : HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCache_e__Struct
+    from_fragment_cache_ex : HTTP_DATA_CHUNK_Anonymous_e__Union_FromFragmentCacheEx_e__Struct
+    trailers : HTTP_DATA_CHUNK_Anonymous_e__Union_Trailers_e__Struct
+  end
+  union HTTP_SERVICE_CONFIG_SSL_PARAM_EX_Anonymous_e__Union
+    http2_window_size_param : HTTP2_WINDOW_SIZE_PARAM
+    http2_settings_limits_param : HTTP2_SETTINGS_LIMITS_PARAM
+    http_performance_param : HTTP_PERFORMANCE_PARAM
+    http_tls_restrictions_param : HTTP_TLS_RESTRICTIONS_PARAM
+    http_error_headers_param : HTTP_ERROR_HEADERS_PARAM
+    http_tls_session_ticket_keys_param : HTTP_TLS_SESSION_TICKET_KEYS_PARAM
+  end
 
   struct HTTP_PROPERTY_FLAGS
     _bitfield : UInt32

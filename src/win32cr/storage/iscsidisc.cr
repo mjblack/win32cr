@@ -245,17 +245,17 @@ lib LibWin32
     LoginOptions = 7
   end
 
-union NV_SEP_CACHE_PARAMETER_Flags_e__Union
-  cache_flags : NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct
-  cache_flags_set : UInt8
-end
-union STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union
-  info : UInt8[8]*
-  as_ulonglong : UInt64
-end
-union IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union
-  ps_key : IKE_AUTHENTICATION_PRESHARED_KEY
-end
+  union NV_SEP_CACHE_PARAMETER_Flags_e__Union
+    cache_flags : NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct
+    cache_flags_set : UInt8
+  end
+  union STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union
+    info : UInt8[8]*
+    as_ulonglong : UInt64
+  end
+  union IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union
+    ps_key : IKE_AUTHENTICATION_PRESHARED_KEY
+  end
 
   struct SCSI_PASS_THROUGH
     length : UInt16

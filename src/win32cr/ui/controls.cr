@@ -3015,162 +3015,162 @@ lib LibWin32
     POINTER_DEVICE_CURSOR_TYPE_MAX = -1
   end
 
-union PROPSHEETPAGEA_V1_Anonymous1_e__Union
-  psz_template : PSTR
-  p_resource : DLGTEMPLATE*
-end
-union PROPSHEETPAGEA_V1_Anonymous2_e__Union
-  h_icon : HANDLE
-  psz_icon : PSTR
-end
-union PROPSHEETPAGEA_V2_Anonymous1_e__Union
-  psz_template : PSTR
-  p_resource : DLGTEMPLATE*
-end
-union PROPSHEETPAGEA_V2_Anonymous2_e__Union
-  h_icon : HANDLE
-  psz_icon : PSTR
-end
-union PROPSHEETPAGEA_V3_Anonymous1_e__Union
-  psz_template : PSTR
-  p_resource : DLGTEMPLATE*
-end
-union PROPSHEETPAGEA_V3_Anonymous2_e__Union
-  h_icon : HANDLE
-  psz_icon : PSTR
-end
-union PROPSHEETPAGEA_Anonymous3_e__Union
-  hbm_header : HBITMAP
-  pszbm_header : PSTR
-end
-union PROPSHEETPAGEA_Anonymous1_e__Union
-  psz_template : PSTR
-  p_resource : DLGTEMPLATE*
-end
-union PROPSHEETPAGEA_Anonymous2_e__Union
-  h_icon : HANDLE
-  psz_icon : PSTR
-end
-union PROPSHEETPAGEW_V1_Anonymous2_e__Union
-  h_icon : HANDLE
-  psz_icon : LibC::LPWSTR
-end
-union PROPSHEETPAGEW_V1_Anonymous1_e__Union
-  psz_template : LibC::LPWSTR
-  p_resource : DLGTEMPLATE*
-end
-union PROPSHEETPAGEW_V2_Anonymous2_e__Union
-  h_icon : HANDLE
-  psz_icon : LibC::LPWSTR
-end
-union PROPSHEETPAGEW_V2_Anonymous1_e__Union
-  psz_template : LibC::LPWSTR
-  p_resource : DLGTEMPLATE*
-end
-union PROPSHEETPAGEW_V3_Anonymous2_e__Union
-  h_icon : HANDLE
-  psz_icon : LibC::LPWSTR
-end
-union PROPSHEETPAGEW_V3_Anonymous1_e__Union
-  psz_template : LibC::LPWSTR
-  p_resource : DLGTEMPLATE*
-end
-union PROPSHEETPAGEW_Anonymous2_e__Union
-  h_icon : HANDLE
-  psz_icon : LibC::LPWSTR
-end
-union PROPSHEETPAGEW_Anonymous1_e__Union
-  psz_template : LibC::LPWSTR
-  p_resource : DLGTEMPLATE*
-end
-union PROPSHEETPAGEW_Anonymous3_e__Union
-  hbm_header : HBITMAP
-  pszbm_header : LibC::LPWSTR
-end
-union PROPSHEETHEADERA_V1_Anonymous3_e__Union
-  ppsp : PROPSHEETPAGEA*
-  phpage : HPROPSHEETPAGE*
-end
-union PROPSHEETHEADERA_V1_Anonymous1_e__Union
-  h_icon : HANDLE
-  psz_icon : PSTR
-end
-union PROPSHEETHEADERA_V1_Anonymous2_e__Union
-  n_start_page : UInt32
-  p_start_page : PSTR
-end
-union PROPSHEETHEADERA_V2_Anonymous4_e__Union
-  hbm_watermark : HBITMAP
-  pszbm_watermark : PSTR
-end
-union PROPSHEETHEADERA_V2_Anonymous2_e__Union
-  n_start_page : UInt32
-  p_start_page : PSTR
-end
-union PROPSHEETHEADERA_V2_Anonymous3_e__Union
-  ppsp : PROPSHEETPAGEA*
-  phpage : HPROPSHEETPAGE*
-end
-union PROPSHEETHEADERA_V2_Anonymous1_e__Union
-  h_icon : HANDLE
-  psz_icon : PSTR
-end
-union PROPSHEETHEADERA_V2_Anonymous5_e__Union
-  hbm_header : HBITMAP
-  pszbm_header : PSTR
-end
-union PROPSHEETHEADERW_V1_Anonymous3_e__Union
-  ppsp : PROPSHEETPAGEW*
-  phpage : HPROPSHEETPAGE*
-end
-union PROPSHEETHEADERW_V1_Anonymous1_e__Union
-  h_icon : HANDLE
-  psz_icon : LibC::LPWSTR
-end
-union PROPSHEETHEADERW_V1_Anonymous2_e__Union
-  n_start_page : UInt32
-  p_start_page : LibC::LPWSTR
-end
-union PROPSHEETHEADERW_V2_Anonymous4_e__Union
-  hbm_watermark : HBITMAP
-  pszbm_watermark : LibC::LPWSTR
-end
-union PROPSHEETHEADERW_V2_Anonymous2_e__Union
-  n_start_page : UInt32
-  p_start_page : LibC::LPWSTR
-end
-union PROPSHEETHEADERW_V2_Anonymous3_e__Union
-  ppsp : PROPSHEETPAGEW*
-  phpage : HPROPSHEETPAGE*
-end
-union PROPSHEETHEADERW_V2_Anonymous1_e__Union
-  h_icon : HANDLE
-  psz_icon : LibC::LPWSTR
-end
-union PROPSHEETHEADERW_V2_Anonymous5_e__Union
-  hbm_header : HBITMAP
-  pszbm_header : LibC::LPWSTR
-end
-union TVINSERTSTRUCTA_Anonymous_e__Union
-  itemex : TVITEMEXA
-  item : TVITEMA
-end
-union TVINSERTSTRUCTW_Anonymous_e__Union
-  itemex : TVITEMEXW
-  item : TVITEMW
-end
-union TASKDIALOGCONFIG_Anonymous1_e__Union
-  h_main_icon : HANDLE
-  psz_main_icon : LibC::LPWSTR
-end
-union TASKDIALOGCONFIG_Anonymous2_e__Union
-  h_footer_icon : HANDLE
-  psz_footer_icon : LibC::LPWSTR
-end
-union POINTER_TYPE_INFO_Anonymous_e__Union
-  touch_info : POINTER_TOUCH_INFO
-  pen_info : POINTER_PEN_INFO
-end
+  union PROPSHEETPAGEA_V1_Anonymous1_e__Union
+    psz_template : PSTR
+    p_resource : DLGTEMPLATE*
+  end
+  union PROPSHEETPAGEA_V1_Anonymous2_e__Union
+    h_icon : HANDLE
+    psz_icon : PSTR
+  end
+  union PROPSHEETPAGEA_V2_Anonymous1_e__Union
+    psz_template : PSTR
+    p_resource : DLGTEMPLATE*
+  end
+  union PROPSHEETPAGEA_V2_Anonymous2_e__Union
+    h_icon : HANDLE
+    psz_icon : PSTR
+  end
+  union PROPSHEETPAGEA_V3_Anonymous1_e__Union
+    psz_template : PSTR
+    p_resource : DLGTEMPLATE*
+  end
+  union PROPSHEETPAGEA_V3_Anonymous2_e__Union
+    h_icon : HANDLE
+    psz_icon : PSTR
+  end
+  union PROPSHEETPAGEA_Anonymous3_e__Union
+    hbm_header : HBITMAP
+    pszbm_header : PSTR
+  end
+  union PROPSHEETPAGEA_Anonymous1_e__Union
+    psz_template : PSTR
+    p_resource : DLGTEMPLATE*
+  end
+  union PROPSHEETPAGEA_Anonymous2_e__Union
+    h_icon : HANDLE
+    psz_icon : PSTR
+  end
+  union PROPSHEETPAGEW_V1_Anonymous2_e__Union
+    h_icon : HANDLE
+    psz_icon : LibC::LPWSTR
+  end
+  union PROPSHEETPAGEW_V1_Anonymous1_e__Union
+    psz_template : LibC::LPWSTR
+    p_resource : DLGTEMPLATE*
+  end
+  union PROPSHEETPAGEW_V2_Anonymous2_e__Union
+    h_icon : HANDLE
+    psz_icon : LibC::LPWSTR
+  end
+  union PROPSHEETPAGEW_V2_Anonymous1_e__Union
+    psz_template : LibC::LPWSTR
+    p_resource : DLGTEMPLATE*
+  end
+  union PROPSHEETPAGEW_V3_Anonymous2_e__Union
+    h_icon : HANDLE
+    psz_icon : LibC::LPWSTR
+  end
+  union PROPSHEETPAGEW_V3_Anonymous1_e__Union
+    psz_template : LibC::LPWSTR
+    p_resource : DLGTEMPLATE*
+  end
+  union PROPSHEETPAGEW_Anonymous2_e__Union
+    h_icon : HANDLE
+    psz_icon : LibC::LPWSTR
+  end
+  union PROPSHEETPAGEW_Anonymous1_e__Union
+    psz_template : LibC::LPWSTR
+    p_resource : DLGTEMPLATE*
+  end
+  union PROPSHEETPAGEW_Anonymous3_e__Union
+    hbm_header : HBITMAP
+    pszbm_header : LibC::LPWSTR
+  end
+  union PROPSHEETHEADERA_V1_Anonymous3_e__Union
+    ppsp : PROPSHEETPAGEA*
+    phpage : HPROPSHEETPAGE*
+  end
+  union PROPSHEETHEADERA_V1_Anonymous1_e__Union
+    h_icon : HANDLE
+    psz_icon : PSTR
+  end
+  union PROPSHEETHEADERA_V1_Anonymous2_e__Union
+    n_start_page : UInt32
+    p_start_page : PSTR
+  end
+  union PROPSHEETHEADERA_V2_Anonymous4_e__Union
+    hbm_watermark : HBITMAP
+    pszbm_watermark : PSTR
+  end
+  union PROPSHEETHEADERA_V2_Anonymous2_e__Union
+    n_start_page : UInt32
+    p_start_page : PSTR
+  end
+  union PROPSHEETHEADERA_V2_Anonymous3_e__Union
+    ppsp : PROPSHEETPAGEA*
+    phpage : HPROPSHEETPAGE*
+  end
+  union PROPSHEETHEADERA_V2_Anonymous1_e__Union
+    h_icon : HANDLE
+    psz_icon : PSTR
+  end
+  union PROPSHEETHEADERA_V2_Anonymous5_e__Union
+    hbm_header : HBITMAP
+    pszbm_header : PSTR
+  end
+  union PROPSHEETHEADERW_V1_Anonymous3_e__Union
+    ppsp : PROPSHEETPAGEW*
+    phpage : HPROPSHEETPAGE*
+  end
+  union PROPSHEETHEADERW_V1_Anonymous1_e__Union
+    h_icon : HANDLE
+    psz_icon : LibC::LPWSTR
+  end
+  union PROPSHEETHEADERW_V1_Anonymous2_e__Union
+    n_start_page : UInt32
+    p_start_page : LibC::LPWSTR
+  end
+  union PROPSHEETHEADERW_V2_Anonymous4_e__Union
+    hbm_watermark : HBITMAP
+    pszbm_watermark : LibC::LPWSTR
+  end
+  union PROPSHEETHEADERW_V2_Anonymous2_e__Union
+    n_start_page : UInt32
+    p_start_page : LibC::LPWSTR
+  end
+  union PROPSHEETHEADERW_V2_Anonymous3_e__Union
+    ppsp : PROPSHEETPAGEW*
+    phpage : HPROPSHEETPAGE*
+  end
+  union PROPSHEETHEADERW_V2_Anonymous1_e__Union
+    h_icon : HANDLE
+    psz_icon : LibC::LPWSTR
+  end
+  union PROPSHEETHEADERW_V2_Anonymous5_e__Union
+    hbm_header : HBITMAP
+    pszbm_header : LibC::LPWSTR
+  end
+  union TVINSERTSTRUCTA_Anonymous_e__Union
+    itemex : TVITEMEXA
+    item : TVITEMA
+  end
+  union TVINSERTSTRUCTW_Anonymous_e__Union
+    itemex : TVITEMEXW
+    item : TVITEMW
+  end
+  union TASKDIALOGCONFIG_Anonymous1_e__Union
+    h_main_icon : HANDLE
+    psz_main_icon : LibC::LPWSTR
+  end
+  union TASKDIALOGCONFIG_Anonymous2_e__Union
+    h_footer_icon : HANDLE
+    psz_footer_icon : LibC::LPWSTR
+  end
+  union POINTER_TYPE_INFO_Anonymous_e__Union
+    touch_info : POINTER_TOUCH_INFO
+    pen_info : POINTER_PEN_INFO
+  end
 
   struct PROPSHEETPAGEA_V1
     dw_size : UInt32

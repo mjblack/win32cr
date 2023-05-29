@@ -2787,122 +2787,122 @@ lib LibWin32
     D3DX11_FFT_CREATE_FLAG_NO_PRECOMPUTE_BUFFERS = 1
   end
 
-union D3D11_BUFFER_SRV_Anonymous1_e__Union
-  first_element : UInt32
-  element_offset : UInt32
-end
-union D3D11_BUFFER_SRV_Anonymous2_e__Union
-  num_elements : UInt32
-  element_width : UInt32
-end
-union D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
-  buffer : D3D11_BUFFER_SRV
-  texture1_d : D3D11_TEX1D_SRV
-  texture1_d_array : D3D11_TEX1D_ARRAY_SRV
-  texture2_d : D3D11_TEX2D_SRV
-  texture2_d_array : D3D11_TEX2D_ARRAY_SRV
-  texture2_dms : D3D11_TEX2DMS_SRV
-  texture2_dms_array : D3D11_TEX2DMS_ARRAY_SRV
-  texture3_d : D3D11_TEX3D_SRV
-  texture_cube : D3D11_TEXCUBE_SRV
-  texture_cube_array : D3D11_TEXCUBE_ARRAY_SRV
-  buffer_ex : D3D11_BUFFEREX_SRV
-end
-union D3D11_BUFFER_RTV_Anonymous2_e__Union
-  num_elements : UInt32
-  element_width : UInt32
-end
-union D3D11_BUFFER_RTV_Anonymous1_e__Union
-  first_element : UInt32
-  element_offset : UInt32
-end
-union D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
-  buffer : D3D11_BUFFER_RTV
-  texture1_d : D3D11_TEX1D_RTV
-  texture1_d_array : D3D11_TEX1D_ARRAY_RTV
-  texture2_d : D3D11_TEX2D_RTV
-  texture2_d_array : D3D11_TEX2D_ARRAY_RTV
-  texture2_dms : D3D11_TEX2DMS_RTV
-  texture2_dms_array : D3D11_TEX2DMS_ARRAY_RTV
-  texture3_d : D3D11_TEX3D_RTV
-end
-union D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
-  texture1_d : D3D11_TEX1D_DSV
-  texture1_d_array : D3D11_TEX1D_ARRAY_DSV
-  texture2_d : D3D11_TEX2D_DSV
-  texture2_d_array : D3D11_TEX2D_ARRAY_DSV
-  texture2_dms : D3D11_TEX2DMS_DSV
-  texture2_dms_array : D3D11_TEX2DMS_ARRAY_DSV
-end
-union D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union
-  buffer : D3D11_BUFFER_UAV
-  texture1_d : D3D11_TEX1D_UAV
-  texture1_d_array : D3D11_TEX1D_ARRAY_UAV
-  texture2_d : D3D11_TEX2D_UAV
-  texture2_d_array : D3D11_TEX2D_ARRAY_UAV
-  texture3_d : D3D11_TEX3D_UAV
-end
-union D3D11_VIDEO_COLOR_Anonymous_e__Union
-  y_cb_cr : D3D11_VIDEO_COLOR_YCbCrA
-  rgba : D3D11_VIDEO_COLOR_RGBA
-end
-union D3D11_AUTHENTICATED_PROTECTION_FLAGS
-  flags : D3D11_AUTHENTICATED_PROTECTION_FLAGS_Flags_e__Struct
-  value : UInt32
-end
-union D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union
-  texture2_d : D3D11_TEX2D_VDOV
-end
-union D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union
-  texture2_d : D3D11_TEX2D_VPIV
-end
-union D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union
-  texture2_d : D3D11_TEX2D_VPOV
-  texture2_d_array : D3D11_TEX2D_ARRAY_VPOV
-end
-union D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union
-  buffer : D3D11_BUFFER_SRV
-  texture1_d : D3D11_TEX1D_SRV
-  texture1_d_array : D3D11_TEX1D_ARRAY_SRV
-  texture2_d : D3D11_TEX2D_SRV1
-  texture2_d_array : D3D11_TEX2D_ARRAY_SRV1
-  texture2_dms : D3D11_TEX2DMS_SRV
-  texture2_dms_array : D3D11_TEX2DMS_ARRAY_SRV
-  texture3_d : D3D11_TEX3D_SRV
-  texture_cube : D3D11_TEXCUBE_SRV
-  texture_cube_array : D3D11_TEXCUBE_ARRAY_SRV
-  buffer_ex : D3D11_BUFFEREX_SRV
-end
-union D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union
-  buffer : D3D11_BUFFER_RTV
-  texture1_d : D3D11_TEX1D_RTV
-  texture1_d_array : D3D11_TEX1D_ARRAY_RTV
-  texture2_d : D3D11_TEX2D_RTV1
-  texture2_d_array : D3D11_TEX2D_ARRAY_RTV1
-  texture2_dms : D3D11_TEX2DMS_RTV
-  texture2_dms_array : D3D11_TEX2DMS_ARRAY_RTV
-  texture3_d : D3D11_TEX3D_RTV
-end
-union D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union
-  buffer : D3D11_BUFFER_UAV
-  texture1_d : D3D11_TEX1D_UAV
-  texture1_d_array : D3D11_TEX1D_ARRAY_UAV
-  texture2_d : D3D11_TEX2D_UAV1
-  texture2_d_array : D3D11_TEX2D_ARRAY_UAV1
-  texture3_d : D3D11_TEX3D_UAV
-end
-union D3D11_SHADER_TRACE_DESC_Anonymous_e__Union
-  vertex_shader_trace_desc : D3D11_VERTEX_SHADER_TRACE_DESC
-  hull_shader_trace_desc : D3D11_HULL_SHADER_TRACE_DESC
-  domain_shader_trace_desc : D3D11_DOMAIN_SHADER_TRACE_DESC
-  geometry_shader_trace_desc : D3D11_GEOMETRY_SHADER_TRACE_DESC
-  pixel_shader_trace_desc : D3D11_PIXEL_SHADER_TRACE_DESC
-  compute_shader_trace_desc : D3D11_COMPUTE_SHADER_TRACE_DESC
-end
-union D3D11_TRACE_REGISTER_Anonymous_e__Union
-  index1_d : UInt16
-  index2_d : UInt16[2]*
-end
+  union D3D11_BUFFER_SRV_Anonymous1_e__Union
+    first_element : UInt32
+    element_offset : UInt32
+  end
+  union D3D11_BUFFER_SRV_Anonymous2_e__Union
+    num_elements : UInt32
+    element_width : UInt32
+  end
+  union D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
+    buffer : D3D11_BUFFER_SRV
+    texture1_d : D3D11_TEX1D_SRV
+    texture1_d_array : D3D11_TEX1D_ARRAY_SRV
+    texture2_d : D3D11_TEX2D_SRV
+    texture2_d_array : D3D11_TEX2D_ARRAY_SRV
+    texture2_dms : D3D11_TEX2DMS_SRV
+    texture2_dms_array : D3D11_TEX2DMS_ARRAY_SRV
+    texture3_d : D3D11_TEX3D_SRV
+    texture_cube : D3D11_TEXCUBE_SRV
+    texture_cube_array : D3D11_TEXCUBE_ARRAY_SRV
+    buffer_ex : D3D11_BUFFEREX_SRV
+  end
+  union D3D11_BUFFER_RTV_Anonymous2_e__Union
+    num_elements : UInt32
+    element_width : UInt32
+  end
+  union D3D11_BUFFER_RTV_Anonymous1_e__Union
+    first_element : UInt32
+    element_offset : UInt32
+  end
+  union D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union
+    buffer : D3D11_BUFFER_RTV
+    texture1_d : D3D11_TEX1D_RTV
+    texture1_d_array : D3D11_TEX1D_ARRAY_RTV
+    texture2_d : D3D11_TEX2D_RTV
+    texture2_d_array : D3D11_TEX2D_ARRAY_RTV
+    texture2_dms : D3D11_TEX2DMS_RTV
+    texture2_dms_array : D3D11_TEX2DMS_ARRAY_RTV
+    texture3_d : D3D11_TEX3D_RTV
+  end
+  union D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union
+    texture1_d : D3D11_TEX1D_DSV
+    texture1_d_array : D3D11_TEX1D_ARRAY_DSV
+    texture2_d : D3D11_TEX2D_DSV
+    texture2_d_array : D3D11_TEX2D_ARRAY_DSV
+    texture2_dms : D3D11_TEX2DMS_DSV
+    texture2_dms_array : D3D11_TEX2DMS_ARRAY_DSV
+  end
+  union D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union
+    buffer : D3D11_BUFFER_UAV
+    texture1_d : D3D11_TEX1D_UAV
+    texture1_d_array : D3D11_TEX1D_ARRAY_UAV
+    texture2_d : D3D11_TEX2D_UAV
+    texture2_d_array : D3D11_TEX2D_ARRAY_UAV
+    texture3_d : D3D11_TEX3D_UAV
+  end
+  union D3D11_VIDEO_COLOR_Anonymous_e__Union
+    y_cb_cr : D3D11_VIDEO_COLOR_YCbCrA
+    rgba : D3D11_VIDEO_COLOR_RGBA
+  end
+  union D3D11_AUTHENTICATED_PROTECTION_FLAGS
+    flags : D3D11_AUTHENTICATED_PROTECTION_FLAGS_Flags_e__Struct
+    value : UInt32
+  end
+  union D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union
+    texture2_d : D3D11_TEX2D_VDOV
+  end
+  union D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union
+    texture2_d : D3D11_TEX2D_VPIV
+  end
+  union D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union
+    texture2_d : D3D11_TEX2D_VPOV
+    texture2_d_array : D3D11_TEX2D_ARRAY_VPOV
+  end
+  union D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union
+    buffer : D3D11_BUFFER_SRV
+    texture1_d : D3D11_TEX1D_SRV
+    texture1_d_array : D3D11_TEX1D_ARRAY_SRV
+    texture2_d : D3D11_TEX2D_SRV1
+    texture2_d_array : D3D11_TEX2D_ARRAY_SRV1
+    texture2_dms : D3D11_TEX2DMS_SRV
+    texture2_dms_array : D3D11_TEX2DMS_ARRAY_SRV
+    texture3_d : D3D11_TEX3D_SRV
+    texture_cube : D3D11_TEXCUBE_SRV
+    texture_cube_array : D3D11_TEXCUBE_ARRAY_SRV
+    buffer_ex : D3D11_BUFFEREX_SRV
+  end
+  union D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union
+    buffer : D3D11_BUFFER_RTV
+    texture1_d : D3D11_TEX1D_RTV
+    texture1_d_array : D3D11_TEX1D_ARRAY_RTV
+    texture2_d : D3D11_TEX2D_RTV1
+    texture2_d_array : D3D11_TEX2D_ARRAY_RTV1
+    texture2_dms : D3D11_TEX2DMS_RTV
+    texture2_dms_array : D3D11_TEX2DMS_ARRAY_RTV
+    texture3_d : D3D11_TEX3D_RTV
+  end
+  union D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union
+    buffer : D3D11_BUFFER_UAV
+    texture1_d : D3D11_TEX1D_UAV
+    texture1_d_array : D3D11_TEX1D_ARRAY_UAV
+    texture2_d : D3D11_TEX2D_UAV1
+    texture2_d_array : D3D11_TEX2D_ARRAY_UAV1
+    texture3_d : D3D11_TEX3D_UAV
+  end
+  union D3D11_SHADER_TRACE_DESC_Anonymous_e__Union
+    vertex_shader_trace_desc : D3D11_VERTEX_SHADER_TRACE_DESC
+    hull_shader_trace_desc : D3D11_HULL_SHADER_TRACE_DESC
+    domain_shader_trace_desc : D3D11_DOMAIN_SHADER_TRACE_DESC
+    geometry_shader_trace_desc : D3D11_GEOMETRY_SHADER_TRACE_DESC
+    pixel_shader_trace_desc : D3D11_PIXEL_SHADER_TRACE_DESC
+    compute_shader_trace_desc : D3D11_COMPUTE_SHADER_TRACE_DESC
+  end
+  union D3D11_TRACE_REGISTER_Anonymous_e__Union
+    index1_d : UInt16
+    index2_d : UInt16[2]*
+  end
 
   struct D3D11_INPUT_ELEMENT_DESC
     semantic_name : PSTR

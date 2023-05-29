@@ -397,41 +397,41 @@ lib LibWin32
     DEPTotalPolicyCount = 4
   end
 
-union SYSTEM_INFO_Anonymous_e__Union
-  dw_oem_id : UInt32
-  anonymous : SYSTEM_INFO_Anonymous_e__Union_Anonymous_e__Struct
-end
-union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union
-  processor_core : SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_ProcessorCore_e__Struct
-  numa_node : SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_NumaNode_e__Struct
-  cache : CACHE_DESCRIPTOR
-  reserved : UInt64[2]*
-end
-union NUMA_NODE_RELATIONSHIP_Anonymous_e__Union
-  group_mask : GROUP_AFFINITY
-  group_masks : GROUP_AFFINITY[0]*
-end
-union CACHE_RELATIONSHIP_Anonymous_e__Union
-  group_mask : GROUP_AFFINITY
-  group_masks : GROUP_AFFINITY[0]*
-end
-union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union
-  processor : PROCESSOR_RELATIONSHIP
-  numa_node : NUMA_NODE_RELATIONSHIP
-  cache : CACHE_RELATIONSHIP
-  group : GROUP_RELATIONSHIP
-end
-union SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union
-  cpu_set : SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct
-end
-union SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union
-  all_flags : UInt8
-  anonymous : SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous2_e__Union
-  reserved : UInt32
-  scheduling_class : UInt8
-end
+  union SYSTEM_INFO_Anonymous_e__Union
+    dw_oem_id : UInt32
+    anonymous : SYSTEM_INFO_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union
+    processor_core : SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_ProcessorCore_e__Struct
+    numa_node : SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_NumaNode_e__Struct
+    cache : CACHE_DESCRIPTOR
+    reserved : UInt64[2]*
+  end
+  union NUMA_NODE_RELATIONSHIP_Anonymous_e__Union
+    group_mask : GROUP_AFFINITY
+    group_masks : GROUP_AFFINITY[0]*
+  end
+  union CACHE_RELATIONSHIP_Anonymous_e__Union
+    group_mask : GROUP_AFFINITY
+    group_masks : GROUP_AFFINITY[0]*
+  end
+  union SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union
+    processor : PROCESSOR_RELATIONSHIP
+    numa_node : NUMA_NODE_RELATIONSHIP
+    cache : CACHE_RELATIONSHIP
+    group : GROUP_RELATIONSHIP
+  end
+  union SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union
+    cpu_set : SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct
+  end
+  union SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union
+    all_flags : UInt8
+    anonymous : SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous2_e__Union
+    reserved : UInt32
+    scheduling_class : UInt8
+  end
 
   struct GROUP_AFFINITY
     mask : LibC::UINT_PTR

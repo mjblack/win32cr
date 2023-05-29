@@ -996,82 +996,82 @@ lib LibWin32
     JET_IndexCheckingMax = 3
   end
 
-union CONVERT_A_Anonymous_e__Union
-  f_flags : UInt32
-  anonymous : CONVERT_A_Anonymous_e__Union_Anonymous_e__Struct
-end
-union CONVERT_W_Anonymous_e__Union
-  f_flags : UInt32
-  anonymous : CONVERT_W_Anonymous_e__Union_Anonymous_e__Struct
-end
-union JET_DBINFOUPGRADE_Anonymous_e__Union
-  ul_flags : UInt32
-  anonymous : JET_DBINFOUPGRADE_Anonymous_e__Union_Anonymous_e__Struct
-end
-union JET_INDEXCREATE_A_Anonymous1_e__Union
-  lcid : UInt32
-  pidxunicode : JET_UNICODEINDEX*
-end
-union JET_INDEXCREATE_A_Anonymous2_e__Union
-  cb_var_seg_mac : UInt32
-  ptuplelimits : JET_TUPLELIMITS*
-end
-union JET_INDEXCREATE_W_Anonymous1_e__Union
-  lcid : UInt32
-  pidxunicode : JET_UNICODEINDEX*
-end
-union JET_INDEXCREATE_W_Anonymous2_e__Union
-  cb_var_seg_mac : UInt32
-  ptuplelimits : JET_TUPLELIMITS*
-end
-union JET_INDEXCREATE2_A_Anonymous1_e__Union
-  lcid : UInt32
-  pidxunicode : JET_UNICODEINDEX*
-end
-union JET_INDEXCREATE2_A_Anonymous2_e__Union
-  cb_var_seg_mac : UInt32
-  ptuplelimits : JET_TUPLELIMITS*
-end
-union JET_INDEXCREATE2_W_Anonymous1_e__Union
-  lcid : UInt32
-  pidxunicode : JET_UNICODEINDEX*
-end
-union JET_INDEXCREATE2_W_Anonymous2_e__Union
-  cb_var_seg_mac : UInt32
-  ptuplelimits : JET_TUPLELIMITS*
-end
-union JET_INDEXCREATE3_A_Anonymous_e__Union
-  cb_var_seg_mac : UInt32
-  ptuplelimits : JET_TUPLELIMITS*
-end
-union JET_INDEXCREATE3_W_Anonymous_e__Union
-  cb_var_seg_mac : UInt32
-  ptuplelimits : JET_TUPLELIMITS*
-end
-union JET_LOGTIME_Anonymous2_e__Union
-  b_filler2 : CHAR
-  anonymous : JET_LOGTIME_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union JET_LOGTIME_Anonymous1_e__Union
-  b_filler1 : CHAR
-  anonymous : JET_LOGTIME_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union JET_BKLOGTIME_Anonymous2_e__Union
-  b_filler2 : CHAR
-  anonymous : JET_BKLOGTIME_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union JET_BKLOGTIME_Anonymous1_e__Union
-  b_filler1 : CHAR
-  anonymous : JET_BKLOGTIME_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union JET_BKINFO_Anonymous_e__Union
-  logtime_mark : JET_LOGTIME
-  bklogtime_mark : JET_BKLOGTIME
-end
-union JET_ENUMCOLUMN_Anonymous_e__Union
-  anonymous1 : JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous2_e__Struct
-end
+  union CONVERT_A_Anonymous_e__Union
+    f_flags : UInt32
+    anonymous : CONVERT_A_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union CONVERT_W_Anonymous_e__Union
+    f_flags : UInt32
+    anonymous : CONVERT_W_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union JET_DBINFOUPGRADE_Anonymous_e__Union
+    ul_flags : UInt32
+    anonymous : JET_DBINFOUPGRADE_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union JET_INDEXCREATE_A_Anonymous1_e__Union
+    lcid : UInt32
+    pidxunicode : JET_UNICODEINDEX*
+  end
+  union JET_INDEXCREATE_A_Anonymous2_e__Union
+    cb_var_seg_mac : UInt32
+    ptuplelimits : JET_TUPLELIMITS*
+  end
+  union JET_INDEXCREATE_W_Anonymous1_e__Union
+    lcid : UInt32
+    pidxunicode : JET_UNICODEINDEX*
+  end
+  union JET_INDEXCREATE_W_Anonymous2_e__Union
+    cb_var_seg_mac : UInt32
+    ptuplelimits : JET_TUPLELIMITS*
+  end
+  union JET_INDEXCREATE2_A_Anonymous1_e__Union
+    lcid : UInt32
+    pidxunicode : JET_UNICODEINDEX*
+  end
+  union JET_INDEXCREATE2_A_Anonymous2_e__Union
+    cb_var_seg_mac : UInt32
+    ptuplelimits : JET_TUPLELIMITS*
+  end
+  union JET_INDEXCREATE2_W_Anonymous1_e__Union
+    lcid : UInt32
+    pidxunicode : JET_UNICODEINDEX*
+  end
+  union JET_INDEXCREATE2_W_Anonymous2_e__Union
+    cb_var_seg_mac : UInt32
+    ptuplelimits : JET_TUPLELIMITS*
+  end
+  union JET_INDEXCREATE3_A_Anonymous_e__Union
+    cb_var_seg_mac : UInt32
+    ptuplelimits : JET_TUPLELIMITS*
+  end
+  union JET_INDEXCREATE3_W_Anonymous_e__Union
+    cb_var_seg_mac : UInt32
+    ptuplelimits : JET_TUPLELIMITS*
+  end
+  union JET_LOGTIME_Anonymous2_e__Union
+    b_filler2 : CHAR
+    anonymous : JET_LOGTIME_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union JET_LOGTIME_Anonymous1_e__Union
+    b_filler1 : CHAR
+    anonymous : JET_LOGTIME_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union JET_BKLOGTIME_Anonymous2_e__Union
+    b_filler2 : CHAR
+    anonymous : JET_BKLOGTIME_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union JET_BKLOGTIME_Anonymous1_e__Union
+    b_filler1 : CHAR
+    anonymous : JET_BKLOGTIME_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union JET_BKINFO_Anonymous_e__Union
+    logtime_mark : JET_LOGTIME
+    bklogtime_mark : JET_BKLOGTIME
+  end
+  union JET_ENUMCOLUMN_Anonymous_e__Union
+    anonymous1 : JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : JET_ENUMCOLUMN_Anonymous_e__Union_Anonymous2_e__Struct
+  end
 
   struct JET_INDEXID
     cb_struct : UInt32

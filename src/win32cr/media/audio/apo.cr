@@ -120,16 +120,16 @@ lib LibWin32
     APO_NOTIFICATION_TYPE_SYSTEM_EFFECTS_PROPERTY_CHANGE = 3
   end
 
-union APO_NOTIFICATION_Anonymous_e__Union
-  audio_endpoint_volume_change : AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION
-  audio_endpoint_property_change : AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION
-  audio_system_effects_property_change : AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION
-end
-union APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union
-  audio_endpoint_volume : AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR
-  audio_endpoint_property_change : AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR
-  audio_system_effects_property_change : AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR
-end
+  union APO_NOTIFICATION_Anonymous_e__Union
+    audio_endpoint_volume_change : AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION
+    audio_endpoint_property_change : AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION
+    audio_system_effects_property_change : AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION
+  end
+  union APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union
+    audio_endpoint_volume : AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR
+    audio_endpoint_property_change : AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR
+    audio_system_effects_property_change : AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR
+  end
 
   struct UNCOMPRESSEDAUDIOFORMAT
     guid_format_type : Guid

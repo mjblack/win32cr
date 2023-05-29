@@ -197,14 +197,14 @@ lib LibWin32
     DBKIND_GUID = 6
   end
 
-union DBID_uName_e__Union
-  pwsz_name : LibC::LPWSTR
-  ul_propid : UInt32
-end
-union DBID_uGuid_e__Union
-  guid : Guid
-  pguid : Guid*
-end
+  union DBID_uName_e__Union
+    pwsz_name : LibC::LPWSTR
+    ul_propid : UInt32
+  end
+  union DBID_uGuid_e__Union
+    guid : Guid
+    pguid : Guid*
+  end
 
   struct CI_STATE
     cb_struct : UInt32

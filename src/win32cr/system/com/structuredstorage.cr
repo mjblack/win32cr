@@ -147,89 +147,89 @@ lib LibWin32
     PIDMSI_STATUS_OTHER = 32767
   end
 
-union PROPVARIANT_Anonymous_e__Union
-  anonymous : PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct
-  dec_val : DECIMAL
-end
-union PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
-  c_val : CHAR
-  b_val : UInt8
-  i_val : Int16
-  ui_val : UInt16
-  l_val : Int32
-  ul_val : UInt32
-  int_val : Int32
-  uint_val : UInt32
-  h_val : LARGE_INTEGER
-  uh_val : ULARGE_INTEGER
-  flt_val : Float32
-  dbl_val : Float64
-  bool_val : Int16
-  __obsolete__variant_bool : Int16
-  scode : Int32
-  cy_val : CY
-  date : Float64
-  filetime : FILETIME
-  puuid : Guid*
-  pclipdata : CLIPDATA*
-  bstr_val : UInt8
-  bstrblob_val : BSTRBLOB
-  blob : BLOB
-  psz_val : PSTR
-  pwsz_val : LibC::LPWSTR
-  punk_val : IUnknown
-  pdisp_val : IDispatch
-  p_stream : IStream
-  p_storage : IStorage
-  p_versioned_stream : VERSIONEDSTREAM*
-  parray : SAFEARRAY*
-  cac : CAC
-  caub : CAUB
-  cai : CAI
-  caui : CAUI
-  cal : CAL
-  caul : CAUL
-  cah : CAH
-  cauh : CAUH
-  caflt : CAFLT
-  cadbl : CADBL
-  cabool : CABOOL
-  cascode : CASCODE
-  cacy : CACY
-  cadate : CADATE
-  cafiletime : CAFILETIME
-  cauuid : CACLSID
-  caclipdata : CACLIPDATA
-  cabstr : CABSTR
-  cabstrblob : CABSTRBLOB
-  calpstr : CALPSTR
-  calpwstr : CALPWSTR
-  capropvar : CAPROPVARIANT
-  pc_val : PSTR
-  pb_val : UInt8*
-  pi_val : Int16*
-  pui_val : UInt16*
-  pl_val : Int32*
-  pul_val : UInt32*
-  pint_val : Int32*
-  puint_val : UInt32*
-  pflt_val : Float32*
-  pdbl_val : Float64*
-  pbool_val : Int16*
-  pdec_val : DECIMAL*
-  pscode : Int32*
-  pcy_val : CY*
-  pdate : Float64*
-  pbstr_val : UInt8*
-  ppunk_val : IUnknown*
-  ppdisp_val : IDispatch*
-  pparray : SAFEARRAY**
-  pvar_val : PROPVARIANT*
-end
-union PROPSPEC_Anonymous_e__Union
-  propid : UInt32
-  lpwstr : LibC::LPWSTR
-end
+  union PROPVARIANT_Anonymous_e__Union
+    anonymous : PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct
+    dec_val : DECIMAL
+  end
+  union PROPVARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
+    c_val : CHAR
+    b_val : UInt8
+    i_val : Int16
+    ui_val : UInt16
+    l_val : Int32
+    ul_val : UInt32
+    int_val : Int32
+    uint_val : UInt32
+    h_val : LARGE_INTEGER
+    uh_val : ULARGE_INTEGER
+    flt_val : Float32
+    dbl_val : Float64
+    bool_val : Int16
+    __obsolete__variant_bool : Int16
+    scode : Int32
+    cy_val : CY
+    date : Float64
+    filetime : FILETIME
+    puuid : Guid*
+    pclipdata : CLIPDATA*
+    bstr_val : UInt8
+    bstrblob_val : BSTRBLOB
+    blob : BLOB
+    psz_val : PSTR
+    pwsz_val : LibC::LPWSTR
+    punk_val : IUnknown
+    pdisp_val : IDispatch
+    p_stream : IStream
+    p_storage : IStorage
+    p_versioned_stream : VERSIONEDSTREAM*
+    parray : SAFEARRAY*
+    cac : CAC
+    caub : CAUB
+    cai : CAI
+    caui : CAUI
+    cal : CAL
+    caul : CAUL
+    cah : CAH
+    cauh : CAUH
+    caflt : CAFLT
+    cadbl : CADBL
+    cabool : CABOOL
+    cascode : CASCODE
+    cacy : CACY
+    cadate : CADATE
+    cafiletime : CAFILETIME
+    cauuid : CACLSID
+    caclipdata : CACLIPDATA
+    cabstr : CABSTR
+    cabstrblob : CABSTRBLOB
+    calpstr : CALPSTR
+    calpwstr : CALPWSTR
+    capropvar : CAPROPVARIANT
+    pc_val : PSTR
+    pb_val : UInt8*
+    pi_val : Int16*
+    pui_val : UInt16*
+    pl_val : Int32*
+    pul_val : UInt32*
+    pint_val : Int32*
+    puint_val : UInt32*
+    pflt_val : Float32*
+    pdbl_val : Float64*
+    pbool_val : Int16*
+    pdec_val : DECIMAL*
+    pscode : Int32*
+    pcy_val : CY*
+    pdate : Float64*
+    pbstr_val : UInt8*
+    ppunk_val : IUnknown*
+    ppdisp_val : IDispatch*
+    pparray : SAFEARRAY**
+    pvar_val : PROPVARIANT*
+  end
+  union PROPSPEC_Anonymous_e__Union
+    propid : UInt32
+    lpwstr : LibC::LPWSTR
+  end
 
   struct BSTRBLOB
     cb_size : UInt32

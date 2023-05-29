@@ -213,40 +213,40 @@ lib LibWin32
     CTL_MODIFY_REQUEST_REMOVE = 2
   end
 
-union CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union
-  p_pvk_file_info : CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO*
-  p_pvk_prov_info : CRYPT_KEY_PROV_INFO*
-end
-union CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union
-  p_signing_cert_context : CERT_CONTEXT*
-  p_signing_cert_store : CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO*
-  p_signing_cert_pvk_info : CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO*
-end
-union CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union
-  pwsz_file_name : LibC::LPWSTR
-  p_sign_blob_info : CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO*
-end
-union CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union
-  p_crypt_provider_data : CRYPT_PROVIDER_DATA*
-  h_wvt_state_data : LibC::HANDLE
-end
-union CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union
-  p_crypt_provider_data : CRYPT_PROVIDER_DATA*
-  h_wvt_state_data : LibC::HANDLE
-end
-union CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union
-  p_cert_context : CERT_CONTEXT*
-  p_ctl_context : CTL_CONTEXT*
-  p_crl_context : CRL_CONTEXT*
-  h_cert_store : Void*
-end
-union CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union
-  pwsz_file_name : LibC::LPWSTR
-  p_cert_context : CERT_CONTEXT*
-  p_ctl_context : CTL_CONTEXT*
-  p_crl_context : CRL_CONTEXT*
-  h_cert_store : Void*
-end
+  union CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union
+    p_pvk_file_info : CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO*
+    p_pvk_prov_info : CRYPT_KEY_PROV_INFO*
+  end
+  union CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union
+    p_signing_cert_context : CERT_CONTEXT*
+    p_signing_cert_store : CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO*
+    p_signing_cert_pvk_info : CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO*
+  end
+  union CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union
+    pwsz_file_name : LibC::LPWSTR
+    p_sign_blob_info : CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO*
+  end
+  union CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union
+    p_crypt_provider_data : CRYPT_PROVIDER_DATA*
+    h_wvt_state_data : LibC::HANDLE
+  end
+  union CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union
+    p_crypt_provider_data : CRYPT_PROVIDER_DATA*
+    h_wvt_state_data : LibC::HANDLE
+  end
+  union CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union
+    p_cert_context : CERT_CONTEXT*
+    p_ctl_context : CTL_CONTEXT*
+    p_crl_context : CRL_CONTEXT*
+    h_cert_store : Void*
+  end
+  union CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union
+    pwsz_file_name : LibC::LPWSTR
+    p_cert_context : CERT_CONTEXT*
+    p_ctl_context : CTL_CONTEXT*
+    p_crl_context : CRL_CONTEXT*
+    h_cert_store : Void*
+  end
 
   struct CERT_SELECT_STRUCT_A
     dw_size : UInt32

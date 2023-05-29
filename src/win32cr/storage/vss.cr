@@ -411,15 +411,15 @@ lib LibWin32
     VSS_PROTECTION_FAULT_MOUNT_DURING_CLUSTER_OFFLINE = 16
   end
 
-union VSS_OBJECT_UNION
-  snap : VSS_SNAPSHOT_PROP
-  prov : VSS_PROVIDER_PROP
-end
-union VSS_MGMT_OBJECT_UNION
-  vol : VSS_VOLUME_PROP
-  diff_vol : VSS_DIFF_VOLUME_PROP
-  diff_area : VSS_DIFF_AREA_PROP
-end
+  union VSS_OBJECT_UNION
+    snap : VSS_SNAPSHOT_PROP
+    prov : VSS_PROVIDER_PROP
+  end
+  union VSS_MGMT_OBJECT_UNION
+    vol : VSS_VOLUME_PROP
+    diff_vol : VSS_DIFF_VOLUME_PROP
+    diff_area : VSS_DIFF_AREA_PROP
+  end
 
   struct VSS_SNAPSHOT_PROP
     m_snapshot_id : Guid

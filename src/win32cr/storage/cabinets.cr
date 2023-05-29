@@ -89,11 +89,11 @@ lib LibWin32
     Fdintenumerate = 5
   end
 
-union FDIDECRYPT_Anonymous_e__Union
-  cabinet : FDIDECRYPT_Anonymous_e__Union_cabinet_e__Struct
-  folder : FDIDECRYPT_Anonymous_e__Union_folder_e__Struct
-  decrypt : FDIDECRYPT_Anonymous_e__Union_decrypt_e__Struct
-end
+  union FDIDECRYPT_Anonymous_e__Union
+    cabinet : FDIDECRYPT_Anonymous_e__Union_cabinet_e__Struct
+    folder : FDIDECRYPT_Anonymous_e__Union_folder_e__Struct
+    decrypt : FDIDECRYPT_Anonymous_e__Union_decrypt_e__Struct
+  end
 
   struct ERF
     erf_oper : Int32

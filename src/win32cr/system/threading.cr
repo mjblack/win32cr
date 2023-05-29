@@ -379,21 +379,21 @@ lib LibWin32
     ThreadNameInformation = 38
   end
 
-union REASON_CONTEXT_Reason_e__Union
-  detailed : REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct
-  simple_reason_string : LibC::LPWSTR
-end
-union RTL_RUN_ONCE
-  ptr : Void*
-end
-union TP_CALLBACK_ENVIRON_V3_u_e__Union
-  flags : UInt32
-  s : TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct
-end
-union UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union
-  anonymous : UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct
-  thread_ums_flags : UInt32
-end
+  union REASON_CONTEXT_Reason_e__Union
+    detailed : REASON_CONTEXT_Reason_e__Union_Detailed_e__Struct
+    simple_reason_string : LibC::LPWSTR
+  end
+  union RTL_RUN_ONCE
+    ptr : Void*
+  end
+  union TP_CALLBACK_ENVIRON_V3_u_e__Union
+    flags : UInt32
+    s : TP_CALLBACK_ENVIRON_V3_u_e__Union_s_e__Struct
+  end
+  union UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union
+    anonymous : UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct
+    thread_ums_flags : UInt32
+  end
 
   struct REASON_CONTEXT
     version : UInt32

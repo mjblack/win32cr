@@ -706,162 +706,162 @@ lib LibWin32
     USBSCAN_PIPE_INTERRUPT = 3
   end
 
-union BM_REQUEST_TYPE
-  s : BM_REQUEST_TYPE_BM
-  b : UInt8
-end
-union USB_DEFAULT_PIPE_SETUP_PACKET_wIndex
-  anonymous : USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_Anonymous_e__Struct
-  w : UInt16
-end
-union USB_DEFAULT_PIPE_SETUP_PACKET_wValue
-  anonymous : USB_DEFAULT_PIPE_SETUP_PACKET_wValue_Anonymous_e__Struct
-  w : UInt16
-end
-union USB_DEVICE_STATUS
-  as_ushort16 : UInt16
-  anonymous : USB_DEVICE_STATUS_Anonymous_e__Struct
-end
-union USB_INTERFACE_STATUS
-  as_ushort16 : UInt16
-  anonymous : USB_INTERFACE_STATUS_Anonymous_e__Struct
-end
-union USB_ENDPOINT_STATUS
-  as_ushort16 : UInt16
-  anonymous : USB_ENDPOINT_STATUS_Anonymous_e__Struct
-end
-union USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union
-  as_ulong : UInt32
-  anonymous : USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-end
-union USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes_e__Union
-  as_ulong : UInt32
-  anonymous : USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-end
-union USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities_e__Union
-  as_ushort : UInt16
-  anonymous : USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities_e__Union_Anonymous_e__Struct
-end
-union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED
-  as_ulong32 : UInt32
-  anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_Anonymous_e__Struct
-end
-union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport_e__Union
-  as_ushort : UInt16
-  anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport_e__Union_Anonymous_e__Struct
-end
-union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes_e__Union
-  as_ulong : UInt32
-  anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-end
-union USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower_e__Union
-  as_ushort : UInt16
-  anonymous : USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower_e__Union_Anonymous_e__Struct
-end
-union USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union
-  as_ulong : UInt32
-  anonymous : USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-end
-union USB_HIGH_SPEED_MAXPACKET
-  us : UInt16
-end
-union USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union
-  as_uchar : UInt8
-  bulk : USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union_Bulk_e__Struct
-  isochronous : USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union_Isochronous_e__Struct
-end
-union USB_HUB_STATUS
-  as_ushort16 : UInt16
-  anonymous : USB_HUB_STATUS_Anonymous_e__Struct
-end
-union USB_HUB_CHANGE
-  as_ushort16 : UInt16
-  anonymous : USB_HUB_CHANGE_Anonymous_e__Struct
-end
-union USB_HUB_STATUS_AND_CHANGE
-  as_ulong32 : UInt32
-  anonymous : USB_HUB_STATUS_AND_CHANGE_Anonymous_e__Struct
-end
-union USB_20_PORT_STATUS
-  as_ushort16 : UInt16
-  anonymous : USB_20_PORT_STATUS_Anonymous_e__Struct
-end
-union USB_20_PORT_CHANGE
-  as_ushort16 : UInt16
-  anonymous : USB_20_PORT_CHANGE_Anonymous_e__Struct
-end
-union USB_30_PORT_STATUS
-  as_ushort16 : UInt16
-  anonymous : USB_30_PORT_STATUS_Anonymous_e__Struct
-end
-union USB_30_PORT_CHANGE
-  as_ushort16 : UInt16
-  anonymous : USB_30_PORT_CHANGE_Anonymous_e__Struct
-end
-union USB_PORT_STATUS
-  as_ushort16 : UInt16
-  usb20_port_status : USB_20_PORT_STATUS
-  usb30_port_status : USB_30_PORT_STATUS
-end
-union USB_PORT_CHANGE
-  as_ushort16 : UInt16
-  usb20_port_change : USB_20_PORT_CHANGE
-  usb30_port_change : USB_30_PORT_CHANGE
-end
-union USB_PORT_EXT_STATUS
-  as_ulong32 : UInt32
-  anonymous : USB_PORT_EXT_STATUS_Anonymous_e__Struct
-end
-union USB_PORT_STATUS_AND_CHANGE
-  as_ulong32 : UInt32
-  anonymous : USB_PORT_STATUS_AND_CHANGE_Anonymous_e__Struct
-end
-union USB_PORT_EXT_STATUS_AND_CHANGE
-  as_ulong64 : UInt64
-  anonymous : USB_PORT_EXT_STATUS_AND_CHANGE_Anonymous_e__Struct
-end
-union USB_HUB_30_PORT_REMOTE_WAKE_MASK
-  as_uchar8 : UInt8
-  anonymous : USB_HUB_30_PORT_REMOTE_WAKE_MASK_Anonymous_e__Struct
-end
-union USB_FUNCTION_SUSPEND_OPTIONS
-  as_uchar : UInt8
-  anonymous : USB_FUNCTION_SUSPEND_OPTIONS_Anonymous_e__Struct
-end
-union OS_STRING_Anonymous_e__Union
-  b_pad : UInt8
-  b_flags : UInt8
-end
-union URB_Anonymous_e__Union
-  urb_header : URB_HEADER
-  urb_select_interface : URB_SELECT_INTERFACE
-  urb_select_configuration : URB_SELECT_CONFIGURATION
-  urb_pipe_request : URB_PIPE_REQUEST
-  urb_frame_length_control : URB_FRAME_LENGTH_CONTROL
-  urb_get_frame_length : URB_GET_FRAME_LENGTH
-  urb_set_frame_length : URB_SET_FRAME_LENGTH
-  urb_get_current_frame_number : URB_GET_CURRENT_FRAME_NUMBER
-  urb_control_transfer : URB_CONTROL_TRANSFER
-  urb_control_transfer_ex : URB_CONTROL_TRANSFER_EX
-  urb_bulk_or_interrupt_transfer : URB_BULK_OR_INTERRUPT_TRANSFER
-  urb_isochronous_transfer : URB_ISOCH_TRANSFER
-  urb_control_descriptor_request : URB_CONTROL_DESCRIPTOR_REQUEST
-  urb_control_get_status_request : URB_CONTROL_GET_STATUS_REQUEST
-  urb_control_feature_request : URB_CONTROL_FEATURE_REQUEST
-  urb_control_vendor_class_request : URB_CONTROL_VENDOR_OR_CLASS_REQUEST
-  urb_control_get_interface_request : URB_CONTROL_GET_INTERFACE_REQUEST
-  urb_control_get_configuration_request : URB_CONTROL_GET_CONFIGURATION_REQUEST
-  urb_os_feature_descriptor_request : URB_OS_FEATURE_DESCRIPTOR_REQUEST
-  urb_open_static_streams : URB_OPEN_STATIC_STREAMS
-  urb_get_isoch_pipe_transfer_path_delays : URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS
-end
-union USBFN_NOTIFICATION_u_e__Union
-  bus_speed : USBFN_BUS_SPEED
-  setup_packet : USB_DEFAULT_PIPE_SETUP_PACKET
-  configuration_value : UInt16
-  port_type : USBFN_PORT_TYPE
-  alternate_interface : ALTERNATE_INTERFACE
-end
+  union BM_REQUEST_TYPE
+    s : BM_REQUEST_TYPE_BM
+    b : UInt8
+  end
+  union USB_DEFAULT_PIPE_SETUP_PACKET_wIndex
+    anonymous : USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_Anonymous_e__Struct
+    w : UInt16
+  end
+  union USB_DEFAULT_PIPE_SETUP_PACKET_wValue
+    anonymous : USB_DEFAULT_PIPE_SETUP_PACKET_wValue_Anonymous_e__Struct
+    w : UInt16
+  end
+  union USB_DEVICE_STATUS
+    as_ushort16 : UInt16
+    anonymous : USB_DEVICE_STATUS_Anonymous_e__Struct
+  end
+  union USB_INTERFACE_STATUS
+    as_ushort16 : UInt16
+    anonymous : USB_INTERFACE_STATUS_Anonymous_e__Struct
+  end
+  union USB_ENDPOINT_STATUS
+    as_ushort16 : UInt16
+    anonymous : USB_ENDPOINT_STATUS_Anonymous_e__Struct
+  end
+  union USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union
+    as_ulong : UInt32
+    anonymous : USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
+  end
+  union USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes_e__Union
+    as_ulong : UInt32
+    anonymous : USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
+  end
+  union USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities_e__Union
+    as_ushort : UInt16
+    anonymous : USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities_e__Union_Anonymous_e__Struct
+  end
+  union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED
+    as_ulong32 : UInt32
+    anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_Anonymous_e__Struct
+  end
+  union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport_e__Union
+    as_ushort : UInt16
+    anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport_e__Union_Anonymous_e__Struct
+  end
+  union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes_e__Union
+    as_ulong : UInt32
+    anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
+  end
+  union USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower_e__Union
+    as_ushort : UInt16
+    anonymous : USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower_e__Union_Anonymous_e__Struct
+  end
+  union USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union
+    as_ulong : UInt32
+    anonymous : USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
+  end
+  union USB_HIGH_SPEED_MAXPACKET
+    us : UInt16
+  end
+  union USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union
+    as_uchar : UInt8
+    bulk : USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union_Bulk_e__Struct
+    isochronous : USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union_Isochronous_e__Struct
+  end
+  union USB_HUB_STATUS
+    as_ushort16 : UInt16
+    anonymous : USB_HUB_STATUS_Anonymous_e__Struct
+  end
+  union USB_HUB_CHANGE
+    as_ushort16 : UInt16
+    anonymous : USB_HUB_CHANGE_Anonymous_e__Struct
+  end
+  union USB_HUB_STATUS_AND_CHANGE
+    as_ulong32 : UInt32
+    anonymous : USB_HUB_STATUS_AND_CHANGE_Anonymous_e__Struct
+  end
+  union USB_20_PORT_STATUS
+    as_ushort16 : UInt16
+    anonymous : USB_20_PORT_STATUS_Anonymous_e__Struct
+  end
+  union USB_20_PORT_CHANGE
+    as_ushort16 : UInt16
+    anonymous : USB_20_PORT_CHANGE_Anonymous_e__Struct
+  end
+  union USB_30_PORT_STATUS
+    as_ushort16 : UInt16
+    anonymous : USB_30_PORT_STATUS_Anonymous_e__Struct
+  end
+  union USB_30_PORT_CHANGE
+    as_ushort16 : UInt16
+    anonymous : USB_30_PORT_CHANGE_Anonymous_e__Struct
+  end
+  union USB_PORT_STATUS
+    as_ushort16 : UInt16
+    usb20_port_status : USB_20_PORT_STATUS
+    usb30_port_status : USB_30_PORT_STATUS
+  end
+  union USB_PORT_CHANGE
+    as_ushort16 : UInt16
+    usb20_port_change : USB_20_PORT_CHANGE
+    usb30_port_change : USB_30_PORT_CHANGE
+  end
+  union USB_PORT_EXT_STATUS
+    as_ulong32 : UInt32
+    anonymous : USB_PORT_EXT_STATUS_Anonymous_e__Struct
+  end
+  union USB_PORT_STATUS_AND_CHANGE
+    as_ulong32 : UInt32
+    anonymous : USB_PORT_STATUS_AND_CHANGE_Anonymous_e__Struct
+  end
+  union USB_PORT_EXT_STATUS_AND_CHANGE
+    as_ulong64 : UInt64
+    anonymous : USB_PORT_EXT_STATUS_AND_CHANGE_Anonymous_e__Struct
+  end
+  union USB_HUB_30_PORT_REMOTE_WAKE_MASK
+    as_uchar8 : UInt8
+    anonymous : USB_HUB_30_PORT_REMOTE_WAKE_MASK_Anonymous_e__Struct
+  end
+  union USB_FUNCTION_SUSPEND_OPTIONS
+    as_uchar : UInt8
+    anonymous : USB_FUNCTION_SUSPEND_OPTIONS_Anonymous_e__Struct
+  end
+  union OS_STRING_Anonymous_e__Union
+    b_pad : UInt8
+    b_flags : UInt8
+  end
+  union URB_Anonymous_e__Union
+    urb_header : URB_HEADER
+    urb_select_interface : URB_SELECT_INTERFACE
+    urb_select_configuration : URB_SELECT_CONFIGURATION
+    urb_pipe_request : URB_PIPE_REQUEST
+    urb_frame_length_control : URB_FRAME_LENGTH_CONTROL
+    urb_get_frame_length : URB_GET_FRAME_LENGTH
+    urb_set_frame_length : URB_SET_FRAME_LENGTH
+    urb_get_current_frame_number : URB_GET_CURRENT_FRAME_NUMBER
+    urb_control_transfer : URB_CONTROL_TRANSFER
+    urb_control_transfer_ex : URB_CONTROL_TRANSFER_EX
+    urb_bulk_or_interrupt_transfer : URB_BULK_OR_INTERRUPT_TRANSFER
+    urb_isochronous_transfer : URB_ISOCH_TRANSFER
+    urb_control_descriptor_request : URB_CONTROL_DESCRIPTOR_REQUEST
+    urb_control_get_status_request : URB_CONTROL_GET_STATUS_REQUEST
+    urb_control_feature_request : URB_CONTROL_FEATURE_REQUEST
+    urb_control_vendor_class_request : URB_CONTROL_VENDOR_OR_CLASS_REQUEST
+    urb_control_get_interface_request : URB_CONTROL_GET_INTERFACE_REQUEST
+    urb_control_get_configuration_request : URB_CONTROL_GET_CONFIGURATION_REQUEST
+    urb_os_feature_descriptor_request : URB_OS_FEATURE_DESCRIPTOR_REQUEST
+    urb_open_static_streams : URB_OPEN_STATIC_STREAMS
+    urb_get_isoch_pipe_transfer_path_delays : URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS
+  end
+  union USBFN_NOTIFICATION_u_e__Union
+    bus_speed : USBFN_BUS_SPEED
+    setup_packet : USB_DEFAULT_PIPE_SETUP_PACKET
+    configuration_value : UInt16
+    port_type : USBFN_PORT_TYPE
+    alternate_interface : ALTERNATE_INTERFACE
+  end
 
   struct BM_REQUEST_TYPE_BM
     _bitfield : UInt8

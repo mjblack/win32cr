@@ -284,90 +284,90 @@ lib LibWin32
     FORK_VIRTUAL_DISK_FLAG_EXISTING_FILE = 1
   end
 
-union OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-  version2 : OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct
-  version3 : OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct
-end
-union CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-  version2 : CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct
-  version3 : CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct
-  version4 : CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version4_e__Struct
-end
-union ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-  version2 : ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct
-end
-union STORAGE_DEPENDENCY_INFO_Anonymous_e__Union
-  version1_entries : STORAGE_DEPENDENCY_INFO_TYPE_1[0]*
-  version2_entries : STORAGE_DEPENDENCY_INFO_TYPE_2[0]*
-end
-union GET_VIRTUAL_DISK_INFO_Anonymous_e__Union
-  size : GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_Size_e__Struct
-  identifier : Guid
-  parent_location : GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocation_e__Struct
-  parent_identifier : Guid
-  parent_timestamp : UInt32
-  virtual_storage_type : VIRTUAL_STORAGE_TYPE
-  provider_subtype : UInt32
-  is4k_aligned : LibC::BOOL
-  is_loaded : LibC::BOOL
-  physical_disk : GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_PhysicalDisk_e__Struct
-  vhd_physical_sector_size : UInt32
-  smallest_safe_virtual_size : UInt64
-  fragmentation_percentage : UInt32
-  virtual_disk_id : Guid
-  change_tracking_state : GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ChangeTrackingState_e__Struct
-end
-union SET_VIRTUAL_DISK_INFO_Anonymous_e__Union
-  parent_file_path : LibC::LPWSTR
-  unique_identifier : Guid
-  parent_path_with_depth_info : SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentPathWithDepthInfo_e__Struct
-  vhd_physical_sector_size : UInt32
-  virtual_disk_id : Guid
-  change_tracking_enabled : LibC::BOOL
-  parent_locator : SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocator_e__Struct
-end
-union COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
-union MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-  version2 : MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct
-end
-union EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
-union RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
-union MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
-union TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
-  version1 : TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
-union DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
-  version1 : DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
-union MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union
-  snapshot_path : MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union_SnapshotPath_e__Struct
-  snapshot_id : Guid
-  default_file_path : LibC::LPWSTR
-end
-union APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
-  version1 : APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
-union RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
-union RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union
-  version1 : RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union_Version1_e__Struct
-end
-union FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
-  version1 : FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
-end
+  union OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+    version2 : OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct
+    version3 : OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct
+  end
+  union CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+    version2 : CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct
+    version3 : CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct
+    version4 : CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version4_e__Struct
+  end
+  union ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+    version2 : ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct
+  end
+  union STORAGE_DEPENDENCY_INFO_Anonymous_e__Union
+    version1_entries : STORAGE_DEPENDENCY_INFO_TYPE_1[0]*
+    version2_entries : STORAGE_DEPENDENCY_INFO_TYPE_2[0]*
+  end
+  union GET_VIRTUAL_DISK_INFO_Anonymous_e__Union
+    size : GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_Size_e__Struct
+    identifier : Guid
+    parent_location : GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocation_e__Struct
+    parent_identifier : Guid
+    parent_timestamp : UInt32
+    virtual_storage_type : VIRTUAL_STORAGE_TYPE
+    provider_subtype : UInt32
+    is4k_aligned : LibC::BOOL
+    is_loaded : LibC::BOOL
+    physical_disk : GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_PhysicalDisk_e__Struct
+    vhd_physical_sector_size : UInt32
+    smallest_safe_virtual_size : UInt64
+    fragmentation_percentage : UInt32
+    virtual_disk_id : Guid
+    change_tracking_state : GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ChangeTrackingState_e__Struct
+  end
+  union SET_VIRTUAL_DISK_INFO_Anonymous_e__Union
+    parent_file_path : LibC::LPWSTR
+    unique_identifier : Guid
+    parent_path_with_depth_info : SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentPathWithDepthInfo_e__Struct
+    vhd_physical_sector_size : UInt32
+    virtual_disk_id : Guid
+    change_tracking_enabled : LibC::BOOL
+    parent_locator : SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocator_e__Struct
+  end
+  union COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
+  union MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+    version2 : MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct
+  end
+  union EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
+  union RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
+  union MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
+  union TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
+    version1 : TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
+  union DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
+    version1 : DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
+  union MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union
+    snapshot_path : MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union_SnapshotPath_e__Struct
+    snapshot_id : Guid
+    default_file_path : LibC::LPWSTR
+  end
+  union APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
+    version1 : APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
+  union RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
+  union RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union
+    version1 : RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union_Version1_e__Struct
+  end
+  union FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
+    version1 : FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct
+  end
 
   struct VIRTUAL_STORAGE_TYPE
     device_id : UInt32

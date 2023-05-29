@@ -63,11 +63,11 @@ lib LibWin32
     RmNoShutdown = 2
   end
 
-union RM_FILTER_INFO_Anonymous_e__Union
-  str_filename : LibC::LPWSTR
-  process : RM_UNIQUE_PROCESS
-  str_service_short_name : LibC::LPWSTR
-end
+  union RM_FILTER_INFO_Anonymous_e__Union
+    str_filename : LibC::LPWSTR
+    process : RM_UNIQUE_PROCESS
+    str_service_short_name : LibC::LPWSTR
+  end
 
   struct RM_UNIQUE_PROCESS
     dw_process_id : UInt32

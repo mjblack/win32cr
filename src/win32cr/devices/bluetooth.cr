@@ -864,54 +864,54 @@ lib LibWin32
     BLUETOOTH_MITM_ProtectionNotDefined = 255
   end
 
-union SdpQueryUuidUnion
-  uuid128 : Guid
-  uuid32 : UInt32
-  uuid16 : UInt16
-end
-union BLUETOOTH_ADDRESS_Anonymous_e__Union
-  ull_long : UInt64
-  rg_bytes : UInt8[6]*
-end
-union BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union
-  numeric_value : UInt32
-  passkey : UInt32
-end
-union BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union
-  pin_info : BLUETOOTH_PIN_INFO
-  oob_info : BLUETOOTH_OOB_DATA_INFO
-  numeric_comp_info : BLUETOOTH_NUMERIC_COMPARISON_INFO
-  passkey_info : BLUETOOTH_PASSKEY_INFO
-end
-union SDP_ELEMENT_DATA_data_e__Union
-  int128 : SDP_LARGE_INTEGER_16
-  int64 : Int64
-  int32 : Int32
-  int16 : Int16
-  int8 : CHAR
-  uint128 : SDP_ULARGE_INTEGER_16
-  uint64 : UInt64
-  uint32 : UInt32
-  uint16 : UInt16
-  uint8 : UInt8
-  boolean_val : UInt8
-  uuid128 : Guid
-  uuid32 : UInt32
-  uuid16 : UInt16
-  string : SDP_ELEMENT_DATA_data_e__Union_string_e__Struct
-  url : SDP_ELEMENT_DATA_data_e__Union_url_e__Struct
-  sequence : SDP_ELEMENT_DATA_data_e__Union_sequence_e__Struct
-  alternative : SDP_ELEMENT_DATA_data_e__Union_alternative_e__Struct
-end
-union RFCOMM_COMMAND_Data_e__Union
-  msc : RFCOMM_MSC_DATA
-  rls : RFCOMM_RLS_DATA
-  rpn : RFCOMM_RPN_DATA
-end
-union BTH_INFO_RSP_Anonymous_e__Union
-  connectionless_mtu : UInt16
-  data : UInt8[44]*
-end
+  union SdpQueryUuidUnion
+    uuid128 : Guid
+    uuid32 : UInt32
+    uuid16 : UInt16
+  end
+  union BLUETOOTH_ADDRESS_Anonymous_e__Union
+    ull_long : UInt64
+    rg_bytes : UInt8[6]*
+  end
+  union BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union
+    numeric_value : UInt32
+    passkey : UInt32
+  end
+  union BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union
+    pin_info : BLUETOOTH_PIN_INFO
+    oob_info : BLUETOOTH_OOB_DATA_INFO
+    numeric_comp_info : BLUETOOTH_NUMERIC_COMPARISON_INFO
+    passkey_info : BLUETOOTH_PASSKEY_INFO
+  end
+  union SDP_ELEMENT_DATA_data_e__Union
+    int128 : SDP_LARGE_INTEGER_16
+    int64 : Int64
+    int32 : Int32
+    int16 : Int16
+    int8 : CHAR
+    uint128 : SDP_ULARGE_INTEGER_16
+    uint64 : UInt64
+    uint32 : UInt32
+    uint16 : UInt16
+    uint8 : UInt8
+    boolean_val : UInt8
+    uuid128 : Guid
+    uuid32 : UInt32
+    uuid16 : UInt16
+    string : SDP_ELEMENT_DATA_data_e__Union_string_e__Struct
+    url : SDP_ELEMENT_DATA_data_e__Union_url_e__Struct
+    sequence : SDP_ELEMENT_DATA_data_e__Union_sequence_e__Struct
+    alternative : SDP_ELEMENT_DATA_data_e__Union_alternative_e__Struct
+  end
+  union RFCOMM_COMMAND_Data_e__Union
+    msc : RFCOMM_MSC_DATA
+    rls : RFCOMM_RLS_DATA
+    rpn : RFCOMM_RPN_DATA
+  end
+  union BTH_INFO_RSP_Anonymous_e__Union
+    connectionless_mtu : UInt16
+    data : UInt8[44]*
+  end
 
   struct SDP_LARGE_INTEGER_16
     low_part : UInt64

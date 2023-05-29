@@ -210,28 +210,28 @@ lib LibWin32
     SNMP_ERROR_INCONSISTENTNAME = 18
   end
 
-union AsnAny_asnValue_e__Union
-  number : Int32
-  unsigned32 : UInt32
-  counter64 : ULARGE_INTEGER
-  string : AsnOctetString
-  bits : AsnOctetString
-  object : AsnObjectIdentifier
-  sequence : AsnOctetString
-  address : AsnOctetString
-  counter : UInt32
-  gauge : UInt32
-  ticks : UInt32
-  arbitrary : AsnOctetString
-end
-union Smivalue_value_e__Union
-  s_number : Int32
-  u_number : UInt32
-  h_number : Smicntr64
-  string : Smioctets
-  oid : Smioid
-  empty : UInt8
-end
+  union AsnAny_asnValue_e__Union
+    number : Int32
+    unsigned32 : UInt32
+    counter64 : ULARGE_INTEGER
+    string : AsnOctetString
+    bits : AsnOctetString
+    object : AsnObjectIdentifier
+    sequence : AsnOctetString
+    address : AsnOctetString
+    counter : UInt32
+    gauge : UInt32
+    ticks : UInt32
+    arbitrary : AsnOctetString
+  end
+  union Smivalue_value_e__Union
+    s_number : Int32
+    u_number : UInt32
+    h_number : Smicntr64
+    string : Smioctets
+    oid : Smioid
+    empty : UInt8
+  end
 
   struct AsnOctetString
     stream : UInt8*

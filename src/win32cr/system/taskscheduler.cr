@@ -170,12 +170,12 @@ lib LibWin32
     TASK_COMPATIBILITY_V2_4 = 6
   end
 
-union TRIGGER_TYPE_UNION
-  daily : DAILY
-  weekly : WEEKLY
-  monthly_date : MONTHLYDATE
-  monthly_dow : MONTHLYDOW
-end
+  union TRIGGER_TYPE_UNION
+    daily : DAILY
+    weekly : WEEKLY
+    monthly_date : MONTHLYDATE
+    monthly_dow : MONTHLYDOW
+  end
 
   struct DAILY
     days_interval : UInt16

@@ -103,10 +103,10 @@ lib LibWin32
     BSOS_PREFERDESTINATIONSTREAM = 1
   end
 
-union HSTRING_HEADER_Reserved_e__Union
-  reserved1 : Void*
-  reserved2 : CHAR[24]*
-end
+  union HSTRING_HEADER_Reserved_e__Union
+    reserved1 : Void*
+    reserved2 : CHAR[24]*
+  end
 
   struct EventRegistrationToken
     value : Int64

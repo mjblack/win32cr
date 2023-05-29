@@ -17,18 +17,18 @@ lib LibWin32
     LIST_MODULES_64BIT = 2
   end
 
-union PSAPI_WORKING_SET_BLOCK
-  flags : LibC::UINT_PTR
-  anonymous : PSAPI_WORKING_SET_BLOCK_Anonymous_e__Struct
-end
-union PSAPI_WORKING_SET_EX_BLOCK
-  flags : LibC::UINT_PTR
-  anonymous : PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union
-end
-union PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union
-  anonymous : PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Anonymous_e__Struct
-  invalid : PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Invalid_e__Struct
-end
+  union PSAPI_WORKING_SET_BLOCK
+    flags : LibC::UINT_PTR
+    anonymous : PSAPI_WORKING_SET_BLOCK_Anonymous_e__Struct
+  end
+  union PSAPI_WORKING_SET_EX_BLOCK
+    flags : LibC::UINT_PTR
+    anonymous : PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union
+  end
+  union PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union
+    anonymous : PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Anonymous_e__Struct
+    invalid : PSAPI_WORKING_SET_EX_BLOCK_Anonymous_e__Union_Invalid_e__Struct
+  end
 
   struct MODULEINFO
     lp_base_of_dll : Void*

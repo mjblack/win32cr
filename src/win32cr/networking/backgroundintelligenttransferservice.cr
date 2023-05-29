@@ -340,19 +340,19 @@ lib LibWin32
     GROUPPROP_DESCRIPTION = 12
   end
 
-union BG_AUTH_CREDENTIALS_UNION
-  basic : BG_BASIC_CREDENTIALS
-end
-union BITS_JOB_PROPERTY_VALUE
-  dword : UInt32
-  cls_id : Guid
-  enable : LibC::BOOL
-  uint64 : UInt64
-  target : BG_AUTH_TARGET
-end
-union BITS_FILE_PROPERTY_VALUE
-  string : LibC::LPWSTR
-end
+  union BG_AUTH_CREDENTIALS_UNION
+    basic : BG_BASIC_CREDENTIALS
+  end
+  union BITS_JOB_PROPERTY_VALUE
+    dword : UInt32
+    cls_id : Guid
+    enable : LibC::BOOL
+    uint64 : UInt64
+    target : BG_AUTH_TARGET
+  end
+  union BITS_FILE_PROPERTY_VALUE
+    string : LibC::LPWSTR
+  end
 
   struct BG_FILE_PROGRESS
     bytes_total : UInt64

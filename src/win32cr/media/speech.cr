@@ -1407,10 +1407,10 @@ lib LibWin32
     DISPID_SPCIdToPhone = 3
   end
 
-union SPPHRASEPROPERTY_Anonymous_e__Union
-  ul_id : UInt32
-  anonymous : SPPHRASEPROPERTY_Anonymous_e__Union_Anonymous_e__Struct
-end
+  union SPPHRASEPROPERTY_Anonymous_e__Union
+    ul_id : UInt32
+    anonymous : SPPHRASEPROPERTY_Anonymous_e__Union_Anonymous_e__Struct
+  end
 
   struct SPEVENT
     _bitfield : Int32

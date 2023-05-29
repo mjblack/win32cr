@@ -218,18 +218,18 @@ lib LibWin32
     MicrosoftHardwareColorV2 = 2
   end
 
-union COLOR
-  gray : GRAYCOLOR
-  rgb : RGBCOLOR
-  cmyk : CMYKCOLOR
-  xyz : XYZCOLOR
-  yxy : YxyCOLOR
-  lab : LabCOLOR
-  gen3ch : GENERIC3CHANNEL
-  named : NAMEDCOLOR
-  hifi : HiFiCOLOR
-  anonymous : COLOR_Anonymous_e__Struct
-end
+  union COLOR
+    gray : GRAYCOLOR
+    rgb : RGBCOLOR
+    cmyk : CMYKCOLOR
+    xyz : XYZCOLOR
+    yxy : YxyCOLOR
+    lab : LabCOLOR
+    gen3ch : GENERIC3CHANNEL
+    named : NAMEDCOLOR
+    hifi : HiFiCOLOR
+    anonymous : COLOR_Anonymous_e__Struct
+  end
 
   struct LOGCOLORSPACEA
     lcs_signature : UInt32

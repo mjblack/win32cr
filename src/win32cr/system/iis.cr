@@ -949,10 +949,10 @@ lib LibWin32
     HTTP_TRACE_TYPE_BOOL = 11
   end
 
-union METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union
-  dw_md_data_offset : LibC::UINT_PTR
-  pb_md_data : UInt8*
-end
+  union METADATA_GETALL_INTERNAL_RECORD_Anonymous_e__Union
+    dw_md_data_offset : LibC::UINT_PTR
+    pb_md_data : UInt8*
+  end
 
   struct CONFIGURATION_ENTRY
     bstr_key : UInt8

@@ -10,10 +10,10 @@ lib LibWin32
   MCAST_API_VERSION_0 = 0_i32
   MCAST_API_VERSION_1 = 1_i32
 
-union IPNG_ADDRESS
-  ip_addr_v4 : UInt32
-  ip_addr_v6 : UInt8[16]*
-end
+  union IPNG_ADDRESS
+    ip_addr_v4 : UInt32
+    ip_addr_v6 : UInt8[16]*
+  end
 
   struct MCAST_CLIENT_UID
     client_uid : UInt8*

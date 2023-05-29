@@ -315,20 +315,20 @@ lib LibWin32
     MMC_VIEW_TYPE_OCX = 2
   end
 
-union MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union
-  u_bitmap : MMC_TASK_DISPLAY_BITMAP
-  u_symbol : MMC_TASK_DISPLAY_SYMBOL
-end
-union MMC_TASK_Anonymous_e__Union
-  n_command_id : LibC::IntPtrT
-  sz_action_url : LibC::LPWSTR
-  sz_script : LibC::LPWSTR
-end
-union RESULT_VIEW_TYPE_INFO_Anonymous_e__Union
-  dw_list_options : UInt32
-  anonymous1 : RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous2_e__Struct
-end
+  union MMC_TASK_DISPLAY_OBJECT_Anonymous_e__Union
+    u_bitmap : MMC_TASK_DISPLAY_BITMAP
+    u_symbol : MMC_TASK_DISPLAY_SYMBOL
+  end
+  union MMC_TASK_Anonymous_e__Union
+    n_command_id : LibC::IntPtrT
+    sz_action_url : LibC::LPWSTR
+    sz_script : LibC::LPWSTR
+  end
+  union RESULT_VIEW_TYPE_INFO_Anonymous_e__Union
+    dw_list_options : UInt32
+    anonymous1 : RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : RESULT_VIEW_TYPE_INFO_Anonymous_e__Union_Anonymous2_e__Struct
+  end
 
   struct MMC_SNAPIN_PROPERTY
     psz_prop_name : LibC::LPWSTR

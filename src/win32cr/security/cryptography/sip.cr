@@ -38,15 +38,15 @@ lib LibWin32
   alias Pcryptsipgetcaps = Proc(SIP_SUBJECTINFO*, SIP_CAP_SET_V3*, LibC::BOOL)
   alias Pcryptsipgetsealeddigest = Proc(SIP_SUBJECTINFO*, UInt8*, UInt32, UInt8*, UInt32*, LibC::BOOL)
 
-union SIP_SUBJECTINFO_Anonymous_e__Union
-  ps_flat : MS_ADDINFO_FLAT*
-  ps_cat_member : MS_ADDINFO_CATALOGMEMBER*
-  ps_blob : MS_ADDINFO_BLOB*
-end
-union SIP_CAP_SET_V3_Anonymous_e__Union
-  dw_flags : UInt32
-  dw_reserved : UInt32
-end
+  union SIP_SUBJECTINFO_Anonymous_e__Union
+    ps_flat : MS_ADDINFO_FLAT*
+    ps_cat_member : MS_ADDINFO_CATALOGMEMBER*
+    ps_blob : MS_ADDINFO_BLOB*
+  end
+  union SIP_CAP_SET_V3_Anonymous_e__Union
+    dw_flags : UInt32
+    dw_reserved : UInt32
+  end
 
   struct SIP_SUBJECTINFO
     cb_size : UInt32

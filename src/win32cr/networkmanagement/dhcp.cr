@@ -517,88 +517,88 @@ lib LibWin32
     SHUTDOWN = 13
   end
 
-union DHCP_SUBNET_ELEMENT_DATADHCP_SUBNET_ELEMENT_UNION
-  ip_range : DHCP_IP_RANGE*
-  secondary_host : DHCP_HOST_INFO*
-  reserved_ip : DHCP_IP_RESERVATION*
-  exclude_ip_range : DHCP_IP_RANGE*
-  ip_used_cluster : DHCP_IP_CLUSTER*
-end
-union DHCP_SUBNET_ELEMENT_UNION
-end
-union DHCP_OPTION_DATA_ELEMENTDHCP_OPTION_ELEMENT_UNION
-  byte_option : UInt8
-  word_option : UInt16
-  d_word_option : UInt32
-  d_word_d_word_option : DWORD_DWORD
-  ip_address_option : UInt32
-  string_data_option : LibC::LPWSTR
-  binary_data_option : DHCP_BINARY_DATA
-  encapsulated_data_option : DHCP_BINARY_DATA
-  ipv6_address_data_option : LibC::LPWSTR
-end
-union DHCP_OPTION_ELEMENT_UNION
-end
-union DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION
-  default_scope_info : Void*
-  global_scope_info : Void*
-  subnet_scope_info : UInt32
-  reserved_scope_info : DHCP_RESERVED_SCOPE
-  m_scope_info : LibC::LPWSTR
-end
-union DHCP_OPTION_SCOPE_INFO6DHCP_OPTION_SCOPE_UNION6
-  default_scope_info : Void*
-  subnet_scope_info : DHCP_IPV6_ADDRESS
-  reserved_scope_info : DHCP_RESERVED_SCOPE6
-end
-union DHCP_OPTION_SCOPE_UNION6
-end
-union DHCP_SEARCH_INFODHCP_CLIENT_SEARCH_UNION
-  client_ip_address : UInt32
-  client_hardware_address : DHCP_BINARY_DATA
-  client_name : LibC::LPWSTR
-end
-union DHCP_CLIENT_SEARCH_UNION
-end
-union DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION
-  byte_value : UInt8
-  word_value : UInt16
-  d_word_value : UInt32
-  string_value : LibC::LPWSTR
-  binary_value : DHCP_BINARY_DATA
-end
-union DHCP_SUBNET_ELEMENT_DATA_V4DHCP_SUBNET_ELEMENT_UNION_V4
-  ip_range : DHCP_IP_RANGE*
-  secondary_host : DHCP_HOST_INFO*
-  reserved_ip : DHCP_IP_RESERVATION_V4*
-  exclude_ip_range : DHCP_IP_RANGE*
-  ip_used_cluster : DHCP_IP_CLUSTER*
-end
-union DHCP_SUBNET_ELEMENT_UNION_V4
-end
-union DHCP_ATTRIB_Anonymous_e__Union
-  dhcp_attrib_bool : LibC::BOOL
-  dhcp_attrib_ulong : UInt32
-end
-union DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5
-  ip_range : DHCP_BOOTP_IP_RANGE*
-  secondary_host : DHCP_HOST_INFO*
-  reserved_ip : DHCP_IP_RESERVATION_V4*
-  exclude_ip_range : DHCP_IP_RANGE*
-  ip_used_cluster : DHCP_IP_CLUSTER*
-end
-union DHCP_SUBNET_ELEMENT_DATA_V6DHCP_SUBNET_ELEMENT_UNION_V6
-  ip_range : DHCP_IP_RANGE_V6*
-  reserved_ip : DHCP_IP_RESERVATION_V6*
-  exclude_ip_range : DHCP_IP_RANGE_V6*
-end
-union DHCP_SUBNET_ELEMENT_UNION_V6
-end
-union DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6
-  client_ip_address : DHCP_IPV6_ADDRESS
-  client_duid : DHCP_BINARY_DATA
-  client_name : LibC::LPWSTR
-end
+  union DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION
+    ip_range : DHCP_IP_RANGE*
+    secondary_host : DHCP_HOST_INFO*
+    reserved_ip : DHCP_IP_RESERVATION*
+    exclude_ip_range : DHCP_IP_RANGE*
+    ip_used_cluster : DHCP_IP_CLUSTER*
+  end
+  union DHCP_SUBNET_ELEMENT_UNION
+  end
+  union DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION
+    byte_option : UInt8
+    word_option : UInt16
+    d_word_option : UInt32
+    d_word_d_word_option : DWORD_DWORD
+    ip_address_option : UInt32
+    string_data_option : LibC::LPWSTR
+    binary_data_option : DHCP_BINARY_DATA
+    encapsulated_data_option : DHCP_BINARY_DATA
+    ipv6_address_data_option : LibC::LPWSTR
+  end
+  union DHCP_OPTION_ELEMENT_UNION
+  end
+  union DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION
+    default_scope_info : Void*
+    global_scope_info : Void*
+    subnet_scope_info : UInt32
+    reserved_scope_info : DHCP_RESERVED_SCOPE
+    m_scope_info : LibC::LPWSTR
+  end
+  union DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6
+    default_scope_info : Void*
+    subnet_scope_info : DHCP_IPV6_ADDRESS
+    reserved_scope_info : DHCP_RESERVED_SCOPE6
+  end
+  union DHCP_OPTION_SCOPE_UNION6
+  end
+  union DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION
+    client_ip_address : UInt32
+    client_hardware_address : DHCP_BINARY_DATA
+    client_name : LibC::LPWSTR
+  end
+  union DHCP_CLIENT_SEARCH_UNION
+  end
+  union DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION
+    byte_value : UInt8
+    word_value : UInt16
+    d_word_value : UInt32
+    string_value : LibC::LPWSTR
+    binary_value : DHCP_BINARY_DATA
+  end
+  union DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4
+    ip_range : DHCP_IP_RANGE*
+    secondary_host : DHCP_HOST_INFO*
+    reserved_ip : DHCP_IP_RESERVATION_V4*
+    exclude_ip_range : DHCP_IP_RANGE*
+    ip_used_cluster : DHCP_IP_CLUSTER*
+  end
+  union DHCP_SUBNET_ELEMENT_UNION_V4
+  end
+  union DHCP_ATTRIB_Anonymous_e__Union
+    dhcp_attrib_bool : LibC::BOOL
+    dhcp_attrib_ulong : UInt32
+  end
+  union DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5
+    ip_range : DHCP_BOOTP_IP_RANGE*
+    secondary_host : DHCP_HOST_INFO*
+    reserved_ip : DHCP_IP_RESERVATION_V4*
+    exclude_ip_range : DHCP_IP_RANGE*
+    ip_used_cluster : DHCP_IP_CLUSTER*
+  end
+  union DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6
+    ip_range : DHCP_IP_RANGE_V6*
+    reserved_ip : DHCP_IP_RESERVATION_V6*
+    exclude_ip_range : DHCP_IP_RANGE_V6*
+  end
+  union DHCP_SUBNET_ELEMENT_UNION_V6
+  end
+  union DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6
+    client_ip_address : DHCP_IPV6_ADDRESS
+    client_duid : DHCP_BINARY_DATA
+    client_name : LibC::LPWSTR
+  end
 
   struct DHCPV6CAPI_PARAMS
     flags : UInt32
@@ -746,7 +746,7 @@ end
   end
   struct DHCP_SUBNET_ELEMENT_DATA
     element_type : DHCP_SUBNET_ELEMENT_TYPE
-    element : DHCP_SUBNET_ELEMENT_DATADHCP_SUBNET_ELEMENT_UNION
+    element : DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION
   end
   struct DHCP_SUBNET_ELEMENT_INFO_ARRAY
     num_elements : UInt32
@@ -782,7 +782,7 @@ end
   end
   struct DHCP_OPTION_DATA_ELEMENT
     option_type : DHCP_OPTION_DATA_TYPE
-    element : DHCP_OPTION_DATA_ELEMENTDHCP_OPTION_ELEMENT_UNION
+    element : DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION
   end
   struct DHCP_OPTION_DATA
     num_elements : UInt32
@@ -821,7 +821,7 @@ end
   end
   struct DHCP_OPTION_SCOPE_INFO6
     scope_type : DHCP_OPTION_SCOPE_TYPE6
-    scope_info : DHCP_OPTION_SCOPE_INFO6DHCP_OPTION_SCOPE_UNION6
+    scope_info : DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6
   end
   struct DHCP_OPTION_LIST
     num_options : UInt32
@@ -899,7 +899,7 @@ end
   end
   struct DHCP_SEARCH_INFO
     search_type : DHCP_SEARCH_INFO_TYPE
-    search_info : DHCP_SEARCH_INFODHCP_CLIENT_SEARCH_UNION
+    search_info : DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION
   end
   struct DHCP_PROPERTY
     id : DHCP_PROPERTY_ID
@@ -1074,7 +1074,7 @@ end
   end
   struct DHCP_SUBNET_ELEMENT_DATA_V4
     element_type : DHCP_SUBNET_ELEMENT_TYPE
-    element : DHCP_SUBNET_ELEMENT_DATA_V4DHCP_SUBNET_ELEMENT_UNION_V4
+    element : DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4
   end
   struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4
     num_elements : UInt32
@@ -1327,7 +1327,7 @@ end
   end
   struct DHCP_SUBNET_ELEMENT_DATA_V6
     element_type : DHCP_SUBNET_ELEMENT_TYPE_V6
-    element : DHCP_SUBNET_ELEMENT_DATA_V6DHCP_SUBNET_ELEMENT_UNION_V6
+    element : DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6
   end
   struct DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6
     num_elements : UInt32

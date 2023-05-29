@@ -1245,70 +1245,70 @@ lib LibWin32
     OLEUIPASTE_LINKTYPE8 = 128
   end
 
-union Wiresafearray_union_u_e__Struct
-  bstr_str : Wiresafearr_bstr
-  unknown_str : Wiresafearr_unknown
-  dispatch_str : Wiresafearr_dispatch
-  variant_str : Wiresafearr_variant
-  record_str : Wiresafearr_brecord
-  have_iid_str : Wiresafearr_haveiid
-  byte_str : BYTE_SIZEDARR
-  word_str : SHORT_SIZEDARR
-  long_str : LONG_SIZEDARR
-  hyper_str : HYPER_SIZEDARR
-end
-union Wirevariant_Anonymous_e__Union
-  ll_val : Int64
-  l_val : Int32
-  b_val : UInt8
-  i_val : Int16
-  flt_val : Float32
-  dbl_val : Float64
-  bool_val : Int16
-  scode : Int32
-  cy_val : CY
-  date : Float64
-  bstr_val : FLAGGED_WORD_BLOB*
-  punk_val : IUnknown
-  pdisp_val : IDispatch
-  parray : Wiresafearray**
-  brec_val : Wirebrecord*
-  pb_val : UInt8*
-  pi_val : Int16*
-  pl_val : Int32*
-  pll_val : Int64*
-  pflt_val : Float32*
-  pdbl_val : Float64*
-  pbool_val : Int16*
-  pscode : Int32*
-  pcy_val : CY*
-  pdate : Float64*
-  pbstr_val : FLAGGED_WORD_BLOB**
-  ppunk_val : IUnknown*
-  ppdisp_val : IDispatch*
-  pparray : Wiresafearray***
-  pvar_val : Wirevariant**
-  c_val : CHAR
-  ui_val : UInt16
-  ul_val : UInt32
-  ull_val : UInt64
-  int_val : Int32
-  uint_val : UInt32
-  dec_val : DECIMAL
-  pdec_val : DECIMAL*
-  pc_val : PSTR
-  pui_val : UInt16*
-  pul_val : UInt32*
-  pull_val : UInt64*
-  pint_val : Int32*
-  puint_val : UInt32*
-end
-union PICTDESC_Anonymous_e__Union
-  bmp : PICTDESC_Anonymous_e__Union_bmp_e__Struct
-  wmf : PICTDESC_Anonymous_e__Union_wmf_e__Struct
-  icon : PICTDESC_Anonymous_e__Union_icon_e__Struct
-  emf : PICTDESC_Anonymous_e__Union_emf_e__Struct
-end
+  union Wiresafearray_union_u_e__Struct
+    bstr_str : Wiresafearr_bstr
+    unknown_str : Wiresafearr_unknown
+    dispatch_str : Wiresafearr_dispatch
+    variant_str : Wiresafearr_variant
+    record_str : Wiresafearr_brecord
+    have_iid_str : Wiresafearr_haveiid
+    byte_str : BYTE_SIZEDARR
+    word_str : SHORT_SIZEDARR
+    long_str : LONG_SIZEDARR
+    hyper_str : HYPER_SIZEDARR
+  end
+  union Wirevariant_Anonymous_e__Union
+    ll_val : Int64
+    l_val : Int32
+    b_val : UInt8
+    i_val : Int16
+    flt_val : Float32
+    dbl_val : Float64
+    bool_val : Int16
+    scode : Int32
+    cy_val : CY
+    date : Float64
+    bstr_val : FLAGGED_WORD_BLOB*
+    punk_val : IUnknown
+    pdisp_val : IDispatch
+    parray : Wiresafearray**
+    brec_val : Wirebrecord*
+    pb_val : UInt8*
+    pi_val : Int16*
+    pl_val : Int32*
+    pll_val : Int64*
+    pflt_val : Float32*
+    pdbl_val : Float64*
+    pbool_val : Int16*
+    pscode : Int32*
+    pcy_val : CY*
+    pdate : Float64*
+    pbstr_val : FLAGGED_WORD_BLOB**
+    ppunk_val : IUnknown*
+    ppdisp_val : IDispatch*
+    pparray : Wiresafearray***
+    pvar_val : Wirevariant**
+    c_val : CHAR
+    ui_val : UInt16
+    ul_val : UInt32
+    ull_val : UInt64
+    int_val : Int32
+    uint_val : UInt32
+    dec_val : DECIMAL
+    pdec_val : DECIMAL*
+    pc_val : PSTR
+    pui_val : UInt16*
+    pul_val : UInt32*
+    pull_val : UInt64*
+    pint_val : Int32*
+    puint_val : UInt32*
+  end
+  union PICTDESC_Anonymous_e__Union
+    bmp : PICTDESC_Anonymous_e__Union_bmp_e__Struct
+    wmf : PICTDESC_Anonymous_e__Union_wmf_e__Struct
+    icon : PICTDESC_Anonymous_e__Union_icon_e__Struct
+    emf : PICTDESC_Anonymous_e__Union_emf_e__Struct
+  end
 
   struct Wiresafearr_bstr
     size : UInt32

@@ -606,72 +606,72 @@ lib LibWin32
     FC_EXPR_END = 6
   end
 
-union RPC_SECURITY_QOS_V2_W_u_e__Union
-  http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_W*
-end
-union RPC_SECURITY_QOS_V2_A_u_e__Union
-  http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_A*
-end
-union RPC_SECURITY_QOS_V3_W_u_e__Union
-  http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_W*
-end
-union RPC_SECURITY_QOS_V3_A_u_e__Union
-  http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_A*
-end
-union RPC_SECURITY_QOS_V4_W_u_e__Union
-  http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_W*
-end
-union RPC_SECURITY_QOS_V4_A_u_e__Union
-  http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_A*
-end
-union RPC_SECURITY_QOS_V5_W_u_e__Union
-  http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_W*
-end
-union RPC_SECURITY_QOS_V5_A_u_e__Union
-  http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_A*
-end
-union RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union
-  reserved : UInt16*
-end
-union RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union
-  reserved : UInt8*
-end
-union RPC_ASYNC_NOTIFICATION_INFO
-  apc : RPC_ASYNC_NOTIFICATION_INFO_APC_e__Struct
-  ioc : RPC_ASYNC_NOTIFICATION_INFO_IOC_e__Struct
-  int_ptr : RPC_ASYNC_NOTIFICATION_INFO_IntPtr_e__Struct
-  h_event : LibC::HANDLE
-  notification_routine : PFN_RPCNOTIFICATION_ROUTINE
-end
-union RPC_EE_INFO_PARAM_u_e__Union
-  ansi_string : PSTR
-  unicode_string : LibC::LPWSTR
-  l_val : Int32
-  s_val : Int16
-  p_val : UInt64
-  b_val : BinaryParam
-end
-union RPC_EXTENDED_ERROR_INFO_u_e__Union
-  system_time : SYSTEMTIME
-  file_time : FILETIME
-end
-union MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union
-  p_auto_handle : Void**
-  p_primitive_handle : Void**
-  p_generic_binding_info : GENERIC_BINDING_INFO*
-end
-union CLIENT_CALL_RETURN
-  pointer : Void*
-  simple : LibC::IntPtrT
-end
-union NDR_USER_MARSHAL_INFO_Anonymous_e__Union
-  level1 : NDR_USER_MARSHAL_INFO_LEVEL1
-end
-union NDR64_BINDINGS
-  primitive : NDR64_BIND_PRIMITIVE
-  generic : NDR64_BIND_GENERIC
-  context : NDR64_BIND_CONTEXT
-end
+  union RPC_SECURITY_QOS_V2_W_u_e__Union
+    http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_W*
+  end
+  union RPC_SECURITY_QOS_V2_A_u_e__Union
+    http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_A*
+  end
+  union RPC_SECURITY_QOS_V3_W_u_e__Union
+    http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_W*
+  end
+  union RPC_SECURITY_QOS_V3_A_u_e__Union
+    http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_A*
+  end
+  union RPC_SECURITY_QOS_V4_W_u_e__Union
+    http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_W*
+  end
+  union RPC_SECURITY_QOS_V4_A_u_e__Union
+    http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_A*
+  end
+  union RPC_SECURITY_QOS_V5_W_u_e__Union
+    http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_W*
+  end
+  union RPC_SECURITY_QOS_V5_A_u_e__Union
+    http_credentials : RPC_HTTP_TRANSPORT_CREDENTIALS_A*
+  end
+  union RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union
+    reserved : UInt16*
+  end
+  union RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union
+    reserved : UInt8*
+  end
+  union RPC_ASYNC_NOTIFICATION_INFO
+    apc : RPC_ASYNC_NOTIFICATION_INFO_APC_e__Struct
+    ioc : RPC_ASYNC_NOTIFICATION_INFO_IOC_e__Struct
+    int_ptr : RPC_ASYNC_NOTIFICATION_INFO_IntPtr_e__Struct
+    h_event : LibC::HANDLE
+    notification_routine : PFN_RPCNOTIFICATION_ROUTINE
+  end
+  union RPC_EE_INFO_PARAM_u_e__Union
+    ansi_string : PSTR
+    unicode_string : LibC::LPWSTR
+    l_val : Int32
+    s_val : Int16
+    p_val : UInt64
+    b_val : BinaryParam
+  end
+  union RPC_EXTENDED_ERROR_INFO_u_e__Union
+    system_time : SYSTEMTIME
+    file_time : FILETIME
+  end
+  union MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union
+    p_auto_handle : Void**
+    p_primitive_handle : Void**
+    p_generic_binding_info : GENERIC_BINDING_INFO*
+  end
+  union CLIENT_CALL_RETURN
+    pointer : Void*
+    simple : LibC::IntPtrT
+  end
+  union NDR_USER_MARSHAL_INFO_Anonymous_e__Union
+    level1 : NDR_USER_MARSHAL_INFO_LEVEL1
+  end
+  union NDR64_BINDINGS
+    primitive : NDR64_BIND_PRIMITIVE
+    generic : NDR64_BIND_GENERIC
+    context : NDR64_BIND_CONTEXT
+  end
 
   struct NDR_SCONTEXT_1
     pad : Void[2]**

@@ -131,10 +131,10 @@ lib LibWin32
   alias VDMGETSYMBOLPROC = Proc(PSTR, UInt16, UInt32, LibC::BOOL, LibC::BOOL, UInt8*, UInt32*, LibC::BOOL)
   alias VDMGETADDREXPRESSIONPROC = Proc(PSTR, PSTR, UInt16*, UInt32*, UInt16*, LibC::BOOL)
 
-union VDMLDT_ENTRY_HighWord_e__Union
-  bytes : VDMLDT_ENTRY_HighWord_e__Union_Bytes_e__Struct
-  bits : VDMLDT_ENTRY_HighWord_e__Union_Bits_e__Struct
-end
+  union VDMLDT_ENTRY_HighWord_e__Union
+    bytes : VDMLDT_ENTRY_HighWord_e__Union_Bytes_e__Struct
+    bits : VDMLDT_ENTRY_HighWord_e__Union_Bits_e__Struct
+  end
 
   struct VDMCONTEXT
     context_flags : UInt32

@@ -107,17 +107,17 @@ lib LibWin32
     EcRuntimeStatusActiveStatusTrying = 4
   end
 
-union EC_VARIANT_Anonymous_e__Union
-  boolean_val : LibC::BOOL
-  u_int32_val : UInt32
-  date_time_val : UInt64
-  string_val : LibC::LPWSTR
-  binary_val : UInt8*
-  boolean_arr : LibC::BOOL*
-  int32_arr : Int32*
-  string_arr : LibC::LPWSTR*
-  property_handle_val : LibC::IntPtrT
-end
+  union EC_VARIANT_Anonymous_e__Union
+    boolean_val : LibC::BOOL
+    u_int32_val : UInt32
+    date_time_val : UInt64
+    string_val : LibC::LPWSTR
+    binary_val : UInt8*
+    boolean_arr : LibC::BOOL*
+    int32_arr : Int32*
+    string_arr : LibC::LPWSTR*
+    property_handle_val : LibC::IntPtrT
+  end
 
   struct EC_VARIANT
     anonymous : EC_VARIANT_Anonymous_e__Union

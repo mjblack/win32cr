@@ -100,21 +100,21 @@ lib LibWin32
     STD_ERROR_HANDLE = 4294967284
   end
 
-union KEY_EVENT_RECORD_uChar_e__Union
-  unicode_char : Char
-  ascii_char : CHAR
-end
-union INPUT_RECORD_Event_e__Union
-  key_event : KEY_EVENT_RECORD
-  mouse_event : MOUSE_EVENT_RECORD
-  window_buffer_size_event : WINDOW_BUFFER_SIZE_RECORD
-  menu_event : MENU_EVENT_RECORD
-  focus_event : FOCUS_EVENT_RECORD
-end
-union CHAR_INFO_Char_e__Union
-  unicode_char : Char
-  ascii_char : CHAR
-end
+  union KEY_EVENT_RECORD_uChar_e__Union
+    unicode_char : Char
+    ascii_char : CHAR
+  end
+  union INPUT_RECORD_Event_e__Union
+    key_event : KEY_EVENT_RECORD
+    mouse_event : MOUSE_EVENT_RECORD
+    window_buffer_size_event : WINDOW_BUFFER_SIZE_RECORD
+    menu_event : MENU_EVENT_RECORD
+    focus_event : FOCUS_EVENT_RECORD
+  end
+  union CHAR_INFO_Char_e__Union
+    unicode_char : Char
+    ascii_char : CHAR
+  end
 
   struct COORD
     x : Int16

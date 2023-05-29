@@ -1317,34 +1317,34 @@ lib LibWin32
     ACTCTX_COMPATIBILITY_ELEMENT_TYPE_MAXVERSIONTESTED = 3
   end
 
-union PM_ENUM_FILTER_FilterParameter_e__Union
-  dummy : Int32
-  genre : PM_APP_GENRE
-  app_hub_type : PM_APPLICATION_HUBTYPE
-  hub_type : PM_TILE_HUBTYPE
-  tasktype : PM_TASK_TYPE
-  task_product_id : Guid
-  tile_product_id : Guid
-  app_task_type : Tagapptasktype
-  consumer : PM_EXTENSIONCONSUMER
-  bsa_task : PM_BSATASKID
-  bsa_product_id : Guid
-  bw_task : PM_BWTASKID
-  protocol_name : UInt8
-  file_type : UInt8
-  content_type : UInt8
-  app_supported_file_ext_pid : Guid
-  share_target_file_type : UInt8
-end
-union PATCH_OLD_FILE_INFO_Anonymous_e__Union
-  old_file_name_a : PSTR
-  old_file_name_w : LibC::LPWSTR
-  old_file_handle : LibC::HANDLE
-end
-union DELTA_INPUT_Anonymous_e__Union
-  lpc_start : Void*
-  lp_start : Void*
-end
+  union PM_ENUM_FILTER_FilterParameter_e__Union
+    dummy : Int32
+    genre : PM_APP_GENRE
+    app_hub_type : PM_APPLICATION_HUBTYPE
+    hub_type : PM_TILE_HUBTYPE
+    tasktype : PM_TASK_TYPE
+    task_product_id : Guid
+    tile_product_id : Guid
+    app_task_type : Tagapptasktype
+    consumer : PM_EXTENSIONCONSUMER
+    bsa_task : PM_BSATASKID
+    bsa_product_id : Guid
+    bw_task : PM_BWTASKID
+    protocol_name : UInt8
+    file_type : UInt8
+    content_type : UInt8
+    app_supported_file_ext_pid : Guid
+    share_target_file_type : UInt8
+  end
+  union PATCH_OLD_FILE_INFO_Anonymous_e__Union
+    old_file_name_a : PSTR
+    old_file_name_w : LibC::LPWSTR
+    old_file_handle : LibC::HANDLE
+  end
+  union DELTA_INPUT_Anonymous_e__Union
+    lpc_start : Void*
+    lp_start : Void*
+  end
 
   struct PMSIHANDLE
     m_h : MSIHANDLE

@@ -256,10 +256,10 @@ lib LibWin32
     FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS_ALL = 3
   end
 
-union INET_FIREWALL_AC_CHANGE_Anonymous_e__Union
-  capabilities : INET_FIREWALL_AC_CAPABILITIES
-  binaries : INET_FIREWALL_AC_BINARIES
-end
+  union INET_FIREWALL_AC_CHANGE_Anonymous_e__Union
+    capabilities : INET_FIREWALL_AC_CAPABILITIES
+    binaries : INET_FIREWALL_AC_BINARIES
+  end
 
   struct NETCON_PROPERTIES
     guid_id : Guid

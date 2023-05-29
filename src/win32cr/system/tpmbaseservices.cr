@@ -50,10 +50,10 @@ lib LibWin32
     TBS_COMMAND_LOCALITY_FOUR = 4
   end
 
-union TBS_CONTEXT_PARAMS2_Anonymous_e__Union
-  anonymous : TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct
-  as_uint32 : UInt32
-end
+  union TBS_CONTEXT_PARAMS2_Anonymous_e__Union
+    anonymous : TBS_CONTEXT_PARAMS2_Anonymous_e__Union_Anonymous_e__Struct
+    as_uint32 : UInt32
+  end
 
   struct TBS_CONTEXT_PARAMS
     version : UInt32

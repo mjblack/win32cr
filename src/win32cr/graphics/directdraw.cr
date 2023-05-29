@@ -1126,192 +1126,192 @@ lib LibWin32
   alias PDX_TRANSFER = Proc(Void*, DDTRANSFERININFO*, DDTRANSFEROUTINFO*, UInt32)
   alias PDX_GETTRANSFERSTATUS = Proc(Void*, Void*, DDGETTRANSFERSTATUSOUTINFO*, UInt32)
 
-union DDBLTFX_Anonymous4_e__Union
-  dw_alpha_src_const : UInt32
-  lp_dds_alpha_src : IDirectDrawSurface
-end
-union DDBLTFX_Anonymous2_e__Union
-  dw_z_src_const : UInt32
-  lp_ddsz_buffer_src : IDirectDrawSurface
-end
-union DDBLTFX_Anonymous5_e__Union
-  dw_fill_color : UInt32
-  dw_fill_depth : UInt32
-  dw_fill_pixel : UInt32
-  lp_dds_pattern : IDirectDrawSurface
-end
-union DDBLTFX_Anonymous1_e__Union
-  dw_z_dest_const : UInt32
-  lp_ddsz_buffer_dest : IDirectDrawSurface
-end
-union DDBLTFX_Anonymous3_e__Union
-  dw_alpha_dest_const : UInt32
-  lp_dds_alpha_dest : IDirectDrawSurface
-end
-union DDSCAPSEX_Anonymous_e__Union
-  dw_caps4 : UInt32
-  dw_volume_depth : UInt32
-end
-union DDSCAPS2_Anonymous_e__Union
-  dw_caps4 : UInt32
-  dw_volume_depth : UInt32
-end
-union DDPIXELFORMAT_Anonymous5_e__Union
-  dw_rgb_alpha_bit_mask : UInt32
-  dw_yuv_alpha_bit_mask : UInt32
-  dw_luminance_alpha_bit_mask : UInt32
-  dw_rgbz_bit_mask : UInt32
-  dw_yuvz_bit_mask : UInt32
-end
-union DDPIXELFORMAT_Anonymous3_e__Union
-  dw_g_bit_mask : UInt32
-  dw_u_bit_mask : UInt32
-  dw_z_bit_mask : UInt32
-  dw_bump_dv_bit_mask : UInt32
-  multi_sample_caps : DDPIXELFORMAT_Anonymous3_e__Union_MultiSampleCaps_e__Struct
-end
-union DDPIXELFORMAT_Anonymous1_e__Union
-  dw_rgb_bit_count : UInt32
-  dw_yuv_bit_count : UInt32
-  dw_z_buffer_bit_depth : UInt32
-  dw_alpha_bit_depth : UInt32
-  dw_luminance_bit_count : UInt32
-  dw_bump_bit_count : UInt32
-  dw_private_format_bit_count : UInt32
-end
-union DDPIXELFORMAT_Anonymous4_e__Union
-  dw_b_bit_mask : UInt32
-  dw_v_bit_mask : UInt32
-  dw_stencil_bit_mask : UInt32
-  dw_bump_luminance_bit_mask : UInt32
-end
-union DDPIXELFORMAT_Anonymous2_e__Union
-  dw_r_bit_mask : UInt32
-  dw_y_bit_mask : UInt32
-  dw_stencil_bit_depth : UInt32
-  dw_luminance_bit_mask : UInt32
-  dw_bump_du_bit_mask : UInt32
-  dw_operations : UInt32
-end
-union DDOVERLAYFX_Anonymous2_e__Union
-  dw_alpha_src_const : UInt32
-  lp_dds_alpha_src : IDirectDrawSurface
-end
-union DDOVERLAYFX_Anonymous1_e__Union
-  dw_alpha_dest_const : UInt32
-  lp_dds_alpha_dest : IDirectDrawSurface
-end
-union DDSURFACEDESC_Anonymous2_e__Union
-  dw_mip_map_count : UInt32
-  dw_z_buffer_bit_depth : UInt32
-  dw_refresh_rate : UInt32
-end
-union DDSURFACEDESC_Anonymous1_e__Union
-  l_pitch : Int32
-  dw_linear_size : UInt32
-end
-union DDSURFACEDESC2_Anonymous4_e__Union
-  ddck_ck_dest_overlay : DDCOLORKEY
-  dw_empty_face_color : UInt32
-end
-union DDSURFACEDESC2_Anonymous2_e__Union
-  dw_back_buffer_count : UInt32
-  dw_depth : UInt32
-end
-union DDSURFACEDESC2_Anonymous3_e__Union
-  dw_mip_map_count : UInt32
-  dw_refresh_rate : UInt32
-  dw_src_vb_handle : UInt32
-end
-union DDSURFACEDESC2_Anonymous1_e__Union
-  l_pitch : Int32
-  dw_linear_size : UInt32
-end
-union DDSURFACEDESC2_Anonymous5_e__Union
-  ddpf_pixel_format : DDPIXELFORMAT
-  dw_fvf : UInt32
-end
-union SURFACEALIGNMENT_Anonymous_e__Union
-  linear : SURFACEALIGNMENT_Anonymous_e__Union_Linear_e__Struct
-  rectangular : SURFACEALIGNMENT_Anonymous_e__Union_Rectangular_e__Struct
-end
-union VIDMEM_Anonymous1_e__Union
-  fp_end : LibC::UINT_PTR
-  dw_width : UInt32
-end
-union VIDMEM_Anonymous2_e__Union
-  lp_heap : VMEMHEAP*
-  dw_height : UInt32
-end
-union DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union
-  dw_reserved1 : LibC::UINT_PTR
-  h_helgdi_palette : HPALETTE
-end
-union DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union
-  lp_dd : DDRAWI_DIRECTDRAW_GBL*
-  lp_dd_handle : Void*
-end
-union DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union
-  lp_rect_list : ACCESSRECTLIST*
-  dw_block_size_y : UInt32
-  l_slice_pitch : Int32
-end
-union DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union
-  lp_vid_mem_heap : VMEMHEAP*
-  dw_block_size_x : UInt32
-end
-union DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union
-  l_pitch : Int32
-  dw_linear_size : UInt32
-end
-union DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union
-  dw_physical_page_table : UInt32
-  fp_physical_vid_mem : LibC::UINT_PTR
-end
-union DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union
-  lp_dd_clipper : DDRAWI_DDRAWCLIPPER_LCL*
-  lp16_dd_clipper : DDRAWI_DDRAWCLIPPER_INT*
-end
-union DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union
-  lp_dd_palette : DDRAWI_DDRAWPALETTE_INT*
-  lp16_dd_palette : DDRAWI_DDRAWPALETTE_INT*
-end
-union DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union
-  dwh_context : LibC::UINT_PTR
-end
-union VIDEOMEMORY_Anonymous1_e__Union
-  fp_end : LibC::UINT_PTR
-  dw_width : UInt32
-end
-union VIDEOMEMORY_Anonymous2_e__Union
-  lp_heap : VMEMHEAP*
-  dw_height : UInt32
-end
-union DD_SURFACE_GLOBAL_Anonymous3_e__Union
-  l_pitch : Int32
-  dw_linear_size : UInt32
-end
-union DD_SURFACE_GLOBAL_Anonymous1_e__Union
-  dw_block_size_y : UInt32
-  l_slice_pitch : Int32
-end
-union DD_SURFACE_GLOBAL_Anonymous2_e__Union
-  lp_vid_mem_heap : VIDEOMEMORY*
-  dw_block_size_x : UInt32
-  dw_user_mem_size : UInt32
-end
-union DD_SURFACE_LOCAL_Anonymous2_e__Union
-  ddck_ck_dest_overlay : DDCOLORKEY
-  ddck_ck_dest_blt : DDCOLORKEY
-end
-union DD_SURFACE_LOCAL_Anonymous1_e__Union
-  ddck_ck_src_overlay : DDCOLORKEY
-  ddck_ck_src_blt : DDCOLORKEY
-end
-union DD_GETDRIVERSTATEDATA_Anonymous_e__Union
-  lp_dd : DD_DIRECTDRAW_GLOBAL*
-  dwh_context : LibC::UINT_PTR
-end
+  union DDBLTFX_Anonymous4_e__Union
+    dw_alpha_src_const : UInt32
+    lp_dds_alpha_src : IDirectDrawSurface
+  end
+  union DDBLTFX_Anonymous2_e__Union
+    dw_z_src_const : UInt32
+    lp_ddsz_buffer_src : IDirectDrawSurface
+  end
+  union DDBLTFX_Anonymous5_e__Union
+    dw_fill_color : UInt32
+    dw_fill_depth : UInt32
+    dw_fill_pixel : UInt32
+    lp_dds_pattern : IDirectDrawSurface
+  end
+  union DDBLTFX_Anonymous1_e__Union
+    dw_z_dest_const : UInt32
+    lp_ddsz_buffer_dest : IDirectDrawSurface
+  end
+  union DDBLTFX_Anonymous3_e__Union
+    dw_alpha_dest_const : UInt32
+    lp_dds_alpha_dest : IDirectDrawSurface
+  end
+  union DDSCAPSEX_Anonymous_e__Union
+    dw_caps4 : UInt32
+    dw_volume_depth : UInt32
+  end
+  union DDSCAPS2_Anonymous_e__Union
+    dw_caps4 : UInt32
+    dw_volume_depth : UInt32
+  end
+  union DDPIXELFORMAT_Anonymous5_e__Union
+    dw_rgb_alpha_bit_mask : UInt32
+    dw_yuv_alpha_bit_mask : UInt32
+    dw_luminance_alpha_bit_mask : UInt32
+    dw_rgbz_bit_mask : UInt32
+    dw_yuvz_bit_mask : UInt32
+  end
+  union DDPIXELFORMAT_Anonymous3_e__Union
+    dw_g_bit_mask : UInt32
+    dw_u_bit_mask : UInt32
+    dw_z_bit_mask : UInt32
+    dw_bump_dv_bit_mask : UInt32
+    multi_sample_caps : DDPIXELFORMAT_Anonymous3_e__Union_MultiSampleCaps_e__Struct
+  end
+  union DDPIXELFORMAT_Anonymous1_e__Union
+    dw_rgb_bit_count : UInt32
+    dw_yuv_bit_count : UInt32
+    dw_z_buffer_bit_depth : UInt32
+    dw_alpha_bit_depth : UInt32
+    dw_luminance_bit_count : UInt32
+    dw_bump_bit_count : UInt32
+    dw_private_format_bit_count : UInt32
+  end
+  union DDPIXELFORMAT_Anonymous4_e__Union
+    dw_b_bit_mask : UInt32
+    dw_v_bit_mask : UInt32
+    dw_stencil_bit_mask : UInt32
+    dw_bump_luminance_bit_mask : UInt32
+  end
+  union DDPIXELFORMAT_Anonymous2_e__Union
+    dw_r_bit_mask : UInt32
+    dw_y_bit_mask : UInt32
+    dw_stencil_bit_depth : UInt32
+    dw_luminance_bit_mask : UInt32
+    dw_bump_du_bit_mask : UInt32
+    dw_operations : UInt32
+  end
+  union DDOVERLAYFX_Anonymous2_e__Union
+    dw_alpha_src_const : UInt32
+    lp_dds_alpha_src : IDirectDrawSurface
+  end
+  union DDOVERLAYFX_Anonymous1_e__Union
+    dw_alpha_dest_const : UInt32
+    lp_dds_alpha_dest : IDirectDrawSurface
+  end
+  union DDSURFACEDESC_Anonymous2_e__Union
+    dw_mip_map_count : UInt32
+    dw_z_buffer_bit_depth : UInt32
+    dw_refresh_rate : UInt32
+  end
+  union DDSURFACEDESC_Anonymous1_e__Union
+    l_pitch : Int32
+    dw_linear_size : UInt32
+  end
+  union DDSURFACEDESC2_Anonymous4_e__Union
+    ddck_ck_dest_overlay : DDCOLORKEY
+    dw_empty_face_color : UInt32
+  end
+  union DDSURFACEDESC2_Anonymous2_e__Union
+    dw_back_buffer_count : UInt32
+    dw_depth : UInt32
+  end
+  union DDSURFACEDESC2_Anonymous3_e__Union
+    dw_mip_map_count : UInt32
+    dw_refresh_rate : UInt32
+    dw_src_vb_handle : UInt32
+  end
+  union DDSURFACEDESC2_Anonymous1_e__Union
+    l_pitch : Int32
+    dw_linear_size : UInt32
+  end
+  union DDSURFACEDESC2_Anonymous5_e__Union
+    ddpf_pixel_format : DDPIXELFORMAT
+    dw_fvf : UInt32
+  end
+  union SURFACEALIGNMENT_Anonymous_e__Union
+    linear : SURFACEALIGNMENT_Anonymous_e__Union_Linear_e__Struct
+    rectangular : SURFACEALIGNMENT_Anonymous_e__Union_Rectangular_e__Struct
+  end
+  union VIDMEM_Anonymous1_e__Union
+    fp_end : LibC::UINT_PTR
+    dw_width : UInt32
+  end
+  union VIDMEM_Anonymous2_e__Union
+    lp_heap : VMEMHEAP*
+    dw_height : UInt32
+  end
+  union DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union
+    dw_reserved1 : LibC::UINT_PTR
+    h_helgdi_palette : HPALETTE
+  end
+  union DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union
+    lp_dd : DDRAWI_DIRECTDRAW_GBL*
+    lp_dd_handle : Void*
+  end
+  union DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union
+    lp_rect_list : ACCESSRECTLIST*
+    dw_block_size_y : UInt32
+    l_slice_pitch : Int32
+  end
+  union DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union
+    lp_vid_mem_heap : VMEMHEAP*
+    dw_block_size_x : UInt32
+  end
+  union DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union
+    l_pitch : Int32
+    dw_linear_size : UInt32
+  end
+  union DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union
+    dw_physical_page_table : UInt32
+    fp_physical_vid_mem : LibC::UINT_PTR
+  end
+  union DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union
+    lp_dd_clipper : DDRAWI_DDRAWCLIPPER_LCL*
+    lp16_dd_clipper : DDRAWI_DDRAWCLIPPER_INT*
+  end
+  union DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union
+    lp_dd_palette : DDRAWI_DDRAWPALETTE_INT*
+    lp16_dd_palette : DDRAWI_DDRAWPALETTE_INT*
+  end
+  union DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union
+    dwh_context : LibC::UINT_PTR
+  end
+  union VIDEOMEMORY_Anonymous1_e__Union
+    fp_end : LibC::UINT_PTR
+    dw_width : UInt32
+  end
+  union VIDEOMEMORY_Anonymous2_e__Union
+    lp_heap : VMEMHEAP*
+    dw_height : UInt32
+  end
+  union DD_SURFACE_GLOBAL_Anonymous3_e__Union
+    l_pitch : Int32
+    dw_linear_size : UInt32
+  end
+  union DD_SURFACE_GLOBAL_Anonymous1_e__Union
+    dw_block_size_y : UInt32
+    l_slice_pitch : Int32
+  end
+  union DD_SURFACE_GLOBAL_Anonymous2_e__Union
+    lp_vid_mem_heap : VIDEOMEMORY*
+    dw_block_size_x : UInt32
+    dw_user_mem_size : UInt32
+  end
+  union DD_SURFACE_LOCAL_Anonymous2_e__Union
+    ddck_ck_dest_overlay : DDCOLORKEY
+    ddck_ck_dest_blt : DDCOLORKEY
+  end
+  union DD_SURFACE_LOCAL_Anonymous1_e__Union
+    ddck_ck_src_overlay : DDCOLORKEY
+    ddck_ck_src_blt : DDCOLORKEY
+  end
+  union DD_GETDRIVERSTATEDATA_Anonymous_e__Union
+    lp_dd : DD_DIRECTDRAW_GLOBAL*
+    dwh_context : LibC::UINT_PTR
+  end
 
   struct DDARGB
     blue : UInt8
@@ -2107,9 +2107,9 @@ end
   struct DDMORESURFACECAPS
     dw_size : UInt32
     dds_caps_more : DDSCAPSEX
-    dds_extended_heap_restrictions : DDMORESURFACECAPSExtendedHeapRestrictions[0]*
+    dds_extended_heap_restrictions : DDMORESURFACECAPS_ExtendedHeapRestrictions[0]*
   end
-  struct DDMORESURFACECAPSExtendedHeapRestrictions
+  struct DDMORESURFACECAPS_ExtendedHeapRestrictions
     dds_caps_ex : DDSCAPSEX
     dds_caps_ex_alt : DDSCAPSEX
   end
@@ -3405,9 +3405,9 @@ end
   struct DD_MORESURFACECAPS
     dw_size : UInt32
     dds_caps_more : DDSCAPSEX
-    dds_extended_heap_restrictions : DD_MORESURFACECAPSNTExtendedHeapRestrictions[0]*
+    dds_extended_heap_restrictions : DD_MORESURFACECAPS_NTExtendedHeapRestrictions[0]*
   end
-  struct DD_MORESURFACECAPSNTExtendedHeapRestrictions
+  struct DD_MORESURFACECAPS_NTExtendedHeapRestrictions
     dds_caps_ex : DDSCAPSEX
     dds_caps_ex_alt : DDSCAPSEX
   end

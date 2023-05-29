@@ -3537,12 +3537,12 @@ lib LibWin32
     MLSTR_WRITE = 2
   end
 
-union UCPTrieData
-  ptr0 : Void*
-  ptr16 : UInt16*
-  ptr32 : UInt32*
-  ptr8 : UInt8*
-end
+  union UCPTrieData
+    ptr0 : Void*
+    ptr16 : UInt16*
+    ptr32 : UInt32*
+    ptr8 : UInt8*
+  end
 
   struct FONTSIGNATURE
     fs_usb : UInt32[4]*

@@ -50,10 +50,10 @@ lib LibWin32
     POINTER_CHANGE_FIFTHBUTTON_UP = 10
   end
 
-union INPUT_TRANSFORM_Anonymous_e__Union
-  anonymous : INPUT_TRANSFORM_Anonymous_e__Union_Anonymous_e__Struct
-  m : Float32[16]*
-end
+  union INPUT_TRANSFORM_Anonymous_e__Union
+    anonymous : INPUT_TRANSFORM_Anonymous_e__Union_Anonymous_e__Struct
+    m : Float32[16]*
+  end
 
   struct POINTER_INFO
     pointer_type : POINTER_INPUT_TYPE

@@ -136,33 +136,33 @@ lib LibWin32
     WTD_UICONTEXT_INSTALL = 1
   end
 
-union WINTRUST_DATA_Anonymous_e__Union
-  p_file : WINTRUST_FILE_INFO*
-  p_catalog : WINTRUST_CATALOG_INFO*
-  p_blob : WINTRUST_BLOB_INFO*
-  p_sgnr : WINTRUST_SGNR_INFO*
-  p_cert : WINTRUST_CERT_INFO*
-end
-union CRYPT_PROVIDER_DATA_Anonymous_e__Union
-  p_pd_sip : PROVDATA_SIP*
-end
-union SPC_LINK_Anonymous_e__Union
-  pwsz_url : LibC::LPWSTR
-  moniker : SPC_SERIALIZED_OBJECT
-  pwsz_file : LibC::LPWSTR
-end
-union WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union
-  cb_struct : UInt32
-  cb_size : UInt32
-end
-union WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union
-  cb_struct : UInt32
-  cb_size : UInt32
-end
-union WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union
-  cb_struct : UInt32
-  cb_size : UInt32
-end
+  union WINTRUST_DATA_Anonymous_e__Union
+    p_file : WINTRUST_FILE_INFO*
+    p_catalog : WINTRUST_CATALOG_INFO*
+    p_blob : WINTRUST_BLOB_INFO*
+    p_sgnr : WINTRUST_SGNR_INFO*
+    p_cert : WINTRUST_CERT_INFO*
+  end
+  union CRYPT_PROVIDER_DATA_Anonymous_e__Union
+    p_pd_sip : PROVDATA_SIP*
+  end
+  union SPC_LINK_Anonymous_e__Union
+    pwsz_url : LibC::LPWSTR
+    moniker : SPC_SERIALIZED_OBJECT
+    pwsz_file : LibC::LPWSTR
+  end
+  union WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union
+    cb_struct : UInt32
+    cb_size : UInt32
+  end
+  union WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union
+    cb_struct : UInt32
+    cb_size : UInt32
+  end
+  union WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union
+    cb_struct : UInt32
+    cb_size : UInt32
+  end
 
   struct WINTRUST_DATA
     cb_struct : UInt32

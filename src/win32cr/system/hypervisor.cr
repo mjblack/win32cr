@@ -828,279 +828,279 @@ lib LibWin32
     ARM64_RegisterMax = 158
   end
 
-union WHV_CAPABILITY_FEATURES
-  anonymous : WHV_CAPABILITY_FEATURES_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_EXTENDED_VM_EXITS
-  anonymous : WHV_EXTENDED_VM_EXITS_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_PROCESSOR_FEATURES
-  anonymous : WHV_PROCESSOR_FEATURES_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_PROCESSOR_FEATURES1
-  anonymous : WHV_PROCESSOR_FEATURES1_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union
-  anonymous : WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct
-  as_uint64 : UInt64[2]*
-end
-union WHV_SYNTHETIC_PROCESSOR_FEATURES
-  anonymous : WHV_SYNTHETIC_PROCESSOR_FEATURES_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union
-  anonymous : WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct
-  as_uint64 : UInt64[0]*
-end
-union WHV_PROCESSOR_XSAVE_FEATURES
-  anonymous : WHV_PROCESSOR_XSAVE_FEATURES_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_PROCESSOR_PERFMON_FEATURES
-  anonymous : WHV_PROCESSOR_PERFMON_FEATURES_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_X64_MSR_EXIT_BITMAP
-  as_uint64 : UInt64
-  anonymous : WHV_X64_MSR_EXIT_BITMAP_Anonymous_e__Struct
-end
-union WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS
-  as_uint32 : UInt32
-  anonymous : WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS_Anonymous_e__Struct
-end
-union WHV_SCHEDULER_FEATURES
-  anonymous : WHV_SCHEDULER_FEATURES_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_CAPABILITY
-  hypervisor_present : LibC::BOOL
-  features : WHV_CAPABILITY_FEATURES
-  extended_vm_exits : WHV_EXTENDED_VM_EXITS
-  processor_vendor : WHV_PROCESSOR_VENDOR
-  processor_features : WHV_PROCESSOR_FEATURES
-  synthetic_processor_features_banks : WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS
-  processor_xsave_features : WHV_PROCESSOR_XSAVE_FEATURES
-  processor_cl_flush_size : UInt8
-  exception_exit_bitmap : UInt64
-  x64_msr_exit_bitmap : WHV_X64_MSR_EXIT_BITMAP
-  processor_clock_frequency : UInt64
-  interrupt_clock_frequency : UInt64
-  processor_features_banks : WHV_PROCESSOR_FEATURES_BANKS
-  gpa_range_populate_flags : WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS
-  processor_frequency_cap : WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP
-  processor_perfmon_features : WHV_PROCESSOR_PERFMON_FEATURES
-  scheduler_features : WHV_SCHEDULER_FEATURES
-end
-union WHV_PARTITION_PROPERTY
-  extended_vm_exits : WHV_EXTENDED_VM_EXITS
-  processor_features : WHV_PROCESSOR_FEATURES
-  synthetic_processor_features_banks : WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS
-  processor_xsave_features : WHV_PROCESSOR_XSAVE_FEATURES
-  processor_cl_flush_size : UInt8
-  processor_count : UInt32
-  cpuid_exit_list : UInt32[0]*
-  cpuid_result_list : WHV_X64_CPUID_RESULT[0]*
-  cpuid_result_list2 : WHV_X64_CPUID_RESULT2[0]*
-  msr_action_list : WHV_MSR_ACTION_ENTRY[0]*
-  unimplemented_msr_action : WHV_MSR_ACTION
-  exception_exit_bitmap : UInt64
-  local_apic_emulation_mode : WHV_X64_LOCAL_APIC_EMULATION_MODE
-  separate_security_domain : LibC::BOOL
-  nested_virtualization : LibC::BOOL
-  x64_msr_exit_bitmap : WHV_X64_MSR_EXIT_BITMAP
-  processor_clock_frequency : UInt64
-  interrupt_clock_frequency : UInt64
-  apic_remote_read : LibC::BOOL
-  processor_features_banks : WHV_PROCESSOR_FEATURES_BANKS
-  reference_time : UInt64
-  primary_numa_node : UInt16
-  cpu_reserve : UInt32
-  cpu_cap : UInt32
-  cpu_weight : UInt32
-  cpu_group_id : UInt64
-  processor_frequency_cap : UInt32
-  allow_device_assignment : LibC::BOOL
-  processor_perfmon_features : WHV_PROCESSOR_PERFMON_FEATURES
-  disable_smt : LibC::BOOL
-end
-union WHV_ADVISE_GPA_RANGE
-  populate : WHV_ADVISE_GPA_RANGE_POPULATE
-end
-union WHV_ACCESS_GPA_CONTROLS
-  as_uint64 : UInt64
-  anonymous : WHV_ACCESS_GPA_CONTROLS_Anonymous_e__Struct
-end
-union WHV_UINT128
-  anonymous : WHV_UINT128_Anonymous_e__Struct
-  dword : UInt32[4]*
-end
-union WHV_X64_FP_REGISTER
-  anonymous : WHV_X64_FP_REGISTER_Anonymous_e__Struct
-  as_uint128 : WHV_UINT128
-end
-union WHV_X64_FP_CONTROL_STATUS_REGISTER
-  anonymous : WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct
-  as_uint128 : WHV_UINT128
-end
-union WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union
-  last_fp_rip : UInt64
-  anonymous : WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
-end
-union WHV_X64_XMM_CONTROL_STATUS_REGISTER
-  anonymous : WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct
-  as_uint128 : WHV_UINT128
-end
-union WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union
-  last_fp_rdp : UInt64
-  anonymous : WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
-end
-union WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union
-  anonymous : WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union_Anonymous_e__Struct
-  attributes : UInt16
-end
-union WHV_X64_INTERRUPT_STATE_REGISTER
-  anonymous : WHV_X64_INTERRUPT_STATE_REGISTER_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_X64_PENDING_INTERRUPTION_REGISTER
-  anonymous : WHV_X64_PENDING_INTERRUPTION_REGISTER_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER
-  anonymous : WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_X64_PENDING_EXCEPTION_EVENT
-  anonymous : WHV_X64_PENDING_EXCEPTION_EVENT_Anonymous_e__Struct
-  as_uint128 : WHV_UINT128
-end
-union WHV_X64_PENDING_EXT_INT_EVENT
-  anonymous : WHV_X64_PENDING_EXT_INT_EVENT_Anonymous_e__Struct
-  as_uint128 : WHV_UINT128
-end
-union WHV_INTERNAL_ACTIVITY_REGISTER
-  anonymous : WHV_INTERNAL_ACTIVITY_REGISTER_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_X64_PENDING_DEBUG_EXCEPTION
-  as_uint64 : UInt64
-  anonymous : WHV_X64_PENDING_DEBUG_EXCEPTION_Anonymous_e__Struct
-end
-union WHV_REGISTER_VALUE
-  reg128 : WHV_UINT128
-  reg64 : UInt64
-  reg32 : UInt32
-  reg16 : UInt16
-  reg8 : UInt8
-  fp : WHV_X64_FP_REGISTER
-  fp_control_status : WHV_X64_FP_CONTROL_STATUS_REGISTER
-  xmm_control_status : WHV_X64_XMM_CONTROL_STATUS_REGISTER
-  segment : WHV_X64_SEGMENT_REGISTER
-  table : WHV_X64_TABLE_REGISTER
-  interrupt_state : WHV_X64_INTERRUPT_STATE_REGISTER
-  pending_interruption : WHV_X64_PENDING_INTERRUPTION_REGISTER
-  deliverability_notifications : WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER
-  exception_event : WHV_X64_PENDING_EXCEPTION_EVENT
-  ext_int_event : WHV_X64_PENDING_EXT_INT_EVENT
-  internal_activity : WHV_INTERNAL_ACTIVITY_REGISTER
-  pending_debug_exception : WHV_X64_PENDING_DEBUG_EXCEPTION
-end
-union WHV_X64_VP_EXECUTION_STATE
-  anonymous : WHV_X64_VP_EXECUTION_STATE_Anonymous_e__Struct
-  as_uint16 : UInt16
-end
-union WHV_MEMORY_ACCESS_INFO
-  anonymous : WHV_MEMORY_ACCESS_INFO_Anonymous_e__Struct
-  as_uint32 : UInt32
-end
-union WHV_X64_IO_PORT_ACCESS_INFO
-  anonymous : WHV_X64_IO_PORT_ACCESS_INFO_Anonymous_e__Struct
-  as_uint32 : UInt32
-end
-union WHV_X64_MSR_ACCESS_INFO
-  anonymous : WHV_X64_MSR_ACCESS_INFO_Anonymous_e__Struct
-  as_uint32 : UInt32
-end
-union WHV_VP_EXCEPTION_INFO
-  anonymous : WHV_VP_EXCEPTION_INFO_Anonymous_e__Struct
-  as_uint32 : UInt32
-end
-union WHV_X64_RDTSC_INFO
-  anonymous : WHV_X64_RDTSC_INFO_Anonymous_e__Struct
-  as_uint64 : UInt64
-end
-union WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union
-  memory_access : WHV_MEMORY_ACCESS_CONTEXT
-  io_port_access : WHV_X64_IO_PORT_ACCESS_CONTEXT
-  msr_access : WHV_X64_MSR_ACCESS_CONTEXT
-  cpuid_access : WHV_X64_CPUID_ACCESS_CONTEXT
-  vp_exception : WHV_VP_EXCEPTION_CONTEXT
-  interrupt_window : WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT
-  unsupported_feature : WHV_X64_UNSUPPORTED_FEATURE_CONTEXT
-  cancel_reason : WHV_RUN_VP_CANCELED_CONTEXT
-  apic_eoi : WHV_X64_APIC_EOI_CONTEXT
-  read_tsc : WHV_X64_RDTSC_CONTEXT
-  apic_smi : WHV_X64_APIC_SMI_CONTEXT
-  hypercall : WHV_HYPERCALL_CONTEXT
-  apic_init_sipi : WHV_X64_APIC_INIT_SIPI_CONTEXT
-  apic_write : WHV_X64_APIC_WRITE_CONTEXT
-  synic_sint_deliverable : WHV_SYNIC_SINT_DELIVERABLE_CONTEXT
-end
-union WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union
-  reserved2 : UInt64
-end
-union WHV_TRIGGER_PARAMETERS_Anonymous_e__Union
-  interrupt : WHV_INTERRUPT_CONTROL
-  synic_event : WHV_SYNIC_EVENT_PARAMETERS
-  device_interrupt : WHV_TRIGGER_PARAMETERS_Anonymous_e__Union_DeviceInterrupt_e__Struct
-end
-union WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union
-  numa_node : UInt16
-  padding : UInt64
-end
-union WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union
-  doorbell : WHV_DOORBELL_MATCH_DATA
-  event : WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union_Event_e__Struct
-end
-union WHV_EMULATOR_STATUS
-  anonymous : WHV_EMULATOR_STATUS_Anonymous_e__Struct
-  as_uint32 : UInt32
-end
-union GUEST_OS_INFO
-  as_uint64 : UInt64
-  closed_source : GUEST_OS_INFO_ClosedSource_e__Struct
-  open_source : GUEST_OS_INFO_OpenSource_e__Struct
-end
-union VIRTUAL_PROCESSOR_REGISTER
-  reg64 : UInt64
-  reg32 : UInt32
-  reg16 : UInt16
-  reg8 : UInt8
-  reg128 : VIRTUAL_PROCESSOR_REGISTER_Reg128_e__Struct
-  x64 : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union
-end
-union VIRTUAL_PROCESSOR_REGISTER_X64_e__Union
-  segment : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct
-  table : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Table_e__Struct
-  fp_control_status : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct
-  xmm_control_status : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct
-end
-union VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union
-  last_fp_rdp : UInt64
-  anonymous : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
-end
-union VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union
-  last_fp_rip : UInt64
-  anonymous : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
-end
-union VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union
-  attributes : UInt16
-  anonymous : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
-end
+  union WHV_CAPABILITY_FEATURES
+    anonymous : WHV_CAPABILITY_FEATURES_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_EXTENDED_VM_EXITS
+    anonymous : WHV_EXTENDED_VM_EXITS_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_PROCESSOR_FEATURES
+    anonymous : WHV_PROCESSOR_FEATURES_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_PROCESSOR_FEATURES1
+    anonymous : WHV_PROCESSOR_FEATURES1_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union
+    anonymous : WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct
+    as_uint64 : UInt64[2]*
+  end
+  union WHV_SYNTHETIC_PROCESSOR_FEATURES
+    anonymous : WHV_SYNTHETIC_PROCESSOR_FEATURES_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union
+    anonymous : WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union_Anonymous_e__Struct
+    as_uint64 : UInt64[0]*
+  end
+  union WHV_PROCESSOR_XSAVE_FEATURES
+    anonymous : WHV_PROCESSOR_XSAVE_FEATURES_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_PROCESSOR_PERFMON_FEATURES
+    anonymous : WHV_PROCESSOR_PERFMON_FEATURES_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_X64_MSR_EXIT_BITMAP
+    as_uint64 : UInt64
+    anonymous : WHV_X64_MSR_EXIT_BITMAP_Anonymous_e__Struct
+  end
+  union WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS
+    as_uint32 : UInt32
+    anonymous : WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS_Anonymous_e__Struct
+  end
+  union WHV_SCHEDULER_FEATURES
+    anonymous : WHV_SCHEDULER_FEATURES_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_CAPABILITY
+    hypervisor_present : LibC::BOOL
+    features : WHV_CAPABILITY_FEATURES
+    extended_vm_exits : WHV_EXTENDED_VM_EXITS
+    processor_vendor : WHV_PROCESSOR_VENDOR
+    processor_features : WHV_PROCESSOR_FEATURES
+    synthetic_processor_features_banks : WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS
+    processor_xsave_features : WHV_PROCESSOR_XSAVE_FEATURES
+    processor_cl_flush_size : UInt8
+    exception_exit_bitmap : UInt64
+    x64_msr_exit_bitmap : WHV_X64_MSR_EXIT_BITMAP
+    processor_clock_frequency : UInt64
+    interrupt_clock_frequency : UInt64
+    processor_features_banks : WHV_PROCESSOR_FEATURES_BANKS
+    gpa_range_populate_flags : WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS
+    processor_frequency_cap : WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP
+    processor_perfmon_features : WHV_PROCESSOR_PERFMON_FEATURES
+    scheduler_features : WHV_SCHEDULER_FEATURES
+  end
+  union WHV_PARTITION_PROPERTY
+    extended_vm_exits : WHV_EXTENDED_VM_EXITS
+    processor_features : WHV_PROCESSOR_FEATURES
+    synthetic_processor_features_banks : WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS
+    processor_xsave_features : WHV_PROCESSOR_XSAVE_FEATURES
+    processor_cl_flush_size : UInt8
+    processor_count : UInt32
+    cpuid_exit_list : UInt32[0]*
+    cpuid_result_list : WHV_X64_CPUID_RESULT[0]*
+    cpuid_result_list2 : WHV_X64_CPUID_RESULT2[0]*
+    msr_action_list : WHV_MSR_ACTION_ENTRY[0]*
+    unimplemented_msr_action : WHV_MSR_ACTION
+    exception_exit_bitmap : UInt64
+    local_apic_emulation_mode : WHV_X64_LOCAL_APIC_EMULATION_MODE
+    separate_security_domain : LibC::BOOL
+    nested_virtualization : LibC::BOOL
+    x64_msr_exit_bitmap : WHV_X64_MSR_EXIT_BITMAP
+    processor_clock_frequency : UInt64
+    interrupt_clock_frequency : UInt64
+    apic_remote_read : LibC::BOOL
+    processor_features_banks : WHV_PROCESSOR_FEATURES_BANKS
+    reference_time : UInt64
+    primary_numa_node : UInt16
+    cpu_reserve : UInt32
+    cpu_cap : UInt32
+    cpu_weight : UInt32
+    cpu_group_id : UInt64
+    processor_frequency_cap : UInt32
+    allow_device_assignment : LibC::BOOL
+    processor_perfmon_features : WHV_PROCESSOR_PERFMON_FEATURES
+    disable_smt : LibC::BOOL
+  end
+  union WHV_ADVISE_GPA_RANGE
+    populate : WHV_ADVISE_GPA_RANGE_POPULATE
+  end
+  union WHV_ACCESS_GPA_CONTROLS
+    as_uint64 : UInt64
+    anonymous : WHV_ACCESS_GPA_CONTROLS_Anonymous_e__Struct
+  end
+  union WHV_UINT128
+    anonymous : WHV_UINT128_Anonymous_e__Struct
+    dword : UInt32[4]*
+  end
+  union WHV_X64_FP_REGISTER
+    anonymous : WHV_X64_FP_REGISTER_Anonymous_e__Struct
+    as_uint128 : WHV_UINT128
+  end
+  union WHV_X64_FP_CONTROL_STATUS_REGISTER
+    anonymous : WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct
+    as_uint128 : WHV_UINT128
+  end
+  union WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union
+    last_fp_rip : UInt64
+    anonymous : WHV_X64_FP_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union WHV_X64_XMM_CONTROL_STATUS_REGISTER
+    anonymous : WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct
+    as_uint128 : WHV_UINT128
+  end
+  union WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union
+    last_fp_rdp : UInt64
+    anonymous : WHV_X64_XMM_CONTROL_STATUS_REGISTER_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union
+    anonymous : WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union_Anonymous_e__Struct
+    attributes : UInt16
+  end
+  union WHV_X64_INTERRUPT_STATE_REGISTER
+    anonymous : WHV_X64_INTERRUPT_STATE_REGISTER_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_X64_PENDING_INTERRUPTION_REGISTER
+    anonymous : WHV_X64_PENDING_INTERRUPTION_REGISTER_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER
+    anonymous : WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_X64_PENDING_EXCEPTION_EVENT
+    anonymous : WHV_X64_PENDING_EXCEPTION_EVENT_Anonymous_e__Struct
+    as_uint128 : WHV_UINT128
+  end
+  union WHV_X64_PENDING_EXT_INT_EVENT
+    anonymous : WHV_X64_PENDING_EXT_INT_EVENT_Anonymous_e__Struct
+    as_uint128 : WHV_UINT128
+  end
+  union WHV_INTERNAL_ACTIVITY_REGISTER
+    anonymous : WHV_INTERNAL_ACTIVITY_REGISTER_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_X64_PENDING_DEBUG_EXCEPTION
+    as_uint64 : UInt64
+    anonymous : WHV_X64_PENDING_DEBUG_EXCEPTION_Anonymous_e__Struct
+  end
+  union WHV_REGISTER_VALUE
+    reg128 : WHV_UINT128
+    reg64 : UInt64
+    reg32 : UInt32
+    reg16 : UInt16
+    reg8 : UInt8
+    fp : WHV_X64_FP_REGISTER
+    fp_control_status : WHV_X64_FP_CONTROL_STATUS_REGISTER
+    xmm_control_status : WHV_X64_XMM_CONTROL_STATUS_REGISTER
+    segment : WHV_X64_SEGMENT_REGISTER
+    table : WHV_X64_TABLE_REGISTER
+    interrupt_state : WHV_X64_INTERRUPT_STATE_REGISTER
+    pending_interruption : WHV_X64_PENDING_INTERRUPTION_REGISTER
+    deliverability_notifications : WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER
+    exception_event : WHV_X64_PENDING_EXCEPTION_EVENT
+    ext_int_event : WHV_X64_PENDING_EXT_INT_EVENT
+    internal_activity : WHV_INTERNAL_ACTIVITY_REGISTER
+    pending_debug_exception : WHV_X64_PENDING_DEBUG_EXCEPTION
+  end
+  union WHV_X64_VP_EXECUTION_STATE
+    anonymous : WHV_X64_VP_EXECUTION_STATE_Anonymous_e__Struct
+    as_uint16 : UInt16
+  end
+  union WHV_MEMORY_ACCESS_INFO
+    anonymous : WHV_MEMORY_ACCESS_INFO_Anonymous_e__Struct
+    as_uint32 : UInt32
+  end
+  union WHV_X64_IO_PORT_ACCESS_INFO
+    anonymous : WHV_X64_IO_PORT_ACCESS_INFO_Anonymous_e__Struct
+    as_uint32 : UInt32
+  end
+  union WHV_X64_MSR_ACCESS_INFO
+    anonymous : WHV_X64_MSR_ACCESS_INFO_Anonymous_e__Struct
+    as_uint32 : UInt32
+  end
+  union WHV_VP_EXCEPTION_INFO
+    anonymous : WHV_VP_EXCEPTION_INFO_Anonymous_e__Struct
+    as_uint32 : UInt32
+  end
+  union WHV_X64_RDTSC_INFO
+    anonymous : WHV_X64_RDTSC_INFO_Anonymous_e__Struct
+    as_uint64 : UInt64
+  end
+  union WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union
+    memory_access : WHV_MEMORY_ACCESS_CONTEXT
+    io_port_access : WHV_X64_IO_PORT_ACCESS_CONTEXT
+    msr_access : WHV_X64_MSR_ACCESS_CONTEXT
+    cpuid_access : WHV_X64_CPUID_ACCESS_CONTEXT
+    vp_exception : WHV_VP_EXCEPTION_CONTEXT
+    interrupt_window : WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT
+    unsupported_feature : WHV_X64_UNSUPPORTED_FEATURE_CONTEXT
+    cancel_reason : WHV_RUN_VP_CANCELED_CONTEXT
+    apic_eoi : WHV_X64_APIC_EOI_CONTEXT
+    read_tsc : WHV_X64_RDTSC_CONTEXT
+    apic_smi : WHV_X64_APIC_SMI_CONTEXT
+    hypercall : WHV_HYPERCALL_CONTEXT
+    apic_init_sipi : WHV_X64_APIC_INIT_SIPI_CONTEXT
+    apic_write : WHV_X64_APIC_WRITE_CONTEXT
+    synic_sint_deliverable : WHV_SYNIC_SINT_DELIVERABLE_CONTEXT
+  end
+  union WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union
+    reserved2 : UInt64
+  end
+  union WHV_TRIGGER_PARAMETERS_Anonymous_e__Union
+    interrupt : WHV_INTERRUPT_CONTROL
+    synic_event : WHV_SYNIC_EVENT_PARAMETERS
+    device_interrupt : WHV_TRIGGER_PARAMETERS_Anonymous_e__Union_DeviceInterrupt_e__Struct
+  end
+  union WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union
+    numa_node : UInt16
+    padding : UInt64
+  end
+  union WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union
+    doorbell : WHV_DOORBELL_MATCH_DATA
+    event : WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union_Event_e__Struct
+  end
+  union WHV_EMULATOR_STATUS
+    anonymous : WHV_EMULATOR_STATUS_Anonymous_e__Struct
+    as_uint32 : UInt32
+  end
+  union GUEST_OS_INFO
+    as_uint64 : UInt64
+    closed_source : GUEST_OS_INFO_ClosedSource_e__Struct
+    open_source : GUEST_OS_INFO_OpenSource_e__Struct
+  end
+  union VIRTUAL_PROCESSOR_REGISTER
+    reg64 : UInt64
+    reg32 : UInt32
+    reg16 : UInt16
+    reg8 : UInt8
+    reg128 : VIRTUAL_PROCESSOR_REGISTER_Reg128_e__Struct
+    x64 : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union
+  end
+  union VIRTUAL_PROCESSOR_REGISTER_X64_e__Union
+    segment : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct
+    table : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Table_e__Struct
+    fp_control_status : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct
+    xmm_control_status : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct
+  end
+  union VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union
+    last_fp_rdp : UInt64
+    anonymous : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_XmmControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union
+    last_fp_rip : UInt64
+    anonymous : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_FpControlStatus_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union
+    attributes : UInt16
+    anonymous : VIRTUAL_PROCESSOR_REGISTER_X64_e__Union_Segment_e__Struct_Anonymous_e__Union_Anonymous_e__Struct
+  end
 
   struct WHV_CAPABILITY_FEATURES_Anonymous_e__Struct
     _bitfield : UInt64

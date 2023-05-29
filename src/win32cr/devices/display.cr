@@ -1141,114 +1141,114 @@ lib LibWin32
     ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED = 8
   end
 
-union DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union
-  additional_signal_info : DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union_AdditionalSignalInfo_e__Struct
-  video_standard : UInt32
-end
-union DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union
-  target_mode : DISPLAYCONFIG_TARGET_MODE
-  source_mode : DISPLAYCONFIG_SOURCE_MODE
-  desktop_image_info : DISPLAYCONFIG_DESKTOP_IMAGE_INFO
-end
-union DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union
-  mode_info_idx : UInt32
-  anonymous : DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union_Anonymous_e__Struct
-end
-union DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union
-  mode_info_idx : UInt32
-  anonymous : DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union_Anonymous_e__Struct
-end
-union DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union
-  anonymous : DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union
-  anonymous : DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union
-  anonymous : DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union
-  anonymous : DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union
-  anonymous : DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union
-  anonymous : DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union
-  anonymous : DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union FLOAT_LONG
-  e : Float32
-  l : Int32
-end
-union GLYPHDEF
-  pgb : GLYPHBITS*
-  ppo : PATHOBJ*
-end
-union VIDEO_CLUT_Anonymous_e__Union
-  rgb_array : VIDEO_CLUTDATA
-  rgb_long : UInt32
-end
-union PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union
-  anonymous : PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union
-  brightness_level : BRIGHTNESS_LEVEL
-  nit_ranges : BRIGHTNESS_NIT_RANGES
-end
-union PANEL_GET_BRIGHTNESS_Anonymous_e__Union
-  level : UInt8
-  anonymous : PANEL_GET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union
-  anonymous : PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union PANEL_SET_BRIGHTNESS_Anonymous_e__Union
-  level : UInt8
-  anonymous : PANEL_SET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct
-end
-union PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union
-  anonymous : PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union
-  anonymous1 : COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous2_e__Struct
-  value : UInt32
-end
-union COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union
-  anonymous : COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union_Anonymous_e__Struct
-  value : UInt32
-end
-union COLORSPACE_TRANSFORM_Data_e__Union
-  rgb256x3x16 : GAMMA_RAMP_RGB256x3x16
-  dxgi1 : GAMMA_RAMP_DXGI_1
-  t3x4 : COLORSPACE_TRANSFORM_3x4
-  matrix_v2 : COLORSPACE_TRANSFORM_MATRIX_V2
-end
-union MIPI_DSI_PACKET_Anonymous2_e__Union
-  anonymous : MIPI_DSI_PACKET_Anonymous2_e__Union_Anonymous_e__Struct
-  long_write_word_count : UInt16
-end
-union MIPI_DSI_PACKET_Anonymous1_e__Union
-  data_id : UInt8
-  anonymous : MIPI_DSI_PACKET_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union MIPI_DSI_RESET_Anonymous_e__Union
-  anonymous : MIPI_DSI_RESET_Anonymous_e__Union_Anonymous_e__Struct
-  results : UInt32
-end
+  union DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union
+    additional_signal_info : DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union_AdditionalSignalInfo_e__Struct
+    video_standard : UInt32
+  end
+  union DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union
+    target_mode : DISPLAYCONFIG_TARGET_MODE
+    source_mode : DISPLAYCONFIG_SOURCE_MODE
+    desktop_image_info : DISPLAYCONFIG_DESKTOP_IMAGE_INFO
+  end
+  union DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union
+    mode_info_idx : UInt32
+    anonymous : DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union
+    mode_info_idx : UInt32
+    anonymous : DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union
+    anonymous : DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union
+    anonymous : DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union
+    anonymous : DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union
+    anonymous : DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union
+    anonymous : DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union
+    anonymous : DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union
+    anonymous : DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union FLOAT_LONG
+    e : Float32
+    l : Int32
+  end
+  union GLYPHDEF
+    pgb : GLYPHBITS*
+    ppo : PATHOBJ*
+  end
+  union VIDEO_CLUT_Anonymous_e__Union
+    rgb_array : VIDEO_CLUTDATA
+    rgb_long : UInt32
+  end
+  union PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union
+    anonymous : PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union
+    brightness_level : BRIGHTNESS_LEVEL
+    nit_ranges : BRIGHTNESS_NIT_RANGES
+  end
+  union PANEL_GET_BRIGHTNESS_Anonymous_e__Union
+    level : UInt8
+    anonymous : PANEL_GET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union
+    anonymous : PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union PANEL_SET_BRIGHTNESS_Anonymous_e__Union
+    level : UInt8
+    anonymous : PANEL_SET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union
+    anonymous : PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union
+    anonymous1 : COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous2_e__Struct
+    value : UInt32
+  end
+  union COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union
+    anonymous : COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union_Anonymous_e__Struct
+    value : UInt32
+  end
+  union COLORSPACE_TRANSFORM_Data_e__Union
+    rgb256x3x16 : GAMMA_RAMP_RGB256x3x16
+    dxgi1 : GAMMA_RAMP_DXGI_1
+    t3x4 : COLORSPACE_TRANSFORM_3x4
+    matrix_v2 : COLORSPACE_TRANSFORM_MATRIX_V2
+  end
+  union MIPI_DSI_PACKET_Anonymous2_e__Union
+    anonymous : MIPI_DSI_PACKET_Anonymous2_e__Union_Anonymous_e__Struct
+    long_write_word_count : UInt16
+  end
+  union MIPI_DSI_PACKET_Anonymous1_e__Union
+    data_id : UInt8
+    anonymous : MIPI_DSI_PACKET_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union MIPI_DSI_RESET_Anonymous_e__Union
+    anonymous : MIPI_DSI_RESET_Anonymous_e__Union_Anonymous_e__Struct
+    results : UInt32
+  end
 
   struct DISPLAYCONFIG_RATIONAL
     numerator : UInt32

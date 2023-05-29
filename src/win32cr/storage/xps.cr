@@ -318,11 +318,11 @@ lib LibWin32
     XPS_SIGN_FLAGS_IGNORE_MARKUP_COMPATIBILITY = 1
   end
 
-union XPS_COLORXPS_COLOR_VALUE
-  s_rgb : XPS_COLORXPS_COLOR_VALUE_sRGB_e__Struct
-  sc_rgb : XPS_COLORXPS_COLOR_VALUE_scRGB_e__Struct
-  context : XPS_COLORXPS_COLOR_VALUE_context_e__Struct
-end
+  union XPS_COLOR_XPS_COLOR_VALUE
+    s_rgb : XPS_COLOR_XPS_COLOR_VALUE_sRGB_e__Struct
+    sc_rgb : XPS_COLOR_XPS_COLOR_VALUE_scRGB_e__Struct
+    context : XPS_COLOR_XPS_COLOR_VALUE_context_e__Struct
+  end
 
   struct DRAWPATRECT
     pt_position : POINT
@@ -400,21 +400,21 @@ end
   end
   struct XPS_COLOR
     color_type : XPS_COLOR_TYPE
-    value : XPS_COLORXPS_COLOR_VALUE
+    value : XPS_COLOR_XPS_COLOR_VALUE
   end
-  struct XPS_COLORXPS_COLOR_VALUE_scRGB_e__Struct
+  struct XPS_COLOR_XPS_COLOR_VALUE_scRGB_e__Struct
     alpha : Float32
     red : Float32
     green : Float32
     blue : Float32
   end
-  struct XPS_COLORXPS_COLOR_VALUE_sRGB_e__Struct
+  struct XPS_COLOR_XPS_COLOR_VALUE_sRGB_e__Struct
     alpha : UInt8
     red : UInt8
     green : UInt8
     blue : UInt8
   end
-  struct XPS_COLORXPS_COLOR_VALUE_context_e__Struct
+  struct XPS_COLOR_XPS_COLOR_VALUE_context_e__Struct
     channel_count : UInt8
     channels : Float32[9]*
   end

@@ -293,12 +293,12 @@ lib LibWin32
     GPHintOrganizationalUnit = 4
   end
 
-union INSTALLSPEC
-  app_name : INSTALLSPEC_AppName_e__Struct
-  file_ext : LibC::LPWSTR
-  prog_id : LibC::LPWSTR
-  com_class : INSTALLSPEC_COMClass_e__Struct
-end
+  union INSTALLSPEC
+    app_name : INSTALLSPEC_AppName_e__Struct
+    file_ext : LibC::LPWSTR
+    prog_id : LibC::LPWSTR
+    com_class : INSTALLSPEC_COMClass_e__Struct
+  end
 
   struct GROUP_POLICY_OBJECTA
     dw_options : UInt32

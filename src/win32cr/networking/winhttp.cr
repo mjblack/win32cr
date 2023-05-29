@@ -621,18 +621,18 @@ lib LibWin32
     WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS = 1015
   end
 
-union WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union
-  pwsz_name : LibC::LPWSTR
-  psz_name : PSTR
-end
-union WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union
-  pwsz_value : LibC::LPWSTR
-  psz_value : PSTR
-end
-union WINHTTP_HEADER_NAME
-  pwsz_name : LibC::LPWSTR
-  psz_name : PSTR
-end
+  union WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union
+    pwsz_name : LibC::LPWSTR
+    psz_name : PSTR
+  end
+  union WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union
+    pwsz_value : LibC::LPWSTR
+    psz_value : PSTR
+  end
+  union WINHTTP_HEADER_NAME
+    pwsz_name : LibC::LPWSTR
+    psz_name : PSTR
+  end
 
   struct WINHTTP_ASYNC_RESULT
     dw_result : LibC::UINT_PTR

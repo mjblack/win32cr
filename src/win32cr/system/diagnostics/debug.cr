@@ -3318,253 +3318,253 @@ lib LibWin32
     IpmiOsSelRecordTypeMax = 10
   end
 
-union DEBUG_EVENT_u_e__Union
-  exception : EXCEPTION_DEBUG_INFO
-  create_thread : CREATE_THREAD_DEBUG_INFO
-  create_process_info : CREATE_PROCESS_DEBUG_INFO
-  exit_thread : EXIT_THREAD_DEBUG_INFO
-  exit_process : EXIT_PROCESS_DEBUG_INFO
-  load_dll : LOAD_DLL_DEBUG_INFO
-  unload_dll : UNLOAD_DLL_DEBUG_INFO
-  debug_string : OUTPUT_DEBUG_STRING_INFO
-  rip_info : RIP_INFO
-end
-union INLINE_FRAME_CONTEXT
-  context_value : UInt32
-  anonymous : INLINE_FRAME_CONTEXT_Anonymous_e__Struct
-end
-union DEBUG_VALUE_Anonymous_e__Union
-  i8 : UInt8
-  i16 : UInt16
-  i32 : UInt32
-  anonymous : DEBUG_VALUE_Anonymous_e__Union_Anonymous_e__Struct
-  f32 : Float32
-  f64 : Float64
-  f80_bytes : UInt8[10]*
-  f82_bytes : UInt8[11]*
-  f128_bytes : UInt8[16]*
-  vi8 : UInt8[16]*
-  vi16 : UInt16[8]*
-  vi32 : UInt32[4]*
-  vi64 : UInt64[2]*
-  vf32 : Float32[4]*
-  vf64 : Float64[2]*
-  i64_parts32 : DEBUG_VALUE_Anonymous_e__Union_I64Parts32_e__Struct
-  f128_parts64 : DEBUG_VALUE_Anonymous_e__Union_F128Parts64_e__Struct
-  raw_bytes : UInt8[24]*
-end
-union DEBUG_PROCESSOR_IDENTIFICATION_ALL
-  alpha : DEBUG_PROCESSOR_IDENTIFICATION_ALPHA
-  amd64 : DEBUG_PROCESSOR_IDENTIFICATION_AMD64
-  ia64 : DEBUG_PROCESSOR_IDENTIFICATION_IA64
-  x86 : DEBUG_PROCESSOR_IDENTIFICATION_X86
-  arm : DEBUG_PROCESSOR_IDENTIFICATION_ARM
-  arm64 : DEBUG_PROCESSOR_IDENTIFICATION_ARM64
-end
-union ScriptDebugEventInformation_u_e__Union
-  exception_information : ScriptDebugEventInformation_u_e__Union_ExceptionInformation_e__Struct
-  breakpoint_information : ScriptDebugEventInformation_u_e__Union_BreakpointInformation_e__Struct
-end
-union FIELD_INFO_Anonymous_e__Union
-  field_call_back : Void*
-  p_buffer : Void*
-end
-union SYM_DUMP_PARAM_Anonymous_e__Union
-  context : Void*
-  p_buffer : Void*
-end
-union CONTEXT_Anonymous_e__Union
-  flt_save : XSAVE_FORMAT
-  anonymous : CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
-end
-union KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union
-  integer_context : UInt64[16]**
-  anonymous : KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union
-  floating_context : M128A[16]**
-  anonymous : KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union ARM64_NT_NEON128
-  anonymous : ARM64_NT_NEON128_Anonymous_e__Struct
-  d : Float64[2]*
-  s : Float32[4]*
-  h : UInt16[8]*
-  b : UInt8[16]*
-end
-union ARM64_NT_CONTEXT_Anonymous_e__Union
-  anonymous : ARM64_NT_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
-  x : UInt64[31]*
-end
-union LDT_ENTRY_HighWord_e__Union
-  bytes : LDT_ENTRY_HighWord_e__Union_Bytes_e__Struct
-  bits : LDT_ENTRY_HighWord_e__Union_Bits_e__Struct
-end
-union WOW64_LDT_ENTRY_HighWord_e__Union
-  bytes : WOW64_LDT_ENTRY_HighWord_e__Union_Bytes_e__Struct
-  bits : WOW64_LDT_ENTRY_HighWord_e__Union_Bits_e__Struct
-end
-union XSTATE_CONFIGURATION_Anonymous_e__Union
-  control_flags : UInt32
-  anonymous : XSTATE_CONFIGURATION_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IMAGE_SECTION_HEADER_Misc_e__Union
-  physical_address : UInt32
-  virtual_size : UInt32
-end
-union IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
-  unwind_data : UInt32
-  anonymous : IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union_Anonymous_e__Struct
-end
-union IMAGE_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
-  unwind_info_address : UInt32
-  unwind_data : UInt32
-end
-union IMAGE_FUNCTION_ENTRY64_Anonymous_e__Union
-  end_of_prologue : UInt64
-  unwind_info_address : UInt64
-end
-union IMAGE_COR20_HEADER_Anonymous_e__Union
-  entry_point_token : UInt32
-  entry_point_rva : UInt32
-end
-union WAITCHAIN_NODE_INFO_Anonymous_e__Union
-  lock_object : WAITCHAIN_NODE_INFO_Anonymous_e__Union_LockObject_e__Struct
-  thread_object : WAITCHAIN_NODE_INFO_Anonymous_e__Union_ThreadObject_e__Struct
-end
-union MINIDUMP_HEADER_Anonymous_e__Union
-  reserved : UInt32
-  time_date_stamp : UInt32
-end
-union CPU_INFORMATION
-  x86_cpu_info : CPU_INFORMATION_X86CpuInfo_e__Struct
-  other_cpu_info : CPU_INFORMATION_OtherCpuInfo_e__Struct
-end
-union MINIDUMP_SYSTEM_INFO_Anonymous2_e__Union
-  reserved1 : UInt32
-  anonymous : MINIDUMP_SYSTEM_INFO_Anonymous2_e__Union_Anonymous_e__Struct
-end
-union MINIDUMP_SYSTEM_INFO_Anonymous1_e__Union
-  reserved0 : UInt16
-  anonymous : MINIDUMP_SYSTEM_INFO_Anonymous1_e__Union_Anonymous_e__Struct
-end
-union MINIDUMP_CALLBACK_INPUT_Anonymous_e__Union
-  status : HRESULT
-  thread : MINIDUMP_THREAD_CALLBACK
-  thread_ex : MINIDUMP_THREAD_EX_CALLBACK
-  module : MINIDUMP_MODULE_CALLBACK
-  include_thread : MINIDUMP_INCLUDE_THREAD_CALLBACK
-  include_module : MINIDUMP_INCLUDE_MODULE_CALLBACK
-  io : MINIDUMP_IO_CALLBACK
-  read_memory_failure : MINIDUMP_READ_MEMORY_FAILURE_CALLBACK
-  secondary_flags : UInt32
-  vm_query : MINIDUMP_VM_QUERY_CALLBACK
-  vm_pre_read : MINIDUMP_VM_PRE_READ_CALLBACK
-  vm_post_read : MINIDUMP_VM_POST_READ_CALLBACK
-end
-union MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union
-  module_write_flags : UInt32
-  thread_write_flags : UInt32
-  secondary_flags : UInt32
-  anonymous1 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous1_e__Struct
-  anonymous2 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous2_e__Struct
-  handle : LibC::HANDLE
-  anonymous3 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous3_e__Struct
-  anonymous4 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous4_e__Struct
-  anonymous5 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous5_e__Struct
-  status : HRESULT
-end
-union PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union
-  number_value : Float64
-  string_value : LibC::LPWSTR
-  bstr_value : UInt8
-  object_id : LibC::UINT_PTR
-  external_object_address : Void*
-  sub_string : PROFILER_PROPERTY_TYPE_SUBSTRING_INFO*
-end
-union PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union
-  prototype : LibC::UINT_PTR
-  function_name : LibC::LPWSTR
-  element_attributes_size : UInt32
-  element_text_children_size : UInt32
-  scope_list : PROFILER_HEAP_OBJECT_SCOPE_LIST*
-  internal_property : PROFILER_HEAP_OBJECT_RELATIONSHIP*
-  name_property_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
-  index_property_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
-  relationship_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
-  event_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
-  weak_map_collection_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
-  map_collection_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
-  set_collection_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
-end
-union PROFILER_HEAP_OBJECT_Anonymous_e__Union
-  object_id : LibC::UINT_PTR
-  external_object_address : Void*
-end
-union DUMP_FILE_ATTRIBUTES
-  anonymous : DUMP_FILE_ATTRIBUTES_Anonymous_e__Struct
-  attributes : UInt32
-end
-union DUMP_HEADER32_Anonymous_e__Union
-  physical_memory_block : PHYSICAL_MEMORY_DESCRIPTOR32
-  physical_memory_block_buffer : UInt8[700]*
-end
-union DUMP_HEADER64_Anonymous_e__Union
-  physical_memory_block : PHYSICAL_MEMORY_DESCRIPTOR64
-  physical_memory_block_buffer : UInt8[700]*
-end
-union WHEA_NOTIFICATION_FLAGS
-  anonymous : WHEA_NOTIFICATION_FLAGS_Anonymous_e__Struct
-  as_ushort : UInt16
-end
-union XPF_MC_BANK_FLAGS
-  anonymous : XPF_MC_BANK_FLAGS_Anonymous_e__Struct
-  as_uchar : UInt8
-end
-union XPF_MCE_FLAGS
-  anonymous : XPF_MCE_FLAGS_Anonymous_e__Struct
-  as_ulong : UInt32
-end
-union AER_ROOTPORT_DESCRIPTOR_FLAGS
-  anonymous : AER_ROOTPORT_DESCRIPTOR_FLAGS_Anonymous_e__Struct
-  as_ushort : UInt16
-end
-union AER_ENDPOINT_DESCRIPTOR_FLAGS
-  anonymous : AER_ENDPOINT_DESCRIPTOR_FLAGS_Anonymous_e__Struct
-  as_ushort : UInt16
-end
-union AER_BRIDGE_DESCRIPTOR_FLAGS
-  anonymous : AER_BRIDGE_DESCRIPTOR_FLAGS_Anonymous_e__Struct
-  as_ushort : UInt16
-end
-union WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union
-  polled : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Polled_e__Struct
-  interrupt : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Interrupt_e__Struct
-  local_interrupt : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_LocalInterrupt_e__Struct
-  sci : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Sci_e__Struct
-  nmi : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Nmi_e__Struct
-  sea : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Sea_e__Struct
-  sei : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Sei_e__Struct
-  gsiv : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Gsiv_e__Struct
-end
-union WHEA_PCI_SLOT_NUMBER_u_e__Union
-  bits : WHEA_PCI_SLOT_NUMBER_u_e__Union_bits_e__Struct
-  as_ulong : UInt32
-end
-union WHEA_ERROR_SOURCE_DESCRIPTOR_Info_e__Union
-  xpf_mce_descriptor : WHEA_XPF_MCE_DESCRIPTOR
-  xpf_cmc_descriptor : WHEA_XPF_CMC_DESCRIPTOR
-  xpf_nmi_descriptor : WHEA_XPF_NMI_DESCRIPTOR
-  ipf_mca_descriptor : WHEA_IPF_MCA_DESCRIPTOR
-  ipf_cmc_descriptor : WHEA_IPF_CMC_DESCRIPTOR
-  ipf_cpe_descriptor : WHEA_IPF_CPE_DESCRIPTOR
-  aer_rootport_descriptor : WHEA_AER_ROOTPORT_DESCRIPTOR
-  aer_endpoint_descriptor : WHEA_AER_ENDPOINT_DESCRIPTOR
-  aer_bridge_descriptor : WHEA_AER_BRIDGE_DESCRIPTOR
-  gen_err_descriptor : WHEA_GENERIC_ERROR_DESCRIPTOR
-  gen_err_descriptor_v2 : WHEA_GENERIC_ERROR_DESCRIPTOR_V2
-  device_driver_descriptor : WHEA_DEVICE_DRIVER_DESCRIPTOR
-end
+  union DEBUG_EVENT_u_e__Union
+    exception : EXCEPTION_DEBUG_INFO
+    create_thread : CREATE_THREAD_DEBUG_INFO
+    create_process_info : CREATE_PROCESS_DEBUG_INFO
+    exit_thread : EXIT_THREAD_DEBUG_INFO
+    exit_process : EXIT_PROCESS_DEBUG_INFO
+    load_dll : LOAD_DLL_DEBUG_INFO
+    unload_dll : UNLOAD_DLL_DEBUG_INFO
+    debug_string : OUTPUT_DEBUG_STRING_INFO
+    rip_info : RIP_INFO
+  end
+  union INLINE_FRAME_CONTEXT
+    context_value : UInt32
+    anonymous : INLINE_FRAME_CONTEXT_Anonymous_e__Struct
+  end
+  union DEBUG_VALUE_Anonymous_e__Union
+    i8 : UInt8
+    i16 : UInt16
+    i32 : UInt32
+    anonymous : DEBUG_VALUE_Anonymous_e__Union_Anonymous_e__Struct
+    f32 : Float32
+    f64 : Float64
+    f80_bytes : UInt8[10]*
+    f82_bytes : UInt8[11]*
+    f128_bytes : UInt8[16]*
+    vi8 : UInt8[16]*
+    vi16 : UInt16[8]*
+    vi32 : UInt32[4]*
+    vi64 : UInt64[2]*
+    vf32 : Float32[4]*
+    vf64 : Float64[2]*
+    i64_parts32 : DEBUG_VALUE_Anonymous_e__Union_I64Parts32_e__Struct
+    f128_parts64 : DEBUG_VALUE_Anonymous_e__Union_F128Parts64_e__Struct
+    raw_bytes : UInt8[24]*
+  end
+  union DEBUG_PROCESSOR_IDENTIFICATION_ALL
+    alpha : DEBUG_PROCESSOR_IDENTIFICATION_ALPHA
+    amd64 : DEBUG_PROCESSOR_IDENTIFICATION_AMD64
+    ia64 : DEBUG_PROCESSOR_IDENTIFICATION_IA64
+    x86 : DEBUG_PROCESSOR_IDENTIFICATION_X86
+    arm : DEBUG_PROCESSOR_IDENTIFICATION_ARM
+    arm64 : DEBUG_PROCESSOR_IDENTIFICATION_ARM64
+  end
+  union ScriptDebugEventInformation_u_e__Union
+    exception_information : ScriptDebugEventInformation_u_e__Union_ExceptionInformation_e__Struct
+    breakpoint_information : ScriptDebugEventInformation_u_e__Union_BreakpointInformation_e__Struct
+  end
+  union FIELD_INFO_Anonymous_e__Union
+    field_call_back : Void*
+    p_buffer : Void*
+  end
+  union SYM_DUMP_PARAM_Anonymous_e__Union
+    context : Void*
+    p_buffer : Void*
+  end
+  union CONTEXT_Anonymous_e__Union
+    flt_save : XSAVE_FORMAT
+    anonymous : CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union
+    integer_context : UInt64[16]**
+    anonymous : KNONVOLATILE_CONTEXT_POINTERS_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union
+    floating_context : M128A[16]**
+    anonymous : KNONVOLATILE_CONTEXT_POINTERS_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union ARM64_NT_NEON128
+    anonymous : ARM64_NT_NEON128_Anonymous_e__Struct
+    d : Float64[2]*
+    s : Float32[4]*
+    h : UInt16[8]*
+    b : UInt8[16]*
+  end
+  union ARM64_NT_CONTEXT_Anonymous_e__Union
+    anonymous : ARM64_NT_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
+    x : UInt64[31]*
+  end
+  union LDT_ENTRY_HighWord_e__Union
+    bytes : LDT_ENTRY_HighWord_e__Union_Bytes_e__Struct
+    bits : LDT_ENTRY_HighWord_e__Union_Bits_e__Struct
+  end
+  union WOW64_LDT_ENTRY_HighWord_e__Union
+    bytes : WOW64_LDT_ENTRY_HighWord_e__Union_Bytes_e__Struct
+    bits : WOW64_LDT_ENTRY_HighWord_e__Union_Bits_e__Struct
+  end
+  union XSTATE_CONFIGURATION_Anonymous_e__Union
+    control_flags : UInt32
+    anonymous : XSTATE_CONFIGURATION_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IMAGE_SECTION_HEADER_Misc_e__Union
+    physical_address : UInt32
+    virtual_size : UInt32
+  end
+  union IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
+    unwind_data : UInt32
+    anonymous : IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union IMAGE_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
+    unwind_info_address : UInt32
+    unwind_data : UInt32
+  end
+  union IMAGE_FUNCTION_ENTRY64_Anonymous_e__Union
+    end_of_prologue : UInt64
+    unwind_info_address : UInt64
+  end
+  union IMAGE_COR20_HEADER_Anonymous_e__Union
+    entry_point_token : UInt32
+    entry_point_rva : UInt32
+  end
+  union WAITCHAIN_NODE_INFO_Anonymous_e__Union
+    lock_object : WAITCHAIN_NODE_INFO_Anonymous_e__Union_LockObject_e__Struct
+    thread_object : WAITCHAIN_NODE_INFO_Anonymous_e__Union_ThreadObject_e__Struct
+  end
+  union MINIDUMP_HEADER_Anonymous_e__Union
+    reserved : UInt32
+    time_date_stamp : UInt32
+  end
+  union CPU_INFORMATION
+    x86_cpu_info : CPU_INFORMATION_X86CpuInfo_e__Struct
+    other_cpu_info : CPU_INFORMATION_OtherCpuInfo_e__Struct
+  end
+  union MINIDUMP_SYSTEM_INFO_Anonymous2_e__Union
+    reserved1 : UInt32
+    anonymous : MINIDUMP_SYSTEM_INFO_Anonymous2_e__Union_Anonymous_e__Struct
+  end
+  union MINIDUMP_SYSTEM_INFO_Anonymous1_e__Union
+    reserved0 : UInt16
+    anonymous : MINIDUMP_SYSTEM_INFO_Anonymous1_e__Union_Anonymous_e__Struct
+  end
+  union MINIDUMP_CALLBACK_INPUT_Anonymous_e__Union
+    status : HRESULT
+    thread : MINIDUMP_THREAD_CALLBACK
+    thread_ex : MINIDUMP_THREAD_EX_CALLBACK
+    module : MINIDUMP_MODULE_CALLBACK
+    include_thread : MINIDUMP_INCLUDE_THREAD_CALLBACK
+    include_module : MINIDUMP_INCLUDE_MODULE_CALLBACK
+    io : MINIDUMP_IO_CALLBACK
+    read_memory_failure : MINIDUMP_READ_MEMORY_FAILURE_CALLBACK
+    secondary_flags : UInt32
+    vm_query : MINIDUMP_VM_QUERY_CALLBACK
+    vm_pre_read : MINIDUMP_VM_PRE_READ_CALLBACK
+    vm_post_read : MINIDUMP_VM_POST_READ_CALLBACK
+  end
+  union MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union
+    module_write_flags : UInt32
+    thread_write_flags : UInt32
+    secondary_flags : UInt32
+    anonymous1 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous1_e__Struct
+    anonymous2 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous2_e__Struct
+    handle : LibC::HANDLE
+    anonymous3 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous3_e__Struct
+    anonymous4 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous4_e__Struct
+    anonymous5 : MINIDUMP_CALLBACK_OUTPUT_Anonymous_e__Union_Anonymous5_e__Struct
+    status : HRESULT
+  end
+  union PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union
+    number_value : Float64
+    string_value : LibC::LPWSTR
+    bstr_value : UInt8
+    object_id : LibC::UINT_PTR
+    external_object_address : Void*
+    sub_string : PROFILER_PROPERTY_TYPE_SUBSTRING_INFO*
+  end
+  union PROFILER_HEAP_OBJECT_OPTIONAL_INFO_Anonymous_e__Union
+    prototype : LibC::UINT_PTR
+    function_name : LibC::LPWSTR
+    element_attributes_size : UInt32
+    element_text_children_size : UInt32
+    scope_list : PROFILER_HEAP_OBJECT_SCOPE_LIST*
+    internal_property : PROFILER_HEAP_OBJECT_RELATIONSHIP*
+    name_property_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    index_property_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    relationship_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    event_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    weak_map_collection_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    map_collection_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    set_collection_list : PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+  end
+  union PROFILER_HEAP_OBJECT_Anonymous_e__Union
+    object_id : LibC::UINT_PTR
+    external_object_address : Void*
+  end
+  union DUMP_FILE_ATTRIBUTES
+    anonymous : DUMP_FILE_ATTRIBUTES_Anonymous_e__Struct
+    attributes : UInt32
+  end
+  union DUMP_HEADER32_Anonymous_e__Union
+    physical_memory_block : PHYSICAL_MEMORY_DESCRIPTOR32
+    physical_memory_block_buffer : UInt8[700]*
+  end
+  union DUMP_HEADER64_Anonymous_e__Union
+    physical_memory_block : PHYSICAL_MEMORY_DESCRIPTOR64
+    physical_memory_block_buffer : UInt8[700]*
+  end
+  union WHEA_NOTIFICATION_FLAGS
+    anonymous : WHEA_NOTIFICATION_FLAGS_Anonymous_e__Struct
+    as_ushort : UInt16
+  end
+  union XPF_MC_BANK_FLAGS
+    anonymous : XPF_MC_BANK_FLAGS_Anonymous_e__Struct
+    as_uchar : UInt8
+  end
+  union XPF_MCE_FLAGS
+    anonymous : XPF_MCE_FLAGS_Anonymous_e__Struct
+    as_ulong : UInt32
+  end
+  union AER_ROOTPORT_DESCRIPTOR_FLAGS
+    anonymous : AER_ROOTPORT_DESCRIPTOR_FLAGS_Anonymous_e__Struct
+    as_ushort : UInt16
+  end
+  union AER_ENDPOINT_DESCRIPTOR_FLAGS
+    anonymous : AER_ENDPOINT_DESCRIPTOR_FLAGS_Anonymous_e__Struct
+    as_ushort : UInt16
+  end
+  union AER_BRIDGE_DESCRIPTOR_FLAGS
+    anonymous : AER_BRIDGE_DESCRIPTOR_FLAGS_Anonymous_e__Struct
+    as_ushort : UInt16
+  end
+  union WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union
+    polled : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Polled_e__Struct
+    interrupt : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Interrupt_e__Struct
+    local_interrupt : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_LocalInterrupt_e__Struct
+    sci : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Sci_e__Struct
+    nmi : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Nmi_e__Struct
+    sea : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Sea_e__Struct
+    sei : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Sei_e__Struct
+    gsiv : WHEA_NOTIFICATION_DESCRIPTOR_u_e__Union_Gsiv_e__Struct
+  end
+  union WHEA_PCI_SLOT_NUMBER_u_e__Union
+    bits : WHEA_PCI_SLOT_NUMBER_u_e__Union_bits_e__Struct
+    as_ulong : UInt32
+  end
+  union WHEA_ERROR_SOURCE_DESCRIPTOR_Info_e__Union
+    xpf_mce_descriptor : WHEA_XPF_MCE_DESCRIPTOR
+    xpf_cmc_descriptor : WHEA_XPF_CMC_DESCRIPTOR
+    xpf_nmi_descriptor : WHEA_XPF_NMI_DESCRIPTOR
+    ipf_mca_descriptor : WHEA_IPF_MCA_DESCRIPTOR
+    ipf_cmc_descriptor : WHEA_IPF_CMC_DESCRIPTOR
+    ipf_cpe_descriptor : WHEA_IPF_CPE_DESCRIPTOR
+    aer_rootport_descriptor : WHEA_AER_ROOTPORT_DESCRIPTOR
+    aer_endpoint_descriptor : WHEA_AER_ENDPOINT_DESCRIPTOR
+    aer_bridge_descriptor : WHEA_AER_BRIDGE_DESCRIPTOR
+    gen_err_descriptor : WHEA_GENERIC_ERROR_DESCRIPTOR
+    gen_err_descriptor_v2 : WHEA_GENERIC_ERROR_DESCRIPTOR_V2
+    device_driver_descriptor : WHEA_DEVICE_DRIVER_DESCRIPTOR
+  end
 
   struct EXCEPTION_DEBUG_INFO
     exception_record : EXCEPTION_RECORD

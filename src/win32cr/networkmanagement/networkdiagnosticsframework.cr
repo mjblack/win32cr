@@ -106,28 +106,28 @@ lib LibWin32
     PT_UP_STREAM_UTILIZATION = 32
   end
 
-union HELPER_ATTRIBUTE_Anonymous_e__Union
-  boolean : LibC::BOOL
-  char : UInt8
-  byte : UInt8
-  short : Int16
-  word : UInt16
-  int : Int32
-  d_word : UInt32
-  int64 : Int64
-  u_int64 : UInt64
-  pw_str : LibC::LPWSTR
-  guid : Guid
-  life_time : LIFE_TIME
-  address : DIAG_SOCKADDR
-  octet_string : OCTET_STRING
-end
-union UiInfo_Anonymous_e__Union
-  pwz_null : LibC::LPWSTR
-  shell_info : ShellCommandInfo
-  pwz_help_url : LibC::LPWSTR
-  pwz_dui : LibC::LPWSTR
-end
+  union HELPER_ATTRIBUTE_Anonymous_e__Union
+    boolean : LibC::BOOL
+    char : UInt8
+    byte : UInt8
+    short : Int16
+    word : UInt16
+    int : Int32
+    d_word : UInt32
+    int64 : Int64
+    u_int64 : UInt64
+    pw_str : LibC::LPWSTR
+    guid : Guid
+    life_time : LIFE_TIME
+    address : DIAG_SOCKADDR
+    octet_string : OCTET_STRING
+  end
+  union UiInfo_Anonymous_e__Union
+    pwz_null : LibC::LPWSTR
+    shell_info : ShellCommandInfo
+    pwz_help_url : LibC::LPWSTR
+    pwz_dui : LibC::LPWSTR
+  end
 
   struct OCTET_STRING
     dw_length : UInt32

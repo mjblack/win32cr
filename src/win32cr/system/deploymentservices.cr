@@ -376,14 +376,14 @@ lib LibWin32
     WdsTptTftpCapVariableWindow = 2
   end
 
-union PXE_DHCP_MESSAGE_Anonymous_e__Union
-  b_magic_cookie : UInt8[4]*
-  u_magic_cookie : UInt32
-end
-union PXE_ADDRESS_Anonymous_e__Union
-  b_address : UInt8[16]*
-  u_ip_address : UInt32
-end
+  union PXE_DHCP_MESSAGE_Anonymous_e__Union
+    b_magic_cookie : UInt8[4]*
+    u_magic_cookie : UInt32
+  end
+  union PXE_ADDRESS_Anonymous_e__Union
+    b_address : UInt8[16]*
+    u_ip_address : UInt32
+  end
 
   struct WDS_CLI_CRED
     pwsz_user_name : LibC::LPWSTR

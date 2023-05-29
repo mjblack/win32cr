@@ -2401,151 +2401,151 @@ lib LibWin32
     ENUM_CEPSETUPPROP_KEYBASED_RENEWAL = 3
   end
 
-union CERT_ALT_NAME_ENTRY_Anonymous_e__Union
-  p_other_name : CERT_OTHER_NAME*
-  pwsz_rfc822_name : LibC::LPWSTR
-  pwsz_dns_name : LibC::LPWSTR
-  directory_name : CRYPTOAPI_BLOB
-  pwsz_url : LibC::LPWSTR
-  ip_address : CRYPTOAPI_BLOB
-  psz_registered_id : PSTR
-end
-union CRL_DIST_POINT_NAME_Anonymous_e__Union
-  full_name : CERT_ALT_NAME_INFO
-end
-union CMC_TAGGED_REQUEST_Anonymous_e__Union
-  p_tagged_cert_request : CMC_TAGGED_CERT_REQUEST*
-end
-union CMC_STATUS_INFO_Anonymous_e__Union
-  dw_fail_info : UInt32
-  p_pend_info : CMC_PEND_INFO*
-end
-union CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union
-  dw_num_bits : UInt32
-  dw_table_size : UInt32
-end
-union CERT_LOGOTYPE_INFO_Anonymous_e__Union
-  p_logotype_direct_info : CERT_LOGOTYPE_DATA*
-  p_logotype_indirect_info : CERT_LOGOTYPE_REFERENCE*
-end
-union CERT_BIOMETRIC_DATA_Anonymous_e__Union
-  dw_predefined : UInt32
-  psz_obj_id : PSTR
-end
-union OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union
-  p_revoked_info : OCSP_BASIC_REVOKED_INFO*
-end
-union OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union
-  by_name_responder_id : CRYPTOAPI_BLOB
-  by_key_responder_id : CRYPTOAPI_BLOB
-end
-union CRYPT_OID_INFO_Anonymous_e__Union
-  dw_value : UInt32
-  algid : UInt32
-  dw_length : UInt32
-end
-union CERT_STRONG_SIGN_PARA_Anonymous_e__Union
-  pv_info : Void*
-  p_serialized_info : CERT_STRONG_SIGN_SERIALIZED_INFO*
-  psz_oid : PSTR
-end
-union CERT_ID_Anonymous_e__Union
-  issuer_serial_number : CERT_ISSUER_SERIAL_NUMBER
-  key_id : CRYPTOAPI_BLOB
-  hash_id : CRYPTOAPI_BLOB
-end
-union CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union
-  h_crypt_prov : LibC::UINT_PTR
-  h_n_crypt_key : LibC::UINT_PTR
-end
-union CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-  p_ephemeral_algorithm : CRYPT_ALGORITHM_IDENTIFIER*
-  p_sender_id : CERT_ID*
-end
-union CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-  h_key_encryption_key : LibC::UINT_PTR
-  pv_key_encryption_key : Void*
-end
-union CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-  p_key_trans : CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO*
-  p_key_agree : CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO*
-  p_mail_list : CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO*
-end
-union CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union
-  originator_cert_id : CERT_ID
-  originator_public_key_info : CERT_PUBLIC_KEY_INFO
-end
-union CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union
-  p_key_trans : CMSG_KEY_TRANS_RECIPIENT_INFO*
-  p_key_agree : CMSG_KEY_AGREE_RECIPIENT_INFO*
-  p_mail_list : CMSG_MAIL_LIST_RECIPIENT_INFO*
-end
-union CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union
-  h_crypt_prov : LibC::UINT_PTR
-  h_n_crypt_key : LibC::UINT_PTR
-end
-union CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union
-  h_crypt_prov : LibC::UINT_PTR
-  h_n_crypt_key : LibC::UINT_PTR
-end
-union CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union
-  h_crypt_prov : LibC::UINT_PTR
-  h_n_crypt_key : LibC::UINT_PTR
-end
-union CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union
-  h_key_encryption_key : LibC::UINT_PTR
-  pv_key_encryption_key : Void*
-end
-union CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union
-  h_content_encrypt_key : LibC::UINT_PTR
-  h_cng_content_encrypt_key : BCRYPT_KEY_HANDLE
-end
-union CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union
-  originator_cert_id : CERT_ID
-  originator_public_key_info : CERT_PUBLIC_KEY_INFO
-end
-union CERT_KEY_CONTEXT_Anonymous_e__Union
-  h_crypt_prov : LibC::UINT_PTR
-  h_n_crypt_key : LibC::UINT_PTR
-end
-union CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union
-  pv_system_store : Void*
-  psz_system_store : PSTR
-  pwsz_system_store : LibC::LPWSTR
-end
-union CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union
-  h_key_base : HKEY
-  pv_base : Void*
-end
-union CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union
-  h_crypt_prov : LibC::UINT_PTR
-  h_n_crypt_key : LibC::UINT_PTR
-end
-union HTTPSPolicyCallbackData_Anonymous_e__Union
-  cb_struct : UInt32
-  cb_size : UInt32
-end
-union CRYPT_XML_KEY_VALUE_Anonymous_e__Union
-  dsa_key_value : CRYPT_XML_KEY_DSA_KEY_VALUE
-  rsa_key_value : CRYPT_XML_KEY_RSA_KEY_VALUE
-  ecdsa_key_value : CRYPT_XML_KEY_ECDSA_KEY_VALUE
-  custom : CRYPT_XML_BLOB
-end
-union CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union
-  issuer_serial : CRYPT_XML_ISSUER_SERIAL
-  ski : CRYPT_XML_DATA_BLOB
-  wsz_subject_name : LibC::LPWSTR
-  certificate : CRYPT_XML_DATA_BLOB
-  crl : CRYPT_XML_DATA_BLOB
-  custom : CRYPT_XML_BLOB
-end
-union CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union
-  wsz_key_name : LibC::LPWSTR
-  key_value : CRYPT_XML_KEY_VALUE
-  retrieval_method : CRYPT_XML_BLOB
-  x509_data : CRYPT_XML_X509DATA
-  custom : CRYPT_XML_BLOB
-end
+  union CERT_ALT_NAME_ENTRY_Anonymous_e__Union
+    p_other_name : CERT_OTHER_NAME*
+    pwsz_rfc822_name : LibC::LPWSTR
+    pwsz_dns_name : LibC::LPWSTR
+    directory_name : CRYPTOAPI_BLOB
+    pwsz_url : LibC::LPWSTR
+    ip_address : CRYPTOAPI_BLOB
+    psz_registered_id : PSTR
+  end
+  union CRL_DIST_POINT_NAME_Anonymous_e__Union
+    full_name : CERT_ALT_NAME_INFO
+  end
+  union CMC_TAGGED_REQUEST_Anonymous_e__Union
+    p_tagged_cert_request : CMC_TAGGED_CERT_REQUEST*
+  end
+  union CMC_STATUS_INFO_Anonymous_e__Union
+    dw_fail_info : UInt32
+    p_pend_info : CMC_PEND_INFO*
+  end
+  union CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union
+    dw_num_bits : UInt32
+    dw_table_size : UInt32
+  end
+  union CERT_LOGOTYPE_INFO_Anonymous_e__Union
+    p_logotype_direct_info : CERT_LOGOTYPE_DATA*
+    p_logotype_indirect_info : CERT_LOGOTYPE_REFERENCE*
+  end
+  union CERT_BIOMETRIC_DATA_Anonymous_e__Union
+    dw_predefined : UInt32
+    psz_obj_id : PSTR
+  end
+  union OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union
+    p_revoked_info : OCSP_BASIC_REVOKED_INFO*
+  end
+  union OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union
+    by_name_responder_id : CRYPTOAPI_BLOB
+    by_key_responder_id : CRYPTOAPI_BLOB
+  end
+  union CRYPT_OID_INFO_Anonymous_e__Union
+    dw_value : UInt32
+    algid : UInt32
+    dw_length : UInt32
+  end
+  union CERT_STRONG_SIGN_PARA_Anonymous_e__Union
+    pv_info : Void*
+    p_serialized_info : CERT_STRONG_SIGN_SERIALIZED_INFO*
+    psz_oid : PSTR
+  end
+  union CERT_ID_Anonymous_e__Union
+    issuer_serial_number : CERT_ISSUER_SERIAL_NUMBER
+    key_id : CRYPTOAPI_BLOB
+    hash_id : CRYPTOAPI_BLOB
+  end
+  union CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union
+    h_crypt_prov : LibC::UINT_PTR
+    h_n_crypt_key : LibC::UINT_PTR
+  end
+  union CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
+    p_ephemeral_algorithm : CRYPT_ALGORITHM_IDENTIFIER*
+    p_sender_id : CERT_ID*
+  end
+  union CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
+    h_key_encryption_key : LibC::UINT_PTR
+    pv_key_encryption_key : Void*
+  end
+  union CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
+    p_key_trans : CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO*
+    p_key_agree : CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO*
+    p_mail_list : CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO*
+  end
+  union CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union
+    originator_cert_id : CERT_ID
+    originator_public_key_info : CERT_PUBLIC_KEY_INFO
+  end
+  union CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union
+    p_key_trans : CMSG_KEY_TRANS_RECIPIENT_INFO*
+    p_key_agree : CMSG_KEY_AGREE_RECIPIENT_INFO*
+    p_mail_list : CMSG_MAIL_LIST_RECIPIENT_INFO*
+  end
+  union CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union
+    h_crypt_prov : LibC::UINT_PTR
+    h_n_crypt_key : LibC::UINT_PTR
+  end
+  union CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union
+    h_crypt_prov : LibC::UINT_PTR
+    h_n_crypt_key : LibC::UINT_PTR
+  end
+  union CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union
+    h_crypt_prov : LibC::UINT_PTR
+    h_n_crypt_key : LibC::UINT_PTR
+  end
+  union CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union
+    h_key_encryption_key : LibC::UINT_PTR
+    pv_key_encryption_key : Void*
+  end
+  union CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union
+    h_content_encrypt_key : LibC::UINT_PTR
+    h_cng_content_encrypt_key : BCRYPT_KEY_HANDLE
+  end
+  union CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union
+    originator_cert_id : CERT_ID
+    originator_public_key_info : CERT_PUBLIC_KEY_INFO
+  end
+  union CERT_KEY_CONTEXT_Anonymous_e__Union
+    h_crypt_prov : LibC::UINT_PTR
+    h_n_crypt_key : LibC::UINT_PTR
+  end
+  union CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union
+    pv_system_store : Void*
+    psz_system_store : PSTR
+    pwsz_system_store : LibC::LPWSTR
+  end
+  union CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union
+    h_key_base : HKEY
+    pv_base : Void*
+  end
+  union CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union
+    h_crypt_prov : LibC::UINT_PTR
+    h_n_crypt_key : LibC::UINT_PTR
+  end
+  union HTTPSPolicyCallbackData_Anonymous_e__Union
+    cb_struct : UInt32
+    cb_size : UInt32
+  end
+  union CRYPT_XML_KEY_VALUE_Anonymous_e__Union
+    dsa_key_value : CRYPT_XML_KEY_DSA_KEY_VALUE
+    rsa_key_value : CRYPT_XML_KEY_RSA_KEY_VALUE
+    ecdsa_key_value : CRYPT_XML_KEY_ECDSA_KEY_VALUE
+    custom : CRYPT_XML_BLOB
+  end
+  union CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union
+    issuer_serial : CRYPT_XML_ISSUER_SERIAL
+    ski : CRYPT_XML_DATA_BLOB
+    wsz_subject_name : LibC::LPWSTR
+    certificate : CRYPT_XML_DATA_BLOB
+    crl : CRYPT_XML_DATA_BLOB
+    custom : CRYPT_XML_BLOB
+  end
+  union CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union
+    wsz_key_name : LibC::LPWSTR
+    key_value : CRYPT_XML_KEY_VALUE
+    retrieval_method : CRYPT_XML_BLOB
+    x509_data : CRYPT_XML_X509DATA
+    custom : CRYPT_XML_BLOB
+  end
 
   struct CMS_KEY_INFO
     dw_version : UInt32

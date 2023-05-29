@@ -59,10 +59,10 @@ lib LibWin32
     WEB_SOCKET_INDICATE_RECEIVE_COMPLETE_ACTION = 4
   end
 
-union WEB_SOCKET_BUFFER
-  data : WEB_SOCKET_BUFFER_Data_e__Struct
-  close_status : WEB_SOCKET_BUFFER_CloseStatus_e__Struct
-end
+  union WEB_SOCKET_BUFFER
+    data : WEB_SOCKET_BUFFER_Data_e__Struct
+    close_status : WEB_SOCKET_BUFFER_CloseStatus_e__Struct
+  end
 
   struct WEB_SOCKET_PROPERTY
     type : WEB_SOCKET_PROPERTY_TYPE

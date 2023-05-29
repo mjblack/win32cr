@@ -1763,50 +1763,50 @@ lib LibWin32
     RAS_WORLD = 4
   end
 
-union LINEINITIALIZEEXPARAMS_Handles_e__Union
-  h_event : LibC::HANDLE
-  h_completion_port : LibC::HANDLE
-end
-union LINEPROXYREQUEST_Anonymous_e__Union
-  set_agent_group : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentGroup_e__Struct
-  set_agent_state : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentState_e__Struct
-  set_agent_activity : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentActivity_e__Struct
-  get_agent_caps : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentCaps_e__Struct
-  get_agent_status : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentStatus_e__Struct
-  agent_specific : LINEPROXYREQUEST_Anonymous_e__Union_AgentSpecific_e__Struct
-  get_agent_activity_list : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentActivityList_e__Struct
-  get_agent_group_list : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentGroupList_e__Struct
-  create_agent : LINEPROXYREQUEST_Anonymous_e__Union_CreateAgent_e__Struct
-  set_agent_state_ex : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentStateEx_e__Struct
-  set_agent_measurement_period : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentMeasurementPeriod_e__Struct
-  get_agent_info : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentInfo_e__Struct
-  create_agent_session : LINEPROXYREQUEST_Anonymous_e__Union_CreateAgentSession_e__Struct
-  get_agent_session_list : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentSessionList_e__Struct
-  get_agent_session_info : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentSessionInfo_e__Struct
-  set_agent_session_state : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentSessionState_e__Struct
-  get_queue_list : LINEPROXYREQUEST_Anonymous_e__Union_GetQueueList_e__Struct
-  set_queue_measurement_period : LINEPROXYREQUEST_Anonymous_e__Union_SetQueueMeasurementPeriod_e__Struct
-  get_queue_info : LINEPROXYREQUEST_Anonymous_e__Union_GetQueueInfo_e__Struct
-  get_group_list : LINEPROXYREQUEST_Anonymous_e__Union_GetGroupList_e__Struct
-end
-union PHONEINITIALIZEEXPARAMS_Handles_e__Union
-  h_event : LibC::HANDLE
-  h_completion_port : LibC::HANDLE
-end
-union MSP_EVENT_INFO_Anonymous_e__Union
-  msp_address_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_ADDRESS_EVENT_INFO_e__Struct
-  msp_call_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_CALL_EVENT_INFO_e__Struct
-  msp_tsp_data : MSP_EVENT_INFO_Anonymous_e__Union_MSP_TSP_DATA_e__Struct
-  msp_private_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_PRIVATE_EVENT_INFO_e__Struct
-  msp_file_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_FILE_TERMINAL_EVENT_INFO_e__Struct
-  msp_asr_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_ASR_TERMINAL_EVENT_INFO_e__Struct
-  msp_tts_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_TTS_TERMINAL_EVENT_INFO_e__Struct
-  msp_tone_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_TONE_TERMINAL_EVENT_INFO_e__Struct
-end
-union NSID_address_e__Union
-  alias : ADDR_ALIAS
-  rgch_inter_net : CHAR[0]*
-end
+  union LINEINITIALIZEEXPARAMS_Handles_e__Union
+    h_event : LibC::HANDLE
+    h_completion_port : LibC::HANDLE
+  end
+  union LINEPROXYREQUEST_Anonymous_e__Union
+    set_agent_group : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentGroup_e__Struct
+    set_agent_state : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentState_e__Struct
+    set_agent_activity : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentActivity_e__Struct
+    get_agent_caps : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentCaps_e__Struct
+    get_agent_status : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentStatus_e__Struct
+    agent_specific : LINEPROXYREQUEST_Anonymous_e__Union_AgentSpecific_e__Struct
+    get_agent_activity_list : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentActivityList_e__Struct
+    get_agent_group_list : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentGroupList_e__Struct
+    create_agent : LINEPROXYREQUEST_Anonymous_e__Union_CreateAgent_e__Struct
+    set_agent_state_ex : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentStateEx_e__Struct
+    set_agent_measurement_period : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentMeasurementPeriod_e__Struct
+    get_agent_info : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentInfo_e__Struct
+    create_agent_session : LINEPROXYREQUEST_Anonymous_e__Union_CreateAgentSession_e__Struct
+    get_agent_session_list : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentSessionList_e__Struct
+    get_agent_session_info : LINEPROXYREQUEST_Anonymous_e__Union_GetAgentSessionInfo_e__Struct
+    set_agent_session_state : LINEPROXYREQUEST_Anonymous_e__Union_SetAgentSessionState_e__Struct
+    get_queue_list : LINEPROXYREQUEST_Anonymous_e__Union_GetQueueList_e__Struct
+    set_queue_measurement_period : LINEPROXYREQUEST_Anonymous_e__Union_SetQueueMeasurementPeriod_e__Struct
+    get_queue_info : LINEPROXYREQUEST_Anonymous_e__Union_GetQueueInfo_e__Struct
+    get_group_list : LINEPROXYREQUEST_Anonymous_e__Union_GetGroupList_e__Struct
+  end
+  union PHONEINITIALIZEEXPARAMS_Handles_e__Union
+    h_event : LibC::HANDLE
+    h_completion_port : LibC::HANDLE
+  end
+  union MSP_EVENT_INFO_Anonymous_e__Union
+    msp_address_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_ADDRESS_EVENT_INFO_e__Struct
+    msp_call_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_CALL_EVENT_INFO_e__Struct
+    msp_tsp_data : MSP_EVENT_INFO_Anonymous_e__Union_MSP_TSP_DATA_e__Struct
+    msp_private_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_PRIVATE_EVENT_INFO_e__Struct
+    msp_file_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_FILE_TERMINAL_EVENT_INFO_e__Struct
+    msp_asr_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_ASR_TERMINAL_EVENT_INFO_e__Struct
+    msp_tts_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_TTS_TERMINAL_EVENT_INFO_e__Struct
+    msp_tone_terminal_event_info : MSP_EVENT_INFO_Anonymous_e__Union_MSP_TONE_TERMINAL_EVENT_INFO_e__Struct
+  end
+  union NSID_address_e__Union
+    alias : ADDR_ALIAS
+    rgch_inter_net : CHAR[0]*
+  end
 
   struct LINEADDRESSCAPS
     dw_total_size : UInt32

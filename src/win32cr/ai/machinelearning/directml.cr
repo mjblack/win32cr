@@ -312,19 +312,19 @@ lib LibWin32
     DML_GRAPH_NODE_TYPE_OPERATOR = 1
   end
 
-union DML_SCALAR_UNION
-  bytes : UInt8[8]*
-  int8 : Int8
-  u_int8 : UInt8
-  int16 : Int16
-  u_int16 : UInt16
-  int32 : Int32
-  u_int32 : UInt32
-  int64 : Int64
-  u_int64 : UInt64
-  float32 : Float32
-  float64 : Float64
-end
+  union DML_SCALAR_UNION
+    bytes : UInt8[8]*
+    int8 : Int8
+    u_int8 : UInt8
+    int16 : Int16
+    u_int16 : UInt16
+    int32 : Int32
+    u_int32 : UInt32
+    int64 : Int64
+    u_int64 : UInt64
+    float32 : Float32
+    float64 : Float64
+  end
 
   struct DML_BUFFER_TENSOR_DESC
     data_type : DML_TENSOR_DATA_TYPE

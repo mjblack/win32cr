@@ -1371,24 +1371,24 @@ lib LibWin32
     CM_NOTIFY_ACTION_MAX = 10
   end
 
-union SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union
-  reserved : UInt16
-  flags : UInt16
-end
-union SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union
-  reserved : UInt16
-  flags : UInt16
-end
-union CM_NOTIFY_FILTER_u_e__Union
-  device_interface : CM_NOTIFY_FILTER_u_e__Union_DeviceInterface_e__Struct
-  device_handle : CM_NOTIFY_FILTER_u_e__Union_DeviceHandle_e__Struct
-  device_instance : CM_NOTIFY_FILTER_u_e__Union_DeviceInstance_e__Struct
-end
-union CM_NOTIFY_EVENT_DATA_u_e__Union
-  device_interface : CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInterface_e__Struct
-  device_handle : CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceHandle_e__Struct
-  device_instance : CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInstance_e__Struct
-end
+  union SP_ALTPLATFORM_INFO_V3_Anonymous_e__Union
+    reserved : UInt16
+    flags : UInt16
+  end
+  union SP_ALTPLATFORM_INFO_V2_Anonymous_e__Union
+    reserved : UInt16
+    flags : UInt16
+  end
+  union CM_NOTIFY_FILTER_u_e__Union
+    device_interface : CM_NOTIFY_FILTER_u_e__Union_DeviceInterface_e__Struct
+    device_handle : CM_NOTIFY_FILTER_u_e__Union_DeviceHandle_e__Struct
+    device_instance : CM_NOTIFY_FILTER_u_e__Union_DeviceInstance_e__Struct
+  end
+  union CM_NOTIFY_EVENT_DATA_u_e__Union
+    device_interface : CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInterface_e__Struct
+    device_handle : CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceHandle_e__Struct
+    device_instance : CM_NOTIFY_EVENT_DATA_u_e__Union_DeviceInstance_e__Struct
+  end
 
   struct INFCONTEXT
     inf : Void*

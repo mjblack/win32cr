@@ -291,10 +291,10 @@ lib LibWin32
     ServiceSharedDirectoryPersistentState = 0
   end
 
-union SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union
-  custom_state_id : SERVICE_TRIGGER_CUSTOM_STATE_ID
-  s : SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union_s_e__Struct
-end
+  union SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union
+    custom_state_id : SERVICE_TRIGGER_CUSTOM_STATE_ID
+    s : SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM_u_e__Union_s_e__Struct
+  end
 
   struct SERVICE_TRIGGER_CUSTOM_STATE_ID
     data : UInt32[2]*

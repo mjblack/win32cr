@@ -261,80 +261,80 @@ lib LibWin32
     Gendermale = 2
   end
 
-union PV
-  i : Int16
-  l : Int32
-  ul : UInt32
-  flt : Float32
-  dbl : Float64
-  b : UInt16
-  cur : CY
-  at : Float64
-  ft : FILETIME
-  lpsz_a : PSTR
-  bin : SBinary
-  lpsz_w : LibC::LPWSTR
-  lpguid : Guid*
-  li : LARGE_INTEGER
-  m_vi : SShortArray
-  m_vl : SLongArray
-  m_vflt : SRealArray
-  m_vdbl : SDoubleArray
-  m_vcur : SCurrencyArray
-  m_vat : SAppTimeArray
-  m_vft : SDateTimeArray
-  m_vbin : SBinaryArray
-  m_vsz_a : SLPSTRArray
-  m_vsz_w : SWStringArray
-  m_vguid : SGuidArray
-  m_vli : SLargeIntegerArray
-  err : Int32
-  x : Int32
-end
-union NOTIFICATION_info_e__Union
-  err : ERROR_NOTIFICATION
-  newmail : NEWMAIL_NOTIFICATION
-  obj : OBJECT_NOTIFICATION
-  tab : TABLE_NOTIFICATION
-  ext : EXTENDED_NOTIFICATION
-  statobj : STATUS_OBJECT_NOTIFICATION
-end
-union MAPINAMEID_Kind_e__Union
-  l_id : Int32
-  lpwstr_name : LibC::LPWSTR
-end
-union SRestriction_res_e__Union
-  res_compare_props : SComparePropsRestriction
-  res_and : SAndRestriction
-  res_or : SOrRestriction
-  res_not : SNotRestriction
-  res_content : SContentRestriction
-  res_property : SPropertyRestriction
-  res_bit_mask : SBitMaskRestriction
-  res_size : SSizeRestriction
-  res_exist : SExistRestriction
-  res_sub : SSubRestriction
-  res_comment : SCommentRestriction
-end
-union DTCTL_ctl_e__Union
-  lpv : Void*
-  lplabel : DTBLLABEL*
-  lpedit : DTBLEDIT*
-  lplbx : DTBLLBX*
-  lpcombobox : DTBLCOMBOBOX*
-  lpddlbx : DTBLDDLBX*
-  lpcheckbox : DTBLCHECKBOX*
-  lpgroupbox : DTBLGROUPBOX*
-  lpbutton : DTBLBUTTON*
-  lpradiobutton : DTBLRADIOBUTTON*
-  lpmvlbx : DTBLMVLISTBOX*
-  lpmvddlbx : DTBLMVDDLBX*
-  lppage : DTBLPAGE*
-end
-union DTPAGE_Anonymous_e__Union
-  lpsz_component : Int8*
-  ul_item_id : UInt32
-end
+  union PV
+    i : Int16
+    l : Int32
+    ul : UInt32
+    flt : Float32
+    dbl : Float64
+    b : UInt16
+    cur : CY
+    at : Float64
+    ft : FILETIME
+    lpsz_a : PSTR
+    bin : SBinary
+    lpsz_w : LibC::LPWSTR
+    lpguid : Guid*
+    li : LARGE_INTEGER
+    m_vi : SShortArray
+    m_vl : SLongArray
+    m_vflt : SRealArray
+    m_vdbl : SDoubleArray
+    m_vcur : SCurrencyArray
+    m_vat : SAppTimeArray
+    m_vft : SDateTimeArray
+    m_vbin : SBinaryArray
+    m_vsz_a : SLPSTRArray
+    m_vsz_w : SWStringArray
+    m_vguid : SGuidArray
+    m_vli : SLargeIntegerArray
+    err : Int32
+    x : Int32
+  end
+  union NOTIFICATION_info_e__Union
+    err : ERROR_NOTIFICATION
+    newmail : NEWMAIL_NOTIFICATION
+    obj : OBJECT_NOTIFICATION
+    tab : TABLE_NOTIFICATION
+    ext : EXTENDED_NOTIFICATION
+    statobj : STATUS_OBJECT_NOTIFICATION
+  end
+  union MAPINAMEID_Kind_e__Union
+    l_id : Int32
+    lpwstr_name : LibC::LPWSTR
+  end
+  union SRestriction_res_e__Union
+    res_compare_props : SComparePropsRestriction
+    res_and : SAndRestriction
+    res_or : SOrRestriction
+    res_not : SNotRestriction
+    res_content : SContentRestriction
+    res_property : SPropertyRestriction
+    res_bit_mask : SBitMaskRestriction
+    res_size : SSizeRestriction
+    res_exist : SExistRestriction
+    res_sub : SSubRestriction
+    res_comment : SCommentRestriction
+  end
+  union DTCTL_ctl_e__Union
+    lpv : Void*
+    lplabel : DTBLLABEL*
+    lpedit : DTBLEDIT*
+    lplbx : DTBLLBX*
+    lpcombobox : DTBLCOMBOBOX*
+    lpddlbx : DTBLDDLBX*
+    lpcheckbox : DTBLCHECKBOX*
+    lpgroupbox : DTBLGROUPBOX*
+    lpbutton : DTBLBUTTON*
+    lpradiobutton : DTBLRADIOBUTTON*
+    lpmvlbx : DTBLMVLISTBOX*
+    lpmvddlbx : DTBLMVDDLBX*
+    lppage : DTBLPAGE*
+  end
+  union DTPAGE_Anonymous_e__Union
+    lpsz_component : Int8*
+    ul_item_id : UInt32
+  end
 
   struct ENTRYID
     ab_flags : UInt8[4]*

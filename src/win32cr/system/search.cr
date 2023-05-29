@@ -4735,51 +4735,51 @@ lib LibWin32
     LOCKMODE_SHARED = 2
   end
 
-union SQL_INTERVAL_STRUCT_intval_e__Union
-  year_month : Tagsql_year_month
-  day_second : Tagsql_day_second
-end
-union RESTRICTION_URes
-  ar : NODERESTRICTION
-  or_restriction : NODERESTRICTION
-  pxr : NODERESTRICTION
-  vr : VECTORRESTRICTION
-  nr : NOTRESTRICTION
-  cr : CONTENTRESTRICTION
-  nlr : NATLANGUAGERESTRICTION
-  pr : PROPERTYRESTRICTION
-end
-union CATEGORIZATION_Anonymous_e__Union
-  c_clusters : UInt32
-  bucket : BUCKETCATEGORIZE
-  range : RANGECATEGORIZE
-end
-union ODBC_VS_ARGS_Anonymous1_e__Union
-  wsz_arg : LibC::LPWSTR
-  sz_arg : PSTR
-end
-union ODBC_VS_ARGS_Anonymous2_e__Union
-  wsz_correlation : LibC::LPWSTR
-  sz_correlation : PSTR
-end
-union SSVARIANT_Anonymous_e__Union
-  b_tiny_int_val : UInt8
-  s_short_int_val : Int16
-  l_int_val : Int32
-  ll_big_int_val : Int64
-  flt_real_val : Float32
-  dbl_float_val : Float64
-  cy_money_val : CY
-  n_char_val : SSVARIANT_Anonymous_e__Union_NCharVal
-  char_val : SSVARIANT_Anonymous_e__Union_CharVal
-  f_bit_val : Int16
-  rgb_guid_val : UInt8[16]*
-  num_numeric_val : DB_NUMERIC
-  binary_val : SSVARIANT_Anonymous_e__Union_BinaryVal
-  ts_date_time_val : DBTIMESTAMP
-  unknown_type : SSVARIANT_Anonymous_e__Union_UnknownType
-  blob_type : SSVARIANT_Anonymous_e__Union_BLOBType
-end
+  union SQL_INTERVAL_STRUCT_intval_e__Union
+    year_month : Tagsql_year_month
+    day_second : Tagsql_day_second
+  end
+  union RESTRICTION_URes
+    ar : NODERESTRICTION
+    or_restriction : NODERESTRICTION
+    pxr : NODERESTRICTION
+    vr : VECTORRESTRICTION
+    nr : NOTRESTRICTION
+    cr : CONTENTRESTRICTION
+    nlr : NATLANGUAGERESTRICTION
+    pr : PROPERTYRESTRICTION
+  end
+  union CATEGORIZATION_Anonymous_e__Union
+    c_clusters : UInt32
+    bucket : BUCKETCATEGORIZE
+    range : RANGECATEGORIZE
+  end
+  union ODBC_VS_ARGS_Anonymous1_e__Union
+    wsz_arg : LibC::LPWSTR
+    sz_arg : PSTR
+  end
+  union ODBC_VS_ARGS_Anonymous2_e__Union
+    wsz_correlation : LibC::LPWSTR
+    sz_correlation : PSTR
+  end
+  union SSVARIANT_Anonymous_e__Union
+    b_tiny_int_val : UInt8
+    s_short_int_val : Int16
+    l_int_val : Int32
+    ll_big_int_val : Int64
+    flt_real_val : Float32
+    dbl_float_val : Float64
+    cy_money_val : CY
+    n_char_val : SSVARIANT_Anonymous_e__Union_NCharVal
+    char_val : SSVARIANT_Anonymous_e__Union_CharVal
+    f_bit_val : Int16
+    rgb_guid_val : UInt8[16]*
+    num_numeric_val : DB_NUMERIC
+    binary_val : SSVARIANT_Anonymous_e__Union_BinaryVal
+    ts_date_time_val : DBTIMESTAMP
+    unknown_type : SSVARIANT_Anonymous_e__Union_UnknownType
+    blob_type : SSVARIANT_Anonymous_e__Union_BLOBType
+  end
 
   struct TEXT_SOURCE
     pfn_fill_text_buffer : PFNFILLTEXTBUFFER

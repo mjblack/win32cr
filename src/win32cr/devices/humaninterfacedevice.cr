@@ -2469,34 +2469,34 @@ lib LibWin32
     GPIO_BUTTON_COUNT = 16
   end
 
-union DIACTIONA_Anonymous_e__Union
-  lptsz_action_name : PSTR
-  u_res_id_string : UInt32
-end
-union DIACTIONW_Anonymous_e__Union
-  lptsz_action_name : LibC::LPWSTR
-  u_res_id_string : UInt32
-end
-union MOUSE_INPUT_DATA_Anonymous_e__Union
-  buttons : UInt32
-  anonymous : MOUSE_INPUT_DATA_Anonymous_e__Union_Anonymous_e__Struct
-end
-union HIDP_BUTTON_CAPS_Anonymous_e__Union
-  range : HIDP_BUTTON_CAPS_Anonymous_e__Union_Range_e__Struct
-  not_range : HIDP_BUTTON_CAPS_Anonymous_e__Union_NotRange_e__Struct
-end
-union HIDP_VALUE_CAPS_Anonymous_e__Union
-  range : HIDP_VALUE_CAPS_Anonymous_e__Union_Range_e__Struct
-  not_range : HIDP_VALUE_CAPS_Anonymous_e__Union_NotRange_e__Struct
-end
-union HIDP_DATA_Anonymous_e__Union
-  raw_value : UInt32
-  on : BOOLEAN
-end
-union HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union
-  anonymous : HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union_Anonymous_e__Struct
-  ul : UInt32
-end
+  union DIACTIONA_Anonymous_e__Union
+    lptsz_action_name : PSTR
+    u_res_id_string : UInt32
+  end
+  union DIACTIONW_Anonymous_e__Union
+    lptsz_action_name : LibC::LPWSTR
+    u_res_id_string : UInt32
+  end
+  union MOUSE_INPUT_DATA_Anonymous_e__Union
+    buttons : UInt32
+    anonymous : MOUSE_INPUT_DATA_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union HIDP_BUTTON_CAPS_Anonymous_e__Union
+    range : HIDP_BUTTON_CAPS_Anonymous_e__Union_Range_e__Struct
+    not_range : HIDP_BUTTON_CAPS_Anonymous_e__Union_NotRange_e__Struct
+  end
+  union HIDP_VALUE_CAPS_Anonymous_e__Union
+    range : HIDP_VALUE_CAPS_Anonymous_e__Union_Range_e__Struct
+    not_range : HIDP_VALUE_CAPS_Anonymous_e__Union_NotRange_e__Struct
+  end
+  union HIDP_DATA_Anonymous_e__Union
+    raw_value : UInt32
+    on : BOOLEAN
+  end
+  union HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union
+    anonymous : HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union_Anonymous_e__Struct
+    ul : UInt32
+  end
 
   struct DICONSTANTFORCE
     l_magnitude : Int32

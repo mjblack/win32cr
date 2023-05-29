@@ -6,10 +6,10 @@ require "../foundation.cr"
 lib LibWin32
   alias LPOVERLAPPED_COMPLETION_ROUTINE = Proc(UInt32, UInt32, OVERLAPPED*, Void)
 
-union OVERLAPPED_Anonymous_e__Union
-  anonymous : OVERLAPPED_Anonymous_e__Union_Anonymous_e__Struct
-  pointer : Void*
-end
+  union OVERLAPPED_Anonymous_e__Union
+    anonymous : OVERLAPPED_Anonymous_e__Union_Anonymous_e__Struct
+    pointer : Void*
+  end
 
   struct OVERLAPPED
     internal : LibC::UINT_PTR

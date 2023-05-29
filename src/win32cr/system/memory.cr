@@ -181,21 +181,21 @@ lib LibWin32
     HeapTag = 7
   end
 
-union PROCESS_HEAP_ENTRY_Anonymous_e__Union
-  block : PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct
-  region : PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct
-end
-union WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union
-  flags : UInt32
-  anonymous : WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct
-end
-union MEM_EXTENDED_PARAMETER_Anonymous2_e__Union
-  u_long64 : UInt64
-  pointer : Void*
-  size : LibC::UINT_PTR
-  handle : LibC::HANDLE
-  u_long : UInt32
-end
+  union PROCESS_HEAP_ENTRY_Anonymous_e__Union
+    block : PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct
+    region : PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct
+  end
+  union WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union
+    flags : UInt32
+    anonymous : WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct
+  end
+  union MEM_EXTENDED_PARAMETER_Anonymous2_e__Union
+    u_long64 : UInt64
+    pointer : Void*
+    size : LibC::UINT_PTR
+    handle : LibC::HANDLE
+    u_long : UInt32
+  end
 
   struct PROCESS_HEAP_ENTRY
     lp_data : Void*

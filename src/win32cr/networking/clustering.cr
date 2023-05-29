@@ -2076,81 +2076,81 @@ lib LibWin32
     CLUADMEX_OT_NETINTERFACE = 7
   end
 
-union CLUSPROP_SYNTAX
-  dw : UInt32
-  anonymous : CLUSPROP_SYNTAX_Anonymous_e__Struct
-end
-union CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union
-  sd : SECURITY_DESCRIPTOR_RELATIVE
-  rgb_security_descriptor : UInt8[0]*
-end
-union CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union
-  anonymous : CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct
-  li : ULARGE_INTEGER
-end
-union CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
-  dw : UInt32
-  rc : CLUSTER_RESOURCE_CLASS
-end
-union CLUSPROP_REQUIRED_DEPENDENCY
-  value : CLUSPROP_VALUE
-  res_class : CLUSPROP_RESOURCE_CLASS
-  res_type_name : CLUSPROP_SZ
-end
-union CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union
-  volume_offset : UInt64
-  volume_id : Char[260]*
-  volume_name : Char[260]*
-  volume_guid : Char[50]*
-end
-union CLUS_SCSI_ADDRESS_Anonymous_e__Union
-  anonymous : CLUS_SCSI_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct
-  dw : UInt32
-end
-union CLUSPROP_BUFFER_HELPER
-  pb : UInt8*
-  pw : UInt16*
-  pdw : UInt32*
-  pl : Int32*
-  psz : LibC::LPWSTR
-  p_list : CLUSPROP_LIST*
-  p_syntax : CLUSPROP_SYNTAX*
-  p_name : CLUSPROP_SZ*
-  p_value : CLUSPROP_VALUE*
-  p_binary_value : CLUSPROP_BINARY*
-  p_word_value : CLUSPROP_WORD*
-  p_dword_value : CLUSPROP_DWORD*
-  p_long_value : CLUSPROP_LONG*
-  p_u_large_integer_value : CLUSPROP_ULARGE_INTEGER*
-  p_large_integer_value : CLUSPROP_LARGE_INTEGER*
-  p_string_value : CLUSPROP_SZ*
-  p_multi_sz_value : CLUSPROP_SZ*
-  p_security_descriptor : CLUSPROP_SECURITY_DESCRIPTOR*
-  p_resource_class_value : CLUSPROP_RESOURCE_CLASS*
-  p_resource_class_info_value : CLUSPROP_RESOURCE_CLASS_INFO*
-  p_disk_signature_value : CLUSPROP_DWORD*
-  p_scsi_address_value : CLUSPROP_SCSI_ADDRESS*
-  p_disk_number_value : CLUSPROP_DWORD*
-  p_partition_info_value : CLUSPROP_PARTITION_INFO*
-  p_required_dependency_value : CLUSPROP_REQUIRED_DEPENDENCY*
-  p_partition_info_value_ex : CLUSPROP_PARTITION_INFO_EX*
-  p_partition_info_value_ex2 : CLUSPROP_PARTITION_INFO_EX2*
-  p_file_time_value : CLUSPROP_FILETIME*
-end
-union CLRES_FUNCTION_TABLE_Anonymous_e__Union
-  v1_functions : CLRES_V1_FUNCTIONS
-  v2_functions : CLRES_V2_FUNCTIONS
-  v3_functions : CLRES_V3_FUNCTIONS
-  v4_functions : CLRES_V4_FUNCTIONS
-end
-union RESUTIL_PROPERTY_ITEM_Anonymous_e__Union
-  default_ptr : LibC::UINT_PTR
-  default : UInt32
-  lp_default : Void*
-  large_int_data : RESUTIL_LARGEINT_DATA*
-  u_large_int_data : RESUTIL_ULARGEINT_DATA*
-  file_time_data : RESUTIL_FILETIME_DATA*
-end
+  union CLUSPROP_SYNTAX
+    dw : UInt32
+    anonymous : CLUSPROP_SYNTAX_Anonymous_e__Struct
+  end
+  union CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union
+    sd : SECURITY_DESCRIPTOR_RELATIVE
+    rgb_security_descriptor : UInt8[0]*
+  end
+  union CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union
+    anonymous : CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct
+    li : ULARGE_INTEGER
+  end
+  union CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
+    dw : UInt32
+    rc : CLUSTER_RESOURCE_CLASS
+  end
+  union CLUSPROP_REQUIRED_DEPENDENCY
+    value : CLUSPROP_VALUE
+    res_class : CLUSPROP_RESOURCE_CLASS
+    res_type_name : CLUSPROP_SZ
+  end
+  union CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union
+    volume_offset : UInt64
+    volume_id : Char[260]*
+    volume_name : Char[260]*
+    volume_guid : Char[50]*
+  end
+  union CLUS_SCSI_ADDRESS_Anonymous_e__Union
+    anonymous : CLUS_SCSI_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct
+    dw : UInt32
+  end
+  union CLUSPROP_BUFFER_HELPER
+    pb : UInt8*
+    pw : UInt16*
+    pdw : UInt32*
+    pl : Int32*
+    psz : LibC::LPWSTR
+    p_list : CLUSPROP_LIST*
+    p_syntax : CLUSPROP_SYNTAX*
+    p_name : CLUSPROP_SZ*
+    p_value : CLUSPROP_VALUE*
+    p_binary_value : CLUSPROP_BINARY*
+    p_word_value : CLUSPROP_WORD*
+    p_dword_value : CLUSPROP_DWORD*
+    p_long_value : CLUSPROP_LONG*
+    p_u_large_integer_value : CLUSPROP_ULARGE_INTEGER*
+    p_large_integer_value : CLUSPROP_LARGE_INTEGER*
+    p_string_value : CLUSPROP_SZ*
+    p_multi_sz_value : CLUSPROP_SZ*
+    p_security_descriptor : CLUSPROP_SECURITY_DESCRIPTOR*
+    p_resource_class_value : CLUSPROP_RESOURCE_CLASS*
+    p_resource_class_info_value : CLUSPROP_RESOURCE_CLASS_INFO*
+    p_disk_signature_value : CLUSPROP_DWORD*
+    p_scsi_address_value : CLUSPROP_SCSI_ADDRESS*
+    p_disk_number_value : CLUSPROP_DWORD*
+    p_partition_info_value : CLUSPROP_PARTITION_INFO*
+    p_required_dependency_value : CLUSPROP_REQUIRED_DEPENDENCY*
+    p_partition_info_value_ex : CLUSPROP_PARTITION_INFO_EX*
+    p_partition_info_value_ex2 : CLUSPROP_PARTITION_INFO_EX2*
+    p_file_time_value : CLUSPROP_FILETIME*
+  end
+  union CLRES_FUNCTION_TABLE_Anonymous_e__Union
+    v1_functions : CLRES_V1_FUNCTIONS
+    v2_functions : CLRES_V2_FUNCTIONS
+    v3_functions : CLRES_V3_FUNCTIONS
+    v4_functions : CLRES_V4_FUNCTIONS
+  end
+  union RESUTIL_PROPERTY_ITEM_Anonymous_e__Union
+    default_ptr : LibC::UINT_PTR
+    default : UInt32
+    lp_default : Void*
+    large_int_data : RESUTIL_LARGEINT_DATA*
+    u_large_int_data : RESUTIL_ULARGEINT_DATA*
+    file_time_data : RESUTIL_FILETIME_DATA*
+  end
 
   struct CLUSTERVERSIONINFO_NT4
     dw_version_info_size : UInt32

@@ -1744,7 +1744,7 @@ lib LibWin32
 
   type APPSTATE_REGISTRATION = Void
   type APPCONSTRAIN_REGISTRATION = Void
-  type NC_ADDRESSNET_ADDRESS_INFO = Void
+  type NC_ADDRESS_NET_ADDRESS_INFO = Void
 
   alias SUBCLASSPROC = Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LibC::UINT_PTR, LibC::UINT_PTR, LRESULT)
   alias BFFCALLBACK = Proc(LibC::HANDLE, UInt32, LPARAM, LPARAM, Int32)
@@ -4570,22 +4570,22 @@ lib LibWin32
     MIMEASSOCDLG_FL_REGISTER_ASSOC = 1
   end
 
-union SHELLEXECUTEINFOA_Anonymous_e__Union
-  h_icon : LibC::HANDLE
-  h_monitor : LibC::HANDLE
-end
-union SHELLEXECUTEINFOW_Anonymous_e__Union
-  h_icon : LibC::HANDLE
-  h_monitor : LibC::HANDLE
-end
-union NOTIFYICONDATAA_Anonymous_e__Union
-  u_timeout : UInt32
-  u_version : UInt32
-end
-union NOTIFYICONDATAW_Anonymous_e__Union
-  u_timeout : UInt32
-  u_version : UInt32
-end
+  union SHELLEXECUTEINFOA_Anonymous_e__Union
+    h_icon : LibC::HANDLE
+    h_monitor : LibC::HANDLE
+  end
+  union SHELLEXECUTEINFOW_Anonymous_e__Union
+    h_icon : LibC::HANDLE
+    h_monitor : LibC::HANDLE
+  end
+  union NOTIFYICONDATAA_Anonymous_e__Union
+    u_timeout : UInt32
+    u_version : UInt32
+  end
+  union NOTIFYICONDATAW_Anonymous_e__Union
+    u_timeout : UInt32
+    u_version : UInt32
+  end
 
   struct APPCATEGORYINFO
     locale : UInt32
@@ -5362,7 +5362,7 @@ end
     b_modal : LibC::BOOL
   end
   struct NC_ADDRESS
-    p_addr_info : NC_ADDRESSNET_ADDRESS_INFO*
+    p_addr_info : NC_ADDRESS_NET_ADDRESS_INFO*
     port_number : UInt16
     prefix_length : UInt8
   end

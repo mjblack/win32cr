@@ -1576,64 +1576,64 @@ lib LibWin32
     IntermediatePageCount = 1
   end
 
-union EXTPUSH_Anonymous2_e__Union
-  dlg_template_id : UInt16
-  h_dlg_template : LibC::HANDLE
-end
-union EXTPUSH_Anonymous1_e__Union
-  dlg_proc : DLGPROC
-  pfn_call_back : FARPROC
-end
-union OPTITEM_Anonymous2_e__Union
-  p_ext_chk_box : EXTCHKBOX*
-  p_ext_push : EXTPUSH*
-end
-union OPTITEM_Anonymous1_e__Union
-  sel : Int32
-  p_sel : Int8*
-end
-union CPSUICBPARAM_Anonymous_e__Union
-  old_sel : Int32
-  p_old_sel : Int8*
-end
-union DLGPAGE_Anonymous_e__Union
-  dlg_template_id : UInt16
-  h_dlg_template : LibC::HANDLE
-end
-union PROPSHEETUI_INFO_HEADER_Anonymous_e__Union
-  h_icon : HANDLE
-  icon_id : LibC::UINT_PTR
-end
-union PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union
-  adw_data : UInt32[2]*
-  data : PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union_Data_e__Struct
-end
-union BIDI_DATA_u_e__Union
-  b_data : LibC::BOOL
-  i_data : Int32
-  s_data : LibC::LPWSTR
-  f_data : Float32
-  bi_data : BINARY_CONTAINER
-end
-union PrintPropertyValue_value_e__Union
-  property_byte : UInt8
-  property_string : LibC::LPWSTR
-  property_int32 : Int32
-  property_int64 : Int64
-  property_blob : PrintPropertyValue_value_e__Union_propertyBlob_e__Struct
-end
-union TRANSDATA_uCode_e__Union
-  s_code : Int16
-  ub_code : UInt8
-  ub_pairs : UInt8[2]*
-end
-union BranchOfficeJobData_JobInfo_e__Union
-  log_job_printed : BranchOfficeJobDataPrinted
-  log_job_rendered : BranchOfficeJobDataRendered
-  log_job_error : BranchOfficeJobDataError
-  log_pipeline_failed : BranchOfficeJobDataPipelineFailed
-  log_offline_file_full : BranchOfficeLogOfflineFileFull
-end
+  union EXTPUSH_Anonymous2_e__Union
+    dlg_template_id : UInt16
+    h_dlg_template : LibC::HANDLE
+  end
+  union EXTPUSH_Anonymous1_e__Union
+    dlg_proc : DLGPROC
+    pfn_call_back : FARPROC
+  end
+  union OPTITEM_Anonymous2_e__Union
+    p_ext_chk_box : EXTCHKBOX*
+    p_ext_push : EXTPUSH*
+  end
+  union OPTITEM_Anonymous1_e__Union
+    sel : Int32
+    p_sel : Int8*
+  end
+  union CPSUICBPARAM_Anonymous_e__Union
+    old_sel : Int32
+    p_old_sel : Int8*
+  end
+  union DLGPAGE_Anonymous_e__Union
+    dlg_template_id : UInt16
+    h_dlg_template : LibC::HANDLE
+  end
+  union PROPSHEETUI_INFO_HEADER_Anonymous_e__Union
+    h_icon : HANDLE
+    icon_id : LibC::UINT_PTR
+  end
+  union PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union
+    adw_data : UInt32[2]*
+    data : PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union_Data_e__Struct
+  end
+  union BIDI_DATA_u_e__Union
+    b_data : LibC::BOOL
+    i_data : Int32
+    s_data : LibC::LPWSTR
+    f_data : Float32
+    bi_data : BINARY_CONTAINER
+  end
+  union PrintPropertyValue_value_e__Union
+    property_byte : UInt8
+    property_string : LibC::LPWSTR
+    property_int32 : Int32
+    property_int64 : Int64
+    property_blob : PrintPropertyValue_value_e__Union_propertyBlob_e__Struct
+  end
+  union TRANSDATA_uCode_e__Union
+    s_code : Int16
+    ub_code : UInt8
+    ub_pairs : UInt8[2]*
+  end
+  union BranchOfficeJobData_JobInfo_e__Union
+    log_job_printed : BranchOfficeJobDataPrinted
+    log_job_rendered : BranchOfficeJobDataRendered
+    log_job_error : BranchOfficeJobDataError
+    log_pipeline_failed : BranchOfficeJobDataPipelineFailed
+    log_offline_file_full : BranchOfficeLogOfflineFileFull
+  end
 
   struct IBidiRequestVtbl
     query_interface : LibC::IntPtrT

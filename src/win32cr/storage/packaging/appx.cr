@@ -227,10 +227,10 @@ lib LibWin32
     AppPolicyCreateFileAccess_Limited = 1
   end
 
-union PACKAGE_VERSION_Anonymous_e__Union
-  version : UInt64
-  anonymous : PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct
-end
+  union PACKAGE_VERSION_Anonymous_e__Union
+    version : UInt64
+    anonymous : PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct
+  end
 
   struct APPX_PACKAGE_SETTINGS
     force_zip32 : LibC::BOOL

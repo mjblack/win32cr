@@ -689,13 +689,13 @@ lib LibWin32
     IS_ENUMSTRING = -5
   end
 
-union TF_DA_COLOR_Anonymous_e__Union
-  n_index : Int32
-  cr : UInt32
-end
-union TF_LMLATTELEMENT_Anonymous_e__Union
-  i_cost : Int32
-end
+  union TF_DA_COLOR_Anonymous_e__Union
+    n_index : Int32
+    cr : UInt32
+  end
+  union TF_LMLATTELEMENT_Anonymous_e__Union
+    i_cost : Int32
+  end
 
   struct TS_STATUS
     dw_dynamic_flags : UInt32
