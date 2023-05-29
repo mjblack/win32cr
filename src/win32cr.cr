@@ -12,6 +12,6 @@ struct LibC::GUID
   end
 end
 
-module Win32
+module Win32cr
   VERSION = "0.2.0"
 end
