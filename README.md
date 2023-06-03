@@ -1,5 +1,7 @@
 # win32cr
 
+![CI](https://github.com/mjblack/win32cr/actions/workflows/crystal.yml/badge.svg)
+
 Win32 library bindings created from Windows Metadata.
 
 ## Installation
