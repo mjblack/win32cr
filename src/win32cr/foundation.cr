@@ -8,7 +8,6 @@
 lib LibWin32
   alias BOOL = LibC::BOOL
   alias BOOLEAN = UInt8
-  # alias BSTR = UInt8*
   alias BSTR = LibC::WCHAR*
   alias HANDLE = LibC::HANDLE
   alias HINSTANCE = LibC::IntPtrT
