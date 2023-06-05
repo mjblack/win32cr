@@ -62,11 +62,11 @@ lib LibWin32
   end
 
   struct SourceInfo
-    file_name : UInt8
+    file_name : UInt8*
     line_number : UInt32
     column_number : UInt32
     char_position : UInt32
-    hash : UInt8
+    hash : UInt8*
   end
   struct ParentChildRelation
     parent : UInt64
@@ -76,38 +76,38 @@ lib LibWin32
   struct VisualElement
     handle : UInt64
     src_info : SourceInfo
-    type : UInt8
-    name : UInt8
+    type : UInt8*
+    name : UInt8*
     num_children : UInt32
   end
   struct PropertyChainSource
     handle : UInt64
-    target_type : UInt8
-    name : UInt8
+    target_type : UInt8*
+    name : UInt8*
     source : BaseValueSource
     src_info : SourceInfo
   end
   struct PropertyChainValue
     index : UInt32
-    type : UInt8
-    declaring_type : UInt8
-    value_type : UInt8
-    item_type : UInt8
-    value : UInt8
+    type : UInt8*
+    declaring_type : UInt8*
+    value_type : UInt8*
+    item_type : UInt8*
+    value : UInt8*
     overridden : LibC::BOOL
     metadata_bits : Int64
-    property_name : UInt8
+    property_name : UInt8*
     property_chain_index : UInt32
   end
   struct EnumType
-    name : UInt8
+    name : UInt8*
     value_ints : SAFEARRAY*
     value_strings : SAFEARRAY*
   end
   struct CollectionElementValue
     index : UInt32
-    value_type : UInt8
-    value : UInt8
+    value_type : UInt8*
+    value : UInt8*
     metadata_bits : Int64
   end
   struct BitmapDescription
@@ -148,7 +148,7 @@ lib LibWin32
     advise_visual_tree_change : Proc(IVisualTreeService*, IVisualTreeServiceCallback, HRESULT)
     unadvise_visual_tree_change : Proc(IVisualTreeService*, IVisualTreeServiceCallback, HRESULT)
     get_enums : Proc(IVisualTreeService*, UInt32*, EnumType**, HRESULT)
-    create_instance : Proc(IVisualTreeService*, UInt8, UInt8, UInt64*, HRESULT)
+    create_instance : Proc(IVisualTreeService*, UInt8*, UInt8*, UInt64*, HRESULT)
     get_property_values_chain : Proc(IVisualTreeService*, UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)
     set_property : Proc(IVisualTreeService*, UInt64, UInt64, UInt32, HRESULT)
     clear_property : Proc(IVisualTreeService*, UInt64, UInt32, HRESULT)
@@ -174,7 +174,7 @@ lib LibWin32
     get_handle_from_i_inspectable : Proc(IXamlDiagnostics*, IInspectable, UInt64*, HRESULT)
     hit_test : Proc(IXamlDiagnostics*, RECT, UInt32*, UInt64**, HRESULT)
     register_instance : Proc(IXamlDiagnostics*, IInspectable, UInt64*, HRESULT)
-    get_initialization_data : Proc(IXamlDiagnostics*, UInt8*, HRESULT)
+    get_initialization_data : Proc(IXamlDiagnostics*, UInt8**, HRESULT)
   end
 
   struct IXamlDiagnostics
@@ -202,7 +202,7 @@ lib LibWin32
     advise_visual_tree_change : Proc(IVisualTreeService2*, IVisualTreeServiceCallback, HRESULT)
     unadvise_visual_tree_change : Proc(IVisualTreeService2*, IVisualTreeServiceCallback, HRESULT)
     get_enums : Proc(IVisualTreeService2*, UInt32*, EnumType**, HRESULT)
-    create_instance : Proc(IVisualTreeService2*, UInt8, UInt8, UInt64*, HRESULT)
+    create_instance : Proc(IVisualTreeService2*, UInt8*, UInt8*, UInt64*, HRESULT)
     get_property_values_chain : Proc(IVisualTreeService2*, UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)
     set_property : Proc(IVisualTreeService2*, UInt64, UInt64, UInt32, HRESULT)
     clear_property : Proc(IVisualTreeService2*, UInt64, UInt32, HRESULT)
@@ -228,7 +228,7 @@ lib LibWin32
     advise_visual_tree_change : Proc(IVisualTreeService3*, IVisualTreeServiceCallback, HRESULT)
     unadvise_visual_tree_change : Proc(IVisualTreeService3*, IVisualTreeServiceCallback, HRESULT)
     get_enums : Proc(IVisualTreeService3*, UInt32*, EnumType**, HRESULT)
-    create_instance : Proc(IVisualTreeService3*, UInt8, UInt8, UInt64*, HRESULT)
+    create_instance : Proc(IVisualTreeService3*, UInt8*, UInt8*, UInt64*, HRESULT)
     get_property_values_chain : Proc(IVisualTreeService3*, UInt64, UInt32*, PropertyChainSource**, UInt32*, PropertyChainValue**, HRESULT)
     set_property : Proc(IVisualTreeService3*, UInt64, UInt64, UInt32, HRESULT)
     clear_property : Proc(IVisualTreeService3*, UInt64, UInt32, HRESULT)

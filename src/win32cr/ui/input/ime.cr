@@ -1198,8 +1198,8 @@ lib LibWin32
     close : Proc(IFELanguage*, HRESULT)
     get_j_morph_result : Proc(IFELanguage*, UInt32, UInt32, Int32, LibC::LPWSTR, UInt32*, MORRSLT**, HRESULT)
     get_conversion_mode_caps : Proc(IFELanguage*, UInt32*, HRESULT)
-    get_phonetic : Proc(IFELanguage*, UInt8, Int32, Int32, UInt8*, HRESULT)
-    get_conversion : Proc(IFELanguage*, UInt8, Int32, Int32, UInt8*, HRESULT)
+    get_phonetic : Proc(IFELanguage*, UInt8*, Int32, Int32, UInt8**, HRESULT)
+    get_conversion : Proc(IFELanguage*, UInt8*, Int32, Int32, UInt8**, HRESULT)
   end
 
   struct IFELanguage
@@ -1275,7 +1275,7 @@ lib LibWin32
     add_ref : Proc(IImePlugInDictDictionaryList*, UInt32)
     release : Proc(IImePlugInDictDictionaryList*, UInt32)
     get_dictionaries_in_use : Proc(IImePlugInDictDictionaryList*, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    delete_dictionary : Proc(IImePlugInDictDictionaryList*, UInt8, HRESULT)
+    delete_dictionary : Proc(IImePlugInDictDictionaryList*, UInt8*, HRESULT)
   end
 
   struct IImePlugInDictDictionaryList

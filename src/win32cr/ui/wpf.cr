@@ -319,7 +319,7 @@ lib LibWin32
     query_interface : Proc(IMILBitmapEffectEvents*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMILBitmapEffectEvents*, UInt32)
     release : Proc(IMILBitmapEffectEvents*, UInt32)
-    property_change : Proc(IMILBitmapEffectEvents*, IMILBitmapEffect, UInt8, HRESULT)
+    property_change : Proc(IMILBitmapEffectEvents*, IMILBitmapEffect, UInt8*, HRESULT)
     dirty_region : Proc(IMILBitmapEffectEvents*, IMILBitmapEffect, MilRectD*, HRESULT)
   end
 

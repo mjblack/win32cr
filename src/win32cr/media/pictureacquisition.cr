@@ -103,7 +103,7 @@ lib LibWin32
     query_interface : Proc(IPhotoAcquireItem*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPhotoAcquireItem*, UInt32)
     release : Proc(IPhotoAcquireItem*, UInt32)
-    get_item_name : Proc(IPhotoAcquireItem*, UInt8*, HRESULT)
+    get_item_name : Proc(IPhotoAcquireItem*, UInt8**, HRESULT)
     get_thumbnail : Proc(IPhotoAcquireItem*, SIZE, HBITMAP*, HRESULT)
     get_property : Proc(IPhotoAcquireItem*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
     set_property : Proc(IPhotoAcquireItem*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
@@ -122,15 +122,15 @@ lib LibWin32
     query_interface : Proc(IUserInputString*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUserInputString*, UInt32)
     release : Proc(IUserInputString*, UInt32)
-    get_submit_button_text : Proc(IUserInputString*, UInt8*, HRESULT)
-    get_prompt : Proc(IUserInputString*, UInt8*, HRESULT)
-    get_string_id : Proc(IUserInputString*, UInt8*, HRESULT)
+    get_submit_button_text : Proc(IUserInputString*, UInt8**, HRESULT)
+    get_prompt : Proc(IUserInputString*, UInt8**, HRESULT)
+    get_string_id : Proc(IUserInputString*, UInt8**, HRESULT)
     get_string_type : Proc(IUserInputString*, USER_INPUT_STRING_TYPE*, HRESULT)
-    get_tooltip_text : Proc(IUserInputString*, UInt8*, HRESULT)
+    get_tooltip_text : Proc(IUserInputString*, UInt8**, HRESULT)
     get_max_length : Proc(IUserInputString*, UInt32*, HRESULT)
-    get_default : Proc(IUserInputString*, UInt8*, HRESULT)
+    get_default : Proc(IUserInputString*, UInt8**, HRESULT)
     get_mru_count : Proc(IUserInputString*, UInt32*, HRESULT)
-    get_mru_entry_at : Proc(IUserInputString*, UInt32, UInt8*, HRESULT)
+    get_mru_entry_at : Proc(IUserInputString*, UInt32, UInt8**, HRESULT)
     get_image : Proc(IUserInputString*, UInt32, HBITMAP*, HANDLE*, HRESULT)
   end
 
@@ -210,13 +210,13 @@ lib LibWin32
     query_interface : Proc(IPhotoAcquireSource*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPhotoAcquireSource*, UInt32)
     release : Proc(IPhotoAcquireSource*, UInt32)
-    get_friendly_name : Proc(IPhotoAcquireSource*, UInt8*, HRESULT)
+    get_friendly_name : Proc(IPhotoAcquireSource*, UInt8**, HRESULT)
     get_device_icons : Proc(IPhotoAcquireSource*, UInt32, HANDLE*, HANDLE*, HRESULT)
     initialize_item_list : Proc(IPhotoAcquireSource*, LibC::BOOL, IPhotoAcquireProgressCB, UInt32*, HRESULT)
     get_item_count : Proc(IPhotoAcquireSource*, UInt32*, HRESULT)
     get_item_at : Proc(IPhotoAcquireSource*, UInt32, IPhotoAcquireItem*, HRESULT)
     get_photo_acquire_settings : Proc(IPhotoAcquireSource*, IPhotoAcquireSettings*, HRESULT)
-    get_device_id : Proc(IPhotoAcquireSource*, UInt8*, HRESULT)
+    get_device_id : Proc(IPhotoAcquireSource*, UInt8**, HRESULT)
     bind_to_object : Proc(IPhotoAcquireSource*, Guid*, Void**, HRESULT)
   end
 
@@ -249,10 +249,10 @@ lib LibWin32
     set_group_tag : Proc(IPhotoAcquireSettings*, LibC::LPWSTR, HRESULT)
     set_acquisition_time : Proc(IPhotoAcquireSettings*, FILETIME*, HRESULT)
     get_flags : Proc(IPhotoAcquireSettings*, UInt32*, HRESULT)
-    get_output_filename_template : Proc(IPhotoAcquireSettings*, UInt8*, HRESULT)
+    get_output_filename_template : Proc(IPhotoAcquireSettings*, UInt8**, HRESULT)
     get_sequence_padding_width : Proc(IPhotoAcquireSettings*, UInt32*, HRESULT)
     get_sequence_zero_padding : Proc(IPhotoAcquireSettings*, LibC::BOOL*, HRESULT)
-    get_group_tag : Proc(IPhotoAcquireSettings*, UInt8*, HRESULT)
+    get_group_tag : Proc(IPhotoAcquireSettings*, UInt8**, HRESULT)
     get_acquisition_time : Proc(IPhotoAcquireSettings*, FILETIME*, HRESULT)
   end
 
@@ -281,7 +281,7 @@ lib LibWin32
     release : Proc(IPhotoAcquireDeviceSelectionDialog*, UInt32)
     set_title : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::LPWSTR, HRESULT)
     set_submit_button_text : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::LPWSTR, HRESULT)
-    do_modal : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::HANDLE, UInt32, UInt8*, DEVICE_SELECTION_DEVICE_TYPE*, HRESULT)
+    do_modal : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::HANDLE, UInt32, UInt8**, DEVICE_SELECTION_DEVICE_TYPE*, HRESULT)
   end
 
   struct IPhotoAcquireDeviceSelectionDialog

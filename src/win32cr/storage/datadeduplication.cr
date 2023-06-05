@@ -98,7 +98,7 @@ lib LibWin32
     offset : UInt64
   end
   struct DedupStream
-    path : UInt8
+    path : UInt8*
     offset : UInt64
     length : UInt64
     chunk_count : UInt32
@@ -109,9 +109,9 @@ lib LibWin32
     query_interface : Proc(IDedupReadFileCallback*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDedupReadFileCallback*, UInt32)
     release : Proc(IDedupReadFileCallback*, UInt32)
-    read_backup_file : Proc(IDedupReadFileCallback*, UInt8, Int64, UInt32, UInt8*, UInt32*, UInt32, HRESULT)
-    order_containers_restore : Proc(IDedupReadFileCallback*, UInt32, UInt8*, UInt32*, DEDUP_CONTAINER_EXTENT**, HRESULT)
-    preview_container_read : Proc(IDedupReadFileCallback*, UInt8, UInt32, DDP_FILE_EXTENT*, HRESULT)
+    read_backup_file : Proc(IDedupReadFileCallback*, UInt8*, Int64, UInt32, UInt8*, UInt32*, UInt32, HRESULT)
+    order_containers_restore : Proc(IDedupReadFileCallback*, UInt32, UInt8**, UInt32*, DEDUP_CONTAINER_EXTENT**, HRESULT)
+    preview_container_read : Proc(IDedupReadFileCallback*, UInt8*, UInt32, DDP_FILE_EXTENT*, HRESULT)
   end
 
   struct IDedupReadFileCallback
@@ -122,7 +122,7 @@ lib LibWin32
     query_interface : Proc(IDedupBackupSupport*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDedupBackupSupport*, UInt32)
     release : Proc(IDedupBackupSupport*, UInt32)
-    restore_files : Proc(IDedupBackupSupport*, UInt32, UInt8*, IDedupReadFileCallback, UInt32, HRESULT*, HRESULT)
+    restore_files : Proc(IDedupBackupSupport*, UInt32, UInt8**, IDedupReadFileCallback, UInt32, HRESULT*, HRESULT)
   end
 
   struct IDedupBackupSupport
@@ -167,7 +167,7 @@ lib LibWin32
     insert_chunks_with_stream : Proc(IDedupDataPort*, UInt32, DedupChunk*, UInt32, IStream, Guid*, HRESULT)
     commit_streams : Proc(IDedupDataPort*, UInt32, DedupStream*, UInt32, DedupStreamEntry*, Guid*, HRESULT)
     commit_streams_with_stream : Proc(IDedupDataPort*, UInt32, DedupStream*, UInt32, IStream, Guid*, HRESULT)
-    get_streams : Proc(IDedupDataPort*, UInt32, UInt8*, Guid*, HRESULT)
+    get_streams : Proc(IDedupDataPort*, UInt32, UInt8**, Guid*, HRESULT)
     get_streams_results : Proc(IDedupDataPort*, Guid, UInt32, UInt32, UInt32*, DedupStream**, UInt32*, DedupStreamEntry**, DedupDataPortRequestStatus*, HRESULT**, HRESULT)
     get_chunks : Proc(IDedupDataPort*, UInt32, DedupHash*, Guid*, HRESULT)
     get_chunks_results : Proc(IDedupDataPort*, Guid, UInt32, UInt32, UInt32*, DedupChunk**, UInt32*, UInt8**, DedupDataPortRequestStatus*, HRESULT**, HRESULT)
@@ -184,8 +184,8 @@ lib LibWin32
     add_ref : Proc(IDedupDataPortManager*, UInt32)
     release : Proc(IDedupDataPortManager*, UInt32)
     get_configuration : Proc(IDedupDataPortManager*, UInt32*, UInt32*, DedupChunkingAlgorithm*, DedupHashingAlgorithm*, DedupCompressionAlgorithm*, HRESULT)
-    get_volume_status : Proc(IDedupDataPortManager*, UInt32, UInt8, DedupDataPortVolumeStatus*, HRESULT)
-    get_volume_data_port : Proc(IDedupDataPortManager*, UInt32, UInt8, IDedupDataPort*, HRESULT)
+    get_volume_status : Proc(IDedupDataPortManager*, UInt32, UInt8*, DedupDataPortVolumeStatus*, HRESULT)
+    get_volume_data_port : Proc(IDedupDataPortManager*, UInt32, UInt8*, IDedupDataPort*, HRESULT)
   end
 
   struct IDedupDataPortManager

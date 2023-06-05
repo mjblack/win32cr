@@ -38,10 +38,10 @@ lib LibWin32
     add_ref : Proc(IRendezvousSession*, UInt32)
     release : Proc(IRendezvousSession*, UInt32)
     get_state : Proc(IRendezvousSession*, RENDEZVOUS_SESSION_STATE*, HRESULT)
-    get_remote_user : Proc(IRendezvousSession*, UInt8*, HRESULT)
+    get_remote_user : Proc(IRendezvousSession*, UInt8**, HRESULT)
     get_flags : Proc(IRendezvousSession*, Int32*, HRESULT)
-    send_context_data : Proc(IRendezvousSession*, UInt8, HRESULT)
-    terminate : Proc(IRendezvousSession*, HRESULT, UInt8, HRESULT)
+    send_context_data : Proc(IRendezvousSession*, UInt8*, HRESULT)
+    terminate : Proc(IRendezvousSession*, HRESULT, UInt8*, HRESULT)
   end
 
   struct IRendezvousSession

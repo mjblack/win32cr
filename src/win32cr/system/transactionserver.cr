@@ -79,8 +79,8 @@ lib LibWin32
     get_type_info : Proc(ICatalog*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ICatalog*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ICatalog*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_collection : Proc(ICatalog*, UInt8, IDispatch*, HRESULT)
-    connect : Proc(ICatalog*, UInt8, IDispatch*, HRESULT)
+    get_collection : Proc(ICatalog*, UInt8*, IDispatch*, HRESULT)
+    connect : Proc(ICatalog*, UInt8*, IDispatch*, HRESULT)
     get_major_version : Proc(ICatalog*, Int32*, HRESULT)
     get_minor_version : Proc(ICatalog*, Int32*, HRESULT)
   end
@@ -97,10 +97,10 @@ lib LibWin32
     get_type_info : Proc(IComponentUtil*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IComponentUtil*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IComponentUtil*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    install_component : Proc(IComponentUtil*, UInt8, UInt8, UInt8, HRESULT)
-    import_component : Proc(IComponentUtil*, UInt8, HRESULT)
-    import_component_by_name : Proc(IComponentUtil*, UInt8, HRESULT)
-    get_clsi_ds : Proc(IComponentUtil*, UInt8, UInt8, SAFEARRAY**, HRESULT)
+    install_component : Proc(IComponentUtil*, UInt8*, UInt8*, UInt8*, HRESULT)
+    import_component : Proc(IComponentUtil*, UInt8*, HRESULT)
+    import_component_by_name : Proc(IComponentUtil*, UInt8*, HRESULT)
+    get_clsi_ds : Proc(IComponentUtil*, UInt8*, UInt8*, SAFEARRAY**, HRESULT)
   end
 
   struct IComponentUtil
@@ -115,9 +115,9 @@ lib LibWin32
     get_type_info : Proc(IPackageUtil*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IPackageUtil*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPackageUtil*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    install_package : Proc(IPackageUtil*, UInt8, UInt8, Int32, HRESULT)
-    export_package : Proc(IPackageUtil*, UInt8, UInt8, Int32, HRESULT)
-    shutdown_package : Proc(IPackageUtil*, UInt8, HRESULT)
+    install_package : Proc(IPackageUtil*, UInt8*, UInt8*, Int32, HRESULT)
+    export_package : Proc(IPackageUtil*, UInt8*, UInt8*, Int32, HRESULT)
+    shutdown_package : Proc(IPackageUtil*, UInt8*, HRESULT)
   end
 
   struct IPackageUtil
@@ -132,8 +132,8 @@ lib LibWin32
     get_type_info : Proc(IRemoteComponentUtil*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IRemoteComponentUtil*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IRemoteComponentUtil*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    install_remote_component : Proc(IRemoteComponentUtil*, UInt8, UInt8, UInt8, HRESULT)
-    install_remote_component_by_name : Proc(IRemoteComponentUtil*, UInt8, UInt8, UInt8, HRESULT)
+    install_remote_component : Proc(IRemoteComponentUtil*, UInt8*, UInt8*, UInt8*, HRESULT)
+    install_remote_component_by_name : Proc(IRemoteComponentUtil*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
   struct IRemoteComponentUtil
@@ -148,8 +148,8 @@ lib LibWin32
     get_type_info : Proc(IRoleAssociationUtil*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IRoleAssociationUtil*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IRoleAssociationUtil*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    associate_role : Proc(IRoleAssociationUtil*, UInt8, HRESULT)
-    associate_role_by_name : Proc(IRoleAssociationUtil*, UInt8, HRESULT)
+    associate_role : Proc(IRoleAssociationUtil*, UInt8*, HRESULT)
+    associate_role_by_name : Proc(IRoleAssociationUtil*, UInt8*, HRESULT)
   end
 
   struct IRoleAssociationUtil

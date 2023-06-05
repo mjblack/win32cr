@@ -104,11 +104,11 @@ lib LibWin32
     get_type_info : Proc(IUPnPDeviceFinder*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IUPnPDeviceFinder*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IUPnPDeviceFinder*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    find_by_type : Proc(IUPnPDeviceFinder*, UInt8, UInt32, IUPnPDevices*, HRESULT)
-    create_async_find : Proc(IUPnPDeviceFinder*, UInt8, UInt32, IUnknown, Int32*, HRESULT)
+    find_by_type : Proc(IUPnPDeviceFinder*, UInt8*, UInt32, IUPnPDevices*, HRESULT)
+    create_async_find : Proc(IUPnPDeviceFinder*, UInt8*, UInt32, IUnknown, Int32*, HRESULT)
     start_async_find : Proc(IUPnPDeviceFinder*, Int32, HRESULT)
     cancel_async_find : Proc(IUPnPDeviceFinder*, Int32, HRESULT)
-    find_by_udn : Proc(IUPnPDeviceFinder*, UInt8, IUPnPDevice*, HRESULT)
+    find_by_udn : Proc(IUPnPDeviceFinder*, UInt8*, IUPnPDevice*, HRESULT)
   end
 
   struct IUPnPDeviceFinder
@@ -131,7 +131,7 @@ lib LibWin32
     query_interface : Proc(IUPnPHttpHeaderControl*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPHttpHeaderControl*, UInt32)
     release : Proc(IUPnPHttpHeaderControl*, UInt32)
-    add_request_headers : Proc(IUPnPHttpHeaderControl*, UInt8, HRESULT)
+    add_request_headers : Proc(IUPnPHttpHeaderControl*, UInt8*, HRESULT)
   end
 
   struct IUPnPHttpHeaderControl
@@ -143,7 +143,7 @@ lib LibWin32
     add_ref : Proc(IUPnPDeviceFinderCallback*, UInt32)
     release : Proc(IUPnPDeviceFinderCallback*, UInt32)
     device_added : Proc(IUPnPDeviceFinderCallback*, Int32, IUPnPDevice, HRESULT)
-    device_removed : Proc(IUPnPDeviceFinderCallback*, Int32, UInt8, HRESULT)
+    device_removed : Proc(IUPnPDeviceFinderCallback*, Int32, UInt8*, HRESULT)
     search_complete : Proc(IUPnPDeviceFinderCallback*, Int32, HRESULT)
   end
 
@@ -161,7 +161,7 @@ lib LibWin32
     invoke : Proc(IUPnPServices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_count : Proc(IUPnPServices*, Int32*, HRESULT)
     get__new_enum : Proc(IUPnPServices*, IUnknown*, HRESULT)
-    get_item : Proc(IUPnPServices*, UInt8, IUPnPService*, HRESULT)
+    get_item : Proc(IUPnPServices*, UInt8*, IUPnPService*, HRESULT)
   end
 
   struct IUPnPServices
@@ -176,11 +176,11 @@ lib LibWin32
     get_type_info : Proc(IUPnPService*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IUPnPService*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IUPnPService*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    query_state_variable : Proc(IUPnPService*, UInt8, VARIANT*, HRESULT)
-    invoke_action : Proc(IUPnPService*, UInt8, VARIANT, VARIANT*, VARIANT*, HRESULT)
-    get_service_type_identifier : Proc(IUPnPService*, UInt8*, HRESULT)
+    query_state_variable : Proc(IUPnPService*, UInt8*, VARIANT*, HRESULT)
+    invoke_action : Proc(IUPnPService*, UInt8*, VARIANT, VARIANT*, VARIANT*, HRESULT)
+    get_service_type_identifier : Proc(IUPnPService*, UInt8**, HRESULT)
     add_callback : Proc(IUPnPService*, IUnknown, HRESULT)
-    get_id : Proc(IUPnPService*, UInt8*, HRESULT)
+    get_id : Proc(IUPnPService*, UInt8**, HRESULT)
     get_last_transport_status : Proc(IUPnPService*, Int32*, HRESULT)
   end
 
@@ -203,14 +203,14 @@ lib LibWin32
     query_interface : Proc(IUPnPServiceAsync*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPServiceAsync*, UInt32)
     release : Proc(IUPnPServiceAsync*, UInt32)
-    begin_invoke_action : Proc(IUPnPServiceAsync*, UInt8, VARIANT, IUPnPAsyncResult, UInt64*, HRESULT)
+    begin_invoke_action : Proc(IUPnPServiceAsync*, UInt8*, VARIANT, IUPnPAsyncResult, UInt64*, HRESULT)
     end_invoke_action : Proc(IUPnPServiceAsync*, UInt64, VARIANT*, VARIANT*, HRESULT)
-    begin_query_state_variable : Proc(IUPnPServiceAsync*, UInt8, IUPnPAsyncResult, UInt64*, HRESULT)
+    begin_query_state_variable : Proc(IUPnPServiceAsync*, UInt8*, IUPnPAsyncResult, UInt64*, HRESULT)
     end_query_state_variable : Proc(IUPnPServiceAsync*, UInt64, VARIANT*, HRESULT)
     begin_subscribe_to_events : Proc(IUPnPServiceAsync*, IUnknown, IUPnPAsyncResult, UInt64*, HRESULT)
     end_subscribe_to_events : Proc(IUPnPServiceAsync*, UInt64, HRESULT)
     begin_scpd_download : Proc(IUPnPServiceAsync*, IUPnPAsyncResult, UInt64*, HRESULT)
-    end_scpd_download : Proc(IUPnPServiceAsync*, UInt64, UInt8*, HRESULT)
+    end_scpd_download : Proc(IUPnPServiceAsync*, UInt64, UInt8**, HRESULT)
     cancel_async_operation : Proc(IUPnPServiceAsync*, UInt64, HRESULT)
   end
 
@@ -245,8 +245,8 @@ lib LibWin32
     query_interface : Proc(IUPnPServiceDocumentAccess*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPServiceDocumentAccess*, UInt32)
     release : Proc(IUPnPServiceDocumentAccess*, UInt32)
-    get_document_url : Proc(IUPnPServiceDocumentAccess*, UInt8*, HRESULT)
-    get_document : Proc(IUPnPServiceDocumentAccess*, UInt8*, HRESULT)
+    get_document_url : Proc(IUPnPServiceDocumentAccess*, UInt8**, HRESULT)
+    get_document : Proc(IUPnPServiceDocumentAccess*, UInt8**, HRESULT)
   end
 
   struct IUPnPServiceDocumentAccess
@@ -263,7 +263,7 @@ lib LibWin32
     invoke : Proc(IUPnPDevices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_count : Proc(IUPnPDevices*, Int32*, HRESULT)
     get__new_enum : Proc(IUPnPDevices*, IUnknown*, HRESULT)
-    get_item : Proc(IUPnPDevices*, UInt8, IUPnPDevice*, HRESULT)
+    get_item : Proc(IUPnPDevices*, UInt8*, IUPnPDevice*, HRESULT)
   end
 
   struct IUPnPDevices
@@ -283,19 +283,19 @@ lib LibWin32
     get_parent_device : Proc(IUPnPDevice*, IUPnPDevice*, HRESULT)
     get_has_children : Proc(IUPnPDevice*, Int16*, HRESULT)
     get_children : Proc(IUPnPDevice*, IUPnPDevices*, HRESULT)
-    get_unique_device_name : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_friendly_name : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_type : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_presentation_url : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_manufacturer_name : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_manufacturer_url : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_model_name : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_model_number : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_description : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_model_url : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_upc : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    get_serial_number : Proc(IUPnPDevice*, UInt8*, HRESULT)
-    icon_url : Proc(IUPnPDevice*, UInt8, Int32, Int32, Int32, UInt8*, HRESULT)
+    get_unique_device_name : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_friendly_name : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_type : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_presentation_url : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_manufacturer_name : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_manufacturer_url : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_model_name : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_model_number : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_description : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_model_url : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_upc : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    get_serial_number : Proc(IUPnPDevice*, UInt8**, HRESULT)
+    icon_url : Proc(IUPnPDevice*, UInt8*, Int32, Int32, Int32, UInt8**, HRESULT)
     get_services : Proc(IUPnPDevice*, IUPnPServices*, HRESULT)
   end
 
@@ -307,7 +307,7 @@ lib LibWin32
     query_interface : Proc(IUPnPDeviceDocumentAccess*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPDeviceDocumentAccess*, UInt32)
     release : Proc(IUPnPDeviceDocumentAccess*, UInt32)
-    get_document_url : Proc(IUPnPDeviceDocumentAccess*, UInt8*, HRESULT)
+    get_document_url : Proc(IUPnPDeviceDocumentAccess*, UInt8**, HRESULT)
   end
 
   struct IUPnPDeviceDocumentAccess
@@ -318,7 +318,7 @@ lib LibWin32
     query_interface : Proc(IUPnPDeviceDocumentAccessEx*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPDeviceDocumentAccessEx*, UInt32)
     release : Proc(IUPnPDeviceDocumentAccessEx*, UInt32)
-    get_document : Proc(IUPnPDeviceDocumentAccessEx*, UInt8*, HRESULT)
+    get_document : Proc(IUPnPDeviceDocumentAccessEx*, UInt8**, HRESULT)
   end
 
   struct IUPnPDeviceDocumentAccessEx
@@ -334,12 +334,12 @@ lib LibWin32
     get_i_ds_of_names : Proc(IUPnPDescriptionDocument*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IUPnPDescriptionDocument*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_ready_state : Proc(IUPnPDescriptionDocument*, Int32*, HRESULT)
-    load : Proc(IUPnPDescriptionDocument*, UInt8, HRESULT)
-    load_async : Proc(IUPnPDescriptionDocument*, UInt8, IUnknown, HRESULT)
+    load : Proc(IUPnPDescriptionDocument*, UInt8*, HRESULT)
+    load_async : Proc(IUPnPDescriptionDocument*, UInt8*, IUnknown, HRESULT)
     get_load_result : Proc(IUPnPDescriptionDocument*, Int32*, HRESULT)
     abort : Proc(IUPnPDescriptionDocument*, HRESULT)
     root_device : Proc(IUPnPDescriptionDocument*, IUPnPDevice*, HRESULT)
-    device_by_udn : Proc(IUPnPDescriptionDocument*, UInt8, IUPnPDevice*, HRESULT)
+    device_by_udn : Proc(IUPnPDescriptionDocument*, UInt8*, IUPnPDevice*, HRESULT)
   end
 
   struct IUPnPDescriptionDocument
@@ -396,12 +396,12 @@ lib LibWin32
     query_interface : Proc(IUPnPRegistrar*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPRegistrar*, UInt32)
     release : Proc(IUPnPRegistrar*, UInt32)
-    register_device : Proc(IUPnPRegistrar*, UInt8, UInt8, UInt8, UInt8, UInt8, Int32, UInt8*, HRESULT)
-    register_running_device : Proc(IUPnPRegistrar*, UInt8, IUnknown, UInt8, UInt8, Int32, UInt8*, HRESULT)
-    register_device_provider : Proc(IUPnPRegistrar*, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    get_unique_device_name : Proc(IUPnPRegistrar*, UInt8, UInt8, UInt8*, HRESULT)
-    unregister_device : Proc(IUPnPRegistrar*, UInt8, LibC::BOOL, HRESULT)
-    unregister_device_provider : Proc(IUPnPRegistrar*, UInt8, HRESULT)
+    register_device : Proc(IUPnPRegistrar*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, UInt8**, HRESULT)
+    register_running_device : Proc(IUPnPRegistrar*, UInt8*, IUnknown, UInt8*, UInt8*, Int32, UInt8**, HRESULT)
+    register_device_provider : Proc(IUPnPRegistrar*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    get_unique_device_name : Proc(IUPnPRegistrar*, UInt8*, UInt8*, UInt8**, HRESULT)
+    unregister_device : Proc(IUPnPRegistrar*, UInt8*, LibC::BOOL, HRESULT)
+    unregister_device_provider : Proc(IUPnPRegistrar*, UInt8*, HRESULT)
   end
 
   struct IUPnPRegistrar
@@ -412,8 +412,8 @@ lib LibWin32
     query_interface : Proc(IUPnPReregistrar*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPReregistrar*, UInt32)
     release : Proc(IUPnPReregistrar*, UInt32)
-    reregister_device : Proc(IUPnPReregistrar*, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, Int32, HRESULT)
-    reregister_running_device : Proc(IUPnPReregistrar*, UInt8, UInt8, IUnknown, UInt8, UInt8, Int32, HRESULT)
+    reregister_device : Proc(IUPnPReregistrar*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, HRESULT)
+    reregister_running_device : Proc(IUPnPReregistrar*, UInt8*, UInt8*, IUnknown, UInt8*, UInt8*, Int32, HRESULT)
   end
 
   struct IUPnPReregistrar
@@ -424,8 +424,8 @@ lib LibWin32
     query_interface : Proc(IUPnPDeviceControl*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPDeviceControl*, UInt32)
     release : Proc(IUPnPDeviceControl*, UInt32)
-    initialize : Proc(IUPnPDeviceControl*, UInt8, UInt8, UInt8, HRESULT)
-    get_service_object : Proc(IUPnPDeviceControl*, UInt8, UInt8, IDispatch*, HRESULT)
+    initialize : Proc(IUPnPDeviceControl*, UInt8*, UInt8*, UInt8*, HRESULT)
+    get_service_object : Proc(IUPnPDeviceControl*, UInt8*, UInt8*, IDispatch*, HRESULT)
   end
 
   struct IUPnPDeviceControl
@@ -436,7 +436,7 @@ lib LibWin32
     query_interface : Proc(IUPnPDeviceControlHttpHeaders*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPDeviceControlHttpHeaders*, UInt32)
     release : Proc(IUPnPDeviceControlHttpHeaders*, UInt32)
-    get_additional_response_headers : Proc(IUPnPDeviceControlHttpHeaders*, UInt8*, HRESULT)
+    get_additional_response_headers : Proc(IUPnPDeviceControlHttpHeaders*, UInt8**, HRESULT)
   end
 
   struct IUPnPDeviceControlHttpHeaders
@@ -447,7 +447,7 @@ lib LibWin32
     query_interface : Proc(IUPnPDeviceProvider*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPDeviceProvider*, UInt32)
     release : Proc(IUPnPDeviceProvider*, UInt32)
-    start : Proc(IUPnPDeviceProvider*, UInt8, HRESULT)
+    start : Proc(IUPnPDeviceProvider*, UInt8*, HRESULT)
     stop : Proc(IUPnPDeviceProvider*, HRESULT)
   end
 
@@ -459,9 +459,9 @@ lib LibWin32
     query_interface : Proc(IUPnPRemoteEndpointInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUPnPRemoteEndpointInfo*, UInt32)
     release : Proc(IUPnPRemoteEndpointInfo*, UInt32)
-    get_dword_value : Proc(IUPnPRemoteEndpointInfo*, UInt8, UInt32*, HRESULT)
-    get_string_value : Proc(IUPnPRemoteEndpointInfo*, UInt8, UInt8*, HRESULT)
-    get_guid_value : Proc(IUPnPRemoteEndpointInfo*, UInt8, Guid*, HRESULT)
+    get_dword_value : Proc(IUPnPRemoteEndpointInfo*, UInt8*, UInt32*, HRESULT)
+    get_string_value : Proc(IUPnPRemoteEndpointInfo*, UInt8*, UInt8**, HRESULT)
+    get_guid_value : Proc(IUPnPRemoteEndpointInfo*, UInt8*, Guid*, HRESULT)
   end
 
   struct IUPnPRemoteEndpointInfo

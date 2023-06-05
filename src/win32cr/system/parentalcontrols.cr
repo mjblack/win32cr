@@ -523,9 +523,9 @@ lib LibWin32
     query_interface : Proc(IWPCProviderConfig*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWPCProviderConfig*, UInt32)
     release : Proc(IWPCProviderConfig*, UInt32)
-    get_user_summary : Proc(IWPCProviderConfig*, UInt8, UInt8*, HRESULT)
-    configure : Proc(IWPCProviderConfig*, LibC::HANDLE, UInt8, HRESULT)
-    request_override : Proc(IWPCProviderConfig*, LibC::HANDLE, UInt8, WPCFLAG_RESTRICTION, HRESULT)
+    get_user_summary : Proc(IWPCProviderConfig*, UInt8*, UInt8**, HRESULT)
+    configure : Proc(IWPCProviderConfig*, LibC::HANDLE, UInt8*, HRESULT)
+    request_override : Proc(IWPCProviderConfig*, LibC::HANDLE, UInt8*, WPCFLAG_RESTRICTION, HRESULT)
   end
 
   struct IWPCProviderConfig

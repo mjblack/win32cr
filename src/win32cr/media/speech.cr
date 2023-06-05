@@ -2469,9 +2469,9 @@ lib LibWin32
     get_type_info : Proc(ISpeechResourceLoader*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISpeechResourceLoader*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISpeechResourceLoader*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    load_resource : Proc(ISpeechResourceLoader*, UInt8, Int16, IUnknown*, UInt8*, Int16*, UInt8*, HRESULT)
-    get_local_copy : Proc(ISpeechResourceLoader*, UInt8, UInt8*, UInt8*, UInt8*, HRESULT)
-    release_local_copy : Proc(ISpeechResourceLoader*, UInt8, HRESULT)
+    load_resource : Proc(ISpeechResourceLoader*, UInt8*, Int16, IUnknown*, UInt8**, Int16*, UInt8**, HRESULT)
+    get_local_copy : Proc(ISpeechResourceLoader*, UInt8*, UInt8**, UInt8**, UInt8**, HRESULT)
+    release_local_copy : Proc(ISpeechResourceLoader*, UInt8*, HRESULT)
   end
 
   struct ISpeechResourceLoader
@@ -2630,18 +2630,18 @@ lib LibWin32
     get_type_info : Proc(ISpeechDataKey*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISpeechDataKey*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISpeechDataKey*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    set_binary_value : Proc(ISpeechDataKey*, UInt8, VARIANT, HRESULT)
-    get_binary_value : Proc(ISpeechDataKey*, UInt8, VARIANT*, HRESULT)
-    set_string_value : Proc(ISpeechDataKey*, UInt8, UInt8, HRESULT)
-    get_string_value : Proc(ISpeechDataKey*, UInt8, UInt8*, HRESULT)
-    set_long_value : Proc(ISpeechDataKey*, UInt8, Int32, HRESULT)
-    get_long_value : Proc(ISpeechDataKey*, UInt8, Int32*, HRESULT)
-    open_key : Proc(ISpeechDataKey*, UInt8, ISpeechDataKey*, HRESULT)
-    create_key : Proc(ISpeechDataKey*, UInt8, ISpeechDataKey*, HRESULT)
-    delete_key : Proc(ISpeechDataKey*, UInt8, HRESULT)
-    delete_value : Proc(ISpeechDataKey*, UInt8, HRESULT)
-    enum_keys : Proc(ISpeechDataKey*, Int32, UInt8*, HRESULT)
-    enum_values : Proc(ISpeechDataKey*, Int32, UInt8*, HRESULT)
+    set_binary_value : Proc(ISpeechDataKey*, UInt8*, VARIANT, HRESULT)
+    get_binary_value : Proc(ISpeechDataKey*, UInt8*, VARIANT*, HRESULT)
+    set_string_value : Proc(ISpeechDataKey*, UInt8*, UInt8*, HRESULT)
+    get_string_value : Proc(ISpeechDataKey*, UInt8*, UInt8**, HRESULT)
+    set_long_value : Proc(ISpeechDataKey*, UInt8*, Int32, HRESULT)
+    get_long_value : Proc(ISpeechDataKey*, UInt8*, Int32*, HRESULT)
+    open_key : Proc(ISpeechDataKey*, UInt8*, ISpeechDataKey*, HRESULT)
+    create_key : Proc(ISpeechDataKey*, UInt8*, ISpeechDataKey*, HRESULT)
+    delete_key : Proc(ISpeechDataKey*, UInt8*, HRESULT)
+    delete_value : Proc(ISpeechDataKey*, UInt8*, HRESULT)
+    enum_keys : Proc(ISpeechDataKey*, Int32, UInt8**, HRESULT)
+    enum_values : Proc(ISpeechDataKey*, Int32, UInt8**, HRESULT)
   end
 
   struct ISpeechDataKey
@@ -2656,19 +2656,19 @@ lib LibWin32
     get_type_info : Proc(ISpeechObjectToken*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISpeechObjectToken*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISpeechObjectToken*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(ISpeechObjectToken*, UInt8*, HRESULT)
+    get_id : Proc(ISpeechObjectToken*, UInt8**, HRESULT)
     get_data_key : Proc(ISpeechObjectToken*, ISpeechDataKey*, HRESULT)
     get_category : Proc(ISpeechObjectToken*, ISpeechObjectTokenCategory*, HRESULT)
-    get_description : Proc(ISpeechObjectToken*, Int32, UInt8*, HRESULT)
-    set_id : Proc(ISpeechObjectToken*, UInt8, UInt8, Int16, HRESULT)
-    get_attribute : Proc(ISpeechObjectToken*, UInt8, UInt8*, HRESULT)
+    get_description : Proc(ISpeechObjectToken*, Int32, UInt8**, HRESULT)
+    set_id : Proc(ISpeechObjectToken*, UInt8*, UInt8*, Int16, HRESULT)
+    get_attribute : Proc(ISpeechObjectToken*, UInt8*, UInt8**, HRESULT)
     create_instance : Proc(ISpeechObjectToken*, IUnknown, SpeechTokenContext, IUnknown*, HRESULT)
-    remove : Proc(ISpeechObjectToken*, UInt8, HRESULT)
-    get_storage_file_name : Proc(ISpeechObjectToken*, UInt8, UInt8, UInt8, SpeechTokenShellFolder, UInt8*, HRESULT)
-    remove_storage_file_name : Proc(ISpeechObjectToken*, UInt8, UInt8, Int16, HRESULT)
-    is_ui_supported : Proc(ISpeechObjectToken*, UInt8, VARIANT*, IUnknown, Int16*, HRESULT)
-    display_ui : Proc(ISpeechObjectToken*, Int32, UInt8, UInt8, VARIANT*, IUnknown, HRESULT)
-    matches_attributes : Proc(ISpeechObjectToken*, UInt8, Int16*, HRESULT)
+    remove : Proc(ISpeechObjectToken*, UInt8*, HRESULT)
+    get_storage_file_name : Proc(ISpeechObjectToken*, UInt8*, UInt8*, UInt8*, SpeechTokenShellFolder, UInt8**, HRESULT)
+    remove_storage_file_name : Proc(ISpeechObjectToken*, UInt8*, UInt8*, Int16, HRESULT)
+    is_ui_supported : Proc(ISpeechObjectToken*, UInt8*, VARIANT*, IUnknown, Int16*, HRESULT)
+    display_ui : Proc(ISpeechObjectToken*, Int32, UInt8*, UInt8*, VARIANT*, IUnknown, HRESULT)
+    matches_attributes : Proc(ISpeechObjectToken*, UInt8*, Int16*, HRESULT)
   end
 
   struct ISpeechObjectToken
@@ -2700,12 +2700,12 @@ lib LibWin32
     get_type_info : Proc(ISpeechObjectTokenCategory*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISpeechObjectTokenCategory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISpeechObjectTokenCategory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(ISpeechObjectTokenCategory*, UInt8*, HRESULT)
-    put_default : Proc(ISpeechObjectTokenCategory*, UInt8, HRESULT)
-    get_default : Proc(ISpeechObjectTokenCategory*, UInt8*, HRESULT)
-    set_id : Proc(ISpeechObjectTokenCategory*, UInt8, Int16, HRESULT)
+    get_id : Proc(ISpeechObjectTokenCategory*, UInt8**, HRESULT)
+    put_default : Proc(ISpeechObjectTokenCategory*, UInt8*, HRESULT)
+    get_default : Proc(ISpeechObjectTokenCategory*, UInt8**, HRESULT)
+    set_id : Proc(ISpeechObjectTokenCategory*, UInt8*, Int16, HRESULT)
     get_data_key : Proc(ISpeechObjectTokenCategory*, SpeechDataKeyLocation, ISpeechDataKey*, HRESULT)
-    enumerate_tokens : Proc(ISpeechObjectTokenCategory*, UInt8, UInt8, ISpeechObjectTokens*, HRESULT)
+    enumerate_tokens : Proc(ISpeechObjectTokenCategory*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
   end
 
   struct ISpeechObjectTokenCategory
@@ -2761,8 +2761,8 @@ lib LibWin32
     invoke : Proc(ISpeechAudioFormat*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_type : Proc(ISpeechAudioFormat*, SpeechAudioFormatType*, HRESULT)
     put_type : Proc(ISpeechAudioFormat*, SpeechAudioFormatType, HRESULT)
-    get_guid : Proc(ISpeechAudioFormat*, UInt8*, HRESULT)
-    put_guid : Proc(ISpeechAudioFormat*, UInt8, HRESULT)
+    get_guid : Proc(ISpeechAudioFormat*, UInt8**, HRESULT)
+    put_guid : Proc(ISpeechAudioFormat*, UInt8*, HRESULT)
     get_wave_format_ex : Proc(ISpeechAudioFormat*, ISpeechWaveFormatEx*, HRESULT)
     set_wave_format_ex : Proc(ISpeechAudioFormat*, ISpeechWaveFormatEx, HRESULT)
   end
@@ -2831,7 +2831,7 @@ lib LibWin32
     read : Proc(ISpeechFileStream*, VARIANT*, Int32, Int32*, HRESULT)
     write : Proc(ISpeechFileStream*, VARIANT, Int32*, HRESULT)
     seek : Proc(ISpeechFileStream*, VARIANT, SpeechStreamSeekPositionType, VARIANT*, HRESULT)
-    open : Proc(ISpeechFileStream*, UInt8, SpeechStreamFileMode, Int16, HRESULT)
+    open : Proc(ISpeechFileStream*, UInt8*, SpeechStreamFileMode, Int16, HRESULT)
     close : Proc(ISpeechFileStream*, HRESULT)
   end
 
@@ -2971,17 +2971,17 @@ lib LibWin32
     get_alert_boundary : Proc(ISpeechVoice*, SpeechVoiceEvents*, HRESULT)
     put_synchronous_speak_timeout : Proc(ISpeechVoice*, Int32, HRESULT)
     get_synchronous_speak_timeout : Proc(ISpeechVoice*, Int32*, HRESULT)
-    speak : Proc(ISpeechVoice*, UInt8, SpeechVoiceSpeakFlags, Int32*, HRESULT)
+    speak : Proc(ISpeechVoice*, UInt8*, SpeechVoiceSpeakFlags, Int32*, HRESULT)
     speak_stream : Proc(ISpeechVoice*, ISpeechBaseStream, SpeechVoiceSpeakFlags, Int32*, HRESULT)
     pause : Proc(ISpeechVoice*, HRESULT)
     resume : Proc(ISpeechVoice*, HRESULT)
-    skip : Proc(ISpeechVoice*, UInt8, Int32, Int32*, HRESULT)
-    get_voices : Proc(ISpeechVoice*, UInt8, UInt8, ISpeechObjectTokens*, HRESULT)
-    get_audio_outputs : Proc(ISpeechVoice*, UInt8, UInt8, ISpeechObjectTokens*, HRESULT)
+    skip : Proc(ISpeechVoice*, UInt8*, Int32, Int32*, HRESULT)
+    get_voices : Proc(ISpeechVoice*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
+    get_audio_outputs : Proc(ISpeechVoice*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
     wait_until_done : Proc(ISpeechVoice*, Int32, Int16*, HRESULT)
     speak_complete_event : Proc(ISpeechVoice*, Int32*, HRESULT)
-    is_ui_supported : Proc(ISpeechVoice*, UInt8, VARIANT*, Int16*, HRESULT)
-    display_ui : Proc(ISpeechVoice*, Int32, UInt8, UInt8, VARIANT*, HRESULT)
+    is_ui_supported : Proc(ISpeechVoice*, UInt8*, VARIANT*, Int16*, HRESULT)
+    display_ui : Proc(ISpeechVoice*, Int32, UInt8*, UInt8*, VARIANT*, HRESULT)
   end
 
   struct ISpeechVoice
@@ -3004,7 +3004,7 @@ lib LibWin32
     get_input_word_length : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
     get_input_sentence_position : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
     get_input_sentence_length : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_last_bookmark : Proc(ISpeechVoiceStatus*, UInt8*, HRESULT)
+    get_last_bookmark : Proc(ISpeechVoiceStatus*, UInt8**, HRESULT)
     get_last_bookmark_id : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
     get_phoneme_id : Proc(ISpeechVoiceStatus*, Int16*, HRESULT)
     get_viseme_id : Proc(ISpeechVoiceStatus*, Int16*, HRESULT)
@@ -3053,15 +3053,15 @@ lib LibWin32
     emulate_recognition : Proc(ISpeechRecognizer*, VARIANT, VARIANT*, Int32, HRESULT)
     create_reco_context : Proc(ISpeechRecognizer*, ISpeechRecoContext*, HRESULT)
     get_format : Proc(ISpeechRecognizer*, SpeechFormatType, ISpeechAudioFormat*, HRESULT)
-    set_property_number : Proc(ISpeechRecognizer*, UInt8, Int32, Int16*, HRESULT)
-    get_property_number : Proc(ISpeechRecognizer*, UInt8, Int32*, Int16*, HRESULT)
-    set_property_string : Proc(ISpeechRecognizer*, UInt8, UInt8, Int16*, HRESULT)
-    get_property_string : Proc(ISpeechRecognizer*, UInt8, UInt8*, Int16*, HRESULT)
-    is_ui_supported : Proc(ISpeechRecognizer*, UInt8, VARIANT*, Int16*, HRESULT)
-    display_ui : Proc(ISpeechRecognizer*, Int32, UInt8, UInt8, VARIANT*, HRESULT)
-    get_recognizers : Proc(ISpeechRecognizer*, UInt8, UInt8, ISpeechObjectTokens*, HRESULT)
-    get_audio_inputs : Proc(ISpeechRecognizer*, UInt8, UInt8, ISpeechObjectTokens*, HRESULT)
-    get_profiles : Proc(ISpeechRecognizer*, UInt8, UInt8, ISpeechObjectTokens*, HRESULT)
+    set_property_number : Proc(ISpeechRecognizer*, UInt8*, Int32, Int16*, HRESULT)
+    get_property_number : Proc(ISpeechRecognizer*, UInt8*, Int32*, Int16*, HRESULT)
+    set_property_string : Proc(ISpeechRecognizer*, UInt8*, UInt8*, Int16*, HRESULT)
+    get_property_string : Proc(ISpeechRecognizer*, UInt8*, UInt8**, Int16*, HRESULT)
+    is_ui_supported : Proc(ISpeechRecognizer*, UInt8*, VARIANT*, Int16*, HRESULT)
+    display_ui : Proc(ISpeechRecognizer*, Int32, UInt8*, UInt8*, VARIANT*, HRESULT)
+    get_recognizers : Proc(ISpeechRecognizer*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
+    get_audio_inputs : Proc(ISpeechRecognizer*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
+    get_profiles : Proc(ISpeechRecognizer*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
   end
 
   struct ISpeechRecognizer
@@ -3080,7 +3080,7 @@ lib LibWin32
     get_current_stream_position : Proc(ISpeechRecognizerStatus*, VARIANT*, HRESULT)
     get_current_stream_number : Proc(ISpeechRecognizerStatus*, Int32*, HRESULT)
     get_number_of_active_rules : Proc(ISpeechRecognizerStatus*, Int32*, HRESULT)
-    get_clsid_engine : Proc(ISpeechRecognizerStatus*, UInt8*, HRESULT)
+    get_clsid_engine : Proc(ISpeechRecognizerStatus*, UInt8**, HRESULT)
     get_supported_languages : Proc(ISpeechRecognizerStatus*, VARIANT*, HRESULT)
   end
 
@@ -3098,7 +3098,7 @@ lib LibWin32
     invoke : Proc(ISpeechRecoContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_recognizer : Proc(ISpeechRecoContext*, ISpeechRecognizer*, HRESULT)
     get_audio_input_interference_status : Proc(ISpeechRecoContext*, SpeechInterference*, HRESULT)
-    get_requested_ui_type : Proc(ISpeechRecoContext*, UInt8*, HRESULT)
+    get_requested_ui_type : Proc(ISpeechRecoContext*, UInt8**, HRESULT)
     putref_voice : Proc(ISpeechRecoContext*, ISpeechVoice, HRESULT)
     get_voice : Proc(ISpeechRecoContext*, ISpeechVoice*, HRESULT)
     put_allow_voice_format_matching_on_next_set : Proc(ISpeechRecoContext*, Int16, HRESULT)
@@ -3120,7 +3120,7 @@ lib LibWin32
     create_grammar : Proc(ISpeechRecoContext*, VARIANT, ISpeechRecoGrammar*, HRESULT)
     create_result_from_memory : Proc(ISpeechRecoContext*, VARIANT*, ISpeechRecoResult*, HRESULT)
     bookmark : Proc(ISpeechRecoContext*, SpeechBookmarkOptions, VARIANT, VARIANT, HRESULT)
-    set_adaptation_data : Proc(ISpeechRecoContext*, UInt8, HRESULT)
+    set_adaptation_data : Proc(ISpeechRecoContext*, UInt8*, HRESULT)
   end
 
   struct ISpeechRecoContext
@@ -3141,19 +3141,19 @@ lib LibWin32
     get_state : Proc(ISpeechRecoGrammar*, SpeechGrammarState*, HRESULT)
     get_rules : Proc(ISpeechRecoGrammar*, ISpeechGrammarRules*, HRESULT)
     reset : Proc(ISpeechRecoGrammar*, Int32, HRESULT)
-    cmd_load_from_file : Proc(ISpeechRecoGrammar*, UInt8, SpeechLoadOption, HRESULT)
-    cmd_load_from_object : Proc(ISpeechRecoGrammar*, UInt8, UInt8, SpeechLoadOption, HRESULT)
+    cmd_load_from_file : Proc(ISpeechRecoGrammar*, UInt8*, SpeechLoadOption, HRESULT)
+    cmd_load_from_object : Proc(ISpeechRecoGrammar*, UInt8*, UInt8*, SpeechLoadOption, HRESULT)
     cmd_load_from_resource : Proc(ISpeechRecoGrammar*, Int32, VARIANT, VARIANT, Int32, SpeechLoadOption, HRESULT)
     cmd_load_from_memory : Proc(ISpeechRecoGrammar*, VARIANT, SpeechLoadOption, HRESULT)
-    cmd_load_from_proprietary_grammar : Proc(ISpeechRecoGrammar*, UInt8, UInt8, VARIANT, SpeechLoadOption, HRESULT)
-    cmd_set_rule_state : Proc(ISpeechRecoGrammar*, UInt8, SpeechRuleState, HRESULT)
+    cmd_load_from_proprietary_grammar : Proc(ISpeechRecoGrammar*, UInt8*, UInt8*, VARIANT, SpeechLoadOption, HRESULT)
+    cmd_set_rule_state : Proc(ISpeechRecoGrammar*, UInt8*, SpeechRuleState, HRESULT)
     cmd_set_rule_id_state : Proc(ISpeechRecoGrammar*, Int32, SpeechRuleState, HRESULT)
-    dictation_load : Proc(ISpeechRecoGrammar*, UInt8, SpeechLoadOption, HRESULT)
+    dictation_load : Proc(ISpeechRecoGrammar*, UInt8*, SpeechLoadOption, HRESULT)
     dictation_unload : Proc(ISpeechRecoGrammar*, HRESULT)
     dictation_set_state : Proc(ISpeechRecoGrammar*, SpeechRuleState, HRESULT)
-    set_word_sequence_data : Proc(ISpeechRecoGrammar*, UInt8, Int32, ISpeechTextSelectionInformation, HRESULT)
+    set_word_sequence_data : Proc(ISpeechRecoGrammar*, UInt8*, Int32, ISpeechTextSelectionInformation, HRESULT)
     set_text_selection : Proc(ISpeechRecoGrammar*, ISpeechTextSelectionInformation, HRESULT)
-    is_pronounceable : Proc(ISpeechRecoGrammar*, UInt8, SpeechWordPronounceable*, HRESULT)
+    is_pronounceable : Proc(ISpeechRecoGrammar*, UInt8*, SpeechWordPronounceable*, HRESULT)
   end
 
   struct ISpeechRecoGrammar
@@ -3184,10 +3184,10 @@ lib LibWin32
     invoke : Proc(ISpeechGrammarRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_attributes : Proc(ISpeechGrammarRule*, SpeechRuleAttributes*, HRESULT)
     get_initial_state : Proc(ISpeechGrammarRule*, ISpeechGrammarRuleState*, HRESULT)
-    get_name : Proc(ISpeechGrammarRule*, UInt8*, HRESULT)
+    get_name : Proc(ISpeechGrammarRule*, UInt8**, HRESULT)
     get_id : Proc(ISpeechGrammarRule*, Int32*, HRESULT)
     clear : Proc(ISpeechGrammarRule*, HRESULT)
-    add_resource : Proc(ISpeechGrammarRule*, UInt8, UInt8, HRESULT)
+    add_resource : Proc(ISpeechGrammarRule*, UInt8*, UInt8*, HRESULT)
     add_state : Proc(ISpeechGrammarRule*, ISpeechGrammarRuleState*, HRESULT)
   end
 
@@ -3208,9 +3208,9 @@ lib LibWin32
     item : Proc(ISpeechGrammarRules*, Int32, ISpeechGrammarRule*, HRESULT)
     get__new_enum : Proc(ISpeechGrammarRules*, IUnknown*, HRESULT)
     get_dynamic : Proc(ISpeechGrammarRules*, Int16*, HRESULT)
-    add : Proc(ISpeechGrammarRules*, UInt8, SpeechRuleAttributes, Int32, ISpeechGrammarRule*, HRESULT)
+    add : Proc(ISpeechGrammarRules*, UInt8*, SpeechRuleAttributes, Int32, ISpeechGrammarRule*, HRESULT)
     commit : Proc(ISpeechGrammarRules*, HRESULT)
-    commit_and_save : Proc(ISpeechGrammarRules*, UInt8*, VARIANT*, HRESULT)
+    commit_and_save : Proc(ISpeechGrammarRules*, UInt8**, VARIANT*, HRESULT)
   end
 
   struct ISpeechGrammarRules
@@ -3227,9 +3227,9 @@ lib LibWin32
     invoke : Proc(ISpeechGrammarRuleState*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_rule : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRule*, HRESULT)
     get_transitions : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleStateTransitions*, HRESULT)
-    add_word_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, UInt8, UInt8, SpeechGrammarWordType, UInt8, Int32, VARIANT*, Float32, HRESULT)
-    add_rule_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, ISpeechGrammarRule, UInt8, Int32, VARIANT*, Float32, HRESULT)
-    add_special_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, SpeechSpecialTransitionType, UInt8, Int32, VARIANT*, Float32, HRESULT)
+    add_word_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, UInt8*, UInt8*, SpeechGrammarWordType, UInt8*, Int32, VARIANT*, Float32, HRESULT)
+    add_rule_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, ISpeechGrammarRule, UInt8*, Int32, VARIANT*, Float32, HRESULT)
+    add_special_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, SpeechSpecialTransitionType, UInt8*, Int32, VARIANT*, Float32, HRESULT)
   end
 
   struct ISpeechGrammarRuleState
@@ -3245,10 +3245,10 @@ lib LibWin32
     get_i_ds_of_names : Proc(ISpeechGrammarRuleStateTransition*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISpeechGrammarRuleStateTransition*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_type : Proc(ISpeechGrammarRuleStateTransition*, SpeechGrammarRuleStateTransitionType*, HRESULT)
-    get_text : Proc(ISpeechGrammarRuleStateTransition*, UInt8*, HRESULT)
+    get_text : Proc(ISpeechGrammarRuleStateTransition*, UInt8**, HRESULT)
     get_rule : Proc(ISpeechGrammarRuleStateTransition*, ISpeechGrammarRule*, HRESULT)
     get_weight : Proc(ISpeechGrammarRuleStateTransition*, VARIANT*, HRESULT)
-    get_property_name : Proc(ISpeechGrammarRuleStateTransition*, UInt8*, HRESULT)
+    get_property_name : Proc(ISpeechGrammarRuleStateTransition*, UInt8**, HRESULT)
     get_property_id : Proc(ISpeechGrammarRuleStateTransition*, Int32*, HRESULT)
     get_property_value : Proc(ISpeechGrammarRuleStateTransition*, VARIANT*, HRESULT)
     get_next_state : Proc(ISpeechGrammarRuleStateTransition*, ISpeechGrammarRuleState*, HRESULT)
@@ -3339,7 +3339,7 @@ lib LibWin32
     speak_audio : Proc(ISpeechRecoResult2*, Int32, Int32, SpeechVoiceSpeakFlags, Int32*, HRESULT)
     save_to_memory : Proc(ISpeechRecoResult2*, VARIANT*, HRESULT)
     discard_result_info : Proc(ISpeechRecoResult2*, SpeechDiscardType, HRESULT)
-    set_text_feedback : Proc(ISpeechRecoResult2*, UInt8, Int16, HRESULT)
+    set_text_feedback : Proc(ISpeechRecoResult2*, UInt8*, Int16, HRESULT)
   end
 
   struct ISpeechRecoResult2
@@ -3419,10 +3419,10 @@ lib LibWin32
     get_properties : Proc(ISpeechPhraseInfo*, ISpeechPhraseProperties*, HRESULT)
     get_elements : Proc(ISpeechPhraseInfo*, ISpeechPhraseElements*, HRESULT)
     get_replacements : Proc(ISpeechPhraseInfo*, ISpeechPhraseReplacements*, HRESULT)
-    get_engine_id : Proc(ISpeechPhraseInfo*, UInt8*, HRESULT)
+    get_engine_id : Proc(ISpeechPhraseInfo*, UInt8**, HRESULT)
     get_engine_private_data : Proc(ISpeechPhraseInfo*, VARIANT*, HRESULT)
     save_to_memory : Proc(ISpeechPhraseInfo*, VARIANT*, HRESULT)
-    get_text : Proc(ISpeechPhraseInfo*, Int32, Int32, Int16, UInt8*, HRESULT)
+    get_text : Proc(ISpeechPhraseInfo*, Int32, Int32, Int16, UInt8**, HRESULT)
     get_display_attributes : Proc(ISpeechPhraseInfo*, Int32, Int32, Int16, SpeechDisplayAttributes*, HRESULT)
   end
 
@@ -3444,8 +3444,8 @@ lib LibWin32
     get_audio_size_bytes : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
     get_retained_stream_offset : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
     get_retained_size_bytes : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
-    get_display_text : Proc(ISpeechPhraseElement*, UInt8*, HRESULT)
-    get_lexical_form : Proc(ISpeechPhraseElement*, UInt8*, HRESULT)
+    get_display_text : Proc(ISpeechPhraseElement*, UInt8**, HRESULT)
+    get_lexical_form : Proc(ISpeechPhraseElement*, UInt8**, HRESULT)
     get_pronunciation : Proc(ISpeechPhraseElement*, VARIANT*, HRESULT)
     get_display_attributes : Proc(ISpeechPhraseElement*, SpeechDisplayAttributes*, HRESULT)
     get_required_confidence : Proc(ISpeechPhraseElement*, SpeechEngineConfidence*, HRESULT)
@@ -3483,7 +3483,7 @@ lib LibWin32
     get_i_ds_of_names : Proc(ISpeechPhraseReplacement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISpeechPhraseReplacement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_display_attributes : Proc(ISpeechPhraseReplacement*, SpeechDisplayAttributes*, HRESULT)
-    get_text : Proc(ISpeechPhraseReplacement*, UInt8*, HRESULT)
+    get_text : Proc(ISpeechPhraseReplacement*, UInt8**, HRESULT)
     get_first_element : Proc(ISpeechPhraseReplacement*, Int32*, HRESULT)
     get_number_of_elements : Proc(ISpeechPhraseReplacement*, Int32*, HRESULT)
   end
@@ -3517,7 +3517,7 @@ lib LibWin32
     get_type_info : Proc(ISpeechPhraseProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISpeechPhraseProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISpeechPhraseProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ISpeechPhraseProperty*, UInt8*, HRESULT)
+    get_name : Proc(ISpeechPhraseProperty*, UInt8**, HRESULT)
     get_id : Proc(ISpeechPhraseProperty*, Int32*, HRESULT)
     get_value : Proc(ISpeechPhraseProperty*, VARIANT*, HRESULT)
     get_first_element : Proc(ISpeechPhraseProperty*, Int32*, HRESULT)
@@ -3557,7 +3557,7 @@ lib LibWin32
     get_type_info : Proc(ISpeechPhraseRule*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISpeechPhraseRule*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISpeechPhraseRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ISpeechPhraseRule*, UInt8*, HRESULT)
+    get_name : Proc(ISpeechPhraseRule*, UInt8**, HRESULT)
     get_id : Proc(ISpeechPhraseRule*, Int32*, HRESULT)
     get_first_element : Proc(ISpeechPhraseRule*, Int32*, HRESULT)
     get_number_of_elements : Proc(ISpeechPhraseRule*, Int32*, HRESULT)
@@ -3598,11 +3598,11 @@ lib LibWin32
     invoke : Proc(ISpeechLexicon*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_generation_id : Proc(ISpeechLexicon*, Int32*, HRESULT)
     get_words : Proc(ISpeechLexicon*, SpeechLexiconType, Int32*, ISpeechLexiconWords*, HRESULT)
-    add_pronunciation : Proc(ISpeechLexicon*, UInt8, Int32, SpeechPartOfSpeech, UInt8, HRESULT)
-    add_pronunciation_by_phone_ids : Proc(ISpeechLexicon*, UInt8, Int32, SpeechPartOfSpeech, VARIANT*, HRESULT)
-    remove_pronunciation : Proc(ISpeechLexicon*, UInt8, Int32, SpeechPartOfSpeech, UInt8, HRESULT)
-    remove_pronunciation_by_phone_ids : Proc(ISpeechLexicon*, UInt8, Int32, SpeechPartOfSpeech, VARIANT*, HRESULT)
-    get_pronunciations : Proc(ISpeechLexicon*, UInt8, Int32, SpeechLexiconType, ISpeechLexiconPronunciations*, HRESULT)
+    add_pronunciation : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechPartOfSpeech, UInt8*, HRESULT)
+    add_pronunciation_by_phone_ids : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechPartOfSpeech, VARIANT*, HRESULT)
+    remove_pronunciation : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechPartOfSpeech, UInt8*, HRESULT)
+    remove_pronunciation_by_phone_ids : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechPartOfSpeech, VARIANT*, HRESULT)
+    get_pronunciations : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechLexiconType, ISpeechLexiconPronunciations*, HRESULT)
     get_generation_change : Proc(ISpeechLexicon*, Int32*, ISpeechLexiconWords*, HRESULT)
   end
 
@@ -3637,7 +3637,7 @@ lib LibWin32
     invoke : Proc(ISpeechLexiconWord*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_lang_id : Proc(ISpeechLexiconWord*, Int32*, HRESULT)
     get_type : Proc(ISpeechLexiconWord*, SpeechWordType*, HRESULT)
-    get_word : Proc(ISpeechLexiconWord*, UInt8*, HRESULT)
+    get_word : Proc(ISpeechLexiconWord*, UInt8**, HRESULT)
     get_pronunciations : Proc(ISpeechLexiconWord*, ISpeechLexiconPronunciations*, HRESULT)
   end
 
@@ -3674,7 +3674,7 @@ lib LibWin32
     get_lang_id : Proc(ISpeechLexiconPronunciation*, Int32*, HRESULT)
     get_part_of_speech : Proc(ISpeechLexiconPronunciation*, SpeechPartOfSpeech*, HRESULT)
     get_phone_ids : Proc(ISpeechLexiconPronunciation*, VARIANT*, HRESULT)
-    get_symbolic : Proc(ISpeechLexiconPronunciation*, UInt8*, HRESULT)
+    get_symbolic : Proc(ISpeechLexiconPronunciation*, UInt8**, HRESULT)
   end
 
   struct ISpeechLexiconPronunciation
@@ -3699,8 +3699,8 @@ lib LibWin32
     speak_audio : Proc(ISpeechXMLRecoResult*, Int32, Int32, SpeechVoiceSpeakFlags, Int32*, HRESULT)
     save_to_memory : Proc(ISpeechXMLRecoResult*, VARIANT*, HRESULT)
     discard_result_info : Proc(ISpeechXMLRecoResult*, SpeechDiscardType, HRESULT)
-    get_xml_result : Proc(ISpeechXMLRecoResult*, SPXMLRESULTOPTIONS, UInt8*, HRESULT)
-    get_xml_error_info : Proc(ISpeechXMLRecoResult*, Int32*, UInt8*, UInt8*, UInt8*, Int32*, Int16*, HRESULT)
+    get_xml_result : Proc(ISpeechXMLRecoResult*, SPXMLRESULTOPTIONS, UInt8**, HRESULT)
+    get_xml_error_info : Proc(ISpeechXMLRecoResult*, Int32*, UInt8**, UInt8**, UInt8**, Int32*, Int16*, HRESULT)
   end
 
   struct ISpeechXMLRecoResult
@@ -3725,9 +3725,9 @@ lib LibWin32
     speak_audio : Proc(ISpeechRecoResultDispatch*, Int32, Int32, SpeechVoiceSpeakFlags, Int32*, HRESULT)
     save_to_memory : Proc(ISpeechRecoResultDispatch*, VARIANT*, HRESULT)
     discard_result_info : Proc(ISpeechRecoResultDispatch*, SpeechDiscardType, HRESULT)
-    get_xml_result : Proc(ISpeechRecoResultDispatch*, SPXMLRESULTOPTIONS, UInt8*, HRESULT)
-    get_xml_error_info : Proc(ISpeechRecoResultDispatch*, Int32*, UInt8*, UInt8*, UInt8*, HRESULT*, Int16*, HRESULT)
-    set_text_feedback : Proc(ISpeechRecoResultDispatch*, UInt8, Int16, HRESULT)
+    get_xml_result : Proc(ISpeechRecoResultDispatch*, SPXMLRESULTOPTIONS, UInt8**, HRESULT)
+    get_xml_error_info : Proc(ISpeechRecoResultDispatch*, Int32*, UInt8**, UInt8**, UInt8**, HRESULT*, Int16*, HRESULT)
+    set_text_feedback : Proc(ISpeechRecoResultDispatch*, UInt8*, Int16, HRESULT)
   end
 
   struct ISpeechRecoResultDispatch
@@ -3759,8 +3759,8 @@ lib LibWin32
     invoke : Proc(ISpeechPhoneConverter*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_language_id : Proc(ISpeechPhoneConverter*, Int32*, HRESULT)
     put_language_id : Proc(ISpeechPhoneConverter*, Int32, HRESULT)
-    phone_to_id : Proc(ISpeechPhoneConverter*, UInt8, VARIANT*, HRESULT)
-    id_to_phone : Proc(ISpeechPhoneConverter*, VARIANT, UInt8*, HRESULT)
+    phone_to_id : Proc(ISpeechPhoneConverter*, UInt8*, VARIANT*, HRESULT)
+    id_to_phone : Proc(ISpeechPhoneConverter*, VARIANT, UInt8**, HRESULT)
   end
 
   struct ISpeechPhoneConverter

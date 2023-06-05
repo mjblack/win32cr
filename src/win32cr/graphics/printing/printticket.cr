@@ -44,20 +44,20 @@ lib LibWin32
   # Params # pbuffer : Void* [In]
   fun PTReleaseMemory(pbuffer : Void*) : HRESULT
 
-  # Params # hprovider : HPTPROVIDER [In],pprintticket : IStream [In],pcapabilities : IStream [In],pbstrerrormessage : UInt8* [In]
-  fun PTGetPrintCapabilities(hprovider : HPTPROVIDER, pprintticket : IStream, pcapabilities : IStream, pbstrerrormessage : UInt8*) : HRESULT
+  # Params # hprovider : HPTPROVIDER [In],pprintticket : IStream [In],pcapabilities : IStream [In],pbstrerrormessage : UInt8** [In]
+  fun PTGetPrintCapabilities(hprovider : HPTPROVIDER, pprintticket : IStream, pcapabilities : IStream, pbstrerrormessage : UInt8**) : HRESULT
 
-  # Params # hprovider : HPTPROVIDER [In],pprintticket : IStream [In],pdevicecapabilities : IStream [In],pbstrerrormessage : UInt8* [In]
-  fun PTGetPrintDeviceCapabilities(hprovider : HPTPROVIDER, pprintticket : IStream, pdevicecapabilities : IStream, pbstrerrormessage : UInt8*) : HRESULT
+  # Params # hprovider : HPTPROVIDER [In],pprintticket : IStream [In],pdevicecapabilities : IStream [In],pbstrerrormessage : UInt8** [In]
+  fun PTGetPrintDeviceCapabilities(hprovider : HPTPROVIDER, pprintticket : IStream, pdevicecapabilities : IStream, pbstrerrormessage : UInt8**) : HRESULT
 
-  # Params # hprovider : HPTPROVIDER [In],pszlocalename : LibC::LPWSTR [In],pprintticket : IStream [In],pdeviceresources : IStream [In],pbstrerrormessage : UInt8* [In]
-  fun PTGetPrintDeviceResources(hprovider : HPTPROVIDER, pszlocalename : LibC::LPWSTR, pprintticket : IStream, pdeviceresources : IStream, pbstrerrormessage : UInt8*) : HRESULT
+  # Params # hprovider : HPTPROVIDER [In],pszlocalename : LibC::LPWSTR [In],pprintticket : IStream [In],pdeviceresources : IStream [In],pbstrerrormessage : UInt8** [In]
+  fun PTGetPrintDeviceResources(hprovider : HPTPROVIDER, pszlocalename : LibC::LPWSTR, pprintticket : IStream, pdeviceresources : IStream, pbstrerrormessage : UInt8**) : HRESULT
 
-  # Params # hprovider : HPTPROVIDER [In],pbaseticket : IStream [In],pdeltaticket : IStream [In],scope : EPrintTicketScope [In],presultticket : IStream [In],pbstrerrormessage : UInt8* [In]
-  fun PTMergeAndValidatePrintTicket(hprovider : HPTPROVIDER, pbaseticket : IStream, pdeltaticket : IStream, scope : EPrintTicketScope, presultticket : IStream, pbstrerrormessage : UInt8*) : HRESULT
+  # Params # hprovider : HPTPROVIDER [In],pbaseticket : IStream [In],pdeltaticket : IStream [In],scope : EPrintTicketScope [In],presultticket : IStream [In],pbstrerrormessage : UInt8** [In]
+  fun PTMergeAndValidatePrintTicket(hprovider : HPTPROVIDER, pbaseticket : IStream, pdeltaticket : IStream, scope : EPrintTicketScope, presultticket : IStream, pbstrerrormessage : UInt8**) : HRESULT
 
-  # Params # hprovider : HPTPROVIDER [In],pprintticket : IStream [In],basedevmodetype : EDefaultDevmodeType [In],scope : EPrintTicketScope [In],pcbdevmode : UInt32* [In],ppdevmode : DEVMODEA** [In],pbstrerrormessage : UInt8* [In]
-  fun PTConvertPrintTicketToDevMode(hprovider : HPTPROVIDER, pprintticket : IStream, basedevmodetype : EDefaultDevmodeType, scope : EPrintTicketScope, pcbdevmode : UInt32*, ppdevmode : DEVMODEA**, pbstrerrormessage : UInt8*) : HRESULT
+  # Params # hprovider : HPTPROVIDER [In],pprintticket : IStream [In],basedevmodetype : EDefaultDevmodeType [In],scope : EPrintTicketScope [In],pcbdevmode : UInt32* [In],ppdevmode : DEVMODEA** [In],pbstrerrormessage : UInt8** [In]
+  fun PTConvertPrintTicketToDevMode(hprovider : HPTPROVIDER, pprintticket : IStream, basedevmodetype : EDefaultDevmodeType, scope : EPrintTicketScope, pcbdevmode : UInt32*, ppdevmode : DEVMODEA**, pbstrerrormessage : UInt8**) : HRESULT
 
   # Params # hprovider : HPTPROVIDER [In],cbdevmode : UInt32 [In],pdevmode : DEVMODEA* [In],scope : EPrintTicketScope [In],pprintticket : IStream [In]
   fun PTConvertDevModeToPrintTicket(hprovider : HPTPROVIDER, cbdevmode : UInt32, pdevmode : DEVMODEA*, scope : EPrintTicketScope, pprintticket : IStream) : HRESULT

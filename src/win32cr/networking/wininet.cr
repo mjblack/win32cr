@@ -2607,8 +2607,8 @@ lib LibWin32
   # Params # 
   fun UrlCacheServer : UInt32
 
-  # Params # pcnetworks : UInt32* [In],pppwsznetworkguids : LibC::LPWSTR** [In],pppbstrnetworknames : UInt8** [In],pppwszgwmacs : LibC::LPWSTR** [In],pcgatewaymacs : UInt32* [In],pdwflags : UInt32* [In]
-  fun ReadGuidsForConnectedNetworks(pcnetworks : UInt32*, pppwsznetworkguids : LibC::LPWSTR**, pppbstrnetworknames : UInt8**, pppwszgwmacs : LibC::LPWSTR**, pcgatewaymacs : UInt32*, pdwflags : UInt32*) : LibC::BOOL
+  # Params # pcnetworks : UInt32* [In],pppwsznetworkguids : LibC::LPWSTR** [In],pppbstrnetworknames : UInt8*** [In],pppwszgwmacs : LibC::LPWSTR** [In],pcgatewaymacs : UInt32* [In],pdwflags : UInt32* [In]
+  fun ReadGuidsForConnectedNetworks(pcnetworks : UInt32*, pppwsznetworkguids : LibC::LPWSTR**, pppbstrnetworknames : UInt8***, pppwszgwmacs : LibC::LPWSTR**, pcgatewaymacs : UInt32*, pdwflags : UInt32*) : LibC::BOOL
 
   # Params # tscheme : INTERNET_SCHEME [In],lpszhost : UInt8* [In],cchhost : UInt32 [In]
   fun IsHostInProxyBypassList(tscheme : INTERNET_SCHEME, lpszhost : UInt8*, cchhost : UInt32) : LibC::BOOL
