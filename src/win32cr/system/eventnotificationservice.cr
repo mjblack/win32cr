@@ -48,11 +48,11 @@ lib LibWin32
     get_type_info : Proc(ISensNetwork*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISensNetwork*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISensNetwork*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connection_made : Proc(ISensNetwork*, UInt8, UInt32, SENS_QOCINFO*, HRESULT)
-    connection_made_no_qoc_info : Proc(ISensNetwork*, UInt8, UInt32, HRESULT)
-    connection_lost : Proc(ISensNetwork*, UInt8, SENS_CONNECTION_TYPE, HRESULT)
-    destination_reachable : Proc(ISensNetwork*, UInt8, UInt8, UInt32, SENS_QOCINFO*, HRESULT)
-    destination_reachable_no_qoc_info : Proc(ISensNetwork*, UInt8, UInt8, UInt32, HRESULT)
+    connection_made : Proc(ISensNetwork*, UInt8*, UInt32, SENS_QOCINFO*, HRESULT)
+    connection_made_no_qoc_info : Proc(ISensNetwork*, UInt8*, UInt32, HRESULT)
+    connection_lost : Proc(ISensNetwork*, UInt8*, SENS_CONNECTION_TYPE, HRESULT)
+    destination_reachable : Proc(ISensNetwork*, UInt8*, UInt8*, UInt32, SENS_QOCINFO*, HRESULT)
+    destination_reachable_no_qoc_info : Proc(ISensNetwork*, UInt8*, UInt8*, UInt32, HRESULT)
   end
 
   struct ISensNetwork
@@ -84,13 +84,13 @@ lib LibWin32
     get_type_info : Proc(ISensLogon*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISensLogon*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISensLogon*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    logon : Proc(ISensLogon*, UInt8, HRESULT)
-    logoff : Proc(ISensLogon*, UInt8, HRESULT)
-    start_shell : Proc(ISensLogon*, UInt8, HRESULT)
-    display_lock : Proc(ISensLogon*, UInt8, HRESULT)
-    display_unlock : Proc(ISensLogon*, UInt8, HRESULT)
-    start_screen_saver : Proc(ISensLogon*, UInt8, HRESULT)
-    stop_screen_saver : Proc(ISensLogon*, UInt8, HRESULT)
+    logon : Proc(ISensLogon*, UInt8*, HRESULT)
+    logoff : Proc(ISensLogon*, UInt8*, HRESULT)
+    start_shell : Proc(ISensLogon*, UInt8*, HRESULT)
+    display_lock : Proc(ISensLogon*, UInt8*, HRESULT)
+    display_unlock : Proc(ISensLogon*, UInt8*, HRESULT)
+    start_screen_saver : Proc(ISensLogon*, UInt8*, HRESULT)
+    stop_screen_saver : Proc(ISensLogon*, UInt8*, HRESULT)
   end
 
   struct ISensLogon
@@ -105,11 +105,11 @@ lib LibWin32
     get_type_info : Proc(ISensLogon2*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISensLogon2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISensLogon2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    logon : Proc(ISensLogon2*, UInt8, UInt32, HRESULT)
-    logoff : Proc(ISensLogon2*, UInt8, UInt32, HRESULT)
-    session_disconnect : Proc(ISensLogon2*, UInt8, UInt32, HRESULT)
-    session_reconnect : Proc(ISensLogon2*, UInt8, UInt32, HRESULT)
-    post_shell : Proc(ISensLogon2*, UInt8, UInt32, HRESULT)
+    logon : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
+    logoff : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
+    session_disconnect : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
+    session_reconnect : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
+    post_shell : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
   end
 
   struct ISensLogon2

@@ -955,8 +955,8 @@ lib LibWin32
   end
 
   struct CONFIGURATION_ENTRY
-    bstr_key : UInt8
-    bstr_value : UInt8
+    bstr_key : UInt8*
+    bstr_value : UInt8*
   end
   struct LOGGING_PARAMETERS
     psz_session_id : LibC::LPWSTR

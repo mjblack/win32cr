@@ -738,7 +738,7 @@ lib LibWin32
   end
   struct TF_LBBALLOONINFO
     style : TfLBBalloonStyle
-    bstr_text : UInt8
+    bstr_text : UInt8*
   end
   struct TF_PERSISTENT_PROPERTY_HEADER_ACP
     guid_type : Guid
@@ -804,7 +804,7 @@ lib LibWin32
     dw_frame_len : UInt32
     dw_flags : UInt32
     anonymous : TF_LMLATTELEMENT_Anonymous_e__Union
-    bstr_text : UInt8
+    bstr_text : UInt8*
   end
 
 
@@ -1062,7 +1062,7 @@ lib LibWin32
     get_info : Proc(ITfLangBarItem*, TF_LANGBARITEMINFO*, HRESULT)
     get_status : Proc(ITfLangBarItem*, UInt32*, HRESULT)
     show : Proc(ITfLangBarItem*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItem*, UInt8*, HRESULT)
+    get_tooltip_string : Proc(ITfLangBarItem*, UInt8**, HRESULT)
   end
 
   struct ITfLangBarItem
@@ -1098,7 +1098,7 @@ lib LibWin32
     add_ref : Proc(ITfSystemLangBarItemText*, UInt32)
     release : Proc(ITfSystemLangBarItemText*, UInt32)
     set_item_text : Proc(ITfSystemLangBarItemText*, Char*, UInt32, HRESULT)
-    get_item_text : Proc(ITfSystemLangBarItemText*, UInt8*, HRESULT)
+    get_item_text : Proc(ITfSystemLangBarItemText*, UInt8**, HRESULT)
   end
 
   struct ITfSystemLangBarItemText
@@ -1124,12 +1124,12 @@ lib LibWin32
     get_info : Proc(ITfLangBarItemButton*, TF_LANGBARITEMINFO*, HRESULT)
     get_status : Proc(ITfLangBarItemButton*, UInt32*, HRESULT)
     show : Proc(ITfLangBarItemButton*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItemButton*, UInt8*, HRESULT)
+    get_tooltip_string : Proc(ITfLangBarItemButton*, UInt8**, HRESULT)
     on_click : Proc(ITfLangBarItemButton*, TfLBIClick, POINT, RECT*, HRESULT)
     init_menu : Proc(ITfLangBarItemButton*, ITfMenu, HRESULT)
     on_menu_select : Proc(ITfLangBarItemButton*, UInt32, HRESULT)
     get_icon : Proc(ITfLangBarItemButton*, HANDLE*, HRESULT)
-    get_text : Proc(ITfLangBarItemButton*, UInt8*, HRESULT)
+    get_text : Proc(ITfLangBarItemButton*, UInt8**, HRESULT)
   end
 
   struct ITfLangBarItemButton
@@ -1143,13 +1143,13 @@ lib LibWin32
     get_info : Proc(ITfLangBarItemBitmapButton*, TF_LANGBARITEMINFO*, HRESULT)
     get_status : Proc(ITfLangBarItemBitmapButton*, UInt32*, HRESULT)
     show : Proc(ITfLangBarItemBitmapButton*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItemBitmapButton*, UInt8*, HRESULT)
+    get_tooltip_string : Proc(ITfLangBarItemBitmapButton*, UInt8**, HRESULT)
     on_click : Proc(ITfLangBarItemBitmapButton*, TfLBIClick, POINT, RECT*, HRESULT)
     init_menu : Proc(ITfLangBarItemBitmapButton*, ITfMenu, HRESULT)
     on_menu_select : Proc(ITfLangBarItemBitmapButton*, UInt32, HRESULT)
     get_preferred_size : Proc(ITfLangBarItemBitmapButton*, SIZE*, SIZE*, HRESULT)
     draw_bitmap : Proc(ITfLangBarItemBitmapButton*, Int32, Int32, UInt32, HBITMAP*, HBITMAP*, HRESULT)
-    get_text : Proc(ITfLangBarItemBitmapButton*, UInt8*, HRESULT)
+    get_text : Proc(ITfLangBarItemBitmapButton*, UInt8**, HRESULT)
   end
 
   struct ITfLangBarItemBitmapButton
@@ -1163,7 +1163,7 @@ lib LibWin32
     get_info : Proc(ITfLangBarItemBitmap*, TF_LANGBARITEMINFO*, HRESULT)
     get_status : Proc(ITfLangBarItemBitmap*, UInt32*, HRESULT)
     show : Proc(ITfLangBarItemBitmap*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItemBitmap*, UInt8*, HRESULT)
+    get_tooltip_string : Proc(ITfLangBarItemBitmap*, UInt8**, HRESULT)
     on_click : Proc(ITfLangBarItemBitmap*, TfLBIClick, POINT, RECT*, HRESULT)
     get_preferred_size : Proc(ITfLangBarItemBitmap*, SIZE*, SIZE*, HRESULT)
     draw_bitmap : Proc(ITfLangBarItemBitmap*, Int32, Int32, UInt32, HBITMAP*, HBITMAP*, HRESULT)
@@ -1180,7 +1180,7 @@ lib LibWin32
     get_info : Proc(ITfLangBarItemBalloon*, TF_LANGBARITEMINFO*, HRESULT)
     get_status : Proc(ITfLangBarItemBalloon*, UInt32*, HRESULT)
     show : Proc(ITfLangBarItemBalloon*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItemBalloon*, UInt8*, HRESULT)
+    get_tooltip_string : Proc(ITfLangBarItemBalloon*, UInt8**, HRESULT)
     on_click : Proc(ITfLangBarItemBalloon*, TfLBIClick, POINT, RECT*, HRESULT)
     get_preferred_size : Proc(ITfLangBarItemBalloon*, SIZE*, SIZE*, HRESULT)
     get_balloon_info : Proc(ITfLangBarItemBalloon*, TF_LBBALLOONINFO*, HRESULT)
@@ -1929,7 +1929,7 @@ lib LibWin32
     query_interface : Proc(ITfFunction*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFunction*, UInt32)
     release : Proc(ITfFunction*, UInt32)
-    get_display_name : Proc(ITfFunction*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFunction*, UInt8**, HRESULT)
   end
 
   struct ITfFunction
@@ -1941,7 +1941,7 @@ lib LibWin32
     add_ref : Proc(ITfFunctionProvider*, UInt32)
     release : Proc(ITfFunctionProvider*, UInt32)
     get_type : Proc(ITfFunctionProvider*, Guid*, HRESULT)
-    get_description : Proc(ITfFunctionProvider*, UInt8*, HRESULT)
+    get_description : Proc(ITfFunctionProvider*, UInt8**, HRESULT)
     get_function : Proc(ITfFunctionProvider*, Guid*, Guid*, IUnknown*, HRESULT)
   end
 
@@ -1976,7 +1976,7 @@ lib LibWin32
     set_default_language_profile : Proc(ITfInputProcessorProfiles*, UInt16, Guid*, Guid*, HRESULT)
     activate_language_profile : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, HRESULT)
     get_active_language_profile : Proc(ITfInputProcessorProfiles*, Guid*, UInt16*, Guid*, HRESULT)
-    get_language_profile_description : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, UInt8*, HRESULT)
+    get_language_profile_description : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, UInt8**, HRESULT)
     get_current_language : Proc(ITfInputProcessorProfiles*, UInt16*, HRESULT)
     change_current_language : Proc(ITfInputProcessorProfiles*, UInt16, HRESULT)
     get_language_list : Proc(ITfInputProcessorProfiles*, UInt16**, UInt32*, HRESULT)
@@ -2004,7 +2004,7 @@ lib LibWin32
     set_default_language_profile : Proc(ITfInputProcessorProfilesEx*, UInt16, Guid*, Guid*, HRESULT)
     activate_language_profile : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, HRESULT)
     get_active_language_profile : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16*, Guid*, HRESULT)
-    get_language_profile_description : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, UInt8*, HRESULT)
+    get_language_profile_description : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, UInt8**, HRESULT)
     get_current_language : Proc(ITfInputProcessorProfilesEx*, UInt16*, HRESULT)
     change_current_language : Proc(ITfInputProcessorProfilesEx*, UInt16, HRESULT)
     get_language_list : Proc(ITfInputProcessorProfilesEx*, UInt16**, UInt32*, HRESULT)
@@ -2127,7 +2127,7 @@ lib LibWin32
     preserve_key : Proc(ITfKeystrokeMgr*, UInt32, Guid*, TF_PRESERVEDKEY*, Char*, UInt32, HRESULT)
     unpreserve_key : Proc(ITfKeystrokeMgr*, Guid*, TF_PRESERVEDKEY*, HRESULT)
     set_preserved_key_description : Proc(ITfKeystrokeMgr*, Guid*, Char*, UInt32, HRESULT)
-    get_preserved_key_description : Proc(ITfKeystrokeMgr*, Guid*, UInt8*, HRESULT)
+    get_preserved_key_description : Proc(ITfKeystrokeMgr*, Guid*, UInt8**, HRESULT)
     simulate_preserved_key : Proc(ITfKeystrokeMgr*, ITfContext, Guid*, LibC::BOOL*, HRESULT)
   end
 
@@ -2241,7 +2241,7 @@ lib LibWin32
     add_ref : Proc(ITfDisplayAttributeInfo*, UInt32)
     release : Proc(ITfDisplayAttributeInfo*, UInt32)
     get_guid : Proc(ITfDisplayAttributeInfo*, Guid*, HRESULT)
-    get_description : Proc(ITfDisplayAttributeInfo*, UInt8*, HRESULT)
+    get_description : Proc(ITfDisplayAttributeInfo*, UInt8**, HRESULT)
     get_attribute_info : Proc(ITfDisplayAttributeInfo*, TF_DISPLAYATTRIBUTE*, HRESULT)
     set_attribute_info : Proc(ITfDisplayAttributeInfo*, TF_DISPLAYATTRIBUTE*, HRESULT)
     reset : Proc(ITfDisplayAttributeInfo*, HRESULT)
@@ -2312,7 +2312,7 @@ lib LibWin32
     find_closest_category : Proc(ITfCategoryMgr*, Guid*, Guid*, Guid**, UInt32, HRESULT)
     register_guid_description : Proc(ITfCategoryMgr*, Guid*, Guid*, Char*, UInt32, HRESULT)
     unregister_guid_description : Proc(ITfCategoryMgr*, Guid*, Guid*, HRESULT)
-    get_guid_description : Proc(ITfCategoryMgr*, Guid*, UInt8*, HRESULT)
+    get_guid_description : Proc(ITfCategoryMgr*, Guid*, UInt8**, HRESULT)
     register_guiddword : Proc(ITfCategoryMgr*, Guid*, Guid*, UInt32, HRESULT)
     unregister_guiddword : Proc(ITfCategoryMgr*, Guid*, Guid*, HRESULT)
     get_guiddword : Proc(ITfCategoryMgr*, Guid*, UInt32*, HRESULT)
@@ -2395,7 +2395,7 @@ lib LibWin32
     query_interface : Proc(ITfUIElement*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfUIElement*, UInt32)
     release : Proc(ITfUIElement*, UInt32)
-    get_description : Proc(ITfUIElement*, UInt8*, HRESULT)
+    get_description : Proc(ITfUIElement*, UInt8**, HRESULT)
     get_guid : Proc(ITfUIElement*, Guid*, HRESULT)
     show : Proc(ITfUIElement*, LibC::BOOL, HRESULT)
     is_shown : Proc(ITfUIElement*, LibC::BOOL*, HRESULT)
@@ -2409,7 +2409,7 @@ lib LibWin32
     query_interface : Proc(ITfCandidateListUIElement*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfCandidateListUIElement*, UInt32)
     release : Proc(ITfCandidateListUIElement*, UInt32)
-    get_description : Proc(ITfCandidateListUIElement*, UInt8*, HRESULT)
+    get_description : Proc(ITfCandidateListUIElement*, UInt8**, HRESULT)
     get_guid : Proc(ITfCandidateListUIElement*, Guid*, HRESULT)
     show : Proc(ITfCandidateListUIElement*, LibC::BOOL, HRESULT)
     is_shown : Proc(ITfCandidateListUIElement*, LibC::BOOL*, HRESULT)
@@ -2417,7 +2417,7 @@ lib LibWin32
     get_document_mgr : Proc(ITfCandidateListUIElement*, ITfDocumentMgr*, HRESULT)
     get_count : Proc(ITfCandidateListUIElement*, UInt32*, HRESULT)
     get_selection : Proc(ITfCandidateListUIElement*, UInt32*, HRESULT)
-    get_string : Proc(ITfCandidateListUIElement*, UInt32, UInt8*, HRESULT)
+    get_string : Proc(ITfCandidateListUIElement*, UInt32, UInt8**, HRESULT)
     get_page_index : Proc(ITfCandidateListUIElement*, UInt32*, UInt32, UInt32*, HRESULT)
     set_page_index : Proc(ITfCandidateListUIElement*, UInt32*, UInt32, HRESULT)
     get_current_page : Proc(ITfCandidateListUIElement*, UInt32*, HRESULT)
@@ -2431,7 +2431,7 @@ lib LibWin32
     query_interface : Proc(ITfCandidateListUIElementBehavior*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfCandidateListUIElementBehavior*, UInt32)
     release : Proc(ITfCandidateListUIElementBehavior*, UInt32)
-    get_description : Proc(ITfCandidateListUIElementBehavior*, UInt8*, HRESULT)
+    get_description : Proc(ITfCandidateListUIElementBehavior*, UInt8**, HRESULT)
     get_guid : Proc(ITfCandidateListUIElementBehavior*, Guid*, HRESULT)
     show : Proc(ITfCandidateListUIElementBehavior*, LibC::BOOL, HRESULT)
     is_shown : Proc(ITfCandidateListUIElementBehavior*, LibC::BOOL*, HRESULT)
@@ -2439,7 +2439,7 @@ lib LibWin32
     get_document_mgr : Proc(ITfCandidateListUIElementBehavior*, ITfDocumentMgr*, HRESULT)
     get_count : Proc(ITfCandidateListUIElementBehavior*, UInt32*, HRESULT)
     get_selection : Proc(ITfCandidateListUIElementBehavior*, UInt32*, HRESULT)
-    get_string : Proc(ITfCandidateListUIElementBehavior*, UInt32, UInt8*, HRESULT)
+    get_string : Proc(ITfCandidateListUIElementBehavior*, UInt32, UInt8**, HRESULT)
     get_page_index : Proc(ITfCandidateListUIElementBehavior*, UInt32*, UInt32, UInt32*, HRESULT)
     set_page_index : Proc(ITfCandidateListUIElementBehavior*, UInt32*, UInt32, HRESULT)
     get_current_page : Proc(ITfCandidateListUIElementBehavior*, UInt32*, HRESULT)
@@ -2456,13 +2456,13 @@ lib LibWin32
     query_interface : Proc(ITfReadingInformationUIElement*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfReadingInformationUIElement*, UInt32)
     release : Proc(ITfReadingInformationUIElement*, UInt32)
-    get_description : Proc(ITfReadingInformationUIElement*, UInt8*, HRESULT)
+    get_description : Proc(ITfReadingInformationUIElement*, UInt8**, HRESULT)
     get_guid : Proc(ITfReadingInformationUIElement*, Guid*, HRESULT)
     show : Proc(ITfReadingInformationUIElement*, LibC::BOOL, HRESULT)
     is_shown : Proc(ITfReadingInformationUIElement*, LibC::BOOL*, HRESULT)
     get_updated_flags : Proc(ITfReadingInformationUIElement*, UInt32*, HRESULT)
     get_context : Proc(ITfReadingInformationUIElement*, ITfContext*, HRESULT)
-    get_string : Proc(ITfReadingInformationUIElement*, UInt8*, HRESULT)
+    get_string : Proc(ITfReadingInformationUIElement*, UInt8**, HRESULT)
     get_max_reading_string_length : Proc(ITfReadingInformationUIElement*, UInt32*, HRESULT)
     get_error_index : Proc(ITfReadingInformationUIElement*, UInt32*, HRESULT)
     is_vertical_order_preferred : Proc(ITfReadingInformationUIElement*, LibC::BOOL*, HRESULT)
@@ -2476,7 +2476,7 @@ lib LibWin32
     query_interface : Proc(ITfTransitoryExtensionUIElement*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfTransitoryExtensionUIElement*, UInt32)
     release : Proc(ITfTransitoryExtensionUIElement*, UInt32)
-    get_description : Proc(ITfTransitoryExtensionUIElement*, UInt8*, HRESULT)
+    get_description : Proc(ITfTransitoryExtensionUIElement*, UInt8**, HRESULT)
     get_guid : Proc(ITfTransitoryExtensionUIElement*, Guid*, HRESULT)
     show : Proc(ITfTransitoryExtensionUIElement*, LibC::BOOL, HRESULT)
     is_shown : Proc(ITfTransitoryExtensionUIElement*, LibC::BOOL*, HRESULT)
@@ -2502,11 +2502,11 @@ lib LibWin32
     query_interface : Proc(ITfToolTipUIElement*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfToolTipUIElement*, UInt32)
     release : Proc(ITfToolTipUIElement*, UInt32)
-    get_description : Proc(ITfToolTipUIElement*, UInt8*, HRESULT)
+    get_description : Proc(ITfToolTipUIElement*, UInt8**, HRESULT)
     get_guid : Proc(ITfToolTipUIElement*, Guid*, HRESULT)
     show : Proc(ITfToolTipUIElement*, LibC::BOOL, HRESULT)
     is_shown : Proc(ITfToolTipUIElement*, LibC::BOOL*, HRESULT)
-    get_string : Proc(ITfToolTipUIElement*, UInt8*, HRESULT)
+    get_string : Proc(ITfToolTipUIElement*, UInt8**, HRESULT)
   end
 
   struct ITfToolTipUIElement
@@ -2518,7 +2518,7 @@ lib LibWin32
     add_ref : Proc(ITfReverseConversionList*, UInt32)
     release : Proc(ITfReverseConversionList*, UInt32)
     get_length : Proc(ITfReverseConversionList*, UInt32*, HRESULT)
-    get_string : Proc(ITfReverseConversionList*, UInt32, UInt8*, HRESULT)
+    get_string : Proc(ITfReverseConversionList*, UInt32, UInt8**, HRESULT)
   end
 
   struct ITfReverseConversionList
@@ -2551,7 +2551,7 @@ lib LibWin32
     query_interface : Proc(ITfCandidateString*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfCandidateString*, UInt32)
     release : Proc(ITfCandidateString*, UInt32)
-    get_string : Proc(ITfCandidateString*, UInt8*, HRESULT)
+    get_string : Proc(ITfCandidateString*, UInt8**, HRESULT)
     get_index : Proc(ITfCandidateString*, UInt32*, HRESULT)
   end
 
@@ -2591,7 +2591,7 @@ lib LibWin32
     query_interface : Proc(ITfFnReconversion*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnReconversion*, UInt32)
     release : Proc(ITfFnReconversion*, UInt32)
-    get_display_name : Proc(ITfFnReconversion*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnReconversion*, UInt8**, HRESULT)
     query_range : Proc(ITfFnReconversion*, ITfRange, ITfRange*, LibC::BOOL*, HRESULT)
     get_reconversion : Proc(ITfFnReconversion*, ITfRange, ITfCandidateList*, HRESULT)
     reconvert : Proc(ITfFnReconversion*, ITfRange, HRESULT)
@@ -2605,7 +2605,7 @@ lib LibWin32
     query_interface : Proc(ITfFnPlayBack*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnPlayBack*, UInt32)
     release : Proc(ITfFnPlayBack*, UInt32)
-    get_display_name : Proc(ITfFnPlayBack*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnPlayBack*, UInt8**, HRESULT)
     query_range : Proc(ITfFnPlayBack*, ITfRange, ITfRange*, LibC::BOOL*, HRESULT)
     play : Proc(ITfFnPlayBack*, ITfRange, HRESULT)
   end
@@ -2618,7 +2618,7 @@ lib LibWin32
     query_interface : Proc(ITfFnLangProfileUtil*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnLangProfileUtil*, UInt32)
     release : Proc(ITfFnLangProfileUtil*, UInt32)
-    get_display_name : Proc(ITfFnLangProfileUtil*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnLangProfileUtil*, UInt8**, HRESULT)
     register_active_profiles : Proc(ITfFnLangProfileUtil*, HRESULT)
     is_profile_available_for_lang : Proc(ITfFnLangProfileUtil*, UInt16, LibC::BOOL*, HRESULT)
   end
@@ -2631,7 +2631,7 @@ lib LibWin32
     query_interface : Proc(ITfFnConfigure*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnConfigure*, UInt32)
     release : Proc(ITfFnConfigure*, UInt32)
-    get_display_name : Proc(ITfFnConfigure*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnConfigure*, UInt8**, HRESULT)
     show : Proc(ITfFnConfigure*, LibC::HANDLE, UInt16, Guid*, HRESULT)
   end
 
@@ -2643,8 +2643,8 @@ lib LibWin32
     query_interface : Proc(ITfFnConfigureRegisterWord*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnConfigureRegisterWord*, UInt32)
     release : Proc(ITfFnConfigureRegisterWord*, UInt32)
-    get_display_name : Proc(ITfFnConfigureRegisterWord*, UInt8*, HRESULT)
-    show : Proc(ITfFnConfigureRegisterWord*, LibC::HANDLE, UInt16, Guid*, UInt8, HRESULT)
+    get_display_name : Proc(ITfFnConfigureRegisterWord*, UInt8**, HRESULT)
+    show : Proc(ITfFnConfigureRegisterWord*, LibC::HANDLE, UInt16, Guid*, UInt8*, HRESULT)
   end
 
   struct ITfFnConfigureRegisterWord
@@ -2655,8 +2655,8 @@ lib LibWin32
     query_interface : Proc(ITfFnConfigureRegisterEudc*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnConfigureRegisterEudc*, UInt32)
     release : Proc(ITfFnConfigureRegisterEudc*, UInt32)
-    get_display_name : Proc(ITfFnConfigureRegisterEudc*, UInt8*, HRESULT)
-    show : Proc(ITfFnConfigureRegisterEudc*, LibC::HANDLE, UInt16, Guid*, UInt8, HRESULT)
+    get_display_name : Proc(ITfFnConfigureRegisterEudc*, UInt8**, HRESULT)
+    show : Proc(ITfFnConfigureRegisterEudc*, LibC::HANDLE, UInt16, Guid*, UInt8*, HRESULT)
   end
 
   struct ITfFnConfigureRegisterEudc
@@ -2667,7 +2667,7 @@ lib LibWin32
     query_interface : Proc(ITfFnShowHelp*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnShowHelp*, UInt32)
     release : Proc(ITfFnShowHelp*, UInt32)
-    get_display_name : Proc(ITfFnShowHelp*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnShowHelp*, UInt8**, HRESULT)
     show : Proc(ITfFnShowHelp*, LibC::HANDLE, HRESULT)
   end
 
@@ -2690,7 +2690,7 @@ lib LibWin32
     query_interface : Proc(ITfFnGetSAPIObject*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnGetSAPIObject*, UInt32)
     release : Proc(ITfFnGetSAPIObject*, UInt32)
-    get_display_name : Proc(ITfFnGetSAPIObject*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnGetSAPIObject*, UInt8**, HRESULT)
     get : Proc(ITfFnGetSAPIObject*, TfSapiObject, IUnknown*, HRESULT)
   end
 
@@ -2702,7 +2702,7 @@ lib LibWin32
     query_interface : Proc(ITfFnPropertyUIStatus*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnPropertyUIStatus*, UInt32)
     release : Proc(ITfFnPropertyUIStatus*, UInt32)
-    get_display_name : Proc(ITfFnPropertyUIStatus*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnPropertyUIStatus*, UInt8**, HRESULT)
     get_status : Proc(ITfFnPropertyUIStatus*, Guid*, UInt32*, HRESULT)
     set_status : Proc(ITfFnPropertyUIStatus*, Guid*, UInt32, HRESULT)
   end
@@ -2741,7 +2741,7 @@ lib LibWin32
     query_interface : Proc(ITfFnCustomSpeechCommand*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnCustomSpeechCommand*, UInt32)
     release : Proc(ITfFnCustomSpeechCommand*, UInt32)
-    get_display_name : Proc(ITfFnCustomSpeechCommand*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnCustomSpeechCommand*, UInt8**, HRESULT)
     set_speech_command_provider : Proc(ITfFnCustomSpeechCommand*, IUnknown, HRESULT)
   end
 
@@ -2753,7 +2753,7 @@ lib LibWin32
     query_interface : Proc(ITfFnLMProcessor*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnLMProcessor*, UInt32)
     release : Proc(ITfFnLMProcessor*, UInt32)
-    get_display_name : Proc(ITfFnLMProcessor*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnLMProcessor*, UInt8**, HRESULT)
     query_range : Proc(ITfFnLMProcessor*, ITfRange, ITfRange*, LibC::BOOL*, HRESULT)
     query_lang_id : Proc(ITfFnLMProcessor*, UInt16, LibC::BOOL*, HRESULT)
     get_reconversion : Proc(ITfFnLMProcessor*, ITfRange, ITfCandidateList*, HRESULT)
@@ -2771,7 +2771,7 @@ lib LibWin32
     query_interface : Proc(ITfFnLMInternal*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnLMInternal*, UInt32)
     release : Proc(ITfFnLMInternal*, UInt32)
-    get_display_name : Proc(ITfFnLMInternal*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnLMInternal*, UInt8**, HRESULT)
     query_range : Proc(ITfFnLMInternal*, ITfRange, ITfRange*, LibC::BOOL*, HRESULT)
     query_lang_id : Proc(ITfFnLMInternal*, UInt16, LibC::BOOL*, HRESULT)
     get_reconversion : Proc(ITfFnLMInternal*, ITfRange, ITfCandidateList*, HRESULT)
@@ -2816,7 +2816,7 @@ lib LibWin32
     query_interface : Proc(ITfFnAdviseText*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnAdviseText*, UInt32)
     release : Proc(ITfFnAdviseText*, UInt32)
-    get_display_name : Proc(ITfFnAdviseText*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnAdviseText*, UInt8**, HRESULT)
     on_text_update : Proc(ITfFnAdviseText*, ITfRange, Char*, Int32, HRESULT)
     on_lattice_update : Proc(ITfFnAdviseText*, ITfRange, ITfLMLattice, HRESULT)
   end
@@ -2829,9 +2829,9 @@ lib LibWin32
     query_interface : Proc(ITfFnSearchCandidateProvider*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnSearchCandidateProvider*, UInt32)
     release : Proc(ITfFnSearchCandidateProvider*, UInt32)
-    get_display_name : Proc(ITfFnSearchCandidateProvider*, UInt8*, HRESULT)
-    get_search_candidates : Proc(ITfFnSearchCandidateProvider*, UInt8, UInt8, ITfCandidateList*, HRESULT)
-    set_result : Proc(ITfFnSearchCandidateProvider*, UInt8, UInt8, UInt8, HRESULT)
+    get_display_name : Proc(ITfFnSearchCandidateProvider*, UInt8**, HRESULT)
+    get_search_candidates : Proc(ITfFnSearchCandidateProvider*, UInt8*, UInt8*, ITfCandidateList*, HRESULT)
+    set_result : Proc(ITfFnSearchCandidateProvider*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
   struct ITfFnSearchCandidateProvider
@@ -2857,7 +2857,7 @@ lib LibWin32
     query_interface : Proc(ITfFnGetPreferredTouchKeyboardLayout*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt32)
     release : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt32)
-    get_display_name : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt8**, HRESULT)
     get_layout : Proc(ITfFnGetPreferredTouchKeyboardLayout*, TKBLayoutType*, UInt16*, HRESULT)
   end
 
@@ -2869,7 +2869,7 @@ lib LibWin32
     query_interface : Proc(ITfFnGetLinguisticAlternates*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITfFnGetLinguisticAlternates*, UInt32)
     release : Proc(ITfFnGetLinguisticAlternates*, UInt32)
-    get_display_name : Proc(ITfFnGetLinguisticAlternates*, UInt8*, HRESULT)
+    get_display_name : Proc(ITfFnGetLinguisticAlternates*, UInt8**, HRESULT)
     get_alternates : Proc(ITfFnGetLinguisticAlternates*, ITfRange, ITfCandidateList*, HRESULT)
   end
 
@@ -2898,10 +2898,10 @@ lib LibWin32
     add_ref : Proc(ITfInputScope*, UInt32)
     release : Proc(ITfInputScope*, UInt32)
     get_input_scopes : Proc(ITfInputScope*, InputScope**, UInt32*, HRESULT)
-    get_phrase : Proc(ITfInputScope*, UInt8**, UInt32*, HRESULT)
-    get_regular_expression : Proc(ITfInputScope*, UInt8*, HRESULT)
-    get_srgs : Proc(ITfInputScope*, UInt8*, HRESULT)
-    get_xml : Proc(ITfInputScope*, UInt8*, HRESULT)
+    get_phrase : Proc(ITfInputScope*, UInt8***, UInt32*, HRESULT)
+    get_regular_expression : Proc(ITfInputScope*, UInt8**, HRESULT)
+    get_srgs : Proc(ITfInputScope*, UInt8**, HRESULT)
+    get_xml : Proc(ITfInputScope*, UInt8**, HRESULT)
   end
 
   struct ITfInputScope
@@ -2913,10 +2913,10 @@ lib LibWin32
     add_ref : Proc(ITfInputScope2*, UInt32)
     release : Proc(ITfInputScope2*, UInt32)
     get_input_scopes : Proc(ITfInputScope2*, InputScope**, UInt32*, HRESULT)
-    get_phrase : Proc(ITfInputScope2*, UInt8**, UInt32*, HRESULT)
-    get_regular_expression : Proc(ITfInputScope2*, UInt8*, HRESULT)
-    get_srgs : Proc(ITfInputScope2*, UInt8*, HRESULT)
-    get_xml : Proc(ITfInputScope2*, UInt8*, HRESULT)
+    get_phrase : Proc(ITfInputScope2*, UInt8***, UInt32*, HRESULT)
+    get_regular_expression : Proc(ITfInputScope2*, UInt8**, HRESULT)
+    get_srgs : Proc(ITfInputScope2*, UInt8**, HRESULT)
+    get_xml : Proc(ITfInputScope2*, UInt8**, HRESULT)
     enum_word_list : Proc(ITfInputScope2*, IEnumString*, HRESULT)
   end
 
@@ -3011,11 +3011,11 @@ lib LibWin32
     query_interface : Proc(IAccDictionary*, Guid*, Void**, HRESULT)
     add_ref : Proc(IAccDictionary*, UInt32)
     release : Proc(IAccDictionary*, UInt32)
-    get_localized_string : Proc(IAccDictionary*, Guid*, UInt32, UInt8*, UInt32*, HRESULT)
+    get_localized_string : Proc(IAccDictionary*, Guid*, UInt32, UInt8**, UInt32*, HRESULT)
     get_parent_term : Proc(IAccDictionary*, Guid*, Guid*, HRESULT)
-    get_mnemonic_string : Proc(IAccDictionary*, Guid*, UInt8*, HRESULT)
-    lookup_mnemonic_term : Proc(IAccDictionary*, UInt8, Guid*, HRESULT)
-    convert_value_to_string : Proc(IAccDictionary*, Guid*, UInt32, VARIANT, UInt8*, UInt32*, HRESULT)
+    get_mnemonic_string : Proc(IAccDictionary*, Guid*, UInt8**, HRESULT)
+    lookup_mnemonic_term : Proc(IAccDictionary*, UInt8*, Guid*, HRESULT)
+    convert_value_to_string : Proc(IAccDictionary*, Guid*, UInt32, VARIANT, UInt8**, UInt32*, HRESULT)
   end
 
   struct IAccDictionary
@@ -3029,8 +3029,8 @@ lib LibWin32
     get_subcomponent_count : Proc(IVersionInfo*, UInt32, UInt32*, HRESULT)
     get_implementation_id : Proc(IVersionInfo*, UInt32, Guid*, HRESULT)
     get_build_version : Proc(IVersionInfo*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_component_description : Proc(IVersionInfo*, UInt32, UInt8*, HRESULT)
-    get_instance_description : Proc(IVersionInfo*, UInt32, UInt8*, HRESULT)
+    get_component_description : Proc(IVersionInfo*, UInt32, UInt8**, HRESULT)
+    get_instance_description : Proc(IVersionInfo*, UInt32, UInt8**, HRESULT)
   end
 
   struct IVersionInfo

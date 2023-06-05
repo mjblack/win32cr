@@ -15,7 +15,7 @@ lib LibWin32
     add_ref : Proc(IXMLGraphBuilder*, UInt32)
     release : Proc(IXMLGraphBuilder*, UInt32)
     build_from_xml : Proc(IXMLGraphBuilder*, IGraphBuilder, IXMLElement, HRESULT)
-    save_to_xml : Proc(IXMLGraphBuilder*, IGraphBuilder, UInt8*, HRESULT)
+    save_to_xml : Proc(IXMLGraphBuilder*, IGraphBuilder, UInt8**, HRESULT)
     build_from_xml_file : Proc(IXMLGraphBuilder*, IGraphBuilder, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 

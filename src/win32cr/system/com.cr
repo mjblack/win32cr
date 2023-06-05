@@ -603,7 +603,7 @@ lib LibWin32
     scode : Int32
     cy_val : CY
     date : Float64
-    bstr_val : UInt8
+    bstr_val : UInt8*
     punk_val : IUnknown
     pdisp_val : IDispatch
     parray : SAFEARRAY*
@@ -618,7 +618,7 @@ lib LibWin32
     pscode : Int32*
     pcy_val : CY*
     pdate : Float64*
-    pbstr_val : UInt8*
+    pbstr_val : UInt8**
     ppunk_val : IUnknown*
     ppdisp_val : IDispatch*
     pparray : SAFEARRAY**
@@ -986,9 +986,9 @@ lib LibWin32
   struct EXCEPINFO
     w_code : UInt16
     w_reserved : UInt16
-    bstr_source : UInt8
-    bstr_description : UInt8
-    bstr_help_file : UInt8
+    bstr_source : UInt8*
+    bstr_description : UInt8*
+    bstr_help_file : UInt8*
     dw_help_context : UInt32
     pv_reserved : Void*
     pfn_deferred_fill_in : LPEXCEPFINO_DEFERRED_FILLIN
@@ -2328,25 +2328,25 @@ lib LibWin32
     query_interface : Proc(IUri*, Guid*, Void**, HRESULT)
     add_ref : Proc(IUri*, UInt32)
     release : Proc(IUri*, UInt32)
-    get_property_bstr : Proc(IUri*, Uri_PROPERTY, UInt8*, UInt32, HRESULT)
+    get_property_bstr : Proc(IUri*, Uri_PROPERTY, UInt8**, UInt32, HRESULT)
     get_property_length : Proc(IUri*, Uri_PROPERTY, UInt32*, UInt32, HRESULT)
     get_property_dword : Proc(IUri*, Uri_PROPERTY, UInt32*, UInt32, HRESULT)
     has_property : Proc(IUri*, Uri_PROPERTY, LibC::BOOL*, HRESULT)
-    get_absolute_uri : Proc(IUri*, UInt8*, HRESULT)
-    get_authority : Proc(IUri*, UInt8*, HRESULT)
-    get_display_uri : Proc(IUri*, UInt8*, HRESULT)
-    get_domain : Proc(IUri*, UInt8*, HRESULT)
-    get_extension : Proc(IUri*, UInt8*, HRESULT)
-    get_fragment : Proc(IUri*, UInt8*, HRESULT)
-    get_host : Proc(IUri*, UInt8*, HRESULT)
-    get_password : Proc(IUri*, UInt8*, HRESULT)
-    get_path : Proc(IUri*, UInt8*, HRESULT)
-    get_path_and_query : Proc(IUri*, UInt8*, HRESULT)
-    get_query : Proc(IUri*, UInt8*, HRESULT)
-    get_raw_uri : Proc(IUri*, UInt8*, HRESULT)
-    get_scheme_name : Proc(IUri*, UInt8*, HRESULT)
-    get_user_info : Proc(IUri*, UInt8*, HRESULT)
-    get_user_name : Proc(IUri*, UInt8*, HRESULT)
+    get_absolute_uri : Proc(IUri*, UInt8**, HRESULT)
+    get_authority : Proc(IUri*, UInt8**, HRESULT)
+    get_display_uri : Proc(IUri*, UInt8**, HRESULT)
+    get_domain : Proc(IUri*, UInt8**, HRESULT)
+    get_extension : Proc(IUri*, UInt8**, HRESULT)
+    get_fragment : Proc(IUri*, UInt8**, HRESULT)
+    get_host : Proc(IUri*, UInt8**, HRESULT)
+    get_password : Proc(IUri*, UInt8**, HRESULT)
+    get_path : Proc(IUri*, UInt8**, HRESULT)
+    get_path_and_query : Proc(IUri*, UInt8**, HRESULT)
+    get_query : Proc(IUri*, UInt8**, HRESULT)
+    get_raw_uri : Proc(IUri*, UInt8**, HRESULT)
+    get_scheme_name : Proc(IUri*, UInt8**, HRESULT)
+    get_user_info : Proc(IUri*, UInt8**, HRESULT)
+    get_user_name : Proc(IUri*, UInt8**, HRESULT)
     get_host_type : Proc(IUri*, UInt32*, HRESULT)
     get_port : Proc(IUri*, UInt32*, HRESULT)
     get_scheme : Proc(IUri*, UInt32*, HRESULT)
@@ -2439,17 +2439,17 @@ lib LibWin32
     get_type_comp : Proc(ITypeInfo*, ITypeComp*, HRESULT)
     get_func_desc : Proc(ITypeInfo*, UInt32, FUNCDESC**, HRESULT)
     get_var_desc : Proc(ITypeInfo*, UInt32, VARDESC**, HRESULT)
-    get_names : Proc(ITypeInfo*, Int32, UInt8*, UInt32, UInt32*, HRESULT)
+    get_names : Proc(ITypeInfo*, Int32, UInt8**, UInt32, UInt32*, HRESULT)
     get_ref_type_of_impl_type : Proc(ITypeInfo*, UInt32, UInt32*, HRESULT)
     get_impl_type_flags : Proc(ITypeInfo*, UInt32, Int32*, HRESULT)
     get_i_ds_of_names : Proc(ITypeInfo*, LibC::LPWSTR*, UInt32, Int32*, HRESULT)
     invoke : Proc(ITypeInfo*, Void*, Int32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_documentation : Proc(ITypeInfo*, Int32, UInt8*, UInt8*, UInt32*, UInt8*, HRESULT)
-    get_dll_entry : Proc(ITypeInfo*, Int32, INVOKEKIND, UInt8*, UInt8*, UInt16*, HRESULT)
+    get_documentation : Proc(ITypeInfo*, Int32, UInt8**, UInt8**, UInt32*, UInt8**, HRESULT)
+    get_dll_entry : Proc(ITypeInfo*, Int32, INVOKEKIND, UInt8**, UInt8**, UInt16*, HRESULT)
     get_ref_type_info : Proc(ITypeInfo*, UInt32, ITypeInfo*, HRESULT)
     address_of_member : Proc(ITypeInfo*, Int32, INVOKEKIND, Void**, HRESULT)
     create_instance : Proc(ITypeInfo*, IUnknown, Guid*, Void**, HRESULT)
-    get_mops : Proc(ITypeInfo*, Int32, UInt8*, HRESULT)
+    get_mops : Proc(ITypeInfo*, Int32, UInt8**, HRESULT)
     get_containing_type_lib : Proc(ITypeInfo*, ITypeLib*, UInt32*, HRESULT)
     release_type_attr : Proc(ITypeInfo*, TYPEATTR*, Void)
     release_func_desc : Proc(ITypeInfo*, FUNCDESC*, Void)
@@ -2468,17 +2468,17 @@ lib LibWin32
     get_type_comp : Proc(ITypeInfo2*, ITypeComp*, HRESULT)
     get_func_desc : Proc(ITypeInfo2*, UInt32, FUNCDESC**, HRESULT)
     get_var_desc : Proc(ITypeInfo2*, UInt32, VARDESC**, HRESULT)
-    get_names : Proc(ITypeInfo2*, Int32, UInt8*, UInt32, UInt32*, HRESULT)
+    get_names : Proc(ITypeInfo2*, Int32, UInt8**, UInt32, UInt32*, HRESULT)
     get_ref_type_of_impl_type : Proc(ITypeInfo2*, UInt32, UInt32*, HRESULT)
     get_impl_type_flags : Proc(ITypeInfo2*, UInt32, Int32*, HRESULT)
     get_i_ds_of_names : Proc(ITypeInfo2*, LibC::LPWSTR*, UInt32, Int32*, HRESULT)
     invoke : Proc(ITypeInfo2*, Void*, Int32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_documentation : Proc(ITypeInfo2*, Int32, UInt8*, UInt8*, UInt32*, UInt8*, HRESULT)
-    get_dll_entry : Proc(ITypeInfo2*, Int32, INVOKEKIND, UInt8*, UInt8*, UInt16*, HRESULT)
+    get_documentation : Proc(ITypeInfo2*, Int32, UInt8**, UInt8**, UInt32*, UInt8**, HRESULT)
+    get_dll_entry : Proc(ITypeInfo2*, Int32, INVOKEKIND, UInt8**, UInt8**, UInt16*, HRESULT)
     get_ref_type_info : Proc(ITypeInfo2*, UInt32, ITypeInfo*, HRESULT)
     address_of_member : Proc(ITypeInfo2*, Int32, INVOKEKIND, Void**, HRESULT)
     create_instance : Proc(ITypeInfo2*, IUnknown, Guid*, Void**, HRESULT)
-    get_mops : Proc(ITypeInfo2*, Int32, UInt8*, HRESULT)
+    get_mops : Proc(ITypeInfo2*, Int32, UInt8**, HRESULT)
     get_containing_type_lib : Proc(ITypeInfo2*, ITypeLib*, UInt32*, HRESULT)
     release_type_attr : Proc(ITypeInfo2*, TYPEATTR*, Void)
     release_func_desc : Proc(ITypeInfo2*, FUNCDESC*, Void)
@@ -2492,7 +2492,7 @@ lib LibWin32
     get_param_cust_data : Proc(ITypeInfo2*, UInt32, UInt32, Guid*, VARIANT*, HRESULT)
     get_var_cust_data : Proc(ITypeInfo2*, UInt32, Guid*, VARIANT*, HRESULT)
     get_impl_type_cust_data : Proc(ITypeInfo2*, UInt32, Guid*, VARIANT*, HRESULT)
-    get_documentation2 : Proc(ITypeInfo2*, Int32, UInt32, UInt8*, UInt32*, UInt8*, HRESULT)
+    get_documentation2 : Proc(ITypeInfo2*, Int32, UInt32, UInt8**, UInt32*, UInt8**, HRESULT)
     get_all_cust_data : Proc(ITypeInfo2*, CUSTDATA*, HRESULT)
     get_all_func_cust_data : Proc(ITypeInfo2*, UInt32, CUSTDATA*, HRESULT)
     get_all_param_cust_data : Proc(ITypeInfo2*, UInt32, UInt32, CUSTDATA*, HRESULT)
@@ -2514,7 +2514,7 @@ lib LibWin32
     get_type_info_of_guid : Proc(ITypeLib*, Guid*, ITypeInfo*, HRESULT)
     get_lib_attr : Proc(ITypeLib*, TLIBATTR**, HRESULT)
     get_type_comp : Proc(ITypeLib*, ITypeComp*, HRESULT)
-    get_documentation : Proc(ITypeLib*, Int32, UInt8*, UInt8*, UInt32*, UInt8*, HRESULT)
+    get_documentation : Proc(ITypeLib*, Int32, UInt8**, UInt8**, UInt32*, UInt8**, HRESULT)
     is_name : Proc(ITypeLib*, LibC::LPWSTR, UInt32, LibC::BOOL*, HRESULT)
     find_name : Proc(ITypeLib*, LibC::LPWSTR, UInt32, ITypeInfo*, Int32*, UInt16*, HRESULT)
     release_t_lib_attr : Proc(ITypeLib*, TLIBATTR*, Void)
@@ -2534,13 +2534,13 @@ lib LibWin32
     get_type_info_of_guid : Proc(ITypeLib2*, Guid*, ITypeInfo*, HRESULT)
     get_lib_attr : Proc(ITypeLib2*, TLIBATTR**, HRESULT)
     get_type_comp : Proc(ITypeLib2*, ITypeComp*, HRESULT)
-    get_documentation : Proc(ITypeLib2*, Int32, UInt8*, UInt8*, UInt32*, UInt8*, HRESULT)
+    get_documentation : Proc(ITypeLib2*, Int32, UInt8**, UInt8**, UInt32*, UInt8**, HRESULT)
     is_name : Proc(ITypeLib2*, LibC::LPWSTR, UInt32, LibC::BOOL*, HRESULT)
     find_name : Proc(ITypeLib2*, LibC::LPWSTR, UInt32, ITypeInfo*, Int32*, UInt16*, HRESULT)
     release_t_lib_attr : Proc(ITypeLib2*, TLIBATTR*, Void)
     get_cust_data : Proc(ITypeLib2*, Guid*, VARIANT*, HRESULT)
     get_lib_statistics : Proc(ITypeLib2*, UInt32*, UInt32*, HRESULT)
-    get_documentation2 : Proc(ITypeLib2*, Int32, UInt32, UInt8*, UInt32*, UInt8*, HRESULT)
+    get_documentation2 : Proc(ITypeLib2*, Int32, UInt32, UInt8**, UInt32*, UInt8**, HRESULT)
     get_all_cust_data : Proc(ITypeLib2*, CUSTDATA*, HRESULT)
   end
 
@@ -2553,9 +2553,9 @@ lib LibWin32
     add_ref : Proc(IErrorInfo*, UInt32)
     release : Proc(IErrorInfo*, UInt32)
     get_guid : Proc(IErrorInfo*, Guid*, HRESULT)
-    get_source : Proc(IErrorInfo*, UInt8*, HRESULT)
-    get_description : Proc(IErrorInfo*, UInt8*, HRESULT)
-    get_help_file : Proc(IErrorInfo*, UInt8*, HRESULT)
+    get_source : Proc(IErrorInfo*, UInt8**, HRESULT)
+    get_description : Proc(IErrorInfo*, UInt8**, HRESULT)
+    get_help_file : Proc(IErrorInfo*, UInt8**, HRESULT)
     get_help_context : Proc(IErrorInfo*, UInt32*, HRESULT)
   end
 
@@ -2601,13 +2601,13 @@ lib LibWin32
     add_ref : Proc(ITypeLibRegistration*, UInt32)
     release : Proc(ITypeLibRegistration*, UInt32)
     get_guid : Proc(ITypeLibRegistration*, Guid*, HRESULT)
-    get_version : Proc(ITypeLibRegistration*, UInt8*, HRESULT)
+    get_version : Proc(ITypeLibRegistration*, UInt8**, HRESULT)
     get_lcid : Proc(ITypeLibRegistration*, UInt32*, HRESULT)
-    get_win32_path : Proc(ITypeLibRegistration*, UInt8*, HRESULT)
-    get_win64_path : Proc(ITypeLibRegistration*, UInt8*, HRESULT)
-    get_display_name : Proc(ITypeLibRegistration*, UInt8*, HRESULT)
+    get_win32_path : Proc(ITypeLibRegistration*, UInt8**, HRESULT)
+    get_win64_path : Proc(ITypeLibRegistration*, UInt8**, HRESULT)
+    get_display_name : Proc(ITypeLibRegistration*, UInt8**, HRESULT)
     get_flags : Proc(ITypeLibRegistration*, UInt32*, HRESULT)
-    get_help_dir : Proc(ITypeLibRegistration*, UInt8*, HRESULT)
+    get_help_dir : Proc(ITypeLibRegistration*, UInt8**, HRESULT)
   end
 
   struct ITypeLibRegistration

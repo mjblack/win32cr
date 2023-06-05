@@ -1950,7 +1950,7 @@ lib LibWin32
     set_var_doc_string : Proc(ICreateTypeInfo*, UInt32, LibC::LPWSTR, HRESULT)
     set_func_help_context : Proc(ICreateTypeInfo*, UInt32, UInt32, HRESULT)
     set_var_help_context : Proc(ICreateTypeInfo*, UInt32, UInt32, HRESULT)
-    set_mops : Proc(ICreateTypeInfo*, UInt32, UInt8, HRESULT)
+    set_mops : Proc(ICreateTypeInfo*, UInt32, UInt8*, HRESULT)
     set_type_idldesc : Proc(ICreateTypeInfo*, IDLDESC*, HRESULT)
     lay_out : Proc(ICreateTypeInfo*, HRESULT)
   end
@@ -1983,7 +1983,7 @@ lib LibWin32
     set_var_doc_string : Proc(ICreateTypeInfo2*, UInt32, LibC::LPWSTR, HRESULT)
     set_func_help_context : Proc(ICreateTypeInfo2*, UInt32, UInt32, HRESULT)
     set_var_help_context : Proc(ICreateTypeInfo2*, UInt32, UInt32, HRESULT)
-    set_mops : Proc(ICreateTypeInfo2*, UInt32, UInt8, HRESULT)
+    set_mops : Proc(ICreateTypeInfo2*, UInt32, UInt8*, HRESULT)
     set_type_idldesc : Proc(ICreateTypeInfo2*, IDLDESC*, HRESULT)
     lay_out : Proc(ICreateTypeInfo2*, HRESULT)
     delete_func_desc : Proc(ICreateTypeInfo2*, UInt32, HRESULT)
@@ -2125,14 +2125,14 @@ lib LibWin32
     record_clear : Proc(IRecordInfo*, Void*, HRESULT)
     record_copy : Proc(IRecordInfo*, Void*, Void*, HRESULT)
     get_guid : Proc(IRecordInfo*, Guid*, HRESULT)
-    get_name : Proc(IRecordInfo*, UInt8*, HRESULT)
+    get_name : Proc(IRecordInfo*, UInt8**, HRESULT)
     get_size : Proc(IRecordInfo*, UInt32*, HRESULT)
     get_type_info : Proc(IRecordInfo*, ITypeInfo*, HRESULT)
     get_field : Proc(IRecordInfo*, Void*, LibC::LPWSTR, VARIANT*, HRESULT)
     get_field_no_copy : Proc(IRecordInfo*, Void*, LibC::LPWSTR, VARIANT*, Void**, HRESULT)
     put_field : Proc(IRecordInfo*, UInt32, Void*, LibC::LPWSTR, VARIANT*, HRESULT)
     put_field_no_copy : Proc(IRecordInfo*, UInt32, Void*, LibC::LPWSTR, VARIANT*, HRESULT)
-    get_field_names : Proc(IRecordInfo*, UInt32*, UInt8*, HRESULT)
+    get_field_names : Proc(IRecordInfo*, UInt32*, UInt8**, HRESULT)
     is_matching_type : Proc(IRecordInfo*, IRecordInfo, LibC::BOOL)
     record_create : Proc(IRecordInfo*, Void**)
     record_create_copy : Proc(IRecordInfo*, Void*, Void**, HRESULT)
@@ -2531,8 +2531,8 @@ lib LibWin32
     create_instance : Proc(IClassFactory2*, IUnknown, Guid*, Void**, HRESULT)
     lock_server : Proc(IClassFactory2*, LibC::BOOL, HRESULT)
     get_lic_info : Proc(IClassFactory2*, LICINFO*, HRESULT)
-    request_lic_key : Proc(IClassFactory2*, UInt32, UInt8*, HRESULT)
-    create_instance_lic : Proc(IClassFactory2*, IUnknown, IUnknown, Guid*, UInt8, Void**, HRESULT)
+    request_lic_key : Proc(IClassFactory2*, UInt32, UInt8**, HRESULT)
+    create_instance_lic : Proc(IClassFactory2*, IUnknown, IUnknown, Guid*, UInt8*, Void**, HRESULT)
   end
 
   struct IClassFactory2
@@ -2717,8 +2717,8 @@ lib LibWin32
     query_interface : Proc(IFont*, Guid*, Void**, HRESULT)
     add_ref : Proc(IFont*, UInt32)
     release : Proc(IFont*, UInt32)
-    get_name : Proc(IFont*, UInt8*, HRESULT)
-    put_name : Proc(IFont*, UInt8, HRESULT)
+    get_name : Proc(IFont*, UInt8**, HRESULT)
+    put_name : Proc(IFont*, UInt8*, HRESULT)
     get_size : Proc(IFont*, CY*, HRESULT)
     put_size : Proc(IFont*, CY, HRESULT)
     get_bold : Proc(IFont*, LibC::BOOL*, HRESULT)
@@ -2944,7 +2944,7 @@ lib LibWin32
     add_ref : Proc(IOleUndoUnit*, UInt32)
     release : Proc(IOleUndoUnit*, UInt32)
     do : Proc(IOleUndoUnit*, IOleUndoManager, HRESULT)
-    get_description : Proc(IOleUndoUnit*, UInt8*, HRESULT)
+    get_description : Proc(IOleUndoUnit*, UInt8**, HRESULT)
     get_unit_type : Proc(IOleUndoUnit*, Guid*, Int32*, HRESULT)
     on_next_add : Proc(IOleUndoUnit*, HRESULT)
   end
@@ -2958,7 +2958,7 @@ lib LibWin32
     add_ref : Proc(IOleParentUndoUnit*, UInt32)
     release : Proc(IOleParentUndoUnit*, UInt32)
     do : Proc(IOleParentUndoUnit*, IOleUndoManager, HRESULT)
-    get_description : Proc(IOleParentUndoUnit*, UInt8*, HRESULT)
+    get_description : Proc(IOleParentUndoUnit*, UInt8**, HRESULT)
     get_unit_type : Proc(IOleParentUndoUnit*, Guid*, Int32*, HRESULT)
     on_next_add : Proc(IOleParentUndoUnit*, HRESULT)
     open : Proc(IOleParentUndoUnit*, IOleParentUndoUnit, HRESULT)
@@ -2999,8 +2999,8 @@ lib LibWin32
     redo_to : Proc(IOleUndoManager*, IOleUndoUnit, HRESULT)
     enum_undoable : Proc(IOleUndoManager*, IEnumOleUndoUnits*, HRESULT)
     enum_redoable : Proc(IOleUndoManager*, IEnumOleUndoUnits*, HRESULT)
-    get_last_undo_description : Proc(IOleUndoManager*, UInt8*, HRESULT)
-    get_last_redo_description : Proc(IOleUndoManager*, UInt8*, HRESULT)
+    get_last_undo_description : Proc(IOleUndoManager*, UInt8**, HRESULT)
+    get_last_redo_description : Proc(IOleUndoManager*, UInt8**, HRESULT)
     enable : Proc(IOleUndoManager*, LibC::BOOL, HRESULT)
   end
 
@@ -3037,7 +3037,7 @@ lib LibWin32
     query_interface : Proc(IPerPropertyBrowsing*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPerPropertyBrowsing*, UInt32)
     release : Proc(IPerPropertyBrowsing*, UInt32)
-    get_display_string : Proc(IPerPropertyBrowsing*, Int32, UInt8*, HRESULT)
+    get_display_string : Proc(IPerPropertyBrowsing*, Int32, UInt8**, HRESULT)
     map_property_to_page : Proc(IPerPropertyBrowsing*, Int32, Guid*, HRESULT)
     get_predefined_strings : Proc(IPerPropertyBrowsing*, Int32, CALPOLESTR*, CADWORD*, HRESULT)
     get_predefined_value : Proc(IPerPropertyBrowsing*, Int32, UInt32, VARIANT*, HRESULT)
@@ -3117,7 +3117,7 @@ lib LibWin32
     query_interface : Proc(IVBFormat*, Guid*, Void**, HRESULT)
     add_ref : Proc(IVBFormat*, UInt32)
     release : Proc(IVBFormat*, UInt32)
-    format : Proc(IVBFormat*, VARIANT*, UInt8, Void*, UInt16, Int32, Int16, UInt16, UInt16*, HRESULT)
+    format : Proc(IVBFormat*, VARIANT*, UInt8*, Void*, UInt16, Int32, Int16, UInt16, UInt16*, HRESULT)
   end
 
   struct IVBFormat
@@ -3380,12 +3380,12 @@ lib LibWin32
     get_type_info : Proc(IDispatchEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IDispatchEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IDispatchEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_disp_id : Proc(IDispatchEx*, UInt8, UInt32, Int32*, HRESULT)
+    get_disp_id : Proc(IDispatchEx*, UInt8*, UInt32, Int32*, HRESULT)
     invoke_ex : Proc(IDispatchEx*, Int32, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, IServiceProvider, HRESULT)
-    delete_member_by_name : Proc(IDispatchEx*, UInt8, UInt32, HRESULT)
+    delete_member_by_name : Proc(IDispatchEx*, UInt8*, UInt32, HRESULT)
     delete_member_by_disp_id : Proc(IDispatchEx*, Int32, HRESULT)
     get_member_properties : Proc(IDispatchEx*, Int32, UInt32, UInt32*, HRESULT)
-    get_member_name : Proc(IDispatchEx*, Int32, UInt8*, HRESULT)
+    get_member_name : Proc(IDispatchEx*, Int32, UInt8**, HRESULT)
     get_next_disp_id : Proc(IDispatchEx*, UInt32, Int32, Int32*, HRESULT)
     get_name_space_parent : Proc(IDispatchEx*, IUnknown*, HRESULT)
   end
@@ -3401,9 +3401,9 @@ lib LibWin32
     query_error_info : Proc(IDispError*, Guid, IDispError*, HRESULT)
     get_next : Proc(IDispError*, IDispError*, HRESULT)
     get_hresult : Proc(IDispError*, HRESULT*, HRESULT)
-    get_source : Proc(IDispError*, UInt8*, HRESULT)
-    get_help_info : Proc(IDispError*, UInt8*, UInt32*, HRESULT)
-    get_description : Proc(IDispError*, UInt8*, HRESULT)
+    get_source : Proc(IDispError*, UInt8**, HRESULT)
+    get_help_info : Proc(IDispError*, UInt8**, UInt32*, HRESULT)
+    get_description : Proc(IDispError*, UInt8**, HRESULT)
   end
 
   struct IDispError
@@ -3581,11 +3581,11 @@ lib LibWin32
   # Params # pvargdest : VARIANT* [In],pvarsrc : VARIANT* [In],lcid : UInt32 [In],wflags : UInt16 [In],vt : UInt16 [In]
   fun VariantChangeTypeEx(pvargdest : VARIANT*, pvarsrc : VARIANT*, lcid : UInt32, wflags : UInt16, vt : UInt16) : HRESULT
 
-  # Params # bstr : UInt8 [In],ppsa : SAFEARRAY** [In]
-  fun VectorFromBstr(bstr : UInt8, ppsa : SAFEARRAY**) : HRESULT
+  # Params # bstr : UInt8* [In],ppsa : SAFEARRAY** [In]
+  fun VectorFromBstr(bstr : UInt8*, ppsa : SAFEARRAY**) : HRESULT
 
-  # Params # psa : SAFEARRAY* [In],pbstr : UInt8* [In]
-  fun BstrFromVector(psa : SAFEARRAY*, pbstr : UInt8*) : HRESULT
+  # Params # psa : SAFEARRAY* [In],pbstr : UInt8** [In]
+  fun BstrFromVector(psa : SAFEARRAY*, pbstr : UInt8**) : HRESULT
 
   # Params # sin : Int16 [In],pbout : UInt8* [In]
   fun VarUI1FromI2(sin : Int16, pbout : UInt8*) : HRESULT
@@ -3944,50 +3944,50 @@ lib LibWin32
   # Params # pdecin : DECIMAL* [In],pcyout : CY* [In]
   fun VarCyFromDec(pdecin : DECIMAL*, pcyout : CY*) : HRESULT
 
-  # Params # bval : UInt8 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromUI1(bval : UInt8, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # bval : UInt8 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromUI1(bval : UInt8, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # ival : Int16 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromI2(ival : Int16, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # ival : Int16 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromI2(ival : Int16, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # lin : Int32 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromI4(lin : Int32, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # lin : Int32 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromI4(lin : Int32, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # i64in : Int64 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromI8(i64in : Int64, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # i64in : Int64 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromI8(i64in : Int64, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # fltin : Float32 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromR4(fltin : Float32, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # fltin : Float32 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromR4(fltin : Float32, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # dblin : Float64 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromR8(dblin : Float64, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # dblin : Float64 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromR8(dblin : Float64, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # cyin : CY [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromCy(cyin : CY, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # cyin : CY [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromCy(cyin : CY, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # datein : Float64 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromDate(datein : Float64, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # datein : Float64 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromDate(datein : Float64, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # pdispin : IDispatch [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromDisp(pdispin : IDispatch, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # pdispin : IDispatch [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromDisp(pdispin : IDispatch, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # boolin : Int16 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromBool(boolin : Int16, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # boolin : Int16 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromBool(boolin : Int16, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # cin : CHAR [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromI1(cin : CHAR, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # cin : CHAR [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromI1(cin : CHAR, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # uiin : UInt16 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromUI2(uiin : UInt16, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # uiin : UInt16 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromUI2(uiin : UInt16, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # ulin : UInt32 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromUI4(ulin : UInt32, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # ulin : UInt32 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromUI4(ulin : UInt32, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # ui64in : UInt64 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromUI8(ui64in : UInt64, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # ui64in : UInt64 [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromUI8(ui64in : UInt64, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # pdecin : DECIMAL* [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarBstrFromDec(pdecin : DECIMAL*, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # pdecin : DECIMAL* [In],lcid : UInt32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarBstrFromDec(pdecin : DECIMAL*, lcid : UInt32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
   # Params # bin : UInt8 [In],pboolout : Int16* [In]
   fun VarBoolFromUI1(bin : UInt8, pboolout : Int16*) : HRESULT
@@ -4391,11 +4391,11 @@ lib LibWin32
   # Params # cyleft : CY [In],dblright : Float64 [In]
   fun VarCyCmpR8(cyleft : CY, dblright : Float64) : HRESULT
 
-  # Params # bstrleft : UInt8 [In],bstrright : UInt8 [In],pbstrresult : UInt16** [In]
-  fun VarBstrCat(bstrleft : UInt8, bstrright : UInt8, pbstrresult : UInt16**) : HRESULT
+  # Params # bstrleft : UInt8* [In],bstrright : UInt8* [In],pbstrresult : UInt16** [In]
+  fun VarBstrCat(bstrleft : UInt8*, bstrright : UInt8*, pbstrresult : UInt16**) : HRESULT
 
-  # Params # bstrleft : UInt8 [In],bstrright : UInt8 [In],lcid : UInt32 [In],dwflags : UInt32 [In]
-  fun VarBstrCmp(bstrleft : UInt8, bstrright : UInt8, lcid : UInt32, dwflags : UInt32) : HRESULT
+  # Params # bstrleft : UInt8* [In],bstrright : UInt8* [In],lcid : UInt32 [In],dwflags : UInt32 [In]
+  fun VarBstrCmp(bstrleft : UInt8*, bstrright : UInt8*, lcid : UInt32, dwflags : UInt32) : HRESULT
 
   # Params # dblleft : Float64 [In],dblright : Float64 [In],pdblresult : Float64* [In]
   fun VarR8Pow(dblleft : Float64, dblright : Float64, pdblresult : Float64*) : HRESULT
@@ -4418,29 +4418,29 @@ lib LibWin32
   # Params # lcid : UInt32 [In],prgp : LibC::LPWSTR** [In]
   fun GetAltMonthNames(lcid : UInt32, prgp : LibC::LPWSTR**) : HRESULT
 
-  # Params # pvarin : VARIANT* [In],pstrformat : LibC::LPWSTR [In],ifirstday : Int32 [In],ifirstweek : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarFormat(pvarin : VARIANT*, pstrformat : LibC::LPWSTR, ifirstday : Int32, ifirstweek : Int32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # pvarin : VARIANT* [In],pstrformat : LibC::LPWSTR [In],ifirstday : Int32 [In],ifirstweek : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarFormat(pvarin : VARIANT*, pstrformat : LibC::LPWSTR, ifirstday : Int32, ifirstweek : Int32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # pvarin : VARIANT* [In],inamedformat : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarFormatDateTime(pvarin : VARIANT*, inamedformat : Int32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # pvarin : VARIANT* [In],inamedformat : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarFormatDateTime(pvarin : VARIANT*, inamedformat : Int32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # pvarin : VARIANT* [In],inumdig : Int32 [In],iinclead : Int32 [In],iuseparens : Int32 [In],igroup : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarFormatNumber(pvarin : VARIANT*, inumdig : Int32, iinclead : Int32, iuseparens : Int32, igroup : Int32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # pvarin : VARIANT* [In],inumdig : Int32 [In],iinclead : Int32 [In],iuseparens : Int32 [In],igroup : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarFormatNumber(pvarin : VARIANT*, inumdig : Int32, iinclead : Int32, iuseparens : Int32, igroup : Int32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # pvarin : VARIANT* [In],inumdig : Int32 [In],iinclead : Int32 [In],iuseparens : Int32 [In],igroup : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarFormatPercent(pvarin : VARIANT*, inumdig : Int32, iinclead : Int32, iuseparens : Int32, igroup : Int32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # pvarin : VARIANT* [In],inumdig : Int32 [In],iinclead : Int32 [In],iuseparens : Int32 [In],igroup : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarFormatPercent(pvarin : VARIANT*, inumdig : Int32, iinclead : Int32, iuseparens : Int32, igroup : Int32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # pvarin : VARIANT* [In],inumdig : Int32 [In],iinclead : Int32 [In],iuseparens : Int32 [In],igroup : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarFormatCurrency(pvarin : VARIANT*, inumdig : Int32, iinclead : Int32, iuseparens : Int32, igroup : Int32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # pvarin : VARIANT* [In],inumdig : Int32 [In],iinclead : Int32 [In],iuseparens : Int32 [In],igroup : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarFormatCurrency(pvarin : VARIANT*, inumdig : Int32, iinclead : Int32, iuseparens : Int32, igroup : Int32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # iweekday : Int32 [In],fabbrev : Int32 [In],ifirstday : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarWeekdayName(iweekday : Int32, fabbrev : Int32, ifirstday : Int32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # iweekday : Int32 [In],fabbrev : Int32 [In],ifirstday : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarWeekdayName(iweekday : Int32, fabbrev : Int32, ifirstday : Int32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # imonth : Int32 [In],fabbrev : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8* [In]
-  fun VarMonthName(imonth : Int32, fabbrev : Int32, dwflags : UInt32, pbstrout : UInt8*) : HRESULT
+  # Params # imonth : Int32 [In],fabbrev : Int32 [In],dwflags : UInt32 [In],pbstrout : UInt8** [In]
+  fun VarMonthName(imonth : Int32, fabbrev : Int32, dwflags : UInt32, pbstrout : UInt8**) : HRESULT
 
-  # Params # pvarin : VARIANT* [In],pstrformat : LibC::LPWSTR [In],pbtokcur : UInt8* [In],dwflags : UInt32 [In],pbstrout : UInt8* [In],lcid : UInt32 [In]
-  fun VarFormatFromTokens(pvarin : VARIANT*, pstrformat : LibC::LPWSTR, pbtokcur : UInt8*, dwflags : UInt32, pbstrout : UInt8*, lcid : UInt32) : HRESULT
+  # Params # pvarin : VARIANT* [In],pstrformat : LibC::LPWSTR [In],pbtokcur : UInt8* [In],dwflags : UInt32 [In],pbstrout : UInt8** [In],lcid : UInt32 [In]
+  fun VarFormatFromTokens(pvarin : VARIANT*, pstrformat : LibC::LPWSTR, pbtokcur : UInt8*, dwflags : UInt32, pbstrout : UInt8**, lcid : UInt32) : HRESULT
 
   # Params # pstrformat : LibC::LPWSTR [In],rgbtok : UInt8* [In],cbtok : Int32 [In],ifirstday : Int32 [In],ifirstweek : Int32 [In],lcid : UInt32 [In],pcbactual : Int32* [In]
   fun VarTokenizeFormatString(pstrformat : LibC::LPWSTR, rgbtok : UInt8*, cbtok : Int32, ifirstday : Int32, ifirstweek : Int32, lcid : UInt32, pcbactual : Int32*) : HRESULT
@@ -4748,8 +4748,8 @@ lib LibWin32
   # Params # varfilename : VARIANT [In],xsizedesired : UInt32 [In],ysizedesired : UInt32 [In],dwflags : UInt32 [In],lplpdisppicture : IDispatch* [In]
   fun OleLoadPictureFileEx(varfilename : VARIANT, xsizedesired : UInt32, ysizedesired : UInt32, dwflags : UInt32, lplpdisppicture : IDispatch*) : HRESULT
 
-  # Params # lpdisppicture : IDispatch [In],bstrfilename : UInt8 [In]
-  fun OleSavePictureFile(lpdisppicture : IDispatch, bstrfilename : UInt8) : HRESULT
+  # Params # lpdisppicture : IDispatch [In],bstrfilename : UInt8* [In]
+  fun OleSavePictureFile(lpdisppicture : IDispatch, bstrfilename : UInt8*) : HRESULT
 
   # Params # hinstexe : HINSTANCE [In],hicon : LibC::HANDLE [In]
   fun OleIconToCursor(hinstexe : HINSTANCE, hicon : LibC::HANDLE) : HANDLE

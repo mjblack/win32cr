@@ -98,10 +98,10 @@ lib LibWin32
     query_interface : Proc(IGameExplorer*, Guid*, Void**, HRESULT)
     add_ref : Proc(IGameExplorer*, UInt32)
     release : Proc(IGameExplorer*, UInt32)
-    add_game : Proc(IGameExplorer*, UInt8, UInt8, GAME_INSTALL_SCOPE, Guid*, HRESULT)
+    add_game : Proc(IGameExplorer*, UInt8*, UInt8*, GAME_INSTALL_SCOPE, Guid*, HRESULT)
     remove_game : Proc(IGameExplorer*, Guid, HRESULT)
     update_game : Proc(IGameExplorer*, Guid, HRESULT)
-    verify_access : Proc(IGameExplorer*, UInt8, LibC::BOOL*, HRESULT)
+    verify_access : Proc(IGameExplorer*, UInt8*, LibC::BOOL*, HRESULT)
   end
 
   struct IGameExplorer

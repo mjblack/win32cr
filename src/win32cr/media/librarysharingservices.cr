@@ -23,7 +23,7 @@ lib LibWin32
     get_type_info : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IWindowsMediaLibrarySharingDeviceProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IWindowsMediaLibrarySharingDeviceProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt8*, HRESULT)
+    get_name : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt8**, HRESULT)
     get_value : Proc(IWindowsMediaLibrarySharingDeviceProperty*, VARIANT*, HRESULT)
   end
 
@@ -41,7 +41,7 @@ lib LibWin32
     invoke : Proc(IWindowsMediaLibrarySharingDeviceProperties*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_item : Proc(IWindowsMediaLibrarySharingDeviceProperties*, Int32, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)
     get_count : Proc(IWindowsMediaLibrarySharingDeviceProperties*, Int32*, HRESULT)
-    get_property : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt8, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)
+    get_property : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt8*, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)
   end
 
   struct IWindowsMediaLibrarySharingDeviceProperties
@@ -56,7 +56,7 @@ lib LibWin32
     get_type_info : Proc(IWindowsMediaLibrarySharingDevice*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IWindowsMediaLibrarySharingDevice*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IWindowsMediaLibrarySharingDevice*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_device_id : Proc(IWindowsMediaLibrarySharingDevice*, UInt8*, HRESULT)
+    get_device_id : Proc(IWindowsMediaLibrarySharingDevice*, UInt8**, HRESULT)
     get_authorization : Proc(IWindowsMediaLibrarySharingDevice*, WindowsMediaLibrarySharingDeviceAuthorizationStatus*, HRESULT)
     put_authorization : Proc(IWindowsMediaLibrarySharingDevice*, WindowsMediaLibrarySharingDeviceAuthorizationStatus, HRESULT)
     get_properties : Proc(IWindowsMediaLibrarySharingDevice*, IWindowsMediaLibrarySharingDeviceProperties*, HRESULT)
@@ -76,7 +76,7 @@ lib LibWin32
     invoke : Proc(IWindowsMediaLibrarySharingDevices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_item : Proc(IWindowsMediaLibrarySharingDevices*, Int32, IWindowsMediaLibrarySharingDevice*, HRESULT)
     get_count : Proc(IWindowsMediaLibrarySharingDevices*, Int32*, HRESULT)
-    get_device : Proc(IWindowsMediaLibrarySharingDevices*, UInt8, IWindowsMediaLibrarySharingDevice*, HRESULT)
+    get_device : Proc(IWindowsMediaLibrarySharingDevices*, UInt8*, IWindowsMediaLibrarySharingDevice*, HRESULT)
   end
 
   struct IWindowsMediaLibrarySharingDevices
@@ -91,23 +91,23 @@ lib LibWin32
     get_type_info : Proc(IWindowsMediaLibrarySharingServices*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IWindowsMediaLibrarySharingServices*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IWindowsMediaLibrarySharingServices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    show_share_media_cpl : Proc(IWindowsMediaLibrarySharingServices*, UInt8, HRESULT)
+    show_share_media_cpl : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, HRESULT)
     get_user_home_media_sharing_state : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
     put_user_home_media_sharing_state : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
-    get_user_home_media_sharing_library_name : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, HRESULT)
-    put_user_home_media_sharing_library_name : Proc(IWindowsMediaLibrarySharingServices*, UInt8, HRESULT)
+    get_user_home_media_sharing_library_name : Proc(IWindowsMediaLibrarySharingServices*, UInt8**, HRESULT)
+    put_user_home_media_sharing_library_name : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, HRESULT)
     get_computer_home_media_sharing_allowed_state : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
     put_computer_home_media_sharing_allowed_state : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
     get_user_internet_media_sharing_state : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
     put_user_internet_media_sharing_state : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
     get_computer_internet_media_sharing_allowed_state : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
     put_computer_internet_media_sharing_allowed_state : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
-    get_internet_media_sharing_security_group : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, HRESULT)
-    put_internet_media_sharing_security_group : Proc(IWindowsMediaLibrarySharingServices*, UInt8, HRESULT)
+    get_internet_media_sharing_security_group : Proc(IWindowsMediaLibrarySharingServices*, UInt8**, HRESULT)
+    put_internet_media_sharing_security_group : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, HRESULT)
     get_allow_sharing_to_all_devices : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
     put_allow_sharing_to_all_devices : Proc(IWindowsMediaLibrarySharingServices*, Int16, HRESULT)
-    set_default_authorization : Proc(IWindowsMediaLibrarySharingServices*, UInt8, UInt8, Int16, HRESULT)
-    set_authorization_state : Proc(IWindowsMediaLibrarySharingServices*, UInt8, Int16, HRESULT)
+    set_default_authorization : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, UInt8*, Int16, HRESULT)
+    set_authorization_state : Proc(IWindowsMediaLibrarySharingServices*, UInt8*, Int16, HRESULT)
     get_all_devices : Proc(IWindowsMediaLibrarySharingServices*, IWindowsMediaLibrarySharingDevices*, HRESULT)
     get_custom_settings_applied : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
   end

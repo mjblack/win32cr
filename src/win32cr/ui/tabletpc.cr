@@ -1660,7 +1660,7 @@ lib LibWin32
     get_type_info : Proc(IInkExtendedProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkExtendedProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkExtendedProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_guid : Proc(IInkExtendedProperty*, UInt8*, HRESULT)
+    get_guid : Proc(IInkExtendedProperty*, UInt8**, HRESULT)
     get_data : Proc(IInkExtendedProperty*, VARIANT*, HRESULT)
     put_data : Proc(IInkExtendedProperty*, VARIANT, HRESULT)
   end
@@ -1680,10 +1680,10 @@ lib LibWin32
     get_count : Proc(IInkExtendedProperties*, Int32*, HRESULT)
     get__new_enum : Proc(IInkExtendedProperties*, IUnknown*, HRESULT)
     item : Proc(IInkExtendedProperties*, VARIANT, IInkExtendedProperty*, HRESULT)
-    add : Proc(IInkExtendedProperties*, UInt8, VARIANT, IInkExtendedProperty*, HRESULT)
+    add : Proc(IInkExtendedProperties*, UInt8*, VARIANT, IInkExtendedProperty*, HRESULT)
     remove : Proc(IInkExtendedProperties*, VARIANT, HRESULT)
     clear : Proc(IInkExtendedProperties*, HRESULT)
-    does_property_exist : Proc(IInkExtendedProperties*, UInt8, Int16*, HRESULT)
+    does_property_exist : Proc(IInkExtendedProperties*, UInt8*, Int16*, HRESULT)
   end
 
   struct IInkExtendedProperties
@@ -1785,7 +1785,7 @@ lib LibWin32
     get_type_info : Proc(IInkCursor*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkCursor*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkCursor*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IInkCursor*, UInt8*, HRESULT)
+    get_name : Proc(IInkCursor*, UInt8**, HRESULT)
     get_id : Proc(IInkCursor*, Int32*, HRESULT)
     get_inverted : Proc(IInkCursor*, Int16*, HRESULT)
     get_drawing_attributes : Proc(IInkCursor*, IInkDrawingAttributes*, HRESULT)
@@ -1823,8 +1823,8 @@ lib LibWin32
     get_type_info : Proc(IInkCursorButton*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkCursorButton*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkCursorButton*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IInkCursorButton*, UInt8*, HRESULT)
-    get_id : Proc(IInkCursorButton*, UInt8*, HRESULT)
+    get_name : Proc(IInkCursorButton*, UInt8**, HRESULT)
+    get_id : Proc(IInkCursorButton*, UInt8**, HRESULT)
     get_state : Proc(IInkCursorButton*, InkCursorButtonState*, HRESULT)
   end
 
@@ -1857,12 +1857,12 @@ lib LibWin32
     get_type_info : Proc(IInkTablet*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkTablet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkTablet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IInkTablet*, UInt8*, HRESULT)
-    get_plug_and_play_id : Proc(IInkTablet*, UInt8*, HRESULT)
+    get_name : Proc(IInkTablet*, UInt8**, HRESULT)
+    get_plug_and_play_id : Proc(IInkTablet*, UInt8**, HRESULT)
     get_maximum_input_rectangle : Proc(IInkTablet*, IInkRectangle*, HRESULT)
     get_hardware_capabilities : Proc(IInkTablet*, TabletHardwareCapabilities*, HRESULT)
-    is_packet_property_supported : Proc(IInkTablet*, UInt8, Int16*, HRESULT)
-    get_property_metrics : Proc(IInkTablet*, UInt8, Int32*, Int32*, TabletPropertyMetricUnit*, Float32*, HRESULT)
+    is_packet_property_supported : Proc(IInkTablet*, UInt8*, Int16*, HRESULT)
+    get_property_metrics : Proc(IInkTablet*, UInt8*, Int32*, Int32*, TabletPropertyMetricUnit*, Float32*, HRESULT)
   end
 
   struct IInkTablet
@@ -1912,7 +1912,7 @@ lib LibWin32
     get__new_enum : Proc(IInkTablets*, IUnknown*, HRESULT)
     get_default_tablet : Proc(IInkTablets*, IInkTablet*, HRESULT)
     item : Proc(IInkTablets*, Int32, IInkTablet*, HRESULT)
-    is_packet_property_supported : Proc(IInkTablets*, UInt8, Int16*, HRESULT)
+    is_packet_property_supported : Proc(IInkTablets*, UInt8*, Int16*, HRESULT)
   end
 
   struct IInkTablets
@@ -1947,12 +1947,12 @@ lib LibWin32
     hit_test_circle : Proc(IInkStrokeDisp*, Int32, Int32, Float32, Int16*, HRESULT)
     nearest_point : Proc(IInkStrokeDisp*, Int32, Int32, Float32*, Float32*, HRESULT)
     split : Proc(IInkStrokeDisp*, Float32, IInkStrokeDisp*, HRESULT)
-    get_packet_description_property_metrics : Proc(IInkStrokeDisp*, UInt8, Int32*, Int32*, TabletPropertyMetricUnit*, Float32*, HRESULT)
+    get_packet_description_property_metrics : Proc(IInkStrokeDisp*, UInt8*, Int32*, Int32*, TabletPropertyMetricUnit*, Float32*, HRESULT)
     get_points : Proc(IInkStrokeDisp*, Int32, Int32, VARIANT*, HRESULT)
     set_points : Proc(IInkStrokeDisp*, VARIANT, Int32, Int32, Int32*, HRESULT)
     get_packet_data : Proc(IInkStrokeDisp*, Int32, Int32, VARIANT*, HRESULT)
-    get_packet_values_by_property : Proc(IInkStrokeDisp*, UInt8, Int32, Int32, VARIANT*, HRESULT)
-    set_packet_values_by_property : Proc(IInkStrokeDisp*, UInt8, VARIANT, Int32, Int32, Int32*, HRESULT)
+    get_packet_values_by_property : Proc(IInkStrokeDisp*, UInt8*, Int32, Int32, VARIANT*, HRESULT)
+    set_packet_values_by_property : Proc(IInkStrokeDisp*, UInt8*, VARIANT, Int32, Int32, Int32*, HRESULT)
     get_flattened_bezier_points : Proc(IInkStrokeDisp*, Int32, VARIANT*, HRESULT)
     transform : Proc(IInkStrokeDisp*, IInkTransform, Int16, HRESULT)
     scale_to_rectangle : Proc(IInkStrokeDisp*, IInkRectangle, HRESULT)
@@ -1978,7 +1978,7 @@ lib LibWin32
     get__new_enum : Proc(IInkStrokes*, IUnknown*, HRESULT)
     get_ink : Proc(IInkStrokes*, IInkDisp*, HRESULT)
     get_recognition_result : Proc(IInkStrokes*, IInkRecognitionResult*, HRESULT)
-    to_string : Proc(IInkStrokes*, UInt8*, HRESULT)
+    to_string : Proc(IInkStrokes*, UInt8**, HRESULT)
     item : Proc(IInkStrokes*, Int32, IInkStrokeDisp*, HRESULT)
     add : Proc(IInkStrokes*, IInkStrokeDisp, HRESULT)
     add_strokes : Proc(IInkStrokes*, IInkStrokes, HRESULT)
@@ -2011,7 +2011,7 @@ lib LibWin32
     get_count : Proc(IInkCustomStrokes*, Int32*, HRESULT)
     get__new_enum : Proc(IInkCustomStrokes*, IUnknown*, HRESULT)
     item : Proc(IInkCustomStrokes*, VARIANT, IInkStrokes*, HRESULT)
-    add : Proc(IInkCustomStrokes*, UInt8, IInkStrokes, HRESULT)
+    add : Proc(IInkCustomStrokes*, UInt8*, IInkStrokes, HRESULT)
     remove : Proc(IInkCustomStrokes*, VARIANT, HRESULT)
     clear : Proc(IInkCustomStrokes*, HRESULT)
   end
@@ -2361,8 +2361,8 @@ lib LibWin32
     get_type_info : Proc(IInkRecognizer*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkRecognizer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkRecognizer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IInkRecognizer*, UInt8*, HRESULT)
-    get_vendor : Proc(IInkRecognizer*, UInt8*, HRESULT)
+    get_name : Proc(IInkRecognizer*, UInt8**, HRESULT)
+    get_vendor : Proc(IInkRecognizer*, UInt8**, HRESULT)
     get_capabilities : Proc(IInkRecognizer*, InkRecognizerCapabilities*, HRESULT)
     get_languages : Proc(IInkRecognizer*, VARIANT*, HRESULT)
     get_supported_properties : Proc(IInkRecognizer*, VARIANT*, HRESULT)
@@ -2382,7 +2382,7 @@ lib LibWin32
     get_type_info : Proc(IInkRecognizer2*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkRecognizer2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkRecognizer2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(IInkRecognizer2*, UInt8*, HRESULT)
+    get_id : Proc(IInkRecognizer2*, UInt8**, HRESULT)
     get_unicode_ranges : Proc(IInkRecognizer2*, VARIANT*, HRESULT)
   end
 
@@ -2434,14 +2434,14 @@ lib LibWin32
     putref_strokes : Proc(IInkRecognizerContext*, IInkStrokes, HRESULT)
     get_character_auto_completion_mode : Proc(IInkRecognizerContext*, InkRecognizerCharacterAutoCompletionMode*, HRESULT)
     put_character_auto_completion_mode : Proc(IInkRecognizerContext*, InkRecognizerCharacterAutoCompletionMode, HRESULT)
-    get_factoid : Proc(IInkRecognizerContext*, UInt8*, HRESULT)
-    put_factoid : Proc(IInkRecognizerContext*, UInt8, HRESULT)
+    get_factoid : Proc(IInkRecognizerContext*, UInt8**, HRESULT)
+    put_factoid : Proc(IInkRecognizerContext*, UInt8*, HRESULT)
     get_guide : Proc(IInkRecognizerContext*, IInkRecognizerGuide*, HRESULT)
     putref_guide : Proc(IInkRecognizerContext*, IInkRecognizerGuide, HRESULT)
-    get_prefix_text : Proc(IInkRecognizerContext*, UInt8*, HRESULT)
-    put_prefix_text : Proc(IInkRecognizerContext*, UInt8, HRESULT)
-    get_suffix_text : Proc(IInkRecognizerContext*, UInt8*, HRESULT)
-    put_suffix_text : Proc(IInkRecognizerContext*, UInt8, HRESULT)
+    get_prefix_text : Proc(IInkRecognizerContext*, UInt8**, HRESULT)
+    put_prefix_text : Proc(IInkRecognizerContext*, UInt8*, HRESULT)
+    get_suffix_text : Proc(IInkRecognizerContext*, UInt8**, HRESULT)
+    put_suffix_text : Proc(IInkRecognizerContext*, UInt8*, HRESULT)
     get_recognition_flags : Proc(IInkRecognizerContext*, InkRecognitionModes*, HRESULT)
     put_recognition_flags : Proc(IInkRecognizerContext*, InkRecognitionModes, HRESULT)
     get_word_list : Proc(IInkRecognizerContext*, IInkWordList*, HRESULT)
@@ -2453,7 +2453,7 @@ lib LibWin32
     background_recognize : Proc(IInkRecognizerContext*, VARIANT, HRESULT)
     background_recognize_with_alternates : Proc(IInkRecognizerContext*, VARIANT, HRESULT)
     clone : Proc(IInkRecognizerContext*, IInkRecognizerContext*, HRESULT)
-    is_string_supported : Proc(IInkRecognizerContext*, UInt8, Int16*, HRESULT)
+    is_string_supported : Proc(IInkRecognizerContext*, UInt8*, Int16*, HRESULT)
   end
 
   struct IInkRecognizerContext
@@ -2484,7 +2484,7 @@ lib LibWin32
     get_type_info : Proc(IInkRecognitionResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkRecognitionResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkRecognitionResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_top_string : Proc(IInkRecognitionResult*, UInt8*, HRESULT)
+    get_top_string : Proc(IInkRecognitionResult*, UInt8**, HRESULT)
     get_top_alternate : Proc(IInkRecognitionResult*, IInkRecognitionAlternate*, HRESULT)
     get_top_confidence : Proc(IInkRecognitionResult*, InkRecognitionConfidence*, HRESULT)
     get_strokes : Proc(IInkRecognitionResult*, IInkStrokes*, HRESULT)
@@ -2505,7 +2505,7 @@ lib LibWin32
     get_type_info : Proc(IInkRecognitionAlternate*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkRecognitionAlternate*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkRecognitionAlternate*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_string : Proc(IInkRecognitionAlternate*, UInt8*, HRESULT)
+    get_string : Proc(IInkRecognitionAlternate*, UInt8**, HRESULT)
     get_confidence : Proc(IInkRecognitionAlternate*, InkRecognitionConfidence*, HRESULT)
     get_baseline : Proc(IInkRecognitionAlternate*, VARIANT*, HRESULT)
     get_midline : Proc(IInkRecognitionAlternate*, VARIANT*, HRESULT)
@@ -2518,8 +2518,8 @@ lib LibWin32
     get_strokes_from_stroke_ranges : Proc(IInkRecognitionAlternate*, IInkStrokes, IInkStrokes*, HRESULT)
     get_strokes_from_text_range : Proc(IInkRecognitionAlternate*, Int32*, Int32*, IInkStrokes*, HRESULT)
     get_text_range_from_strokes : Proc(IInkRecognitionAlternate*, IInkStrokes, Int32*, Int32*, HRESULT)
-    alternates_with_constant_property_values : Proc(IInkRecognitionAlternate*, UInt8, IInkRecognitionAlternates*, HRESULT)
-    get_property_value : Proc(IInkRecognitionAlternate*, UInt8, VARIANT*, HRESULT)
+    alternates_with_constant_property_values : Proc(IInkRecognitionAlternate*, UInt8*, IInkRecognitionAlternates*, HRESULT)
+    get_property_value : Proc(IInkRecognitionAlternate*, UInt8*, VARIANT*, HRESULT)
   end
 
   struct IInkRecognitionAlternate
@@ -2578,8 +2578,8 @@ lib LibWin32
     get_type_info : Proc(IInkWordList*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkWordList*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkWordList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    add_word : Proc(IInkWordList*, UInt8, HRESULT)
-    remove_word : Proc(IInkWordList*, UInt8, HRESULT)
+    add_word : Proc(IInkWordList*, UInt8*, HRESULT)
+    remove_word : Proc(IInkWordList*, UInt8*, HRESULT)
     merge : Proc(IInkWordList*, IInkWordList, HRESULT)
   end
 
@@ -2595,7 +2595,7 @@ lib LibWin32
     get_type_info : Proc(IInkWordList2*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IInkWordList2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IInkWordList2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    add_words : Proc(IInkWordList2*, UInt8, HRESULT)
+    add_words : Proc(IInkWordList2*, UInt8*, HRESULT)
   end
 
   struct IInkWordList2
@@ -2693,7 +2693,7 @@ lib LibWin32
     invoke : Proc(IInkDivisionUnit*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_strokes : Proc(IInkDivisionUnit*, IInkStrokes*, HRESULT)
     get_division_type : Proc(IInkDivisionUnit*, InkDivisionType*, HRESULT)
-    get_recognized_string : Proc(IInkDivisionUnit*, UInt8*, HRESULT)
+    get_recognized_string : Proc(IInkDivisionUnit*, UInt8**, HRESULT)
     get_rotation_transform : Proc(IInkDivisionUnit*, IInkTransform*, HRESULT)
   end
 
@@ -2727,8 +2727,8 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPenInputPanel*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPenInputPanel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_busy : Proc(IPenInputPanel*, Int16*, HRESULT)
-    get_factoid : Proc(IPenInputPanel*, UInt8*, HRESULT)
-    put_factoid : Proc(IPenInputPanel*, UInt8, HRESULT)
+    get_factoid : Proc(IPenInputPanel*, UInt8**, HRESULT)
+    put_factoid : Proc(IPenInputPanel*, UInt8*, HRESULT)
     get_attached_edit_window : Proc(IPenInputPanel*, Int32*, HRESULT)
     put_attached_edit_window : Proc(IPenInputPanel*, Int32, HRESULT)
     get_current_panel : Proc(IPenInputPanel*, PanelType*, HRESULT)
@@ -2886,8 +2886,8 @@ lib LibWin32
     put_recognition_timeout : Proc(IInkEdit*, Int32, HRESULT)
     get_recognizer : Proc(IInkEdit*, IInkRecognizer*, HRESULT)
     putref_recognizer : Proc(IInkEdit*, IInkRecognizer, HRESULT)
-    get_factoid : Proc(IInkEdit*, UInt8*, HRESULT)
-    put_factoid : Proc(IInkEdit*, UInt8, HRESULT)
+    get_factoid : Proc(IInkEdit*, UInt8**, HRESULT)
+    put_factoid : Proc(IInkEdit*, UInt8*, HRESULT)
     get_sel_inks : Proc(IInkEdit*, VARIANT*, HRESULT)
     put_sel_inks : Proc(IInkEdit*, VARIANT, HRESULT)
     get_sel_inks_display_mode : Proc(IInkEdit*, InkDisplayMode*, HRESULT)
@@ -2904,8 +2904,8 @@ lib LibWin32
     get_hwnd : Proc(IInkEdit*, UInt32*, HRESULT)
     get_font : Proc(IInkEdit*, IFontDisp*, HRESULT)
     putref_font : Proc(IInkEdit*, IFontDisp, HRESULT)
-    get_text : Proc(IInkEdit*, UInt8*, HRESULT)
-    put_text : Proc(IInkEdit*, UInt8, HRESULT)
+    get_text : Proc(IInkEdit*, UInt8**, HRESULT)
+    put_text : Proc(IInkEdit*, UInt8*, HRESULT)
     get_mouse_icon : Proc(IInkEdit*, IPictureDisp*, HRESULT)
     put_mouse_icon : Proc(IInkEdit*, IPictureDisp, HRESULT)
     putref_mouse_icon : Proc(IInkEdit*, IPictureDisp, HRESULT)
@@ -2939,16 +2939,16 @@ lib LibWin32
     put_sel_font_size : Proc(IInkEdit*, VARIANT, HRESULT)
     get_sel_char_offset : Proc(IInkEdit*, VARIANT*, HRESULT)
     put_sel_char_offset : Proc(IInkEdit*, VARIANT, HRESULT)
-    get_text_rtf : Proc(IInkEdit*, UInt8*, HRESULT)
-    put_text_rtf : Proc(IInkEdit*, UInt8, HRESULT)
+    get_text_rtf : Proc(IInkEdit*, UInt8**, HRESULT)
+    put_text_rtf : Proc(IInkEdit*, UInt8*, HRESULT)
     get_sel_start : Proc(IInkEdit*, Int32*, HRESULT)
     put_sel_start : Proc(IInkEdit*, Int32, HRESULT)
     get_sel_length : Proc(IInkEdit*, Int32*, HRESULT)
     put_sel_length : Proc(IInkEdit*, Int32, HRESULT)
-    get_sel_text : Proc(IInkEdit*, UInt8*, HRESULT)
-    put_sel_text : Proc(IInkEdit*, UInt8, HRESULT)
-    get_sel_rtf : Proc(IInkEdit*, UInt8*, HRESULT)
-    put_sel_rtf : Proc(IInkEdit*, UInt8, HRESULT)
+    get_sel_text : Proc(IInkEdit*, UInt8**, HRESULT)
+    put_sel_text : Proc(IInkEdit*, UInt8*, HRESULT)
+    get_sel_rtf : Proc(IInkEdit*, UInt8**, HRESULT)
+    put_sel_rtf : Proc(IInkEdit*, UInt8*, HRESULT)
     refresh : Proc(IInkEdit*, HRESULT)
   end
 
@@ -2985,15 +2985,15 @@ lib LibWin32
     set_position : Proc(IMathInputControl*, Int32, Int32, Int32, Int32, HRESULT)
     clear : Proc(IMathInputControl*, HRESULT)
     set_custom_paint : Proc(IMathInputControl*, Int32, Int16, HRESULT)
-    set_caption_text : Proc(IMathInputControl*, UInt8, HRESULT)
+    set_caption_text : Proc(IMathInputControl*, UInt8*, HRESULT)
     load_ink : Proc(IMathInputControl*, IInkDisp, HRESULT)
     set_owner_window : Proc(IMathInputControl*, LibC::IntPtrT, HRESULT)
     enable_extended_buttons : Proc(IMathInputControl*, Int16, HRESULT)
     get_preview_height : Proc(IMathInputControl*, Int32*, HRESULT)
     set_preview_height : Proc(IMathInputControl*, Int32, HRESULT)
     enable_auto_grow : Proc(IMathInputControl*, Int16, HRESULT)
-    add_function_name : Proc(IMathInputControl*, UInt8, HRESULT)
-    remove_function_name : Proc(IMathInputControl*, UInt8, HRESULT)
+    add_function_name : Proc(IMathInputControl*, UInt8*, HRESULT)
+    remove_function_name : Proc(IMathInputControl*, UInt8*, HRESULT)
     get_hover_icon : Proc(IMathInputControl*, IPictureDisp*, HRESULT)
   end
 
@@ -3234,7 +3234,7 @@ lib LibWin32
     query_interface : Proc(ITipAutoCompleteProvider*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITipAutoCompleteProvider*, UInt32)
     release : Proc(ITipAutoCompleteProvider*, UInt32)
-    update_pending_text : Proc(ITipAutoCompleteProvider*, UInt8, HRESULT)
+    update_pending_text : Proc(ITipAutoCompleteProvider*, UInt8*, HRESULT)
     show : Proc(ITipAutoCompleteProvider*, LibC::BOOL, HRESULT)
   end
 

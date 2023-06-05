@@ -8,7 +8,7 @@
 lib LibWin32
   alias BOOL = LibC::BOOL
   alias BOOLEAN = UInt8
-  alias BSTR = LibC::WCHAR*
+  alias BSTR = UInt8**
   alias HANDLE = LibC::HANDLE
   alias HINSTANCE = LibC::IntPtrT
   alias HRESULT = Int32
@@ -9922,34 +9922,34 @@ lib LibWin32
 
 
   # Params # psz : LibC::LPWSTR [In]
-  fun SysAllocString(psz : LibC::LPWSTR) : BSTR
+  fun SysAllocString(psz : LibC::LPWSTR) : UInt8*
 
-  # Params # pbstr : BSTR* [In],psz : LibC::LPWSTR [In]
-  fun SysReAllocString(pbstr : BSTR*, psz : LibC::LPWSTR) : Int32
+  # Params # pbstr : UInt8** [In],psz : LibC::LPWSTR [In]
+  fun SysReAllocString(pbstr : UInt8**, psz : LibC::LPWSTR) : Int32
 
-  # Params # strin : LibC::WCHAR* [In],ui : UInt32 [In]
-  fun SysAllocStringLen(strin : LibC::WCHAR*, ui : UInt32) : UInt8
+  # Params # strin : Char* [In],ui : UInt32 [In]
+  fun SysAllocStringLen(strin : Char*, ui : UInt32) : UInt8*
 
-  # Params # pbstr : BSTR* [In],psz : LibC::LPWSTR [In],len : UInt32 [In]
-  fun SysReAllocStringLen(pbstr : BSTR*, psz : LibC::LPWSTR, len : UInt32) : Int32
+  # Params # pbstr : UInt8** [In],psz : LibC::LPWSTR [In],len : UInt32 [In]
+  fun SysReAllocStringLen(pbstr : UInt8**, psz : LibC::LPWSTR, len : UInt32) : Int32
 
-  # Params # bstrstring : BSTR [In]
-  fun SysAddRefString(bstrstring : BSTR) : HRESULT
+  # Params # bstrstring : UInt8* [In]
+  fun SysAddRefString(bstrstring : UInt8*) : HRESULT
 
-  # Params # bstrstring : BSTR [In]
-  fun SysReleaseString(bstrstring : BSTR)
+  # Params # bstrstring : UInt8* [In]
+  fun SysReleaseString(bstrstring : UInt8*)
 
-  # Params # bstrstring : BSTR [In]
-  fun SysFreeString(bstrstring : BSTR)
+  # Params # bstrstring : UInt8* [In]
+  fun SysFreeString(bstrstring : UInt8*)
 
-  # Params # pbstr : BSTR [In]
-  fun SysStringLen(pbstr : BSTR*) : UInt32
+  # Params # pbstr : UInt8* [In]
+  fun SysStringLen(pbstr : UInt8*) : UInt32
 
-  # Params # bstr : BSTR [In]
-  fun SysStringByteLen(bstr : BSTR) : UInt32
+  # Params # bstr : UInt8* [In]
+  fun SysStringByteLen(bstr : UInt8*) : UInt32
 
   # Params # psz : PSTR [In],len : UInt32 [In]
-  fun SysAllocStringByteLen(psz : PSTR, len : UInt32) : BSTR
+  fun SysAllocStringByteLen(psz : PSTR, len : UInt32) : UInt8*
 
   # Params # hobject : LibC::HANDLE [In]
   # Commented out because function is part of Lib C

@@ -93,7 +93,7 @@ lib LibWin32
     add_ref : Proc(IWebApplicationAuthoringMode*, UInt32)
     release : Proc(IWebApplicationAuthoringMode*, UInt32)
     query_service : Proc(IWebApplicationAuthoringMode*, Guid*, Guid*, Void**, HRESULT)
-    get_authoring_client_binary : Proc(IWebApplicationAuthoringMode*, UInt8*, HRESULT)
+    get_authoring_client_binary : Proc(IWebApplicationAuthoringMode*, UInt8**, HRESULT)
   end
 
   struct IWebApplicationAuthoringMode

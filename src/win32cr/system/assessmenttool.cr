@@ -56,8 +56,8 @@ lib LibWin32
     get_i_ds_of_names : Proc(IProvideWinSATAssessmentInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IProvideWinSATAssessmentInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_score : Proc(IProvideWinSATAssessmentInfo*, Float32*, HRESULT)
-    get_title : Proc(IProvideWinSATAssessmentInfo*, UInt8*, HRESULT)
-    get_description : Proc(IProvideWinSATAssessmentInfo*, UInt8*, HRESULT)
+    get_title : Proc(IProvideWinSATAssessmentInfo*, UInt8**, HRESULT)
+    get_description : Proc(IProvideWinSATAssessmentInfo*, UInt8**, HRESULT)
   end
 
   struct IProvideWinSATAssessmentInfo
@@ -76,7 +76,7 @@ lib LibWin32
     get_assessment_state : Proc(IProvideWinSATResultsInfo*, WINSAT_ASSESSMENT_STATE*, HRESULT)
     get_assessment_date_time : Proc(IProvideWinSATResultsInfo*, VARIANT*, HRESULT)
     get_system_rating : Proc(IProvideWinSATResultsInfo*, Float32*, HRESULT)
-    get_rating_state_desc : Proc(IProvideWinSATResultsInfo*, UInt8*, HRESULT)
+    get_rating_state_desc : Proc(IProvideWinSATResultsInfo*, UInt8**, HRESULT)
   end
 
   struct IProvideWinSATResultsInfo
@@ -91,7 +91,7 @@ lib LibWin32
     get_type_info : Proc(IQueryRecentWinSATAssessment*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IQueryRecentWinSATAssessment*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IQueryRecentWinSATAssessment*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_xml : Proc(IQueryRecentWinSATAssessment*, UInt8, UInt8, IXMLDOMNodeList*, HRESULT)
+    get_xml : Proc(IQueryRecentWinSATAssessment*, UInt8*, UInt8*, IXMLDOMNodeList*, HRESULT)
     get_info : Proc(IQueryRecentWinSATAssessment*, IProvideWinSATResultsInfo*, HRESULT)
   end
 
@@ -118,7 +118,7 @@ lib LibWin32
     get_type_info : Proc(IQueryAllWinSATAssessments*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IQueryAllWinSATAssessments*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IQueryAllWinSATAssessments*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_all_xml : Proc(IQueryAllWinSATAssessments*, UInt8, UInt8, IXMLDOMNodeList*, HRESULT)
+    get_all_xml : Proc(IQueryAllWinSATAssessments*, UInt8*, UInt8*, IXMLDOMNodeList*, HRESULT)
   end
 
   struct IQueryAllWinSATAssessments
@@ -161,24 +161,24 @@ lib LibWin32
     get_acc_parent : Proc(IAccessibleWinSAT*, IDispatch*, HRESULT)
     get_acc_child_count : Proc(IAccessibleWinSAT*, Int32*, HRESULT)
     get_acc_child : Proc(IAccessibleWinSAT*, VARIANT, IDispatch*, HRESULT)
-    get_acc_name : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
-    get_acc_value : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
-    get_acc_description : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
+    get_acc_name : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    get_acc_value : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    get_acc_description : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
     get_acc_role : Proc(IAccessibleWinSAT*, VARIANT, VARIANT*, HRESULT)
     get_acc_state : Proc(IAccessibleWinSAT*, VARIANT, VARIANT*, HRESULT)
-    get_acc_help : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
-    get_acc_help_topic : Proc(IAccessibleWinSAT*, UInt8*, VARIANT, Int32*, HRESULT)
-    get_acc_keyboard_shortcut : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
+    get_acc_help : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
+    get_acc_help_topic : Proc(IAccessibleWinSAT*, UInt8**, VARIANT, Int32*, HRESULT)
+    get_acc_keyboard_shortcut : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
     get_acc_focus : Proc(IAccessibleWinSAT*, VARIANT*, HRESULT)
     get_acc_selection : Proc(IAccessibleWinSAT*, VARIANT*, HRESULT)
-    get_acc_default_action : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
+    get_acc_default_action : Proc(IAccessibleWinSAT*, VARIANT, UInt8**, HRESULT)
     acc_select : Proc(IAccessibleWinSAT*, Int32, VARIANT, HRESULT)
     acc_location : Proc(IAccessibleWinSAT*, Int32*, Int32*, Int32*, Int32*, VARIANT, HRESULT)
     acc_navigate : Proc(IAccessibleWinSAT*, Int32, VARIANT, VARIANT*, HRESULT)
     acc_hit_test : Proc(IAccessibleWinSAT*, Int32, Int32, VARIANT*, HRESULT)
     acc_do_default_action : Proc(IAccessibleWinSAT*, VARIANT, HRESULT)
-    put_acc_name : Proc(IAccessibleWinSAT*, VARIANT, UInt8, HRESULT)
-    put_acc_value : Proc(IAccessibleWinSAT*, VARIANT, UInt8, HRESULT)
+    put_acc_name : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
+    put_acc_value : Proc(IAccessibleWinSAT*, VARIANT, UInt8*, HRESULT)
     set_accessiblity_data : Proc(IAccessibleWinSAT*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 

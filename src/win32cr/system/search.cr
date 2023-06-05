@@ -4981,7 +4981,7 @@ lib LibWin32
     p_i_seq_stream : ISequentialStream
     cb_data : UInt32
     c_bstr : UInt32
-    rg_bstr : UInt8*
+    rg_bstr : UInt8**
     c_variant : UInt32
     rg_variant : VARIANT*
     c_idispatch : UInt32
@@ -5096,9 +5096,9 @@ lib LibWin32
     b_changes_only : LibC::BOOL
     b_need_password : LibC::BOOL
     f_channel_flags : UInt32
-    bstr_user_name : UInt8
-    bstr_password : UInt8
-    bstr_friendly_name : UInt8
+    bstr_user_name : UInt8*
+    bstr_password : UInt8*
+    bstr_friendly_name : UInt8*
     dw_max_size_kb : UInt32
     sub_type : SUBSCRIPTIONTYPE
     f_task_flags : UInt32
@@ -6201,8 +6201,8 @@ lib LibWin32
     query_interface : Proc(IErrorLookup*, Guid*, Void**, HRESULT)
     add_ref : Proc(IErrorLookup*, UInt32)
     release : Proc(IErrorLookup*, UInt32)
-    get_error_description : Proc(IErrorLookup*, HRESULT, UInt32, DISPPARAMS*, UInt32, UInt8*, UInt8*, HRESULT)
-    get_help_info : Proc(IErrorLookup*, HRESULT, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
+    get_error_description : Proc(IErrorLookup*, HRESULT, UInt32, DISPPARAMS*, UInt32, UInt8**, UInt8**, HRESULT)
+    get_help_info : Proc(IErrorLookup*, HRESULT, UInt32, UInt32, UInt8**, UInt32*, HRESULT)
     release_errors : Proc(IErrorLookup*, UInt32, HRESULT)
   end
 
@@ -6214,7 +6214,7 @@ lib LibWin32
     query_interface : Proc(ISQLErrorInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(ISQLErrorInfo*, UInt32)
     release : Proc(ISQLErrorInfo*, UInt32)
-    get_sql_info : Proc(ISQLErrorInfo*, UInt8*, Int32*, HRESULT)
+    get_sql_info : Proc(ISQLErrorInfo*, UInt8**, Int32*, HRESULT)
   end
 
   struct ISQLErrorInfo
@@ -7475,7 +7475,7 @@ lib LibWin32
     get_rw_status : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, OSPRW*, HRESULT)
     get_variant : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, OSPFORMAT, VARIANT*, HRESULT)
     set_variant : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, OSPFORMAT, VARIANT, HRESULT)
-    get_locale : Proc(OLEDBSimpleProvider*, UInt8*, HRESULT)
+    get_locale : Proc(OLEDBSimpleProvider*, UInt8**, HRESULT)
     delete_rows : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, LibC::IntPtrT*, HRESULT)
     insert_rows : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, LibC::IntPtrT*, HRESULT)
     find : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, VARIANT, OSPFIND, OSPCOMP, LibC::IntPtrT*, HRESULT)

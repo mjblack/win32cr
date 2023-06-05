@@ -532,7 +532,7 @@ lib LibWin32
     get_id : Proc(ISensor*, Guid*, HRESULT)
     get_category : Proc(ISensor*, Guid*, HRESULT)
     get_type : Proc(ISensor*, Guid*, HRESULT)
-    get_friendly_name : Proc(ISensor*, UInt8*, HRESULT)
+    get_friendly_name : Proc(ISensor*, UInt8**, HRESULT)
     get_property : Proc(ISensor*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
     get_properties : Proc(ISensor*, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)
     get_supported_data_fields : Proc(ISensor*, IPortableDeviceKeyCollection*, HRESULT)
