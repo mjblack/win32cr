@@ -3477,7 +3477,7 @@ lib LibWin32
   union PROFILER_HEAP_OBJECT_RELATIONSHIP_Anonymous_e__Union
     number_value : Float64
     string_value : LibC::LPWSTR
-    bstr_value : UInt8
+    bstr_value : UInt8*
     object_id : LibC::UINT_PTR
     external_object_address : Void*
     sub_string : PROFILER_PROPERTY_TYPE_SUBSTRING_INFO*
@@ -5837,10 +5837,10 @@ lib LibWin32
   end
   struct DebugPropertyInfo
     m_dw_valid_fields : UInt32
-    m_bstr_name : UInt8
-    m_bstr_type : UInt8
-    m_bstr_value : UInt8
-    m_bstr_full_name : UInt8
+    m_bstr_name : UInt8*
+    m_bstr_type : UInt8*
+    m_bstr_value : UInt8*
+    m_bstr_full_name : UInt8*
     m_dw_attrib : UInt32
     m_p_debug_prop : IDebugProperty
   end
@@ -6304,10 +6304,10 @@ lib LibWin32
     members : IDebugDocumentText*
   end
   struct JsDebugPropertyInfo
-    name : UInt8
-    type : UInt8
-    value : UInt8
-    full_name : UInt8
+    name : UInt8*
+    type : UInt8*
+    value : UInt8*
+    full_name : UInt8*
     attr : JS_PROPERTY_ATTRIBUTES
   end
   struct MIDL___MIDL_itf_jscript9diag_0000_0007_0001
@@ -9929,7 +9929,7 @@ lib LibWin32
     query_interface : Proc(IModelKeyReference*, Guid*, Void**, HRESULT)
     add_ref : Proc(IModelKeyReference*, UInt32)
     release : Proc(IModelKeyReference*, UInt32)
-    get_key_name : Proc(IModelKeyReference*, UInt8*, HRESULT)
+    get_key_name : Proc(IModelKeyReference*, UInt8**, HRESULT)
     get_original_object : Proc(IModelKeyReference*, IModelObject*, HRESULT)
     get_context_object : Proc(IModelKeyReference*, IModelObject*, HRESULT)
     get_key : Proc(IModelKeyReference*, IModelObject*, IKeyStore*, HRESULT)
@@ -9970,7 +9970,7 @@ lib LibWin32
     add_ref : Proc(IKeyEnumerator*, UInt32)
     release : Proc(IKeyEnumerator*, UInt32)
     reset : Proc(IKeyEnumerator*, HRESULT)
-    get_next : Proc(IKeyEnumerator*, UInt8*, IModelObject*, IKeyStore*, HRESULT)
+    get_next : Proc(IKeyEnumerator*, UInt8**, IModelObject*, IKeyStore*, HRESULT)
   end
 
   struct IKeyEnumerator
@@ -9982,7 +9982,7 @@ lib LibWin32
     add_ref : Proc(IRawEnumerator*, UInt32)
     release : Proc(IRawEnumerator*, UInt32)
     reset : Proc(IRawEnumerator*, HRESULT)
-    get_next : Proc(IRawEnumerator*, UInt8*, SymbolKind*, IModelObject*, HRESULT)
+    get_next : Proc(IRawEnumerator*, UInt8**, SymbolKind*, IModelObject*, HRESULT)
   end
 
   struct IRawEnumerator
@@ -9994,7 +9994,7 @@ lib LibWin32
     add_ref : Proc(IDataModelConcept*, UInt32)
     release : Proc(IDataModelConcept*, UInt32)
     initialize_object : Proc(IDataModelConcept*, IModelObject, IDebugHostTypeSignature, IDebugHostSymbolEnumerator, HRESULT)
-    get_name : Proc(IDataModelConcept*, UInt8*, HRESULT)
+    get_name : Proc(IDataModelConcept*, UInt8**, HRESULT)
   end
 
   struct IDataModelConcept
@@ -10005,7 +10005,7 @@ lib LibWin32
     query_interface : Proc(IStringDisplayableConcept*, Guid*, Void**, HRESULT)
     add_ref : Proc(IStringDisplayableConcept*, UInt32)
     release : Proc(IStringDisplayableConcept*, UInt32)
-    to_display_string : Proc(IStringDisplayableConcept*, IModelObject, IKeyStore, UInt8*, HRESULT)
+    to_display_string : Proc(IStringDisplayableConcept*, IModelObject, IKeyStore, UInt8**, HRESULT)
   end
 
   struct IStringDisplayableConcept
@@ -10113,7 +10113,7 @@ lib LibWin32
     get_context : Proc(IDebugHostSymbol*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostSymbol*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostSymbol*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostSymbol*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostSymbol*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostSymbol*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostSymbol*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostSymbol*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10142,11 +10142,11 @@ lib LibWin32
     get_context : Proc(IDebugHostModule*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostModule*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostModule*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostModule*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostModule*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostModule*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostModule*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostModule*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
-    get_image_name : Proc(IDebugHostModule*, UInt8, UInt8*, HRESULT)
+    get_image_name : Proc(IDebugHostModule*, UInt8, UInt8**, HRESULT)
     get_base_location : Proc(IDebugHostModule*, Location*, HRESULT)
     get_version : Proc(IDebugHostModule*, UInt64*, UInt64*, HRESULT)
     find_type_by_name : Proc(IDebugHostModule*, LibC::LPWSTR, IDebugHostType*, HRESULT)
@@ -10165,7 +10165,7 @@ lib LibWin32
     get_context : Proc(IDebugHostType*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostType*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostType*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostType*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostType*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostType*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostType*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostType*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10201,7 +10201,7 @@ lib LibWin32
     get_context : Proc(IDebugHostConstant*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostConstant*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostConstant*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostConstant*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostConstant*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostConstant*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostConstant*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostConstant*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10219,7 +10219,7 @@ lib LibWin32
     get_context : Proc(IDebugHostField*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostField*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostField*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostField*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostField*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostField*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostField*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostField*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10240,7 +10240,7 @@ lib LibWin32
     get_context : Proc(IDebugHostData*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostData*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostData*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostData*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostData*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostData*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostData*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostData*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10260,7 +10260,7 @@ lib LibWin32
     get_context : Proc(IDebugHostPublic*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostPublic*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostPublic*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostPublic*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostPublic*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostPublic*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostPublic*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostPublic*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10279,7 +10279,7 @@ lib LibWin32
     get_context : Proc(IDebugHostBaseClass*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostBaseClass*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostBaseClass*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostBaseClass*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostBaseClass*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostBaseClass*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostBaseClass*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostBaseClass*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10315,7 +10315,7 @@ lib LibWin32
     write_bytes : Proc(IDebugHostMemory*, IDebugHostContext, Location, Void*, UInt64, UInt64*, HRESULT)
     read_pointers : Proc(IDebugHostMemory*, IDebugHostContext, Location, UInt64, UInt64*, HRESULT)
     write_pointers : Proc(IDebugHostMemory*, IDebugHostContext, Location, UInt64, UInt64*, HRESULT)
-    get_display_string_for_location : Proc(IDebugHostMemory*, IDebugHostContext, Location, UInt8, UInt8*, HRESULT)
+    get_display_string_for_location : Proc(IDebugHostMemory*, IDebugHostContext, Location, UInt8, UInt8**, HRESULT)
   end
 
   struct IDebugHostMemory
@@ -10365,7 +10365,7 @@ lib LibWin32
     get_context : Proc(IDebugHostSymbol2*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostSymbol2*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostSymbol2*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostSymbol2*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostSymbol2*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostSymbol2*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostSymbol2*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostSymbol2*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10383,7 +10383,7 @@ lib LibWin32
     get_context : Proc(IDebugHostType2*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostType2*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostType2*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostType2*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostType2*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostType2*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostType2*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostType2*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
@@ -10443,8 +10443,8 @@ lib LibWin32
     query_interface : Proc(IDataModelScriptTemplate*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDataModelScriptTemplate*, UInt32)
     release : Proc(IDataModelScriptTemplate*, UInt32)
-    get_name : Proc(IDataModelScriptTemplate*, UInt8*, HRESULT)
-    get_description : Proc(IDataModelScriptTemplate*, UInt8*, HRESULT)
+    get_name : Proc(IDataModelScriptTemplate*, UInt8**, HRESULT)
+    get_description : Proc(IDataModelScriptTemplate*, UInt8**, HRESULT)
     get_content : Proc(IDataModelScriptTemplate*, IStream*, HRESULT)
   end
 
@@ -10456,7 +10456,7 @@ lib LibWin32
     query_interface : Proc(IDataModelScript*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDataModelScript*, UInt32)
     release : Proc(IDataModelScript*, UInt32)
-    get_name : Proc(IDataModelScript*, UInt8*, HRESULT)
+    get_name : Proc(IDataModelScript*, UInt8**, HRESULT)
     rename : Proc(IDataModelScript*, LibC::LPWSTR, HRESULT)
     populate : Proc(IDataModelScript*, IStream, HRESULT)
     execute : Proc(IDataModelScript*, IDataModelScriptClient, HRESULT)
@@ -10485,8 +10485,8 @@ lib LibWin32
     query_interface : Proc(IDataModelScriptProvider*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDataModelScriptProvider*, UInt32)
     release : Proc(IDataModelScriptProvider*, UInt32)
-    get_name : Proc(IDataModelScriptProvider*, UInt8*, HRESULT)
-    get_extension : Proc(IDataModelScriptProvider*, UInt8*, HRESULT)
+    get_name : Proc(IDataModelScriptProvider*, UInt8**, HRESULT)
+    get_extension : Proc(IDataModelScriptProvider*, UInt8**, HRESULT)
     create_script : Proc(IDataModelScriptProvider*, IDataModelScript*, HRESULT)
     get_default_template_content : Proc(IDataModelScriptProvider*, IDataModelScriptTemplate*, HRESULT)
     enumerate_templates : Proc(IDataModelScriptProvider*, IDataModelScriptTemplateEnumerator*, HRESULT)
@@ -10593,7 +10593,7 @@ lib LibWin32
     query_interface : Proc(IModelKeyReference2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IModelKeyReference2*, UInt32)
     release : Proc(IModelKeyReference2*, UInt32)
-    get_key_name : Proc(IModelKeyReference2*, UInt8*, HRESULT)
+    get_key_name : Proc(IModelKeyReference2*, UInt8**, HRESULT)
     get_original_object : Proc(IModelKeyReference2*, IModelObject*, HRESULT)
     get_context_object : Proc(IModelKeyReference2*, IModelObject*, HRESULT)
     get_key : Proc(IModelKeyReference2*, IModelObject*, IKeyStore*, HRESULT)
@@ -10660,7 +10660,7 @@ lib LibWin32
     write_bytes : Proc(IDebugHostMemory2*, IDebugHostContext, Location, Void*, UInt64, UInt64*, HRESULT)
     read_pointers : Proc(IDebugHostMemory2*, IDebugHostContext, Location, UInt64, UInt64*, HRESULT)
     write_pointers : Proc(IDebugHostMemory2*, IDebugHostContext, Location, UInt64, UInt64*, HRESULT)
-    get_display_string_for_location : Proc(IDebugHostMemory2*, IDebugHostContext, Location, UInt8, UInt8*, HRESULT)
+    get_display_string_for_location : Proc(IDebugHostMemory2*, IDebugHostContext, Location, UInt8, UInt8**, HRESULT)
     linearize_location : Proc(IDebugHostMemory2*, IDebugHostContext, Location, Location*, HRESULT)
   end
 
@@ -10696,7 +10696,7 @@ lib LibWin32
     add_ref : Proc(IDataModelScriptDebugVariableSetEnumerator*, UInt32)
     release : Proc(IDataModelScriptDebugVariableSetEnumerator*, UInt32)
     reset : Proc(IDataModelScriptDebugVariableSetEnumerator*, HRESULT)
-    get_next : Proc(IDataModelScriptDebugVariableSetEnumerator*, UInt8*, IModelObject*, IKeyStore*, HRESULT)
+    get_next : Proc(IDataModelScriptDebugVariableSetEnumerator*, UInt8**, IModelObject*, IKeyStore*, HRESULT)
   end
 
   struct IDataModelScriptDebugVariableSetEnumerator
@@ -10707,8 +10707,8 @@ lib LibWin32
     query_interface : Proc(IDataModelScriptDebugStackFrame*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDataModelScriptDebugStackFrame*, UInt32)
     release : Proc(IDataModelScriptDebugStackFrame*, UInt32)
-    get_name : Proc(IDataModelScriptDebugStackFrame*, UInt8*, HRESULT)
-    get_position : Proc(IDataModelScriptDebugStackFrame*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8*, HRESULT)
+    get_name : Proc(IDataModelScriptDebugStackFrame*, UInt8**, HRESULT)
+    get_position : Proc(IDataModelScriptDebugStackFrame*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8**, HRESULT)
     is_transition_point : Proc(IDataModelScriptDebugStackFrame*, Bool*, HRESULT)
     get_transition : Proc(IDataModelScriptDebugStackFrame*, IDataModelScript*, Bool*, HRESULT)
     evaluate : Proc(IDataModelScriptDebugStackFrame*, LibC::LPWSTR, IModelObject*, HRESULT)
@@ -10741,7 +10741,7 @@ lib LibWin32
     enable : Proc(IDataModelScriptDebugBreakpoint*, Void)
     disable : Proc(IDataModelScriptDebugBreakpoint*, Void)
     remove : Proc(IDataModelScriptDebugBreakpoint*, Void)
-    get_position : Proc(IDataModelScriptDebugBreakpoint*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8*, HRESULT)
+    get_position : Proc(IDataModelScriptDebugBreakpoint*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8**, HRESULT)
   end
 
   struct IDataModelScriptDebugBreakpoint
@@ -10765,7 +10765,7 @@ lib LibWin32
     add_ref : Proc(IDataModelScriptDebug*, UInt32)
     release : Proc(IDataModelScriptDebug*, UInt32)
     get_debug_state : Proc(IDataModelScriptDebug*, ScriptDebugState)
-    get_current_position : Proc(IDataModelScriptDebug*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8*, HRESULT)
+    get_current_position : Proc(IDataModelScriptDebug*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8**, HRESULT)
     get_stack : Proc(IDataModelScriptDebug*, IDataModelScriptDebugStack*, HRESULT)
     set_breakpoint : Proc(IDataModelScriptDebug*, UInt32, UInt32, IDataModelScriptDebugBreakpoint*, HRESULT)
     find_breakpoint_by_id : Proc(IDataModelScriptDebug*, UInt64, IDataModelScriptDebugBreakpoint*, HRESULT)
@@ -10785,7 +10785,7 @@ lib LibWin32
     add_ref : Proc(IDataModelScriptDebug2*, UInt32)
     release : Proc(IDataModelScriptDebug2*, UInt32)
     get_debug_state : Proc(IDataModelScriptDebug2*, ScriptDebugState)
-    get_current_position : Proc(IDataModelScriptDebug2*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8*, HRESULT)
+    get_current_position : Proc(IDataModelScriptDebug2*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8**, HRESULT)
     get_stack : Proc(IDataModelScriptDebug2*, IDataModelScriptDebugStack*, HRESULT)
     set_breakpoint : Proc(IDataModelScriptDebug2*, UInt32, UInt32, IDataModelScriptDebugBreakpoint*, HRESULT)
     find_breakpoint_by_id : Proc(IDataModelScriptDebug2*, UInt64, IDataModelScriptDebugBreakpoint*, HRESULT)
@@ -10808,11 +10808,11 @@ lib LibWin32
     get_context : Proc(IDebugHostModule2*, IDebugHostContext*, HRESULT)
     enumerate_children : Proc(IDebugHostModule2*, SymbolKind, LibC::LPWSTR, IDebugHostSymbolEnumerator*, HRESULT)
     get_symbol_kind : Proc(IDebugHostModule2*, SymbolKind*, HRESULT)
-    get_name : Proc(IDebugHostModule2*, UInt8*, HRESULT)
+    get_name : Proc(IDebugHostModule2*, UInt8**, HRESULT)
     get_type : Proc(IDebugHostModule2*, IDebugHostType*, HRESULT)
     get_containing_module : Proc(IDebugHostModule2*, IDebugHostModule*, HRESULT)
     compare_against : Proc(IDebugHostModule2*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
-    get_image_name : Proc(IDebugHostModule2*, UInt8, UInt8*, HRESULT)
+    get_image_name : Proc(IDebugHostModule2*, UInt8, UInt8**, HRESULT)
     get_base_location : Proc(IDebugHostModule2*, Location*, HRESULT)
     get_version : Proc(IDebugHostModule2*, UInt64*, UInt64*, HRESULT)
     find_type_by_name : Proc(IDebugHostModule2*, LibC::LPWSTR, IDebugHostType*, HRESULT)
@@ -10853,7 +10853,7 @@ lib LibWin32
     release : Proc(IActiveScriptSite*, UInt32)
     get_lcid : Proc(IActiveScriptSite*, UInt32*, HRESULT)
     get_item_info : Proc(IActiveScriptSite*, LibC::LPWSTR, UInt32, IUnknown*, ITypeInfo*, HRESULT)
-    get_doc_version_string : Proc(IActiveScriptSite*, UInt8*, HRESULT)
+    get_doc_version_string : Proc(IActiveScriptSite*, UInt8**, HRESULT)
     on_script_terminate : Proc(IActiveScriptSite*, VARIANT*, EXCEPINFO*, HRESULT)
     on_state_change : Proc(IActiveScriptSite*, SCRIPTSTATE, HRESULT)
     on_script_error : Proc(IActiveScriptSite*, IActiveScriptError, HRESULT)
@@ -10871,7 +10871,7 @@ lib LibWin32
     release : Proc(IActiveScriptError*, UInt32)
     get_exception_info : Proc(IActiveScriptError*, EXCEPINFO*, HRESULT)
     get_source_position : Proc(IActiveScriptError*, UInt32*, UInt32*, Int32*, HRESULT)
-    get_source_line_text : Proc(IActiveScriptError*, UInt8*, HRESULT)
+    get_source_line_text : Proc(IActiveScriptError*, UInt8**, HRESULT)
   end
 
   struct IActiveScriptError
@@ -10884,7 +10884,7 @@ lib LibWin32
     release : Proc(IActiveScriptError64*, UInt32)
     get_exception_info : Proc(IActiveScriptError64*, EXCEPINFO*, HRESULT)
     get_source_position : Proc(IActiveScriptError64*, UInt32*, UInt32*, Int32*, HRESULT)
-    get_source_line_text : Proc(IActiveScriptError64*, UInt8*, HRESULT)
+    get_source_line_text : Proc(IActiveScriptError64*, UInt8**, HRESULT)
     get_source_position64 : Proc(IActiveScriptError64*, UInt64*, UInt32*, Int32*, HRESULT)
   end
 
@@ -10954,7 +10954,7 @@ lib LibWin32
     add_ref : Proc(IActiveScriptParse32*, UInt32)
     release : Proc(IActiveScriptParse32*, UInt32)
     init_new : Proc(IActiveScriptParse32*, HRESULT)
-    add_scriptlet : Proc(IActiveScriptParse32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt8*, EXCEPINFO*, HRESULT)
+    add_scriptlet : Proc(IActiveScriptParse32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt8**, EXCEPINFO*, HRESULT)
     parse_script_text : Proc(IActiveScriptParse32*, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt32, UInt32, UInt32, VARIANT*, EXCEPINFO*, HRESULT)
   end
 
@@ -10967,7 +10967,7 @@ lib LibWin32
     add_ref : Proc(IActiveScriptParse64*, UInt32)
     release : Proc(IActiveScriptParse64*, UInt32)
     init_new : Proc(IActiveScriptParse64*, HRESULT)
-    add_scriptlet : Proc(IActiveScriptParse64*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt64, UInt32, UInt32, UInt8*, EXCEPINFO*, HRESULT)
+    add_scriptlet : Proc(IActiveScriptParse64*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt64, UInt32, UInt32, UInt8**, EXCEPINFO*, HRESULT)
     parse_script_text : Proc(IActiveScriptParse64*, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt64, UInt32, UInt32, VARIANT*, EXCEPINFO*, HRESULT)
   end
 
@@ -11047,7 +11047,7 @@ lib LibWin32
     release : Proc(IActiveScriptEncode*, UInt32)
     encode_section : Proc(IActiveScriptEncode*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
     decode_script : Proc(IActiveScriptEncode*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
-    get_encode_prog_id : Proc(IActiveScriptEncode*, UInt8*, HRESULT)
+    get_encode_prog_id : Proc(IActiveScriptEncode*, UInt8**, HRESULT)
   end
 
   struct IActiveScriptEncode
@@ -11058,7 +11058,7 @@ lib LibWin32
     query_interface : Proc(IActiveScriptHostEncode*, Guid*, Void**, HRESULT)
     add_ref : Proc(IActiveScriptHostEncode*, UInt32)
     release : Proc(IActiveScriptHostEncode*, UInt32)
-    encode_script_host_file : Proc(IActiveScriptHostEncode*, UInt8, UInt8*, UInt32, UInt8, HRESULT)
+    encode_script_host_file : Proc(IActiveScriptHostEncode*, UInt8*, UInt8**, UInt32, UInt8*, HRESULT)
   end
 
   struct IActiveScriptHostEncode
@@ -11161,7 +11161,7 @@ lib LibWin32
     query_interface : Proc(IActiveScriptStringCompare*, Guid*, Void**, HRESULT)
     add_ref : Proc(IActiveScriptStringCompare*, UInt32)
     release : Proc(IActiveScriptStringCompare*, UInt32)
-    str_comp : Proc(IActiveScriptStringCompare*, UInt8, UInt8, Int32*, HRESULT)
+    str_comp : Proc(IActiveScriptStringCompare*, UInt8*, UInt8*, Int32*, HRESULT)
   end
 
   struct IActiveScriptStringCompare
@@ -11234,7 +11234,7 @@ lib LibWin32
     query_interface : Proc(IPerPropertyBrowsing2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPerPropertyBrowsing2*, UInt32)
     release : Proc(IPerPropertyBrowsing2*, UInt32)
-    get_display_string : Proc(IPerPropertyBrowsing2*, Int32, UInt8*, HRESULT)
+    get_display_string : Proc(IPerPropertyBrowsing2*, Int32, UInt8**, HRESULT)
     map_property_to_page : Proc(IPerPropertyBrowsing2*, Int32, Guid*, HRESULT)
     get_predefined_strings : Proc(IPerPropertyBrowsing2*, Int32, CALPOLESTR*, CADWORD*, HRESULT)
     set_predefined_value : Proc(IPerPropertyBrowsing2*, Int32, UInt32, HRESULT)
@@ -11248,7 +11248,7 @@ lib LibWin32
     query_interface : Proc(IDebugPropertyEnumType_All*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugPropertyEnumType_All*, UInt32)
     release : Proc(IDebugPropertyEnumType_All*, UInt32)
-    get_name : Proc(IDebugPropertyEnumType_All*, UInt8*, HRESULT)
+    get_name : Proc(IDebugPropertyEnumType_All*, UInt8**, HRESULT)
   end
 
   struct IDebugPropertyEnumType_All
@@ -11259,7 +11259,7 @@ lib LibWin32
     query_interface : Proc(IDebugPropertyEnumType_Locals*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugPropertyEnumType_Locals*, UInt32)
     release : Proc(IDebugPropertyEnumType_Locals*, UInt32)
-    get_name : Proc(IDebugPropertyEnumType_Locals*, UInt8*, HRESULT)
+    get_name : Proc(IDebugPropertyEnumType_Locals*, UInt8**, HRESULT)
   end
 
   struct IDebugPropertyEnumType_Locals
@@ -11270,7 +11270,7 @@ lib LibWin32
     query_interface : Proc(IDebugPropertyEnumType_Arguments*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugPropertyEnumType_Arguments*, UInt32)
     release : Proc(IDebugPropertyEnumType_Arguments*, UInt32)
-    get_name : Proc(IDebugPropertyEnumType_Arguments*, UInt8*, HRESULT)
+    get_name : Proc(IDebugPropertyEnumType_Arguments*, UInt8**, HRESULT)
   end
 
   struct IDebugPropertyEnumType_Arguments
@@ -11281,7 +11281,7 @@ lib LibWin32
     query_interface : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, UInt32)
     release : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, UInt32)
-    get_name : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, UInt8*, HRESULT)
+    get_name : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, UInt8**, HRESULT)
   end
 
   struct IDebugPropertyEnumType_LocalsPlusArgs
@@ -11292,7 +11292,7 @@ lib LibWin32
     query_interface : Proc(IDebugPropertyEnumType_Registers*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugPropertyEnumType_Registers*, UInt32)
     release : Proc(IDebugPropertyEnumType_Registers*, UInt32)
-    get_name : Proc(IDebugPropertyEnumType_Registers*, UInt8*, HRESULT)
+    get_name : Proc(IDebugPropertyEnumType_Registers*, UInt8**, HRESULT)
   end
 
   struct IDebugPropertyEnumType_Registers
@@ -11370,7 +11370,7 @@ lib LibWin32
     release : Proc(IActiveScriptErrorDebug*, UInt32)
     get_exception_info : Proc(IActiveScriptErrorDebug*, EXCEPINFO*, HRESULT)
     get_source_position : Proc(IActiveScriptErrorDebug*, UInt32*, UInt32*, Int32*, HRESULT)
-    get_source_line_text : Proc(IActiveScriptErrorDebug*, UInt8*, HRESULT)
+    get_source_line_text : Proc(IActiveScriptErrorDebug*, UInt8**, HRESULT)
     get_document_context : Proc(IActiveScriptErrorDebug*, IDebugDocumentContext*, HRESULT)
     get_stack_frame : Proc(IActiveScriptErrorDebug*, IDebugStackFrame*, HRESULT)
   end
@@ -11398,7 +11398,7 @@ lib LibWin32
     start : Proc(IDebugExpression*, IDebugExpressionCallBack, HRESULT)
     abort : Proc(IDebugExpression*, HRESULT)
     query_is_complete : Proc(IDebugExpression*, HRESULT)
-    get_result_as_string : Proc(IDebugExpression*, HRESULT*, UInt8*, HRESULT)
+    get_result_as_string : Proc(IDebugExpression*, HRESULT*, UInt8**, HRESULT)
     get_result_as_debug_property : Proc(IDebugExpression*, HRESULT*, IDebugProperty*, HRESULT)
   end
 
@@ -11411,7 +11411,7 @@ lib LibWin32
     add_ref : Proc(IDebugExpressionContext*, UInt32)
     release : Proc(IDebugExpressionContext*, UInt32)
     parse_language_text : Proc(IDebugExpressionContext*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, IDebugExpression*, HRESULT)
-    get_language_info : Proc(IDebugExpressionContext*, UInt8*, Guid*, HRESULT)
+    get_language_info : Proc(IDebugExpressionContext*, UInt8**, Guid*, HRESULT)
   end
 
   struct IDebugExpressionContext
@@ -11434,8 +11434,8 @@ lib LibWin32
     add_ref : Proc(IDebugStackFrame*, UInt32)
     release : Proc(IDebugStackFrame*, UInt32)
     get_code_context : Proc(IDebugStackFrame*, IDebugCodeContext*, HRESULT)
-    get_description_string : Proc(IDebugStackFrame*, LibC::BOOL, UInt8*, HRESULT)
-    get_language_string : Proc(IDebugStackFrame*, LibC::BOOL, UInt8*, HRESULT)
+    get_description_string : Proc(IDebugStackFrame*, LibC::BOOL, UInt8**, HRESULT)
+    get_language_string : Proc(IDebugStackFrame*, LibC::BOOL, UInt8**, HRESULT)
     get_thread : Proc(IDebugStackFrame*, IDebugApplicationThread*, HRESULT)
     get_debug_property : Proc(IDebugStackFrame*, IDebugProperty*, HRESULT)
   end
@@ -11565,7 +11565,7 @@ lib LibWin32
     query_interface : Proc(IDebugDocumentInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugDocumentInfo*, UInt32)
     release : Proc(IDebugDocumentInfo*, UInt32)
-    get_name : Proc(IDebugDocumentInfo*, DOCUMENTNAMETYPE, UInt8*, HRESULT)
+    get_name : Proc(IDebugDocumentInfo*, DOCUMENTNAMETYPE, UInt8**, HRESULT)
     get_document_class_id : Proc(IDebugDocumentInfo*, Guid*, HRESULT)
   end
 
@@ -11577,7 +11577,7 @@ lib LibWin32
     query_interface : Proc(IDebugDocumentProvider*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugDocumentProvider*, UInt32)
     release : Proc(IDebugDocumentProvider*, UInt32)
-    get_name : Proc(IDebugDocumentProvider*, DOCUMENTNAMETYPE, UInt8*, HRESULT)
+    get_name : Proc(IDebugDocumentProvider*, DOCUMENTNAMETYPE, UInt8**, HRESULT)
     get_document_class_id : Proc(IDebugDocumentProvider*, Guid*, HRESULT)
     get_document : Proc(IDebugDocumentProvider*, IDebugDocument*, HRESULT)
   end
@@ -11590,7 +11590,7 @@ lib LibWin32
     query_interface : Proc(IDebugDocument*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugDocument*, UInt32)
     release : Proc(IDebugDocument*, UInt32)
-    get_name : Proc(IDebugDocument*, DOCUMENTNAMETYPE, UInt8*, HRESULT)
+    get_name : Proc(IDebugDocument*, DOCUMENTNAMETYPE, UInt8**, HRESULT)
     get_document_class_id : Proc(IDebugDocument*, Guid*, HRESULT)
   end
 
@@ -11602,7 +11602,7 @@ lib LibWin32
     query_interface : Proc(IDebugDocumentText*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugDocumentText*, UInt32)
     release : Proc(IDebugDocumentText*, UInt32)
-    get_name : Proc(IDebugDocumentText*, DOCUMENTNAMETYPE, UInt8*, HRESULT)
+    get_name : Proc(IDebugDocumentText*, DOCUMENTNAMETYPE, UInt8**, HRESULT)
     get_document_class_id : Proc(IDebugDocumentText*, Guid*, HRESULT)
     get_document_attributes : Proc(IDebugDocumentText*, UInt32*, HRESULT)
     get_size : Proc(IDebugDocumentText*, UInt32*, UInt32*, HRESULT)
@@ -11637,7 +11637,7 @@ lib LibWin32
     query_interface : Proc(IDebugDocumentTextAuthor*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugDocumentTextAuthor*, UInt32)
     release : Proc(IDebugDocumentTextAuthor*, UInt32)
-    get_name : Proc(IDebugDocumentTextAuthor*, DOCUMENTNAMETYPE, UInt8*, HRESULT)
+    get_name : Proc(IDebugDocumentTextAuthor*, DOCUMENTNAMETYPE, UInt8**, HRESULT)
     get_document_class_id : Proc(IDebugDocumentTextAuthor*, Guid*, HRESULT)
     get_document_attributes : Proc(IDebugDocumentTextAuthor*, UInt32*, HRESULT)
     get_size : Proc(IDebugDocumentTextAuthor*, UInt32*, UInt32*, HRESULT)
@@ -11659,8 +11659,8 @@ lib LibWin32
     query_interface : Proc(IDebugDocumentTextExternalAuthor*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugDocumentTextExternalAuthor*, UInt32)
     release : Proc(IDebugDocumentTextExternalAuthor*, UInt32)
-    get_path_name : Proc(IDebugDocumentTextExternalAuthor*, UInt8*, LibC::BOOL*, HRESULT)
-    get_file_name : Proc(IDebugDocumentTextExternalAuthor*, UInt8*, HRESULT)
+    get_path_name : Proc(IDebugDocumentTextExternalAuthor*, UInt8**, LibC::BOOL*, HRESULT)
+    get_file_name : Proc(IDebugDocumentTextExternalAuthor*, UInt8**, HRESULT)
     notify_changed : Proc(IDebugDocumentTextExternalAuthor*, HRESULT)
   end
 
@@ -11731,8 +11731,8 @@ lib LibWin32
     get_deferred_text : Proc(IDebugDocumentHost*, UInt32, Char*, UInt16*, UInt32*, UInt32, HRESULT)
     get_script_text_attributes : Proc(IDebugDocumentHost*, Char*, UInt32, LibC::LPWSTR, UInt32, UInt16*, HRESULT)
     on_create_document_context : Proc(IDebugDocumentHost*, IUnknown*, HRESULT)
-    get_path_name : Proc(IDebugDocumentHost*, UInt8*, LibC::BOOL*, HRESULT)
-    get_file_name : Proc(IDebugDocumentHost*, UInt8*, HRESULT)
+    get_path_name : Proc(IDebugDocumentHost*, UInt8**, LibC::BOOL*, HRESULT)
+    get_file_name : Proc(IDebugDocumentHost*, UInt8**, HRESULT)
     notify_changed : Proc(IDebugDocumentHost*, HRESULT)
   end
 
@@ -11871,7 +11871,7 @@ lib LibWin32
     create_instance_at_application : Proc(IRemoteDebugApplication*, Guid*, IUnknown, UInt32, Guid*, IUnknown*, HRESULT)
     query_alive : Proc(IRemoteDebugApplication*, HRESULT)
     enum_threads : Proc(IRemoteDebugApplication*, IEnumRemoteDebugApplicationThreads*, HRESULT)
-    get_name : Proc(IRemoteDebugApplication*, UInt8*, HRESULT)
+    get_name : Proc(IRemoteDebugApplication*, UInt8**, HRESULT)
     get_root_node : Proc(IRemoteDebugApplication*, IDebugApplicationNode*, HRESULT)
     enum_global_expression_contexts : Proc(IRemoteDebugApplication*, IEnumDebugExpressionContexts*, HRESULT)
   end
@@ -11892,7 +11892,7 @@ lib LibWin32
     create_instance_at_application : Proc(IDebugApplication32*, Guid*, IUnknown, UInt32, Guid*, IUnknown*, HRESULT)
     query_alive : Proc(IDebugApplication32*, HRESULT)
     enum_threads : Proc(IDebugApplication32*, IEnumRemoteDebugApplicationThreads*, HRESULT)
-    get_name : Proc(IDebugApplication32*, UInt8*, HRESULT)
+    get_name : Proc(IDebugApplication32*, UInt8**, HRESULT)
     get_root_node : Proc(IDebugApplication32*, IDebugApplicationNode*, HRESULT)
     enum_global_expression_contexts : Proc(IDebugApplication32*, IEnumDebugExpressionContexts*, HRESULT)
     set_name : Proc(IDebugApplication32*, LibC::LPWSTR, HRESULT)
@@ -11933,7 +11933,7 @@ lib LibWin32
     create_instance_at_application : Proc(IDebugApplication64*, Guid*, IUnknown, UInt32, Guid*, IUnknown*, HRESULT)
     query_alive : Proc(IDebugApplication64*, HRESULT)
     enum_threads : Proc(IDebugApplication64*, IEnumRemoteDebugApplicationThreads*, HRESULT)
-    get_name : Proc(IDebugApplication64*, UInt8*, HRESULT)
+    get_name : Proc(IDebugApplication64*, UInt8**, HRESULT)
     get_root_node : Proc(IDebugApplication64*, IDebugApplicationNode*, HRESULT)
     enum_global_expression_contexts : Proc(IDebugApplication64*, IEnumDebugExpressionContexts*, HRESULT)
     set_name : Proc(IDebugApplication64*, LibC::LPWSTR, HRESULT)
@@ -11986,7 +11986,7 @@ lib LibWin32
     query_interface : Proc(IDebugApplicationNode*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugApplicationNode*, UInt32)
     release : Proc(IDebugApplicationNode*, UInt32)
-    get_name : Proc(IDebugApplicationNode*, DOCUMENTNAMETYPE, UInt8*, HRESULT)
+    get_name : Proc(IDebugApplicationNode*, DOCUMENTNAMETYPE, UInt8**, HRESULT)
     get_document_class_id : Proc(IDebugApplicationNode*, Guid*, HRESULT)
     get_document : Proc(IDebugApplicationNode*, IDebugDocument*, HRESULT)
     enum_children : Proc(IDebugApplicationNode*, IEnumDebugApplicationNodes*, HRESULT)
@@ -12062,7 +12062,7 @@ lib LibWin32
     get_system_thread_id : Proc(IRemoteDebugApplicationThread*, UInt32*, HRESULT)
     get_application : Proc(IRemoteDebugApplicationThread*, IRemoteDebugApplication*, HRESULT)
     enum_stack_frames : Proc(IRemoteDebugApplicationThread*, IEnumDebugStackFrames*, HRESULT)
-    get_description : Proc(IRemoteDebugApplicationThread*, UInt8*, UInt8*, HRESULT)
+    get_description : Proc(IRemoteDebugApplicationThread*, UInt8**, UInt8**, HRESULT)
     set_next_statement : Proc(IRemoteDebugApplicationThread*, IDebugStackFrame, IDebugCodeContext, HRESULT)
     get_state : Proc(IRemoteDebugApplicationThread*, UInt32*, HRESULT)
     suspend : Proc(IRemoteDebugApplicationThread*, UInt32*, HRESULT)
@@ -12081,7 +12081,7 @@ lib LibWin32
     get_system_thread_id : Proc(IDebugApplicationThread*, UInt32*, HRESULT)
     get_application : Proc(IDebugApplicationThread*, IRemoteDebugApplication*, HRESULT)
     enum_stack_frames : Proc(IDebugApplicationThread*, IEnumDebugStackFrames*, HRESULT)
-    get_description : Proc(IDebugApplicationThread*, UInt8*, UInt8*, HRESULT)
+    get_description : Proc(IDebugApplicationThread*, UInt8**, UInt8**, HRESULT)
     set_next_statement : Proc(IDebugApplicationThread*, IDebugStackFrame, IDebugCodeContext, HRESULT)
     get_state : Proc(IDebugApplicationThread*, UInt32*, HRESULT)
     suspend : Proc(IDebugApplicationThread*, UInt32*, HRESULT)
@@ -12105,7 +12105,7 @@ lib LibWin32
     get_system_thread_id : Proc(IDebugApplicationThread64*, UInt32*, HRESULT)
     get_application : Proc(IDebugApplicationThread64*, IRemoteDebugApplication*, HRESULT)
     enum_stack_frames : Proc(IDebugApplicationThread64*, IEnumDebugStackFrames*, HRESULT)
-    get_description : Proc(IDebugApplicationThread64*, UInt8*, UInt8*, HRESULT)
+    get_description : Proc(IDebugApplicationThread64*, UInt8**, UInt8**, HRESULT)
     set_next_statement : Proc(IDebugApplicationThread64*, IDebugStackFrame, IDebugCodeContext, HRESULT)
     get_state : Proc(IDebugApplicationThread64*, UInt32*, HRESULT)
     suspend : Proc(IDebugApplicationThread64*, UInt32*, HRESULT)
@@ -12180,9 +12180,9 @@ lib LibWin32
     query_interface : Proc(IDebugFormatter*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDebugFormatter*, UInt32)
     release : Proc(IDebugFormatter*, UInt32)
-    get_string_for_variant : Proc(IDebugFormatter*, VARIANT*, UInt32, UInt8*, HRESULT)
+    get_string_for_variant : Proc(IDebugFormatter*, VARIANT*, UInt32, UInt8**, HRESULT)
     get_variant_for_string : Proc(IDebugFormatter*, LibC::LPWSTR, VARIANT*, HRESULT)
-    get_string_for_var_type : Proc(IDebugFormatter*, UInt16, TYPEDESC*, UInt8*, HRESULT)
+    get_string_for_var_type : Proc(IDebugFormatter*, UInt16, TYPEDESC*, UInt8**, HRESULT)
   end
 
   struct IDebugFormatter
@@ -12194,7 +12194,7 @@ lib LibWin32
     add_ref : Proc(ISimpleConnectionPoint*, UInt32)
     release : Proc(ISimpleConnectionPoint*, UInt32)
     get_event_count : Proc(ISimpleConnectionPoint*, UInt32*, HRESULT)
-    describe_events : Proc(ISimpleConnectionPoint*, UInt32, UInt32, Int32*, UInt8*, UInt32*, HRESULT)
+    describe_events : Proc(ISimpleConnectionPoint*, UInt32, UInt32, Int32*, UInt8**, UInt32*, HRESULT)
     advise : Proc(ISimpleConnectionPoint*, IDispatch, UInt32*, HRESULT)
     unadvise : Proc(ISimpleConnectionPoint*, UInt32, HRESULT)
   end
@@ -12398,7 +12398,7 @@ lib LibWin32
     get_cookie : Proc(IScriptNode*, UInt32*, HRESULT)
     get_number_of_children : Proc(IScriptNode*, UInt32*, HRESULT)
     get_child : Proc(IScriptNode*, UInt32, IScriptNode*, HRESULT)
-    get_language : Proc(IScriptNode*, UInt8*, HRESULT)
+    get_language : Proc(IScriptNode*, UInt8**, HRESULT)
     create_child_entry : Proc(IScriptNode*, UInt32, UInt32, LibC::LPWSTR, IScriptEntry*, HRESULT)
     create_child_handler : Proc(IScriptNode*, LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::LPWSTR, LibC::LPWSTR, ITypeInfo, UInt32, UInt32, UInt32, IScriptEntry*, HRESULT)
   end
@@ -12418,16 +12418,16 @@ lib LibWin32
     get_cookie : Proc(IScriptEntry*, UInt32*, HRESULT)
     get_number_of_children : Proc(IScriptEntry*, UInt32*, HRESULT)
     get_child : Proc(IScriptEntry*, UInt32, IScriptNode*, HRESULT)
-    get_language : Proc(IScriptEntry*, UInt8*, HRESULT)
+    get_language : Proc(IScriptEntry*, UInt8**, HRESULT)
     create_child_entry : Proc(IScriptEntry*, UInt32, UInt32, LibC::LPWSTR, IScriptEntry*, HRESULT)
     create_child_handler : Proc(IScriptEntry*, LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::LPWSTR, LibC::LPWSTR, ITypeInfo, UInt32, UInt32, UInt32, IScriptEntry*, HRESULT)
-    get_text : Proc(IScriptEntry*, UInt8*, HRESULT)
+    get_text : Proc(IScriptEntry*, UInt8**, HRESULT)
     set_text : Proc(IScriptEntry*, LibC::LPWSTR, HRESULT)
-    get_body : Proc(IScriptEntry*, UInt8*, HRESULT)
+    get_body : Proc(IScriptEntry*, UInt8**, HRESULT)
     set_body : Proc(IScriptEntry*, LibC::LPWSTR, HRESULT)
-    get_name : Proc(IScriptEntry*, UInt8*, HRESULT)
+    get_name : Proc(IScriptEntry*, UInt8**, HRESULT)
     set_name : Proc(IScriptEntry*, LibC::LPWSTR, HRESULT)
-    get_item_name : Proc(IScriptEntry*, UInt8*, HRESULT)
+    get_item_name : Proc(IScriptEntry*, UInt8**, HRESULT)
     set_item_name : Proc(IScriptEntry*, LibC::LPWSTR, HRESULT)
     get_signature : Proc(IScriptEntry*, ITypeInfo*, UInt32*, HRESULT)
     set_signature : Proc(IScriptEntry*, ITypeInfo, UInt32, HRESULT)
@@ -12449,25 +12449,25 @@ lib LibWin32
     get_cookie : Proc(IScriptScriptlet*, UInt32*, HRESULT)
     get_number_of_children : Proc(IScriptScriptlet*, UInt32*, HRESULT)
     get_child : Proc(IScriptScriptlet*, UInt32, IScriptNode*, HRESULT)
-    get_language : Proc(IScriptScriptlet*, UInt8*, HRESULT)
+    get_language : Proc(IScriptScriptlet*, UInt8**, HRESULT)
     create_child_entry : Proc(IScriptScriptlet*, UInt32, UInt32, LibC::LPWSTR, IScriptEntry*, HRESULT)
     create_child_handler : Proc(IScriptScriptlet*, LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::LPWSTR, LibC::LPWSTR, ITypeInfo, UInt32, UInt32, UInt32, IScriptEntry*, HRESULT)
-    get_text : Proc(IScriptScriptlet*, UInt8*, HRESULT)
+    get_text : Proc(IScriptScriptlet*, UInt8**, HRESULT)
     set_text : Proc(IScriptScriptlet*, LibC::LPWSTR, HRESULT)
-    get_body : Proc(IScriptScriptlet*, UInt8*, HRESULT)
+    get_body : Proc(IScriptScriptlet*, UInt8**, HRESULT)
     set_body : Proc(IScriptScriptlet*, LibC::LPWSTR, HRESULT)
-    get_name : Proc(IScriptScriptlet*, UInt8*, HRESULT)
+    get_name : Proc(IScriptScriptlet*, UInt8**, HRESULT)
     set_name : Proc(IScriptScriptlet*, LibC::LPWSTR, HRESULT)
-    get_item_name : Proc(IScriptScriptlet*, UInt8*, HRESULT)
+    get_item_name : Proc(IScriptScriptlet*, UInt8**, HRESULT)
     set_item_name : Proc(IScriptScriptlet*, LibC::LPWSTR, HRESULT)
     get_signature : Proc(IScriptScriptlet*, ITypeInfo*, UInt32*, HRESULT)
     set_signature : Proc(IScriptScriptlet*, ITypeInfo, UInt32, HRESULT)
     get_range : Proc(IScriptScriptlet*, UInt32*, UInt32*, HRESULT)
-    get_sub_item_name : Proc(IScriptScriptlet*, UInt8*, HRESULT)
+    get_sub_item_name : Proc(IScriptScriptlet*, UInt8**, HRESULT)
     set_sub_item_name : Proc(IScriptScriptlet*, LibC::LPWSTR, HRESULT)
-    get_event_name : Proc(IScriptScriptlet*, UInt8*, HRESULT)
+    get_event_name : Proc(IScriptScriptlet*, UInt8**, HRESULT)
     set_event_name : Proc(IScriptScriptlet*, LibC::LPWSTR, HRESULT)
-    get_simple_event_name : Proc(IScriptScriptlet*, UInt8*, HRESULT)
+    get_simple_event_name : Proc(IScriptScriptlet*, UInt8**, HRESULT)
     set_simple_event_name : Proc(IScriptScriptlet*, LibC::LPWSTR, HRESULT)
   end
 
@@ -12490,7 +12490,7 @@ lib LibWin32
     remove_named_item : Proc(IActiveScriptAuthor*, LibC::LPWSTR, HRESULT)
     add_type_lib : Proc(IActiveScriptAuthor*, Guid*, UInt32, UInt32, UInt32, HRESULT)
     remove_type_lib : Proc(IActiveScriptAuthor*, Guid*, UInt32, UInt32, HRESULT)
-    get_chars : Proc(IActiveScriptAuthor*, UInt32, UInt8*, HRESULT)
+    get_chars : Proc(IActiveScriptAuthor*, UInt32, UInt8**, HRESULT)
     get_info_from_context : Proc(IActiveScriptAuthor*, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32*, Int32*, Int32*, IUnknown*, HRESULT)
     is_commit_char : Proc(IActiveScriptAuthor*, Char, LibC::BOOL*, HRESULT)
   end
@@ -12597,10 +12597,10 @@ lib LibWin32
     release : Proc(IActiveScriptWinRTErrorDebug*, UInt32)
     get_exception_info : Proc(IActiveScriptWinRTErrorDebug*, EXCEPINFO*, HRESULT)
     get_source_position : Proc(IActiveScriptWinRTErrorDebug*, UInt32*, UInt32*, Int32*, HRESULT)
-    get_source_line_text : Proc(IActiveScriptWinRTErrorDebug*, UInt8*, HRESULT)
-    get_restricted_error_string : Proc(IActiveScriptWinRTErrorDebug*, UInt8*, HRESULT)
-    get_restricted_error_reference : Proc(IActiveScriptWinRTErrorDebug*, UInt8*, HRESULT)
-    get_capability_sid : Proc(IActiveScriptWinRTErrorDebug*, UInt8*, HRESULT)
+    get_source_line_text : Proc(IActiveScriptWinRTErrorDebug*, UInt8**, HRESULT)
+    get_restricted_error_string : Proc(IActiveScriptWinRTErrorDebug*, UInt8**, HRESULT)
+    get_restricted_error_reference : Proc(IActiveScriptWinRTErrorDebug*, UInt8**, HRESULT)
+    get_capability_sid : Proc(IActiveScriptWinRTErrorDebug*, UInt8**, HRESULT)
   end
 
   struct IActiveScriptWinRTErrorDebug
@@ -12664,7 +12664,7 @@ lib LibWin32
     query_interface : Proc(IRemoteDebugCriticalErrorEvent110*, Guid*, Void**, HRESULT)
     add_ref : Proc(IRemoteDebugCriticalErrorEvent110*, UInt32)
     release : Proc(IRemoteDebugCriticalErrorEvent110*, UInt32)
-    get_error_info : Proc(IRemoteDebugCriticalErrorEvent110*, UInt8*, Int32*, UInt8*, IDebugDocumentContext*, HRESULT)
+    get_error_info : Proc(IRemoteDebugCriticalErrorEvent110*, UInt8**, Int32*, UInt8**, IDebugDocumentContext*, HRESULT)
   end
 
   struct IRemoteDebugCriticalErrorEvent110
@@ -12676,7 +12676,7 @@ lib LibWin32
     add_ref : Proc(IScriptInvocationContext*, UInt32)
     release : Proc(IScriptInvocationContext*, UInt32)
     get_context_type : Proc(IScriptInvocationContext*, SCRIPT_INVOCATION_CONTEXT_TYPE*, HRESULT)
-    get_context_description : Proc(IScriptInvocationContext*, UInt8*, HRESULT)
+    get_context_description : Proc(IScriptInvocationContext*, UInt8**, HRESULT)
     get_context_object : Proc(IScriptInvocationContext*, IUnknown*, HRESULT)
   end
 
@@ -12689,8 +12689,8 @@ lib LibWin32
     add_ref : Proc(IDebugStackFrame110*, UInt32)
     release : Proc(IDebugStackFrame110*, UInt32)
     get_code_context : Proc(IDebugStackFrame110*, IDebugCodeContext*, HRESULT)
-    get_description_string : Proc(IDebugStackFrame110*, LibC::BOOL, UInt8*, HRESULT)
-    get_language_string : Proc(IDebugStackFrame110*, LibC::BOOL, UInt8*, HRESULT)
+    get_description_string : Proc(IDebugStackFrame110*, LibC::BOOL, UInt8**, HRESULT)
+    get_language_string : Proc(IDebugStackFrame110*, LibC::BOOL, UInt8**, HRESULT)
     get_thread : Proc(IDebugStackFrame110*, IDebugApplicationThread*, HRESULT)
     get_debug_property : Proc(IDebugStackFrame110*, IDebugProperty*, HRESULT)
     get_stack_frame_type : Proc(IDebugStackFrame110*, DEBUG_STACKFRAME_TYPE*, HRESULT)
@@ -12705,7 +12705,7 @@ lib LibWin32
     query_interface : Proc(IRemoteDebugInfoEvent110*, Guid*, Void**, HRESULT)
     add_ref : Proc(IRemoteDebugInfoEvent110*, UInt32)
     release : Proc(IRemoteDebugInfoEvent110*, UInt32)
-    get_event_info : Proc(IRemoteDebugInfoEvent110*, DEBUG_EVENT_INFO_TYPE*, UInt8*, UInt8*, IDebugDocumentContext*, HRESULT)
+    get_event_info : Proc(IRemoteDebugInfoEvent110*, DEBUG_EVENT_INFO_TYPE*, UInt8**, UInt8**, IDebugDocumentContext*, HRESULT)
   end
 
   struct IRemoteDebugInfoEvent110
@@ -12753,12 +12753,12 @@ lib LibWin32
     add_ref : Proc(IJsDebugFrame*, UInt32)
     release : Proc(IJsDebugFrame*, UInt32)
     get_stack_range : Proc(IJsDebugFrame*, UInt64*, UInt64*, HRESULT)
-    get_name : Proc(IJsDebugFrame*, UInt8*, HRESULT)
+    get_name : Proc(IJsDebugFrame*, UInt8**, HRESULT)
     get_document_position_with_id : Proc(IJsDebugFrame*, UInt64*, UInt32*, UInt32*, HRESULT)
-    get_document_position_with_name : Proc(IJsDebugFrame*, UInt8*, UInt32*, UInt32*, HRESULT)
+    get_document_position_with_name : Proc(IJsDebugFrame*, UInt8**, UInt32*, UInt32*, HRESULT)
     get_debug_property : Proc(IJsDebugFrame*, IJsDebugProperty*, HRESULT)
     get_return_address : Proc(IJsDebugFrame*, UInt64*, HRESULT)
-    evaluate : Proc(IJsDebugFrame*, LibC::LPWSTR, IJsDebugProperty*, UInt8*, HRESULT)
+    evaluate : Proc(IJsDebugFrame*, LibC::LPWSTR, IJsDebugProperty*, UInt8**, HRESULT)
   end
 
   struct IJsDebugFrame
@@ -12825,8 +12825,8 @@ lib LibWin32
     allocate_virtual_memory : Proc(IJsDebugDataTarget*, UInt64, UInt32, UInt32, UInt32, UInt64*, HRESULT)
     free_virtual_memory : Proc(IJsDebugDataTarget*, UInt64, UInt32, UInt32, HRESULT)
     get_tls_value : Proc(IJsDebugDataTarget*, UInt32, UInt32, UInt64*, HRESULT)
-    read_bstr : Proc(IJsDebugDataTarget*, UInt64, UInt8*, HRESULT)
-    read_null_terminated_string : Proc(IJsDebugDataTarget*, UInt64, UInt16, UInt32, UInt8*, HRESULT)
+    read_bstr : Proc(IJsDebugDataTarget*, UInt64, UInt8**, HRESULT)
+    read_null_terminated_string : Proc(IJsDebugDataTarget*, UInt64, UInt16, UInt32, UInt8**, HRESULT)
     create_stack_frame_enumerator : Proc(IJsDebugDataTarget*, UInt32, IEnumJsStackFrames*, HRESULT)
     get_thread_context : Proc(IJsDebugDataTarget*, UInt32, UInt32, UInt32, Void*, HRESULT)
   end

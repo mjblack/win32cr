@@ -1604,8 +1604,8 @@ lib LibWin32
     get_type_info : Proc(IPortableDeviceWebControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IPortableDeviceWebControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPortableDeviceWebControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_device_from_id : Proc(IPortableDeviceWebControl*, UInt8, IDispatch*, HRESULT)
-    get_device_from_id_async : Proc(IPortableDeviceWebControl*, UInt8, IDispatch, IDispatch, HRESULT)
+    get_device_from_id : Proc(IPortableDeviceWebControl*, UInt8*, IDispatch*, HRESULT)
+    get_device_from_id_async : Proc(IPortableDeviceWebControl*, UInt8*, IDispatch, IDispatch, HRESULT)
   end
 
   struct IPortableDeviceWebControl
@@ -1682,8 +1682,8 @@ lib LibWin32
     add_ref : Proc(IRadioInstance*, UInt32)
     release : Proc(IRadioInstance*, UInt32)
     get_radio_manager_signature : Proc(IRadioInstance*, Guid*, HRESULT)
-    get_instance_signature : Proc(IRadioInstance*, UInt8*, HRESULT)
-    get_friendly_name : Proc(IRadioInstance*, UInt32, UInt8*, HRESULT)
+    get_instance_signature : Proc(IRadioInstance*, UInt8**, HRESULT)
+    get_friendly_name : Proc(IRadioInstance*, UInt32, UInt8**, HRESULT)
     get_radio_state : Proc(IRadioInstance*, DEVICE_RADIO_STATE*, HRESULT)
     set_radio_state : Proc(IRadioInstance*, DEVICE_RADIO_STATE, UInt32, HRESULT)
     is_multi_comm : Proc(IRadioInstance*, LibC::BOOL)
@@ -1699,8 +1699,8 @@ lib LibWin32
     add_ref : Proc(IMediaRadioManagerNotifySink*, UInt32)
     release : Proc(IMediaRadioManagerNotifySink*, UInt32)
     on_instance_add : Proc(IMediaRadioManagerNotifySink*, IRadioInstance, HRESULT)
-    on_instance_remove : Proc(IMediaRadioManagerNotifySink*, UInt8, HRESULT)
-    on_instance_radio_change : Proc(IMediaRadioManagerNotifySink*, UInt8, DEVICE_RADIO_STATE, HRESULT)
+    on_instance_remove : Proc(IMediaRadioManagerNotifySink*, UInt8*, HRESULT)
+    on_instance_radio_change : Proc(IMediaRadioManagerNotifySink*, UInt8*, DEVICE_RADIO_STATE, HRESULT)
   end
 
   struct IMediaRadioManagerNotifySink
@@ -1708,6 +1708,6 @@ lib LibWin32
   end
 
 
-  # Params # pszxmlin : LibC::LPWSTR [In],rgszallowedcspnodes : LibC::LPWSTR* [In],dwnumallowedcspnodes : UInt32 [In],pbstrxmlout : UInt8* [In]
-  fun DMProcessConfigXMLFiltered(pszxmlin : LibC::LPWSTR, rgszallowedcspnodes : LibC::LPWSTR*, dwnumallowedcspnodes : UInt32, pbstrxmlout : UInt8*) : HRESULT
+  # Params # pszxmlin : LibC::LPWSTR [In],rgszallowedcspnodes : LibC::LPWSTR* [In],dwnumallowedcspnodes : UInt32 [In],pbstrxmlout : UInt8** [In]
+  fun DMProcessConfigXMLFiltered(pszxmlin : LibC::LPWSTR, rgszallowedcspnodes : LibC::LPWSTR*, dwnumallowedcspnodes : UInt32, pbstrxmlout : UInt8**) : HRESULT
 end

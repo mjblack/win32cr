@@ -377,7 +377,7 @@ lib LibWin32
     get_named_value : Proc(INamedPropertyStore*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
     set_named_value : Proc(INamedPropertyStore*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
     get_name_count : Proc(INamedPropertyStore*, UInt32*, HRESULT)
-    get_name_at : Proc(INamedPropertyStore*, UInt32, UInt8*, HRESULT)
+    get_name_at : Proc(INamedPropertyStore*, UInt32, UInt8**, HRESULT)
   end
 
   struct INamedPropertyStore
@@ -900,14 +900,14 @@ lib LibWin32
   # Params # propbag : IPropertyBag [In],propname : LibC::LPWSTR [In],value : LibC::LPWSTR* [In]
   fun PSPropertyBag_ReadStrAlloc(propbag : IPropertyBag, propname : LibC::LPWSTR, value : LibC::LPWSTR*) : HRESULT
 
-  # Params # propbag : IPropertyBag [In],propname : LibC::LPWSTR [In],value : UInt8* [In]
-  fun PSPropertyBag_ReadBSTR(propbag : IPropertyBag, propname : LibC::LPWSTR, value : UInt8*) : HRESULT
+  # Params # propbag : IPropertyBag [In],propname : LibC::LPWSTR [In],value : UInt8** [In]
+  fun PSPropertyBag_ReadBSTR(propbag : IPropertyBag, propname : LibC::LPWSTR, value : UInt8**) : HRESULT
 
   # Params # propbag : IPropertyBag [In],propname : LibC::LPWSTR [In],value : LibC::LPWSTR [In]
   fun PSPropertyBag_WriteStr(propbag : IPropertyBag, propname : LibC::LPWSTR, value : LibC::LPWSTR) : HRESULT
 
-  # Params # propbag : IPropertyBag [In],propname : LibC::LPWSTR [In],value : UInt8 [In]
-  fun PSPropertyBag_WriteBSTR(propbag : IPropertyBag, propname : LibC::LPWSTR, value : UInt8) : HRESULT
+  # Params # propbag : IPropertyBag [In],propname : LibC::LPWSTR [In],value : UInt8* [In]
+  fun PSPropertyBag_WriteBSTR(propbag : IPropertyBag, propname : LibC::LPWSTR, value : UInt8*) : HRESULT
 
   # Params # propbag : IPropertyBag [In],propname : LibC::LPWSTR [In],value : Int32* [In]
   fun PSPropertyBag_ReadInt(propbag : IPropertyBag, propname : LibC::LPWSTR, value : Int32*) : HRESULT
@@ -1110,8 +1110,8 @@ lib LibWin32
   # Params # propvar : PROPVARIANT* [In],ppszout : LibC::LPWSTR* [In]
   fun PropVariantToStringAlloc(propvar : PROPVARIANT*, ppszout : LibC::LPWSTR*) : HRESULT
 
-  # Params # propvar : PROPVARIANT* [In],pbstrout : UInt8* [In]
-  fun PropVariantToBSTR(propvar : PROPVARIANT*, pbstrout : UInt8*) : HRESULT
+  # Params # propvar : PROPVARIANT* [In],pbstrout : UInt8** [In]
+  fun PropVariantToBSTR(propvar : PROPVARIANT*, pbstrout : UInt8**) : HRESULT
 
   # Params # propvar : PROPVARIANT* [In],pstrret : STRRET* [In]
   fun PropVariantToStrRet(propvar : PROPVARIANT*, pstrret : STRRET*) : HRESULT

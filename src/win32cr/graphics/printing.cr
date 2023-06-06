@@ -1684,16 +1684,16 @@ lib LibWin32
     lp_vtbl : IBidiSpl2Vtbl*
   end
   struct MIDL___MIDL_itf_imgerror_0000_0000_0001
-    description : UInt8
+    description : UInt8*
     guid : Guid
     help_context : UInt32
-    help_file : UInt8
-    source : UInt8
-    dev_description : UInt8
+    help_file : UInt8*
+    source : UInt8*
+    dev_description : UInt8*
     error_id : Guid
     c_user_parameters : UInt32
-    a_user_parameters : UInt8*
-    user_fallback : UInt8
+    a_user_parameters : UInt8**
+    user_fallback : UInt8*
     exception_id : UInt32
   end
   struct IImgErrorInfoVtbl
@@ -3918,8 +3918,8 @@ lib LibWin32
     add_ref : Proc(IPrintTicketProvider*, UInt32)
     release : Proc(IPrintTicketProvider*, UInt32)
     get_supported_versions : Proc(IPrintTicketProvider*, LibC::HANDLE, Int32**, Int32*, HRESULT)
-    bind_printer : Proc(IPrintTicketProvider*, LibC::HANDLE, Int32, SHIMOPTS*, UInt32*, Int32*, UInt8**, HRESULT)
-    query_device_namespace : Proc(IPrintTicketProvider*, UInt8*, HRESULT)
+    bind_printer : Proc(IPrintTicketProvider*, LibC::HANDLE, Int32, SHIMOPTS*, UInt32*, Int32*, UInt8***, HRESULT)
+    query_device_namespace : Proc(IPrintTicketProvider*, UInt8**, HRESULT)
     convert_print_ticket_to_dev_mode : Proc(IPrintTicketProvider*, IXMLDOMDocument2, UInt32, DEVMODEA*, UInt32*, DEVMODEA**, HRESULT)
     convert_dev_mode_to_print_ticket : Proc(IPrintTicketProvider*, UInt32, DEVMODEA*, IXMLDOMDocument2, HRESULT)
     get_print_capabilities : Proc(IPrintTicketProvider*, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)
@@ -3935,8 +3935,8 @@ lib LibWin32
     add_ref : Proc(IPrintTicketProvider2*, UInt32)
     release : Proc(IPrintTicketProvider2*, UInt32)
     get_supported_versions : Proc(IPrintTicketProvider2*, LibC::HANDLE, Int32**, Int32*, HRESULT)
-    bind_printer : Proc(IPrintTicketProvider2*, LibC::HANDLE, Int32, SHIMOPTS*, UInt32*, Int32*, UInt8**, HRESULT)
-    query_device_namespace : Proc(IPrintTicketProvider2*, UInt8*, HRESULT)
+    bind_printer : Proc(IPrintTicketProvider2*, LibC::HANDLE, Int32, SHIMOPTS*, UInt32*, Int32*, UInt8***, HRESULT)
+    query_device_namespace : Proc(IPrintTicketProvider2*, UInt8**, HRESULT)
     convert_print_ticket_to_dev_mode : Proc(IPrintTicketProvider2*, IXMLDOMDocument2, UInt32, DEVMODEA*, UInt32*, DEVMODEA**, HRESULT)
     convert_dev_mode_to_print_ticket : Proc(IPrintTicketProvider2*, UInt32, DEVMODEA*, IXMLDOMDocument2, HRESULT)
     get_print_capabilities : Proc(IPrintTicketProvider2*, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)
@@ -3958,8 +3958,8 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaElement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaElement*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaElement*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaElement*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaElement*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaElement*, UInt8**, HRESULT)
   end
 
   struct IPrintSchemaElement
@@ -3975,9 +3975,9 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaDisplayableElement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaDisplayableElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaDisplayableElement*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaDisplayableElement*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaDisplayableElement*, UInt8*, HRESULT)
-    get_display_name : Proc(IPrintSchemaDisplayableElement*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaDisplayableElement*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaDisplayableElement*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaDisplayableElement*, UInt8**, HRESULT)
   end
 
   struct IPrintSchemaDisplayableElement
@@ -3993,12 +3993,12 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaOption*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaOption*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaOption*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaOption*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaOption*, UInt8*, HRESULT)
-    get_display_name : Proc(IPrintSchemaOption*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaOption*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaOption*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaOption*, UInt8**, HRESULT)
     get_selected : Proc(IPrintSchemaOption*, LibC::BOOL*, HRESULT)
     get_constrained : Proc(IPrintSchemaOption*, PrintSchemaConstrainedSetting*, HRESULT)
-    get_property_value : Proc(IPrintSchemaOption*, UInt8, UInt8, IUnknown*, HRESULT)
+    get_property_value : Proc(IPrintSchemaOption*, UInt8*, UInt8*, IUnknown*, HRESULT)
   end
 
   struct IPrintSchemaOption
@@ -4014,12 +4014,12 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaPageMediaSizeOption*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaPageMediaSizeOption*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaPageMediaSizeOption*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaPageMediaSizeOption*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaPageMediaSizeOption*, UInt8*, HRESULT)
-    get_display_name : Proc(IPrintSchemaPageMediaSizeOption*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaPageMediaSizeOption*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaPageMediaSizeOption*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaPageMediaSizeOption*, UInt8**, HRESULT)
     get_selected : Proc(IPrintSchemaPageMediaSizeOption*, LibC::BOOL*, HRESULT)
     get_constrained : Proc(IPrintSchemaPageMediaSizeOption*, PrintSchemaConstrainedSetting*, HRESULT)
-    get_property_value : Proc(IPrintSchemaPageMediaSizeOption*, UInt8, UInt8, IUnknown*, HRESULT)
+    get_property_value : Proc(IPrintSchemaPageMediaSizeOption*, UInt8*, UInt8*, IUnknown*, HRESULT)
     get_width_in_microns : Proc(IPrintSchemaPageMediaSizeOption*, UInt32*, HRESULT)
     get_height_in_microns : Proc(IPrintSchemaPageMediaSizeOption*, UInt32*, HRESULT)
   end
@@ -4037,12 +4037,12 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaNUpOption*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaNUpOption*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaNUpOption*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaNUpOption*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaNUpOption*, UInt8*, HRESULT)
-    get_display_name : Proc(IPrintSchemaNUpOption*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaNUpOption*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaNUpOption*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaNUpOption*, UInt8**, HRESULT)
     get_selected : Proc(IPrintSchemaNUpOption*, LibC::BOOL*, HRESULT)
     get_constrained : Proc(IPrintSchemaNUpOption*, PrintSchemaConstrainedSetting*, HRESULT)
-    get_property_value : Proc(IPrintSchemaNUpOption*, UInt8, UInt8, IUnknown*, HRESULT)
+    get_property_value : Proc(IPrintSchemaNUpOption*, UInt8*, UInt8*, IUnknown*, HRESULT)
     get_pages_per_sheet : Proc(IPrintSchemaNUpOption*, UInt32*, HRESULT)
   end
 
@@ -4076,13 +4076,13 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaFeature*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaFeature*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaFeature*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaFeature*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaFeature*, UInt8*, HRESULT)
-    get_display_name : Proc(IPrintSchemaFeature*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaFeature*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaFeature*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaFeature*, UInt8**, HRESULT)
     get_selected_option : Proc(IPrintSchemaFeature*, IPrintSchemaOption*, HRESULT)
     put_selected_option : Proc(IPrintSchemaFeature*, IPrintSchemaOption, HRESULT)
     get_selection_type : Proc(IPrintSchemaFeature*, PrintSchemaSelectionType*, HRESULT)
-    get_option : Proc(IPrintSchemaFeature*, UInt8, UInt8, IPrintSchemaOption*, HRESULT)
+    get_option : Proc(IPrintSchemaFeature*, UInt8*, UInt8*, IPrintSchemaOption*, HRESULT)
     get_display_ui : Proc(IPrintSchemaFeature*, LibC::BOOL*, HRESULT)
   end
 
@@ -4099,8 +4099,8 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaPageImageableSize*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaPageImageableSize*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaPageImageableSize*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaPageImageableSize*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaPageImageableSize*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaPageImageableSize*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaPageImageableSize*, UInt8**, HRESULT)
     get_imageable_size_width_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
     get_imageable_size_height_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
     get_origin_width_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
@@ -4122,11 +4122,11 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaParameterDefinition*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaParameterDefinition*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaParameterDefinition*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaParameterDefinition*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaParameterDefinition*, UInt8*, HRESULT)
-    get_display_name : Proc(IPrintSchemaParameterDefinition*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaParameterDefinition*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaParameterDefinition*, UInt8**, HRESULT)
+    get_display_name : Proc(IPrintSchemaParameterDefinition*, UInt8**, HRESULT)
     get_user_input_required : Proc(IPrintSchemaParameterDefinition*, LibC::BOOL*, HRESULT)
-    get_unit_type : Proc(IPrintSchemaParameterDefinition*, UInt8*, HRESULT)
+    get_unit_type : Proc(IPrintSchemaParameterDefinition*, UInt8**, HRESULT)
     get_data_type : Proc(IPrintSchemaParameterDefinition*, PrintSchemaParameterDataType*, HRESULT)
     get_range_min : Proc(IPrintSchemaParameterDefinition*, Int32*, HRESULT)
     get_range_max : Proc(IPrintSchemaParameterDefinition*, Int32*, HRESULT)
@@ -4145,8 +4145,8 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaParameterInitializer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaParameterInitializer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaParameterInitializer*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaParameterInitializer*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaParameterInitializer*, UInt8*, HRESULT)
+    get_name : Proc(IPrintSchemaParameterInitializer*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaParameterInitializer*, UInt8**, HRESULT)
     get_value : Proc(IPrintSchemaParameterInitializer*, VARIANT*, HRESULT)
     put_value : Proc(IPrintSchemaParameterInitializer*, VARIANT*, HRESULT)
   end
@@ -4164,10 +4164,10 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaCapabilities*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaCapabilities*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaCapabilities*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaCapabilities*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaCapabilities*, UInt8*, HRESULT)
-    get_feature_by_key_name : Proc(IPrintSchemaCapabilities*, UInt8, IPrintSchemaFeature*, HRESULT)
-    get_feature : Proc(IPrintSchemaCapabilities*, UInt8, UInt8, IPrintSchemaFeature*, HRESULT)
+    get_name : Proc(IPrintSchemaCapabilities*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaCapabilities*, UInt8**, HRESULT)
+    get_feature_by_key_name : Proc(IPrintSchemaCapabilities*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_feature : Proc(IPrintSchemaCapabilities*, UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)
     get_page_imageable_size : Proc(IPrintSchemaCapabilities*, IPrintSchemaPageImageableSize*, HRESULT)
     get_job_copies_all_documents_min_value : Proc(IPrintSchemaCapabilities*, UInt32*, HRESULT)
     get_job_copies_all_documents_max_value : Proc(IPrintSchemaCapabilities*, UInt32*, HRESULT)
@@ -4188,16 +4188,16 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaCapabilities2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaCapabilities2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaCapabilities2*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaCapabilities2*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaCapabilities2*, UInt8*, HRESULT)
-    get_feature_by_key_name : Proc(IPrintSchemaCapabilities2*, UInt8, IPrintSchemaFeature*, HRESULT)
-    get_feature : Proc(IPrintSchemaCapabilities2*, UInt8, UInt8, IPrintSchemaFeature*, HRESULT)
+    get_name : Proc(IPrintSchemaCapabilities2*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaCapabilities2*, UInt8**, HRESULT)
+    get_feature_by_key_name : Proc(IPrintSchemaCapabilities2*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_feature : Proc(IPrintSchemaCapabilities2*, UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)
     get_page_imageable_size : Proc(IPrintSchemaCapabilities2*, IPrintSchemaPageImageableSize*, HRESULT)
     get_job_copies_all_documents_min_value : Proc(IPrintSchemaCapabilities2*, UInt32*, HRESULT)
     get_job_copies_all_documents_max_value : Proc(IPrintSchemaCapabilities2*, UInt32*, HRESULT)
     get_selected_option_in_print_ticket : Proc(IPrintSchemaCapabilities2*, IPrintSchemaFeature, IPrintSchemaOption*, HRESULT)
     get_options : Proc(IPrintSchemaCapabilities2*, IPrintSchemaFeature, IPrintSchemaOptionCollection*, HRESULT)
-    get_parameter_definition : Proc(IPrintSchemaCapabilities2*, UInt8, UInt8, IPrintSchemaParameterDefinition*, HRESULT)
+    get_parameter_definition : Proc(IPrintSchemaCapabilities2*, UInt8*, UInt8*, IPrintSchemaParameterDefinition*, HRESULT)
   end
 
   struct IPrintSchemaCapabilities2
@@ -4229,10 +4229,10 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaTicket*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaTicket*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaTicket*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaTicket*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaTicket*, UInt8*, HRESULT)
-    get_feature_by_key_name : Proc(IPrintSchemaTicket*, UInt8, IPrintSchemaFeature*, HRESULT)
-    get_feature : Proc(IPrintSchemaTicket*, UInt8, UInt8, IPrintSchemaFeature*, HRESULT)
+    get_name : Proc(IPrintSchemaTicket*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaTicket*, UInt8**, HRESULT)
+    get_feature_by_key_name : Proc(IPrintSchemaTicket*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_feature : Proc(IPrintSchemaTicket*, UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)
     validate_async : Proc(IPrintSchemaTicket*, IPrintSchemaAsyncOperation*, HRESULT)
     commit_async : Proc(IPrintSchemaTicket*, IPrintSchemaTicket, IPrintSchemaAsyncOperation*, HRESULT)
     notify_xml_changed : Proc(IPrintSchemaTicket*, HRESULT)
@@ -4254,17 +4254,17 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrintSchemaTicket2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrintSchemaTicket2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_xml_node : Proc(IPrintSchemaTicket2*, IUnknown*, HRESULT)
-    get_name : Proc(IPrintSchemaTicket2*, UInt8*, HRESULT)
-    get_namespace_uri : Proc(IPrintSchemaTicket2*, UInt8*, HRESULT)
-    get_feature_by_key_name : Proc(IPrintSchemaTicket2*, UInt8, IPrintSchemaFeature*, HRESULT)
-    get_feature : Proc(IPrintSchemaTicket2*, UInt8, UInt8, IPrintSchemaFeature*, HRESULT)
+    get_name : Proc(IPrintSchemaTicket2*, UInt8**, HRESULT)
+    get_namespace_uri : Proc(IPrintSchemaTicket2*, UInt8**, HRESULT)
+    get_feature_by_key_name : Proc(IPrintSchemaTicket2*, UInt8*, IPrintSchemaFeature*, HRESULT)
+    get_feature : Proc(IPrintSchemaTicket2*, UInt8*, UInt8*, IPrintSchemaFeature*, HRESULT)
     validate_async : Proc(IPrintSchemaTicket2*, IPrintSchemaAsyncOperation*, HRESULT)
     commit_async : Proc(IPrintSchemaTicket2*, IPrintSchemaTicket, IPrintSchemaAsyncOperation*, HRESULT)
     notify_xml_changed : Proc(IPrintSchemaTicket2*, HRESULT)
     get_capabilities : Proc(IPrintSchemaTicket2*, IPrintSchemaCapabilities*, HRESULT)
     get_job_copies_all_documents : Proc(IPrintSchemaTicket2*, UInt32*, HRESULT)
     put_job_copies_all_documents : Proc(IPrintSchemaTicket2*, UInt32, HRESULT)
-    get_parameter_initializer : Proc(IPrintSchemaTicket2*, UInt8, UInt8, IPrintSchemaParameterInitializer*, HRESULT)
+    get_parameter_initializer : Proc(IPrintSchemaTicket2*, UInt8*, UInt8*, IPrintSchemaParameterInitializer*, HRESULT)
   end
 
   struct IPrintSchemaTicket2
@@ -4329,16 +4329,16 @@ lib LibWin32
     get_type_info : Proc(IPrinterPropertyBag*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IPrinterPropertyBag*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrinterPropertyBag*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_bool : Proc(IPrinterPropertyBag*, UInt8, LibC::BOOL*, HRESULT)
-    set_bool : Proc(IPrinterPropertyBag*, UInt8, LibC::BOOL, HRESULT)
-    get_int32 : Proc(IPrinterPropertyBag*, UInt8, Int32*, HRESULT)
-    set_int32 : Proc(IPrinterPropertyBag*, UInt8, Int32, HRESULT)
-    get_string : Proc(IPrinterPropertyBag*, UInt8, UInt8*, HRESULT)
-    set_string : Proc(IPrinterPropertyBag*, UInt8, UInt8, HRESULT)
-    get_bytes : Proc(IPrinterPropertyBag*, UInt8, UInt32*, UInt8**, HRESULT)
-    set_bytes : Proc(IPrinterPropertyBag*, UInt8, UInt32, UInt8*, HRESULT)
-    get_read_stream : Proc(IPrinterPropertyBag*, UInt8, IStream*, HRESULT)
-    get_write_stream : Proc(IPrinterPropertyBag*, UInt8, IStream*, HRESULT)
+    get_bool : Proc(IPrinterPropertyBag*, UInt8*, LibC::BOOL*, HRESULT)
+    set_bool : Proc(IPrinterPropertyBag*, UInt8*, LibC::BOOL, HRESULT)
+    get_int32 : Proc(IPrinterPropertyBag*, UInt8*, Int32*, HRESULT)
+    set_int32 : Proc(IPrinterPropertyBag*, UInt8*, Int32, HRESULT)
+    get_string : Proc(IPrinterPropertyBag*, UInt8*, UInt8**, HRESULT)
+    set_string : Proc(IPrinterPropertyBag*, UInt8*, UInt8*, HRESULT)
+    get_bytes : Proc(IPrinterPropertyBag*, UInt8*, UInt32*, UInt8**, HRESULT)
+    set_bytes : Proc(IPrinterPropertyBag*, UInt8*, UInt32, UInt8*, HRESULT)
+    get_read_stream : Proc(IPrinterPropertyBag*, UInt8*, IStream*, HRESULT)
+    get_write_stream : Proc(IPrinterPropertyBag*, UInt8*, IStream*, HRESULT)
   end
 
   struct IPrinterPropertyBag
@@ -4353,16 +4353,16 @@ lib LibWin32
     get_type_info : Proc(IPrinterScriptablePropertyBag*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IPrinterScriptablePropertyBag*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrinterScriptablePropertyBag*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_bool : Proc(IPrinterScriptablePropertyBag*, UInt8, LibC::BOOL*, HRESULT)
-    set_bool : Proc(IPrinterScriptablePropertyBag*, UInt8, LibC::BOOL, HRESULT)
-    get_int32 : Proc(IPrinterScriptablePropertyBag*, UInt8, Int32*, HRESULT)
-    set_int32 : Proc(IPrinterScriptablePropertyBag*, UInt8, Int32, HRESULT)
-    get_string : Proc(IPrinterScriptablePropertyBag*, UInt8, UInt8*, HRESULT)
-    set_string : Proc(IPrinterScriptablePropertyBag*, UInt8, UInt8, HRESULT)
-    get_bytes : Proc(IPrinterScriptablePropertyBag*, UInt8, IDispatch*, HRESULT)
-    set_bytes : Proc(IPrinterScriptablePropertyBag*, UInt8, IDispatch, HRESULT)
-    get_read_stream : Proc(IPrinterScriptablePropertyBag*, UInt8, IPrinterScriptableStream*, HRESULT)
-    get_write_stream : Proc(IPrinterScriptablePropertyBag*, UInt8, IPrinterScriptableStream*, HRESULT)
+    get_bool : Proc(IPrinterScriptablePropertyBag*, UInt8*, LibC::BOOL*, HRESULT)
+    set_bool : Proc(IPrinterScriptablePropertyBag*, UInt8*, LibC::BOOL, HRESULT)
+    get_int32 : Proc(IPrinterScriptablePropertyBag*, UInt8*, Int32*, HRESULT)
+    set_int32 : Proc(IPrinterScriptablePropertyBag*, UInt8*, Int32, HRESULT)
+    get_string : Proc(IPrinterScriptablePropertyBag*, UInt8*, UInt8**, HRESULT)
+    set_string : Proc(IPrinterScriptablePropertyBag*, UInt8*, UInt8*, HRESULT)
+    get_bytes : Proc(IPrinterScriptablePropertyBag*, UInt8*, IDispatch*, HRESULT)
+    set_bytes : Proc(IPrinterScriptablePropertyBag*, UInt8*, IDispatch, HRESULT)
+    get_read_stream : Proc(IPrinterScriptablePropertyBag*, UInt8*, IPrinterScriptableStream*, HRESULT)
+    get_write_stream : Proc(IPrinterScriptablePropertyBag*, UInt8*, IPrinterScriptableStream*, HRESULT)
   end
 
   struct IPrinterScriptablePropertyBag
@@ -4377,17 +4377,17 @@ lib LibWin32
     get_type_info : Proc(IPrinterScriptablePropertyBag2*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IPrinterScriptablePropertyBag2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrinterScriptablePropertyBag2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_bool : Proc(IPrinterScriptablePropertyBag2*, UInt8, LibC::BOOL*, HRESULT)
-    set_bool : Proc(IPrinterScriptablePropertyBag2*, UInt8, LibC::BOOL, HRESULT)
-    get_int32 : Proc(IPrinterScriptablePropertyBag2*, UInt8, Int32*, HRESULT)
-    set_int32 : Proc(IPrinterScriptablePropertyBag2*, UInt8, Int32, HRESULT)
-    get_string : Proc(IPrinterScriptablePropertyBag2*, UInt8, UInt8*, HRESULT)
-    set_string : Proc(IPrinterScriptablePropertyBag2*, UInt8, UInt8, HRESULT)
-    get_bytes : Proc(IPrinterScriptablePropertyBag2*, UInt8, IDispatch*, HRESULT)
-    set_bytes : Proc(IPrinterScriptablePropertyBag2*, UInt8, IDispatch, HRESULT)
-    get_read_stream : Proc(IPrinterScriptablePropertyBag2*, UInt8, IPrinterScriptableStream*, HRESULT)
-    get_write_stream : Proc(IPrinterScriptablePropertyBag2*, UInt8, IPrinterScriptableStream*, HRESULT)
-    get_read_stream_as_xml : Proc(IPrinterScriptablePropertyBag2*, UInt8, IUnknown*, HRESULT)
+    get_bool : Proc(IPrinterScriptablePropertyBag2*, UInt8*, LibC::BOOL*, HRESULT)
+    set_bool : Proc(IPrinterScriptablePropertyBag2*, UInt8*, LibC::BOOL, HRESULT)
+    get_int32 : Proc(IPrinterScriptablePropertyBag2*, UInt8*, Int32*, HRESULT)
+    set_int32 : Proc(IPrinterScriptablePropertyBag2*, UInt8*, Int32, HRESULT)
+    get_string : Proc(IPrinterScriptablePropertyBag2*, UInt8*, UInt8**, HRESULT)
+    set_string : Proc(IPrinterScriptablePropertyBag2*, UInt8*, UInt8*, HRESULT)
+    get_bytes : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IDispatch*, HRESULT)
+    set_bytes : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IDispatch, HRESULT)
+    get_read_stream : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IPrinterScriptableStream*, HRESULT)
+    get_write_stream : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IPrinterScriptableStream*, HRESULT)
+    get_read_stream_as_xml : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IUnknown*, HRESULT)
   end
 
   struct IPrinterScriptablePropertyBag2
@@ -4403,8 +4403,8 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrinterQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrinterQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_handle : Proc(IPrinterQueue*, LibC::HANDLE*, HRESULT)
-    get_name : Proc(IPrinterQueue*, UInt8*, HRESULT)
-    send_bidi_query : Proc(IPrinterQueue*, UInt8, HRESULT)
+    get_name : Proc(IPrinterQueue*, UInt8**, HRESULT)
+    send_bidi_query : Proc(IPrinterQueue*, UInt8*, HRESULT)
     get_properties : Proc(IPrinterQueue*, IPrinterPropertyBag*, HRESULT)
   end
 
@@ -4416,7 +4416,7 @@ lib LibWin32
     query_interface : Proc(IPrintJob*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPrintJob*, UInt32)
     release : Proc(IPrintJob*, UInt32)
-    get_name : Proc(IPrintJob*, UInt8*, HRESULT)
+    get_name : Proc(IPrintJob*, UInt8**, HRESULT)
     get_id : Proc(IPrintJob*, UInt32*, HRESULT)
     get_printed_pages : Proc(IPrintJob*, UInt32*, HRESULT)
     get_total_pages : Proc(IPrintJob*, UInt32*, HRESULT)
@@ -4484,7 +4484,7 @@ lib LibWin32
     get_type_info : Proc(IPrinterQueueEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IPrinterQueueEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrinterQueueEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    on_bidi_response_received : Proc(IPrinterQueueEvent*, UInt8, HRESULT, HRESULT)
+    on_bidi_response_received : Proc(IPrinterQueueEvent*, UInt8*, HRESULT, HRESULT)
   end
 
   struct IPrinterQueueEvent
@@ -4495,7 +4495,7 @@ lib LibWin32
     query_interface : Proc(IPrinterBidiSetRequestCallback*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPrinterBidiSetRequestCallback*, UInt32)
     release : Proc(IPrinterBidiSetRequestCallback*, UInt32)
-    completed : Proc(IPrinterBidiSetRequestCallback*, UInt8, HRESULT, HRESULT)
+    completed : Proc(IPrinterBidiSetRequestCallback*, UInt8*, HRESULT, HRESULT)
   end
 
   struct IPrinterBidiSetRequestCallback
@@ -4522,10 +4522,10 @@ lib LibWin32
     get_i_ds_of_names : Proc(IPrinterQueue2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrinterQueue2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_handle : Proc(IPrinterQueue2*, LibC::HANDLE*, HRESULT)
-    get_name : Proc(IPrinterQueue2*, UInt8*, HRESULT)
-    send_bidi_query : Proc(IPrinterQueue2*, UInt8, HRESULT)
+    get_name : Proc(IPrinterQueue2*, UInt8**, HRESULT)
+    send_bidi_query : Proc(IPrinterQueue2*, UInt8*, HRESULT)
     get_properties : Proc(IPrinterQueue2*, IPrinterPropertyBag*, HRESULT)
-    send_bidi_set_request_async : Proc(IPrinterQueue2*, UInt8, IPrinterBidiSetRequestCallback, IPrinterExtensionAsyncOperation*, HRESULT)
+    send_bidi_set_request_async : Proc(IPrinterQueue2*, UInt8*, IPrinterBidiSetRequestCallback, IPrinterExtensionAsyncOperation*, HRESULT)
     get_printer_queue_view : Proc(IPrinterQueue2*, UInt32, UInt32, IPrinterQueueView*, HRESULT)
   end
 
@@ -4559,7 +4559,7 @@ lib LibWin32
     get_type_info : Proc(IPrinterExtensionRequest*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IPrinterExtensionRequest*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPrinterExtensionRequest*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    cancel : Proc(IPrinterExtensionRequest*, HRESULT, UInt8, HRESULT)
+    cancel : Proc(IPrinterExtensionRequest*, HRESULT, UInt8*, HRESULT)
     complete : Proc(IPrinterExtensionRequest*, HRESULT)
   end
 
@@ -4579,10 +4579,10 @@ lib LibWin32
     get_print_schema_ticket : Proc(IPrinterExtensionEventArgs*, IPrintSchemaTicket*, HRESULT)
     get_driver_properties : Proc(IPrinterExtensionEventArgs*, IPrinterPropertyBag*, HRESULT)
     get_user_properties : Proc(IPrinterExtensionEventArgs*, IPrinterPropertyBag*, HRESULT)
-    get_bidi_notification : Proc(IPrinterExtensionEventArgs*, UInt8*, HRESULT)
+    get_bidi_notification : Proc(IPrinterExtensionEventArgs*, UInt8**, HRESULT)
     get_reason_id : Proc(IPrinterExtensionEventArgs*, Guid*, HRESULT)
     get_request : Proc(IPrinterExtensionEventArgs*, IPrinterExtensionRequest*, HRESULT)
-    get_source_application : Proc(IPrinterExtensionEventArgs*, UInt8*, HRESULT)
+    get_source_application : Proc(IPrinterExtensionEventArgs*, UInt8**, HRESULT)
     get_detailed_reason_id : Proc(IPrinterExtensionEventArgs*, Guid*, HRESULT)
     get_window_modal : Proc(IPrinterExtensionEventArgs*, LibC::BOOL*, HRESULT)
     get_window_parent : Proc(IPrinterExtensionEventArgs*, LibC::HANDLE*, HRESULT)

@@ -243,8 +243,8 @@ lib LibWin32
     query_interface : Proc(IRDPSRAPIDebug*, Guid*, Void**, HRESULT)
     add_ref : Proc(IRDPSRAPIDebug*, UInt32)
     release : Proc(IRDPSRAPIDebug*, UInt32)
-    put_clx_cmd_line : Proc(IRDPSRAPIDebug*, UInt8, HRESULT)
-    get_clx_cmd_line : Proc(IRDPSRAPIDebug*, UInt8*, HRESULT)
+    put_clx_cmd_line : Proc(IRDPSRAPIDebug*, UInt8*, HRESULT)
+    get_clx_cmd_line : Proc(IRDPSRAPIDebug*, UInt8**, HRESULT)
   end
 
   struct IRDPSRAPIDebug
@@ -266,7 +266,7 @@ lib LibWin32
     query_interface : Proc(IRDPSRAPIPerfCounterLoggingManager*, Guid*, Void**, HRESULT)
     add_ref : Proc(IRDPSRAPIPerfCounterLoggingManager*, UInt32)
     release : Proc(IRDPSRAPIPerfCounterLoggingManager*, UInt32)
-    create_logger : Proc(IRDPSRAPIPerfCounterLoggingManager*, UInt8, IRDPSRAPIPerfCounterLogger*, HRESULT)
+    create_logger : Proc(IRDPSRAPIPerfCounterLoggingManager*, UInt8*, IRDPSRAPIPerfCounterLogger*, HRESULT)
   end
 
   struct IRDPSRAPIPerfCounterLoggingManager
@@ -311,7 +311,7 @@ lib LibWin32
     get_application : Proc(IRDPSRAPIWindow*, IRDPSRAPIApplication*, HRESULT)
     get_shared : Proc(IRDPSRAPIWindow*, Int16*, HRESULT)
     put_shared : Proc(IRDPSRAPIWindow*, Int16, HRESULT)
-    get_name : Proc(IRDPSRAPIWindow*, UInt8*, HRESULT)
+    get_name : Proc(IRDPSRAPIWindow*, UInt8**, HRESULT)
     show : Proc(IRDPSRAPIWindow*, HRESULT)
     get_flags : Proc(IRDPSRAPIWindow*, UInt32*, HRESULT)
   end
@@ -348,7 +348,7 @@ lib LibWin32
     get_id : Proc(IRDPSRAPIApplication*, Int32*, HRESULT)
     get_shared : Proc(IRDPSRAPIApplication*, Int16*, HRESULT)
     put_shared : Proc(IRDPSRAPIApplication*, Int16, HRESULT)
-    get_name : Proc(IRDPSRAPIApplication*, UInt8*, HRESULT)
+    get_name : Proc(IRDPSRAPIApplication*, UInt8**, HRESULT)
     get_flags : Proc(IRDPSRAPIApplication*, UInt32*, HRESULT)
   end
 
@@ -398,8 +398,8 @@ lib LibWin32
     get_type_info : Proc(IRDPSRAPISessionProperties*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IRDPSRAPISessionProperties*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IRDPSRAPISessionProperties*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_property : Proc(IRDPSRAPISessionProperties*, UInt8, VARIANT*, HRESULT)
-    put_property : Proc(IRDPSRAPISessionProperties*, UInt8, VARIANT, HRESULT)
+    get_property : Proc(IRDPSRAPISessionProperties*, UInt8*, VARIANT*, HRESULT)
+    put_property : Proc(IRDPSRAPISessionProperties*, UInt8*, VARIANT, HRESULT)
   end
 
   struct IRDPSRAPISessionProperties
@@ -414,9 +414,9 @@ lib LibWin32
     get_type_info : Proc(IRDPSRAPIInvitation*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IRDPSRAPIInvitation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IRDPSRAPIInvitation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_connection_string : Proc(IRDPSRAPIInvitation*, UInt8*, HRESULT)
-    get_group_name : Proc(IRDPSRAPIInvitation*, UInt8*, HRESULT)
-    get_password : Proc(IRDPSRAPIInvitation*, UInt8*, HRESULT)
+    get_connection_string : Proc(IRDPSRAPIInvitation*, UInt8**, HRESULT)
+    get_group_name : Proc(IRDPSRAPIInvitation*, UInt8**, HRESULT)
+    get_password : Proc(IRDPSRAPIInvitation*, UInt8**, HRESULT)
     get_attendee_limit : Proc(IRDPSRAPIInvitation*, Int32*, HRESULT)
     put_attendee_limit : Proc(IRDPSRAPIInvitation*, Int32, HRESULT)
     get_revoked : Proc(IRDPSRAPIInvitation*, Int16*, HRESULT)
@@ -438,7 +438,7 @@ lib LibWin32
     get__new_enum : Proc(IRDPSRAPIInvitationManager*, IUnknown*, HRESULT)
     get_item : Proc(IRDPSRAPIInvitationManager*, VARIANT, IRDPSRAPIInvitation*, HRESULT)
     get_count : Proc(IRDPSRAPIInvitationManager*, Int32*, HRESULT)
-    create_invitation : Proc(IRDPSRAPIInvitationManager*, UInt8, UInt8, UInt8, Int32, IRDPSRAPIInvitation*, HRESULT)
+    create_invitation : Proc(IRDPSRAPIInvitationManager*, UInt8*, UInt8*, UInt8*, Int32, IRDPSRAPIInvitation*, HRESULT)
   end
 
   struct IRDPSRAPIInvitationManager
@@ -455,9 +455,9 @@ lib LibWin32
     invoke : Proc(IRDPSRAPITcpConnectionInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_protocol : Proc(IRDPSRAPITcpConnectionInfo*, Int32*, HRESULT)
     get_local_port : Proc(IRDPSRAPITcpConnectionInfo*, Int32*, HRESULT)
-    get_local_ip : Proc(IRDPSRAPITcpConnectionInfo*, UInt8*, HRESULT)
+    get_local_ip : Proc(IRDPSRAPITcpConnectionInfo*, UInt8**, HRESULT)
     get_peer_port : Proc(IRDPSRAPITcpConnectionInfo*, Int32*, HRESULT)
-    get_peer_ip : Proc(IRDPSRAPITcpConnectionInfo*, UInt8*, HRESULT)
+    get_peer_ip : Proc(IRDPSRAPITcpConnectionInfo*, UInt8**, HRESULT)
   end
 
   struct IRDPSRAPITcpConnectionInfo
@@ -473,7 +473,7 @@ lib LibWin32
     get_i_ds_of_names : Proc(IRDPSRAPIAttendee*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IRDPSRAPIAttendee*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_id : Proc(IRDPSRAPIAttendee*, Int32*, HRESULT)
-    get_remote_name : Proc(IRDPSRAPIAttendee*, UInt8*, HRESULT)
+    get_remote_name : Proc(IRDPSRAPIAttendee*, UInt8**, HRESULT)
     get_control_level : Proc(IRDPSRAPIAttendee*, CTRL_LEVEL*, HRESULT)
     put_control_level : Proc(IRDPSRAPIAttendee*, CTRL_LEVEL, HRESULT)
     get_invitation : Proc(IRDPSRAPIAttendee*, IRDPSRAPIInvitation*, HRESULT)
@@ -527,9 +527,9 @@ lib LibWin32
     get_type_info : Proc(IRDPSRAPIVirtualChannel*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IRDPSRAPIVirtualChannel*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IRDPSRAPIVirtualChannel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    send_data : Proc(IRDPSRAPIVirtualChannel*, UInt8, Int32, UInt32, HRESULT)
+    send_data : Proc(IRDPSRAPIVirtualChannel*, UInt8*, Int32, UInt32, HRESULT)
     set_access : Proc(IRDPSRAPIVirtualChannel*, Int32, CHANNEL_ACCESS_ENUM, HRESULT)
-    get_name : Proc(IRDPSRAPIVirtualChannel*, UInt8*, HRESULT)
+    get_name : Proc(IRDPSRAPIVirtualChannel*, UInt8**, HRESULT)
     get_flags : Proc(IRDPSRAPIVirtualChannel*, Int32*, HRESULT)
     get_priority : Proc(IRDPSRAPIVirtualChannel*, CHANNEL_PRIORITY*, HRESULT)
   end
@@ -548,7 +548,7 @@ lib LibWin32
     invoke : Proc(IRDPSRAPIVirtualChannelManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get__new_enum : Proc(IRDPSRAPIVirtualChannelManager*, IUnknown*, HRESULT)
     get_item : Proc(IRDPSRAPIVirtualChannelManager*, VARIANT, IRDPSRAPIVirtualChannel*, HRESULT)
-    create_virtual_channel : Proc(IRDPSRAPIVirtualChannelManager*, UInt8, CHANNEL_PRIORITY, UInt32, IRDPSRAPIVirtualChannel*, HRESULT)
+    create_virtual_channel : Proc(IRDPSRAPIVirtualChannelManager*, UInt8*, CHANNEL_PRIORITY, UInt32, IRDPSRAPIVirtualChannel*, HRESULT)
   end
 
   struct IRDPSRAPIVirtualChannelManager
@@ -563,7 +563,7 @@ lib LibWin32
     get_type_info : Proc(IRDPSRAPIViewer*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IRDPSRAPIViewer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IRDPSRAPIViewer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connect : Proc(IRDPSRAPIViewer*, UInt8, UInt8, UInt8, HRESULT)
+    connect : Proc(IRDPSRAPIViewer*, UInt8*, UInt8*, UInt8*, HRESULT)
     disconnect : Proc(IRDPSRAPIViewer*, HRESULT)
     get_attendees : Proc(IRDPSRAPIViewer*, IRDPSRAPIAttendeeManager*, HRESULT)
     get_invitations : Proc(IRDPSRAPIViewer*, IRDPSRAPIInvitationManager*, HRESULT)
@@ -572,11 +572,11 @@ lib LibWin32
     put_smart_sizing : Proc(IRDPSRAPIViewer*, Int16, HRESULT)
     get_smart_sizing : Proc(IRDPSRAPIViewer*, Int16*, HRESULT)
     request_control : Proc(IRDPSRAPIViewer*, CTRL_LEVEL, HRESULT)
-    put_disconnected_text : Proc(IRDPSRAPIViewer*, UInt8, HRESULT)
-    get_disconnected_text : Proc(IRDPSRAPIViewer*, UInt8*, HRESULT)
+    put_disconnected_text : Proc(IRDPSRAPIViewer*, UInt8*, HRESULT)
+    get_disconnected_text : Proc(IRDPSRAPIViewer*, UInt8**, HRESULT)
     request_color_depth_change : Proc(IRDPSRAPIViewer*, Int32, HRESULT)
     get_properties : Proc(IRDPSRAPIViewer*, IRDPSRAPISessionProperties*, HRESULT)
-    start_reverse_connect_listener : Proc(IRDPSRAPIViewer*, UInt8, UInt8, UInt8, UInt8*, HRESULT)
+    start_reverse_connect_listener : Proc(IRDPSRAPIViewer*, UInt8*, UInt8*, UInt8*, UInt8**, HRESULT)
   end
 
   struct IRDPSRAPIViewer
@@ -687,7 +687,7 @@ lib LibWin32
     get_virtual_channel_manager : Proc(IRDPSRAPISharingSession*, IRDPSRAPIVirtualChannelManager*, HRESULT)
     pause : Proc(IRDPSRAPISharingSession*, HRESULT)
     resume : Proc(IRDPSRAPISharingSession*, HRESULT)
-    connect_to_client : Proc(IRDPSRAPISharingSession*, UInt8, HRESULT)
+    connect_to_client : Proc(IRDPSRAPISharingSession*, UInt8*, HRESULT)
     set_desktop_shared_rect : Proc(IRDPSRAPISharingSession*, Int32, Int32, Int32, Int32, HRESULT)
     get_desktop_shared_rect : Proc(IRDPSRAPISharingSession*, Int32*, Int32*, Int32*, Int32*, HRESULT)
   end
@@ -715,10 +715,10 @@ lib LibWin32
     get_virtual_channel_manager : Proc(IRDPSRAPISharingSession2*, IRDPSRAPIVirtualChannelManager*, HRESULT)
     pause : Proc(IRDPSRAPISharingSession2*, HRESULT)
     resume : Proc(IRDPSRAPISharingSession2*, HRESULT)
-    connect_to_client : Proc(IRDPSRAPISharingSession2*, UInt8, HRESULT)
+    connect_to_client : Proc(IRDPSRAPISharingSession2*, UInt8*, HRESULT)
     set_desktop_shared_rect : Proc(IRDPSRAPISharingSession2*, Int32, Int32, Int32, Int32, HRESULT)
     get_desktop_shared_rect : Proc(IRDPSRAPISharingSession2*, Int32*, Int32*, Int32*, Int32*, HRESULT)
-    connect_using_transport_stream : Proc(IRDPSRAPISharingSession2*, IRDPSRAPITransportStream, UInt8, UInt8, HRESULT)
+    connect_using_transport_stream : Proc(IRDPSRAPISharingSession2*, IRDPSRAPITransportStream, UInt8*, UInt8*, HRESULT)
     get_frame_buffer : Proc(IRDPSRAPISharingSession2*, IRDPSRAPIFrameBuffer*, HRESULT)
     send_control_level_change_response : Proc(IRDPSRAPISharingSession2*, IRDPSRAPIAttendee, CTRL_LEVEL, Int32, HRESULT)
   end

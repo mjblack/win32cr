@@ -414,8 +414,8 @@ lib LibWin32
     query_interface : Proc(IRestrictedErrorInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IRestrictedErrorInfo*, UInt32)
     release : Proc(IRestrictedErrorInfo*, UInt32)
-    get_error_details : Proc(IRestrictedErrorInfo*, UInt8*, HRESULT*, UInt8*, UInt8*, HRESULT)
-    get_reference : Proc(IRestrictedErrorInfo*, UInt8*, HRESULT)
+    get_error_details : Proc(IRestrictedErrorInfo*, UInt8**, HRESULT*, UInt8**, UInt8**, HRESULT)
+    get_reference : Proc(IRestrictedErrorInfo*, UInt8**, HRESULT)
   end
 
   struct IRestrictedErrorInfo

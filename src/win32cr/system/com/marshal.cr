@@ -71,17 +71,17 @@ lib LibWin32
   end
 
 
-  # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : UInt8* [In]
-  fun BSTR_UserSize(param0 : UInt32*, param1 : UInt32, param2 : UInt8*) : UInt32
+  # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : UInt8** [In]
+  fun BSTR_UserSize(param0 : UInt32*, param1 : UInt32, param2 : UInt8**) : UInt32
 
-  # Params # param0 : UInt32* [In],param1 : UInt8* [In],param2 : UInt8* [In]
-  fun BSTR_UserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : UInt8*) : UInt8*
+  # Params # param0 : UInt32* [In],param1 : UInt8* [In],param2 : UInt8** [In]
+  fun BSTR_UserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : UInt8**) : UInt8*
 
-  # Params # param0 : UInt32* [In],param1 : UInt8* [In],param2 : UInt8* [In]
-  fun BSTR_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : UInt8*) : UInt8*
+  # Params # param0 : UInt32* [In],param1 : UInt8* [In],param2 : UInt8** [In]
+  fun BSTR_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : UInt8**) : UInt8*
 
-  # Params # param0 : UInt32* [In],param1 : UInt8* [In]
-  fun BSTR_UserFree(param0 : UInt32*, param1 : UInt8*)
+  # Params # param0 : UInt32* [In],param1 : UInt8** [In]
+  fun BSTR_UserFree(param0 : UInt32*, param1 : UInt8**)
 
   # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : HANDLE* [In]
   fun HWND_UserSize(param0 : UInt32*, param1 : UInt32, param2 : HANDLE*) : UInt32
@@ -107,17 +107,17 @@ lib LibWin32
   # Params # param0 : UInt32* [In],param1 : VARIANT* [In]
   fun VARIANT_UserFree(param0 : UInt32*, param1 : VARIANT*)
 
-  # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : UInt8* [In]
-  fun BSTR_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : UInt8*) : UInt32
+  # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : UInt8** [In]
+  fun BSTR_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : UInt8**) : UInt32
 
-  # Params # param0 : UInt32* [In],param1 : UInt8* [In],param2 : UInt8* [In]
-  fun BSTR_UserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : UInt8*) : UInt8*
+  # Params # param0 : UInt32* [In],param1 : UInt8* [In],param2 : UInt8** [In]
+  fun BSTR_UserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : UInt8**) : UInt8*
 
-  # Params # param0 : UInt32* [In],param1 : UInt8* [In],param2 : UInt8* [In]
-  fun BSTR_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : UInt8*) : UInt8*
+  # Params # param0 : UInt32* [In],param1 : UInt8* [In],param2 : UInt8** [In]
+  fun BSTR_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : UInt8**) : UInt8*
 
-  # Params # param0 : UInt32* [In],param1 : UInt8* [In]
-  fun BSTR_UserFree64(param0 : UInt32*, param1 : UInt8*)
+  # Params # param0 : UInt32* [In],param1 : UInt8** [In]
+  fun BSTR_UserFree64(param0 : UInt32*, param1 : UInt8**)
 
   # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : HANDLE* [In]
   fun HWND_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : HANDLE*) : UInt32

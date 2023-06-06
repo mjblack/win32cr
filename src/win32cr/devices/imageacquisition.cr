@@ -1007,19 +1007,19 @@ lib LibWin32
   union WIAS_CHANGED_VALUE_INFO_Old_e__Union
     l_val : Int32
     flt_val : Float32
-    bstr_val : UInt8
+    bstr_val : UInt8*
     guid_val : Guid
   end
   union WIAS_CHANGED_VALUE_INFO_Current_e__Union
     l_val : Int32
     flt_val : Float32
-    bstr_val : UInt8
+    bstr_val : UInt8*
     guid_val : Guid
   end
 
   struct WIA_DITHER_PATTERN_DATA
     l_size : Int32
-    bstr_pattern_name : UInt8
+    bstr_pattern_name : UInt8*
     l_pattern_width : Int32
     l_pattern_length : Int32
     cb_pattern : Int32
@@ -1122,10 +1122,10 @@ lib LibWin32
   struct WIA_DEV_CAP
     guid : Guid
     ul_flags : UInt32
-    bstr_name : UInt8
-    bstr_description : UInt8
-    bstr_icon : UInt8
-    bstr_commandline : UInt8
+    bstr_name : UInt8*
+    bstr_description : UInt8*
+    bstr_icon : UInt8*
+    bstr_commandline : UInt8*
   end
   struct WiaTransferParams
     l_message : Int32
@@ -1204,8 +1204,8 @@ lib LibWin32
   end
   struct WIA_PROPERTY_INFO_ValidVal_e__Union_ListBStr_e__Struct
     c_num_list : Int32
-    nom : UInt8
-    p_list : UInt8*
+    nom : UInt8*
+    p_list : UInt8**
   end
   struct WIA_PROPERTY_INFO_ValidVal_e__Union_RangeFloat_e__Struct
     min : Float64
@@ -1252,10 +1252,10 @@ lib LibWin32
     p_i_wia_item_root : IWiaItem2
     dw_flags : UInt32
     hwnd_parent : HANDLE
-    bstr_folder_name : UInt8
-    bstr_filename : UInt8
+    bstr_folder_name : UInt8*
+    bstr_filename : UInt8*
     l_num_files : Int32
-    pbstr_file_paths : UInt8*
+    pbstr_file_paths : UInt8**
     p_wia_item : IWiaItem2
   end
   struct DEVICEDIALOGDATA
@@ -1344,13 +1344,13 @@ lib LibWin32
     add_ref : Proc(IWiaDevMgr*, UInt32)
     release : Proc(IWiaDevMgr*, UInt32)
     enum_device_info : Proc(IWiaDevMgr*, Int32, IEnumWIA_DEV_INFO*, HRESULT)
-    create_device : Proc(IWiaDevMgr*, UInt8, IWiaItem*, HRESULT)
-    select_device_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, UInt8*, IWiaItem*, HRESULT)
-    select_device_dlg_id : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, UInt8*, HRESULT)
-    get_image_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, Int32, IWiaItem, UInt8, Guid*, HRESULT)
-    register_event_callback_program : Proc(IWiaDevMgr*, Int32, UInt8, Guid*, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    register_event_callback_interface : Proc(IWiaDevMgr*, Int32, UInt8, Guid*, IWiaEventCallback, IUnknown*, HRESULT)
-    register_event_callback_clsid : Proc(IWiaDevMgr*, Int32, UInt8, Guid*, Guid*, UInt8, UInt8, UInt8, HRESULT)
+    create_device : Proc(IWiaDevMgr*, UInt8*, IWiaItem*, HRESULT)
+    select_device_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, UInt8**, IWiaItem*, HRESULT)
+    select_device_dlg_id : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, UInt8**, HRESULT)
+    get_image_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, Int32, IWiaItem, UInt8*, Guid*, HRESULT)
+    register_event_callback_program : Proc(IWiaDevMgr*, Int32, UInt8*, Guid*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    register_event_callback_interface : Proc(IWiaDevMgr*, Int32, UInt8*, Guid*, IWiaEventCallback, IUnknown*, HRESULT)
+    register_event_callback_clsid : Proc(IWiaDevMgr*, Int32, UInt8*, Guid*, Guid*, UInt8*, UInt8*, UInt8*, HRESULT)
     add_device_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, HRESULT)
   end
 
@@ -1377,7 +1377,7 @@ lib LibWin32
     query_interface : Proc(IWiaEventCallback*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWiaEventCallback*, UInt32)
     release : Proc(IWiaEventCallback*, UInt32)
-    image_event_callback : Proc(IWiaEventCallback*, Guid*, UInt8, UInt8, UInt8, UInt32, UInt8, UInt32*, UInt32, HRESULT)
+    image_event_callback : Proc(IWiaEventCallback*, Guid*, UInt8*, UInt8*, UInt8*, UInt32, UInt8*, UInt32*, UInt32, HRESULT)
   end
 
   struct IWiaEventCallback
@@ -1418,16 +1418,16 @@ lib LibWin32
     analyze_item : Proc(IWiaItem*, Int32, HRESULT)
     enum_child_items : Proc(IWiaItem*, IEnumWiaItem*, HRESULT)
     delete_item : Proc(IWiaItem*, Int32, HRESULT)
-    create_child_item : Proc(IWiaItem*, Int32, UInt8, UInt8, IWiaItem*, HRESULT)
+    create_child_item : Proc(IWiaItem*, Int32, UInt8*, UInt8*, IWiaItem*, HRESULT)
     enum_register_event_info : Proc(IWiaItem*, Int32, Guid*, IEnumWIA_DEV_CAPS*, HRESULT)
-    find_item_by_name : Proc(IWiaItem*, Int32, UInt8, IWiaItem*, HRESULT)
+    find_item_by_name : Proc(IWiaItem*, Int32, UInt8*, IWiaItem*, HRESULT)
     device_dlg : Proc(IWiaItem*, LibC::HANDLE, Int32, Int32, Int32*, IWiaItem**, HRESULT)
     device_command : Proc(IWiaItem*, Int32, Guid*, IWiaItem*, HRESULT)
     get_root_item : Proc(IWiaItem*, IWiaItem*, HRESULT)
     enum_device_capabilities : Proc(IWiaItem*, Int32, IEnumWIA_DEV_CAPS*, HRESULT)
-    dump_item_data : Proc(IWiaItem*, UInt8*, HRESULT)
-    dump_drv_item_data : Proc(IWiaItem*, UInt8*, HRESULT)
-    dump_tree_item_data : Proc(IWiaItem*, UInt8*, HRESULT)
+    dump_item_data : Proc(IWiaItem*, UInt8**, HRESULT)
+    dump_drv_item_data : Proc(IWiaItem*, UInt8**, HRESULT)
+    dump_tree_item_data : Proc(IWiaItem*, UInt8**, HRESULT)
     diagnostic : Proc(IWiaItem*, UInt32, UInt8*, HRESULT)
   end
 
@@ -1512,7 +1512,7 @@ lib LibWin32
     release : Proc(IWiaLog*, UInt32)
     initialize_log : Proc(IWiaLog*, Int32, HRESULT)
     h_result : Proc(IWiaLog*, HRESULT, HRESULT)
-    log : Proc(IWiaLog*, Int32, Int32, Int32, UInt8, HRESULT)
+    log : Proc(IWiaLog*, Int32, Int32, Int32, UInt8*, HRESULT)
   end
 
   struct IWiaLog
@@ -1525,9 +1525,9 @@ lib LibWin32
     release : Proc(IWiaLogEx*, UInt32)
     initialize_log_ex : Proc(IWiaLogEx*, UInt8*, HRESULT)
     h_result : Proc(IWiaLogEx*, HRESULT, HRESULT)
-    log : Proc(IWiaLogEx*, Int32, Int32, Int32, UInt8, HRESULT)
+    log : Proc(IWiaLogEx*, Int32, Int32, Int32, UInt8*, HRESULT)
     h_result_ex : Proc(IWiaLogEx*, Int32, HRESULT, HRESULT)
-    log_ex : Proc(IWiaLogEx*, Int32, Int32, Int32, Int32, UInt8, HRESULT)
+    log_ex : Proc(IWiaLogEx*, Int32, Int32, Int32, Int32, UInt8*, HRESULT)
   end
 
   struct IWiaLogEx
@@ -1549,7 +1549,7 @@ lib LibWin32
     query_interface : Proc(IWiaItemExtras*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWiaItemExtras*, UInt32)
     release : Proc(IWiaItemExtras*, UInt32)
-    get_extended_error_info : Proc(IWiaItemExtras*, UInt8*, HRESULT)
+    get_extended_error_info : Proc(IWiaItemExtras*, UInt8**, HRESULT)
     escape : Proc(IWiaItemExtras*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
     cancel_pending_io : Proc(IWiaItemExtras*, HRESULT)
   end
@@ -1575,7 +1575,7 @@ lib LibWin32
     add_ref : Proc(IWiaErrorHandler*, UInt32)
     release : Proc(IWiaErrorHandler*, UInt32)
     report_status : Proc(IWiaErrorHandler*, Int32, LibC::HANDLE, IWiaItem2, HRESULT, Int32, HRESULT)
-    get_status_description : Proc(IWiaErrorHandler*, Int32, IWiaItem2, HRESULT, UInt8*, HRESULT)
+    get_status_description : Proc(IWiaErrorHandler*, Int32, IWiaItem2, HRESULT, UInt8**, HRESULT)
   end
 
   struct IWiaErrorHandler
@@ -1601,7 +1601,7 @@ lib LibWin32
     add_ref : Proc(IWiaTransferCallback*, UInt32)
     release : Proc(IWiaTransferCallback*, UInt32)
     transfer_callback : Proc(IWiaTransferCallback*, Int32, WiaTransferParams*, HRESULT)
-    get_next_stream : Proc(IWiaTransferCallback*, Int32, UInt8, UInt8, IStream*, HRESULT)
+    get_next_stream : Proc(IWiaTransferCallback*, Int32, UInt8*, UInt8*, IStream*, HRESULT)
   end
 
   struct IWiaTransferCallback
@@ -1666,17 +1666,17 @@ lib LibWin32
     query_interface : Proc(IWiaItem2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWiaItem2*, UInt32)
     release : Proc(IWiaItem2*, UInt32)
-    create_child_item : Proc(IWiaItem2*, Int32, Int32, UInt8, IWiaItem2*, HRESULT)
+    create_child_item : Proc(IWiaItem2*, Int32, Int32, UInt8*, IWiaItem2*, HRESULT)
     delete_item : Proc(IWiaItem2*, Int32, HRESULT)
     enum_child_items : Proc(IWiaItem2*, Guid*, IEnumWiaItem2*, HRESULT)
-    find_item_by_name : Proc(IWiaItem2*, Int32, UInt8, IWiaItem2*, HRESULT)
+    find_item_by_name : Proc(IWiaItem2*, Int32, UInt8*, IWiaItem2*, HRESULT)
     get_item_category : Proc(IWiaItem2*, Guid*, HRESULT)
     get_item_type : Proc(IWiaItem2*, Int32*, HRESULT)
-    device_dlg : Proc(IWiaItem2*, Int32, LibC::HANDLE, UInt8, UInt8, Int32*, UInt8**, IWiaItem2*, HRESULT)
+    device_dlg : Proc(IWiaItem2*, Int32, LibC::HANDLE, UInt8*, UInt8*, Int32*, UInt8***, IWiaItem2*, HRESULT)
     device_command : Proc(IWiaItem2*, Int32, Guid*, IWiaItem2*, HRESULT)
     enum_device_capabilities : Proc(IWiaItem2*, Int32, IEnumWIA_DEV_CAPS*, HRESULT)
-    check_extension : Proc(IWiaItem2*, Int32, UInt8, Guid*, LibC::BOOL*, HRESULT)
-    get_extension : Proc(IWiaItem2*, Int32, UInt8, Guid*, Void**, HRESULT)
+    check_extension : Proc(IWiaItem2*, Int32, UInt8*, Guid*, LibC::BOOL*, HRESULT)
+    get_extension : Proc(IWiaItem2*, Int32, UInt8*, Guid*, Void**, HRESULT)
     get_parent_item : Proc(IWiaItem2*, IWiaItem2*, HRESULT)
     get_root_item : Proc(IWiaItem2*, IWiaItem2*, HRESULT)
     get_preview_component : Proc(IWiaItem2*, Int32, IWiaPreview*, HRESULT)
@@ -1693,13 +1693,13 @@ lib LibWin32
     add_ref : Proc(IWiaDevMgr2*, UInt32)
     release : Proc(IWiaDevMgr2*, UInt32)
     enum_device_info : Proc(IWiaDevMgr2*, Int32, IEnumWIA_DEV_INFO*, HRESULT)
-    create_device : Proc(IWiaDevMgr2*, Int32, UInt8, IWiaItem2*, HRESULT)
-    select_device_dlg : Proc(IWiaDevMgr2*, LibC::HANDLE, Int32, Int32, UInt8*, IWiaItem2*, HRESULT)
-    select_device_dlg_id : Proc(IWiaDevMgr2*, LibC::HANDLE, Int32, Int32, UInt8*, HRESULT)
-    register_event_callback_interface : Proc(IWiaDevMgr2*, Int32, UInt8, Guid*, IWiaEventCallback, IUnknown*, HRESULT)
-    register_event_callback_program : Proc(IWiaDevMgr2*, Int32, UInt8, Guid*, UInt8, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    register_event_callback_clsid : Proc(IWiaDevMgr2*, Int32, UInt8, Guid*, Guid*, UInt8, UInt8, UInt8, HRESULT)
-    get_image_dlg : Proc(IWiaDevMgr2*, Int32, UInt8, LibC::HANDLE, UInt8, UInt8, Int32*, UInt8**, IWiaItem2*, HRESULT)
+    create_device : Proc(IWiaDevMgr2*, Int32, UInt8*, IWiaItem2*, HRESULT)
+    select_device_dlg : Proc(IWiaDevMgr2*, LibC::HANDLE, Int32, Int32, UInt8**, IWiaItem2*, HRESULT)
+    select_device_dlg_id : Proc(IWiaDevMgr2*, LibC::HANDLE, Int32, Int32, UInt8**, HRESULT)
+    register_event_callback_interface : Proc(IWiaDevMgr2*, Int32, UInt8*, Guid*, IWiaEventCallback, IUnknown*, HRESULT)
+    register_event_callback_program : Proc(IWiaDevMgr2*, Int32, UInt8*, Guid*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    register_event_callback_clsid : Proc(IWiaDevMgr2*, Int32, UInt8*, Guid*, Guid*, UInt8*, UInt8*, UInt8*, HRESULT)
+    get_image_dlg : Proc(IWiaDevMgr2*, Int32, UInt8*, LibC::HANDLE, UInt8*, UInt8*, Int32*, UInt8***, IWiaItem2*, HRESULT)
   end
 
   struct IWiaDevMgr2
@@ -1710,7 +1710,7 @@ lib LibWin32
     query_interface : Proc(IWiaMiniDrv*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWiaMiniDrv*, UInt32)
     release : Proc(IWiaMiniDrv*, UInt32)
-    drv_initialize_wia : Proc(IWiaMiniDrv*, UInt8*, Int32, UInt8, UInt8, IUnknown, IUnknown, IWiaDrvItem*, IUnknown*, Int32*, HRESULT)
+    drv_initialize_wia : Proc(IWiaMiniDrv*, UInt8*, Int32, UInt8*, UInt8*, IUnknown, IUnknown, IWiaDrvItem*, IUnknown*, Int32*, HRESULT)
     drv_acquire_item_data : Proc(IWiaMiniDrv*, UInt8*, Int32, MINIDRV_TRANSFER_CONTEXT*, Int32*, HRESULT)
     drv_init_item_properties : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, HRESULT)
     drv_validate_item_properties : Proc(IWiaMiniDrv*, UInt8*, Int32, UInt32, PROPSPEC*, Int32*, HRESULT)
@@ -1725,7 +1725,7 @@ lib LibWin32
     drv_delete_item : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, HRESULT)
     drv_free_drv_item_context : Proc(IWiaMiniDrv*, Int32, UInt8*, Int32*, HRESULT)
     drv_get_wia_format_info : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, WIA_FORMAT_INFO**, Int32*, HRESULT)
-    drv_notify_pnp_event : Proc(IWiaMiniDrv*, Guid*, UInt8, UInt32, HRESULT)
+    drv_notify_pnp_event : Proc(IWiaMiniDrv*, Guid*, UInt8*, UInt32, HRESULT)
     drv_un_initialize_wia : Proc(IWiaMiniDrv*, UInt8*, HRESULT)
   end
 
@@ -1748,7 +1748,7 @@ lib LibWin32
     query_interface : Proc(IWiaMiniDrvTransferCallback*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWiaMiniDrvTransferCallback*, UInt32)
     release : Proc(IWiaMiniDrvTransferCallback*, UInt32)
-    get_next_stream : Proc(IWiaMiniDrvTransferCallback*, Int32, UInt8, UInt8, IStream*, HRESULT)
+    get_next_stream : Proc(IWiaMiniDrvTransferCallback*, Int32, UInt8*, UInt8*, IStream*, HRESULT)
     send_message : Proc(IWiaMiniDrvTransferCallback*, Int32, WiaTransferParams*, HRESULT)
   end
 
@@ -1762,17 +1762,17 @@ lib LibWin32
     release : Proc(IWiaDrvItem*, UInt32)
     get_item_flags : Proc(IWiaDrvItem*, Int32*, HRESULT)
     get_device_spec_context : Proc(IWiaDrvItem*, UInt8**, HRESULT)
-    get_full_item_name : Proc(IWiaDrvItem*, UInt8*, HRESULT)
-    get_item_name : Proc(IWiaDrvItem*, UInt8*, HRESULT)
+    get_full_item_name : Proc(IWiaDrvItem*, UInt8**, HRESULT)
+    get_item_name : Proc(IWiaDrvItem*, UInt8**, HRESULT)
     add_item_to_folder : Proc(IWiaDrvItem*, IWiaDrvItem, HRESULT)
     unlink_item_tree : Proc(IWiaDrvItem*, Int32, HRESULT)
     remove_item_from_folder : Proc(IWiaDrvItem*, Int32, HRESULT)
-    find_item_by_name : Proc(IWiaDrvItem*, Int32, UInt8, IWiaDrvItem*, HRESULT)
-    find_child_item_by_name : Proc(IWiaDrvItem*, UInt8, IWiaDrvItem*, HRESULT)
+    find_item_by_name : Proc(IWiaDrvItem*, Int32, UInt8*, IWiaDrvItem*, HRESULT)
+    find_child_item_by_name : Proc(IWiaDrvItem*, UInt8*, IWiaDrvItem*, HRESULT)
     get_parent_item : Proc(IWiaDrvItem*, IWiaDrvItem*, HRESULT)
     get_first_child_item : Proc(IWiaDrvItem*, IWiaDrvItem*, HRESULT)
     get_next_sibling_item : Proc(IWiaDrvItem*, IWiaDrvItem*, HRESULT)
-    dump_item_data : Proc(IWiaDrvItem*, UInt8*, HRESULT)
+    dump_item_data : Proc(IWiaDrvItem*, UInt8**, HRESULT)
   end
 
   struct IWiaDrvItem
@@ -1785,15 +1785,15 @@ lib LibWin32
     release : Proc(IWiaVideo*, UInt32)
     get_preview_visible : Proc(IWiaVideo*, LibC::BOOL*, HRESULT)
     put_preview_visible : Proc(IWiaVideo*, LibC::BOOL, HRESULT)
-    get_images_directory : Proc(IWiaVideo*, UInt8*, HRESULT)
-    put_images_directory : Proc(IWiaVideo*, UInt8, HRESULT)
-    create_video_by_wia_dev_id : Proc(IWiaVideo*, UInt8, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)
+    get_images_directory : Proc(IWiaVideo*, UInt8**, HRESULT)
+    put_images_directory : Proc(IWiaVideo*, UInt8*, HRESULT)
+    create_video_by_wia_dev_id : Proc(IWiaVideo*, UInt8*, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)
     create_video_by_dev_num : Proc(IWiaVideo*, UInt32, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)
-    create_video_by_name : Proc(IWiaVideo*, UInt8, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)
+    create_video_by_name : Proc(IWiaVideo*, UInt8*, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)
     destroy_video : Proc(IWiaVideo*, HRESULT)
     play : Proc(IWiaVideo*, HRESULT)
     pause : Proc(IWiaVideo*, HRESULT)
-    take_picture : Proc(IWiaVideo*, UInt8*, HRESULT)
+    take_picture : Proc(IWiaVideo*, UInt8**, HRESULT)
     resize_video : Proc(IWiaVideo*, LibC::BOOL, HRESULT)
     get_current_state : Proc(IWiaVideo*, WIAVIDEO_STATE*, HRESULT)
   end
@@ -1807,7 +1807,7 @@ lib LibWin32
     add_ref : Proc(IWiaUIExtension2*, UInt32)
     release : Proc(IWiaUIExtension2*, UInt32)
     device_dialog : Proc(IWiaUIExtension2*, DEVICEDIALOGDATA2*, HRESULT)
-    get_device_icon : Proc(IWiaUIExtension2*, UInt8, HANDLE*, UInt32, HRESULT)
+    get_device_icon : Proc(IWiaUIExtension2*, UInt8*, HANDLE*, UInt32, HRESULT)
   end
 
   struct IWiaUIExtension2
@@ -1819,8 +1819,8 @@ lib LibWin32
     add_ref : Proc(IWiaUIExtension*, UInt32)
     release : Proc(IWiaUIExtension*, UInt32)
     device_dialog : Proc(IWiaUIExtension*, DEVICEDIALOGDATA*, HRESULT)
-    get_device_icon : Proc(IWiaUIExtension*, UInt8, HANDLE*, UInt32, HRESULT)
-    get_device_bitmap_logo : Proc(IWiaUIExtension*, UInt8, HBITMAP*, UInt32, UInt32, HRESULT)
+    get_device_icon : Proc(IWiaUIExtension*, UInt8*, HANDLE*, UInt32, HRESULT)
+    get_device_bitmap_logo : Proc(IWiaUIExtension*, UInt8*, HBITMAP*, UInt32, UInt32, HRESULT)
   end
 
   struct IWiaUIExtension

@@ -634,32 +634,32 @@ lib LibWin32
     get_type_info : Proc(ICOMAdminCatalog*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ICOMAdminCatalog*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ICOMAdminCatalog*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_collection : Proc(ICOMAdminCatalog*, UInt8, IDispatch*, HRESULT)
-    connect : Proc(ICOMAdminCatalog*, UInt8, IDispatch*, HRESULT)
+    get_collection : Proc(ICOMAdminCatalog*, UInt8*, IDispatch*, HRESULT)
+    connect : Proc(ICOMAdminCatalog*, UInt8*, IDispatch*, HRESULT)
     get_major_version : Proc(ICOMAdminCatalog*, Int32*, HRESULT)
     get_minor_version : Proc(ICOMAdminCatalog*, Int32*, HRESULT)
-    get_collection_by_query : Proc(ICOMAdminCatalog*, UInt8, SAFEARRAY**, IDispatch*, HRESULT)
-    import_component : Proc(ICOMAdminCatalog*, UInt8, UInt8, HRESULT)
-    install_component : Proc(ICOMAdminCatalog*, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    shutdown_application : Proc(ICOMAdminCatalog*, UInt8, HRESULT)
-    export_application : Proc(ICOMAdminCatalog*, UInt8, UInt8, COMAdminApplicationExportOptions, HRESULT)
-    install_application : Proc(ICOMAdminCatalog*, UInt8, UInt8, COMAdminApplicationInstallOptions, UInt8, UInt8, UInt8, HRESULT)
+    get_collection_by_query : Proc(ICOMAdminCatalog*, UInt8*, SAFEARRAY**, IDispatch*, HRESULT)
+    import_component : Proc(ICOMAdminCatalog*, UInt8*, UInt8*, HRESULT)
+    install_component : Proc(ICOMAdminCatalog*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    shutdown_application : Proc(ICOMAdminCatalog*, UInt8*, HRESULT)
+    export_application : Proc(ICOMAdminCatalog*, UInt8*, UInt8*, COMAdminApplicationExportOptions, HRESULT)
+    install_application : Proc(ICOMAdminCatalog*, UInt8*, UInt8*, COMAdminApplicationInstallOptions, UInt8*, UInt8*, UInt8*, HRESULT)
     stop_router : Proc(ICOMAdminCatalog*, HRESULT)
     refresh_router : Proc(ICOMAdminCatalog*, HRESULT)
     start_router : Proc(ICOMAdminCatalog*, HRESULT)
     reserved1 : Proc(ICOMAdminCatalog*, HRESULT)
     reserved2 : Proc(ICOMAdminCatalog*, HRESULT)
-    install_multiple_components : Proc(ICOMAdminCatalog*, UInt8, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    get_multiple_components_info : Proc(ICOMAdminCatalog*, UInt8, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
+    install_multiple_components : Proc(ICOMAdminCatalog*, UInt8*, SAFEARRAY**, SAFEARRAY**, HRESULT)
+    get_multiple_components_info : Proc(ICOMAdminCatalog*, UInt8*, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
     refresh_components : Proc(ICOMAdminCatalog*, HRESULT)
-    backup_regdb : Proc(ICOMAdminCatalog*, UInt8, HRESULT)
-    restore_regdb : Proc(ICOMAdminCatalog*, UInt8, HRESULT)
-    query_application_file : Proc(ICOMAdminCatalog*, UInt8, UInt8*, UInt8*, Int16*, Int16*, SAFEARRAY**, HRESULT)
-    start_application : Proc(ICOMAdminCatalog*, UInt8, HRESULT)
+    backup_regdb : Proc(ICOMAdminCatalog*, UInt8*, HRESULT)
+    restore_regdb : Proc(ICOMAdminCatalog*, UInt8*, HRESULT)
+    query_application_file : Proc(ICOMAdminCatalog*, UInt8*, UInt8**, UInt8**, Int16*, Int16*, SAFEARRAY**, HRESULT)
+    start_application : Proc(ICOMAdminCatalog*, UInt8*, HRESULT)
     service_check : Proc(ICOMAdminCatalog*, Int32, Int32*, HRESULT)
-    install_multiple_event_classes : Proc(ICOMAdminCatalog*, UInt8, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    install_event_class : Proc(ICOMAdminCatalog*, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    get_event_classes_for_iid : Proc(ICOMAdminCatalog*, UInt8, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
+    install_multiple_event_classes : Proc(ICOMAdminCatalog*, UInt8*, SAFEARRAY**, SAFEARRAY**, HRESULT)
+    install_event_class : Proc(ICOMAdminCatalog*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    get_event_classes_for_iid : Proc(ICOMAdminCatalog*, UInt8*, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
   end
 
   struct ICOMAdminCatalog
@@ -674,63 +674,63 @@ lib LibWin32
     get_type_info : Proc(ICOMAdminCatalog2*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ICOMAdminCatalog2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ICOMAdminCatalog2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_collection : Proc(ICOMAdminCatalog2*, UInt8, IDispatch*, HRESULT)
-    connect : Proc(ICOMAdminCatalog2*, UInt8, IDispatch*, HRESULT)
+    get_collection : Proc(ICOMAdminCatalog2*, UInt8*, IDispatch*, HRESULT)
+    connect : Proc(ICOMAdminCatalog2*, UInt8*, IDispatch*, HRESULT)
     get_major_version : Proc(ICOMAdminCatalog2*, Int32*, HRESULT)
     get_minor_version : Proc(ICOMAdminCatalog2*, Int32*, HRESULT)
-    get_collection_by_query : Proc(ICOMAdminCatalog2*, UInt8, SAFEARRAY**, IDispatch*, HRESULT)
-    import_component : Proc(ICOMAdminCatalog2*, UInt8, UInt8, HRESULT)
-    install_component : Proc(ICOMAdminCatalog2*, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    shutdown_application : Proc(ICOMAdminCatalog2*, UInt8, HRESULT)
-    export_application : Proc(ICOMAdminCatalog2*, UInt8, UInt8, COMAdminApplicationExportOptions, HRESULT)
-    install_application : Proc(ICOMAdminCatalog2*, UInt8, UInt8, COMAdminApplicationInstallOptions, UInt8, UInt8, UInt8, HRESULT)
+    get_collection_by_query : Proc(ICOMAdminCatalog2*, UInt8*, SAFEARRAY**, IDispatch*, HRESULT)
+    import_component : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, HRESULT)
+    install_component : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    shutdown_application : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
+    export_application : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, COMAdminApplicationExportOptions, HRESULT)
+    install_application : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, COMAdminApplicationInstallOptions, UInt8*, UInt8*, UInt8*, HRESULT)
     stop_router : Proc(ICOMAdminCatalog2*, HRESULT)
     refresh_router : Proc(ICOMAdminCatalog2*, HRESULT)
     start_router : Proc(ICOMAdminCatalog2*, HRESULT)
     reserved1 : Proc(ICOMAdminCatalog2*, HRESULT)
     reserved2 : Proc(ICOMAdminCatalog2*, HRESULT)
-    install_multiple_components : Proc(ICOMAdminCatalog2*, UInt8, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    get_multiple_components_info : Proc(ICOMAdminCatalog2*, UInt8, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
+    install_multiple_components : Proc(ICOMAdminCatalog2*, UInt8*, SAFEARRAY**, SAFEARRAY**, HRESULT)
+    get_multiple_components_info : Proc(ICOMAdminCatalog2*, UInt8*, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
     refresh_components : Proc(ICOMAdminCatalog2*, HRESULT)
-    backup_regdb : Proc(ICOMAdminCatalog2*, UInt8, HRESULT)
-    restore_regdb : Proc(ICOMAdminCatalog2*, UInt8, HRESULT)
-    query_application_file : Proc(ICOMAdminCatalog2*, UInt8, UInt8*, UInt8*, Int16*, Int16*, SAFEARRAY**, HRESULT)
-    start_application : Proc(ICOMAdminCatalog2*, UInt8, HRESULT)
+    backup_regdb : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
+    restore_regdb : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
+    query_application_file : Proc(ICOMAdminCatalog2*, UInt8*, UInt8**, UInt8**, Int16*, Int16*, SAFEARRAY**, HRESULT)
+    start_application : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
     service_check : Proc(ICOMAdminCatalog2*, Int32, Int32*, HRESULT)
-    install_multiple_event_classes : Proc(ICOMAdminCatalog2*, UInt8, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    install_event_class : Proc(ICOMAdminCatalog2*, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    get_event_classes_for_iid : Proc(ICOMAdminCatalog2*, UInt8, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    get_collection_by_query2 : Proc(ICOMAdminCatalog2*, UInt8, VARIANT*, IDispatch*, HRESULT)
-    get_application_instance_id_from_process_id : Proc(ICOMAdminCatalog2*, Int32, UInt8*, HRESULT)
+    install_multiple_event_classes : Proc(ICOMAdminCatalog2*, UInt8*, SAFEARRAY**, SAFEARRAY**, HRESULT)
+    install_event_class : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    get_event_classes_for_iid : Proc(ICOMAdminCatalog2*, UInt8*, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
+    get_collection_by_query2 : Proc(ICOMAdminCatalog2*, UInt8*, VARIANT*, IDispatch*, HRESULT)
+    get_application_instance_id_from_process_id : Proc(ICOMAdminCatalog2*, Int32, UInt8**, HRESULT)
     shutdown_application_instances : Proc(ICOMAdminCatalog2*, VARIANT*, HRESULT)
     pause_application_instances : Proc(ICOMAdminCatalog2*, VARIANT*, HRESULT)
     resume_application_instances : Proc(ICOMAdminCatalog2*, VARIANT*, HRESULT)
     recycle_application_instances : Proc(ICOMAdminCatalog2*, VARIANT*, Int32, HRESULT)
     are_application_instances_paused : Proc(ICOMAdminCatalog2*, VARIANT*, Int16*, HRESULT)
-    dump_application_instance : Proc(ICOMAdminCatalog2*, UInt8, UInt8, Int32, UInt8*, HRESULT)
+    dump_application_instance : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, Int32, UInt8**, HRESULT)
     get_is_application_instance_dump_supported : Proc(ICOMAdminCatalog2*, Int16*, HRESULT)
-    create_service_for_application : Proc(ICOMAdminCatalog2*, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, Int16, HRESULT)
-    delete_service_for_application : Proc(ICOMAdminCatalog2*, UInt8, HRESULT)
-    get_partition_id : Proc(ICOMAdminCatalog2*, UInt8, UInt8*, HRESULT)
-    get_partition_name : Proc(ICOMAdminCatalog2*, UInt8, UInt8*, HRESULT)
-    put_current_partition : Proc(ICOMAdminCatalog2*, UInt8, HRESULT)
-    get_current_partition_id : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
-    get_current_partition_name : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
-    get_global_partition_id : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
+    create_service_for_application : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int16, HRESULT)
+    delete_service_for_application : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
+    get_partition_id : Proc(ICOMAdminCatalog2*, UInt8*, UInt8**, HRESULT)
+    get_partition_name : Proc(ICOMAdminCatalog2*, UInt8*, UInt8**, HRESULT)
+    put_current_partition : Proc(ICOMAdminCatalog2*, UInt8*, HRESULT)
+    get_current_partition_id : Proc(ICOMAdminCatalog2*, UInt8**, HRESULT)
+    get_current_partition_name : Proc(ICOMAdminCatalog2*, UInt8**, HRESULT)
+    get_global_partition_id : Proc(ICOMAdminCatalog2*, UInt8**, HRESULT)
     flush_partition_cache : Proc(ICOMAdminCatalog2*, HRESULT)
-    copy_applications : Proc(ICOMAdminCatalog2*, UInt8, VARIANT*, UInt8, HRESULT)
-    copy_components : Proc(ICOMAdminCatalog2*, UInt8, VARIANT*, UInt8, HRESULT)
-    move_components : Proc(ICOMAdminCatalog2*, UInt8, VARIANT*, UInt8, HRESULT)
-    alias_component : Proc(ICOMAdminCatalog2*, UInt8, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    is_safe_to_delete : Proc(ICOMAdminCatalog2*, UInt8, COMAdminInUse*, HRESULT)
-    import_unconfigured_components : Proc(ICOMAdminCatalog2*, UInt8, VARIANT*, VARIANT*, HRESULT)
-    promote_unconfigured_components : Proc(ICOMAdminCatalog2*, UInt8, VARIANT*, VARIANT*, HRESULT)
-    import_components : Proc(ICOMAdminCatalog2*, UInt8, VARIANT*, VARIANT*, HRESULT)
+    copy_applications : Proc(ICOMAdminCatalog2*, UInt8*, VARIANT*, UInt8*, HRESULT)
+    copy_components : Proc(ICOMAdminCatalog2*, UInt8*, VARIANT*, UInt8*, HRESULT)
+    move_components : Proc(ICOMAdminCatalog2*, UInt8*, VARIANT*, UInt8*, HRESULT)
+    alias_component : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    is_safe_to_delete : Proc(ICOMAdminCatalog2*, UInt8*, COMAdminInUse*, HRESULT)
+    import_unconfigured_components : Proc(ICOMAdminCatalog2*, UInt8*, VARIANT*, VARIANT*, HRESULT)
+    promote_unconfigured_components : Proc(ICOMAdminCatalog2*, UInt8*, VARIANT*, VARIANT*, HRESULT)
+    import_components : Proc(ICOMAdminCatalog2*, UInt8*, VARIANT*, VARIANT*, HRESULT)
     get_is64_bit_catalog_server : Proc(ICOMAdminCatalog2*, Int16*, HRESULT)
-    export_partition : Proc(ICOMAdminCatalog2*, UInt8, UInt8, COMAdminApplicationExportOptions, HRESULT)
-    install_partition : Proc(ICOMAdminCatalog2*, UInt8, UInt8, COMAdminApplicationInstallOptions, UInt8, UInt8, UInt8, HRESULT)
-    query_application_file2 : Proc(ICOMAdminCatalog2*, UInt8, IDispatch*, HRESULT)
-    get_component_version_count : Proc(ICOMAdminCatalog2*, UInt8, Int32*, HRESULT)
+    export_partition : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, COMAdminApplicationExportOptions, HRESULT)
+    install_partition : Proc(ICOMAdminCatalog2*, UInt8*, UInt8*, COMAdminApplicationInstallOptions, UInt8*, UInt8*, UInt8*, HRESULT)
+    query_application_file2 : Proc(ICOMAdminCatalog2*, UInt8*, IDispatch*, HRESULT)
+    get_component_version_count : Proc(ICOMAdminCatalog2*, UInt8*, Int32*, HRESULT)
   end
 
   struct ICOMAdminCatalog2
@@ -745,13 +745,13 @@ lib LibWin32
     get_type_info : Proc(ICatalogObject*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ICatalogObject*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ICatalogObject*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_value : Proc(ICatalogObject*, UInt8, VARIANT*, HRESULT)
-    put_value : Proc(ICatalogObject*, UInt8, VARIANT, HRESULT)
+    get_value : Proc(ICatalogObject*, UInt8*, VARIANT*, HRESULT)
+    put_value : Proc(ICatalogObject*, UInt8*, VARIANT, HRESULT)
     get_key : Proc(ICatalogObject*, VARIANT*, HRESULT)
     get_name : Proc(ICatalogObject*, VARIANT*, HRESULT)
-    is_property_read_only : Proc(ICatalogObject*, UInt8, Int16*, HRESULT)
+    is_property_read_only : Proc(ICatalogObject*, UInt8*, Int16*, HRESULT)
     get_valid : Proc(ICatalogObject*, Int16*, HRESULT)
-    is_property_write_only : Proc(ICatalogObject*, UInt8, Int16*, HRESULT)
+    is_property_write_only : Proc(ICatalogObject*, UInt8*, Int16*, HRESULT)
   end
 
   struct ICatalogObject
@@ -773,7 +773,7 @@ lib LibWin32
     add : Proc(ICatalogCollection*, IDispatch*, HRESULT)
     populate : Proc(ICatalogCollection*, HRESULT)
     save_changes : Proc(ICatalogCollection*, Int32*, HRESULT)
-    get_collection : Proc(ICatalogCollection*, UInt8, VARIANT, IDispatch*, HRESULT)
+    get_collection : Proc(ICatalogCollection*, UInt8*, VARIANT, IDispatch*, HRESULT)
     get_name : Proc(ICatalogCollection*, VARIANT*, HRESULT)
     get_add_enabled : Proc(ICatalogCollection*, Int16*, HRESULT)
     get_remove_enabled : Proc(ICatalogCollection*, Int16*, HRESULT)
@@ -781,7 +781,7 @@ lib LibWin32
     get_data_store_major_version : Proc(ICatalogCollection*, Int32*, HRESULT)
     get_data_store_minor_version : Proc(ICatalogCollection*, Int32*, HRESULT)
     populate_by_key : Proc(ICatalogCollection*, SAFEARRAY*, HRESULT)
-    populate_by_query : Proc(ICatalogCollection*, UInt8, Int32, HRESULT)
+    populate_by_query : Proc(ICatalogCollection*, UInt8*, Int32, HRESULT)
   end
 
   struct ICatalogCollection
@@ -797,7 +797,7 @@ lib LibWin32
     get_i_ds_of_names : Proc(ISecurityIdentityColl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISecurityIdentityColl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_count : Proc(ISecurityIdentityColl*, Int32*, HRESULT)
-    get_item : Proc(ISecurityIdentityColl*, UInt8, VARIANT*, HRESULT)
+    get_item : Proc(ISecurityIdentityColl*, UInt8*, VARIANT*, HRESULT)
     get__new_enum : Proc(ISecurityIdentityColl*, IUnknown*, HRESULT)
   end
 
@@ -831,11 +831,11 @@ lib LibWin32
     get_i_ds_of_names : Proc(ISecurityCallContext*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISecurityCallContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_count : Proc(ISecurityCallContext*, Int32*, HRESULT)
-    get_item : Proc(ISecurityCallContext*, UInt8, VARIANT*, HRESULT)
+    get_item : Proc(ISecurityCallContext*, UInt8*, VARIANT*, HRESULT)
     get__new_enum : Proc(ISecurityCallContext*, IUnknown*, HRESULT)
-    is_caller_in_role : Proc(ISecurityCallContext*, UInt8, Int16*, HRESULT)
+    is_caller_in_role : Proc(ISecurityCallContext*, UInt8*, Int16*, HRESULT)
     is_security_enabled : Proc(ISecurityCallContext*, Int16*, HRESULT)
-    is_user_in_role : Proc(ISecurityCallContext*, VARIANT*, UInt8, Int16*, HRESULT)
+    is_user_in_role : Proc(ISecurityCallContext*, VARIANT*, UInt8*, Int16*, HRESULT)
   end
 
   struct ISecurityCallContext
@@ -865,10 +865,10 @@ lib LibWin32
     get_type_info : Proc(SecurityProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(SecurityProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(SecurityProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_direct_caller_name : Proc(SecurityProperty*, UInt8*, HRESULT)
-    get_direct_creator_name : Proc(SecurityProperty*, UInt8*, HRESULT)
-    get_original_caller_name : Proc(SecurityProperty*, UInt8*, HRESULT)
-    get_original_creator_name : Proc(SecurityProperty*, UInt8*, HRESULT)
+    get_direct_caller_name : Proc(SecurityProperty*, UInt8**, HRESULT)
+    get_direct_creator_name : Proc(SecurityProperty*, UInt8**, HRESULT)
+    get_original_caller_name : Proc(SecurityProperty*, UInt8**, HRESULT)
+    get_original_creator_name : Proc(SecurityProperty*, UInt8**, HRESULT)
   end
 
   struct SecurityProperty
@@ -885,9 +885,9 @@ lib LibWin32
     invoke : Proc(ContextInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     is_in_transaction : Proc(ContextInfo*, Int16*, HRESULT)
     get_transaction : Proc(ContextInfo*, IUnknown*, HRESULT)
-    get_transaction_id : Proc(ContextInfo*, UInt8*, HRESULT)
-    get_activity_id : Proc(ContextInfo*, UInt8*, HRESULT)
-    get_context_id : Proc(ContextInfo*, UInt8*, HRESULT)
+    get_transaction_id : Proc(ContextInfo*, UInt8**, HRESULT)
+    get_activity_id : Proc(ContextInfo*, UInt8**, HRESULT)
+    get_context_id : Proc(ContextInfo*, UInt8**, HRESULT)
   end
 
   struct ContextInfo
@@ -904,12 +904,12 @@ lib LibWin32
     invoke : Proc(ContextInfo2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     is_in_transaction : Proc(ContextInfo2*, Int16*, HRESULT)
     get_transaction : Proc(ContextInfo2*, IUnknown*, HRESULT)
-    get_transaction_id : Proc(ContextInfo2*, UInt8*, HRESULT)
-    get_activity_id : Proc(ContextInfo2*, UInt8*, HRESULT)
-    get_context_id : Proc(ContextInfo2*, UInt8*, HRESULT)
-    get_partition_id : Proc(ContextInfo2*, UInt8*, HRESULT)
-    get_application_id : Proc(ContextInfo2*, UInt8*, HRESULT)
-    get_application_instance_id : Proc(ContextInfo2*, UInt8*, HRESULT)
+    get_transaction_id : Proc(ContextInfo2*, UInt8**, HRESULT)
+    get_activity_id : Proc(ContextInfo2*, UInt8**, HRESULT)
+    get_context_id : Proc(ContextInfo2*, UInt8**, HRESULT)
+    get_partition_id : Proc(ContextInfo2*, UInt8**, HRESULT)
+    get_application_id : Proc(ContextInfo2*, UInt8**, HRESULT)
+    get_application_instance_id : Proc(ContextInfo2*, UInt8**, HRESULT)
   end
 
   struct ContextInfo2
@@ -924,16 +924,16 @@ lib LibWin32
     get_type_info : Proc(ObjectContext*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ObjectContext*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ObjectContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    create_instance : Proc(ObjectContext*, UInt8, VARIANT*, HRESULT)
+    create_instance : Proc(ObjectContext*, UInt8*, VARIANT*, HRESULT)
     set_complete : Proc(ObjectContext*, HRESULT)
     set_abort : Proc(ObjectContext*, HRESULT)
     enable_commit : Proc(ObjectContext*, HRESULT)
     disable_commit : Proc(ObjectContext*, HRESULT)
     is_in_transaction : Proc(ObjectContext*, Int16*, HRESULT)
     is_security_enabled : Proc(ObjectContext*, Int16*, HRESULT)
-    is_caller_in_role : Proc(ObjectContext*, UInt8, Int16*, HRESULT)
+    is_caller_in_role : Proc(ObjectContext*, UInt8*, Int16*, HRESULT)
     get_count : Proc(ObjectContext*, Int32*, HRESULT)
-    get_item : Proc(ObjectContext*, UInt8, VARIANT*, HRESULT)
+    get_item : Proc(ObjectContext*, UInt8*, VARIANT*, HRESULT)
     get__new_enum : Proc(ObjectContext*, IUnknown*, HRESULT)
     get_security : Proc(ObjectContext*, SecurityProperty*, HRESULT)
     get_context_info : Proc(ObjectContext*, ContextInfo*, HRESULT)
@@ -964,7 +964,7 @@ lib LibWin32
     get_type_info : Proc(ITransactionContext*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ITransactionContext*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ITransactionContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    create_instance : Proc(ITransactionContext*, UInt8, VARIANT*, HRESULT)
+    create_instance : Proc(ITransactionContext*, UInt8*, VARIANT*, HRESULT)
     commit : Proc(ITransactionContext*, HRESULT)
     abort : Proc(ITransactionContext*, HRESULT)
   end
@@ -999,7 +999,7 @@ lib LibWin32
     query_interface : Proc(ICreateWithTipTransactionEx*, Guid*, Void**, HRESULT)
     add_ref : Proc(ICreateWithTipTransactionEx*, UInt32)
     release : Proc(ICreateWithTipTransactionEx*, UInt32)
-    create_instance : Proc(ICreateWithTipTransactionEx*, UInt8, Guid*, Guid*, Void**, HRESULT)
+    create_instance : Proc(ICreateWithTipTransactionEx*, UInt8*, Guid*, Guid*, Void**, HRESULT)
   end
 
   struct ICreateWithTipTransactionEx
@@ -1248,9 +1248,9 @@ lib LibWin32
     query_interface : Proc(ILBEvents*, Guid*, Void**, HRESULT)
     add_ref : Proc(ILBEvents*, UInt32)
     release : Proc(ILBEvents*, UInt32)
-    target_up : Proc(ILBEvents*, UInt8, UInt8, HRESULT)
-    target_down : Proc(ILBEvents*, UInt8, UInt8, HRESULT)
-    engine_defined : Proc(ILBEvents*, UInt8, VARIANT*, UInt8, HRESULT)
+    target_up : Proc(ILBEvents*, UInt8*, UInt8*, HRESULT)
+    target_down : Proc(ILBEvents*, UInt8*, UInt8*, HRESULT)
+    engine_defined : Proc(ILBEvents*, UInt8*, VARIANT*, UInt8*, HRESULT)
   end
 
   struct ILBEvents
@@ -1413,7 +1413,7 @@ lib LibWin32
     add_ref : Proc(ISystemAppEventData*, UInt32)
     release : Proc(ISystemAppEventData*, UInt32)
     startup : Proc(ISystemAppEventData*, HRESULT)
-    on_data_changed : Proc(ISystemAppEventData*, UInt32, UInt32, UInt32, UInt8, UInt32, UInt64, HRESULT)
+    on_data_changed : Proc(ISystemAppEventData*, UInt32, UInt32, UInt32, UInt8*, UInt32, UInt64, HRESULT)
   end
 
   struct ISystemAppEventData
@@ -1428,8 +1428,8 @@ lib LibWin32
     get_type_info : Proc(IMtsEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IMtsEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IMtsEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_package_name : Proc(IMtsEvents*, UInt8*, HRESULT)
-    get_package_guid : Proc(IMtsEvents*, UInt8*, HRESULT)
+    get_package_name : Proc(IMtsEvents*, UInt8**, HRESULT)
+    get_package_guid : Proc(IMtsEvents*, UInt8**, HRESULT)
     post_event : Proc(IMtsEvents*, VARIANT*, HRESULT)
     get_fire_events : Proc(IMtsEvents*, Int16*, HRESULT)
     get_process_id : Proc(IMtsEvents*, Int32*, HRESULT)
@@ -1448,10 +1448,10 @@ lib LibWin32
     get_i_ds_of_names : Proc(IMtsEventInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IMtsEventInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_names : Proc(IMtsEventInfo*, IUnknown*, HRESULT)
-    get_display_name : Proc(IMtsEventInfo*, UInt8*, HRESULT)
-    get_event_id : Proc(IMtsEventInfo*, UInt8*, HRESULT)
+    get_display_name : Proc(IMtsEventInfo*, UInt8**, HRESULT)
+    get_event_id : Proc(IMtsEventInfo*, UInt8**, HRESULT)
     get_count : Proc(IMtsEventInfo*, Int32*, HRESULT)
-    get_value : Proc(IMtsEventInfo*, UInt8, VARIANT*, HRESULT)
+    get_value : Proc(IMtsEventInfo*, UInt8*, VARIANT*, HRESULT)
   end
 
   struct IMtsEventInfo
@@ -1498,10 +1498,10 @@ lib LibWin32
     get_type_info : Proc(IMessageMover*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IMessageMover*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IMessageMover*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_source_path : Proc(IMessageMover*, UInt8*, HRESULT)
-    put_source_path : Proc(IMessageMover*, UInt8, HRESULT)
-    get_dest_path : Proc(IMessageMover*, UInt8*, HRESULT)
-    put_dest_path : Proc(IMessageMover*, UInt8, HRESULT)
+    get_source_path : Proc(IMessageMover*, UInt8**, HRESULT)
+    put_source_path : Proc(IMessageMover*, UInt8*, HRESULT)
+    get_dest_path : Proc(IMessageMover*, UInt8**, HRESULT)
+    put_dest_path : Proc(IMessageMover*, UInt8*, HRESULT)
     get_commit_batch_size : Proc(IMessageMover*, Int32*, HRESULT)
     put_commit_batch_size : Proc(IMessageMover*, Int32, HRESULT)
     move_messages : Proc(IMessageMover*, Int32*, HRESULT)
@@ -1519,9 +1519,9 @@ lib LibWin32
     get_type_info : Proc(IEventServerTrace*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IEventServerTrace*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IEventServerTrace*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    start_trace_guid : Proc(IEventServerTrace*, UInt8, UInt8, Int32, HRESULT)
-    stop_trace_guid : Proc(IEventServerTrace*, UInt8, UInt8, Int32, HRESULT)
-    enum_trace_guid : Proc(IEventServerTrace*, Int32*, UInt8*, HRESULT)
+    start_trace_guid : Proc(IEventServerTrace*, UInt8*, UInt8*, Int32, HRESULT)
+    stop_trace_guid : Proc(IEventServerTrace*, UInt8*, UInt8*, Int32, HRESULT)
+    enum_trace_guid : Proc(IEventServerTrace*, Int32*, UInt8**, HRESULT)
   end
 
   struct IEventServerTrace
@@ -1642,7 +1642,7 @@ lib LibWin32
     disable_commit : Proc(IObjectContext*, HRESULT)
     is_in_transaction : Proc(IObjectContext*, LibC::BOOL)
     is_security_enabled : Proc(IObjectContext*, LibC::BOOL)
-    is_caller_in_role : Proc(IObjectContext*, UInt8, LibC::BOOL*, HRESULT)
+    is_caller_in_role : Proc(IObjectContext*, UInt8*, LibC::BOOL*, HRESULT)
   end
 
   struct IObjectContext
@@ -1666,7 +1666,7 @@ lib LibWin32
     query_interface : Proc(IEnumNames*, Guid*, Void**, HRESULT)
     add_ref : Proc(IEnumNames*, UInt32)
     release : Proc(IEnumNames*, UInt32)
-    next : Proc(IEnumNames*, UInt32, UInt8*, UInt32*, HRESULT)
+    next : Proc(IEnumNames*, UInt32, UInt8**, UInt32*, HRESULT)
     skip : Proc(IEnumNames*, UInt32, HRESULT)
     reset : Proc(IEnumNames*, HRESULT)
     clone : Proc(IEnumNames*, IEnumNames*, HRESULT)
@@ -1730,8 +1730,8 @@ lib LibWin32
     invoke : Proc(ISharedPropertyGroup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     create_property_by_position : Proc(ISharedPropertyGroup*, Int32, Int16*, ISharedProperty*, HRESULT)
     get_property_by_position : Proc(ISharedPropertyGroup*, Int32, ISharedProperty*, HRESULT)
-    create_property : Proc(ISharedPropertyGroup*, UInt8, Int16*, ISharedProperty*, HRESULT)
-    get_property : Proc(ISharedPropertyGroup*, UInt8, ISharedProperty*, HRESULT)
+    create_property : Proc(ISharedPropertyGroup*, UInt8*, Int16*, ISharedProperty*, HRESULT)
+    get_property : Proc(ISharedPropertyGroup*, UInt8*, ISharedProperty*, HRESULT)
   end
 
   struct ISharedPropertyGroup
@@ -1746,8 +1746,8 @@ lib LibWin32
     get_type_info : Proc(ISharedPropertyGroupManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISharedPropertyGroupManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISharedPropertyGroupManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    create_property_group : Proc(ISharedPropertyGroupManager*, UInt8, Int32*, Int32*, Int16*, ISharedPropertyGroup*, HRESULT)
-    get_group : Proc(ISharedPropertyGroupManager*, UInt8, ISharedPropertyGroup*, HRESULT)
+    create_property_group : Proc(ISharedPropertyGroupManager*, UInt8*, Int32*, Int32*, Int16*, ISharedPropertyGroup*, HRESULT)
+    get_group : Proc(ISharedPropertyGroupManager*, UInt8*, ISharedPropertyGroup*, HRESULT)
     get__new_enum : Proc(ISharedPropertyGroupManager*, IUnknown*, HRESULT)
   end
 
@@ -1774,7 +1774,7 @@ lib LibWin32
     get_type_info : Proc(IObjectConstructString*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IObjectConstructString*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IObjectConstructString*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_construct_string : Proc(IObjectConstructString*, UInt8*, HRESULT)
+    get_construct_string : Proc(IObjectConstructString*, UInt8**, HRESULT)
   end
 
   struct IObjectConstructString
@@ -1841,7 +1841,7 @@ lib LibWin32
     query_interface : Proc(IObjectContextTip*, Guid*, Void**, HRESULT)
     add_ref : Proc(IObjectContextTip*, UInt32)
     release : Proc(IObjectContextTip*, UInt32)
-    get_tip_url : Proc(IObjectContextTip*, UInt8*, HRESULT)
+    get_tip_url : Proc(IObjectContextTip*, UInt8**, HRESULT)
   end
 
   struct IObjectContextTip
@@ -1865,7 +1865,7 @@ lib LibWin32
     add_ref : Proc(IGetContextProperties*, UInt32)
     release : Proc(IGetContextProperties*, UInt32)
     count : Proc(IGetContextProperties*, Int32*, HRESULT)
-    get_property : Proc(IGetContextProperties*, UInt8, VARIANT*, HRESULT)
+    get_property : Proc(IGetContextProperties*, UInt8*, VARIANT*, HRESULT)
     enum_names : Proc(IGetContextProperties*, IEnumNames*, HRESULT)
   end
 
@@ -1895,7 +1895,7 @@ lib LibWin32
     get_type_info : Proc(IPoolManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IPoolManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IPoolManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    shutdown_pool : Proc(IPoolManager*, UInt8, HRESULT)
+    shutdown_pool : Proc(IPoolManager*, UInt8*, HRESULT)
   end
 
   struct IPoolManager
@@ -1932,7 +1932,7 @@ lib LibWin32
     query_interface : Proc(ICrmLogControl*, Guid*, Void**, HRESULT)
     add_ref : Proc(ICrmLogControl*, UInt32)
     release : Proc(ICrmLogControl*, UInt32)
-    get_transaction_uow : Proc(ICrmLogControl*, UInt8*, HRESULT)
+    get_transaction_uow : Proc(ICrmLogControl*, UInt8**, HRESULT)
     register_compensator : Proc(ICrmLogControl*, LibC::LPWSTR, LibC::LPWSTR, Int32, HRESULT)
     write_log_record_variants : Proc(ICrmLogControl*, VARIANT*, HRESULT)
     force_log : Proc(ICrmLogControl*, HRESULT)
@@ -2425,7 +2425,7 @@ lib LibWin32
     get_type_info : Proc(IAssemblyLocator*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IAssemblyLocator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IAssemblyLocator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_modules : Proc(IAssemblyLocator*, UInt8, UInt8, UInt8, SAFEARRAY**, HRESULT)
+    get_modules : Proc(IAssemblyLocator*, UInt8*, UInt8*, UInt8*, SAFEARRAY**, HRESULT)
   end
 
   struct IAssemblyLocator
@@ -2484,10 +2484,10 @@ lib LibWin32
     add_ref : Proc(IContextProperties*, UInt32)
     release : Proc(IContextProperties*, UInt32)
     count : Proc(IContextProperties*, Int32*, HRESULT)
-    get_property : Proc(IContextProperties*, UInt8, VARIANT*, HRESULT)
+    get_property : Proc(IContextProperties*, UInt8*, VARIANT*, HRESULT)
     enum_names : Proc(IContextProperties*, IEnumNames*, HRESULT)
-    set_property : Proc(IContextProperties*, UInt8, VARIANT, HRESULT)
-    remove_property : Proc(IContextProperties*, UInt8, HRESULT)
+    set_property : Proc(IContextProperties*, UInt8*, VARIANT, HRESULT)
+    remove_property : Proc(IContextProperties*, UInt8*, HRESULT)
   end
 
   struct IContextProperties

@@ -7639,11 +7639,11 @@ lib LibWin32
     p_credential : IMFNetCredential
   end
   struct DEVICE_INFO
-    p_friendly_device_name : UInt8
-    p_unique_device_name : UInt8
-    p_manufacturer_name : UInt8
-    p_model_name : UInt8
-    p_icon_url : UInt8
+    p_friendly_device_name : UInt8*
+    p_unique_device_name : UInt8*
+    p_manufacturer_name : UInt8*
+    p_model_name : UInt8*
+    p_icon_url : UInt8*
   end
   struct MFVideoAlphaBitmapParams
     dw_flags : UInt32
@@ -11841,7 +11841,7 @@ lib LibWin32
     query_interface : Proc(IMFDRMNetHelper*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFDRMNetHelper*, UInt32)
     release : Proc(IMFDRMNetHelper*, UInt32)
-    process_license_request : Proc(IMFDRMNetHelper*, UInt8*, UInt32, UInt8**, UInt32*, UInt8*, HRESULT)
+    process_license_request : Proc(IMFDRMNetHelper*, UInt8*, UInt32, UInt8**, UInt32*, UInt8**, HRESULT)
     get_chained_license_response : Proc(IMFDRMNetHelper*, UInt8**, UInt32*, HRESULT)
   end
 
@@ -12117,10 +12117,10 @@ lib LibWin32
     add_ref : Proc(IMFMediaEngineSrcElements*, UInt32)
     release : Proc(IMFMediaEngineSrcElements*, UInt32)
     get_length : Proc(IMFMediaEngineSrcElements*, UInt32)
-    get_url : Proc(IMFMediaEngineSrcElements*, UInt32, UInt8*, HRESULT)
-    get_type : Proc(IMFMediaEngineSrcElements*, UInt32, UInt8*, HRESULT)
-    get_media : Proc(IMFMediaEngineSrcElements*, UInt32, UInt8*, HRESULT)
-    add_element : Proc(IMFMediaEngineSrcElements*, UInt8, UInt8, UInt8, HRESULT)
+    get_url : Proc(IMFMediaEngineSrcElements*, UInt32, UInt8**, HRESULT)
+    get_type : Proc(IMFMediaEngineSrcElements*, UInt32, UInt8**, HRESULT)
+    get_media : Proc(IMFMediaEngineSrcElements*, UInt32, UInt8**, HRESULT)
+    add_element : Proc(IMFMediaEngineSrcElements*, UInt8*, UInt8*, UInt8*, HRESULT)
     remove_all_elements : Proc(IMFMediaEngineSrcElements*, HRESULT)
   end
 
@@ -12135,14 +12135,14 @@ lib LibWin32
     get_error : Proc(IMFMediaEngine*, IMFMediaError*, HRESULT)
     set_error_code : Proc(IMFMediaEngine*, MF_MEDIA_ENGINE_ERR, HRESULT)
     set_source_elements : Proc(IMFMediaEngine*, IMFMediaEngineSrcElements, HRESULT)
-    set_source : Proc(IMFMediaEngine*, UInt8, HRESULT)
-    get_current_source : Proc(IMFMediaEngine*, UInt8*, HRESULT)
+    set_source : Proc(IMFMediaEngine*, UInt8*, HRESULT)
+    get_current_source : Proc(IMFMediaEngine*, UInt8**, HRESULT)
     get_network_state : Proc(IMFMediaEngine*, UInt16)
     get_preload : Proc(IMFMediaEngine*, MF_MEDIA_ENGINE_PRELOAD)
     set_preload : Proc(IMFMediaEngine*, MF_MEDIA_ENGINE_PRELOAD, HRESULT)
     get_buffered : Proc(IMFMediaEngine*, IMFMediaTimeRange*, HRESULT)
     load : Proc(IMFMediaEngine*, HRESULT)
-    can_play_type : Proc(IMFMediaEngine*, UInt8, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
+    can_play_type : Proc(IMFMediaEngine*, UInt8*, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
     get_ready_state : Proc(IMFMediaEngine*, UInt16)
     is_seeking : Proc(IMFMediaEngine*, LibC::BOOL)
     get_current_time : Proc(IMFMediaEngine*, Float64)
@@ -12187,14 +12187,14 @@ lib LibWin32
     get_error : Proc(IMFMediaEngineEx*, IMFMediaError*, HRESULT)
     set_error_code : Proc(IMFMediaEngineEx*, MF_MEDIA_ENGINE_ERR, HRESULT)
     set_source_elements : Proc(IMFMediaEngineEx*, IMFMediaEngineSrcElements, HRESULT)
-    set_source : Proc(IMFMediaEngineEx*, UInt8, HRESULT)
-    get_current_source : Proc(IMFMediaEngineEx*, UInt8*, HRESULT)
+    set_source : Proc(IMFMediaEngineEx*, UInt8*, HRESULT)
+    get_current_source : Proc(IMFMediaEngineEx*, UInt8**, HRESULT)
     get_network_state : Proc(IMFMediaEngineEx*, UInt16)
     get_preload : Proc(IMFMediaEngineEx*, MF_MEDIA_ENGINE_PRELOAD)
     set_preload : Proc(IMFMediaEngineEx*, MF_MEDIA_ENGINE_PRELOAD, HRESULT)
     get_buffered : Proc(IMFMediaEngineEx*, IMFMediaTimeRange*, HRESULT)
     load : Proc(IMFMediaEngineEx*, HRESULT)
-    can_play_type : Proc(IMFMediaEngineEx*, UInt8, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
+    can_play_type : Proc(IMFMediaEngineEx*, UInt8*, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
     get_ready_state : Proc(IMFMediaEngineEx*, UInt16)
     is_seeking : Proc(IMFMediaEngineEx*, LibC::BOOL)
     get_current_time : Proc(IMFMediaEngineEx*, Float64)
@@ -12226,7 +12226,7 @@ lib LibWin32
     shutdown : Proc(IMFMediaEngineEx*, HRESULT)
     transfer_video_frame : Proc(IMFMediaEngineEx*, IUnknown, MFVideoNormalizedRect*, RECT*, MFARGB*, HRESULT)
     on_video_stream_tick : Proc(IMFMediaEngineEx*, Int64*, HRESULT)
-    set_source_from_byte_stream : Proc(IMFMediaEngineEx*, IMFByteStream, UInt8, HRESULT)
+    set_source_from_byte_stream : Proc(IMFMediaEngineEx*, IMFByteStream, UInt8*, HRESULT)
     get_statistics : Proc(IMFMediaEngineEx*, MF_MEDIA_ENGINE_STATISTIC, PROPVARIANT*, HRESULT)
     update_video_stream : Proc(IMFMediaEngineEx*, MFVideoNormalizedRect*, RECT*, MFARGB*, HRESULT)
     get_balance : Proc(IMFMediaEngineEx*, Float64)
@@ -12285,8 +12285,8 @@ lib LibWin32
     query_interface : Proc(IMFMediaEngineExtension*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFMediaEngineExtension*, UInt32)
     release : Proc(IMFMediaEngineExtension*, UInt32)
-    can_play_type : Proc(IMFMediaEngineExtension*, LibC::BOOL, UInt8, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
-    begin_create_object : Proc(IMFMediaEngineExtension*, UInt8, IMFByteStream, MF_OBJECT_TYPE, IUnknown*, IMFAsyncCallback, IUnknown, HRESULT)
+    can_play_type : Proc(IMFMediaEngineExtension*, LibC::BOOL, UInt8*, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
+    begin_create_object : Proc(IMFMediaEngineExtension*, UInt8*, IMFByteStream, MF_OBJECT_TYPE, IUnknown*, IMFAsyncCallback, IUnknown, HRESULT)
     cancel_object_creation : Proc(IMFMediaEngineExtension*, IUnknown, HRESULT)
     end_create_object : Proc(IMFMediaEngineExtension*, IMFAsyncResult, IUnknown*, HRESULT)
   end
@@ -12430,10 +12430,10 @@ lib LibWin32
     get_ready_state : Proc(IMFMediaSourceExtension*, MF_MSE_READY)
     get_duration : Proc(IMFMediaSourceExtension*, Float64)
     set_duration : Proc(IMFMediaSourceExtension*, Float64, HRESULT)
-    add_source_buffer : Proc(IMFMediaSourceExtension*, UInt8, IMFSourceBufferNotify, IMFSourceBuffer*, HRESULT)
+    add_source_buffer : Proc(IMFMediaSourceExtension*, UInt8*, IMFSourceBufferNotify, IMFSourceBuffer*, HRESULT)
     remove_source_buffer : Proc(IMFMediaSourceExtension*, IMFSourceBuffer, HRESULT)
     set_end_of_stream : Proc(IMFMediaSourceExtension*, MF_MSE_ERROR, HRESULT)
-    is_type_supported : Proc(IMFMediaSourceExtension*, UInt8, LibC::BOOL)
+    is_type_supported : Proc(IMFMediaSourceExtension*, UInt8*, LibC::BOOL)
     get_source_buffer : Proc(IMFMediaSourceExtension*, UInt32, IMFSourceBuffer)
   end
 
@@ -12470,13 +12470,13 @@ lib LibWin32
     add_ref : Proc(IMFMediaEngineSrcElementsEx*, UInt32)
     release : Proc(IMFMediaEngineSrcElementsEx*, UInt32)
     get_length : Proc(IMFMediaEngineSrcElementsEx*, UInt32)
-    get_url : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8*, HRESULT)
-    get_type : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8*, HRESULT)
-    get_media : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8*, HRESULT)
-    add_element : Proc(IMFMediaEngineSrcElementsEx*, UInt8, UInt8, UInt8, HRESULT)
+    get_url : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8**, HRESULT)
+    get_type : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8**, HRESULT)
+    get_media : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8**, HRESULT)
+    add_element : Proc(IMFMediaEngineSrcElementsEx*, UInt8*, UInt8*, UInt8*, HRESULT)
     remove_all_elements : Proc(IMFMediaEngineSrcElementsEx*, HRESULT)
-    add_element_ex : Proc(IMFMediaEngineSrcElementsEx*, UInt8, UInt8, UInt8, UInt8, HRESULT)
-    get_key_system : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8*, HRESULT)
+    add_element_ex : Proc(IMFMediaEngineSrcElementsEx*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    get_key_system : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8**, HRESULT)
   end
 
   struct IMFMediaEngineSrcElementsEx
@@ -12498,8 +12498,8 @@ lib LibWin32
     query_interface : Proc(IMFMediaKeys*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFMediaKeys*, UInt32)
     release : Proc(IMFMediaKeys*, UInt32)
-    create_session : Proc(IMFMediaKeys*, UInt8, UInt8*, UInt32, UInt8*, UInt32, IMFMediaKeySessionNotify, IMFMediaKeySession*, HRESULT)
-    get_key_system : Proc(IMFMediaKeys*, UInt8*, HRESULT)
+    create_session : Proc(IMFMediaKeys*, UInt8*, UInt8*, UInt32, UInt8*, UInt32, IMFMediaKeySessionNotify, IMFMediaKeySession*, HRESULT)
+    get_key_system : Proc(IMFMediaKeys*, UInt8**, HRESULT)
     shutdown : Proc(IMFMediaKeys*, HRESULT)
     get_suspend_notify : Proc(IMFMediaKeys*, IMFCdmSuspendNotify*, HRESULT)
   end
@@ -12513,8 +12513,8 @@ lib LibWin32
     add_ref : Proc(IMFMediaKeySession*, UInt32)
     release : Proc(IMFMediaKeySession*, UInt32)
     get_error : Proc(IMFMediaKeySession*, UInt16*, UInt32*, HRESULT)
-    get_key_system : Proc(IMFMediaKeySession*, UInt8*, HRESULT)
-    get_session_id : Proc(IMFMediaKeySession*, UInt8*, HRESULT)
+    get_key_system : Proc(IMFMediaKeySession*, UInt8**, HRESULT)
+    get_session_id : Proc(IMFMediaKeySession*, UInt8**, HRESULT)
     update : Proc(IMFMediaKeySession*, UInt8*, UInt32, HRESULT)
     close : Proc(IMFMediaKeySession*, HRESULT)
   end
@@ -12527,7 +12527,7 @@ lib LibWin32
     query_interface : Proc(IMFMediaKeySessionNotify*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFMediaKeySessionNotify*, UInt32)
     release : Proc(IMFMediaKeySessionNotify*, UInt32)
-    key_message : Proc(IMFMediaKeySessionNotify*, UInt8, UInt8*, UInt32, Void)
+    key_message : Proc(IMFMediaKeySessionNotify*, UInt8*, UInt8*, UInt32, Void)
     key_added : Proc(IMFMediaKeySessionNotify*, Void)
     key_error : Proc(IMFMediaKeySessionNotify*, UInt16, UInt32, Void)
   end
@@ -12592,8 +12592,8 @@ lib LibWin32
     create_time_range : Proc(IMFMediaEngineClassFactoryEx*, IMFMediaTimeRange*, HRESULT)
     create_error : Proc(IMFMediaEngineClassFactoryEx*, IMFMediaError*, HRESULT)
     create_media_source_extension : Proc(IMFMediaEngineClassFactoryEx*, UInt32, IMFAttributes, IMFMediaSourceExtension*, HRESULT)
-    create_media_keys : Proc(IMFMediaEngineClassFactoryEx*, UInt8, UInt8, IMFMediaKeys*, HRESULT)
-    is_type_supported : Proc(IMFMediaEngineClassFactoryEx*, UInt8, UInt8, LibC::BOOL*, HRESULT)
+    create_media_keys : Proc(IMFMediaEngineClassFactoryEx*, UInt8*, UInt8*, IMFMediaKeys*, HRESULT)
+    is_type_supported : Proc(IMFMediaEngineClassFactoryEx*, UInt8*, UInt8*, LibC::BOOL*, HRESULT)
   end
 
   struct IMFMediaEngineClassFactoryEx
@@ -12604,7 +12604,7 @@ lib LibWin32
     query_interface : Proc(IMFMediaEngineClassFactory2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFMediaEngineClassFactory2*, UInt32)
     release : Proc(IMFMediaEngineClassFactory2*, UInt32)
-    create_media_keys2 : Proc(IMFMediaEngineClassFactory2*, UInt8, UInt8, UInt8, IMFMediaKeys*, HRESULT)
+    create_media_keys2 : Proc(IMFMediaEngineClassFactory2*, UInt8*, UInt8*, UInt8*, IMFMediaKeys*, HRESULT)
   end
 
   struct IMFMediaEngineClassFactory2
@@ -12615,7 +12615,7 @@ lib LibWin32
     query_interface : Proc(IMFExtendedDRMTypeSupport*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFExtendedDRMTypeSupport*, UInt32)
     release : Proc(IMFExtendedDRMTypeSupport*, UInt32)
-    is_type_supported_ex : Proc(IMFExtendedDRMTypeSupport*, UInt8, UInt8, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
+    is_type_supported_ex : Proc(IMFExtendedDRMTypeSupport*, UInt8*, UInt8*, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
   end
 
   struct IMFExtendedDRMTypeSupport
@@ -12875,7 +12875,7 @@ lib LibWin32
     query_interface : Proc(IMFMediaEngineEMENotify*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFMediaEngineEMENotify*, UInt32)
     release : Proc(IMFMediaEngineEMENotify*, UInt32)
-    encrypted : Proc(IMFMediaEngineEMENotify*, UInt8*, UInt32, UInt8, Void)
+    encrypted : Proc(IMFMediaEngineEMENotify*, UInt8*, UInt32, UInt8*, Void)
     waiting_for_key : Proc(IMFMediaEngineEMENotify*, Void)
   end
 
@@ -12887,10 +12887,10 @@ lib LibWin32
     query_interface : Proc(IMFMediaKeySessionNotify2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFMediaKeySessionNotify2*, UInt32)
     release : Proc(IMFMediaKeySessionNotify2*, UInt32)
-    key_message : Proc(IMFMediaKeySessionNotify2*, UInt8, UInt8*, UInt32, Void)
+    key_message : Proc(IMFMediaKeySessionNotify2*, UInt8*, UInt8*, UInt32, Void)
     key_added : Proc(IMFMediaKeySessionNotify2*, Void)
     key_error : Proc(IMFMediaKeySessionNotify2*, UInt16, UInt32, Void)
-    key_message2 : Proc(IMFMediaKeySessionNotify2*, MF_MEDIAKEYSESSION_MESSAGETYPE, UInt8, UInt8*, UInt32, Void)
+    key_message2 : Proc(IMFMediaKeySessionNotify2*, MF_MEDIAKEYSESSION_MESSAGETYPE, UInt8*, UInt8*, UInt32, Void)
     key_status_change : Proc(IMFMediaKeySessionNotify2*, Void)
   end
 
@@ -12904,7 +12904,7 @@ lib LibWin32
     release : Proc(IMFMediaKeySystemAccess*, UInt32)
     create_media_keys : Proc(IMFMediaKeySystemAccess*, IPropertyStore, IMFMediaKeys2*, HRESULT)
     get_supported_configuration : Proc(IMFMediaKeySystemAccess*, IPropertyStore*, HRESULT)
-    get_key_system : Proc(IMFMediaKeySystemAccess*, UInt8*, HRESULT)
+    get_key_system : Proc(IMFMediaKeySystemAccess*, UInt8**, HRESULT)
   end
 
   struct IMFMediaKeySystemAccess
@@ -12915,7 +12915,7 @@ lib LibWin32
     query_interface : Proc(IMFMediaEngineClassFactory3*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFMediaEngineClassFactory3*, UInt32)
     release : Proc(IMFMediaEngineClassFactory3*, UInt32)
-    create_media_key_system_access : Proc(IMFMediaEngineClassFactory3*, UInt8, IPropertyStore*, UInt32, IMFMediaKeySystemAccess*, HRESULT)
+    create_media_key_system_access : Proc(IMFMediaEngineClassFactory3*, UInt8*, IPropertyStore*, UInt32, IMFMediaKeySystemAccess*, HRESULT)
   end
 
   struct IMFMediaEngineClassFactory3
@@ -12926,8 +12926,8 @@ lib LibWin32
     query_interface : Proc(IMFMediaKeys2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFMediaKeys2*, UInt32)
     release : Proc(IMFMediaKeys2*, UInt32)
-    create_session : Proc(IMFMediaKeys2*, UInt8, UInt8*, UInt32, UInt8*, UInt32, IMFMediaKeySessionNotify, IMFMediaKeySession*, HRESULT)
-    get_key_system : Proc(IMFMediaKeys2*, UInt8*, HRESULT)
+    create_session : Proc(IMFMediaKeys2*, UInt8*, UInt8*, UInt32, UInt8*, UInt32, IMFMediaKeySessionNotify, IMFMediaKeySession*, HRESULT)
+    get_key_system : Proc(IMFMediaKeys2*, UInt8**, HRESULT)
     shutdown : Proc(IMFMediaKeys2*, HRESULT)
     get_suspend_notify : Proc(IMFMediaKeys2*, IMFCdmSuspendNotify*, HRESULT)
     create_session2 : Proc(IMFMediaKeys2*, MF_MEDIAKEYSESSION_TYPE, IMFMediaKeySessionNotify2, IMFMediaKeySession2*, HRESULT)
@@ -12944,13 +12944,13 @@ lib LibWin32
     add_ref : Proc(IMFMediaKeySession2*, UInt32)
     release : Proc(IMFMediaKeySession2*, UInt32)
     get_error : Proc(IMFMediaKeySession2*, UInt16*, UInt32*, HRESULT)
-    get_key_system : Proc(IMFMediaKeySession2*, UInt8*, HRESULT)
-    get_session_id : Proc(IMFMediaKeySession2*, UInt8*, HRESULT)
+    get_key_system : Proc(IMFMediaKeySession2*, UInt8**, HRESULT)
+    get_session_id : Proc(IMFMediaKeySession2*, UInt8**, HRESULT)
     update : Proc(IMFMediaKeySession2*, UInt8*, UInt32, HRESULT)
     close : Proc(IMFMediaKeySession2*, HRESULT)
     get_key_statuses : Proc(IMFMediaKeySession2*, MFMediaKeyStatus**, UInt32*, HRESULT)
-    load : Proc(IMFMediaKeySession2*, UInt8, LibC::BOOL*, HRESULT)
-    generate_request : Proc(IMFMediaKeySession2*, UInt8, UInt8*, UInt32, HRESULT)
+    load : Proc(IMFMediaKeySession2*, UInt8*, LibC::BOOL*, HRESULT)
+    generate_request : Proc(IMFMediaKeySession2*, UInt8*, UInt8*, UInt32, HRESULT)
     get_expiration : Proc(IMFMediaKeySession2*, Float64*, HRESULT)
     remove : Proc(IMFMediaKeySession2*, HRESULT)
     shutdown : Proc(IMFMediaKeySession2*, HRESULT)
@@ -13433,14 +13433,14 @@ lib LibWin32
     get_error : Proc(IMFMediaSharingEngine*, IMFMediaError*, HRESULT)
     set_error_code : Proc(IMFMediaSharingEngine*, MF_MEDIA_ENGINE_ERR, HRESULT)
     set_source_elements : Proc(IMFMediaSharingEngine*, IMFMediaEngineSrcElements, HRESULT)
-    set_source : Proc(IMFMediaSharingEngine*, UInt8, HRESULT)
-    get_current_source : Proc(IMFMediaSharingEngine*, UInt8*, HRESULT)
+    set_source : Proc(IMFMediaSharingEngine*, UInt8*, HRESULT)
+    get_current_source : Proc(IMFMediaSharingEngine*, UInt8**, HRESULT)
     get_network_state : Proc(IMFMediaSharingEngine*, UInt16)
     get_preload : Proc(IMFMediaSharingEngine*, MF_MEDIA_ENGINE_PRELOAD)
     set_preload : Proc(IMFMediaSharingEngine*, MF_MEDIA_ENGINE_PRELOAD, HRESULT)
     get_buffered : Proc(IMFMediaSharingEngine*, IMFMediaTimeRange*, HRESULT)
     load : Proc(IMFMediaSharingEngine*, HRESULT)
-    can_play_type : Proc(IMFMediaSharingEngine*, UInt8, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
+    can_play_type : Proc(IMFMediaSharingEngine*, UInt8*, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
     get_ready_state : Proc(IMFMediaSharingEngine*, UInt16)
     is_seeking : Proc(IMFMediaSharingEngine*, LibC::BOOL)
     get_current_time : Proc(IMFMediaSharingEngine*, Float64)
@@ -13507,7 +13507,7 @@ lib LibWin32
     query_interface : Proc(IMFImageSharingEngineClassFactory*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMFImageSharingEngineClassFactory*, UInt32)
     release : Proc(IMFImageSharingEngineClassFactory*, UInt32)
-    create_instance_from_udn : Proc(IMFImageSharingEngineClassFactory*, UInt8, IMFImageSharingEngine*, HRESULT)
+    create_instance_from_udn : Proc(IMFImageSharingEngineClassFactory*, UInt8*, IMFImageSharingEngine*, HRESULT)
   end
 
   struct IMFImageSharingEngineClassFactory

@@ -1330,11 +1330,11 @@ lib LibWin32
     bsa_task : PM_BSATASKID
     bsa_product_id : Guid
     bw_task : PM_BWTASKID
-    protocol_name : UInt8
-    file_type : UInt8
-    content_type : UInt8
+    protocol_name : UInt8*
+    file_type : UInt8*
+    content_type : UInt8*
     app_supported_file_ext_pid : Guid
-    share_target_file_type : UInt8
+    share_target_file_type : UInt8*
   end
   union PATCH_OLD_FILE_INFO_Anonymous_e__Union
     old_file_name_a : PSTR
@@ -1389,15 +1389,15 @@ lib LibWin32
   end
   struct PM_EXTENSIONCONSUMER
     consumer_pid : Guid
-    extension_id : UInt8
+    extension_id : UInt8*
   end
   struct PM_BSATASKID
     product_id : Guid
-    task_id : UInt8
+    task_id : UInt8*
   end
   struct PM_BWTASKID
     product_id : Guid
-    task_id : UInt8
+    task_id : UInt8*
   end
   struct PM_ENUM_FILTER
     filter_type : Int32
@@ -1406,8 +1406,8 @@ lib LibWin32
   struct PM_STARTAPPBLOB
     cb_size : UInt32
     product_id : Guid
-    app_title : UInt8
-    icon_path : UInt8
+    app_title : UInt8*
+    icon_path : UInt8*
     is_uninstallable : LibC::BOOL
     app_install_type : PM_APPLICATION_INSTALL_TYPE
     instance_id : Guid
@@ -1417,13 +1417,13 @@ lib LibWin32
     light_up_support_mask : UInt16
   end
   struct PM_INVOCATIONINFO
-    uri_base_or_aumid : UInt8
-    uri_fragment_or_args : UInt8
+    uri_base_or_aumid : UInt8*
+    uri_fragment_or_args : UInt8*
   end
   struct PM_STARTTILEBLOB
     cb_size : UInt32
     product_id : Guid
-    tile_id : UInt8
+    tile_id : UInt8*
     template_type : TILE_TEMPLATE_TYPE
     hub_position : UInt32[32]*
     hub_visibility_bitmask : UInt32
@@ -1437,30 +1437,30 @@ lib LibWin32
   end
   struct PM_INSTALLINFO
     product_id : Guid
-    package_path : UInt8
+    package_path : UInt8*
     instance_id : Guid
     pb_license : UInt8*
     cb_license : UInt32
     is_uninstall_disabled : LibC::BOOL
     deployment_options : UInt32
     offer_id : Guid
-    marketplace_app_version : UInt8
+    marketplace_app_version : UInt8*
   end
   struct PM_UPDATEINFO_LEGACY
     product_id : Guid
-    package_path : UInt8
+    package_path : UInt8*
     instance_id : Guid
     pb_license : UInt8*
     cb_license : UInt32
-    marketplace_app_version : UInt8
+    marketplace_app_version : UInt8*
   end
   struct PM_UPDATEINFO
     product_id : Guid
-    package_path : UInt8
+    package_path : UInt8*
     instance_id : Guid
     pb_license : UInt8*
     cb_license : UInt32
-    marketplace_app_version : UInt8
+    marketplace_app_version : UInt8*
     deployment_options : UInt32
   end
   struct PATCH_IGNORE_RANGE
@@ -1665,7 +1665,7 @@ lib LibWin32
     query_interface : Proc(IEnumMsmString*, Guid*, Void**, HRESULT)
     add_ref : Proc(IEnumMsmString*, UInt32)
     release : Proc(IEnumMsmString*, UInt32)
-    next : Proc(IEnumMsmString*, UInt32, UInt8*, UInt32*, HRESULT)
+    next : Proc(IEnumMsmString*, UInt32, UInt8**, UInt32*, HRESULT)
     skip : Proc(IEnumMsmString*, UInt32, HRESULT)
     reset : Proc(IEnumMsmString*, HRESULT)
     clone : Proc(IEnumMsmString*, IEnumMsmString*, HRESULT)
@@ -1683,7 +1683,7 @@ lib LibWin32
     get_type_info : Proc(IMsmStrings*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IMsmStrings*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IMsmStrings*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IMsmStrings*, Int32, UInt8*, HRESULT)
+    get_item : Proc(IMsmStrings*, Int32, UInt8**, HRESULT)
     get_count : Proc(IMsmStrings*, Int32*, HRESULT)
     get__new_enum : Proc(IMsmStrings*, IUnknown*, HRESULT)
   end
@@ -1701,11 +1701,11 @@ lib LibWin32
     get_i_ds_of_names : Proc(IMsmError*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IMsmError*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_type : Proc(IMsmError*, Msmerrortype*, HRESULT)
-    get_path : Proc(IMsmError*, UInt8*, HRESULT)
+    get_path : Proc(IMsmError*, UInt8**, HRESULT)
     get_language : Proc(IMsmError*, Int16*, HRESULT)
-    get_database_table : Proc(IMsmError*, UInt8*, HRESULT)
+    get_database_table : Proc(IMsmError*, UInt8**, HRESULT)
     get_database_keys : Proc(IMsmError*, IMsmStrings*, HRESULT)
-    get_module_table : Proc(IMsmError*, UInt8*, HRESULT)
+    get_module_table : Proc(IMsmError*, UInt8**, HRESULT)
     get_module_keys : Proc(IMsmError*, IMsmStrings*, HRESULT)
   end
 
@@ -1752,9 +1752,9 @@ lib LibWin32
     get_type_info : Proc(IMsmDependency*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IMsmDependency*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IMsmDependency*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_module : Proc(IMsmDependency*, UInt8*, HRESULT)
+    get_module : Proc(IMsmDependency*, UInt8**, HRESULT)
     get_language : Proc(IMsmDependency*, Int16*, HRESULT)
-    get_version : Proc(IMsmDependency*, UInt8*, HRESULT)
+    get_version : Proc(IMsmDependency*, UInt8**, HRESULT)
   end
 
   struct IMsmDependency
@@ -1800,19 +1800,19 @@ lib LibWin32
     get_type_info : Proc(IMsmMerge*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IMsmMerge*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IMsmMerge*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    open_database : Proc(IMsmMerge*, UInt8, HRESULT)
-    open_module : Proc(IMsmMerge*, UInt8, Int16, HRESULT)
+    open_database : Proc(IMsmMerge*, UInt8*, HRESULT)
+    open_module : Proc(IMsmMerge*, UInt8*, Int16, HRESULT)
     close_database : Proc(IMsmMerge*, Int16, HRESULT)
     close_module : Proc(IMsmMerge*, HRESULT)
-    open_log : Proc(IMsmMerge*, UInt8, HRESULT)
+    open_log : Proc(IMsmMerge*, UInt8*, HRESULT)
     close_log : Proc(IMsmMerge*, HRESULT)
-    log : Proc(IMsmMerge*, UInt8, HRESULT)
+    log : Proc(IMsmMerge*, UInt8*, HRESULT)
     get_errors : Proc(IMsmMerge*, IMsmErrors*, HRESULT)
     get_dependencies : Proc(IMsmMerge*, IMsmDependencies*, HRESULT)
-    merge : Proc(IMsmMerge*, UInt8, UInt8, HRESULT)
-    connect : Proc(IMsmMerge*, UInt8, HRESULT)
-    extract_cab : Proc(IMsmMerge*, UInt8, HRESULT)
-    extract_files : Proc(IMsmMerge*, UInt8, HRESULT)
+    merge : Proc(IMsmMerge*, UInt8*, UInt8*, HRESULT)
+    connect : Proc(IMsmMerge*, UInt8*, HRESULT)
+    extract_cab : Proc(IMsmMerge*, UInt8*, HRESULT)
+    extract_files : Proc(IMsmMerge*, UInt8*, HRESULT)
   end
 
   struct IMsmMerge
@@ -1888,9 +1888,9 @@ lib LibWin32
     get_product_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
     get_instance_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
     get_offer_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
-    get_default_task : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
-    get_app_title : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
-    get_icon_path : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
+    get_default_task : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_app_title : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_icon_path : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
     get_notification_state : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
     get_app_install_type : Proc(IPMApplicationInfo*, PM_APPLICATION_INSTALL_TYPE*, HRESULT)
     get_state : Proc(IPMApplicationInfo*, PM_APPLICATION_STATE*, HRESULT)
@@ -1900,24 +1900,24 @@ lib LibWin32
     get_is_uninstallable : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
     get_is_themable : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
     get_is_trial : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
-    get_install_path : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
-    get_data_root : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
+    get_install_path : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_data_root : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
     get_genre : Proc(IPMApplicationInfo*, PM_APP_GENRE*, HRESULT)
-    get_publisher : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
-    get_author : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
-    get_description : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
-    get_version : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
-    get_invocation_info : Proc(IPMApplicationInfo*, UInt8*, UInt8*, HRESULT)
+    get_publisher : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_author : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_description : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_version : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
+    get_invocation_info : Proc(IPMApplicationInfo*, UInt8**, UInt8**, HRESULT)
     get_app_plat_major_version : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
     get_app_plat_minor_version : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
     get_publisher_id : Proc(IPMApplicationInfo*, Guid*, HRESULT)
     get_is_multi_core : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
-    get_sid : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
+    get_sid : Proc(IPMApplicationInfo*, UInt8**, HRESULT)
     get_app_plat_major_version_light_up : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
     get_app_plat_minor_version_light_up : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
     set_update_available : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
     set_notification_state : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
-    set_icon_path : Proc(IPMApplicationInfo*, UInt8, HRESULT)
+    set_icon_path : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
     set_uninstallable_state : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
     get_is_pinable_on_kid_zone : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
     get_is_originally_pre_installed : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
@@ -1939,7 +1939,7 @@ lib LibWin32
     get_should_defer_mdil_bind : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
     get_is_fully_pre_install : Proc(IPMApplicationInfo*, LibC::BOOL*, HRESULT)
     set_is_mdil_maintenance_needed : Proc(IPMApplicationInfo*, LibC::BOOL, HRESULT)
-    set_title : Proc(IPMApplicationInfo*, UInt8, HRESULT)
+    set_title : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
   end
 
   struct IPMApplicationInfo
@@ -1951,8 +1951,8 @@ lib LibWin32
     add_ref : Proc(IPMTilePropertyInfo*, UInt32)
     release : Proc(IPMTilePropertyInfo*, UInt32)
     get_property_id : Proc(IPMTilePropertyInfo*, UInt32*, HRESULT)
-    get_property_value : Proc(IPMTilePropertyInfo*, UInt8*, HRESULT)
-    set_property : Proc(IPMTilePropertyInfo*, UInt8, HRESULT)
+    get_property_value : Proc(IPMTilePropertyInfo*, UInt8**, HRESULT)
+    set_property : Proc(IPMTilePropertyInfo*, UInt8*, HRESULT)
   end
 
   struct IPMTilePropertyInfo
@@ -1975,24 +1975,24 @@ lib LibWin32
     add_ref : Proc(IPMTileInfo*, UInt32)
     release : Proc(IPMTileInfo*, UInt32)
     get_product_id : Proc(IPMTileInfo*, Guid*, HRESULT)
-    get_tile_id : Proc(IPMTileInfo*, UInt8*, HRESULT)
+    get_tile_id : Proc(IPMTileInfo*, UInt8**, HRESULT)
     get_template_type : Proc(IPMTileInfo*, TILE_TEMPLATE_TYPE*, HRESULT)
     get_hub_pinned_state : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, LibC::BOOL*, HRESULT)
     get_hub_position : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, UInt32*, HRESULT)
     get_is_notified : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
     get_is_default : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
-    get_task_id : Proc(IPMTileInfo*, UInt8*, HRESULT)
+    get_task_id : Proc(IPMTileInfo*, UInt8**, HRESULT)
     get_tile_type : Proc(IPMTileInfo*, PM_STARTTILE_TYPE*, HRESULT)
     get_is_themable : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
     get_property_by_id : Proc(IPMTileInfo*, UInt32, IPMTilePropertyInfo*, HRESULT)
-    get_invocation_info : Proc(IPMTileInfo*, UInt8*, UInt8*, HRESULT)
+    get_invocation_info : Proc(IPMTileInfo*, UInt8**, UInt8**, HRESULT)
     get_property_enum : Proc(IPMTileInfo*, IPMTilePropertyEnumerator*, HRESULT)
     get_hub_tile_size : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, PM_TILE_SIZE*, HRESULT)
     set_hub_position : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, UInt32, HRESULT)
     set_notified_state : Proc(IPMTileInfo*, LibC::BOOL, HRESULT)
     set_hub_pinned_state : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, LibC::BOOL, HRESULT)
     set_hub_tile_size : Proc(IPMTileInfo*, PM_TILE_HUBTYPE, PM_TILE_SIZE, HRESULT)
-    set_invocation_info : Proc(IPMTileInfo*, UInt8, UInt8, HRESULT)
+    set_invocation_info : Proc(IPMTileInfo*, UInt8*, UInt8*, HRESULT)
     get_start_tile_blob : Proc(IPMTileInfo*, PM_STARTTILEBLOB*, HRESULT)
     get_is_restoring : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
     get_is_auto_restore_disabled : Proc(IPMTileInfo*, LibC::BOOL*, HRESULT)
@@ -2031,7 +2031,7 @@ lib LibWin32
     add_ref : Proc(IPMLiveTileJobInfo*, UInt32)
     release : Proc(IPMLiveTileJobInfo*, UInt32)
     get_product_id : Proc(IPMLiveTileJobInfo*, Guid*, HRESULT)
-    get_tile_id : Proc(IPMLiveTileJobInfo*, UInt8*, HRESULT)
+    get_tile_id : Proc(IPMLiveTileJobInfo*, UInt8**, HRESULT)
     get_next_schedule : Proc(IPMLiveTileJobInfo*, FILETIME*, HRESULT)
     set_next_schedule : Proc(IPMLiveTileJobInfo*, FILETIME, HRESULT)
     get_start_schedule : Proc(IPMLiveTileJobInfo*, FILETIME*, HRESULT)
@@ -2086,7 +2086,7 @@ lib LibWin32
     begin_enterprise_app_install : Proc(IPMDeploymentManager*, PM_INSTALLINFO*, HRESULT)
     begin_enterprise_app_update : Proc(IPMDeploymentManager*, PM_UPDATEINFO*, HRESULT)
     begin_update_license : Proc(IPMDeploymentManager*, Guid, Guid, UInt8*, UInt32, HRESULT)
-    get_license_challenge : Proc(IPMDeploymentManager*, UInt8, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, HRESULT)
+    get_license_challenge : Proc(IPMDeploymentManager*, UInt8*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, HRESULT)
     get_license_challenge_by_product_id : Proc(IPMDeploymentManager*, Guid, UInt8**, UInt32*, HRESULT)
     get_license_challenge_by_product_id2 : Proc(IPMDeploymentManager*, Guid, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, UInt8**, UInt32*, HRESULT)
     revoke_license : Proc(IPMDeploymentManager*, Guid, HRESULT)
@@ -2094,7 +2094,7 @@ lib LibWin32
     rebind_all_mdil_binaries : Proc(IPMDeploymentManager*, Guid, Guid, HRESULT)
     regenerate_xbf : Proc(IPMDeploymentManager*, Guid, SAFEARRAY*, HRESULT)
     generate_xbf_for_current_locale : Proc(IPMDeploymentManager*, Guid, HRESULT)
-    begin_provision : Proc(IPMDeploymentManager*, Guid, UInt8, HRESULT)
+    begin_provision : Proc(IPMDeploymentManager*, Guid, UInt8*, HRESULT)
     begin_deprovision : Proc(IPMDeploymentManager*, Guid, HRESULT)
     reindex_sqlce_databases : Proc(IPMDeploymentManager*, Guid, HRESULT)
     set_applications_need_maintenance : Proc(IPMDeploymentManager*, UInt32, UInt32*, HRESULT)
@@ -2102,12 +2102,12 @@ lib LibWin32
     enterprise_policy_is_application_allowed : Proc(IPMDeploymentManager*, Guid, LibC::LPWSTR, LibC::BOOL*, HRESULT)
     begin_update_deployed_package : Proc(IPMDeploymentManager*, PM_UPDATEINFO*, HRESULT)
     report_restore_cancelled : Proc(IPMDeploymentManager*, Guid, HRESULT)
-    resolve_resource_string : Proc(IPMDeploymentManager*, LibC::LPWSTR, UInt8*, HRESULT)
+    resolve_resource_string : Proc(IPMDeploymentManager*, LibC::LPWSTR, UInt8**, HRESULT)
     update_capabilities_for_modern_apps : Proc(IPMDeploymentManager*, HRESULT)
     report_download_status_update : Proc(IPMDeploymentManager*, Guid, HRESULT)
     begin_uninstall_with_options : Proc(IPMDeploymentManager*, Guid, UInt32, HRESULT)
     bind_deferred_mdil_binaries : Proc(IPMDeploymentManager*, HRESULT)
-    generate_xaml_lightup_xbf_for_current_locale : Proc(IPMDeploymentManager*, UInt8, HRESULT)
+    generate_xaml_lightup_xbf_for_current_locale : Proc(IPMDeploymentManager*, UInt8*, HRESULT)
     add_license_for_appx : Proc(IPMDeploymentManager*, Guid, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
     fix_junctions_for_apps_on_sd_card : Proc(IPMDeploymentManager*, HRESULT)
   end
@@ -2127,15 +2127,15 @@ lib LibWin32
     get_all_background_service_agents : Proc(IPMEnumerationManager*, IPMBackgroundServiceAgentInfoEnumerator*, PM_ENUM_FILTER, HRESULT)
     get_all_background_workers : Proc(IPMEnumerationManager*, IPMBackgroundWorkerInfoEnumerator*, PM_ENUM_FILTER, HRESULT)
     get_application_info : Proc(IPMEnumerationManager*, Guid, IPMApplicationInfo*, HRESULT)
-    get_tile_info : Proc(IPMEnumerationManager*, Guid, UInt8, IPMTileInfo*, HRESULT)
-    get_task_info : Proc(IPMEnumerationManager*, Guid, UInt8, IPMTaskInfo*, HRESULT)
+    get_tile_info : Proc(IPMEnumerationManager*, Guid, UInt8*, IPMTileInfo*, HRESULT)
+    get_task_info : Proc(IPMEnumerationManager*, Guid, UInt8*, IPMTaskInfo*, HRESULT)
     get_task_info_ex : Proc(IPMEnumerationManager*, Guid, LibC::LPWSTR, IPMTaskInfo*, HRESULT)
     get_background_service_agent_info : Proc(IPMEnumerationManager*, UInt32, IPMBackgroundServiceAgentInfo*, HRESULT)
     get_all_live_tile_jobs : Proc(IPMEnumerationManager*, IPMLiveTileJobInfoEnumerator*, HRESULT)
-    get_live_tile_job : Proc(IPMEnumerationManager*, Guid, UInt8, PM_LIVETILE_RECURRENCE_TYPE, IPMLiveTileJobInfo*, HRESULT)
+    get_live_tile_job : Proc(IPMEnumerationManager*, Guid, UInt8*, PM_LIVETILE_RECURRENCE_TYPE, IPMLiveTileJobInfo*, HRESULT)
     get_application_info_external : Proc(IPMEnumerationManager*, Guid, IPMApplicationInfo*, HRESULT)
-    get_file_handler_generic_logo : Proc(IPMEnumerationManager*, UInt8, PM_LOGO_SIZE, UInt8*, HRESULT)
-    get_application_info_from_access_claims : Proc(IPMEnumerationManager*, UInt8, UInt8, IPMApplicationInfo*, HRESULT)
+    get_file_handler_generic_logo : Proc(IPMEnumerationManager*, UInt8*, PM_LOGO_SIZE, UInt8**, HRESULT)
+    get_application_info_from_access_claims : Proc(IPMEnumerationManager*, UInt8*, UInt8*, IPMApplicationInfo*, HRESULT)
     get_start_tile_enumerator_blob : Proc(IPMEnumerationManager*, PM_ENUM_FILTER, UInt32*, PM_STARTTILEBLOB**, HRESULT)
     get_start_app_enumerator_blob : Proc(IPMEnumerationManager*, PM_ENUM_FILTER, UInt32*, PM_STARTAPPBLOB**, HRESULT)
   end
@@ -2149,17 +2149,17 @@ lib LibWin32
     add_ref : Proc(IPMTaskInfo*, UInt32)
     release : Proc(IPMTaskInfo*, UInt32)
     get_product_id : Proc(IPMTaskInfo*, Guid*, HRESULT)
-    get_task_id : Proc(IPMTaskInfo*, UInt8*, HRESULT)
-    get_navigation_page : Proc(IPMTaskInfo*, UInt8*, HRESULT)
+    get_task_id : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_navigation_page : Proc(IPMTaskInfo*, UInt8**, HRESULT)
     get_task_transition : Proc(IPMTaskInfo*, PM_TASK_TRANSITION*, HRESULT)
     get_runtime_type : Proc(IPMTaskInfo*, PACKMAN_RUNTIME*, HRESULT)
     get_activation_policy : Proc(IPMTaskInfo*, PM_ACTIVATION_POLICY*, HRESULT)
     get_task_type : Proc(IPMTaskInfo*, PM_TASK_TYPE*, HRESULT)
-    get_invocation_info : Proc(IPMTaskInfo*, UInt8*, UInt8*, HRESULT)
-    get_image_path : Proc(IPMTaskInfo*, UInt8*, HRESULT)
-    get_image_params : Proc(IPMTaskInfo*, UInt8*, HRESULT)
-    get_install_root_folder : Proc(IPMTaskInfo*, UInt8*, HRESULT)
-    get_data_root_folder : Proc(IPMTaskInfo*, UInt8*, HRESULT)
+    get_invocation_info : Proc(IPMTaskInfo*, UInt8**, UInt8**, HRESULT)
+    get_image_path : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_image_params : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_install_root_folder : Proc(IPMTaskInfo*, UInt8**, HRESULT)
+    get_data_root_folder : Proc(IPMTaskInfo*, UInt8**, HRESULT)
     get_is_single_instance_host : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
     get_is_interop_enabled : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
     get_application_state : Proc(IPMTaskInfo*, PM_APPLICATION_STATE*, HRESULT)
@@ -2167,7 +2167,7 @@ lib LibWin32
     get_version : Proc(IPMTaskInfo*, UInt8*, UInt8*, HRESULT)
     get_bits_per_pixel : Proc(IPMTaskInfo*, UInt16*, HRESULT)
     get_suppresses_dehydration : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
-    get_background_execution_abilities : Proc(IPMTaskInfo*, UInt8*, HRESULT)
+    get_background_execution_abilities : Proc(IPMTaskInfo*, UInt8**, HRESULT)
     get_is_opted_for_extended_mem : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
   end
 
@@ -2191,11 +2191,11 @@ lib LibWin32
     add_ref : Proc(IPMExtensionInfo*, UInt32)
     release : Proc(IPMExtensionInfo*, UInt32)
     get_supplier_pid : Proc(IPMExtensionInfo*, Guid*, HRESULT)
-    get_supplier_task_id : Proc(IPMExtensionInfo*, UInt8*, HRESULT)
-    get_title : Proc(IPMExtensionInfo*, UInt8*, HRESULT)
-    get_icon_path : Proc(IPMExtensionInfo*, UInt8*, HRESULT)
-    get_extra_file : Proc(IPMExtensionInfo*, UInt8*, HRESULT)
-    get_invocation_info : Proc(IPMExtensionInfo*, UInt8*, UInt8*, HRESULT)
+    get_supplier_task_id : Proc(IPMExtensionInfo*, UInt8**, HRESULT)
+    get_title : Proc(IPMExtensionInfo*, UInt8**, HRESULT)
+    get_icon_path : Proc(IPMExtensionInfo*, UInt8**, HRESULT)
+    get_extra_file : Proc(IPMExtensionInfo*, UInt8**, HRESULT)
+    get_invocation_info : Proc(IPMExtensionInfo*, UInt8**, UInt8**, HRESULT)
   end
 
   struct IPMExtensionInfo
@@ -2206,13 +2206,13 @@ lib LibWin32
     query_interface : Proc(IPMExtensionFileExtensionInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPMExtensionFileExtensionInfo*, UInt32)
     release : Proc(IPMExtensionFileExtensionInfo*, UInt32)
-    get_name : Proc(IPMExtensionFileExtensionInfo*, UInt8*, HRESULT)
-    get_display_name : Proc(IPMExtensionFileExtensionInfo*, UInt8*, HRESULT)
-    get_logo : Proc(IPMExtensionFileExtensionInfo*, PM_LOGO_SIZE, UInt8*, HRESULT)
-    get_content_type : Proc(IPMExtensionFileExtensionInfo*, UInt8, UInt8*, HRESULT)
-    get_file_type : Proc(IPMExtensionFileExtensionInfo*, UInt8, UInt8*, HRESULT)
-    get_invocation_info : Proc(IPMExtensionFileExtensionInfo*, UInt8*, UInt8*, HRESULT)
-    get_all_file_types : Proc(IPMExtensionFileExtensionInfo*, UInt32*, UInt8**, HRESULT)
+    get_name : Proc(IPMExtensionFileExtensionInfo*, UInt8**, HRESULT)
+    get_display_name : Proc(IPMExtensionFileExtensionInfo*, UInt8**, HRESULT)
+    get_logo : Proc(IPMExtensionFileExtensionInfo*, PM_LOGO_SIZE, UInt8**, HRESULT)
+    get_content_type : Proc(IPMExtensionFileExtensionInfo*, UInt8*, UInt8**, HRESULT)
+    get_file_type : Proc(IPMExtensionFileExtensionInfo*, UInt8*, UInt8**, HRESULT)
+    get_invocation_info : Proc(IPMExtensionFileExtensionInfo*, UInt8**, UInt8**, HRESULT)
+    get_all_file_types : Proc(IPMExtensionFileExtensionInfo*, UInt32*, UInt8***, HRESULT)
   end
 
   struct IPMExtensionFileExtensionInfo
@@ -2223,8 +2223,8 @@ lib LibWin32
     query_interface : Proc(IPMExtensionProtocolInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPMExtensionProtocolInfo*, UInt32)
     release : Proc(IPMExtensionProtocolInfo*, UInt32)
-    get_protocol : Proc(IPMExtensionProtocolInfo*, UInt8*, HRESULT)
-    get_invocation_info : Proc(IPMExtensionProtocolInfo*, UInt8*, UInt8*, HRESULT)
+    get_protocol : Proc(IPMExtensionProtocolInfo*, UInt8**, HRESULT)
+    get_invocation_info : Proc(IPMExtensionProtocolInfo*, UInt8**, UInt8**, HRESULT)
   end
 
   struct IPMExtensionProtocolInfo
@@ -2235,8 +2235,8 @@ lib LibWin32
     query_interface : Proc(IPMExtensionShareTargetInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPMExtensionShareTargetInfo*, UInt32)
     release : Proc(IPMExtensionShareTargetInfo*, UInt32)
-    get_all_file_types : Proc(IPMExtensionShareTargetInfo*, UInt32*, UInt8**, HRESULT)
-    get_all_data_formats : Proc(IPMExtensionShareTargetInfo*, UInt32*, UInt8**, HRESULT)
+    get_all_file_types : Proc(IPMExtensionShareTargetInfo*, UInt32*, UInt8***, HRESULT)
+    get_all_data_formats : Proc(IPMExtensionShareTargetInfo*, UInt32*, UInt8***, HRESULT)
     get_supports_all_file_types : Proc(IPMExtensionShareTargetInfo*, LibC::BOOL*, HRESULT)
   end
 
@@ -2248,7 +2248,7 @@ lib LibWin32
     query_interface : Proc(IPMExtensionContractInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPMExtensionContractInfo*, UInt32)
     release : Proc(IPMExtensionContractInfo*, UInt32)
-    get_invocation_info : Proc(IPMExtensionContractInfo*, UInt8*, UInt8*, HRESULT)
+    get_invocation_info : Proc(IPMExtensionContractInfo*, UInt8**, UInt8**, HRESULT)
   end
 
   struct IPMExtensionContractInfo
@@ -2259,7 +2259,7 @@ lib LibWin32
     query_interface : Proc(IPMExtensionFileOpenPickerInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPMExtensionFileOpenPickerInfo*, UInt32)
     release : Proc(IPMExtensionFileOpenPickerInfo*, UInt32)
-    get_all_file_types : Proc(IPMExtensionFileOpenPickerInfo*, UInt32*, UInt8**, HRESULT)
+    get_all_file_types : Proc(IPMExtensionFileOpenPickerInfo*, UInt32*, UInt8***, HRESULT)
     get_supports_all_file_types : Proc(IPMExtensionFileOpenPickerInfo*, LibC::BOOL*, HRESULT)
   end
 
@@ -2271,7 +2271,7 @@ lib LibWin32
     query_interface : Proc(IPMExtensionFileSavePickerInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IPMExtensionFileSavePickerInfo*, UInt32)
     release : Proc(IPMExtensionFileSavePickerInfo*, UInt32)
-    get_all_file_types : Proc(IPMExtensionFileSavePickerInfo*, UInt32*, UInt8**, HRESULT)
+    get_all_file_types : Proc(IPMExtensionFileSavePickerInfo*, UInt32*, UInt8***, HRESULT)
     get_supports_all_file_types : Proc(IPMExtensionFileSavePickerInfo*, LibC::BOOL*, HRESULT)
   end
 
@@ -2306,16 +2306,16 @@ lib LibWin32
     add_ref : Proc(IPMBackgroundServiceAgentInfo*, UInt32)
     release : Proc(IPMBackgroundServiceAgentInfo*, UInt32)
     get_product_id : Proc(IPMBackgroundServiceAgentInfo*, Guid*, HRESULT)
-    get_task_id : Proc(IPMBackgroundServiceAgentInfo*, UInt8*, HRESULT)
+    get_task_id : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
     get_bsaid : Proc(IPMBackgroundServiceAgentInfo*, UInt32*, HRESULT)
-    get_bg_specifier : Proc(IPMBackgroundServiceAgentInfo*, UInt8*, HRESULT)
-    get_bg_name : Proc(IPMBackgroundServiceAgentInfo*, UInt8*, HRESULT)
-    get_bg_source : Proc(IPMBackgroundServiceAgentInfo*, UInt8*, HRESULT)
-    get_bg_type : Proc(IPMBackgroundServiceAgentInfo*, UInt8*, HRESULT)
+    get_bg_specifier : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_bg_name : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_bg_source : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
+    get_bg_type : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
     get_is_periodic : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL*, HRESULT)
     get_is_scheduled : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL*, HRESULT)
     get_is_schedule_allowed : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL*, HRESULT)
-    get_description : Proc(IPMBackgroundServiceAgentInfo*, UInt8*, HRESULT)
+    get_description : Proc(IPMBackgroundServiceAgentInfo*, UInt8**, HRESULT)
     get_is_launch_on_boot : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL*, HRESULT)
     set_is_scheduled : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL, HRESULT)
     set_is_schedule_allowed : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL, HRESULT)
@@ -2330,8 +2330,8 @@ lib LibWin32
     add_ref : Proc(IPMBackgroundWorkerInfo*, UInt32)
     release : Proc(IPMBackgroundWorkerInfo*, UInt32)
     get_product_id : Proc(IPMBackgroundWorkerInfo*, Guid*, HRESULT)
-    get_task_id : Proc(IPMBackgroundWorkerInfo*, UInt8*, HRESULT)
-    get_bg_name : Proc(IPMBackgroundWorkerInfo*, UInt8*, HRESULT)
+    get_task_id : Proc(IPMBackgroundWorkerInfo*, UInt8**, HRESULT)
+    get_bg_name : Proc(IPMBackgroundWorkerInfo*, UInt8**, HRESULT)
     get_max_startup_latency : Proc(IPMBackgroundWorkerInfo*, UInt32*, HRESULT)
     get_expected_runtime : Proc(IPMBackgroundWorkerInfo*, UInt32*, HRESULT)
     get_is_boot_worker : Proc(IPMBackgroundWorkerInfo*, LibC::BOOL*, HRESULT)

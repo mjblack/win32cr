@@ -504,7 +504,7 @@ lib LibWin32
     query_interface : Proc(IDeviceModelPlugIn*, Guid*, Void**, HRESULT)
     add_ref : Proc(IDeviceModelPlugIn*, UInt32)
     release : Proc(IDeviceModelPlugIn*, UInt32)
-    initialize : Proc(IDeviceModelPlugIn*, UInt8, UInt32, UInt32, HRESULT)
+    initialize : Proc(IDeviceModelPlugIn*, UInt8*, UInt32, UInt32, HRESULT)
     get_num_channels : Proc(IDeviceModelPlugIn*, UInt32*, HRESULT)
     device_to_colorimetric_colors : Proc(IDeviceModelPlugIn*, UInt32, UInt32, Float32*, XYZColorF*, HRESULT)
     colorimetric_to_device_colors : Proc(IDeviceModelPlugIn*, UInt32, UInt32, XYZColorF*, Float32*, HRESULT)
@@ -525,7 +525,7 @@ lib LibWin32
     query_interface : Proc(IGamutMapModelPlugIn*, Guid*, Void**, HRESULT)
     add_ref : Proc(IGamutMapModelPlugIn*, UInt32)
     release : Proc(IGamutMapModelPlugIn*, UInt32)
-    initialize : Proc(IGamutMapModelPlugIn*, UInt8, IDeviceModelPlugIn, IDeviceModelPlugIn, GamutBoundaryDescription*, GamutBoundaryDescription*, HRESULT)
+    initialize : Proc(IGamutMapModelPlugIn*, UInt8*, IDeviceModelPlugIn, IDeviceModelPlugIn, GamutBoundaryDescription*, GamutBoundaryDescription*, HRESULT)
     source_to_destination_appearance_colors : Proc(IGamutMapModelPlugIn*, UInt32, JChColorF*, JChColorF*, HRESULT)
   end
 

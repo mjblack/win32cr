@@ -1314,7 +1314,7 @@ lib LibWin32
     suspend : Proc(ICameraUIControl*, LibC::BOOL*, HRESULT)
     resume : Proc(ICameraUIControl*, HRESULT)
     get_current_view_type : Proc(ICameraUIControl*, CameraUIControlViewType*, HRESULT)
-    get_active_item : Proc(ICameraUIControl*, UInt8*, HRESULT)
+    get_active_item : Proc(ICameraUIControl*, UInt8**, HRESULT)
     get_selected_items : Proc(ICameraUIControl*, SAFEARRAY**, HRESULT)
     remove_captured_item : Proc(ICameraUIControl*, LibC::LPWSTR, HRESULT)
   end
@@ -1354,7 +1354,7 @@ lib LibWin32
     add_ref : Proc(IEditionUpgradeBroker*, UInt32)
     release : Proc(IEditionUpgradeBroker*, UInt32)
     initialize_parent_window : Proc(IEditionUpgradeBroker*, UInt32, HRESULT)
-    update_operating_system : Proc(IEditionUpgradeBroker*, UInt8, HRESULT)
+    update_operating_system : Proc(IEditionUpgradeBroker*, UInt8*, HRESULT)
     show_product_key_ui : Proc(IEditionUpgradeBroker*, HRESULT)
     can_upgrade : Proc(IEditionUpgradeBroker*, HRESULT)
   end
@@ -1378,7 +1378,7 @@ lib LibWin32
     query_interface : Proc(IClipServiceNotificationHelper*, Guid*, Void**, HRESULT)
     add_ref : Proc(IClipServiceNotificationHelper*, UInt32)
     release : Proc(IClipServiceNotificationHelper*, UInt32)
-    show_toast : Proc(IClipServiceNotificationHelper*, UInt8, UInt8, UInt8, UInt8, UInt8, HRESULT)
+    show_toast : Proc(IClipServiceNotificationHelper*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
   struct IClipServiceNotificationHelper

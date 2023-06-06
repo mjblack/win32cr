@@ -392,8 +392,8 @@ lib LibWin32
     length : UInt64
   end
   struct FILESETINFO
-    bstr_remote_file : UInt8
-    bstr_local_file : UInt8
+    bstr_remote_file : UInt8*
+    bstr_local_file : UInt8*
     dw_size_hint : UInt32
   end
 
@@ -1077,7 +1077,7 @@ lib LibWin32
     invoke : Proc(IBITSExtensionSetup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     enable_bits_uploads : Proc(IBITSExtensionSetup*, HRESULT)
     disable_bits_uploads : Proc(IBITSExtensionSetup*, HRESULT)
-    get_cleanup_task_name : Proc(IBITSExtensionSetup*, UInt8*, HRESULT)
+    get_cleanup_task_name : Proc(IBITSExtensionSetup*, UInt8**, HRESULT)
     get_cleanup_task : Proc(IBITSExtensionSetup*, Guid*, IUnknown*, HRESULT)
   end
 
@@ -1093,7 +1093,7 @@ lib LibWin32
     get_type_info : Proc(IBITSExtensionSetupFactory*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IBITSExtensionSetupFactory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IBITSExtensionSetupFactory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_object : Proc(IBITSExtensionSetupFactory*, UInt8, IBITSExtensionSetup*, HRESULT)
+    get_object : Proc(IBITSExtensionSetupFactory*, UInt8*, IBITSExtensionSetup*, HRESULT)
   end
 
   struct IBITSExtensionSetupFactory

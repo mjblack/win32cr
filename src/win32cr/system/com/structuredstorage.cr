@@ -172,7 +172,7 @@ lib LibWin32
     filetime : FILETIME
     puuid : Guid*
     pclipdata : CLIPDATA*
-    bstr_val : UInt8
+    bstr_val : UInt8*
     bstrblob_val : BSTRBLOB
     blob : BLOB
     psz_val : PSTR
@@ -220,7 +220,7 @@ lib LibWin32
     pscode : Int32*
     pcy_val : CY*
     pdate : Float64*
-    pbstr_val : UInt8*
+    pbstr_val : UInt8**
     ppunk_val : IUnknown*
     ppdisp_val : IDispatch*
     pparray : SAFEARRAY**
@@ -291,7 +291,7 @@ lib LibWin32
   end
   struct CABSTR
     c_elems : UInt32
-    p_elems : UInt8*
+    p_elems : UInt8**
   end
   struct CABSTRBLOB
     c_elems : UInt32

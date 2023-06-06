@@ -2850,7 +2850,7 @@ lib LibWin32
     query_interface : Proc(IGetClusterUIInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IGetClusterUIInfo*, UInt32)
     release : Proc(IGetClusterUIInfo*, UInt32)
-    get_cluster_name : Proc(IGetClusterUIInfo*, UInt8, Int32*, HRESULT)
+    get_cluster_name : Proc(IGetClusterUIInfo*, UInt8*, Int32*, HRESULT)
     get_locale : Proc(IGetClusterUIInfo*, UInt32)
     get_font : Proc(IGetClusterUIInfo*, HFONT)
     get_icon : Proc(IGetClusterUIInfo*, HANDLE)
@@ -2864,7 +2864,7 @@ lib LibWin32
     query_interface : Proc(IGetClusterDataInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IGetClusterDataInfo*, UInt32)
     release : Proc(IGetClusterDataInfo*, UInt32)
-    get_cluster_name : Proc(IGetClusterDataInfo*, UInt8, Int32*, HRESULT)
+    get_cluster_name : Proc(IGetClusterDataInfo*, UInt8*, Int32*, HRESULT)
     get_cluster_handle : Proc(IGetClusterDataInfo*, HCLUSTER**)
     get_object_count : Proc(IGetClusterDataInfo*, Int32)
   end
@@ -2877,7 +2877,7 @@ lib LibWin32
     query_interface : Proc(IGetClusterObjectInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(IGetClusterObjectInfo*, UInt32)
     release : Proc(IGetClusterObjectInfo*, UInt32)
-    get_object_name : Proc(IGetClusterObjectInfo*, Int32, UInt8, Int32*, HRESULT)
+    get_object_name : Proc(IGetClusterObjectInfo*, Int32, UInt8*, Int32*, HRESULT)
     get_object_type : Proc(IGetClusterObjectInfo*, Int32, CLUADMEX_OBJECT_TYPE)
   end
 
@@ -2912,8 +2912,8 @@ lib LibWin32
     add_ref : Proc(IGetClusterResourceInfo*, UInt32)
     release : Proc(IGetClusterResourceInfo*, UInt32)
     get_resource_handle : Proc(IGetClusterResourceInfo*, Int32, HRESOURCE**)
-    get_resource_type_name : Proc(IGetClusterResourceInfo*, Int32, UInt8, Int32*, HRESULT)
-    get_resource_network_name : Proc(IGetClusterResourceInfo*, Int32, UInt8, UInt32*, LibC::BOOL)
+    get_resource_type_name : Proc(IGetClusterResourceInfo*, Int32, UInt8*, Int32*, HRESULT)
+    get_resource_network_name : Proc(IGetClusterResourceInfo*, Int32, UInt8*, UInt32*, LibC::BOOL)
   end
 
   struct IGetClusterResourceInfo
@@ -2991,7 +2991,7 @@ lib LibWin32
     query_interface : Proc(IWCContextMenuCallback*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWCContextMenuCallback*, UInt32)
     release : Proc(IWCContextMenuCallback*, UInt32)
-    add_extension_menu_item : Proc(IWCContextMenuCallback*, UInt8, UInt8, UInt32, UInt32, UInt32, HRESULT)
+    add_extension_menu_item : Proc(IWCContextMenuCallback*, UInt8*, UInt8*, UInt32, UInt32, UInt32, HRESULT)
   end
 
   struct IWCContextMenuCallback
@@ -3052,8 +3052,8 @@ lib LibWin32
     get_i_ds_of_names : Proc(ISClusApplication*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISClusApplication*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_domain_names : Proc(ISClusApplication*, ISDomainNames*, HRESULT)
-    get_cluster_names : Proc(ISClusApplication*, UInt8, ISClusterNames*, HRESULT)
-    open_cluster : Proc(ISClusApplication*, UInt8, ISCluster*, HRESULT)
+    get_cluster_names : Proc(ISClusApplication*, UInt8*, ISClusterNames*, HRESULT)
+    open_cluster : Proc(ISClusApplication*, UInt8*, ISCluster*, HRESULT)
   end
 
   struct ISClusApplication
@@ -3071,7 +3071,7 @@ lib LibWin32
     get_count : Proc(ISDomainNames*, Int32*, HRESULT)
     get__new_enum : Proc(ISDomainNames*, IUnknown*, HRESULT)
     refresh : Proc(ISDomainNames*, HRESULT)
-    get_item : Proc(ISDomainNames*, VARIANT, UInt8*, HRESULT)
+    get_item : Proc(ISDomainNames*, VARIANT, UInt8**, HRESULT)
   end
 
   struct ISDomainNames
@@ -3089,8 +3089,8 @@ lib LibWin32
     get_count : Proc(ISClusterNames*, Int32*, HRESULT)
     get__new_enum : Proc(ISClusterNames*, IUnknown*, HRESULT)
     refresh : Proc(ISClusterNames*, HRESULT)
-    get_item : Proc(ISClusterNames*, VARIANT, UInt8*, HRESULT)
-    get_domain_name : Proc(ISClusterNames*, UInt8*, HRESULT)
+    get_item : Proc(ISClusterNames*, VARIANT, UInt8**, HRESULT)
+    get_domain_name : Proc(ISClusterNames*, UInt8**, HRESULT)
   end
 
   struct ISClusterNames
@@ -3120,12 +3120,12 @@ lib LibWin32
     get_type_info : Proc(ISClusVersion*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISClusVersion*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISClusVersion*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ISClusVersion*, UInt8*, HRESULT)
+    get_name : Proc(ISClusVersion*, UInt8**, HRESULT)
     get_major_version : Proc(ISClusVersion*, Int32*, HRESULT)
     get_minor_version : Proc(ISClusVersion*, Int32*, HRESULT)
     get_build_number : Proc(ISClusVersion*, Int16*, HRESULT)
-    get_vendor_id : Proc(ISClusVersion*, UInt8*, HRESULT)
-    get_csd_version : Proc(ISClusVersion*, UInt8*, HRESULT)
+    get_vendor_id : Proc(ISClusVersion*, UInt8**, HRESULT)
+    get_csd_version : Proc(ISClusVersion*, UInt8**, HRESULT)
     get_cluster_highest_version : Proc(ISClusVersion*, Int32*, HRESULT)
     get_cluster_lowest_version : Proc(ISClusVersion*, Int32*, HRESULT)
     get_flags : Proc(ISClusVersion*, Int32*, HRESULT)
@@ -3149,16 +3149,16 @@ lib LibWin32
     get_common_ro_properties : Proc(ISCluster*, ISClusProperties*, HRESULT)
     get_private_ro_properties : Proc(ISCluster*, ISClusProperties*, HRESULT)
     get_handle : Proc(ISCluster*, LibC::UINT_PTR*, HRESULT)
-    open : Proc(ISCluster*, UInt8, HRESULT)
-    get_name : Proc(ISCluster*, UInt8*, HRESULT)
-    put_name : Proc(ISCluster*, UInt8, HRESULT)
+    open : Proc(ISCluster*, UInt8*, HRESULT)
+    get_name : Proc(ISCluster*, UInt8**, HRESULT)
+    put_name : Proc(ISCluster*, UInt8*, HRESULT)
     get_version : Proc(ISCluster*, ISClusVersion*, HRESULT)
     put_quorum_resource : Proc(ISCluster*, ISClusResource, HRESULT)
     get_quorum_resource : Proc(ISCluster*, ISClusResource*, HRESULT)
     get_quorum_log_size : Proc(ISCluster*, Int32*, HRESULT)
     put_quorum_log_size : Proc(ISCluster*, Int32, HRESULT)
-    get_quorum_path : Proc(ISCluster*, UInt8*, HRESULT)
-    put_quorum_path : Proc(ISCluster*, UInt8, HRESULT)
+    get_quorum_path : Proc(ISCluster*, UInt8**, HRESULT)
+    put_quorum_path : Proc(ISCluster*, UInt8*, HRESULT)
     get_nodes : Proc(ISCluster*, ISClusNodes*, HRESULT)
     get_resource_groups : Proc(ISCluster*, ISClusResGroups*, HRESULT)
     get_resources : Proc(ISCluster*, ISClusResources*, HRESULT)
@@ -3183,9 +3183,9 @@ lib LibWin32
     get_private_properties : Proc(ISClusNode*, ISClusProperties*, HRESULT)
     get_common_ro_properties : Proc(ISClusNode*, ISClusProperties*, HRESULT)
     get_private_ro_properties : Proc(ISClusNode*, ISClusProperties*, HRESULT)
-    get_name : Proc(ISClusNode*, UInt8*, HRESULT)
+    get_name : Proc(ISClusNode*, UInt8**, HRESULT)
     get_handle : Proc(ISClusNode*, LibC::UINT_PTR*, HRESULT)
-    get_node_id : Proc(ISClusNode*, UInt8*, HRESULT)
+    get_node_id : Proc(ISClusNode*, UInt8**, HRESULT)
     get_state : Proc(ISClusNode*, CLUSTER_NODE_STATE*, HRESULT)
     pause : Proc(ISClusNode*, HRESULT)
     resume : Proc(ISClusNode*, HRESULT)
@@ -3230,9 +3230,9 @@ lib LibWin32
     get_common_ro_properties : Proc(ISClusNetwork*, ISClusProperties*, HRESULT)
     get_private_ro_properties : Proc(ISClusNetwork*, ISClusProperties*, HRESULT)
     get_handle : Proc(ISClusNetwork*, LibC::UINT_PTR*, HRESULT)
-    get_name : Proc(ISClusNetwork*, UInt8*, HRESULT)
-    put_name : Proc(ISClusNetwork*, UInt8, HRESULT)
-    get_network_id : Proc(ISClusNetwork*, UInt8*, HRESULT)
+    get_name : Proc(ISClusNetwork*, UInt8**, HRESULT)
+    put_name : Proc(ISClusNetwork*, UInt8*, HRESULT)
+    get_network_id : Proc(ISClusNetwork*, UInt8**, HRESULT)
     get_state : Proc(ISClusNetwork*, CLUSTER_NETWORK_STATE*, HRESULT)
     get_net_interfaces : Proc(ISClusNetwork*, ISClusNetworkNetInterfaces*, HRESULT)
     get_cluster : Proc(ISClusNetwork*, ISCluster*, HRESULT)
@@ -3272,7 +3272,7 @@ lib LibWin32
     get_private_properties : Proc(ISClusNetInterface*, ISClusProperties*, HRESULT)
     get_common_ro_properties : Proc(ISClusNetInterface*, ISClusProperties*, HRESULT)
     get_private_ro_properties : Proc(ISClusNetInterface*, ISClusProperties*, HRESULT)
-    get_name : Proc(ISClusNetInterface*, UInt8*, HRESULT)
+    get_name : Proc(ISClusNetInterface*, UInt8**, HRESULT)
     get_handle : Proc(ISClusNetInterface*, LibC::UINT_PTR*, HRESULT)
     get_state : Proc(ISClusNetInterface*, CLUSTER_NETINTERFACE_STATE*, HRESULT)
     get_cluster : Proc(ISClusNetInterface*, ISCluster*, HRESULT)
@@ -3349,8 +3349,8 @@ lib LibWin32
     get_common_ro_properties : Proc(ISClusResGroup*, ISClusProperties*, HRESULT)
     get_private_ro_properties : Proc(ISClusResGroup*, ISClusProperties*, HRESULT)
     get_handle : Proc(ISClusResGroup*, LibC::UINT_PTR*, HRESULT)
-    get_name : Proc(ISClusResGroup*, UInt8*, HRESULT)
-    put_name : Proc(ISClusResGroup*, UInt8, HRESULT)
+    get_name : Proc(ISClusResGroup*, UInt8**, HRESULT)
+    put_name : Proc(ISClusResGroup*, UInt8*, HRESULT)
     get_state : Proc(ISClusResGroup*, CLUSTER_GROUP_STATE*, HRESULT)
     get_owner_node : Proc(ISClusResGroup*, ISClusNode*, HRESULT)
     get_resources : Proc(ISClusResGroup*, ISClusResGroupResources*, HRESULT)
@@ -3378,7 +3378,7 @@ lib LibWin32
     get__new_enum : Proc(ISClusResGroups*, IUnknown*, HRESULT)
     refresh : Proc(ISClusResGroups*, HRESULT)
     get_item : Proc(ISClusResGroups*, VARIANT, ISClusResGroup*, HRESULT)
-    create_item : Proc(ISClusResGroups*, UInt8, ISClusResGroup*, HRESULT)
+    create_item : Proc(ISClusResGroups*, UInt8*, ISClusResGroup*, HRESULT)
     delete_item : Proc(ISClusResGroups*, VARIANT, HRESULT)
   end
 
@@ -3399,11 +3399,11 @@ lib LibWin32
     get_common_ro_properties : Proc(ISClusResource*, ISClusProperties*, HRESULT)
     get_private_ro_properties : Proc(ISClusResource*, ISClusProperties*, HRESULT)
     get_handle : Proc(ISClusResource*, LibC::UINT_PTR*, HRESULT)
-    get_name : Proc(ISClusResource*, UInt8*, HRESULT)
-    put_name : Proc(ISClusResource*, UInt8, HRESULT)
+    get_name : Proc(ISClusResource*, UInt8**, HRESULT)
+    put_name : Proc(ISClusResource*, UInt8*, HRESULT)
     get_state : Proc(ISClusResource*, CLUSTER_RESOURCE_STATE*, HRESULT)
     get_core_flag : Proc(ISClusResource*, CLUS_FLAGS*, HRESULT)
-    become_quorum_resource : Proc(ISClusResource*, UInt8, Int32, HRESULT)
+    become_quorum_resource : Proc(ISClusResource*, UInt8*, Int32, HRESULT)
     delete : Proc(ISClusResource*, HRESULT)
     fail : Proc(ISClusResource*, HRESULT)
     online : Proc(ISClusResource*, Int32, VARIANT*, HRESULT)
@@ -3422,7 +3422,7 @@ lib LibWin32
     get_disk : Proc(ISClusResource*, ISClusDisk*, HRESULT)
     get_registry_keys : Proc(ISClusResource*, ISClusRegistryKeys*, HRESULT)
     get_crypto_keys : Proc(ISClusResource*, ISClusCryptoKeys*, HRESULT)
-    get_type_name : Proc(ISClusResource*, UInt8*, HRESULT)
+    get_type_name : Proc(ISClusResource*, UInt8**, HRESULT)
     get_type : Proc(ISClusResource*, ISClusResType*, HRESULT)
     get_maintenance_mode : Proc(ISClusResource*, LibC::BOOL*, HRESULT)
     put_maintenance_mode : Proc(ISClusResource*, LibC::BOOL, HRESULT)
@@ -3444,7 +3444,7 @@ lib LibWin32
     get__new_enum : Proc(ISClusResDependencies*, IUnknown*, HRESULT)
     refresh : Proc(ISClusResDependencies*, HRESULT)
     get_item : Proc(ISClusResDependencies*, VARIANT, ISClusResource*, HRESULT)
-    create_item : Proc(ISClusResDependencies*, UInt8, UInt8, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
+    create_item : Proc(ISClusResDependencies*, UInt8*, UInt8*, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
     delete_item : Proc(ISClusResDependencies*, VARIANT, HRESULT)
     add_item : Proc(ISClusResDependencies*, ISClusResource, HRESULT)
     remove_item : Proc(ISClusResDependencies*, VARIANT, HRESULT)
@@ -3466,7 +3466,7 @@ lib LibWin32
     get__new_enum : Proc(ISClusResGroupResources*, IUnknown*, HRESULT)
     refresh : Proc(ISClusResGroupResources*, HRESULT)
     get_item : Proc(ISClusResGroupResources*, VARIANT, ISClusResource*, HRESULT)
-    create_item : Proc(ISClusResGroupResources*, UInt8, UInt8, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
+    create_item : Proc(ISClusResGroupResources*, UInt8*, UInt8*, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
     delete_item : Proc(ISClusResGroupResources*, VARIANT, HRESULT)
   end
 
@@ -3486,7 +3486,7 @@ lib LibWin32
     get__new_enum : Proc(ISClusResTypeResources*, IUnknown*, HRESULT)
     refresh : Proc(ISClusResTypeResources*, HRESULT)
     get_item : Proc(ISClusResTypeResources*, VARIANT, ISClusResource*, HRESULT)
-    create_item : Proc(ISClusResTypeResources*, UInt8, UInt8, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
+    create_item : Proc(ISClusResTypeResources*, UInt8*, UInt8*, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
     delete_item : Proc(ISClusResTypeResources*, VARIANT, HRESULT)
   end
 
@@ -3506,7 +3506,7 @@ lib LibWin32
     get__new_enum : Proc(ISClusResources*, IUnknown*, HRESULT)
     refresh : Proc(ISClusResources*, HRESULT)
     get_item : Proc(ISClusResources*, VARIANT, ISClusResource*, HRESULT)
-    create_item : Proc(ISClusResources*, UInt8, UInt8, UInt8, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
+    create_item : Proc(ISClusResources*, UInt8*, UInt8*, UInt8*, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
     delete_item : Proc(ISClusResources*, VARIANT, HRESULT)
   end
 
@@ -3588,7 +3588,7 @@ lib LibWin32
     get_private_properties : Proc(ISClusResType*, ISClusProperties*, HRESULT)
     get_common_ro_properties : Proc(ISClusResType*, ISClusProperties*, HRESULT)
     get_private_ro_properties : Proc(ISClusResType*, ISClusProperties*, HRESULT)
-    get_name : Proc(ISClusResType*, UInt8*, HRESULT)
+    get_name : Proc(ISClusResType*, UInt8**, HRESULT)
     delete : Proc(ISClusResType*, HRESULT)
     get_cluster : Proc(ISClusResType*, ISCluster*, HRESULT)
     get_resources : Proc(ISClusResType*, ISClusResTypeResources*, HRESULT)
@@ -3612,7 +3612,7 @@ lib LibWin32
     get__new_enum : Proc(ISClusResTypes*, IUnknown*, HRESULT)
     refresh : Proc(ISClusResTypes*, HRESULT)
     get_item : Proc(ISClusResTypes*, VARIANT, ISClusResType*, HRESULT)
-    create_item : Proc(ISClusResTypes*, UInt8, UInt8, UInt8, Int32, Int32, ISClusResType*, HRESULT)
+    create_item : Proc(ISClusResTypes*, UInt8*, UInt8*, UInt8*, Int32, Int32, ISClusResType*, HRESULT)
     delete_item : Proc(ISClusResTypes*, VARIANT, HRESULT)
   end
 
@@ -3628,7 +3628,7 @@ lib LibWin32
     get_type_info : Proc(ISClusProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(ISClusProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISClusProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ISClusProperty*, UInt8*, HRESULT)
+    get_name : Proc(ISClusProperty*, UInt8**, HRESULT)
     get_length : Proc(ISClusProperty*, Int32*, HRESULT)
     get_value_count : Proc(ISClusProperty*, Int32*, HRESULT)
     get_values : Proc(ISClusProperty*, ISClusPropertyValues*, HRESULT)
@@ -3683,7 +3683,7 @@ lib LibWin32
     get_count : Proc(ISClusPropertyValues*, Int32*, HRESULT)
     get__new_enum : Proc(ISClusPropertyValues*, IUnknown*, HRESULT)
     get_item : Proc(ISClusPropertyValues*, VARIANT, ISClusPropertyValue*, HRESULT)
-    create_item : Proc(ISClusPropertyValues*, UInt8, VARIANT, ISClusPropertyValue*, HRESULT)
+    create_item : Proc(ISClusPropertyValues*, UInt8*, VARIANT, ISClusPropertyValue*, HRESULT)
     remove_item : Proc(ISClusPropertyValues*, VARIANT, HRESULT)
   end
 
@@ -3703,7 +3703,7 @@ lib LibWin32
     get__new_enum : Proc(ISClusProperties*, IUnknown*, HRESULT)
     refresh : Proc(ISClusProperties*, HRESULT)
     get_item : Proc(ISClusProperties*, VARIANT, ISClusProperty*, HRESULT)
-    create_item : Proc(ISClusProperties*, UInt8, VARIANT, ISClusProperty*, HRESULT)
+    create_item : Proc(ISClusProperties*, UInt8*, VARIANT, ISClusProperty*, HRESULT)
     use_default_value : Proc(ISClusProperties*, VARIANT, HRESULT)
     save_changes : Proc(ISClusProperties*, VARIANT*, HRESULT)
     get_read_only : Proc(ISClusProperties*, VARIANT*, HRESULT)
@@ -3744,12 +3744,12 @@ lib LibWin32
     get_i_ds_of_names : Proc(ISClusPartition*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISClusPartition*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_flags : Proc(ISClusPartition*, Int32*, HRESULT)
-    get_device_name : Proc(ISClusPartition*, UInt8*, HRESULT)
-    get_volume_label : Proc(ISClusPartition*, UInt8*, HRESULT)
+    get_device_name : Proc(ISClusPartition*, UInt8**, HRESULT)
+    get_volume_label : Proc(ISClusPartition*, UInt8**, HRESULT)
     get_serial_number : Proc(ISClusPartition*, Int32*, HRESULT)
     get_maximum_component_length : Proc(ISClusPartition*, Int32*, HRESULT)
     get_file_system_flags : Proc(ISClusPartition*, Int32*, HRESULT)
-    get_file_system : Proc(ISClusPartition*, UInt8*, HRESULT)
+    get_file_system : Proc(ISClusPartition*, UInt8**, HRESULT)
   end
 
   struct ISClusPartition
@@ -3765,17 +3765,17 @@ lib LibWin32
     get_i_ds_of_names : Proc(ISClusPartitionEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(ISClusPartitionEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
     get_flags : Proc(ISClusPartitionEx*, Int32*, HRESULT)
-    get_device_name : Proc(ISClusPartitionEx*, UInt8*, HRESULT)
-    get_volume_label : Proc(ISClusPartitionEx*, UInt8*, HRESULT)
+    get_device_name : Proc(ISClusPartitionEx*, UInt8**, HRESULT)
+    get_volume_label : Proc(ISClusPartitionEx*, UInt8**, HRESULT)
     get_serial_number : Proc(ISClusPartitionEx*, Int32*, HRESULT)
     get_maximum_component_length : Proc(ISClusPartitionEx*, Int32*, HRESULT)
     get_file_system_flags : Proc(ISClusPartitionEx*, Int32*, HRESULT)
-    get_file_system : Proc(ISClusPartitionEx*, UInt8*, HRESULT)
+    get_file_system : Proc(ISClusPartitionEx*, UInt8**, HRESULT)
     get_total_size : Proc(ISClusPartitionEx*, Int32*, HRESULT)
     get_free_space : Proc(ISClusPartitionEx*, Int32*, HRESULT)
     get_device_number : Proc(ISClusPartitionEx*, Int32*, HRESULT)
     get_partition_number : Proc(ISClusPartitionEx*, Int32*, HRESULT)
-    get_volume_guid : Proc(ISClusPartitionEx*, UInt8*, HRESULT)
+    get_volume_guid : Proc(ISClusPartitionEx*, UInt8**, HRESULT)
   end
 
   struct ISClusPartitionEx
@@ -3863,8 +3863,8 @@ lib LibWin32
     get_count : Proc(ISClusRegistryKeys*, Int32*, HRESULT)
     get__new_enum : Proc(ISClusRegistryKeys*, IUnknown*, HRESULT)
     refresh : Proc(ISClusRegistryKeys*, HRESULT)
-    get_item : Proc(ISClusRegistryKeys*, VARIANT, UInt8*, HRESULT)
-    add_item : Proc(ISClusRegistryKeys*, UInt8, HRESULT)
+    get_item : Proc(ISClusRegistryKeys*, VARIANT, UInt8**, HRESULT)
+    add_item : Proc(ISClusRegistryKeys*, UInt8*, HRESULT)
     remove_item : Proc(ISClusRegistryKeys*, VARIANT, HRESULT)
   end
 
@@ -3883,8 +3883,8 @@ lib LibWin32
     get_count : Proc(ISClusCryptoKeys*, Int32*, HRESULT)
     get__new_enum : Proc(ISClusCryptoKeys*, IUnknown*, HRESULT)
     refresh : Proc(ISClusCryptoKeys*, HRESULT)
-    get_item : Proc(ISClusCryptoKeys*, VARIANT, UInt8*, HRESULT)
-    add_item : Proc(ISClusCryptoKeys*, UInt8, HRESULT)
+    get_item : Proc(ISClusCryptoKeys*, VARIANT, UInt8**, HRESULT)
+    add_item : Proc(ISClusCryptoKeys*, UInt8*, HRESULT)
     remove_item : Proc(ISClusCryptoKeys*, VARIANT, HRESULT)
   end
 
@@ -3904,7 +3904,7 @@ lib LibWin32
     get__new_enum : Proc(ISClusResDependents*, IUnknown*, HRESULT)
     refresh : Proc(ISClusResDependents*, HRESULT)
     get_item : Proc(ISClusResDependents*, VARIANT, ISClusResource*, HRESULT)
-    create_item : Proc(ISClusResDependents*, UInt8, UInt8, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
+    create_item : Proc(ISClusResDependents*, UInt8*, UInt8*, CLUSTER_RESOURCE_CREATE_FLAGS, ISClusResource*, HRESULT)
     delete_item : Proc(ISClusResDependents*, VARIANT, HRESULT)
     add_item : Proc(ISClusResDependents*, ISClusResource, HRESULT)
     remove_item : Proc(ISClusResDependents*, VARIANT, HRESULT)

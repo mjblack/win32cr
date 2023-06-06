@@ -309,21 +309,21 @@ lib LibWin32
     cellular_class : MBN_CELLULAR_CLASS
     voice_class : MBN_VOICE_CLASS
     data_class : UInt32
-    custom_data_class : UInt8
+    custom_data_class : UInt8*
     gsm_band_class : UInt32
     cdma_band_class : UInt32
-    custom_band_class : UInt8
+    custom_band_class : UInt8*
     sms_caps : UInt32
     control_caps : UInt32
-    device_id : UInt8
-    manufacturer : UInt8
-    model : UInt8
-    firmware_info : UInt8
+    device_id : UInt8*
+    manufacturer : UInt8*
+    model : UInt8*
+    firmware_info : UInt8*
   end
   struct MBN_PROVIDER
-    provider_id : UInt8
+    provider_id : UInt8*
     provider_state : UInt32
-    provider_name : UInt8
+    provider_name : UInt8*
     data_class : UInt32
   end
   struct MBN_PROVIDER2
@@ -340,9 +340,9 @@ lib LibWin32
   struct MBN_CONTEXT
     context_id : UInt32
     context_type : MBN_CONTEXT_TYPE
-    access_string : UInt8
-    user_name : UInt8
-    password : UInt8
+    access_string : UInt8*
+    user_name : UInt8*
+    password : UInt8*
     compression : MBN_COMPRESSION
     auth_type : MBN_AUTH_PROTOCOL
   end
@@ -355,7 +355,7 @@ lib LibWin32
     message_index : UInt32
   end
   struct MBN_DEVICE_SERVICE
-    device_service_id : UInt8
+    device_service_id : UInt8*
     data_write_supported : Int16
     data_read_supported : Int16
   end
@@ -398,11 +398,11 @@ lib LibWin32
     query_interface : Proc(IMbnConnection*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMbnConnection*, UInt32)
     release : Proc(IMbnConnection*, UInt32)
-    get_connection_id : Proc(IMbnConnection*, UInt8*, HRESULT)
-    get_interface_id : Proc(IMbnConnection*, UInt8*, HRESULT)
+    get_connection_id : Proc(IMbnConnection*, UInt8**, HRESULT)
+    get_interface_id : Proc(IMbnConnection*, UInt8**, HRESULT)
     connect : Proc(IMbnConnection*, MBN_CONNECTION_MODE, LibC::LPWSTR, UInt32*, HRESULT)
     disconnect : Proc(IMbnConnection*, UInt32*, HRESULT)
-    get_connection_state : Proc(IMbnConnection*, MBN_ACTIVATION_STATE*, UInt8*, HRESULT)
+    get_connection_state : Proc(IMbnConnection*, MBN_ACTIVATION_STATE*, UInt8**, HRESULT)
     get_voice_call_state : Proc(IMbnConnection*, MBN_VOICE_CALL_STATE*, HRESULT)
     get_activation_network_error : Proc(IMbnConnection*, UInt32*, HRESULT)
   end
@@ -429,7 +429,7 @@ lib LibWin32
     query_interface : Proc(IMbnInterface*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMbnInterface*, UInt32)
     release : Proc(IMbnInterface*, UInt32)
-    get_interface_id : Proc(IMbnInterface*, UInt8*, HRESULT)
+    get_interface_id : Proc(IMbnInterface*, UInt8**, HRESULT)
     get_interface_capability : Proc(IMbnInterface*, MBN_INTERFACE_CAPS*, HRESULT)
     get_subscriber_information : Proc(IMbnInterface*, IMbnSubscriberInformation*, HRESULT)
     get_ready_state : Proc(IMbnInterface*, MBN_READY_STATE*, HRESULT)
@@ -494,9 +494,9 @@ lib LibWin32
     release : Proc(IMbnRegistration*, UInt32)
     get_register_state : Proc(IMbnRegistration*, MBN_REGISTER_STATE*, HRESULT)
     get_register_mode : Proc(IMbnRegistration*, MBN_REGISTER_MODE*, HRESULT)
-    get_provider_id : Proc(IMbnRegistration*, UInt8*, HRESULT)
-    get_provider_name : Proc(IMbnRegistration*, UInt8*, HRESULT)
-    get_roaming_text : Proc(IMbnRegistration*, UInt8*, HRESULT)
+    get_provider_id : Proc(IMbnRegistration*, UInt8**, HRESULT)
+    get_provider_name : Proc(IMbnRegistration*, UInt8**, HRESULT)
+    get_roaming_text : Proc(IMbnRegistration*, UInt8**, HRESULT)
     get_available_data_classes : Proc(IMbnRegistration*, UInt32*, HRESULT)
     get_current_data_class : Proc(IMbnRegistration*, UInt32*, HRESULT)
     get_registration_network_error : Proc(IMbnRegistration*, UInt32*, HRESULT)
@@ -590,8 +590,8 @@ lib LibWin32
     query_interface : Proc(IMbnSubscriberInformation*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMbnSubscriberInformation*, UInt32)
     release : Proc(IMbnSubscriberInformation*, UInt32)
-    get_subscriber_id : Proc(IMbnSubscriberInformation*, UInt8*, HRESULT)
-    get_sim_icc_id : Proc(IMbnSubscriberInformation*, UInt8*, HRESULT)
+    get_subscriber_id : Proc(IMbnSubscriberInformation*, UInt8**, HRESULT)
+    get_sim_icc_id : Proc(IMbnSubscriberInformation*, UInt8**, HRESULT)
     get_telephone_numbers : Proc(IMbnSubscriberInformation*, SAFEARRAY**, HRESULT)
   end
 
@@ -663,7 +663,7 @@ lib LibWin32
     query_interface : Proc(IMbnConnectionProfile*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMbnConnectionProfile*, UInt32)
     release : Proc(IMbnConnectionProfile*, UInt32)
-    get_profile_xml_data : Proc(IMbnConnectionProfile*, UInt8*, HRESULT)
+    get_profile_xml_data : Proc(IMbnConnectionProfile*, UInt8**, HRESULT)
     update_profile : Proc(IMbnConnectionProfile*, LibC::LPWSTR, HRESULT)
     delete : Proc(IMbnConnectionProfile*, HRESULT)
   end
@@ -687,7 +687,7 @@ lib LibWin32
     query_interface : Proc(IMbnSmsConfiguration*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMbnSmsConfiguration*, UInt32)
     release : Proc(IMbnSmsConfiguration*, UInt32)
-    get_service_center_address : Proc(IMbnSmsConfiguration*, UInt8*, HRESULT)
+    get_service_center_address : Proc(IMbnSmsConfiguration*, UInt8**, HRESULT)
     put_service_center_address : Proc(IMbnSmsConfiguration*, LibC::LPWSTR, HRESULT)
     get_max_message_index : Proc(IMbnSmsConfiguration*, UInt32*, HRESULT)
     get_cdma_short_msg_size : Proc(IMbnSmsConfiguration*, UInt32*, HRESULT)
@@ -705,7 +705,7 @@ lib LibWin32
     release : Proc(IMbnSmsReadMsgPdu*, UInt32)
     get_index : Proc(IMbnSmsReadMsgPdu*, UInt32*, HRESULT)
     get_status : Proc(IMbnSmsReadMsgPdu*, MBN_MSG_STATUS*, HRESULT)
-    get_pdu_data : Proc(IMbnSmsReadMsgPdu*, UInt8*, HRESULT)
+    get_pdu_data : Proc(IMbnSmsReadMsgPdu*, UInt8**, HRESULT)
     get_message : Proc(IMbnSmsReadMsgPdu*, SAFEARRAY**, HRESULT)
   end
 
@@ -719,8 +719,8 @@ lib LibWin32
     release : Proc(IMbnSmsReadMsgTextCdma*, UInt32)
     get_index : Proc(IMbnSmsReadMsgTextCdma*, UInt32*, HRESULT)
     get_status : Proc(IMbnSmsReadMsgTextCdma*, MBN_MSG_STATUS*, HRESULT)
-    get_address : Proc(IMbnSmsReadMsgTextCdma*, UInt8*, HRESULT)
-    get_timestamp : Proc(IMbnSmsReadMsgTextCdma*, UInt8*, HRESULT)
+    get_address : Proc(IMbnSmsReadMsgTextCdma*, UInt8**, HRESULT)
+    get_timestamp : Proc(IMbnSmsReadMsgTextCdma*, UInt8**, HRESULT)
     get_encoding_id : Proc(IMbnSmsReadMsgTextCdma*, MBN_SMS_CDMA_ENCODING*, HRESULT)
     get_language_id : Proc(IMbnSmsReadMsgTextCdma*, MBN_SMS_CDMA_LANG*, HRESULT)
     get_size_in_characters : Proc(IMbnSmsReadMsgTextCdma*, UInt32*, HRESULT)
@@ -883,7 +883,7 @@ lib LibWin32
     query_interface : Proc(IMbnDeviceServiceStateEvents*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMbnDeviceServiceStateEvents*, UInt32)
     release : Proc(IMbnDeviceServiceStateEvents*, UInt32)
-    on_sessions_state_change : Proc(IMbnDeviceServiceStateEvents*, UInt8, MBN_DEVICE_SERVICE_SESSIONS_STATE, HRESULT)
+    on_sessions_state_change : Proc(IMbnDeviceServiceStateEvents*, UInt8*, MBN_DEVICE_SERVICE_SESSIONS_STATE, HRESULT)
   end
 
   struct IMbnDeviceServiceStateEvents
@@ -894,7 +894,7 @@ lib LibWin32
     query_interface : Proc(IMbnDeviceServicesManager*, Guid*, Void**, HRESULT)
     add_ref : Proc(IMbnDeviceServicesManager*, UInt32)
     release : Proc(IMbnDeviceServicesManager*, UInt32)
-    get_device_services_context : Proc(IMbnDeviceServicesManager*, UInt8, IMbnDeviceServicesContext*, HRESULT)
+    get_device_services_context : Proc(IMbnDeviceServicesManager*, UInt8*, IMbnDeviceServicesContext*, HRESULT)
   end
 
   struct IMbnDeviceServicesManager
@@ -906,7 +906,7 @@ lib LibWin32
     add_ref : Proc(IMbnDeviceServicesContext*, UInt32)
     release : Proc(IMbnDeviceServicesContext*, UInt32)
     enumerate_device_services : Proc(IMbnDeviceServicesContext*, SAFEARRAY**, HRESULT)
-    get_device_service : Proc(IMbnDeviceServicesContext*, UInt8, IMbnDeviceService*, HRESULT)
+    get_device_service : Proc(IMbnDeviceServicesContext*, UInt8*, IMbnDeviceService*, HRESULT)
     get_max_command_size : Proc(IMbnDeviceServicesContext*, UInt32*, HRESULT)
     get_max_data_size : Proc(IMbnDeviceServicesContext*, UInt32*, HRESULT)
   end
@@ -929,7 +929,7 @@ lib LibWin32
     on_close_data_session_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, HRESULT, UInt32, HRESULT)
     on_write_data_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, HRESULT, UInt32, HRESULT)
     on_read_data : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, SAFEARRAY*, HRESULT)
-    on_interface_state_change : Proc(IMbnDeviceServicesEvents*, UInt8, MBN_DEVICE_SERVICES_INTERFACE_STATE, HRESULT)
+    on_interface_state_change : Proc(IMbnDeviceServicesEvents*, UInt8*, MBN_DEVICE_SERVICES_INTERFACE_STATE, HRESULT)
   end
 
   struct IMbnDeviceServicesEvents
@@ -948,8 +948,8 @@ lib LibWin32
     open_data_session : Proc(IMbnDeviceService*, UInt32*, HRESULT)
     close_data_session : Proc(IMbnDeviceService*, UInt32*, HRESULT)
     write_data : Proc(IMbnDeviceService*, SAFEARRAY*, UInt32*, HRESULT)
-    get_interface_id : Proc(IMbnDeviceService*, UInt8*, HRESULT)
-    get_device_service_id : Proc(IMbnDeviceService*, UInt8*, HRESULT)
+    get_interface_id : Proc(IMbnDeviceService*, UInt8**, HRESULT)
+    get_device_service_id : Proc(IMbnDeviceService*, UInt8**, HRESULT)
     get_is_command_session_open : Proc(IMbnDeviceService*, LibC::BOOL*, HRESULT)
     get_is_data_session_open : Proc(IMbnDeviceService*, LibC::BOOL*, HRESULT)
   end

@@ -4333,7 +4333,7 @@ lib LibWin32
     query_interface : Proc(IProvisioningProfileWireless*, Guid*, Void**, HRESULT)
     add_ref : Proc(IProvisioningProfileWireless*, UInt32)
     release : Proc(IProvisioningProfileWireless*, UInt32)
-    create_profile : Proc(IProvisioningProfileWireless*, UInt8, UInt8, Guid*, UInt32*, HRESULT)
+    create_profile : Proc(IProvisioningProfileWireless*, UInt8*, UInt8*, Guid*, UInt32*, HRESULT)
   end
 
   struct IProvisioningProfileWireless

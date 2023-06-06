@@ -119,7 +119,7 @@ lib LibWin32
     query_interface : Proc(IFhTarget*, Guid*, Void**, HRESULT)
     add_ref : Proc(IFhTarget*, UInt32)
     release : Proc(IFhTarget*, UInt32)
-    get_string_property : Proc(IFhTarget*, FH_TARGET_PROPERTY_TYPE, UInt8*, HRESULT)
+    get_string_property : Proc(IFhTarget*, FH_TARGET_PROPERTY_TYPE, UInt8**, HRESULT)
     get_numerical_property : Proc(IFhTarget*, FH_TARGET_PROPERTY_TYPE, UInt64*, HRESULT)
   end
 
@@ -132,7 +132,7 @@ lib LibWin32
     add_ref : Proc(IFhScopeIterator*, UInt32)
     release : Proc(IFhScopeIterator*, UInt32)
     move_to_next_item : Proc(IFhScopeIterator*, HRESULT)
-    get_item : Proc(IFhScopeIterator*, UInt8*, HRESULT)
+    get_item : Proc(IFhScopeIterator*, UInt8**, HRESULT)
   end
 
   struct IFhScopeIterator
@@ -146,17 +146,17 @@ lib LibWin32
     load_configuration : Proc(IFhConfigMgr*, HRESULT)
     create_default_configuration : Proc(IFhConfigMgr*, LibC::BOOL, HRESULT)
     save_configuration : Proc(IFhConfigMgr*, HRESULT)
-    add_remove_exclude_rule : Proc(IFhConfigMgr*, LibC::BOOL, FH_PROTECTED_ITEM_CATEGORY, UInt8, HRESULT)
+    add_remove_exclude_rule : Proc(IFhConfigMgr*, LibC::BOOL, FH_PROTECTED_ITEM_CATEGORY, UInt8*, HRESULT)
     get_include_exclude_rules : Proc(IFhConfigMgr*, LibC::BOOL, FH_PROTECTED_ITEM_CATEGORY, IFhScopeIterator*, HRESULT)
     get_local_policy : Proc(IFhConfigMgr*, FH_LOCAL_POLICY_TYPE, UInt64*, HRESULT)
     set_local_policy : Proc(IFhConfigMgr*, FH_LOCAL_POLICY_TYPE, UInt64, HRESULT)
     get_backup_status : Proc(IFhConfigMgr*, FH_BACKUP_STATUS*, HRESULT)
     set_backup_status : Proc(IFhConfigMgr*, FH_BACKUP_STATUS, HRESULT)
     get_default_target : Proc(IFhConfigMgr*, IFhTarget*, HRESULT)
-    validate_target : Proc(IFhConfigMgr*, UInt8, FH_DEVICE_VALIDATION_RESULT*, HRESULT)
-    provision_and_set_new_target : Proc(IFhConfigMgr*, UInt8, UInt8, HRESULT)
+    validate_target : Proc(IFhConfigMgr*, UInt8*, FH_DEVICE_VALIDATION_RESULT*, HRESULT)
+    provision_and_set_new_target : Proc(IFhConfigMgr*, UInt8*, UInt8*, HRESULT)
     change_default_target_recommendation : Proc(IFhConfigMgr*, LibC::BOOL, HRESULT)
-    query_protection_status : Proc(IFhConfigMgr*, UInt32*, UInt8*, HRESULT)
+    query_protection_status : Proc(IFhConfigMgr*, UInt32*, UInt8**, HRESULT)
   end
 
   struct IFhConfigMgr
@@ -167,9 +167,9 @@ lib LibWin32
     query_interface : Proc(IFhReassociation*, Guid*, Void**, HRESULT)
     add_ref : Proc(IFhReassociation*, UInt32)
     release : Proc(IFhReassociation*, UInt32)
-    validate_target : Proc(IFhReassociation*, UInt8, FH_DEVICE_VALIDATION_RESULT*, HRESULT)
-    scan_target_for_configurations : Proc(IFhReassociation*, UInt8, HRESULT)
-    get_configuration_details : Proc(IFhReassociation*, UInt32, UInt8*, UInt8*, FILETIME*, HRESULT)
+    validate_target : Proc(IFhReassociation*, UInt8*, FH_DEVICE_VALIDATION_RESULT*, HRESULT)
+    scan_target_for_configurations : Proc(IFhReassociation*, UInt8*, HRESULT)
+    get_configuration_details : Proc(IFhReassociation*, UInt32, UInt8**, UInt8**, FILETIME*, HRESULT)
     select_configuration : Proc(IFhReassociation*, UInt32, HRESULT)
     perform_reassociation : Proc(IFhReassociation*, LibC::BOOL, HRESULT)
   end

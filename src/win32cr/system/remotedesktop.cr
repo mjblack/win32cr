@@ -752,15 +752,15 @@ lib LibWin32
     flag : AE_POSITION_FLAGS
   end
   struct AAAccountingData
-    user_name : UInt8
-    client_name : UInt8
+    user_name : UInt8*
+    client_name : UInt8*
     auth_type : AAAuthSchemes
-    resource_name : UInt8
+    resource_name : UInt8*
     port_number : Int32
-    protocol_name : UInt8
+    protocol_name : UInt8*
     number_of_bytes_received : Int32
     number_of_bytes_transfered : Int32
-    reason_for_disconnect : UInt8
+    reason_for_disconnect : UInt8*
     main_session_id : Guid
     sub_session_id : Int32
   end
@@ -1703,12 +1703,12 @@ lib LibWin32
     get_type_info : Proc(IADsTSUserEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IADsTSUserEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IADsTSUserEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_terminal_services_profile_path : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    put_terminal_services_profile_path : Proc(IADsTSUserEx*, UInt8, HRESULT)
-    get_terminal_services_home_directory : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    put_terminal_services_home_directory : Proc(IADsTSUserEx*, UInt8, HRESULT)
-    get_terminal_services_home_drive : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    put_terminal_services_home_drive : Proc(IADsTSUserEx*, UInt8, HRESULT)
+    get_terminal_services_profile_path : Proc(IADsTSUserEx*, UInt8**, HRESULT)
+    put_terminal_services_profile_path : Proc(IADsTSUserEx*, UInt8*, HRESULT)
+    get_terminal_services_home_directory : Proc(IADsTSUserEx*, UInt8**, HRESULT)
+    put_terminal_services_home_directory : Proc(IADsTSUserEx*, UInt8*, HRESULT)
+    get_terminal_services_home_drive : Proc(IADsTSUserEx*, UInt8**, HRESULT)
+    put_terminal_services_home_drive : Proc(IADsTSUserEx*, UInt8*, HRESULT)
     get_allow_logon : Proc(IADsTSUserEx*, Int32*, HRESULT)
     put_allow_logon : Proc(IADsTSUserEx*, Int32, HRESULT)
     get_enable_remote_control : Proc(IADsTSUserEx*, Int32*, HRESULT)
@@ -1729,10 +1729,10 @@ lib LibWin32
     put_connect_client_printers_at_logon : Proc(IADsTSUserEx*, Int32, HRESULT)
     get_default_to_main_printer : Proc(IADsTSUserEx*, Int32*, HRESULT)
     put_default_to_main_printer : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_terminal_services_work_directory : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    put_terminal_services_work_directory : Proc(IADsTSUserEx*, UInt8, HRESULT)
-    get_terminal_services_initial_program : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    put_terminal_services_initial_program : Proc(IADsTSUserEx*, UInt8, HRESULT)
+    get_terminal_services_work_directory : Proc(IADsTSUserEx*, UInt8**, HRESULT)
+    put_terminal_services_work_directory : Proc(IADsTSUserEx*, UInt8*, HRESULT)
+    get_terminal_services_initial_program : Proc(IADsTSUserEx*, UInt8**, HRESULT)
+    put_terminal_services_initial_program : Proc(IADsTSUserEx*, UInt8*, HRESULT)
   end
 
   struct IADsTSUserEx
@@ -1754,7 +1754,7 @@ lib LibWin32
     query_interface : Proc(ITSGAuthorizeResourceSink*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITSGAuthorizeResourceSink*, UInt32)
     release : Proc(ITSGAuthorizeResourceSink*, UInt32)
-    on_channel_authorized : Proc(ITSGAuthorizeResourceSink*, HRESULT, Guid, Int32, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
+    on_channel_authorized : Proc(ITSGAuthorizeResourceSink*, HRESULT, Guid, Int32, UInt8**, UInt32, UInt8**, UInt32, HRESULT)
   end
 
   struct ITSGAuthorizeResourceSink
@@ -1765,8 +1765,8 @@ lib LibWin32
     query_interface : Proc(ITSGPolicyEngine*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITSGPolicyEngine*, UInt32)
     release : Proc(ITSGPolicyEngine*, UInt32)
-    authorize_connection : Proc(ITSGPolicyEngine*, Guid, UInt8, AAAuthSchemes, UInt8, UInt8, UInt8*, UInt32, UInt8*, UInt32, HANDLE_PTR, ITSGAuthorizeConnectionSink, HRESULT)
-    authorize_resource : Proc(ITSGPolicyEngine*, Guid, Int32, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt8, UInt8*, UInt32, ITSGAuthorizeResourceSink, HRESULT)
+    authorize_connection : Proc(ITSGPolicyEngine*, Guid, UInt8*, AAAuthSchemes, UInt8*, UInt8*, UInt8*, UInt32, UInt8*, UInt32, HANDLE_PTR, ITSGAuthorizeConnectionSink, HRESULT)
+    authorize_resource : Proc(ITSGPolicyEngine*, Guid, Int32, UInt8*, UInt8**, UInt32, UInt8**, UInt32, UInt32, UInt8*, UInt8*, UInt32, ITSGAuthorizeResourceSink, HRESULT)
     refresh : Proc(ITSGPolicyEngine*, HRESULT)
     is_quarantine_enabled : Proc(ITSGPolicyEngine*, LibC::BOOL*, HRESULT)
   end
@@ -1790,7 +1790,7 @@ lib LibWin32
     query_interface : Proc(ITSGAuthenticateUserSink*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITSGAuthenticateUserSink*, UInt32)
     release : Proc(ITSGAuthenticateUserSink*, UInt32)
-    on_user_authenticated : Proc(ITSGAuthenticateUserSink*, UInt8, UInt8, LibC::UINT_PTR, HANDLE_PTR, HRESULT)
+    on_user_authenticated : Proc(ITSGAuthenticateUserSink*, UInt8*, UInt8*, LibC::UINT_PTR, HANDLE_PTR, HRESULT)
     on_user_authentication_failed : Proc(ITSGAuthenticateUserSink*, LibC::UINT_PTR, HRESULT, HRESULT, HRESULT)
     reauthenticate_user : Proc(ITSGAuthenticateUserSink*, LibC::UINT_PTR, HRESULT)
     disconnect_user : Proc(ITSGAuthenticateUserSink*, LibC::UINT_PTR, HRESULT)
@@ -1832,8 +1832,8 @@ lib LibWin32
     query_interface : Proc(IWorkspaceClientExt*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWorkspaceClientExt*, UInt32)
     release : Proc(IWorkspaceClientExt*, UInt32)
-    get_resource_id : Proc(IWorkspaceClientExt*, UInt8*, HRESULT)
-    get_resource_display_name : Proc(IWorkspaceClientExt*, UInt8*, HRESULT)
+    get_resource_id : Proc(IWorkspaceClientExt*, UInt8**, HRESULT)
+    get_resource_display_name : Proc(IWorkspaceClientExt*, UInt8**, HRESULT)
     issue_disconnect : Proc(IWorkspaceClientExt*, HRESULT)
   end
 
@@ -1846,7 +1846,7 @@ lib LibWin32
     add_ref : Proc(IWorkspace*, UInt32)
     release : Proc(IWorkspace*, UInt32)
     get_workspace_names : Proc(IWorkspace*, SAFEARRAY**, HRESULT)
-    start_remote_application : Proc(IWorkspace*, UInt8, SAFEARRAY*, HRESULT)
+    start_remote_application : Proc(IWorkspace*, UInt8*, SAFEARRAY*, HRESULT)
     get_process_id : Proc(IWorkspace*, UInt32*, HRESULT)
   end
 
@@ -1859,9 +1859,9 @@ lib LibWin32
     add_ref : Proc(IWorkspace2*, UInt32)
     release : Proc(IWorkspace2*, UInt32)
     get_workspace_names : Proc(IWorkspace2*, SAFEARRAY**, HRESULT)
-    start_remote_application : Proc(IWorkspace2*, UInt8, SAFEARRAY*, HRESULT)
+    start_remote_application : Proc(IWorkspace2*, UInt8*, SAFEARRAY*, HRESULT)
     get_process_id : Proc(IWorkspace2*, UInt32*, HRESULT)
-    start_remote_application_ex : Proc(IWorkspace2*, UInt8, UInt8, UInt8, Int16, UInt8, SAFEARRAY*, HRESULT)
+    start_remote_application_ex : Proc(IWorkspace2*, UInt8*, UInt8*, UInt8*, Int16, UInt8*, SAFEARRAY*, HRESULT)
   end
 
   struct IWorkspace2
@@ -1873,11 +1873,11 @@ lib LibWin32
     add_ref : Proc(IWorkspace3*, UInt32)
     release : Proc(IWorkspace3*, UInt32)
     get_workspace_names : Proc(IWorkspace3*, SAFEARRAY**, HRESULT)
-    start_remote_application : Proc(IWorkspace3*, UInt8, SAFEARRAY*, HRESULT)
+    start_remote_application : Proc(IWorkspace3*, UInt8*, SAFEARRAY*, HRESULT)
     get_process_id : Proc(IWorkspace3*, UInt32*, HRESULT)
-    start_remote_application_ex : Proc(IWorkspace3*, UInt8, UInt8, UInt8, Int16, UInt8, SAFEARRAY*, HRESULT)
-    get_claims_token2 : Proc(IWorkspace3*, UInt8, UInt8, UInt32, UInt32, RECT, UInt8*, HRESULT)
-    set_claims_token : Proc(IWorkspace3*, UInt8, UInt64, UInt8, HRESULT)
+    start_remote_application_ex : Proc(IWorkspace3*, UInt8*, UInt8*, UInt8*, Int16, UInt8*, SAFEARRAY*, HRESULT)
+    get_claims_token2 : Proc(IWorkspace3*, UInt8*, UInt8*, UInt32, UInt32, RECT, UInt8**, HRESULT)
+    set_claims_token : Proc(IWorkspace3*, UInt8*, UInt64, UInt8*, HRESULT)
   end
 
   struct IWorkspace3
@@ -1902,7 +1902,7 @@ lib LibWin32
     release : Proc(IWorkspaceRegistration2*, UInt32)
     add_resource : Proc(IWorkspaceRegistration2*, IWorkspaceClientExt, UInt32*, HRESULT)
     remove_resource : Proc(IWorkspaceRegistration2*, UInt32, HRESULT)
-    add_resource_ex : Proc(IWorkspaceRegistration2*, IWorkspaceClientExt, UInt8, UInt32*, Guid, HRESULT)
+    add_resource_ex : Proc(IWorkspaceRegistration2*, IWorkspaceClientExt, UInt8*, UInt32*, Guid, HRESULT)
     remove_resource_ex : Proc(IWorkspaceRegistration2*, UInt32, Guid, HRESULT)
   end
 
@@ -1918,13 +1918,13 @@ lib LibWin32
     get_type_info : Proc(IWorkspaceScriptable*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IWorkspaceScriptable*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IWorkspaceScriptable*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    disconnect_workspace : Proc(IWorkspaceScriptable*, UInt8, HRESULT)
-    start_workspace : Proc(IWorkspaceScriptable*, UInt8, UInt8, UInt8, UInt8, Int32, Int32, HRESULT)
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable*, UInt8, Int16, Int16*, HRESULT)
+    disconnect_workspace : Proc(IWorkspaceScriptable*, UInt8*, HRESULT)
+    start_workspace : Proc(IWorkspaceScriptable*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
+    is_workspace_credential_specified : Proc(IWorkspaceScriptable*, UInt8*, Int16, Int16*, HRESULT)
     is_workspace_sso_enabled : Proc(IWorkspaceScriptable*, Int16*, HRESULT)
-    clear_workspace_credential : Proc(IWorkspaceScriptable*, UInt8, HRESULT)
-    on_authenticated : Proc(IWorkspaceScriptable*, UInt8, UInt8, HRESULT)
-    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable*, UInt8, HRESULT)
+    clear_workspace_credential : Proc(IWorkspaceScriptable*, UInt8*, HRESULT)
+    on_authenticated : Proc(IWorkspaceScriptable*, UInt8*, UInt8*, HRESULT)
+    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable*, UInt8*, HRESULT)
   end
 
   struct IWorkspaceScriptable
@@ -1939,15 +1939,15 @@ lib LibWin32
     get_type_info : Proc(IWorkspaceScriptable2*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IWorkspaceScriptable2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IWorkspaceScriptable2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    disconnect_workspace : Proc(IWorkspaceScriptable2*, UInt8, HRESULT)
-    start_workspace : Proc(IWorkspaceScriptable2*, UInt8, UInt8, UInt8, UInt8, Int32, Int32, HRESULT)
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable2*, UInt8, Int16, Int16*, HRESULT)
+    disconnect_workspace : Proc(IWorkspaceScriptable2*, UInt8*, HRESULT)
+    start_workspace : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
+    is_workspace_credential_specified : Proc(IWorkspaceScriptable2*, UInt8*, Int16, Int16*, HRESULT)
     is_workspace_sso_enabled : Proc(IWorkspaceScriptable2*, Int16*, HRESULT)
-    clear_workspace_credential : Proc(IWorkspaceScriptable2*, UInt8, HRESULT)
-    on_authenticated : Proc(IWorkspaceScriptable2*, UInt8, UInt8, HRESULT)
-    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable2*, UInt8, HRESULT)
-    start_workspace_ex : Proc(IWorkspaceScriptable2*, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, Int32, Int32, HRESULT)
-    resource_dismissed : Proc(IWorkspaceScriptable2*, UInt8, UInt8, HRESULT)
+    clear_workspace_credential : Proc(IWorkspaceScriptable2*, UInt8*, HRESULT)
+    on_authenticated : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, HRESULT)
+    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable2*, UInt8*, HRESULT)
+    start_workspace_ex : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
+    resource_dismissed : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, HRESULT)
   end
 
   struct IWorkspaceScriptable2
@@ -1962,16 +1962,16 @@ lib LibWin32
     get_type_info : Proc(IWorkspaceScriptable3*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IWorkspaceScriptable3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IWorkspaceScriptable3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    disconnect_workspace : Proc(IWorkspaceScriptable3*, UInt8, HRESULT)
-    start_workspace : Proc(IWorkspaceScriptable3*, UInt8, UInt8, UInt8, UInt8, Int32, Int32, HRESULT)
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable3*, UInt8, Int16, Int16*, HRESULT)
+    disconnect_workspace : Proc(IWorkspaceScriptable3*, UInt8*, HRESULT)
+    start_workspace : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
+    is_workspace_credential_specified : Proc(IWorkspaceScriptable3*, UInt8*, Int16, Int16*, HRESULT)
     is_workspace_sso_enabled : Proc(IWorkspaceScriptable3*, Int16*, HRESULT)
-    clear_workspace_credential : Proc(IWorkspaceScriptable3*, UInt8, HRESULT)
-    on_authenticated : Proc(IWorkspaceScriptable3*, UInt8, UInt8, HRESULT)
-    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable3*, UInt8, HRESULT)
-    start_workspace_ex : Proc(IWorkspaceScriptable3*, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, Int32, Int32, HRESULT)
-    resource_dismissed : Proc(IWorkspaceScriptable3*, UInt8, UInt8, HRESULT)
-    start_workspace_ex2 : Proc(IWorkspaceScriptable3*, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, Int32, Int32, UInt8, Guid, HRESULT)
+    clear_workspace_credential : Proc(IWorkspaceScriptable3*, UInt8*, HRESULT)
+    on_authenticated : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, HRESULT)
+    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable3*, UInt8*, HRESULT)
+    start_workspace_ex : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
+    resource_dismissed : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, HRESULT)
+    start_workspace_ex2 : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, UInt8*, Guid, HRESULT)
   end
 
   struct IWorkspaceScriptable3
@@ -1982,9 +1982,9 @@ lib LibWin32
     query_interface : Proc(IWorkspaceReportMessage*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWorkspaceReportMessage*, UInt32)
     release : Proc(IWorkspaceReportMessage*, UInt32)
-    register_error_log_message : Proc(IWorkspaceReportMessage*, UInt8, HRESULT)
-    is_error_message_registered : Proc(IWorkspaceReportMessage*, UInt8, UInt32, UInt8, UInt32, Int16*, HRESULT)
-    register_error_event : Proc(IWorkspaceReportMessage*, UInt8, UInt32, UInt8, UInt32, HRESULT)
+    register_error_log_message : Proc(IWorkspaceReportMessage*, UInt8*, HRESULT)
+    is_error_message_registered : Proc(IWorkspaceReportMessage*, UInt8*, UInt32, UInt8*, UInt32, Int16*, HRESULT)
+    register_error_event : Proc(IWorkspaceReportMessage*, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
   end
 
   struct IWorkspaceReportMessage
@@ -2084,7 +2084,7 @@ lib LibWin32
     query_interface : Proc(ITsSbEnvironment*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbEnvironment*, UInt32)
     release : Proc(ITsSbEnvironment*, UInt32)
-    get_name : Proc(ITsSbEnvironment*, UInt8*, HRESULT)
+    get_name : Proc(ITsSbEnvironment*, UInt8**, HRESULT)
     get_server_weight : Proc(ITsSbEnvironment*, UInt32*, HRESULT)
     get_environment_property_set : Proc(ITsSbEnvironment*, ITsSbEnvironmentPropertySet*, HRESULT)
     put_environment_property_set : Proc(ITsSbEnvironment*, ITsSbEnvironmentPropertySet, HRESULT)
@@ -2098,7 +2098,7 @@ lib LibWin32
     query_interface : Proc(ITsSbLoadBalanceResult*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbLoadBalanceResult*, UInt32)
     release : Proc(ITsSbLoadBalanceResult*, UInt32)
-    get_target_name : Proc(ITsSbLoadBalanceResult*, UInt8*, HRESULT)
+    get_target_name : Proc(ITsSbLoadBalanceResult*, UInt8**, HRESULT)
   end
 
   struct ITsSbLoadBalanceResult
@@ -2109,22 +2109,22 @@ lib LibWin32
     query_interface : Proc(ITsSbTarget*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbTarget*, UInt32)
     release : Proc(ITsSbTarget*, UInt32)
-    get_target_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    put_target_name : Proc(ITsSbTarget*, UInt8, HRESULT)
-    get_farm_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    put_farm_name : Proc(ITsSbTarget*, UInt8, HRESULT)
-    get_target_fqdn : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    put_target_fqdn : Proc(ITsSbTarget*, UInt8, HRESULT)
-    get_target_netbios : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    put_target_netbios : Proc(ITsSbTarget*, UInt8, HRESULT)
+    get_target_name : Proc(ITsSbTarget*, UInt8**, HRESULT)
+    put_target_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
+    get_farm_name : Proc(ITsSbTarget*, UInt8**, HRESULT)
+    put_farm_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
+    get_target_fqdn : Proc(ITsSbTarget*, UInt8**, HRESULT)
+    put_target_fqdn : Proc(ITsSbTarget*, UInt8*, HRESULT)
+    get_target_netbios : Proc(ITsSbTarget*, UInt8**, HRESULT)
+    put_target_netbios : Proc(ITsSbTarget*, UInt8*, HRESULT)
     get_ip_addresses : Proc(ITsSbTarget*, TSSD_ConnectionPoint*, UInt32*, HRESULT)
     put_ip_addresses : Proc(ITsSbTarget*, TSSD_ConnectionPoint*, UInt32, HRESULT)
     get_target_state : Proc(ITsSbTarget*, TARGET_STATE*, HRESULT)
     put_target_state : Proc(ITsSbTarget*, TARGET_STATE, HRESULT)
     get_target_property_set : Proc(ITsSbTarget*, ITsSbTargetPropertySet*, HRESULT)
     put_target_property_set : Proc(ITsSbTarget*, ITsSbTargetPropertySet, HRESULT)
-    get_environment_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    put_environment_name : Proc(ITsSbTarget*, UInt8, HRESULT)
+    get_environment_name : Proc(ITsSbTarget*, UInt8**, HRESULT)
+    put_environment_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
     get_num_sessions : Proc(ITsSbTarget*, UInt32*, HRESULT)
     get_num_pending_connections : Proc(ITsSbTarget*, UInt32*, HRESULT)
     get_target_load : Proc(ITsSbTarget*, UInt32*, HRESULT)
@@ -2139,18 +2139,18 @@ lib LibWin32
     add_ref : Proc(ITsSbSession*, UInt32)
     release : Proc(ITsSbSession*, UInt32)
     get_session_id : Proc(ITsSbSession*, UInt32*, HRESULT)
-    get_target_name : Proc(ITsSbSession*, UInt8*, HRESULT)
-    put_target_name : Proc(ITsSbSession*, UInt8, HRESULT)
-    get_username : Proc(ITsSbSession*, UInt8*, HRESULT)
-    get_domain : Proc(ITsSbSession*, UInt8*, HRESULT)
+    get_target_name : Proc(ITsSbSession*, UInt8**, HRESULT)
+    put_target_name : Proc(ITsSbSession*, UInt8*, HRESULT)
+    get_username : Proc(ITsSbSession*, UInt8**, HRESULT)
+    get_domain : Proc(ITsSbSession*, UInt8**, HRESULT)
     get_state : Proc(ITsSbSession*, TSSESSION_STATE*, HRESULT)
     put_state : Proc(ITsSbSession*, TSSESSION_STATE, HRESULT)
     get_create_time : Proc(ITsSbSession*, FILETIME*, HRESULT)
     put_create_time : Proc(ITsSbSession*, FILETIME, HRESULT)
     get_disconnect_time : Proc(ITsSbSession*, FILETIME*, HRESULT)
     put_disconnect_time : Proc(ITsSbSession*, FILETIME, HRESULT)
-    get_initial_program : Proc(ITsSbSession*, UInt8*, HRESULT)
-    put_initial_program : Proc(ITsSbSession*, UInt8, HRESULT)
+    get_initial_program : Proc(ITsSbSession*, UInt8**, HRESULT)
+    put_initial_program : Proc(ITsSbSession*, UInt8*, HRESULT)
     get_client_display : Proc(ITsSbSession*, CLIENT_DISPLAY*, HRESULT)
     put_client_display : Proc(ITsSbSession*, CLIENT_DISPLAY, HRESULT)
     get_protocol_type : Proc(ITsSbSession*, UInt32*, HRESULT)
@@ -2178,9 +2178,9 @@ lib LibWin32
     query_interface : Proc(ITsSbResourceNotificationEx*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbResourceNotificationEx*, UInt32)
     release : Proc(ITsSbResourceNotificationEx*, UInt32)
-    notify_session_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8, UInt8, UInt8, UInt32, TSSESSION_STATE, HRESULT)
-    notify_target_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8, UInt32, HRESULT)
-    notify_client_connection_state_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8, UInt8, UInt8, UInt8, UInt8, CONNECTION_CHANGE_NOTIFICATION, HRESULT)
+    notify_session_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8*, UInt8*, UInt8*, UInt32, TSSESSION_STATE, HRESULT)
+    notify_target_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8*, UInt32, HRESULT)
+    notify_client_connection_state_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, CONNECTION_CHANGE_NOTIFICATION, HRESULT)
   end
 
   struct ITsSbResourceNotificationEx
@@ -2191,14 +2191,14 @@ lib LibWin32
     query_interface : Proc(ITsSbTaskInfo*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbTaskInfo*, UInt32)
     release : Proc(ITsSbTaskInfo*, UInt32)
-    get_target_id : Proc(ITsSbTaskInfo*, UInt8*, HRESULT)
+    get_target_id : Proc(ITsSbTaskInfo*, UInt8**, HRESULT)
     get_start_time : Proc(ITsSbTaskInfo*, FILETIME*, HRESULT)
     get_end_time : Proc(ITsSbTaskInfo*, FILETIME*, HRESULT)
     get_deadline : Proc(ITsSbTaskInfo*, FILETIME*, HRESULT)
-    get_identifier : Proc(ITsSbTaskInfo*, UInt8*, HRESULT)
-    get_label : Proc(ITsSbTaskInfo*, UInt8*, HRESULT)
+    get_identifier : Proc(ITsSbTaskInfo*, UInt8**, HRESULT)
+    get_label : Proc(ITsSbTaskInfo*, UInt8**, HRESULT)
     get_context : Proc(ITsSbTaskInfo*, SAFEARRAY**, HRESULT)
-    get_plugin : Proc(ITsSbTaskInfo*, UInt8*, HRESULT)
+    get_plugin : Proc(ITsSbTaskInfo*, UInt8**, HRESULT)
     get_status : Proc(ITsSbTaskInfo*, RDV_TASK_STATUS*, HRESULT)
   end
 
@@ -2213,7 +2213,7 @@ lib LibWin32
     initialize : Proc(ITsSbTaskPlugin*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
     terminate : Proc(ITsSbTaskPlugin*, HRESULT, HRESULT)
     initialize_task_plugin : Proc(ITsSbTaskPlugin*, ITsSbTaskPluginNotifySink, HRESULT)
-    set_task_queue : Proc(ITsSbTaskPlugin*, UInt8, UInt32, ITsSbTaskInfo*, HRESULT)
+    set_task_queue : Proc(ITsSbTaskPlugin*, UInt8*, UInt32, ITsSbTaskInfo*, HRESULT)
   end
 
   struct ITsSbTaskPlugin
@@ -2351,10 +2351,10 @@ lib LibWin32
     release : Proc(ITsSbTaskPluginNotifySink*, UInt32)
     on_error : Proc(ITsSbTaskPluginNotifySink*, HRESULT, HRESULT)
     on_report_status : Proc(ITsSbTaskPluginNotifySink*, CLIENT_MESSAGE_TYPE, UInt32, HRESULT)
-    on_set_task_time : Proc(ITsSbTaskPluginNotifySink*, UInt8, FILETIME, FILETIME, FILETIME, UInt8, UInt8, UInt8, UInt32, SAFEARRAY*, HRESULT)
-    on_delete_task_time : Proc(ITsSbTaskPluginNotifySink*, UInt8, UInt8, HRESULT)
-    on_update_task_status : Proc(ITsSbTaskPluginNotifySink*, UInt8, UInt8, RDV_TASK_STATUS, HRESULT)
-    on_report_tasks : Proc(ITsSbTaskPluginNotifySink*, UInt8, HRESULT)
+    on_set_task_time : Proc(ITsSbTaskPluginNotifySink*, UInt8*, FILETIME, FILETIME, FILETIME, UInt8*, UInt8*, UInt8*, UInt32, SAFEARRAY*, HRESULT)
+    on_delete_task_time : Proc(ITsSbTaskPluginNotifySink*, UInt8*, UInt8*, HRESULT)
+    on_update_task_status : Proc(ITsSbTaskPluginNotifySink*, UInt8*, UInt8*, RDV_TASK_STATUS, HRESULT)
+    on_report_tasks : Proc(ITsSbTaskPluginNotifySink*, UInt8*, HRESULT)
   end
 
   struct ITsSbTaskPluginNotifySink
@@ -2365,16 +2365,16 @@ lib LibWin32
     query_interface : Proc(ITsSbClientConnection*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbClientConnection*, UInt32)
     release : Proc(ITsSbClientConnection*, UInt32)
-    get_user_name : Proc(ITsSbClientConnection*, UInt8*, HRESULT)
-    get_domain : Proc(ITsSbClientConnection*, UInt8*, HRESULT)
-    get_initial_program : Proc(ITsSbClientConnection*, UInt8*, HRESULT)
+    get_user_name : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
+    get_domain : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
+    get_initial_program : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
     get_load_balance_result : Proc(ITsSbClientConnection*, ITsSbLoadBalanceResult*, HRESULT)
-    get_farm_name : Proc(ITsSbClientConnection*, UInt8*, HRESULT)
-    put_context : Proc(ITsSbClientConnection*, UInt8, VARIANT, VARIANT*, HRESULT)
-    get_context : Proc(ITsSbClientConnection*, UInt8, VARIANT*, HRESULT)
+    get_farm_name : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
+    put_context : Proc(ITsSbClientConnection*, UInt8*, VARIANT, VARIANT*, HRESULT)
+    get_context : Proc(ITsSbClientConnection*, UInt8*, VARIANT*, HRESULT)
     get_environment : Proc(ITsSbClientConnection*, ITsSbEnvironment*, HRESULT)
     get_connection_error : Proc(ITsSbClientConnection*, HRESULT)
-    get_sam_user_account : Proc(ITsSbClientConnection*, UInt8*, HRESULT)
+    get_sam_user_account : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
     get_client_connection_property_set : Proc(ITsSbClientConnection*, ITsSbClientConnectionPropertySet*, HRESULT)
     get_is_first_assignment : Proc(ITsSbClientConnection*, LibC::BOOL*, HRESULT)
     get_rd_farm_type : Proc(ITsSbClientConnection*, RD_FARM_TYPE*, HRESULT)
@@ -2390,16 +2390,16 @@ lib LibWin32
     query_interface : Proc(ITsSbProvider*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbProvider*, UInt32)
     release : Proc(ITsSbProvider*, UInt32)
-    create_target_object : Proc(ITsSbProvider*, UInt8, UInt8, ITsSbTarget*, HRESULT)
-    create_load_balance_result_object : Proc(ITsSbProvider*, UInt8, ITsSbLoadBalanceResult*, HRESULT)
-    create_session_object : Proc(ITsSbProvider*, UInt8, UInt8, UInt8, UInt32, ITsSbSession*, HRESULT)
+    create_target_object : Proc(ITsSbProvider*, UInt8*, UInt8*, ITsSbTarget*, HRESULT)
+    create_load_balance_result_object : Proc(ITsSbProvider*, UInt8*, ITsSbLoadBalanceResult*, HRESULT)
+    create_session_object : Proc(ITsSbProvider*, UInt8*, UInt8*, UInt8*, UInt32, ITsSbSession*, HRESULT)
     create_plugin_property_set : Proc(ITsSbProvider*, ITsSbPluginPropertySet*, HRESULT)
     create_target_property_set_object : Proc(ITsSbProvider*, ITsSbTargetPropertySet*, HRESULT)
-    create_environment_object : Proc(ITsSbProvider*, UInt8, UInt32, ITsSbEnvironment*, HRESULT)
+    create_environment_object : Proc(ITsSbProvider*, UInt8*, UInt32, ITsSbEnvironment*, HRESULT)
     get_resource_plugin_store : Proc(ITsSbProvider*, ITsSbResourcePluginStore*, HRESULT)
     get_filter_plugin_store : Proc(ITsSbProvider*, ITsSbFilterPluginStore*, HRESULT)
-    register_for_notification : Proc(ITsSbProvider*, UInt32, UInt8, ITsSbResourceNotification, HRESULT)
-    un_register_for_notification : Proc(ITsSbProvider*, UInt32, UInt8, HRESULT)
+    register_for_notification : Proc(ITsSbProvider*, UInt32, UInt8*, ITsSbResourceNotification, HRESULT)
+    un_register_for_notification : Proc(ITsSbProvider*, UInt32, UInt8*, HRESULT)
     get_instance_of_global_store : Proc(ITsSbProvider*, ITsSbGlobalStore*, HRESULT)
     create_environment_property_set_object : Proc(ITsSbProvider*, ITsSbEnvironmentPropertySet*, HRESULT)
   end
@@ -2412,34 +2412,34 @@ lib LibWin32
     query_interface : Proc(ITsSbResourcePluginStore*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbResourcePluginStore*, UInt32)
     release : Proc(ITsSbResourcePluginStore*, UInt32)
-    query_target : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, ITsSbTarget*, HRESULT)
-    query_session_by_session_id : Proc(ITsSbResourcePluginStore*, UInt32, UInt8, ITsSbSession*, HRESULT)
+    query_target : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, ITsSbTarget*, HRESULT)
+    query_session_by_session_id : Proc(ITsSbResourcePluginStore*, UInt32, UInt8*, ITsSbSession*, HRESULT)
     add_target_to_store : Proc(ITsSbResourcePluginStore*, ITsSbTarget, HRESULT)
     add_session_to_store : Proc(ITsSbResourcePluginStore*, ITsSbSession, HRESULT)
     add_environment_to_store : Proc(ITsSbResourcePluginStore*, ITsSbEnvironment, HRESULT)
-    remove_environment_from_store : Proc(ITsSbResourcePluginStore*, UInt8, LibC::BOOL, HRESULT)
+    remove_environment_from_store : Proc(ITsSbResourcePluginStore*, UInt8*, LibC::BOOL, HRESULT)
     enumerate_farms : Proc(ITsSbResourcePluginStore*, UInt32*, SAFEARRAY**, HRESULT)
-    query_environment : Proc(ITsSbResourcePluginStore*, UInt8, ITsSbEnvironment*, HRESULT)
+    query_environment : Proc(ITsSbResourcePluginStore*, UInt8*, ITsSbEnvironment*, HRESULT)
     enumerate_environments : Proc(ITsSbResourcePluginStore*, UInt32*, ITsSbEnvironment**, HRESULT)
     save_target : Proc(ITsSbResourcePluginStore*, ITsSbTarget, LibC::BOOL, HRESULT)
     save_environment : Proc(ITsSbResourcePluginStore*, ITsSbEnvironment, LibC::BOOL, HRESULT)
     save_session : Proc(ITsSbResourcePluginStore*, ITsSbSession, HRESULT)
-    set_target_property : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, VARIANT*, HRESULT)
-    set_environment_property : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, VARIANT*, HRESULT)
-    set_target_state : Proc(ITsSbResourcePluginStore*, UInt8, TARGET_STATE, TARGET_STATE*, HRESULT)
+    set_target_property : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
+    set_environment_property : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
+    set_target_state : Proc(ITsSbResourcePluginStore*, UInt8*, TARGET_STATE, TARGET_STATE*, HRESULT)
     set_session_state : Proc(ITsSbResourcePluginStore*, ITsSbSession, HRESULT)
-    enumerate_targets : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, TS_SB_SORT_BY, UInt8, UInt32*, ITsSbTarget**, HRESULT)
-    enumerate_sessions : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, UInt8, UInt8, UInt8, TSSESSION_STATE*, UInt32*, ITsSbSession**, HRESULT)
-    get_farm_property : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, VARIANT*, HRESULT)
-    delete_target : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, HRESULT)
-    set_target_property_with_version_check : Proc(ITsSbResourcePluginStore*, ITsSbTarget, UInt8, VARIANT*, HRESULT)
-    set_environment_property_with_version_check : Proc(ITsSbResourcePluginStore*, ITsSbEnvironment, UInt8, VARIANT*, HRESULT)
-    acquire_target_lock : Proc(ITsSbResourcePluginStore*, UInt8, UInt32, IUnknown*, HRESULT)
+    enumerate_targets : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, TS_SB_SORT_BY, UInt8*, UInt32*, ITsSbTarget**, HRESULT)
+    enumerate_sessions : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, TSSESSION_STATE*, UInt32*, ITsSbSession**, HRESULT)
+    get_farm_property : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
+    delete_target : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, HRESULT)
+    set_target_property_with_version_check : Proc(ITsSbResourcePluginStore*, ITsSbTarget, UInt8*, VARIANT*, HRESULT)
+    set_environment_property_with_version_check : Proc(ITsSbResourcePluginStore*, ITsSbEnvironment, UInt8*, VARIANT*, HRESULT)
+    acquire_target_lock : Proc(ITsSbResourcePluginStore*, UInt8*, UInt32, IUnknown*, HRESULT)
     release_target_lock : Proc(ITsSbResourcePluginStore*, IUnknown, HRESULT)
-    test_and_set_server_state : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, TARGET_STATE, TARGET_STATE, TARGET_STATE*, HRESULT)
-    set_server_waiting_to_start : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, HRESULT)
-    get_server_state : Proc(ITsSbResourcePluginStore*, UInt8, UInt8, TARGET_STATE*, HRESULT)
-    set_server_drain_mode : Proc(ITsSbResourcePluginStore*, UInt8, UInt32, HRESULT)
+    test_and_set_server_state : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, TARGET_STATE, TARGET_STATE, TARGET_STATE*, HRESULT)
+    set_server_waiting_to_start : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, HRESULT)
+    get_server_state : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, TARGET_STATE*, HRESULT)
+    set_server_drain_mode : Proc(ITsSbResourcePluginStore*, UInt8*, UInt32, HRESULT)
   end
 
   struct ITsSbResourcePluginStore
@@ -2452,7 +2452,7 @@ lib LibWin32
     release : Proc(ITsSbFilterPluginStore*, UInt32)
     save_properties : Proc(ITsSbFilterPluginStore*, ITsSbPropertySet, HRESULT)
     enumerate_properties : Proc(ITsSbFilterPluginStore*, ITsSbPropertySet*, HRESULT)
-    delete_properties : Proc(ITsSbFilterPluginStore*, UInt8, HRESULT)
+    delete_properties : Proc(ITsSbFilterPluginStore*, UInt8*, HRESULT)
   end
 
   struct ITsSbFilterPluginStore
@@ -2463,13 +2463,13 @@ lib LibWin32
     query_interface : Proc(ITsSbGlobalStore*, Guid*, Void**, HRESULT)
     add_ref : Proc(ITsSbGlobalStore*, UInt32)
     release : Proc(ITsSbGlobalStore*, UInt32)
-    query_target : Proc(ITsSbGlobalStore*, UInt8, UInt8, UInt8, ITsSbTarget*, HRESULT)
-    query_session_by_session_id : Proc(ITsSbGlobalStore*, UInt8, UInt32, UInt8, ITsSbSession*, HRESULT)
-    enumerate_farms : Proc(ITsSbGlobalStore*, UInt8, UInt32*, SAFEARRAY**, HRESULT)
-    enumerate_targets : Proc(ITsSbGlobalStore*, UInt8, UInt8, UInt8, UInt32*, ITsSbTarget**, HRESULT)
-    enumerate_environments_by_provider : Proc(ITsSbGlobalStore*, UInt8, UInt32*, ITsSbEnvironment**, HRESULT)
-    enumerate_sessions : Proc(ITsSbGlobalStore*, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, TSSESSION_STATE*, UInt32*, ITsSbSession**, HRESULT)
-    get_farm_property : Proc(ITsSbGlobalStore*, UInt8, UInt8, VARIANT*, HRESULT)
+    query_target : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, UInt8*, ITsSbTarget*, HRESULT)
+    query_session_by_session_id : Proc(ITsSbGlobalStore*, UInt8*, UInt32, UInt8*, ITsSbSession*, HRESULT)
+    enumerate_farms : Proc(ITsSbGlobalStore*, UInt8*, UInt32*, SAFEARRAY**, HRESULT)
+    enumerate_targets : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, UInt8*, UInt32*, ITsSbTarget**, HRESULT)
+    enumerate_environments_by_provider : Proc(ITsSbGlobalStore*, UInt8*, UInt32*, ITsSbEnvironment**, HRESULT)
+    enumerate_sessions : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, TSSESSION_STATE*, UInt32*, ITsSbSession**, HRESULT)
+    get_farm_property : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
   end
 
   struct ITsSbGlobalStore
@@ -2481,11 +2481,11 @@ lib LibWin32
     add_ref : Proc(ITsSbProvisioningPluginNotifySink*, UInt32)
     release : Proc(ITsSbProvisioningPluginNotifySink*, UInt32)
     on_job_created : Proc(ITsSbProvisioningPluginNotifySink*, VM_NOTIFY_INFO*, HRESULT)
-    on_virtual_machine_status_changed : Proc(ITsSbProvisioningPluginNotifySink*, VM_NOTIFY_ENTRY*, VM_NOTIFY_STATUS, HRESULT, UInt8, HRESULT)
-    on_job_completed : Proc(ITsSbProvisioningPluginNotifySink*, HRESULT, UInt8, HRESULT)
+    on_virtual_machine_status_changed : Proc(ITsSbProvisioningPluginNotifySink*, VM_NOTIFY_ENTRY*, VM_NOTIFY_STATUS, HRESULT, UInt8*, HRESULT)
+    on_job_completed : Proc(ITsSbProvisioningPluginNotifySink*, HRESULT, UInt8*, HRESULT)
     on_job_cancelled : Proc(ITsSbProvisioningPluginNotifySink*, HRESULT)
     lock_virtual_machine : Proc(ITsSbProvisioningPluginNotifySink*, VM_NOTIFY_ENTRY*, HRESULT)
-    on_virtual_machine_host_status_changed : Proc(ITsSbProvisioningPluginNotifySink*, UInt8, VM_HOST_NOTIFY_STATUS, HRESULT, UInt8, HRESULT)
+    on_virtual_machine_host_status_changed : Proc(ITsSbProvisioningPluginNotifySink*, UInt8*, VM_HOST_NOTIFY_STATUS, HRESULT, UInt8*, HRESULT)
   end
 
   struct ITsSbProvisioningPluginNotifySink
@@ -2498,10 +2498,10 @@ lib LibWin32
     release : Proc(ITsSbProvisioning*, UInt32)
     initialize : Proc(ITsSbProvisioning*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
     terminate : Proc(ITsSbProvisioning*, HRESULT, HRESULT)
-    create_virtual_machines : Proc(ITsSbProvisioning*, UInt8, UInt8, ITsSbProvisioningPluginNotifySink, HRESULT)
-    patch_virtual_machines : Proc(ITsSbProvisioning*, UInt8, UInt8, ITsSbProvisioningPluginNotifySink, VM_PATCH_INFO*, HRESULT)
-    delete_virtual_machines : Proc(ITsSbProvisioning*, UInt8, UInt8, ITsSbProvisioningPluginNotifySink, HRESULT)
-    cancel_job : Proc(ITsSbProvisioning*, UInt8, HRESULT)
+    create_virtual_machines : Proc(ITsSbProvisioning*, UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, HRESULT)
+    patch_virtual_machines : Proc(ITsSbProvisioning*, UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, VM_PATCH_INFO*, HRESULT)
+    delete_virtual_machines : Proc(ITsSbProvisioning*, UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, HRESULT)
+    cancel_job : Proc(ITsSbProvisioning*, UInt8*, HRESULT)
   end
 
   struct ITsSbProvisioning
@@ -2527,8 +2527,8 @@ lib LibWin32
     get_resource_list : Proc(ItsPubPlugin*, LibC::LPWSTR, Int32*, Pluginresource**, HRESULT)
     get_resource : Proc(ItsPubPlugin*, LibC::LPWSTR, Int32, Pluginresource*, HRESULT)
     get_cache_last_update_time : Proc(ItsPubPlugin*, UInt64*, HRESULT)
-    get_plugin_name : Proc(ItsPubPlugin*, UInt8*, HRESULT)
-    get_plugin_version : Proc(ItsPubPlugin*, UInt8*, HRESULT)
+    get_plugin_name : Proc(ItsPubPlugin*, UInt8**, HRESULT)
+    get_plugin_version : Proc(ItsPubPlugin*, UInt8**, HRESULT)
     resolve_resource : Proc(ItsPubPlugin*, UInt32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
@@ -2543,8 +2543,8 @@ lib LibWin32
     get_resource_list : Proc(ItsPubPlugin2*, LibC::LPWSTR, Int32*, Pluginresource**, HRESULT)
     get_resource : Proc(ItsPubPlugin2*, LibC::LPWSTR, Int32, Pluginresource*, HRESULT)
     get_cache_last_update_time : Proc(ItsPubPlugin2*, UInt64*, HRESULT)
-    get_plugin_name : Proc(ItsPubPlugin2*, UInt8*, HRESULT)
-    get_plugin_version : Proc(ItsPubPlugin2*, UInt8*, HRESULT)
+    get_plugin_name : Proc(ItsPubPlugin2*, UInt8**, HRESULT)
+    get_plugin_version : Proc(ItsPubPlugin2*, UInt8**, HRESULT)
     resolve_resource : Proc(ItsPubPlugin2*, UInt32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
     get_resource2_list : Proc(ItsPubPlugin2*, LibC::LPWSTR, Int32*, Pluginresource2**, HRESULT)
     get_resource2 : Proc(ItsPubPlugin2*, LibC::LPWSTR, Int32, Pluginresource2*, HRESULT)
@@ -2564,11 +2564,11 @@ lib LibWin32
     get_type_info : Proc(IWorkspaceResTypeRegistry*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IWorkspaceResTypeRegistry*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IWorkspaceResTypeRegistry*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    add_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8, UInt8, HRESULT)
-    delete_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8, HRESULT)
+    add_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, UInt8*, HRESULT)
+    delete_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, HRESULT)
     get_registered_file_extensions : Proc(IWorkspaceResTypeRegistry*, Int16, SAFEARRAY**, HRESULT)
-    get_resource_type_info : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8, UInt8*, HRESULT)
-    modify_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8, UInt8, HRESULT)
+    get_resource_type_info : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, UInt8**, HRESULT)
+    modify_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, UInt8*, HRESULT)
   end
 
   struct IWorkspaceResTypeRegistry
@@ -2604,7 +2604,7 @@ lib LibWin32
     query_interface : Proc(IWTSListenerCallback*, Guid*, Void**, HRESULT)
     add_ref : Proc(IWTSListenerCallback*, UInt32)
     release : Proc(IWTSListenerCallback*, UInt32)
-    on_new_channel_connection : Proc(IWTSListenerCallback*, IWTSVirtualChannel, UInt8, LibC::BOOL*, IWTSVirtualChannelCallback*, HRESULT)
+    on_new_channel_connection : Proc(IWTSListenerCallback*, IWTSVirtualChannel, UInt8*, LibC::BOOL*, IWTSVirtualChannelCallback*, HRESULT)
   end
 
   struct IWTSListenerCallback
@@ -3071,10 +3071,10 @@ lib LibWin32
     get_type_info : Proc(IRemoteDesktopClientSettings*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IRemoteDesktopClientSettings*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IRemoteDesktopClientSettings*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    apply_settings : Proc(IRemoteDesktopClientSettings*, UInt8, HRESULT)
-    retrieve_settings : Proc(IRemoteDesktopClientSettings*, UInt8*, HRESULT)
-    get_rdp_property : Proc(IRemoteDesktopClientSettings*, UInt8, VARIANT*, HRESULT)
-    set_rdp_property : Proc(IRemoteDesktopClientSettings*, UInt8, VARIANT, HRESULT)
+    apply_settings : Proc(IRemoteDesktopClientSettings*, UInt8*, HRESULT)
+    retrieve_settings : Proc(IRemoteDesktopClientSettings*, UInt8**, HRESULT)
+    get_rdp_property : Proc(IRemoteDesktopClientSettings*, UInt8*, VARIANT*, HRESULT)
+    set_rdp_property : Proc(IRemoteDesktopClientSettings*, UInt8*, VARIANT, HRESULT)
   end
 
   struct IRemoteDesktopClientSettings
@@ -3092,7 +3092,7 @@ lib LibWin32
     suspend_screen_updates : Proc(IRemoteDesktopClientActions*, HRESULT)
     resume_screen_updates : Proc(IRemoteDesktopClientActions*, HRESULT)
     execute_remote_action : Proc(IRemoteDesktopClientActions*, RemoteActionType, HRESULT)
-    get_snapshot : Proc(IRemoteDesktopClientActions*, SnapshotEncodingType, SnapshotFormatType, UInt32, UInt32, UInt8*, HRESULT)
+    get_snapshot : Proc(IRemoteDesktopClientActions*, SnapshotEncodingType, SnapshotFormatType, UInt32, UInt32, UInt8**, HRESULT)
   end
 
   struct IRemoteDesktopClientActions
@@ -3133,10 +3133,10 @@ lib LibWin32
     get_settings : Proc(IRemoteDesktopClient*, IRemoteDesktopClientSettings*, HRESULT)
     get_actions : Proc(IRemoteDesktopClient*, IRemoteDesktopClientActions*, HRESULT)
     get_touch_pointer : Proc(IRemoteDesktopClient*, IRemoteDesktopClientTouchPointer*, HRESULT)
-    delete_saved_credentials : Proc(IRemoteDesktopClient*, UInt8, HRESULT)
+    delete_saved_credentials : Proc(IRemoteDesktopClient*, UInt8*, HRESULT)
     update_session_display_settings : Proc(IRemoteDesktopClient*, UInt32, UInt32, HRESULT)
-    attach_event : Proc(IRemoteDesktopClient*, UInt8, IDispatch, HRESULT)
-    detach_event : Proc(IRemoteDesktopClient*, UInt8, IDispatch, HRESULT)
+    attach_event : Proc(IRemoteDesktopClient*, UInt8*, IDispatch, HRESULT)
+    detach_event : Proc(IRemoteDesktopClient*, UInt8*, IDispatch, HRESULT)
   end
 
   struct IRemoteDesktopClient
