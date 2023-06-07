@@ -3333,7 +3333,8 @@ lib LibWin32
   #fun UnlockFileEx(hfile : LibC::HANDLE, dwreserved : UInt32, nnumberofbytestounlocklow : UInt32, nnumberofbytestounlockhigh : UInt32, lpoverlapped : OVERLAPPED*) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],lpbuffer : Void* [In],nnumberofbytestowrite : UInt32 [In],lpnumberofbyteswritten : UInt32* [In],lpoverlapped : OVERLAPPED* [In]
-  fun WriteFile(hfile : LibC::HANDLE, lpbuffer : Void*, nnumberofbytestowrite : UInt32, lpnumberofbyteswritten : UInt32*, lpoverlapped : OVERLAPPED*) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun WriteFile(hfile : LibC::HANDLE, lpbuffer : Void*, nnumberofbytestowrite : UInt32, lpnumberofbyteswritten : UInt32*, lpoverlapped : OVERLAPPED*) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],lpbuffer : Void* [In],nnumberofbytestowrite : UInt32 [In],lpoverlapped : OVERLAPPED* [In],lpcompletionroutine : LPOVERLAPPED_COMPLETION_ROUTINE [In]
   fun WriteFileEx(hfile : LibC::HANDLE, lpbuffer : Void*, nnumberofbytestowrite : UInt32, lpoverlapped : OVERLAPPED*, lpcompletionroutine : LPOVERLAPPED_COMPLETION_ROUTINE) : LibC::BOOL
@@ -4028,7 +4029,8 @@ lib LibWin32
   fun GetLongPathNameTransactedW(lpszshortpath : LibC::LPWSTR, lpszlongpath : Char*, cchbuffer : UInt32, htransaction : LibC::HANDLE) : UInt32
 
   # Params # filehandle : LibC::HANDLE [In],flags : UInt8 [In]
-  fun SetFileCompletionNotificationModes(filehandle : LibC::HANDLE, flags : UInt8) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun SetFileCompletionNotificationModes(filehandle : LibC::HANDLE, flags : UInt8) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],lpshortname : PSTR [In]
   fun SetFileShortNameA(hfile : LibC::HANDLE, lpshortname : PSTR) : LibC::BOOL
