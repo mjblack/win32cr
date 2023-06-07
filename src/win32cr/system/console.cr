@@ -498,7 +498,8 @@ lib LibWin32
   fun GetConsoleProcessList(lpdwprocesslist : UInt32*, dwprocesscount : UInt32) : UInt32
 
   # Params # nstdhandle : STD_HANDLE [In]
-  fun GetStdHandle(nstdhandle : STD_HANDLE) : LibC::HANDLE
+  # Commented out because function is part of Lib C
+  #fun GetStdHandle(nstdhandle : STD_HANDLE) : LibC::HANDLE
 
   # Params # nstdhandle : STD_HANDLE [In],hhandle : LibC::HANDLE [In]
   fun SetStdHandle(nstdhandle : STD_HANDLE, hhandle : LibC::HANDLE) : LibC::BOOL

@@ -13731,7 +13731,8 @@ lib LibWin32
   fun DebugBreakProcess(process : LibC::HANDLE) : LibC::BOOL
 
   # Params # dwflags : FORMAT_MESSAGE_OPTIONS [In],lpsource : Void* [In],dwmessageid : UInt32 [In],dwlanguageid : UInt32 [In],lpbuffer : PSTR [In],nsize : UInt32 [In],arguments : Int8** [In]
-  fun FormatMessageA(dwflags : FORMAT_MESSAGE_OPTIONS, lpsource : Void*, dwmessageid : UInt32, dwlanguageid : UInt32, lpbuffer : PSTR, nsize : UInt32, arguments : Int8**) : UInt32
+  # Commented out because function is part of Lib C
+  #fun FormatMessageA(dwflags : FORMAT_MESSAGE_OPTIONS, lpsource : Void*, dwmessageid : UInt32, dwlanguageid : UInt32, lpbuffer : PSTR, nsize : UInt32, arguments : Int8**) : UInt32
 
   # Params # dwflags : FORMAT_MESSAGE_OPTIONS [In],lpsource : Void* [In],dwmessageid : UInt32 [In],dwlanguageid : UInt32 [In],lpbuffer : LibC::LPWSTR [In],nsize : UInt32 [In],arguments : Int8** [In]
   # Commented out because function is part of Lib C

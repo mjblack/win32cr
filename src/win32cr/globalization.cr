@@ -4528,7 +4528,8 @@ lib LibWin32
   fun GetStringTypeW(dwinfotype : UInt32, lpsrcstr : Char*, cchsrc : Int32, lpchartype : UInt16*) : LibC::BOOL
 
   # Params # codepage : UInt32 [In],dwflags : MULTI_BYTE_TO_WIDE_CHAR_FLAGS [In],lpmultibytestr : UInt8* [In],cbmultibyte : Int32 [In],lpwidecharstr : Char* [In],cchwidechar : Int32 [In]
-  fun MultiByteToWideChar(codepage : UInt32, dwflags : MULTI_BYTE_TO_WIDE_CHAR_FLAGS, lpmultibytestr : UInt8*, cbmultibyte : Int32, lpwidecharstr : Char*, cchwidechar : Int32) : Int32
+  # Commented out because function is part of Lib C
+  #fun MultiByteToWideChar(codepage : UInt32, dwflags : MULTI_BYTE_TO_WIDE_CHAR_FLAGS, lpmultibytestr : UInt8*, cbmultibyte : Int32, lpwidecharstr : Char*, cchwidechar : Int32) : Int32
 
   # Params # codepage : UInt32 [In],dwflags : UInt32 [In],lpwidecharstr : Char* [In],cchwidechar : Int32 [In],lpmultibytestr : PSTR [In],cbmultibyte : Int32 [In],lpdefaultchar : PSTR [In],lpuseddefaultchar : Int32* [In]
   # Commented out because function is part of Lib C

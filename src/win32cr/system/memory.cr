@@ -308,19 +308,23 @@ lib LibWin32
   fun HeapDestroy(hheap : HeapHandle) : LibC::BOOL
 
   # Params # hheap : HeapHandle [In],dwflags : HEAP_FLAGS [In],dwbytes : LibC::UINT_PTR [In]
-  fun HeapAlloc(hheap : HeapHandle, dwflags : HEAP_FLAGS, dwbytes : LibC::UINT_PTR) : Void*
+  # Commented out because function is part of Lib C
+  #fun HeapAlloc(hheap : HeapHandle, dwflags : HEAP_FLAGS, dwbytes : LibC::UINT_PTR) : Void*
 
   # Params # hheap : HeapHandle [In],dwflags : HEAP_FLAGS [In],lpmem : Void* [In],dwbytes : LibC::UINT_PTR [In]
-  fun HeapReAlloc(hheap : HeapHandle, dwflags : HEAP_FLAGS, lpmem : Void*, dwbytes : LibC::UINT_PTR) : Void*
+  # Commented out because function is part of Lib C
+  #fun HeapReAlloc(hheap : HeapHandle, dwflags : HEAP_FLAGS, lpmem : Void*, dwbytes : LibC::UINT_PTR) : Void*
 
   # Params # hheap : HeapHandle [In],dwflags : HEAP_FLAGS [In],lpmem : Void* [In]
-  fun HeapFree(hheap : HeapHandle, dwflags : HEAP_FLAGS, lpmem : Void*) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun HeapFree(hheap : HeapHandle, dwflags : HEAP_FLAGS, lpmem : Void*) : LibC::BOOL
 
   # Params # hheap : HeapHandle [In],dwflags : HEAP_FLAGS [In],lpmem : Void* [In]
   fun HeapSize(hheap : HeapHandle, dwflags : HEAP_FLAGS, lpmem : Void*) : LibC::UINT_PTR
 
   # Params # 
-  fun GetProcessHeap : HeapHandle
+  # Commented out because function is part of Lib C
+  #fun GetProcessHeap : HeapHandle
 
   # Params # hheap : HeapHandle [In],dwflags : HEAP_FLAGS [In]
   fun HeapCompact(hheap : HeapHandle, dwflags : HEAP_FLAGS) : LibC::UINT_PTR

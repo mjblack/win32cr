@@ -891,7 +891,8 @@ lib LibWin32
   #fun GetCurrentProcessId : UInt32
 
   # Params # uexitcode : UInt32 [In]
-  fun ExitProcess(uexitcode : UInt32)
+  # Commented out because function is part of Lib C
+  #fun ExitProcess(uexitcode : UInt32)
 
   # Params # hprocess : LibC::HANDLE [In],uexitcode : UInt32 [In]
   # Commented out because function is part of Lib C

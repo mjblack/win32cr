@@ -55,7 +55,8 @@ lib LibWin32
   #fun DeviceIoControl(hdevice : LibC::HANDLE, dwiocontrolcode : UInt32, lpinbuffer : Void*, ninbuffersize : UInt32, lpoutbuffer : Void*, noutbuffersize : UInt32, lpbytesreturned : UInt32*, lpoverlapped : OVERLAPPED*) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],lpoverlapped : OVERLAPPED* [In],lpnumberofbytestransferred : UInt32* [In],bwait : LibC::BOOL [In]
-  fun GetOverlappedResult(hfile : LibC::HANDLE, lpoverlapped : OVERLAPPED*, lpnumberofbytestransferred : UInt32*, bwait : LibC::BOOL) : LibC::BOOL
+  # Commented out because function is part of Lib C
+  #fun GetOverlappedResult(hfile : LibC::HANDLE, lpoverlapped : OVERLAPPED*, lpnumberofbytestransferred : UInt32*, bwait : LibC::BOOL) : LibC::BOOL
 
   # Params # hfile : LibC::HANDLE [In],lpoverlapped : OVERLAPPED* [In]
   # Commented out because function is part of Lib C

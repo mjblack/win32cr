@@ -76,7 +76,8 @@ lib LibWin32
   fun CallNamedPipeW(lpnamedpipename : LibC::LPWSTR, lpinbuffer : Void*, ninbuffersize : UInt32, lpoutbuffer : Void*, noutbuffersize : UInt32, lpbytesread : UInt32*, ntimeout : UInt32) : LibC::BOOL
 
   # Params # lpname : PSTR [In],dwopenmode : FILE_FLAGS_AND_ATTRIBUTES [In],dwpipemode : NAMED_PIPE_MODE [In],nmaxinstances : UInt32 [In],noutbuffersize : UInt32 [In],ninbuffersize : UInt32 [In],ndefaulttimeout : UInt32 [In],lpsecurityattributes : SECURITY_ATTRIBUTES* [In]
-  fun CreateNamedPipeA(lpname : PSTR, dwopenmode : FILE_FLAGS_AND_ATTRIBUTES, dwpipemode : NAMED_PIPE_MODE, nmaxinstances : UInt32, noutbuffersize : UInt32, ninbuffersize : UInt32, ndefaulttimeout : UInt32, lpsecurityattributes : SECURITY_ATTRIBUTES*) : LibC::HANDLE
+  # Commented out because function is part of Lib C
+  #fun CreateNamedPipeA(lpname : PSTR, dwopenmode : FILE_FLAGS_AND_ATTRIBUTES, dwpipemode : NAMED_PIPE_MODE, nmaxinstances : UInt32, noutbuffersize : UInt32, ninbuffersize : UInt32, ndefaulttimeout : UInt32, lpsecurityattributes : SECURITY_ATTRIBUTES*) : LibC::HANDLE
 
   # Params # hnamedpipe : LibC::HANDLE [In],lpstate : NAMED_PIPE_MODE* [In],lpcurinstances : UInt32* [In],lpmaxcollectioncount : UInt32* [In],lpcollectdatatimeout : UInt32* [In],lpusername : UInt8* [In],nmaxusernamesize : UInt32 [In]
   fun GetNamedPipeHandleStateA(hnamedpipe : LibC::HANDLE, lpstate : NAMED_PIPE_MODE*, lpcurinstances : UInt32*, lpmaxcollectioncount : UInt32*, lpcollectdatatimeout : UInt32*, lpusername : UInt8*, nmaxusernamesize : UInt32) : LibC::BOOL
