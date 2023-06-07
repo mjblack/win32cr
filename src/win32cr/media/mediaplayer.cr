@@ -2546,18 +2546,18 @@ lib LibWin32
     lpVtbl : IWMPEvents4VTbl*
   end
 
-  struct WMPOCXEventsVTbl
-    query_interface : Proc(WMPOCXEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(WMPOCXEvents*, UInt32)
-    release : Proc(WMPOCXEvents*, UInt32)
-    get_type_info_count : Proc(WMPOCXEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(WMPOCXEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(WMPOCXEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(WMPOCXEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IWMPOCXEventsVTbl
+    query_interface : Proc(IWMPOCXEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IWMPOCXEvents*, UInt32)
+    release : Proc(IWMPOCXEvents*, UInt32)
+    get_type_info_count : Proc(IWMPOCXEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IWMPOCXEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IWMPOCXEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IWMPOCXEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct WMPOCXEvents
-    lpVtbl : WMPOCXEventsVTbl*
+  struct IWMPOCXEvents
+    lpVtbl : IWMPOCXEventsVTbl*
   end
 
   struct IWMPNodeRealEstateVTbl

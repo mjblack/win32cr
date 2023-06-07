@@ -548,30 +548,56 @@ lib LibWin32
     lpVtbl : ISnapinPropertiesCallbackVTbl*
   end
 
-  struct ApplicationVTbl
-    query_interface : Proc(Application*, Guid*, Void**, HRESULT)
-    add_ref : Proc(Application*, UInt32)
-    release : Proc(Application*, UInt32)
-    get_type_info_count : Proc(Application*, UInt32*, HRESULT)
-    get_type_info : Proc(Application*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(Application*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(Application*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    help : Proc(Application*, Void)
-    quit : Proc(Application*, Void)
-    get_document : Proc(Application*, Document*, HRESULT)
-    load : Proc(Application*, UInt8*, HRESULT)
-    get_frame : Proc(Application*, Frame*, HRESULT)
-    get_visible : Proc(Application*, LibC::BOOL*, HRESULT)
-    show : Proc(Application*, HRESULT)
-    hide : Proc(Application*, HRESULT)
-    get_user_control : Proc(Application*, LibC::BOOL*, HRESULT)
-    put_user_control : Proc(Application*, LibC::BOOL, HRESULT)
-    get_version_major : Proc(Application*, Int32*, HRESULT)
-    get_version_minor : Proc(Application*, Int32*, HRESULT)
+  struct IApplicationVTbl
+    query_interface : Proc(IApplication*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IApplication*, UInt32)
+    release : Proc(IApplication*, UInt32)
+    get_type_info_count : Proc(IApplication*, UInt32*, HRESULT)
+    get_type_info : Proc(IApplication*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IApplication*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IApplication*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    help : Proc(IApplication*, Void)
+    quit : Proc(IApplication*, Void)
+    get_document : Proc(IApplication*, Document*, HRESULT)
+    load : Proc(IApplication*, UInt8*, HRESULT)
+    get_frame : Proc(IApplication*, Frame*, HRESULT)
+    get_visible : Proc(IApplication*, LibC::BOOL*, HRESULT)
+    show : Proc(IApplication*, HRESULT)
+    hide : Proc(IApplication*, HRESULT)
+    get_user_control : Proc(IApplication*, LibC::BOOL*, HRESULT)
+    put_user_control : Proc(IApplication*, LibC::BOOL, HRESULT)
+    get_version_major : Proc(IApplication*, Int32*, HRESULT)
+    get_version_minor : Proc(IApplication*, Int32*, HRESULT)
   end
 
-  struct Application
-    lpVtbl : ApplicationVTbl*
+  struct IApplication
+    lpVtbl : IApplicationVTbl*
+  end
+
+  struct IAppEventsVTbl
+    query_interface : Proc(IAppEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IAppEvents*, UInt32)
+    release : Proc(IAppEvents*, UInt32)
+    get_type_info_count : Proc(IAppEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IAppEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IAppEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IAppEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    on_quit : Proc(IAppEvents*, Application, HRESULT)
+    on_document_open : Proc(IAppEvents*, Document, LibC::BOOL, HRESULT)
+    on_document_close : Proc(IAppEvents*, Document, HRESULT)
+    on_snap_in_added : Proc(IAppEvents*, Document, SnapIn, HRESULT)
+    on_snap_in_removed : Proc(IAppEvents*, Document, SnapIn, HRESULT)
+    on_new_view : Proc(IAppEvents*, View, HRESULT)
+    on_view_close : Proc(IAppEvents*, View, HRESULT)
+    on_view_change : Proc(IAppEvents*, View, Node, HRESULT)
+    on_selection_change : Proc(IAppEvents*, View, Nodes, HRESULT)
+    on_context_menu_executed : Proc(IAppEvents*, MenuItem, HRESULT)
+    on_toolbar_button_clicked : Proc(IAppEvents*, HRESULT)
+    on_list_updated : Proc(IAppEvents*, View, HRESULT)
+  end
+
+  struct IAppEvents
+    lpVtbl : IAppEventsVTbl*
   end
 
   struct AppEventsVTbl
@@ -582,52 +608,26 @@ lib LibWin32
     get_type_info : Proc(AppEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(AppEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(AppEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    on_quit : Proc(AppEvents*, Application, HRESULT)
-    on_document_open : Proc(AppEvents*, Document, LibC::BOOL, HRESULT)
-    on_document_close : Proc(AppEvents*, Document, HRESULT)
-    on_snap_in_added : Proc(AppEvents*, Document, SnapIn, HRESULT)
-    on_snap_in_removed : Proc(AppEvents*, Document, SnapIn, HRESULT)
-    on_new_view : Proc(AppEvents*, View, HRESULT)
-    on_view_close : Proc(AppEvents*, View, HRESULT)
-    on_view_change : Proc(AppEvents*, View, Node, HRESULT)
-    on_selection_change : Proc(AppEvents*, View, Nodes, HRESULT)
-    on_context_menu_executed : Proc(AppEvents*, MenuItem, HRESULT)
-    on_toolbar_button_clicked : Proc(AppEvents*, HRESULT)
-    on_list_updated : Proc(AppEvents*, View, HRESULT)
   end
 
   struct AppEvents
     lpVtbl : AppEventsVTbl*
   end
 
-  struct AppEventsVTbl
-    query_interface : Proc(AppEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AppEvents*, UInt32)
-    release : Proc(AppEvents*, UInt32)
-    get_type_info_count : Proc(AppEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(AppEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(AppEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(AppEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IEventConnectorVTbl
+    query_interface : Proc(IEventConnector*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IEventConnector*, UInt32)
+    release : Proc(IEventConnector*, UInt32)
+    get_type_info_count : Proc(IEventConnector*, UInt32*, HRESULT)
+    get_type_info : Proc(IEventConnector*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IEventConnector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IEventConnector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    connect_to : Proc(IEventConnector*, Application, HRESULT)
+    disconnect : Proc(IEventConnector*, HRESULT)
   end
 
-  struct AppEvents
-    lpVtbl : AppEventsVTbl*
-  end
-
-  struct EventConnectorVTbl
-    query_interface : Proc(EventConnector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(EventConnector*, UInt32)
-    release : Proc(EventConnector*, UInt32)
-    get_type_info_count : Proc(EventConnector*, UInt32*, HRESULT)
-    get_type_info : Proc(EventConnector*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(EventConnector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(EventConnector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connect_to : Proc(EventConnector*, Application, HRESULT)
-    disconnect : Proc(EventConnector*, HRESULT)
-  end
-
-  struct EventConnector
-    lpVtbl : EventConnectorVTbl*
+  struct IEventConnector
+    lpVtbl : IEventConnectorVTbl*
   end
 
   struct FrameVTbl

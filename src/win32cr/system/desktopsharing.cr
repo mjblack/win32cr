@@ -734,18 +734,18 @@ lib LibWin32
     lpVtbl : IRDPSRAPISharingSession2VTbl*
   end
 
-  struct IRDPSessionEventsVTbl
-    query_interface : Proc(IRDPSessionEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRDPSessionEvents*, UInt32)
-    release : Proc(IRDPSessionEvents*, UInt32)
-    get_type_info_count : Proc(IRDPSessionEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IRDPSessionEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IRDPSessionEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IRDPSessionEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIRDPSessionEventsVTbl
+    query_interface : Proc(IIRDPSessionEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIRDPSessionEvents*, UInt32)
+    release : Proc(IIRDPSessionEvents*, UInt32)
+    get_type_info_count : Proc(IIRDPSessionEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIRDPSessionEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIRDPSessionEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIRDPSessionEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IRDPSessionEvents
-    lpVtbl : IRDPSessionEventsVTbl*
+  struct IIRDPSessionEvents
+    lpVtbl : IIRDPSessionEventsVTbl*
   end
 
 end

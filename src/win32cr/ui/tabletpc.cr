@@ -2028,18 +2028,18 @@ lib LibWin32
     lpVtbl : IInkCustomStrokesVTbl*
   end
 
-  struct IInkStrokesEventsVTbl
-    query_interface : Proc(IInkStrokesEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInkStrokesEvents*, UInt32)
-    release : Proc(IInkStrokesEvents*, UInt32)
-    get_type_info_count : Proc(IInkStrokesEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IInkStrokesEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IInkStrokesEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IInkStrokesEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIInkStrokesEventsVTbl
+    query_interface : Proc(IIInkStrokesEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIInkStrokesEvents*, UInt32)
+    release : Proc(IIInkStrokesEvents*, UInt32)
+    get_type_info_count : Proc(IIInkStrokesEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIInkStrokesEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIInkStrokesEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIInkStrokesEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IInkStrokesEvents
-    lpVtbl : IInkStrokesEventsVTbl*
+  struct IIInkStrokesEvents
+    lpVtbl : IIInkStrokesEventsVTbl*
   end
 
   struct IInkDispVTbl
@@ -2081,18 +2081,18 @@ lib LibWin32
     lpVtbl : IInkDispVTbl*
   end
 
-  struct IInkEventsVTbl
-    query_interface : Proc(IInkEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInkEvents*, UInt32)
-    release : Proc(IInkEvents*, UInt32)
-    get_type_info_count : Proc(IInkEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IInkEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IInkEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IInkEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIInkEventsVTbl
+    query_interface : Proc(IIInkEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIInkEvents*, UInt32)
+    release : Proc(IIInkEvents*, UInt32)
+    get_type_info_count : Proc(IIInkEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIInkEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIInkEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIInkEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IInkEvents
-    lpVtbl : IInkEventsVTbl*
+  struct IIInkEvents
+    lpVtbl : IIInkEventsVTbl*
   end
 
   struct IInkRendererVTbl
@@ -2178,18 +2178,18 @@ lib LibWin32
     lpVtbl : IInkCollectorVTbl*
   end
 
-  struct IInkCollectorEventsVTbl
-    query_interface : Proc(IInkCollectorEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInkCollectorEvents*, UInt32)
-    release : Proc(IInkCollectorEvents*, UInt32)
-    get_type_info_count : Proc(IInkCollectorEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IInkCollectorEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IInkCollectorEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IInkCollectorEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIInkCollectorEventsVTbl
+    query_interface : Proc(IIInkCollectorEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIInkCollectorEvents*, UInt32)
+    release : Proc(IIInkCollectorEvents*, UInt32)
+    get_type_info_count : Proc(IIInkCollectorEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIInkCollectorEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIInkCollectorEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIInkCollectorEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IInkCollectorEvents
-    lpVtbl : IInkCollectorEventsVTbl*
+  struct IIInkCollectorEvents
+    lpVtbl : IIInkCollectorEventsVTbl*
   end
 
   struct IInkOverlayVTbl
@@ -2260,18 +2260,18 @@ lib LibWin32
     lpVtbl : IInkOverlayVTbl*
   end
 
-  struct IInkOverlayEventsVTbl
-    query_interface : Proc(IInkOverlayEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInkOverlayEvents*, UInt32)
-    release : Proc(IInkOverlayEvents*, UInt32)
-    get_type_info_count : Proc(IInkOverlayEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IInkOverlayEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IInkOverlayEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IInkOverlayEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIInkOverlayEventsVTbl
+    query_interface : Proc(IIInkOverlayEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIInkOverlayEvents*, UInt32)
+    release : Proc(IIInkOverlayEvents*, UInt32)
+    get_type_info_count : Proc(IIInkOverlayEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIInkOverlayEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIInkOverlayEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIInkOverlayEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IInkOverlayEvents
-    lpVtbl : IInkOverlayEventsVTbl*
+  struct IIInkOverlayEvents
+    lpVtbl : IIInkOverlayEventsVTbl*
   end
 
   struct IInkPictureVTbl
@@ -2347,18 +2347,18 @@ lib LibWin32
     lpVtbl : IInkPictureVTbl*
   end
 
-  struct IInkPictureEventsVTbl
-    query_interface : Proc(IInkPictureEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInkPictureEvents*, UInt32)
-    release : Proc(IInkPictureEvents*, UInt32)
-    get_type_info_count : Proc(IInkPictureEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IInkPictureEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IInkPictureEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IInkPictureEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIInkPictureEventsVTbl
+    query_interface : Proc(IIInkPictureEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIInkPictureEvents*, UInt32)
+    release : Proc(IIInkPictureEvents*, UInt32)
+    get_type_info_count : Proc(IIInkPictureEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIInkPictureEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIInkPictureEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIInkPictureEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IInkPictureEvents
-    lpVtbl : IInkPictureEventsVTbl*
+  struct IIInkPictureEvents
+    lpVtbl : IIInkPictureEventsVTbl*
   end
 
   struct IInkRecognizerVTbl
@@ -2416,18 +2416,18 @@ lib LibWin32
     lpVtbl : IInkRecognizersVTbl*
   end
 
-  struct IInkRecognitionEventsVTbl
-    query_interface : Proc(IInkRecognitionEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInkRecognitionEvents*, UInt32)
-    release : Proc(IInkRecognitionEvents*, UInt32)
-    get_type_info_count : Proc(IInkRecognitionEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IInkRecognitionEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IInkRecognitionEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IInkRecognitionEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIInkRecognitionEventsVTbl
+    query_interface : Proc(IIInkRecognitionEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIInkRecognitionEvents*, UInt32)
+    release : Proc(IIInkRecognitionEvents*, UInt32)
+    get_type_info_count : Proc(IIInkRecognitionEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIInkRecognitionEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIInkRecognitionEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIInkRecognitionEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IInkRecognitionEvents
-    lpVtbl : IInkRecognitionEventsVTbl*
+  struct IIInkRecognitionEvents
+    lpVtbl : IIInkRecognitionEventsVTbl*
   end
 
   struct IInkRecognizerContextVTbl
@@ -2765,18 +2765,18 @@ lib LibWin32
     lpVtbl : IPenInputPanelVTbl*
   end
 
-  struct IPenInputPanelEventsVTbl
-    query_interface : Proc(IPenInputPanelEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPenInputPanelEvents*, UInt32)
-    release : Proc(IPenInputPanelEvents*, UInt32)
-    get_type_info_count : Proc(IPenInputPanelEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IPenInputPanelEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IPenInputPanelEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IPenInputPanelEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIPenInputPanelEventsVTbl
+    query_interface : Proc(IIPenInputPanelEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIPenInputPanelEvents*, UInt32)
+    release : Proc(IIPenInputPanelEvents*, UInt32)
+    get_type_info_count : Proc(IIPenInputPanelEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIPenInputPanelEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIPenInputPanelEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIPenInputPanelEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IPenInputPanelEvents
-    lpVtbl : IPenInputPanelEventsVTbl*
+  struct IIPenInputPanelEvents
+    lpVtbl : IIPenInputPanelEventsVTbl*
   end
 
   struct IHandwrittenTextInsertionVTbl
@@ -2964,18 +2964,18 @@ lib LibWin32
     lpVtbl : IInkEditVTbl*
   end
 
-  struct IInkEditEventsVTbl
-    query_interface : Proc(IInkEditEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInkEditEvents*, UInt32)
-    release : Proc(IInkEditEvents*, UInt32)
-    get_type_info_count : Proc(IInkEditEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IInkEditEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IInkEditEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IInkEditEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIInkEditEventsVTbl
+    query_interface : Proc(IIInkEditEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIInkEditEvents*, UInt32)
+    release : Proc(IIInkEditEvents*, UInt32)
+    get_type_info_count : Proc(IIInkEditEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIInkEditEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIInkEditEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIInkEditEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IInkEditEvents
-    lpVtbl : IInkEditEventsVTbl*
+  struct IIInkEditEvents
+    lpVtbl : IIInkEditEventsVTbl*
   end
 
   struct IMathInputControlVTbl
@@ -3009,18 +3009,18 @@ lib LibWin32
     lpVtbl : IMathInputControlVTbl*
   end
 
-  struct IMathInputControlEventsVTbl
-    query_interface : Proc(IMathInputControlEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMathInputControlEvents*, UInt32)
-    release : Proc(IMathInputControlEvents*, UInt32)
-    get_type_info_count : Proc(IMathInputControlEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IMathInputControlEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMathInputControlEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMathInputControlEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIMathInputControlEventsVTbl
+    query_interface : Proc(IIMathInputControlEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIMathInputControlEvents*, UInt32)
+    release : Proc(IIMathInputControlEvents*, UInt32)
+    get_type_info_count : Proc(IIMathInputControlEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIMathInputControlEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIMathInputControlEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIMathInputControlEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IMathInputControlEvents
-    lpVtbl : IMathInputControlEventsVTbl*
+  struct IIMathInputControlEvents
+    lpVtbl : IIMathInputControlEventsVTbl*
   end
 
   struct IRealTimeStylusVTbl

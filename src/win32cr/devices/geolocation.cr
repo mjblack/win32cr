@@ -888,32 +888,32 @@ lib LibWin32
     lpVtbl : ICivicAddressReportFactoryVTbl*
   end
 
-  struct ILatLongReportFactoryEventsVTbl
-    query_interface : Proc(ILatLongReportFactoryEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILatLongReportFactoryEvents*, UInt32)
-    release : Proc(ILatLongReportFactoryEvents*, UInt32)
-    get_type_info_count : Proc(ILatLongReportFactoryEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(ILatLongReportFactoryEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ILatLongReportFactoryEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ILatLongReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IILatLongReportFactoryEventsVTbl
+    query_interface : Proc(IILatLongReportFactoryEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IILatLongReportFactoryEvents*, UInt32)
+    release : Proc(IILatLongReportFactoryEvents*, UInt32)
+    get_type_info_count : Proc(IILatLongReportFactoryEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IILatLongReportFactoryEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IILatLongReportFactoryEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IILatLongReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct ILatLongReportFactoryEvents
-    lpVtbl : ILatLongReportFactoryEventsVTbl*
+  struct IILatLongReportFactoryEvents
+    lpVtbl : IILatLongReportFactoryEventsVTbl*
   end
 
-  struct ICivicAddressReportFactoryEventsVTbl
-    query_interface : Proc(ICivicAddressReportFactoryEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICivicAddressReportFactoryEvents*, UInt32)
-    release : Proc(ICivicAddressReportFactoryEvents*, UInt32)
-    get_type_info_count : Proc(ICivicAddressReportFactoryEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(ICivicAddressReportFactoryEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICivicAddressReportFactoryEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICivicAddressReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IICivicAddressReportFactoryEventsVTbl
+    query_interface : Proc(IICivicAddressReportFactoryEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IICivicAddressReportFactoryEvents*, UInt32)
+    release : Proc(IICivicAddressReportFactoryEvents*, UInt32)
+    get_type_info_count : Proc(IICivicAddressReportFactoryEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IICivicAddressReportFactoryEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IICivicAddressReportFactoryEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IICivicAddressReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct ICivicAddressReportFactoryEvents
-    lpVtbl : ICivicAddressReportFactoryEventsVTbl*
+  struct IICivicAddressReportFactoryEvents
+    lpVtbl : IICivicAddressReportFactoryEventsVTbl*
   end
 
 end
