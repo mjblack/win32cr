@@ -1,10 +1,18 @@
 require "../system/com.cr"
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:deviceaccess.dll")]
+{% else %}
+@[Link("deviceaccess")]
+{% end %}
 lib LibWin32
   ED_BASE = 4096_i32
   DEV_PORT_SIM = 1_u32

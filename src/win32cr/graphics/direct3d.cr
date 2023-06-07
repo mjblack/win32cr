@@ -1,9 +1,16 @@
 require "../foundation.cr"
 require "../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   D3D_FL9_1_REQ_TEXTURE1D_U_DIMENSION = 2048_u32
   D3D_FL9_3_REQ_TEXTURE1D_U_DIMENSION = 4096_u32

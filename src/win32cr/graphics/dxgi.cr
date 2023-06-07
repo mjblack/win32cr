@@ -4,10 +4,18 @@ require "../graphics/gdi.cr"
 require "../system/com.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dxgi.dll")]
+{% else %}
+@[Link("dxgi")]
+{% end %}
 lib LibWin32
   DXGI_USAGE_SHADER_INPUT = 16_u32
   DXGI_USAGE_RENDER_TARGET_OUTPUT = 32_u32

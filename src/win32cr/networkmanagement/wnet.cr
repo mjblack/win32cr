@@ -1,11 +1,21 @@
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:mpr.dll")]
 @[Link(ldflags: "/DELAYLOAD:davclnt.dll")]
 @[Link(ldflags: "/DELAYLOAD:ntlanman.dll")]
+{% else %}
+@[Link("mpr")]
+@[Link("davclnt")]
+@[Link("ntlanman")]
+{% end %}
 lib LibWin32
   alias NetEnumHandle = LibC::IntPtrT
 

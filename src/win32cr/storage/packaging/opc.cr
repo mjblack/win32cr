@@ -3,9 +3,16 @@ require "../../foundation.cr"
 require "../../security/cryptography.cr"
 require "../../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   OPC_E_NONCONFORMING_URI = -2142175231_i32
   OPC_E_RELATIVE_URI_REQUIRED = -2142175230_i32

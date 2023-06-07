@@ -1,10 +1,18 @@
 require "../foundation.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
+{% else %}
+@[Link("advapi32")]
+{% end %}
 lib LibWin32
   SAFER_SCOPEID_MACHINE = 1_u32
   SAFER_SCOPEID_USER = 2_u32

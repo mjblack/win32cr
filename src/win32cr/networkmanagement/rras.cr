@@ -3,13 +3,24 @@ require "../foundation.cr"
 require "../security/cryptography.cr"
 require "../networkmanagement/iphelper.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:rasapi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:rasdlg.dll")]
 @[Link(ldflags: "/DELAYLOAD:mprapi.dll")]
 @[Link(ldflags: "/DELAYLOAD:rtm.dll")]
+{% else %}
+@[Link("rasapi32")]
+@[Link("rasdlg")]
+@[Link("mprapi")]
+@[Link("rtm")]
+{% end %}
 lib LibWin32
   alias HRASCONN = LibC::IntPtrT
 

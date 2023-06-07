@@ -3,9 +3,16 @@ require "../security.cr"
 require "../system/stationsanddesktops.cr"
 require "../ui/windowsandmessaging.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   WLX_VERSION_1_0 = 65536_u32
   WLX_VERSION_1_1 = 65537_u32

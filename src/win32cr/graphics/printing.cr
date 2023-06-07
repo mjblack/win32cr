@@ -10,14 +10,26 @@ require "../graphics/imaging.cr"
 require "../storage/xps.cr"
 require "../graphics/dxgi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:compstui.dll")]
 @[Link(ldflags: "/DELAYLOAD:winspool.dll")]
 @[Link(ldflags: "/DELAYLOAD:gdi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:spoolss.dll")]
 @[Link(ldflags: "/DELAYLOAD:mscms.dll")]
+{% else %}
+@[Link("compstui")]
+@[Link("winspool")]
+@[Link("gdi32")]
+@[Link("spoolss")]
+@[Link("mscms")]
+{% end %}
 lib LibWin32
   USB_PRINTER_INTERFACE_CLASSIC = 1_u32
   USB_PRINTER_INTERFACE_IPP = 2_u32

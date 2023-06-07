@@ -3,11 +3,20 @@ require "../foundation.cr"
 require "../system/com.cr"
 require "../system/threading.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:authz.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
+{% else %}
+@[Link("authz")]
+@[Link("advapi32")]
+{% end %}
 lib LibWin32
   alias AUTHZ_ACCESS_CHECK_RESULTS_HANDLE = LibC::IntPtrT
   alias AUTHZ_CLIENT_CONTEXT_HANDLE = LibC::IntPtrT

@@ -2,10 +2,18 @@ require "../system/diagnostics/debug.cr"
 require "../foundation.cr"
 require "../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:chakra.dll")]
+{% else %}
+@[Link("chakra")]
+{% end %}
 lib LibWin32
   JS_SOURCE_CONTEXT_NONE = 18446744073709551615_u64
 

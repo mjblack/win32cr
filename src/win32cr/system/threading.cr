@@ -4,13 +4,24 @@ require "../system/kernel.cr"
 require "../security.cr"
 require "../system/systeminformation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:vertdll.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-wow64-l1-1-1.dll")]
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
+{% else %}
+@[Link("vertdll")]
+@[Link("advapi32")]
+@[Link("onecore")]
+@[Link("user32")]
+{% end %}
 lib LibWin32
   alias TimerQueueHandle = LibC::IntPtrT
   alias PTP_POOL = LibC::IntPtrT

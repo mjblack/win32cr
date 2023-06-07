@@ -2,10 +2,18 @@ require "../foundation.cr"
 require "../security/cryptography.cr"
 require "../security/cryptography/sip.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wintrust.dll")]
+{% else %}
+@[Link("wintrust")]
+{% end %}
 lib LibWin32
   WINTRUST_MAX_HEADER_BYTES_TO_MAP_DEFAULT = 10485760_u32
   WINTRUST_MAX_HASH_BYTES_TO_MAP_DEFAULT = 1048576_u32

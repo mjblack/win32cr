@@ -3,10 +3,18 @@ require "../foundation.cr"
 require "../data/xml/msxml.cr"
 require "../storage/virtualdiskservice.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:vssapi.dll")]
+{% else %}
+@[Link("vssapi")]
+{% end %}
 lib LibWin32
   VSS_ASSOC_NO_MAX_SPACE = -1_i32
   VSS_ASSOC_REMOVE = 0_u32

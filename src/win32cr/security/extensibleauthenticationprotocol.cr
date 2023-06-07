@@ -2,11 +2,20 @@ require "../foundation.cr"
 require "../system/com.cr"
 require "../data/xml/msxml.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:eappcfg.dll")]
 @[Link(ldflags: "/DELAYLOAD:eappprxy.dll")]
+{% else %}
+@[Link("eappcfg")]
+@[Link("eappprxy")]
+{% end %}
 lib LibWin32
   FACILITY_EAP_MESSAGE = 2114_u32
   EAP_GROUP_MASK = 65280_i32

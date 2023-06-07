@@ -5,12 +5,22 @@ require "../system/systemservices.cr"
 require "../security.cr"
 require "../system/ole.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:ole32.dll")]
 @[Link(ldflags: "/DELAYLOAD:urlmon.dll")]
 @[Link(ldflags: "/DELAYLOAD:oleaut32.dll")]
+{% else %}
+@[Link("ole32")]
+@[Link("urlmon")]
+@[Link("oleaut32")]
+{% end %}
 lib LibWin32
   alias CO_MTA_USAGE_COOKIE = LibC::IntPtrT
   alias CO_DEVICE_CATALOG_COOKIE = LibC::IntPtrT

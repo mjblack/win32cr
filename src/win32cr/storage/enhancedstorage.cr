@@ -2,9 +2,16 @@ require "../foundation.cr"
 require "../system/com.cr"
 require "../devices/portabledevices.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   GUID_DEVINTERFACE_ENHANCED_STORAGE_SILO = "3897f6a4-fd35-4bc8-a0b7-5dbba36adafa"
   WPD_CATEGORY_ENHANCED_STORAGE = "91248166-b832-4ad4-baa4-7ca0b6b2798c"

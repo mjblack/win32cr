@@ -2,9 +2,14 @@ require "./graphics/gdi.cr"
 require "./foundation.cr"
 require "./system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:gdi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:normaliz.dll")]
 @[Link(ldflags: "/DELAYLOAD:elscore.dll")]
@@ -12,6 +17,15 @@ require "./system/com.cr"
 @[Link(ldflags: "/DELAYLOAD:icu.dll")]
 @[Link(ldflags: "/DELAYLOAD:bcp47mrm.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
+{% else %}
+@[Link("gdi32")]
+@[Link("normaliz")]
+@[Link("elscore")]
+@[Link("usp10")]
+@[Link("icu")]
+@[Link("bcp47mrm")]
+@[Link("advapi32")]
+{% end %}
 lib LibWin32
   alias HIMC = LibC::IntPtrT
   alias HIMCC = LibC::IntPtrT

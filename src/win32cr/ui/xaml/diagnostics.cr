@@ -3,10 +3,18 @@ require "../../system/com.cr"
 require "../../graphics/dxgi/common.cr"
 require "../../system/winrt.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:windows.ui.xaml.dll")]
+{% else %}
+@[Link("windows.ui.xaml")]
+{% end %}
 lib LibWin32
   E_UNKNOWNTYPE = -2144665560_i32
 

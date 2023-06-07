@@ -3,10 +3,18 @@ require "../../ui/controls.cr"
 require "../../graphics/gdi.cr"
 require "../../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:comdlg32.dll")]
+{% else %}
+@[Link("comdlg32")]
+{% end %}
 lib LibWin32
   OFN_SHAREFALLTHROUGH = 2_u32
   OFN_SHARENOWARN = 1_u32

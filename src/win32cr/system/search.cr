@@ -8,11 +8,20 @@ require "../system/distributedtransactioncoordinator.cr"
 require "../security/authorization.cr"
 require "../ui/shell/common.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:odbc32.dll")]
 @[Link(ldflags: "/DELAYLOAD:odbcbcp.dll")]
+{% else %}
+@[Link("odbc32")]
+@[Link("odbcbcp")]
+{% end %}
 lib LibWin32
   SI_TEMPORARY = 2147483648_u32
   SUBSINFO_ALLFLAGS = 61311_u32

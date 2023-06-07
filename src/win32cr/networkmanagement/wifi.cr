@@ -3,11 +3,20 @@ require "../foundation.cr"
 require "../security/extensibleauthenticationprotocol.cr"
 require "../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wlanapi.dll")]
 @[Link(ldflags: "/DELAYLOAD:wlanui.dll")]
+{% else %}
+@[Link("wlanapi")]
+@[Link("wlanui")]
+{% end %}
 lib LibWin32
   L2_REASON_CODE_DOT11_AC_BASE = 131072_u32
   L2_REASON_CODE_DOT11_MSM_BASE = 196608_u32

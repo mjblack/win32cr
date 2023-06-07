@@ -4,10 +4,15 @@ require "../system/com.cr"
 require "../system/io.cr"
 require "../system/windowsprogramming.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-file-fromapp-l1-1-0.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:onecoreuap.dll")]
 @[Link(ldflags: "/DELAYLOAD:version.dll")]
 @[Link(ldflags: "/DELAYLOAD:clfsw32.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
@@ -15,7 +20,16 @@ require "../system/windowsprogramming.cr"
 @[Link(ldflags: "/DELAYLOAD:txfw32.dll")]
 @[Link(ldflags: "/DELAYLOAD:ktmw32.dll")]
 @[Link(ldflags: "/DELAYLOAD:netapi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-ioring-l1-1-0.dll")]
+{% else %}
+@[Link("onecoreuap")]
+@[Link("version")]
+@[Link("clfsw32")]
+@[Link("advapi32")]
+@[Link("wofutil")]
+@[Link("txfw32")]
+@[Link("ktmw32")]
+@[Link("netapi32")]
+{% end %}
 lib LibWin32
   alias FindFileHandle = LibC::IntPtrT
   alias FindFileNameHandle = LibC::IntPtrT

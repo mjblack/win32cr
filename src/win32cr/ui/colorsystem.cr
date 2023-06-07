@@ -3,13 +3,24 @@ require "../foundation.cr"
 require "../system/com.cr"
 require "../ui/windowsandmessaging.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:gdi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:mscms.dll")]
 @[Link(ldflags: "/DELAYLOAD:icmui.dll")]
 @[Link(ldflags: "/DELAYLOAD:icm32.dll")]
+{% else %}
+@[Link("gdi32")]
+@[Link("mscms")]
+@[Link("icmui")]
+@[Link("icm32")]
+{% end %}
 lib LibWin32
   alias HCOLORSPACE = LibC::IntPtrT
 

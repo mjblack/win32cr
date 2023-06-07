@@ -15,10 +15,18 @@ require "../media/mediafoundation.cr"
 require "../system/diagnostics/etw.cr"
 require "../system/ole.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:quartz.dll")]
+{% else %}
+@[Link("quartz")]
+{% end %}
 lib LibWin32
   EC_SND_DEVICE_ERROR_BASE = 512_u32
   EC_SNDDEV_IN_ERROR = 512_u32

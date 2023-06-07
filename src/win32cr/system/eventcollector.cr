@@ -1,9 +1,17 @@
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wecapi.dll")]
+{% else %}
+@[Link("wecapi")]
+{% end %}
 lib LibWin32
   EC_VARIANT_TYPE_MASK = 127_u32
   EC_VARIANT_TYPE_ARRAY = 128_u32

@@ -5,9 +5,16 @@ require "../system/ole.cr"
 require "../graphics/gdi.cr"
 require "../ui/windowsandmessaging.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   CLSID_XFeedsManager = "fe6b11c3-c72e-4061-86c6-9d163121f229"
   WMPGC_FLAGS_ALLOW_PREROLL = 1_u32

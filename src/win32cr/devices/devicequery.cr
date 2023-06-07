@@ -1,11 +1,18 @@
 require "../devices/properties.cr"
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-devices-query-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-devices-query-l1-1-1.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:cfgmgr32.dll")]
+{% else %}
+@[Link("cfgmgr32")]
+{% end %}
 lib LibWin32
   alias PDEV_QUERY_RESULT_CALLBACK = Proc(HDEVQUERY__*, Void*, DEV_QUERY_RESULT_ACTION_DATA*, Void)
 

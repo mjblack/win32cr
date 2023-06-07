@@ -2,12 +2,22 @@ require "../foundation.cr"
 require "../system/com.cr"
 require "../system/registry.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dinput8.dll")]
 @[Link(ldflags: "/DELAYLOAD:winmm.dll")]
 @[Link(ldflags: "/DELAYLOAD:hid.dll")]
+{% else %}
+@[Link("dinput8")]
+@[Link("winmm")]
+@[Link("hid")]
+{% end %}
 lib LibWin32
   DIRECTINPUT_VERSION = 2048_u32
   JOY_HW_NONE = 0_u32

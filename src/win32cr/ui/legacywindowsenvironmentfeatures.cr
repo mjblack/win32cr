@@ -4,9 +4,16 @@ require "../system/registry.cr"
 require "../system/com/structuredstorage.cr"
 require "../system/ole.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   EVCF_HASSETTINGS = 1_u32
   EVCF_ENABLEBYDEFAULT = 2_u32

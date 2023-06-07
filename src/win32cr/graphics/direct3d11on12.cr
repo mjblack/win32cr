@@ -4,10 +4,18 @@ require "../graphics/direct3d.cr"
 require "../graphics/direct3d11.cr"
 require "../graphics/direct3d12.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:d3d11.dll")]
+{% else %}
+@[Link("d3d11")]
+{% end %}
 lib LibWin32
   alias PFN_D3D11ON12_CREATE_DEVICE = Proc(IUnknown, UInt32, D3D_FEATURE_LEVEL*, UInt32, IUnknown*, UInt32, UInt32, ID3D11Device*, ID3D11DeviceContext*, D3D_FEATURE_LEVEL*, HRESULT)
 

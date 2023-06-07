@@ -9,10 +9,18 @@ require "../graphics/dxgi/common.cr"
 require "../storage/xps/printing.cr"
 require "../graphics/direct3d.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:d2d1.dll")]
+{% else %}
+@[Link("d2d1")]
+{% end %}
 lib LibWin32
   D2D1_DEFAULT_FLATTENING_TOLERANCE = "0.25_f32"
   CLSID_D2D12DAffineTransform = "6aa97485-6354-4cfc-908c-e4a74f62c96c"

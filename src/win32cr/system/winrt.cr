@@ -3,21 +3,26 @@ require "../foundation.cr"
 require "../ui/shell/propertiessystem.cr"
 require "../system/com/marshal.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:ole32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-winrt-string-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-winrt-string-l1-1-1.dll")]
+@[Link(ldflags: "/DELAYLOAD:strmbase.dll")]
 @[Link(ldflags: "/DELAYLOAD:coremessaging.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-winrt-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-winrt-robuffer-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-winrt-error-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-winrt-error-l1-1-1.dll")]
 @[Link(ldflags: "/DELAYLOAD:rometadata.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-winrt-roparameterizediid-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-winrt-registration-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-shcore-stream-winrt-l1-1-0.dll")]
+@[Link(ldflags: "/DELAYLOAD:shcore.dll")]
+{% else %}
+@[Link("ole32")]
+@[Link("strmbase")]
+@[Link("coremessaging")]
+@[Link("rometadata")]
+@[Link("shcore")]
+{% end %}
 lib LibWin32
   alias HSTRING = LibC::IntPtrT
   alias HSTRING_BUFFER = LibC::IntPtrT

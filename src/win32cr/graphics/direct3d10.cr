@@ -4,11 +4,20 @@ require "../system/com.cr"
 require "../graphics/direct3d.cr"
 require "../graphics/dxgi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:d3d10.dll")]
 @[Link(ldflags: "/DELAYLOAD:d3d10_1.dll")]
+{% else %}
+@[Link("d3d10")]
+@[Link("d3d10_1")]
+{% end %}
 lib LibWin32
   D3D10_16BIT_INDEX_STRIP_CUT_VALUE = 65535_u32
   D3D10_32BIT_INDEX_STRIP_CUT_VALUE = 4294967295_u32

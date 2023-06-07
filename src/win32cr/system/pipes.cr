@@ -3,10 +3,18 @@ require "../security.cr"
 require "../system/io.cr"
 require "../storage/filesystem.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
+{% else %}
+@[Link("advapi32")]
+{% end %}
 lib LibWin32
   PIPE_UNLIMITED_INSTANCES = 255_u32
   NMPWAIT_WAIT_FOREVER = 4294967295_u32

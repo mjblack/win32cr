@@ -5,22 +5,32 @@ require "../security.cr"
 require "../graphics/gdi.cr"
 require "../system/registry.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-apiquery-l2-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-realtime-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-realtime-l1-1-2.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-backgroundtask-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-featurestaging-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-featurestaging-l1-1-1.dll")]
+@[Link(ldflags: "/DELAYLOAD:shcore.dll")]
 @[Link(ldflags: "/DELAYLOAD:dciman32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-dx-d3dkmt-l1-1-0.dll")]
+@[Link(ldflags: "/DELAYLOAD:gdi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:advpack.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
-@[Link(ldflags: "/DELAYLOAD:apphelp.dll")]
 @[Link(ldflags: "/DELAYLOAD:wldp.dll")]
+{% else %}
+@[Link("onecore")]
+@[Link("advapi32")]
+@[Link("shcore")]
+@[Link("dciman32")]
+@[Link("gdi32")]
+@[Link("advpack")]
+@[Link("user32")]
+@[Link("wldp")]
+{% end %}
 lib LibWin32
   alias HWINWATCH = LibC::IntPtrT
   alias FEATURE_STATE_CHANGE_SUBSCRIPTION = LibC::IntPtrT

@@ -1,10 +1,18 @@
 require "../foundation.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:netapi32.dll")]
+{% else %}
+@[Link("netapi32")]
+{% end %}
 lib LibWin32
   FSCTL_DFS_BASE = 6_u32
   DFS_VOLUME_STATES = 15_u32

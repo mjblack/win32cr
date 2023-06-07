@@ -2,10 +2,18 @@ require "../../foundation.cr"
 require "../../security/cryptography/sip.cr"
 require "../../security/cryptography.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wintrust.dll")]
+{% else %}
+@[Link("wintrust")]
+{% end %}
 lib LibWin32
   CRYPTCAT_MAX_MEMBERTAG = 64_u32
   CRYPTCAT_MEMBER_SORTED = 1073741824_u32

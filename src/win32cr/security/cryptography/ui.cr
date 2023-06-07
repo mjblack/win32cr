@@ -3,10 +3,18 @@ require "../../security/cryptography.cr"
 require "../../ui/controls.cr"
 require "../../security/wintrust.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:cryptui.dll")]
+{% else %}
+@[Link("cryptui")]
+{% end %}
 lib LibWin32
   CRYTPDLG_FLAGS_MASK = 4278190080_u32
   CRYPTDLG_REVOCATION_DEFAULT = 0_u32

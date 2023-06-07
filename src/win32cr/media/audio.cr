@@ -6,14 +6,26 @@ require "../system/com/structuredstorage.cr"
 require "../ui/shell/propertiessystem.cr"
 require "../ui/windowsandmessaging.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:ole32.dll")]
 @[Link(ldflags: "/DELAYLOAD:winmm.dll")]
 @[Link(ldflags: "/DELAYLOAD:mmdevapi.dll")]
 @[Link(ldflags: "/DELAYLOAD:windows.media.mediacontrol.dll")]
 @[Link(ldflags: "/DELAYLOAD:msacm32.dll")]
+{% else %}
+@[Link("ole32")]
+@[Link("winmm")]
+@[Link("mmdevapi")]
+@[Link("windows.media.mediacontrol")]
+@[Link("msacm32")]
+{% end %}
 lib LibWin32
   alias HMIDI = LibC::IntPtrT
   alias HMIDIIN = LibC::IntPtrT

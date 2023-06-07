@@ -2,11 +2,20 @@ require "../foundation.cr"
 require "../system/com.cr"
 require "../system/com/structuredstorage.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:rtm.dll")]
 @[Link(ldflags: "/DELAYLOAD:mapi32.dll")]
+{% else %}
+@[Link("rtm")]
+@[Link("mapi32")]
+{% end %}
 lib LibWin32
   PROP_ID_SECURE_MIN = 26608_u32
   PROP_ID_SECURE_MAX = 26623_u32

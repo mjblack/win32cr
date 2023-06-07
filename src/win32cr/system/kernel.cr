@@ -1,9 +1,16 @@
 require "../foundation.cr"
 require "../system/diagnostics/debug.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   OBJ_HANDLE_TAGBITS = 3_i32
   RTL_BALANCED_NODE_RESERVED_PARENT_MASK = 3_u32

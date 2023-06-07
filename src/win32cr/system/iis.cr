@@ -2,10 +2,18 @@ require "../foundation.cr"
 require "../system/com.cr"
 require "../security/cryptography.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:rpcproxy.dll")]
+{% else %}
+@[Link("rpcproxy")]
+{% end %}
 lib LibWin32
   ADMINDATA_MAX_NAME_LEN = 256_u32
   CLSID_MSAdminBase_W = "a9e69610-b80d-11d0-b9b9-00a0c922e750"

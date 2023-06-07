@@ -4,10 +4,18 @@ require "../graphics/direct2d/common.cr"
 require "../graphics/gdi.cr"
 require "../globalization.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dwrite.dll")]
+{% else %}
+@[Link("dwrite")]
+{% end %}
 lib LibWin32
   DWRITE_ALPHA_MAX = 255_u32
   FACILITY_DWRITE = 2200_u32

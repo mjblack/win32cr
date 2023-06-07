@@ -3,10 +3,18 @@ require "../foundation.cr"
 require "../system/com.cr"
 require "../graphics/gdi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:d3d9.dll")]
+{% else %}
+@[Link("d3d9")]
+{% end %}
 lib LibWin32
   D3DRTYPECOUNT = 8_u32
   D3DCS_LEFT = 1_i32

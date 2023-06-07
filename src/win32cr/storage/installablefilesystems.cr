@@ -2,10 +2,18 @@ require "../foundation.cr"
 require "../security.cr"
 require "../system/io.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:fltlib.dll")]
+{% else %}
+@[Link("fltlib")]
+{% end %}
 lib LibWin32
   alias HFILTER = LibC::IntPtrT
   alias HFILTER_INSTANCE = LibC::IntPtrT

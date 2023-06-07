@@ -1,10 +1,18 @@
 require "../../system/com.cr"
 require "../../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:xmllite.dll")]
+{% else %}
+@[Link("xmllite")]
+{% end %}
 lib LibWin32
   IID_IXmlReader = "7279fc81-709d-4095-b63d-69fe4b0d9030"
   IID_IXmlWriter = "7279fc88-709d-4095-b63d-69fe4b0d9030"

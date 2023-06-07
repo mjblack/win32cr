@@ -4,14 +4,26 @@ require "../system/windowsprogramming.cr"
 require "../system/registry.cr"
 require "../security/cryptography.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:msi.dll")]
 @[Link(ldflags: "/DELAYLOAD:sfc.dll")]
 @[Link(ldflags: "/DELAYLOAD:mspatchc.dll")]
 @[Link(ldflags: "/DELAYLOAD:mspatcha.dll")]
 @[Link(ldflags: "/DELAYLOAD:msdelta.dll")]
+{% else %}
+@[Link("msi")]
+@[Link("sfc")]
+@[Link("mspatchc")]
+@[Link("mspatcha")]
+@[Link("msdelta")]
+{% end %}
 lib LibWin32
   alias MSIHANDLE = UInt32
 

@@ -4,9 +4,16 @@ require "../system/registry.cr"
 require "../media/audio.cr"
 require "../system/com/urlmon.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   SP_LOW_CONFIDENCE = -1_i32
   SP_NORMAL_CONFIDENCE = 0_u32

@@ -2,10 +2,18 @@ require "../foundation.cr"
 require "../security/authentication/identity.cr"
 require "../security/cryptography.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wldap32.dll")]
+{% else %}
+@[Link("wldap32")]
+{% end %}
 lib LibWin32
   LBER_ERROR = -1_i32
   LBER_DEFAULT = -1_i32

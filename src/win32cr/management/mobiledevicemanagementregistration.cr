@@ -1,10 +1,19 @@
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:mdmregistration.dll")]
 @[Link(ldflags: "/DELAYLOAD:mdmlocalmanagement.dll")]
+{% else %}
+@[Link("mdmregistration")]
+@[Link("mdmlocalmanagement")]
+{% end %}
 lib LibWin32
   MENROLL_E_DEVICE_MESSAGE_FORMAT_ERROR = -2145910783_i32
   MENROLL_E_DEVICE_AUTHENTICATION_ERROR = -2145910782_i32

@@ -7,12 +7,22 @@ require "../ui/windowsandmessaging.cr"
 require "../graphics/gdi.cr"
 require "../data/htmlhelp.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:setupapi.dll")]
 @[Link(ldflags: "/DELAYLOAD:cfgmgr32.dll")]
 @[Link(ldflags: "/DELAYLOAD:newdev.dll")]
+{% else %}
+@[Link("setupapi")]
+@[Link("cfgmgr32")]
+@[Link("newdev")]
+{% end %}
 lib LibWin32
   alias HCMNOTIFICATION = LibC::IntPtrT
 

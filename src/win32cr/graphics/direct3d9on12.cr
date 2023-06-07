@@ -3,10 +3,18 @@ require "../system/com.cr"
 require "../graphics/direct3d9.cr"
 require "../graphics/direct3d12.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:d3d9.dll")]
+{% else %}
+@[Link("d3d9")]
+{% end %}
 lib LibWin32
   MAX_D3D9ON12_QUEUES = 2_u32
 

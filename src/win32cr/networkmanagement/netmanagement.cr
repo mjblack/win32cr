@@ -5,12 +5,22 @@ require "../system/com.cr"
 require "../system/registry.cr"
 require "../data/xml/msxml.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:netapi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:mstask.dll")]
 @[Link(ldflags: "/DELAYLOAD:rtutils.dll")]
+{% else %}
+@[Link("netapi32")]
+@[Link("mstask")]
+@[Link("rtutils")]
+{% end %}
 lib LibWin32
   NERR_BASE = 2100_u32
   NERR_PasswordExpired = 2242_u32

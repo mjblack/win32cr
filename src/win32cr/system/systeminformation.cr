@@ -1,14 +1,18 @@
 require "../system/diagnostics/debug.cr"
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-sysinfo-l1-2-4.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-sysinfo-l1-2-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-sysinfo-l1-2-3.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-wow64-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:ntdllk.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
+{% else %}
+@[Link("onecore")]
+{% end %}
 lib LibWin32
   alias FIRMWARE_TABLE_ID = UInt32
 

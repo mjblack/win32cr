@@ -2,13 +2,18 @@ require "../foundation.cr"
 require "../security.cr"
 require "../system/registry.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-service-core-l1-1-3.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-service-core-l1-1-4.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-service-core-l1-1-5.dll")]
+{% else %}
+@[Link("advapi32")]
+{% end %}
 lib LibWin32
   alias SERVICE_STATUS_HANDLE = LibC::IntPtrT
 

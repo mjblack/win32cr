@@ -9,9 +9,14 @@ require "../../system/passwordmanagement.cr"
 require "../../system/com.cr"
 require "../../system/windowsprogramming.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:secur32.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:sspicli.dll")]
@@ -21,7 +26,19 @@ require "../../system/windowsprogramming.cr"
 @[Link(ldflags: "/DELAYLOAD:slc.dll")]
 @[Link(ldflags: "/DELAYLOAD:slcext.dll")]
 @[Link(ldflags: "/DELAYLOAD:slwga.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-slapi-l1-1-0.dll")]
+@[Link(ldflags: "/DELAYLOAD:clipc.dll")]
+{% else %}
+@[Link("secur32")]
+@[Link("advapi32")]
+@[Link("sspicli")]
+@[Link("credui")]
+@[Link("schannel")]
+@[Link("tokenbinding")]
+@[Link("slc")]
+@[Link("slcext")]
+@[Link("slwga")]
+@[Link("clipc")]
+{% end %}
 lib LibWin32
   alias LsaHandle = LibC::IntPtrT
 

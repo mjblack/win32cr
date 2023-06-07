@@ -1,11 +1,20 @@
 require "../foundation.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-state-helpers-l1-1-0.dll")]
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
+{% else %}
+@[Link("advapi32")]
+@[Link("onecore")]
+{% end %}
 lib LibWin32
   alias HKEY = LibC::IntPtrT
 

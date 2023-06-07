@@ -1,12 +1,22 @@
 require "../foundation.cr"
 require "../graphics/gdi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:uxtheme.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-shcore-scaling-l1-1-1.dll")]
+@[Link(ldflags: "/DELAYLOAD:shcore.dll")]
+{% else %}
+@[Link("uxtheme")]
+@[Link("user32")]
+@[Link("shcore")]
+{% end %}
 lib LibWin32
   alias DPI_AWARENESS_CONTEXT = LibC::IntPtrT
 
