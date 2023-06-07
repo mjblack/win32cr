@@ -3,11 +3,20 @@ require "../foundation.cr"
 require "../media/directshow.cr"
 require "../system/addressbook.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:tapi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:mapi32.dll")]
+{% else %}
+@[Link("tapi32")]
+@[Link("mapi32")]
+{% end %}
 lib LibWin32
   TAPI_CURRENT_VERSION = 131074_u32
   LINE_ADDRESSSTATE = 0_i32

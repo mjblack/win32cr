@@ -3,11 +3,20 @@ require "../foundation.cr"
 require "../system/io.cr"
 require "../security/cryptography.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:rpcrt4.dll")]
 @[Link(ldflags: "/DELAYLOAD:rpcns4.dll")]
+{% else %}
+@[Link("rpcrt4")]
+@[Link("rpcns4")]
+{% end %}
 lib LibWin32
   RPC_C_BINDING_INFINITE_TIMEOUT = 10_u32
   RPC_C_BINDING_MIN_TIMEOUT = 0_u32

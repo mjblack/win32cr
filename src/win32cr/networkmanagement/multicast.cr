@@ -1,9 +1,17 @@
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dhcpcsvc.dll")]
+{% else %}
+@[Link("dhcpcsvc")]
+{% end %}
 lib LibWin32
   MCAST_CLIENT_ID_LEN = 17_u32
   MCAST_API_CURRENT_VERSION = 1_i32

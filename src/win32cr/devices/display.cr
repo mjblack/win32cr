@@ -7,12 +7,22 @@ require "../ui/colorsystem.cr"
 require "../system/console.cr"
 require "../graphics/direct3d9.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dxva2.dll")]
 @[Link(ldflags: "/DELAYLOAD:gdi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
+{% else %}
+@[Link("dxva2")]
+@[Link("gdi32")]
+@[Link("user32")]
+{% end %}
 lib LibWin32
   alias HSEMAPHORE = LibC::IntPtrT
   alias HSURF = LibC::IntPtrT

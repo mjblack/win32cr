@@ -1,9 +1,16 @@
 require "../foundation.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
 
   # Params # lpname : PSTR [In],nmaxmessagesize : UInt32 [In],lreadtimeout : UInt32 [In],lpsecurityattributes : SECURITY_ATTRIBUTES* [In]

@@ -2,10 +2,18 @@ require "../../system/com.cr"
 require "../../foundation.cr"
 require "../../data/xml/msxml.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:urlmon.dll")]
+{% else %}
+@[Link("urlmon")]
+{% end %}
 lib LibWin32
   MKSYS_URLMONIKER = 6_u32
   URL_MK_LEGACY = 0_u32

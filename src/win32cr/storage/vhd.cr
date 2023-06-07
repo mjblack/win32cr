@@ -2,10 +2,18 @@ require "../foundation.cr"
 require "../security.cr"
 require "../system/io.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:virtdisk.dll")]
+{% else %}
+@[Link("virtdisk")]
+{% end %}
 lib LibWin32
   VIRTUAL_STORAGE_TYPE_VENDOR_UNKNOWN = "00000000-0000-0000-0000-000000000000"
   VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT = "ec984aec-a0f9-47e9-901f-71415a66345b"

@@ -3,11 +3,20 @@ require "../security/cryptography.cr"
 require "../security/authentication/identity.cr"
 require "../system/winrt.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:webservices.dll")]
 @[Link(ldflags: "/DELAYLOAD:webauthn.dll")]
+{% else %}
+@[Link("webservices")]
+@[Link("webauthn")]
+{% end %}
 lib LibWin32
   WEBAUTHN_API_VERSION_1 = 1_u32
   WEBAUTHN_API_VERSION_2 = 2_u32

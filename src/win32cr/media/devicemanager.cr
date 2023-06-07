@@ -3,9 +3,16 @@ require "../system/com/structuredstorage.cr"
 require "../system/com.cr"
 require "../system/ole.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   IOCTL_MTP_CUSTOM_COMMAND = 827348045_u32
   MTP_NEXTPHASE_READ_DATA = 1_u32

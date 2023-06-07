@@ -4,9 +4,16 @@ require "../system/com/structuredstorage.cr"
 require "../ui/windowsandmessaging.cr"
 require "../graphics/gdi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   WIA_DIP_DEV_ID = 2_u32
   WIA_DIP_VEND_DESC = 3_u32

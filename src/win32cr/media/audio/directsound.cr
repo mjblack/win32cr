@@ -3,10 +3,18 @@ require "../../graphics/direct3d.cr"
 require "../../foundation.cr"
 require "../../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dsound.dll")]
+{% else %}
+@[Link("dsound")]
+{% end %}
 lib LibWin32
   DIRECTSOUND_VERSION = 1792_u32
   FACDS = 2168_u32

@@ -6,12 +6,22 @@ require "../system/com.cr"
 require "../graphics/gdi.cr"
 require "../ui/windowsandmessaging.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:clusapi.dll")]
 @[Link(ldflags: "/DELAYLOAD:resutils.dll")]
 @[Link(ldflags: "/DELAYLOAD:ntlanman.dll")]
+{% else %}
+@[Link("clusapi")]
+@[Link("resutils")]
+@[Link("ntlanman")]
+{% end %}
 lib LibWin32
   CLUSTER_VERSION_FLAG_MIXED_MODE = 1_u32
   CLUSTER_VERSION_UNKNOWN = 4294967295_u32

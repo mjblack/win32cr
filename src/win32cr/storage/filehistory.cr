@@ -2,10 +2,18 @@ require "../system/com.cr"
 require "../foundation.cr"
 require "../system/windowsprogramming.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:fhsvcctl.dll")]
+{% else %}
+@[Link("fhsvcctl")]
+{% end %}
 lib LibWin32
   FHCFG_E_CORRUPT_CONFIG_FILE = -2147220736_i32
   FHCFG_E_CONFIG_FILE_NOT_FOUND = -2147220735_i32

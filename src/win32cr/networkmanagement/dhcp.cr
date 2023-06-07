@@ -1,11 +1,21 @@
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dhcpcsvc6.dll")]
 @[Link(ldflags: "/DELAYLOAD:dhcpcsvc.dll")]
 @[Link(ldflags: "/DELAYLOAD:dhcpsapi.dll")]
+{% else %}
+@[Link("dhcpcsvc6")]
+@[Link("dhcpcsvc")]
+@[Link("dhcpsapi")]
+{% end %}
 lib LibWin32
   OPTION_PAD = 0_u32
   OPTION_SUBNET_MASK = 1_u32

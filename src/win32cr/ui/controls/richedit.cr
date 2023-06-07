@@ -8,9 +8,16 @@ require "../../globalization.cr"
 require "../../graphics/direct2d.cr"
 require "../../system/com/structuredstorage.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   WM_CONTEXTMENU = 123_u32
   WM_UNICHAR = 265_u32

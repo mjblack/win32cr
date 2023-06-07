@@ -1,8 +1,15 @@
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   GUID_DEVINTERFACE_PWM_CONTROLLER = "60824b4c-eed1-4c9c-b49c-1b961461a819"
   IOCTL_PWM_CONTROLLER_GET_INFO = 262144_u32

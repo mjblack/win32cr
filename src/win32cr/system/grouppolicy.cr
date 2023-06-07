@@ -7,12 +7,22 @@ require "../ui/controls.cr"
 require "../security.cr"
 require "../ui/shell.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:userenv.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:gpedit.dll")]
+{% else %}
+@[Link("userenv")]
+@[Link("advapi32")]
+@[Link("gpedit")]
+{% end %}
 lib LibWin32
   alias CriticalPolicySectionHandle = LibC::IntPtrT
 

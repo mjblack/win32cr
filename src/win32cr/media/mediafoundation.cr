@@ -13,9 +13,14 @@ require "../system/winrt.cr"
 require "../devices/properties.cr"
 require "../media/directshow.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dxva2.dll")]
 @[Link(ldflags: "/DELAYLOAD:mfplat.dll")]
 @[Link(ldflags: "/DELAYLOAD:mf.dll")]
@@ -26,6 +31,18 @@ require "../media/directshow.cr"
 @[Link(ldflags: "/DELAYLOAD:mfreadwrite.dll")]
 @[Link(ldflags: "/DELAYLOAD:mfplay.dll")]
 @[Link(ldflags: "/DELAYLOAD:opmxbox.dll")]
+{% else %}
+@[Link("dxva2")]
+@[Link("mfplat")]
+@[Link("mf")]
+@[Link("mfsrcsnk")]
+@[Link("mfsensorgroup")]
+@[Link("mfcore")]
+@[Link("evr")]
+@[Link("mfreadwrite")]
+@[Link("mfplay")]
+@[Link("opmxbox")]
+{% end %}
 lib LibWin32
   MEDIASUBTYPE_None = "e436eb8e-524f-11ce-9f53-0020af0ba770"
   AVENC_H263V_LEVELCOUNT = 8_u32

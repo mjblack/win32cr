@@ -4,11 +4,20 @@ require "../../system/com/structuredstorage.cr"
 require "../../system/search/common.cr"
 require "../../ui/shell/common.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:propsys.dll")]
 @[Link(ldflags: "/DELAYLOAD:shell32.dll")]
+{% else %}
+@[Link("propsys")]
+@[Link("shell32")]
+{% end %}
 lib LibWin32
   PKEY_PIDSTR_MAX = 10_u32
   InMemoryPropertyStore = LibC::GUID.new(0x9a02e012_u32, 0x6303_u16, 0x4e1e_u16, StaticArray[0xb9_u8, 0xa1_u8, 0x63_u8, 0xf_u8, 0x80_u8, 0x25_u8, 0x92_u8, 0xc5_u8])

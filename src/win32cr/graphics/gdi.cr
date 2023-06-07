@@ -1,14 +1,27 @@
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:gdi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:msimg32.dll")]
 @[Link(ldflags: "/DELAYLOAD:opengl32.dll")]
 @[Link(ldflags: "/DELAYLOAD:fontsub.dll")]
 @[Link(ldflags: "/DELAYLOAD:t2embed.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
+{% else %}
+@[Link("gdi32")]
+@[Link("msimg32")]
+@[Link("opengl32")]
+@[Link("fontsub")]
+@[Link("t2embed")]
+@[Link("user32")]
+{% end %}
 lib LibWin32
   alias HDC = LibC::IntPtrT
   alias CreatedHDC = LibC::IntPtrT

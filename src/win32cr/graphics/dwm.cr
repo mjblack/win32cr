@@ -2,10 +2,18 @@ require "../foundation.cr"
 require "../graphics/gdi.cr"
 require "../ui/controls.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dwmapi.dll")]
+{% else %}
+@[Link("dwmapi")]
+{% end %}
 lib LibWin32
   DWM_BB_ENABLE = 1_u32
   DWM_BB_BLURREGION = 2_u32

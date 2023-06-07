@@ -1,11 +1,20 @@
 require "../foundation.cr"
 require "../system/diagnostics/debug.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wer.dll")]
 @[Link(ldflags: "/DELAYLOAD:faultrep.dll")]
+{% else %}
+@[Link("wer")]
+@[Link("faultrep")]
+{% end %}
 lib LibWin32
   alias HREPORT = LibC::IntPtrT
   alias HREPORTSTORE = LibC::IntPtrT

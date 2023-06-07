@@ -1,10 +1,18 @@
 require "../foundation.cr"
 require "../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:msdmo.dll")]
+{% else %}
+@[Link("msdmo")]
+{% end %}
 lib LibWin32
   DMO_E_INVALIDSTREAMINDEX = -2147220991_i32
   DMO_E_INVALIDTYPE = -2147220990_i32

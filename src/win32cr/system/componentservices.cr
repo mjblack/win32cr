@@ -2,12 +2,22 @@ require "../system/com.cr"
 require "../foundation.cr"
 require "../system/distributedtransactioncoordinator.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:ole32.dll")]
 @[Link(ldflags: "/DELAYLOAD:comsvcs.dll")]
 @[Link(ldflags: "/DELAYLOAD:mtxdm.dll")]
+{% else %}
+@[Link("ole32")]
+@[Link("comsvcs")]
+@[Link("mtxdm")]
+{% end %}
 lib LibWin32
   GUID_STRING_SIZE = 40_u32
   DATA_NOT_AVAILABLE = 4294967295_u32

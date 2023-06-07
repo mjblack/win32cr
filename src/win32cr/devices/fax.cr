@@ -5,12 +5,22 @@ require "../system/com.cr"
 require "../system/io.cr"
 require "../system/registry.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:winfax.dll")]
 @[Link(ldflags: "/DELAYLOAD:fxsutility.dll")]
 @[Link(ldflags: "/DELAYLOAD:sti.dll")]
+{% else %}
+@[Link("winfax")]
+@[Link("fxsutility")]
+@[Link("sti")]
+{% end %}
 lib LibWin32
   FS_INITIALIZING = 536870912_u32
   FS_DIALING = 536870913_u32

@@ -4,10 +4,18 @@ require "../system/ole.cr"
 require "../system/com/structuredstorage.cr"
 require "../system/addressbook.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:mapi32.dll")]
+{% else %}
+@[Link("mapi32")]
+{% end %}
 lib LibWin32
   IMAPI_SECTOR_SIZE = 2048_u32
   IMAPI2_DEFAULT_COMMAND_TIMEOUT = 10_u32

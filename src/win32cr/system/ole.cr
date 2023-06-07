@@ -7,13 +7,24 @@ require "../media.cr"
 require "../ui/controls/dialogs.cr"
 require "../ui/controls.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:oleaut32.dll")]
 @[Link(ldflags: "/DELAYLOAD:ole32.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-marshal-l1-1-0.dll")]
+@[Link(ldflags: "/DELAYLOAD:strmbase.dll")]
 @[Link(ldflags: "/DELAYLOAD:oledlg.dll")]
+{% else %}
+@[Link("oleaut32")]
+@[Link("ole32")]
+@[Link("strmbase")]
+@[Link("oledlg")]
+{% end %}
 lib LibWin32
   CTL_E_ILLEGALFUNCTIONCALL = -2146828283_i32
   CONNECT_E_FIRST = -2147220992_i32

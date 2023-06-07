@@ -3,13 +3,22 @@ require "../system/com.cr"
 require "../security.cr"
 require "../system/registry.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-security-isolatedcontainer-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-security-isolatedcontainer-l1-1-0.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:shcore.dll")]
 @[Link(ldflags: "/DELAYLOAD:isolatedwindowsenvironmentutils.dll")]
 @[Link(ldflags: "/DELAYLOAD:userenv.dll")]
+{% else %}
+@[Link("shcore")]
+@[Link("isolatedwindowsenvironmentutils")]
+@[Link("userenv")]
+{% end %}
 lib LibWin32
   IsolatedAppLauncher = LibC::GUID.new(0xbc812430_u32, 0xe75e_u16, 0x4fd1_u16, StaticArray[0x96_u8, 0x41_u8, 0x1f_u8, 0x9f_u8, 0x1e_u8, 0x2d_u8, 0x9a_u8, 0x1f_u8])
 

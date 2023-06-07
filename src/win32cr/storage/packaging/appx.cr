@@ -1,11 +1,18 @@
 require "../../foundation.cr"
 require "../../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-appmodel-runtime-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-appmodel-runtime-l1-1-3.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:kernel.appcore.dll")]
+{% else %}
+@[Link("kernel.appcore")]
+{% end %}
 lib LibWin32
   PACKAGE_PROPERTY_FRAMEWORK = 1_u32
   PACKAGE_PROPERTY_RESOURCE = 2_u32

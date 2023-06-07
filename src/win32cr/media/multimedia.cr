@@ -7,14 +7,22 @@ require "../ui/controls.cr"
 require "../system/io.cr"
 require "../ui/controls/dialogs.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:winmm.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-mm-misc-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:msvfw32.dll")]
+@[Link(ldflags: "/DELAYLOAD:vfw32.dll")]
 @[Link(ldflags: "/DELAYLOAD:avifil32.dll")]
-@[Link(ldflags: "/DELAYLOAD:avicap32.dll")]
+{% else %}
+@[Link("winmm")]
+@[Link("vfw32")]
+@[Link("avifil32")]
+{% end %}
 lib LibWin32
   alias HMMIO = LibC::IntPtrT
   alias HDRVR = LibC::IntPtrT

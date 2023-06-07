@@ -3,11 +3,20 @@ require "../graphics/gdi.cr"
 require "../ui/shell.cr"
 require "../system/power.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
 @[Link(ldflags: "/DELAYLOAD:mrmsupport.dll")]
+{% else %}
+@[Link("user32")]
+@[Link("mrmsupport")]
+{% end %}
 lib LibWin32
   alias HHOOK = HANDLE
   alias HICON = HANDLE

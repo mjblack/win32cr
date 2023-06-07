@@ -1,11 +1,20 @@
 require "../../foundation.cr"
 require "../../ui/textservices.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:comctl32.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
+{% else %}
+@[Link("comctl32")]
+@[Link("user32")]
+{% end %}
 lib LibWin32
   EXTENDED_BIT = 16777216_u32
   DONTCARE_BIT = 33554432_u32

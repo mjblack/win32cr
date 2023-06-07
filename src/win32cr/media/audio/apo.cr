@@ -3,9 +3,16 @@ require "../../foundation.cr"
 require "../../media/audio.cr"
 require "../../ui/shell/propertiessystem.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   APOERR_ALREADY_INITIALIZED = -2005073919_i32
   APOERR_NOT_INITIALIZED = -2005073918_i32

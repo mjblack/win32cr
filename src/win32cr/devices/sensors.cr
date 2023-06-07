@@ -4,10 +4,18 @@ require "../ui/shell/propertiessystem.cr"
 require "../system/com/structuredstorage.cr"
 require "../devices/portabledevices.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:sensorsutilsv2.dll")]
+{% else %}
+@[Link("sensorsutilsv2")]
+{% end %}
 lib LibWin32
   GUID_DEVINTERFACE_SENSOR = "ba1bb692-9b7a-4833-9a1e-525ed134e7e2"
   SENSOR_EVENT_STATE_CHANGED = "bfd96016-6bd7-4560-ad34-f2f6607e8f81"

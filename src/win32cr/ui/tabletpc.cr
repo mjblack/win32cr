@@ -4,10 +4,18 @@ require "../graphics/gdi.cr"
 require "../system/ole.cr"
 require "../ui/controls.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:inkobjcore.dll")]
+{% else %}
+@[Link("inkobjcore")]
+{% end %}
 lib LibWin32
   alias HRECOALT = LibC::IntPtrT
   alias HRECOCONTEXT = LibC::IntPtrT

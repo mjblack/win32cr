@@ -10,15 +10,28 @@ require "../security.cr"
 require "../networking/winsock.cr"
 require "../security/authentication/identity.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:activeds.dll")]
 @[Link(ldflags: "/DELAYLOAD:dsuiext.dll")]
 @[Link(ldflags: "/DELAYLOAD:dsprop.dll")]
 @[Link(ldflags: "/DELAYLOAD:dsparse.dll")]
 @[Link(ldflags: "/DELAYLOAD:ntdsapi.dll")]
 @[Link(ldflags: "/DELAYLOAD:netapi32.dll")]
+{% else %}
+@[Link("activeds")]
+@[Link("dsuiext")]
+@[Link("dsprop")]
+@[Link("dsparse")]
+@[Link("ntdsapi")]
+@[Link("netapi32")]
+{% end %}
 lib LibWin32
   alias GetDcContextHandle = LibC::IntPtrT
 

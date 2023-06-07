@@ -1,9 +1,16 @@
 require "../../foundation.cr"
 require "../../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   PERCEIVEDFLAG_UNDEFINED = 0_u32
   PERCEIVEDFLAG_SOFTCODED = 1_u32

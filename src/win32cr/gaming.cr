@@ -2,16 +2,18 @@ require "./system/com.cr"
 require "./foundation.cr"
 require "./system/winrt.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-gaming-expandedresources-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-gaming-deviceinformation-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-gaming-tcui-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-gaming-tcui-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-gaming-tcui-l1-1-2.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-gaming-tcui-l1-1-3.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-gaming-tcui-l1-1-4.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
+{% else %}
+@[Link("onecore")]
+{% end %}
 lib LibWin32
   GameExplorer = LibC::GUID.new(0x9a5ea990_u32, 0x3034_u16, 0x4d6f_u16, StaticArray[0x91_u8, 0x28_u8, 0x1_u8, 0xf3_u8, 0xc6_u8, 0x10_u8, 0x22_u8, 0xbc_u8])
   GameStatistics = LibC::GUID.new(0xdbc85a2c_u32, 0xc0dc_u16, 0x4961_u16, StaticArray[0xb6_u8, 0xe2_u8, 0xd2_u8, 0x8b_u8, 0x62_u8, 0xc1_u8, 0x1a_u8, 0xd4_u8])

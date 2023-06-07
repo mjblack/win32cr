@@ -3,10 +3,18 @@ require "../../graphics/direct3d.cr"
 require "../../graphics/direct3d11.cr"
 require "../../graphics/direct3d10.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:d3dcompiler_47.dll")]
+{% else %}
+@[Link("d3dcompiler_47")]
+{% end %}
 lib LibWin32
   D3D_COMPILER_VERSION = 47_u32
   D3DCOMPILE_DEBUG = 1_u32

@@ -2,11 +2,20 @@ require "../../foundation.cr"
 require "../../graphics/direct3d12.cr"
 require "../../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:winml.dll")]
 @[Link(ldflags: "/DELAYLOAD:windows.ai.machinelearning.dll")]
+{% else %}
+@[Link("winml")]
+@[Link("windows.ai.machinelearning")]
+{% end %}
 lib LibWin32
   WINML_TENSOR_DIMENSION_COUNT_MAX = 4_u32
 

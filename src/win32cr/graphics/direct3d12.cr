@@ -4,10 +4,18 @@ require "../system/com.cr"
 require "../graphics/direct3d.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:d3d12.dll")]
+{% else %}
+@[Link("d3d12")]
+{% end %}
 lib LibWin32
   D3D12_SHADER_COMPONENT_MAPPING_ALWAYS_SET_BIT_AVOIDING_ZEROMEM_MISTAKES = 4096_u32
   D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING = 5768_u32

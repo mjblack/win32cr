@@ -1,15 +1,18 @@
 require "../foundation.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-memory-l1-1-3.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-memory-l1-1-7.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-memory-l1-1-4.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-memory-l1-1-5.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-memory-l1-1-6.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-memory-l1-1-8.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
+{% else %}
+@[Link("onecore")]
+{% end %}
 lib LibWin32
   alias HeapHandle = LibC::IntPtrT
 

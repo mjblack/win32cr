@@ -2,14 +2,26 @@ require "../foundation.cr"
 require "../graphics/gdi.cr"
 require "../ui/windowsandmessaging.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:keycredmgr.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:credui.dll")]
 @[Link(ldflags: "/DELAYLOAD:winscard.dll")]
 @[Link(ldflags: "/DELAYLOAD:scarddlg.dll")]
+{% else %}
+@[Link("keycredmgr")]
+@[Link("advapi32")]
+@[Link("credui")]
+@[Link("winscard")]
+@[Link("scarddlg")]
+{% end %}
 lib LibWin32
   FILE_DEVICE_SMARTCARD = 49_u32
   GUID_DEVINTERFACE_SMARTCARD_READER = "50dd5230-ba8a-11d1-bf5d-0000f805f530"

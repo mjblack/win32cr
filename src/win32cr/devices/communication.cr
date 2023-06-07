@@ -1,11 +1,18 @@
 require "../foundation.cr"
 require "../system/io.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-comm-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-comm-l1-1-2.dll")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
+{% else %}
+@[Link("onecore")]
+{% end %}
 lib LibWin32
   MDM_COMPRESSION = 1_u32
   MDM_ERROR_CONTROL = 2_u32

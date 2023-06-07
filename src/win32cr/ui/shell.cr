@@ -19,23 +19,38 @@ require "../system/threading.cr"
 require "../graphics/directcomposition.cr"
 require "../system/com/urlmon.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:userenv.dll")]
 @[Link(ldflags: "/DELAYLOAD:comctl32.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
 @[Link(ldflags: "/DELAYLOAD:shell32.dll")]
 @[Link(ldflags: "/DELAYLOAD:ole32.dll")]
 @[Link(ldflags: "/DELAYLOAD:shdocvw.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-shcore-scaling-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-shcore-scaling-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-shcore-scaling-l1-1-2.dll")]
+@[Link(ldflags: "/DELAYLOAD:shcore.dll")]
 @[Link(ldflags: "/DELAYLOAD:shlwapi.dll")]
 @[Link(ldflags: "/DELAYLOAD:hlink.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-path-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-psm-appnotify-l1-1-0.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-psm-appnotify-l1-1-1.dll")]
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
+@[Link(ldflags: "/DELAYLOAD:twinapi.dll")]
+{% else %}
+@[Link("userenv")]
+@[Link("comctl32")]
+@[Link("user32")]
+@[Link("shell32")]
+@[Link("ole32")]
+@[Link("shdocvw")]
+@[Link("shcore")]
+@[Link("shlwapi")]
+@[Link("hlink")]
+@[Link("onecore")]
+@[Link("twinapi")]
+{% end %}
 lib LibWin32
   alias ShFindChangeNotificationHandle = LibC::IntPtrT
   alias HDROP = LibC::IntPtrT

@@ -3,11 +3,20 @@ require "../../foundation.cr"
 require "../../graphics/gdi.cr"
 require "../../ui/windowsandmessaging.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:oleaut32.dll")]
 @[Link(ldflags: "/DELAYLOAD:ole32.dll")]
+{% else %}
+@[Link("oleaut32")]
+@[Link("ole32")]
+{% end %}
 lib LibWin32
 
   enum STDMSHLFLAGS : Int32

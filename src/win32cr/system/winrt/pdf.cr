@@ -4,10 +4,18 @@ require "../../graphics/direct2d/common.cr"
 require "../../system/com.cr"
 require "../../graphics/direct2d.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:windows.data.pdf.dll")]
+{% else %}
+@[Link("windows.data.pdf")]
+{% end %}
 lib LibWin32
   alias PFN_PDF_CREATE_RENDERER = Proc(IDXGIDevice, IPdfRendererNative*, HRESULT)
 

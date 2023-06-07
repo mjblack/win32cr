@@ -4,15 +4,28 @@ require "../system/com.cr"
 require "../security/cryptography.cr"
 require "../system/io.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:p2pgraph.dll")]
 @[Link(ldflags: "/DELAYLOAD:p2p.dll")]
 @[Link(ldflags: "/DELAYLOAD:drtprov.dll")]
 @[Link(ldflags: "/DELAYLOAD:drttransport.dll")]
 @[Link(ldflags: "/DELAYLOAD:drt.dll")]
 @[Link(ldflags: "/DELAYLOAD:peerdist.dll")]
+{% else %}
+@[Link("p2pgraph")]
+@[Link("p2p")]
+@[Link("drtprov")]
+@[Link("drttransport")]
+@[Link("drt")]
+@[Link("peerdist")]
+{% end %}
 lib LibWin32
   NS_PNRPNAME = 38_u32
   NS_PNRPCLOUD = 39_u32

@@ -4,10 +4,18 @@ require "../graphics/gdi.cr"
 require "../system/diagnostics/debug.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
+{% else %}
+@[Link("user32")]
+{% end %}
 lib LibWin32
   MM_HINT_T0 = 1_u32
   MM_HINT_T1 = 2_u32

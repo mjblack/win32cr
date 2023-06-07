@@ -3,10 +3,18 @@ require "../foundation.cr"
 require "../media/directshow.cr"
 require "../graphics/gdi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wmvcore.dll")]
+{% else %}
+@[Link("wmvcore")]
+{% end %}
 lib LibWin32
   WMT_VIDEOIMAGE_SAMPLE_INPUT_FRAME = 1_u32
   WMT_VIDEOIMAGE_SAMPLE_OUTPUT_FRAME = 2_u32

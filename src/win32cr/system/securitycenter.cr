@@ -2,10 +2,18 @@ require "../system/com.cr"
 require "../foundation.cr"
 require "../system/threading.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wscapi.dll")]
+{% else %}
+@[Link("wscapi")]
+{% end %}
 lib LibWin32
   WSCProductList = LibC::GUID.new(0x17072f7b_u32, 0x9abe_u16, 0x4a74_u16, StaticArray[0xa2_u8, 0x61_u8, 0x1e_u8, 0xb7_u8, 0x6b_u8, 0x55_u8, 0x10_u8, 0x7a_u8])
   WSCDefaultProduct = LibC::GUID.new(0x2981a36e_u32, 0xf22d_u16, 0x11e5_u16, StaticArray[0x9c_u8, 0xe9_u8, 0x5e_u8, 0x55_u8, 0x17_u8, 0x50_u8, 0x7c_u8, 0x66_u8])

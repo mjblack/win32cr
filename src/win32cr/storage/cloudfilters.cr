@@ -3,10 +3,18 @@ require "../foundation.cr"
 require "../system/correlationvector.cr"
 require "../system/io.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:cldapi.dll")]
+{% else %}
+@[Link("cldapi")]
+{% end %}
 lib LibWin32
   alias CF_CONNECTION_KEY = LibC::IntPtrT
 

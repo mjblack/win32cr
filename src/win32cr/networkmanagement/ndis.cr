@@ -4,9 +4,16 @@ require "../networkmanagement/wifi.cr"
 require "../security/extensibleauthenticationprotocol.cr"
 require "../system/remotedesktop.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
+{% else %}
+{% end %}
 lib LibWin32
   IOCTL_NDIS_RESERVED5 = 1507380_u32
   IOCTL_NDIS_RESERVED6 = 1540152_u32

@@ -1,10 +1,18 @@
 require "../foundation.cr"
 require "../graphics/gdi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:magnification.dll")]
+{% else %}
+@[Link("magnification")]
+{% end %}
 lib LibWin32
   MS_SHOWMAGNIFIEDCURSOR = 1_i32
   MS_CLIPAROUNDCURSOR = 2_i32

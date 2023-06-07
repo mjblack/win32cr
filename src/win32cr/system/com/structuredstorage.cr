@@ -2,12 +2,22 @@ require "../../system/com.cr"
 require "../../foundation.cr"
 require "../../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:ole32.dll")]
 @[Link(ldflags: "/DELAYLOAD:dflayout.dll")]
 @[Link(ldflags: "/DELAYLOAD:propsys.dll")]
+{% else %}
+@[Link("ole32")]
+@[Link("dflayout")]
+@[Link("propsys")]
+{% end %}
 lib LibWin32
   PROPSETFLAG_DEFAULT = 0_u32
   PROPSETFLAG_NONSIMPLE = 1_u32

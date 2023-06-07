@@ -3,10 +3,18 @@ require "../networkmanagement/windowsfilteringplatform.cr"
 require "../foundation.cr"
 require "../system/io.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wnvapi.dll")]
+{% else %}
+@[Link("wnvapi")]
+{% end %}
 lib LibWin32
   WNV_API_MAJOR_VERSION_1 = 1_u32
   WNV_API_MINOR_VERSION_0 = 0_u32

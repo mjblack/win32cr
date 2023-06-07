@@ -9,12 +9,22 @@ require "../ui/windowsandmessaging.cr"
 require "../system/diagnostics/debug.cr"
 require "../graphics/directdraw.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:msrating.dll")]
 @[Link(ldflags: "/DELAYLOAD:imgutil.dll")]
 @[Link(ldflags: "/DELAYLOAD:shdocvw.dll")]
+{% else %}
+@[Link("msrating")]
+@[Link("imgutil")]
+@[Link("shdocvw")]
+{% end %}
 lib LibWin32
   DISPID_STYLESHEETSCOLLECTION_NAMED_MAX = 1999999_u32
   DISPID_AMBIENT_OFFLINEIFNOTCONNECTED = -5501_i32

@@ -3,10 +3,18 @@ require "../system/com.cr"
 require "../ui/windowsandmessaging.cr"
 require "../graphics/gdi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:msctfmonitor.dll")]
+{% else %}
+@[Link("msctfmonitor")]
+{% end %}
 lib LibWin32
   alias HKL = LibC::IntPtrT
 

@@ -2,11 +2,20 @@ require "../../foundation.cr"
 require "../../security/cryptography.cr"
 require "../../security/cryptography/catalog.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wintrust.dll")]
 @[Link(ldflags: "/DELAYLOAD:crypt32.dll")]
+{% else %}
+@[Link("wintrust")]
+@[Link("crypt32")]
+{% end %}
 lib LibWin32
   MSSIP_FLAGS_PROHIBIT_RESIZE_ON_CREATE = 65536_u32
   MSSIP_FLAGS_USE_CATALOG = 131072_u32

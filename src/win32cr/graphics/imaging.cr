@@ -6,10 +6,18 @@ require "../graphics/gdi.cr"
 require "../ui/windowsandmessaging.cr"
 require "../graphics/dxgi/common.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:windowscodecs.dll")]
+{% else %}
+@[Link("windowscodecs")]
+{% end %}
 lib LibWin32
   WINCODEC_SDK_VERSION1 = 566_u32
   WINCODEC_SDK_VERSION2 = 567_u32

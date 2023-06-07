@@ -3,10 +3,18 @@ require "../security.cr"
 require "../networking/winsock.cr"
 require "../system/io.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:httpapi.dll")]
+{% else %}
+@[Link("httpapi")]
+{% end %}
 lib LibWin32
   HTTP_DEMAND_CBT = 4_u32
   HTTP_MAX_SERVER_QUEUE_LENGTH = 2147483647_u32

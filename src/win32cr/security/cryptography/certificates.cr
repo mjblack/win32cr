@@ -3,11 +3,20 @@ require "../../foundation.cr"
 require "../../security/cryptography.cr"
 require "../../security/authentication/identity.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:certadm.dll")]
 @[Link(ldflags: "/DELAYLOAD:certpoleng.dll")]
+{% else %}
+@[Link("certadm")]
+@[Link("certpoleng")]
+{% end %}
 lib LibWin32
   CA_DISP_INCOMPLETE = 0_u32
   CA_DISP_ERROR = 1_u32

@@ -2,14 +2,26 @@ require "../foundation.cr"
 require "../system/registry.cr"
 require "../system/com.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:wdsclientapi.dll")]
 @[Link(ldflags: "/DELAYLOAD:wdspxe.dll")]
 @[Link(ldflags: "/DELAYLOAD:wdsmc.dll")]
 @[Link(ldflags: "/DELAYLOAD:wdstptc.dll")]
 @[Link(ldflags: "/DELAYLOAD:wdsbp.dll")]
+{% else %}
+@[Link("wdsclientapi")]
+@[Link("wdspxe")]
+@[Link("wdsmc")]
+@[Link("wdstptc")]
+@[Link("wdsbp")]
+{% end %}
 lib LibWin32
   WDS_CLI_TRANSFER_ASYNCHRONOUS = 1_u32
   WDS_CLI_NO_SPARSE_FILE = 2_u32

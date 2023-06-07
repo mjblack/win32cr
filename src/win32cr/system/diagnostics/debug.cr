@@ -9,17 +9,30 @@ require "../../system/com/structuredstorage.cr"
 require "../../system/ole.cr"
 require "../../security/wintrust.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:dbgeng.dll")]
 @[Link(ldflags: "/DELAYLOAD:dbgmodel.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-util-l1-1-1.dll")]
-@[Link(ldflags: "/DELAYLOAD:api-ms-win-core-errorhandling-l1-1-3.dll")]
+@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
 @[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
 @[Link(ldflags: "/DELAYLOAD:dbghelp.dll")]
 @[Link(ldflags: "/DELAYLOAD:imagehlp.dll")]
 @[Link(ldflags: "/DELAYLOAD:user32.dll")]
+{% else %}
+@[Link("dbgeng")]
+@[Link("dbgmodel")]
+@[Link("onecore")]
+@[Link("advapi32")]
+@[Link("dbghelp")]
+@[Link("imagehlp")]
+@[Link("user32")]
+{% end %}
 lib LibWin32
   WOW64_CONTEXT_i386 = 65536_u32
   WOW64_CONTEXT_i486 = 65536_u32

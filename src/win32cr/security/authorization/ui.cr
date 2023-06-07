@@ -4,10 +4,18 @@ require "../../system/com.cr"
 require "../../ui/controls.cr"
 require "../../security/authorization.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:aclui.dll")]
+{% else %}
+@[Link("aclui")]
+{% end %}
 lib LibWin32
   SI_EDIT_PERMS = 0_i32
   SI_EDIT_OWNER = 1_i32

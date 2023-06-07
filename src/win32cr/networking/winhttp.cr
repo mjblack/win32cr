@@ -1,10 +1,18 @@
 require "../foundation.cr"
 require "../networking/winsock.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:winhttp.dll")]
+{% else %}
+@[Link("winhttp")]
+{% end %}
 lib LibWin32
   WINHTTP_FLAG_ASYNC = 268435456_u32
   WINHTTP_FLAG_SECURE_DEFAULTS = 805306368_u32

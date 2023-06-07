@@ -2,13 +2,24 @@ require "../foundation.cr"
 require "../system/power.cr"
 require "../system/hostcomputesystem.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:winhvplatform.dll")]
 @[Link(ldflags: "/DELAYLOAD:winhvemulation.dll")]
 @[Link(ldflags: "/DELAYLOAD:vmdevicehost.dll")]
 @[Link(ldflags: "/DELAYLOAD:vmsavedstatedumpprovider.dll")]
+{% else %}
+@[Link("winhvplatform")]
+@[Link("winhvemulation")]
+@[Link("vmdevicehost")]
+@[Link("vmsavedstatedumpprovider")]
+{% end %}
 lib LibWin32
   alias WHV_PARTITION_HANDLE = LibC::IntPtrT
 

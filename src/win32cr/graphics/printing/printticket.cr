@@ -3,10 +3,18 @@ require "../../storage/xps.cr"
 require "../../system/com.cr"
 require "../../graphics/gdi.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:prntvpt.dll")]
+{% else %}
+@[Link("prntvpt")]
+{% end %}
 lib LibWin32
   PRINTTICKET_ISTREAM_APIS = 1_u32
   S_PT_NO_CONFLICT = 262145_u32

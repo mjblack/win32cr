@@ -1,9 +1,17 @@
 require "../foundation.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:sfc.dll")]
+{% else %}
+@[Link("sfc")]
+{% end %}
 lib LibWin32
   MIN_EVENT = 100_u32
   BEGIN_NESTED_SYSTEM_CHANGE_NORP = 104_u32

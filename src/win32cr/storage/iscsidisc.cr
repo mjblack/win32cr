@@ -1,10 +1,18 @@
 require "../foundation.cr"
 require "../system/ioctl.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:iscsidsc.dll")]
+{% else %}
+@[Link("iscsidsc")]
+{% end %}
 lib LibWin32
   IOCTL_SCSI_BASE = 4_u32
   ScsiRawInterfaceGuid = "53f56309-b6bf-11d0-94f2-00a0c91efb8b"

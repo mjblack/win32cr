@@ -5,12 +5,22 @@ require "../graphics/direct3d.cr"
 require "../graphics/dxgi.cr"
 require "../security.cr"
 
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link("delayimp")]
+{% end %}
 @[Link("user32")]
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
+{% end %}
+{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/DELAYLOAD:d3d11.dll")]
 @[Link(ldflags: "/DELAYLOAD:d3dcompiler_47.dll")]
 @[Link(ldflags: "/DELAYLOAD:d3dcsx.dll")]
+{% else %}
+@[Link("d3d11")]
+@[Link("d3dcompiler_47")]
+@[Link("d3dcsx")]
+{% end %}
 lib LibWin32
   D3D11_16BIT_INDEX_STRIP_CUT_VALUE = 65535_u32
   D3D11_32BIT_INDEX_STRIP_CUT_VALUE = 4294967295_u32
