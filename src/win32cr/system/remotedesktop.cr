@@ -1999,18 +1999,18 @@ lib LibWin32
     lpVtbl : IWorkspaceReportMessageVTbl*
   end
 
-  struct ITSWkspEventsVTbl
-    query_interface : Proc(ITSWkspEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSWkspEvents*, UInt32)
-    release : Proc(ITSWkspEvents*, UInt32)
-    get_type_info_count : Proc(ITSWkspEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(ITSWkspEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITSWkspEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITSWkspEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IITSWkspEventsVTbl
+    query_interface : Proc(IITSWkspEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IITSWkspEvents*, UInt32)
+    release : Proc(IITSWkspEvents*, UInt32)
+    get_type_info_count : Proc(IITSWkspEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IITSWkspEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IITSWkspEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IITSWkspEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct ITSWkspEvents
-    lpVtbl : ITSWkspEventsVTbl*
+  struct IITSWkspEvents
+    lpVtbl : IITSWkspEventsVTbl*
   end
 
   struct ITsSbPluginVTbl

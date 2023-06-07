@@ -1547,18 +1547,18 @@ lib LibWin32
     lpVtbl : IMSMQPrivateEventVTbl*
   end
 
-  struct DMSMQEventEventsVTbl
-    query_interface : Proc(DMSMQEventEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DMSMQEventEvents*, UInt32)
-    release : Proc(DMSMQEventEvents*, UInt32)
-    get_type_info_count : Proc(DMSMQEventEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(DMSMQEventEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DMSMQEventEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DMSMQEventEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IDMSMQEventEventsVTbl
+    query_interface : Proc(IDMSMQEventEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IDMSMQEventEvents*, UInt32)
+    release : Proc(IDMSMQEventEvents*, UInt32)
+    get_type_info_count : Proc(IDMSMQEventEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IDMSMQEventEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IDMSMQEventEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IDMSMQEventEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct DMSMQEventEvents
-    lpVtbl : DMSMQEventEventsVTbl*
+  struct IDMSMQEventEvents
+    lpVtbl : IDMSMQEventEventsVTbl*
   end
 
   struct IMSMQTransaction2VTbl

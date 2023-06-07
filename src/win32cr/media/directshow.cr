@@ -15534,18 +15534,18 @@ lib LibWin32
     lpVtbl : IMSEventBinderVTbl*
   end
 
-  struct IMSVidCtlEventsVTbl
-    query_interface : Proc(IMSVidCtlEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMSVidCtlEvents*, UInt32)
-    release : Proc(IMSVidCtlEvents*, UInt32)
-    get_type_info_count : Proc(IMSVidCtlEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IMSVidCtlEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMSVidCtlEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMSVidCtlEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIMSVidCtlEventsVTbl
+    query_interface : Proc(IIMSVidCtlEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIMSVidCtlEvents*, UInt32)
+    release : Proc(IIMSVidCtlEvents*, UInt32)
+    get_type_info_count : Proc(IIMSVidCtlEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IIMSVidCtlEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIMSVidCtlEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIMSVidCtlEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct IMSVidCtlEvents
-    lpVtbl : IMSVidCtlEventsVTbl*
+  struct IIMSVidCtlEvents
+    lpVtbl : IIMSVidCtlEventsVTbl*
   end
 
   struct IStreamBufferInitializeVTbl

@@ -2556,6 +2556,46 @@ lib LibWin32
     lpVtbl : IFaxServerNotifyVTbl*
   end
 
+  struct IIFaxServerNotify2VTbl
+    query_interface : Proc(IIFaxServerNotify2*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIFaxServerNotify2*, UInt32)
+    release : Proc(IIFaxServerNotify2*, UInt32)
+    get_type_info_count : Proc(IIFaxServerNotify2*, UInt32*, HRESULT)
+    get_type_info : Proc(IIFaxServerNotify2*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIFaxServerNotify2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIFaxServerNotify2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    on_incoming_job_added : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
+    on_incoming_job_removed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
+    on_incoming_job_changed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, IFaxJobStatus, HRESULT)
+    on_outgoing_job_added : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
+    on_outgoing_job_removed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
+    on_outgoing_job_changed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, IFaxJobStatus, HRESULT)
+    on_incoming_message_added : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
+    on_incoming_message_removed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
+    on_outgoing_message_added : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
+    on_outgoing_message_removed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
+    on_receipt_options_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_activity_logging_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_security_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_event_logging_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_outgoing_queue_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_outgoing_archive_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_incoming_archive_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_devices_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_outbound_routing_groups_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_outbound_routing_rules_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_server_activity_change : Proc(IIFaxServerNotify2*, IFaxServer2, Int32, Int32, Int32, Int32, HRESULT)
+    on_queues_status_change : Proc(IIFaxServerNotify2*, IFaxServer2, Int16, Int16, Int16, HRESULT)
+    on_new_call : Proc(IIFaxServerNotify2*, IFaxServer2, Int32, Int32, UInt8*, HRESULT)
+    on_server_shut_down : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    on_device_status_change : Proc(IIFaxServerNotify2*, IFaxServer2, Int32, Int16, Int16, Int16, Int16, HRESULT)
+    on_general_server_config_changed : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+  end
+
+  struct IIFaxServerNotify2
+    lpVtbl : IIFaxServerNotify2VTbl*
+  end
+
   struct IFaxServerNotify2VTbl
     query_interface : Proc(IFaxServerNotify2*, Guid*, Void**, HRESULT)
     add_ref : Proc(IFaxServerNotify2*, UInt32)
@@ -2564,75 +2604,35 @@ lib LibWin32
     get_type_info : Proc(IFaxServerNotify2*, UInt32, UInt32, ITypeInfo*, HRESULT)
     get_i_ds_of_names : Proc(IFaxServerNotify2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
     invoke : Proc(IFaxServerNotify2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    on_incoming_job_added : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_incoming_job_removed : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_incoming_job_changed : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, IFaxJobStatus, HRESULT)
-    on_outgoing_job_added : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_outgoing_job_removed : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_outgoing_job_changed : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, IFaxJobStatus, HRESULT)
-    on_incoming_message_added : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_incoming_message_removed : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_outgoing_message_added : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_outgoing_message_removed : Proc(IFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_receipt_options_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_activity_logging_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_security_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_event_logging_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_outgoing_queue_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_outgoing_archive_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_incoming_archive_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_devices_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_outbound_routing_groups_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_outbound_routing_rules_config_change : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_server_activity_change : Proc(IFaxServerNotify2*, IFaxServer2, Int32, Int32, Int32, Int32, HRESULT)
-    on_queues_status_change : Proc(IFaxServerNotify2*, IFaxServer2, Int16, Int16, Int16, HRESULT)
-    on_new_call : Proc(IFaxServerNotify2*, IFaxServer2, Int32, Int32, UInt8*, HRESULT)
-    on_server_shut_down : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_device_status_change : Proc(IFaxServerNotify2*, IFaxServer2, Int32, Int16, Int16, Int16, Int16, HRESULT)
-    on_general_server_config_changed : Proc(IFaxServerNotify2*, IFaxServer2, HRESULT)
   end
 
   struct IFaxServerNotify2
     lpVtbl : IFaxServerNotify2VTbl*
   end
 
-  struct IFaxServerNotify2VTbl
-    query_interface : Proc(IFaxServerNotify2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxServerNotify2*, UInt32)
-    release : Proc(IFaxServerNotify2*, UInt32)
-    get_type_info_count : Proc(IFaxServerNotify2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxServerNotify2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxServerNotify2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxServerNotify2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IIFaxAccountNotifyVTbl
+    query_interface : Proc(IIFaxAccountNotify*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIFaxAccountNotify*, UInt32)
+    release : Proc(IIFaxAccountNotify*, UInt32)
+    get_type_info_count : Proc(IIFaxAccountNotify*, UInt32*, HRESULT)
+    get_type_info : Proc(IIFaxAccountNotify*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IIFaxAccountNotify*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IIFaxAccountNotify*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    on_incoming_job_added : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
+    on_incoming_job_removed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
+    on_incoming_job_changed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, IFaxJobStatus, HRESULT)
+    on_outgoing_job_added : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
+    on_outgoing_job_removed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
+    on_outgoing_job_changed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, IFaxJobStatus, HRESULT)
+    on_incoming_message_added : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, Int16, HRESULT)
+    on_incoming_message_removed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, Int16, HRESULT)
+    on_outgoing_message_added : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
+    on_outgoing_message_removed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
+    on_server_shut_down : Proc(IIFaxAccountNotify*, IFaxServer2, HRESULT)
   end
 
-  struct IFaxServerNotify2
-    lpVtbl : IFaxServerNotify2VTbl*
-  end
-
-  struct IFaxAccountNotifyVTbl
-    query_interface : Proc(IFaxAccountNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccountNotify*, UInt32)
-    release : Proc(IFaxAccountNotify*, UInt32)
-    get_type_info_count : Proc(IFaxAccountNotify*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccountNotify*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccountNotify*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccountNotify*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    on_incoming_job_added : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_incoming_job_removed : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_incoming_job_changed : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, IFaxJobStatus, HRESULT)
-    on_outgoing_job_added : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_outgoing_job_removed : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_outgoing_job_changed : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, IFaxJobStatus, HRESULT)
-    on_incoming_message_added : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, Int16, HRESULT)
-    on_incoming_message_removed : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, Int16, HRESULT)
-    on_outgoing_message_added : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_outgoing_message_removed : Proc(IFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_server_shut_down : Proc(IFaxAccountNotify*, IFaxServer2, HRESULT)
-  end
-
-  struct IFaxAccountNotify
-    lpVtbl : IFaxAccountNotifyVTbl*
+  struct IIFaxAccountNotify
+    lpVtbl : IIFaxAccountNotifyVTbl*
   end
 
   struct IFaxAccountNotifyVTbl

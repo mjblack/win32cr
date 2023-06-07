@@ -3021,18 +3021,18 @@ lib LibWin32
     lpVtbl : ISpeechVoiceStatusVTbl*
   end
 
-  struct ISpeechVoiceEventsVTbl
-    query_interface : Proc(ISpeechVoiceEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechVoiceEvents*, UInt32)
-    release : Proc(ISpeechVoiceEvents*, UInt32)
-    get_type_info_count : Proc(ISpeechVoiceEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechVoiceEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechVoiceEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechVoiceEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IISpeechVoiceEventsVTbl
+    query_interface : Proc(IISpeechVoiceEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IISpeechVoiceEvents*, UInt32)
+    release : Proc(IISpeechVoiceEvents*, UInt32)
+    get_type_info_count : Proc(IISpeechVoiceEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IISpeechVoiceEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IISpeechVoiceEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IISpeechVoiceEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct ISpeechVoiceEvents
-    lpVtbl : ISpeechVoiceEventsVTbl*
+  struct IISpeechVoiceEvents
+    lpVtbl : IISpeechVoiceEventsVTbl*
   end
 
   struct ISpeechRecognizerVTbl
@@ -3167,18 +3167,18 @@ lib LibWin32
     lpVtbl : ISpeechRecoGrammarVTbl*
   end
 
-  struct ISpeechRecoContextEventsVTbl
-    query_interface : Proc(ISpeechRecoContextEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecoContextEvents*, UInt32)
-    release : Proc(ISpeechRecoContextEvents*, UInt32)
-    get_type_info_count : Proc(ISpeechRecoContextEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecoContextEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecoContextEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecoContextEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  struct IISpeechRecoContextEventsVTbl
+    query_interface : Proc(IISpeechRecoContextEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IISpeechRecoContextEvents*, UInt32)
+    release : Proc(IISpeechRecoContextEvents*, UInt32)
+    get_type_info_count : Proc(IISpeechRecoContextEvents*, UInt32*, HRESULT)
+    get_type_info : Proc(IISpeechRecoContextEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
+    get_i_ds_of_names : Proc(IISpeechRecoContextEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
+    invoke : Proc(IISpeechRecoContextEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  struct ISpeechRecoContextEvents
-    lpVtbl : ISpeechRecoContextEventsVTbl*
+  struct IISpeechRecoContextEvents
+    lpVtbl : IISpeechRecoContextEventsVTbl*
   end
 
   struct ISpeechGrammarRuleVTbl

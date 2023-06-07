@@ -100,17 +100,17 @@ lib LibWin32
   end
 
 
-  struct IManipulationEventsVTbl
-    query_interface : Proc(IManipulationEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IManipulationEvents*, UInt32)
-    release : Proc(IManipulationEvents*, UInt32)
-    manipulation_started : Proc(IManipulationEvents*, Float32, Float32, HRESULT)
-    manipulation_delta : Proc(IManipulationEvents*, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, HRESULT)
-    manipulation_completed : Proc(IManipulationEvents*, Float32, Float32, Float32, Float32, Float32, Float32, Float32, HRESULT)
+  struct IIManipulationEventsVTbl
+    query_interface : Proc(IIManipulationEvents*, Guid*, Void**, HRESULT)
+    add_ref : Proc(IIManipulationEvents*, UInt32)
+    release : Proc(IIManipulationEvents*, UInt32)
+    manipulation_started : Proc(IIManipulationEvents*, Float32, Float32, HRESULT)
+    manipulation_delta : Proc(IIManipulationEvents*, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, Float32, HRESULT)
+    manipulation_completed : Proc(IIManipulationEvents*, Float32, Float32, Float32, Float32, Float32, Float32, Float32, HRESULT)
   end
 
-  struct IManipulationEvents
-    lpVtbl : IManipulationEventsVTbl*
+  struct IIManipulationEvents
+    lpVtbl : IIManipulationEventsVTbl*
   end
 
   struct IInertiaProcessorVTbl
