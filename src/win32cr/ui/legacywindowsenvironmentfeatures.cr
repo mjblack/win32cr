@@ -56,6 +56,8 @@ lib LibWin32
     purge_progress : Proc(IEmptyVolumeCacheCallBack*, UInt64, UInt64, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IEmptyVolumeCacheCallBack_GUID = LibC::GUID.new("6e793361-73c6-11d0-8469-00aa00442901")
+  CLSID_IEmptyVolumeCacheCallBack = "6e793361-73c6-11d0-8469-00aa00442901"
   struct IEmptyVolumeCacheCallBack
     lpVtbl : IEmptyVolumeCacheCallBackVTbl*
   end
@@ -71,6 +73,8 @@ lib LibWin32
     deactivate : Proc(IEmptyVolumeCache*, UInt32*, HRESULT)
   end
 
+  IEmptyVolumeCache_GUID = LibC::GUID.new("8fce5227-04da-11d1-a004-00805f8abe06")
+  CLSID_IEmptyVolumeCache = "8fce5227-04da-11d1-a004-00805f8abe06"
   struct IEmptyVolumeCache
     lpVtbl : IEmptyVolumeCacheVTbl*
   end
@@ -87,6 +91,8 @@ lib LibWin32
     initialize_ex : Proc(IEmptyVolumeCache2*, HKEY, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR*, UInt32*, HRESULT)
   end
 
+  IEmptyVolumeCache2_GUID = LibC::GUID.new("02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c")
+  CLSID_IEmptyVolumeCache2 = "02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c"
   struct IEmptyVolumeCache2
     lpVtbl : IEmptyVolumeCache2VTbl*
   end
@@ -99,6 +105,8 @@ lib LibWin32
     set_progress_feedback : Proc(IReconcileInitiator*, UInt32, UInt32, HRESULT)
   end
 
+  IReconcileInitiator_GUID = LibC::GUID.new("99180161-da16-101a-935c-444553540000")
+  CLSID_IReconcileInitiator = "99180161-da16-101a-935c-444553540000"
   struct IReconcileInitiator
     lpVtbl : IReconcileInitiatorVTbl*
   end
@@ -111,6 +119,8 @@ lib LibWin32
     get_progress_feedback_max_estimate : Proc(IReconcilableObject*, UInt32*, HRESULT)
   end
 
+  IReconcilableObject_GUID = LibC::GUID.new("99180162-da16-101a-935c-444553540000")
+  CLSID_IReconcilableObject = "99180162-da16-101a-935c-444553540000"
   struct IReconcilableObject
     lpVtbl : IReconcilableObjectVTbl*
   end
@@ -122,6 +132,8 @@ lib LibWin32
     is_moniker_in_briefcase : Proc(IBriefcaseInitiator*, IMoniker, HRESULT)
   end
 
+  IBriefcaseInitiator_GUID = LibC::GUID.new("99180164-da16-101a-935c-444553540000")
+  CLSID_IBriefcaseInitiator = "99180164-da16-101a-935c-444553540000"
   struct IBriefcaseInitiator
     lpVtbl : IBriefcaseInitiatorVTbl*
   end
@@ -136,6 +148,8 @@ lib LibWin32
     get_scheme : Proc(IActiveDesktopP*, Char*, UInt32*, UInt32, HRESULT)
   end
 
+  IActiveDesktopP_GUID = LibC::GUID.new("52502ee0-ec80-11d0-89ab-00c04fc2972d")
+  CLSID_IActiveDesktopP = "52502ee0-ec80-11d0-89ab-00c04fc2972d"
   struct IActiveDesktopP
     lpVtbl : IActiveDesktopPVTbl*
   end
@@ -150,6 +164,8 @@ lib LibWin32
     make_dynamic_changes : Proc(IADesktopP2*, IOleObject, HRESULT)
   end
 
+  IADesktopP2_GUID = LibC::GUID.new("b22754e2-4574-11d1-9888-006097deacf9")
+  CLSID_IADesktopP2 = "b22754e2-4574-11d1-9888-006097deacf9"
   struct IADesktopP2
     lpVtbl : IADesktopP2VTbl*
   end

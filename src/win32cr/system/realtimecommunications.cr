@@ -646,6 +646,8 @@ lib LibWin32
     get_is_tuned : Proc(IRTCClient*, Int16*, HRESULT)
   end
 
+  IRTCClient_GUID = LibC::GUID.new("07829e45-9a34-408e-a011-bddf13487cd1")
+  CLSID_IRTCClient = "07829e45-9a34-408e-a011-bddf13487cd1"
   struct IRTCClient
     lpVtbl : IRTCClientVTbl*
   end
@@ -711,6 +713,8 @@ lib LibWin32
     get_allowed_ports : Proc(IRTCClient2*, Int32, RTC_LISTEN_MODE*, HRESULT)
   end
 
+  IRTCClient2_GUID = LibC::GUID.new("0c91d71d-1064-42da-bfa5-572beb8eea84")
+  CLSID_IRTCClient2 = "0c91d71d-1064-42da-bfa5-572beb8eea84"
   struct IRTCClient2
     lpVtbl : IRTCClient2VTbl*
   end
@@ -739,6 +743,8 @@ lib LibWin32
     put_privacy_mode : Proc(IRTCClientPresence*, RTC_PRIVACY_MODE, HRESULT)
   end
 
+  IRTCClientPresence_GUID = LibC::GUID.new("11c3cbcc-0744-42d1-968a-51aa1bb274c6")
+  CLSID_IRTCClientPresence = "11c3cbcc-0744-42d1-968a-51aa1bb274c6"
   struct IRTCClientPresence
     lpVtbl : IRTCClientPresenceVTbl*
   end
@@ -782,6 +788,8 @@ lib LibWin32
     add_buddy_ex : Proc(IRTCClientPresence2*, UInt8*, UInt8*, UInt8*, Int16, RTC_BUDDY_SUBSCRIPTION_TYPE, IRTCProfile, Int32, IRTCBuddy2*, HRESULT)
   end
 
+  IRTCClientPresence2_GUID = LibC::GUID.new("ad1809e8-62f7-4783-909a-29c9d2cb1d34")
+  CLSID_IRTCClientPresence2 = "ad1809e8-62f7-4783-909a-29c9d2cb1d34"
   struct IRTCClientPresence2
     lpVtbl : IRTCClientPresence2VTbl*
   end
@@ -799,6 +807,8 @@ lib LibWin32
     get_session_capabilities : Proc(IRTCClientProvisioning*, Int32*, HRESULT)
   end
 
+  IRTCClientProvisioning_GUID = LibC::GUID.new("b9f5cf06-65b9-4a80-a0e6-73cae3ef3822")
+  CLSID_IRTCClientProvisioning = "b9f5cf06-65b9-4a80-a0e6-73cae3ef3822"
   struct IRTCClientProvisioning
     lpVtbl : IRTCClientProvisioningVTbl*
   end
@@ -817,6 +827,8 @@ lib LibWin32
     enable_profile_ex : Proc(IRTCClientProvisioning2*, IRTCProfile, Int32, Int32, HRESULT)
   end
 
+  IRTCClientProvisioning2_GUID = LibC::GUID.new("a70909b5-f40e-4587-bb75-e6bc0845023e")
+  CLSID_IRTCClientProvisioning2 = "a70909b5-f40e-4587-bb75-e6bc0845023e"
   struct IRTCClientProvisioning2
     lpVtbl : IRTCClientProvisioning2VTbl*
   end
@@ -845,6 +857,8 @@ lib LibWin32
     get_state : Proc(IRTCProfile*, RTC_REGISTRATION_STATE*, HRESULT)
   end
 
+  IRTCProfile_GUID = LibC::GUID.new("d07eca9e-4062-4dd4-9e7d-722a49ba7303")
+  CLSID_IRTCProfile = "d07eca9e-4062-4dd4-9e7d-722a49ba7303"
   struct IRTCProfile
     lpVtbl : IRTCProfileVTbl*
   end
@@ -877,6 +891,8 @@ lib LibWin32
     put_allowed_auth : Proc(IRTCProfile2*, Int32, HRESULT)
   end
 
+  IRTCProfile2_GUID = LibC::GUID.new("4b81f84e-bdc7-4184-9154-3cb2dd7917fb")
+  CLSID_IRTCProfile2 = "4b81f84e-bdc7-4184-9154-3cb2dd7917fb"
   struct IRTCProfile2
     lpVtbl : IRTCProfile2VTbl*
   end
@@ -907,6 +923,8 @@ lib LibWin32
     put_encryption_key : Proc(IRTCSession*, Int32, UInt8*, HRESULT)
   end
 
+  IRTCSession_GUID = LibC::GUID.new("387c8086-99be-42fb-9973-7c0fc0ca9fa8")
+  CLSID_IRTCSession = "387c8086-99be-42fb-9973-7c0fc0ca9fa8"
   struct IRTCSession
     lpVtbl : IRTCSessionVTbl*
   end
@@ -943,6 +961,8 @@ lib LibWin32
     re_invite_with_session_description : Proc(IRTCSession2*, UInt8*, UInt8*, LibC::IntPtrT, HRESULT)
   end
 
+  IRTCSession2_GUID = LibC::GUID.new("17d7cdfc-b007-484c-99d2-86a8a820991d")
+  CLSID_IRTCSession2 = "17d7cdfc-b007-484c-99d2-86a8a820991d"
   struct IRTCSession2
     lpVtbl : IRTCSession2VTbl*
   end
@@ -962,6 +982,8 @@ lib LibWin32
     get_is_referred : Proc(IRTCSessionCallControl*, Int16*, HRESULT)
   end
 
+  IRTCSessionCallControl_GUID = LibC::GUID.new("e9a50d94-190b-4f82-9530-3b8ebf60758a")
+  CLSID_IRTCSessionCallControl = "e9a50d94-190b-4f82-9530-3b8ebf60758a"
   struct IRTCSessionCallControl
     lpVtbl : IRTCSessionCallControlVTbl*
   end
@@ -977,6 +999,8 @@ lib LibWin32
     get_session : Proc(IRTCParticipant*, IRTCSession*, HRESULT)
   end
 
+  IRTCParticipant_GUID = LibC::GUID.new("ae86add5-26b1-4414-af1d-b94cd938d739")
+  CLSID_IRTCParticipant = "ae86add5-26b1-4414-af1d-b94cd938d739"
   struct IRTCParticipant
     lpVtbl : IRTCParticipantVTbl*
   end
@@ -995,6 +1019,8 @@ lib LibWin32
     get_status_text : Proc(IRTCRoamingEvent*, UInt8**, HRESULT)
   end
 
+  IRTCRoamingEvent_GUID = LibC::GUID.new("79960a6b-0cb1-4dc8-a805-7318e99902e8")
+  CLSID_IRTCRoamingEvent = "79960a6b-0cb1-4dc8-a805-7318e99902e8"
   struct IRTCRoamingEvent
     lpVtbl : IRTCRoamingEventVTbl*
   end
@@ -1012,6 +1038,8 @@ lib LibWin32
     get_status_code : Proc(IRTCProfileEvent*, Int32*, HRESULT)
   end
 
+  IRTCProfileEvent_GUID = LibC::GUID.new("d6d5ab3b-770e-43e8-800a-79b062395fca")
+  CLSID_IRTCProfileEvent = "d6d5ab3b-770e-43e8-800a-79b062395fca"
   struct IRTCProfileEvent
     lpVtbl : IRTCProfileEventVTbl*
   end
@@ -1030,6 +1058,8 @@ lib LibWin32
     get_event_type : Proc(IRTCProfileEvent2*, RTC_PROFILE_EVENT_TYPE*, HRESULT)
   end
 
+  IRTCProfileEvent2_GUID = LibC::GUID.new("62e56edc-03fa-4121-94fb-23493fd0ae64")
+  CLSID_IRTCProfileEvent2 = "62e56edc-03fa-4121-94fb-23493fd0ae64"
   struct IRTCProfileEvent2
     lpVtbl : IRTCProfileEvent2VTbl*
   end
@@ -1046,6 +1076,8 @@ lib LibWin32
     get_client : Proc(IRTCClientEvent*, IRTCClient*, HRESULT)
   end
 
+  IRTCClientEvent_GUID = LibC::GUID.new("2b493b7a-3cba-4170-9c8b-76a9dacdd644")
+  CLSID_IRTCClientEvent = "2b493b7a-3cba-4170-9c8b-76a9dacdd644"
   struct IRTCClientEvent
     lpVtbl : IRTCClientEventVTbl*
   end
@@ -1064,6 +1096,8 @@ lib LibWin32
     get_status_text : Proc(IRTCRegistrationStateChangeEvent*, UInt8**, HRESULT)
   end
 
+  IRTCRegistrationStateChangeEvent_GUID = LibC::GUID.new("62d0991b-50ab-4f02-b948-ca94f26f8f95")
+  CLSID_IRTCRegistrationStateChangeEvent = "62d0991b-50ab-4f02-b948-ca94f26f8f95"
   struct IRTCRegistrationStateChangeEvent
     lpVtbl : IRTCRegistrationStateChangeEventVTbl*
   end
@@ -1082,6 +1116,8 @@ lib LibWin32
     get_status_text : Proc(IRTCSessionStateChangeEvent*, UInt8**, HRESULT)
   end
 
+  IRTCSessionStateChangeEvent_GUID = LibC::GUID.new("b5bad703-5952-48b3-9321-7f4500521506")
+  CLSID_IRTCSessionStateChangeEvent = "b5bad703-5952-48b3-9321-7f4500521506"
   struct IRTCSessionStateChangeEvent
     lpVtbl : IRTCSessionStateChangeEventVTbl*
   end
@@ -1104,6 +1140,8 @@ lib LibWin32
     get_remote_session_description : Proc(IRTCSessionStateChangeEvent2*, UInt8**, UInt8**, HRESULT)
   end
 
+  IRTCSessionStateChangeEvent2_GUID = LibC::GUID.new("4f933171-6f95-4880-80d9-2ec8d495d261")
+  CLSID_IRTCSessionStateChangeEvent2 = "4f933171-6f95-4880-80d9-2ec8d495d261"
   struct IRTCSessionStateChangeEvent2
     lpVtbl : IRTCSessionStateChangeEvent2VTbl*
   end
@@ -1122,6 +1160,8 @@ lib LibWin32
     get_status_text : Proc(IRTCSessionOperationCompleteEvent*, UInt8**, HRESULT)
   end
 
+  IRTCSessionOperationCompleteEvent_GUID = LibC::GUID.new("a6bff4c0-f7c8-4d3c-9a41-3550f78a95b0")
+  CLSID_IRTCSessionOperationCompleteEvent = "a6bff4c0-f7c8-4d3c-9a41-3550f78a95b0"
   struct IRTCSessionOperationCompleteEvent
     lpVtbl : IRTCSessionOperationCompleteEventVTbl*
   end
@@ -1142,6 +1182,8 @@ lib LibWin32
     get_remote_session_description : Proc(IRTCSessionOperationCompleteEvent2*, UInt8**, UInt8**, HRESULT)
   end
 
+  IRTCSessionOperationCompleteEvent2_GUID = LibC::GUID.new("f6fc2a9b-d5bc-4241-b436-1b8460c13832")
+  CLSID_IRTCSessionOperationCompleteEvent2 = "f6fc2a9b-d5bc-4241-b436-1b8460c13832"
   struct IRTCSessionOperationCompleteEvent2
     lpVtbl : IRTCSessionOperationCompleteEvent2VTbl*
   end
@@ -1159,6 +1201,8 @@ lib LibWin32
     get_status_code : Proc(IRTCParticipantStateChangeEvent*, Int32*, HRESULT)
   end
 
+  IRTCParticipantStateChangeEvent_GUID = LibC::GUID.new("09bcb597-f0fa-48f9-b420-468cea7fde04")
+  CLSID_IRTCParticipantStateChangeEvent = "09bcb597-f0fa-48f9-b420-468cea7fde04"
   struct IRTCParticipantStateChangeEvent
     lpVtbl : IRTCParticipantStateChangeEventVTbl*
   end
@@ -1176,6 +1220,8 @@ lib LibWin32
     get_event_reason : Proc(IRTCMediaEvent*, RTC_MEDIA_EVENT_REASON*, HRESULT)
   end
 
+  IRTCMediaEvent_GUID = LibC::GUID.new("099944fb-bcda-453e-8c41-e13da2adf7f3")
+  CLSID_IRTCMediaEvent = "099944fb-bcda-453e-8c41-e13da2adf7f3"
   struct IRTCMediaEvent
     lpVtbl : IRTCMediaEventVTbl*
   end
@@ -1194,6 +1240,8 @@ lib LibWin32
     get_direction : Proc(IRTCIntensityEvent*, RTC_AUDIO_DEVICE*, HRESULT)
   end
 
+  IRTCIntensityEvent_GUID = LibC::GUID.new("4c23bf51-390c-4992-a41d-41eec05b2a4b")
+  CLSID_IRTCIntensityEvent = "4c23bf51-390c-4992-a41d-41eec05b2a4b"
   struct IRTCIntensityEvent
     lpVtbl : IRTCIntensityEventVTbl*
   end
@@ -1214,6 +1262,8 @@ lib LibWin32
     get_user_status : Proc(IRTCMessagingEvent*, RTC_MESSAGING_USER_STATUS*, HRESULT)
   end
 
+  IRTCMessagingEvent_GUID = LibC::GUID.new("d3609541-1b29-4de5-a4ad-5aebaf319512")
+  CLSID_IRTCMessagingEvent = "d3609541-1b29-4de5-a4ad-5aebaf319512"
   struct IRTCMessagingEvent
     lpVtbl : IRTCMessagingEventVTbl*
   end
@@ -1229,6 +1279,8 @@ lib LibWin32
     get_buddy : Proc(IRTCBuddyEvent*, IRTCBuddy*, HRESULT)
   end
 
+  IRTCBuddyEvent_GUID = LibC::GUID.new("f36d755d-17e6-404e-954f-0fc07574c78d")
+  CLSID_IRTCBuddyEvent = "f36d755d-17e6-404e-954f-0fc07574c78d"
   struct IRTCBuddyEvent
     lpVtbl : IRTCBuddyEventVTbl*
   end
@@ -1247,6 +1299,8 @@ lib LibWin32
     get_status_text : Proc(IRTCBuddyEvent2*, UInt8**, HRESULT)
   end
 
+  IRTCBuddyEvent2_GUID = LibC::GUID.new("484a7f1e-73f0-4990-bfc2-60bc3978a720")
+  CLSID_IRTCBuddyEvent2 = "484a7f1e-73f0-4990-bfc2-60bc3978a720"
   struct IRTCBuddyEvent2
     lpVtbl : IRTCBuddyEvent2VTbl*
   end
@@ -1262,6 +1316,8 @@ lib LibWin32
     get_watcher : Proc(IRTCWatcherEvent*, IRTCWatcher*, HRESULT)
   end
 
+  IRTCWatcherEvent_GUID = LibC::GUID.new("f30d7261-587a-424f-822c-312788f43548")
+  CLSID_IRTCWatcherEvent = "f30d7261-587a-424f-822c-312788f43548"
   struct IRTCWatcherEvent
     lpVtbl : IRTCWatcherEventVTbl*
   end
@@ -1279,6 +1335,8 @@ lib LibWin32
     get_status_code : Proc(IRTCWatcherEvent2*, Int32*, HRESULT)
   end
 
+  IRTCWatcherEvent2_GUID = LibC::GUID.new("e52891e8-188c-49af-b005-98ed13f83f9c")
+  CLSID_IRTCWatcherEvent2 = "e52891e8-188c-49af-b005-98ed13f83f9c"
   struct IRTCWatcherEvent2
     lpVtbl : IRTCWatcherEvent2VTbl*
   end
@@ -1297,6 +1355,8 @@ lib LibWin32
     get_status_code : Proc(IRTCBuddyGroupEvent*, Int32*, HRESULT)
   end
 
+  IRTCBuddyGroupEvent_GUID = LibC::GUID.new("3a79e1d1-b736-4414-96f8-bbc7f08863e4")
+  CLSID_IRTCBuddyGroupEvent = "3a79e1d1-b736-4414-96f8-bbc7f08863e4"
   struct IRTCBuddyGroupEvent
     lpVtbl : IRTCBuddyGroupEventVTbl*
   end
@@ -1315,6 +1375,8 @@ lib LibWin32
     get_info_header : Proc(IRTCInfoEvent*, UInt8**, HRESULT)
   end
 
+  IRTCInfoEvent_GUID = LibC::GUID.new("4e1d68ae-1912-4f49-b2c3-594fadfd425f")
+  CLSID_IRTCInfoEvent = "4e1d68ae-1912-4f49-b2c3-594fadfd425f"
   struct IRTCInfoEvent
     lpVtbl : IRTCInfoEventVTbl*
   end
@@ -1336,6 +1398,8 @@ lib LibWin32
     get_state : Proc(IRTCMediaRequestEvent*, RTC_REINVITE_STATE*, HRESULT)
   end
 
+  IRTCMediaRequestEvent_GUID = LibC::GUID.new("52572d15-148c-4d97-a36c-2da55c289d63")
+  CLSID_IRTCMediaRequestEvent = "52572d15-148c-4d97-a36c-2da55c289d63"
   struct IRTCMediaRequestEvent
     lpVtbl : IRTCMediaRequestEventVTbl*
   end
@@ -1355,6 +1419,8 @@ lib LibWin32
     get_remote_session_description : Proc(IRTCReInviteEvent*, UInt8**, UInt8**, HRESULT)
   end
 
+  IRTCReInviteEvent_GUID = LibC::GUID.new("11558d84-204c-43e7-99b0-2034e9417f7d")
+  CLSID_IRTCReInviteEvent = "11558d84-204c-43e7-99b0-2034e9417f7d"
   struct IRTCReInviteEvent
     lpVtbl : IRTCReInviteEventVTbl*
   end
@@ -1373,6 +1439,8 @@ lib LibWin32
     get_value : Proc(IRTCPresencePropertyEvent*, UInt8**, HRESULT)
   end
 
+  IRTCPresencePropertyEvent_GUID = LibC::GUID.new("f777f570-a820-49d5-86bd-e099493f1518")
+  CLSID_IRTCPresencePropertyEvent = "f777f570-a820-49d5-86bd-e099493f1518"
   struct IRTCPresencePropertyEvent
     lpVtbl : IRTCPresencePropertyEventVTbl*
   end
@@ -1390,6 +1458,8 @@ lib LibWin32
     get_presence_data : Proc(IRTCPresenceDataEvent*, UInt8**, UInt8**, HRESULT)
   end
 
+  IRTCPresenceDataEvent_GUID = LibC::GUID.new("38f0e78c-8b87-4c04-a82d-aedd83c909bb")
+  CLSID_IRTCPresenceDataEvent = "38f0e78c-8b87-4c04-a82d-aedd83c909bb"
   struct IRTCPresenceDataEvent
     lpVtbl : IRTCPresenceDataEventVTbl*
   end
@@ -1407,6 +1477,8 @@ lib LibWin32
     get_local_presence_info : Proc(IRTCPresenceStatusEvent*, RTC_PRESENCE_STATUS*, UInt8**, HRESULT)
   end
 
+  IRTCPresenceStatusEvent_GUID = LibC::GUID.new("78673f32-4a0f-462c-89aa-ee7706707678")
+  CLSID_IRTCPresenceStatusEvent = "78673f32-4a0f-462c-89aa-ee7706707678"
   struct IRTCPresenceStatusEvent
     lpVtbl : IRTCPresenceStatusEventVTbl*
   end
@@ -1424,6 +1496,8 @@ lib LibWin32
     get__new_enum : Proc(IRTCCollection*, IUnknown*, HRESULT)
   end
 
+  IRTCCollection_GUID = LibC::GUID.new("ec7c8096-b918-4044-94f1-e4fba0361d5c")
+  CLSID_IRTCCollection = "ec7c8096-b918-4044-94f1-e4fba0361d5c"
   struct IRTCCollection
     lpVtbl : IRTCCollectionVTbl*
   end
@@ -1438,6 +1512,8 @@ lib LibWin32
     clone : Proc(IRTCEnumParticipants*, IRTCEnumParticipants*, HRESULT)
   end
 
+  IRTCEnumParticipants_GUID = LibC::GUID.new("fcd56f29-4a4f-41b2-ba5c-f5bccc060bf6")
+  CLSID_IRTCEnumParticipants = "fcd56f29-4a4f-41b2-ba5c-f5bccc060bf6"
   struct IRTCEnumParticipants
     lpVtbl : IRTCEnumParticipantsVTbl*
   end
@@ -1452,6 +1528,8 @@ lib LibWin32
     clone : Proc(IRTCEnumProfiles*, IRTCEnumProfiles*, HRESULT)
   end
 
+  IRTCEnumProfiles_GUID = LibC::GUID.new("29b7c41c-ed82-4bca-84ad-39d5101b58e3")
+  CLSID_IRTCEnumProfiles = "29b7c41c-ed82-4bca-84ad-39d5101b58e3"
   struct IRTCEnumProfiles
     lpVtbl : IRTCEnumProfilesVTbl*
   end
@@ -1466,6 +1544,8 @@ lib LibWin32
     clone : Proc(IRTCEnumBuddies*, IRTCEnumBuddies*, HRESULT)
   end
 
+  IRTCEnumBuddies_GUID = LibC::GUID.new("f7296917-5569-4b3b-b3af-98d1144b2b87")
+  CLSID_IRTCEnumBuddies = "f7296917-5569-4b3b-b3af-98d1144b2b87"
   struct IRTCEnumBuddies
     lpVtbl : IRTCEnumBuddiesVTbl*
   end
@@ -1480,6 +1560,8 @@ lib LibWin32
     clone : Proc(IRTCEnumWatchers*, IRTCEnumWatchers*, HRESULT)
   end
 
+  IRTCEnumWatchers_GUID = LibC::GUID.new("a87d55d7-db74-4ed1-9ca4-77a0e41b413e")
+  CLSID_IRTCEnumWatchers = "a87d55d7-db74-4ed1-9ca4-77a0e41b413e"
   struct IRTCEnumWatchers
     lpVtbl : IRTCEnumWatchersVTbl*
   end
@@ -1494,6 +1576,8 @@ lib LibWin32
     clone : Proc(IRTCEnumGroups*, IRTCEnumGroups*, HRESULT)
   end
 
+  IRTCEnumGroups_GUID = LibC::GUID.new("742378d6-a141-4415-8f27-35d99076cf5d")
+  CLSID_IRTCEnumGroups = "742378d6-a141-4415-8f27-35d99076cf5d"
   struct IRTCEnumGroups
     lpVtbl : IRTCEnumGroupsVTbl*
   end
@@ -1512,6 +1596,8 @@ lib LibWin32
     put_persistent : Proc(IRTCPresenceContact*, Int16, HRESULT)
   end
 
+  IRTCPresenceContact_GUID = LibC::GUID.new("8b22f92c-cd90-42db-a733-212205c3e3df")
+  CLSID_IRTCPresenceContact = "8b22f92c-cd90-42db-a733-212205c3e3df"
   struct IRTCPresenceContact
     lpVtbl : IRTCPresenceContactVTbl*
   end
@@ -1532,6 +1618,8 @@ lib LibWin32
     get_notes : Proc(IRTCBuddy*, UInt8**, HRESULT)
   end
 
+  IRTCBuddy_GUID = LibC::GUID.new("fcb136c8-7b90-4e0c-befe-56edf0ba6f1c")
+  CLSID_IRTCBuddy = "fcb136c8-7b90-4e0c-befe-56edf0ba6f1c"
   struct IRTCBuddy
     lpVtbl : IRTCBuddyVTbl*
   end
@@ -1560,6 +1648,8 @@ lib LibWin32
     get_subscription_type : Proc(IRTCBuddy2*, RTC_BUDDY_SUBSCRIPTION_TYPE*, HRESULT)
   end
 
+  IRTCBuddy2_GUID = LibC::GUID.new("102f9588-23e7-40e3-954d-cd7a1d5c0361")
+  CLSID_IRTCBuddy2 = "102f9588-23e7-40e3-954d-cd7a1d5c0361"
   struct IRTCBuddy2
     lpVtbl : IRTCBuddy2VTbl*
   end
@@ -1580,6 +1670,8 @@ lib LibWin32
     put_state : Proc(IRTCWatcher*, RTC_WATCHER_STATE, HRESULT)
   end
 
+  IRTCWatcher_GUID = LibC::GUID.new("c7cedad8-346b-4d1b-ac02-a2088df9be4f")
+  CLSID_IRTCWatcher = "c7cedad8-346b-4d1b-ac02-a2088df9be4f"
   struct IRTCWatcher
     lpVtbl : IRTCWatcherVTbl*
   end
@@ -1602,6 +1694,8 @@ lib LibWin32
     get_scope : Proc(IRTCWatcher2*, RTC_ACE_SCOPE*, HRESULT)
   end
 
+  IRTCWatcher2_GUID = LibC::GUID.new("d4d9967f-d011-4b1d-91e3-aba78f96393d")
+  CLSID_IRTCWatcher2 = "d4d9967f-d011-4b1d-91e3-aba78f96393d"
   struct IRTCWatcher2
     lpVtbl : IRTCWatcher2VTbl*
   end
@@ -1621,6 +1715,8 @@ lib LibWin32
     get_profile : Proc(IRTCBuddyGroup*, IRTCProfile2*, HRESULT)
   end
 
+  IRTCBuddyGroup_GUID = LibC::GUID.new("60361e68-9164-4389-a4c6-d0b3925bda5e")
+  CLSID_IRTCBuddyGroup = "60361e68-9164-4389-a4c6-d0b3925bda5e"
   struct IRTCBuddyGroup
     lpVtbl : IRTCBuddyGroupVTbl*
   end
@@ -1632,6 +1728,8 @@ lib LibWin32
     event : Proc(IRTCEventNotification*, RTC_EVENT, IDispatch, HRESULT)
   end
 
+  IRTCEventNotification_GUID = LibC::GUID.new("13fa24c7-5748-4b21-91f5-7397609ce747")
+  CLSID_IRTCEventNotification = "13fa24c7-5748-4b21-91f5-7397609ce747"
   struct IRTCEventNotification
     lpVtbl : IRTCEventNotificationVTbl*
   end
@@ -1645,6 +1743,8 @@ lib LibWin32
     release_mapping : Proc(IRTCPortManager*, UInt8*, Int32, UInt8*, Int32, HRESULT)
   end
 
+  IRTCPortManager_GUID = LibC::GUID.new("da77c14b-6208-43ca-8ddf-5b60a0a69fac")
+  CLSID_IRTCPortManager = "da77c14b-6208-43ca-8ddf-5b60a0a69fac"
   struct IRTCPortManager
     lpVtbl : IRTCPortManagerVTbl*
   end
@@ -1656,6 +1756,8 @@ lib LibWin32
     set_port_manager : Proc(IRTCSessionPortManagement*, IRTCPortManager, HRESULT)
   end
 
+  IRTCSessionPortManagement_GUID = LibC::GUID.new("a072f1d6-0286-4e1f-85f2-17a2948456ec")
+  CLSID_IRTCSessionPortManagement = "a072f1d6-0286-4e1f-85f2-17a2948456ec"
   struct IRTCSessionPortManagement
     lpVtbl : IRTCSessionPortManagementVTbl*
   end
@@ -1669,6 +1771,8 @@ lib LibWin32
     get_port_range : Proc(IRTCClientPortManagement*, RTC_PORT_TYPE, Int32*, Int32*, HRESULT)
   end
 
+  IRTCClientPortManagement_GUID = LibC::GUID.new("d5df3f03-4bde-4417-aefe-71177bdaea66")
+  CLSID_IRTCClientPortManagement = "d5df3f03-4bde-4417-aefe-71177bdaea66"
   struct IRTCClientPortManagement
     lpVtbl : IRTCClientPortManagementVTbl*
   end
@@ -1681,6 +1785,8 @@ lib LibWin32
     execute_search : Proc(IRTCUserSearch*, IRTCUserSearchQuery, IRTCProfile, LibC::IntPtrT, HRESULT)
   end
 
+  IRTCUserSearch_GUID = LibC::GUID.new("b619882b-860c-4db4-be1b-693b6505bbe5")
+  CLSID_IRTCUserSearch = "b619882b-860c-4db4-be1b-693b6505bbe5"
   struct IRTCUserSearch
     lpVtbl : IRTCUserSearchVTbl*
   end
@@ -1698,6 +1804,8 @@ lib LibWin32
     get_search_domain : Proc(IRTCUserSearchQuery*, UInt8**, HRESULT)
   end
 
+  IRTCUserSearchQuery_GUID = LibC::GUID.new("288300f5-d23a-4365-9a73-9985c98c2881")
+  CLSID_IRTCUserSearchQuery = "288300f5-d23a-4365-9a73-9985c98c2881"
   struct IRTCUserSearchQuery
     lpVtbl : IRTCUserSearchQueryVTbl*
   end
@@ -1709,6 +1817,8 @@ lib LibWin32
     get_value : Proc(IRTCUserSearchResult*, RTC_USER_SEARCH_COLUMN, UInt8**, HRESULT)
   end
 
+  IRTCUserSearchResult_GUID = LibC::GUID.new("851278b2-9592-480f-8db5-2de86b26b54d")
+  CLSID_IRTCUserSearchResult = "851278b2-9592-480f-8db5-2de86b26b54d"
   struct IRTCUserSearchResult
     lpVtbl : IRTCUserSearchResultVTbl*
   end
@@ -1723,6 +1833,8 @@ lib LibWin32
     clone : Proc(IRTCEnumUserSearchResults*, IRTCEnumUserSearchResults*, HRESULT)
   end
 
+  IRTCEnumUserSearchResults_GUID = LibC::GUID.new("83d4d877-aa5d-4a5b-8d0e-002a8067e0e8")
+  CLSID_IRTCEnumUserSearchResults = "83d4d877-aa5d-4a5b-8d0e-002a8067e0e8"
   struct IRTCEnumUserSearchResults
     lpVtbl : IRTCEnumUserSearchResultsVTbl*
   end
@@ -1744,6 +1856,8 @@ lib LibWin32
     get_more_available : Proc(IRTCUserSearchResultsEvent*, Int16*, HRESULT)
   end
 
+  IRTCUserSearchResultsEvent_GUID = LibC::GUID.new("d8c8c3cd-7fac-4088-81c5-c24cbc0938e3")
+  CLSID_IRTCUserSearchResultsEvent = "d8c8c3cd-7fac-4088-81c5-c24cbc0938e3"
   struct IRTCUserSearchResultsEvent
     lpVtbl : IRTCUserSearchResultsEventVTbl*
   end
@@ -1762,6 +1876,8 @@ lib LibWin32
     get_status_text : Proc(IRTCSessionReferStatusEvent*, UInt8**, HRESULT)
   end
 
+  IRTCSessionReferStatusEvent_GUID = LibC::GUID.new("3d8fc2cd-5d76-44ab-bb68-2a80353b34a2")
+  CLSID_IRTCSessionReferStatusEvent = "3d8fc2cd-5d76-44ab-bb68-2a80353b34a2"
   struct IRTCSessionReferStatusEvent
     lpVtbl : IRTCSessionReferStatusEventVTbl*
   end
@@ -1783,6 +1899,8 @@ lib LibWin32
     set_referred_session_state : Proc(IRTCSessionReferredEvent*, RTC_SESSION_STATE, HRESULT)
   end
 
+  IRTCSessionReferredEvent_GUID = LibC::GUID.new("176a6828-4fcc-4f28-a862-04597a6cf1c4")
+  CLSID_IRTCSessionReferredEvent = "176a6828-4fcc-4f28-a862-04597a6cf1c4"
   struct IRTCSessionReferredEvent
     lpVtbl : IRTCSessionReferredEventVTbl*
   end
@@ -1794,6 +1912,8 @@ lib LibWin32
     evaluate_session_description : Proc(IRTCSessionDescriptionManager*, UInt8*, UInt8*, Int16*, HRESULT)
   end
 
+  IRTCSessionDescriptionManager_GUID = LibC::GUID.new("ba7f518e-d336-4070-93a6-865395c843f9")
+  CLSID_IRTCSessionDescriptionManager = "ba7f518e-d336-4070-93a6-865395c843f9"
   struct IRTCSessionDescriptionManager
     lpVtbl : IRTCSessionDescriptionManagerVTbl*
   end
@@ -1808,6 +1928,8 @@ lib LibWin32
     clone : Proc(IRTCEnumPresenceDevices*, IRTCEnumPresenceDevices*, HRESULT)
   end
 
+  IRTCEnumPresenceDevices_GUID = LibC::GUID.new("708c2ab7-8bf8-42f8-8c7d-635197ad5539")
+  CLSID_IRTCEnumPresenceDevices = "708c2ab7-8bf8-42f8-8c7d-635197ad5539"
   struct IRTCEnumPresenceDevices
     lpVtbl : IRTCEnumPresenceDevicesVTbl*
   end
@@ -1822,6 +1944,8 @@ lib LibWin32
     get_presence_data : Proc(IRTCPresenceDevice*, UInt8**, UInt8**, HRESULT)
   end
 
+  IRTCPresenceDevice_GUID = LibC::GUID.new("bc6a90dd-ad9a-48da-9b0c-2515e38521ad")
+  CLSID_IRTCPresenceDevice = "bc6a90dd-ad9a-48da-9b0c-2515e38521ad"
   struct IRTCPresenceDevice
     lpVtbl : IRTCPresenceDeviceVTbl*
   end
@@ -1836,6 +1960,8 @@ lib LibWin32
     invoke : Proc(IRTCDispatchEventNotification*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IRTCDispatchEventNotification_GUID = LibC::GUID.new("176ddfbe-fec0-4d55-bc87-84cff1ef7f91")
+  CLSID_IRTCDispatchEventNotification = "176ddfbe-fec0-4d55-bc87-84cff1ef7f91"
   struct IRTCDispatchEventNotification
     lpVtbl : IRTCDispatchEventNotificationVTbl*
   end
@@ -1848,6 +1974,8 @@ lib LibWin32
     query_setting : Proc(ITransportSettingsInternal*, TRANSPORT_SETTING*, HRESULT)
   end
 
+  ITransportSettingsInternal_GUID = LibC::GUID.new("5123e076-29e3-4bfd-84fe-0192d411e3e8")
+  CLSID_ITransportSettingsInternal = "5123e076-29e3-4bfd-84fe-0192d411e3e8"
   struct ITransportSettingsInternal
     lpVtbl : ITransportSettingsInternalVTbl*
   end
@@ -1860,6 +1988,8 @@ lib LibWin32
     query_setting : Proc(INetworkTransportSettings*, TRANSPORT_SETTING_ID*, UInt32, UInt8*, UInt32*, UInt8**, HRESULT)
   end
 
+  INetworkTransportSettings_GUID = LibC::GUID.new("5e7abb2c-f2c1-4a61-bd35-deb7a08ab0f1")
+  CLSID_INetworkTransportSettings = "5e7abb2c-f2c1-4a61-bd35-deb7a08ab0f1"
   struct INetworkTransportSettings
     lpVtbl : INetworkTransportSettingsVTbl*
   end
@@ -1872,6 +2002,8 @@ lib LibWin32
     flush : Proc(INotificationTransportSync*, HRESULT)
   end
 
+  INotificationTransportSync_GUID = LibC::GUID.new("79eb1402-0ab8-49c0-9e14-a1ae4ba93058")
+  CLSID_INotificationTransportSync = "79eb1402-0ab8-49c0-9e14-a1ae4ba93058"
   struct INotificationTransportSync
     lpVtbl : INotificationTransportSyncVTbl*
   end

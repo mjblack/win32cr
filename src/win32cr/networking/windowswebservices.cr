@@ -2822,6 +2822,8 @@ lib LibWin32
     is_registered_for_content_prefetch : Proc(IContentPrefetcherTaskTrigger*, LibC::LPWSTR, UInt8*, HRESULT)
   end
 
+  IContentPrefetcherTaskTrigger_GUID = LibC::GUID.new("1b35a14a-6094-4799-a60e-e474e15d4dc9")
+  CLSID_IContentPrefetcherTaskTrigger = "1b35a14a-6094-4799-a60e-e474e15d4dc9"
   struct IContentPrefetcherTaskTrigger
     lpVtbl : IContentPrefetcherTaskTriggerVTbl*
   end

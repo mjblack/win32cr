@@ -230,6 +230,8 @@ lib LibWin32
     get_trigger_string : Proc(ITaskTrigger*, LibC::LPWSTR*, HRESULT)
   end
 
+  ITaskTrigger_GUID = LibC::GUID.new("148bd52b-a2ab-11ce-b11f-00aa00530503")
+  CLSID_ITaskTrigger = "148bd52b-a2ab-11ce-b11f-00aa00530503"
   struct ITaskTrigger
     lpVtbl : ITaskTriggerVTbl*
   end
@@ -269,6 +271,8 @@ lib LibWin32
     get_account_information : Proc(IScheduledWorkItem*, LibC::LPWSTR*, HRESULT)
   end
 
+  IScheduledWorkItem_GUID = LibC::GUID.new("a6b952f0-a4b1-11d0-997d-00aa006887ec")
+  CLSID_IScheduledWorkItem = "a6b952f0-a4b1-11d0-997d-00aa006887ec"
   struct IScheduledWorkItem
     lpVtbl : IScheduledWorkItemVTbl*
   end
@@ -320,6 +324,8 @@ lib LibWin32
     get_max_run_time : Proc(ITask*, UInt32*, HRESULT)
   end
 
+  ITask_GUID = LibC::GUID.new("148bd524-a2ab-11ce-b11f-00aa00530503")
+  CLSID_ITask = "148bd524-a2ab-11ce-b11f-00aa00530503"
   struct ITask
     lpVtbl : ITaskVTbl*
   end
@@ -334,6 +340,8 @@ lib LibWin32
     clone : Proc(IEnumWorkItems*, IEnumWorkItems*, HRESULT)
   end
 
+  IEnumWorkItems_GUID = LibC::GUID.new("148bd528-a2ab-11ce-b11f-00aa00530503")
+  CLSID_IEnumWorkItems = "148bd528-a2ab-11ce-b11f-00aa00530503"
   struct IEnumWorkItems
     lpVtbl : IEnumWorkItemsVTbl*
   end
@@ -352,6 +360,8 @@ lib LibWin32
     is_of_type : Proc(ITaskScheduler*, LibC::LPWSTR, Guid*, HRESULT)
   end
 
+  ITaskScheduler_GUID = LibC::GUID.new("148bd527-a2ab-11ce-b11f-00aa00530503")
+  CLSID_ITaskScheduler = "148bd527-a2ab-11ce-b11f-00aa00530503"
   struct ITaskScheduler
     lpVtbl : ITaskSchedulerVTbl*
   end
@@ -363,6 +373,8 @@ lib LibWin32
     get_page : Proc(IProvideTaskPage*, TASKPAGE, LibC::BOOL, HPROPSHEETPAGE*, HRESULT)
   end
 
+  IProvideTaskPage_GUID = LibC::GUID.new("4086658a-cbbb-11cf-b604-00c04fd8d565")
+  CLSID_IProvideTaskPage = "4086658a-cbbb-11cf-b604-00c04fd8d565"
   struct IProvideTaskPage
     lpVtbl : IProvideTaskPageVTbl*
   end
@@ -380,6 +392,8 @@ lib LibWin32
     get__new_enum : Proc(ITaskFolderCollection*, IUnknown*, HRESULT)
   end
 
+  ITaskFolderCollection_GUID = LibC::GUID.new("79184a66-8664-423f-97f1-637356a5d812")
+  CLSID_ITaskFolderCollection = "79184a66-8664-423f-97f1-637356a5d812"
   struct ITaskFolderCollection
     lpVtbl : ITaskFolderCollectionVTbl*
   end
@@ -403,6 +417,8 @@ lib LibWin32
     get_highest_version : Proc(ITaskService*, UInt32*, HRESULT)
   end
 
+  ITaskService_GUID = LibC::GUID.new("2faba4c7-4da9-4013-9697-20cc3fd40f85")
+  CLSID_ITaskService = "2faba4c7-4da9-4013-9697-20cc3fd40f85"
   struct ITaskService
     lpVtbl : ITaskServiceVTbl*
   end
@@ -417,6 +433,8 @@ lib LibWin32
     resume : Proc(ITaskHandler*, HRESULT)
   end
 
+  ITaskHandler_GUID = LibC::GUID.new("839d7762-5121-4009-9234-4f0d19394f04")
+  CLSID_ITaskHandler = "839d7762-5121-4009-9234-4f0d19394f04"
   struct ITaskHandler
     lpVtbl : ITaskHandlerVTbl*
   end
@@ -429,6 +447,8 @@ lib LibWin32
     task_completed : Proc(ITaskHandlerStatus*, HRESULT, HRESULT)
   end
 
+  ITaskHandlerStatus_GUID = LibC::GUID.new("eaec7a8f-27a0-4ddc-8675-14726a01a38a")
+  CLSID_ITaskHandlerStatus = "eaec7a8f-27a0-4ddc-8675-14726a01a38a"
   struct ITaskHandlerStatus
     lpVtbl : ITaskHandlerStatusVTbl*
   end
@@ -442,6 +462,8 @@ lib LibWin32
     get_context : Proc(ITaskVariables*, UInt8**, HRESULT)
   end
 
+  ITaskVariables_GUID = LibC::GUID.new("3e4c9351-d966-4b8b-bb87-ceba68bb0107")
+  CLSID_ITaskVariables = "3e4c9351-d966-4b8b-bb87-ceba68bb0107"
   struct ITaskVariables
     lpVtbl : ITaskVariablesVTbl*
   end
@@ -460,6 +482,8 @@ lib LibWin32
     put_value : Proc(ITaskNamedValuePair*, UInt8*, HRESULT)
   end
 
+  ITaskNamedValuePair_GUID = LibC::GUID.new("39038068-2b46-4afd-8662-7bb6f868d221")
+  CLSID_ITaskNamedValuePair = "39038068-2b46-4afd-8662-7bb6f868d221"
   struct ITaskNamedValuePair
     lpVtbl : ITaskNamedValuePairVTbl*
   end
@@ -480,6 +504,8 @@ lib LibWin32
     clear : Proc(ITaskNamedValueCollection*, HRESULT)
   end
 
+  ITaskNamedValueCollection_GUID = LibC::GUID.new("b4ef826b-63c3-46e4-a504-ef69e4f7ea4d")
+  CLSID_ITaskNamedValueCollection = "b4ef826b-63c3-46e4-a504-ef69e4f7ea4d"
   struct ITaskNamedValueCollection
     lpVtbl : ITaskNamedValueCollectionVTbl*
   end
@@ -502,6 +528,8 @@ lib LibWin32
     get_engine_pid : Proc(IRunningTask*, UInt32*, HRESULT)
   end
 
+  IRunningTask_GUID = LibC::GUID.new("653758fb-7b9a-4f1e-a471-beeb8e9b834e")
+  CLSID_IRunningTask = "653758fb-7b9a-4f1e-a471-beeb8e9b834e"
   struct IRunningTask
     lpVtbl : IRunningTaskVTbl*
   end
@@ -519,6 +547,8 @@ lib LibWin32
     get__new_enum : Proc(IRunningTaskCollection*, IUnknown*, HRESULT)
   end
 
+  IRunningTaskCollection_GUID = LibC::GUID.new("6a67614b-6828-4fec-aa54-6d52e8f1f2db")
+  CLSID_IRunningTaskCollection = "6a67614b-6828-4fec-aa54-6d52e8f1f2db"
   struct IRunningTaskCollection
     lpVtbl : IRunningTaskCollectionVTbl*
   end
@@ -551,6 +581,8 @@ lib LibWin32
     get_run_times : Proc(IRegisteredTask*, SYSTEMTIME*, SYSTEMTIME*, UInt32*, SYSTEMTIME**, HRESULT)
   end
 
+  IRegisteredTask_GUID = LibC::GUID.new("9c86f320-dee3-4dd1-b972-a303f26b061e")
+  CLSID_IRegisteredTask = "9c86f320-dee3-4dd1-b972-a303f26b061e"
   struct IRegisteredTask
     lpVtbl : IRegisteredTaskVTbl*
   end
@@ -578,6 +610,8 @@ lib LibWin32
     put_enabled : Proc(ITrigger*, Int16, HRESULT)
   end
 
+  ITrigger_GUID = LibC::GUID.new("09941815-ea89-4b5b-89e0-2a773801fac3")
+  CLSID_ITrigger = "09941815-ea89-4b5b-89e0-2a773801fac3"
   struct ITrigger
     lpVtbl : ITriggerVTbl*
   end
@@ -605,6 +639,8 @@ lib LibWin32
     put_enabled : Proc(IIdleTrigger*, Int16, HRESULT)
   end
 
+  IIdleTrigger_GUID = LibC::GUID.new("d537d2b0-9fb3-4d34-9739-1ff5ce7b1ef3")
+  CLSID_IIdleTrigger = "d537d2b0-9fb3-4d34-9739-1ff5ce7b1ef3"
   struct IIdleTrigger
     lpVtbl : IIdleTriggerVTbl*
   end
@@ -636,6 +672,8 @@ lib LibWin32
     put_user_id : Proc(ILogonTrigger*, UInt8*, HRESULT)
   end
 
+  ILogonTrigger_GUID = LibC::GUID.new("72dade38-fae4-4b3e-baf4-5d009af02b1c")
+  CLSID_ILogonTrigger = "72dade38-fae4-4b3e-baf4-5d009af02b1c"
   struct ILogonTrigger
     lpVtbl : ILogonTriggerVTbl*
   end
@@ -669,6 +707,8 @@ lib LibWin32
     put_state_change : Proc(ISessionStateChangeTrigger*, TASK_SESSION_STATE_CHANGE_TYPE, HRESULT)
   end
 
+  ISessionStateChangeTrigger_GUID = LibC::GUID.new("754da71b-4385-4475-9dd9-598294fa3641")
+  CLSID_ISessionStateChangeTrigger = "754da71b-4385-4475-9dd9-598294fa3641"
   struct ISessionStateChangeTrigger
     lpVtbl : ISessionStateChangeTriggerVTbl*
   end
@@ -702,6 +742,8 @@ lib LibWin32
     put_value_queries : Proc(IEventTrigger*, ITaskNamedValueCollection, HRESULT)
   end
 
+  IEventTrigger_GUID = LibC::GUID.new("d45b0167-9653-4eef-b94f-0732ca7af251")
+  CLSID_IEventTrigger = "d45b0167-9653-4eef-b94f-0732ca7af251"
   struct IEventTrigger
     lpVtbl : IEventTriggerVTbl*
   end
@@ -731,6 +773,8 @@ lib LibWin32
     put_random_delay : Proc(ITimeTrigger*, UInt8*, HRESULT)
   end
 
+  ITimeTrigger_GUID = LibC::GUID.new("b45747e0-eba7-4276-9f29-85c5bb300006")
+  CLSID_ITimeTrigger = "b45747e0-eba7-4276-9f29-85c5bb300006"
   struct ITimeTrigger
     lpVtbl : ITimeTriggerVTbl*
   end
@@ -762,6 +806,8 @@ lib LibWin32
     put_random_delay : Proc(IDailyTrigger*, UInt8*, HRESULT)
   end
 
+  IDailyTrigger_GUID = LibC::GUID.new("126c5cd8-b288-41d5-8dbf-e491446adc5c")
+  CLSID_IDailyTrigger = "126c5cd8-b288-41d5-8dbf-e491446adc5c"
   struct IDailyTrigger
     lpVtbl : IDailyTriggerVTbl*
   end
@@ -795,6 +841,8 @@ lib LibWin32
     put_random_delay : Proc(IWeeklyTrigger*, UInt8*, HRESULT)
   end
 
+  IWeeklyTrigger_GUID = LibC::GUID.new("5038fc98-82ff-436d-8728-a512a57c9dc1")
+  CLSID_IWeeklyTrigger = "5038fc98-82ff-436d-8728-a512a57c9dc1"
   struct IWeeklyTrigger
     lpVtbl : IWeeklyTriggerVTbl*
   end
@@ -830,6 +878,8 @@ lib LibWin32
     put_random_delay : Proc(IMonthlyTrigger*, UInt8*, HRESULT)
   end
 
+  IMonthlyTrigger_GUID = LibC::GUID.new("97c45ef1-6b02-4a1a-9c0e-1ebfba1500ac")
+  CLSID_IMonthlyTrigger = "97c45ef1-6b02-4a1a-9c0e-1ebfba1500ac"
   struct IMonthlyTrigger
     lpVtbl : IMonthlyTriggerVTbl*
   end
@@ -867,6 +917,8 @@ lib LibWin32
     put_random_delay : Proc(IMonthlyDOWTrigger*, UInt8*, HRESULT)
   end
 
+  IMonthlyDOWTrigger_GUID = LibC::GUID.new("77d025a3-90fa-43aa-b52e-cda5499b946a")
+  CLSID_IMonthlyDOWTrigger = "77d025a3-90fa-43aa-b52e-cda5499b946a"
   struct IMonthlyDOWTrigger
     lpVtbl : IMonthlyDOWTriggerVTbl*
   end
@@ -896,6 +948,8 @@ lib LibWin32
     put_delay : Proc(IBootTrigger*, UInt8*, HRESULT)
   end
 
+  IBootTrigger_GUID = LibC::GUID.new("2a9c35da-d357-41f4-bbc1-207ac1b1f3cb")
+  CLSID_IBootTrigger = "2a9c35da-d357-41f4-bbc1-207ac1b1f3cb"
   struct IBootTrigger
     lpVtbl : IBootTriggerVTbl*
   end
@@ -925,6 +979,8 @@ lib LibWin32
     put_delay : Proc(IRegistrationTrigger*, UInt8*, HRESULT)
   end
 
+  IRegistrationTrigger_GUID = LibC::GUID.new("4c8fec3a-c218-4e0c-b23d-629024db91a2")
+  CLSID_IRegistrationTrigger = "4c8fec3a-c218-4e0c-b23d-629024db91a2"
   struct IRegistrationTrigger
     lpVtbl : IRegistrationTriggerVTbl*
   end
@@ -942,6 +998,8 @@ lib LibWin32
     get_type : Proc(IAction*, TASK_ACTION_TYPE*, HRESULT)
   end
 
+  IAction_GUID = LibC::GUID.new("bae54997-48b1-4cbe-9965-d6be263ebea4")
+  CLSID_IAction = "bae54997-48b1-4cbe-9965-d6be263ebea4"
   struct IAction
     lpVtbl : IActionVTbl*
   end
@@ -965,6 +1023,8 @@ lib LibWin32
     put_working_directory : Proc(IExecAction*, UInt8*, HRESULT)
   end
 
+  IExecAction_GUID = LibC::GUID.new("4c3d624d-fd6b-49a3-b9b7-09cb3cd3f047")
+  CLSID_IExecAction = "4c3d624d-fd6b-49a3-b9b7-09cb3cd3f047"
   struct IExecAction
     lpVtbl : IExecActionVTbl*
   end
@@ -990,6 +1050,8 @@ lib LibWin32
     put_hide_app_window : Proc(IExecAction2*, Int16, HRESULT)
   end
 
+  IExecAction2_GUID = LibC::GUID.new("f2a82542-bda5-4e6b-9143-e2bf4f8987b6")
+  CLSID_IExecAction2 = "f2a82542-bda5-4e6b-9143-e2bf4f8987b6"
   struct IExecAction2
     lpVtbl : IExecAction2VTbl*
   end
@@ -1011,6 +1073,8 @@ lib LibWin32
     put_message_body : Proc(IShowMessageAction*, UInt8*, HRESULT)
   end
 
+  IShowMessageAction_GUID = LibC::GUID.new("505e9e68-af89-46b8-a30f-56162a83d537")
+  CLSID_IShowMessageAction = "505e9e68-af89-46b8-a30f-56162a83d537"
   struct IShowMessageAction
     lpVtbl : IShowMessageActionVTbl*
   end
@@ -1032,6 +1096,8 @@ lib LibWin32
     put_data : Proc(IComHandlerAction*, UInt8*, HRESULT)
   end
 
+  IComHandlerAction_GUID = LibC::GUID.new("6d2fd252-75c5-4f66-90ba-2a7d8cc3039f")
+  CLSID_IComHandlerAction = "6d2fd252-75c5-4f66-90ba-2a7d8cc3039f"
   struct IComHandlerAction
     lpVtbl : IComHandlerActionVTbl*
   end
@@ -1069,6 +1135,8 @@ lib LibWin32
     put_attachments : Proc(IEmailAction*, SAFEARRAY*, HRESULT)
   end
 
+  IEmailAction_GUID = LibC::GUID.new("10f62c64-7e16-4314-a0c2-0c3683f99d40")
+  CLSID_IEmailAction = "10f62c64-7e16-4314-a0c2-0c3683f99d40"
   struct IEmailAction
     lpVtbl : IEmailActionVTbl*
   end
@@ -1089,6 +1157,8 @@ lib LibWin32
     clear : Proc(ITriggerCollection*, HRESULT)
   end
 
+  ITriggerCollection_GUID = LibC::GUID.new("85df5081-1b24-4f32-878a-d9d14df4cb77")
+  CLSID_ITriggerCollection = "85df5081-1b24-4f32-878a-d9d14df4cb77"
   struct ITriggerCollection
     lpVtbl : ITriggerCollectionVTbl*
   end
@@ -1113,6 +1183,8 @@ lib LibWin32
     put_context : Proc(IActionCollection*, UInt8*, HRESULT)
   end
 
+  IActionCollection_GUID = LibC::GUID.new("02820e19-7b98-4ed2-b2e8-fdccceff619b")
+  CLSID_IActionCollection = "02820e19-7b98-4ed2-b2e8-fdccceff619b"
   struct IActionCollection
     lpVtbl : IActionCollectionVTbl*
   end
@@ -1139,6 +1211,8 @@ lib LibWin32
     put_run_level : Proc(IPrincipal*, TASK_RUNLEVEL_TYPE, HRESULT)
   end
 
+  IPrincipal_GUID = LibC::GUID.new("d98d51e5-c9b4-496a-a9c1-18980261cf0f")
+  CLSID_IPrincipal = "d98d51e5-c9b4-496a-a9c1-18980261cf0f"
   struct IPrincipal
     lpVtbl : IPrincipalVTbl*
   end
@@ -1158,6 +1232,8 @@ lib LibWin32
     add_required_privilege : Proc(IPrincipal2*, UInt8*, HRESULT)
   end
 
+  IPrincipal2_GUID = LibC::GUID.new("248919ae-e345-4a6d-8aeb-e0d3165c904e")
+  CLSID_IPrincipal2 = "248919ae-e345-4a6d-8aeb-e0d3165c904e"
   struct IPrincipal2
     lpVtbl : IPrincipal2VTbl*
   end
@@ -1190,6 +1266,8 @@ lib LibWin32
     put_source : Proc(IRegistrationInfo*, UInt8*, HRESULT)
   end
 
+  IRegistrationInfo_GUID = LibC::GUID.new("416d8b73-cb41-4ea1-805c-9be9a5ac4a74")
+  CLSID_IRegistrationInfo = "416d8b73-cb41-4ea1-805c-9be9a5ac4a74"
   struct IRegistrationInfo
     lpVtbl : IRegistrationInfoVTbl*
   end
@@ -1218,6 +1296,8 @@ lib LibWin32
     put_xml_text : Proc(ITaskDefinition*, UInt8*, HRESULT)
   end
 
+  ITaskDefinition_GUID = LibC::GUID.new("f5bc8fc5-536d-4f77-b852-fbc1356fdeb6")
+  CLSID_ITaskDefinition = "f5bc8fc5-536d-4f77-b852-fbc1356fdeb6"
   struct ITaskDefinition
     lpVtbl : ITaskDefinitionVTbl*
   end
@@ -1272,6 +1352,8 @@ lib LibWin32
     put_network_settings : Proc(ITaskSettings*, INetworkSettings, HRESULT)
   end
 
+  ITaskSettings_GUID = LibC::GUID.new("8fd4711d-2d02-4c8c-87e3-eff699de127e")
+  CLSID_ITaskSettings = "8fd4711d-2d02-4c8c-87e3-eff699de127e"
   struct ITaskSettings
     lpVtbl : ITaskSettingsVTbl*
   end
@@ -1290,6 +1372,8 @@ lib LibWin32
     put_use_unified_scheduling_engine : Proc(ITaskSettings2*, Int16, HRESULT)
   end
 
+  ITaskSettings2_GUID = LibC::GUID.new("2c05c3f0-6eed-4c05-a15f-ed7d7a98a369")
+  CLSID_ITaskSettings2 = "2c05c3f0-6eed-4c05-a15f-ed7d7a98a369"
   struct ITaskSettings2
     lpVtbl : ITaskSettings2VTbl*
   end
@@ -1353,6 +1437,8 @@ lib LibWin32
     put_volatile : Proc(ITaskSettings3*, Int16, HRESULT)
   end
 
+  ITaskSettings3_GUID = LibC::GUID.new("0ad9d0d7-0c7f-4ebb-9a5f-d1c648dca528")
+  CLSID_ITaskSettings3 = "0ad9d0d7-0c7f-4ebb-9a5f-d1c648dca528"
   struct ITaskSettings3
     lpVtbl : ITaskSettings3VTbl*
   end
@@ -1373,6 +1459,8 @@ lib LibWin32
     get_exclusive : Proc(IMaintenanceSettings*, Int16*, HRESULT)
   end
 
+  IMaintenanceSettings_GUID = LibC::GUID.new("a6024fa8-9652-4adb-a6bf-5cfcd877a7ba")
+  CLSID_IMaintenanceSettings = "a6024fa8-9652-4adb-a6bf-5cfcd877a7ba"
   struct IMaintenanceSettings
     lpVtbl : IMaintenanceSettingsVTbl*
   end
@@ -1390,6 +1478,8 @@ lib LibWin32
     get__new_enum : Proc(IRegisteredTaskCollection*, IUnknown*, HRESULT)
   end
 
+  IRegisteredTaskCollection_GUID = LibC::GUID.new("86627eb4-42a7-41e4-a4d9-ac33a72f2d52")
+  CLSID_IRegisteredTaskCollection = "86627eb4-42a7-41e4-a4d9-ac33a72f2d52"
   struct IRegisteredTaskCollection
     lpVtbl : IRegisteredTaskCollectionVTbl*
   end
@@ -1417,6 +1507,8 @@ lib LibWin32
     set_security_descriptor : Proc(ITaskFolder*, UInt8*, Int32, HRESULT)
   end
 
+  ITaskFolder_GUID = LibC::GUID.new("8cfac062-a080-4c15-9a88-aa7c2af80dfc")
+  CLSID_ITaskFolder = "8cfac062-a080-4c15-9a88-aa7c2af80dfc"
   struct ITaskFolder
     lpVtbl : ITaskFolderVTbl*
   end
@@ -1439,6 +1531,8 @@ lib LibWin32
     put_restart_on_idle : Proc(IIdleSettings*, Int16, HRESULT)
   end
 
+  IIdleSettings_GUID = LibC::GUID.new("84594461-0053-4342-a8fd-088fabf11f32")
+  CLSID_IIdleSettings = "84594461-0053-4342-a8fd-088fabf11f32"
   struct IIdleSettings
     lpVtbl : IIdleSettingsVTbl*
   end
@@ -1457,6 +1551,8 @@ lib LibWin32
     put_id : Proc(INetworkSettings*, UInt8*, HRESULT)
   end
 
+  INetworkSettings_GUID = LibC::GUID.new("9f7dea84-c30b-4245-80b6-00e9f646f1b4")
+  CLSID_INetworkSettings = "9f7dea84-c30b-4245-80b6-00e9f646f1b4"
   struct INetworkSettings
     lpVtbl : INetworkSettingsVTbl*
   end
@@ -1477,6 +1573,8 @@ lib LibWin32
     put_stop_at_duration_end : Proc(IRepetitionPattern*, Int16, HRESULT)
   end
 
+  IRepetitionPattern_GUID = LibC::GUID.new("7fb9acf1-26be-400e-85b5-294b9c75dfd6")
+  CLSID_IRepetitionPattern = "7fb9acf1-26be-400e-85b5-294b9c75dfd6"
   struct IRepetitionPattern
     lpVtbl : IRepetitionPatternVTbl*
   end

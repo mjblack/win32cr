@@ -71,6 +71,8 @@ lib LibWin32
     report_error : Proc(ITpmVirtualSmartCardManagerStatusCallback*, TPMVSCMGR_ERROR, HRESULT)
   end
 
+  ITpmVirtualSmartCardManagerStatusCallback_GUID = LibC::GUID.new("1a1bb35f-abb8-451c-a1ae-33d98f1bef4a")
+  CLSID_ITpmVirtualSmartCardManagerStatusCallback = "1a1bb35f-abb8-451c-a1ae-33d98f1bef4a"
   struct ITpmVirtualSmartCardManagerStatusCallback
     lpVtbl : ITpmVirtualSmartCardManagerStatusCallbackVTbl*
   end
@@ -83,6 +85,8 @@ lib LibWin32
     destroy_virtual_smart_card : Proc(ITpmVirtualSmartCardManager*, LibC::LPWSTR, ITpmVirtualSmartCardManagerStatusCallback, LibC::BOOL*, HRESULT)
   end
 
+  ITpmVirtualSmartCardManager_GUID = LibC::GUID.new("112b1dff-d9dc-41f7-869f-d67fee7cb591")
+  CLSID_ITpmVirtualSmartCardManager = "112b1dff-d9dc-41f7-869f-d67fee7cb591"
   struct ITpmVirtualSmartCardManager
     lpVtbl : ITpmVirtualSmartCardManagerVTbl*
   end
@@ -96,6 +100,8 @@ lib LibWin32
     create_virtual_smart_card_with_pin_policy : Proc(ITpmVirtualSmartCardManager2*, LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
   end
 
+  ITpmVirtualSmartCardManager2_GUID = LibC::GUID.new("fdf8a2b9-02de-47f4-bc26-aa85ab5e5267")
+  CLSID_ITpmVirtualSmartCardManager2 = "fdf8a2b9-02de-47f4-bc26-aa85ab5e5267"
   struct ITpmVirtualSmartCardManager2
     lpVtbl : ITpmVirtualSmartCardManager2VTbl*
   end
@@ -110,6 +116,8 @@ lib LibWin32
     create_virtual_smart_card_with_attestation : Proc(ITpmVirtualSmartCardManager3*, LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, TPMVSC_ATTESTATION_TYPE, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, HRESULT)
   end
 
+  ITpmVirtualSmartCardManager3_GUID = LibC::GUID.new("3c745a97-f375-4150-be17-5950f694c699")
+  CLSID_ITpmVirtualSmartCardManager3 = "3c745a97-f375-4150-be17-5950f694c699"
   struct ITpmVirtualSmartCardManager3
     lpVtbl : ITpmVirtualSmartCardManager3VTbl*
   end

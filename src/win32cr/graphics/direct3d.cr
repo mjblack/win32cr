@@ -749,6 +749,8 @@ lib LibWin32
     get_buffer_size : Proc(ID3DBlob*, LibC::UINT_PTR)
   end
 
+  ID3DBlob_GUID = LibC::GUID.new("8ba5fb08-5195-40e2-ac58-0d989c3a0102")
+  CLSID_ID3DBlob = "8ba5fb08-5195-40e2-ac58-0d989c3a0102"
   struct ID3DBlob
     lpVtbl : ID3DBlobVTbl*
   end
@@ -761,6 +763,8 @@ lib LibWin32
     unregister_destruction_callback : Proc(ID3DDestructionNotifier*, UInt32, HRESULT)
   end
 
+  ID3DDestructionNotifier_GUID = LibC::GUID.new("a06eb39a-50da-425b-8c31-4eecd6c270f3")
+  CLSID_ID3DDestructionNotifier = "a06eb39a-50da-425b-8c31-4eecd6c270f3"
   struct ID3DDestructionNotifier
     lpVtbl : ID3DDestructionNotifierVTbl*
   end

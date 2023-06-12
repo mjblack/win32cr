@@ -1632,6 +1632,8 @@ lib LibWin32
     set_event_handle : Proc(IAudioEndpoint*, LibC::HANDLE, HRESULT)
   end
 
+  IAudioEndpoint_GUID = LibC::GUID.new("30a99515-1527-4451-af9f-00c5f0234daf")
+  CLSID_IAudioEndpoint = "30a99515-1527-4451-af9f-00c5f0234daf"
   struct IAudioEndpoint
     lpVtbl : IAudioEndpointVTbl*
   end
@@ -1646,6 +1648,8 @@ lib LibWin32
     set_pin_active : Proc(IAudioEndpointRT*, HRESULT)
   end
 
+  IAudioEndpointRT_GUID = LibC::GUID.new("dfd2005f-a6e5-4d39-a265-939ada9fbb4d")
+  CLSID_IAudioEndpointRT = "dfd2005f-a6e5-4d39-a265-939ada9fbb4d"
   struct IAudioEndpointRT
     lpVtbl : IAudioEndpointRTVTbl*
   end
@@ -1659,6 +1663,8 @@ lib LibWin32
     pulse_endpoint : Proc(IAudioInputEndpointRT*, Void)
   end
 
+  IAudioInputEndpointRT_GUID = LibC::GUID.new("8026ab61-92b2-43c1-a1df-5c37ebd08d82")
+  CLSID_IAudioInputEndpointRT = "8026ab61-92b2-43c1-a1df-5c37ebd08d82"
   struct IAudioInputEndpointRT
     lpVtbl : IAudioInputEndpointRTVTbl*
   end
@@ -1672,6 +1678,8 @@ lib LibWin32
     pulse_endpoint : Proc(IAudioOutputEndpointRT*, Void)
   end
 
+  IAudioOutputEndpointRT_GUID = LibC::GUID.new("8fa906e4-c31c-4e31-932e-19a66385e9aa")
+  CLSID_IAudioOutputEndpointRT = "8fa906e4-c31c-4e31-932e-19a66385e9aa"
   struct IAudioOutputEndpointRT
     lpVtbl : IAudioOutputEndpointRTVTbl*
   end
@@ -1686,6 +1694,8 @@ lib LibWin32
     write_exclusive_mode_parameters_to_shared_memory : Proc(IAudioDeviceEndpoint*, LibC::UINT_PTR, Int64, Int64, UInt32, UInt32*, LibC::UINT_PTR*, HRESULT)
   end
 
+  IAudioDeviceEndpoint_GUID = LibC::GUID.new("d4952f5a-a0b2-4cc4-8b82-9358488dd8ac")
+  CLSID_IAudioDeviceEndpoint = "d4952f5a-a0b2-4cc4-8b82-9358488dd8ac"
   struct IAudioDeviceEndpoint
     lpVtbl : IAudioDeviceEndpointVTbl*
   end
@@ -1699,6 +1709,8 @@ lib LibWin32
     stop : Proc(IAudioEndpointControl*, HRESULT)
   end
 
+  IAudioEndpointControl_GUID = LibC::GUID.new("c684b72a-6df4-4774-bdf9-76b77509b653")
+  CLSID_IAudioEndpointControl = "c684b72a-6df4-4774-bdf9-76b77509b653"
   struct IAudioEndpointControl
     lpVtbl : IAudioEndpointControlVTbl*
   end
@@ -1743,6 +1755,8 @@ lib LibWin32
     put_terminal_services_initial_program : Proc(IADsTSUserEx*, UInt8*, HRESULT)
   end
 
+  IADsTSUserEx_GUID = LibC::GUID.new("c4930e79-2989-4462-8a60-2fcf2f2955ef")
+  CLSID_IADsTSUserEx = "c4930e79-2989-4462-8a60-2fcf2f2955ef"
   struct IADsTSUserEx
     lpVtbl : IADsTSUserExVTbl*
   end
@@ -1754,6 +1768,8 @@ lib LibWin32
     on_connection_authorized : Proc(ITSGAuthorizeConnectionSink*, HRESULT, Guid, UInt32, UInt8*, UInt32, UInt32, SESSION_TIMEOUT_ACTION_TYPE, AATrustClassID, UInt32*, HRESULT)
   end
 
+  ITSGAuthorizeConnectionSink_GUID = LibC::GUID.new("c27ece33-7781-4318-98ef-1cf2da7b7005")
+  CLSID_ITSGAuthorizeConnectionSink = "c27ece33-7781-4318-98ef-1cf2da7b7005"
   struct ITSGAuthorizeConnectionSink
     lpVtbl : ITSGAuthorizeConnectionSinkVTbl*
   end
@@ -1765,6 +1781,8 @@ lib LibWin32
     on_channel_authorized : Proc(ITSGAuthorizeResourceSink*, HRESULT, Guid, Int32, UInt8**, UInt32, UInt8**, UInt32, HRESULT)
   end
 
+  ITSGAuthorizeResourceSink_GUID = LibC::GUID.new("feddfcd4-fa12-4435-ae55-7ad1a9779af7")
+  CLSID_ITSGAuthorizeResourceSink = "feddfcd4-fa12-4435-ae55-7ad1a9779af7"
   struct ITSGAuthorizeResourceSink
     lpVtbl : ITSGAuthorizeResourceSinkVTbl*
   end
@@ -1779,6 +1797,8 @@ lib LibWin32
     is_quarantine_enabled : Proc(ITSGPolicyEngine*, LibC::BOOL*, HRESULT)
   end
 
+  ITSGPolicyEngine_GUID = LibC::GUID.new("8bc24f08-6223-42f4-a5b4-8e37cd135bbd")
+  CLSID_ITSGPolicyEngine = "8bc24f08-6223-42f4-a5b4-8e37cd135bbd"
   struct ITSGPolicyEngine
     lpVtbl : ITSGPolicyEngineVTbl*
   end
@@ -1790,6 +1810,8 @@ lib LibWin32
     do_accounting : Proc(ITSGAccountingEngine*, AAAccountingDataType, AAAccountingData, HRESULT)
   end
 
+  ITSGAccountingEngine_GUID = LibC::GUID.new("4ce2a0c9-e874-4f1a-86f4-06bbb9115338")
+  CLSID_ITSGAccountingEngine = "4ce2a0c9-e874-4f1a-86f4-06bbb9115338"
   struct ITSGAccountingEngine
     lpVtbl : ITSGAccountingEngineVTbl*
   end
@@ -1804,6 +1826,8 @@ lib LibWin32
     disconnect_user : Proc(ITSGAuthenticateUserSink*, LibC::UINT_PTR, HRESULT)
   end
 
+  ITSGAuthenticateUserSink_GUID = LibC::GUID.new("2c3e2e73-a782-47f9-8dfb-77ee1ed27a03")
+  CLSID_ITSGAuthenticateUserSink = "2c3e2e73-a782-47f9-8dfb-77ee1ed27a03"
   struct ITSGAuthenticateUserSink
     lpVtbl : ITSGAuthenticateUserSinkVTbl*
   end
@@ -1816,6 +1840,8 @@ lib LibWin32
     cancel_authentication : Proc(ITSGAuthenticationEngine*, Guid, LibC::UINT_PTR, HRESULT)
   end
 
+  ITSGAuthenticationEngine_GUID = LibC::GUID.new("9ee3e5bf-04ab-4691-998c-d7f622321a56")
+  CLSID_ITSGAuthenticationEngine = "9ee3e5bf-04ab-4691-998c-d7f622321a56"
   struct ITSGAuthenticationEngine
     lpVtbl : ITSGAuthenticationEngineVTbl*
   end
@@ -1832,6 +1858,8 @@ lib LibWin32
     wtssbx_get_user_external_session : Proc(IWTSSBPlugin*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, WTSSBX_IP_ADDRESS*, UInt32*, WTSSBX_MACHINE_CONNECT_INFO*, HRESULT)
   end
 
+  IWTSSBPlugin_GUID = LibC::GUID.new("dc44be78-b18d-4399-b210-641bf67a002c")
+  CLSID_IWTSSBPlugin = "dc44be78-b18d-4399-b210-641bf67a002c"
   struct IWTSSBPlugin
     lpVtbl : IWTSSBPluginVTbl*
   end
@@ -1845,6 +1873,8 @@ lib LibWin32
     issue_disconnect : Proc(IWorkspaceClientExt*, HRESULT)
   end
 
+  IWorkspaceClientExt_GUID = LibC::GUID.new("12b952f4-41ca-4f21-a829-a6d07d9a16e5")
+  CLSID_IWorkspaceClientExt = "12b952f4-41ca-4f21-a829-a6d07d9a16e5"
   struct IWorkspaceClientExt
     lpVtbl : IWorkspaceClientExtVTbl*
   end
@@ -1858,6 +1888,8 @@ lib LibWin32
     get_process_id : Proc(IWorkspace*, UInt32*, HRESULT)
   end
 
+  IWorkspace_GUID = LibC::GUID.new("b922bbb8-4c55-4fea-8496-beb0b44285e5")
+  CLSID_IWorkspace = "b922bbb8-4c55-4fea-8496-beb0b44285e5"
   struct IWorkspace
     lpVtbl : IWorkspaceVTbl*
   end
@@ -1872,6 +1904,8 @@ lib LibWin32
     start_remote_application_ex : Proc(IWorkspace2*, UInt8*, UInt8*, UInt8*, Int16, UInt8*, SAFEARRAY*, HRESULT)
   end
 
+  IWorkspace2_GUID = LibC::GUID.new("96d8d7cf-783e-4286-834c-ebc0e95f783c")
+  CLSID_IWorkspace2 = "96d8d7cf-783e-4286-834c-ebc0e95f783c"
   struct IWorkspace2
     lpVtbl : IWorkspace2VTbl*
   end
@@ -1888,6 +1922,8 @@ lib LibWin32
     set_claims_token : Proc(IWorkspace3*, UInt8*, UInt64, UInt8*, HRESULT)
   end
 
+  IWorkspace3_GUID = LibC::GUID.new("1becbe4a-d654-423b-afeb-be8d532c13c6")
+  CLSID_IWorkspace3 = "1becbe4a-d654-423b-afeb-be8d532c13c6"
   struct IWorkspace3
     lpVtbl : IWorkspace3VTbl*
   end
@@ -1900,6 +1936,8 @@ lib LibWin32
     remove_resource : Proc(IWorkspaceRegistration*, UInt32, HRESULT)
   end
 
+  IWorkspaceRegistration_GUID = LibC::GUID.new("b922bbb8-4c55-4fea-8496-beb0b44285e6")
+  CLSID_IWorkspaceRegistration = "b922bbb8-4c55-4fea-8496-beb0b44285e6"
   struct IWorkspaceRegistration
     lpVtbl : IWorkspaceRegistrationVTbl*
   end
@@ -1914,6 +1952,8 @@ lib LibWin32
     remove_resource_ex : Proc(IWorkspaceRegistration2*, UInt32, Guid, HRESULT)
   end
 
+  IWorkspaceRegistration2_GUID = LibC::GUID.new("cf59f654-39bb-44d8-94d0-4635728957e9")
+  CLSID_IWorkspaceRegistration2 = "cf59f654-39bb-44d8-94d0-4635728957e9"
   struct IWorkspaceRegistration2
     lpVtbl : IWorkspaceRegistration2VTbl*
   end
@@ -1935,6 +1975,8 @@ lib LibWin32
     disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable*, UInt8*, HRESULT)
   end
 
+  IWorkspaceScriptable_GUID = LibC::GUID.new("efea49a2-dda5-429d-8f42-b23b92c4c347")
+  CLSID_IWorkspaceScriptable = "efea49a2-dda5-429d-8f42-b23b92c4c347"
   struct IWorkspaceScriptable
     lpVtbl : IWorkspaceScriptableVTbl*
   end
@@ -1958,6 +2000,8 @@ lib LibWin32
     resource_dismissed : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, HRESULT)
   end
 
+  IWorkspaceScriptable2_GUID = LibC::GUID.new("efea49a2-dda5-429d-8f42-b33ba2c4c348")
+  CLSID_IWorkspaceScriptable2 = "efea49a2-dda5-429d-8f42-b33ba2c4c348"
   struct IWorkspaceScriptable2
     lpVtbl : IWorkspaceScriptable2VTbl*
   end
@@ -1982,6 +2026,8 @@ lib LibWin32
     start_workspace_ex2 : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, UInt8*, Guid, HRESULT)
   end
 
+  IWorkspaceScriptable3_GUID = LibC::GUID.new("531e6512-2cbf-4bd2-80a5-d90a71636a9a")
+  CLSID_IWorkspaceScriptable3 = "531e6512-2cbf-4bd2-80a5-d90a71636a9a"
   struct IWorkspaceScriptable3
     lpVtbl : IWorkspaceScriptable3VTbl*
   end
@@ -1995,6 +2041,8 @@ lib LibWin32
     register_error_event : Proc(IWorkspaceReportMessage*, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
   end
 
+  IWorkspaceReportMessage_GUID = LibC::GUID.new("a7c06739-500f-4e8c-99a8-2bd6955899eb")
+  CLSID_IWorkspaceReportMessage = "a7c06739-500f-4e8c-99a8-2bd6955899eb"
   struct IWorkspaceReportMessage
     lpVtbl : IWorkspaceReportMessageVTbl*
   end
@@ -2009,6 +2057,8 @@ lib LibWin32
     invoke : Proc(IITSWkspEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IITSWkspEvents_GUID = LibC::GUID.new("b922bbb8-4c55-4fea-8496-beb0b44285e9")
+  CLSID_IITSWkspEvents = "b922bbb8-4c55-4fea-8496-beb0b44285e9"
   struct IITSWkspEvents
     lpVtbl : IITSWkspEventsVTbl*
   end
@@ -2021,6 +2071,8 @@ lib LibWin32
     terminate : Proc(ITsSbPlugin*, HRESULT, HRESULT)
   end
 
+  ITsSbPlugin_GUID = LibC::GUID.new("48cd7406-caab-465f-a5d6-baa863b9ea4f")
+  CLSID_ITsSbPlugin = "48cd7406-caab-465f-a5d6-baa863b9ea4f"
   struct ITsSbPlugin
     lpVtbl : ITsSbPluginVTbl*
   end
@@ -2033,6 +2085,8 @@ lib LibWin32
     terminate : Proc(ITsSbResourcePlugin*, HRESULT, HRESULT)
   end
 
+  ITsSbResourcePlugin_GUID = LibC::GUID.new("ea8db42c-98ed-4535-a88b-2a164f35490f")
+  CLSID_ITsSbResourcePlugin = "ea8db42c-98ed-4535-a88b-2a164f35490f"
   struct ITsSbResourcePlugin
     lpVtbl : ITsSbResourcePluginVTbl*
   end
@@ -2045,6 +2099,8 @@ lib LibWin32
     notify_service_success : Proc(ITsSbServiceNotification*, HRESULT)
   end
 
+  ITsSbServiceNotification_GUID = LibC::GUID.new("86cb68ae-86e0-4f57-8a64-bb7406bc5550")
+  CLSID_ITsSbServiceNotification = "86cb68ae-86e0-4f57-8a64-bb7406bc5550"
   struct ITsSbServiceNotification
     lpVtbl : ITsSbServiceNotificationVTbl*
   end
@@ -2058,6 +2114,8 @@ lib LibWin32
     get_most_suitable_target : Proc(ITsSbLoadBalancing*, ITsSbClientConnection, ITsSbLoadBalancingNotifySink, HRESULT)
   end
 
+  ITsSbLoadBalancing_GUID = LibC::GUID.new("24329274-9eb7-11dc-ae98-f2b456d89593")
+  CLSID_ITsSbLoadBalancing = "24329274-9eb7-11dc-ae98-f2b456d89593"
   struct ITsSbLoadBalancing
     lpVtbl : ITsSbLoadBalancingVTbl*
   end
@@ -2071,6 +2129,8 @@ lib LibWin32
     query_environment_for_target : Proc(ITsSbPlacement*, ITsSbClientConnection, ITsSbPlacementNotifySink, HRESULT)
   end
 
+  ITsSbPlacement_GUID = LibC::GUID.new("daadee5f-6d32-480e-9e36-ddab2329f06d")
+  CLSID_ITsSbPlacement = "daadee5f-6d32-480e-9e36-ddab2329f06d"
   struct ITsSbPlacement
     lpVtbl : ITsSbPlacementVTbl*
   end
@@ -2084,6 +2144,8 @@ lib LibWin32
     prepare_target_for_connect : Proc(ITsSbOrchestration*, ITsSbClientConnection, ITsSbOrchestrationNotifySink, HRESULT)
   end
 
+  ITsSbOrchestration_GUID = LibC::GUID.new("64fc1172-9eb7-11dc-8b00-3aba56d89593")
+  CLSID_ITsSbOrchestration = "64fc1172-9eb7-11dc-8b00-3aba56d89593"
   struct ITsSbOrchestration
     lpVtbl : ITsSbOrchestrationVTbl*
   end
@@ -2098,6 +2160,8 @@ lib LibWin32
     put_environment_property_set : Proc(ITsSbEnvironment*, ITsSbEnvironmentPropertySet, HRESULT)
   end
 
+  ITsSbEnvironment_GUID = LibC::GUID.new("8c87f7f7-bf51-4a5c-87bf-8e94fb6e2256")
+  CLSID_ITsSbEnvironment = "8c87f7f7-bf51-4a5c-87bf-8e94fb6e2256"
   struct ITsSbEnvironment
     lpVtbl : ITsSbEnvironmentVTbl*
   end
@@ -2109,6 +2173,8 @@ lib LibWin32
     get_target_name : Proc(ITsSbLoadBalanceResult*, UInt8**, HRESULT)
   end
 
+  ITsSbLoadBalanceResult_GUID = LibC::GUID.new("24fdb7ac-fea6-11dc-9672-9a8956d89593")
+  CLSID_ITsSbLoadBalanceResult = "24fdb7ac-fea6-11dc-9672-9a8956d89593"
   struct ITsSbLoadBalanceResult
     lpVtbl : ITsSbLoadBalanceResultVTbl*
   end
@@ -2138,6 +2204,8 @@ lib LibWin32
     get_target_load : Proc(ITsSbTarget*, UInt32*, HRESULT)
   end
 
+  ITsSbTarget_GUID = LibC::GUID.new("16616ecc-272d-411d-b324-126893033856")
+  CLSID_ITsSbTarget = "16616ecc-272d-411d-b324-126893033856"
   struct ITsSbTarget
     lpVtbl : ITsSbTargetVTbl*
   end
@@ -2165,6 +2233,8 @@ lib LibWin32
     put_protocol_type : Proc(ITsSbSession*, UInt32, HRESULT)
   end
 
+  ITsSbSession_GUID = LibC::GUID.new("d453aac7-b1d8-4c5e-ba34-9afb4c8c5510")
+  CLSID_ITsSbSession = "d453aac7-b1d8-4c5e-ba34-9afb4c8c5510"
   struct ITsSbSession
     lpVtbl : ITsSbSessionVTbl*
   end
@@ -2178,6 +2248,8 @@ lib LibWin32
     notify_client_connection_state_change : Proc(ITsSbResourceNotification*, CONNECTION_CHANGE_NOTIFICATION, ITsSbClientConnection, HRESULT)
   end
 
+  ITsSbResourceNotification_GUID = LibC::GUID.new("65d3e85a-c39b-11dc-b92d-3cd255d89593")
+  CLSID_ITsSbResourceNotification = "65d3e85a-c39b-11dc-b92d-3cd255d89593"
   struct ITsSbResourceNotification
     lpVtbl : ITsSbResourceNotificationVTbl*
   end
@@ -2191,6 +2263,8 @@ lib LibWin32
     notify_client_connection_state_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, CONNECTION_CHANGE_NOTIFICATION, HRESULT)
   end
 
+  ITsSbResourceNotificationEx_GUID = LibC::GUID.new("a8a47fde-ca91-44d2-b897-3aa28a43b2b7")
+  CLSID_ITsSbResourceNotificationEx = "a8a47fde-ca91-44d2-b897-3aa28a43b2b7"
   struct ITsSbResourceNotificationEx
     lpVtbl : ITsSbResourceNotificationExVTbl*
   end
@@ -2210,6 +2284,8 @@ lib LibWin32
     get_status : Proc(ITsSbTaskInfo*, RDV_TASK_STATUS*, HRESULT)
   end
 
+  ITsSbTaskInfo_GUID = LibC::GUID.new("523d1083-89be-48dd-99ea-04e82ffa7265")
+  CLSID_ITsSbTaskInfo = "523d1083-89be-48dd-99ea-04e82ffa7265"
   struct ITsSbTaskInfo
     lpVtbl : ITsSbTaskInfoVTbl*
   end
@@ -2224,6 +2300,8 @@ lib LibWin32
     set_task_queue : Proc(ITsSbTaskPlugin*, UInt8*, UInt32, ITsSbTaskInfo*, HRESULT)
   end
 
+  ITsSbTaskPlugin_GUID = LibC::GUID.new("fa22ef0f-8705-41be-93bc-44bdbcf1c9c4")
+  CLSID_ITsSbTaskPlugin = "fa22ef0f-8705-41be-93bc-44bdbcf1c9c4"
   struct ITsSbTaskPlugin
     lpVtbl : ITsSbTaskPluginVTbl*
   end
@@ -2236,6 +2314,8 @@ lib LibWin32
     write : Proc(ITsSbPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  ITsSbPropertySet_GUID = LibC::GUID.new("5c025171-bb1e-4baf-a212-6d5e9774b33b")
+  CLSID_ITsSbPropertySet = "5c025171-bb1e-4baf-a212-6d5e9774b33b"
   struct ITsSbPropertySet
     lpVtbl : ITsSbPropertySetVTbl*
   end
@@ -2248,6 +2328,8 @@ lib LibWin32
     write : Proc(ITsSbPluginPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  ITsSbPluginPropertySet_GUID = LibC::GUID.new("95006e34-7eff-4b6c-bb40-49a4fda7cea6")
+  CLSID_ITsSbPluginPropertySet = "95006e34-7eff-4b6c-bb40-49a4fda7cea6"
   struct ITsSbPluginPropertySet
     lpVtbl : ITsSbPluginPropertySetVTbl*
   end
@@ -2260,6 +2342,8 @@ lib LibWin32
     write : Proc(ITsSbClientConnectionPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  ITsSbClientConnectionPropertySet_GUID = LibC::GUID.new("e51995b0-46d6-11dd-aa21-cedc55d89593")
+  CLSID_ITsSbClientConnectionPropertySet = "e51995b0-46d6-11dd-aa21-cedc55d89593"
   struct ITsSbClientConnectionPropertySet
     lpVtbl : ITsSbClientConnectionPropertySetVTbl*
   end
@@ -2272,6 +2356,8 @@ lib LibWin32
     write : Proc(ITsSbTargetPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  ITsSbTargetPropertySet_GUID = LibC::GUID.new("f7bda5d6-994c-4e11-a079-2763b61830ac")
+  CLSID_ITsSbTargetPropertySet = "f7bda5d6-994c-4e11-a079-2763b61830ac"
   struct ITsSbTargetPropertySet
     lpVtbl : ITsSbTargetPropertySetVTbl*
   end
@@ -2284,6 +2370,8 @@ lib LibWin32
     write : Proc(ITsSbEnvironmentPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  ITsSbEnvironmentPropertySet_GUID = LibC::GUID.new("d0d1bf7e-7acf-11dd-a243-e51156d89593")
+  CLSID_ITsSbEnvironmentPropertySet = "d0d1bf7e-7acf-11dd-a243-e51156d89593"
   struct ITsSbEnvironmentPropertySet
     lpVtbl : ITsSbEnvironmentPropertySetVTbl*
   end
@@ -2296,6 +2384,8 @@ lib LibWin32
     on_report_status : Proc(ITsSbBaseNotifySink*, CLIENT_MESSAGE_TYPE, UInt32, HRESULT)
   end
 
+  ITsSbBaseNotifySink_GUID = LibC::GUID.new("808a6537-1282-4989-9e09-f43938b71722")
+  CLSID_ITsSbBaseNotifySink = "808a6537-1282-4989-9e09-f43938b71722"
   struct ITsSbBaseNotifySink
     lpVtbl : ITsSbBaseNotifySinkVTbl*
   end
@@ -2310,6 +2400,8 @@ lib LibWin32
     on_terminated : Proc(ITsSbPluginNotifySink*, HRESULT)
   end
 
+  ITsSbPluginNotifySink_GUID = LibC::GUID.new("44dfe30b-c3be-40f5-bf82-7a95bb795adf")
+  CLSID_ITsSbPluginNotifySink = "44dfe30b-c3be-40f5-bf82-7a95bb795adf"
   struct ITsSbPluginNotifySink
     lpVtbl : ITsSbPluginNotifySinkVTbl*
   end
@@ -2323,6 +2415,8 @@ lib LibWin32
     on_get_most_suitable_target : Proc(ITsSbLoadBalancingNotifySink*, ITsSbLoadBalanceResult, LibC::BOOL, HRESULT)
   end
 
+  ITsSbLoadBalancingNotifySink_GUID = LibC::GUID.new("5f8a8297-3244-4e6a-958a-27c822c1e141")
+  CLSID_ITsSbLoadBalancingNotifySink = "5f8a8297-3244-4e6a-958a-27c822c1e141"
   struct ITsSbLoadBalancingNotifySink
     lpVtbl : ITsSbLoadBalancingNotifySinkVTbl*
   end
@@ -2336,6 +2430,8 @@ lib LibWin32
     on_query_environment_completed : Proc(ITsSbPlacementNotifySink*, ITsSbEnvironment, HRESULT)
   end
 
+  ITsSbPlacementNotifySink_GUID = LibC::GUID.new("68a0c487-2b4f-46c2-94a1-6ce685183634")
+  CLSID_ITsSbPlacementNotifySink = "68a0c487-2b4f-46c2-94a1-6ce685183634"
   struct ITsSbPlacementNotifySink
     lpVtbl : ITsSbPlacementNotifySinkVTbl*
   end
@@ -2349,6 +2445,8 @@ lib LibWin32
     on_ready_to_connect : Proc(ITsSbOrchestrationNotifySink*, ITsSbTarget, HRESULT)
   end
 
+  ITsSbOrchestrationNotifySink_GUID = LibC::GUID.new("36c37d61-926b-442f-bca5-118c6d50dcf2")
+  CLSID_ITsSbOrchestrationNotifySink = "36c37d61-926b-442f-bca5-118c6d50dcf2"
   struct ITsSbOrchestrationNotifySink
     lpVtbl : ITsSbOrchestrationNotifySinkVTbl*
   end
@@ -2365,6 +2463,8 @@ lib LibWin32
     on_report_tasks : Proc(ITsSbTaskPluginNotifySink*, UInt8*, HRESULT)
   end
 
+  ITsSbTaskPluginNotifySink_GUID = LibC::GUID.new("6aaf899e-c2ec-45ee-aa37-45e60895261a")
+  CLSID_ITsSbTaskPluginNotifySink = "6aaf899e-c2ec-45ee-aa37-45e60895261a"
   struct ITsSbTaskPluginNotifySink
     lpVtbl : ITsSbTaskPluginNotifySinkVTbl*
   end
@@ -2390,6 +2490,8 @@ lib LibWin32
     get_disconnected_session : Proc(ITsSbClientConnection*, ITsSbSession*, HRESULT)
   end
 
+  ITsSbClientConnection_GUID = LibC::GUID.new("18857499-ad61-4b1b-b7df-cbcd41fb8338")
+  CLSID_ITsSbClientConnection = "18857499-ad61-4b1b-b7df-cbcd41fb8338"
   struct ITsSbClientConnection
     lpVtbl : ITsSbClientConnectionVTbl*
   end
@@ -2412,6 +2514,8 @@ lib LibWin32
     create_environment_property_set_object : Proc(ITsSbProvider*, ITsSbEnvironmentPropertySet*, HRESULT)
   end
 
+  ITsSbProvider_GUID = LibC::GUID.new("87a4098f-6d7b-44dd-bc17-8ce44e370d52")
+  CLSID_ITsSbProvider = "87a4098f-6d7b-44dd-bc17-8ce44e370d52"
   struct ITsSbProvider
     lpVtbl : ITsSbProviderVTbl*
   end
@@ -2450,6 +2554,8 @@ lib LibWin32
     set_server_drain_mode : Proc(ITsSbResourcePluginStore*, UInt8*, UInt32, HRESULT)
   end
 
+  ITsSbResourcePluginStore_GUID = LibC::GUID.new("5c38f65f-bcf1-4036-a6bf-9e3cccae0b63")
+  CLSID_ITsSbResourcePluginStore = "5c38f65f-bcf1-4036-a6bf-9e3cccae0b63"
   struct ITsSbResourcePluginStore
     lpVtbl : ITsSbResourcePluginStoreVTbl*
   end
@@ -2463,6 +2569,8 @@ lib LibWin32
     delete_properties : Proc(ITsSbFilterPluginStore*, UInt8*, HRESULT)
   end
 
+  ITsSbFilterPluginStore_GUID = LibC::GUID.new("85b44b0f-ed78-413f-9702-fa6d3b5ee755")
+  CLSID_ITsSbFilterPluginStore = "85b44b0f-ed78-413f-9702-fa6d3b5ee755"
   struct ITsSbFilterPluginStore
     lpVtbl : ITsSbFilterPluginStoreVTbl*
   end
@@ -2480,6 +2588,8 @@ lib LibWin32
     get_farm_property : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
   end
 
+  ITsSbGlobalStore_GUID = LibC::GUID.new("9ab60f7b-bd72-4d9f-8a3a-a0ea5574e635")
+  CLSID_ITsSbGlobalStore = "9ab60f7b-bd72-4d9f-8a3a-a0ea5574e635"
   struct ITsSbGlobalStore
     lpVtbl : ITsSbGlobalStoreVTbl*
   end
@@ -2496,6 +2606,8 @@ lib LibWin32
     on_virtual_machine_host_status_changed : Proc(ITsSbProvisioningPluginNotifySink*, UInt8*, VM_HOST_NOTIFY_STATUS, HRESULT, UInt8*, HRESULT)
   end
 
+  ITsSbProvisioningPluginNotifySink_GUID = LibC::GUID.new("aca87a8e-818b-4581-a032-49c3dfb9c701")
+  CLSID_ITsSbProvisioningPluginNotifySink = "aca87a8e-818b-4581-a032-49c3dfb9c701"
   struct ITsSbProvisioningPluginNotifySink
     lpVtbl : ITsSbProvisioningPluginNotifySinkVTbl*
   end
@@ -2512,6 +2624,8 @@ lib LibWin32
     cancel_job : Proc(ITsSbProvisioning*, UInt8*, HRESULT)
   end
 
+  ITsSbProvisioning_GUID = LibC::GUID.new("2f6f0dbb-9e4f-462b-9c3f-fccc3dcb6232")
+  CLSID_ITsSbProvisioning = "2f6f0dbb-9e4f-462b-9c3f-fccc3dcb6232"
   struct ITsSbProvisioning
     lpVtbl : ITsSbProvisioningVTbl*
   end
@@ -2524,6 +2638,8 @@ lib LibWin32
     get_wait_timeout : Proc(ITsSbGenericNotifySink*, FILETIME*, HRESULT)
   end
 
+  ITsSbGenericNotifySink_GUID = LibC::GUID.new("4c4c8c4f-300b-46ad-9164-8468a7e7568c")
+  CLSID_ITsSbGenericNotifySink = "4c4c8c4f-300b-46ad-9164-8468a7e7568c"
   struct ITsSbGenericNotifySink
     lpVtbl : ITsSbGenericNotifySinkVTbl*
   end
@@ -2540,6 +2656,8 @@ lib LibWin32
     resolve_resource : Proc(ItsPubPlugin*, UInt32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  ItsPubPlugin_GUID = LibC::GUID.new("70c04b05-f347-412b-822f-36c99c54ca45")
+  CLSID_ItsPubPlugin = "70c04b05-f347-412b-822f-36c99c54ca45"
   struct ItsPubPlugin
     lpVtbl : ItsPubPluginVTbl*
   end
@@ -2560,6 +2678,8 @@ lib LibWin32
     delete_personal_desktop_assignment : Proc(ItsPubPlugin2*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  ItsPubPlugin2_GUID = LibC::GUID.new("fa4ce418-aad7-4ec6-bad1-0a321ba465d5")
+  CLSID_ItsPubPlugin2 = "fa4ce418-aad7-4ec6-bad1-0a321ba465d5"
   struct ItsPubPlugin2
     lpVtbl : ItsPubPlugin2VTbl*
   end
@@ -2579,6 +2699,8 @@ lib LibWin32
     modify_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, UInt8*, HRESULT)
   end
 
+  IWorkspaceResTypeRegistry_GUID = LibC::GUID.new("1d428c79-6e2e-4351-a361-c0401a03a0ba")
+  CLSID_IWorkspaceResTypeRegistry = "1d428c79-6e2e-4351-a361-c0401a03a0ba"
   struct IWorkspaceResTypeRegistry
     lpVtbl : IWorkspaceResTypeRegistryVTbl*
   end
@@ -2593,6 +2715,8 @@ lib LibWin32
     terminated : Proc(IWTSPlugin*, HRESULT)
   end
 
+  IWTSPlugin_GUID = LibC::GUID.new("a1230201-1439-4e62-a414-190d0ac3d40e")
+  CLSID_IWTSPlugin = "a1230201-1439-4e62-a414-190d0ac3d40e"
   struct IWTSPlugin
     lpVtbl : IWTSPluginVTbl*
   end
@@ -2604,6 +2728,8 @@ lib LibWin32
     get_configuration : Proc(IWTSListener*, IPropertyBag*, HRESULT)
   end
 
+  IWTSListener_GUID = LibC::GUID.new("a1230206-9a39-4d58-8674-cdb4dff4e73b")
+  CLSID_IWTSListener = "a1230206-9a39-4d58-8674-cdb4dff4e73b"
   struct IWTSListener
     lpVtbl : IWTSListenerVTbl*
   end
@@ -2615,6 +2741,8 @@ lib LibWin32
     on_new_channel_connection : Proc(IWTSListenerCallback*, IWTSVirtualChannel, UInt8*, LibC::BOOL*, IWTSVirtualChannelCallback*, HRESULT)
   end
 
+  IWTSListenerCallback_GUID = LibC::GUID.new("a1230203-d6a7-11d8-b9fd-000bdbd1f198")
+  CLSID_IWTSListenerCallback = "a1230203-d6a7-11d8-b9fd-000bdbd1f198"
   struct IWTSListenerCallback
     lpVtbl : IWTSListenerCallbackVTbl*
   end
@@ -2627,6 +2755,8 @@ lib LibWin32
     on_close : Proc(IWTSVirtualChannelCallback*, HRESULT)
   end
 
+  IWTSVirtualChannelCallback_GUID = LibC::GUID.new("a1230204-d6a7-11d8-b9fd-000bdbd1f198")
+  CLSID_IWTSVirtualChannelCallback = "a1230204-d6a7-11d8-b9fd-000bdbd1f198"
   struct IWTSVirtualChannelCallback
     lpVtbl : IWTSVirtualChannelCallbackVTbl*
   end
@@ -2638,6 +2768,8 @@ lib LibWin32
     create_listener : Proc(IWTSVirtualChannelManager*, UInt8*, UInt32, IWTSListenerCallback, IWTSListener*, HRESULT)
   end
 
+  IWTSVirtualChannelManager_GUID = LibC::GUID.new("a1230205-d6a7-11d8-b9fd-000bdbd1f198")
+  CLSID_IWTSVirtualChannelManager = "a1230205-d6a7-11d8-b9fd-000bdbd1f198"
   struct IWTSVirtualChannelManager
     lpVtbl : IWTSVirtualChannelManagerVTbl*
   end
@@ -2650,6 +2782,8 @@ lib LibWin32
     close : Proc(IWTSVirtualChannel*, HRESULT)
   end
 
+  IWTSVirtualChannel_GUID = LibC::GUID.new("a1230207-d6a7-11d8-b9fd-000bdbd1f198")
+  CLSID_IWTSVirtualChannel = "a1230207-d6a7-11d8-b9fd-000bdbd1f198"
   struct IWTSVirtualChannel
     lpVtbl : IWTSVirtualChannelVTbl*
   end
@@ -2661,6 +2795,8 @@ lib LibWin32
     get_service : Proc(IWTSPluginServiceProvider*, Guid, IUnknown*, HRESULT)
   end
 
+  IWTSPluginServiceProvider_GUID = LibC::GUID.new("d3e07363-087c-476c-86a7-dbb15f46ddb4")
+  CLSID_IWTSPluginServiceProvider = "d3e07363-087c-476c-86a7-dbb15f46ddb4"
   struct IWTSPluginServiceProvider
     lpVtbl : IWTSPluginServiceProviderVTbl*
   end
@@ -2674,6 +2810,8 @@ lib LibWin32
     remove_mapping : Proc(IWTSBitmapRenderer*, HRESULT)
   end
 
+  IWTSBitmapRenderer_GUID = LibC::GUID.new("5b7acc97-f3c9-46f7-8c5b-fa685d3441b1")
+  CLSID_IWTSBitmapRenderer = "5b7acc97-f3c9-46f7-8c5b-fa685d3441b1"
   struct IWTSBitmapRenderer
     lpVtbl : IWTSBitmapRendererVTbl*
   end
@@ -2685,6 +2823,8 @@ lib LibWin32
     on_target_size_changed : Proc(IWTSBitmapRendererCallback*, RECT, HRESULT)
   end
 
+  IWTSBitmapRendererCallback_GUID = LibC::GUID.new("d782928e-fe4e-4e77-ae90-9cd0b3e3b353")
+  CLSID_IWTSBitmapRendererCallback = "d782928e-fe4e-4e77-ae90-9cd0b3e3b353"
   struct IWTSBitmapRendererCallback
     lpVtbl : IWTSBitmapRendererCallbackVTbl*
   end
@@ -2696,6 +2836,8 @@ lib LibWin32
     get_mapped_renderer : Proc(IWTSBitmapRenderService*, UInt64, IWTSBitmapRendererCallback, IWTSBitmapRenderer*, HRESULT)
   end
 
+  IWTSBitmapRenderService_GUID = LibC::GUID.new("ea326091-05fe-40c1-b49c-3d2ef4626a0e")
+  CLSID_IWTSBitmapRenderService = "ea326091-05fe-40c1-b49c-3d2ef4626a0e"
   struct IWTSBitmapRenderService
     lpVtbl : IWTSBitmapRenderServiceVTbl*
   end
@@ -2711,6 +2853,8 @@ lib LibWin32
     on_metrics_update : Proc(IWRdsGraphicsChannelEvents*, UInt32, UInt32, UInt64, HRESULT)
   end
 
+  IWRdsGraphicsChannelEvents_GUID = LibC::GUID.new("67f2368c-d674-4fae-66a5-d20628a640d2")
+  CLSID_IWRdsGraphicsChannelEvents = "67f2368c-d674-4fae-66a5-d20628a640d2"
   struct IWRdsGraphicsChannelEvents
     lpVtbl : IWRdsGraphicsChannelEventsVTbl*
   end
@@ -2724,6 +2868,8 @@ lib LibWin32
     open : Proc(IWRdsGraphicsChannel*, IWRdsGraphicsChannelEvents, IUnknown, HRESULT)
   end
 
+  IWRdsGraphicsChannel_GUID = LibC::GUID.new("684b7a0b-edff-43ad-d5a2-4a8d5388f401")
+  CLSID_IWRdsGraphicsChannel = "684b7a0b-edff-43ad-d5a2-4a8d5388f401"
   struct IWRdsGraphicsChannel
     lpVtbl : IWRdsGraphicsChannelVTbl*
   end
@@ -2735,6 +2881,8 @@ lib LibWin32
     create_channel : Proc(IWRdsGraphicsChannelManager*, UInt8*, WRdsGraphicsChannelType, IWRdsGraphicsChannel*, HRESULT)
   end
 
+  IWRdsGraphicsChannelManager_GUID = LibC::GUID.new("0fd57159-e83e-476a-a8b9-4a7976e71e18")
+  CLSID_IWRdsGraphicsChannelManager = "0fd57159-e83e-476a-a8b9-4a7976e71e18"
   struct IWRdsGraphicsChannelManager
     lpVtbl : IWRdsGraphicsChannelManagerVTbl*
   end
@@ -2750,6 +2898,8 @@ lib LibWin32
     notify_session_state_change : Proc(IWTSProtocolManager*, WTS_SESSION_ID*, UInt32, HRESULT)
   end
 
+  IWTSProtocolManager_GUID = LibC::GUID.new("f9eaf6cc-ed79-4f01-821d-1f881b9f66cc")
+  CLSID_IWTSProtocolManager = "f9eaf6cc-ed79-4f01-821d-1f881b9f66cc"
   struct IWTSProtocolManager
     lpVtbl : IWTSProtocolManagerVTbl*
   end
@@ -2762,6 +2912,8 @@ lib LibWin32
     stop_listen : Proc(IWTSProtocolListener*, HRESULT)
   end
 
+  IWTSProtocolListener_GUID = LibC::GUID.new("23083765-45f0-4394-8f69-32b2bc0ef4ca")
+  CLSID_IWTSProtocolListener = "23083765-45f0-4394-8f69-32b2bc0ef4ca"
   struct IWTSProtocolListener
     lpVtbl : IWTSProtocolListenerVTbl*
   end
@@ -2773,6 +2925,8 @@ lib LibWin32
     on_connected : Proc(IWTSProtocolListenerCallback*, IWTSProtocolConnection, IWTSProtocolConnectionCallback*, HRESULT)
   end
 
+  IWTSProtocolListenerCallback_GUID = LibC::GUID.new("23083765-1a2d-4de2-97de-4a35f260f0b3")
+  CLSID_IWTSProtocolListenerCallback = "23083765-1a2d-4de2-97de-4a35f260f0b3"
   struct IWTSProtocolListenerCallback
     lpVtbl : IWTSProtocolListenerCallbackVTbl*
   end
@@ -2806,6 +2960,8 @@ lib LibWin32
     get_shadow_connection : Proc(IWTSProtocolConnection*, IWTSProtocolShadowConnection*, HRESULT)
   end
 
+  IWTSProtocolConnection_GUID = LibC::GUID.new("23083765-9095-4648-98bf-ef81c914032d")
+  CLSID_IWTSProtocolConnection = "23083765-9095-4648-98bf-ef81c914032d"
   struct IWTSProtocolConnection
     lpVtbl : IWTSProtocolConnectionVTbl*
   end
@@ -2821,6 +2977,8 @@ lib LibWin32
     display_io_ctl : Proc(IWTSProtocolConnectionCallback*, WTS_DISPLAY_IOCTL*, HRESULT)
   end
 
+  IWTSProtocolConnectionCallback_GUID = LibC::GUID.new("23083765-75eb-41fe-b4fb-e086242afa0f")
+  CLSID_IWTSProtocolConnectionCallback = "23083765-75eb-41fe-b4fb-e086242afa0f"
   struct IWTSProtocolConnectionCallback
     lpVtbl : IWTSProtocolConnectionCallbackVTbl*
   end
@@ -2834,6 +2992,8 @@ lib LibWin32
     do_target : Proc(IWTSProtocolShadowConnection*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IWTSProtocolShadowConnection_GUID = LibC::GUID.new("ee3b0c14-37fb-456b-bab3-6d6cd51e13bf")
+  CLSID_IWTSProtocolShadowConnection = "ee3b0c14-37fb-456b-bab3-6d6cd51e13bf"
   struct IWTSProtocolShadowConnection
     lpVtbl : IWTSProtocolShadowConnectionVTbl*
   end
@@ -2846,6 +3006,8 @@ lib LibWin32
     invoke_target_shadow : Proc(IWTSProtocolShadowCallback*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IWTSProtocolShadowCallback_GUID = LibC::GUID.new("503a2504-aae5-4ab1-93e0-6d1c4bc6f71a")
+  CLSID_IWTSProtocolShadowCallback = "503a2504-aae5-4ab1-93e0-6d1c4bc6f71a"
   struct IWTSProtocolShadowCallback
     lpVtbl : IWTSProtocolShadowCallbackVTbl*
   end
@@ -2860,6 +3022,8 @@ lib LibWin32
     protocol_complete : Proc(IWTSProtocolLicenseConnection*, UInt32, HRESULT)
   end
 
+  IWTSProtocolLicenseConnection_GUID = LibC::GUID.new("23083765-178c-4079-8e4a-fea6496a4d70")
+  CLSID_IWTSProtocolLicenseConnection = "23083765-178c-4079-8e4a-fea6496a4d70"
   struct IWTSProtocolLicenseConnection
     lpVtbl : IWTSProtocolLicenseConnectionVTbl*
   end
@@ -2874,6 +3038,8 @@ lib LibWin32
     redirect_logon_error : Proc(IWTSProtocolLogonErrorRedirector*, Int32, Int32, LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)
   end
 
+  IWTSProtocolLogonErrorRedirector_GUID = LibC::GUID.new("fd9b61a7-2916-4627-8dee-4328711ad6cb")
+  CLSID_IWTSProtocolLogonErrorRedirector = "fd9b61a7-2916-4627-8dee-4328711ad6cb"
   struct IWTSProtocolLogonErrorRedirector
     lpVtbl : IWTSProtocolLogonErrorRedirectorVTbl*
   end
@@ -2886,6 +3052,8 @@ lib LibWin32
     merge_settings : Proc(IWRdsProtocolSettings*, WRDS_SETTINGS*, WRDS_CONNECTION_SETTING_LEVEL, WRDS_CONNECTION_SETTINGS*, HRESULT)
   end
 
+  IWRdsProtocolSettings_GUID = LibC::GUID.new("654a5a6a-2550-47eb-b6f7-ebd637475265")
+  CLSID_IWRdsProtocolSettings = "654a5a6a-2550-47eb-b6f7-ebd637475265"
   struct IWRdsProtocolSettings
     lpVtbl : IWRdsProtocolSettingsVTbl*
   end
@@ -2904,6 +3072,8 @@ lib LibWin32
     uninitialize : Proc(IWRdsProtocolManager*, HRESULT)
   end
 
+  IWRdsProtocolManager_GUID = LibC::GUID.new("dc796967-3abb-40cd-a446-105276b58950")
+  CLSID_IWRdsProtocolManager = "dc796967-3abb-40cd-a446-105276b58950"
   struct IWRdsProtocolManager
     lpVtbl : IWRdsProtocolManagerVTbl*
   end
@@ -2917,6 +3087,8 @@ lib LibWin32
     stop_listen : Proc(IWRdsProtocolListener*, HRESULT)
   end
 
+  IWRdsProtocolListener_GUID = LibC::GUID.new("fcbc131b-c686-451d-a773-e279e230f540")
+  CLSID_IWRdsProtocolListener = "fcbc131b-c686-451d-a773-e279e230f540"
   struct IWRdsProtocolListener
     lpVtbl : IWRdsProtocolListenerVTbl*
   end
@@ -2928,6 +3100,8 @@ lib LibWin32
     on_connected : Proc(IWRdsProtocolListenerCallback*, IWRdsProtocolConnection, WRDS_CONNECTION_SETTINGS*, IWRdsProtocolConnectionCallback*, HRESULT)
   end
 
+  IWRdsProtocolListenerCallback_GUID = LibC::GUID.new("3ab27e5b-4449-4dc1-b74a-91621d4fe984")
+  CLSID_IWRdsProtocolListenerCallback = "3ab27e5b-4449-4dc1-b74a-91621d4fe984"
   struct IWRdsProtocolListenerCallback
     lpVtbl : IWRdsProtocolListenerCallbackVTbl*
   end
@@ -2962,6 +3136,8 @@ lib LibWin32
     notify_command_process_created : Proc(IWRdsProtocolConnection*, UInt32, HRESULT)
   end
 
+  IWRdsProtocolConnection_GUID = LibC::GUID.new("324ed94f-fdaf-4ff6-81a8-42abe755830b")
+  CLSID_IWRdsProtocolConnection = "324ed94f-fdaf-4ff6-81a8-42abe755830b"
   struct IWRdsProtocolConnection
     lpVtbl : IWRdsProtocolConnectionVTbl*
   end
@@ -2977,6 +3153,8 @@ lib LibWin32
     get_connection_id : Proc(IWRdsProtocolConnectionCallback*, UInt32*, HRESULT)
   end
 
+  IWRdsProtocolConnectionCallback_GUID = LibC::GUID.new("f1d70332-d070-4ef1-a088-78313536c2d6")
+  CLSID_IWRdsProtocolConnectionCallback = "f1d70332-d070-4ef1-a088-78313536c2d6"
   struct IWRdsProtocolConnectionCallback
     lpVtbl : IWRdsProtocolConnectionCallbackVTbl*
   end
@@ -2990,6 +3168,8 @@ lib LibWin32
     do_target : Proc(IWRdsProtocolShadowConnection*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IWRdsProtocolShadowConnection_GUID = LibC::GUID.new("9ae85ce6-cade-4548-8feb-99016597f60a")
+  CLSID_IWRdsProtocolShadowConnection = "9ae85ce6-cade-4548-8feb-99016597f60a"
   struct IWRdsProtocolShadowConnection
     lpVtbl : IWRdsProtocolShadowConnectionVTbl*
   end
@@ -3002,6 +3182,8 @@ lib LibWin32
     invoke_target_shadow : Proc(IWRdsProtocolShadowCallback*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IWRdsProtocolShadowCallback_GUID = LibC::GUID.new("e0667ce0-0372-40d6-adb2-a0f3322674d6")
+  CLSID_IWRdsProtocolShadowCallback = "e0667ce0-0372-40d6-adb2-a0f3322674d6"
   struct IWRdsProtocolShadowCallback
     lpVtbl : IWRdsProtocolShadowCallbackVTbl*
   end
@@ -3016,6 +3198,8 @@ lib LibWin32
     protocol_complete : Proc(IWRdsProtocolLicenseConnection*, UInt32, HRESULT)
   end
 
+  IWRdsProtocolLicenseConnection_GUID = LibC::GUID.new("1d6a145f-d095-4424-957a-407fae822d84")
+  CLSID_IWRdsProtocolLicenseConnection = "1d6a145f-d095-4424-957a-407fae822d84"
   struct IWRdsProtocolLicenseConnection
     lpVtbl : IWRdsProtocolLicenseConnectionVTbl*
   end
@@ -3030,6 +3214,8 @@ lib LibWin32
     redirect_logon_error : Proc(IWRdsProtocolLogonErrorRedirector*, Int32, Int32, LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)
   end
 
+  IWRdsProtocolLogonErrorRedirector_GUID = LibC::GUID.new("519fe83b-142a-4120-a3d5-a405d315281a")
+  CLSID_IWRdsProtocolLogonErrorRedirector = "519fe83b-142a-4120-a3d5-a405d315281a"
   struct IWRdsProtocolLogonErrorRedirector
     lpVtbl : IWRdsProtocolLogonErrorRedirectorVTbl*
   end
@@ -3044,6 +3230,8 @@ lib LibWin32
     enable_wddm_idd : Proc(IWRdsWddmIddProps*, LibC::BOOL, HRESULT)
   end
 
+  IWRdsWddmIddProps_GUID = LibC::GUID.new("1382df4d-a289-43d1-a184-144726f9af90")
+  CLSID_IWRdsWddmIddProps = "1382df4d-a289-43d1-a184-144726f9af90"
   struct IWRdsWddmIddProps
     lpVtbl : IWRdsWddmIddPropsVTbl*
   end
@@ -3056,6 +3244,8 @@ lib LibWin32
     get_connection_setting : Proc(IWRdsProtocolConnectionSettings*, Guid, WTS_PROPERTY_VALUE*, HRESULT)
   end
 
+  IWRdsProtocolConnectionSettings_GUID = LibC::GUID.new("83fcf5d3-f6f4-ea94-9cd2-32f280e1e510")
+  CLSID_IWRdsProtocolConnectionSettings = "83fcf5d3-f6f4-ea94-9cd2-32f280e1e510"
   struct IWRdsProtocolConnectionSettings
     lpVtbl : IWRdsProtocolConnectionSettingsVTbl*
   end
@@ -3067,6 +3257,8 @@ lib LibWin32
     get_session_for_enhanced_fast_reconnect : Proc(IWRdsEnhancedFastReconnectArbitrator*, Int32*, UInt32, Int32*, HRESULT)
   end
 
+  IWRdsEnhancedFastReconnectArbitrator_GUID = LibC::GUID.new("5718ae9b-47f2-499f-b634-d8175bd51131")
+  CLSID_IWRdsEnhancedFastReconnectArbitrator = "5718ae9b-47f2-499f-b634-d8175bd51131"
   struct IWRdsEnhancedFastReconnectArbitrator
     lpVtbl : IWRdsEnhancedFastReconnectArbitratorVTbl*
   end
@@ -3085,6 +3277,8 @@ lib LibWin32
     set_rdp_property : Proc(IRemoteDesktopClientSettings*, UInt8*, VARIANT, HRESULT)
   end
 
+  IRemoteDesktopClientSettings_GUID = LibC::GUID.new("48a0f2a7-2713-431f-bbac-6f4558e7d64d")
+  CLSID_IRemoteDesktopClientSettings = "48a0f2a7-2713-431f-bbac-6f4558e7d64d"
   struct IRemoteDesktopClientSettings
     lpVtbl : IRemoteDesktopClientSettingsVTbl*
   end
@@ -3103,6 +3297,8 @@ lib LibWin32
     get_snapshot : Proc(IRemoteDesktopClientActions*, SnapshotEncodingType, SnapshotFormatType, UInt32, UInt32, UInt8**, HRESULT)
   end
 
+  IRemoteDesktopClientActions_GUID = LibC::GUID.new("7d54bc4e-1028-45d4-8b0a-b9b6bffba176")
+  CLSID_IRemoteDesktopClientActions = "7d54bc4e-1028-45d4-8b0a-b9b6bffba176"
   struct IRemoteDesktopClientActions
     lpVtbl : IRemoteDesktopClientActionsVTbl*
   end
@@ -3123,6 +3319,8 @@ lib LibWin32
     get_pointer_speed : Proc(IRemoteDesktopClientTouchPointer*, UInt32*, HRESULT)
   end
 
+  IRemoteDesktopClientTouchPointer_GUID = LibC::GUID.new("260ec22d-8cbc-44b5-9e88-2a37f6c93ae9")
+  CLSID_IRemoteDesktopClientTouchPointer = "260ec22d-8cbc-44b5-9e88-2a37f6c93ae9"
   struct IRemoteDesktopClientTouchPointer
     lpVtbl : IRemoteDesktopClientTouchPointerVTbl*
   end
@@ -3147,6 +3345,8 @@ lib LibWin32
     detach_event : Proc(IRemoteDesktopClient*, UInt8*, IDispatch, HRESULT)
   end
 
+  IRemoteDesktopClient_GUID = LibC::GUID.new("57d25668-625a-4905-be4e-304caa13f89c")
+  CLSID_IRemoteDesktopClient = "57d25668-625a-4905-be4e-304caa13f89c"
   struct IRemoteDesktopClient
     lpVtbl : IRemoteDesktopClientVTbl*
   end
@@ -3158,6 +3358,8 @@ lib LibWin32
     get_additional_info : Proc(IRemoteSystemAdditionalInfoProvider*, HSTRING*, Guid*, Void**, HRESULT)
   end
 
+  IRemoteSystemAdditionalInfoProvider_GUID = LibC::GUID.new("eeaa3d5f-ec63-4d27-af38-e86b1d7292cb")
+  CLSID_IRemoteSystemAdditionalInfoProvider = "eeaa3d5f-ec63-4d27-af38-e86b1d7292cb"
   struct IRemoteSystemAdditionalInfoProvider
     lpVtbl : IRemoteSystemAdditionalInfoProviderVTbl*
   end

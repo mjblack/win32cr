@@ -26,6 +26,8 @@ lib LibWin32
     script_error : Proc(IWebApplicationScriptEvents*, IHTMLWindow2, IActiveScriptError, LibC::LPWSTR, LibC::BOOL, HRESULT)
   end
 
+  IWebApplicationScriptEvents_GUID = LibC::GUID.new("7c3f6998-1567-4bba-b52b-48d32141d613")
+  CLSID_IWebApplicationScriptEvents = "7c3f6998-1567-4bba-b52b-48d32141d613"
   struct IWebApplicationScriptEvents
     lpVtbl : IWebApplicationScriptEventsVTbl*
   end
@@ -42,6 +44,8 @@ lib LibWin32
     download_complete : Proc(IWebApplicationNavigationEvents*, HRESULT)
   end
 
+  IWebApplicationNavigationEvents_GUID = LibC::GUID.new("c22615d2-d318-4da2-8422-1fcaf77b10e4")
+  CLSID_IWebApplicationNavigationEvents = "c22615d2-d318-4da2-8422-1fcaf77b10e4"
   struct IWebApplicationNavigationEvents
     lpVtbl : IWebApplicationNavigationEventsVTbl*
   end
@@ -53,6 +57,8 @@ lib LibWin32
     security_problem : Proc(IWebApplicationUIEvents*, UInt32, HRESULT*, HRESULT)
   end
 
+  IWebApplicationUIEvents_GUID = LibC::GUID.new("5b2b3f99-328c-41d5-a6f7-7483ed8e71dd")
+  CLSID_IWebApplicationUIEvents = "5b2b3f99-328c-41d5-a6f7-7483ed8e71dd"
   struct IWebApplicationUIEvents
     lpVtbl : IWebApplicationUIEventsVTbl*
   end
@@ -65,6 +71,8 @@ lib LibWin32
     on_css_changed : Proc(IWebApplicationUpdateEvents*, HRESULT)
   end
 
+  IWebApplicationUpdateEvents_GUID = LibC::GUID.new("3e59e6b7-c652-4daf-ad5e-16feb350cde3")
+  CLSID_IWebApplicationUpdateEvents = "3e59e6b7-c652-4daf-ad5e-16feb350cde3"
   struct IWebApplicationUpdateEvents
     lpVtbl : IWebApplicationUpdateEventsVTbl*
   end
@@ -80,6 +88,8 @@ lib LibWin32
     unadvise : Proc(IWebApplicationHost*, UInt32, HRESULT)
   end
 
+  IWebApplicationHost_GUID = LibC::GUID.new("cecbd2c3-a3a5-4749-9681-20e9161c6794")
+  CLSID_IWebApplicationHost = "cecbd2c3-a3a5-4749-9681-20e9161c6794"
   struct IWebApplicationHost
     lpVtbl : IWebApplicationHostVTbl*
   end
@@ -91,6 +101,8 @@ lib LibWin32
     cancel_pending_activation : Proc(IWebApplicationActivation*, HRESULT)
   end
 
+  IWebApplicationActivation_GUID = LibC::GUID.new("bcdcd0de-330e-481b-b843-4898a6a8ebac")
+  CLSID_IWebApplicationActivation = "bcdcd0de-330e-481b-b843-4898a6a8ebac"
   struct IWebApplicationActivation
     lpVtbl : IWebApplicationActivationVTbl*
   end
@@ -103,6 +115,8 @@ lib LibWin32
     get_authoring_client_binary : Proc(IWebApplicationAuthoringMode*, UInt8**, HRESULT)
   end
 
+  IWebApplicationAuthoringMode_GUID = LibC::GUID.new("720aea93-1964-4db0-b005-29eb9e2b18a9")
+  CLSID_IWebApplicationAuthoringMode = "720aea93-1964-4db0-b005-29eb9e2b18a9"
   struct IWebApplicationAuthoringMode
     lpVtbl : IWebApplicationAuthoringModeVTbl*
   end

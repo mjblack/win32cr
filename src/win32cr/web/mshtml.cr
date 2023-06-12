@@ -9862,6 +9862,8 @@ lib LibWin32
     item : Proc(IHTMLFiltersCollection*, VARIANT*, VARIANT*, HRESULT)
   end
 
+  IHTMLFiltersCollection_GUID = LibC::GUID.new("3050f3ee-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFiltersCollection = "3050f3ee-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFiltersCollection
     lpVtbl : IHTMLFiltersCollectionVTbl*
   end
@@ -9884,6 +9886,8 @@ lib LibWin32
     get_name_space_parent : Proc(IIE70DispatchEx*, IUnknown*, HRESULT)
   end
 
+  IIE70DispatchEx_GUID = LibC::GUID.new("3051046b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IIE70DispatchEx = "3051046b-98b5-11cf-bb82-00aa00bdce0b"
   struct IIE70DispatchEx
     lpVtbl : IIE70DispatchExVTbl*
   end
@@ -9906,6 +9910,8 @@ lib LibWin32
     get_name_space_parent : Proc(IIE80DispatchEx*, IUnknown*, HRESULT)
   end
 
+  IIE80DispatchEx_GUID = LibC::GUID.new("3051046c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IIE80DispatchEx = "3051046c-98b5-11cf-bb82-00aa00bdce0b"
   struct IIE80DispatchEx
     lpVtbl : IIE80DispatchExVTbl*
   end
@@ -9945,6 +9951,8 @@ lib LibWin32
     get_src_filter : Proc(IHTMLEventObj*, IDispatch*, HRESULT)
   end
 
+  IHTMLEventObj_GUID = LibC::GUID.new("3050f32d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEventObj = "3050f32d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEventObj
     lpVtbl : IHTMLEventObjVTbl*
   end
@@ -9957,6 +9965,8 @@ lib LibWin32
     register_notification : Proc(IElementBehaviorSite*, Int32, HRESULT)
   end
 
+  IElementBehaviorSite_GUID = LibC::GUID.new("3050f427-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorSite = "3050f427-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorSite
     lpVtbl : IElementBehaviorSiteVTbl*
   end
@@ -9970,6 +9980,8 @@ lib LibWin32
     detach : Proc(IElementBehavior*, HRESULT)
   end
 
+  IElementBehavior_GUID = LibC::GUID.new("3050f425-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehavior = "3050f425-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehavior
     lpVtbl : IElementBehaviorVTbl*
   end
@@ -9981,6 +9993,8 @@ lib LibWin32
     find_behavior : Proc(IElementBehaviorFactory*, UInt8*, UInt8*, IElementBehaviorSite, IElementBehavior*, HRESULT)
   end
 
+  IElementBehaviorFactory_GUID = LibC::GUID.new("3050f429-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorFactory = "3050f429-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorFactory
     lpVtbl : IElementBehaviorFactoryVTbl*
   end
@@ -9997,6 +10011,8 @@ lib LibWin32
     register_urn : Proc(IElementBehaviorSiteOM*, LibC::LPWSTR, HRESULT)
   end
 
+  IElementBehaviorSiteOM_GUID = LibC::GUID.new("3050f489-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorSiteOM = "3050f489-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorSiteOM
     lpVtbl : IElementBehaviorSiteOMVTbl*
   end
@@ -10010,6 +10026,8 @@ lib LibWin32
     hit_test_point : Proc(IElementBehaviorRender*, POINT*, IUnknown, LibC::BOOL*, HRESULT)
   end
 
+  IElementBehaviorRender_GUID = LibC::GUID.new("3050f4aa-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorRender = "3050f4aa-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorRender
     lpVtbl : IElementBehaviorRenderVTbl*
   end
@@ -10023,6 +10041,8 @@ lib LibWin32
     invalidate_style : Proc(IElementBehaviorSiteRender*, HRESULT)
   end
 
+  IElementBehaviorSiteRender_GUID = LibC::GUID.new("3050f4a7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorSiteRender = "3050f4a7-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorSiteRender
     lpVtbl : IElementBehaviorSiteRenderVTbl*
   end
@@ -10053,6 +10073,8 @@ lib LibWin32
     get_src_element : Proc(IDOMEvent*, IHTMLElement*, HRESULT)
   end
 
+  IDOMEvent_GUID = LibC::GUID.new("305104ba-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMEvent = "305104ba-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMEvent
     lpVtbl : IDOMEventVTbl*
   end
@@ -10072,6 +10094,8 @@ lib LibWin32
     define_setter : Proc(IHTMLDOMConstructor*, UInt8*, VARIANT*, HRESULT)
   end
 
+  IHTMLDOMConstructor_GUID = LibC::GUID.new("3051049b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMConstructor = "3051049b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMConstructor
     lpVtbl : IHTMLDOMConstructorVTbl*
   end
@@ -10090,6 +10114,8 @@ lib LibWin32
     get_read_only : Proc(IHTMLStyleSheetRule*, Int16*, HRESULT)
   end
 
+  IHTMLStyleSheetRule_GUID = LibC::GUID.new("3050f357-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetRule = "3050f357-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetRule
     lpVtbl : IHTMLStyleSheetRuleVTbl*
   end
@@ -10478,6 +10504,8 @@ lib LibWin32
     get_ms_transform_origin : Proc(IHTMLCSSStyleDeclaration*, UInt8**, HRESULT)
   end
 
+  IHTMLCSSStyleDeclaration_GUID = LibC::GUID.new("30510740-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCSSStyleDeclaration = "30510740-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCSSStyleDeclaration
     lpVtbl : IHTMLCSSStyleDeclarationVTbl*
   end
@@ -10720,6 +10748,8 @@ lib LibWin32
     get_animation_fill_mode : Proc(IHTMLCSSStyleDeclaration2*, UInt8**, HRESULT)
   end
 
+  IHTMLCSSStyleDeclaration2_GUID = LibC::GUID.new("305107d1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCSSStyleDeclaration2 = "305107d1-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCSSStyleDeclaration2
     lpVtbl : IHTMLCSSStyleDeclaration2VTbl*
   end
@@ -10774,6 +10804,8 @@ lib LibWin32
     get_touch_action : Proc(IHTMLCSSStyleDeclaration3*, UInt8**, HRESULT)
   end
 
+  IHTMLCSSStyleDeclaration3_GUID = LibC::GUID.new("3051085c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCSSStyleDeclaration3 = "3051085c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCSSStyleDeclaration3
     lpVtbl : IHTMLCSSStyleDeclaration3VTbl*
   end
@@ -10878,6 +10910,8 @@ lib LibWin32
     get_webkit_animation_fill_mode : Proc(IHTMLCSSStyleDeclaration4*, UInt8**, HRESULT)
   end
 
+  IHTMLCSSStyleDeclaration4_GUID = LibC::GUID.new("d6100f3b-27c8-4132-afea-f0e4b1e00060")
+  CLSID_IHTMLCSSStyleDeclaration4 = "d6100f3b-27c8-4132-afea-f0e4b1e00060"
   struct IHTMLCSSStyleDeclaration4
     lpVtbl : IHTMLCSSStyleDeclaration4VTbl*
   end
@@ -10894,6 +10928,8 @@ lib LibWin32
     ms_put_property_enabled : Proc(IHTMLStyleEnabled*, UInt8*, Int16, HRESULT)
   end
 
+  IHTMLStyleEnabled_GUID = LibC::GUID.new("305104c2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleEnabled = "305104c2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleEnabled
     lpVtbl : IHTMLStyleEnabledVTbl*
   end
@@ -10908,6 +10944,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCSSStyleDeclaration*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCSSStyleDeclaration_GUID = LibC::GUID.new("3059009a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCSSStyleDeclaration = "3059009a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCSSStyleDeclaration
     lpVtbl : DispHTMLCSSStyleDeclarationVTbl*
   end
@@ -11101,6 +11139,8 @@ lib LibWin32
     to_string : Proc(IHTMLStyle*, UInt8**, HRESULT)
   end
 
+  IHTMLStyle_GUID = LibC::GUID.new("3050f25e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyle = "3050f25e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyle
     lpVtbl : IHTMLStyleVTbl*
   end
@@ -11178,6 +11218,8 @@ lib LibWin32
     get_accelerator : Proc(IHTMLStyle2*, UInt8**, HRESULT)
   end
 
+  IHTMLStyle2_GUID = LibC::GUID.new("3050f4a2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyle2 = "3050f4a2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyle2
     lpVtbl : IHTMLStyle2VTbl*
   end
@@ -11222,6 +11264,8 @@ lib LibWin32
     get_text_kashida_space : Proc(IHTMLStyle3*, VARIANT*, HRESULT)
   end
 
+  IHTMLStyle3_GUID = LibC::GUID.new("3050f656-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyle3 = "3050f656-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyle3
     lpVtbl : IHTMLStyle3VTbl*
   end
@@ -11240,6 +11284,8 @@ lib LibWin32
     get_min_height : Proc(IHTMLStyle4*, VARIANT*, HRESULT)
   end
 
+  IHTMLStyle4_GUID = LibC::GUID.new("3050f816-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyle4 = "3050f816-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyle4
     lpVtbl : IHTMLStyle4VTbl*
   end
@@ -11262,6 +11308,8 @@ lib LibWin32
     get_max_width : Proc(IHTMLStyle5*, VARIANT*, HRESULT)
   end
 
+  IHTMLStyle5_GUID = LibC::GUID.new("3050f33a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyle5 = "3050f33a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyle5
     lpVtbl : IHTMLStyle5VTbl*
   end
@@ -11308,6 +11356,8 @@ lib LibWin32
     get_quotes : Proc(IHTMLStyle6*, UInt8**, HRESULT)
   end
 
+  IHTMLStyle6_GUID = LibC::GUID.new("30510480-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyle6 = "30510480-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyle6
     lpVtbl : IHTMLStyle6VTbl*
   end
@@ -11484,6 +11534,8 @@ lib LibWin32
     remove_attribute : Proc(IHTMLRuleStyle*, UInt8*, Int32, Int16*, HRESULT)
   end
 
+  IHTMLRuleStyle_GUID = LibC::GUID.new("3050f3cf-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRuleStyle = "3050f3cf-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRuleStyle
     lpVtbl : IHTMLRuleStyleVTbl*
   end
@@ -11558,6 +11610,8 @@ lib LibWin32
     get_accelerator : Proc(IHTMLRuleStyle2*, UInt8**, HRESULT)
   end
 
+  IHTMLRuleStyle2_GUID = LibC::GUID.new("3050f4ac-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRuleStyle2 = "3050f4ac-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRuleStyle2
     lpVtbl : IHTMLRuleStyle2VTbl*
   end
@@ -11602,6 +11656,8 @@ lib LibWin32
     get_text_kashida_space : Proc(IHTMLRuleStyle3*, VARIANT*, HRESULT)
   end
 
+  IHTMLRuleStyle3_GUID = LibC::GUID.new("3050f657-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRuleStyle3 = "3050f657-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRuleStyle3
     lpVtbl : IHTMLRuleStyle3VTbl*
   end
@@ -11620,6 +11676,8 @@ lib LibWin32
     get_min_height : Proc(IHTMLRuleStyle4*, VARIANT*, HRESULT)
   end
 
+  IHTMLRuleStyle4_GUID = LibC::GUID.new("3050f817-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRuleStyle4 = "3050f817-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRuleStyle4
     lpVtbl : IHTMLRuleStyle4VTbl*
   end
@@ -11642,6 +11700,8 @@ lib LibWin32
     get_max_width : Proc(IHTMLRuleStyle5*, VARIANT*, HRESULT)
   end
 
+  IHTMLRuleStyle5_GUID = LibC::GUID.new("3050f335-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRuleStyle5 = "3050f335-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRuleStyle5
     lpVtbl : IHTMLRuleStyle5VTbl*
   end
@@ -11688,6 +11748,8 @@ lib LibWin32
     get_quotes : Proc(IHTMLRuleStyle6*, UInt8**, HRESULT)
   end
 
+  IHTMLRuleStyle6_GUID = LibC::GUID.new("30510471-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRuleStyle6 = "30510471-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRuleStyle6
     lpVtbl : IHTMLRuleStyle6VTbl*
   end
@@ -11702,6 +11764,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyle*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyle_GUID = LibC::GUID.new("3050f55a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyle = "3050f55a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyle
     lpVtbl : DispHTMLStyleVTbl*
   end
@@ -11716,6 +11780,8 @@ lib LibWin32
     invoke : Proc(DispHTMLRuleStyle*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLRuleStyle_GUID = LibC::GUID.new("3050f55c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLRuleStyle = "3050f55c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLRuleStyle
     lpVtbl : DispHTMLRuleStyleVTbl*
   end
@@ -11732,6 +11798,8 @@ lib LibWin32
     item : Proc(IHTMLStyleSheetRulesCollection*, Int32, IHTMLStyleSheetRule*, HRESULT)
   end
 
+  IHTMLStyleSheetRulesCollection_GUID = LibC::GUID.new("3050f2e5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetRulesCollection = "3050f2e5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetRulesCollection
     lpVtbl : IHTMLStyleSheetRulesCollectionVTbl*
   end
@@ -11767,6 +11835,8 @@ lib LibWin32
     get_rules : Proc(IHTMLStyleSheet*, IHTMLStyleSheetRulesCollection*, HRESULT)
   end
 
+  IHTMLStyleSheet_GUID = LibC::GUID.new("3050f2e3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheet = "3050f2e3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheet
     lpVtbl : IHTMLStyleSheetVTbl*
   end
@@ -11786,6 +11856,8 @@ lib LibWin32
     get_parent_style_sheet : Proc(IHTMLCSSRule*, IHTMLStyleSheet*, HRESULT)
   end
 
+  IHTMLCSSRule_GUID = LibC::GUID.new("305106e9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCSSRule = "305106e9-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCSSRule
     lpVtbl : IHTMLCSSRuleVTbl*
   end
@@ -11804,6 +11876,8 @@ lib LibWin32
     get_style_sheet : Proc(IHTMLCSSImportRule*, IHTMLStyleSheet*, HRESULT)
   end
 
+  IHTMLCSSImportRule_GUID = LibC::GUID.new("305106ea-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCSSImportRule = "305106ea-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCSSImportRule
     lpVtbl : IHTMLCSSImportRuleVTbl*
   end
@@ -11823,6 +11897,8 @@ lib LibWin32
     delete_rule : Proc(IHTMLCSSMediaRule*, Int32, HRESULT)
   end
 
+  IHTMLCSSMediaRule_GUID = LibC::GUID.new("305106eb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCSSMediaRule = "305106eb-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCSSMediaRule
     lpVtbl : IHTMLCSSMediaRuleVTbl*
   end
@@ -11843,6 +11919,8 @@ lib LibWin32
     delete_medium : Proc(IHTMLCSSMediaList*, UInt8*, HRESULT)
   end
 
+  IHTMLCSSMediaList_GUID = LibC::GUID.new("30510731-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCSSMediaList = "30510731-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCSSMediaList
     lpVtbl : IHTMLCSSMediaListVTbl*
   end
@@ -11859,6 +11937,8 @@ lib LibWin32
     get_prefix : Proc(IHTMLCSSNamespaceRule*, UInt8**, HRESULT)
   end
 
+  IHTMLCSSNamespaceRule_GUID = LibC::GUID.new("305106ee-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCSSNamespaceRule = "305106ee-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCSSNamespaceRule
     lpVtbl : IHTMLCSSNamespaceRuleVTbl*
   end
@@ -11876,6 +11956,8 @@ lib LibWin32
     get_style : Proc(IHTMLMSCSSKeyframeRule*, IHTMLRuleStyle*, HRESULT)
   end
 
+  IHTMLMSCSSKeyframeRule_GUID = LibC::GUID.new("3051080c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMSCSSKeyframeRule = "3051080c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMSCSSKeyframeRule
     lpVtbl : IHTMLMSCSSKeyframeRuleVTbl*
   end
@@ -11896,6 +11978,8 @@ lib LibWin32
     find_rule : Proc(IHTMLMSCSSKeyframesRule*, UInt8*, IHTMLMSCSSKeyframeRule*, HRESULT)
   end
 
+  IHTMLMSCSSKeyframesRule_GUID = LibC::GUID.new("3051080d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMSCSSKeyframesRule = "3051080d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMSCSSKeyframesRule
     lpVtbl : IHTMLMSCSSKeyframesRuleVTbl*
   end
@@ -11910,6 +11994,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCSSRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCSSRule_GUID = LibC::GUID.new("3059007d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCSSRule = "3059007d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCSSRule
     lpVtbl : DispHTMLCSSRuleVTbl*
   end
@@ -11924,6 +12010,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCSSImportRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCSSImportRule_GUID = LibC::GUID.new("3059007e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCSSImportRule = "3059007e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCSSImportRule
     lpVtbl : DispHTMLCSSImportRuleVTbl*
   end
@@ -11938,6 +12026,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCSSMediaRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCSSMediaRule_GUID = LibC::GUID.new("3059007f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCSSMediaRule = "3059007f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCSSMediaRule
     lpVtbl : DispHTMLCSSMediaRuleVTbl*
   end
@@ -11952,6 +12042,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCSSMediaList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCSSMediaList_GUID = LibC::GUID.new("30590097-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCSSMediaList = "30590097-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCSSMediaList
     lpVtbl : DispHTMLCSSMediaListVTbl*
   end
@@ -11966,6 +12058,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCSSNamespaceRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCSSNamespaceRule_GUID = LibC::GUID.new("30590080-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCSSNamespaceRule = "30590080-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCSSNamespaceRule
     lpVtbl : DispHTMLCSSNamespaceRuleVTbl*
   end
@@ -11980,6 +12074,8 @@ lib LibWin32
     invoke : Proc(DispHTMLMSCSSKeyframeRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLMSCSSKeyframeRule_GUID = LibC::GUID.new("305900de-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLMSCSSKeyframeRule = "305900de-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLMSCSSKeyframeRule
     lpVtbl : DispHTMLMSCSSKeyframeRuleVTbl*
   end
@@ -11994,6 +12090,8 @@ lib LibWin32
     invoke : Proc(DispHTMLMSCSSKeyframesRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLMSCSSKeyframesRule_GUID = LibC::GUID.new("305900df-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLMSCSSKeyframesRule = "305900df-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLMSCSSKeyframesRule
     lpVtbl : DispHTMLMSCSSKeyframesRuleVTbl*
   end
@@ -12026,6 +12124,8 @@ lib LibWin32
     get_text_decoration : Proc(IHTMLRenderStyle*, UInt8**, HRESULT)
   end
 
+  IHTMLRenderStyle_GUID = LibC::GUID.new("3050f6ae-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRenderStyle = "3050f6ae-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRenderStyle
     lpVtbl : IHTMLRenderStyleVTbl*
   end
@@ -12040,6 +12140,8 @@ lib LibWin32
     invoke : Proc(DispHTMLRenderStyle*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLRenderStyle_GUID = LibC::GUID.new("3050f58b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLRenderStyle = "3050f58b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLRenderStyle
     lpVtbl : DispHTMLRenderStyleVTbl*
   end
@@ -12145,6 +12247,8 @@ lib LibWin32
     get_text_transform : Proc(IHTMLCurrentStyle*, UInt8**, HRESULT)
   end
 
+  IHTMLCurrentStyle_GUID = LibC::GUID.new("3050f3db-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCurrentStyle = "3050f3db-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCurrentStyle
     lpVtbl : IHTMLCurrentStyleVTbl*
   end
@@ -12177,6 +12281,8 @@ lib LibWin32
     get_is_block : Proc(IHTMLCurrentStyle2*, Int16*, HRESULT)
   end
 
+  IHTMLCurrentStyle2_GUID = LibC::GUID.new("3050f658-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCurrentStyle2 = "3050f658-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCurrentStyle2
     lpVtbl : IHTMLCurrentStyle2VTbl*
   end
@@ -12195,6 +12301,8 @@ lib LibWin32
     get_white_space : Proc(IHTMLCurrentStyle3*, UInt8**, HRESULT)
   end
 
+  IHTMLCurrentStyle3_GUID = LibC::GUID.new("3050f818-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCurrentStyle3 = "3050f818-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCurrentStyle3
     lpVtbl : IHTMLCurrentStyle3VTbl*
   end
@@ -12213,6 +12321,8 @@ lib LibWin32
     get_max_width : Proc(IHTMLCurrentStyle4*, VARIANT*, HRESULT)
   end
 
+  IHTMLCurrentStyle4_GUID = LibC::GUID.new("3050f33b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCurrentStyle4 = "3050f33b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCurrentStyle4
     lpVtbl : IHTMLCurrentStyle4VTbl*
   end
@@ -12240,6 +12350,8 @@ lib LibWin32
     get_quotes : Proc(IHTMLCurrentStyle5*, UInt8**, HRESULT)
   end
 
+  IHTMLCurrentStyle5_GUID = LibC::GUID.new("30510481-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCurrentStyle5 = "30510481-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCurrentStyle5
     lpVtbl : IHTMLCurrentStyle5VTbl*
   end
@@ -12254,6 +12366,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCurrentStyle*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCurrentStyle_GUID = LibC::GUID.new("3050f557-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCurrentStyle = "3050f557-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCurrentStyle
     lpVtbl : DispHTMLCurrentStyleVTbl*
   end
@@ -12355,6 +12469,8 @@ lib LibWin32
     get_all : Proc(IHTMLElement*, IDispatch*, HRESULT)
   end
 
+  IHTMLElement_GUID = LibC::GUID.new("3050f1ff-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElement = "3050f1ff-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElement
     lpVtbl : IHTMLElementVTbl*
   end
@@ -12377,6 +12493,8 @@ lib LibWin32
     get_bottom : Proc(IHTMLRect*, Int32*, HRESULT)
   end
 
+  IHTMLRect_GUID = LibC::GUID.new("3050f4a3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRect = "3050f4a3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRect
     lpVtbl : IHTMLRectVTbl*
   end
@@ -12393,6 +12511,8 @@ lib LibWin32
     get_height : Proc(IHTMLRect2*, Float32*, HRESULT)
   end
 
+  IHTMLRect2_GUID = LibC::GUID.new("3051076c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRect2 = "3051076c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRect2
     lpVtbl : IHTMLRect2VTbl*
   end
@@ -12410,6 +12530,8 @@ lib LibWin32
     item : Proc(IHTMLRectCollection*, VARIANT*, VARIANT*, HRESULT)
   end
 
+  IHTMLRectCollection_GUID = LibC::GUID.new("3050f4a4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLRectCollection = "3050f4a4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLRectCollection
     lpVtbl : IHTMLRectCollectionVTbl*
   end
@@ -12430,6 +12552,8 @@ lib LibWin32
     tags : Proc(IHTMLElementCollection*, VARIANT, IDispatch*, HRESULT)
   end
 
+  IHTMLElementCollection_GUID = LibC::GUID.new("3050f21f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElementCollection = "3050f21f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElementCollection
     lpVtbl : IHTMLElementCollectionVTbl*
   end
@@ -12542,6 +12666,8 @@ lib LibWin32
     get_elements_by_tag_name : Proc(IHTMLElement2*, UInt8*, IHTMLElementCollection*, HRESULT)
   end
 
+  IHTMLElement2_GUID = LibC::GUID.new("3050f434-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElement2 = "3050f434-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElement2
     lpVtbl : IHTMLElement2VTbl*
   end
@@ -12561,6 +12687,8 @@ lib LibWin32
     get_length : Proc(IHTMLAttributeCollection3*, Int32*, HRESULT)
   end
 
+  IHTMLAttributeCollection3_GUID = LibC::GUID.new("30510469-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAttributeCollection3 = "30510469-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAttributeCollection3
     lpVtbl : IHTMLAttributeCollection3VTbl*
   end
@@ -12581,6 +12709,8 @@ lib LibWin32
     get_internal_subset : Proc(IDOMDocumentType*, VARIANT*, HRESULT)
   end
 
+  IDOMDocumentType_GUID = LibC::GUID.new("30510738-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMDocumentType = "30510738-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMDocumentType
     lpVtbl : IDOMDocumentTypeVTbl*
   end
@@ -12699,6 +12829,8 @@ lib LibWin32
     get_head : Proc(IHTMLDocument7*, IHTMLElement*, HRESULT)
   end
 
+  IHTMLDocument7_GUID = LibC::GUID.new("305104b8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDocument7 = "305104b8-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDocument7
     lpVtbl : IHTMLDocument7VTbl*
   end
@@ -12733,6 +12865,8 @@ lib LibWin32
     get_next_sibling : Proc(IHTMLDOMNode*, IHTMLDOMNode*, HRESULT)
   end
 
+  IHTMLDOMNode_GUID = LibC::GUID.new("3050f5da-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMNode = "3050f5da-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMNode
     lpVtbl : IHTMLDOMNodeVTbl*
   end
@@ -12748,6 +12882,8 @@ lib LibWin32
     get_owner_document : Proc(IHTMLDOMNode2*, IDispatch*, HRESULT)
   end
 
+  IHTMLDOMNode2_GUID = LibC::GUID.new("3050f80b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMNode2 = "3050f80b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMNode2
     lpVtbl : IHTMLDOMNode2VTbl*
   end
@@ -12779,6 +12915,8 @@ lib LibWin32
     is_supported : Proc(IHTMLDOMNode3*, UInt8*, VARIANT, Int16*, HRESULT)
   end
 
+  IHTMLDOMNode3_GUID = LibC::GUID.new("305106e0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMNode3 = "305106e0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMNode3
     lpVtbl : IHTMLDOMNode3VTbl*
   end
@@ -12797,6 +12935,8 @@ lib LibWin32
     get_specified : Proc(IHTMLDOMAttribute*, Int16*, HRESULT)
   end
 
+  IHTMLDOMAttribute_GUID = LibC::GUID.new("3050f4b0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMAttribute = "3050f4b0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMAttribute
     lpVtbl : IHTMLDOMAttributeVTbl*
   end
@@ -12830,6 +12970,8 @@ lib LibWin32
     clone_node : Proc(IHTMLDOMAttribute2*, Int16, IHTMLDOMAttribute*, HRESULT)
   end
 
+  IHTMLDOMAttribute2_GUID = LibC::GUID.new("3050f810-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMAttribute2 = "3050f810-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMAttribute2
     lpVtbl : IHTMLDOMAttribute2VTbl*
   end
@@ -12850,6 +12992,8 @@ lib LibWin32
     get_owner_element : Proc(IHTMLDOMAttribute3*, IHTMLElement2*, HRESULT)
   end
 
+  IHTMLDOMAttribute3_GUID = LibC::GUID.new("30510468-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMAttribute3 = "30510468-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMAttribute3
     lpVtbl : IHTMLDOMAttribute3VTbl*
   end
@@ -12877,6 +13021,8 @@ lib LibWin32
     get_specified : Proc(IHTMLDOMAttribute4*, Int16*, HRESULT)
   end
 
+  IHTMLDOMAttribute4_GUID = LibC::GUID.new("305106f9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMAttribute4 = "305106f9-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMAttribute4
     lpVtbl : IHTMLDOMAttribute4VTbl*
   end
@@ -12896,6 +13042,8 @@ lib LibWin32
     split_text : Proc(IHTMLDOMTextNode*, Int32, IHTMLDOMNode*, HRESULT)
   end
 
+  IHTMLDOMTextNode_GUID = LibC::GUID.new("3050f4b1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMTextNode = "3050f4b1-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMTextNode
     lpVtbl : IHTMLDOMTextNodeVTbl*
   end
@@ -12915,6 +13063,8 @@ lib LibWin32
     replace_data : Proc(IHTMLDOMTextNode2*, Int32, Int32, UInt8*, HRESULT)
   end
 
+  IHTMLDOMTextNode2_GUID = LibC::GUID.new("3050f809-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMTextNode2 = "3050f809-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMTextNode2
     lpVtbl : IHTMLDOMTextNode2VTbl*
   end
@@ -12938,6 +13088,8 @@ lib LibWin32
     normalize : Proc(IHTMLDOMTextNode3*, HRESULT)
   end
 
+  IHTMLDOMTextNode3_GUID = LibC::GUID.new("3051073e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMTextNode3 = "3051073e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMTextNode3
     lpVtbl : IHTMLDOMTextNode3VTbl*
   end
@@ -12953,6 +13105,8 @@ lib LibWin32
     has_feature : Proc(IHTMLDOMImplementation*, UInt8*, VARIANT, Int16*, HRESULT)
   end
 
+  IHTMLDOMImplementation_GUID = LibC::GUID.new("3050f80d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMImplementation = "3050f80d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMImplementation
     lpVtbl : IHTMLDOMImplementationVTbl*
   end
@@ -12971,6 +13125,8 @@ lib LibWin32
     has_feature : Proc(IHTMLDOMImplementation2*, UInt8*, VARIANT, Int16*, HRESULT)
   end
 
+  IHTMLDOMImplementation2_GUID = LibC::GUID.new("3051073c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMImplementation2 = "3051073c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMImplementation2
     lpVtbl : IHTMLDOMImplementation2VTbl*
   end
@@ -12985,6 +13141,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDOMAttribute*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDOMAttribute_GUID = LibC::GUID.new("3050f564-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDOMAttribute = "3050f564-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDOMAttribute
     lpVtbl : DispHTMLDOMAttributeVTbl*
   end
@@ -12999,6 +13157,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDOMTextNode*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDOMTextNode_GUID = LibC::GUID.new("3050f565-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDOMTextNode = "3050f565-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDOMTextNode
     lpVtbl : DispHTMLDOMTextNodeVTbl*
   end
@@ -13013,6 +13173,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDOMImplementation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDOMImplementation_GUID = LibC::GUID.new("3050f58f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDOMImplementation = "3050f58f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDOMImplementation
     lpVtbl : DispHTMLDOMImplementationVTbl*
   end
@@ -13030,6 +13192,8 @@ lib LibWin32
     item : Proc(IHTMLAttributeCollection*, VARIANT*, IDispatch*, HRESULT)
   end
 
+  IHTMLAttributeCollection_GUID = LibC::GUID.new("3050f4c3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAttributeCollection = "3050f4c3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAttributeCollection
     lpVtbl : IHTMLAttributeCollectionVTbl*
   end
@@ -13047,6 +13211,8 @@ lib LibWin32
     remove_named_item : Proc(IHTMLAttributeCollection2*, UInt8*, IHTMLDOMAttribute*, HRESULT)
   end
 
+  IHTMLAttributeCollection2_GUID = LibC::GUID.new("3050f80a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAttributeCollection2 = "3050f80a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAttributeCollection2
     lpVtbl : IHTMLAttributeCollection2VTbl*
   end
@@ -13069,6 +13235,8 @@ lib LibWin32
     get_length : Proc(IHTMLAttributeCollection4*, Int32*, HRESULT)
   end
 
+  IHTMLAttributeCollection4_GUID = LibC::GUID.new("305106fa-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAttributeCollection4 = "305106fa-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAttributeCollection4
     lpVtbl : IHTMLAttributeCollection4VTbl*
   end
@@ -13086,6 +13254,8 @@ lib LibWin32
     item : Proc(IHTMLDOMChildrenCollection*, Int32, IDispatch*, HRESULT)
   end
 
+  IHTMLDOMChildrenCollection_GUID = LibC::GUID.new("3050f5ab-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMChildrenCollection = "3050f5ab-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMChildrenCollection
     lpVtbl : IHTMLDOMChildrenCollectionVTbl*
   end
@@ -13101,6 +13271,8 @@ lib LibWin32
     item : Proc(IHTMLDOMChildrenCollection2*, Int32, IDispatch*, HRESULT)
   end
 
+  IHTMLDOMChildrenCollection2_GUID = LibC::GUID.new("30510791-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMChildrenCollection2 = "30510791-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMChildrenCollection2
     lpVtbl : IHTMLDOMChildrenCollection2VTbl*
   end
@@ -13115,6 +13287,8 @@ lib LibWin32
     invoke : Proc(DispHTMLAttributeCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLAttributeCollection_GUID = LibC::GUID.new("3050f56c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLAttributeCollection = "3050f56c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLAttributeCollection
     lpVtbl : DispHTMLAttributeCollectionVTbl*
   end
@@ -13129,6 +13303,8 @@ lib LibWin32
     invoke : Proc(DispStaticNodeList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispStaticNodeList_GUID = LibC::GUID.new("3050f59b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispStaticNodeList = "3050f59b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispStaticNodeList
     lpVtbl : DispStaticNodeListVTbl*
   end
@@ -13143,6 +13319,8 @@ lib LibWin32
     invoke : Proc(DispDOMChildrenCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMChildrenCollection_GUID = LibC::GUID.new("3050f577-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMChildrenCollection = "3050f577-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMChildrenCollection
     lpVtbl : DispDOMChildrenCollectionVTbl*
   end
@@ -13157,6 +13335,8 @@ lib LibWin32
     invoke : Proc(HTMLElementEvents4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLElementEvents4_GUID = LibC::GUID.new("3051075e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLElementEvents4 = "3051075e-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLElementEvents4
     lpVtbl : HTMLElementEvents4VTbl*
   end
@@ -13171,6 +13351,8 @@ lib LibWin32
     invoke : Proc(HTMLElementEvents3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLElementEvents3_GUID = LibC::GUID.new("3050f59f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLElementEvents3 = "3050f59f-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLElementEvents3
     lpVtbl : HTMLElementEvents3VTbl*
   end
@@ -13185,6 +13367,8 @@ lib LibWin32
     invoke : Proc(HTMLElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLElementEvents2_GUID = LibC::GUID.new("3050f60f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLElementEvents2 = "3050f60f-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLElementEvents2
     lpVtbl : HTMLElementEvents2VTbl*
   end
@@ -13199,6 +13383,8 @@ lib LibWin32
     invoke : Proc(HTMLElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLElementEvents_GUID = LibC::GUID.new("3050f33c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLElementEvents = "3050f33c-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLElementEvents
     lpVtbl : HTMLElementEventsVTbl*
   end
@@ -13221,6 +13407,8 @@ lib LibWin32
     property_inherited_trace_length : Proc(IRulesAppliedCollection*, UInt8*, Int32*, HRESULT)
   end
 
+  IRulesAppliedCollection_GUID = LibC::GUID.new("305104be-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IRulesAppliedCollection = "305104be-98b5-11cf-bb82-00aa00bdce0b"
   struct IRulesAppliedCollection
     lpVtbl : IRulesAppliedCollectionVTbl*
   end
@@ -13278,6 +13466,8 @@ lib LibWin32
     get_glyph_mode : Proc(IHTMLElement3*, Int32*, HRESULT)
   end
 
+  IHTMLElement3_GUID = LibC::GUID.new("3050f673-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElement3 = "3050f673-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElement3
     lpVtbl : IHTMLElement3VTbl*
   end
@@ -13304,6 +13494,8 @@ lib LibWin32
     get_onfocusout : Proc(IHTMLElement4*, VARIANT*, HRESULT)
   end
 
+  IHTMLElement4_GUID = LibC::GUID.new("3050f80f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElement4 = "3050f80f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElement4
     lpVtbl : IHTMLElement4VTbl*
   end
@@ -13320,6 +13512,8 @@ lib LibWin32
     query_selector_all : Proc(IElementSelector*, UInt8*, IHTMLDOMChildrenCollection*, HRESULT)
   end
 
+  IElementSelector_GUID = LibC::GUID.new("30510463-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementSelector = "30510463-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementSelector
     lpVtbl : IElementSelectorVTbl*
   end
@@ -13332,6 +13526,8 @@ lib LibWin32
     set_document_printer : Proc(IHTMLElementRender*, UInt8*, HDC, HRESULT)
   end
 
+  IHTMLElementRender_GUID = LibC::GUID.new("3050f669-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElementRender = "3050f669-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElementRender
     lpVtbl : IHTMLElementRenderVTbl*
   end
@@ -13348,6 +13544,8 @@ lib LibWin32
     get_unique_id : Proc(IHTMLUniqueName*, UInt8**, HRESULT)
   end
 
+  IHTMLUniqueName_GUID = LibC::GUID.new("3050f4d0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLUniqueName = "3050f4d0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLUniqueName
     lpVtbl : IHTMLUniqueNameVTbl*
   end
@@ -13427,6 +13625,8 @@ lib LibWin32
     get_aria_relevant : Proc(IHTMLElement5*, UInt8**, HRESULT)
   end
 
+  IHTMLElement5_GUID = LibC::GUID.new("3051045d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElement5 = "3051045d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElement5
     lpVtbl : IHTMLElement5VTbl*
   end
@@ -13516,6 +13716,8 @@ lib LibWin32
     has_attributes : Proc(IHTMLElement6*, Int16*, HRESULT)
   end
 
+  IHTMLElement6_GUID = LibC::GUID.new("305106f8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElement6 = "305106f8-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElement6
     lpVtbl : IHTMLElement6VTbl*
   end
@@ -13584,6 +13786,8 @@ lib LibWin32
     get_oncuechange : Proc(IHTMLElement7*, VARIANT*, HRESULT)
   end
 
+  IHTMLElement7_GUID = LibC::GUID.new("305107aa-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElement7 = "305107aa-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElement7
     lpVtbl : IHTMLElement7VTbl*
   end
@@ -13600,6 +13804,8 @@ lib LibWin32
     ms_get_rules_applied_with_ancestor : Proc(IHTMLElementAppliedStyles*, VARIANT, IRulesAppliedCollection*, HRESULT)
   end
 
+  IHTMLElementAppliedStyles_GUID = LibC::GUID.new("305104bd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElementAppliedStyles = "305104bd-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElementAppliedStyles
     lpVtbl : IHTMLElementAppliedStylesVTbl*
   end
@@ -13619,6 +13825,8 @@ lib LibWin32
     get_child_element_count : Proc(IElementTraversal*, Int32*, HRESULT)
   end
 
+  IElementTraversal_GUID = LibC::GUID.new("30510736-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementTraversal = "30510736-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementTraversal
     lpVtbl : IElementTraversalVTbl*
   end
@@ -13639,6 +13847,8 @@ lib LibWin32
     get_data_format_as : Proc(IHTMLDatabinding*, UInt8**, HRESULT)
   end
 
+  IHTMLDatabinding_GUID = LibC::GUID.new("3050f3f2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDatabinding = "3050f3f2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDatabinding
     lpVtbl : IHTMLDatabindingVTbl*
   end
@@ -13654,6 +13864,8 @@ lib LibWin32
     get_script : Proc(IHTMLDocument*, IDispatch*, HRESULT)
   end
 
+  IHTMLDocument_GUID = LibC::GUID.new("626fc520-a41e-11cf-a731-00a0c9082637")
+  CLSID_IHTMLDocument = "626fc520-a41e-11cf-a731-00a0c9082637"
   struct IHTMLDocument
     lpVtbl : IHTMLDocumentVTbl*
   end
@@ -13689,6 +13901,8 @@ lib LibWin32
     get_frozen : Proc(IHTMLElementDefaults*, Int16*, HRESULT)
   end
 
+  IHTMLElementDefaults_GUID = LibC::GUID.new("3050f6c9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElementDefaults = "3050f6c9-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElementDefaults
     lpVtbl : IHTMLElementDefaultsVTbl*
   end
@@ -13703,6 +13917,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDefaults*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDefaults_GUID = LibC::GUID.new("3050f58c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDefaults = "3050f58c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDefaults
     lpVtbl : DispHTMLDefaultsVTbl*
   end
@@ -13721,6 +13937,8 @@ lib LibWin32
     get_document : Proc(IHTCDefaultDispatch*, IDispatch*, HRESULT)
   end
 
+  IHTCDefaultDispatch_GUID = LibC::GUID.new("3050f4fd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTCDefaultDispatch = "3050f4fd-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTCDefaultDispatch
     lpVtbl : IHTCDefaultDispatchVTbl*
   end
@@ -13738,6 +13956,8 @@ lib LibWin32
     get_value : Proc(IHTCPropertyBehavior*, VARIANT*, HRESULT)
   end
 
+  IHTCPropertyBehavior_GUID = LibC::GUID.new("3050f5df-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTCPropertyBehavior = "3050f5df-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTCPropertyBehavior
     lpVtbl : IHTCPropertyBehaviorVTbl*
   end
@@ -13752,6 +13972,8 @@ lib LibWin32
     invoke : Proc(IHTCMethodBehavior*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IHTCMethodBehavior_GUID = LibC::GUID.new("3050f631-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTCMethodBehavior = "3050f631-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTCMethodBehavior
     lpVtbl : IHTCMethodBehaviorVTbl*
   end
@@ -13767,6 +13989,8 @@ lib LibWin32
     fire : Proc(IHTCEventBehavior*, IHTMLEventObj, HRESULT)
   end
 
+  IHTCEventBehavior_GUID = LibC::GUID.new("3050f4ff-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTCEventBehavior = "3050f4ff-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTCEventBehavior
     lpVtbl : IHTCEventBehaviorVTbl*
   end
@@ -13783,6 +14007,8 @@ lib LibWin32
     detach_event : Proc(IHTCAttachBehavior*, HRESULT)
   end
 
+  IHTCAttachBehavior_GUID = LibC::GUID.new("3050f5f4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTCAttachBehavior = "3050f5f4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTCAttachBehavior
     lpVtbl : IHTCAttachBehaviorVTbl*
   end
@@ -13798,6 +14024,8 @@ lib LibWin32
     fire_event : Proc(IHTCAttachBehavior2*, VARIANT, HRESULT)
   end
 
+  IHTCAttachBehavior2_GUID = LibC::GUID.new("3050f7eb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTCAttachBehavior2 = "3050f7eb-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTCAttachBehavior2
     lpVtbl : IHTCAttachBehavior2VTbl*
   end
@@ -13814,6 +14042,8 @@ lib LibWin32
     get_name : Proc(IHTCDescBehavior*, UInt8**, HRESULT)
   end
 
+  IHTCDescBehavior_GUID = LibC::GUID.new("3050f5dc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTCDescBehavior = "3050f5dc-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTCDescBehavior
     lpVtbl : IHTCDescBehaviorVTbl*
   end
@@ -13828,6 +14058,8 @@ lib LibWin32
     invoke : Proc(DispHTCDefaultDispatch*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTCDefaultDispatch_GUID = LibC::GUID.new("3050f573-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTCDefaultDispatch = "3050f573-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTCDefaultDispatch
     lpVtbl : DispHTCDefaultDispatchVTbl*
   end
@@ -13842,6 +14074,8 @@ lib LibWin32
     invoke : Proc(DispHTCPropertyBehavior*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTCPropertyBehavior_GUID = LibC::GUID.new("3050f57f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTCPropertyBehavior = "3050f57f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTCPropertyBehavior
     lpVtbl : DispHTCPropertyBehaviorVTbl*
   end
@@ -13856,6 +14090,8 @@ lib LibWin32
     invoke : Proc(DispHTCMethodBehavior*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTCMethodBehavior_GUID = LibC::GUID.new("3050f587-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTCMethodBehavior = "3050f587-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTCMethodBehavior
     lpVtbl : DispHTCMethodBehaviorVTbl*
   end
@@ -13870,6 +14106,8 @@ lib LibWin32
     invoke : Proc(DispHTCEventBehavior*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTCEventBehavior_GUID = LibC::GUID.new("3050f574-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTCEventBehavior = "3050f574-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTCEventBehavior
     lpVtbl : DispHTCEventBehaviorVTbl*
   end
@@ -13884,6 +14122,8 @@ lib LibWin32
     invoke : Proc(DispHTCAttachBehavior*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTCAttachBehavior_GUID = LibC::GUID.new("3050f583-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTCAttachBehavior = "3050f583-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTCAttachBehavior
     lpVtbl : DispHTCAttachBehaviorVTbl*
   end
@@ -13898,6 +14138,8 @@ lib LibWin32
     invoke : Proc(DispHTCDescBehavior*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTCDescBehavior_GUID = LibC::GUID.new("3050f57e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTCDescBehavior = "3050f57e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTCDescBehavior
     lpVtbl : DispHTCDescBehaviorVTbl*
   end
@@ -13914,6 +14156,8 @@ lib LibWin32
     item : Proc(IHTMLUrnCollection*, Int32, UInt8**, HRESULT)
   end
 
+  IHTMLUrnCollection_GUID = LibC::GUID.new("3050f5e2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLUrnCollection = "3050f5e2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLUrnCollection
     lpVtbl : IHTMLUrnCollectionVTbl*
   end
@@ -13928,6 +14172,8 @@ lib LibWin32
     invoke : Proc(DispHTMLUrnCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLUrnCollection_GUID = LibC::GUID.new("3050f551-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLUrnCollection = "3050f551-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLUrnCollection
     lpVtbl : DispHTMLUrnCollectionVTbl*
   end
@@ -13944,6 +14190,8 @@ lib LibWin32
     named_recordset : Proc(IHTMLGenericElement*, UInt8*, VARIANT*, IDispatch*, HRESULT)
   end
 
+  IHTMLGenericElement_GUID = LibC::GUID.new("3050f4b7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLGenericElement = "3050f4b7-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLGenericElement
     lpVtbl : IHTMLGenericElementVTbl*
   end
@@ -13958,6 +14206,8 @@ lib LibWin32
     invoke : Proc(DispHTMLGenericElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLGenericElement_GUID = LibC::GUID.new("3050f563-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLGenericElement = "3050f563-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLGenericElement
     lpVtbl : DispHTMLGenericElementVTbl*
   end
@@ -13974,6 +14224,8 @@ lib LibWin32
     ms_get_specificity : Proc(IHTMLStyleSheetRuleApplied*, Int32, Int32*, HRESULT)
   end
 
+  IHTMLStyleSheetRuleApplied_GUID = LibC::GUID.new("305104c1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetRuleApplied = "305104c1-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetRuleApplied
     lpVtbl : IHTMLStyleSheetRuleAppliedVTbl*
   end
@@ -13990,6 +14242,8 @@ lib LibWin32
     get_selector_text : Proc(IHTMLStyleSheetRule2*, UInt8**, HRESULT)
   end
 
+  IHTMLStyleSheetRule2_GUID = LibC::GUID.new("305106fd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetRule2 = "305106fd-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetRule2
     lpVtbl : IHTMLStyleSheetRule2VTbl*
   end
@@ -14006,6 +14260,8 @@ lib LibWin32
     item : Proc(IHTMLStyleSheetRulesCollection2*, Int32, IHTMLCSSRule*, HRESULT)
   end
 
+  IHTMLStyleSheetRulesCollection2_GUID = LibC::GUID.new("305106e8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetRulesCollection2 = "305106e8-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetRulesCollection2
     lpVtbl : IHTMLStyleSheetRulesCollection2VTbl*
   end
@@ -14020,6 +14276,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleSheetRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleSheetRule_GUID = LibC::GUID.new("3050f50e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleSheetRule = "3050f50e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleSheetRule
     lpVtbl : DispHTMLStyleSheetRuleVTbl*
   end
@@ -14034,6 +14292,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleSheetRulesCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleSheetRulesCollection_GUID = LibC::GUID.new("3050f52f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleSheetRulesCollection = "3050f52f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleSheetRulesCollection
     lpVtbl : DispHTMLStyleSheetRulesCollectionVTbl*
   end
@@ -14050,6 +14310,8 @@ lib LibWin32
     get_pseudo_class : Proc(IHTMLStyleSheetPage*, UInt8**, HRESULT)
   end
 
+  IHTMLStyleSheetPage_GUID = LibC::GUID.new("3050f7ee-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetPage = "3050f7ee-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetPage
     lpVtbl : IHTMLStyleSheetPageVTbl*
   end
@@ -14067,6 +14329,8 @@ lib LibWin32
     get_style : Proc(IHTMLStyleSheetPage2*, IHTMLRuleStyle*, HRESULT)
   end
 
+  IHTMLStyleSheetPage2_GUID = LibC::GUID.new("305106ed-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetPage2 = "305106ed-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetPage2
     lpVtbl : IHTMLStyleSheetPage2VTbl*
   end
@@ -14083,6 +14347,8 @@ lib LibWin32
     item : Proc(IHTMLStyleSheetPagesCollection*, Int32, IHTMLStyleSheetPage*, HRESULT)
   end
 
+  IHTMLStyleSheetPagesCollection_GUID = LibC::GUID.new("3050f7f0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetPagesCollection = "3050f7f0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetPagesCollection
     lpVtbl : IHTMLStyleSheetPagesCollectionVTbl*
   end
@@ -14097,6 +14363,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleSheetPage*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleSheetPage_GUID = LibC::GUID.new("3050f540-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleSheetPage = "3050f540-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleSheetPage
     lpVtbl : DispHTMLStyleSheetPageVTbl*
   end
@@ -14111,6 +14379,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleSheetPagesCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleSheetPagesCollection_GUID = LibC::GUID.new("3050f543-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleSheetPagesCollection = "3050f543-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleSheetPagesCollection
     lpVtbl : DispHTMLStyleSheetPagesCollectionVTbl*
   end
@@ -14128,6 +14398,8 @@ lib LibWin32
     item : Proc(IHTMLStyleSheetsCollection*, VARIANT*, VARIANT*, HRESULT)
   end
 
+  IHTMLStyleSheetsCollection_GUID = LibC::GUID.new("3050f37e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetsCollection = "3050f37e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetsCollection
     lpVtbl : IHTMLStyleSheetsCollectionVTbl*
   end
@@ -14144,6 +14416,8 @@ lib LibWin32
     add_page_rule : Proc(IHTMLStyleSheet2*, UInt8*, UInt8*, Int32, Int32*, HRESULT)
   end
 
+  IHTMLStyleSheet2_GUID = LibC::GUID.new("3050f3d1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheet2 = "3050f3d1-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheet2
     lpVtbl : IHTMLStyleSheet2VTbl*
   end
@@ -14162,6 +14436,8 @@ lib LibWin32
     get_is_pref_alternate : Proc(IHTMLStyleSheet3*, Int16*, HRESULT)
   end
 
+  IHTMLStyleSheet3_GUID = LibC::GUID.new("30510496-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheet3 = "30510496-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheet3
     lpVtbl : IHTMLStyleSheet3VTbl*
   end
@@ -14185,6 +14461,8 @@ lib LibWin32
     delete_rule : Proc(IHTMLStyleSheet4*, Int32, HRESULT)
   end
 
+  IHTMLStyleSheet4_GUID = LibC::GUID.new("305106f4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheet4 = "305106f4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheet4
     lpVtbl : IHTMLStyleSheet4VTbl*
   end
@@ -14199,6 +14477,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleSheet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleSheet_GUID = LibC::GUID.new("3050f58d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleSheet = "3050f58d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleSheet
     lpVtbl : DispHTMLStyleSheetVTbl*
   end
@@ -14214,6 +14494,8 @@ lib LibWin32
     item : Proc(IHTMLStyleSheetsCollection2*, Int32, VARIANT*, HRESULT)
   end
 
+  IHTMLStyleSheetsCollection2_GUID = LibC::GUID.new("305106e7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetsCollection2 = "305106e7-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetsCollection2
     lpVtbl : IHTMLStyleSheetsCollection2VTbl*
   end
@@ -14228,6 +14510,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleSheetsCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleSheetsCollection_GUID = LibC::GUID.new("3050f547-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleSheetsCollection = "3050f547-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleSheetsCollection
     lpVtbl : DispHTMLStyleSheetsCollectionVTbl*
   end
@@ -14242,6 +14526,8 @@ lib LibWin32
     invoke : Proc(HTMLLinkElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLLinkElementEvents2_GUID = LibC::GUID.new("3050f61d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLinkElementEvents2 = "3050f61d-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLLinkElementEvents2
     lpVtbl : HTMLLinkElementEvents2VTbl*
   end
@@ -14256,6 +14542,8 @@ lib LibWin32
     invoke : Proc(HTMLLinkElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLLinkElementEvents_GUID = LibC::GUID.new("3050f3cc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLinkElementEvents = "3050f3cc-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLLinkElementEvents
     lpVtbl : HTMLLinkElementEventsVTbl*
   end
@@ -14290,6 +14578,8 @@ lib LibWin32
     get_media : Proc(IHTMLLinkElement*, UInt8**, HRESULT)
   end
 
+  IHTMLLinkElement_GUID = LibC::GUID.new("3050f205-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLinkElement = "3050f205-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLinkElement
     lpVtbl : IHTMLLinkElementVTbl*
   end
@@ -14306,6 +14596,8 @@ lib LibWin32
     get_target : Proc(IHTMLLinkElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLLinkElement2_GUID = LibC::GUID.new("3050f4e5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLinkElement2 = "3050f4e5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLinkElement2
     lpVtbl : IHTMLLinkElement2VTbl*
   end
@@ -14324,6 +14616,8 @@ lib LibWin32
     get_hreflang : Proc(IHTMLLinkElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLLinkElement3_GUID = LibC::GUID.new("3050f81e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLinkElement3 = "3050f81e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLinkElement3
     lpVtbl : IHTMLLinkElement3VTbl*
   end
@@ -14340,6 +14634,8 @@ lib LibWin32
     get_href : Proc(IHTMLLinkElement4*, UInt8**, HRESULT)
   end
 
+  IHTMLLinkElement4_GUID = LibC::GUID.new("3051043a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLinkElement4 = "3051043a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLinkElement4
     lpVtbl : IHTMLLinkElement4VTbl*
   end
@@ -14355,6 +14651,8 @@ lib LibWin32
     get_sheet : Proc(IHTMLLinkElement5*, IHTMLStyleSheet*, HRESULT)
   end
 
+  IHTMLLinkElement5_GUID = LibC::GUID.new("30510726-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLinkElement5 = "30510726-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLinkElement5
     lpVtbl : IHTMLLinkElement5VTbl*
   end
@@ -14369,6 +14667,8 @@ lib LibWin32
     invoke : Proc(DispHTMLLinkElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLLinkElement_GUID = LibC::GUID.new("3050f524-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLLinkElement = "3050f524-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLLinkElement
     lpVtbl : DispHTMLLinkElementVTbl*
   end
@@ -14413,6 +14713,8 @@ lib LibWin32
     exec_command_show_help : Proc(IHTMLTxtRange*, UInt8*, Int16*, HRESULT)
   end
 
+  IHTMLTxtRange_GUID = LibC::GUID.new("3050f220-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTxtRange = "3050f220-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTxtRange
     lpVtbl : IHTMLTxtRangeVTbl*
   end
@@ -14433,6 +14735,8 @@ lib LibWin32
     get_bounding_height : Proc(IHTMLTextRangeMetrics*, Int32*, HRESULT)
   end
 
+  IHTMLTextRangeMetrics_GUID = LibC::GUID.new("3050f40b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTextRangeMetrics = "3050f40b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTextRangeMetrics
     lpVtbl : IHTMLTextRangeMetricsVTbl*
   end
@@ -14449,6 +14753,8 @@ lib LibWin32
     get_bounding_client_rect : Proc(IHTMLTextRangeMetrics2*, IHTMLRect*, HRESULT)
   end
 
+  IHTMLTextRangeMetrics2_GUID = LibC::GUID.new("3050f4a6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTextRangeMetrics2 = "3050f4a6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTextRangeMetrics2
     lpVtbl : IHTMLTextRangeMetrics2VTbl*
   end
@@ -14466,6 +14772,8 @@ lib LibWin32
     item : Proc(IHTMLTxtRangeCollection*, VARIANT*, VARIANT*, HRESULT)
   end
 
+  IHTMLTxtRangeCollection_GUID = LibC::GUID.new("3050f7ed-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTxtRangeCollection = "3050f7ed-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTxtRangeCollection
     lpVtbl : IHTMLTxtRangeCollectionVTbl*
   end
@@ -14506,6 +14814,8 @@ lib LibWin32
     get_bounding_client_rect : Proc(IHTMLDOMRange*, IHTMLRect*, HRESULT)
   end
 
+  IHTMLDOMRange_GUID = LibC::GUID.new("305104ae-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMRange = "305104ae-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMRange
     lpVtbl : IHTMLDOMRangeVTbl*
   end
@@ -14520,6 +14830,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDOMRange*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDOMRange_GUID = LibC::GUID.new("3050f5a3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDOMRange = "3050f5a3-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDOMRange
     lpVtbl : DispHTMLDOMRangeVTbl*
   end
@@ -14534,6 +14846,8 @@ lib LibWin32
     invoke : Proc(HTMLFormElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLFormElementEvents2_GUID = LibC::GUID.new("3050f614-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFormElementEvents2 = "3050f614-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLFormElementEvents2
     lpVtbl : HTMLFormElementEvents2VTbl*
   end
@@ -14548,6 +14862,8 @@ lib LibWin32
     invoke : Proc(HTMLFormElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLFormElementEvents_GUID = LibC::GUID.new("3050f364-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFormElementEvents = "3050f364-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLFormElementEvents
     lpVtbl : HTMLFormElementEventsVTbl*
   end
@@ -14586,6 +14902,8 @@ lib LibWin32
     tags : Proc(IHTMLFormElement*, VARIANT, IDispatch*, HRESULT)
   end
 
+  IHTMLFormElement_GUID = LibC::GUID.new("3050f1f7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFormElement = "3050f1f7-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFormElement
     lpVtbl : IHTMLFormElementVTbl*
   end
@@ -14603,6 +14921,8 @@ lib LibWin32
     urns : Proc(IHTMLFormElement2*, VARIANT, IDispatch*, HRESULT)
   end
 
+  IHTMLFormElement2_GUID = LibC::GUID.new("3050f4f6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFormElement2 = "3050f4f6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFormElement2
     lpVtbl : IHTMLFormElement2VTbl*
   end
@@ -14618,6 +14938,8 @@ lib LibWin32
     named_item : Proc(IHTMLFormElement3*, UInt8*, IDispatch*, HRESULT)
   end
 
+  IHTMLFormElement3_GUID = LibC::GUID.new("3050f836-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFormElement3 = "3050f836-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFormElement3
     lpVtbl : IHTMLFormElement3VTbl*
   end
@@ -14635,6 +14957,8 @@ lib LibWin32
     append_item_separator : Proc(IHTMLSubmitData*, HRESULT)
   end
 
+  IHTMLSubmitData_GUID = LibC::GUID.new("3050f645-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSubmitData = "3050f645-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSubmitData
     lpVtbl : IHTMLSubmitDataVTbl*
   end
@@ -14651,6 +14975,8 @@ lib LibWin32
     get_action : Proc(IHTMLFormElement4*, UInt8**, HRESULT)
   end
 
+  IHTMLFormElement4_GUID = LibC::GUID.new("3051042c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFormElement4 = "3051042c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFormElement4
     lpVtbl : IHTMLFormElement4VTbl*
   end
@@ -14665,6 +14991,8 @@ lib LibWin32
     invoke : Proc(DispHTMLFormElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLFormElement_GUID = LibC::GUID.new("3050f510-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLFormElement = "3050f510-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLFormElement
     lpVtbl : DispHTMLFormElementVTbl*
   end
@@ -14679,6 +15007,8 @@ lib LibWin32
     invoke : Proc(HTMLControlElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLControlElementEvents2_GUID = LibC::GUID.new("3050f612-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLControlElementEvents2 = "3050f612-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLControlElementEvents2
     lpVtbl : HTMLControlElementEvents2VTbl*
   end
@@ -14693,6 +15023,8 @@ lib LibWin32
     invoke : Proc(HTMLControlElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLControlElementEvents_GUID = LibC::GUID.new("3050f4ea-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLControlElementEvents = "3050f4ea-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLControlElementEvents
     lpVtbl : HTMLControlElementEventsVTbl*
   end
@@ -14725,6 +15057,8 @@ lib LibWin32
     get_client_left : Proc(IHTMLControlElement*, Int32*, HRESULT)
   end
 
+  IHTMLControlElement_GUID = LibC::GUID.new("3050f4e9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLControlElement = "3050f4e9-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLControlElement
     lpVtbl : IHTMLControlElementVTbl*
   end
@@ -14739,6 +15073,8 @@ lib LibWin32
     invoke : Proc(IHTMLTextElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IHTMLTextElement_GUID = LibC::GUID.new("3050f218-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTextElement = "3050f218-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTextElement
     lpVtbl : IHTMLTextElementVTbl*
   end
@@ -14753,6 +15089,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTextElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTextElement_GUID = LibC::GUID.new("3050f537-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTextElement = "3050f537-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTextElement
     lpVtbl : DispHTMLTextElementVTbl*
   end
@@ -14767,6 +15105,8 @@ lib LibWin32
     invoke : Proc(HTMLTextContainerEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLTextContainerEvents2_GUID = LibC::GUID.new("3050f624-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTextContainerEvents2 = "3050f624-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLTextContainerEvents2
     lpVtbl : HTMLTextContainerEvents2VTbl*
   end
@@ -14781,6 +15121,8 @@ lib LibWin32
     invoke : Proc(HTMLTextContainerEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLTextContainerEvents_GUID = LibC::GUID.new("1ff6aa72-5842-11cf-a707-00aa00c0098d")
+  CLSID_HTMLTextContainerEvents = "1ff6aa72-5842-11cf-a707-00aa00c0098d"
   struct HTMLTextContainerEvents
     lpVtbl : HTMLTextContainerEventsVTbl*
   end
@@ -14804,6 +15146,8 @@ lib LibWin32
     get_onscroll : Proc(IHTMLTextContainer*, VARIANT*, HRESULT)
   end
 
+  IHTMLTextContainer_GUID = LibC::GUID.new("3050f230-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTextContainer = "3050f230-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTextContainer
     lpVtbl : IHTMLTextContainerVTbl*
   end
@@ -14833,6 +15177,8 @@ lib LibWin32
     get_length : Proc(IHTMLControlRange*, Int32*, HRESULT)
   end
 
+  IHTMLControlRange_GUID = LibC::GUID.new("3050f29c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLControlRange = "3050f29c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLControlRange
     lpVtbl : IHTMLControlRangeVTbl*
   end
@@ -14848,6 +15194,8 @@ lib LibWin32
     add_element : Proc(IHTMLControlRange2*, IHTMLElement, HRESULT)
   end
 
+  IHTMLControlRange2_GUID = LibC::GUID.new("3050f65e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLControlRange2 = "3050f65e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLControlRange2
     lpVtbl : IHTMLControlRange2VTbl*
   end
@@ -14862,6 +15210,8 @@ lib LibWin32
     invoke : Proc(HTMLImgEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLImgEvents2_GUID = LibC::GUID.new("3050f616-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLImgEvents2 = "3050f616-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLImgEvents2
     lpVtbl : HTMLImgEvents2VTbl*
   end
@@ -14876,6 +15226,8 @@ lib LibWin32
     invoke : Proc(HTMLImgEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLImgEvents_GUID = LibC::GUID.new("3050f25b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLImgEvents = "3050f25b-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLImgEvents
     lpVtbl : HTMLImgEventsVTbl*
   end
@@ -14938,6 +15290,8 @@ lib LibWin32
     get_start : Proc(IHTMLImgElement*, UInt8**, HRESULT)
   end
 
+  IHTMLImgElement_GUID = LibC::GUID.new("3050f240-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLImgElement = "3050f240-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLImgElement
     lpVtbl : IHTMLImgElementVTbl*
   end
@@ -14954,6 +15308,8 @@ lib LibWin32
     get_long_desc : Proc(IHTMLImgElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLImgElement2_GUID = LibC::GUID.new("3050f826-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLImgElement2 = "3050f826-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLImgElement2
     lpVtbl : IHTMLImgElement2VTbl*
   end
@@ -14976,6 +15332,8 @@ lib LibWin32
     get_dynsrc : Proc(IHTMLImgElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLImgElement3_GUID = LibC::GUID.new("30510434-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLImgElement3 = "30510434-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLImgElement3
     lpVtbl : IHTMLImgElement3VTbl*
   end
@@ -14992,6 +15350,8 @@ lib LibWin32
     get_natural_height : Proc(IHTMLImgElement4*, Int32*, HRESULT)
   end
 
+  IHTMLImgElement4_GUID = LibC::GUID.new("305107f6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLImgElement4 = "305107f6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLImgElement4
     lpVtbl : IHTMLImgElement4VTbl*
   end
@@ -15010,6 +15370,8 @@ lib LibWin32
     get_ms_play_to_primary : Proc(IHTMLMSImgElement*, Int16*, HRESULT)
   end
 
+  IHTMLMSImgElement_GUID = LibC::GUID.new("30510793-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMSImgElement = "30510793-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMSImgElement
     lpVtbl : IHTMLMSImgElementVTbl*
   end
@@ -15025,6 +15387,8 @@ lib LibWin32
     create : Proc(IHTMLImageElementFactory*, VARIANT, VARIANT, IHTMLImgElement*, HRESULT)
   end
 
+  IHTMLImageElementFactory_GUID = LibC::GUID.new("3050f38e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLImageElementFactory = "3050f38e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLImageElementFactory
     lpVtbl : IHTMLImageElementFactoryVTbl*
   end
@@ -15039,6 +15403,8 @@ lib LibWin32
     invoke : Proc(DispHTMLImg*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLImg_GUID = LibC::GUID.new("3050f51c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLImg = "3050f51c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLImg
     lpVtbl : DispHTMLImgVTbl*
   end
@@ -15088,6 +15454,8 @@ lib LibWin32
     create_text_range : Proc(IHTMLBodyElement*, IHTMLTxtRange*, HRESULT)
   end
 
+  IHTMLBodyElement_GUID = LibC::GUID.new("3050f1d8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBodyElement = "3050f1d8-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBodyElement
     lpVtbl : IHTMLBodyElementVTbl*
   end
@@ -15106,6 +15474,8 @@ lib LibWin32
     get_onafterprint : Proc(IHTMLBodyElement2*, VARIANT*, HRESULT)
   end
 
+  IHTMLBodyElement2_GUID = LibC::GUID.new("3050f5c5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBodyElement2 = "3050f5c5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBodyElement2
     lpVtbl : IHTMLBodyElement2VTbl*
   end
@@ -15128,6 +15498,8 @@ lib LibWin32
     get_onhashchange : Proc(IHTMLBodyElement3*, VARIANT*, HRESULT)
   end
 
+  IHTMLBodyElement3_GUID = LibC::GUID.new("30510422-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBodyElement3 = "30510422-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBodyElement3
     lpVtbl : IHTMLBodyElement3VTbl*
   end
@@ -15146,6 +15518,8 @@ lib LibWin32
     get_onstorage : Proc(IHTMLBodyElement4*, VARIANT*, HRESULT)
   end
 
+  IHTMLBodyElement4_GUID = LibC::GUID.new("30510795-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBodyElement4 = "30510795-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBodyElement4
     lpVtbl : IHTMLBodyElement4VTbl*
   end
@@ -15162,6 +15536,8 @@ lib LibWin32
     get_onpopstate : Proc(IHTMLBodyElement5*, VARIANT*, HRESULT)
   end
 
+  IHTMLBodyElement5_GUID = LibC::GUID.new("30510822-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBodyElement5 = "30510822-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBodyElement5
     lpVtbl : IHTMLBodyElement5VTbl*
   end
@@ -15176,6 +15552,8 @@ lib LibWin32
     invoke : Proc(DispHTMLBody*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLBody_GUID = LibC::GUID.new("3050f507-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLBody = "3050f507-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLBody
     lpVtbl : DispHTMLBodyVTbl*
   end
@@ -15196,6 +15574,8 @@ lib LibWin32
     get_size : Proc(IHTMLFontElement*, VARIANT*, HRESULT)
   end
 
+  IHTMLFontElement_GUID = LibC::GUID.new("3050f1d9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFontElement = "3050f1d9-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFontElement
     lpVtbl : IHTMLFontElementVTbl*
   end
@@ -15210,6 +15590,8 @@ lib LibWin32
     invoke : Proc(DispHTMLFontElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLFontElement_GUID = LibC::GUID.new("3050f512-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLFontElement = "3050f512-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLFontElement
     lpVtbl : DispHTMLFontElementVTbl*
   end
@@ -15224,6 +15606,8 @@ lib LibWin32
     invoke : Proc(HTMLAnchorEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLAnchorEvents2_GUID = LibC::GUID.new("3050f610-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAnchorEvents2 = "3050f610-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLAnchorEvents2
     lpVtbl : HTMLAnchorEvents2VTbl*
   end
@@ -15238,6 +15622,8 @@ lib LibWin32
     invoke : Proc(HTMLAnchorEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLAnchorEvents_GUID = LibC::GUID.new("3050f29d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAnchorEvents = "3050f29d-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLAnchorEvents
     lpVtbl : HTMLAnchorEventsVTbl*
   end
@@ -15293,6 +15679,8 @@ lib LibWin32
     blur : Proc(IHTMLAnchorElement*, HRESULT)
   end
 
+  IHTMLAnchorElement_GUID = LibC::GUID.new("3050f1da-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAnchorElement = "3050f1da-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAnchorElement
     lpVtbl : IHTMLAnchorElementVTbl*
   end
@@ -15317,6 +15705,8 @@ lib LibWin32
     get_type : Proc(IHTMLAnchorElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLAnchorElement2_GUID = LibC::GUID.new("3050f825-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAnchorElement2 = "3050f825-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAnchorElement2
     lpVtbl : IHTMLAnchorElement2VTbl*
   end
@@ -15337,6 +15727,8 @@ lib LibWin32
     get_href : Proc(IHTMLAnchorElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLAnchorElement3_GUID = LibC::GUID.new("3051041d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAnchorElement3 = "3051041d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAnchorElement3
     lpVtbl : IHTMLAnchorElement3VTbl*
   end
@@ -15351,6 +15743,8 @@ lib LibWin32
     invoke : Proc(DispHTMLAnchorElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLAnchorElement_GUID = LibC::GUID.new("3050f502-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLAnchorElement = "3050f502-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLAnchorElement
     lpVtbl : DispHTMLAnchorElementVTbl*
   end
@@ -15365,6 +15759,8 @@ lib LibWin32
     invoke : Proc(HTMLLabelEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLLabelEvents2_GUID = LibC::GUID.new("3050f61c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLabelEvents2 = "3050f61c-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLLabelEvents2
     lpVtbl : HTMLLabelEvents2VTbl*
   end
@@ -15379,6 +15775,8 @@ lib LibWin32
     invoke : Proc(HTMLLabelEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLLabelEvents_GUID = LibC::GUID.new("3050f329-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLLabelEvents = "3050f329-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLLabelEvents
     lpVtbl : HTMLLabelEventsVTbl*
   end
@@ -15397,6 +15795,8 @@ lib LibWin32
     get_access_key : Proc(IHTMLLabelElement*, UInt8**, HRESULT)
   end
 
+  IHTMLLabelElement_GUID = LibC::GUID.new("3050f32a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLabelElement = "3050f32a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLabelElement
     lpVtbl : IHTMLLabelElementVTbl*
   end
@@ -15412,6 +15812,8 @@ lib LibWin32
     get_form : Proc(IHTMLLabelElement2*, IHTMLFormElement*, HRESULT)
   end
 
+  IHTMLLabelElement2_GUID = LibC::GUID.new("3050f832-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLabelElement2 = "3050f832-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLabelElement2
     lpVtbl : IHTMLLabelElement2VTbl*
   end
@@ -15426,6 +15828,8 @@ lib LibWin32
     invoke : Proc(DispHTMLLabelElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLLabelElement_GUID = LibC::GUID.new("3050f522-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLLabelElement = "3050f522-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLLabelElement
     lpVtbl : DispHTMLLabelElementVTbl*
   end
@@ -15440,6 +15844,8 @@ lib LibWin32
     invoke : Proc(IHTMLListElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IHTMLListElement_GUID = LibC::GUID.new("3050f20e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLListElement = "3050f20e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLListElement
     lpVtbl : IHTMLListElementVTbl*
   end
@@ -15456,6 +15862,8 @@ lib LibWin32
     get_compact : Proc(IHTMLListElement2*, Int16*, HRESULT)
   end
 
+  IHTMLListElement2_GUID = LibC::GUID.new("3050f822-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLListElement2 = "3050f822-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLListElement2
     lpVtbl : IHTMLListElement2VTbl*
   end
@@ -15470,6 +15878,8 @@ lib LibWin32
     invoke : Proc(DispHTMLListElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLListElement_GUID = LibC::GUID.new("3050f525-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLListElement = "3050f525-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLListElement
     lpVtbl : DispHTMLListElementVTbl*
   end
@@ -15488,6 +15898,8 @@ lib LibWin32
     get_type : Proc(IHTMLUListElement*, UInt8**, HRESULT)
   end
 
+  IHTMLUListElement_GUID = LibC::GUID.new("3050f1dd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLUListElement = "3050f1dd-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLUListElement
     lpVtbl : IHTMLUListElementVTbl*
   end
@@ -15502,6 +15914,8 @@ lib LibWin32
     invoke : Proc(DispHTMLUListElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLUListElement_GUID = LibC::GUID.new("3050f538-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLUListElement = "3050f538-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLUListElement
     lpVtbl : DispHTMLUListElementVTbl*
   end
@@ -15522,6 +15936,8 @@ lib LibWin32
     get_type : Proc(IHTMLOListElement*, UInt8**, HRESULT)
   end
 
+  IHTMLOListElement_GUID = LibC::GUID.new("3050f1de-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOListElement = "3050f1de-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOListElement
     lpVtbl : IHTMLOListElementVTbl*
   end
@@ -15536,6 +15952,8 @@ lib LibWin32
     invoke : Proc(DispHTMLOListElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLOListElement_GUID = LibC::GUID.new("3050f52a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLOListElement = "3050f52a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLOListElement
     lpVtbl : DispHTMLOListElementVTbl*
   end
@@ -15554,6 +15972,8 @@ lib LibWin32
     get_value : Proc(IHTMLLIElement*, Int32*, HRESULT)
   end
 
+  IHTMLLIElement_GUID = LibC::GUID.new("3050f1e0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLIElement = "3050f1e0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLIElement
     lpVtbl : IHTMLLIElementVTbl*
   end
@@ -15568,6 +15988,8 @@ lib LibWin32
     invoke : Proc(DispHTMLLIElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLLIElement_GUID = LibC::GUID.new("3050f523-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLLIElement = "3050f523-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLLIElement
     lpVtbl : DispHTMLLIElementVTbl*
   end
@@ -15584,6 +16006,8 @@ lib LibWin32
     get_clear : Proc(IHTMLBlockElement*, UInt8**, HRESULT)
   end
 
+  IHTMLBlockElement_GUID = LibC::GUID.new("3050f208-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBlockElement = "3050f208-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBlockElement
     lpVtbl : IHTMLBlockElementVTbl*
   end
@@ -15602,6 +16026,8 @@ lib LibWin32
     get_width : Proc(IHTMLBlockElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLBlockElement2_GUID = LibC::GUID.new("3050f823-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBlockElement2 = "3050f823-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBlockElement2
     lpVtbl : IHTMLBlockElement2VTbl*
   end
@@ -15618,6 +16044,8 @@ lib LibWin32
     get_cite : Proc(IHTMLBlockElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLBlockElement3_GUID = LibC::GUID.new("30510494-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBlockElement3 = "30510494-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBlockElement3
     lpVtbl : IHTMLBlockElement3VTbl*
   end
@@ -15632,6 +16060,8 @@ lib LibWin32
     invoke : Proc(DispHTMLBlockElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLBlockElement_GUID = LibC::GUID.new("3050f506-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLBlockElement = "3050f506-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLBlockElement
     lpVtbl : DispHTMLBlockElementVTbl*
   end
@@ -15650,6 +16080,8 @@ lib LibWin32
     get_no_wrap : Proc(IHTMLDivElement*, Int16*, HRESULT)
   end
 
+  IHTMLDivElement_GUID = LibC::GUID.new("3050f200-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDivElement = "3050f200-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDivElement
     lpVtbl : IHTMLDivElementVTbl*
   end
@@ -15664,6 +16096,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDivElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDivElement_GUID = LibC::GUID.new("3050f50c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDivElement = "3050f50c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDivElement
     lpVtbl : DispHTMLDivElementVTbl*
   end
@@ -15680,6 +16114,8 @@ lib LibWin32
     get_no_wrap : Proc(IHTMLDDElement*, Int16*, HRESULT)
   end
 
+  IHTMLDDElement_GUID = LibC::GUID.new("3050f1f2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDDElement = "3050f1f2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDDElement
     lpVtbl : IHTMLDDElementVTbl*
   end
@@ -15694,6 +16130,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDDElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDDElement_GUID = LibC::GUID.new("3050f50b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDDElement = "3050f50b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDDElement
     lpVtbl : DispHTMLDDElementVTbl*
   end
@@ -15710,6 +16148,8 @@ lib LibWin32
     get_no_wrap : Proc(IHTMLDTElement*, Int16*, HRESULT)
   end
 
+  IHTMLDTElement_GUID = LibC::GUID.new("3050f1f3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDTElement = "3050f1f3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDTElement
     lpVtbl : IHTMLDTElementVTbl*
   end
@@ -15724,6 +16164,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDTElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDTElement_GUID = LibC::GUID.new("3050f50d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDTElement = "3050f50d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDTElement
     lpVtbl : DispHTMLDTElementVTbl*
   end
@@ -15740,6 +16182,8 @@ lib LibWin32
     get_clear : Proc(IHTMLBRElement*, UInt8**, HRESULT)
   end
 
+  IHTMLBRElement_GUID = LibC::GUID.new("3050f1f0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBRElement = "3050f1f0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBRElement
     lpVtbl : IHTMLBRElementVTbl*
   end
@@ -15754,6 +16198,8 @@ lib LibWin32
     invoke : Proc(DispHTMLBRElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLBRElement_GUID = LibC::GUID.new("3050f53a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLBRElement = "3050f53a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLBRElement
     lpVtbl : DispHTMLBRElementVTbl*
   end
@@ -15770,6 +16216,8 @@ lib LibWin32
     get_compact : Proc(IHTMLDListElement*, Int16*, HRESULT)
   end
 
+  IHTMLDListElement_GUID = LibC::GUID.new("3050f1f1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDListElement = "3050f1f1-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDListElement
     lpVtbl : IHTMLDListElementVTbl*
   end
@@ -15784,6 +16232,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDListElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDListElement_GUID = LibC::GUID.new("3050f53b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDListElement = "3050f53b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDListElement
     lpVtbl : DispHTMLDListElementVTbl*
   end
@@ -15808,6 +16258,8 @@ lib LibWin32
     get_size : Proc(IHTMLHRElement*, VARIANT*, HRESULT)
   end
 
+  IHTMLHRElement_GUID = LibC::GUID.new("3050f1f4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLHRElement = "3050f1f4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLHRElement
     lpVtbl : IHTMLHRElementVTbl*
   end
@@ -15822,6 +16274,8 @@ lib LibWin32
     invoke : Proc(DispHTMLHRElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLHRElement_GUID = LibC::GUID.new("3050f53d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLHRElement = "3050f53d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLHRElement
     lpVtbl : DispHTMLHRElementVTbl*
   end
@@ -15838,6 +16292,8 @@ lib LibWin32
     get_align : Proc(IHTMLParaElement*, UInt8**, HRESULT)
   end
 
+  IHTMLParaElement_GUID = LibC::GUID.new("3050f1f5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLParaElement = "3050f1f5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLParaElement
     lpVtbl : IHTMLParaElementVTbl*
   end
@@ -15852,6 +16308,8 @@ lib LibWin32
     invoke : Proc(DispHTMLParaElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLParaElement_GUID = LibC::GUID.new("3050f52c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLParaElement = "3050f52c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLParaElement
     lpVtbl : DispHTMLParaElementVTbl*
   end
@@ -15867,6 +16325,8 @@ lib LibWin32
     urns : Proc(IHTMLElementCollection2*, VARIANT, IDispatch*, HRESULT)
   end
 
+  IHTMLElementCollection2_GUID = LibC::GUID.new("3050f5ee-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElementCollection2 = "3050f5ee-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElementCollection2
     lpVtbl : IHTMLElementCollection2VTbl*
   end
@@ -15882,6 +16342,8 @@ lib LibWin32
     named_item : Proc(IHTMLElementCollection3*, UInt8*, IDispatch*, HRESULT)
   end
 
+  IHTMLElementCollection3_GUID = LibC::GUID.new("3050f835-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElementCollection3 = "3050f835-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElementCollection3
     lpVtbl : IHTMLElementCollection3VTbl*
   end
@@ -15899,6 +16361,8 @@ lib LibWin32
     named_item : Proc(IHTMLElementCollection4*, UInt8*, IHTMLElement2*, HRESULT)
   end
 
+  IHTMLElementCollection4_GUID = LibC::GUID.new("30510425-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLElementCollection4 = "30510425-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLElementCollection4
     lpVtbl : IHTMLElementCollection4VTbl*
   end
@@ -15913,6 +16377,8 @@ lib LibWin32
     invoke : Proc(DispHTMLElementCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLElementCollection_GUID = LibC::GUID.new("3050f56b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLElementCollection = "3050f56b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLElementCollection
     lpVtbl : DispHTMLElementCollectionVTbl*
   end
@@ -15929,6 +16395,8 @@ lib LibWin32
     get_align : Proc(IHTMLHeaderElement*, UInt8**, HRESULT)
   end
 
+  IHTMLHeaderElement_GUID = LibC::GUID.new("3050f1f6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLHeaderElement = "3050f1f6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLHeaderElement
     lpVtbl : IHTMLHeaderElementVTbl*
   end
@@ -15943,6 +16411,8 @@ lib LibWin32
     invoke : Proc(DispHTMLHeaderElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLHeaderElement_GUID = LibC::GUID.new("3050f515-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLHeaderElement = "3050f515-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLHeaderElement
     lpVtbl : DispHTMLHeaderElementVTbl*
   end
@@ -15957,6 +16427,8 @@ lib LibWin32
     invoke : Proc(HTMLSelectElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLSelectElementEvents2_GUID = LibC::GUID.new("3050f622-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLSelectElementEvents2 = "3050f622-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLSelectElementEvents2
     lpVtbl : HTMLSelectElementEvents2VTbl*
   end
@@ -15971,6 +16443,8 @@ lib LibWin32
     invoke : Proc(HTMLSelectElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLSelectElementEvents_GUID = LibC::GUID.new("3050f302-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLSelectElementEvents = "3050f302-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLSelectElementEvents
     lpVtbl : HTMLSelectElementEventsVTbl*
   end
@@ -15996,6 +16470,8 @@ lib LibWin32
     get_form : Proc(IHTMLOptionElement*, IHTMLFormElement*, HRESULT)
   end
 
+  IHTMLOptionElement_GUID = LibC::GUID.new("3050f211-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOptionElement = "3050f211-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOptionElement
     lpVtbl : IHTMLOptionElementVTbl*
   end
@@ -16010,6 +16486,8 @@ lib LibWin32
     get_dropdown_open : Proc(IHTMLSelectElementEx*, LibC::BOOL*, HRESULT)
   end
 
+  IHTMLSelectElementEx_GUID = LibC::GUID.new("3050f2d1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelectElementEx = "3050f2d1-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelectElementEx
     lpVtbl : IHTMLSelectElementExVTbl*
   end
@@ -16048,6 +16526,8 @@ lib LibWin32
     tags : Proc(IHTMLSelectElement*, VARIANT, IDispatch*, HRESULT)
   end
 
+  IHTMLSelectElement_GUID = LibC::GUID.new("3050f244-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelectElement = "3050f244-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelectElement
     lpVtbl : IHTMLSelectElementVTbl*
   end
@@ -16063,6 +16543,8 @@ lib LibWin32
     urns : Proc(IHTMLSelectElement2*, VARIANT, IDispatch*, HRESULT)
   end
 
+  IHTMLSelectElement2_GUID = LibC::GUID.new("3050f5ed-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelectElement2 = "3050f5ed-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelectElement2
     lpVtbl : IHTMLSelectElement2VTbl*
   end
@@ -16078,6 +16560,8 @@ lib LibWin32
     named_item : Proc(IHTMLSelectElement4*, UInt8*, IDispatch*, HRESULT)
   end
 
+  IHTMLSelectElement4_GUID = LibC::GUID.new("3050f838-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelectElement4 = "3050f838-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelectElement4
     lpVtbl : IHTMLSelectElement4VTbl*
   end
@@ -16093,6 +16577,8 @@ lib LibWin32
     add : Proc(IHTMLSelectElement5*, IHTMLOptionElement, VARIANT*, HRESULT)
   end
 
+  IHTMLSelectElement5_GUID = LibC::GUID.new("3051049d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelectElement5 = "3051049d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelectElement5
     lpVtbl : IHTMLSelectElement5VTbl*
   end
@@ -16110,6 +16596,8 @@ lib LibWin32
     get_value : Proc(IHTMLSelectElement6*, UInt8**, HRESULT)
   end
 
+  IHTMLSelectElement6_GUID = LibC::GUID.new("30510760-98b6-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelectElement6 = "30510760-98b6-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelectElement6
     lpVtbl : IHTMLSelectElement6VTbl*
   end
@@ -16124,6 +16612,8 @@ lib LibWin32
     invoke : Proc(DispHTMLSelectElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLSelectElement_GUID = LibC::GUID.new("3050f531-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLSelectElement = "3050f531-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLSelectElement
     lpVtbl : DispHTMLSelectElementVTbl*
   end
@@ -16138,6 +16628,8 @@ lib LibWin32
     invoke : Proc(DispHTMLWndSelectElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLWndSelectElement_GUID = LibC::GUID.new("3050f597-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLWndSelectElement = "3050f597-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLWndSelectElement
     lpVtbl : DispHTMLWndSelectElementVTbl*
   end
@@ -16156,6 +16648,8 @@ lib LibWin32
     get_type : Proc(IHTMLSelectionObject*, UInt8**, HRESULT)
   end
 
+  IHTMLSelectionObject_GUID = LibC::GUID.new("3050f25a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelectionObject = "3050f25a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelectionObject
     lpVtbl : IHTMLSelectionObjectVTbl*
   end
@@ -16172,6 +16666,8 @@ lib LibWin32
     get_type_detail : Proc(IHTMLSelectionObject2*, UInt8**, HRESULT)
   end
 
+  IHTMLSelectionObject2_GUID = LibC::GUID.new("3050f7ec-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelectionObject2 = "3050f7ec-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelectionObject2
     lpVtbl : IHTMLSelectionObject2VTbl*
   end
@@ -16202,6 +16698,8 @@ lib LibWin32
     to_string : Proc(IHTMLSelection*, UInt8**, HRESULT)
   end
 
+  IHTMLSelection_GUID = LibC::GUID.new("305104b6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSelection = "305104b6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSelection
     lpVtbl : IHTMLSelectionVTbl*
   end
@@ -16218,6 +16716,8 @@ lib LibWin32
     get_label : Proc(IHTMLOptionElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLOptionElement3_GUID = LibC::GUID.new("3050f820-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOptionElement3 = "3050f820-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOptionElement3
     lpVtbl : IHTMLOptionElement3VTbl*
   end
@@ -16234,6 +16734,8 @@ lib LibWin32
     get_value : Proc(IHTMLOptionElement4*, UInt8**, HRESULT)
   end
 
+  IHTMLOptionElement4_GUID = LibC::GUID.new("305107b4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOptionElement4 = "305107b4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOptionElement4
     lpVtbl : IHTMLOptionElement4VTbl*
   end
@@ -16249,6 +16751,8 @@ lib LibWin32
     create : Proc(IHTMLOptionElementFactory*, VARIANT, VARIANT, VARIANT, VARIANT, IHTMLOptionElement*, HRESULT)
   end
 
+  IHTMLOptionElementFactory_GUID = LibC::GUID.new("3050f38c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOptionElementFactory = "3050f38c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOptionElementFactory
     lpVtbl : IHTMLOptionElementFactoryVTbl*
   end
@@ -16263,6 +16767,8 @@ lib LibWin32
     invoke : Proc(DispHTMLOptionElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLOptionElement_GUID = LibC::GUID.new("3050f52b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLOptionElement = "3050f52b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLOptionElement
     lpVtbl : DispHTMLOptionElementVTbl*
   end
@@ -16277,6 +16783,8 @@ lib LibWin32
     invoke : Proc(DispHTMLWndOptionElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLWndOptionElement_GUID = LibC::GUID.new("3050f598-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLWndOptionElement = "3050f598-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLWndOptionElement
     lpVtbl : DispHTMLWndOptionElementVTbl*
   end
@@ -16291,6 +16799,8 @@ lib LibWin32
     invoke : Proc(HTMLButtonElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLButtonElementEvents2_GUID = LibC::GUID.new("3050f617-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLButtonElementEvents2 = "3050f617-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLButtonElementEvents2
     lpVtbl : HTMLButtonElementEvents2VTbl*
   end
@@ -16305,6 +16815,8 @@ lib LibWin32
     invoke : Proc(HTMLButtonElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLButtonElementEvents_GUID = LibC::GUID.new("3050f2b3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLButtonElementEvents = "3050f2b3-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLButtonElementEvents
     lpVtbl : HTMLButtonElementEventsVTbl*
   end
@@ -16319,6 +16831,8 @@ lib LibWin32
     invoke : Proc(HTMLInputTextElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLInputTextElementEvents2_GUID = LibC::GUID.new("3050f618-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputTextElementEvents2 = "3050f618-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLInputTextElementEvents2
     lpVtbl : HTMLInputTextElementEvents2VTbl*
   end
@@ -16333,6 +16847,8 @@ lib LibWin32
     invoke : Proc(HTMLOptionButtonElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLOptionButtonElementEvents2_GUID = LibC::GUID.new("3050f619-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLOptionButtonElementEvents2 = "3050f619-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLOptionButtonElementEvents2
     lpVtbl : HTMLOptionButtonElementEvents2VTbl*
   end
@@ -16347,6 +16863,8 @@ lib LibWin32
     invoke : Proc(HTMLInputFileElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLInputFileElementEvents2_GUID = LibC::GUID.new("3050f61a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputFileElementEvents2 = "3050f61a-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLInputFileElementEvents2
     lpVtbl : HTMLInputFileElementEvents2VTbl*
   end
@@ -16361,6 +16879,8 @@ lib LibWin32
     invoke : Proc(HTMLInputImageEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLInputImageEvents2_GUID = LibC::GUID.new("3050f61b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputImageEvents2 = "3050f61b-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLInputImageEvents2
     lpVtbl : HTMLInputImageEvents2VTbl*
   end
@@ -16375,6 +16895,8 @@ lib LibWin32
     invoke : Proc(HTMLInputTextElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLInputTextElementEvents_GUID = LibC::GUID.new("3050f2a7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputTextElementEvents = "3050f2a7-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLInputTextElementEvents
     lpVtbl : HTMLInputTextElementEventsVTbl*
   end
@@ -16389,6 +16911,8 @@ lib LibWin32
     invoke : Proc(HTMLOptionButtonElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLOptionButtonElementEvents_GUID = LibC::GUID.new("3050f2bd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLOptionButtonElementEvents = "3050f2bd-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLOptionButtonElementEvents
     lpVtbl : HTMLOptionButtonElementEventsVTbl*
   end
@@ -16403,6 +16927,8 @@ lib LibWin32
     invoke : Proc(HTMLInputFileElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLInputFileElementEvents_GUID = LibC::GUID.new("3050f2af-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputFileElementEvents = "3050f2af-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLInputFileElementEvents
     lpVtbl : HTMLInputFileElementEventsVTbl*
   end
@@ -16417,6 +16943,8 @@ lib LibWin32
     invoke : Proc(HTMLInputImageEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLInputImageEvents_GUID = LibC::GUID.new("3050f2c3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLInputImageEvents = "3050f2c3-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLInputImageEvents
     lpVtbl : HTMLInputImageEventsVTbl*
   end
@@ -16496,6 +17024,8 @@ lib LibWin32
     get_start : Proc(IHTMLInputElement*, UInt8**, HRESULT)
   end
 
+  IHTMLInputElement_GUID = LibC::GUID.new("3050f5d2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputElement = "3050f5d2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputElement
     lpVtbl : IHTMLInputElementVTbl*
   end
@@ -16514,6 +17044,8 @@ lib LibWin32
     get_use_map : Proc(IHTMLInputElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLInputElement2_GUID = LibC::GUID.new("3050f821-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputElement2 = "3050f821-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputElement2
     lpVtbl : IHTMLInputElement2VTbl*
   end
@@ -16536,6 +17068,8 @@ lib LibWin32
     get_dynsrc : Proc(IHTMLInputElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLInputElement3_GUID = LibC::GUID.new("30510435-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputElement3 = "30510435-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputElement3
     lpVtbl : IHTMLInputElement3VTbl*
   end
@@ -16561,6 +17095,8 @@ lib LibWin32
     create_text_range : Proc(IHTMLInputButtonElement*, IHTMLTxtRange*, HRESULT)
   end
 
+  IHTMLInputButtonElement_GUID = LibC::GUID.new("3050f2b2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputButtonElement = "3050f2b2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputButtonElement
     lpVtbl : IHTMLInputButtonElementVTbl*
   end
@@ -16586,6 +17122,8 @@ lib LibWin32
     create_text_range : Proc(IHTMLInputHiddenElement*, IHTMLTxtRange*, HRESULT)
   end
 
+  IHTMLInputHiddenElement_GUID = LibC::GUID.new("3050f2a4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputHiddenElement = "3050f2a4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputHiddenElement
     lpVtbl : IHTMLInputHiddenElementVTbl*
   end
@@ -16624,6 +17162,8 @@ lib LibWin32
     create_text_range : Proc(IHTMLInputTextElement*, IHTMLTxtRange*, HRESULT)
   end
 
+  IHTMLInputTextElement_GUID = LibC::GUID.new("3050f2a6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputTextElement = "3050f2a6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputTextElement
     lpVtbl : IHTMLInputTextElementVTbl*
   end
@@ -16643,6 +17183,8 @@ lib LibWin32
     set_selection_range : Proc(IHTMLInputTextElement2*, Int32, Int32, HRESULT)
   end
 
+  IHTMLInputTextElement2_GUID = LibC::GUID.new("3050f2d2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputTextElement2 = "3050f2d2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputTextElement2
     lpVtbl : IHTMLInputTextElement2VTbl*
   end
@@ -16676,6 +17218,8 @@ lib LibWin32
     get_value : Proc(IHTMLInputFileElement*, UInt8**, HRESULT)
   end
 
+  IHTMLInputFileElement_GUID = LibC::GUID.new("3050f2ad-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputFileElement = "3050f2ad-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputFileElement
     lpVtbl : IHTMLInputFileElementVTbl*
   end
@@ -16708,6 +17252,8 @@ lib LibWin32
     get_form : Proc(IHTMLOptionButtonElement*, IHTMLFormElement*, HRESULT)
   end
 
+  IHTMLOptionButtonElement_GUID = LibC::GUID.new("3050f2bc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOptionButtonElement = "3050f2bc-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOptionButtonElement
     lpVtbl : IHTMLOptionButtonElementVTbl*
   end
@@ -16761,6 +17307,8 @@ lib LibWin32
     get_start : Proc(IHTMLInputImage*, UInt8**, HRESULT)
   end
 
+  IHTMLInputImage_GUID = LibC::GUID.new("3050f2c2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputImage = "3050f2c2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputImage
     lpVtbl : IHTMLInputImageVTbl*
   end
@@ -16794,6 +17342,8 @@ lib LibWin32
     step_down : Proc(IHTMLInputRangeElement*, Int32, HRESULT)
   end
 
+  IHTMLInputRangeElement_GUID = LibC::GUID.new("3050f2d4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLInputRangeElement = "3050f2d4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLInputRangeElement
     lpVtbl : IHTMLInputRangeElementVTbl*
   end
@@ -16808,6 +17358,8 @@ lib LibWin32
     invoke : Proc(DispHTMLInputElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLInputElement_GUID = LibC::GUID.new("3050f57d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLInputElement = "3050f57d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLInputElement
     lpVtbl : DispHTMLInputElementVTbl*
   end
@@ -16848,6 +17400,8 @@ lib LibWin32
     create_text_range : Proc(IHTMLTextAreaElement*, IHTMLTxtRange*, HRESULT)
   end
 
+  IHTMLTextAreaElement_GUID = LibC::GUID.new("3050f2aa-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTextAreaElement = "3050f2aa-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTextAreaElement
     lpVtbl : IHTMLTextAreaElementVTbl*
   end
@@ -16867,6 +17421,8 @@ lib LibWin32
     set_selection_range : Proc(IHTMLTextAreaElement2*, Int32, Int32, HRESULT)
   end
 
+  IHTMLTextAreaElement2_GUID = LibC::GUID.new("3050f2d3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTextAreaElement2 = "3050f2d3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTextAreaElement2
     lpVtbl : IHTMLTextAreaElement2VTbl*
   end
@@ -16881,6 +17437,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTextAreaElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTextAreaElement_GUID = LibC::GUID.new("3050f521-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTextAreaElement = "3050f521-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTextAreaElement
     lpVtbl : DispHTMLTextAreaElementVTbl*
   end
@@ -16895,6 +17453,8 @@ lib LibWin32
     invoke : Proc(DispHTMLRichtextElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLRichtextElement_GUID = LibC::GUID.new("3050f54d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLRichtextElement = "3050f54d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLRichtextElement
     lpVtbl : DispHTMLRichtextElementVTbl*
   end
@@ -16920,6 +17480,8 @@ lib LibWin32
     create_text_range : Proc(IHTMLButtonElement*, IHTMLTxtRange*, HRESULT)
   end
 
+  IHTMLButtonElement_GUID = LibC::GUID.new("3050f2bb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLButtonElement = "3050f2bb-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLButtonElement
     lpVtbl : IHTMLButtonElementVTbl*
   end
@@ -16936,6 +17498,8 @@ lib LibWin32
     get_type : Proc(IHTMLButtonElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLButtonElement2_GUID = LibC::GUID.new("305106f3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLButtonElement2 = "305106f3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLButtonElement2
     lpVtbl : IHTMLButtonElement2VTbl*
   end
@@ -16950,6 +17514,8 @@ lib LibWin32
     invoke : Proc(DispHTMLButtonElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLButtonElement_GUID = LibC::GUID.new("3050f51f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLButtonElement = "3050f51f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLButtonElement
     lpVtbl : DispHTMLButtonElementVTbl*
   end
@@ -16964,6 +17530,8 @@ lib LibWin32
     invoke : Proc(HTMLMarqueeElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLMarqueeElementEvents2_GUID = LibC::GUID.new("3050f61f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMarqueeElementEvents2 = "3050f61f-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLMarqueeElementEvents2
     lpVtbl : HTMLMarqueeElementEvents2VTbl*
   end
@@ -16978,6 +17546,8 @@ lib LibWin32
     invoke : Proc(HTMLMarqueeElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLMarqueeElementEvents_GUID = LibC::GUID.new("3050f2b8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMarqueeElementEvents = "3050f2b8-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLMarqueeElementEvents
     lpVtbl : HTMLMarqueeElementEventsVTbl*
   end
@@ -17022,6 +17592,8 @@ lib LibWin32
     stop : Proc(IHTMLMarqueeElement*, HRESULT)
   end
 
+  IHTMLMarqueeElement_GUID = LibC::GUID.new("3050f2b5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMarqueeElement = "3050f2b5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMarqueeElement
     lpVtbl : IHTMLMarqueeElementVTbl*
   end
@@ -17036,6 +17608,8 @@ lib LibWin32
     invoke : Proc(DispHTMLMarqueeElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLMarqueeElement_GUID = LibC::GUID.new("3050f527-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLMarqueeElement = "3050f527-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLMarqueeElement
     lpVtbl : DispHTMLMarqueeElementVTbl*
   end
@@ -17052,6 +17626,8 @@ lib LibWin32
     get_version : Proc(IHTMLHtmlElement*, UInt8**, HRESULT)
   end
 
+  IHTMLHtmlElement_GUID = LibC::GUID.new("3050f81c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLHtmlElement = "3050f81c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLHtmlElement
     lpVtbl : IHTMLHtmlElementVTbl*
   end
@@ -17068,6 +17644,8 @@ lib LibWin32
     get_profile : Proc(IHTMLHeadElement*, UInt8**, HRESULT)
   end
 
+  IHTMLHeadElement_GUID = LibC::GUID.new("3050f81d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLHeadElement = "3050f81d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLHeadElement
     lpVtbl : IHTMLHeadElementVTbl*
   end
@@ -17084,6 +17662,8 @@ lib LibWin32
     get_profile : Proc(IHTMLHeadElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLHeadElement2_GUID = LibC::GUID.new("3051042f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLHeadElement2 = "3051042f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLHeadElement2
     lpVtbl : IHTMLHeadElement2VTbl*
   end
@@ -17100,6 +17680,8 @@ lib LibWin32
     get_text : Proc(IHTMLTitleElement*, UInt8**, HRESULT)
   end
 
+  IHTMLTitleElement_GUID = LibC::GUID.new("3050f322-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTitleElement = "3050f322-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTitleElement
     lpVtbl : IHTMLTitleElementVTbl*
   end
@@ -17124,6 +17706,8 @@ lib LibWin32
     get_charset : Proc(IHTMLMetaElement*, UInt8**, HRESULT)
   end
 
+  IHTMLMetaElement_GUID = LibC::GUID.new("3050f203-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMetaElement = "3050f203-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMetaElement
     lpVtbl : IHTMLMetaElementVTbl*
   end
@@ -17140,6 +17724,8 @@ lib LibWin32
     get_scheme : Proc(IHTMLMetaElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLMetaElement2_GUID = LibC::GUID.new("3050f81f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMetaElement2 = "3050f81f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMetaElement2
     lpVtbl : IHTMLMetaElement2VTbl*
   end
@@ -17156,6 +17742,8 @@ lib LibWin32
     get_url : Proc(IHTMLMetaElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLMetaElement3_GUID = LibC::GUID.new("30510495-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMetaElement3 = "30510495-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMetaElement3
     lpVtbl : IHTMLMetaElement3VTbl*
   end
@@ -17174,6 +17762,8 @@ lib LibWin32
     get_target : Proc(IHTMLBaseElement*, UInt8**, HRESULT)
   end
 
+  IHTMLBaseElement_GUID = LibC::GUID.new("3050f204-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBaseElement = "3050f204-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBaseElement
     lpVtbl : IHTMLBaseElementVTbl*
   end
@@ -17190,6 +17780,8 @@ lib LibWin32
     get_href : Proc(IHTMLBaseElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLBaseElement2_GUID = LibC::GUID.new("30510420-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBaseElement2 = "30510420-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBaseElement2
     lpVtbl : IHTMLBaseElement2VTbl*
   end
@@ -17204,6 +17796,8 @@ lib LibWin32
     invoke : Proc(DispHTMLHtmlElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLHtmlElement_GUID = LibC::GUID.new("3050f560-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLHtmlElement = "3050f560-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLHtmlElement
     lpVtbl : DispHTMLHtmlElementVTbl*
   end
@@ -17218,6 +17812,8 @@ lib LibWin32
     invoke : Proc(DispHTMLHeadElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLHeadElement_GUID = LibC::GUID.new("3050f561-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLHeadElement = "3050f561-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLHeadElement
     lpVtbl : DispHTMLHeadElementVTbl*
   end
@@ -17232,6 +17828,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTitleElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTitleElement_GUID = LibC::GUID.new("3050f516-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTitleElement = "3050f516-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTitleElement
     lpVtbl : DispHTMLTitleElementVTbl*
   end
@@ -17246,6 +17844,8 @@ lib LibWin32
     invoke : Proc(DispHTMLMetaElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLMetaElement_GUID = LibC::GUID.new("3050f517-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLMetaElement = "3050f517-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLMetaElement
     lpVtbl : DispHTMLMetaElementVTbl*
   end
@@ -17260,6 +17860,8 @@ lib LibWin32
     invoke : Proc(DispHTMLBaseElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLBaseElement_GUID = LibC::GUID.new("3050f518-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLBaseElement = "3050f518-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLBaseElement
     lpVtbl : DispHTMLBaseElementVTbl*
   end
@@ -17278,6 +17880,8 @@ lib LibWin32
     get_action : Proc(IHTMLIsIndexElement*, UInt8**, HRESULT)
   end
 
+  IHTMLIsIndexElement_GUID = LibC::GUID.new("3050f206-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLIsIndexElement = "3050f206-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLIsIndexElement
     lpVtbl : IHTMLIsIndexElementVTbl*
   end
@@ -17293,6 +17897,8 @@ lib LibWin32
     get_form : Proc(IHTMLIsIndexElement2*, IHTMLFormElement*, HRESULT)
   end
 
+  IHTMLIsIndexElement2_GUID = LibC::GUID.new("3050f82f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLIsIndexElement2 = "3050f82f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLIsIndexElement2
     lpVtbl : IHTMLIsIndexElement2VTbl*
   end
@@ -17309,6 +17915,8 @@ lib LibWin32
     get_n : Proc(IHTMLNextIdElement*, UInt8**, HRESULT)
   end
 
+  IHTMLNextIdElement_GUID = LibC::GUID.new("3050f207-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLNextIdElement = "3050f207-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLNextIdElement
     lpVtbl : IHTMLNextIdElementVTbl*
   end
@@ -17323,6 +17931,8 @@ lib LibWin32
     invoke : Proc(DispHTMLIsIndexElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLIsIndexElement_GUID = LibC::GUID.new("3050f519-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLIsIndexElement = "3050f519-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLIsIndexElement
     lpVtbl : DispHTMLIsIndexElementVTbl*
   end
@@ -17337,6 +17947,8 @@ lib LibWin32
     invoke : Proc(DispHTMLNextIdElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLNextIdElement_GUID = LibC::GUID.new("3050f51a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLNextIdElement = "3050f51a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLNextIdElement
     lpVtbl : DispHTMLNextIdElementVTbl*
   end
@@ -17357,6 +17969,8 @@ lib LibWin32
     get_size : Proc(IHTMLBaseFontElement*, Int32*, HRESULT)
   end
 
+  IHTMLBaseFontElement_GUID = LibC::GUID.new("3050f202-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBaseFontElement = "3050f202-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBaseFontElement
     lpVtbl : IHTMLBaseFontElementVTbl*
   end
@@ -17371,6 +17985,8 @@ lib LibWin32
     invoke : Proc(DispHTMLBaseFontElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLBaseFontElement_GUID = LibC::GUID.new("3050f504-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLBaseFontElement = "3050f504-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLBaseFontElement
     lpVtbl : DispHTMLBaseFontElementVTbl*
   end
@@ -17385,6 +18001,8 @@ lib LibWin32
     invoke : Proc(IHTMLUnknownElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IHTMLUnknownElement_GUID = LibC::GUID.new("3050f209-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLUnknownElement = "3050f209-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLUnknownElement
     lpVtbl : IHTMLUnknownElementVTbl*
   end
@@ -17399,6 +18017,8 @@ lib LibWin32
     invoke : Proc(DispHTMLUnknownElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLUnknownElement_GUID = LibC::GUID.new("3050f539-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLUnknownElement = "3050f539-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLUnknownElement
     lpVtbl : DispHTMLUnknownElementVTbl*
   end
@@ -17416,6 +18036,8 @@ lib LibWin32
     clear_watch : Proc(IWebGeolocation*, Int32, HRESULT)
   end
 
+  IWebGeolocation_GUID = LibC::GUID.new("305107c5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IWebGeolocation = "305107c5-98b5-11cf-bb82-00aa00bdce0b"
   struct IWebGeolocation
     lpVtbl : IWebGeolocationVTbl*
   end
@@ -17431,6 +18053,8 @@ lib LibWin32
     get_length : Proc(IHTMLMimeTypesCollection*, Int32*, HRESULT)
   end
 
+  IHTMLMimeTypesCollection_GUID = LibC::GUID.new("3050f3fc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMimeTypesCollection = "3050f3fc-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMimeTypesCollection
     lpVtbl : IHTMLMimeTypesCollectionVTbl*
   end
@@ -17447,6 +18071,8 @@ lib LibWin32
     refresh : Proc(IHTMLPluginsCollection*, Int16, HRESULT)
   end
 
+  IHTMLPluginsCollection_GUID = LibC::GUID.new("3050f3fd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPluginsCollection = "3050f3fd-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPluginsCollection
     lpVtbl : IHTMLPluginsCollectionVTbl*
   end
@@ -17465,6 +18091,8 @@ lib LibWin32
     go : Proc(IOmHistory*, VARIANT*, HRESULT)
   end
 
+  IOmHistory_GUID = LibC::GUID.new("feceaaa2-8405-11cf-8ba1-00aa00476da6")
+  CLSID_IOmHistory = "feceaaa2-8405-11cf-8ba1-00aa00476da6"
   struct IOmHistory
     lpVtbl : IOmHistoryVTbl*
   end
@@ -17488,6 +18116,8 @@ lib LibWin32
     do_write_request : Proc(IHTMLOpsProfile*, Int16*, HRESULT)
   end
 
+  IHTMLOpsProfile_GUID = LibC::GUID.new("3050f401-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOpsProfile = "3050f401-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOpsProfile
     lpVtbl : IHTMLOpsProfileVTbl*
   end
@@ -17522,6 +18152,8 @@ lib LibWin32
     get_user_profile : Proc(IOmNavigator*, IHTMLOpsProfile*, HRESULT)
   end
 
+  IOmNavigator_GUID = LibC::GUID.new("feceaaa5-8405-11cf-8ba1-00aa00476da6")
+  CLSID_IOmNavigator = "feceaaa5-8405-11cf-8ba1-00aa00476da6"
   struct IOmNavigator
     lpVtbl : IOmNavigatorVTbl*
   end
@@ -17537,6 +18169,8 @@ lib LibWin32
     get_geolocation : Proc(INavigatorGeolocation*, IWebGeolocation*, HRESULT)
   end
 
+  INavigatorGeolocation_GUID = LibC::GUID.new("305107cf-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_INavigatorGeolocation = "305107cf-98b5-11cf-bb82-00aa00bdce0b"
   struct INavigatorGeolocation
     lpVtbl : INavigatorGeolocationVTbl*
   end
@@ -17552,6 +18186,8 @@ lib LibWin32
     get_ms_do_not_track : Proc(INavigatorDoNotTrack*, UInt8**, HRESULT)
   end
 
+  INavigatorDoNotTrack_GUID = LibC::GUID.new("30510804-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_INavigatorDoNotTrack = "30510804-98b5-11cf-bb82-00aa00bdce0b"
   struct INavigatorDoNotTrack
     lpVtbl : INavigatorDoNotTrackVTbl*
   end
@@ -17586,6 +18222,8 @@ lib LibWin32
     to_string : Proc(IHTMLLocation*, UInt8**, HRESULT)
   end
 
+  IHTMLLocation_GUID = LibC::GUID.new("163bb1e0-6e00-11cf-837a-48dc04c10000")
+  CLSID_IHTMLLocation = "163bb1e0-6e00-11cf-837a-48dc04c10000"
   struct IHTMLLocation
     lpVtbl : IHTMLLocationVTbl*
   end
@@ -17600,6 +18238,8 @@ lib LibWin32
     invoke : Proc(DispHTMLHistory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLHistory_GUID = LibC::GUID.new("3050f549-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLHistory = "3050f549-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLHistory
     lpVtbl : DispHTMLHistoryVTbl*
   end
@@ -17614,6 +18254,8 @@ lib LibWin32
     invoke : Proc(DispHTMLNavigator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLNavigator_GUID = LibC::GUID.new("3050f54c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLNavigator = "3050f54c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLNavigator
     lpVtbl : DispHTMLNavigatorVTbl*
   end
@@ -17628,6 +18270,8 @@ lib LibWin32
     invoke : Proc(DispHTMLLocation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLLocation_GUID = LibC::GUID.new("3050f54e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLLocation = "3050f54e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLLocation
     lpVtbl : DispHTMLLocationVTbl*
   end
@@ -17642,6 +18286,8 @@ lib LibWin32
     invoke : Proc(DispCPlugins*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispCPlugins_GUID = LibC::GUID.new("3050f54a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispCPlugins = "3050f54a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispCPlugins
     lpVtbl : DispCPluginsVTbl*
   end
@@ -17659,6 +18305,8 @@ lib LibWin32
     item : Proc(IHTMLBookmarkCollection*, Int32, VARIANT*, HRESULT)
   end
 
+  IHTMLBookmarkCollection_GUID = LibC::GUID.new("3050f4ce-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBookmarkCollection = "3050f4ce-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBookmarkCollection
     lpVtbl : IHTMLBookmarkCollectionVTbl*
   end
@@ -17680,6 +18328,8 @@ lib LibWin32
     get_effect_allowed : Proc(IHTMLDataTransfer*, UInt8**, HRESULT)
   end
 
+  IHTMLDataTransfer_GUID = LibC::GUID.new("3050f4b3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDataTransfer = "3050f4b3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDataTransfer
     lpVtbl : IHTMLDataTransferVTbl*
   end
@@ -17750,6 +18400,8 @@ lib LibWin32
     get_data_transfer : Proc(IHTMLEventObj2*, IHTMLDataTransfer*, HRESULT)
   end
 
+  IHTMLEventObj2_GUID = LibC::GUID.new("3050f48b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEventObj2 = "3050f48b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEventObj2
     lpVtbl : IHTMLEventObj2VTbl*
   end
@@ -17780,6 +18432,8 @@ lib LibWin32
     get_next_page : Proc(IHTMLEventObj3*, UInt8**, HRESULT)
   end
 
+  IHTMLEventObj3_GUID = LibC::GUID.new("3050f680-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEventObj3 = "3050f680-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEventObj3
     lpVtbl : IHTMLEventObj3VTbl*
   end
@@ -17795,6 +18449,8 @@ lib LibWin32
     get_wheel_delta : Proc(IHTMLEventObj4*, Int32*, HRESULT)
   end
 
+  IHTMLEventObj4_GUID = LibC::GUID.new("3050f814-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEventObj4 = "3050f814-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEventObj4
     lpVtbl : IHTMLEventObj4VTbl*
   end
@@ -17818,6 +18474,8 @@ lib LibWin32
     get_issession : Proc(IHTMLEventObj5*, Int16*, HRESULT)
   end
 
+  IHTMLEventObj5_GUID = LibC::GUID.new("30510478-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEventObj5 = "30510478-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEventObj5
     lpVtbl : IHTMLEventObj5VTbl*
   end
@@ -17834,6 +18492,8 @@ lib LibWin32
     get_button_id : Proc(IHTMLEventObj6*, Int32*, HRESULT)
   end
 
+  IHTMLEventObj6_GUID = LibC::GUID.new("30510734-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEventObj6 = "30510734-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEventObj6
     lpVtbl : IHTMLEventObj6VTbl*
   end
@@ -17848,6 +18508,8 @@ lib LibWin32
     invoke : Proc(DispCEventObj*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispCEventObj_GUID = LibC::GUID.new("3050f558-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispCEventObj = "3050f558-98b5-11cf-bb82-00aa00bdce0b"
   struct DispCEventObj
     lpVtbl : DispCEventObjVTbl*
   end
@@ -17864,6 +18526,8 @@ lib LibWin32
     match_medium : Proc(IHTMLStyleMedia*, UInt8*, Int16*, HRESULT)
   end
 
+  IHTMLStyleMedia_GUID = LibC::GUID.new("3051074b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleMedia = "3051074b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleMedia
     lpVtbl : IHTMLStyleMediaVTbl*
   end
@@ -17878,6 +18542,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleMedia*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleMedia_GUID = LibC::GUID.new("3059009e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleMedia = "3059009e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleMedia
     lpVtbl : DispHTMLStyleMediaVTbl*
   end
@@ -17894,6 +18560,8 @@ lib LibWin32
     get_length : Proc(IHTMLFramesCollection2*, Int32*, HRESULT)
   end
 
+  IHTMLFramesCollection2_GUID = LibC::GUID.new("332c4426-26cb-11d0-b483-00c04fd90119")
+  CLSID_IHTMLFramesCollection2 = "332c4426-26cb-11d0-b483-00c04fd90119"
   struct IHTMLFramesCollection2
     lpVtbl : IHTMLFramesCollection2VTbl*
   end
@@ -17908,6 +18576,8 @@ lib LibWin32
     invoke : Proc(HTMLWindowEvents3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLWindowEvents3_GUID = LibC::GUID.new("3050f5a1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLWindowEvents3 = "3050f5a1-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLWindowEvents3
     lpVtbl : HTMLWindowEvents3VTbl*
   end
@@ -17922,6 +18592,8 @@ lib LibWin32
     invoke : Proc(HTMLWindowEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLWindowEvents2_GUID = LibC::GUID.new("3050f625-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLWindowEvents2 = "3050f625-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLWindowEvents2
     lpVtbl : HTMLWindowEvents2VTbl*
   end
@@ -17936,6 +18608,8 @@ lib LibWin32
     invoke : Proc(HTMLWindowEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLWindowEvents_GUID = LibC::GUID.new("96a0a4e0-d062-11cf-94b6-00aa0060275c")
+  CLSID_HTMLWindowEvents = "96a0a4e0-d062-11cf-94b6-00aa0060275c"
   struct HTMLWindowEvents
     lpVtbl : HTMLWindowEventsVTbl*
   end
@@ -18059,6 +18733,8 @@ lib LibWin32
     create_style_sheet : Proc(IHTMLDocument2*, UInt8*, Int32, IHTMLStyleSheet*, HRESULT)
   end
 
+  IHTMLDocument2_GUID = LibC::GUID.new("332c4425-26cb-11d0-b483-00c04fd90119")
+  CLSID_IHTMLDocument2 = "332c4425-26cb-11d0-b483-00c04fd90119"
   struct IHTMLDocument2
     lpVtbl : IHTMLDocument2VTbl*
   end
@@ -18143,6 +18819,8 @@ lib LibWin32
     get_external : Proc(IHTMLWindow2*, IDispatch*, HRESULT)
   end
 
+  IHTMLWindow2_GUID = LibC::GUID.new("332c4427-26cb-11d0-b483-00c04fd90119")
+  CLSID_IHTMLWindow2 = "332c4427-26cb-11d0-b483-00c04fd90119"
   struct IHTMLWindow2
     lpVtbl : IHTMLWindow2VTbl*
   end
@@ -18170,6 +18848,8 @@ lib LibWin32
     show_modeless_dialog : Proc(IHTMLWindow3*, UInt8*, VARIANT*, VARIANT*, IHTMLWindow2*, HRESULT)
   end
 
+  IHTMLWindow3_GUID = LibC::GUID.new("3050f4ae-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLWindow3 = "3050f4ae-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLWindow3
     lpVtbl : IHTMLWindow3VTbl*
   end
@@ -18202,6 +18882,8 @@ lib LibWin32
     get_scrolling : Proc(IHTMLFrameBase*, UInt8**, HRESULT)
   end
 
+  IHTMLFrameBase_GUID = LibC::GUID.new("3050f311-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameBase = "3050f311-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameBase
     lpVtbl : IHTMLFrameBaseVTbl*
   end
@@ -18223,6 +18905,8 @@ lib LibWin32
     clear : Proc(IHTMLStorage*, HRESULT)
   end
 
+  IHTMLStorage_GUID = LibC::GUID.new("30510474-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStorage = "30510474-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStorage
     lpVtbl : IHTMLStorageVTbl*
   end
@@ -18241,6 +18925,8 @@ lib LibWin32
     to_json : Proc(IHTMLPerformance*, VARIANT*, HRESULT)
   end
 
+  IHTMLPerformance_GUID = LibC::GUID.new("3051074e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPerformance = "3051074e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPerformance
     lpVtbl : IHTMLPerformanceVTbl*
   end
@@ -18275,6 +18961,8 @@ lib LibWin32
     abort : Proc(IHTMLApplicationCache*, HRESULT)
   end
 
+  IHTMLApplicationCache_GUID = LibC::GUID.new("30510828-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLApplicationCache = "30510828-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLApplicationCache
     lpVtbl : IHTMLApplicationCacheVTbl*
   end
@@ -18299,6 +18987,8 @@ lib LibWin32
     get_font_smoothing_enabled : Proc(IHTMLScreen*, Int16*, HRESULT)
   end
 
+  IHTMLScreen_GUID = LibC::GUID.new("3050f35c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLScreen = "3050f35c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLScreen
     lpVtbl : IHTMLScreenVTbl*
   end
@@ -18317,6 +19007,8 @@ lib LibWin32
     get_device_ydpi : Proc(IHTMLScreen2*, Int32*, HRESULT)
   end
 
+  IHTMLScreen2_GUID = LibC::GUID.new("3050f84a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLScreen2 = "3050f84a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLScreen2
     lpVtbl : IHTMLScreen2VTbl*
   end
@@ -18333,6 +19025,8 @@ lib LibWin32
     get_system_ydpi : Proc(IHTMLScreen3*, Int32*, HRESULT)
   end
 
+  IHTMLScreen3_GUID = LibC::GUID.new("305104a1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLScreen3 = "305104a1-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLScreen3
     lpVtbl : IHTMLScreen3VTbl*
   end
@@ -18348,6 +19042,8 @@ lib LibWin32
     get_pixel_depth : Proc(IHTMLScreen4*, Int32*, HRESULT)
   end
 
+  IHTMLScreen4_GUID = LibC::GUID.new("3051076b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLScreen4 = "3051076b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLScreen4
     lpVtbl : IHTMLScreen4VTbl*
   end
@@ -18364,6 +19060,8 @@ lib LibWin32
     get_frame_element : Proc(IHTMLWindow4*, IHTMLFrameBase*, HRESULT)
   end
 
+  IHTMLWindow4_GUID = LibC::GUID.new("3050f6cf-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLWindow4 = "3050f6cf-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLWindow4
     lpVtbl : IHTMLWindow4VTbl*
   end
@@ -18380,6 +19078,8 @@ lib LibWin32
     get_xml_http_request : Proc(IHTMLWindow5*, VARIANT*, HRESULT)
   end
 
+  IHTMLWindow5_GUID = LibC::GUID.new("3051040e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLWindow5 = "3051040e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLWindow5
     lpVtbl : IHTMLWindow5VTbl*
   end
@@ -18406,6 +19106,8 @@ lib LibWin32
     ms_write_profiler_mark : Proc(IHTMLWindow6*, UInt8*, HRESULT)
   end
 
+  IHTMLWindow6_GUID = LibC::GUID.new("30510453-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLWindow6 = "30510453-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLWindow6
     lpVtbl : IHTMLWindow6VTbl*
   end
@@ -18539,6 +19241,8 @@ lib LibWin32
     get_onwaiting : Proc(IHTMLWindow7*, VARIANT*, HRESULT)
   end
 
+  IHTMLWindow7_GUID = LibC::GUID.new("305104b7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLWindow7 = "305104b7-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLWindow7
     lpVtbl : IHTMLWindow7VTbl*
   end
@@ -18584,6 +19288,8 @@ lib LibWin32
     get_onpopstate : Proc(IHTMLWindow8*, VARIANT*, HRESULT)
   end
 
+  IHTMLWindow8_GUID = LibC::GUID.new("305107ab-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLWindow8 = "305107ab-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLWindow8
     lpVtbl : IHTMLWindow8VTbl*
   end
@@ -18598,6 +19304,8 @@ lib LibWin32
     invoke : Proc(DispHTMLScreen*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLScreen_GUID = LibC::GUID.new("3050f591-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLScreen = "3050f591-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLScreen
     lpVtbl : DispHTMLScreenVTbl*
   end
@@ -18612,6 +19320,8 @@ lib LibWin32
     invoke : Proc(DispHTMLWindow2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLWindow2_GUID = LibC::GUID.new("3050f55d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLWindow2 = "3050f55d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLWindow2
     lpVtbl : DispHTMLWindow2VTbl*
   end
@@ -18626,6 +19336,8 @@ lib LibWin32
     invoke : Proc(DispHTMLWindowProxy*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLWindowProxy_GUID = LibC::GUID.new("3050f55e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLWindowProxy = "3050f55e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLWindowProxy
     lpVtbl : DispHTMLWindowProxyVTbl*
   end
@@ -18642,6 +19354,8 @@ lib LibWin32
     get_version : Proc(IHTMLDocumentCompatibleInfo*, UInt8**, HRESULT)
   end
 
+  IHTMLDocumentCompatibleInfo_GUID = LibC::GUID.new("3051041a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDocumentCompatibleInfo = "3051041a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDocumentCompatibleInfo
     lpVtbl : IHTMLDocumentCompatibleInfoVTbl*
   end
@@ -18658,6 +19372,8 @@ lib LibWin32
     item : Proc(IHTMLDocumentCompatibleInfoCollection*, Int32, IHTMLDocumentCompatibleInfo*, HRESULT)
   end
 
+  IHTMLDocumentCompatibleInfoCollection_GUID = LibC::GUID.new("30510418-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDocumentCompatibleInfoCollection = "30510418-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDocumentCompatibleInfoCollection
     lpVtbl : IHTMLDocumentCompatibleInfoCollectionVTbl*
   end
@@ -18672,6 +19388,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDocumentCompatibleInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDocumentCompatibleInfo_GUID = LibC::GUID.new("3050f53e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDocumentCompatibleInfo = "3050f53e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDocumentCompatibleInfo
     lpVtbl : DispHTMLDocumentCompatibleInfoVTbl*
   end
@@ -18686,6 +19404,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDocumentCompatibleInfoCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDocumentCompatibleInfoCollection_GUID = LibC::GUID.new("3050f53f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDocumentCompatibleInfoCollection = "3050f53f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDocumentCompatibleInfoCollection
     lpVtbl : DispHTMLDocumentCompatibleInfoCollectionVTbl*
   end
@@ -18700,6 +19420,8 @@ lib LibWin32
     invoke : Proc(HTMLDocumentEvents4*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLDocumentEvents4_GUID = LibC::GUID.new("30510737-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDocumentEvents4 = "30510737-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLDocumentEvents4
     lpVtbl : HTMLDocumentEvents4VTbl*
   end
@@ -18714,6 +19436,8 @@ lib LibWin32
     invoke : Proc(HTMLDocumentEvents3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLDocumentEvents3_GUID = LibC::GUID.new("3050f5a0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDocumentEvents3 = "3050f5a0-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLDocumentEvents3
     lpVtbl : HTMLDocumentEvents3VTbl*
   end
@@ -18728,6 +19452,8 @@ lib LibWin32
     invoke : Proc(HTMLDocumentEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLDocumentEvents2_GUID = LibC::GUID.new("3050f613-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDocumentEvents2 = "3050f613-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLDocumentEvents2
     lpVtbl : HTMLDocumentEvents2VTbl*
   end
@@ -18742,6 +19468,8 @@ lib LibWin32
     invoke : Proc(HTMLDocumentEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLDocumentEvents_GUID = LibC::GUID.new("3050f260-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLDocumentEvents = "3050f260-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLDocumentEvents
     lpVtbl : HTMLDocumentEventsVTbl*
   end
@@ -18809,6 +19537,8 @@ lib LibWin32
     get_element_by_id : Proc(ISVGSVGElement*, UInt8*, IHTMLElement*, HRESULT)
   end
 
+  ISVGSVGElement_GUID = LibC::GUID.new("305104e7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGSVGElement = "305104e7-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGSVGElement
     lpVtbl : ISVGSVGElementVTbl*
   end
@@ -18830,6 +19560,8 @@ lib LibWin32
     detach : Proc(IDOMNodeIterator*, HRESULT)
   end
 
+  IDOMNodeIterator_GUID = LibC::GUID.new("30510746-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMNodeIterator = "30510746-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMNodeIterator
     lpVtbl : IDOMNodeIteratorVTbl*
   end
@@ -18857,6 +19589,8 @@ lib LibWin32
     next_node : Proc(IDOMTreeWalker*, IDispatch*, HRESULT)
   end
 
+  IDOMTreeWalker_GUID = LibC::GUID.new("30510748-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMTreeWalker = "30510748-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMTreeWalker
     lpVtbl : IDOMTreeWalkerVTbl*
   end
@@ -18874,6 +19608,8 @@ lib LibWin32
     get_data : Proc(IDOMProcessingInstruction*, UInt8**, HRESULT)
   end
 
+  IDOMProcessingInstruction_GUID = LibC::GUID.new("30510742-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMProcessingInstruction = "30510742-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMProcessingInstruction
     lpVtbl : IDOMProcessingInstructionVTbl*
   end
@@ -18929,6 +19665,8 @@ lib LibWin32
     get_elements_by_tag_name : Proc(IHTMLDocument3*, UInt8*, IHTMLElementCollection*, HRESULT)
   end
 
+  IHTMLDocument3_GUID = LibC::GUID.new("3050f485-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDocument3 = "3050f485-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDocument3
     lpVtbl : IHTMLDocument3VTbl*
   end
@@ -18957,6 +19695,8 @@ lib LibWin32
     get_url_unencoded : Proc(IHTMLDocument4*, UInt8**, HRESULT)
   end
 
+  IHTMLDocument4_GUID = LibC::GUID.new("3050f69a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDocument4 = "3050f69a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDocument4
     lpVtbl : IHTMLDocument4VTbl*
   end
@@ -18990,6 +19730,8 @@ lib LibWin32
     get_compat_mode : Proc(IHTMLDocument5*, UInt8**, HRESULT)
   end
 
+  IHTMLDocument5_GUID = LibC::GUID.new("3050f80c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDocument5 = "3050f80c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDocument5
     lpVtbl : IHTMLDocument5VTbl*
   end
@@ -19012,6 +19754,8 @@ lib LibWin32
     update_settings : Proc(IHTMLDocument6*, HRESULT)
   end
 
+  IHTMLDocument6_GUID = LibC::GUID.new("30510417-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDocument6 = "30510417-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDocument6
     lpVtbl : IHTMLDocument6VTbl*
   end
@@ -19062,6 +19806,8 @@ lib LibWin32
     get_ms_caps_lock_warning_off : Proc(IHTMLDocument8*, Int16*, HRESULT)
   end
 
+  IHTMLDocument8_GUID = LibC::GUID.new("305107d0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDocument8 = "305107d0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDocument8
     lpVtbl : IHTMLDocument8VTbl*
   end
@@ -19077,6 +19823,8 @@ lib LibWin32
     create_event : Proc(IDocumentEvent*, UInt8*, IDOMEvent*, HRESULT)
   end
 
+  IDocumentEvent_GUID = LibC::GUID.new("305104bc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDocumentEvent = "305104bc-98b5-11cf-bb82-00aa00bdce0b"
   struct IDocumentEvent
     lpVtbl : IDocumentEventVTbl*
   end
@@ -19092,6 +19840,8 @@ lib LibWin32
     create_range : Proc(IDocumentRange*, IHTMLDOMRange*, HRESULT)
   end
 
+  IDocumentRange_GUID = LibC::GUID.new("305104af-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDocumentRange = "305104af-98b5-11cf-bb82-00aa00bdce0b"
   struct IDocumentRange
     lpVtbl : IDocumentRangeVTbl*
   end
@@ -19108,6 +19858,8 @@ lib LibWin32
     query_selector_all : Proc(IDocumentSelector*, UInt8*, IHTMLDOMChildrenCollection*, HRESULT)
   end
 
+  IDocumentSelector_GUID = LibC::GUID.new("30510462-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDocumentSelector = "30510462-98b5-11cf-bb82-00aa00bdce0b"
   struct IDocumentSelector
     lpVtbl : IDocumentSelectorVTbl*
   end
@@ -19124,6 +19876,8 @@ lib LibWin32
     create_tree_walker : Proc(IDocumentTraversal*, IDispatch, Int32, VARIANT*, Int16, IDOMTreeWalker*, HRESULT)
   end
 
+  IDocumentTraversal_GUID = LibC::GUID.new("30510744-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDocumentTraversal = "30510744-98b5-11cf-bb82-00aa00bdce0b"
   struct IDocumentTraversal
     lpVtbl : IDocumentTraversalVTbl*
   end
@@ -19138,6 +19892,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDocument*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDocument_GUID = LibC::GUID.new("3050f55f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDocument = "3050f55f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDocument
     lpVtbl : DispHTMLDocumentVTbl*
   end
@@ -19152,6 +19908,8 @@ lib LibWin32
     invoke : Proc(DWebBridgeEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DWebBridgeEvents_GUID = LibC::GUID.new("a6d897ff-0a95-11d1-b0ba-006008166e11")
+  CLSID_DWebBridgeEvents = "a6d897ff-0a95-11d1-b0ba-006008166e11"
   struct DWebBridgeEvents
     lpVtbl : DWebBridgeEventsVTbl*
   end
@@ -19175,6 +19933,8 @@ lib LibWin32
     about_box : Proc(IWebBridge*, HRESULT)
   end
 
+  IWebBridge_GUID = LibC::GUID.new("ae24fdad-03c6-11d1-8b76-0080c744f389")
+  CLSID_IWebBridge = "ae24fdad-03c6-11d1-8b76-0080c744f389"
   struct IWebBridge
     lpVtbl : IWebBridgeVTbl*
   end
@@ -19201,6 +19961,8 @@ lib LibWin32
     get_onvisibilitychange : Proc(IWBScriptControl*, VARIANT*, HRESULT)
   end
 
+  IWBScriptControl_GUID = LibC::GUID.new("a5170870-0cf8-11d1-8b91-0080c744f389")
+  CLSID_IWBScriptControl = "a5170870-0cf8-11d1-8b91-0080c744f389"
   struct IWBScriptControl
     lpVtbl : IWBScriptControlVTbl*
   end
@@ -19229,6 +19991,8 @@ lib LibWin32
     get_height : Proc(IHTMLEmbedElement*, VARIANT*, HRESULT)
   end
 
+  IHTMLEmbedElement_GUID = LibC::GUID.new("3050f25f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEmbedElement = "3050f25f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEmbedElement
     lpVtbl : IHTMLEmbedElementVTbl*
   end
@@ -19246,6 +20010,8 @@ lib LibWin32
     get_pluginspage : Proc(IHTMLEmbedElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLEmbedElement2_GUID = LibC::GUID.new("30510493-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEmbedElement2 = "30510493-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEmbedElement2
     lpVtbl : IHTMLEmbedElement2VTbl*
   end
@@ -19260,6 +20026,8 @@ lib LibWin32
     invoke : Proc(DispHTMLEmbed*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLEmbed_GUID = LibC::GUID.new("3050f52e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLEmbed = "3050f52e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLEmbed
     lpVtbl : DispHTMLEmbedVTbl*
   end
@@ -19274,6 +20042,8 @@ lib LibWin32
     invoke : Proc(HTMLMapEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLMapEvents2_GUID = LibC::GUID.new("3050f61e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMapEvents2 = "3050f61e-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLMapEvents2
     lpVtbl : HTMLMapEvents2VTbl*
   end
@@ -19288,6 +20058,8 @@ lib LibWin32
     invoke : Proc(HTMLMapEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLMapEvents_GUID = LibC::GUID.new("3050f3ba-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLMapEvents = "3050f3ba-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLMapEvents
     lpVtbl : HTMLMapEventsVTbl*
   end
@@ -19309,6 +20081,8 @@ lib LibWin32
     remove : Proc(IHTMLAreasCollection*, Int32, HRESULT)
   end
 
+  IHTMLAreasCollection_GUID = LibC::GUID.new("3050f383-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAreasCollection = "3050f383-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAreasCollection
     lpVtbl : IHTMLAreasCollectionVTbl*
   end
@@ -19324,6 +20098,8 @@ lib LibWin32
     urns : Proc(IHTMLAreasCollection2*, VARIANT, IDispatch*, HRESULT)
   end
 
+  IHTMLAreasCollection2_GUID = LibC::GUID.new("3050f5ec-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAreasCollection2 = "3050f5ec-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAreasCollection2
     lpVtbl : IHTMLAreasCollection2VTbl*
   end
@@ -19339,6 +20115,8 @@ lib LibWin32
     named_item : Proc(IHTMLAreasCollection3*, UInt8*, IDispatch*, HRESULT)
   end
 
+  IHTMLAreasCollection3_GUID = LibC::GUID.new("3050f837-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAreasCollection3 = "3050f837-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAreasCollection3
     lpVtbl : IHTMLAreasCollection3VTbl*
   end
@@ -19356,6 +20134,8 @@ lib LibWin32
     named_item : Proc(IHTMLAreasCollection4*, UInt8*, IHTMLElement2*, HRESULT)
   end
 
+  IHTMLAreasCollection4_GUID = LibC::GUID.new("30510492-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAreasCollection4 = "30510492-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAreasCollection4
     lpVtbl : IHTMLAreasCollection4VTbl*
   end
@@ -19373,6 +20153,8 @@ lib LibWin32
     get_name : Proc(IHTMLMapElement*, UInt8**, HRESULT)
   end
 
+  IHTMLMapElement_GUID = LibC::GUID.new("3050f266-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMapElement = "3050f266-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMapElement
     lpVtbl : IHTMLMapElementVTbl*
   end
@@ -19387,6 +20169,8 @@ lib LibWin32
     invoke : Proc(DispHTMLAreasCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLAreasCollection_GUID = LibC::GUID.new("3050f56a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLAreasCollection = "3050f56a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLAreasCollection
     lpVtbl : DispHTMLAreasCollectionVTbl*
   end
@@ -19401,6 +20185,8 @@ lib LibWin32
     invoke : Proc(DispHTMLMapElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLMapElement_GUID = LibC::GUID.new("3050f526-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLMapElement = "3050f526-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLMapElement
     lpVtbl : DispHTMLMapElementVTbl*
   end
@@ -19415,6 +20201,8 @@ lib LibWin32
     invoke : Proc(HTMLAreaEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLAreaEvents2_GUID = LibC::GUID.new("3050f611-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAreaEvents2 = "3050f611-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLAreaEvents2
     lpVtbl : HTMLAreaEvents2VTbl*
   end
@@ -19429,6 +20217,8 @@ lib LibWin32
     invoke : Proc(HTMLAreaEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLAreaEvents_GUID = LibC::GUID.new("3050f366-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLAreaEvents = "3050f366-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLAreaEvents
     lpVtbl : HTMLAreaEventsVTbl*
   end
@@ -19477,6 +20267,8 @@ lib LibWin32
     blur : Proc(IHTMLAreaElement*, HRESULT)
   end
 
+  IHTMLAreaElement_GUID = LibC::GUID.new("3050f265-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAreaElement = "3050f265-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAreaElement
     lpVtbl : IHTMLAreaElementVTbl*
   end
@@ -19497,6 +20289,8 @@ lib LibWin32
     get_href : Proc(IHTMLAreaElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLAreaElement2_GUID = LibC::GUID.new("3051041f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAreaElement2 = "3051041f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAreaElement2
     lpVtbl : IHTMLAreaElement2VTbl*
   end
@@ -19511,6 +20305,8 @@ lib LibWin32
     invoke : Proc(DispHTMLAreaElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLAreaElement_GUID = LibC::GUID.new("3050f503-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLAreaElement = "3050f503-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLAreaElement
     lpVtbl : DispHTMLAreaElementVTbl*
   end
@@ -19529,6 +20325,8 @@ lib LibWin32
     get_v_align : Proc(IHTMLTableCaption*, UInt8**, HRESULT)
   end
 
+  IHTMLTableCaption_GUID = LibC::GUID.new("3050f2eb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableCaption = "3050f2eb-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableCaption
     lpVtbl : IHTMLTableCaptionVTbl*
   end
@@ -19543,6 +20341,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTableCaption*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTableCaption_GUID = LibC::GUID.new("3050f508-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTableCaption = "3050f508-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTableCaption
     lpVtbl : DispHTMLTableCaptionVTbl*
   end
@@ -19561,6 +20361,8 @@ lib LibWin32
     get_atomic : Proc(IHTMLCommentElement*, Int32*, HRESULT)
   end
 
+  IHTMLCommentElement_GUID = LibC::GUID.new("3050f20c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCommentElement = "3050f20c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCommentElement
     lpVtbl : IHTMLCommentElementVTbl*
   end
@@ -19583,6 +20385,8 @@ lib LibWin32
     replace_data : Proc(IHTMLCommentElement2*, Int32, Int32, UInt8*, HRESULT)
   end
 
+  IHTMLCommentElement2_GUID = LibC::GUID.new("3050f813-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCommentElement2 = "3050f813-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCommentElement2
     lpVtbl : IHTMLCommentElement2VTbl*
   end
@@ -19601,6 +20405,8 @@ lib LibWin32
     replace_data : Proc(IHTMLCommentElement3*, Int32, Int32, UInt8*, HRESULT)
   end
 
+  IHTMLCommentElement3_GUID = LibC::GUID.new("3051073f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCommentElement3 = "3051073f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCommentElement3
     lpVtbl : IHTMLCommentElement3VTbl*
   end
@@ -19615,6 +20421,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCommentElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCommentElement_GUID = LibC::GUID.new("3050f50a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCommentElement = "3050f50a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCommentElement
     lpVtbl : DispHTMLCommentElementVTbl*
   end
@@ -19629,6 +20437,8 @@ lib LibWin32
     invoke : Proc(IHTMLPhraseElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IHTMLPhraseElement_GUID = LibC::GUID.new("3050f20a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPhraseElement = "3050f20a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPhraseElement
     lpVtbl : IHTMLPhraseElementVTbl*
   end
@@ -19647,6 +20457,8 @@ lib LibWin32
     get_date_time : Proc(IHTMLPhraseElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLPhraseElement2_GUID = LibC::GUID.new("3050f824-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPhraseElement2 = "3050f824-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPhraseElement2
     lpVtbl : IHTMLPhraseElement2VTbl*
   end
@@ -19663,6 +20475,8 @@ lib LibWin32
     get_cite : Proc(IHTMLPhraseElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLPhraseElement3_GUID = LibC::GUID.new("3051043d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPhraseElement3 = "3051043d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPhraseElement3
     lpVtbl : IHTMLPhraseElement3VTbl*
   end
@@ -19677,6 +20491,8 @@ lib LibWin32
     invoke : Proc(IHTMLSpanElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IHTMLSpanElement_GUID = LibC::GUID.new("3050f3f3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSpanElement = "3050f3f3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSpanElement
     lpVtbl : IHTMLSpanElementVTbl*
   end
@@ -19691,6 +20507,8 @@ lib LibWin32
     invoke : Proc(DispHTMLPhraseElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLPhraseElement_GUID = LibC::GUID.new("3050f52d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLPhraseElement = "3050f52d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLPhraseElement
     lpVtbl : DispHTMLPhraseElementVTbl*
   end
@@ -19705,6 +20523,8 @@ lib LibWin32
     invoke : Proc(DispHTMLSpanElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLSpanElement_GUID = LibC::GUID.new("3050f548-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLSpanElement = "3050f548-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLSpanElement
     lpVtbl : DispHTMLSpanElementVTbl*
   end
@@ -19719,6 +20539,8 @@ lib LibWin32
     invoke : Proc(HTMLTableEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLTableEvents2_GUID = LibC::GUID.new("3050f623-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTableEvents2 = "3050f623-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLTableEvents2
     lpVtbl : HTMLTableEvents2VTbl*
   end
@@ -19733,6 +20555,8 @@ lib LibWin32
     invoke : Proc(HTMLTableEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLTableEvents_GUID = LibC::GUID.new("3050f407-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLTableEvents = "3050f407-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLTableEvents
     lpVtbl : HTMLTableEventsVTbl*
   end
@@ -19756,6 +20580,8 @@ lib LibWin32
     delete_row : Proc(IHTMLTableSection*, Int32, HRESULT)
   end
 
+  IHTMLTableSection_GUID = LibC::GUID.new("3050f23b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableSection = "3050f23b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableSection
     lpVtbl : IHTMLTableSectionVTbl*
   end
@@ -19819,6 +20645,8 @@ lib LibWin32
     get_onreadystatechange : Proc(IHTMLTable*, VARIANT*, HRESULT)
   end
 
+  IHTMLTable_GUID = LibC::GUID.new("3050f21e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTable = "3050f21e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTable
     lpVtbl : IHTMLTableVTbl*
   end
@@ -19837,6 +20665,8 @@ lib LibWin32
     move_row : Proc(IHTMLTable2*, Int32, Int32, IDispatch*, HRESULT)
   end
 
+  IHTMLTable2_GUID = LibC::GUID.new("3050f4ad-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTable2 = "3050f4ad-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTable2
     lpVtbl : IHTMLTable2VTbl*
   end
@@ -19853,6 +20683,8 @@ lib LibWin32
     get_summary : Proc(IHTMLTable3*, UInt8**, HRESULT)
   end
 
+  IHTMLTable3_GUID = LibC::GUID.new("3050f829-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTable3 = "3050f829-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTable3
     lpVtbl : IHTMLTable3VTbl*
   end
@@ -19876,6 +20708,8 @@ lib LibWin32
     create_t_body : Proc(IHTMLTable4*, IHTMLTableSection*, HRESULT)
   end
 
+  IHTMLTable4_GUID = LibC::GUID.new("305106c2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTable4 = "305106c2-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTable4
     lpVtbl : IHTMLTable4VTbl*
   end
@@ -19898,6 +20732,8 @@ lib LibWin32
     get_v_align : Proc(IHTMLTableCol*, UInt8**, HRESULT)
   end
 
+  IHTMLTableCol_GUID = LibC::GUID.new("3050f23a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableCol = "3050f23a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableCol
     lpVtbl : IHTMLTableColVTbl*
   end
@@ -19916,6 +20752,8 @@ lib LibWin32
     get_ch_off : Proc(IHTMLTableCol2*, UInt8**, HRESULT)
   end
 
+  IHTMLTableCol2_GUID = LibC::GUID.new("3050f82a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableCol2 = "3050f82a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableCol2
     lpVtbl : IHTMLTableCol2VTbl*
   end
@@ -19934,6 +20772,8 @@ lib LibWin32
     get_ch_off : Proc(IHTMLTableCol3*, UInt8**, HRESULT)
   end
 
+  IHTMLTableCol3_GUID = LibC::GUID.new("305106c4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableCol3 = "305106c4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableCol3
     lpVtbl : IHTMLTableCol3VTbl*
   end
@@ -19949,6 +20789,8 @@ lib LibWin32
     move_row : Proc(IHTMLTableSection2*, Int32, Int32, IDispatch*, HRESULT)
   end
 
+  IHTMLTableSection2_GUID = LibC::GUID.new("3050f5c7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableSection2 = "3050f5c7-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableSection2
     lpVtbl : IHTMLTableSection2VTbl*
   end
@@ -19967,6 +20809,8 @@ lib LibWin32
     get_ch_off : Proc(IHTMLTableSection3*, UInt8**, HRESULT)
   end
 
+  IHTMLTableSection3_GUID = LibC::GUID.new("3050f82b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableSection3 = "3050f82b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableSection3
     lpVtbl : IHTMLTableSection3VTbl*
   end
@@ -19987,6 +20831,8 @@ lib LibWin32
     delete_row : Proc(IHTMLTableSection4*, Int32, HRESULT)
   end
 
+  IHTMLTableSection4_GUID = LibC::GUID.new("305106c5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableSection4 = "305106c5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableSection4
     lpVtbl : IHTMLTableSection4VTbl*
   end
@@ -20018,6 +20864,8 @@ lib LibWin32
     delete_cell : Proc(IHTMLTableRow*, Int32, HRESULT)
   end
 
+  IHTMLTableRow_GUID = LibC::GUID.new("3050f23c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableRow = "3050f23c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableRow
     lpVtbl : IHTMLTableRowVTbl*
   end
@@ -20034,6 +20882,8 @@ lib LibWin32
     get_height : Proc(IHTMLTableRow2*, VARIANT*, HRESULT)
   end
 
+  IHTMLTableRow2_GUID = LibC::GUID.new("3050f4a1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableRow2 = "3050f4a1-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableRow2
     lpVtbl : IHTMLTableRow2VTbl*
   end
@@ -20052,6 +20902,8 @@ lib LibWin32
     get_ch_off : Proc(IHTMLTableRow3*, UInt8**, HRESULT)
   end
 
+  IHTMLTableRow3_GUID = LibC::GUID.new("3050f82c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableRow3 = "3050f82c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableRow3
     lpVtbl : IHTMLTableRow3VTbl*
   end
@@ -20072,6 +20924,8 @@ lib LibWin32
     delete_cell : Proc(IHTMLTableRow4*, Int32, HRESULT)
   end
 
+  IHTMLTableRow4_GUID = LibC::GUID.new("305106c6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableRow4 = "305106c6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableRow4
     lpVtbl : IHTMLTableRow4VTbl*
   end
@@ -20090,6 +20944,8 @@ lib LibWin32
     get_client_left : Proc(IHTMLTableRowMetrics*, Int32*, HRESULT)
   end
 
+  IHTMLTableRowMetrics_GUID = LibC::GUID.new("3050f413-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableRowMetrics = "3050f413-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableRowMetrics
     lpVtbl : IHTMLTableRowMetricsVTbl*
   end
@@ -20129,6 +20985,8 @@ lib LibWin32
     get_cell_index : Proc(IHTMLTableCell*, Int32*, HRESULT)
   end
 
+  IHTMLTableCell_GUID = LibC::GUID.new("3050f23d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableCell = "3050f23d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableCell
     lpVtbl : IHTMLTableCellVTbl*
   end
@@ -20155,6 +21013,8 @@ lib LibWin32
     get_scope : Proc(IHTMLTableCell2*, UInt8**, HRESULT)
   end
 
+  IHTMLTableCell2_GUID = LibC::GUID.new("3050f82d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableCell2 = "3050f82d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableCell2
     lpVtbl : IHTMLTableCell2VTbl*
   end
@@ -20173,6 +21033,8 @@ lib LibWin32
     get_ch_off : Proc(IHTMLTableCell3*, UInt8**, HRESULT)
   end
 
+  IHTMLTableCell3_GUID = LibC::GUID.new("305106c7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTableCell3 = "305106c7-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTableCell3
     lpVtbl : IHTMLTableCell3VTbl*
   end
@@ -20187,6 +21049,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTable*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTable_GUID = LibC::GUID.new("3050f532-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTable = "3050f532-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTable
     lpVtbl : DispHTMLTableVTbl*
   end
@@ -20201,6 +21065,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTableCol*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTableCol_GUID = LibC::GUID.new("3050f533-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTableCol = "3050f533-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTableCol
     lpVtbl : DispHTMLTableColVTbl*
   end
@@ -20215,6 +21081,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTableSection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTableSection_GUID = LibC::GUID.new("3050f534-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTableSection = "3050f534-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTableSection
     lpVtbl : DispHTMLTableSectionVTbl*
   end
@@ -20229,6 +21097,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTableRow*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTableRow_GUID = LibC::GUID.new("3050f535-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTableRow = "3050f535-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTableRow
     lpVtbl : DispHTMLTableRowVTbl*
   end
@@ -20243,6 +21113,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTableCell*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTableCell_GUID = LibC::GUID.new("3050f536-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTableCell = "3050f536-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTableCell
     lpVtbl : DispHTMLTableCellVTbl*
   end
@@ -20257,6 +21129,8 @@ lib LibWin32
     invoke : Proc(HTMLScriptEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLScriptEvents2_GUID = LibC::GUID.new("3050f621-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLScriptEvents2 = "3050f621-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLScriptEvents2
     lpVtbl : HTMLScriptEvents2VTbl*
   end
@@ -20271,6 +21145,8 @@ lib LibWin32
     invoke : Proc(HTMLScriptEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLScriptEvents_GUID = LibC::GUID.new("3050f3e2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLScriptEvents = "3050f3e2-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLScriptEvents
     lpVtbl : HTMLScriptEventsVTbl*
   end
@@ -20300,6 +21176,8 @@ lib LibWin32
     get_type : Proc(IHTMLScriptElement*, UInt8**, HRESULT)
   end
 
+  IHTMLScriptElement_GUID = LibC::GUID.new("3050f28b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLScriptElement = "3050f28b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLScriptElement
     lpVtbl : IHTMLScriptElementVTbl*
   end
@@ -20316,6 +21194,8 @@ lib LibWin32
     get_charset : Proc(IHTMLScriptElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLScriptElement2_GUID = LibC::GUID.new("3050f828-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLScriptElement2 = "3050f828-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLScriptElement2
     lpVtbl : IHTMLScriptElement2VTbl*
   end
@@ -20332,6 +21212,8 @@ lib LibWin32
     get_src : Proc(IHTMLScriptElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLScriptElement3_GUID = LibC::GUID.new("30510447-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLScriptElement3 = "30510447-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLScriptElement3
     lpVtbl : IHTMLScriptElement3VTbl*
   end
@@ -20347,6 +21229,8 @@ lib LibWin32
     get_used_charset : Proc(IHTMLScriptElement4*, UInt8**, HRESULT)
   end
 
+  IHTMLScriptElement4_GUID = LibC::GUID.new("30510801-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLScriptElement4 = "30510801-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLScriptElement4
     lpVtbl : IHTMLScriptElement4VTbl*
   end
@@ -20361,6 +21245,8 @@ lib LibWin32
     invoke : Proc(DispHTMLScriptElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLScriptElement_GUID = LibC::GUID.new("3050f530-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLScriptElement = "3050f530-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLScriptElement
     lpVtbl : DispHTMLScriptElementVTbl*
   end
@@ -20375,6 +21261,8 @@ lib LibWin32
     invoke : Proc(IHTMLNoShowElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IHTMLNoShowElement_GUID = LibC::GUID.new("3050f38a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLNoShowElement = "3050f38a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLNoShowElement
     lpVtbl : IHTMLNoShowElementVTbl*
   end
@@ -20389,6 +21277,8 @@ lib LibWin32
     invoke : Proc(DispHTMLNoShowElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLNoShowElement_GUID = LibC::GUID.new("3050f528-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLNoShowElement = "3050f528-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLNoShowElement
     lpVtbl : DispHTMLNoShowElementVTbl*
   end
@@ -20403,6 +21293,8 @@ lib LibWin32
     invoke : Proc(HTMLObjectElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLObjectElementEvents2_GUID = LibC::GUID.new("3050f620-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLObjectElementEvents2 = "3050f620-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLObjectElementEvents2
     lpVtbl : HTMLObjectElementEvents2VTbl*
   end
@@ -20417,6 +21309,8 @@ lib LibWin32
     invoke : Proc(HTMLObjectElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLObjectElementEvents_GUID = LibC::GUID.new("3050f3c4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLObjectElementEvents = "3050f3c4-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLObjectElementEvents
     lpVtbl : HTMLObjectElementEventsVTbl*
   end
@@ -20465,6 +21359,8 @@ lib LibWin32
     get_hspace : Proc(IHTMLObjectElement*, Int32*, HRESULT)
   end
 
+  IHTMLObjectElement_GUID = LibC::GUID.new("3050f24f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLObjectElement = "3050f24f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLObjectElement
     lpVtbl : IHTMLObjectElementVTbl*
   end
@@ -20484,6 +21380,8 @@ lib LibWin32
     get_data : Proc(IHTMLObjectElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLObjectElement2_GUID = LibC::GUID.new("3050f4cd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLObjectElement2 = "3050f4cd-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLObjectElement2
     lpVtbl : IHTMLObjectElement2VTbl*
   end
@@ -20510,6 +21408,8 @@ lib LibWin32
     get_use_map : Proc(IHTMLObjectElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLObjectElement3_GUID = LibC::GUID.new("3050f827-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLObjectElement3 = "3050f827-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLObjectElement3
     lpVtbl : IHTMLObjectElement3VTbl*
   end
@@ -20529,6 +21429,8 @@ lib LibWin32
     get_data : Proc(IHTMLObjectElement4*, UInt8**, HRESULT)
   end
 
+  IHTMLObjectElement4_GUID = LibC::GUID.new("3051043e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLObjectElement4 = "3051043e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLObjectElement4
     lpVtbl : IHTMLObjectElement4VTbl*
   end
@@ -20545,6 +21447,8 @@ lib LibWin32
     get_object : Proc(IHTMLObjectElement5*, UInt8**, HRESULT)
   end
 
+  IHTMLObjectElement5_GUID = LibC::GUID.new("305104b5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLObjectElement5 = "305104b5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLObjectElement5
     lpVtbl : IHTMLObjectElement5VTbl*
   end
@@ -20567,6 +21471,8 @@ lib LibWin32
     get_value_type : Proc(IHTMLParamElement*, UInt8**, HRESULT)
   end
 
+  IHTMLParamElement_GUID = LibC::GUID.new("3050f83d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLParamElement = "3050f83d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLParamElement
     lpVtbl : IHTMLParamElementVTbl*
   end
@@ -20589,6 +21495,8 @@ lib LibWin32
     get_value_type : Proc(IHTMLParamElement2*, UInt8**, HRESULT)
   end
 
+  IHTMLParamElement2_GUID = LibC::GUID.new("30510444-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLParamElement2 = "30510444-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLParamElement2
     lpVtbl : IHTMLParamElement2VTbl*
   end
@@ -20603,6 +21511,8 @@ lib LibWin32
     invoke : Proc(DispHTMLObjectElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLObjectElement_GUID = LibC::GUID.new("3050f529-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLObjectElement = "3050f529-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLObjectElement
     lpVtbl : DispHTMLObjectElementVTbl*
   end
@@ -20617,6 +21527,8 @@ lib LibWin32
     invoke : Proc(DispHTMLParamElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLParamElement_GUID = LibC::GUID.new("3050f590-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLParamElement = "3050f590-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLParamElement
     lpVtbl : DispHTMLParamElementVTbl*
   end
@@ -20631,6 +21543,8 @@ lib LibWin32
     invoke : Proc(HTMLFrameSiteEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLFrameSiteEvents2_GUID = LibC::GUID.new("3050f7ff-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFrameSiteEvents2 = "3050f7ff-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLFrameSiteEvents2
     lpVtbl : HTMLFrameSiteEvents2VTbl*
   end
@@ -20645,6 +21559,8 @@ lib LibWin32
     invoke : Proc(HTMLFrameSiteEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLFrameSiteEvents_GUID = LibC::GUID.new("3050f800-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLFrameSiteEvents = "3050f800-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLFrameSiteEvents
     lpVtbl : HTMLFrameSiteEventsVTbl*
   end
@@ -20667,6 +21583,8 @@ lib LibWin32
     get_allow_transparency : Proc(IHTMLFrameBase2*, Int16*, HRESULT)
   end
 
+  IHTMLFrameBase2_GUID = LibC::GUID.new("3050f6db-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameBase2 = "3050f6db-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameBase2
     lpVtbl : IHTMLFrameBase2VTbl*
   end
@@ -20683,6 +21601,8 @@ lib LibWin32
     get_long_desc : Proc(IHTMLFrameBase3*, UInt8**, HRESULT)
   end
 
+  IHTMLFrameBase3_GUID = LibC::GUID.new("3050f82e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameBase3 = "3050f82e-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameBase3
     lpVtbl : IHTMLFrameBase3VTbl*
   end
@@ -20697,6 +21617,8 @@ lib LibWin32
     invoke : Proc(DispHTMLFrameBase*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLFrameBase_GUID = LibC::GUID.new("3050f541-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLFrameBase = "3050f541-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLFrameBase
     lpVtbl : DispHTMLFrameBaseVTbl*
   end
@@ -20713,6 +21635,8 @@ lib LibWin32
     get_border_color : Proc(IHTMLFrameElement*, VARIANT*, HRESULT)
   end
 
+  IHTMLFrameElement_GUID = LibC::GUID.new("3050f313-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameElement = "3050f313-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameElement
     lpVtbl : IHTMLFrameElementVTbl*
   end
@@ -20731,6 +21655,8 @@ lib LibWin32
     get_width : Proc(IHTMLFrameElement2*, VARIANT*, HRESULT)
   end
 
+  IHTMLFrameElement2_GUID = LibC::GUID.new("3050f7f5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameElement2 = "3050f7f5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameElement2
     lpVtbl : IHTMLFrameElement2VTbl*
   end
@@ -20752,6 +21678,8 @@ lib LibWin32
     get_frame_border : Proc(IHTMLFrameElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLFrameElement3_GUID = LibC::GUID.new("3051042d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameElement3 = "3051042d-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameElement3
     lpVtbl : IHTMLFrameElement3VTbl*
   end
@@ -20766,6 +21694,8 @@ lib LibWin32
     invoke : Proc(DispHTMLFrameElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLFrameElement_GUID = LibC::GUID.new("3050f513-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLFrameElement = "3050f513-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLFrameElement
     lpVtbl : DispHTMLFrameElementVTbl*
   end
@@ -20786,6 +21716,8 @@ lib LibWin32
     get_align : Proc(IHTMLIFrameElement*, UInt8**, HRESULT)
   end
 
+  IHTMLIFrameElement_GUID = LibC::GUID.new("3050f315-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLIFrameElement = "3050f315-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLIFrameElement
     lpVtbl : IHTMLIFrameElementVTbl*
   end
@@ -20804,6 +21736,8 @@ lib LibWin32
     get_width : Proc(IHTMLIFrameElement2*, VARIANT*, HRESULT)
   end
 
+  IHTMLIFrameElement2_GUID = LibC::GUID.new("3050f4e6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLIFrameElement2 = "3050f4e6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLIFrameElement2
     lpVtbl : IHTMLIFrameElement2VTbl*
   end
@@ -20825,6 +21759,8 @@ lib LibWin32
     get_frame_border : Proc(IHTMLIFrameElement3*, UInt8**, HRESULT)
   end
 
+  IHTMLIFrameElement3_GUID = LibC::GUID.new("30510433-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLIFrameElement3 = "30510433-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLIFrameElement3
     lpVtbl : IHTMLIFrameElement3VTbl*
   end
@@ -20839,6 +21775,8 @@ lib LibWin32
     invoke : Proc(DispHTMLIFrame*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLIFrame_GUID = LibC::GUID.new("3050f51b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLIFrame = "3050f51b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLIFrame
     lpVtbl : DispHTMLIFrameVTbl*
   end
@@ -20855,6 +21793,8 @@ lib LibWin32
     get_align : Proc(IHTMLDivPosition*, UInt8**, HRESULT)
   end
 
+  IHTMLDivPosition_GUID = LibC::GUID.new("3050f212-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDivPosition = "3050f212-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDivPosition
     lpVtbl : IHTMLDivPositionVTbl*
   end
@@ -20871,6 +21811,8 @@ lib LibWin32
     get_align : Proc(IHTMLFieldSetElement*, UInt8**, HRESULT)
   end
 
+  IHTMLFieldSetElement_GUID = LibC::GUID.new("3050f3e7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFieldSetElement = "3050f3e7-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFieldSetElement
     lpVtbl : IHTMLFieldSetElementVTbl*
   end
@@ -20886,6 +21828,8 @@ lib LibWin32
     get_form : Proc(IHTMLFieldSetElement2*, IHTMLFormElement*, HRESULT)
   end
 
+  IHTMLFieldSetElement2_GUID = LibC::GUID.new("3050f833-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFieldSetElement2 = "3050f833-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFieldSetElement2
     lpVtbl : IHTMLFieldSetElement2VTbl*
   end
@@ -20902,6 +21846,8 @@ lib LibWin32
     get_align : Proc(IHTMLLegendElement*, UInt8**, HRESULT)
   end
 
+  IHTMLLegendElement_GUID = LibC::GUID.new("3050f3ea-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLegendElement = "3050f3ea-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLegendElement
     lpVtbl : IHTMLLegendElementVTbl*
   end
@@ -20917,6 +21863,8 @@ lib LibWin32
     get_form : Proc(IHTMLLegendElement2*, IHTMLFormElement*, HRESULT)
   end
 
+  IHTMLLegendElement2_GUID = LibC::GUID.new("3050f834-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLLegendElement2 = "3050f834-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLLegendElement2
     lpVtbl : IHTMLLegendElement2VTbl*
   end
@@ -20931,6 +21879,8 @@ lib LibWin32
     invoke : Proc(DispHTMLDivPosition*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLDivPosition_GUID = LibC::GUID.new("3050f50f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLDivPosition = "3050f50f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLDivPosition
     lpVtbl : DispHTMLDivPositionVTbl*
   end
@@ -20945,6 +21895,8 @@ lib LibWin32
     invoke : Proc(DispHTMLFieldSetElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLFieldSetElement_GUID = LibC::GUID.new("3050f545-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLFieldSetElement = "3050f545-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLFieldSetElement
     lpVtbl : DispHTMLFieldSetElementVTbl*
   end
@@ -20959,6 +21911,8 @@ lib LibWin32
     invoke : Proc(DispHTMLLegendElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLLegendElement_GUID = LibC::GUID.new("3050f546-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLLegendElement = "3050f546-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLLegendElement
     lpVtbl : DispHTMLLegendElementVTbl*
   end
@@ -20975,6 +21929,8 @@ lib LibWin32
     get_align : Proc(IHTMLSpanFlow*, UInt8**, HRESULT)
   end
 
+  IHTMLSpanFlow_GUID = LibC::GUID.new("3050f3e5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSpanFlow = "3050f3e5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSpanFlow
     lpVtbl : IHTMLSpanFlowVTbl*
   end
@@ -20989,6 +21945,8 @@ lib LibWin32
     invoke : Proc(DispHTMLSpanFlow*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLSpanFlow_GUID = LibC::GUID.new("3050f544-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLSpanFlow = "3050f544-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLSpanFlow
     lpVtbl : DispHTMLSpanFlowVTbl*
   end
@@ -21023,6 +21981,8 @@ lib LibWin32
     get_onbeforeunload : Proc(IHTMLFrameSetElement*, VARIANT*, HRESULT)
   end
 
+  IHTMLFrameSetElement_GUID = LibC::GUID.new("3050f319-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameSetElement = "3050f319-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameSetElement
     lpVtbl : IHTMLFrameSetElementVTbl*
   end
@@ -21041,6 +22001,8 @@ lib LibWin32
     get_onafterprint : Proc(IHTMLFrameSetElement2*, VARIANT*, HRESULT)
   end
 
+  IHTMLFrameSetElement2_GUID = LibC::GUID.new("3050f5c6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameSetElement2 = "3050f5c6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameSetElement2
     lpVtbl : IHTMLFrameSetElement2VTbl*
   end
@@ -21065,6 +22027,8 @@ lib LibWin32
     get_onstorage : Proc(IHTMLFrameSetElement3*, VARIANT*, HRESULT)
   end
 
+  IHTMLFrameSetElement3_GUID = LibC::GUID.new("30510796-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFrameSetElement3 = "30510796-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFrameSetElement3
     lpVtbl : IHTMLFrameSetElement3VTbl*
   end
@@ -21079,6 +22043,8 @@ lib LibWin32
     invoke : Proc(DispHTMLFrameSetSite*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLFrameSetSite_GUID = LibC::GUID.new("3050f514-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLFrameSetSite = "3050f514-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLFrameSetSite
     lpVtbl : DispHTMLFrameSetSiteVTbl*
   end
@@ -21101,6 +22067,8 @@ lib LibWin32
     get_balance : Proc(IHTMLBGsound*, VARIANT*, HRESULT)
   end
 
+  IHTMLBGsound_GUID = LibC::GUID.new("3050f369-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLBGsound = "3050f369-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLBGsound
     lpVtbl : IHTMLBGsoundVTbl*
   end
@@ -21115,6 +22083,8 @@ lib LibWin32
     invoke : Proc(DispHTMLBGsound*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLBGsound_GUID = LibC::GUID.new("3050f53c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLBGsound = "3050f53c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLBGsound
     lpVtbl : DispHTMLBGsoundVTbl*
   end
@@ -21132,6 +22102,8 @@ lib LibWin32
     item : Proc(IHTMLFontNamesCollection*, Int32, UInt8**, HRESULT)
   end
 
+  IHTMLFontNamesCollection_GUID = LibC::GUID.new("3050f376-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFontNamesCollection = "3050f376-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFontNamesCollection
     lpVtbl : IHTMLFontNamesCollectionVTbl*
   end
@@ -21150,6 +22122,8 @@ lib LibWin32
     item : Proc(IHTMLFontSizesCollection*, Int32, Int32*, HRESULT)
   end
 
+  IHTMLFontSizesCollection_GUID = LibC::GUID.new("3050f377-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLFontSizesCollection = "3050f377-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLFontSizesCollection
     lpVtbl : IHTMLFontSizesCollectionVTbl*
   end
@@ -21191,6 +22165,8 @@ lib LibWin32
     get_secure_connection_info : Proc(IHTMLOptionsHolder*, UInt8**, HRESULT)
   end
 
+  IHTMLOptionsHolder_GUID = LibC::GUID.new("3050f378-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOptionsHolder = "3050f378-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOptionsHolder
     lpVtbl : IHTMLOptionsHolderVTbl*
   end
@@ -21205,6 +22181,8 @@ lib LibWin32
     invoke : Proc(HTMLStyleElementEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLStyleElementEvents2_GUID = LibC::GUID.new("3050f615-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleElementEvents2 = "3050f615-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLStyleElementEvents2
     lpVtbl : HTMLStyleElementEvents2VTbl*
   end
@@ -21219,6 +22197,8 @@ lib LibWin32
     invoke : Proc(HTMLStyleElementEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLStyleElementEvents_GUID = LibC::GUID.new("3050f3cb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLStyleElementEvents = "3050f3cb-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLStyleElementEvents
     lpVtbl : HTMLStyleElementEventsVTbl*
   end
@@ -21247,6 +22227,8 @@ lib LibWin32
     get_media : Proc(IHTMLStyleElement*, UInt8**, HRESULT)
   end
 
+  IHTMLStyleElement_GUID = LibC::GUID.new("3050f375-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleElement = "3050f375-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleElement
     lpVtbl : IHTMLStyleElementVTbl*
   end
@@ -21262,6 +22244,8 @@ lib LibWin32
     get_sheet : Proc(IHTMLStyleElement2*, IHTMLStyleSheet*, HRESULT)
   end
 
+  IHTMLStyleElement2_GUID = LibC::GUID.new("3051072a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleElement2 = "3051072a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleElement2
     lpVtbl : IHTMLStyleElement2VTbl*
   end
@@ -21276,6 +22260,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleElement_GUID = LibC::GUID.new("3050f511-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleElement = "3050f511-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleElement
     lpVtbl : DispHTMLStyleElementVTbl*
   end
@@ -21292,6 +22278,8 @@ lib LibWin32
     get_fontsrc : Proc(IHTMLStyleFontFace*, UInt8**, HRESULT)
   end
 
+  IHTMLStyleFontFace_GUID = LibC::GUID.new("3050f3d5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleFontFace = "3050f3d5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleFontFace
     lpVtbl : IHTMLStyleFontFaceVTbl*
   end
@@ -21307,6 +22295,8 @@ lib LibWin32
     get_style : Proc(IHTMLStyleFontFace2*, IHTMLRuleStyle*, HRESULT)
   end
 
+  IHTMLStyleFontFace2_GUID = LibC::GUID.new("305106ec-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleFontFace2 = "305106ec-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleFontFace2
     lpVtbl : IHTMLStyleFontFace2VTbl*
   end
@@ -21321,6 +22311,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleFontFace*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleFontFace_GUID = LibC::GUID.new("30590081-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleFontFace = "30590081-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleFontFace
     lpVtbl : DispHTMLStyleFontFaceVTbl*
   end
@@ -21350,6 +22342,8 @@ lib LibWin32
     send : Proc(IHTMLXDomainRequest*, VARIANT, HRESULT)
   end
 
+  IHTMLXDomainRequest_GUID = LibC::GUID.new("30510454-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLXDomainRequest = "30510454-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLXDomainRequest
     lpVtbl : IHTMLXDomainRequestVTbl*
   end
@@ -21365,6 +22359,8 @@ lib LibWin32
     create : Proc(IHTMLXDomainRequestFactory*, IHTMLXDomainRequest*, HRESULT)
   end
 
+  IHTMLXDomainRequestFactory_GUID = LibC::GUID.new("30510456-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLXDomainRequestFactory = "30510456-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLXDomainRequestFactory
     lpVtbl : IHTMLXDomainRequestFactoryVTbl*
   end
@@ -21379,6 +22375,8 @@ lib LibWin32
     invoke : Proc(DispXDomainRequest*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispXDomainRequest_GUID = LibC::GUID.new("3050f599-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispXDomainRequest = "3050f599-98b5-11cf-bb82-00aa00bdce0b"
   struct DispXDomainRequest
     lpVtbl : DispXDomainRequestVTbl*
   end
@@ -21394,6 +22392,8 @@ lib LibWin32
     set_item : Proc(IHTMLStorage2*, UInt8*, UInt8*, HRESULT)
   end
 
+  IHTMLStorage2_GUID = LibC::GUID.new("30510799-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStorage2 = "30510799-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStorage2
     lpVtbl : IHTMLStorage2VTbl*
   end
@@ -21408,6 +22408,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStorage*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStorage_GUID = LibC::GUID.new("3050f59d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStorage = "3050f59d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStorage
     lpVtbl : DispHTMLStorageVTbl*
   end
@@ -21425,6 +22427,8 @@ lib LibWin32
     dispatch_event : Proc(IEventTarget*, IDOMEvent, Int16*, HRESULT)
   end
 
+  IEventTarget_GUID = LibC::GUID.new("305104b9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IEventTarget = "305104b9-98b5-11cf-bb82-00aa00bdce0b"
   struct IEventTarget
     lpVtbl : IEventTargetVTbl*
   end
@@ -21439,6 +22443,8 @@ lib LibWin32
     invoke : Proc(DispDOMEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMEvent_GUID = LibC::GUID.new("3050f5a2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMEvent = "3050f5a2-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMEvent
     lpVtbl : DispDOMEventVTbl*
   end
@@ -21456,6 +22462,8 @@ lib LibWin32
     init_ui_event : Proc(IDOMUIEvent*, UInt8*, Int16, Int16, IHTMLWindow2, Int32, HRESULT)
   end
 
+  IDOMUIEvent_GUID = LibC::GUID.new("305106ca-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMUIEvent = "305106ca-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMUIEvent
     lpVtbl : IDOMUIEventVTbl*
   end
@@ -21470,6 +22478,8 @@ lib LibWin32
     invoke : Proc(DispDOMUIEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMUIEvent_GUID = LibC::GUID.new("30590072-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMUIEvent = "30590072-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMUIEvent
     lpVtbl : DispDOMUIEventVTbl*
   end
@@ -21508,6 +22518,8 @@ lib LibWin32
     get_which : Proc(IDOMMouseEvent*, UInt16*, HRESULT)
   end
 
+  IDOMMouseEvent_GUID = LibC::GUID.new("305106ce-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMMouseEvent = "305106ce-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMMouseEvent
     lpVtbl : IDOMMouseEventVTbl*
   end
@@ -21522,6 +22534,8 @@ lib LibWin32
     invoke : Proc(DispDOMMouseEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMMouseEvent_GUID = LibC::GUID.new("30590073-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMMouseEvent = "30590073-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMMouseEvent
     lpVtbl : DispDOMMouseEventVTbl*
   end
@@ -21538,6 +22552,8 @@ lib LibWin32
     init_drag_event : Proc(IDOMDragEvent*, UInt8*, Int16, Int16, IHTMLWindow2, Int32, Int32, Int32, Int32, Int32, Int16, Int16, Int16, Int16, UInt16, IEventTarget, IHTMLDataTransfer, HRESULT)
   end
 
+  IDOMDragEvent_GUID = LibC::GUID.new("30510761-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMDragEvent = "30510761-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMDragEvent
     lpVtbl : IDOMDragEventVTbl*
   end
@@ -21552,6 +22568,8 @@ lib LibWin32
     invoke : Proc(DispDOMDragEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMDragEvent_GUID = LibC::GUID.new("305900a7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMDragEvent = "305900a7-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMDragEvent
     lpVtbl : DispDOMDragEventVTbl*
   end
@@ -21568,6 +22586,8 @@ lib LibWin32
     init_mouse_wheel_event : Proc(IDOMMouseWheelEvent*, UInt8*, Int16, Int16, IHTMLWindow2, Int32, Int32, Int32, Int32, Int32, UInt16, IEventTarget, UInt8*, Int32, HRESULT)
   end
 
+  IDOMMouseWheelEvent_GUID = LibC::GUID.new("305106d0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMMouseWheelEvent = "305106d0-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMMouseWheelEvent
     lpVtbl : IDOMMouseWheelEventVTbl*
   end
@@ -21582,6 +22602,8 @@ lib LibWin32
     invoke : Proc(DispDOMMouseWheelEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMMouseWheelEvent_GUID = LibC::GUID.new("30590074-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMMouseWheelEvent = "30590074-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMMouseWheelEvent
     lpVtbl : DispDOMMouseWheelEventVTbl*
   end
@@ -21601,6 +22623,8 @@ lib LibWin32
     init_wheel_event : Proc(IDOMWheelEvent*, UInt8*, Int16, Int16, IHTMLWindow2, Int32, Int32, Int32, Int32, Int32, UInt16, IEventTarget, UInt8*, Int32, Int32, Int32, UInt32, HRESULT)
   end
 
+  IDOMWheelEvent_GUID = LibC::GUID.new("305106d2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMWheelEvent = "305106d2-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMWheelEvent
     lpVtbl : IDOMWheelEventVTbl*
   end
@@ -21615,6 +22639,8 @@ lib LibWin32
     invoke : Proc(DispDOMWheelEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMWheelEvent_GUID = LibC::GUID.new("30590075-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMWheelEvent = "30590075-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMWheelEvent
     lpVtbl : DispDOMWheelEventVTbl*
   end
@@ -21633,6 +22659,8 @@ lib LibWin32
     get_locale : Proc(IDOMTextEvent*, UInt8**, HRESULT)
   end
 
+  IDOMTextEvent_GUID = LibC::GUID.new("305106d4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMTextEvent = "305106d4-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMTextEvent
     lpVtbl : IDOMTextEventVTbl*
   end
@@ -21647,6 +22675,8 @@ lib LibWin32
     invoke : Proc(DispDOMTextEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMTextEvent_GUID = LibC::GUID.new("30590076-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMTextEvent = "30590076-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMTextEvent
     lpVtbl : DispDOMTextEventVTbl*
   end
@@ -21675,6 +22705,8 @@ lib LibWin32
     get_locale : Proc(IDOMKeyboardEvent*, UInt8**, HRESULT)
   end
 
+  IDOMKeyboardEvent_GUID = LibC::GUID.new("305106d6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMKeyboardEvent = "305106d6-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMKeyboardEvent
     lpVtbl : IDOMKeyboardEventVTbl*
   end
@@ -21689,6 +22721,8 @@ lib LibWin32
     invoke : Proc(DispDOMKeyboardEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMKeyboardEvent_GUID = LibC::GUID.new("30590077-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMKeyboardEvent = "30590077-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMKeyboardEvent
     lpVtbl : DispDOMKeyboardEventVTbl*
   end
@@ -21706,6 +22740,8 @@ lib LibWin32
     get_locale : Proc(IDOMCompositionEvent*, UInt8**, HRESULT)
   end
 
+  IDOMCompositionEvent_GUID = LibC::GUID.new("305106d8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMCompositionEvent = "305106d8-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMCompositionEvent
     lpVtbl : IDOMCompositionEventVTbl*
   end
@@ -21720,6 +22756,8 @@ lib LibWin32
     invoke : Proc(DispDOMCompositionEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMCompositionEvent_GUID = LibC::GUID.new("30590078-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMCompositionEvent = "30590078-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMCompositionEvent
     lpVtbl : DispDOMCompositionEventVTbl*
   end
@@ -21740,6 +22778,8 @@ lib LibWin32
     init_mutation_event : Proc(IDOMMutationEvent*, UInt8*, Int16, Int16, IDispatch, UInt8*, UInt8*, UInt8*, UInt16, HRESULT)
   end
 
+  IDOMMutationEvent_GUID = LibC::GUID.new("305106da-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMMutationEvent = "305106da-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMMutationEvent
     lpVtbl : IDOMMutationEventVTbl*
   end
@@ -21754,6 +22794,8 @@ lib LibWin32
     invoke : Proc(DispDOMMutationEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMMutationEvent_GUID = LibC::GUID.new("30590079-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMMutationEvent = "30590079-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMMutationEvent
     lpVtbl : DispDOMMutationEventVTbl*
   end
@@ -21770,6 +22812,8 @@ lib LibWin32
     get_return_value : Proc(IDOMBeforeUnloadEvent*, VARIANT*, HRESULT)
   end
 
+  IDOMBeforeUnloadEvent_GUID = LibC::GUID.new("30510763-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMBeforeUnloadEvent = "30510763-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMBeforeUnloadEvent
     lpVtbl : IDOMBeforeUnloadEventVTbl*
   end
@@ -21784,6 +22828,8 @@ lib LibWin32
     invoke : Proc(DispDOMBeforeUnloadEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMBeforeUnloadEvent_GUID = LibC::GUID.new("305900a8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMBeforeUnloadEvent = "305900a8-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMBeforeUnloadEvent
     lpVtbl : DispDOMBeforeUnloadEventVTbl*
   end
@@ -21800,6 +22846,8 @@ lib LibWin32
     init_focus_event : Proc(IDOMFocusEvent*, UInt8*, Int16, Int16, IHTMLWindow2, Int32, IEventTarget, HRESULT)
   end
 
+  IDOMFocusEvent_GUID = LibC::GUID.new("305106cc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMFocusEvent = "305106cc-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMFocusEvent
     lpVtbl : IDOMFocusEventVTbl*
   end
@@ -21814,6 +22862,8 @@ lib LibWin32
     invoke : Proc(DispDOMFocusEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMFocusEvent_GUID = LibC::GUID.new("30590071-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMFocusEvent = "30590071-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMFocusEvent
     lpVtbl : DispDOMFocusEventVTbl*
   end
@@ -21830,6 +22880,8 @@ lib LibWin32
     init_custom_event : Proc(IDOMCustomEvent*, UInt8*, Int16, Int16, VARIANT*, HRESULT)
   end
 
+  IDOMCustomEvent_GUID = LibC::GUID.new("305106de-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMCustomEvent = "305106de-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMCustomEvent
     lpVtbl : IDOMCustomEventVTbl*
   end
@@ -21844,6 +22896,8 @@ lib LibWin32
     invoke : Proc(DispDOMCustomEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMCustomEvent_GUID = LibC::GUID.new("3059007c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMCustomEvent = "3059007c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMCustomEvent
     lpVtbl : DispDOMCustomEventVTbl*
   end
@@ -21859,6 +22913,8 @@ lib LibWin32
     add_color_stop : Proc(ICanvasGradient*, Float32, UInt8*, HRESULT)
   end
 
+  ICanvasGradient_GUID = LibC::GUID.new("30510714-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICanvasGradient = "30510714-98b5-11cf-bb82-00aa00bdce0b"
   struct ICanvasGradient
     lpVtbl : ICanvasGradientVTbl*
   end
@@ -21873,6 +22929,8 @@ lib LibWin32
     invoke : Proc(ICanvasPattern*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ICanvasPattern_GUID = LibC::GUID.new("30510716-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICanvasPattern = "30510716-98b5-11cf-bb82-00aa00bdce0b"
   struct ICanvasPattern
     lpVtbl : ICanvasPatternVTbl*
   end
@@ -21888,6 +22946,8 @@ lib LibWin32
     get_width : Proc(ICanvasTextMetrics*, Float32*, HRESULT)
   end
 
+  ICanvasTextMetrics_GUID = LibC::GUID.new("30510718-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICanvasTextMetrics = "30510718-98b5-11cf-bb82-00aa00bdce0b"
   struct ICanvasTextMetrics
     lpVtbl : ICanvasTextMetricsVTbl*
   end
@@ -21905,6 +22965,8 @@ lib LibWin32
     get_data : Proc(ICanvasImageData*, VARIANT*, HRESULT)
   end
 
+  ICanvasImageData_GUID = LibC::GUID.new("3051071a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICanvasImageData = "3051071a-98b5-11cf-bb82-00aa00bdce0b"
   struct ICanvasImageData
     lpVtbl : ICanvasImageDataVTbl*
   end
@@ -21920,6 +22982,8 @@ lib LibWin32
     get_length : Proc(ICanvasPixelArray*, UInt32*, HRESULT)
   end
 
+  ICanvasPixelArray_GUID = LibC::GUID.new("3051071c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICanvasPixelArray = "3051071c-98b5-11cf-bb82-00aa00bdce0b"
   struct ICanvasPixelArray
     lpVtbl : ICanvasPixelArrayVTbl*
   end
@@ -21940,6 +23004,8 @@ lib LibWin32
     to_data_url : Proc(IHTMLCanvasElement*, UInt8*, VARIANT, UInt8**, HRESULT)
   end
 
+  IHTMLCanvasElement_GUID = LibC::GUID.new("305106e4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCanvasElement = "305106e4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCanvasElement
     lpVtbl : IHTMLCanvasElementVTbl*
   end
@@ -22018,6 +23084,8 @@ lib LibWin32
     put_image_data : Proc(ICanvasRenderingContext2D*, ICanvasImageData, Float32, Float32, VARIANT, VARIANT, VARIANT, VARIANT, HRESULT)
   end
 
+  ICanvasRenderingContext2D_GUID = LibC::GUID.new("305106ff-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICanvasRenderingContext2D = "305106ff-98b5-11cf-bb82-00aa00bdce0b"
   struct ICanvasRenderingContext2D
     lpVtbl : ICanvasRenderingContext2DVTbl*
   end
@@ -22032,6 +23100,8 @@ lib LibWin32
     invoke : Proc(DispCanvasGradient*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispCanvasGradient_GUID = LibC::GUID.new("3059008c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispCanvasGradient = "3059008c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispCanvasGradient
     lpVtbl : DispCanvasGradientVTbl*
   end
@@ -22046,6 +23116,8 @@ lib LibWin32
     invoke : Proc(DispCanvasPattern*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispCanvasPattern_GUID = LibC::GUID.new("3059008d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispCanvasPattern = "3059008d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispCanvasPattern
     lpVtbl : DispCanvasPatternVTbl*
   end
@@ -22060,6 +23132,8 @@ lib LibWin32
     invoke : Proc(DispCanvasTextMetrics*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispCanvasTextMetrics_GUID = LibC::GUID.new("3059008e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispCanvasTextMetrics = "3059008e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispCanvasTextMetrics
     lpVtbl : DispCanvasTextMetricsVTbl*
   end
@@ -22074,6 +23148,8 @@ lib LibWin32
     invoke : Proc(DispCanvasImageData*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispCanvasImageData_GUID = LibC::GUID.new("3059008f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispCanvasImageData = "3059008f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispCanvasImageData
     lpVtbl : DispCanvasImageDataVTbl*
   end
@@ -22088,6 +23164,8 @@ lib LibWin32
     invoke : Proc(DispCanvasRenderingContext2D*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispCanvasRenderingContext2D_GUID = LibC::GUID.new("30590082-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispCanvasRenderingContext2D = "30590082-98b5-11cf-bb82-00aa00bdce0b"
   struct DispCanvasRenderingContext2D
     lpVtbl : DispCanvasRenderingContext2DVTbl*
   end
@@ -22102,6 +23180,8 @@ lib LibWin32
     invoke : Proc(DispHTMLCanvasElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLCanvasElement_GUID = LibC::GUID.new("3059007b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLCanvasElement = "3059007b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLCanvasElement
     lpVtbl : DispHTMLCanvasElementVTbl*
   end
@@ -22120,6 +23200,8 @@ lib LibWin32
     init_progress_event : Proc(IDOMProgressEvent*, UInt8*, Int16, Int16, Int16, UInt64, UInt64, HRESULT)
   end
 
+  IDOMProgressEvent_GUID = LibC::GUID.new("3051071e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMProgressEvent = "3051071e-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMProgressEvent
     lpVtbl : IDOMProgressEventVTbl*
   end
@@ -22134,6 +23216,8 @@ lib LibWin32
     invoke : Proc(DispDOMProgressEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMProgressEvent_GUID = LibC::GUID.new("30590091-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMProgressEvent = "30590091-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMProgressEvent
     lpVtbl : DispDOMProgressEventVTbl*
   end
@@ -22152,6 +23236,8 @@ lib LibWin32
     init_message_event : Proc(IDOMMessageEvent*, UInt8*, Int16, Int16, UInt8*, UInt8*, UInt8*, IHTMLWindow2, HRESULT)
   end
 
+  IDOMMessageEvent_GUID = LibC::GUID.new("30510720-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMMessageEvent = "30510720-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMMessageEvent
     lpVtbl : IDOMMessageEventVTbl*
   end
@@ -22166,6 +23252,8 @@ lib LibWin32
     invoke : Proc(DispDOMMessageEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMMessageEvent_GUID = LibC::GUID.new("30590092-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMMessageEvent = "30590092-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMMessageEvent
     lpVtbl : DispDOMMessageEventVTbl*
   end
@@ -22182,6 +23270,8 @@ lib LibWin32
     get_action_url : Proc(IDOMSiteModeEvent*, UInt8**, HRESULT)
   end
 
+  IDOMSiteModeEvent_GUID = LibC::GUID.new("30510765-98b6-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMSiteModeEvent = "30510765-98b6-11cf-bb82-00aa00bdce0b"
   struct IDOMSiteModeEvent
     lpVtbl : IDOMSiteModeEventVTbl*
   end
@@ -22196,6 +23286,8 @@ lib LibWin32
     invoke : Proc(DispDOMSiteModeEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMSiteModeEvent_GUID = LibC::GUID.new("305900a9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMSiteModeEvent = "305900a9-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMSiteModeEvent
     lpVtbl : DispDOMSiteModeEventVTbl*
   end
@@ -22216,6 +23308,8 @@ lib LibWin32
     init_storage_event : Proc(IDOMStorageEvent*, UInt8*, Int16, Int16, UInt8*, UInt8*, UInt8*, UInt8*, IHTMLStorage, HRESULT)
   end
 
+  IDOMStorageEvent_GUID = LibC::GUID.new("30510722-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMStorageEvent = "30510722-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMStorageEvent
     lpVtbl : IDOMStorageEventVTbl*
   end
@@ -22230,6 +23324,8 @@ lib LibWin32
     invoke : Proc(DispDOMStorageEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMStorageEvent_GUID = LibC::GUID.new("30590093-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMStorageEvent = "30590093-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMStorageEvent
     lpVtbl : DispDOMStorageEventVTbl*
   end
@@ -22244,6 +23340,8 @@ lib LibWin32
     invoke : Proc(IXMLHttpRequestEventTarget*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IXMLHttpRequestEventTarget_GUID = LibC::GUID.new("30510830-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IXMLHttpRequestEventTarget = "30510830-98b5-11cf-bb82-00aa00bdce0b"
   struct IXMLHttpRequestEventTarget
     lpVtbl : IXMLHttpRequestEventTargetVTbl*
   end
@@ -22258,6 +23356,8 @@ lib LibWin32
     invoke : Proc(DispXMLHttpRequestEventTarget*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispXMLHttpRequestEventTarget_GUID = LibC::GUID.new("305900e7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispXMLHttpRequestEventTarget = "305900e7-98b5-11cf-bb82-00aa00bdce0b"
   struct DispXMLHttpRequestEventTarget
     lpVtbl : DispXMLHttpRequestEventTargetVTbl*
   end
@@ -22272,6 +23372,8 @@ lib LibWin32
     invoke : Proc(HTMLXMLHttpRequestEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLXMLHttpRequestEvents_GUID = LibC::GUID.new("30510498-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLXMLHttpRequestEvents = "30510498-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLXMLHttpRequestEvents
     lpVtbl : HTMLXMLHttpRequestEventsVTbl*
   end
@@ -22300,6 +23402,8 @@ lib LibWin32
     set_request_header : Proc(IHTMLXMLHttpRequest*, UInt8*, UInt8*, HRESULT)
   end
 
+  IHTMLXMLHttpRequest_GUID = LibC::GUID.new("3051040a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLXMLHttpRequest = "3051040a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLXMLHttpRequest
     lpVtbl : IHTMLXMLHttpRequestVTbl*
   end
@@ -22318,6 +23422,8 @@ lib LibWin32
     get_ontimeout : Proc(IHTMLXMLHttpRequest2*, VARIANT*, HRESULT)
   end
 
+  IHTMLXMLHttpRequest2_GUID = LibC::GUID.new("30510482-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLXMLHttpRequest2 = "30510482-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLXMLHttpRequest2
     lpVtbl : IHTMLXMLHttpRequest2VTbl*
   end
@@ -22333,6 +23439,8 @@ lib LibWin32
     create : Proc(IHTMLXMLHttpRequestFactory*, IHTMLXMLHttpRequest*, HRESULT)
   end
 
+  IHTMLXMLHttpRequestFactory_GUID = LibC::GUID.new("3051040c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLXMLHttpRequestFactory = "3051040c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLXMLHttpRequestFactory
     lpVtbl : IHTMLXMLHttpRequestFactoryVTbl*
   end
@@ -22347,6 +23455,8 @@ lib LibWin32
     invoke : Proc(DispHTMLXMLHttpRequest*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLXMLHttpRequest_GUID = LibC::GUID.new("3050f596-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLXMLHttpRequest = "3050f596-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLXMLHttpRequest
     lpVtbl : DispHTMLXMLHttpRequestVTbl*
   end
@@ -22371,6 +23481,8 @@ lib LibWin32
     convert_to_specified_units : Proc(ISVGAngle*, Int16, HRESULT)
   end
 
+  ISVGAngle_GUID = LibC::GUID.new("305104d3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAngle = "305104d3-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAngle
     lpVtbl : ISVGAngleVTbl*
   end
@@ -22393,6 +23505,8 @@ lib LibWin32
     get_focusable : Proc(ISVGElement*, ISVGAnimatedEnumeration*, HRESULT)
   end
 
+  ISVGElement_GUID = LibC::GUID.new("305104c5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGElement = "305104c5-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGElement
     lpVtbl : ISVGElementVTbl*
   end
@@ -22415,6 +23529,8 @@ lib LibWin32
     get_height : Proc(ISVGRect*, Float32*, HRESULT)
   end
 
+  ISVGRect_GUID = LibC::GUID.new("305104d7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGRect = "305104d7-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGRect
     lpVtbl : ISVGRectVTbl*
   end
@@ -22452,6 +23568,8 @@ lib LibWin32
     skew_y : Proc(ISVGMatrix*, Float32, ISVGMatrix*, HRESULT)
   end
 
+  ISVGMatrix_GUID = LibC::GUID.new("305104f6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGMatrix = "305104f6-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGMatrix
     lpVtbl : ISVGMatrixVTbl*
   end
@@ -22475,6 +23593,8 @@ lib LibWin32
     append_item : Proc(ISVGStringList*, UInt8*, UInt8**, HRESULT)
   end
 
+  ISVGStringList_GUID = LibC::GUID.new("305104c8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGStringList = "305104c8-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGStringList
     lpVtbl : ISVGStringListVTbl*
   end
@@ -22493,6 +23613,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedRect*, ISVGRect*, HRESULT)
   end
 
+  ISVGAnimatedRect_GUID = LibC::GUID.new("305104d8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedRect = "305104d8-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedRect
     lpVtbl : ISVGAnimatedRectVTbl*
   end
@@ -22510,6 +23632,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedString*, UInt8**, HRESULT)
   end
 
+  ISVGAnimatedString_GUID = LibC::GUID.new("305104c7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedString = "305104c7-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedString
     lpVtbl : ISVGAnimatedStringVTbl*
   end
@@ -22528,6 +23652,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedBoolean*, Int16*, HRESULT)
   end
 
+  ISVGAnimatedBoolean_GUID = LibC::GUID.new("305104c6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedBoolean = "305104c6-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedBoolean
     lpVtbl : ISVGAnimatedBooleanVTbl*
   end
@@ -22546,6 +23672,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedTransformList*, ISVGTransformList*, HRESULT)
   end
 
+  ISVGAnimatedTransformList_GUID = LibC::GUID.new("305104f9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedTransformList = "305104f9-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedTransformList
     lpVtbl : ISVGAnimatedTransformListVTbl*
   end
@@ -22564,6 +23692,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedPreserveAspectRatio*, ISVGPreserveAspectRatio*, HRESULT)
   end
 
+  ISVGAnimatedPreserveAspectRatio_GUID = LibC::GUID.new("305104fb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedPreserveAspectRatio = "305104fb-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedPreserveAspectRatio
     lpVtbl : ISVGAnimatedPreserveAspectRatioVTbl*
   end
@@ -22579,6 +23709,8 @@ lib LibWin32
     get_class_name : Proc(ISVGStylable*, ISVGAnimatedString*, HRESULT)
   end
 
+  ISVGStylable_GUID = LibC::GUID.new("305104da-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGStylable = "305104da-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGStylable
     lpVtbl : ISVGStylableVTbl*
   end
@@ -22599,6 +23731,8 @@ lib LibWin32
     get_transform_to_element : Proc(ISVGLocatable*, ISVGElement, ISVGMatrix*, HRESULT)
   end
 
+  ISVGLocatable_GUID = LibC::GUID.new("305104db-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGLocatable = "305104db-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGLocatable
     lpVtbl : ISVGLocatableVTbl*
   end
@@ -22614,6 +23748,8 @@ lib LibWin32
     get_transform : Proc(ISVGTransformable*, ISVGAnimatedTransformList*, HRESULT)
   end
 
+  ISVGTransformable_GUID = LibC::GUID.new("305104dc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTransformable = "305104dc-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTransformable
     lpVtbl : ISVGTransformableVTbl*
   end
@@ -22632,6 +23768,8 @@ lib LibWin32
     has_extension : Proc(ISVGTests*, UInt8*, Int16*, HRESULT)
   end
 
+  ISVGTests_GUID = LibC::GUID.new("305104dd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTests = "305104dd-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTests
     lpVtbl : ISVGTestsVTbl*
   end
@@ -22650,6 +23788,8 @@ lib LibWin32
     get_xmlspace : Proc(ISVGLangSpace*, UInt8**, HRESULT)
   end
 
+  ISVGLangSpace_GUID = LibC::GUID.new("305104de-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGLangSpace = "305104de-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGLangSpace
     lpVtbl : ISVGLangSpaceVTbl*
   end
@@ -22665,6 +23805,8 @@ lib LibWin32
     get_external_resources_required : Proc(ISVGExternalResourcesRequired*, ISVGAnimatedBoolean*, HRESULT)
   end
 
+  ISVGExternalResourcesRequired_GUID = LibC::GUID.new("305104df-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGExternalResourcesRequired = "305104df-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGExternalResourcesRequired
     lpVtbl : ISVGExternalResourcesRequiredVTbl*
   end
@@ -22682,6 +23824,8 @@ lib LibWin32
     get_preserve_aspect_ratio : Proc(ISVGFitToViewBox*, ISVGAnimatedPreserveAspectRatio*, HRESULT)
   end
 
+  ISVGFitToViewBox_GUID = LibC::GUID.new("305104e0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGFitToViewBox = "305104e0-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGFitToViewBox
     lpVtbl : ISVGFitToViewBoxVTbl*
   end
@@ -22697,6 +23841,8 @@ lib LibWin32
     get_zoom_and_pan : Proc(ISVGZoomAndPan*, Int16*, HRESULT)
   end
 
+  ISVGZoomAndPan_GUID = LibC::GUID.new("305104e1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGZoomAndPan = "305104e1-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGZoomAndPan
     lpVtbl : ISVGZoomAndPanVTbl*
   end
@@ -22712,6 +23858,8 @@ lib LibWin32
     get_href : Proc(ISVGURIReference*, ISVGAnimatedString*, HRESULT)
   end
 
+  ISVGURIReference_GUID = LibC::GUID.new("305104e3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGURIReference = "305104e3-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGURIReference
     lpVtbl : ISVGURIReferenceVTbl*
   end
@@ -22730,6 +23878,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedAngle*, ISVGAngle*, HRESULT)
   end
 
+  ISVGAnimatedAngle_GUID = LibC::GUID.new("305104d4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedAngle = "305104d4-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedAngle
     lpVtbl : ISVGAnimatedAngleVTbl*
   end
@@ -22755,6 +23905,8 @@ lib LibWin32
     consolidate : Proc(ISVGTransformList*, ISVGTransform*, HRESULT)
   end
 
+  ISVGTransformList_GUID = LibC::GUID.new("305104f8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTransformList = "305104f8-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTransformList
     lpVtbl : ISVGTransformListVTbl*
   end
@@ -22773,6 +23925,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedEnumeration*, UInt16*, HRESULT)
   end
 
+  ISVGAnimatedEnumeration_GUID = LibC::GUID.new("305104c9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedEnumeration = "305104c9-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedEnumeration
     lpVtbl : ISVGAnimatedEnumerationVTbl*
   end
@@ -22791,6 +23945,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedInteger*, Int32*, HRESULT)
   end
 
+  ISVGAnimatedInteger_GUID = LibC::GUID.new("305104ca-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedInteger = "305104ca-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedInteger
     lpVtbl : ISVGAnimatedIntegerVTbl*
   end
@@ -22815,6 +23971,8 @@ lib LibWin32
     convert_to_specified_units : Proc(ISVGLength*, Int16, HRESULT)
   end
 
+  ISVGLength_GUID = LibC::GUID.new("305104cf-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGLength = "305104cf-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGLength
     lpVtbl : ISVGLengthVTbl*
   end
@@ -22833,6 +23991,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedLength*, ISVGLength*, HRESULT)
   end
 
+  ISVGAnimatedLength_GUID = LibC::GUID.new("305104d0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedLength = "305104d0-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedLength
     lpVtbl : ISVGAnimatedLengthVTbl*
   end
@@ -22856,6 +24016,8 @@ lib LibWin32
     append_item : Proc(ISVGLengthList*, ISVGLength, ISVGLength*, HRESULT)
   end
 
+  ISVGLengthList_GUID = LibC::GUID.new("305104d1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGLengthList = "305104d1-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGLengthList
     lpVtbl : ISVGLengthListVTbl*
   end
@@ -22874,6 +24036,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedLengthList*, ISVGLengthList*, HRESULT)
   end
 
+  ISVGAnimatedLengthList_GUID = LibC::GUID.new("305104d2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedLengthList = "305104d2-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedLengthList
     lpVtbl : ISVGAnimatedLengthListVTbl*
   end
@@ -22890,6 +24054,8 @@ lib LibWin32
     get_value : Proc(ISVGNumber*, Float32*, HRESULT)
   end
 
+  ISVGNumber_GUID = LibC::GUID.new("305104cb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGNumber = "305104cb-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGNumber
     lpVtbl : ISVGNumberVTbl*
   end
@@ -22908,6 +24074,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedNumber*, Float32*, HRESULT)
   end
 
+  ISVGAnimatedNumber_GUID = LibC::GUID.new("305104cc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedNumber = "305104cc-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedNumber
     lpVtbl : ISVGAnimatedNumberVTbl*
   end
@@ -22931,6 +24099,8 @@ lib LibWin32
     append_item : Proc(ISVGNumberList*, ISVGNumber, ISVGNumber*, HRESULT)
   end
 
+  ISVGNumberList_GUID = LibC::GUID.new("305104cd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGNumberList = "305104cd-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGNumberList
     lpVtbl : ISVGNumberListVTbl*
   end
@@ -22949,6 +24119,8 @@ lib LibWin32
     get_anim_val : Proc(ISVGAnimatedNumberList*, ISVGNumberList*, HRESULT)
   end
 
+  ISVGAnimatedNumberList_GUID = LibC::GUID.new("305104ce-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedNumberList = "305104ce-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedNumberList
     lpVtbl : ISVGAnimatedNumberListVTbl*
   end
@@ -22965,6 +24137,8 @@ lib LibWin32
     get_clip_path_units : Proc(ISVGClipPathElement*, ISVGAnimatedEnumeration*, HRESULT)
   end
 
+  ISVGClipPathElement_GUID = LibC::GUID.new("3051052d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGClipPathElement = "3051052d-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGClipPathElement
     lpVtbl : ISVGClipPathElementVTbl*
   end
@@ -22979,6 +24153,8 @@ lib LibWin32
     invoke : Proc(DispSVGClipPathElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGClipPathElement_GUID = LibC::GUID.new("3059003b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGClipPathElement = "3059003b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGClipPathElement
     lpVtbl : DispSVGClipPathElementVTbl*
   end
@@ -22994,6 +24170,8 @@ lib LibWin32
     get_root_element : Proc(ISVGDocument*, ISVGSVGElement*, HRESULT)
   end
 
+  ISVGDocument_GUID = LibC::GUID.new("305104e6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGDocument = "305104e6-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGDocument
     lpVtbl : ISVGDocumentVTbl*
   end
@@ -23009,6 +24187,8 @@ lib LibWin32
     get_svg_document : Proc(IGetSVGDocument*, IDispatch*, HRESULT)
   end
 
+  IGetSVGDocument_GUID = LibC::GUID.new("305105ab-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IGetSVGDocument = "305105ab-98b5-11cf-bb82-00aa00bdce0b"
   struct IGetSVGDocument
     lpVtbl : IGetSVGDocumentVTbl*
   end
@@ -23023,6 +24203,8 @@ lib LibWin32
     invoke : Proc(DispSVGElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGElement_GUID = LibC::GUID.new("30590000-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGElement = "30590000-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGElement
     lpVtbl : DispSVGElementVTbl*
   end
@@ -23037,6 +24219,8 @@ lib LibWin32
     invoke : Proc(IICCSVGColor*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IICCSVGColor_GUID = LibC::GUID.new("305104d6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IICCSVGColor = "305104d6-98b5-11cf-bb82-00aa00bdce0b"
   struct IICCSVGColor
     lpVtbl : IICCSVGColorVTbl*
   end
@@ -23051,6 +24235,8 @@ lib LibWin32
     invoke : Proc(ISVGPaint*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGPaint_GUID = LibC::GUID.new("30510524-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPaint = "30510524-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPaint
     lpVtbl : ISVGPaintVTbl*
   end
@@ -23079,6 +24265,8 @@ lib LibWin32
     get_height : Proc(ISVGPatternElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGPatternElement_GUID = LibC::GUID.new("3051052c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPatternElement = "3051052c-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPatternElement
     lpVtbl : ISVGPatternElementVTbl*
   end
@@ -23093,6 +24281,8 @@ lib LibWin32
     invoke : Proc(DispSVGPatternElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPatternElement_GUID = LibC::GUID.new("3059002c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPatternElement = "3059002c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPatternElement
     lpVtbl : DispSVGPatternElementVTbl*
   end
@@ -23110,6 +24300,8 @@ lib LibWin32
     get_path_seg_type_as_letter : Proc(ISVGPathSeg*, UInt8**, HRESULT)
   end
 
+  ISVGPathSeg_GUID = LibC::GUID.new("305104fc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSeg = "305104fc-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSeg
     lpVtbl : ISVGPathSegVTbl*
   end
@@ -23138,6 +24330,8 @@ lib LibWin32
     get_sweep_flag : Proc(ISVGPathSegArcAbs*, Int16*, HRESULT)
   end
 
+  ISVGPathSegArcAbs_GUID = LibC::GUID.new("30510506-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegArcAbs = "30510506-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegArcAbs
     lpVtbl : ISVGPathSegArcAbsVTbl*
   end
@@ -23166,6 +24360,8 @@ lib LibWin32
     get_sweep_flag : Proc(ISVGPathSegArcRel*, Int16*, HRESULT)
   end
 
+  ISVGPathSegArcRel_GUID = LibC::GUID.new("30510507-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegArcRel = "30510507-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegArcRel
     lpVtbl : ISVGPathSegArcRelVTbl*
   end
@@ -23180,6 +24376,8 @@ lib LibWin32
     invoke : Proc(ISVGPathSegClosePath*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGPathSegClosePath_GUID = LibC::GUID.new("305104fd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegClosePath = "305104fd-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegClosePath
     lpVtbl : ISVGPathSegClosePathVTbl*
   end
@@ -23198,6 +24396,8 @@ lib LibWin32
     get_y : Proc(ISVGPathSegMovetoAbs*, Float32*, HRESULT)
   end
 
+  ISVGPathSegMovetoAbs_GUID = LibC::GUID.new("305104fe-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegMovetoAbs = "305104fe-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegMovetoAbs
     lpVtbl : ISVGPathSegMovetoAbsVTbl*
   end
@@ -23216,6 +24416,8 @@ lib LibWin32
     get_y : Proc(ISVGPathSegMovetoRel*, Float32*, HRESULT)
   end
 
+  ISVGPathSegMovetoRel_GUID = LibC::GUID.new("305104ff-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegMovetoRel = "305104ff-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegMovetoRel
     lpVtbl : ISVGPathSegMovetoRelVTbl*
   end
@@ -23234,6 +24436,8 @@ lib LibWin32
     get_y : Proc(ISVGPathSegLinetoAbs*, Float32*, HRESULT)
   end
 
+  ISVGPathSegLinetoAbs_GUID = LibC::GUID.new("30510500-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegLinetoAbs = "30510500-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegLinetoAbs
     lpVtbl : ISVGPathSegLinetoAbsVTbl*
   end
@@ -23252,6 +24456,8 @@ lib LibWin32
     get_y : Proc(ISVGPathSegLinetoRel*, Float32*, HRESULT)
   end
 
+  ISVGPathSegLinetoRel_GUID = LibC::GUID.new("30510501-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegLinetoRel = "30510501-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegLinetoRel
     lpVtbl : ISVGPathSegLinetoRelVTbl*
   end
@@ -23278,6 +24484,8 @@ lib LibWin32
     get_y2 : Proc(ISVGPathSegCurvetoCubicAbs*, Float32*, HRESULT)
   end
 
+  ISVGPathSegCurvetoCubicAbs_GUID = LibC::GUID.new("30510502-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegCurvetoCubicAbs = "30510502-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegCurvetoCubicAbs
     lpVtbl : ISVGPathSegCurvetoCubicAbsVTbl*
   end
@@ -23304,6 +24512,8 @@ lib LibWin32
     get_y2 : Proc(ISVGPathSegCurvetoCubicRel*, Float32*, HRESULT)
   end
 
+  ISVGPathSegCurvetoCubicRel_GUID = LibC::GUID.new("30510503-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegCurvetoCubicRel = "30510503-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegCurvetoCubicRel
     lpVtbl : ISVGPathSegCurvetoCubicRelVTbl*
   end
@@ -23326,6 +24536,8 @@ lib LibWin32
     get_y2 : Proc(ISVGPathSegCurvetoCubicSmoothAbs*, Float32*, HRESULT)
   end
 
+  ISVGPathSegCurvetoCubicSmoothAbs_GUID = LibC::GUID.new("3051050c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegCurvetoCubicSmoothAbs = "3051050c-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegCurvetoCubicSmoothAbs
     lpVtbl : ISVGPathSegCurvetoCubicSmoothAbsVTbl*
   end
@@ -23348,6 +24560,8 @@ lib LibWin32
     get_y2 : Proc(ISVGPathSegCurvetoCubicSmoothRel*, Float32*, HRESULT)
   end
 
+  ISVGPathSegCurvetoCubicSmoothRel_GUID = LibC::GUID.new("3051050d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegCurvetoCubicSmoothRel = "3051050d-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegCurvetoCubicSmoothRel
     lpVtbl : ISVGPathSegCurvetoCubicSmoothRelVTbl*
   end
@@ -23370,6 +24584,8 @@ lib LibWin32
     get_y1 : Proc(ISVGPathSegCurvetoQuadraticAbs*, Float32*, HRESULT)
   end
 
+  ISVGPathSegCurvetoQuadraticAbs_GUID = LibC::GUID.new("30510504-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegCurvetoQuadraticAbs = "30510504-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegCurvetoQuadraticAbs
     lpVtbl : ISVGPathSegCurvetoQuadraticAbsVTbl*
   end
@@ -23392,6 +24608,8 @@ lib LibWin32
     get_y1 : Proc(ISVGPathSegCurvetoQuadraticRel*, Float32*, HRESULT)
   end
 
+  ISVGPathSegCurvetoQuadraticRel_GUID = LibC::GUID.new("30510505-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegCurvetoQuadraticRel = "30510505-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegCurvetoQuadraticRel
     lpVtbl : ISVGPathSegCurvetoQuadraticRelVTbl*
   end
@@ -23410,6 +24628,8 @@ lib LibWin32
     get_y : Proc(ISVGPathSegCurvetoQuadraticSmoothAbs*, Float32*, HRESULT)
   end
 
+  ISVGPathSegCurvetoQuadraticSmoothAbs_GUID = LibC::GUID.new("3051050e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegCurvetoQuadraticSmoothAbs = "3051050e-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegCurvetoQuadraticSmoothAbs
     lpVtbl : ISVGPathSegCurvetoQuadraticSmoothAbsVTbl*
   end
@@ -23428,6 +24648,8 @@ lib LibWin32
     get_y : Proc(ISVGPathSegCurvetoQuadraticSmoothRel*, Float32*, HRESULT)
   end
 
+  ISVGPathSegCurvetoQuadraticSmoothRel_GUID = LibC::GUID.new("3051050f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegCurvetoQuadraticSmoothRel = "3051050f-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegCurvetoQuadraticSmoothRel
     lpVtbl : ISVGPathSegCurvetoQuadraticSmoothRelVTbl*
   end
@@ -23444,6 +24666,8 @@ lib LibWin32
     get_x : Proc(ISVGPathSegLinetoHorizontalAbs*, Float32*, HRESULT)
   end
 
+  ISVGPathSegLinetoHorizontalAbs_GUID = LibC::GUID.new("30510508-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegLinetoHorizontalAbs = "30510508-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegLinetoHorizontalAbs
     lpVtbl : ISVGPathSegLinetoHorizontalAbsVTbl*
   end
@@ -23460,6 +24684,8 @@ lib LibWin32
     get_x : Proc(ISVGPathSegLinetoHorizontalRel*, Float32*, HRESULT)
   end
 
+  ISVGPathSegLinetoHorizontalRel_GUID = LibC::GUID.new("30510509-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegLinetoHorizontalRel = "30510509-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegLinetoHorizontalRel
     lpVtbl : ISVGPathSegLinetoHorizontalRelVTbl*
   end
@@ -23476,6 +24702,8 @@ lib LibWin32
     get_y : Proc(ISVGPathSegLinetoVerticalAbs*, Float32*, HRESULT)
   end
 
+  ISVGPathSegLinetoVerticalAbs_GUID = LibC::GUID.new("3051050a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegLinetoVerticalAbs = "3051050a-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegLinetoVerticalAbs
     lpVtbl : ISVGPathSegLinetoVerticalAbsVTbl*
   end
@@ -23492,6 +24720,8 @@ lib LibWin32
     get_y : Proc(ISVGPathSegLinetoVerticalRel*, Float32*, HRESULT)
   end
 
+  ISVGPathSegLinetoVerticalRel_GUID = LibC::GUID.new("3051050b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegLinetoVerticalRel = "3051050b-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegLinetoVerticalRel
     lpVtbl : ISVGPathSegLinetoVerticalRelVTbl*
   end
@@ -23506,6 +24736,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegArcAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegArcAbs_GUID = LibC::GUID.new("30590013-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegArcAbs = "30590013-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegArcAbs
     lpVtbl : DispSVGPathSegArcAbsVTbl*
   end
@@ -23520,6 +24752,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegArcRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegArcRel_GUID = LibC::GUID.new("30590014-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegArcRel = "30590014-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegArcRel
     lpVtbl : DispSVGPathSegArcRelVTbl*
   end
@@ -23534,6 +24768,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegClosePath*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegClosePath_GUID = LibC::GUID.new("30590015-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegClosePath = "30590015-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegClosePath
     lpVtbl : DispSVGPathSegClosePathVTbl*
   end
@@ -23548,6 +24784,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegMovetoAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegMovetoAbs_GUID = LibC::GUID.new("30590024-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegMovetoAbs = "30590024-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegMovetoAbs
     lpVtbl : DispSVGPathSegMovetoAbsVTbl*
   end
@@ -23562,6 +24800,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegMovetoRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegMovetoRel_GUID = LibC::GUID.new("30590025-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegMovetoRel = "30590025-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegMovetoRel
     lpVtbl : DispSVGPathSegMovetoRelVTbl*
   end
@@ -23576,6 +24816,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegLinetoAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegLinetoAbs_GUID = LibC::GUID.new("3059001e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegLinetoAbs = "3059001e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegLinetoAbs
     lpVtbl : DispSVGPathSegLinetoAbsVTbl*
   end
@@ -23590,6 +24832,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegLinetoRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegLinetoRel_GUID = LibC::GUID.new("30590021-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegLinetoRel = "30590021-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegLinetoRel
     lpVtbl : DispSVGPathSegLinetoRelVTbl*
   end
@@ -23604,6 +24848,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegCurvetoCubicAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegCurvetoCubicAbs_GUID = LibC::GUID.new("30590016-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegCurvetoCubicAbs = "30590016-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegCurvetoCubicAbs
     lpVtbl : DispSVGPathSegCurvetoCubicAbsVTbl*
   end
@@ -23618,6 +24864,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegCurvetoCubicRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegCurvetoCubicRel_GUID = LibC::GUID.new("30590017-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegCurvetoCubicRel = "30590017-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegCurvetoCubicRel
     lpVtbl : DispSVGPathSegCurvetoCubicRelVTbl*
   end
@@ -23632,6 +24880,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegCurvetoCubicSmoothAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegCurvetoCubicSmoothAbs_GUID = LibC::GUID.new("30590018-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegCurvetoCubicSmoothAbs = "30590018-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegCurvetoCubicSmoothAbs
     lpVtbl : DispSVGPathSegCurvetoCubicSmoothAbsVTbl*
   end
@@ -23646,6 +24896,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegCurvetoCubicSmoothRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegCurvetoCubicSmoothRel_GUID = LibC::GUID.new("30590019-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegCurvetoCubicSmoothRel = "30590019-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegCurvetoCubicSmoothRel
     lpVtbl : DispSVGPathSegCurvetoCubicSmoothRelVTbl*
   end
@@ -23660,6 +24912,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegCurvetoQuadraticAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegCurvetoQuadraticAbs_GUID = LibC::GUID.new("3059001a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegCurvetoQuadraticAbs = "3059001a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegCurvetoQuadraticAbs
     lpVtbl : DispSVGPathSegCurvetoQuadraticAbsVTbl*
   end
@@ -23674,6 +24928,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegCurvetoQuadraticRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegCurvetoQuadraticRel_GUID = LibC::GUID.new("3059001b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegCurvetoQuadraticRel = "3059001b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegCurvetoQuadraticRel
     lpVtbl : DispSVGPathSegCurvetoQuadraticRelVTbl*
   end
@@ -23688,6 +24944,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegCurvetoQuadraticSmoothAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegCurvetoQuadraticSmoothAbs_GUID = LibC::GUID.new("3059001c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegCurvetoQuadraticSmoothAbs = "3059001c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegCurvetoQuadraticSmoothAbs
     lpVtbl : DispSVGPathSegCurvetoQuadraticSmoothAbsVTbl*
   end
@@ -23702,6 +24960,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegCurvetoQuadraticSmoothRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegCurvetoQuadraticSmoothRel_GUID = LibC::GUID.new("3059001d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegCurvetoQuadraticSmoothRel = "3059001d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegCurvetoQuadraticSmoothRel
     lpVtbl : DispSVGPathSegCurvetoQuadraticSmoothRelVTbl*
   end
@@ -23716,6 +24976,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegLinetoHorizontalAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegLinetoHorizontalAbs_GUID = LibC::GUID.new("3059001f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegLinetoHorizontalAbs = "3059001f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegLinetoHorizontalAbs
     lpVtbl : DispSVGPathSegLinetoHorizontalAbsVTbl*
   end
@@ -23730,6 +24992,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegLinetoHorizontalRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegLinetoHorizontalRel_GUID = LibC::GUID.new("30590020-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegLinetoHorizontalRel = "30590020-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegLinetoHorizontalRel
     lpVtbl : DispSVGPathSegLinetoHorizontalRelVTbl*
   end
@@ -23744,6 +25008,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegLinetoVerticalAbs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegLinetoVerticalAbs_GUID = LibC::GUID.new("30590022-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegLinetoVerticalAbs = "30590022-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegLinetoVerticalAbs
     lpVtbl : DispSVGPathSegLinetoVerticalAbsVTbl*
   end
@@ -23758,6 +25024,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathSegLinetoVerticalRel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathSegLinetoVerticalRel_GUID = LibC::GUID.new("30590023-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathSegLinetoVerticalRel = "30590023-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathSegLinetoVerticalRel
     lpVtbl : DispSVGPathSegLinetoVerticalRelVTbl*
   end
@@ -23781,6 +25049,8 @@ lib LibWin32
     append_item : Proc(ISVGPathSegList*, ISVGPathSeg, ISVGPathSeg*, HRESULT)
   end
 
+  ISVGPathSegList_GUID = LibC::GUID.new("30510510-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathSegList = "30510510-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathSegList
     lpVtbl : ISVGPathSegListVTbl*
   end
@@ -23800,6 +25070,8 @@ lib LibWin32
     matrix_transform : Proc(ISVGPoint*, ISVGMatrix, ISVGPoint*, HRESULT)
   end
 
+  ISVGPoint_GUID = LibC::GUID.new("305104f4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPoint = "305104f4-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPoint
     lpVtbl : ISVGPointVTbl*
   end
@@ -23823,6 +25095,8 @@ lib LibWin32
     append_item : Proc(ISVGPointList*, ISVGPoint, ISVGPoint*, HRESULT)
   end
 
+  ISVGPointList_GUID = LibC::GUID.new("305104f5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPointList = "305104f5-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPointList
     lpVtbl : ISVGPointListVTbl*
   end
@@ -23837,6 +25111,8 @@ lib LibWin32
     invoke : Proc(ISVGViewSpec*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGViewSpec_GUID = LibC::GUID.new("305104e2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGViewSpec = "305104e2-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGViewSpec
     lpVtbl : ISVGViewSpecVTbl*
   end
@@ -23863,6 +25139,8 @@ lib LibWin32
     set_skew_y : Proc(ISVGTransform*, Float32, HRESULT)
   end
 
+  ISVGTransform_GUID = LibC::GUID.new("305104f7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTransform = "305104f7-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTransform
     lpVtbl : ISVGTransformVTbl*
   end
@@ -23877,6 +25155,8 @@ lib LibWin32
     invoke : Proc(DispSVGSVGElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGSVGElement_GUID = LibC::GUID.new("30590001-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGSVGElement = "30590001-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGSVGElement
     lpVtbl : DispSVGSVGElementVTbl*
   end
@@ -23899,6 +25179,8 @@ lib LibWin32
     get_next_sibling : Proc(ISVGElementInstance*, ISVGElementInstance*, HRESULT)
   end
 
+  ISVGElementInstance_GUID = LibC::GUID.new("305104ee-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGElementInstance = "305104ee-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGElementInstance
     lpVtbl : ISVGElementInstanceVTbl*
   end
@@ -23925,6 +25207,8 @@ lib LibWin32
     get_animated_instance_root : Proc(ISVGUseElement*, ISVGElementInstance*, HRESULT)
   end
 
+  ISVGUseElement_GUID = LibC::GUID.new("305104ed-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGUseElement = "305104ed-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGUseElement
     lpVtbl : ISVGUseElementVTbl*
   end
@@ -23939,6 +25223,8 @@ lib LibWin32
     invoke : Proc(DispSVGUseElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGUseElement_GUID = LibC::GUID.new("30590010-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGUseElement = "30590010-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGUseElement
     lpVtbl : DispSVGUseElementVTbl*
   end
@@ -23958,6 +25244,8 @@ lib LibWin32
     property_applied_trace_length : Proc(IHTMLStyleSheetRulesAppliedCollection*, UInt8*, Int32*, HRESULT)
   end
 
+  IHTMLStyleSheetRulesAppliedCollection_GUID = LibC::GUID.new("305104c0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLStyleSheetRulesAppliedCollection = "305104c0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLStyleSheetRulesAppliedCollection
     lpVtbl : IHTMLStyleSheetRulesAppliedCollectionVTbl*
   end
@@ -23978,6 +25266,8 @@ lib LibWin32
     has_inheritable_property : Proc(IRulesApplied*, Int16*, HRESULT)
   end
 
+  IRulesApplied_GUID = LibC::GUID.new("305104bf-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IRulesApplied = "305104bf-98b5-11cf-bb82-00aa00bdce0b"
   struct IRulesApplied
     lpVtbl : IRulesAppliedVTbl*
   end
@@ -23992,6 +25282,8 @@ lib LibWin32
     invoke : Proc(DispHTMLStyleSheetRulesAppliedCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLStyleSheetRulesAppliedCollection_GUID = LibC::GUID.new("3050f5a6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLStyleSheetRulesAppliedCollection = "3050f5a6-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLStyleSheetRulesAppliedCollection
     lpVtbl : DispHTMLStyleSheetRulesAppliedCollectionVTbl*
   end
@@ -24006,6 +25298,8 @@ lib LibWin32
     invoke : Proc(DispRulesApplied*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispRulesApplied_GUID = LibC::GUID.new("3050f5a5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispRulesApplied = "3050f5a5-98b5-11cf-bb82-00aa00bdce0b"
   struct DispRulesApplied
     lpVtbl : DispRulesAppliedVTbl*
   end
@@ -24020,6 +25314,8 @@ lib LibWin32
     invoke : Proc(DispRulesAppliedCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispRulesAppliedCollection_GUID = LibC::GUID.new("3050f5a4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispRulesAppliedCollection = "3050f5a4-98b5-11cf-bb82-00aa00bdce0b"
   struct DispRulesAppliedCollection
     lpVtbl : DispRulesAppliedCollectionVTbl*
   end
@@ -24034,6 +25330,8 @@ lib LibWin32
     invoke : Proc(DispHTMLW3CComputedStyle*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLW3CComputedStyle_GUID = LibC::GUID.new("30590070-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLW3CComputedStyle = "30590070-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLW3CComputedStyle
     lpVtbl : DispHTMLW3CComputedStyleVTbl*
   end
@@ -24052,6 +25350,8 @@ lib LibWin32
     get_animated_points : Proc(ISVGAnimatedPoints*, ISVGPointList*, HRESULT)
   end
 
+  ISVGAnimatedPoints_GUID = LibC::GUID.new("30510517-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedPoints = "30510517-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedPoints
     lpVtbl : ISVGAnimatedPointsVTbl*
   end
@@ -24072,6 +25372,8 @@ lib LibWin32
     get_r : Proc(ISVGCircleElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGCircleElement_GUID = LibC::GUID.new("30510514-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGCircleElement = "30510514-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGCircleElement
     lpVtbl : ISVGCircleElementVTbl*
   end
@@ -24094,6 +25396,8 @@ lib LibWin32
     get_ry : Proc(ISVGEllipseElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGEllipseElement_GUID = LibC::GUID.new("30510515-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGEllipseElement = "30510515-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGEllipseElement
     lpVtbl : ISVGEllipseElementVTbl*
   end
@@ -24116,6 +25420,8 @@ lib LibWin32
     get_y2 : Proc(ISVGLineElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGLineElement_GUID = LibC::GUID.new("30510516-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGLineElement = "30510516-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGLineElement
     lpVtbl : ISVGLineElementVTbl*
   end
@@ -24142,6 +25448,8 @@ lib LibWin32
     get_ry : Proc(ISVGRectElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGRectElement_GUID = LibC::GUID.new("30510513-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGRectElement = "30510513-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGRectElement
     lpVtbl : ISVGRectElementVTbl*
   end
@@ -24156,6 +25464,8 @@ lib LibWin32
     invoke : Proc(ISVGPolygonElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGPolygonElement_GUID = LibC::GUID.new("30510519-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPolygonElement = "30510519-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPolygonElement
     lpVtbl : ISVGPolygonElementVTbl*
   end
@@ -24170,6 +25480,8 @@ lib LibWin32
     invoke : Proc(ISVGPolylineElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGPolylineElement_GUID = LibC::GUID.new("30510518-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPolylineElement = "30510518-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPolylineElement
     lpVtbl : ISVGPolylineElementVTbl*
   end
@@ -24184,6 +25496,8 @@ lib LibWin32
     invoke : Proc(DispSVGCircleElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGCircleElement_GUID = LibC::GUID.new("3059000a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGCircleElement = "3059000a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGCircleElement
     lpVtbl : DispSVGCircleElementVTbl*
   end
@@ -24198,6 +25512,8 @@ lib LibWin32
     invoke : Proc(DispSVGEllipseElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGEllipseElement_GUID = LibC::GUID.new("3059000b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGEllipseElement = "3059000b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGEllipseElement
     lpVtbl : DispSVGEllipseElementVTbl*
   end
@@ -24212,6 +25528,8 @@ lib LibWin32
     invoke : Proc(DispSVGLineElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGLineElement_GUID = LibC::GUID.new("3059000c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGLineElement = "3059000c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGLineElement
     lpVtbl : DispSVGLineElementVTbl*
   end
@@ -24226,6 +25544,8 @@ lib LibWin32
     invoke : Proc(DispSVGRectElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGRectElement_GUID = LibC::GUID.new("30590009-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGRectElement = "30590009-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGRectElement
     lpVtbl : DispSVGRectElementVTbl*
   end
@@ -24240,6 +25560,8 @@ lib LibWin32
     invoke : Proc(DispSVGPolygonElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPolygonElement_GUID = LibC::GUID.new("3059000d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPolygonElement = "3059000d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPolygonElement
     lpVtbl : DispSVGPolygonElementVTbl*
   end
@@ -24254,6 +25576,8 @@ lib LibWin32
     invoke : Proc(DispSVGPolylineElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPolylineElement_GUID = LibC::GUID.new("3059000e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPolylineElement = "3059000e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPolylineElement
     lpVtbl : DispSVGPolylineElementVTbl*
   end
@@ -24268,6 +25592,8 @@ lib LibWin32
     invoke : Proc(ISVGGElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGGElement_GUID = LibC::GUID.new("305104e8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGGElement = "305104e8-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGGElement
     lpVtbl : ISVGGElementVTbl*
   end
@@ -24282,6 +25608,8 @@ lib LibWin32
     invoke : Proc(DispSVGGElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGGElement_GUID = LibC::GUID.new("30590002-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGGElement = "30590002-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGGElement
     lpVtbl : DispSVGGElementVTbl*
   end
@@ -24296,6 +25624,8 @@ lib LibWin32
     invoke : Proc(ISVGSymbolElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGSymbolElement_GUID = LibC::GUID.new("305104ec-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGSymbolElement = "305104ec-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGSymbolElement
     lpVtbl : ISVGSymbolElementVTbl*
   end
@@ -24310,6 +25640,8 @@ lib LibWin32
     invoke : Proc(DispSVGSymbolElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGSymbolElement_GUID = LibC::GUID.new("30590004-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGSymbolElement = "30590004-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGSymbolElement
     lpVtbl : DispSVGSymbolElementVTbl*
   end
@@ -24324,6 +25656,8 @@ lib LibWin32
     invoke : Proc(ISVGDefsElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGDefsElement_GUID = LibC::GUID.new("305104e9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGDefsElement = "305104e9-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGDefsElement
     lpVtbl : ISVGDefsElementVTbl*
   end
@@ -24338,6 +25672,8 @@ lib LibWin32
     invoke : Proc(DispSVGDefsElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGDefsElement_GUID = LibC::GUID.new("30590003-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGDefsElement = "30590003-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGDefsElement
     lpVtbl : DispSVGDefsElementVTbl*
   end
@@ -24360,6 +25696,8 @@ lib LibWin32
     get_animated_normalized_path_seg_list : Proc(ISVGAnimatedPathData*, ISVGPathSegList*, HRESULT)
   end
 
+  ISVGAnimatedPathData_GUID = LibC::GUID.new("30510511-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAnimatedPathData = "30510511-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAnimatedPathData
     lpVtbl : ISVGAnimatedPathDataVTbl*
   end
@@ -24398,6 +25736,8 @@ lib LibWin32
     create_svg_path_seg_curveto_quadratic_smooth_rel : Proc(ISVGPathElement*, Float32, Float32, ISVGPathSegCurvetoQuadraticSmoothRel*, HRESULT)
   end
 
+  ISVGPathElement_GUID = LibC::GUID.new("30510512-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPathElement = "30510512-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPathElement
     lpVtbl : ISVGPathElementVTbl*
   end
@@ -24412,6 +25752,8 @@ lib LibWin32
     invoke : Proc(DispSVGPathElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGPathElement_GUID = LibC::GUID.new("30590011-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGPathElement = "30590011-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGPathElement
     lpVtbl : DispSVGPathElementVTbl*
   end
@@ -24430,6 +25772,8 @@ lib LibWin32
     get_meet_or_slice : Proc(ISVGPreserveAspectRatio*, Int16*, HRESULT)
   end
 
+  ISVGPreserveAspectRatio_GUID = LibC::GUID.new("305104fa-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGPreserveAspectRatio = "305104fa-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGPreserveAspectRatio
     lpVtbl : ISVGPreserveAspectRatioVTbl*
   end
@@ -24444,6 +25788,8 @@ lib LibWin32
     invoke : Proc(ISVGTextElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGTextElement_GUID = LibC::GUID.new("3051051c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTextElement = "3051051c-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTextElement
     lpVtbl : ISVGTextElementVTbl*
   end
@@ -24458,6 +25804,8 @@ lib LibWin32
     invoke : Proc(DispSVGTextElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGTextElement_GUID = LibC::GUID.new("30590037-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGTextElement = "30590037-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGTextElement
     lpVtbl : DispSVGTextElementVTbl*
   end
@@ -24480,6 +25828,8 @@ lib LibWin32
     get_height : Proc(ISVGImageElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGImageElement_GUID = LibC::GUID.new("305104f0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGImageElement = "305104f0-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGImageElement
     lpVtbl : ISVGImageElementVTbl*
   end
@@ -24494,6 +25844,8 @@ lib LibWin32
     invoke : Proc(DispSVGImageElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGImageElement_GUID = LibC::GUID.new("30590027-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGImageElement = "30590027-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGImageElement
     lpVtbl : DispSVGImageElementVTbl*
   end
@@ -24510,6 +25862,8 @@ lib LibWin32
     get_offset : Proc(ISVGStopElement*, ISVGAnimatedNumber*, HRESULT)
   end
 
+  ISVGStopElement_GUID = LibC::GUID.new("3051052b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGStopElement = "3051052b-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGStopElement
     lpVtbl : ISVGStopElementVTbl*
   end
@@ -24524,6 +25878,8 @@ lib LibWin32
     invoke : Proc(DispSVGStopElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGStopElement_GUID = LibC::GUID.new("3059002d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGStopElement = "3059002d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGStopElement
     lpVtbl : DispSVGStopElementVTbl*
   end
@@ -24544,6 +25900,8 @@ lib LibWin32
     get_spread_method : Proc(ISVGGradientElement*, ISVGAnimatedEnumeration*, HRESULT)
   end
 
+  ISVGGradientElement_GUID = LibC::GUID.new("30510528-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGGradientElement = "30510528-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGGradientElement
     lpVtbl : ISVGGradientElementVTbl*
   end
@@ -24558,6 +25916,8 @@ lib LibWin32
     invoke : Proc(DispSVGGradientElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGGradientElement_GUID = LibC::GUID.new("3059002e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGGradientElement = "3059002e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGGradientElement
     lpVtbl : DispSVGGradientElementVTbl*
   end
@@ -24580,6 +25940,8 @@ lib LibWin32
     get_y2 : Proc(ISVGLinearGradientElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGLinearGradientElement_GUID = LibC::GUID.new("30510529-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGLinearGradientElement = "30510529-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGLinearGradientElement
     lpVtbl : ISVGLinearGradientElementVTbl*
   end
@@ -24594,6 +25956,8 @@ lib LibWin32
     invoke : Proc(DispSVGLinearGradientElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGLinearGradientElement_GUID = LibC::GUID.new("3059002a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGLinearGradientElement = "3059002a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGLinearGradientElement
     lpVtbl : DispSVGLinearGradientElementVTbl*
   end
@@ -24618,6 +25982,8 @@ lib LibWin32
     get_fy : Proc(ISVGRadialGradientElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGRadialGradientElement_GUID = LibC::GUID.new("3051052a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGRadialGradientElement = "3051052a-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGRadialGradientElement
     lpVtbl : ISVGRadialGradientElementVTbl*
   end
@@ -24632,6 +25998,8 @@ lib LibWin32
     invoke : Proc(DispSVGRadialGradientElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGRadialGradientElement_GUID = LibC::GUID.new("3059002b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGRadialGradientElement = "3059002b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGRadialGradientElement
     lpVtbl : DispSVGRadialGradientElementVTbl*
   end
@@ -24658,6 +26026,8 @@ lib LibWin32
     get_height : Proc(ISVGMaskElement*, ISVGAnimatedLength*, HRESULT)
   end
 
+  ISVGMaskElement_GUID = LibC::GUID.new("3051052e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGMaskElement = "3051052e-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGMaskElement
     lpVtbl : ISVGMaskElementVTbl*
   end
@@ -24672,6 +26042,8 @@ lib LibWin32
     invoke : Proc(DispSVGMaskElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGMaskElement_GUID = LibC::GUID.new("3059003c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGMaskElement = "3059003c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGMaskElement
     lpVtbl : DispSVGMaskElementVTbl*
   end
@@ -24702,6 +26074,8 @@ lib LibWin32
     set_orient_to_angle : Proc(ISVGMarkerElement*, ISVGAngle, HRESULT)
   end
 
+  ISVGMarkerElement_GUID = LibC::GUID.new("30510525-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGMarkerElement = "30510525-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGMarkerElement
     lpVtbl : ISVGMarkerElementVTbl*
   end
@@ -24716,6 +26090,8 @@ lib LibWin32
     invoke : Proc(DispSVGMarkerElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGMarkerElement_GUID = LibC::GUID.new("30590036-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGMarkerElement = "30590036-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGMarkerElement
     lpVtbl : DispSVGMarkerElementVTbl*
   end
@@ -24735,6 +26111,8 @@ lib LibWin32
     get_new_translate : Proc(ISVGZoomEvent*, ISVGPoint*, HRESULT)
   end
 
+  ISVGZoomEvent_GUID = LibC::GUID.new("3051054e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGZoomEvent = "3051054e-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGZoomEvent
     lpVtbl : ISVGZoomEventVTbl*
   end
@@ -24749,6 +26127,8 @@ lib LibWin32
     invoke : Proc(DispSVGZoomEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGZoomEvent_GUID = LibC::GUID.new("30590031-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGZoomEvent = "30590031-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGZoomEvent
     lpVtbl : DispSVGZoomEventVTbl*
   end
@@ -24765,6 +26145,8 @@ lib LibWin32
     get_target : Proc(ISVGAElement*, ISVGAnimatedString*, HRESULT)
   end
 
+  ISVGAElement_GUID = LibC::GUID.new("3051054b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGAElement = "3051054b-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGAElement
     lpVtbl : ISVGAElementVTbl*
   end
@@ -24779,6 +26161,8 @@ lib LibWin32
     invoke : Proc(DispSVGAElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGAElement_GUID = LibC::GUID.new("30590033-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGAElement = "30590033-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGAElement
     lpVtbl : DispSVGAElementVTbl*
   end
@@ -24795,6 +26179,8 @@ lib LibWin32
     get_view_target : Proc(ISVGViewElement*, ISVGStringList*, HRESULT)
   end
 
+  ISVGViewElement_GUID = LibC::GUID.new("3051054c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGViewElement = "3051054c-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGViewElement
     lpVtbl : ISVGViewElementVTbl*
   end
@@ -24809,6 +26195,8 @@ lib LibWin32
     invoke : Proc(DispSVGViewElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGViewElement_GUID = LibC::GUID.new("30590034-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGViewElement = "30590034-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGViewElement
     lpVtbl : DispSVGViewElementVTbl*
   end
@@ -24824,6 +26212,8 @@ lib LibWin32
     get_code : Proc(IHTMLMediaError*, Int16*, HRESULT)
   end
 
+  IHTMLMediaError_GUID = LibC::GUID.new("30510704-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMediaError = "30510704-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMediaError
     lpVtbl : IHTMLMediaErrorVTbl*
   end
@@ -24841,6 +26231,8 @@ lib LibWin32
     rend : Proc(IHTMLTimeRanges*, Int32, Float32*, HRESULT)
   end
 
+  IHTMLTimeRanges_GUID = LibC::GUID.new("30510705-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTimeRanges = "30510705-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTimeRanges
     lpVtbl : IHTMLTimeRangesVTbl*
   end
@@ -24857,6 +26249,8 @@ lib LibWin32
     end_double : Proc(IHTMLTimeRanges2*, Int32, Float64*, HRESULT)
   end
 
+  IHTMLTimeRanges2_GUID = LibC::GUID.new("3051080b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLTimeRanges2 = "3051080b-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLTimeRanges2
     lpVtbl : IHTMLTimeRanges2VTbl*
   end
@@ -24908,6 +26302,8 @@ lib LibWin32
     get_autobuffer : Proc(IHTMLMediaElement*, Int16*, HRESULT)
   end
 
+  IHTMLMediaElement_GUID = LibC::GUID.new("30510706-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMediaElement = "30510706-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMediaElement
     lpVtbl : IHTMLMediaElementVTbl*
   end
@@ -24932,6 +26328,8 @@ lib LibWin32
     get_volume_double : Proc(IHTMLMediaElement2*, Float64*, HRESULT)
   end
 
+  IHTMLMediaElement2_GUID = LibC::GUID.new("30510809-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMediaElement2 = "30510809-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMediaElement2
     lpVtbl : IHTMLMediaElement2VTbl*
   end
@@ -24950,6 +26348,8 @@ lib LibWin32
     get_ms_play_to_primary : Proc(IHTMLMSMediaElement*, Int16*, HRESULT)
   end
 
+  IHTMLMSMediaElement_GUID = LibC::GUID.new("30510792-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLMSMediaElement = "30510792-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLMSMediaElement
     lpVtbl : IHTMLMSMediaElementVTbl*
   end
@@ -24970,6 +26370,8 @@ lib LibWin32
     get_media : Proc(IHTMLSourceElement*, UInt8**, HRESULT)
   end
 
+  IHTMLSourceElement_GUID = LibC::GUID.new("30510707-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLSourceElement = "30510707-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLSourceElement
     lpVtbl : IHTMLSourceElementVTbl*
   end
@@ -24984,6 +26386,8 @@ lib LibWin32
     invoke : Proc(IHTMLAudioElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IHTMLAudioElement_GUID = LibC::GUID.new("30510708-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAudioElement = "30510708-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAudioElement
     lpVtbl : IHTMLAudioElementVTbl*
   end
@@ -25006,6 +26410,8 @@ lib LibWin32
     get_poster : Proc(IHTMLVideoElement*, UInt8**, HRESULT)
   end
 
+  IHTMLVideoElement_GUID = LibC::GUID.new("30510709-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLVideoElement = "30510709-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLVideoElement
     lpVtbl : IHTMLVideoElementVTbl*
   end
@@ -25021,6 +26427,8 @@ lib LibWin32
     create : Proc(IHTMLAudioElementFactory*, VARIANT, IHTMLAudioElement*, HRESULT)
   end
 
+  IHTMLAudioElementFactory_GUID = LibC::GUID.new("305107eb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAudioElementFactory = "305107eb-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAudioElementFactory
     lpVtbl : IHTMLAudioElementFactoryVTbl*
   end
@@ -25035,6 +26443,8 @@ lib LibWin32
     invoke : Proc(DispHTMLMediaError*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLMediaError_GUID = LibC::GUID.new("30590086-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLMediaError = "30590086-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLMediaError
     lpVtbl : DispHTMLMediaErrorVTbl*
   end
@@ -25049,6 +26459,8 @@ lib LibWin32
     invoke : Proc(DispHTMLTimeRanges*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLTimeRanges_GUID = LibC::GUID.new("30590087-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLTimeRanges = "30590087-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLTimeRanges
     lpVtbl : DispHTMLTimeRangesVTbl*
   end
@@ -25063,6 +26475,8 @@ lib LibWin32
     invoke : Proc(DispHTMLMediaElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLMediaElement_GUID = LibC::GUID.new("30590088-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLMediaElement = "30590088-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLMediaElement
     lpVtbl : DispHTMLMediaElementVTbl*
   end
@@ -25077,6 +26491,8 @@ lib LibWin32
     invoke : Proc(DispHTMLSourceElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLSourceElement_GUID = LibC::GUID.new("30590089-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLSourceElement = "30590089-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLSourceElement
     lpVtbl : DispHTMLSourceElementVTbl*
   end
@@ -25091,6 +26507,8 @@ lib LibWin32
     invoke : Proc(DispHTMLAudioElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLAudioElement_GUID = LibC::GUID.new("3059008a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLAudioElement = "3059008a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLAudioElement
     lpVtbl : DispHTMLAudioElementVTbl*
   end
@@ -25105,6 +26523,8 @@ lib LibWin32
     invoke : Proc(DispHTMLVideoElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLVideoElement_GUID = LibC::GUID.new("3059008b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLVideoElement = "3059008b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLVideoElement
     lpVtbl : DispHTMLVideoElementVTbl*
   end
@@ -25119,6 +26539,8 @@ lib LibWin32
     invoke : Proc(ISVGSwitchElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGSwitchElement_GUID = LibC::GUID.new("305104f1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGSwitchElement = "305104f1-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGSwitchElement
     lpVtbl : ISVGSwitchElementVTbl*
   end
@@ -25133,6 +26555,8 @@ lib LibWin32
     invoke : Proc(DispSVGSwitchElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGSwitchElement_GUID = LibC::GUID.new("30590030-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGSwitchElement = "30590030-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGSwitchElement
     lpVtbl : DispSVGSwitchElementVTbl*
   end
@@ -25147,6 +26571,8 @@ lib LibWin32
     invoke : Proc(ISVGDescElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGDescElement_GUID = LibC::GUID.new("305104ea-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGDescElement = "305104ea-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGDescElement
     lpVtbl : ISVGDescElementVTbl*
   end
@@ -25161,6 +26587,8 @@ lib LibWin32
     invoke : Proc(DispSVGDescElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGDescElement_GUID = LibC::GUID.new("30590005-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGDescElement = "30590005-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGDescElement
     lpVtbl : DispSVGDescElementVTbl*
   end
@@ -25175,6 +26603,8 @@ lib LibWin32
     invoke : Proc(ISVGTitleElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGTitleElement_GUID = LibC::GUID.new("305104eb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTitleElement = "305104eb-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTitleElement
     lpVtbl : ISVGTitleElementVTbl*
   end
@@ -25189,6 +26619,8 @@ lib LibWin32
     invoke : Proc(DispSVGTitleElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGTitleElement_GUID = LibC::GUID.new("30590006-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGTitleElement = "30590006-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGTitleElement
     lpVtbl : DispSVGTitleElementVTbl*
   end
@@ -25203,6 +26635,8 @@ lib LibWin32
     invoke : Proc(ISVGMetadataElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGMetadataElement_GUID = LibC::GUID.new("30510560-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGMetadataElement = "30510560-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGMetadataElement
     lpVtbl : ISVGMetadataElementVTbl*
   end
@@ -25217,6 +26651,8 @@ lib LibWin32
     invoke : Proc(DispSVGMetadataElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGMetadataElement_GUID = LibC::GUID.new("3059002f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGMetadataElement = "3059002f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGMetadataElement
     lpVtbl : DispSVGMetadataElementVTbl*
   end
@@ -25233,6 +26669,8 @@ lib LibWin32
     item : Proc(ISVGElementInstanceList*, Int32, ISVGElementInstance*, HRESULT)
   end
 
+  ISVGElementInstanceList_GUID = LibC::GUID.new("305104ef-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGElementInstanceList = "305104ef-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGElementInstanceList
     lpVtbl : ISVGElementInstanceListVTbl*
   end
@@ -25247,6 +26685,8 @@ lib LibWin32
     invoke : Proc(DispSVGElementInstance*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGElementInstance_GUID = LibC::GUID.new("30590007-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGElementInstance = "30590007-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGElementInstance
     lpVtbl : DispSVGElementInstanceVTbl*
   end
@@ -25261,6 +26701,8 @@ lib LibWin32
     invoke : Proc(DispSVGElementInstanceList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGElementInstanceList_GUID = LibC::GUID.new("30590008-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGElementInstanceList = "30590008-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGElementInstanceList
     lpVtbl : DispSVGElementInstanceListVTbl*
   end
@@ -25278,6 +26720,8 @@ lib LibWin32
     get_message : Proc(IDOMException*, UInt8**, HRESULT)
   end
 
+  IDOMException_GUID = LibC::GUID.new("3051072b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMException = "3051072b-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMException
     lpVtbl : IDOMExceptionVTbl*
   end
@@ -25292,6 +26736,8 @@ lib LibWin32
     invoke : Proc(DispDOMException*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMException_GUID = LibC::GUID.new("30590094-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMException = "30590094-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMException
     lpVtbl : DispDOMExceptionVTbl*
   end
@@ -25309,6 +26755,8 @@ lib LibWin32
     get_message : Proc(IRangeException*, UInt8**, HRESULT)
   end
 
+  IRangeException_GUID = LibC::GUID.new("3051072d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IRangeException = "3051072d-98b5-11cf-bb82-00aa00bdce0b"
   struct IRangeException
     lpVtbl : IRangeExceptionVTbl*
   end
@@ -25323,6 +26771,8 @@ lib LibWin32
     invoke : Proc(DispRangeException*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispRangeException_GUID = LibC::GUID.new("30590095-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispRangeException = "30590095-98b5-11cf-bb82-00aa00bdce0b"
   struct DispRangeException
     lpVtbl : DispRangeExceptionVTbl*
   end
@@ -25340,6 +26790,8 @@ lib LibWin32
     get_message : Proc(ISVGException*, UInt8**, HRESULT)
   end
 
+  ISVGException_GUID = LibC::GUID.new("3051072f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGException = "3051072f-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGException
     lpVtbl : ISVGExceptionVTbl*
   end
@@ -25354,6 +26806,8 @@ lib LibWin32
     invoke : Proc(DispSVGException*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGException_GUID = LibC::GUID.new("30590096-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGException = "30590096-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGException
     lpVtbl : DispSVGExceptionVTbl*
   end
@@ -25371,6 +26825,8 @@ lib LibWin32
     get_message : Proc(IEventException*, UInt8**, HRESULT)
   end
 
+  IEventException_GUID = LibC::GUID.new("3051073a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IEventException = "3051073a-98b5-11cf-bb82-00aa00bdce0b"
   struct IEventException
     lpVtbl : IEventExceptionVTbl*
   end
@@ -25385,6 +26841,8 @@ lib LibWin32
     invoke : Proc(DispEventException*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispEventException_GUID = LibC::GUID.new("30590099-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispEventException = "30590099-98b5-11cf-bb82-00aa00bdce0b"
   struct DispEventException
     lpVtbl : DispEventExceptionVTbl*
   end
@@ -25401,6 +26859,8 @@ lib LibWin32
     get_type : Proc(ISVGScriptElement*, UInt8**, HRESULT)
   end
 
+  ISVGScriptElement_GUID = LibC::GUID.new("3051054d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGScriptElement = "3051054d-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGScriptElement
     lpVtbl : ISVGScriptElementVTbl*
   end
@@ -25415,6 +26875,8 @@ lib LibWin32
     invoke : Proc(DispSVGScriptElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGScriptElement_GUID = LibC::GUID.new("30590039-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGScriptElement = "30590039-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGScriptElement
     lpVtbl : DispSVGScriptElementVTbl*
   end
@@ -25433,6 +26895,8 @@ lib LibWin32
     get_media : Proc(ISVGStyleElement*, UInt8**, HRESULT)
   end
 
+  ISVGStyleElement_GUID = LibC::GUID.new("305104f3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGStyleElement = "305104f3-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGStyleElement
     lpVtbl : ISVGStyleElementVTbl*
   end
@@ -25447,6 +26911,8 @@ lib LibWin32
     invoke : Proc(DispSVGStyleElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGStyleElement_GUID = LibC::GUID.new("30590029-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGStyleElement = "30590029-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGStyleElement
     lpVtbl : DispSVGStyleElementVTbl*
   end
@@ -25474,6 +26940,8 @@ lib LibWin32
     select_sub_string : Proc(ISVGTextContentElement*, Int32, Int32, HRESULT)
   end
 
+  ISVGTextContentElement_GUID = LibC::GUID.new("3051051a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTextContentElement = "3051051a-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTextContentElement
     lpVtbl : ISVGTextContentElementVTbl*
   end
@@ -25488,6 +26956,8 @@ lib LibWin32
     invoke : Proc(DispSVGTextContentElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGTextContentElement_GUID = LibC::GUID.new("30590035-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGTextContentElement = "30590035-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGTextContentElement
     lpVtbl : DispSVGTextContentElementVTbl*
   end
@@ -25512,6 +26982,8 @@ lib LibWin32
     get_rotate : Proc(ISVGTextPositioningElement*, ISVGAnimatedNumberList*, HRESULT)
   end
 
+  ISVGTextPositioningElement_GUID = LibC::GUID.new("3051051b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTextPositioningElement = "3051051b-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTextPositioningElement
     lpVtbl : ISVGTextPositioningElementVTbl*
   end
@@ -25526,6 +26998,8 @@ lib LibWin32
     invoke : Proc(DispSVGTextPositioningElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGTextPositioningElement_GUID = LibC::GUID.new("30590038-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGTextPositioningElement = "30590038-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGTextPositioningElement
     lpVtbl : DispSVGTextPositioningElementVTbl*
   end
@@ -25540,6 +27014,8 @@ lib LibWin32
     invoke : Proc(DispDOMDocumentType*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMDocumentType_GUID = LibC::GUID.new("30590098-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMDocumentType = "30590098-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMDocumentType
     lpVtbl : DispDOMDocumentTypeVTbl*
   end
@@ -25554,6 +27030,8 @@ lib LibWin32
     invoke : Proc(DispNodeIterator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispNodeIterator_GUID = LibC::GUID.new("3059009c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispNodeIterator = "3059009c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispNodeIterator
     lpVtbl : DispNodeIteratorVTbl*
   end
@@ -25568,6 +27046,8 @@ lib LibWin32
     invoke : Proc(DispTreeWalker*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispTreeWalker_GUID = LibC::GUID.new("3059009d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispTreeWalker = "3059009d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispTreeWalker
     lpVtbl : DispTreeWalkerVTbl*
   end
@@ -25582,6 +27062,8 @@ lib LibWin32
     invoke : Proc(DispDOMProcessingInstruction*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMProcessingInstruction_GUID = LibC::GUID.new("3059009b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMProcessingInstruction = "3059009b-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMProcessingInstruction
     lpVtbl : DispDOMProcessingInstructionVTbl*
   end
@@ -25600,6 +27082,8 @@ lib LibWin32
     to_json : Proc(IHTMLPerformanceNavigation*, VARIANT*, HRESULT)
   end
 
+  IHTMLPerformanceNavigation_GUID = LibC::GUID.new("30510750-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPerformanceNavigation = "30510750-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPerformanceNavigation
     lpVtbl : IHTMLPerformanceNavigationVTbl*
   end
@@ -25637,6 +27121,8 @@ lib LibWin32
     to_json : Proc(IHTMLPerformanceTiming*, VARIANT*, HRESULT)
   end
 
+  IHTMLPerformanceTiming_GUID = LibC::GUID.new("30510752-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPerformanceTiming = "30510752-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPerformanceTiming
     lpVtbl : IHTMLPerformanceTimingVTbl*
   end
@@ -25651,6 +27137,8 @@ lib LibWin32
     invoke : Proc(DispHTMLPerformance*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLPerformance_GUID = LibC::GUID.new("3059009f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLPerformance = "3059009f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLPerformance
     lpVtbl : DispHTMLPerformanceVTbl*
   end
@@ -25665,6 +27153,8 @@ lib LibWin32
     invoke : Proc(DispHTMLPerformanceNavigation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLPerformanceNavigation_GUID = LibC::GUID.new("305900a0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLPerformanceNavigation = "305900a0-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLPerformanceNavigation
     lpVtbl : DispHTMLPerformanceNavigationVTbl*
   end
@@ -25679,6 +27169,8 @@ lib LibWin32
     invoke : Proc(DispHTMLPerformanceTiming*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLPerformanceTiming_GUID = LibC::GUID.new("305900a1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLPerformanceTiming = "305900a1-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLPerformanceTiming
     lpVtbl : DispHTMLPerformanceTimingVTbl*
   end
@@ -25693,6 +27185,8 @@ lib LibWin32
     invoke : Proc(ISVGTSpanElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISVGTSpanElement_GUID = LibC::GUID.new("3051051d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTSpanElement = "3051051d-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTSpanElement
     lpVtbl : ISVGTSpanElementVTbl*
   end
@@ -25707,6 +27201,8 @@ lib LibWin32
     invoke : Proc(DispSVGTSpanElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGTSpanElement_GUID = LibC::GUID.new("3059003a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGTSpanElement = "3059003a-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGTSpanElement
     lpVtbl : DispSVGTSpanElementVTbl*
   end
@@ -25776,6 +27272,8 @@ lib LibWin32
     update_page_status : Proc(ITemplatePrinter*, Int32*, HRESULT)
   end
 
+  ITemplatePrinter_GUID = LibC::GUID.new("3050f6b4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITemplatePrinter = "3050f6b4-98b5-11cf-bb82-00aa00bdce0b"
   struct ITemplatePrinter
     lpVtbl : ITemplatePrinterVTbl*
   end
@@ -25854,6 +27352,8 @@ lib LibWin32
     device_supports : Proc(ITemplatePrinter2*, UInt8*, VARIANT*, HRESULT)
   end
 
+  ITemplatePrinter2_GUID = LibC::GUID.new("3050f83f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITemplatePrinter2 = "3050f83f-98b5-11cf-bb82-00aa00bdce0b"
   struct ITemplatePrinter2
     lpVtbl : ITemplatePrinter2VTbl*
   end
@@ -25942,6 +27442,8 @@ lib LibWin32
     get_page_margin_left_important : Proc(ITemplatePrinter3*, IDispatch, Int16*, HRESULT)
   end
 
+  ITemplatePrinter3_GUID = LibC::GUID.new("305104a3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITemplatePrinter3 = "305104a3-98b5-11cf-bb82-00aa00bdce0b"
   struct ITemplatePrinter3
     lpVtbl : ITemplatePrinter3VTbl*
   end
@@ -25962,6 +27464,8 @@ lib LibWin32
     end_print : Proc(IPrintManagerTemplatePrinter*, HRESULT)
   end
 
+  IPrintManagerTemplatePrinter_GUID = LibC::GUID.new("f633be14-9eff-4c4d-929e-05717b21b3e6")
+  CLSID_IPrintManagerTemplatePrinter = "f633be14-9eff-4c4d-929e-05717b21b3e6"
   struct IPrintManagerTemplatePrinter
     lpVtbl : IPrintManagerTemplatePrinterVTbl*
   end
@@ -25985,6 +27489,8 @@ lib LibWin32
     get_percent_scale : Proc(IPrintManagerTemplatePrinter2*, Float32*, HRESULT)
   end
 
+  IPrintManagerTemplatePrinter2_GUID = LibC::GUID.new("c6403497-7493-4f09-8016-54b03e9bda69")
+  CLSID_IPrintManagerTemplatePrinter2 = "c6403497-7493-4f09-8016-54b03e9bda69"
   struct IPrintManagerTemplatePrinter2
     lpVtbl : IPrintManagerTemplatePrinter2VTbl*
   end
@@ -25999,6 +27505,8 @@ lib LibWin32
     invoke : Proc(DispCPrintManagerTemplatePrinter*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispCPrintManagerTemplatePrinter_GUID = LibC::GUID.new("305900e9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispCPrintManagerTemplatePrinter = "305900e9-98b5-11cf-bb82-00aa00bdce0b"
   struct DispCPrintManagerTemplatePrinter
     lpVtbl : DispCPrintManagerTemplatePrinterVTbl*
   end
@@ -26019,6 +27527,8 @@ lib LibWin32
     get_spacing : Proc(ISVGTextPathElement*, ISVGAnimatedEnumeration*, HRESULT)
   end
 
+  ISVGTextPathElement_GUID = LibC::GUID.new("3051051f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISVGTextPathElement = "3051051f-98b5-11cf-bb82-00aa00bdce0b"
   struct ISVGTextPathElement
     lpVtbl : ISVGTextPathElementVTbl*
   end
@@ -26033,6 +27543,8 @@ lib LibWin32
     invoke : Proc(DispSVGTextPathElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispSVGTextPathElement_GUID = LibC::GUID.new("3059003d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispSVGTextPathElement = "3059003d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispSVGTextPathElement
     lpVtbl : DispSVGTextPathElementVTbl*
   end
@@ -26048,6 +27560,8 @@ lib LibWin32
     serialize_to_string : Proc(IDOMXmlSerializer*, IHTMLDOMNode, UInt8**, HRESULT)
   end
 
+  IDOMXmlSerializer_GUID = LibC::GUID.new("3051077d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMXmlSerializer = "3051077d-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMXmlSerializer
     lpVtbl : IDOMXmlSerializerVTbl*
   end
@@ -26063,6 +27577,8 @@ lib LibWin32
     parse_from_string : Proc(IDOMParser*, UInt8*, UInt8*, IHTMLDocument2*, HRESULT)
   end
 
+  IDOMParser_GUID = LibC::GUID.new("30510781-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMParser = "30510781-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMParser
     lpVtbl : IDOMParserVTbl*
   end
@@ -26077,6 +27593,8 @@ lib LibWin32
     invoke : Proc(DispXMLSerializer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispXMLSerializer_GUID = LibC::GUID.new("305900ad-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispXMLSerializer = "305900ad-98b5-11cf-bb82-00aa00bdce0b"
   struct DispXMLSerializer
     lpVtbl : DispXMLSerializerVTbl*
   end
@@ -26091,6 +27609,8 @@ lib LibWin32
     invoke : Proc(DispDOMParser*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMParser_GUID = LibC::GUID.new("305900ae-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMParser = "305900ae-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMParser
     lpVtbl : DispDOMParserVTbl*
   end
@@ -26106,6 +27626,8 @@ lib LibWin32
     create : Proc(IDOMXmlSerializerFactory*, IDOMXmlSerializer*, HRESULT)
   end
 
+  IDOMXmlSerializerFactory_GUID = LibC::GUID.new("3051077f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMXmlSerializerFactory = "3051077f-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMXmlSerializerFactory
     lpVtbl : IDOMXmlSerializerFactoryVTbl*
   end
@@ -26121,6 +27643,8 @@ lib LibWin32
     create : Proc(IDOMParserFactory*, IDOMParser*, HRESULT)
   end
 
+  IDOMParserFactory_GUID = LibC::GUID.new("30510783-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMParserFactory = "30510783-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMParserFactory
     lpVtbl : IDOMParserFactoryVTbl*
   end
@@ -26135,6 +27659,8 @@ lib LibWin32
     invoke : Proc(DispHTMLSemanticElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLSemanticElement_GUID = LibC::GUID.new("305900ba-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLSemanticElement = "305900ba-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLSemanticElement
     lpVtbl : DispHTMLSemanticElementVTbl*
   end
@@ -26155,6 +27681,8 @@ lib LibWin32
     get_form : Proc(IHTMLProgressElement*, IHTMLFormElement*, HRESULT)
   end
 
+  IHTMLProgressElement_GUID = LibC::GUID.new("3050f2d6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLProgressElement = "3050f2d6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLProgressElement
     lpVtbl : IHTMLProgressElementVTbl*
   end
@@ -26169,6 +27697,8 @@ lib LibWin32
     invoke : Proc(DispHTMLProgressElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLProgressElement_GUID = LibC::GUID.new("305900af-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLProgressElement = "305900af-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLProgressElement
     lpVtbl : DispHTMLProgressElementVTbl*
   end
@@ -26186,6 +27716,8 @@ lib LibWin32
     init_ms_transition_event : Proc(IDOMMSTransitionEvent*, UInt8*, Int16, Int16, UInt8*, Float32, HRESULT)
   end
 
+  IDOMMSTransitionEvent_GUID = LibC::GUID.new("305107b5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMMSTransitionEvent = "305107b5-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMMSTransitionEvent
     lpVtbl : IDOMMSTransitionEventVTbl*
   end
@@ -26200,6 +27732,8 @@ lib LibWin32
     invoke : Proc(DispDOMMSTransitionEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMMSTransitionEvent_GUID = LibC::GUID.new("305900bb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMMSTransitionEvent = "305900bb-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMMSTransitionEvent
     lpVtbl : DispDOMMSTransitionEventVTbl*
   end
@@ -26217,6 +27751,8 @@ lib LibWin32
     init_ms_animation_event : Proc(IDOMMSAnimationEvent*, UInt8*, Int16, Int16, UInt8*, Float32, HRESULT)
   end
 
+  IDOMMSAnimationEvent_GUID = LibC::GUID.new("305107b7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMMSAnimationEvent = "305107b7-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMMSAnimationEvent
     lpVtbl : IDOMMSAnimationEventVTbl*
   end
@@ -26231,6 +27767,8 @@ lib LibWin32
     invoke : Proc(DispDOMMSAnimationEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMMSAnimationEvent_GUID = LibC::GUID.new("305900bc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMMSAnimationEvent = "305900bc-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMMSAnimationEvent
     lpVtbl : DispDOMMSAnimationEventVTbl*
   end
@@ -26252,6 +27790,8 @@ lib LibWin32
     get_speed : Proc(IWebGeocoordinates*, VARIANT*, HRESULT)
   end
 
+  IWebGeocoordinates_GUID = LibC::GUID.new("305107c7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IWebGeocoordinates = "305107c7-98b5-11cf-bb82-00aa00bdce0b"
   struct IWebGeocoordinates
     lpVtbl : IWebGeocoordinatesVTbl*
   end
@@ -26268,6 +27808,8 @@ lib LibWin32
     get_message : Proc(IWebGeopositionError*, UInt8**, HRESULT)
   end
 
+  IWebGeopositionError_GUID = LibC::GUID.new("305107c9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IWebGeopositionError = "305107c9-98b5-11cf-bb82-00aa00bdce0b"
   struct IWebGeopositionError
     lpVtbl : IWebGeopositionErrorVTbl*
   end
@@ -26284,6 +27826,8 @@ lib LibWin32
     get_timestamp : Proc(IWebGeoposition*, UInt64*, HRESULT)
   end
 
+  IWebGeoposition_GUID = LibC::GUID.new("305107cd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IWebGeoposition = "305107cd-98b5-11cf-bb82-00aa00bdce0b"
   struct IWebGeoposition
     lpVtbl : IWebGeopositionVTbl*
   end
@@ -26298,6 +27842,8 @@ lib LibWin32
     invoke : Proc(DispWebGeolocation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispWebGeolocation_GUID = LibC::GUID.new("305900bd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispWebGeolocation = "305900bd-98b5-11cf-bb82-00aa00bdce0b"
   struct DispWebGeolocation
     lpVtbl : DispWebGeolocationVTbl*
   end
@@ -26312,6 +27858,8 @@ lib LibWin32
     invoke : Proc(DispWebGeocoordinates*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispWebGeocoordinates_GUID = LibC::GUID.new("305900be-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispWebGeocoordinates = "305900be-98b5-11cf-bb82-00aa00bdce0b"
   struct DispWebGeocoordinates
     lpVtbl : DispWebGeocoordinatesVTbl*
   end
@@ -26326,6 +27874,8 @@ lib LibWin32
     invoke : Proc(DispWebGeopositionError*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispWebGeopositionError_GUID = LibC::GUID.new("305900bf-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispWebGeopositionError = "305900bf-98b5-11cf-bb82-00aa00bdce0b"
   struct DispWebGeopositionError
     lpVtbl : DispWebGeopositionErrorVTbl*
   end
@@ -26340,6 +27890,8 @@ lib LibWin32
     invoke : Proc(DispWebGeoposition*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispWebGeoposition_GUID = LibC::GUID.new("305900c1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispWebGeoposition = "305900c1-98b5-11cf-bb82-00aa00bdce0b"
   struct DispWebGeoposition
     lpVtbl : DispWebGeopositionVTbl*
   end
@@ -26375,6 +27927,8 @@ lib LibWin32
     clear_component_request : Proc(IClientCaps*, HRESULT)
   end
 
+  IClientCaps_GUID = LibC::GUID.new("7e8bc44d-aeff-11d1-89c2-00c04fb6bfc4")
+  CLSID_IClientCaps = "7e8bc44d-aeff-11d1-89c2-00c04fb6bfc4"
   struct IClientCaps
     lpVtbl : IClientCapsVTbl*
   end
@@ -26392,6 +27946,8 @@ lib LibWin32
     init_ms_manipulation_event : Proc(IDOMMSManipulationEvent*, UInt8*, Int16, Int16, IHTMLWindow2, Int32, Int32, Int32, HRESULT)
   end
 
+  IDOMMSManipulationEvent_GUID = LibC::GUID.new("30510816-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMMSManipulationEvent = "30510816-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMMSManipulationEvent
     lpVtbl : IDOMMSManipulationEventVTbl*
   end
@@ -26406,6 +27962,8 @@ lib LibWin32
     invoke : Proc(DispDOMMSManipulationEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMMSManipulationEvent_GUID = LibC::GUID.new("305900e1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMMSManipulationEvent = "305900e1-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMMSManipulationEvent
     lpVtbl : DispDOMMSManipulationEventVTbl*
   end
@@ -26422,6 +27980,8 @@ lib LibWin32
     init_close_event : Proc(IDOMCloseEvent*, UInt8*, Int16, Int16, Int16, Int32, UInt8*, HRESULT)
   end
 
+  IDOMCloseEvent_GUID = LibC::GUID.new("305107ff-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMCloseEvent = "305107ff-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMCloseEvent
     lpVtbl : IDOMCloseEventVTbl*
   end
@@ -26436,6 +27996,8 @@ lib LibWin32
     invoke : Proc(DispDOMCloseEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispDOMCloseEvent_GUID = LibC::GUID.new("305900dc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispDOMCloseEvent = "305900dc-98b5-11cf-bb82-00aa00bdce0b"
   struct DispDOMCloseEvent
     lpVtbl : DispDOMCloseEventVTbl*
   end
@@ -26450,6 +28012,8 @@ lib LibWin32
     invoke : Proc(DispApplicationCache*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispApplicationCache_GUID = LibC::GUID.new("305900e4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispApplicationCache = "305900e4-98b5-11cf-bb82-00aa00bdce0b"
   struct DispApplicationCache
     lpVtbl : DispApplicationCacheVTbl*
   end
@@ -26462,6 +28026,8 @@ lib LibWin32
     fire_on_filter_change_event : Proc(ICSSFilterSite*, HRESULT)
   end
 
+  ICSSFilterSite_GUID = LibC::GUID.new("3050f3ed-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICSSFilterSite = "3050f3ed-98b5-11cf-bb82-00aa00bdce0b"
   struct ICSSFilterSite
     lpVtbl : ICSSFilterSiteVTbl*
   end
@@ -26493,6 +28059,8 @@ lib LibWin32
     find_text : Proc(IMarkupPointer*, LibC::LPWSTR, UInt32, IMarkupPointer, IMarkupPointer, HRESULT)
   end
 
+  IMarkupPointer_GUID = LibC::GUID.new("3050f49f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IMarkupPointer = "3050f49f-98b5-11cf-bb82-00aa00bdce0b"
   struct IMarkupPointer
     lpVtbl : IMarkupPointerVTbl*
   end
@@ -26504,6 +28072,8 @@ lib LibWin32
     owning_doc : Proc(IMarkupContainer*, IHTMLDocument2*, HRESULT)
   end
 
+  IMarkupContainer_GUID = LibC::GUID.new("3050f5f9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IMarkupContainer = "3050f5f9-98b5-11cf-bb82-00aa00bdce0b"
   struct IMarkupContainer
     lpVtbl : IMarkupContainerVTbl*
   end
@@ -26521,6 +28091,8 @@ lib LibWin32
     get_master_element : Proc(IMarkupContainer2*, IHTMLElement*, HRESULT)
   end
 
+  IMarkupContainer2_GUID = LibC::GUID.new("3050f648-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IMarkupContainer2 = "3050f648-98b5-11cf-bb82-00aa00bdce0b"
   struct IMarkupContainer2
     lpVtbl : IMarkupContainer2VTbl*
   end
@@ -26532,6 +28104,8 @@ lib LibWin32
     get_next_change : Proc(IHTMLChangeLog*, UInt8*, Int32, Int32*, HRESULT)
   end
 
+  IHTMLChangeLog_GUID = LibC::GUID.new("3050f649-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLChangeLog = "3050f649-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLChangeLog
     lpVtbl : IHTMLChangeLogVTbl*
   end
@@ -26543,6 +28117,8 @@ lib LibWin32
     notify : Proc(IHTMLChangeSink*, HRESULT)
   end
 
+  IHTMLChangeSink_GUID = LibC::GUID.new("3050f64a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLChangeSink = "3050f64a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLChangeSink
     lpVtbl : IHTMLChangeSinkVTbl*
   end
@@ -26556,6 +28132,8 @@ lib LibWin32
     is_empty : Proc(ISegmentList*, LibC::BOOL*, HRESULT)
   end
 
+  ISegmentList_GUID = LibC::GUID.new("3050f605-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISegmentList = "3050f605-98b5-11cf-bb82-00aa00bdce0b"
   struct ISegmentList
     lpVtbl : ISegmentListVTbl*
   end
@@ -26570,6 +28148,8 @@ lib LibWin32
     advance : Proc(ISegmentListIterator*, HRESULT)
   end
 
+  ISegmentListIterator_GUID = LibC::GUID.new("3050f692-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISegmentListIterator = "3050f692-98b5-11cf-bb82-00aa00bdce0b"
   struct ISegmentListIterator
     lpVtbl : ISegmentListIteratorVTbl*
   end
@@ -26592,6 +28172,8 @@ lib LibWin32
     set_caret_direction : Proc(IHTMLCaret*, CARET_DIRECTION, HRESULT)
   end
 
+  IHTMLCaret_GUID = LibC::GUID.new("3050f604-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLCaret = "3050f604-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLCaret
     lpVtbl : IHTMLCaretVTbl*
   end
@@ -26603,6 +28185,8 @@ lib LibWin32
     get_pointers : Proc(ISegment*, IMarkupPointer, IMarkupPointer, HRESULT)
   end
 
+  ISegment_GUID = LibC::GUID.new("3050f683-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISegment = "3050f683-98b5-11cf-bb82-00aa00bdce0b"
   struct ISegment
     lpVtbl : ISegmentVTbl*
   end
@@ -26617,6 +28201,8 @@ lib LibWin32
     is_primary : Proc(IElementSegment*, LibC::BOOL*, HRESULT)
   end
 
+  IElementSegment_GUID = LibC::GUID.new("3050f68f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementSegment = "3050f68f-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementSegment
     lpVtbl : IElementSegmentVTbl*
   end
@@ -26628,6 +28214,8 @@ lib LibWin32
     get_pointers : Proc(IHighlightSegment*, IMarkupPointer, IMarkupPointer, HRESULT)
   end
 
+  IHighlightSegment_GUID = LibC::GUID.new("3050f690-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHighlightSegment = "3050f690-98b5-11cf-bb82-00aa00bdce0b"
   struct IHighlightSegment
     lpVtbl : IHighlightSegmentVTbl*
   end
@@ -26641,6 +28229,8 @@ lib LibWin32
     remove_segment : Proc(IHighlightRenderingServices*, IHighlightSegment, HRESULT)
   end
 
+  IHighlightRenderingServices_GUID = LibC::GUID.new("3050f606-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHighlightRenderingServices = "3050f606-98b5-11cf-bb82-00aa00bdce0b"
   struct IHighlightRenderingServices
     lpVtbl : IHighlightRenderingServicesVTbl*
   end
@@ -26656,6 +28246,8 @@ lib LibWin32
     get_line_direction : Proc(ILineInfo*, Int32*, HRESULT)
   end
 
+  ILineInfo_GUID = LibC::GUID.new("3050f7e2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ILineInfo = "3050f7e2-98b5-11cf-bb82-00aa00bdce0b"
   struct ILineInfo
     lpVtbl : ILineInfoVTbl*
   end
@@ -26685,6 +28277,8 @@ lib LibWin32
     query_breaks : Proc(IDisplayPointer*, UInt32*, HRESULT)
   end
 
+  IDisplayPointer_GUID = LibC::GUID.new("3050f69e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDisplayPointer = "3050f69e-98b5-11cf-bb82-00aa00bdce0b"
   struct IDisplayPointer
     lpVtbl : IDisplayPointerVTbl*
   end
@@ -26702,6 +28296,8 @@ lib LibWin32
     has_flow_layout : Proc(IDisplayServices*, IHTMLElement, LibC::BOOL*, HRESULT)
   end
 
+  IDisplayServices_GUID = LibC::GUID.new("3050f69d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDisplayServices = "3050f69d-98b5-11cf-bb82-00aa00bdce0b"
   struct IDisplayServices
     lpVtbl : IDisplayServicesVTbl*
   end
@@ -26720,6 +28316,8 @@ lib LibWin32
     get_block_formats : Proc(IHtmlDlgSafeHelper*, IDispatch*, HRESULT)
   end
 
+  IHtmlDlgSafeHelper_GUID = LibC::GUID.new("3050f81a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHtmlDlgSafeHelper = "3050f81a-98b5-11cf-bb82-00aa00bdce0b"
   struct IHtmlDlgSafeHelper
     lpVtbl : IHtmlDlgSafeHelperVTbl*
   end
@@ -26737,6 +28335,8 @@ lib LibWin32
     item : Proc(IBlockFormats*, VARIANT*, UInt8**, HRESULT)
   end
 
+  IBlockFormats_GUID = LibC::GUID.new("3050f830-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IBlockFormats = "3050f830-98b5-11cf-bb82-00aa00bdce0b"
   struct IBlockFormats
     lpVtbl : IBlockFormatsVTbl*
   end
@@ -26754,6 +28354,8 @@ lib LibWin32
     item : Proc(IFontNames*, VARIANT*, UInt8**, HRESULT)
   end
 
+  IFontNames_GUID = LibC::GUID.new("3050f839-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IFontNames = "3050f839-98b5-11cf-bb82-00aa00bdce0b"
   struct IFontNames
     lpVtbl : IFontNamesVTbl*
   end
@@ -26766,6 +28368,8 @@ lib LibWin32
     on_ambient_property_change : Proc(ICSSFilter*, Int32, HRESULT)
   end
 
+  ICSSFilter_GUID = LibC::GUID.new("3050f3ec-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICSSFilter = "3050f3ec-98b5-11cf-bb82-00aa00bdce0b"
   struct ICSSFilter
     lpVtbl : ICSSFilterVTbl*
   end
@@ -26777,6 +28381,8 @@ lib LibWin32
     validate_secure_url : Proc(ISecureUrlHost*, LibC::BOOL*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  ISecureUrlHost_GUID = LibC::GUID.new("c81984c4-74c8-11d2-baa9-00c04fc2040e")
+  CLSID_ISecureUrlHost = "c81984c4-74c8-11d2-baa9-00c04fc2040e"
   struct ISecureUrlHost
     lpVtbl : ISecureUrlHostVTbl*
   end
@@ -26807,6 +28413,8 @@ lib LibWin32
     end_undo_unit : Proc(IMarkupServices*, HRESULT)
   end
 
+  IMarkupServices_GUID = LibC::GUID.new("3050f4a0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IMarkupServices = "3050f4a0-98b5-11cf-bb82-00aa00bdce0b"
   struct IMarkupServices
     lpVtbl : IMarkupServicesVTbl*
   end
@@ -26840,6 +28448,8 @@ lib LibWin32
     save_segments_to_clipboard : Proc(IMarkupServices2*, ISegmentList, UInt32, HRESULT)
   end
 
+  IMarkupServices2_GUID = LibC::GUID.new("3050f682-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IMarkupServices2 = "3050f682-98b5-11cf-bb82-00aa00bdce0b"
   struct IMarkupServices2
     lpVtbl : IMarkupServices2VTbl*
   end
@@ -26851,6 +28461,8 @@ lib LibWin32
     exec_change : Proc(IHTMLChangePlayback*, UInt8*, LibC::BOOL, HRESULT)
   end
 
+  IHTMLChangePlayback_GUID = LibC::GUID.new("3050f6e0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLChangePlayback = "3050f6e0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLChangePlayback
     lpVtbl : IHTMLChangePlaybackVTbl*
   end
@@ -26888,6 +28500,8 @@ lib LibWin32
     move_to_content : Proc(IMarkupPointer2*, IHTMLElement, LibC::BOOL, HRESULT)
   end
 
+  IMarkupPointer2_GUID = LibC::GUID.new("3050f675-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IMarkupPointer2 = "3050f675-98b5-11cf-bb82-00aa00bdce0b"
   struct IMarkupPointer2
     lpVtbl : IMarkupPointer2VTbl*
   end
@@ -26903,6 +28517,8 @@ lib LibWin32
     find_text_frag_from_markup_pointer : Proc(IMarkupTextFrags*, IMarkupPointer, Int32*, LibC::BOOL*, HRESULT)
   end
 
+  IMarkupTextFrags_GUID = LibC::GUID.new("3050f5fa-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IMarkupTextFrags = "3050f5fa-98b5-11cf-bb82-00aa00bdce0b"
   struct IMarkupTextFrags
     lpVtbl : IMarkupTextFragsVTbl*
   end
@@ -26914,6 +28530,8 @@ lib LibWin32
     set_generic_parse : Proc(IXMLGenericParse*, Int16, HRESULT)
   end
 
+  IXMLGenericParse_GUID = LibC::GUID.new("e4e23071-4d07-11d2-ae76-0080c73bc199")
+  CLSID_IXMLGenericParse = "e4e23071-4d07-11d2-ae76-0080c73bc199"
   struct IXMLGenericParse
     lpVtbl : IXMLGenericParseVTbl*
   end
@@ -26925,6 +28543,8 @@ lib LibWin32
     snap_rect : Proc(IHTMLEditHost*, IHTMLElement, RECT*, ELEMENT_CORNER, HRESULT)
   end
 
+  IHTMLEditHost_GUID = LibC::GUID.new("3050f6a0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEditHost = "3050f6a0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEditHost
     lpVtbl : IHTMLEditHostVTbl*
   end
@@ -26937,6 +28557,8 @@ lib LibWin32
     pre_drag : Proc(IHTMLEditHost2*, HRESULT)
   end
 
+  IHTMLEditHost2_GUID = LibC::GUID.new("3050f848-98b5-11cf-bb82-00aa00bdce0d")
+  CLSID_IHTMLEditHost2 = "3050f848-98b5-11cf-bb82-00aa00bdce0d"
   struct IHTMLEditHost2
     lpVtbl : IHTMLEditHost2VTbl*
   end
@@ -26948,6 +28570,8 @@ lib LibWin32
     get_sequence_number : Proc(ISequenceNumber*, Int32, Int32*, HRESULT)
   end
 
+  ISequenceNumber_GUID = LibC::GUID.new("3050f6c1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISequenceNumber = "3050f6c1-98b5-11cf-bb82-00aa00bdce0b"
   struct ISequenceNumber
     lpVtbl : ISequenceNumberVTbl*
   end
@@ -26959,6 +28583,8 @@ lib LibWin32
     get_active_imm : Proc(IIMEServices*, IActiveIMMApp*, HRESULT)
   end
 
+  IIMEServices_GUID = LibC::GUID.new("3050f6ca-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IIMEServices = "3050f6ca-98b5-11cf-bb82-00aa00bdce0b"
   struct IIMEServices
     lpVtbl : IIMEServicesVTbl*
   end
@@ -26974,6 +28600,8 @@ lib LibWin32
     get_type_detail : Proc(ISelectionServicesListener*, UInt8**, HRESULT)
   end
 
+  ISelectionServicesListener_GUID = LibC::GUID.new("3050f699-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISelectionServicesListener = "3050f699-98b5-11cf-bb82-00aa00bdce0b"
   struct ISelectionServicesListener
     lpVtbl : ISelectionServicesListenerVTbl*
   end
@@ -26990,6 +28618,8 @@ lib LibWin32
     get_selection_services_listener : Proc(ISelectionServices*, ISelectionServicesListener*, HRESULT)
   end
 
+  ISelectionServices_GUID = LibC::GUID.new("3050f684-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISelectionServices = "3050f684-98b5-11cf-bb82-00aa00bdce0b"
   struct ISelectionServices
     lpVtbl : ISelectionServicesVTbl*
   end
@@ -27004,6 +28634,8 @@ lib LibWin32
     post_editor_event_notify : Proc(IHTMLEditDesigner*, Int32, IHTMLEventObj, HRESULT)
   end
 
+  IHTMLEditDesigner_GUID = LibC::GUID.new("3050f662-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEditDesigner = "3050f662-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEditDesigner
     lpVtbl : IHTMLEditDesignerVTbl*
   end
@@ -27020,6 +28652,8 @@ lib LibWin32
     select_range : Proc(IHTMLEditServices*, IMarkupPointer, IMarkupPointer, SELECTION_TYPE, HRESULT)
   end
 
+  IHTMLEditServices_GUID = LibC::GUID.new("3050f663-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEditServices = "3050f663-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEditServices
     lpVtbl : IHTMLEditServicesVTbl*
   end
@@ -27040,6 +28674,8 @@ lib LibWin32
     un_freeze_virtual_caret_pos : Proc(IHTMLEditServices2*, LibC::BOOL, HRESULT)
   end
 
+  IHTMLEditServices2_GUID = LibC::GUID.new("3050f812-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLEditServices2 = "3050f812-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLEditServices2
     lpVtbl : IHTMLEditServices2VTbl*
   end
@@ -27069,6 +28705,8 @@ lib LibWin32
     is_equal : Proc(IHTMLComputedStyle*, IHTMLComputedStyle, Int16*, HRESULT)
   end
 
+  IHTMLComputedStyle_GUID = LibC::GUID.new("3050f6c3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLComputedStyle = "3050f6c3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLComputedStyle
     lpVtbl : IHTMLComputedStyleVTbl*
   end
@@ -27083,6 +28721,8 @@ lib LibWin32
     write_with_url_line_and_column : Proc(IDeveloperConsoleMessageReceiver*, LibC::LPWSTR, DEV_CONSOLE_MESSAGE_LEVEL, Int32, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, HRESULT)
   end
 
+  IDeveloperConsoleMessageReceiver_GUID = LibC::GUID.new("30510808-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDeveloperConsoleMessageReceiver = "30510808-98b5-11cf-bb82-00aa00bdce0b"
   struct IDeveloperConsoleMessageReceiver
     lpVtbl : IDeveloperConsoleMessageReceiverVTbl*
   end
@@ -27098,6 +28738,8 @@ lib LibWin32
     cookie : Proc(IScriptEventHandler*, UInt64*, HRESULT)
   end
 
+  IScriptEventHandler_GUID = LibC::GUID.new("3051083a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IScriptEventHandler = "3051083a-98b5-11cf-bb82-00aa00bdce0b"
   struct IScriptEventHandler
     lpVtbl : IScriptEventHandlerVTbl*
   end
@@ -27115,6 +28757,8 @@ lib LibWin32
     invoke_callback_complete : Proc(IDebugCallbackNotificationHandler*, SCRIPT_TIMER_TYPE, UInt32, IDispatch, UInt64, UInt8*, UInt32, UInt32, UInt32, IUnknown, HRESULT)
   end
 
+  IDebugCallbackNotificationHandler_GUID = LibC::GUID.new("30510842-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDebugCallbackNotificationHandler = "30510842-98b5-11cf-bb82-00aa00bdce0b"
   struct IDebugCallbackNotificationHandler
     lpVtbl : IDebugCallbackNotificationHandlerVTbl*
   end
@@ -27126,6 +28770,8 @@ lib LibWin32
     get_source_info : Proc(IScriptEventHandlerSourceInfo*, UInt8**, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
+  IScriptEventHandlerSourceInfo_GUID = LibC::GUID.new("30510841-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IScriptEventHandlerSourceInfo = "30510841-98b5-11cf-bb82-00aa00bdce0b"
   struct IScriptEventHandlerSourceInfo
     lpVtbl : IScriptEventHandlerSourceInfoVTbl*
   end
@@ -27138,6 +28784,8 @@ lib LibWin32
     on_dom_event_listener_removed : Proc(IDOMEventRegistrationCallback*, UInt64, HRESULT)
   end
 
+  IDOMEventRegistrationCallback_GUID = LibC::GUID.new("3051083b-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDOMEventRegistrationCallback = "3051083b-98b5-11cf-bb82-00aa00bdce0b"
   struct IDOMEventRegistrationCallback
     lpVtbl : IDOMEventRegistrationCallbackVTbl*
   end
@@ -27152,6 +28800,8 @@ lib LibWin32
     unregister_for_dom_event_listeners : Proc(IEventTarget2*, IDOMEventRegistrationCallback, HRESULT)
   end
 
+  IEventTarget2_GUID = LibC::GUID.new("30510839-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IEventTarget2 = "30510839-98b5-11cf-bb82-00aa00bdce0b"
   struct IEventTarget2
     lpVtbl : IEventTarget2VTbl*
   end
@@ -27166,6 +28816,8 @@ lib LibWin32
     invoke : Proc(HTMLNamespaceEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  HTMLNamespaceEvents_GUID = LibC::GUID.new("3050f6bd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_HTMLNamespaceEvents = "3050f6bd-98b5-11cf-bb82-00aa00bdce0b"
   struct HTMLNamespaceEvents
     lpVtbl : HTMLNamespaceEventsVTbl*
   end
@@ -27189,6 +28841,8 @@ lib LibWin32
     detach_event : Proc(IHTMLNamespace*, UInt8*, IDispatch, HRESULT)
   end
 
+  IHTMLNamespace_GUID = LibC::GUID.new("3050f6bb-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLNamespace = "3050f6bb-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLNamespace
     lpVtbl : IHTMLNamespaceVTbl*
   end
@@ -27206,6 +28860,8 @@ lib LibWin32
     add : Proc(IHTMLNamespaceCollection*, UInt8*, UInt8*, VARIANT, IDispatch*, HRESULT)
   end
 
+  IHTMLNamespaceCollection_GUID = LibC::GUID.new("3050f6b8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLNamespaceCollection = "3050f6b8-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLNamespaceCollection
     lpVtbl : IHTMLNamespaceCollectionVTbl*
   end
@@ -27220,6 +28876,8 @@ lib LibWin32
     invoke : Proc(DispHTMLNamespace*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLNamespace_GUID = LibC::GUID.new("3050f54f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLNamespace = "3050f54f-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLNamespace
     lpVtbl : DispHTMLNamespaceVTbl*
   end
@@ -27234,6 +28892,8 @@ lib LibWin32
     invoke : Proc(DispHTMLNamespaceCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLNamespaceCollection_GUID = LibC::GUID.new("3050f550-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLNamespaceCollection = "3050f550-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLNamespaceCollection
     lpVtbl : DispHTMLNamespaceCollectionVTbl*
   end
@@ -27248,6 +28908,8 @@ lib LibWin32
     hit_test_point : Proc(IHTMLPainter*, POINT, LibC::BOOL*, Int32*, HRESULT)
   end
 
+  IHTMLPainter_GUID = LibC::GUID.new("3050f6a6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPainter = "3050f6a6-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPainter
     lpVtbl : IHTMLPainterVTbl*
   end
@@ -27265,6 +28927,8 @@ lib LibWin32
     get_hit_test_cookie : Proc(IHTMLPaintSite*, Int32*, HRESULT)
   end
 
+  IHTMLPaintSite_GUID = LibC::GUID.new("3050f6a7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPaintSite = "3050f6a7-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPaintSite
     lpVtbl : IHTMLPaintSiteVTbl*
   end
@@ -27279,6 +28943,8 @@ lib LibWin32
     string_from_part_id : Proc(IHTMLPainterEventInfo*, Int32, UInt8**, HRESULT)
   end
 
+  IHTMLPainterEventInfo_GUID = LibC::GUID.new("3050f6df-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPainterEventInfo = "3050f6df-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPainterEventInfo
     lpVtbl : IHTMLPainterEventInfoVTbl*
   end
@@ -27290,6 +28956,8 @@ lib LibWin32
     on_move : Proc(IHTMLPainterOverlay*, RECT, HRESULT)
   end
 
+  IHTMLPainterOverlay_GUID = LibC::GUID.new("3050f7e3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPainterOverlay = "3050f7e3-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPainterOverlay
     lpVtbl : IHTMLPainterOverlayVTbl*
   end
@@ -27307,6 +28975,8 @@ lib LibWin32
     item : Proc(IHTMLIPrintCollection*, Int32, IUnknown*, HRESULT)
   end
 
+  IHTMLIPrintCollection_GUID = LibC::GUID.new("3050f6b5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLIPrintCollection = "3050f6b5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLIPrintCollection
     lpVtbl : IHTMLIPrintCollectionVTbl*
   end
@@ -27321,6 +28991,8 @@ lib LibWin32
     next : Proc(IEnumPrivacyRecords*, UInt8**, UInt8**, Int32*, UInt32*, HRESULT)
   end
 
+  IEnumPrivacyRecords_GUID = LibC::GUID.new("3050f844-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IEnumPrivacyRecords = "3050f844-98b5-11cf-bb82-00aa00bdce0b"
   struct IEnumPrivacyRecords
     lpVtbl : IEnumPrivacyRecordsVTbl*
   end
@@ -27333,6 +29005,8 @@ lib LibWin32
     get_url : Proc(IWPCBlockedUrls*, UInt32, UInt8**, HRESULT)
   end
 
+  IWPCBlockedUrls_GUID = LibC::GUID.new("30510413-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IWPCBlockedUrls = "30510413-98b5-11cf-bb82-00aa00bdce0b"
   struct IWPCBlockedUrls
     lpVtbl : IWPCBlockedUrlsVTbl*
   end
@@ -27453,6 +29127,8 @@ lib LibWin32
     get_xml_http_request : Proc(IHTMLDOMConstructorCollection*, IDispatch*, HRESULT)
   end
 
+  IHTMLDOMConstructorCollection_GUID = LibC::GUID.new("3051049c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDOMConstructorCollection = "3051049c-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDOMConstructorCollection
     lpVtbl : IHTMLDOMConstructorCollectionVTbl*
   end
@@ -27481,6 +29157,8 @@ lib LibWin32
     to_string : Proc(IHTMLDialog*, UInt8**, HRESULT)
   end
 
+  IHTMLDialog_GUID = LibC::GUID.new("3050f216-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDialog = "3050f216-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDialog
     lpVtbl : IHTMLDialogVTbl*
   end
@@ -27499,6 +29177,8 @@ lib LibWin32
     get_resizable : Proc(IHTMLDialog2*, UInt8**, HRESULT)
   end
 
+  IHTMLDialog2_GUID = LibC::GUID.new("3050f5e0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDialog2 = "3050f5e0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDialog2
     lpVtbl : IHTMLDialog2VTbl*
   end
@@ -27517,6 +29197,8 @@ lib LibWin32
     get_dialog_hide : Proc(IHTMLDialog3*, UInt8**, HRESULT)
   end
 
+  IHTMLDialog3_GUID = LibC::GUID.new("3050f388-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLDialog3 = "3050f388-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLDialog3
     lpVtbl : IHTMLDialog3VTbl*
   end
@@ -27535,6 +29217,8 @@ lib LibWin32
     get_document : Proc(IHTMLModelessInit*, IUnknown*, HRESULT)
   end
 
+  IHTMLModelessInit_GUID = LibC::GUID.new("3050f5e4-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLModelessInit = "3050f5e4-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLModelessInit
     lpVtbl : IHTMLModelessInitVTbl*
   end
@@ -27553,6 +29237,8 @@ lib LibWin32
     get_is_open : Proc(IHTMLPopup*, Int16*, HRESULT)
   end
 
+  IHTMLPopup_GUID = LibC::GUID.new("3050f666-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPopup = "3050f666-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPopup
     lpVtbl : IHTMLPopupVTbl*
   end
@@ -27567,6 +29253,8 @@ lib LibWin32
     invoke : Proc(DispHTMLPopup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLPopup_GUID = LibC::GUID.new("3050f589-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLPopup = "3050f589-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLPopup
     lpVtbl : DispHTMLPopupVTbl*
   end
@@ -27606,6 +29294,8 @@ lib LibWin32
     get_command_line : Proc(IHTMLAppBehavior*, UInt8**, HRESULT)
   end
 
+  IHTMLAppBehavior_GUID = LibC::GUID.new("3050f5ca-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAppBehavior = "3050f5ca-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAppBehavior
     lpVtbl : IHTMLAppBehaviorVTbl*
   end
@@ -27630,6 +29320,8 @@ lib LibWin32
     get_selection : Proc(IHTMLAppBehavior2*, UInt8**, HRESULT)
   end
 
+  IHTMLAppBehavior2_GUID = LibC::GUID.new("3050f5c9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAppBehavior2 = "3050f5c9-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAppBehavior2
     lpVtbl : IHTMLAppBehavior2VTbl*
   end
@@ -27646,6 +29338,8 @@ lib LibWin32
     get_navigable : Proc(IHTMLAppBehavior3*, UInt8**, HRESULT)
   end
 
+  IHTMLAppBehavior3_GUID = LibC::GUID.new("3050f5cd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLAppBehavior3 = "3050f5cd-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLAppBehavior3
     lpVtbl : IHTMLAppBehavior3VTbl*
   end
@@ -27660,6 +29354,8 @@ lib LibWin32
     invoke : Proc(DispHTMLAppBehavior*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispHTMLAppBehavior_GUID = LibC::GUID.new("3050f57c-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispHTMLAppBehavior = "3050f57c-98b5-11cf-bb82-00aa00bdce0b"
   struct DispHTMLAppBehavior
     lpVtbl : DispHTMLAppBehaviorVTbl*
   end
@@ -27674,6 +29370,8 @@ lib LibWin32
     invoke : Proc(DispIHTMLInputButtonElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispIHTMLInputButtonElement_GUID = LibC::GUID.new("3050f51e-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispIHTMLInputButtonElement = "3050f51e-98b5-11cf-bb82-00aa00bdce0b"
   struct DispIHTMLInputButtonElement
     lpVtbl : DispIHTMLInputButtonElementVTbl*
   end
@@ -27688,6 +29386,8 @@ lib LibWin32
     invoke : Proc(DispIHTMLInputTextElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispIHTMLInputTextElement_GUID = LibC::GUID.new("3050f520-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispIHTMLInputTextElement = "3050f520-98b5-11cf-bb82-00aa00bdce0b"
   struct DispIHTMLInputTextElement
     lpVtbl : DispIHTMLInputTextElementVTbl*
   end
@@ -27702,6 +29402,8 @@ lib LibWin32
     invoke : Proc(DispIHTMLInputFileElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispIHTMLInputFileElement_GUID = LibC::GUID.new("3050f542-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispIHTMLInputFileElement = "3050f542-98b5-11cf-bb82-00aa00bdce0b"
   struct DispIHTMLInputFileElement
     lpVtbl : DispIHTMLInputFileElementVTbl*
   end
@@ -27716,6 +29418,8 @@ lib LibWin32
     invoke : Proc(DispIHTMLOptionButtonElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispIHTMLOptionButtonElement_GUID = LibC::GUID.new("3050f509-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispIHTMLOptionButtonElement = "3050f509-98b5-11cf-bb82-00aa00bdce0b"
   struct DispIHTMLOptionButtonElement
     lpVtbl : DispIHTMLOptionButtonElementVTbl*
   end
@@ -27730,6 +29434,8 @@ lib LibWin32
     invoke : Proc(DispIHTMLInputImage*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DispIHTMLInputImage_GUID = LibC::GUID.new("3050f51d-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_DispIHTMLInputImage = "3050f51d-98b5-11cf-bb82-00aa00bdce0b"
   struct DispIHTMLInputImage
     lpVtbl : DispIHTMLInputImageVTbl*
   end
@@ -27741,6 +29447,8 @@ lib LibWin32
     add_tag : Proc(IElementNamespace*, UInt8*, Int32, HRESULT)
   end
 
+  IElementNamespace_GUID = LibC::GUID.new("3050f671-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementNamespace = "3050f671-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementNamespace
     lpVtbl : IElementNamespaceVTbl*
   end
@@ -27752,6 +29460,8 @@ lib LibWin32
     add_namespace : Proc(IElementNamespaceTable*, UInt8*, UInt8*, Int32, VARIANT*, HRESULT)
   end
 
+  IElementNamespaceTable_GUID = LibC::GUID.new("3050f670-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementNamespaceTable = "3050f670-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementNamespaceTable
     lpVtbl : IElementNamespaceTableVTbl*
   end
@@ -27763,6 +29473,8 @@ lib LibWin32
     create : Proc(IElementNamespaceFactory*, IElementNamespace, HRESULT)
   end
 
+  IElementNamespaceFactory_GUID = LibC::GUID.new("3050f672-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementNamespaceFactory = "3050f672-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementNamespaceFactory
     lpVtbl : IElementNamespaceFactoryVTbl*
   end
@@ -27775,6 +29487,8 @@ lib LibWin32
     create_with_implementation : Proc(IElementNamespaceFactory2*, IElementNamespace, UInt8*, HRESULT)
   end
 
+  IElementNamespaceFactory2_GUID = LibC::GUID.new("3050f805-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementNamespaceFactory2 = "3050f805-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementNamespaceFactory2
     lpVtbl : IElementNamespaceFactory2VTbl*
   end
@@ -27786,6 +29500,8 @@ lib LibWin32
     resolve : Proc(IElementNamespaceFactoryCallback*, UInt8*, UInt8*, UInt8*, IElementNamespace, HRESULT)
   end
 
+  IElementNamespaceFactoryCallback_GUID = LibC::GUID.new("3050f7fd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementNamespaceFactoryCallback = "3050f7fd-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementNamespaceFactoryCallback
     lpVtbl : IElementNamespaceFactoryCallbackVTbl*
   end
@@ -27803,6 +29519,8 @@ lib LibWin32
     get_defaults : Proc(IElementBehaviorSiteOM2*, IHTMLElementDefaults*, HRESULT)
   end
 
+  IElementBehaviorSiteOM2_GUID = LibC::GUID.new("3050f659-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorSiteOM2 = "3050f659-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorSiteOM2
     lpVtbl : IElementBehaviorSiteOM2VTbl*
   end
@@ -27814,6 +29532,8 @@ lib LibWin32
     get_category : Proc(IElementBehaviorCategory*, LibC::LPWSTR*, HRESULT)
   end
 
+  IElementBehaviorCategory_GUID = LibC::GUID.new("3050f4ed-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorCategory = "3050f4ed-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorCategory
     lpVtbl : IElementBehaviorCategoryVTbl*
   end
@@ -27825,6 +29545,8 @@ lib LibWin32
     get_related_behaviors : Proc(IElementBehaviorSiteCategory*, Int32, LibC::LPWSTR, IEnumUnknown*, HRESULT)
   end
 
+  IElementBehaviorSiteCategory_GUID = LibC::GUID.new("3050f4ee-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorSiteCategory = "3050f4ee-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorSiteCategory
     lpVtbl : IElementBehaviorSiteCategoryVTbl*
   end
@@ -27837,6 +29559,8 @@ lib LibWin32
     reset : Proc(IElementBehaviorSubmit*, HRESULT)
   end
 
+  IElementBehaviorSubmit_GUID = LibC::GUID.new("3050f646-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorSubmit = "3050f646-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorSubmit
     lpVtbl : IElementBehaviorSubmitVTbl*
   end
@@ -27848,6 +29572,8 @@ lib LibWin32
     get_focus_rect : Proc(IElementBehaviorFocus*, RECT*, HRESULT)
   end
 
+  IElementBehaviorFocus_GUID = LibC::GUID.new("3050f6b6-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorFocus = "3050f6b6-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorFocus
     lpVtbl : IElementBehaviorFocusVTbl*
   end
@@ -27862,6 +29588,8 @@ lib LibWin32
     map_size : Proc(IElementBehaviorLayout*, SIZE*, RECT*, HRESULT)
   end
 
+  IElementBehaviorLayout_GUID = LibC::GUID.new("3050f6ba-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorLayout = "3050f6ba-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorLayout
     lpVtbl : IElementBehaviorLayoutVTbl*
   end
@@ -27873,6 +29601,8 @@ lib LibWin32
     get_text_descent : Proc(IElementBehaviorLayout2*, Int32*, HRESULT)
   end
 
+  IElementBehaviorLayout2_GUID = LibC::GUID.new("3050f846-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorLayout2 = "3050f846-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorLayout2
     lpVtbl : IElementBehaviorLayout2VTbl*
   end
@@ -27886,6 +29616,8 @@ lib LibWin32
     get_media_resolution : Proc(IElementBehaviorSiteLayout*, SIZE*, HRESULT)
   end
 
+  IElementBehaviorSiteLayout_GUID = LibC::GUID.new("3050f6b7-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorSiteLayout = "3050f6b7-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorSiteLayout
     lpVtbl : IElementBehaviorSiteLayoutVTbl*
   end
@@ -27897,6 +29629,8 @@ lib LibWin32
     get_font_info : Proc(IElementBehaviorSiteLayout2*, LOGFONTW*, HRESULT)
   end
 
+  IElementBehaviorSiteLayout2_GUID = LibC::GUID.new("3050f847-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IElementBehaviorSiteLayout2 = "3050f847-98b5-11cf-bb82-00aa00bdce0b"
   struct IElementBehaviorSiteLayout2
     lpVtbl : IElementBehaviorSiteLayout2VTbl*
   end
@@ -27908,6 +29642,8 @@ lib LibWin32
     populate_namespace_table : Proc(IHostBehaviorInit*, HRESULT)
   end
 
+  IHostBehaviorInit_GUID = LibC::GUID.new("3050f842-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHostBehaviorInit = "3050f842-98b5-11cf-bb82-00aa00bdce0b"
   struct IHostBehaviorInit
     lpVtbl : IHostBehaviorInitVTbl*
   end
@@ -27921,6 +29657,8 @@ lib LibWin32
     is_current : Proc(ISurfacePresenter*, LibC::BOOL*, HRESULT)
   end
 
+  ISurfacePresenter_GUID = LibC::GUID.new("305106e2-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISurfacePresenter = "305106e2-98b5-11cf-bb82-00aa00bdce0b"
   struct ISurfacePresenter
     lpVtbl : ISurfacePresenterVTbl*
   end
@@ -27934,6 +29672,8 @@ lib LibWin32
     set_composition_mode : Proc(IViewObjectPresentSite*, VIEW_OBJECT_COMPOSITION_MODE, HRESULT)
   end
 
+  IViewObjectPresentSite_GUID = LibC::GUID.new("305106e1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IViewObjectPresentSite = "305106e1-98b5-11cf-bb82-00aa00bdce0b"
   struct IViewObjectPresentSite
     lpVtbl : IViewObjectPresentSiteVTbl*
   end
@@ -27945,6 +29685,8 @@ lib LibWin32
     get_buffer_pointer : Proc(ICanvasPixelArrayData*, UInt8**, UInt32*, HRESULT)
   end
 
+  ICanvasPixelArrayData_GUID = LibC::GUID.new("305107f9-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICanvasPixelArrayData = "305107f9-98b5-11cf-bb82-00aa00bdce0b"
   struct ICanvasPixelArrayData
     lpVtbl : ICanvasPixelArrayDataVTbl*
   end
@@ -27956,6 +29698,8 @@ lib LibWin32
     get_print_bitmap : Proc(IViewObjectPrint*, IUnknown*, HRESULT)
   end
 
+  IViewObjectPrint_GUID = LibC::GUID.new("305106e3-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IViewObjectPrint = "305106e3-98b5-11cf-bb82-00aa00bdce0b"
   struct IViewObjectPrint
     lpVtbl : IViewObjectPrintVTbl*
   end
@@ -27970,6 +29714,8 @@ lib LibWin32
     request_frame : Proc(IViewObjectPresentNotifySite*, HRESULT)
   end
 
+  IViewObjectPresentNotifySite_GUID = LibC::GUID.new("305107fa-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IViewObjectPresentNotifySite = "305107fa-98b5-11cf-bb82-00aa00bdce0b"
   struct IViewObjectPresentNotifySite
     lpVtbl : IViewObjectPresentNotifySiteVTbl*
   end
@@ -27981,6 +29727,8 @@ lib LibWin32
     on_pre_render : Proc(IViewObjectPresentNotify*, HRESULT)
   end
 
+  IViewObjectPresentNotify_GUID = LibC::GUID.new("305107f8-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IViewObjectPresentNotify = "305107f8-98b5-11cf-bb82-00aa00bdce0b"
   struct IViewObjectPresentNotify
     lpVtbl : IViewObjectPresentNotifyVTbl*
   end
@@ -27993,6 +29741,8 @@ lib LibWin32
     get_enabled : Proc(ITrackingProtection*, LibC::BOOL*, HRESULT)
   end
 
+  ITrackingProtection_GUID = LibC::GUID.new("30510803-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITrackingProtection = "30510803-98b5-11cf-bb82-00aa00bdce0b"
   struct ITrackingProtection
     lpVtbl : ITrackingProtectionVTbl*
   end
@@ -28005,6 +29755,8 @@ lib LibWin32
     exit_bf_cache : Proc(IBFCacheable*, HRESULT)
   end
 
+  IBFCacheable_GUID = LibC::GUID.new("30510861-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IBFCacheable = "30510861-98b5-11cf-bb82-00aa00bdce0b"
   struct IBFCacheable
     lpVtbl : IBFCacheableVTbl*
   end
@@ -28025,6 +29777,8 @@ lib LibWin32
     is_error_url : Proc(IDocObjectService*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
+  IDocObjectService_GUID = LibC::GUID.new("3050f801-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDocObjectService = "3050f801-98b5-11cf-bb82-00aa00bdce0b"
   struct IDocObjectService
     lpVtbl : IDocObjectServiceVTbl*
   end
@@ -28036,6 +29790,8 @@ lib LibWin32
     download : Proc(IDownloadManager*, IMoniker, IBindCtx, UInt32, Int32, BINDINFO*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  IDownloadManager_GUID = LibC::GUID.new("988934a4-064b-11d3-bb80-00104b35e7f9")
+  CLSID_IDownloadManager = "988934a4-064b-11d3-bb80-00104b35e7f9"
   struct IDownloadManager
     lpVtbl : IDownloadManagerVTbl*
   end
@@ -28048,6 +29804,8 @@ lib LibWin32
     display_name : Proc(IExtensionValidation*, LibC::LPWSTR*, HRESULT)
   end
 
+  IExtensionValidation_GUID = LibC::GUID.new("7d33f73d-8525-4e0f-87db-830288baff44")
+  CLSID_IExtensionValidation = "7d33f73d-8525-4e0f-87db-830288baff44"
   struct IExtensionValidation
     lpVtbl : IExtensionValidationVTbl*
   end
@@ -28061,6 +29819,8 @@ lib LibWin32
     set_home_page_to_browser_default : Proc(IHomePageSetting*, HRESULT)
   end
 
+  IHomePageSetting_GUID = LibC::GUID.new("fdfc244f-18fa-4ff2-b08e-1d618f3ffbe4")
+  CLSID_IHomePageSetting = "fdfc244f-18fa-4ff2-b08e-1d618f3ffbe4"
   struct IHomePageSetting
     lpVtbl : IHomePageSettingVTbl*
   end
@@ -28073,6 +29833,8 @@ lib LibWin32
     on_reuse : Proc(ITargetNotify*, IUnknown, HRESULT)
   end
 
+  ITargetNotify_GUID = LibC::GUID.new("863a99a0-21bc-11d0-82b4-00a0c90c29c5")
+  CLSID_ITargetNotify = "863a99a0-21bc-11d0-82b4-00a0c90c29c5"
   struct ITargetNotify
     lpVtbl : ITargetNotifyVTbl*
   end
@@ -28086,6 +29848,8 @@ lib LibWin32
     get_option_string : Proc(ITargetNotify2*, UInt8**, HRESULT)
   end
 
+  ITargetNotify2_GUID = LibC::GUID.new("3050f6b1-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITargetNotify2 = "3050f6b1-98b5-11cf-bb82-00aa00bdce0b"
   struct ITargetNotify2
     lpVtbl : ITargetNotify2VTbl*
   end
@@ -28108,6 +29872,8 @@ lib LibWin32
     get_target_alias : Proc(ITargetFrame2*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
+  ITargetFrame2_GUID = LibC::GUID.new("86d52e11-94a8-11d0-82af-00c04fd5ae38")
+  CLSID_ITargetFrame2 = "86d52e11-94a8-11d0-82af-00c04fd5ae38"
   struct ITargetFrame2
     lpVtbl : ITargetFrame2VTbl*
   end
@@ -28120,6 +29886,8 @@ lib LibWin32
     get_frames_container : Proc(ITargetContainer*, IOleContainer*, HRESULT)
   end
 
+  ITargetContainer_GUID = LibC::GUID.new("7847ec01-2bec-11d0-82b4-00a0c90c29c5")
+  CLSID_ITargetContainer = "7847ec01-2bec-11d0-82b4-00a0c90c29c5"
   struct ITargetContainer
     lpVtbl : ITargetContainerVTbl*
   end
@@ -28144,6 +29912,8 @@ lib LibWin32
     on_child_frame_deactivate : Proc(ITargetFrame*, IUnknown, HRESULT)
   end
 
+  ITargetFrame_GUID = LibC::GUID.new("d5f78c80-5252-11cf-90fa-00aa0042106e")
+  CLSID_ITargetFrame = "d5f78c80-5252-11cf-90fa-00aa0042106e"
   struct ITargetFrame
     lpVtbl : ITargetFrameVTbl*
   end
@@ -28155,6 +29925,8 @@ lib LibWin32
     get_target_frame : Proc(ITargetEmbedding*, ITargetFrame*, HRESULT)
   end
 
+  ITargetEmbedding_GUID = LibC::GUID.new("548793c0-9e74-11cf-9655-00a0c9034923")
+  CLSID_ITargetEmbedding = "548793c0-9e74-11cf-9655-00a0c9034923"
   struct ITargetEmbedding
     lpVtbl : ITargetEmbeddingVTbl*
   end
@@ -28171,6 +29943,8 @@ lib LibWin32
     find_browser_by_index : Proc(ITargetFramePriv*, UInt32, IUnknown*, HRESULT)
   end
 
+  ITargetFramePriv_GUID = LibC::GUID.new("9216e421-2bf5-11d0-82b4-00a0c90c29c5")
+  CLSID_ITargetFramePriv = "9216e421-2bf5-11d0-82b4-00a0c90c29c5"
   struct ITargetFramePriv
     lpVtbl : ITargetFramePrivVTbl*
   end
@@ -28188,6 +29962,8 @@ lib LibWin32
     aggregated_navigation2 : Proc(ITargetFramePriv2*, UInt32, IBindCtx, IBindStatusCallback, LibC::LPWSTR, IUri, LibC::LPWSTR, HRESULT)
   end
 
+  ITargetFramePriv2_GUID = LibC::GUID.new("b2c867e6-69d6-46f2-a611-ded9a4bd7fef")
+  CLSID_ITargetFramePriv2 = "b2c867e6-69d6-46f2-a611-ded9a4bd7fef"
   struct ITargetFramePriv2
     lpVtbl : ITargetFramePriv2VTbl*
   end
@@ -28200,6 +29976,8 @@ lib LibWin32
     end_draw : Proc(ISurfacePresenterFlipBuffer*, HRESULT)
   end
 
+  ISurfacePresenterFlipBuffer_GUID = LibC::GUID.new("e43f4a08-8bbc-4665-ac92-c55ce61fd7e7")
+  CLSID_ISurfacePresenterFlipBuffer = "e43f4a08-8bbc-4665-ac92-c55ce61fd7e7"
   struct ISurfacePresenterFlipBuffer
     lpVtbl : ISurfacePresenterFlipBufferVTbl*
   end
@@ -28212,6 +29990,8 @@ lib LibWin32
     get_buffer : Proc(ISurfacePresenterFlip*, UInt32, Guid*, Void**, HRESULT)
   end
 
+  ISurfacePresenterFlip_GUID = LibC::GUID.new("30510848-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISurfacePresenterFlip = "30510848-98b5-11cf-bb82-00aa00bdce0b"
   struct ISurfacePresenterFlip
     lpVtbl : ISurfacePresenterFlipVTbl*
   end
@@ -28223,6 +30003,8 @@ lib LibWin32
     set_rotation : Proc(ISurfacePresenterFlip2*, DXGI_MODE_ROTATION, HRESULT)
   end
 
+  ISurfacePresenterFlip2_GUID = LibC::GUID.new("30510865-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ISurfacePresenterFlip2 = "30510865-98b5-11cf-bb82-00aa00bdce0b"
   struct ISurfacePresenterFlip2
     lpVtbl : ISurfacePresenterFlip2VTbl*
   end
@@ -28241,6 +30023,8 @@ lib LibWin32
     get_full_screen_size : Proc(IViewObjectPresentFlipSite*, SIZE*, HRESULT)
   end
 
+  IViewObjectPresentFlipSite_GUID = LibC::GUID.new("30510846-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IViewObjectPresentFlipSite = "30510846-98b5-11cf-bb82-00aa00bdce0b"
   struct IViewObjectPresentFlipSite
     lpVtbl : IViewObjectPresentFlipSiteVTbl*
   end
@@ -28252,6 +30036,8 @@ lib LibWin32
     get_rotation_for_current_output : Proc(IViewObjectPresentFlipSite2*, DXGI_MODE_ROTATION*, HRESULT)
   end
 
+  IViewObjectPresentFlipSite2_GUID = LibC::GUID.new("aad0cbf1-e7fd-4f12-8902-c78132a8e01d")
+  CLSID_IViewObjectPresentFlipSite2 = "aad0cbf1-e7fd-4f12-8902-c78132a8e01d"
   struct IViewObjectPresentFlipSite2
     lpVtbl : IViewObjectPresentFlipSite2VTbl*
   end
@@ -28265,6 +30051,8 @@ lib LibWin32
     render_object_to_shared_buffer : Proc(IViewObjectPresentFlip*, ISurfacePresenterFlipBuffer, HRESULT)
   end
 
+  IViewObjectPresentFlip_GUID = LibC::GUID.new("30510847-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IViewObjectPresentFlip = "30510847-98b5-11cf-bb82-00aa00bdce0b"
   struct IViewObjectPresentFlip
     lpVtbl : IViewObjectPresentFlipVTbl*
   end
@@ -28276,6 +30064,8 @@ lib LibWin32
     notify_leaving_view : Proc(IViewObjectPresentFlip2*, HRESULT)
   end
 
+  IViewObjectPresentFlip2_GUID = LibC::GUID.new("30510856-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IViewObjectPresentFlip2 = "30510856-98b5-11cf-bb82-00aa00bdce0b"
   struct IViewObjectPresentFlip2
     lpVtbl : IViewObjectPresentFlip2VTbl*
   end
@@ -28288,6 +30078,8 @@ lib LibWin32
     remove_suspension_exemption : Proc(IActiveXUIHandlerSite2*, UInt64, HRESULT)
   end
 
+  IActiveXUIHandlerSite2_GUID = LibC::GUID.new("7e3707b2-d087-4542-ac1f-a0d2fcd080fd")
+  CLSID_IActiveXUIHandlerSite2 = "7e3707b2-d087-4542-ac1f-a0d2fcd080fd"
   struct IActiveXUIHandlerSite2
     lpVtbl : IActiveXUIHandlerSite2VTbl*
   end
@@ -28299,6 +30091,8 @@ lib LibWin32
     get_caret_position : Proc(ICaretPositionProvider*, POINT*, Float32*, HRESULT)
   end
 
+  ICaretPositionProvider_GUID = LibC::GUID.new("58da43a2-108e-4d5b-9f75-e5f74f93fff5")
+  CLSID_ICaretPositionProvider = "58da43a2-108e-4d5b-9f75-e5f74f93fff5"
   struct ICaretPositionProvider
     lpVtbl : ICaretPositionProviderVTbl*
   end
@@ -28310,6 +30104,8 @@ lib LibWin32
     on_pointer_message : Proc(ITridentTouchInput*, UInt32, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
   end
 
+  ITridentTouchInput_GUID = LibC::GUID.new("30510850-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITridentTouchInput = "30510850-98b5-11cf-bb82-00aa00bdce0b"
   struct ITridentTouchInput
     lpVtbl : ITridentTouchInputVTbl*
   end
@@ -28322,6 +30118,8 @@ lib LibWin32
     zoom_to_point : Proc(ITridentTouchInputSite*, Int32, Int32, HRESULT)
   end
 
+  ITridentTouchInputSite_GUID = LibC::GUID.new("30510849-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITridentTouchInputSite = "30510849-98b5-11cf-bb82-00aa00bdce0b"
   struct ITridentTouchInputSite
     lpVtbl : ITridentTouchInputSiteVTbl*
   end
@@ -28334,6 +30132,8 @@ lib LibWin32
     on_media_activity_stopped : Proc(IMediaActivityNotifySite*, MediaActivityNotifyType, HRESULT)
   end
 
+  IMediaActivityNotifySite_GUID = LibC::GUID.new("8165cfef-179d-46c2-bc71-3fa726dc1f8d")
+  CLSID_IMediaActivityNotifySite = "8165cfef-179d-46c2-bc71-3fa726dc1f8d"
   struct IMediaActivityNotifySite
     lpVtbl : IMediaActivityNotifySiteVTbl*
   end
@@ -28347,6 +30147,8 @@ lib LibWin32
     on_audio_stream_destroyed : Proc(IAudioSessionSite*, LibC::LPWSTR, HRESULT)
   end
 
+  IAudioSessionSite_GUID = LibC::GUID.new("d7d8b684-d02d-4517-b6b7-19e3dfe29c45")
+  CLSID_IAudioSessionSite = "d7d8b684-d02d-4517-b6b7-19e3dfe29c45"
   struct IAudioSessionSite
     lpVtbl : IAudioSessionSiteVTbl*
   end
@@ -28358,6 +30160,8 @@ lib LibWin32
     handle_print_task_request : Proc(IPrintTaskRequestHandler*, IInspectable, HRESULT)
   end
 
+  IPrintTaskRequestHandler_GUID = LibC::GUID.new("191cd340-cf36-44ff-bd53-d1b701799d9b")
+  CLSID_IPrintTaskRequestHandler = "191cd340-cf36-44ff-bd53-d1b701799d9b"
   struct IPrintTaskRequestHandler
     lpVtbl : IPrintTaskRequestHandlerVTbl*
   end
@@ -28369,6 +30173,8 @@ lib LibWin32
     create_print_task_request : Proc(IPrintTaskRequestFactory*, IPrintTaskRequestHandler, HRESULT)
   end
 
+  IPrintTaskRequestFactory_GUID = LibC::GUID.new("bb516745-8c34-4f8b-9605-684dcb144be5")
+  CLSID_IPrintTaskRequestFactory = "bb516745-8c34-4f8b-9605-684dcb144be5"
   struct IPrintTaskRequestFactory
     lpVtbl : IPrintTaskRequestFactoryVTbl*
   end
@@ -28381,6 +30187,8 @@ lib LibWin32
     show_modal : Proc(IScrollableContextMenu*, Int32, Int32, UInt32*, HRESULT)
   end
 
+  IScrollableContextMenu_GUID = LibC::GUID.new("30510854-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IScrollableContextMenu = "30510854-98b5-11cf-bb82-00aa00bdce0b"
   struct IScrollableContextMenu
     lpVtbl : IScrollableContextMenuVTbl*
   end
@@ -28395,6 +30203,8 @@ lib LibWin32
     set_placement : Proc(IScrollableContextMenu2*, SCROLLABLECONTEXTMENU_PLACEMENT, HRESULT)
   end
 
+  IScrollableContextMenu2_GUID = LibC::GUID.new("f77e9056-8674-4936-924c-0e4a06fa634a")
+  CLSID_IScrollableContextMenu2 = "f77e9056-8674-4936-924c-0e4a06fa634a"
   struct IScrollableContextMenu2
     lpVtbl : IScrollableContextMenu2VTbl*
   end
@@ -28407,6 +30217,8 @@ lib LibWin32
     pick_file_and_get_result : Proc(IActiveXUIHandlerSite*, IUnknown, LibC::BOOL, IUnknown*, HRESULT)
   end
 
+  IActiveXUIHandlerSite_GUID = LibC::GUID.new("30510853-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IActiveXUIHandlerSite = "30510853-98b5-11cf-bb82-00aa00bdce0b"
   struct IActiveXUIHandlerSite
     lpVtbl : IActiveXUIHandlerSiteVTbl*
   end
@@ -28418,6 +30230,8 @@ lib LibWin32
     message_box_w : Proc(IActiveXUIHandlerSite3*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, Int32*, HRESULT)
   end
 
+  IActiveXUIHandlerSite3_GUID = LibC::GUID.new("7904009a-1238-47f4-901c-871375c34608")
+  CLSID_IActiveXUIHandlerSite3 = "7904009a-1238-47f4-901c-871375c34608"
   struct IActiveXUIHandlerSite3
     lpVtbl : IActiveXUIHandlerSite3VTbl*
   end
@@ -28433,6 +30247,8 @@ lib LibWin32
     clone : Proc(IEnumManagerFrames*, IEnumManagerFrames*, HRESULT)
   end
 
+  IEnumManagerFrames_GUID = LibC::GUID.new("3caa826a-9b1f-4a79-bc81-f0430ded1648")
+  CLSID_IEnumManagerFrames = "3caa826a-9b1f-4a79-bc81-f0430ded1648"
   struct IEnumManagerFrames
     lpVtbl : IEnumManagerFramesVTbl*
   end
@@ -28444,6 +30260,8 @@ lib LibWin32
     create_object : Proc(IInternetExplorerManager*, UInt32, LibC::LPWSTR, Guid*, Void**, HRESULT)
   end
 
+  IInternetExplorerManager_GUID = LibC::GUID.new("acc84351-04ff-44f9-b23f-655ed168c6d5")
+  CLSID_IInternetExplorerManager = "acc84351-04ff-44f9-b23f-655ed168c6d5"
   struct IInternetExplorerManager
     lpVtbl : IInternetExplorerManagerVTbl*
   end
@@ -28455,6 +30273,8 @@ lib LibWin32
     enum_frame_windows : Proc(IInternetExplorerManager2*, IEnumManagerFrames*, HRESULT)
   end
 
+  IInternetExplorerManager2_GUID = LibC::GUID.new("dfbb5136-9259-4895-b4a7-c1934429919a")
+  CLSID_IInternetExplorerManager2 = "dfbb5136-9259-4895-b4a7-c1934429919a"
   struct IInternetExplorerManager2
     lpVtbl : IInternetExplorerManager2VTbl*
   end
@@ -28472,6 +30292,8 @@ lib LibWin32
     get_capability_value : Proc(IIEWebDriverSite*, IUnknown, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  IIEWebDriverSite_GUID = LibC::GUID.new("ffb84444-453d-4fbc-9f9d-8db5c471ec75")
+  CLSID_IIEWebDriverSite = "ffb84444-453d-4fbc-9f9d-8db5c471ec75"
   struct IIEWebDriverSite
     lpVtbl : IIEWebDriverSiteVTbl*
   end
@@ -28487,6 +30309,8 @@ lib LibWin32
     execute_command : Proc(IIEWebDriverManager*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
+  IIEWebDriverManager_GUID = LibC::GUID.new("bd1dc630-6590-4ca2-a293-6bc72b2438d8")
+  CLSID_IIEWebDriverManager = "bd1dc630-6590-4ca2-a293-6bc72b2438d8"
   struct IIEWebDriverManager
     lpVtbl : IIEWebDriverManagerVTbl*
   end
@@ -28497,6 +30321,8 @@ lib LibWin32
     release : Proc(IPeerFactory*, UInt32)
   end
 
+  IPeerFactory_GUID = LibC::GUID.new("6663f9d3-b482-11d1-89c6-00c04fb6bfc4")
+  CLSID_IPeerFactory = "6663f9d3-b482-11d1-89c6-00c04fb6bfc4"
   struct IPeerFactory
     lpVtbl : IPeerFactoryVTbl*
   end
@@ -28514,6 +30340,8 @@ lib LibWin32
     is_home_page : Proc(IHomePage*, UInt8*, Int16*, HRESULT)
   end
 
+  IHomePage_GUID = LibC::GUID.new("766bf2af-d650-11d1-9811-00c04fc31d2e")
+  CLSID_IHomePage = "766bf2af-d650-11d1-9811-00c04fc31d2e"
   struct IHomePage
     lpVtbl : IHomePageVTbl*
   end
@@ -28530,6 +30358,8 @@ lib LibWin32
     put_enabled : Proc(IIntelliForms*, Int16, HRESULT)
   end
 
+  IIntelliForms_GUID = LibC::GUID.new("9b9f68e6-1aaa-11d2-bca5-00c04fd929db")
+  CLSID_IIntelliForms = "9b9f68e6-1aaa-11d2-bca5-00c04fd929db"
   struct IIntelliForms
     lpVtbl : IIntelliFormsVTbl*
   end
@@ -28547,6 +30377,8 @@ lib LibWin32
     navigate_no_site : Proc(Iwfolders*, UInt8*, UInt8*, UInt32, IUnknown, HRESULT)
   end
 
+  Iwfolders_GUID = LibC::GUID.new("bae31f98-1b81-11d2-a97a-00c04f8ecb02")
+  CLSID_Iwfolders = "bae31f98-1b81-11d2-a97a-00c04f8ecb02"
   struct Iwfolders
     lpVtbl : IwfoldersVTbl*
   end
@@ -28562,6 +30394,8 @@ lib LibWin32
     proc_on_click : Proc(IAnchorClick*, HRESULT)
   end
 
+  IAnchorClick_GUID = LibC::GUID.new("13d5413b-33b9-11d2-95a7-00c04f8ecb02")
+  CLSID_IAnchorClick = "13d5413b-33b9-11d2-95a7-00c04f8ecb02"
   struct IAnchorClick
     lpVtbl : IAnchorClickVTbl*
   end
@@ -28584,6 +30418,8 @@ lib LibWin32
     get_expires : Proc(IHTMLUserDataOM*, UInt8**, HRESULT)
   end
 
+  IHTMLUserDataOM_GUID = LibC::GUID.new("3050f48f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLUserDataOM = "3050f48f-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLUserDataOM
     lpVtbl : IHTMLUserDataOMVTbl*
   end
@@ -28602,6 +30438,8 @@ lib LibWin32
     remove_attribute : Proc(IHTMLPersistDataOM*, UInt8*, HRESULT)
   end
 
+  IHTMLPersistDataOM_GUID = LibC::GUID.new("3050f4c0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPersistDataOM = "3050f4c0-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPersistDataOM
     lpVtbl : IHTMLPersistDataOMVTbl*
   end
@@ -28615,6 +30453,8 @@ lib LibWin32
     query_type : Proc(IHTMLPersistData*, Int32, Int16*, HRESULT)
   end
 
+  IHTMLPersistData_GUID = LibC::GUID.new("3050f4c5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLPersistData = "3050f4c5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLPersistData
     lpVtbl : IHTMLPersistDataVTbl*
   end
@@ -28630,6 +30470,8 @@ lib LibWin32
     start_download : Proc(IDownloadBehavior*, UInt8*, IDispatch, HRESULT)
   end
 
+  IDownloadBehavior_GUID = LibC::GUID.new("3050f5bd-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDownloadBehavior = "3050f5bd-98b5-11cf-bb82-00aa00bdce0b"
   struct IDownloadBehavior
     lpVtbl : IDownloadBehaviorVTbl*
   end
@@ -28655,6 +30497,8 @@ lib LibWin32
     get_content_document : Proc(ILayoutRect*, IDispatch*, HRESULT)
   end
 
+  ILayoutRect_GUID = LibC::GUID.new("3050f665-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ILayoutRect = "3050f665-98b5-11cf-bb82-00aa00bdce0b"
   struct ILayoutRect
     lpVtbl : ILayoutRectVTbl*
   end
@@ -28669,6 +30513,8 @@ lib LibWin32
     invoke : Proc(IDeviceRect*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IDeviceRect_GUID = LibC::GUID.new("3050f6d5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDeviceRect = "3050f6d5-98b5-11cf-bb82-00aa00bdce0b"
   struct IDeviceRect
     lpVtbl : IDeviceRectVTbl*
   end
@@ -28705,6 +30551,8 @@ lib LibWin32
     get_time_long : Proc(IHeaderFooter*, UInt8**, HRESULT)
   end
 
+  IHeaderFooter_GUID = LibC::GUID.new("3050f6ce-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHeaderFooter = "3050f6ce-98b5-11cf-bb82-00aa00bdce0b"
   struct IHeaderFooter
     lpVtbl : IHeaderFooterVTbl*
   end
@@ -28743,6 +30591,8 @@ lib LibWin32
     get_font : Proc(IHeaderFooter2*, UInt8**, HRESULT)
   end
 
+  IHeaderFooter2_GUID = LibC::GUID.new("305104a5-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHeaderFooter2 = "305104a5-98b5-11cf-bb82-00aa00bdce0b"
   struct IHeaderFooter2
     lpVtbl : IHeaderFooter2VTbl*
   end
@@ -28754,6 +30604,8 @@ lib LibWin32
     show_html_dialog : Proc(IHostDialogHelper*, LibC::HANDLE, IMoniker, VARIANT*, LibC::LPWSTR, VARIANT*, IUnknown, HRESULT)
   end
 
+  IHostDialogHelper_GUID = LibC::GUID.new("53dec138-a51e-11d2-861e-00c04fa35c89")
+  CLSID_IHostDialogHelper = "53dec138-a51e-11d2-861e-00c04fa35c89"
   struct IHostDialogHelper
     lpVtbl : IHostDialogHelperVTbl*
   end
@@ -28779,6 +30631,8 @@ lib LibWin32
     filter_data_object : Proc(IDocHostUIHandler*, IDataObject, IDataObject*, HRESULT)
   end
 
+  IDocHostUIHandler_GUID = LibC::GUID.new("bd3f23c0-d43e-11cf-893b-00aa00bdce1a")
+  CLSID_IDocHostUIHandler = "bd3f23c0-d43e-11cf-893b-00aa00bdce1a"
   struct IDocHostUIHandler
     lpVtbl : IDocHostUIHandlerVTbl*
   end
@@ -28805,6 +30659,8 @@ lib LibWin32
     get_override_key_path : Proc(IDocHostUIHandler2*, LibC::LPWSTR*, UInt32, HRESULT)
   end
 
+  IDocHostUIHandler2_GUID = LibC::GUID.new("3050f6d0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDocHostUIHandler2 = "3050f6d0-98b5-11cf-bb82-00aa00bdce0b"
   struct IDocHostUIHandler2
     lpVtbl : IDocHostUIHandler2VTbl*
   end
@@ -28816,6 +30672,8 @@ lib LibWin32
     set_ui_handler : Proc(ICustomDoc*, IDocHostUIHandler, HRESULT)
   end
 
+  ICustomDoc_GUID = LibC::GUID.new("3050f3f0-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ICustomDoc = "3050f3f0-98b5-11cf-bb82-00aa00bdce0b"
   struct ICustomDoc
     lpVtbl : ICustomDocVTbl*
   end
@@ -28828,6 +30686,8 @@ lib LibWin32
     show_help : Proc(IDocHostShowUI*, LibC::HANDLE, LibC::LPWSTR, UInt32, UInt32, POINT, IDispatch, HRESULT)
   end
 
+  IDocHostShowUI_GUID = LibC::GUID.new("c4d244b0-d43e-11cf-893b-00aa00bdce1a")
+  CLSID_IDocHostShowUI = "c4d244b0-d43e-11cf-893b-00aa00bdce1a"
   struct IDocHostShowUI
     lpVtbl : IDocHostShowUIVTbl*
   end
@@ -28841,6 +30701,8 @@ lib LibWin32
     create_instance_with_context : Proc(IClassFactoryEx*, IUnknown, IUnknown, Guid*, Void**, HRESULT)
   end
 
+  IClassFactoryEx_GUID = LibC::GUID.new("342d1ea0-ae25-11d1-89c5-006008c3fbfc")
+  CLSID_IClassFactoryEx = "342d1ea0-ae25-11d1-89c5-006008c3fbfc"
   struct IClassFactoryEx
     lpVtbl : IClassFactoryExVTbl*
   end
@@ -28855,6 +30717,8 @@ lib LibWin32
     resize_by : Proc(IHTMLOMWindowServices*, Int32, Int32, HRESULT)
   end
 
+  IHTMLOMWindowServices_GUID = LibC::GUID.new("3050f5fc-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IHTMLOMWindowServices = "3050f5fc-98b5-11cf-bb82-00aa00bdce0b"
   struct IHTMLOMWindowServices
     lpVtbl : IHTMLOMWindowServicesVTbl*
   end
@@ -28867,6 +30731,8 @@ lib LibWin32
     on_script_error : Proc(IDiagnosticsScriptEngineSite*, IActiveScriptError, HRESULT)
   end
 
+  IDiagnosticsScriptEngineSite_GUID = LibC::GUID.new("30510858-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDiagnosticsScriptEngineSite = "30510858-98b5-11cf-bb82-00aa00bdce0b"
   struct IDiagnosticsScriptEngineSite
     lpVtbl : IDiagnosticsScriptEngineSiteVTbl*
   end
@@ -28880,6 +30746,8 @@ lib LibWin32
     detach : Proc(IDiagnosticsScriptEngine*, HRESULT)
   end
 
+  IDiagnosticsScriptEngine_GUID = LibC::GUID.new("30510859-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDiagnosticsScriptEngine = "30510859-98b5-11cf-bb82-00aa00bdce0b"
   struct IDiagnosticsScriptEngine
     lpVtbl : IDiagnosticsScriptEngineVTbl*
   end
@@ -28891,6 +30759,8 @@ lib LibWin32
     create_diagnostics_script_engine : Proc(IDiagnosticsScriptEngineProvider*, IDiagnosticsScriptEngineSite, LibC::BOOL, UInt32, IDiagnosticsScriptEngine*, HRESULT)
   end
 
+  IDiagnosticsScriptEngineProvider_GUID = LibC::GUID.new("3051085a-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_IDiagnosticsScriptEngineProvider = "3051085a-98b5-11cf-bb82-00aa00bdce0b"
   struct IDiagnosticsScriptEngineProvider
     lpVtbl : IDiagnosticsScriptEngineProviderVTbl*
   end
@@ -28904,6 +30774,8 @@ lib LibWin32
     get_type : Proc(IOpenServiceActivityInput*, OpenServiceActivityContentType*, HRESULT)
   end
 
+  IOpenServiceActivityInput_GUID = LibC::GUID.new("75cb4db9-6da0-4da3-83ce-422b6a433346")
+  CLSID_IOpenServiceActivityInput = "75cb4db9-6da0-4da3-83ce-422b6a433346"
   struct IOpenServiceActivityInput
     lpVtbl : IOpenServiceActivityInputVTbl*
   end
@@ -28916,6 +30788,8 @@ lib LibWin32
     can_navigate : Proc(IOpenServiceActivityOutputContext*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IStream, LibC::BOOL*, HRESULT)
   end
 
+  IOpenServiceActivityOutputContext_GUID = LibC::GUID.new("e289deab-f709-49a9-b99e-282364074571")
+  CLSID_IOpenServiceActivityOutputContext = "e289deab-f709-49a9-b99e-282364074571"
   struct IOpenServiceActivityOutputContext
     lpVtbl : IOpenServiceActivityOutputContextVTbl*
   end
@@ -28929,6 +30803,8 @@ lib LibWin32
     get_id : Proc(IOpenService*, UInt8**, HRESULT)
   end
 
+  IOpenService_GUID = LibC::GUID.new("c2952ed1-6a89-4606-925f-1ed8b4be0630")
+  CLSID_IOpenService = "c2952ed1-6a89-4606-925f-1ed8b4be0630"
   struct IOpenService
     lpVtbl : IOpenServiceVTbl*
   end
@@ -28942,6 +30818,8 @@ lib LibWin32
     get_service_by_id : Proc(IOpenServiceManager*, LibC::LPWSTR, IOpenService*, HRESULT)
   end
 
+  IOpenServiceManager_GUID = LibC::GUID.new("5664125f-4e10-4e90-98e4-e4513d955a14")
+  CLSID_IOpenServiceManager = "5664125f-4e10-4e90-98e4-e4513d955a14"
   struct IOpenServiceManager
     lpVtbl : IOpenServiceManagerVTbl*
   end
@@ -28973,6 +30851,8 @@ lib LibWin32
     set_enabled : Proc(IOpenServiceActivity*, LibC::BOOL, HRESULT)
   end
 
+  IOpenServiceActivity_GUID = LibC::GUID.new("13645c88-221a-4905-8ed1-4f5112cfc108")
+  CLSID_IOpenServiceActivity = "13645c88-221a-4905-8ed1-4f5112cfc108"
   struct IOpenServiceActivity
     lpVtbl : IOpenServiceActivityVTbl*
   end
@@ -28987,6 +30867,8 @@ lib LibWin32
     clone : Proc(IEnumOpenServiceActivity*, IEnumOpenServiceActivity*, HRESULT)
   end
 
+  IEnumOpenServiceActivity_GUID = LibC::GUID.new("a436d7d2-17c3-4ef4-a1e8-5c86faff26c0")
+  CLSID_IEnumOpenServiceActivity = "a436d7d2-17c3-4ef4-a1e8-5c86faff26c0"
   struct IEnumOpenServiceActivity
     lpVtbl : IEnumOpenServiceActivityVTbl*
   end
@@ -29002,6 +30884,8 @@ lib LibWin32
     get_activity_enumerator : Proc(IOpenServiceActivityCategory*, IOpenServiceActivityInput, IOpenServiceActivityOutputContext, IEnumOpenServiceActivity*, HRESULT)
   end
 
+  IOpenServiceActivityCategory_GUID = LibC::GUID.new("850af9d6-7309-40b5-bdb8-786c106b2153")
+  CLSID_IOpenServiceActivityCategory = "850af9d6-7309-40b5-bdb8-786c106b2153"
   struct IOpenServiceActivityCategory
     lpVtbl : IOpenServiceActivityCategoryVTbl*
   end
@@ -29016,6 +30900,8 @@ lib LibWin32
     clone : Proc(IEnumOpenServiceActivityCategory*, IEnumOpenServiceActivityCategory*, HRESULT)
   end
 
+  IEnumOpenServiceActivityCategory_GUID = LibC::GUID.new("33627a56-8c9a-4430-8fd1-b5f5c771afb6")
+  CLSID_IEnumOpenServiceActivityCategory = "33627a56-8c9a-4430-8fd1-b5f5c771afb6"
   struct IEnumOpenServiceActivityCategory
     lpVtbl : IEnumOpenServiceActivityCategoryVTbl*
   end
@@ -29030,6 +30916,8 @@ lib LibWin32
     get_version_cookie : Proc(IOpenServiceActivityManager*, UInt32*, HRESULT)
   end
 
+  IOpenServiceActivityManager_GUID = LibC::GUID.new("8a2d0a9d-e920-4bdc-a291-d30f650bc4f1")
+  CLSID_IOpenServiceActivityManager = "8a2d0a9d-e920-4bdc-a291-d30f650bc4f1"
   struct IOpenServiceActivityManager
     lpVtbl : IOpenServiceActivityManagerVTbl*
   end
@@ -29045,6 +30933,8 @@ lib LibWin32
     get_position_cookie : Proc(IPersistHistory*, UInt32*, HRESULT)
   end
 
+  IPersistHistory_GUID = LibC::GUID.new("91a565c1-e38f-11d0-94bf-00a0c9055cbf")
+  CLSID_IPersistHistory = "91a565c1-e38f-11d0-94bf-00a0c9055cbf"
   struct IPersistHistory
     lpVtbl : IPersistHistoryVTbl*
   end
@@ -29060,6 +30950,8 @@ lib LibWin32
     set_filter : Proc(IEnumSTATURL*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  IEnumSTATURL_GUID = LibC::GUID.new("3c374a42-bae4-11cf-bf7d-00aa006946ee")
+  CLSID_IEnumSTATURL = "3c374a42-bae4-11cf-bf7d-00aa006946ee"
   struct IEnumSTATURL
     lpVtbl : IEnumSTATURLVTbl*
   end
@@ -29075,6 +30967,8 @@ lib LibWin32
     enum_urls : Proc(IUrlHistoryStg*, IEnumSTATURL*, HRESULT)
   end
 
+  IUrlHistoryStg_GUID = LibC::GUID.new("3c374a41-bae4-11cf-bf7d-00aa006946ee")
+  CLSID_IUrlHistoryStg = "3c374a41-bae4-11cf-bf7d-00aa006946ee"
   struct IUrlHistoryStg
     lpVtbl : IUrlHistoryStgVTbl*
   end
@@ -29092,6 +30986,8 @@ lib LibWin32
     clear_history : Proc(IUrlHistoryStg2*, HRESULT)
   end
 
+  IUrlHistoryStg2_GUID = LibC::GUID.new("afa0dc11-c313-11d0-831a-00c04fd5ae38")
+  CLSID_IUrlHistoryStg2 = "afa0dc11-c313-11d0-831a-00c04fd5ae38"
   struct IUrlHistoryStg2
     lpVtbl : IUrlHistoryStg2VTbl*
   end
@@ -29104,6 +31000,8 @@ lib LibWin32
     exec : Proc(IUrlHistoryNotify*, Guid*, UInt32, UInt32, VARIANT*, VARIANT*, HRESULT)
   end
 
+  IUrlHistoryNotify_GUID = LibC::GUID.new("bc40bec1-c493-11d0-831b-00c04fd5ae38")
+  CLSID_IUrlHistoryNotify = "bc40bec1-c493-11d0-831b-00c04fd5ae38"
   struct IUrlHistoryNotify
     lpVtbl : IUrlHistoryNotifyVTbl*
   end
@@ -29119,6 +31017,8 @@ lib LibWin32
     fire_document_complete_event : Proc(IWebBrowserEventsService*, HRESULT)
   end
 
+  IWebBrowserEventsService_GUID = LibC::GUID.new("54a8f188-9ebd-4795-ad16-9b4945119636")
+  CLSID_IWebBrowserEventsService = "54a8f188-9ebd-4795-ad16-9b4945119636"
   struct IWebBrowserEventsService
     lpVtbl : IWebBrowserEventsServiceVTbl*
   end
@@ -29130,6 +31030,8 @@ lib LibWin32
     get_url_for_events : Proc(IWebBrowserEventsUrlService*, UInt8**, HRESULT)
   end
 
+  IWebBrowserEventsUrlService_GUID = LibC::GUID.new("87cc5d04-eafa-4833-9820-8f986530cc00")
+  CLSID_IWebBrowserEventsUrlService = "87cc5d04-eafa-4833-9820-8f986530cc00"
   struct IWebBrowserEventsUrlService
     lpVtbl : IWebBrowserEventsUrlServiceVTbl*
   end
@@ -29143,6 +31045,8 @@ lib LibWin32
     set_named_timer_reference : Proc(ITimerService*, Guid*, ITimer, HRESULT)
   end
 
+  ITimerService_GUID = LibC::GUID.new("3050f35f-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITimerService = "3050f35f-98b5-11cf-bb82-00aa00bdce0b"
   struct ITimerService
     lpVtbl : ITimerServiceVTbl*
   end
@@ -29157,6 +31061,8 @@ lib LibWin32
     get_time : Proc(ITimer*, VARIANT*, HRESULT)
   end
 
+  ITimer_GUID = LibC::GUID.new("3050f360-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITimer = "3050f360-98b5-11cf-bb82-00aa00bdce0b"
   struct ITimer
     lpVtbl : ITimerVTbl*
   end
@@ -29172,6 +31078,8 @@ lib LibWin32
     set_mode : Proc(ITimerEx*, UInt32, HRESULT)
   end
 
+  ITimerEx_GUID = LibC::GUID.new("30510414-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITimerEx = "30510414-98b5-11cf-bb82-00aa00bdce0b"
   struct ITimerEx
     lpVtbl : ITimerExVTbl*
   end
@@ -29183,6 +31091,8 @@ lib LibWin32
     on_timer : Proc(ITimerSink*, VARIANT, HRESULT)
   end
 
+  ITimerSink_GUID = LibC::GUID.new("3050f361-98b5-11cf-bb82-00aa00bdce0b")
+  CLSID_ITimerSink = "3050f361-98b5-11cf-bb82-00aa00bdce0b"
   struct ITimerSink
     lpVtbl : ITimerSinkVTbl*
   end
@@ -29196,6 +31106,8 @@ lib LibWin32
     set_mapping : Proc(IMapMIMEToCLSID*, LibC::LPWSTR, UInt32, Guid*, HRESULT)
   end
 
+  IMapMIMEToCLSID_GUID = LibC::GUID.new("d9e89500-30fa-11d0-b724-00aa006c1a01")
+  CLSID_IMapMIMEToCLSID = "d9e89500-30fa-11d0-b724-00aa006c1a01"
   struct IMapMIMEToCLSID
     lpVtbl : IMapMIMEToCLSIDVTbl*
   end
@@ -29209,6 +31121,8 @@ lib LibWin32
     terminate : Proc(IImageDecodeFilter*, HRESULT, HRESULT)
   end
 
+  IImageDecodeFilter_GUID = LibC::GUID.new("a3ccedf3-2de2-11d0-86f4-00a0c913f750")
+  CLSID_IImageDecodeFilter = "a3ccedf3-2de2-11d0-86f4-00a0c913f750"
   struct IImageDecodeFilter
     lpVtbl : IImageDecodeFilterVTbl*
   end
@@ -29225,6 +31139,8 @@ lib LibWin32
     on_progress : Proc(IImageDecodeEventSink*, RECT*, LibC::BOOL, HRESULT)
   end
 
+  IImageDecodeEventSink_GUID = LibC::GUID.new("baa342a0-2ded-11d0-86f4-00a0c913f750")
+  CLSID_IImageDecodeEventSink = "baa342a0-2ded-11d0-86f4-00a0c913f750"
   struct IImageDecodeEventSink
     lpVtbl : IImageDecodeEventSinkVTbl*
   end
@@ -29242,6 +31158,8 @@ lib LibWin32
     is_alpha_premult_required : Proc(IImageDecodeEventSink2*, LibC::BOOL*, HRESULT)
   end
 
+  IImageDecodeEventSink2_GUID = LibC::GUID.new("8ebd8a57-8a96-48c9-84a6-962e2db9c931")
+  CLSID_IImageDecodeEventSink2 = "8ebd8a57-8a96-48c9-84a6-962e2db9c931"
   struct IImageDecodeEventSink2
     lpVtbl : IImageDecodeEventSink2VTbl*
   end
@@ -29254,6 +31172,8 @@ lib LibWin32
     peek : Proc(ISniffStream*, Void*, UInt32, UInt32*, HRESULT)
   end
 
+  ISniffStream_GUID = LibC::GUID.new("4ef17940-30e0-11d0-b724-00aa006c1a01")
+  CLSID_ISniffStream = "4ef17940-30e0-11d0-b724-00aa006c1a01"
   struct ISniffStream
     lpVtbl : ISniffStreamVTbl*
   end
@@ -29266,6 +31186,8 @@ lib LibWin32
     set_event_sink : Proc(IDithererImpl*, IImageDecodeEventSink, HRESULT)
   end
 
+  IDithererImpl_GUID = LibC::GUID.new("7c48e840-3910-11d0-86fc-00a0c913f750")
+  CLSID_IDithererImpl = "7c48e840-3910-11d0-86fc-00a0c913f750"
   struct IDithererImpl
     lpVtbl : IDithererImplVTbl*
   end

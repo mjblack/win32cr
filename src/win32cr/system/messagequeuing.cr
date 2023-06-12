@@ -605,6 +605,8 @@ lib LibWin32
     lookup_queue : Proc(IMSMQQuery*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos*, HRESULT)
   end
 
+  IMSMQQuery_GUID = LibC::GUID.new("d7d6e072-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQQuery = "d7d6e072-dccd-11d0-aa4b-0060970debae"
   struct IMSMQQuery
     lpVtbl : IMSMQQueryVTbl*
   end
@@ -649,6 +651,8 @@ lib LibWin32
     update : Proc(IMSMQQueueInfo*, HRESULT)
   end
 
+  IMSMQQueueInfo_GUID = LibC::GUID.new("d7d6e07b-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQQueueInfo = "d7d6e07b-dccd-11d0-aa4b-0060970debae"
   struct IMSMQQueueInfo
     lpVtbl : IMSMQQueueInfoVTbl*
   end
@@ -697,6 +701,8 @@ lib LibWin32
     put_security : Proc(IMSMQQueueInfo2*, VARIANT, HRESULT)
   end
 
+  IMSMQQueueInfo2_GUID = LibC::GUID.new("fd174a80-89cf-11d2-b0f2-00e02c074f6b")
+  CLSID_IMSMQQueueInfo2 = "fd174a80-89cf-11d2-b0f2-00e02c074f6b"
   struct IMSMQQueueInfo2
     lpVtbl : IMSMQQueueInfo2VTbl*
   end
@@ -750,6 +756,8 @@ lib LibWin32
     get_a_ds_path : Proc(IMSMQQueueInfo3*, UInt8**, HRESULT)
   end
 
+  IMSMQQueueInfo3_GUID = LibC::GUID.new("eba96b1d-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQueueInfo3 = "eba96b1d-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQueueInfo3
     lpVtbl : IMSMQQueueInfo3VTbl*
   end
@@ -803,6 +811,8 @@ lib LibWin32
     get_a_ds_path : Proc(IMSMQQueueInfo4*, UInt8**, HRESULT)
   end
 
+  IMSMQQueueInfo4_GUID = LibC::GUID.new("eba96b21-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQueueInfo4 = "eba96b21-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQueueInfo4
     lpVtbl : IMSMQQueueInfo4VTbl*
   end
@@ -830,6 +840,8 @@ lib LibWin32
     peek_current : Proc(IMSMQQueue*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage*, HRESULT)
   end
 
+  IMSMQQueue_GUID = LibC::GUID.new("d7d6e076-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQQueue = "d7d6e076-dccd-11d0-aa4b-0060970debae"
   struct IMSMQQueue
     lpVtbl : IMSMQQueueVTbl*
   end
@@ -863,6 +875,8 @@ lib LibWin32
     get_properties : Proc(IMSMQQueue2*, IDispatch*, HRESULT)
   end
 
+  IMSMQQueue2_GUID = LibC::GUID.new("ef0574e0-06d8-11d3-b100-00e02c074f6b")
+  CLSID_IMSMQQueue2 = "ef0574e0-06d8-11d3-b100-00e02c074f6b"
   struct IMSMQQueue2
     lpVtbl : IMSMQQueue2VTbl*
   end
@@ -909,6 +923,8 @@ lib LibWin32
     get_is_open2 : Proc(IMSMQQueue3*, Int16*, HRESULT)
   end
 
+  IMSMQQueue3_GUID = LibC::GUID.new("eba96b1b-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQueue3 = "eba96b1b-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQueue3
     lpVtbl : IMSMQQueue3VTbl*
   end
@@ -956,6 +972,8 @@ lib LibWin32
     receive_by_lookup_id_allow_peek : Proc(IMSMQQueue4*, VARIANT, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQMessage4*, HRESULT)
   end
 
+  IMSMQQueue4_GUID = LibC::GUID.new("eba96b20-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQueue4 = "eba96b20-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQueue4
     lpVtbl : IMSMQQueue4VTbl*
   end
@@ -1019,6 +1037,8 @@ lib LibWin32
     attach_current_security_context : Proc(IMSMQMessage*, HRESULT)
   end
 
+  IMSMQMessage_GUID = LibC::GUID.new("d7d6e074-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQMessage = "d7d6e074-dccd-11d0-aa4b-0060970debae"
   struct IMSMQMessage
     lpVtbl : IMSMQMessageVTbl*
   end
@@ -1035,6 +1055,8 @@ lib LibWin32
     next : Proc(IMSMQQueueInfos*, IMSMQQueueInfo*, HRESULT)
   end
 
+  IMSMQQueueInfos_GUID = LibC::GUID.new("d7d6e07d-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQQueueInfos = "d7d6e07d-dccd-11d0-aa4b-0060970debae"
   struct IMSMQQueueInfos
     lpVtbl : IMSMQQueueInfosVTbl*
   end
@@ -1052,6 +1074,8 @@ lib LibWin32
     get_properties : Proc(IMSMQQueueInfos2*, IDispatch*, HRESULT)
   end
 
+  IMSMQQueueInfos2_GUID = LibC::GUID.new("eba96b0f-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQueueInfos2 = "eba96b0f-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQueueInfos2
     lpVtbl : IMSMQQueueInfos2VTbl*
   end
@@ -1069,6 +1093,8 @@ lib LibWin32
     get_properties : Proc(IMSMQQueueInfos3*, IDispatch*, HRESULT)
   end
 
+  IMSMQQueueInfos3_GUID = LibC::GUID.new("eba96b1e-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQueueInfos3 = "eba96b1e-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQueueInfos3
     lpVtbl : IMSMQQueueInfos3VTbl*
   end
@@ -1086,6 +1112,8 @@ lib LibWin32
     get_properties : Proc(IMSMQQueueInfos4*, IDispatch*, HRESULT)
   end
 
+  IMSMQQueueInfos4_GUID = LibC::GUID.new("eba96b22-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQueueInfos4 = "eba96b22-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQueueInfos4
     lpVtbl : IMSMQQueueInfos4VTbl*
   end
@@ -1100,6 +1128,8 @@ lib LibWin32
     invoke : Proc(IMSMQEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IMSMQEvent_GUID = LibC::GUID.new("d7d6e077-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQEvent = "d7d6e077-dccd-11d0-aa4b-0060970debae"
   struct IMSMQEvent
     lpVtbl : IMSMQEventVTbl*
   end
@@ -1115,6 +1145,8 @@ lib LibWin32
     get_properties : Proc(IMSMQEvent2*, IDispatch*, HRESULT)
   end
 
+  IMSMQEvent2_GUID = LibC::GUID.new("eba96b12-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQEvent2 = "eba96b12-2168-11d3-898c-00e02c074f6b"
   struct IMSMQEvent2
     lpVtbl : IMSMQEvent2VTbl*
   end
@@ -1130,6 +1162,8 @@ lib LibWin32
     get_properties : Proc(IMSMQEvent3*, IDispatch*, HRESULT)
   end
 
+  IMSMQEvent3_GUID = LibC::GUID.new("eba96b1c-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQEvent3 = "eba96b1c-2168-11d3-898c-00e02c074f6b"
   struct IMSMQEvent3
     lpVtbl : IMSMQEvent3VTbl*
   end
@@ -1147,6 +1181,8 @@ lib LibWin32
     abort : Proc(IMSMQTransaction*, VARIANT*, VARIANT*, HRESULT)
   end
 
+  IMSMQTransaction_GUID = LibC::GUID.new("d7d6e07f-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQTransaction = "d7d6e07f-dccd-11d0-aa4b-0060970debae"
   struct IMSMQTransaction
     lpVtbl : IMSMQTransactionVTbl*
   end
@@ -1162,6 +1198,8 @@ lib LibWin32
     begin_transaction : Proc(IMSMQCoordinatedTransactionDispenser*, IMSMQTransaction*, HRESULT)
   end
 
+  IMSMQCoordinatedTransactionDispenser_GUID = LibC::GUID.new("d7d6e081-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQCoordinatedTransactionDispenser = "d7d6e081-dccd-11d0-aa4b-0060970debae"
   struct IMSMQCoordinatedTransactionDispenser
     lpVtbl : IMSMQCoordinatedTransactionDispenserVTbl*
   end
@@ -1177,6 +1215,8 @@ lib LibWin32
     begin_transaction : Proc(IMSMQTransactionDispenser*, IMSMQTransaction*, HRESULT)
   end
 
+  IMSMQTransactionDispenser_GUID = LibC::GUID.new("d7d6e083-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQTransactionDispenser = "d7d6e083-dccd-11d0-aa4b-0060970debae"
   struct IMSMQTransactionDispenser
     lpVtbl : IMSMQTransactionDispenserVTbl*
   end
@@ -1193,6 +1233,8 @@ lib LibWin32
     get_properties : Proc(IMSMQQuery2*, IDispatch*, HRESULT)
   end
 
+  IMSMQQuery2_GUID = LibC::GUID.new("eba96b0e-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQuery2 = "eba96b0e-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQuery2
     lpVtbl : IMSMQQuery2VTbl*
   end
@@ -1210,6 +1252,8 @@ lib LibWin32
     lookup_queue : Proc(IMSMQQuery3*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos3*, HRESULT)
   end
 
+  IMSMQQuery3_GUID = LibC::GUID.new("eba96b19-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQuery3 = "eba96b19-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQuery3
     lpVtbl : IMSMQQuery3VTbl*
   end
@@ -1227,6 +1271,8 @@ lib LibWin32
     lookup_queue : Proc(IMSMQQuery4*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IMSMQQueueInfos4*, HRESULT)
   end
 
+  IMSMQQuery4_GUID = LibC::GUID.new("eba96b24-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQQuery4 = "eba96b24-2168-11d3-898c-00e02c074f6b"
   struct IMSMQQuery4
     lpVtbl : IMSMQQuery4VTbl*
   end
@@ -1316,6 +1362,8 @@ lib LibWin32
     get_received_authentication_level : Proc(IMSMQMessage2*, Int16*, HRESULT)
   end
 
+  IMSMQMessage2_GUID = LibC::GUID.new("d9933be0-a567-11d2-b0f3-00e02c074f6b")
+  CLSID_IMSMQMessage2 = "d9933be0-a567-11d2-b0f3-00e02c074f6b"
   struct IMSMQMessage2
     lpVtbl : IMSMQMessage2VTbl*
   end
@@ -1421,6 +1469,8 @@ lib LibWin32
     put_soap_body : Proc(IMSMQMessage3*, UInt8*, HRESULT)
   end
 
+  IMSMQMessage3_GUID = LibC::GUID.new("eba96b1a-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQMessage3 = "eba96b1a-2168-11d3-898c-00e02c074f6b"
   struct IMSMQMessage3
     lpVtbl : IMSMQMessage3VTbl*
   end
@@ -1526,6 +1576,8 @@ lib LibWin32
     put_soap_body : Proc(IMSMQMessage4*, UInt8*, HRESULT)
   end
 
+  IMSMQMessage4_GUID = LibC::GUID.new("eba96b23-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQMessage4 = "eba96b23-2168-11d3-898c-00e02c074f6b"
   struct IMSMQMessage4
     lpVtbl : IMSMQMessage4VTbl*
   end
@@ -1543,6 +1595,8 @@ lib LibWin32
     fire_arrived_error_event : Proc(IMSMQPrivateEvent*, IMSMQQueue, HRESULT, Int32, HRESULT)
   end
 
+  IMSMQPrivateEvent_GUID = LibC::GUID.new("d7ab3341-c9d3-11d1-bb47-0080c7c5a2c0")
+  CLSID_IMSMQPrivateEvent = "d7ab3341-c9d3-11d1-bb47-0080c7c5a2c0"
   struct IMSMQPrivateEvent
     lpVtbl : IMSMQPrivateEventVTbl*
   end
@@ -1557,6 +1611,8 @@ lib LibWin32
     invoke : Proc(IDMSMQEventEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IDMSMQEventEvents_GUID = LibC::GUID.new("d7d6e078-dccd-11d0-aa4b-0060970debae")
+  CLSID_IDMSMQEventEvents = "d7d6e078-dccd-11d0-aa4b-0060970debae"
   struct IDMSMQEventEvents
     lpVtbl : IDMSMQEventEventsVTbl*
   end
@@ -1576,6 +1632,8 @@ lib LibWin32
     get_properties : Proc(IMSMQTransaction2*, IDispatch*, HRESULT)
   end
 
+  IMSMQTransaction2_GUID = LibC::GUID.new("2ce0c5b0-6e67-11d2-b0e6-00e02c074f6b")
+  CLSID_IMSMQTransaction2 = "2ce0c5b0-6e67-11d2-b0e6-00e02c074f6b"
   struct IMSMQTransaction2
     lpVtbl : IMSMQTransaction2VTbl*
   end
@@ -1596,6 +1654,8 @@ lib LibWin32
     get_i_transaction : Proc(IMSMQTransaction3*, VARIANT*, HRESULT)
   end
 
+  IMSMQTransaction3_GUID = LibC::GUID.new("eba96b13-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQTransaction3 = "eba96b13-2168-11d3-898c-00e02c074f6b"
   struct IMSMQTransaction3
     lpVtbl : IMSMQTransaction3VTbl*
   end
@@ -1612,6 +1672,8 @@ lib LibWin32
     get_properties : Proc(IMSMQCoordinatedTransactionDispenser2*, IDispatch*, HRESULT)
   end
 
+  IMSMQCoordinatedTransactionDispenser2_GUID = LibC::GUID.new("eba96b10-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQCoordinatedTransactionDispenser2 = "eba96b10-2168-11d3-898c-00e02c074f6b"
   struct IMSMQCoordinatedTransactionDispenser2
     lpVtbl : IMSMQCoordinatedTransactionDispenser2VTbl*
   end
@@ -1628,6 +1690,8 @@ lib LibWin32
     get_properties : Proc(IMSMQCoordinatedTransactionDispenser3*, IDispatch*, HRESULT)
   end
 
+  IMSMQCoordinatedTransactionDispenser3_GUID = LibC::GUID.new("eba96b14-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQCoordinatedTransactionDispenser3 = "eba96b14-2168-11d3-898c-00e02c074f6b"
   struct IMSMQCoordinatedTransactionDispenser3
     lpVtbl : IMSMQCoordinatedTransactionDispenser3VTbl*
   end
@@ -1644,6 +1708,8 @@ lib LibWin32
     get_properties : Proc(IMSMQTransactionDispenser2*, IDispatch*, HRESULT)
   end
 
+  IMSMQTransactionDispenser2_GUID = LibC::GUID.new("eba96b11-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQTransactionDispenser2 = "eba96b11-2168-11d3-898c-00e02c074f6b"
   struct IMSMQTransactionDispenser2
     lpVtbl : IMSMQTransactionDispenser2VTbl*
   end
@@ -1660,6 +1726,8 @@ lib LibWin32
     get_properties : Proc(IMSMQTransactionDispenser3*, IDispatch*, HRESULT)
   end
 
+  IMSMQTransactionDispenser3_GUID = LibC::GUID.new("eba96b15-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQTransactionDispenser3 = "eba96b15-2168-11d3-898c-00e02c074f6b"
   struct IMSMQTransactionDispenser3
     lpVtbl : IMSMQTransactionDispenser3VTbl*
   end
@@ -1675,6 +1743,8 @@ lib LibWin32
     machine_id_of_machine_name : Proc(IMSMQApplication*, UInt8*, UInt8**, HRESULT)
   end
 
+  IMSMQApplication_GUID = LibC::GUID.new("d7d6e085-dccd-11d0-aa4b-0060970debae")
+  CLSID_IMSMQApplication = "d7d6e085-dccd-11d0-aa4b-0060970debae"
   struct IMSMQApplication
     lpVtbl : IMSMQApplicationVTbl*
   end
@@ -1697,6 +1767,8 @@ lib LibWin32
     get_properties : Proc(IMSMQApplication2*, IDispatch*, HRESULT)
   end
 
+  IMSMQApplication2_GUID = LibC::GUID.new("12a30900-7300-11d2-b0e6-00e02c074f6b")
+  CLSID_IMSMQApplication2 = "12a30900-7300-11d2-b0e6-00e02c074f6b"
   struct IMSMQApplication2
     lpVtbl : IMSMQApplication2VTbl*
   end
@@ -1729,6 +1801,8 @@ lib LibWin32
     tidy : Proc(IMSMQApplication3*, HRESULT)
   end
 
+  IMSMQApplication3_GUID = LibC::GUID.new("eba96b1f-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQApplication3 = "eba96b1f-2168-11d3-898c-00e02c074f6b"
   struct IMSMQApplication3
     lpVtbl : IMSMQApplication3VTbl*
   end
@@ -1757,6 +1831,8 @@ lib LibWin32
     get_properties : Proc(IMSMQDestination*, IDispatch*, HRESULT)
   end
 
+  IMSMQDestination_GUID = LibC::GUID.new("eba96b16-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQDestination = "eba96b16-2168-11d3-898c-00e02c074f6b"
   struct IMSMQDestination
     lpVtbl : IMSMQDestinationVTbl*
   end
@@ -1773,6 +1849,8 @@ lib LibWin32
     put_handle : Proc(IMSMQPrivateDestination*, VARIANT, HRESULT)
   end
 
+  IMSMQPrivateDestination_GUID = LibC::GUID.new("eba96b17-2168-11d3-898c-00e02c074f6b")
+  CLSID_IMSMQPrivateDestination = "eba96b17-2168-11d3-898c-00e02c074f6b"
   struct IMSMQPrivateDestination
     lpVtbl : IMSMQPrivateDestinationVTbl*
   end
@@ -1790,6 +1868,8 @@ lib LibWin32
     _new_enum : Proc(IMSMQCollection*, IUnknown*, HRESULT)
   end
 
+  IMSMQCollection_GUID = LibC::GUID.new("0188ac2f-ecb3-4173-9779-635ca2039c72")
+  CLSID_IMSMQCollection = "0188ac2f-ecb3-4173-9779-635ca2039c72"
   struct IMSMQCollection
     lpVtbl : IMSMQCollectionVTbl*
   end
@@ -1813,6 +1893,8 @@ lib LibWin32
     get_bytes_in_queue : Proc(IMSMQManagement*, VARIANT*, HRESULT)
   end
 
+  IMSMQManagement_GUID = LibC::GUID.new("be5f0241-e489-4957-8cc4-a452fcf3e23e")
+  CLSID_IMSMQManagement = "be5f0241-e489-4957-8cc4-a452fcf3e23e"
   struct IMSMQManagement
     lpVtbl : IMSMQManagementVTbl*
   end
@@ -1842,6 +1924,8 @@ lib LibWin32
     eod_resend : Proc(IMSMQOutgoingQueueManagement*, HRESULT)
   end
 
+  IMSMQOutgoingQueueManagement_GUID = LibC::GUID.new("64c478fb-f9b0-4695-8a7f-439ac94326d3")
+  CLSID_IMSMQOutgoingQueueManagement = "64c478fb-f9b0-4695-8a7f-439ac94326d3"
   struct IMSMQOutgoingQueueManagement
     lpVtbl : IMSMQOutgoingQueueManagementVTbl*
   end
@@ -1868,6 +1952,8 @@ lib LibWin32
     eod_get_receive_info : Proc(IMSMQQueueManagement*, VARIANT*, HRESULT)
   end
 
+  IMSMQQueueManagement_GUID = LibC::GUID.new("7fbe7759-5760-444d-b8a5-5e7ab9a84cce")
+  CLSID_IMSMQQueueManagement = "7fbe7759-5760-444d-b8a5-5e7ab9a84cce"
   struct IMSMQQueueManagement
     lpVtbl : IMSMQQueueManagementVTbl*
   end

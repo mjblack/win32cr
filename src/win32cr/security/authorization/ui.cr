@@ -148,6 +148,8 @@ lib LibWin32
     property_sheet_page_callback : Proc(ISecurityInformation*, LibC::HANDLE, PSPCB_MESSAGE, SI_PAGE_TYPE, HRESULT)
   end
 
+  ISecurityInformation_GUID = LibC::GUID.new("965fc360-16ff-11d0-91cb-00aa00bbb723")
+  CLSID_ISecurityInformation = "965fc360-16ff-11d0-91cb-00aa00bbb723"
   struct ISecurityInformation
     lpVtbl : ISecurityInformationVTbl*
   end
@@ -160,6 +162,8 @@ lib LibWin32
     lookup_sids : Proc(ISecurityInformation2*, UInt32, PSID*, IDataObject*, HRESULT)
   end
 
+  ISecurityInformation2_GUID = LibC::GUID.new("c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
+  CLSID_ISecurityInformation2 = "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a"
   struct ISecurityInformation2
     lpVtbl : ISecurityInformation2VTbl*
   end
@@ -171,6 +175,8 @@ lib LibWin32
     get_effective_permission : Proc(IEffectivePermission*, Guid*, PSID, LibC::LPWSTR, SECURITY_DESCRIPTOR*, OBJECT_TYPE_LIST**, UInt32*, UInt32**, UInt32*, HRESULT)
   end
 
+  IEffectivePermission_GUID = LibC::GUID.new("3853dc76-9f35-407c-88a1-d19344365fbc")
+  CLSID_IEffectivePermission = "3853dc76-9f35-407c-88a1-d19344365fbc"
   struct IEffectivePermission
     lpVtbl : IEffectivePermissionVTbl*
   end
@@ -182,6 +188,8 @@ lib LibWin32
     get_inherit_source : Proc(ISecurityObjectTypeInfo*, UInt32, ACL*, INHERITED_FROMA**, HRESULT)
   end
 
+  ISecurityObjectTypeInfo_GUID = LibC::GUID.new("fc3066eb-79ef-444b-9111-d18a75ebf2fa")
+  CLSID_ISecurityObjectTypeInfo = "fc3066eb-79ef-444b-9111-d18a75ebf2fa"
   struct ISecurityObjectTypeInfo
     lpVtbl : ISecurityObjectTypeInfoVTbl*
   end
@@ -194,6 +202,8 @@ lib LibWin32
     open_elevated_editor : Proc(ISecurityInformation3*, LibC::HANDLE, SI_PAGE_TYPE, HRESULT)
   end
 
+  ISecurityInformation3_GUID = LibC::GUID.new("e2cdc9cc-31bd-4f8f-8c8b-b641af516a1a")
+  CLSID_ISecurityInformation3 = "e2cdc9cc-31bd-4f8f-8c8b-b641af516a1a"
   struct ISecurityInformation3
     lpVtbl : ISecurityInformation3VTbl*
   end
@@ -205,6 +215,8 @@ lib LibWin32
     get_secondary_security : Proc(ISecurityInformation4*, SECURITY_OBJECT**, UInt32*, HRESULT)
   end
 
+  ISecurityInformation4_GUID = LibC::GUID.new("ea961070-cd14-4621-ace4-f63c03e583e4")
+  CLSID_ISecurityInformation4 = "ea961070-cd14-4621-ace4-f63c03e583e4"
   struct ISecurityInformation4
     lpVtbl : ISecurityInformation4VTbl*
   end
@@ -216,6 +228,8 @@ lib LibWin32
     compute_effective_permission_with_secondary_security : Proc(IEffectivePermission2*, PSID, PSID, LibC::LPWSTR, SECURITY_OBJECT*, UInt32, TOKEN_GROUPS*, AUTHZ_SID_OPERATION*, TOKEN_GROUPS*, AUTHZ_SID_OPERATION*, AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, EFFPERM_RESULT_LIST*, HRESULT)
   end
 
+  IEffectivePermission2_GUID = LibC::GUID.new("941fabca-dd47-4fca-90bb-b0e10255f20d")
+  CLSID_IEffectivePermission2 = "941fabca-dd47-4fca-90bb-b0e10255f20d"
   struct IEffectivePermission2
     lpVtbl : IEffectivePermission2VTbl*
   end

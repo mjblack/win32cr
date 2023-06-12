@@ -51,6 +51,8 @@ lib LibWin32
     terminate : Proc(IRendezvousSession*, HRESULT, UInt8*, HRESULT)
   end
 
+  IRendezvousSession_GUID = LibC::GUID.new("9ba4b1dd-8b0c-48b7-9e7c-2f25857c8df5")
+  CLSID_IRendezvousSession = "9ba4b1dd-8b0c-48b7-9e7c-2f25857c8df5"
   struct IRendezvousSession
     lpVtbl : IRendezvousSessionVTbl*
   end
@@ -65,6 +67,8 @@ lib LibWin32
     invoke : Proc(DRendezvousSessionEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DRendezvousSessionEvents_GUID = LibC::GUID.new("3fa19cf8-64c4-4f53-ae60-635b3806eca6")
+  CLSID_DRendezvousSessionEvents = "3fa19cf8-64c4-4f53-ae60-635b3806eca6"
   struct DRendezvousSessionEvents
     lpVtbl : DRendezvousSessionEventsVTbl*
   end
@@ -76,6 +80,8 @@ lib LibWin32
     set_rendezvous_session : Proc(IRendezvousApplication*, IUnknown, HRESULT)
   end
 
+  IRendezvousApplication_GUID = LibC::GUID.new("4f4d070b-a275-49fb-b10d-8ec26387b50d")
+  CLSID_IRendezvousApplication = "4f4d070b-a275-49fb-b10d-8ec26387b50d"
   struct IRendezvousApplication
     lpVtbl : IRendezvousApplicationVTbl*
   end

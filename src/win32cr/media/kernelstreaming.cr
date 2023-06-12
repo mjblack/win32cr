@@ -4781,6 +4781,8 @@ lib LibWin32
     ks_event : Proc(IKsControl*, KSIDENTIFIER*, UInt32, Void*, UInt32, UInt32*, HRESULT)
   end
 
+  IKsControl_GUID = LibC::GUID.new("28f54685-06fd-11d2-b27a-00a0c9223196")
+  CLSID_IKsControl = "28f54685-06fd-11d2-b27a-00a0c9223196"
   struct IKsControl
     lpVtbl : IKsControlVTbl*
   end
@@ -4793,6 +4795,8 @@ lib LibWin32
     get_device_preferred_format : Proc(IKsFormatSupport*, KSDATAFORMAT**, HRESULT)
   end
 
+  IKsFormatSupport_GUID = LibC::GUID.new("3cb4a69d-bb6f-4d2b-95b7-452d2c155db5")
+  CLSID_IKsFormatSupport = "3cb4a69d-bb6f-4d2b-95b7-452d2c155db5"
   struct IKsFormatSupport
     lpVtbl : IKsFormatSupportVTbl*
   end
@@ -4805,6 +4809,8 @@ lib LibWin32
     get_jack_description : Proc(IKsJackDescription*, UInt32, KSJACK_DESCRIPTION*, HRESULT)
   end
 
+  IKsJackDescription_GUID = LibC::GUID.new("4509f757-2d46-4637-8e62-ce7db944f57b")
+  CLSID_IKsJackDescription = "4509f757-2d46-4637-8e62-ce7db944f57b"
   struct IKsJackDescription
     lpVtbl : IKsJackDescriptionVTbl*
   end
@@ -4817,6 +4823,8 @@ lib LibWin32
     get_jack_description2 : Proc(IKsJackDescription2*, UInt32, KSJACK_DESCRIPTION2*, HRESULT)
   end
 
+  IKsJackDescription2_GUID = LibC::GUID.new("478f3a9b-e0c9-4827-9228-6f5505ffe76a")
+  CLSID_IKsJackDescription2 = "478f3a9b-e0c9-4827-9228-6f5505ffe76a"
   struct IKsJackDescription2
     lpVtbl : IKsJackDescription2VTbl*
   end
@@ -4828,6 +4836,8 @@ lib LibWin32
     get_jack_sink_information : Proc(IKsJackSinkInformation*, KSJACK_SINK_INFORMATION*, HRESULT)
   end
 
+  IKsJackSinkInformation_GUID = LibC::GUID.new("d9bd72ed-290f-4581-9ff3-61027a8fe532")
+  CLSID_IKsJackSinkInformation = "d9bd72ed-290f-4581-9ff3-61027a8fe532"
   struct IKsJackSinkInformation
     lpVtbl : IKsJackSinkInformationVTbl*
   end
@@ -4839,6 +4849,8 @@ lib LibWin32
     get_jack_container_id : Proc(IKsJackContainerId*, Guid*, HRESULT)
   end
 
+  IKsJackContainerId_GUID = LibC::GUID.new("c99af463-d629-4ec4-8c00-e54d68154248")
+  CLSID_IKsJackContainerId = "c99af463-d629-4ec4-8c00-e54d68154248"
   struct IKsJackContainerId
     lpVtbl : IKsJackContainerIdVTbl*
   end
@@ -4852,6 +4864,8 @@ lib LibWin32
     query_supported : Proc(IKsPropertySet*, Guid*, UInt32, UInt32*, HRESULT)
   end
 
+  IKsPropertySet_GUID = LibC::GUID.new("31efac30-515c-11d0-a9aa-00aa0061be93")
+  CLSID_IKsPropertySet = "31efac30-515c-11d0-a9aa-00aa0061be93"
   struct IKsPropertySet
     lpVtbl : IKsPropertySetVTbl*
   end
@@ -4864,6 +4878,8 @@ lib LibWin32
     ks_remove_aggregate : Proc(IKsAggregateControl*, Guid*, HRESULT)
   end
 
+  IKsAggregateControl_GUID = LibC::GUID.new("7f40eac0-3947-11d2-874e-00a0c9223196")
+  CLSID_IKsAggregateControl = "7f40eac0-3947-11d2-874e-00a0c9223196"
   struct IKsAggregateControl
     lpVtbl : IKsAggregateControlVTbl*
   end
@@ -4875,6 +4891,8 @@ lib LibWin32
     create_node_instance : Proc(IKsTopology*, UInt32, UInt32, UInt32, IUnknown, Guid*, Void**, HRESULT)
   end
 
+  IKsTopology_GUID = LibC::GUID.new("28f54683-06fd-11d2-b27a-00a0c9223196")
+  CLSID_IKsTopology = "28f54683-06fd-11d2-b27a-00a0c9223196"
   struct IKsTopology
     lpVtbl : IKsTopologyVTbl*
   end

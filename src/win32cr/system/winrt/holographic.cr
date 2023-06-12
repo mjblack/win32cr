@@ -28,6 +28,8 @@ lib LibWin32
     unacquire_direct3_d12_buffer_resource : Proc(IHolographicCameraInterop*, ID3D12Resource, HRESULT)
   end
 
+  IHolographicCameraInterop_GUID = LibC::GUID.new("7cc1f9c5-6d02-41fa-9500-e1809eb48eec")
+  CLSID_IHolographicCameraInterop = "7cc1f9c5-6d02-41fa-9500-e1809eb48eec"
   struct IHolographicCameraInterop
     lpVtbl : IHolographicCameraInteropVTbl*
   end
@@ -43,6 +45,8 @@ lib LibWin32
     commit_direct3_d12_resource_with_depth_data : Proc(IHolographicCameraRenderingParametersInterop*, ID3D12Resource, ID3D12Fence, UInt64, ID3D12Resource, ID3D12Fence, UInt64, HRESULT)
   end
 
+  IHolographicCameraRenderingParametersInterop_GUID = LibC::GUID.new("f75b68d6-d1fd-4707-aafd-fa6f4c0e3bf4")
+  CLSID_IHolographicCameraRenderingParametersInterop = "f75b68d6-d1fd-4707-aafd-fa6f4c0e3bf4"
   struct IHolographicCameraRenderingParametersInterop
     lpVtbl : IHolographicCameraRenderingParametersInteropVTbl*
   end
@@ -61,6 +65,8 @@ lib LibWin32
     unacquire_direct3_d12_buffer_resource : Proc(IHolographicQuadLayerInterop*, ID3D12Resource, HRESULT)
   end
 
+  IHolographicQuadLayerInterop_GUID = LibC::GUID.new("cfa688f0-639e-4a47-83d7-6b7f5ebf7fed")
+  CLSID_IHolographicQuadLayerInterop = "cfa688f0-639e-4a47-83d7-6b7f5ebf7fed"
   struct IHolographicQuadLayerInterop
     lpVtbl : IHolographicQuadLayerInteropVTbl*
   end
@@ -75,6 +81,8 @@ lib LibWin32
     commit_direct3_d12_resource : Proc(IHolographicQuadLayerUpdateParametersInterop*, ID3D12Resource, ID3D12Fence, UInt64, HRESULT)
   end
 
+  IHolographicQuadLayerUpdateParametersInterop_GUID = LibC::GUID.new("e5f549cd-c909-444f-8809-7cc18a9c8920")
+  CLSID_IHolographicQuadLayerUpdateParametersInterop = "e5f549cd-c909-444f-8809-7cc18a9c8920"
   struct IHolographicQuadLayerUpdateParametersInterop
     lpVtbl : IHolographicQuadLayerUpdateParametersInteropVTbl*
   end

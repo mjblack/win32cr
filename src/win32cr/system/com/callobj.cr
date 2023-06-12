@@ -97,6 +97,8 @@ lib LibWin32
     invoke : Proc(ICallFrame*, Void*, HRESULT)
   end
 
+  ICallFrame_GUID = LibC::GUID.new("d573b4b0-894e-11d2-b8b6-00c04fb9618a")
+  CLSID_ICallFrame = "d573b4b0-894e-11d2-b8b6-00c04fb9618a"
   struct ICallFrame
     lpVtbl : ICallFrameVTbl*
   end
@@ -111,6 +113,8 @@ lib LibWin32
     get_iid : Proc(ICallIndirect*, Guid*, LibC::BOOL*, UInt32*, LibC::LPWSTR*, HRESULT)
   end
 
+  ICallIndirect_GUID = LibC::GUID.new("d573b4b1-894e-11d2-b8b6-00c04fb9618a")
+  CLSID_ICallIndirect = "d573b4b1-894e-11d2-b8b6-00c04fb9618a"
   struct ICallIndirect
     lpVtbl : ICallIndirectVTbl*
   end
@@ -127,6 +131,8 @@ lib LibWin32
     get_registered_sink : Proc(ICallInterceptor*, ICallFrameEvents*, HRESULT)
   end
 
+  ICallInterceptor_GUID = LibC::GUID.new("60c7ca75-896d-11d2-b8b6-00c04fb9618a")
+  CLSID_ICallInterceptor = "60c7ca75-896d-11d2-b8b6-00c04fb9618a"
   struct ICallInterceptor
     lpVtbl : ICallInterceptorVTbl*
   end
@@ -138,6 +144,8 @@ lib LibWin32
     on_call : Proc(ICallFrameEvents*, ICallFrame, HRESULT)
   end
 
+  ICallFrameEvents_GUID = LibC::GUID.new("fd5e0843-fc91-11d0-97d7-00c04fb9618a")
+  CLSID_ICallFrameEvents = "fd5e0843-fc91-11d0-97d7-00c04fb9618a"
   struct ICallFrameEvents
     lpVtbl : ICallFrameEventsVTbl*
   end
@@ -150,6 +158,8 @@ lib LibWin32
     release_marshal_data : Proc(ICallUnmarshal*, UInt32, Void*, UInt32, UInt32, UInt32, CALLFRAME_MARSHALCONTEXT*, HRESULT)
   end
 
+  ICallUnmarshal_GUID = LibC::GUID.new("5333b003-2e42-11d2-b89d-00c04fb9618a")
+  CLSID_ICallUnmarshal = "5333b003-2e42-11d2-b89d-00c04fb9618a"
   struct ICallUnmarshal
     lpVtbl : ICallUnmarshalVTbl*
   end
@@ -161,6 +171,8 @@ lib LibWin32
     on_walk_interface : Proc(ICallFrameWalker*, Guid*, Void**, LibC::BOOL, LibC::BOOL, HRESULT)
   end
 
+  ICallFrameWalker_GUID = LibC::GUID.new("08b23919-392d-11d2-b8a4-00c04fb9618a")
+  CLSID_ICallFrameWalker = "08b23919-392d-11d2-b8a4-00c04fb9618a"
   struct ICallFrameWalker
     lpVtbl : ICallFrameWalkerVTbl*
   end
@@ -173,6 +185,8 @@ lib LibWin32
     get_iid : Proc(IInterfaceRelated*, Guid*, HRESULT)
   end
 
+  IInterfaceRelated_GUID = LibC::GUID.new("d1fb5a79-7706-11d1-adba-00c04fc2adc0")
+  CLSID_IInterfaceRelated = "d1fb5a79-7706-11d1-adba-00c04fc2adc0"
   struct IInterfaceRelated
     lpVtbl : IInterfaceRelatedVTbl*
   end

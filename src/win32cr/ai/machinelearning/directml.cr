@@ -1446,6 +1446,8 @@ lib LibWin32
     set_name : Proc(IDMLObject*, LibC::LPWSTR, HRESULT)
   end
 
+  IDMLObject_GUID = LibC::GUID.new("c8263aac-9e0c-4a2d-9b8e-007521a3317c")
+  CLSID_IDMLObject = "c8263aac-9e0c-4a2d-9b8e-007521a3317c"
   struct IDMLObject
     lpVtbl : IDMLObjectVTbl*
   end
@@ -1470,6 +1472,8 @@ lib LibWin32
     get_parent_device : Proc(IDMLDevice*, Guid*, Void**, HRESULT)
   end
 
+  IDMLDevice_GUID = LibC::GUID.new("6dbd6437-96fd-423f-a98c-ae5e7c2a573f")
+  CLSID_IDMLDevice = "6dbd6437-96fd-423f-a98c-ae5e7c2a573f"
   struct IDMLDevice
     lpVtbl : IDMLDeviceVTbl*
   end
@@ -1485,6 +1489,8 @@ lib LibWin32
     get_device : Proc(IDMLDeviceChild*, Guid*, Void**, HRESULT)
   end
 
+  IDMLDeviceChild_GUID = LibC::GUID.new("27e83142-8165-49e3-974e-2fd66e4cb69d")
+  CLSID_IDMLDeviceChild = "27e83142-8165-49e3-974e-2fd66e4cb69d"
   struct IDMLDeviceChild
     lpVtbl : IDMLDeviceChildVTbl*
   end
@@ -1500,6 +1506,8 @@ lib LibWin32
     get_device : Proc(IDMLPageable*, Guid*, Void**, HRESULT)
   end
 
+  IDMLPageable_GUID = LibC::GUID.new("b1ab0825-4542-4a4b-8617-6dde6e8f6201")
+  CLSID_IDMLPageable = "b1ab0825-4542-4a4b-8617-6dde6e8f6201"
   struct IDMLPageable
     lpVtbl : IDMLPageableVTbl*
   end
@@ -1515,6 +1523,8 @@ lib LibWin32
     get_device : Proc(IDMLOperator*, Guid*, Void**, HRESULT)
   end
 
+  IDMLOperator_GUID = LibC::GUID.new("26caae7a-3081-4633-9581-226fbe57695d")
+  CLSID_IDMLOperator = "26caae7a-3081-4633-9581-226fbe57695d"
   struct IDMLOperator
     lpVtbl : IDMLOperatorVTbl*
   end
@@ -1531,6 +1541,8 @@ lib LibWin32
     get_binding_properties : Proc(IDMLDispatchable*, DML_BINDING_PROPERTIES)
   end
 
+  IDMLDispatchable_GUID = LibC::GUID.new("dcb821a8-1039-441e-9f1c-b1759c2f3cec")
+  CLSID_IDMLDispatchable = "dcb821a8-1039-441e-9f1c-b1759c2f3cec"
   struct IDMLDispatchable
     lpVtbl : IDMLDispatchableVTbl*
   end
@@ -1547,6 +1559,8 @@ lib LibWin32
     get_binding_properties : Proc(IDMLCompiledOperator*, DML_BINDING_PROPERTIES)
   end
 
+  IDMLCompiledOperator_GUID = LibC::GUID.new("6b15e56a-bf5c-4902-92d8-da3a650afea4")
+  CLSID_IDMLCompiledOperator = "6b15e56a-bf5c-4902-92d8-da3a650afea4"
   struct IDMLCompiledOperator
     lpVtbl : IDMLCompiledOperatorVTbl*
   end
@@ -1564,6 +1578,8 @@ lib LibWin32
     reset : Proc(IDMLOperatorInitializer*, UInt32, IDMLCompiledOperator*, HRESULT)
   end
 
+  IDMLOperatorInitializer_GUID = LibC::GUID.new("427c1113-435c-469c-8676-4d5dd072f813")
+  CLSID_IDMLOperatorInitializer = "427c1113-435c-469c-8676-4d5dd072f813"
   struct IDMLOperatorInitializer
     lpVtbl : IDMLOperatorInitializerVTbl*
   end
@@ -1584,6 +1600,8 @@ lib LibWin32
     reset : Proc(IDMLBindingTable*, DML_BINDING_TABLE_DESC*, HRESULT)
   end
 
+  IDMLBindingTable_GUID = LibC::GUID.new("29c687dc-de74-4e3b-ab00-1168f2fc3cfc")
+  CLSID_IDMLBindingTable = "29c687dc-de74-4e3b-ab00-1168f2fc3cfc"
   struct IDMLBindingTable
     lpVtbl : IDMLBindingTableVTbl*
   end
@@ -1600,6 +1618,8 @@ lib LibWin32
     record_dispatch : Proc(IDMLCommandRecorder*, ID3D12CommandList, IDMLDispatchable, IDMLBindingTable, Void)
   end
 
+  IDMLCommandRecorder_GUID = LibC::GUID.new("e6857a76-2e3e-4fdd-bff4-5d2ba10fb453")
+  CLSID_IDMLCommandRecorder = "e6857a76-2e3e-4fdd-bff4-5d2ba10fb453"
   struct IDMLCommandRecorder
     lpVtbl : IDMLCommandRecorderVTbl*
   end
@@ -1611,6 +1631,8 @@ lib LibWin32
     set_mute_debug_output : Proc(IDMLDebugDevice*, LibC::BOOL, Void)
   end
 
+  IDMLDebugDevice_GUID = LibC::GUID.new("7d6f3ac9-394a-4ac3-92a7-390cc57a8217")
+  CLSID_IDMLDebugDevice = "7d6f3ac9-394a-4ac3-92a7-390cc57a8217"
   struct IDMLDebugDevice
     lpVtbl : IDMLDebugDeviceVTbl*
   end
@@ -1636,6 +1658,8 @@ lib LibWin32
     compile_graph : Proc(IDMLDevice1*, DML_GRAPH_DESC*, DML_EXECUTION_FLAGS, Guid*, Void**, HRESULT)
   end
 
+  IDMLDevice1_GUID = LibC::GUID.new("a0884f9a-d2be-4355-aa5d-5901281ad1d2")
+  CLSID_IDMLDevice1 = "a0884f9a-d2be-4355-aa5d-5901281ad1d2"
   struct IDMLDevice1
     lpVtbl : IDMLDevice1VTbl*
   end

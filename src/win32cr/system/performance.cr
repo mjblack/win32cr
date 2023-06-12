@@ -958,6 +958,8 @@ lib LibWin32
     get_value : Proc(IDataCollectorSet*, UInt8*, UInt8**, HRESULT)
   end
 
+  IDataCollectorSet_GUID = LibC::GUID.new("03837520-098b-11d8-9414-505054503030")
+  CLSID_IDataCollectorSet = "03837520-098b-11d8-9414-505054503030"
   struct IDataCollectorSet
     lpVtbl : IDataCollectorSetVTbl*
   end
@@ -997,6 +999,8 @@ lib LibWin32
     extract : Proc(IDataManager*, UInt8*, UInt8*, HRESULT)
   end
 
+  IDataManager_GUID = LibC::GUID.new("03837541-098b-11d8-9414-505054503030")
+  CLSID_IDataManager = "03837541-098b-11d8-9414-505054503030"
   struct IDataManager
     lpVtbl : IDataManagerVTbl*
   end
@@ -1019,6 +1023,8 @@ lib LibWin32
     put_send_cab_to : Proc(IFolderAction*, UInt8*, HRESULT)
   end
 
+  IFolderAction_GUID = LibC::GUID.new("03837543-098b-11d8-9414-505054503030")
+  CLSID_IFolderAction = "03837543-098b-11d8-9414-505054503030"
   struct IFolderAction
     lpVtbl : IFolderActionVTbl*
   end
@@ -1041,6 +1047,8 @@ lib LibWin32
     create_folder_action : Proc(IFolderActionCollection*, IFolderAction*, HRESULT)
   end
 
+  IFolderActionCollection_GUID = LibC::GUID.new("03837544-098b-11d8-9414-505054503030")
+  CLSID_IFolderActionCollection = "03837544-098b-11d8-9414-505054503030"
   struct IFolderActionCollection
     lpVtbl : IFolderActionCollectionVTbl*
   end
@@ -1080,6 +1088,8 @@ lib LibWin32
     create_output_location : Proc(IDataCollector*, Int16, UInt8**, HRESULT)
   end
 
+  IDataCollector_GUID = LibC::GUID.new("038374ff-098b-11d8-9414-505054503030")
+  CLSID_IDataCollector = "038374ff-098b-11d8-9414-505054503030"
   struct IDataCollector
     lpVtbl : IDataCollectorVTbl*
   end
@@ -1129,6 +1139,8 @@ lib LibWin32
     put_segment_max_records : Proc(IPerformanceCounterDataCollector*, UInt32, HRESULT)
   end
 
+  IPerformanceCounterDataCollector_GUID = LibC::GUID.new("03837506-098b-11d8-9414-505054503030")
+  CLSID_IPerformanceCounterDataCollector = "03837506-098b-11d8-9414-505054503030"
   struct IPerformanceCounterDataCollector
     lpVtbl : IPerformanceCounterDataCollectorVTbl*
   end
@@ -1208,6 +1220,8 @@ lib LibWin32
     get_trace_data_providers : Proc(ITraceDataCollector*, ITraceDataProviderCollection*, HRESULT)
   end
 
+  ITraceDataCollector_GUID = LibC::GUID.new("0383750b-098b-11d8-9414-505054503030")
+  CLSID_ITraceDataCollector = "0383750b-098b-11d8-9414-505054503030"
   struct ITraceDataCollector
     lpVtbl : ITraceDataCollectorVTbl*
   end
@@ -1265,6 +1279,8 @@ lib LibWin32
     put_system_state_file : Proc(IConfigurationDataCollector*, UInt8*, HRESULT)
   end
 
+  IConfigurationDataCollector_GUID = LibC::GUID.new("03837514-098b-11d8-9414-505054503030")
+  CLSID_IConfigurationDataCollector = "03837514-098b-11d8-9414-505054503030"
   struct IConfigurationDataCollector
     lpVtbl : IConfigurationDataCollectorVTbl*
   end
@@ -1320,6 +1336,8 @@ lib LibWin32
     put_trigger_data_collector_set : Proc(IAlertDataCollector*, UInt8*, HRESULT)
   end
 
+  IAlertDataCollector_GUID = LibC::GUID.new("03837516-098b-11d8-9414-505054503030")
+  CLSID_IAlertDataCollector = "03837516-098b-11d8-9414-505054503030"
   struct IAlertDataCollector
     lpVtbl : IAlertDataCollectorVTbl*
   end
@@ -1373,6 +1391,8 @@ lib LibWin32
     put_exclude_apis : Proc(IApiTracingDataCollector*, SAFEARRAY*, HRESULT)
   end
 
+  IApiTracingDataCollector_GUID = LibC::GUID.new("0383751a-098b-11d8-9414-505054503030")
+  CLSID_IApiTracingDataCollector = "0383751a-098b-11d8-9414-505054503030"
   struct IApiTracingDataCollector
     lpVtbl : IApiTracingDataCollectorVTbl*
   end
@@ -1396,6 +1416,8 @@ lib LibWin32
     create_data_collector : Proc(IDataCollectorCollection*, DataCollectorType, IDataCollector*, HRESULT)
   end
 
+  IDataCollectorCollection_GUID = LibC::GUID.new("03837502-098b-11d8-9414-505054503030")
+  CLSID_IDataCollectorCollection = "03837502-098b-11d8-9414-505054503030"
   struct IDataCollectorCollection
     lpVtbl : IDataCollectorCollectionVTbl*
   end
@@ -1418,6 +1440,8 @@ lib LibWin32
     get_data_collector_sets : Proc(IDataCollectorSetCollection*, UInt8*, UInt8*, HRESULT)
   end
 
+  IDataCollectorSetCollection_GUID = LibC::GUID.new("03837524-098b-11d8-9414-505054503030")
+  CLSID_IDataCollectorSetCollection = "03837524-098b-11d8-9414-505054503030"
   struct IDataCollectorSetCollection
     lpVtbl : IDataCollectorSetCollectionVTbl*
   end
@@ -1451,6 +1475,8 @@ lib LibWin32
     get_registered_processes : Proc(ITraceDataProvider*, IValueMap*, HRESULT)
   end
 
+  ITraceDataProvider_GUID = LibC::GUID.new("03837512-098b-11d8-9414-505054503030")
+  CLSID_ITraceDataProvider = "03837512-098b-11d8-9414-505054503030"
   struct ITraceDataProvider
     lpVtbl : ITraceDataProviderVTbl*
   end
@@ -1475,6 +1501,8 @@ lib LibWin32
     get_trace_data_providers_by_process : Proc(ITraceDataProviderCollection*, UInt8*, UInt32, HRESULT)
   end
 
+  ITraceDataProviderCollection_GUID = LibC::GUID.new("03837510-098b-11d8-9414-505054503030")
+  CLSID_ITraceDataProviderCollection = "03837510-098b-11d8-9414-505054503030"
   struct ITraceDataProviderCollection
     lpVtbl : ITraceDataProviderCollectionVTbl*
   end
@@ -1497,6 +1525,8 @@ lib LibWin32
     put_days : Proc(ISchedule*, WeekDays, HRESULT)
   end
 
+  ISchedule_GUID = LibC::GUID.new("0383753a-098b-11d8-9414-505054503030")
+  CLSID_ISchedule = "0383753a-098b-11d8-9414-505054503030"
   struct ISchedule
     lpVtbl : IScheduleVTbl*
   end
@@ -1519,6 +1549,8 @@ lib LibWin32
     create_schedule : Proc(IScheduleCollection*, ISchedule*, HRESULT)
   end
 
+  IScheduleCollection_GUID = LibC::GUID.new("0383753d-098b-11d8-9414-505054503030")
+  CLSID_IScheduleCollection = "0383753d-098b-11d8-9414-505054503030"
   struct IScheduleCollection
     lpVtbl : IScheduleCollectionVTbl*
   end
@@ -1543,6 +1575,8 @@ lib LibWin32
     put_value_map_type : Proc(IValueMapItem*, ValueMapType, HRESULT)
   end
 
+  IValueMapItem_GUID = LibC::GUID.new("03837533-098b-11d8-9414-505054503030")
+  CLSID_IValueMapItem = "03837533-098b-11d8-9414-505054503030"
   struct IValueMapItem
     lpVtbl : IValueMapItemVTbl*
   end
@@ -1571,6 +1605,8 @@ lib LibWin32
     create_value_map_item : Proc(IValueMap*, IValueMapItem*, HRESULT)
   end
 
+  IValueMap_GUID = LibC::GUID.new("03837534-098b-11d8-9414-505054503030")
+  CLSID_IValueMap = "03837534-098b-11d8-9414-505054503030"
   struct IValueMap
     lpVtbl : IValueMapVTbl*
   end
@@ -1593,6 +1629,8 @@ lib LibWin32
     get_statistics : Proc(ICounterItem*, Float64*, Float64*, Float64*, Int32*, HRESULT)
   end
 
+  ICounterItem_GUID = LibC::GUID.new("771a9520-ee28-11ce-941e-008029004347")
+  CLSID_ICounterItem = "771a9520-ee28-11ce-941e-008029004347"
   struct ICounterItem
     lpVtbl : ICounterItemVTbl*
   end
@@ -1620,6 +1658,8 @@ lib LibWin32
     get_data_at : Proc(ICounterItem2*, Int32, SysmonDataType, VARIANT*, HRESULT)
   end
 
+  ICounterItem2_GUID = LibC::GUID.new("eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9")
+  CLSID_ICounterItem2 = "eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9"
   struct ICounterItem2
     lpVtbl : ICounterItem2VTbl*
   end
@@ -1647,6 +1687,8 @@ lib LibWin32
     get_data_at : Proc(IICounterItemUnion*, Int32, SysmonDataType, VARIANT*, HRESULT)
   end
 
+  IICounterItemUnion_GUID = LibC::GUID.new("de1a6b74-9182-4c41-8e2c-24c2cd30ee83")
+  CLSID_IICounterItemUnion = "de1a6b74-9182-4c41-8e2c-24c2cd30ee83"
   struct IICounterItemUnion
     lpVtbl : IICounterItemUnionVTbl*
   end
@@ -1661,6 +1703,8 @@ lib LibWin32
     invoke : Proc(DICounterItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DICounterItem_GUID = LibC::GUID.new("c08c4ff2-0e2e-11cf-942c-008029004347")
+  CLSID_DICounterItem = "c08c4ff2-0e2e-11cf-942c-008029004347"
   struct DICounterItem
     lpVtbl : DICounterItemVTbl*
   end
@@ -1680,6 +1724,8 @@ lib LibWin32
     remove : Proc(ICounters*, VARIANT, HRESULT)
   end
 
+  ICounters_GUID = LibC::GUID.new("79167962-28fc-11cf-942f-008029004347")
+  CLSID_ICounters = "79167962-28fc-11cf-942f-008029004347"
   struct ICounters
     lpVtbl : ICountersVTbl*
   end
@@ -1691,6 +1737,8 @@ lib LibWin32
     get_path : Proc(ILogFileItem*, UInt8**, HRESULT)
   end
 
+  ILogFileItem_GUID = LibC::GUID.new("d6b518dd-05c7-418a-89e6-4f9ce8c6841e")
+  CLSID_ILogFileItem = "d6b518dd-05c7-418a-89e6-4f9ce8c6841e"
   struct ILogFileItem
     lpVtbl : ILogFileItemVTbl*
   end
@@ -1705,6 +1753,8 @@ lib LibWin32
     invoke : Proc(DILogFileItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DILogFileItem_GUID = LibC::GUID.new("8d093ffc-f777-4917-82d1-833fbc54c58f")
+  CLSID_DILogFileItem = "8d093ffc-f777-4917-82d1-833fbc54c58f"
   struct DILogFileItem
     lpVtbl : DILogFileItemVTbl*
   end
@@ -1724,6 +1774,8 @@ lib LibWin32
     remove : Proc(ILogFiles*, VARIANT, HRESULT)
   end
 
+  ILogFiles_GUID = LibC::GUID.new("6a2a97e6-6851-41ea-87ad-2a8225335865")
+  CLSID_ILogFiles = "6a2a97e6-6851-41ea-87ad-2a8225335865"
   struct ILogFiles
     lpVtbl : ILogFilesVTbl*
   end
@@ -1810,6 +1862,8 @@ lib LibWin32
     get_sql_log_set_name : Proc(ISystemMonitor*, UInt8**, HRESULT)
   end
 
+  ISystemMonitor_GUID = LibC::GUID.new("194eb241-c32c-11cf-9398-00aa00a3ddea")
+  CLSID_ISystemMonitor = "194eb241-c32c-11cf-9398-00aa00a3ddea"
   struct ISystemMonitor
     lpVtbl : ISystemMonitorVTbl*
   end
@@ -1916,6 +1970,8 @@ lib LibWin32
     load_settings : Proc(ISystemMonitor2*, UInt8*, HRESULT)
   end
 
+  ISystemMonitor2_GUID = LibC::GUID.new("08e3206a-5fd2-4fde-a8a5-8cb3b63d2677")
+  CLSID_ISystemMonitor2 = "08e3206a-5fd2-4fde-a8a5-8cb3b63d2677"
   struct ISystemMonitor2
     lpVtbl : ISystemMonitor2VTbl*
   end
@@ -2022,6 +2078,8 @@ lib LibWin32
     load_settings : Proc(IISystemMonitorUnion*, UInt8*, HRESULT)
   end
 
+  IISystemMonitorUnion_GUID = LibC::GUID.new("c8a77338-265f-4de5-aa25-c7da1ce5a8f4")
+  CLSID_IISystemMonitorUnion = "c8a77338-265f-4de5-aa25-c7da1ce5a8f4"
   struct IISystemMonitorUnion
     lpVtbl : IISystemMonitorUnionVTbl*
   end
@@ -2036,6 +2094,8 @@ lib LibWin32
     invoke : Proc(DISystemMonitor*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DISystemMonitor_GUID = LibC::GUID.new("13d73d81-c32e-11cf-9398-00aa00a3ddea")
+  CLSID_DISystemMonitor = "13d73d81-c32e-11cf-9398-00aa00a3ddea"
   struct DISystemMonitor
     lpVtbl : DISystemMonitorVTbl*
   end
@@ -2050,6 +2110,8 @@ lib LibWin32
     invoke : Proc(DISystemMonitorInternal*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DISystemMonitorInternal_GUID = LibC::GUID.new("194eb242-c32c-11cf-9398-00aa00a3ddea")
+  CLSID_DISystemMonitorInternal = "194eb242-c32c-11cf-9398-00aa00a3ddea"
   struct DISystemMonitorInternal
     lpVtbl : DISystemMonitorInternalVTbl*
   end
@@ -2065,6 +2127,8 @@ lib LibWin32
     on_dbl_click : Proc(ISystemMonitorEvents*, Int32, Void)
   end
 
+  ISystemMonitorEvents_GUID = LibC::GUID.new("ee660ea0-4abd-11cf-943a-008029004347")
+  CLSID_ISystemMonitorEvents = "ee660ea0-4abd-11cf-943a-008029004347"
   struct ISystemMonitorEvents
     lpVtbl : ISystemMonitorEventsVTbl*
   end
@@ -2079,6 +2143,8 @@ lib LibWin32
     invoke : Proc(DISystemMonitorEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DISystemMonitorEvents_GUID = LibC::GUID.new("84979930-4ab3-11cf-943a-008029004347")
+  CLSID_DISystemMonitorEvents = "84979930-4ab3-11cf-943a-008029004347"
   struct DISystemMonitorEvents
     lpVtbl : DISystemMonitorEventsVTbl*
   end

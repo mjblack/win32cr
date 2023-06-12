@@ -92,6 +92,8 @@ lib LibWin32
     get_minor_version : Proc(ICatalog*, Int32*, HRESULT)
   end
 
+  ICatalog_GUID = LibC::GUID.new("6eb22870-8a19-11d0-81b6-00a0c9231c29")
+  CLSID_ICatalog = "6eb22870-8a19-11d0-81b6-00a0c9231c29"
   struct ICatalog
     lpVtbl : ICatalogVTbl*
   end
@@ -110,6 +112,8 @@ lib LibWin32
     get_clsi_ds : Proc(IComponentUtil*, UInt8*, UInt8*, SAFEARRAY**, HRESULT)
   end
 
+  IComponentUtil_GUID = LibC::GUID.new("6eb22873-8a19-11d0-81b6-00a0c9231c29")
+  CLSID_IComponentUtil = "6eb22873-8a19-11d0-81b6-00a0c9231c29"
   struct IComponentUtil
     lpVtbl : IComponentUtilVTbl*
   end
@@ -127,6 +131,8 @@ lib LibWin32
     shutdown_package : Proc(IPackageUtil*, UInt8*, HRESULT)
   end
 
+  IPackageUtil_GUID = LibC::GUID.new("6eb22874-8a19-11d0-81b6-00a0c9231c29")
+  CLSID_IPackageUtil = "6eb22874-8a19-11d0-81b6-00a0c9231c29"
   struct IPackageUtil
     lpVtbl : IPackageUtilVTbl*
   end
@@ -143,6 +149,8 @@ lib LibWin32
     install_remote_component_by_name : Proc(IRemoteComponentUtil*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
+  IRemoteComponentUtil_GUID = LibC::GUID.new("6eb22875-8a19-11d0-81b6-00a0c9231c29")
+  CLSID_IRemoteComponentUtil = "6eb22875-8a19-11d0-81b6-00a0c9231c29"
   struct IRemoteComponentUtil
     lpVtbl : IRemoteComponentUtilVTbl*
   end
@@ -159,6 +167,8 @@ lib LibWin32
     associate_role_by_name : Proc(IRoleAssociationUtil*, UInt8*, HRESULT)
   end
 
+  IRoleAssociationUtil_GUID = LibC::GUID.new("6eb22876-8a19-11d0-81b6-00a0c9231c29")
+  CLSID_IRoleAssociationUtil = "6eb22876-8a19-11d0-81b6-00a0c9231c29"
   struct IRoleAssociationUtil
     lpVtbl : IRoleAssociationUtilVTbl*
   end

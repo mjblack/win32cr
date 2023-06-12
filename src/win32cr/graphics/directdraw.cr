@@ -4102,6 +4102,8 @@ lib LibWin32
     wait_for_vertical_blank : Proc(IDirectDraw*, UInt32, LibC::HANDLE, HRESULT)
   end
 
+  IDirectDraw_GUID = LibC::GUID.new("6c14db80-a733-11ce-a521-0020af0be560")
+  CLSID_IDirectDraw = "6c14db80-a733-11ce-a521-0020af0be560"
   struct IDirectDraw
     lpVtbl : IDirectDrawVTbl*
   end
@@ -4133,6 +4135,8 @@ lib LibWin32
     get_available_vid_mem : Proc(IDirectDraw2*, DDSCAPS*, UInt32*, UInt32*, HRESULT)
   end
 
+  IDirectDraw2_GUID = LibC::GUID.new("b3a6f3e0-2b43-11cf-a2de-00aa00b93356")
+  CLSID_IDirectDraw2 = "b3a6f3e0-2b43-11cf-a2de-00aa00b93356"
   struct IDirectDraw2
     lpVtbl : IDirectDraw2VTbl*
   end
@@ -4168,6 +4172,8 @@ lib LibWin32
     get_device_identifier : Proc(IDirectDraw4*, DDDEVICEIDENTIFIER*, UInt32, HRESULT)
   end
 
+  IDirectDraw4_GUID = LibC::GUID.new("9c59509a-39bd-11d1-8c4a-00c04fd930c5")
+  CLSID_IDirectDraw4 = "9c59509a-39bd-11d1-8c4a-00c04fd930c5"
   struct IDirectDraw4
     lpVtbl : IDirectDraw4VTbl*
   end
@@ -4205,6 +4211,8 @@ lib LibWin32
     evaluate_mode : Proc(IDirectDraw7*, UInt32, UInt32*, HRESULT)
   end
 
+  IDirectDraw7_GUID = LibC::GUID.new("15e65ec0-3b9c-11d2-b92f-00609797ea5b")
+  CLSID_IDirectDraw7 = "15e65ec0-3b9c-11d2-b92f-00609797ea5b"
   struct IDirectDraw7
     lpVtbl : IDirectDraw7VTbl*
   end
@@ -4219,6 +4227,8 @@ lib LibWin32
     set_entries : Proc(IDirectDrawPalette*, UInt32, UInt32, UInt32, PALETTEENTRY*, HRESULT)
   end
 
+  IDirectDrawPalette_GUID = LibC::GUID.new("6c14db84-a733-11ce-a521-0020af0be560")
+  CLSID_IDirectDrawPalette = "6c14db84-a733-11ce-a521-0020af0be560"
   struct IDirectDrawPalette
     lpVtbl : IDirectDrawPaletteVTbl*
   end
@@ -4235,6 +4245,8 @@ lib LibWin32
     set_h_wnd : Proc(IDirectDrawClipper*, UInt32, LibC::HANDLE, HRESULT)
   end
 
+  IDirectDrawClipper_GUID = LibC::GUID.new("6c14db85-a733-11ce-a521-0020af0be560")
+  CLSID_IDirectDrawClipper = "6c14db85-a733-11ce-a521-0020af0be560"
   struct IDirectDrawClipper
     lpVtbl : IDirectDrawClipperVTbl*
   end
@@ -4278,6 +4290,8 @@ lib LibWin32
     update_overlay_z_order : Proc(IDirectDrawSurface*, UInt32, IDirectDrawSurface, HRESULT)
   end
 
+  IDirectDrawSurface_GUID = LibC::GUID.new("6c14db81-a733-11ce-a521-0020af0be560")
+  CLSID_IDirectDrawSurface = "6c14db81-a733-11ce-a521-0020af0be560"
   struct IDirectDrawSurface
     lpVtbl : IDirectDrawSurfaceVTbl*
   end
@@ -4324,6 +4338,8 @@ lib LibWin32
     page_unlock : Proc(IDirectDrawSurface2*, UInt32, HRESULT)
   end
 
+  IDirectDrawSurface2_GUID = LibC::GUID.new("57805885-6eec-11cf-9441-a82303c10e27")
+  CLSID_IDirectDrawSurface2 = "57805885-6eec-11cf-9441-a82303c10e27"
   struct IDirectDrawSurface2
     lpVtbl : IDirectDrawSurface2VTbl*
   end
@@ -4371,6 +4387,8 @@ lib LibWin32
     set_surface_desc : Proc(IDirectDrawSurface3*, DDSURFACEDESC*, UInt32, HRESULT)
   end
 
+  IDirectDrawSurface3_GUID = LibC::GUID.new("da044e00-69b2-11d0-a1d5-00aa00b8dfbb")
+  CLSID_IDirectDrawSurface3 = "da044e00-69b2-11d0-a1d5-00aa00b8dfbb"
   struct IDirectDrawSurface3
     lpVtbl : IDirectDrawSurface3VTbl*
   end
@@ -4423,6 +4441,8 @@ lib LibWin32
     change_uniqueness_value : Proc(IDirectDrawSurface4*, HRESULT)
   end
 
+  IDirectDrawSurface4_GUID = LibC::GUID.new("0b2b8630-ad35-11d0-8ea6-00609797ea5b")
+  CLSID_IDirectDrawSurface4 = "0b2b8630-ad35-11d0-8ea6-00609797ea5b"
   struct IDirectDrawSurface4
     lpVtbl : IDirectDrawSurface4VTbl*
   end
@@ -4479,6 +4499,8 @@ lib LibWin32
     get_lod : Proc(IDirectDrawSurface7*, UInt32*, HRESULT)
   end
 
+  IDirectDrawSurface7_GUID = LibC::GUID.new("06675a80-3b9b-11d2-b92f-00609797ea5b")
+  CLSID_IDirectDrawSurface7 = "06675a80-3b9b-11d2-b92f-00609797ea5b"
   struct IDirectDrawSurface7
     lpVtbl : IDirectDrawSurface7VTbl*
   end
@@ -4491,6 +4513,8 @@ lib LibWin32
     set_color_controls : Proc(IDirectDrawColorControl*, DDCOLORCONTROL*, HRESULT)
   end
 
+  IDirectDrawColorControl_GUID = LibC::GUID.new("4b9f0ee0-0d7e-11d0-9b06-00a0c903a3b8")
+  CLSID_IDirectDrawColorControl = "4b9f0ee0-0d7e-11d0-9b06-00a0c903a3b8"
   struct IDirectDrawColorControl
     lpVtbl : IDirectDrawColorControlVTbl*
   end
@@ -4503,6 +4527,8 @@ lib LibWin32
     set_gamma_ramp : Proc(IDirectDrawGammaControl*, UInt32, DDGAMMARAMP*, HRESULT)
   end
 
+  IDirectDrawGammaControl_GUID = LibC::GUID.new("69c11c3e-b46b-11d1-ad7a-00c04fc29b4e")
+  CLSID_IDirectDrawGammaControl = "69c11c3e-b46b-11d1-ad7a-00c04fc29b4e"
   struct IDirectDrawGammaControl
     lpVtbl : IDirectDrawGammaControlVTbl*
   end
@@ -4517,6 +4543,8 @@ lib LibWin32
     query_video_port_status : Proc(IDDVideoPortContainer*, UInt32, DDVIDEOPORTSTATUS*, HRESULT)
   end
 
+  IDDVideoPortContainer_GUID = LibC::GUID.new("6c142760-a733-11ce-a521-0020af0be560")
+  CLSID_IDDVideoPortContainer = "6c142760-a733-11ce-a521-0020af0be560"
   struct IDDVideoPortContainer
     lpVtbl : IDDVideoPortContainerVTbl*
   end
@@ -4541,6 +4569,8 @@ lib LibWin32
     wait_for_sync : Proc(IDirectDrawVideoPort*, UInt32, UInt32, UInt32, HRESULT)
   end
 
+  IDirectDrawVideoPort_GUID = LibC::GUID.new("b36d93e0-2b43-11cf-a2de-00aa00b93356")
+  CLSID_IDirectDrawVideoPort = "b36d93e0-2b43-11cf-a2de-00aa00b93356"
   struct IDirectDrawVideoPort
     lpVtbl : IDirectDrawVideoPortVTbl*
   end
@@ -4553,6 +4583,8 @@ lib LibWin32
     release_notification : Proc(IDirectDrawVideoPortNotify*, LibC::HANDLE, HRESULT)
   end
 
+  IDirectDrawVideoPortNotify_GUID = LibC::GUID.new("a655fb94-0589-4e57-b333-567a89468c88")
+  CLSID_IDirectDrawVideoPortNotify = "a655fb94-0589-4e57-b333-567a89468c88"
   struct IDirectDrawVideoPortNotify
     lpVtbl : IDirectDrawVideoPortNotifyVTbl*
   end
@@ -4566,6 +4598,8 @@ lib LibWin32
     release_kernel_handle : Proc(IDirectDrawKernel*, HRESULT)
   end
 
+  IDirectDrawKernel_GUID = LibC::GUID.new("8d56c120-6a08-11d0-9b06-00a0c903a3b8")
+  CLSID_IDirectDrawKernel = "8d56c120-6a08-11d0-9b06-00a0c903a3b8"
   struct IDirectDrawKernel
     lpVtbl : IDirectDrawKernelVTbl*
   end
@@ -4578,6 +4612,8 @@ lib LibWin32
     release_kernel_handle : Proc(IDirectDrawSurfaceKernel*, HRESULT)
   end
 
+  IDirectDrawSurfaceKernel_GUID = LibC::GUID.new("60755da0-6a40-11d0-9b06-00a0c903a3b8")
+  CLSID_IDirectDrawSurfaceKernel = "60755da0-6a40-11d0-9b06-00a0c903a3b8"
   struct IDirectDrawSurfaceKernel
     lpVtbl : IDirectDrawSurfaceKernelVTbl*
   end

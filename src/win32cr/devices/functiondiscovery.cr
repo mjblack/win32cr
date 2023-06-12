@@ -342,6 +342,8 @@ lib LibWin32
     on_event : Proc(IFunctionDiscoveryNotification*, UInt32, UInt64, LibC::LPWSTR, HRESULT)
   end
 
+  IFunctionDiscoveryNotification_GUID = LibC::GUID.new("5f6c1ba8-5330-422e-a368-572b244d3f87")
+  CLSID_IFunctionDiscoveryNotification = "5f6c1ba8-5330-422e-a368-572b244d3f87"
   struct IFunctionDiscoveryNotification
     lpVtbl : IFunctionDiscoveryNotificationVTbl*
   end
@@ -358,6 +360,8 @@ lib LibWin32
     remove_instance : Proc(IFunctionDiscovery*, SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IFunctionDiscovery_GUID = LibC::GUID.new("4df99b70-e148-4432-b004-4c9eeb535a5e")
+  CLSID_IFunctionDiscovery = "4df99b70-e148-4432-b004-4c9eeb535a5e"
   struct IFunctionDiscovery
     lpVtbl : IFunctionDiscoveryVTbl*
   end
@@ -373,6 +377,8 @@ lib LibWin32
     get_category : Proc(IFunctionInstance*, UInt16**, UInt16**, HRESULT)
   end
 
+  IFunctionInstance_GUID = LibC::GUID.new("33591c10-0bed-4f02-b0ab-1530d5533ee9")
+  CLSID_IFunctionInstance = "33591c10-0bed-4f02-b0ab-1530d5533ee9"
   struct IFunctionInstance
     lpVtbl : IFunctionInstanceVTbl*
   end
@@ -390,6 +396,8 @@ lib LibWin32
     delete_all : Proc(IFunctionInstanceCollection*, HRESULT)
   end
 
+  IFunctionInstanceCollection_GUID = LibC::GUID.new("f0a3d895-855c-42a2-948d-2f97d450ecb1")
+  CLSID_IFunctionInstanceCollection = "f0a3d895-855c-42a2-948d-2f97d450ecb1"
   struct IFunctionInstanceCollection
     lpVtbl : IFunctionInstanceCollectionVTbl*
   end
@@ -407,6 +415,8 @@ lib LibWin32
     delete_all : Proc(IPropertyStoreCollection*, HRESULT)
   end
 
+  IPropertyStoreCollection_GUID = LibC::GUID.new("d14d9c30-12d2-42d8-bce4-c60c2bb226fa")
+  CLSID_IPropertyStoreCollection = "d14d9c30-12d2-42d8-bce4-c60c2bb226fa"
   struct IPropertyStoreCollection
     lpVtbl : IPropertyStoreCollectionVTbl*
   end
@@ -418,6 +428,8 @@ lib LibWin32
     execute : Proc(IFunctionInstanceQuery*, IFunctionInstance*, HRESULT)
   end
 
+  IFunctionInstanceQuery_GUID = LibC::GUID.new("6242bc6b-90ec-4b37-bb46-e229fd84ed95")
+  CLSID_IFunctionInstanceQuery = "6242bc6b-90ec-4b37-bb46-e229fd84ed95"
   struct IFunctionInstanceQuery
     lpVtbl : IFunctionInstanceQueryVTbl*
   end
@@ -431,6 +443,8 @@ lib LibWin32
     execute : Proc(IFunctionInstanceCollectionQuery*, IFunctionInstanceCollection*, HRESULT)
   end
 
+  IFunctionInstanceCollectionQuery_GUID = LibC::GUID.new("57cc6fd2-c09a-4289-bb72-25f04142058e")
+  CLSID_IFunctionInstanceCollectionQuery = "57cc6fd2-c09a-4289-bb72-25f04142058e"
   struct IFunctionInstanceCollectionQuery
     lpVtbl : IFunctionInstanceCollectionQueryVTbl*
   end
@@ -449,6 +463,8 @@ lib LibWin32
     instance_released : Proc(IFunctionDiscoveryProvider*, IFunctionInstance, LibC::IntPtrT, HRESULT)
   end
 
+  IFunctionDiscoveryProvider_GUID = LibC::GUID.new("dcde394f-1478-4813-a402-f6fb10657222")
+  CLSID_IFunctionDiscoveryProvider = "dcde394f-1478-4813-a402-f6fb10657222"
   struct IFunctionDiscoveryProvider
     lpVtbl : IFunctionDiscoveryProviderVTbl*
   end
@@ -463,6 +479,8 @@ lib LibWin32
     set_value : Proc(IProviderProperties*, IFunctionInstance, LibC::IntPtrT, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
+  IProviderProperties_GUID = LibC::GUID.new("cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17")
+  CLSID_IProviderProperties = "cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17"
   struct IProviderProperties
     lpVtbl : IProviderPropertiesVTbl*
   end
@@ -475,6 +493,8 @@ lib LibWin32
     remove_instance : Proc(IProviderPublishing*, SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IProviderPublishing_GUID = LibC::GUID.new("cd1b9a04-206c-4a05-a0c8-1635a21a2b7c")
+  CLSID_IProviderPublishing = "cd1b9a04-206c-4a05-a0c8-1635a21a2b7c"
   struct IProviderPublishing
     lpVtbl : IProviderPublishingVTbl*
   end
@@ -488,6 +508,8 @@ lib LibWin32
     create_function_instance_collection : Proc(IFunctionDiscoveryProviderFactory*, IFunctionInstanceCollection*, HRESULT)
   end
 
+  IFunctionDiscoveryProviderFactory_GUID = LibC::GUID.new("86443ff0-1ad5-4e68-a45a-40c2c329de3b")
+  CLSID_IFunctionDiscoveryProviderFactory = "86443ff0-1ad5-4e68-a45a-40c2c329de3b"
   struct IFunctionDiscoveryProviderFactory
     lpVtbl : IFunctionDiscoveryProviderFactoryVTbl*
   end
@@ -502,6 +524,8 @@ lib LibWin32
     get_property_constraints : Proc(IFunctionDiscoveryProviderQuery*, IProviderPropertyConstraintCollection*, HRESULT)
   end
 
+  IFunctionDiscoveryProviderQuery_GUID = LibC::GUID.new("6876ea98-baec-46db-bc20-75a76e267a3a")
+  CLSID_IFunctionDiscoveryProviderQuery = "6876ea98-baec-46db-bc20-75a76e267a3a"
   struct IFunctionDiscoveryProviderQuery
     lpVtbl : IFunctionDiscoveryProviderQueryVTbl*
   end
@@ -518,6 +542,8 @@ lib LibWin32
     reset : Proc(IProviderQueryConstraintCollection*, HRESULT)
   end
 
+  IProviderQueryConstraintCollection_GUID = LibC::GUID.new("9c243e11-3261-4bcd-b922-84a873d460ae")
+  CLSID_IProviderQueryConstraintCollection = "9c243e11-3261-4bcd-b922-84a873d460ae"
   struct IProviderQueryConstraintCollection
     lpVtbl : IProviderQueryConstraintCollectionVTbl*
   end
@@ -534,6 +560,8 @@ lib LibWin32
     reset : Proc(IProviderPropertyConstraintCollection*, HRESULT)
   end
 
+  IProviderPropertyConstraintCollection_GUID = LibC::GUID.new("f4fae42f-5778-4a13-8540-b5fd8c1398dd")
+  CLSID_IProviderPropertyConstraintCollection = "f4fae42f-5778-4a13-8540-b5fd8c1398dd"
   struct IProviderPropertyConstraintCollection
     lpVtbl : IProviderPropertyConstraintCollectionVTbl*
   end
@@ -545,6 +573,8 @@ lib LibWin32
     initialize : Proc(IFunctionDiscoveryServiceProvider*, IFunctionInstance, Guid*, Void**, HRESULT)
   end
 
+  IFunctionDiscoveryServiceProvider_GUID = LibC::GUID.new("4c81ed02-1b04-43f2-a451-69966cbcd1c2")
+  CLSID_IFunctionDiscoveryServiceProvider = "4c81ed02-1b04-43f2-a451-69966cbcd1c2"
   struct IFunctionDiscoveryServiceProvider
     lpVtbl : IFunctionDiscoveryServiceProviderVTbl*
   end
@@ -558,6 +588,8 @@ lib LibWin32
     delete : Proc(IPNPXAssociation*, LibC::LPWSTR, HRESULT)
   end
 
+  IPNPXAssociation_GUID = LibC::GUID.new("0bd7e521-4da6-42d5-81ba-1981b6b94075")
+  CLSID_IPNPXAssociation = "0bd7e521-4da6-42d5-81ba-1981b6b94075"
   struct IPNPXAssociation
     lpVtbl : IPNPXAssociationVTbl*
   end
@@ -571,6 +603,8 @@ lib LibWin32
     delete : Proc(IPNPXDeviceAssociation*, LibC::LPWSTR, IFunctionDiscoveryNotification, HRESULT)
   end
 
+  IPNPXDeviceAssociation_GUID = LibC::GUID.new("eed366d0-35b8-4fc5-8d20-7e5bd31f6ded")
+  CLSID_IPNPXDeviceAssociation = "eed366d0-35b8-4fc5-8d20-7e5bd31f6ded"
   struct IPNPXDeviceAssociation
     lpVtbl : IPNPXDeviceAssociationVTbl*
   end

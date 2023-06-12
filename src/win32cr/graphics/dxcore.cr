@@ -104,6 +104,8 @@ lib LibWin32
     get_factory : Proc(IDXCoreAdapter*, Guid*, Void**, HRESULT)
   end
 
+  IDXCoreAdapter_GUID = LibC::GUID.new("f0db4c7f-fe5a-42a2-bd62-f2a6cf6fc83e")
+  CLSID_IDXCoreAdapter = "f0db4c7f-fe5a-42a2-bd62-f2a6cf6fc83e"
   struct IDXCoreAdapter
     lpVtbl : IDXCoreAdapterVTbl*
   end
@@ -120,6 +122,8 @@ lib LibWin32
     is_adapter_preference_supported : Proc(IDXCoreAdapterList*, DXCoreAdapterPreference, Bool)
   end
 
+  IDXCoreAdapterList_GUID = LibC::GUID.new("526c7776-40e9-459b-b711-f32ad76dfc28")
+  CLSID_IDXCoreAdapterList = "526c7776-40e9-459b-b711-f32ad76dfc28"
   struct IDXCoreAdapterList
     lpVtbl : IDXCoreAdapterListVTbl*
   end
@@ -135,6 +139,8 @@ lib LibWin32
     unregister_event_notification : Proc(IDXCoreAdapterFactory*, UInt32, HRESULT)
   end
 
+  IDXCoreAdapterFactory_GUID = LibC::GUID.new("78ee5945-c36e-4b13-a669-005dd11c0f06")
+  CLSID_IDXCoreAdapterFactory = "78ee5945-c36e-4b13-a669-005dd11c0f06"
   struct IDXCoreAdapterFactory
     lpVtbl : IDXCoreAdapterFactoryVTbl*
   end

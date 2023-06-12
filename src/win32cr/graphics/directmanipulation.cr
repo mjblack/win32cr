@@ -165,6 +165,8 @@ lib LibWin32
     create_content : Proc(IDirectManipulationManager*, IDirectManipulationFrameInfoProvider, Guid*, Guid*, Void**, HRESULT)
   end
 
+  IDirectManipulationManager_GUID = LibC::GUID.new("fbf5d3b4-70c7-4163-9322-5a6f660d6fbc")
+  CLSID_IDirectManipulationManager = "fbf5d3b4-70c7-4163-9322-5a6f660d6fbc"
   struct IDirectManipulationManager
     lpVtbl : IDirectManipulationManagerVTbl*
   end
@@ -183,6 +185,8 @@ lib LibWin32
     create_behavior : Proc(IDirectManipulationManager2*, Guid*, Guid*, Void**, HRESULT)
   end
 
+  IDirectManipulationManager2_GUID = LibC::GUID.new("fa1005e9-3d16-484c-bfc9-62b61e56ec4e")
+  CLSID_IDirectManipulationManager2 = "fa1005e9-3d16-484c-bfc9-62b61e56ec4e"
   struct IDirectManipulationManager2
     lpVtbl : IDirectManipulationManager2VTbl*
   end
@@ -202,6 +206,8 @@ lib LibWin32
     get_service : Proc(IDirectManipulationManager3*, Guid*, Guid*, Void**, HRESULT)
   end
 
+  IDirectManipulationManager3_GUID = LibC::GUID.new("2cb6b33d-ffe8-488c-b750-fbdfe88dca8c")
+  CLSID_IDirectManipulationManager3 = "2cb6b33d-ffe8-488c-b750-fbdfe88dca8c"
   struct IDirectManipulationManager3
     lpVtbl : IDirectManipulationManager3VTbl*
   end
@@ -240,6 +246,8 @@ lib LibWin32
     abandon : Proc(IDirectManipulationViewport*, HRESULT)
   end
 
+  IDirectManipulationViewport_GUID = LibC::GUID.new("28b85a3d-60a0-48bd-9ba1-5ce8d9ea3a6d")
+  CLSID_IDirectManipulationViewport = "28b85a3d-60a0-48bd-9ba1-5ce8d9ea3a6d"
   struct IDirectManipulationViewport
     lpVtbl : IDirectManipulationViewportVTbl*
   end
@@ -281,6 +289,8 @@ lib LibWin32
     remove_all_behaviors : Proc(IDirectManipulationViewport2*, HRESULT)
   end
 
+  IDirectManipulationViewport2_GUID = LibC::GUID.new("923ccaac-61e1-4385-b726-017af189882a")
+  CLSID_IDirectManipulationViewport2 = "923ccaac-61e1-4385-b726-017af189882a"
   struct IDirectManipulationViewport2
     lpVtbl : IDirectManipulationViewport2VTbl*
   end
@@ -294,6 +304,8 @@ lib LibWin32
     on_content_updated : Proc(IDirectManipulationViewportEventHandler*, IDirectManipulationViewport, IDirectManipulationContent, HRESULT)
   end
 
+  IDirectManipulationViewportEventHandler_GUID = LibC::GUID.new("952121da-d69f-45f9-b0f9-f23944321a6d")
+  CLSID_IDirectManipulationViewportEventHandler = "952121da-d69f-45f9-b0f9-f23944321a6d"
   struct IDirectManipulationViewportEventHandler
     lpVtbl : IDirectManipulationViewportEventHandlerVTbl*
   end
@@ -312,6 +324,8 @@ lib LibWin32
     sync_content_transform : Proc(IDirectManipulationContent*, Float32*, UInt32, HRESULT)
   end
 
+  IDirectManipulationContent_GUID = LibC::GUID.new("b89962cb-3d89-442b-bb58-5098fa0f9f16")
+  CLSID_IDirectManipulationContent = "b89962cb-3d89-442b-bb58-5098fa0f9f16"
   struct IDirectManipulationContent
     lpVtbl : IDirectManipulationContentVTbl*
   end
@@ -331,6 +345,8 @@ lib LibWin32
     get_center_point : Proc(IDirectManipulationPrimaryContent*, Float32*, Float32*, HRESULT)
   end
 
+  IDirectManipulationPrimaryContent_GUID = LibC::GUID.new("c12851e4-1698-4625-b9b1-7ca3ec18630b")
+  CLSID_IDirectManipulationPrimaryContent = "c12851e4-1698-4625-b9b1-7ca3ec18630b"
   struct IDirectManipulationPrimaryContent
     lpVtbl : IDirectManipulationPrimaryContentVTbl*
   end
@@ -342,6 +358,8 @@ lib LibWin32
     on_drag_drop_status_change : Proc(IDirectManipulationDragDropEventHandler*, IDirectManipulationViewport2, DIRECTMANIPULATION_DRAG_DROP_STATUS, DIRECTMANIPULATION_DRAG_DROP_STATUS, HRESULT)
   end
 
+  IDirectManipulationDragDropEventHandler_GUID = LibC::GUID.new("1fa11b10-701b-41ae-b5f2-49e36bd595aa")
+  CLSID_IDirectManipulationDragDropEventHandler = "1fa11b10-701b-41ae-b5f2-49e36bd595aa"
   struct IDirectManipulationDragDropEventHandler
     lpVtbl : IDirectManipulationDragDropEventHandlerVTbl*
   end
@@ -354,6 +372,8 @@ lib LibWin32
     get_status : Proc(IDirectManipulationDragDropBehavior*, DIRECTMANIPULATION_DRAG_DROP_STATUS*, HRESULT)
   end
 
+  IDirectManipulationDragDropBehavior_GUID = LibC::GUID.new("814b5af5-c2c8-4270-a9b7-a198ce8d02fa")
+  CLSID_IDirectManipulationDragDropBehavior = "814b5af5-c2c8-4270-a9b7-a198ce8d02fa"
   struct IDirectManipulationDragDropBehavior
     lpVtbl : IDirectManipulationDragDropBehaviorVTbl*
   end
@@ -365,6 +385,8 @@ lib LibWin32
     on_interaction : Proc(IDirectManipulationInteractionEventHandler*, IDirectManipulationViewport2, DIRECTMANIPULATION_INTERACTION_TYPE, HRESULT)
   end
 
+  IDirectManipulationInteractionEventHandler_GUID = LibC::GUID.new("e43f45b8-42b4-403e-b1f2-273b8f510830")
+  CLSID_IDirectManipulationInteractionEventHandler = "e43f45b8-42b4-403e-b1f2-273b8f510830"
   struct IDirectManipulationInteractionEventHandler
     lpVtbl : IDirectManipulationInteractionEventHandlerVTbl*
   end
@@ -376,6 +398,8 @@ lib LibWin32
     get_next_frame_info : Proc(IDirectManipulationFrameInfoProvider*, UInt64*, UInt64*, UInt64*, HRESULT)
   end
 
+  IDirectManipulationFrameInfoProvider_GUID = LibC::GUID.new("fb759dba-6f4c-4c01-874e-19c8a05907f9")
+  CLSID_IDirectManipulationFrameInfoProvider = "fb759dba-6f4c-4c01-874e-19c8a05907f9"
   struct IDirectManipulationFrameInfoProvider
     lpVtbl : IDirectManipulationFrameInfoProviderVTbl*
   end
@@ -390,6 +414,8 @@ lib LibWin32
     flush : Proc(IDirectManipulationCompositor*, HRESULT)
   end
 
+  IDirectManipulationCompositor_GUID = LibC::GUID.new("537a0825-0387-4efa-b62f-71eb1f085a7e")
+  CLSID_IDirectManipulationCompositor = "537a0825-0387-4efa-b62f-71eb1f085a7e"
   struct IDirectManipulationCompositor
     lpVtbl : IDirectManipulationCompositorVTbl*
   end
@@ -405,6 +431,8 @@ lib LibWin32
     add_content_with_cross_process_chaining : Proc(IDirectManipulationCompositor2*, IDirectManipulationPrimaryContent, IUnknown, IUnknown, IUnknown, HRESULT)
   end
 
+  IDirectManipulationCompositor2_GUID = LibC::GUID.new("d38c7822-f1cb-43cb-b4b9-ac0c767a412e")
+  CLSID_IDirectManipulationCompositor2 = "d38c7822-f1cb-43cb-b4b9-ac0c767a412e"
   struct IDirectManipulationCompositor2
     lpVtbl : IDirectManipulationCompositor2VTbl*
   end
@@ -416,6 +444,8 @@ lib LibWin32
     update : Proc(IDirectManipulationUpdateHandler*, HRESULT)
   end
 
+  IDirectManipulationUpdateHandler_GUID = LibC::GUID.new("790b6337-64f8-4ff5-a269-b32bc2af27a7")
+  CLSID_IDirectManipulationUpdateHandler = "790b6337-64f8-4ff5-a269-b32bc2af27a7"
   struct IDirectManipulationUpdateHandler
     lpVtbl : IDirectManipulationUpdateHandlerVTbl*
   end
@@ -429,6 +459,8 @@ lib LibWin32
     update : Proc(IDirectManipulationUpdateManager*, IDirectManipulationFrameInfoProvider, HRESULT)
   end
 
+  IDirectManipulationUpdateManager_GUID = LibC::GUID.new("b0ae62fd-be34-46e7-9caa-d361facbb9cc")
+  CLSID_IDirectManipulationUpdateManager = "b0ae62fd-be34-46e7-9caa-d361facbb9cc"
   struct IDirectManipulationUpdateManager
     lpVtbl : IDirectManipulationUpdateManagerVTbl*
   end
@@ -440,6 +472,8 @@ lib LibWin32
     set_configuration : Proc(IDirectManipulationAutoScrollBehavior*, DIRECTMANIPULATION_MOTION_TYPES, DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION, HRESULT)
   end
 
+  IDirectManipulationAutoScrollBehavior_GUID = LibC::GUID.new("6d5954d4-2003-4356-9b31-d051c9ff0af7")
+  CLSID_IDirectManipulationAutoScrollBehavior = "6d5954d4-2003-4356-9b31-d051c9ff0af7"
   struct IDirectManipulationAutoScrollBehavior
     lpVtbl : IDirectManipulationAutoScrollBehaviorVTbl*
   end
@@ -453,6 +487,8 @@ lib LibWin32
     cancel_deferral : Proc(IDirectManipulationDeferContactService*, UInt32, HRESULT)
   end
 
+  IDirectManipulationDeferContactService_GUID = LibC::GUID.new("652d5c71-fe60-4a98-be70-e5f21291e7f1")
+  CLSID_IDirectManipulationDeferContactService = "652d5c71-fe60-4a98-be70-e5f21291e7f1"
   struct IDirectManipulationDeferContactService
     lpVtbl : IDirectManipulationDeferContactServiceVTbl*
   end

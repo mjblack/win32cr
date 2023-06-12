@@ -23,6 +23,8 @@ lib LibWin32
     get_win32_handle : Proc(IWindowsDevicesAllJoynBusAttachmentInterop*, UInt64*, HRESULT)
   end
 
+  IWindowsDevicesAllJoynBusAttachmentInterop_GUID = LibC::GUID.new("fd89c65b-b50e-4a19-9d0c-b42b783281cd")
+  CLSID_IWindowsDevicesAllJoynBusAttachmentInterop = "fd89c65b-b50e-4a19-9d0c-b42b783281cd"
   struct IWindowsDevicesAllJoynBusAttachmentInterop
     lpVtbl : IWindowsDevicesAllJoynBusAttachmentInteropVTbl*
   end
@@ -37,6 +39,8 @@ lib LibWin32
     create_from_win32_handle : Proc(IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, UInt64, UInt8, Guid*, Void**, HRESULT)
   end
 
+  IWindowsDevicesAllJoynBusAttachmentFactoryInterop_GUID = LibC::GUID.new("4b8f7505-b239-4e7b-88af-f6682575d861")
+  CLSID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop = "4b8f7505-b239-4e7b-88af-f6682575d861"
   struct IWindowsDevicesAllJoynBusAttachmentFactoryInterop
     lpVtbl : IWindowsDevicesAllJoynBusAttachmentFactoryInteropVTbl*
   end
@@ -53,6 +57,8 @@ lib LibWin32
     get_win32_handle : Proc(IWindowsDevicesAllJoynBusObjectInterop*, UInt64*, HRESULT)
   end
 
+  IWindowsDevicesAllJoynBusObjectInterop_GUID = LibC::GUID.new("d78aa3d5-5054-428f-99f2-ec3a5de3c3bc")
+  CLSID_IWindowsDevicesAllJoynBusObjectInterop = "d78aa3d5-5054-428f-99f2-ec3a5de3c3bc"
   struct IWindowsDevicesAllJoynBusObjectInterop
     lpVtbl : IWindowsDevicesAllJoynBusObjectInteropVTbl*
   end
@@ -67,6 +73,8 @@ lib LibWin32
     create_from_win32_handle : Proc(IWindowsDevicesAllJoynBusObjectFactoryInterop*, UInt64, Guid*, Void**, HRESULT)
   end
 
+  IWindowsDevicesAllJoynBusObjectFactoryInterop_GUID = LibC::GUID.new("6174e506-8b95-4e36-95c0-b88fed34938c")
+  CLSID_IWindowsDevicesAllJoynBusObjectFactoryInterop = "6174e506-8b95-4e36-95c0-b88fed34938c"
   struct IWindowsDevicesAllJoynBusObjectFactoryInterop
     lpVtbl : IWindowsDevicesAllJoynBusObjectFactoryInteropVTbl*
   end

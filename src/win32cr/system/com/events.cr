@@ -52,6 +52,8 @@ lib LibWin32
     remove_s : Proc(IEventSystem*, UInt8*, UInt8*, HRESULT)
   end
 
+  IEventSystem_GUID = LibC::GUID.new("4e14fb9f-2e22-11d1-9964-00c04fbbb345")
+  CLSID_IEventSystem = "4e14fb9f-2e22-11d1-9964-00c04fbbb345"
   struct IEventSystem
     lpVtbl : IEventSystemVTbl*
   end
@@ -80,6 +82,8 @@ lib LibWin32
     get_default_property_collection : Proc(IEventPublisher*, IEventObjectCollection*, HRESULT)
   end
 
+  IEventPublisher_GUID = LibC::GUID.new("e341516b-2e32-11d1-9964-00c04fbbb345")
+  CLSID_IEventPublisher = "e341516b-2e32-11d1-9964-00c04fbbb345"
   struct IEventPublisher
     lpVtbl : IEventPublisherVTbl*
   end
@@ -108,6 +112,8 @@ lib LibWin32
     put_type_lib : Proc(IEventClass*, UInt8*, HRESULT)
   end
 
+  IEventClass_GUID = LibC::GUID.new("fb2b72a0-7a68-11d1-88f9-0080c7d771bf")
+  CLSID_IEventClass = "fb2b72a0-7a68-11d1-88f9-0080c7d771bf"
   struct IEventClass
     lpVtbl : IEventClassVTbl*
   end
@@ -144,6 +150,8 @@ lib LibWin32
     put_fire_in_parallel : Proc(IEventClass2*, LibC::BOOL, HRESULT)
   end
 
+  IEventClass2_GUID = LibC::GUID.new("fb2b72a1-7a68-11d1-88f9-0080c7d771bf")
+  CLSID_IEventClass2 = "fb2b72a1-7a68-11d1-88f9-0080c7d771bf"
   struct IEventClass2
     lpVtbl : IEventClass2VTbl*
   end
@@ -192,6 +200,8 @@ lib LibWin32
     put_interface_id : Proc(IEventSubscription*, UInt8*, HRESULT)
   end
 
+  IEventSubscription_GUID = LibC::GUID.new("4a6b0e15-2e38-11d1-9965-00c04fbbb345")
+  CLSID_IEventSubscription = "4a6b0e15-2e38-11d1-9965-00c04fbbb345"
   struct IEventSubscription
     lpVtbl : IEventSubscriptionVTbl*
   end
@@ -207,6 +217,8 @@ lib LibWin32
     fire_subscription : Proc(IFiringControl*, IEventSubscription, HRESULT)
   end
 
+  IFiringControl_GUID = LibC::GUID.new("e0498c93-4efe-11d1-9971-00c04fbbb345")
+  CLSID_IFiringControl = "e0498c93-4efe-11d1-9971-00c04fbbb345"
   struct IFiringControl
     lpVtbl : IFiringControlVTbl*
   end
@@ -219,6 +231,8 @@ lib LibWin32
     prepare_to_fire : Proc(IPublisherFilter*, UInt8*, IFiringControl, HRESULT)
   end
 
+  IPublisherFilter_GUID = LibC::GUID.new("465e5cc0-7b26-11d1-88fb-0080c7d771bf")
+  CLSID_IPublisherFilter = "465e5cc0-7b26-11d1-88fb-0080c7d771bf"
   struct IPublisherFilter
     lpVtbl : IPublisherFilterVTbl*
   end
@@ -231,6 +245,8 @@ lib LibWin32
     prepare_to_fire : Proc(IMultiInterfacePublisherFilter*, Guid*, UInt8*, IFiringControl, HRESULT)
   end
 
+  IMultiInterfacePublisherFilter_GUID = LibC::GUID.new("465e5cc1-7b26-11d1-88fb-0080c7d771bf")
+  CLSID_IMultiInterfacePublisherFilter = "465e5cc1-7b26-11d1-88fb-0080c7d771bf"
   struct IMultiInterfacePublisherFilter
     lpVtbl : IMultiInterfacePublisherFilterVTbl*
   end
@@ -244,6 +260,8 @@ lib LibWin32
     changed_publisher : Proc(IEventObjectChange*, EOC_ChangeType, UInt8*, HRESULT)
   end
 
+  IEventObjectChange_GUID = LibC::GUID.new("f4a07d70-2e25-11d1-9964-00c04fbbb345")
+  CLSID_IEventObjectChange = "f4a07d70-2e25-11d1-9964-00c04fbbb345"
   struct IEventObjectChange
     lpVtbl : IEventObjectChangeVTbl*
   end
@@ -256,6 +274,8 @@ lib LibWin32
     changed_event_class : Proc(IEventObjectChange2*, COMEVENTSYSCHANGEINFO*, HRESULT)
   end
 
+  IEventObjectChange2_GUID = LibC::GUID.new("7701a9c3-bd68-438f-83e0-67bf4f53a422")
+  CLSID_IEventObjectChange2 = "7701a9c3-bd68-438f-83e0-67bf4f53a422"
   struct IEventObjectChange2
     lpVtbl : IEventObjectChange2VTbl*
   end
@@ -270,6 +290,8 @@ lib LibWin32
     skip : Proc(IEnumEventObject*, UInt32, HRESULT)
   end
 
+  IEnumEventObject_GUID = LibC::GUID.new("f4a07d63-2e25-11d1-9964-00c04fbbb345")
+  CLSID_IEnumEventObject = "f4a07d63-2e25-11d1-9964-00c04fbbb345"
   struct IEnumEventObject
     lpVtbl : IEnumEventObjectVTbl*
   end
@@ -290,6 +312,8 @@ lib LibWin32
     remove : Proc(IEventObjectCollection*, UInt8*, HRESULT)
   end
 
+  IEventObjectCollection_GUID = LibC::GUID.new("f89ac270-d4eb-11d1-b682-00805fc79216")
+  CLSID_IEventObjectCollection = "f89ac270-d4eb-11d1-b682-00805fc79216"
   struct IEventObjectCollection
     lpVtbl : IEventObjectCollectionVTbl*
   end
@@ -308,6 +332,8 @@ lib LibWin32
     put_value : Proc(IEventProperty*, VARIANT*, HRESULT)
   end
 
+  IEventProperty_GUID = LibC::GUID.new("da538ee2-f4de-11d1-b6bb-00805fc79216")
+  CLSID_IEventProperty = "da538ee2-f4de-11d1-b6bb-00805fc79216"
   struct IEventProperty
     lpVtbl : IEventPropertyVTbl*
   end
@@ -327,6 +353,8 @@ lib LibWin32
     set_default_query : Proc(IEventControl*, UInt8*, UInt8*, Int32*, HRESULT)
   end
 
+  IEventControl_GUID = LibC::GUID.new("0343e2f4-86f6-11d1-b760-00c04fb926af")
+  CLSID_IEventControl = "0343e2f4-86f6-11d1-b760-00c04fb926af"
   struct IEventControl
     lpVtbl : IEventControlVTbl*
   end
@@ -344,6 +372,8 @@ lib LibWin32
     put_fire_in_parallel : Proc(IMultiInterfaceEventControl*, LibC::BOOL, HRESULT)
   end
 
+  IMultiInterfaceEventControl_GUID = LibC::GUID.new("0343e2f5-86f6-11d1-b760-00c04fb926af")
+  CLSID_IMultiInterfaceEventControl = "0343e2f5-86f6-11d1-b760-00c04fb926af"
   struct IMultiInterfaceEventControl
     lpVtbl : IMultiInterfaceEventControlVTbl*
   end
@@ -354,6 +384,8 @@ lib LibWin32
     release : Proc(IDontSupportEventSubscription*, UInt32)
   end
 
+  IDontSupportEventSubscription_GUID = LibC::GUID.new("784121f1-62a6-4b89-855f-d65f296de83a")
+  CLSID_IDontSupportEventSubscription = "784121f1-62a6-4b89-855f-d65f296de83a"
   struct IDontSupportEventSubscription
     lpVtbl : IDontSupportEventSubscriptionVTbl*
   end

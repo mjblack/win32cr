@@ -59,6 +59,8 @@ lib LibWin32
     identity_updated : Proc(IIdentityAdvise*, IdentityUpdateEvent, LibC::LPWSTR, HRESULT)
   end
 
+  IIdentityAdvise_GUID = LibC::GUID.new("4e982fed-d14b-440c-b8d6-bb386453d386")
+  CLSID_IIdentityAdvise = "4e982fed-d14b-440c-b8d6-bb386453d386"
   struct IIdentityAdvise
     lpVtbl : IIdentityAdviseVTbl*
   end
@@ -71,6 +73,8 @@ lib LibWin32
     finish_identity_updated : Proc(AsyncIIdentityAdvise*, HRESULT)
   end
 
+  AsyncIIdentityAdvise_GUID = LibC::GUID.new("3ab4c8da-d038-4830-8dd9-3253c55a127f")
+  CLSID_AsyncIIdentityAdvise = "3ab4c8da-d038-4830-8dd9-3253c55a127f"
   struct AsyncIIdentityAdvise
     lpVtbl : AsyncIIdentityAdviseVTbl*
   end
@@ -89,6 +93,8 @@ lib LibWin32
     un_advise : Proc(IIdentityProvider*, UInt32, HRESULT)
   end
 
+  IIdentityProvider_GUID = LibC::GUID.new("0d1b9e0c-e8ba-4f55-a81b-bce934b948f5")
+  CLSID_IIdentityProvider = "0d1b9e0c-e8ba-4f55-a81b-bce934b948f5"
   struct IIdentityProvider
     lpVtbl : IIdentityProviderVTbl*
   end
@@ -115,6 +121,8 @@ lib LibWin32
     finish_un_advise : Proc(AsyncIIdentityProvider*, HRESULT)
   end
 
+  AsyncIIdentityProvider_GUID = LibC::GUID.new("c6fc9901-c433-4646-8f48-4e4687aae2a0")
+  CLSID_AsyncIIdentityProvider = "c6fc9901-c433-4646-8f48-4e4687aae2a0"
   struct AsyncIIdentityProvider
     lpVtbl : AsyncIIdentityProviderVTbl*
   end
@@ -128,6 +136,8 @@ lib LibWin32
     change_credential : Proc(IAssociatedIdentityProvider*, LibC::HANDLE, LibC::LPWSTR, HRESULT)
   end
 
+  IAssociatedIdentityProvider_GUID = LibC::GUID.new("2af066b3-4cbb-4cba-a798-204b6af68cc0")
+  CLSID_IAssociatedIdentityProvider = "2af066b3-4cbb-4cba-a798-204b6af68cc0"
   struct IAssociatedIdentityProvider
     lpVtbl : IAssociatedIdentityProviderVTbl*
   end
@@ -144,6 +154,8 @@ lib LibWin32
     finish_change_credential : Proc(AsyncIAssociatedIdentityProvider*, HRESULT)
   end
 
+  AsyncIAssociatedIdentityProvider_GUID = LibC::GUID.new("2834d6ed-297e-4e72-8a51-961e86f05152")
+  CLSID_AsyncIAssociatedIdentityProvider = "2834d6ed-297e-4e72-8a51-961e86f05152"
   struct AsyncIAssociatedIdentityProvider
     lpVtbl : AsyncIAssociatedIdentityProviderVTbl*
   end
@@ -159,6 +171,8 @@ lib LibWin32
     get_account_state : Proc(IConnectedIdentityProvider*, ACCOUNT_STATE*, HRESULT)
   end
 
+  IConnectedIdentityProvider_GUID = LibC::GUID.new("b7417b54-e08c-429b-96c8-678d1369ecb1")
+  CLSID_IConnectedIdentityProvider = "b7417b54-e08c-429b-96c8-678d1369ecb1"
   struct IConnectedIdentityProvider
     lpVtbl : IConnectedIdentityProviderVTbl*
   end
@@ -179,6 +193,8 @@ lib LibWin32
     finish_get_account_state : Proc(AsyncIConnectedIdentityProvider*, ACCOUNT_STATE*, HRESULT)
   end
 
+  AsyncIConnectedIdentityProvider_GUID = LibC::GUID.new("9ce55141-bce9-4e15-824d-43d79f512f93")
+  CLSID_AsyncIConnectedIdentityProvider = "9ce55141-bce9-4e15-824d-43d79f512f93"
   struct AsyncIConnectedIdentityProvider
     lpVtbl : AsyncIConnectedIdentityProviderVTbl*
   end
@@ -191,6 +207,8 @@ lib LibWin32
     validate_identity_credential : Proc(IIdentityAuthentication*, UInt8*, UInt32, IPropertyStore*, HRESULT)
   end
 
+  IIdentityAuthentication_GUID = LibC::GUID.new("5e7ef254-979f-43b5-b74e-06e4eb7df0f9")
+  CLSID_IIdentityAuthentication = "5e7ef254-979f-43b5-b74e-06e4eb7df0f9"
   struct IIdentityAuthentication
     lpVtbl : IIdentityAuthenticationVTbl*
   end
@@ -205,6 +223,8 @@ lib LibWin32
     finish_validate_identity_credential : Proc(AsyncIIdentityAuthentication*, IPropertyStore*, HRESULT)
   end
 
+  AsyncIIdentityAuthentication_GUID = LibC::GUID.new("f9a2f918-feca-4e9c-9633-61cbf13ed34d")
+  CLSID_AsyncIIdentityAuthentication = "f9a2f918-feca-4e9c-9633-61cbf13ed34d"
   struct AsyncIIdentityAuthentication
     lpVtbl : AsyncIIdentityAuthenticationVTbl*
   end
@@ -221,6 +241,8 @@ lib LibWin32
     reset : Proc(IIdentityStore*, HRESULT)
   end
 
+  IIdentityStore_GUID = LibC::GUID.new("df586fa5-6f35-44f1-b209-b38e169772eb")
+  CLSID_IIdentityStore = "df586fa5-6f35-44f1-b209-b38e169772eb"
   struct IIdentityStore
     lpVtbl : IIdentityStoreVTbl*
   end
@@ -243,6 +265,8 @@ lib LibWin32
     finish_reset : Proc(AsyncIIdentityStore*, HRESULT)
   end
 
+  AsyncIIdentityStore_GUID = LibC::GUID.new("eefa1616-48de-4872-aa64-6e6206535a51")
+  CLSID_AsyncIIdentityStore = "eefa1616-48de-4872-aa64-6e6206535a51"
   struct AsyncIIdentityStore
     lpVtbl : AsyncIIdentityStoreVTbl*
   end
@@ -255,6 +279,8 @@ lib LibWin32
     delete_connected_identity : Proc(IIdentityStoreEx*, LibC::LPWSTR, Guid*, HRESULT)
   end
 
+  IIdentityStoreEx_GUID = LibC::GUID.new("f9f9eb98-8f7f-4e38-9577-6980114ce32b")
+  CLSID_IIdentityStoreEx = "f9f9eb98-8f7f-4e38-9577-6980114ce32b"
   struct IIdentityStoreEx
     lpVtbl : IIdentityStoreExVTbl*
   end
@@ -269,6 +295,8 @@ lib LibWin32
     finish_delete_connected_identity : Proc(AsyncIIdentityStoreEx*, HRESULT)
   end
 
+  AsyncIIdentityStoreEx_GUID = LibC::GUID.new("fca3af9a-8a07-4eae-8632-ec3de658a36a")
+  CLSID_AsyncIIdentityStoreEx = "fca3af9a-8a07-4eae-8632-ec3de658a36a"
   struct AsyncIIdentityStoreEx
     lpVtbl : AsyncIIdentityStoreExVTbl*
   end

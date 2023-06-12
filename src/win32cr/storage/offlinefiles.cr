@@ -347,6 +347,8 @@ lib LibWin32
     ping : Proc(IOfflineFilesEvents*, HRESULT)
   end
 
+  IOfflineFilesEvents_GUID = LibC::GUID.new("e25585c1-0caa-4eb1-873b-1cae5b77c314")
+  CLSID_IOfflineFilesEvents = "e25585c1-0caa-4eb1-873b-1cae5b77c314"
   struct IOfflineFilesEvents
     lpVtbl : IOfflineFilesEventsVTbl*
   end
@@ -391,6 +393,8 @@ lib LibWin32
     settings_changes_applied : Proc(IOfflineFilesEvents2*, HRESULT)
   end
 
+  IOfflineFilesEvents2_GUID = LibC::GUID.new("1ead8f56-ff76-4faa-a795-6f6ef792498b")
+  CLSID_IOfflineFilesEvents2 = "1ead8f56-ff76-4faa-a795-6f6ef792498b"
   struct IOfflineFilesEvents2
     lpVtbl : IOfflineFilesEvents2VTbl*
   end
@@ -438,6 +442,8 @@ lib LibWin32
     prefetch_file_end : Proc(IOfflineFilesEvents3*, LibC::LPWSTR, HRESULT, HRESULT)
   end
 
+  IOfflineFilesEvents3_GUID = LibC::GUID.new("9ba04a45-ee69-42f0-9ab1-7db5c8805808")
+  CLSID_IOfflineFilesEvents3 = "9ba04a45-ee69-42f0-9ab1-7db5c8805808"
   struct IOfflineFilesEvents3
     lpVtbl : IOfflineFilesEvents3VTbl*
   end
@@ -487,6 +493,8 @@ lib LibWin32
     prefetch_close_handle_end : Proc(IOfflineFilesEvents4*, UInt32, UInt32, HRESULT, HRESULT)
   end
 
+  IOfflineFilesEvents4_GUID = LibC::GUID.new("dbd69b1e-c7d2-473e-b35f-9d8c24c0c484")
+  CLSID_IOfflineFilesEvents4 = "dbd69b1e-c7d2-473e-b35f-9d8c24c0c484"
   struct IOfflineFilesEvents4
     lpVtbl : IOfflineFilesEvents4VTbl*
   end
@@ -500,6 +508,8 @@ lib LibWin32
     get_excluded_events : Proc(IOfflineFilesEventsFilter*, UInt32, OFFLINEFILES_EVENTS*, UInt32*, HRESULT)
   end
 
+  IOfflineFilesEventsFilter_GUID = LibC::GUID.new("33fc4e1b-0716-40fa-ba65-6e62a84a846f")
+  CLSID_IOfflineFilesEventsFilter = "33fc4e1b-0716-40fa-ba65-6e62a84a846f"
   struct IOfflineFilesEventsFilter
     lpVtbl : IOfflineFilesEventsFilterVTbl*
   end
@@ -512,6 +522,8 @@ lib LibWin32
     get_description : Proc(IOfflineFilesErrorInfo*, LibC::LPWSTR*, HRESULT)
   end
 
+  IOfflineFilesErrorInfo_GUID = LibC::GUID.new("7112fa5f-7571-435a-8eb7-195c7c1429bc")
+  CLSID_IOfflineFilesErrorInfo = "7112fa5f-7571-435a-8eb7-195c7c1429bc"
   struct IOfflineFilesErrorInfo
     lpVtbl : IOfflineFilesErrorInfoVTbl*
   end
@@ -525,6 +537,8 @@ lib LibWin32
     get_file_size : Proc(IOfflineFilesSyncErrorItemInfo*, LARGE_INTEGER*, HRESULT)
   end
 
+  IOfflineFilesSyncErrorItemInfo_GUID = LibC::GUID.new("ecdbaf0d-6a18-4d55-8017-108f7660ba44")
+  CLSID_IOfflineFilesSyncErrorItemInfo = "ecdbaf0d-6a18-4d55-8017-108f7660ba44"
   struct IOfflineFilesSyncErrorItemInfo
     lpVtbl : IOfflineFilesSyncErrorItemInfoVTbl*
   end
@@ -544,6 +558,8 @@ lib LibWin32
     get_original_info : Proc(IOfflineFilesSyncErrorInfo*, IOfflineFilesSyncErrorItemInfo*, HRESULT)
   end
 
+  IOfflineFilesSyncErrorInfo_GUID = LibC::GUID.new("59f95e46-eb54-49d1-be76-de95458d01b0")
+  CLSID_IOfflineFilesSyncErrorInfo = "59f95e46-eb54-49d1-be76-de95458d01b0"
   struct IOfflineFilesSyncErrorInfo
     lpVtbl : IOfflineFilesSyncErrorInfoVTbl*
   end
@@ -557,6 +573,8 @@ lib LibWin32
     rend : Proc(IOfflineFilesProgress*, HRESULT, HRESULT)
   end
 
+  IOfflineFilesProgress_GUID = LibC::GUID.new("fad63237-c55b-4911-9850-bcf96d4c979e")
+  CLSID_IOfflineFilesProgress = "fad63237-c55b-4911-9850-bcf96d4c979e"
   struct IOfflineFilesProgress
     lpVtbl : IOfflineFilesProgressVTbl*
   end
@@ -572,6 +590,8 @@ lib LibWin32
     item_result : Proc(IOfflineFilesSimpleProgress*, LibC::LPWSTR, HRESULT, OFFLINEFILES_OP_RESPONSE*, HRESULT)
   end
 
+  IOfflineFilesSimpleProgress_GUID = LibC::GUID.new("c34f7f9b-c43d-4f9d-a776-c0eb6de5d401")
+  CLSID_IOfflineFilesSimpleProgress = "c34f7f9b-c43d-4f9d-a776-c0eb6de5d401"
   struct IOfflineFilesSimpleProgress
     lpVtbl : IOfflineFilesSimpleProgressVTbl*
   end
@@ -587,6 +607,8 @@ lib LibWin32
     sync_item_result : Proc(IOfflineFilesSyncProgress*, LibC::LPWSTR, HRESULT, IOfflineFilesSyncErrorInfo, OFFLINEFILES_OP_RESPONSE*, HRESULT)
   end
 
+  IOfflineFilesSyncProgress_GUID = LibC::GUID.new("6931f49a-6fc7-4c1b-b265-56793fc451b7")
+  CLSID_IOfflineFilesSyncProgress = "6931f49a-6fc7-4c1b-b265-56793fc451b7"
   struct IOfflineFilesSyncProgress
     lpVtbl : IOfflineFilesSyncProgressVTbl*
   end
@@ -598,6 +620,8 @@ lib LibWin32
     resolve_conflict : Proc(IOfflineFilesSyncConflictHandler*, LibC::LPWSTR, UInt32, OFFLINEFILES_SYNC_STATE, UInt32, OFFLINEFILES_SYNC_CONFLICT_RESOLVE*, LibC::LPWSTR*, HRESULT)
   end
 
+  IOfflineFilesSyncConflictHandler_GUID = LibC::GUID.new("b6dd5092-c65c-46b6-97b8-fadd08e7e1be")
+  CLSID_IOfflineFilesSyncConflictHandler = "b6dd5092-c65c-46b6-97b8-fadd08e7e1be"
   struct IOfflineFilesSyncConflictHandler
     lpVtbl : IOfflineFilesSyncConflictHandlerVTbl*
   end
@@ -611,6 +635,8 @@ lib LibWin32
     get_pattern_filter : Proc(IOfflineFilesItemFilter*, Char*, UInt32, HRESULT)
   end
 
+  IOfflineFilesItemFilter_GUID = LibC::GUID.new("f4b5a26c-dc05-4f20-ada4-551f1077be5c")
+  CLSID_IOfflineFilesItemFilter = "f4b5a26c-dc05-4f20-ada4-551f1077be5c"
   struct IOfflineFilesItemFilter
     lpVtbl : IOfflineFilesItemFilterVTbl*
   end
@@ -626,6 +652,8 @@ lib LibWin32
     is_marked_for_deletion : Proc(IOfflineFilesItem*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesItem_GUID = LibC::GUID.new("4a753da6-e044-4f12-a718-5d14d079a906")
+  CLSID_IOfflineFilesItem = "4a753da6-e044-4f12-a718-5d14d079a906"
   struct IOfflineFilesItem
     lpVtbl : IOfflineFilesItemVTbl*
   end
@@ -641,6 +669,8 @@ lib LibWin32
     is_marked_for_deletion : Proc(IOfflineFilesServerItem*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesServerItem_GUID = LibC::GUID.new("9b1c9576-a92b-4151-8e9e-7c7b3ec2e016")
+  CLSID_IOfflineFilesServerItem = "9b1c9576-a92b-4151-8e9e-7c7b3ec2e016"
   struct IOfflineFilesServerItem
     lpVtbl : IOfflineFilesServerItemVTbl*
   end
@@ -656,6 +686,8 @@ lib LibWin32
     is_marked_for_deletion : Proc(IOfflineFilesShareItem*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesShareItem_GUID = LibC::GUID.new("bab7e48d-4804-41b5-a44d-0f199b06b145")
+  CLSID_IOfflineFilesShareItem = "bab7e48d-4804-41b5-a44d-0f199b06b145"
   struct IOfflineFilesShareItem
     lpVtbl : IOfflineFilesShareItemVTbl*
   end
@@ -671,6 +703,8 @@ lib LibWin32
     is_marked_for_deletion : Proc(IOfflineFilesDirectoryItem*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesDirectoryItem_GUID = LibC::GUID.new("2273597a-a08c-4a00-a37a-c1ae4e9a1cfd")
+  CLSID_IOfflineFilesDirectoryItem = "2273597a-a08c-4a00-a37a-c1ae4e9a1cfd"
   struct IOfflineFilesDirectoryItem
     lpVtbl : IOfflineFilesDirectoryItemVTbl*
   end
@@ -688,6 +722,8 @@ lib LibWin32
     is_encrypted : Proc(IOfflineFilesFileItem*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesFileItem_GUID = LibC::GUID.new("8dfadead-26c2-4eff-8a72-6b50723d9a00")
+  CLSID_IOfflineFilesFileItem = "8dfadead-26c2-4eff-8a72-6b50723d9a00"
   struct IOfflineFilesFileItem
     lpVtbl : IOfflineFilesFileItemVTbl*
   end
@@ -702,6 +738,8 @@ lib LibWin32
     clone : Proc(IEnumOfflineFilesItems*, IEnumOfflineFilesItems*, HRESULT)
   end
 
+  IEnumOfflineFilesItems_GUID = LibC::GUID.new("da70e815-c361-4407-bc0b-0d7046e5f2cd")
+  CLSID_IEnumOfflineFilesItems = "da70e815-c361-4407-bc0b-0d7046e5f2cd"
   struct IEnumOfflineFilesItems
     lpVtbl : IEnumOfflineFilesItemsVTbl*
   end
@@ -714,6 +752,8 @@ lib LibWin32
     enum_items_ex : Proc(IOfflineFilesItemContainer*, IOfflineFilesItemFilter, IOfflineFilesItemFilter, IOfflineFilesItemFilter, IOfflineFilesItemFilter, UInt32, UInt32, IEnumOfflineFilesItems*, HRESULT)
   end
 
+  IOfflineFilesItemContainer_GUID = LibC::GUID.new("3836f049-9413-45dd-bf46-b5aaa82dc310")
+  CLSID_IOfflineFilesItemContainer = "3836f049-9413-45dd-bf46-b5aaa82dc310"
   struct IOfflineFilesItemContainer
     lpVtbl : IOfflineFilesItemContainerVTbl*
   end
@@ -730,6 +770,8 @@ lib LibWin32
     is_locally_modified_time : Proc(IOfflineFilesChangeInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesChangeInfo_GUID = LibC::GUID.new("a96e6fa4-e0d1-4c29-960b-ee508fe68c72")
+  CLSID_IOfflineFilesChangeInfo = "a96e6fa4-e0d1-4c29-960b-ee508fe68c72"
   struct IOfflineFilesChangeInfo
     lpVtbl : IOfflineFilesChangeInfoVTbl*
   end
@@ -742,6 +784,8 @@ lib LibWin32
     remote_dirty_byte_count : Proc(IOfflineFilesDirtyInfo*, LARGE_INTEGER*, HRESULT)
   end
 
+  IOfflineFilesDirtyInfo_GUID = LibC::GUID.new("0f50ce33-bac9-4eaa-a11d-da0e527d047d")
+  CLSID_IOfflineFilesDirtyInfo = "0f50ce33-bac9-4eaa-a11d-da0e527d047d"
   struct IOfflineFilesDirtyInfo
     lpVtbl : IOfflineFilesDirtyInfoVTbl*
   end
@@ -755,6 +799,8 @@ lib LibWin32
     get_file_size : Proc(IOfflineFilesFileSysInfo*, OFFLINEFILES_ITEM_COPY, LARGE_INTEGER*, HRESULT)
   end
 
+  IOfflineFilesFileSysInfo_GUID = LibC::GUID.new("bc1a163f-7bfd-4d88-9c66-96ea9a6a3d6b")
+  CLSID_IOfflineFilesFileSysInfo = "bc1a163f-7bfd-4d88-9c66-96ea9a6a3d6b"
   struct IOfflineFilesFileSysInfo
     lpVtbl : IOfflineFilesFileSysInfoVTbl*
   end
@@ -770,6 +816,8 @@ lib LibWin32
     is_pinned_for_folder_redirection : Proc(IOfflineFilesPinInfo*, LibC::BOOL*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesPinInfo_GUID = LibC::GUID.new("5b2b0655-b3fd-497d-adeb-bd156bc8355b")
+  CLSID_IOfflineFilesPinInfo = "5b2b0655-b3fd-497d-adeb-bd156bc8355b"
   struct IOfflineFilesPinInfo
     lpVtbl : IOfflineFilesPinInfoVTbl*
   end
@@ -786,6 +834,8 @@ lib LibWin32
     is_partly_pinned : Proc(IOfflineFilesPinInfo2*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesPinInfo2_GUID = LibC::GUID.new("623c58a2-42ed-4ad7-b69a-0f1b30a72d0d")
+  CLSID_IOfflineFilesPinInfo2 = "623c58a2-42ed-4ad7-b69a-0f1b30a72d0d"
   struct IOfflineFilesPinInfo2
     lpVtbl : IOfflineFilesPinInfo2VTbl*
   end
@@ -797,6 +847,8 @@ lib LibWin32
     is_transparently_cached : Proc(IOfflineFilesTransparentCacheInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesTransparentCacheInfo_GUID = LibC::GUID.new("bcaf4a01-5b68-4b56-a6a1-8d2786ede8e3")
+  CLSID_IOfflineFilesTransparentCacheInfo = "bcaf4a01-5b68-4b56-a6a1-8d2786ede8e3"
   struct IOfflineFilesTransparentCacheInfo
     lpVtbl : IOfflineFilesTransparentCacheInfoVTbl*
   end
@@ -808,6 +860,8 @@ lib LibWin32
     is_ghosted : Proc(IOfflineFilesGhostInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesGhostInfo_GUID = LibC::GUID.new("2b09d48c-8ab5-464f-a755-a59d92f99429")
+  CLSID_IOfflineFilesGhostInfo = "2b09d48c-8ab5-464f-a755-a59d92f99429"
   struct IOfflineFilesGhostInfo
     lpVtbl : IOfflineFilesGhostInfoVTbl*
   end
@@ -822,6 +876,8 @@ lib LibWin32
     transition_offline : Proc(IOfflineFilesConnectionInfo*, LibC::HANDLE, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesConnectionInfo_GUID = LibC::GUID.new("efb23a09-a867-4be8-83a6-86969a7d0856")
+  CLSID_IOfflineFilesConnectionInfo = "efb23a09-a867-4be8-83a6-86969a7d0856"
   struct IOfflineFilesConnectionInfo
     lpVtbl : IOfflineFilesConnectionInfoVTbl*
   end
@@ -835,6 +891,8 @@ lib LibWin32
     is_share_dfs_junction : Proc(IOfflineFilesShareInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesShareInfo_GUID = LibC::GUID.new("7bcc43e7-31ce-4ca4-8ccd-1cff2dc494da")
+  CLSID_IOfflineFilesShareInfo = "7bcc43e7-31ce-4ca4-8ccd-1cff2dc494da"
   struct IOfflineFilesShareInfo
     lpVtbl : IOfflineFilesShareInfoVTbl*
   end
@@ -846,6 +904,8 @@ lib LibWin32
     suspend_root : Proc(IOfflineFilesSuspend*, LibC::BOOL, HRESULT)
   end
 
+  IOfflineFilesSuspend_GUID = LibC::GUID.new("62c4560f-bc0b-48ca-ad9d-34cb528d99a9")
+  CLSID_IOfflineFilesSuspend = "62c4560f-bc0b-48ca-ad9d-34cb528d99a9"
   struct IOfflineFilesSuspend
     lpVtbl : IOfflineFilesSuspendVTbl*
   end
@@ -857,6 +917,8 @@ lib LibWin32
     is_suspended : Proc(IOfflineFilesSuspendInfo*, LibC::BOOL*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesSuspendInfo_GUID = LibC::GUID.new("a457c25b-4e9c-4b04-85af-8932ccd97889")
+  CLSID_IOfflineFilesSuspendInfo = "a457c25b-4e9c-4b04-85af-8932ccd97889"
   struct IOfflineFilesSuspendInfo
     lpVtbl : IOfflineFilesSuspendInfoVTbl*
   end
@@ -876,6 +938,8 @@ lib LibWin32
     get_value : Proc(IOfflineFilesSetting*, VARIANT*, LibC::BOOL*, HRESULT)
   end
 
+  IOfflineFilesSetting_GUID = LibC::GUID.new("d871d3f7-f613-48a1-827e-7a34e560fff6")
+  CLSID_IOfflineFilesSetting = "d871d3f7-f613-48a1-827e-7a34e560fff6"
   struct IOfflineFilesSetting
     lpVtbl : IOfflineFilesSettingVTbl*
   end
@@ -890,6 +954,8 @@ lib LibWin32
     clone : Proc(IEnumOfflineFilesSettings*, IEnumOfflineFilesSettings*, HRESULT)
   end
 
+  IEnumOfflineFilesSettings_GUID = LibC::GUID.new("729680c4-1a38-47bc-9e5c-02c51562ac30")
+  CLSID_IEnumOfflineFilesSettings = "729680c4-1a38-47bc-9e5c-02c51562ac30"
   struct IEnumOfflineFilesSettings
     lpVtbl : IEnumOfflineFilesSettingsVTbl*
   end
@@ -917,6 +983,8 @@ lib LibWin32
     is_path_cacheable : Proc(IOfflineFilesCache*, LibC::LPWSTR, LibC::BOOL*, OFFLINEFILES_CACHING_MODE*, HRESULT)
   end
 
+  IOfflineFilesCache_GUID = LibC::GUID.new("855d6203-7914-48b9-8d40-4c56f5acffc5")
+  CLSID_IOfflineFilesCache = "855d6203-7914-48b9-8d40-4c56f5acffc5"
   struct IOfflineFilesCache
     lpVtbl : IOfflineFilesCacheVTbl*
   end
@@ -945,6 +1013,8 @@ lib LibWin32
     rename_item_ex : Proc(IOfflineFilesCache2*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, HRESULT)
   end
 
+  IOfflineFilesCache2_GUID = LibC::GUID.new("8c075039-1551-4ed9-8781-56705c04d3c0")
+  CLSID_IOfflineFilesCache2 = "8c075039-1551-4ed9-8781-56705c04d3c0"
   struct IOfflineFilesCache2
     lpVtbl : IOfflineFilesCache2VTbl*
   end

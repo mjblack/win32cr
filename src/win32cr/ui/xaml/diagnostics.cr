@@ -133,6 +133,8 @@ lib LibWin32
     on_visual_tree_change : Proc(IVisualTreeServiceCallback*, ParentChildRelation, VisualElement, VisualMutationType, HRESULT)
   end
 
+  IVisualTreeServiceCallback_GUID = LibC::GUID.new("aa7a8931-80e4-4fec-8f3b-553f87b4966e")
+  CLSID_IVisualTreeServiceCallback = "aa7a8931-80e4-4fec-8f3b-553f87b4966e"
   struct IVisualTreeServiceCallback
     lpVtbl : IVisualTreeServiceCallbackVTbl*
   end
@@ -145,6 +147,8 @@ lib LibWin32
     on_element_state_changed : Proc(IVisualTreeServiceCallback2*, UInt64, VisualElementState, LibC::LPWSTR, HRESULT)
   end
 
+  IVisualTreeServiceCallback2_GUID = LibC::GUID.new("bad9eb88-ae77-4397-b948-5fa2db0a19ea")
+  CLSID_IVisualTreeServiceCallback2 = "bad9eb88-ae77-4397-b948-5fa2db0a19ea"
   struct IVisualTreeServiceCallback2
     lpVtbl : IVisualTreeServiceCallback2VTbl*
   end
@@ -167,6 +171,8 @@ lib LibWin32
     clear_children : Proc(IVisualTreeService*, UInt64, HRESULT)
   end
 
+  IVisualTreeService_GUID = LibC::GUID.new("a593b11a-d17f-48bb-8f66-83910731c8a5")
+  CLSID_IVisualTreeService = "a593b11a-d17f-48bb-8f66-83910731c8a5"
   struct IVisualTreeService
     lpVtbl : IVisualTreeServiceVTbl*
   end
@@ -185,6 +191,8 @@ lib LibWin32
     get_initialization_data : Proc(IXamlDiagnostics*, UInt8**, HRESULT)
   end
 
+  IXamlDiagnostics_GUID = LibC::GUID.new("18c9e2b6-3f43-4116-9f2b-ff935d7770d2")
+  CLSID_IXamlDiagnostics = "18c9e2b6-3f43-4116-9f2b-ff935d7770d2"
   struct IXamlDiagnostics
     lpVtbl : IXamlDiagnosticsVTbl*
   end
@@ -199,6 +207,8 @@ lib LibWin32
     get_source_bitmap_description : Proc(IBitmapData*, BitmapDescription*, HRESULT)
   end
 
+  IBitmapData_GUID = LibC::GUID.new("d1a34ef2-cad8-4635-a3d2-fcda8d3f3caf")
+  CLSID_IBitmapData = "d1a34ef2-cad8-4635-a3d2-fcda8d3f3caf"
   struct IBitmapData
     lpVtbl : IBitmapDataVTbl*
   end
@@ -225,6 +235,8 @@ lib LibWin32
     render_target_bitmap : Proc(IVisualTreeService2*, UInt64, RenderTargetBitmapOptions, UInt32, UInt32, IBitmapData*, HRESULT)
   end
 
+  IVisualTreeService2_GUID = LibC::GUID.new("130f5136-ec43-4f61-89c7-9801a36d2e95")
+  CLSID_IVisualTreeService2 = "130f5136-ec43-4f61-89c7-9801a36d2e95"
   struct IVisualTreeService2
     lpVtbl : IVisualTreeService2VTbl*
   end
@@ -255,6 +267,8 @@ lib LibWin32
     remove_dictionary_item : Proc(IVisualTreeService3*, UInt64, UInt64, HRESULT)
   end
 
+  IVisualTreeService3_GUID = LibC::GUID.new("0e79c6e0-85a0-4be8-b41a-655cf1fd19bd")
+  CLSID_IVisualTreeService3 = "0e79c6e0-85a0-4be8-b41a-655cf1fd19bd"
   struct IVisualTreeService3
     lpVtbl : IVisualTreeService3VTbl*
   end

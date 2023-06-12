@@ -56,6 +56,8 @@ lib LibWin32
     get_for_window : Proc(IProtectionPolicyManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IProtectionPolicyManagerInterop_GUID = LibC::GUID.new("4652651d-c1fe-4ba1-9f0a-c0f56596f721")
+  CLSID_IProtectionPolicyManagerInterop = "4652651d-c1fe-4ba1-9f0a-c0f56596f721"
   struct IProtectionPolicyManagerInterop
     lpVtbl : IProtectionPolicyManagerInteropVTbl*
   end
@@ -74,6 +76,8 @@ lib LibWin32
     request_access_for_app_with_message_for_window_async : Proc(IProtectionPolicyManagerInterop2*, LibC::HANDLE, HSTRING, HSTRING, IUnknown, HSTRING, Guid*, Void**, HRESULT)
   end
 
+  IProtectionPolicyManagerInterop2_GUID = LibC::GUID.new("157cfbe4-a78d-4156-b384-61fdac41e686")
+  CLSID_IProtectionPolicyManagerInterop2 = "157cfbe4-a78d-4156-b384-61fdac41e686"
   struct IProtectionPolicyManagerInterop2
     lpVtbl : IProtectionPolicyManagerInterop2VTbl*
   end
@@ -93,6 +97,8 @@ lib LibWin32
     request_access_to_files_for_process_with_message_and_behavior_for_window_async : Proc(IProtectionPolicyManagerInterop3*, LibC::HANDLE, IUnknown, UInt32, IUnknown, HSTRING, UInt32, Guid*, Void**, HRESULT)
   end
 
+  IProtectionPolicyManagerInterop3_GUID = LibC::GUID.new("c1c03933-b398-4d93-b0fd-2972adf802c2")
+  CLSID_IProtectionPolicyManagerInterop3 = "c1c03933-b398-4d93-b0fd-2972adf802c2"
   struct IProtectionPolicyManagerInterop3
     lpVtbl : IProtectionPolicyManagerInterop3VTbl*
   end

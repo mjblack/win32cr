@@ -121,6 +121,8 @@ lib LibWin32
     get_sub_item_at : Proc(IPhotoAcquireItem*, UInt32, IPhotoAcquireItem*, HRESULT)
   end
 
+  IPhotoAcquireItem_GUID = LibC::GUID.new("00f21c97-28bf-4c02-b842-5e4e90139a30")
+  CLSID_IPhotoAcquireItem = "00f21c97-28bf-4c02-b842-5e4e90139a30"
   struct IPhotoAcquireItem
     lpVtbl : IPhotoAcquireItemVTbl*
   end
@@ -141,6 +143,8 @@ lib LibWin32
     get_image : Proc(IUserInputString*, UInt32, HBITMAP*, HANDLE*, HRESULT)
   end
 
+  IUserInputString_GUID = LibC::GUID.new("00f243a1-205b-45ba-ae26-abbc53aa7a6f")
+  CLSID_IUserInputString = "00f243a1-205b-45ba-ae26-abbc53aa7a6f"
   struct IUserInputString
     lpVtbl : IUserInputStringVTbl*
   end
@@ -170,6 +174,8 @@ lib LibWin32
     get_user_input : Proc(IPhotoAcquireProgressCB*, Guid*, IUnknown, PROPVARIANT*, PROPVARIANT*, HRESULT)
   end
 
+  IPhotoAcquireProgressCB_GUID = LibC::GUID.new("00f2ce1e-935e-4248-892c-130f32c45cb4")
+  CLSID_IPhotoAcquireProgressCB = "00f2ce1e-935e-4248-892c-130f32c45cb4"
   struct IPhotoAcquireProgressCB
     lpVtbl : IPhotoAcquireProgressCBVTbl*
   end
@@ -181,6 +187,8 @@ lib LibWin32
     do_action : Proc(IPhotoProgressActionCB*, LibC::HANDLE, HRESULT)
   end
 
+  IPhotoProgressActionCB_GUID = LibC::GUID.new("00f242d0-b206-4e7d-b4c1-4755bcbb9c9f")
+  CLSID_IPhotoProgressActionCB = "00f242d0-b206-4e7d-b4c1-4755bcbb9c9f"
   struct IPhotoProgressActionCB
     lpVtbl : IPhotoProgressActionCBVTbl*
   end
@@ -209,6 +217,8 @@ lib LibWin32
     get_user_input : Proc(IPhotoProgressDialog*, Guid*, IUnknown, PROPVARIANT*, PROPVARIANT*, HRESULT)
   end
 
+  IPhotoProgressDialog_GUID = LibC::GUID.new("00f246f9-0750-4f08-9381-2cd8e906a4ae")
+  CLSID_IPhotoProgressDialog = "00f246f9-0750-4f08-9381-2cd8e906a4ae"
   struct IPhotoProgressDialog
     lpVtbl : IPhotoProgressDialogVTbl*
   end
@@ -227,6 +237,8 @@ lib LibWin32
     bind_to_object : Proc(IPhotoAcquireSource*, Guid*, Void**, HRESULT)
   end
 
+  IPhotoAcquireSource_GUID = LibC::GUID.new("00f2c703-8613-4282-a53b-6ec59c5883ac")
+  CLSID_IPhotoAcquireSource = "00f2c703-8613-4282-a53b-6ec59c5883ac"
   struct IPhotoAcquireSource
     lpVtbl : IPhotoAcquireSourceVTbl*
   end
@@ -240,6 +252,8 @@ lib LibWin32
     enum_results : Proc(IPhotoAcquire*, IEnumString*, HRESULT)
   end
 
+  IPhotoAcquire_GUID = LibC::GUID.new("00f23353-e31b-4955-a8ad-ca5ebf31e2ce")
+  CLSID_IPhotoAcquire = "00f23353-e31b-4955-a8ad-ca5ebf31e2ce"
   struct IPhotoAcquire
     lpVtbl : IPhotoAcquireVTbl*
   end
@@ -263,6 +277,8 @@ lib LibWin32
     get_acquisition_time : Proc(IPhotoAcquireSettings*, FILETIME*, HRESULT)
   end
 
+  IPhotoAcquireSettings_GUID = LibC::GUID.new("00f2b868-dd67-487c-9553-049240767e91")
+  CLSID_IPhotoAcquireSettings = "00f2b868-dd67-487c-9553-049240767e91"
   struct IPhotoAcquireSettings
     lpVtbl : IPhotoAcquireSettingsVTbl*
   end
@@ -278,6 +294,8 @@ lib LibWin32
     save_data : Proc(IPhotoAcquireOptionsDialog*, HRESULT)
   end
 
+  IPhotoAcquireOptionsDialog_GUID = LibC::GUID.new("00f2b3ee-bf64-47ee-89f4-4dedd79643f2")
+  CLSID_IPhotoAcquireOptionsDialog = "00f2b3ee-bf64-47ee-89f4-4dedd79643f2"
   struct IPhotoAcquireOptionsDialog
     lpVtbl : IPhotoAcquireOptionsDialogVTbl*
   end
@@ -291,6 +309,8 @@ lib LibWin32
     do_modal : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::HANDLE, UInt32, UInt8**, DEVICE_SELECTION_DEVICE_TYPE*, HRESULT)
   end
 
+  IPhotoAcquireDeviceSelectionDialog_GUID = LibC::GUID.new("00f28837-55dd-4f37-aaf5-6855a9640467")
+  CLSID_IPhotoAcquireDeviceSelectionDialog = "00f28837-55dd-4f37-aaf5-6855a9640467"
   struct IPhotoAcquireDeviceSelectionDialog
     lpVtbl : IPhotoAcquireDeviceSelectionDialogVTbl*
   end
@@ -305,6 +325,8 @@ lib LibWin32
     display_configure_dialog : Proc(IPhotoAcquirePlugin*, LibC::HANDLE, HRESULT)
   end
 
+  IPhotoAcquirePlugin_GUID = LibC::GUID.new("00f2dceb-ecb8-4f77-8e47-e7a987c83dd0")
+  CLSID_IPhotoAcquirePlugin = "00f2dceb-ecb8-4f77-8e47-e7a987c83dd0"
   struct IPhotoAcquirePlugin
     lpVtbl : IPhotoAcquirePluginVTbl*
   end

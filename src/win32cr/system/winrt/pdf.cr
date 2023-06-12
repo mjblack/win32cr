@@ -36,6 +36,8 @@ lib LibWin32
     render_page_to_device_context : Proc(IPdfRendererNative*, IUnknown, ID2D1DeviceContext, PDF_RENDER_PARAMS*, HRESULT)
   end
 
+  IPdfRendererNative_GUID = LibC::GUID.new("7d9dcd91-d277-4947-8527-07a0daeda94a")
+  CLSID_IPdfRendererNative = "7d9dcd91-d277-4947-8527-07a0daeda94a"
   struct IPdfRendererNative
     lpVtbl : IPdfRendererNativeVTbl*
   end

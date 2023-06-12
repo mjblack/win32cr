@@ -55,6 +55,8 @@ lib LibWin32
     get_mode : Proc(IRandomAccessStreamFileAccessMode*, UInt32*, HRESULT)
   end
 
+  IRandomAccessStreamFileAccessMode_GUID = LibC::GUID.new("332e5848-2e15-458e-85c4-c911c0c3d6f4")
+  CLSID_IRandomAccessStreamFileAccessMode = "332e5848-2e15-458e-85c4-c911c0c3d6f4"
   struct IRandomAccessStreamFileAccessMode
     lpVtbl : IRandomAccessStreamFileAccessModeVTbl*
   end
@@ -66,6 +68,8 @@ lib LibWin32
     on_broken_callback : Proc(IUnbufferedFileHandleOplockCallback*, HRESULT)
   end
 
+  IUnbufferedFileHandleOplockCallback_GUID = LibC::GUID.new("d1019a0e-6243-4329-8497-2e75894d7710")
+  CLSID_IUnbufferedFileHandleOplockCallback = "d1019a0e-6243-4329-8497-2e75894d7710"
   struct IUnbufferedFileHandleOplockCallback
     lpVtbl : IUnbufferedFileHandleOplockCallbackVTbl*
   end
@@ -78,6 +82,8 @@ lib LibWin32
     close_unbuffered_file_handle : Proc(IUnbufferedFileHandleProvider*, HRESULT)
   end
 
+  IUnbufferedFileHandleProvider_GUID = LibC::GUID.new("a65c9109-42ab-4b94-a7b1-dd2e4e68515e")
+  CLSID_IUnbufferedFileHandleProvider = "a65c9109-42ab-4b94-a7b1-dd2e4e68515e"
   struct IUnbufferedFileHandleProvider
     lpVtbl : IUnbufferedFileHandleProviderVTbl*
   end
@@ -89,6 +95,8 @@ lib LibWin32
     oplock_breaking : Proc(IOplockBreakingHandler*, HRESULT)
   end
 
+  IOplockBreakingHandler_GUID = LibC::GUID.new("826abe3d-3acd-47d3-84f2-88aaedcf6304")
+  CLSID_IOplockBreakingHandler = "826abe3d-3acd-47d3-84f2-88aaedcf6304"
   struct IOplockBreakingHandler
     lpVtbl : IOplockBreakingHandlerVTbl*
   end
@@ -100,6 +108,8 @@ lib LibWin32
     create : Proc(IStorageItemHandleAccess*, HANDLE_ACCESS_OPTIONS, HANDLE_SHARING_OPTIONS, HANDLE_OPTIONS, IOplockBreakingHandler, LibC::HANDLE*, HRESULT)
   end
 
+  IStorageItemHandleAccess_GUID = LibC::GUID.new("5ca296b2-2c25-4d22-b785-b885c8201e6a")
+  CLSID_IStorageItemHandleAccess = "5ca296b2-2c25-4d22-b785-b885c8201e6a"
   struct IStorageItemHandleAccess
     lpVtbl : IStorageItemHandleAccessVTbl*
   end
@@ -111,6 +121,8 @@ lib LibWin32
     create : Proc(IStorageFolderHandleAccess*, LibC::LPWSTR, HANDLE_CREATION_OPTIONS, HANDLE_ACCESS_OPTIONS, HANDLE_SHARING_OPTIONS, HANDLE_OPTIONS, IOplockBreakingHandler, LibC::HANDLE*, HRESULT)
   end
 
+  IStorageFolderHandleAccess_GUID = LibC::GUID.new("df19938f-5462-48a0-be65-d2a3271a08d6")
+  CLSID_IStorageFolderHandleAccess = "df19938f-5462-48a0-be65-d2a3271a08d6"
   struct IStorageFolderHandleAccess
     lpVtbl : IStorageFolderHandleAccessVTbl*
   end

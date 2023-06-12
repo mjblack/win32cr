@@ -1669,6 +1669,8 @@ lib LibWin32
     validate : Proc(IValidate*, LibC::LPWSTR, HRESULT)
   end
 
+  IValidate_GUID = LibC::GUID.new("e482e5c6-e31e-4143-a2e6-dbc3d8e4b8d3")
+  CLSID_IValidate = "e482e5c6-e31e-4143-a2e6-dbc3d8e4b8d3"
   struct IValidate
     lpVtbl : IValidateVTbl*
   end
@@ -1683,6 +1685,8 @@ lib LibWin32
     clone : Proc(IEnumMsmString*, IEnumMsmString*, HRESULT)
   end
 
+  IEnumMsmString_GUID = LibC::GUID.new("0adda826-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IEnumMsmString = "0adda826-2c26-11d2-ad65-00a0c9af11a6"
   struct IEnumMsmString
     lpVtbl : IEnumMsmStringVTbl*
   end
@@ -1700,6 +1704,8 @@ lib LibWin32
     get__new_enum : Proc(IMsmStrings*, IUnknown*, HRESULT)
   end
 
+  IMsmStrings_GUID = LibC::GUID.new("0adda827-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IMsmStrings = "0adda827-2c26-11d2-ad65-00a0c9af11a6"
   struct IMsmStrings
     lpVtbl : IMsmStringsVTbl*
   end
@@ -1721,6 +1727,8 @@ lib LibWin32
     get_module_keys : Proc(IMsmError*, IMsmStrings*, HRESULT)
   end
 
+  IMsmError_GUID = LibC::GUID.new("0adda828-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IMsmError = "0adda828-2c26-11d2-ad65-00a0c9af11a6"
   struct IMsmError
     lpVtbl : IMsmErrorVTbl*
   end
@@ -1735,6 +1743,8 @@ lib LibWin32
     clone : Proc(IEnumMsmError*, IEnumMsmError*, HRESULT)
   end
 
+  IEnumMsmError_GUID = LibC::GUID.new("0adda829-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IEnumMsmError = "0adda829-2c26-11d2-ad65-00a0c9af11a6"
   struct IEnumMsmError
     lpVtbl : IEnumMsmErrorVTbl*
   end
@@ -1752,6 +1762,8 @@ lib LibWin32
     get__new_enum : Proc(IMsmErrors*, IUnknown*, HRESULT)
   end
 
+  IMsmErrors_GUID = LibC::GUID.new("0adda82a-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IMsmErrors = "0adda82a-2c26-11d2-ad65-00a0c9af11a6"
   struct IMsmErrors
     lpVtbl : IMsmErrorsVTbl*
   end
@@ -1769,6 +1781,8 @@ lib LibWin32
     get_version : Proc(IMsmDependency*, UInt8**, HRESULT)
   end
 
+  IMsmDependency_GUID = LibC::GUID.new("0adda82b-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IMsmDependency = "0adda82b-2c26-11d2-ad65-00a0c9af11a6"
   struct IMsmDependency
     lpVtbl : IMsmDependencyVTbl*
   end
@@ -1783,6 +1797,8 @@ lib LibWin32
     clone : Proc(IEnumMsmDependency*, IEnumMsmDependency*, HRESULT)
   end
 
+  IEnumMsmDependency_GUID = LibC::GUID.new("0adda82c-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IEnumMsmDependency = "0adda82c-2c26-11d2-ad65-00a0c9af11a6"
   struct IEnumMsmDependency
     lpVtbl : IEnumMsmDependencyVTbl*
   end
@@ -1800,6 +1816,8 @@ lib LibWin32
     get__new_enum : Proc(IMsmDependencies*, IUnknown*, HRESULT)
   end
 
+  IMsmDependencies_GUID = LibC::GUID.new("0adda82d-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IMsmDependencies = "0adda82d-2c26-11d2-ad65-00a0c9af11a6"
   struct IMsmDependencies
     lpVtbl : IMsmDependenciesVTbl*
   end
@@ -1827,6 +1845,8 @@ lib LibWin32
     extract_files : Proc(IMsmMerge*, UInt8*, HRESULT)
   end
 
+  IMsmMerge_GUID = LibC::GUID.new("0adda82e-2c26-11d2-ad65-00a0c9af11a6")
+  CLSID_IMsmMerge = "0adda82e-2c26-11d2-ad65-00a0c9af11a6"
   struct IMsmMerge
     lpVtbl : IMsmMergeVTbl*
   end
@@ -1842,6 +1862,8 @@ lib LibWin32
     get_module_files : Proc(IMsmGetFiles*, IMsmStrings*, HRESULT)
   end
 
+  IMsmGetFiles_GUID = LibC::GUID.new("7041ae26-2d78-11d2-888a-00a0c981b015")
+  CLSID_IMsmGetFiles = "7041ae26-2d78-11d2-888a-00a0c981b015"
   struct IMsmGetFiles
     lpVtbl : IMsmGetFilesVTbl*
   end
@@ -1861,6 +1883,8 @@ lib LibWin32
     clone : Proc(IAssemblyName*, IAssemblyName*, HRESULT)
   end
 
+  IAssemblyName_GUID = LibC::GUID.new("cd193bc0-b4bc-11d2-9833-00c04fc31d2e")
+  CLSID_IAssemblyName = "cd193bc0-b4bc-11d2-9833-00c04fc31d2e"
   struct IAssemblyName
     lpVtbl : IAssemblyNameVTbl*
   end
@@ -1874,6 +1898,8 @@ lib LibWin32
     abort_item : Proc(IAssemblyCacheItem*, HRESULT)
   end
 
+  IAssemblyCacheItem_GUID = LibC::GUID.new("9e3aaeb4-d1cd-11d2-bab9-00c04f8eceae")
+  CLSID_IAssemblyCacheItem = "9e3aaeb4-d1cd-11d2-bab9-00c04f8eceae"
   struct IAssemblyCacheItem
     lpVtbl : IAssemblyCacheItemVTbl*
   end
@@ -1889,6 +1915,8 @@ lib LibWin32
     install_assembly : Proc(IAssemblyCache*, UInt32, LibC::LPWSTR, FUSION_INSTALL_REFERENCE*, HRESULT)
   end
 
+  IAssemblyCache_GUID = LibC::GUID.new("e707dcde-d1cd-11d2-bab9-00c04f8eceae")
+  CLSID_IAssemblyCache = "e707dcde-d1cd-11d2-bab9-00c04f8eceae"
   struct IAssemblyCache
     lpVtbl : IAssemblyCacheVTbl*
   end
@@ -1954,6 +1982,8 @@ lib LibWin32
     set_title : Proc(IPMApplicationInfo*, UInt8*, HRESULT)
   end
 
+  IPMApplicationInfo_GUID = LibC::GUID.new("50afb58a-438c-4088-9789-f8c4899829c7")
+  CLSID_IPMApplicationInfo = "50afb58a-438c-4088-9789-f8c4899829c7"
   struct IPMApplicationInfo
     lpVtbl : IPMApplicationInfoVTbl*
   end
@@ -1967,6 +1997,8 @@ lib LibWin32
     set_property : Proc(IPMTilePropertyInfo*, UInt8*, HRESULT)
   end
 
+  IPMTilePropertyInfo_GUID = LibC::GUID.new("6c2b8017-1efa-42a7-86c0-6d4b640bf528")
+  CLSID_IPMTilePropertyInfo = "6c2b8017-1efa-42a7-86c0-6d4b640bf528"
   struct IPMTilePropertyInfo
     lpVtbl : IPMTilePropertyInfoVTbl*
   end
@@ -1978,6 +2010,8 @@ lib LibWin32
     get_next : Proc(IPMTilePropertyEnumerator*, IPMTilePropertyInfo*, HRESULT)
   end
 
+  IPMTilePropertyEnumerator_GUID = LibC::GUID.new("cc4cd629-9047-4250-aac8-930e47812421")
+  CLSID_IPMTilePropertyEnumerator = "cc4cd629-9047-4250-aac8-930e47812421"
   struct IPMTilePropertyEnumerator
     lpVtbl : IPMTilePropertyEnumeratorVTbl*
   end
@@ -2012,6 +2046,8 @@ lib LibWin32
     set_is_auto_restore_disabled : Proc(IPMTileInfo*, LibC::BOOL, HRESULT)
   end
 
+  IPMTileInfo_GUID = LibC::GUID.new("d1604833-2b08-4001-82cd-183ad734f752")
+  CLSID_IPMTileInfo = "d1604833-2b08-4001-82cd-183ad734f752"
   struct IPMTileInfo
     lpVtbl : IPMTileInfoVTbl*
   end
@@ -2023,6 +2059,8 @@ lib LibWin32
     get_next : Proc(IPMTileInfoEnumerator*, IPMTileInfo*, HRESULT)
   end
 
+  IPMTileInfoEnumerator_GUID = LibC::GUID.new("ded83065-e462-4b2c-acb5-e39cea61c874")
+  CLSID_IPMTileInfoEnumerator = "ded83065-e462-4b2c-acb5-e39cea61c874"
   struct IPMTileInfoEnumerator
     lpVtbl : IPMTileInfoEnumeratorVTbl*
   end
@@ -2034,6 +2072,8 @@ lib LibWin32
     get_next : Proc(IPMApplicationInfoEnumerator*, IPMApplicationInfo*, HRESULT)
   end
 
+  IPMApplicationInfoEnumerator_GUID = LibC::GUID.new("0ec42a96-4d46-4dc6-a3d9-a7acaac0f5fa")
+  CLSID_IPMApplicationInfoEnumerator = "0ec42a96-4d46-4dc6-a3d9-a7acaac0f5fa"
   struct IPMApplicationInfoEnumerator
     lpVtbl : IPMApplicationInfoEnumeratorVTbl*
   end
@@ -2068,6 +2108,8 @@ lib LibWin32
     set_download_state : Proc(IPMLiveTileJobInfo*, UInt32, HRESULT)
   end
 
+  IPMLiveTileJobInfo_GUID = LibC::GUID.new("6009a81f-4710-4697-b5f6-2208f6057b8e")
+  CLSID_IPMLiveTileJobInfo = "6009a81f-4710-4697-b5f6-2208f6057b8e"
   struct IPMLiveTileJobInfo
     lpVtbl : IPMLiveTileJobInfoVTbl*
   end
@@ -2079,6 +2121,8 @@ lib LibWin32
     get_next : Proc(IPMLiveTileJobInfoEnumerator*, IPMLiveTileJobInfo*, HRESULT)
   end
 
+  IPMLiveTileJobInfoEnumerator_GUID = LibC::GUID.new("bc042582-9415-4f36-9f99-06f104c07c03")
+  CLSID_IPMLiveTileJobInfoEnumerator = "bc042582-9415-4f36-9f99-06f104c07c03"
   struct IPMLiveTileJobInfoEnumerator
     lpVtbl : IPMLiveTileJobInfoEnumeratorVTbl*
   end
@@ -2124,6 +2168,8 @@ lib LibWin32
     fix_junctions_for_apps_on_sd_card : Proc(IPMDeploymentManager*, HRESULT)
   end
 
+  IPMDeploymentManager_GUID = LibC::GUID.new("35f785fa-1979-4a8b-bc8f-fd70eb0d1544")
+  CLSID_IPMDeploymentManager = "35f785fa-1979-4a8b-bc8f-fd70eb0d1544"
   struct IPMDeploymentManager
     lpVtbl : IPMDeploymentManagerVTbl*
   end
@@ -2152,6 +2198,8 @@ lib LibWin32
     get_start_app_enumerator_blob : Proc(IPMEnumerationManager*, PM_ENUM_FILTER, UInt32*, PM_STARTAPPBLOB**, HRESULT)
   end
 
+  IPMEnumerationManager_GUID = LibC::GUID.new("698d57c2-292d-4cf3-b73c-d95a6922ed9a")
+  CLSID_IPMEnumerationManager = "698d57c2-292d-4cf3-b73c-d95a6922ed9a"
   struct IPMEnumerationManager
     lpVtbl : IPMEnumerationManagerVTbl*
   end
@@ -2183,6 +2231,8 @@ lib LibWin32
     get_is_opted_for_extended_mem : Proc(IPMTaskInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IPMTaskInfo_GUID = LibC::GUID.new("bf1d8c33-1bf5-4ee0-b549-6b9dd3834942")
+  CLSID_IPMTaskInfo = "bf1d8c33-1bf5-4ee0-b549-6b9dd3834942"
   struct IPMTaskInfo
     lpVtbl : IPMTaskInfoVTbl*
   end
@@ -2194,6 +2244,8 @@ lib LibWin32
     get_next : Proc(IPMTaskInfoEnumerator*, IPMTaskInfo*, HRESULT)
   end
 
+  IPMTaskInfoEnumerator_GUID = LibC::GUID.new("0630b0f8-0bbc-4821-be74-c7995166ed2a")
+  CLSID_IPMTaskInfoEnumerator = "0630b0f8-0bbc-4821-be74-c7995166ed2a"
   struct IPMTaskInfoEnumerator
     lpVtbl : IPMTaskInfoEnumeratorVTbl*
   end
@@ -2210,6 +2262,8 @@ lib LibWin32
     get_invocation_info : Proc(IPMExtensionInfo*, UInt8**, UInt8**, HRESULT)
   end
 
+  IPMExtensionInfo_GUID = LibC::GUID.new("49acde79-9788-4d0a-8aa0-1746afdb9e9d")
+  CLSID_IPMExtensionInfo = "49acde79-9788-4d0a-8aa0-1746afdb9e9d"
   struct IPMExtensionInfo
     lpVtbl : IPMExtensionInfoVTbl*
   end
@@ -2227,6 +2281,8 @@ lib LibWin32
     get_all_file_types : Proc(IPMExtensionFileExtensionInfo*, UInt32*, UInt8***, HRESULT)
   end
 
+  IPMExtensionFileExtensionInfo_GUID = LibC::GUID.new("6b87cb6c-0b88-4989-a4ec-033714f710d4")
+  CLSID_IPMExtensionFileExtensionInfo = "6b87cb6c-0b88-4989-a4ec-033714f710d4"
   struct IPMExtensionFileExtensionInfo
     lpVtbl : IPMExtensionFileExtensionInfoVTbl*
   end
@@ -2239,6 +2295,8 @@ lib LibWin32
     get_invocation_info : Proc(IPMExtensionProtocolInfo*, UInt8**, UInt8**, HRESULT)
   end
 
+  IPMExtensionProtocolInfo_GUID = LibC::GUID.new("1e3fa036-51eb-4453-baff-b8d8e4b46c8e")
+  CLSID_IPMExtensionProtocolInfo = "1e3fa036-51eb-4453-baff-b8d8e4b46c8e"
   struct IPMExtensionProtocolInfo
     lpVtbl : IPMExtensionProtocolInfoVTbl*
   end
@@ -2252,6 +2310,8 @@ lib LibWin32
     get_supports_all_file_types : Proc(IPMExtensionShareTargetInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IPMExtensionShareTargetInfo_GUID = LibC::GUID.new("5471f48b-c65c-4656-8c70-242e31195fea")
+  CLSID_IPMExtensionShareTargetInfo = "5471f48b-c65c-4656-8c70-242e31195fea"
   struct IPMExtensionShareTargetInfo
     lpVtbl : IPMExtensionShareTargetInfoVTbl*
   end
@@ -2263,6 +2323,8 @@ lib LibWin32
     get_invocation_info : Proc(IPMExtensionContractInfo*, UInt8**, UInt8**, HRESULT)
   end
 
+  IPMExtensionContractInfo_GUID = LibC::GUID.new("e5666373-7ba1-467c-b819-b175db1c295b")
+  CLSID_IPMExtensionContractInfo = "e5666373-7ba1-467c-b819-b175db1c295b"
   struct IPMExtensionContractInfo
     lpVtbl : IPMExtensionContractInfoVTbl*
   end
@@ -2275,6 +2337,8 @@ lib LibWin32
     get_supports_all_file_types : Proc(IPMExtensionFileOpenPickerInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IPMExtensionFileOpenPickerInfo_GUID = LibC::GUID.new("6dc91d25-9606-420c-9a78-e034a3418345")
+  CLSID_IPMExtensionFileOpenPickerInfo = "6dc91d25-9606-420c-9a78-e034a3418345"
   struct IPMExtensionFileOpenPickerInfo
     lpVtbl : IPMExtensionFileOpenPickerInfoVTbl*
   end
@@ -2287,6 +2351,8 @@ lib LibWin32
     get_supports_all_file_types : Proc(IPMExtensionFileSavePickerInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IPMExtensionFileSavePickerInfo_GUID = LibC::GUID.new("38005cba-f81a-493e-a0f8-922c8680da43")
+  CLSID_IPMExtensionFileSavePickerInfo = "38005cba-f81a-493e-a0f8-922c8680da43"
   struct IPMExtensionFileSavePickerInfo
     lpVtbl : IPMExtensionFileSavePickerInfoVTbl*
   end
@@ -2298,6 +2364,8 @@ lib LibWin32
     get_supports_updates : Proc(IPMExtensionCachedFileUpdaterInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IPMExtensionCachedFileUpdaterInfo_GUID = LibC::GUID.new("e2d77509-4e58-4ba9-af7e-b642e370e1b0")
+  CLSID_IPMExtensionCachedFileUpdaterInfo = "e2d77509-4e58-4ba9-af7e-b642e370e1b0"
   struct IPMExtensionCachedFileUpdaterInfo
     lpVtbl : IPMExtensionCachedFileUpdaterInfoVTbl*
   end
@@ -2309,6 +2377,8 @@ lib LibWin32
     get_next : Proc(IPMExtensionInfoEnumerator*, IPMExtensionInfo*, HRESULT)
   end
 
+  IPMExtensionInfoEnumerator_GUID = LibC::GUID.new("403b9e82-1171-4573-8e6f-6f33f39b83dd")
+  CLSID_IPMExtensionInfoEnumerator = "403b9e82-1171-4573-8e6f-6f33f39b83dd"
   struct IPMExtensionInfoEnumerator
     lpVtbl : IPMExtensionInfoEnumeratorVTbl*
   end
@@ -2333,6 +2403,8 @@ lib LibWin32
     set_is_schedule_allowed : Proc(IPMBackgroundServiceAgentInfo*, LibC::BOOL, HRESULT)
   end
 
+  IPMBackgroundServiceAgentInfo_GUID = LibC::GUID.new("3a8b46da-928c-4879-998c-09dc96f3d490")
+  CLSID_IPMBackgroundServiceAgentInfo = "3a8b46da-928c-4879-998c-09dc96f3d490"
   struct IPMBackgroundServiceAgentInfo
     lpVtbl : IPMBackgroundServiceAgentInfoVTbl*
   end
@@ -2349,6 +2421,8 @@ lib LibWin32
     get_is_boot_worker : Proc(IPMBackgroundWorkerInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IPMBackgroundWorkerInfo_GUID = LibC::GUID.new("7dd4531b-d3bf-4b6b-94f3-69c098b1497d")
+  CLSID_IPMBackgroundWorkerInfo = "7dd4531b-d3bf-4b6b-94f3-69c098b1497d"
   struct IPMBackgroundWorkerInfo
     lpVtbl : IPMBackgroundWorkerInfoVTbl*
   end
@@ -2360,6 +2434,8 @@ lib LibWin32
     get_next : Proc(IPMBackgroundServiceAgentInfoEnumerator*, IPMBackgroundServiceAgentInfo*, HRESULT)
   end
 
+  IPMBackgroundServiceAgentInfoEnumerator_GUID = LibC::GUID.new("18eb2072-ab56-43b3-872c-beafb7a6b391")
+  CLSID_IPMBackgroundServiceAgentInfoEnumerator = "18eb2072-ab56-43b3-872c-beafb7a6b391"
   struct IPMBackgroundServiceAgentInfoEnumerator
     lpVtbl : IPMBackgroundServiceAgentInfoEnumeratorVTbl*
   end
@@ -2371,6 +2447,8 @@ lib LibWin32
     get_next : Proc(IPMBackgroundWorkerInfoEnumerator*, IPMBackgroundWorkerInfo*, HRESULT)
   end
 
+  IPMBackgroundWorkerInfoEnumerator_GUID = LibC::GUID.new("87f479f8-90d8-4ec7-92b9-72787e2f636b")
+  CLSID_IPMBackgroundWorkerInfoEnumerator = "87f479f8-90d8-4ec7-92b9-72787e2f636b"
   struct IPMBackgroundWorkerInfoEnumerator
     lpVtbl : IPMBackgroundWorkerInfoEnumeratorVTbl*
   end

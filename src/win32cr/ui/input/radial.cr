@@ -23,6 +23,8 @@ lib LibWin32
     create_for_window : Proc(IRadialControllerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IRadialControllerInterop_GUID = LibC::GUID.new("1b0535c9-57ad-45c1-9d79-ad5c34360513")
+  CLSID_IRadialControllerInterop = "1b0535c9-57ad-45c1-9d79-ad5c34360513"
   struct IRadialControllerInterop
     lpVtbl : IRadialControllerInteropVTbl*
   end
@@ -37,6 +39,8 @@ lib LibWin32
     get_for_window : Proc(IRadialControllerConfigurationInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IRadialControllerConfigurationInterop_GUID = LibC::GUID.new("787cdaac-3186-476d-87e4-b9374a7b9970")
+  CLSID_IRadialControllerConfigurationInterop = "787cdaac-3186-476d-87e4-b9374a7b9970"
   struct IRadialControllerConfigurationInterop
     lpVtbl : IRadialControllerConfigurationInteropVTbl*
   end
@@ -51,6 +55,8 @@ lib LibWin32
     create_for_window : Proc(IRadialControllerIndependentInputSourceInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IRadialControllerIndependentInputSourceInterop_GUID = LibC::GUID.new("3d577eff-4cee-11e6-b535-001bdc06ab3b")
+  CLSID_IRadialControllerIndependentInputSourceInterop = "3d577eff-4cee-11e6-b535-001bdc06ab3b"
   struct IRadialControllerIndependentInputSourceInterop
     lpVtbl : IRadialControllerIndependentInputSourceInteropVTbl*
   end

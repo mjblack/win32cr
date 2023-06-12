@@ -848,6 +848,8 @@ lib LibWin32
     get_wnd : Proc(ITextStoreACP*, UInt32, HANDLE*, HRESULT)
   end
 
+  ITextStoreACP_GUID = LibC::GUID.new("28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d")
+  CLSID_ITextStoreACP = "28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d"
   struct ITextStoreACP
     lpVtbl : ITextStoreACPVTbl*
   end
@@ -883,6 +885,8 @@ lib LibWin32
     get_screen_ext : Proc(ITextStoreACP2*, UInt32, RECT*, HRESULT)
   end
 
+  ITextStoreACP2_GUID = LibC::GUID.new("f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f")
+  CLSID_ITextStoreACP2 = "f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f"
   struct ITextStoreACP2
     lpVtbl : ITextStoreACP2VTbl*
   end
@@ -901,6 +905,8 @@ lib LibWin32
     on_end_edit_transaction : Proc(ITextStoreACPSink*, HRESULT)
   end
 
+  ITextStoreACPSink_GUID = LibC::GUID.new("22d44c94-a419-4542-a272-ae26093ececf")
+  CLSID_ITextStoreACPSink = "22d44c94-a419-4542-a272-ae26093ececf"
   struct ITextStoreACPSink
     lpVtbl : ITextStoreACPSinkVTbl*
   end
@@ -922,6 +928,8 @@ lib LibWin32
     clone : Proc(IAnchor*, IAnchor*, HRESULT)
   end
 
+  IAnchor_GUID = LibC::GUID.new("0feb7e34-5a60-4356-8ef7-abdec2ff7cf8")
+  CLSID_IAnchor = "0feb7e34-5a60-4356-8ef7-abdec2ff7cf8"
   struct IAnchor
     lpVtbl : IAnchorVTbl*
   end
@@ -959,6 +967,8 @@ lib LibWin32
     insert_embedded_at_selection : Proc(ITextStoreAnchor*, UInt32, IDataObject, IAnchor*, IAnchor*, HRESULT)
   end
 
+  ITextStoreAnchor_GUID = LibC::GUID.new("9b2077b0-5f18-4dec-bee9-3cc722f5dfe0")
+  CLSID_ITextStoreAnchor = "9b2077b0-5f18-4dec-bee9-3cc722f5dfe0"
   struct ITextStoreAnchor
     lpVtbl : ITextStoreAnchorVTbl*
   end
@@ -977,6 +987,8 @@ lib LibWin32
     on_end_edit_transaction : Proc(ITextStoreAnchorSink*, HRESULT)
   end
 
+  ITextStoreAnchorSink_GUID = LibC::GUID.new("aa80e905-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITextStoreAnchorSink = "aa80e905-2021-11d2-93e0-0060b067b86e"
   struct ITextStoreAnchorSink
     lpVtbl : ITextStoreAnchorSinkVTbl*
   end
@@ -996,6 +1008,8 @@ lib LibWin32
     get_show_floating_status : Proc(ITfLangBarMgr*, UInt32*, HRESULT)
   end
 
+  ITfLangBarMgr_GUID = LibC::GUID.new("87955690-e627-11d2-8ddb-00105a2799b5")
+  CLSID_ITfLangBarMgr = "87955690-e627-11d2-8ddb-00105a2799b5"
   struct ITfLangBarMgr
     lpVtbl : ITfLangBarMgrVTbl*
   end
@@ -1012,6 +1026,8 @@ lib LibWin32
     get_item_floating_rect : Proc(ITfLangBarEventSink*, UInt32, Guid*, RECT*, HRESULT)
   end
 
+  ITfLangBarEventSink_GUID = LibC::GUID.new("18a4e900-e0ae-11d2-afdd-00105a2799b5")
+  CLSID_ITfLangBarEventSink = "18a4e900-e0ae-11d2-afdd-00105a2799b5"
   struct ITfLangBarEventSink
     lpVtbl : ITfLangBarEventSinkVTbl*
   end
@@ -1023,6 +1039,8 @@ lib LibWin32
     on_update : Proc(ITfLangBarItemSink*, UInt32, HRESULT)
   end
 
+  ITfLangBarItemSink_GUID = LibC::GUID.new("57dbe1a0-de25-11d2-afdd-00105a2799b5")
+  CLSID_ITfLangBarItemSink = "57dbe1a0-de25-11d2-afdd-00105a2799b5"
   struct ITfLangBarItemSink
     lpVtbl : ITfLangBarItemSinkVTbl*
   end
@@ -1037,6 +1055,8 @@ lib LibWin32
     skip : Proc(IEnumTfLangBarItems*, UInt32, HRESULT)
   end
 
+  IEnumTfLangBarItems_GUID = LibC::GUID.new("583f34d0-de25-11d2-afdd-00105a2799b5")
+  CLSID_IEnumTfLangBarItems = "583f34d0-de25-11d2-afdd-00105a2799b5"
   struct IEnumTfLangBarItems
     lpVtbl : IEnumTfLangBarItemsVTbl*
   end
@@ -1059,6 +1079,8 @@ lib LibWin32
     unadvise_items_sink : Proc(ITfLangBarItemMgr*, UInt32, UInt32*, HRESULT)
   end
 
+  ITfLangBarItemMgr_GUID = LibC::GUID.new("ba468c55-9956-4fb1-a59d-52a7dd7cc6aa")
+  CLSID_ITfLangBarItemMgr = "ba468c55-9956-4fb1-a59d-52a7dd7cc6aa"
   struct ITfLangBarItemMgr
     lpVtbl : ITfLangBarItemMgrVTbl*
   end
@@ -1073,6 +1095,8 @@ lib LibWin32
     get_tooltip_string : Proc(ITfLangBarItem*, UInt8**, HRESULT)
   end
 
+  ITfLangBarItem_GUID = LibC::GUID.new("73540d69-edeb-4ee9-96c9-23aa30b25916")
+  CLSID_ITfLangBarItem = "73540d69-edeb-4ee9-96c9-23aa30b25916"
   struct ITfLangBarItem
     lpVtbl : ITfLangBarItemVTbl*
   end
@@ -1085,6 +1109,8 @@ lib LibWin32
     on_menu_select : Proc(ITfSystemLangBarItemSink*, UInt32, HRESULT)
   end
 
+  ITfSystemLangBarItemSink_GUID = LibC::GUID.new("1449d9ab-13cf-4687-aa3e-8d8b18574396")
+  CLSID_ITfSystemLangBarItemSink = "1449d9ab-13cf-4687-aa3e-8d8b18574396"
   struct ITfSystemLangBarItemSink
     lpVtbl : ITfSystemLangBarItemSinkVTbl*
   end
@@ -1097,6 +1123,8 @@ lib LibWin32
     set_tooltip_string : Proc(ITfSystemLangBarItem*, Char*, UInt32, HRESULT)
   end
 
+  ITfSystemLangBarItem_GUID = LibC::GUID.new("1e13e9ec-6b33-4d4a-b5eb-8a92f029f356")
+  CLSID_ITfSystemLangBarItem = "1e13e9ec-6b33-4d4a-b5eb-8a92f029f356"
   struct ITfSystemLangBarItem
     lpVtbl : ITfSystemLangBarItemVTbl*
   end
@@ -1109,6 +1137,8 @@ lib LibWin32
     get_item_text : Proc(ITfSystemLangBarItemText*, UInt8**, HRESULT)
   end
 
+  ITfSystemLangBarItemText_GUID = LibC::GUID.new("5c4ce0e5-ba49-4b52-ac6b-3b397b4f701f")
+  CLSID_ITfSystemLangBarItemText = "5c4ce0e5-ba49-4b52-ac6b-3b397b4f701f"
   struct ITfSystemLangBarItemText
     lpVtbl : ITfSystemLangBarItemTextVTbl*
   end
@@ -1121,6 +1151,8 @@ lib LibWin32
     get_icon_mode : Proc(ITfSystemDeviceTypeLangBarItem*, UInt32*, HRESULT)
   end
 
+  ITfSystemDeviceTypeLangBarItem_GUID = LibC::GUID.new("45672eb9-9059-46a2-838d-4530355f6a77")
+  CLSID_ITfSystemDeviceTypeLangBarItem = "45672eb9-9059-46a2-838d-4530355f6a77"
   struct ITfSystemDeviceTypeLangBarItem
     lpVtbl : ITfSystemDeviceTypeLangBarItemVTbl*
   end
@@ -1140,6 +1172,8 @@ lib LibWin32
     get_text : Proc(ITfLangBarItemButton*, UInt8**, HRESULT)
   end
 
+  ITfLangBarItemButton_GUID = LibC::GUID.new("28c7f1d0-de25-11d2-afdd-00105a2799b5")
+  CLSID_ITfLangBarItemButton = "28c7f1d0-de25-11d2-afdd-00105a2799b5"
   struct ITfLangBarItemButton
     lpVtbl : ITfLangBarItemButtonVTbl*
   end
@@ -1160,6 +1194,8 @@ lib LibWin32
     get_text : Proc(ITfLangBarItemBitmapButton*, UInt8**, HRESULT)
   end
 
+  ITfLangBarItemBitmapButton_GUID = LibC::GUID.new("a26a0525-3fae-4fa0-89ee-88a964f9f1b5")
+  CLSID_ITfLangBarItemBitmapButton = "a26a0525-3fae-4fa0-89ee-88a964f9f1b5"
   struct ITfLangBarItemBitmapButton
     lpVtbl : ITfLangBarItemBitmapButtonVTbl*
   end
@@ -1177,6 +1213,8 @@ lib LibWin32
     draw_bitmap : Proc(ITfLangBarItemBitmap*, Int32, Int32, UInt32, HBITMAP*, HBITMAP*, HRESULT)
   end
 
+  ITfLangBarItemBitmap_GUID = LibC::GUID.new("73830352-d722-4179-ada5-f045c98df355")
+  CLSID_ITfLangBarItemBitmap = "73830352-d722-4179-ada5-f045c98df355"
   struct ITfLangBarItemBitmap
     lpVtbl : ITfLangBarItemBitmapVTbl*
   end
@@ -1194,6 +1232,8 @@ lib LibWin32
     get_balloon_info : Proc(ITfLangBarItemBalloon*, TF_LBBALLOONINFO*, HRESULT)
   end
 
+  ITfLangBarItemBalloon_GUID = LibC::GUID.new("01c2d285-d3c7-4b7b-b5b5-d97411d0c283")
+  CLSID_ITfLangBarItemBalloon = "01c2d285-d3c7-4b7b-b5b5-d97411d0c283"
   struct ITfLangBarItemBalloon
     lpVtbl : ITfLangBarItemBalloonVTbl*
   end
@@ -1205,6 +1245,8 @@ lib LibWin32
     add_menu_item : Proc(ITfMenu*, UInt32, UInt32, HBITMAP, HBITMAP, Char*, UInt32, ITfMenu*, HRESULT)
   end
 
+  ITfMenu_GUID = LibC::GUID.new("6f8a98e4-aaa0-4f15-8c5b-07e0df0a3dd8")
+  CLSID_ITfMenu = "6f8a98e4-aaa0-4f15-8c5b-07e0df0a3dd8"
   struct ITfMenu
     lpVtbl : ITfMenuVTbl*
   end
@@ -1226,6 +1268,8 @@ lib LibWin32
     get_global_compartment : Proc(ITfThreadMgr*, ITfCompartmentMgr*, HRESULT)
   end
 
+  ITfThreadMgr_GUID = LibC::GUID.new("aa80e801-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfThreadMgr = "aa80e801-2021-11d2-93e0-0060b067b86e"
   struct ITfThreadMgr
     lpVtbl : ITfThreadMgrVTbl*
   end
@@ -1249,6 +1293,8 @@ lib LibWin32
     get_active_flags : Proc(ITfThreadMgrEx*, UInt32*, HRESULT)
   end
 
+  ITfThreadMgrEx_GUID = LibC::GUID.new("3e90ade3-7594-4cb0-bb58-69628f5f458c")
+  CLSID_ITfThreadMgrEx = "3e90ade3-7594-4cb0-bb58-69628f5f458c"
   struct ITfThreadMgrEx
     lpVtbl : ITfThreadMgrExVTbl*
   end
@@ -1273,6 +1319,8 @@ lib LibWin32
     resume_keystroke_handling : Proc(ITfThreadMgr2*, HRESULT)
   end
 
+  ITfThreadMgr2_GUID = LibC::GUID.new("0ab198ef-6477-4ee8-8812-6780edb82d5e")
+  CLSID_ITfThreadMgr2 = "0ab198ef-6477-4ee8-8812-6780edb82d5e"
   struct ITfThreadMgr2
     lpVtbl : ITfThreadMgr2VTbl*
   end
@@ -1288,6 +1336,8 @@ lib LibWin32
     on_pop_context : Proc(ITfThreadMgrEventSink*, ITfContext, HRESULT)
   end
 
+  ITfThreadMgrEventSink_GUID = LibC::GUID.new("aa80e80e-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfThreadMgrEventSink = "aa80e80e-2021-11d2-93e0-0060b067b86e"
   struct ITfThreadMgrEventSink
     lpVtbl : ITfThreadMgrEventSinkVTbl*
   end
@@ -1300,6 +1350,8 @@ lib LibWin32
     enable_system_keystroke_feed : Proc(ITfConfigureSystemKeystrokeFeed*, HRESULT)
   end
 
+  ITfConfigureSystemKeystrokeFeed_GUID = LibC::GUID.new("0d2c969a-bc9c-437c-84ee-951c49b1a764")
+  CLSID_ITfConfigureSystemKeystrokeFeed = "0d2c969a-bc9c-437c-84ee-951c49b1a764"
   struct ITfConfigureSystemKeystrokeFeed
     lpVtbl : ITfConfigureSystemKeystrokeFeedVTbl*
   end
@@ -1314,6 +1366,8 @@ lib LibWin32
     skip : Proc(IEnumTfDocumentMgrs*, UInt32, HRESULT)
   end
 
+  IEnumTfDocumentMgrs_GUID = LibC::GUID.new("aa80e808-2021-11d2-93e0-0060b067b86e")
+  CLSID_IEnumTfDocumentMgrs = "aa80e808-2021-11d2-93e0-0060b067b86e"
   struct IEnumTfDocumentMgrs
     lpVtbl : IEnumTfDocumentMgrsVTbl*
   end
@@ -1330,6 +1384,8 @@ lib LibWin32
     enum_contexts : Proc(ITfDocumentMgr*, IEnumTfContexts*, HRESULT)
   end
 
+  ITfDocumentMgr_GUID = LibC::GUID.new("aa80e7f4-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfDocumentMgr = "aa80e7f4-2021-11d2-93e0-0060b067b86e"
   struct ITfDocumentMgr
     lpVtbl : ITfDocumentMgrVTbl*
   end
@@ -1344,6 +1400,8 @@ lib LibWin32
     skip : Proc(IEnumTfContexts*, UInt32, HRESULT)
   end
 
+  IEnumTfContexts_GUID = LibC::GUID.new("8f1a7ea6-1654-4502-a86e-b2902344d507")
+  CLSID_IEnumTfContexts = "8f1a7ea6-1654-4502-a86e-b2902344d507"
   struct IEnumTfContexts
     lpVtbl : IEnumTfContextsVTbl*
   end
@@ -1356,6 +1414,8 @@ lib LibWin32
     get_range : Proc(ITfCompositionView*, ITfRange*, HRESULT)
   end
 
+  ITfCompositionView_GUID = LibC::GUID.new("d7540241-f9a1-4364-befc-dbcd2c4395b7")
+  CLSID_ITfCompositionView = "d7540241-f9a1-4364-befc-dbcd2c4395b7"
   struct ITfCompositionView
     lpVtbl : ITfCompositionViewVTbl*
   end
@@ -1370,6 +1430,8 @@ lib LibWin32
     skip : Proc(IEnumITfCompositionView*, UInt32, HRESULT)
   end
 
+  IEnumITfCompositionView_GUID = LibC::GUID.new("5efd22ba-7838-46cb-88e2-cadb14124f8f")
+  CLSID_IEnumITfCompositionView = "5efd22ba-7838-46cb-88e2-cadb14124f8f"
   struct IEnumITfCompositionView
     lpVtbl : IEnumITfCompositionViewVTbl*
   end
@@ -1384,6 +1446,8 @@ lib LibWin32
     end_composition : Proc(ITfComposition*, UInt32, HRESULT)
   end
 
+  ITfComposition_GUID = LibC::GUID.new("20168d64-5a8f-4a5a-b7bd-cfa29f4d0fd9")
+  CLSID_ITfComposition = "20168d64-5a8f-4a5a-b7bd-cfa29f4d0fd9"
   struct ITfComposition
     lpVtbl : ITfCompositionVTbl*
   end
@@ -1395,6 +1459,8 @@ lib LibWin32
     on_composition_terminated : Proc(ITfCompositionSink*, UInt32, ITfComposition, HRESULT)
   end
 
+  ITfCompositionSink_GUID = LibC::GUID.new("a781718c-579a-4b15-a280-32b8577acc5e")
+  CLSID_ITfCompositionSink = "a781718c-579a-4b15-a280-32b8577acc5e"
   struct ITfCompositionSink
     lpVtbl : ITfCompositionSinkVTbl*
   end
@@ -1409,6 +1475,8 @@ lib LibWin32
     take_ownership : Proc(ITfContextComposition*, UInt32, ITfCompositionView, ITfCompositionSink, ITfComposition*, HRESULT)
   end
 
+  ITfContextComposition_GUID = LibC::GUID.new("d40c8aae-ac92-4fc7-9a11-0ee0e23aa39b")
+  CLSID_ITfContextComposition = "d40c8aae-ac92-4fc7-9a11-0ee0e23aa39b"
   struct ITfContextComposition
     lpVtbl : ITfContextCompositionVTbl*
   end
@@ -1424,6 +1492,8 @@ lib LibWin32
     terminate_composition : Proc(ITfContextOwnerCompositionServices*, ITfCompositionView, HRESULT)
   end
 
+  ITfContextOwnerCompositionServices_GUID = LibC::GUID.new("86462810-593b-4916-9764-19c08e9ce110")
+  CLSID_ITfContextOwnerCompositionServices = "86462810-593b-4916-9764-19c08e9ce110"
   struct ITfContextOwnerCompositionServices
     lpVtbl : ITfContextOwnerCompositionServicesVTbl*
   end
@@ -1437,6 +1507,8 @@ lib LibWin32
     on_end_composition : Proc(ITfContextOwnerCompositionSink*, ITfCompositionView, HRESULT)
   end
 
+  ITfContextOwnerCompositionSink_GUID = LibC::GUID.new("5f20aa40-b57a-4f34-96ab-3576f377cc79")
+  CLSID_ITfContextOwnerCompositionSink = "5f20aa40-b57a-4f34-96ab-3576f377cc79"
   struct ITfContextOwnerCompositionSink
     lpVtbl : ITfContextOwnerCompositionSinkVTbl*
   end
@@ -1451,6 +1523,8 @@ lib LibWin32
     get_wnd : Proc(ITfContextView*, HANDLE*, HRESULT)
   end
 
+  ITfContextView_GUID = LibC::GUID.new("2433bf8e-0f9b-435c-ba2c-180611978c30")
+  CLSID_ITfContextView = "2433bf8e-0f9b-435c-ba2c-180611978c30"
   struct ITfContextView
     lpVtbl : ITfContextViewVTbl*
   end
@@ -1465,6 +1539,8 @@ lib LibWin32
     skip : Proc(IEnumTfContextViews*, UInt32, HRESULT)
   end
 
+  IEnumTfContextViews_GUID = LibC::GUID.new("f0c0f8dd-cf38-44e1-bb0f-68cf0d551c78")
+  CLSID_IEnumTfContextViews = "f0c0f8dd-cf38-44e1-bb0f-68cf0d551c78"
   struct IEnumTfContextViews
     lpVtbl : IEnumTfContextViewsVTbl*
   end
@@ -1490,6 +1566,8 @@ lib LibWin32
     create_range_backup : Proc(ITfContext*, UInt32, ITfRange, ITfRangeBackup*, HRESULT)
   end
 
+  ITfContext_GUID = LibC::GUID.new("aa80e7fd-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfContext = "aa80e7fd-2021-11d2-93e0-0060b067b86e"
   struct ITfContext
     lpVtbl : ITfContextVTbl*
   end
@@ -1501,6 +1579,8 @@ lib LibWin32
     query_insert_embedded : Proc(ITfQueryEmbedded*, Guid*, FORMATETC*, LibC::BOOL*, HRESULT)
   end
 
+  ITfQueryEmbedded_GUID = LibC::GUID.new("0fab9bdb-d250-4169-84e5-6be118fdd7a8")
+  CLSID_ITfQueryEmbedded = "0fab9bdb-d250-4169-84e5-6be118fdd7a8"
   struct ITfQueryEmbedded
     lpVtbl : ITfQueryEmbeddedVTbl*
   end
@@ -1513,6 +1593,8 @@ lib LibWin32
     insert_embedded_at_selection : Proc(ITfInsertAtSelection*, UInt32, UInt32, IDataObject, ITfRange*, HRESULT)
   end
 
+  ITfInsertAtSelection_GUID = LibC::GUID.new("55ce16ba-3014-41c1-9ceb-fade1446ac6c")
+  CLSID_ITfInsertAtSelection = "55ce16ba-3014-41c1-9ceb-fade1446ac6c"
   struct ITfInsertAtSelection
     lpVtbl : ITfInsertAtSelectionVTbl*
   end
@@ -1524,6 +1606,8 @@ lib LibWin32
     on_cleanup_context : Proc(ITfCleanupContextSink*, UInt32, ITfContext, HRESULT)
   end
 
+  ITfCleanupContextSink_GUID = LibC::GUID.new("01689689-7acb-4e9b-ab7c-7ea46b12b522")
+  CLSID_ITfCleanupContextSink = "01689689-7acb-4e9b-ab7c-7ea46b12b522"
   struct ITfCleanupContextSink
     lpVtbl : ITfCleanupContextSinkVTbl*
   end
@@ -1536,6 +1620,8 @@ lib LibWin32
     on_end_cleanup_context : Proc(ITfCleanupContextDurationSink*, HRESULT)
   end
 
+  ITfCleanupContextDurationSink_GUID = LibC::GUID.new("45c35144-154e-4797-bed8-d33ae7bf8794")
+  CLSID_ITfCleanupContextDurationSink = "45c35144-154e-4797-bed8-d33ae7bf8794"
   struct ITfCleanupContextDurationSink
     lpVtbl : ITfCleanupContextDurationSinkVTbl*
   end
@@ -1550,6 +1636,8 @@ lib LibWin32
     get_context : Proc(ITfReadOnlyProperty*, ITfContext*, HRESULT)
   end
 
+  ITfReadOnlyProperty_GUID = LibC::GUID.new("17d49a3d-f8b8-4b2f-b254-52319dd64c53")
+  CLSID_ITfReadOnlyProperty = "17d49a3d-f8b8-4b2f-b254-52319dd64c53"
   struct ITfReadOnlyProperty
     lpVtbl : ITfReadOnlyPropertyVTbl*
   end
@@ -1564,6 +1652,8 @@ lib LibWin32
     skip : Proc(IEnumTfPropertyValue*, UInt32, HRESULT)
   end
 
+  IEnumTfPropertyValue_GUID = LibC::GUID.new("8ed8981b-7c10-4d7d-9fb3-ab72e9c75f72")
+  CLSID_IEnumTfPropertyValue = "8ed8981b-7c10-4d7d-9fb3-ab72e9c75f72"
   struct IEnumTfPropertyValue
     lpVtbl : IEnumTfPropertyValueVTbl*
   end
@@ -1576,6 +1666,8 @@ lib LibWin32
     unadvise_mouse_sink : Proc(ITfMouseTracker*, UInt32, HRESULT)
   end
 
+  ITfMouseTracker_GUID = LibC::GUID.new("09d146cd-a544-4132-925b-7afa8ef322d0")
+  CLSID_ITfMouseTracker = "09d146cd-a544-4132-925b-7afa8ef322d0"
   struct ITfMouseTracker
     lpVtbl : ITfMouseTrackerVTbl*
   end
@@ -1588,6 +1680,8 @@ lib LibWin32
     unadvise_mouse_sink : Proc(ITfMouseTrackerACP*, UInt32, HRESULT)
   end
 
+  ITfMouseTrackerACP_GUID = LibC::GUID.new("3bdd78e2-c16e-47fd-b883-ce6facc1a208")
+  CLSID_ITfMouseTrackerACP = "3bdd78e2-c16e-47fd-b883-ce6facc1a208"
   struct ITfMouseTrackerACP
     lpVtbl : ITfMouseTrackerACPVTbl*
   end
@@ -1599,6 +1693,8 @@ lib LibWin32
     on_mouse_event : Proc(ITfMouseSink*, UInt32, UInt32, UInt32, LibC::BOOL*, HRESULT)
   end
 
+  ITfMouseSink_GUID = LibC::GUID.new("a1adaaa2-3a24-449d-ac96-5183e7f5c217")
+  CLSID_ITfMouseSink = "a1adaaa2-3a24-449d-ac96-5183e7f5c217"
   struct ITfMouseSink
     lpVtbl : ITfMouseSinkVTbl*
   end
@@ -1611,6 +1707,8 @@ lib LibWin32
     get_text_and_property_updates : Proc(ITfEditRecord*, GET_TEXT_AND_PROPERTY_UPDATES_FLAGS, Guid**, UInt32, IEnumTfRanges*, HRESULT)
   end
 
+  ITfEditRecord_GUID = LibC::GUID.new("42d4d099-7c1a-4a89-b836-6c6f22160df0")
+  CLSID_ITfEditRecord = "42d4d099-7c1a-4a89-b836-6c6f22160df0"
   struct ITfEditRecord
     lpVtbl : ITfEditRecordVTbl*
   end
@@ -1622,6 +1720,8 @@ lib LibWin32
     on_end_edit : Proc(ITfTextEditSink*, ITfContext, UInt32, ITfEditRecord, HRESULT)
   end
 
+  ITfTextEditSink_GUID = LibC::GUID.new("8127d409-ccd3-4683-967a-b43d5b482bf7")
+  CLSID_ITfTextEditSink = "8127d409-ccd3-4683-967a-b43d5b482bf7"
   struct ITfTextEditSink
     lpVtbl : ITfTextEditSinkVTbl*
   end
@@ -1633,6 +1733,8 @@ lib LibWin32
     on_layout_change : Proc(ITfTextLayoutSink*, ITfContext, TfLayoutCode, ITfContextView, HRESULT)
   end
 
+  ITfTextLayoutSink_GUID = LibC::GUID.new("2af2d06a-dd5b-4927-a0b4-54f19c91fade")
+  CLSID_ITfTextLayoutSink = "2af2d06a-dd5b-4927-a0b4-54f19c91fade"
   struct ITfTextLayoutSink
     lpVtbl : ITfTextLayoutSinkVTbl*
   end
@@ -1644,6 +1746,8 @@ lib LibWin32
     on_status_change : Proc(ITfStatusSink*, ITfContext, UInt32, HRESULT)
   end
 
+  ITfStatusSink_GUID = LibC::GUID.new("6b7d8d73-b267-4f69-b32e-1ca321ce4f45")
+  CLSID_ITfStatusSink = "6b7d8d73-b267-4f69-b32e-1ca321ce4f45"
   struct ITfStatusSink
     lpVtbl : ITfStatusSinkVTbl*
   end
@@ -1656,6 +1760,8 @@ lib LibWin32
     on_end_edit_transaction : Proc(ITfEditTransactionSink*, ITfContext, HRESULT)
   end
 
+  ITfEditTransactionSink_GUID = LibC::GUID.new("708fbf70-b520-416b-b06c-2c41ab44f8ba")
+  CLSID_ITfEditTransactionSink = "708fbf70-b520-416b-b06c-2c41ab44f8ba"
   struct ITfEditTransactionSink
     lpVtbl : ITfEditTransactionSinkVTbl*
   end
@@ -1672,6 +1778,8 @@ lib LibWin32
     get_attribute : Proc(ITfContextOwner*, Guid*, VARIANT*, HRESULT)
   end
 
+  ITfContextOwner_GUID = LibC::GUID.new("aa80e80c-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfContextOwner = "aa80e80c-2021-11d2-93e0-0060b067b86e"
   struct ITfContextOwner
     lpVtbl : ITfContextOwnerVTbl*
   end
@@ -1689,6 +1797,8 @@ lib LibWin32
     create_range : Proc(ITfContextOwnerServices*, Int32, Int32, ITfRangeACP*, HRESULT)
   end
 
+  ITfContextOwnerServices_GUID = LibC::GUID.new("b23eb630-3e1c-11d3-a745-0050040ab407")
+  CLSID_ITfContextOwnerServices = "b23eb630-3e1c-11d3-a745-0050040ab407"
   struct ITfContextOwnerServices
     lpVtbl : ITfContextOwnerServicesVTbl*
   end
@@ -1703,6 +1813,8 @@ lib LibWin32
     on_test_key_up : Proc(ITfContextKeyEventSink*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
   end
 
+  ITfContextKeyEventSink_GUID = LibC::GUID.new("0552ba5d-c835-4934-bf50-846aaa67432f")
+  CLSID_ITfContextKeyEventSink = "0552ba5d-c835-4934-bf50-846aaa67432f"
   struct ITfContextKeyEventSink
     lpVtbl : ITfContextKeyEventSinkVTbl*
   end
@@ -1714,6 +1826,8 @@ lib LibWin32
     do_edit_session : Proc(ITfEditSession*, UInt32, HRESULT)
   end
 
+  ITfEditSession_GUID = LibC::GUID.new("aa80e803-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfEditSession = "aa80e803-2021-11d2-93e0-0060b067b86e"
   struct ITfEditSession
     lpVtbl : ITfEditSessionVTbl*
   end
@@ -1746,6 +1860,8 @@ lib LibWin32
     get_context : Proc(ITfRange*, ITfContext*, HRESULT)
   end
 
+  ITfRange_GUID = LibC::GUID.new("aa80e7ff-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfRange = "aa80e7ff-2021-11d2-93e0-0060b067b86e"
   struct ITfRange
     lpVtbl : ITfRangeVTbl*
   end
@@ -1780,6 +1896,8 @@ lib LibWin32
     set_extent : Proc(ITfRangeACP*, Int32, Int32, HRESULT)
   end
 
+  ITfRangeACP_GUID = LibC::GUID.new("057a6296-029b-4154-b79a-0d461d4ea94c")
+  CLSID_ITfRangeACP = "057a6296-029b-4154-b79a-0d461d4ea94c"
   struct ITfRangeACP
     lpVtbl : ITfRangeACPVTbl*
   end
@@ -1794,6 +1912,8 @@ lib LibWin32
     create_range : Proc(ITextStoreACPServices*, Int32, Int32, ITfRangeACP*, HRESULT)
   end
 
+  ITextStoreACPServices_GUID = LibC::GUID.new("aa80e901-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITextStoreACPServices = "aa80e901-2021-11d2-93e0-0060b067b86e"
   struct ITextStoreACPServices
     lpVtbl : ITextStoreACPServicesVTbl*
   end
@@ -1805,6 +1925,8 @@ lib LibWin32
     restore : Proc(ITfRangeBackup*, UInt32, ITfRange, HRESULT)
   end
 
+  ITfRangeBackup_GUID = LibC::GUID.new("463a506d-6992-49d2-9b88-93d55e70bb16")
+  CLSID_ITfRangeBackup = "463a506d-6992-49d2-9b88-93d55e70bb16"
   struct ITfRangeBackup
     lpVtbl : ITfRangeBackupVTbl*
   end
@@ -1824,6 +1946,8 @@ lib LibWin32
     serialize : Proc(ITfPropertyStore*, IStream, UInt32*, HRESULT)
   end
 
+  ITfPropertyStore_GUID = LibC::GUID.new("6834b120-88cb-11d2-bf45-00105a2799b5")
+  CLSID_ITfPropertyStore = "6834b120-88cb-11d2-bf45-00105a2799b5"
   struct ITfPropertyStore
     lpVtbl : ITfPropertyStoreVTbl*
   end
@@ -1838,6 +1962,8 @@ lib LibWin32
     skip : Proc(IEnumTfRanges*, UInt32, HRESULT)
   end
 
+  IEnumTfRanges_GUID = LibC::GUID.new("f99d3f40-8e32-11d2-bf46-00105a2799b5")
+  CLSID_IEnumTfRanges = "f99d3f40-8e32-11d2-bf46-00105a2799b5"
   struct IEnumTfRanges
     lpVtbl : IEnumTfRangesVTbl*
   end
@@ -1850,6 +1976,8 @@ lib LibWin32
     create_property_store : Proc(ITfCreatePropertyStore*, Guid*, ITfRange, UInt32, IStream, ITfPropertyStore*, HRESULT)
   end
 
+  ITfCreatePropertyStore_GUID = LibC::GUID.new("2463fbf0-b0af-11d2-afc5-00105a2799b5")
+  CLSID_ITfCreatePropertyStore = "2463fbf0-b0af-11d2-afc5-00105a2799b5"
   struct ITfCreatePropertyStore
     lpVtbl : ITfCreatePropertyStoreVTbl*
   end
@@ -1861,6 +1989,8 @@ lib LibWin32
     load_property : Proc(ITfPersistentPropertyLoaderACP*, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream*, HRESULT)
   end
 
+  ITfPersistentPropertyLoaderACP_GUID = LibC::GUID.new("4ef89150-0807-11d3-8df0-00105a2799b5")
+  CLSID_ITfPersistentPropertyLoaderACP = "4ef89150-0807-11d3-8df0-00105a2799b5"
   struct ITfPersistentPropertyLoaderACP
     lpVtbl : ITfPersistentPropertyLoaderACPVTbl*
   end
@@ -1879,6 +2009,8 @@ lib LibWin32
     clear : Proc(ITfProperty*, UInt32, ITfRange, HRESULT)
   end
 
+  ITfProperty_GUID = LibC::GUID.new("e2449660-9542-11d2-bf46-00105a2799b5")
+  CLSID_ITfProperty = "e2449660-9542-11d2-bf46-00105a2799b5"
   struct ITfProperty
     lpVtbl : ITfPropertyVTbl*
   end
@@ -1893,6 +2025,8 @@ lib LibWin32
     skip : Proc(IEnumTfProperties*, UInt32, HRESULT)
   end
 
+  IEnumTfProperties_GUID = LibC::GUID.new("19188cb0-aca9-11d2-afc5-00105a2799b5")
+  CLSID_IEnumTfProperties = "19188cb0-aca9-11d2-afc5-00105a2799b5"
   struct IEnumTfProperties
     lpVtbl : IEnumTfPropertiesVTbl*
   end
@@ -1905,6 +2039,8 @@ lib LibWin32
     get_value : Proc(ITfCompartment*, VARIANT*, HRESULT)
   end
 
+  ITfCompartment_GUID = LibC::GUID.new("bb08f7a9-607a-4384-8623-056892b64371")
+  CLSID_ITfCompartment = "bb08f7a9-607a-4384-8623-056892b64371"
   struct ITfCompartment
     lpVtbl : ITfCompartmentVTbl*
   end
@@ -1916,6 +2052,8 @@ lib LibWin32
     on_change : Proc(ITfCompartmentEventSink*, Guid*, HRESULT)
   end
 
+  ITfCompartmentEventSink_GUID = LibC::GUID.new("743abd5f-f26d-48df-8cc5-238492419b64")
+  CLSID_ITfCompartmentEventSink = "743abd5f-f26d-48df-8cc5-238492419b64"
   struct ITfCompartmentEventSink
     lpVtbl : ITfCompartmentEventSinkVTbl*
   end
@@ -1929,6 +2067,8 @@ lib LibWin32
     enum_compartments : Proc(ITfCompartmentMgr*, IEnumGUID*, HRESULT)
   end
 
+  ITfCompartmentMgr_GUID = LibC::GUID.new("7dcf57ac-18ad-438b-824d-979bffb74b7c")
+  CLSID_ITfCompartmentMgr = "7dcf57ac-18ad-438b-824d-979bffb74b7c"
   struct ITfCompartmentMgr
     lpVtbl : ITfCompartmentMgrVTbl*
   end
@@ -1940,6 +2080,8 @@ lib LibWin32
     get_display_name : Proc(ITfFunction*, UInt8**, HRESULT)
   end
 
+  ITfFunction_GUID = LibC::GUID.new("db593490-098f-11d3-8df0-00105a2799b5")
+  CLSID_ITfFunction = "db593490-098f-11d3-8df0-00105a2799b5"
   struct ITfFunction
     lpVtbl : ITfFunctionVTbl*
   end
@@ -1953,6 +2095,8 @@ lib LibWin32
     get_function : Proc(ITfFunctionProvider*, Guid*, Guid*, IUnknown*, HRESULT)
   end
 
+  ITfFunctionProvider_GUID = LibC::GUID.new("101d6610-0990-11d3-8df0-00105a2799b5")
+  CLSID_ITfFunctionProvider = "101d6610-0990-11d3-8df0-00105a2799b5"
   struct ITfFunctionProvider
     lpVtbl : ITfFunctionProviderVTbl*
   end
@@ -1967,6 +2111,8 @@ lib LibWin32
     skip : Proc(IEnumTfFunctionProviders*, UInt32, HRESULT)
   end
 
+  IEnumTfFunctionProviders_GUID = LibC::GUID.new("e4b24db0-0990-11d3-8df0-00105a2799b5")
+  CLSID_IEnumTfFunctionProviders = "e4b24db0-0990-11d3-8df0-00105a2799b5"
   struct IEnumTfFunctionProviders
     lpVtbl : IEnumTfFunctionProvidersVTbl*
   end
@@ -1995,6 +2141,8 @@ lib LibWin32
     substitute_keyboard_layout : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, HKL, HRESULT)
   end
 
+  ITfInputProcessorProfiles_GUID = LibC::GUID.new("1f02b6c5-7842-4ee6-8a0b-9a24183a95ca")
+  CLSID_ITfInputProcessorProfiles = "1f02b6c5-7842-4ee6-8a0b-9a24183a95ca"
   struct ITfInputProcessorProfiles
     lpVtbl : ITfInputProcessorProfilesVTbl*
   end
@@ -2024,6 +2172,8 @@ lib LibWin32
     set_language_profile_display_name : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, Char*, UInt32, UInt32, HRESULT)
   end
 
+  ITfInputProcessorProfilesEx_GUID = LibC::GUID.new("892f230f-fe00-4a41-a98e-fcd6de0d35ef")
+  CLSID_ITfInputProcessorProfilesEx = "892f230f-fe00-4a41-a98e-fcd6de0d35ef"
   struct ITfInputProcessorProfilesEx
     lpVtbl : ITfInputProcessorProfilesExVTbl*
   end
@@ -2035,6 +2185,8 @@ lib LibWin32
     get_substitute_keyboard_layout : Proc(ITfInputProcessorProfileSubstituteLayout*, Guid*, UInt16, Guid*, HKL*, HRESULT)
   end
 
+  ITfInputProcessorProfileSubstituteLayout_GUID = LibC::GUID.new("4fd67194-1002-4513-bff2-c0ddf6258552")
+  CLSID_ITfInputProcessorProfileSubstituteLayout = "4fd67194-1002-4513-bff2-c0ddf6258552"
   struct ITfInputProcessorProfileSubstituteLayout
     lpVtbl : ITfInputProcessorProfileSubstituteLayoutVTbl*
   end
@@ -2046,6 +2198,8 @@ lib LibWin32
     on_activated : Proc(ITfActiveLanguageProfileNotifySink*, Guid*, Guid*, LibC::BOOL, HRESULT)
   end
 
+  ITfActiveLanguageProfileNotifySink_GUID = LibC::GUID.new("b246cb75-a93e-4652-bf8c-b3fe0cfd7e57")
+  CLSID_ITfActiveLanguageProfileNotifySink = "b246cb75-a93e-4652-bf8c-b3fe0cfd7e57"
   struct ITfActiveLanguageProfileNotifySink
     lpVtbl : ITfActiveLanguageProfileNotifySinkVTbl*
   end
@@ -2060,6 +2214,8 @@ lib LibWin32
     skip : Proc(IEnumTfLanguageProfiles*, UInt32, HRESULT)
   end
 
+  IEnumTfLanguageProfiles_GUID = LibC::GUID.new("3d61bf11-ac5f-42c8-a4cb-931bcc28c744")
+  CLSID_IEnumTfLanguageProfiles = "3d61bf11-ac5f-42c8-a4cb-931bcc28c744"
   struct IEnumTfLanguageProfiles
     lpVtbl : IEnumTfLanguageProfilesVTbl*
   end
@@ -2072,6 +2228,8 @@ lib LibWin32
     on_language_changed : Proc(ITfLanguageProfileNotifySink*, HRESULT)
   end
 
+  ITfLanguageProfileNotifySink_GUID = LibC::GUID.new("43c9fe15-f494-4c17-9de2-b8a4ac350aa8")
+  CLSID_ITfLanguageProfileNotifySink = "43c9fe15-f494-4c17-9de2-b8a4ac350aa8"
   struct ITfLanguageProfileNotifySink
     lpVtbl : ITfLanguageProfileNotifySinkVTbl*
   end
@@ -2090,6 +2248,8 @@ lib LibWin32
     get_active_profile : Proc(ITfInputProcessorProfileMgr*, Guid*, TF_INPUTPROCESSORPROFILE*, HRESULT)
   end
 
+  ITfInputProcessorProfileMgr_GUID = LibC::GUID.new("71c6e74c-0f28-11d8-a82a-00065b84435c")
+  CLSID_ITfInputProcessorProfileMgr = "71c6e74c-0f28-11d8-a82a-00065b84435c"
   struct ITfInputProcessorProfileMgr
     lpVtbl : ITfInputProcessorProfileMgrVTbl*
   end
@@ -2104,6 +2264,8 @@ lib LibWin32
     skip : Proc(IEnumTfInputProcessorProfiles*, UInt32, HRESULT)
   end
 
+  IEnumTfInputProcessorProfiles_GUID = LibC::GUID.new("71c6e74d-0f28-11d8-a82a-00065b84435c")
+  CLSID_IEnumTfInputProcessorProfiles = "71c6e74d-0f28-11d8-a82a-00065b84435c"
   struct IEnumTfInputProcessorProfiles
     lpVtbl : IEnumTfInputProcessorProfilesVTbl*
   end
@@ -2115,6 +2277,8 @@ lib LibWin32
     on_activated : Proc(ITfInputProcessorProfileActivationSink*, UInt32, UInt16, Guid*, Guid*, Guid*, HKL, UInt32, HRESULT)
   end
 
+  ITfInputProcessorProfileActivationSink_GUID = LibC::GUID.new("71c6e74e-0f28-11d8-a82a-00065b84435c")
+  CLSID_ITfInputProcessorProfileActivationSink = "71c6e74e-0f28-11d8-a82a-00065b84435c"
   struct ITfInputProcessorProfileActivationSink
     lpVtbl : ITfInputProcessorProfileActivationSinkVTbl*
   end
@@ -2139,6 +2303,8 @@ lib LibWin32
     simulate_preserved_key : Proc(ITfKeystrokeMgr*, ITfContext, Guid*, LibC::BOOL*, HRESULT)
   end
 
+  ITfKeystrokeMgr_GUID = LibC::GUID.new("aa80e7f0-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfKeystrokeMgr = "aa80e7f0-2021-11d2-93e0-0060b067b86e"
   struct ITfKeystrokeMgr
     lpVtbl : ITfKeystrokeMgrVTbl*
   end
@@ -2155,6 +2321,8 @@ lib LibWin32
     on_preserved_key : Proc(ITfKeyEventSink*, ITfContext, Guid*, LibC::BOOL*, HRESULT)
   end
 
+  ITfKeyEventSink_GUID = LibC::GUID.new("aa80e7f5-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfKeyEventSink = "aa80e7f5-2021-11d2-93e0-0060b067b86e"
   struct ITfKeyEventSink
     lpVtbl : ITfKeyEventSinkVTbl*
   end
@@ -2167,6 +2335,8 @@ lib LibWin32
     on_key_trace_up : Proc(ITfKeyTraceEventSink*, LibC::UINT_PTR, LPARAM, HRESULT)
   end
 
+  ITfKeyTraceEventSink_GUID = LibC::GUID.new("1cd4c13b-1c36-4191-a70a-7f3e611f367d")
+  CLSID_ITfKeyTraceEventSink = "1cd4c13b-1c36-4191-a70a-7f3e611f367d"
   struct ITfKeyTraceEventSink
     lpVtbl : ITfKeyTraceEventSinkVTbl*
   end
@@ -2178,6 +2348,8 @@ lib LibWin32
     on_updated : Proc(ITfPreservedKeyNotifySink*, TF_PRESERVEDKEY*, HRESULT)
   end
 
+  ITfPreservedKeyNotifySink_GUID = LibC::GUID.new("6f77c993-d2b1-446e-853e-5912efc8a286")
+  CLSID_ITfPreservedKeyNotifySink = "6f77c993-d2b1-446e-853e-5912efc8a286"
   struct ITfPreservedKeyNotifySink
     lpVtbl : ITfPreservedKeyNotifySinkVTbl*
   end
@@ -2192,6 +2364,8 @@ lib LibWin32
     get_message_w : Proc(ITfMessagePump*, MSG*, LibC::HANDLE, UInt32, UInt32, LibC::BOOL*, HRESULT)
   end
 
+  ITfMessagePump_GUID = LibC::GUID.new("8f1b8ad8-0b6b-4874-90c5-bd76011e8f7c")
+  CLSID_ITfMessagePump = "8f1b8ad8-0b6b-4874-90c5-bd76011e8f7c"
   struct ITfMessagePump
     lpVtbl : ITfMessagePumpVTbl*
   end
@@ -2204,6 +2378,8 @@ lib LibWin32
     on_kill_thread_focus : Proc(ITfThreadFocusSink*, HRESULT)
   end
 
+  ITfThreadFocusSink_GUID = LibC::GUID.new("c0f1db0c-3a20-405c-a303-96b6010a885f")
+  CLSID_ITfThreadFocusSink = "c0f1db0c-3a20-405c-a303-96b6010a885f"
   struct ITfThreadFocusSink
     lpVtbl : ITfThreadFocusSinkVTbl*
   end
@@ -2216,6 +2392,8 @@ lib LibWin32
     deactivate : Proc(ITfTextInputProcessor*, HRESULT)
   end
 
+  ITfTextInputProcessor_GUID = LibC::GUID.new("aa80e7f7-2021-11d2-93e0-0060b067b86e")
+  CLSID_ITfTextInputProcessor = "aa80e7f7-2021-11d2-93e0-0060b067b86e"
   struct ITfTextInputProcessor
     lpVtbl : ITfTextInputProcessorVTbl*
   end
@@ -2229,6 +2407,8 @@ lib LibWin32
     activate_ex : Proc(ITfTextInputProcessorEx*, ITfThreadMgr, UInt32, UInt32, HRESULT)
   end
 
+  ITfTextInputProcessorEx_GUID = LibC::GUID.new("6e4e2102-f9cd-433d-b496-303ce03a6507")
+  CLSID_ITfTextInputProcessorEx = "6e4e2102-f9cd-433d-b496-303ce03a6507"
   struct ITfTextInputProcessorEx
     lpVtbl : ITfTextInputProcessorExVTbl*
   end
@@ -2240,6 +2420,8 @@ lib LibWin32
     get_client_id : Proc(ITfClientId*, Guid*, UInt32*, HRESULT)
   end
 
+  ITfClientId_GUID = LibC::GUID.new("d60a7b49-1b9f-4be2-b702-47e9dc05dec3")
+  CLSID_ITfClientId = "d60a7b49-1b9f-4be2-b702-47e9dc05dec3"
   struct ITfClientId
     lpVtbl : ITfClientIdVTbl*
   end
@@ -2255,6 +2437,8 @@ lib LibWin32
     reset : Proc(ITfDisplayAttributeInfo*, HRESULT)
   end
 
+  ITfDisplayAttributeInfo_GUID = LibC::GUID.new("70528852-2f26-4aea-8c96-215150578932")
+  CLSID_ITfDisplayAttributeInfo = "70528852-2f26-4aea-8c96-215150578932"
   struct ITfDisplayAttributeInfo
     lpVtbl : ITfDisplayAttributeInfoVTbl*
   end
@@ -2269,6 +2453,8 @@ lib LibWin32
     skip : Proc(IEnumTfDisplayAttributeInfo*, UInt32, HRESULT)
   end
 
+  IEnumTfDisplayAttributeInfo_GUID = LibC::GUID.new("7cef04d7-cb75-4e80-a7ab-5f5bc7d332de")
+  CLSID_IEnumTfDisplayAttributeInfo = "7cef04d7-cb75-4e80-a7ab-5f5bc7d332de"
   struct IEnumTfDisplayAttributeInfo
     lpVtbl : IEnumTfDisplayAttributeInfoVTbl*
   end
@@ -2281,6 +2467,8 @@ lib LibWin32
     get_display_attribute_info : Proc(ITfDisplayAttributeProvider*, Guid*, ITfDisplayAttributeInfo*, HRESULT)
   end
 
+  ITfDisplayAttributeProvider_GUID = LibC::GUID.new("fee47777-163c-4769-996a-6e9c50ad8f54")
+  CLSID_ITfDisplayAttributeProvider = "fee47777-163c-4769-996a-6e9c50ad8f54"
   struct ITfDisplayAttributeProvider
     lpVtbl : ITfDisplayAttributeProviderVTbl*
   end
@@ -2294,6 +2482,8 @@ lib LibWin32
     get_display_attribute_info : Proc(ITfDisplayAttributeMgr*, Guid*, ITfDisplayAttributeInfo*, Guid*, HRESULT)
   end
 
+  ITfDisplayAttributeMgr_GUID = LibC::GUID.new("8ded7393-5db1-475c-9e71-a39111b0ff67")
+  CLSID_ITfDisplayAttributeMgr = "8ded7393-5db1-475c-9e71-a39111b0ff67"
   struct ITfDisplayAttributeMgr
     lpVtbl : ITfDisplayAttributeMgrVTbl*
   end
@@ -2305,6 +2495,8 @@ lib LibWin32
     on_update_info : Proc(ITfDisplayAttributeNotifySink*, HRESULT)
   end
 
+  ITfDisplayAttributeNotifySink_GUID = LibC::GUID.new("ad56f402-e162-4f25-908f-7d577cf9bda9")
+  CLSID_ITfDisplayAttributeNotifySink = "ad56f402-e162-4f25-908f-7d577cf9bda9"
   struct ITfDisplayAttributeNotifySink
     lpVtbl : ITfDisplayAttributeNotifySinkVTbl*
   end
@@ -2329,6 +2521,8 @@ lib LibWin32
     is_equal_tf_guid_atom : Proc(ITfCategoryMgr*, UInt32, Guid*, LibC::BOOL*, HRESULT)
   end
 
+  ITfCategoryMgr_GUID = LibC::GUID.new("c3acefb5-f69d-4905-938f-fcadcf4be830")
+  CLSID_ITfCategoryMgr = "c3acefb5-f69d-4905-938f-fcadcf4be830"
   struct ITfCategoryMgr
     lpVtbl : ITfCategoryMgrVTbl*
   end
@@ -2341,6 +2535,8 @@ lib LibWin32
     unadvise_sink : Proc(ITfSource*, UInt32, HRESULT)
   end
 
+  ITfSource_GUID = LibC::GUID.new("4ea48a35-60ae-446f-8fd6-e6a8d82459f7")
+  CLSID_ITfSource = "4ea48a35-60ae-446f-8fd6-e6a8d82459f7"
   struct ITfSource
     lpVtbl : ITfSourceVTbl*
   end
@@ -2353,6 +2549,8 @@ lib LibWin32
     unadvise_single_sink : Proc(ITfSourceSingle*, UInt32, Guid*, HRESULT)
   end
 
+  ITfSourceSingle_GUID = LibC::GUID.new("73131f9c-56a9-49dd-b0ee-d046633f7528")
+  CLSID_ITfSourceSingle = "73131f9c-56a9-49dd-b0ee-d046633f7528"
   struct ITfSourceSingle
     lpVtbl : ITfSourceSingleVTbl*
   end
@@ -2368,6 +2566,8 @@ lib LibWin32
     enum_ui_elements : Proc(ITfUIElementMgr*, IEnumTfUIElements*, HRESULT)
   end
 
+  ITfUIElementMgr_GUID = LibC::GUID.new("ea1ea135-19df-11d7-a6d2-00065b84435c")
+  CLSID_ITfUIElementMgr = "ea1ea135-19df-11d7-a6d2-00065b84435c"
   struct ITfUIElementMgr
     lpVtbl : ITfUIElementMgrVTbl*
   end
@@ -2382,6 +2582,8 @@ lib LibWin32
     skip : Proc(IEnumTfUIElements*, UInt32, HRESULT)
   end
 
+  IEnumTfUIElements_GUID = LibC::GUID.new("887aa91e-acba-4931-84da-3c5208cf543f")
+  CLSID_IEnumTfUIElements = "887aa91e-acba-4931-84da-3c5208cf543f"
   struct IEnumTfUIElements
     lpVtbl : IEnumTfUIElementsVTbl*
   end
@@ -2395,6 +2597,8 @@ lib LibWin32
     end_ui_element : Proc(ITfUIElementSink*, UInt32, HRESULT)
   end
 
+  ITfUIElementSink_GUID = LibC::GUID.new("ea1ea136-19df-11d7-a6d2-00065b84435c")
+  CLSID_ITfUIElementSink = "ea1ea136-19df-11d7-a6d2-00065b84435c"
   struct ITfUIElementSink
     lpVtbl : ITfUIElementSinkVTbl*
   end
@@ -2409,6 +2613,8 @@ lib LibWin32
     is_shown : Proc(ITfUIElement*, LibC::BOOL*, HRESULT)
   end
 
+  ITfUIElement_GUID = LibC::GUID.new("ea1ea137-19df-11d7-a6d2-00065b84435c")
+  CLSID_ITfUIElement = "ea1ea137-19df-11d7-a6d2-00065b84435c"
   struct ITfUIElement
     lpVtbl : ITfUIElementVTbl*
   end
@@ -2431,6 +2637,8 @@ lib LibWin32
     get_current_page : Proc(ITfCandidateListUIElement*, UInt32*, HRESULT)
   end
 
+  ITfCandidateListUIElement_GUID = LibC::GUID.new("ea1ea138-19df-11d7-a6d2-00065b84435c")
+  CLSID_ITfCandidateListUIElement = "ea1ea138-19df-11d7-a6d2-00065b84435c"
   struct ITfCandidateListUIElement
     lpVtbl : ITfCandidateListUIElementVTbl*
   end
@@ -2456,6 +2664,8 @@ lib LibWin32
     abort : Proc(ITfCandidateListUIElementBehavior*, HRESULT)
   end
 
+  ITfCandidateListUIElementBehavior_GUID = LibC::GUID.new("85fad185-58ce-497a-9460-355366b64b9a")
+  CLSID_ITfCandidateListUIElementBehavior = "85fad185-58ce-497a-9460-355366b64b9a"
   struct ITfCandidateListUIElementBehavior
     lpVtbl : ITfCandidateListUIElementBehaviorVTbl*
   end
@@ -2476,6 +2686,8 @@ lib LibWin32
     is_vertical_order_preferred : Proc(ITfReadingInformationUIElement*, LibC::BOOL*, HRESULT)
   end
 
+  ITfReadingInformationUIElement_GUID = LibC::GUID.new("ea1ea139-19df-11d7-a6d2-00065b84435c")
+  CLSID_ITfReadingInformationUIElement = "ea1ea139-19df-11d7-a6d2-00065b84435c"
   struct ITfReadingInformationUIElement
     lpVtbl : ITfReadingInformationUIElementVTbl*
   end
@@ -2491,6 +2703,8 @@ lib LibWin32
     get_document_mgr : Proc(ITfTransitoryExtensionUIElement*, ITfDocumentMgr*, HRESULT)
   end
 
+  ITfTransitoryExtensionUIElement_GUID = LibC::GUID.new("858f956a-972f-42a2-a2f2-0321e1abe209")
+  CLSID_ITfTransitoryExtensionUIElement = "858f956a-972f-42a2-a2f2-0321e1abe209"
   struct ITfTransitoryExtensionUIElement
     lpVtbl : ITfTransitoryExtensionUIElementVTbl*
   end
@@ -2502,6 +2716,8 @@ lib LibWin32
     on_transitory_extension_updated : Proc(ITfTransitoryExtensionSink*, ITfContext, UInt32, ITfRange, ITfRange, LibC::BOOL*, HRESULT)
   end
 
+  ITfTransitoryExtensionSink_GUID = LibC::GUID.new("a615096f-1c57-4813-8a15-55ee6e5a839c")
+  CLSID_ITfTransitoryExtensionSink = "a615096f-1c57-4813-8a15-55ee6e5a839c"
   struct ITfTransitoryExtensionSink
     lpVtbl : ITfTransitoryExtensionSinkVTbl*
   end
@@ -2517,6 +2733,8 @@ lib LibWin32
     get_string : Proc(ITfToolTipUIElement*, UInt8**, HRESULT)
   end
 
+  ITfToolTipUIElement_GUID = LibC::GUID.new("52b18b5c-555d-46b2-b00a-fa680144fbdb")
+  CLSID_ITfToolTipUIElement = "52b18b5c-555d-46b2-b00a-fa680144fbdb"
   struct ITfToolTipUIElement
     lpVtbl : ITfToolTipUIElementVTbl*
   end
@@ -2529,6 +2747,8 @@ lib LibWin32
     get_string : Proc(ITfReverseConversionList*, UInt32, UInt8**, HRESULT)
   end
 
+  ITfReverseConversionList_GUID = LibC::GUID.new("151d69f0-86f4-4674-b721-56911e797f47")
+  CLSID_ITfReverseConversionList = "151d69f0-86f4-4674-b721-56911e797f47"
   struct ITfReverseConversionList
     lpVtbl : ITfReverseConversionListVTbl*
   end
@@ -2540,6 +2760,8 @@ lib LibWin32
     do_reverse_conversion : Proc(ITfReverseConversion*, LibC::LPWSTR, ITfReverseConversionList*, HRESULT)
   end
 
+  ITfReverseConversion_GUID = LibC::GUID.new("a415e162-157d-417d-8a8c-0ab26c7d2781")
+  CLSID_ITfReverseConversion = "a415e162-157d-417d-8a8c-0ab26c7d2781"
   struct ITfReverseConversion
     lpVtbl : ITfReverseConversionVTbl*
   end
@@ -2551,6 +2773,8 @@ lib LibWin32
     get_reverse_conversion : Proc(ITfReverseConversionMgr*, UInt16, Guid*, UInt32, ITfReverseConversion*, HRESULT)
   end
 
+  ITfReverseConversionMgr_GUID = LibC::GUID.new("b643c236-c493-41b6-abb3-692412775cc4")
+  CLSID_ITfReverseConversionMgr = "b643c236-c493-41b6-abb3-692412775cc4"
   struct ITfReverseConversionMgr
     lpVtbl : ITfReverseConversionMgrVTbl*
   end
@@ -2563,6 +2787,8 @@ lib LibWin32
     get_index : Proc(ITfCandidateString*, UInt32*, HRESULT)
   end
 
+  ITfCandidateString_GUID = LibC::GUID.new("581f317e-fd9d-443f-b972-ed00467c5d40")
+  CLSID_ITfCandidateString = "581f317e-fd9d-443f-b972-ed00467c5d40"
   struct ITfCandidateString
     lpVtbl : ITfCandidateStringVTbl*
   end
@@ -2577,6 +2803,8 @@ lib LibWin32
     skip : Proc(IEnumTfCandidates*, UInt32, HRESULT)
   end
 
+  IEnumTfCandidates_GUID = LibC::GUID.new("defb1926-6c80-4ce8-87d4-d6b72b812bde")
+  CLSID_IEnumTfCandidates = "defb1926-6c80-4ce8-87d4-d6b72b812bde"
   struct IEnumTfCandidates
     lpVtbl : IEnumTfCandidatesVTbl*
   end
@@ -2591,6 +2819,8 @@ lib LibWin32
     set_result : Proc(ITfCandidateList*, UInt32, TfCandidateResult, HRESULT)
   end
 
+  ITfCandidateList_GUID = LibC::GUID.new("a3ad50fb-9bdb-49e3-a843-6c76520fbf5d")
+  CLSID_ITfCandidateList = "a3ad50fb-9bdb-49e3-a843-6c76520fbf5d"
   struct ITfCandidateList
     lpVtbl : ITfCandidateListVTbl*
   end
@@ -2605,6 +2835,8 @@ lib LibWin32
     reconvert : Proc(ITfFnReconversion*, ITfRange, HRESULT)
   end
 
+  ITfFnReconversion_GUID = LibC::GUID.new("4cea93c0-0a58-11d3-8df0-00105a2799b5")
+  CLSID_ITfFnReconversion = "4cea93c0-0a58-11d3-8df0-00105a2799b5"
   struct ITfFnReconversion
     lpVtbl : ITfFnReconversionVTbl*
   end
@@ -2618,6 +2850,8 @@ lib LibWin32
     play : Proc(ITfFnPlayBack*, ITfRange, HRESULT)
   end
 
+  ITfFnPlayBack_GUID = LibC::GUID.new("a3a416a4-0f64-11d3-b5b7-00c04fc324a1")
+  CLSID_ITfFnPlayBack = "a3a416a4-0f64-11d3-b5b7-00c04fc324a1"
   struct ITfFnPlayBack
     lpVtbl : ITfFnPlayBackVTbl*
   end
@@ -2631,6 +2865,8 @@ lib LibWin32
     is_profile_available_for_lang : Proc(ITfFnLangProfileUtil*, UInt16, LibC::BOOL*, HRESULT)
   end
 
+  ITfFnLangProfileUtil_GUID = LibC::GUID.new("a87a8574-a6c1-4e15-99f0-3d3965f548eb")
+  CLSID_ITfFnLangProfileUtil = "a87a8574-a6c1-4e15-99f0-3d3965f548eb"
   struct ITfFnLangProfileUtil
     lpVtbl : ITfFnLangProfileUtilVTbl*
   end
@@ -2643,6 +2879,8 @@ lib LibWin32
     show : Proc(ITfFnConfigure*, LibC::HANDLE, UInt16, Guid*, HRESULT)
   end
 
+  ITfFnConfigure_GUID = LibC::GUID.new("88f567c6-1757-49f8-a1b2-89234c1eeff9")
+  CLSID_ITfFnConfigure = "88f567c6-1757-49f8-a1b2-89234c1eeff9"
   struct ITfFnConfigure
     lpVtbl : ITfFnConfigureVTbl*
   end
@@ -2655,6 +2893,8 @@ lib LibWin32
     show : Proc(ITfFnConfigureRegisterWord*, LibC::HANDLE, UInt16, Guid*, UInt8*, HRESULT)
   end
 
+  ITfFnConfigureRegisterWord_GUID = LibC::GUID.new("bb95808a-6d8f-4bca-8400-5390b586aedf")
+  CLSID_ITfFnConfigureRegisterWord = "bb95808a-6d8f-4bca-8400-5390b586aedf"
   struct ITfFnConfigureRegisterWord
     lpVtbl : ITfFnConfigureRegisterWordVTbl*
   end
@@ -2667,6 +2907,8 @@ lib LibWin32
     show : Proc(ITfFnConfigureRegisterEudc*, LibC::HANDLE, UInt16, Guid*, UInt8*, HRESULT)
   end
 
+  ITfFnConfigureRegisterEudc_GUID = LibC::GUID.new("b5e26ff5-d7ad-4304-913f-21a2ed95a1b0")
+  CLSID_ITfFnConfigureRegisterEudc = "b5e26ff5-d7ad-4304-913f-21a2ed95a1b0"
   struct ITfFnConfigureRegisterEudc
     lpVtbl : ITfFnConfigureRegisterEudcVTbl*
   end
@@ -2679,6 +2921,8 @@ lib LibWin32
     show : Proc(ITfFnShowHelp*, LibC::HANDLE, HRESULT)
   end
 
+  ITfFnShowHelp_GUID = LibC::GUID.new("5ab1d30c-094d-4c29-8ea5-0bf59be87bf3")
+  CLSID_ITfFnShowHelp = "5ab1d30c-094d-4c29-8ea5-0bf59be87bf3"
   struct ITfFnShowHelp
     lpVtbl : ITfFnShowHelpVTbl*
   end
@@ -2690,6 +2934,8 @@ lib LibWin32
     update_balloon : Proc(ITfFnBalloon*, TfLBBalloonStyle, Char*, UInt32, HRESULT)
   end
 
+  ITfFnBalloon_GUID = LibC::GUID.new("3bab89e4-5fbe-45f4-a5bc-dca36ad225a8")
+  CLSID_ITfFnBalloon = "3bab89e4-5fbe-45f4-a5bc-dca36ad225a8"
   struct ITfFnBalloon
     lpVtbl : ITfFnBalloonVTbl*
   end
@@ -2702,6 +2948,8 @@ lib LibWin32
     get : Proc(ITfFnGetSAPIObject*, TfSapiObject, IUnknown*, HRESULT)
   end
 
+  ITfFnGetSAPIObject_GUID = LibC::GUID.new("5c0ab7ea-167d-4f59-bfb5-4693755e90ca")
+  CLSID_ITfFnGetSAPIObject = "5c0ab7ea-167d-4f59-bfb5-4693755e90ca"
   struct ITfFnGetSAPIObject
     lpVtbl : ITfFnGetSAPIObjectVTbl*
   end
@@ -2715,6 +2963,8 @@ lib LibWin32
     set_status : Proc(ITfFnPropertyUIStatus*, Guid*, UInt32, HRESULT)
   end
 
+  ITfFnPropertyUIStatus_GUID = LibC::GUID.new("2338ac6e-2b9d-44c0-a75e-ee64f256b3bd")
+  CLSID_ITfFnPropertyUIStatus = "2338ac6e-2b9d-44c0-a75e-ee64f256b3bd"
   struct ITfFnPropertyUIStatus
     lpVtbl : ITfFnPropertyUIStatusVTbl*
   end
@@ -2729,6 +2979,8 @@ lib LibWin32
     skip : Proc(IEnumSpeechCommands*, UInt32, HRESULT)
   end
 
+  IEnumSpeechCommands_GUID = LibC::GUID.new("8c5dac4f-083c-4b85-a4c9-71746048adca")
+  CLSID_IEnumSpeechCommands = "8c5dac4f-083c-4b85-a4c9-71746048adca"
   struct IEnumSpeechCommands
     lpVtbl : IEnumSpeechCommandsVTbl*
   end
@@ -2741,6 +2993,8 @@ lib LibWin32
     process_command : Proc(ISpeechCommandProvider*, Char*, UInt32, UInt16, HRESULT)
   end
 
+  ISpeechCommandProvider_GUID = LibC::GUID.new("38e09d4c-586d-435a-b592-c8a86691dec6")
+  CLSID_ISpeechCommandProvider = "38e09d4c-586d-435a-b592-c8a86691dec6"
   struct ISpeechCommandProvider
     lpVtbl : ISpeechCommandProviderVTbl*
   end
@@ -2753,6 +3007,8 @@ lib LibWin32
     set_speech_command_provider : Proc(ITfFnCustomSpeechCommand*, IUnknown, HRESULT)
   end
 
+  ITfFnCustomSpeechCommand_GUID = LibC::GUID.new("fca6c349-a12f-43a3-8dd6-5a5a4282577b")
+  CLSID_ITfFnCustomSpeechCommand = "fca6c349-a12f-43a3-8dd6-5a5a4282577b"
   struct ITfFnCustomSpeechCommand
     lpVtbl : ITfFnCustomSpeechCommandVTbl*
   end
@@ -2771,6 +3027,8 @@ lib LibWin32
     invoke_func : Proc(ITfFnLMProcessor*, ITfContext, Guid*, HRESULT)
   end
 
+  ITfFnLMProcessor_GUID = LibC::GUID.new("7afbf8e7-ac4b-4082-b058-890899d3a010")
+  CLSID_ITfFnLMProcessor = "7afbf8e7-ac4b-4082-b058-890899d3a010"
   struct ITfFnLMProcessor
     lpVtbl : ITfFnLMProcessorVTbl*
   end
@@ -2790,6 +3048,8 @@ lib LibWin32
     process_lattice : Proc(ITfFnLMInternal*, ITfRange, HRESULT)
   end
 
+  ITfFnLMInternal_GUID = LibC::GUID.new("04b825b1-ac9a-4f7b-b5ad-c7168f1ee445")
+  CLSID_ITfFnLMInternal = "04b825b1-ac9a-4f7b-b5ad-c7168f1ee445"
   struct ITfFnLMInternal
     lpVtbl : ITfFnLMInternalVTbl*
   end
@@ -2804,6 +3064,8 @@ lib LibWin32
     skip : Proc(IEnumTfLatticeElements*, UInt32, HRESULT)
   end
 
+  IEnumTfLatticeElements_GUID = LibC::GUID.new("56988052-47da-4a05-911a-e3d941f17145")
+  CLSID_IEnumTfLatticeElements = "56988052-47da-4a05-911a-e3d941f17145"
   struct IEnumTfLatticeElements
     lpVtbl : IEnumTfLatticeElementsVTbl*
   end
@@ -2816,6 +3078,8 @@ lib LibWin32
     enum_lattice_elements : Proc(ITfLMLattice*, UInt32, Guid*, IEnumTfLatticeElements*, HRESULT)
   end
 
+  ITfLMLattice_GUID = LibC::GUID.new("d4236675-a5bf-4570-9d42-5d6d7b02d59b")
+  CLSID_ITfLMLattice = "d4236675-a5bf-4570-9d42-5d6d7b02d59b"
   struct ITfLMLattice
     lpVtbl : ITfLMLatticeVTbl*
   end
@@ -2829,6 +3093,8 @@ lib LibWin32
     on_lattice_update : Proc(ITfFnAdviseText*, ITfRange, ITfLMLattice, HRESULT)
   end
 
+  ITfFnAdviseText_GUID = LibC::GUID.new("3527268b-7d53-4dd9-92b7-7296ae461249")
+  CLSID_ITfFnAdviseText = "3527268b-7d53-4dd9-92b7-7296ae461249"
   struct ITfFnAdviseText
     lpVtbl : ITfFnAdviseTextVTbl*
   end
@@ -2842,6 +3108,8 @@ lib LibWin32
     set_result : Proc(ITfFnSearchCandidateProvider*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
+  ITfFnSearchCandidateProvider_GUID = LibC::GUID.new("87a2ad8f-f27b-4920-8501-67602280175d")
+  CLSID_ITfFnSearchCandidateProvider = "87a2ad8f-f27b-4920-8501-67602280175d"
   struct ITfFnSearchCandidateProvider
     lpVtbl : ITfFnSearchCandidateProviderVTbl*
   end
@@ -2857,6 +3125,8 @@ lib LibWin32
     finalize_exact_composition_string : Proc(ITfIntegratableCandidateListUIElement*, HRESULT)
   end
 
+  ITfIntegratableCandidateListUIElement_GUID = LibC::GUID.new("c7a6f54f-b180-416f-b2bf-7bf2e4683d7b")
+  CLSID_ITfIntegratableCandidateListUIElement = "c7a6f54f-b180-416f-b2bf-7bf2e4683d7b"
   struct ITfIntegratableCandidateListUIElement
     lpVtbl : ITfIntegratableCandidateListUIElementVTbl*
   end
@@ -2869,6 +3139,8 @@ lib LibWin32
     get_layout : Proc(ITfFnGetPreferredTouchKeyboardLayout*, TKBLayoutType*, UInt16*, HRESULT)
   end
 
+  ITfFnGetPreferredTouchKeyboardLayout_GUID = LibC::GUID.new("5f309a41-590a-4acc-a97f-d8efff13fdfc")
+  CLSID_ITfFnGetPreferredTouchKeyboardLayout = "5f309a41-590a-4acc-a97f-d8efff13fdfc"
   struct ITfFnGetPreferredTouchKeyboardLayout
     lpVtbl : ITfFnGetPreferredTouchKeyboardLayoutVTbl*
   end
@@ -2881,6 +3153,8 @@ lib LibWin32
     get_alternates : Proc(ITfFnGetLinguisticAlternates*, ITfRange, ITfCandidateList*, HRESULT)
   end
 
+  ITfFnGetLinguisticAlternates_GUID = LibC::GUID.new("ea163ce2-7a65-4506-82a3-c528215da64e")
+  CLSID_ITfFnGetLinguisticAlternates = "ea163ce2-7a65-4506-82a3-c528215da64e"
   struct ITfFnGetLinguisticAlternates
     lpVtbl : ITfFnGetLinguisticAlternatesVTbl*
   end
@@ -2897,6 +3171,8 @@ lib LibWin32
     on_window_closed : Proc(IUIManagerEventSink*, HRESULT)
   end
 
+  IUIManagerEventSink_GUID = LibC::GUID.new("cd91d690-a7e8-4265-9b38-8bb3bbaba7de")
+  CLSID_IUIManagerEventSink = "cd91d690-a7e8-4265-9b38-8bb3bbaba7de"
   struct IUIManagerEventSink
     lpVtbl : IUIManagerEventSinkVTbl*
   end
@@ -2912,6 +3188,8 @@ lib LibWin32
     get_xml : Proc(ITfInputScope*, UInt8**, HRESULT)
   end
 
+  ITfInputScope_GUID = LibC::GUID.new("fde1eaee-6924-4cdf-91e7-da38cff5559d")
+  CLSID_ITfInputScope = "fde1eaee-6924-4cdf-91e7-da38cff5559d"
   struct ITfInputScope
     lpVtbl : ITfInputScopeVTbl*
   end
@@ -2928,6 +3206,8 @@ lib LibWin32
     enum_word_list : Proc(ITfInputScope2*, IEnumString*, HRESULT)
   end
 
+  ITfInputScope2_GUID = LibC::GUID.new("5731eaa0-6bc2-4681-a532-92fbb74d7c41")
+  CLSID_ITfInputScope2 = "5731eaa0-6bc2-4681-a532-92fbb74d7c41"
   struct ITfInputScope2
     lpVtbl : ITfInputScope2VTbl*
   end
@@ -2940,6 +3220,8 @@ lib LibWin32
     system_disable_msaa : Proc(ITfMSAAControl*, HRESULT)
   end
 
+  ITfMSAAControl_GUID = LibC::GUID.new("b5f8fb3b-393f-4f7c-84cb-504924c2705a")
+  CLSID_ITfMSAAControl = "b5f8fb3b-393f-4f7c-84cb-504924c2705a"
   struct ITfMSAAControl
     lpVtbl : ITfMSAAControlVTbl*
   end
@@ -2951,6 +3233,8 @@ lib LibWin32
     notify_revoke : Proc(IInternalDocWrap*, HRESULT)
   end
 
+  IInternalDocWrap_GUID = LibC::GUID.new("e1aa6466-9db4-40ba-be03-77c38e8e60b2")
+  CLSID_IInternalDocWrap = "e1aa6466-9db4-40ba-be03-77c38e8e60b2"
   struct IInternalDocWrap
     lpVtbl : IInternalDocWrapVTbl*
   end
@@ -2962,6 +3246,8 @@ lib LibWin32
     scroll_to_rect : Proc(ITextStoreACPEx*, Int32, Int32, RECT, UInt32, HRESULT)
   end
 
+  ITextStoreACPEx_GUID = LibC::GUID.new("a2de3bc2-3d8e-11d3-81a9-f753fbe61a00")
+  CLSID_ITextStoreACPEx = "a2de3bc2-3d8e-11d3-81a9-f753fbe61a00"
   struct ITextStoreACPEx
     lpVtbl : ITextStoreACPExVTbl*
   end
@@ -2973,6 +3259,8 @@ lib LibWin32
     scroll_to_rect : Proc(ITextStoreAnchorEx*, IAnchor, IAnchor, RECT, UInt32, HRESULT)
   end
 
+  ITextStoreAnchorEx_GUID = LibC::GUID.new("a2de3bc1-3d8e-11d3-81a9-f753fbe61a00")
+  CLSID_ITextStoreAnchorEx = "a2de3bc1-3d8e-11d3-81a9-f753fbe61a00"
   struct ITextStoreAnchorEx
     lpVtbl : ITextStoreAnchorExVTbl*
   end
@@ -2992,6 +3280,8 @@ lib LibWin32
     on_disconnect : Proc(ITextStoreACPSinkEx*, HRESULT)
   end
 
+  ITextStoreACPSinkEx_GUID = LibC::GUID.new("2bdf9464-41e2-43e3-950c-a6865ba25cd4")
+  CLSID_ITextStoreACPSinkEx = "2bdf9464-41e2-43e3-950c-a6865ba25cd4"
   struct ITextStoreACPSinkEx
     lpVtbl : ITextStoreACPSinkExVTbl*
   end
@@ -3011,6 +3301,8 @@ lib LibWin32
     on_disconnect : Proc(ITextStoreSinkAnchorEx*, HRESULT)
   end
 
+  ITextStoreSinkAnchorEx_GUID = LibC::GUID.new("25642426-028d-4474-977b-111bb114fe3e")
+  CLSID_ITextStoreSinkAnchorEx = "25642426-028d-4474-977b-111bb114fe3e"
   struct ITextStoreSinkAnchorEx
     lpVtbl : ITextStoreSinkAnchorExVTbl*
   end
@@ -3026,6 +3318,8 @@ lib LibWin32
     convert_value_to_string : Proc(IAccDictionary*, Guid*, UInt32, VARIANT, UInt8**, UInt32*, HRESULT)
   end
 
+  IAccDictionary_GUID = LibC::GUID.new("1dc4cb5f-d737-474d-ade9-5ccfc9bc1cc9")
+  CLSID_IAccDictionary = "1dc4cb5f-d737-474d-ade9-5ccfc9bc1cc9"
   struct IAccDictionary
     lpVtbl : IAccDictionaryVTbl*
   end
@@ -3041,6 +3335,8 @@ lib LibWin32
     get_instance_description : Proc(IVersionInfo*, UInt32, UInt8**, HRESULT)
   end
 
+  IVersionInfo_GUID = LibC::GUID.new("401518ec-db00-4611-9b29-2a0e4b9afa85")
+  CLSID_IVersionInfo = "401518ec-db00-4611-9b29-2a0e4b9afa85"
   struct IVersionInfo
     lpVtbl : IVersionInfoVTbl*
   end
@@ -3052,6 +3348,8 @@ lib LibWin32
     co_create_locally : Proc(ICoCreateLocally*, Guid*, UInt32, Guid*, IUnknown*, Guid*, IUnknown, VARIANT, HRESULT)
   end
 
+  ICoCreateLocally_GUID = LibC::GUID.new("03de00aa-f272-41e3-99cb-03c5e8114ea0")
+  CLSID_ICoCreateLocally = "03de00aa-f272-41e3-99cb-03c5e8114ea0"
   struct ICoCreateLocally
     lpVtbl : ICoCreateLocallyVTbl*
   end
@@ -3063,6 +3361,8 @@ lib LibWin32
     local_init : Proc(ICoCreatedLocally*, IUnknown, Guid*, IUnknown, VARIANT, HRESULT)
   end
 
+  ICoCreatedLocally_GUID = LibC::GUID.new("0a53eb6c-1908-4742-8cff-2cee2e93f94c")
+  CLSID_ICoCreatedLocally = "0a53eb6c-1908-4742-8cff-2cee2e93f94c"
   struct ICoCreatedLocally
     lpVtbl : ICoCreatedLocallyVTbl*
   end
@@ -3080,6 +3380,8 @@ lib LibWin32
     get_focused : Proc(IAccStore*, Guid*, IUnknown*, HRESULT)
   end
 
+  IAccStore_GUID = LibC::GUID.new("e2cd4a63-2b72-4d48-b739-95e4765195ba")
+  CLSID_IAccStore = "e2cd4a63-2b72-4d48-b739-95e4765195ba"
   struct IAccStore
     lpVtbl : IAccStoreVTbl*
   end
@@ -3093,6 +3395,8 @@ lib LibWin32
     on_document_focus : Proc(IAccServerDocMgr*, IUnknown, HRESULT)
   end
 
+  IAccServerDocMgr_GUID = LibC::GUID.new("ad7c73cf-6dd5-4855-abc2-b04bad5b9153")
+  CLSID_IAccServerDocMgr = "ad7c73cf-6dd5-4855-abc2-b04bad5b9153"
   struct IAccServerDocMgr
     lpVtbl : IAccServerDocMgrVTbl*
   end
@@ -3107,6 +3411,8 @@ lib LibWin32
     get_focused : Proc(IAccClientDocMgr*, Guid*, IUnknown*, HRESULT)
   end
 
+  IAccClientDocMgr_GUID = LibC::GUID.new("4c896039-7b6d-49e6-a8c1-45116a98292b")
+  CLSID_IAccClientDocMgr = "4c896039-7b6d-49e6-a8c1-45116a98292b"
   struct IAccClientDocMgr
     lpVtbl : IAccClientDocMgrVTbl*
   end
@@ -3119,6 +3425,8 @@ lib LibWin32
     get_wrapped_doc : Proc(IDocWrap*, Guid*, IUnknown*, HRESULT)
   end
 
+  IDocWrap_GUID = LibC::GUID.new("dcd285fe-0be0-43bd-99c9-aaaec513c555")
+  CLSID_IDocWrap = "dcd285fe-0be0-43bd-99c9-aaaec513c555"
   struct IDocWrap
     lpVtbl : IDocWrapVTbl*
   end
@@ -3130,6 +3438,8 @@ lib LibWin32
     clone_new_wrapper : Proc(IClonableWrapper*, Guid*, Void**, HRESULT)
   end
 
+  IClonableWrapper_GUID = LibC::GUID.new("b33e75ff-e84c-4dca-a25c-33b8dc003374")
+  CLSID_IClonableWrapper = "b33e75ff-e84c-4dca-a25c-33b8dc003374"
   struct IClonableWrapper
     lpVtbl : IClonableWrapperVTbl*
   end
@@ -3143,6 +3453,8 @@ lib LibWin32
     update_balloon : Proc(ITfSpeechUIServer*, TfLBBalloonStyle, Char*, UInt32, HRESULT)
   end
 
+  ITfSpeechUIServer_GUID = LibC::GUID.new("90e9a944-9244-489f-a78f-de67afc013a7")
+  CLSID_ITfSpeechUIServer = "90e9a944-9244-489f-a78f-de67afc013a7"
   struct ITfSpeechUIServer
     lpVtbl : ITfSpeechUIServerVTbl*
   end

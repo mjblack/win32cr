@@ -202,6 +202,8 @@ lib LibWin32
     is_eof : Proc(IXmlReader*, LibC::BOOL)
   end
 
+  IXmlReader_GUID = LibC::GUID.new("7279fc81-709d-4095-b63d-69fe4b0d9030")
+  CLSID_IXmlReader = "7279fc81-709d-4095-b63d-69fe4b0d9030"
   struct IXmlReader
     lpVtbl : IXmlReaderVTbl*
   end
@@ -213,6 +215,8 @@ lib LibWin32
     resolve_uri : Proc(IXmlResolver*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown*, HRESULT)
   end
 
+  IXmlResolver_GUID = LibC::GUID.new("7279fc82-709d-4095-b63d-69fe4b0d9030")
+  CLSID_IXmlResolver = "7279fc82-709d-4095-b63d-69fe4b0d9030"
   struct IXmlResolver
     lpVtbl : IXmlResolverVTbl*
   end
@@ -252,6 +256,8 @@ lib LibWin32
     flush : Proc(IXmlWriter*, HRESULT)
   end
 
+  IXmlWriter_GUID = LibC::GUID.new("7279fc88-709d-4095-b63d-69fe4b0d9030")
+  CLSID_IXmlWriter = "7279fc88-709d-4095-b63d-69fe4b0d9030"
   struct IXmlWriter
     lpVtbl : IXmlWriterVTbl*
   end
@@ -290,6 +296,8 @@ lib LibWin32
     flush : Proc(IXmlWriterLite*, HRESULT)
   end
 
+  IXmlWriterLite_GUID = LibC::GUID.new("862494c6-1310-4aad-b3cd-2dbeebf670d3")
+  CLSID_IXmlWriterLite = "862494c6-1310-4aad-b3cd-2dbeebf670d3"
   struct IXmlWriterLite
     lpVtbl : IXmlWriterLiteVTbl*
   end

@@ -1116,6 +1116,8 @@ lib LibWin32
     get_routing_information : Proc(IFaxJobStatus*, UInt8**, HRESULT)
   end
 
+  IFaxJobStatus_GUID = LibC::GUID.new("8b86f485-fd7f-4824-886b-40c5caa617cc")
+  CLSID_IFaxJobStatus = "8b86f485-fd7f-4824-886b-40c5caa617cc"
   struct IFaxJobStatus
     lpVtbl : IFaxJobStatusVTbl*
   end
@@ -1156,6 +1158,8 @@ lib LibWin32
     get_api_version : Proc(IFaxServer*, FAX_SERVER_APIVERSION_ENUM*, HRESULT)
   end
 
+  IFaxServer_GUID = LibC::GUID.new("475b6469-90a5-4878-a577-17a86e8e3462")
+  CLSID_IFaxServer = "475b6469-90a5-4878-a577-17a86e8e3462"
   struct IFaxServer
     lpVtbl : IFaxServerVTbl*
   end
@@ -1173,6 +1177,8 @@ lib LibWin32
     get_count : Proc(IFaxDeviceProviders*, Int32*, HRESULT)
   end
 
+  IFaxDeviceProviders_GUID = LibC::GUID.new("9fb76f62-4c7e-43a5-b6fd-502893f7e13e")
+  CLSID_IFaxDeviceProviders = "9fb76f62-4c7e-43a5-b6fd-502893f7e13e"
   struct IFaxDeviceProviders
     lpVtbl : IFaxDeviceProvidersVTbl*
   end
@@ -1191,6 +1197,8 @@ lib LibWin32
     get_item_by_id : Proc(IFaxDevices*, Int32, IFaxDevice*, HRESULT)
   end
 
+  IFaxDevices_GUID = LibC::GUID.new("9e46783e-f34f-482e-a360-0416becbbd96")
+  CLSID_IFaxDevices = "9e46783e-f34f-482e-a360-0416becbbd96"
   struct IFaxDevices
     lpVtbl : IFaxDevicesVTbl*
   end
@@ -1207,6 +1215,8 @@ lib LibWin32
     get_methods : Proc(IFaxInboundRouting*, IFaxInboundRoutingMethods*, HRESULT)
   end
 
+  IFaxInboundRouting_GUID = LibC::GUID.new("8148c20f-9d52-45b1-bf96-38fc12713527")
+  CLSID_IFaxInboundRouting = "8148c20f-9d52-45b1-bf96-38fc12713527"
   struct IFaxInboundRouting
     lpVtbl : IFaxInboundRoutingVTbl*
   end
@@ -1225,6 +1235,8 @@ lib LibWin32
     get_outgoing_archive : Proc(IFaxFolders*, IFaxOutgoingArchive*, HRESULT)
   end
 
+  IFaxFolders_GUID = LibC::GUID.new("dce3b2a8-a7ab-42bc-9d0a-3149457261a0")
+  CLSID_IFaxFolders = "dce3b2a8-a7ab-42bc-9d0a-3149457261a0"
   struct IFaxFolders
     lpVtbl : IFaxFoldersVTbl*
   end
@@ -1241,6 +1253,8 @@ lib LibWin32
     get_activity_logging : Proc(IFaxLoggingOptions*, IFaxActivityLogging*, HRESULT)
   end
 
+  IFaxLoggingOptions_GUID = LibC::GUID.new("34e64fb9-6b31-4d32-8b27-d286c0c33606")
+  CLSID_IFaxLoggingOptions = "34e64fb9-6b31-4d32-8b27-d286c0c33606"
   struct IFaxLoggingOptions
     lpVtbl : IFaxLoggingOptionsVTbl*
   end
@@ -1260,6 +1274,8 @@ lib LibWin32
     refresh : Proc(IFaxActivity*, HRESULT)
   end
 
+  IFaxActivity_GUID = LibC::GUID.new("4b106f97-3df5-40f2-bc3c-44cb8115ebdf")
+  CLSID_IFaxActivity = "4b106f97-3df5-40f2-bc3c-44cb8115ebdf"
   struct IFaxActivity
     lpVtbl : IFaxActivityVTbl*
   end
@@ -1276,6 +1292,8 @@ lib LibWin32
     get_rules : Proc(IFaxOutboundRouting*, IFaxOutboundRoutingRules*, HRESULT)
   end
 
+  IFaxOutboundRouting_GUID = LibC::GUID.new("25dc05a4-9909-41bd-a95b-7e5d1dec1d43")
+  CLSID_IFaxOutboundRouting = "25dc05a4-9909-41bd-a95b-7e5d1dec1d43"
   struct IFaxOutboundRouting
     lpVtbl : IFaxOutboundRoutingVTbl*
   end
@@ -1308,6 +1326,8 @@ lib LibWin32
     put_use_for_inbound_routing : Proc(IFaxReceiptOptions*, Int16, HRESULT)
   end
 
+  IFaxReceiptOptions_GUID = LibC::GUID.new("378efaeb-5fcb-4afb-b2ee-e16e80614487")
+  CLSID_IFaxReceiptOptions = "378efaeb-5fcb-4afb-b2ee-e16e80614487"
   struct IFaxReceiptOptions
     lpVtbl : IFaxReceiptOptionsVTbl*
   end
@@ -1329,6 +1349,8 @@ lib LibWin32
     put_information_type : Proc(IFaxSecurity*, Int32, HRESULT)
   end
 
+  IFaxSecurity_GUID = LibC::GUID.new("77b508c1-09c0-47a2-91eb-fce7fdf2690e")
+  CLSID_IFaxSecurity = "77b508c1-09c0-47a2-91eb-fce7fdf2690e"
   struct IFaxSecurity
     lpVtbl : IFaxSecurityVTbl*
   end
@@ -1377,6 +1399,8 @@ lib LibWin32
     put_attach_fax_to_receipt : Proc(IFaxDocument*, Int16, HRESULT)
   end
 
+  IFaxDocument_GUID = LibC::GUID.new("b207a246-09e3-4a4e-a7dc-fea31d29458f")
+  CLSID_IFaxDocument = "b207a246-09e3-4a4e-a7dc-fea31d29458f"
   struct IFaxDocument
     lpVtbl : IFaxDocumentVTbl*
   end
@@ -1425,6 +1449,8 @@ lib LibWin32
     save_default_sender : Proc(IFaxSender*, HRESULT)
   end
 
+  IFaxSender_GUID = LibC::GUID.new("0d879d7d-f57a-4cc6-a6f9-3ee5d527b46a")
+  CLSID_IFaxSender = "0d879d7d-f57a-4cc6-a6f9-3ee5d527b46a"
   struct IFaxSender
     lpVtbl : IFaxSenderVTbl*
   end
@@ -1443,6 +1469,8 @@ lib LibWin32
     put_name : Proc(IFaxRecipient*, UInt8*, HRESULT)
   end
 
+  IFaxRecipient_GUID = LibC::GUID.new("9a3da3a0-538d-42b6-9444-aaa57d0ce2bc")
+  CLSID_IFaxRecipient = "9a3da3a0-538d-42b6-9444-aaa57d0ce2bc"
   struct IFaxRecipient
     lpVtbl : IFaxRecipientVTbl*
   end
@@ -1462,6 +1490,8 @@ lib LibWin32
     remove : Proc(IFaxRecipients*, Int32, HRESULT)
   end
 
+  IFaxRecipients_GUID = LibC::GUID.new("b9c9de5a-894e-4492-9fa3-08c627c11d5d")
+  CLSID_IFaxRecipients = "b9c9de5a-894e-4492-9fa3-08c627c11d5d"
   struct IFaxRecipients
     lpVtbl : IFaxRecipientsVTbl*
   end
@@ -1494,6 +1524,8 @@ lib LibWin32
     get_message : Proc(IFaxIncomingArchive*, UInt8*, IFaxIncomingMessage*, HRESULT)
   end
 
+  IFaxIncomingArchive_GUID = LibC::GUID.new("76062cc7-f714-4fbd-aa06-ed6e4a4b70f3")
+  CLSID_IFaxIncomingArchive = "76062cc7-f714-4fbd-aa06-ed6e4a4b70f3"
   struct IFaxIncomingArchive
     lpVtbl : IFaxIncomingArchiveVTbl*
   end
@@ -1514,6 +1546,8 @@ lib LibWin32
     get_job : Proc(IFaxIncomingQueue*, UInt8*, IFaxIncomingJob*, HRESULT)
   end
 
+  IFaxIncomingQueue_GUID = LibC::GUID.new("902e64ef-8fd8-4b75-9725-6014df161545")
+  CLSID_IFaxIncomingQueue = "902e64ef-8fd8-4b75-9725-6014df161545"
   struct IFaxIncomingQueue
     lpVtbl : IFaxIncomingQueueVTbl*
   end
@@ -1546,6 +1580,8 @@ lib LibWin32
     get_message : Proc(IFaxOutgoingArchive*, UInt8*, IFaxOutgoingMessage*, HRESULT)
   end
 
+  IFaxOutgoingArchive_GUID = LibC::GUID.new("c9c28f40-8d80-4e53-810f-9a79919b49fd")
+  CLSID_IFaxOutgoingArchive = "c9c28f40-8d80-4e53-810f-9a79919b49fd"
   struct IFaxOutgoingArchive
     lpVtbl : IFaxOutgoingArchiveVTbl*
   end
@@ -1584,6 +1620,8 @@ lib LibWin32
     get_job : Proc(IFaxOutgoingQueue*, UInt8*, IFaxOutgoingJob*, HRESULT)
   end
 
+  IFaxOutgoingQueue_GUID = LibC::GUID.new("80b1df24-d9ac-4333-b373-487cedc80ce5")
+  CLSID_IFaxOutgoingQueue = "80b1df24-d9ac-4333-b373-487cedc80ce5"
   struct IFaxOutgoingQueue
     lpVtbl : IFaxOutgoingQueueVTbl*
   end
@@ -1604,6 +1642,8 @@ lib LibWin32
     move_next : Proc(IFaxIncomingMessageIterator*, HRESULT)
   end
 
+  IFaxIncomingMessageIterator_GUID = LibC::GUID.new("fd73ecc4-6f06-4f52-82a8-f7ba06ae3108")
+  CLSID_IFaxIncomingMessageIterator = "fd73ecc4-6f06-4f52-82a8-f7ba06ae3108"
   struct IFaxIncomingMessageIterator
     lpVtbl : IFaxIncomingMessageIteratorVTbl*
   end
@@ -1631,6 +1671,8 @@ lib LibWin32
     delete : Proc(IFaxIncomingMessage*, HRESULT)
   end
 
+  IFaxIncomingMessage_GUID = LibC::GUID.new("7cab88fa-2ef9-4851-b2f3-1d148fed8447")
+  CLSID_IFaxIncomingMessage = "7cab88fa-2ef9-4851-b2f3-1d148fed8447"
   struct IFaxIncomingMessage
     lpVtbl : IFaxIncomingMessageVTbl*
   end
@@ -1648,6 +1690,8 @@ lib LibWin32
     get_count : Proc(IFaxOutgoingJobs*, Int32*, HRESULT)
   end
 
+  IFaxOutgoingJobs_GUID = LibC::GUID.new("2c56d8e6-8c2f-4573-944c-e505f8f5aeed")
+  CLSID_IFaxOutgoingJobs = "2c56d8e6-8c2f-4573-944c-e505f8f5aeed"
   struct IFaxOutgoingJobs
     lpVtbl : IFaxOutgoingJobsVTbl*
   end
@@ -1693,6 +1737,8 @@ lib LibWin32
     cancel : Proc(IFaxOutgoingJob*, HRESULT)
   end
 
+  IFaxOutgoingJob_GUID = LibC::GUID.new("6356daad-6614-4583-bf7a-3ad67bbfc71c")
+  CLSID_IFaxOutgoingJob = "6356daad-6614-4583-bf7a-3ad67bbfc71c"
   struct IFaxOutgoingJob
     lpVtbl : IFaxOutgoingJobVTbl*
   end
@@ -1713,6 +1759,8 @@ lib LibWin32
     move_next : Proc(IFaxOutgoingMessageIterator*, HRESULT)
   end
 
+  IFaxOutgoingMessageIterator_GUID = LibC::GUID.new("f5ec5d4f-b840-432f-9980-112fe42a9b7a")
+  CLSID_IFaxOutgoingMessageIterator = "f5ec5d4f-b840-432f-9980-112fe42a9b7a"
   struct IFaxOutgoingMessageIterator
     lpVtbl : IFaxOutgoingMessageIteratorVTbl*
   end
@@ -1746,6 +1794,8 @@ lib LibWin32
     delete : Proc(IFaxOutgoingMessage*, HRESULT)
   end
 
+  IFaxOutgoingMessage_GUID = LibC::GUID.new("f0ea35de-caa5-4a7c-82c7-2b60ba5f2be2")
+  CLSID_IFaxOutgoingMessage = "f0ea35de-caa5-4a7c-82c7-2b60ba5f2be2"
   struct IFaxOutgoingMessage
     lpVtbl : IFaxOutgoingMessageVTbl*
   end
@@ -1763,6 +1813,8 @@ lib LibWin32
     get_count : Proc(IFaxIncomingJobs*, Int32*, HRESULT)
   end
 
+  IFaxIncomingJobs_GUID = LibC::GUID.new("011f04e9-4fd6-4c23-9513-b6b66bb26be9")
+  CLSID_IFaxIncomingJobs = "011f04e9-4fd6-4c23-9513-b6b66bb26be9"
   struct IFaxIncomingJobs
     lpVtbl : IFaxIncomingJobsVTbl*
   end
@@ -1796,6 +1848,8 @@ lib LibWin32
     copy_tiff : Proc(IFaxIncomingJob*, UInt8*, HRESULT)
   end
 
+  IFaxIncomingJob_GUID = LibC::GUID.new("207529e6-654a-4916-9f88-4d232ee8a107")
+  CLSID_IFaxIncomingJob = "207529e6-654a-4916-9f88-4d232ee8a107"
   struct IFaxIncomingJob
     lpVtbl : IFaxIncomingJobVTbl*
   end
@@ -1822,6 +1876,8 @@ lib LibWin32
     get_device_ids : Proc(IFaxDeviceProvider*, VARIANT*, HRESULT)
   end
 
+  IFaxDeviceProvider_GUID = LibC::GUID.new("290eac63-83ec-449c-8417-f148df8c682a")
+  CLSID_IFaxDeviceProvider = "290eac63-83ec-449c-8417-f148df8c682a"
   struct IFaxDeviceProvider
     lpVtbl : IFaxDeviceProviderVTbl*
   end
@@ -1862,6 +1918,8 @@ lib LibWin32
     answer_call : Proc(IFaxDevice*, HRESULT)
   end
 
+  IFaxDevice_GUID = LibC::GUID.new("49306c59-b52e-4867-9df4-ca5841c956d0")
+  CLSID_IFaxDevice = "49306c59-b52e-4867-9df4-ca5841c956d0"
   struct IFaxDevice
     lpVtbl : IFaxDeviceVTbl*
   end
@@ -1884,6 +1942,8 @@ lib LibWin32
     save : Proc(IFaxActivityLogging*, HRESULT)
   end
 
+  IFaxActivityLogging_GUID = LibC::GUID.new("1e29078b-5a69-497b-9592-49b7e7faddb5")
+  CLSID_IFaxActivityLogging = "1e29078b-5a69-497b-9592-49b7e7faddb5"
   struct IFaxActivityLogging
     lpVtbl : IFaxActivityLoggingVTbl*
   end
@@ -1908,6 +1968,8 @@ lib LibWin32
     save : Proc(IFaxEventLogging*, HRESULT)
   end
 
+  IFaxEventLogging_GUID = LibC::GUID.new("0880d965-20e8-42e4-8e17-944f192caad4")
+  CLSID_IFaxEventLogging = "0880d965-20e8-42e4-8e17-944f192caad4"
   struct IFaxEventLogging
     lpVtbl : IFaxEventLoggingVTbl*
   end
@@ -1927,6 +1989,8 @@ lib LibWin32
     remove : Proc(IFaxOutboundRoutingGroups*, VARIANT, HRESULT)
   end
 
+  IFaxOutboundRoutingGroups_GUID = LibC::GUID.new("235cbef7-c2de-4bfd-b8da-75097c82c87f")
+  CLSID_IFaxOutboundRoutingGroups = "235cbef7-c2de-4bfd-b8da-75097c82c87f"
   struct IFaxOutboundRoutingGroups
     lpVtbl : IFaxOutboundRoutingGroupsVTbl*
   end
@@ -1944,6 +2008,8 @@ lib LibWin32
     get_device_ids : Proc(IFaxOutboundRoutingGroup*, IFaxDeviceIds*, HRESULT)
   end
 
+  IFaxOutboundRoutingGroup_GUID = LibC::GUID.new("ca6289a1-7e25-4f87-9a0b-93365734962c")
+  CLSID_IFaxOutboundRoutingGroup = "ca6289a1-7e25-4f87-9a0b-93365734962c"
   struct IFaxOutboundRoutingGroup
     lpVtbl : IFaxOutboundRoutingGroupVTbl*
   end
@@ -1964,6 +2030,8 @@ lib LibWin32
     set_order : Proc(IFaxDeviceIds*, Int32, Int32, HRESULT)
   end
 
+  IFaxDeviceIds_GUID = LibC::GUID.new("2f0f813f-4ce9-443e-8ca1-738cfaeee149")
+  CLSID_IFaxDeviceIds = "2f0f813f-4ce9-443e-8ca1-738cfaeee149"
   struct IFaxDeviceIds
     lpVtbl : IFaxDeviceIdsVTbl*
   end
@@ -1985,6 +2053,8 @@ lib LibWin32
     add : Proc(IFaxOutboundRoutingRules*, Int32, Int32, Int16, UInt8*, Int32, IFaxOutboundRoutingRule*, HRESULT)
   end
 
+  IFaxOutboundRoutingRules_GUID = LibC::GUID.new("dcefa1e7-ae7d-4ed6-8521-369edcca5120")
+  CLSID_IFaxOutboundRoutingRules = "dcefa1e7-ae7d-4ed6-8521-369edcca5120"
   struct IFaxOutboundRoutingRules
     lpVtbl : IFaxOutboundRoutingRulesVTbl*
   end
@@ -2010,6 +2080,8 @@ lib LibWin32
     save : Proc(IFaxOutboundRoutingRule*, HRESULT)
   end
 
+  IFaxOutboundRoutingRule_GUID = LibC::GUID.new("e1f795d5-07c2-469f-b027-acacc23219da")
+  CLSID_IFaxOutboundRoutingRule = "e1f795d5-07c2-469f-b027-acacc23219da"
   struct IFaxOutboundRoutingRule
     lpVtbl : IFaxOutboundRoutingRuleVTbl*
   end
@@ -2027,6 +2099,8 @@ lib LibWin32
     get_count : Proc(IFaxInboundRoutingExtensions*, Int32*, HRESULT)
   end
 
+  IFaxInboundRoutingExtensions_GUID = LibC::GUID.new("2f6c9673-7b26-42de-8eb0-915dcd2a4f4c")
+  CLSID_IFaxInboundRoutingExtensions = "2f6c9673-7b26-42de-8eb0-915dcd2a4f4c"
   struct IFaxInboundRoutingExtensions
     lpVtbl : IFaxInboundRoutingExtensionsVTbl*
   end
@@ -2052,6 +2126,8 @@ lib LibWin32
     get_methods : Proc(IFaxInboundRoutingExtension*, VARIANT*, HRESULT)
   end
 
+  IFaxInboundRoutingExtension_GUID = LibC::GUID.new("885b5e08-c26c-4ef9-af83-51580a750be1")
+  CLSID_IFaxInboundRoutingExtension = "885b5e08-c26c-4ef9-af83-51580a750be1"
   struct IFaxInboundRoutingExtension
     lpVtbl : IFaxInboundRoutingExtensionVTbl*
   end
@@ -2069,6 +2145,8 @@ lib LibWin32
     get_count : Proc(IFaxInboundRoutingMethods*, Int32*, HRESULT)
   end
 
+  IFaxInboundRoutingMethods_GUID = LibC::GUID.new("783fca10-8908-4473-9d69-f67fbea0c6b9")
+  CLSID_IFaxInboundRoutingMethods = "783fca10-8908-4473-9d69-f67fbea0c6b9"
   struct IFaxInboundRoutingMethods
     lpVtbl : IFaxInboundRoutingMethodsVTbl*
   end
@@ -2092,6 +2170,8 @@ lib LibWin32
     save : Proc(IFaxInboundRoutingMethod*, HRESULT)
   end
 
+  IFaxInboundRoutingMethod_GUID = LibC::GUID.new("45700061-ad9d-4776-a8c4-64065492cf4b")
+  CLSID_IFaxInboundRoutingMethod = "45700061-ad9d-4776-a8c4-64065492cf4b"
   struct IFaxInboundRoutingMethod
     lpVtbl : IFaxInboundRoutingMethodVTbl*
   end
@@ -2145,6 +2225,8 @@ lib LibWin32
     connected_submit2 : Proc(IFaxDocument2*, IFaxServer, VARIANT*, Int32*, HRESULT)
   end
 
+  IFaxDocument2_GUID = LibC::GUID.new("e1347661-f9ef-4d6d-b4a5-c0a068b65cff")
+  CLSID_IFaxDocument2 = "e1347661-f9ef-4d6d-b4a5-c0a068b65cff"
   struct IFaxDocument2
     lpVtbl : IFaxDocument2VTbl*
   end
@@ -2201,6 +2283,8 @@ lib LibWin32
     save : Proc(IFaxConfiguration*, HRESULT)
   end
 
+  IFaxConfiguration_GUID = LibC::GUID.new("10f4d0f7-0994-4543-ab6e-506949128c40")
+  CLSID_IFaxConfiguration = "10f4d0f7-0994-4543-ab6e-506949128c40"
   struct IFaxConfiguration
     lpVtbl : IFaxConfigurationVTbl*
   end
@@ -2245,6 +2329,8 @@ lib LibWin32
     get_security2 : Proc(IFaxServer2*, IFaxSecurity2*, HRESULT)
   end
 
+  IFaxServer2_GUID = LibC::GUID.new("571ced0f-5609-4f40-9176-547e3a72ca7c")
+  CLSID_IFaxServer2 = "571ced0f-5609-4f40-9176-547e3a72ca7c"
   struct IFaxServer2
     lpVtbl : IFaxServer2VTbl*
   end
@@ -2263,6 +2349,8 @@ lib LibWin32
     remove_account : Proc(IFaxAccountSet*, UInt8*, HRESULT)
   end
 
+  IFaxAccountSet_GUID = LibC::GUID.new("7428fbae-841e-47b8-86f4-2288946dca1b")
+  CLSID_IFaxAccountSet = "7428fbae-841e-47b8-86f4-2288946dca1b"
   struct IFaxAccountSet
     lpVtbl : IFaxAccountSetVTbl*
   end
@@ -2280,6 +2368,8 @@ lib LibWin32
     get_count : Proc(IFaxAccounts*, Int32*, HRESULT)
   end
 
+  IFaxAccounts_GUID = LibC::GUID.new("93ea8162-8be7-42d1-ae7b-ec74e2d989da")
+  CLSID_IFaxAccounts = "93ea8162-8be7-42d1-ae7b-ec74e2d989da"
   struct IFaxAccounts
     lpVtbl : IFaxAccountsVTbl*
   end
@@ -2298,6 +2388,8 @@ lib LibWin32
     get_registered_events : Proc(IFaxAccount*, FAX_ACCOUNT_EVENTS_TYPE_ENUM*, HRESULT)
   end
 
+  IFaxAccount_GUID = LibC::GUID.new("68535b33-5dc4-4086-be26-b76f9b711006")
+  CLSID_IFaxAccount = "68535b33-5dc4-4086-be26-b76f9b711006"
   struct IFaxAccount
     lpVtbl : IFaxAccountVTbl*
   end
@@ -2346,6 +2438,8 @@ lib LibWin32
     get_schedule_type : Proc(IFaxOutgoingJob2*, FAX_SCHEDULE_TYPE_ENUM*, HRESULT)
   end
 
+  IFaxOutgoingJob2_GUID = LibC::GUID.new("418a8d96-59a0-4789-b176-edf3dc8fa8f7")
+  CLSID_IFaxOutgoingJob2 = "418a8d96-59a0-4789-b176-edf3dc8fa8f7"
   struct IFaxOutgoingJob2
     lpVtbl : IFaxOutgoingJob2VTbl*
   end
@@ -2364,6 +2458,8 @@ lib LibWin32
     get_outgoing_archive : Proc(IFaxAccountFolders*, IFaxAccountOutgoingArchive*, HRESULT)
   end
 
+  IFaxAccountFolders_GUID = LibC::GUID.new("6463f89d-23d8-46a9-8f86-c47b77ca7926")
+  CLSID_IFaxAccountFolders = "6463f89d-23d8-46a9-8f86-c47b77ca7926"
   struct IFaxAccountFolders
     lpVtbl : IFaxAccountFoldersVTbl*
   end
@@ -2380,6 +2476,8 @@ lib LibWin32
     get_job : Proc(IFaxAccountIncomingQueue*, UInt8*, IFaxIncomingJob*, HRESULT)
   end
 
+  IFaxAccountIncomingQueue_GUID = LibC::GUID.new("dd142d92-0186-4a95-a090-cbc3eadba6b4")
+  CLSID_IFaxAccountIncomingQueue = "dd142d92-0186-4a95-a090-cbc3eadba6b4"
   struct IFaxAccountIncomingQueue
     lpVtbl : IFaxAccountIncomingQueueVTbl*
   end
@@ -2396,6 +2494,8 @@ lib LibWin32
     get_job : Proc(IFaxAccountOutgoingQueue*, UInt8*, IFaxOutgoingJob*, HRESULT)
   end
 
+  IFaxAccountOutgoingQueue_GUID = LibC::GUID.new("0f1424e9-f22d-4553-b7a5-0d24bd0d7e46")
+  CLSID_IFaxAccountOutgoingQueue = "0f1424e9-f22d-4553-b7a5-0d24bd0d7e46"
   struct IFaxAccountOutgoingQueue
     lpVtbl : IFaxAccountOutgoingQueueVTbl*
   end
@@ -2436,6 +2536,8 @@ lib LibWin32
     refresh : Proc(IFaxOutgoingMessage2*, HRESULT)
   end
 
+  IFaxOutgoingMessage2_GUID = LibC::GUID.new("b37df687-bc88-4b46-b3be-b458b3ea9e7f")
+  CLSID_IFaxOutgoingMessage2 = "b37df687-bc88-4b46-b3be-b458b3ea9e7f"
   struct IFaxOutgoingMessage2
     lpVtbl : IFaxOutgoingMessage2VTbl*
   end
@@ -2455,6 +2557,8 @@ lib LibWin32
     get_message : Proc(IFaxAccountIncomingArchive*, UInt8*, IFaxIncomingMessage*, HRESULT)
   end
 
+  IFaxAccountIncomingArchive_GUID = LibC::GUID.new("a8a5b6ef-e0d6-4aee-955c-91625bec9db4")
+  CLSID_IFaxAccountIncomingArchive = "a8a5b6ef-e0d6-4aee-955c-91625bec9db4"
   struct IFaxAccountIncomingArchive
     lpVtbl : IFaxAccountIncomingArchiveVTbl*
   end
@@ -2474,6 +2578,8 @@ lib LibWin32
     get_message : Proc(IFaxAccountOutgoingArchive*, UInt8*, IFaxOutgoingMessage*, HRESULT)
   end
 
+  IFaxAccountOutgoingArchive_GUID = LibC::GUID.new("5463076d-ec14-491f-926e-b3ceda5e5662")
+  CLSID_IFaxAccountOutgoingArchive = "5463076d-ec14-491f-926e-b3ceda5e5662"
   struct IFaxAccountOutgoingArchive
     lpVtbl : IFaxAccountOutgoingArchiveVTbl*
   end
@@ -2495,6 +2601,8 @@ lib LibWin32
     put_information_type : Proc(IFaxSecurity2*, Int32, HRESULT)
   end
 
+  IFaxSecurity2_GUID = LibC::GUID.new("17d851f4-d09b-48fc-99c9-8f24c4db9ab1")
+  CLSID_IFaxSecurity2 = "17d851f4-d09b-48fc-99c9-8f24c4db9ab1"
   struct IFaxSecurity2
     lpVtbl : IFaxSecurity2VTbl*
   end
@@ -2538,6 +2646,8 @@ lib LibWin32
     refresh : Proc(IFaxIncomingMessage2*, HRESULT)
   end
 
+  IFaxIncomingMessage2_GUID = LibC::GUID.new("f9208503-e2bc-48f3-9ec0-e6236f9b509a")
+  CLSID_IFaxIncomingMessage2 = "f9208503-e2bc-48f3-9ec0-e6236f9b509a"
   struct IFaxIncomingMessage2
     lpVtbl : IFaxIncomingMessage2VTbl*
   end
@@ -2552,6 +2662,8 @@ lib LibWin32
     invoke : Proc(IFaxServerNotify*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IFaxServerNotify_GUID = LibC::GUID.new("2e037b27-cf8a-4abd-b1e0-5704943bea6f")
+  CLSID_IFaxServerNotify = "2e037b27-cf8a-4abd-b1e0-5704943bea6f"
   struct IFaxServerNotify
     lpVtbl : IFaxServerNotifyVTbl*
   end
@@ -2592,6 +2704,8 @@ lib LibWin32
     on_general_server_config_changed : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
   end
 
+  IIFaxServerNotify2_GUID = LibC::GUID.new("ec9c69b9-5fe7-4805-9467-82fcd96af903")
+  CLSID_IIFaxServerNotify2 = "ec9c69b9-5fe7-4805-9467-82fcd96af903"
   struct IIFaxServerNotify2
     lpVtbl : IIFaxServerNotify2VTbl*
   end
@@ -2606,6 +2720,8 @@ lib LibWin32
     invoke : Proc(IFaxServerNotify2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IFaxServerNotify2_GUID = LibC::GUID.new("616ca8d6-a77a-4062-abfd-0e471241c7aa")
+  CLSID_IFaxServerNotify2 = "616ca8d6-a77a-4062-abfd-0e471241c7aa"
   struct IFaxServerNotify2
     lpVtbl : IFaxServerNotify2VTbl*
   end
@@ -2631,6 +2747,8 @@ lib LibWin32
     on_server_shut_down : Proc(IIFaxAccountNotify*, IFaxServer2, HRESULT)
   end
 
+  IIFaxAccountNotify_GUID = LibC::GUID.new("b9b3bc81-ac1b-46f3-b39d-0adc30e1b788")
+  CLSID_IIFaxAccountNotify = "b9b3bc81-ac1b-46f3-b39d-0adc30e1b788"
   struct IIFaxAccountNotify
     lpVtbl : IIFaxAccountNotifyVTbl*
   end
@@ -2645,6 +2763,8 @@ lib LibWin32
     invoke : Proc(IFaxAccountNotify*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IFaxAccountNotify_GUID = LibC::GUID.new("0b5e5bd1-b8a9-47a0-a323-ef4a293ba06a")
+  CLSID_IFaxAccountNotify = "0b5e5bd1-b8a9-47a0-a323-ef4a293ba06a"
   struct IFaxAccountNotify
     lpVtbl : IFaxAccountNotifyVTbl*
   end
@@ -2670,6 +2790,8 @@ lib LibWin32
     write_to_error_log : Proc(IStillImageW*, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IStillImageW_GUID = LibC::GUID.new("641bd880-2dc8-11d0-90ea-00aa0060f86c")
+  CLSID_IStillImageW = "641bd880-2dc8-11d0-90ea-00aa0060f86c"
   struct IStillImageW
     lpVtbl : IStillImageWVTbl*
   end
@@ -2697,6 +2819,8 @@ lib LibWin32
     get_last_error_info : Proc(IStiDevice*, ERROR_INFOW*, HRESULT)
   end
 
+  IStiDevice_GUID = LibC::GUID.new("6cfa5a80-2dc8-11d0-90ea-00aa0060f86c")
+  CLSID_IStiDevice = "6cfa5a80-2dc8-11d0-90ea-00aa0060f86c"
   struct IStiDevice
     lpVtbl : IStiDeviceVTbl*
   end
@@ -2718,6 +2842,8 @@ lib LibWin32
     write_to_error_log : Proc(IStiDeviceControl*, UInt32, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  IStiDeviceControl_GUID = LibC::GUID.new("128a9860-52dc-11d0-9edf-444553540000")
+  CLSID_IStiDeviceControl = "128a9860-52dc-11d0-9edf-444553540000"
   struct IStiDeviceControl
     lpVtbl : IStiDeviceControlVTbl*
   end
@@ -2744,6 +2870,8 @@ lib LibWin32
     get_last_error_info : Proc(IStiUSD*, ERROR_INFOW*, HRESULT)
   end
 
+  IStiUSD_GUID = LibC::GUID.new("0c9bb460-51ac-11d0-90ea-00aa0060f86c")
+  CLSID_IStiUSD = "0c9bb460-51ac-11d0-90ea-00aa0060f86c"
   struct IStiUSD
     lpVtbl : IStiUSDVTbl*
   end

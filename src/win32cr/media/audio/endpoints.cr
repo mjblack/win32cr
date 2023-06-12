@@ -45,6 +45,8 @@ lib LibWin32
     reset_to_default : Proc(IAudioEndpointFormatControl*, UInt32, HRESULT)
   end
 
+  IAudioEndpointFormatControl_GUID = LibC::GUID.new("784cfd40-9f89-456e-a1a6-873b006a664e")
+  CLSID_IAudioEndpointFormatControl = "784cfd40-9f89-456e-a1a6-873b006a664e"
   struct IAudioEndpointFormatControl
     lpVtbl : IAudioEndpointFormatControlVTbl*
   end
@@ -58,6 +60,8 @@ lib LibWin32
     get_channel_volumes : Proc(IAudioEndpointOffloadStreamVolume*, UInt32, Float32*, HRESULT)
   end
 
+  IAudioEndpointOffloadStreamVolume_GUID = LibC::GUID.new("64f1dd49-71ca-4281-8672-3a9eddd1d0b6")
+  CLSID_IAudioEndpointOffloadStreamVolume = "64f1dd49-71ca-4281-8672-3a9eddd1d0b6"
   struct IAudioEndpointOffloadStreamVolume
     lpVtbl : IAudioEndpointOffloadStreamVolumeVTbl*
   end
@@ -70,6 +74,8 @@ lib LibWin32
     get_mute : Proc(IAudioEndpointOffloadStreamMute*, UInt8*, HRESULT)
   end
 
+  IAudioEndpointOffloadStreamMute_GUID = LibC::GUID.new("dfe21355-5ec2-40e0-8d6b-710ac3c00249")
+  CLSID_IAudioEndpointOffloadStreamMute = "dfe21355-5ec2-40e0-8d6b-710ac3c00249"
   struct IAudioEndpointOffloadStreamMute
     lpVtbl : IAudioEndpointOffloadStreamMuteVTbl*
   end
@@ -82,6 +88,8 @@ lib LibWin32
     get_metering_data : Proc(IAudioEndpointOffloadStreamMeter*, UInt32, Float32*, HRESULT)
   end
 
+  IAudioEndpointOffloadStreamMeter_GUID = LibC::GUID.new("e1546dce-9dd1-418b-9ab2-348ced161c86")
+  CLSID_IAudioEndpointOffloadStreamMeter = "e1546dce-9dd1-418b-9ab2-348ced161c86"
   struct IAudioEndpointOffloadStreamMeter
     lpVtbl : IAudioEndpointOffloadStreamMeterVTbl*
   end
@@ -94,6 +102,8 @@ lib LibWin32
     release_output_data_pointer_for_last_buffer : Proc(IAudioEndpointLastBufferControl*, APO_CONNECTION_PROPERTY*, Void)
   end
 
+  IAudioEndpointLastBufferControl_GUID = LibC::GUID.new("f8520dd3-8f9d-4437-9861-62f584c33dd6")
+  CLSID_IAudioEndpointLastBufferControl = "f8520dd3-8f9d-4437-9861-62f584c33dd6"
   struct IAudioEndpointLastBufferControl
     lpVtbl : IAudioEndpointLastBufferControlVTbl*
   end
@@ -106,6 +116,8 @@ lib LibWin32
     get_local_effects_state : Proc(IAudioLfxControl*, LibC::BOOL*, HRESULT)
   end
 
+  IAudioLfxControl_GUID = LibC::GUID.new("076a6922-d802-4f83-baf6-409d9ca11bfe")
+  CLSID_IAudioLfxControl = "076a6922-d802-4f83-baf6-409d9ca11bfe"
   struct IAudioLfxControl
     lpVtbl : IAudioLfxControlVTbl*
   end
@@ -121,6 +133,8 @@ lib LibWin32
     get_gfx_state : Proc(IHardwareAudioEngineBase*, IMMDevice, LibC::BOOL*, HRESULT)
   end
 
+  IHardwareAudioEngineBase_GUID = LibC::GUID.new("eddce3e4-f3c1-453a-b461-223563cbd886")
+  CLSID_IHardwareAudioEngineBase = "eddce3e4-f3c1-453a-b461-223563cbd886"
   struct IHardwareAudioEngineBase
     lpVtbl : IHardwareAudioEngineBaseVTbl*
   end
@@ -132,6 +146,8 @@ lib LibWin32
     on_notify : Proc(IAudioEndpointVolumeCallback*, AUDIO_VOLUME_NOTIFICATION_DATA*, HRESULT)
   end
 
+  IAudioEndpointVolumeCallback_GUID = LibC::GUID.new("657804fa-d6ad-4496-8a60-352752af4f89")
+  CLSID_IAudioEndpointVolumeCallback = "657804fa-d6ad-4496-8a60-352752af4f89"
   struct IAudioEndpointVolumeCallback
     lpVtbl : IAudioEndpointVolumeCallbackVTbl*
   end
@@ -160,6 +176,8 @@ lib LibWin32
     get_volume_range : Proc(IAudioEndpointVolume*, Float32*, Float32*, Float32*, HRESULT)
   end
 
+  IAudioEndpointVolume_GUID = LibC::GUID.new("5cdf2c82-841e-4546-9722-0cf74078229a")
+  CLSID_IAudioEndpointVolume = "5cdf2c82-841e-4546-9722-0cf74078229a"
   struct IAudioEndpointVolume
     lpVtbl : IAudioEndpointVolumeVTbl*
   end
@@ -189,6 +207,8 @@ lib LibWin32
     get_volume_range_channel : Proc(IAudioEndpointVolumeEx*, UInt32, Float32*, Float32*, Float32*, HRESULT)
   end
 
+  IAudioEndpointVolumeEx_GUID = LibC::GUID.new("66e11784-f695-4f28-a505-a7080081a78f")
+  CLSID_IAudioEndpointVolumeEx = "66e11784-f695-4f28-a505-a7080081a78f"
   struct IAudioEndpointVolumeEx
     lpVtbl : IAudioEndpointVolumeExVTbl*
   end
@@ -203,6 +223,8 @@ lib LibWin32
     query_hardware_support : Proc(IAudioMeterInformation*, UInt32*, HRESULT)
   end
 
+  IAudioMeterInformation_GUID = LibC::GUID.new("c02216f6-8c67-4b5b-9d00-d008e73e0064")
+  CLSID_IAudioMeterInformation = "c02216f6-8c67-4b5b-9d00-d008e73e0064"
   struct IAudioMeterInformation
     lpVtbl : IAudioMeterInformationVTbl*
   end

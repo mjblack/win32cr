@@ -414,6 +414,8 @@ lib LibWin32
     get_progress : Proc(IBackgroundCopyFile*, BG_FILE_PROGRESS*, HRESULT)
   end
 
+  IBackgroundCopyFile_GUID = LibC::GUID.new("01b7bd23-fb88-4a77-8490-5891d3e4653a")
+  CLSID_IBackgroundCopyFile = "01b7bd23-fb88-4a77-8490-5891d3e4653a"
   struct IBackgroundCopyFile
     lpVtbl : IBackgroundCopyFileVTbl*
   end
@@ -429,6 +431,8 @@ lib LibWin32
     get_count : Proc(IEnumBackgroundCopyFiles*, UInt32*, HRESULT)
   end
 
+  IEnumBackgroundCopyFiles_GUID = LibC::GUID.new("ca51e165-c365-424c-8d41-24aaa4ff3c40")
+  CLSID_IEnumBackgroundCopyFiles = "ca51e165-c365-424c-8d41-24aaa4ff3c40"
   struct IEnumBackgroundCopyFiles
     lpVtbl : IEnumBackgroundCopyFilesVTbl*
   end
@@ -444,6 +448,8 @@ lib LibWin32
     get_protocol : Proc(IBackgroundCopyError*, LibC::LPWSTR*, HRESULT)
   end
 
+  IBackgroundCopyError_GUID = LibC::GUID.new("19c613a0-fcb8-4f28-81ae-897c3d078f81")
+  CLSID_IBackgroundCopyError = "19c613a0-fcb8-4f28-81ae-897c3d078f81"
   struct IBackgroundCopyError
     lpVtbl : IBackgroundCopyErrorVTbl*
   end
@@ -486,6 +492,8 @@ lib LibWin32
     take_ownership : Proc(IBackgroundCopyJob*, HRESULT)
   end
 
+  IBackgroundCopyJob_GUID = LibC::GUID.new("37668d37-507e-4160-9316-26306d150b12")
+  CLSID_IBackgroundCopyJob = "37668d37-507e-4160-9316-26306d150b12"
   struct IBackgroundCopyJob
     lpVtbl : IBackgroundCopyJobVTbl*
   end
@@ -501,6 +509,8 @@ lib LibWin32
     get_count : Proc(IEnumBackgroundCopyJobs*, UInt32*, HRESULT)
   end
 
+  IEnumBackgroundCopyJobs_GUID = LibC::GUID.new("1af4f612-3b71-466f-8f58-7b6f73ac57ad")
+  CLSID_IEnumBackgroundCopyJobs = "1af4f612-3b71-466f-8f58-7b6f73ac57ad"
   struct IEnumBackgroundCopyJobs
     lpVtbl : IEnumBackgroundCopyJobsVTbl*
   end
@@ -514,6 +524,8 @@ lib LibWin32
     job_modification : Proc(IBackgroundCopyCallback*, IBackgroundCopyJob, UInt32, HRESULT)
   end
 
+  IBackgroundCopyCallback_GUID = LibC::GUID.new("97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22")
+  CLSID_IBackgroundCopyCallback = "97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22"
   struct IBackgroundCopyCallback
     lpVtbl : IBackgroundCopyCallbackVTbl*
   end
@@ -530,6 +542,8 @@ lib LibWin32
     finish_job_modification : Proc(AsyncIBackgroundCopyCallback*, HRESULT)
   end
 
+  AsyncIBackgroundCopyCallback_GUID = LibC::GUID.new("ca29d251-b4bb-4679-a3d9-ae8006119d54")
+  CLSID_AsyncIBackgroundCopyCallback = "ca29d251-b4bb-4679-a3d9-ae8006119d54"
   struct AsyncIBackgroundCopyCallback
     lpVtbl : AsyncIBackgroundCopyCallbackVTbl*
   end
@@ -544,6 +558,8 @@ lib LibWin32
     get_error_description : Proc(IBackgroundCopyManager*, HRESULT, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
+  IBackgroundCopyManager_GUID = LibC::GUID.new("5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c")
+  CLSID_IBackgroundCopyManager = "5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c"
   struct IBackgroundCopyManager
     lpVtbl : IBackgroundCopyManagerVTbl*
   end
@@ -594,6 +610,8 @@ lib LibWin32
     remove_credentials : Proc(IBackgroundCopyJob2*, BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)
   end
 
+  IBackgroundCopyJob2_GUID = LibC::GUID.new("54b50739-686f-45eb-9dff-d6a9a0faa9af")
+  CLSID_IBackgroundCopyJob2 = "54b50739-686f-45eb-9dff-d6a9a0faa9af"
   struct IBackgroundCopyJob2
     lpVtbl : IBackgroundCopyJob2VTbl*
   end
@@ -648,6 +666,8 @@ lib LibWin32
     get_file_acl_flags : Proc(IBackgroundCopyJob3*, UInt32*, HRESULT)
   end
 
+  IBackgroundCopyJob3_GUID = LibC::GUID.new("443c8934-90ff-48ed-bcde-26f5c7450042")
+  CLSID_IBackgroundCopyJob3 = "443c8934-90ff-48ed-bcde-26f5c7450042"
   struct IBackgroundCopyJob3
     lpVtbl : IBackgroundCopyJob3VTbl*
   end
@@ -663,6 +683,8 @@ lib LibWin32
     set_remote_name : Proc(IBackgroundCopyFile2*, LibC::LPWSTR, HRESULT)
   end
 
+  IBackgroundCopyFile2_GUID = LibC::GUID.new("83e81b93-0873-474d-8a8c-f2018b1a939c")
+  CLSID_IBackgroundCopyFile2 = "83e81b93-0873-474d-8a8c-f2018b1a939c"
   struct IBackgroundCopyFile2
     lpVtbl : IBackgroundCopyFile2VTbl*
   end
@@ -681,6 +703,8 @@ lib LibWin32
     get_security_flags : Proc(IBackgroundCopyJobHttpOptions*, UInt32*, HRESULT)
   end
 
+  IBackgroundCopyJobHttpOptions_GUID = LibC::GUID.new("f1bd1079-9f01-4bdc-8036-f09b70095066")
+  CLSID_IBackgroundCopyJobHttpOptions = "f1bd1079-9f01-4bdc-8036-f09b70095066"
   struct IBackgroundCopyJobHttpOptions
     lpVtbl : IBackgroundCopyJobHttpOptionsVTbl*
   end
@@ -698,6 +722,8 @@ lib LibWin32
     get_file_ranges : Proc(IBitsPeerCacheRecord*, UInt32*, BG_FILE_RANGE**, HRESULT)
   end
 
+  IBitsPeerCacheRecord_GUID = LibC::GUID.new("659cdeaf-489e-11d9-a9cd-000d56965251")
+  CLSID_IBitsPeerCacheRecord = "659cdeaf-489e-11d9-a9cd-000d56965251"
   struct IBitsPeerCacheRecord
     lpVtbl : IBitsPeerCacheRecordVTbl*
   end
@@ -713,6 +739,8 @@ lib LibWin32
     get_count : Proc(IEnumBitsPeerCacheRecords*, UInt32*, HRESULT)
   end
 
+  IEnumBitsPeerCacheRecords_GUID = LibC::GUID.new("659cdea4-489e-11d9-a9cd-000d56965251")
+  CLSID_IEnumBitsPeerCacheRecords = "659cdea4-489e-11d9-a9cd-000d56965251"
   struct IEnumBitsPeerCacheRecords
     lpVtbl : IEnumBitsPeerCacheRecordsVTbl*
   end
@@ -726,6 +754,8 @@ lib LibWin32
     is_available : Proc(IBitsPeer*, LibC::BOOL*, HRESULT)
   end
 
+  IBitsPeer_GUID = LibC::GUID.new("659cdea2-489e-11d9-a9cd-000d56965251")
+  CLSID_IBitsPeer = "659cdea2-489e-11d9-a9cd-000d56965251"
   struct IBitsPeer
     lpVtbl : IBitsPeerVTbl*
   end
@@ -741,6 +771,8 @@ lib LibWin32
     get_count : Proc(IEnumBitsPeers*, UInt32*, HRESULT)
   end
 
+  IEnumBitsPeers_GUID = LibC::GUID.new("659cdea5-489e-11d9-a9cd-000d56965251")
+  CLSID_IEnumBitsPeers = "659cdea5-489e-11d9-a9cd-000d56965251"
   struct IEnumBitsPeers
     lpVtbl : IEnumBitsPeersVTbl*
   end
@@ -765,6 +797,8 @@ lib LibWin32
     discover_peers : Proc(IBitsPeerCacheAdministration*, HRESULT)
   end
 
+  IBitsPeerCacheAdministration_GUID = LibC::GUID.new("659cdead-489e-11d9-a9cd-000d56965251")
+  CLSID_IBitsPeerCacheAdministration = "659cdead-489e-11d9-a9cd-000d56965251"
   struct IBitsPeerCacheAdministration
     lpVtbl : IBitsPeerCacheAdministrationVTbl*
   end
@@ -825,6 +859,8 @@ lib LibWin32
     get_maximum_download_time : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
   end
 
+  IBackgroundCopyJob4_GUID = LibC::GUID.new("659cdeae-489e-11d9-a9cd-000d56965251")
+  CLSID_IBackgroundCopyJob4 = "659cdeae-489e-11d9-a9cd-000d56965251"
   struct IBackgroundCopyJob4
     lpVtbl : IBackgroundCopyJob4VTbl*
   end
@@ -844,6 +880,8 @@ lib LibWin32
     is_downloaded_from_peer : Proc(IBackgroundCopyFile3*, LibC::BOOL*, HRESULT)
   end
 
+  IBackgroundCopyFile3_GUID = LibC::GUID.new("659cdeaa-489e-11d9-a9cd-000d56965251")
+  CLSID_IBackgroundCopyFile3 = "659cdeaa-489e-11d9-a9cd-000d56965251"
   struct IBackgroundCopyFile3
     lpVtbl : IBackgroundCopyFile3VTbl*
   end
@@ -858,6 +896,8 @@ lib LibWin32
     file_transferred : Proc(IBackgroundCopyCallback2*, IBackgroundCopyJob, IBackgroundCopyFile, HRESULT)
   end
 
+  IBackgroundCopyCallback2_GUID = LibC::GUID.new("659cdeac-489e-11d9-a9cd-000d56965251")
+  CLSID_IBackgroundCopyCallback2 = "659cdeac-489e-11d9-a9cd-000d56965251"
   struct IBackgroundCopyCallback2
     lpVtbl : IBackgroundCopyCallback2VTbl*
   end
@@ -873,6 +913,8 @@ lib LibWin32
     get_helper_token_sid : Proc(IBitsTokenOptions*, LibC::LPWSTR*, HRESULT)
   end
 
+  IBitsTokenOptions_GUID = LibC::GUID.new("9a2584c3-f7d2-457a-9a5e-22b67bffc7d2")
+  CLSID_IBitsTokenOptions = "9a2584c3-f7d2-457a-9a5e-22b67bffc7d2"
   struct IBitsTokenOptions
     lpVtbl : IBitsTokenOptionsVTbl*
   end
@@ -893,6 +935,8 @@ lib LibWin32
     get_peer_download_stats : Proc(IBackgroundCopyFile4*, UInt64*, UInt64*, HRESULT)
   end
 
+  IBackgroundCopyFile4_GUID = LibC::GUID.new("ef7e0655-7888-4960-b0e5-730846e03492")
+  CLSID_IBackgroundCopyFile4 = "ef7e0655-7888-4960-b0e5-730846e03492"
   struct IBackgroundCopyFile4
     lpVtbl : IBackgroundCopyFile4VTbl*
   end
@@ -955,6 +999,8 @@ lib LibWin32
     get_property : Proc(IBackgroundCopyJob5*, BITS_JOB_PROPERTY_ID, BITS_JOB_PROPERTY_VALUE*, HRESULT)
   end
 
+  IBackgroundCopyJob5_GUID = LibC::GUID.new("e847030c-bbba-4657-af6d-484aa42bf1fe")
+  CLSID_IBackgroundCopyJob5 = "e847030c-bbba-4657-af6d-484aa42bf1fe"
   struct IBackgroundCopyJob5
     lpVtbl : IBackgroundCopyJob5VTbl*
   end
@@ -977,6 +1023,8 @@ lib LibWin32
     get_property : Proc(IBackgroundCopyFile5*, BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE*, HRESULT)
   end
 
+  IBackgroundCopyFile5_GUID = LibC::GUID.new("85c1657f-dafc-40e8-8834-df18ea25717e")
+  CLSID_IBackgroundCopyFile5 = "85c1657f-dafc-40e8-8834-df18ea25717e"
   struct IBackgroundCopyFile5
     lpVtbl : IBackgroundCopyFile5VTbl*
   end
@@ -992,6 +1040,8 @@ lib LibWin32
     file_ranges_transferred : Proc(IBackgroundCopyCallback3*, IBackgroundCopyJob, IBackgroundCopyFile, UInt32, BG_FILE_RANGE*, HRESULT)
   end
 
+  IBackgroundCopyCallback3_GUID = LibC::GUID.new("98c97bd2-e32b-4ad8-a528-95fd8b16bd42")
+  CLSID_IBackgroundCopyCallback3 = "98c97bd2-e32b-4ad8-a528-95fd8b16bd42"
   struct IBackgroundCopyCallback3
     lpVtbl : IBackgroundCopyCallback3VTbl*
   end
@@ -1017,6 +1067,8 @@ lib LibWin32
     get_filled_file_ranges : Proc(IBackgroundCopyFile6*, UInt32*, BG_FILE_RANGE**, HRESULT)
   end
 
+  IBackgroundCopyFile6_GUID = LibC::GUID.new("cf6784f7-d677-49fd-9368-cb47aee9d1ad")
+  CLSID_IBackgroundCopyFile6 = "cf6784f7-d677-49fd-9368-cb47aee9d1ad"
   struct IBackgroundCopyFile6
     lpVtbl : IBackgroundCopyFile6VTbl*
   end
@@ -1037,6 +1089,8 @@ lib LibWin32
     get_http_method : Proc(IBackgroundCopyJobHttpOptions2*, LibC::LPWSTR*, HRESULT)
   end
 
+  IBackgroundCopyJobHttpOptions2_GUID = LibC::GUID.new("b591a192-a405-4fc3-8323-4c5c542578fc")
+  CLSID_IBackgroundCopyJobHttpOptions2 = "b591a192-a405-4fc3-8323-4c5c542578fc"
   struct IBackgroundCopyJobHttpOptions2
     lpVtbl : IBackgroundCopyJobHttpOptions2VTbl*
   end
@@ -1048,6 +1102,8 @@ lib LibWin32
     validate_server_certificate : Proc(IBackgroundCopyServerCertificateValidationCallback*, IBackgroundCopyJob, IBackgroundCopyFile, UInt32, UInt8*, UInt32, UInt32, UInt8*, HRESULT)
   end
 
+  IBackgroundCopyServerCertificateValidationCallback_GUID = LibC::GUID.new("4cec0d02-def7-4158-813a-c32a46945ff7")
+  CLSID_IBackgroundCopyServerCertificateValidationCallback = "4cec0d02-def7-4158-813a-c32a46945ff7"
   struct IBackgroundCopyServerCertificateValidationCallback
     lpVtbl : IBackgroundCopyServerCertificateValidationCallbackVTbl*
   end
@@ -1070,6 +1126,8 @@ lib LibWin32
     make_custom_headers_write_only : Proc(IBackgroundCopyJobHttpOptions3*, HRESULT)
   end
 
+  IBackgroundCopyJobHttpOptions3_GUID = LibC::GUID.new("8a9263d3-fd4c-4eda-9b28-30132a4d4e3c")
+  CLSID_IBackgroundCopyJobHttpOptions3 = "8a9263d3-fd4c-4eda-9b28-30132a4d4e3c"
   struct IBackgroundCopyJobHttpOptions3
     lpVtbl : IBackgroundCopyJobHttpOptions3VTbl*
   end
@@ -1088,6 +1146,8 @@ lib LibWin32
     get_cleanup_task : Proc(IBITSExtensionSetup*, Guid*, IUnknown*, HRESULT)
   end
 
+  IBITSExtensionSetup_GUID = LibC::GUID.new("29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3")
+  CLSID_IBITSExtensionSetup = "29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3"
   struct IBITSExtensionSetup
     lpVtbl : IBITSExtensionSetupVTbl*
   end
@@ -1103,6 +1163,8 @@ lib LibWin32
     get_object : Proc(IBITSExtensionSetupFactory*, UInt8*, IBITSExtensionSetup*, HRESULT)
   end
 
+  IBITSExtensionSetupFactory_GUID = LibC::GUID.new("d5d2d542-5503-4e64-8b48-72ef91a32ee1")
+  CLSID_IBITSExtensionSetupFactory = "d5d2d542-5503-4e64-8b48-72ef91a32ee1"
   struct IBITSExtensionSetupFactory
     lpVtbl : IBITSExtensionSetupFactoryVTbl*
   end
@@ -1121,6 +1183,8 @@ lib LibWin32
     get_job_id : Proc(IBackgroundCopyJob1*, Guid*, HRESULT)
   end
 
+  IBackgroundCopyJob1_GUID = LibC::GUID.new("59f5553c-2031-4629-bb18-2645a6970947")
+  CLSID_IBackgroundCopyJob1 = "59f5553c-2031-4629-bb18-2645a6970947"
   struct IBackgroundCopyJob1
     lpVtbl : IBackgroundCopyJob1VTbl*
   end
@@ -1136,6 +1200,8 @@ lib LibWin32
     get_count : Proc(IEnumBackgroundCopyJobs1*, UInt32*, HRESULT)
   end
 
+  IEnumBackgroundCopyJobs1_GUID = LibC::GUID.new("8baeba9d-8f1c-42c4-b82c-09ae79980d25")
+  CLSID_IEnumBackgroundCopyJobs1 = "8baeba9d-8f1c-42c4-b82c-09ae79980d25"
   struct IEnumBackgroundCopyJobs1
     lpVtbl : IEnumBackgroundCopyJobs1VTbl*
   end
@@ -1161,6 +1227,8 @@ lib LibWin32
     set_notification_pointer : Proc(IBackgroundCopyGroup*, Guid*, IUnknown, HRESULT)
   end
 
+  IBackgroundCopyGroup_GUID = LibC::GUID.new("1ded80a7-53ea-424f-8a04-17fea9adc4f5")
+  CLSID_IBackgroundCopyGroup = "1ded80a7-53ea-424f-8a04-17fea9adc4f5"
   struct IBackgroundCopyGroup
     lpVtbl : IBackgroundCopyGroupVTbl*
   end
@@ -1176,6 +1244,8 @@ lib LibWin32
     get_count : Proc(IEnumBackgroundCopyGroups*, UInt32*, HRESULT)
   end
 
+  IEnumBackgroundCopyGroups_GUID = LibC::GUID.new("d993e603-4aa4-47c5-8665-c20d39c2ba4f")
+  CLSID_IEnumBackgroundCopyGroups = "d993e603-4aa4-47c5-8665-c20d39c2ba4f"
   struct IEnumBackgroundCopyGroups
     lpVtbl : IEnumBackgroundCopyGroupsVTbl*
   end
@@ -1189,6 +1259,8 @@ lib LibWin32
     on_progress_ex : Proc(IBackgroundCopyCallback1*, UInt32, IBackgroundCopyGroup, IBackgroundCopyJob1, UInt32, UInt32, UInt32, UInt8*, HRESULT)
   end
 
+  IBackgroundCopyCallback1_GUID = LibC::GUID.new("084f6593-3800-4e08-9b59-99fa59addf82")
+  CLSID_IBackgroundCopyCallback1 = "084f6593-3800-4e08-9b59-99fa59addf82"
   struct IBackgroundCopyCallback1
     lpVtbl : IBackgroundCopyCallback1VTbl*
   end
@@ -1202,6 +1274,8 @@ lib LibWin32
     enum_groups : Proc(IBackgroundCopyQMgr*, UInt32, IEnumBackgroundCopyGroups*, HRESULT)
   end
 
+  IBackgroundCopyQMgr_GUID = LibC::GUID.new("16f41c69-09f5-41d2-8cd8-3c08c47bc8a8")
+  CLSID_IBackgroundCopyQMgr = "16f41c69-09f5-41d2-8cd8-3c08c47bc8a8"
   struct IBackgroundCopyQMgr
     lpVtbl : IBackgroundCopyQMgrVTbl*
   end

@@ -268,6 +268,8 @@ lib LibWin32
     bind_region : Proc(IFilter*, FILTERREGION, Guid*, Void**, Int32)
   end
 
+  IFilter_GUID = LibC::GUID.new("89bcb740-6119-101a-bcb7-00dd010655af")
+  CLSID_IFilter = "89bcb740-6119-101a-bcb7-00dd010655af"
   struct IFilter
     lpVtbl : IFilterVTbl*
   end
@@ -280,6 +282,8 @@ lib LibWin32
     put_phrase : Proc(IPhraseSink*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  IPhraseSink_GUID = LibC::GUID.new("cc906ff0-c058-101a-b554-08002b33b0e6")
+  CLSID_IPhraseSink = "cc906ff0-c058-101a-b554-08002b33b0e6"
   struct IPhraseSink
     lpVtbl : IPhraseSinkVTbl*
   end

@@ -5905,6 +5905,8 @@ lib LibWin32
     set_info : Proc(IAVIStream*, AVISTREAMINFOW*, Int32, HRESULT)
   end
 
+  IAVIStream_GUID = LibC::GUID.new("00020021-0000-0000-c000-000000000046")
+  CLSID_IAVIStream = "00020021-0000-0000-c000-000000000046"
   struct IAVIStream
     lpVtbl : IAVIStreamVTbl*
   end
@@ -5917,6 +5919,8 @@ lib LibWin32
     rend : Proc(IAVIStreaming*, HRESULT)
   end
 
+  IAVIStreaming_GUID = LibC::GUID.new("00020022-0000-0000-c000-000000000046")
+  CLSID_IAVIStreaming = "00020022-0000-0000-c000-000000000046"
   struct IAVIStreaming
     lpVtbl : IAVIStreamingVTbl*
   end
@@ -5932,6 +5936,8 @@ lib LibWin32
     set_info : Proc(IAVIEditStream*, AVISTREAMINFOW*, Int32, HRESULT)
   end
 
+  IAVIEditStream_GUID = LibC::GUID.new("00020024-0000-0000-c000-000000000046")
+  CLSID_IAVIEditStream = "00020024-0000-0000-c000-000000000046"
   struct IAVIEditStream
     lpVtbl : IAVIEditStreamVTbl*
   end
@@ -5949,6 +5955,8 @@ lib LibWin32
     reserved1 : Proc(IAVIPersistFile*, HRESULT)
   end
 
+  IAVIPersistFile_GUID = LibC::GUID.new("00020025-0000-0000-c000-000000000046")
+  CLSID_IAVIPersistFile = "00020025-0000-0000-c000-000000000046"
   struct IAVIPersistFile
     lpVtbl : IAVIPersistFileVTbl*
   end
@@ -5966,6 +5974,8 @@ lib LibWin32
     delete_stream : Proc(IAVIFile*, UInt32, Int32, HRESULT)
   end
 
+  IAVIFile_GUID = LibC::GUID.new("00020020-0000-0000-c000-000000000046")
+  CLSID_IAVIFile = "00020020-0000-0000-c000-000000000046"
   struct IAVIFile
     lpVtbl : IAVIFileVTbl*
   end
@@ -5980,6 +5990,8 @@ lib LibWin32
     set_format : Proc(IGetFrame*, BITMAPINFOHEADER*, Void*, Int32, Int32, Int32, Int32, HRESULT)
   end
 
+  IGetFrame_GUID = LibC::GUID.new("00020023-0000-0000-c000-000000000046")
+  CLSID_IGetFrame = "00020023-0000-0000-c000-000000000046"
   struct IGetFrame
     lpVtbl : IGetFrameVTbl*
   end
