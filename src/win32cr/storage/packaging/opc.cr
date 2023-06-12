@@ -219,6 +219,8 @@ lib LibWin32
     combine_part_uri : Proc(IOpcUri*, IUri, IOpcPartUri*, HRESULT)
   end
 
+  IOpcUri_GUID = LibC::GUID.new("bc9c1b9b-d62c-49eb-aef0-3b4e0b28ebed")
+  CLSID_IOpcUri = "bc9c1b9b-d62c-49eb-aef0-3b4e0b28ebed"
   struct IOpcUri
     lpVtbl : IOpcUriVTbl*
   end
@@ -260,6 +262,8 @@ lib LibWin32
     is_relationships_part_uri : Proc(IOpcPartUri*, LibC::BOOL*, HRESULT)
   end
 
+  IOpcPartUri_GUID = LibC::GUID.new("7d3babe7-88b2-46ba-85cb-4203cb016c87")
+  CLSID_IOpcPartUri = "7d3babe7-88b2-46ba-85cb-4203cb016c87"
   struct IOpcPartUri
     lpVtbl : IOpcPartUriVTbl*
   end
@@ -272,6 +276,8 @@ lib LibWin32
     get_relationship_set : Proc(IOpcPackage*, IOpcRelationshipSet*, HRESULT)
   end
 
+  IOpcPackage_GUID = LibC::GUID.new("42195949-3b79-4fc8-89c6-fc7fb979ee70")
+  CLSID_IOpcPackage = "42195949-3b79-4fc8-89c6-fc7fb979ee70"
   struct IOpcPackage
     lpVtbl : IOpcPackageVTbl*
   end
@@ -287,6 +293,8 @@ lib LibWin32
     get_compression_options : Proc(IOpcPart*, OPC_COMPRESSION_OPTIONS*, HRESULT)
   end
 
+  IOpcPart_GUID = LibC::GUID.new("42195949-3b79-4fc8-89c6-fc7fb979ee71")
+  CLSID_IOpcPart = "42195949-3b79-4fc8-89c6-fc7fb979ee71"
   struct IOpcPart
     lpVtbl : IOpcPartVTbl*
   end
@@ -302,6 +310,8 @@ lib LibWin32
     get_target_mode : Proc(IOpcRelationship*, OPC_URI_TARGET_MODE*, HRESULT)
   end
 
+  IOpcRelationship_GUID = LibC::GUID.new("42195949-3b79-4fc8-89c6-fc7fb979ee72")
+  CLSID_IOpcRelationship = "42195949-3b79-4fc8-89c6-fc7fb979ee72"
   struct IOpcRelationship
     lpVtbl : IOpcRelationshipVTbl*
   end
@@ -317,6 +327,8 @@ lib LibWin32
     get_enumerator : Proc(IOpcPartSet*, IOpcPartEnumerator*, HRESULT)
   end
 
+  IOpcPartSet_GUID = LibC::GUID.new("42195949-3b79-4fc8-89c6-fc7fb979ee73")
+  CLSID_IOpcPartSet = "42195949-3b79-4fc8-89c6-fc7fb979ee73"
   struct IOpcPartSet
     lpVtbl : IOpcPartSetVTbl*
   end
@@ -334,6 +346,8 @@ lib LibWin32
     get_relationships_content_stream : Proc(IOpcRelationshipSet*, IStream*, HRESULT)
   end
 
+  IOpcRelationshipSet_GUID = LibC::GUID.new("42195949-3b79-4fc8-89c6-fc7fb979ee74")
+  CLSID_IOpcRelationshipSet = "42195949-3b79-4fc8-89c6-fc7fb979ee74"
   struct IOpcRelationshipSet
     lpVtbl : IOpcRelationshipSetVTbl*
   end
@@ -348,6 +362,8 @@ lib LibWin32
     clone : Proc(IOpcPartEnumerator*, IOpcPartEnumerator*, HRESULT)
   end
 
+  IOpcPartEnumerator_GUID = LibC::GUID.new("42195949-3b79-4fc8-89c6-fc7fb979ee75")
+  CLSID_IOpcPartEnumerator = "42195949-3b79-4fc8-89c6-fc7fb979ee75"
   struct IOpcPartEnumerator
     lpVtbl : IOpcPartEnumeratorVTbl*
   end
@@ -362,6 +378,8 @@ lib LibWin32
     clone : Proc(IOpcRelationshipEnumerator*, IOpcRelationshipEnumerator*, HRESULT)
   end
 
+  IOpcRelationshipEnumerator_GUID = LibC::GUID.new("42195949-3b79-4fc8-89c6-fc7fb979ee76")
+  CLSID_IOpcRelationshipEnumerator = "42195949-3b79-4fc8-89c6-fc7fb979ee76"
   struct IOpcRelationshipEnumerator
     lpVtbl : IOpcRelationshipEnumeratorVTbl*
   end
@@ -377,6 +395,8 @@ lib LibWin32
     get_transform_method : Proc(IOpcSignaturePartReference*, OPC_CANONICALIZATION_METHOD*, HRESULT)
   end
 
+  IOpcSignaturePartReference_GUID = LibC::GUID.new("e24231ca-59f4-484e-b64b-36eeda36072c")
+  CLSID_IOpcSignaturePartReference = "e24231ca-59f4-484e-b64b-36eeda36072c"
   struct IOpcSignaturePartReference
     lpVtbl : IOpcSignaturePartReferenceVTbl*
   end
@@ -393,6 +413,8 @@ lib LibWin32
     get_relationship_selector_enumerator : Proc(IOpcSignatureRelationshipReference*, IOpcRelationshipSelectorEnumerator*, HRESULT)
   end
 
+  IOpcSignatureRelationshipReference_GUID = LibC::GUID.new("57babac6-9d4a-4e50-8b86-e5d4051eae7c")
+  CLSID_IOpcSignatureRelationshipReference = "57babac6-9d4a-4e50-8b86-e5d4051eae7c"
   struct IOpcSignatureRelationshipReference
     lpVtbl : IOpcSignatureRelationshipReferenceVTbl*
   end
@@ -405,6 +427,8 @@ lib LibWin32
     get_selection_criterion : Proc(IOpcRelationshipSelector*, LibC::LPWSTR*, HRESULT)
   end
 
+  IOpcRelationshipSelector_GUID = LibC::GUID.new("f8f26c7f-b28f-4899-84c8-5d5639ede75f")
+  CLSID_IOpcRelationshipSelector = "f8f26c7f-b28f-4899-84c8-5d5639ede75f"
   struct IOpcRelationshipSelector
     lpVtbl : IOpcRelationshipSelectorVTbl*
   end
@@ -421,6 +445,8 @@ lib LibWin32
     get_digest_value : Proc(IOpcSignatureReference*, UInt8**, UInt32*, HRESULT)
   end
 
+  IOpcSignatureReference_GUID = LibC::GUID.new("1b47005e-3011-4edc-be6f-0f65e5ab0342")
+  CLSID_IOpcSignatureReference = "1b47005e-3011-4edc-be6f-0f65e5ab0342"
   struct IOpcSignatureReference
     lpVtbl : IOpcSignatureReferenceVTbl*
   end
@@ -432,6 +458,8 @@ lib LibWin32
     get_xml : Proc(IOpcSignatureCustomObject*, UInt8**, UInt32*, HRESULT)
   end
 
+  IOpcSignatureCustomObject_GUID = LibC::GUID.new("5d77a19e-62c1-44e7-becd-45da5ae51a56")
+  CLSID_IOpcSignatureCustomObject = "5d77a19e-62c1-44e7-becd-45da5ae51a56"
   struct IOpcSignatureCustomObject
     lpVtbl : IOpcSignatureCustomObjectVTbl*
   end
@@ -457,6 +485,8 @@ lib LibWin32
     get_signature_xml : Proc(IOpcDigitalSignature*, UInt8**, UInt32*, HRESULT)
   end
 
+  IOpcDigitalSignature_GUID = LibC::GUID.new("52ab21dd-1cd0-4949-bc80-0c1232d00cb4")
+  CLSID_IOpcDigitalSignature = "52ab21dd-1cd0-4949-bc80-0c1232d00cb4"
   struct IOpcDigitalSignature
     lpVtbl : IOpcDigitalSignatureVTbl*
   end
@@ -484,6 +514,8 @@ lib LibWin32
     set_signature_part_name : Proc(IOpcSigningOptions*, IOpcPartUri, HRESULT)
   end
 
+  IOpcSigningOptions_GUID = LibC::GUID.new("50d2d6a5-7aeb-46c0-b241-43ab0e9b407e")
+  CLSID_IOpcSigningOptions = "50d2d6a5-7aeb-46c0-b241-43ab0e9b407e"
   struct IOpcSigningOptions
     lpVtbl : IOpcSigningOptionsVTbl*
   end
@@ -502,6 +534,8 @@ lib LibWin32
     replace_signature_xml : Proc(IOpcDigitalSignatureManager*, IOpcPartUri, UInt8*, UInt32, IOpcDigitalSignature*, HRESULT)
   end
 
+  IOpcDigitalSignatureManager_GUID = LibC::GUID.new("d5e62a0b-696d-462f-94df-72e33cef2659")
+  CLSID_IOpcDigitalSignatureManager = "d5e62a0b-696d-462f-94df-72e33cef2659"
   struct IOpcDigitalSignatureManager
     lpVtbl : IOpcDigitalSignatureManagerVTbl*
   end
@@ -516,6 +550,8 @@ lib LibWin32
     clone : Proc(IOpcSignaturePartReferenceEnumerator*, IOpcSignaturePartReferenceEnumerator*, HRESULT)
   end
 
+  IOpcSignaturePartReferenceEnumerator_GUID = LibC::GUID.new("80eb1561-8c77-49cf-8266-459b356ee99a")
+  CLSID_IOpcSignaturePartReferenceEnumerator = "80eb1561-8c77-49cf-8266-459b356ee99a"
   struct IOpcSignaturePartReferenceEnumerator
     lpVtbl : IOpcSignaturePartReferenceEnumeratorVTbl*
   end
@@ -530,6 +566,8 @@ lib LibWin32
     clone : Proc(IOpcSignatureRelationshipReferenceEnumerator*, IOpcSignatureRelationshipReferenceEnumerator*, HRESULT)
   end
 
+  IOpcSignatureRelationshipReferenceEnumerator_GUID = LibC::GUID.new("773ba3e4-f021-48e4-aa04-9816db5d3495")
+  CLSID_IOpcSignatureRelationshipReferenceEnumerator = "773ba3e4-f021-48e4-aa04-9816db5d3495"
   struct IOpcSignatureRelationshipReferenceEnumerator
     lpVtbl : IOpcSignatureRelationshipReferenceEnumeratorVTbl*
   end
@@ -544,6 +582,8 @@ lib LibWin32
     clone : Proc(IOpcRelationshipSelectorEnumerator*, IOpcRelationshipSelectorEnumerator*, HRESULT)
   end
 
+  IOpcRelationshipSelectorEnumerator_GUID = LibC::GUID.new("5e50a181-a91b-48ac-88d2-bca3d8f8c0b1")
+  CLSID_IOpcRelationshipSelectorEnumerator = "5e50a181-a91b-48ac-88d2-bca3d8f8c0b1"
   struct IOpcRelationshipSelectorEnumerator
     lpVtbl : IOpcRelationshipSelectorEnumeratorVTbl*
   end
@@ -558,6 +598,8 @@ lib LibWin32
     clone : Proc(IOpcSignatureReferenceEnumerator*, IOpcSignatureReferenceEnumerator*, HRESULT)
   end
 
+  IOpcSignatureReferenceEnumerator_GUID = LibC::GUID.new("cfa59a45-28b1-4868-969e-fa8097fdc12a")
+  CLSID_IOpcSignatureReferenceEnumerator = "cfa59a45-28b1-4868-969e-fa8097fdc12a"
   struct IOpcSignatureReferenceEnumerator
     lpVtbl : IOpcSignatureReferenceEnumeratorVTbl*
   end
@@ -572,6 +614,8 @@ lib LibWin32
     clone : Proc(IOpcSignatureCustomObjectEnumerator*, IOpcSignatureCustomObjectEnumerator*, HRESULT)
   end
 
+  IOpcSignatureCustomObjectEnumerator_GUID = LibC::GUID.new("5ee4fe1d-e1b0-4683-8079-7ea0fcf80b4c")
+  CLSID_IOpcSignatureCustomObjectEnumerator = "5ee4fe1d-e1b0-4683-8079-7ea0fcf80b4c"
   struct IOpcSignatureCustomObjectEnumerator
     lpVtbl : IOpcSignatureCustomObjectEnumeratorVTbl*
   end
@@ -586,6 +630,8 @@ lib LibWin32
     clone : Proc(IOpcCertificateEnumerator*, IOpcCertificateEnumerator*, HRESULT)
   end
 
+  IOpcCertificateEnumerator_GUID = LibC::GUID.new("85131937-8f24-421f-b439-59ab24d140b8")
+  CLSID_IOpcCertificateEnumerator = "85131937-8f24-421f-b439-59ab24d140b8"
   struct IOpcCertificateEnumerator
     lpVtbl : IOpcCertificateEnumeratorVTbl*
   end
@@ -600,6 +646,8 @@ lib LibWin32
     clone : Proc(IOpcDigitalSignatureEnumerator*, IOpcDigitalSignatureEnumerator*, HRESULT)
   end
 
+  IOpcDigitalSignatureEnumerator_GUID = LibC::GUID.new("967b6882-0ba3-4358-b9e7-b64c75063c5e")
+  CLSID_IOpcDigitalSignatureEnumerator = "967b6882-0ba3-4358-b9e7-b64c75063c5e"
   struct IOpcDigitalSignatureEnumerator
     lpVtbl : IOpcDigitalSignatureEnumeratorVTbl*
   end
@@ -613,6 +661,8 @@ lib LibWin32
     get_enumerator : Proc(IOpcSignaturePartReferenceSet*, IOpcSignaturePartReferenceEnumerator*, HRESULT)
   end
 
+  IOpcSignaturePartReferenceSet_GUID = LibC::GUID.new("6c9fe28c-ecd9-4b22-9d36-7fdde670fec0")
+  CLSID_IOpcSignaturePartReferenceSet = "6c9fe28c-ecd9-4b22-9d36-7fdde670fec0"
   struct IOpcSignaturePartReferenceSet
     lpVtbl : IOpcSignaturePartReferenceSetVTbl*
   end
@@ -627,6 +677,8 @@ lib LibWin32
     get_enumerator : Proc(IOpcSignatureRelationshipReferenceSet*, IOpcSignatureRelationshipReferenceEnumerator*, HRESULT)
   end
 
+  IOpcSignatureRelationshipReferenceSet_GUID = LibC::GUID.new("9f863ca5-3631-404c-828d-807e0715069b")
+  CLSID_IOpcSignatureRelationshipReferenceSet = "9f863ca5-3631-404c-828d-807e0715069b"
   struct IOpcSignatureRelationshipReferenceSet
     lpVtbl : IOpcSignatureRelationshipReferenceSetVTbl*
   end
@@ -640,6 +692,8 @@ lib LibWin32
     get_enumerator : Proc(IOpcRelationshipSelectorSet*, IOpcRelationshipSelectorEnumerator*, HRESULT)
   end
 
+  IOpcRelationshipSelectorSet_GUID = LibC::GUID.new("6e34c269-a4d3-47c0-b5c4-87ff2b3b6136")
+  CLSID_IOpcRelationshipSelectorSet = "6e34c269-a4d3-47c0-b5c4-87ff2b3b6136"
   struct IOpcRelationshipSelectorSet
     lpVtbl : IOpcRelationshipSelectorSetVTbl*
   end
@@ -653,6 +707,8 @@ lib LibWin32
     get_enumerator : Proc(IOpcSignatureReferenceSet*, IOpcSignatureReferenceEnumerator*, HRESULT)
   end
 
+  IOpcSignatureReferenceSet_GUID = LibC::GUID.new("f3b02d31-ab12-42dd-9e2f-2b16761c3c1e")
+  CLSID_IOpcSignatureReferenceSet = "f3b02d31-ab12-42dd-9e2f-2b16761c3c1e"
   struct IOpcSignatureReferenceSet
     lpVtbl : IOpcSignatureReferenceSetVTbl*
   end
@@ -666,6 +722,8 @@ lib LibWin32
     get_enumerator : Proc(IOpcSignatureCustomObjectSet*, IOpcSignatureCustomObjectEnumerator*, HRESULT)
   end
 
+  IOpcSignatureCustomObjectSet_GUID = LibC::GUID.new("8f792ac5-7947-4e11-bc3d-2659ff046ae1")
+  CLSID_IOpcSignatureCustomObjectSet = "8f792ac5-7947-4e11-bc3d-2659ff046ae1"
   struct IOpcSignatureCustomObjectSet
     lpVtbl : IOpcSignatureCustomObjectSetVTbl*
   end
@@ -679,6 +737,8 @@ lib LibWin32
     get_enumerator : Proc(IOpcCertificateSet*, IOpcCertificateEnumerator*, HRESULT)
   end
 
+  IOpcCertificateSet_GUID = LibC::GUID.new("56ea4325-8e2d-4167-b1a4-e486d24c8fa7")
+  CLSID_IOpcCertificateSet = "56ea4325-8e2d-4167-b1a4-e486d24c8fa7"
   struct IOpcCertificateSet
     lpVtbl : IOpcCertificateSetVTbl*
   end
@@ -696,6 +756,8 @@ lib LibWin32
     create_digital_signature_manager : Proc(IOpcFactory*, IOpcPackage, IOpcDigitalSignatureManager*, HRESULT)
   end
 
+  IOpcFactory_GUID = LibC::GUID.new("6d0b4446-cd73-4ab3-94f4-8ccdf6116154")
+  CLSID_IOpcFactory = "6d0b4446-cd73-4ab3-94f4-8ccdf6116154"
   struct IOpcFactory
     lpVtbl : IOpcFactoryVTbl*
   end

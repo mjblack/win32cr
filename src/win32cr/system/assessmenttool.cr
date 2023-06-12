@@ -67,6 +67,8 @@ lib LibWin32
     get_description : Proc(IProvideWinSATAssessmentInfo*, UInt8**, HRESULT)
   end
 
+  IProvideWinSATAssessmentInfo_GUID = LibC::GUID.new("0cd1c380-52d3-4678-ac6f-e929e480be9e")
+  CLSID_IProvideWinSATAssessmentInfo = "0cd1c380-52d3-4678-ac6f-e929e480be9e"
   struct IProvideWinSATAssessmentInfo
     lpVtbl : IProvideWinSATAssessmentInfoVTbl*
   end
@@ -86,6 +88,8 @@ lib LibWin32
     get_rating_state_desc : Proc(IProvideWinSATResultsInfo*, UInt8**, HRESULT)
   end
 
+  IProvideWinSATResultsInfo_GUID = LibC::GUID.new("f8334d5d-568e-4075-875f-9df341506640")
+  CLSID_IProvideWinSATResultsInfo = "f8334d5d-568e-4075-875f-9df341506640"
   struct IProvideWinSATResultsInfo
     lpVtbl : IProvideWinSATResultsInfoVTbl*
   end
@@ -102,6 +106,8 @@ lib LibWin32
     get_info : Proc(IQueryRecentWinSATAssessment*, IProvideWinSATResultsInfo*, HRESULT)
   end
 
+  IQueryRecentWinSATAssessment_GUID = LibC::GUID.new("f8ad5d1f-3b47-4bdc-9375-7c6b1da4eca7")
+  CLSID_IQueryRecentWinSATAssessment = "f8ad5d1f-3b47-4bdc-9375-7c6b1da4eca7"
   struct IQueryRecentWinSATAssessment
     lpVtbl : IQueryRecentWinSATAssessmentVTbl*
   end
@@ -113,6 +119,8 @@ lib LibWin32
     get_bitmap : Proc(IProvideWinSATVisuals*, WINSAT_BITMAP_SIZE, WINSAT_ASSESSMENT_STATE, Float32, HBITMAP*, HRESULT)
   end
 
+  IProvideWinSATVisuals_GUID = LibC::GUID.new("a9f4ade0-871a-42a3-b813-3078d25162c9")
+  CLSID_IProvideWinSATVisuals = "a9f4ade0-871a-42a3-b813-3078d25162c9"
   struct IProvideWinSATVisuals
     lpVtbl : IProvideWinSATVisualsVTbl*
   end
@@ -128,6 +136,8 @@ lib LibWin32
     get_all_xml : Proc(IQueryAllWinSATAssessments*, UInt8*, UInt8*, IXMLDOMNodeList*, HRESULT)
   end
 
+  IQueryAllWinSATAssessments_GUID = LibC::GUID.new("0b89ed1d-6398-4fea-87fc-567d8d19176f")
+  CLSID_IQueryAllWinSATAssessments = "0b89ed1d-6398-4fea-87fc-567d8d19176f"
   struct IQueryAllWinSATAssessments
     lpVtbl : IQueryAllWinSATAssessmentsVTbl*
   end
@@ -140,6 +150,8 @@ lib LibWin32
     win_sat_update : Proc(IWinSATInitiateEvents*, UInt32, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IWinSATInitiateEvents_GUID = LibC::GUID.new("262a1918-ba0d-41d5-92c2-fab4633ee74f")
+  CLSID_IWinSATInitiateEvents = "262a1918-ba0d-41d5-92c2-fab4633ee74f"
   struct IWinSATInitiateEvents
     lpVtbl : IWinSATInitiateEventsVTbl*
   end
@@ -153,6 +165,8 @@ lib LibWin32
     cancel_assessment : Proc(IInitiateWinSATAssessment*, HRESULT)
   end
 
+  IInitiateWinSATAssessment_GUID = LibC::GUID.new("d983fc50-f5bf-49d5-b5ed-cccb18aa7fc1")
+  CLSID_IInitiateWinSATAssessment = "d983fc50-f5bf-49d5-b5ed-cccb18aa7fc1"
   struct IInitiateWinSATAssessment
     lpVtbl : IInitiateWinSATAssessmentVTbl*
   end
@@ -189,6 +203,8 @@ lib LibWin32
     set_accessiblity_data : Proc(IAccessibleWinSAT*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IAccessibleWinSAT_GUID = LibC::GUID.new("30e6018a-94a8-4ff8-a69a-71b67413f07b")
+  CLSID_IAccessibleWinSAT = "30e6018a-94a8-4ff8-a69a-71b67413f07b"
   struct IAccessibleWinSAT
     lpVtbl : IAccessibleWinSATVTbl*
   end
@@ -200,6 +216,8 @@ lib LibWin32
     get_oem_pre_population_info : Proc(IQueryOEMWinSATCustomization*, WINSAT_OEM_DATA_TYPE*, HRESULT)
   end
 
+  IQueryOEMWinSATCustomization_GUID = LibC::GUID.new("bc9a6a9f-ad4e-420e-9953-b34671e9df22")
+  CLSID_IQueryOEMWinSATCustomization = "bc9a6a9f-ad4e-420e-9953-b34671e9df22"
   struct IQueryOEMWinSATCustomization
     lpVtbl : IQueryOEMWinSATCustomizationVTbl*
   end

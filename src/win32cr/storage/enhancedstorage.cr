@@ -1376,6 +1376,8 @@ lib LibWin32
     get_matching_act : Proc(IEnumEnhancedStorageACT*, LibC::LPWSTR, IEnhancedStorageACT*, HRESULT)
   end
 
+  IEnumEnhancedStorageACT_GUID = LibC::GUID.new("09b224bd-1335-4631-a7ff-cfd3a92646d7")
+  CLSID_IEnumEnhancedStorageACT = "09b224bd-1335-4631-a7ff-cfd3a92646d7"
   struct IEnumEnhancedStorageACT
     lpVtbl : IEnumEnhancedStorageACTVTbl*
   end
@@ -1392,6 +1394,8 @@ lib LibWin32
     get_silos : Proc(IEnhancedStorageACT*, IEnhancedStorageSilo**, UInt32*, HRESULT)
   end
 
+  IEnhancedStorageACT_GUID = LibC::GUID.new("6e7781f4-e0f2-4239-b976-a01abab52930")
+  CLSID_IEnhancedStorageACT = "6e7781f4-e0f2-4239-b976-a01abab52930"
   struct IEnhancedStorageACT
     lpVtbl : IEnhancedStorageACTVTbl*
   end
@@ -1410,6 +1414,8 @@ lib LibWin32
     is_device_removable : Proc(IEnhancedStorageACT2*, LibC::BOOL*, HRESULT)
   end
 
+  IEnhancedStorageACT2_GUID = LibC::GUID.new("4da57d2e-8eb3-41f6-a07e-98b52b88242b")
+  CLSID_IEnhancedStorageACT2 = "4da57d2e-8eb3-41f6-a07e-98b52b88242b"
   struct IEnhancedStorageACT2
     lpVtbl : IEnhancedStorageACT2VTbl*
   end
@@ -1431,6 +1437,8 @@ lib LibWin32
     get_shell_ext_support : Proc(IEnhancedStorageACT3*, LibC::BOOL*, HRESULT)
   end
 
+  IEnhancedStorageACT3_GUID = LibC::GUID.new("022150a1-113d-11df-bb61-001aa01bbc58")
+  CLSID_IEnhancedStorageACT3 = "022150a1-113d-11df-bb61-001aa01bbc58"
   struct IEnhancedStorageACT3
     lpVtbl : IEnhancedStorageACT3VTbl*
   end
@@ -1446,6 +1454,8 @@ lib LibWin32
     get_device_path : Proc(IEnhancedStorageSilo*, LibC::LPWSTR*, HRESULT)
   end
 
+  IEnhancedStorageSilo_GUID = LibC::GUID.new("5aef78c6-2242-4703-bf49-44b29357a359")
+  CLSID_IEnhancedStorageSilo = "5aef78c6-2242-4703-bf49-44b29357a359"
   struct IEnhancedStorageSilo
     lpVtbl : IEnhancedStorageSiloVTbl*
   end
@@ -1459,6 +1469,8 @@ lib LibWin32
     invoke : Proc(IEnhancedStorageSiloAction*, HRESULT)
   end
 
+  IEnhancedStorageSiloAction_GUID = LibC::GUID.new("b6f7f311-206f-4ff8-9c4b-27efee77a86f")
+  CLSID_IEnhancedStorageSiloAction = "b6f7f311-206f-4ff8-9c4b-27efee77a86f"
   struct IEnhancedStorageSiloAction
     lpVtbl : IEnhancedStorageSiloActionVTbl*
   end

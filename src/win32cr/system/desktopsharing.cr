@@ -254,6 +254,8 @@ lib LibWin32
     get_clx_cmd_line : Proc(IRDPSRAPIDebug*, UInt8**, HRESULT)
   end
 
+  IRDPSRAPIDebug_GUID = LibC::GUID.new("aa1e42b5-496d-4ca4-a690-348dcb2ec4ad")
+  CLSID_IRDPSRAPIDebug = "aa1e42b5-496d-4ca4-a690-348dcb2ec4ad"
   struct IRDPSRAPIDebug
     lpVtbl : IRDPSRAPIDebugVTbl*
   end
@@ -265,6 +267,8 @@ lib LibWin32
     log_value : Proc(IRDPSRAPIPerfCounterLogger*, Int64, HRESULT)
   end
 
+  IRDPSRAPIPerfCounterLogger_GUID = LibC::GUID.new("071c2533-0fa4-4e8f-ae83-9c10b4305ab5")
+  CLSID_IRDPSRAPIPerfCounterLogger = "071c2533-0fa4-4e8f-ae83-9c10b4305ab5"
   struct IRDPSRAPIPerfCounterLogger
     lpVtbl : IRDPSRAPIPerfCounterLoggerVTbl*
   end
@@ -276,6 +280,8 @@ lib LibWin32
     create_logger : Proc(IRDPSRAPIPerfCounterLoggingManager*, UInt8*, IRDPSRAPIPerfCounterLogger*, HRESULT)
   end
 
+  IRDPSRAPIPerfCounterLoggingManager_GUID = LibC::GUID.new("9a512c86-ac6e-4a8e-b1a4-fcef363f6e64")
+  CLSID_IRDPSRAPIPerfCounterLoggingManager = "9a512c86-ac6e-4a8e-b1a4-fcef363f6e64"
   struct IRDPSRAPIPerfCounterLoggingManager
     lpVtbl : IRDPSRAPIPerfCounterLoggingManagerVTbl*
   end
@@ -291,6 +297,8 @@ lib LibWin32
     free_buffer : Proc(IRDPSRAPIAudioStream*, HRESULT)
   end
 
+  IRDPSRAPIAudioStream_GUID = LibC::GUID.new("e3e30ef9-89c6-4541-ba3b-19336ac6d31c")
+  CLSID_IRDPSRAPIAudioStream = "e3e30ef9-89c6-4541-ba3b-19336ac6d31c"
   struct IRDPSRAPIAudioStream
     lpVtbl : IRDPSRAPIAudioStreamVTbl*
   end
@@ -302,6 +310,8 @@ lib LibWin32
     on_paste_from_clipboard : Proc(IRDPSRAPIClipboardUseEvents*, UInt32, IDispatch, Int16*, HRESULT)
   end
 
+  IRDPSRAPIClipboardUseEvents_GUID = LibC::GUID.new("d559f59a-7a27-4138-8763-247ce5f659a8")
+  CLSID_IRDPSRAPIClipboardUseEvents = "d559f59a-7a27-4138-8763-247ce5f659a8"
   struct IRDPSRAPIClipboardUseEvents
     lpVtbl : IRDPSRAPIClipboardUseEventsVTbl*
   end
@@ -323,6 +333,8 @@ lib LibWin32
     get_flags : Proc(IRDPSRAPIWindow*, UInt32*, HRESULT)
   end
 
+  IRDPSRAPIWindow_GUID = LibC::GUID.new("beafe0f9-c77b-4933-ba9f-a24cddcc27cf")
+  CLSID_IRDPSRAPIWindow = "beafe0f9-c77b-4933-ba9f-a24cddcc27cf"
   struct IRDPSRAPIWindow
     lpVtbl : IRDPSRAPIWindowVTbl*
   end
@@ -339,6 +351,8 @@ lib LibWin32
     get_item : Proc(IRDPSRAPIWindowList*, Int32, IRDPSRAPIWindow*, HRESULT)
   end
 
+  IRDPSRAPIWindowList_GUID = LibC::GUID.new("8a05ce44-715a-4116-a189-a118f30a07bd")
+  CLSID_IRDPSRAPIWindowList = "8a05ce44-715a-4116-a189-a118f30a07bd"
   struct IRDPSRAPIWindowList
     lpVtbl : IRDPSRAPIWindowListVTbl*
   end
@@ -359,6 +373,8 @@ lib LibWin32
     get_flags : Proc(IRDPSRAPIApplication*, UInt32*, HRESULT)
   end
 
+  IRDPSRAPIApplication_GUID = LibC::GUID.new("41e7a09d-eb7a-436e-935d-780ca2628324")
+  CLSID_IRDPSRAPIApplication = "41e7a09d-eb7a-436e-935d-780ca2628324"
   struct IRDPSRAPIApplication
     lpVtbl : IRDPSRAPIApplicationVTbl*
   end
@@ -375,6 +391,8 @@ lib LibWin32
     get_item : Proc(IRDPSRAPIApplicationList*, Int32, IRDPSRAPIApplication*, HRESULT)
   end
 
+  IRDPSRAPIApplicationList_GUID = LibC::GUID.new("d4b4aeb3-22dc-4837-b3b6-42ea2517849a")
+  CLSID_IRDPSRAPIApplicationList = "d4b4aeb3-22dc-4837-b3b6-42ea2517849a"
   struct IRDPSRAPIApplicationList
     lpVtbl : IRDPSRAPIApplicationListVTbl*
   end
@@ -393,6 +411,8 @@ lib LibWin32
     put_enabled : Proc(IRDPSRAPIApplicationFilter*, Int16, HRESULT)
   end
 
+  IRDPSRAPIApplicationFilter_GUID = LibC::GUID.new("d20f10ca-6637-4f06-b1d5-277ea7e5160d")
+  CLSID_IRDPSRAPIApplicationFilter = "d20f10ca-6637-4f06-b1d5-277ea7e5160d"
   struct IRDPSRAPIApplicationFilter
     lpVtbl : IRDPSRAPIApplicationFilterVTbl*
   end
@@ -409,6 +429,8 @@ lib LibWin32
     put_property : Proc(IRDPSRAPISessionProperties*, UInt8*, VARIANT, HRESULT)
   end
 
+  IRDPSRAPISessionProperties_GUID = LibC::GUID.new("339b24f2-9bc0-4f16-9aac-f165433d13d4")
+  CLSID_IRDPSRAPISessionProperties = "339b24f2-9bc0-4f16-9aac-f165433d13d4"
   struct IRDPSRAPISessionProperties
     lpVtbl : IRDPSRAPISessionPropertiesVTbl*
   end
@@ -430,6 +452,8 @@ lib LibWin32
     put_revoked : Proc(IRDPSRAPIInvitation*, Int16, HRESULT)
   end
 
+  IRDPSRAPIInvitation_GUID = LibC::GUID.new("4fac1d43-fc51-45bb-b1b4-2b53aa562fa3")
+  CLSID_IRDPSRAPIInvitation = "4fac1d43-fc51-45bb-b1b4-2b53aa562fa3"
   struct IRDPSRAPIInvitation
     lpVtbl : IRDPSRAPIInvitationVTbl*
   end
@@ -448,6 +472,8 @@ lib LibWin32
     create_invitation : Proc(IRDPSRAPIInvitationManager*, UInt8*, UInt8*, UInt8*, Int32, IRDPSRAPIInvitation*, HRESULT)
   end
 
+  IRDPSRAPIInvitationManager_GUID = LibC::GUID.new("4722b049-92c3-4c2d-8a65-f7348f644dcf")
+  CLSID_IRDPSRAPIInvitationManager = "4722b049-92c3-4c2d-8a65-f7348f644dcf"
   struct IRDPSRAPIInvitationManager
     lpVtbl : IRDPSRAPIInvitationManagerVTbl*
   end
@@ -467,6 +493,8 @@ lib LibWin32
     get_peer_ip : Proc(IRDPSRAPITcpConnectionInfo*, UInt8**, HRESULT)
   end
 
+  IRDPSRAPITcpConnectionInfo_GUID = LibC::GUID.new("f74049a4-3d06-4028-8193-0a8c29bc2452")
+  CLSID_IRDPSRAPITcpConnectionInfo = "f74049a4-3d06-4028-8193-0a8c29bc2452"
   struct IRDPSRAPITcpConnectionInfo
     lpVtbl : IRDPSRAPITcpConnectionInfoVTbl*
   end
@@ -489,6 +517,8 @@ lib LibWin32
     get_connectivity_info : Proc(IRDPSRAPIAttendee*, IUnknown*, HRESULT)
   end
 
+  IRDPSRAPIAttendee_GUID = LibC::GUID.new("ec0671b3-1b78-4b80-a464-9132247543e3")
+  CLSID_IRDPSRAPIAttendee = "ec0671b3-1b78-4b80-a464-9132247543e3"
   struct IRDPSRAPIAttendee
     lpVtbl : IRDPSRAPIAttendeeVTbl*
   end
@@ -505,6 +535,8 @@ lib LibWin32
     get_item : Proc(IRDPSRAPIAttendeeManager*, Int32, IRDPSRAPIAttendee*, HRESULT)
   end
 
+  IRDPSRAPIAttendeeManager_GUID = LibC::GUID.new("ba3a37e8-33da-4749-8da0-07fa34da7944")
+  CLSID_IRDPSRAPIAttendeeManager = "ba3a37e8-33da-4749-8da0-07fa34da7944"
   struct IRDPSRAPIAttendeeManager
     lpVtbl : IRDPSRAPIAttendeeManagerVTbl*
   end
@@ -522,6 +554,8 @@ lib LibWin32
     get_code : Proc(IRDPSRAPIAttendeeDisconnectInfo*, Int32*, HRESULT)
   end
 
+  IRDPSRAPIAttendeeDisconnectInfo_GUID = LibC::GUID.new("c187689f-447c-44a1-9c14-fffbb3b7ec17")
+  CLSID_IRDPSRAPIAttendeeDisconnectInfo = "c187689f-447c-44a1-9c14-fffbb3b7ec17"
   struct IRDPSRAPIAttendeeDisconnectInfo
     lpVtbl : IRDPSRAPIAttendeeDisconnectInfoVTbl*
   end
@@ -541,6 +575,8 @@ lib LibWin32
     get_priority : Proc(IRDPSRAPIVirtualChannel*, CHANNEL_PRIORITY*, HRESULT)
   end
 
+  IRDPSRAPIVirtualChannel_GUID = LibC::GUID.new("05e12f95-28b3-4c9a-8780-d0248574a1e0")
+  CLSID_IRDPSRAPIVirtualChannel = "05e12f95-28b3-4c9a-8780-d0248574a1e0"
   struct IRDPSRAPIVirtualChannel
     lpVtbl : IRDPSRAPIVirtualChannelVTbl*
   end
@@ -558,6 +594,8 @@ lib LibWin32
     create_virtual_channel : Proc(IRDPSRAPIVirtualChannelManager*, UInt8*, CHANNEL_PRIORITY, UInt32, IRDPSRAPIVirtualChannel*, HRESULT)
   end
 
+  IRDPSRAPIVirtualChannelManager_GUID = LibC::GUID.new("0d11c661-5d0d-4ee4-89df-2166ae1fdfed")
+  CLSID_IRDPSRAPIVirtualChannelManager = "0d11c661-5d0d-4ee4-89df-2166ae1fdfed"
   struct IRDPSRAPIVirtualChannelManager
     lpVtbl : IRDPSRAPIVirtualChannelManagerVTbl*
   end
@@ -586,6 +624,8 @@ lib LibWin32
     start_reverse_connect_listener : Proc(IRDPSRAPIViewer*, UInt8*, UInt8*, UInt8*, UInt8**, HRESULT)
   end
 
+  IRDPSRAPIViewer_GUID = LibC::GUID.new("c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5")
+  CLSID_IRDPSRAPIViewer = "c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5"
   struct IRDPSRAPIViewer
     lpVtbl : IRDPSRAPIViewerVTbl*
   end
@@ -604,6 +644,8 @@ lib LibWin32
     end_touch_frame : Proc(IRDPViewerInputSink*, HRESULT)
   end
 
+  IRDPViewerInputSink_GUID = LibC::GUID.new("bb590853-a6c5-4a7b-8dd4-76b69eea12d5")
+  CLSID_IRDPViewerInputSink = "bb590853-a6c5-4a7b-8dd4-76b69eea12d5"
   struct IRDPViewerInputSink
     lpVtbl : IRDPViewerInputSinkVTbl*
   end
@@ -622,6 +664,8 @@ lib LibWin32
     get_frame_buffer_bits : Proc(IRDPSRAPIFrameBuffer*, Int32, Int32, Int32, Int32, SAFEARRAY**, HRESULT)
   end
 
+  IRDPSRAPIFrameBuffer_GUID = LibC::GUID.new("3d67e7d2-b27b-448e-81b3-c6110ed8b4be")
+  CLSID_IRDPSRAPIFrameBuffer = "3d67e7d2-b27b-448e-81b3-c6110ed8b4be"
   struct IRDPSRAPIFrameBuffer
     lpVtbl : IRDPSRAPIFrameBufferVTbl*
   end
@@ -642,6 +686,8 @@ lib LibWin32
     put_context : Proc(IRDPSRAPITransportStreamBuffer*, IUnknown, HRESULT)
   end
 
+  IRDPSRAPITransportStreamBuffer_GUID = LibC::GUID.new("81c80290-5085-44b0-b460-f865c39cb4a9")
+  CLSID_IRDPSRAPITransportStreamBuffer = "81c80290-5085-44b0-b460-f865c39cb4a9"
   struct IRDPSRAPITransportStreamBuffer
     lpVtbl : IRDPSRAPITransportStreamBufferVTbl*
   end
@@ -655,6 +701,8 @@ lib LibWin32
     on_stream_closed : Proc(IRDPSRAPITransportStreamEvents*, HRESULT, Void)
   end
 
+  IRDPSRAPITransportStreamEvents_GUID = LibC::GUID.new("ea81c254-f5af-4e40-982e-3e63bb595276")
+  CLSID_IRDPSRAPITransportStreamEvents = "ea81c254-f5af-4e40-982e-3e63bb595276"
   struct IRDPSRAPITransportStreamEvents
     lpVtbl : IRDPSRAPITransportStreamEventsVTbl*
   end
@@ -671,6 +719,8 @@ lib LibWin32
     close : Proc(IRDPSRAPITransportStream*, HRESULT)
   end
 
+  IRDPSRAPITransportStream_GUID = LibC::GUID.new("36cfa065-43bb-4ef7-aed7-9b88a5053036")
+  CLSID_IRDPSRAPITransportStream = "36cfa065-43bb-4ef7-aed7-9b88a5053036"
   struct IRDPSRAPITransportStream
     lpVtbl : IRDPSRAPITransportStreamVTbl*
   end
@@ -699,6 +749,8 @@ lib LibWin32
     get_desktop_shared_rect : Proc(IRDPSRAPISharingSession*, Int32*, Int32*, Int32*, Int32*, HRESULT)
   end
 
+  IRDPSRAPISharingSession_GUID = LibC::GUID.new("eeb20886-e470-4cf6-842b-2739c0ec5cfb")
+  CLSID_IRDPSRAPISharingSession = "eeb20886-e470-4cf6-842b-2739c0ec5cfb"
   struct IRDPSRAPISharingSession
     lpVtbl : IRDPSRAPISharingSessionVTbl*
   end
@@ -730,6 +782,8 @@ lib LibWin32
     send_control_level_change_response : Proc(IRDPSRAPISharingSession2*, IRDPSRAPIAttendee, CTRL_LEVEL, Int32, HRESULT)
   end
 
+  IRDPSRAPISharingSession2_GUID = LibC::GUID.new("fee4ee57-e3e8-4205-8fb0-8fd1d0675c21")
+  CLSID_IRDPSRAPISharingSession2 = "fee4ee57-e3e8-4205-8fb0-8fd1d0675c21"
   struct IRDPSRAPISharingSession2
     lpVtbl : IRDPSRAPISharingSession2VTbl*
   end
@@ -744,6 +798,8 @@ lib LibWin32
     invoke : Proc(IIRDPSessionEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IIRDPSessionEvents_GUID = LibC::GUID.new("98a97042-6698-40e9-8efd-b3200990004b")
+  CLSID_IIRDPSessionEvents = "98a97042-6698-40e9-8efd-b3200990004b"
   struct IIRDPSessionEvents
     lpVtbl : IIRDPSessionEventsVTbl*
   end

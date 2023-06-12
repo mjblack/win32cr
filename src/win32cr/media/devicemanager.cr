@@ -653,6 +653,8 @@ lib LibWin32
     get_item_count : Proc(IWMDMMetaData*, UInt32*, HRESULT)
   end
 
+  IWMDMMetaData_GUID = LibC::GUID.new("ec3b0663-0951-460a-9a80-0dceed3c043c")
+  CLSID_IWMDMMetaData = "ec3b0663-0951-460a-9a80-0dceed3c043c"
   struct IWMDMMetaData
     lpVtbl : IWMDMMetaDataVTbl*
   end
@@ -666,6 +668,8 @@ lib LibWin32
     enum_devices : Proc(IWMDeviceManager*, IWMDMEnumDevice*, HRESULT)
   end
 
+  IWMDeviceManager_GUID = LibC::GUID.new("1dcb3a00-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDeviceManager = "1dcb3a00-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDeviceManager
     lpVtbl : IWMDeviceManagerVTbl*
   end
@@ -682,6 +686,8 @@ lib LibWin32
     reinitialize : Proc(IWMDeviceManager2*, HRESULT)
   end
 
+  IWMDeviceManager2_GUID = LibC::GUID.new("923e5249-8731-4c5b-9b1c-b8b60b6e46af")
+  CLSID_IWMDeviceManager2 = "923e5249-8731-4c5b-9b1c-b8b60b6e46af"
   struct IWMDeviceManager2
     lpVtbl : IWMDeviceManager2VTbl*
   end
@@ -699,6 +705,8 @@ lib LibWin32
     set_device_enum_preference : Proc(IWMDeviceManager3*, UInt32, HRESULT)
   end
 
+  IWMDeviceManager3_GUID = LibC::GUID.new("af185c41-100d-46ed-be2e-9ce8c44594ef")
+  CLSID_IWMDeviceManager3 = "af185c41-100d-46ed-be2e-9ce8c44594ef"
   struct IWMDeviceManager3
     lpVtbl : IWMDeviceManager3VTbl*
   end
@@ -716,6 +724,8 @@ lib LibWin32
     initialize : Proc(IWMDMStorageGlobals*, UInt32, IWMDMProgress, HRESULT)
   end
 
+  IWMDMStorageGlobals_GUID = LibC::GUID.new("1dcb3a07-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMStorageGlobals = "1dcb3a07-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMStorageGlobals
     lpVtbl : IWMDMStorageGlobalsVTbl*
   end
@@ -735,6 +745,8 @@ lib LibWin32
     send_opaque_command : Proc(IWMDMStorage*, OPAQUECOMMAND*, HRESULT)
   end
 
+  IWMDMStorage_GUID = LibC::GUID.new("1dcb3a06-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMStorage = "1dcb3a06-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMStorage
     lpVtbl : IWMDMStorageVTbl*
   end
@@ -757,6 +769,8 @@ lib LibWin32
     get_attributes2 : Proc(IWMDMStorage2*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
   end
 
+  IWMDMStorage2_GUID = LibC::GUID.new("1ed5a144-5cd5-4683-9eff-72cbdb2d9533")
+  CLSID_IWMDMStorage2 = "1ed5a144-5cd5-4683-9eff-72cbdb2d9533"
   struct IWMDMStorage2
     lpVtbl : IWMDMStorage2VTbl*
   end
@@ -783,6 +797,8 @@ lib LibWin32
     set_enum_preference : Proc(IWMDMStorage3*, WMDM_STORAGE_ENUM_MODE*, UInt32, WMDMMetadataView*, HRESULT)
   end
 
+  IWMDMStorage3_GUID = LibC::GUID.new("97717eea-926a-464e-96a4-247b0216026e")
+  CLSID_IWMDMStorage3 = "97717eea-926a-464e-96a4-247b0216026e"
   struct IWMDMStorage3
     lpVtbl : IWMDMStorage3VTbl*
   end
@@ -815,6 +831,8 @@ lib LibWin32
     get_parent : Proc(IWMDMStorage4*, IWMDMStorage*, HRESULT)
   end
 
+  IWMDMStorage4_GUID = LibC::GUID.new("c225bac5-a03a-40b8-9a23-91cf478c64a6")
+  CLSID_IWMDMStorage4 = "c225bac5-a03a-40b8-9a23-91cf478c64a6"
   struct IWMDMStorage4
     lpVtbl : IWMDMStorage4VTbl*
   end
@@ -835,6 +853,8 @@ lib LibWin32
     rend : Proc(IWMDMOperation*, HRESULT*, IUnknown, HRESULT)
   end
 
+  IWMDMOperation_GUID = LibC::GUID.new("1dcb3a0b-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMOperation = "1dcb3a0b-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMOperation
     lpVtbl : IWMDMOperationVTbl*
   end
@@ -857,6 +877,8 @@ lib LibWin32
     get_object_attributes2 : Proc(IWMDMOperation2*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
   end
 
+  IWMDMOperation2_GUID = LibC::GUID.new("33445b48-7df7-425c-ad8f-0fc6d82f9f75")
+  CLSID_IWMDMOperation2 = "33445b48-7df7-425c-ad8f-0fc6d82f9f75"
   struct IWMDMOperation2
     lpVtbl : IWMDMOperation2VTbl*
   end
@@ -878,6 +900,8 @@ lib LibWin32
     transfer_object_data_on_clear_channel : Proc(IWMDMOperation3*, UInt8*, UInt32*, HRESULT)
   end
 
+  IWMDMOperation3_GUID = LibC::GUID.new("d1f9b46a-9ca8-46d8-9d0f-1ec9bae54919")
+  CLSID_IWMDMOperation3 = "d1f9b46a-9ca8-46d8-9d0f-1ec9bae54919"
   struct IWMDMOperation3
     lpVtbl : IWMDMOperation3VTbl*
   end
@@ -891,6 +915,8 @@ lib LibWin32
     rend : Proc(IWMDMProgress*, HRESULT)
   end
 
+  IWMDMProgress_GUID = LibC::GUID.new("1dcb3a0c-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMProgress = "1dcb3a0c-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMProgress
     lpVtbl : IWMDMProgressVTbl*
   end
@@ -905,6 +931,8 @@ lib LibWin32
     end2 : Proc(IWMDMProgress2*, HRESULT, HRESULT)
   end
 
+  IWMDMProgress2_GUID = LibC::GUID.new("3a43f550-b383-4e92-b04a-e6bbc660fefc")
+  CLSID_IWMDMProgress2 = "3a43f550-b383-4e92-b04a-e6bbc660fefc"
   struct IWMDMProgress2
     lpVtbl : IWMDMProgress2VTbl*
   end
@@ -922,6 +950,8 @@ lib LibWin32
     end3 : Proc(IWMDMProgress3*, Guid, HRESULT, OPAQUECOMMAND*, HRESULT)
   end
 
+  IWMDMProgress3_GUID = LibC::GUID.new("21de01cb-3bb4-4929-b21a-17af3f80f658")
+  CLSID_IWMDMProgress3 = "21de01cb-3bb4-4929-b21a-17af3f80f658"
   struct IWMDMProgress3
     lpVtbl : IWMDMProgress3VTbl*
   end
@@ -943,6 +973,8 @@ lib LibWin32
     send_opaque_command : Proc(IWMDMDevice*, OPAQUECOMMAND*, HRESULT)
   end
 
+  IWMDMDevice_GUID = LibC::GUID.new("1dcb3a02-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMDevice = "1dcb3a02-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMDevice
     lpVtbl : IWMDMDeviceVTbl*
   end
@@ -968,6 +1000,8 @@ lib LibWin32
     get_canonical_name : Proc(IWMDMDevice2*, Char*, UInt32, HRESULT)
   end
 
+  IWMDMDevice2_GUID = LibC::GUID.new("e34f3d37-9d67-4fc1-9252-62d28b2f8b55")
+  CLSID_IWMDMDevice2 = "e34f3d37-9d67-4fc1-9252-62d28b2f8b55"
   struct IWMDMDevice2
     lpVtbl : IWMDMDevice2VTbl*
   end
@@ -998,6 +1032,8 @@ lib LibWin32
     find_storage : Proc(IWMDMDevice3*, WMDM_FIND_SCOPE, LibC::LPWSTR, IWMDMStorage*, HRESULT)
   end
 
+  IWMDMDevice3_GUID = LibC::GUID.new("6c03e4fe-05db-4dda-9e3c-06233a6d5d65")
+  CLSID_IWMDMDevice3 = "6c03e4fe-05db-4dda-9e3c-06233a6d5d65"
   struct IWMDMDevice3
     lpVtbl : IWMDMDevice3VTbl*
   end
@@ -1010,6 +1046,8 @@ lib LibWin32
     end_session : Proc(IWMDMDeviceSession*, WMDM_SESSION_TYPE, UInt8*, UInt32, HRESULT)
   end
 
+  IWMDMDeviceSession_GUID = LibC::GUID.new("82af0a65-9d96-412c-83e5-3c43e4b06cc7")
+  CLSID_IWMDMDeviceSession = "82af0a65-9d96-412c-83e5-3c43e4b06cc7"
   struct IWMDMDeviceSession
     lpVtbl : IWMDMDeviceSessionVTbl*
   end
@@ -1024,6 +1062,8 @@ lib LibWin32
     clone : Proc(IWMDMEnumDevice*, IWMDMEnumDevice*, HRESULT)
   end
 
+  IWMDMEnumDevice_GUID = LibC::GUID.new("1dcb3a01-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMEnumDevice = "1dcb3a01-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMEnumDevice
     lpVtbl : IWMDMEnumDeviceVTbl*
   end
@@ -1042,6 +1082,8 @@ lib LibWin32
     seek : Proc(IWMDMDeviceControl*, UInt32, Int32, HRESULT)
   end
 
+  IWMDMDeviceControl_GUID = LibC::GUID.new("1dcb3a04-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMDeviceControl = "1dcb3a04-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMDeviceControl
     lpVtbl : IWMDMDeviceControlVTbl*
   end
@@ -1056,6 +1098,8 @@ lib LibWin32
     clone : Proc(IWMDMEnumStorage*, IWMDMEnumStorage*, HRESULT)
   end
 
+  IWMDMEnumStorage_GUID = LibC::GUID.new("1dcb3a05-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMEnumStorage = "1dcb3a05-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMEnumStorage
     lpVtbl : IWMDMEnumStorageVTbl*
   end
@@ -1071,6 +1115,8 @@ lib LibWin32
     move : Proc(IWMDMStorageControl*, UInt32, IWMDMStorage, IWMDMProgress, HRESULT)
   end
 
+  IWMDMStorageControl_GUID = LibC::GUID.new("1dcb3a08-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMStorageControl = "1dcb3a08-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMStorageControl
     lpVtbl : IWMDMStorageControlVTbl*
   end
@@ -1087,6 +1133,8 @@ lib LibWin32
     insert2 : Proc(IWMDMStorageControl2*, UInt32, LibC::LPWSTR, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IUnknown, IWMDMStorage*, HRESULT)
   end
 
+  IWMDMStorageControl2_GUID = LibC::GUID.new("972c2e88-bd6c-4125-8e09-84f837e637b6")
+  CLSID_IWMDMStorageControl2 = "972c2e88-bd6c-4125-8e09-84f837e637b6"
   struct IWMDMStorageControl2
     lpVtbl : IWMDMStorageControl2VTbl*
   end
@@ -1104,6 +1152,8 @@ lib LibWin32
     insert3 : Proc(IWMDMStorageControl3*, UInt32, UInt32, LibC::LPWSTR, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMMetaData, IUnknown, IWMDMStorage*, HRESULT)
   end
 
+  IWMDMStorageControl3_GUID = LibC::GUID.new("b3266365-d4f3-4696-8d53-bd27ec60993a")
+  CLSID_IWMDMStorageControl3 = "b3266365-d4f3-4696-8d53-bd27ec60993a"
   struct IWMDMStorageControl3
     lpVtbl : IWMDMStorageControl3VTbl*
   end
@@ -1121,6 +1171,8 @@ lib LibWin32
     get_longest_play_position : Proc(IWMDMObjectInfo*, UInt32*, HRESULT)
   end
 
+  IWMDMObjectInfo_GUID = LibC::GUID.new("1dcb3a09-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IWMDMObjectInfo = "1dcb3a09-33ed-11d3-8470-00c04f79dbc0"
   struct IWMDMObjectInfo
     lpVtbl : IWMDMObjectInfoVTbl*
   end
@@ -1132,6 +1184,8 @@ lib LibWin32
     get_revocation_url : Proc(IWMDMRevoked*, LibC::LPWSTR*, UInt32*, UInt32*, HRESULT)
   end
 
+  IWMDMRevoked_GUID = LibC::GUID.new("ebeccedb-88ee-4e55-b6a4-8d9f07d696aa")
+  CLSID_IWMDMRevoked = "ebeccedb-88ee-4e55-b6a4-8d9f07d696aa"
   struct IWMDMRevoked
     lpVtbl : IWMDMRevokedVTbl*
   end
@@ -1143,6 +1197,8 @@ lib LibWin32
     wmdm_message : Proc(IWMDMNotification*, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IWMDMNotification_GUID = LibC::GUID.new("3f5e95c0-0f43-4ed4-93d2-c89a45d59b81")
+  CLSID_IWMDMNotification = "3f5e95c0-0f43-4ed4-93d2-c89a45d59b81"
   struct IWMDMNotification
     lpVtbl : IWMDMNotificationVTbl*
   end
@@ -1155,6 +1211,8 @@ lib LibWin32
     enum_devices : Proc(IMDServiceProvider*, IMDSPEnumDevice*, HRESULT)
   end
 
+  IMDServiceProvider_GUID = LibC::GUID.new("1dcb3a10-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDServiceProvider = "1dcb3a10-33ed-11d3-8470-00c04f79dbc0"
   struct IMDServiceProvider
     lpVtbl : IMDServiceProviderVTbl*
   end
@@ -1168,6 +1226,8 @@ lib LibWin32
     create_device : Proc(IMDServiceProvider2*, LibC::LPWSTR, UInt32*, IMDSPDevice**, HRESULT)
   end
 
+  IMDServiceProvider2_GUID = LibC::GUID.new("b2fa24b7-cda3-4694-9862-413ae1a34819")
+  CLSID_IMDServiceProvider2 = "b2fa24b7-cda3-4694-9862-413ae1a34819"
   struct IMDServiceProvider2
     lpVtbl : IMDServiceProvider2VTbl*
   end
@@ -1182,6 +1242,8 @@ lib LibWin32
     set_device_enum_preference : Proc(IMDServiceProvider3*, UInt32, HRESULT)
   end
 
+  IMDServiceProvider3_GUID = LibC::GUID.new("4ed13ef3-a971-4d19-9f51-0e1826b2da57")
+  CLSID_IMDServiceProvider3 = "4ed13ef3-a971-4d19-9f51-0e1826b2da57"
   struct IMDServiceProvider3
     lpVtbl : IMDServiceProvider3VTbl*
   end
@@ -1196,6 +1258,8 @@ lib LibWin32
     clone : Proc(IMDSPEnumDevice*, IMDSPEnumDevice*, HRESULT)
   end
 
+  IMDSPEnumDevice_GUID = LibC::GUID.new("1dcb3a11-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDSPEnumDevice = "1dcb3a11-33ed-11d3-8470-00c04f79dbc0"
   struct IMDSPEnumDevice
     lpVtbl : IMDSPEnumDeviceVTbl*
   end
@@ -1217,6 +1281,8 @@ lib LibWin32
     send_opaque_command : Proc(IMDSPDevice*, OPAQUECOMMAND*, HRESULT)
   end
 
+  IMDSPDevice_GUID = LibC::GUID.new("1dcb3a12-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDSPDevice = "1dcb3a12-33ed-11d3-8470-00c04f79dbc0"
   struct IMDSPDevice
     lpVtbl : IMDSPDeviceVTbl*
   end
@@ -1242,6 +1308,8 @@ lib LibWin32
     get_canonical_name : Proc(IMDSPDevice2*, Char*, UInt32, HRESULT)
   end
 
+  IMDSPDevice2_GUID = LibC::GUID.new("420d16ad-c97d-4e00-82aa-00e9f4335ddd")
+  CLSID_IMDSPDevice2 = "420d16ad-c97d-4e00-82aa-00e9f4335ddd"
   struct IMDSPDevice2
     lpVtbl : IMDSPDevice2VTbl*
   end
@@ -1272,6 +1340,8 @@ lib LibWin32
     find_storage : Proc(IMDSPDevice3*, WMDM_FIND_SCOPE, LibC::LPWSTR, IMDSPStorage*, HRESULT)
   end
 
+  IMDSPDevice3_GUID = LibC::GUID.new("1a839845-fc55-487c-976f-ee38ac0e8c4e")
+  CLSID_IMDSPDevice3 = "1a839845-fc55-487c-976f-ee38ac0e8c4e"
   struct IMDSPDevice3
     lpVtbl : IMDSPDevice3VTbl*
   end
@@ -1290,6 +1360,8 @@ lib LibWin32
     seek : Proc(IMDSPDeviceControl*, UInt32, Int32, HRESULT)
   end
 
+  IMDSPDeviceControl_GUID = LibC::GUID.new("1dcb3a14-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDSPDeviceControl = "1dcb3a14-33ed-11d3-8470-00c04f79dbc0"
   struct IMDSPDeviceControl
     lpVtbl : IMDSPDeviceControlVTbl*
   end
@@ -1304,6 +1376,8 @@ lib LibWin32
     clone : Proc(IMDSPEnumStorage*, IMDSPEnumStorage*, HRESULT)
   end
 
+  IMDSPEnumStorage_GUID = LibC::GUID.new("1dcb3a15-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDSPEnumStorage = "1dcb3a15-33ed-11d3-8470-00c04f79dbc0"
   struct IMDSPEnumStorage
     lpVtbl : IMDSPEnumStorageVTbl*
   end
@@ -1324,6 +1398,8 @@ lib LibWin32
     send_opaque_command : Proc(IMDSPStorage*, OPAQUECOMMAND*, HRESULT)
   end
 
+  IMDSPStorage_GUID = LibC::GUID.new("1dcb3a16-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDSPStorage = "1dcb3a16-33ed-11d3-8470-00c04f79dbc0"
   struct IMDSPStorage
     lpVtbl : IMDSPStorageVTbl*
   end
@@ -1348,6 +1424,8 @@ lib LibWin32
     get_attributes2 : Proc(IMDSPStorage2*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
   end
 
+  IMDSPStorage2_GUID = LibC::GUID.new("0a5e07a5-6454-4451-9c36-1c6ae7e2b1d6")
+  CLSID_IMDSPStorage2 = "0a5e07a5-6454-4451-9c36-1c6ae7e2b1d6"
   struct IMDSPStorage2
     lpVtbl : IMDSPStorage2VTbl*
   end
@@ -1374,6 +1452,8 @@ lib LibWin32
     set_metadata : Proc(IMDSPStorage3*, IWMDMMetaData, HRESULT)
   end
 
+  IMDSPStorage3_GUID = LibC::GUID.new("6c669867-97ed-4a67-9706-1c5529d2a414")
+  CLSID_IMDSPStorage3 = "6c669867-97ed-4a67-9706-1c5529d2a414"
   struct IMDSPStorage3
     lpVtbl : IMDSPStorage3VTbl*
   end
@@ -1406,6 +1486,8 @@ lib LibWin32
     get_parent : Proc(IMDSPStorage4*, IMDSPStorage*, HRESULT)
   end
 
+  IMDSPStorage4_GUID = LibC::GUID.new("3133b2c4-515c-481b-b1ce-39327ecb4f74")
+  CLSID_IMDSPStorage4 = "3133b2c4-515c-481b-b1ce-39327ecb4f74"
   struct IMDSPStorage4
     lpVtbl : IMDSPStorage4VTbl*
   end
@@ -1425,6 +1507,8 @@ lib LibWin32
     get_root_storage : Proc(IMDSPStorageGlobals*, IMDSPStorage*, HRESULT)
   end
 
+  IMDSPStorageGlobals_GUID = LibC::GUID.new("1dcb3a17-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDSPStorageGlobals = "1dcb3a17-33ed-11d3-8470-00c04f79dbc0"
   struct IMDSPStorageGlobals
     lpVtbl : IMDSPStorageGlobalsVTbl*
   end
@@ -1442,6 +1526,8 @@ lib LibWin32
     get_longest_play_position : Proc(IMDSPObjectInfo*, UInt32*, HRESULT)
   end
 
+  IMDSPObjectInfo_GUID = LibC::GUID.new("1dcb3a19-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDSPObjectInfo = "1dcb3a19-33ed-11d3-8470-00c04f79dbc0"
   struct IMDSPObjectInfo
     lpVtbl : IMDSPObjectInfoVTbl*
   end
@@ -1460,6 +1546,8 @@ lib LibWin32
     close : Proc(IMDSPObject*, HRESULT)
   end
 
+  IMDSPObject_GUID = LibC::GUID.new("1dcb3a18-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_IMDSPObject = "1dcb3a18-33ed-11d3-8470-00c04f79dbc0"
   struct IMDSPObject
     lpVtbl : IMDSPObjectVTbl*
   end
@@ -1480,6 +1568,8 @@ lib LibWin32
     write_on_clear_channel : Proc(IMDSPObject2*, UInt8*, UInt32*, HRESULT)
   end
 
+  IMDSPObject2_GUID = LibC::GUID.new("3f34cd3e-5907-4341-9af9-97f4187c3aa5")
+  CLSID_IMDSPObject2 = "3f34cd3e-5907-4341-9af9-97f4187c3aa5"
   struct IMDSPObject2
     lpVtbl : IMDSPObject2VTbl*
   end
@@ -1491,6 +1581,8 @@ lib LibWin32
     transfer_to_device : Proc(IMDSPDirectTransfer*, LibC::LPWSTR, IWMDMOperation, UInt32, LibC::LPWSTR, IWMDMMetaData, IWMDMProgress, IMDSPStorage*, HRESULT)
   end
 
+  IMDSPDirectTransfer_GUID = LibC::GUID.new("c2fe57a8-9304-478c-9ee4-47e397b912d7")
+  CLSID_IMDSPDirectTransfer = "c2fe57a8-9304-478c-9ee4-47e397b912d7"
   struct IMDSPDirectTransfer
     lpVtbl : IMDSPDirectTransferVTbl*
   end
@@ -1502,6 +1594,8 @@ lib LibWin32
     get_revocation_url : Proc(IMDSPRevoked*, LibC::LPWSTR*, UInt32*, HRESULT)
   end
 
+  IMDSPRevoked_GUID = LibC::GUID.new("a4e8f2d4-3f31-464d-b53d-4fc335998184")
+  CLSID_IMDSPRevoked = "a4e8f2d4-3f31-464d-b53d-4fc335998184"
   struct IMDSPRevoked
     lpVtbl : IMDSPRevokedVTbl*
   end
@@ -1513,6 +1607,8 @@ lib LibWin32
     get_secure_query : Proc(ISCPSecureAuthenticate*, ISCPSecureQuery*, HRESULT)
   end
 
+  ISCPSecureAuthenticate_GUID = LibC::GUID.new("1dcb3a0f-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_ISCPSecureAuthenticate = "1dcb3a0f-33ed-11d3-8470-00c04f79dbc0"
   struct ISCPSecureAuthenticate
     lpVtbl : ISCPSecureAuthenticateVTbl*
   end
@@ -1525,6 +1621,8 @@ lib LibWin32
     get_scp_session : Proc(ISCPSecureAuthenticate2*, ISCPSession*, HRESULT)
   end
 
+  ISCPSecureAuthenticate2_GUID = LibC::GUID.new("b580cfae-1672-47e2-acaa-44bbecbcae5b")
+  CLSID_ISCPSecureAuthenticate2 = "b580cfae-1672-47e2-acaa-44bbecbcae5b"
   struct ISCPSecureAuthenticate2
     lpVtbl : ISCPSecureAuthenticate2VTbl*
   end
@@ -1539,6 +1637,8 @@ lib LibWin32
     get_rights : Proc(ISCPSecureQuery*, UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
   end
 
+  ISCPSecureQuery_GUID = LibC::GUID.new("1dcb3a0d-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_ISCPSecureQuery = "1dcb3a0d-33ed-11d3-8470-00c04f79dbc0"
   struct ISCPSecureQuery
     lpVtbl : ISCPSecureQueryVTbl*
   end
@@ -1554,6 +1654,8 @@ lib LibWin32
     make_decision2 : Proc(ISCPSecureQuery2*, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR*, UInt32*, UInt32*, UInt64*, IUnknown, ISCPSecureExchange*, UInt8*, HRESULT)
   end
 
+  ISCPSecureQuery2_GUID = LibC::GUID.new("ebe17e25-4fd7-4632-af46-6d93d4fcc72e")
+  CLSID_ISCPSecureQuery2 = "ebe17e25-4fd7-4632-af46-6d93d4fcc72e"
   struct ISCPSecureQuery2
     lpVtbl : ISCPSecureQuery2VTbl*
   end
@@ -1567,6 +1669,8 @@ lib LibWin32
     transfer_complete : Proc(ISCPSecureExchange*, HRESULT)
   end
 
+  ISCPSecureExchange_GUID = LibC::GUID.new("1dcb3a0e-33ed-11d3-8470-00c04f79dbc0")
+  CLSID_ISCPSecureExchange = "1dcb3a0e-33ed-11d3-8470-00c04f79dbc0"
   struct ISCPSecureExchange
     lpVtbl : ISCPSecureExchangeVTbl*
   end
@@ -1581,6 +1685,8 @@ lib LibWin32
     transfer_container_data2 : Proc(ISCPSecureExchange2*, UInt8*, UInt32, IWMDMProgress3, UInt32*, UInt8*, HRESULT)
   end
 
+  ISCPSecureExchange2_GUID = LibC::GUID.new("6c62fc7b-2690-483f-9d44-0a20cb35577c")
+  CLSID_ISCPSecureExchange2 = "6c62fc7b-2690-483f-9d44-0a20cb35577c"
   struct ISCPSecureExchange2
     lpVtbl : ISCPSecureExchange2VTbl*
   end
@@ -1598,6 +1704,8 @@ lib LibWin32
     transfer_complete_for_device : Proc(ISCPSecureExchange3*, IMDSPDevice, HRESULT)
   end
 
+  ISCPSecureExchange3_GUID = LibC::GUID.new("ab4e77e4-8908-4b17-bd2a-b1dbe6dd69e1")
+  CLSID_ISCPSecureExchange3 = "ab4e77e4-8908-4b17-bd2a-b1dbe6dd69e1"
   struct ISCPSecureExchange3
     lpVtbl : ISCPSecureExchange3VTbl*
   end
@@ -1611,6 +1719,8 @@ lib LibWin32
     get_secure_query : Proc(ISCPSession*, ISCPSecureQuery*, HRESULT)
   end
 
+  ISCPSession_GUID = LibC::GUID.new("88a3e6ed-eee4-4619-bbb3-fd4fb62715d1")
+  CLSID_ISCPSession = "88a3e6ed-eee4-4619-bbb3-fd4fb62715d1"
   struct ISCPSession
     lpVtbl : ISCPSessionVTbl*
   end
@@ -1628,6 +1738,8 @@ lib LibWin32
     make_decision_on_clear_channel : Proc(ISCPSecureQuery3*, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, IWMDMProgress3, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR*, UInt32*, UInt32*, UInt64*, IUnknown, ISCPSecureExchange*, HRESULT)
   end
 
+  ISCPSecureQuery3_GUID = LibC::GUID.new("b7edd1a2-4dab-484b-b3c5-ad39b8b4c0b1")
+  CLSID_ISCPSecureQuery3 = "b7edd1a2-4dab-484b-b3c5-ad39b8b4c0b1"
   struct ISCPSecureQuery3
     lpVtbl : ISCPSecureQuery3VTbl*
   end
@@ -1640,6 +1752,8 @@ lib LibWin32
     sac_get_protocols : Proc(IComponentAuthenticate*, UInt32**, UInt32*, HRESULT)
   end
 
+  IComponentAuthenticate_GUID = LibC::GUID.new("a9889c00-6d2b-11d3-8496-00c04f79dbc0")
+  CLSID_IComponentAuthenticate = "a9889c00-6d2b-11d3-8496-00c04f79dbc0"
   struct IComponentAuthenticate
     lpVtbl : IComponentAuthenticateVTbl*
   end
@@ -1659,6 +1773,8 @@ lib LibWin32
     set_size_params : Proc(IWMDMLogger*, UInt32, UInt32, HRESULT)
   end
 
+  IWMDMLogger_GUID = LibC::GUID.new("110a3200-5a79-11d3-8d78-444553540000")
+  CLSID_IWMDMLogger = "110a3200-5a79-11d3-8d78-444553540000"
   struct IWMDMLogger
     lpVtbl : IWMDMLoggerVTbl*
   end

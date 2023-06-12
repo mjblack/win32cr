@@ -1737,6 +1737,8 @@ lib LibWin32
     on_event : Proc(IDialEventSink*, UInt32, UInt32, HRESULT)
   end
 
+  IDialEventSink_GUID = LibC::GUID.new("2d86f4ff-6e2d-4488-b2e9-6934afd41bea")
+  CLSID_IDialEventSink = "2d86f4ff-6e2d-4488-b2e9-6934afd41bea"
   struct IDialEventSink
     lpVtbl : IDialEventSinkVTbl*
   end
@@ -1754,6 +1756,8 @@ lib LibWin32
     get_connect_handle : Proc(IDialEngine*, LibC::UINT_PTR*, HRESULT)
   end
 
+  IDialEngine_GUID = LibC::GUID.new("39fd782b-7905-40d5-9148-3c9b190423d5")
+  CLSID_IDialEngine = "39fd782b-7905-40d5-9148-3c9b190423d5"
   struct IDialEngine
     lpVtbl : IDialEngineVTbl*
   end
@@ -1766,6 +1770,8 @@ lib LibWin32
     get_bitmap : Proc(IDialBranding*, UInt32, HBITMAP*, HRESULT)
   end
 
+  IDialBranding_GUID = LibC::GUID.new("8aecafa9-4306-43cc-8c5a-765f2979cc16")
+  CLSID_IDialBranding = "8aecafa9-4306-43cc-8c5a-765f2979cc16"
   struct IDialBranding
     lpVtbl : IDialBrandingVTbl*
   end
@@ -1777,6 +1783,8 @@ lib LibWin32
     get_cookie_info_for_uri : Proc(IProofOfPossessionCookieInfoManager*, LibC::LPWSTR, UInt32*, ProofOfPossessionCookieInfo**, HRESULT)
   end
 
+  IProofOfPossessionCookieInfoManager_GUID = LibC::GUID.new("cdaece56-4edf-43df-b113-88e4556fa1bb")
+  CLSID_IProofOfPossessionCookieInfoManager = "cdaece56-4edf-43df-b113-88e4556fa1bb"
   struct IProofOfPossessionCookieInfoManager
     lpVtbl : IProofOfPossessionCookieInfoManagerVTbl*
   end
@@ -1788,6 +1796,8 @@ lib LibWin32
     get_cookie_info_with_uri_for_account : Proc(IProofOfPossessionCookieInfoManager2*, IInspectable, LibC::LPWSTR, UInt32*, ProofOfPossessionCookieInfo**, HRESULT)
   end
 
+  IProofOfPossessionCookieInfoManager2_GUID = LibC::GUID.new("15e41407-b42f-4ae7-9966-34a087b2d713")
+  CLSID_IProofOfPossessionCookieInfoManager2 = "15e41407-b42f-4ae7-9966-34a087b2d713"
   struct IProofOfPossessionCookieInfoManager2
     lpVtbl : IProofOfPossessionCookieInfoManager2VTbl*
   end

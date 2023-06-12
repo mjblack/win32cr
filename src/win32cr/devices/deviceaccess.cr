@@ -68,6 +68,8 @@ lib LibWin32
     invoke : Proc(IDeviceRequestCompletionCallback*, HRESULT, UInt32, HRESULT)
   end
 
+  IDeviceRequestCompletionCallback_GUID = LibC::GUID.new("999bad24-9acd-45bb-8669-2a2fc0288b04")
+  CLSID_IDeviceRequestCompletionCallback = "999bad24-9acd-45bb-8669-2a2fc0288b04"
   struct IDeviceRequestCompletionCallback
     lpVtbl : IDeviceRequestCompletionCallbackVTbl*
   end
@@ -81,6 +83,8 @@ lib LibWin32
     cancel_operation : Proc(IDeviceIoControl*, LibC::UINT_PTR, HRESULT)
   end
 
+  IDeviceIoControl_GUID = LibC::GUID.new("9eefe161-23ab-4f18-9b49-991b586ae970")
+  CLSID_IDeviceIoControl = "9eefe161-23ab-4f18-9b49-991b586ae970"
   struct IDeviceIoControl
     lpVtbl : IDeviceIoControlVTbl*
   end
@@ -95,6 +99,8 @@ lib LibWin32
     get_result : Proc(ICreateDeviceAccessAsync*, Guid*, Void**, HRESULT)
   end
 
+  ICreateDeviceAccessAsync_GUID = LibC::GUID.new("3474628f-683d-42d2-abcb-db018c6503bc")
+  CLSID_ICreateDeviceAccessAsync = "3474628f-683d-42d2-abcb-db018c6503bc"
   struct ICreateDeviceAccessAsync
     lpVtbl : ICreateDeviceAccessAsyncVTbl*
   end

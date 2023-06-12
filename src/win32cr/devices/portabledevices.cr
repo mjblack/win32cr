@@ -1167,6 +1167,8 @@ lib LibWin32
     get_serialized_size : Proc(IWpdSerializer*, IPortableDeviceValues, UInt32*, HRESULT)
   end
 
+  IWpdSerializer_GUID = LibC::GUID.new("b32f4002-bb27-45ff-af4f-06631c1e8dad")
+  CLSID_IWpdSerializer = "b32f4002-bb27-45ff-af4f-06631c1e8dad"
   struct IWpdSerializer
     lpVtbl : IWpdSerializerVTbl*
   end
@@ -1217,6 +1219,8 @@ lib LibWin32
     clear : Proc(IPortableDeviceValues*, HRESULT)
   end
 
+  IPortableDeviceValues_GUID = LibC::GUID.new("6848f6f2-3155-4f86-b6f5-263eeeab3143")
+  CLSID_IPortableDeviceValues = "6848f6f2-3155-4f86-b6f5-263eeeab3143"
   struct IPortableDeviceValues
     lpVtbl : IPortableDeviceValuesVTbl*
   end
@@ -1232,6 +1236,8 @@ lib LibWin32
     remove_at : Proc(IPortableDeviceKeyCollection*, UInt32, HRESULT)
   end
 
+  IPortableDeviceKeyCollection_GUID = LibC::GUID.new("dada2357-e0ad-492e-98db-dd61c53ba353")
+  CLSID_IPortableDeviceKeyCollection = "dada2357-e0ad-492e-98db-dd61c53ba353"
   struct IPortableDeviceKeyCollection
     lpVtbl : IPortableDeviceKeyCollectionVTbl*
   end
@@ -1249,6 +1255,8 @@ lib LibWin32
     remove_at : Proc(IPortableDevicePropVariantCollection*, UInt32, HRESULT)
   end
 
+  IPortableDevicePropVariantCollection_GUID = LibC::GUID.new("89b2e422-4f1b-4316-bcef-a44afea83eb3")
+  CLSID_IPortableDevicePropVariantCollection = "89b2e422-4f1b-4316-bcef-a44afea83eb3"
   struct IPortableDevicePropVariantCollection
     lpVtbl : IPortableDevicePropVariantCollectionVTbl*
   end
@@ -1264,6 +1272,8 @@ lib LibWin32
     remove_at : Proc(IPortableDeviceValuesCollection*, UInt32, HRESULT)
   end
 
+  IPortableDeviceValuesCollection_GUID = LibC::GUID.new("6e3f2d79-4e07-48c4-8208-d8c2e5af4a99")
+  CLSID_IPortableDeviceValuesCollection = "6e3f2d79-4e07-48c4-8208-d8c2e5af4a99"
   struct IPortableDeviceValuesCollection
     lpVtbl : IPortableDeviceValuesCollectionVTbl*
   end
@@ -1281,6 +1291,8 @@ lib LibWin32
     get_private_devices : Proc(IPortableDeviceManager*, LibC::LPWSTR*, UInt32*, HRESULT)
   end
 
+  IPortableDeviceManager_GUID = LibC::GUID.new("a1567595-4c2f-4574-a6fa-ecef917b9a40")
+  CLSID_IPortableDeviceManager = "a1567595-4c2f-4574-a6fa-ecef917b9a40"
   struct IPortableDeviceManager
     lpVtbl : IPortableDeviceManagerVTbl*
   end
@@ -1300,6 +1312,8 @@ lib LibWin32
     get_pn_p_device_id : Proc(IPortableDevice*, LibC::LPWSTR*, HRESULT)
   end
 
+  IPortableDevice_GUID = LibC::GUID.new("625e2df8-6392-4cf0-9ad1-3cfa5f17775c")
+  CLSID_IPortableDevice = "625e2df8-6392-4cf0-9ad1-3cfa5f17775c"
   struct IPortableDevice
     lpVtbl : IPortableDeviceVTbl*
   end
@@ -1320,6 +1334,8 @@ lib LibWin32
     copy : Proc(IPortableDeviceContent*, IPortableDevicePropVariantCollection, LibC::LPWSTR, IPortableDevicePropVariantCollection*, HRESULT)
   end
 
+  IPortableDeviceContent_GUID = LibC::GUID.new("6a96ed84-7c73-4480-9938-bf5af477d426")
+  CLSID_IPortableDeviceContent = "6a96ed84-7c73-4480-9938-bf5af477d426"
   struct IPortableDeviceContent
     lpVtbl : IPortableDeviceContentVTbl*
   end
@@ -1341,6 +1357,8 @@ lib LibWin32
     update_object_with_properties_and_data : Proc(IPortableDeviceContent2*, LibC::LPWSTR, IPortableDeviceValues, IStream*, UInt32*, HRESULT)
   end
 
+  IPortableDeviceContent2_GUID = LibC::GUID.new("9b4add96-f6bf-4034-8708-eca72bf10554")
+  CLSID_IPortableDeviceContent2 = "9b4add96-f6bf-4034-8708-eca72bf10554"
   struct IPortableDeviceContent2
     lpVtbl : IPortableDeviceContent2VTbl*
   end
@@ -1356,6 +1374,8 @@ lib LibWin32
     cancel : Proc(IEnumPortableDeviceObjectIDs*, HRESULT)
   end
 
+  IEnumPortableDeviceObjectIDs_GUID = LibC::GUID.new("10ece955-cf41-4728-bfa0-41eedf1bbf19")
+  CLSID_IEnumPortableDeviceObjectIDs = "10ece955-cf41-4728-bfa0-41eedf1bbf19"
   struct IEnumPortableDeviceObjectIDs
     lpVtbl : IEnumPortableDeviceObjectIDsVTbl*
   end
@@ -1372,6 +1392,8 @@ lib LibWin32
     cancel : Proc(IPortableDeviceProperties*, HRESULT)
   end
 
+  IPortableDeviceProperties_GUID = LibC::GUID.new("7f6d695c-03df-4439-a809-59266beee3a6")
+  CLSID_IPortableDeviceProperties = "7f6d695c-03df-4439-a809-59266beee3a6"
   struct IPortableDeviceProperties
     lpVtbl : IPortableDevicePropertiesVTbl*
   end
@@ -1388,6 +1410,8 @@ lib LibWin32
     create_resource : Proc(IPortableDeviceResources*, IPortableDeviceValues, IStream*, UInt32*, LibC::LPWSTR*, HRESULT)
   end
 
+  IPortableDeviceResources_GUID = LibC::GUID.new("fd8878ac-d841-4d17-891c-e6829cdb6934")
+  CLSID_IPortableDeviceResources = "fd8878ac-d841-4d17-891c-e6829cdb6934"
   struct IPortableDeviceResources
     lpVtbl : IPortableDeviceResourcesVTbl*
   end
@@ -1409,6 +1433,8 @@ lib LibWin32
     get_event_options : Proc(IPortableDeviceCapabilities*, Guid*, IPortableDeviceValues*, HRESULT)
   end
 
+  IPortableDeviceCapabilities_GUID = LibC::GUID.new("2c8c6dbf-e3dc-4061-becc-8542e810d126")
+  CLSID_IPortableDeviceCapabilities = "2c8c6dbf-e3dc-4061-becc-8542e810d126"
   struct IPortableDeviceCapabilities
     lpVtbl : IPortableDeviceCapabilitiesVTbl*
   end
@@ -1420,6 +1446,8 @@ lib LibWin32
     on_event : Proc(IPortableDeviceEventCallback*, IPortableDeviceValues, HRESULT)
   end
 
+  IPortableDeviceEventCallback_GUID = LibC::GUID.new("a8792a31-f385-493c-a893-40f64eb45f6e")
+  CLSID_IPortableDeviceEventCallback = "a8792a31-f385-493c-a893-40f64eb45f6e"
   struct IPortableDeviceEventCallback
     lpVtbl : IPortableDeviceEventCallbackVTbl*
   end
@@ -1443,6 +1471,8 @@ lib LibWin32
     cancel : Proc(IPortableDeviceDataStream*, HRESULT)
   end
 
+  IPortableDeviceDataStream_GUID = LibC::GUID.new("88e04db3-1012-4d64-9996-f703a950d3f4")
+  CLSID_IPortableDeviceDataStream = "88e04db3-1012-4d64-9996-f703a950d3f4"
   struct IPortableDeviceDataStream
     lpVtbl : IPortableDeviceDataStreamVTbl*
   end
@@ -1455,6 +1485,8 @@ lib LibWin32
     cancel : Proc(IPortableDeviceUnitsStream*, HRESULT)
   end
 
+  IPortableDeviceUnitsStream_GUID = LibC::GUID.new("5e98025f-bfc4-47a2-9a5f-bc900a507c67")
+  CLSID_IPortableDeviceUnitsStream = "5e98025f-bfc4-47a2-9a5f-bc900a507c67"
   struct IPortableDeviceUnitsStream
     lpVtbl : IPortableDeviceUnitsStreamVTbl*
   end
@@ -1470,6 +1502,8 @@ lib LibWin32
     cancel : Proc(IPortableDevicePropertiesBulk*, Guid*, HRESULT)
   end
 
+  IPortableDevicePropertiesBulk_GUID = LibC::GUID.new("482b05c0-4056-44ed-9e0f-5e23b009da93")
+  CLSID_IPortableDevicePropertiesBulk = "482b05c0-4056-44ed-9e0f-5e23b009da93"
   struct IPortableDevicePropertiesBulk
     lpVtbl : IPortableDevicePropertiesBulkVTbl*
   end
@@ -1483,6 +1517,8 @@ lib LibWin32
     on_end : Proc(IPortableDevicePropertiesBulkCallback*, Guid*, HRESULT, HRESULT)
   end
 
+  IPortableDevicePropertiesBulkCallback_GUID = LibC::GUID.new("9deacb80-11e8-40e3-a9f3-f557986a7845")
+  CLSID_IPortableDevicePropertiesBulkCallback = "9deacb80-11e8-40e3-a9f3-f557986a7845"
   struct IPortableDevicePropertiesBulkCallback
     lpVtbl : IPortableDevicePropertiesBulkCallbackVTbl*
   end
@@ -1495,6 +1531,8 @@ lib LibWin32
     get_device_for_service : Proc(IPortableDeviceServiceManager*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
+  IPortableDeviceServiceManager_GUID = LibC::GUID.new("a8abc4e9-a84a-47a9-80b3-c5d9b172a961")
+  CLSID_IPortableDeviceServiceManager = "a8abc4e9-a84a-47a9-80b3-c5d9b172a961"
   struct IPortableDeviceServiceManager
     lpVtbl : IPortableDeviceServiceManagerVTbl*
   end
@@ -1516,6 +1554,8 @@ lib LibWin32
     send_command : Proc(IPortableDeviceService*, UInt32, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)
   end
 
+  IPortableDeviceService_GUID = LibC::GUID.new("d3bd3a44-d7b5-40a9-98b7-2fa4d01dec08")
+  CLSID_IPortableDeviceService = "d3bd3a44-d7b5-40a9-98b7-2fa4d01dec08"
   struct IPortableDeviceService
     lpVtbl : IPortableDeviceServiceVTbl*
   end
@@ -1542,6 +1582,8 @@ lib LibWin32
     cancel : Proc(IPortableDeviceServiceCapabilities*, HRESULT)
   end
 
+  IPortableDeviceServiceCapabilities_GUID = LibC::GUID.new("24dbd89d-413e-43e0-bd5b-197f3c56c886")
+  CLSID_IPortableDeviceServiceCapabilities = "24dbd89d-413e-43e0-bd5b-197f3c56c886"
   struct IPortableDeviceServiceCapabilities
     lpVtbl : IPortableDeviceServiceCapabilitiesVTbl*
   end
@@ -1555,6 +1597,8 @@ lib LibWin32
     cancel : Proc(IPortableDeviceServiceMethods*, IPortableDeviceServiceMethodCallback, HRESULT)
   end
 
+  IPortableDeviceServiceMethods_GUID = LibC::GUID.new("e20333c9-fd34-412d-a381-cc6f2d820df7")
+  CLSID_IPortableDeviceServiceMethods = "e20333c9-fd34-412d-a381-cc6f2d820df7"
   struct IPortableDeviceServiceMethods
     lpVtbl : IPortableDeviceServiceMethodsVTbl*
   end
@@ -1566,6 +1610,8 @@ lib LibWin32
     on_complete : Proc(IPortableDeviceServiceMethodCallback*, HRESULT, IPortableDeviceValues, HRESULT)
   end
 
+  IPortableDeviceServiceMethodCallback_GUID = LibC::GUID.new("c424233c-afce-4828-a756-7ed7a2350083")
+  CLSID_IPortableDeviceServiceMethodCallback = "c424233c-afce-4828-a756-7ed7a2350083"
   struct IPortableDeviceServiceMethodCallback
     lpVtbl : IPortableDeviceServiceMethodCallbackVTbl*
   end
@@ -1578,6 +1624,8 @@ lib LibWin32
     cancel_open_async : Proc(IPortableDeviceServiceActivation*, HRESULT)
   end
 
+  IPortableDeviceServiceActivation_GUID = LibC::GUID.new("e56b0534-d9b9-425c-9b99-75f97cb3d7c8")
+  CLSID_IPortableDeviceServiceActivation = "e56b0534-d9b9-425c-9b99-75f97cb3d7c8"
   struct IPortableDeviceServiceActivation
     lpVtbl : IPortableDeviceServiceActivationVTbl*
   end
@@ -1589,6 +1637,8 @@ lib LibWin32
     on_complete : Proc(IPortableDeviceServiceOpenCallback*, HRESULT, HRESULT)
   end
 
+  IPortableDeviceServiceOpenCallback_GUID = LibC::GUID.new("bced49c8-8efe-41ed-960b-61313abd47a9")
+  CLSID_IPortableDeviceServiceOpenCallback = "bced49c8-8efe-41ed-960b-61313abd47a9"
   struct IPortableDeviceServiceOpenCallback
     lpVtbl : IPortableDeviceServiceOpenCallbackVTbl*
   end
@@ -1600,6 +1650,8 @@ lib LibWin32
     get_device_dispatch : Proc(IPortableDeviceDispatchFactory*, LibC::LPWSTR, IDispatch*, HRESULT)
   end
 
+  IPortableDeviceDispatchFactory_GUID = LibC::GUID.new("5e1eafc3-e3d7-4132-96fa-759c0f9d1e0f")
+  CLSID_IPortableDeviceDispatchFactory = "5e1eafc3-e3d7-4132-96fa-759c0f9d1e0f"
   struct IPortableDeviceDispatchFactory
     lpVtbl : IPortableDeviceDispatchFactoryVTbl*
   end
@@ -1616,6 +1668,8 @@ lib LibWin32
     get_device_from_id_async : Proc(IPortableDeviceWebControl*, UInt8*, IDispatch, IDispatch, HRESULT)
   end
 
+  IPortableDeviceWebControl_GUID = LibC::GUID.new("94fc7953-5ca1-483a-8aee-df52e7747d00")
+  CLSID_IPortableDeviceWebControl = "94fc7953-5ca1-483a-8aee-df52e7747d00"
   struct IPortableDeviceWebControl
     lpVtbl : IPortableDeviceWebControlVTbl*
   end
@@ -1630,6 +1684,8 @@ lib LibWin32
     clone : Proc(IEnumPortableDeviceConnectors*, IEnumPortableDeviceConnectors*, HRESULT)
   end
 
+  IEnumPortableDeviceConnectors_GUID = LibC::GUID.new("bfdef549-9247-454f-bd82-06fe80853faa")
+  CLSID_IEnumPortableDeviceConnectors = "bfdef549-9247-454f-bd82-06fe80853faa"
   struct IEnumPortableDeviceConnectors
     lpVtbl : IEnumPortableDeviceConnectorsVTbl*
   end
@@ -1646,6 +1702,8 @@ lib LibWin32
     get_pn_pid : Proc(IPortableDeviceConnector*, LibC::LPWSTR*, HRESULT)
   end
 
+  IPortableDeviceConnector_GUID = LibC::GUID.new("625e2df8-6392-4cf0-9ad1-3cfa5f17775c")
+  CLSID_IPortableDeviceConnector = "625e2df8-6392-4cf0-9ad1-3cfa5f17775c"
   struct IPortableDeviceConnector
     lpVtbl : IPortableDeviceConnectorVTbl*
   end
@@ -1657,6 +1715,8 @@ lib LibWin32
     on_complete : Proc(IConnectionRequestCallback*, HRESULT, HRESULT)
   end
 
+  IConnectionRequestCallback_GUID = LibC::GUID.new("272c9ae0-7161-4ae0-91bd-9f448ee9c427")
+  CLSID_IConnectionRequestCallback = "272c9ae0-7161-4ae0-91bd-9f448ee9c427"
   struct IConnectionRequestCallback
     lpVtbl : IConnectionRequestCallbackVTbl*
   end
@@ -1669,6 +1729,8 @@ lib LibWin32
     on_system_radio_state_change : Proc(IMediaRadioManager*, SYSTEM_RADIO_STATE, UInt32, HRESULT)
   end
 
+  IMediaRadioManager_GUID = LibC::GUID.new("6cfdcab5-fc47-42a5-9241-074b58830e73")
+  CLSID_IMediaRadioManager = "6cfdcab5-fc47-42a5-9241-074b58830e73"
   struct IMediaRadioManager
     lpVtbl : IMediaRadioManagerVTbl*
   end
@@ -1681,6 +1743,8 @@ lib LibWin32
     get_at : Proc(IRadioInstanceCollection*, UInt32, IRadioInstance*, HRESULT)
   end
 
+  IRadioInstanceCollection_GUID = LibC::GUID.new("e5791fae-5665-4e0c-95be-5fde31644185")
+  CLSID_IRadioInstanceCollection = "e5791fae-5665-4e0c-95be-5fde31644185"
   struct IRadioInstanceCollection
     lpVtbl : IRadioInstanceCollectionVTbl*
   end
@@ -1698,6 +1762,8 @@ lib LibWin32
     is_associating_device : Proc(IRadioInstance*, LibC::BOOL)
   end
 
+  IRadioInstance_GUID = LibC::GUID.new("70aa1c9e-f2b4-4c61-86d3-6b9fb75fd1a2")
+  CLSID_IRadioInstance = "70aa1c9e-f2b4-4c61-86d3-6b9fb75fd1a2"
   struct IRadioInstance
     lpVtbl : IRadioInstanceVTbl*
   end
@@ -1711,6 +1777,8 @@ lib LibWin32
     on_instance_radio_change : Proc(IMediaRadioManagerNotifySink*, UInt8*, DEVICE_RADIO_STATE, HRESULT)
   end
 
+  IMediaRadioManagerNotifySink_GUID = LibC::GUID.new("89d81f5f-c147-49ed-a11c-77b20c31e7c9")
+  CLSID_IMediaRadioManagerNotifySink = "89d81f5f-c147-49ed-a11c-77b20c31e7c9"
   struct IMediaRadioManagerNotifySink
     lpVtbl : IMediaRadioManagerNotifySinkVTbl*
   end

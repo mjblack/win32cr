@@ -26,6 +26,8 @@ lib LibWin32
     build_from_xml_file : Proc(IXMLGraphBuilder*, IGraphBuilder, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IXMLGraphBuilder_GUID = LibC::GUID.new("1bb05960-5fbf-11d2-a521-44df07c10000")
+  CLSID_IXMLGraphBuilder = "1bb05960-5fbf-11d2-a521-44df07c10000"
   struct IXMLGraphBuilder
     lpVtbl : IXMLGraphBuilderVTbl*
   end

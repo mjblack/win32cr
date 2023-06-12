@@ -1035,6 +1035,8 @@ lib LibWin32
     get_custom_url : Proc(IWMPErrorItem*, UInt8**, HRESULT)
   end
 
+  IWMPErrorItem_GUID = LibC::GUID.new("3614c646-3b3b-4de7-a81e-930e3f2127b3")
+  CLSID_IWMPErrorItem = "3614c646-3b3b-4de7-a81e-930e3f2127b3"
   struct IWMPErrorItem
     lpVtbl : IWMPErrorItemVTbl*
   end
@@ -1053,6 +1055,8 @@ lib LibWin32
     web_help : Proc(IWMPError*, HRESULT)
   end
 
+  IWMPError_GUID = LibC::GUID.new("a12dcf7d-14ab-4c1b-a8cd-63909f06025b")
+  CLSID_IWMPError = "a12dcf7d-14ab-4c1b-a8cd-63909f06025b"
   struct IWMPError
     lpVtbl : IWMPErrorVTbl*
   end
@@ -1085,6 +1089,8 @@ lib LibWin32
     is_read_only_item : Proc(IWMPMedia*, UInt8*, Int16*, HRESULT)
   end
 
+  IWMPMedia_GUID = LibC::GUID.new("94d55e95-3fac-11d3-b155-00c04f79faa6")
+  CLSID_IWMPMedia = "94d55e95-3fac-11d3-b155-00c04f79faa6"
   struct IWMPMedia
     lpVtbl : IWMPMediaVTbl*
   end
@@ -1115,6 +1121,8 @@ lib LibWin32
     play_item : Proc(IWMPControls*, IWMPMedia, HRESULT)
   end
 
+  IWMPControls_GUID = LibC::GUID.new("74c09e02-f828-11d2-a74b-00a0c905f36e")
+  CLSID_IWMPControls = "74c09e02-f828-11d2-a74b-00a0c905f36e"
   struct IWMPControls
     lpVtbl : IWMPControlsVTbl*
   end
@@ -1152,6 +1160,8 @@ lib LibWin32
     put_enable_error_dialogs : Proc(IWMPSettings*, Int16, HRESULT)
   end
 
+  IWMPSettings_GUID = LibC::GUID.new("9104d1ab-80c9-4fed-abf0-2e6417a6df14")
+  CLSID_IWMPSettings = "9104d1ab-80c9-4fed-abf0-2e6417a6df14"
   struct IWMPSettings
     lpVtbl : IWMPSettingsVTbl*
   end
@@ -1174,6 +1184,8 @@ lib LibWin32
     put_captioning_id : Proc(IWMPClosedCaption*, UInt8*, HRESULT)
   end
 
+  IWMPClosedCaption_GUID = LibC::GUID.new("4f2df574-c588-11d3-9ed0-00c04fb6e937")
+  CLSID_IWMPClosedCaption = "4f2df574-c588-11d3-9ed0-00c04fb6e937"
   struct IWMPClosedCaption
     lpVtbl : IWMPClosedCaptionVTbl*
   end
@@ -1202,6 +1214,8 @@ lib LibWin32
     move_item : Proc(IWMPPlaylist*, Int32, Int32, HRESULT)
   end
 
+  IWMPPlaylist_GUID = LibC::GUID.new("d5f0f4f1-130c-11d3-b14e-00c04f79faa6")
+  CLSID_IWMPPlaylist = "d5f0f4f1-130c-11d3-b14e-00c04f79faa6"
   struct IWMPPlaylist
     lpVtbl : IWMPPlaylistVTbl*
   end
@@ -1219,6 +1233,8 @@ lib LibWin32
     eject : Proc(IWMPCdrom*, HRESULT)
   end
 
+  IWMPCdrom_GUID = LibC::GUID.new("cfab6e98-8730-11d3-b388-00c04f68574b")
+  CLSID_IWMPCdrom = "cfab6e98-8730-11d3-b388-00c04f68574b"
   struct IWMPCdrom
     lpVtbl : IWMPCdromVTbl*
   end
@@ -1236,6 +1252,8 @@ lib LibWin32
     get_by_drive_specifier : Proc(IWMPCdromCollection*, UInt8*, IWMPCdrom*, HRESULT)
   end
 
+  IWMPCdromCollection_GUID = LibC::GUID.new("ee4c8fe2-34b2-11d3-a3bf-006097c9b344")
+  CLSID_IWMPCdromCollection = "ee4c8fe2-34b2-11d3-a3bf-006097c9b344"
   struct IWMPCdromCollection
     lpVtbl : IWMPCdromCollectionVTbl*
   end
@@ -1252,6 +1270,8 @@ lib LibWin32
     item : Proc(IWMPStringCollection*, Int32, UInt8**, HRESULT)
   end
 
+  IWMPStringCollection_GUID = LibC::GUID.new("4a976298-8c0d-11d3-b389-00c04f68574b")
+  CLSID_IWMPStringCollection = "4a976298-8c0d-11d3-b389-00c04f68574b"
   struct IWMPStringCollection
     lpVtbl : IWMPStringCollectionVTbl*
   end
@@ -1278,6 +1298,8 @@ lib LibWin32
     is_deleted : Proc(IWMPMediaCollection*, IWMPMedia, Int16*, HRESULT)
   end
 
+  IWMPMediaCollection_GUID = LibC::GUID.new("8363bc22-b4b4-4b19-989d-1cd765749dd1")
+  CLSID_IWMPMediaCollection = "8363bc22-b4b4-4b19-989d-1cd765749dd1"
   struct IWMPMediaCollection
     lpVtbl : IWMPMediaCollectionVTbl*
   end
@@ -1294,6 +1316,8 @@ lib LibWin32
     item : Proc(IWMPPlaylistArray*, Int32, IWMPPlaylist*, HRESULT)
   end
 
+  IWMPPlaylistArray_GUID = LibC::GUID.new("679409c0-99f7-11d3-9fb7-00105aa620bb")
+  CLSID_IWMPPlaylistArray = "679409c0-99f7-11d3-9fb7-00105aa620bb"
   struct IWMPPlaylistArray
     lpVtbl : IWMPPlaylistArrayVTbl*
   end
@@ -1315,6 +1339,8 @@ lib LibWin32
     import_playlist : Proc(IWMPPlaylistCollection*, IWMPPlaylist, IWMPPlaylist*, HRESULT)
   end
 
+  IWMPPlaylistCollection_GUID = LibC::GUID.new("10a13217-23a7-439b-b1c0-d847c79b7774")
+  CLSID_IWMPPlaylistCollection = "10a13217-23a7-439b-b1c0-d847c79b7774"
   struct IWMPPlaylistCollection
     lpVtbl : IWMPPlaylistCollectionVTbl*
   end
@@ -1357,6 +1383,8 @@ lib LibWin32
     get_frames_skipped : Proc(IWMPNetwork*, Int32*, HRESULT)
   end
 
+  IWMPNetwork_GUID = LibC::GUID.new("ec21b779-edef-462d-bba4-ad9dde2b29a7")
+  CLSID_IWMPNetwork = "ec21b779-edef-462d-bba4-ad9dde2b29a7"
   struct IWMPNetwork
     lpVtbl : IWMPNetworkVTbl*
   end
@@ -1392,6 +1420,8 @@ lib LibWin32
     get_status : Proc(IWMPCore*, UInt8**, HRESULT)
   end
 
+  IWMPCore_GUID = LibC::GUID.new("d84cca99-cce2-11d2-9ecc-0000f8085981")
+  CLSID_IWMPCore = "d84cca99-cce2-11d2-9ecc-0000f8085981"
   struct IWMPCore
     lpVtbl : IWMPCoreVTbl*
   end
@@ -1435,6 +1465,8 @@ lib LibWin32
     get_ui_mode : Proc(IWMPPlayer*, UInt8**, HRESULT)
   end
 
+  IWMPPlayer_GUID = LibC::GUID.new("6bf52a4f-394a-11d3-b153-00c04f79faa6")
+  CLSID_IWMPPlayer = "6bf52a4f-394a-11d3-b153-00c04f79faa6"
   struct IWMPPlayer
     lpVtbl : IWMPPlayerVTbl*
   end
@@ -1482,6 +1514,8 @@ lib LibWin32
     put_windowless_video : Proc(IWMPPlayer2*, Int16, HRESULT)
   end
 
+  IWMPPlayer2_GUID = LibC::GUID.new("0e6b01d1-d407-4c85-bf5f-1c01f6150280")
+  CLSID_IWMPPlayer2 = "0e6b01d1-d407-4c85-bf5f-1c01f6150280"
   struct IWMPPlayer2
     lpVtbl : IWMPPlayer2VTbl*
   end
@@ -1515,6 +1549,8 @@ lib LibWin32
     get_error : Proc(IWMPMedia2*, IWMPErrorItem*, HRESULT)
   end
 
+  IWMPMedia2_GUID = LibC::GUID.new("ab7c88bb-143e-4ea4-acc3-e4350b2106c3")
+  CLSID_IWMPMedia2 = "ab7c88bb-143e-4ea4-acc3-e4350b2106c3"
   struct IWMPMedia2
     lpVtbl : IWMPMedia2VTbl*
   end
@@ -1546,6 +1582,8 @@ lib LibWin32
     step : Proc(IWMPControls2*, Int32, HRESULT)
   end
 
+  IWMPControls2_GUID = LibC::GUID.new("6f030d25-0890-480f-9775-1f7e40ab5b8e")
+  CLSID_IWMPControls2 = "6f030d25-0890-480f-9775-1f7e40ab5b8e"
   struct IWMPControls2
     lpVtbl : IWMPControls2VTbl*
   end
@@ -1566,6 +1604,8 @@ lib LibWin32
     resume : Proc(IWMPDVD*, HRESULT)
   end
 
+  IWMPDVD_GUID = LibC::GUID.new("8da61686-4668-4a5c-ae5d-803193293dbe")
+  CLSID_IWMPDVD = "8da61686-4668-4a5c-ae5d-803193293dbe"
   struct IWMPDVD
     lpVtbl : IWMPDVDVTbl*
   end
@@ -1602,6 +1642,8 @@ lib LibWin32
     get_dvd : Proc(IWMPCore2*, IWMPDVD*, HRESULT)
   end
 
+  IWMPCore2_GUID = LibC::GUID.new("bc17e5b7-7561-4c18-bb90-17d485775659")
+  CLSID_IWMPCore2 = "bc17e5b7-7561-4c18-bb90-17d485775659"
   struct IWMPCore2
     lpVtbl : IWMPCore2VTbl*
   end
@@ -1650,6 +1692,8 @@ lib LibWin32
     put_windowless_video : Proc(IWMPPlayer3*, Int16, HRESULT)
   end
 
+  IWMPPlayer3_GUID = LibC::GUID.new("54062b68-052a-4c25-a39f-8b63346511d4")
+  CLSID_IWMPPlayer3 = "54062b68-052a-4c25-a39f-8b63346511d4"
   struct IWMPPlayer3
     lpVtbl : IWMPPlayer3VTbl*
   end
@@ -1670,6 +1714,8 @@ lib LibWin32
     get_condition : Proc(IWMPErrorItem2*, Int32*, HRESULT)
   end
 
+  IWMPErrorItem2_GUID = LibC::GUID.new("f75ccec0-c67c-475c-931e-8719870bee7d")
+  CLSID_IWMPErrorItem2 = "f75ccec0-c67c-475c-931e-8719870bee7d"
   struct IWMPErrorItem2
     lpVtbl : IWMPErrorItem2VTbl*
   end
@@ -1684,6 +1730,8 @@ lib LibWin32
     get_custom_ui_mode : Proc(IWMPRemoteMediaServices*, UInt8**, HRESULT)
   end
 
+  IWMPRemoteMediaServices_GUID = LibC::GUID.new("cbb92747-741f-44fe-ab5b-f1a48f3b2a59")
+  CLSID_IWMPRemoteMediaServices = "cbb92747-741f-44fe-ab5b-f1a48f3b2a59"
   struct IWMPRemoteMediaServices
     lpVtbl : IWMPRemoteMediaServicesVTbl*
   end
@@ -1695,6 +1743,8 @@ lib LibWin32
     set_visual_style : Proc(IWMPSkinManager*, UInt8*, HRESULT)
   end
 
+  IWMPSkinManager_GUID = LibC::GUID.new("076f2fa6-ed30-448b-8cc5-3f3ef3529c7a")
+  CLSID_IWMPSkinManager = "076f2fa6-ed30-448b-8cc5-3f3ef3529c7a"
   struct IWMPSkinManager
     lpVtbl : IWMPSkinManagerVTbl*
   end
@@ -1713,6 +1763,8 @@ lib LibWin32
     get_url : Proc(IWMPMetadataPicture*, UInt8**, HRESULT)
   end
 
+  IWMPMetadataPicture_GUID = LibC::GUID.new("5c29bbe0-f87d-4c45-aa28-a70f0230ffa9")
+  CLSID_IWMPMetadataPicture = "5c29bbe0-f87d-4c45-aa28-a70f0230ffa9"
   struct IWMPMetadataPicture
     lpVtbl : IWMPMetadataPictureVTbl*
   end
@@ -1729,6 +1781,8 @@ lib LibWin32
     get_text : Proc(IWMPMetadataText*, UInt8**, HRESULT)
   end
 
+  IWMPMetadataText_GUID = LibC::GUID.new("769a72db-13d2-45e2-9c48-53ca9d5b7450")
+  CLSID_IWMPMetadataText = "769a72db-13d2-45e2-9c48-53ca9d5b7450"
   struct IWMPMetadataText
     lpVtbl : IWMPMetadataTextVTbl*
   end
@@ -1764,6 +1818,8 @@ lib LibWin32
     get_item_info_by_type : Proc(IWMPMedia3*, UInt8*, UInt8*, Int32, VARIANT*, HRESULT)
   end
 
+  IWMPMedia3_GUID = LibC::GUID.new("f118efc7-f03a-4fb4-99c9-1c02a5c1065b")
+  CLSID_IWMPMedia3 = "f118efc7-f03a-4fb4-99c9-1c02a5c1065b"
   struct IWMPMedia3
     lpVtbl : IWMPMedia3VTbl*
   end
@@ -1804,6 +1860,8 @@ lib LibWin32
     request_media_access_rights : Proc(IWMPSettings2*, UInt8*, Int16*, HRESULT)
   end
 
+  IWMPSettings2_GUID = LibC::GUID.new("fda937a4-eece-4da5-a0b6-39bf89ade2c2")
+  CLSID_IWMPSettings2 = "fda937a4-eece-4da5-a0b6-39bf89ade2c2"
   struct IWMPSettings2
     lpVtbl : IWMPSettings2VTbl*
   end
@@ -1845,6 +1903,8 @@ lib LibWin32
     put_current_position_timecode : Proc(IWMPControls3*, UInt8*, HRESULT)
   end
 
+  IWMPControls3_GUID = LibC::GUID.new("a1d1110e-d545-476a-9a78-ac3e4cb1e6bd")
+  CLSID_IWMPControls3 = "a1d1110e-d545-476a-9a78-ac3e4cb1e6bd"
   struct IWMPControls3
     lpVtbl : IWMPControls3VTbl*
   end
@@ -1872,6 +1932,8 @@ lib LibWin32
     get_sami_style_name : Proc(IWMPClosedCaption2*, Int32, UInt8**, HRESULT)
   end
 
+  IWMPClosedCaption2_GUID = LibC::GUID.new("350ba78b-6bc8-4113-a5f5-312056934eb6")
+  CLSID_IWMPClosedCaption2 = "350ba78b-6bc8-4113-a5f5-312056934eb6"
   struct IWMPClosedCaption2
     lpVtbl : IWMPClosedCaption2VTbl*
   end
@@ -1890,6 +1952,8 @@ lib LibWin32
     get_has_display : Proc(IWMPPlayerApplication*, Int16*, HRESULT)
   end
 
+  IWMPPlayerApplication_GUID = LibC::GUID.new("40897764-ceab-47be-ad4a-8e28537f9bbf")
+  CLSID_IWMPPlayerApplication = "40897764-ceab-47be-ad4a-8e28537f9bbf"
   struct IWMPPlayerApplication
     lpVtbl : IWMPPlayerApplicationVTbl*
   end
@@ -1928,6 +1992,8 @@ lib LibWin32
     new_media : Proc(IWMPCore3*, UInt8*, IWMPMedia*, HRESULT)
   end
 
+  IWMPCore3_GUID = LibC::GUID.new("7587c667-628f-499f-88e7-6a6f4e888464")
+  CLSID_IWMPCore3 = "7587c667-628f-499f-88e7-6a6f4e888464"
   struct IWMPCore3
     lpVtbl : IWMPCore3VTbl*
   end
@@ -1981,6 +2047,8 @@ lib LibWin32
     open_player : Proc(IWMPPlayer4*, UInt8*, HRESULT)
   end
 
+  IWMPPlayer4_GUID = LibC::GUID.new("6c497d62-8919-413c-82db-e935fb3ec584")
+  CLSID_IWMPPlayer4 = "6c497d62-8919-413c-82db-e935fb3ec584"
   struct IWMPPlayer4
     lpVtbl : IWMPPlayer4VTbl*
   end
@@ -1994,6 +2062,8 @@ lib LibWin32
     set_task_pane_url : Proc(IWMPPlayerServices*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
+  IWMPPlayerServices_GUID = LibC::GUID.new("1d01fbdb-ade2-4c8d-9842-c190b95c3306")
+  CLSID_IWMPPlayerServices = "1d01fbdb-ade2-4c8d-9842-c190b95c3306"
   struct IWMPPlayerServices
     lpVtbl : IWMPPlayerServicesVTbl*
   end
@@ -2020,6 +2090,8 @@ lib LibWin32
     is_identical : Proc(IWMPSyncDevice*, IWMPSyncDevice, Int16*, HRESULT)
   end
 
+  IWMPSyncDevice_GUID = LibC::GUID.new("82a2986c-0293-4fd0-b279-b21b86c058be")
+  CLSID_IWMPSyncDevice = "82a2986c-0293-4fd0-b279-b21b86c058be"
   struct IWMPSyncDevice
     lpVtbl : IWMPSyncDeviceVTbl*
   end
@@ -2032,6 +2104,8 @@ lib LibWin32
     get_device : Proc(IWMPSyncServices*, Int32, IWMPSyncDevice*, HRESULT)
   end
 
+  IWMPSyncServices_GUID = LibC::GUID.new("8b5050ff-e0a4-4808-b3a8-893a9e1ed894")
+  CLSID_IWMPSyncServices = "8b5050ff-e0a4-4808-b3a8-893a9e1ed894"
   struct IWMPSyncServices
     lpVtbl : IWMPSyncServicesVTbl*
   end
@@ -2046,6 +2120,8 @@ lib LibWin32
     set_background_processing_priority : Proc(IWMPPlayerServices2*, UInt8*, HRESULT)
   end
 
+  IWMPPlayerServices2_GUID = LibC::GUID.new("1bb1592f-f040-418a-9f71-17c7512b4d70")
+  CLSID_IWMPPlayerServices2 = "1bb1592f-f040-418a-9f71-17c7512b4d70"
   struct IWMPPlayerServices2
     lpVtbl : IWMPPlayerServices2VTbl*
   end
@@ -2060,6 +2136,8 @@ lib LibWin32
     stop_rip : Proc(IWMPCdromRip*, HRESULT)
   end
 
+  IWMPCdromRip_GUID = LibC::GUID.new("56e2294f-69ed-4629-a869-aea72c0dcc2c")
+  CLSID_IWMPCdromRip = "56e2294f-69ed-4629-a869-aea72c0dcc2c"
   struct IWMPCdromRip
     lpVtbl : IWMPCdromRipVTbl*
   end
@@ -2084,6 +2162,8 @@ lib LibWin32
     erase : Proc(IWMPCdromBurn*, HRESULT)
   end
 
+  IWMPCdromBurn_GUID = LibC::GUID.new("bd94dbeb-417f-4928-aa06-087d56ed9b59")
+  CLSID_IWMPCdromBurn = "bd94dbeb-417f-4928-aa06-087d56ed9b59"
   struct IWMPCdromBurn
     lpVtbl : IWMPCdromBurnVTbl*
   end
@@ -2100,6 +2180,8 @@ lib LibWin32
     begin_next_group : Proc(IWMPQuery*, HRESULT)
   end
 
+  IWMPQuery_GUID = LibC::GUID.new("a00918f3-a6b0-4bfb-9189-fd834c7bc5a5")
+  CLSID_IWMPQuery = "a00918f3-a6b0-4bfb-9189-fd834c7bc5a5"
   struct IWMPQuery
     lpVtbl : IWMPQueryVTbl*
   end
@@ -2130,6 +2212,8 @@ lib LibWin32
     get_by_attribute_and_media_type : Proc(IWMPMediaCollection2*, UInt8*, UInt8*, UInt8*, IWMPPlaylist*, HRESULT)
   end
 
+  IWMPMediaCollection2_GUID = LibC::GUID.new("8ba957f5-fd8c-4791-b82d-f840401ee474")
+  CLSID_IWMPMediaCollection2 = "8ba957f5-fd8c-4791-b82d-f840401ee474"
   struct IWMPMediaCollection2
     lpVtbl : IWMPMediaCollection2VTbl*
   end
@@ -2150,6 +2234,8 @@ lib LibWin32
     get_item_info_by_type : Proc(IWMPStringCollection2*, Int32, UInt8*, UInt8*, Int32, VARIANT*, HRESULT)
   end
 
+  IWMPStringCollection2_GUID = LibC::GUID.new("46ad648d-53f1-4a74-92e2-2a1b68d63fd4")
+  CLSID_IWMPStringCollection2 = "46ad648d-53f1-4a74-92e2-2a1b68d63fd4"
   struct IWMPStringCollection2
     lpVtbl : IWMPStringCollection2VTbl*
   end
@@ -2164,6 +2250,8 @@ lib LibWin32
     is_identical : Proc(IWMPLibrary*, IWMPLibrary, Int16*, HRESULT)
   end
 
+  IWMPLibrary_GUID = LibC::GUID.new("3df47861-7df1-4c1f-a81b-4c26f0f7a7c6")
+  CLSID_IWMPLibrary = "3df47861-7df1-4c1f-a81b-4c26f0f7a7c6"
   struct IWMPLibrary
     lpVtbl : IWMPLibraryVTbl*
   end
@@ -2176,6 +2264,8 @@ lib LibWin32
     get_library_by_type : Proc(IWMPLibraryServices*, WMPLibraryType, Int32, IWMPLibrary*, HRESULT)
   end
 
+  IWMPLibraryServices_GUID = LibC::GUID.new("39c2f8d5-1cf2-4d5e-ae09-d73492cf9eaa")
+  CLSID_IWMPLibraryServices = "39c2f8d5-1cf2-4d5e-ae09-d73492cf9eaa"
   struct IWMPLibraryServices
     lpVtbl : IWMPLibraryServicesVTbl*
   end
@@ -2189,6 +2279,8 @@ lib LibWin32
     show_library_sharing : Proc(IWMPLibrarySharingServices*, HRESULT)
   end
 
+  IWMPLibrarySharingServices_GUID = LibC::GUID.new("82cba86b-9f04-474b-a365-d6dd1466e541")
+  CLSID_IWMPLibrarySharingServices = "82cba86b-9f04-474b-a365-d6dd1466e541"
   struct IWMPLibrarySharingServices
     lpVtbl : IWMPLibrarySharingServicesVTbl*
   end
@@ -2210,6 +2302,8 @@ lib LibWin32
     stop_scan : Proc(IWMPFolderMonitorServices*, HRESULT)
   end
 
+  IWMPFolderMonitorServices_GUID = LibC::GUID.new("788c8743-e57f-439d-a468-5bc77f2e59c6")
+  CLSID_IWMPFolderMonitorServices = "788c8743-e57f-439d-a468-5bc77f2e59c6"
   struct IWMPFolderMonitorServices
     lpVtbl : IWMPFolderMonitorServicesVTbl*
   end
@@ -2237,6 +2331,8 @@ lib LibWin32
     set_item_info : Proc(IWMPSyncDevice2*, UInt8*, UInt8*, HRESULT)
   end
 
+  IWMPSyncDevice2_GUID = LibC::GUID.new("88afb4b2-140a-44d2-91e6-4543da467cd1")
+  CLSID_IWMPSyncDevice2 = "88afb4b2-140a-44d2-91e6-4543da467cd1"
   struct IWMPSyncDevice2
     lpVtbl : IWMPSyncDevice2VTbl*
   end
@@ -2266,6 +2362,8 @@ lib LibWin32
     cancel_estimation : Proc(IWMPSyncDevice3*, HRESULT)
   end
 
+  IWMPSyncDevice3_GUID = LibC::GUID.new("b22c85f9-263c-4372-a0da-b518db9b4098")
+  CLSID_IWMPSyncDevice3 = "b22c85f9-263c-4372-a0da-b518db9b4098"
   struct IWMPSyncDevice3
     lpVtbl : IWMPSyncDevice3VTbl*
   end
@@ -2281,6 +2379,8 @@ lib LibWin32
     get_item_info : Proc(IWMPLibrary2*, UInt8*, UInt8**, HRESULT)
   end
 
+  IWMPLibrary2_GUID = LibC::GUID.new("dd578a4e-79b1-426c-bf8f-3add9072500b")
+  CLSID_IWMPLibrary2 = "dd578a4e-79b1-426c-bf8f-3add9072500b"
   struct IWMPLibrary2
     lpVtbl : IWMPLibrary2VTbl*
   end
@@ -2336,6 +2436,8 @@ lib LibWin32
     mouse_up : Proc(IWMPEvents*, Int16, Int16, Int32, Int32, Void)
   end
 
+  IWMPEvents_GUID = LibC::GUID.new("19a6627b-da9e-47c1-bb23-00b5e668236a")
+  CLSID_IWMPEvents = "19a6627b-da9e-47c1-bb23-00b5e668236a"
   struct IWMPEvents
     lpVtbl : IWMPEventsVTbl*
   end
@@ -2397,6 +2499,8 @@ lib LibWin32
     create_partnership_complete : Proc(IWMPEvents2*, IWMPSyncDevice, HRESULT, Void)
   end
 
+  IWMPEvents2_GUID = LibC::GUID.new("1e7601fa-47ea-4107-9ea9-9004ed9684ff")
+  CLSID_IWMPEvents2 = "1e7601fa-47ea-4107-9ea9-9004ed9684ff"
   struct IWMPEvents2
     lpVtbl : IWMPEvents2VTbl*
   end
@@ -2469,6 +2573,8 @@ lib LibWin32
     media_collection_media_removed : Proc(IWMPEvents3*, IDispatch, Void)
   end
 
+  IWMPEvents3_GUID = LibC::GUID.new("1f504270-a66b-4223-8e96-26a06c63d69f")
+  CLSID_IWMPEvents3 = "1f504270-a66b-4223-8e96-26a06c63d69f"
   struct IWMPEvents3
     lpVtbl : IWMPEvents3VTbl*
   end
@@ -2542,6 +2648,8 @@ lib LibWin32
     device_estimation : Proc(IWMPEvents4*, IWMPSyncDevice, HRESULT, Int64, Int64, Void)
   end
 
+  IWMPEvents4_GUID = LibC::GUID.new("26dabcfa-306b-404d-9a6f-630a8405048d")
+  CLSID_IWMPEvents4 = "26dabcfa-306b-404d-9a6f-630a8405048d"
   struct IWMPEvents4
     lpVtbl : IWMPEvents4VTbl*
   end
@@ -2556,6 +2664,8 @@ lib LibWin32
     invoke : Proc(IWMPOCXEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IWMPOCXEvents_GUID = LibC::GUID.new("6bf52a51-394a-11d3-b153-00c04f79faa6")
+  CLSID_IWMPOCXEvents = "6bf52a51-394a-11d3-b153-00c04f79faa6"
   struct IWMPOCXEvents
     lpVtbl : IWMPOCXEventsVTbl*
   end
@@ -2573,6 +2683,8 @@ lib LibWin32
     get_full_screen : Proc(IWMPNodeRealEstate*, LibC::BOOL*, HRESULT)
   end
 
+  IWMPNodeRealEstate_GUID = LibC::GUID.new("42751198-5a50-4460-bcb4-709f8bdc8e59")
+  CLSID_IWMPNodeRealEstate = "42751198-5a50-4460-bcb4-709f8bdc8e59"
   struct IWMPNodeRealEstate
     lpVtbl : IWMPNodeRealEstateVTbl*
   end
@@ -2585,6 +2697,8 @@ lib LibWin32
     on_full_screen_transition : Proc(IWMPNodeRealEstateHost*, LibC::BOOL, HRESULT)
   end
 
+  IWMPNodeRealEstateHost_GUID = LibC::GUID.new("1491087d-2c6b-44c8-b019-b3c929d2ada9")
+  CLSID_IWMPNodeRealEstateHost = "1491087d-2c6b-44c8-b019-b3c929d2ada9"
   struct IWMPNodeRealEstateHost
     lpVtbl : IWMPNodeRealEstateHostVTbl*
   end
@@ -2597,6 +2711,8 @@ lib LibWin32
     get_owner_window : Proc(IWMPNodeWindowed*, LibC::IntPtrT*, HRESULT)
   end
 
+  IWMPNodeWindowed_GUID = LibC::GUID.new("96740bfa-c56a-45d1-a3a4-762914d4ade9")
+  CLSID_IWMPNodeWindowed = "96740bfa-c56a-45d1-a3a4-762914d4ade9"
   struct IWMPNodeWindowed
     lpVtbl : IWMPNodeWindowedVTbl*
   end
@@ -2608,6 +2724,8 @@ lib LibWin32
     on_window_message_from_renderer : Proc(IWMPNodeWindowedHost*, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, LibC::BOOL*, HRESULT)
   end
 
+  IWMPNodeWindowedHost_GUID = LibC::GUID.new("a300415a-54aa-4081-adbf-3b13610d8958")
+  CLSID_IWMPNodeWindowedHost = "a300415a-54aa-4081-adbf-3b13610d8958"
   struct IWMPNodeWindowedHost
     lpVtbl : IWMPNodeWindowedHostVTbl*
   end
@@ -2619,6 +2737,8 @@ lib LibWin32
     on_window_message : Proc(IWMPWindowMessageSink*, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, LibC::BOOL*, HRESULT)
   end
 
+  IWMPWindowMessageSink_GUID = LibC::GUID.new("3a0daa30-908d-4789-ba87-aed879b5c49b")
+  CLSID_IWMPWindowMessageSink = "3a0daa30-908d-4789-ba87-aed879b5c49b"
   struct IWMPWindowMessageSink
     lpVtbl : IWMPWindowMessageSinkVTbl*
   end
@@ -2631,6 +2751,8 @@ lib LibWin32
     on_draw : Proc(IWMPNodeWindowless*, LibC::IntPtrT, RECT*, HRESULT)
   end
 
+  IWMPNodeWindowless_GUID = LibC::GUID.new("9b9199ad-780c-4eda-b816-261eba5d1575")
+  CLSID_IWMPNodeWindowless = "9b9199ad-780c-4eda-b816-261eba5d1575"
   struct IWMPNodeWindowless
     lpVtbl : IWMPNodeWindowlessVTbl*
   end
@@ -2642,6 +2764,8 @@ lib LibWin32
     invalidate_rect : Proc(IWMPNodeWindowlessHost*, RECT*, LibC::BOOL, HRESULT)
   end
 
+  IWMPNodeWindowlessHost_GUID = LibC::GUID.new("be7017c6-ce34-4901-8106-770381aa6e3e")
+  CLSID_IWMPNodeWindowlessHost = "be7017c6-ce34-4901-8106-770381aa6e3e"
   struct IWMPNodeWindowlessHost
     lpVtbl : IWMPNodeWindowlessHostVTbl*
   end
@@ -2653,6 +2777,8 @@ lib LibWin32
     put_presenter_activate : Proc(IWMPVideoRenderConfig*, IMFActivate, HRESULT)
   end
 
+  IWMPVideoRenderConfig_GUID = LibC::GUID.new("6d6cf803-1ec0-4c8d-b3ca-f18e27282074")
+  CLSID_IWMPVideoRenderConfig = "6d6cf803-1ec0-4c8d-b3ca-f18e27282074"
   struct IWMPVideoRenderConfig
     lpVtbl : IWMPVideoRenderConfigVTbl*
   end
@@ -2665,6 +2791,8 @@ lib LibWin32
     put_audio_output_device : Proc(IWMPAudioRenderConfig*, UInt8*, HRESULT)
   end
 
+  IWMPAudioRenderConfig_GUID = LibC::GUID.new("e79c6349-5997-4ce4-917c-22a3391ec564")
+  CLSID_IWMPAudioRenderConfig = "e79c6349-5997-4ce4-917c-22a3391ec564"
   struct IWMPAudioRenderConfig
     lpVtbl : IWMPAudioRenderConfigVTbl*
   end
@@ -2677,6 +2805,8 @@ lib LibWin32
     get_in_proc_only : Proc(IWMPRenderConfig*, LibC::BOOL*, HRESULT)
   end
 
+  IWMPRenderConfig_GUID = LibC::GUID.new("959506c1-0314-4ec5-9e61-8528db5e5478")
+  CLSID_IWMPRenderConfig = "959506c1-0314-4ec5-9e61-8528db5e5478"
   struct IWMPRenderConfig
     lpVtbl : IWMPRenderConfigVTbl*
   end
@@ -2689,6 +2819,8 @@ lib LibWin32
     get_stream_state : Proc(IWMPServices*, WMPServices_StreamState*, HRESULT)
   end
 
+  IWMPServices_GUID = LibC::GUID.new("afb6b76b-1e20-4198-83b3-191db6e0b149")
+  CLSID_IWMPServices = "afb6b76b-1e20-4198-83b3-191db6e0b149"
   struct IWMPServices
     lpVtbl : IWMPServicesVTbl*
   end
@@ -2701,6 +2833,8 @@ lib LibWin32
     wmp_un_register_player_plugin : Proc(IWMPMediaPluginRegistrar*, Guid, Guid, HRESULT)
   end
 
+  IWMPMediaPluginRegistrar_GUID = LibC::GUID.new("68e27045-05bd-40b2-9720-23088c78e390")
+  CLSID_IWMPMediaPluginRegistrar = "68e27045-05bd-40b2-9720-23088c78e390"
   struct IWMPMediaPluginRegistrar
     lpVtbl : IWMPMediaPluginRegistrarVTbl*
   end
@@ -2717,6 +2851,8 @@ lib LibWin32
     un_advise_wmp_services : Proc(IWMPPlugin*, HRESULT)
   end
 
+  IWMPPlugin_GUID = LibC::GUID.new("f1392a70-024c-42bb-a998-73dfdfe7d5a7")
+  CLSID_IWMPPlugin = "f1392a70-024c-42bb-a998-73dfdfe7d5a7"
   struct IWMPPlugin
     lpVtbl : IWMPPluginVTbl*
   end
@@ -2729,6 +2865,8 @@ lib LibWin32
     get_enable : Proc(IWMPPluginEnable*, LibC::BOOL*, HRESULT)
   end
 
+  IWMPPluginEnable_GUID = LibC::GUID.new("5fca444c-7ad1-479d-a4ef-40566a5309d6")
+  CLSID_IWMPPluginEnable = "5fca444c-7ad1-479d-a4ef-40566a5309d6"
   struct IWMPPluginEnable
     lpVtbl : IWMPPluginEnableVTbl*
   end
@@ -2742,6 +2880,8 @@ lib LibWin32
     get_graph_creation_flags : Proc(IWMPGraphCreation*, UInt32*, HRESULT)
   end
 
+  IWMPGraphCreation_GUID = LibC::GUID.new("bfb377e5-c594-4369-a970-de896d5ece74")
+  CLSID_IWMPGraphCreation = "bfb377e5-c594-4369-a970-de896d5ece74"
   struct IWMPGraphCreation
     lpVtbl : IWMPGraphCreationVTbl*
   end
@@ -2754,6 +2894,8 @@ lib LibWin32
     get_error_url : Proc(IWMPConvert*, UInt8**, HRESULT)
   end
 
+  IWMPConvert_GUID = LibC::GUID.new("d683162f-57d4-4108-8373-4a9676d1c2e9")
+  CLSID_IWMPConvert = "d683162f-57d4-4108-8373-4a9676d1c2e9"
   struct IWMPConvert
     lpVtbl : IWMPConvertVTbl*
   end
@@ -2765,6 +2907,8 @@ lib LibWin32
     allow_transcode : Proc(IWMPTranscodePolicy*, Int16*, HRESULT)
   end
 
+  IWMPTranscodePolicy_GUID = LibC::GUID.new("b64cbac3-401c-4327-a3e8-b9feb3a8c25c")
+  CLSID_IWMPTranscodePolicy = "b64cbac3-401c-4327-a3e8-b9feb3a8c25c"
   struct IWMPTranscodePolicy
     lpVtbl : IWMPTranscodePolicyVTbl*
   end
@@ -2776,6 +2920,8 @@ lib LibWin32
     notify_user_event : Proc(IWMPUserEventSink*, Int32, HRESULT)
   end
 
+  IWMPUserEventSink_GUID = LibC::GUID.new("cfccfa72-c343-48c3-a2de-b7a4402e39f2")
+  CLSID_IWMPUserEventSink = "cfccfa72-c343-48c3-a2de-b7a4402e39f2"
   struct IWMPUserEventSink
     lpVtbl : IWMPUserEventSinkVTbl*
   end
@@ -2802,6 +2948,8 @@ lib LibWin32
     item_count_limit : Proc(IXFeedsManager*, UInt32*, HRESULT)
   end
 
+  IXFeedsManager_GUID = LibC::GUID.new("5357e238-fb12-4aca-a930-cab7832b84bf")
+  CLSID_IXFeedsManager = "5357e238-fb12-4aca-a930-cab7832b84bf"
   struct IXFeedsManager
     lpVtbl : IXFeedsManagerVTbl*
   end
@@ -2814,6 +2962,8 @@ lib LibWin32
     item : Proc(IXFeedsEnum*, UInt32, Guid*, Void**, HRESULT)
   end
 
+  IXFeedsEnum_GUID = LibC::GUID.new("dc43a9d5-5015-4301-8c96-a47434b4d658")
+  CLSID_IXFeedsEnum = "dc43a9d5-5015-4301-8c96-a47434b4d658"
   struct IXFeedsEnum
     lpVtbl : IXFeedsEnumVTbl*
   end
@@ -2842,6 +2992,8 @@ lib LibWin32
     total_item_count : Proc(IXFeedFolder*, UInt32*, HRESULT)
   end
 
+  IXFeedFolder_GUID = LibC::GUID.new("4c963678-3a51-4b88-8531-98b90b6508f2")
+  CLSID_IXFeedFolder = "4c963678-3a51-4b88-8531-98b90b6508f2"
   struct IXFeedFolder
     lpVtbl : IXFeedFolderVTbl*
   end
@@ -2868,6 +3020,8 @@ lib LibWin32
     feed_item_count_changed : Proc(IXFeedFolderEvents*, LibC::LPWSTR, Int32, HRESULT)
   end
 
+  IXFeedFolderEvents_GUID = LibC::GUID.new("7964b769-234a-4bb1-a5f4-90454c8ad07e")
+  CLSID_IXFeedFolderEvents = "7964b769-234a-4bb1-a5f4-90454c8ad07e"
   struct IXFeedFolderEvents
     lpVtbl : IXFeedFolderEventsVTbl*
   end
@@ -2922,6 +3076,8 @@ lib LibWin32
     item_count : Proc(IXFeed*, UInt32*, HRESULT)
   end
 
+  IXFeed_GUID = LibC::GUID.new("a44179a4-e0f6-403b-af8d-d080f425a451")
+  CLSID_IXFeed = "a44179a4-e0f6-403b-af8d-d080f425a451"
   struct IXFeed
     lpVtbl : IXFeedVTbl*
   end
@@ -2982,6 +3138,8 @@ lib LibWin32
     clear_credentials : Proc(IXFeed2*, HRESULT)
   end
 
+  IXFeed2_GUID = LibC::GUID.new("ce528e77-3716-4eb7-956d-f5e37502e12a")
+  CLSID_IXFeed2 = "ce528e77-3716-4eb7-956d-f5e37502e12a"
   struct IXFeed2
     lpVtbl : IXFeed2VTbl*
   end
@@ -3000,6 +3158,8 @@ lib LibWin32
     feed_item_count_changed : Proc(IXFeedEvents*, LibC::LPWSTR, Int32, HRESULT)
   end
 
+  IXFeedEvents_GUID = LibC::GUID.new("1630852e-1263-465b-98e5-fe60ffec4ac2")
+  CLSID_IXFeedEvents = "1630852e-1263-465b-98e5-fe60ffec4ac2"
   struct IXFeedEvents
     lpVtbl : IXFeedEventsVTbl*
   end
@@ -3027,6 +3187,8 @@ lib LibWin32
     modified : Proc(IXFeedItem*, SYSTEMTIME*, HRESULT)
   end
 
+  IXFeedItem_GUID = LibC::GUID.new("e757b2f5-e73e-434e-a1bf-2bd7c3e60fcb")
+  CLSID_IXFeedItem = "e757b2f5-e73e-434e-a1bf-2bd7c3e60fcb"
   struct IXFeedItem
     lpVtbl : IXFeedItemVTbl*
   end
@@ -3055,6 +3217,8 @@ lib LibWin32
     effective_id : Proc(IXFeedItem2*, UInt32*, HRESULT)
   end
 
+  IXFeedItem2_GUID = LibC::GUID.new("6cda2dc7-9013-4522-9970-2a9dd9ead5a3")
+  CLSID_IXFeedItem2 = "6cda2dc7-9013-4522-9970-2a9dd9ead5a3"
   struct IXFeedItem2
     lpVtbl : IXFeedItem2VTbl*
   end
@@ -3078,6 +3242,8 @@ lib LibWin32
     set_file : Proc(IXFeedEnclosure*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IXFeedEnclosure_GUID = LibC::GUID.new("bfbfb953-644f-4792-b69c-dfaca4cbf89a")
+  CLSID_IXFeedEnclosure = "bfbfb953-644f-4792-b69c-dfaca4cbf89a"
   struct IXFeedEnclosure
     lpVtbl : IXFeedEnclosureVTbl*
   end
@@ -3108,6 +3274,8 @@ lib LibWin32
     get_item_count_limit : Proc(IFeedsManager*, Int32*, HRESULT)
   end
 
+  IFeedsManager_GUID = LibC::GUID.new("a74029cc-1f1a-4906-88f0-810638d86591")
+  CLSID_IFeedsManager = "a74029cc-1f1a-4906-88f0-810638d86591"
   struct IFeedsManager
     lpVtbl : IFeedsManagerVTbl*
   end
@@ -3125,6 +3293,8 @@ lib LibWin32
     get__new_enum : Proc(IFeedsEnum*, IEnumVARIANT*, HRESULT)
   end
 
+  IFeedsEnum_GUID = LibC::GUID.new("e3cd0028-2eed-4c60-8fae-a3225309a836")
+  CLSID_IFeedsEnum = "e3cd0028-2eed-4c60-8fae-a3225309a836"
   struct IFeedsEnum
     lpVtbl : IFeedsEnumVTbl*
   end
@@ -3157,6 +3327,8 @@ lib LibWin32
     get_watcher : Proc(IFeedFolder*, FEEDS_EVENTS_SCOPE, FEEDS_EVENTS_MASK, IDispatch*, HRESULT)
   end
 
+  IFeedFolder_GUID = LibC::GUID.new("81f04ad1-4194-4d7d-86d6-11813cec163c")
+  CLSID_IFeedFolder = "81f04ad1-4194-4d7d-86d6-11813cec163c"
   struct IFeedFolder
     lpVtbl : IFeedFolderVTbl*
   end
@@ -3187,6 +3359,8 @@ lib LibWin32
     feed_item_count_changed : Proc(IFeedFolderEvents*, UInt8*, Int32, HRESULT)
   end
 
+  IFeedFolderEvents_GUID = LibC::GUID.new("20a59fa6-a844-4630-9e98-175f70b4d55b")
+  CLSID_IFeedFolderEvents = "20a59fa6-a844-4630-9e98-175f70b4d55b"
   struct IFeedFolderEvents
     lpVtbl : IFeedFolderEventsVTbl*
   end
@@ -3245,6 +3419,8 @@ lib LibWin32
     get_item_count : Proc(IFeed*, Int32*, HRESULT)
   end
 
+  IFeed_GUID = LibC::GUID.new("f7f915d8-2ede-42bc-98e7-a5d05063a757")
+  CLSID_IFeed = "f7f915d8-2ede-42bc-98e7-a5d05063a757"
   struct IFeed
     lpVtbl : IFeedVTbl*
   end
@@ -3309,6 +3485,8 @@ lib LibWin32
     clear_credentials : Proc(IFeed2*, HRESULT)
   end
 
+  IFeed2_GUID = LibC::GUID.new("33f2ea09-1398-4ab9-b6a4-f94b49d0a42e")
+  CLSID_IFeed2 = "33f2ea09-1398-4ab9-b6a4-f94b49d0a42e"
   struct IFeed2
     lpVtbl : IFeed2VTbl*
   end
@@ -3331,6 +3509,8 @@ lib LibWin32
     feed_item_count_changed : Proc(IFeedEvents*, UInt8*, Int32, HRESULT)
   end
 
+  IFeedEvents_GUID = LibC::GUID.new("abf35c99-0681-47ea-9a8c-1436a375a99e")
+  CLSID_IFeedEvents = "abf35c99-0681-47ea-9a8c-1436a375a99e"
   struct IFeedEvents
     lpVtbl : IFeedEventsVTbl*
   end
@@ -3362,6 +3542,8 @@ lib LibWin32
     get_modified : Proc(IFeedItem*, Float64*, HRESULT)
   end
 
+  IFeedItem_GUID = LibC::GUID.new("0a1e6cad-0a47-4da2-a13d-5baaa5c8bd4f")
+  CLSID_IFeedItem = "0a1e6cad-0a47-4da2-a13d-5baaa5c8bd4f"
   struct IFeedItem
     lpVtbl : IFeedItemVTbl*
   end
@@ -3394,6 +3576,8 @@ lib LibWin32
     get_effective_id : Proc(IFeedItem2*, Int32*, HRESULT)
   end
 
+  IFeedItem2_GUID = LibC::GUID.new("79ac9ef4-f9c1-4d2b-a50b-a7ffba4dcf37")
+  CLSID_IFeedItem2 = "79ac9ef4-f9c1-4d2b-a50b-a7ffba4dcf37"
   struct IFeedItem2
     lpVtbl : IFeedItem2VTbl*
   end
@@ -3421,6 +3605,8 @@ lib LibWin32
     set_file : Proc(IFeedEnclosure*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
+  IFeedEnclosure_GUID = LibC::GUID.new("361c26f7-90a4-4e67-ae09-3a36a546436a")
+  CLSID_IFeedEnclosure = "361c26f7-90a4-4e67-ae09-3a36a546436a"
   struct IFeedEnclosure
     lpVtbl : IFeedEnclosureVTbl*
   end
@@ -3442,6 +3628,8 @@ lib LibWin32
     render_full_screen : Proc(IWMPEffects*, TimedLevel*, HRESULT)
   end
 
+  IWMPEffects_GUID = LibC::GUID.new("d3984c13-c3cb-48e2-8be5-5168340b4f35")
+  CLSID_IWMPEffects = "d3984c13-c3cb-48e2-8be5-5168340b4f35"
   struct IWMPEffects
     lpVtbl : IWMPEffectsVTbl*
   end
@@ -3469,6 +3657,8 @@ lib LibWin32
     render_windowed : Proc(IWMPEffects2*, TimedLevel*, LibC::BOOL, HRESULT)
   end
 
+  IWMPEffects2_GUID = LibC::GUID.new("695386ec-aa3c-4618-a5e1-dd9a8b987632")
+  CLSID_IWMPEffects2 = "695386ec-aa3c-4618-a5e1-dd9a8b987632"
   struct IWMPEffects2
     lpVtbl : IWMPEffects2VTbl*
   end
@@ -3486,6 +3676,8 @@ lib LibWin32
     translate_accelerator : Proc(IWMPPluginUI*, MSG*, HRESULT)
   end
 
+  IWMPPluginUI_GUID = LibC::GUID.new("4c5e8f9f-ad3e-4bf9-9753-fcd30d6d38dd")
+  CLSID_IWMPPluginUI = "4c5e8f9f-ad3e-4bf9-9753-fcd30d6d38dd"
   struct IWMPPluginUI
     lpVtbl : IWMPPluginUIVTbl*
   end
@@ -3502,6 +3694,8 @@ lib LibWin32
     get_content_id : Proc(IWMPContentContainer*, UInt32, UInt32*, HRESULT)
   end
 
+  IWMPContentContainer_GUID = LibC::GUID.new("ad7f4d9c-1a9f-4ed2-9815-ecc0b58cb616")
+  CLSID_IWMPContentContainer = "ad7f4d9c-1a9f-4ed2-9815-ecc0b58cb616"
   struct IWMPContentContainer
     lpVtbl : IWMPContentContainerVTbl*
   end
@@ -3515,6 +3709,8 @@ lib LibWin32
     get_container : Proc(IWMPContentContainerList*, UInt32, IWMPContentContainer*, HRESULT)
   end
 
+  IWMPContentContainerList_GUID = LibC::GUID.new("a9937f78-0802-4af8-8b8d-e3f045bc8ab5")
+  CLSID_IWMPContentContainerList = "a9937f78-0802-4af8-8b8d-e3f045bc8ab5"
   struct IWMPContentContainerList
     lpVtbl : IWMPContentContainerListVTbl*
   end
@@ -3538,6 +3734,8 @@ lib LibWin32
     verify_permission_complete : Proc(IWMPContentPartnerCallback*, UInt8*, VARIANT*, HRESULT, HRESULT)
   end
 
+  IWMPContentPartnerCallback_GUID = LibC::GUID.new("9e8f7da2-0695-403c-b697-da10fafaa676")
+  CLSID_IWMPContentPartnerCallback = "9e8f7da2-0695-403c-b697-da10fafaa676"
   struct IWMPContentPartnerCallback
     lpVtbl : IWMPContentPartnerCallbackVTbl*
   end
@@ -3571,6 +3769,8 @@ lib LibWin32
     verify_permission : Proc(IWMPContentPartner*, UInt8*, VARIANT*, HRESULT)
   end
 
+  IWMPContentPartner_GUID = LibC::GUID.new("55455073-41b5-4e75-87b8-f13bdb291d08")
+  CLSID_IWMPContentPartner = "55455073-41b5-4e75-87b8-f13bdb291d08"
   struct IWMPContentPartner
     lpVtbl : IWMPContentPartnerVTbl*
   end
@@ -3585,6 +3785,8 @@ lib LibWin32
     start_background_processing : Proc(IWMPSubscriptionService*, LibC::HANDLE, HRESULT)
   end
 
+  IWMPSubscriptionService_GUID = LibC::GUID.new("376055f8-2a59-4a73-9501-dca5273a7a10")
+  CLSID_IWMPSubscriptionService = "376055f8-2a59-4a73-9501-dca5273a7a10"
   struct IWMPSubscriptionService
     lpVtbl : IWMPSubscriptionServiceVTbl*
   end
@@ -3596,6 +3798,8 @@ lib LibWin32
     on_complete : Proc(IWMPSubscriptionServiceCallback*, HRESULT, HRESULT)
   end
 
+  IWMPSubscriptionServiceCallback_GUID = LibC::GUID.new("dd01d127-2dc2-4c3a-876e-63312079f9b0")
+  CLSID_IWMPSubscriptionServiceCallback = "dd01d127-2dc2-4c3a-876e-63312079f9b0"
   struct IWMPSubscriptionServiceCallback
     lpVtbl : IWMPSubscriptionServiceCallbackVTbl*
   end
@@ -3614,6 +3818,8 @@ lib LibWin32
     prepare_for_sync : Proc(IWMPSubscriptionService2*, UInt8*, UInt8*, IWMPSubscriptionServiceCallback, HRESULT)
   end
 
+  IWMPSubscriptionService2_GUID = LibC::GUID.new("a94c120e-d600-4ec6-b05e-ec9d56d84de0")
+  CLSID_IWMPSubscriptionService2 = "a94c120e-d600-4ec6-b05e-ec9d56d84de0"
   struct IWMPSubscriptionService2
     lpVtbl : IWMPSubscriptionService2VTbl*
   end
@@ -3636,6 +3842,8 @@ lib LibWin32
     cancel : Proc(IWMPDownloadItem*, HRESULT)
   end
 
+  IWMPDownloadItem_GUID = LibC::GUID.new("c9470e8e-3f6b-46a9-a0a9-452815c34297")
+  CLSID_IWMPDownloadItem = "c9470e8e-3f6b-46a9-a0a9-452815c34297"
   struct IWMPDownloadItem
     lpVtbl : IWMPDownloadItemVTbl*
   end
@@ -3659,6 +3867,8 @@ lib LibWin32
     get_item_info : Proc(IWMPDownloadItem2*, UInt8*, UInt8**, HRESULT)
   end
 
+  IWMPDownloadItem2_GUID = LibC::GUID.new("9fbb3336-6da3-479d-b8ff-67d46e20a987")
+  CLSID_IWMPDownloadItem2 = "9fbb3336-6da3-479d-b8ff-67d46e20a987"
   struct IWMPDownloadItem2
     lpVtbl : IWMPDownloadItem2VTbl*
   end
@@ -3679,6 +3889,8 @@ lib LibWin32
     clear : Proc(IWMPDownloadCollection*, HRESULT)
   end
 
+  IWMPDownloadCollection_GUID = LibC::GUID.new("0a319c7f-85f9-436c-b88e-82fd88000e1c")
+  CLSID_IWMPDownloadCollection = "0a319c7f-85f9-436c-b88e-82fd88000e1c"
   struct IWMPDownloadCollection
     lpVtbl : IWMPDownloadCollectionVTbl*
   end
@@ -3695,6 +3907,8 @@ lib LibWin32
     create_download_collection : Proc(IWMPDownloadManager*, IWMPDownloadCollection*, HRESULT)
   end
 
+  IWMPDownloadManager_GUID = LibC::GUID.new("e15e9ad1-8f20-4cc4-9ec7-1a328ca86a0d")
+  CLSID_IWMPDownloadManager = "e15e9ad1-8f20-4cc4-9ec7-1a328ca86a0d"
   struct IWMPDownloadManager
     lpVtbl : IWMPDownloadManagerVTbl*
   end

@@ -4170,6 +4170,8 @@ lib LibWin32
     set_name : Proc(ID3D12Object*, LibC::LPWSTR, HRESULT)
   end
 
+  ID3D12Object_GUID = LibC::GUID.new("c4fec28f-7966-4e95-9f94-f431cb56c3b8")
+  CLSID_ID3D12Object = "c4fec28f-7966-4e95-9f94-f431cb56c3b8"
   struct ID3D12Object
     lpVtbl : ID3D12ObjectVTbl*
   end
@@ -4185,6 +4187,8 @@ lib LibWin32
     get_device : Proc(ID3D12DeviceChild*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12DeviceChild_GUID = LibC::GUID.new("905db94b-a00c-4140-9df5-2b64ca9ea357")
+  CLSID_ID3D12DeviceChild = "905db94b-a00c-4140-9df5-2b64ca9ea357"
   struct ID3D12DeviceChild
     lpVtbl : ID3D12DeviceChildVTbl*
   end
@@ -4200,6 +4204,8 @@ lib LibWin32
     get_device : Proc(ID3D12RootSignature*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12RootSignature_GUID = LibC::GUID.new("c54a6b66-72df-4ee8-8be5-a946a1429214")
+  CLSID_ID3D12RootSignature = "c54a6b66-72df-4ee8-8be5-a946a1429214"
   struct ID3D12RootSignature
     lpVtbl : ID3D12RootSignatureVTbl*
   end
@@ -4211,6 +4217,8 @@ lib LibWin32
     get_root_signature_desc : Proc(ID3D12RootSignatureDeserializer*, D3D12_ROOT_SIGNATURE_DESC**)
   end
 
+  ID3D12RootSignatureDeserializer_GUID = LibC::GUID.new("34ab647b-3cc8-46ac-841b-c0965645c046")
+  CLSID_ID3D12RootSignatureDeserializer = "34ab647b-3cc8-46ac-841b-c0965645c046"
   struct ID3D12RootSignatureDeserializer
     lpVtbl : ID3D12RootSignatureDeserializerVTbl*
   end
@@ -4223,6 +4231,8 @@ lib LibWin32
     get_unconverted_root_signature_desc : Proc(ID3D12VersionedRootSignatureDeserializer*, D3D12_VERSIONED_ROOT_SIGNATURE_DESC**)
   end
 
+  ID3D12VersionedRootSignatureDeserializer_GUID = LibC::GUID.new("7f91ce67-090c-4bb7-b78e-ed8ff2e31da0")
+  CLSID_ID3D12VersionedRootSignatureDeserializer = "7f91ce67-090c-4bb7-b78e-ed8ff2e31da0"
   struct ID3D12VersionedRootSignatureDeserializer
     lpVtbl : ID3D12VersionedRootSignatureDeserializerVTbl*
   end
@@ -4238,6 +4248,8 @@ lib LibWin32
     get_device : Proc(ID3D12Pageable*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12Pageable_GUID = LibC::GUID.new("63ee58fb-1268-4835-86da-f008ce62f0d6")
+  CLSID_ID3D12Pageable = "63ee58fb-1268-4835-86da-f008ce62f0d6"
   struct ID3D12Pageable
     lpVtbl : ID3D12PageableVTbl*
   end
@@ -4254,6 +4266,8 @@ lib LibWin32
     get_desc : Proc(ID3D12Heap*, D3D12_HEAP_DESC)
   end
 
+  ID3D12Heap_GUID = LibC::GUID.new("6b3b2502-6e51-45b3-90ee-9884265e8df3")
+  CLSID_ID3D12Heap = "6b3b2502-6e51-45b3-90ee-9884265e8df3"
   struct ID3D12Heap
     lpVtbl : ID3D12HeapVTbl*
   end
@@ -4276,6 +4290,8 @@ lib LibWin32
     get_heap_properties : Proc(ID3D12Resource*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS*, HRESULT)
   end
 
+  ID3D12Resource_GUID = LibC::GUID.new("696442be-a72e-4059-bc79-5b5c98040fad")
+  CLSID_ID3D12Resource = "696442be-a72e-4059-bc79-5b5c98040fad"
   struct ID3D12Resource
     lpVtbl : ID3D12ResourceVTbl*
   end
@@ -4292,6 +4308,8 @@ lib LibWin32
     reset : Proc(ID3D12CommandAllocator*, HRESULT)
   end
 
+  ID3D12CommandAllocator_GUID = LibC::GUID.new("6102dee4-af59-4b09-b999-b44d73f09b24")
+  CLSID_ID3D12CommandAllocator = "6102dee4-af59-4b09-b999-b44d73f09b24"
   struct ID3D12CommandAllocator
     lpVtbl : ID3D12CommandAllocatorVTbl*
   end
@@ -4310,6 +4328,8 @@ lib LibWin32
     signal : Proc(ID3D12Fence*, UInt64, HRESULT)
   end
 
+  ID3D12Fence_GUID = LibC::GUID.new("0a753dcf-c4d8-4b91-adf6-be5a60d95a76")
+  CLSID_ID3D12Fence = "0a753dcf-c4d8-4b91-adf6-be5a60d95a76"
   struct ID3D12Fence
     lpVtbl : ID3D12FenceVTbl*
   end
@@ -4329,6 +4349,8 @@ lib LibWin32
     get_creation_flags : Proc(ID3D12Fence1*, D3D12_FENCE_FLAGS)
   end
 
+  ID3D12Fence1_GUID = LibC::GUID.new("433685fe-e22b-4ca0-a8db-b5b4f4dd0e4a")
+  CLSID_ID3D12Fence1 = "433685fe-e22b-4ca0-a8db-b5b4f4dd0e4a"
   struct ID3D12Fence1
     lpVtbl : ID3D12Fence1VTbl*
   end
@@ -4345,6 +4367,8 @@ lib LibWin32
     get_cached_blob : Proc(ID3D12PipelineState*, ID3DBlob*, HRESULT)
   end
 
+  ID3D12PipelineState_GUID = LibC::GUID.new("765a30f3-f624-4c6f-a828-ace948622445")
+  CLSID_ID3D12PipelineState = "765a30f3-f624-4c6f-a828-ace948622445"
   struct ID3D12PipelineState
     lpVtbl : ID3D12PipelineStateVTbl*
   end
@@ -4363,6 +4387,8 @@ lib LibWin32
     get_gpu_descriptor_handle_for_heap_start : Proc(ID3D12DescriptorHeap*, D3D12_GPU_DESCRIPTOR_HANDLE)
   end
 
+  ID3D12DescriptorHeap_GUID = LibC::GUID.new("8efb471d-616c-4f49-90f7-127bb763fa51")
+  CLSID_ID3D12DescriptorHeap = "8efb471d-616c-4f49-90f7-127bb763fa51"
   struct ID3D12DescriptorHeap
     lpVtbl : ID3D12DescriptorHeapVTbl*
   end
@@ -4378,6 +4404,8 @@ lib LibWin32
     get_device : Proc(ID3D12QueryHeap*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12QueryHeap_GUID = LibC::GUID.new("0d9658ae-ed45-469e-a61d-970ec583cab4")
+  CLSID_ID3D12QueryHeap = "0d9658ae-ed45-469e-a61d-970ec583cab4"
   struct ID3D12QueryHeap
     lpVtbl : ID3D12QueryHeapVTbl*
   end
@@ -4393,6 +4421,8 @@ lib LibWin32
     get_device : Proc(ID3D12CommandSignature*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12CommandSignature_GUID = LibC::GUID.new("c36a797c-ec80-4f0a-8985-a7b2475082d1")
+  CLSID_ID3D12CommandSignature = "c36a797c-ec80-4f0a-8985-a7b2475082d1"
   struct ID3D12CommandSignature
     lpVtbl : ID3D12CommandSignatureVTbl*
   end
@@ -4409,6 +4439,8 @@ lib LibWin32
     get_type : Proc(ID3D12CommandList*, D3D12_COMMAND_LIST_TYPE)
   end
 
+  ID3D12CommandList_GUID = LibC::GUID.new("7116d91c-e7e4-47ce-b8c6-ec8168f437e5")
+  CLSID_ID3D12CommandList = "7116d91c-e7e4-47ce-b8c6-ec8168f437e5"
   struct ID3D12CommandList
     lpVtbl : ID3D12CommandListVTbl*
   end
@@ -4476,6 +4508,8 @@ lib LibWin32
     execute_indirect : Proc(ID3D12GraphicsCommandList*, ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)
   end
 
+  ID3D12GraphicsCommandList_GUID = LibC::GUID.new("5b160d0f-ac1b-4185-8ba8-b3ae42a5a455")
+  CLSID_ID3D12GraphicsCommandList = "5b160d0f-ac1b-4185-8ba8-b3ae42a5a455"
   struct ID3D12GraphicsCommandList
     lpVtbl : ID3D12GraphicsCommandListVTbl*
   end
@@ -4549,6 +4583,8 @@ lib LibWin32
     set_view_instance_mask : Proc(ID3D12GraphicsCommandList1*, UInt32, Void)
   end
 
+  ID3D12GraphicsCommandList1_GUID = LibC::GUID.new("553103fb-1fe7-4557-bb38-946d7d0e7ca7")
+  CLSID_ID3D12GraphicsCommandList1 = "553103fb-1fe7-4557-bb38-946d7d0e7ca7"
   struct ID3D12GraphicsCommandList1
     lpVtbl : ID3D12GraphicsCommandList1VTbl*
   end
@@ -4623,6 +4659,8 @@ lib LibWin32
     write_buffer_immediate : Proc(ID3D12GraphicsCommandList2*, UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
   end
 
+  ID3D12GraphicsCommandList2_GUID = LibC::GUID.new("38c3e585-ff17-412c-9150-4fc6f9d72a28")
+  CLSID_ID3D12GraphicsCommandList2 = "38c3e585-ff17-412c-9150-4fc6f9d72a28"
   struct ID3D12GraphicsCommandList2
     lpVtbl : ID3D12GraphicsCommandList2VTbl*
   end
@@ -4649,6 +4687,8 @@ lib LibWin32
     get_desc : Proc(ID3D12CommandQueue*, D3D12_COMMAND_QUEUE_DESC)
   end
 
+  ID3D12CommandQueue_GUID = LibC::GUID.new("0ec870a6-5d7e-4c22-8cfc-5baae07616ed")
+  CLSID_ID3D12CommandQueue = "0ec870a6-5d7e-4c22-8cfc-5baae07616ed"
   struct ID3D12CommandQueue
     lpVtbl : ID3D12CommandQueueVTbl*
   end
@@ -4700,6 +4740,8 @@ lib LibWin32
     get_adapter_luid : Proc(ID3D12Device*, LUID)
   end
 
+  ID3D12Device_GUID = LibC::GUID.new("189819f1-1db6-4b57-be54-1821339b85f7")
+  CLSID_ID3D12Device = "189819f1-1db6-4b57-be54-1821339b85f7"
   struct ID3D12Device
     lpVtbl : ID3D12DeviceVTbl*
   end
@@ -4720,6 +4762,8 @@ lib LibWin32
     serialize : Proc(ID3D12PipelineLibrary*, Void*, LibC::UINT_PTR, HRESULT)
   end
 
+  ID3D12PipelineLibrary_GUID = LibC::GUID.new("c64226a8-9201-46af-b4cc-53fb9ff7414f")
+  CLSID_ID3D12PipelineLibrary = "c64226a8-9201-46af-b4cc-53fb9ff7414f"
   struct ID3D12PipelineLibrary
     lpVtbl : ID3D12PipelineLibraryVTbl*
   end
@@ -4741,6 +4785,8 @@ lib LibWin32
     load_pipeline : Proc(ID3D12PipelineLibrary1*, LibC::LPWSTR, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12PipelineLibrary1_GUID = LibC::GUID.new("80eabf42-2568-4e5e-bd82-c37f86961dc3")
+  CLSID_ID3D12PipelineLibrary1 = "80eabf42-2568-4e5e-bd82-c37f86961dc3"
   struct ID3D12PipelineLibrary1
     lpVtbl : ID3D12PipelineLibrary1VTbl*
   end
@@ -4795,6 +4841,8 @@ lib LibWin32
     set_residency_priority : Proc(ID3D12Device1*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
   end
 
+  ID3D12Device1_GUID = LibC::GUID.new("77acce80-638e-4e65-8895-c1f23386863e")
+  CLSID_ID3D12Device1 = "77acce80-638e-4e65-8895-c1f23386863e"
   struct ID3D12Device1
     lpVtbl : ID3D12Device1VTbl*
   end
@@ -4850,6 +4898,8 @@ lib LibWin32
     create_pipeline_state : Proc(ID3D12Device2*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12Device2_GUID = LibC::GUID.new("30baa41e-b15b-475c-a0bb-1af5c5b64328")
+  CLSID_ID3D12Device2 = "30baa41e-b15b-475c-a0bb-1af5c5b64328"
   struct ID3D12Device2
     lpVtbl : ID3D12Device2VTbl*
   end
@@ -4908,6 +4958,8 @@ lib LibWin32
     enqueue_make_resident : Proc(ID3D12Device3*, D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)
   end
 
+  ID3D12Device3_GUID = LibC::GUID.new("81dadc15-2bad-4392-93c5-101345c4aa98")
+  CLSID_ID3D12Device3 = "81dadc15-2bad-4392-93c5-101345c4aa98"
   struct ID3D12Device3
     lpVtbl : ID3D12Device3VTbl*
   end
@@ -4925,6 +4977,8 @@ lib LibWin32
     get_session_status : Proc(ID3D12ProtectedSession*, D3D12_PROTECTED_SESSION_STATUS)
   end
 
+  ID3D12ProtectedSession_GUID = LibC::GUID.new("a1533d18-0ac1-4084-85b9-89a96116806b")
+  CLSID_ID3D12ProtectedSession = "a1533d18-0ac1-4084-85b9-89a96116806b"
   struct ID3D12ProtectedSession
     lpVtbl : ID3D12ProtectedSessionVTbl*
   end
@@ -4943,6 +4997,8 @@ lib LibWin32
     get_desc : Proc(ID3D12ProtectedResourceSession*, D3D12_PROTECTED_RESOURCE_SESSION_DESC)
   end
 
+  ID3D12ProtectedResourceSession_GUID = LibC::GUID.new("6cd696f4-f289-40cc-8091-5a6c0a099c3d")
+  CLSID_ID3D12ProtectedResourceSession = "6cd696f4-f289-40cc-8091-5a6c0a099c3d"
   struct ID3D12ProtectedResourceSession
     lpVtbl : ID3D12ProtectedResourceSessionVTbl*
   end
@@ -5007,6 +5063,8 @@ lib LibWin32
     get_resource_allocation_info1 : Proc(ID3D12Device4*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
   end
 
+  ID3D12Device4_GUID = LibC::GUID.new("e865df17-a9ee-46f9-a463-3098315aa2e5")
+  CLSID_ID3D12Device4 = "e865df17-a9ee-46f9-a463-3098315aa2e5"
   struct ID3D12Device4
     lpVtbl : ID3D12Device4VTbl*
   end
@@ -5018,6 +5076,8 @@ lib LibWin32
     lifetime_state_updated : Proc(ID3D12LifetimeOwner*, D3D12_LIFETIME_STATE, Void)
   end
 
+  ID3D12LifetimeOwner_GUID = LibC::GUID.new("e667af9f-cd56-4f46-83ce-032e595d70a8")
+  CLSID_ID3D12LifetimeOwner = "e667af9f-cd56-4f46-83ce-032e595d70a8"
   struct ID3D12LifetimeOwner
     lpVtbl : ID3D12LifetimeOwnerVTbl*
   end
@@ -5032,6 +5092,8 @@ lib LibWin32
     insert_implicit_sync : Proc(ID3D12SwapChainAssistant*, HRESULT)
   end
 
+  ID3D12SwapChainAssistant_GUID = LibC::GUID.new("f1df64b6-57fd-49cd-8807-c0eb88b45c8f")
+  CLSID_ID3D12SwapChainAssistant = "f1df64b6-57fd-49cd-8807-c0eb88b45c8f"
   struct ID3D12SwapChainAssistant
     lpVtbl : ID3D12SwapChainAssistantVTbl*
   end
@@ -5048,6 +5110,8 @@ lib LibWin32
     destroy_owned_object : Proc(ID3D12LifetimeTracker*, ID3D12DeviceChild, HRESULT)
   end
 
+  ID3D12LifetimeTracker_GUID = LibC::GUID.new("3fd03d36-4eb1-424a-a582-494ecb8ba813")
+  CLSID_ID3D12LifetimeTracker = "3fd03d36-4eb1-424a-a582-494ecb8ba813"
   struct ID3D12LifetimeTracker
     lpVtbl : ID3D12LifetimeTrackerVTbl*
   end
@@ -5063,6 +5127,8 @@ lib LibWin32
     get_device : Proc(ID3D12StateObject*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12StateObject_GUID = LibC::GUID.new("47016943-fca8-4594-93ea-af258b55346d")
+  CLSID_ID3D12StateObject = "47016943-fca8-4594-93ea-af258b55346d"
   struct ID3D12StateObject
     lpVtbl : ID3D12StateObjectVTbl*
   end
@@ -5077,6 +5143,8 @@ lib LibWin32
     set_pipeline_stack_size : Proc(ID3D12StateObjectProperties*, UInt64, Void)
   end
 
+  ID3D12StateObjectProperties_GUID = LibC::GUID.new("de5fa827-9bf9-4f26-89ff-d7f56fde3860")
+  CLSID_ID3D12StateObjectProperties = "de5fa827-9bf9-4f26-89ff-d7f56fde3860"
   struct ID3D12StateObjectProperties
     lpVtbl : ID3D12StateObjectPropertiesVTbl*
   end
@@ -5149,6 +5217,8 @@ lib LibWin32
     check_driver_matching_identifier : Proc(ID3D12Device5*, D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)
   end
 
+  ID3D12Device5_GUID = LibC::GUID.new("8b4f173b-2fea-4b80-8f58-4307191ab95d")
+  CLSID_ID3D12Device5 = "8b4f173b-2fea-4b80-8f58-4307191ab95d"
   struct ID3D12Device5
     lpVtbl : ID3D12Device5VTbl*
   end
@@ -5162,6 +5232,8 @@ lib LibWin32
     set_watson_dump_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings*, D3D12_DRED_ENABLEMENT, Void)
   end
 
+  ID3D12DeviceRemovedExtendedDataSettings_GUID = LibC::GUID.new("82bc481c-6b9b-4030-aedb-7ee3d1df1e63")
+  CLSID_ID3D12DeviceRemovedExtendedDataSettings = "82bc481c-6b9b-4030-aedb-7ee3d1df1e63"
   struct ID3D12DeviceRemovedExtendedDataSettings
     lpVtbl : ID3D12DeviceRemovedExtendedDataSettingsVTbl*
   end
@@ -5176,6 +5248,8 @@ lib LibWin32
     set_breadcrumb_context_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings1*, D3D12_DRED_ENABLEMENT, Void)
   end
 
+  ID3D12DeviceRemovedExtendedDataSettings1_GUID = LibC::GUID.new("dbd5ae51-3317-4f0a-adf9-1d7cedcaae0b")
+  CLSID_ID3D12DeviceRemovedExtendedDataSettings1 = "dbd5ae51-3317-4f0a-adf9-1d7cedcaae0b"
   struct ID3D12DeviceRemovedExtendedDataSettings1
     lpVtbl : ID3D12DeviceRemovedExtendedDataSettings1VTbl*
   end
@@ -5188,6 +5262,8 @@ lib LibWin32
     get_page_fault_allocation_output : Proc(ID3D12DeviceRemovedExtendedData*, D3D12_DRED_PAGE_FAULT_OUTPUT*, HRESULT)
   end
 
+  ID3D12DeviceRemovedExtendedData_GUID = LibC::GUID.new("98931d33-5ae8-4791-aa3c-1a73a2934e71")
+  CLSID_ID3D12DeviceRemovedExtendedData = "98931d33-5ae8-4791-aa3c-1a73a2934e71"
   struct ID3D12DeviceRemovedExtendedData
     lpVtbl : ID3D12DeviceRemovedExtendedDataVTbl*
   end
@@ -5202,6 +5278,8 @@ lib LibWin32
     get_page_fault_allocation_output1 : Proc(ID3D12DeviceRemovedExtendedData1*, D3D12_DRED_PAGE_FAULT_OUTPUT1*, HRESULT)
   end
 
+  ID3D12DeviceRemovedExtendedData1_GUID = LibC::GUID.new("9727a022-cf1d-4dda-9eba-effa653fc506")
+  CLSID_ID3D12DeviceRemovedExtendedData1 = "9727a022-cf1d-4dda-9eba-effa653fc506"
   struct ID3D12DeviceRemovedExtendedData1
     lpVtbl : ID3D12DeviceRemovedExtendedData1VTbl*
   end
@@ -5218,6 +5296,8 @@ lib LibWin32
     get_device_state : Proc(ID3D12DeviceRemovedExtendedData2*, D3D12_DRED_DEVICE_STATE)
   end
 
+  ID3D12DeviceRemovedExtendedData2_GUID = LibC::GUID.new("67fc5816-e4ca-4915-bf18-42541272da54")
+  CLSID_ID3D12DeviceRemovedExtendedData2 = "67fc5816-e4ca-4915-bf18-42541272da54"
   struct ID3D12DeviceRemovedExtendedData2
     lpVtbl : ID3D12DeviceRemovedExtendedData2VTbl*
   end
@@ -5291,6 +5371,8 @@ lib LibWin32
     set_background_processing_mode : Proc(ID3D12Device6*, D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)
   end
 
+  ID3D12Device6_GUID = LibC::GUID.new("c70b221b-40e4-4a17-89af-025a0727a6dc")
+  CLSID_ID3D12Device6 = "c70b221b-40e4-4a17-89af-025a0727a6dc"
   struct ID3D12Device6
     lpVtbl : ID3D12Device6VTbl*
   end
@@ -5310,6 +5392,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D12ProtectedResourceSession1*, D3D12_PROTECTED_RESOURCE_SESSION_DESC1)
   end
 
+  ID3D12ProtectedResourceSession1_GUID = LibC::GUID.new("d6f12dd6-76fb-406e-8961-4296eefc0409")
+  CLSID_ID3D12ProtectedResourceSession1 = "d6f12dd6-76fb-406e-8961-4296eefc0409"
   struct ID3D12ProtectedResourceSession1
     lpVtbl : ID3D12ProtectedResourceSession1VTbl*
   end
@@ -5385,6 +5469,8 @@ lib LibWin32
     create_protected_resource_session1 : Proc(ID3D12Device7*, D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12Device7_GUID = LibC::GUID.new("5c014b53-68a1-4b9b-8bd1-dd6046b9358b")
+  CLSID_ID3D12Device7 = "5c014b53-68a1-4b9b-8bd1-dd6046b9358b"
   struct ID3D12Device7
     lpVtbl : ID3D12Device7VTbl*
   end
@@ -5465,6 +5551,8 @@ lib LibWin32
     get_copyable_footprints1 : Proc(ID3D12Device8*, D3D12_RESOURCE_DESC1*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
   end
 
+  ID3D12Device8_GUID = LibC::GUID.new("9218e6bb-f944-4f7e-a75c-b1b2c7b701f3")
+  CLSID_ID3D12Device8 = "9218e6bb-f944-4f7e-a75c-b1b2c7b701f3"
   struct ID3D12Device8
     lpVtbl : ID3D12Device8VTbl*
   end
@@ -5488,6 +5576,8 @@ lib LibWin32
     get_protected_resource_session : Proc(ID3D12Resource1*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12Resource1_GUID = LibC::GUID.new("9d5e227a-4430-4161-88b3-3eca6bb16e19")
+  CLSID_ID3D12Resource1 = "9d5e227a-4430-4161-88b3-3eca6bb16e19"
   struct ID3D12Resource1
     lpVtbl : ID3D12Resource1VTbl*
   end
@@ -5512,6 +5602,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D12Resource2*, D3D12_RESOURCE_DESC1)
   end
 
+  ID3D12Resource2_GUID = LibC::GUID.new("be36ec3b-ea85-4aeb-a45a-e9d76404a495")
+  CLSID_ID3D12Resource2 = "be36ec3b-ea85-4aeb-a45a-e9d76404a495"
   struct ID3D12Resource2
     lpVtbl : ID3D12Resource2VTbl*
   end
@@ -5529,6 +5621,8 @@ lib LibWin32
     get_protected_resource_session : Proc(ID3D12Heap1*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12Heap1_GUID = LibC::GUID.new("572f7389-2168-49e3-9693-d6df5871bf6d")
+  CLSID_ID3D12Heap1 = "572f7389-2168-49e3-9693-d6df5871bf6d"
   struct ID3D12Heap1
     lpVtbl : ID3D12Heap1VTbl*
   end
@@ -5604,6 +5698,8 @@ lib LibWin32
     set_protected_resource_session : Proc(ID3D12GraphicsCommandList3*, ID3D12ProtectedResourceSession, Void)
   end
 
+  ID3D12GraphicsCommandList3_GUID = LibC::GUID.new("6fda83a7-b84c-4e38-9ac8-c7bd22016b3d")
+  CLSID_ID3D12GraphicsCommandList3 = "6fda83a7-b84c-4e38-9ac8-c7bd22016b3d"
   struct ID3D12GraphicsCommandList3
     lpVtbl : ID3D12GraphicsCommandList3VTbl*
   end
@@ -5620,6 +5716,8 @@ lib LibWin32
     get_required_parameter_resource_size : Proc(ID3D12MetaCommand*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32, UInt64)
   end
 
+  ID3D12MetaCommand_GUID = LibC::GUID.new("dbb84c27-36ce-4fc9-b801-f048c46ac570")
+  CLSID_ID3D12MetaCommand = "dbb84c27-36ce-4fc9-b801-f048c46ac570"
   struct ID3D12MetaCommand
     lpVtbl : ID3D12MetaCommandVTbl*
   end
@@ -5704,6 +5802,8 @@ lib LibWin32
     dispatch_rays : Proc(ID3D12GraphicsCommandList4*, D3D12_DISPATCH_RAYS_DESC*, Void)
   end
 
+  ID3D12GraphicsCommandList4_GUID = LibC::GUID.new("8754318e-d3a9-4541-98cf-645b50dc4874")
+  CLSID_ID3D12GraphicsCommandList4 = "8754318e-d3a9-4541-98cf-645b50dc4874"
   struct ID3D12GraphicsCommandList4
     lpVtbl : ID3D12GraphicsCommandList4VTbl*
   end
@@ -5723,6 +5823,8 @@ lib LibWin32
     get_desc : Proc(ID3D12ShaderCacheSession*, D3D12_SHADER_CACHE_SESSION_DESC)
   end
 
+  ID3D12ShaderCacheSession_GUID = LibC::GUID.new("28e2495d-0f64-4ae4-a6ec-129255dc49a8")
+  CLSID_ID3D12ShaderCacheSession = "28e2495d-0f64-4ae4-a6ec-129255dc49a8"
   struct ID3D12ShaderCacheSession
     lpVtbl : ID3D12ShaderCacheSessionVTbl*
   end
@@ -5806,6 +5908,8 @@ lib LibWin32
     create_command_queue1 : Proc(ID3D12Device9*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12Device9_GUID = LibC::GUID.new("4c80e962-f032-4f60-bc9e-ebc2cfa1d83c")
+  CLSID_ID3D12Device9 = "4c80e962-f032-4f60-bc9e-ebc2cfa1d83c"
   struct ID3D12Device9
     lpVtbl : ID3D12Device9VTbl*
   end
@@ -5818,6 +5922,8 @@ lib LibWin32
     shader_instrumentation_enabled : Proc(ID3D12Tools*, LibC::BOOL)
   end
 
+  ID3D12Tools_GUID = LibC::GUID.new("7071e1f0-e84b-4b33-974f-12fa49de65c5")
+  CLSID_ID3D12Tools = "7071e1f0-e84b-4b33-974f-12fa49de65c5"
   struct ID3D12Tools
     lpVtbl : ID3D12ToolsVTbl*
   end
@@ -5829,6 +5935,8 @@ lib LibWin32
     enable_debug_layer : Proc(ID3D12Debug*, Void)
   end
 
+  ID3D12Debug_GUID = LibC::GUID.new("344488b7-6846-474b-b989-f027448245e0")
+  CLSID_ID3D12Debug = "344488b7-6846-474b-b989-f027448245e0"
   struct ID3D12Debug
     lpVtbl : ID3D12DebugVTbl*
   end
@@ -5842,6 +5950,8 @@ lib LibWin32
     set_enable_synchronized_command_queue_validation : Proc(ID3D12Debug1*, LibC::BOOL, Void)
   end
 
+  ID3D12Debug1_GUID = LibC::GUID.new("affaa4ca-63fe-4d8e-b8ad-159000af4304")
+  CLSID_ID3D12Debug1 = "affaa4ca-63fe-4d8e-b8ad-159000af4304"
   struct ID3D12Debug1
     lpVtbl : ID3D12Debug1VTbl*
   end
@@ -5853,6 +5963,8 @@ lib LibWin32
     set_gpu_based_validation_flags : Proc(ID3D12Debug2*, D3D12_GPU_BASED_VALIDATION_FLAGS, Void)
   end
 
+  ID3D12Debug2_GUID = LibC::GUID.new("93a665c4-a3b2-4e5d-b692-a26ae14e3374")
+  CLSID_ID3D12Debug2 = "93a665c4-a3b2-4e5d-b692-a26ae14e3374"
   struct ID3D12Debug2
     lpVtbl : ID3D12Debug2VTbl*
   end
@@ -5867,6 +5979,8 @@ lib LibWin32
     set_gpu_based_validation_flags : Proc(ID3D12Debug3*, D3D12_GPU_BASED_VALIDATION_FLAGS, Void)
   end
 
+  ID3D12Debug3_GUID = LibC::GUID.new("5cf4e58f-f671-4ff1-a542-3686e3d153d1")
+  CLSID_ID3D12Debug3 = "5cf4e58f-f671-4ff1-a542-3686e3d153d1"
   struct ID3D12Debug3
     lpVtbl : ID3D12Debug3VTbl*
   end
@@ -5882,6 +5996,8 @@ lib LibWin32
     disable_debug_layer : Proc(ID3D12Debug4*, Void)
   end
 
+  ID3D12Debug4_GUID = LibC::GUID.new("014b816e-9ec5-4a2f-a845-ffbe441ce13a")
+  CLSID_ID3D12Debug4 = "014b816e-9ec5-4a2f-a845-ffbe441ce13a"
   struct ID3D12Debug4
     lpVtbl : ID3D12Debug4VTbl*
   end
@@ -5898,6 +6014,8 @@ lib LibWin32
     set_enable_auto_name : Proc(ID3D12Debug5*, LibC::BOOL, Void)
   end
 
+  ID3D12Debug5_GUID = LibC::GUID.new("548d6b12-09fa-40e0-9069-5dcd589a52c9")
+  CLSID_ID3D12Debug5 = "548d6b12-09fa-40e0-9069-5dcd589a52c9"
   struct ID3D12Debug5
     lpVtbl : ID3D12Debug5VTbl*
   end
@@ -5911,6 +6029,8 @@ lib LibWin32
     report_live_device_objects : Proc(ID3D12DebugDevice1*, D3D12_RLDO_FLAGS, HRESULT)
   end
 
+  ID3D12DebugDevice1_GUID = LibC::GUID.new("a9b71770-d099-4a65-a698-3dee10020f88")
+  CLSID_ID3D12DebugDevice1 = "a9b71770-d099-4a65-a698-3dee10020f88"
   struct ID3D12DebugDevice1
     lpVtbl : ID3D12DebugDevice1VTbl*
   end
@@ -5924,6 +6044,8 @@ lib LibWin32
     report_live_device_objects : Proc(ID3D12DebugDevice*, D3D12_RLDO_FLAGS, HRESULT)
   end
 
+  ID3D12DebugDevice_GUID = LibC::GUID.new("3febd6dd-4973-4787-8194-e45f9e28923e")
+  CLSID_ID3D12DebugDevice = "3febd6dd-4973-4787-8194-e45f9e28923e"
   struct ID3D12DebugDevice
     lpVtbl : ID3D12DebugDeviceVTbl*
   end
@@ -5939,6 +6061,8 @@ lib LibWin32
     get_debug_parameter : Proc(ID3D12DebugDevice2*, D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)
   end
 
+  ID3D12DebugDevice2_GUID = LibC::GUID.new("60eccbc1-378d-4df1-894c-f8ac5ce4d7dd")
+  CLSID_ID3D12DebugDevice2 = "60eccbc1-378d-4df1-894c-f8ac5ce4d7dd"
   struct ID3D12DebugDevice2
     lpVtbl : ID3D12DebugDevice2VTbl*
   end
@@ -5950,6 +6074,8 @@ lib LibWin32
     assert_resource_state : Proc(ID3D12DebugCommandQueue*, ID3D12Resource, UInt32, UInt32, LibC::BOOL)
   end
 
+  ID3D12DebugCommandQueue_GUID = LibC::GUID.new("09e0bf36-54ac-484f-8847-4baeeab6053a")
+  CLSID_ID3D12DebugCommandQueue = "09e0bf36-54ac-484f-8847-4baeeab6053a"
   struct ID3D12DebugCommandQueue
     lpVtbl : ID3D12DebugCommandQueueVTbl*
   end
@@ -5963,6 +6089,8 @@ lib LibWin32
     get_debug_parameter : Proc(ID3D12DebugCommandList1*, D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)
   end
 
+  ID3D12DebugCommandList1_GUID = LibC::GUID.new("102ca951-311b-4b01-b11f-ecb83e061b37")
+  CLSID_ID3D12DebugCommandList1 = "102ca951-311b-4b01-b11f-ecb83e061b37"
   struct ID3D12DebugCommandList1
     lpVtbl : ID3D12DebugCommandList1VTbl*
   end
@@ -5976,6 +6104,8 @@ lib LibWin32
     get_feature_mask : Proc(ID3D12DebugCommandList*, D3D12_DEBUG_FEATURE)
   end
 
+  ID3D12DebugCommandList_GUID = LibC::GUID.new("09e0bf36-54ac-484f-8847-4baeeab6053f")
+  CLSID_ID3D12DebugCommandList = "09e0bf36-54ac-484f-8847-4baeeab6053f"
   struct ID3D12DebugCommandList
     lpVtbl : ID3D12DebugCommandListVTbl*
   end
@@ -5991,6 +6121,8 @@ lib LibWin32
     get_debug_parameter : Proc(ID3D12DebugCommandList2*, D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)
   end
 
+  ID3D12DebugCommandList2_GUID = LibC::GUID.new("aeb575cf-4e06-48be-ba3b-c450fc96652e")
+  CLSID_ID3D12DebugCommandList2 = "aeb575cf-4e06-48be-ba3b-c450fc96652e"
   struct ID3D12DebugCommandList2
     lpVtbl : ID3D12DebugCommandList2VTbl*
   end
@@ -6005,6 +6137,8 @@ lib LibWin32
     end_capturable_work : Proc(ID3D12SharingContract*, Guid*, Void)
   end
 
+  ID3D12SharingContract_GUID = LibC::GUID.new("0adf7d52-929c-4e61-addb-ffed30de66ef")
+  CLSID_ID3D12SharingContract = "0adf7d52-929c-4e61-addb-ffed30de66ef"
   struct ID3D12SharingContract
     lpVtbl : ID3D12SharingContractVTbl*
   end
@@ -6050,6 +6184,8 @@ lib LibWin32
     get_mute_debug_output : Proc(ID3D12InfoQueue*, LibC::BOOL)
   end
 
+  ID3D12InfoQueue_GUID = LibC::GUID.new("0742a90b-c387-483f-b946-30a7e4e61458")
+  CLSID_ID3D12InfoQueue = "0742a90b-c387-483f-b946-30a7e4e61458"
   struct ID3D12InfoQueue
     lpVtbl : ID3D12InfoQueueVTbl*
   end
@@ -6097,6 +6233,8 @@ lib LibWin32
     unregister_message_callback : Proc(ID3D12InfoQueue1*, UInt32, HRESULT)
   end
 
+  ID3D12InfoQueue1_GUID = LibC::GUID.new("2852dd88-b484-4c0c-b6b1-67168500e600")
+  CLSID_ID3D12InfoQueue1 = "2852dd88-b484-4c0c-b6b1-67168500e600"
   struct ID3D12InfoQueue1
     lpVtbl : ID3D12InfoQueue1VTbl*
   end
@@ -6108,6 +6246,8 @@ lib LibWin32
     set_sdk_version : Proc(ID3D12SDKConfiguration*, UInt32, PSTR, HRESULT)
   end
 
+  ID3D12SDKConfiguration_GUID = LibC::GUID.new("e9eb5314-33aa-42b2-a718-d77f58b1f1c7")
+  CLSID_ID3D12SDKConfiguration = "e9eb5314-33aa-42b2-a718-d77f58b1f1c7"
   struct ID3D12SDKConfiguration
     lpVtbl : ID3D12SDKConfigurationVTbl*
   end
@@ -6194,6 +6334,8 @@ lib LibWin32
     rs_set_shading_rate_image : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, Void)
   end
 
+  ID3D12GraphicsCommandList5_GUID = LibC::GUID.new("55050859-4024-474c-87f5-6472eaee44ea")
+  CLSID_ID3D12GraphicsCommandList5 = "55050859-4024-474c-87f5-6472eaee44ea"
   struct ID3D12GraphicsCommandList5
     lpVtbl : ID3D12GraphicsCommandList5VTbl*
   end
@@ -6281,6 +6423,8 @@ lib LibWin32
     dispatch_mesh : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, UInt32, Void)
   end
 
+  ID3D12GraphicsCommandList6_GUID = LibC::GUID.new("c3827890-e548-4cfa-96cf-5689a9370f80")
+  CLSID_ID3D12GraphicsCommandList6 = "c3827890-e548-4cfa-96cf-5689a9370f80"
   struct ID3D12GraphicsCommandList6
     lpVtbl : ID3D12GraphicsCommandList6VTbl*
   end
@@ -6299,6 +6443,8 @@ lib LibWin32
     implements_interface : Proc(ID3D12ShaderReflectionType*, ID3D12ShaderReflectionType, HRESULT)
   end
 
+  ID3D12ShaderReflectionType_GUID = LibC::GUID.new("e913c351-783d-48ca-a1d1-4f306284ad56")
+  CLSID_ID3D12ShaderReflectionType = "e913c351-783d-48ca-a1d1-4f306284ad56"
   struct ID3D12ShaderReflectionType
     lpVtbl : ID3D12ShaderReflectionTypeVTbl*
   end
@@ -6310,6 +6456,8 @@ lib LibWin32
     get_interface_slot : Proc(ID3D12ShaderReflectionVariable*, UInt32, UInt32)
   end
 
+  ID3D12ShaderReflectionVariable_GUID = LibC::GUID.new("8337a8a6-a216-444a-b2f4-314733a73aea")
+  CLSID_ID3D12ShaderReflectionVariable = "8337a8a6-a216-444a-b2f4-314733a73aea"
   struct ID3D12ShaderReflectionVariable
     lpVtbl : ID3D12ShaderReflectionVariableVTbl*
   end
@@ -6320,6 +6468,8 @@ lib LibWin32
     get_variable_by_name : Proc(ID3D12ShaderReflectionConstantBuffer*, PSTR, ID3D12ShaderReflectionVariable)
   end
 
+  ID3D12ShaderReflectionConstantBuffer_GUID = LibC::GUID.new("c59598b4-48b3-4869-b9b1-b1618b14a8b7")
+  CLSID_ID3D12ShaderReflectionConstantBuffer = "c59598b4-48b3-4869-b9b1-b1618b14a8b7"
   struct ID3D12ShaderReflectionConstantBuffer
     lpVtbl : ID3D12ShaderReflectionConstantBufferVTbl*
   end
@@ -6349,6 +6499,8 @@ lib LibWin32
     get_requires_flags : Proc(ID3D12ShaderReflection*, UInt64)
   end
 
+  ID3D12ShaderReflection_GUID = LibC::GUID.new("5a58797d-a72c-478d-8ba2-efc6b0efe88e")
+  CLSID_ID3D12ShaderReflection = "5a58797d-a72c-478d-8ba2-efc6b0efe88e"
   struct ID3D12ShaderReflection
     lpVtbl : ID3D12ShaderReflectionVTbl*
   end
@@ -6361,6 +6513,8 @@ lib LibWin32
     get_function_by_index : Proc(ID3D12LibraryReflection*, Int32, ID3D12FunctionReflection)
   end
 
+  ID3D12LibraryReflection_GUID = LibC::GUID.new("8e349d19-54db-4a56-9dc9-119d87bdb804")
+  CLSID_ID3D12LibraryReflection = "8e349d19-54db-4a56-9dc9-119d87bdb804"
   struct ID3D12LibraryReflection
     lpVtbl : ID3D12LibraryReflectionVTbl*
   end
@@ -6375,6 +6529,8 @@ lib LibWin32
     get_function_parameter : Proc(ID3D12FunctionReflection*, Int32, ID3D12FunctionParameterReflection)
   end
 
+  ID3D12FunctionReflection_GUID = LibC::GUID.new("1108795c-2772-4ba9-b2a8-d464dc7e2799")
+  CLSID_ID3D12FunctionReflection = "1108795c-2772-4ba9-b2a8-d464dc7e2799"
   struct ID3D12FunctionReflection
     lpVtbl : ID3D12FunctionReflectionVTbl*
   end
@@ -6383,6 +6539,8 @@ lib LibWin32
     get_desc : Proc(ID3D12FunctionParameterReflection*, D3D12_PARAMETER_DESC*, HRESULT)
   end
 
+  ID3D12FunctionParameterReflection_GUID = LibC::GUID.new("ec25f42d-7006-4f2b-b33e-02cc3375733f")
+  CLSID_ID3D12FunctionParameterReflection = "ec25f42d-7006-4f2b-b33e-02cc3375733f"
   struct ID3D12FunctionParameterReflection
     lpVtbl : ID3D12FunctionParameterReflectionVTbl*
   end

@@ -52,6 +52,8 @@ lib LibWin32
     get_contact_collection : Proc(IContactManager*, IContactCollection*, HRESULT)
   end
 
+  IContactManager_GUID = LibC::GUID.new("ad553d98-deb1-474a-8e17-fc0c2075b738")
+  CLSID_IContactManager = "ad553d98-deb1-474a-8e17-fc0c2075b738"
   struct IContactManager
     lpVtbl : IContactManagerVTbl*
   end
@@ -65,6 +67,8 @@ lib LibWin32
     get_current : Proc(IContactCollection*, IContact*, HRESULT)
   end
 
+  IContactCollection_GUID = LibC::GUID.new("b6afa338-d779-11d9-8bde-f66bad1e3f3a")
+  CLSID_IContactCollection = "b6afa338-d779-11d9-8bde-f66bad1e3f3a"
   struct IContactCollection
     lpVtbl : IContactCollectionVTbl*
   end
@@ -88,6 +92,8 @@ lib LibWin32
     get_property_collection : Proc(IContactProperties*, IContactPropertyCollection*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR*, LibC::BOOL, HRESULT)
   end
 
+  IContactProperties_GUID = LibC::GUID.new("70dd27dd-5cbd-46e8-bef0-23b6b346288f")
+  CLSID_IContactProperties = "70dd27dd-5cbd-46e8-bef0-23b6b346288f"
   struct IContactProperties
     lpVtbl : IContactPropertiesVTbl*
   end
@@ -101,6 +107,8 @@ lib LibWin32
     commit_changes : Proc(IContact*, UInt32, HRESULT)
   end
 
+  IContact_GUID = LibC::GUID.new("f941b671-bda7-4f77-884a-f46462f226a7")
+  CLSID_IContact = "f941b671-bda7-4f77-884a-f46462f226a7"
   struct IContact
     lpVtbl : IContactVTbl*
   end
@@ -118,6 +126,8 @@ lib LibWin32
     get_property_array_element_id : Proc(IContactPropertyCollection*, Char*, UInt32, UInt32*, HRESULT)
   end
 
+  IContactPropertyCollection_GUID = LibC::GUID.new("ffd3adf8-fa64-4328-b1b6-2e0db509cb3c")
+  CLSID_IContactPropertyCollection = "ffd3adf8-fa64-4328-b1b6-2e0db509cb3c"
   struct IContactPropertyCollection
     lpVtbl : IContactPropertyCollectionVTbl*
   end
@@ -143,6 +153,8 @@ lib LibWin32
     get_server_contact_links : Proc(IContactAggregationManager*, LibC::LPWSTR, IContactAggregationLinkCollection*, HRESULT)
   end
 
+  IContactAggregationManager_GUID = LibC::GUID.new("1d865989-4b1f-4b60-8f34-c2ad468b2b50")
+  CLSID_IContactAggregationManager = "1d865989-4b1f-4b60-8f34-c2ad468b2b50"
   struct IContactAggregationManager
     lpVtbl : IContactAggregationManagerVTbl*
   end
@@ -171,6 +183,8 @@ lib LibWin32
     put_sync_identity_hash : Proc(IContactAggregationContact*, CONTACT_AGGREGATION_BLOB*, HRESULT)
   end
 
+  IContactAggregationContact_GUID = LibC::GUID.new("1eb22e86-4c86-41f0-9f9f-c251e9fda6c3")
+  CLSID_IContactAggregationContact = "1eb22e86-4c86-41f0-9f9f-c251e9fda6c3"
   struct IContactAggregationContact
     lpVtbl : IContactAggregationContactVTbl*
   end
@@ -186,6 +200,8 @@ lib LibWin32
     find_first_by_remote_id : Proc(IContactAggregationContactCollection*, LibC::LPWSTR, LibC::LPWSTR, CONTACT_AGGREGATION_BLOB*, IContactAggregationContact*, HRESULT)
   end
 
+  IContactAggregationContactCollection_GUID = LibC::GUID.new("826e66fa-81de-43ca-a6fb-8c785cd996c6")
+  CLSID_IContactAggregationContactCollection = "826e66fa-81de-43ca-a6fb-8c785cd996c6"
   struct IContactAggregationContactCollection
     lpVtbl : IContactAggregationContactCollectionVTbl*
   end
@@ -205,6 +221,8 @@ lib LibWin32
     get_id : Proc(IContactAggregationAggregate*, LibC::LPWSTR*, HRESULT)
   end
 
+  IContactAggregationAggregate_GUID = LibC::GUID.new("7ed1c814-cd30-43c8-9b8d-2e489e53d54b")
+  CLSID_IContactAggregationAggregate = "7ed1c814-cd30-43c8-9b8d-2e489e53d54b"
   struct IContactAggregationAggregate
     lpVtbl : IContactAggregationAggregateVTbl*
   end
@@ -219,6 +237,8 @@ lib LibWin32
     get_count : Proc(IContactAggregationAggregateCollection*, Int32*, HRESULT)
   end
 
+  IContactAggregationAggregateCollection_GUID = LibC::GUID.new("2359f3a6-3a68-40af-98db-0f9eb143c3bb")
+  CLSID_IContactAggregationAggregateCollection = "2359f3a6-3a68-40af-98db-0f9eb143c3bb"
   struct IContactAggregationAggregateCollection
     lpVtbl : IContactAggregationAggregateCollectionVTbl*
   end
@@ -239,6 +259,8 @@ lib LibWin32
     put_name : Proc(IContactAggregationGroup*, LibC::LPWSTR, HRESULT)
   end
 
+  IContactAggregationGroup_GUID = LibC::GUID.new("c93c545f-1284-499b-96af-07372af473e0")
+  CLSID_IContactAggregationGroup = "c93c545f-1284-499b-96af-07372af473e0"
   struct IContactAggregationGroup
     lpVtbl : IContactAggregationGroupVTbl*
   end
@@ -253,6 +275,8 @@ lib LibWin32
     get_count : Proc(IContactAggregationGroupCollection*, UInt32*, HRESULT)
   end
 
+  IContactAggregationGroupCollection_GUID = LibC::GUID.new("20a19a9c-d2f3-4b83-9143-beffd2cc226d")
+  CLSID_IContactAggregationGroupCollection = "20a19a9c-d2f3-4b83-9143-beffd2cc226d"
   struct IContactAggregationGroupCollection
     lpVtbl : IContactAggregationGroupCollectionVTbl*
   end
@@ -280,6 +304,8 @@ lib LibWin32
     put_sync_identity_hash : Proc(IContactAggregationLink*, CONTACT_AGGREGATION_BLOB*, HRESULT)
   end
 
+  IContactAggregationLink_GUID = LibC::GUID.new("b6813323-a183-4654-8627-79b30de3a0ec")
+  CLSID_IContactAggregationLink = "b6813323-a183-4654-8627-79b30de3a0ec"
   struct IContactAggregationLink
     lpVtbl : IContactAggregationLinkVTbl*
   end
@@ -294,6 +320,8 @@ lib LibWin32
     get_count : Proc(IContactAggregationLinkCollection*, UInt32*, HRESULT)
   end
 
+  IContactAggregationLinkCollection_GUID = LibC::GUID.new("f8bc0e93-fb55-4f28-b9fa-b1c274153292")
+  CLSID_IContactAggregationLinkCollection = "f8bc0e93-fb55-4f28-b9fa-b1c274153292"
   struct IContactAggregationLinkCollection
     lpVtbl : IContactAggregationLinkCollectionVTbl*
   end
@@ -327,6 +355,8 @@ lib LibWin32
     put_object_id : Proc(IContactAggregationServerPerson*, LibC::LPWSTR, HRESULT)
   end
 
+  IContactAggregationServerPerson_GUID = LibC::GUID.new("7fdc3d4b-1b82-4334-85c5-25184ee5a5f2")
+  CLSID_IContactAggregationServerPerson = "7fdc3d4b-1b82-4334-85c5-25184ee5a5f2"
   struct IContactAggregationServerPerson
     lpVtbl : IContactAggregationServerPersonVTbl*
   end
@@ -343,6 +373,8 @@ lib LibWin32
     get_count : Proc(IContactAggregationServerPersonCollection*, UInt32*, HRESULT)
   end
 
+  IContactAggregationServerPersonCollection_GUID = LibC::GUID.new("4f730a4a-6604-47b6-a987-669ecf1e5751")
+  CLSID_IContactAggregationServerPersonCollection = "4f730a4a-6604-47b6-a987-669ecf1e5751"
   struct IContactAggregationServerPersonCollection
     lpVtbl : IContactAggregationServerPersonCollectionVTbl*
   end

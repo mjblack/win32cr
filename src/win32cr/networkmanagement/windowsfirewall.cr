@@ -331,6 +331,8 @@ lib LibWin32
     get_nat_event_manager : Proc(IUPnPNAT*, INATEventManager*, HRESULT)
   end
 
+  IUPnPNAT_GUID = LibC::GUID.new("b171c812-cc76-485a-94d8-b6b3a2794e99")
+  CLSID_IUPnPNAT = "b171c812-cc76-485a-94d8-b6b3a2794e99"
   struct IUPnPNAT
     lpVtbl : IUPnPNATVTbl*
   end
@@ -347,6 +349,8 @@ lib LibWin32
     put_number_of_entries_callback : Proc(INATEventManager*, IUnknown, HRESULT)
   end
 
+  INATEventManager_GUID = LibC::GUID.new("624bd588-9060-4109-b0b0-1adbbcac32df")
+  CLSID_INATEventManager = "624bd588-9060-4109-b0b0-1adbbcac32df"
   struct INATEventManager
     lpVtbl : INATEventManagerVTbl*
   end
@@ -358,6 +362,8 @@ lib LibWin32
     new_external_ip_address : Proc(INATExternalIPAddressCallback*, UInt8*, HRESULT)
   end
 
+  INATExternalIPAddressCallback_GUID = LibC::GUID.new("9c416740-a34e-446f-ba06-abd04c3149ae")
+  CLSID_INATExternalIPAddressCallback = "9c416740-a34e-446f-ba06-abd04c3149ae"
   struct INATExternalIPAddressCallback
     lpVtbl : INATExternalIPAddressCallbackVTbl*
   end
@@ -369,6 +375,8 @@ lib LibWin32
     new_number_of_entries : Proc(INATNumberOfEntriesCallback*, Int32, HRESULT)
   end
 
+  INATNumberOfEntriesCallback_GUID = LibC::GUID.new("c83a0a74-91ee-41b6-b67a-67e0f00bbd78")
+  CLSID_INATNumberOfEntriesCallback = "c83a0a74-91ee-41b6-b67a-67e0f00bbd78"
   struct INATNumberOfEntriesCallback
     lpVtbl : INATNumberOfEntriesCallbackVTbl*
   end
@@ -388,6 +396,8 @@ lib LibWin32
     add : Proc(IDynamicPortMappingCollection*, UInt8*, Int32, UInt8*, Int32, UInt8*, Int16, UInt8*, Int32, IDynamicPortMapping*, HRESULT)
   end
 
+  IDynamicPortMappingCollection_GUID = LibC::GUID.new("b60de00f-156e-4e8d-9ec1-3a2342c10899")
+  CLSID_IDynamicPortMappingCollection = "b60de00f-156e-4e8d-9ec1-3a2342c10899"
   struct IDynamicPortMappingCollection
     lpVtbl : IDynamicPortMappingCollectionVTbl*
   end
@@ -416,6 +426,8 @@ lib LibWin32
     edit_internal_port : Proc(IDynamicPortMapping*, Int32, HRESULT)
   end
 
+  IDynamicPortMapping_GUID = LibC::GUID.new("4fc80282-23b6-4378-9a27-cd8f17c9400c")
+  CLSID_IDynamicPortMapping = "4fc80282-23b6-4378-9a27-cd8f17c9400c"
   struct IDynamicPortMapping
     lpVtbl : IDynamicPortMappingVTbl*
   end
@@ -435,6 +447,8 @@ lib LibWin32
     add : Proc(IStaticPortMappingCollection*, Int32, UInt8*, Int32, UInt8*, Int16, UInt8*, IStaticPortMapping*, HRESULT)
   end
 
+  IStaticPortMappingCollection_GUID = LibC::GUID.new("cd1f3e77-66d6-4664-82c7-36dbb641d0f1")
+  CLSID_IStaticPortMappingCollection = "cd1f3e77-66d6-4664-82c7-36dbb641d0f1"
   struct IStaticPortMappingCollection
     lpVtbl : IStaticPortMappingCollectionVTbl*
   end
@@ -460,6 +474,8 @@ lib LibWin32
     edit_internal_port : Proc(IStaticPortMapping*, Int32, HRESULT)
   end
 
+  IStaticPortMapping_GUID = LibC::GUID.new("6f10711f-729b-41e5-93b8-f21d0f818df1")
+  CLSID_IStaticPortMapping = "6f10711f-729b-41e5-93b8-f21d0f818df1"
   struct IStaticPortMapping
     lpVtbl : IStaticPortMappingVTbl*
   end
@@ -474,6 +490,8 @@ lib LibWin32
     clone : Proc(IEnumNetConnection*, IEnumNetConnection*, HRESULT)
   end
 
+  IEnumNetConnection_GUID = LibC::GUID.new("c08956a0-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_IEnumNetConnection = "c08956a0-1cd3-11d1-b1c5-00805fc1270e"
   struct IEnumNetConnection
     lpVtbl : IEnumNetConnectionVTbl*
   end
@@ -491,6 +509,8 @@ lib LibWin32
     rename : Proc(INetConnection*, LibC::LPWSTR, HRESULT)
   end
 
+  INetConnection_GUID = LibC::GUID.new("c08956a1-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_INetConnection = "c08956a1-1cd3-11d1-b1c5-00805fc1270e"
   struct INetConnection
     lpVtbl : INetConnectionVTbl*
   end
@@ -502,6 +522,8 @@ lib LibWin32
     enum_connections : Proc(INetConnectionManager*, NETCONMGR_ENUM_FLAGS, IEnumNetConnection*, HRESULT)
   end
 
+  INetConnectionManager_GUID = LibC::GUID.new("c08956a2-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_INetConnectionManager = "c08956a2-1cd3-11d1-b1c5-00805fc1270e"
   struct INetConnectionManager
     lpVtbl : INetConnectionManagerVTbl*
   end
@@ -515,6 +537,8 @@ lib LibWin32
     disconnect : Proc(INetConnectionConnectUi*, LibC::HANDLE, UInt32, HRESULT)
   end
 
+  INetConnectionConnectUi_GUID = LibC::GUID.new("c08956a3-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_INetConnectionConnectUi = "c08956a3-1cd3-11d1-b1c5-00805fc1270e"
   struct INetConnectionConnectUi
     lpVtbl : INetConnectionConnectUiVTbl*
   end
@@ -529,6 +553,8 @@ lib LibWin32
     clone : Proc(IEnumNetSharingPortMapping*, IEnumNetSharingPortMapping*, HRESULT)
   end
 
+  IEnumNetSharingPortMapping_GUID = LibC::GUID.new("c08956b0-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_IEnumNetSharingPortMapping = "c08956b0-1cd3-11d1-b1c5-00805fc1270e"
   struct IEnumNetSharingPortMapping
     lpVtbl : IEnumNetSharingPortMappingVTbl*
   end
@@ -551,6 +577,8 @@ lib LibWin32
     get_enabled : Proc(INetSharingPortMappingProps*, Int16*, HRESULT)
   end
 
+  INetSharingPortMappingProps_GUID = LibC::GUID.new("24b7e9b5-e38f-4685-851b-00892cf5f940")
+  CLSID_INetSharingPortMappingProps = "24b7e9b5-e38f-4685-851b-00892cf5f940"
   struct INetSharingPortMappingProps
     lpVtbl : INetSharingPortMappingPropsVTbl*
   end
@@ -569,6 +597,8 @@ lib LibWin32
     delete : Proc(INetSharingPortMapping*, HRESULT)
   end
 
+  INetSharingPortMapping_GUID = LibC::GUID.new("c08956b1-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_INetSharingPortMapping = "c08956b1-1cd3-11d1-b1c5-00805fc1270e"
   struct INetSharingPortMapping
     lpVtbl : INetSharingPortMappingVTbl*
   end
@@ -583,6 +613,8 @@ lib LibWin32
     clone : Proc(IEnumNetSharingEveryConnection*, IEnumNetSharingEveryConnection*, HRESULT)
   end
 
+  IEnumNetSharingEveryConnection_GUID = LibC::GUID.new("c08956b8-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_IEnumNetSharingEveryConnection = "c08956b8-1cd3-11d1-b1c5-00805fc1270e"
   struct IEnumNetSharingEveryConnection
     lpVtbl : IEnumNetSharingEveryConnectionVTbl*
   end
@@ -597,6 +629,8 @@ lib LibWin32
     clone : Proc(IEnumNetSharingPublicConnection*, IEnumNetSharingPublicConnection*, HRESULT)
   end
 
+  IEnumNetSharingPublicConnection_GUID = LibC::GUID.new("c08956b4-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_IEnumNetSharingPublicConnection = "c08956b4-1cd3-11d1-b1c5-00805fc1270e"
   struct IEnumNetSharingPublicConnection
     lpVtbl : IEnumNetSharingPublicConnectionVTbl*
   end
@@ -611,6 +645,8 @@ lib LibWin32
     clone : Proc(IEnumNetSharingPrivateConnection*, IEnumNetSharingPrivateConnection*, HRESULT)
   end
 
+  IEnumNetSharingPrivateConnection_GUID = LibC::GUID.new("c08956b5-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_IEnumNetSharingPrivateConnection = "c08956b5-1cd3-11d1-b1c5-00805fc1270e"
   struct IEnumNetSharingPrivateConnection
     lpVtbl : IEnumNetSharingPrivateConnectionVTbl*
   end
@@ -627,6 +663,8 @@ lib LibWin32
     get_count : Proc(INetSharingPortMappingCollection*, Int32*, HRESULT)
   end
 
+  INetSharingPortMappingCollection_GUID = LibC::GUID.new("02e4a2de-da20-4e34-89c8-ac22275a010b")
+  CLSID_INetSharingPortMappingCollection = "02e4a2de-da20-4e34-89c8-ac22275a010b"
   struct INetSharingPortMappingCollection
     lpVtbl : INetSharingPortMappingCollectionVTbl*
   end
@@ -647,6 +685,8 @@ lib LibWin32
     get_characteristics : Proc(INetConnectionProps*, UInt32*, HRESULT)
   end
 
+  INetConnectionProps_GUID = LibC::GUID.new("f4277c95-ce5b-463d-8167-5662d9bcaa72")
+  CLSID_INetConnectionProps = "f4277c95-ce5b-463d-8167-5662d9bcaa72"
   struct INetConnectionProps
     lpVtbl : INetConnectionPropsVTbl*
   end
@@ -671,6 +711,8 @@ lib LibWin32
     remove_port_mapping : Proc(INetSharingConfiguration*, INetSharingPortMapping, HRESULT)
   end
 
+  INetSharingConfiguration_GUID = LibC::GUID.new("c08956b6-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_INetSharingConfiguration = "c08956b6-1cd3-11d1-b1c5-00805fc1270e"
   struct INetSharingConfiguration
     lpVtbl : INetSharingConfigurationVTbl*
   end
@@ -687,6 +729,8 @@ lib LibWin32
     get_count : Proc(INetSharingEveryConnectionCollection*, Int32*, HRESULT)
   end
 
+  INetSharingEveryConnectionCollection_GUID = LibC::GUID.new("33c4643c-7811-46fa-a89a-768597bd7223")
+  CLSID_INetSharingEveryConnectionCollection = "33c4643c-7811-46fa-a89a-768597bd7223"
   struct INetSharingEveryConnectionCollection
     lpVtbl : INetSharingEveryConnectionCollectionVTbl*
   end
@@ -703,6 +747,8 @@ lib LibWin32
     get_count : Proc(INetSharingPublicConnectionCollection*, Int32*, HRESULT)
   end
 
+  INetSharingPublicConnectionCollection_GUID = LibC::GUID.new("7d7a6355-f372-4971-a149-bfc927be762a")
+  CLSID_INetSharingPublicConnectionCollection = "7d7a6355-f372-4971-a149-bfc927be762a"
   struct INetSharingPublicConnectionCollection
     lpVtbl : INetSharingPublicConnectionCollectionVTbl*
   end
@@ -719,6 +765,8 @@ lib LibWin32
     get_count : Proc(INetSharingPrivateConnectionCollection*, Int32*, HRESULT)
   end
 
+  INetSharingPrivateConnectionCollection_GUID = LibC::GUID.new("38ae69e0-4409-402a-a2cb-e965c727f840")
+  CLSID_INetSharingPrivateConnectionCollection = "38ae69e0-4409-402a-a2cb-e965c727f840"
   struct INetSharingPrivateConnectionCollection
     lpVtbl : INetSharingPrivateConnectionCollectionVTbl*
   end
@@ -739,6 +787,8 @@ lib LibWin32
     get_net_connection_props : Proc(INetSharingManager*, INetConnection, INetConnectionProps*, HRESULT)
   end
 
+  INetSharingManager_GUID = LibC::GUID.new("c08956b7-1cd3-11d1-b1c5-00805fc1270e")
+  CLSID_INetSharingManager = "c08956b7-1cd3-11d1-b1c5-00805fc1270e"
   struct INetSharingManager
     lpVtbl : INetSharingManagerVTbl*
   end
@@ -761,6 +811,8 @@ lib LibWin32
     put_enabled : Proc(INetFwRemoteAdminSettings*, Int16, HRESULT)
   end
 
+  INetFwRemoteAdminSettings_GUID = LibC::GUID.new("d4becddf-6f73-4a83-b832-9c66874cd20e")
+  CLSID_INetFwRemoteAdminSettings = "d4becddf-6f73-4a83-b832-9c66874cd20e"
   struct INetFwRemoteAdminSettings
     lpVtbl : INetFwRemoteAdminSettingsVTbl*
   end
@@ -795,6 +847,8 @@ lib LibWin32
     put_allow_outbound_packet_too_big : Proc(INetFwIcmpSettings*, Int16, HRESULT)
   end
 
+  INetFwIcmpSettings_GUID = LibC::GUID.new("a6207b2e-7cdd-426a-951e-5e1cbc5afead")
+  CLSID_INetFwIcmpSettings = "a6207b2e-7cdd-426a-951e-5e1cbc5afead"
   struct INetFwIcmpSettings
     lpVtbl : INetFwIcmpSettingsVTbl*
   end
@@ -824,6 +878,8 @@ lib LibWin32
     get_built_in : Proc(INetFwOpenPort*, Int16*, HRESULT)
   end
 
+  INetFwOpenPort_GUID = LibC::GUID.new("e0483ba0-47ff-4d9c-a6d6-7741d0b195f7")
+  CLSID_INetFwOpenPort = "e0483ba0-47ff-4d9c-a6d6-7741d0b195f7"
   struct INetFwOpenPort
     lpVtbl : INetFwOpenPortVTbl*
   end
@@ -843,6 +899,8 @@ lib LibWin32
     get__new_enum : Proc(INetFwOpenPorts*, IUnknown*, HRESULT)
   end
 
+  INetFwOpenPorts_GUID = LibC::GUID.new("c0e9d7fa-e07e-430a-b19a-090ce82d92e2")
+  CLSID_INetFwOpenPorts = "c0e9d7fa-e07e-430a-b19a-090ce82d92e2"
   struct INetFwOpenPorts
     lpVtbl : INetFwOpenPortsVTbl*
   end
@@ -869,6 +927,8 @@ lib LibWin32
     get_globally_open_ports : Proc(INetFwService*, INetFwOpenPorts*, HRESULT)
   end
 
+  INetFwService_GUID = LibC::GUID.new("79fd57c8-908e-4a36-9888-d5b3f0a444cf")
+  CLSID_INetFwService = "79fd57c8-908e-4a36-9888-d5b3f0a444cf"
   struct INetFwService
     lpVtbl : INetFwServiceVTbl*
   end
@@ -886,6 +946,8 @@ lib LibWin32
     get__new_enum : Proc(INetFwServices*, IUnknown*, HRESULT)
   end
 
+  INetFwServices_GUID = LibC::GUID.new("79649bb4-903e-421b-94c9-79848e79f6ee")
+  CLSID_INetFwServices = "79649bb4-903e-421b-94c9-79848e79f6ee"
   struct INetFwServices
     lpVtbl : INetFwServicesVTbl*
   end
@@ -912,6 +974,8 @@ lib LibWin32
     put_enabled : Proc(INetFwAuthorizedApplication*, Int16, HRESULT)
   end
 
+  INetFwAuthorizedApplication_GUID = LibC::GUID.new("b5e64ffa-c2c5-444e-a301-fb5e00018050")
+  CLSID_INetFwAuthorizedApplication = "b5e64ffa-c2c5-444e-a301-fb5e00018050"
   struct INetFwAuthorizedApplication
     lpVtbl : INetFwAuthorizedApplicationVTbl*
   end
@@ -931,6 +995,8 @@ lib LibWin32
     get__new_enum : Proc(INetFwAuthorizedApplications*, IUnknown*, HRESULT)
   end
 
+  INetFwAuthorizedApplications_GUID = LibC::GUID.new("644efd52-ccf9-486c-97a2-39f352570b30")
+  CLSID_INetFwAuthorizedApplications = "644efd52-ccf9-486c-97a2-39f352570b30"
   struct INetFwAuthorizedApplications
     lpVtbl : INetFwAuthorizedApplicationsVTbl*
   end
@@ -981,6 +1047,8 @@ lib LibWin32
     put_action : Proc(INetFwRule*, NET_FW_ACTION, HRESULT)
   end
 
+  INetFwRule_GUID = LibC::GUID.new("af230d27-baba-4e42-aced-f524f22cfce2")
+  CLSID_INetFwRule = "af230d27-baba-4e42-aced-f524f22cfce2"
   struct INetFwRule
     lpVtbl : INetFwRuleVTbl*
   end
@@ -1033,6 +1101,8 @@ lib LibWin32
     put_edge_traversal_options : Proc(INetFwRule2*, Int32, HRESULT)
   end
 
+  INetFwRule2_GUID = LibC::GUID.new("9c27c8da-189b-4dde-89f7-8b39a316782c")
+  CLSID_INetFwRule2 = "9c27c8da-189b-4dde-89f7-8b39a316782c"
   struct INetFwRule2
     lpVtbl : INetFwRule2VTbl*
   end
@@ -1097,6 +1167,8 @@ lib LibWin32
     put_secure_flags : Proc(INetFwRule3*, Int32, HRESULT)
   end
 
+  INetFwRule3_GUID = LibC::GUID.new("b21563ff-d696-4222-ab46-4e89b73ab34a")
+  CLSID_INetFwRule3 = "b21563ff-d696-4222-ab46-4e89b73ab34a"
   struct INetFwRule3
     lpVtbl : INetFwRule3VTbl*
   end
@@ -1116,6 +1188,8 @@ lib LibWin32
     get__new_enum : Proc(INetFwRules*, IUnknown*, HRESULT)
   end
 
+  INetFwRules_GUID = LibC::GUID.new("9c4c6277-5027-441e-afae-ca1f542da009")
+  CLSID_INetFwRules = "9c4c6277-5027-441e-afae-ca1f542da009"
   struct INetFwRules
     lpVtbl : INetFwRulesVTbl*
   end
@@ -1133,6 +1207,8 @@ lib LibWin32
     get_rules : Proc(INetFwServiceRestriction*, INetFwRules*, HRESULT)
   end
 
+  INetFwServiceRestriction_GUID = LibC::GUID.new("8267bbe3-f890-491c-b7b6-2db1ef0e5d2b")
+  CLSID_INetFwServiceRestriction = "8267bbe3-f890-491c-b7b6-2db1ef0e5d2b"
   struct INetFwServiceRestriction
     lpVtbl : INetFwServiceRestrictionVTbl*
   end
@@ -1161,6 +1237,8 @@ lib LibWin32
     get_authorized_applications : Proc(INetFwProfile*, INetFwAuthorizedApplications*, HRESULT)
   end
 
+  INetFwProfile_GUID = LibC::GUID.new("174a0dda-e9f9-449d-993b-21ab667ca456")
+  CLSID_INetFwProfile = "174a0dda-e9f9-449d-993b-21ab667ca456"
   struct INetFwProfile
     lpVtbl : INetFwProfileVTbl*
   end
@@ -1177,6 +1255,8 @@ lib LibWin32
     get_profile_by_type : Proc(INetFwPolicy*, NET_FW_PROFILE_TYPE, INetFwProfile*, HRESULT)
   end
 
+  INetFwPolicy_GUID = LibC::GUID.new("d46d2478-9ac9-4008-9dc7-5563ce5536cc")
+  CLSID_INetFwPolicy = "d46d2478-9ac9-4008-9dc7-5563ce5536cc"
   struct INetFwPolicy
     lpVtbl : INetFwPolicyVTbl*
   end
@@ -1213,6 +1293,8 @@ lib LibWin32
     get_local_policy_modify_state : Proc(INetFwPolicy2*, NET_FW_MODIFY_STATE*, HRESULT)
   end
 
+  INetFwPolicy2_GUID = LibC::GUID.new("98325047-c671-4174-8d81-defcd3f03186")
+  CLSID_INetFwPolicy2 = "98325047-c671-4174-8d81-defcd3f03186"
   struct INetFwPolicy2
     lpVtbl : INetFwPolicy2VTbl*
   end
@@ -1232,6 +1314,8 @@ lib LibWin32
     is_icmp_type_allowed : Proc(INetFwMgr*, NET_FW_IP_VERSION, UInt8*, UInt8, VARIANT*, VARIANT*, HRESULT)
   end
 
+  INetFwMgr_GUID = LibC::GUID.new("f7898af5-cac4-4632-a2ec-da06e5111af2")
+  CLSID_INetFwMgr = "f7898af5-cac4-4632-a2ec-da06e5111af2"
   struct INetFwMgr
     lpVtbl : INetFwMgrVTbl*
   end
@@ -1251,6 +1335,8 @@ lib LibWin32
     get_path_to_signed_product_exe : Proc(INetFwProduct*, UInt8**, HRESULT)
   end
 
+  INetFwProduct_GUID = LibC::GUID.new("71881699-18f4-458b-b892-3ffce5e07f75")
+  CLSID_INetFwProduct = "71881699-18f4-458b-b892-3ffce5e07f75"
   struct INetFwProduct
     lpVtbl : INetFwProductVTbl*
   end
@@ -1269,6 +1355,8 @@ lib LibWin32
     get__new_enum : Proc(INetFwProducts*, IUnknown*, HRESULT)
   end
 
+  INetFwProducts_GUID = LibC::GUID.new("39eb36e0-2097-40bd-8af2-63a13b525362")
+  CLSID_INetFwProducts = "39eb36e0-2097-40bd-8af2-63a13b525362"
   struct INetFwProducts
     lpVtbl : INetFwProductsVTbl*
   end

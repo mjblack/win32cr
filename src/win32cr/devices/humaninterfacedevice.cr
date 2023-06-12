@@ -3372,6 +3372,8 @@ lib LibWin32
     escape : Proc(IDirectInputEffect*, DIEFFESCAPE*, HRESULT)
   end
 
+  IDirectInputEffect_GUID = LibC::GUID.new("e7e1f7c0-88d2-11d0-9ad0-00a0c9a06e35")
+  CLSID_IDirectInputEffect = "e7e1f7c0-88d2-11d0-9ad0-00a0c9a06e35"
   struct IDirectInputEffect
     lpVtbl : IDirectInputEffectVTbl*
   end
@@ -3397,6 +3399,8 @@ lib LibWin32
     initialize : Proc(IDirectInputDeviceW*, HINSTANCE, UInt32, Guid*, HRESULT)
   end
 
+  IDirectInputDeviceW_GUID = LibC::GUID.new("5944e681-c92e-11cf-bfc7-444553540000")
+  CLSID_IDirectInputDeviceW = "5944e681-c92e-11cf-bfc7-444553540000"
   struct IDirectInputDeviceW
     lpVtbl : IDirectInputDeviceWVTbl*
   end
@@ -3422,6 +3426,8 @@ lib LibWin32
     initialize : Proc(IDirectInputDeviceA*, HINSTANCE, UInt32, Guid*, HRESULT)
   end
 
+  IDirectInputDeviceA_GUID = LibC::GUID.new("5944e680-c92e-11cf-bfc7-444553540000")
+  CLSID_IDirectInputDeviceA = "5944e680-c92e-11cf-bfc7-444553540000"
   struct IDirectInputDeviceA
     lpVtbl : IDirectInputDeviceAVTbl*
   end
@@ -3456,6 +3462,8 @@ lib LibWin32
     send_device_data : Proc(IDirectInputDevice2W*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
   end
 
+  IDirectInputDevice2W_GUID = LibC::GUID.new("5944e683-c92e-11cf-bfc7-444553540000")
+  CLSID_IDirectInputDevice2W = "5944e683-c92e-11cf-bfc7-444553540000"
   struct IDirectInputDevice2W
     lpVtbl : IDirectInputDevice2WVTbl*
   end
@@ -3490,6 +3498,8 @@ lib LibWin32
     send_device_data : Proc(IDirectInputDevice2A*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
   end
 
+  IDirectInputDevice2A_GUID = LibC::GUID.new("5944e682-c92e-11cf-bfc7-444553540000")
+  CLSID_IDirectInputDevice2A = "5944e682-c92e-11cf-bfc7-444553540000"
   struct IDirectInputDevice2A
     lpVtbl : IDirectInputDevice2AVTbl*
   end
@@ -3526,6 +3536,8 @@ lib LibWin32
     write_effect_to_file : Proc(IDirectInputDevice7W*, LibC::LPWSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)
   end
 
+  IDirectInputDevice7W_GUID = LibC::GUID.new("57d7c6bd-2356-11d3-8e9d-00c04f6844ae")
+  CLSID_IDirectInputDevice7W = "57d7c6bd-2356-11d3-8e9d-00c04f6844ae"
   struct IDirectInputDevice7W
     lpVtbl : IDirectInputDevice7WVTbl*
   end
@@ -3562,6 +3574,8 @@ lib LibWin32
     write_effect_to_file : Proc(IDirectInputDevice7A*, PSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)
   end
 
+  IDirectInputDevice7A_GUID = LibC::GUID.new("57d7c6bc-2356-11d3-8e9d-00c04f6844ae")
+  CLSID_IDirectInputDevice7A = "57d7c6bc-2356-11d3-8e9d-00c04f6844ae"
   struct IDirectInputDevice7A
     lpVtbl : IDirectInputDevice7AVTbl*
   end
@@ -3601,6 +3615,8 @@ lib LibWin32
     get_image_info : Proc(IDirectInputDevice8W*, DIDEVICEIMAGEINFOHEADERW*, HRESULT)
   end
 
+  IDirectInputDevice8W_GUID = LibC::GUID.new("54d41081-dc15-4833-a41b-748f73a38179")
+  CLSID_IDirectInputDevice8W = "54d41081-dc15-4833-a41b-748f73a38179"
   struct IDirectInputDevice8W
     lpVtbl : IDirectInputDevice8WVTbl*
   end
@@ -3640,6 +3656,8 @@ lib LibWin32
     get_image_info : Proc(IDirectInputDevice8A*, DIDEVICEIMAGEINFOHEADERA*, HRESULT)
   end
 
+  IDirectInputDevice8A_GUID = LibC::GUID.new("54d41080-dc15-4833-a41b-748f73a38179")
+  CLSID_IDirectInputDevice8A = "54d41080-dc15-4833-a41b-748f73a38179"
   struct IDirectInputDevice8A
     lpVtbl : IDirectInputDevice8AVTbl*
   end
@@ -3655,6 +3673,8 @@ lib LibWin32
     initialize : Proc(IDirectInputW*, HINSTANCE, UInt32, HRESULT)
   end
 
+  IDirectInputW_GUID = LibC::GUID.new("89521361-aa8a-11cf-bfc7-444553540000")
+  CLSID_IDirectInputW = "89521361-aa8a-11cf-bfc7-444553540000"
   struct IDirectInputW
     lpVtbl : IDirectInputWVTbl*
   end
@@ -3670,6 +3690,8 @@ lib LibWin32
     initialize : Proc(IDirectInputA*, HINSTANCE, UInt32, HRESULT)
   end
 
+  IDirectInputA_GUID = LibC::GUID.new("89521360-aa8a-11cf-bfc7-444553540000")
+  CLSID_IDirectInputA = "89521360-aa8a-11cf-bfc7-444553540000"
   struct IDirectInputA
     lpVtbl : IDirectInputAVTbl*
   end
@@ -3686,6 +3708,8 @@ lib LibWin32
     find_device : Proc(IDirectInput2W*, Guid*, LibC::LPWSTR, Guid*, HRESULT)
   end
 
+  IDirectInput2W_GUID = LibC::GUID.new("5944e663-aa8a-11cf-bfc7-444553540000")
+  CLSID_IDirectInput2W = "5944e663-aa8a-11cf-bfc7-444553540000"
   struct IDirectInput2W
     lpVtbl : IDirectInput2WVTbl*
   end
@@ -3702,6 +3726,8 @@ lib LibWin32
     find_device : Proc(IDirectInput2A*, Guid*, PSTR, Guid*, HRESULT)
   end
 
+  IDirectInput2A_GUID = LibC::GUID.new("5944e662-aa8a-11cf-bfc7-444553540000")
+  CLSID_IDirectInput2A = "5944e662-aa8a-11cf-bfc7-444553540000"
   struct IDirectInput2A
     lpVtbl : IDirectInput2AVTbl*
   end
@@ -3719,6 +3745,8 @@ lib LibWin32
     create_device_ex : Proc(IDirectInput7W*, Guid*, Guid*, Void**, IUnknown, HRESULT)
   end
 
+  IDirectInput7W_GUID = LibC::GUID.new("9a4cb685-236d-11d3-8e9d-00c04f6844ae")
+  CLSID_IDirectInput7W = "9a4cb685-236d-11d3-8e9d-00c04f6844ae"
   struct IDirectInput7W
     lpVtbl : IDirectInput7WVTbl*
   end
@@ -3736,6 +3764,8 @@ lib LibWin32
     create_device_ex : Proc(IDirectInput7A*, Guid*, Guid*, Void**, IUnknown, HRESULT)
   end
 
+  IDirectInput7A_GUID = LibC::GUID.new("9a4cb684-236d-11d3-8e9d-00c04f6844ae")
+  CLSID_IDirectInput7A = "9a4cb684-236d-11d3-8e9d-00c04f6844ae"
   struct IDirectInput7A
     lpVtbl : IDirectInput7AVTbl*
   end
@@ -3754,6 +3784,8 @@ lib LibWin32
     configure_devices : Proc(IDirectInput8W*, LPDICONFIGUREDEVICESCALLBACK, DICONFIGUREDEVICESPARAMSW*, UInt32, Void*, HRESULT)
   end
 
+  IDirectInput8W_GUID = LibC::GUID.new("bf798031-483a-4da2-aa99-5d64ed369700")
+  CLSID_IDirectInput8W = "bf798031-483a-4da2-aa99-5d64ed369700"
   struct IDirectInput8W
     lpVtbl : IDirectInput8WVTbl*
   end
@@ -3772,6 +3804,8 @@ lib LibWin32
     configure_devices : Proc(IDirectInput8A*, LPDICONFIGUREDEVICESCALLBACK, DICONFIGUREDEVICESPARAMSA*, UInt32, Void*, HRESULT)
   end
 
+  IDirectInput8A_GUID = LibC::GUID.new("bf798030-483a-4da2-aa99-5d64ed369700")
+  CLSID_IDirectInput8A = "bf798030-483a-4da2-aa99-5d64ed369700"
   struct IDirectInput8A
     lpVtbl : IDirectInput8AVTbl*
   end
@@ -3793,6 +3827,8 @@ lib LibWin32
     get_effect_status : Proc(IDirectInputEffectDriver*, UInt32, UInt32, UInt32*, HRESULT)
   end
 
+  IDirectInputEffectDriver_GUID = LibC::GUID.new("02538130-898f-11d0-9ad0-00a0c9a06e35")
+  CLSID_IDirectInputEffectDriver = "02538130-898f-11d0-9ad0-00a0c9a06e35"
   struct IDirectInputEffectDriver
     lpVtbl : IDirectInputEffectDriverVTbl*
   end
@@ -3819,6 +3855,8 @@ lib LibWin32
     open_config_key : Proc(IDirectInputJoyConfig*, UInt32, UInt32, HKEY*, HRESULT)
   end
 
+  IDirectInputJoyConfig_GUID = LibC::GUID.new("1de12ab1-c9f5-11cf-bfc7-444553540000")
+  CLSID_IDirectInputJoyConfig = "1de12ab1-c9f5-11cf-bfc7-444553540000"
   struct IDirectInputJoyConfig
     lpVtbl : IDirectInputJoyConfigVTbl*
   end
@@ -3845,6 +3883,8 @@ lib LibWin32
     open_app_status_key : Proc(IDirectInputJoyConfig8*, HKEY*, HRESULT)
   end
 
+  IDirectInputJoyConfig8_GUID = LibC::GUID.new("eb0d7dfa-1990-4f27-b4d6-edf2eec4a44c")
+  CLSID_IDirectInputJoyConfig8 = "eb0d7dfa-1990-4f27-b4d6-edf2eec4a44c"
   struct IDirectInputJoyConfig8
     lpVtbl : IDirectInputJoyConfig8VTbl*
   end

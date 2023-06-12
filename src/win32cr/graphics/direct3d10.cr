@@ -1866,6 +1866,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D10DeviceChild*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D10DeviceChild_GUID = LibC::GUID.new("9b7e4c00-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10DeviceChild = "9b7e4c00-342c-4106-a19f-4f2704f689f0"
   struct ID3D10DeviceChild
     lpVtbl : ID3D10DeviceChildVTbl*
   end
@@ -1881,6 +1883,8 @@ lib LibWin32
     get_desc : Proc(ID3D10DepthStencilState*, D3D10_DEPTH_STENCIL_DESC*, Void)
   end
 
+  ID3D10DepthStencilState_GUID = LibC::GUID.new("2b4b1cc8-a4ad-41f8-8322-ca86fc3ec675")
+  CLSID_ID3D10DepthStencilState = "2b4b1cc8-a4ad-41f8-8322-ca86fc3ec675"
   struct ID3D10DepthStencilState
     lpVtbl : ID3D10DepthStencilStateVTbl*
   end
@@ -1896,6 +1900,8 @@ lib LibWin32
     get_desc : Proc(ID3D10BlendState*, D3D10_BLEND_DESC*, Void)
   end
 
+  ID3D10BlendState_GUID = LibC::GUID.new("edad8d19-8a35-4d6d-8566-2ea276cde161")
+  CLSID_ID3D10BlendState = "edad8d19-8a35-4d6d-8566-2ea276cde161"
   struct ID3D10BlendState
     lpVtbl : ID3D10BlendStateVTbl*
   end
@@ -1911,6 +1917,8 @@ lib LibWin32
     get_desc : Proc(ID3D10RasterizerState*, D3D10_RASTERIZER_DESC*, Void)
   end
 
+  ID3D10RasterizerState_GUID = LibC::GUID.new("a2a07292-89af-4345-be2e-c53d9fbb6e9f")
+  CLSID_ID3D10RasterizerState = "a2a07292-89af-4345-be2e-c53d9fbb6e9f"
   struct ID3D10RasterizerState
     lpVtbl : ID3D10RasterizerStateVTbl*
   end
@@ -1928,6 +1936,8 @@ lib LibWin32
     get_eviction_priority : Proc(ID3D10Resource*, UInt32)
   end
 
+  ID3D10Resource_GUID = LibC::GUID.new("9b7e4c01-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Resource = "9b7e4c01-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Resource
     lpVtbl : ID3D10ResourceVTbl*
   end
@@ -1948,6 +1958,8 @@ lib LibWin32
     get_desc : Proc(ID3D10Buffer*, D3D10_BUFFER_DESC*, Void)
   end
 
+  ID3D10Buffer_GUID = LibC::GUID.new("9b7e4c02-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Buffer = "9b7e4c02-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Buffer
     lpVtbl : ID3D10BufferVTbl*
   end
@@ -1968,6 +1980,8 @@ lib LibWin32
     get_desc : Proc(ID3D10Texture1D*, D3D10_TEXTURE1D_DESC*, Void)
   end
 
+  ID3D10Texture1D_GUID = LibC::GUID.new("9b7e4c03-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Texture1D = "9b7e4c03-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Texture1D
     lpVtbl : ID3D10Texture1DVTbl*
   end
@@ -1988,6 +2002,8 @@ lib LibWin32
     get_desc : Proc(ID3D10Texture2D*, D3D10_TEXTURE2D_DESC*, Void)
   end
 
+  ID3D10Texture2D_GUID = LibC::GUID.new("9b7e4c04-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Texture2D = "9b7e4c04-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Texture2D
     lpVtbl : ID3D10Texture2DVTbl*
   end
@@ -2008,6 +2024,8 @@ lib LibWin32
     get_desc : Proc(ID3D10Texture3D*, D3D10_TEXTURE3D_DESC*, Void)
   end
 
+  ID3D10Texture3D_GUID = LibC::GUID.new("9b7e4c05-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Texture3D = "9b7e4c05-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Texture3D
     lpVtbl : ID3D10Texture3DVTbl*
   end
@@ -2023,6 +2041,8 @@ lib LibWin32
     get_resource : Proc(ID3D10View*, ID3D10Resource*, Void)
   end
 
+  ID3D10View_GUID = LibC::GUID.new("c902b03f-60a7-49ba-9936-2a3ab37a7e33")
+  CLSID_ID3D10View = "c902b03f-60a7-49ba-9936-2a3ab37a7e33"
   struct ID3D10View
     lpVtbl : ID3D10ViewVTbl*
   end
@@ -2039,6 +2059,8 @@ lib LibWin32
     get_desc : Proc(ID3D10ShaderResourceView*, D3D10_SHADER_RESOURCE_VIEW_DESC*, Void)
   end
 
+  ID3D10ShaderResourceView_GUID = LibC::GUID.new("9b7e4c07-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10ShaderResourceView = "9b7e4c07-342c-4106-a19f-4f2704f689f0"
   struct ID3D10ShaderResourceView
     lpVtbl : ID3D10ShaderResourceViewVTbl*
   end
@@ -2055,6 +2077,8 @@ lib LibWin32
     get_desc : Proc(ID3D10RenderTargetView*, D3D10_RENDER_TARGET_VIEW_DESC*, Void)
   end
 
+  ID3D10RenderTargetView_GUID = LibC::GUID.new("9b7e4c08-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10RenderTargetView = "9b7e4c08-342c-4106-a19f-4f2704f689f0"
   struct ID3D10RenderTargetView
     lpVtbl : ID3D10RenderTargetViewVTbl*
   end
@@ -2071,6 +2095,8 @@ lib LibWin32
     get_desc : Proc(ID3D10DepthStencilView*, D3D10_DEPTH_STENCIL_VIEW_DESC*, Void)
   end
 
+  ID3D10DepthStencilView_GUID = LibC::GUID.new("9b7e4c09-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10DepthStencilView = "9b7e4c09-342c-4106-a19f-4f2704f689f0"
   struct ID3D10DepthStencilView
     lpVtbl : ID3D10DepthStencilViewVTbl*
   end
@@ -2085,6 +2111,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D10VertexShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D10VertexShader_GUID = LibC::GUID.new("9b7e4c0a-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10VertexShader = "9b7e4c0a-342c-4106-a19f-4f2704f689f0"
   struct ID3D10VertexShader
     lpVtbl : ID3D10VertexShaderVTbl*
   end
@@ -2099,6 +2127,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D10GeometryShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D10GeometryShader_GUID = LibC::GUID.new("6316be88-54cd-4040-ab44-20461bc81f68")
+  CLSID_ID3D10GeometryShader = "6316be88-54cd-4040-ab44-20461bc81f68"
   struct ID3D10GeometryShader
     lpVtbl : ID3D10GeometryShaderVTbl*
   end
@@ -2113,6 +2143,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D10PixelShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D10PixelShader_GUID = LibC::GUID.new("4968b601-9d00-4cde-8346-8e7f675819b6")
+  CLSID_ID3D10PixelShader = "4968b601-9d00-4cde-8346-8e7f675819b6"
   struct ID3D10PixelShader
     lpVtbl : ID3D10PixelShaderVTbl*
   end
@@ -2127,6 +2159,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D10InputLayout*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D10InputLayout_GUID = LibC::GUID.new("9b7e4c0b-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10InputLayout = "9b7e4c0b-342c-4106-a19f-4f2704f689f0"
   struct ID3D10InputLayout
     lpVtbl : ID3D10InputLayoutVTbl*
   end
@@ -2142,6 +2176,8 @@ lib LibWin32
     get_desc : Proc(ID3D10SamplerState*, D3D10_SAMPLER_DESC*, Void)
   end
 
+  ID3D10SamplerState_GUID = LibC::GUID.new("9b7e4c0c-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10SamplerState = "9b7e4c0c-342c-4106-a19f-4f2704f689f0"
   struct ID3D10SamplerState
     lpVtbl : ID3D10SamplerStateVTbl*
   end
@@ -2160,6 +2196,8 @@ lib LibWin32
     get_data_size : Proc(ID3D10Asynchronous*, UInt32)
   end
 
+  ID3D10Asynchronous_GUID = LibC::GUID.new("9b7e4c0d-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Asynchronous = "9b7e4c0d-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Asynchronous
     lpVtbl : ID3D10AsynchronousVTbl*
   end
@@ -2179,6 +2217,8 @@ lib LibWin32
     get_desc : Proc(ID3D10Query*, D3D10_QUERY_DESC*, Void)
   end
 
+  ID3D10Query_GUID = LibC::GUID.new("9b7e4c0e-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Query = "9b7e4c0e-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Query
     lpVtbl : ID3D10QueryVTbl*
   end
@@ -2198,6 +2238,8 @@ lib LibWin32
     get_desc : Proc(ID3D10Predicate*, D3D10_QUERY_DESC*, Void)
   end
 
+  ID3D10Predicate_GUID = LibC::GUID.new("9b7e4c10-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Predicate = "9b7e4c10-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Predicate
     lpVtbl : ID3D10PredicateVTbl*
   end
@@ -2217,6 +2259,8 @@ lib LibWin32
     get_desc : Proc(ID3D10Counter*, D3D10_COUNTER_DESC*, Void)
   end
 
+  ID3D10Counter_GUID = LibC::GUID.new("9b7e4c11-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Counter = "9b7e4c11-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Counter
     lpVtbl : ID3D10CounterVTbl*
   end
@@ -2322,6 +2366,8 @@ lib LibWin32
     get_text_filter_size : Proc(ID3D10Device*, UInt32*, UInt32*, Void)
   end
 
+  ID3D10Device_GUID = LibC::GUID.new("9b7e4c0f-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Device = "9b7e4c0f-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Device
     lpVtbl : ID3D10DeviceVTbl*
   end
@@ -2336,6 +2382,8 @@ lib LibWin32
     get_multithread_protected : Proc(ID3D10Multithread*, LibC::BOOL)
   end
 
+  ID3D10Multithread_GUID = LibC::GUID.new("9b7e4e00-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Multithread = "9b7e4e00-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Multithread
     lpVtbl : ID3D10MultithreadVTbl*
   end
@@ -2353,6 +2401,8 @@ lib LibWin32
     validate : Proc(ID3D10Debug*, HRESULT)
   end
 
+  ID3D10Debug_GUID = LibC::GUID.new("9b7e4e01-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Debug = "9b7e4e01-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Debug
     lpVtbl : ID3D10DebugVTbl*
   end
@@ -2365,6 +2415,8 @@ lib LibWin32
     get_use_ref : Proc(ID3D10SwitchToRef*, LibC::BOOL)
   end
 
+  ID3D10SwitchToRef_GUID = LibC::GUID.new("9b7e4e02-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10SwitchToRef = "9b7e4e02-342c-4106-a19f-4f2704f689f0"
   struct ID3D10SwitchToRef
     lpVtbl : ID3D10SwitchToRefVTbl*
   end
@@ -2410,6 +2462,8 @@ lib LibWin32
     get_mute_debug_output : Proc(ID3D10InfoQueue*, LibC::BOOL)
   end
 
+  ID3D10InfoQueue_GUID = LibC::GUID.new("1b940b17-2642-4d1f-ab1f-b99bad0c395f")
+  CLSID_ID3D10InfoQueue = "1b940b17-2642-4d1f-ab1f-b99bad0c395f"
   struct ID3D10InfoQueue
     lpVtbl : ID3D10InfoQueueVTbl*
   end
@@ -2421,6 +2475,8 @@ lib LibWin32
     get_member_type_name : Proc(ID3D10ShaderReflectionType*, UInt32, PSTR)
   end
 
+  ID3D10ShaderReflectionType_GUID = LibC::GUID.new("c530ad7d-9b16-4395-a979-ba2ecff83add")
+  CLSID_ID3D10ShaderReflectionType = "c530ad7d-9b16-4395-a979-ba2ecff83add"
   struct ID3D10ShaderReflectionType
     lpVtbl : ID3D10ShaderReflectionTypeVTbl*
   end
@@ -2430,6 +2486,8 @@ lib LibWin32
     get_type : Proc(ID3D10ShaderReflectionVariable*, ID3D10ShaderReflectionType)
   end
 
+  ID3D10ShaderReflectionVariable_GUID = LibC::GUID.new("1bf63c95-2650-405d-99c1-3636bd1da0a1")
+  CLSID_ID3D10ShaderReflectionVariable = "1bf63c95-2650-405d-99c1-3636bd1da0a1"
   struct ID3D10ShaderReflectionVariable
     lpVtbl : ID3D10ShaderReflectionVariableVTbl*
   end
@@ -2440,6 +2498,8 @@ lib LibWin32
     get_variable_by_name : Proc(ID3D10ShaderReflectionConstantBuffer*, PSTR, ID3D10ShaderReflectionVariable)
   end
 
+  ID3D10ShaderReflectionConstantBuffer_GUID = LibC::GUID.new("66c66a94-dddd-4b62-a66a-f0da33c2b4d0")
+  CLSID_ID3D10ShaderReflectionConstantBuffer = "66c66a94-dddd-4b62-a66a-f0da33c2b4d0"
   struct ID3D10ShaderReflectionConstantBuffer
     lpVtbl : ID3D10ShaderReflectionConstantBufferVTbl*
   end
@@ -2456,6 +2516,8 @@ lib LibWin32
     get_output_parameter_desc : Proc(ID3D10ShaderReflection*, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)
   end
 
+  ID3D10ShaderReflection_GUID = LibC::GUID.new("d40e20b6-f8f7-42ad-ab20-4baf8f15dfaa")
+  CLSID_ID3D10ShaderReflection = "d40e20b6-f8f7-42ad-ab20-4baf8f15dfaa"
   struct ID3D10ShaderReflection
     lpVtbl : ID3D10ShaderReflectionVTbl*
   end
@@ -2470,6 +2532,8 @@ lib LibWin32
     get_device : Proc(ID3D10StateBlock*, ID3D10Device*, HRESULT)
   end
 
+  ID3D10StateBlock_GUID = LibC::GUID.new("0803425a-57f5-4dd6-9465-a87570834a08")
+  CLSID_ID3D10StateBlock = "0803425a-57f5-4dd6-9465-a87570834a08"
   struct ID3D10StateBlock
     lpVtbl : ID3D10StateBlockVTbl*
   end
@@ -2484,6 +2548,8 @@ lib LibWin32
     get_member_semantic : Proc(ID3D10EffectType*, UInt32, PSTR)
   end
 
+  ID3D10EffectType_GUID = LibC::GUID.new("4e9e1ddc-cd9d-4772-a837-00180b9b88fd")
+  CLSID_ID3D10EffectType = "4e9e1ddc-cd9d-4772-a837-00180b9b88fd"
   struct ID3D10EffectType
     lpVtbl : ID3D10EffectTypeVTbl*
   end
@@ -2516,6 +2582,8 @@ lib LibWin32
     get_raw_value : Proc(ID3D10EffectVariable*, Void*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D10EffectVariable_GUID = LibC::GUID.new("ae897105-00e6-45bf-bb8e-281dd6db8e1b")
+  CLSID_ID3D10EffectVariable = "ae897105-00e6-45bf-bb8e-281dd6db8e1b"
   struct ID3D10EffectVariable
     lpVtbl : ID3D10EffectVariableVTbl*
   end
@@ -2560,6 +2628,8 @@ lib LibWin32
     get_bool_array : Proc(ID3D10EffectScalarVariable*, LibC::BOOL*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D10EffectScalarVariable_GUID = LibC::GUID.new("00e48f7b-d2c8-49e8-a86c-022dee53431f")
+  CLSID_ID3D10EffectScalarVariable = "00e48f7b-d2c8-49e8-a86c-022dee53431f"
   struct ID3D10EffectScalarVariable
     lpVtbl : ID3D10EffectScalarVariableVTbl*
   end
@@ -2604,6 +2674,8 @@ lib LibWin32
     get_float_vector_array : Proc(ID3D10EffectVectorVariable*, Float32*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D10EffectVectorVariable_GUID = LibC::GUID.new("62b98c44-1f82-4c67-bcd0-72cf8f217e81")
+  CLSID_ID3D10EffectVectorVariable = "62b98c44-1f82-4c67-bcd0-72cf8f217e81"
   struct ID3D10EffectVectorVariable
     lpVtbl : ID3D10EffectVectorVariableVTbl*
   end
@@ -2644,6 +2716,8 @@ lib LibWin32
     get_matrix_transpose_array : Proc(ID3D10EffectMatrixVariable*, Float32*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D10EffectMatrixVariable_GUID = LibC::GUID.new("50666c24-b82f-4eed-a172-5b6e7e8522e0")
+  CLSID_ID3D10EffectMatrixVariable = "50666c24-b82f-4eed-a172-5b6e7e8522e0"
   struct ID3D10EffectMatrixVariable
     lpVtbl : ID3D10EffectMatrixVariableVTbl*
   end
@@ -2678,6 +2752,8 @@ lib LibWin32
     get_string_array : Proc(ID3D10EffectStringVariable*, PSTR*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D10EffectStringVariable_GUID = LibC::GUID.new("71417501-8df9-4e0a-a78a-255f9756baff")
+  CLSID_ID3D10EffectStringVariable = "71417501-8df9-4e0a-a78a-255f9756baff"
   struct ID3D10EffectStringVariable
     lpVtbl : ID3D10EffectStringVariableVTbl*
   end
@@ -2714,6 +2790,8 @@ lib LibWin32
     get_resource_array : Proc(ID3D10EffectShaderResourceVariable*, ID3D10ShaderResourceView*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D10EffectShaderResourceVariable_GUID = LibC::GUID.new("c0a7157b-d872-4b1d-8073-efc2acd4b1fc")
+  CLSID_ID3D10EffectShaderResourceVariable = "c0a7157b-d872-4b1d-8073-efc2acd4b1fc"
   struct ID3D10EffectShaderResourceVariable
     lpVtbl : ID3D10EffectShaderResourceVariableVTbl*
   end
@@ -2750,6 +2828,8 @@ lib LibWin32
     get_render_target_array : Proc(ID3D10EffectRenderTargetViewVariable*, ID3D10RenderTargetView*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D10EffectRenderTargetViewVariable_GUID = LibC::GUID.new("28ca0cc3-c2c9-40bb-b57f-67b737122b17")
+  CLSID_ID3D10EffectRenderTargetViewVariable = "28ca0cc3-c2c9-40bb-b57f-67b737122b17"
   struct ID3D10EffectRenderTargetViewVariable
     lpVtbl : ID3D10EffectRenderTargetViewVariableVTbl*
   end
@@ -2786,6 +2866,8 @@ lib LibWin32
     get_depth_stencil_array : Proc(ID3D10EffectDepthStencilViewVariable*, ID3D10DepthStencilView*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D10EffectDepthStencilViewVariable_GUID = LibC::GUID.new("3e02c918-cc79-4985-b622-2d92ad701623")
+  CLSID_ID3D10EffectDepthStencilViewVariable = "3e02c918-cc79-4985-b622-2d92ad701623"
   struct ID3D10EffectDepthStencilViewVariable
     lpVtbl : ID3D10EffectDepthStencilViewVariableVTbl*
   end
@@ -2822,6 +2904,8 @@ lib LibWin32
     get_texture_buffer : Proc(ID3D10EffectConstantBuffer*, ID3D10ShaderResourceView*, HRESULT)
   end
 
+  ID3D10EffectConstantBuffer_GUID = LibC::GUID.new("56648f4d-cc8b-4444-a5ad-b5a3d76e91b3")
+  CLSID_ID3D10EffectConstantBuffer = "56648f4d-cc8b-4444-a5ad-b5a3d76e91b3"
   struct ID3D10EffectConstantBuffer
     lpVtbl : ID3D10EffectConstantBufferVTbl*
   end
@@ -2860,6 +2944,8 @@ lib LibWin32
     get_output_signature_element_desc : Proc(ID3D10EffectShaderVariable*, UInt32, UInt32, D3D10_SIGNATURE_PARAMETER_DESC*, HRESULT)
   end
 
+  ID3D10EffectShaderVariable_GUID = LibC::GUID.new("80849279-c799-4797-8c33-0407a07d9e06")
+  CLSID_ID3D10EffectShaderVariable = "80849279-c799-4797-8c33-0407a07d9e06"
   struct ID3D10EffectShaderVariable
     lpVtbl : ID3D10EffectShaderVariableVTbl*
   end
@@ -2894,6 +2980,8 @@ lib LibWin32
     get_backing_store : Proc(ID3D10EffectBlendVariable*, UInt32, D3D10_BLEND_DESC*, HRESULT)
   end
 
+  ID3D10EffectBlendVariable_GUID = LibC::GUID.new("1fcd2294-df6d-4eae-86b3-0e9160cfb07b")
+  CLSID_ID3D10EffectBlendVariable = "1fcd2294-df6d-4eae-86b3-0e9160cfb07b"
   struct ID3D10EffectBlendVariable
     lpVtbl : ID3D10EffectBlendVariableVTbl*
   end
@@ -2928,6 +3016,8 @@ lib LibWin32
     get_backing_store : Proc(ID3D10EffectDepthStencilVariable*, UInt32, D3D10_DEPTH_STENCIL_DESC*, HRESULT)
   end
 
+  ID3D10EffectDepthStencilVariable_GUID = LibC::GUID.new("af482368-330a-46a5-9a5c-01c71af24c8d")
+  CLSID_ID3D10EffectDepthStencilVariable = "af482368-330a-46a5-9a5c-01c71af24c8d"
   struct ID3D10EffectDepthStencilVariable
     lpVtbl : ID3D10EffectDepthStencilVariableVTbl*
   end
@@ -2962,6 +3052,8 @@ lib LibWin32
     get_backing_store : Proc(ID3D10EffectRasterizerVariable*, UInt32, D3D10_RASTERIZER_DESC*, HRESULT)
   end
 
+  ID3D10EffectRasterizerVariable_GUID = LibC::GUID.new("21af9f0e-4d94-4ea9-9785-2cb76b8c0b34")
+  CLSID_ID3D10EffectRasterizerVariable = "21af9f0e-4d94-4ea9-9785-2cb76b8c0b34"
   struct ID3D10EffectRasterizerVariable
     lpVtbl : ID3D10EffectRasterizerVariableVTbl*
   end
@@ -2996,6 +3088,8 @@ lib LibWin32
     get_backing_store : Proc(ID3D10EffectSamplerVariable*, UInt32, D3D10_SAMPLER_DESC*, HRESULT)
   end
 
+  ID3D10EffectSamplerVariable_GUID = LibC::GUID.new("6530d5c7-07e9-4271-a418-e7ce4bd1e480")
+  CLSID_ID3D10EffectSamplerVariable = "6530d5c7-07e9-4271-a418-e7ce4bd1e480"
   struct ID3D10EffectSamplerVariable
     lpVtbl : ID3D10EffectSamplerVariableVTbl*
   end
@@ -3012,6 +3106,8 @@ lib LibWin32
     compute_state_block_mask : Proc(ID3D10EffectPass*, D3D10_STATE_BLOCK_MASK*, HRESULT)
   end
 
+  ID3D10EffectPass_GUID = LibC::GUID.new("5cfbeb89-1a06-46e0-b282-e3f9bfa36a54")
+  CLSID_ID3D10EffectPass = "5cfbeb89-1a06-46e0-b282-e3f9bfa36a54"
   struct ID3D10EffectPass
     lpVtbl : ID3D10EffectPassVTbl*
   end
@@ -3026,6 +3122,8 @@ lib LibWin32
     compute_state_block_mask : Proc(ID3D10EffectTechnique*, D3D10_STATE_BLOCK_MASK*, HRESULT)
   end
 
+  ID3D10EffectTechnique_GUID = LibC::GUID.new("db122ce8-d1c9-4292-b237-24ed3de8b175")
+  CLSID_ID3D10EffectTechnique = "db122ce8-d1c9-4292-b237-24ed3de8b175"
   struct ID3D10EffectTechnique
     lpVtbl : ID3D10EffectTechniqueVTbl*
   end
@@ -3049,6 +3147,8 @@ lib LibWin32
     is_optimized : Proc(ID3D10Effect*, LibC::BOOL)
   end
 
+  ID3D10Effect_GUID = LibC::GUID.new("51b0ca8b-ec0b-4519-870d-8ee1cb5017c7")
+  CLSID_ID3D10Effect = "51b0ca8b-ec0b-4519-870d-8ee1cb5017c7"
   struct ID3D10Effect
     lpVtbl : ID3D10EffectVTbl*
   end
@@ -3060,6 +3160,8 @@ lib LibWin32
     as_effect : Proc(ID3D10EffectPool*, ID3D10Effect)
   end
 
+  ID3D10EffectPool_GUID = LibC::GUID.new("9537ab04-3250-412e-8213-fcd2f8677933")
+  CLSID_ID3D10EffectPool = "9537ab04-3250-412e-8213-fcd2f8677933"
   struct ID3D10EffectPool
     lpVtbl : ID3D10EffectPoolVTbl*
   end
@@ -3076,6 +3178,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D10BlendState1*, D3D10_BLEND_DESC1*, Void)
   end
 
+  ID3D10BlendState1_GUID = LibC::GUID.new("edad8d99-8a35-4d6d-8566-2ea276cde161")
+  CLSID_ID3D10BlendState1 = "edad8d99-8a35-4d6d-8566-2ea276cde161"
   struct ID3D10BlendState1
     lpVtbl : ID3D10BlendState1VTbl*
   end
@@ -3093,6 +3197,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D10ShaderResourceView1*, D3D10_SHADER_RESOURCE_VIEW_DESC1*, Void)
   end
 
+  ID3D10ShaderResourceView1_GUID = LibC::GUID.new("9b7e4c87-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10ShaderResourceView1 = "9b7e4c87-342c-4106-a19f-4f2704f689f0"
   struct ID3D10ShaderResourceView1
     lpVtbl : ID3D10ShaderResourceView1VTbl*
   end
@@ -3201,6 +3307,8 @@ lib LibWin32
     get_feature_level : Proc(ID3D10Device1*, D3D10_FEATURE_LEVEL1)
   end
 
+  ID3D10Device1_GUID = LibC::GUID.new("9b7e4c8f-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D10Device1 = "9b7e4c8f-342c-4106-a19f-4f2704f689f0"
   struct ID3D10Device1
     lpVtbl : ID3D10Device1VTbl*
   end
@@ -3226,6 +3334,8 @@ lib LibWin32
     is_sample_frequency_shader : Proc(ID3D10ShaderReflection1*, LibC::BOOL*, HRESULT)
   end
 
+  ID3D10ShaderReflection1_GUID = LibC::GUID.new("c3457783-a846-47ce-9520-cea6f66e7447")
+  CLSID_ID3D10ShaderReflection1 = "c3457783-a846-47ce-9520-cea6f66e7447"
   struct ID3D10ShaderReflection1
     lpVtbl : ID3D10ShaderReflection1VTbl*
   end

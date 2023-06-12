@@ -466,6 +466,8 @@ lib LibWin32
     save_to_mem : Proc(IITPropList*, Void*, UInt32, HRESULT)
   end
 
+  IITPropList_GUID = LibC::GUID.new("1f403bb1-9997-11d0-a850-00aa006c7d01")
+  CLSID_IITPropList = "1f403bb1-9997-11d0-a850-00aa006c7d01"
   struct IITPropList
     lpVtbl : IITPropListVTbl*
   end
@@ -481,6 +483,8 @@ lib LibWin32
     get_object_persistence : Proc(IITDatabase*, LibC::LPWSTR, UInt32, Void**, LibC::BOOL, HRESULT)
   end
 
+  IITDatabase_GUID = LibC::GUID.new("8fa0d5a2-dedf-11d0-9a61-00c04fb68bf7")
+  CLSID_IITDatabase = "8fa0d5a2-dedf-11d0-9a61-00c04fb68bf7"
   struct IITDatabase
     lpVtbl : IITDatabaseVTbl*
   end
@@ -504,6 +508,8 @@ lib LibWin32
     get_data_columns : Proc(IITWordWheel*, IITResultSet, HRESULT)
   end
 
+  IITWordWheel_GUID = LibC::GUID.new("8fa0d5a4-dedf-11d0-9a61-00c04fb68bf7")
+  CLSID_IITWordWheel = "8fa0d5a4-dedf-11d0-9a61-00c04fb68bf7"
   struct IITWordWheel
     lpVtbl : IITWordWheelVTbl*
   end
@@ -516,6 +522,8 @@ lib LibWin32
     put_word : Proc(IStemSink*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  IStemSink_GUID = LibC::GUID.new("fe77c330-7f42-11ce-be57-00aa0051fe20")
+  CLSID_IStemSink = "fe77c330-7f42-11ce-be57-00aa0051fe20"
   struct IStemSink
     lpVtbl : IStemSinkVTbl*
   end
@@ -531,6 +539,8 @@ lib LibWin32
     load_external_stemmer_data : Proc(IStemmerConfig*, IStream, UInt32, HRESULT)
   end
 
+  IStemmerConfig_GUID = LibC::GUID.new("8fa0d5a7-dedf-11d0-9a61-00c04fb68bf7")
+  CLSID_IStemmerConfig = "8fa0d5a7-dedf-11d0-9a61-00c04fb68bf7"
   struct IStemmerConfig
     lpVtbl : IStemmerConfigVTbl*
   end
@@ -550,6 +560,8 @@ lib LibWin32
     get_word_stemmer : Proc(IWordBreakerConfig*, IStemmer*, HRESULT)
   end
 
+  IWordBreakerConfig_GUID = LibC::GUID.new("8fa0d5a6-dedf-11d0-9a61-00c04fb68bf7")
+  CLSID_IWordBreakerConfig = "8fa0d5a6-dedf-11d0-9a61-00c04fb68bf7"
   struct IWordBreakerConfig
     lpVtbl : IWordBreakerConfigVTbl*
   end
@@ -590,6 +602,8 @@ lib LibWin32
     get_column_status : Proc(IITResultSet*, COLUMNSTATUS*, HRESULT)
   end
 
+  IITResultSet_GUID = LibC::GUID.new("3bb91d41-998b-11d0-a850-00aa006c7d01")
+  CLSID_IITResultSet = "3bb91d41-998b-11d0-a850-00aa006c7d01"
   struct IITResultSet
     lpVtbl : IITResultSetVTbl*
   end

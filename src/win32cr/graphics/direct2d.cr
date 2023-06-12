@@ -1751,6 +1751,8 @@ lib LibWin32
     get_factory : Proc(ID2D1Resource*, ID2D1Factory*, Void)
   end
 
+  ID2D1Resource_GUID = LibC::GUID.new("2cd90691-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1Resource = "2cd90691-12e2-11dc-9fed-001143a055f9"
   struct ID2D1Resource
     lpVtbl : ID2D1ResourceVTbl*
   end
@@ -1762,6 +1764,8 @@ lib LibWin32
     get_factory : Proc(ID2D1Image*, ID2D1Factory*, Void)
   end
 
+  ID2D1Image_GUID = LibC::GUID.new("65019f75-8da2-497c-b32c-dfa34e48ede6")
+  CLSID_ID2D1Image = "65019f75-8da2-497c-b32c-dfa34e48ede6"
   struct ID2D1Image
     lpVtbl : ID2D1ImageVTbl*
   end
@@ -1780,6 +1784,8 @@ lib LibWin32
     copy_from_memory : Proc(ID2D1Bitmap*, D2D_RECT_U*, Void*, UInt32, HRESULT)
   end
 
+  ID2D1Bitmap_GUID = LibC::GUID.new("a2296057-ea42-4099-983b-539fb6505426")
+  CLSID_ID2D1Bitmap = "a2296057-ea42-4099-983b-539fb6505426"
   struct ID2D1Bitmap
     lpVtbl : ID2D1BitmapVTbl*
   end
@@ -1795,6 +1801,8 @@ lib LibWin32
     get_extend_mode : Proc(ID2D1GradientStopCollection*, D2D1_EXTEND_MODE)
   end
 
+  ID2D1GradientStopCollection_GUID = LibC::GUID.new("2cd906a7-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1GradientStopCollection = "2cd906a7-12e2-11dc-9fed-001143a055f9"
   struct ID2D1GradientStopCollection
     lpVtbl : ID2D1GradientStopCollectionVTbl*
   end
@@ -1810,6 +1818,8 @@ lib LibWin32
     get_transform : Proc(ID2D1Brush*, D2D_MATRIX_3X2_F*, Void)
   end
 
+  ID2D1Brush_GUID = LibC::GUID.new("2cd906a8-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1Brush = "2cd906a8-12e2-11dc-9fed-001143a055f9"
   struct ID2D1Brush
     lpVtbl : ID2D1BrushVTbl*
   end
@@ -1833,6 +1843,8 @@ lib LibWin32
     get_bitmap : Proc(ID2D1BitmapBrush*, ID2D1Bitmap*, Void)
   end
 
+  ID2D1BitmapBrush_GUID = LibC::GUID.new("2cd906aa-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1BitmapBrush = "2cd906aa-12e2-11dc-9fed-001143a055f9"
   struct ID2D1BitmapBrush
     lpVtbl : ID2D1BitmapBrushVTbl*
   end
@@ -1850,6 +1862,8 @@ lib LibWin32
     get_color : Proc(ID2D1SolidColorBrush*, D2D1_COLOR_F)
   end
 
+  ID2D1SolidColorBrush_GUID = LibC::GUID.new("2cd906a9-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1SolidColorBrush = "2cd906a9-12e2-11dc-9fed-001143a055f9"
   struct ID2D1SolidColorBrush
     lpVtbl : ID2D1SolidColorBrushVTbl*
   end
@@ -1870,6 +1884,8 @@ lib LibWin32
     get_gradient_stop_collection : Proc(ID2D1LinearGradientBrush*, ID2D1GradientStopCollection*, Void)
   end
 
+  ID2D1LinearGradientBrush_GUID = LibC::GUID.new("2cd906ab-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1LinearGradientBrush = "2cd906ab-12e2-11dc-9fed-001143a055f9"
   struct ID2D1LinearGradientBrush
     lpVtbl : ID2D1LinearGradientBrushVTbl*
   end
@@ -1894,6 +1910,8 @@ lib LibWin32
     get_gradient_stop_collection : Proc(ID2D1RadialGradientBrush*, ID2D1GradientStopCollection*, Void)
   end
 
+  ID2D1RadialGradientBrush_GUID = LibC::GUID.new("2cd906ac-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1RadialGradientBrush = "2cd906ac-12e2-11dc-9fed-001143a055f9"
   struct ID2D1RadialGradientBrush
     lpVtbl : ID2D1RadialGradientBrushVTbl*
   end
@@ -1914,6 +1932,8 @@ lib LibWin32
     get_dashes : Proc(ID2D1StrokeStyle*, Float32*, UInt32, Void)
   end
 
+  ID2D1StrokeStyle_GUID = LibC::GUID.new("2cd9069d-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1StrokeStyle = "2cd9069d-12e2-11dc-9fed-001143a055f9"
   struct ID2D1StrokeStyle
     lpVtbl : ID2D1StrokeStyleVTbl*
   end
@@ -1938,6 +1958,8 @@ lib LibWin32
     widen : Proc(ID2D1Geometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
   end
 
+  ID2D1Geometry_GUID = LibC::GUID.new("2cd906a1-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1Geometry = "2cd906a1-12e2-11dc-9fed-001143a055f9"
   struct ID2D1Geometry
     lpVtbl : ID2D1GeometryVTbl*
   end
@@ -1963,6 +1985,8 @@ lib LibWin32
     get_rect : Proc(ID2D1RectangleGeometry*, D2D_RECT_F*, Void)
   end
 
+  ID2D1RectangleGeometry_GUID = LibC::GUID.new("2cd906a2-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1RectangleGeometry = "2cd906a2-12e2-11dc-9fed-001143a055f9"
   struct ID2D1RectangleGeometry
     lpVtbl : ID2D1RectangleGeometryVTbl*
   end
@@ -1988,6 +2012,8 @@ lib LibWin32
     get_rounded_rect : Proc(ID2D1RoundedRectangleGeometry*, D2D1_ROUNDED_RECT*, Void)
   end
 
+  ID2D1RoundedRectangleGeometry_GUID = LibC::GUID.new("2cd906a3-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1RoundedRectangleGeometry = "2cd906a3-12e2-11dc-9fed-001143a055f9"
   struct ID2D1RoundedRectangleGeometry
     lpVtbl : ID2D1RoundedRectangleGeometryVTbl*
   end
@@ -2013,6 +2039,8 @@ lib LibWin32
     get_ellipse : Proc(ID2D1EllipseGeometry*, D2D1_ELLIPSE*, Void)
   end
 
+  ID2D1EllipseGeometry_GUID = LibC::GUID.new("2cd906a4-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1EllipseGeometry = "2cd906a4-12e2-11dc-9fed-001143a055f9"
   struct ID2D1EllipseGeometry
     lpVtbl : ID2D1EllipseGeometryVTbl*
   end
@@ -2040,6 +2068,8 @@ lib LibWin32
     get_source_geometries : Proc(ID2D1GeometryGroup*, ID2D1Geometry*, UInt32, Void)
   end
 
+  ID2D1GeometryGroup_GUID = LibC::GUID.new("2cd906a6-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1GeometryGroup = "2cd906a6-12e2-11dc-9fed-001143a055f9"
   struct ID2D1GeometryGroup
     lpVtbl : ID2D1GeometryGroupVTbl*
   end
@@ -2066,6 +2096,8 @@ lib LibWin32
     get_transform : Proc(ID2D1TransformedGeometry*, D2D_MATRIX_3X2_F*, Void)
   end
 
+  ID2D1TransformedGeometry_GUID = LibC::GUID.new("2cd906bb-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1TransformedGeometry = "2cd906bb-12e2-11dc-9fed-001143a055f9"
   struct ID2D1TransformedGeometry
     lpVtbl : ID2D1TransformedGeometryVTbl*
   end
@@ -2088,6 +2120,8 @@ lib LibWin32
     add_arc : Proc(ID2D1GeometrySink*, D2D1_ARC_SEGMENT*, Void)
   end
 
+  ID2D1GeometrySink_GUID = LibC::GUID.new("2cd9069f-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1GeometrySink = "2cd9069f-12e2-11dc-9fed-001143a055f9"
   struct ID2D1GeometrySink
     lpVtbl : ID2D1GeometrySinkVTbl*
   end
@@ -2100,6 +2134,8 @@ lib LibWin32
     close : Proc(ID2D1TessellationSink*, HRESULT)
   end
 
+  ID2D1TessellationSink_GUID = LibC::GUID.new("2cd906c1-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1TessellationSink = "2cd906c1-12e2-11dc-9fed-001143a055f9"
   struct ID2D1TessellationSink
     lpVtbl : ID2D1TessellationSinkVTbl*
   end
@@ -2128,6 +2164,8 @@ lib LibWin32
     get_figure_count : Proc(ID2D1PathGeometry*, UInt32*, HRESULT)
   end
 
+  ID2D1PathGeometry_GUID = LibC::GUID.new("2cd906a5-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1PathGeometry = "2cd906a5-12e2-11dc-9fed-001143a055f9"
   struct ID2D1PathGeometry
     lpVtbl : ID2D1PathGeometryVTbl*
   end
@@ -2140,6 +2178,8 @@ lib LibWin32
     open : Proc(ID2D1Mesh*, ID2D1TessellationSink*, HRESULT)
   end
 
+  ID2D1Mesh_GUID = LibC::GUID.new("2cd906c2-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1Mesh = "2cd906c2-12e2-11dc-9fed-001143a055f9"
   struct ID2D1Mesh
     lpVtbl : ID2D1MeshVTbl*
   end
@@ -2152,6 +2192,8 @@ lib LibWin32
     get_size : Proc(ID2D1Layer*, D2D_SIZE_F)
   end
 
+  ID2D1Layer_GUID = LibC::GUID.new("2cd9069b-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1Layer = "2cd9069b-12e2-11dc-9fed-001143a055f9"
   struct ID2D1Layer
     lpVtbl : ID2D1LayerVTbl*
   end
@@ -2167,6 +2209,8 @@ lib LibWin32
     get_text_rendering_params : Proc(ID2D1DrawingStateBlock*, IDWriteRenderingParams*, Void)
   end
 
+  ID2D1DrawingStateBlock_GUID = LibC::GUID.new("28506e39-ebf6-46a1-bb47-fd85565ab957")
+  CLSID_ID2D1DrawingStateBlock = "28506e39-ebf6-46a1-bb47-fd85565ab957"
   struct ID2D1DrawingStateBlock
     lpVtbl : ID2D1DrawingStateBlockVTbl*
   end
@@ -2231,6 +2275,8 @@ lib LibWin32
     is_supported : Proc(ID2D1RenderTarget*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
   end
 
+  ID2D1RenderTarget_GUID = LibC::GUID.new("2cd90694-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1RenderTarget = "2cd90694-12e2-11dc-9fed-001143a055f9"
   struct ID2D1RenderTarget
     lpVtbl : ID2D1RenderTargetVTbl*
   end
@@ -2296,6 +2342,8 @@ lib LibWin32
     get_bitmap : Proc(ID2D1BitmapRenderTarget*, ID2D1Bitmap*, HRESULT)
   end
 
+  ID2D1BitmapRenderTarget_GUID = LibC::GUID.new("2cd90695-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1BitmapRenderTarget = "2cd90695-12e2-11dc-9fed-001143a055f9"
   struct ID2D1BitmapRenderTarget
     lpVtbl : ID2D1BitmapRenderTargetVTbl*
   end
@@ -2363,6 +2411,8 @@ lib LibWin32
     get_hwnd : Proc(ID2D1HwndRenderTarget*, HANDLE)
   end
 
+  ID2D1HwndRenderTarget_GUID = LibC::GUID.new("2cd90698-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1HwndRenderTarget = "2cd90698-12e2-11dc-9fed-001143a055f9"
   struct ID2D1HwndRenderTarget
     lpVtbl : ID2D1HwndRenderTargetVTbl*
   end
@@ -2375,6 +2425,8 @@ lib LibWin32
     release_dc : Proc(ID2D1GdiInteropRenderTarget*, RECT*, HRESULT)
   end
 
+  ID2D1GdiInteropRenderTarget_GUID = LibC::GUID.new("e0db51c3-6f77-4bae-b3d5-e47509b35838")
+  CLSID_ID2D1GdiInteropRenderTarget = "e0db51c3-6f77-4bae-b3d5-e47509b35838"
   struct ID2D1GdiInteropRenderTarget
     lpVtbl : ID2D1GdiInteropRenderTargetVTbl*
   end
@@ -2440,6 +2492,8 @@ lib LibWin32
     bind_dc : Proc(ID2D1DCRenderTarget*, HDC, RECT*, HRESULT)
   end
 
+  ID2D1DCRenderTarget_GUID = LibC::GUID.new("1c51bc64-de61-46fd-9899-63a5d8f03950")
+  CLSID_ID2D1DCRenderTarget = "1c51bc64-de61-46fd-9899-63a5d8f03950"
   struct ID2D1DCRenderTarget
     lpVtbl : ID2D1DCRenderTargetVTbl*
   end
@@ -2464,6 +2518,8 @@ lib LibWin32
     create_dc_render_target : Proc(ID2D1Factory*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
   end
 
+  ID2D1Factory_GUID = LibC::GUID.new("06152247-6f50-465a-9245-118bfd3b6007")
+  CLSID_ID2D1Factory = "06152247-6f50-465a-9245-118bfd3b6007"
   struct ID2D1Factory
     lpVtbl : ID2D1FactoryVTbl*
   end
@@ -2475,6 +2531,8 @@ lib LibWin32
     process_record : Proc(ID2D1GdiMetafileSink*, UInt32, Void*, UInt32, HRESULT)
   end
 
+  ID2D1GdiMetafileSink_GUID = LibC::GUID.new("82237326-8111-4f7c-bcf4-b5c1175564fe")
+  CLSID_ID2D1GdiMetafileSink = "82237326-8111-4f7c-bcf4-b5c1175564fe"
   struct ID2D1GdiMetafileSink
     lpVtbl : ID2D1GdiMetafileSinkVTbl*
   end
@@ -2488,6 +2546,8 @@ lib LibWin32
     get_bounds : Proc(ID2D1GdiMetafile*, D2D_RECT_F*, HRESULT)
   end
 
+  ID2D1GdiMetafile_GUID = LibC::GUID.new("2f543dc3-cfc1-4211-864f-cfd91c6f3395")
+  CLSID_ID2D1GdiMetafile = "2f543dc3-cfc1-4211-864f-cfd91c6f3395"
   struct ID2D1GdiMetafile
     lpVtbl : ID2D1GdiMetafileVTbl*
   end
@@ -2523,6 +2583,8 @@ lib LibWin32
     pop_layer : Proc(ID2D1CommandSink*, HRESULT)
   end
 
+  ID2D1CommandSink_GUID = LibC::GUID.new("54d7898a-a061-40a7-bec7-e465bcba2c4f")
+  CLSID_ID2D1CommandSink = "54d7898a-a061-40a7-bec7-e465bcba2c4f"
   struct ID2D1CommandSink
     lpVtbl : ID2D1CommandSinkVTbl*
   end
@@ -2536,6 +2598,8 @@ lib LibWin32
     close : Proc(ID2D1CommandList*, HRESULT)
   end
 
+  ID2D1CommandList_GUID = LibC::GUID.new("b4f34a19-2383-4d76-94f6-ec343657c3dc")
+  CLSID_ID2D1CommandList = "b4f34a19-2383-4d76-94f6-ec343657c3dc"
   struct ID2D1CommandList
     lpVtbl : ID2D1CommandListVTbl*
   end
@@ -2548,6 +2612,8 @@ lib LibWin32
     close : Proc(ID2D1PrintControl*, HRESULT)
   end
 
+  ID2D1PrintControl_GUID = LibC::GUID.new("2c1d867d-c290-41c8-ae7e-34a98702e9a5")
+  CLSID_ID2D1PrintControl = "2c1d867d-c290-41c8-ae7e-34a98702e9a5"
   struct ID2D1PrintControl
     lpVtbl : ID2D1PrintControlVTbl*
   end
@@ -2573,6 +2639,8 @@ lib LibWin32
     get_source_rectangle : Proc(ID2D1ImageBrush*, D2D_RECT_F*, Void)
   end
 
+  ID2D1ImageBrush_GUID = LibC::GUID.new("fe9e984d-3f95-407c-b5db-cb94d4e8f87c")
+  CLSID_ID2D1ImageBrush = "fe9e984d-3f95-407c-b5db-cb94d4e8f87c"
   struct ID2D1ImageBrush
     lpVtbl : ID2D1ImageBrushVTbl*
   end
@@ -2598,6 +2666,8 @@ lib LibWin32
     get_interpolation_mode1 : Proc(ID2D1BitmapBrush1*, D2D1_INTERPOLATION_MODE)
   end
 
+  ID2D1BitmapBrush1_GUID = LibC::GUID.new("41343a53-e41a-49a2-91cd-21793bbb62e5")
+  CLSID_ID2D1BitmapBrush1 = "41343a53-e41a-49a2-91cd-21793bbb62e5"
   struct ID2D1BitmapBrush1
     lpVtbl : ID2D1BitmapBrush1VTbl*
   end
@@ -2619,6 +2689,8 @@ lib LibWin32
     get_stroke_transform_type : Proc(ID2D1StrokeStyle1*, D2D1_STROKE_TRANSFORM_TYPE)
   end
 
+  ID2D1StrokeStyle1_GUID = LibC::GUID.new("10a72a66-e91c-43f4-993f-ddf4b82b0b4a")
+  CLSID_ID2D1StrokeStyle1 = "10a72a66-e91c-43f4-993f-ddf4b82b0b4a"
   struct ID2D1StrokeStyle1
     lpVtbl : ID2D1StrokeStyle1VTbl*
   end
@@ -2648,6 +2720,8 @@ lib LibWin32
     compute_point_and_segment_at_length : Proc(ID2D1PathGeometry1*, Float32, UInt32, D2D_MATRIX_3X2_F*, Float32, D2D1_POINT_DESCRIPTION*, HRESULT)
   end
 
+  ID2D1PathGeometry1_GUID = LibC::GUID.new("62baa2d2-ab54-41b7-b872-787e0106a421")
+  CLSID_ID2D1PathGeometry1 = "62baa2d2-ab54-41b7-b872-787e0106a421"
   struct ID2D1PathGeometry1
     lpVtbl : ID2D1PathGeometry1VTbl*
   end
@@ -2669,6 +2743,8 @@ lib LibWin32
     get_sub_properties : Proc(ID2D1Properties*, UInt32, ID2D1Properties*, HRESULT)
   end
 
+  ID2D1Properties_GUID = LibC::GUID.new("483473d7-cd46-4f9d-9d3a-3112aa80159d")
+  CLSID_ID2D1Properties = "483473d7-cd46-4f9d-9d3a-3112aa80159d"
   struct ID2D1Properties
     lpVtbl : ID2D1PropertiesVTbl*
   end
@@ -2695,6 +2771,8 @@ lib LibWin32
     get_output : Proc(ID2D1Effect*, ID2D1Image*, Void)
   end
 
+  ID2D1Effect_GUID = LibC::GUID.new("28211a43-7d89-476f-8181-2d6159b220ad")
+  CLSID_ID2D1Effect = "28211a43-7d89-476f-8181-2d6159b220ad"
   struct ID2D1Effect
     lpVtbl : ID2D1EffectVTbl*
   end
@@ -2718,6 +2796,8 @@ lib LibWin32
     unmap : Proc(ID2D1Bitmap1*, HRESULT)
   end
 
+  ID2D1Bitmap1_GUID = LibC::GUID.new("a898a84c-3873-4588-b08b-ebbf978df041")
+  CLSID_ID2D1Bitmap1 = "a898a84c-3873-4588-b08b-ebbf978df041"
   struct ID2D1Bitmap1
     lpVtbl : ID2D1Bitmap1VTbl*
   end
@@ -2732,6 +2812,8 @@ lib LibWin32
     get_profile : Proc(ID2D1ColorContext*, UInt8*, UInt32, HRESULT)
   end
 
+  ID2D1ColorContext_GUID = LibC::GUID.new("1c4820bb-5771-4518-a581-2fe4dd0ec657")
+  CLSID_ID2D1ColorContext = "1c4820bb-5771-4518-a581-2fe4dd0ec657"
   struct ID2D1ColorContext
     lpVtbl : ID2D1ColorContextVTbl*
   end
@@ -2752,6 +2834,8 @@ lib LibWin32
     get_color_interpolation_mode : Proc(ID2D1GradientStopCollection1*, D2D1_COLOR_INTERPOLATION_MODE)
   end
 
+  ID2D1GradientStopCollection1_GUID = LibC::GUID.new("ae1572f4-5dd0-4777-998b-9279472ae63b")
+  CLSID_ID2D1GradientStopCollection1 = "ae1572f4-5dd0-4777-998b-9279472ae63b"
   struct ID2D1GradientStopCollection1
     lpVtbl : ID2D1GradientStopCollection1VTbl*
   end
@@ -2769,6 +2853,8 @@ lib LibWin32
     set_description2 : Proc(ID2D1DrawingStateBlock1*, D2D1_DRAWING_STATE_DESCRIPTION1*, Void)
   end
 
+  ID2D1DrawingStateBlock1_GUID = LibC::GUID.new("689f1f85-c72e-4e33-8f19-85754efd5ace")
+  CLSID_ID2D1DrawingStateBlock1 = "689f1f85-c72e-4e33-8f19-85754efd5ace"
   struct ID2D1DrawingStateBlock1
     lpVtbl : ID2D1DrawingStateBlock1VTbl*
   end
@@ -2868,6 +2954,8 @@ lib LibWin32
     fill_opacity_mask2 : Proc(ID2D1DeviceContext*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)
   end
 
+  ID2D1DeviceContext_GUID = LibC::GUID.new("e8f7fe7a-191c-466d-ad95-975678bda998")
+  CLSID_ID2D1DeviceContext = "e8f7fe7a-191c-466d-ad95-975678bda998"
   struct ID2D1DeviceContext
     lpVtbl : ID2D1DeviceContextVTbl*
   end
@@ -2884,6 +2972,8 @@ lib LibWin32
     clear_resources : Proc(ID2D1Device*, UInt32, Void)
   end
 
+  ID2D1Device_GUID = LibC::GUID.new("47dd575d-ac05-4cdd-8049-9b02cd16f44c")
+  CLSID_ID2D1Device = "47dd575d-ac05-4cdd-8049-9b02cd16f44c"
   struct ID2D1Device
     lpVtbl : ID2D1DeviceVTbl*
   end
@@ -2918,6 +3008,8 @@ lib LibWin32
     get_effect_properties : Proc(ID2D1Factory1*, Guid*, ID2D1Properties*, HRESULT)
   end
 
+  ID2D1Factory1_GUID = LibC::GUID.new("bb12d362-daee-4b9a-aa1d-14ba401cfa1f")
+  CLSID_ID2D1Factory1 = "bb12d362-daee-4b9a-aa1d-14ba401cfa1f"
   struct ID2D1Factory1
     lpVtbl : ID2D1Factory1VTbl*
   end
@@ -2931,6 +3023,8 @@ lib LibWin32
     leave : Proc(ID2D1Multithread*, Void)
   end
 
+  ID2D1Multithread_GUID = LibC::GUID.new("31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3")
+  CLSID_ID2D1Multithread = "31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3"
   struct ID2D1Multithread
     lpVtbl : ID2D1MultithreadVTbl*
   end
@@ -2943,6 +3037,8 @@ lib LibWin32
     unmap : Proc(ID2D1VertexBuffer*, HRESULT)
   end
 
+  ID2D1VertexBuffer_GUID = LibC::GUID.new("9b8b1336-00a5-4668-92b7-ced5d8bf9b7b")
+  CLSID_ID2D1VertexBuffer = "9b8b1336-00a5-4668-92b7-ced5d8bf9b7b"
   struct ID2D1VertexBuffer
     lpVtbl : ID2D1VertexBufferVTbl*
   end
@@ -2954,6 +3050,8 @@ lib LibWin32
     update : Proc(ID2D1ResourceTexture*, UInt32*, UInt32*, UInt32*, UInt32, UInt8*, UInt32, HRESULT)
   end
 
+  ID2D1ResourceTexture_GUID = LibC::GUID.new("688d15c3-02b0-438d-b13a-d1b44c32c39a")
+  CLSID_ID2D1ResourceTexture = "688d15c3-02b0-438d-b13a-d1b44c32c39a"
   struct ID2D1ResourceTexture
     lpVtbl : ID2D1ResourceTextureVTbl*
   end
@@ -2968,6 +3066,8 @@ lib LibWin32
     set_instruction_count_hint : Proc(ID2D1RenderInfo*, UInt32, Void)
   end
 
+  ID2D1RenderInfo_GUID = LibC::GUID.new("519ae1bd-d19a-420d-b849-364f594776b7")
+  CLSID_ID2D1RenderInfo = "519ae1bd-d19a-420d-b849-364f594776b7"
   struct ID2D1RenderInfo
     lpVtbl : ID2D1RenderInfoVTbl*
   end
@@ -2987,6 +3087,8 @@ lib LibWin32
     set_vertex_processing : Proc(ID2D1DrawInfo*, ID2D1VertexBuffer, D2D1_VERTEX_OPTIONS, D2D1_BLEND_DESCRIPTION*, D2D1_VERTEX_RANGE*, Guid*, HRESULT)
   end
 
+  ID2D1DrawInfo_GUID = LibC::GUID.new("693ce632-7f2f-45de-93fe-18d88b37aa21")
+  CLSID_ID2D1DrawInfo = "693ce632-7f2f-45de-93fe-18d88b37aa21"
   struct ID2D1DrawInfo
     lpVtbl : ID2D1DrawInfoVTbl*
   end
@@ -3004,6 +3106,8 @@ lib LibWin32
     set_resource_texture : Proc(ID2D1ComputeInfo*, UInt32, ID2D1ResourceTexture, HRESULT)
   end
 
+  ID2D1ComputeInfo_GUID = LibC::GUID.new("5598b14b-9fd7-48b7-9bdb-8f0964eb38bc")
+  CLSID_ID2D1ComputeInfo = "5598b14b-9fd7-48b7-9bdb-8f0964eb38bc"
   struct ID2D1ComputeInfo
     lpVtbl : ID2D1ComputeInfoVTbl*
   end
@@ -3015,6 +3119,8 @@ lib LibWin32
     get_input_count : Proc(ID2D1TransformNode*, UInt32)
   end
 
+  ID2D1TransformNode_GUID = LibC::GUID.new("b2efe1e7-729f-4102-949f-505fa21bf666")
+  CLSID_ID2D1TransformNode = "b2efe1e7-729f-4102-949f-505fa21bf666"
   struct ID2D1TransformNode
     lpVtbl : ID2D1TransformNodeVTbl*
   end
@@ -3034,6 +3140,8 @@ lib LibWin32
     set_passthrough_graph : Proc(ID2D1TransformGraph*, UInt32, HRESULT)
   end
 
+  ID2D1TransformGraph_GUID = LibC::GUID.new("13d29038-c3e6-4034-9081-13b53a417992")
+  CLSID_ID2D1TransformGraph = "13d29038-c3e6-4034-9081-13b53a417992"
   struct ID2D1TransformGraph
     lpVtbl : ID2D1TransformGraphVTbl*
   end
@@ -3048,6 +3156,8 @@ lib LibWin32
     map_invalid_rect : Proc(ID2D1Transform*, UInt32, RECT, RECT*, HRESULT)
   end
 
+  ID2D1Transform_GUID = LibC::GUID.new("ef1a287d-342a-4f76-8fdb-da0d6ea9f92b")
+  CLSID_ID2D1Transform = "ef1a287d-342a-4f76-8fdb-da0d6ea9f92b"
   struct ID2D1Transform
     lpVtbl : ID2D1TransformVTbl*
   end
@@ -3063,6 +3173,8 @@ lib LibWin32
     set_draw_info : Proc(ID2D1DrawTransform*, ID2D1DrawInfo, HRESULT)
   end
 
+  ID2D1DrawTransform_GUID = LibC::GUID.new("36bfdcb6-9739-435d-a30d-a653beff6a6f")
+  CLSID_ID2D1DrawTransform = "36bfdcb6-9739-435d-a30d-a653beff6a6f"
   struct ID2D1DrawTransform
     lpVtbl : ID2D1DrawTransformVTbl*
   end
@@ -3079,6 +3191,8 @@ lib LibWin32
     calculate_threadgroups : Proc(ID2D1ComputeTransform*, RECT*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
+  ID2D1ComputeTransform_GUID = LibC::GUID.new("0d85573c-01e3-4f7d-bfd9-0d60608bf3c3")
+  CLSID_ID2D1ComputeTransform = "0d85573c-01e3-4f7d-bfd9-0d60608bf3c3"
   struct ID2D1ComputeTransform
     lpVtbl : ID2D1ComputeTransformVTbl*
   end
@@ -3090,6 +3204,8 @@ lib LibWin32
     process_analysis_results : Proc(ID2D1AnalysisTransform*, UInt8*, UInt32, HRESULT)
   end
 
+  ID2D1AnalysisTransform_GUID = LibC::GUID.new("0359dc30-95e6-4568-9055-27720d130e93")
+  CLSID_ID2D1AnalysisTransform = "0359dc30-95e6-4568-9055-27720d130e93"
   struct ID2D1AnalysisTransform
     lpVtbl : ID2D1AnalysisTransformVTbl*
   end
@@ -3106,6 +3222,8 @@ lib LibWin32
     draw : Proc(ID2D1SourceTransform*, ID2D1Bitmap1, RECT*, D2D_POINT_2U, HRESULT)
   end
 
+  ID2D1SourceTransform_GUID = LibC::GUID.new("db1800dd-0c34-4cf9-be90-31cc0a5653e1")
+  CLSID_ID2D1SourceTransform = "db1800dd-0c34-4cf9-be90-31cc0a5653e1"
   struct ID2D1SourceTransform
     lpVtbl : ID2D1SourceTransformVTbl*
   end
@@ -3119,6 +3237,8 @@ lib LibWin32
     set_cached : Proc(ID2D1ConcreteTransform*, LibC::BOOL, Void)
   end
 
+  ID2D1ConcreteTransform_GUID = LibC::GUID.new("1a799d8a-69f7-4e4c-9fed-437ccc6684cc")
+  CLSID_ID2D1ConcreteTransform = "1a799d8a-69f7-4e4c-9fed-437ccc6684cc"
   struct ID2D1ConcreteTransform
     lpVtbl : ID2D1ConcreteTransformVTbl*
   end
@@ -3134,6 +3254,8 @@ lib LibWin32
     get_description : Proc(ID2D1BlendTransform*, D2D1_BLEND_DESCRIPTION*, Void)
   end
 
+  ID2D1BlendTransform_GUID = LibC::GUID.new("63ac0b32-ba44-450f-8806-7f4ca1ff2f1b")
+  CLSID_ID2D1BlendTransform = "63ac0b32-ba44-450f-8806-7f4ca1ff2f1b"
   struct ID2D1BlendTransform
     lpVtbl : ID2D1BlendTransformVTbl*
   end
@@ -3151,6 +3273,8 @@ lib LibWin32
     get_extend_mode_y : Proc(ID2D1BorderTransform*, D2D1_EXTEND_MODE)
   end
 
+  ID2D1BorderTransform_GUID = LibC::GUID.new("4998735c-3a19-473c-9781-656847e3a347")
+  CLSID_ID2D1BorderTransform = "4998735c-3a19-473c-9781-656847e3a347"
   struct ID2D1BorderTransform
     lpVtbl : ID2D1BorderTransformVTbl*
   end
@@ -3164,6 +3288,8 @@ lib LibWin32
     get_offset : Proc(ID2D1OffsetTransform*, POINT)
   end
 
+  ID2D1OffsetTransform_GUID = LibC::GUID.new("3fe6adea-7643-4f53-bd14-a0ce63f24042")
+  CLSID_ID2D1OffsetTransform = "3fe6adea-7643-4f53-bd14-a0ce63f24042"
   struct ID2D1OffsetTransform
     lpVtbl : ID2D1OffsetTransformVTbl*
   end
@@ -3177,6 +3303,8 @@ lib LibWin32
     get_output_bounds : Proc(ID2D1BoundsAdjustmentTransform*, RECT*, Void)
   end
 
+  ID2D1BoundsAdjustmentTransform_GUID = LibC::GUID.new("90f732e2-5092-4606-a819-8651970baccd")
+  CLSID_ID2D1BoundsAdjustmentTransform = "90f732e2-5092-4606-a819-8651970baccd"
   struct ID2D1BoundsAdjustmentTransform
     lpVtbl : ID2D1BoundsAdjustmentTransformVTbl*
   end
@@ -3190,6 +3318,8 @@ lib LibWin32
     set_graph : Proc(ID2D1EffectImpl*, ID2D1TransformGraph, HRESULT)
   end
 
+  ID2D1EffectImpl_GUID = LibC::GUID.new("a248fd3f-3e6c-4e63-9f03-7f68ecc91db9")
+  CLSID_ID2D1EffectImpl = "a248fd3f-3e6c-4e63-9f03-7f68ecc91db9"
   struct ID2D1EffectImpl
     lpVtbl : ID2D1EffectImplVTbl*
   end
@@ -3221,6 +3351,8 @@ lib LibWin32
     is_buffer_precision_supported : Proc(ID2D1EffectContext*, D2D1_BUFFER_PRECISION, LibC::BOOL)
   end
 
+  ID2D1EffectContext_GUID = LibC::GUID.new("3d9f916b-27dc-4ad7-b4f1-64945340f563")
+  CLSID_ID2D1EffectContext = "3d9f916b-27dc-4ad7-b4f1-64945340f563"
   struct ID2D1EffectContext
     lpVtbl : ID2D1EffectContextVTbl*
   end
@@ -3232,6 +3364,8 @@ lib LibWin32
     get_factory : Proc(ID2D1GeometryRealization*, ID2D1Factory*, Void)
   end
 
+  ID2D1GeometryRealization_GUID = LibC::GUID.new("a16907d7-bc02-4801-99e8-8cf7f485f774")
+  CLSID_ID2D1GeometryRealization = "a16907d7-bc02-4801-99e8-8cf7f485f774"
   struct ID2D1GeometryRealization
     lpVtbl : ID2D1GeometryRealizationVTbl*
   end
@@ -3334,6 +3468,8 @@ lib LibWin32
     draw_geometry_realization : Proc(ID2D1DeviceContext1*, ID2D1GeometryRealization, ID2D1Brush, Void)
   end
 
+  ID2D1DeviceContext1_GUID = LibC::GUID.new("d37f57e4-6908-459f-a199-e72f24f79987")
+  CLSID_ID2D1DeviceContext1 = "d37f57e4-6908-459f-a199-e72f24f79987"
   struct ID2D1DeviceContext1
     lpVtbl : ID2D1DeviceContext1VTbl*
   end
@@ -3353,6 +3489,8 @@ lib LibWin32
     create_device_context2 : Proc(ID2D1Device1*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)
   end
 
+  ID2D1Device1_GUID = LibC::GUID.new("d21768e1-23a4-4823-a14b-7c3eba85d658")
+  CLSID_ID2D1Device1 = "d21768e1-23a4-4823-a14b-7c3eba85d658"
   struct ID2D1Device1
     lpVtbl : ID2D1Device1VTbl*
   end
@@ -3388,6 +3526,8 @@ lib LibWin32
     create_device2 : Proc(ID2D1Factory2*, IDXGIDevice, ID2D1Device1*, HRESULT)
   end
 
+  ID2D1Factory2_GUID = LibC::GUID.new("94f81a73-9212-4376-9c58-b16a3a0d3992")
+  CLSID_ID2D1Factory2 = "94f81a73-9212-4376-9c58-b16a3a0d3992"
   struct ID2D1Factory2
     lpVtbl : ID2D1Factory2VTbl*
   end
@@ -3424,6 +3564,8 @@ lib LibWin32
     set_primitive_blend1 : Proc(ID2D1CommandSink1*, D2D1_PRIMITIVE_BLEND, HRESULT)
   end
 
+  ID2D1CommandSink1_GUID = LibC::GUID.new("9eb767fd-4269-4467-b8c2-eb30cb305743")
+  CLSID_ID2D1CommandSink1 = "9eb767fd-4269-4467-b8c2-eb30cb305743"
   struct ID2D1CommandSink1
     lpVtbl : ID2D1CommandSink1VTbl*
   end
@@ -3437,6 +3579,8 @@ lib LibWin32
     clone : Proc(ID2D1SvgAttribute*, ID2D1SvgAttribute*, HRESULT)
   end
 
+  ID2D1SvgAttribute_GUID = LibC::GUID.new("c9cdb0dd-f8c9-4e70-b7c2-301c80292c5e")
+  CLSID_ID2D1SvgAttribute = "c9cdb0dd-f8c9-4e70-b7c2-301c80292c5e"
   struct ID2D1SvgAttribute
     lpVtbl : ID2D1SvgAttributeVTbl*
   end
@@ -3457,6 +3601,8 @@ lib LibWin32
     get_id_length : Proc(ID2D1SvgPaint*, UInt32)
   end
 
+  ID2D1SvgPaint_GUID = LibC::GUID.new("d59bab0a-68a2-455b-a5dc-9eb2854e2490")
+  CLSID_ID2D1SvgPaint = "d59bab0a-68a2-455b-a5dc-9eb2854e2490"
   struct ID2D1SvgPaint
     lpVtbl : ID2D1SvgPaintVTbl*
   end
@@ -3476,6 +3622,8 @@ lib LibWin32
     get_dashes_count : Proc(ID2D1SvgStrokeDashArray*, UInt32)
   end
 
+  ID2D1SvgStrokeDashArray_GUID = LibC::GUID.new("f1c0ca52-92a3-4f00-b4ce-f35691efd9d9")
+  CLSID_ID2D1SvgStrokeDashArray = "f1c0ca52-92a3-4f00-b4ce-f35691efd9d9"
   struct ID2D1SvgStrokeDashArray
     lpVtbl : ID2D1SvgStrokeDashArrayVTbl*
   end
@@ -3493,6 +3641,8 @@ lib LibWin32
     get_points_count : Proc(ID2D1SvgPointCollection*, UInt32)
   end
 
+  ID2D1SvgPointCollection_GUID = LibC::GUID.new("9dbe4c0d-3572-4dd9-9825-5530813bb712")
+  CLSID_ID2D1SvgPointCollection = "9dbe4c0d-3572-4dd9-9825-5530813bb712"
   struct ID2D1SvgPointCollection
     lpVtbl : ID2D1SvgPointCollectionVTbl*
   end
@@ -3515,6 +3665,8 @@ lib LibWin32
     create_path_geometry : Proc(ID2D1SvgPathData*, D2D1_FILL_MODE, ID2D1PathGeometry1*, HRESULT)
   end
 
+  ID2D1SvgPathData_GUID = LibC::GUID.new("c095e4f4-bb98-43d6-9745-4d1b84ec9888")
+  CLSID_ID2D1SvgPathData = "c095e4f4-bb98-43d6-9745-4d1b84ec9888"
   struct ID2D1SvgPathData
     lpVtbl : ID2D1SvgPathDataVTbl*
   end
@@ -3556,6 +3708,8 @@ lib LibWin32
     get_attribute_value_length : Proc(ID2D1SvgElement*, LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_STRING_TYPE, UInt32*, HRESULT)
   end
 
+  ID2D1SvgElement_GUID = LibC::GUID.new("ac7b67a6-183e-49c1-a823-0ebe40b0db29")
+  CLSID_ID2D1SvgElement = "ac7b67a6-183e-49c1-a823-0ebe40b0db29"
   struct ID2D1SvgElement
     lpVtbl : ID2D1SvgElementVTbl*
   end
@@ -3578,6 +3732,8 @@ lib LibWin32
     create_path_data : Proc(ID2D1SvgDocument*, Float32*, UInt32, D2D1_SVG_PATH_COMMAND*, UInt32, ID2D1SvgPathData*, HRESULT)
   end
 
+  ID2D1SvgDocument_GUID = LibC::GUID.new("86b88e4d-afa4-4d7b-88e4-68a51c4a0aec")
+  CLSID_ID2D1SvgDocument = "86b88e4d-afa4-4d7b-88e4-68a51c4a0aec"
   struct ID2D1SvgDocument
     lpVtbl : ID2D1SvgDocumentVTbl*
   end
@@ -3593,6 +3749,8 @@ lib LibWin32
     get_nib_shape : Proc(ID2D1InkStyle*, D2D1_INK_NIB_SHAPE)
   end
 
+  ID2D1InkStyle_GUID = LibC::GUID.new("bae8b344-23fc-4071-8cb5-d05d6f073848")
+  CLSID_ID2D1InkStyle = "bae8b344-23fc-4071-8cb5-d05d6f073848"
   struct ID2D1InkStyle
     lpVtbl : ID2D1InkStyleVTbl*
   end
@@ -3614,6 +3772,8 @@ lib LibWin32
     get_bounds : Proc(ID2D1Ink*, ID2D1InkStyle, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
   end
 
+  ID2D1Ink_GUID = LibC::GUID.new("b499923b-7029-478f-a8b3-432c7c5f5312")
+  CLSID_ID2D1Ink = "b499923b-7029-478f-a8b3-432c7c5f5312"
   struct ID2D1Ink
     lpVtbl : ID2D1InkVTbl*
   end
@@ -3627,6 +3787,8 @@ lib LibWin32
     get_patches : Proc(ID2D1GradientMesh*, UInt32, D2D1_GRADIENT_MESH_PATCH*, UInt32, HRESULT)
   end
 
+  ID2D1GradientMesh_GUID = LibC::GUID.new("f292e401-c050-4cde-83d7-04962d3b23c2")
+  CLSID_ID2D1GradientMesh = "f292e401-c050-4cde-83d7-04962d3b23c2"
   struct ID2D1GradientMesh
     lpVtbl : ID2D1GradientMeshVTbl*
   end
@@ -3640,6 +3802,8 @@ lib LibWin32
     try_reclaim_resources : Proc(ID2D1ImageSource*, LibC::BOOL*, HRESULT)
   end
 
+  ID2D1ImageSource_GUID = LibC::GUID.new("c9b664e5-74a1-4378-9ac2-eefc37a3f4d8")
+  CLSID_ID2D1ImageSource = "c9b664e5-74a1-4378-9ac2-eefc37a3f4d8"
   struct ID2D1ImageSource
     lpVtbl : ID2D1ImageSourceVTbl*
   end
@@ -3656,6 +3820,8 @@ lib LibWin32
     get_source : Proc(ID2D1ImageSourceFromWic*, IWICBitmapSource*, Void)
   end
 
+  ID2D1ImageSourceFromWic_GUID = LibC::GUID.new("77395441-1c8f-4555-8683-f50dab0fe792")
+  CLSID_ID2D1ImageSourceFromWic = "77395441-1c8f-4555-8683-f50dab0fe792"
   struct ID2D1ImageSourceFromWic
     lpVtbl : ID2D1ImageSourceFromWicVTbl*
   end
@@ -3669,6 +3835,8 @@ lib LibWin32
     get_properties : Proc(ID2D1TransformedImageSource*, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, Void)
   end
 
+  ID2D1TransformedImageSource_GUID = LibC::GUID.new("7f1f79e5-2796-416c-8f55-700f911445e5")
+  CLSID_ID2D1TransformedImageSource = "7f1f79e5-2796-416c-8f55-700f911445e5"
   struct ID2D1TransformedImageSource
     lpVtbl : ID2D1TransformedImageSourceVTbl*
   end
@@ -3680,6 +3848,8 @@ lib LibWin32
     get_factory : Proc(ID2D1LookupTable3D*, ID2D1Factory*, Void)
   end
 
+  ID2D1LookupTable3D_GUID = LibC::GUID.new("53dd9855-a3b0-4d5b-82e1-26e25c5e5797")
+  CLSID_ID2D1LookupTable3D = "53dd9855-a3b0-4d5b-82e1-26e25c5e5797"
   struct ID2D1LookupTable3D
     lpVtbl : ID2D1LookupTable3DVTbl*
   end
@@ -3793,6 +3963,8 @@ lib LibWin32
     create_transformed_image_source : Proc(ID2D1DeviceContext2*, ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)
   end
 
+  ID2D1DeviceContext2_GUID = LibC::GUID.new("394ea6a3-0c34-4321-950b-6ca20f0be6c7")
+  CLSID_ID2D1DeviceContext2 = "394ea6a3-0c34-4321-950b-6ca20f0be6c7"
   struct ID2D1DeviceContext2
     lpVtbl : ID2D1DeviceContext2VTbl*
   end
@@ -3815,6 +3987,8 @@ lib LibWin32
     get_dxgi_device : Proc(ID2D1Device2*, IDXGIDevice*, HRESULT)
   end
 
+  ID2D1Device2_GUID = LibC::GUID.new("a44472e1-8dfb-4e60-8492-6e2861c9ca8b")
+  CLSID_ID2D1Device2 = "a44472e1-8dfb-4e60-8492-6e2861c9ca8b"
   struct ID2D1Device2
     lpVtbl : ID2D1Device2VTbl*
   end
@@ -3851,6 +4025,8 @@ lib LibWin32
     create_device3 : Proc(ID2D1Factory3*, IDXGIDevice, ID2D1Device2*, HRESULT)
   end
 
+  ID2D1Factory3_GUID = LibC::GUID.new("0869759f-4f00-413f-b03e-2bda45404d0f")
+  CLSID_ID2D1Factory3 = "0869759f-4f00-413f-b03e-2bda45404d0f"
   struct ID2D1Factory3
     lpVtbl : ID2D1Factory3VTbl*
   end
@@ -3890,6 +4066,8 @@ lib LibWin32
     draw_gdi_metafile2 : Proc(ID2D1CommandSink2*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
   end
 
+  ID2D1CommandSink2_GUID = LibC::GUID.new("3bab440e-417e-47df-a2e2-bc0be6a00916")
+  CLSID_ID2D1CommandSink2 = "3bab440e-417e-47df-a2e2-bc0be6a00916"
   struct ID2D1CommandSink2
     lpVtbl : ID2D1CommandSink2VTbl*
   end
@@ -3905,6 +4083,8 @@ lib LibWin32
     get_source_bounds : Proc(ID2D1GdiMetafile1*, D2D_RECT_F*, HRESULT)
   end
 
+  ID2D1GdiMetafile1_GUID = LibC::GUID.new("2e69f9e8-dd3f-4bf9-95ba-c04f49d788df")
+  CLSID_ID2D1GdiMetafile1 = "2e69f9e8-dd3f-4bf9-95ba-c04f49d788df"
   struct ID2D1GdiMetafile1
     lpVtbl : ID2D1GdiMetafile1VTbl*
   end
@@ -3917,6 +4097,8 @@ lib LibWin32
     process_record2 : Proc(ID2D1GdiMetafileSink1*, UInt32, Void*, UInt32, UInt32, HRESULT)
   end
 
+  ID2D1GdiMetafileSink1_GUID = LibC::GUID.new("fd0ecb6b-91e6-411e-8655-395e760f91b4")
+  CLSID_ID2D1GdiMetafileSink1 = "fd0ecb6b-91e6-411e-8655-395e760f91b4"
   struct ID2D1GdiMetafileSink1
     lpVtbl : ID2D1GdiMetafileSink1VTbl*
   end
@@ -3933,6 +4115,8 @@ lib LibWin32
     clear : Proc(ID2D1SpriteBatch*, Void)
   end
 
+  ID2D1SpriteBatch_GUID = LibC::GUID.new("4dc583bf-3a10-438a-8722-e9765224f1f1")
+  CLSID_ID2D1SpriteBatch = "4dc583bf-3a10-438a-8722-e9765224f1f1"
   struct ID2D1SpriteBatch
     lpVtbl : ID2D1SpriteBatchVTbl*
   end
@@ -4048,6 +4232,8 @@ lib LibWin32
     draw_sprite_batch : Proc(ID2D1DeviceContext3*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)
   end
 
+  ID2D1DeviceContext3_GUID = LibC::GUID.new("235a7496-8351-414c-bcd4-6672ab2d8e00")
+  CLSID_ID2D1DeviceContext3 = "235a7496-8351-414c-bcd4-6672ab2d8e00"
   struct ID2D1DeviceContext3
     lpVtbl : ID2D1DeviceContext3VTbl*
   end
@@ -4071,6 +4257,8 @@ lib LibWin32
     create_device_context4 : Proc(ID2D1Device3*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)
   end
 
+  ID2D1Device3_GUID = LibC::GUID.new("852f2087-802c-4037-ab60-ff2e7ee6fc01")
+  CLSID_ID2D1Device3 = "852f2087-802c-4037-ab60-ff2e7ee6fc01"
   struct ID2D1Device3
     lpVtbl : ID2D1Device3VTbl*
   end
@@ -4108,6 +4296,8 @@ lib LibWin32
     create_device4 : Proc(ID2D1Factory4*, IDXGIDevice, ID2D1Device3*, HRESULT)
   end
 
+  ID2D1Factory4_GUID = LibC::GUID.new("bd4ec2d2-0662-4bee-ba8e-6f29f032e096")
+  CLSID_ID2D1Factory4 = "bd4ec2d2-0662-4bee-ba8e-6f29f032e096"
   struct ID2D1Factory4
     lpVtbl : ID2D1Factory4VTbl*
   end
@@ -4148,6 +4338,8 @@ lib LibWin32
     draw_sprite_batch : Proc(ID2D1CommandSink3*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, HRESULT)
   end
 
+  ID2D1CommandSink3_GUID = LibC::GUID.new("18079135-4cf3-4868-bc8e-06067e6d242d")
+  CLSID_ID2D1CommandSink3 = "18079135-4cf3-4868-bc8e-06067e6d242d"
   struct ID2D1CommandSink3
     lpVtbl : ID2D1CommandSink3VTbl*
   end
@@ -4164,6 +4356,8 @@ lib LibWin32
     get_stroke : Proc(ID2D1SvgGlyphStyle*, ID2D1Brush*, Float32*, Float32*, UInt32, Float32*, Void)
   end
 
+  ID2D1SvgGlyphStyle_GUID = LibC::GUID.new("af671749-d241-4db8-8e41-dcc2e5c1a438")
+  CLSID_ID2D1SvgGlyphStyle = "af671749-d241-4db8-8e41-dcc2e5c1a438"
   struct ID2D1SvgGlyphStyle
     lpVtbl : ID2D1SvgGlyphStyleVTbl*
   end
@@ -4286,6 +4480,8 @@ lib LibWin32
     get_svg_glyph_image : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D_MATRIX_3X2_F*, ID2D1CommandList*, HRESULT)
   end
 
+  ID2D1DeviceContext4_GUID = LibC::GUID.new("8c427831-3d90-4476-b647-c4fae349e4db")
+  CLSID_ID2D1DeviceContext4 = "8c427831-3d90-4476-b647-c4fae349e4db"
   struct ID2D1DeviceContext4
     lpVtbl : ID2D1DeviceContext4VTbl*
   end
@@ -4312,6 +4508,8 @@ lib LibWin32
     get_maximum_color_glyph_cache_memory : Proc(ID2D1Device4*, UInt64)
   end
 
+  ID2D1Device4_GUID = LibC::GUID.new("d7bdb159-5683-4a46-bc9c-72dc720b858b")
+  CLSID_ID2D1Device4 = "d7bdb159-5683-4a46-bc9c-72dc720b858b"
   struct ID2D1Device4
     lpVtbl : ID2D1Device4VTbl*
   end
@@ -4350,6 +4548,8 @@ lib LibWin32
     create_device5 : Proc(ID2D1Factory5*, IDXGIDevice, ID2D1Device4*, HRESULT)
   end
 
+  ID2D1Factory5_GUID = LibC::GUID.new("c4349994-838e-4b0f-8cab-44997d9eeacc")
+  CLSID_ID2D1Factory5 = "c4349994-838e-4b0f-8cab-44997d9eeacc"
   struct ID2D1Factory5
     lpVtbl : ID2D1Factory5VTbl*
   end
@@ -4391,6 +4591,8 @@ lib LibWin32
     set_primitive_blend2 : Proc(ID2D1CommandSink4*, D2D1_PRIMITIVE_BLEND, HRESULT)
   end
 
+  ID2D1CommandSink4_GUID = LibC::GUID.new("c78a6519-40d6-4218-b2de-beeeb744bb3e")
+  CLSID_ID2D1CommandSink4 = "c78a6519-40d6-4218-b2de-beeeb744bb3e"
   struct ID2D1CommandSink4
     lpVtbl : ID2D1CommandSink4VTbl*
   end
@@ -4408,6 +4610,8 @@ lib LibWin32
     get_simple_color_profile : Proc(ID2D1ColorContext1*, D2D1_SIMPLE_COLOR_PROFILE*, HRESULT)
   end
 
+  ID2D1ColorContext1_GUID = LibC::GUID.new("1ab42875-c57f-4be9-bd85-9cd78d6f55ee")
+  CLSID_ID2D1ColorContext1 = "1ab42875-c57f-4be9-bd85-9cd78d6f55ee"
   struct ID2D1ColorContext1
     lpVtbl : ID2D1ColorContext1VTbl*
   end
@@ -4534,6 +4738,8 @@ lib LibWin32
     create_color_context_from_simple_color_profile : Proc(ID2D1DeviceContext5*, D2D1_SIMPLE_COLOR_PROFILE*, ID2D1ColorContext1*, HRESULT)
   end
 
+  ID2D1DeviceContext5_GUID = LibC::GUID.new("7836d248-68cc-4df6-b9e8-de991bf62eb7")
+  CLSID_ID2D1DeviceContext5 = "7836d248-68cc-4df6-b9e8-de991bf62eb7"
   struct ID2D1DeviceContext5
     lpVtbl : ID2D1DeviceContext5VTbl*
   end
@@ -4561,6 +4767,8 @@ lib LibWin32
     create_device_context6 : Proc(ID2D1Device5*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext5*, HRESULT)
   end
 
+  ID2D1Device5_GUID = LibC::GUID.new("d55ba0a4-6405-4694-aef5-08ee1a4358b4")
+  CLSID_ID2D1Device5 = "d55ba0a4-6405-4694-aef5-08ee1a4358b4"
   struct ID2D1Device5
     lpVtbl : ID2D1Device5VTbl*
   end
@@ -4600,6 +4808,8 @@ lib LibWin32
     create_device6 : Proc(ID2D1Factory6*, IDXGIDevice, ID2D1Device5*, HRESULT)
   end
 
+  ID2D1Factory6_GUID = LibC::GUID.new("f9976f46-f642-44c1-97ca-da32ea2a2635")
+  CLSID_ID2D1Factory6 = "f9976f46-f642-44c1-97ca-da32ea2a2635"
   struct ID2D1Factory6
     lpVtbl : ID2D1Factory6VTbl*
   end
@@ -4642,6 +4852,8 @@ lib LibWin32
     blend_image : Proc(ID2D1CommandSink5*, ID2D1Image, D2D1_BLEND_MODE, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, HRESULT)
   end
 
+  ID2D1CommandSink5_GUID = LibC::GUID.new("7047dd26-b1e7-44a7-959a-8349e2144fa8")
+  CLSID_ID2D1CommandSink5 = "7047dd26-b1e7-44a7-959a-8349e2144fa8"
   struct ID2D1CommandSink5
     lpVtbl : ID2D1CommandSink5VTbl*
   end
@@ -4769,6 +4981,8 @@ lib LibWin32
     blend_image : Proc(ID2D1DeviceContext6*, ID2D1Image, D2D1_BLEND_MODE, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, Void)
   end
 
+  ID2D1DeviceContext6_GUID = LibC::GUID.new("985f7e37-4ed0-4a19-98a3-15b0edfde306")
+  CLSID_ID2D1DeviceContext6 = "985f7e37-4ed0-4a19-98a3-15b0edfde306"
   struct ID2D1DeviceContext6
     lpVtbl : ID2D1DeviceContext6VTbl*
   end
@@ -4797,6 +5011,8 @@ lib LibWin32
     create_device_context7 : Proc(ID2D1Device6*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext6*, HRESULT)
   end
 
+  ID2D1Device6_GUID = LibC::GUID.new("7bfef914-2d75-4bad-be87-e18ddb077b6d")
+  CLSID_ID2D1Device6 = "7bfef914-2d75-4bad-be87-e18ddb077b6d"
   struct ID2D1Device6
     lpVtbl : ID2D1Device6VTbl*
   end
@@ -4837,6 +5053,8 @@ lib LibWin32
     create_device7 : Proc(ID2D1Factory7*, IDXGIDevice, ID2D1Device6*, HRESULT)
   end
 
+  ID2D1Factory7_GUID = LibC::GUID.new("bdc2bdd3-b96c-4de6-bdf7-99d4745454de")
+  CLSID_ID2D1Factory7 = "bdc2bdd3-b96c-4de6-bdf7-99d4745454de"
   struct ID2D1Factory7
     lpVtbl : ID2D1Factory7VTbl*
   end
@@ -4869,6 +5087,8 @@ lib LibWin32
     create_lookup_table3_d : Proc(ID2D1EffectContext1*, D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)
   end
 
+  ID2D1EffectContext1_GUID = LibC::GUID.new("84ab595a-fc81-4546-bacd-e8ef4d8abe7a")
+  CLSID_ID2D1EffectContext1 = "84ab595a-fc81-4546-bacd-e8ef4d8abe7a"
   struct ID2D1EffectContext1
     lpVtbl : ID2D1EffectContext1VTbl*
   end
@@ -4903,6 +5123,8 @@ lib LibWin32
     create_color_context_from_simple_color_profile : Proc(ID2D1EffectContext2*, D2D1_SIMPLE_COLOR_PROFILE*, ID2D1ColorContext1*, HRESULT)
   end
 
+  ID2D1EffectContext2_GUID = LibC::GUID.new("577ad2a0-9fc7-4dda-8b18-dab810140052")
+  CLSID_ID2D1EffectContext2 = "577ad2a0-9fc7-4dda-8b18-dab810140052"
   struct ID2D1EffectContext2
     lpVtbl : ID2D1EffectContext2VTbl*
   end

@@ -1054,6 +1054,8 @@ lib LibWin32
     release : Proc(IUnknown*, UInt32)
   end
 
+  IUnknown_GUID = LibC::GUID.new("00000000-0000-0000-c000-000000000046")
+  CLSID_IUnknown = "00000000-0000-0000-c000-000000000046"
   struct IUnknown
     lpVtbl : IUnknownVTbl*
   end
@@ -1070,6 +1072,8 @@ lib LibWin32
     finish_release : Proc(AsyncIUnknown*, UInt32)
   end
 
+  AsyncIUnknown_GUID = LibC::GUID.new("000e0000-0000-0000-c000-000000000046")
+  CLSID_AsyncIUnknown = "000e0000-0000-0000-c000-000000000046"
   struct AsyncIUnknown
     lpVtbl : AsyncIUnknownVTbl*
   end
@@ -1082,6 +1086,8 @@ lib LibWin32
     lock_server : Proc(IClassFactory*, LibC::BOOL, HRESULT)
   end
 
+  IClassFactory_GUID = LibC::GUID.new("00000001-0000-0000-c000-000000000046")
+  CLSID_IClassFactory = "00000001-0000-0000-c000-000000000046"
   struct IClassFactory
     lpVtbl : IClassFactoryVTbl*
   end
@@ -1092,6 +1098,8 @@ lib LibWin32
     release : Proc(INoMarshal*, UInt32)
   end
 
+  INoMarshal_GUID = LibC::GUID.new("ecc8691b-c1db-4dc0-855e-65f6c551af49")
+  CLSID_INoMarshal = "ecc8691b-c1db-4dc0-855e-65f6c551af49"
   struct INoMarshal
     lpVtbl : INoMarshalVTbl*
   end
@@ -1102,6 +1110,8 @@ lib LibWin32
     release : Proc(IAgileObject*, UInt32)
   end
 
+  IAgileObject_GUID = LibC::GUID.new("94ea2b94-e9cc-49e0-c0ff-ee64ca8f5b90")
+  CLSID_IAgileObject = "94ea2b94-e9cc-49e0-c0ff-ee64ca8f5b90"
   struct IAgileObject
     lpVtbl : IAgileObjectVTbl*
   end
@@ -1113,6 +1123,8 @@ lib LibWin32
     handle_activation : Proc(IActivationFilter*, UInt32, Guid*, Guid*, HRESULT)
   end
 
+  IActivationFilter_GUID = LibC::GUID.new("00000017-0000-0000-c000-000000000046")
+  CLSID_IActivationFilter = "00000017-0000-0000-c000-000000000046"
   struct IActivationFilter
     lpVtbl : IActivationFilterVTbl*
   end
@@ -1129,6 +1141,8 @@ lib LibWin32
     heap_minimize : Proc(IMalloc*, Void)
   end
 
+  IMalloc_GUID = LibC::GUID.new("00000002-0000-0000-c000-000000000046")
+  CLSID_IMalloc = "00000002-0000-0000-c000-000000000046"
   struct IMalloc
     lpVtbl : IMallocVTbl*
   end
@@ -1140,6 +1154,8 @@ lib LibWin32
     get_class_for_handler : Proc(IStdMarshalInfo*, UInt32, Void*, Guid*, HRESULT)
   end
 
+  IStdMarshalInfo_GUID = LibC::GUID.new("00000018-0000-0000-c000-000000000046")
+  CLSID_IStdMarshalInfo = "00000018-0000-0000-c000-000000000046"
   struct IStdMarshalInfo
     lpVtbl : IStdMarshalInfoVTbl*
   end
@@ -1152,6 +1168,8 @@ lib LibWin32
     release_connection : Proc(IExternalConnection*, UInt32, UInt32, LibC::BOOL, UInt32)
   end
 
+  IExternalConnection_GUID = LibC::GUID.new("00000019-0000-0000-c000-000000000046")
+  CLSID_IExternalConnection = "00000019-0000-0000-c000-000000000046"
   struct IExternalConnection
     lpVtbl : IExternalConnectionVTbl*
   end
@@ -1163,6 +1181,8 @@ lib LibWin32
     query_multiple_interfaces : Proc(IMultiQI*, UInt32, MULTI_QI*, HRESULT)
   end
 
+  IMultiQI_GUID = LibC::GUID.new("00000020-0000-0000-c000-000000000046")
+  CLSID_IMultiQI = "00000020-0000-0000-c000-000000000046"
   struct IMultiQI
     lpVtbl : IMultiQIVTbl*
   end
@@ -1175,6 +1195,8 @@ lib LibWin32
     finish_query_multiple_interfaces : Proc(AsyncIMultiQI*, MULTI_QI*, HRESULT)
   end
 
+  AsyncIMultiQI_GUID = LibC::GUID.new("000e0020-0000-0000-c000-000000000046")
+  CLSID_AsyncIMultiQI = "000e0020-0000-0000-c000-000000000046"
   struct AsyncIMultiQI
     lpVtbl : AsyncIMultiQIVTbl*
   end
@@ -1186,6 +1208,8 @@ lib LibWin32
     query_internal_interface : Proc(IInternalUnknown*, Guid*, Void**, HRESULT)
   end
 
+  IInternalUnknown_GUID = LibC::GUID.new("00000021-0000-0000-c000-000000000046")
+  CLSID_IInternalUnknown = "00000021-0000-0000-c000-000000000046"
   struct IInternalUnknown
     lpVtbl : IInternalUnknownVTbl*
   end
@@ -1200,6 +1224,8 @@ lib LibWin32
     clone : Proc(IEnumUnknown*, IEnumUnknown*, HRESULT)
   end
 
+  IEnumUnknown_GUID = LibC::GUID.new("00000100-0000-0000-c000-000000000046")
+  CLSID_IEnumUnknown = "00000100-0000-0000-c000-000000000046"
   struct IEnumUnknown
     lpVtbl : IEnumUnknownVTbl*
   end
@@ -1214,6 +1240,8 @@ lib LibWin32
     clone : Proc(IEnumString*, IEnumString*, HRESULT)
   end
 
+  IEnumString_GUID = LibC::GUID.new("00000101-0000-0000-c000-000000000046")
+  CLSID_IEnumString = "00000101-0000-0000-c000-000000000046"
   struct IEnumString
     lpVtbl : IEnumStringVTbl*
   end
@@ -1226,6 +1254,8 @@ lib LibWin32
     write : Proc(ISequentialStream*, Void*, UInt32, UInt32*, HRESULT)
   end
 
+  ISequentialStream_GUID = LibC::GUID.new("0c733a30-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ISequentialStream = "0c733a30-2a1c-11ce-ade5-00aa0044773d"
   struct ISequentialStream
     lpVtbl : ISequentialStreamVTbl*
   end
@@ -1247,6 +1277,8 @@ lib LibWin32
     clone : Proc(IStream*, IStream*, HRESULT)
   end
 
+  IStream_GUID = LibC::GUID.new("0000000c-0000-0000-c000-000000000046")
+  CLSID_IStream = "0000000c-0000-0000-c000-000000000046"
   struct IStream
     lpVtbl : IStreamVTbl*
   end
@@ -1262,6 +1294,8 @@ lib LibWin32
     is_connected : Proc(IRpcChannelBuffer*, HRESULT)
   end
 
+  IRpcChannelBuffer_GUID = LibC::GUID.new("d5f56b60-593b-101a-b569-08002b2dbf7a")
+  CLSID_IRpcChannelBuffer = "d5f56b60-593b-101a-b569-08002b2dbf7a"
   struct IRpcChannelBuffer
     lpVtbl : IRpcChannelBufferVTbl*
   end
@@ -1278,6 +1312,8 @@ lib LibWin32
     get_protocol_version : Proc(IRpcChannelBuffer2*, UInt32*, HRESULT)
   end
 
+  IRpcChannelBuffer2_GUID = LibC::GUID.new("594f31d0-7f19-11d0-b194-00a0c90dc8bf")
+  CLSID_IRpcChannelBuffer2 = "594f31d0-7f19-11d0-b194-00a0c90dc8bf"
   struct IRpcChannelBuffer2
     lpVtbl : IRpcChannelBuffer2VTbl*
   end
@@ -1297,6 +1333,8 @@ lib LibWin32
     get_dest_ctx_ex : Proc(IAsyncRpcChannelBuffer*, RPCOLEMESSAGE*, UInt32*, Void**, HRESULT)
   end
 
+  IAsyncRpcChannelBuffer_GUID = LibC::GUID.new("a5029fb6-3c34-11d1-9c99-00c04fb998aa")
+  CLSID_IAsyncRpcChannelBuffer = "a5029fb6-3c34-11d1-9c99-00c04fb998aa"
   struct IAsyncRpcChannelBuffer
     lpVtbl : IAsyncRpcChannelBufferVTbl*
   end
@@ -1320,6 +1358,8 @@ lib LibWin32
     register_async : Proc(IRpcChannelBuffer3*, RPCOLEMESSAGE*, IAsyncManager, HRESULT)
   end
 
+  IRpcChannelBuffer3_GUID = LibC::GUID.new("25b15600-0115-11d0-bf0d-00aa00b8dfd2")
+  CLSID_IRpcChannelBuffer3 = "25b15600-0115-11d0-bf0d-00aa00b8dfd2"
   struct IRpcChannelBuffer3
     lpVtbl : IRpcChannelBuffer3VTbl*
   end
@@ -1331,6 +1371,8 @@ lib LibWin32
     negotiate_syntax : Proc(IRpcSyntaxNegotiate*, RPCOLEMESSAGE*, HRESULT)
   end
 
+  IRpcSyntaxNegotiate_GUID = LibC::GUID.new("58a08519-24c8-4935-b482-3fd823333a4f")
+  CLSID_IRpcSyntaxNegotiate = "58a08519-24c8-4935-b482-3fd823333a4f"
   struct IRpcSyntaxNegotiate
     lpVtbl : IRpcSyntaxNegotiateVTbl*
   end
@@ -1343,6 +1385,8 @@ lib LibWin32
     disconnect : Proc(IRpcProxyBuffer*, Void)
   end
 
+  IRpcProxyBuffer_GUID = LibC::GUID.new("d5f56a34-593b-101a-b569-08002b2dbf7a")
+  CLSID_IRpcProxyBuffer = "d5f56a34-593b-101a-b569-08002b2dbf7a"
   struct IRpcProxyBuffer
     lpVtbl : IRpcProxyBufferVTbl*
   end
@@ -1360,6 +1404,8 @@ lib LibWin32
     debug_server_release : Proc(IRpcStubBuffer*, Void*, Void)
   end
 
+  IRpcStubBuffer_GUID = LibC::GUID.new("d5f56afc-593b-101a-b569-08002b2dbf7a")
+  CLSID_IRpcStubBuffer = "d5f56afc-593b-101a-b569-08002b2dbf7a"
   struct IRpcStubBuffer
     lpVtbl : IRpcStubBufferVTbl*
   end
@@ -1372,6 +1418,8 @@ lib LibWin32
     create_stub : Proc(IPSFactoryBuffer*, Guid*, IUnknown, IRpcStubBuffer*, HRESULT)
   end
 
+  IPSFactoryBuffer_GUID = LibC::GUID.new("d5f569d0-593b-101a-b569-08002b2dbf7a")
+  CLSID_IPSFactoryBuffer = "d5f569d0-593b-101a-b569-08002b2dbf7a"
   struct IPSFactoryBuffer
     lpVtbl : IPSFactoryBufferVTbl*
   end
@@ -1388,6 +1436,8 @@ lib LibWin32
     server_fill_buffer : Proc(IChannelHook*, Guid*, Guid*, UInt32*, Void*, HRESULT, Void)
   end
 
+  IChannelHook_GUID = LibC::GUID.new("1008c4a0-7613-11cf-9af1-0020af6e72f4")
+  CLSID_IChannelHook = "1008c4a0-7613-11cf-9af1-0020af6e72f4"
   struct IChannelHook
     lpVtbl : IChannelHookVTbl*
   end
@@ -1401,6 +1451,8 @@ lib LibWin32
     copy_proxy : Proc(IClientSecurity*, IUnknown, IUnknown*, HRESULT)
   end
 
+  IClientSecurity_GUID = LibC::GUID.new("0000013d-0000-0000-c000-000000000046")
+  CLSID_IClientSecurity = "0000013d-0000-0000-c000-000000000046"
   struct IClientSecurity
     lpVtbl : IClientSecurityVTbl*
   end
@@ -1415,6 +1467,8 @@ lib LibWin32
     is_impersonating : Proc(IServerSecurity*, LibC::BOOL)
   end
 
+  IServerSecurity_GUID = LibC::GUID.new("0000013e-0000-0000-c000-000000000046")
+  CLSID_IServerSecurity = "0000013e-0000-0000-c000-000000000046"
   struct IServerSecurity
     lpVtbl : IServerSecurityVTbl*
   end
@@ -1427,6 +1481,8 @@ lib LibWin32
     query : Proc(IRpcOptions*, IUnknown, RPCOPT_PROPERTIES, LibC::UINT_PTR*, HRESULT)
   end
 
+  IRpcOptions_GUID = LibC::GUID.new("00000144-0000-0000-c000-000000000046")
+  CLSID_IRpcOptions = "00000144-0000-0000-c000-000000000046"
   struct IRpcOptions
     lpVtbl : IRpcOptionsVTbl*
   end
@@ -1439,6 +1495,8 @@ lib LibWin32
     query : Proc(IGlobalOptions*, GLOBALOPT_PROPERTIES, LibC::UINT_PTR*, HRESULT)
   end
 
+  IGlobalOptions_GUID = LibC::GUID.new("0000015b-0000-0000-c000-000000000046")
+  CLSID_IGlobalOptions = "0000015b-0000-0000-c000-000000000046"
   struct IGlobalOptions
     lpVtbl : IGlobalOptionsVTbl*
   end
@@ -1451,6 +1509,8 @@ lib LibWin32
     free_surrogate : Proc(ISurrogate*, HRESULT)
   end
 
+  ISurrogate_GUID = LibC::GUID.new("00000022-0000-0000-c000-000000000046")
+  CLSID_ISurrogate = "00000022-0000-0000-c000-000000000046"
   struct ISurrogate
     lpVtbl : ISurrogateVTbl*
   end
@@ -1464,6 +1524,8 @@ lib LibWin32
     get_interface_from_global : Proc(IGlobalInterfaceTable*, UInt32, Guid*, Void**, HRESULT)
   end
 
+  IGlobalInterfaceTable_GUID = LibC::GUID.new("00000146-0000-0000-c000-000000000046")
+  CLSID_IGlobalInterfaceTable = "00000146-0000-0000-c000-000000000046"
   struct IGlobalInterfaceTable
     lpVtbl : IGlobalInterfaceTableVTbl*
   end
@@ -1477,6 +1539,8 @@ lib LibWin32
     reset : Proc(ISynchronize*, HRESULT)
   end
 
+  ISynchronize_GUID = LibC::GUID.new("00000030-0000-0000-c000-000000000046")
+  CLSID_ISynchronize = "00000030-0000-0000-c000-000000000046"
   struct ISynchronize
     lpVtbl : ISynchronizeVTbl*
   end
@@ -1488,6 +1552,8 @@ lib LibWin32
     get_handle : Proc(ISynchronizeHandle*, LibC::HANDLE*, HRESULT)
   end
 
+  ISynchronizeHandle_GUID = LibC::GUID.new("00000031-0000-0000-c000-000000000046")
+  CLSID_ISynchronizeHandle = "00000031-0000-0000-c000-000000000046"
   struct ISynchronizeHandle
     lpVtbl : ISynchronizeHandleVTbl*
   end
@@ -1500,6 +1566,8 @@ lib LibWin32
     set_event_handle : Proc(ISynchronizeEvent*, LibC::HANDLE*, HRESULT)
   end
 
+  ISynchronizeEvent_GUID = LibC::GUID.new("00000032-0000-0000-c000-000000000046")
+  CLSID_ISynchronizeEvent = "00000032-0000-0000-c000-000000000046"
   struct ISynchronizeEvent
     lpVtbl : ISynchronizeEventVTbl*
   end
@@ -1512,6 +1580,8 @@ lib LibWin32
     wait_multiple : Proc(ISynchronizeContainer*, UInt32, UInt32, ISynchronize*, HRESULT)
   end
 
+  ISynchronizeContainer_GUID = LibC::GUID.new("00000033-0000-0000-c000-000000000046")
+  CLSID_ISynchronizeContainer = "00000033-0000-0000-c000-000000000046"
   struct ISynchronizeContainer
     lpVtbl : ISynchronizeContainerVTbl*
   end
@@ -1526,6 +1596,8 @@ lib LibWin32
     release_mutex : Proc(ISynchronizeMutex*, HRESULT)
   end
 
+  ISynchronizeMutex_GUID = LibC::GUID.new("00000025-0000-0000-c000-000000000046")
+  CLSID_ISynchronizeMutex = "00000025-0000-0000-c000-000000000046"
   struct ISynchronizeMutex
     lpVtbl : ISynchronizeMutexVTbl*
   end
@@ -1538,6 +1610,8 @@ lib LibWin32
     test_cancel : Proc(ICancelMethodCalls*, HRESULT)
   end
 
+  ICancelMethodCalls_GUID = LibC::GUID.new("00000029-0000-0000-c000-000000000046")
+  CLSID_ICancelMethodCalls = "00000029-0000-0000-c000-000000000046"
   struct ICancelMethodCalls
     lpVtbl : ICancelMethodCallsVTbl*
   end
@@ -1551,6 +1625,8 @@ lib LibWin32
     get_state : Proc(IAsyncManager*, UInt32*, HRESULT)
   end
 
+  IAsyncManager_GUID = LibC::GUID.new("0000002a-0000-0000-c000-000000000046")
+  CLSID_IAsyncManager = "0000002a-0000-0000-c000-000000000046"
   struct IAsyncManager
     lpVtbl : IAsyncManagerVTbl*
   end
@@ -1562,6 +1638,8 @@ lib LibWin32
     create_call : Proc(ICallFactory*, Guid*, IUnknown, Guid*, IUnknown*, HRESULT)
   end
 
+  ICallFactory_GUID = LibC::GUID.new("1c733a30-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICallFactory = "1c733a30-2a1c-11ce-ade5-00aa0044773d"
   struct ICallFactory
     lpVtbl : ICallFactoryVTbl*
   end
@@ -1574,6 +1652,8 @@ lib LibWin32
     get_iid_from_objref : Proc(IRpcHelper*, Void*, Guid**, HRESULT)
   end
 
+  IRpcHelper_GUID = LibC::GUID.new("00000149-0000-0000-c000-000000000046")
+  CLSID_IRpcHelper = "00000149-0000-0000-c000-000000000046"
   struct IRpcHelper
     lpVtbl : IRpcHelperVTbl*
   end
@@ -1585,6 +1665,8 @@ lib LibWin32
     release_marshal_buffer : Proc(IReleaseMarshalBuffers*, RPCOLEMESSAGE*, UInt32, IUnknown, HRESULT)
   end
 
+  IReleaseMarshalBuffers_GUID = LibC::GUID.new("eb0cb9e8-7996-11d2-872e-0000f8080859")
+  CLSID_IReleaseMarshalBuffers = "eb0cb9e8-7996-11d2-872e-0000f8080859"
   struct IReleaseMarshalBuffers
     lpVtbl : IReleaseMarshalBuffersVTbl*
   end
@@ -1597,6 +1679,8 @@ lib LibWin32
     add_synchronize : Proc(IWaitMultiple*, ISynchronize, HRESULT)
   end
 
+  IWaitMultiple_GUID = LibC::GUID.new("0000002b-0000-0000-c000-000000000046")
+  CLSID_IWaitMultiple = "0000002b-0000-0000-c000-000000000046"
   struct IWaitMultiple
     lpVtbl : IWaitMultipleVTbl*
   end
@@ -1609,6 +1693,8 @@ lib LibWin32
     disable_com_dynamic_addr_tracking : Proc(IAddrTrackingControl*, HRESULT)
   end
 
+  IAddrTrackingControl_GUID = LibC::GUID.new("00000147-0000-0000-c000-000000000046")
+  CLSID_IAddrTrackingControl = "00000147-0000-0000-c000-000000000046"
   struct IAddrTrackingControl
     lpVtbl : IAddrTrackingControlVTbl*
   end
@@ -1621,6 +1707,8 @@ lib LibWin32
     update_addr_exclusion_list : Proc(IAddrExclusionControl*, IUnknown, HRESULT)
   end
 
+  IAddrExclusionControl_GUID = LibC::GUID.new("00000148-0000-0000-c000-000000000046")
+  CLSID_IAddrExclusionControl = "00000148-0000-0000-c000-000000000046"
   struct IAddrExclusionControl
     lpVtbl : IAddrExclusionControlVTbl*
   end
@@ -1633,6 +1721,8 @@ lib LibWin32
     push : Proc(IPipeByte*, UInt8*, UInt32, HRESULT)
   end
 
+  IPipeByte_GUID = LibC::GUID.new("db2f3aca-2f86-11d1-8e04-00c04fb9989a")
+  CLSID_IPipeByte = "db2f3aca-2f86-11d1-8e04-00c04fb9989a"
   struct IPipeByte
     lpVtbl : IPipeByteVTbl*
   end
@@ -1647,6 +1737,8 @@ lib LibWin32
     finish_push : Proc(AsyncIPipeByte*, HRESULT)
   end
 
+  AsyncIPipeByte_GUID = LibC::GUID.new("db2f3acb-2f86-11d1-8e04-00c04fb9989a")
+  CLSID_AsyncIPipeByte = "db2f3acb-2f86-11d1-8e04-00c04fb9989a"
   struct AsyncIPipeByte
     lpVtbl : AsyncIPipeByteVTbl*
   end
@@ -1659,6 +1751,8 @@ lib LibWin32
     push : Proc(IPipeLong*, Int32*, UInt32, HRESULT)
   end
 
+  IPipeLong_GUID = LibC::GUID.new("db2f3acc-2f86-11d1-8e04-00c04fb9989a")
+  CLSID_IPipeLong = "db2f3acc-2f86-11d1-8e04-00c04fb9989a"
   struct IPipeLong
     lpVtbl : IPipeLongVTbl*
   end
@@ -1673,6 +1767,8 @@ lib LibWin32
     finish_push : Proc(AsyncIPipeLong*, HRESULT)
   end
 
+  AsyncIPipeLong_GUID = LibC::GUID.new("db2f3acd-2f86-11d1-8e04-00c04fb9989a")
+  CLSID_AsyncIPipeLong = "db2f3acd-2f86-11d1-8e04-00c04fb9989a"
   struct AsyncIPipeLong
     lpVtbl : AsyncIPipeLongVTbl*
   end
@@ -1685,6 +1781,8 @@ lib LibWin32
     push : Proc(IPipeDouble*, Float64*, UInt32, HRESULT)
   end
 
+  IPipeDouble_GUID = LibC::GUID.new("db2f3ace-2f86-11d1-8e04-00c04fb9989a")
+  CLSID_IPipeDouble = "db2f3ace-2f86-11d1-8e04-00c04fb9989a"
   struct IPipeDouble
     lpVtbl : IPipeDoubleVTbl*
   end
@@ -1699,6 +1797,8 @@ lib LibWin32
     finish_push : Proc(AsyncIPipeDouble*, HRESULT)
   end
 
+  AsyncIPipeDouble_GUID = LibC::GUID.new("db2f3acf-2f86-11d1-8e04-00c04fb9989a")
+  CLSID_AsyncIPipeDouble = "db2f3acf-2f86-11d1-8e04-00c04fb9989a"
   struct AsyncIPipeDouble
     lpVtbl : AsyncIPipeDoubleVTbl*
   end
@@ -1713,6 +1813,8 @@ lib LibWin32
     set_current_logical_thread_id : Proc(IComThreadingInfo*, Guid*, HRESULT)
   end
 
+  IComThreadingInfo_GUID = LibC::GUID.new("000001ce-0000-0000-c000-000000000046")
+  CLSID_IComThreadingInfo = "000001ce-0000-0000-c000-000000000046"
   struct IComThreadingInfo
     lpVtbl : IComThreadingInfoVTbl*
   end
@@ -1724,6 +1826,8 @@ lib LibWin32
     reset_initializer_timeout : Proc(IProcessInitControl*, UInt32, HRESULT)
   end
 
+  IProcessInitControl_GUID = LibC::GUID.new("72380d55-8d2b-43a3-8513-2b6ef31434e9")
+  CLSID_IProcessInitControl = "72380d55-8d2b-43a3-8513-2b6ef31434e9"
   struct IProcessInitControl
     lpVtbl : IProcessInitControlVTbl*
   end
@@ -1734,6 +1838,8 @@ lib LibWin32
     release : Proc(IFastRundown*, UInt32)
   end
 
+  IFastRundown_GUID = LibC::GUID.new("00000040-0000-0000-c000-000000000046")
+  CLSID_IFastRundown = "00000040-0000-0000-c000-000000000046"
   struct IFastRundown
     lpVtbl : IFastRundownVTbl*
   end
@@ -1747,6 +1853,8 @@ lib LibWin32
     revoke_object : Proc(IMachineGlobalObjectTable*, MachineGlobalObjectTableRegistrationToken__*, HRESULT)
   end
 
+  IMachineGlobalObjectTable_GUID = LibC::GUID.new("26d709ac-f70b-4421-a96f-d2878fafb00d")
+  CLSID_IMachineGlobalObjectTable = "26d709ac-f70b-4421-a96f-d2878fafb00d"
   struct IMachineGlobalObjectTable
     lpVtbl : IMachineGlobalObjectTableVTbl*
   end
@@ -1769,6 +1877,8 @@ lib LibWin32
     post_heap_minimize : Proc(IMallocSpy*, Void)
   end
 
+  IMallocSpy_GUID = LibC::GUID.new("0000001d-0000-0000-c000-000000000046")
+  CLSID_IMallocSpy = "0000001d-0000-0000-c000-000000000046"
   struct IMallocSpy
     lpVtbl : IMallocSpyVTbl*
   end
@@ -1789,6 +1899,8 @@ lib LibWin32
     revoke_object_param : Proc(IBindCtx*, LibC::LPWSTR, HRESULT)
   end
 
+  IBindCtx_GUID = LibC::GUID.new("0000000e-0000-0000-c000-000000000046")
+  CLSID_IBindCtx = "0000000e-0000-0000-c000-000000000046"
   struct IBindCtx
     lpVtbl : IBindCtxVTbl*
   end
@@ -1803,6 +1915,8 @@ lib LibWin32
     clone : Proc(IEnumMoniker*, IEnumMoniker*, HRESULT)
   end
 
+  IEnumMoniker_GUID = LibC::GUID.new("00000102-0000-0000-c000-000000000046")
+  CLSID_IEnumMoniker = "00000102-0000-0000-c000-000000000046"
   struct IEnumMoniker
     lpVtbl : IEnumMonikerVTbl*
   end
@@ -1818,6 +1932,8 @@ lib LibWin32
     set_contained_object : Proc(IRunnableObject*, LibC::BOOL, HRESULT)
   end
 
+  IRunnableObject_GUID = LibC::GUID.new("00000126-0000-0000-c000-000000000046")
+  CLSID_IRunnableObject = "00000126-0000-0000-c000-000000000046"
   struct IRunnableObject
     lpVtbl : IRunnableObjectVTbl*
   end
@@ -1835,6 +1951,8 @@ lib LibWin32
     enum_running : Proc(IRunningObjectTable*, IEnumMoniker*, HRESULT)
   end
 
+  IRunningObjectTable_GUID = LibC::GUID.new("00000010-0000-0000-c000-000000000046")
+  CLSID_IRunningObjectTable = "00000010-0000-0000-c000-000000000046"
   struct IRunningObjectTable
     lpVtbl : IRunningObjectTableVTbl*
   end
@@ -1846,6 +1964,8 @@ lib LibWin32
     get_class_id : Proc(IPersist*, Guid*, HRESULT)
   end
 
+  IPersist_GUID = LibC::GUID.new("0000010c-0000-0000-c000-000000000046")
+  CLSID_IPersist = "0000010c-0000-0000-c000-000000000046"
   struct IPersist
     lpVtbl : IPersistVTbl*
   end
@@ -1861,6 +1981,8 @@ lib LibWin32
     get_size_max : Proc(IPersistStream*, ULARGE_INTEGER*, HRESULT)
   end
 
+  IPersistStream_GUID = LibC::GUID.new("00000109-0000-0000-c000-000000000046")
+  CLSID_IPersistStream = "00000109-0000-0000-c000-000000000046"
   struct IPersistStream
     lpVtbl : IPersistStreamVTbl*
   end
@@ -1891,6 +2013,8 @@ lib LibWin32
     is_system_moniker : Proc(IMoniker*, UInt32*, HRESULT)
   end
 
+  IMoniker_GUID = LibC::GUID.new("0000000f-0000-0000-c000-000000000046")
+  CLSID_IMoniker = "0000000f-0000-0000-c000-000000000046"
   struct IMoniker
     lpVtbl : IMonikerVTbl*
   end
@@ -1902,6 +2026,8 @@ lib LibWin32
     get_comparison_data : Proc(IROTData*, UInt8*, UInt32, UInt32*, HRESULT)
   end
 
+  IROTData_GUID = LibC::GUID.new("f29f6bc0-5021-11ce-aa15-00006901293f")
+  CLSID_IROTData = "f29f6bc0-5021-11ce-aa15-00006901293f"
   struct IROTData
     lpVtbl : IROTDataVTbl*
   end
@@ -1918,6 +2044,8 @@ lib LibWin32
     get_cur_file : Proc(IPersistFile*, LibC::LPWSTR*, HRESULT)
   end
 
+  IPersistFile_GUID = LibC::GUID.new("0000010b-0000-0000-c000-000000000046")
+  CLSID_IPersistFile = "0000010b-0000-0000-c000-000000000046"
   struct IPersistFile
     lpVtbl : IPersistFileVTbl*
   end
@@ -1932,6 +2060,8 @@ lib LibWin32
     clone : Proc(IEnumFORMATETC*, IEnumFORMATETC*, HRESULT)
   end
 
+  IEnumFORMATETC_GUID = LibC::GUID.new("00000103-0000-0000-c000-000000000046")
+  CLSID_IEnumFORMATETC = "00000103-0000-0000-c000-000000000046"
   struct IEnumFORMATETC
     lpVtbl : IEnumFORMATETCVTbl*
   end
@@ -1946,6 +2076,8 @@ lib LibWin32
     clone : Proc(IEnumSTATDATA*, IEnumSTATDATA*, HRESULT)
   end
 
+  IEnumSTATDATA_GUID = LibC::GUID.new("00000105-0000-0000-c000-000000000046")
+  CLSID_IEnumSTATDATA = "00000105-0000-0000-c000-000000000046"
   struct IEnumSTATDATA
     lpVtbl : IEnumSTATDATAVTbl*
   end
@@ -1961,6 +2093,8 @@ lib LibWin32
     on_close : Proc(IAdviseSink*, Void)
   end
 
+  IAdviseSink_GUID = LibC::GUID.new("0000010f-0000-0000-c000-000000000046")
+  CLSID_IAdviseSink = "0000010f-0000-0000-c000-000000000046"
   struct IAdviseSink
     lpVtbl : IAdviseSinkVTbl*
   end
@@ -1981,6 +2115,8 @@ lib LibWin32
     finish_on_close : Proc(AsyncIAdviseSink*, Void)
   end
 
+  AsyncIAdviseSink_GUID = LibC::GUID.new("00000150-0000-0000-c000-000000000046")
+  CLSID_AsyncIAdviseSink = "00000150-0000-0000-c000-000000000046"
   struct AsyncIAdviseSink
     lpVtbl : AsyncIAdviseSinkVTbl*
   end
@@ -1997,6 +2133,8 @@ lib LibWin32
     on_link_src_change : Proc(IAdviseSink2*, IMoniker, Void)
   end
 
+  IAdviseSink2_GUID = LibC::GUID.new("00000125-0000-0000-c000-000000000046")
+  CLSID_IAdviseSink2 = "00000125-0000-0000-c000-000000000046"
   struct IAdviseSink2
     lpVtbl : IAdviseSink2VTbl*
   end
@@ -2019,6 +2157,8 @@ lib LibWin32
     finish_on_link_src_change : Proc(AsyncIAdviseSink2*, Void)
   end
 
+  AsyncIAdviseSink2_GUID = LibC::GUID.new("00000151-0000-0000-c000-000000000046")
+  CLSID_AsyncIAdviseSink2 = "00000151-0000-0000-c000-000000000046"
   struct AsyncIAdviseSink2
     lpVtbl : AsyncIAdviseSink2VTbl*
   end
@@ -2038,6 +2178,8 @@ lib LibWin32
     enum_d_advise : Proc(IDataObject*, IEnumSTATDATA*, HRESULT)
   end
 
+  IDataObject_GUID = LibC::GUID.new("0000010e-0000-0000-c000-000000000046")
+  CLSID_IDataObject = "0000010e-0000-0000-c000-000000000046"
   struct IDataObject
     lpVtbl : IDataObjectVTbl*
   end
@@ -2052,6 +2194,8 @@ lib LibWin32
     send_on_data_change : Proc(IDataAdviseHolder*, IDataObject, UInt32, UInt32, HRESULT)
   end
 
+  IDataAdviseHolder_GUID = LibC::GUID.new("00000110-0000-0000-c000-000000000046")
+  CLSID_IDataAdviseHolder = "00000110-0000-0000-c000-000000000046"
   struct IDataAdviseHolder
     lpVtbl : IDataAdviseHolderVTbl*
   end
@@ -2063,6 +2207,8 @@ lib LibWin32
     get_class_object : Proc(IClassActivator*, Guid*, UInt32, UInt32, Guid*, Void**, HRESULT)
   end
 
+  IClassActivator_GUID = LibC::GUID.new("00000140-0000-0000-c000-000000000046")
+  CLSID_IClassActivator = "00000140-0000-0000-c000-000000000046"
   struct IClassActivator
     lpVtbl : IClassActivatorVTbl*
   end
@@ -2074,6 +2220,8 @@ lib LibWin32
     on_progress : Proc(IProgressNotify*, UInt32, UInt32, LibC::BOOL, LibC::BOOL, HRESULT)
   end
 
+  IProgressNotify_GUID = LibC::GUID.new("a9d758a0-4617-11cf-95fc-00aa00680db4")
+  CLSID_IProgressNotify = "a9d758a0-4617-11cf-95fc-00aa00680db4"
   struct IProgressNotify
     lpVtbl : IProgressNotifyVTbl*
   end
@@ -2086,6 +2234,8 @@ lib LibWin32
     unlock : Proc(IBlockingLock*, HRESULT)
   end
 
+  IBlockingLock_GUID = LibC::GUID.new("30f3d47a-6447-11d1-8e3c-00c04fb9386d")
+  CLSID_IBlockingLock = "30f3d47a-6447-11d1-8e3c-00c04fb9386d"
   struct IBlockingLock
     lpVtbl : IBlockingLockVTbl*
   end
@@ -2097,6 +2247,8 @@ lib LibWin32
     suppress_changes : Proc(ITimeAndNoticeControl*, UInt32, UInt32, HRESULT)
   end
 
+  ITimeAndNoticeControl_GUID = LibC::GUID.new("bc0bf6ae-8878-11d1-83e9-00c04fc2c6d4")
+  CLSID_ITimeAndNoticeControl = "bc0bf6ae-8878-11d1-83e9-00c04fc2c6d4"
   struct ITimeAndNoticeControl
     lpVtbl : ITimeAndNoticeControlVTbl*
   end
@@ -2109,6 +2261,8 @@ lib LibWin32
     open_storage_ex : Proc(IOplockStorage*, LibC::LPWSTR, UInt32, UInt32, UInt32, Guid*, Void**, HRESULT)
   end
 
+  IOplockStorage_GUID = LibC::GUID.new("8d19c834-8879-11d1-83e9-00c04fc2c6d4")
+  CLSID_IOplockStorage = "8d19c834-8879-11d1-83e9-00c04fc2c6d4"
   struct IOplockStorage
     lpVtbl : IOplockStorageVTbl*
   end
@@ -2120,6 +2274,8 @@ lib LibWin32
     async_get_class_bits : Proc(IUrlMon*, Guid*, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, IBindCtx, UInt32, Guid*, UInt32, HRESULT)
   end
 
+  IUrlMon_GUID = LibC::GUID.new("00000026-0000-0000-c000-000000000046")
+  CLSID_IUrlMon = "00000026-0000-0000-c000-000000000046"
   struct IUrlMon
     lpVtbl : IUrlMonVTbl*
   end
@@ -2131,6 +2287,8 @@ lib LibWin32
     allow_foreground_transfer : Proc(IForegroundTransfer*, Void*, HRESULT)
   end
 
+  IForegroundTransfer_GUID = LibC::GUID.new("00000145-0000-0000-c000-000000000046")
+  CLSID_IForegroundTransfer = "00000145-0000-0000-c000-000000000046"
   struct IForegroundTransfer
     lpVtbl : IForegroundTransferVTbl*
   end
@@ -2143,6 +2301,8 @@ lib LibWin32
     release_ref_on_process : Proc(IProcessLock*, UInt32)
   end
 
+  IProcessLock_GUID = LibC::GUID.new("000001d5-0000-0000-c000-000000000046")
+  CLSID_IProcessLock = "000001d5-0000-0000-c000-000000000046"
   struct IProcessLock
     lpVtbl : IProcessLockVTbl*
   end
@@ -2158,6 +2318,8 @@ lib LibWin32
     process_shutdown : Proc(ISurrogateService*, ShutdownType, HRESULT)
   end
 
+  ISurrogateService_GUID = LibC::GUID.new("000001d4-0000-0000-c000-000000000046")
+  CLSID_ISurrogateService = "000001d4-0000-0000-c000-000000000046"
   struct ISurrogateService
     lpVtbl : ISurrogateServiceVTbl*
   end
@@ -2172,6 +2334,8 @@ lib LibWin32
     post_uninitialize : Proc(IInitializeSpy*, UInt32, HRESULT)
   end
 
+  IInitializeSpy_GUID = LibC::GUID.new("00000034-0000-0000-c000-000000000046")
+  CLSID_IInitializeSpy = "00000034-0000-0000-c000-000000000046"
   struct IInitializeSpy
     lpVtbl : IInitializeSpyVTbl*
   end
@@ -2183,6 +2347,8 @@ lib LibWin32
     query_service : Proc(IServiceProvider*, Guid*, Guid*, Void**, HRESULT)
   end
 
+  IServiceProvider_GUID = LibC::GUID.new("6d5140c1-7436-11ce-8034-00aa006009fa")
+  CLSID_IServiceProvider = "6d5140c1-7436-11ce-8034-00aa006009fa"
   struct IServiceProvider
     lpVtbl : IServiceProviderVTbl*
   end
@@ -2197,6 +2363,8 @@ lib LibWin32
     clone : Proc(IEnumGUID*, IEnumGUID*, HRESULT)
   end
 
+  IEnumGUID_GUID = LibC::GUID.new("0002e000-0000-0000-c000-000000000046")
+  CLSID_IEnumGUID = "0002e000-0000-0000-c000-000000000046"
   struct IEnumGUID
     lpVtbl : IEnumGUIDVTbl*
   end
@@ -2211,6 +2379,8 @@ lib LibWin32
     clone : Proc(IEnumCATEGORYINFO*, IEnumCATEGORYINFO*, HRESULT)
   end
 
+  IEnumCATEGORYINFO_GUID = LibC::GUID.new("0002e011-0000-0000-c000-000000000046")
+  CLSID_IEnumCATEGORYINFO = "0002e011-0000-0000-c000-000000000046"
   struct IEnumCATEGORYINFO
     lpVtbl : IEnumCATEGORYINFOVTbl*
   end
@@ -2227,6 +2397,8 @@ lib LibWin32
     un_register_class_req_categories : Proc(ICatRegister*, Guid*, UInt32, Guid*, HRESULT)
   end
 
+  ICatRegister_GUID = LibC::GUID.new("0002e012-0000-0000-c000-000000000046")
+  CLSID_ICatRegister = "0002e012-0000-0000-c000-000000000046"
   struct ICatRegister
     lpVtbl : ICatRegisterVTbl*
   end
@@ -2243,6 +2415,8 @@ lib LibWin32
     enum_req_categories_of_class : Proc(ICatInformation*, Guid*, IEnumGUID*, HRESULT)
   end
 
+  ICatInformation_GUID = LibC::GUID.new("0002e013-0000-0000-c000-000000000046")
+  CLSID_ICatInformation = "0002e013-0000-0000-c000-000000000046"
   struct ICatInformation
     lpVtbl : ICatInformationVTbl*
   end
@@ -2254,6 +2428,8 @@ lib LibWin32
     context_callback : Proc(IContextCallback*, PFNCONTEXTCALL, ComCallData*, Guid*, Int32, IUnknown, HRESULT)
   end
 
+  IContextCallback_GUID = LibC::GUID.new("000001da-0000-0000-c000-000000000046")
+  CLSID_IContextCallback = "000001da-0000-0000-c000-000000000046"
   struct IContextCallback
     lpVtbl : IContextCallbackVTbl*
   end
@@ -2270,6 +2446,8 @@ lib LibWin32
     get_bind_result : Proc(IBinding*, Guid*, UInt32*, LibC::LPWSTR*, UInt32*, HRESULT)
   end
 
+  IBinding_GUID = LibC::GUID.new("79eac9c0-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IBinding = "79eac9c0-baf9-11ce-8c82-00aa004ba90b"
   struct IBinding
     lpVtbl : IBindingVTbl*
   end
@@ -2288,6 +2466,8 @@ lib LibWin32
     on_object_available : Proc(IBindStatusCallback*, Guid*, IUnknown, HRESULT)
   end
 
+  IBindStatusCallback_GUID = LibC::GUID.new("79eac9c1-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IBindStatusCallback = "79eac9c1-baf9-11ce-8c82-00aa004ba90b"
   struct IBindStatusCallback
     lpVtbl : IBindStatusCallbackVTbl*
   end
@@ -2307,6 +2487,8 @@ lib LibWin32
     get_bind_info_ex : Proc(IBindStatusCallbackEx*, UInt32*, BINDINFO*, UInt32*, UInt32*, HRESULT)
   end
 
+  IBindStatusCallbackEx_GUID = LibC::GUID.new("aaa74ef9-8ee7-4659-88d9-f8c504da73cc")
+  CLSID_IBindStatusCallbackEx = "aaa74ef9-8ee7-4659-88d9-f8c504da73cc"
   struct IBindStatusCallbackEx
     lpVtbl : IBindStatusCallbackExVTbl*
   end
@@ -2318,6 +2500,8 @@ lib LibWin32
     authenticate : Proc(IAuthenticate*, HANDLE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
   end
 
+  IAuthenticate_GUID = LibC::GUID.new("79eac9d0-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IAuthenticate = "79eac9d0-baf9-11ce-8c82-00aa004ba90b"
   struct IAuthenticate
     lpVtbl : IAuthenticateVTbl*
   end
@@ -2330,6 +2514,8 @@ lib LibWin32
     authenticate_ex : Proc(IAuthenticateEx*, HANDLE*, LibC::LPWSTR*, LibC::LPWSTR*, AUTHENTICATEINFO*, HRESULT)
   end
 
+  IAuthenticateEx_GUID = LibC::GUID.new("2ad1edaf-d83d-48b5-9adf-03dbe19f53bd")
+  CLSID_IAuthenticateEx = "2ad1edaf-d83d-48b5-9adf-03dbe19f53bd"
   struct IAuthenticateEx
     lpVtbl : IAuthenticateExVTbl*
   end
@@ -2365,6 +2551,8 @@ lib LibWin32
     is_equal : Proc(IUri*, IUri, LibC::BOOL*, HRESULT)
   end
 
+  IUri_GUID = LibC::GUID.new("a39ee748-6a27-4817-a6f2-13914bef5890")
+  CLSID_IUri = "a39ee748-6a27-4817-a6f2-13914bef5890"
   struct IUri
     lpVtbl : IUriVTbl*
   end
@@ -2398,6 +2586,8 @@ lib LibWin32
     has_been_modified : Proc(IUriBuilder*, LibC::BOOL*, HRESULT)
   end
 
+  IUriBuilder_GUID = LibC::GUID.new("4221b2e1-8955-46c0-bd5b-de9897565de7")
+  CLSID_IUriBuilder = "4221b2e1-8955-46c0-bd5b-de9897565de7"
   struct IUriBuilder
     lpVtbl : IUriBuilderVTbl*
   end
@@ -2411,6 +2601,8 @@ lib LibWin32
     moniker_bind_to_object : Proc(IBindHost*, IMoniker, IBindCtx, IBindStatusCallback, Guid*, Void**, HRESULT)
   end
 
+  IBindHost_GUID = LibC::GUID.new("fc4801a1-2ba9-11cf-a229-00aa003d7352")
+  CLSID_IBindHost = "fc4801a1-2ba9-11cf-a229-00aa003d7352"
   struct IBindHost
     lpVtbl : IBindHostVTbl*
   end
@@ -2425,6 +2617,8 @@ lib LibWin32
     invoke : Proc(IDispatch*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IDispatch_GUID = LibC::GUID.new("00020400-0000-0000-c000-000000000046")
+  CLSID_IDispatch = "00020400-0000-0000-c000-000000000046"
   struct IDispatch
     lpVtbl : IDispatchVTbl*
   end
@@ -2437,6 +2631,8 @@ lib LibWin32
     bind_type : Proc(ITypeComp*, LibC::LPWSTR, UInt32, ITypeInfo*, ITypeComp*, HRESULT)
   end
 
+  ITypeComp_GUID = LibC::GUID.new("00020403-0000-0000-c000-000000000046")
+  CLSID_ITypeComp = "00020403-0000-0000-c000-000000000046"
   struct ITypeComp
     lpVtbl : ITypeCompVTbl*
   end
@@ -2466,6 +2662,8 @@ lib LibWin32
     release_var_desc : Proc(ITypeInfo*, VARDESC*, Void)
   end
 
+  ITypeInfo_GUID = LibC::GUID.new("00020401-0000-0000-c000-000000000046")
+  CLSID_ITypeInfo = "00020401-0000-0000-c000-000000000046"
   struct ITypeInfo
     lpVtbl : ITypeInfoVTbl*
   end
@@ -2510,6 +2708,8 @@ lib LibWin32
     get_all_impl_type_cust_data : Proc(ITypeInfo2*, UInt32, CUSTDATA*, HRESULT)
   end
 
+  ITypeInfo2_GUID = LibC::GUID.new("00020412-0000-0000-c000-000000000046")
+  CLSID_ITypeInfo2 = "00020412-0000-0000-c000-000000000046"
   struct ITypeInfo2
     lpVtbl : ITypeInfo2VTbl*
   end
@@ -2530,6 +2730,8 @@ lib LibWin32
     release_t_lib_attr : Proc(ITypeLib*, TLIBATTR*, Void)
   end
 
+  ITypeLib_GUID = LibC::GUID.new("00020402-0000-0000-c000-000000000046")
+  CLSID_ITypeLib = "00020402-0000-0000-c000-000000000046"
   struct ITypeLib
     lpVtbl : ITypeLibVTbl*
   end
@@ -2554,6 +2756,8 @@ lib LibWin32
     get_all_cust_data : Proc(ITypeLib2*, CUSTDATA*, HRESULT)
   end
 
+  ITypeLib2_GUID = LibC::GUID.new("00020411-0000-0000-c000-000000000046")
+  CLSID_ITypeLib2 = "00020411-0000-0000-c000-000000000046"
   struct ITypeLib2
     lpVtbl : ITypeLib2VTbl*
   end
@@ -2569,6 +2773,8 @@ lib LibWin32
     get_help_context : Proc(IErrorInfo*, UInt32*, HRESULT)
   end
 
+  IErrorInfo_GUID = LibC::GUID.new("1cf2b120-547d-101b-8e65-08002b2bd119")
+  CLSID_IErrorInfo = "1cf2b120-547d-101b-8e65-08002b2bd119"
   struct IErrorInfo
     lpVtbl : IErrorInfoVTbl*
   end
@@ -2580,6 +2786,8 @@ lib LibWin32
     interface_supports_error_info : Proc(ISupportErrorInfo*, Guid*, HRESULT)
   end
 
+  ISupportErrorInfo_GUID = LibC::GUID.new("df0b3d60-548f-101b-8e65-08002b2bd119")
+  CLSID_ISupportErrorInfo = "df0b3d60-548f-101b-8e65-08002b2bd119"
   struct ISupportErrorInfo
     lpVtbl : ISupportErrorInfoVTbl*
   end
@@ -2591,6 +2799,8 @@ lib LibWin32
     add_error : Proc(IErrorLog*, LibC::LPWSTR, EXCEPINFO*, HRESULT)
   end
 
+  IErrorLog_GUID = LibC::GUID.new("3127ca40-446e-11ce-8135-00aa004bb851")
+  CLSID_IErrorLog = "3127ca40-446e-11ce-8135-00aa004bb851"
   struct IErrorLog
     lpVtbl : IErrorLogVTbl*
   end
@@ -2602,6 +2812,8 @@ lib LibWin32
     enum_type_lib_registrations : Proc(ITypeLibRegistrationReader*, IEnumUnknown*, HRESULT)
   end
 
+  ITypeLibRegistrationReader_GUID = LibC::GUID.new("ed6a8a2a-b160-4e77-8f73-aa7435cd5c27")
+  CLSID_ITypeLibRegistrationReader = "ed6a8a2a-b160-4e77-8f73-aa7435cd5c27"
   struct ITypeLibRegistrationReader
     lpVtbl : ITypeLibRegistrationReaderVTbl*
   end
@@ -2620,6 +2832,8 @@ lib LibWin32
     get_help_dir : Proc(ITypeLibRegistration*, UInt8**, HRESULT)
   end
 
+  ITypeLibRegistration_GUID = LibC::GUID.new("76a3e735-02df-4a12-98eb-043ad3600af3")
+  CLSID_ITypeLibRegistration = "76a3e735-02df-4a12-98eb-043ad3600af3"
   struct ITypeLibRegistration
     lpVtbl : ITypeLibRegistrationVTbl*
   end
@@ -2634,6 +2848,8 @@ lib LibWin32
     clone : Proc(IEnumConnections*, IEnumConnections*, HRESULT)
   end
 
+  IEnumConnections_GUID = LibC::GUID.new("b196b287-bab4-101a-b69c-00aa00341d07")
+  CLSID_IEnumConnections = "b196b287-bab4-101a-b69c-00aa00341d07"
   struct IEnumConnections
     lpVtbl : IEnumConnectionsVTbl*
   end
@@ -2649,6 +2865,8 @@ lib LibWin32
     enum_connections : Proc(IConnectionPoint*, IEnumConnections*, HRESULT)
   end
 
+  IConnectionPoint_GUID = LibC::GUID.new("b196b286-bab4-101a-b69c-00aa00341d07")
+  CLSID_IConnectionPoint = "b196b286-bab4-101a-b69c-00aa00341d07"
   struct IConnectionPoint
     lpVtbl : IConnectionPointVTbl*
   end
@@ -2663,6 +2881,8 @@ lib LibWin32
     clone : Proc(IEnumConnectionPoints*, IEnumConnectionPoints*, HRESULT)
   end
 
+  IEnumConnectionPoints_GUID = LibC::GUID.new("b196b285-bab4-101a-b69c-00aa00341d07")
+  CLSID_IEnumConnectionPoints = "b196b285-bab4-101a-b69c-00aa00341d07"
   struct IEnumConnectionPoints
     lpVtbl : IEnumConnectionPointsVTbl*
   end
@@ -2675,6 +2895,8 @@ lib LibWin32
     find_connection_point : Proc(IConnectionPointContainer*, Guid*, IConnectionPoint*, HRESULT)
   end
 
+  IConnectionPointContainer_GUID = LibC::GUID.new("b196b284-bab4-101a-b69c-00aa00341d07")
+  CLSID_IConnectionPointContainer = "b196b284-bab4-101a-b69c-00aa00341d07"
   struct IConnectionPointContainer
     lpVtbl : IConnectionPointContainerVTbl*
   end
@@ -2691,6 +2913,8 @@ lib LibWin32
     init_new : Proc(IPersistMemory*, HRESULT)
   end
 
+  IPersistMemory_GUID = LibC::GUID.new("bd1ae5e0-a6ae-11ce-bd37-504200c10000")
+  CLSID_IPersistMemory = "bd1ae5e0-a6ae-11ce-bd37-504200c10000"
   struct IPersistMemory
     lpVtbl : IPersistMemoryVTbl*
   end
@@ -2707,6 +2931,8 @@ lib LibWin32
     init_new : Proc(IPersistStreamInit*, HRESULT)
   end
 
+  IPersistStreamInit_GUID = LibC::GUID.new("7fd52380-4e07-101b-ae2d-08002b2ec713")
+  CLSID_IPersistStreamInit = "7fd52380-4e07-101b-ae2d-08002b2ec713"
   struct IPersistStreamInit
     lpVtbl : IPersistStreamInitVTbl*
   end

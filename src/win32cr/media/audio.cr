@@ -1718,6 +1718,8 @@ lib LibWin32
     message_pending : Proc(IMessageFilter*, HTASK, UInt32, UInt32, UInt32)
   end
 
+  IMessageFilter_GUID = LibC::GUID.new("00000016-0000-0000-c000-000000000046")
+  CLSID_IMessageFilter = "00000016-0000-0000-c000-000000000046"
   struct IMessageFilter
     lpVtbl : IMessageFilterVTbl*
   end
@@ -1740,6 +1742,8 @@ lib LibWin32
     get_service : Proc(IAudioClient*, Guid*, Void**, HRESULT)
   end
 
+  IAudioClient_GUID = LibC::GUID.new("1cb9ad4c-dbfa-4c32-b178-c2f568a703b2")
+  CLSID_IAudioClient = "1cb9ad4c-dbfa-4c32-b178-c2f568a703b2"
   struct IAudioClient
     lpVtbl : IAudioClientVTbl*
   end
@@ -1765,6 +1769,8 @@ lib LibWin32
     get_buffer_size_limits : Proc(IAudioClient2*, WAVEFORMATEX*, LibC::BOOL, Int64*, Int64*, HRESULT)
   end
 
+  IAudioClient2_GUID = LibC::GUID.new("726778cd-f60a-4eda-82de-e47610cd78aa")
+  CLSID_IAudioClient2 = "726778cd-f60a-4eda-82de-e47610cd78aa"
   struct IAudioClient2
     lpVtbl : IAudioClient2VTbl*
   end
@@ -1793,6 +1799,8 @@ lib LibWin32
     initialize_shared_audio_stream : Proc(IAudioClient3*, UInt32, UInt32, WAVEFORMATEX*, Guid*, HRESULT)
   end
 
+  IAudioClient3_GUID = LibC::GUID.new("7ed4ee07-8e67-4cd4-8c1a-2b7a5987ad42")
+  CLSID_IAudioClient3 = "7ed4ee07-8e67-4cd4-8c1a-2b7a5987ad42"
   struct IAudioClient3
     lpVtbl : IAudioClient3VTbl*
   end
@@ -1805,6 +1813,8 @@ lib LibWin32
     release_buffer : Proc(IAudioRenderClient*, UInt32, UInt32, HRESULT)
   end
 
+  IAudioRenderClient_GUID = LibC::GUID.new("f294acfc-3146-4483-a7bf-addca7c260e2")
+  CLSID_IAudioRenderClient = "f294acfc-3146-4483-a7bf-addca7c260e2"
   struct IAudioRenderClient
     lpVtbl : IAudioRenderClientVTbl*
   end
@@ -1818,6 +1828,8 @@ lib LibWin32
     get_next_packet_size : Proc(IAudioCaptureClient*, UInt32*, HRESULT)
   end
 
+  IAudioCaptureClient_GUID = LibC::GUID.new("c8adbd64-e71e-48a0-a4de-185c395cd317")
+  CLSID_IAudioCaptureClient = "c8adbd64-e71e-48a0-a4de-185c395cd317"
   struct IAudioCaptureClient
     lpVtbl : IAudioCaptureClientVTbl*
   end
@@ -1831,6 +1843,8 @@ lib LibWin32
     get_characteristics : Proc(IAudioClock*, UInt32*, HRESULT)
   end
 
+  IAudioClock_GUID = LibC::GUID.new("cd63314f-3fba-4a1b-812c-ef96358728e7")
+  CLSID_IAudioClock = "cd63314f-3fba-4a1b-812c-ef96358728e7"
   struct IAudioClock
     lpVtbl : IAudioClockVTbl*
   end
@@ -1842,6 +1856,8 @@ lib LibWin32
     get_device_position : Proc(IAudioClock2*, UInt64*, UInt64*, HRESULT)
   end
 
+  IAudioClock2_GUID = LibC::GUID.new("6f49ff73-6727-49ac-a008-d98cf5e70048")
+  CLSID_IAudioClock2 = "6f49ff73-6727-49ac-a008-d98cf5e70048"
   struct IAudioClock2
     lpVtbl : IAudioClock2VTbl*
   end
@@ -1853,6 +1869,8 @@ lib LibWin32
     set_sample_rate : Proc(IAudioClockAdjustment*, Float32, HRESULT)
   end
 
+  IAudioClockAdjustment_GUID = LibC::GUID.new("f6e4c0a0-46d9-4fb8-be21-57a3ef2b626c")
+  CLSID_IAudioClockAdjustment = "f6e4c0a0-46d9-4fb8-be21-57a3ef2b626c"
   struct IAudioClockAdjustment
     lpVtbl : IAudioClockAdjustmentVTbl*
   end
@@ -1867,6 +1885,8 @@ lib LibWin32
     get_mute : Proc(ISimpleAudioVolume*, LibC::BOOL*, HRESULT)
   end
 
+  ISimpleAudioVolume_GUID = LibC::GUID.new("87ce5498-68d6-44e5-9215-6da47ef883d8")
+  CLSID_ISimpleAudioVolume = "87ce5498-68d6-44e5-9215-6da47ef883d8"
   struct ISimpleAudioVolume
     lpVtbl : ISimpleAudioVolumeVTbl*
   end
@@ -1878,6 +1898,8 @@ lib LibWin32
     set_ducking_options_for_current_stream : Proc(IAudioClientDuckingControl*, AUDIO_DUCKING_OPTIONS, HRESULT)
   end
 
+  IAudioClientDuckingControl_GUID = LibC::GUID.new("c789d381-a28c-4168-b28f-d3a837924dc3")
+  CLSID_IAudioClientDuckingControl = "c789d381-a28c-4168-b28f-d3a837924dc3"
   struct IAudioClientDuckingControl
     lpVtbl : IAudioClientDuckingControlVTbl*
   end
@@ -1889,6 +1911,8 @@ lib LibWin32
     on_audio_effects_changed : Proc(IAudioEffectsChangedNotificationClient*, HRESULT)
   end
 
+  IAudioEffectsChangedNotificationClient_GUID = LibC::GUID.new("a5ded44f-3c5d-4b2b-bd1e-5dc1ee20bbf6")
+  CLSID_IAudioEffectsChangedNotificationClient = "a5ded44f-3c5d-4b2b-bd1e-5dc1ee20bbf6"
   struct IAudioEffectsChangedNotificationClient
     lpVtbl : IAudioEffectsChangedNotificationClientVTbl*
   end
@@ -1903,6 +1927,8 @@ lib LibWin32
     set_audio_effect_state : Proc(IAudioEffectsManager*, Guid, AUDIO_EFFECT_STATE, HRESULT)
   end
 
+  IAudioEffectsManager_GUID = LibC::GUID.new("4460b3ae-4b44-4527-8676-7548a8acd260")
+  CLSID_IAudioEffectsManager = "4460b3ae-4b44-4527-8676-7548a8acd260"
   struct IAudioEffectsManager
     lpVtbl : IAudioEffectsManagerVTbl*
   end
@@ -1918,6 +1944,8 @@ lib LibWin32
     get_all_volumes : Proc(IAudioStreamVolume*, UInt32, Float32*, HRESULT)
   end
 
+  IAudioStreamVolume_GUID = LibC::GUID.new("93014887-242d-4068-8a15-cf5e93b90fe3")
+  CLSID_IAudioStreamVolume = "93014887-242d-4068-8a15-cf5e93b90fe3"
   struct IAudioStreamVolume
     lpVtbl : IAudioStreamVolumeVTbl*
   end
@@ -1932,6 +1960,8 @@ lib LibWin32
     set_rotation : Proc(IAudioAmbisonicsControl*, Float32, Float32, Float32, Float32, HRESULT)
   end
 
+  IAudioAmbisonicsControl_GUID = LibC::GUID.new("28724c91-df35-4856-9f76-d6a26413f3df")
+  CLSID_IAudioAmbisonicsControl = "28724c91-df35-4856-9f76-d6a26413f3df"
   struct IAudioAmbisonicsControl
     lpVtbl : IAudioAmbisonicsControlVTbl*
   end
@@ -1947,6 +1977,8 @@ lib LibWin32
     get_all_volumes : Proc(IChannelAudioVolume*, UInt32, Float32*, HRESULT)
   end
 
+  IChannelAudioVolume_GUID = LibC::GUID.new("1c158861-b533-4b30-b1cf-e853e51c59b8")
+  CLSID_IChannelAudioVolume = "1c158861-b533-4b30-b1cf-e853e51c59b8"
   struct IChannelAudioVolume
     lpVtbl : IChannelAudioVolumeVTbl*
   end
@@ -1959,6 +1991,8 @@ lib LibWin32
     get_format : Proc(IAudioFormatEnumerator*, UInt32, WAVEFORMATEX**, HRESULT)
   end
 
+  IAudioFormatEnumerator_GUID = LibC::GUID.new("dcdaa858-895a-4a22-a5eb-67bda506096d")
+  CLSID_IAudioFormatEnumerator = "dcdaa858-895a-4a22-a5eb-67bda506096d"
   struct IAudioFormatEnumerator
     lpVtbl : IAudioFormatEnumeratorVTbl*
   end
@@ -1973,6 +2007,8 @@ lib LibWin32
     get_audio_object_type : Proc(ISpatialAudioObjectBase*, AudioObjectType*, HRESULT)
   end
 
+  ISpatialAudioObjectBase_GUID = LibC::GUID.new("cce0b8f2-8d4d-4efb-a8cf-3d6ecf1c30e0")
+  CLSID_ISpatialAudioObjectBase = "cce0b8f2-8d4d-4efb-a8cf-3d6ecf1c30e0"
   struct ISpatialAudioObjectBase
     lpVtbl : ISpatialAudioObjectBaseVTbl*
   end
@@ -1989,6 +2025,8 @@ lib LibWin32
     set_volume : Proc(ISpatialAudioObject*, Float32, HRESULT)
   end
 
+  ISpatialAudioObject_GUID = LibC::GUID.new("dde28967-521b-46e5-8f00-bd6f2bc8ab1d")
+  CLSID_ISpatialAudioObject = "dde28967-521b-46e5-8f00-bd6f2bc8ab1d"
   struct ISpatialAudioObject
     lpVtbl : ISpatialAudioObjectVTbl*
   end
@@ -2006,6 +2044,8 @@ lib LibWin32
     end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamBase*, HRESULT)
   end
 
+  ISpatialAudioObjectRenderStreamBase_GUID = LibC::GUID.new("feaaf403-c1d8-450d-aa05-e0ccee7502a8")
+  CLSID_ISpatialAudioObjectRenderStreamBase = "feaaf403-c1d8-450d-aa05-e0ccee7502a8"
   struct ISpatialAudioObjectRenderStreamBase
     lpVtbl : ISpatialAudioObjectRenderStreamBaseVTbl*
   end
@@ -2024,6 +2064,8 @@ lib LibWin32
     activate_spatial_audio_object : Proc(ISpatialAudioObjectRenderStream*, AudioObjectType, ISpatialAudioObject*, HRESULT)
   end
 
+  ISpatialAudioObjectRenderStream_GUID = LibC::GUID.new("bab5f473-b423-477b-85f5-b5a332a04153")
+  CLSID_ISpatialAudioObjectRenderStream = "bab5f473-b423-477b-85f5-b5a332a04153"
   struct ISpatialAudioObjectRenderStream
     lpVtbl : ISpatialAudioObjectRenderStreamVTbl*
   end
@@ -2035,6 +2077,8 @@ lib LibWin32
     on_available_dynamic_object_count_change : Proc(ISpatialAudioObjectRenderStreamNotify*, ISpatialAudioObjectRenderStreamBase, Int64, UInt32, HRESULT)
   end
 
+  ISpatialAudioObjectRenderStreamNotify_GUID = LibC::GUID.new("dddf83e6-68d7-4c70-883f-a1836afb4a50")
+  CLSID_ISpatialAudioObjectRenderStreamNotify = "dddf83e6-68d7-4c70-883f-a1836afb4a50"
   struct ISpatialAudioObjectRenderStreamNotify
     lpVtbl : ISpatialAudioObjectRenderStreamNotifyVTbl*
   end
@@ -2053,6 +2097,8 @@ lib LibWin32
     activate_spatial_audio_stream : Proc(ISpatialAudioClient*, PROPVARIANT*, Guid*, Void**, HRESULT)
   end
 
+  ISpatialAudioClient_GUID = LibC::GUID.new("bbf8e066-aaaa-49be-9a4d-fd2a858ea27f")
+  CLSID_ISpatialAudioClient = "bbf8e066-aaaa-49be-9a4d-fd2a858ea27f"
   struct ISpatialAudioClient
     lpVtbl : ISpatialAudioClientVTbl*
   end
@@ -2073,6 +2119,8 @@ lib LibWin32
     get_max_frame_count_for_category : Proc(ISpatialAudioClient2*, AUDIO_STREAM_CATEGORY, LibC::BOOL, WAVEFORMATEX*, UInt32*, HRESULT)
   end
 
+  ISpatialAudioClient2_GUID = LibC::GUID.new("caabe452-a66a-4bee-a93e-e320463f6a53")
+  CLSID_ISpatialAudioClient2 = "caabe452-a66a-4bee-a93e-e320463f6a53"
   struct ISpatialAudioClient2
     lpVtbl : ISpatialAudioClient2VTbl*
   end
@@ -2093,6 +2141,8 @@ lib LibWin32
     set_directivity : Proc(ISpatialAudioObjectForHrtf*, SpatialAudioHrtfDirectivityUnion*, HRESULT)
   end
 
+  ISpatialAudioObjectForHrtf_GUID = LibC::GUID.new("d7436ade-1978-4e14-aba0-555bd8eb83b4")
+  CLSID_ISpatialAudioObjectForHrtf = "d7436ade-1978-4e14-aba0-555bd8eb83b4"
   struct ISpatialAudioObjectForHrtf
     lpVtbl : ISpatialAudioObjectForHrtfVTbl*
   end
@@ -2111,6 +2161,8 @@ lib LibWin32
     activate_spatial_audio_object_for_hrtf : Proc(ISpatialAudioObjectRenderStreamForHrtf*, AudioObjectType, ISpatialAudioObjectForHrtf*, HRESULT)
   end
 
+  ISpatialAudioObjectRenderStreamForHrtf_GUID = LibC::GUID.new("e08deef9-5363-406e-9fdc-080ee247bbe0")
+  CLSID_ISpatialAudioObjectRenderStreamForHrtf = "e08deef9-5363-406e-9fdc-080ee247bbe0"
   struct ISpatialAudioObjectRenderStreamForHrtf
     lpVtbl : ISpatialAudioObjectRenderStreamForHrtfVTbl*
   end
@@ -2126,6 +2178,8 @@ lib LibWin32
     on_property_value_changed : Proc(IMMNotificationClient*, LibC::LPWSTR, PROPERTYKEY, HRESULT)
   end
 
+  IMMNotificationClient_GUID = LibC::GUID.new("7991eec9-7e89-4d85-8390-6c703cec60c0")
+  CLSID_IMMNotificationClient = "7991eec9-7e89-4d85-8390-6c703cec60c0"
   struct IMMNotificationClient
     lpVtbl : IMMNotificationClientVTbl*
   end
@@ -2140,6 +2194,8 @@ lib LibWin32
     get_state : Proc(IMMDevice*, UInt32*, HRESULT)
   end
 
+  IMMDevice_GUID = LibC::GUID.new("d666063f-1587-4e43-81f1-b948e807363f")
+  CLSID_IMMDevice = "d666063f-1587-4e43-81f1-b948e807363f"
   struct IMMDevice
     lpVtbl : IMMDeviceVTbl*
   end
@@ -2152,6 +2208,8 @@ lib LibWin32
     item : Proc(IMMDeviceCollection*, UInt32, IMMDevice*, HRESULT)
   end
 
+  IMMDeviceCollection_GUID = LibC::GUID.new("0bd7a1be-7a1a-44db-8397-cc5392387b5e")
+  CLSID_IMMDeviceCollection = "0bd7a1be-7a1a-44db-8397-cc5392387b5e"
   struct IMMDeviceCollection
     lpVtbl : IMMDeviceCollectionVTbl*
   end
@@ -2163,6 +2221,8 @@ lib LibWin32
     get_data_flow : Proc(IMMEndpoint*, EDataFlow*, HRESULT)
   end
 
+  IMMEndpoint_GUID = LibC::GUID.new("1be09788-6894-4089-8586-9a2a6c265ac5")
+  CLSID_IMMEndpoint = "1be09788-6894-4089-8586-9a2a6c265ac5"
   struct IMMEndpoint
     lpVtbl : IMMEndpointVTbl*
   end
@@ -2178,6 +2238,8 @@ lib LibWin32
     unregister_endpoint_notification_callback : Proc(IMMDeviceEnumerator*, IMMNotificationClient, HRESULT)
   end
 
+  IMMDeviceEnumerator_GUID = LibC::GUID.new("a95664d2-9614-4f35-a746-de8db63617e6")
+  CLSID_IMMDeviceEnumerator = "a95664d2-9614-4f35-a746-de8db63617e6"
   struct IMMDeviceEnumerator
     lpVtbl : IMMDeviceEnumeratorVTbl*
   end
@@ -2189,6 +2251,8 @@ lib LibWin32
     activate : Proc(IMMDeviceActivator*, Guid*, IMMDevice, PROPVARIANT*, Void**, HRESULT)
   end
 
+  IMMDeviceActivator_GUID = LibC::GUID.new("3b0d0ea4-d0a9-4b0e-935b-09516746fac0")
+  CLSID_IMMDeviceActivator = "3b0d0ea4-d0a9-4b0e-935b-09516746fac0"
   struct IMMDeviceActivator
     lpVtbl : IMMDeviceActivatorVTbl*
   end
@@ -2200,6 +2264,8 @@ lib LibWin32
     activate_completed : Proc(IActivateAudioInterfaceCompletionHandler*, IActivateAudioInterfaceAsyncOperation, HRESULT)
   end
 
+  IActivateAudioInterfaceCompletionHandler_GUID = LibC::GUID.new("41d949ab-9862-444a-80f6-c261334da5eb")
+  CLSID_IActivateAudioInterfaceCompletionHandler = "41d949ab-9862-444a-80f6-c261334da5eb"
   struct IActivateAudioInterfaceCompletionHandler
     lpVtbl : IActivateAudioInterfaceCompletionHandlerVTbl*
   end
@@ -2211,6 +2277,8 @@ lib LibWin32
     get_activate_result : Proc(IActivateAudioInterfaceAsyncOperation*, HRESULT*, IUnknown*, HRESULT)
   end
 
+  IActivateAudioInterfaceAsyncOperation_GUID = LibC::GUID.new("72a22d78-cde4-431d-b8cc-843a71199b6d")
+  CLSID_IActivateAudioInterfaceAsyncOperation = "72a22d78-cde4-431d-b8cc-843a71199b6d"
   struct IActivateAudioInterfaceAsyncOperation
     lpVtbl : IActivateAudioInterfaceAsyncOperationVTbl*
   end
@@ -2222,6 +2290,8 @@ lib LibWin32
     on_property_changed : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, MIDL___MIDL_itf_mmdeviceapi_0000_0008_0002, PROPERTYKEY, HRESULT)
   end
 
+  IAudioSystemEffectsPropertyChangeNotificationClient_GUID = LibC::GUID.new("20049d40-56d5-400e-a2ef-385599feed49")
+  CLSID_IAudioSystemEffectsPropertyChangeNotificationClient = "20049d40-56d5-400e-a2ef-385599feed49"
   struct IAudioSystemEffectsPropertyChangeNotificationClient
     lpVtbl : IAudioSystemEffectsPropertyChangeNotificationClientVTbl*
   end
@@ -2239,6 +2309,8 @@ lib LibWin32
     unregister_property_change_notification : Proc(IAudioSystemEffectsPropertyStore*, IAudioSystemEffectsPropertyChangeNotificationClient, HRESULT)
   end
 
+  IAudioSystemEffectsPropertyStore_GUID = LibC::GUID.new("302ae7f9-d7e0-43e4-971b-1f8293613d2a")
+  CLSID_IAudioSystemEffectsPropertyStore = "302ae7f9-d7e0-43e4-971b-1f8293613d2a"
   struct IAudioSystemEffectsPropertyStore
     lpVtbl : IAudioSystemEffectsPropertyStoreVTbl*
   end
@@ -2255,6 +2327,8 @@ lib LibWin32
     set_level_all_channels : Proc(IPerChannelDbLevel*, Float32*, UInt32, Guid*, HRESULT)
   end
 
+  IPerChannelDbLevel_GUID = LibC::GUID.new("c2f8e001-f205-4bc9-99bc-c13b1e048ccb")
+  CLSID_IPerChannelDbLevel = "c2f8e001-f205-4bc9-99bc-c13b1e048ccb"
   struct IPerChannelDbLevel
     lpVtbl : IPerChannelDbLevelVTbl*
   end
@@ -2271,6 +2345,8 @@ lib LibWin32
     set_level_all_channels : Proc(IAudioVolumeLevel*, Float32*, UInt32, Guid*, HRESULT)
   end
 
+  IAudioVolumeLevel_GUID = LibC::GUID.new("7fb7b48f-531d-44a2-bcb3-5ad5a134b3dc")
+  CLSID_IAudioVolumeLevel = "7fb7b48f-531d-44a2-bcb3-5ad5a134b3dc"
   struct IAudioVolumeLevel
     lpVtbl : IAudioVolumeLevelVTbl*
   end
@@ -2283,6 +2359,8 @@ lib LibWin32
     get_channel_config : Proc(IAudioChannelConfig*, UInt32*, HRESULT)
   end
 
+  IAudioChannelConfig_GUID = LibC::GUID.new("bb11c46f-ec28-493c-b88a-5db88062ce98")
+  CLSID_IAudioChannelConfig = "bb11c46f-ec28-493c-b88a-5db88062ce98"
   struct IAudioChannelConfig
     lpVtbl : IAudioChannelConfigVTbl*
   end
@@ -2295,6 +2373,8 @@ lib LibWin32
     set_enabled : Proc(IAudioLoudness*, LibC::BOOL, Guid*, HRESULT)
   end
 
+  IAudioLoudness_GUID = LibC::GUID.new("7d8b1437-dd53-4350-9c1b-1ee2890bd938")
+  CLSID_IAudioLoudness = "7d8b1437-dd53-4350-9c1b-1ee2890bd938"
   struct IAudioLoudness
     lpVtbl : IAudioLoudnessVTbl*
   end
@@ -2307,6 +2387,8 @@ lib LibWin32
     set_selection : Proc(IAudioInputSelector*, UInt32, Guid*, HRESULT)
   end
 
+  IAudioInputSelector_GUID = LibC::GUID.new("4f03dc02-5e6e-4653-8f72-a030c123d598")
+  CLSID_IAudioInputSelector = "4f03dc02-5e6e-4653-8f72-a030c123d598"
   struct IAudioInputSelector
     lpVtbl : IAudioInputSelectorVTbl*
   end
@@ -2319,6 +2401,8 @@ lib LibWin32
     set_selection : Proc(IAudioOutputSelector*, UInt32, Guid*, HRESULT)
   end
 
+  IAudioOutputSelector_GUID = LibC::GUID.new("bb515f69-94a7-429e-8b9c-271b3f11a3ab")
+  CLSID_IAudioOutputSelector = "bb515f69-94a7-429e-8b9c-271b3f11a3ab"
   struct IAudioOutputSelector
     lpVtbl : IAudioOutputSelectorVTbl*
   end
@@ -2331,6 +2415,8 @@ lib LibWin32
     get_mute : Proc(IAudioMute*, LibC::BOOL*, HRESULT)
   end
 
+  IAudioMute_GUID = LibC::GUID.new("df45aeea-b74a-4b6b-afad-2366b6aa012e")
+  CLSID_IAudioMute = "df45aeea-b74a-4b6b-afad-2366b6aa012e"
   struct IAudioMute
     lpVtbl : IAudioMuteVTbl*
   end
@@ -2347,6 +2433,8 @@ lib LibWin32
     set_level_all_channels : Proc(IAudioBass*, Float32*, UInt32, Guid*, HRESULT)
   end
 
+  IAudioBass_GUID = LibC::GUID.new("a2b1a1d9-4db3-425d-a2b2-bd335cb3e2e5")
+  CLSID_IAudioBass = "a2b1a1d9-4db3-425d-a2b2-bd335cb3e2e5"
   struct IAudioBass
     lpVtbl : IAudioBassVTbl*
   end
@@ -2363,6 +2451,8 @@ lib LibWin32
     set_level_all_channels : Proc(IAudioMidrange*, Float32*, UInt32, Guid*, HRESULT)
   end
 
+  IAudioMidrange_GUID = LibC::GUID.new("5e54b6d7-b44b-40d9-9a9e-e691d9ce6edf")
+  CLSID_IAudioMidrange = "5e54b6d7-b44b-40d9-9a9e-e691d9ce6edf"
   struct IAudioMidrange
     lpVtbl : IAudioMidrangeVTbl*
   end
@@ -2379,6 +2469,8 @@ lib LibWin32
     set_level_all_channels : Proc(IAudioTreble*, Float32*, UInt32, Guid*, HRESULT)
   end
 
+  IAudioTreble_GUID = LibC::GUID.new("0a717812-694e-4907-b74b-bafa5cfdca7b")
+  CLSID_IAudioTreble = "0a717812-694e-4907-b74b-bafa5cfdca7b"
   struct IAudioTreble
     lpVtbl : IAudioTrebleVTbl*
   end
@@ -2391,6 +2483,8 @@ lib LibWin32
     set_enabled : Proc(IAudioAutoGainControl*, LibC::BOOL, Guid*, HRESULT)
   end
 
+  IAudioAutoGainControl_GUID = LibC::GUID.new("85401fd4-6de4-4b9d-9869-2d6753a82f3c")
+  CLSID_IAudioAutoGainControl = "85401fd4-6de4-4b9d-9869-2d6753a82f3c"
   struct IAudioAutoGainControl
     lpVtbl : IAudioAutoGainControlVTbl*
   end
@@ -2403,6 +2497,8 @@ lib LibWin32
     get_level : Proc(IAudioPeakMeter*, UInt32, Float32*, HRESULT)
   end
 
+  IAudioPeakMeter_GUID = LibC::GUID.new("dd79923c-0599-45e0-b8b6-c8df7db6e796")
+  CLSID_IAudioPeakMeter = "dd79923c-0599-45e0-b8b6-c8df7db6e796"
   struct IAudioPeakMeter
     lpVtbl : IAudioPeakMeterVTbl*
   end
@@ -2417,6 +2513,8 @@ lib LibWin32
     get4_b_range : Proc(IDeviceSpecificProperty*, Int32*, Int32*, Int32*, HRESULT)
   end
 
+  IDeviceSpecificProperty_GUID = LibC::GUID.new("3b22bcbf-2586-4af0-8583-205d391b807c")
+  CLSID_IDeviceSpecificProperty = "3b22bcbf-2586-4af0-8583-205d391b807c"
   struct IDeviceSpecificProperty
     lpVtbl : IDeviceSpecificPropertyVTbl*
   end
@@ -2429,6 +2527,8 @@ lib LibWin32
     get_part : Proc(IPartsList*, UInt32, IPart*, HRESULT)
   end
 
+  IPartsList_GUID = LibC::GUID.new("6daa848c-5eb0-45cc-aea5-998a2cda1ffb")
+  CLSID_IPartsList = "6daa848c-5eb0-45cc-aea5-998a2cda1ffb"
   struct IPartsList
     lpVtbl : IPartsListVTbl*
   end
@@ -2452,6 +2552,8 @@ lib LibWin32
     unregister_control_change_callback : Proc(IPart*, IControlChangeNotify, HRESULT)
   end
 
+  IPart_GUID = LibC::GUID.new("ae2de0e4-5bca-4f2d-aa46-5d13f8fdb3a9")
+  CLSID_IPart = "ae2de0e4-5bca-4f2d-aa46-5d13f8fdb3a9"
   struct IPart
     lpVtbl : IPartVTbl*
   end
@@ -2470,6 +2572,8 @@ lib LibWin32
     get_device_id_connected_to : Proc(IConnector*, LibC::LPWSTR*, HRESULT)
   end
 
+  IConnector_GUID = LibC::GUID.new("9c2c4058-23f5-41de-877a-df3af236a09e")
+  CLSID_IConnector = "9c2c4058-23f5-41de-877a-df3af236a09e"
   struct IConnector
     lpVtbl : IConnectorVTbl*
   end
@@ -2480,6 +2584,8 @@ lib LibWin32
     release : Proc(ISubunit*, UInt32)
   end
 
+  ISubunit_GUID = LibC::GUID.new("82149a85-dba6-4487-86bb-ea8f7fefcc71")
+  CLSID_ISubunit = "82149a85-dba6-4487-86bb-ea8f7fefcc71"
   struct ISubunit
     lpVtbl : ISubunitVTbl*
   end
@@ -2492,6 +2598,8 @@ lib LibWin32
     get_iid : Proc(IControlInterface*, Guid*, HRESULT)
   end
 
+  IControlInterface_GUID = LibC::GUID.new("45d37c3f-5140-444a-ae24-400789f3cbf3")
+  CLSID_IControlInterface = "45d37c3f-5140-444a-ae24-400789f3cbf3"
   struct IControlInterface
     lpVtbl : IControlInterfaceVTbl*
   end
@@ -2503,6 +2611,8 @@ lib LibWin32
     on_notify : Proc(IControlChangeNotify*, UInt32, Guid*, HRESULT)
   end
 
+  IControlChangeNotify_GUID = LibC::GUID.new("a09513ed-c709-4d21-bd7b-5f34c47f3947")
+  CLSID_IControlChangeNotify = "a09513ed-c709-4d21-bd7b-5f34c47f3947"
   struct IControlChangeNotify
     lpVtbl : IControlChangeNotifyVTbl*
   end
@@ -2520,6 +2630,8 @@ lib LibWin32
     get_signal_path : Proc(IDeviceTopology*, IPart, IPart, LibC::BOOL, IPartsList*, HRESULT)
   end
 
+  IDeviceTopology_GUID = LibC::GUID.new("2a07407e-6497-4a18-9787-32f79bd0d98f")
+  CLSID_IDeviceTopology = "2a07407e-6497-4a18-9787-32f79bd0d98f"
   struct IDeviceTopology
     lpVtbl : IDeviceTopologyVTbl*
   end
@@ -2537,6 +2649,8 @@ lib LibWin32
     on_session_disconnected : Proc(IAudioSessionEvents*, AudioSessionDisconnectReason, HRESULT)
   end
 
+  IAudioSessionEvents_GUID = LibC::GUID.new("24918acc-64b3-37c1-8ca9-74a66e9957a8")
+  CLSID_IAudioSessionEvents = "24918acc-64b3-37c1-8ca9-74a66e9957a8"
   struct IAudioSessionEvents
     lpVtbl : IAudioSessionEventsVTbl*
   end
@@ -2556,6 +2670,8 @@ lib LibWin32
     unregister_audio_session_notification : Proc(IAudioSessionControl*, IAudioSessionEvents, HRESULT)
   end
 
+  IAudioSessionControl_GUID = LibC::GUID.new("f4b1a599-7266-4319-a8ca-e70acb11e8cd")
+  CLSID_IAudioSessionControl = "f4b1a599-7266-4319-a8ca-e70acb11e8cd"
   struct IAudioSessionControl
     lpVtbl : IAudioSessionControlVTbl*
   end
@@ -2580,6 +2696,8 @@ lib LibWin32
     set_ducking_preference : Proc(IAudioSessionControl2*, LibC::BOOL, HRESULT)
   end
 
+  IAudioSessionControl2_GUID = LibC::GUID.new("bfb7ff88-7239-4fc9-8fa2-07c950be9c6d")
+  CLSID_IAudioSessionControl2 = "bfb7ff88-7239-4fc9-8fa2-07c950be9c6d"
   struct IAudioSessionControl2
     lpVtbl : IAudioSessionControl2VTbl*
   end
@@ -2592,6 +2710,8 @@ lib LibWin32
     get_simple_audio_volume : Proc(IAudioSessionManager*, Guid*, UInt32, ISimpleAudioVolume*, HRESULT)
   end
 
+  IAudioSessionManager_GUID = LibC::GUID.new("bfa971f1-4d5e-40bb-935e-967039bfbee4")
+  CLSID_IAudioSessionManager = "bfa971f1-4d5e-40bb-935e-967039bfbee4"
   struct IAudioSessionManager
     lpVtbl : IAudioSessionManagerVTbl*
   end
@@ -2604,6 +2724,8 @@ lib LibWin32
     on_volume_unduck_notification : Proc(IAudioVolumeDuckNotification*, LibC::LPWSTR, HRESULT)
   end
 
+  IAudioVolumeDuckNotification_GUID = LibC::GUID.new("c3b284d4-6d39-4359-b3cf-b56ddb3bb39c")
+  CLSID_IAudioVolumeDuckNotification = "c3b284d4-6d39-4359-b3cf-b56ddb3bb39c"
   struct IAudioVolumeDuckNotification
     lpVtbl : IAudioVolumeDuckNotificationVTbl*
   end
@@ -2615,6 +2737,8 @@ lib LibWin32
     on_session_created : Proc(IAudioSessionNotification*, IAudioSessionControl, HRESULT)
   end
 
+  IAudioSessionNotification_GUID = LibC::GUID.new("641dd20b-4d41-49cc-aba3-174b9477bb08")
+  CLSID_IAudioSessionNotification = "641dd20b-4d41-49cc-aba3-174b9477bb08"
   struct IAudioSessionNotification
     lpVtbl : IAudioSessionNotificationVTbl*
   end
@@ -2627,6 +2751,8 @@ lib LibWin32
     get_session : Proc(IAudioSessionEnumerator*, Int32, IAudioSessionControl*, HRESULT)
   end
 
+  IAudioSessionEnumerator_GUID = LibC::GUID.new("e2f5bb11-0570-40ca-acdd-3aa01277dee8")
+  CLSID_IAudioSessionEnumerator = "e2f5bb11-0570-40ca-acdd-3aa01277dee8"
   struct IAudioSessionEnumerator
     lpVtbl : IAudioSessionEnumeratorVTbl*
   end
@@ -2644,6 +2770,8 @@ lib LibWin32
     unregister_duck_notification : Proc(IAudioSessionManager2*, IAudioVolumeDuckNotification, HRESULT)
   end
 
+  IAudioSessionManager2_GUID = LibC::GUID.new("77aa99a0-1bd6-484f-8bc7-2c654c9a9b6f")
+  CLSID_IAudioSessionManager2 = "77aa99a0-1bd6-484f-8bc7-2c654c9a9b6f"
   struct IAudioSessionManager2
     lpVtbl : IAudioSessionManager2VTbl*
   end
@@ -2659,6 +2787,8 @@ lib LibWin32
     get_info : Proc(ISpatialAudioMetadataItems*, SpatialAudioMetadataItemsInfo*, HRESULT)
   end
 
+  ISpatialAudioMetadataItems_GUID = LibC::GUID.new("bcd7c78f-3098-4f22-b547-a2f25a381269")
+  CLSID_ISpatialAudioMetadataItems = "bcd7c78f-3098-4f22-b547-a2f25a381269"
   struct ISpatialAudioMetadataItems
     lpVtbl : ISpatialAudioMetadataItemsVTbl*
   end
@@ -2673,6 +2803,8 @@ lib LibWin32
     close : Proc(ISpatialAudioMetadataWriter*, HRESULT)
   end
 
+  ISpatialAudioMetadataWriter_GUID = LibC::GUID.new("1b17ca01-2955-444d-a430-537dc589a844")
+  CLSID_ISpatialAudioMetadataWriter = "1b17ca01-2955-444d-a430-537dc589a844"
   struct ISpatialAudioMetadataWriter
     lpVtbl : ISpatialAudioMetadataWriterVTbl*
   end
@@ -2687,6 +2819,8 @@ lib LibWin32
     close : Proc(ISpatialAudioMetadataReader*, HRESULT)
   end
 
+  ISpatialAudioMetadataReader_GUID = LibC::GUID.new("b78e86a2-31d9-4c32-94d2-7df40fc7ebec")
+  CLSID_ISpatialAudioMetadataReader = "b78e86a2-31d9-4c32-94d2-7df40fc7ebec"
   struct ISpatialAudioMetadataReader
     lpVtbl : ISpatialAudioMetadataReaderVTbl*
   end
@@ -2700,6 +2834,8 @@ lib LibWin32
     close : Proc(ISpatialAudioMetadataCopier*, HRESULT)
   end
 
+  ISpatialAudioMetadataCopier_GUID = LibC::GUID.new("d224b233-e251-4fd0-9ca2-d5ecf9a68404")
+  CLSID_ISpatialAudioMetadataCopier = "d224b233-e251-4fd0-9ca2-d5ecf9a68404"
   struct ISpatialAudioMetadataCopier
     lpVtbl : ISpatialAudioMetadataCopierVTbl*
   end
@@ -2713,6 +2849,8 @@ lib LibWin32
     detach_buffer : Proc(ISpatialAudioMetadataItemsBuffer*, HRESULT)
   end
 
+  ISpatialAudioMetadataItemsBuffer_GUID = LibC::GUID.new("42640a16-e1bd-42d9-9ff6-031ab71a2dba")
+  CLSID_ISpatialAudioMetadataItemsBuffer = "42640a16-e1bd-42d9-9ff6-031ab71a2dba"
   struct ISpatialAudioMetadataItemsBuffer
     lpVtbl : ISpatialAudioMetadataItemsBufferVTbl*
   end
@@ -2728,6 +2866,8 @@ lib LibWin32
     activate_spatial_audio_metadata_reader : Proc(ISpatialAudioMetadataClient*, ISpatialAudioMetadataReader*, HRESULT)
   end
 
+  ISpatialAudioMetadataClient_GUID = LibC::GUID.new("777d4a3b-f6ff-4a26-85dc-68d7cdeda1d4")
+  CLSID_ISpatialAudioMetadataClient = "777d4a3b-f6ff-4a26-85dc-68d7cdeda1d4"
   struct ISpatialAudioMetadataClient
     lpVtbl : ISpatialAudioMetadataClientVTbl*
   end
@@ -2743,6 +2883,8 @@ lib LibWin32
     write_next_metadata_command : Proc(ISpatialAudioObjectForMetadataCommands*, UInt8, Void*, UInt32, HRESULT)
   end
 
+  ISpatialAudioObjectForMetadataCommands_GUID = LibC::GUID.new("0df2c94b-f5f9-472d-af6b-c46e0ac9cd05")
+  CLSID_ISpatialAudioObjectForMetadataCommands = "0df2c94b-f5f9-472d-af6b-c46e0ac9cd05"
   struct ISpatialAudioObjectForMetadataCommands
     lpVtbl : ISpatialAudioObjectForMetadataCommandsVTbl*
   end
@@ -2758,6 +2900,8 @@ lib LibWin32
     get_spatial_audio_metadata_items : Proc(ISpatialAudioObjectForMetadataItems*, ISpatialAudioMetadataItems*, HRESULT)
   end
 
+  ISpatialAudioObjectForMetadataItems_GUID = LibC::GUID.new("ddea49ff-3bc0-4377-8aad-9fbcfd808566")
+  CLSID_ISpatialAudioObjectForMetadataItems = "ddea49ff-3bc0-4377-8aad-9fbcfd808566"
   struct ISpatialAudioObjectForMetadataItems
     lpVtbl : ISpatialAudioObjectForMetadataItemsVTbl*
   end
@@ -2777,6 +2921,8 @@ lib LibWin32
     activate_spatial_audio_object_for_metadata_items : Proc(ISpatialAudioObjectRenderStreamForMetadata*, AudioObjectType, ISpatialAudioObjectForMetadataItems*, HRESULT)
   end
 
+  ISpatialAudioObjectRenderStreamForMetadata_GUID = LibC::GUID.new("bbc9c907-48d5-4a2e-a0c7-f7f0d67c1fb1")
+  CLSID_ISpatialAudioObjectRenderStreamForMetadata = "bbc9c907-48d5-4a2e-a0c7-f7f0d67c1fb1"
   struct ISpatialAudioObjectRenderStreamForMetadata
     lpVtbl : ISpatialAudioObjectRenderStreamForMetadataVTbl*
   end
@@ -2790,6 +2936,8 @@ lib LibWin32
     get_sound_level : Proc(IAudioStateMonitor*, AudioStateMonitorSoundLevel)
   end
 
+  IAudioStateMonitor_GUID = LibC::GUID.new("63bd8738-e30d-4c77-bf5c-834e87c657e2")
+  CLSID_IAudioStateMonitor = "63bd8738-e30d-4c77-bf5c-834e87c657e2"
   struct IAudioStateMonitor
     lpVtbl : IAudioStateMonitorVTbl*
   end

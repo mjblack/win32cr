@@ -4916,6 +4916,8 @@ lib LibWin32
     get_overlay_image : Proc(IImageList*, Int32, Int32*, HRESULT)
   end
 
+  IImageList_GUID = LibC::GUID.new("46eb5926-582e-4017-9fdf-e8998daa0950")
+  CLSID_IImageList = "46eb5926-582e-4017-9fdf-e8998daa0950"
   struct IImageList
     lpVtbl : IImageListVTbl*
   end
@@ -4967,6 +4969,8 @@ lib LibWin32
     replace_from_image_list : Proc(IImageList2*, Int32, IImageList, Int32, IUnknown, UInt32, HRESULT)
   end
 
+  IImageList2_GUID = LibC::GUID.new("192b9d83-50fc-457b-90a0-2b82a8b5dae1")
+  CLSID_IImageList2 = "192b9d83-50fc-457b-90a0-2b82a8b5dae1"
   struct IImageList2
     lpVtbl : IImageList2VTbl*
   end

@@ -36,6 +36,8 @@ lib LibWin32
     acquire_wrapped_resources : Proc(ID3D11On12Device*, ID3D11Resource*, UInt32, Void)
   end
 
+  ID3D11On12Device_GUID = LibC::GUID.new("85611e73-70a9-490e-9614-a9e302777904")
+  CLSID_ID3D11On12Device = "85611e73-70a9-490e-9614-a9e302777904"
   struct ID3D11On12Device
     lpVtbl : ID3D11On12DeviceVTbl*
   end
@@ -50,6 +52,8 @@ lib LibWin32
     get_d3_d12_device : Proc(ID3D11On12Device1*, Guid*, Void**, HRESULT)
   end
 
+  ID3D11On12Device1_GUID = LibC::GUID.new("bdb64df4-ea2f-4c70-b861-aaab1258bb5d")
+  CLSID_ID3D11On12Device1 = "bdb64df4-ea2f-4c70-b861-aaab1258bb5d"
   struct ID3D11On12Device1
     lpVtbl : ID3D11On12Device1VTbl*
   end
@@ -66,6 +70,8 @@ lib LibWin32
     return_underlying_resource : Proc(ID3D11On12Device2*, ID3D11Resource, UInt32, UInt64*, ID3D12Fence*, HRESULT)
   end
 
+  ID3D11On12Device2_GUID = LibC::GUID.new("dc90f331-4740-43fa-866e-67f12cb58223")
+  CLSID_ID3D11On12Device2 = "dc90f331-4740-43fa-866e-67f12cb58223"
   struct ID3D11On12Device2
     lpVtbl : ID3D11On12Device2VTbl*
   end

@@ -20,6 +20,8 @@ lib LibWin32
     get_host_hwnd_interop : Proc(IIsolatedEnvironmentInterop*, LibC::HANDLE, HANDLE*, HRESULT)
   end
 
+  IIsolatedEnvironmentInterop_GUID = LibC::GUID.new("85713c2e-8e62-46c5-8de2-c647e1d54636")
+  CLSID_IIsolatedEnvironmentInterop = "85713c2e-8e62-46c5-8de2-c647e1d54636"
   struct IIsolatedEnvironmentInterop
     lpVtbl : IIsolatedEnvironmentInteropVTbl*
   end

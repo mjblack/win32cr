@@ -106,6 +106,8 @@ lib LibWin32
     verify_access : Proc(IGameExplorer*, UInt8*, LibC::BOOL*, HRESULT)
   end
 
+  IGameExplorer_GUID = LibC::GUID.new("e7b2fb72-d728-49b3-a5f2-18ebf5f1349e")
+  CLSID_IGameExplorer = "e7b2fb72-d728-49b3-a5f2-18ebf5f1349e"
   struct IGameExplorer
     lpVtbl : IGameExplorerVTbl*
   end
@@ -128,6 +130,8 @@ lib LibWin32
     get_last_played_category : Proc(IGameStatistics*, UInt32*, HRESULT)
   end
 
+  IGameStatistics_GUID = LibC::GUID.new("3887c9ca-04a0-42ae-bc4c-5fa6c7721145")
+  CLSID_IGameStatistics = "3887c9ca-04a0-42ae-bc4c-5fa6c7721145"
   struct IGameStatistics
     lpVtbl : IGameStatisticsVTbl*
   end
@@ -140,6 +144,8 @@ lib LibWin32
     remove_game_statistics : Proc(IGameStatisticsMgr*, LibC::LPWSTR, HRESULT)
   end
 
+  IGameStatisticsMgr_GUID = LibC::GUID.new("aff3ea11-e70e-407d-95dd-35e612c41ce2")
+  CLSID_IGameStatisticsMgr = "aff3ea11-e70e-407d-95dd-35e612c41ce2"
   struct IGameStatisticsMgr
     lpVtbl : IGameStatisticsMgrVTbl*
   end
@@ -153,6 +159,8 @@ lib LibWin32
     check_access : Proc(IGameExplorer2*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
+  IGameExplorer2_GUID = LibC::GUID.new("86874aa7-a1ed-450d-a7eb-b89e20b2fff3")
+  CLSID_IGameExplorer2 = "86874aa7-a1ed-450d-a7eb-b89e20b2fff3"
   struct IGameExplorer2
     lpVtbl : IGameExplorer2VTbl*
   end
@@ -169,6 +177,8 @@ lib LibWin32
     get_token_and_signature_with_token_result : Proc(IXblIdpAuthManager*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, LibC::BOOL, IXblIdpAuthTokenResult*, HRESULT)
   end
 
+  IXblIdpAuthManager_GUID = LibC::GUID.new("eb5ddb08-8bbf-449b-ac21-b02ddeb3b136")
+  CLSID_IXblIdpAuthManager = "eb5ddb08-8bbf-449b-ac21-b02ddeb3b136"
   struct IXblIdpAuthManager
     lpVtbl : IXblIdpAuthManagerVTbl*
   end
@@ -199,6 +209,8 @@ lib LibWin32
     get_title_restrictions : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
   end
 
+  IXblIdpAuthTokenResult_GUID = LibC::GUID.new("46ce0225-f267-4d68-b299-b2762552dec1")
+  CLSID_IXblIdpAuthTokenResult = "46ce0225-f267-4d68-b299-b2762552dec1"
   struct IXblIdpAuthTokenResult
     lpVtbl : IXblIdpAuthTokenResultVTbl*
   end
@@ -212,6 +224,8 @@ lib LibWin32
     get_unique_modern_gamertag : Proc(IXblIdpAuthTokenResult2*, LibC::LPWSTR*, HRESULT)
   end
 
+  IXblIdpAuthTokenResult2_GUID = LibC::GUID.new("75d760b0-60b9-412d-994f-26b2cd5f7812")
+  CLSID_IXblIdpAuthTokenResult2 = "75d760b0-60b9-412d-994f-26b2cd5f7812"
   struct IXblIdpAuthTokenResult2
     lpVtbl : IXblIdpAuthTokenResult2VTbl*
   end

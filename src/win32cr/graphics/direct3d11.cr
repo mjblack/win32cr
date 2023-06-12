@@ -4143,6 +4143,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11DeviceChild*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11DeviceChild_GUID = LibC::GUID.new("1841e5c8-16b0-489b-bcc8-44cfb0d5deae")
+  CLSID_ID3D11DeviceChild = "1841e5c8-16b0-489b-bcc8-44cfb0d5deae"
   struct ID3D11DeviceChild
     lpVtbl : ID3D11DeviceChildVTbl*
   end
@@ -4158,6 +4160,8 @@ lib LibWin32
     get_desc : Proc(ID3D11DepthStencilState*, D3D11_DEPTH_STENCIL_DESC*, Void)
   end
 
+  ID3D11DepthStencilState_GUID = LibC::GUID.new("03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1")
+  CLSID_ID3D11DepthStencilState = "03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1"
   struct ID3D11DepthStencilState
     lpVtbl : ID3D11DepthStencilStateVTbl*
   end
@@ -4173,6 +4177,8 @@ lib LibWin32
     get_desc : Proc(ID3D11BlendState*, D3D11_BLEND_DESC*, Void)
   end
 
+  ID3D11BlendState_GUID = LibC::GUID.new("75b68faa-347d-4159-8f45-a0640f01cd9a")
+  CLSID_ID3D11BlendState = "75b68faa-347d-4159-8f45-a0640f01cd9a"
   struct ID3D11BlendState
     lpVtbl : ID3D11BlendStateVTbl*
   end
@@ -4188,6 +4194,8 @@ lib LibWin32
     get_desc : Proc(ID3D11RasterizerState*, D3D11_RASTERIZER_DESC*, Void)
   end
 
+  ID3D11RasterizerState_GUID = LibC::GUID.new("9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7")
+  CLSID_ID3D11RasterizerState = "9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7"
   struct ID3D11RasterizerState
     lpVtbl : ID3D11RasterizerStateVTbl*
   end
@@ -4205,6 +4213,8 @@ lib LibWin32
     get_eviction_priority : Proc(ID3D11Resource*, UInt32)
   end
 
+  ID3D11Resource_GUID = LibC::GUID.new("dc8e63f3-d12b-4952-b47b-5e45026a862d")
+  CLSID_ID3D11Resource = "dc8e63f3-d12b-4952-b47b-5e45026a862d"
   struct ID3D11Resource
     lpVtbl : ID3D11ResourceVTbl*
   end
@@ -4223,6 +4233,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Buffer*, D3D11_BUFFER_DESC*, Void)
   end
 
+  ID3D11Buffer_GUID = LibC::GUID.new("48570b85-d1ee-4fcd-a250-eb350722b037")
+  CLSID_ID3D11Buffer = "48570b85-d1ee-4fcd-a250-eb350722b037"
   struct ID3D11Buffer
     lpVtbl : ID3D11BufferVTbl*
   end
@@ -4241,6 +4253,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Texture1D*, D3D11_TEXTURE1D_DESC*, Void)
   end
 
+  ID3D11Texture1D_GUID = LibC::GUID.new("f8fb5c27-c6b3-4f75-a4c8-439af2ef564c")
+  CLSID_ID3D11Texture1D = "f8fb5c27-c6b3-4f75-a4c8-439af2ef564c"
   struct ID3D11Texture1D
     lpVtbl : ID3D11Texture1DVTbl*
   end
@@ -4259,6 +4273,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Texture2D*, D3D11_TEXTURE2D_DESC*, Void)
   end
 
+  ID3D11Texture2D_GUID = LibC::GUID.new("6f15aaf2-d208-4e89-9ab4-489535d34f9c")
+  CLSID_ID3D11Texture2D = "6f15aaf2-d208-4e89-9ab4-489535d34f9c"
   struct ID3D11Texture2D
     lpVtbl : ID3D11Texture2DVTbl*
   end
@@ -4277,6 +4293,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Texture3D*, D3D11_TEXTURE3D_DESC*, Void)
   end
 
+  ID3D11Texture3D_GUID = LibC::GUID.new("037e866e-f56d-4357-a8af-9dabbe6e250e")
+  CLSID_ID3D11Texture3D = "037e866e-f56d-4357-a8af-9dabbe6e250e"
   struct ID3D11Texture3D
     lpVtbl : ID3D11Texture3DVTbl*
   end
@@ -4292,6 +4310,8 @@ lib LibWin32
     get_resource : Proc(ID3D11View*, ID3D11Resource*, Void)
   end
 
+  ID3D11View_GUID = LibC::GUID.new("839d1216-bb2e-412b-b7f4-a9dbebe08ed1")
+  CLSID_ID3D11View = "839d1216-bb2e-412b-b7f4-a9dbebe08ed1"
   struct ID3D11View
     lpVtbl : ID3D11ViewVTbl*
   end
@@ -4308,6 +4328,8 @@ lib LibWin32
     get_desc : Proc(ID3D11ShaderResourceView*, D3D11_SHADER_RESOURCE_VIEW_DESC*, Void)
   end
 
+  ID3D11ShaderResourceView_GUID = LibC::GUID.new("b0e06fe0-8192-4e1a-b1ca-36d7414710b2")
+  CLSID_ID3D11ShaderResourceView = "b0e06fe0-8192-4e1a-b1ca-36d7414710b2"
   struct ID3D11ShaderResourceView
     lpVtbl : ID3D11ShaderResourceViewVTbl*
   end
@@ -4324,6 +4346,8 @@ lib LibWin32
     get_desc : Proc(ID3D11RenderTargetView*, D3D11_RENDER_TARGET_VIEW_DESC*, Void)
   end
 
+  ID3D11RenderTargetView_GUID = LibC::GUID.new("dfdba067-0b8d-4865-875b-d7b4516cc164")
+  CLSID_ID3D11RenderTargetView = "dfdba067-0b8d-4865-875b-d7b4516cc164"
   struct ID3D11RenderTargetView
     lpVtbl : ID3D11RenderTargetViewVTbl*
   end
@@ -4340,6 +4364,8 @@ lib LibWin32
     get_desc : Proc(ID3D11DepthStencilView*, D3D11_DEPTH_STENCIL_VIEW_DESC*, Void)
   end
 
+  ID3D11DepthStencilView_GUID = LibC::GUID.new("9fdac92a-1876-48c3-afad-25b94f84a9b6")
+  CLSID_ID3D11DepthStencilView = "9fdac92a-1876-48c3-afad-25b94f84a9b6"
   struct ID3D11DepthStencilView
     lpVtbl : ID3D11DepthStencilViewVTbl*
   end
@@ -4356,6 +4382,8 @@ lib LibWin32
     get_desc : Proc(ID3D11UnorderedAccessView*, D3D11_UNORDERED_ACCESS_VIEW_DESC*, Void)
   end
 
+  ID3D11UnorderedAccessView_GUID = LibC::GUID.new("28acf509-7f5c-48f6-8611-f316010a6380")
+  CLSID_ID3D11UnorderedAccessView = "28acf509-7f5c-48f6-8611-f316010a6380"
   struct ID3D11UnorderedAccessView
     lpVtbl : ID3D11UnorderedAccessViewVTbl*
   end
@@ -4370,6 +4398,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11VertexShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11VertexShader_GUID = LibC::GUID.new("3b301d64-d678-4289-8897-22f8928b72f3")
+  CLSID_ID3D11VertexShader = "3b301d64-d678-4289-8897-22f8928b72f3"
   struct ID3D11VertexShader
     lpVtbl : ID3D11VertexShaderVTbl*
   end
@@ -4384,6 +4414,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11HullShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11HullShader_GUID = LibC::GUID.new("8e5c6061-628a-4c8e-8264-bbe45cb3d5dd")
+  CLSID_ID3D11HullShader = "8e5c6061-628a-4c8e-8264-bbe45cb3d5dd"
   struct ID3D11HullShader
     lpVtbl : ID3D11HullShaderVTbl*
   end
@@ -4398,6 +4430,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11DomainShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11DomainShader_GUID = LibC::GUID.new("f582c508-0f36-490c-9977-31eece268cfa")
+  CLSID_ID3D11DomainShader = "f582c508-0f36-490c-9977-31eece268cfa"
   struct ID3D11DomainShader
     lpVtbl : ID3D11DomainShaderVTbl*
   end
@@ -4412,6 +4446,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11GeometryShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11GeometryShader_GUID = LibC::GUID.new("38325b96-effb-4022-ba02-2e795b70275c")
+  CLSID_ID3D11GeometryShader = "38325b96-effb-4022-ba02-2e795b70275c"
   struct ID3D11GeometryShader
     lpVtbl : ID3D11GeometryShaderVTbl*
   end
@@ -4426,6 +4462,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11PixelShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11PixelShader_GUID = LibC::GUID.new("ea82e40d-51dc-4f33-93d4-db7c9125ae8c")
+  CLSID_ID3D11PixelShader = "ea82e40d-51dc-4f33-93d4-db7c9125ae8c"
   struct ID3D11PixelShader
     lpVtbl : ID3D11PixelShaderVTbl*
   end
@@ -4440,6 +4478,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11ComputeShader*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11ComputeShader_GUID = LibC::GUID.new("4f5b196e-c2bd-495e-bd01-1fded38e4969")
+  CLSID_ID3D11ComputeShader = "4f5b196e-c2bd-495e-bd01-1fded38e4969"
   struct ID3D11ComputeShader
     lpVtbl : ID3D11ComputeShaderVTbl*
   end
@@ -4454,6 +4494,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11InputLayout*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11InputLayout_GUID = LibC::GUID.new("e4819ddc-4cf0-4025-bd26-5de82a3e07b7")
+  CLSID_ID3D11InputLayout = "e4819ddc-4cf0-4025-bd26-5de82a3e07b7"
   struct ID3D11InputLayout
     lpVtbl : ID3D11InputLayoutVTbl*
   end
@@ -4469,6 +4511,8 @@ lib LibWin32
     get_desc : Proc(ID3D11SamplerState*, D3D11_SAMPLER_DESC*, Void)
   end
 
+  ID3D11SamplerState_GUID = LibC::GUID.new("da6fea51-564c-4487-9810-f0d0f9b4e3a5")
+  CLSID_ID3D11SamplerState = "da6fea51-564c-4487-9810-f0d0f9b4e3a5"
   struct ID3D11SamplerState
     lpVtbl : ID3D11SamplerStateVTbl*
   end
@@ -4484,6 +4528,8 @@ lib LibWin32
     get_data_size : Proc(ID3D11Asynchronous*, UInt32)
   end
 
+  ID3D11Asynchronous_GUID = LibC::GUID.new("4b35d0cd-1e15-4258-9c98-1b1333f6dd3b")
+  CLSID_ID3D11Asynchronous = "4b35d0cd-1e15-4258-9c98-1b1333f6dd3b"
   struct ID3D11Asynchronous
     lpVtbl : ID3D11AsynchronousVTbl*
   end
@@ -4500,6 +4546,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Query*, D3D11_QUERY_DESC*, Void)
   end
 
+  ID3D11Query_GUID = LibC::GUID.new("d6c00747-87b7-425e-b84d-44d108560afd")
+  CLSID_ID3D11Query = "d6c00747-87b7-425e-b84d-44d108560afd"
   struct ID3D11Query
     lpVtbl : ID3D11QueryVTbl*
   end
@@ -4516,6 +4564,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Predicate*, D3D11_QUERY_DESC*, Void)
   end
 
+  ID3D11Predicate_GUID = LibC::GUID.new("9eb576dd-9f77-4d86-81aa-8bab5fe490e2")
+  CLSID_ID3D11Predicate = "9eb576dd-9f77-4d86-81aa-8bab5fe490e2"
   struct ID3D11Predicate
     lpVtbl : ID3D11PredicateVTbl*
   end
@@ -4532,6 +4582,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Counter*, D3D11_COUNTER_DESC*, Void)
   end
 
+  ID3D11Counter_GUID = LibC::GUID.new("6e8c49fb-a371-4770-b440-29086022b741")
+  CLSID_ID3D11Counter = "6e8c49fb-a371-4770-b440-29086022b741"
   struct ID3D11Counter
     lpVtbl : ID3D11CounterVTbl*
   end
@@ -4550,6 +4602,8 @@ lib LibWin32
     get_type_name : Proc(ID3D11ClassInstance*, UInt8*, LibC::UINT_PTR*, Void)
   end
 
+  ID3D11ClassInstance_GUID = LibC::GUID.new("a6cd7faa-b0b7-4a2f-9436-8662a65797cb")
+  CLSID_ID3D11ClassInstance = "a6cd7faa-b0b7-4a2f-9436-8662a65797cb"
   struct ID3D11ClassInstance
     lpVtbl : ID3D11ClassInstanceVTbl*
   end
@@ -4566,6 +4620,8 @@ lib LibWin32
     create_class_instance : Proc(ID3D11ClassLinkage*, PSTR, UInt32, UInt32, UInt32, UInt32, ID3D11ClassInstance*, HRESULT)
   end
 
+  ID3D11ClassLinkage_GUID = LibC::GUID.new("ddf57cba-9543-46e4-a12b-f207a0fe7fed")
+  CLSID_ID3D11ClassLinkage = "ddf57cba-9543-46e4-a12b-f207a0fe7fed"
   struct ID3D11ClassLinkage
     lpVtbl : ID3D11ClassLinkageVTbl*
   end
@@ -4581,6 +4637,8 @@ lib LibWin32
     get_context_flags : Proc(ID3D11CommandList*, UInt32)
   end
 
+  ID3D11CommandList_GUID = LibC::GUID.new("a24bc4d1-769e-43f7-8013-98ff566c18e2")
+  CLSID_ID3D11CommandList = "a24bc4d1-769e-43f7-8013-98ff566c18e2"
   struct ID3D11CommandList
     lpVtbl : ID3D11CommandListVTbl*
   end
@@ -4703,6 +4761,8 @@ lib LibWin32
     finish_command_list : Proc(ID3D11DeviceContext*, LibC::BOOL, ID3D11CommandList*, HRESULT)
   end
 
+  ID3D11DeviceContext_GUID = LibC::GUID.new("c0bfa96c-e089-44fb-8eaf-26f8796190da")
+  CLSID_ID3D11DeviceContext = "c0bfa96c-e089-44fb-8eaf-26f8796190da"
   struct ID3D11DeviceContext
     lpVtbl : ID3D11DeviceContextVTbl*
   end
@@ -4719,6 +4779,8 @@ lib LibWin32
     get_driver_handle : Proc(ID3D11VideoDecoder*, LibC::HANDLE*, HRESULT)
   end
 
+  ID3D11VideoDecoder_GUID = LibC::GUID.new("3c9c5b51-995d-48d1-9b8d-fa5caeded65c")
+  CLSID_ID3D11VideoDecoder = "3c9c5b51-995d-48d1-9b8d-fa5caeded65c"
   struct ID3D11VideoDecoder
     lpVtbl : ID3D11VideoDecoderVTbl*
   end
@@ -4739,6 +4801,8 @@ lib LibWin32
     get_video_processor_filter_range : Proc(ID3D11VideoProcessorEnumerator*, D3D11_VIDEO_PROCESSOR_FILTER, D3D11_VIDEO_PROCESSOR_FILTER_RANGE*, HRESULT)
   end
 
+  ID3D11VideoProcessorEnumerator_GUID = LibC::GUID.new("31627037-53ab-4200-9061-05faa9ab45f9")
+  CLSID_ID3D11VideoProcessorEnumerator = "31627037-53ab-4200-9061-05faa9ab45f9"
   struct ID3D11VideoProcessorEnumerator
     lpVtbl : ID3D11VideoProcessorEnumeratorVTbl*
   end
@@ -4755,6 +4819,8 @@ lib LibWin32
     get_rate_conversion_caps : Proc(ID3D11VideoProcessor*, D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*, Void)
   end
 
+  ID3D11VideoProcessor_GUID = LibC::GUID.new("1d7b0652-185f-41c6-85ce-0c5be3d4ae6c")
+  CLSID_ID3D11VideoProcessor = "1d7b0652-185f-41c6-85ce-0c5be3d4ae6c"
   struct ID3D11VideoProcessor
     lpVtbl : ID3D11VideoProcessorVTbl*
   end
@@ -4772,6 +4838,8 @@ lib LibWin32
     get_channel_handle : Proc(ID3D11AuthenticatedChannel*, LibC::HANDLE*, Void)
   end
 
+  ID3D11AuthenticatedChannel_GUID = LibC::GUID.new("3015a308-dcbd-47aa-a747-192486d14d4a")
+  CLSID_ID3D11AuthenticatedChannel = "3015a308-dcbd-47aa-a747-192486d14d4a"
   struct ID3D11AuthenticatedChannel
     lpVtbl : ID3D11AuthenticatedChannelVTbl*
   end
@@ -4791,6 +4859,8 @@ lib LibWin32
     get_crypto_session_handle : Proc(ID3D11CryptoSession*, LibC::HANDLE*, Void)
   end
 
+  ID3D11CryptoSession_GUID = LibC::GUID.new("9b32f9ad-bdcc-40a6-a39d-d5c865845720")
+  CLSID_ID3D11CryptoSession = "9b32f9ad-bdcc-40a6-a39d-d5c865845720"
   struct ID3D11CryptoSession
     lpVtbl : ID3D11CryptoSessionVTbl*
   end
@@ -4807,6 +4877,8 @@ lib LibWin32
     get_desc : Proc(ID3D11VideoDecoderOutputView*, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, Void)
   end
 
+  ID3D11VideoDecoderOutputView_GUID = LibC::GUID.new("c2931aea-2a85-4f20-860f-fba1fd256e18")
+  CLSID_ID3D11VideoDecoderOutputView = "c2931aea-2a85-4f20-860f-fba1fd256e18"
   struct ID3D11VideoDecoderOutputView
     lpVtbl : ID3D11VideoDecoderOutputViewVTbl*
   end
@@ -4823,6 +4895,8 @@ lib LibWin32
     get_desc : Proc(ID3D11VideoProcessorInputView*, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, Void)
   end
 
+  ID3D11VideoProcessorInputView_GUID = LibC::GUID.new("11ec5a5f-51dc-4945-ab34-6e8c21300ea5")
+  CLSID_ID3D11VideoProcessorInputView = "11ec5a5f-51dc-4945-ab34-6e8c21300ea5"
   struct ID3D11VideoProcessorInputView
     lpVtbl : ID3D11VideoProcessorInputViewVTbl*
   end
@@ -4839,6 +4913,8 @@ lib LibWin32
     get_desc : Proc(ID3D11VideoProcessorOutputView*, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, Void)
   end
 
+  ID3D11VideoProcessorOutputView_GUID = LibC::GUID.new("a048285e-25a9-4527-bd93-d68b68c44254")
+  CLSID_ID3D11VideoProcessorOutputView = "a048285e-25a9-4527-bd93-d68b68c44254"
   struct ID3D11VideoProcessorOutputView
     lpVtbl : ID3D11VideoProcessorOutputViewVTbl*
   end
@@ -4911,6 +4987,8 @@ lib LibWin32
     video_processor_get_stream_rotation : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)
   end
 
+  ID3D11VideoContext_GUID = LibC::GUID.new("61f21c45-3c0e-4a74-9cea-67100d9ad5e4")
+  CLSID_ID3D11VideoContext = "61f21c45-3c0e-4a74-9cea-67100d9ad5e4"
   struct ID3D11VideoContext
     lpVtbl : ID3D11VideoContextVTbl*
   end
@@ -4938,6 +5016,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11VideoDevice*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3D11VideoDevice_GUID = LibC::GUID.new("10ec4d5b-975a-4689-b9e4-d0aac30fe333")
+  CLSID_ID3D11VideoDevice = "10ec4d5b-975a-4689-b9e4-d0aac30fe333"
   struct ID3D11VideoDevice
     lpVtbl : ID3D11VideoDeviceVTbl*
   end
@@ -4988,6 +5068,8 @@ lib LibWin32
     get_exception_mode : Proc(ID3D11Device*, UInt32)
   end
 
+  ID3D11Device_GUID = LibC::GUID.new("db6f6ddb-ac77-4e88-8253-819df9bbf140")
+  CLSID_ID3D11Device = "db6f6ddb-ac77-4e88-8253-819df9bbf140"
   struct ID3D11Device
     lpVtbl : ID3D11DeviceVTbl*
   end
@@ -5007,6 +5089,8 @@ lib LibWin32
     validate_context_for_dispatch : Proc(ID3D11Debug*, ID3D11DeviceContext, HRESULT)
   end
 
+  ID3D11Debug_GUID = LibC::GUID.new("79cf2233-7536-4948-9d36-1e4692dc5760")
+  CLSID_ID3D11Debug = "79cf2233-7536-4948-9d36-1e4692dc5760"
   struct ID3D11Debug
     lpVtbl : ID3D11DebugVTbl*
   end
@@ -5019,6 +5103,8 @@ lib LibWin32
     get_use_ref : Proc(ID3D11SwitchToRef*, LibC::BOOL)
   end
 
+  ID3D11SwitchToRef_GUID = LibC::GUID.new("1ef337e3-58e7-4f83-a692-db221f5ed47e")
+  CLSID_ID3D11SwitchToRef = "1ef337e3-58e7-4f83-a692-db221f5ed47e"
   struct ID3D11SwitchToRef
     lpVtbl : ID3D11SwitchToRefVTbl*
   end
@@ -5031,6 +5117,8 @@ lib LibWin32
     set_shader_tracking_options : Proc(ID3D11TracingDevice*, IUnknown, UInt32, HRESULT)
   end
 
+  ID3D11TracingDevice_GUID = LibC::GUID.new("1911c771-1587-413e-a7e0-fb26c3de0268")
+  CLSID_ID3D11TracingDevice = "1911c771-1587-413e-a7e0-fb26c3de0268"
   struct ID3D11TracingDevice
     lpVtbl : ID3D11TracingDeviceVTbl*
   end
@@ -5042,6 +5130,8 @@ lib LibWin32
     set_tracking_options : Proc(ID3D11RefTrackingOptions*, UInt32, HRESULT)
   end
 
+  ID3D11RefTrackingOptions_GUID = LibC::GUID.new("193dacdf-0db2-4c05-a55c-ef06cac56fd9")
+  CLSID_ID3D11RefTrackingOptions = "193dacdf-0db2-4c05-a55c-ef06cac56fd9"
   struct ID3D11RefTrackingOptions
     lpVtbl : ID3D11RefTrackingOptionsVTbl*
   end
@@ -5053,6 +5143,8 @@ lib LibWin32
     set_tracking_options : Proc(ID3D11RefDefaultTrackingOptions*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D11RefDefaultTrackingOptions_GUID = LibC::GUID.new("03916615-c644-418c-9bf4-75db5be63ca0")
+  CLSID_ID3D11RefDefaultTrackingOptions = "03916615-c644-418c-9bf4-75db5be63ca0"
   struct ID3D11RefDefaultTrackingOptions
     lpVtbl : ID3D11RefDefaultTrackingOptionsVTbl*
   end
@@ -5098,6 +5190,8 @@ lib LibWin32
     get_mute_debug_output : Proc(ID3D11InfoQueue*, LibC::BOOL)
   end
 
+  ID3D11InfoQueue_GUID = LibC::GUID.new("6543dbb6-1b48-42f5-ab82-e97ec74326f6")
+  CLSID_ID3D11InfoQueue = "6543dbb6-1b48-42f5-ab82-e97ec74326f6"
   struct ID3D11InfoQueue
     lpVtbl : ID3D11InfoQueueVTbl*
   end
@@ -5114,6 +5208,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11BlendState1*, D3D11_BLEND_DESC1*, Void)
   end
 
+  ID3D11BlendState1_GUID = LibC::GUID.new("cc86fabe-da55-401d-85e7-e3c9de2877e9")
+  CLSID_ID3D11BlendState1 = "cc86fabe-da55-401d-85e7-e3c9de2877e9"
   struct ID3D11BlendState1
     lpVtbl : ID3D11BlendState1VTbl*
   end
@@ -5130,6 +5226,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11RasterizerState1*, D3D11_RASTERIZER_DESC1*, Void)
   end
 
+  ID3D11RasterizerState1_GUID = LibC::GUID.new("1217d7a6-5039-418c-b042-9cbe256afd6e")
+  CLSID_ID3D11RasterizerState1 = "1217d7a6-5039-418c-b042-9cbe256afd6e"
   struct ID3D11RasterizerState1
     lpVtbl : ID3D11RasterizerState1VTbl*
   end
@@ -5144,6 +5242,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3DDeviceContextState*, Guid*, IUnknown, HRESULT)
   end
 
+  ID3DDeviceContextState_GUID = LibC::GUID.new("5c1e0d8a-7c23-48f9-8c59-a92958ceff11")
+  CLSID_ID3DDeviceContextState = "5c1e0d8a-7c23-48f9-8c59-a92958ceff11"
   struct ID3DDeviceContextState
     lpVtbl : ID3DDeviceContextStateVTbl*
   end
@@ -5285,6 +5385,8 @@ lib LibWin32
     discard_view1 : Proc(ID3D11DeviceContext1*, ID3D11View, RECT*, UInt32, Void)
   end
 
+  ID3D11DeviceContext1_GUID = LibC::GUID.new("bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1")
+  CLSID_ID3D11DeviceContext1 = "bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1"
   struct ID3D11DeviceContext1
     lpVtbl : ID3D11DeviceContext1VTbl*
   end
@@ -5371,6 +5473,8 @@ lib LibWin32
     video_processor_get_behavior_hints : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, UInt32, DXGI_FORMAT, UInt32, D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, UInt32*, HRESULT)
   end
 
+  ID3D11VideoContext1_GUID = LibC::GUID.new("a7f026da-a5f8-4487-a564-15e34357651e")
+  CLSID_ID3D11VideoContext1 = "a7f026da-a5f8-4487-a564-15e34357651e"
   struct ID3D11VideoContext1
     lpVtbl : ID3D11VideoContext1VTbl*
   end
@@ -5402,6 +5506,8 @@ lib LibWin32
     recommend_video_decoder_downsample_parameters : Proc(ID3D11VideoDevice1*, D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)
   end
 
+  ID3D11VideoDevice1_GUID = LibC::GUID.new("29da1d51-1321-4454-804b-f5fc9f861f0f")
+  CLSID_ID3D11VideoDevice1 = "29da1d51-1321-4454-804b-f5fc9f861f0f"
   struct ID3D11VideoDevice1
     lpVtbl : ID3D11VideoDevice1VTbl*
   end
@@ -5423,6 +5529,8 @@ lib LibWin32
     check_video_processor_format_conversion : Proc(ID3D11VideoProcessorEnumerator1*, DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, LibC::BOOL*, HRESULT)
   end
 
+  ID3D11VideoProcessorEnumerator1_GUID = LibC::GUID.new("465217f2-5568-43cf-b5b9-f61d54531ca1")
+  CLSID_ID3D11VideoProcessorEnumerator1 = "465217f2-5568-43cf-b5b9-f61d54531ca1"
   struct ID3D11VideoProcessorEnumerator1
     lpVtbl : ID3D11VideoProcessorEnumerator1VTbl*
   end
@@ -5480,6 +5588,8 @@ lib LibWin32
     open_shared_resource_by_name : Proc(ID3D11Device1*, LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)
   end
 
+  ID3D11Device1_GUID = LibC::GUID.new("a04bfb29-08ef-43d6-a49c-a9bdbdcbe686")
+  CLSID_ID3D11Device1 = "a04bfb29-08ef-43d6-a49c-a9bdbdcbe686"
   struct ID3D11Device1
     lpVtbl : ID3D11Device1VTbl*
   end
@@ -5494,6 +5604,8 @@ lib LibWin32
     get_status : Proc(ID3DUserDefinedAnnotation*, LibC::BOOL)
   end
 
+  ID3DUserDefinedAnnotation_GUID = LibC::GUID.new("b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab")
+  CLSID_ID3DUserDefinedAnnotation = "b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab"
   struct ID3DUserDefinedAnnotation
     lpVtbl : ID3DUserDefinedAnnotationVTbl*
   end
@@ -5645,6 +5757,8 @@ lib LibWin32
     end_event : Proc(ID3D11DeviceContext2*, Void)
   end
 
+  ID3D11DeviceContext2_GUID = LibC::GUID.new("420d5b32-b90c-4da4-bef0-359f6a24a83a")
+  CLSID_ID3D11DeviceContext2 = "420d5b32-b90c-4da4-bef0-359f6a24a83a"
   struct ID3D11DeviceContext2
     lpVtbl : ID3D11DeviceContext2VTbl*
   end
@@ -5706,6 +5820,8 @@ lib LibWin32
     check_multisample_quality_levels1 : Proc(ID3D11Device2*, DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)
   end
 
+  ID3D11Device2_GUID = LibC::GUID.new("9d06dffa-d1e5-4d07-83a8-1bb123f2f841")
+  CLSID_ID3D11Device2 = "9d06dffa-d1e5-4d07-83a8-1bb123f2f841"
   struct ID3D11Device2
     lpVtbl : ID3D11Device2VTbl*
   end
@@ -5725,6 +5841,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11Texture2D1*, D3D11_TEXTURE2D_DESC1*, Void)
   end
 
+  ID3D11Texture2D1_GUID = LibC::GUID.new("51218251-1e33-4617-9ccb-4d3a4367e7bb")
+  CLSID_ID3D11Texture2D1 = "51218251-1e33-4617-9ccb-4d3a4367e7bb"
   struct ID3D11Texture2D1
     lpVtbl : ID3D11Texture2D1VTbl*
   end
@@ -5744,6 +5862,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11Texture3D1*, D3D11_TEXTURE3D_DESC1*, Void)
   end
 
+  ID3D11Texture3D1_GUID = LibC::GUID.new("0c711683-2853-4846-9bb0-f3e60639e46a")
+  CLSID_ID3D11Texture3D1 = "0c711683-2853-4846-9bb0-f3e60639e46a"
   struct ID3D11Texture3D1
     lpVtbl : ID3D11Texture3D1VTbl*
   end
@@ -5761,6 +5881,8 @@ lib LibWin32
     get_desc2 : Proc(ID3D11RasterizerState2*, D3D11_RASTERIZER_DESC2*, Void)
   end
 
+  ID3D11RasterizerState2_GUID = LibC::GUID.new("6fbd02fb-209f-46c4-b059-2ed15586a6ac")
+  CLSID_ID3D11RasterizerState2 = "6fbd02fb-209f-46c4-b059-2ed15586a6ac"
   struct ID3D11RasterizerState2
     lpVtbl : ID3D11RasterizerState2VTbl*
   end
@@ -5778,6 +5900,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11ShaderResourceView1*, D3D11_SHADER_RESOURCE_VIEW_DESC1*, Void)
   end
 
+  ID3D11ShaderResourceView1_GUID = LibC::GUID.new("91308b87-9040-411d-8c67-c39253ce3802")
+  CLSID_ID3D11ShaderResourceView1 = "91308b87-9040-411d-8c67-c39253ce3802"
   struct ID3D11ShaderResourceView1
     lpVtbl : ID3D11ShaderResourceView1VTbl*
   end
@@ -5795,6 +5919,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11RenderTargetView1*, D3D11_RENDER_TARGET_VIEW_DESC1*, Void)
   end
 
+  ID3D11RenderTargetView1_GUID = LibC::GUID.new("ffbe2e23-f011-418a-ac56-5ceed7c5b94b")
+  CLSID_ID3D11RenderTargetView1 = "ffbe2e23-f011-418a-ac56-5ceed7c5b94b"
   struct ID3D11RenderTargetView1
     lpVtbl : ID3D11RenderTargetView1VTbl*
   end
@@ -5812,6 +5938,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11UnorderedAccessView1*, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, Void)
   end
 
+  ID3D11UnorderedAccessView1_GUID = LibC::GUID.new("7b3b6153-a886-4544-ab37-6537c8500403")
+  CLSID_ID3D11UnorderedAccessView1 = "7b3b6153-a886-4544-ab37-6537c8500403"
   struct ID3D11UnorderedAccessView1
     lpVtbl : ID3D11UnorderedAccessView1VTbl*
   end
@@ -5829,6 +5957,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11Query1*, D3D11_QUERY_DESC1*, Void)
   end
 
+  ID3D11Query1_GUID = LibC::GUID.new("631b4766-36dc-461d-8db6-c47e13e60916")
+  CLSID_ID3D11Query1 = "631b4766-36dc-461d-8db6-c47e13e60916"
   struct ID3D11Query1
     lpVtbl : ID3D11Query1VTbl*
   end
@@ -5983,6 +6113,8 @@ lib LibWin32
     get_hardware_protection_state : Proc(ID3D11DeviceContext3*, LibC::BOOL*, Void)
   end
 
+  ID3D11DeviceContext3_GUID = LibC::GUID.new("b4e3c01d-e79e-4637-91b2-510e9f4c9b8f")
+  CLSID_ID3D11DeviceContext3 = "b4e3c01d-e79e-4637-91b2-510e9f4c9b8f"
   struct ID3D11DeviceContext3
     lpVtbl : ID3D11DeviceContext3VTbl*
   end
@@ -6000,6 +6132,8 @@ lib LibWin32
     set_event_on_completion : Proc(ID3D11Fence*, UInt64, LibC::HANDLE, HRESULT)
   end
 
+  ID3D11Fence_GUID = LibC::GUID.new("affde9d1-1df7-4bb7-8a34-0f46251dab80")
+  CLSID_ID3D11Fence = "affde9d1-1df7-4bb7-8a34-0f46251dab80"
   struct ID3D11Fence
     lpVtbl : ID3D11FenceVTbl*
   end
@@ -6156,6 +6290,8 @@ lib LibWin32
     wait : Proc(ID3D11DeviceContext4*, ID3D11Fence, UInt64, HRESULT)
   end
 
+  ID3D11DeviceContext4_GUID = LibC::GUID.new("917600da-f58c-4c33-98d8-3e15b390fa24")
+  CLSID_ID3D11DeviceContext4 = "917600da-f58c-4c33-98d8-3e15b390fa24"
   struct ID3D11DeviceContext4
     lpVtbl : ID3D11DeviceContext4VTbl*
   end
@@ -6228,6 +6364,8 @@ lib LibWin32
     read_from_subresource : Proc(ID3D11Device3*, Void*, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
   end
 
+  ID3D11Device3_GUID = LibC::GUID.new("a05c8c37-d2c6-4732-b3a0-9ce0b0dc9ae6")
+  CLSID_ID3D11Device3 = "a05c8c37-d2c6-4732-b3a0-9ce0b0dc9ae6"
   struct ID3D11Device3
     lpVtbl : ID3D11Device3VTbl*
   end
@@ -6302,6 +6440,8 @@ lib LibWin32
     unregister_device_removed : Proc(ID3D11Device4*, UInt32, Void)
   end
 
+  ID3D11Device4_GUID = LibC::GUID.new("8992ab71-02e6-4b8d-ba48-b056dcda42c4")
+  CLSID_ID3D11Device4 = "8992ab71-02e6-4b8d-ba48-b056dcda42c4"
   struct ID3D11Device4
     lpVtbl : ID3D11Device4VTbl*
   end
@@ -6378,6 +6518,8 @@ lib LibWin32
     create_fence : Proc(ID3D11Device5*, UInt64, D3D11_FENCE_FLAG, Guid*, Void**, HRESULT)
   end
 
+  ID3D11Device5_GUID = LibC::GUID.new("8ffde202-a0e7-45df-9e01-e837801b5ea0")
+  CLSID_ID3D11Device5 = "8ffde202-a0e7-45df-9e01-e837801b5ea0"
   struct ID3D11Device5
     lpVtbl : ID3D11Device5VTbl*
   end
@@ -6392,6 +6534,8 @@ lib LibWin32
     get_multithread_protected : Proc(ID3D11Multithread*, LibC::BOOL)
   end
 
+  ID3D11Multithread_GUID = LibC::GUID.new("9b7e4e00-342c-4106-a19f-4f2704f689f0")
+  CLSID_ID3D11Multithread = "9b7e4e00-342c-4106-a19f-4f2704f689f0"
   struct ID3D11Multithread
     lpVtbl : ID3D11MultithreadVTbl*
   end
@@ -6482,6 +6626,8 @@ lib LibWin32
     video_processor_get_stream_hdr_meta_data : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)
   end
 
+  ID3D11VideoContext2_GUID = LibC::GUID.new("c4e7374c-6243-4d1b-ae87-52b4f740e261")
+  CLSID_ID3D11VideoContext2 = "c4e7374c-6243-4d1b-ae87-52b4f740e261"
   struct ID3D11VideoContext2
     lpVtbl : ID3D11VideoContext2VTbl*
   end
@@ -6515,6 +6661,8 @@ lib LibWin32
     negotiate_crypto_session_key_exchange_mt : Proc(ID3D11VideoDevice2*, ID3D11CryptoSession, D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, UInt32, Void*, HRESULT)
   end
 
+  ID3D11VideoDevice2_GUID = LibC::GUID.new("59c0cb01-35f0-4a70-8f67-87905c906a53")
+  CLSID_ID3D11VideoDevice2 = "59c0cb01-35f0-4a70-8f67-87905c906a53"
   struct ID3D11VideoDevice2
     lpVtbl : ID3D11VideoDevice2VTbl*
   end
@@ -6607,6 +6755,8 @@ lib LibWin32
     submit_decoder_buffers2 : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC2*, HRESULT)
   end
 
+  ID3D11VideoContext3_GUID = LibC::GUID.new("a9e2faa0-cb39-418f-a0b7-d8aad4de672e")
+  CLSID_ID3D11VideoContext3 = "a9e2faa0-cb39-418f-a0b7-d8aad4de672e"
   struct ID3D11VideoContext3
     lpVtbl : ID3D11VideoContext3VTbl*
   end
@@ -6625,6 +6775,8 @@ lib LibWin32
     implements_interface : Proc(ID3D11ShaderReflectionType*, ID3D11ShaderReflectionType, HRESULT)
   end
 
+  ID3D11ShaderReflectionType_GUID = LibC::GUID.new("6e6ffa6a-9bae-4613-a51e-91652d508c21")
+  CLSID_ID3D11ShaderReflectionType = "6e6ffa6a-9bae-4613-a51e-91652d508c21"
   struct ID3D11ShaderReflectionType
     lpVtbl : ID3D11ShaderReflectionTypeVTbl*
   end
@@ -6636,6 +6788,8 @@ lib LibWin32
     get_interface_slot : Proc(ID3D11ShaderReflectionVariable*, UInt32, UInt32)
   end
 
+  ID3D11ShaderReflectionVariable_GUID = LibC::GUID.new("51f23923-f3e5-4bd1-91cb-606177d8db4c")
+  CLSID_ID3D11ShaderReflectionVariable = "51f23923-f3e5-4bd1-91cb-606177d8db4c"
   struct ID3D11ShaderReflectionVariable
     lpVtbl : ID3D11ShaderReflectionVariableVTbl*
   end
@@ -6646,6 +6800,8 @@ lib LibWin32
     get_variable_by_name : Proc(ID3D11ShaderReflectionConstantBuffer*, PSTR, ID3D11ShaderReflectionVariable)
   end
 
+  ID3D11ShaderReflectionConstantBuffer_GUID = LibC::GUID.new("eb62d63d-93dd-4318-8ae8-c6f83ad371b8")
+  CLSID_ID3D11ShaderReflectionConstantBuffer = "eb62d63d-93dd-4318-8ae8-c6f83ad371b8"
   struct ID3D11ShaderReflectionConstantBuffer
     lpVtbl : ID3D11ShaderReflectionConstantBufferVTbl*
   end
@@ -6675,6 +6831,8 @@ lib LibWin32
     get_requires_flags : Proc(ID3D11ShaderReflection*, UInt64)
   end
 
+  ID3D11ShaderReflection_GUID = LibC::GUID.new("8d536ca1-0cca-4956-a837-786963755584")
+  CLSID_ID3D11ShaderReflection = "8d536ca1-0cca-4956-a837-786963755584"
   struct ID3D11ShaderReflection
     lpVtbl : ID3D11ShaderReflectionVTbl*
   end
@@ -6687,6 +6845,8 @@ lib LibWin32
     get_function_by_index : Proc(ID3D11LibraryReflection*, Int32, ID3D11FunctionReflection)
   end
 
+  ID3D11LibraryReflection_GUID = LibC::GUID.new("54384f1b-5b3e-4bb7-ae01-60ba3097cbb6")
+  CLSID_ID3D11LibraryReflection = "54384f1b-5b3e-4bb7-ae01-60ba3097cbb6"
   struct ID3D11LibraryReflection
     lpVtbl : ID3D11LibraryReflectionVTbl*
   end
@@ -6701,6 +6861,8 @@ lib LibWin32
     get_function_parameter : Proc(ID3D11FunctionReflection*, Int32, ID3D11FunctionParameterReflection)
   end
 
+  ID3D11FunctionReflection_GUID = LibC::GUID.new("207bcecb-d683-4a06-a8a3-9b149b9f73a4")
+  CLSID_ID3D11FunctionReflection = "207bcecb-d683-4a06-a8a3-9b149b9f73a4"
   struct ID3D11FunctionReflection
     lpVtbl : ID3D11FunctionReflectionVTbl*
   end
@@ -6709,6 +6871,8 @@ lib LibWin32
     get_desc : Proc(ID3D11FunctionParameterReflection*, D3D11_PARAMETER_DESC*, HRESULT)
   end
 
+  ID3D11FunctionParameterReflection_GUID = LibC::GUID.new("42757488-334f-47fe-982e-1a65d08cc462")
+  CLSID_ID3D11FunctionParameterReflection = "42757488-334f-47fe-982e-1a65d08cc462"
   struct ID3D11FunctionParameterReflection
     lpVtbl : ID3D11FunctionParameterReflectionVTbl*
   end
@@ -6729,6 +6893,8 @@ lib LibWin32
     bind_resource_as_unordered_access_view_by_name : Proc(ID3D11ModuleInstance*, PSTR, UInt32, UInt32, HRESULT)
   end
 
+  ID3D11ModuleInstance_GUID = LibC::GUID.new("469e07f7-045a-48d5-aa12-68a478cdf75d")
+  CLSID_ID3D11ModuleInstance = "469e07f7-045a-48d5-aa12-68a478cdf75d"
   struct ID3D11ModuleInstance
     lpVtbl : ID3D11ModuleInstanceVTbl*
   end
@@ -6740,6 +6906,8 @@ lib LibWin32
     create_instance : Proc(ID3D11Module*, PSTR, ID3D11ModuleInstance*, HRESULT)
   end
 
+  ID3D11Module_GUID = LibC::GUID.new("cac701ee-80fc-4122-8242-10b39c8cec34")
+  CLSID_ID3D11Module = "cac701ee-80fc-4122-8242-10b39c8cec34"
   struct ID3D11Module
     lpVtbl : ID3D11ModuleVTbl*
   end
@@ -6753,6 +6921,8 @@ lib LibWin32
     add_clip_plane_from_c_buffer : Proc(ID3D11Linker*, UInt32, UInt32, HRESULT)
   end
 
+  ID3D11Linker_GUID = LibC::GUID.new("59a6cd0e-e10d-4c1f-88c0-63aba1daf30e")
+  CLSID_ID3D11Linker = "59a6cd0e-e10d-4c1f-88c0-63aba1daf30e"
   struct ID3D11Linker
     lpVtbl : ID3D11LinkerVTbl*
   end
@@ -6763,6 +6933,8 @@ lib LibWin32
     release : Proc(ID3D11LinkingNode*, UInt32)
   end
 
+  ID3D11LinkingNode_GUID = LibC::GUID.new("d80dd70c-8d2f-4751-94a1-03c79b3556db")
+  CLSID_ID3D11LinkingNode = "d80dd70c-8d2f-4751-94a1-03c79b3556db"
   struct ID3D11LinkingNode
     lpVtbl : ID3D11LinkingNodeVTbl*
   end
@@ -6781,6 +6953,8 @@ lib LibWin32
     generate_hlsl : Proc(ID3D11FunctionLinkingGraph*, UInt32, ID3DBlob*, HRESULT)
   end
 
+  ID3D11FunctionLinkingGraph_GUID = LibC::GUID.new("54133220-1ce8-43d3-8236-9855c5ceecff")
+  CLSID_ID3D11FunctionLinkingGraph = "54133220-1ce8-43d3-8236-9855c5ceecff"
   struct ID3D11FunctionLinkingGraph
     lpVtbl : ID3D11FunctionLinkingGraphVTbl*
   end
@@ -6799,6 +6973,8 @@ lib LibWin32
     get_read_register : Proc(ID3D11ShaderTrace*, UInt32, UInt32, D3D11_TRACE_REGISTER*, D3D11_TRACE_VALUE*, HRESULT)
   end
 
+  ID3D11ShaderTrace_GUID = LibC::GUID.new("36b013e6-2811-4845-baa7-d623fe0df104")
+  CLSID_ID3D11ShaderTrace = "36b013e6-2811-4845-baa7-d623fe0df104"
   struct ID3D11ShaderTrace
     lpVtbl : ID3D11ShaderTraceVTbl*
   end
@@ -6810,6 +6986,8 @@ lib LibWin32
     create_shader_trace : Proc(ID3D11ShaderTraceFactory*, IUnknown, D3D11_SHADER_TRACE_DESC*, ID3D11ShaderTrace*, HRESULT)
   end
 
+  ID3D11ShaderTraceFactory_GUID = LibC::GUID.new("1fbad429-66ab-41cc-9617-667ac10e4459")
+  CLSID_ID3D11ShaderTraceFactory = "1fbad429-66ab-41cc-9617-667ac10e4459"
   struct ID3D11ShaderTraceFactory
     lpVtbl : ID3D11ShaderTraceFactoryVTbl*
   end
@@ -6823,6 +7001,8 @@ lib LibWin32
     multiscan : Proc(ID3DX11Scan*, D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, UInt32, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)
   end
 
+  ID3DX11Scan_GUID = LibC::GUID.new("5089b68f-e71d-4d38-be8e-f363b95a9405")
+  CLSID_ID3DX11Scan = "5089b68f-e71d-4d38-be8e-f363b95a9405"
   struct ID3DX11Scan
     lpVtbl : ID3DX11ScanVTbl*
   end
@@ -6835,6 +7015,8 @@ lib LibWin32
     seg_scan : Proc(ID3DX11SegmentedScan*, D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)
   end
 
+  ID3DX11SegmentedScan_GUID = LibC::GUID.new("a915128c-d954-4c79-bfe1-64db923194d6")
+  CLSID_ID3DX11SegmentedScan = "a915128c-d954-4c79-bfe1-64db923194d6"
   struct ID3DX11SegmentedScan
     lpVtbl : ID3DX11SegmentedScanVTbl*
   end
@@ -6852,6 +7034,8 @@ lib LibWin32
     inverse_transform : Proc(ID3DX11FFT*, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView*, HRESULT)
   end
 
+  ID3DX11FFT_GUID = LibC::GUID.new("b3f7a938-4c93-4310-a675-b30d6de50553")
+  CLSID_ID3DX11FFT = "b3f7a938-4c93-4310-a675-b30d6de50553"
   struct ID3DX11FFT
     lpVtbl : ID3DX11FFTVTbl*
   end

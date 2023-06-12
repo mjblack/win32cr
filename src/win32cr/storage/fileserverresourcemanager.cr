@@ -528,6 +528,8 @@ lib LibWin32
     commit : Proc(IFsrmObject*, HRESULT)
   end
 
+  IFsrmObject_GUID = LibC::GUID.new("22bcef93-4a3f-4183-89f9-2f8b8a628aee")
+  CLSID_IFsrmObject = "22bcef93-4a3f-4183-89f9-2f8b8a628aee"
   struct IFsrmObject
     lpVtbl : IFsrmObjectVTbl*
   end
@@ -549,6 +551,8 @@ lib LibWin32
     get_by_id : Proc(IFsrmCollection*, Guid, VARIANT*, HRESULT)
   end
 
+  IFsrmCollection_GUID = LibC::GUID.new("f76fbf3b-8ddd-4b42-b05a-cb1c3ff1fee8")
+  CLSID_IFsrmCollection = "f76fbf3b-8ddd-4b42-b05a-cb1c3ff1fee8"
   struct IFsrmCollection
     lpVtbl : IFsrmCollectionVTbl*
   end
@@ -574,6 +578,8 @@ lib LibWin32
     clone : Proc(IFsrmMutableCollection*, IFsrmMutableCollection*, HRESULT)
   end
 
+  IFsrmMutableCollection_GUID = LibC::GUID.new("1bb617b8-3886-49dc-af82-a6c90fa35dda")
+  CLSID_IFsrmMutableCollection = "1bb617b8-3886-49dc-af82-a6c90fa35dda"
   struct IFsrmMutableCollection
     lpVtbl : IFsrmMutableCollectionVTbl*
   end
@@ -600,6 +606,8 @@ lib LibWin32
     commit : Proc(IFsrmCommittableCollection*, FsrmCommitOptions, IFsrmCollection*, HRESULT)
   end
 
+  IFsrmCommittableCollection_GUID = LibC::GUID.new("96deb3b5-8b91-4a2a-9d93-80a35d8aa847")
+  CLSID_IFsrmCommittableCollection = "96deb3b5-8b91-4a2a-9d93-80a35d8aa847"
   struct IFsrmCommittableCollection
     lpVtbl : IFsrmCommittableCollectionVTbl*
   end
@@ -619,6 +627,8 @@ lib LibWin32
     delete : Proc(IFsrmAction*, HRESULT)
   end
 
+  IFsrmAction_GUID = LibC::GUID.new("6cd6408a-ae60-463b-9ef1-e117534d69dc")
+  CLSID_IFsrmAction = "6cd6408a-ae60-463b-9ef1-e117534d69dc"
   struct IFsrmAction
     lpVtbl : IFsrmActionVTbl*
   end
@@ -652,6 +662,8 @@ lib LibWin32
     put_message_text : Proc(IFsrmActionEmail*, UInt8*, HRESULT)
   end
 
+  IFsrmActionEmail_GUID = LibC::GUID.new("d646567d-26ae-4caa-9f84-4e0aad207fca")
+  CLSID_IFsrmActionEmail = "d646567d-26ae-4caa-9f84-4e0aad207fca"
   struct IFsrmActionEmail
     lpVtbl : IFsrmActionEmailVTbl*
   end
@@ -687,6 +699,8 @@ lib LibWin32
     put_attachment_file_list_size : Proc(IFsrmActionEmail2*, Int32, HRESULT)
   end
 
+  IFsrmActionEmail2_GUID = LibC::GUID.new("8276702f-2532-4839-89bf-4872609a2ea4")
+  CLSID_IFsrmActionEmail2 = "8276702f-2532-4839-89bf-4872609a2ea4"
   struct IFsrmActionEmail2
     lpVtbl : IFsrmActionEmail2VTbl*
   end
@@ -710,6 +724,8 @@ lib LibWin32
     put_mail_to : Proc(IFsrmActionReport*, UInt8*, HRESULT)
   end
 
+  IFsrmActionReport_GUID = LibC::GUID.new("2dbe63c4-b340-48a0-a5b0-158e07fc567e")
+  CLSID_IFsrmActionReport = "2dbe63c4-b340-48a0-a5b0-158e07fc567e"
   struct IFsrmActionReport
     lpVtbl : IFsrmActionReportVTbl*
   end
@@ -733,6 +749,8 @@ lib LibWin32
     put_message_text : Proc(IFsrmActionEventLog*, UInt8*, HRESULT)
   end
 
+  IFsrmActionEventLog_GUID = LibC::GUID.new("4c8f96c3-5d94-4f37-a4f4-f56ab463546f")
+  CLSID_IFsrmActionEventLog = "4c8f96c3-5d94-4f37-a4f4-f56ab463546f"
   struct IFsrmActionEventLog
     lpVtbl : IFsrmActionEventLogVTbl*
   end
@@ -766,6 +784,8 @@ lib LibWin32
     put_log_result : Proc(IFsrmActionCommand*, Int16, HRESULT)
   end
 
+  IFsrmActionCommand_GUID = LibC::GUID.new("12937789-e247-4917-9c20-f3ee9c7ee783")
+  CLSID_IFsrmActionCommand = "12937789-e247-4917-9c20-f3ee9c7ee783"
   struct IFsrmActionCommand
     lpVtbl : IFsrmActionCommandVTbl*
   end
@@ -793,6 +813,8 @@ lib LibWin32
     get_action_run_limit_interval : Proc(IFsrmSetting*, FsrmActionType, Int32*, HRESULT)
   end
 
+  IFsrmSetting_GUID = LibC::GUID.new("f411d4fd-14be-4260-8c40-03b7c95e608a")
+  CLSID_IFsrmSetting = "f411d4fd-14be-4260-8c40-03b7c95e608a"
   struct IFsrmSetting
     lpVtbl : IFsrmSettingVTbl*
   end
@@ -808,6 +830,8 @@ lib LibWin32
     get_share_paths_for_local_path : Proc(IFsrmPathMapper*, UInt8*, SAFEARRAY**, HRESULT)
   end
 
+  IFsrmPathMapper_GUID = LibC::GUID.new("6f4dbfff-6920-4821-a6c3-b7e94c1fd60c")
+  CLSID_IFsrmPathMapper = "6f4dbfff-6920-4821-a6c3-b7e94c1fd60c"
   struct IFsrmPathMapper
     lpVtbl : IFsrmPathMapperVTbl*
   end
@@ -828,6 +852,8 @@ lib LibWin32
     import_quota_templates : Proc(IFsrmExportImport*, UInt8*, VARIANT*, UInt8*, IFsrmCommittableCollection*, HRESULT)
   end
 
+  IFsrmExportImport_GUID = LibC::GUID.new("efcb0ab1-16c4-4a79-812c-725614c3306b")
+  CLSID_IFsrmExportImport = "efcb0ab1-16c4-4a79-812c-725614c3306b"
   struct IFsrmExportImport
     lpVtbl : IFsrmExportImportVTbl*
   end
@@ -844,6 +870,8 @@ lib LibWin32
     get_results : Proc(IFsrmDerivedObjectsResult*, IFsrmCollection*, HRESULT)
   end
 
+  IFsrmDerivedObjectsResult_GUID = LibC::GUID.new("39322a2d-38ee-4d0d-8095-421a80849a82")
+  CLSID_IFsrmDerivedObjectsResult = "39322a2d-38ee-4d0d-8095-421a80849a82"
   struct IFsrmDerivedObjectsResult
     lpVtbl : IFsrmDerivedObjectsResultVTbl*
   end
@@ -859,6 +887,8 @@ lib LibWin32
     show : Proc(IFsrmAccessDeniedRemediationClient*, LibC::UINT_PTR, UInt8*, AdrClientErrorType, Int32, UInt8*, UInt8*, Int32*, HRESULT)
   end
 
+  IFsrmAccessDeniedRemediationClient_GUID = LibC::GUID.new("40002314-590b-45a5-8e1b-8c05da527e52")
+  CLSID_IFsrmAccessDeniedRemediationClient = "40002314-590b-45a5-8e1b-8c05da527e52"
   struct IFsrmAccessDeniedRemediationClient
     lpVtbl : IFsrmAccessDeniedRemediationClientVTbl*
   end
@@ -888,6 +918,8 @@ lib LibWin32
     enum_threshold_actions : Proc(IFsrmQuotaBase*, Int32, IFsrmCollection*, HRESULT)
   end
 
+  IFsrmQuotaBase_GUID = LibC::GUID.new("1568a795-3924-4118-b74b-68d8f0fa5daf")
+  CLSID_IFsrmQuotaBase = "1568a795-3924-4118-b74b-68d8f0fa5daf"
   struct IFsrmQuotaBase
     lpVtbl : IFsrmQuotaBaseVTbl*
   end
@@ -923,6 +955,8 @@ lib LibWin32
     apply_template : Proc(IFsrmQuotaObject*, UInt8*, HRESULT)
   end
 
+  IFsrmQuotaObject_GUID = LibC::GUID.new("42dc3511-61d5-48ae-b6dc-59fc00c0a8d6")
+  CLSID_IFsrmQuotaObject = "42dc3511-61d5-48ae-b6dc-59fc00c0a8d6"
   struct IFsrmQuotaObject
     lpVtbl : IFsrmQuotaObjectVTbl*
   end
@@ -963,6 +997,8 @@ lib LibWin32
     refresh_usage_properties : Proc(IFsrmQuota*, HRESULT)
   end
 
+  IFsrmQuota_GUID = LibC::GUID.new("377f739d-9647-4b8e-97d2-5ffce6d759cd")
+  CLSID_IFsrmQuota = "377f739d-9647-4b8e-97d2-5ffce6d759cd"
   struct IFsrmQuota
     lpVtbl : IFsrmQuotaVTbl*
   end
@@ -1001,6 +1037,8 @@ lib LibWin32
     commit_and_update_derived : Proc(IFsrmAutoApplyQuota*, FsrmCommitOptions, FsrmTemplateApplyOptions, IFsrmDerivedObjectsResult*, HRESULT)
   end
 
+  IFsrmAutoApplyQuota_GUID = LibC::GUID.new("f82e5729-6aba-4740-bfc7-c7f58f75fb7b")
+  CLSID_IFsrmAutoApplyQuota = "f82e5729-6aba-4740-bfc7-c7f58f75fb7b"
   struct IFsrmAutoApplyQuota
     lpVtbl : IFsrmAutoApplyQuotaVTbl*
   end
@@ -1027,6 +1065,8 @@ lib LibWin32
     create_quota_collection : Proc(IFsrmQuotaManager*, IFsrmCommittableCollection*, HRESULT)
   end
 
+  IFsrmQuotaManager_GUID = LibC::GUID.new("8bb68c7d-19d8-4ffb-809e-be4fc1734014")
+  CLSID_IFsrmQuotaManager = "8bb68c7d-19d8-4ffb-809e-be4fc1734014"
   struct IFsrmQuotaManager
     lpVtbl : IFsrmQuotaManagerVTbl*
   end
@@ -1054,6 +1094,8 @@ lib LibWin32
     is_affected_by_quota : Proc(IFsrmQuotaManagerEx*, UInt8*, FsrmEnumOptions, Int16*, HRESULT)
   end
 
+  IFsrmQuotaManagerEx_GUID = LibC::GUID.new("4846cb01-d430-494f-abb4-b1054999fb09")
+  CLSID_IFsrmQuotaManagerEx = "4846cb01-d430-494f-abb4-b1054999fb09"
   struct IFsrmQuotaManagerEx
     lpVtbl : IFsrmQuotaManagerExVTbl*
   end
@@ -1087,6 +1129,8 @@ lib LibWin32
     commit_and_update_derived : Proc(IFsrmQuotaTemplate*, FsrmCommitOptions, FsrmTemplateApplyOptions, IFsrmDerivedObjectsResult*, HRESULT)
   end
 
+  IFsrmQuotaTemplate_GUID = LibC::GUID.new("a2efab31-295e-46bb-b976-e86d58b52e8b")
+  CLSID_IFsrmQuotaTemplate = "a2efab31-295e-46bb-b976-e86d58b52e8b"
   struct IFsrmQuotaTemplate
     lpVtbl : IFsrmQuotaTemplateVTbl*
   end
@@ -1122,6 +1166,8 @@ lib LibWin32
     put_overwrite_on_commit : Proc(IFsrmQuotaTemplateImported*, Int16, HRESULT)
   end
 
+  IFsrmQuotaTemplateImported_GUID = LibC::GUID.new("9a2bf113-a329-44cc-809a-5c00fce8da40")
+  CLSID_IFsrmQuotaTemplateImported = "9a2bf113-a329-44cc-809a-5c00fce8da40"
   struct IFsrmQuotaTemplateImported
     lpVtbl : IFsrmQuotaTemplateImportedVTbl*
   end
@@ -1141,6 +1187,8 @@ lib LibWin32
     import_templates : Proc(IFsrmQuotaTemplateManager*, UInt8*, VARIANT*, IFsrmCommittableCollection*, HRESULT)
   end
 
+  IFsrmQuotaTemplateManager_GUID = LibC::GUID.new("4173ac41-172d-4d52-963c-fdc7e415f717")
+  CLSID_IFsrmQuotaTemplateManager = "4173ac41-172d-4d52-963c-fdc7e415f717"
   struct IFsrmQuotaTemplateManager
     lpVtbl : IFsrmQuotaTemplateManagerVTbl*
   end
@@ -1166,6 +1214,8 @@ lib LibWin32
     put_non_members : Proc(IFsrmFileGroup*, IFsrmMutableCollection, HRESULT)
   end
 
+  IFsrmFileGroup_GUID = LibC::GUID.new("8dd04909-0e34-4d55-afaa-89e1f1a1bbb9")
+  CLSID_IFsrmFileGroup = "8dd04909-0e34-4d55-afaa-89e1f1a1bbb9"
   struct IFsrmFileGroup
     lpVtbl : IFsrmFileGroupVTbl*
   end
@@ -1193,6 +1243,8 @@ lib LibWin32
     put_overwrite_on_commit : Proc(IFsrmFileGroupImported*, Int16, HRESULT)
   end
 
+  IFsrmFileGroupImported_GUID = LibC::GUID.new("ad55f10b-5f11-4be7-94ef-d9ee2e470ded")
+  CLSID_IFsrmFileGroupImported = "ad55f10b-5f11-4be7-94ef-d9ee2e470ded"
   struct IFsrmFileGroupImported
     lpVtbl : IFsrmFileGroupImportedVTbl*
   end
@@ -1212,6 +1264,8 @@ lib LibWin32
     import_file_groups : Proc(IFsrmFileGroupManager*, UInt8*, VARIANT*, IFsrmCommittableCollection*, HRESULT)
   end
 
+  IFsrmFileGroupManager_GUID = LibC::GUID.new("426677d5-018c-485c-8a51-20b86d00bdc4")
+  CLSID_IFsrmFileGroupManager = "426677d5-018c-485c-8a51-20b86d00bdc4"
   struct IFsrmFileGroupManager
     lpVtbl : IFsrmFileGroupManagerVTbl*
   end
@@ -1237,6 +1291,8 @@ lib LibWin32
     enum_actions : Proc(IFsrmFileScreenBase*, IFsrmCollection*, HRESULT)
   end
 
+  IFsrmFileScreenBase_GUID = LibC::GUID.new("f3637e80-5b22-4a2b-a637-bbb642b41cfc")
+  CLSID_IFsrmFileScreenBase = "f3637e80-5b22-4a2b-a637-bbb642b41cfc"
   struct IFsrmFileScreenBase
     lpVtbl : IFsrmFileScreenBaseVTbl*
   end
@@ -1268,6 +1324,8 @@ lib LibWin32
     apply_template : Proc(IFsrmFileScreen*, UInt8*, HRESULT)
   end
 
+  IFsrmFileScreen_GUID = LibC::GUID.new("5f6325d3-ce88-4733-84c1-2d6aefc5ea07")
+  CLSID_IFsrmFileScreen = "5f6325d3-ce88-4733-84c1-2d6aefc5ea07"
   struct IFsrmFileScreen
     lpVtbl : IFsrmFileScreenVTbl*
   end
@@ -1290,6 +1348,8 @@ lib LibWin32
     put_allowed_file_groups : Proc(IFsrmFileScreenException*, IFsrmMutableCollection, HRESULT)
   end
 
+  IFsrmFileScreenException_GUID = LibC::GUID.new("bee7ce02-df77-4515-9389-78f01c5afc1a")
+  CLSID_IFsrmFileScreenException = "bee7ce02-df77-4515-9389-78f01c5afc1a"
   struct IFsrmFileScreenException
     lpVtbl : IFsrmFileScreenExceptionVTbl*
   end
@@ -1313,6 +1373,8 @@ lib LibWin32
     create_file_screen_collection : Proc(IFsrmFileScreenManager*, IFsrmCommittableCollection*, HRESULT)
   end
 
+  IFsrmFileScreenManager_GUID = LibC::GUID.new("ff4fa04e-5a94-4bda-a3a0-d5b4d3c52eba")
+  CLSID_IFsrmFileScreenManager = "ff4fa04e-5a94-4bda-a3a0-d5b4d3c52eba"
   struct IFsrmFileScreenManager
     lpVtbl : IFsrmFileScreenManagerVTbl*
   end
@@ -1342,6 +1404,8 @@ lib LibWin32
     commit_and_update_derived : Proc(IFsrmFileScreenTemplate*, FsrmCommitOptions, FsrmTemplateApplyOptions, IFsrmDerivedObjectsResult*, HRESULT)
   end
 
+  IFsrmFileScreenTemplate_GUID = LibC::GUID.new("205bebf8-dd93-452a-95a6-32b566b35828")
+  CLSID_IFsrmFileScreenTemplate = "205bebf8-dd93-452a-95a6-32b566b35828"
   struct IFsrmFileScreenTemplate
     lpVtbl : IFsrmFileScreenTemplateVTbl*
   end
@@ -1373,6 +1437,8 @@ lib LibWin32
     put_overwrite_on_commit : Proc(IFsrmFileScreenTemplateImported*, Int16, HRESULT)
   end
 
+  IFsrmFileScreenTemplateImported_GUID = LibC::GUID.new("e1010359-3e5d-4ecd-9fe4-ef48622fdf30")
+  CLSID_IFsrmFileScreenTemplateImported = "e1010359-3e5d-4ecd-9fe4-ef48622fdf30"
   struct IFsrmFileScreenTemplateImported
     lpVtbl : IFsrmFileScreenTemplateImportedVTbl*
   end
@@ -1392,6 +1458,8 @@ lib LibWin32
     import_templates : Proc(IFsrmFileScreenTemplateManager*, UInt8*, VARIANT*, IFsrmCommittableCollection*, HRESULT)
   end
 
+  IFsrmFileScreenTemplateManager_GUID = LibC::GUID.new("cfe36cba-1949-4e74-a14f-f1d580ceaf13")
+  CLSID_IFsrmFileScreenTemplateManager = "cfe36cba-1949-4e74-a14f-f1d580ceaf13"
   struct IFsrmFileScreenTemplateManager
     lpVtbl : IFsrmFileScreenTemplateManagerVTbl*
   end
@@ -1416,6 +1484,8 @@ lib LibWin32
     set_report_size_limit : Proc(IFsrmReportManager*, FsrmReportLimit, VARIANT, HRESULT)
   end
 
+  IFsrmReportManager_GUID = LibC::GUID.new("27b899fe-6ffa-4481-a184-d3daade8a02b")
+  CLSID_IFsrmReportManager = "27b899fe-6ffa-4481-a184-d3daade8a02b"
   struct IFsrmReportManager
     lpVtbl : IFsrmReportManagerVTbl*
   end
@@ -1452,6 +1522,8 @@ lib LibWin32
     cancel : Proc(IFsrmReportJob*, HRESULT)
   end
 
+  IFsrmReportJob_GUID = LibC::GUID.new("38e87280-715c-4c7d-a280-ea1651a19fef")
+  CLSID_IFsrmReportJob = "38e87280-715c-4c7d-a280-ea1651a19fef"
   struct IFsrmReportJob
     lpVtbl : IFsrmReportJobVTbl*
   end
@@ -1475,6 +1547,8 @@ lib LibWin32
     delete : Proc(IFsrmReport*, HRESULT)
   end
 
+  IFsrmReport_GUID = LibC::GUID.new("d8cc81d9-46b8-4fa4-bfa5-4aa9dec9b638")
+  CLSID_IFsrmReport = "d8cc81d9-46b8-4fa4-bfa5-4aa9dec9b638"
   struct IFsrmReport
     lpVtbl : IFsrmReportVTbl*
   end
@@ -1493,6 +1567,8 @@ lib LibWin32
     delete_schedule_task : Proc(IFsrmReportScheduler*, UInt8*, HRESULT)
   end
 
+  IFsrmReportScheduler_GUID = LibC::GUID.new("6879caf9-6617-4484-8719-71c3d8645f94")
+  CLSID_IFsrmReportScheduler = "6879caf9-6617-4484-8719-71c3d8645f94"
   struct IFsrmReportScheduler
     lpVtbl : IFsrmReportSchedulerVTbl*
   end
@@ -1512,6 +1588,8 @@ lib LibWin32
     get_file_management_job : Proc(IFsrmFileManagementJobManager*, UInt8*, IFsrmFileManagementJob*, HRESULT)
   end
 
+  IFsrmFileManagementJobManager_GUID = LibC::GUID.new("ee321ecb-d95e-48e9-907c-c7685a013235")
+  CLSID_IFsrmFileManagementJobManager = "ee321ecb-d95e-48e9-907c-c7685a013235"
   struct IFsrmFileManagementJobManager
     lpVtbl : IFsrmFileManagementJobManagerVTbl*
   end
@@ -1580,6 +1658,8 @@ lib LibWin32
     create_custom_action : Proc(IFsrmFileManagementJob*, IFsrmActionCommand*, HRESULT)
   end
 
+  IFsrmFileManagementJob_GUID = LibC::GUID.new("0770687e-9f36-4d6f-8778-599d188461c9")
+  CLSID_IFsrmFileManagementJob = "0770687e-9f36-4d6f-8778-599d188461c9"
   struct IFsrmFileManagementJob
     lpVtbl : IFsrmFileManagementJobVTbl*
   end
@@ -1601,6 +1681,8 @@ lib LibWin32
     delete : Proc(IFsrmPropertyCondition*, HRESULT)
   end
 
+  IFsrmPropertyCondition_GUID = LibC::GUID.new("326af66f-2ac0-4f68-bf8c-4759f054fa29")
+  CLSID_IFsrmPropertyCondition = "326af66f-2ac0-4f68-bf8c-4759f054fa29"
   struct IFsrmPropertyCondition
     lpVtbl : IFsrmPropertyConditionVTbl*
   end
@@ -1617,6 +1699,8 @@ lib LibWin32
     delete : Proc(IFsrmFileCondition*, HRESULT)
   end
 
+  IFsrmFileCondition_GUID = LibC::GUID.new("70684ffc-691a-4a1a-b922-97752e138cc1")
+  CLSID_IFsrmFileCondition = "70684ffc-691a-4a1a-b922-97752e138cc1"
   struct IFsrmFileCondition
     lpVtbl : IFsrmFileConditionVTbl*
   end
@@ -1643,6 +1727,8 @@ lib LibWin32
     put_value : Proc(IFsrmFileConditionProperty*, VARIANT, HRESULT)
   end
 
+  IFsrmFileConditionProperty_GUID = LibC::GUID.new("81926775-b981-4479-988f-da171d627360")
+  CLSID_IFsrmFileConditionProperty = "81926775-b981-4479-988f-da171d627360"
   struct IFsrmFileConditionProperty
     lpVtbl : IFsrmFileConditionPropertyVTbl*
   end
@@ -1672,6 +1758,8 @@ lib LibWin32
     put_parameters : Proc(IFsrmPropertyDefinition*, SAFEARRAY*, HRESULT)
   end
 
+  IFsrmPropertyDefinition_GUID = LibC::GUID.new("ede0150f-e9a3-419c-877c-01fe5d24c5d3")
+  CLSID_IFsrmPropertyDefinition = "ede0150f-e9a3-419c-877c-01fe5d24c5d3"
   struct IFsrmPropertyDefinition
     lpVtbl : IFsrmPropertyDefinitionVTbl*
   end
@@ -1706,6 +1794,8 @@ lib LibWin32
     get_value_definitions : Proc(IFsrmPropertyDefinition2*, IFsrmCollection*, HRESULT)
   end
 
+  IFsrmPropertyDefinition2_GUID = LibC::GUID.new("47782152-d16c-4229-b4e1-0ddfe308b9f6")
+  CLSID_IFsrmPropertyDefinition2 = "47782152-d16c-4229-b4e1-0ddfe308b9f6"
   struct IFsrmPropertyDefinition2
     lpVtbl : IFsrmPropertyDefinition2VTbl*
   end
@@ -1724,6 +1814,8 @@ lib LibWin32
     get_unique_id : Proc(IFsrmPropertyDefinitionValue*, UInt8**, HRESULT)
   end
 
+  IFsrmPropertyDefinitionValue_GUID = LibC::GUID.new("e946d148-bd67-4178-8e22-1c44925ed710")
+  CLSID_IFsrmPropertyDefinitionValue = "e946d148-bd67-4178-8e22-1c44925ed710"
   struct IFsrmPropertyDefinitionValue
     lpVtbl : IFsrmPropertyDefinitionValueVTbl*
   end
@@ -1742,6 +1834,8 @@ lib LibWin32
     get_property_flags : Proc(IFsrmProperty*, Int32*, HRESULT)
   end
 
+  IFsrmProperty_GUID = LibC::GUID.new("4a73fee4-4102-4fcc-9ffb-38614f9ee768")
+  CLSID_IFsrmProperty = "4a73fee4-4102-4fcc-9ffb-38614f9ee768"
   struct IFsrmProperty
     lpVtbl : IFsrmPropertyVTbl*
   end
@@ -1773,6 +1867,8 @@ lib LibWin32
     get_last_modified : Proc(IFsrmRule*, VARIANT*, HRESULT)
   end
 
+  IFsrmRule_GUID = LibC::GUID.new("cb0df960-16f5-4495-9079-3f9360d831df")
+  CLSID_IFsrmRule = "cb0df960-16f5-4495-9079-3f9360d831df"
   struct IFsrmRule
     lpVtbl : IFsrmRuleVTbl*
   end
@@ -1810,6 +1906,8 @@ lib LibWin32
     put_value : Proc(IFsrmClassificationRule*, UInt8*, HRESULT)
   end
 
+  IFsrmClassificationRule_GUID = LibC::GUID.new("afc052c2-5315-45ab-841b-c6db0e120148")
+  CLSID_IFsrmClassificationRule = "afc052c2-5315-45ab-841b-c6db0e120148"
   struct IFsrmClassificationRule
     lpVtbl : IFsrmClassificationRuleVTbl*
   end
@@ -1848,6 +1946,8 @@ lib LibWin32
     put_parameters : Proc(IFsrmPipelineModuleDefinition*, SAFEARRAY*, HRESULT)
   end
 
+  IFsrmPipelineModuleDefinition_GUID = LibC::GUID.new("515c1277-2c81-440e-8fcf-367921ed4f59")
+  CLSID_IFsrmPipelineModuleDefinition = "515c1277-2c81-440e-8fcf-367921ed4f59"
   struct IFsrmPipelineModuleDefinition
     lpVtbl : IFsrmPipelineModuleDefinitionVTbl*
   end
@@ -1892,6 +1992,8 @@ lib LibWin32
     put_needs_explicit_value : Proc(IFsrmClassifierModuleDefinition*, Int16, HRESULT)
   end
 
+  IFsrmClassifierModuleDefinition_GUID = LibC::GUID.new("bb36ea26-6318-4b8c-8592-f72dd602e7a5")
+  CLSID_IFsrmClassifierModuleDefinition = "bb36ea26-6318-4b8c-8592-f72dd602e7a5"
   struct IFsrmClassifierModuleDefinition
     lpVtbl : IFsrmClassifierModuleDefinitionVTbl*
   end
@@ -1936,6 +2038,8 @@ lib LibWin32
     put_updates_file_content : Proc(IFsrmStorageModuleDefinition*, Int16, HRESULT)
   end
 
+  IFsrmStorageModuleDefinition_GUID = LibC::GUID.new("15a81350-497d-4aba-80e9-d4dbcc5521fe")
+  CLSID_IFsrmStorageModuleDefinition = "15a81350-497d-4aba-80e9-d4dbcc5521fe"
   struct IFsrmStorageModuleDefinition
     lpVtbl : IFsrmStorageModuleDefinitionVTbl*
   end
@@ -1977,6 +2081,8 @@ lib LibWin32
     clear_file_property : Proc(IFsrmClassificationManager*, UInt8*, UInt8*, HRESULT)
   end
 
+  IFsrmClassificationManager_GUID = LibC::GUID.new("d2dc89da-ee91-48a0-85d8-cc72a56f7d04")
+  CLSID_IFsrmClassificationManager = "d2dc89da-ee91-48a0-85d8-cc72a56f7d04"
   struct IFsrmClassificationManager
     lpVtbl : IFsrmClassificationManagerVTbl*
   end
@@ -2019,6 +2125,8 @@ lib LibWin32
     classify_files : Proc(IFsrmClassificationManager2*, SAFEARRAY*, SAFEARRAY*, SAFEARRAY*, FsrmGetFilePropertyOptions, HRESULT)
   end
 
+  IFsrmClassificationManager2_GUID = LibC::GUID.new("0004c1c9-127e-4765-ba07-6a3147bca112")
+  CLSID_IFsrmClassificationManager2 = "0004c1c9-127e-4765-ba07-6a3147bca112"
   struct IFsrmClassificationManager2
     lpVtbl : IFsrmClassificationManager2VTbl*
   end
@@ -2054,6 +2162,8 @@ lib LibWin32
     get_file_stream_interface : Proc(IFsrmPropertyBag*, FsrmFileStreamingMode, FsrmFileStreamingInterfaceType, VARIANT*, HRESULT)
   end
 
+  IFsrmPropertyBag_GUID = LibC::GUID.new("774589d1-d300-4f7a-9a24-f7b766800250")
+  CLSID_IFsrmPropertyBag = "774589d1-d300-4f7a-9a24-f7b766800250"
   struct IFsrmPropertyBag
     lpVtbl : IFsrmPropertyBagVTbl*
   end
@@ -2091,6 +2201,8 @@ lib LibWin32
     get_untrusted_in_file_properties : Proc(IFsrmPropertyBag2*, IFsrmCollection*, HRESULT)
   end
 
+  IFsrmPropertyBag2_GUID = LibC::GUID.new("0e46bdbd-2402-4fed-9c30-9266e6eb2cc9")
+  CLSID_IFsrmPropertyBag2 = "0e46bdbd-2402-4fed-9c30-9266e6eb2cc9"
   struct IFsrmPropertyBag2
     lpVtbl : IFsrmPropertyBag2VTbl*
   end
@@ -2107,6 +2219,8 @@ lib LibWin32
     on_unload : Proc(IFsrmPipelineModuleImplementation*, HRESULT)
   end
 
+  IFsrmPipelineModuleImplementation_GUID = LibC::GUID.new("b7907906-2b02-4cb5-84a9-fdf54613d6cd")
+  CLSID_IFsrmPipelineModuleImplementation = "b7907906-2b02-4cb5-84a9-fdf54613d6cd"
   struct IFsrmPipelineModuleImplementation
     lpVtbl : IFsrmPipelineModuleImplementationVTbl*
   end
@@ -2129,6 +2243,8 @@ lib LibWin32
     on_end_file : Proc(IFsrmClassifierModuleImplementation*, HRESULT)
   end
 
+  IFsrmClassifierModuleImplementation_GUID = LibC::GUID.new("4c968fc6-6edb-4051-9c18-73b7291ae106")
+  CLSID_IFsrmClassifierModuleImplementation = "4c968fc6-6edb-4051-9c18-73b7291ae106"
   struct IFsrmClassifierModuleImplementation
     lpVtbl : IFsrmClassifierModuleImplementationVTbl*
   end
@@ -2148,6 +2264,8 @@ lib LibWin32
     save_properties : Proc(IFsrmStorageModuleImplementation*, IFsrmPropertyBag, HRESULT)
   end
 
+  IFsrmStorageModuleImplementation_GUID = LibC::GUID.new("0af4a0da-895a-4e50-8712-a96724bcec64")
+  CLSID_IFsrmStorageModuleImplementation = "0af4a0da-895a-4e50-8712-a96724bcec64"
   struct IFsrmStorageModuleImplementation
     lpVtbl : IFsrmStorageModuleImplementationVTbl*
   end
@@ -2167,6 +2285,8 @@ lib LibWin32
     bind : Proc(IFsrmPipelineModuleConnector*, IFsrmPipelineModuleDefinition, IFsrmPipelineModuleImplementation, HRESULT)
   end
 
+  IFsrmPipelineModuleConnector_GUID = LibC::GUID.new("c16014f3-9aa1-46b3-b0a7-ab146eb205f2")
+  CLSID_IFsrmPipelineModuleConnector = "c16014f3-9aa1-46b3-b0a7-ab146eb205f2"
   struct IFsrmPipelineModuleConnector
     lpVtbl : IFsrmPipelineModuleConnectorVTbl*
   end
@@ -2181,6 +2301,8 @@ lib LibWin32
     invoke : Proc(DIFsrmClassificationEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DIFsrmClassificationEvents_GUID = LibC::GUID.new("26942db0-dabf-41d8-bbdd-b129a9f70424")
+  CLSID_DIFsrmClassificationEvents = "26942db0-dabf-41d8-bbdd-b129a9f70424"
   struct DIFsrmClassificationEvents
     lpVtbl : DIFsrmClassificationEventsVTbl*
   end

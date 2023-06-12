@@ -681,6 +681,8 @@ lib LibWin32
     get_value : Proc(ILocationReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
+  ILocationReport_GUID = LibC::GUID.new("c8b7f7ee-75d0-4db9-b62d-7a0f369ca456")
+  CLSID_ILocationReport = "c8b7f7ee-75d0-4db9-b62d-7a0f369ca456"
   struct ILocationReport
     lpVtbl : ILocationReportVTbl*
   end
@@ -699,6 +701,8 @@ lib LibWin32
     get_altitude_error : Proc(ILatLongReport*, Float64*, HRESULT)
   end
 
+  ILatLongReport_GUID = LibC::GUID.new("7fed806d-0ef8-4f07-80ac-36a0beae3134")
+  CLSID_ILatLongReport = "7fed806d-0ef8-4f07-80ac-36a0beae3134"
   struct ILatLongReport
     lpVtbl : ILatLongReportVTbl*
   end
@@ -719,6 +723,8 @@ lib LibWin32
     get_detail_level : Proc(ICivicAddressReport*, UInt32*, HRESULT)
   end
 
+  ICivicAddressReport_GUID = LibC::GUID.new("c0b19f70-4adf-445d-87f2-cad8fd711792")
+  CLSID_ICivicAddressReport = "c0b19f70-4adf-445d-87f2-cad8fd711792"
   struct ICivicAddressReport
     lpVtbl : ICivicAddressReportVTbl*
   end
@@ -738,6 +744,8 @@ lib LibWin32
     request_permissions : Proc(ILocation*, LibC::HANDLE, Guid*, UInt32, LibC::BOOL, HRESULT)
   end
 
+  ILocation_GUID = LibC::GUID.new("ab2ece69-56d9-4f28-b525-de1b0ee44237")
+  CLSID_ILocation = "ab2ece69-56d9-4f28-b525-de1b0ee44237"
   struct ILocation
     lpVtbl : ILocationVTbl*
   end
@@ -750,6 +758,8 @@ lib LibWin32
     disconnect : Proc(ILocationPower*, HRESULT)
   end
 
+  ILocationPower_GUID = LibC::GUID.new("193e7729-ab6b-4b12-8617-7596e1bb191c")
+  CLSID_ILocationPower = "193e7729-ab6b-4b12-8617-7596e1bb191c"
   struct ILocationPower
     lpVtbl : ILocationPowerVTbl*
   end
@@ -762,6 +772,8 @@ lib LibWin32
     get_report : Proc(IDefaultLocation*, Guid*, ILocationReport*, HRESULT)
   end
 
+  IDefaultLocation_GUID = LibC::GUID.new("a65af77e-969a-4a2e-8aca-33bb7cbb1235")
+  CLSID_IDefaultLocation = "a65af77e-969a-4a2e-8aca-33bb7cbb1235"
   struct IDefaultLocation
     lpVtbl : IDefaultLocationVTbl*
   end
@@ -774,6 +786,8 @@ lib LibWin32
     on_status_changed : Proc(ILocationEvents*, Guid*, LOCATION_REPORT_STATUS, HRESULT)
   end
 
+  ILocationEvents_GUID = LibC::GUID.new("cae02bbf-798b-4508-a207-35a7906dc73d")
+  CLSID_ILocationEvents = "cae02bbf-798b-4508-a207-35a7906dc73d"
   struct ILocationEvents
     lpVtbl : ILocationEventsVTbl*
   end
@@ -794,6 +808,8 @@ lib LibWin32
     get_timestamp : Proc(IDispLatLongReport*, Float64*, HRESULT)
   end
 
+  IDispLatLongReport_GUID = LibC::GUID.new("8ae32723-389b-4a11-9957-5bdd48fc9617")
+  CLSID_IDispLatLongReport = "8ae32723-389b-4a11-9957-5bdd48fc9617"
   struct IDispLatLongReport
     lpVtbl : IDispLatLongReportVTbl*
   end
@@ -816,6 +832,8 @@ lib LibWin32
     get_timestamp : Proc(IDispCivicAddressReport*, Float64*, HRESULT)
   end
 
+  IDispCivicAddressReport_GUID = LibC::GUID.new("16ff1a34-9e30-42c3-b44d-e22513b5767a")
+  CLSID_IDispCivicAddressReport = "16ff1a34-9e30-42c3-b44d-e22513b5767a"
   struct IDispCivicAddressReport
     lpVtbl : IDispCivicAddressReportVTbl*
   end
@@ -838,6 +856,8 @@ lib LibWin32
     request_permissions : Proc(ILocationReportFactory*, UInt32*, HRESULT)
   end
 
+  ILocationReportFactory_GUID = LibC::GUID.new("2daec322-90b2-47e4-bb08-0da841935a6b")
+  CLSID_ILocationReportFactory = "2daec322-90b2-47e4-bb08-0da841935a6b"
   struct ILocationReportFactory
     lpVtbl : ILocationReportFactoryVTbl*
   end
@@ -861,6 +881,8 @@ lib LibWin32
     get_lat_long_report : Proc(ILatLongReportFactory*, IDispLatLongReport*, HRESULT)
   end
 
+  ILatLongReportFactory_GUID = LibC::GUID.new("3f0804cb-b114-447d-83dd-390174ebb082")
+  CLSID_ILatLongReportFactory = "3f0804cb-b114-447d-83dd-390174ebb082"
   struct ILatLongReportFactory
     lpVtbl : ILatLongReportFactoryVTbl*
   end
@@ -884,6 +906,8 @@ lib LibWin32
     get_civic_address_report : Proc(ICivicAddressReportFactory*, IDispCivicAddressReport*, HRESULT)
   end
 
+  ICivicAddressReportFactory_GUID = LibC::GUID.new("bf773b93-c64f-4bee-beb2-67c0b8df66e0")
+  CLSID_ICivicAddressReportFactory = "bf773b93-c64f-4bee-beb2-67c0b8df66e0"
   struct ICivicAddressReportFactory
     lpVtbl : ICivicAddressReportFactoryVTbl*
   end
@@ -898,6 +922,8 @@ lib LibWin32
     invoke : Proc(IILatLongReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IILatLongReportFactoryEvents_GUID = LibC::GUID.new("16ee6cb7-ab3c-424b-849f-269be551fcbc")
+  CLSID_IILatLongReportFactoryEvents = "16ee6cb7-ab3c-424b-849f-269be551fcbc"
   struct IILatLongReportFactoryEvents
     lpVtbl : IILatLongReportFactoryEventsVTbl*
   end
@@ -912,6 +938,8 @@ lib LibWin32
     invoke : Proc(IICivicAddressReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IICivicAddressReportFactoryEvents_GUID = LibC::GUID.new("c96039ff-72ec-4617-89bd-84d88bedc722")
+  CLSID_IICivicAddressReportFactoryEvents = "c96039ff-72ec-4617-89bd-84d88bedc722"
   struct IICivicAddressReportFactoryEvents
     lpVtbl : IICivicAddressReportFactoryEventsVTbl*
   end

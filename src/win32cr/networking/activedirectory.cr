@@ -1872,6 +1872,8 @@ lib LibWin32
     add_pages : Proc(IQueryForm*, LPCQADDPAGESPROC, LPARAM, HRESULT)
   end
 
+  IQueryForm_GUID = LibC::GUID.new("8cfcee30-39bd-11d0-b8d1-00a024ab2dbb")
+  CLSID_IQueryForm = "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb"
   struct IQueryForm
     lpVtbl : IQueryFormVTbl*
   end
@@ -1890,6 +1892,8 @@ lib LibWin32
     clear : Proc(IPersistQuery*, HRESULT)
   end
 
+  IPersistQuery_GUID = LibC::GUID.new("1a3114b8-a62e-11d0-a6c5-00a0c906af45")
+  CLSID_IPersistQuery = "1a3114b8-a62e-11d0-a6c5-00a0c906af45"
   struct IPersistQuery
     lpVtbl : IPersistQueryVTbl*
   end
@@ -1901,6 +1905,8 @@ lib LibWin32
     open_query_window : Proc(ICommonQuery*, LibC::HANDLE, OPENQUERYWINDOW*, IDataObject*, HRESULT)
   end
 
+  ICommonQuery_GUID = LibC::GUID.new("ab50dec0-6f1d-11d0-a1c4-00aa00c16e65")
+  CLSID_ICommonQuery = "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65"
   struct ICommonQuery
     lpVtbl : ICommonQueryVTbl*
   end
@@ -1928,6 +1934,8 @@ lib LibWin32
     get_info_ex : Proc(IADs*, VARIANT, Int32, HRESULT)
   end
 
+  IADs_GUID = LibC::GUID.new("fd8256d0-fd15-11ce-abc4-02608c9e7553")
+  CLSID_IADs = "fd8256d0-fd15-11ce-abc4-02608c9e7553"
   struct IADs
     lpVtbl : IADsVTbl*
   end
@@ -1953,6 +1961,8 @@ lib LibWin32
     move_here : Proc(IADsContainer*, UInt8*, UInt8*, IDispatch*, HRESULT)
   end
 
+  IADsContainer_GUID = LibC::GUID.new("001677d0-fd16-11ce-abc4-02608c9e7553")
+  CLSID_IADsContainer = "001677d0-fd16-11ce-abc4-02608c9e7553"
   struct IADsContainer
     lpVtbl : IADsContainerVTbl*
   end
@@ -1971,6 +1981,8 @@ lib LibWin32
     get_object : Proc(IADsCollection*, UInt8*, VARIANT*, HRESULT)
   end
 
+  IADsCollection_GUID = LibC::GUID.new("72b945e0-253b-11cf-a988-00aa006bc149")
+  CLSID_IADsCollection = "72b945e0-253b-11cf-a988-00aa006bc149"
   struct IADsCollection
     lpVtbl : IADsCollectionVTbl*
   end
@@ -1989,6 +2001,8 @@ lib LibWin32
     put_filter : Proc(IADsMembers*, VARIANT, HRESULT)
   end
 
+  IADsMembers_GUID = LibC::GUID.new("451a0030-72ec-11cf-b03b-00aa006e0975")
+  CLSID_IADsMembers = "451a0030-72ec-11cf-b03b-00aa006e0975"
   struct IADsMembers
     lpVtbl : IADsMembersVTbl*
   end
@@ -2012,6 +2026,8 @@ lib LibWin32
     purge_property_list : Proc(IADsPropertyList*, HRESULT)
   end
 
+  IADsPropertyList_GUID = LibC::GUID.new("c6f602b6-8f69-11d0-8528-00c04fd8d503")
+  CLSID_IADsPropertyList = "c6f602b6-8f69-11d0-8528-00c04fd8d503"
   struct IADsPropertyList
     lpVtbl : IADsPropertyListVTbl*
   end
@@ -2035,6 +2051,8 @@ lib LibWin32
     put_values : Proc(IADsPropertyEntry*, VARIANT, HRESULT)
   end
 
+  IADsPropertyEntry_GUID = LibC::GUID.new("05792c8e-941f-11d0-8529-00c04fd8d503")
+  CLSID_IADsPropertyEntry = "05792c8e-941f-11d0-8529-00c04fd8d503"
   struct IADsPropertyEntry
     lpVtbl : IADsPropertyEntryVTbl*
   end
@@ -2074,6 +2092,8 @@ lib LibWin32
     put_utc_time : Proc(IADsPropertyValue*, Float64, HRESULT)
   end
 
+  IADsPropertyValue_GUID = LibC::GUID.new("79fa9ad0-a97c-11d0-8534-00c04fd8d503")
+  CLSID_IADsPropertyValue = "79fa9ad0-a97c-11d0-8534-00c04fd8d503"
   struct IADsPropertyValue
     lpVtbl : IADsPropertyValueVTbl*
   end
@@ -2090,6 +2110,8 @@ lib LibWin32
     put_object_property : Proc(IADsPropertyValue2*, Int32, VARIANT, HRESULT)
   end
 
+  IADsPropertyValue2_GUID = LibC::GUID.new("306e831c-5bc7-11d1-a3b8-00c04fb950dc")
+  CLSID_IADsPropertyValue2 = "306e831c-5bc7-11d1-a3b8-00c04fb950dc"
   struct IADsPropertyValue2
     lpVtbl : IADsPropertyValue2VTbl*
   end
@@ -2105,6 +2127,8 @@ lib LibWin32
     adsi_invoke : Proc(IPrivateDispatch*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IPrivateDispatch_GUID = LibC::GUID.new("86ab4bbe-65f6-11d1-8c13-00c04fd8d503")
+  CLSID_IPrivateDispatch = "86ab4bbe-65f6-11d1-8c13-00c04fd8d503"
   struct IPrivateDispatch
     lpVtbl : IPrivateDispatchVTbl*
   end
@@ -2117,6 +2141,8 @@ lib LibWin32
     adsi_release_object : Proc(IPrivateUnknown*, HRESULT)
   end
 
+  IPrivateUnknown_GUID = LibC::GUID.new("89126bab-6ead-11d1-8c18-00c04fd8d503")
+  CLSID_IPrivateUnknown = "89126bab-6ead-11d1-8c18-00c04fd8d503"
   struct IPrivateUnknown
     lpVtbl : IPrivateUnknownVTbl*
   end
@@ -2130,6 +2156,8 @@ lib LibWin32
     private_invoke : Proc(IADsExtension*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IADsExtension_GUID = LibC::GUID.new("3d35553c-d2b0-11d1-b17b-0000f87593a0")
+  CLSID_IADsExtension = "3d35553c-d2b0-11d1-b17b-0000f87593a0"
   struct IADsExtension
     lpVtbl : IADsExtensionVTbl*
   end
@@ -2145,6 +2173,8 @@ lib LibWin32
     delete_object : Proc(IADsDeleteOps*, Int32, HRESULT)
   end
 
+  IADsDeleteOps_GUID = LibC::GUID.new("b2bd0902-8878-11d1-8c21-00c04fd8d503")
+  CLSID_IADsDeleteOps = "b2bd0902-8878-11d1-8c21-00c04fd8d503"
   struct IADsDeleteOps
     lpVtbl : IADsDeleteOpsVTbl*
   end
@@ -2174,6 +2204,8 @@ lib LibWin32
     put_default_container : Proc(IADsNamespaces*, UInt8*, HRESULT)
   end
 
+  IADsNamespaces_GUID = LibC::GUID.new("28b96ba0-b330-11cf-a9ad-00aa006bc149")
+  CLSID_IADsNamespaces = "28b96ba0-b330-11cf-a9ad-00aa006bc149"
   struct IADsNamespaces
     lpVtbl : IADsNamespacesVTbl*
   end
@@ -2231,6 +2263,8 @@ lib LibWin32
     qualifiers : Proc(IADsClass*, IADsCollection*, HRESULT)
   end
 
+  IADsClass_GUID = LibC::GUID.new("c8f93dd0-4ae0-11cf-9e73-00aa004a5691")
+  CLSID_IADsClass = "c8f93dd0-4ae0-11cf-9e73-00aa004a5691"
   struct IADsClass
     lpVtbl : IADsClassVTbl*
   end
@@ -2269,6 +2303,8 @@ lib LibWin32
     qualifiers : Proc(IADsProperty*, IADsCollection*, HRESULT)
   end
 
+  IADsProperty_GUID = LibC::GUID.new("c8f93dd3-4ae0-11cf-9e73-00aa004a5691")
+  CLSID_IADsProperty = "c8f93dd3-4ae0-11cf-9e73-00aa004a5691"
   struct IADsProperty
     lpVtbl : IADsPropertyVTbl*
   end
@@ -2298,6 +2334,8 @@ lib LibWin32
     put_ole_auto_data_type : Proc(IADsSyntax*, Int32, HRESULT)
   end
 
+  IADsSyntax_GUID = LibC::GUID.new("c8f93dd2-4ae0-11cf-9e73-00aa004a5691")
+  CLSID_IADsSyntax = "c8f93dd2-4ae0-11cf-9e73-00aa004a5691"
   struct IADsSyntax
     lpVtbl : IADsSyntaxVTbl*
   end
@@ -2333,6 +2371,8 @@ lib LibWin32
     put_see_also : Proc(IADsLocality*, VARIANT, HRESULT)
   end
 
+  IADsLocality_GUID = LibC::GUID.new("a05e03a2-effe-11cf-8abc-00c04fd8d503")
+  CLSID_IADsLocality = "a05e03a2-effe-11cf-8abc-00c04fd8d503"
   struct IADsLocality
     lpVtbl : IADsLocalityVTbl*
   end
@@ -2372,6 +2412,8 @@ lib LibWin32
     put_see_also : Proc(IADsO*, VARIANT, HRESULT)
   end
 
+  IADsO_GUID = LibC::GUID.new("a1cd2dc6-effe-11cf-8abc-00c04fd8d503")
+  CLSID_IADsO = "a1cd2dc6-effe-11cf-8abc-00c04fd8d503"
   struct IADsO
     lpVtbl : IADsOVTbl*
   end
@@ -2413,6 +2455,8 @@ lib LibWin32
     put_business_category : Proc(IADsOU*, UInt8*, HRESULT)
   end
 
+  IADsOU_GUID = LibC::GUID.new("a2f733b8-effe-11cf-8abc-00c04fd8d503")
+  CLSID_IADsOU = "a2f733b8-effe-11cf-8abc-00c04fd8d503"
   struct IADsOU
     lpVtbl : IADsOUVTbl*
   end
@@ -2457,6 +2501,8 @@ lib LibWin32
     put_lockout_observation_interval : Proc(IADsDomain*, Int32, HRESULT)
   end
 
+  IADsDomain_GUID = LibC::GUID.new("00e4c220-fd16-11ce-abc4-02608c9e7553")
+  CLSID_IADsDomain = "00e4c220-fd16-11ce-abc4-02608c9e7553"
   struct IADsDomain
     lpVtbl : IADsDomainVTbl*
   end
@@ -2516,6 +2562,8 @@ lib LibWin32
     put_net_addresses : Proc(IADsComputer*, VARIANT, HRESULT)
   end
 
+  IADsComputer_GUID = LibC::GUID.new("efe3cc70-1d9f-11cf-b1f3-02608c9e7553")
+  CLSID_IADsComputer = "efe3cc70-1d9f-11cf-b1f3-02608c9e7553"
   struct IADsComputer
     lpVtbl : IADsComputerVTbl*
   end
@@ -2545,6 +2593,8 @@ lib LibWin32
     shutdown : Proc(IADsComputerOperations*, Int16, HRESULT)
   end
 
+  IADsComputerOperations_GUID = LibC::GUID.new("ef497680-1d9f-11cf-b1f3-02608c9e7553")
+  CLSID_IADsComputerOperations = "ef497680-1d9f-11cf-b1f3-02608c9e7553"
   struct IADsComputerOperations
     lpVtbl : IADsComputerOperationsVTbl*
   end
@@ -2578,6 +2628,8 @@ lib LibWin32
     remove : Proc(IADsGroup*, UInt8*, HRESULT)
   end
 
+  IADsGroup_GUID = LibC::GUID.new("27636b00-410f-11cf-b1ff-02608c9e7553")
+  CLSID_IADsGroup = "27636b00-410f-11cf-b1ff-02608c9e7553"
   struct IADsGroup
     lpVtbl : IADsGroupVTbl*
   end
@@ -2696,6 +2748,8 @@ lib LibWin32
     change_password : Proc(IADsUser*, UInt8*, UInt8*, HRESULT)
   end
 
+  IADsUser_GUID = LibC::GUID.new("3e37e320-17e2-11cf-abc4-02608c9e7553")
+  CLSID_IADsUser = "3e37e320-17e2-11cf-abc4-02608c9e7553"
   struct IADsUser
     lpVtbl : IADsUserVTbl*
   end
@@ -2749,6 +2803,8 @@ lib LibWin32
     put_net_addresses : Proc(IADsPrintQueue*, VARIANT, HRESULT)
   end
 
+  IADsPrintQueue_GUID = LibC::GUID.new("b15160d0-1226-11cf-a985-00aa006bc149")
+  CLSID_IADsPrintQueue = "b15160d0-1226-11cf-a985-00aa006bc149"
   struct IADsPrintQueue
     lpVtbl : IADsPrintQueueVTbl*
   end
@@ -2781,6 +2837,8 @@ lib LibWin32
     purge : Proc(IADsPrintQueueOperations*, HRESULT)
   end
 
+  IADsPrintQueueOperations_GUID = LibC::GUID.new("124be5c0-156e-11cf-a986-00aa006bc149")
+  CLSID_IADsPrintQueueOperations = "124be5c0-156e-11cf-a986-00aa006bc149"
   struct IADsPrintQueueOperations
     lpVtbl : IADsPrintQueueOperationsVTbl*
   end
@@ -2826,6 +2884,8 @@ lib LibWin32
     put_notify_path : Proc(IADsPrintJob*, UInt8*, HRESULT)
   end
 
+  IADsPrintJob_GUID = LibC::GUID.new("32fb6780-1ed0-11cf-a988-00aa006bc149")
+  CLSID_IADsPrintJob = "32fb6780-1ed0-11cf-a988-00aa006bc149"
   struct IADsPrintJob
     lpVtbl : IADsPrintJobVTbl*
   end
@@ -2860,6 +2920,8 @@ lib LibWin32
     resume : Proc(IADsPrintJobOperations*, HRESULT)
   end
 
+  IADsPrintJobOperations_GUID = LibC::GUID.new("9a52db30-1ecf-11cf-a988-00aa006bc149")
+  CLSID_IADsPrintJobOperations = "9a52db30-1ecf-11cf-a988-00aa006bc149"
   struct IADsPrintJobOperations
     lpVtbl : IADsPrintJobOperationsVTbl*
   end
@@ -2911,6 +2973,8 @@ lib LibWin32
     put_dependencies : Proc(IADsService*, VARIANT, HRESULT)
   end
 
+  IADsService_GUID = LibC::GUID.new("68af66e0-31ca-11cf-a98a-00aa006bc149")
+  CLSID_IADsService = "68af66e0-31ca-11cf-a98a-00aa006bc149"
   struct IADsService
     lpVtbl : IADsServiceVTbl*
   end
@@ -2944,6 +3008,8 @@ lib LibWin32
     set_password : Proc(IADsServiceOperations*, UInt8*, HRESULT)
   end
 
+  IADsServiceOperations_GUID = LibC::GUID.new("5d7b33f0-31ca-11cf-a98a-00aa006bc149")
+  CLSID_IADsServiceOperations = "5d7b33f0-31ca-11cf-a98a-00aa006bc149"
   struct IADsServiceOperations
     lpVtbl : IADsServiceOperationsVTbl*
   end
@@ -2999,6 +3065,8 @@ lib LibWin32
     put_max_user_count : Proc(IADsFileService*, Int32, HRESULT)
   end
 
+  IADsFileService_GUID = LibC::GUID.new("a89d1900-31ca-11cf-a98a-00aa006bc149")
+  CLSID_IADsFileService = "a89d1900-31ca-11cf-a98a-00aa006bc149"
   struct IADsFileService
     lpVtbl : IADsFileServiceVTbl*
   end
@@ -3034,6 +3102,8 @@ lib LibWin32
     resources : Proc(IADsFileServiceOperations*, IADsCollection*, HRESULT)
   end
 
+  IADsFileServiceOperations_GUID = LibC::GUID.new("a02ded10-31ca-11cf-a98a-00aa006bc149")
+  CLSID_IADsFileServiceOperations = "a02ded10-31ca-11cf-a98a-00aa006bc149"
   struct IADsFileServiceOperations
     lpVtbl : IADsFileServiceOperationsVTbl*
   end
@@ -3070,6 +3140,8 @@ lib LibWin32
     put_max_user_count : Proc(IADsFileShare*, Int32, HRESULT)
   end
 
+  IADsFileShare_GUID = LibC::GUID.new("eb6dcaf0-4b83-11cf-a995-00aa006bc149")
+  CLSID_IADsFileShare = "eb6dcaf0-4b83-11cf-a995-00aa006bc149"
   struct IADsFileShare
     lpVtbl : IADsFileShareVTbl*
   end
@@ -3103,6 +3175,8 @@ lib LibWin32
     get_idle_time : Proc(IADsSession*, Int32*, HRESULT)
   end
 
+  IADsSession_GUID = LibC::GUID.new("398b7da0-4aab-11cf-ae2c-00aa006ebfb9")
+  CLSID_IADsSession = "398b7da0-4aab-11cf-ae2c-00aa006ebfb9"
   struct IADsSession
     lpVtbl : IADsSessionVTbl*
   end
@@ -3134,6 +3208,8 @@ lib LibWin32
     get_lock_count : Proc(IADsResource*, Int32*, HRESULT)
   end
 
+  IADsResource_GUID = LibC::GUID.new("34a05b20-4aab-11cf-ae2c-00aa006ebfb9")
+  CLSID_IADsResource = "34a05b20-4aab-11cf-ae2c-00aa006ebfb9"
   struct IADsResource
     lpVtbl : IADsResourceVTbl*
   end
@@ -3149,6 +3225,8 @@ lib LibWin32
     open_ds_object : Proc(IADsOpenDSObject*, UInt8*, UInt8*, UInt8*, Int32, IDispatch*, HRESULT)
   end
 
+  IADsOpenDSObject_GUID = LibC::GUID.new("ddf2891e-0f9c-11d0-8ad4-00c04fd8d503")
+  CLSID_IADsOpenDSObject = "ddf2891e-0f9c-11d0-8ad4-00c04fd8d503"
   struct IADsOpenDSObject
     lpVtbl : IADsOpenDSObjectVTbl*
   end
@@ -3164,6 +3242,8 @@ lib LibWin32
     delete_ds_object : Proc(IDirectoryObject*, LibC::LPWSTR, HRESULT)
   end
 
+  IDirectoryObject_GUID = LibC::GUID.new("e798de2c-22e4-11d0-84fe-00c04fd8d503")
+  CLSID_IDirectoryObject = "e798de2c-22e4-11d0-84fe-00c04fd8d503"
   struct IDirectoryObject
     lpVtbl : IDirectoryObjectVTbl*
   end
@@ -3184,6 +3264,8 @@ lib LibWin32
     close_search_handle : Proc(IDirectorySearch*, LibC::IntPtrT, HRESULT)
   end
 
+  IDirectorySearch_GUID = LibC::GUID.new("109ba8ec-92f0-11d0-a790-00c04fd8d5a8")
+  CLSID_IDirectorySearch = "109ba8ec-92f0-11d0-a790-00c04fd8d5a8"
   struct IDirectorySearch
     lpVtbl : IDirectorySearchVTbl*
   end
@@ -3202,6 +3284,8 @@ lib LibWin32
     delete_class_definition : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR, HRESULT)
   end
 
+  IDirectorySchemaMgmt_GUID = LibC::GUID.new("75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8")
+  CLSID_IDirectorySchemaMgmt = "75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8"
   struct IDirectorySchemaMgmt
     lpVtbl : IDirectorySchemaMgmtVTbl*
   end
@@ -3216,6 +3300,8 @@ lib LibWin32
     restore_interface : Proc(IADsAggregatee*, Guid*, HRESULT)
   end
 
+  IADsAggregatee_GUID = LibC::GUID.new("1346ce8c-9039-11d0-8528-00c04fd8d503")
+  CLSID_IADsAggregatee = "1346ce8c-9039-11d0-8528-00c04fd8d503"
   struct IADsAggregatee
     lpVtbl : IADsAggregateeVTbl*
   end
@@ -3228,6 +3314,8 @@ lib LibWin32
     disconnect_as_aggregator : Proc(IADsAggregator*, HRESULT)
   end
 
+  IADsAggregator_GUID = LibC::GUID.new("52db5fb0-941f-11d0-8529-00c04fd8d503")
+  CLSID_IADsAggregator = "52db5fb0-941f-11d0-8529-00c04fd8d503"
   struct IADsAggregator
     lpVtbl : IADsAggregatorVTbl*
   end
@@ -3256,6 +3344,8 @@ lib LibWin32
     put_trustee : Proc(IADsAccessControlEntry*, UInt8*, HRESULT)
   end
 
+  IADsAccessControlEntry_GUID = LibC::GUID.new("b4f3a14c-9bdd-11d0-852c-00c04fd8d503")
+  CLSID_IADsAccessControlEntry = "b4f3a14c-9bdd-11d0-852c-00c04fd8d503"
   struct IADsAccessControlEntry
     lpVtbl : IADsAccessControlEntryVTbl*
   end
@@ -3278,6 +3368,8 @@ lib LibWin32
     get__new_enum : Proc(IADsAccessControlList*, IUnknown*, HRESULT)
   end
 
+  IADsAccessControlList_GUID = LibC::GUID.new("b7ee91cc-9bdd-11d0-852c-00c04fd8d503")
+  CLSID_IADsAccessControlList = "b7ee91cc-9bdd-11d0-852c-00c04fd8d503"
   struct IADsAccessControlList
     lpVtbl : IADsAccessControlListVTbl*
   end
@@ -3313,6 +3405,8 @@ lib LibWin32
     copy_security_descriptor : Proc(IADsSecurityDescriptor*, IDispatch*, HRESULT)
   end
 
+  IADsSecurityDescriptor_GUID = LibC::GUID.new("b8c787ca-9bdd-11d0-852c-00c04fd8d503")
+  CLSID_IADsSecurityDescriptor = "b8c787ca-9bdd-11d0-852c-00c04fd8d503"
   struct IADsSecurityDescriptor
     lpVtbl : IADsSecurityDescriptorVTbl*
   end
@@ -3331,6 +3425,8 @@ lib LibWin32
     put_low_part : Proc(IADsLargeInteger*, Int32, HRESULT)
   end
 
+  IADsLargeInteger_GUID = LibC::GUID.new("9068270b-0939-11d1-8be1-00c04fd8d503")
+  CLSID_IADsLargeInteger = "9068270b-0939-11d1-8be1-00c04fd8d503"
   struct IADsLargeInteger
     lpVtbl : IADsLargeIntegerVTbl*
   end
@@ -3352,6 +3448,8 @@ lib LibWin32
     get_ex : Proc(IADsNameTranslate*, Int32, VARIANT*, HRESULT)
   end
 
+  IADsNameTranslate_GUID = LibC::GUID.new("b1b272a3-3625-11d1-a3a4-00c04fb950dc")
+  CLSID_IADsNameTranslate = "b1b272a3-3625-11d1-a3a4-00c04fb950dc"
   struct IADsNameTranslate
     lpVtbl : IADsNameTranslateVTbl*
   end
@@ -3368,6 +3466,8 @@ lib LibWin32
     put_case_ignore_list : Proc(IADsCaseIgnoreList*, VARIANT, HRESULT)
   end
 
+  IADsCaseIgnoreList_GUID = LibC::GUID.new("7b66b533-4680-11d1-a3b4-00c04fb950dc")
+  CLSID_IADsCaseIgnoreList = "7b66b533-4680-11d1-a3b4-00c04fb950dc"
   struct IADsCaseIgnoreList
     lpVtbl : IADsCaseIgnoreListVTbl*
   end
@@ -3386,6 +3486,8 @@ lib LibWin32
     put_parameters : Proc(IADsFaxNumber*, VARIANT, HRESULT)
   end
 
+  IADsFaxNumber_GUID = LibC::GUID.new("a910dea9-4680-11d1-a3b4-00c04fb950dc")
+  CLSID_IADsFaxNumber = "a910dea9-4680-11d1-a3b4-00c04fb950dc"
   struct IADsFaxNumber
     lpVtbl : IADsFaxNumberVTbl*
   end
@@ -3404,6 +3506,8 @@ lib LibWin32
     put_address : Proc(IADsNetAddress*, VARIANT, HRESULT)
   end
 
+  IADsNetAddress_GUID = LibC::GUID.new("b21a50a9-4080-11d1-a3ac-00c04fb950dc")
+  CLSID_IADsNetAddress = "b21a50a9-4080-11d1-a3ac-00c04fb950dc"
   struct IADsNetAddress
     lpVtbl : IADsNetAddressVTbl*
   end
@@ -3420,6 +3524,8 @@ lib LibWin32
     put_octet_list : Proc(IADsOctetList*, VARIANT, HRESULT)
   end
 
+  IADsOctetList_GUID = LibC::GUID.new("7b28b80f-4680-11d1-a3b4-00c04fb950dc")
+  CLSID_IADsOctetList = "7b28b80f-4680-11d1-a3b4-00c04fb950dc"
   struct IADsOctetList
     lpVtbl : IADsOctetListVTbl*
   end
@@ -3438,6 +3544,8 @@ lib LibWin32
     put_address : Proc(IADsEmail*, UInt8*, HRESULT)
   end
 
+  IADsEmail_GUID = LibC::GUID.new("97af011a-478e-11d1-a3b4-00c04fb950dc")
+  CLSID_IADsEmail = "97af011a-478e-11d1-a3b4-00c04fb950dc"
   struct IADsEmail
     lpVtbl : IADsEmailVTbl*
   end
@@ -3458,6 +3566,8 @@ lib LibWin32
     put_path : Proc(IADsPath*, UInt8*, HRESULT)
   end
 
+  IADsPath_GUID = LibC::GUID.new("b287fcd5-4080-11d1-a3ac-00c04fb950dc")
+  CLSID_IADsPath = "b287fcd5-4080-11d1-a3ac-00c04fb950dc"
   struct IADsPath
     lpVtbl : IADsPathVTbl*
   end
@@ -3482,6 +3592,8 @@ lib LibWin32
     put_replica_address_hints : Proc(IADsReplicaPointer*, VARIANT, HRESULT)
   end
 
+  IADsReplicaPointer_GUID = LibC::GUID.new("f60fb803-4080-11d1-a3ac-00c04fb950dc")
+  CLSID_IADsReplicaPointer = "f60fb803-4080-11d1-a3ac-00c04fb950dc"
   struct IADsReplicaPointer
     lpVtbl : IADsReplicaPointerVTbl*
   end
@@ -3503,6 +3615,8 @@ lib LibWin32
     copy_acl : Proc(IADsAcl*, IDispatch*, HRESULT)
   end
 
+  IADsAcl_GUID = LibC::GUID.new("8452d3ab-0869-11d1-a377-00c04fb950dc")
+  CLSID_IADsAcl = "8452d3ab-0869-11d1-a377-00c04fb950dc"
   struct IADsAcl
     lpVtbl : IADsAclVTbl*
   end
@@ -3521,6 +3635,8 @@ lib LibWin32
     put_event_id : Proc(IADsTimestamp*, Int32, HRESULT)
   end
 
+  IADsTimestamp_GUID = LibC::GUID.new("b2f5a901-4080-11d1-a3ac-00c04fb950dc")
+  CLSID_IADsTimestamp = "b2f5a901-4080-11d1-a3ac-00c04fb950dc"
   struct IADsTimestamp
     lpVtbl : IADsTimestampVTbl*
   end
@@ -3537,6 +3653,8 @@ lib LibWin32
     put_postal_address : Proc(IADsPostalAddress*, VARIANT, HRESULT)
   end
 
+  IADsPostalAddress_GUID = LibC::GUID.new("7adecf29-4680-11d1-a3b4-00c04fb950dc")
+  CLSID_IADsPostalAddress = "7adecf29-4680-11d1-a3b4-00c04fb950dc"
   struct IADsPostalAddress
     lpVtbl : IADsPostalAddressVTbl*
   end
@@ -3555,6 +3673,8 @@ lib LibWin32
     put_object_name : Proc(IADsBackLink*, UInt8*, HRESULT)
   end
 
+  IADsBackLink_GUID = LibC::GUID.new("fd1302bd-4080-11d1-a3ac-00c04fb950dc")
+  CLSID_IADsBackLink = "fd1302bd-4080-11d1-a3ac-00c04fb950dc"
   struct IADsBackLink
     lpVtbl : IADsBackLinkVTbl*
   end
@@ -3575,6 +3695,8 @@ lib LibWin32
     put_interval : Proc(IADsTypedName*, Int32, HRESULT)
   end
 
+  IADsTypedName_GUID = LibC::GUID.new("b371a349-4080-11d1-a3ac-00c04fb950dc")
+  CLSID_IADsTypedName = "b371a349-4080-11d1-a3ac-00c04fb950dc"
   struct IADsTypedName
     lpVtbl : IADsTypedNameVTbl*
   end
@@ -3593,6 +3715,8 @@ lib LibWin32
     put_amount : Proc(IADsHold*, Int32, HRESULT)
   end
 
+  IADsHold_GUID = LibC::GUID.new("b3eb3b37-4080-11d1-a3ac-00c04fb950dc")
+  CLSID_IADsHold = "b3eb3b37-4080-11d1-a3ac-00c04fb950dc"
   struct IADsHold
     lpVtbl : IADsHoldVTbl*
   end
@@ -3609,6 +3733,8 @@ lib LibWin32
     set_option : Proc(IADsObjectOptions*, Int32, VARIANT, HRESULT)
   end
 
+  IADsObjectOptions_GUID = LibC::GUID.new("46f14fda-232b-11d1-a808-00c04fd8d5a8")
+  CLSID_IADsObjectOptions = "46f14fda-232b-11d1-a808-00c04fd8d5a8"
   struct IADsObjectOptions
     lpVtbl : IADsObjectOptionsVTbl*
   end
@@ -3634,6 +3760,8 @@ lib LibWin32
     put_escaped_mode : Proc(IADsPathname*, Int32, HRESULT)
   end
 
+  IADsPathname_GUID = LibC::GUID.new("d592aed4-f420-11d0-a36e-00c04fb950dc")
+  CLSID_IADsPathname = "d592aed4-f420-11d0-a36e-00c04fb950dc"
   struct IADsPathname
     lpVtbl : IADsPathnameVTbl*
   end
@@ -3661,6 +3789,8 @@ lib LibWin32
     get_trees : Proc(IADsADSystemInfo*, VARIANT*, HRESULT)
   end
 
+  IADsADSystemInfo_GUID = LibC::GUID.new("5bb11929-afd1-11d2-9cb9-0000f87a369e")
+  CLSID_IADsADSystemInfo = "5bb11929-afd1-11d2-9cb9-0000f87a369e"
   struct IADsADSystemInfo
     lpVtbl : IADsADSystemInfoVTbl*
   end
@@ -3679,6 +3809,8 @@ lib LibWin32
     get_pdc : Proc(IADsWinNTSystemInfo*, UInt8**, HRESULT)
   end
 
+  IADsWinNTSystemInfo_GUID = LibC::GUID.new("6c6d65dc-afd1-11d2-9cb9-0000f87a369e")
+  CLSID_IADsWinNTSystemInfo = "6c6d65dc-afd1-11d2-9cb9-0000f87a369e"
   struct IADsWinNTSystemInfo
     lpVtbl : IADsWinNTSystemInfoVTbl*
   end
@@ -3697,6 +3829,8 @@ lib LibWin32
     put_dn_string : Proc(IADsDNWithBinary*, UInt8*, HRESULT)
   end
 
+  IADsDNWithBinary_GUID = LibC::GUID.new("7e99c0a2-f935-11d2-ba96-00c04fb6d0d1")
+  CLSID_IADsDNWithBinary = "7e99c0a2-f935-11d2-ba96-00c04fb6d0d1"
   struct IADsDNWithBinary
     lpVtbl : IADsDNWithBinaryVTbl*
   end
@@ -3715,6 +3849,8 @@ lib LibWin32
     put_dn_string : Proc(IADsDNWithString*, UInt8*, HRESULT)
   end
 
+  IADsDNWithString_GUID = LibC::GUID.new("370df02e-f934-11d2-ba96-00c04fb6d0d1")
+  CLSID_IADsDNWithString = "370df02e-f934-11d2-ba96-00c04fb6d0d1"
   struct IADsDNWithString
     lpVtbl : IADsDNWithStringVTbl*
   end
@@ -3734,6 +3870,8 @@ lib LibWin32
     put_security_mask : Proc(IADsSecurityUtility*, Int32, HRESULT)
   end
 
+  IADsSecurityUtility_GUID = LibC::GUID.new("a63251b2-5f21-474b-ab52-4a8efad10895")
+  CLSID_IADsSecurityUtility = "a63251b2-5f21-474b-ab52-4a8efad10895"
   struct IADsSecurityUtility
     lpVtbl : IADsSecurityUtilityVTbl*
   end
@@ -3749,6 +3887,8 @@ lib LibWin32
     set_computer : Proc(IDsBrowseDomainTree*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IDsBrowseDomainTree_GUID = LibC::GUID.new("7cabcf1e-78f5-11d2-960c-00c04fa31a86")
+  CLSID_IDsBrowseDomainTree = "7cabcf1e-78f5-11d2-960c-00c04fa31a86"
   struct IDsBrowseDomainTree
     lpVtbl : IDsBrowseDomainTreeVTbl*
   end
@@ -3770,6 +3910,8 @@ lib LibWin32
     get_attribute_a_ds_type : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, ADSTYPEENUM)
   end
 
+  IDsDisplaySpecifier_GUID = LibC::GUID.new("1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")
+  CLSID_IDsDisplaySpecifier = "1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86"
   struct IDsDisplaySpecifier
     lpVtbl : IDsDisplaySpecifierVTbl*
   end
@@ -3782,6 +3924,8 @@ lib LibWin32
     invoke_dialog : Proc(IDsObjectPicker*, LibC::HANDLE, IDataObject*, HRESULT)
   end
 
+  IDsObjectPicker_GUID = LibC::GUID.new("0c87e64e-3b7a-11d2-b9e0-00c04fd8dbf7")
+  CLSID_IDsObjectPicker = "0c87e64e-3b7a-11d2-b9e0-00c04fd8dbf7"
   struct IDsObjectPicker
     lpVtbl : IDsObjectPickerVTbl*
   end
@@ -3795,6 +3939,8 @@ lib LibWin32
     set_credentials : Proc(IDsObjectPickerCredentials*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IDsObjectPickerCredentials_GUID = LibC::GUID.new("e2d3ec9b-d041-445a-8f16-4748de8fb1cf")
+  CLSID_IDsObjectPickerCredentials = "e2d3ec9b-d041-445a-8f16-4748de8fb1cf"
   struct IDsObjectPickerCredentials
     lpVtbl : IDsObjectPickerCredentialsVTbl*
   end
@@ -3807,6 +3953,8 @@ lib LibWin32
     create_modal : Proc(IDsAdminCreateObj*, LibC::HANDLE, IADs*, HRESULT)
   end
 
+  IDsAdminCreateObj_GUID = LibC::GUID.new("53554a38-f902-11d2-82b9-00c04f68928b")
+  CLSID_IDsAdminCreateObj = "53554a38-f902-11d2-82b9-00c04f68928b"
   struct IDsAdminCreateObj
     lpVtbl : IDsAdminCreateObjVTbl*
   end
@@ -3819,6 +3967,8 @@ lib LibWin32
     get_page_counts : Proc(IDsAdminNewObj*, Int32*, Int32*, HRESULT)
   end
 
+  IDsAdminNewObj_GUID = LibC::GUID.new("f2573587-e6fc-11d2-82af-00c04f68928b")
+  CLSID_IDsAdminNewObj = "f2573587-e6fc-11d2-82af-00c04f68928b"
   struct IDsAdminNewObj
     lpVtbl : IDsAdminNewObjVTbl*
   end
@@ -3831,6 +3981,8 @@ lib LibWin32
     commit : Proc(IDsAdminNewObjPrimarySite*, HRESULT)
   end
 
+  IDsAdminNewObjPrimarySite_GUID = LibC::GUID.new("be2b487e-f904-11d2-82b9-00c04f68928b")
+  CLSID_IDsAdminNewObjPrimarySite = "be2b487e-f904-11d2-82b9-00c04f68928b"
   struct IDsAdminNewObjPrimarySite
     lpVtbl : IDsAdminNewObjPrimarySiteVTbl*
   end
@@ -3847,6 +3999,8 @@ lib LibWin32
     get_summary_info : Proc(IDsAdminNewObjExt*, UInt8**, HRESULT)
   end
 
+  IDsAdminNewObjExt_GUID = LibC::GUID.new("6088eae2-e7bf-11d2-82af-00c04f68928b")
+  CLSID_IDsAdminNewObjExt = "6088eae2-e7bf-11d2-82af-00c04f68928b"
   struct IDsAdminNewObjExt
     lpVtbl : IDsAdminNewObjExtVTbl*
   end
@@ -3861,6 +4015,8 @@ lib LibWin32
     rend : Proc(IDsAdminNotifyHandler*, HRESULT)
   end
 
+  IDsAdminNotifyHandler_GUID = LibC::GUID.new("e4a2b8b3-5a18-11d2-97c1-00a0c9a06d2d")
+  CLSID_IDsAdminNotifyHandler = "e4a2b8b3-5a18-11d2-97c1-00a0c9a06d2d"
   struct IDsAdminNotifyHandler
     lpVtbl : IDsAdminNotifyHandlerVTbl*
   end

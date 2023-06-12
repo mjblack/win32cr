@@ -28,6 +28,8 @@ lib LibWin32
     initialize : Proc(IDDEInitializer*, LibC::LPWSTR, CreateProcessMethod, LibC::LPWSTR, IShellItem, IUnknown, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IDDEInitializer_GUID = LibC::GUID.new("30dc931f-33fc-4ffd-a168-942258cf3ca4")
+  CLSID_IDDEInitializer = "30dc931f-33fc-4ffd-a168-942258cf3ca4"
   struct IDDEInitializer
     lpVtbl : IDDEInitializerVTbl*
   end

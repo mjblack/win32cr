@@ -878,6 +878,8 @@ lib LibWin32
     remove_protocol : Proc(IRouterProtocolConfig*, LibC::LPWSTR, UInt32, UInt32, LibC::HANDLE, UInt32, IUnknown, LibC::UINT_PTR, HRESULT)
   end
 
+  IRouterProtocolConfig_GUID = LibC::GUID.new("66a2db16-d706-11d0-a37b-00c04fc9da04")
+  CLSID_IRouterProtocolConfig = "66a2db16-d706-11d0-a37b-00c04fc9da04"
   struct IRouterProtocolConfig
     lpVtbl : IRouterProtocolConfigVTbl*
   end
@@ -893,6 +895,8 @@ lib LibWin32
     deactivate : Proc(IAuthenticationProviderConfig*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
   end
 
+  IAuthenticationProviderConfig_GUID = LibC::GUID.new("66a2db17-d706-11d0-a37b-00c04fc9da04")
+  CLSID_IAuthenticationProviderConfig = "66a2db17-d706-11d0-a37b-00c04fc9da04"
   struct IAuthenticationProviderConfig
     lpVtbl : IAuthenticationProviderConfigVTbl*
   end
@@ -908,6 +912,8 @@ lib LibWin32
     deactivate : Proc(IAccountingProviderConfig*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
   end
 
+  IAccountingProviderConfig_GUID = LibC::GUID.new("66a2db18-d706-11d0-a37b-00c04fc9da04")
+  CLSID_IAccountingProviderConfig = "66a2db18-d706-11d0-a37b-00c04fc9da04"
   struct IAccountingProviderConfig
     lpVtbl : IAccountingProviderConfigVTbl*
   end
@@ -923,6 +929,8 @@ lib LibWin32
     router_invoke_credentials_ui : Proc(IEAPProviderConfig*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
   end
 
+  IEAPProviderConfig_GUID = LibC::GUID.new("66a2db19-d706-11d0-a37b-00c04fc9da04")
+  CLSID_IEAPProviderConfig = "66a2db19-d706-11d0-a37b-00c04fc9da04"
   struct IEAPProviderConfig
     lpVtbl : IEAPProviderConfigVTbl*
   end
@@ -940,6 +948,8 @@ lib LibWin32
     get_global_config : Proc(IEAPProviderConfig2*, UInt32, UInt8**, UInt32*, HRESULT)
   end
 
+  IEAPProviderConfig2_GUID = LibC::GUID.new("d565917a-85c4-4466-856e-671c3742ea9a")
+  CLSID_IEAPProviderConfig2 = "d565917a-85c4-4466-856e-671c3742ea9a"
   struct IEAPProviderConfig2
     lpVtbl : IEAPProviderConfig2VTbl*
   end
@@ -958,6 +968,8 @@ lib LibWin32
     server_invoke_certificate_config_ui : Proc(IEAPProviderConfig3*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt8*, UInt32, UInt8**, UInt32*, LibC::UINT_PTR, HRESULT)
   end
 
+  IEAPProviderConfig3_GUID = LibC::GUID.new("b78ecd12-68bb-4f86-9bf0-8438dd3be982")
+  CLSID_IEAPProviderConfig3 = "b78ecd12-68bb-4f86-9bf0-8438dd3be982"
   struct IEAPProviderConfig3
     lpVtbl : IEAPProviderConfig3VTbl*
   end

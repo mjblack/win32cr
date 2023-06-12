@@ -641,6 +641,8 @@ lib LibWin32
     lock_down : Proc(IUpdateLockdown*, Int32, HRESULT)
   end
 
+  IUpdateLockdown_GUID = LibC::GUID.new("a976c28d-75a1-42aa-94ae-8af8b872089a")
+  CLSID_IUpdateLockdown = "a976c28d-75a1-42aa-94ae-8af8b872089a"
   struct IUpdateLockdown
     lpVtbl : IUpdateLockdownVTbl*
   end
@@ -665,6 +667,8 @@ lib LibWin32
     remove_at : Proc(IStringCollection*, Int32, HRESULT)
   end
 
+  IStringCollection_GUID = LibC::GUID.new("eff90582-2ddc-480f-a06d-60f3fbc362c3")
+  CLSID_IStringCollection = "eff90582-2ddc-480f-a06d-60f3fbc362c3"
   struct IStringCollection
     lpVtbl : IStringCollectionVTbl*
   end
@@ -693,6 +697,8 @@ lib LibWin32
     put_auto_detect : Proc(IWebProxy*, Int16, HRESULT)
   end
 
+  IWebProxy_GUID = LibC::GUID.new("174c81fe-aecd-4dae-b8a0-2c6318dd86a8")
+  CLSID_IWebProxy = "174c81fe-aecd-4dae-b8a0-2c6318dd86a8"
   struct IWebProxy
     lpVtbl : IWebProxyVTbl*
   end
@@ -709,6 +715,8 @@ lib LibWin32
     get_reboot_required : Proc(ISystemInformation*, Int16*, HRESULT)
   end
 
+  ISystemInformation_GUID = LibC::GUID.new("ade87bf7-7b56-4275-8fab-b9b0e591844b")
+  CLSID_ISystemInformation = "ade87bf7-7b56-4275-8fab-b9b0e591844b"
   struct ISystemInformation
     lpVtbl : ISystemInformationVTbl*
   end
@@ -724,6 +732,8 @@ lib LibWin32
     get_info : Proc(IWindowsUpdateAgentInfo*, VARIANT, VARIANT*, HRESULT)
   end
 
+  IWindowsUpdateAgentInfo_GUID = LibC::GUID.new("85713fa1-7796-4fa2-be3b-e2d6124dd373")
+  CLSID_IWindowsUpdateAgentInfo = "85713fa1-7796-4fa2-be3b-e2d6124dd373"
   struct IWindowsUpdateAgentInfo
     lpVtbl : IWindowsUpdateAgentInfoVTbl*
   end
@@ -740,6 +750,8 @@ lib LibWin32
     get_last_installation_success_date : Proc(IAutomaticUpdatesResults*, VARIANT*, HRESULT)
   end
 
+  IAutomaticUpdatesResults_GUID = LibC::GUID.new("e7a4d634-7942-4dd9-a111-82228ba33901")
+  CLSID_IAutomaticUpdatesResults = "e7a4d634-7942-4dd9-a111-82228ba33901"
   struct IAutomaticUpdatesResults
     lpVtbl : IAutomaticUpdatesResultsVTbl*
   end
@@ -764,6 +776,8 @@ lib LibWin32
     save : Proc(IAutomaticUpdatesSettings*, HRESULT)
   end
 
+  IAutomaticUpdatesSettings_GUID = LibC::GUID.new("2ee48f22-af3c-405f-8970-f71be12ee9a2")
+  CLSID_IAutomaticUpdatesSettings = "2ee48f22-af3c-405f-8970-f71be12ee9a2"
   struct IAutomaticUpdatesSettings
     lpVtbl : IAutomaticUpdatesSettingsVTbl*
   end
@@ -791,6 +805,8 @@ lib LibWin32
     check_permission : Proc(IAutomaticUpdatesSettings2*, AutomaticUpdatesUserType, AutomaticUpdatesPermissionType, Int16*, HRESULT)
   end
 
+  IAutomaticUpdatesSettings2_GUID = LibC::GUID.new("6abc136a-c3ca-4384-8171-cb2b1e59b8dc")
+  CLSID_IAutomaticUpdatesSettings2 = "6abc136a-c3ca-4384-8171-cb2b1e59b8dc"
   struct IAutomaticUpdatesSettings2
     lpVtbl : IAutomaticUpdatesSettings2VTbl*
   end
@@ -822,6 +838,8 @@ lib LibWin32
     put_featured_updates_enabled : Proc(IAutomaticUpdatesSettings3*, Int16, HRESULT)
   end
 
+  IAutomaticUpdatesSettings3_GUID = LibC::GUID.new("b587f5c3-f57e-485f-bbf5-0d181c5cd0dc")
+  CLSID_IAutomaticUpdatesSettings3 = "b587f5c3-f57e-485f-bbf5-0d181c5cd0dc"
   struct IAutomaticUpdatesSettings3
     lpVtbl : IAutomaticUpdatesSettings3VTbl*
   end
@@ -843,6 +861,8 @@ lib LibWin32
     enable_service : Proc(IAutomaticUpdates*, HRESULT)
   end
 
+  IAutomaticUpdates_GUID = LibC::GUID.new("673425bf-c082-4c7c-bdfd-569464b8e0ce")
+  CLSID_IAutomaticUpdates = "673425bf-c082-4c7c-bdfd-569464b8e0ce"
   struct IAutomaticUpdates
     lpVtbl : IAutomaticUpdatesVTbl*
   end
@@ -865,6 +885,8 @@ lib LibWin32
     get_results : Proc(IAutomaticUpdates2*, IAutomaticUpdatesResults*, HRESULT)
   end
 
+  IAutomaticUpdates2_GUID = LibC::GUID.new("4a2f5c31-cfd9-410e-b7fb-29a653973a0f")
+  CLSID_IAutomaticUpdates2 = "4a2f5c31-cfd9-410e-b7fb-29a653973a0f"
   struct IAutomaticUpdates2
     lpVtbl : IAutomaticUpdates2VTbl*
   end
@@ -881,6 +903,8 @@ lib LibWin32
     get_update_id : Proc(IUpdateIdentity*, UInt8**, HRESULT)
   end
 
+  IUpdateIdentity_GUID = LibC::GUID.new("46297823-9940-4c09-aed9-cd3ea6d05968")
+  CLSID_IUpdateIdentity = "46297823-9940-4c09-aed9-cd3ea6d05968"
   struct IUpdateIdentity
     lpVtbl : IUpdateIdentityVTbl*
   end
@@ -899,6 +923,8 @@ lib LibWin32
     get_width : Proc(IImageInformation*, Int32*, HRESULT)
   end
 
+  IImageInformation_GUID = LibC::GUID.new("7c907864-346c-4aeb-8f3f-57da289f969f")
+  CLSID_IImageInformation = "7c907864-346c-4aeb-8f3f-57da289f969f"
   struct IImageInformation
     lpVtbl : IImageInformationVTbl*
   end
@@ -922,6 +948,8 @@ lib LibWin32
     get_updates : Proc(ICategory*, IUpdateCollection*, HRESULT)
   end
 
+  ICategory_GUID = LibC::GUID.new("81ddc1b8-9d35-47a6-b471-5b80f519223b")
+  CLSID_ICategory = "81ddc1b8-9d35-47a6-b471-5b80f519223b"
   struct ICategory
     lpVtbl : ICategoryVTbl*
   end
@@ -939,6 +967,8 @@ lib LibWin32
     get_count : Proc(ICategoryCollection*, Int32*, HRESULT)
   end
 
+  ICategoryCollection_GUID = LibC::GUID.new("3a56bfb8-576c-43f7-9335-fe4838fd7e37")
+  CLSID_ICategoryCollection = "3a56bfb8-576c-43f7-9335-fe4838fd7e37"
   struct ICategoryCollection
     lpVtbl : ICategoryCollectionVTbl*
   end
@@ -957,6 +987,8 @@ lib LibWin32
     get_requires_network_connectivity : Proc(IInstallationBehavior*, Int16*, HRESULT)
   end
 
+  IInstallationBehavior_GUID = LibC::GUID.new("d9a59339-e245-4dbd-9686-4d5763e39624")
+  CLSID_IInstallationBehavior = "d9a59339-e245-4dbd-9686-4d5763e39624"
   struct IInstallationBehavior
     lpVtbl : IInstallationBehaviorVTbl*
   end
@@ -972,6 +1004,8 @@ lib LibWin32
     get_download_url : Proc(IUpdateDownloadContent*, UInt8**, HRESULT)
   end
 
+  IUpdateDownloadContent_GUID = LibC::GUID.new("54a2cb2d-9a0c-48b6-8a50-9abb69ee2d02")
+  CLSID_IUpdateDownloadContent = "54a2cb2d-9a0c-48b6-8a50-9abb69ee2d02"
   struct IUpdateDownloadContent
     lpVtbl : IUpdateDownloadContentVTbl*
   end
@@ -988,6 +1022,8 @@ lib LibWin32
     get_is_delta_compressed_content : Proc(IUpdateDownloadContent2*, Int16*, HRESULT)
   end
 
+  IUpdateDownloadContent2_GUID = LibC::GUID.new("c97ad11b-f257-420b-9d9f-377f733f6f68")
+  CLSID_IUpdateDownloadContent2 = "c97ad11b-f257-420b-9d9f-377f733f6f68"
   struct IUpdateDownloadContent2
     lpVtbl : IUpdateDownloadContent2VTbl*
   end
@@ -1005,6 +1041,8 @@ lib LibWin32
     get_count : Proc(IUpdateDownloadContentCollection*, Int32*, HRESULT)
   end
 
+  IUpdateDownloadContentCollection_GUID = LibC::GUID.new("bc5513c8-b3b8-4bf7-a4d4-361c0d8c88ba")
+  CLSID_IUpdateDownloadContentCollection = "bc5513c8-b3b8-4bf7-a4d4-361c0d8c88ba"
   struct IUpdateDownloadContentCollection
     lpVtbl : IUpdateDownloadContentCollectionVTbl*
   end
@@ -1064,6 +1102,8 @@ lib LibWin32
     get_download_contents : Proc(IUpdate*, IUpdateDownloadContentCollection*, HRESULT)
   end
 
+  IUpdate_GUID = LibC::GUID.new("6a92b07a-d821-4682-b423-5c805022cc4d")
+  CLSID_IUpdate = "6a92b07a-d821-4682-b423-5c805022cc4d"
   struct IUpdate
     lpVtbl : IUpdateVTbl*
   end
@@ -1131,6 +1171,8 @@ lib LibWin32
     get_device_status : Proc(IWindowsDriverUpdate*, Int32*, HRESULT)
   end
 
+  IWindowsDriverUpdate_GUID = LibC::GUID.new("b383cd1a-5ce9-4504-9f63-764b1236f191")
+  CLSID_IWindowsDriverUpdate = "b383cd1a-5ce9-4504-9f63-764b1236f191"
   struct IWindowsDriverUpdate
     lpVtbl : IWindowsDriverUpdateVTbl*
   end
@@ -1194,6 +1236,8 @@ lib LibWin32
     copy_to_cache : Proc(IUpdate2*, IStringCollection, HRESULT)
   end
 
+  IUpdate2_GUID = LibC::GUID.new("144fe9b0-d23d-4a8b-8634-fb4457533b7a")
+  CLSID_IUpdate2 = "144fe9b0-d23d-4a8b-8634-fb4457533b7a"
   struct IUpdate2
     lpVtbl : IUpdate2VTbl*
   end
@@ -1258,6 +1302,8 @@ lib LibWin32
     get_browse_only : Proc(IUpdate3*, Int16*, HRESULT)
   end
 
+  IUpdate3_GUID = LibC::GUID.new("112eda6b-95b3-476f-9d90-aee82c6b8181")
+  CLSID_IUpdate3 = "112eda6b-95b3-476f-9d90-aee82c6b8181"
   struct IUpdate3
     lpVtbl : IUpdate3VTbl*
   end
@@ -1323,6 +1369,8 @@ lib LibWin32
     get_per_user : Proc(IUpdate4*, Int16*, HRESULT)
   end
 
+  IUpdate4_GUID = LibC::GUID.new("27e94b0d-5139-49a2-9a61-93522dc54652")
+  CLSID_IUpdate4 = "27e94b0d-5139-49a2-9a61-93522dc54652"
   struct IUpdate4
     lpVtbl : IUpdate4VTbl*
   end
@@ -1390,6 +1438,8 @@ lib LibWin32
     get_auto_download : Proc(IUpdate5*, AutoDownloadMode*, HRESULT)
   end
 
+  IUpdate5_GUID = LibC::GUID.new("c1c2f21a-d2f4-4902-b5c6-8a081c19a890")
+  CLSID_IUpdate5 = "c1c2f21a-d2f4-4902-b5c6-8a081c19a890"
   struct IUpdate5
     lpVtbl : IUpdate5VTbl*
   end
@@ -1461,6 +1511,8 @@ lib LibWin32
     copy_to_cache : Proc(IWindowsDriverUpdate2*, IStringCollection, HRESULT)
   end
 
+  IWindowsDriverUpdate2_GUID = LibC::GUID.new("615c4269-7a48-43bd-96b7-bf6ca27d6c3e")
+  CLSID_IWindowsDriverUpdate2 = "615c4269-7a48-43bd-96b7-bf6ca27d6c3e"
   struct IWindowsDriverUpdate2
     lpVtbl : IWindowsDriverUpdate2VTbl*
   end
@@ -1533,6 +1585,8 @@ lib LibWin32
     get_browse_only : Proc(IWindowsDriverUpdate3*, Int16*, HRESULT)
   end
 
+  IWindowsDriverUpdate3_GUID = LibC::GUID.new("49ebd502-4a96-41bd-9e3e-4c5057f4250c")
+  CLSID_IWindowsDriverUpdate3 = "49ebd502-4a96-41bd-9e3e-4c5057f4250c"
   struct IWindowsDriverUpdate3
     lpVtbl : IWindowsDriverUpdate3VTbl*
   end
@@ -1555,6 +1609,8 @@ lib LibWin32
     get_device_status : Proc(IWindowsDriverUpdateEntry*, Int32*, HRESULT)
   end
 
+  IWindowsDriverUpdateEntry_GUID = LibC::GUID.new("ed8bfe40-a60b-42ea-9652-817dfcfa23ec")
+  CLSID_IWindowsDriverUpdateEntry = "ed8bfe40-a60b-42ea-9652-817dfcfa23ec"
   struct IWindowsDriverUpdateEntry
     lpVtbl : IWindowsDriverUpdateEntryVTbl*
   end
@@ -1572,6 +1628,8 @@ lib LibWin32
     get_count : Proc(IWindowsDriverUpdateEntryCollection*, Int32*, HRESULT)
   end
 
+  IWindowsDriverUpdateEntryCollection_GUID = LibC::GUID.new("0d521700-a372-4bef-828b-3d00c10adebd")
+  CLSID_IWindowsDriverUpdateEntryCollection = "0d521700-a372-4bef-828b-3d00c10adebd"
   struct IWindowsDriverUpdateEntryCollection
     lpVtbl : IWindowsDriverUpdateEntryCollectionVTbl*
   end
@@ -1646,6 +1704,8 @@ lib LibWin32
     get_per_user : Proc(IWindowsDriverUpdate4*, Int16*, HRESULT)
   end
 
+  IWindowsDriverUpdate4_GUID = LibC::GUID.new("004c6a2b-0c19-4c69-9f5c-a269b2560db9")
+  CLSID_IWindowsDriverUpdate4 = "004c6a2b-0c19-4c69-9f5c-a269b2560db9"
   struct IWindowsDriverUpdate4
     lpVtbl : IWindowsDriverUpdate4VTbl*
   end
@@ -1722,6 +1782,8 @@ lib LibWin32
     get_auto_download : Proc(IWindowsDriverUpdate5*, AutoDownloadMode*, HRESULT)
   end
 
+  IWindowsDriverUpdate5_GUID = LibC::GUID.new("70cf5c82-8642-42bb-9dbc-0cfd263c6c4f")
+  CLSID_IWindowsDriverUpdate5 = "70cf5c82-8642-42bb-9dbc-0cfd263c6c4f"
   struct IWindowsDriverUpdate5
     lpVtbl : IWindowsDriverUpdate5VTbl*
   end
@@ -1746,6 +1808,8 @@ lib LibWin32
     remove_at : Proc(IUpdateCollection*, Int32, HRESULT)
   end
 
+  IUpdateCollection_GUID = LibC::GUID.new("07f7438c-7709-4ca5-b518-91279288134e")
+  CLSID_IUpdateCollection = "07f7438c-7709-4ca5-b518-91279288134e"
   struct IUpdateCollection
     lpVtbl : IUpdateCollectionVTbl*
   end
@@ -1763,6 +1827,8 @@ lib LibWin32
     get_context : Proc(IUpdateException*, UpdateExceptionContext*, HRESULT)
   end
 
+  IUpdateException_GUID = LibC::GUID.new("a376dd5e-09d4-427f-af7c-fed5b6e1c1d6")
+  CLSID_IUpdateException = "a376dd5e-09d4-427f-af7c-fed5b6e1c1d6"
   struct IUpdateException
     lpVtbl : IUpdateExceptionVTbl*
   end
@@ -1781,6 +1847,8 @@ lib LibWin32
     get_product : Proc(IInvalidProductLicenseException*, UInt8**, HRESULT)
   end
 
+  IInvalidProductLicenseException_GUID = LibC::GUID.new("a37d00f5-7bb0-4953-b414-f9e98326f2e8")
+  CLSID_IInvalidProductLicenseException = "a37d00f5-7bb0-4953-b414-f9e98326f2e8"
   struct IInvalidProductLicenseException
     lpVtbl : IInvalidProductLicenseExceptionVTbl*
   end
@@ -1798,6 +1866,8 @@ lib LibWin32
     get_count : Proc(IUpdateExceptionCollection*, Int32*, HRESULT)
   end
 
+  IUpdateExceptionCollection_GUID = LibC::GUID.new("503626a3-8e14-4729-9355-0fe664bd2321")
+  CLSID_IUpdateExceptionCollection = "503626a3-8e14-4729-9355-0fe664bd2321"
   struct IUpdateExceptionCollection
     lpVtbl : IUpdateExceptionCollectionVTbl*
   end
@@ -1816,6 +1886,8 @@ lib LibWin32
     get_warnings : Proc(ISearchResult*, IUpdateExceptionCollection*, HRESULT)
   end
 
+  ISearchResult_GUID = LibC::GUID.new("d40cff62-e08c-4498-941a-01e25f0fd33c")
+  CLSID_ISearchResult = "d40cff62-e08c-4498-941a-01e25f0fd33c"
   struct ISearchResult
     lpVtbl : ISearchResultVTbl*
   end
@@ -1834,6 +1906,8 @@ lib LibWin32
     request_abort : Proc(ISearchJob*, HRESULT)
   end
 
+  ISearchJob_GUID = LibC::GUID.new("7366ea16-7a1a-4ea2-b042-973d3e9cd99b")
+  CLSID_ISearchJob = "7366ea16-7a1a-4ea2-b042-973d3e9cd99b"
   struct ISearchJob
     lpVtbl : ISearchJobVTbl*
   end
@@ -1848,6 +1922,8 @@ lib LibWin32
     invoke : Proc(ISearchCompletedCallbackArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ISearchCompletedCallbackArgs_GUID = LibC::GUID.new("a700a634-2850-4c47-938a-9e4b6e5af9a6")
+  CLSID_ISearchCompletedCallbackArgs = "a700a634-2850-4c47-938a-9e4b6e5af9a6"
   struct ISearchCompletedCallbackArgs
     lpVtbl : ISearchCompletedCallbackArgsVTbl*
   end
@@ -1859,6 +1935,8 @@ lib LibWin32
     invoke : Proc(ISearchCompletedCallback*, ISearchJob, ISearchCompletedCallbackArgs, HRESULT)
   end
 
+  ISearchCompletedCallback_GUID = LibC::GUID.new("88aee058-d4b0-4725-a2f1-814a67ae964c")
+  CLSID_ISearchCompletedCallback = "88aee058-d4b0-4725-a2f1-814a67ae964c"
   struct ISearchCompletedCallback
     lpVtbl : ISearchCompletedCallbackVTbl*
   end
@@ -1887,6 +1965,8 @@ lib LibWin32
     get_support_url : Proc(IUpdateHistoryEntry*, UInt8**, HRESULT)
   end
 
+  IUpdateHistoryEntry_GUID = LibC::GUID.new("be56a644-af0e-4e0e-a311-c1d8e695cbff")
+  CLSID_IUpdateHistoryEntry = "be56a644-af0e-4e0e-a311-c1d8e695cbff"
   struct IUpdateHistoryEntry
     lpVtbl : IUpdateHistoryEntryVTbl*
   end
@@ -1916,6 +1996,8 @@ lib LibWin32
     get_categories : Proc(IUpdateHistoryEntry2*, ICategoryCollection*, HRESULT)
   end
 
+  IUpdateHistoryEntry2_GUID = LibC::GUID.new("c2bfb780-4539-4132-ab8c-0a8772013ab6")
+  CLSID_IUpdateHistoryEntry2 = "c2bfb780-4539-4132-ab8c-0a8772013ab6"
   struct IUpdateHistoryEntry2
     lpVtbl : IUpdateHistoryEntry2VTbl*
   end
@@ -1933,6 +2015,8 @@ lib LibWin32
     get_count : Proc(IUpdateHistoryEntryCollection*, Int32*, HRESULT)
   end
 
+  IUpdateHistoryEntryCollection_GUID = LibC::GUID.new("a7f04f3c-a290-435b-aadf-a116c3357a5c")
+  CLSID_IUpdateHistoryEntryCollection = "a7f04f3c-a290-435b-aadf-a116c3357a5c"
   struct IUpdateHistoryEntryCollection
     lpVtbl : IUpdateHistoryEntryCollectionVTbl*
   end
@@ -1965,6 +2049,8 @@ lib LibWin32
     put_service_id : Proc(IUpdateSearcher*, UInt8*, HRESULT)
   end
 
+  IUpdateSearcher_GUID = LibC::GUID.new("8f45abf1-f9ae-4b95-a933-f0f66e5056ea")
+  CLSID_IUpdateSearcher = "8f45abf1-f9ae-4b95-a933-f0f66e5056ea"
   struct IUpdateSearcher
     lpVtbl : IUpdateSearcherVTbl*
   end
@@ -1999,6 +2085,8 @@ lib LibWin32
     put_ignore_download_priority : Proc(IUpdateSearcher2*, Int16, HRESULT)
   end
 
+  IUpdateSearcher2_GUID = LibC::GUID.new("4cbdcb2d-1589-4beb-bd1c-3e582ff0add0")
+  CLSID_IUpdateSearcher2 = "4cbdcb2d-1589-4beb-bd1c-3e582ff0add0"
   struct IUpdateSearcher2
     lpVtbl : IUpdateSearcher2VTbl*
   end
@@ -2035,6 +2123,8 @@ lib LibWin32
     put_search_scope : Proc(IUpdateSearcher3*, SearchScope, HRESULT)
   end
 
+  IUpdateSearcher3_GUID = LibC::GUID.new("04c6895d-eaf2-4034-97f3-311de9be413a")
+  CLSID_IUpdateSearcher3 = "04c6895d-eaf2-4034-97f3-311de9be413a"
   struct IUpdateSearcher3
     lpVtbl : IUpdateSearcher3VTbl*
   end
@@ -2051,6 +2141,8 @@ lib LibWin32
     get_result_code : Proc(IUpdateDownloadResult*, OperationResultCode*, HRESULT)
   end
 
+  IUpdateDownloadResult_GUID = LibC::GUID.new("bf99af76-b575-42ad-8aa4-33cbb5477af1")
+  CLSID_IUpdateDownloadResult = "bf99af76-b575-42ad-8aa4-33cbb5477af1"
   struct IUpdateDownloadResult
     lpVtbl : IUpdateDownloadResultVTbl*
   end
@@ -2068,6 +2160,8 @@ lib LibWin32
     get_update_result : Proc(IDownloadResult*, Int32, IUpdateDownloadResult*, HRESULT)
   end
 
+  IDownloadResult_GUID = LibC::GUID.new("daa4fdd0-4727-4dbe-a1e7-745dca317144")
+  CLSID_IDownloadResult = "daa4fdd0-4727-4dbe-a1e7-745dca317144"
   struct IDownloadResult
     lpVtbl : IDownloadResultVTbl*
   end
@@ -2091,6 +2185,8 @@ lib LibWin32
     get_current_update_percent_complete : Proc(IDownloadProgress*, Int32*, HRESULT)
   end
 
+  IDownloadProgress_GUID = LibC::GUID.new("d31a5bac-f719-4178-9dbb-5e2cb47fd18a")
+  CLSID_IDownloadProgress = "d31a5bac-f719-4178-9dbb-5e2cb47fd18a"
   struct IDownloadProgress
     lpVtbl : IDownloadProgressVTbl*
   end
@@ -2111,6 +2207,8 @@ lib LibWin32
     request_abort : Proc(IDownloadJob*, HRESULT)
   end
 
+  IDownloadJob_GUID = LibC::GUID.new("c574de85-7358-43f6-aae8-8697e62d8ba7")
+  CLSID_IDownloadJob = "c574de85-7358-43f6-aae8-8697e62d8ba7"
   struct IDownloadJob
     lpVtbl : IDownloadJobVTbl*
   end
@@ -2125,6 +2223,8 @@ lib LibWin32
     invoke : Proc(IDownloadCompletedCallbackArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IDownloadCompletedCallbackArgs_GUID = LibC::GUID.new("fa565b23-498c-47a0-979d-e7d5b1813360")
+  CLSID_IDownloadCompletedCallbackArgs = "fa565b23-498c-47a0-979d-e7d5b1813360"
   struct IDownloadCompletedCallbackArgs
     lpVtbl : IDownloadCompletedCallbackArgsVTbl*
   end
@@ -2136,6 +2236,8 @@ lib LibWin32
     invoke : Proc(IDownloadCompletedCallback*, IDownloadJob, IDownloadCompletedCallbackArgs, HRESULT)
   end
 
+  IDownloadCompletedCallback_GUID = LibC::GUID.new("77254866-9f5b-4c8e-b9e2-c77a8530d64b")
+  CLSID_IDownloadCompletedCallback = "77254866-9f5b-4c8e-b9e2-c77a8530d64b"
   struct IDownloadCompletedCallback
     lpVtbl : IDownloadCompletedCallbackVTbl*
   end
@@ -2151,6 +2253,8 @@ lib LibWin32
     get_progress : Proc(IDownloadProgressChangedCallbackArgs*, IDownloadProgress*, HRESULT)
   end
 
+  IDownloadProgressChangedCallbackArgs_GUID = LibC::GUID.new("324ff2c6-4981-4b04-9412-57481745ab24")
+  CLSID_IDownloadProgressChangedCallbackArgs = "324ff2c6-4981-4b04-9412-57481745ab24"
   struct IDownloadProgressChangedCallbackArgs
     lpVtbl : IDownloadProgressChangedCallbackArgsVTbl*
   end
@@ -2162,6 +2266,8 @@ lib LibWin32
     invoke : Proc(IDownloadProgressChangedCallback*, IDownloadJob, IDownloadProgressChangedCallbackArgs, HRESULT)
   end
 
+  IDownloadProgressChangedCallback_GUID = LibC::GUID.new("8c3f1cdd-6173-4591-aebd-a56a53ca77c1")
+  CLSID_IDownloadProgressChangedCallback = "8c3f1cdd-6173-4591-aebd-a56a53ca77c1"
   struct IDownloadProgressChangedCallback
     lpVtbl : IDownloadProgressChangedCallbackVTbl*
   end
@@ -2187,6 +2293,8 @@ lib LibWin32
     end_download : Proc(IUpdateDownloader*, IDownloadJob, IDownloadResult*, HRESULT)
   end
 
+  IUpdateDownloader_GUID = LibC::GUID.new("68f1c6f9-7ecc-4666-a464-247fe12496c3")
+  CLSID_IUpdateDownloader = "68f1c6f9-7ecc-4666-a464-247fe12496c3"
   struct IUpdateDownloader
     lpVtbl : IUpdateDownloaderVTbl*
   end
@@ -2204,6 +2312,8 @@ lib LibWin32
     get_result_code : Proc(IUpdateInstallationResult*, OperationResultCode*, HRESULT)
   end
 
+  IUpdateInstallationResult_GUID = LibC::GUID.new("d940f0f8-3cbb-4fd0-993f-471e7f2328ad")
+  CLSID_IUpdateInstallationResult = "d940f0f8-3cbb-4fd0-993f-471e7f2328ad"
   struct IUpdateInstallationResult
     lpVtbl : IUpdateInstallationResultVTbl*
   end
@@ -2222,6 +2332,8 @@ lib LibWin32
     get_update_result : Proc(IInstallationResult*, Int32, IUpdateInstallationResult*, HRESULT)
   end
 
+  IInstallationResult_GUID = LibC::GUID.new("a43c56d6-7451-48d4-af96-b6cd2d0d9b7a")
+  CLSID_IInstallationResult = "a43c56d6-7451-48d4-af96-b6cd2d0d9b7a"
   struct IInstallationResult
     lpVtbl : IInstallationResultVTbl*
   end
@@ -2240,6 +2352,8 @@ lib LibWin32
     get_update_result : Proc(IInstallationProgress*, Int32, IUpdateInstallationResult*, HRESULT)
   end
 
+  IInstallationProgress_GUID = LibC::GUID.new("345c8244-43a3-4e32-a368-65f073b76f36")
+  CLSID_IInstallationProgress = "345c8244-43a3-4e32-a368-65f073b76f36"
   struct IInstallationProgress
     lpVtbl : IInstallationProgressVTbl*
   end
@@ -2260,6 +2374,8 @@ lib LibWin32
     request_abort : Proc(IInstallationJob*, HRESULT)
   end
 
+  IInstallationJob_GUID = LibC::GUID.new("5c209f0b-bad5-432a-9556-4699bed2638a")
+  CLSID_IInstallationJob = "5c209f0b-bad5-432a-9556-4699bed2638a"
   struct IInstallationJob
     lpVtbl : IInstallationJobVTbl*
   end
@@ -2274,6 +2390,8 @@ lib LibWin32
     invoke : Proc(IInstallationCompletedCallbackArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IInstallationCompletedCallbackArgs_GUID = LibC::GUID.new("250e2106-8efb-4705-9653-ef13c581b6a1")
+  CLSID_IInstallationCompletedCallbackArgs = "250e2106-8efb-4705-9653-ef13c581b6a1"
   struct IInstallationCompletedCallbackArgs
     lpVtbl : IInstallationCompletedCallbackArgsVTbl*
   end
@@ -2285,6 +2403,8 @@ lib LibWin32
     invoke : Proc(IInstallationCompletedCallback*, IInstallationJob, IInstallationCompletedCallbackArgs, HRESULT)
   end
 
+  IInstallationCompletedCallback_GUID = LibC::GUID.new("45f4f6f3-d602-4f98-9a8a-3efa152ad2d3")
+  CLSID_IInstallationCompletedCallback = "45f4f6f3-d602-4f98-9a8a-3efa152ad2d3"
   struct IInstallationCompletedCallback
     lpVtbl : IInstallationCompletedCallbackVTbl*
   end
@@ -2300,6 +2420,8 @@ lib LibWin32
     get_progress : Proc(IInstallationProgressChangedCallbackArgs*, IInstallationProgress*, HRESULT)
   end
 
+  IInstallationProgressChangedCallbackArgs_GUID = LibC::GUID.new("e4f14e1e-689d-4218-a0b9-bc189c484a01")
+  CLSID_IInstallationProgressChangedCallbackArgs = "e4f14e1e-689d-4218-a0b9-bc189c484a01"
   struct IInstallationProgressChangedCallbackArgs
     lpVtbl : IInstallationProgressChangedCallbackArgsVTbl*
   end
@@ -2311,6 +2433,8 @@ lib LibWin32
     invoke : Proc(IInstallationProgressChangedCallback*, IInstallationJob, IInstallationProgressChangedCallbackArgs, HRESULT)
   end
 
+  IInstallationProgressChangedCallback_GUID = LibC::GUID.new("e01402d5-f8da-43ba-a012-38894bd048f1")
+  CLSID_IInstallationProgressChangedCallback = "e01402d5-f8da-43ba-a012-38894bd048f1"
   struct IInstallationProgressChangedCallback
     lpVtbl : IInstallationProgressChangedCallbackVTbl*
   end
@@ -2346,6 +2470,8 @@ lib LibWin32
     get_reboot_required_before_installation : Proc(IUpdateInstaller*, Int16*, HRESULT)
   end
 
+  IUpdateInstaller_GUID = LibC::GUID.new("7b929c68-ccdc-4226-96b1-8724600b54c2")
+  CLSID_IUpdateInstaller = "7b929c68-ccdc-4226-96b1-8724600b54c2"
   struct IUpdateInstaller
     lpVtbl : IUpdateInstallerVTbl*
   end
@@ -2383,6 +2509,8 @@ lib LibWin32
     put_force_quiet : Proc(IUpdateInstaller2*, Int16, HRESULT)
   end
 
+  IUpdateInstaller2_GUID = LibC::GUID.new("3442d4fe-224d-4cee-98cf-30e0c4d229e6")
+  CLSID_IUpdateInstaller2 = "3442d4fe-224d-4cee-98cf-30e0c4d229e6"
   struct IUpdateInstaller2
     lpVtbl : IUpdateInstaller2VTbl*
   end
@@ -2422,6 +2550,8 @@ lib LibWin32
     put_attempt_close_apps_if_necessary : Proc(IUpdateInstaller3*, Int16, HRESULT)
   end
 
+  IUpdateInstaller3_GUID = LibC::GUID.new("16d11c35-099a-48d0-8338-5fae64047f8e")
+  CLSID_IUpdateInstaller3 = "16d11c35-099a-48d0-8338-5fae64047f8e"
   struct IUpdateInstaller3
     lpVtbl : IUpdateInstaller3VTbl*
   end
@@ -2462,6 +2592,8 @@ lib LibWin32
     commit : Proc(IUpdateInstaller4*, UInt32, HRESULT)
   end
 
+  IUpdateInstaller4_GUID = LibC::GUID.new("ef8208ea-2304-492d-9109-23813b0958e1")
+  CLSID_IUpdateInstaller4 = "ef8208ea-2304-492d-9109-23813b0958e1"
   struct IUpdateInstaller4
     lpVtbl : IUpdateInstaller4VTbl*
   end
@@ -2484,6 +2616,8 @@ lib LibWin32
     create_update_installer : Proc(IUpdateSession*, IUpdateInstaller*, HRESULT)
   end
 
+  IUpdateSession_GUID = LibC::GUID.new("816858a4-260d-4260-933a-2585f1abc76b")
+  CLSID_IUpdateSession = "816858a4-260d-4260-933a-2585f1abc76b"
   struct IUpdateSession
     lpVtbl : IUpdateSessionVTbl*
   end
@@ -2508,6 +2642,8 @@ lib LibWin32
     put_user_locale : Proc(IUpdateSession2*, UInt32, HRESULT)
   end
 
+  IUpdateSession2_GUID = LibC::GUID.new("91caf7b0-eb23-49ed-9937-c52d817f46f7")
+  CLSID_IUpdateSession2 = "91caf7b0-eb23-49ed-9937-c52d817f46f7"
   struct IUpdateSession2
     lpVtbl : IUpdateSession2VTbl*
   end
@@ -2534,6 +2670,8 @@ lib LibWin32
     query_history : Proc(IUpdateSession3*, UInt8*, Int32, Int32, IUpdateHistoryEntryCollection*, HRESULT)
   end
 
+  IUpdateSession3_GUID = LibC::GUID.new("918efd1e-b5d8-4c90-8540-aeb9bdc56f9d")
+  CLSID_IUpdateSession3 = "918efd1e-b5d8-4c90-8540-aeb9bdc56f9d"
   struct IUpdateSession3
     lpVtbl : IUpdateSession3VTbl*
   end
@@ -2561,6 +2699,8 @@ lib LibWin32
     get_setup_prefix : Proc(IUpdateService*, UInt8**, HRESULT)
   end
 
+  IUpdateService_GUID = LibC::GUID.new("76b3b17e-aed6-4da5-85f0-83587f81abe3")
+  CLSID_IUpdateService = "76b3b17e-aed6-4da5-85f0-83587f81abe3"
   struct IUpdateService
     lpVtbl : IUpdateServiceVTbl*
   end
@@ -2589,6 +2729,8 @@ lib LibWin32
     get_is_default_au_service : Proc(IUpdateService2*, Int16*, HRESULT)
   end
 
+  IUpdateService2_GUID = LibC::GUID.new("1518b460-6518-4172-940f-c75883b24ceb")
+  CLSID_IUpdateService2 = "1518b460-6518-4172-940f-c75883b24ceb"
   struct IUpdateService2
     lpVtbl : IUpdateService2VTbl*
   end
@@ -2606,6 +2748,8 @@ lib LibWin32
     get_count : Proc(IUpdateServiceCollection*, Int32*, HRESULT)
   end
 
+  IUpdateServiceCollection_GUID = LibC::GUID.new("9b0353aa-0e52-44ff-b8b0-1f7fa0437f88")
+  CLSID_IUpdateServiceCollection = "9b0353aa-0e52-44ff-b8b0-1f7fa0437f88"
   struct IUpdateServiceCollection
     lpVtbl : IUpdateServiceCollectionVTbl*
   end
@@ -2624,6 +2768,8 @@ lib LibWin32
     get_service : Proc(IUpdateServiceRegistration*, IUpdateService2*, HRESULT)
   end
 
+  IUpdateServiceRegistration_GUID = LibC::GUID.new("dde02280-12b3-4e0b-937b-6747f6acb286")
+  CLSID_IUpdateServiceRegistration = "dde02280-12b3-4e0b-937b-6747f6acb286"
   struct IUpdateServiceRegistration
     lpVtbl : IUpdateServiceRegistrationVTbl*
   end
@@ -2645,6 +2791,8 @@ lib LibWin32
     set_option : Proc(IUpdateServiceManager*, UInt8*, VARIANT, HRESULT)
   end
 
+  IUpdateServiceManager_GUID = LibC::GUID.new("23857e3c-02ba-44a3-9423-b1c900805f37")
+  CLSID_IUpdateServiceManager = "23857e3c-02ba-44a3-9423-b1c900805f37"
   struct IUpdateServiceManager
     lpVtbl : IUpdateServiceManagerVTbl*
   end
@@ -2670,6 +2818,8 @@ lib LibWin32
     add_service2 : Proc(IUpdateServiceManager2*, UInt8*, Int32, UInt8*, IUpdateServiceRegistration*, HRESULT)
   end
 
+  IUpdateServiceManager2_GUID = LibC::GUID.new("0bb8531d-7e8d-424f-986c-a0b8f60a3e7b")
+  CLSID_IUpdateServiceManager2 = "0bb8531d-7e8d-424f-986c-a0b8f60a3e7b"
   struct IUpdateServiceManager2
     lpVtbl : IUpdateServiceManager2VTbl*
   end
@@ -2685,6 +2835,8 @@ lib LibWin32
     record_installation_result : Proc(IInstallationAgent*, UInt8*, Int32, IStringCollection, HRESULT)
   end
 
+  IInstallationAgent_GUID = LibC::GUID.new("925cbc18-a2ea-4648-bf1c-ec8badcfe20a")
+  CLSID_IInstallationAgent = "925cbc18-a2ea-4648-bf1c-ec8badcfe20a"
   struct IInstallationAgent
     lpVtbl : IInstallationAgentVTbl*
   end

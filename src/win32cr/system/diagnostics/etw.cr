@@ -1645,6 +1645,8 @@ lib LibWin32
     set_provider_id : Proc(ITraceEvent*, Guid*, HRESULT)
   end
 
+  ITraceEvent_GUID = LibC::GUID.new("8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb")
+  CLSID_ITraceEvent = "8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb"
   struct ITraceEvent
     lpVtbl : ITraceEventVTbl*
   end
@@ -1658,6 +1660,8 @@ lib LibWin32
     on_event : Proc(ITraceEventCallback*, ITraceEvent, ITraceRelogger, HRESULT)
   end
 
+  ITraceEventCallback_GUID = LibC::GUID.new("3ed25501-593f-43e9-8f38-3ab46f5a4a52")
+  CLSID_ITraceEventCallback = "3ed25501-593f-43e9-8f38-3ab46f5a4a52"
   struct ITraceEventCallback
     lpVtbl : ITraceEventCallbackVTbl*
   end
@@ -1677,6 +1681,8 @@ lib LibWin32
     cancel : Proc(ITraceRelogger*, HRESULT)
   end
 
+  ITraceRelogger_GUID = LibC::GUID.new("f754ad43-3bcc-4286-8009-9c5da214e84e")
+  CLSID_ITraceRelogger = "f754ad43-3bcc-4286-8009-9c5da214e84e"
   struct ITraceRelogger
     lpVtbl : ITraceReloggerVTbl*
   end

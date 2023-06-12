@@ -880,6 +880,8 @@ lib LibWin32
     get_error : Proc(IWSMan*, UInt8**, HRESULT)
   end
 
+  IWSMan_GUID = LibC::GUID.new("190d8637-5cd3-496d-ad24-69636bb5a3b5")
+  CLSID_IWSMan = "190d8637-5cd3-496d-ad24-69636bb5a3b5"
   struct IWSMan
     lpVtbl : IWSManVTbl*
   end
@@ -918,6 +920,8 @@ lib LibWin32
     enumeration_flag_return_object : Proc(IWSManEx*, Int32*, HRESULT)
   end
 
+  IWSManEx_GUID = LibC::GUID.new("2d53bdaa-798e-49e6-a1aa-74d01256f411")
+  CLSID_IWSManEx = "2d53bdaa-798e-49e6-a1aa-74d01256f411"
   struct IWSManEx
     lpVtbl : IWSManExVTbl*
   end
@@ -957,6 +961,8 @@ lib LibWin32
     session_flag_use_client_certificate : Proc(IWSManEx2*, Int32*, HRESULT)
   end
 
+  IWSManEx2_GUID = LibC::GUID.new("1d1b5ae0-42d9-4021-8261-3987619512e9")
+  CLSID_IWSManEx2 = "1d1b5ae0-42d9-4021-8261-3987619512e9"
   struct IWSManEx2
     lpVtbl : IWSManEx2VTbl*
   end
@@ -1003,6 +1009,8 @@ lib LibWin32
     session_flag_use_ssl : Proc(IWSManEx3*, Int32*, HRESULT)
   end
 
+  IWSManEx3_GUID = LibC::GUID.new("6400e966-011d-4eac-8474-049e0848afad")
+  CLSID_IWSManEx3 = "6400e966-011d-4eac-8474-049e0848afad"
   struct IWSManEx3
     lpVtbl : IWSManEx3VTbl*
   end
@@ -1020,6 +1028,8 @@ lib LibWin32
     put_password : Proc(IWSManConnectionOptions*, UInt8*, HRESULT)
   end
 
+  IWSManConnectionOptions_GUID = LibC::GUID.new("f704e861-9e52-464f-b786-da5eb2320fdd")
+  CLSID_IWSManConnectionOptions = "f704e861-9e52-464f-b786-da5eb2320fdd"
   struct IWSManConnectionOptions
     lpVtbl : IWSManConnectionOptionsVTbl*
   end
@@ -1039,6 +1049,8 @@ lib LibWin32
     put_certificate_thumbprint : Proc(IWSManConnectionOptionsEx*, UInt8*, HRESULT)
   end
 
+  IWSManConnectionOptionsEx_GUID = LibC::GUID.new("ef43edf7-2a48-4d93-9526-8bd6ab6d4a6b")
+  CLSID_IWSManConnectionOptionsEx = "ef43edf7-2a48-4d93-9526-8bd6ab6d4a6b"
   struct IWSManConnectionOptionsEx
     lpVtbl : IWSManConnectionOptionsExVTbl*
   end
@@ -1066,6 +1078,8 @@ lib LibWin32
     proxy_authentication_use_digest : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
   end
 
+  IWSManConnectionOptionsEx2_GUID = LibC::GUID.new("f500c9ec-24ee-48ab-b38d-fc9a164c658e")
+  CLSID_IWSManConnectionOptionsEx2 = "f500c9ec-24ee-48ab-b38d-fc9a164c658e"
   struct IWSManConnectionOptionsEx2
     lpVtbl : IWSManConnectionOptionsEx2VTbl*
   end
@@ -1092,6 +1106,8 @@ lib LibWin32
     put_timeout : Proc(IWSManSession*, Int32, HRESULT)
   end
 
+  IWSManSession_GUID = LibC::GUID.new("fc84fc58-1286-40c4-9da0-c8ef6ec241e0")
+  CLSID_IWSManSession = "fc84fc58-1286-40c4-9da0-c8ef6ec241e0"
   struct IWSManSession
     lpVtbl : IWSManSessionVTbl*
   end
@@ -1109,6 +1125,8 @@ lib LibWin32
     get_error : Proc(IWSManEnumerator*, UInt8**, HRESULT)
   end
 
+  IWSManEnumerator_GUID = LibC::GUID.new("f3457ca9-abb9-4fa5-b850-90e8ca300e7f")
+  CLSID_IWSManEnumerator = "f3457ca9-abb9-4fa5-b850-90e8ca300e7f"
   struct IWSManEnumerator
     lpVtbl : IWSManEnumeratorVTbl*
   end
@@ -1136,6 +1154,8 @@ lib LibWin32
     get_error : Proc(IWSManResourceLocator*, UInt8**, HRESULT)
   end
 
+  IWSManResourceLocator_GUID = LibC::GUID.new("a7a1ba28-de41-466a-ad0a-c4059ead7428")
+  CLSID_IWSManResourceLocator = "a7a1ba28-de41-466a-ad0a-c4059ead7428"
   struct IWSManResourceLocator
     lpVtbl : IWSManResourceLocatorVTbl*
   end
@@ -1146,6 +1166,8 @@ lib LibWin32
     release : Proc(IWSManResourceLocatorInternal*, UInt32)
   end
 
+  IWSManResourceLocatorInternal_GUID = LibC::GUID.new("effaead7-7ec8-4716-b9be-f2e7e9fb4adb")
+  CLSID_IWSManResourceLocatorInternal = "effaead7-7ec8-4716-b9be-f2e7e9fb4adb"
   struct IWSManResourceLocatorInternal
     lpVtbl : IWSManResourceLocatorInternalVTbl*
   end
@@ -1161,6 +1183,8 @@ lib LibWin32
     config_sddl : Proc(IWSManInternal*, IDispatch, VARIANT, Int32, UInt8**, HRESULT)
   end
 
+  IWSManInternal_GUID = LibC::GUID.new("04ae2b1d-9954-4d99-94a9-a961e72c3a13")
+  CLSID_IWSManInternal = "04ae2b1d-9954-4d99-94a9-a961e72c3a13"
   struct IWSManInternal
     lpVtbl : IWSManInternalVTbl*
   end

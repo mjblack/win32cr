@@ -5363,6 +5363,8 @@ lib LibWin32
     put_break : Proc(IWordSink*, WORDREP_BREAK_TYPE, HRESULT)
   end
 
+  IWordSink_GUID = LibC::GUID.new("cc907054-c058-101a-b554-08002b33b0e6")
+  CLSID_IWordSink = "cc907054-c058-101a-b554-08002b33b0e6"
   struct IWordSink
     lpVtbl : IWordSinkVTbl*
   end
@@ -5377,6 +5379,8 @@ lib LibWin32
     get_license_to_use : Proc(IWordBreaker*, UInt16**, HRESULT)
   end
 
+  IWordBreaker_GUID = LibC::GUID.new("d53552c8-77e3-101a-b552-08002b33b0e6")
+  CLSID_IWordBreaker = "d53552c8-77e3-101a-b552-08002b33b0e6"
   struct IWordBreaker
     lpVtbl : IWordBreakerVTbl*
   end
@@ -5389,6 +5393,8 @@ lib LibWin32
     put_word : Proc(IWordFormSink*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  IWordFormSink_GUID = LibC::GUID.new("fe77c330-7f42-11ce-be57-00aa0051fe20")
+  CLSID_IWordFormSink = "fe77c330-7f42-11ce-be57-00aa0051fe20"
   struct IWordFormSink
     lpVtbl : IWordFormSinkVTbl*
   end
@@ -5402,6 +5408,8 @@ lib LibWin32
     get_license_to_use : Proc(IStemmer*, UInt16**, HRESULT)
   end
 
+  IStemmer_GUID = LibC::GUID.new("efbaf140-7f42-11ce-be57-00aa0051fe20")
+  CLSID_IStemmer = "efbaf140-7f42-11ce-be57-00aa0051fe20"
   struct IStemmer
     lpVtbl : IStemmerVTbl*
   end
@@ -5415,6 +5423,8 @@ lib LibWin32
     get_default_catalog : Proc(ISimpleCommandCreator*, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
   end
 
+  ISimpleCommandCreator_GUID = LibC::GUID.new("5e341ab7-02d0-11d1-900c-00a0c9063796")
+  CLSID_ISimpleCommandCreator = "5e341ab7-02d0-11d1-900c-00a0c9063796"
   struct ISimpleCommandCreator
     lpVtbl : ISimpleCommandCreatorVTbl*
   end
@@ -5429,6 +5439,8 @@ lib LibWin32
     is_map_up_to_date : Proc(IColumnMapper*, HRESULT)
   end
 
+  IColumnMapper_GUID = LibC::GUID.new("0b63e37a-9ccc-11d0-bcdb-00805fccce04")
+  CLSID_IColumnMapper = "0b63e37a-9ccc-11d0-bcdb-00805fccce04"
   struct IColumnMapper
     lpVtbl : IColumnMapperVTbl*
   end
@@ -5440,6 +5452,8 @@ lib LibWin32
     get_column_mapper : Proc(IColumnMapperCreator*, LibC::LPWSTR, LibC::LPWSTR, IColumnMapper*, HRESULT)
   end
 
+  IColumnMapperCreator_GUID = LibC::GUID.new("0b63e37b-9ccc-11d0-bcdb-00805fccce04")
+  CLSID_IColumnMapperCreator = "0b63e37b-9ccc-11d0-bcdb-00805fccce04"
   struct IColumnMapperCreator
     lpVtbl : IColumnMapperCreatorVTbl*
   end
@@ -5453,6 +5467,8 @@ lib LibWin32
     load_i_filter_from_stream : Proc(ILoadFilter*, IStream, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)
   end
 
+  ILoadFilter_GUID = LibC::GUID.new("c7310722-ac80-11d1-8df3-00c04fb6ef4f")
+  CLSID_ILoadFilter = "c7310722-ac80-11d1-8df3-00c04fb6ef4f"
   struct ILoadFilter
     lpVtbl : ILoadFilterVTbl*
   end
@@ -5467,6 +5483,8 @@ lib LibWin32
     load_i_filter_with_private_com_activation : Proc(ILoadFilterWithPrivateComActivation*, FILTERED_DATA_SOURCES*, LibC::BOOL, Guid*, LibC::BOOL*, IFilter*, HRESULT)
   end
 
+  ILoadFilterWithPrivateComActivation_GUID = LibC::GUID.new("40bdbd34-780b-48d3-9bb6-12ebd4ad2e75")
+  CLSID_ILoadFilterWithPrivateComActivation = "40bdbd34-780b-48d3-9bb6-12ebd4ad2e75"
   struct ILoadFilterWithPrivateComActivation
     lpVtbl : ILoadFilterWithPrivateComActivationVTbl*
   end
@@ -5478,6 +5496,8 @@ lib LibWin32
     get_data : Proc(IRichChunk*, UInt32*, UInt32*, LibC::LPWSTR*, PROPVARIANT*, HRESULT)
   end
 
+  IRichChunk_GUID = LibC::GUID.new("4fdef69c-dbc9-454e-9910-b34f3c64b510")
+  CLSID_IRichChunk = "4fdef69c-dbc9-454e-9910-b34f3c64b510"
   struct IRichChunk
     lpVtbl : IRichChunkVTbl*
   end
@@ -5500,6 +5520,8 @@ lib LibWin32
     clone : Proc(ICondition*, ICondition*, HRESULT)
   end
 
+  ICondition_GUID = LibC::GUID.new("0fc988d4-c935-4b97-a973-46282ea175c8")
+  CLSID_ICondition = "0fc988d4-c935-4b97-a973-46282ea175c8"
   struct ICondition
     lpVtbl : IConditionVTbl*
   end
@@ -5524,6 +5546,8 @@ lib LibWin32
     get_leaf_condition_info : Proc(ICondition2*, PROPERTYKEY*, CONDITION_OPERATION*, PROPVARIANT*, HRESULT)
   end
 
+  ICondition2_GUID = LibC::GUID.new("0db8851d-2e5b-47eb-9208-d28c325a01d7")
+  CLSID_ICondition2 = "0db8851d-2e5b-47eb-9208-d28c325a01d7"
   struct ICondition2
     lpVtbl : ICondition2VTbl*
   end
@@ -5538,6 +5562,8 @@ lib LibWin32
     release_accessor : Proc(IAccessor*, LibC::UINT_PTR, UInt32*, HRESULT)
   end
 
+  IAccessor_GUID = LibC::GUID.new("0c733a8c-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IAccessor = "0c733a8c-2a1c-11ce-ade5-00aa0044773d"
   struct IAccessor
     lpVtbl : IAccessorVTbl*
   end
@@ -5553,6 +5579,8 @@ lib LibWin32
     restart_position : Proc(IRowset*, LibC::UINT_PTR, HRESULT)
   end
 
+  IRowset_GUID = LibC::GUID.new("0c733a7c-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowset = "0c733a7c-2a1c-11ce-ade5-00aa0044773d"
   struct IRowset
     lpVtbl : IRowsetVTbl*
   end
@@ -5566,6 +5594,8 @@ lib LibWin32
     get_specification : Proc(IRowsetInfo*, Guid*, IUnknown*, HRESULT)
   end
 
+  IRowsetInfo_GUID = LibC::GUID.new("0c733a55-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetInfo = "0c733a55-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetInfo
     lpVtbl : IRowsetInfoVTbl*
   end
@@ -5585,6 +5615,8 @@ lib LibWin32
     hash : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)
   end
 
+  IRowsetLocate_GUID = LibC::GUID.new("0c733a7d-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetLocate = "0c733a7d-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetLocate
     lpVtbl : IRowsetLocateVTbl*
   end
@@ -5597,6 +5629,8 @@ lib LibWin32
     resynch_rows : Proc(IRowsetResynch*, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)
   end
 
+  IRowsetResynch_GUID = LibC::GUID.new("0c733a84-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetResynch = "0c733a84-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetResynch
     lpVtbl : IRowsetResynchVTbl*
   end
@@ -5618,6 +5652,8 @@ lib LibWin32
     get_rows_at_ratio : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
   end
 
+  IRowsetScroll_GUID = LibC::GUID.new("0c733a7e-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetScroll = "0c733a7e-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetScroll
     lpVtbl : IRowsetScrollVTbl*
   end
@@ -5630,6 +5666,8 @@ lib LibWin32
     release_chapter : Proc(IChapteredRowset*, LibC::UINT_PTR, UInt32*, HRESULT)
   end
 
+  IChapteredRowset_GUID = LibC::GUID.new("0c733a93-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IChapteredRowset = "0c733a93-2a1c-11ce-ade5-00aa0044773d"
   struct IChapteredRowset
     lpVtbl : IChapteredRowsetVTbl*
   end
@@ -5641,6 +5679,8 @@ lib LibWin32
     find_next_row : Proc(IRowsetFind*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, UInt32, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
   end
 
+  IRowsetFind_GUID = LibC::GUID.new("0c733a9d-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetFind = "0c733a9d-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetFind
     lpVtbl : IRowsetFindVTbl*
   end
@@ -5656,6 +5696,8 @@ lib LibWin32
     set_row_position : Proc(IRowPosition*, LibC::UINT_PTR, LibC::UINT_PTR, UInt32, HRESULT)
   end
 
+  IRowPosition_GUID = LibC::GUID.new("0c733a94-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowPosition = "0c733a94-2a1c-11ce-ade5-00aa0044773d"
   struct IRowPosition
     lpVtbl : IRowPositionVTbl*
   end
@@ -5667,6 +5709,8 @@ lib LibWin32
     on_row_position_change : Proc(IRowPositionChange*, UInt32, UInt32, LibC::BOOL, HRESULT)
   end
 
+  IRowPositionChange_GUID = LibC::GUID.new("0997a571-126e-11d0-9f8a-00a0c9a0631e")
+  CLSID_IRowPositionChange = "0997a571-126e-11d0-9f8a-00a0c9a0631e"
   struct IRowPositionChange
     lpVtbl : IRowPositionChangeVTbl*
   end
@@ -5679,6 +5723,8 @@ lib LibWin32
     open_view_rowset : Proc(IViewRowset*, IUnknown, Guid*, IUnknown*, HRESULT)
   end
 
+  IViewRowset_GUID = LibC::GUID.new("0c733a97-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IViewRowset = "0c733a97-2a1c-11ce-ade5-00aa0044773d"
   struct IViewRowset
     lpVtbl : IViewRowsetVTbl*
   end
@@ -5691,6 +5737,8 @@ lib LibWin32
     open_view_chapter : Proc(IViewChapter*, LibC::UINT_PTR, LibC::UINT_PTR*, HRESULT)
   end
 
+  IViewChapter_GUID = LibC::GUID.new("0c733a98-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IViewChapter = "0c733a98-2a1c-11ce-ade5-00aa0044773d"
   struct IViewChapter
     lpVtbl : IViewChapterVTbl*
   end
@@ -5703,6 +5751,8 @@ lib LibWin32
     set_sort_order : Proc(IViewSort*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)
   end
 
+  IViewSort_GUID = LibC::GUID.new("0c733a9a-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IViewSort = "0c733a9a-2a1c-11ce-ade5-00aa0044773d"
   struct IViewSort
     lpVtbl : IViewSortVTbl*
   end
@@ -5716,6 +5766,8 @@ lib LibWin32
     set_filter : Proc(IViewFilter*, LibC::UINT_PTR, LibC::UINT_PTR, UInt32*, Void*, HRESULT)
   end
 
+  IViewFilter_GUID = LibC::GUID.new("0c733a9b-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IViewFilter = "0c733a9b-2a1c-11ce-ade5-00aa0044773d"
   struct IViewFilter
     lpVtbl : IViewFilterVTbl*
   end
@@ -5728,6 +5780,8 @@ lib LibWin32
     get_view : Proc(IRowsetView*, LibC::UINT_PTR, Guid*, LibC::UINT_PTR*, IUnknown*, HRESULT)
   end
 
+  IRowsetView_GUID = LibC::GUID.new("0c733a99-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetView = "0c733a99-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetView
     lpVtbl : IRowsetViewVTbl*
   end
@@ -5741,6 +5795,8 @@ lib LibWin32
     insert_row : Proc(IRowsetChange*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR*, HRESULT)
   end
 
+  IRowsetChange_GUID = LibC::GUID.new("0c733a05-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetChange = "0c733a05-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetChange
     lpVtbl : IRowsetChangeVTbl*
   end
@@ -5759,6 +5815,8 @@ lib LibWin32
     update : Proc(IRowsetUpdate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)
   end
 
+  IRowsetUpdate_GUID = LibC::GUID.new("0c733a6d-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetUpdate = "0c733a6d-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetUpdate
     lpVtbl : IRowsetUpdateVTbl*
   end
@@ -5770,6 +5828,8 @@ lib LibWin32
     is_same_row : Proc(IRowsetIdentity*, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
   end
 
+  IRowsetIdentity_GUID = LibC::GUID.new("0c733a09-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetIdentity = "0c733a09-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetIdentity
     lpVtbl : IRowsetIdentityVTbl*
   end
@@ -5783,6 +5843,8 @@ lib LibWin32
     on_rowset_change : Proc(IRowsetNotify*, IRowset, UInt32, UInt32, LibC::BOOL, HRESULT)
   end
 
+  IRowsetNotify_GUID = LibC::GUID.new("0c733a83-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetNotify = "0c733a83-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetNotify
     lpVtbl : IRowsetNotifyVTbl*
   end
@@ -5796,6 +5858,8 @@ lib LibWin32
     set_range : Proc(IRowsetIndex*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, UInt32, HRESULT)
   end
 
+  IRowsetIndex_GUID = LibC::GUID.new("0c733a82-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetIndex = "0c733a82-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetIndex
     lpVtbl : IRowsetIndexVTbl*
   end
@@ -5809,6 +5873,8 @@ lib LibWin32
     get_db_session : Proc(ICommand*, Guid*, IUnknown*, HRESULT)
   end
 
+  ICommand_GUID = LibC::GUID.new("0c733a63-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommand = "0c733a63-2a1c-11ce-ade5-00aa0044773d"
   struct ICommand
     lpVtbl : ICommandVTbl*
   end
@@ -5820,6 +5886,8 @@ lib LibWin32
     get_result : Proc(IMultipleResults*, IUnknown, LibC::IntPtrT, Guid*, LibC::IntPtrT*, IUnknown*, HRESULT)
   end
 
+  IMultipleResults_GUID = LibC::GUID.new("0c733a90-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IMultipleResults = "0c733a90-2a1c-11ce-ade5-00aa0044773d"
   struct IMultipleResults
     lpVtbl : IMultipleResultsVTbl*
   end
@@ -5831,6 +5899,8 @@ lib LibWin32
     can_convert : Proc(IConvertType*, UInt16, UInt16, UInt32, HRESULT)
   end
 
+  IConvertType_GUID = LibC::GUID.new("0c733a88-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IConvertType = "0c733a88-2a1c-11ce-ade5-00aa0044773d"
   struct IConvertType
     lpVtbl : IConvertTypeVTbl*
   end
@@ -5843,6 +5913,8 @@ lib LibWin32
     unprepare : Proc(ICommandPrepare*, HRESULT)
   end
 
+  ICommandPrepare_GUID = LibC::GUID.new("0c733a26-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommandPrepare = "0c733a26-2a1c-11ce-ade5-00aa0044773d"
   struct ICommandPrepare
     lpVtbl : ICommandPrepareVTbl*
   end
@@ -5855,6 +5927,8 @@ lib LibWin32
     set_properties : Proc(ICommandProperties*, UInt32, DBPROPSET*, HRESULT)
   end
 
+  ICommandProperties_GUID = LibC::GUID.new("0c733a79-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommandProperties = "0c733a79-2a1c-11ce-ade5-00aa0044773d"
   struct ICommandProperties
     lpVtbl : ICommandPropertiesVTbl*
   end
@@ -5870,6 +5944,8 @@ lib LibWin32
     set_command_text : Proc(ICommandText*, Guid*, LibC::LPWSTR, HRESULT)
   end
 
+  ICommandText_GUID = LibC::GUID.new("0c733a27-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommandText = "0c733a27-2a1c-11ce-ade5-00aa0044773d"
   struct ICommandText
     lpVtbl : ICommandTextVTbl*
   end
@@ -5883,6 +5959,8 @@ lib LibWin32
     set_parameter_info : Proc(ICommandWithParameters*, LibC::UINT_PTR, LibC::UINT_PTR*, DBPARAMBINDINFO*, HRESULT)
   end
 
+  ICommandWithParameters_GUID = LibC::GUID.new("0c733a64-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommandWithParameters = "0c733a64-2a1c-11ce-ade5-00aa0044773d"
   struct ICommandWithParameters
     lpVtbl : ICommandWithParametersVTbl*
   end
@@ -5895,6 +5973,8 @@ lib LibWin32
     get_columns_rowset : Proc(IColumnsRowset*, IUnknown, LibC::UINT_PTR, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
   end
 
+  IColumnsRowset_GUID = LibC::GUID.new("0c733a10-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IColumnsRowset = "0c733a10-2a1c-11ce-ade5-00aa0044773d"
   struct IColumnsRowset
     lpVtbl : IColumnsRowsetVTbl*
   end
@@ -5907,6 +5987,8 @@ lib LibWin32
     map_column_i_ds : Proc(IColumnsInfo*, LibC::UINT_PTR, DBID*, LibC::UINT_PTR*, HRESULT)
   end
 
+  IColumnsInfo_GUID = LibC::GUID.new("0c733a11-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IColumnsInfo = "0c733a11-2a1c-11ce-ade5-00aa0044773d"
   struct IColumnsInfo
     lpVtbl : IColumnsInfoVTbl*
   end
@@ -5918,6 +6000,8 @@ lib LibWin32
     create_command : Proc(IDBCreateCommand*, IUnknown, Guid*, IUnknown*, HRESULT)
   end
 
+  IDBCreateCommand_GUID = LibC::GUID.new("0c733a1d-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBCreateCommand = "0c733a1d-2a1c-11ce-ade5-00aa0044773d"
   struct IDBCreateCommand
     lpVtbl : IDBCreateCommandVTbl*
   end
@@ -5929,6 +6013,8 @@ lib LibWin32
     create_session : Proc(IDBCreateSession*, IUnknown, Guid*, IUnknown*, HRESULT)
   end
 
+  IDBCreateSession_GUID = LibC::GUID.new("0c733a5d-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBCreateSession = "0c733a5d-2a1c-11ce-ade5-00aa0044773d"
   struct IDBCreateSession
     lpVtbl : IDBCreateSessionVTbl*
   end
@@ -5940,6 +6026,8 @@ lib LibWin32
     get_sources_rowset : Proc(ISourcesRowset*, IUnknown, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
   end
 
+  ISourcesRowset_GUID = LibC::GUID.new("0c733a1e-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ISourcesRowset = "0c733a1e-2a1c-11ce-ade5-00aa0044773d"
   struct ISourcesRowset
     lpVtbl : ISourcesRowsetVTbl*
   end
@@ -5953,6 +6041,8 @@ lib LibWin32
     set_properties : Proc(IDBProperties*, UInt32, DBPROPSET*, HRESULT)
   end
 
+  IDBProperties_GUID = LibC::GUID.new("0c733a8a-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBProperties = "0c733a8a-2a1c-11ce-ade5-00aa0044773d"
   struct IDBProperties
     lpVtbl : IDBPropertiesVTbl*
   end
@@ -5965,6 +6055,8 @@ lib LibWin32
     uninitialize : Proc(IDBInitialize*, HRESULT)
   end
 
+  IDBInitialize_GUID = LibC::GUID.new("0c733a8b-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBInitialize = "0c733a8b-2a1c-11ce-ade5-00aa0044773d"
   struct IDBInitialize
     lpVtbl : IDBInitializeVTbl*
   end
@@ -5977,6 +6069,8 @@ lib LibWin32
     get_literal_info : Proc(IDBInfo*, UInt32, UInt32*, UInt32*, DBLITERALINFO**, UInt16**, HRESULT)
   end
 
+  IDBInfo_GUID = LibC::GUID.new("0c733a89-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBInfo = "0c733a89-2a1c-11ce-ade5-00aa0044773d"
   struct IDBInfo
     lpVtbl : IDBInfoVTbl*
   end
@@ -5991,6 +6085,8 @@ lib LibWin32
     modify_data_source : Proc(IDBDataSourceAdmin*, UInt32, DBPROPSET*, HRESULT)
   end
 
+  IDBDataSourceAdmin_GUID = LibC::GUID.new("0c733a7a-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBDataSourceAdmin = "0c733a7a-2a1c-11ce-ade5-00aa0044773d"
   struct IDBDataSourceAdmin
     lpVtbl : IDBDataSourceAdminVTbl*
   end
@@ -6004,6 +6100,8 @@ lib LibWin32
     on_stop : Proc(IDBAsynchNotify*, LibC::UINT_PTR, UInt32, HRESULT, LibC::LPWSTR, HRESULT)
   end
 
+  IDBAsynchNotify_GUID = LibC::GUID.new("0c733a96-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBAsynchNotify = "0c733a96-2a1c-11ce-ade5-00aa0044773d"
   struct IDBAsynchNotify
     lpVtbl : IDBAsynchNotifyVTbl*
   end
@@ -6016,6 +6114,8 @@ lib LibWin32
     get_status : Proc(IDBAsynchStatus*, LibC::UINT_PTR, UInt32, LibC::UINT_PTR*, LibC::UINT_PTR*, UInt32*, LibC::LPWSTR*, HRESULT)
   end
 
+  IDBAsynchStatus_GUID = LibC::GUID.new("0c733a95-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBAsynchStatus = "0c733a95-2a1c-11ce-ade5-00aa0044773d"
   struct IDBAsynchStatus
     lpVtbl : IDBAsynchStatusVTbl*
   end
@@ -6028,6 +6128,8 @@ lib LibWin32
     set_properties : Proc(ISessionProperties*, UInt32, DBPROPSET*, HRESULT)
   end
 
+  ISessionProperties_GUID = LibC::GUID.new("0c733a85-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ISessionProperties = "0c733a85-2a1c-11ce-ade5-00aa0044773d"
   struct ISessionProperties
     lpVtbl : ISessionPropertiesVTbl*
   end
@@ -6040,6 +6142,8 @@ lib LibWin32
     drop_index : Proc(IIndexDefinition*, DBID*, DBID*, HRESULT)
   end
 
+  IIndexDefinition_GUID = LibC::GUID.new("0c733a68-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IIndexDefinition = "0c733a68-2a1c-11ce-ade5-00aa0044773d"
   struct IIndexDefinition
     lpVtbl : IIndexDefinitionVTbl*
   end
@@ -6054,6 +6158,8 @@ lib LibWin32
     drop_column : Proc(ITableDefinition*, DBID*, DBID*, HRESULT)
   end
 
+  ITableDefinition_GUID = LibC::GUID.new("0c733a86-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITableDefinition = "0c733a86-2a1c-11ce-ade5-00aa0044773d"
   struct ITableDefinition
     lpVtbl : ITableDefinitionVTbl*
   end
@@ -6065,6 +6171,8 @@ lib LibWin32
     open_rowset : Proc(IOpenRowset*, IUnknown, DBID*, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
   end
 
+  IOpenRowset_GUID = LibC::GUID.new("0c733a69-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IOpenRowset = "0c733a69-2a1c-11ce-ade5-00aa0044773d"
   struct IOpenRowset
     lpVtbl : IOpenRowsetVTbl*
   end
@@ -6077,6 +6185,8 @@ lib LibWin32
     get_schemas : Proc(IDBSchemaRowset*, UInt32*, Guid**, UInt32**, HRESULT)
   end
 
+  IDBSchemaRowset_GUID = LibC::GUID.new("0c733a7b-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBSchemaRowset = "0c733a7b-2a1c-11ce-ade5-00aa0044773d"
   struct IDBSchemaRowset
     lpVtbl : IDBSchemaRowsetVTbl*
   end
@@ -6092,6 +6202,8 @@ lib LibWin32
     get_specification : Proc(IMDDataset*, Guid*, IUnknown*, HRESULT)
   end
 
+  IMDDataset_GUID = LibC::GUID.new("a07cccd1-8148-11d0-87bb-00c04fc33942")
+  CLSID_IMDDataset = "a07cccd1-8148-11d0-87bb-00c04fc33942"
   struct IMDDataset
     lpVtbl : IMDDatasetVTbl*
   end
@@ -6104,6 +6216,8 @@ lib LibWin32
     find_tuple : Proc(IMDFind*, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::LPWSTR*, UInt32*, HRESULT)
   end
 
+  IMDFind_GUID = LibC::GUID.new("a07cccd2-8148-11d0-87bb-00c04fc33942")
+  CLSID_IMDFind = "a07cccd2-8148-11d0-87bb-00c04fc33942"
   struct IMDFind
     lpVtbl : IMDFindVTbl*
   end
@@ -6115,6 +6229,8 @@ lib LibWin32
     get_range_rowset : Proc(IMDRangeRowset*, IUnknown, LibC::UINT_PTR, LibC::UINT_PTR, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
   end
 
+  IMDRangeRowset_GUID = LibC::GUID.new("0c733aa0-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IMDRangeRowset = "0c733aa0-2a1c-11ce-ade5-00aa0044773d"
   struct IMDRangeRowset
     lpVtbl : IMDRangeRowsetVTbl*
   end
@@ -6127,6 +6243,8 @@ lib LibWin32
     alter_table : Proc(IAlterTable*, DBID*, DBID*, UInt32, DBPROPSET*, HRESULT)
   end
 
+  IAlterTable_GUID = LibC::GUID.new("0c733aa5-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IAlterTable = "0c733aa5-2a1c-11ce-ade5-00aa0044773d"
   struct IAlterTable
     lpVtbl : IAlterTableVTbl*
   end
@@ -6138,6 +6256,8 @@ lib LibWin32
     alter_index : Proc(IAlterIndex*, DBID*, DBID*, DBID*, UInt32, DBPROPSET*, HRESULT)
   end
 
+  IAlterIndex_GUID = LibC::GUID.new("0c733aa6-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IAlterIndex = "0c733aa6-2a1c-11ce-ade5-00aa0044773d"
   struct IAlterIndex
     lpVtbl : IAlterIndexVTbl*
   end
@@ -6149,6 +6269,8 @@ lib LibWin32
     is_row_in_chapter : Proc(IRowsetChapterMember*, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
   end
 
+  IRowsetChapterMember_GUID = LibC::GUID.new("0c733aa8-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetChapterMember = "0c733aa8-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetChapterMember
     lpVtbl : IRowsetChapterMemberVTbl*
   end
@@ -6163,6 +6285,8 @@ lib LibWin32
     save_command : Proc(ICommandPersist*, DBID*, UInt32, HRESULT)
   end
 
+  ICommandPersist_GUID = LibC::GUID.new("0c733aa7-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommandPersist = "0c733aa7-2a1c-11ce-ade5-00aa0044773d"
   struct ICommandPersist
     lpVtbl : ICommandPersistVTbl*
   end
@@ -6175,6 +6299,8 @@ lib LibWin32
     get_last_visible_data : Proc(IRowsetRefresh*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
   end
 
+  IRowsetRefresh_GUID = LibC::GUID.new("0c733aa9-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetRefresh = "0c733aa9-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetRefresh
     lpVtbl : IRowsetRefreshVTbl*
   end
@@ -6186,6 +6312,8 @@ lib LibWin32
     get_child_rowset : Proc(IParentRowset*, IUnknown, LibC::UINT_PTR, Guid*, IUnknown*, HRESULT)
   end
 
+  IParentRowset_GUID = LibC::GUID.new("0c733aaa-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IParentRowset = "0c733aaa-2a1c-11ce-ade5-00aa0044773d"
   struct IParentRowset
     lpVtbl : IParentRowsetVTbl*
   end
@@ -6202,6 +6330,8 @@ lib LibWin32
     get_record_count : Proc(IErrorRecords*, UInt32*, HRESULT)
   end
 
+  IErrorRecords_GUID = LibC::GUID.new("0c733a67-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IErrorRecords = "0c733a67-2a1c-11ce-ade5-00aa0044773d"
   struct IErrorRecords
     lpVtbl : IErrorRecordsVTbl*
   end
@@ -6215,6 +6345,8 @@ lib LibWin32
     release_errors : Proc(IErrorLookup*, UInt32, HRESULT)
   end
 
+  IErrorLookup_GUID = LibC::GUID.new("0c733a66-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IErrorLookup = "0c733a66-2a1c-11ce-ade5-00aa0044773d"
   struct IErrorLookup
     lpVtbl : IErrorLookupVTbl*
   end
@@ -6226,6 +6358,8 @@ lib LibWin32
     get_sql_info : Proc(ISQLErrorInfo*, UInt8**, Int32*, HRESULT)
   end
 
+  ISQLErrorInfo_GUID = LibC::GUID.new("0c733a74-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ISQLErrorInfo = "0c733a74-2a1c-11ce-ade5-00aa0044773d"
   struct ISQLErrorInfo
     lpVtbl : ISQLErrorInfoVTbl*
   end
@@ -6237,6 +6371,8 @@ lib LibWin32
     get_data_source : Proc(IGetDataSource*, Guid*, IUnknown*, HRESULT)
   end
 
+  IGetDataSource_GUID = LibC::GUID.new("0c733a75-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IGetDataSource = "0c733a75-2a1c-11ce-ade5-00aa0044773d"
   struct IGetDataSource
     lpVtbl : IGetDataSourceVTbl*
   end
@@ -6252,6 +6388,8 @@ lib LibWin32
     start_transaction : Proc(ITransactionLocal*, Int32, UInt32, ITransactionOptions, UInt32*, HRESULT)
   end
 
+  ITransactionLocal_GUID = LibC::GUID.new("0c733a5f-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITransactionLocal = "0c733a5f-2a1c-11ce-ade5-00aa0044773d"
   struct ITransactionLocal
     lpVtbl : ITransactionLocalVTbl*
   end
@@ -6264,6 +6402,8 @@ lib LibWin32
     join_transaction : Proc(ITransactionJoin*, IUnknown, Int32, UInt32, ITransactionOptions, HRESULT)
   end
 
+  ITransactionJoin_GUID = LibC::GUID.new("0c733a5e-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITransactionJoin = "0c733a5e-2a1c-11ce-ade5-00aa0044773d"
   struct ITransactionJoin
     lpVtbl : ITransactionJoinVTbl*
   end
@@ -6275,6 +6415,8 @@ lib LibWin32
     get_transaction_object : Proc(ITransactionObject*, UInt32, ITransaction*, HRESULT)
   end
 
+  ITransactionObject_GUID = LibC::GUID.new("0c733a60-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITransactionObject = "0c733a60-2a1c-11ce-ade5-00aa0044773d"
   struct ITransactionObject
     lpVtbl : ITransactionObjectVTbl*
   end
@@ -6290,6 +6432,8 @@ lib LibWin32
     get_trustee_properties : Proc(ITrusteeAdmin*, TRUSTEE_W*, UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)
   end
 
+  ITrusteeAdmin_GUID = LibC::GUID.new("0c733aa1-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITrusteeAdmin = "0c733aa1-2a1c-11ce-ade5-00aa0044773d"
   struct ITrusteeAdmin
     lpVtbl : ITrusteeAdminVTbl*
   end
@@ -6305,6 +6449,8 @@ lib LibWin32
     get_memberships : Proc(ITrusteeGroupAdmin*, TRUSTEE_W*, UInt32*, TRUSTEE_W**, HRESULT)
   end
 
+  ITrusteeGroupAdmin_GUID = LibC::GUID.new("0c733aa2-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITrusteeGroupAdmin = "0c733aa2-2a1c-11ce-ade5-00aa0044773d"
   struct ITrusteeGroupAdmin
     lpVtbl : ITrusteeGroupAdminVTbl*
   end
@@ -6320,6 +6466,8 @@ lib LibWin32
     set_object_owner : Proc(IObjectAccessControl*, SEC_OBJECT*, TRUSTEE_W*, HRESULT)
   end
 
+  IObjectAccessControl_GUID = LibC::GUID.new("0c733aa3-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IObjectAccessControl = "0c733aa3-2a1c-11ce-ade5-00aa0044773d"
   struct IObjectAccessControl
     lpVtbl : IObjectAccessControlVTbl*
   end
@@ -6333,6 +6481,8 @@ lib LibWin32
     get_permissions : Proc(ISecurityInfo*, Guid, UInt32*, HRESULT)
   end
 
+  ISecurityInfo_GUID = LibC::GUID.new("0c733aa4-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ISecurityInfo = "0c733aa4-2a1c-11ce-ade5-00aa0044773d"
   struct ISecurityInfo
     lpVtbl : ISecurityInfoVTbl*
   end
@@ -6348,6 +6498,8 @@ lib LibWin32
     get_table_definition : Proc(ITableCreation*, DBID*, LibC::UINT_PTR*, DBCOLUMNDESC**, UInt32*, DBPROPSET**, UInt32*, DBCONSTRAINTDESC**, UInt16**, HRESULT)
   end
 
+  ITableCreation_GUID = LibC::GUID.new("0c733abc-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITableCreation = "0c733abc-2a1c-11ce-ade5-00aa0044773d"
   struct ITableCreation
     lpVtbl : ITableCreationVTbl*
   end
@@ -6366,6 +6518,8 @@ lib LibWin32
     drop_constraint : Proc(ITableDefinitionWithConstraints*, DBID*, DBID*, HRESULT)
   end
 
+  ITableDefinitionWithConstraints_GUID = LibC::GUID.new("0c733aab-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITableDefinitionWithConstraints = "0c733aab-2a1c-11ce-ade5-00aa0044773d"
   struct ITableDefinitionWithConstraints
     lpVtbl : ITableDefinitionWithConstraintsVTbl*
   end
@@ -6379,6 +6533,8 @@ lib LibWin32
     open : Proc(IRow*, IUnknown, DBID*, Guid*, UInt32, Guid*, IUnknown*, HRESULT)
   end
 
+  IRow_GUID = LibC::GUID.new("0c733ab4-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRow = "0c733ab4-2a1c-11ce-ade5-00aa0044773d"
   struct IRow
     lpVtbl : IRowVTbl*
   end
@@ -6390,6 +6546,8 @@ lib LibWin32
     set_columns : Proc(IRowChange*, LibC::UINT_PTR, DBCOLUMNACCESS*, HRESULT)
   end
 
+  IRowChange_GUID = LibC::GUID.new("0c733ab5-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowChange = "0c733ab5-2a1c-11ce-ade5-00aa0044773d"
   struct IRowChange
     lpVtbl : IRowChangeVTbl*
   end
@@ -6403,6 +6561,8 @@ lib LibWin32
     add_columns : Proc(IRowSchemaChange*, LibC::UINT_PTR, DBCOLUMNINFO*, DBCOLUMNACCESS*, HRESULT)
   end
 
+  IRowSchemaChange_GUID = LibC::GUID.new("0c733aae-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowSchemaChange = "0c733aae-2a1c-11ce-ade5-00aa0044773d"
   struct IRowSchemaChange
     lpVtbl : IRowSchemaChangeVTbl*
   end
@@ -6415,6 +6575,8 @@ lib LibWin32
     get_url_from_hrow : Proc(IGetRow*, LibC::UINT_PTR, LibC::LPWSTR*, HRESULT)
   end
 
+  IGetRow_GUID = LibC::GUID.new("0c733aaf-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IGetRow = "0c733aaf-2a1c-11ce-ade5-00aa0044773d"
   struct IGetRow
     lpVtbl : IGetRowVTbl*
   end
@@ -6426,6 +6588,8 @@ lib LibWin32
     bind : Proc(IBindResource*, IUnknown, LibC::LPWSTR, UInt32, Guid*, Guid*, IAuthenticate, DBIMPLICITSESSION*, UInt32*, IUnknown*, HRESULT)
   end
 
+  IBindResource_GUID = LibC::GUID.new("0c733ab1-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IBindResource = "0c733ab1-2a1c-11ce-ade5-00aa0044773d"
   struct IBindResource
     lpVtbl : IBindResourceVTbl*
   end
@@ -6441,6 +6605,8 @@ lib LibWin32
     open_rowset : Proc(IScopedOperations*, IUnknown, DBID*, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
   end
 
+  IScopedOperations_GUID = LibC::GUID.new("0c733ab0-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IScopedOperations = "0c733ab0-2a1c-11ce-ade5-00aa0044773d"
   struct IScopedOperations
     lpVtbl : IScopedOperationsVTbl*
   end
@@ -6452,6 +6618,8 @@ lib LibWin32
     create_row : Proc(ICreateRow*, IUnknown, LibC::LPWSTR, UInt32, Guid*, Guid*, IAuthenticate, DBIMPLICITSESSION*, UInt32*, LibC::LPWSTR*, IUnknown*, HRESULT)
   end
 
+  ICreateRow_GUID = LibC::GUID.new("0c733ab2-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICreateRow = "0c733ab2-2a1c-11ce-ade5-00aa0044773d"
   struct ICreateRow
     lpVtbl : ICreateRowVTbl*
   end
@@ -6466,6 +6634,8 @@ lib LibWin32
     reset : Proc(IDBBinderProperties*, HRESULT)
   end
 
+  IDBBinderProperties_GUID = LibC::GUID.new("0c733ab3-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBBinderProperties = "0c733ab3-2a1c-11ce-ade5-00aa0044773d"
   struct IDBBinderProperties
     lpVtbl : IDBBinderPropertiesVTbl*
   end
@@ -6479,6 +6649,8 @@ lib LibWin32
     get_restricted_column_info : Proc(IColumnsInfo2*, LibC::UINT_PTR, DBID*, UInt32, LibC::UINT_PTR*, DBID**, DBCOLUMNINFO**, UInt16**, HRESULT)
   end
 
+  IColumnsInfo2_GUID = LibC::GUID.new("0c733ab8-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IColumnsInfo2 = "0c733ab8-2a1c-11ce-ade5-00aa0044773d"
   struct IColumnsInfo2
     lpVtbl : IColumnsInfo2VTbl*
   end
@@ -6492,6 +6664,8 @@ lib LibWin32
     unregister_provider : Proc(IRegisterProvider*, LibC::LPWSTR, LibC::UINT_PTR, Guid*, HRESULT)
   end
 
+  IRegisterProvider_GUID = LibC::GUID.new("0c733ab9-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRegisterProvider = "0c733ab9-2a1c-11ce-ade5-00aa0044773d"
   struct IRegisterProvider
     lpVtbl : IRegisterProviderVTbl*
   end
@@ -6503,6 +6677,8 @@ lib LibWin32
     get_session : Proc(IGetSession*, Guid*, IUnknown*, HRESULT)
   end
 
+  IGetSession_GUID = LibC::GUID.new("0c733aba-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IGetSession = "0c733aba-2a1c-11ce-ade5-00aa0044773d"
   struct IGetSession
     lpVtbl : IGetSessionVTbl*
   end
@@ -6514,6 +6690,8 @@ lib LibWin32
     get_source_row : Proc(IGetSourceRow*, Guid*, IUnknown*, HRESULT)
   end
 
+  IGetSourceRow_GUID = LibC::GUID.new("0c733abb-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IGetSourceRow = "0c733abb-2a1c-11ce-ade5-00aa0044773d"
   struct IGetSourceRow
     lpVtbl : IGetSourceRowVTbl*
   end
@@ -6529,6 +6707,8 @@ lib LibWin32
     set_index : Proc(IRowsetCurrentIndex*, DBID*, HRESULT)
   end
 
+  IRowsetCurrentIndex_GUID = LibC::GUID.new("0c733abd-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetCurrentIndex = "0c733abd-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetCurrentIndex
     lpVtbl : IRowsetCurrentIndexVTbl*
   end
@@ -6541,6 +6721,8 @@ lib LibWin32
     set_command_stream : Proc(ICommandStream*, Guid*, Guid*, IUnknown, HRESULT)
   end
 
+  ICommandStream_GUID = LibC::GUID.new("0c733abf-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommandStream = "0c733abf-2a1c-11ce-ade5-00aa0044773d"
   struct ICommandStream
     lpVtbl : ICommandStreamVTbl*
   end
@@ -6552,6 +6734,8 @@ lib LibWin32
     position_on_bookmark : Proc(IRowsetBookmark*, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, HRESULT)
   end
 
+  IRowsetBookmark_GUID = LibC::GUID.new("0c733ac2-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetBookmark = "0c733ac2-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetBookmark
     lpVtbl : IRowsetBookmarkVTbl*
   end
@@ -6570,6 +6754,8 @@ lib LibWin32
     restate_property_value_to_string : Proc(IQueryParser*, ICondition, LibC::BOOL, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
   end
 
+  IQueryParser_GUID = LibC::GUID.new("2ebdee67-3505-43f8-9946-ea44abc8e5b0")
+  CLSID_IQueryParser = "2ebdee67-3505-43f8-9946-ea44abc8e5b0"
   struct IQueryParser
     lpVtbl : IQueryParserVTbl*
   end
@@ -6584,6 +6770,8 @@ lib LibWin32
     resolve : Proc(IConditionFactory*, ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, ICondition*, HRESULT)
   end
 
+  IConditionFactory_GUID = LibC::GUID.new("a5efe073-b16f-474f-9f3e-9f8b497a3e08")
+  CLSID_IConditionFactory = "a5efe073-b16f-474f-9f3e-9f8b497a3e08"
   struct IConditionFactory
     lpVtbl : IConditionFactoryVTbl*
   end
@@ -6601,6 +6789,8 @@ lib LibWin32
     get_lexical_data : Proc(IQuerySolution*, LibC::LPWSTR*, ITokenCollection*, UInt32*, IUnknown*, HRESULT)
   end
 
+  IQuerySolution_GUID = LibC::GUID.new("d6ebc66b-8921-4193-afdd-a1789fb7ff57")
+  CLSID_IQuerySolution = "d6ebc66b-8921-4193-afdd-a1789fb7ff57"
   struct IQuerySolution
     lpVtbl : IQuerySolutionVTbl*
   end
@@ -6624,6 +6814,8 @@ lib LibWin32
     resolve_condition : Proc(IConditionFactory2*, ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, Guid*, Void**, HRESULT)
   end
 
+  IConditionFactory2_GUID = LibC::GUID.new("71d222e1-432f-429e-8c13-b6dafde5077a")
+  CLSID_IConditionFactory2 = "71d222e1-432f-429e-8c13-b6dafde5077a"
   struct IConditionFactory2
     lpVtbl : IConditionFactory2VTbl*
   end
@@ -6638,6 +6830,8 @@ lib LibWin32
     default_phrase : Proc(IConditionGenerator*, LibC::LPWSTR, PROPVARIANT*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
   end
 
+  IConditionGenerator_GUID = LibC::GUID.new("92d2cc58-4386-45a3-b98c-7e0ce64a4117")
+  CLSID_IConditionGenerator = "92d2cc58-4386-45a3-b98c-7e0ce64a4117"
   struct IConditionGenerator
     lpVtbl : IConditionGeneratorVTbl*
   end
@@ -6649,6 +6843,8 @@ lib LibWin32
     get_limits : Proc(IInterval*, INTERVAL_LIMIT_KIND*, PROPVARIANT*, INTERVAL_LIMIT_KIND*, PROPVARIANT*, HRESULT)
   end
 
+  IInterval_GUID = LibC::GUID.new("6bf0a714-3c18-430b-8b5d-83b1c234d3db")
+  CLSID_IInterval = "6bf0a714-3c18-430b-8b5d-83b1c234d3db"
   struct IInterval
     lpVtbl : IIntervalVTbl*
   end
@@ -6660,6 +6856,8 @@ lib LibWin32
     get_data : Proc(IMetaData*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
   end
 
+  IMetaData_GUID = LibC::GUID.new("780102b0-c43b-4876-bc7b-5e9ba5c88794")
+  CLSID_IMetaData = "780102b0-c43b-4876-bc7b-5e9ba5c88794"
   struct IMetaData
     lpVtbl : IMetaDataVTbl*
   end
@@ -6678,6 +6876,8 @@ lib LibWin32
     default_phrase : Proc(IEntity*, LibC::LPWSTR*, HRESULT)
   end
 
+  IEntity_GUID = LibC::GUID.new("24264891-e80b-4fd3-b7ce-4ff2fae8931f")
+  CLSID_IEntity = "24264891-e80b-4fd3-b7ce-4ff2fae8931f"
   struct IEntity
     lpVtbl : IEntityVTbl*
   end
@@ -6693,6 +6893,8 @@ lib LibWin32
     default_phrase : Proc(IRelationship*, LibC::LPWSTR*, HRESULT)
   end
 
+  IRelationship_GUID = LibC::GUID.new("2769280b-5108-498c-9c7f-a51239b63147")
+  CLSID_IRelationship = "2769280b-5108-498c-9c7f-a51239b63147"
   struct IRelationship
     lpVtbl : IRelationshipVTbl*
   end
@@ -6705,6 +6907,8 @@ lib LibWin32
     default_phrase : Proc(INamedEntity*, LibC::LPWSTR*, HRESULT)
   end
 
+  INamedEntity_GUID = LibC::GUID.new("abdbd0b1-7d54-49fb-ab5c-bff4130004cd")
+  CLSID_INamedEntity = "abdbd0b1-7d54-49fb-ab5c-bff4130004cd"
   struct INamedEntity
     lpVtbl : INamedEntityVTbl*
   end
@@ -6722,6 +6926,8 @@ lib LibWin32
     lookup_authored_named_entity : Proc(ISchemaProvider*, IEntity, LibC::LPWSTR, ITokenCollection, UInt32, UInt32*, LibC::LPWSTR*, HRESULT)
   end
 
+  ISchemaProvider_GUID = LibC::GUID.new("8cf89bcb-394c-49b2-ae28-a59dd4ed7f68")
+  CLSID_ISchemaProvider = "8cf89bcb-394c-49b2-ae28-a59dd4ed7f68"
   struct ISchemaProvider
     lpVtbl : ISchemaProviderVTbl*
   end
@@ -6734,6 +6940,8 @@ lib LibWin32
     get_token : Proc(ITokenCollection*, UInt32, UInt32*, UInt32*, LibC::LPWSTR*, HRESULT)
   end
 
+  ITokenCollection_GUID = LibC::GUID.new("22d8b4f2-f577-4adb-a335-c2ae88416fab")
+  CLSID_ITokenCollection = "22d8b4f2-f577-4adb-a335-c2ae88416fab"
   struct ITokenCollection
     lpVtbl : ITokenCollectionVTbl*
   end
@@ -6745,6 +6953,8 @@ lib LibWin32
     add : Proc(INamedEntityCollector*, UInt32, UInt32, UInt32, UInt32, IEntity, LibC::LPWSTR, NAMED_ENTITY_CERTAINTY, HRESULT)
   end
 
+  INamedEntityCollector_GUID = LibC::GUID.new("af2440f6-8afc-47d0-9a7f-396a0acfb43d")
+  CLSID_INamedEntityCollector = "af2440f6-8afc-47d0-9a7f-396a0acfb43d"
   struct INamedEntityCollector
     lpVtbl : INamedEntityCollectorVTbl*
   end
@@ -6756,6 +6966,8 @@ lib LibWin32
     localize : Proc(ISchemaLocalizerSupport*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
+  ISchemaLocalizerSupport_GUID = LibC::GUID.new("ca3fdca2-bfbe-4eed-90d7-0caef0a1bda1")
+  CLSID_ISchemaLocalizerSupport = "ca3fdca2-bfbe-4eed-90d7-0caef0a1bda1"
   struct ISchemaLocalizerSupport
     lpVtbl : ISchemaLocalizerSupportVTbl*
   end
@@ -6769,6 +6981,8 @@ lib LibWin32
     set_option : Proc(IQueryParserManager*, QUERY_PARSER_MANAGER_OPTION, PROPVARIANT*, HRESULT)
   end
 
+  IQueryParserManager_GUID = LibC::GUID.new("a879e3c4-af77-44fb-8f37-ebd1487cf920")
+  CLSID_IQueryParserManager = "a879e3c4-af77-44fb-8f37-ebd1487cf920"
   struct IQueryParserManager
     lpVtbl : IQueryParserManagerVTbl*
   end
@@ -6792,6 +7006,8 @@ lib LibWin32
     bind_to_filter : Proc(IUrlAccessor*, IFilter*, HRESULT)
   end
 
+  IUrlAccessor_GUID = LibC::GUID.new("0b63e318-9ccc-11d0-bcdb-00805fccce04")
+  CLSID_IUrlAccessor = "0b63e318-9ccc-11d0-bcdb-00805fccce04"
   struct IUrlAccessor
     lpVtbl : IUrlAccessorVTbl*
   end
@@ -6818,6 +7034,8 @@ lib LibWin32
     get_code_page : Proc(IUrlAccessor2*, Char*, UInt32, UInt32*, HRESULT)
   end
 
+  IUrlAccessor2_GUID = LibC::GUID.new("c7310734-ac80-11d1-8df3-00c04fb6ef4f")
+  CLSID_IUrlAccessor2 = "c7310734-ac80-11d1-8df3-00c04fb6ef4f"
   struct IUrlAccessor2
     lpVtbl : IUrlAccessor2VTbl*
   end
@@ -6845,6 +7063,8 @@ lib LibWin32
     get_impersonation_sid_blobs : Proc(IUrlAccessor3*, LibC::LPWSTR, UInt32*, BLOB**, HRESULT)
   end
 
+  IUrlAccessor3_GUID = LibC::GUID.new("6fbc7005-0455-4874-b8ff-7439450241a3")
+  CLSID_IUrlAccessor3 = "6fbc7005-0455-4874-b8ff-7439450241a3"
   struct IUrlAccessor3
     lpVtbl : IUrlAccessor3VTbl*
   end
@@ -6874,6 +7094,8 @@ lib LibWin32
     should_index_property : Proc(IUrlAccessor4*, PROPERTYKEY*, LibC::BOOL*, HRESULT)
   end
 
+  IUrlAccessor4_GUID = LibC::GUID.new("5cc51041-c8d2-41d7-bca3-9e9e286297dc")
+  CLSID_IUrlAccessor4 = "5cc51041-c8d2-41d7-bca3-9e9e286297dc"
   struct IUrlAccessor4
     lpVtbl : IUrlAccessor4VTbl*
   end
@@ -6887,6 +7109,8 @@ lib LibWin32
     get_oplock_event_handle : Proc(IOpLockStatus*, LibC::HANDLE*, HRESULT)
   end
 
+  IOpLockStatus_GUID = LibC::GUID.new("c731065d-ac80-11d1-8df3-00c04fb6ef4f")
+  CLSID_IOpLockStatus = "c731065d-ac80-11d1-8df3-00c04fb6ef4f"
   struct IOpLockStatus
     lpVtbl : IOpLockStatusVTbl*
   end
@@ -6900,6 +7124,8 @@ lib LibWin32
     thread_idle : Proc(ISearchProtocolThreadContext*, UInt32, HRESULT)
   end
 
+  ISearchProtocolThreadContext_GUID = LibC::GUID.new("c73106e1-ac80-11d1-8df3-00c04fb6ef4f")
+  CLSID_ISearchProtocolThreadContext = "c73106e1-ac80-11d1-8df3-00c04fb6ef4f"
   struct ISearchProtocolThreadContext
     lpVtbl : ISearchProtocolThreadContextVTbl*
   end
@@ -6914,6 +7140,8 @@ lib LibWin32
     shut_down : Proc(ISearchProtocol*, HRESULT)
   end
 
+  ISearchProtocol_GUID = LibC::GUID.new("c73106ba-ac80-11d1-8df3-00c04fb6ef4f")
+  CLSID_ISearchProtocol = "c73106ba-ac80-11d1-8df3-00c04fb6ef4f"
   struct ISearchProtocol
     lpVtbl : ISearchProtocolVTbl*
   end
@@ -6929,6 +7157,8 @@ lib LibWin32
     create_accessor_ex : Proc(ISearchProtocol2*, LibC::LPWSTR, AUTHENTICATION_INFO*, INCREMENTAL_ACCESS_INFO*, ITEM_INFO*, BLOB*, IUrlAccessor*, HRESULT)
   end
 
+  ISearchProtocol2_GUID = LibC::GUID.new("7789f0b2-b5b2-4722-8b65-5dbd150697a9")
+  CLSID_ISearchProtocol2 = "7789f0b2-b5b2-4722-8b65-5dbd150697a9"
   struct ISearchProtocol2
     lpVtbl : ISearchProtocol2VTbl*
   end
@@ -6940,6 +7170,8 @@ lib LibWin32
     get_filter : Proc(IProtocolHandlerSite*, Guid*, LibC::LPWSTR, LibC::LPWSTR, IFilter*, HRESULT)
   end
 
+  IProtocolHandlerSite_GUID = LibC::GUID.new("0b63e385-9ccc-11d0-bcdb-00805fccce04")
+  CLSID_IProtocolHandlerSite = "0b63e385-9ccc-11d0-bcdb-00805fccce04"
   struct IProtocolHandlerSite
     lpVtbl : IProtocolHandlerSiteVTbl*
   end
@@ -6972,6 +7204,8 @@ lib LibWin32
     get_password : Proc(ISearchRoot*, LibC::LPWSTR*, HRESULT)
   end
 
+  ISearchRoot_GUID = LibC::GUID.new("04c18ccf-1f57-4cbd-88cc-3900f5195ce3")
+  CLSID_ISearchRoot = "04c18ccf-1f57-4cbd-88cc-3900f5195ce3"
   struct ISearchRoot
     lpVtbl : ISearchRootVTbl*
   end
@@ -6986,6 +7220,8 @@ lib LibWin32
     clone : Proc(IEnumSearchRoots*, IEnumSearchRoots*, HRESULT)
   end
 
+  IEnumSearchRoots_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef52")
+  CLSID_IEnumSearchRoots = "ab310581-ac80-11d1-8df3-00c04fb6ef52"
   struct IEnumSearchRoots
     lpVtbl : IEnumSearchRootsVTbl*
   end
@@ -7000,6 +7236,8 @@ lib LibWin32
     get_follow_flags : Proc(ISearchScopeRule*, UInt32*, HRESULT)
   end
 
+  ISearchScopeRule_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef53")
+  CLSID_ISearchScopeRule = "ab310581-ac80-11d1-8df3-00c04fb6ef53"
   struct ISearchScopeRule
     lpVtbl : ISearchScopeRuleVTbl*
   end
@@ -7014,6 +7252,8 @@ lib LibWin32
     clone : Proc(IEnumSearchScopeRules*, IEnumSearchScopeRules*, HRESULT)
   end
 
+  IEnumSearchScopeRules_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef54")
+  CLSID_IEnumSearchScopeRules = "ab310581-ac80-11d1-8df3-00c04fb6ef54"
   struct IEnumSearchScopeRules
     lpVtbl : IEnumSearchScopeRulesVTbl*
   end
@@ -7040,6 +7280,8 @@ lib LibWin32
     remove_default_scope_rule : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, HRESULT)
   end
 
+  ISearchCrawlScopeManager_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef55")
+  CLSID_ISearchCrawlScopeManager = "ab310581-ac80-11d1-8df3-00c04fb6ef55"
   struct ISearchCrawlScopeManager
     lpVtbl : ISearchCrawlScopeManagerVTbl*
   end
@@ -7067,6 +7309,8 @@ lib LibWin32
     get_version : Proc(ISearchCrawlScopeManager2*, Int32**, LibC::HANDLE*, HRESULT)
   end
 
+  ISearchCrawlScopeManager2_GUID = LibC::GUID.new("6292f7ad-4e19-4717-a534-8fc22bcd5ccd")
+  CLSID_ISearchCrawlScopeManager2 = "6292f7ad-4e19-4717-a534-8fc22bcd5ccd"
   struct ISearchCrawlScopeManager2
     lpVtbl : ISearchCrawlScopeManager2VTbl*
   end
@@ -7080,6 +7324,8 @@ lib LibWin32
     on_items_changed : Proc(ISearchItemsChangedSink*, UInt32, SEARCH_ITEM_CHANGE*, UInt32*, HRESULT*, HRESULT)
   end
 
+  ISearchItemsChangedSink_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef58")
+  CLSID_ISearchItemsChangedSink = "ab310581-ac80-11d1-8df3-00c04fb6ef58"
   struct ISearchItemsChangedSink
     lpVtbl : ISearchItemsChangedSinkVTbl*
   end
@@ -7093,6 +7339,8 @@ lib LibWin32
     on_items_changed : Proc(ISearchPersistentItemsChangedSink*, UInt32, SEARCH_ITEM_PERSISTENT_CHANGE*, HRESULT*, HRESULT)
   end
 
+  ISearchPersistentItemsChangedSink_GUID = LibC::GUID.new("a2ffdf9b-4758-4f84-b729-df81a1a0612f")
+  CLSID_ISearchPersistentItemsChangedSink = "a2ffdf9b-4758-4f84-b729-df81a1a0612f"
   struct ISearchPersistentItemsChangedSink
     lpVtbl : ISearchPersistentItemsChangedSinkVTbl*
   end
@@ -7104,6 +7352,8 @@ lib LibWin32
     on_change : Proc(ISearchViewChangedSink*, Int32*, SEARCH_ITEM_CHANGE*, LibC::BOOL*, HRESULT)
   end
 
+  ISearchViewChangedSink_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef65")
+  CLSID_ISearchViewChangedSink = "ab310581-ac80-11d1-8df3-00c04fb6ef65"
   struct ISearchViewChangedSink
     lpVtbl : ISearchViewChangedSinkVTbl*
   end
@@ -7116,6 +7366,8 @@ lib LibWin32
     on_catalog_status_change : Proc(ISearchNotifyInlineSite*, Guid*, Guid*, UInt32, HRESULT)
   end
 
+  ISearchNotifyInlineSite_GUID = LibC::GUID.new("b5702e61-e75c-4b64-82a1-6cb4f832fccf")
+  CLSID_ISearchNotifyInlineSite = "b5702e61-e75c-4b64-82a1-6cb4f832fccf"
   struct ISearchNotifyInlineSite
     lpVtbl : ISearchNotifyInlineSiteVTbl*
   end
@@ -7152,6 +7404,8 @@ lib LibWin32
     get_crawl_scope_manager : Proc(ISearchCatalogManager*, ISearchCrawlScopeManager*, HRESULT)
   end
 
+  ISearchCatalogManager_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef50")
+  CLSID_ISearchCatalogManager = "ab310581-ac80-11d1-8df3-00c04fb6ef50"
   struct ISearchCatalogManager
     lpVtbl : ISearchCatalogManagerVTbl*
   end
@@ -7189,6 +7443,8 @@ lib LibWin32
     prioritize_matching_ur_ls : Proc(ISearchCatalogManager2*, LibC::LPWSTR, PRIORITIZE_FLAGS, HRESULT)
   end
 
+  ISearchCatalogManager2_GUID = LibC::GUID.new("7ac3286d-4d1d-4817-84fc-c1c85e3af0d9")
+  CLSID_ISearchCatalogManager2 = "7ac3286d-4d1d-4817-84fc-c1c85e3af0d9"
   struct ISearchCatalogManager2
     lpVtbl : ISearchCatalogManager2VTbl*
   end
@@ -7220,6 +7476,8 @@ lib LibWin32
     get_query_max_results : Proc(ISearchQueryHelper*, Int32*, HRESULT)
   end
 
+  ISearchQueryHelper_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef63")
+  CLSID_ISearchQueryHelper = "ab310581-ac80-11d1-8df3-00c04fb6ef63"
   struct ISearchQueryHelper
     lpVtbl : ISearchQueryHelperVTbl*
   end
@@ -7233,6 +7491,8 @@ lib LibWin32
     get_scope_statistics : Proc(IRowsetPrioritization*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
+  IRowsetPrioritization_GUID = LibC::GUID.new("42811652-079d-481b-87a2-09a69ecc5f44")
+  CLSID_IRowsetPrioritization = "42811652-079d-481b-87a2-09a69ecc5f44"
   struct IRowsetPrioritization
     lpVtbl : IRowsetPrioritizationVTbl*
   end
@@ -7247,6 +7507,8 @@ lib LibWin32
     on_rowset_event : Proc(IRowsetEvents*, ROWSETEVENT_TYPE, PROPVARIANT*, HRESULT)
   end
 
+  IRowsetEvents_GUID = LibC::GUID.new("1551aea5-5d66-4b11-86f5-d5634cb211b9")
+  CLSID_IRowsetEvents = "1551aea5-5d66-4b11-86f5-d5634cb211b9"
   struct IRowsetEvents
     lpVtbl : IRowsetEventsVTbl*
   end
@@ -7270,6 +7532,8 @@ lib LibWin32
     get_port_number : Proc(ISearchManager*, UInt32*, HRESULT)
   end
 
+  ISearchManager_GUID = LibC::GUID.new("ab310581-ac80-11d1-8df3-00c04fb6ef69")
+  CLSID_ISearchManager = "ab310581-ac80-11d1-8df3-00c04fb6ef69"
   struct ISearchManager
     lpVtbl : ISearchManagerVTbl*
   end
@@ -7295,6 +7559,8 @@ lib LibWin32
     delete_catalog : Proc(ISearchManager2*, LibC::LPWSTR, HRESULT)
   end
 
+  ISearchManager2_GUID = LibC::GUID.new("dbab3f73-db19-4a79-bfc0-a61a93886ddf")
+  CLSID_ISearchManager2 = "dbab3f73-db19-4a79-bfc0-a61a93886ddf"
   struct ISearchManager2
     lpVtbl : ISearchManager2VTbl*
   end
@@ -7310,6 +7576,8 @@ lib LibWin32
     is_prefix_normalized : Proc(ISearchLanguageSupport*, Char*, UInt32, Char*, UInt32, UInt32*, HRESULT)
   end
 
+  ISearchLanguageSupport_GUID = LibC::GUID.new("24c3cbaa-ebc1-491a-9ef1-9f6d8deb1b8f")
+  CLSID_ISearchLanguageSupport = "24c3cbaa-ebc1-491a-9ef1-9f6d8deb1b8f"
   struct ISearchLanguageSupport
     lpVtbl : ISearchLanguageSupportVTbl*
   end
@@ -7325,6 +7593,8 @@ lib LibWin32
     get_count : Proc(IEnumItemProperties*, UInt32*, HRESULT)
   end
 
+  IEnumItemProperties_GUID = LibC::GUID.new("f72c8d96-6dbd-11d1-a1e8-00c04fc2fbe1")
+  CLSID_IEnumItemProperties = "f72c8d96-6dbd-11d1-a1e8-00c04fc2fbe1"
   struct IEnumItemProperties
     lpVtbl : IEnumItemPropertiesVTbl*
   end
@@ -7342,6 +7612,8 @@ lib LibWin32
     notify_changed : Proc(ISubscriptionItem*, HRESULT)
   end
 
+  ISubscriptionItem_GUID = LibC::GUID.new("a97559f8-6c4a-11d1-a1e8-00c04fc2fbe1")
+  CLSID_ISubscriptionItem = "a97559f8-6c4a-11d1-a1e8-00c04fc2fbe1"
   struct ISubscriptionItem
     lpVtbl : ISubscriptionItemVTbl*
   end
@@ -7357,6 +7629,8 @@ lib LibWin32
     get_count : Proc(IEnumSubscription*, UInt32*, HRESULT)
   end
 
+  IEnumSubscription_GUID = LibC::GUID.new("f72c8d97-6dbd-11d1-a1e8-00c04fc2fbe1")
+  CLSID_IEnumSubscription = "f72c8d97-6dbd-11d1-a1e8-00c04fc2fbe1"
   struct IEnumSubscription
     lpVtbl : IEnumSubscriptionVTbl*
   end
@@ -7375,6 +7649,8 @@ lib LibWin32
     create_subscription : Proc(ISubscriptionMgr*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)
   end
 
+  ISubscriptionMgr_GUID = LibC::GUID.new("085fb2c0-0df8-11d1-8f4b-00a0c905413f")
+  CLSID_ISubscriptionMgr = "085fb2c0-0df8-11d1-8f4b-00a0c905413f"
   struct ISubscriptionMgr
     lpVtbl : ISubscriptionMgrVTbl*
   end
@@ -7400,6 +7676,8 @@ lib LibWin32
     abort_all : Proc(ISubscriptionMgr2*, HRESULT)
   end
 
+  ISubscriptionMgr2_GUID = LibC::GUID.new("614bc270-aedf-11d1-a1f9-00c04fc2fbe1")
+  CLSID_ISubscriptionMgr2 = "614bc270-aedf-11d1-a1f9-00c04fc2fbe1"
   struct ISubscriptionMgr2
     lpVtbl : ISubscriptionMgr2VTbl*
   end
@@ -7413,6 +7691,8 @@ lib LibWin32
     get_conversion_size : Proc(IDataConvert*, UInt16, UInt16, LibC::UINT_PTR*, LibC::UINT_PTR*, Void*, HRESULT)
   end
 
+  IDataConvert_GUID = LibC::GUID.new("0c733a8d-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDataConvert = "0c733a8d-2a1c-11ce-ade5-00aa0044773d"
   struct IDataConvert
     lpVtbl : IDataConvertVTbl*
   end
@@ -7425,6 +7705,8 @@ lib LibWin32
     set_info : Proc(IDCInfo*, UInt32, DCINFO*, HRESULT)
   end
 
+  IDCInfo_GUID = LibC::GUID.new("0c733a9c-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDCInfo = "0c733a9c-2a1c-11ce-ade5-00aa0044773d"
   struct IDCInfo
     lpVtbl : IDCInfoVTbl*
   end
@@ -7438,6 +7720,8 @@ lib LibWin32
     data_member_removed : Proc(DataSourceListener*, UInt16*, HRESULT)
   end
 
+  DataSourceListener_GUID = LibC::GUID.new("7c0ffab2-cd84-11d0-949a-00a0c91110ed")
+  CLSID_DataSourceListener = "7c0ffab2-cd84-11d0-949a-00a0c91110ed"
   struct DataSourceListener
     lpVtbl : DataSourceListenerVTbl*
   end
@@ -7453,6 +7737,8 @@ lib LibWin32
     remove_data_source_listener : Proc(DataSource*, DataSourceListener, HRESULT)
   end
 
+  DataSource_GUID = LibC::GUID.new("7c0ffab3-cd84-11d0-949a-00a0c91110ed")
+  CLSID_DataSource = "7c0ffab3-cd84-11d0-949a-00a0c91110ed"
   struct DataSource
     lpVtbl : DataSourceVTbl*
   end
@@ -7471,6 +7757,8 @@ lib LibWin32
     transfer_complete : Proc(OLEDBSimpleProviderListener*, OSPXFER, HRESULT)
   end
 
+  OLEDBSimpleProviderListener_GUID = LibC::GUID.new("e0e270c1-c0be-11d0-8fe4-00a0c90a6341")
+  CLSID_OLEDBSimpleProviderListener = "e0e270c1-c0be-11d0-8fe4-00a0c90a6341"
   struct OLEDBSimpleProviderListener
     lpVtbl : OLEDBSimpleProviderListenerVTbl*
   end
@@ -7495,6 +7783,8 @@ lib LibWin32
     stop_transfer : Proc(OLEDBSimpleProvider*, HRESULT)
   end
 
+  OLEDBSimpleProvider_GUID = LibC::GUID.new("e0e270c0-c0be-11d0-8fe4-00a0c90a6341")
+  CLSID_OLEDBSimpleProvider = "e0e270c0-c0be-11d0-8fe4-00a0c90a6341"
   struct OLEDBSimpleProvider
     lpVtbl : OLEDBSimpleProviderVTbl*
   end
@@ -7509,6 +7799,8 @@ lib LibWin32
     invoke : Proc(DataSourceObject*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  DataSourceObject_GUID = LibC::GUID.new("0ae9a4e4-18d4-11d1-b3b3-00aa00c1a924")
+  CLSID_DataSourceObject = "0ae9a4e4-18d4-11d1-b3b3-00aa00c1a924"
   struct DataSourceObject
     lpVtbl : DataSourceObjectVTbl*
   end
@@ -7520,6 +7812,8 @@ lib LibWin32
     invoke_service : Proc(IService*, IUnknown, HRESULT)
   end
 
+  IService_GUID = LibC::GUID.new("06210e88-01f5-11d1-b512-0080c781c384")
+  CLSID_IService = "06210e88-01f5-11d1-b512-0080c781c384"
   struct IService
     lpVtbl : IServiceVTbl*
   end
@@ -7532,6 +7826,8 @@ lib LibWin32
     prompt_file_name : Proc(IDBPromptInitialize*, LibC::HANDLE, UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
+  IDBPromptInitialize_GUID = LibC::GUID.new("2206ccb0-19c1-11d1-89e0-00c04fd7a829")
+  CLSID_IDBPromptInitialize = "2206ccb0-19c1-11d1-89e0-00c04fd7a829"
   struct IDBPromptInitialize
     lpVtbl : IDBPromptInitializeVTbl*
   end
@@ -7548,6 +7844,8 @@ lib LibWin32
     write_string_to_storage : Proc(IDataInitialize*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  IDataInitialize_GUID = LibC::GUID.new("2206ccb1-19c1-11d1-89e0-00c04fd7a829")
+  CLSID_IDataInitialize = "2206ccb1-19c1-11d1-89e0-00c04fd7a829"
   struct IDataInitialize
     lpVtbl : IDataInitializeVTbl*
   end
@@ -7566,6 +7864,8 @@ lib LibWin32
     prompt_edit : Proc(IDataSourceLocator*, IDispatch*, Int16*, HRESULT)
   end
 
+  IDataSourceLocator_GUID = LibC::GUID.new("2206ccb2-19c1-11d1-89e0-00c04fd7a829")
+  CLSID_IDataSourceLocator = "2206ccb2-19c1-11d1-89e0-00c04fd7a829"
   struct IDataSourceLocator
     lpVtbl : IDataSourceLocatorVTbl*
   end
@@ -7578,6 +7878,8 @@ lib LibWin32
     get_pending_columns : Proc(IRowsetChangeExtInfo*, LibC::UINT_PTR, LibC::UINT_PTR, UInt32, UInt32*, UInt32*, HRESULT)
   end
 
+  IRowsetChangeExtInfo_GUID = LibC::GUID.new("0c733a8f-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetChangeExtInfo = "0c733a8f-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetChangeExtInfo
     lpVtbl : IRowsetChangeExtInfoVTbl*
   end
@@ -7589,6 +7891,8 @@ lib LibWin32
     request_diag_fields : Proc(ISQLRequestDiagFields*, UInt32, KAGREQDIAG*, HRESULT)
   end
 
+  ISQLRequestDiagFields_GUID = LibC::GUID.new("228972f0-b5ff-11d0-8a80-00c04fd611cd")
+  CLSID_ISQLRequestDiagFields = "228972f0-b5ff-11d0-8a80-00c04fd611cd"
   struct ISQLRequestDiagFields
     lpVtbl : ISQLRequestDiagFieldsVTbl*
   end
@@ -7600,6 +7904,8 @@ lib LibWin32
     get_diag_field : Proc(ISQLGetDiagField*, KAGGETDIAG*, HRESULT)
   end
 
+  ISQLGetDiagField_GUID = LibC::GUID.new("228972f1-b5ff-11d0-8a80-00c04fd611cd")
+  CLSID_ISQLGetDiagField = "228972f1-b5ff-11d0-8a80-00c04fd611cd"
   struct ISQLGetDiagField
     lpVtbl : ISQLGetDiagFieldVTbl*
   end
@@ -7611,6 +7917,8 @@ lib LibWin32
     get_next_rowset : Proc(IRowsetNextRowset*, IUnknown, Guid*, IUnknown*, HRESULT)
   end
 
+  IRowsetNextRowset_GUID = LibC::GUID.new("0c733a72-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetNextRowset = "0c733a72-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetNextRowset
     lpVtbl : IRowsetNextRowsetVTbl*
   end
@@ -7622,6 +7930,8 @@ lib LibWin32
     set_new_data_after : Proc(IRowsetNewRowAfter*, LibC::UINT_PTR, UInt32, UInt8*, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR*, HRESULT)
   end
 
+  IRowsetNewRowAfter_GUID = LibC::GUID.new("0c733a71-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetNewRowAfter = "0c733a71-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetNewRowAfter
     lpVtbl : IRowsetNewRowAfterVTbl*
   end
@@ -7634,6 +7944,8 @@ lib LibWin32
     requery : Proc(IRowsetWithParameters*, DBPARAMS*, UInt32*, LibC::UINT_PTR*, HRESULT)
   end
 
+  IRowsetWithParameters_GUID = LibC::GUID.new("0c733a6e-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetWithParameters = "0c733a6e-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetWithParameters
     lpVtbl : IRowsetWithParametersVTbl*
   end
@@ -7646,6 +7958,8 @@ lib LibWin32
     stop : Proc(IRowsetAsynch*, HRESULT)
   end
 
+  IRowsetAsynch_GUID = LibC::GUID.new("0c733a0f-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetAsynch = "0c733a0f-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetAsynch
     lpVtbl : IRowsetAsynchVTbl*
   end
@@ -7657,6 +7971,8 @@ lib LibWin32
     list_keys : Proc(IRowsetKeys*, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
   end
 
+  IRowsetKeys_GUID = LibC::GUID.new("0c733a12-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetKeys = "0c733a12-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetKeys
     lpVtbl : IRowsetKeysVTbl*
   end
@@ -7670,6 +7986,8 @@ lib LibWin32
     stop_watching : Proc(IRowsetWatchAll*, HRESULT)
   end
 
+  IRowsetWatchAll_GUID = LibC::GUID.new("0c733a73-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetWatchAll = "0c733a73-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetWatchAll
     lpVtbl : IRowsetWatchAllVTbl*
   end
@@ -7681,6 +7999,8 @@ lib LibWin32
     on_change : Proc(IRowsetWatchNotify*, IRowset, UInt32, HRESULT)
   end
 
+  IRowsetWatchNotify_GUID = LibC::GUID.new("0c733a44-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetWatchNotify = "0c733a44-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetWatchNotify
     lpVtbl : IRowsetWatchNotifyVTbl*
   end
@@ -7700,6 +8020,8 @@ lib LibWin32
     shrink_watch_region : Proc(IRowsetWatchRegion*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, HRESULT)
   end
 
+  IRowsetWatchRegion_GUID = LibC::GUID.new("0c733a45-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetWatchRegion = "0c733a45-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetWatchRegion
     lpVtbl : IRowsetWatchRegionVTbl*
   end
@@ -7714,6 +8036,8 @@ lib LibWin32
     define_source : Proc(IRowsetCopyRows*, IRowset, LibC::UINT_PTR, LibC::IntPtrT*, LibC::IntPtrT*, UInt16*, HRESULT)
   end
 
+  IRowsetCopyRows_GUID = LibC::GUID.new("0c733a6b-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IRowsetCopyRows = "0c733a6b-2a1c-11ce-ade5-00aa0044773d"
   struct IRowsetCopyRows
     lpVtbl : IRowsetCopyRowsVTbl*
   end
@@ -7726,6 +8050,8 @@ lib LibWin32
     release_chapter : Proc(IReadData*, LibC::UINT_PTR, HRESULT)
   end
 
+  IReadData_GUID = LibC::GUID.new("0c733a6a-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IReadData = "0c733a6a-2a1c-11ce-ade5-00aa0044773d"
   struct IReadData
     lpVtbl : IReadDataVTbl*
   end
@@ -7742,6 +8068,8 @@ lib LibWin32
     set_cost_limits : Proc(ICommandCost*, LibC::LPWSTR, UInt32, DBCOST*, UInt32, HRESULT)
   end
 
+  ICommandCost_GUID = LibC::GUID.new("0c733a4e-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommandCost = "0c733a4e-2a1c-11ce-ade5-00aa0044773d"
   struct ICommandCost
     lpVtbl : ICommandCostVTbl*
   end
@@ -7754,6 +8082,8 @@ lib LibWin32
     validate_syntax : Proc(ICommandValidate*, HRESULT)
   end
 
+  ICommandValidate_GUID = LibC::GUID.new("0c733a18-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ICommandValidate = "0c733a18-2a1c-11ce-ade5-00aa0044773d"
   struct ICommandValidate
     lpVtbl : ICommandValidateVTbl*
   end
@@ -7766,6 +8096,8 @@ lib LibWin32
     rename_table : Proc(ITableRename*, DBID*, DBID*, DBID*, DBID*, HRESULT)
   end
 
+  ITableRename_GUID = LibC::GUID.new("0c733a77-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_ITableRename = "0c733a77-2a1c-11ce-ade5-00aa0044773d"
   struct ITableRename
     lpVtbl : ITableRenameVTbl*
   end
@@ -7778,6 +8110,8 @@ lib LibWin32
     get_schemas : Proc(IDBSchemaCommand*, UInt32*, Guid**, HRESULT)
   end
 
+  IDBSchemaCommand_GUID = LibC::GUID.new("0c733a50-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IDBSchemaCommand = "0c733a50-2a1c-11ce-ade5-00aa0044773d"
   struct IDBSchemaCommand
     lpVtbl : IDBSchemaCommandVTbl*
   end
@@ -7789,6 +8123,8 @@ lib LibWin32
     get_moniker : Proc(IProvideMoniker*, IMoniker*, HRESULT)
   end
 
+  IProvideMoniker_GUID = LibC::GUID.new("0c733a4d-2a1c-11ce-ade5-00aa0044773d")
+  CLSID_IProvideMoniker = "0c733a4d-2a1c-11ce-ade5-00aa0044773d"
   struct IProvideMoniker
     lpVtbl : IProvideMonikerVTbl*
   end
@@ -7802,6 +8138,8 @@ lib LibWin32
     next_hit_offset : Proc(ISearchQueryHits*, UInt32*, FILTERREGION**, Int32)
   end
 
+  ISearchQueryHits_GUID = LibC::GUID.new("ed8ce7e0-106c-11ce-84e2-00aa004b9986")
+  CLSID_ISearchQueryHits = "ed8ce7e0-106c-11ce-84e2-00aa004b9986"
   struct ISearchQueryHits
     lpVtbl : ISearchQueryHitsVTbl*
   end
@@ -7814,6 +8152,8 @@ lib LibWin32
     get_status_ex : Proc(IRowsetQueryStatus*, UInt32*, UInt32*, UInt32*, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR*, LibC::UINT_PTR*, HRESULT)
   end
 
+  IRowsetQueryStatus_GUID = LibC::GUID.new("a7ac77ed-f8d7-11ce-a798-0020f8008024")
+  CLSID_IRowsetQueryStatus = "a7ac77ed-f8d7-11ce-a798-0020f8008024"
   struct IRowsetQueryStatus
     lpVtbl : IRowsetQueryStatusVTbl*
   end
@@ -7825,6 +8165,8 @@ lib LibWin32
     initialize : Proc(IUMSInitialize*, Void*, HRESULT)
   end
 
+  IUMSInitialize_GUID = LibC::GUID.new("5cf4ca14-ef21-11d0-97e7-00c04fc2ad98")
+  CLSID_IUMSInitialize = "5cf4ca14-ef21-11d0-97e7-00c04fc2ad98"
   struct IUMSInitialize
     lpVtbl : IUMSInitializeVTbl*
   end
@@ -7848,6 +8190,8 @@ lib LibWin32
     get_error_info : Proc(ISQLServerErrorInfo*, Tagsserrorinfo**, UInt16**, HRESULT)
   end
 
+  ISQLServerErrorInfo_GUID = LibC::GUID.new("5cf4ca12-ef21-11d0-97e7-00c04fc2ad98")
+  CLSID_ISQLServerErrorInfo = "5cf4ca12-ef21-11d0-97e7-00c04fc2ad98"
   struct ISQLServerErrorInfo
     lpVtbl : ISQLServerErrorInfoVTbl*
   end
@@ -7860,6 +8204,8 @@ lib LibWin32
     commit : Proc(IRowsetFastLoad*, LibC::BOOL, HRESULT)
   end
 
+  IRowsetFastLoad_GUID = LibC::GUID.new("5cf4ca13-ef21-11d0-97e7-00c04fc2ad98")
+  CLSID_IRowsetFastLoad = "5cf4ca13-ef21-11d0-97e7-00c04fc2ad98"
   struct IRowsetFastLoad
     lpVtbl : IRowsetFastLoadVTbl*
   end
@@ -7872,6 +8218,8 @@ lib LibWin32
     release_schema_lock : Proc(ISchemaLock*, LibC::HANDLE, HRESULT)
   end
 
+  ISchemaLock_GUID = LibC::GUID.new("4c2389fb-2511-11d4-b258-00c04f7971ce")
+  CLSID_ISchemaLock = "4c2389fb-2511-11d4-b258-00c04f7971ce"
   struct ISchemaLock
     lpVtbl : ISchemaLockVTbl*
   end

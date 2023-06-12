@@ -35,6 +35,8 @@ lib LibWin32
     launch : Proc(IIsolatedAppLauncher*, LibC::LPWSTR, LibC::LPWSTR, IsolatedAppLauncherTelemetryParameters*, HRESULT)
   end
 
+  IIsolatedAppLauncher_GUID = LibC::GUID.new("f686878f-7b42-4cc4-96fb-f4f3b6e3d24d")
+  CLSID_IIsolatedAppLauncher = "f686878f-7b42-4cc4-96fb-f4f3b6e3d24d"
   struct IIsolatedAppLauncher
     lpVtbl : IIsolatedAppLauncherVTbl*
   end

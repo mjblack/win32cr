@@ -2496,6 +2496,8 @@ lib LibWin32
     commit : Proc(ICloneViewHelper*, LibC::BOOL, HRESULT)
   end
 
+  ICloneViewHelper_GUID = LibC::GUID.new("f6a3d4c4-5632-4d83-b0a1-fb88712b1eb7")
+  CLSID_ICloneViewHelper = "f6a3d4c4-5632-4d83-b0a1-fb88712b1eb7"
   struct ICloneViewHelper
     lpVtbl : ICloneViewHelperVTbl*
   end
@@ -2512,6 +2514,8 @@ lib LibWin32
     get_proceed_on_new_configuration : Proc(IViewHelper*, HRESULT)
   end
 
+  IViewHelper_GUID = LibC::GUID.new("e85ccef5-aaaa-47f0-b5e3-61f7aecdc4c1")
+  CLSID_IViewHelper = "e85ccef5-aaaa-47f0-b5e3-61f7aecdc4c1"
   struct IViewHelper
     lpVtbl : IViewHelperVTbl*
   end

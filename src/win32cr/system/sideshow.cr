@@ -139,6 +139,8 @@ lib LibWin32
     register_notifications : Proc(ISideShowSession*, Guid*, ISideShowNotificationManager*, HRESULT)
   end
 
+  ISideShowSession_GUID = LibC::GUID.new("e22331ee-9e7d-4922-9fc2-ab7aa41ce491")
+  CLSID_ISideShowSession = "e22331ee-9e7d-4922-9fc2-ab7aa41ce491"
   struct ISideShowSession
     lpVtbl : ISideShowSessionVTbl*
   end
@@ -152,6 +154,8 @@ lib LibWin32
     revoke_all : Proc(ISideShowNotificationManager*, HRESULT)
   end
 
+  ISideShowNotificationManager_GUID = LibC::GUID.new("63cea909-f2b9-4302-b5e1-c68e6d9ab833")
+  CLSID_ISideShowNotificationManager = "63cea909-f2b9-4302-b5e1-c68e6d9ab833"
   struct ISideShowNotificationManager
     lpVtbl : ISideShowNotificationManagerVTbl*
   end
@@ -172,6 +176,8 @@ lib LibWin32
     put_expiration_time : Proc(ISideShowNotification*, SYSTEMTIME*, HRESULT)
   end
 
+  ISideShowNotification_GUID = LibC::GUID.new("03c93300-8ab2-41c5-9b79-46127a30e148")
+  CLSID_ISideShowNotification = "03c93300-8ab2-41c5-9b79-46127a30e148"
   struct ISideShowNotification
     lpVtbl : ISideShowNotificationVTbl*
   end
@@ -187,6 +193,8 @@ lib LibWin32
     get_device_capabilities : Proc(ISideShowContentManager*, ISideShowCapabilitiesCollection*, HRESULT)
   end
 
+  ISideShowContentManager_GUID = LibC::GUID.new("a5d5b66b-eef9-41db-8d7e-e17c33ab10b0")
+  CLSID_ISideShowContentManager = "a5d5b66b-eef9-41db-8d7e-e17c33ab10b0"
   struct ISideShowContentManager
     lpVtbl : ISideShowContentManagerVTbl*
   end
@@ -200,6 +208,8 @@ lib LibWin32
     get_differentiate_content : Proc(ISideShowContent*, LibC::BOOL*, HRESULT)
   end
 
+  ISideShowContent_GUID = LibC::GUID.new("c18552ed-74ff-4fec-be07-4cfed29d4887")
+  CLSID_ISideShowContent = "c18552ed-74ff-4fec-be07-4cfed29d4887"
   struct ISideShowContent
     lpVtbl : ISideShowContentVTbl*
   end
@@ -214,6 +224,8 @@ lib LibWin32
     device_removed : Proc(ISideShowEvents*, ISideShowCapabilities, HRESULT)
   end
 
+  ISideShowEvents_GUID = LibC::GUID.new("61feca4c-deb4-4a7e-8d75-51f1132d615b")
+  CLSID_ISideShowEvents = "61feca4c-deb4-4a7e-8d75-51f1132d615b"
   struct ISideShowEvents
     lpVtbl : ISideShowEventsVTbl*
   end
@@ -225,6 +237,8 @@ lib LibWin32
     get_capability : Proc(ISideShowCapabilities*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
+  ISideShowCapabilities_GUID = LibC::GUID.new("535e1379-c09e-4a54-a511-597bab3a72b8")
+  CLSID_ISideShowCapabilities = "535e1379-c09e-4a54-a511-597bab3a72b8"
   struct ISideShowCapabilities
     lpVtbl : ISideShowCapabilitiesVTbl*
   end
@@ -237,6 +251,8 @@ lib LibWin32
     get_at : Proc(ISideShowCapabilitiesCollection*, UInt32, ISideShowCapabilities*, HRESULT)
   end
 
+  ISideShowCapabilitiesCollection_GUID = LibC::GUID.new("50305597-5e0d-4ff7-b3af-33d0d9bd52dd")
+  CLSID_ISideShowCapabilitiesCollection = "50305597-5e0d-4ff7-b3af-33d0d9bd52dd"
   struct ISideShowCapabilitiesCollection
     lpVtbl : ISideShowCapabilitiesCollectionVTbl*
   end
@@ -249,6 +265,8 @@ lib LibWin32
     get_capabilities : Proc(ISideShowBulkCapabilities*, ISideShowKeyCollection, ISideShowPropVariantCollection*, HRESULT)
   end
 
+  ISideShowBulkCapabilities_GUID = LibC::GUID.new("3a2b7fbc-3ad5-48bd-bbf1-0e6cfbd10807")
+  CLSID_ISideShowBulkCapabilities = "3a2b7fbc-3ad5-48bd-bbf1-0e6cfbd10807"
   struct ISideShowBulkCapabilities
     lpVtbl : ISideShowBulkCapabilitiesVTbl*
   end
@@ -264,6 +282,8 @@ lib LibWin32
     remove_at : Proc(ISideShowKeyCollection*, UInt32, HRESULT)
   end
 
+  ISideShowKeyCollection_GUID = LibC::GUID.new("045473bc-a37b-4957-b144-68105411ed8e")
+  CLSID_ISideShowKeyCollection = "045473bc-a37b-4957-b144-68105411ed8e"
   struct ISideShowKeyCollection
     lpVtbl : ISideShowKeyCollectionVTbl*
   end
@@ -279,6 +299,8 @@ lib LibWin32
     remove_at : Proc(ISideShowPropVariantCollection*, UInt32, HRESULT)
   end
 
+  ISideShowPropVariantCollection_GUID = LibC::GUID.new("2ea7a549-7bff-4aae-bab0-22d43111de49")
+  CLSID_ISideShowPropVariantCollection = "2ea7a549-7bff-4aae-bab0-22d43111de49"
   struct ISideShowPropVariantCollection
     lpVtbl : ISideShowPropVariantCollectionVTbl*
   end

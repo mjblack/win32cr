@@ -1904,6 +1904,8 @@ lib LibWin32
     clone : Proc(IEnumCERTVIEWCOLUMN*, IEnumCERTVIEWCOLUMN*, HRESULT)
   end
 
+  IEnumCERTVIEWCOLUMN_GUID = LibC::GUID.new("9c735be2-57a5-11d1-9bdb-00c04fb683fa")
+  CLSID_IEnumCERTVIEWCOLUMN = "9c735be2-57a5-11d1-9bdb-00c04fb683fa"
   struct IEnumCERTVIEWCOLUMN
     lpVtbl : IEnumCERTVIEWCOLUMNVTbl*
   end
@@ -1924,6 +1926,8 @@ lib LibWin32
     clone : Proc(IEnumCERTVIEWATTRIBUTE*, IEnumCERTVIEWATTRIBUTE*, HRESULT)
   end
 
+  IEnumCERTVIEWATTRIBUTE_GUID = LibC::GUID.new("e77db656-7653-11d1-9bde-00c04fb683fa")
+  CLSID_IEnumCERTVIEWATTRIBUTE = "e77db656-7653-11d1-9bde-00c04fb683fa"
   struct IEnumCERTVIEWATTRIBUTE
     lpVtbl : IEnumCERTVIEWATTRIBUTEVTbl*
   end
@@ -1945,6 +1949,8 @@ lib LibWin32
     clone : Proc(IEnumCERTVIEWEXTENSION*, IEnumCERTVIEWEXTENSION*, HRESULT)
   end
 
+  IEnumCERTVIEWEXTENSION_GUID = LibC::GUID.new("e7dd1466-7653-11d1-9bde-00c04fb683fa")
+  CLSID_IEnumCERTVIEWEXTENSION = "e7dd1466-7653-11d1-9bde-00c04fb683fa"
   struct IEnumCERTVIEWEXTENSION
     lpVtbl : IEnumCERTVIEWEXTENSIONVTbl*
   end
@@ -1967,6 +1973,8 @@ lib LibWin32
     get_max_index : Proc(IEnumCERTVIEWROW*, Int32*, HRESULT)
   end
 
+  IEnumCERTVIEWROW_GUID = LibC::GUID.new("d1157f4c-5af2-11d1-9bdc-00c04fb683fa")
+  CLSID_IEnumCERTVIEWROW = "d1157f4c-5af2-11d1-9bdc-00c04fb683fa"
   struct IEnumCERTVIEWROW
     lpVtbl : IEnumCERTVIEWROWVTbl*
   end
@@ -1989,6 +1997,8 @@ lib LibWin32
     open_view : Proc(ICertView*, IEnumCERTVIEWROW*, HRESULT)
   end
 
+  ICertView_GUID = LibC::GUID.new("c3fac344-1e84-11d1-9bd6-00c04fb683fa")
+  CLSID_ICertView = "c3fac344-1e84-11d1-9bd6-00c04fb683fa"
   struct ICertView
     lpVtbl : ICertViewVTbl*
   end
@@ -2012,6 +2022,8 @@ lib LibWin32
     set_table : Proc(ICertView2*, CVRC_TABLE, HRESULT)
   end
 
+  ICertView2_GUID = LibC::GUID.new("d594b282-8851-4b61-9c66-3edadf848863")
+  CLSID_ICertView2 = "d594b282-8851-4b61-9c66-3edadf848863"
   struct ICertView2
     lpVtbl : ICertView2VTbl*
   end
@@ -2036,6 +2048,8 @@ lib LibWin32
     import_certificate : Proc(ICertAdmin*, UInt8*, UInt8*, CERT_IMPORT_FLAGS, Int32*, HRESULT)
   end
 
+  ICertAdmin_GUID = LibC::GUID.new("34df6950-7fb6-11d0-8817-00a0c903b83c")
+  CLSID_ICertAdmin = "34df6950-7fb6-11d0-8817-00a0c903b83c"
   struct ICertAdmin
     lpVtbl : ICertAdminVTbl*
   end
@@ -2071,6 +2085,8 @@ lib LibWin32
     delete_row : Proc(ICertAdmin2*, UInt8*, CERT_DELETE_ROW_FLAGS, Float64, CVRC_TABLE, Int32, Int32*, HRESULT)
   end
 
+  ICertAdmin2_GUID = LibC::GUID.new("f7c3ac41-b8ce-4fb4-aa58-3d1dc0e36b39")
+  CLSID_ICertAdmin2 = "f7c3ac41-b8ce-4fb4-aa58-3d1dc0e36b39"
   struct ICertAdmin2
     lpVtbl : ICertAdmin2VTbl*
   end
@@ -2089,6 +2105,8 @@ lib LibWin32
     get_modified : Proc(IOCSPProperty*, Int16*, HRESULT)
   end
 
+  IOCSPProperty_GUID = LibC::GUID.new("66fb7839-5f04-4c25-ad18-9ff1a8376ee0")
+  CLSID_IOCSPProperty = "66fb7839-5f04-4c25-ad18-9ff1a8376ee0"
   struct IOCSPProperty
     lpVtbl : IOCSPPropertyVTbl*
   end
@@ -2111,6 +2129,8 @@ lib LibWin32
     get_all_properties : Proc(IOCSPPropertyCollection*, VARIANT*, HRESULT)
   end
 
+  IOCSPPropertyCollection_GUID = LibC::GUID.new("2597c18d-54e6-4b74-9fa9-a6bfda99cbbe")
+  CLSID_IOCSPPropertyCollection = "2597c18d-54e6-4b74-9fa9-a6bfda99cbbe"
   struct IOCSPPropertyCollection
     lpVtbl : IOCSPPropertyCollectionVTbl*
   end
@@ -2149,6 +2169,8 @@ lib LibWin32
     put_ca_config : Proc(IOCSPCAConfiguration*, UInt8*, HRESULT)
   end
 
+  IOCSPCAConfiguration_GUID = LibC::GUID.new("aec92b40-3d46-433f-87d1-b84d5c1e790d")
+  CLSID_IOCSPCAConfiguration = "aec92b40-3d46-433f-87d1-b84d5c1e790d"
   struct IOCSPCAConfiguration
     lpVtbl : IOCSPCAConfigurationVTbl*
   end
@@ -2169,6 +2191,8 @@ lib LibWin32
     delete_ca_configuration : Proc(IOCSPCAConfigurationCollection*, UInt8*, HRESULT)
   end
 
+  IOCSPCAConfigurationCollection_GUID = LibC::GUID.new("2bebea0b-5ece-4f28-a91c-86b4bb20f0d3")
+  CLSID_IOCSPCAConfigurationCollection = "2bebea0b-5ece-4f28-a91c-86b4bb20f0d3"
   struct IOCSPCAConfigurationCollection
     lpVtbl : IOCSPCAConfigurationCollectionVTbl*
   end
@@ -2193,6 +2217,8 @@ lib LibWin32
     get_hash_algorithms : Proc(IOCSPAdmin*, UInt8*, UInt8*, VARIANT*, HRESULT)
   end
 
+  IOCSPAdmin_GUID = LibC::GUID.new("322e830d-67db-4fe9-9577-4596d9f09294")
+  CLSID_IOCSPAdmin = "322e830d-67db-4fe9-9577-4596d9f09294"
   struct IOCSPAdmin
     lpVtbl : IOCSPAdminVTbl*
   end
@@ -2221,6 +2247,8 @@ lib LibWin32
     enumerate_attributes_close : Proc(ICertServerPolicy*, HRESULT)
   end
 
+  ICertServerPolicy_GUID = LibC::GUID.new("aa000922-ffbe-11cf-8800-00a0c903b83c")
+  CLSID_ICertServerPolicy = "aa000922-ffbe-11cf-8800-00a0c903b83c"
   struct ICertServerPolicy
     lpVtbl : ICertServerPolicyVTbl*
   end
@@ -2247,6 +2275,8 @@ lib LibWin32
     enumerate_attributes_close : Proc(ICertServerExit*, HRESULT)
   end
 
+  ICertServerExit_GUID = LibC::GUID.new("4ba9eb90-732c-11d0-8816-00a0c903b83c")
+  CLSID_ICertServerExit = "4ba9eb90-732c-11d0-8816-00a0c903b83c"
   struct ICertServerExit
     lpVtbl : ICertServerExitVTbl*
   end
@@ -2262,6 +2292,8 @@ lib LibWin32
     get_config : Proc(ICertGetConfig*, CERT_GET_CONFIG_FLAGS, UInt8**, HRESULT)
   end
 
+  ICertGetConfig_GUID = LibC::GUID.new("c7ea09c0-ce17-11d0-8833-00a0c903b83c")
+  CLSID_ICertGetConfig = "c7ea09c0-ce17-11d0-8833-00a0c903b83c"
   struct ICertGetConfig
     lpVtbl : ICertGetConfigVTbl*
   end
@@ -2280,6 +2312,8 @@ lib LibWin32
     get_config : Proc(ICertConfig*, Int32, UInt8**, HRESULT)
   end
 
+  ICertConfig_GUID = LibC::GUID.new("372fce34-4324-11d0-8810-00a0c903b83c")
+  CLSID_ICertConfig = "372fce34-4324-11d0-8810-00a0c903b83c"
   struct ICertConfig
     lpVtbl : ICertConfigVTbl*
   end
@@ -2299,6 +2333,8 @@ lib LibWin32
     set_shared_folder : Proc(ICertConfig2*, UInt8*, HRESULT)
   end
 
+  ICertConfig2_GUID = LibC::GUID.new("7a18edde-7e78-4163-8ded-78e2c9cee924")
+  CLSID_ICertConfig2 = "7a18edde-7e78-4163-8ded-78e2c9cee924"
   struct ICertConfig2
     lpVtbl : ICertConfig2VTbl*
   end
@@ -2320,6 +2356,8 @@ lib LibWin32
     get_certificate : Proc(ICertRequest*, Int32, UInt8**, HRESULT)
   end
 
+  ICertRequest_GUID = LibC::GUID.new("014e4840-5523-11d0-8812-00a0c903b83c")
+  CLSID_ICertRequest = "014e4840-5523-11d0-8812-00a0c903b83c"
   struct ICertRequest
     lpVtbl : ICertRequestVTbl*
   end
@@ -2347,6 +2385,8 @@ lib LibWin32
     get_full_response_property : Proc(ICertRequest2*, FULL_RESPONSE_PROPERTY_ID, Int32, CERT_PROPERTY_TYPE, CERT_REQUEST_OUT_TYPE, VARIANT*, HRESULT)
   end
 
+  ICertRequest2_GUID = LibC::GUID.new("a4772988-4a85-4fa9-824e-b5cf5c16405a")
+  CLSID_ICertRequest2 = "a4772988-4a85-4fa9-824e-b5cf5c16405a"
   struct ICertRequest2
     lpVtbl : ICertRequest2VTbl*
   end
@@ -2378,6 +2418,8 @@ lib LibWin32
     get_refresh_policy : Proc(ICertRequest3*, Int16*, HRESULT)
   end
 
+  ICertRequest3_GUID = LibC::GUID.new("afc8f92b-33a2-4861-bf36-2933b7cd67b3")
+  CLSID_ICertRequest3 = "afc8f92b-33a2-4861-bf36-2933b7cd67b3"
   struct ICertRequest3
     lpVtbl : ICertRequest3VTbl*
   end
@@ -2395,6 +2437,8 @@ lib LibWin32
     configure : Proc(ICertManageModule*, UInt8*, UInt8*, Int32, HRESULT)
   end
 
+  ICertManageModule_GUID = LibC::GUID.new("e7d7ad42-bd3d-11d1-9a4d-00c04fc297eb")
+  CLSID_ICertManageModule = "e7d7ad42-bd3d-11d1-9a4d-00c04fc297eb"
   struct ICertManageModule
     lpVtbl : ICertManageModuleVTbl*
   end
@@ -2413,6 +2457,8 @@ lib LibWin32
     shut_down : Proc(ICertPolicy*, HRESULT)
   end
 
+  ICertPolicy_GUID = LibC::GUID.new("38bb5a00-7636-11d0-b413-00a0c91bbf8c")
+  CLSID_ICertPolicy = "38bb5a00-7636-11d0-b413-00a0c91bbf8c"
   struct ICertPolicy
     lpVtbl : ICertPolicyVTbl*
   end
@@ -2432,6 +2478,8 @@ lib LibWin32
     get_manage_module : Proc(ICertPolicy2*, ICertManageModule*, HRESULT)
   end
 
+  ICertPolicy2_GUID = LibC::GUID.new("3db4910e-8001-4bf1-aa1b-f43a808317a0")
+  CLSID_ICertPolicy2 = "3db4910e-8001-4bf1-aa1b-f43a808317a0"
   struct ICertPolicy2
     lpVtbl : ICertPolicy2VTbl*
   end
@@ -2447,6 +2495,8 @@ lib LibWin32
     notify : Proc(INDESPolicy*, LibC::LPWSTR, LibC::LPWSTR, X509SCEPDisposition, Int32, CERTTRANSBLOB*, HRESULT)
   end
 
+  INDESPolicy_GUID = LibC::GUID.new("13ca515d-431d-46cc-8c2e-1da269bbd625")
+  CLSID_INDESPolicy = "13ca515d-431d-46cc-8c2e-1da269bbd625"
   struct INDESPolicy
     lpVtbl : INDESPolicyVTbl*
   end
@@ -2469,6 +2519,8 @@ lib LibWin32
     get_algorithm_name : Proc(IObjectId*, ObjectIdGroupId, ObjectIdPublicKeyFlags, UInt8**, HRESULT)
   end
 
+  IObjectId_GUID = LibC::GUID.new("728ab300-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IObjectId = "728ab300-217d-11da-b2a4-000e7bbb2b09"
   struct IObjectId
     lpVtbl : IObjectIdVTbl*
   end
@@ -2490,6 +2542,8 @@ lib LibWin32
     add_range : Proc(IObjectIds*, IObjectIds, HRESULT)
   end
 
+  IObjectIds_GUID = LibC::GUID.new("728ab301-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IObjectIds = "728ab301-217d-11da-b2a4-000e7bbb2b09"
   struct IObjectIds
     lpVtbl : IObjectIdsVTbl*
   end
@@ -2507,6 +2561,8 @@ lib LibWin32
     string_to_variant_byte_array : Proc(IBinaryConverter*, UInt8*, EncodingType, VARIANT*, HRESULT)
   end
 
+  IBinaryConverter_GUID = LibC::GUID.new("728ab302-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IBinaryConverter = "728ab302-217d-11da-b2a4-000e7bbb2b09"
   struct IBinaryConverter
     lpVtbl : IBinaryConverterVTbl*
   end
@@ -2526,6 +2582,8 @@ lib LibWin32
     variant_array_to_string_array : Proc(IBinaryConverter2*, VARIANT*, VARIANT*, HRESULT)
   end
 
+  IBinaryConverter2_GUID = LibC::GUID.new("8d7928b4-4e17-428d-9a17-728df00d1b2b")
+  CLSID_IBinaryConverter2 = "8d7928b4-4e17-428d-9a17-728df00d1b2b"
   struct IBinaryConverter2
     lpVtbl : IBinaryConverter2VTbl*
   end
@@ -2544,6 +2602,8 @@ lib LibWin32
     get_encoded_name : Proc(IX500DistinguishedName*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX500DistinguishedName_GUID = LibC::GUID.new("728ab303-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX500DistinguishedName = "728ab303-217d-11da-b2a4-000e7bbb2b09"
   struct IX500DistinguishedName
     lpVtbl : IX500DistinguishedNameVTbl*
   end
@@ -2570,6 +2630,8 @@ lib LibWin32
     get_error_text : Proc(IX509EnrollmentStatus*, UInt8**, HRESULT)
   end
 
+  IX509EnrollmentStatus_GUID = LibC::GUID.new("728ab304-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509EnrollmentStatus = "728ab304-217d-11da-b2a4-000e7bbb2b09"
   struct IX509EnrollmentStatus
     lpVtbl : IX509EnrollmentStatusVTbl*
   end
@@ -2594,6 +2656,8 @@ lib LibWin32
     get_operations : Proc(ICspAlgorithm*, AlgorithmOperationFlags*, HRESULT)
   end
 
+  ICspAlgorithm_GUID = LibC::GUID.new("728ab305-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICspAlgorithm = "728ab305-217d-11da-b2a4-000e7bbb2b09"
   struct ICspAlgorithm
     lpVtbl : ICspAlgorithmVTbl*
   end
@@ -2616,6 +2680,8 @@ lib LibWin32
     get_index_by_object_id : Proc(ICspAlgorithms*, IObjectId, Int32*, HRESULT)
   end
 
+  ICspAlgorithms_GUID = LibC::GUID.new("728ab306-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICspAlgorithms = "728ab306-217d-11da-b2a4-000e7bbb2b09"
   struct ICspAlgorithms
     lpVtbl : ICspAlgorithmsVTbl*
   end
@@ -2647,6 +2713,8 @@ lib LibWin32
     get_csp_status_from_operations : Proc(ICspInformation*, IObjectId, AlgorithmOperationFlags, ICspStatus*, HRESULT)
   end
 
+  ICspInformation_GUID = LibC::GUID.new("728ab307-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICspInformation = "728ab307-217d-11da-b2a4-000e7bbb2b09"
   struct ICspInformation
     lpVtbl : ICspInformationVTbl*
   end
@@ -2673,6 +2741,8 @@ lib LibWin32
     get_hash_algorithms : Proc(ICspInformations*, ICspInformation, IObjectIds*, HRESULT)
   end
 
+  ICspInformations_GUID = LibC::GUID.new("728ab308-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICspInformations = "728ab308-217d-11da-b2a4-000e7bbb2b09"
   struct ICspInformations
     lpVtbl : ICspInformationsVTbl*
   end
@@ -2694,6 +2764,8 @@ lib LibWin32
     get_display_name : Proc(ICspStatus*, UInt8**, HRESULT)
   end
 
+  ICspStatus_GUID = LibC::GUID.new("728ab309-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICspStatus = "728ab309-217d-11da-b2a4-000e7bbb2b09"
   struct ICspStatus
     lpVtbl : ICspStatusVTbl*
   end
@@ -2718,6 +2790,8 @@ lib LibWin32
     get_item_by_provider : Proc(ICspStatuses*, ICspStatus, ICspStatus*, HRESULT)
   end
 
+  ICspStatuses_GUID = LibC::GUID.new("728ab30a-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICspStatuses = "728ab30a-217d-11da-b2a4-000e7bbb2b09"
   struct ICspStatuses
     lpVtbl : ICspStatusesVTbl*
   end
@@ -2739,6 +2813,8 @@ lib LibWin32
     compute_key_identifier : Proc(IX509PublicKey*, KeyIdentifierHashAlgorithm, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509PublicKey_GUID = LibC::GUID.new("728ab30b-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509PublicKey = "728ab30b-217d-11da-b2a4-000e7bbb2b09"
   struct IX509PublicKey
     lpVtbl : IX509PublicKeyVTbl*
   end
@@ -2811,6 +2887,8 @@ lib LibWin32
     put_description : Proc(IX509PrivateKey*, UInt8*, HRESULT)
   end
 
+  IX509PrivateKey_GUID = LibC::GUID.new("728ab30c-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509PrivateKey = "728ab30c-217d-11da-b2a4-000e7bbb2b09"
   struct IX509PrivateKey
     lpVtbl : IX509PrivateKeyVTbl*
   end
@@ -2893,6 +2971,8 @@ lib LibWin32
     put_parameters_export_type : Proc(IX509PrivateKey2*, X509KeyParametersExportType, HRESULT)
   end
 
+  IX509PrivateKey2_GUID = LibC::GUID.new("728ab362-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509PrivateKey2 = "728ab362-217d-11da-b2a4-000e7bbb2b09"
   struct IX509PrivateKey2
     lpVtbl : IX509PrivateKey2VTbl*
   end
@@ -2918,6 +2998,8 @@ lib LibWin32
     close : Proc(IX509EndorsementKey*, HRESULT)
   end
 
+  IX509EndorsementKey_GUID = LibC::GUID.new("b11cd855-f4c4-4fc6-b710-4422237f09e9")
+  CLSID_IX509EndorsementKey = "b11cd855-f4c4-4fc6-b710-4422237f09e9"
   struct IX509EndorsementKey
     lpVtbl : IX509EndorsementKeyVTbl*
   end
@@ -2937,6 +3019,8 @@ lib LibWin32
     put_critical : Proc(IX509Extension*, Int16, HRESULT)
   end
 
+  IX509Extension_GUID = LibC::GUID.new("728ab30d-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509Extension = "728ab30d-217d-11da-b2a4-000e7bbb2b09"
   struct IX509Extension
     lpVtbl : IX509ExtensionVTbl*
   end
@@ -2959,6 +3043,8 @@ lib LibWin32
     add_range : Proc(IX509Extensions*, IX509Extensions, HRESULT)
   end
 
+  IX509Extensions_GUID = LibC::GUID.new("728ab30e-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509Extensions = "728ab30e-217d-11da-b2a4-000e7bbb2b09"
   struct IX509Extensions
     lpVtbl : IX509ExtensionsVTbl*
   end
@@ -2981,6 +3067,8 @@ lib LibWin32
     get_key_usage : Proc(IX509ExtensionKeyUsage*, X509KeyUsageFlags*, HRESULT)
   end
 
+  IX509ExtensionKeyUsage_GUID = LibC::GUID.new("728ab30f-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionKeyUsage = "728ab30f-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionKeyUsage
     lpVtbl : IX509ExtensionKeyUsageVTbl*
   end
@@ -3003,6 +3091,8 @@ lib LibWin32
     get_enhanced_key_usage : Proc(IX509ExtensionEnhancedKeyUsage*, IObjectIds*, HRESULT)
   end
 
+  IX509ExtensionEnhancedKeyUsage_GUID = LibC::GUID.new("728ab310-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionEnhancedKeyUsage = "728ab310-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionEnhancedKeyUsage
     lpVtbl : IX509ExtensionEnhancedKeyUsageVTbl*
   end
@@ -3025,6 +3115,8 @@ lib LibWin32
     get_template_name : Proc(IX509ExtensionTemplateName*, UInt8**, HRESULT)
   end
 
+  IX509ExtensionTemplateName_GUID = LibC::GUID.new("728ab311-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionTemplateName = "728ab311-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionTemplateName
     lpVtbl : IX509ExtensionTemplateNameVTbl*
   end
@@ -3049,6 +3141,8 @@ lib LibWin32
     get_minor_version : Proc(IX509ExtensionTemplate*, Int32*, HRESULT)
   end
 
+  IX509ExtensionTemplate_GUID = LibC::GUID.new("728ab312-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionTemplate = "728ab312-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionTemplate
     lpVtbl : IX509ExtensionTemplateVTbl*
   end
@@ -3070,6 +3164,8 @@ lib LibWin32
     get_raw_data : Proc(IAlternativeName*, EncodingType, UInt8**, HRESULT)
   end
 
+  IAlternativeName_GUID = LibC::GUID.new("728ab313-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IAlternativeName = "728ab313-217d-11da-b2a4-000e7bbb2b09"
   struct IAlternativeName
     lpVtbl : IAlternativeNameVTbl*
   end
@@ -3090,6 +3186,8 @@ lib LibWin32
     clear : Proc(IAlternativeNames*, HRESULT)
   end
 
+  IAlternativeNames_GUID = LibC::GUID.new("728ab314-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IAlternativeNames = "728ab314-217d-11da-b2a4-000e7bbb2b09"
   struct IAlternativeNames
     lpVtbl : IAlternativeNamesVTbl*
   end
@@ -3112,6 +3210,8 @@ lib LibWin32
     get_alternative_names : Proc(IX509ExtensionAlternativeNames*, IAlternativeNames*, HRESULT)
   end
 
+  IX509ExtensionAlternativeNames_GUID = LibC::GUID.new("728ab315-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionAlternativeNames = "728ab315-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionAlternativeNames
     lpVtbl : IX509ExtensionAlternativeNamesVTbl*
   end
@@ -3135,6 +3235,8 @@ lib LibWin32
     get_path_len_constraint : Proc(IX509ExtensionBasicConstraints*, Int32*, HRESULT)
   end
 
+  IX509ExtensionBasicConstraints_GUID = LibC::GUID.new("728ab316-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionBasicConstraints = "728ab316-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionBasicConstraints
     lpVtbl : IX509ExtensionBasicConstraintsVTbl*
   end
@@ -3157,6 +3259,8 @@ lib LibWin32
     get_subject_key_identifier : Proc(IX509ExtensionSubjectKeyIdentifier*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509ExtensionSubjectKeyIdentifier_GUID = LibC::GUID.new("728ab317-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionSubjectKeyIdentifier = "728ab317-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionSubjectKeyIdentifier
     lpVtbl : IX509ExtensionSubjectKeyIdentifierVTbl*
   end
@@ -3179,6 +3283,8 @@ lib LibWin32
     get_authority_key_identifier : Proc(IX509ExtensionAuthorityKeyIdentifier*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509ExtensionAuthorityKeyIdentifier_GUID = LibC::GUID.new("728ab318-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionAuthorityKeyIdentifier = "728ab318-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionAuthorityKeyIdentifier
     lpVtbl : IX509ExtensionAuthorityKeyIdentifierVTbl*
   end
@@ -3196,6 +3302,8 @@ lib LibWin32
     get_bit_count : Proc(ISmimeCapability*, Int32*, HRESULT)
   end
 
+  ISmimeCapability_GUID = LibC::GUID.new("728ab319-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ISmimeCapability = "728ab319-217d-11da-b2a4-000e7bbb2b09"
   struct ISmimeCapability
     lpVtbl : ISmimeCapabilityVTbl*
   end
@@ -3218,6 +3326,8 @@ lib LibWin32
     add_available_smime_capabilities : Proc(ISmimeCapabilities*, Int16, HRESULT)
   end
 
+  ISmimeCapabilities_GUID = LibC::GUID.new("728ab31a-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ISmimeCapabilities = "728ab31a-217d-11da-b2a4-000e7bbb2b09"
   struct ISmimeCapabilities
     lpVtbl : ISmimeCapabilitiesVTbl*
   end
@@ -3240,6 +3350,8 @@ lib LibWin32
     get_smime_capabilities : Proc(IX509ExtensionSmimeCapabilities*, ISmimeCapabilities*, HRESULT)
   end
 
+  IX509ExtensionSmimeCapabilities_GUID = LibC::GUID.new("728ab31b-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionSmimeCapabilities = "728ab31b-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionSmimeCapabilities
     lpVtbl : IX509ExtensionSmimeCapabilitiesVTbl*
   end
@@ -3259,6 +3371,8 @@ lib LibWin32
     get_raw_data : Proc(IPolicyQualifier*, EncodingType, UInt8**, HRESULT)
   end
 
+  IPolicyQualifier_GUID = LibC::GUID.new("728ab31c-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IPolicyQualifier = "728ab31c-217d-11da-b2a4-000e7bbb2b09"
   struct IPolicyQualifier
     lpVtbl : IPolicyQualifierVTbl*
   end
@@ -3279,6 +3393,8 @@ lib LibWin32
     clear : Proc(IPolicyQualifiers*, HRESULT)
   end
 
+  IPolicyQualifiers_GUID = LibC::GUID.new("728ab31d-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IPolicyQualifiers = "728ab31d-217d-11da-b2a4-000e7bbb2b09"
   struct IPolicyQualifiers
     lpVtbl : IPolicyQualifiersVTbl*
   end
@@ -3296,6 +3412,8 @@ lib LibWin32
     get_policy_qualifiers : Proc(ICertificatePolicy*, IPolicyQualifiers*, HRESULT)
   end
 
+  ICertificatePolicy_GUID = LibC::GUID.new("728ab31e-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertificatePolicy = "728ab31e-217d-11da-b2a4-000e7bbb2b09"
   struct ICertificatePolicy
     lpVtbl : ICertificatePolicyVTbl*
   end
@@ -3316,6 +3434,8 @@ lib LibWin32
     clear : Proc(ICertificatePolicies*, HRESULT)
   end
 
+  ICertificatePolicies_GUID = LibC::GUID.new("728ab31f-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertificatePolicies = "728ab31f-217d-11da-b2a4-000e7bbb2b09"
   struct ICertificatePolicies
     lpVtbl : ICertificatePoliciesVTbl*
   end
@@ -3338,6 +3458,8 @@ lib LibWin32
     get_policies : Proc(IX509ExtensionCertificatePolicies*, ICertificatePolicies*, HRESULT)
   end
 
+  IX509ExtensionCertificatePolicies_GUID = LibC::GUID.new("728ab320-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionCertificatePolicies = "728ab320-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionCertificatePolicies
     lpVtbl : IX509ExtensionCertificatePoliciesVTbl*
   end
@@ -3360,6 +3482,8 @@ lib LibWin32
     get_policies : Proc(IX509ExtensionMSApplicationPolicies*, ICertificatePolicies*, HRESULT)
   end
 
+  IX509ExtensionMSApplicationPolicies_GUID = LibC::GUID.new("728ab321-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509ExtensionMSApplicationPolicies = "728ab321-217d-11da-b2a4-000e7bbb2b09"
   struct IX509ExtensionMSApplicationPolicies
     lpVtbl : IX509ExtensionMSApplicationPoliciesVTbl*
   end
@@ -3377,6 +3501,8 @@ lib LibWin32
     get_raw_data : Proc(IX509Attribute*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509Attribute_GUID = LibC::GUID.new("728ab322-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509Attribute = "728ab322-217d-11da-b2a4-000e7bbb2b09"
   struct IX509Attribute
     lpVtbl : IX509AttributeVTbl*
   end
@@ -3397,6 +3523,8 @@ lib LibWin32
     clear : Proc(IX509Attributes*, HRESULT)
   end
 
+  IX509Attributes_GUID = LibC::GUID.new("728ab323-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509Attributes = "728ab323-217d-11da-b2a4-000e7bbb2b09"
   struct IX509Attributes
     lpVtbl : IX509AttributesVTbl*
   end
@@ -3417,6 +3545,8 @@ lib LibWin32
     get_x509_extensions : Proc(IX509AttributeExtensions*, IX509Extensions*, HRESULT)
   end
 
+  IX509AttributeExtensions_GUID = LibC::GUID.new("728ab324-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509AttributeExtensions = "728ab324-217d-11da-b2a4-000e7bbb2b09"
   struct IX509AttributeExtensions
     lpVtbl : IX509AttributeExtensionsVTbl*
   end
@@ -3440,6 +3570,8 @@ lib LibWin32
     get_process_name : Proc(IX509AttributeClientId*, UInt8**, HRESULT)
   end
 
+  IX509AttributeClientId_GUID = LibC::GUID.new("728ab325-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509AttributeClientId = "728ab325-217d-11da-b2a4-000e7bbb2b09"
   struct IX509AttributeClientId
     lpVtbl : IX509AttributeClientIdVTbl*
   end
@@ -3460,6 +3592,8 @@ lib LibWin32
     get_renewal_certificate : Proc(IX509AttributeRenewalCertificate*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509AttributeRenewalCertificate_GUID = LibC::GUID.new("728ab326-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509AttributeRenewalCertificate = "728ab326-217d-11da-b2a4-000e7bbb2b09"
   struct IX509AttributeRenewalCertificate
     lpVtbl : IX509AttributeRenewalCertificateVTbl*
   end
@@ -3482,6 +3616,8 @@ lib LibWin32
     get_encryption_strength : Proc(IX509AttributeArchiveKey*, Int32*, HRESULT)
   end
 
+  IX509AttributeArchiveKey_GUID = LibC::GUID.new("728ab327-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509AttributeArchiveKey = "728ab327-217d-11da-b2a4-000e7bbb2b09"
   struct IX509AttributeArchiveKey
     lpVtbl : IX509AttributeArchiveKeyVTbl*
   end
@@ -3502,6 +3638,8 @@ lib LibWin32
     get_encrypted_key_hash_blob : Proc(IX509AttributeArchiveKeyHash*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509AttributeArchiveKeyHash_GUID = LibC::GUID.new("728ab328-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509AttributeArchiveKeyHash = "728ab328-217d-11da-b2a4-000e7bbb2b09"
   struct IX509AttributeArchiveKeyHash
     lpVtbl : IX509AttributeArchiveKeyHashVTbl*
   end
@@ -3522,6 +3660,8 @@ lib LibWin32
     get_os_version : Proc(IX509AttributeOSVersion*, UInt8**, HRESULT)
   end
 
+  IX509AttributeOSVersion_GUID = LibC::GUID.new("728ab32a-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509AttributeOSVersion = "728ab32a-217d-11da-b2a4-000e7bbb2b09"
   struct IX509AttributeOSVersion
     lpVtbl : IX509AttributeOSVersionVTbl*
   end
@@ -3544,6 +3684,8 @@ lib LibWin32
     get_signature : Proc(IX509AttributeCspProvider*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509AttributeCspProvider_GUID = LibC::GUID.new("728ab32b-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509AttributeCspProvider = "728ab32b-217d-11da-b2a4-000e7bbb2b09"
   struct IX509AttributeCspProvider
     lpVtbl : IX509AttributeCspProviderVTbl*
   end
@@ -3562,6 +3704,8 @@ lib LibWin32
     get_values : Proc(ICryptAttribute*, IX509Attributes*, HRESULT)
   end
 
+  ICryptAttribute_GUID = LibC::GUID.new("728ab32c-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICryptAttribute = "728ab32c-217d-11da-b2a4-000e7bbb2b09"
   struct ICryptAttribute
     lpVtbl : ICryptAttributeVTbl*
   end
@@ -3584,6 +3728,8 @@ lib LibWin32
     add_range : Proc(ICryptAttributes*, ICryptAttributes, HRESULT)
   end
 
+  ICryptAttributes_GUID = LibC::GUID.new("728ab32d-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICryptAttributes = "728ab32d-217d-11da-b2a4-000e7bbb2b09"
   struct ICryptAttributes
     lpVtbl : ICryptAttributesVTbl*
   end
@@ -3605,6 +3751,8 @@ lib LibWin32
     set_value_on_certificate : Proc(ICertProperty*, Int16, EncodingType, UInt8*, HRESULT)
   end
 
+  ICertProperty_GUID = LibC::GUID.new("728ab32e-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertProperty = "728ab32e-217d-11da-b2a4-000e7bbb2b09"
   struct ICertProperty
     lpVtbl : ICertPropertyVTbl*
   end
@@ -3626,6 +3774,8 @@ lib LibWin32
     initialize_from_certificate : Proc(ICertProperties*, Int16, EncodingType, UInt8*, HRESULT)
   end
 
+  ICertProperties_GUID = LibC::GUID.new("728ab32f-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertProperties = "728ab32f-217d-11da-b2a4-000e7bbb2b09"
   struct ICertProperties
     lpVtbl : ICertPropertiesVTbl*
   end
@@ -3649,6 +3799,8 @@ lib LibWin32
     get_friendly_name : Proc(ICertPropertyFriendlyName*, UInt8**, HRESULT)
   end
 
+  ICertPropertyFriendlyName_GUID = LibC::GUID.new("728ab330-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyFriendlyName = "728ab330-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyFriendlyName
     lpVtbl : ICertPropertyFriendlyNameVTbl*
   end
@@ -3672,6 +3824,8 @@ lib LibWin32
     get_description : Proc(ICertPropertyDescription*, UInt8**, HRESULT)
   end
 
+  ICertPropertyDescription_GUID = LibC::GUID.new("728ab331-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyDescription = "728ab331-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyDescription
     lpVtbl : ICertPropertyDescriptionVTbl*
   end
@@ -3695,6 +3849,8 @@ lib LibWin32
     get_template_name : Proc(ICertPropertyAutoEnroll*, UInt8**, HRESULT)
   end
 
+  ICertPropertyAutoEnroll_GUID = LibC::GUID.new("728ab332-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyAutoEnroll = "728ab332-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyAutoEnroll
     lpVtbl : ICertPropertyAutoEnrollVTbl*
   end
@@ -3719,6 +3875,8 @@ lib LibWin32
     get_request_originator : Proc(ICertPropertyRequestOriginator*, UInt8**, HRESULT)
   end
 
+  ICertPropertyRequestOriginator_GUID = LibC::GUID.new("728ab333-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyRequestOriginator = "728ab333-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyRequestOriginator
     lpVtbl : ICertPropertyRequestOriginatorVTbl*
   end
@@ -3742,6 +3900,8 @@ lib LibWin32
     get_sha1_hash : Proc(ICertPropertySHA1Hash*, EncodingType, UInt8**, HRESULT)
   end
 
+  ICertPropertySHA1Hash_GUID = LibC::GUID.new("728ab334-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertySHA1Hash = "728ab334-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertySHA1Hash
     lpVtbl : ICertPropertySHA1HashVTbl*
   end
@@ -3765,6 +3925,8 @@ lib LibWin32
     get_private_key : Proc(ICertPropertyKeyProvInfo*, IX509PrivateKey*, HRESULT)
   end
 
+  ICertPropertyKeyProvInfo_GUID = LibC::GUID.new("728ab336-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyKeyProvInfo = "728ab336-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyKeyProvInfo
     lpVtbl : ICertPropertyKeyProvInfoVTbl*
   end
@@ -3788,6 +3950,8 @@ lib LibWin32
     get_archived : Proc(ICertPropertyArchived*, Int16*, HRESULT)
   end
 
+  ICertPropertyArchived_GUID = LibC::GUID.new("728ab337-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyArchived = "728ab337-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyArchived
     lpVtbl : ICertPropertyArchivedVTbl*
   end
@@ -3813,6 +3977,8 @@ lib LibWin32
     get_backed_up_time : Proc(ICertPropertyBackedUp*, Float64*, HRESULT)
   end
 
+  ICertPropertyBackedUp_GUID = LibC::GUID.new("728ab338-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyBackedUp = "728ab338-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyBackedUp
     lpVtbl : ICertPropertyBackedUpVTbl*
   end
@@ -3839,6 +4005,8 @@ lib LibWin32
     get_friendly_name : Proc(ICertPropertyEnrollment*, UInt8**, HRESULT)
   end
 
+  ICertPropertyEnrollment_GUID = LibC::GUID.new("728ab339-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyEnrollment = "728ab339-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyEnrollment
     lpVtbl : ICertPropertyEnrollmentVTbl*
   end
@@ -3863,6 +4031,8 @@ lib LibWin32
     get_renewal : Proc(ICertPropertyRenewal*, EncodingType, UInt8**, HRESULT)
   end
 
+  ICertPropertyRenewal_GUID = LibC::GUID.new("728ab33a-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyRenewal = "728ab33a-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyRenewal
     lpVtbl : ICertPropertyRenewalVTbl*
   end
@@ -3886,6 +4056,8 @@ lib LibWin32
     get_archived_key_hash : Proc(ICertPropertyArchivedKeyHash*, EncodingType, UInt8**, HRESULT)
   end
 
+  ICertPropertyArchivedKeyHash_GUID = LibC::GUID.new("728ab33b-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyArchivedKeyHash = "728ab33b-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyArchivedKeyHash
     lpVtbl : ICertPropertyArchivedKeyHashVTbl*
   end
@@ -3916,6 +4088,8 @@ lib LibWin32
     get_enrollment_server_authentication : Proc(ICertPropertyEnrollmentPolicyServer*, X509EnrollmentAuthFlags*, HRESULT)
   end
 
+  ICertPropertyEnrollmentPolicyServer_GUID = LibC::GUID.new("728ab34a-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertPropertyEnrollmentPolicyServer = "728ab34a-217d-11da-b2a4-000e7bbb2b09"
   struct ICertPropertyEnrollmentPolicyServer
     lpVtbl : ICertPropertyEnrollmentPolicyServerVTbl*
   end
@@ -3943,6 +4117,8 @@ lib LibWin32
     set_default_values : Proc(IX509SignatureInformation*, HRESULT)
   end
 
+  IX509SignatureInformation_GUID = LibC::GUID.new("728ab33c-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509SignatureInformation = "728ab33c-217d-11da-b2a4-000e7bbb2b09"
   struct IX509SignatureInformation
     lpVtbl : IX509SignatureInformationVTbl*
   end
@@ -3968,6 +4144,8 @@ lib LibWin32
     get_signature_information : Proc(ISignerCertificate*, IX509SignatureInformation*, HRESULT)
   end
 
+  ISignerCertificate_GUID = LibC::GUID.new("728ab33d-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ISignerCertificate = "728ab33d-217d-11da-b2a4-000e7bbb2b09"
   struct ISignerCertificate
     lpVtbl : ISignerCertificateVTbl*
   end
@@ -3989,6 +4167,8 @@ lib LibWin32
     find : Proc(ISignerCertificates*, ISignerCertificate, Int32*, HRESULT)
   end
 
+  ISignerCertificates_GUID = LibC::GUID.new("728ab33e-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_ISignerCertificates = "728ab33e-217d-11da-b2a4-000e7bbb2b09"
   struct ISignerCertificates
     lpVtbl : ISignerCertificatesVTbl*
   end
@@ -4006,6 +4186,8 @@ lib LibWin32
     get_name : Proc(IX509NameValuePair*, UInt8**, HRESULT)
   end
 
+  IX509NameValuePair_GUID = LibC::GUID.new("728ab33f-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509NameValuePair = "728ab33f-217d-11da-b2a4-000e7bbb2b09"
   struct IX509NameValuePair
     lpVtbl : IX509NameValuePairVTbl*
   end
@@ -4026,6 +4208,8 @@ lib LibWin32
     clear : Proc(IX509NameValuePairs*, HRESULT)
   end
 
+  IX509NameValuePairs_GUID = LibC::GUID.new("728ab340-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509NameValuePairs = "728ab340-217d-11da-b2a4-000e7bbb2b09"
   struct IX509NameValuePairs
     lpVtbl : IX509NameValuePairsVTbl*
   end
@@ -4041,6 +4225,8 @@ lib LibWin32
     get_property : Proc(IX509CertificateTemplate*, EnrollmentTemplateProperty, VARIANT*, HRESULT)
   end
 
+  IX509CertificateTemplate_GUID = LibC::GUID.new("54244a13-555a-4e22-896d-1b0e52f76406")
+  CLSID_IX509CertificateTemplate = "54244a13-555a-4e22-896d-1b0e52f76406"
   struct IX509CertificateTemplate
     lpVtbl : IX509CertificateTemplateVTbl*
   end
@@ -4063,6 +4249,8 @@ lib LibWin32
     get_item_by_oid : Proc(IX509CertificateTemplates*, IObjectId, IX509CertificateTemplate*, HRESULT)
   end
 
+  IX509CertificateTemplates_GUID = LibC::GUID.new("13b79003-2181-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateTemplates = "13b79003-2181-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateTemplates
     lpVtbl : IX509CertificateTemplatesVTbl*
   end
@@ -4082,6 +4270,8 @@ lib LibWin32
     get_template : Proc(IX509CertificateTemplateWritable*, IX509CertificateTemplate*, HRESULT)
   end
 
+  IX509CertificateTemplateWritable_GUID = LibC::GUID.new("f49466a7-395a-4e9e-b6e7-32b331600dc0")
+  CLSID_IX509CertificateTemplateWritable = "f49466a7-395a-4e9e-b6e7-32b331600dc0"
   struct IX509CertificateTemplateWritable
     lpVtbl : IX509CertificateTemplateWritableVTbl*
   end
@@ -4097,6 +4287,8 @@ lib LibWin32
     get_property : Proc(ICertificationAuthority*, EnrollmentCAProperty, VARIANT*, HRESULT)
   end
 
+  ICertificationAuthority_GUID = LibC::GUID.new("835d1f61-1e95-4bc8-b4d3-976c42b968f7")
+  CLSID_ICertificationAuthority = "835d1f61-1e95-4bc8-b4d3-976c42b968f7"
   struct ICertificationAuthority
     lpVtbl : ICertificationAuthorityVTbl*
   end
@@ -4119,6 +4311,8 @@ lib LibWin32
     get_item_by_name : Proc(ICertificationAuthorities*, UInt8*, ICertificationAuthority*, HRESULT)
   end
 
+  ICertificationAuthorities_GUID = LibC::GUID.new("13b79005-2181-11da-b2a4-000e7bbb2b09")
+  CLSID_ICertificationAuthorities = "13b79005-2181-11da-b2a4-000e7bbb2b09"
   struct ICertificationAuthorities
     lpVtbl : ICertificationAuthoritiesVTbl*
   end
@@ -4157,6 +4351,8 @@ lib LibWin32
     put_cost : Proc(IX509EnrollmentPolicyServer*, UInt32, HRESULT)
   end
 
+  IX509EnrollmentPolicyServer_GUID = LibC::GUID.new("13b79026-2181-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509EnrollmentPolicyServer = "13b79026-2181-11da-b2a4-000e7bbb2b09"
   struct IX509EnrollmentPolicyServer
     lpVtbl : IX509EnrollmentPolicyServerVTbl*
   end
@@ -4186,6 +4382,8 @@ lib LibWin32
     remove_from_registry : Proc(IX509PolicyServerUrl*, X509CertificateEnrollmentContext, HRESULT)
   end
 
+  IX509PolicyServerUrl_GUID = LibC::GUID.new("884e204a-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509PolicyServerUrl = "884e204a-217d-11da-b2a4-000e7bbb2b09"
   struct IX509PolicyServerUrl
     lpVtbl : IX509PolicyServerUrlVTbl*
   end
@@ -4207,6 +4405,8 @@ lib LibWin32
     initialize : Proc(IX509PolicyServerListManager*, X509CertificateEnrollmentContext, PolicyServerUrlFlags, HRESULT)
   end
 
+  IX509PolicyServerListManager_GUID = LibC::GUID.new("884e204b-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509PolicyServerListManager = "884e204b-217d-11da-b2a4-000e7bbb2b09"
   struct IX509PolicyServerListManager
     lpVtbl : IX509PolicyServerListManagerVTbl*
   end
@@ -4246,6 +4446,8 @@ lib LibWin32
     get_raw_data : Proc(IX509CertificateRequest*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509CertificateRequest_GUID = LibC::GUID.new("728ab341-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequest = "728ab341-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequest
     lpVtbl : IX509CertificateRequestVTbl*
   end
@@ -4313,6 +4515,8 @@ lib LibWin32
     get_csp_statuses2 : Proc(IX509CertificateRequestPkcs10*, X509KeySpec, ICspStatuses*, HRESULT)
   end
 
+  IX509CertificateRequestPkcs10_GUID = LibC::GUID.new("728ab342-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestPkcs10 = "728ab342-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestPkcs10
     lpVtbl : IX509CertificateRequestPkcs10VTbl*
   end
@@ -4385,6 +4589,8 @@ lib LibWin32
     get_template : Proc(IX509CertificateRequestPkcs10V2*, IX509CertificateTemplate*, HRESULT)
   end
 
+  IX509CertificateRequestPkcs10V2_GUID = LibC::GUID.new("728ab35b-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestPkcs10V2 = "728ab35b-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestPkcs10V2
     lpVtbl : IX509CertificateRequestPkcs10V2VTbl*
   end
@@ -4468,6 +4674,8 @@ lib LibWin32
     get_name_value_pairs : Proc(IX509CertificateRequestPkcs10V3*, IX509NameValuePairs*, HRESULT)
   end
 
+  IX509CertificateRequestPkcs10V3_GUID = LibC::GUID.new("54ea9942-3d66-4530-b76e-7c9170d3ec52")
+  CLSID_IX509CertificateRequestPkcs10V3 = "54ea9942-3d66-4530-b76e-7c9170d3ec52"
   struct IX509CertificateRequestPkcs10V3
     lpVtbl : IX509CertificateRequestPkcs10V3VTbl*
   end
@@ -4555,6 +4763,8 @@ lib LibWin32
     put_attest_private_key_preferred : Proc(IX509CertificateRequestPkcs10V4*, Int16, HRESULT)
   end
 
+  IX509CertificateRequestPkcs10V4_GUID = LibC::GUID.new("728ab363-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestPkcs10V4 = "728ab363-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestPkcs10V4
     lpVtbl : IX509CertificateRequestPkcs10V4VTbl*
   end
@@ -4633,6 +4843,8 @@ lib LibWin32
     put_signer_certificate : Proc(IX509CertificateRequestCertificate*, ISignerCertificate, HRESULT)
   end
 
+  IX509CertificateRequestCertificate_GUID = LibC::GUID.new("728ab343-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestCertificate = "728ab343-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestCertificate
     lpVtbl : IX509CertificateRequestCertificateVTbl*
   end
@@ -4715,6 +4927,8 @@ lib LibWin32
     get_template : Proc(IX509CertificateRequestCertificate2*, IX509CertificateTemplate*, HRESULT)
   end
 
+  IX509CertificateRequestCertificate2_GUID = LibC::GUID.new("728ab35a-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestCertificate2 = "728ab35a-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestCertificate2
     lpVtbl : IX509CertificateRequestCertificate2VTbl*
   end
@@ -4762,6 +4976,8 @@ lib LibWin32
     put_signer_certificate : Proc(IX509CertificateRequestPkcs7*, ISignerCertificate, HRESULT)
   end
 
+  IX509CertificateRequestPkcs7_GUID = LibC::GUID.new("728ab344-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestPkcs7 = "728ab344-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestPkcs7
     lpVtbl : IX509CertificateRequestPkcs7VTbl*
   end
@@ -4813,6 +5029,8 @@ lib LibWin32
     check_certificate_signature : Proc(IX509CertificateRequestPkcs7V2*, Int16, HRESULT)
   end
 
+  IX509CertificateRequestPkcs7V2_GUID = LibC::GUID.new("728ab35c-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestPkcs7V2 = "728ab35c-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestPkcs7V2
     lpVtbl : IX509CertificateRequestPkcs7V2VTbl*
   end
@@ -4883,6 +5101,8 @@ lib LibWin32
     get_signer_certificates : Proc(IX509CertificateRequestCmc*, ISignerCertificates*, HRESULT)
   end
 
+  IX509CertificateRequestCmc_GUID = LibC::GUID.new("728ab345-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestCmc = "728ab345-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestCmc
     lpVtbl : IX509CertificateRequestCmcVTbl*
   end
@@ -4959,6 +5179,8 @@ lib LibWin32
     check_certificate_signature : Proc(IX509CertificateRequestCmc2*, ISignerCertificate, Int16, HRESULT)
   end
 
+  IX509CertificateRequestCmc2_GUID = LibC::GUID.new("728ab35d-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRequestCmc2 = "728ab35d-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRequestCmc2
     lpVtbl : IX509CertificateRequestCmc2VTbl*
   end
@@ -4996,6 +5218,8 @@ lib LibWin32
     get_ca_config_string : Proc(IX509Enrollment*, UInt8**, HRESULT)
   end
 
+  IX509Enrollment_GUID = LibC::GUID.new("728ab346-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509Enrollment = "728ab346-217d-11da-b2a4-000e7bbb2b09"
   struct IX509Enrollment
     lpVtbl : IX509EnrollmentVTbl*
   end
@@ -5038,6 +5262,8 @@ lib LibWin32
     get_request_id_string : Proc(IX509Enrollment2*, UInt8**, HRESULT)
   end
 
+  IX509Enrollment2_GUID = LibC::GUID.new("728ab350-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509Enrollment2 = "728ab350-217d-11da-b2a4-000e7bbb2b09"
   struct IX509Enrollment2
     lpVtbl : IX509Enrollment2VTbl*
   end
@@ -5056,6 +5282,8 @@ lib LibWin32
     initialize : Proc(IX509EnrollmentHelper*, X509CertificateEnrollmentContext, HRESULT)
   end
 
+  IX509EnrollmentHelper_GUID = LibC::GUID.new("728ab351-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509EnrollmentHelper = "728ab351-217d-11da-b2a4-000e7bbb2b09"
   struct IX509EnrollmentHelper
     lpVtbl : IX509EnrollmentHelperVTbl*
   end
@@ -5071,6 +5299,8 @@ lib LibWin32
     create_object : Proc(IX509EnrollmentWebClassFactory*, UInt8*, IUnknown*, HRESULT)
   end
 
+  IX509EnrollmentWebClassFactory_GUID = LibC::GUID.new("728ab349-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509EnrollmentWebClassFactory = "728ab349-217d-11da-b2a4-000e7bbb2b09"
   struct IX509EnrollmentWebClassFactory
     lpVtbl : IX509EnrollmentWebClassFactoryVTbl*
   end
@@ -5086,6 +5316,8 @@ lib LibWin32
     create_object : Proc(IX509MachineEnrollmentFactory*, UInt8*, IX509EnrollmentHelper*, HRESULT)
   end
 
+  IX509MachineEnrollmentFactory_GUID = LibC::GUID.new("728ab352-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509MachineEnrollmentFactory = "728ab352-217d-11da-b2a4-000e7bbb2b09"
   struct IX509MachineEnrollmentFactory
     lpVtbl : IX509MachineEnrollmentFactoryVTbl*
   end
@@ -5107,6 +5339,8 @@ lib LibWin32
     get_critical_extensions : Proc(IX509CertificateRevocationListEntry*, IObjectIds*, HRESULT)
   end
 
+  IX509CertificateRevocationListEntry_GUID = LibC::GUID.new("728ab35e-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRevocationListEntry = "728ab35e-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRevocationListEntry
     lpVtbl : IX509CertificateRevocationListEntryVTbl*
   end
@@ -5129,6 +5363,8 @@ lib LibWin32
     add_range : Proc(IX509CertificateRevocationListEntries*, IX509CertificateRevocationListEntries, HRESULT)
   end
 
+  IX509CertificateRevocationListEntries_GUID = LibC::GUID.new("728ab35f-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRevocationListEntries = "728ab35f-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRevocationListEntries
     lpVtbl : IX509CertificateRevocationListEntriesVTbl*
   end
@@ -5174,6 +5410,8 @@ lib LibWin32
     get_signature : Proc(IX509CertificateRevocationList*, EncodingType, UInt8**, HRESULT)
   end
 
+  IX509CertificateRevocationList_GUID = LibC::GUID.new("728ab360-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509CertificateRevocationList = "728ab360-217d-11da-b2a4-000e7bbb2b09"
   struct IX509CertificateRevocationList
     lpVtbl : IX509CertificateRevocationListVTbl*
   end
@@ -5191,6 +5429,8 @@ lib LibWin32
     get_request_id : Proc(ICertificateAttestationChallenge*, UInt8**, HRESULT)
   end
 
+  ICertificateAttestationChallenge_GUID = LibC::GUID.new("6f175a7c-4a3a-40ae-9dba-592fd6bbf9b8")
+  CLSID_ICertificateAttestationChallenge = "6f175a7c-4a3a-40ae-9dba-592fd6bbf9b8"
   struct ICertificateAttestationChallenge
     lpVtbl : ICertificateAttestationChallengeVTbl*
   end
@@ -5210,6 +5450,8 @@ lib LibWin32
     put_key_blob : Proc(ICertificateAttestationChallenge2*, EncodingType, UInt8*, HRESULT)
   end
 
+  ICertificateAttestationChallenge2_GUID = LibC::GUID.new("4631334d-e266-47d6-bd79-be53cb2e2753")
+  CLSID_ICertificateAttestationChallenge2 = "4631334d-e266-47d6-bd79-be53cb2e2753"
   struct ICertificateAttestationChallenge2
     lpVtbl : ICertificateAttestationChallenge2VTbl*
   end
@@ -5246,6 +5488,8 @@ lib LibWin32
     delete_request : Proc(IX509SCEPEnrollment*, HRESULT)
   end
 
+  IX509SCEPEnrollment_GUID = LibC::GUID.new("728ab361-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509SCEPEnrollment = "728ab361-217d-11da-b2a4-000e7bbb2b09"
   struct IX509SCEPEnrollment
     lpVtbl : IX509SCEPEnrollmentVTbl*
   end
@@ -5288,6 +5532,8 @@ lib LibWin32
     put_activity_id : Proc(IX509SCEPEnrollment2*, UInt8*, HRESULT)
   end
 
+  IX509SCEPEnrollment2_GUID = LibC::GUID.new("728ab364-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509SCEPEnrollment2 = "728ab364-217d-11da-b2a4-000e7bbb2b09"
   struct IX509SCEPEnrollment2
     lpVtbl : IX509SCEPEnrollment2VTbl*
   end
@@ -5308,6 +5554,8 @@ lib LibWin32
     get_result_message_text : Proc(IX509SCEPEnrollmentHelper*, UInt8**, HRESULT)
   end
 
+  IX509SCEPEnrollmentHelper_GUID = LibC::GUID.new("728ab365-217d-11da-b2a4-000e7bbb2b09")
+  CLSID_IX509SCEPEnrollmentHelper = "728ab365-217d-11da-b2a4-000e7bbb2b09"
   struct IX509SCEPEnrollmentHelper
     lpVtbl : IX509SCEPEnrollmentHelperVTbl*
   end
@@ -5329,6 +5577,8 @@ lib LibWin32
     encode : Proc(ICertEncodeStringArray*, UInt8**, HRESULT)
   end
 
+  ICertEncodeStringArray_GUID = LibC::GUID.new("12a88820-7494-11d0-8816-00a0c903b83c")
+  CLSID_ICertEncodeStringArray = "12a88820-7494-11d0-8816-00a0c903b83c"
   struct ICertEncodeStringArray
     lpVtbl : ICertEncodeStringArrayVTbl*
   end
@@ -5352,6 +5602,8 @@ lib LibWin32
     encode_blob : Proc(ICertEncodeStringArray2*, EncodingType, UInt8**, HRESULT)
   end
 
+  ICertEncodeStringArray2_GUID = LibC::GUID.new("9c680d93-9b7d-4e95-9018-4ffe10ba5ada")
+  CLSID_ICertEncodeStringArray2 = "9c680d93-9b7d-4e95-9018-4ffe10ba5ada"
   struct ICertEncodeStringArray2
     lpVtbl : ICertEncodeStringArray2VTbl*
   end
@@ -5372,6 +5624,8 @@ lib LibWin32
     encode : Proc(ICertEncodeLongArray*, UInt8**, HRESULT)
   end
 
+  ICertEncodeLongArray_GUID = LibC::GUID.new("15e2f230-a0a2-11d0-8821-00a0c903b83c")
+  CLSID_ICertEncodeLongArray = "15e2f230-a0a2-11d0-8821-00a0c903b83c"
   struct ICertEncodeLongArray
     lpVtbl : ICertEncodeLongArrayVTbl*
   end
@@ -5394,6 +5648,8 @@ lib LibWin32
     encode_blob : Proc(ICertEncodeLongArray2*, EncodingType, UInt8**, HRESULT)
   end
 
+  ICertEncodeLongArray2_GUID = LibC::GUID.new("4efde84a-bd9b-4fc2-a108-c347d478840f")
+  CLSID_ICertEncodeLongArray2 = "4efde84a-bd9b-4fc2-a108-c347d478840f"
   struct ICertEncodeLongArray2
     lpVtbl : ICertEncodeLongArray2VTbl*
   end
@@ -5414,6 +5670,8 @@ lib LibWin32
     encode : Proc(ICertEncodeDateArray*, UInt8**, HRESULT)
   end
 
+  ICertEncodeDateArray_GUID = LibC::GUID.new("2f9469a0-a470-11d0-8821-00a0c903b83c")
+  CLSID_ICertEncodeDateArray = "2f9469a0-a470-11d0-8821-00a0c903b83c"
   struct ICertEncodeDateArray
     lpVtbl : ICertEncodeDateArrayVTbl*
   end
@@ -5436,6 +5694,8 @@ lib LibWin32
     encode_blob : Proc(ICertEncodeDateArray2*, EncodingType, UInt8**, HRESULT)
   end
 
+  ICertEncodeDateArray2_GUID = LibC::GUID.new("99a4edb5-2b8e-448d-bf95-bba8d7789dc8")
+  CLSID_ICertEncodeDateArray2 = "99a4edb5-2b8e-448d-bf95-bba8d7789dc8"
   struct ICertEncodeDateArray2
     lpVtbl : ICertEncodeDateArray2VTbl*
   end
@@ -5459,6 +5719,8 @@ lib LibWin32
     encode : Proc(ICertEncodeCRLDistInfo*, UInt8**, HRESULT)
   end
 
+  ICertEncodeCRLDistInfo_GUID = LibC::GUID.new("01958640-bbff-11d0-8825-00a0c903b83c")
+  CLSID_ICertEncodeCRLDistInfo = "01958640-bbff-11d0-8825-00a0c903b83c"
   struct ICertEncodeCRLDistInfo
     lpVtbl : ICertEncodeCRLDistInfoVTbl*
   end
@@ -5484,6 +5746,8 @@ lib LibWin32
     encode_blob : Proc(ICertEncodeCRLDistInfo2*, EncodingType, UInt8**, HRESULT)
   end
 
+  ICertEncodeCRLDistInfo2_GUID = LibC::GUID.new("b4275d4b-3e30-446f-ad36-09d03120b078")
+  CLSID_ICertEncodeCRLDistInfo2 = "b4275d4b-3e30-446f-ad36-09d03120b078"
   struct ICertEncodeCRLDistInfo2
     lpVtbl : ICertEncodeCRLDistInfo2VTbl*
   end
@@ -5505,6 +5769,8 @@ lib LibWin32
     encode : Proc(ICertEncodeAltName*, UInt8**, HRESULT)
   end
 
+  ICertEncodeAltName_GUID = LibC::GUID.new("1c9a8c70-1271-11d1-9bd4-00c04fb683fa")
+  CLSID_ICertEncodeAltName = "1c9a8c70-1271-11d1-9bd4-00c04fb683fa"
   struct ICertEncodeAltName
     lpVtbl : ICertEncodeAltNameVTbl*
   end
@@ -5530,6 +5796,8 @@ lib LibWin32
     set_name_entry_blob : Proc(ICertEncodeAltName2*, Int32, Int32, UInt8*, EncodingType, HRESULT)
   end
 
+  ICertEncodeAltName2_GUID = LibC::GUID.new("f67fe177-5ef1-4535-b4ce-29df15e2e0c3")
+  CLSID_ICertEncodeAltName2 = "f67fe177-5ef1-4535-b4ce-29df15e2e0c3"
   struct ICertEncodeAltName2
     lpVtbl : ICertEncodeAltName2VTbl*
   end
@@ -5548,6 +5816,8 @@ lib LibWin32
     encode : Proc(ICertEncodeBitString*, Int32, UInt8*, UInt8**, HRESULT)
   end
 
+  ICertEncodeBitString_GUID = LibC::GUID.new("6db525be-1278-11d1-9bd4-00c04fb683fa")
+  CLSID_ICertEncodeBitString = "6db525be-1278-11d1-9bd4-00c04fb683fa"
   struct ICertEncodeBitString
     lpVtbl : ICertEncodeBitStringVTbl*
   end
@@ -5569,6 +5839,8 @@ lib LibWin32
     get_bit_string_blob : Proc(ICertEncodeBitString2*, EncodingType, UInt8**, HRESULT)
   end
 
+  ICertEncodeBitString2_GUID = LibC::GUID.new("e070d6e7-23ef-4dd2-8242-ebd9c928cb30")
+  CLSID_ICertEncodeBitString2 = "e070d6e7-23ef-4dd2-8242-ebd9c928cb30"
   struct ICertEncodeBitString2
     lpVtbl : ICertEncodeBitString2VTbl*
   end
@@ -5586,6 +5858,8 @@ lib LibWin32
     get_description : Proc(ICertExit*, UInt8**, HRESULT)
   end
 
+  ICertExit_GUID = LibC::GUID.new("e19ae1a0-7364-11d0-8816-00a0c903b83c")
+  CLSID_ICertExit = "e19ae1a0-7364-11d0-8816-00a0c903b83c"
   struct ICertExit
     lpVtbl : ICertExitVTbl*
   end
@@ -5604,6 +5878,8 @@ lib LibWin32
     get_manage_module : Proc(ICertExit2*, ICertManageModule*, HRESULT)
   end
 
+  ICertExit2_GUID = LibC::GUID.new("0abf484b-d049-464d-a7ed-552e7529b0ff")
+  CLSID_ICertExit2 = "0abf484b-d049-464d-a7ed-552e7529b0ff"
   struct ICertExit2
     lpVtbl : ICertExit2VTbl*
   end
@@ -5674,6 +5950,8 @@ lib LibWin32
     put_hash_algorithm : Proc(ICEnroll*, UInt8*, HRESULT)
   end
 
+  ICEnroll_GUID = LibC::GUID.new("43f8f288-7a20-11d0-8f06-00c04fc295e1")
+  CLSID_ICEnroll = "43f8f288-7a20-11d0-8f06-00c04fc295e1"
   struct ICEnroll
     lpVtbl : ICEnrollVTbl*
   end
@@ -5750,6 +6028,8 @@ lib LibWin32
     put_enable_t61_dn_encoding : Proc(ICEnroll2*, LibC::BOOL, HRESULT)
   end
 
+  ICEnroll2_GUID = LibC::GUID.new("704ca730-c90b-11d1-9bec-00c04fc295e1")
+  CLSID_ICEnroll2 = "704ca730-c90b-11d1-9bec-00c04fc295e1"
   struct ICEnroll2
     lpVtbl : ICEnroll2VTbl*
   end
@@ -5840,6 +6120,8 @@ lib LibWin32
     get_enable_smime_capabilities : Proc(ICEnroll3*, LibC::BOOL*, HRESULT)
   end
 
+  ICEnroll3_GUID = LibC::GUID.new("c28c2d95-b7de-11d2-a421-00c04f79fe8e")
+  CLSID_ICEnroll3 = "c28c2d95-b7de-11d2-a421-00c04f79fe8e"
   struct ICEnroll3
     lpVtbl : ICEnroll3VTbl*
   end
@@ -5963,6 +6245,8 @@ lib LibWin32
     get_include_subject_key_id : Proc(ICEnroll4*, LibC::BOOL*, HRESULT)
   end
 
+  ICEnroll4_GUID = LibC::GUID.new("c1f1188a-2eb5-4a80-841b-7e729a356d90")
+  CLSID_ICEnroll4 = "c1f1188a-2eb5-4a80-841b-7e729a356d90"
   struct ICEnroll4
     lpVtbl : ICEnroll4VTbl*
   end
@@ -6043,6 +6327,8 @@ lib LibWin32
     create_pkcs7_request_from_request : Proc(IEnroll*, CRYPTOAPI_BLOB*, CERT_CONTEXT*, CRYPTOAPI_BLOB*, HRESULT)
   end
 
+  IEnroll_GUID = LibC::GUID.new("acaa7838-4585-11d1-ab57-00c04fc295e1")
+  CLSID_IEnroll = "acaa7838-4585-11d1-ab57-00c04fc295e1"
   struct IEnroll
     lpVtbl : IEnrollVTbl*
   end
@@ -6141,6 +6427,8 @@ lib LibWin32
     get_enable_smime_capabilities : Proc(IEnroll2*, LibC::BOOL*, HRESULT)
   end
 
+  IEnroll2_GUID = LibC::GUID.new("c080e199-b7df-11d2-a421-00c04f79fe8e")
+  CLSID_IEnroll2 = "c080e199-b7df-11d2-a421-00c04f79fe8e"
   struct IEnroll2
     lpVtbl : IEnroll2VTbl*
   end
@@ -6271,6 +6559,8 @@ lib LibWin32
     get_include_subject_key_id : Proc(IEnroll4*, LibC::BOOL*, HRESULT)
   end
 
+  IEnroll4_GUID = LibC::GUID.new("f8053fe5-78f4-448f-a0db-41d61b73446b")
+  CLSID_IEnroll4 = "f8053fe5-78f4-448f-a0db-41d61b73446b"
   struct IEnroll4
     lpVtbl : IEnroll4VTbl*
   end
@@ -6284,6 +6574,8 @@ lib LibWin32
     ping : Proc(ICertRequestD*, LibC::LPWSTR, HRESULT)
   end
 
+  ICertRequestD_GUID = LibC::GUID.new("d99e6e70-fc88-11d0-b498-00a0c90312f3")
+  CLSID_ICertRequestD = "d99e6e70-fc88-11d0-b498-00a0c90312f3"
   struct ICertRequestD
     lpVtbl : ICertRequestDVTbl*
   end
@@ -6301,6 +6593,8 @@ lib LibWin32
     ping2 : Proc(ICertRequestD2*, LibC::LPWSTR, HRESULT)
   end
 
+  ICertRequestD2_GUID = LibC::GUID.new("5422fd3a-d4b8-4cef-a12e-e87d4ca22e90")
+  CLSID_ICertRequestD2 = "5422fd3a-d4b8-4cef-a12e-e87d4ca22e90"
   struct ICertRequestD2
     lpVtbl : ICertRequestD2VTbl*
   end

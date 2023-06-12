@@ -890,6 +890,8 @@ lib LibWin32
     get_cur_moniker : Proc(IPersistMoniker*, IMoniker*, HRESULT)
   end
 
+  IPersistMoniker_GUID = LibC::GUID.new("79eac9c9-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IPersistMoniker = "79eac9c9-baf9-11ce-8c82-00aa004ba90b"
   struct IPersistMoniker
     lpVtbl : IPersistMonikerVTbl*
   end
@@ -901,6 +903,8 @@ lib LibWin32
     put_property : Proc(IMonikerProp*, MONIKERPROPERTY, LibC::LPWSTR, HRESULT)
   end
 
+  IMonikerProp_GUID = LibC::GUID.new("a5ca5f7f-1847-4d87-9c5b-918509f7511d")
+  CLSID_IMonikerProp = "a5ca5f7f-1847-4d87-9c5b-918509f7511d"
   struct IMonikerProp
     lpVtbl : IMonikerPropVTbl*
   end
@@ -912,6 +916,8 @@ lib LibWin32
     create_binding : Proc(IBindProtocol*, LibC::LPWSTR, IBindCtx, IBinding*, HRESULT)
   end
 
+  IBindProtocol_GUID = LibC::GUID.new("79eac9cd-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IBindProtocol = "79eac9cd-baf9-11ce-8c82-00aa004ba90b"
   struct IBindProtocol
     lpVtbl : IBindProtocolVTbl*
   end
@@ -924,6 +930,8 @@ lib LibWin32
     on_response : Proc(IHttpNegotiate*, UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
+  IHttpNegotiate_GUID = LibC::GUID.new("79eac9d2-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IHttpNegotiate = "79eac9d2-baf9-11ce-8c82-00aa004ba90b"
   struct IHttpNegotiate
     lpVtbl : IHttpNegotiateVTbl*
   end
@@ -937,6 +945,8 @@ lib LibWin32
     get_root_security_id : Proc(IHttpNegotiate2*, UInt8*, UInt32*, LibC::UINT_PTR, HRESULT)
   end
 
+  IHttpNegotiate2_GUID = LibC::GUID.new("4f9f9fcb-e0f4-48eb-b7ab-fa2ea9365cb4")
+  CLSID_IHttpNegotiate2 = "4f9f9fcb-e0f4-48eb-b7ab-fa2ea9365cb4"
   struct IHttpNegotiate2
     lpVtbl : IHttpNegotiate2VTbl*
   end
@@ -951,6 +961,8 @@ lib LibWin32
     get_serialized_client_cert_context : Proc(IHttpNegotiate3*, UInt8**, UInt32*, HRESULT)
   end
 
+  IHttpNegotiate3_GUID = LibC::GUID.new("57b6c80a-34c2-4602-bc26-66a02fc57153")
+  CLSID_IHttpNegotiate3 = "57b6c80a-34c2-4602-bc26-66a02fc57153"
   struct IHttpNegotiate3
     lpVtbl : IHttpNegotiate3VTbl*
   end
@@ -963,6 +975,8 @@ lib LibWin32
     set_delete_file : Proc(IWinInetFileStream*, LibC::UINT_PTR, HRESULT)
   end
 
+  IWinInetFileStream_GUID = LibC::GUID.new("f134c4b7-b1f8-4e75-b886-74b90943becb")
+  CLSID_IWinInetFileStream = "f134c4b7-b1f8-4e75-b886-74b90943becb"
   struct IWinInetFileStream
     lpVtbl : IWinInetFileStreamVTbl*
   end
@@ -974,6 +988,8 @@ lib LibWin32
     get_window : Proc(IWindowForBindingUI*, Guid*, HANDLE*, HRESULT)
   end
 
+  IWindowForBindingUI_GUID = LibC::GUID.new("79eac9d5-bafa-11ce-8c82-00aa004ba90b")
+  CLSID_IWindowForBindingUI = "79eac9d5-bafa-11ce-8c82-00aa004ba90b"
   struct IWindowForBindingUI
     lpVtbl : IWindowForBindingUIVTbl*
   end
@@ -986,6 +1002,8 @@ lib LibWin32
     on_code_install_problem : Proc(ICodeInstall*, UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  ICodeInstall_GUID = LibC::GUID.new("79eac9d1-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_ICodeInstall = "79eac9d1-baf9-11ce-8c82-00aa004ba90b"
   struct ICodeInstall
     lpVtbl : ICodeInstallVTbl*
   end
@@ -997,6 +1015,8 @@ lib LibWin32
     get_i_uri : Proc(IUriContainer*, IUri*, HRESULT)
   end
 
+  IUriContainer_GUID = LibC::GUID.new("a158a630-ed6f-45fb-b987-f68676f57752")
+  CLSID_IUriContainer = "a158a630-ed6f-45fb-b987-f68676f57752"
   struct IUriContainer
     lpVtbl : IUriContainerVTbl*
   end
@@ -1009,6 +1029,8 @@ lib LibWin32
     create_initialized_i_uri_builder : Proc(IUriBuilderFactory*, UInt32, LibC::UINT_PTR, IUriBuilder*, HRESULT)
   end
 
+  IUriBuilderFactory_GUID = LibC::GUID.new("e982ce48-0b96-440c-bc37-0c869b27a29e")
+  CLSID_IUriBuilderFactory = "e982ce48-0b96-440c-bc37-0c869b27a29e"
   struct IUriBuilderFactory
     lpVtbl : IUriBuilderFactoryVTbl*
   end
@@ -1020,6 +1042,8 @@ lib LibWin32
     query_option : Proc(IWinInetInfo*, UInt32, Void*, UInt32*, HRESULT)
   end
 
+  IWinInetInfo_GUID = LibC::GUID.new("79eac9d6-bafa-11ce-8c82-00aa004ba90b")
+  CLSID_IWinInetInfo = "79eac9d6-bafa-11ce-8c82-00aa004ba90b"
   struct IWinInetInfo
     lpVtbl : IWinInetInfoVTbl*
   end
@@ -1032,6 +1056,8 @@ lib LibWin32
     on_security_problem : Proc(IHttpSecurity*, UInt32, HRESULT)
   end
 
+  IHttpSecurity_GUID = LibC::GUID.new("79eac9d7-bafa-11ce-8c82-00aa004ba90b")
+  CLSID_IHttpSecurity = "79eac9d7-bafa-11ce-8c82-00aa004ba90b"
   struct IHttpSecurity
     lpVtbl : IHttpSecurityVTbl*
   end
@@ -1044,6 +1070,8 @@ lib LibWin32
     query_info : Proc(IWinInetHttpInfo*, UInt32, Void*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
+  IWinInetHttpInfo_GUID = LibC::GUID.new("79eac9d8-bafa-11ce-8c82-00aa004ba90b")
+  CLSID_IWinInetHttpInfo = "79eac9d8-bafa-11ce-8c82-00aa004ba90b"
   struct IWinInetHttpInfo
     lpVtbl : IWinInetHttpInfoVTbl*
   end
@@ -1055,6 +1083,8 @@ lib LibWin32
     get_request_timeouts : Proc(IWinInetHttpTimeouts*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
+  IWinInetHttpTimeouts_GUID = LibC::GUID.new("f286fa56-c1fd-4270-8e67-b3eb790a81e8")
+  CLSID_IWinInetHttpTimeouts = "f286fa56-c1fd-4270-8e67-b3eb790a81e8"
   struct IWinInetHttpTimeouts
     lpVtbl : IWinInetHttpTimeoutsVTbl*
   end
@@ -1066,6 +1096,8 @@ lib LibWin32
     set_cache_extension : Proc(IWinInetCacheHints*, LibC::LPWSTR, Void*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
+  IWinInetCacheHints_GUID = LibC::GUID.new("dd1ec3b3-8391-4fdb-a9e6-347c3caaa7dd")
+  CLSID_IWinInetCacheHints = "dd1ec3b3-8391-4fdb-a9e6-347c3caaa7dd"
   struct IWinInetCacheHints
     lpVtbl : IWinInetCacheHintsVTbl*
   end
@@ -1078,6 +1110,8 @@ lib LibWin32
     set_cache_extension2 : Proc(IWinInetCacheHints2*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
+  IWinInetCacheHints2_GUID = LibC::GUID.new("7857aeac-d31f-49bf-884e-dd46df36780a")
+  CLSID_IWinInetCacheHints2 = "7857aeac-d31f-49bf-884e-dd46df36780a"
   struct IWinInetCacheHints2
     lpVtbl : IWinInetCacheHints2VTbl*
   end
@@ -1088,6 +1122,8 @@ lib LibWin32
     release : Proc(IInternet*, UInt32)
   end
 
+  IInternet_GUID = LibC::GUID.new("79eac9e0-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternet = "79eac9e0-baf9-11ce-8c82-00aa004ba90b"
   struct IInternet
     lpVtbl : IInternetVTbl*
   end
@@ -1100,6 +1136,8 @@ lib LibWin32
     get_bind_string : Proc(IInternetBindInfo*, UInt32, LibC::LPWSTR*, UInt32, UInt32*, HRESULT)
   end
 
+  IInternetBindInfo_GUID = LibC::GUID.new("79eac9e1-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetBindInfo = "79eac9e1-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetBindInfo
     lpVtbl : IInternetBindInfoVTbl*
   end
@@ -1113,6 +1151,8 @@ lib LibWin32
     get_bind_info_ex : Proc(IInternetBindInfoEx*, UInt32*, BINDINFO*, UInt32*, UInt32*, HRESULT)
   end
 
+  IInternetBindInfoEx_GUID = LibC::GUID.new("a3e015b7-a82c-4dcd-a150-569aeeed36ab")
+  CLSID_IInternetBindInfoEx = "a3e015b7-a82c-4dcd-a150-569aeeed36ab"
   struct IInternetBindInfoEx
     lpVtbl : IInternetBindInfoExVTbl*
   end
@@ -1129,6 +1169,8 @@ lib LibWin32
     resume : Proc(IInternetProtocolRoot*, HRESULT)
   end
 
+  IInternetProtocolRoot_GUID = LibC::GUID.new("79eac9e3-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetProtocolRoot = "79eac9e3-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetProtocolRoot
     lpVtbl : IInternetProtocolRootVTbl*
   end
@@ -1149,6 +1191,8 @@ lib LibWin32
     unlock_request : Proc(IInternetProtocol*, HRESULT)
   end
 
+  IInternetProtocol_GUID = LibC::GUID.new("79eac9e4-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetProtocol = "79eac9e4-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetProtocol
     lpVtbl : IInternetProtocolVTbl*
   end
@@ -1170,6 +1214,8 @@ lib LibWin32
     start_ex : Proc(IInternetProtocolEx*, IUri, IInternetProtocolSink, IInternetBindInfo, UInt32, HANDLE_PTR, HRESULT)
   end
 
+  IInternetProtocolEx_GUID = LibC::GUID.new("c7a98e66-1010-492c-a1c8-c809e1f75905")
+  CLSID_IInternetProtocolEx = "c7a98e66-1010-492c-a1c8-c809e1f75905"
   struct IInternetProtocolEx
     lpVtbl : IInternetProtocolExVTbl*
   end
@@ -1184,6 +1230,8 @@ lib LibWin32
     report_result : Proc(IInternetProtocolSink*, HRESULT, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IInternetProtocolSink_GUID = LibC::GUID.new("79eac9e5-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetProtocolSink = "79eac9e5-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetProtocolSink
     lpVtbl : IInternetProtocolSinkVTbl*
   end
@@ -1197,6 +1245,8 @@ lib LibWin32
     rollback_switch : Proc(IInternetProtocolSinkStackable*, HRESULT)
   end
 
+  IInternetProtocolSinkStackable_GUID = LibC::GUID.new("79eac9f0-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetProtocolSinkStackable = "79eac9f0-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetProtocolSinkStackable
     lpVtbl : IInternetProtocolSinkStackableVTbl*
   end
@@ -1214,6 +1264,8 @@ lib LibWin32
     get_session_option : Proc(IInternetSession*, UInt32, Void*, UInt32*, UInt32, HRESULT)
   end
 
+  IInternetSession_GUID = LibC::GUID.new("79eac9e7-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetSession = "79eac9e7-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetSession
     lpVtbl : IInternetSessionVTbl*
   end
@@ -1226,6 +1278,8 @@ lib LibWin32
     continue : Proc(IInternetThreadSwitch*, HRESULT)
   end
 
+  IInternetThreadSwitch_GUID = LibC::GUID.new("79eac9e8-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetThreadSwitch = "79eac9e8-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetThreadSwitch
     lpVtbl : IInternetThreadSwitchVTbl*
   end
@@ -1238,6 +1292,8 @@ lib LibWin32
     get_priority : Proc(IInternetPriority*, Int32*, HRESULT)
   end
 
+  IInternetPriority_GUID = LibC::GUID.new("79eac9eb-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetPriority = "79eac9eb-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetPriority
     lpVtbl : IInternetPriorityVTbl*
   end
@@ -1252,6 +1308,8 @@ lib LibWin32
     query_info : Proc(IInternetProtocolInfo*, LibC::LPWSTR, QUERYOPTION, UInt32, Void*, UInt32, UInt32*, UInt32, HRESULT)
   end
 
+  IInternetProtocolInfo_GUID = LibC::GUID.new("79eac9ec-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetProtocolInfo = "79eac9ec-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetProtocolInfo
     lpVtbl : IInternetProtocolInfoVTbl*
   end
@@ -1264,6 +1322,8 @@ lib LibWin32
     enable_modeless : Proc(IInternetSecurityMgrSite*, LibC::BOOL, HRESULT)
   end
 
+  IInternetSecurityMgrSite_GUID = LibC::GUID.new("79eac9ed-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetSecurityMgrSite = "79eac9ed-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetSecurityMgrSite
     lpVtbl : IInternetSecurityMgrSiteVTbl*
   end
@@ -1282,6 +1342,8 @@ lib LibWin32
     get_zone_mappings : Proc(IInternetSecurityManager*, UInt32, IEnumString*, UInt32, HRESULT)
   end
 
+  IInternetSecurityManager_GUID = LibC::GUID.new("79eac9ee-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetSecurityManager = "79eac9ee-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetSecurityManager
     lpVtbl : IInternetSecurityManagerVTbl*
   end
@@ -1301,6 +1363,8 @@ lib LibWin32
     process_url_action_ex : Proc(IInternetSecurityManagerEx*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32*, HRESULT)
   end
 
+  IInternetSecurityManagerEx_GUID = LibC::GUID.new("f164edf1-cc7c-4f0d-9a94-34222625c393")
+  CLSID_IInternetSecurityManagerEx = "f164edf1-cc7c-4f0d-9a94-34222625c393"
   struct IInternetSecurityManagerEx
     lpVtbl : IInternetSecurityManagerExVTbl*
   end
@@ -1324,6 +1388,8 @@ lib LibWin32
     query_custom_policy_ex2 : Proc(IInternetSecurityManagerEx2*, IUri, Guid*, UInt8**, UInt32*, UInt8*, UInt32, LibC::UINT_PTR, HRESULT)
   end
 
+  IInternetSecurityManagerEx2_GUID = LibC::GUID.new("f1e50292-a795-4117-8e09-2b560a72ac60")
+  CLSID_IInternetSecurityManagerEx2 = "f1e50292-a795-4117-8e09-2b560a72ac60"
   struct IInternetSecurityManagerEx2
     lpVtbl : IInternetSecurityManagerEx2VTbl*
   end
@@ -1337,6 +1403,8 @@ lib LibWin32
     remove : Proc(IZoneIdentifier*, HRESULT)
   end
 
+  IZoneIdentifier_GUID = LibC::GUID.new("cd45f185-1b21-48e2-967b-ead743a8914e")
+  CLSID_IZoneIdentifier = "cd45f185-1b21-48e2-967b-ead743a8914e"
   struct IZoneIdentifier
     lpVtbl : IZoneIdentifierVTbl*
   end
@@ -1356,6 +1424,8 @@ lib LibWin32
     remove_app_zone_id : Proc(IZoneIdentifier2*, HRESULT)
   end
 
+  IZoneIdentifier2_GUID = LibC::GUID.new("eb5e760c-09ef-45c0-b510-70830ce31e6a")
+  CLSID_IZoneIdentifier2 = "eb5e760c-09ef-45c0-b510-70830ce31e6a"
   struct IZoneIdentifier2
     lpVtbl : IZoneIdentifier2VTbl*
   end
@@ -1369,6 +1439,8 @@ lib LibWin32
     query_custom_policy : Proc(IInternetHostSecurityManager*, Guid*, UInt8**, UInt32*, UInt8*, UInt32, UInt32, HRESULT)
   end
 
+  IInternetHostSecurityManager_GUID = LibC::GUID.new("3af280b6-cb3f-11d0-891e-00c04fb6bfc4")
+  CLSID_IInternetHostSecurityManager = "3af280b6-cb3f-11d0-891e-00c04fb6bfc4"
   struct IInternetHostSecurityManager
     lpVtbl : IInternetHostSecurityManagerVTbl*
   end
@@ -1391,6 +1463,8 @@ lib LibWin32
     copy_template_policies_to_zone : Proc(IInternetZoneManager*, UInt32, UInt32, UInt32, HRESULT)
   end
 
+  IInternetZoneManager_GUID = LibC::GUID.new("79eac9ef-baf9-11ce-8c82-00aa004ba90b")
+  CLSID_IInternetZoneManager = "79eac9ef-baf9-11ce-8c82-00aa004ba90b"
   struct IInternetZoneManager
     lpVtbl : IInternetZoneManagerVTbl*
   end
@@ -1415,6 +1489,8 @@ lib LibWin32
     set_zone_action_policy_ex : Proc(IInternetZoneManagerEx*, UInt32, UInt32, UInt8*, UInt32, URLZONEREG, UInt32, HRESULT)
   end
 
+  IInternetZoneManagerEx_GUID = LibC::GUID.new("a4c23339-8e06-431e-9bf4-7e711c085648")
+  CLSID_IInternetZoneManagerEx = "a4c23339-8e06-431e-9bf4-7e711c085648"
   struct IInternetZoneManagerEx
     lpVtbl : IInternetZoneManagerExVTbl*
   end
@@ -1443,6 +1519,8 @@ lib LibWin32
     fix_unsecure_settings : Proc(IInternetZoneManagerEx2*, HRESULT)
   end
 
+  IInternetZoneManagerEx2_GUID = LibC::GUID.new("edc17559-dd5d-4846-8eef-8becba5a4abf")
+  CLSID_IInternetZoneManagerEx2 = "edc17559-dd5d-4846-8eef-8becba5a4abf"
   struct IInternetZoneManagerEx2
     lpVtbl : IInternetZoneManagerEx2VTbl*
   end
@@ -1457,6 +1535,8 @@ lib LibWin32
     async_install_distribution_unit : Proc(ISoftDistExt*, IBindCtx, Void*, UInt32, CODEBASEHOLD*, HRESULT)
   end
 
+  ISoftDistExt_GUID = LibC::GUID.new("b15b8dc1-c7e1-11d0-8680-00aa00bdcb71")
+  CLSID_ISoftDistExt = "b15b8dc1-c7e1-11d0-8680-00aa00bdcb71"
   struct ISoftDistExt
     lpVtbl : ISoftDistExtVTbl*
   end
@@ -1469,6 +1549,8 @@ lib LibWin32
     get_java_trust : Proc(ICatalogFileInfo*, Void**, HRESULT)
   end
 
+  ICatalogFileInfo_GUID = LibC::GUID.new("711c7600-6b48-11d1-b403-00aa00b92af1")
+  CLSID_ICatalogFileInfo = "711c7600-6b48-11d1-b403-00aa00b92af1"
   struct ICatalogFileInfo
     lpVtbl : ICatalogFileInfoVTbl*
   end
@@ -1482,6 +1564,8 @@ lib LibWin32
     set_encoding_level : Proc(IDataFilter*, UInt32, HRESULT)
   end
 
+  IDataFilter_GUID = LibC::GUID.new("69d14c80-c18e-11d0-a9ce-006097942311")
+  CLSID_IDataFilter = "69d14c80-c18e-11d0-a9ce-006097942311"
   struct IDataFilter
     lpVtbl : IDataFilterVTbl*
   end
@@ -1494,6 +1578,8 @@ lib LibWin32
     get_default_filter : Proc(IEncodingFilterFactory*, LibC::LPWSTR, LibC::LPWSTR, IDataFilter*, HRESULT)
   end
 
+  IEncodingFilterFactory_GUID = LibC::GUID.new("70bdde00-c18e-11d0-a9ce-006097942311")
+  CLSID_IEncodingFilterFactory = "70bdde00-c18e-11d0-a9ce-006097942311"
   struct IEncodingFilterFactory
     lpVtbl : IEncodingFilterFactoryVTbl*
   end
@@ -1505,6 +1591,8 @@ lib LibWin32
     get_wrapper_code : Proc(IWrappedProtocol*, Int32*, LibC::UINT_PTR, HRESULT)
   end
 
+  IWrappedProtocol_GUID = LibC::GUID.new("53c84785-8425-4dc5-971b-e58d9c19f9b6")
+  CLSID_IWrappedProtocol = "53c84785-8425-4dc5-971b-e58d9c19f9b6"
   struct IWrappedProtocol
     lpVtbl : IWrappedProtocolVTbl*
   end
@@ -1516,6 +1604,8 @@ lib LibWin32
     get_bind_handle : Proc(IGetBindHandle*, BINDHANDLETYPES, LibC::HANDLE*, HRESULT)
   end
 
+  IGetBindHandle_GUID = LibC::GUID.new("af0ff408-129d-4b20-91f0-02bd23d88352")
+  CLSID_IGetBindHandle = "af0ff408-129d-4b20-91f0-02bd23d88352"
   struct IGetBindHandle
     lpVtbl : IGetBindHandleVTbl*
   end
@@ -1527,6 +1617,8 @@ lib LibWin32
     redirect : Proc(IBindCallbackRedirect*, LibC::LPWSTR, Int16*, HRESULT)
   end
 
+  IBindCallbackRedirect_GUID = LibC::GUID.new("11c81bc2-121e-4ed5-b9c4-b430bd54f2c0")
+  CLSID_IBindCallbackRedirect = "11c81bc2-121e-4ed5-b9c4-b430bd54f2c0"
   struct IBindCallbackRedirect
     lpVtbl : IBindCallbackRedirectVTbl*
   end
@@ -1538,6 +1630,8 @@ lib LibWin32
     get_ignore_cert_mask : Proc(IBindHttpSecurity*, UInt32*, HRESULT)
   end
 
+  IBindHttpSecurity_GUID = LibC::GUID.new("a9eda967-f50e-4a33-b358-206f6ef3086d")
+  CLSID_IBindHttpSecurity = "a9eda967-f50e-4a33-b358-206f6ef3086d"
   struct IBindHttpSecurity
     lpVtbl : IBindHttpSecurityVTbl*
   end

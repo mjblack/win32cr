@@ -23,6 +23,8 @@ lib LibWin32
     open_shared_handle : Proc(IDisplayDeviceInterop*, LibC::HANDLE, Guid, Void**, HRESULT)
   end
 
+  IDisplayDeviceInterop_GUID = LibC::GUID.new("64338358-366a-471b-bd56-dd8ef48e439b")
+  CLSID_IDisplayDeviceInterop = "64338358-366a-471b-bd56-dd8ef48e439b"
   struct IDisplayDeviceInterop
     lpVtbl : IDisplayDeviceInteropVTbl*
   end
@@ -35,6 +37,8 @@ lib LibWin32
     get_source_id : Proc(IDisplayPathInterop*, UInt32*, HRESULT)
   end
 
+  IDisplayPathInterop_GUID = LibC::GUID.new("a6ba4205-e59e-4e71-b25b-4e436d21ee3d")
+  CLSID_IDisplayPathInterop = "a6ba4205-e59e-4e71-b25b-4e436d21ee3d"
   struct IDisplayPathInterop
     lpVtbl : IDisplayPathInteropVTbl*
   end

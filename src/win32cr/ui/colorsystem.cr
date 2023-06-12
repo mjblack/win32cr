@@ -528,6 +528,8 @@ lib LibWin32
     get_neutral_axis : Proc(IDeviceModelPlugIn*, UInt32, XYZColorF*, HRESULT)
   end
 
+  IDeviceModelPlugIn_GUID = LibC::GUID.new("1cd63475-07c4-46fe-a903-d655316d11fd")
+  CLSID_IDeviceModelPlugIn = "1cd63475-07c4-46fe-a903-d655316d11fd"
   struct IDeviceModelPlugIn
     lpVtbl : IDeviceModelPlugInVTbl*
   end
@@ -540,6 +542,8 @@ lib LibWin32
     source_to_destination_appearance_colors : Proc(IGamutMapModelPlugIn*, UInt32, JChColorF*, JChColorF*, HRESULT)
   end
 
+  IGamutMapModelPlugIn_GUID = LibC::GUID.new("2dd80115-ad1e-41f6-a219-a4f4b583d1f9")
+  CLSID_IGamutMapModelPlugIn = "2dd80115-ad1e-41f6-a219-a4f4b583d1f9"
   struct IGamutMapModelPlugIn
     lpVtbl : IGamutMapModelPlugInVTbl*
   end

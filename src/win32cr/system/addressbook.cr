@@ -1238,6 +1238,8 @@ lib LibWin32
     initialize : Proc(IWABExtInit*, WABEXTDISPLAY*, HRESULT)
   end
 
+  IWABExtInit_GUID = LibC::GUID.new("ea22ebf0-87a4-11d1-9acf-00a0c91f9c8b")
+  CLSID_IWABExtInit = "ea22ebf0-87a4-11d1-9acf-00a0c91f9c8b"
   struct IWABExtInit
     lpVtbl : IWABExtInitVTbl*
   end

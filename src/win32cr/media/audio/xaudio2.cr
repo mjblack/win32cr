@@ -494,6 +494,8 @@ lib LibWin32
     calc_output_frames : Proc(IXAPO*, UInt32, UInt32)
   end
 
+  IXAPO_GUID = LibC::GUID.new("a410b984-9839-4819-a0be-2856ae6b3adb")
+  CLSID_IXAPO = "a410b984-9839-4819-a0be-2856ae6b3adb"
   struct IXAPO
     lpVtbl : IXAPOVTbl*
   end
@@ -506,6 +508,8 @@ lib LibWin32
     get_parameters : Proc(IXAPOParameters*, Void*, UInt32, Void)
   end
 
+  IXAPOParameters_GUID = LibC::GUID.new("26d95c66-80f2-499a-ad54-5ae7f01c6d98")
+  CLSID_IXAPOParameters = "26d95c66-80f2-499a-ad54-5ae7f01c6d98"
   struct IXAPOParameters
     lpVtbl : IXAPOParametersVTbl*
   end
@@ -526,6 +530,8 @@ lib LibWin32
     set_debug_configuration : Proc(IXAudio2*, XAUDIO2_DEBUG_CONFIGURATION*, Void*, Void)
   end
 
+  IXAudio2_GUID = LibC::GUID.new("2b02e3cf-2e0b-4ec3-be45-1b2a3fe7210d")
+  CLSID_IXAudio2 = "2b02e3cf-2e0b-4ec3-be45-1b2a3fe7210d"
   struct IXAudio2
     lpVtbl : IXAudio2VTbl*
   end
@@ -538,6 +544,8 @@ lib LibWin32
     get_processor : Proc(IXAudio2Extension*, UInt32*, Void)
   end
 
+  IXAudio2Extension_GUID = LibC::GUID.new("84ac29bb-d619-44d2-b197-e4acf7df3ed6")
+  CLSID_IXAudio2Extension = "84ac29bb-d619-44d2-b197-e4acf7df3ed6"
   struct IXAudio2Extension
     lpVtbl : IXAudio2ExtensionVTbl*
   end
@@ -691,6 +699,8 @@ lib LibWin32
     set_environment : Proc(IXAPOHrtfParameters*, HrtfEnvironment, HRESULT)
   end
 
+  IXAPOHrtfParameters_GUID = LibC::GUID.new("15b3cd66-e9de-4464-b6e6-2bc3cf63d455")
+  CLSID_IXAPOHrtfParameters = "15b3cd66-e9de-4464-b6e6-2bc3cf63d455"
   struct IXAPOHrtfParameters
     lpVtbl : IXAPOHrtfParametersVTbl*
   end
