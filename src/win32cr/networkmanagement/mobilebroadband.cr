@@ -397,6 +397,8 @@ lib LibWin32
     invoke : Proc(IDummyMBNUCMExt*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  IDummyMBNUCMExt_GUID = LibC::GUID.new("dcbbbab6-ffff-4bbb-aaee-338e368af6fa")
+  CLSID_IDummyMBNUCMExt = "dcbbbab6-ffff-4bbb-aaee-338e368af6fa"
   struct IDummyMBNUCMExt
     lpVtbl : IDummyMBNUCMExtVTbl*
   end
@@ -414,6 +416,8 @@ lib LibWin32
     get_activation_network_error : Proc(IMbnConnection*, UInt32*, HRESULT)
   end
 
+  IMbnConnection_GUID = LibC::GUID.new("dcbbbab6-200d-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnection = "dcbbbab6-200d-4bbb-aaee-338e368af6fa"
   struct IMbnConnection
     lpVtbl : IMbnConnectionVTbl*
   end
@@ -428,6 +432,8 @@ lib LibWin32
     on_voice_call_state_change : Proc(IMbnConnectionEvents*, IMbnConnection, HRESULT)
   end
 
+  IMbnConnectionEvents_GUID = LibC::GUID.new("dcbbbab6-200e-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionEvents = "dcbbbab6-200e-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionEvents
     lpVtbl : IMbnConnectionEventsVTbl*
   end
@@ -449,6 +455,8 @@ lib LibWin32
     get_connection : Proc(IMbnInterface*, IMbnConnection*, HRESULT)
   end
 
+  IMbnInterface_GUID = LibC::GUID.new("dcbbbab6-2001-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnInterface = "dcbbbab6-2001-4bbb-aaee-338e368af6fa"
   struct IMbnInterface
     lpVtbl : IMbnInterfaceVTbl*
   end
@@ -467,6 +475,8 @@ lib LibWin32
     on_scan_network_complete : Proc(IMbnInterfaceEvents*, IMbnInterface, UInt32, HRESULT, HRESULT)
   end
 
+  IMbnInterfaceEvents_GUID = LibC::GUID.new("dcbbbab6-2002-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnInterfaceEvents = "dcbbbab6-2002-4bbb-aaee-338e368af6fa"
   struct IMbnInterfaceEvents
     lpVtbl : IMbnInterfaceEventsVTbl*
   end
@@ -479,6 +489,8 @@ lib LibWin32
     get_interfaces : Proc(IMbnInterfaceManager*, SAFEARRAY**, HRESULT)
   end
 
+  IMbnInterfaceManager_GUID = LibC::GUID.new("dcbbbab6-201b-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnInterfaceManager = "dcbbbab6-201b-4bbb-aaee-338e368af6fa"
   struct IMbnInterfaceManager
     lpVtbl : IMbnInterfaceManagerVTbl*
   end
@@ -491,6 +503,8 @@ lib LibWin32
     on_interface_removal : Proc(IMbnInterfaceManagerEvents*, IMbnInterface, HRESULT)
   end
 
+  IMbnInterfaceManagerEvents_GUID = LibC::GUID.new("dcbbbab6-201c-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnInterfaceManagerEvents = "dcbbbab6-201c-4bbb-aaee-338e368af6fa"
   struct IMbnInterfaceManagerEvents
     lpVtbl : IMbnInterfaceManagerEventsVTbl*
   end
@@ -511,6 +525,8 @@ lib LibWin32
     set_register_mode : Proc(IMbnRegistration*, MBN_REGISTER_MODE, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
   end
 
+  IMbnRegistration_GUID = LibC::GUID.new("dcbbbab6-2009-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnRegistration = "dcbbbab6-2009-4bbb-aaee-338e368af6fa"
   struct IMbnRegistration
     lpVtbl : IMbnRegistrationVTbl*
   end
@@ -525,6 +541,8 @@ lib LibWin32
     on_set_register_mode_complete : Proc(IMbnRegistrationEvents*, IMbnRegistration, UInt32, HRESULT, HRESULT)
   end
 
+  IMbnRegistrationEvents_GUID = LibC::GUID.new("dcbbbab6-200a-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnRegistrationEvents = "dcbbbab6-200a-4bbb-aaee-338e368af6fa"
   struct IMbnRegistrationEvents
     lpVtbl : IMbnRegistrationEventsVTbl*
   end
@@ -537,6 +555,8 @@ lib LibWin32
     get_connections : Proc(IMbnConnectionManager*, SAFEARRAY**, HRESULT)
   end
 
+  IMbnConnectionManager_GUID = LibC::GUID.new("dcbbbab6-201d-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionManager = "dcbbbab6-201d-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionManager
     lpVtbl : IMbnConnectionManagerVTbl*
   end
@@ -549,6 +569,8 @@ lib LibWin32
     on_connection_removal : Proc(IMbnConnectionManagerEvents*, IMbnConnection, HRESULT)
   end
 
+  IMbnConnectionManagerEvents_GUID = LibC::GUID.new("dcbbbab6-201e-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionManagerEvents = "dcbbbab6-201e-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionManagerEvents
     lpVtbl : IMbnConnectionManagerEventsVTbl*
   end
@@ -562,6 +584,8 @@ lib LibWin32
     get_pin_state : Proc(IMbnPinManager*, UInt32*, HRESULT)
   end
 
+  IMbnPinManager_GUID = LibC::GUID.new("dcbbbab6-2005-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnPinManager = "dcbbbab6-2005-4bbb-aaee-338e368af6fa"
   struct IMbnPinManager
     lpVtbl : IMbnPinManagerVTbl*
   end
@@ -574,6 +598,8 @@ lib LibWin32
     on_get_pin_state_complete : Proc(IMbnPinManagerEvents*, IMbnPinManager, MBN_PIN_INFO, UInt32, HRESULT, HRESULT)
   end
 
+  IMbnPinManagerEvents_GUID = LibC::GUID.new("dcbbbab6-2006-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnPinManagerEvents = "dcbbbab6-2006-4bbb-aaee-338e368af6fa"
   struct IMbnPinManagerEvents
     lpVtbl : IMbnPinManagerEventsVTbl*
   end
@@ -589,6 +615,8 @@ lib LibWin32
     on_unblock_complete : Proc(IMbnPinEvents*, IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)
   end
 
+  IMbnPinEvents_GUID = LibC::GUID.new("dcbbbab6-2008-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnPinEvents = "dcbbbab6-2008-4bbb-aaee-338e368af6fa"
   struct IMbnPinEvents
     lpVtbl : IMbnPinEventsVTbl*
   end
@@ -602,6 +630,8 @@ lib LibWin32
     get_telephone_numbers : Proc(IMbnSubscriberInformation*, SAFEARRAY**, HRESULT)
   end
 
+  IMbnSubscriberInformation_GUID = LibC::GUID.new("459ecc43-bcf5-11dc-a8a8-001321f1405f")
+  CLSID_IMbnSubscriberInformation = "459ecc43-bcf5-11dc-a8a8-001321f1405f"
   struct IMbnSubscriberInformation
     lpVtbl : IMbnSubscriberInformationVTbl*
   end
@@ -614,6 +644,8 @@ lib LibWin32
     get_signal_error : Proc(IMbnSignal*, UInt32*, HRESULT)
   end
 
+  IMbnSignal_GUID = LibC::GUID.new("dcbbbab6-2003-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnSignal = "dcbbbab6-2003-4bbb-aaee-338e368af6fa"
   struct IMbnSignal
     lpVtbl : IMbnSignalVTbl*
   end
@@ -625,6 +657,8 @@ lib LibWin32
     on_signal_state_change : Proc(IMbnSignalEvents*, IMbnSignal, HRESULT)
   end
 
+  IMbnSignalEvents_GUID = LibC::GUID.new("dcbbbab6-2004-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnSignalEvents = "dcbbbab6-2004-4bbb-aaee-338e368af6fa"
   struct IMbnSignalEvents
     lpVtbl : IMbnSignalEventsVTbl*
   end
@@ -637,6 +671,8 @@ lib LibWin32
     set_provisioned_context : Proc(IMbnConnectionContext*, MBN_CONTEXT, LibC::LPWSTR, UInt32*, HRESULT)
   end
 
+  IMbnConnectionContext_GUID = LibC::GUID.new("dcbbbab6-200b-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionContext = "dcbbbab6-200b-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionContext
     lpVtbl : IMbnConnectionContextVTbl*
   end
@@ -649,6 +685,8 @@ lib LibWin32
     on_set_provisioned_context_complete : Proc(IMbnConnectionContextEvents*, IMbnConnectionContext, UInt32, HRESULT, HRESULT)
   end
 
+  IMbnConnectionContextEvents_GUID = LibC::GUID.new("dcbbbab6-200c-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionContextEvents = "dcbbbab6-200c-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionContextEvents
     lpVtbl : IMbnConnectionContextEventsVTbl*
   end
@@ -662,6 +700,8 @@ lib LibWin32
     create_connection_profile : Proc(IMbnConnectionProfileManager*, LibC::LPWSTR, HRESULT)
   end
 
+  IMbnConnectionProfileManager_GUID = LibC::GUID.new("dcbbbab6-200f-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionProfileManager = "dcbbbab6-200f-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionProfileManager
     lpVtbl : IMbnConnectionProfileManagerVTbl*
   end
@@ -675,6 +715,8 @@ lib LibWin32
     delete : Proc(IMbnConnectionProfile*, HRESULT)
   end
 
+  IMbnConnectionProfile_GUID = LibC::GUID.new("dcbbbab6-2010-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionProfile = "dcbbbab6-2010-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionProfile
     lpVtbl : IMbnConnectionProfileVTbl*
   end
@@ -686,6 +728,8 @@ lib LibWin32
     on_profile_update : Proc(IMbnConnectionProfileEvents*, IMbnConnectionProfile, HRESULT)
   end
 
+  IMbnConnectionProfileEvents_GUID = LibC::GUID.new("dcbbbab6-2011-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionProfileEvents = "dcbbbab6-2011-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionProfileEvents
     lpVtbl : IMbnConnectionProfileEventsVTbl*
   end
@@ -702,6 +746,8 @@ lib LibWin32
     put_sms_format : Proc(IMbnSmsConfiguration*, MBN_SMS_FORMAT, HRESULT)
   end
 
+  IMbnSmsConfiguration_GUID = LibC::GUID.new("dcbbbab6-2012-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnSmsConfiguration = "dcbbbab6-2012-4bbb-aaee-338e368af6fa"
   struct IMbnSmsConfiguration
     lpVtbl : IMbnSmsConfigurationVTbl*
   end
@@ -716,6 +762,8 @@ lib LibWin32
     get_message : Proc(IMbnSmsReadMsgPdu*, SAFEARRAY**, HRESULT)
   end
 
+  IMbnSmsReadMsgPdu_GUID = LibC::GUID.new("dcbbbab6-2013-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnSmsReadMsgPdu = "dcbbbab6-2013-4bbb-aaee-338e368af6fa"
   struct IMbnSmsReadMsgPdu
     lpVtbl : IMbnSmsReadMsgPduVTbl*
   end
@@ -734,6 +782,8 @@ lib LibWin32
     get_message : Proc(IMbnSmsReadMsgTextCdma*, SAFEARRAY**, HRESULT)
   end
 
+  IMbnSmsReadMsgTextCdma_GUID = LibC::GUID.new("dcbbbab6-2014-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnSmsReadMsgTextCdma = "dcbbbab6-2014-4bbb-aaee-338e368af6fa"
   struct IMbnSmsReadMsgTextCdma
     lpVtbl : IMbnSmsReadMsgTextCdmaVTbl*
   end
@@ -752,6 +802,8 @@ lib LibWin32
     get_sms_status : Proc(IMbnSms*, MBN_SMS_STATUS_INFO*, HRESULT)
   end
 
+  IMbnSms_GUID = LibC::GUID.new("dcbbbab6-2015-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnSms = "dcbbbab6-2015-4bbb-aaee-338e368af6fa"
   struct IMbnSms
     lpVtbl : IMbnSmsVTbl*
   end
@@ -769,6 +821,8 @@ lib LibWin32
     on_sms_status_change : Proc(IMbnSmsEvents*, IMbnSms, HRESULT)
   end
 
+  IMbnSmsEvents_GUID = LibC::GUID.new("dcbbbab6-2016-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnSmsEvents = "dcbbbab6-2016-4bbb-aaee-338e368af6fa"
   struct IMbnSmsEvents
     lpVtbl : IMbnSmsEventsVTbl*
   end
@@ -780,6 +834,8 @@ lib LibWin32
     activate : Proc(IMbnServiceActivation*, SAFEARRAY*, UInt32*, HRESULT)
   end
 
+  IMbnServiceActivation_GUID = LibC::GUID.new("dcbbbab6-2017-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnServiceActivation = "dcbbbab6-2017-4bbb-aaee-338e368af6fa"
   struct IMbnServiceActivation
     lpVtbl : IMbnServiceActivationVTbl*
   end
@@ -791,6 +847,8 @@ lib LibWin32
     on_activation_complete : Proc(IMbnServiceActivationEvents*, IMbnServiceActivation, SAFEARRAY*, UInt32, HRESULT, UInt32, HRESULT)
   end
 
+  IMbnServiceActivationEvents_GUID = LibC::GUID.new("dcbbbab6-2018-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnServiceActivationEvents = "dcbbbab6-2018-4bbb-aaee-338e368af6fa"
   struct IMbnServiceActivationEvents
     lpVtbl : IMbnServiceActivationEventsVTbl*
   end
@@ -802,6 +860,8 @@ lib LibWin32
     set_vendor_specific : Proc(IMbnVendorSpecificOperation*, SAFEARRAY*, UInt32*, HRESULT)
   end
 
+  IMbnVendorSpecificOperation_GUID = LibC::GUID.new("dcbbbab6-2019-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnVendorSpecificOperation = "dcbbbab6-2019-4bbb-aaee-338e368af6fa"
   struct IMbnVendorSpecificOperation
     lpVtbl : IMbnVendorSpecificOperationVTbl*
   end
@@ -814,6 +874,8 @@ lib LibWin32
     on_set_vendor_specific_complete : Proc(IMbnVendorSpecificEvents*, IMbnVendorSpecificOperation, SAFEARRAY*, UInt32, HRESULT)
   end
 
+  IMbnVendorSpecificEvents_GUID = LibC::GUID.new("dcbbbab6-201a-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnVendorSpecificEvents = "dcbbbab6-201a-4bbb-aaee-338e368af6fa"
   struct IMbnVendorSpecificEvents
     lpVtbl : IMbnVendorSpecificEventsVTbl*
   end
@@ -826,6 +888,8 @@ lib LibWin32
     on_connection_profile_removal : Proc(IMbnConnectionProfileManagerEvents*, IMbnConnectionProfile, HRESULT)
   end
 
+  IMbnConnectionProfileManagerEvents_GUID = LibC::GUID.new("dcbbbab6-201f-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnConnectionProfileManagerEvents = "dcbbbab6-201f-4bbb-aaee-338e368af6fa"
   struct IMbnConnectionProfileManagerEvents
     lpVtbl : IMbnConnectionProfileManagerEventsVTbl*
   end
@@ -839,6 +903,8 @@ lib LibWin32
     set_software_radio_state : Proc(IMbnRadio*, MBN_RADIO, UInt32*, HRESULT)
   end
 
+  IMbnRadio_GUID = LibC::GUID.new("dccccab6-201f-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnRadio = "dccccab6-201f-4bbb-aaee-338e368af6fa"
   struct IMbnRadio
     lpVtbl : IMbnRadioVTbl*
   end
@@ -851,6 +917,8 @@ lib LibWin32
     on_set_software_radio_state_complete : Proc(IMbnRadioEvents*, IMbnRadio, UInt32, HRESULT, HRESULT)
   end
 
+  IMbnRadioEvents_GUID = LibC::GUID.new("dcdddab6-201f-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnRadioEvents = "dcdddab6-201f-4bbb-aaee-338e368af6fa"
   struct IMbnRadioEvents
     lpVtbl : IMbnRadioEventsVTbl*
   end
@@ -867,6 +935,8 @@ lib LibWin32
     scan_network : Proc(IMbnMultiCarrier*, UInt32*, HRESULT)
   end
 
+  IMbnMultiCarrier_GUID = LibC::GUID.new("dcbbbab6-2020-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnMultiCarrier = "dcbbbab6-2020-4bbb-aaee-338e368af6fa"
   struct IMbnMultiCarrier
     lpVtbl : IMbnMultiCarrierVTbl*
   end
@@ -882,6 +952,8 @@ lib LibWin32
     on_interface_capability_change : Proc(IMbnMultiCarrierEvents*, IMbnMultiCarrier, HRESULT)
   end
 
+  IMbnMultiCarrierEvents_GUID = LibC::GUID.new("dcdddab6-2021-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnMultiCarrierEvents = "dcdddab6-2021-4bbb-aaee-338e368af6fa"
   struct IMbnMultiCarrierEvents
     lpVtbl : IMbnMultiCarrierEventsVTbl*
   end
@@ -893,6 +965,8 @@ lib LibWin32
     on_sessions_state_change : Proc(IMbnDeviceServiceStateEvents*, UInt8*, MBN_DEVICE_SERVICE_SESSIONS_STATE, HRESULT)
   end
 
+  IMbnDeviceServiceStateEvents_GUID = LibC::GUID.new("5d3ff196-89ee-49d8-8b60-33ffddffc58d")
+  CLSID_IMbnDeviceServiceStateEvents = "5d3ff196-89ee-49d8-8b60-33ffddffc58d"
   struct IMbnDeviceServiceStateEvents
     lpVtbl : IMbnDeviceServiceStateEventsVTbl*
   end
@@ -904,6 +978,8 @@ lib LibWin32
     get_device_services_context : Proc(IMbnDeviceServicesManager*, UInt8*, IMbnDeviceServicesContext*, HRESULT)
   end
 
+  IMbnDeviceServicesManager_GUID = LibC::GUID.new("20a26258-6811-4478-ac1d-13324e45e41c")
+  CLSID_IMbnDeviceServicesManager = "20a26258-6811-4478-ac1d-13324e45e41c"
   struct IMbnDeviceServicesManager
     lpVtbl : IMbnDeviceServicesManagerVTbl*
   end
@@ -918,6 +994,8 @@ lib LibWin32
     get_max_data_size : Proc(IMbnDeviceServicesContext*, UInt32*, HRESULT)
   end
 
+  IMbnDeviceServicesContext_GUID = LibC::GUID.new("fc5ac347-1592-4068-80bb-6a57580150d8")
+  CLSID_IMbnDeviceServicesContext = "fc5ac347-1592-4068-80bb-6a57580150d8"
   struct IMbnDeviceServicesContext
     lpVtbl : IMbnDeviceServicesContextVTbl*
   end
@@ -939,6 +1017,8 @@ lib LibWin32
     on_interface_state_change : Proc(IMbnDeviceServicesEvents*, UInt8*, MBN_DEVICE_SERVICES_INTERFACE_STATE, HRESULT)
   end
 
+  IMbnDeviceServicesEvents_GUID = LibC::GUID.new("0a900c19-6824-4e97-b76e-cf239d0ca642")
+  CLSID_IMbnDeviceServicesEvents = "0a900c19-6824-4e97-b76e-cf239d0ca642"
   struct IMbnDeviceServicesEvents
     lpVtbl : IMbnDeviceServicesEventsVTbl*
   end
@@ -961,6 +1041,8 @@ lib LibWin32
     get_is_data_session_open : Proc(IMbnDeviceService*, LibC::BOOL*, HRESULT)
   end
 
+  IMbnDeviceService_GUID = LibC::GUID.new("b3bb9a71-dc70-4be9-a4da-7886ae8b191b")
+  CLSID_IMbnDeviceService = "b3bb9a71-dc70-4be9-a4da-7886ae8b191b"
   struct IMbnDeviceService
     lpVtbl : IMbnDeviceServiceVTbl*
   end
@@ -982,6 +1064,8 @@ lib LibWin32
     get_pin_manager : Proc(IMbnPin*, IMbnPinManager*, HRESULT)
   end
 
+  IMbnPin_GUID = LibC::GUID.new("dcbbbab6-2007-4bbb-aaee-338e368af6fa")
+  CLSID_IMbnPin = "dcbbbab6-2007-4bbb-aaee-338e368af6fa"
   struct IMbnPin
     lpVtbl : IMbnPinVTbl*
   end

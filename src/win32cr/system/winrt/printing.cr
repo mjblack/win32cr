@@ -27,6 +27,8 @@ lib LibWin32
     show_print_ui_for_window_async : Proc(IPrinting3DManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IPrinting3DManagerInterop_GUID = LibC::GUID.new("9ca31010-1484-4587-b26b-dddf9f9caecd")
+  CLSID_IPrinting3DManagerInterop = "9ca31010-1484-4587-b26b-dddf9f9caecd"
   struct IPrinting3DManagerInterop
     lpVtbl : IPrinting3DManagerInteropVTbl*
   end
@@ -42,6 +44,8 @@ lib LibWin32
     show_print_ui_for_window_async : Proc(IPrintManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IPrintManagerInterop_GUID = LibC::GUID.new("c5435a42-8d43-4e7b-a68a-ef311e392087")
+  CLSID_IPrintManagerInterop = "c5435a42-8d43-4e7b-a68a-ef311e392087"
   struct IPrintManagerInterop
     lpVtbl : IPrintManagerInteropVTbl*
   end
@@ -57,6 +61,8 @@ lib LibWin32
     close : Proc(IPrintWorkflowXpsReceiver*, HRESULT)
   end
 
+  IPrintWorkflowXpsReceiver_GUID = LibC::GUID.new("04097374-77b8-47f6-8167-aae29d4cf84b")
+  CLSID_IPrintWorkflowXpsReceiver = "04097374-77b8-47f6-8167-aae29d4cf84b"
   struct IPrintWorkflowXpsReceiver
     lpVtbl : IPrintWorkflowXpsReceiverVTbl*
   end
@@ -73,6 +79,8 @@ lib LibWin32
     failed : Proc(IPrintWorkflowXpsReceiver2*, HRESULT, HRESULT)
   end
 
+  IPrintWorkflowXpsReceiver2_GUID = LibC::GUID.new("023bcc0c-dfab-4a61-b074-490c6995580d")
+  CLSID_IPrintWorkflowXpsReceiver2 = "023bcc0c-dfab-4a61-b074-490c6995580d"
   struct IPrintWorkflowXpsReceiver2
     lpVtbl : IPrintWorkflowXpsReceiver2VTbl*
   end
@@ -85,6 +93,8 @@ lib LibWin32
     get_object_factory : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, IXpsOMObjectFactory1*, HRESULT)
   end
 
+  IPrintWorkflowObjectModelSourceFileContentNative_GUID = LibC::GUID.new("68c9e477-993e-4052-8ac6-454eff58db9d")
+  CLSID_IPrintWorkflowObjectModelSourceFileContentNative = "68c9e477-993e-4052-8ac6-454eff58db9d"
   struct IPrintWorkflowObjectModelSourceFileContentNative
     lpVtbl : IPrintWorkflowObjectModelSourceFileContentNativeVTbl*
   end
@@ -96,6 +106,8 @@ lib LibWin32
     get_document_package_target : Proc(IPrintWorkflowXpsObjectModelTargetPackageNative*, IXpsDocumentPackageTarget*, HRESULT)
   end
 
+  IPrintWorkflowXpsObjectModelTargetPackageNative_GUID = LibC::GUID.new("7d96bc74-9b54-4ca1-ad3a-979c3d44ddac")
+  CLSID_IPrintWorkflowXpsObjectModelTargetPackageNative = "7d96bc74-9b54-4ca1-ad3a-979c3d44ddac"
   struct IPrintWorkflowXpsObjectModelTargetPackageNative
     lpVtbl : IPrintWorkflowXpsObjectModelTargetPackageNativeVTbl*
   end
@@ -109,6 +121,8 @@ lib LibWin32
     get_user_properties : Proc(IPrintWorkflowConfigurationNative*, IPrinterPropertyBag*, HRESULT)
   end
 
+  IPrintWorkflowConfigurationNative_GUID = LibC::GUID.new("c056be0a-9ee2-450a-9823-964f0006f2bb")
+  CLSID_IPrintWorkflowConfigurationNative = "c056be0a-9ee2-450a-9823-964f0006f2bb"
   struct IPrintWorkflowConfigurationNative
     lpVtbl : IPrintWorkflowConfigurationNativeVTbl*
   end

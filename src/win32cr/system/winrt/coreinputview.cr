@@ -23,6 +23,8 @@ lib LibWin32
     get_for_window : Proc(ICoreFrameworkInputViewInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  ICoreFrameworkInputViewInterop_GUID = LibC::GUID.new("0e3da342-b11c-484b-9c1c-be0d61c2f6c5")
+  CLSID_ICoreFrameworkInputViewInterop = "0e3da342-b11c-484b-9c1c-be0d61c2f6c5"
   struct ICoreFrameworkInputViewInterop
     lpVtbl : ICoreFrameworkInputViewInteropVTbl*
   end

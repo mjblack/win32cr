@@ -22,6 +22,8 @@ lib LibWin32
     create_for_monitor : Proc(IGraphicsCaptureItemInterop*, HMONITOR, Guid*, Void**, HRESULT)
   end
 
+  IGraphicsCaptureItemInterop_GUID = LibC::GUID.new("3628e81b-3cac-4c60-b7f4-23ce0e0c3356")
+  CLSID_IGraphicsCaptureItemInterop = "3628e81b-3cac-4c60-b7f4-23ce0e0c3356"
   struct IGraphicsCaptureItemInterop
     lpVtbl : IGraphicsCaptureItemInteropVTbl*
   end

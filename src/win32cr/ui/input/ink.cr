@@ -30,6 +30,8 @@ lib LibWin32
     on_commit_requested : Proc(IInkCommitRequestHandler*, HRESULT)
   end
 
+  IInkCommitRequestHandler_GUID = LibC::GUID.new("fabea3fc-b108-45b6-a9fc-8d08fa9f85cf")
+  CLSID_IInkCommitRequestHandler = "fabea3fc-b108-45b6-a9fc-8d08fa9f85cf"
   struct IInkCommitRequestHandler
     lpVtbl : IInkCommitRequestHandlerVTbl*
   end
@@ -45,6 +47,8 @@ lib LibWin32
     on_high_contrast_changed : Proc(IInkPresenterDesktop*, HRESULT)
   end
 
+  IInkPresenterDesktop_GUID = LibC::GUID.new("73f3c0d9-2e8b-48f3-895e-20cbd27b723b")
+  CLSID_IInkPresenterDesktop = "73f3c0d9-2e8b-48f3-895e-20cbd27b723b"
   struct IInkPresenterDesktop
     lpVtbl : IInkPresenterDesktopVTbl*
   end
@@ -56,6 +60,8 @@ lib LibWin32
     invoke : Proc(IInkHostWorkItem*, HRESULT)
   end
 
+  IInkHostWorkItem_GUID = LibC::GUID.new("ccda0a9a-1b78-4632-bb96-97800662e26c")
+  CLSID_IInkHostWorkItem = "ccda0a9a-1b78-4632-bb96-97800662e26c"
   struct IInkHostWorkItem
     lpVtbl : IInkHostWorkItemVTbl*
   end
@@ -69,6 +75,8 @@ lib LibWin32
     create_and_initialize_ink_presenter : Proc(IInkDesktopHost*, IUnknown, Float32, Float32, Guid*, Void**, HRESULT)
   end
 
+  IInkDesktopHost_GUID = LibC::GUID.new("4ce7d875-a981-4140-a1ff-ad93258e8d59")
+  CLSID_IInkDesktopHost = "4ce7d875-a981-4140-a1ff-ad93258e8d59"
   struct IInkDesktopHost
     lpVtbl : IInkDesktopHostVTbl*
   end
@@ -80,6 +88,8 @@ lib LibWin32
     draw : Proc(IInkD2DRenderer*, IUnknown, IUnknown, LibC::BOOL, HRESULT)
   end
 
+  IInkD2DRenderer_GUID = LibC::GUID.new("407fb1de-f85a-4150-97cf-b7fb274fb4f8")
+  CLSID_IInkD2DRenderer = "407fb1de-f85a-4150-97cf-b7fb274fb4f8"
   struct IInkD2DRenderer
     lpVtbl : IInkD2DRendererVTbl*
   end
@@ -91,6 +101,8 @@ lib LibWin32
     draw : Proc(IInkD2DRenderer2*, IUnknown, IUnknown, INK_HIGH_CONTRAST_ADJUSTMENT, HRESULT)
   end
 
+  IInkD2DRenderer2_GUID = LibC::GUID.new("0a95dcd9-4578-4b71-b20b-bf664d4bfeee")
+  CLSID_IInkD2DRenderer2 = "0a95dcd9-4578-4b71-b20b-bf664d4bfeee"
   struct IInkD2DRenderer2
     lpVtbl : IInkD2DRenderer2VTbl*
   end

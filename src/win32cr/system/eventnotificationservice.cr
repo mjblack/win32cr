@@ -63,6 +63,8 @@ lib LibWin32
     destination_reachable_no_qoc_info : Proc(ISensNetwork*, UInt8*, UInt8*, UInt32, HRESULT)
   end
 
+  ISensNetwork_GUID = LibC::GUID.new("d597bab1-5b9f-11d1-8dd2-00aa004abd5e")
+  CLSID_ISensNetwork = "d597bab1-5b9f-11d1-8dd2-00aa004abd5e"
   struct ISensNetwork
     lpVtbl : ISensNetworkVTbl*
   end
@@ -80,6 +82,8 @@ lib LibWin32
     battery_low : Proc(ISensOnNow*, UInt32, HRESULT)
   end
 
+  ISensOnNow_GUID = LibC::GUID.new("d597bab2-5b9f-11d1-8dd2-00aa004abd5e")
+  CLSID_ISensOnNow = "d597bab2-5b9f-11d1-8dd2-00aa004abd5e"
   struct ISensOnNow
     lpVtbl : ISensOnNowVTbl*
   end
@@ -101,6 +105,8 @@ lib LibWin32
     stop_screen_saver : Proc(ISensLogon*, UInt8*, HRESULT)
   end
 
+  ISensLogon_GUID = LibC::GUID.new("d597bab3-5b9f-11d1-8dd2-00aa004abd5e")
+  CLSID_ISensLogon = "d597bab3-5b9f-11d1-8dd2-00aa004abd5e"
   struct ISensLogon
     lpVtbl : ISensLogonVTbl*
   end
@@ -120,6 +126,8 @@ lib LibWin32
     post_shell : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
   end
 
+  ISensLogon2_GUID = LibC::GUID.new("d597bab4-5b9f-11d1-8dd2-00aa004abd5e")
+  CLSID_ISensLogon2 = "d597bab4-5b9f-11d1-8dd2-00aa004abd5e"
   struct ISensLogon2
     lpVtbl : ISensLogon2VTbl*
   end

@@ -672,6 +672,8 @@ lib LibWin32
     get_event_classes_for_iid : Proc(ICOMAdminCatalog*, UInt8*, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
   end
 
+  ICOMAdminCatalog_GUID = LibC::GUID.new("dd662187-dfc2-11d1-a2cf-00805fc79235")
+  CLSID_ICOMAdminCatalog = "dd662187-dfc2-11d1-a2cf-00805fc79235"
   struct ICOMAdminCatalog
     lpVtbl : ICOMAdminCatalogVTbl*
   end
@@ -743,6 +745,8 @@ lib LibWin32
     get_component_version_count : Proc(ICOMAdminCatalog2*, UInt8*, Int32*, HRESULT)
   end
 
+  ICOMAdminCatalog2_GUID = LibC::GUID.new("790c6e0b-9194-4cc9-9426-a48a63185696")
+  CLSID_ICOMAdminCatalog2 = "790c6e0b-9194-4cc9-9426-a48a63185696"
   struct ICOMAdminCatalog2
     lpVtbl : ICOMAdminCatalog2VTbl*
   end
@@ -764,6 +768,8 @@ lib LibWin32
     is_property_write_only : Proc(ICatalogObject*, UInt8*, Int16*, HRESULT)
   end
 
+  ICatalogObject_GUID = LibC::GUID.new("6eb22871-8a19-11d0-81b6-00a0c9231c29")
+  CLSID_ICatalogObject = "6eb22871-8a19-11d0-81b6-00a0c9231c29"
   struct ICatalogObject
     lpVtbl : ICatalogObjectVTbl*
   end
@@ -794,6 +800,8 @@ lib LibWin32
     populate_by_query : Proc(ICatalogCollection*, UInt8*, Int32, HRESULT)
   end
 
+  ICatalogCollection_GUID = LibC::GUID.new("6eb22872-8a19-11d0-81b6-00a0c9231c29")
+  CLSID_ICatalogCollection = "6eb22872-8a19-11d0-81b6-00a0c9231c29"
   struct ICatalogCollection
     lpVtbl : ICatalogCollectionVTbl*
   end
@@ -811,6 +819,8 @@ lib LibWin32
     get__new_enum : Proc(ISecurityIdentityColl*, IUnknown*, HRESULT)
   end
 
+  ISecurityIdentityColl_GUID = LibC::GUID.new("cafc823c-b441-11d1-b82b-0000f8757e2a")
+  CLSID_ISecurityIdentityColl = "cafc823c-b441-11d1-b82b-0000f8757e2a"
   struct ISecurityIdentityColl
     lpVtbl : ISecurityIdentityCollVTbl*
   end
@@ -828,6 +838,8 @@ lib LibWin32
     get__new_enum : Proc(ISecurityCallersColl*, IUnknown*, HRESULT)
   end
 
+  ISecurityCallersColl_GUID = LibC::GUID.new("cafc823d-b441-11d1-b82b-0000f8757e2a")
+  CLSID_ISecurityCallersColl = "cafc823d-b441-11d1-b82b-0000f8757e2a"
   struct ISecurityCallersColl
     lpVtbl : ISecurityCallersCollVTbl*
   end
@@ -848,6 +860,8 @@ lib LibWin32
     is_user_in_role : Proc(ISecurityCallContext*, VARIANT*, UInt8*, Int16*, HRESULT)
   end
 
+  ISecurityCallContext_GUID = LibC::GUID.new("cafc823e-b441-11d1-b82b-0000f8757e2a")
+  CLSID_ISecurityCallContext = "cafc823e-b441-11d1-b82b-0000f8757e2a"
   struct ISecurityCallContext
     lpVtbl : ISecurityCallContextVTbl*
   end
@@ -863,6 +877,8 @@ lib LibWin32
     get_security_call_context : Proc(IGetSecurityCallContext*, ISecurityCallContext*, HRESULT)
   end
 
+  IGetSecurityCallContext_GUID = LibC::GUID.new("cafc823f-b441-11d1-b82b-0000f8757e2a")
+  CLSID_IGetSecurityCallContext = "cafc823f-b441-11d1-b82b-0000f8757e2a"
   struct IGetSecurityCallContext
     lpVtbl : IGetSecurityCallContextVTbl*
   end
@@ -881,6 +897,8 @@ lib LibWin32
     get_original_creator_name : Proc(SecurityProperty*, UInt8**, HRESULT)
   end
 
+  SecurityProperty_GUID = LibC::GUID.new("e74a7215-014d-11d1-a63c-00a0c911b4e0")
+  CLSID_SecurityProperty = "e74a7215-014d-11d1-a63c-00a0c911b4e0"
   struct SecurityProperty
     lpVtbl : SecurityPropertyVTbl*
   end
@@ -900,6 +918,8 @@ lib LibWin32
     get_context_id : Proc(ContextInfo*, UInt8**, HRESULT)
   end
 
+  ContextInfo_GUID = LibC::GUID.new("19a5a02c-0ac8-11d2-b286-00c04f8ef934")
+  CLSID_ContextInfo = "19a5a02c-0ac8-11d2-b286-00c04f8ef934"
   struct ContextInfo
     lpVtbl : ContextInfoVTbl*
   end
@@ -922,6 +942,8 @@ lib LibWin32
     get_application_instance_id : Proc(ContextInfo2*, UInt8**, HRESULT)
   end
 
+  ContextInfo2_GUID = LibC::GUID.new("c99d6e75-2375-11d4-8331-00c04f605588")
+  CLSID_ContextInfo2 = "c99d6e75-2375-11d4-8331-00c04f605588"
   struct ContextInfo2
     lpVtbl : ContextInfo2VTbl*
   end
@@ -949,6 +971,8 @@ lib LibWin32
     get_context_info : Proc(ObjectContext*, ContextInfo*, HRESULT)
   end
 
+  ObjectContext_GUID = LibC::GUID.new("74c08646-cedb-11cf-8b49-00aa00b8a790")
+  CLSID_ObjectContext = "74c08646-cedb-11cf-8b49-00aa00b8a790"
   struct ObjectContext
     lpVtbl : ObjectContextVTbl*
   end
@@ -962,6 +986,8 @@ lib LibWin32
     abort : Proc(ITransactionContextEx*, HRESULT)
   end
 
+  ITransactionContextEx_GUID = LibC::GUID.new("7999fc22-d3c6-11cf-acab-00a024a55aef")
+  CLSID_ITransactionContextEx = "7999fc22-d3c6-11cf-acab-00a024a55aef"
   struct ITransactionContextEx
     lpVtbl : ITransactionContextExVTbl*
   end
@@ -979,6 +1005,8 @@ lib LibWin32
     abort : Proc(ITransactionContext*, HRESULT)
   end
 
+  ITransactionContext_GUID = LibC::GUID.new("7999fc21-d3c6-11cf-acab-00a024a55aef")
+  CLSID_ITransactionContext = "7999fc21-d3c6-11cf-acab-00a024a55aef"
   struct ITransactionContext
     lpVtbl : ITransactionContextVTbl*
   end
@@ -990,6 +1018,8 @@ lib LibWin32
     create_instance : Proc(ICreateWithTransactionEx*, ITransaction, Guid*, Guid*, Void**, HRESULT)
   end
 
+  ICreateWithTransactionEx_GUID = LibC::GUID.new("455acf57-5345-11d2-99cf-00c04f797bc9")
+  CLSID_ICreateWithTransactionEx = "455acf57-5345-11d2-99cf-00c04f797bc9"
   struct ICreateWithTransactionEx
     lpVtbl : ICreateWithTransactionExVTbl*
   end
@@ -1001,6 +1031,8 @@ lib LibWin32
     create_instance_with_sys_tx : Proc(ICreateWithLocalTransaction*, IUnknown, Guid*, Guid*, Void**, HRESULT)
   end
 
+  ICreateWithLocalTransaction_GUID = LibC::GUID.new("227ac7a8-8423-42ce-b7cf-03061ec9aaa3")
+  CLSID_ICreateWithLocalTransaction = "227ac7a8-8423-42ce-b7cf-03061ec9aaa3"
   struct ICreateWithLocalTransaction
     lpVtbl : ICreateWithLocalTransactionVTbl*
   end
@@ -1012,6 +1044,8 @@ lib LibWin32
     create_instance : Proc(ICreateWithTipTransactionEx*, UInt8*, Guid*, Guid*, Void**, HRESULT)
   end
 
+  ICreateWithTipTransactionEx_GUID = LibC::GUID.new("455acf59-5345-11d2-99cf-00c04f797bc9")
+  CLSID_ICreateWithTipTransactionEx = "455acf59-5345-11d2-99cf-00c04f797bc9"
   struct ICreateWithTipTransactionEx
     lpVtbl : ICreateWithTipTransactionExVTbl*
   end
@@ -1027,6 +1061,8 @@ lib LibWin32
     on_ltx_transaction_promote : Proc(IComLTxEvents*, COMSVCSEVENTINFO*, Guid, Guid, HRESULT)
   end
 
+  IComLTxEvents_GUID = LibC::GUID.new("605cf82c-578e-4298-975d-82babcd9e053")
+  CLSID_IComLTxEvents = "605cf82c-578e-4298-975d-82babcd9e053"
   struct IComLTxEvents
     lpVtbl : IComLTxEventsVTbl*
   end
@@ -1038,6 +1074,8 @@ lib LibWin32
     on_user_event : Proc(IComUserEvent*, COMSVCSEVENTINFO*, VARIANT*, HRESULT)
   end
 
+  IComUserEvent_GUID = LibC::GUID.new("683130a4-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComUserEvent = "683130a4-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComUserEvent
     lpVtbl : IComUserEventVTbl*
   end
@@ -1059,6 +1097,8 @@ lib LibWin32
     on_thread_unassign_apartment : Proc(IComThreadEvents*, COMSVCSEVENTINFO*, UInt64, HRESULT)
   end
 
+  IComThreadEvents_GUID = LibC::GUID.new("683130a5-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComThreadEvents = "683130a5-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComThreadEvents
     lpVtbl : IComThreadEventsVTbl*
   end
@@ -1072,6 +1112,8 @@ lib LibWin32
     on_app_force_shutdown : Proc(IComAppEvents*, COMSVCSEVENTINFO*, Guid, HRESULT)
   end
 
+  IComAppEvents_GUID = LibC::GUID.new("683130a6-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComAppEvents = "683130a6-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComAppEvents
     lpVtbl : IComAppEventsVTbl*
   end
@@ -1084,6 +1126,8 @@ lib LibWin32
     on_object_destroy : Proc(IComInstanceEvents*, COMSVCSEVENTINFO*, UInt64, HRESULT)
   end
 
+  IComInstanceEvents_GUID = LibC::GUID.new("683130a7-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComInstanceEvents = "683130a7-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComInstanceEvents
     lpVtbl : IComInstanceEventsVTbl*
   end
@@ -1098,6 +1142,8 @@ lib LibWin32
     on_transaction_commit : Proc(IComTransactionEvents*, COMSVCSEVENTINFO*, Guid*, HRESULT)
   end
 
+  IComTransactionEvents_GUID = LibC::GUID.new("683130a8-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComTransactionEvents = "683130a8-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComTransactionEvents
     lpVtbl : IComTransactionEventsVTbl*
   end
@@ -1111,6 +1157,8 @@ lib LibWin32
     on_method_exception : Proc(IComMethodEvents*, COMSVCSEVENTINFO*, UInt64, Guid*, Guid*, UInt32, HRESULT)
   end
 
+  IComMethodEvents_GUID = LibC::GUID.new("683130a9-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComMethodEvents = "683130a9-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComMethodEvents
     lpVtbl : IComMethodEventsVTbl*
   end
@@ -1127,6 +1175,8 @@ lib LibWin32
     on_set_abort : Proc(IComObjectEvents*, COMSVCSEVENTINFO*, UInt64, HRESULT)
   end
 
+  IComObjectEvents_GUID = LibC::GUID.new("683130aa-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComObjectEvents = "683130aa-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComObjectEvents
     lpVtbl : IComObjectEventsVTbl*
   end
@@ -1142,6 +1192,8 @@ lib LibWin32
     on_resource_track : Proc(IComResourceEvents*, COMSVCSEVENTINFO*, UInt64, LibC::LPWSTR, UInt64, LibC::BOOL, HRESULT)
   end
 
+  IComResourceEvents_GUID = LibC::GUID.new("683130ab-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComResourceEvents = "683130ab-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComResourceEvents
     lpVtbl : IComResourceEventsVTbl*
   end
@@ -1154,6 +1206,8 @@ lib LibWin32
     on_authenticate_fail : Proc(IComSecurityEvents*, COMSVCSEVENTINFO*, Guid*, UInt64, Guid*, UInt32, UInt32, UInt8*, UInt32, UInt8*, LibC::BOOL, HRESULT)
   end
 
+  IComSecurityEvents_GUID = LibC::GUID.new("683130ac-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComSecurityEvents = "683130ac-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComSecurityEvents
     lpVtbl : IComSecurityEventsVTbl*
   end
@@ -1168,6 +1222,8 @@ lib LibWin32
     on_obj_pool_get_from_tx : Proc(IComObjectPoolEvents*, COMSVCSEVENTINFO*, Guid*, Guid*, Guid*, UInt64, HRESULT)
   end
 
+  IComObjectPoolEvents_GUID = LibC::GUID.new("683130ad-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComObjectPoolEvents = "683130ad-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComObjectPoolEvents
     lpVtbl : IComObjectPoolEventsVTbl*
   end
@@ -1183,6 +1239,8 @@ lib LibWin32
     on_obj_pool_create_pool : Proc(IComObjectPoolEvents2*, COMSVCSEVENTINFO*, Guid*, UInt32, UInt32, UInt32, HRESULT)
   end
 
+  IComObjectPoolEvents2_GUID = LibC::GUID.new("683130ae-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComObjectPoolEvents2 = "683130ae-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComObjectPoolEvents2
     lpVtbl : IComObjectPoolEvents2VTbl*
   end
@@ -1194,6 +1252,8 @@ lib LibWin32
     on_object_construct : Proc(IComObjectConstructionEvents*, COMSVCSEVENTINFO*, Guid*, LibC::LPWSTR, UInt64, HRESULT)
   end
 
+  IComObjectConstructionEvents_GUID = LibC::GUID.new("683130af-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComObjectConstructionEvents = "683130af-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComObjectConstructionEvents
     lpVtbl : IComObjectConstructionEventsVTbl*
   end
@@ -1211,6 +1271,8 @@ lib LibWin32
     on_activity_leave_same : Proc(IComActivityEvents*, COMSVCSEVENTINFO*, Guid*, UInt32, HRESULT)
   end
 
+  IComActivityEvents_GUID = LibC::GUID.new("683130b0-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComActivityEvents = "683130b0-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComActivityEvents
     lpVtbl : IComActivityEventsVTbl*
   end
@@ -1222,6 +1284,8 @@ lib LibWin32
     on_iis_request_info : Proc(IComIdentityEvents*, COMSVCSEVENTINFO*, UInt64, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IComIdentityEvents_GUID = LibC::GUID.new("683130b1-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComIdentityEvents = "683130b1-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComIdentityEvents
     lpVtbl : IComIdentityEventsVTbl*
   end
@@ -1239,6 +1303,8 @@ lib LibWin32
     on_qc_playback : Proc(IComQCEvents*, COMSVCSEVENTINFO*, UInt64, Guid*, Guid*, HRESULT, HRESULT)
   end
 
+  IComQCEvents_GUID = LibC::GUID.new("683130b2-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComQCEvents = "683130b2-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComQCEvents
     lpVtbl : IComQCEventsVTbl*
   end
@@ -1250,6 +1316,8 @@ lib LibWin32
     on_exception_user : Proc(IComExceptionEvents*, COMSVCSEVENTINFO*, UInt32, UInt64, LibC::LPWSTR, HRESULT)
   end
 
+  IComExceptionEvents_GUID = LibC::GUID.new("683130b3-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComExceptionEvents = "683130b3-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComExceptionEvents
     lpVtbl : IComExceptionEventsVTbl*
   end
@@ -1263,6 +1331,8 @@ lib LibWin32
     engine_defined : Proc(ILBEvents*, UInt8*, VARIANT*, UInt8*, HRESULT)
   end
 
+  ILBEvents_GUID = LibC::GUID.new("683130b4-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_ILBEvents = "683130b4-2e50-11d2-98a5-00c04f8ee1c4"
   struct ILBEvents
     lpVtbl : ILBEventsVTbl*
   end
@@ -1288,6 +1358,8 @@ lib LibWin32
     on_crm_deliver : Proc(IComCRMEvents*, COMSVCSEVENTINFO*, Guid, LibC::BOOL, UInt32, HRESULT)
   end
 
+  IComCRMEvents_GUID = LibC::GUID.new("683130b5-2e50-11d2-98a5-00c04f8ee1c4")
+  CLSID_IComCRMEvents = "683130b5-2e50-11d2-98a5-00c04f8ee1c4"
   struct IComCRMEvents
     lpVtbl : IComCRMEventsVTbl*
   end
@@ -1301,6 +1373,8 @@ lib LibWin32
     on_method_exception2 : Proc(IComMethod2Events*, COMSVCSEVENTINFO*, UInt64, Guid*, Guid*, UInt32, UInt32, HRESULT)
   end
 
+  IComMethod2Events_GUID = LibC::GUID.new("fb388aaa-567d-4024-af8e-6e93ee748573")
+  CLSID_IComMethod2Events = "fb388aaa-567d-4024-af8e-6e93ee748573"
   struct IComMethod2Events
     lpVtbl : IComMethod2EventsVTbl*
   end
@@ -1312,6 +1386,8 @@ lib LibWin32
     on_new_tracking_info : Proc(IComTrackingInfoEvents*, IUnknown, HRESULT)
   end
 
+  IComTrackingInfoEvents_GUID = LibC::GUID.new("4e6cdcc9-fb25-4fd5-9cc5-c9f4b6559cec")
+  CLSID_IComTrackingInfoEvents = "4e6cdcc9-fb25-4fd5-9cc5-c9f4b6559cec"
   struct IComTrackingInfoEvents
     lpVtbl : IComTrackingInfoEventsVTbl*
   end
@@ -1325,6 +1401,8 @@ lib LibWin32
     item : Proc(IComTrackingInfoCollection*, UInt32, Guid*, Void**, HRESULT)
   end
 
+  IComTrackingInfoCollection_GUID = LibC::GUID.new("c266c677-c9ad-49ab-9fd9-d9661078588a")
+  CLSID_IComTrackingInfoCollection = "c266c677-c9ad-49ab-9fd9-d9661078588a"
   struct IComTrackingInfoCollection
     lpVtbl : IComTrackingInfoCollectionVTbl*
   end
@@ -1336,6 +1414,8 @@ lib LibWin32
     get_value : Proc(IComTrackingInfoObject*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  IComTrackingInfoObject_GUID = LibC::GUID.new("116e42c5-d8b1-47bf-ab1e-c895ed3e2372")
+  CLSID_IComTrackingInfoObject = "116e42c5-d8b1-47bf-ab1e-c895ed3e2372"
   struct IComTrackingInfoObject
     lpVtbl : IComTrackingInfoObjectVTbl*
   end
@@ -1348,6 +1428,8 @@ lib LibWin32
     get_prop_name : Proc(IComTrackingInfoProperties*, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
+  IComTrackingInfoProperties_GUID = LibC::GUID.new("789b42be-6f6b-443a-898e-67abf390aa14")
+  CLSID_IComTrackingInfoProperties = "789b42be-6f6b-443a-898e-67abf390aa14"
   struct IComTrackingInfoProperties
     lpVtbl : IComTrackingInfoPropertiesVTbl*
   end
@@ -1363,6 +1445,8 @@ lib LibWin32
     on_app_recycle2 : Proc(IComApp2Events*, COMSVCSEVENTINFO*, Guid, Guid, Int32, HRESULT)
   end
 
+  IComApp2Events_GUID = LibC::GUID.new("1290bc1a-b219-418d-b078-5934ded08242")
+  CLSID_IComApp2Events = "1290bc1a-b219-418d-b078-5934ded08242"
   struct IComApp2Events
     lpVtbl : IComApp2EventsVTbl*
   end
@@ -1377,6 +1461,8 @@ lib LibWin32
     on_transaction_commit2 : Proc(IComTransaction2Events*, COMSVCSEVENTINFO*, Guid*, HRESULT)
   end
 
+  IComTransaction2Events_GUID = LibC::GUID.new("a136f62a-2f94-4288-86e0-d8a1fa4c0299")
+  CLSID_IComTransaction2Events = "a136f62a-2f94-4288-86e0-d8a1fa4c0299"
   struct IComTransaction2Events
     lpVtbl : IComTransaction2EventsVTbl*
   end
@@ -1389,6 +1475,8 @@ lib LibWin32
     on_object_destroy2 : Proc(IComInstance2Events*, COMSVCSEVENTINFO*, UInt64, HRESULT)
   end
 
+  IComInstance2Events_GUID = LibC::GUID.new("20e3bf07-b506-4ad5-a50c-d2ca5b9c158e")
+  CLSID_IComInstance2Events = "20e3bf07-b506-4ad5-a50c-d2ca5b9c158e"
   struct IComInstance2Events
     lpVtbl : IComInstance2EventsVTbl*
   end
@@ -1403,6 +1491,8 @@ lib LibWin32
     on_obj_pool_get_from_tx2 : Proc(IComObjectPool2Events*, COMSVCSEVENTINFO*, Guid*, Guid*, Guid*, UInt64, Guid*, HRESULT)
   end
 
+  IComObjectPool2Events_GUID = LibC::GUID.new("65bf6534-85ea-4f64-8cf4-3d974b2ab1cf")
+  CLSID_IComObjectPool2Events = "65bf6534-85ea-4f64-8cf4-3d974b2ab1cf"
   struct IComObjectPool2Events
     lpVtbl : IComObjectPool2EventsVTbl*
   end
@@ -1414,6 +1504,8 @@ lib LibWin32
     on_object_construct2 : Proc(IComObjectConstruction2Events*, COMSVCSEVENTINFO*, Guid*, LibC::LPWSTR, UInt64, Guid*, HRESULT)
   end
 
+  IComObjectConstruction2Events_GUID = LibC::GUID.new("4b5a7827-8df2-45c0-8f6f-57ea1f856a9f")
+  CLSID_IComObjectConstruction2Events = "4b5a7827-8df2-45c0-8f6f-57ea1f856a9f"
   struct IComObjectConstruction2Events
     lpVtbl : IComObjectConstruction2EventsVTbl*
   end
@@ -1426,6 +1518,8 @@ lib LibWin32
     on_data_changed : Proc(ISystemAppEventData*, UInt32, UInt32, UInt32, UInt8*, UInt32, UInt64, HRESULT)
   end
 
+  ISystemAppEventData_GUID = LibC::GUID.new("d6d48a3c-d5c5-49e7-8c74-99e4889ed52f")
+  CLSID_ISystemAppEventData = "d6d48a3c-d5c5-49e7-8c74-99e4889ed52f"
   struct ISystemAppEventData
     lpVtbl : ISystemAppEventDataVTbl*
   end
@@ -1445,6 +1539,8 @@ lib LibWin32
     get_process_id : Proc(IMtsEvents*, Int32*, HRESULT)
   end
 
+  IMtsEvents_GUID = LibC::GUID.new("bacedf4d-74ab-11d0-b162-00aa00ba3258")
+  CLSID_IMtsEvents = "bacedf4d-74ab-11d0-b162-00aa00ba3258"
   struct IMtsEvents
     lpVtbl : IMtsEventsVTbl*
   end
@@ -1464,6 +1560,8 @@ lib LibWin32
     get_value : Proc(IMtsEventInfo*, UInt8*, VARIANT*, HRESULT)
   end
 
+  IMtsEventInfo_GUID = LibC::GUID.new("d56c3dc1-8482-11d0-b170-00aa00ba3258")
+  CLSID_IMtsEventInfo = "d56c3dc1-8482-11d0-b170-00aa00ba3258"
   struct IMtsEventInfo
     lpVtbl : IMtsEventInfoVTbl*
   end
@@ -1479,6 +1577,8 @@ lib LibWin32
     get_event_dispatcher : Proc(IMTSLocator*, IUnknown*, HRESULT)
   end
 
+  IMTSLocator_GUID = LibC::GUID.new("d19b8bfd-7f88-11d0-b16e-00aa00ba3258")
+  CLSID_IMTSLocator = "d19b8bfd-7f88-11d0-b16e-00aa00ba3258"
   struct IMTSLocator
     lpVtbl : IMTSLocatorVTbl*
   end
@@ -1496,6 +1596,8 @@ lib LibWin32
     refresh : Proc(IMtsGrp*, HRESULT)
   end
 
+  IMtsGrp_GUID = LibC::GUID.new("4b2e958c-0393-11d1-b1ab-00aa00ba3258")
+  CLSID_IMtsGrp = "4b2e958c-0393-11d1-b1ab-00aa00ba3258"
   struct IMtsGrp
     lpVtbl : IMtsGrpVTbl*
   end
@@ -1517,6 +1619,8 @@ lib LibWin32
     move_messages : Proc(IMessageMover*, Int32*, HRESULT)
   end
 
+  IMessageMover_GUID = LibC::GUID.new("588a085a-b795-11d1-8054-00c04fc340ee")
+  CLSID_IMessageMover = "588a085a-b795-11d1-8054-00c04fc340ee"
   struct IMessageMover
     lpVtbl : IMessageMoverVTbl*
   end
@@ -1534,6 +1638,8 @@ lib LibWin32
     enum_trace_guid : Proc(IEventServerTrace*, Int32*, UInt8**, HRESULT)
   end
 
+  IEventServerTrace_GUID = LibC::GUID.new("9a9f12b8-80af-47ab-a579-35ea57725370")
+  CLSID_IEventServerTrace = "9a9f12b8-80af-47ab-a579-35ea57725370"
   struct IEventServerTrace
     lpVtbl : IEventServerTraceVTbl*
   end
@@ -1551,6 +1657,8 @@ lib LibWin32
     get_suggested_polling_interval : Proc(IGetAppTrackerData*, UInt32*, HRESULT)
   end
 
+  IGetAppTrackerData_GUID = LibC::GUID.new("507c3ac8-3e12-4cb0-9366-653d3e050638")
+  CLSID_IGetAppTrackerData = "507c3ac8-3e12-4cb0-9366-653d3e050638"
   struct IGetAppTrackerData
     lpVtbl : IGetAppTrackerDataVTbl*
   end
@@ -1563,6 +1671,8 @@ lib LibWin32
     get_context : Proc(IDispenserManager*, LibC::UINT_PTR*, LibC::UINT_PTR*, HRESULT)
   end
 
+  IDispenserManager_GUID = LibC::GUID.new("5cb31e10-2b5f-11cf-be10-00aa00a2fa25")
+  CLSID_IDispenserManager = "5cb31e10-2b5f-11cf-be10-00aa00a2fa25"
   struct IDispenserManager
     lpVtbl : IDispenserManagerVTbl*
   end
@@ -1581,6 +1691,8 @@ lib LibWin32
     request_destroy_resource : Proc(IHolder*, LibC::UINT_PTR, HRESULT)
   end
 
+  IHolder_GUID = LibC::GUID.new("bf6a1850-2b45-11cf-be10-00aa00a2fa25")
+  CLSID_IHolder = "bf6a1850-2b45-11cf-be10-00aa00a2fa25"
   struct IHolder
     lpVtbl : IHolderVTbl*
   end
@@ -1597,6 +1709,8 @@ lib LibWin32
     destroy_resource_s : Proc(IDispenserDriver*, UInt16*, HRESULT)
   end
 
+  IDispenserDriver_GUID = LibC::GUID.new("208b3651-2b48-11cf-be10-00aa00a2fa25")
+  CLSID_IDispenserDriver = "208b3651-2b48-11cf-be10-00aa00a2fa25"
   struct IDispenserDriver
     lpVtbl : IDispenserDriverVTbl*
   end
@@ -1614,6 +1728,8 @@ lib LibWin32
     is_reusable : Proc(ITransactionProxy*, LibC::BOOL*, HRESULT)
   end
 
+  ITransactionProxy_GUID = LibC::GUID.new("02558374-df2e-4dae-bd6b-1d5c994f9bdc")
+  CLSID_ITransactionProxy = "02558374-df2e-4dae-bd6b-1d5c994f9bdc"
   struct ITransactionProxy
     lpVtbl : ITransactionProxyVTbl*
   end
@@ -1626,6 +1742,8 @@ lib LibWin32
     set_perimeter_flag : Proc(IContextSecurityPerimeter*, LibC::BOOL, HRESULT)
   end
 
+  IContextSecurityPerimeter_GUID = LibC::GUID.new("a7549a29-a7c4-42e1-8dc1-7e3d748dc24a")
+  CLSID_IContextSecurityPerimeter = "a7549a29-a7c4-42e1-8dc1-7e3d748dc24a"
   struct IContextSecurityPerimeter
     lpVtbl : IContextSecurityPerimeterVTbl*
   end
@@ -1637,6 +1755,8 @@ lib LibWin32
     get_identifier : Proc(ITxProxyHolder*, Guid*, Void)
   end
 
+  ITxProxyHolder_GUID = LibC::GUID.new("13d86f31-0139-41af-bcad-c7d50435fe9f")
+  CLSID_ITxProxyHolder = "13d86f31-0139-41af-bcad-c7d50435fe9f"
   struct ITxProxyHolder
     lpVtbl : ITxProxyHolderVTbl*
   end
@@ -1655,6 +1775,8 @@ lib LibWin32
     is_caller_in_role : Proc(IObjectContext*, UInt8*, LibC::BOOL*, HRESULT)
   end
 
+  IObjectContext_GUID = LibC::GUID.new("51372ae0-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IObjectContext = "51372ae0-cae7-11cf-be81-00aa00a2fa25"
   struct IObjectContext
     lpVtbl : IObjectContextVTbl*
   end
@@ -1668,6 +1790,8 @@ lib LibWin32
     can_be_pooled : Proc(IObjectControl*, LibC::BOOL)
   end
 
+  IObjectControl_GUID = LibC::GUID.new("51372aec-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IObjectControl = "51372aec-cae7-11cf-be81-00aa00a2fa25"
   struct IObjectControl
     lpVtbl : IObjectControlVTbl*
   end
@@ -1682,6 +1806,8 @@ lib LibWin32
     clone : Proc(IEnumNames*, IEnumNames*, HRESULT)
   end
 
+  IEnumNames_GUID = LibC::GUID.new("51372af2-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IEnumNames = "51372af2-cae7-11cf-be81-00aa00a2fa25"
   struct IEnumNames
     lpVtbl : IEnumNamesVTbl*
   end
@@ -1697,6 +1823,8 @@ lib LibWin32
     release_sid : Proc(ISecurityProperty*, PSID, HRESULT)
   end
 
+  ISecurityProperty_GUID = LibC::GUID.new("51372aea-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_ISecurityProperty = "51372aea-cae7-11cf-be81-00aa00a2fa25"
   struct ISecurityProperty
     lpVtbl : ISecurityPropertyVTbl*
   end
@@ -1710,6 +1838,8 @@ lib LibWin32
     can_be_pooled : Proc(ObjectControl*, Int16*, HRESULT)
   end
 
+  ObjectControl_GUID = LibC::GUID.new("7dc41850-0c31-11d0-8b79-00aa00b8a790")
+  CLSID_ObjectControl = "7dc41850-0c31-11d0-8b79-00aa00b8a790"
   struct ObjectControl
     lpVtbl : ObjectControlVTbl*
   end
@@ -1726,6 +1856,8 @@ lib LibWin32
     put_value : Proc(ISharedProperty*, VARIANT, HRESULT)
   end
 
+  ISharedProperty_GUID = LibC::GUID.new("2a005c01-a5de-11cf-9e66-00aa00a3f464")
+  CLSID_ISharedProperty = "2a005c01-a5de-11cf-9e66-00aa00a3f464"
   struct ISharedProperty
     lpVtbl : ISharedPropertyVTbl*
   end
@@ -1744,6 +1876,8 @@ lib LibWin32
     get_property : Proc(ISharedPropertyGroup*, UInt8*, ISharedProperty*, HRESULT)
   end
 
+  ISharedPropertyGroup_GUID = LibC::GUID.new("2a005c07-a5de-11cf-9e66-00aa00a3f464")
+  CLSID_ISharedPropertyGroup = "2a005c07-a5de-11cf-9e66-00aa00a3f464"
   struct ISharedPropertyGroup
     lpVtbl : ISharedPropertyGroupVTbl*
   end
@@ -1761,6 +1895,8 @@ lib LibWin32
     get__new_enum : Proc(ISharedPropertyGroupManager*, IUnknown*, HRESULT)
   end
 
+  ISharedPropertyGroupManager_GUID = LibC::GUID.new("2a005c0d-a5de-11cf-9e66-00aa00a3f464")
+  CLSID_ISharedPropertyGroupManager = "2a005c0d-a5de-11cf-9e66-00aa00a3f464"
   struct ISharedPropertyGroupManager
     lpVtbl : ISharedPropertyGroupManagerVTbl*
   end
@@ -1772,6 +1908,8 @@ lib LibWin32
     construct : Proc(IObjectConstruct*, IDispatch, HRESULT)
   end
 
+  IObjectConstruct_GUID = LibC::GUID.new("41c4f8b3-7439-11d2-98cb-00c04f8ee1c4")
+  CLSID_IObjectConstruct = "41c4f8b3-7439-11d2-98cb-00c04f8ee1c4"
   struct IObjectConstruct
     lpVtbl : IObjectConstructVTbl*
   end
@@ -1787,6 +1925,8 @@ lib LibWin32
     get_construct_string : Proc(IObjectConstructString*, UInt8**, HRESULT)
   end
 
+  IObjectConstructString_GUID = LibC::GUID.new("41c4f8b2-7439-11d2-98cb-00c04f8ee1c4")
+  CLSID_IObjectConstructString = "41c4f8b2-7439-11d2-98cb-00c04f8ee1c4"
   struct IObjectConstructString
     lpVtbl : IObjectConstructStringVTbl*
   end
@@ -1798,6 +1938,8 @@ lib LibWin32
     get_activity_id : Proc(IObjectContextActivity*, Guid*, HRESULT)
   end
 
+  IObjectContextActivity_GUID = LibC::GUID.new("51372afc-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IObjectContextActivity = "51372afc-cae7-11cf-be81-00aa00a2fa25"
   struct IObjectContextActivity
     lpVtbl : IObjectContextActivityVTbl*
   end
@@ -1813,6 +1955,8 @@ lib LibWin32
     get_context_id : Proc(IObjectContextInfo*, Guid*, HRESULT)
   end
 
+  IObjectContextInfo_GUID = LibC::GUID.new("75b52ddb-e8ed-11d1-93ad-00aa00ba3258")
+  CLSID_IObjectContextInfo = "75b52ddb-e8ed-11d1-93ad-00aa00ba3258"
   struct IObjectContextInfo
     lpVtbl : IObjectContextInfoVTbl*
   end
@@ -1831,6 +1975,8 @@ lib LibWin32
     get_application_instance_id : Proc(IObjectContextInfo2*, Guid*, HRESULT)
   end
 
+  IObjectContextInfo2_GUID = LibC::GUID.new("594be71a-4bc4-438b-9197-cfd176248b09")
+  CLSID_IObjectContextInfo2 = "594be71a-4bc4-438b-9197-cfd176248b09"
   struct IObjectContextInfo2
     lpVtbl : IObjectContextInfo2VTbl*
   end
@@ -1843,6 +1989,8 @@ lib LibWin32
     get_transaction_status : Proc(ITransactionStatus*, HRESULT*, HRESULT)
   end
 
+  ITransactionStatus_GUID = LibC::GUID.new("61f589e8-3724-4898-a0a4-664ae9e1d1b4")
+  CLSID_ITransactionStatus = "61f589e8-3724-4898-a0a4-664ae9e1d1b4"
   struct ITransactionStatus
     lpVtbl : ITransactionStatusVTbl*
   end
@@ -1854,6 +2002,8 @@ lib LibWin32
     get_tip_url : Proc(IObjectContextTip*, UInt8**, HRESULT)
   end
 
+  IObjectContextTip_GUID = LibC::GUID.new("92fd41ca-bad9-11d2-9a2d-00c04f797bc9")
+  CLSID_IObjectContextTip = "92fd41ca-bad9-11d2-9a2d-00c04f797bc9"
   struct IObjectContextTip
     lpVtbl : IObjectContextTipVTbl*
   end
@@ -1866,6 +2016,8 @@ lib LibWin32
     final_server_retry : Proc(IPlaybackControl*, HRESULT)
   end
 
+  IPlaybackControl_GUID = LibC::GUID.new("51372afd-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IPlaybackControl = "51372afd-cae7-11cf-be81-00aa00a2fa25"
   struct IPlaybackControl
     lpVtbl : IPlaybackControlVTbl*
   end
@@ -1879,6 +2031,8 @@ lib LibWin32
     enum_names : Proc(IGetContextProperties*, IEnumNames*, HRESULT)
   end
 
+  IGetContextProperties_GUID = LibC::GUID.new("51372af4-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IGetContextProperties = "51372af4-cae7-11cf-be81-00aa00a2fa25"
   struct IGetContextProperties
     lpVtbl : IGetContextPropertiesVTbl*
   end
@@ -1893,6 +2047,8 @@ lib LibWin32
     get_my_transaction_vote : Proc(IContextState*, TransactionVote*, HRESULT)
   end
 
+  IContextState_GUID = LibC::GUID.new("3c05e54b-a42a-11d2-afc4-00c04f8ee1c4")
+  CLSID_IContextState = "3c05e54b-a42a-11d2-afc4-00c04f8ee1c4"
   struct IContextState
     lpVtbl : IContextStateVTbl*
   end
@@ -1908,6 +2064,8 @@ lib LibWin32
     shutdown_pool : Proc(IPoolManager*, UInt8*, HRESULT)
   end
 
+  IPoolManager_GUID = LibC::GUID.new("0a469861-5a91-43a0-99b6-d5e179bb0631")
+  CLSID_IPoolManager = "0a469861-5a91-43a0-99b6-d5e179bb0631"
   struct IPoolManager
     lpVtbl : IPoolManagerVTbl*
   end
@@ -1920,6 +2078,8 @@ lib LibWin32
     get_lb_server : Proc(ISelectCOMLBServer*, IUnknown, HRESULT)
   end
 
+  ISelectCOMLBServer_GUID = LibC::GUID.new("dcf443f4-3f8a-4872-b9f0-369a796d12d6")
+  CLSID_ISelectCOMLBServer = "dcf443f4-3f8a-4872-b9f0-369a796d12d6"
   struct ISelectCOMLBServer
     lpVtbl : ISelectCOMLBServerVTbl*
   end
@@ -1934,6 +2094,8 @@ lib LibWin32
     set_machine_name : Proc(ICOMLBArguments*, UInt32, Char*, HRESULT)
   end
 
+  ICOMLBArguments_GUID = LibC::GUID.new("3a0f150f-8ee5-4b94-b40e-aef2f9e42ed2")
+  CLSID_ICOMLBArguments = "3a0f150f-8ee5-4b94-b40e-aef2f9e42ed2"
   struct ICOMLBArguments
     lpVtbl : ICOMLBArgumentsVTbl*
   end
@@ -1951,6 +2113,8 @@ lib LibWin32
     write_log_record : Proc(ICrmLogControl*, BLOB*, UInt32, HRESULT)
   end
 
+  ICrmLogControl_GUID = LibC::GUID.new("a0e174b3-d26e-11d2-8f84-00805fc7bcd9")
+  CLSID_ICrmLogControl = "a0e174b3-d26e-11d2-8f84-00805fc7bcd9"
   struct ICrmLogControl
     lpVtbl : ICrmLogControlVTbl*
   end
@@ -1971,6 +2135,8 @@ lib LibWin32
     end_abort_variants : Proc(ICrmCompensatorVariants*, HRESULT)
   end
 
+  ICrmCompensatorVariants_GUID = LibC::GUID.new("f0baf8e4-7804-11d1-82e9-00a0c91eede9")
+  CLSID_ICrmCompensatorVariants = "f0baf8e4-7804-11d1-82e9-00a0c91eede9"
   struct ICrmCompensatorVariants
     lpVtbl : ICrmCompensatorVariantsVTbl*
   end
@@ -1991,6 +2157,8 @@ lib LibWin32
     end_abort : Proc(ICrmCompensator*, HRESULT)
   end
 
+  ICrmCompensator_GUID = LibC::GUID.new("bbc01830-8d3b-11d1-82ec-00a0c91eede9")
+  CLSID_ICrmCompensator = "bbc01830-8d3b-11d1-82ec-00a0c91eede9"
   struct ICrmCompensator
     lpVtbl : ICrmCompensatorVTbl*
   end
@@ -2006,6 +2174,8 @@ lib LibWin32
     get_log_record_variants : Proc(ICrmMonitorLogRecords*, VARIANT, VARIANT*, HRESULT)
   end
 
+  ICrmMonitorLogRecords_GUID = LibC::GUID.new("70c8e441-c7ed-11d1-82fb-00a0c91eede9")
+  CLSID_ICrmMonitorLogRecords = "70c8e441-c7ed-11d1-82fb-00a0c91eede9"
   struct ICrmMonitorLogRecords
     lpVtbl : ICrmMonitorLogRecordsVTbl*
   end
@@ -2027,6 +2197,8 @@ lib LibWin32
     activity_id : Proc(ICrmMonitorClerks*, VARIANT, VARIANT*, HRESULT)
   end
 
+  ICrmMonitorClerks_GUID = LibC::GUID.new("70c8e442-c7ed-11d1-82fb-00a0c91eede9")
+  CLSID_ICrmMonitorClerks = "70c8e442-c7ed-11d1-82fb-00a0c91eede9"
   struct ICrmMonitorClerks
     lpVtbl : ICrmMonitorClerksVTbl*
   end
@@ -2039,6 +2211,8 @@ lib LibWin32
     hold_clerk : Proc(ICrmMonitor*, VARIANT, VARIANT*, HRESULT)
   end
 
+  ICrmMonitor_GUID = LibC::GUID.new("70c8e443-c7ed-11d1-82fb-00a0c91eede9")
+  CLSID_ICrmMonitor = "70c8e443-c7ed-11d1-82fb-00a0c91eede9"
   struct ICrmMonitor
     lpVtbl : ICrmMonitorVTbl*
   end
@@ -2053,6 +2227,8 @@ lib LibWin32
     get_column_variants : Proc(ICrmFormatLogRecords*, VARIANT, VARIANT*, HRESULT)
   end
 
+  ICrmFormatLogRecords_GUID = LibC::GUID.new("9c51d821-c98b-11d1-82fb-00a0c91eede9")
+  CLSID_ICrmFormatLogRecords = "9c51d821-c98b-11d1-82fb-00a0c91eede9"
   struct ICrmFormatLogRecords
     lpVtbl : ICrmFormatLogRecordsVTbl*
   end
@@ -2064,6 +2240,8 @@ lib LibWin32
     iis_intrinsics_config : Proc(IServiceIISIntrinsicsConfig*, CSC_IISIntrinsicsConfig, HRESULT)
   end
 
+  IServiceIISIntrinsicsConfig_GUID = LibC::GUID.new("1a0cf920-d452-46f4-bc36-48118d54ea52")
+  CLSID_IServiceIISIntrinsicsConfig = "1a0cf920-d452-46f4-bc36-48118d54ea52"
   struct IServiceIISIntrinsicsConfig
     lpVtbl : IServiceIISIntrinsicsConfigVTbl*
   end
@@ -2075,6 +2253,8 @@ lib LibWin32
     com_ti_intrinsics_config : Proc(IServiceComTIIntrinsicsConfig*, CSC_COMTIIntrinsicsConfig, HRESULT)
   end
 
+  IServiceComTIIntrinsicsConfig_GUID = LibC::GUID.new("09e6831e-04e1-4ed4-9d0f-e8b168bafeaf")
+  CLSID_IServiceComTIIntrinsicsConfig = "09e6831e-04e1-4ed4-9d0f-e8b168bafeaf"
   struct IServiceComTIIntrinsicsConfig
     lpVtbl : IServiceComTIIntrinsicsConfigVTbl*
   end
@@ -2088,6 +2268,8 @@ lib LibWin32
     sxs_directory : Proc(IServiceSxsConfig*, LibC::LPWSTR, HRESULT)
   end
 
+  IServiceSxsConfig_GUID = LibC::GUID.new("c7cd7379-f3f2-4634-811b-703281d73e08")
+  CLSID_IServiceSxsConfig = "c7cd7379-f3f2-4634-811b-703281d73e08"
   struct IServiceSxsConfig
     lpVtbl : IServiceSxsConfigVTbl*
   end
@@ -2099,6 +2281,8 @@ lib LibWin32
     is_same_sxs_config : Proc(ICheckSxsConfig*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  ICheckSxsConfig_GUID = LibC::GUID.new("0ff5a96f-11fc-47d1-baa6-25dd347e7242")
+  CLSID_ICheckSxsConfig = "0ff5a96f-11fc-47d1-baa6-25dd347e7242"
   struct ICheckSxsConfig
     lpVtbl : ICheckSxsConfigVTbl*
   end
@@ -2110,6 +2294,8 @@ lib LibWin32
     containing_context_treatment : Proc(IServiceInheritanceConfig*, CSC_InheritanceConfig, HRESULT)
   end
 
+  IServiceInheritanceConfig_GUID = LibC::GUID.new("92186771-d3b4-4d77-a8ea-ee842d586f35")
+  CLSID_IServiceInheritanceConfig = "92186771-d3b4-4d77-a8ea-ee842d586f35"
   struct IServiceInheritanceConfig
     lpVtbl : IServiceInheritanceConfigVTbl*
   end
@@ -2122,6 +2308,8 @@ lib LibWin32
     set_binding_info : Proc(IServiceThreadPoolConfig*, CSC_Binding, HRESULT)
   end
 
+  IServiceThreadPoolConfig_GUID = LibC::GUID.new("186d89bc-f277-4bcc-80d5-4df7b836ef4a")
+  CLSID_IServiceThreadPoolConfig = "186d89bc-f277-4bcc-80d5-4df7b836ef4a"
   struct IServiceThreadPoolConfig
     lpVtbl : IServiceThreadPoolConfigVTbl*
   end
@@ -2137,6 +2325,8 @@ lib LibWin32
     new_transaction_description : Proc(IServiceTransactionConfigBase*, LibC::LPWSTR, HRESULT)
   end
 
+  IServiceTransactionConfigBase_GUID = LibC::GUID.new("772b3fbe-6ffd-42fb-b5f8-8f9b260f3810")
+  CLSID_IServiceTransactionConfigBase = "772b3fbe-6ffd-42fb-b5f8-8f9b260f3810"
   struct IServiceTransactionConfigBase
     lpVtbl : IServiceTransactionConfigBaseVTbl*
   end
@@ -2153,6 +2343,8 @@ lib LibWin32
     configure_byot : Proc(IServiceTransactionConfig*, ITransaction, HRESULT)
   end
 
+  IServiceTransactionConfig_GUID = LibC::GUID.new("59f4c2a3-d3d7-4a31-b6e4-6ab3177c50b9")
+  CLSID_IServiceTransactionConfig = "59f4c2a3-d3d7-4a31-b6e4-6ab3177c50b9"
   struct IServiceTransactionConfig
     lpVtbl : IServiceTransactionConfigVTbl*
   end
@@ -2170,6 +2362,8 @@ lib LibWin32
     configure_byot_sys_txn : Proc(IServiceSysTxnConfig*, ITransactionProxy, HRESULT)
   end
 
+  IServiceSysTxnConfig_GUID = LibC::GUID.new("33caf1a1-fcb8-472b-b45e-967448ded6d8")
+  CLSID_IServiceSysTxnConfig = "33caf1a1-fcb8-472b-b45e-967448ded6d8"
   struct IServiceSysTxnConfig
     lpVtbl : IServiceSysTxnConfigVTbl*
   end
@@ -2181,6 +2375,8 @@ lib LibWin32
     configure_synchronization : Proc(IServiceSynchronizationConfig*, CSC_SynchronizationConfig, HRESULT)
   end
 
+  IServiceSynchronizationConfig_GUID = LibC::GUID.new("fd880e81-6dce-4c58-af83-a208846c0030")
+  CLSID_IServiceSynchronizationConfig = "fd880e81-6dce-4c58-af83-a208846c0030"
   struct IServiceSynchronizationConfig
     lpVtbl : IServiceSynchronizationConfigVTbl*
   end
@@ -2192,6 +2388,8 @@ lib LibWin32
     tracker_config : Proc(IServiceTrackerConfig*, CSC_TrackerConfig, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IServiceTrackerConfig_GUID = LibC::GUID.new("6c3a3e1d-0ba6-4036-b76f-d0404db816c9")
+  CLSID_IServiceTrackerConfig = "6c3a3e1d-0ba6-4036-b76f-d0404db816c9"
   struct IServiceTrackerConfig
     lpVtbl : IServiceTrackerConfigVTbl*
   end
@@ -2204,6 +2402,8 @@ lib LibWin32
     partition_id : Proc(IServicePartitionConfig*, Guid*, HRESULT)
   end
 
+  IServicePartitionConfig_GUID = LibC::GUID.new("80182d03-5ea4-4831-ae97-55beffc2e590")
+  CLSID_IServicePartitionConfig = "80182d03-5ea4-4831-ae97-55beffc2e590"
   struct IServicePartitionConfig
     lpVtbl : IServicePartitionConfigVTbl*
   end
@@ -2215,6 +2415,8 @@ lib LibWin32
     on_call : Proc(IServiceCall*, HRESULT)
   end
 
+  IServiceCall_GUID = LibC::GUID.new("bd3e2e12-42dd-40f4-a09a-95a50c58304b")
+  CLSID_IServiceCall = "bd3e2e12-42dd-40f4-a09a-95a50c58304b"
   struct IServiceCall
     lpVtbl : IServiceCallVTbl*
   end
@@ -2226,6 +2428,8 @@ lib LibWin32
     on_error : Proc(IAsyncErrorNotify*, HRESULT, HRESULT)
   end
 
+  IAsyncErrorNotify_GUID = LibC::GUID.new("fe6777fb-a674-4177-8f32-6d707e113484")
+  CLSID_IAsyncErrorNotify = "fe6777fb-a674-4177-8f32-6d707e113484"
   struct IAsyncErrorNotify
     lpVtbl : IAsyncErrorNotifyVTbl*
   end
@@ -2240,6 +2444,8 @@ lib LibWin32
     unbind_from_thread : Proc(IServiceActivity*, HRESULT)
   end
 
+  IServiceActivity_GUID = LibC::GUID.new("67532e0c-9e2f-4450-a354-035633944e17")
+  CLSID_IServiceActivity = "67532e0c-9e2f-4450-a354-035633944e17"
   struct IServiceActivity
     lpVtbl : IServiceActivityVTbl*
   end
@@ -2260,6 +2466,8 @@ lib LibWin32
     set_queue_depth : Proc(IThreadPoolKnobs*, Int32, HRESULT)
   end
 
+  IThreadPoolKnobs_GUID = LibC::GUID.new("51372af7-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IThreadPoolKnobs = "51372af7-cae7-11cf-be81-00aa00a2fa25"
   struct IThreadPoolKnobs
     lpVtbl : IThreadPoolKnobsVTbl*
   end
@@ -2281,6 +2489,8 @@ lib LibWin32
     set_queue_depth : Proc(IComStaThreadPoolKnobs*, Int32, HRESULT)
   end
 
+  IComStaThreadPoolKnobs_GUID = LibC::GUID.new("324b64fa-33b6-11d2-98b7-00c04f8ee1c4")
+  CLSID_IComStaThreadPoolKnobs = "324b64fa-33b6-11d2-98b7-00c04f8ee1c4"
   struct IComStaThreadPoolKnobs
     lpVtbl : IComStaThreadPoolKnobsVTbl*
   end
@@ -2295,6 +2505,8 @@ lib LibWin32
     mta_get_throttle_value : Proc(IComMtaThreadPoolKnobs*, UInt32*, HRESULT)
   end
 
+  IComMtaThreadPoolKnobs_GUID = LibC::GUID.new("f9a76d2e-76a5-43eb-a0c4-49bec8e48480")
+  CLSID_IComMtaThreadPoolKnobs = "f9a76d2e-76a5-43eb-a0c4-49bec8e48480"
   struct IComMtaThreadPoolKnobs
     lpVtbl : IComMtaThreadPoolKnobsVTbl*
   end
@@ -2326,6 +2538,8 @@ lib LibWin32
     set_wait_time_for_thread_cleanup : Proc(IComStaThreadPoolKnobs2*, Int32, HRESULT)
   end
 
+  IComStaThreadPoolKnobs2_GUID = LibC::GUID.new("73707523-ff9a-4974-bf84-2108dc213740")
+  CLSID_IComStaThreadPoolKnobs2 = "73707523-ff9a-4974-bf84-2108dc213740"
   struct IComStaThreadPoolKnobs2
     lpVtbl : IComStaThreadPoolKnobs2VTbl*
   end
@@ -2338,6 +2552,8 @@ lib LibWin32
     shutdown : Proc(IProcessInitializer*, HRESULT)
   end
 
+  IProcessInitializer_GUID = LibC::GUID.new("1113f52d-dc7f-4943-aed6-88d04027e32a")
+  CLSID_IProcessInitializer = "1113f52d-dc7f-4943-aed6-88d04027e32a"
   struct IProcessInitializer
     lpVtbl : IProcessInitializerVTbl*
   end
@@ -2358,6 +2574,8 @@ lib LibWin32
     get_class_factory : Proc(IServicePoolConfig*, IClassFactory*, HRESULT)
   end
 
+  IServicePoolConfig_GUID = LibC::GUID.new("a9690656-5bca-470c-8451-250c1f43a33e")
+  CLSID_IServicePoolConfig = "a9690656-5bca-470c-8451-250c1f43a33e"
   struct IServicePoolConfig
     lpVtbl : IServicePoolConfigVTbl*
   end
@@ -2371,6 +2589,8 @@ lib LibWin32
     shutdown : Proc(IServicePool*, HRESULT)
   end
 
+  IServicePool_GUID = LibC::GUID.new("b302df81-ea45-451e-99a2-09f9fd1b1e13")
+  CLSID_IServicePool = "b302df81-ea45-451e-99a2-09f9fd1b1e13"
   struct IServicePool
     lpVtbl : IServicePoolVTbl*
   end
@@ -2382,6 +2602,8 @@ lib LibWin32
     set_held : Proc(IManagedPooledObj*, LibC::BOOL, HRESULT)
   end
 
+  IManagedPooledObj_GUID = LibC::GUID.new("c5da4bea-1b42-4437-8926-b6a38860a770")
+  CLSID_IManagedPooledObj = "c5da4bea-1b42-4437-8926-b6a38860a770"
   struct IManagedPooledObj
     lpVtbl : IManagedPooledObjVTbl*
   end
@@ -2393,6 +2615,8 @@ lib LibWin32
     last_release : Proc(IManagedPoolAction*, HRESULT)
   end
 
+  IManagedPoolAction_GUID = LibC::GUID.new("da91b74e-5388-4783-949d-c1cd5fb00506")
+  CLSID_IManagedPoolAction = "da91b74e-5388-4783-949d-c1cd5fb00506"
   struct IManagedPoolAction
     lpVtbl : IManagedPoolActionVTbl*
   end
@@ -2407,6 +2631,8 @@ lib LibWin32
     set_wrapper_strength : Proc(IManagedObjectInfo*, LibC::BOOL, HRESULT)
   end
 
+  IManagedObjectInfo_GUID = LibC::GUID.new("1427c51a-4584-49d8-90a0-c50d8086cbe9")
+  CLSID_IManagedObjectInfo = "1427c51a-4584-49d8-90a0-c50d8086cbe9"
   struct IManagedObjectInfo
     lpVtbl : IManagedObjectInfoVTbl*
   end
@@ -2423,6 +2649,8 @@ lib LibWin32
     do_callback : Proc(IAppDomainHelper*, IUnknown, LibC::IntPtrT, Void*, HRESULT)
   end
 
+  IAppDomainHelper_GUID = LibC::GUID.new("c7b67079-8255-42c6-9ec0-6994a3548780")
+  CLSID_IAppDomainHelper = "c7b67079-8255-42c6-9ec0-6994a3548780"
   struct IAppDomainHelper
     lpVtbl : IAppDomainHelperVTbl*
   end
@@ -2438,6 +2666,8 @@ lib LibWin32
     get_modules : Proc(IAssemblyLocator*, UInt8*, UInt8*, UInt8*, SAFEARRAY**, HRESULT)
   end
 
+  IAssemblyLocator_GUID = LibC::GUID.new("391ffbb9-a8ee-432a-abc8-baa238dab90f")
+  CLSID_IAssemblyLocator = "391ffbb9-a8ee-432a-abc8-baa238dab90f"
   struct IAssemblyLocator
     lpVtbl : IAssemblyLocatorVTbl*
   end
@@ -2450,6 +2680,8 @@ lib LibWin32
     destroy_managed_stub : Proc(IManagedActivationEvents*, IManagedObjectInfo, HRESULT)
   end
 
+  IManagedActivationEvents_GUID = LibC::GUID.new("a5f325af-572f-46da-b8ab-827c3d95d99e")
+  CLSID_IManagedActivationEvents = "a5f325af-572f-46da-b8ab-827c3d95d99e"
   struct IManagedActivationEvents
     lpVtbl : IManagedActivationEventsVTbl*
   end
@@ -2462,6 +2694,8 @@ lib LibWin32
     send_method_return : Proc(ISendMethodEvents*, Void*, Guid*, UInt32, HRESULT, HRESULT, HRESULT)
   end
 
+  ISendMethodEvents_GUID = LibC::GUID.new("2732fd59-b2b4-4d44-878c-8b8f09626008")
+  CLSID_ISendMethodEvents = "2732fd59-b2b4-4d44-878c-8b8f09626008"
   struct ISendMethodEvents
     lpVtbl : ISendMethodEventsVTbl*
   end
@@ -2474,6 +2708,8 @@ lib LibWin32
     get_resource : Proc(ITransactionResourcePool*, IObjPool, IUnknown*, HRESULT)
   end
 
+  ITransactionResourcePool_GUID = LibC::GUID.new("c5feb7c1-346a-11d1-b1cc-00aa00ba3258")
+  CLSID_ITransactionResourcePool = "c5feb7c1-346a-11d1-b1cc-00aa00ba3258"
   struct ITransactionResourcePool
     lpVtbl : ITransactionResourcePoolVTbl*
   end
@@ -2485,6 +2721,8 @@ lib LibWin32
     on_call : Proc(IMTSCall*, HRESULT)
   end
 
+  IMTSCall_GUID = LibC::GUID.new("51372aef-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IMTSCall = "51372aef-cae7-11cf-be81-00aa00a2fa25"
   struct IMTSCall
     lpVtbl : IMTSCallVTbl*
   end
@@ -2500,6 +2738,8 @@ lib LibWin32
     remove_property : Proc(IContextProperties*, UInt8*, HRESULT)
   end
 
+  IContextProperties_GUID = LibC::GUID.new("d396da85-bf8f-11d1-bbae-00c04fc2fa5f")
+  CLSID_IContextProperties = "d396da85-bf8f-11d1-bbae-00c04fc2fa5f"
   struct IContextProperties
     lpVtbl : IContextPropertiesVTbl*
   end
@@ -2517,6 +2757,8 @@ lib LibWin32
     reserved6 : Proc(IObjPool*, Void)
   end
 
+  IObjPool_GUID = LibC::GUID.new("7d8805a0-2ea7-11d1-b1cc-00aa00ba3258")
+  CLSID_IObjPool = "7d8805a0-2ea7-11d1-b1cc-00aa00ba3258"
   struct IObjPool
     lpVtbl : IObjPoolVTbl*
   end
@@ -2545,6 +2787,8 @@ lib LibWin32
     reserved17 : Proc(ITransactionProperty*, Void)
   end
 
+  ITransactionProperty_GUID = LibC::GUID.new("788ea814-87b1-11d1-bba6-00c04fc2fa5f")
+  CLSID_ITransactionProperty = "788ea814-87b1-11d1-bba6-00c04fc2fa5f"
   struct ITransactionProperty
     lpVtbl : ITransactionPropertyVTbl*
   end
@@ -2560,6 +2804,8 @@ lib LibWin32
     unbind_from_thread : Proc(IMTSActivity*, HRESULT)
   end
 
+  IMTSActivity_GUID = LibC::GUID.new("51372af0-cae7-11cf-be81-00aa00a2fa25")
+  CLSID_IMTSActivity = "51372af0-cae7-11cf-be81-00aa00a2fa25"
   struct IMTSActivity
     lpVtbl : IMTSActivityVTbl*
   end

@@ -796,6 +796,8 @@ lib LibWin32
     get_sdo_schema : Proc(ISdoMachine*, IUnknown*, HRESULT)
   end
 
+  ISdoMachine_GUID = LibC::GUID.new("479f6e75-49a2-11d2-8eca-00c04fc2f519")
+  CLSID_ISdoMachine = "479f6e75-49a2-11d2-8eca-00c04fc2f519"
   struct ISdoMachine
     lpVtbl : ISdoMachineVTbl*
   end
@@ -824,6 +826,8 @@ lib LibWin32
     reload : Proc(ISdoMachine2*, HRESULT)
   end
 
+  ISdoMachine2_GUID = LibC::GUID.new("518e5ffe-d8ce-4f7e-a5db-b40a35419d3b")
+  CLSID_ISdoMachine2 = "518e5ffe-d8ce-4f7e-a5db-b40a35419d3b"
   struct ISdoMachine2
     lpVtbl : ISdoMachine2VTbl*
   end
@@ -842,6 +846,8 @@ lib LibWin32
     reset_service : Proc(ISdoServiceControl*, HRESULT)
   end
 
+  ISdoServiceControl_GUID = LibC::GUID.new("479f6e74-49a2-11d2-8eca-00c04fc2f519")
+  CLSID_ISdoServiceControl = "479f6e74-49a2-11d2-8eca-00c04fc2f519"
   struct ISdoServiceControl
     lpVtbl : ISdoServiceControlVTbl*
   end
@@ -863,6 +869,8 @@ lib LibWin32
     get__new_enum : Proc(ISdo*, IUnknown*, HRESULT)
   end
 
+  ISdo_GUID = LibC::GUID.new("56bc53de-96db-11d1-bf3f-000000000000")
+  CLSID_ISdo = "56bc53de-96db-11d1-bf3f-000000000000"
   struct ISdo
     lpVtbl : ISdoVTbl*
   end
@@ -885,6 +893,8 @@ lib LibWin32
     get__new_enum : Proc(ISdoCollection*, IUnknown*, HRESULT)
   end
 
+  ISdoCollection_GUID = LibC::GUID.new("56bc53e2-96db-11d1-bf3f-000000000000")
+  CLSID_ISdoCollection = "56bc53e2-96db-11d1-bf3f-000000000000"
   struct ISdoCollection
     lpVtbl : ISdoCollectionVTbl*
   end
@@ -909,6 +919,8 @@ lib LibWin32
     add_to_sdo_as_property : Proc(ITemplateSdo*, IDispatch, Int32, HRESULT)
   end
 
+  ITemplateSdo_GUID = LibC::GUID.new("8aa85302-d2e2-4e20-8b1f-a571e437d6c9")
+  CLSID_ITemplateSdo = "8aa85302-d2e2-4e20-8b1f-a571e437d6c9"
   struct ITemplateSdo
     lpVtbl : ITemplateSdoVTbl*
   end
@@ -928,6 +940,8 @@ lib LibWin32
     get_attribute_id : Proc(ISdoDictionaryOld*, UInt8*, ATTRIBUTEID*, HRESULT)
   end
 
+  ISdoDictionaryOld_GUID = LibC::GUID.new("d432e5f4-53d8-11d2-9a3a-00c04fb998ac")
+  CLSID_ISdoDictionaryOld = "d432e5f4-53d8-11d2-9a3a-00c04fb998ac"
   struct ISdoDictionaryOld
     lpVtbl : ISdoDictionaryOldVTbl*
   end

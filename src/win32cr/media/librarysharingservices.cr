@@ -34,6 +34,8 @@ lib LibWin32
     get_value : Proc(IWindowsMediaLibrarySharingDeviceProperty*, VARIANT*, HRESULT)
   end
 
+  IWindowsMediaLibrarySharingDeviceProperty_GUID = LibC::GUID.new("81e26927-7a7d-40a7-81d4-bddc02960e3e")
+  CLSID_IWindowsMediaLibrarySharingDeviceProperty = "81e26927-7a7d-40a7-81d4-bddc02960e3e"
   struct IWindowsMediaLibrarySharingDeviceProperty
     lpVtbl : IWindowsMediaLibrarySharingDevicePropertyVTbl*
   end
@@ -51,6 +53,8 @@ lib LibWin32
     get_property : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt8*, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)
   end
 
+  IWindowsMediaLibrarySharingDeviceProperties_GUID = LibC::GUID.new("c4623214-6b06-40c5-a623-b2ff4c076bfd")
+  CLSID_IWindowsMediaLibrarySharingDeviceProperties = "c4623214-6b06-40c5-a623-b2ff4c076bfd"
   struct IWindowsMediaLibrarySharingDeviceProperties
     lpVtbl : IWindowsMediaLibrarySharingDevicePropertiesVTbl*
   end
@@ -69,6 +73,8 @@ lib LibWin32
     get_properties : Proc(IWindowsMediaLibrarySharingDevice*, IWindowsMediaLibrarySharingDeviceProperties*, HRESULT)
   end
 
+  IWindowsMediaLibrarySharingDevice_GUID = LibC::GUID.new("3dccc293-4fd9-4191-a25b-8e57c5d27bd4")
+  CLSID_IWindowsMediaLibrarySharingDevice = "3dccc293-4fd9-4191-a25b-8e57c5d27bd4"
   struct IWindowsMediaLibrarySharingDevice
     lpVtbl : IWindowsMediaLibrarySharingDeviceVTbl*
   end
@@ -86,6 +92,8 @@ lib LibWin32
     get_device : Proc(IWindowsMediaLibrarySharingDevices*, UInt8*, IWindowsMediaLibrarySharingDevice*, HRESULT)
   end
 
+  IWindowsMediaLibrarySharingDevices_GUID = LibC::GUID.new("1803f9d6-fe6d-4546-bf5b-992fe8ec12d1")
+  CLSID_IWindowsMediaLibrarySharingDevices = "1803f9d6-fe6d-4546-bf5b-992fe8ec12d1"
   struct IWindowsMediaLibrarySharingDevices
     lpVtbl : IWindowsMediaLibrarySharingDevicesVTbl*
   end
@@ -119,6 +127,8 @@ lib LibWin32
     get_custom_settings_applied : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
   end
 
+  IWindowsMediaLibrarySharingServices_GUID = LibC::GUID.new("01f5f85e-0a81-40da-a7c8-21ef3af8440c")
+  CLSID_IWindowsMediaLibrarySharingServices = "01f5f85e-0a81-40da-a7c8-21ef3af8440c"
   struct IWindowsMediaLibrarySharingServices
     lpVtbl : IWindowsMediaLibrarySharingServicesVTbl*
   end

@@ -1125,6 +1125,8 @@ lib LibWin32
     create_stream_from_key : Proc(IDWriteFontFileLoader*, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
   end
 
+  IDWriteFontFileLoader_GUID = LibC::GUID.new("727cad4e-d6af-4c9e-8a08-d695b11caa49")
+  CLSID_IDWriteFontFileLoader = "727cad4e-d6af-4c9e-8a08-d695b11caa49"
   struct IDWriteFontFileLoader
     lpVtbl : IDWriteFontFileLoaderVTbl*
   end
@@ -1139,6 +1141,8 @@ lib LibWin32
     get_last_write_time_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, FILETIME*, HRESULT)
   end
 
+  IDWriteLocalFontFileLoader_GUID = LibC::GUID.new("b2d9f3ec-c9fe-4a11-a2ec-d86208f7c0a2")
+  CLSID_IDWriteLocalFontFileLoader = "b2d9f3ec-c9fe-4a11-a2ec-d86208f7c0a2"
   struct IDWriteLocalFontFileLoader
     lpVtbl : IDWriteLocalFontFileLoaderVTbl*
   end
@@ -1153,6 +1157,8 @@ lib LibWin32
     get_last_write_time : Proc(IDWriteFontFileStream*, UInt64*, HRESULT)
   end
 
+  IDWriteFontFileStream_GUID = LibC::GUID.new("6d4865fe-0ab8-4d91-8f62-5dd6be34a3e0")
+  CLSID_IDWriteFontFileStream = "6d4865fe-0ab8-4d91-8f62-5dd6be34a3e0"
   struct IDWriteFontFileStream
     lpVtbl : IDWriteFontFileStreamVTbl*
   end
@@ -1166,6 +1172,8 @@ lib LibWin32
     analyze : Proc(IDWriteFontFile*, LibC::BOOL*, DWRITE_FONT_FILE_TYPE*, DWRITE_FONT_FACE_TYPE*, UInt32*, HRESULT)
   end
 
+  IDWriteFontFile_GUID = LibC::GUID.new("739d886a-cef5-47dc-8769-1a8b41bebbb0")
+  CLSID_IDWriteFontFile = "739d886a-cef5-47dc-8769-1a8b41bebbb0"
   struct IDWriteFontFile
     lpVtbl : IDWriteFontFileVTbl*
   end
@@ -1181,6 +1189,8 @@ lib LibWin32
     get_rendering_mode : Proc(IDWriteRenderingParams*, DWRITE_RENDERING_MODE)
   end
 
+  IDWriteRenderingParams_GUID = LibC::GUID.new("2f0da53a-2add-47cd-82ee-d9ec34688e75")
+  CLSID_IDWriteRenderingParams = "2f0da53a-2add-47cd-82ee-d9ec34688e75"
   struct IDWriteRenderingParams
     lpVtbl : IDWriteRenderingParamsVTbl*
   end
@@ -1206,6 +1216,8 @@ lib LibWin32
     get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
   end
 
+  IDWriteFontFace_GUID = LibC::GUID.new("5f49804d-7024-4d43-bfa9-d25984f53849")
+  CLSID_IDWriteFontFace = "5f49804d-7024-4d43-bfa9-d25984f53849"
   struct IDWriteFontFace
     lpVtbl : IDWriteFontFaceVTbl*
   end
@@ -1217,6 +1229,8 @@ lib LibWin32
     create_enumerator_from_key : Proc(IDWriteFontCollectionLoader*, IDWriteFactory, Void*, UInt32, IDWriteFontFileEnumerator*, HRESULT)
   end
 
+  IDWriteFontCollectionLoader_GUID = LibC::GUID.new("cca920e4-52f0-492b-bfa8-29c72ee0a468")
+  CLSID_IDWriteFontCollectionLoader = "cca920e4-52f0-492b-bfa8-29c72ee0a468"
   struct IDWriteFontCollectionLoader
     lpVtbl : IDWriteFontCollectionLoaderVTbl*
   end
@@ -1229,6 +1243,8 @@ lib LibWin32
     get_current_font_file : Proc(IDWriteFontFileEnumerator*, IDWriteFontFile*, HRESULT)
   end
 
+  IDWriteFontFileEnumerator_GUID = LibC::GUID.new("72755049-5ff7-435d-8348-4be97cfa6c7c")
+  CLSID_IDWriteFontFileEnumerator = "72755049-5ff7-435d-8348-4be97cfa6c7c"
   struct IDWriteFontFileEnumerator
     lpVtbl : IDWriteFontFileEnumeratorVTbl*
   end
@@ -1245,6 +1261,8 @@ lib LibWin32
     get_string : Proc(IDWriteLocalizedStrings*, UInt32, Char*, UInt32, HRESULT)
   end
 
+  IDWriteLocalizedStrings_GUID = LibC::GUID.new("08256209-099a-4b34-b86d-c22b110e7771")
+  CLSID_IDWriteLocalizedStrings = "08256209-099a-4b34-b86d-c22b110e7771"
   struct IDWriteLocalizedStrings
     lpVtbl : IDWriteLocalizedStringsVTbl*
   end
@@ -1259,6 +1277,8 @@ lib LibWin32
     get_font_from_font_face : Proc(IDWriteFontCollection*, IDWriteFontFace, IDWriteFont*, HRESULT)
   end
 
+  IDWriteFontCollection_GUID = LibC::GUID.new("a84cee02-3eea-4eee-a827-87c1a02a0fcc")
+  CLSID_IDWriteFontCollection = "a84cee02-3eea-4eee-a827-87c1a02a0fcc"
   struct IDWriteFontCollection
     lpVtbl : IDWriteFontCollectionVTbl*
   end
@@ -1272,6 +1292,8 @@ lib LibWin32
     get_font : Proc(IDWriteFontList*, UInt32, IDWriteFont*, HRESULT)
   end
 
+  IDWriteFontList_GUID = LibC::GUID.new("1a0d8438-1d97-4ec1-aef9-a2fb86ed6acb")
+  CLSID_IDWriteFontList = "1a0d8438-1d97-4ec1-aef9-a2fb86ed6acb"
   struct IDWriteFontList
     lpVtbl : IDWriteFontListVTbl*
   end
@@ -1288,6 +1310,8 @@ lib LibWin32
     get_matching_fonts : Proc(IDWriteFontFamily*, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontList*, HRESULT)
   end
 
+  IDWriteFontFamily_GUID = LibC::GUID.new("da20d8ef-812a-4c43-9802-62ec4abd7add")
+  CLSID_IDWriteFontFamily = "da20d8ef-812a-4c43-9802-62ec4abd7add"
   struct IDWriteFontFamily
     lpVtbl : IDWriteFontFamilyVTbl*
   end
@@ -1309,6 +1333,8 @@ lib LibWin32
     create_font_face : Proc(IDWriteFont*, IDWriteFontFace*, HRESULT)
   end
 
+  IDWriteFont_GUID = LibC::GUID.new("acd16696-8c14-4f5d-877e-fe3fc1d32737")
+  CLSID_IDWriteFont = "acd16696-8c14-4f5d-877e-fe3fc1d32737"
   struct IDWriteFont
     lpVtbl : IDWriteFontVTbl*
   end
@@ -1344,6 +1370,8 @@ lib LibWin32
     get_locale_name : Proc(IDWriteTextFormat*, Char*, UInt32, HRESULT)
   end
 
+  IDWriteTextFormat_GUID = LibC::GUID.new("9c906818-31d7-4fd3-a151-7c5e225db55a")
+  CLSID_IDWriteTextFormat = "9c906818-31d7-4fd3-a151-7c5e225db55a"
   struct IDWriteTextFormat
     lpVtbl : IDWriteTextFormatVTbl*
   end
@@ -1357,6 +1385,8 @@ lib LibWin32
     get_font_feature : Proc(IDWriteTypography*, UInt32, DWRITE_FONT_FEATURE*, HRESULT)
   end
 
+  IDWriteTypography_GUID = LibC::GUID.new("55f1112b-1dc2-4b3c-9541-f46894ed85b6")
+  CLSID_IDWriteTypography = "55f1112b-1dc2-4b3c-9541-f46894ed85b6"
   struct IDWriteTypography
     lpVtbl : IDWriteTypographyVTbl*
   end
@@ -1367,6 +1397,8 @@ lib LibWin32
     release : Proc(IDWriteNumberSubstitution*, UInt32)
   end
 
+  IDWriteNumberSubstitution_GUID = LibC::GUID.new("14885cc9-bab0-4f90-b6ed-5c366a2cd03d")
+  CLSID_IDWriteNumberSubstitution = "14885cc9-bab0-4f90-b6ed-5c366a2cd03d"
   struct IDWriteNumberSubstitution
     lpVtbl : IDWriteNumberSubstitutionVTbl*
   end
@@ -1382,6 +1414,8 @@ lib LibWin32
     get_number_substitution : Proc(IDWriteTextAnalysisSource*, UInt32, UInt32*, IDWriteNumberSubstitution*, HRESULT)
   end
 
+  IDWriteTextAnalysisSource_GUID = LibC::GUID.new("688e1a58-5094-47c8-adc8-fbcea60ae92b")
+  CLSID_IDWriteTextAnalysisSource = "688e1a58-5094-47c8-adc8-fbcea60ae92b"
   struct IDWriteTextAnalysisSource
     lpVtbl : IDWriteTextAnalysisSourceVTbl*
   end
@@ -1396,6 +1430,8 @@ lib LibWin32
     set_number_substitution : Proc(IDWriteTextAnalysisSink*, UInt32, UInt32, IDWriteNumberSubstitution, HRESULT)
   end
 
+  IDWriteTextAnalysisSink_GUID = LibC::GUID.new("5810cd44-0ca0-4701-b3fa-bec5182ae4f6")
+  CLSID_IDWriteTextAnalysisSink = "5810cd44-0ca0-4701-b3fa-bec5182ae4f6"
   struct IDWriteTextAnalysisSink
     lpVtbl : IDWriteTextAnalysisSinkVTbl*
   end
@@ -1413,6 +1449,8 @@ lib LibWin32
     get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer*, Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
   end
 
+  IDWriteTextAnalyzer_GUID = LibC::GUID.new("b7e6163e-7f46-43b4-84b3-e4e6249c365d")
+  CLSID_IDWriteTextAnalyzer = "b7e6163e-7f46-43b4-84b3-e4e6249c365d"
   struct IDWriteTextAnalyzer
     lpVtbl : IDWriteTextAnalyzerVTbl*
   end
@@ -1427,6 +1465,8 @@ lib LibWin32
     get_break_conditions : Proc(IDWriteInlineObject*, DWRITE_BREAK_CONDITION*, DWRITE_BREAK_CONDITION*, HRESULT)
   end
 
+  IDWriteInlineObject_GUID = LibC::GUID.new("8339fde3-106f-47ab-8373-1c6295eb10b3")
+  CLSID_IDWriteInlineObject = "8339fde3-106f-47ab-8373-1c6295eb10b3"
   struct IDWriteInlineObject
     lpVtbl : IDWriteInlineObjectVTbl*
   end
@@ -1440,6 +1480,8 @@ lib LibWin32
     get_pixels_per_dip : Proc(IDWritePixelSnapping*, Void*, Float32*, HRESULT)
   end
 
+  IDWritePixelSnapping_GUID = LibC::GUID.new("eaf3a2da-ecf4-4d24-b644-b34f6842024b")
+  CLSID_IDWritePixelSnapping = "eaf3a2da-ecf4-4d24-b644-b34f6842024b"
   struct IDWritePixelSnapping
     lpVtbl : IDWritePixelSnappingVTbl*
   end
@@ -1457,6 +1499,8 @@ lib LibWin32
     draw_inline_object : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, IDWriteInlineObject, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)
   end
 
+  IDWriteTextRenderer_GUID = LibC::GUID.new("ef8a8135-5cc6-45fe-8825-c5a0724eb819")
+  CLSID_IDWriteTextRenderer = "ef8a8135-5cc6-45fe-8825-c5a0724eb819"
   struct IDWriteTextRenderer
     lpVtbl : IDWriteTextRendererVTbl*
   end
@@ -1531,6 +1575,8 @@ lib LibWin32
     hit_test_text_range : Proc(IDWriteTextLayout*, UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)
   end
 
+  IDWriteTextLayout_GUID = LibC::GUID.new("53737037-6d14-410b-9bfe-0b182bb70961")
+  CLSID_IDWriteTextLayout = "53737037-6d14-410b-9bfe-0b182bb70961"
   struct IDWriteTextLayout
     lpVtbl : IDWriteTextLayoutVTbl*
   end
@@ -1549,6 +1595,8 @@ lib LibWin32
     resize : Proc(IDWriteBitmapRenderTarget*, UInt32, UInt32, HRESULT)
   end
 
+  IDWriteBitmapRenderTarget_GUID = LibC::GUID.new("5e5a32a3-8dff-4773-9ff6-0696eab77267")
+  CLSID_IDWriteBitmapRenderTarget = "5e5a32a3-8dff-4773-9ff6-0696eab77267"
   struct IDWriteBitmapRenderTarget
     lpVtbl : IDWriteBitmapRenderTargetVTbl*
   end
@@ -1564,6 +1612,8 @@ lib LibWin32
     create_bitmap_render_target : Proc(IDWriteGdiInterop*, HDC, UInt32, UInt32, IDWriteBitmapRenderTarget*, HRESULT)
   end
 
+  IDWriteGdiInterop_GUID = LibC::GUID.new("1edd9491-9853-4299-898f-6432983b6f3a")
+  CLSID_IDWriteGdiInterop = "1edd9491-9853-4299-898f-6432983b6f3a"
   struct IDWriteGdiInterop
     lpVtbl : IDWriteGdiInteropVTbl*
   end
@@ -1577,6 +1627,8 @@ lib LibWin32
     get_alpha_blend_params : Proc(IDWriteGlyphRunAnalysis*, IDWriteRenderingParams, Float32*, Float32*, Float32*, HRESULT)
   end
 
+  IDWriteGlyphRunAnalysis_GUID = LibC::GUID.new("7d97dbf7-e085-42d4-81e3-6a883bded118")
+  CLSID_IDWriteGlyphRunAnalysis = "7d97dbf7-e085-42d4-81e3-6a883bded118"
   struct IDWriteGlyphRunAnalysis
     lpVtbl : IDWriteGlyphRunAnalysisVTbl*
   end
@@ -1608,6 +1660,8 @@ lib LibWin32
     create_glyph_run_analysis : Proc(IDWriteFactory*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
   end
 
+  IDWriteFactory_GUID = LibC::GUID.new("b859ee5a-d838-4b5b-a2e8-1adc7d93db48")
+  CLSID_IDWriteFactory = "b859ee5a-d838-4b5b-a2e8-1adc7d93db48"
   struct IDWriteFactory
     lpVtbl : IDWriteFactoryVTbl*
   end
@@ -1641,6 +1695,8 @@ lib LibWin32
     create_custom_rendering_params2 : Proc(IDWriteFactory1*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)
   end
 
+  IDWriteFactory1_GUID = LibC::GUID.new("30572f99-dac6-41db-a16e-0486307e606a")
+  CLSID_IDWriteFactory1 = "30572f99-dac6-41db-a16e-0486307e606a"
   struct IDWriteFactory1
     lpVtbl : IDWriteFactory1VTbl*
   end
@@ -1678,6 +1734,8 @@ lib LibWin32
     has_vertical_glyph_variants : Proc(IDWriteFontFace1*, LibC::BOOL)
   end
 
+  IDWriteFontFace1_GUID = LibC::GUID.new("a71efdb4-9fdb-4838-ad90-cfc3be8c3daf")
+  CLSID_IDWriteFontFace1 = "a71efdb4-9fdb-4838-ad90-cfc3be8c3daf"
   struct IDWriteFontFace1
     lpVtbl : IDWriteFontFace1VTbl*
   end
@@ -1703,6 +1761,8 @@ lib LibWin32
     is_monospaced_font : Proc(IDWriteFont1*, LibC::BOOL)
   end
 
+  IDWriteFont1_GUID = LibC::GUID.new("acd16696-8c14-4f5d-877e-fe3fc1d32738")
+  CLSID_IDWriteFont1 = "acd16696-8c14-4f5d-877e-fe3fc1d32738"
   struct IDWriteFont1
     lpVtbl : IDWriteFont1VTbl*
   end
@@ -1719,6 +1779,8 @@ lib LibWin32
     get_grayscale_enhanced_contrast : Proc(IDWriteRenderingParams1*, Float32)
   end
 
+  IDWriteRenderingParams1_GUID = LibC::GUID.new("94413cf4-a6fc-4248-8b50-6674348fcad3")
+  CLSID_IDWriteRenderingParams1 = "94413cf4-a6fc-4248-8b50-6674348fcad3"
   struct IDWriteRenderingParams1
     lpVtbl : IDWriteRenderingParams1VTbl*
   end
@@ -1745,6 +1807,8 @@ lib LibWin32
     get_justified_glyphs : Proc(IDWriteTextAnalyzer1*, IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt32, UInt16*, UInt16*, Float32*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, UInt16*, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
   end
 
+  IDWriteTextAnalyzer1_GUID = LibC::GUID.new("80dad800-e21f-4e83-96ce-bfcce500db7c")
+  CLSID_IDWriteTextAnalyzer1 = "80dad800-e21f-4e83-96ce-bfcce500db7c"
   struct IDWriteTextAnalyzer1
     lpVtbl : IDWriteTextAnalyzer1VTbl*
   end
@@ -1761,6 +1825,8 @@ lib LibWin32
     get_vertical_glyph_orientation : Proc(IDWriteTextAnalysisSource1*, UInt32, UInt32*, DWRITE_VERTICAL_GLYPH_ORIENTATION*, UInt8*, HRESULT)
   end
 
+  IDWriteTextAnalysisSource1_GUID = LibC::GUID.new("639cfad8-0fb4-4b21-a58a-067920120009")
+  CLSID_IDWriteTextAnalysisSource1 = "639cfad8-0fb4-4b21-a58a-067920120009"
   struct IDWriteTextAnalysisSource1
     lpVtbl : IDWriteTextAnalysisSource1VTbl*
   end
@@ -1776,6 +1842,8 @@ lib LibWin32
     set_glyph_orientation : Proc(IDWriteTextAnalysisSink1*, UInt32, UInt32, DWRITE_GLYPH_ORIENTATION_ANGLE, UInt8, LibC::BOOL, LibC::BOOL, HRESULT)
   end
 
+  IDWriteTextAnalysisSink1_GUID = LibC::GUID.new("b0d941a0-85e7-4d8b-9fd3-5ced9934482a")
+  CLSID_IDWriteTextAnalysisSink1 = "b0d941a0-85e7-4d8b-9fd3-5ced9934482a"
   struct IDWriteTextAnalysisSink1
     lpVtbl : IDWriteTextAnalysisSink1VTbl*
   end
@@ -1854,6 +1922,8 @@ lib LibWin32
     get_character_spacing : Proc(IDWriteTextLayout1*, UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
   end
 
+  IDWriteTextLayout1_GUID = LibC::GUID.new("9064d822-80a7-465c-a986-df65f78b8feb")
+  CLSID_IDWriteTextLayout1 = "9064d822-80a7-465c-a986-df65f78b8feb"
   struct IDWriteTextLayout1
     lpVtbl : IDWriteTextLayout1VTbl*
   end
@@ -1874,6 +1944,8 @@ lib LibWin32
     set_text_antialias_mode : Proc(IDWriteBitmapRenderTarget1*, DWRITE_TEXT_ANTIALIAS_MODE, HRESULT)
   end
 
+  IDWriteBitmapRenderTarget1_GUID = LibC::GUID.new("791e8298-3ef3-4230-9880-c9bdecc42064")
+  CLSID_IDWriteBitmapRenderTarget1 = "791e8298-3ef3-4230-9880-c9bdecc42064"
   struct IDWriteBitmapRenderTarget1
     lpVtbl : IDWriteBitmapRenderTarget1VTbl*
   end
@@ -1895,6 +1967,8 @@ lib LibWin32
     draw_inline_object2 : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, IDWriteInlineObject, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)
   end
 
+  IDWriteTextRenderer1_GUID = LibC::GUID.new("d3e0e934-22a0-427e-aae4-7d9574b59db1")
+  CLSID_IDWriteTextRenderer1 = "d3e0e934-22a0-427e-aae4-7d9574b59db1"
   struct IDWriteTextRenderer1
     lpVtbl : IDWriteTextRenderer1VTbl*
   end
@@ -1938,6 +2012,8 @@ lib LibWin32
     get_font_fallback : Proc(IDWriteTextFormat1*, IDWriteFontFallback*, HRESULT)
   end
 
+  IDWriteTextFormat1_GUID = LibC::GUID.new("5f174b49-0d8b-4cfb-8bca-f1cce9d06c67")
+  CLSID_IDWriteTextFormat1 = "5f174b49-0d8b-4cfb-8bca-f1cce9d06c67"
   struct IDWriteTextFormat1
     lpVtbl : IDWriteTextFormat1VTbl*
   end
@@ -2025,6 +2101,8 @@ lib LibWin32
     get_font_fallback : Proc(IDWriteTextLayout2*, IDWriteFontFallback*, HRESULT)
   end
 
+  IDWriteTextLayout2_GUID = LibC::GUID.new("1093c18f-8d5e-43f0-b064-0917311b525e")
+  CLSID_IDWriteTextLayout2 = "1093c18f-8d5e-43f0-b064-0917311b525e"
   struct IDWriteTextLayout2
     lpVtbl : IDWriteTextLayout2VTbl*
   end
@@ -2054,6 +2132,8 @@ lib LibWin32
     check_typographic_feature : Proc(IDWriteTextAnalyzer2*, IDWriteFontFace, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, DWRITE_FONT_FEATURE_TAG, UInt32, UInt16*, UInt8*, HRESULT)
   end
 
+  IDWriteTextAnalyzer2_GUID = LibC::GUID.new("553a9ff3-5693-4df7-b52b-74806f7f2eb9")
+  CLSID_IDWriteTextAnalyzer2 = "553a9ff3-5693-4df7-b52b-74806f7f2eb9"
   struct IDWriteTextAnalyzer2
     lpVtbl : IDWriteTextAnalyzer2VTbl*
   end
@@ -2065,6 +2145,8 @@ lib LibWin32
     map_characters : Proc(IDWriteFontFallback*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteFontCollection, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, UInt32*, IDWriteFont*, Float32*, HRESULT)
   end
 
+  IDWriteFontFallback_GUID = LibC::GUID.new("efa008f9-f7a1-48bf-b05c-f224713cc0ff")
+  CLSID_IDWriteFontFallback = "efa008f9-f7a1-48bf-b05c-f224713cc0ff"
   struct IDWriteFontFallback
     lpVtbl : IDWriteFontFallbackVTbl*
   end
@@ -2078,6 +2160,8 @@ lib LibWin32
     create_font_fallback : Proc(IDWriteFontFallbackBuilder*, IDWriteFontFallback*, HRESULT)
   end
 
+  IDWriteFontFallbackBuilder_GUID = LibC::GUID.new("fd882d06-8aba-4fb8-b849-8be8b73e14de")
+  CLSID_IDWriteFontFallbackBuilder = "fd882d06-8aba-4fb8-b849-8be8b73e14de"
   struct IDWriteFontFallbackBuilder
     lpVtbl : IDWriteFontFallbackBuilderVTbl*
   end
@@ -2104,6 +2188,8 @@ lib LibWin32
     is_color_font : Proc(IDWriteFont2*, LibC::BOOL)
   end
 
+  IDWriteFont2_GUID = LibC::GUID.new("29748ed6-8c9c-4a6a-be0b-d912e8538944")
+  CLSID_IDWriteFont2 = "29748ed6-8c9c-4a6a-be0b-d912e8538944"
   struct IDWriteFont2
     lpVtbl : IDWriteFont2VTbl*
   end
@@ -2146,6 +2232,8 @@ lib LibWin32
     get_recommended_rendering_mode3 : Proc(IDWriteFontFace2*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)
   end
 
+  IDWriteFontFace2_GUID = LibC::GUID.new("d8b768ff-64bc-4e66-982b-ec8e87f693f7")
+  CLSID_IDWriteFontFace2 = "d8b768ff-64bc-4e66-982b-ec8e87f693f7"
   struct IDWriteFontFace2
     lpVtbl : IDWriteFontFace2VTbl*
   end
@@ -2158,6 +2246,8 @@ lib LibWin32
     get_current_run : Proc(IDWriteColorGlyphRunEnumerator*, DWRITE_COLOR_GLYPH_RUN**, HRESULT)
   end
 
+  IDWriteColorGlyphRunEnumerator_GUID = LibC::GUID.new("d31fbe17-f157-41a2-8d24-cb779e0560e8")
+  CLSID_IDWriteColorGlyphRunEnumerator = "d31fbe17-f157-41a2-8d24-cb779e0560e8"
   struct IDWriteColorGlyphRunEnumerator
     lpVtbl : IDWriteColorGlyphRunEnumeratorVTbl*
   end
@@ -2175,6 +2265,8 @@ lib LibWin32
     get_grid_fit_mode : Proc(IDWriteRenderingParams2*, DWRITE_GRID_FIT_MODE)
   end
 
+  IDWriteRenderingParams2_GUID = LibC::GUID.new("f9d711c3-9777-40ae-87e8-3e5af9bf0948")
+  CLSID_IDWriteRenderingParams2 = "f9d711c3-9777-40ae-87e8-3e5af9bf0948"
   struct IDWriteRenderingParams2
     lpVtbl : IDWriteRenderingParams2VTbl*
   end
@@ -2213,6 +2305,8 @@ lib LibWin32
     create_glyph_run_analysis2 : Proc(IDWriteFactory2*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
   end
 
+  IDWriteFactory2_GUID = LibC::GUID.new("0439fc60-ca44-4994-8dee-3a9af7b732ec")
+  CLSID_IDWriteFactory2 = "0439fc60-ca44-4994-8dee-3a9af7b732ec"
   struct IDWriteFactory2
     lpVtbl : IDWriteFactory2VTbl*
   end
@@ -2231,6 +2325,8 @@ lib LibWin32
     get_rendering_mode1 : Proc(IDWriteRenderingParams3*, DWRITE_RENDERING_MODE1)
   end
 
+  IDWriteRenderingParams3_GUID = LibC::GUID.new("b7924baa-391b-412a-8c5c-e44cc2d867dc")
+  CLSID_IDWriteRenderingParams3 = "b7924baa-391b-412a-8c5c-e44cc2d867dc"
   struct IDWriteRenderingParams3
     lpVtbl : IDWriteRenderingParams3VTbl*
   end
@@ -2278,6 +2374,8 @@ lib LibWin32
     get_font_download_queue : Proc(IDWriteFactory3*, IDWriteFontDownloadQueue*, HRESULT)
   end
 
+  IDWriteFactory3_GUID = LibC::GUID.new("9a1b41c3-d3bb-466a-87fc-fe67556a3b65")
+  CLSID_IDWriteFactory3 = "9a1b41c3-d3bb-466a-87fc-fe67556a3b65"
   struct IDWriteFactory3
     lpVtbl : IDWriteFactory3VTbl*
   end
@@ -2298,6 +2396,8 @@ lib LibWin32
     get_matching_fonts2 : Proc(IDWriteFontSet*, DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)
   end
 
+  IDWriteFontSet_GUID = LibC::GUID.new("53585141-d9f8-4095-8321-d73cf6bd116b")
+  CLSID_IDWriteFontSet = "53585141-d9f8-4095-8321-d73cf6bd116b"
   struct IDWriteFontSet
     lpVtbl : IDWriteFontSetVTbl*
   end
@@ -2312,6 +2412,8 @@ lib LibWin32
     create_font_set : Proc(IDWriteFontSetBuilder*, IDWriteFontSet*, HRESULT)
   end
 
+  IDWriteFontSetBuilder_GUID = LibC::GUID.new("2f642afe-9c68-4f40-b8be-457401afcb3d")
+  CLSID_IDWriteFontSetBuilder = "2f642afe-9c68-4f40-b8be-457401afcb3d"
   struct IDWriteFontSetBuilder
     lpVtbl : IDWriteFontSetBuilderVTbl*
   end
@@ -2328,6 +2430,8 @@ lib LibWin32
     get_font_family2 : Proc(IDWriteFontCollection1*, UInt32, IDWriteFontFamily1*, HRESULT)
   end
 
+  IDWriteFontCollection1_GUID = LibC::GUID.new("53585141-d9f8-4095-8321-d73cf6bd116c")
+  CLSID_IDWriteFontCollection1 = "53585141-d9f8-4095-8321-d73cf6bd116c"
   struct IDWriteFontCollection1
     lpVtbl : IDWriteFontCollection1VTbl*
   end
@@ -2347,6 +2451,8 @@ lib LibWin32
     get_font_face_reference : Proc(IDWriteFontFamily1*, UInt32, IDWriteFontFaceReference*, HRESULT)
   end
 
+  IDWriteFontFamily1_GUID = LibC::GUID.new("da20d8ef-812a-4c43-9802-62ec4abd7adf")
+  CLSID_IDWriteFontFamily1 = "da20d8ef-812a-4c43-9802-62ec4abd7adf"
   struct IDWriteFontFamily1
     lpVtbl : IDWriteFontFamily1VTbl*
   end
@@ -2363,6 +2469,8 @@ lib LibWin32
     get_font_face_reference : Proc(IDWriteFontList1*, UInt32, IDWriteFontFaceReference*, HRESULT)
   end
 
+  IDWriteFontList1_GUID = LibC::GUID.new("da20d8ef-812a-4c43-9802-62ec4abd7ade")
+  CLSID_IDWriteFontList1 = "da20d8ef-812a-4c43-9802-62ec4abd7ade"
   struct IDWriteFontList1
     lpVtbl : IDWriteFontList1VTbl*
   end
@@ -2387,6 +2495,8 @@ lib LibWin32
     enqueue_file_fragment_download_request : Proc(IDWriteFontFaceReference*, UInt64, UInt64, HRESULT)
   end
 
+  IDWriteFontFaceReference_GUID = LibC::GUID.new("5e7fa7ca-dde3-424c-89f0-9fcd6fed58cd")
+  CLSID_IDWriteFontFaceReference = "5e7fa7ca-dde3-424c-89f0-9fcd6fed58cd"
   struct IDWriteFontFaceReference
     lpVtbl : IDWriteFontFaceReferenceVTbl*
   end
@@ -2418,6 +2528,8 @@ lib LibWin32
     get_locality : Proc(IDWriteFont3*, DWRITE_LOCALITY)
   end
 
+  IDWriteFont3_GUID = LibC::GUID.new("29748ed6-8c9c-4a6a-be0b-d912e8538944")
+  CLSID_IDWriteFont3 = "29748ed6-8c9c-4a6a-be0b-d912e8538944"
   struct IDWriteFont3
     lpVtbl : IDWriteFont3VTbl*
   end
@@ -2474,6 +2586,8 @@ lib LibWin32
     are_glyphs_local : Proc(IDWriteFontFace3*, UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
   end
 
+  IDWriteFontFace3_GUID = LibC::GUID.new("d37d7598-09be-4222-a236-2081341cc1f2")
+  CLSID_IDWriteFontFace3 = "d37d7598-09be-4222-a236-2081341cc1f2"
   struct IDWriteFontFace3
     lpVtbl : IDWriteFontFace3VTbl*
   end
@@ -2489,6 +2603,8 @@ lib LibWin32
     get_string : Proc(IDWriteStringList*, UInt32, Char*, UInt32, HRESULT)
   end
 
+  IDWriteStringList_GUID = LibC::GUID.new("cfee3140-1157-47ca-8b85-31bfcf3f2d0e")
+  CLSID_IDWriteStringList = "cfee3140-1157-47ca-8b85-31bfcf3f2d0e"
   struct IDWriteStringList
     lpVtbl : IDWriteStringListVTbl*
   end
@@ -2500,6 +2616,8 @@ lib LibWin32
     download_completed : Proc(IDWriteFontDownloadListener*, IDWriteFontDownloadQueue, IUnknown, HRESULT, Void)
   end
 
+  IDWriteFontDownloadListener_GUID = LibC::GUID.new("b06fe5b9-43ec-4393-881b-dbe4dc72fda7")
+  CLSID_IDWriteFontDownloadListener = "b06fe5b9-43ec-4393-881b-dbe4dc72fda7"
   struct IDWriteFontDownloadListener
     lpVtbl : IDWriteFontDownloadListenerVTbl*
   end
@@ -2516,6 +2634,8 @@ lib LibWin32
     get_generation_count : Proc(IDWriteFontDownloadQueue*, UInt64)
   end
 
+  IDWriteFontDownloadQueue_GUID = LibC::GUID.new("b71e6052-5aea-4fa3-832e-f60d431f7e91")
+  CLSID_IDWriteFontDownloadQueue = "b71e6052-5aea-4fa3-832e-f60d431f7e91"
   struct IDWriteFontDownloadQueue
     lpVtbl : IDWriteFontDownloadQueueVTbl*
   end
@@ -2535,6 +2655,8 @@ lib LibWin32
     get_matching_fonts_by_logfont : Proc(IDWriteGdiInterop1*, LOGFONTA*, IDWriteFontSet, IDWriteFontSet*, HRESULT)
   end
 
+  IDWriteGdiInterop1_GUID = LibC::GUID.new("4556be70-3abd-4f70-90be-421780a6f515")
+  CLSID_IDWriteGdiInterop1 = "4556be70-3abd-4f70-90be-421780a6f515"
   struct IDWriteGdiInterop1
     lpVtbl : IDWriteGdiInterop1VTbl*
   end
@@ -2580,6 +2702,8 @@ lib LibWin32
     get_line_spacing2 : Proc(IDWriteTextFormat2*, DWRITE_LINE_SPACING*, HRESULT)
   end
 
+  IDWriteTextFormat2_GUID = LibC::GUID.new("f67e0edd-9e3d-4ecc-8c32-4183253dfe70")
+  CLSID_IDWriteTextFormat2 = "f67e0edd-9e3d-4ecc-8c32-4183253dfe70"
   struct IDWriteTextFormat2
     lpVtbl : IDWriteTextFormat2VTbl*
   end
@@ -2671,6 +2795,8 @@ lib LibWin32
     get_line_metrics2 : Proc(IDWriteTextLayout3*, DWRITE_LINE_METRICS1*, UInt32, UInt32*, HRESULT)
   end
 
+  IDWriteTextLayout3_GUID = LibC::GUID.new("07ddcd52-020e-4de8-ac33-6c953d83f92d")
+  CLSID_IDWriteTextLayout3 = "07ddcd52-020e-4de8-ac33-6c953d83f92d"
   struct IDWriteTextLayout3
     lpVtbl : IDWriteTextLayout3VTbl*
   end
@@ -2684,6 +2810,8 @@ lib LibWin32
     get_current_run2 : Proc(IDWriteColorGlyphRunEnumerator1*, DWRITE_COLOR_GLYPH_RUN1**, HRESULT)
   end
 
+  IDWriteColorGlyphRunEnumerator1_GUID = LibC::GUID.new("7c5f86da-c7a1-4f05-b8e1-55a179fe5a35")
+  CLSID_IDWriteColorGlyphRunEnumerator1 = "7c5f86da-c7a1-4f05-b8e1-55a179fe5a35"
   struct IDWriteColorGlyphRunEnumerator1
     lpVtbl : IDWriteColorGlyphRunEnumerator1VTbl*
   end
@@ -2744,6 +2872,8 @@ lib LibWin32
     release_glyph_image_data : Proc(IDWriteFontFace4*, Void*, Void)
   end
 
+  IDWriteFontFace4_GUID = LibC::GUID.new("27f2a904-4eb8-441d-9678-0563f53e3e2f")
+  CLSID_IDWriteFontFace4 = "27f2a904-4eb8-441d-9678-0563f53e3e2f"
   struct IDWriteFontFace4
     lpVtbl : IDWriteFontFace4VTbl*
   end
@@ -2794,6 +2924,8 @@ lib LibWin32
     compute_glyph_origins2 : Proc(IDWriteFactory4*, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)
   end
 
+  IDWriteFactory4_GUID = LibC::GUID.new("4b0b5bd3-0797-4549-8ac5-fe915cc53856")
+  CLSID_IDWriteFactory4 = "4b0b5bd3-0797-4549-8ac5-fe915cc53856"
   struct IDWriteFactory4
     lpVtbl : IDWriteFactory4VTbl*
   end
@@ -2809,6 +2941,8 @@ lib LibWin32
     add_font_file : Proc(IDWriteFontSetBuilder1*, IDWriteFontFile, HRESULT)
   end
 
+  IDWriteFontSetBuilder1_GUID = LibC::GUID.new("3ff7715f-3cdc-4dc6-9b72-ec5621dccafd")
+  CLSID_IDWriteFontSetBuilder1 = "3ff7715f-3cdc-4dc6-9b72-ec5621dccafd"
   struct IDWriteFontSetBuilder1
     lpVtbl : IDWriteFontSetBuilder1VTbl*
   end
@@ -2821,6 +2955,8 @@ lib LibWin32
     get_result : Proc(IDWriteAsyncResult*, HRESULT)
   end
 
+  IDWriteAsyncResult_GUID = LibC::GUID.new("ce25f8fd-863b-4d13-9651-c1f88dc73fe2")
+  CLSID_IDWriteAsyncResult = "ce25f8fd-863b-4d13-9651-c1f88dc73fe2"
   struct IDWriteAsyncResult
     lpVtbl : IDWriteAsyncResultVTbl*
   end
@@ -2839,6 +2975,8 @@ lib LibWin32
     begin_download : Proc(IDWriteRemoteFontFileStream*, Guid*, DWRITE_FILE_FRAGMENT*, UInt32, IDWriteAsyncResult*, HRESULT)
   end
 
+  IDWriteRemoteFontFileStream_GUID = LibC::GUID.new("4db3757a-2c72-4ed9-b2b6-1ababe1aff9c")
+  CLSID_IDWriteRemoteFontFileStream = "4db3757a-2c72-4ed9-b2b6-1ababe1aff9c"
   struct IDWriteRemoteFontFileStream
     lpVtbl : IDWriteRemoteFontFileStreamVTbl*
   end
@@ -2853,6 +2991,8 @@ lib LibWin32
     create_font_file_reference_from_url : Proc(IDWriteRemoteFontFileLoader*, IDWriteFactory, LibC::LPWSTR, LibC::LPWSTR, IDWriteFontFile*, HRESULT)
   end
 
+  IDWriteRemoteFontFileLoader_GUID = LibC::GUID.new("68648c83-6ede-46c0-ab46-20083a887fde")
+  CLSID_IDWriteRemoteFontFileLoader = "68648c83-6ede-46c0-ab46-20083a887fde"
   struct IDWriteRemoteFontFileLoader
     lpVtbl : IDWriteRemoteFontFileLoaderVTbl*
   end
@@ -2866,6 +3006,8 @@ lib LibWin32
     get_file_count : Proc(IDWriteInMemoryFontFileLoader*, UInt32)
   end
 
+  IDWriteInMemoryFontFileLoader_GUID = LibC::GUID.new("dc102f47-a12d-4b1c-822d-9e117e33043f")
+  CLSID_IDWriteInMemoryFontFileLoader = "dc102f47-a12d-4b1c-822d-9e117e33043f"
   struct IDWriteInMemoryFontFileLoader
     lpVtbl : IDWriteInMemoryFontFileLoaderVTbl*
   end
@@ -2921,6 +3063,8 @@ lib LibWin32
     unpack_font_file : Proc(IDWriteFactory5*, DWRITE_CONTAINER_TYPE, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
   end
 
+  IDWriteFactory5_GUID = LibC::GUID.new("958db99a-be2a-4f09-af7d-65189803d1d3")
+  CLSID_IDWriteFactory5 = "958db99a-be2a-4f09-af7d-65189803d1d3"
   struct IDWriteFactory5
     lpVtbl : IDWriteFactory5VTbl*
   end
@@ -2983,6 +3127,8 @@ lib LibWin32
     create_text_format2 : Proc(IDWriteFactory6*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_AXIS_VALUE*, UInt32, Float32, LibC::LPWSTR, IDWriteTextFormat3*, HRESULT)
   end
 
+  IDWriteFactory6_GUID = LibC::GUID.new("f3744d80-21f7-42eb-b35d-995bc72fc223")
+  CLSID_IDWriteFactory6 = "f3744d80-21f7-42eb-b35d-995bc72fc223"
   struct IDWriteFactory6
     lpVtbl : IDWriteFactory6VTbl*
   end
@@ -3048,6 +3194,8 @@ lib LibWin32
     equals : Proc(IDWriteFontFace5*, IDWriteFontFace, LibC::BOOL)
   end
 
+  IDWriteFontFace5_GUID = LibC::GUID.new("98eff3a5-b667-479a-b145-e2fa5b9fdc29")
+  CLSID_IDWriteFontFace5 = "98eff3a5-b667-479a-b145-e2fa5b9fdc29"
   struct IDWriteFontFace5
     lpVtbl : IDWriteFontFace5VTbl*
   end
@@ -3070,6 +3218,8 @@ lib LibWin32
     create_font_face_reference : Proc(IDWriteFontResource*, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFaceReference1*, HRESULT)
   end
 
+  IDWriteFontResource_GUID = LibC::GUID.new("1f803a76-6871-48e8-987f-b975551c50f2")
+  CLSID_IDWriteFontResource = "1f803a76-6871-48e8-987f-b975551c50f2"
   struct IDWriteFontResource
     lpVtbl : IDWriteFontResourceVTbl*
   end
@@ -3097,6 +3247,8 @@ lib LibWin32
     get_font_axis_values : Proc(IDWriteFontFaceReference1*, DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)
   end
 
+  IDWriteFontFaceReference1_GUID = LibC::GUID.new("c081fe77-2fd1-41ac-a5a3-34983c4ba61a")
+  CLSID_IDWriteFontFaceReference1 = "c081fe77-2fd1-41ac-a5a3-34983c4ba61a"
   struct IDWriteFontFaceReference1
     lpVtbl : IDWriteFontFaceReference1VTbl*
   end
@@ -3114,6 +3266,8 @@ lib LibWin32
     add_font_file2 : Proc(IDWriteFontSetBuilder2*, LibC::LPWSTR, HRESULT)
   end
 
+  IDWriteFontSetBuilder2_GUID = LibC::GUID.new("ee5ba612-b131-463c-8f4f-3189b9401e45")
+  CLSID_IDWriteFontSetBuilder2 = "ee5ba612-b131-463c-8f4f-3189b9401e45"
   struct IDWriteFontSetBuilder2
     lpVtbl : IDWriteFontSetBuilder2VTbl*
   end
@@ -3147,6 +3301,8 @@ lib LibWin32
     get_font_locality : Proc(IDWriteFontSet1*, UInt32, DWRITE_LOCALITY)
   end
 
+  IDWriteFontSet1_GUID = LibC::GUID.new("7e9fda85-6c92-4053-bc47-7ae3530db4d3")
+  CLSID_IDWriteFontSet1 = "7e9fda85-6c92-4053-bc47-7ae3530db4d3"
   struct IDWriteFontSet1
     lpVtbl : IDWriteFontSet1VTbl*
   end
@@ -3164,6 +3320,8 @@ lib LibWin32
     get_font_set : Proc(IDWriteFontList2*, IDWriteFontSet1*, HRESULT)
   end
 
+  IDWriteFontList2_GUID = LibC::GUID.new("c0763a34-77af-445a-b735-08c37b0a5bf5")
+  CLSID_IDWriteFontList2 = "c0763a34-77af-445a-b735-08c37b0a5bf5"
   struct IDWriteFontList2
     lpVtbl : IDWriteFontList2VTbl*
   end
@@ -3185,6 +3343,8 @@ lib LibWin32
     get_font_set : Proc(IDWriteFontFamily2*, IDWriteFontSet1*, HRESULT)
   end
 
+  IDWriteFontFamily2_GUID = LibC::GUID.new("3ed49e77-a398-4261-b9cf-c126c2131ef3")
+  CLSID_IDWriteFontFamily2 = "3ed49e77-a398-4261-b9cf-c126c2131ef3"
   struct IDWriteFontFamily2
     lpVtbl : IDWriteFontFamily2VTbl*
   end
@@ -3205,6 +3365,8 @@ lib LibWin32
     get_font_set2 : Proc(IDWriteFontCollection2*, IDWriteFontSet1*, HRESULT)
   end
 
+  IDWriteFontCollection2_GUID = LibC::GUID.new("514039c6-4617-4064-bf8b-92ea83e506e0")
+  CLSID_IDWriteFontCollection2 = "514039c6-4617-4064-bf8b-92ea83e506e0"
   struct IDWriteFontCollection2
     lpVtbl : IDWriteFontCollection2VTbl*
   end
@@ -3301,6 +3463,8 @@ lib LibWin32
     set_automatic_font_axes : Proc(IDWriteTextLayout4*, DWRITE_AUTOMATIC_FONT_AXES, HRESULT)
   end
 
+  IDWriteTextLayout4_GUID = LibC::GUID.new("05a9bf42-223f-4441-b5fb-8263685f55e9")
+  CLSID_IDWriteTextLayout4 = "05a9bf42-223f-4441-b5fb-8263685f55e9"
   struct IDWriteTextLayout4
     lpVtbl : IDWriteTextLayout4VTbl*
   end
@@ -3351,6 +3515,8 @@ lib LibWin32
     set_automatic_font_axes : Proc(IDWriteTextFormat3*, DWRITE_AUTOMATIC_FONT_AXES, HRESULT)
   end
 
+  IDWriteTextFormat3_GUID = LibC::GUID.new("6d3b5641-e550-430d-a85b-b7bf48a93427")
+  CLSID_IDWriteTextFormat3 = "6d3b5641-e550-430d-a85b-b7bf48a93427"
   struct IDWriteTextFormat3
     lpVtbl : IDWriteTextFormat3VTbl*
   end
@@ -3363,6 +3529,8 @@ lib LibWin32
     map_characters2 : Proc(IDWriteFontFallback1*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteFontCollection, LibC::LPWSTR, DWRITE_FONT_AXIS_VALUE*, UInt32, UInt32*, Float32*, IDWriteFontFace5*, HRESULT)
   end
 
+  IDWriteFontFallback1_GUID = LibC::GUID.new("2397599d-dd0d-4681-bd6a-f4f31eaade77")
+  CLSID_IDWriteFontFallback1 = "2397599d-dd0d-4681-bd6a-f4f31eaade77"
   struct IDWriteFontFallback1
     lpVtbl : IDWriteFontFallback1VTbl*
   end
@@ -3397,6 +3565,8 @@ lib LibWin32
     get_expiration_event : Proc(IDWriteFontSet2*, LibC::HANDLE)
   end
 
+  IDWriteFontSet2_GUID = LibC::GUID.new("dc7ead19-e54c-43af-b2da-4e2b79ba3f7f")
+  CLSID_IDWriteFontSet2 = "dc7ead19-e54c-43af-b2da-4e2b79ba3f7f"
   struct IDWriteFontSet2
     lpVtbl : IDWriteFontSet2VTbl*
   end
@@ -3418,6 +3588,8 @@ lib LibWin32
     get_expiration_event : Proc(IDWriteFontCollection3*, LibC::HANDLE)
   end
 
+  IDWriteFontCollection3_GUID = LibC::GUID.new("a4d055a6-f9e3-4e25-93b7-9e309f3af8e9")
+  CLSID_IDWriteFontCollection3 = "a4d055a6-f9e3-4e25-93b7-9e309f3af8e9"
   struct IDWriteFontCollection3
     lpVtbl : IDWriteFontCollection3VTbl*
   end
@@ -3482,6 +3654,8 @@ lib LibWin32
     get_system_font_collection4 : Proc(IDWriteFactory7*, LibC::BOOL, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection3*, HRESULT)
   end
 
+  IDWriteFactory7_GUID = LibC::GUID.new("35d0e0b3-9076-4d2e-a016-a91b568a06b4")
+  CLSID_IDWriteFactory7 = "35d0e0b3-9076-4d2e-a016-a91b568a06b4"
   struct IDWriteFactory7
     lpVtbl : IDWriteFactory7VTbl*
   end
@@ -3519,6 +3693,8 @@ lib LibWin32
     get_font_source_name : Proc(IDWriteFontSet3*, UInt32, Char*, UInt32, HRESULT)
   end
 
+  IDWriteFontSet3_GUID = LibC::GUID.new("7c073ef2-a7f4-4045-8c32-8ab8ae640f90")
+  CLSID_IDWriteFontSet3 = "7c073ef2-a7f4-4045-8c32-8ab8ae640f90"
   struct IDWriteFontSet3
     lpVtbl : IDWriteFontSet3VTbl*
   end
@@ -3586,6 +3762,8 @@ lib LibWin32
     get_face_names2 : Proc(IDWriteFontFace6*, DWRITE_FONT_FAMILY_MODEL, IDWriteLocalizedStrings*, HRESULT)
   end
 
+  IDWriteFontFace6_GUID = LibC::GUID.new("c4b1fe1b-6e84-47d5-b54c-a597981b06ad")
+  CLSID_IDWriteFontFace6 = "c4b1fe1b-6e84-47d5-b54c-a597981b06ad"
   struct IDWriteFontFace6
     lpVtbl : IDWriteFontFace6VTbl*
   end

@@ -63,6 +63,8 @@ lib LibWin32
     get_os_update_assessment : Proc(IWaaSAssessor*, OSUpdateAssessment*, HRESULT)
   end
 
+  IWaaSAssessor_GUID = LibC::GUID.new("2347bbef-1a3b-45a4-902d-3e09c269b45e")
+  CLSID_IWaaSAssessor = "2347bbef-1a3b-45a4-902d-3e09c269b45e"
   struct IWaaSAssessor
     lpVtbl : IWaaSAssessorVTbl*
   end

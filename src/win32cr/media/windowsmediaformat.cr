@@ -907,6 +907,8 @@ lib LibWin32
     set_notify : Proc(IAMWMBufferPass*, IAMWMBufferPassCallback, HRESULT)
   end
 
+  IAMWMBufferPass_GUID = LibC::GUID.new("6dd816d7-e740-4123-9e24-2444412644d8")
+  CLSID_IAMWMBufferPass = "6dd816d7-e740-4123-9e24-2444412644d8"
   struct IAMWMBufferPass
     lpVtbl : IAMWMBufferPassVTbl*
   end
@@ -918,6 +920,8 @@ lib LibWin32
     notify : Proc(IAMWMBufferPassCallback*, INSSBuffer3, IPin, Int64*, Int64*, HRESULT)
   end
 
+  IAMWMBufferPassCallback_GUID = LibC::GUID.new("b25b8372-d2d2-44b2-8653-1b8dae332489")
+  CLSID_IAMWMBufferPassCallback = "b25b8372-d2d2-44b2-8653-1b8dae332489"
   struct IAMWMBufferPassCallback
     lpVtbl : IAMWMBufferPassCallbackVTbl*
   end
@@ -933,6 +937,8 @@ lib LibWin32
     get_buffer_and_length : Proc(INSSBuffer*, UInt8**, UInt32*, HRESULT)
   end
 
+  INSSBuffer_GUID = LibC::GUID.new("e1cd3524-03d7-11d2-9eed-006097d2d7cf")
+  CLSID_INSSBuffer = "e1cd3524-03d7-11d2-9eed-006097d2d7cf"
   struct INSSBuffer
     lpVtbl : INSSBufferVTbl*
   end
@@ -950,6 +956,8 @@ lib LibWin32
     set_sample_properties : Proc(INSSBuffer2*, UInt32, UInt8*, HRESULT)
   end
 
+  INSSBuffer2_GUID = LibC::GUID.new("4f528693-1035-43fe-b428-757561ad3a68")
+  CLSID_INSSBuffer2 = "4f528693-1035-43fe-b428-757561ad3a68"
   struct INSSBuffer2
     lpVtbl : INSSBuffer2VTbl*
   end
@@ -969,6 +977,8 @@ lib LibWin32
     get_property : Proc(INSSBuffer3*, Guid, Void*, UInt32*, HRESULT)
   end
 
+  INSSBuffer3_GUID = LibC::GUID.new("c87ceaaf-75be-4bc4-84eb-ac2798507672")
+  CLSID_INSSBuffer3 = "c87ceaaf-75be-4bc4-84eb-ac2798507672"
   struct INSSBuffer3
     lpVtbl : INSSBuffer3VTbl*
   end
@@ -990,6 +1000,8 @@ lib LibWin32
     get_property_by_index : Proc(INSSBuffer4*, UInt32, Guid*, Void*, UInt32*, HRESULT)
   end
 
+  INSSBuffer4_GUID = LibC::GUID.new("b6b8fd5a-32e2-49d4-a910-c26cc85465ed")
+  CLSID_INSSBuffer4 = "b6b8fd5a-32e2-49d4-a910-c26cc85465ed"
   struct INSSBuffer4
     lpVtbl : INSSBuffer4VTbl*
   end
@@ -1002,6 +1014,8 @@ lib LibWin32
     allocate_page_size_buffer : Proc(IWMSBufferAllocator*, UInt32, INSSBuffer*, HRESULT)
   end
 
+  IWMSBufferAllocator_GUID = LibC::GUID.new("61103ca4-2033-11d2-9ef1-006097d2d7cf")
+  CLSID_IWMSBufferAllocator = "61103ca4-2033-11d2-9ef1-006097d2d7cf"
   struct IWMSBufferAllocator
     lpVtbl : IWMSBufferAllocatorVTbl*
   end
@@ -1015,6 +1029,8 @@ lib LibWin32
     set_media_type : Proc(IWMMediaProps*, WM_MEDIA_TYPE*, HRESULT)
   end
 
+  IWMMediaProps_GUID = LibC::GUID.new("96406bce-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMMediaProps = "96406bce-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMMediaProps
     lpVtbl : IWMMediaPropsVTbl*
   end
@@ -1032,6 +1048,8 @@ lib LibWin32
     set_quality : Proc(IWMVideoMediaProps*, UInt32, HRESULT)
   end
 
+  IWMVideoMediaProps_GUID = LibC::GUID.new("96406bcf-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMVideoMediaProps = "96406bcf-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMVideoMediaProps
     lpVtbl : IWMVideoMediaPropsVTbl*
   end
@@ -1055,6 +1073,8 @@ lib LibWin32
     flush : Proc(IWMWriter*, HRESULT)
   end
 
+  IWMWriter_GUID = LibC::GUID.new("96406bd4-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMWriter = "96406bd4-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMWriter
     lpVtbl : IWMWriterVTbl*
   end
@@ -1069,6 +1089,8 @@ lib LibWin32
     set_drm_attribute : Proc(IWMDRMWriter*, UInt16, LibC::LPWSTR, WMT_ATTR_DATATYPE, UInt8*, UInt16, HRESULT)
   end
 
+  IWMDRMWriter_GUID = LibC::GUID.new("d6ea5dd0-12a0-43f4-90ab-a3fd451e6a07")
+  CLSID_IWMDRMWriter = "d6ea5dd0-12a0-43f4-90ab-a3fd451e6a07"
   struct IWMDRMWriter
     lpVtbl : IWMDRMWriterVTbl*
   end
@@ -1084,6 +1106,8 @@ lib LibWin32
     set_wmdrm_net_encryption : Proc(IWMDRMWriter2*, LibC::BOOL, UInt8*, UInt32, HRESULT)
   end
 
+  IWMDRMWriter2_GUID = LibC::GUID.new("38ee7a94-40e2-4e10-aa3f-33fd3210ed5b")
+  CLSID_IWMDRMWriter2 = "38ee7a94-40e2-4e10-aa3f-33fd3210ed5b"
   struct IWMDRMWriter2
     lpVtbl : IWMDRMWriter2VTbl*
   end
@@ -1100,6 +1124,8 @@ lib LibWin32
     set_protect_stream_samples : Proc(IWMDRMWriter3*, WMDRM_IMPORT_INIT_STRUCT*, HRESULT)
   end
 
+  IWMDRMWriter3_GUID = LibC::GUID.new("a7184082-a4aa-4dde-ac9c-e75dbd1117ce")
+  CLSID_IWMDRMWriter3 = "a7184082-a4aa-4dde-ac9c-e75dbd1117ce"
   struct IWMDRMWriter3
     lpVtbl : IWMDRMWriter3VTbl*
   end
@@ -1115,6 +1141,8 @@ lib LibWin32
     get_group_name : Proc(IWMInputMediaProps*, Char*, UInt16*, HRESULT)
   end
 
+  IWMInputMediaProps_GUID = LibC::GUID.new("96406bd5-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMInputMediaProps = "96406bd5-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMInputMediaProps
     lpVtbl : IWMInputMediaPropsVTbl*
   end
@@ -1131,6 +1159,8 @@ lib LibWin32
     clear : Proc(IWMPropertyVault*, HRESULT)
   end
 
+  IWMPropertyVault_GUID = LibC::GUID.new("72995a79-5090-42a4-9c8c-d9d0b6d34be5")
+  CLSID_IWMPropertyVault = "72995a79-5090-42a4-9c8c-d9d0b6d34be5"
   struct IWMPropertyVault
     lpVtbl : IWMPropertyVaultVTbl*
   end
@@ -1142,6 +1172,8 @@ lib LibWin32
     get_property : Proc(IWMIStreamProps*, LibC::LPWSTR, WMT_ATTR_DATATYPE*, UInt8*, UInt32*, HRESULT)
   end
 
+  IWMIStreamProps_GUID = LibC::GUID.new("6816dad3-2b4b-4c8e-8149-874c3483a753")
+  CLSID_IWMIStreamProps = "6816dad3-2b4b-4c8e-8149-874c3483a753"
   struct IWMIStreamProps
     lpVtbl : IWMIStreamPropsVTbl*
   end
@@ -1163,6 +1195,8 @@ lib LibWin32
     resume : Proc(IWMReader*, HRESULT)
   end
 
+  IWMReader_GUID = LibC::GUID.new("96406bd6-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMReader = "96406bd6-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMReader
     lpVtbl : IWMReaderVTbl*
   end
@@ -1194,6 +1228,8 @@ lib LibWin32
     open_stream : Proc(IWMSyncReader*, IStream, HRESULT)
   end
 
+  IWMSyncReader_GUID = LibC::GUID.new("9397f121-7705-4dc9-b049-98b698188414")
+  CLSID_IWMSyncReader = "9397f121-7705-4dc9-b049-98b698188414"
   struct IWMSyncReader
     lpVtbl : IWMSyncReaderVTbl*
   end
@@ -1231,6 +1267,8 @@ lib LibWin32
     get_allocate_for_stream : Proc(IWMSyncReader2*, UInt16, IWMReaderAllocatorEx*, HRESULT)
   end
 
+  IWMSyncReader2_GUID = LibC::GUID.new("faed3d21-1b6b-4af7-8cb6-3e189bbc187b")
+  CLSID_IWMSyncReader2 = "faed3d21-1b6b-4af7-8cb6-3e189bbc187b"
   struct IWMSyncReader2
     lpVtbl : IWMSyncReader2VTbl*
   end
@@ -1246,6 +1284,8 @@ lib LibWin32
     get_connection_name : Proc(IWMOutputMediaProps*, Char*, UInt16*, HRESULT)
   end
 
+  IWMOutputMediaProps_GUID = LibC::GUID.new("96406bd7-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMOutputMediaProps = "96406bd7-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMOutputMediaProps
     lpVtbl : IWMOutputMediaPropsVTbl*
   end
@@ -1257,6 +1297,8 @@ lib LibWin32
     on_status : Proc(IWMStatusCallback*, WMT_STATUS, HRESULT, WMT_ATTR_DATATYPE, UInt8*, Void*, HRESULT)
   end
 
+  IWMStatusCallback_GUID = LibC::GUID.new("6d7cdc70-9888-11d3-8edc-00c04f6109cf")
+  CLSID_IWMStatusCallback = "6d7cdc70-9888-11d3-8edc-00c04f6109cf"
   struct IWMStatusCallback
     lpVtbl : IWMStatusCallbackVTbl*
   end
@@ -1269,6 +1311,8 @@ lib LibWin32
     on_sample : Proc(IWMReaderCallback*, UInt32, UInt64, UInt64, UInt32, INSSBuffer, Void*, HRESULT)
   end
 
+  IWMReaderCallback_GUID = LibC::GUID.new("96406bd8-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMReaderCallback = "96406bd8-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMReaderCallback
     lpVtbl : IWMReaderCallbackVTbl*
   end
@@ -1280,6 +1324,8 @@ lib LibWin32
     acquire_credentials : Proc(IWMCredentialCallback*, LibC::LPWSTR, LibC::LPWSTR, Char*, UInt32, Char*, UInt32, HRESULT, UInt32*, HRESULT)
   end
 
+  IWMCredentialCallback_GUID = LibC::GUID.new("342e0eb7-e651-450c-975b-2ace2c90c48e")
+  CLSID_IWMCredentialCallback = "342e0eb7-e651-450c-975b-2ace2c90c48e"
   struct IWMCredentialCallback
     lpVtbl : IWMCredentialCallbackVTbl*
   end
@@ -1293,6 +1339,8 @@ lib LibWin32
     flush : Proc(IWMMetadataEditor*, HRESULT)
   end
 
+  IWMMetadataEditor_GUID = LibC::GUID.new("96406bd9-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMMetadataEditor = "96406bd9-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMMetadataEditor
     lpVtbl : IWMMetadataEditorVTbl*
   end
@@ -1307,6 +1355,8 @@ lib LibWin32
     open_ex : Proc(IWMMetadataEditor2*, LibC::LPWSTR, UInt32, UInt32, HRESULT)
   end
 
+  IWMMetadataEditor2_GUID = LibC::GUID.new("203cffe3-2e18-4fdf-b59d-6e71530534cf")
+  CLSID_IWMMetadataEditor2 = "203cffe3-2e18-4fdf-b59d-6e71530534cf"
   struct IWMMetadataEditor2
     lpVtbl : IWMMetadataEditor2VTbl*
   end
@@ -1318,6 +1368,8 @@ lib LibWin32
     get_drm_property : Proc(IWMDRMEditor*, LibC::LPWSTR, WMT_ATTR_DATATYPE*, UInt8*, UInt16*, HRESULT)
   end
 
+  IWMDRMEditor_GUID = LibC::GUID.new("ff130ebc-a6c3-42a6-b401-c3382c3e08b3")
+  CLSID_IWMDRMEditor = "ff130ebc-a6c3-42a6-b401-c3382c3e08b3"
   struct IWMDRMEditor
     lpVtbl : IWMDRMEditorVTbl*
   end
@@ -1340,6 +1392,8 @@ lib LibWin32
     remove_script : Proc(IWMHeaderInfo*, UInt16, HRESULT)
   end
 
+  IWMHeaderInfo_GUID = LibC::GUID.new("96406bda-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMHeaderInfo = "96406bda-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMHeaderInfo
     lpVtbl : IWMHeaderInfoVTbl*
   end
@@ -1364,6 +1418,8 @@ lib LibWin32
     get_codec_info : Proc(IWMHeaderInfo2*, UInt32, UInt16*, Char*, UInt16*, Char*, WMT_CODEC_INFO_TYPE*, UInt16*, UInt8*, HRESULT)
   end
 
+  IWMHeaderInfo2_GUID = LibC::GUID.new("15cf9781-454e-482e-b393-85fae487a810")
+  CLSID_IWMHeaderInfo2 = "15cf9781-454e-482e-b393-85fae487a810"
   struct IWMHeaderInfo2
     lpVtbl : IWMHeaderInfo2VTbl*
   end
@@ -1395,6 +1451,8 @@ lib LibWin32
     add_codec_info : Proc(IWMHeaderInfo3*, LibC::LPWSTR, LibC::LPWSTR, WMT_CODEC_INFO_TYPE, UInt16, UInt8*, HRESULT)
   end
 
+  IWMHeaderInfo3_GUID = LibC::GUID.new("15cc68e3-27cc-4ecd-b222-3f5d02d80bd5")
+  CLSID_IWMHeaderInfo3 = "15cc68e3-27cc-4ecd-b222-3f5d02d80bd5"
   struct IWMHeaderInfo3
     lpVtbl : IWMHeaderInfo3VTbl*
   end
@@ -1411,6 +1469,8 @@ lib LibWin32
     load_system_profile : Proc(IWMProfileManager*, UInt32, IWMProfile*, HRESULT)
   end
 
+  IWMProfileManager_GUID = LibC::GUID.new("d16679f2-6ca0-472d-8d31-2f5d55aee155")
+  CLSID_IWMProfileManager = "d16679f2-6ca0-472d-8d31-2f5d55aee155"
   struct IWMProfileManager
     lpVtbl : IWMProfileManagerVTbl*
   end
@@ -1429,6 +1489,8 @@ lib LibWin32
     set_system_profile_version : Proc(IWMProfileManager2*, WMT_VERSION, HRESULT)
   end
 
+  IWMProfileManager2_GUID = LibC::GUID.new("7a924e51-73c1-494d-8019-23d37ed9b89a")
+  CLSID_IWMProfileManager2 = "7a924e51-73c1-494d-8019-23d37ed9b89a"
   struct IWMProfileManager2
     lpVtbl : IWMProfileManager2VTbl*
   end
@@ -1441,6 +1503,8 @@ lib LibWin32
     set_user_language_id : Proc(IWMProfileManagerLanguage*, UInt16, HRESULT)
   end
 
+  IWMProfileManagerLanguage_GUID = LibC::GUID.new("ba4dcc78-7ee0-4ab8-b27a-dbce8bc51454")
+  CLSID_IWMProfileManagerLanguage = "ba4dcc78-7ee0-4ab8-b27a-dbce8bc51454"
   struct IWMProfileManagerLanguage
     lpVtbl : IWMProfileManagerLanguageVTbl*
   end
@@ -1469,6 +1533,8 @@ lib LibWin32
     create_new_mutual_exclusion : Proc(IWMProfile*, IWMMutualExclusion*, HRESULT)
   end
 
+  IWMProfile_GUID = LibC::GUID.new("96406bdb-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMProfile = "96406bdb-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMProfile
     lpVtbl : IWMProfileVTbl*
   end
@@ -1498,6 +1564,8 @@ lib LibWin32
     get_profile_id : Proc(IWMProfile2*, Guid*, HRESULT)
   end
 
+  IWMProfile2_GUID = LibC::GUID.new("07e72d33-d94e-4be7-8843-60ae5ff7e5f5")
+  CLSID_IWMProfile2 = "07e72d33-d94e-4be7-8843-60ae5ff7e5f5"
   struct IWMProfile2
     lpVtbl : IWMProfile2VTbl*
   end
@@ -1539,6 +1607,8 @@ lib LibWin32
     get_expected_packet_count : Proc(IWMProfile3*, UInt64, UInt64*, HRESULT)
   end
 
+  IWMProfile3_GUID = LibC::GUID.new("00ef96cc-a461-4546-8bcd-c9a28f0e06f5")
+  CLSID_IWMProfile3 = "00ef96cc-a461-4546-8bcd-c9a28f0e06f5"
   struct IWMProfile3
     lpVtbl : IWMProfile3VTbl*
   end
@@ -1560,6 +1630,8 @@ lib LibWin32
     set_buffer_window : Proc(IWMStreamConfig*, UInt32, HRESULT)
   end
 
+  IWMStreamConfig_GUID = LibC::GUID.new("96406bdc-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMStreamConfig = "96406bdc-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMStreamConfig
     lpVtbl : IWMStreamConfigVTbl*
   end
@@ -1587,6 +1659,8 @@ lib LibWin32
     remove_all_data_unit_extensions : Proc(IWMStreamConfig2*, HRESULT)
   end
 
+  IWMStreamConfig2_GUID = LibC::GUID.new("7688d8cb-fc0d-43bd-9459-5a8dec200cfa")
+  CLSID_IWMStreamConfig2 = "7688d8cb-fc0d-43bd-9459-5a8dec200cfa"
   struct IWMStreamConfig2
     lpVtbl : IWMStreamConfig2VTbl*
   end
@@ -1616,6 +1690,8 @@ lib LibWin32
     set_language : Proc(IWMStreamConfig3*, LibC::LPWSTR, HRESULT)
   end
 
+  IWMStreamConfig3_GUID = LibC::GUID.new("cb164104-3aa9-45a7-9ac9-4daee131d6e1")
+  CLSID_IWMStreamConfig3 = "cb164104-3aa9-45a7-9ac9-4daee131d6e1"
   struct IWMStreamConfig3
     lpVtbl : IWMStreamConfig3VTbl*
   end
@@ -1628,6 +1704,8 @@ lib LibWin32
     set_max_packet_size : Proc(IWMPacketSize*, UInt32, HRESULT)
   end
 
+  IWMPacketSize_GUID = LibC::GUID.new("cdfb97ab-188f-40b3-b643-5b7903975c59")
+  CLSID_IWMPacketSize = "cdfb97ab-188f-40b3-b643-5b7903975c59"
   struct IWMPacketSize
     lpVtbl : IWMPacketSizeVTbl*
   end
@@ -1642,6 +1720,8 @@ lib LibWin32
     set_min_packet_size : Proc(IWMPacketSize2*, UInt32, HRESULT)
   end
 
+  IWMPacketSize2_GUID = LibC::GUID.new("8bfc2b9e-b646-4233-a877-1c6a079669dc")
+  CLSID_IWMPacketSize2 = "8bfc2b9e-b646-4233-a877-1c6a079669dc"
   struct IWMPacketSize2
     lpVtbl : IWMPacketSize2VTbl*
   end
@@ -1655,6 +1735,8 @@ lib LibWin32
     remove_stream : Proc(IWMStreamList*, UInt16, HRESULT)
   end
 
+  IWMStreamList_GUID = LibC::GUID.new("96406bdd-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMStreamList = "96406bdd-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMStreamList
     lpVtbl : IWMStreamListVTbl*
   end
@@ -1670,6 +1752,8 @@ lib LibWin32
     set_type : Proc(IWMMutualExclusion*, Guid*, HRESULT)
   end
 
+  IWMMutualExclusion_GUID = LibC::GUID.new("96406bde-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMMutualExclusion = "96406bde-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMMutualExclusion
     lpVtbl : IWMMutualExclusionVTbl*
   end
@@ -1695,6 +1779,8 @@ lib LibWin32
     remove_stream_for_record : Proc(IWMMutualExclusion2*, UInt16, UInt16, HRESULT)
   end
 
+  IWMMutualExclusion2_GUID = LibC::GUID.new("0302b57d-89d1-4ba2-85c9-166f2c53eb91")
+  CLSID_IWMMutualExclusion2 = "0302b57d-89d1-4ba2-85c9-166f2c53eb91"
   struct IWMMutualExclusion2
     lpVtbl : IWMMutualExclusion2VTbl*
   end
@@ -1712,6 +1798,8 @@ lib LibWin32
     set_bandwidth : Proc(IWMBandwidthSharing*, UInt32, UInt32, HRESULT)
   end
 
+  IWMBandwidthSharing_GUID = LibC::GUID.new("ad694af1-f8d9-42f8-bc47-70311b0c4f9e")
+  CLSID_IWMBandwidthSharing = "ad694af1-f8d9-42f8-bc47-70311b0c4f9e"
   struct IWMBandwidthSharing
     lpVtbl : IWMBandwidthSharingVTbl*
   end
@@ -1724,6 +1812,8 @@ lib LibWin32
     set_priority_records : Proc(IWMStreamPrioritization*, WM_STREAM_PRIORITY_RECORD*, UInt16, HRESULT)
   end
 
+  IWMStreamPrioritization_GUID = LibC::GUID.new("8c1c6090-f9a8-4748-8ec3-dd1108ba1e77")
+  CLSID_IWMStreamPrioritization = "8c1c6090-f9a8-4748-8ec3-dd1108ba1e77"
   struct IWMStreamPrioritization
     lpVtbl : IWMStreamPrioritizationVTbl*
   end
@@ -1745,6 +1835,8 @@ lib LibWin32
     get_sync_tolerance : Proc(IWMWriterAdvanced*, UInt32*, HRESULT)
   end
 
+  IWMWriterAdvanced_GUID = LibC::GUID.new("96406be3-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMWriterAdvanced = "96406be3-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMWriterAdvanced
     lpVtbl : IWMWriterAdvancedVTbl*
   end
@@ -1768,6 +1860,8 @@ lib LibWin32
     set_input_setting : Proc(IWMWriterAdvanced2*, UInt32, LibC::LPWSTR, WMT_ATTR_DATATYPE, UInt8*, UInt16, HRESULT)
   end
 
+  IWMWriterAdvanced2_GUID = LibC::GUID.new("962dc1ec-c046-4db8-9cc7-26ceae500817")
+  CLSID_IWMWriterAdvanced2 = "962dc1ec-c046-4db8-9cc7-26ceae500817"
   struct IWMWriterAdvanced2
     lpVtbl : IWMWriterAdvanced2VTbl*
   end
@@ -1793,6 +1887,8 @@ lib LibWin32
     set_non_blocking : Proc(IWMWriterAdvanced3*, HRESULT)
   end
 
+  IWMWriterAdvanced3_GUID = LibC::GUID.new("2cd6492d-7c37-4e76-9d3b-59261183a22e")
+  CLSID_IWMWriterAdvanced3 = "2cd6492d-7c37-4e76-9d3b-59261183a22e"
   struct IWMWriterAdvanced3
     lpVtbl : IWMWriterAdvanced3VTbl*
   end
@@ -1808,6 +1904,8 @@ lib LibWin32
     end_preprocessing_pass : Proc(IWMWriterPreprocess*, UInt32, UInt32, HRESULT)
   end
 
+  IWMWriterPreprocess_GUID = LibC::GUID.new("fc54a285-38c4-45b5-aa23-85b9f7cb424b")
+  CLSID_IWMWriterPreprocess = "fc54a285-38c4-45b5-aa23-85b9f7cb424b"
   struct IWMWriterPreprocess
     lpVtbl : IWMWriterPreprocessVTbl*
   end
@@ -1821,6 +1919,8 @@ lib LibWin32
     allocate_for_post_view : Proc(IWMWriterPostViewCallback*, UInt16, UInt32, INSSBuffer*, Void*, HRESULT)
   end
 
+  IWMWriterPostViewCallback_GUID = LibC::GUID.new("d9d6549d-a193-4f24-b308-03123d9b7f8d")
+  CLSID_IWMWriterPostViewCallback = "d9d6549d-a193-4f24-b308-03123d9b7f8d"
   struct IWMWriterPostViewCallback
     lpVtbl : IWMWriterPostViewCallbackVTbl*
   end
@@ -1840,6 +1940,8 @@ lib LibWin32
     get_allocate_for_post_view : Proc(IWMWriterPostView*, UInt16, LibC::BOOL*, HRESULT)
   end
 
+  IWMWriterPostView_GUID = LibC::GUID.new("81e20ce4-75ef-491a-8004-fc53c45bdc3e")
+  CLSID_IWMWriterPostView = "81e20ce4-75ef-491a-8004-fc53c45bdc3e"
   struct IWMWriterPostView
     lpVtbl : IWMWriterPostViewVTbl*
   end
@@ -1855,6 +1957,8 @@ lib LibWin32
     on_end_writing : Proc(IWMWriterSink*, HRESULT)
   end
 
+  IWMWriterSink_GUID = LibC::GUID.new("96406be4-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMWriterSink = "96406be4-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMWriterSink
     lpVtbl : IWMWriterSinkVTbl*
   end
@@ -1867,6 +1971,8 @@ lib LibWin32
     unadvise : Proc(IWMRegisterCallback*, IWMStatusCallback, Void*, HRESULT)
   end
 
+  IWMRegisterCallback_GUID = LibC::GUID.new("cf4b1f99-4de2-4e49-a363-252740d99bc1")
+  CLSID_IWMRegisterCallback = "cf4b1f99-4de2-4e49-a363-252740d99bc1"
   struct IWMRegisterCallback
     lpVtbl : IWMRegisterCallbackVTbl*
   end
@@ -1883,6 +1989,8 @@ lib LibWin32
     open : Proc(IWMWriterFileSink*, LibC::LPWSTR, HRESULT)
   end
 
+  IWMWriterFileSink_GUID = LibC::GUID.new("96406be5-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMWriterFileSink = "96406be5-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMWriterFileSink
     lpVtbl : IWMWriterFileSinkVTbl*
   end
@@ -1906,6 +2014,8 @@ lib LibWin32
     is_closed : Proc(IWMWriterFileSink2*, LibC::BOOL*, HRESULT)
   end
 
+  IWMWriterFileSink2_GUID = LibC::GUID.new("14282ba7-4aef-4205-8ce5-c229035a05bc")
+  CLSID_IWMWriterFileSink2 = "14282ba7-4aef-4205-8ce5-c229035a05bc"
   struct IWMWriterFileSink2
     lpVtbl : IWMWriterFileSink2VTbl*
   end
@@ -1937,6 +2047,8 @@ lib LibWin32
     complete_operations : Proc(IWMWriterFileSink3*, HRESULT)
   end
 
+  IWMWriterFileSink3_GUID = LibC::GUID.new("3fea4feb-2945-47a7-a1dd-c53a8fc4c45c")
+  CLSID_IWMWriterFileSink3 = "3fea4feb-2945-47a7-a1dd-c53a8fc4c45c"
   struct IWMWriterFileSink3
     lpVtbl : IWMWriterFileSink3VTbl*
   end
@@ -1960,6 +2072,8 @@ lib LibWin32
     close : Proc(IWMWriterNetworkSink*, HRESULT)
   end
 
+  IWMWriterNetworkSink_GUID = LibC::GUID.new("96406be7-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMWriterNetworkSink = "96406be7-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMWriterNetworkSink
     lpVtbl : IWMWriterNetworkSinkVTbl*
   end
@@ -1972,6 +2086,8 @@ lib LibWin32
     get_client_properties : Proc(IWMClientConnections*, UInt32, WM_CLIENT_PROPERTIES*, HRESULT)
   end
 
+  IWMClientConnections_GUID = LibC::GUID.new("73c66010-a299-41df-b1f0-ccf03b09c1c6")
+  CLSID_IWMClientConnections = "73c66010-a299-41df-b1f0-ccf03b09c1c6"
   struct IWMClientConnections
     lpVtbl : IWMClientConnectionsVTbl*
   end
@@ -1985,6 +2101,8 @@ lib LibWin32
     get_client_info : Proc(IWMClientConnections2*, UInt32, Char*, UInt32*, Char*, UInt32*, Char*, UInt32*, HRESULT)
   end
 
+  IWMClientConnections2_GUID = LibC::GUID.new("4091571e-4701-4593-bb3d-d5f5f0c74246")
+  CLSID_IWMClientConnections2 = "4091571e-4701-4593-bb3d-d5f5f0c74246"
   struct IWMClientConnections2
     lpVtbl : IWMClientConnections2VTbl*
   end
@@ -2015,6 +2133,8 @@ lib LibWin32
     notify_late_delivery : Proc(IWMReaderAdvanced*, UInt64, HRESULT)
   end
 
+  IWMReaderAdvanced_GUID = LibC::GUID.new("96406bea-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMReaderAdvanced = "96406bea-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMReaderAdvanced
     lpVtbl : IWMReaderAdvancedVTbl*
   end
@@ -2060,6 +2180,8 @@ lib LibWin32
     open_stream : Proc(IWMReaderAdvanced2*, IStream, IWMReaderCallback, Void*, HRESULT)
   end
 
+  IWMReaderAdvanced2_GUID = LibC::GUID.new("ae14a945-b90c-4d0d-9127-80d665f7d73e")
+  CLSID_IWMReaderAdvanced2 = "ae14a945-b90c-4d0d-9127-80d665f7d73e"
   struct IWMReaderAdvanced2
     lpVtbl : IWMReaderAdvanced2VTbl*
   end
@@ -2107,6 +2229,8 @@ lib LibWin32
     start_at_position : Proc(IWMReaderAdvanced3*, UInt16, Void*, Void*, WMT_OFFSET_FORMAT, Float32, Void*, HRESULT)
   end
 
+  IWMReaderAdvanced3_GUID = LibC::GUID.new("5dc0674b-f04b-4a4e-9f2a-b1afde2c8100")
+  CLSID_IWMReaderAdvanced3 = "5dc0674b-f04b-4a4e-9f2a-b1afde2c8100"
   struct IWMReaderAdvanced3
     lpVtbl : IWMReaderAdvanced3VTbl*
   end
@@ -2163,6 +2287,8 @@ lib LibWin32
     get_url : Proc(IWMReaderAdvanced4*, Char*, UInt32*, HRESULT)
   end
 
+  IWMReaderAdvanced4_GUID = LibC::GUID.new("945a76a2-12ae-4d48-bd3c-cd1d90399b85")
+  CLSID_IWMReaderAdvanced4 = "945a76a2-12ae-4d48-bd3c-cd1d90399b85"
   struct IWMReaderAdvanced4
     lpVtbl : IWMReaderAdvanced4VTbl*
   end
@@ -2220,6 +2346,8 @@ lib LibWin32
     set_player_hook : Proc(IWMReaderAdvanced5*, UInt32, IWMPlayerHook, HRESULT)
   end
 
+  IWMReaderAdvanced5_GUID = LibC::GUID.new("24c44db0-55d1-49ae-a5cc-f13815e36363")
+  CLSID_IWMReaderAdvanced5 = "24c44db0-55d1-49ae-a5cc-f13815e36363"
   struct IWMReaderAdvanced5
     lpVtbl : IWMReaderAdvanced5VTbl*
   end
@@ -2278,6 +2406,8 @@ lib LibWin32
     set_protect_stream_samples : Proc(IWMReaderAdvanced6*, UInt8*, UInt32, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
+  IWMReaderAdvanced6_GUID = LibC::GUID.new("18a2e7f8-428f-4acd-8a00-e64639bc93de")
+  CLSID_IWMReaderAdvanced6 = "18a2e7f8-428f-4acd-8a00-e64639bc93de"
   struct IWMReaderAdvanced6
     lpVtbl : IWMReaderAdvanced6VTbl*
   end
@@ -2289,6 +2419,8 @@ lib LibWin32
     pre_decode : Proc(IWMPlayerHook*, HRESULT)
   end
 
+  IWMPlayerHook_GUID = LibC::GUID.new("e5b7ca9a-0f1c-4f66-9002-74ec50d8b304")
+  CLSID_IWMPlayerHook = "e5b7ca9a-0f1c-4f66-9002-74ec50d8b304"
   struct IWMPlayerHook
     lpVtbl : IWMPlayerHookVTbl*
   end
@@ -2301,6 +2433,8 @@ lib LibWin32
     allocate_for_output_ex : Proc(IWMReaderAllocatorEx*, UInt32, UInt32, INSSBuffer*, UInt32, UInt64, UInt64, Void*, HRESULT)
   end
 
+  IWMReaderAllocatorEx_GUID = LibC::GUID.new("9f762fa7-a22e-428d-93c9-ac82f3aafe5a")
+  CLSID_IWMReaderAllocatorEx = "9f762fa7-a22e-428d-93c9-ac82f3aafe5a"
   struct IWMReaderAllocatorEx
     lpVtbl : IWMReaderAllocatorExVTbl*
   end
@@ -2312,6 +2446,8 @@ lib LibWin32
     try_output_props : Proc(IWMReaderTypeNegotiation*, UInt32, IWMOutputMediaProps, HRESULT)
   end
 
+  IWMReaderTypeNegotiation_GUID = LibC::GUID.new("fdbe5592-81a1-41ea-93bd-735cad1adc05")
+  CLSID_IWMReaderTypeNegotiation = "fdbe5592-81a1-41ea-93bd-735cad1adc05"
   struct IWMReaderTypeNegotiation
     lpVtbl : IWMReaderTypeNegotiationVTbl*
   end
@@ -2328,6 +2464,8 @@ lib LibWin32
     allocate_for_output : Proc(IWMReaderCallbackAdvanced*, UInt32, UInt32, INSSBuffer*, Void*, HRESULT)
   end
 
+  IWMReaderCallbackAdvanced_GUID = LibC::GUID.new("96406beb-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMReaderCallbackAdvanced = "96406beb-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMReaderCallbackAdvanced
     lpVtbl : IWMReaderCallbackAdvancedVTbl*
   end
@@ -2346,6 +2484,8 @@ lib LibWin32
     get_drm_property : Proc(IWMDRMReader*, LibC::LPWSTR, WMT_ATTR_DATATYPE*, UInt8*, UInt16*, HRESULT)
   end
 
+  IWMDRMReader_GUID = LibC::GUID.new("d2827540-3ee7-432c-b14c-dc17f085d3b3")
+  CLSID_IWMDRMReader = "d2827540-3ee7-432c-b14c-dc17f085d3b3"
   struct IWMDRMReader
     lpVtbl : IWMDRMReaderVTbl*
   end
@@ -2368,6 +2508,8 @@ lib LibWin32
     try_next_license : Proc(IWMDRMReader2*, HRESULT)
   end
 
+  IWMDRMReader2_GUID = LibC::GUID.new("befe7a75-9f1d-4075-b9d9-a3c37bda49a0")
+  CLSID_IWMDRMReader2 = "befe7a75-9f1d-4075-b9d9-a3c37bda49a0"
   struct IWMDRMReader2
     lpVtbl : IWMDRMReader2VTbl*
   end
@@ -2391,6 +2533,8 @@ lib LibWin32
     get_inclusion_list : Proc(IWMDRMReader3*, Guid**, UInt32*, HRESULT)
   end
 
+  IWMDRMReader3_GUID = LibC::GUID.new("e08672de-f1e7-4ff4-a0a3-fc4b08e4caf8")
+  CLSID_IWMDRMReader3 = "e08672de-f1e7-4ff4-a0a3-fc4b08e4caf8"
   struct IWMDRMReader3
     lpVtbl : IWMDRMReader3VTbl*
   end
@@ -2405,6 +2549,8 @@ lib LibWin32
     end_playlist_burn : Proc(IWMReaderPlaylistBurn*, HRESULT, HRESULT)
   end
 
+  IWMReaderPlaylistBurn_GUID = LibC::GUID.new("f28c0300-9baa-4477-a846-1744d9cbf533")
+  CLSID_IWMReaderPlaylistBurn = "f28c0300-9baa-4477-a846-1744d9cbf533"
   struct IWMReaderPlaylistBurn
     lpVtbl : IWMReaderPlaylistBurnVTbl*
   end
@@ -2448,6 +2594,8 @@ lib LibWin32
     reset_logging_url_list : Proc(IWMReaderNetworkConfig*, HRESULT)
   end
 
+  IWMReaderNetworkConfig_GUID = LibC::GUID.new("96406bec-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMReaderNetworkConfig = "96406bec-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMReaderNetworkConfig
     lpVtbl : IWMReaderNetworkConfigVTbl*
   end
@@ -2504,6 +2652,8 @@ lib LibWin32
     get_max_net_packet_size : Proc(IWMReaderNetworkConfig2*, UInt32*, HRESULT)
   end
 
+  IWMReaderNetworkConfig2_GUID = LibC::GUID.new("d979a853-042b-4050-8387-c939db22013f")
+  CLSID_IWMReaderNetworkConfig2 = "d979a853-042b-4050-8387-c939db22013f"
   struct IWMReaderNetworkConfig2
     lpVtbl : IWMReaderNetworkConfig2VTbl*
   end
@@ -2517,6 +2667,8 @@ lib LibWin32
     kill_timer : Proc(IWMReaderStreamClock*, UInt32, HRESULT)
   end
 
+  IWMReaderStreamClock_GUID = LibC::GUID.new("96406bed-2b2b-11d3-b36b-00c04f6108ff")
+  CLSID_IWMReaderStreamClock = "96406bed-2b2b-11d3-b36b-00c04f6108ff"
   struct IWMReaderStreamClock
     lpVtbl : IWMReaderStreamClockVTbl*
   end
@@ -2529,6 +2681,8 @@ lib LibWin32
     cancel : Proc(IWMIndexer*, HRESULT)
   end
 
+  IWMIndexer_GUID = LibC::GUID.new("6d7cdc71-9888-11d3-8edc-00c04f6109cf")
+  CLSID_IWMIndexer = "6d7cdc71-9888-11d3-8edc-00c04f6109cf"
   struct IWMIndexer
     lpVtbl : IWMIndexerVTbl*
   end
@@ -2542,6 +2696,8 @@ lib LibWin32
     configure : Proc(IWMIndexer2*, UInt16, WMT_INDEXER_TYPE, Void*, Void*, HRESULT)
   end
 
+  IWMIndexer2_GUID = LibC::GUID.new("b70f1e42-6255-4df0-a6b9-02b212d9e2bb")
+  CLSID_IWMIndexer2 = "b70f1e42-6255-4df0-a6b9-02b212d9e2bb"
   struct IWMIndexer2
     lpVtbl : IWMIndexer2VTbl*
   end
@@ -2554,6 +2710,8 @@ lib LibWin32
     cancel_license_backup : Proc(IWMLicenseBackup*, HRESULT)
   end
 
+  IWMLicenseBackup_GUID = LibC::GUID.new("05e5ac9f-3fb6-4508-bb43-a4067ba1ebe8")
+  CLSID_IWMLicenseBackup = "05e5ac9f-3fb6-4508-bb43-a4067ba1ebe8"
   struct IWMLicenseBackup
     lpVtbl : IWMLicenseBackupVTbl*
   end
@@ -2566,6 +2724,8 @@ lib LibWin32
     cancel_license_restore : Proc(IWMLicenseRestore*, HRESULT)
   end
 
+  IWMLicenseRestore_GUID = LibC::GUID.new("c70b6334-a22e-4efb-a245-15e65a004a13")
+  CLSID_IWMLicenseRestore = "c70b6334-a22e-4efb-a245-15e65a004a13"
   struct IWMLicenseRestore
     lpVtbl : IWMLicenseRestoreVTbl*
   end
@@ -2582,6 +2742,8 @@ lib LibWin32
     remove_all_props : Proc(IWMBackupRestoreProps*, HRESULT)
   end
 
+  IWMBackupRestoreProps_GUID = LibC::GUID.new("3c8e0da6-996f-4ff3-a1af-4838f9377e2e")
+  CLSID_IWMBackupRestoreProps = "3c8e0da6-996f-4ff3-a1af-4838f9377e2e"
   struct IWMBackupRestoreProps
     lpVtbl : IWMBackupRestorePropsVTbl*
   end
@@ -2595,6 +2757,8 @@ lib LibWin32
     get_codec_format : Proc(IWMCodecInfo*, Guid*, UInt32, UInt32, IWMStreamConfig*, HRESULT)
   end
 
+  IWMCodecInfo_GUID = LibC::GUID.new("a970f41e-34de-4a98-b3ba-e4b3ca7528f0")
+  CLSID_IWMCodecInfo = "a970f41e-34de-4a98-b3ba-e4b3ca7528f0"
   struct IWMCodecInfo
     lpVtbl : IWMCodecInfoVTbl*
   end
@@ -2610,6 +2774,8 @@ lib LibWin32
     get_codec_format_desc : Proc(IWMCodecInfo2*, Guid*, UInt32, UInt32, IWMStreamConfig*, Char*, UInt32*, HRESULT)
   end
 
+  IWMCodecInfo2_GUID = LibC::GUID.new("aa65e273-b686-4056-91ec-dd768d4df710")
+  CLSID_IWMCodecInfo2 = "aa65e273-b686-4056-91ec-dd768d4df710"
   struct IWMCodecInfo2
     lpVtbl : IWMCodecInfo2VTbl*
   end
@@ -2629,6 +2795,8 @@ lib LibWin32
     get_codec_enumeration_setting : Proc(IWMCodecInfo3*, Guid*, UInt32, LibC::LPWSTR, WMT_ATTR_DATATYPE*, UInt8*, UInt32*, HRESULT)
   end
 
+  IWMCodecInfo3_GUID = LibC::GUID.new("7e51f487-4d93-4f98-8ab4-27d0565adc51")
+  CLSID_IWMCodecInfo3 = "7e51f487-4d93-4f98-8ab4-27d0565adc51"
   struct IWMCodecInfo3
     lpVtbl : IWMCodecInfo3VTbl*
   end
@@ -2642,6 +2810,8 @@ lib LibWin32
     add_language_by_rfc1766_string : Proc(IWMLanguageList*, LibC::LPWSTR, UInt16*, HRESULT)
   end
 
+  IWMLanguageList_GUID = LibC::GUID.new("df683f00-2d49-4d8e-92b7-fb19f6a0dc57")
+  CLSID_IWMLanguageList = "df683f00-2d49-4d8e-92b7-fb19f6a0dc57"
   struct IWMLanguageList
     lpVtbl : IWMLanguageListVTbl*
   end
@@ -2660,6 +2830,8 @@ lib LibWin32
     end_session : Proc(IWMWriterPushSink*, HRESULT)
   end
 
+  IWMWriterPushSink_GUID = LibC::GUID.new("dc10e6a5-072c-467d-bf57-6330a9dde12a")
+  CLSID_IWMWriterPushSink = "dc10e6a5-072c-467d-bf57-6330a9dde12a"
   struct IWMWriterPushSink
     lpVtbl : IWMWriterPushSinkVTbl*
   end
@@ -2676,6 +2848,8 @@ lib LibWin32
     get_registered_device_by_id : Proc(IWMDeviceRegistration*, UInt32, UInt8*, UInt32, DRM_VAL16, IWMRegisteredDevice*, HRESULT)
   end
 
+  IWMDeviceRegistration_GUID = LibC::GUID.new("f6211f03-8d21-4e94-93e6-8510805f2d99")
+  CLSID_IWMDeviceRegistration = "f6211f03-8d21-4e94-93e6-8510805f2d99"
   struct IWMDeviceRegistration
     lpVtbl : IWMDeviceRegistrationVTbl*
   end
@@ -2700,6 +2874,8 @@ lib LibWin32
     close : Proc(IWMRegisteredDevice*, HRESULT)
   end
 
+  IWMRegisteredDevice_GUID = LibC::GUID.new("a4503bec-5508-4148-97ac-bfa75760a70d")
+  CLSID_IWMRegisteredDevice = "a4503bec-5508-4148-97ac-bfa75760a70d"
   struct IWMRegisteredDevice
     lpVtbl : IWMRegisteredDeviceVTbl*
   end
@@ -2711,6 +2887,8 @@ lib LibWin32
     start_detection : Proc(IWMProximityDetection*, UInt8*, UInt32, UInt8*, UInt32, UInt32, INSSBuffer*, IWMStatusCallback, Void*, HRESULT)
   end
 
+  IWMProximityDetection_GUID = LibC::GUID.new("6a9fd8ee-b651-4bf0-b849-7d4ece79a2b1")
+  CLSID_IWMProximityDetection = "6a9fd8ee-b651-4bf0-b849-7d4ece79a2b1"
   struct IWMProximityDetection
     lpVtbl : IWMProximityDetectionVTbl*
   end
@@ -2723,6 +2901,8 @@ lib LibWin32
     parse_license_request_msg : Proc(IWMDRMMessageParser*, UInt8*, UInt32, INSSBuffer*, DRM_VAL16*, UInt8**, HRESULT)
   end
 
+  IWMDRMMessageParser_GUID = LibC::GUID.new("a73a0072-25a0-4c99-b4a5-ede8101a6c39")
+  CLSID_IWMDRMMessageParser = "a73a0072-25a0-4c99-b4a5-ede8101a6c39"
   struct IWMDRMMessageParser
     lpVtbl : IWMDRMMessageParserVTbl*
   end
@@ -2737,6 +2917,8 @@ lib LibWin32
     close : Proc(IWMDRMTranscryptor*, HRESULT)
   end
 
+  IWMDRMTranscryptor_GUID = LibC::GUID.new("69059850-6e6f-4bb2-806f-71863ddfc471")
+  CLSID_IWMDRMTranscryptor = "69059850-6e6f-4bb2-806f-71863ddfc471"
   struct IWMDRMTranscryptor
     lpVtbl : IWMDRMTranscryptorVTbl*
   end
@@ -2755,6 +2937,8 @@ lib LibWin32
     get_duration : Proc(IWMDRMTranscryptor2*, UInt64*, HRESULT)
   end
 
+  IWMDRMTranscryptor2_GUID = LibC::GUID.new("e0da439f-d331-496a-bece-18e5bac5dd23")
+  CLSID_IWMDRMTranscryptor2 = "e0da439f-d331-496a-bece-18e5bac5dd23"
   struct IWMDRMTranscryptor2
     lpVtbl : IWMDRMTranscryptor2VTbl*
   end
@@ -2766,6 +2950,8 @@ lib LibWin32
     create_transcryptor : Proc(IWMDRMTranscryptionManager*, IWMDRMTranscryptor*, HRESULT)
   end
 
+  IWMDRMTranscryptionManager_GUID = LibC::GUID.new("b1a887b2-a4f0-407a-b02e-efbd23bbecdf")
+  CLSID_IWMDRMTranscryptionManager = "b1a887b2-a4f0-407a-b02e-efbd23bbecdf"
   struct IWMDRMTranscryptionManager
     lpVtbl : IWMDRMTranscryptionManagerVTbl*
   end
@@ -2778,6 +2964,8 @@ lib LibWin32
     get_watermark_entry : Proc(IWMWatermarkInfo*, WMT_WATERMARK_ENTRY_TYPE, UInt32, WMT_WATERMARK_ENTRY*, HRESULT)
   end
 
+  IWMWatermarkInfo_GUID = LibC::GUID.new("6f497062-f2e2-4624-8ea7-9dd40d81fc8d")
+  CLSID_IWMWatermarkInfo = "6f497062-f2e2-4624-8ea7-9dd40d81fc8d"
   struct IWMWatermarkInfo
     lpVtbl : IWMWatermarkInfoVTbl*
   end
@@ -2790,6 +2978,8 @@ lib LibWin32
     notify : Proc(IWMReaderAccelerator*, UInt32, WM_MEDIA_TYPE*, HRESULT)
   end
 
+  IWMReaderAccelerator_GUID = LibC::GUID.new("bddc4d08-944d-4d52-a612-46c3fda07dd4")
+  CLSID_IWMReaderAccelerator = "bddc4d08-944d-4d52-a612-46c3fda07dd4"
   struct IWMReaderAccelerator
     lpVtbl : IWMReaderAcceleratorVTbl*
   end
@@ -2802,6 +2992,8 @@ lib LibWin32
     get_timecode_range_bounds : Proc(IWMReaderTimecode*, UInt16, UInt16, UInt32*, UInt32*, HRESULT)
   end
 
+  IWMReaderTimecode_GUID = LibC::GUID.new("f369e2f0-e081-4fe6-8450-b810b2f410d1")
+  CLSID_IWMReaderTimecode = "f369e2f0-e081-4fe6-8450-b810b2f410d1"
   struct IWMReaderTimecode
     lpVtbl : IWMReaderTimecodeVTbl*
   end
@@ -2816,6 +3008,8 @@ lib LibWin32
     remove_access_entry : Proc(IWMAddressAccess*, WM_AETYPE, UInt32, HRESULT)
   end
 
+  IWMAddressAccess_GUID = LibC::GUID.new("bb3c6389-1633-4e92-af14-9f3173ba39d0")
+  CLSID_IWMAddressAccess = "bb3c6389-1633-4e92-af14-9f3173ba39d0"
   struct IWMAddressAccess
     lpVtbl : IWMAddressAccessVTbl*
   end
@@ -2832,6 +3026,8 @@ lib LibWin32
     add_access_entry_ex : Proc(IWMAddressAccess2*, WM_AETYPE, UInt8*, UInt8*, HRESULT)
   end
 
+  IWMAddressAccess2_GUID = LibC::GUID.new("65a83fc2-3e98-4d4d-81b5-2a742886b33d")
+  CLSID_IWMAddressAccess2 = "65a83fc2-3e98-4d4d-81b5-2a742886b33d"
   struct IWMAddressAccess2
     lpVtbl : IWMAddressAccess2VTbl*
   end
@@ -2844,6 +3040,8 @@ lib LibWin32
     get_image : Proc(IWMImageInfo*, UInt32, UInt16*, Char*, UInt16*, Char*, UInt16*, UInt32*, UInt8*, HRESULT)
   end
 
+  IWMImageInfo_GUID = LibC::GUID.new("9f0aa3b6-7267-4d89-88f2-ba915aa5c4c6")
+  CLSID_IWMImageInfo = "9f0aa3b6-7267-4d89-88f2-ba915aa5c4c6"
   struct IWMImageInfo
     lpVtbl : IWMImageInfoVTbl*
   end
@@ -2856,6 +3054,8 @@ lib LibWin32
     process_lrb : Proc(IWMLicenseRevocationAgent*, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
+  IWMLicenseRevocationAgent_GUID = LibC::GUID.new("6967f2c9-4e26-4b57-8894-799880f7ac7b")
+  CLSID_IWMLicenseRevocationAgent = "6967f2c9-4e26-4b57-8894-799880f7ac7b"
   struct IWMLicenseRevocationAgent
     lpVtbl : IWMLicenseRevocationAgentVTbl*
   end
@@ -2869,6 +3069,8 @@ lib LibWin32
     get_shared_data : Proc(IWMAuthorizer*, UInt32, UInt8*, UInt8*, UInt8**, HRESULT)
   end
 
+  IWMAuthorizer_GUID = LibC::GUID.new("d9b67d36-a9ad-4eb4-baef-db284ef5504c")
+  CLSID_IWMAuthorizer = "d9b67d36-a9ad-4eb4-baef-db284ef5504c"
   struct IWMAuthorizer
     lpVtbl : IWMAuthorizerVTbl*
   end
@@ -2893,6 +3095,8 @@ lib LibWin32
     wmsc_set_shared_data : Proc(IWMSecureChannel*, UInt32, UInt8*, HRESULT)
   end
 
+  IWMSecureChannel_GUID = LibC::GUID.new("2720598a-d0f2-4189-bd10-91c46ef0936f")
+  CLSID_IWMSecureChannel = "2720598a-d0f2-4189-bd10-91c46ef0936f"
   struct IWMSecureChannel
     lpVtbl : IWMSecureChannelVTbl*
   end
@@ -2904,6 +3108,8 @@ lib LibWin32
     get_peer_secure_channel_interface : Proc(IWMGetSecureChannel*, IWMSecureChannel*, HRESULT)
   end
 
+  IWMGetSecureChannel_GUID = LibC::GUID.new("94bc0598-c3d2-11d3-bedf-00c04f612986")
+  CLSID_IWMGetSecureChannel = "94bc0598-c3d2-11d3-bedf-00c04f612986"
   struct IWMGetSecureChannel
     lpVtbl : IWMGetSecureChannelVTbl*
   end
@@ -2922,6 +3128,8 @@ lib LibWin32
     shutdown : Proc(INSNetSourceCreator*, HRESULT)
   end
 
+  INSNetSourceCreator_GUID = LibC::GUID.new("0c0e4080-9081-11d2-beec-0060082f2054")
+  CLSID_INSNetSourceCreator = "0c0e4080-9081-11d2-beec-0060082f2054"
   struct INSNetSourceCreator
     lpVtbl : INSNetSourceCreatorVTbl*
   end
@@ -2933,6 +3141,8 @@ lib LibWin32
     map_timestamp : Proc(IWMPlayerTimestampHook*, Int64, Int64*, HRESULT)
   end
 
+  IWMPlayerTimestampHook_GUID = LibC::GUID.new("28580dda-d98e-48d0-b7ae-69e473a02825")
+  CLSID_IWMPlayerTimestampHook = "28580dda-d98e-48d0-b7ae-69e473a02825"
   struct IWMPlayerTimestampHook
     lpVtbl : IWMPlayerTimestampHookVTbl*
   end
@@ -2946,6 +3156,8 @@ lib LibWin32
     set_player_notify : Proc(IWMCodecAMVideoAccelerator*, IWMPlayerTimestampHook, HRESULT)
   end
 
+  IWMCodecAMVideoAccelerator_GUID = LibC::GUID.new("d98ee251-34e0-4a2d-9312-9b4c788d9fa1")
+  CLSID_IWMCodecAMVideoAccelerator = "d98ee251-34e0-4a2d-9312-9b4c788d9fa1"
   struct IWMCodecAMVideoAccelerator
     lpVtbl : IWMCodecAMVideoAcceleratorVTbl*
   end
@@ -2958,6 +3170,8 @@ lib LibWin32
     set_player_notify : Proc(IWMCodecVideoAccelerator*, IWMPlayerTimestampHook, HRESULT)
   end
 
+  IWMCodecVideoAccelerator_GUID = LibC::GUID.new("990641b0-739f-4e94-a808-9888da8f75af")
+  CLSID_IWMCodecVideoAccelerator = "990641b0-739f-4e94-a808-9888da8f75af"
   struct IWMCodecVideoAccelerator
     lpVtbl : IWMCodecVideoAcceleratorVTbl*
   end
@@ -2979,6 +3193,8 @@ lib LibWin32
     is_using_ie : Proc(IWMSInternalAdminNetSource*, UInt32, LibC::BOOL*, HRESULT)
   end
 
+  IWMSInternalAdminNetSource_GUID = LibC::GUID.new("8bb23e5f-d127-4afb-8d02-ae5b66d54c78")
+  CLSID_IWMSInternalAdminNetSource = "8bb23e5f-d127-4afb-8d02-ae5b66d54c78"
   struct IWMSInternalAdminNetSource
     lpVtbl : IWMSInternalAdminNetSourceVTbl*
   end
@@ -2993,6 +3209,8 @@ lib LibWin32
     find_proxy_for_url_ex : Proc(IWMSInternalAdminNetSource2*, UInt8*, UInt8*, UInt8*, LibC::BOOL*, UInt8**, UInt32*, UInt32*, HRESULT)
   end
 
+  IWMSInternalAdminNetSource2_GUID = LibC::GUID.new("e74d58c3-cf77-4b51-af17-744687c43eae")
+  CLSID_IWMSInternalAdminNetSource2 = "e74d58c3-cf77-4b51-af17-744687c43eae"
   struct IWMSInternalAdminNetSource2
     lpVtbl : IWMSInternalAdminNetSource2VTbl*
   end
@@ -3014,6 +3232,8 @@ lib LibWin32
     get_credentials_ex2 : Proc(IWMSInternalAdminNetSource3*, UInt8*, UInt8*, LibC::BOOL, LibC::BOOL, NETSOURCE_URLCREDPOLICY_SETTINGS*, UInt8**, UInt8**, LibC::BOOL*, HRESULT)
   end
 
+  IWMSInternalAdminNetSource3_GUID = LibC::GUID.new("6b63d08e-4590-44af-9eb3-57ff1e73bf80")
+  CLSID_IWMSInternalAdminNetSource3 = "6b63d08e-4590-44af-9eb3-57ff1e73bf80"
   struct IWMSInternalAdminNetSource3
     lpVtbl : IWMSInternalAdminNetSource3VTbl*
   end

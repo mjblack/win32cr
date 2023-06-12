@@ -412,6 +412,8 @@ lib LibWin32
     clone : Proc(IEnumSTATSTG*, IEnumSTATSTG*, HRESULT)
   end
 
+  IEnumSTATSTG_GUID = LibC::GUID.new("0000000d-0000-0000-c000-000000000046")
+  CLSID_IEnumSTATSTG = "0000000d-0000-0000-c000-000000000046"
   struct IEnumSTATSTG
     lpVtbl : IEnumSTATSTGVTbl*
   end
@@ -437,6 +439,8 @@ lib LibWin32
     stat : Proc(IStorage*, STATSTG*, UInt32, HRESULT)
   end
 
+  IStorage_GUID = LibC::GUID.new("0000000b-0000-0000-c000-000000000046")
+  CLSID_IStorage = "0000000b-0000-0000-c000-000000000046"
   struct IStorage
     lpVtbl : IStorageVTbl*
   end
@@ -454,6 +458,8 @@ lib LibWin32
     hands_off_storage : Proc(IPersistStorage*, HRESULT)
   end
 
+  IPersistStorage_GUID = LibC::GUID.new("0000010a-0000-0000-c000-000000000046")
+  CLSID_IPersistStorage = "0000010a-0000-0000-c000-000000000046"
   struct IPersistStorage
     lpVtbl : IPersistStorageVTbl*
   end
@@ -471,6 +477,8 @@ lib LibWin32
     stat : Proc(ILockBytes*, STATSTG*, UInt32, HRESULT)
   end
 
+  ILockBytes_GUID = LibC::GUID.new("0000000a-0000-0000-c000-000000000046")
+  CLSID_ILockBytes = "0000000a-0000-0000-c000-000000000046"
   struct ILockBytes
     lpVtbl : ILockBytesVTbl*
   end
@@ -482,6 +490,8 @@ lib LibWin32
     switch_to_file : Proc(IRootStorage*, LibC::LPWSTR, HRESULT)
   end
 
+  IRootStorage_GUID = LibC::GUID.new("00000012-0000-0000-c000-000000000046")
+  CLSID_IRootStorage = "00000012-0000-0000-c000-000000000046"
   struct IRootStorage
     lpVtbl : IRootStorageVTbl*
   end
@@ -496,6 +506,8 @@ lib LibWin32
     terminate : Proc(IFillLockBytes*, LibC::BOOL, HRESULT)
   end
 
+  IFillLockBytes_GUID = LibC::GUID.new("99caf010-415e-11cf-8814-00aa00b569f5")
+  CLSID_IFillLockBytes = "99caf010-415e-11cf-8814-00aa00b569f5"
   struct IFillLockBytes
     lpVtbl : IFillLockBytesVTbl*
   end
@@ -511,6 +523,8 @@ lib LibWin32
     re_layout_docfile_on_i_lock_bytes : Proc(ILayoutStorage*, ILockBytes, HRESULT)
   end
 
+  ILayoutStorage_GUID = LibC::GUID.new("0e6d4d90-6738-11cf-9608-00aa00680db4")
+  CLSID_ILayoutStorage = "0e6d4d90-6738-11cf-9608-00aa00680db4"
   struct ILayoutStorage
     lpVtbl : ILayoutStorageVTbl*
   end
@@ -524,6 +538,8 @@ lib LibWin32
     have_write_access : Proc(IDirectWriterLock*, HRESULT)
   end
 
+  IDirectWriterLock_GUID = LibC::GUID.new("0e6d4d92-6738-11cf-9608-00aa00680db4")
+  CLSID_IDirectWriterLock = "0e6d4d92-6738-11cf-9608-00aa00680db4"
   struct IDirectWriterLock
     lpVtbl : IDirectWriterLockVTbl*
   end
@@ -546,6 +562,8 @@ lib LibWin32
     stat : Proc(IPropertyStorage*, STATPROPSETSTG*, HRESULT)
   end
 
+  IPropertyStorage_GUID = LibC::GUID.new("00000138-0000-0000-c000-000000000046")
+  CLSID_IPropertyStorage = "00000138-0000-0000-c000-000000000046"
   struct IPropertyStorage
     lpVtbl : IPropertyStorageVTbl*
   end
@@ -560,6 +578,8 @@ lib LibWin32
     enum : Proc(IPropertySetStorage*, IEnumSTATPROPSETSTG*, HRESULT)
   end
 
+  IPropertySetStorage_GUID = LibC::GUID.new("0000013a-0000-0000-c000-000000000046")
+  CLSID_IPropertySetStorage = "0000013a-0000-0000-c000-000000000046"
   struct IPropertySetStorage
     lpVtbl : IPropertySetStorageVTbl*
   end
@@ -574,6 +594,8 @@ lib LibWin32
     clone : Proc(IEnumSTATPROPSTG*, IEnumSTATPROPSTG*, HRESULT)
   end
 
+  IEnumSTATPROPSTG_GUID = LibC::GUID.new("00000139-0000-0000-c000-000000000046")
+  CLSID_IEnumSTATPROPSTG = "00000139-0000-0000-c000-000000000046"
   struct IEnumSTATPROPSTG
     lpVtbl : IEnumSTATPROPSTGVTbl*
   end
@@ -588,6 +610,8 @@ lib LibWin32
     clone : Proc(IEnumSTATPROPSETSTG*, IEnumSTATPROPSETSTG*, HRESULT)
   end
 
+  IEnumSTATPROPSETSTG_GUID = LibC::GUID.new("0000013b-0000-0000-c000-000000000046")
+  CLSID_IEnumSTATPROPSETSTG = "0000013b-0000-0000-c000-000000000046"
   struct IEnumSTATPROPSETSTG
     lpVtbl : IEnumSTATPROPSETSTGVTbl*
   end
@@ -600,6 +624,8 @@ lib LibWin32
     write : Proc(IPropertyBag*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  IPropertyBag_GUID = LibC::GUID.new("55272a00-42cb-11ce-8135-00aa004bb851")
+  CLSID_IPropertyBag = "55272a00-42cb-11ce-8135-00aa004bb851"
   struct IPropertyBag
     lpVtbl : IPropertyBagVTbl*
   end
@@ -615,6 +641,8 @@ lib LibWin32
     load_object : Proc(IPropertyBag2*, LibC::LPWSTR, UInt32, IUnknown, IErrorLog, HRESULT)
   end
 
+  IPropertyBag2_GUID = LibC::GUID.new("22f55882-280b-11d0-a8a9-00a0c90c2004")
+  CLSID_IPropertyBag2 = "22f55882-280b-11d0-a8a9-00a0c90c2004"
   struct IPropertyBag2
     lpVtbl : IPropertyBag2VTbl*
   end

@@ -291,6 +291,8 @@ lib LibWin32
     close : Proc(ID2D1SimplifiedGeometrySink*, HRESULT)
   end
 
+  ID2D1SimplifiedGeometrySink_GUID = LibC::GUID.new("2cd9069e-12e2-11dc-9fed-001143a055f9")
+  CLSID_ID2D1SimplifiedGeometrySink = "2cd9069e-12e2-11dc-9fed-001143a055f9"
   struct ID2D1SimplifiedGeometrySink
     lpVtbl : ID2D1SimplifiedGeometrySinkVTbl*
   end

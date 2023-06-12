@@ -1311,6 +1311,8 @@ lib LibWin32
     on_closed : Proc(ICameraUIControlEventCallback*, Void)
   end
 
+  ICameraUIControlEventCallback_GUID = LibC::GUID.new("1bfa0c2c-fbcd-4776-bda4-88bf974e74f4")
+  CLSID_ICameraUIControlEventCallback = "1bfa0c2c-fbcd-4776-bda4-88bf974e74f4"
   struct ICameraUIControlEventCallback
     lpVtbl : ICameraUIControlEventCallbackVTbl*
   end
@@ -1329,6 +1331,8 @@ lib LibWin32
     remove_captured_item : Proc(ICameraUIControl*, LibC::LPWSTR, HRESULT)
   end
 
+  ICameraUIControl_GUID = LibC::GUID.new("b8733adf-3d68-4b8f-bb08-e28a0bed0376")
+  CLSID_ICameraUIControl = "b8733adf-3d68-4b8f-bb08-e28a0bed0376"
   struct ICameraUIControl
     lpVtbl : ICameraUIControlVTbl*
   end
@@ -1344,6 +1348,8 @@ lib LibWin32
     get_genuine_local_status : Proc(IEditionUpgradeHelper*, LibC::BOOL*, HRESULT)
   end
 
+  IEditionUpgradeHelper_GUID = LibC::GUID.new("d3e9e342-5deb-43b6-849e-6913b85d503a")
+  CLSID_IEditionUpgradeHelper = "d3e9e342-5deb-43b6-849e-6913b85d503a"
   struct IEditionUpgradeHelper
     lpVtbl : IEditionUpgradeHelperVTbl*
   end
@@ -1355,6 +1361,8 @@ lib LibWin32
     get_s_mode : Proc(IWindowsLockModeHelper*, LibC::BOOL*, HRESULT)
   end
 
+  IWindowsLockModeHelper_GUID = LibC::GUID.new("f342d19e-cc22-4648-bb5d-03ccf75b47c5")
+  CLSID_IWindowsLockModeHelper = "f342d19e-cc22-4648-bb5d-03ccf75b47c5"
   struct IWindowsLockModeHelper
     lpVtbl : IWindowsLockModeHelperVTbl*
   end
@@ -1369,6 +1377,8 @@ lib LibWin32
     can_upgrade : Proc(IEditionUpgradeBroker*, HRESULT)
   end
 
+  IEditionUpgradeBroker_GUID = LibC::GUID.new("ff19cbcf-9455-4937-b872-6b7929a460af")
+  CLSID_IEditionUpgradeBroker = "ff19cbcf-9455-4937-b872-6b7929a460af"
   struct IEditionUpgradeBroker
     lpVtbl : IEditionUpgradeBrokerVTbl*
   end
@@ -1380,6 +1390,8 @@ lib LibWin32
     can_activate_client_vm : Proc(IContainerActivationHelper*, Int16*, HRESULT)
   end
 
+  IContainerActivationHelper_GUID = LibC::GUID.new("b524f93f-80d5-4ec7-ae9e-d66e93ade1fa")
+  CLSID_IContainerActivationHelper = "b524f93f-80d5-4ec7-ae9e-d66e93ade1fa"
   struct IContainerActivationHelper
     lpVtbl : IContainerActivationHelperVTbl*
   end
@@ -1391,6 +1403,8 @@ lib LibWin32
     show_toast : Proc(IClipServiceNotificationHelper*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
+  IClipServiceNotificationHelper_GUID = LibC::GUID.new("c39948f0-6142-44fd-98ca-e1681a8d68b5")
+  CLSID_IClipServiceNotificationHelper = "c39948f0-6142-44fd-98ca-e1681a8d68b5"
   struct IClipServiceNotificationHelper
     lpVtbl : IClipServiceNotificationHelperVTbl*
   end
@@ -1402,6 +1416,8 @@ lib LibWin32
     is_enabled : Proc(IDefaultBrowserSyncSettings*, LibC::BOOL)
   end
 
+  IDefaultBrowserSyncSettings_GUID = LibC::GUID.new("7a27faad-5ae6-4255-9030-c530936292e3")
+  CLSID_IDefaultBrowserSyncSettings = "7a27faad-5ae6-4255-9030-c530936292e3"
   struct IDefaultBrowserSyncSettings
     lpVtbl : IDefaultBrowserSyncSettingsVTbl*
   end
@@ -1413,6 +1429,8 @@ lib LibWin32
     delete_browsing_history : Proc(IDeleteBrowsingHistory*, UInt32, HRESULT)
   end
 
+  IDeleteBrowsingHistory_GUID = LibC::GUID.new("cf38ed4b-2be7-4461-8b5e-9a466dc82ae3")
+  CLSID_IDeleteBrowsingHistory = "cf38ed4b-2be7-4461-8b5e-9a466dc82ae3"
   struct IDeleteBrowsingHistory
     lpVtbl : IDeleteBrowsingHistoryVTbl*
   end

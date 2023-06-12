@@ -533,6 +533,8 @@ lib LibWin32
     properties_changed : Proc(ISnapinProperties*, Int32, MMC_SNAPIN_PROPERTY*, HRESULT)
   end
 
+  ISnapinProperties_GUID = LibC::GUID.new("f7889da9-4a02-4837-bf89-1a6f2a021010")
+  CLSID_ISnapinProperties = "f7889da9-4a02-4837-bf89-1a6f2a021010"
   struct ISnapinProperties
     lpVtbl : ISnapinPropertiesVTbl*
   end
@@ -544,6 +546,8 @@ lib LibWin32
     add_property_name : Proc(ISnapinPropertiesCallback*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  ISnapinPropertiesCallback_GUID = LibC::GUID.new("a50fa2e5-7e61-45eb-a8d4-9a07b3e851a8")
+  CLSID_ISnapinPropertiesCallback = "a50fa2e5-7e61-45eb-a8d4-9a07b3e851a8"
   struct ISnapinPropertiesCallback
     lpVtbl : ISnapinPropertiesCallbackVTbl*
   end
@@ -570,6 +574,8 @@ lib LibWin32
     get_version_minor : Proc(IApplication*, Int32*, HRESULT)
   end
 
+  IApplication_GUID = LibC::GUID.new("a3afb9cc-b653-4741-86ab-f0470ec1384c")
+  CLSID_IApplication = "a3afb9cc-b653-4741-86ab-f0470ec1384c"
   struct IApplication
     lpVtbl : IApplicationVTbl*
   end
@@ -596,6 +602,8 @@ lib LibWin32
     on_list_updated : Proc(IAppEvents*, View, HRESULT)
   end
 
+  IAppEvents_GUID = LibC::GUID.new("de46cbdd-53f5-4635-af54-4fe71e923d3f")
+  CLSID_IAppEvents = "de46cbdd-53f5-4635-af54-4fe71e923d3f"
   struct IAppEvents
     lpVtbl : IAppEventsVTbl*
   end
@@ -610,6 +618,8 @@ lib LibWin32
     invoke : Proc(AppEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  AppEvents_GUID = LibC::GUID.new("fc7a4252-78ac-4532-8c5a-563cfe138863")
+  CLSID_AppEvents = "fc7a4252-78ac-4532-8c5a-563cfe138863"
   struct AppEvents
     lpVtbl : AppEventsVTbl*
   end
@@ -626,6 +636,8 @@ lib LibWin32
     disconnect : Proc(IEventConnector*, HRESULT)
   end
 
+  IEventConnector_GUID = LibC::GUID.new("c0bccd30-de44-4528-8403-a05a6a1cc8ea")
+  CLSID_IEventConnector = "c0bccd30-de44-4528-8403-a05a6a1cc8ea"
   struct IEventConnector
     lpVtbl : IEventConnectorVTbl*
   end
@@ -651,6 +663,8 @@ lib LibWin32
     put_right : Proc(Frame*, Int32, HRESULT)
   end
 
+  Frame_GUID = LibC::GUID.new("e5e2d970-5bb3-4306-8804-b0968a31c8e6")
+  CLSID_Frame = "e5e2d970-5bb3-4306-8804-b0968a31c8e6"
   struct Frame
     lpVtbl : FrameVTbl*
   end
@@ -670,6 +684,8 @@ lib LibWin32
     get_nodetype : Proc(Node*, UInt16**, HRESULT)
   end
 
+  Node_GUID = LibC::GUID.new("f81ed800-7839-4447-945d-8e15da59ca55")
+  CLSID_Node = "f81ed800-7839-4447-945d-8e15da59ca55"
   struct Node
     lpVtbl : NodeVTbl*
   end
@@ -689,6 +705,8 @@ lib LibWin32
     expand : Proc(ScopeNamespace*, Node, HRESULT)
   end
 
+  ScopeNamespace_GUID = LibC::GUID.new("ebbb48dc-1a3b-4d86-b786-c21b28389012")
+  CLSID_ScopeNamespace = "ebbb48dc-1a3b-4d86-b786-c21b28389012"
   struct ScopeNamespace
     lpVtbl : ScopeNamespaceVTbl*
   end
@@ -719,6 +737,8 @@ lib LibWin32
     get_application : Proc(Document*, Application*, HRESULT)
   end
 
+  Document_GUID = LibC::GUID.new("225120d6-1e0f-40a3-93fe-1079e6a8017b")
+  CLSID_Document = "225120d6-1e0f-40a3-93fe-1079e6a8017b"
   struct Document
     lpVtbl : DocumentVTbl*
   end
@@ -740,6 +760,8 @@ lib LibWin32
     enable_all_extensions : Proc(SnapIn*, LibC::BOOL, HRESULT)
   end
 
+  SnapIn_GUID = LibC::GUID.new("3be910f6-3459-49c6-a1bb-41e6be9df3ea")
+  CLSID_SnapIn = "3be910f6-3459-49c6-a1bb-41e6be9df3ea"
   struct SnapIn
     lpVtbl : SnapInVTbl*
   end
@@ -759,6 +781,8 @@ lib LibWin32
     remove : Proc(SnapIns*, SnapIn, HRESULT)
   end
 
+  SnapIns_GUID = LibC::GUID.new("2ef3de1d-b12a-49d1-92c5-0b00798768f1")
+  CLSID_SnapIns = "2ef3de1d-b12a-49d1-92c5-0b00798768f1"
   struct SnapIns
     lpVtbl : SnapInsVTbl*
   end
@@ -780,6 +804,8 @@ lib LibWin32
     enable : Proc(Extension*, LibC::BOOL, HRESULT)
   end
 
+  Extension_GUID = LibC::GUID.new("ad4d6ca6-912f-409b-a26e-7fd234aef542")
+  CLSID_Extension = "ad4d6ca6-912f-409b-a26e-7fd234aef542"
   struct Extension
     lpVtbl : ExtensionVTbl*
   end
@@ -797,6 +823,8 @@ lib LibWin32
     get_count : Proc(Extensions*, Int32*, HRESULT)
   end
 
+  Extensions_GUID = LibC::GUID.new("82dbea43-8ca4-44bc-a2ca-d18741059ec8")
+  CLSID_Extensions = "82dbea43-8ca4-44bc-a2ca-d18741059ec8"
   struct Extensions
     lpVtbl : ExtensionsVTbl*
   end
@@ -814,6 +842,8 @@ lib LibWin32
     get__new_enum : Proc(Columns*, IUnknown*, HRESULT)
   end
 
+  Columns_GUID = LibC::GUID.new("383d4d97-fc44-478b-b139-6323dc48611c")
+  CLSID_Columns = "383d4d97-fc44-478b-b139-6323dc48611c"
   struct Columns
     lpVtbl : ColumnsVTbl*
   end
@@ -837,6 +867,8 @@ lib LibWin32
     is_sort_column : Proc(Column*, LibC::BOOL*, HRESULT)
   end
 
+  Column_GUID = LibC::GUID.new("fd1c5f63-2b16-4d06-9ab3-f45350b940ab")
+  CLSID_Column = "fd1c5f63-2b16-4d06-9ab3-f45350b940ab"
   struct Column
     lpVtbl : ColumnVTbl*
   end
@@ -855,6 +887,8 @@ lib LibWin32
     get__new_enum : Proc(Views*, IUnknown*, HRESULT)
   end
 
+  Views_GUID = LibC::GUID.new("d6b8c29d-a1ff-4d72-aab0-e381e9b9338d")
+  CLSID_Views = "d6b8c29d-a1ff-4d72-aab0-e381e9b9338d"
   struct Views
     lpVtbl : ViewsVTbl*
   end
@@ -911,6 +945,8 @@ lib LibWin32
     get_control_object : Proc(View*, IDispatch*, HRESULT)
   end
 
+  View_GUID = LibC::GUID.new("6efc2da2-b38c-457e-9abb-ed2d189b8c38")
+  CLSID_View = "6efc2da2-b38c-457e-9abb-ed2d189b8c38"
   struct View
     lpVtbl : ViewVTbl*
   end
@@ -928,6 +964,8 @@ lib LibWin32
     get_count : Proc(Nodes*, Int32*, HRESULT)
   end
 
+  Nodes_GUID = LibC::GUID.new("313b01df-b22f-4d42-b1b8-483cdcf51d35")
+  CLSID_Nodes = "313b01df-b22f-4d42-b1b8-483cdcf51d35"
   struct Nodes
     lpVtbl : NodesVTbl*
   end
@@ -945,6 +983,8 @@ lib LibWin32
     get_count : Proc(ContextMenu*, Int32*, HRESULT)
   end
 
+  ContextMenu_GUID = LibC::GUID.new("dab39ce0-25e6-4e07-8362-ba9c95706545")
+  CLSID_ContextMenu = "dab39ce0-25e6-4e07-8362-ba9c95706545"
   struct ContextMenu
     lpVtbl : ContextMenuVTbl*
   end
@@ -965,6 +1005,8 @@ lib LibWin32
     get_enabled : Proc(MenuItem*, LibC::BOOL*, HRESULT)
   end
 
+  MenuItem_GUID = LibC::GUID.new("0178fad1-b361-4b27-96ad-67c57ebf2e1d")
+  CLSID_MenuItem = "0178fad1-b361-4b27-96ad-67c57ebf2e1d"
   struct MenuItem
     lpVtbl : MenuItemVTbl*
   end
@@ -983,6 +1025,8 @@ lib LibWin32
     remove : Proc(Properties*, UInt8*, HRESULT)
   end
 
+  Properties_GUID = LibC::GUID.new("2886abc2-a425-42b2-91c6-e25c0e04581c")
+  CLSID_Properties = "2886abc2-a425-42b2-91c6-e25c0e04581c"
   struct Properties
     lpVtbl : PropertiesVTbl*
   end
@@ -1000,6 +1044,8 @@ lib LibWin32
     get_name : Proc(Property*, UInt16**, HRESULT)
   end
 
+  Property_GUID = LibC::GUID.new("4600c3a5-e301-41d8-b6d0-ef2e4212e0ca")
+  CLSID_Property = "4600c3a5-e301-41d8-b6d0-ef2e4212e0ca"
   struct Property
     lpVtbl : PropertyVTbl*
   end
@@ -1017,6 +1063,8 @@ lib LibWin32
     compare_objects : Proc(IComponentData*, IDataObject, IDataObject, HRESULT)
   end
 
+  IComponentData_GUID = LibC::GUID.new("955ab28a-5218-11d0-a985-00c04fd8d565")
+  CLSID_IComponentData = "955ab28a-5218-11d0-a985-00c04fd8d565"
   struct IComponentData
     lpVtbl : IComponentDataVTbl*
   end
@@ -1034,6 +1082,8 @@ lib LibWin32
     compare_objects : Proc(IComponent*, IDataObject, IDataObject, HRESULT)
   end
 
+  IComponent_GUID = LibC::GUID.new("43136eb2-d36c-11cf-adbc-00aa00a80033")
+  CLSID_IComponent = "43136eb2-d36c-11cf-adbc-00aa00a80033"
   struct IComponent
     lpVtbl : IComponentVTbl*
   end
@@ -1045,6 +1095,8 @@ lib LibWin32
     compare : Proc(IResultDataCompare*, LPARAM, LibC::IntPtrT, LibC::IntPtrT, Int32*, HRESULT)
   end
 
+  IResultDataCompare_GUID = LibC::GUID.new("e8315a52-7a1a-11d0-a2d2-00c04fd909dd")
+  CLSID_IResultDataCompare = "e8315a52-7a1a-11d0-a2d2-00c04fd909dd"
   struct IResultDataCompare
     lpVtbl : IResultDataCompareVTbl*
   end
@@ -1058,6 +1110,8 @@ lib LibWin32
     sort_items : Proc(IResultOwnerData*, Int32, UInt32, LPARAM, HRESULT)
   end
 
+  IResultOwnerData_GUID = LibC::GUID.new("9cb396d8-ea83-11d0-aef1-00c04fb6dd2c")
+  CLSID_IResultOwnerData = "9cb396d8-ea83-11d0-aef1-00c04fb6dd2c"
   struct IResultOwnerData
     lpVtbl : IResultOwnerDataVTbl*
   end
@@ -1079,6 +1133,8 @@ lib LibWin32
     new_window : Proc(IConsole*, LibC::IntPtrT, UInt32, HRESULT)
   end
 
+  IConsole_GUID = LibC::GUID.new("43136eb1-d36c-11cf-adbc-00aa00a80033")
+  CLSID_IConsole = "43136eb1-d36c-11cf-adbc-00aa00a80033"
   struct IConsole
     lpVtbl : IConsoleVTbl*
   end
@@ -1095,6 +1151,8 @@ lib LibWin32
     get_column_width : Proc(IHeaderCtrl*, Int32, Int32*, HRESULT)
   end
 
+  IHeaderCtrl_GUID = LibC::GUID.new("43136eb3-d36c-11cf-adbc-00aa00a80033")
+  CLSID_IHeaderCtrl = "43136eb3-d36c-11cf-adbc-00aa00a80033"
   struct IHeaderCtrl
     lpVtbl : IHeaderCtrlVTbl*
   end
@@ -1106,6 +1164,8 @@ lib LibWin32
     add_item : Proc(IContextMenuCallback*, CONTEXTMENUITEM*, HRESULT)
   end
 
+  IContextMenuCallback_GUID = LibC::GUID.new("43136eb7-d36c-11cf-adbc-00aa00a80033")
+  CLSID_IContextMenuCallback = "43136eb7-d36c-11cf-adbc-00aa00a80033"
   struct IContextMenuCallback
     lpVtbl : IContextMenuCallbackVTbl*
   end
@@ -1121,6 +1181,8 @@ lib LibWin32
     show_context_menu : Proc(IContextMenuProvider*, LibC::HANDLE, Int32, Int32, Int32*, HRESULT)
   end
 
+  IContextMenuProvider_GUID = LibC::GUID.new("43136eb6-d36c-11cf-adbc-00aa00a80033")
+  CLSID_IContextMenuProvider = "43136eb6-d36c-11cf-adbc-00aa00a80033"
   struct IContextMenuProvider
     lpVtbl : IContextMenuProviderVTbl*
   end
@@ -1133,6 +1195,8 @@ lib LibWin32
     command : Proc(IExtendContextMenu*, Int32, IDataObject, HRESULT)
   end
 
+  IExtendContextMenu_GUID = LibC::GUID.new("4f3b7a4f-cfac-11cf-b8e3-00c04fd8d5b0")
+  CLSID_IExtendContextMenu = "4f3b7a4f-cfac-11cf-b8e3-00c04fd8d5b0"
   struct IExtendContextMenu
     lpVtbl : IExtendContextMenuVTbl*
   end
@@ -1145,6 +1209,8 @@ lib LibWin32
     image_list_set_strip : Proc(IImageList*, LibC::IntPtrT*, LibC::IntPtrT*, Int32, UInt32, HRESULT)
   end
 
+  IImageList_GUID = LibC::GUID.new("43136eb8-d36c-11cf-adbc-00aa00a80033")
+  CLSID_IImageList = "43136eb8-d36c-11cf-adbc-00aa00a80033"
   struct IImageList
     lpVtbl : IImageListVTbl*
   end
@@ -1170,6 +1236,8 @@ lib LibWin32
     set_item_count : Proc(IResultData*, Int32, UInt32, HRESULT)
   end
 
+  IResultData_GUID = LibC::GUID.new("31da5fa0-e0eb-11cf-9f21-00aa003ca9f6")
+  CLSID_IResultData = "31da5fa0-e0eb-11cf-9f21-00aa003ca9f6"
   struct IResultData
     lpVtbl : IResultDataVTbl*
   end
@@ -1187,6 +1255,8 @@ lib LibWin32
     get_parent_item : Proc(IConsoleNameSpace*, LibC::IntPtrT, LibC::IntPtrT*, LibC::IntPtrT*, HRESULT)
   end
 
+  IConsoleNameSpace_GUID = LibC::GUID.new("bedeb620-f24d-11cf-8afc-00aa003ca9f6")
+  CLSID_IConsoleNameSpace = "bedeb620-f24d-11cf-8afc-00aa003ca9f6"
   struct IConsoleNameSpace
     lpVtbl : IConsoleNameSpaceVTbl*
   end
@@ -1206,6 +1276,8 @@ lib LibWin32
     add_extension : Proc(IConsoleNameSpace2*, LibC::IntPtrT, Guid*, HRESULT)
   end
 
+  IConsoleNameSpace2_GUID = LibC::GUID.new("255f18cc-65db-11d1-a7dc-00c04fd8d565")
+  CLSID_IConsoleNameSpace2 = "255f18cc-65db-11d1-a7dc-00c04fd8d565"
   struct IConsoleNameSpace2
     lpVtbl : IConsoleNameSpace2VTbl*
   end
@@ -1218,6 +1290,8 @@ lib LibWin32
     remove_page : Proc(IPropertySheetCallback*, HPROPSHEETPAGE, HRESULT)
   end
 
+  IPropertySheetCallback_GUID = LibC::GUID.new("85de64dd-ef21-11cf-a285-00c04fd8dbe6")
+  CLSID_IPropertySheetCallback = "85de64dd-ef21-11cf-a285-00c04fd8dbe6"
   struct IPropertySheetCallback
     lpVtbl : IPropertySheetCallbackVTbl*
   end
@@ -1233,6 +1307,8 @@ lib LibWin32
     show : Proc(IPropertySheetProvider*, LibC::IntPtrT, Int32, HRESULT)
   end
 
+  IPropertySheetProvider_GUID = LibC::GUID.new("85de64de-ef21-11cf-a285-00c04fd8dbe6")
+  CLSID_IPropertySheetProvider = "85de64de-ef21-11cf-a285-00c04fd8dbe6"
   struct IPropertySheetProvider
     lpVtbl : IPropertySheetProviderVTbl*
   end
@@ -1245,6 +1321,8 @@ lib LibWin32
     query_pages_for : Proc(IExtendPropertySheet*, IDataObject, HRESULT)
   end
 
+  IExtendPropertySheet_GUID = LibC::GUID.new("85de64dc-ef21-11cf-a285-00c04fd8dbe6")
+  CLSID_IExtendPropertySheet = "85de64dc-ef21-11cf-a285-00c04fd8dbe6"
   struct IExtendPropertySheet
     lpVtbl : IExtendPropertySheetVTbl*
   end
@@ -1258,6 +1336,8 @@ lib LibWin32
     detach : Proc(IControlbar*, IUnknown, HRESULT)
   end
 
+  IControlbar_GUID = LibC::GUID.new("69fb811e-6c1c-11d0-a2cb-00c04fd909dd")
+  CLSID_IControlbar = "69fb811e-6c1c-11d0-a2cb-00c04fd909dd"
   struct IControlbar
     lpVtbl : IControlbarVTbl*
   end
@@ -1270,6 +1350,8 @@ lib LibWin32
     controlbar_notify : Proc(IExtendControlbar*, MMC_NOTIFY_TYPE, LPARAM, LPARAM, HRESULT)
   end
 
+  IExtendControlbar_GUID = LibC::GUID.new("49506520-6f40-11d0-a98b-00c04fd8d565")
+  CLSID_IExtendControlbar = "49506520-6f40-11d0-a98b-00c04fd8d565"
   struct IExtendControlbar
     lpVtbl : IExtendControlbarVTbl*
   end
@@ -1286,6 +1368,8 @@ lib LibWin32
     set_button_state : Proc(IToolbar*, Int32, MMC_BUTTON_STATE, LibC::BOOL, HRESULT)
   end
 
+  IToolbar_GUID = LibC::GUID.new("43136eb9-d36c-11cf-adbc-00aa00a80033")
+  CLSID_IToolbar = "43136eb9-d36c-11cf-adbc-00aa00a80033"
   struct IToolbar
     lpVtbl : IToolbarVTbl*
   end
@@ -1300,6 +1384,8 @@ lib LibWin32
     get_default_verb : Proc(IConsoleVerb*, MMC_CONSOLE_VERB*, HRESULT)
   end
 
+  IConsoleVerb_GUID = LibC::GUID.new("e49f7a60-74af-11d0-a286-00c04fd8fe93")
+  CLSID_IConsoleVerb = "e49f7a60-74af-11d0-a286-00c04fd8fe93"
   struct IConsoleVerb
     lpVtbl : IConsoleVerbVTbl*
   end
@@ -1315,6 +1401,8 @@ lib LibWin32
     get_static_folder_image : Proc(ISnapinAbout*, HBITMAP*, HBITMAP*, HBITMAP*, UInt32*, HRESULT)
   end
 
+  ISnapinAbout_GUID = LibC::GUID.new("1245208c-a151-11d0-a7d7-00c04fd909dd")
+  CLSID_ISnapinAbout = "1245208c-a151-11d0-a7d7-00c04fd909dd"
   struct ISnapinAbout
     lpVtbl : ISnapinAboutVTbl*
   end
@@ -1328,6 +1416,8 @@ lib LibWin32
     set_button_state : Proc(IMenuButton*, Int32, MMC_BUTTON_STATE, LibC::BOOL, HRESULT)
   end
 
+  IMenuButton_GUID = LibC::GUID.new("951ed750-d080-11d0-b197-000000000000")
+  CLSID_IMenuButton = "951ed750-d080-11d0-b197-000000000000"
   struct IMenuButton
     lpVtbl : IMenuButtonVTbl*
   end
@@ -1339,6 +1429,8 @@ lib LibWin32
     get_help_topic : Proc(ISnapinHelp*, LibC::LPWSTR*, HRESULT)
   end
 
+  ISnapinHelp_GUID = LibC::GUID.new("a6b15ace-df59-11d0-a7dd-00c04fd909dd")
+  CLSID_ISnapinHelp = "a6b15ace-df59-11d0-a7dd-00c04fd909dd"
   struct ISnapinHelp
     lpVtbl : ISnapinHelpVTbl*
   end
@@ -1352,6 +1444,8 @@ lib LibWin32
     get_watermarks : Proc(IExtendPropertySheet2*, IDataObject, HBITMAP*, HBITMAP*, HPALETTE*, LibC::BOOL*, HRESULT)
   end
 
+  IExtendPropertySheet2_GUID = LibC::GUID.new("b7a87232-4a51-11d1-a7ea-00c04fd909dd")
+  CLSID_IExtendPropertySheet2 = "b7a87232-4a51-11d1-a7ea-00c04fd909dd"
   struct IExtendPropertySheet2
     lpVtbl : IExtendPropertySheet2VTbl*
   end
@@ -1371,6 +1465,8 @@ lib LibWin32
     get_column_filter : Proc(IHeaderCtrl2*, UInt32, UInt32*, MMC_FILTERDATA*, HRESULT)
   end
 
+  IHeaderCtrl2_GUID = LibC::GUID.new("9757abb8-1b32-11d1-a7ce-00c04fd8d565")
+  CLSID_IHeaderCtrl2 = "9757abb8-1b32-11d1-a7ce-00c04fd8d565"
   struct IHeaderCtrl2
     lpVtbl : IHeaderCtrl2VTbl*
   end
@@ -1383,6 +1479,8 @@ lib LibWin32
     get_linked_topics : Proc(ISnapinHelp2*, LibC::LPWSTR*, HRESULT)
   end
 
+  ISnapinHelp2_GUID = LibC::GUID.new("4861a010-20f9-11d2-a510-00c04fb6dd2c")
+  CLSID_ISnapinHelp2 = "4861a010-20f9-11d2-a510-00c04fb6dd2c"
   struct ISnapinHelp2
     lpVtbl : ISnapinHelp2VTbl*
   end
@@ -1397,6 +1495,8 @@ lib LibWin32
     clone : Proc(IEnumTASK*, IEnumTASK*, HRESULT)
   end
 
+  IEnumTASK_GUID = LibC::GUID.new("338698b1-5a02-11d1-9fec-00600832db4a")
+  CLSID_IEnumTASK = "338698b1-5a02-11d1-9fec-00600832db4a"
   struct IEnumTASK
     lpVtbl : IEnumTASKVTbl*
   end
@@ -1413,6 +1513,8 @@ lib LibWin32
     get_list_pad_info : Proc(IExtendTaskPad*, LibC::LPWSTR, MMC_LISTPAD_INFO*, HRESULT)
   end
 
+  IExtendTaskPad_GUID = LibC::GUID.new("8dee6511-554d-11d1-9fea-00600832db4a")
+  CLSID_IExtendTaskPad = "8dee6511-554d-11d1-9fea-00600832db4a"
   struct IExtendTaskPad
     lpVtbl : IExtendTaskPadVTbl*
   end
@@ -1437,6 +1539,8 @@ lib LibWin32
     set_status_text : Proc(IConsole2*, LibC::LPWSTR, HRESULT)
   end
 
+  IConsole2_GUID = LibC::GUID.new("103d842a-aa63-11d1-a7e1-00c04fd8d565")
+  CLSID_IConsole2 = "103d842a-aa63-11d1-a7e1-00c04fd8d565"
   struct IConsole2
     lpVtbl : IConsole2VTbl*
   end
@@ -1448,6 +1552,8 @@ lib LibWin32
     show_topic : Proc(IDisplayHelp*, LibC::LPWSTR, HRESULT)
   end
 
+  IDisplayHelp_GUID = LibC::GUID.new("cc593830-b926-11d1-8063-0000f875a9ce")
+  CLSID_IDisplayHelp = "cc593830-b926-11d1-8063-0000f875a9ce"
   struct IDisplayHelp
     lpVtbl : IDisplayHelpVTbl*
   end
@@ -1461,6 +1567,8 @@ lib LibWin32
     get_next_extension : Proc(IRequiredExtensions*, Guid*, HRESULT)
   end
 
+  IRequiredExtensions_GUID = LibC::GUID.new("72782d7a-a4a0-11d1-af0f-00c04fb6dd2c")
+  CLSID_IRequiredExtensions = "72782d7a-a4a0-11d1-af0f-00c04fb6dd2c"
   struct IRequiredExtensions
     lpVtbl : IRequiredExtensionsVTbl*
   end
@@ -1478,6 +1586,8 @@ lib LibWin32
     enumerate : Proc(IStringTable*, IEnumString*, HRESULT)
   end
 
+  IStringTable_GUID = LibC::GUID.new("de40b7a4-0f65-11d2-8e25-00c04f8ecd78")
+  CLSID_IStringTable = "de40b7a4-0f65-11d2-8e25-00c04f8ecd78"
   struct IStringTable
     lpVtbl : IStringTableVTbl*
   end
@@ -1492,6 +1602,8 @@ lib LibWin32
     get_column_sort_data : Proc(IColumnData*, SColumnSetID*, MMC_SORT_SET_DATA**, HRESULT)
   end
 
+  IColumnData_GUID = LibC::GUID.new("547c1354-024d-11d3-a707-00c04f8ef4cb")
+  CLSID_IColumnData = "547c1354-024d-11d3-a707-00c04f8ef4cb"
   struct IColumnData
     lpVtbl : IColumnDataVTbl*
   end
@@ -1506,6 +1618,8 @@ lib LibWin32
     clear : Proc(IMessageView*, HRESULT)
   end
 
+  IMessageView_GUID = LibC::GUID.new("80f94174-fccc-11d2-b991-00c04f8ecd78")
+  CLSID_IMessageView = "80f94174-fccc-11d2-b991-00c04f8ecd78"
   struct IMessageView
     lpVtbl : IMessageViewVTbl*
   end
@@ -1517,6 +1631,8 @@ lib LibWin32
     compare : Proc(IResultDataCompareEx*, RDCOMPARE*, Int32*, HRESULT)
   end
 
+  IResultDataCompareEx_GUID = LibC::GUID.new("96933476-0251-11d3-aeb0-00c04f8ecd78")
+  CLSID_IResultDataCompareEx = "96933476-0251-11d3-aeb0-00c04f8ecd78"
   struct IResultDataCompareEx
     lpVtbl : IResultDataCompareExVTbl*
   end
@@ -1535,6 +1651,8 @@ lib LibWin32
     query_dispatch : Proc(IComponentData2*, LibC::IntPtrT, DATA_OBJECT_TYPES, IDispatch*, HRESULT)
   end
 
+  IComponentData2_GUID = LibC::GUID.new("cca0f2d2-82de-41b5-bf47-3b2076273d5c")
+  CLSID_IComponentData2 = "cca0f2d2-82de-41b5-bf47-3b2076273d5c"
   struct IComponentData2
     lpVtbl : IComponentData2VTbl*
   end
@@ -1555,6 +1673,8 @@ lib LibWin32
     restore_result_view : Proc(IComponent2*, LibC::IntPtrT, RESULT_VIEW_TYPE_INFO*, HRESULT)
   end
 
+  IComponent2_GUID = LibC::GUID.new("79a2d615-4a10-4ed4-8c65-8633f9335095")
+  CLSID_IComponent2 = "79a2d615-4a10-4ed4-8c65-8633f9335095"
   struct IComponent2
     lpVtbl : IComponent2VTbl*
   end
@@ -1566,6 +1686,8 @@ lib LibWin32
     add_item : Proc(IContextMenuCallback2*, CONTEXTMENUITEM2*, HRESULT)
   end
 
+  IContextMenuCallback2_GUID = LibC::GUID.new("e178bc0e-2ed0-4b5e-8097-42c9087e8b33")
+  CLSID_IContextMenuCallback2 = "e178bc0e-2ed0-4b5e-8097-42c9087e8b33"
   struct IContextMenuCallback2
     lpVtbl : IContextMenuCallback2VTbl*
   end
@@ -1577,6 +1699,8 @@ lib LibWin32
     get_mmc_version : Proc(IMMCVersionInfo*, Int32*, Int32*, HRESULT)
   end
 
+  IMMCVersionInfo_GUID = LibC::GUID.new("a8d2c5fe-cdcb-4b9d-bde5-a27343ff54bc")
+  CLSID_IMMCVersionInfo = "a8d2c5fe-cdcb-4b9d-bde5-a27343ff54bc"
   struct IMMCVersionInfo
     lpVtbl : IMMCVersionInfoVTbl*
   end
@@ -1588,6 +1712,8 @@ lib LibWin32
     get_views : Proc(IExtendView*, IDataObject, IViewExtensionCallback, HRESULT)
   end
 
+  IExtendView_GUID = LibC::GUID.new("89995cee-d2ed-4c0e-ae5e-df7e76f3fa53")
+  CLSID_IExtendView = "89995cee-d2ed-4c0e-ae5e-df7e76f3fa53"
   struct IExtendView
     lpVtbl : IExtendViewVTbl*
   end
@@ -1599,6 +1725,8 @@ lib LibWin32
     add_view : Proc(IViewExtensionCallback*, MMC_EXT_VIEW_DATA*, HRESULT)
   end
 
+  IViewExtensionCallback_GUID = LibC::GUID.new("34dd928a-7599-41e5-9f5e-d6bc3062c2da")
+  CLSID_IViewExtensionCallback = "34dd928a-7599-41e5-9f5e-d6bc3062c2da"
   struct IViewExtensionCallback
     lpVtbl : IViewExtensionCallbackVTbl*
   end
@@ -1611,6 +1739,8 @@ lib LibWin32
     reset_idle_timer : Proc(IConsolePower*, UInt32, HRESULT)
   end
 
+  IConsolePower_GUID = LibC::GUID.new("1cfbdd0e-62ca-49ce-a3af-dbb2de61b068")
+  CLSID_IConsolePower = "1cfbdd0e-62ca-49ce-a3af-dbb2de61b068"
   struct IConsolePower
     lpVtbl : IConsolePowerVTbl*
   end
@@ -1622,6 +1752,8 @@ lib LibWin32
     on_power_broadcast : Proc(IConsolePowerSink*, UInt32, LPARAM, LRESULT*, HRESULT)
   end
 
+  IConsolePowerSink_GUID = LibC::GUID.new("3333759f-fe4f-4975-b143-fec0a5dd6d65")
+  CLSID_IConsolePowerSink = "3333759f-fe4f-4975-b143-fec0a5dd6d65"
   struct IConsolePowerSink
     lpVtbl : IConsolePowerSinkVTbl*
   end
@@ -1633,6 +1765,8 @@ lib LibWin32
     get_property : Proc(INodeProperties*, IDataObject, UInt8*, UInt16**, HRESULT)
   end
 
+  INodeProperties_GUID = LibC::GUID.new("15bc4d24-a522-4406-aa55-0749537a6865")
+  CLSID_INodeProperties = "15bc4d24-a522-4406-aa55-0749537a6865"
   struct INodeProperties
     lpVtbl : INodePropertiesVTbl*
   end
@@ -1658,6 +1792,8 @@ lib LibWin32
     rename_scope_item : Proc(IConsole3*, LibC::IntPtrT, HRESULT)
   end
 
+  IConsole3_GUID = LibC::GUID.new("4f85efdb-d0e1-498c-8d4a-d010dfdd404f")
+  CLSID_IConsole3 = "4f85efdb-d0e1-498c-8d4a-d010dfdd404f"
   struct IConsole3
     lpVtbl : IConsole3VTbl*
   end
@@ -1684,6 +1820,8 @@ lib LibWin32
     rename_result_item : Proc(IResultData2*, LibC::IntPtrT, HRESULT)
   end
 
+  IResultData2_GUID = LibC::GUID.new("0f36e0eb-a7f1-4a81-be5a-9247f7de4b1b")
+  CLSID_IResultData2 = "0f36e0eb-a7f1-4a81-be5a-9247f7de4b1b"
   struct IResultData2
     lpVtbl : IResultData2VTbl*
   end

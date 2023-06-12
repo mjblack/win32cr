@@ -24,6 +24,8 @@ lib LibWin32
     get_interface : Proc(IDirect3DDxgiInterfaceAccess*, Guid*, Void**, HRESULT)
   end
 
+  IDirect3DDxgiInterfaceAccess_GUID = LibC::GUID.new("a9b3d012-3df2-4ee3-b8d1-8695f457d3c1")
+  CLSID_IDirect3DDxgiInterfaceAccess = "a9b3d012-3df2-4ee3-b8d1-8695f457d3c1"
   struct IDirect3DDxgiInterfaceAccess
     lpVtbl : IDirect3DDxgiInterfaceAccessVTbl*
   end

@@ -319,6 +319,8 @@ lib LibWin32
     create_validated_block_map_reader : Proc(IAppxFactory*, IStream, LibC::LPWSTR, IAppxBlockMapReader*, HRESULT)
   end
 
+  IAppxFactory_GUID = LibC::GUID.new("beb94909-e451-438b-b5a7-d79e767b75d8")
+  CLSID_IAppxFactory = "beb94909-e451-438b-b5a7-d79e767b75d8"
   struct IAppxFactory
     lpVtbl : IAppxFactoryVTbl*
   end
@@ -332,6 +334,8 @@ lib LibWin32
     create_content_group_map_writer : Proc(IAppxFactory2*, IStream, IAppxContentGroupMapWriter*, HRESULT)
   end
 
+  IAppxFactory2_GUID = LibC::GUID.new("f1346df2-c282-4e22-b918-743a929a8d55")
+  CLSID_IAppxFactory2 = "f1346df2-c282-4e22-b918-743a929a8d55"
   struct IAppxFactory2
     lpVtbl : IAppxFactory2VTbl*
   end
@@ -347,6 +351,8 @@ lib LibWin32
     get_manifest : Proc(IAppxPackageReader*, IAppxManifestReader*, HRESULT)
   end
 
+  IAppxPackageReader_GUID = LibC::GUID.new("b5c49650-99bc-481c-9a34-3d53a4106708")
+  CLSID_IAppxPackageReader = "b5c49650-99bc-481c-9a34-3d53a4106708"
   struct IAppxPackageReader
     lpVtbl : IAppxPackageReaderVTbl*
   end
@@ -359,6 +365,8 @@ lib LibWin32
     close : Proc(IAppxPackageWriter*, IStream, HRESULT)
   end
 
+  IAppxPackageWriter_GUID = LibC::GUID.new("9099e33b-246f-41e4-881a-008eb613f858")
+  CLSID_IAppxPackageWriter = "9099e33b-246f-41e4-881a-008eb613f858"
   struct IAppxPackageWriter
     lpVtbl : IAppxPackageWriterVTbl*
   end
@@ -370,6 +378,8 @@ lib LibWin32
     close : Proc(IAppxPackageWriter2*, IStream, IStream, HRESULT)
   end
 
+  IAppxPackageWriter2_GUID = LibC::GUID.new("2cf5c4fd-e54c-4ea5-ba4e-f8c4b105a8c8")
+  CLSID_IAppxPackageWriter2 = "2cf5c4fd-e54c-4ea5-ba4e-f8c4b105a8c8"
   struct IAppxPackageWriter2
     lpVtbl : IAppxPackageWriter2VTbl*
   end
@@ -381,6 +391,8 @@ lib LibWin32
     add_payload_files : Proc(IAppxPackageWriter3*, UInt32, APPX_PACKAGE_WRITER_PAYLOAD_STREAM*, UInt64, HRESULT)
   end
 
+  IAppxPackageWriter3_GUID = LibC::GUID.new("a83aacd3-41c0-4501-b8a3-74164f50b2fd")
+  CLSID_IAppxPackageWriter3 = "a83aacd3-41c0-4501-b8a3-74164f50b2fd"
   struct IAppxPackageWriter3
     lpVtbl : IAppxPackageWriter3VTbl*
   end
@@ -396,6 +408,8 @@ lib LibWin32
     get_stream : Proc(IAppxFile*, IStream*, HRESULT)
   end
 
+  IAppxFile_GUID = LibC::GUID.new("91df827b-94fd-468f-827b-57f41b2f6f2e")
+  CLSID_IAppxFile = "91df827b-94fd-468f-827b-57f41b2f6f2e"
   struct IAppxFile
     lpVtbl : IAppxFileVTbl*
   end
@@ -409,6 +423,8 @@ lib LibWin32
     move_next : Proc(IAppxFilesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxFilesEnumerator_GUID = LibC::GUID.new("f007eeaf-9831-411c-9847-917cdc62d1fe")
+  CLSID_IAppxFilesEnumerator = "f007eeaf-9831-411c-9847-917cdc62d1fe"
   struct IAppxFilesEnumerator
     lpVtbl : IAppxFilesEnumeratorVTbl*
   end
@@ -423,6 +439,8 @@ lib LibWin32
     get_stream : Proc(IAppxBlockMapReader*, IStream*, HRESULT)
   end
 
+  IAppxBlockMapReader_GUID = LibC::GUID.new("5efec991-bca3-42d1-9ec2-e92d609ec22a")
+  CLSID_IAppxBlockMapReader = "5efec991-bca3-42d1-9ec2-e92d609ec22a"
   struct IAppxBlockMapReader
     lpVtbl : IAppxBlockMapReaderVTbl*
   end
@@ -438,6 +456,8 @@ lib LibWin32
     validate_file_hash : Proc(IAppxBlockMapFile*, IStream, LibC::BOOL*, HRESULT)
   end
 
+  IAppxBlockMapFile_GUID = LibC::GUID.new("277672ac-4f63-42c1-8abc-beae3600eb59")
+  CLSID_IAppxBlockMapFile = "277672ac-4f63-42c1-8abc-beae3600eb59"
   struct IAppxBlockMapFile
     lpVtbl : IAppxBlockMapFileVTbl*
   end
@@ -451,6 +471,8 @@ lib LibWin32
     move_next : Proc(IAppxBlockMapFilesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxBlockMapFilesEnumerator_GUID = LibC::GUID.new("02b856a2-4262-4070-bacb-1a8cbbc42305")
+  CLSID_IAppxBlockMapFilesEnumerator = "02b856a2-4262-4070-bacb-1a8cbbc42305"
   struct IAppxBlockMapFilesEnumerator
     lpVtbl : IAppxBlockMapFilesEnumeratorVTbl*
   end
@@ -463,6 +485,8 @@ lib LibWin32
     get_compressed_size : Proc(IAppxBlockMapBlock*, UInt32*, HRESULT)
   end
 
+  IAppxBlockMapBlock_GUID = LibC::GUID.new("75cf3930-3244-4fe0-a8c8-e0bcb270b889")
+  CLSID_IAppxBlockMapBlock = "75cf3930-3244-4fe0-a8c8-e0bcb270b889"
   struct IAppxBlockMapBlock
     lpVtbl : IAppxBlockMapBlockVTbl*
   end
@@ -476,6 +500,8 @@ lib LibWin32
     move_next : Proc(IAppxBlockMapBlocksEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxBlockMapBlocksEnumerator_GUID = LibC::GUID.new("6b429b5b-36ef-479e-b9eb-0c1482b49e16")
+  CLSID_IAppxBlockMapBlocksEnumerator = "6b429b5b-36ef-479e-b9eb-0c1482b49e16"
   struct IAppxBlockMapBlocksEnumerator
     lpVtbl : IAppxBlockMapBlocksEnumeratorVTbl*
   end
@@ -495,6 +521,8 @@ lib LibWin32
     get_stream : Proc(IAppxManifestReader*, IStream*, HRESULT)
   end
 
+  IAppxManifestReader_GUID = LibC::GUID.new("4e1bd148-55a0-4480-a3d1-15544710637c")
+  CLSID_IAppxManifestReader = "4e1bd148-55a0-4480-a3d1-15544710637c"
   struct IAppxManifestReader
     lpVtbl : IAppxManifestReaderVTbl*
   end
@@ -515,6 +543,8 @@ lib LibWin32
     get_qualified_resources : Proc(IAppxManifestReader2*, IAppxManifestQualifiedResourcesEnumerator*, HRESULT)
   end
 
+  IAppxManifestReader2_GUID = LibC::GUID.new("d06f67bc-b31d-4eba-a8af-638e73e77b4d")
+  CLSID_IAppxManifestReader2 = "d06f67bc-b31d-4eba-a8af-638e73e77b4d"
   struct IAppxManifestReader2
     lpVtbl : IAppxManifestReader2VTbl*
   end
@@ -537,6 +567,8 @@ lib LibWin32
     get_target_device_families : Proc(IAppxManifestReader3*, IAppxManifestTargetDeviceFamiliesEnumerator*, HRESULT)
   end
 
+  IAppxManifestReader3_GUID = LibC::GUID.new("c43825ab-69b7-400a-9709-cc37f5a72d24")
+  CLSID_IAppxManifestReader3 = "c43825ab-69b7-400a-9709-cc37f5a72d24"
   struct IAppxManifestReader3
     lpVtbl : IAppxManifestReader3VTbl*
   end
@@ -560,6 +592,8 @@ lib LibWin32
     get_optional_package_info : Proc(IAppxManifestReader4*, IAppxManifestOptionalPackageInfo*, HRESULT)
   end
 
+  IAppxManifestReader4_GUID = LibC::GUID.new("4579bb7c-741d-4161-b5a1-47bd3b78ad9b")
+  CLSID_IAppxManifestReader4 = "4579bb7c-741d-4161-b5a1-47bd3b78ad9b"
   struct IAppxManifestReader4
     lpVtbl : IAppxManifestReader4VTbl*
   end
@@ -571,6 +605,8 @@ lib LibWin32
     get_main_package_dependencies : Proc(IAppxManifestReader5*, IAppxManifestMainPackageDependenciesEnumerator*, HRESULT)
   end
 
+  IAppxManifestReader5_GUID = LibC::GUID.new("8d7ae132-a690-4c00-b75a-6aae1feaac80")
+  CLSID_IAppxManifestReader5 = "8d7ae132-a690-4c00-b75a-6aae1feaac80"
   struct IAppxManifestReader5
     lpVtbl : IAppxManifestReader5VTbl*
   end
@@ -582,6 +618,8 @@ lib LibWin32
     get_is_non_qualified_resource_package : Proc(IAppxManifestReader6*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestReader6_GUID = LibC::GUID.new("34deaca4-d3c0-4e3e-b312-e42625e3807e")
+  CLSID_IAppxManifestReader6 = "34deaca4-d3c0-4e3e-b312-e42625e3807e"
   struct IAppxManifestReader6
     lpVtbl : IAppxManifestReader6VTbl*
   end
@@ -595,6 +633,8 @@ lib LibWin32
     get_host_runtime_dependencies : Proc(IAppxManifestReader7*, IAppxManifestHostRuntimeDependenciesEnumerator*, HRESULT)
   end
 
+  IAppxManifestReader7_GUID = LibC::GUID.new("8efe6f27-0ce0-4988-b32d-738eb63db3b7")
+  CLSID_IAppxManifestReader7 = "8efe6f27-0ce0-4988-b32d-738eb63db3b7"
   struct IAppxManifestReader7
     lpVtbl : IAppxManifestReader7VTbl*
   end
@@ -608,6 +648,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestDriverDependenciesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestDriverDependenciesEnumerator_GUID = LibC::GUID.new("fe039db2-467f-4755-8404-8f5eb6865b33")
+  CLSID_IAppxManifestDriverDependenciesEnumerator = "fe039db2-467f-4755-8404-8f5eb6865b33"
   struct IAppxManifestDriverDependenciesEnumerator
     lpVtbl : IAppxManifestDriverDependenciesEnumeratorVTbl*
   end
@@ -619,6 +661,8 @@ lib LibWin32
     get_driver_constraints : Proc(IAppxManifestDriverDependency*, IAppxManifestDriverConstraintsEnumerator*, HRESULT)
   end
 
+  IAppxManifestDriverDependency_GUID = LibC::GUID.new("1210cb94-5a92-4602-be24-79f318af4af9")
+  CLSID_IAppxManifestDriverDependency = "1210cb94-5a92-4602-be24-79f318af4af9"
   struct IAppxManifestDriverDependency
     lpVtbl : IAppxManifestDriverDependencyVTbl*
   end
@@ -632,6 +676,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestDriverConstraintsEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestDriverConstraintsEnumerator_GUID = LibC::GUID.new("d402b2d1-f600-49e0-95e6-975d8da13d89")
+  CLSID_IAppxManifestDriverConstraintsEnumerator = "d402b2d1-f600-49e0-95e6-975d8da13d89"
   struct IAppxManifestDriverConstraintsEnumerator
     lpVtbl : IAppxManifestDriverConstraintsEnumeratorVTbl*
   end
@@ -645,6 +691,8 @@ lib LibWin32
     get_min_date : Proc(IAppxManifestDriverConstraint*, LibC::LPWSTR*, HRESULT)
   end
 
+  IAppxManifestDriverConstraint_GUID = LibC::GUID.new("c031bee4-bbcc-48ea-a237-c34045c80a07")
+  CLSID_IAppxManifestDriverConstraint = "c031bee4-bbcc-48ea-a237-c34045c80a07"
   struct IAppxManifestDriverConstraint
     lpVtbl : IAppxManifestDriverConstraintVTbl*
   end
@@ -658,6 +706,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestOSPackageDependenciesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestOSPackageDependenciesEnumerator_GUID = LibC::GUID.new("b84e2fc3-f8ec-4bc1-8ae2-156346f5ffea")
+  CLSID_IAppxManifestOSPackageDependenciesEnumerator = "b84e2fc3-f8ec-4bc1-8ae2-156346f5ffea"
   struct IAppxManifestOSPackageDependenciesEnumerator
     lpVtbl : IAppxManifestOSPackageDependenciesEnumeratorVTbl*
   end
@@ -670,6 +720,8 @@ lib LibWin32
     get_version : Proc(IAppxManifestOSPackageDependency*, UInt64*, HRESULT)
   end
 
+  IAppxManifestOSPackageDependency_GUID = LibC::GUID.new("154995ee-54a6-4f14-ac97-d8cf0519644b")
+  CLSID_IAppxManifestOSPackageDependency = "154995ee-54a6-4f14-ac97-d8cf0519644b"
   struct IAppxManifestOSPackageDependency
     lpVtbl : IAppxManifestOSPackageDependencyVTbl*
   end
@@ -683,6 +735,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestHostRuntimeDependenciesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestHostRuntimeDependenciesEnumerator_GUID = LibC::GUID.new("6427a646-7f49-433e-b1a6-0da309f6885a")
+  CLSID_IAppxManifestHostRuntimeDependenciesEnumerator = "6427a646-7f49-433e-b1a6-0da309f6885a"
   struct IAppxManifestHostRuntimeDependenciesEnumerator
     lpVtbl : IAppxManifestHostRuntimeDependenciesEnumeratorVTbl*
   end
@@ -696,6 +750,8 @@ lib LibWin32
     get_min_version : Proc(IAppxManifestHostRuntimeDependency*, UInt64*, HRESULT)
   end
 
+  IAppxManifestHostRuntimeDependency_GUID = LibC::GUID.new("3455d234-8414-410d-95c7-7b35255b8391")
+  CLSID_IAppxManifestHostRuntimeDependency = "3455d234-8414-410d-95c7-7b35255b8391"
   struct IAppxManifestHostRuntimeDependency
     lpVtbl : IAppxManifestHostRuntimeDependencyVTbl*
   end
@@ -707,6 +763,8 @@ lib LibWin32
     get_package_family_name : Proc(IAppxManifestHostRuntimeDependency2*, LibC::LPWSTR*, HRESULT)
   end
 
+  IAppxManifestHostRuntimeDependency2_GUID = LibC::GUID.new("c26f23a8-ee10-4ad6-b898-2b4d7aebfe6a")
+  CLSID_IAppxManifestHostRuntimeDependency2 = "c26f23a8-ee10-4ad6-b898-2b4d7aebfe6a"
   struct IAppxManifestHostRuntimeDependency2
     lpVtbl : IAppxManifestHostRuntimeDependency2VTbl*
   end
@@ -719,6 +777,8 @@ lib LibWin32
     get_main_package_name : Proc(IAppxManifestOptionalPackageInfo*, LibC::LPWSTR*, HRESULT)
   end
 
+  IAppxManifestOptionalPackageInfo_GUID = LibC::GUID.new("2634847d-5b5d-4fe5-a243-002ff95edc7e")
+  CLSID_IAppxManifestOptionalPackageInfo = "2634847d-5b5d-4fe5-a243-002ff95edc7e"
   struct IAppxManifestOptionalPackageInfo
     lpVtbl : IAppxManifestOptionalPackageInfoVTbl*
   end
@@ -732,6 +792,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestMainPackageDependenciesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestMainPackageDependenciesEnumerator_GUID = LibC::GUID.new("a99c4f00-51d2-4f0f-ba46-7ed5255ebdff")
+  CLSID_IAppxManifestMainPackageDependenciesEnumerator = "a99c4f00-51d2-4f0f-ba46-7ed5255ebdff"
   struct IAppxManifestMainPackageDependenciesEnumerator
     lpVtbl : IAppxManifestMainPackageDependenciesEnumeratorVTbl*
   end
@@ -745,6 +807,8 @@ lib LibWin32
     get_package_family_name : Proc(IAppxManifestMainPackageDependency*, LibC::LPWSTR*, HRESULT)
   end
 
+  IAppxManifestMainPackageDependency_GUID = LibC::GUID.new("05d0611c-bc29-46d5-97e2-84b9c79bd8ae")
+  CLSID_IAppxManifestMainPackageDependency = "05d0611c-bc29-46d5-97e2-84b9c79bd8ae"
   struct IAppxManifestMainPackageDependency
     lpVtbl : IAppxManifestMainPackageDependencyVTbl*
   end
@@ -763,6 +827,8 @@ lib LibWin32
     get_package_family_name : Proc(IAppxManifestPackageId*, LibC::LPWSTR*, HRESULT)
   end
 
+  IAppxManifestPackageId_GUID = LibC::GUID.new("283ce2d7-7153-4a91-9649-7a0f7240945f")
+  CLSID_IAppxManifestPackageId = "283ce2d7-7153-4a91-9649-7a0f7240945f"
   struct IAppxManifestPackageId
     lpVtbl : IAppxManifestPackageIdVTbl*
   end
@@ -782,6 +848,8 @@ lib LibWin32
     get_architecture2 : Proc(IAppxManifestPackageId2*, APPX_PACKAGE_ARCHITECTURE2*, HRESULT)
   end
 
+  IAppxManifestPackageId2_GUID = LibC::GUID.new("2256999d-d617-42f1-880e-0ba4542319d5")
+  CLSID_IAppxManifestPackageId2 = "2256999d-d617-42f1-880e-0ba4542319d5"
   struct IAppxManifestPackageId2
     lpVtbl : IAppxManifestPackageId2VTbl*
   end
@@ -794,6 +862,8 @@ lib LibWin32
     get_string_value : Proc(IAppxManifestProperties*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
+  IAppxManifestProperties_GUID = LibC::GUID.new("03faf64d-f26f-4b2c-aaf7-8fe7789b8bca")
+  CLSID_IAppxManifestProperties = "03faf64d-f26f-4b2c-aaf7-8fe7789b8bca"
   struct IAppxManifestProperties
     lpVtbl : IAppxManifestPropertiesVTbl*
   end
@@ -807,6 +877,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestTargetDeviceFamiliesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestTargetDeviceFamiliesEnumerator_GUID = LibC::GUID.new("36537f36-27a4-4788-88c0-733819575017")
+  CLSID_IAppxManifestTargetDeviceFamiliesEnumerator = "36537f36-27a4-4788-88c0-733819575017"
   struct IAppxManifestTargetDeviceFamiliesEnumerator
     lpVtbl : IAppxManifestTargetDeviceFamiliesEnumeratorVTbl*
   end
@@ -820,6 +892,8 @@ lib LibWin32
     get_max_version_tested : Proc(IAppxManifestTargetDeviceFamily*, UInt64*, HRESULT)
   end
 
+  IAppxManifestTargetDeviceFamily_GUID = LibC::GUID.new("9091b09b-c8d5-4f31-8687-a338259faefb")
+  CLSID_IAppxManifestTargetDeviceFamily = "9091b09b-c8d5-4f31-8687-a338259faefb"
   struct IAppxManifestTargetDeviceFamily
     lpVtbl : IAppxManifestTargetDeviceFamilyVTbl*
   end
@@ -833,6 +907,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestPackageDependenciesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestPackageDependenciesEnumerator_GUID = LibC::GUID.new("b43bbcf9-65a6-42dd-bac0-8c6741e7f5a4")
+  CLSID_IAppxManifestPackageDependenciesEnumerator = "b43bbcf9-65a6-42dd-bac0-8c6741e7f5a4"
   struct IAppxManifestPackageDependenciesEnumerator
     lpVtbl : IAppxManifestPackageDependenciesEnumeratorVTbl*
   end
@@ -846,6 +922,8 @@ lib LibWin32
     get_min_version : Proc(IAppxManifestPackageDependency*, UInt64*, HRESULT)
   end
 
+  IAppxManifestPackageDependency_GUID = LibC::GUID.new("e4946b59-733e-43f0-a724-3bde4c1285a0")
+  CLSID_IAppxManifestPackageDependency = "e4946b59-733e-43f0-a724-3bde4c1285a0"
   struct IAppxManifestPackageDependency
     lpVtbl : IAppxManifestPackageDependencyVTbl*
   end
@@ -860,6 +938,8 @@ lib LibWin32
     get_max_major_version_tested : Proc(IAppxManifestPackageDependency2*, UInt16*, HRESULT)
   end
 
+  IAppxManifestPackageDependency2_GUID = LibC::GUID.new("dda0b713-f3ff-49d3-898a-2786780c5d98")
+  CLSID_IAppxManifestPackageDependency2 = "dda0b713-f3ff-49d3-898a-2786780c5d98"
   struct IAppxManifestPackageDependency2
     lpVtbl : IAppxManifestPackageDependency2VTbl*
   end
@@ -871,6 +951,8 @@ lib LibWin32
     get_is_optional : Proc(IAppxManifestPackageDependency3*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestPackageDependency3_GUID = LibC::GUID.new("1ac56374-6198-4d6b-92e4-749d5ab8a895")
+  CLSID_IAppxManifestPackageDependency3 = "1ac56374-6198-4d6b-92e4-749d5ab8a895"
   struct IAppxManifestPackageDependency3
     lpVtbl : IAppxManifestPackageDependency3VTbl*
   end
@@ -884,6 +966,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestResourcesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestResourcesEnumerator_GUID = LibC::GUID.new("de4dfbbd-881a-48bb-858c-d6f2baeae6ed")
+  CLSID_IAppxManifestResourcesEnumerator = "de4dfbbd-881a-48bb-858c-d6f2baeae6ed"
   struct IAppxManifestResourcesEnumerator
     lpVtbl : IAppxManifestResourcesEnumeratorVTbl*
   end
@@ -897,6 +981,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestDeviceCapabilitiesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestDeviceCapabilitiesEnumerator_GUID = LibC::GUID.new("30204541-427b-4a1c-bacf-655bf463a540")
+  CLSID_IAppxManifestDeviceCapabilitiesEnumerator = "30204541-427b-4a1c-bacf-655bf463a540"
   struct IAppxManifestDeviceCapabilitiesEnumerator
     lpVtbl : IAppxManifestDeviceCapabilitiesEnumeratorVTbl*
   end
@@ -910,6 +996,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestCapabilitiesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestCapabilitiesEnumerator_GUID = LibC::GUID.new("11d22258-f470-42c1-b291-8361c5437e41")
+  CLSID_IAppxManifestCapabilitiesEnumerator = "11d22258-f470-42c1-b291-8361c5437e41"
   struct IAppxManifestCapabilitiesEnumerator
     lpVtbl : IAppxManifestCapabilitiesEnumeratorVTbl*
   end
@@ -923,6 +1011,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestApplicationsEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestApplicationsEnumerator_GUID = LibC::GUID.new("9eb8a55a-f04b-4d0d-808d-686185d4847a")
+  CLSID_IAppxManifestApplicationsEnumerator = "9eb8a55a-f04b-4d0d-808d-686185d4847a"
   struct IAppxManifestApplicationsEnumerator
     lpVtbl : IAppxManifestApplicationsEnumeratorVTbl*
   end
@@ -935,6 +1025,8 @@ lib LibWin32
     get_app_user_model_id : Proc(IAppxManifestApplication*, LibC::LPWSTR*, HRESULT)
   end
 
+  IAppxManifestApplication_GUID = LibC::GUID.new("5da89bf4-3773-46be-b650-7e744863b7e8")
+  CLSID_IAppxManifestApplication = "5da89bf4-3773-46be-b650-7e744863b7e8"
   struct IAppxManifestApplication
     lpVtbl : IAppxManifestApplicationVTbl*
   end
@@ -948,6 +1040,8 @@ lib LibWin32
     move_next : Proc(IAppxManifestQualifiedResourcesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxManifestQualifiedResourcesEnumerator_GUID = LibC::GUID.new("8ef6adfe-3762-4a8f-9373-2fc5d444c8d2")
+  CLSID_IAppxManifestQualifiedResourcesEnumerator = "8ef6adfe-3762-4a8f-9373-2fc5d444c8d2"
   struct IAppxManifestQualifiedResourcesEnumerator
     lpVtbl : IAppxManifestQualifiedResourcesEnumeratorVTbl*
   end
@@ -961,6 +1055,8 @@ lib LibWin32
     get_dx_feature_level : Proc(IAppxManifestQualifiedResource*, DX_FEATURE_LEVEL*, HRESULT)
   end
 
+  IAppxManifestQualifiedResource_GUID = LibC::GUID.new("3b53a497-3c5c-48d1-9ea3-bb7eac8cd7d4")
+  CLSID_IAppxManifestQualifiedResource = "3b53a497-3c5c-48d1-9ea3-bb7eac8cd7d4"
   struct IAppxManifestQualifiedResource
     lpVtbl : IAppxManifestQualifiedResourceVTbl*
   end
@@ -974,6 +1070,8 @@ lib LibWin32
     create_bundle_manifest_reader : Proc(IAppxBundleFactory*, IStream, IAppxBundleManifestReader*, HRESULT)
   end
 
+  IAppxBundleFactory_GUID = LibC::GUID.new("bba65864-965f-4a5f-855f-f074bdbf3a7b")
+  CLSID_IAppxBundleFactory = "bba65864-965f-4a5f-855f-f074bdbf3a7b"
   struct IAppxBundleFactory
     lpVtbl : IAppxBundleFactoryVTbl*
   end
@@ -986,6 +1084,8 @@ lib LibWin32
     close : Proc(IAppxBundleWriter*, HRESULT)
   end
 
+  IAppxBundleWriter_GUID = LibC::GUID.new("ec446fe8-bfec-4c64-ab4f-49f038f0c6d2")
+  CLSID_IAppxBundleWriter = "ec446fe8-bfec-4c64-ab4f-49f038f0c6d2"
   struct IAppxBundleWriter
     lpVtbl : IAppxBundleWriterVTbl*
   end
@@ -997,6 +1097,8 @@ lib LibWin32
     add_external_package_reference : Proc(IAppxBundleWriter2*, LibC::LPWSTR, IStream, HRESULT)
   end
 
+  IAppxBundleWriter2_GUID = LibC::GUID.new("6d8fe971-01cc-49a0-b685-233851279962")
+  CLSID_IAppxBundleWriter2 = "6d8fe971-01cc-49a0-b685-233851279962"
   struct IAppxBundleWriter2
     lpVtbl : IAppxBundleWriter2VTbl*
   end
@@ -1009,6 +1111,8 @@ lib LibWin32
     close : Proc(IAppxBundleWriter3*, LibC::LPWSTR, HRESULT)
   end
 
+  IAppxBundleWriter3_GUID = LibC::GUID.new("ad711152-f969-4193-82d5-9ddf2786d21a")
+  CLSID_IAppxBundleWriter3 = "ad711152-f969-4193-82d5-9ddf2786d21a"
   struct IAppxBundleWriter3
     lpVtbl : IAppxBundleWriter3VTbl*
   end
@@ -1022,6 +1126,8 @@ lib LibWin32
     add_external_package_reference : Proc(IAppxBundleWriter4*, LibC::LPWSTR, IStream, LibC::BOOL, HRESULT)
   end
 
+  IAppxBundleWriter4_GUID = LibC::GUID.new("9cd9d523-5009-4c01-9882-dc029fbd47a3")
+  CLSID_IAppxBundleWriter4 = "9cd9d523-5009-4c01-9882-dc029fbd47a3"
   struct IAppxBundleWriter4
     lpVtbl : IAppxBundleWriter4VTbl*
   end
@@ -1037,6 +1143,8 @@ lib LibWin32
     get_payload_package : Proc(IAppxBundleReader*, LibC::LPWSTR, IAppxFile*, HRESULT)
   end
 
+  IAppxBundleReader_GUID = LibC::GUID.new("dd75b8c0-ba76-43b0-ae0f-68656a1dc5c8")
+  CLSID_IAppxBundleReader = "dd75b8c0-ba76-43b0-ae0f-68656a1dc5c8"
   struct IAppxBundleReader
     lpVtbl : IAppxBundleReaderVTbl*
   end
@@ -1050,6 +1158,8 @@ lib LibWin32
     get_stream : Proc(IAppxBundleManifestReader*, IStream*, HRESULT)
   end
 
+  IAppxBundleManifestReader_GUID = LibC::GUID.new("cf0ebbc1-cc99-4106-91eb-e67462e04fb0")
+  CLSID_IAppxBundleManifestReader = "cf0ebbc1-cc99-4106-91eb-e67462e04fb0"
   struct IAppxBundleManifestReader
     lpVtbl : IAppxBundleManifestReaderVTbl*
   end
@@ -1061,6 +1171,8 @@ lib LibWin32
     get_optional_bundles : Proc(IAppxBundleManifestReader2*, IAppxBundleManifestOptionalBundleInfoEnumerator*, HRESULT)
   end
 
+  IAppxBundleManifestReader2_GUID = LibC::GUID.new("5517df70-033f-4af2-8213-87d766805c02")
+  CLSID_IAppxBundleManifestReader2 = "5517df70-033f-4af2-8213-87d766805c02"
   struct IAppxBundleManifestReader2
     lpVtbl : IAppxBundleManifestReader2VTbl*
   end
@@ -1074,6 +1186,8 @@ lib LibWin32
     move_next : Proc(IAppxBundleManifestPackageInfoEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxBundleManifestPackageInfoEnumerator_GUID = LibC::GUID.new("f9b856ee-49a6-4e19-b2b0-6a2406d63a32")
+  CLSID_IAppxBundleManifestPackageInfoEnumerator = "f9b856ee-49a6-4e19-b2b0-6a2406d63a32"
   struct IAppxBundleManifestPackageInfoEnumerator
     lpVtbl : IAppxBundleManifestPackageInfoEnumeratorVTbl*
   end
@@ -1090,6 +1204,8 @@ lib LibWin32
     get_resources : Proc(IAppxBundleManifestPackageInfo*, IAppxManifestQualifiedResourcesEnumerator*, HRESULT)
   end
 
+  IAppxBundleManifestPackageInfo_GUID = LibC::GUID.new("54cd06c1-268f-40bb-8ed2-757a9ebaec8d")
+  CLSID_IAppxBundleManifestPackageInfo = "54cd06c1-268f-40bb-8ed2-757a9ebaec8d"
   struct IAppxBundleManifestPackageInfo
     lpVtbl : IAppxBundleManifestPackageInfoVTbl*
   end
@@ -1103,6 +1219,8 @@ lib LibWin32
     get_is_default_applicable_package : Proc(IAppxBundleManifestPackageInfo2*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxBundleManifestPackageInfo2_GUID = LibC::GUID.new("44c2acbc-b2cf-4ccb-bbdb-9c6da8c3bc9e")
+  CLSID_IAppxBundleManifestPackageInfo2 = "44c2acbc-b2cf-4ccb-bbdb-9c6da8c3bc9e"
   struct IAppxBundleManifestPackageInfo2
     lpVtbl : IAppxBundleManifestPackageInfo2VTbl*
   end
@@ -1114,6 +1232,8 @@ lib LibWin32
     get_target_device_families : Proc(IAppxBundleManifestPackageInfo3*, IAppxManifestTargetDeviceFamiliesEnumerator*, HRESULT)
   end
 
+  IAppxBundleManifestPackageInfo3_GUID = LibC::GUID.new("6ba74b98-bb74-4296-80d0-5f4256a99675")
+  CLSID_IAppxBundleManifestPackageInfo3 = "6ba74b98-bb74-4296-80d0-5f4256a99675"
   struct IAppxBundleManifestPackageInfo3
     lpVtbl : IAppxBundleManifestPackageInfo3VTbl*
   end
@@ -1125,6 +1245,8 @@ lib LibWin32
     get_is_stub : Proc(IAppxBundleManifestPackageInfo4*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxBundleManifestPackageInfo4_GUID = LibC::GUID.new("5da6f13d-a8a7-4532-857c-1393d659371d")
+  CLSID_IAppxBundleManifestPackageInfo4 = "5da6f13d-a8a7-4532-857c-1393d659371d"
   struct IAppxBundleManifestPackageInfo4
     lpVtbl : IAppxBundleManifestPackageInfo4VTbl*
   end
@@ -1138,6 +1260,8 @@ lib LibWin32
     move_next : Proc(IAppxBundleManifestOptionalBundleInfoEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxBundleManifestOptionalBundleInfoEnumerator_GUID = LibC::GUID.new("9a178793-f97e-46ac-aaca-dd5ba4c177c8")
+  CLSID_IAppxBundleManifestOptionalBundleInfoEnumerator = "9a178793-f97e-46ac-aaca-dd5ba4c177c8"
   struct IAppxBundleManifestOptionalBundleInfoEnumerator
     lpVtbl : IAppxBundleManifestOptionalBundleInfoEnumeratorVTbl*
   end
@@ -1151,6 +1275,8 @@ lib LibWin32
     get_package_info_items : Proc(IAppxBundleManifestOptionalBundleInfo*, IAppxBundleManifestPackageInfoEnumerator*, HRESULT)
   end
 
+  IAppxBundleManifestOptionalBundleInfo_GUID = LibC::GUID.new("515bf2e8-bcb0-4d69-8c48-e383147b6e12")
+  CLSID_IAppxBundleManifestOptionalBundleInfo = "515bf2e8-bcb0-4d69-8c48-e383147b6e12"
   struct IAppxBundleManifestOptionalBundleInfo
     lpVtbl : IAppxBundleManifestOptionalBundleInfoVTbl*
   end
@@ -1164,6 +1290,8 @@ lib LibWin32
     move_next : Proc(IAppxContentGroupFilesEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxContentGroupFilesEnumerator_GUID = LibC::GUID.new("1a09a2fd-7440-44eb-8c84-848205a6a1cc")
+  CLSID_IAppxContentGroupFilesEnumerator = "1a09a2fd-7440-44eb-8c84-848205a6a1cc"
   struct IAppxContentGroupFilesEnumerator
     lpVtbl : IAppxContentGroupFilesEnumeratorVTbl*
   end
@@ -1176,6 +1304,8 @@ lib LibWin32
     get_files : Proc(IAppxContentGroup*, IAppxContentGroupFilesEnumerator*, HRESULT)
   end
 
+  IAppxContentGroup_GUID = LibC::GUID.new("328f6468-c04f-4e3c-b6fa-6b8d27f3003a")
+  CLSID_IAppxContentGroup = "328f6468-c04f-4e3c-b6fa-6b8d27f3003a"
   struct IAppxContentGroup
     lpVtbl : IAppxContentGroupVTbl*
   end
@@ -1189,6 +1319,8 @@ lib LibWin32
     move_next : Proc(IAppxContentGroupsEnumerator*, LibC::BOOL*, HRESULT)
   end
 
+  IAppxContentGroupsEnumerator_GUID = LibC::GUID.new("3264e477-16d1-4d63-823e-7d2984696634")
+  CLSID_IAppxContentGroupsEnumerator = "3264e477-16d1-4d63-823e-7d2984696634"
   struct IAppxContentGroupsEnumerator
     lpVtbl : IAppxContentGroupsEnumeratorVTbl*
   end
@@ -1201,6 +1333,8 @@ lib LibWin32
     get_automatic_groups : Proc(IAppxContentGroupMapReader*, IAppxContentGroupsEnumerator*, HRESULT)
   end
 
+  IAppxContentGroupMapReader_GUID = LibC::GUID.new("418726d8-dd99-4f5d-9886-157add20de01")
+  CLSID_IAppxContentGroupMapReader = "418726d8-dd99-4f5d-9886-157add20de01"
   struct IAppxContentGroupMapReader
     lpVtbl : IAppxContentGroupMapReaderVTbl*
   end
@@ -1213,6 +1347,8 @@ lib LibWin32
     get_automatic_groups : Proc(IAppxSourceContentGroupMapReader*, IAppxContentGroupsEnumerator*, HRESULT)
   end
 
+  IAppxSourceContentGroupMapReader_GUID = LibC::GUID.new("f329791d-540b-4a9f-bc75-3282b7d73193")
+  CLSID_IAppxSourceContentGroupMapReader = "f329791d-540b-4a9f-bc75-3282b7d73193"
   struct IAppxSourceContentGroupMapReader
     lpVtbl : IAppxSourceContentGroupMapReaderVTbl*
   end
@@ -1226,6 +1362,8 @@ lib LibWin32
     close : Proc(IAppxContentGroupMapWriter*, HRESULT)
   end
 
+  IAppxContentGroupMapWriter_GUID = LibC::GUID.new("d07ab776-a9de-4798-8c14-3db31e687c78")
+  CLSID_IAppxContentGroupMapWriter = "d07ab776-a9de-4798-8c14-3db31e687c78"
   struct IAppxContentGroupMapWriter
     lpVtbl : IAppxContentGroupMapWriterVTbl*
   end
@@ -1238,6 +1376,8 @@ lib LibWin32
     report_error : Proc(IAppxPackagingDiagnosticEventSink*, LibC::LPWSTR, HRESULT)
   end
 
+  IAppxPackagingDiagnosticEventSink_GUID = LibC::GUID.new("17239d47-6adb-45d2-80f6-f9cbc3bf059d")
+  CLSID_IAppxPackagingDiagnosticEventSink = "17239d47-6adb-45d2-80f6-f9cbc3bf059d"
   struct IAppxPackagingDiagnosticEventSink
     lpVtbl : IAppxPackagingDiagnosticEventSinkVTbl*
   end
@@ -1249,6 +1389,8 @@ lib LibWin32
     set_sink_for_process : Proc(IAppxPackagingDiagnosticEventSinkManager*, IAppxPackagingDiagnosticEventSink, HRESULT)
   end
 
+  IAppxPackagingDiagnosticEventSinkManager_GUID = LibC::GUID.new("369648fa-a7eb-4909-a15d-6954a078f18a")
+  CLSID_IAppxPackagingDiagnosticEventSinkManager = "369648fa-a7eb-4909-a15d-6954a078f18a"
   struct IAppxPackagingDiagnosticEventSinkManager
     lpVtbl : IAppxPackagingDiagnosticEventSinkManagerVTbl*
   end
@@ -1267,6 +1409,8 @@ lib LibWin32
     create_encrypted_bundle_reader : Proc(IAppxEncryptionFactory*, IStream, APPX_KEY_INFO*, IAppxBundleReader*, HRESULT)
   end
 
+  IAppxEncryptionFactory_GUID = LibC::GUID.new("80e8e04d-8c88-44ae-a011-7cadf6fb2e72")
+  CLSID_IAppxEncryptionFactory = "80e8e04d-8c88-44ae-a011-7cadf6fb2e72"
   struct IAppxEncryptionFactory
     lpVtbl : IAppxEncryptionFactoryVTbl*
   end
@@ -1278,6 +1422,8 @@ lib LibWin32
     create_encrypted_package_writer : Proc(IAppxEncryptionFactory2*, IStream, IStream, IStream, APPX_ENCRYPTED_PACKAGE_SETTINGS*, APPX_KEY_INFO*, APPX_ENCRYPTED_EXEMPTIONS*, IAppxEncryptedPackageWriter*, HRESULT)
   end
 
+  IAppxEncryptionFactory2_GUID = LibC::GUID.new("c1b11eee-c4ba-4ab2-a55d-d015fe8ff64f")
+  CLSID_IAppxEncryptionFactory2 = "c1b11eee-c4ba-4ab2-a55d-d015fe8ff64f"
   struct IAppxEncryptionFactory2
     lpVtbl : IAppxEncryptionFactory2VTbl*
   end
@@ -1292,6 +1438,8 @@ lib LibWin32
     create_encrypted_bundle_writer : Proc(IAppxEncryptionFactory3*, IStream, UInt64, APPX_ENCRYPTED_PACKAGE_SETTINGS2*, APPX_KEY_INFO*, APPX_ENCRYPTED_EXEMPTIONS*, IAppxEncryptedBundleWriter*, HRESULT)
   end
 
+  IAppxEncryptionFactory3_GUID = LibC::GUID.new("09edca37-cd64-47d6-b7e8-1cb11d4f7e05")
+  CLSID_IAppxEncryptionFactory3 = "09edca37-cd64-47d6-b7e8-1cb11d4f7e05"
   struct IAppxEncryptionFactory3
     lpVtbl : IAppxEncryptionFactory3VTbl*
   end
@@ -1303,6 +1451,8 @@ lib LibWin32
     encrypt_package : Proc(IAppxEncryptionFactory4*, IStream, IStream, APPX_ENCRYPTED_PACKAGE_SETTINGS2*, APPX_KEY_INFO*, APPX_ENCRYPTED_EXEMPTIONS*, UInt64, HRESULT)
   end
 
+  IAppxEncryptionFactory4_GUID = LibC::GUID.new("a879611f-12fd-41fe-85d5-06ae779bbaf5")
+  CLSID_IAppxEncryptionFactory4 = "a879611f-12fd-41fe-85d5-06ae779bbaf5"
   struct IAppxEncryptionFactory4
     lpVtbl : IAppxEncryptionFactory4VTbl*
   end
@@ -1315,6 +1465,8 @@ lib LibWin32
     close : Proc(IAppxEncryptedPackageWriter*, HRESULT)
   end
 
+  IAppxEncryptedPackageWriter_GUID = LibC::GUID.new("f43d0b0b-1379-40e2-9b29-682ea2bf42af")
+  CLSID_IAppxEncryptedPackageWriter = "f43d0b0b-1379-40e2-9b29-682ea2bf42af"
   struct IAppxEncryptedPackageWriter
     lpVtbl : IAppxEncryptedPackageWriterVTbl*
   end
@@ -1326,6 +1478,8 @@ lib LibWin32
     add_payload_files_encrypted : Proc(IAppxEncryptedPackageWriter2*, UInt32, APPX_PACKAGE_WRITER_PAYLOAD_STREAM*, UInt64, HRESULT)
   end
 
+  IAppxEncryptedPackageWriter2_GUID = LibC::GUID.new("3e475447-3a25-40b5-8ad2-f953ae50c92d")
+  CLSID_IAppxEncryptedPackageWriter2 = "3e475447-3a25-40b5-8ad2-f953ae50c92d"
   struct IAppxEncryptedPackageWriter2
     lpVtbl : IAppxEncryptedPackageWriter2VTbl*
   end
@@ -1338,6 +1492,8 @@ lib LibWin32
     close : Proc(IAppxEncryptedBundleWriter*, HRESULT)
   end
 
+  IAppxEncryptedBundleWriter_GUID = LibC::GUID.new("80b0902f-7bf0-4117-b8c6-4279ef81ee77")
+  CLSID_IAppxEncryptedBundleWriter = "80b0902f-7bf0-4117-b8c6-4279ef81ee77"
   struct IAppxEncryptedBundleWriter
     lpVtbl : IAppxEncryptedBundleWriterVTbl*
   end
@@ -1349,6 +1505,8 @@ lib LibWin32
     add_external_package_reference : Proc(IAppxEncryptedBundleWriter2*, LibC::LPWSTR, IStream, HRESULT)
   end
 
+  IAppxEncryptedBundleWriter2_GUID = LibC::GUID.new("e644be82-f0fa-42b8-a956-8d1cb48ee379")
+  CLSID_IAppxEncryptedBundleWriter2 = "e644be82-f0fa-42b8-a956-8d1cb48ee379"
   struct IAppxEncryptedBundleWriter2
     lpVtbl : IAppxEncryptedBundleWriter2VTbl*
   end
@@ -1361,6 +1519,8 @@ lib LibWin32
     add_external_package_reference : Proc(IAppxEncryptedBundleWriter3*, LibC::LPWSTR, IStream, LibC::BOOL, HRESULT)
   end
 
+  IAppxEncryptedBundleWriter3_GUID = LibC::GUID.new("0d34deb3-5cae-4dd3-977c-504932a51d31")
+  CLSID_IAppxEncryptedBundleWriter3 = "0d34deb3-5cae-4dd3-977c-504932a51d31"
   struct IAppxEncryptedBundleWriter3
     lpVtbl : IAppxEncryptedBundleWriter3VTbl*
   end
@@ -1377,6 +1537,8 @@ lib LibWin32
     update_package_manifest : Proc(IAppxPackageEditor*, IStream, IStream, LibC::BOOL, APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS, HRESULT)
   end
 
+  IAppxPackageEditor_GUID = LibC::GUID.new("e2adb6dc-5e71-4416-86b6-86e5f5291a6b")
+  CLSID_IAppxPackageEditor = "e2adb6dc-5e71-4416-86b6-86e5f5291a6b"
   struct IAppxPackageEditor
     lpVtbl : IAppxPackageEditorVTbl*
   end

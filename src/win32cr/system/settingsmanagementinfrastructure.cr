@@ -131,6 +131,8 @@ lib LibWin32
     reset : Proc(IItemEnumerator*, HRESULT)
   end
 
+  IItemEnumerator_GUID = LibC::GUID.new("9f7d7bb7-20b3-11da-81a5-0030f1642e3c")
+  CLSID_IItemEnumerator = "9f7d7bb7-20b3-11da-81a5-0030f1642e3c"
   struct IItemEnumerator
     lpVtbl : IItemEnumeratorVTbl*
   end
@@ -145,6 +147,8 @@ lib LibWin32
     set_flags : Proc(ISettingsIdentity*, UInt32, HRESULT)
   end
 
+  ISettingsIdentity_GUID = LibC::GUID.new("9f7d7bb6-20b3-11da-81a5-0030f1642e3c")
+  CLSID_ISettingsIdentity = "9f7d7bb6-20b3-11da-81a5-0030f1642e3c"
   struct ISettingsIdentity
     lpVtbl : ISettingsIdentityVTbl*
   end
@@ -176,6 +180,8 @@ lib LibWin32
     get_schema_hive_mount_name : Proc(ITargetInfo*, UInt8**, HRESULT)
   end
 
+  ITargetInfo_GUID = LibC::GUID.new("9f7d7bb8-20b3-11da-81a5-0030f1642e3c")
+  CLSID_ITargetInfo = "9f7d7bb8-20b3-11da-81a5-0030f1642e3c"
   struct ITargetInfo
     lpVtbl : ITargetInfoVTbl*
   end
@@ -202,6 +208,8 @@ lib LibWin32
     get_settings_context : Proc(ISettingsEngine*, ISettingsContext*, HRESULT)
   end
 
+  ISettingsEngine_GUID = LibC::GUID.new("9f7d7bb9-20b3-11da-81a5-0030f1642e3c")
+  CLSID_ISettingsEngine = "9f7d7bb9-20b3-11da-81a5-0030f1642e3c"
   struct ISettingsEngine
     lpVtbl : ISettingsEngineVTbl*
   end
@@ -234,6 +242,8 @@ lib LibWin32
     get_key_value : Proc(ISettingsItem*, VARIANT*, HRESULT)
   end
 
+  ISettingsItem_GUID = LibC::GUID.new("9f7d7bbb-20b3-11da-81a5-0030f1642e3c")
+  CLSID_ISettingsItem = "9f7d7bbb-20b3-11da-81a5-0030f1642e3c"
   struct ISettingsItem
     lpVtbl : ISettingsItemVTbl*
   end
@@ -251,6 +261,8 @@ lib LibWin32
     get_attribute : Proc(ISettingsNamespace*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
+  ISettingsNamespace_GUID = LibC::GUID.new("9f7d7bba-20b3-11da-81a5-0030f1642e3c")
+  CLSID_ISettingsNamespace = "9f7d7bba-20b3-11da-81a5-0030f1642e3c"
   struct ISettingsNamespace
     lpVtbl : ISettingsNamespaceVTbl*
   end
@@ -267,6 +279,8 @@ lib LibWin32
     get_source : Proc(ISettingsResult*, UInt8**, HRESULT)
   end
 
+  ISettingsResult_GUID = LibC::GUID.new("9f7d7bbc-20b3-11da-81a5-0030f1642e3c")
+  CLSID_ISettingsResult = "9f7d7bbc-20b3-11da-81a5-0030f1642e3c"
   struct ISettingsResult
     lpVtbl : ISettingsResultVTbl*
   end
@@ -284,6 +298,8 @@ lib LibWin32
     revert_setting : Proc(ISettingsContext*, ISettingsIdentity, LibC::LPWSTR, HRESULT)
   end
 
+  ISettingsContext_GUID = LibC::GUID.new("9f7d7bbd-20b3-11da-81a5-0030f1642e3c")
+  CLSID_ISettingsContext = "9f7d7bbd-20b3-11da-81a5-0030f1642e3c"
   struct ISettingsContext
     lpVtbl : ISettingsContextVTbl*
   end

@@ -386,6 +386,8 @@ lib LibWin32
     set_nfc_password_params : Proc(IWCNDevice*, WCN_PASSWORD_TYPE, UInt32, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, HRESULT)
   end
 
+  IWCNDevice_GUID = LibC::GUID.new("c100be9c-d33a-4a4b-bf23-bbef4663d017")
+  CLSID_IWCNDevice = "c100be9c-d33a-4a4b-bf23-bbef4663d017"
   struct IWCNDevice
     lpVtbl : IWCNDeviceVTbl*
   end
@@ -398,6 +400,8 @@ lib LibWin32
     connect_failed : Proc(IWCNConnectNotify*, HRESULT, HRESULT)
   end
 
+  IWCNConnectNotify_GUID = LibC::GUID.new("c100be9f-d33a-4a4b-bf23-bbef4663d017")
+  CLSID_IWCNConnectNotify = "c100be9f-d33a-4a4b-bf23-bbef4663d017"
   struct IWCNConnectNotify
     lpVtbl : IWCNConnectNotifyVTbl*
   end

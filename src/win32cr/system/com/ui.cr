@@ -24,6 +24,8 @@ lib LibWin32
     on_file_updated : Proc(IThumbnailExtractor*, IStorage, HRESULT)
   end
 
+  IThumbnailExtractor_GUID = LibC::GUID.new("969dc708-5c76-11d1-8d86-0000f804b057")
+  CLSID_IThumbnailExtractor = "969dc708-5c76-11d1-8d86-0000f804b057"
   struct IThumbnailExtractor
     lpVtbl : IThumbnailExtractorVTbl*
   end
@@ -35,6 +37,8 @@ lib LibWin32
     dummy : Proc(IDummyHICONIncluder*, LibC::HANDLE, HDC, HRESULT)
   end
 
+  IDummyHICONIncluder_GUID = LibC::GUID.new("947990de-cc28-11d2-a0f7-00805f858fb1")
+  CLSID_IDummyHICONIncluder = "947990de-cc28-11d2-a0f7-00805f858fb1"
   struct IDummyHICONIncluder
     lpVtbl : IDummyHICONIncluderVTbl*
   end

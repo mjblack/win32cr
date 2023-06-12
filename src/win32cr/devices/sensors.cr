@@ -501,6 +501,8 @@ lib LibWin32
     request_permissions : Proc(ISensorManager*, LibC::HANDLE, ISensorCollection, LibC::BOOL, HRESULT)
   end
 
+  ISensorManager_GUID = LibC::GUID.new("bd77db67-45a8-42dc-8d00-6dcf15f8377a")
+  CLSID_ISensorManager = "bd77db67-45a8-42dc-8d00-6dcf15f8377a"
   struct ISensorManager
     lpVtbl : ISensorManagerVTbl*
   end
@@ -513,6 +515,8 @@ lib LibWin32
     check_location_capability : Proc(ILocationPermissions*, UInt32, HRESULT)
   end
 
+  ILocationPermissions_GUID = LibC::GUID.new("d5fb0a7f-e74e-44f5-8e02-4806863a274f")
+  CLSID_ILocationPermissions = "d5fb0a7f-e74e-44f5-8e02-4806863a274f"
   struct ILocationPermissions
     lpVtbl : ILocationPermissionsVTbl*
   end
@@ -529,6 +533,8 @@ lib LibWin32
     clear : Proc(ISensorCollection*, HRESULT)
   end
 
+  ISensorCollection_GUID = LibC::GUID.new("23571e11-e545-4dd8-a337-b89bf44b10df")
+  CLSID_ISensorCollection = "23571e11-e545-4dd8-a337-b89bf44b10df"
   struct ISensorCollection
     lpVtbl : ISensorCollectionVTbl*
   end
@@ -554,6 +560,8 @@ lib LibWin32
     set_event_sink : Proc(ISensor*, ISensorEvents, HRESULT)
   end
 
+  ISensor_GUID = LibC::GUID.new("5fa08f80-2657-458e-af75-46f73fa6ac5c")
+  CLSID_ISensor = "5fa08f80-2657-458e-af75-46f73fa6ac5c"
   struct ISensor
     lpVtbl : ISensorVTbl*
   end
@@ -567,6 +575,8 @@ lib LibWin32
     get_sensor_values : Proc(ISensorDataReport*, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)
   end
 
+  ISensorDataReport_GUID = LibC::GUID.new("0ab9df9b-c4b5-4796-8898-0470706a2e1d")
+  CLSID_ISensorDataReport = "0ab9df9b-c4b5-4796-8898-0470706a2e1d"
   struct ISensorDataReport
     lpVtbl : ISensorDataReportVTbl*
   end
@@ -578,6 +588,8 @@ lib LibWin32
     on_sensor_enter : Proc(ISensorManagerEvents*, ISensor, SensorState, HRESULT)
   end
 
+  ISensorManagerEvents_GUID = LibC::GUID.new("9b3b0b86-266a-4aad-b21f-fde5501001b7")
+  CLSID_ISensorManagerEvents = "9b3b0b86-266a-4aad-b21f-fde5501001b7"
   struct ISensorManagerEvents
     lpVtbl : ISensorManagerEventsVTbl*
   end
@@ -592,6 +604,8 @@ lib LibWin32
     on_leave : Proc(ISensorEvents*, Guid*, HRESULT)
   end
 
+  ISensorEvents_GUID = LibC::GUID.new("5d8dcc91-4641-47e7-b7c3-b74f48a6c391")
+  CLSID_ISensorEvents = "5d8dcc91-4641-47e7-b7c3-b74f48a6c391"
   struct ISensorEvents
     lpVtbl : ISensorEventsVTbl*
   end

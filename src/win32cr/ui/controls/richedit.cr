@@ -1900,6 +1900,8 @@ lib LibWin32
     import_data_object : Proc(IRichEditOle*, IDataObject, UInt16, LibC::IntPtrT, HRESULT)
   end
 
+  IRichEditOle_GUID = LibC::GUID.new("00020d00-0000-0000-c000-000000000046")
+  CLSID_IRichEditOle = "00020d00-0000-0000-c000-000000000046"
   struct IRichEditOle
     lpVtbl : IRichEditOleVTbl*
   end
@@ -1920,6 +1922,8 @@ lib LibWin32
     get_context_menu : Proc(IRichEditOleCallback*, RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, IOleObject, CHARRANGE*, HANDLE*, HRESULT)
   end
 
+  IRichEditOleCallback_GUID = LibC::GUID.new("00020d03-0000-0000-c000-000000000046")
+  CLSID_IRichEditOleCallback = "00020d03-0000-0000-c000-000000000046"
   struct IRichEditOleCallback
     lpVtbl : IRichEditOleCallbackVTbl*
   end
@@ -1953,6 +1957,8 @@ lib LibWin32
     range_from_point : Proc(ITextDocument*, Int32, Int32, ITextRange*, HRESULT)
   end
 
+  ITextDocument_GUID = LibC::GUID.new("8cc497c0-a1df-11ce-8098-00aa0047be5d")
+  CLSID_ITextDocument = "8cc497c0-a1df-11ce-8098-00aa0047be5d"
   struct ITextDocument
     lpVtbl : ITextDocumentVTbl*
   end
@@ -2018,6 +2024,8 @@ lib LibWin32
     get_embedded_object : Proc(ITextRange*, IUnknown*, HRESULT)
   end
 
+  ITextRange_GUID = LibC::GUID.new("8cc497c2-a1df-11ce-8098-00aa0047be5d")
+  CLSID_ITextRange = "8cc497c2-a1df-11ce-8098-00aa0047be5d"
   struct ITextRange
     lpVtbl : ITextRangeVTbl*
   end
@@ -2093,6 +2101,8 @@ lib LibWin32
     type_text : Proc(ITextSelection*, UInt8*, HRESULT)
   end
 
+  ITextSelection_GUID = LibC::GUID.new("8cc497c1-a1df-11ce-8098-00aa0047be5d")
+  CLSID_ITextSelection = "8cc497c1-a1df-11ce-8098-00aa0047be5d"
   struct ITextSelection
     lpVtbl : ITextSelectionVTbl*
   end
@@ -2162,6 +2172,8 @@ lib LibWin32
     set_weight : Proc(ITextFont*, Int32, HRESULT)
   end
 
+  ITextFont_GUID = LibC::GUID.new("8cc497c3-a1df-11ce-8098-00aa0047be5d")
+  CLSID_ITextFont = "8cc497c3-a1df-11ce-8098-00aa0047be5d"
   struct ITextFont
     lpVtbl : ITextFontVTbl*
   end
@@ -2224,6 +2236,8 @@ lib LibWin32
     get_tab : Proc(ITextPara*, Int32, Float32*, Int32*, Int32*, HRESULT)
   end
 
+  ITextPara_GUID = LibC::GUID.new("8cc497c4-a1df-11ce-8098-00aa0047be5d")
+  CLSID_ITextPara = "8cc497c4-a1df-11ce-8098-00aa0047be5d"
   struct ITextPara
     lpVtbl : ITextParaVTbl*
   end
@@ -2241,6 +2255,8 @@ lib LibWin32
     get_count : Proc(ITextStoryRanges*, Int32*, HRESULT)
   end
 
+  ITextStoryRanges_GUID = LibC::GUID.new("8cc497c5-a1df-11ce-8098-00aa0047be5d")
+  CLSID_ITextStoryRanges = "8cc497c5-a1df-11ce-8098-00aa0047be5d"
   struct ITextStoryRanges
     lpVtbl : ITextStoryRangesVTbl*
   end
@@ -2318,6 +2334,8 @@ lib LibWin32
     get_story : Proc(ITextDocument2*, Int32, ITextStory*, HRESULT)
   end
 
+  ITextDocument2_GUID = LibC::GUID.new("c241f5e0-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextDocument2 = "c241f5e0-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextDocument2
     lpVtbl : ITextDocument2VTbl*
   end
@@ -2433,6 +2451,8 @@ lib LibWin32
     insert_image : Proc(ITextRange2*, Int32, Int32, Int32, TEXT_ALIGN_OPTIONS, UInt8*, IStream, HRESULT)
   end
 
+  ITextRange2_GUID = LibC::GUID.new("c241f5e2-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextRange2 = "c241f5e2-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextRange2
     lpVtbl : ITextRange2VTbl*
   end
@@ -2548,6 +2568,8 @@ lib LibWin32
     insert_image : Proc(ITextSelection2*, Int32, Int32, Int32, TEXT_ALIGN_OPTIONS, UInt8*, IStream, HRESULT)
   end
 
+  ITextSelection2_GUID = LibC::GUID.new("c241f5e1-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextSelection2 = "c241f5e1-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextSelection2
     lpVtbl : ITextSelection2VTbl*
   end
@@ -2663,6 +2685,8 @@ lib LibWin32
     set_property : Proc(ITextFont2*, Int32, Int32, HRESULT)
   end
 
+  ITextFont2_GUID = LibC::GUID.new("c241f5e3-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextFont2 = "c241f5e3-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextFont2
     lpVtbl : ITextFont2VTbl*
   end
@@ -2741,6 +2765,8 @@ lib LibWin32
     set_property : Proc(ITextPara2*, Int32, Int32, HRESULT)
   end
 
+  ITextPara2_GUID = LibC::GUID.new("c241f5e4-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextPara2 = "c241f5e4-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextPara2
     lpVtbl : ITextPara2VTbl*
   end
@@ -2759,6 +2785,8 @@ lib LibWin32
     item2 : Proc(ITextStoryRanges2*, Int32, ITextRange2*, HRESULT)
   end
 
+  ITextStoryRanges2_GUID = LibC::GUID.new("c241f5e5-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextStoryRanges2 = "c241f5e5-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextStoryRanges2
     lpVtbl : ITextStoryRanges2VTbl*
   end
@@ -2781,6 +2809,8 @@ lib LibWin32
     set_text : Proc(ITextStory*, Int32, UInt8*, HRESULT)
   end
 
+  ITextStory_GUID = LibC::GUID.new("c241f5f3-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextStory = "c241f5f3-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextStory
     lpVtbl : ITextStoryVTbl*
   end
@@ -2812,6 +2842,8 @@ lib LibWin32
     swap : Proc(ITextStrings*, HRESULT)
   end
 
+  ITextStrings_GUID = LibC::GUID.new("c241f5e7-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextStrings = "c241f5e7-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextStrings
     lpVtbl : ITextStringsVTbl*
   end
@@ -2872,6 +2904,8 @@ lib LibWin32
     set_property : Proc(ITextRow*, Int32, Int32, HRESULT)
   end
 
+  ITextRow_GUID = LibC::GUID.new("c241f5ef-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextRow = "c241f5ef-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextRow
     lpVtbl : ITextRowVTbl*
   end
@@ -2886,6 +2920,8 @@ lib LibWin32
     invoke : Proc(ITextDisplays*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
+  ITextDisplays_GUID = LibC::GUID.new("c241f5f2-7206-11d8-a2c7-00a0d1d6c6b3")
+  CLSID_ITextDisplays = "c241f5f2-7206-11d8-a2c7-00a0d1d6c6b3"
   struct ITextDisplays
     lpVtbl : ITextDisplaysVTbl*
   end
@@ -2943,6 +2979,8 @@ lib LibWin32
     release_call_manager : Proc(ITextDocument2Old*, IUnknown, HRESULT)
   end
 
+  ITextDocument2Old_GUID = LibC::GUID.new("01c25500-4268-11d1-883a-3c8b00c10000")
+  CLSID_ITextDocument2Old = "01c25500-4268-11d1-883a-3c8b00c10000"
   struct ITextDocument2Old
     lpVtbl : ITextDocument2OldVTbl*
   end

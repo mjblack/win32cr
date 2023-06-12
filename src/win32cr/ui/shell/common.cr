@@ -125,6 +125,8 @@ lib LibWin32
     get_at : Proc(IObjectArray*, UInt32, Guid*, Void**, HRESULT)
   end
 
+  IObjectArray_GUID = LibC::GUID.new("92ca9dcd-5622-4bba-a805-5e9f541bd8c9")
+  CLSID_IObjectArray = "92ca9dcd-5622-4bba-a805-5e9f541bd8c9"
   struct IObjectArray
     lpVtbl : IObjectArrayVTbl*
   end
@@ -141,6 +143,8 @@ lib LibWin32
     clear : Proc(IObjectCollection*, HRESULT)
   end
 
+  IObjectCollection_GUID = LibC::GUID.new("5632b1a4-e38a-400a-928a-d4cd63230295")
+  CLSID_IObjectCollection = "5632b1a4-e38a-400a-928a-d4cd63230295"
   struct IObjectCollection
     lpVtbl : IObjectCollectionVTbl*
   end

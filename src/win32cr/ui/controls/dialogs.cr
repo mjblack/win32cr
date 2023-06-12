@@ -631,6 +631,8 @@ lib LibWin32
     handle_message : Proc(IPrintDialogCallback*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
   end
 
+  IPrintDialogCallback_GUID = LibC::GUID.new("5852a2c3-6530-11d1-b6a3-0000f8757bf9")
+  CLSID_IPrintDialogCallback = "5852a2c3-6530-11d1-b6a3-0000f8757bf9"
   struct IPrintDialogCallback
     lpVtbl : IPrintDialogCallbackVTbl*
   end
@@ -644,6 +646,8 @@ lib LibWin32
     get_current_port_name : Proc(IPrintDialogServices*, Char*, UInt32*, HRESULT)
   end
 
+  IPrintDialogServices_GUID = LibC::GUID.new("509aaeda-5639-11d1-b6a1-0000f8757bf9")
+  CLSID_IPrintDialogServices = "509aaeda-5639-11d1-b6a1-0000f8757bf9"
   struct IPrintDialogServices
     lpVtbl : IPrintDialogServicesVTbl*
   end

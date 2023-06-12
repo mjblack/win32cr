@@ -7698,6 +7698,8 @@ lib LibWin32
     set_all_settings_with_notify : Proc(ICodecAPI*, IStream, Guid**, UInt32*, HRESULT)
   end
 
+  ICodecAPI_GUID = LibC::GUID.new("901db4c7-31ce-41a2-85dc-8fa0bf41b8da")
+  CLSID_ICodecAPI = "901db4c7-31ce-41a2-85dc-8fa0bf41b8da"
   struct ICodecAPI
     lpVtbl : ICodecAPIVTbl*
   end
@@ -7709,6 +7711,8 @@ lib LibWin32
     check_device_overlay_type : Proc(IDirect3D9ExOverlayExtension*, UInt32, D3DDEVTYPE, UInt32, UInt32, D3DFORMAT, D3DDISPLAYMODEEX*, D3DDISPLAYROTATION, D3DOVERLAYCAPS*, HRESULT)
   end
 
+  IDirect3D9ExOverlayExtension_GUID = LibC::GUID.new("187aeb13-aaf5-4c59-876d-e059088c0df8")
+  CLSID_IDirect3D9ExOverlayExtension = "187aeb13-aaf5-4c59-876d-e059088c0df8"
   struct IDirect3D9ExOverlayExtension
     lpVtbl : IDirect3D9ExOverlayExtensionVTbl*
   end
@@ -7722,6 +7726,8 @@ lib LibWin32
     create_crypto_session : Proc(IDirect3DDevice9Video*, Guid*, Guid*, IDirect3DCryptoSession9*, LibC::HANDLE*, HRESULT)
   end
 
+  IDirect3DDevice9Video_GUID = LibC::GUID.new("26dc4561-a1ee-4ae7-96da-118a36c0ec95")
+  CLSID_IDirect3DDevice9Video = "26dc4561-a1ee-4ae7-96da-118a36c0ec95"
   struct IDirect3DDevice9Video
     lpVtbl : IDirect3DDevice9VideoVTbl*
   end
@@ -7737,6 +7743,8 @@ lib LibWin32
     configure : Proc(IDirect3DAuthenticatedChannel9*, UInt32, Void*, D3DAUTHENTICATEDCHANNEL_CONFIGURE_OUTPUT*, HRESULT)
   end
 
+  IDirect3DAuthenticatedChannel9_GUID = LibC::GUID.new("ff24beee-da21-4beb-98b5-d2f899f98af9")
+  CLSID_IDirect3DAuthenticatedChannel9 = "ff24beee-da21-4beb-98b5-d2f899f98af9"
   struct IDirect3DAuthenticatedChannel9
     lpVtbl : IDirect3DAuthenticatedChannel9VTbl*
   end
@@ -7756,6 +7764,8 @@ lib LibWin32
     get_encryption_blt_key : Proc(IDirect3DCryptoSession9*, Void*, UInt32, HRESULT)
   end
 
+  IDirect3DCryptoSession9_GUID = LibC::GUID.new("fa0ab799-7a9c-48ca-8c5b-237e71a54434")
+  CLSID_IDirect3DCryptoSession9 = "fa0ab799-7a9c-48ca-8c5b-237e71a54434"
   struct IDirect3DCryptoSession9
     lpVtbl : IDirect3DCryptoSession9VTbl*
   end
@@ -7772,6 +7782,8 @@ lib LibWin32
     get_desc : Proc(ID3D12VideoDecoderHeap*, D3D12_VIDEO_DECODER_HEAP_DESC)
   end
 
+  ID3D12VideoDecoderHeap_GUID = LibC::GUID.new("0946b7c9-ebf6-4047-bb73-8683e27dbb1f")
+  CLSID_ID3D12VideoDecoderHeap = "0946b7c9-ebf6-4047-bb73-8683e27dbb1f"
   struct ID3D12VideoDecoderHeap
     lpVtbl : ID3D12VideoDecoderHeapVTbl*
   end
@@ -7786,6 +7798,8 @@ lib LibWin32
     create_video_processor : Proc(ID3D12VideoDevice*, UInt32, D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC*, UInt32, D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoDevice_GUID = LibC::GUID.new("1f052807-0b46-4acc-8a89-364f793718a4")
+  CLSID_ID3D12VideoDevice = "1f052807-0b46-4acc-8a89-364f793718a4"
   struct ID3D12VideoDevice
     lpVtbl : ID3D12VideoDeviceVTbl*
   end
@@ -7802,6 +7816,8 @@ lib LibWin32
     get_desc : Proc(ID3D12VideoDecoder*, D3D12_VIDEO_DECODER_DESC)
   end
 
+  ID3D12VideoDecoder_GUID = LibC::GUID.new("c59b6bdc-7720-4074-a136-17a156037470")
+  CLSID_ID3D12VideoDecoder = "c59b6bdc-7720-4074-a136-17a156037470"
   struct ID3D12VideoDecoder
     lpVtbl : ID3D12VideoDecoderVTbl*
   end
@@ -7821,6 +7837,8 @@ lib LibWin32
     get_output_stream_desc : Proc(ID3D12VideoProcessor*, D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC)
   end
 
+  ID3D12VideoProcessor_GUID = LibC::GUID.new("304fdb32-bede-410a-8545-943ac6a46138")
+  CLSID_ID3D12VideoProcessor = "304fdb32-bede-410a-8545-943ac6a46138"
   struct ID3D12VideoProcessor
     lpVtbl : ID3D12VideoProcessorVTbl*
   end
@@ -7851,6 +7869,8 @@ lib LibWin32
     write_buffer_immediate : Proc(ID3D12VideoDecodeCommandList*, UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
   end
 
+  ID3D12VideoDecodeCommandList_GUID = LibC::GUID.new("3b60536e-ad29-4e64-a269-f853837e5e53")
+  CLSID_ID3D12VideoDecodeCommandList = "3b60536e-ad29-4e64-a269-f853837e5e53"
   struct ID3D12VideoDecodeCommandList
     lpVtbl : ID3D12VideoDecodeCommandListVTbl*
   end
@@ -7881,6 +7901,8 @@ lib LibWin32
     write_buffer_immediate : Proc(ID3D12VideoProcessCommandList*, UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
   end
 
+  ID3D12VideoProcessCommandList_GUID = LibC::GUID.new("aeb2543a-167f-4682-acc8-d159ed4a6209")
+  CLSID_ID3D12VideoProcessCommandList = "aeb2543a-167f-4682-acc8-d159ed4a6209"
   struct ID3D12VideoProcessCommandList
     lpVtbl : ID3D12VideoProcessCommandListVTbl*
   end
@@ -7912,6 +7934,8 @@ lib LibWin32
     decode_frame1 : Proc(ID3D12VideoDecodeCommandList1*, ID3D12VideoDecoder, D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1*, D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS*, Void)
   end
 
+  ID3D12VideoDecodeCommandList1_GUID = LibC::GUID.new("d52f011b-b56e-453c-a05a-a7f311c8f472")
+  CLSID_ID3D12VideoDecodeCommandList1 = "d52f011b-b56e-453c-a05a-a7f311c8f472"
   struct ID3D12VideoDecodeCommandList1
     lpVtbl : ID3D12VideoDecodeCommandList1VTbl*
   end
@@ -7943,6 +7967,8 @@ lib LibWin32
     process_frames1 : Proc(ID3D12VideoProcessCommandList1*, ID3D12VideoProcessor, D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS*, UInt32, D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1*, Void)
   end
 
+  ID3D12VideoProcessCommandList1_GUID = LibC::GUID.new("542c5c4d-7596-434f-8c93-4efa6766f267")
+  CLSID_ID3D12VideoProcessCommandList1 = "542c5c4d-7596-434f-8c93-4efa6766f267"
   struct ID3D12VideoProcessCommandList1
     lpVtbl : ID3D12VideoProcessCommandList1VTbl*
   end
@@ -7960,6 +7986,8 @@ lib LibWin32
     get_protected_resource_session : Proc(ID3D12VideoMotionEstimator*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoMotionEstimator_GUID = LibC::GUID.new("33fdae0e-098b-428f-87bb-34b695de08f8")
+  CLSID_ID3D12VideoMotionEstimator = "33fdae0e-098b-428f-87bb-34b695de08f8"
   struct ID3D12VideoMotionEstimator
     lpVtbl : ID3D12VideoMotionEstimatorVTbl*
   end
@@ -7977,6 +8005,8 @@ lib LibWin32
     get_protected_resource_session : Proc(ID3D12VideoMotionVectorHeap*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoMotionVectorHeap_GUID = LibC::GUID.new("5be17987-743a-4061-834b-23d22daea505")
+  CLSID_ID3D12VideoMotionVectorHeap = "5be17987-743a-4061-834b-23d22daea505"
   struct ID3D12VideoMotionVectorHeap
     lpVtbl : ID3D12VideoMotionVectorHeapVTbl*
   end
@@ -7993,6 +8023,8 @@ lib LibWin32
     create_video_motion_vector_heap : Proc(ID3D12VideoDevice1*, D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoDevice1_GUID = LibC::GUID.new("981611ad-a144-4c83-9890-f30e26d658ab")
+  CLSID_ID3D12VideoDevice1 = "981611ad-a144-4c83-9890-f30e26d658ab"
   struct ID3D12VideoDevice1
     lpVtbl : ID3D12VideoDevice1VTbl*
   end
@@ -8025,6 +8057,8 @@ lib LibWin32
     set_protected_resource_session : Proc(ID3D12VideoEncodeCommandList*, ID3D12ProtectedResourceSession, Void)
   end
 
+  ID3D12VideoEncodeCommandList_GUID = LibC::GUID.new("8455293a-0cbd-4831-9b39-fbdbab724723")
+  CLSID_ID3D12VideoEncodeCommandList = "8455293a-0cbd-4831-9b39-fbdbab724723"
   struct ID3D12VideoEncodeCommandList
     lpVtbl : ID3D12VideoEncodeCommandListVTbl*
   end
@@ -8042,6 +8076,8 @@ lib LibWin32
     get_protected_resource_session : Proc(ID3D12VideoDecoder1*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoDecoder1_GUID = LibC::GUID.new("79a2e5fb-ccd2-469a-9fde-195d10951f7e")
+  CLSID_ID3D12VideoDecoder1 = "79a2e5fb-ccd2-469a-9fde-195d10951f7e"
   struct ID3D12VideoDecoder1
     lpVtbl : ID3D12VideoDecoder1VTbl*
   end
@@ -8059,6 +8095,8 @@ lib LibWin32
     get_protected_resource_session : Proc(ID3D12VideoDecoderHeap1*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoDecoderHeap1_GUID = LibC::GUID.new("da1d98c5-539f-41b2-bf6b-1198a03b6d26")
+  CLSID_ID3D12VideoDecoderHeap1 = "da1d98c5-539f-41b2-bf6b-1198a03b6d26"
   struct ID3D12VideoDecoderHeap1
     lpVtbl : ID3D12VideoDecoderHeap1VTbl*
   end
@@ -8079,6 +8117,8 @@ lib LibWin32
     get_protected_resource_session : Proc(ID3D12VideoProcessor1*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoProcessor1_GUID = LibC::GUID.new("f3cfe615-553f-425c-86d8-ee8c1b1fb01c")
+  CLSID_ID3D12VideoProcessor1 = "f3cfe615-553f-425c-86d8-ee8c1b1fb01c"
   struct ID3D12VideoProcessor1
     lpVtbl : ID3D12VideoProcessor1VTbl*
   end
@@ -8096,6 +8136,8 @@ lib LibWin32
     get_protected_resource_session : Proc(ID3D12VideoExtensionCommand*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoExtensionCommand_GUID = LibC::GUID.new("554e41e8-ae8e-4a8c-b7d2-5b4f274a30e4")
+  CLSID_ID3D12VideoExtensionCommand = "554e41e8-ae8e-4a8c-b7d2-5b4f274a30e4"
   struct ID3D12VideoExtensionCommand
     lpVtbl : ID3D12VideoExtensionCommandVTbl*
   end
@@ -8117,6 +8159,8 @@ lib LibWin32
     execute_extension_command : Proc(ID3D12VideoDevice2*, ID3D12VideoExtensionCommand, Void*, LibC::UINT_PTR, Void*, LibC::UINT_PTR, HRESULT)
   end
 
+  ID3D12VideoDevice2_GUID = LibC::GUID.new("f019ac49-f838-4a95-9b17-579437c8f513")
+  CLSID_ID3D12VideoDevice2 = "f019ac49-f838-4a95-9b17-579437c8f513"
   struct ID3D12VideoDevice2
     lpVtbl : ID3D12VideoDevice2VTbl*
   end
@@ -8151,6 +8195,8 @@ lib LibWin32
     execute_extension_command : Proc(ID3D12VideoDecodeCommandList2*, ID3D12VideoExtensionCommand, Void*, LibC::UINT_PTR, Void)
   end
 
+  ID3D12VideoDecodeCommandList2_GUID = LibC::GUID.new("6e120880-c114-4153-8036-d247051e1729")
+  CLSID_ID3D12VideoDecodeCommandList2 = "6e120880-c114-4153-8036-d247051e1729"
   struct ID3D12VideoDecodeCommandList2
     lpVtbl : ID3D12VideoDecodeCommandList2VTbl*
   end
@@ -8185,6 +8231,8 @@ lib LibWin32
     execute_extension_command : Proc(ID3D12VideoProcessCommandList2*, ID3D12VideoExtensionCommand, Void*, LibC::UINT_PTR, Void)
   end
 
+  ID3D12VideoProcessCommandList2_GUID = LibC::GUID.new("db525ae4-6ad6-473c-baa7-59b2e37082e4")
+  CLSID_ID3D12VideoProcessCommandList2 = "db525ae4-6ad6-473c-baa7-59b2e37082e4"
   struct ID3D12VideoProcessCommandList2
     lpVtbl : ID3D12VideoProcessCommandList2VTbl*
   end
@@ -8219,6 +8267,8 @@ lib LibWin32
     execute_extension_command : Proc(ID3D12VideoEncodeCommandList1*, ID3D12VideoExtensionCommand, Void*, LibC::UINT_PTR, Void)
   end
 
+  ID3D12VideoEncodeCommandList1_GUID = LibC::GUID.new("94971eca-2bdb-4769-88cf-3675ea757ebc")
+  CLSID_ID3D12VideoEncodeCommandList1 = "94971eca-2bdb-4769-88cf-3675ea757ebc"
   struct ID3D12VideoEncodeCommandList1
     lpVtbl : ID3D12VideoEncodeCommandList1VTbl*
   end
@@ -8241,6 +8291,8 @@ lib LibWin32
     get_max_motion_estimation_precision : Proc(ID3D12VideoEncoder*, D3D12_VIDEO_ENCODER_MOTION_ESTIMATION_PRECISION_MODE)
   end
 
+  ID3D12VideoEncoder_GUID = LibC::GUID.new("2e0d212d-8df9-44a6-a770-bb289b182737")
+  CLSID_ID3D12VideoEncoder = "2e0d212d-8df9-44a6-a770-bb289b182737"
   struct ID3D12VideoEncoder
     lpVtbl : ID3D12VideoEncoderVTbl*
   end
@@ -8263,6 +8315,8 @@ lib LibWin32
     get_resolution_list : Proc(ID3D12VideoEncoderHeap*, UInt32, D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC*, HRESULT)
   end
 
+  ID3D12VideoEncoderHeap_GUID = LibC::GUID.new("22b35d96-876a-44c0-b25e-fb8c9c7f1c4a")
+  CLSID_ID3D12VideoEncoderHeap = "22b35d96-876a-44c0-b25e-fb8c9c7f1c4a"
   struct ID3D12VideoEncoderHeap
     lpVtbl : ID3D12VideoEncoderHeapVTbl*
   end
@@ -8286,6 +8340,8 @@ lib LibWin32
     create_video_encoder_heap : Proc(ID3D12VideoDevice3*, D3D12_VIDEO_ENCODER_HEAP_DESC*, Guid*, Void**, HRESULT)
   end
 
+  ID3D12VideoDevice3_GUID = LibC::GUID.new("4243adb4-3a32-4666-973c-0ccc5625dc44")
+  CLSID_ID3D12VideoDevice3 = "4243adb4-3a32-4666-973c-0ccc5625dc44"
   struct ID3D12VideoDevice3
     lpVtbl : ID3D12VideoDevice3VTbl*
   end
@@ -8322,6 +8378,8 @@ lib LibWin32
     resolve_encoder_output_metadata : Proc(ID3D12VideoEncodeCommandList2*, D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS*, D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS*, Void)
   end
 
+  ID3D12VideoEncodeCommandList2_GUID = LibC::GUID.new("895491e2-e701-46a9-9a1f-8d3480ed867a")
+  CLSID_ID3D12VideoEncodeCommandList2 = "895491e2-e701-46a9-9a1f-8d3480ed867a"
   struct ID3D12VideoEncodeCommandList2
     lpVtbl : ID3D12VideoEncodeCommandList2VTbl*
   end
@@ -8333,6 +8391,8 @@ lib LibWin32
     set_identifier : Proc(IWMValidate*, Guid, HRESULT)
   end
 
+  IWMValidate_GUID = LibC::GUID.new("cee3def2-3808-414d-be66-fafd472210bc")
+  CLSID_IWMValidate = "cee3def2-3808-414d-be66-fafd472210bc"
   struct IWMValidate
     lpVtbl : IWMValidateVTbl*
   end
@@ -8344,6 +8404,8 @@ lib LibWin32
     get_identifier : Proc(IValidateBinding*, Guid, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
   end
 
+  IValidateBinding_GUID = LibC::GUID.new("04a578b2-e778-422a-a805-b3ee54d90bd9")
+  CLSID_IValidateBinding = "04a578b2-e778-422a-a805-b3ee54d90bd9"
   struct IValidateBinding
     lpVtbl : IValidateBindingVTbl*
   end
@@ -8356,6 +8418,8 @@ lib LibWin32
     get_hurryup : Proc(IWMVideoDecoderHurryup*, Int32*, HRESULT)
   end
 
+  IWMVideoDecoderHurryup_GUID = LibC::GUID.new("352bb3bd-2d4d-4323-9e71-dcdcfbd53ca6")
+  CLSID_IWMVideoDecoderHurryup = "352bb3bd-2d4d-4323-9e71-dcdcfbd53ca6"
   struct IWMVideoDecoderHurryup
     lpVtbl : IWMVideoDecoderHurryupVTbl*
   end
@@ -8367,6 +8431,8 @@ lib LibWin32
     set_key_frame : Proc(IWMVideoForceKeyFrame*, HRESULT)
   end
 
+  IWMVideoForceKeyFrame_GUID = LibC::GUID.new("9f8496be-5b9a-41b9-a9e8-f21cd80596c2")
+  CLSID_IWMVideoForceKeyFrame = "9f8496be-5b9a-41b9-a9e8-f21cd80596c2"
   struct IWMVideoForceKeyFrame
     lpVtbl : IWMVideoForceKeyFrameVTbl*
   end
@@ -8379,6 +8445,8 @@ lib LibWin32
     get_description : Proc(IWMCodecStrings*, DMO_MEDIA_TYPE*, UInt32, Char*, UInt32*, HRESULT)
   end
 
+  IWMCodecStrings_GUID = LibC::GUID.new("a7b2504b-e58a-47fb-958b-cac7165a057d")
+  CLSID_IWMCodecStrings = "a7b2504b-e58a-47fb-958b-cac7165a057d"
   struct IWMCodecStrings
     lpVtbl : IWMCodecStringsVTbl*
   end
@@ -8391,6 +8459,8 @@ lib LibWin32
     get_codec_prop : Proc(IWMCodecProps*, UInt32, LibC::LPWSTR, WMT_PROP_DATATYPE*, UInt8*, UInt32*, HRESULT)
   end
 
+  IWMCodecProps_GUID = LibC::GUID.new("2573e11a-f01a-4fdd-a98d-63b8e0ba9589")
+  CLSID_IWMCodecProps = "2573e11a-f01a-4fdd-a98d-63b8e0ba9589"
   struct IWMCodecProps
     lpVtbl : IWMCodecPropsVTbl*
   end
@@ -8405,6 +8475,8 @@ lib LibWin32
     get_buffer_fullness_bits : Proc(IWMCodecLeakyBucket*, UInt32*, HRESULT)
   end
 
+  IWMCodecLeakyBucket_GUID = LibC::GUID.new("a81ba647-6227-43b7-b231-c7b15135dd7d")
+  CLSID_IWMCodecLeakyBucket = "a81ba647-6227-43b7-b231-c7b15135dd7d"
   struct IWMCodecLeakyBucket
     lpVtbl : IWMCodecLeakyBucketVTbl*
   end
@@ -8416,6 +8488,8 @@ lib LibWin32
     get_next_output_time : Proc(IWMCodecOutputTimestamp*, Int64*, HRESULT)
   end
 
+  IWMCodecOutputTimestamp_GUID = LibC::GUID.new("b72adf95-7adc-4a72-bc05-577d8ea6bf68")
+  CLSID_IWMCodecOutputTimestamp = "b72adf95-7adc-4a72-bc05-577d8ea6bf68"
   struct IWMCodecOutputTimestamp
     lpVtbl : IWMCodecOutputTimestampVTbl*
   end
@@ -8429,6 +8503,8 @@ lib LibWin32
     set_reconstructed_video_frame : Proc(IWMVideoDecoderReconBuffer*, IMediaBuffer, HRESULT)
   end
 
+  IWMVideoDecoderReconBuffer_GUID = LibC::GUID.new("45bda2ac-88e2-4923-98ba-3949080711a3")
+  CLSID_IWMVideoDecoderReconBuffer = "45bda2ac-88e2-4923-98ba-3949080711a3"
   struct IWMVideoDecoderReconBuffer
     lpVtbl : IWMVideoDecoderReconBufferVTbl*
   end
@@ -8441,6 +8517,8 @@ lib LibWin32
     get_private_data : Proc(IWMCodecPrivateData*, UInt8*, UInt32*, HRESULT)
   end
 
+  IWMCodecPrivateData_GUID = LibC::GUID.new("73f0be8e-57f7-4f01-aa66-9f57340cfe0e")
+  CLSID_IWMCodecPrivateData = "73f0be8e-57f7-4f01-aa66-9f57340cfe0e"
   struct IWMCodecPrivateData
     lpVtbl : IWMCodecPrivateDataVTbl*
   end
@@ -8452,6 +8530,8 @@ lib LibWin32
     set_use_sample_extensions : Proc(IWMSampleExtensionSupport*, LibC::BOOL, HRESULT)
   end
 
+  IWMSampleExtensionSupport_GUID = LibC::GUID.new("9bca9884-0604-4c2a-87da-793ff4d586c3")
+  CLSID_IWMSampleExtensionSupport = "9bca9884-0604-4c2a-87da-793ff4d586c3"
   struct IWMSampleExtensionSupport
     lpVtbl : IWMSampleExtensionSupportVTbl*
   end
@@ -8464,6 +8544,8 @@ lib LibWin32
     set_user_channel_mtx : Proc(IWMResamplerProps*, Float32*, HRESULT)
   end
 
+  IWMResamplerProps_GUID = LibC::GUID.new("e7e9984f-f09f-4da4-903f-6e2e0efe56b5")
+  CLSID_IWMResamplerProps = "e7e9984f-f09f-4da4-903f-6e2e0efe56b5"
   struct IWMResamplerProps
     lpVtbl : IWMResamplerPropsVTbl*
   end
@@ -8479,6 +8561,8 @@ lib LibWin32
     get_full_crop_region : Proc(IWMResizerProps*, Int32*, Int32*, Int32*, Int32*, Int32*, Int32*, Int32*, Int32*, HRESULT)
   end
 
+  IWMResizerProps_GUID = LibC::GUID.new("57665d4c-0414-4faa-905b-10e546f81c33")
+  CLSID_IWMResizerProps = "57665d4c-0414-4faa-905b-10e546f81c33"
   struct IWMResizerProps
     lpVtbl : IWMResizerPropsVTbl*
   end
@@ -8490,6 +8574,8 @@ lib LibWin32
     set_color_legalizer_quality : Proc(IWMColorLegalizerProps*, Int32, HRESULT)
   end
 
+  IWMColorLegalizerProps_GUID = LibC::GUID.new("776c93b3-b72d-4508-b6d0-208785f553e7")
+  CLSID_IWMColorLegalizerProps = "776c93b3-b72d-4508-b6d0-208785f553e7"
   struct IWMColorLegalizerProps
     lpVtbl : IWMColorLegalizerPropsVTbl*
   end
@@ -8503,6 +8589,8 @@ lib LibWin32
     set_last_frame : Proc(IWMInterlaceProps*, HRESULT)
   end
 
+  IWMInterlaceProps_GUID = LibC::GUID.new("7b12e5d1-bd22-48ea-bc06-98e893221c89")
+  CLSID_IWMInterlaceProps = "7b12e5d1-bd22-48ea-bc06-98e893221c89"
   struct IWMInterlaceProps
     lpVtbl : IWMInterlacePropsVTbl*
   end
@@ -8517,6 +8605,8 @@ lib LibWin32
     set_complexity_level : Proc(IWMFrameInterpProps*, Int32, HRESULT)
   end
 
+  IWMFrameInterpProps_GUID = LibC::GUID.new("4c06bb9b-626c-4614-8329-cc6a21b93fa0")
+  CLSID_IWMFrameInterpProps = "4c06bb9b-626c-4614-8329-cc6a21b93fa0"
   struct IWMFrameInterpProps
     lpVtbl : IWMFrameInterpPropsVTbl*
   end
@@ -8529,6 +8619,8 @@ lib LibWin32
     set_full_cropping_param : Proc(IWMColorConvProps*, Int32, Int32, Int32, Int32, Int32, Int32, HRESULT)
   end
 
+  IWMColorConvProps_GUID = LibC::GUID.new("e6a49e22-c099-421d-aad3-c061fb4ae85b")
+  CLSID_IWMColorConvProps = "e6a49e22-c099-421d-aad3-c061fb4ae85b"
   struct IWMColorConvProps
     lpVtbl : IWMColorConvPropsVTbl*
   end
@@ -8547,6 +8639,8 @@ lib LibWin32
     get_description_data : Proc(ITocEntry*, UInt32*, UInt8*, Guid*, HRESULT)
   end
 
+  ITocEntry_GUID = LibC::GUID.new("f22f5e06-585c-4def-8523-6555cfbc0cb3")
+  CLSID_ITocEntry = "f22f5e06-585c-4def-8523-6555cfbc0cb3"
   struct ITocEntry
     lpVtbl : ITocEntryVTbl*
   end
@@ -8562,6 +8656,8 @@ lib LibWin32
     remove_entry_by_index : Proc(ITocEntryList*, UInt32, HRESULT)
   end
 
+  ITocEntryList_GUID = LibC::GUID.new("3a8cccbd-0efd-43a3-b838-f38a552ba237")
+  CLSID_ITocEntryList = "3a8cccbd-0efd-43a3-b838-f38a552ba237"
   struct ITocEntryList
     lpVtbl : ITocEntryListVTbl*
   end
@@ -8583,6 +8679,8 @@ lib LibWin32
     remove_entry_list_by_index : Proc(IToc*, UInt16, HRESULT)
   end
 
+  IToc_GUID = LibC::GUID.new("d6f05441-a919-423b-91a0-89d5b4a8ab77")
+  CLSID_IToc = "d6f05441-a919-423b-91a0-89d5b4a8ab77"
   struct IToc
     lpVtbl : ITocVTbl*
   end
@@ -8598,6 +8696,8 @@ lib LibWin32
     remove_entry_by_index : Proc(ITocCollection*, UInt32, HRESULT)
   end
 
+  ITocCollection_GUID = LibC::GUID.new("23fee831-ae96-42df-b170-25a04847a3ca")
+  CLSID_ITocCollection = "23fee831-ae96-42df-b170-25a04847a3ca"
   struct ITocCollection
     lpVtbl : ITocCollectionVTbl*
   end
@@ -8616,6 +8716,8 @@ lib LibWin32
     commit : Proc(ITocParser*, HRESULT)
   end
 
+  ITocParser_GUID = LibC::GUID.new("ecfb9a55-9298-4f49-887f-0b36206599d2")
+  CLSID_ITocParser = "ecfb9a55-9298-4f49-887f-0b36206599d2"
   struct ITocParser
     lpVtbl : ITocParserVTbl*
   end
@@ -8636,6 +8738,8 @@ lib LibWin32
     close : Proc(IFileIo*, HRESULT)
   end
 
+  IFileIo_GUID = LibC::GUID.new("11993196-1244-4840-ab44-480975c4ffe4")
+  CLSID_IFileIo = "11993196-1244-4840-ab44-480975c4ffe4"
   struct IFileIo
     lpVtbl : IFileIoVTbl*
   end
@@ -8649,6 +8753,8 @@ lib LibWin32
     read : Proc(IFileClient*, IFileIo, HRESULT)
   end
 
+  IFileClient_GUID = LibC::GUID.new("bfccd196-1244-4840-ab44-480975c4ffe4")
+  CLSID_IFileClient = "bfccd196-1244-4840-ab44-480975c4ffe4"
   struct IFileClient
     lpVtbl : IFileClientVTbl*
   end
@@ -8661,6 +8767,8 @@ lib LibWin32
     detect : Proc(IClusterDetector*, UInt32, Float32, Float32, IToc, IToc*, HRESULT)
   end
 
+  IClusterDetector_GUID = LibC::GUID.new("3f07f7b7-c680-41d9-9423-915107ec9ff9")
+  CLSID_IClusterDetector = "3f07f7b7-c680-41d9-9423-915107ec9ff9"
   struct IClusterDetector
     lpVtbl : IClusterDetectorVTbl*
   end
@@ -8679,6 +8787,8 @@ lib LibWin32
     create_video_processor : Proc(IDXVAHD_Device*, Guid*, IDXVAHD_VideoProcessor*, HRESULT)
   end
 
+  IDXVAHD_Device_GUID = LibC::GUID.new("95f12dfd-d77e-49be-815f-57d579634d6d")
+  CLSID_IDXVAHD_Device = "95f12dfd-d77e-49be-815f-57d579634d6d"
   struct IDXVAHD_Device
     lpVtbl : IDXVAHD_DeviceVTbl*
   end
@@ -8694,6 +8804,8 @@ lib LibWin32
     video_process_blt_hd : Proc(IDXVAHD_VideoProcessor*, IDirect3DSurface9, UInt32, UInt32, DXVAHD_STREAM_DATA*, HRESULT)
   end
 
+  IDXVAHD_VideoProcessor_GUID = LibC::GUID.new("95f4edf4-6e03-4cd7-be1b-3075d665aa52")
+  CLSID_IDXVAHD_VideoProcessor = "95f4edf4-6e03-4cd7-be1b-3075d665aa52"
   struct IDXVAHD_VideoProcessor
     lpVtbl : IDXVAHD_VideoProcessorVTbl*
   end
@@ -8711,6 +8823,8 @@ lib LibWin32
     get_video_service : Proc(IDirect3DDeviceManager9*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IDirect3DDeviceManager9_GUID = LibC::GUID.new("a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75")
+  CLSID_IDirect3DDeviceManager9 = "a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75"
   struct IDirect3DDeviceManager9
     lpVtbl : IDirect3DDeviceManager9VTbl*
   end
@@ -8722,6 +8836,8 @@ lib LibWin32
     create_surface : Proc(IDirectXVideoAccelerationService*, UInt32, UInt32, UInt32, D3DFORMAT, D3DPOOL, UInt32, DXVA2_VideoRenderTargetType, IDirect3DSurface9*, LibC::HANDLE*, HRESULT)
   end
 
+  IDirectXVideoAccelerationService_GUID = LibC::GUID.new("fc51a550-d5e7-11d9-af55-00054e43ff02")
+  CLSID_IDirectXVideoAccelerationService = "fc51a550-d5e7-11d9-af55-00054e43ff02"
   struct IDirectXVideoAccelerationService
     lpVtbl : IDirectXVideoAccelerationServiceVTbl*
   end
@@ -8737,6 +8853,8 @@ lib LibWin32
     create_video_decoder : Proc(IDirectXVideoDecoderService*, Guid*, DXVA2_VideoDesc*, DXVA2_ConfigPictureDecode*, IDirect3DSurface9*, UInt32, IDirectXVideoDecoder*, HRESULT)
   end
 
+  IDirectXVideoDecoderService_GUID = LibC::GUID.new("fc51a551-d5e7-11d9-af55-00054e43ff02")
+  CLSID_IDirectXVideoDecoderService = "fc51a551-d5e7-11d9-af55-00054e43ff02"
   struct IDirectXVideoDecoderService
     lpVtbl : IDirectXVideoDecoderServiceVTbl*
   end
@@ -8756,6 +8874,8 @@ lib LibWin32
     create_video_processor : Proc(IDirectXVideoProcessorService*, Guid*, DXVA2_VideoDesc*, D3DFORMAT, UInt32, IDirectXVideoProcessor*, HRESULT)
   end
 
+  IDirectXVideoProcessorService_GUID = LibC::GUID.new("fc51a552-d5e7-11d9-af55-00054e43ff02")
+  CLSID_IDirectXVideoProcessorService = "fc51a552-d5e7-11d9-af55-00054e43ff02"
   struct IDirectXVideoProcessorService
     lpVtbl : IDirectXVideoProcessorServiceVTbl*
   end
@@ -8773,6 +8893,8 @@ lib LibWin32
     execute : Proc(IDirectXVideoDecoder*, DXVA2_DecodeExecuteParams*, HRESULT)
   end
 
+  IDirectXVideoDecoder_GUID = LibC::GUID.new("f2b0810a-fd00-43c9-918c-df94e2d8ef7d")
+  CLSID_IDirectXVideoDecoder = "f2b0810a-fd00-43c9-918c-df94e2d8ef7d"
   struct IDirectXVideoDecoder
     lpVtbl : IDirectXVideoDecoderVTbl*
   end
@@ -8789,6 +8911,8 @@ lib LibWin32
     video_process_blt : Proc(IDirectXVideoProcessor*, IDirect3DSurface9, DXVA2_VideoProcessBltParams*, DXVA2_VideoSample*, UInt32, LibC::HANDLE*, HRESULT)
   end
 
+  IDirectXVideoProcessor_GUID = LibC::GUID.new("8c3a39f0-916e-4690-804f-4c8001355d25")
+  CLSID_IDirectXVideoProcessor = "8c3a39f0-916e-4690-804f-4c8001355d25"
   struct IDirectXVideoProcessor
     lpVtbl : IDirectXVideoProcessorVTbl*
   end
@@ -8801,6 +8925,8 @@ lib LibWin32
     set_surface_type : Proc(IDirectXVideoMemoryConfiguration*, DXVA2_SurfaceType, HRESULT)
   end
 
+  IDirectXVideoMemoryConfiguration_GUID = LibC::GUID.new("b7f916dd-db3b-49c1-84d7-e45ef99ec726")
+  CLSID_IDirectXVideoMemoryConfiguration = "b7f916dd-db3b-49c1-84d7-e45ef99ec726"
   struct IDirectXVideoMemoryConfiguration
     lpVtbl : IDirectXVideoMemoryConfigurationVTbl*
   end
@@ -8816,6 +8942,8 @@ lib LibWin32
     configure : Proc(IOPMVideoOutput*, OPM_CONFIGURE_PARAMETERS*, UInt32, UInt8*, HRESULT)
   end
 
+  IOPMVideoOutput_GUID = LibC::GUID.new("0a15159d-41c7-4456-93e1-284cd61d4e8d")
+  CLSID_IOPMVideoOutput = "0a15159d-41c7-4456-93e1-284cd61d4e8d"
   struct IOPMVideoOutput
     lpVtbl : IOPMVideoOutputVTbl*
   end
@@ -8856,6 +8984,8 @@ lib LibWin32
     copy_all_items : Proc(IMFAttributes*, IMFAttributes, HRESULT)
   end
 
+  IMFAttributes_GUID = LibC::GUID.new("2cd2d921-c447-44a7-a13c-4adabfc247e3")
+  CLSID_IMFAttributes = "2cd2d921-c447-44a7-a13c-4adabfc247e3"
   struct IMFAttributes
     lpVtbl : IMFAttributesVTbl*
   end
@@ -8871,6 +9001,8 @@ lib LibWin32
     get_max_length : Proc(IMFMediaBuffer*, UInt32*, HRESULT)
   end
 
+  IMFMediaBuffer_GUID = LibC::GUID.new("045fa593-8799-42b8-bc8d-8968c6453507")
+  CLSID_IMFMediaBuffer = "045fa593-8799-42b8-bc8d-8968c6453507"
   struct IMFMediaBuffer
     lpVtbl : IMFMediaBufferVTbl*
   end
@@ -8925,6 +9057,8 @@ lib LibWin32
     copy_to_buffer : Proc(IMFSample*, IMFMediaBuffer, HRESULT)
   end
 
+  IMFSample_GUID = LibC::GUID.new("c40a00f2-b93a-4d80-ae8c-5a1c634f58e4")
+  CLSID_IMFSample = "c40a00f2-b93a-4d80-ae8c-5a1c634f58e4"
   struct IMFSample
     lpVtbl : IMFSampleVTbl*
   end
@@ -8942,6 +9076,8 @@ lib LibWin32
     contiguous_copy_from : Proc(IMF2DBuffer*, UInt8*, UInt32, HRESULT)
   end
 
+  IMF2DBuffer_GUID = LibC::GUID.new("7dc9d5f9-9ed9-44ec-9bbf-0600bb589fbb")
+  CLSID_IMF2DBuffer = "7dc9d5f9-9ed9-44ec-9bbf-0600bb589fbb"
   struct IMF2DBuffer
     lpVtbl : IMF2DBufferVTbl*
   end
@@ -8961,6 +9097,8 @@ lib LibWin32
     copy2_d_to : Proc(IMF2DBuffer2*, IMF2DBuffer2, HRESULT)
   end
 
+  IMF2DBuffer2_GUID = LibC::GUID.new("33ae5ea6-4316-436f-8ddd-d73d22f829ec")
+  CLSID_IMF2DBuffer2 = "33ae5ea6-4316-436f-8ddd-d73d22f829ec"
   struct IMF2DBuffer2
     lpVtbl : IMF2DBuffer2VTbl*
   end
@@ -8975,6 +9113,8 @@ lib LibWin32
     set_unknown : Proc(IMFDXGIBuffer*, Guid*, IUnknown, HRESULT)
   end
 
+  IMFDXGIBuffer_GUID = LibC::GUID.new("e7174cfa-1c9e-48b1-8866-626226bfc258")
+  CLSID_IMFDXGIBuffer = "e7174cfa-1c9e-48b1-8866-626226bfc258"
   struct IMFDXGIBuffer
     lpVtbl : IMFDXGIBufferVTbl*
   end
@@ -9020,6 +9160,8 @@ lib LibWin32
     free_representation : Proc(IMFMediaType*, Guid, Void*, HRESULT)
   end
 
+  IMFMediaType_GUID = LibC::GUID.new("44ae0fa8-ea31-4109-8d2e-4cae4997c555")
+  CLSID_IMFMediaType = "44ae0fa8-ea31-4109-8d2e-4cae4997c555"
   struct IMFMediaType
     lpVtbl : IMFMediaTypeVTbl*
   end
@@ -9066,6 +9208,8 @@ lib LibWin32
     get_audio_format : Proc(IMFAudioMediaType*, WAVEFORMATEX**)
   end
 
+  IMFAudioMediaType_GUID = LibC::GUID.new("26a0adc3-ce26-4672-9304-69552edd3faf")
+  CLSID_IMFAudioMediaType = "26a0adc3-ce26-4672-9304-69552edd3faf"
   struct IMFAudioMediaType
     lpVtbl : IMFAudioMediaTypeVTbl*
   end
@@ -9113,6 +9257,8 @@ lib LibWin32
     get_video_representation : Proc(IMFVideoMediaType*, Guid, Void**, Int32, HRESULT)
   end
 
+  IMFVideoMediaType_GUID = LibC::GUID.new("b99f381f-a8f9-47a2-a5af-ca3a225a3890")
+  CLSID_IMFVideoMediaType = "b99f381f-a8f9-47a2-a5af-ca3a225a3890"
   struct IMFVideoMediaType
     lpVtbl : IMFVideoMediaTypeVTbl*
   end
@@ -9128,6 +9274,8 @@ lib LibWin32
     get_state_no_add_ref : Proc(IMFAsyncResult*, IUnknown)
   end
 
+  IMFAsyncResult_GUID = LibC::GUID.new("ac6b7889-0740-4d51-8619-905994a55cc6")
+  CLSID_IMFAsyncResult = "ac6b7889-0740-4d51-8619-905994a55cc6"
   struct IMFAsyncResult
     lpVtbl : IMFAsyncResultVTbl*
   end
@@ -9140,6 +9288,8 @@ lib LibWin32
     invoke : Proc(IMFAsyncCallback*, IMFAsyncResult, HRESULT)
   end
 
+  IMFAsyncCallback_GUID = LibC::GUID.new("a27003cf-2354-4f2a-8d6a-ab7cff15437e")
+  CLSID_IMFAsyncCallback = "a27003cf-2354-4f2a-8d6a-ab7cff15437e"
   struct IMFAsyncCallback
     lpVtbl : IMFAsyncCallbackVTbl*
   end
@@ -9154,6 +9304,8 @@ lib LibWin32
     get_object_tag : Proc(IMFAsyncCallbackLogging*, UInt32)
   end
 
+  IMFAsyncCallbackLogging_GUID = LibC::GUID.new("c7a4dca1-f5f0-47b6-b92b-bf0106d25791")
+  CLSID_IMFAsyncCallbackLogging = "c7a4dca1-f5f0-47b6-b92b-bf0106d25791"
   struct IMFAsyncCallbackLogging
     lpVtbl : IMFAsyncCallbackLoggingVTbl*
   end
@@ -9198,6 +9350,8 @@ lib LibWin32
     get_value : Proc(IMFMediaEvent*, PROPVARIANT*, HRESULT)
   end
 
+  IMFMediaEvent_GUID = LibC::GUID.new("df598932-f10c-4e39-bba2-c308f101daa3")
+  CLSID_IMFMediaEvent = "df598932-f10c-4e39-bba2-c308f101daa3"
   struct IMFMediaEvent
     lpVtbl : IMFMediaEventVTbl*
   end
@@ -9212,6 +9366,8 @@ lib LibWin32
     queue_event : Proc(IMFMediaEventGenerator*, UInt32, Guid*, HRESULT, PROPVARIANT*, HRESULT)
   end
 
+  IMFMediaEventGenerator_GUID = LibC::GUID.new("2cd0bd52-bcd5-4b89-b62c-eadc0c031e7d")
+  CLSID_IMFMediaEventGenerator = "2cd0bd52-bcd5-4b89-b62c-eadc0c031e7d"
   struct IMFMediaEventGenerator
     lpVtbl : IMFMediaEventGeneratorVTbl*
   end
@@ -9223,6 +9379,8 @@ lib LibWin32
     invoke : Proc(IMFRemoteAsyncCallback*, HRESULT, IUnknown, HRESULT)
   end
 
+  IMFRemoteAsyncCallback_GUID = LibC::GUID.new("a27003d0-2354-4f2a-8d6a-ab7cff15437e")
+  CLSID_IMFRemoteAsyncCallback = "a27003d0-2354-4f2a-8d6a-ab7cff15437e"
   struct IMFRemoteAsyncCallback
     lpVtbl : IMFRemoteAsyncCallbackVTbl*
   end
@@ -9248,6 +9406,8 @@ lib LibWin32
     close : Proc(IMFByteStream*, HRESULT)
   end
 
+  IMFByteStream_GUID = LibC::GUID.new("ad4c1b00-4bf7-422f-9175-756693d9130d")
+  CLSID_IMFByteStream = "ad4c1b00-4bf7-422f-9175-756693d9130d"
   struct IMFByteStream
     lpVtbl : IMFByteStreamVTbl*
   end
@@ -9259,6 +9419,8 @@ lib LibWin32
     create_byte_stream_proxy : Proc(IMFByteStreamProxyClassFactory*, IMFByteStream, IMFAttributes, Guid*, Void**, HRESULT)
   end
 
+  IMFByteStreamProxyClassFactory_GUID = LibC::GUID.new("a6b43f84-5c0a-42e8-a44d-b1857a76992f")
+  CLSID_IMFByteStreamProxyClassFactory = "a6b43f84-5c0a-42e8-a44d-b1857a76992f"
   struct IMFByteStreamProxyClassFactory
     lpVtbl : IMFByteStreamProxyClassFactoryVTbl*
   end
@@ -9272,6 +9434,8 @@ lib LibWin32
     close : Proc(IMFSampleOutputStream*, HRESULT)
   end
 
+  IMFSampleOutputStream_GUID = LibC::GUID.new("8feed468-6f7e-440d-869a-49bdd283ad0d")
+  CLSID_IMFSampleOutputStream = "8feed468-6f7e-440d-869a-49bdd283ad0d"
   struct IMFSampleOutputStream
     lpVtbl : IMFSampleOutputStreamVTbl*
   end
@@ -9288,6 +9452,8 @@ lib LibWin32
     remove_all_elements : Proc(IMFCollection*, HRESULT)
   end
 
+  IMFCollection_GUID = LibC::GUID.new("5bc8a76b-869a-46a3-9b03-fa218a66aebe")
+  CLSID_IMFCollection = "5bc8a76b-869a-46a3-9b03-fa218a66aebe"
   struct IMFCollection
     lpVtbl : IMFCollectionVTbl*
   end
@@ -9305,6 +9471,8 @@ lib LibWin32
     shutdown : Proc(IMFMediaEventQueue*, HRESULT)
   end
 
+  IMFMediaEventQueue_GUID = LibC::GUID.new("36f846fc-2256-48b6-b58e-e2b638316581")
+  CLSID_IMFMediaEventQueue = "36f846fc-2256-48b6-b58e-e2b638316581"
   struct IMFMediaEventQueue
     lpVtbl : IMFMediaEventQueueVTbl*
   end
@@ -9348,6 +9516,8 @@ lib LibWin32
     detach_object : Proc(IMFActivate*, HRESULT)
   end
 
+  IMFActivate_GUID = LibC::GUID.new("7fee9e9a-4a89-47a6-899c-b6a53a70fb67")
+  CLSID_IMFActivate = "7fee9e9a-4a89-47a6-899c-b6a53a70fb67"
   struct IMFActivate
     lpVtbl : IMFActivateVTbl*
   end
@@ -9364,6 +9534,8 @@ lib LibWin32
     set_disabled : Proc(IMFPluginControl*, UInt32, Guid*, LibC::BOOL, HRESULT)
   end
 
+  IMFPluginControl_GUID = LibC::GUID.new("5c6c44bf-1db6-435b-9249-e8cd10fdec96")
+  CLSID_IMFPluginControl = "5c6c44bf-1db6-435b-9249-e8cd10fdec96"
   struct IMFPluginControl
     lpVtbl : IMFPluginControlVTbl*
   end
@@ -9381,6 +9553,8 @@ lib LibWin32
     set_policy : Proc(IMFPluginControl2*, MF_PLUGIN_CONTROL_POLICY, HRESULT)
   end
 
+  IMFPluginControl2_GUID = LibC::GUID.new("c6982083-3ddc-45cb-af5e-0f7a8ce4de77")
+  CLSID_IMFPluginControl2 = "c6982083-3ddc-45cb-af5e-0f7a8ce4de77"
   struct IMFPluginControl2
     lpVtbl : IMFPluginControl2VTbl*
   end
@@ -9398,6 +9572,8 @@ lib LibWin32
     unlock_device : Proc(IMFDXGIDeviceManager*, LibC::HANDLE, LibC::BOOL, HRESULT)
   end
 
+  IMFDXGIDeviceManager_GUID = LibC::GUID.new("eb533d5d-2db6-40f8-97a9-494692014f07")
+  CLSID_IMFDXGIDeviceManager = "eb533d5d-2db6-40f8-97a9-494692014f07"
   struct IMFDXGIDeviceManager
     lpVtbl : IMFDXGIDeviceManagerVTbl*
   end
@@ -9410,6 +9586,8 @@ lib LibWin32
     get_attributes : Proc(IMFMuxStreamAttributesManager*, UInt32, IMFAttributes*, HRESULT)
   end
 
+  IMFMuxStreamAttributesManager_GUID = LibC::GUID.new("ce8bd576-e440-43b3-be34-1e53f565f7e8")
+  CLSID_IMFMuxStreamAttributesManager = "ce8bd576-e440-43b3-be34-1e53f565f7e8"
   struct IMFMuxStreamAttributesManager
     lpVtbl : IMFMuxStreamAttributesManagerVTbl*
   end
@@ -9426,6 +9604,8 @@ lib LibWin32
     get_stream_configuration : Proc(IMFMuxStreamMediaTypeManager*, UInt32, UInt64*, HRESULT)
   end
 
+  IMFMuxStreamMediaTypeManager_GUID = LibC::GUID.new("505a2c72-42f7-4690-aeab-8f513d0ffdb8")
+  CLSID_IMFMuxStreamMediaTypeManager = "505a2c72-42f7-4690-aeab-8f513d0ffdb8"
   struct IMFMuxStreamMediaTypeManager
     lpVtbl : IMFMuxStreamMediaTypeManagerVTbl*
   end
@@ -9439,6 +9619,8 @@ lib LibWin32
     get_stream_configuration : Proc(IMFMuxStreamSampleManager*, UInt64)
   end
 
+  IMFMuxStreamSampleManager_GUID = LibC::GUID.new("74abbc19-b1cc-4e41-bb8b-9d9b86a8f6ca")
+  CLSID_IMFMuxStreamSampleManager = "74abbc19-b1cc-4e41-bb8b-9d9b86a8f6ca"
   struct IMFMuxStreamSampleManager
     lpVtbl : IMFMuxStreamSampleManagerVTbl*
   end
@@ -9450,6 +9632,8 @@ lib LibWin32
     get_identifier : Proc(IMFSecureBuffer*, Guid*, HRESULT)
   end
 
+  IMFSecureBuffer_GUID = LibC::GUID.new("c1209904-e584-4752-a2d6-7f21693f8b21")
+  CLSID_IMFSecureBuffer = "c1209904-e584-4752-a2d6-7f21693f8b21"
   struct IMFSecureBuffer
     lpVtbl : IMFSecureBufferVTbl*
   end
@@ -9483,6 +9667,8 @@ lib LibWin32
     process_output : Proc(IMFTransform*, UInt32, UInt32, MFT_OUTPUT_DATA_BUFFER*, UInt32*, HRESULT)
   end
 
+  IMFTransform_GUID = LibC::GUID.new("bf94c121-5b05-4e6f-8000-ba598961414d")
+  CLSID_IMFTransform = "bf94c121-5b05-4e6f-8000-ba598961414d"
   struct IMFTransform
     lpVtbl : IMFTransformVTbl*
   end
@@ -9507,6 +9693,8 @@ lib LibWin32
     get_full_topology : Proc(IMFMediaSession*, UInt32, UInt64, IMFTopology*, HRESULT)
   end
 
+  IMFMediaSession_GUID = LibC::GUID.new("90377834-21d0-4dee-8214-ba2e3e6c1127")
+  CLSID_IMFMediaSession = "90377834-21d0-4dee-8214-ba2e3e6c1127"
   struct IMFMediaSession
     lpVtbl : IMFMediaSessionVTbl*
   end
@@ -9524,6 +9712,8 @@ lib LibWin32
     cancel_object_creation : Proc(IMFSourceResolver*, IUnknown, HRESULT)
   end
 
+  IMFSourceResolver_GUID = LibC::GUID.new("fbe5a32d-a497-4b61-bb85-97b1a848a6e3")
+  CLSID_IMFSourceResolver = "fbe5a32d-a497-4b61-bb85-97b1a848a6e3"
   struct IMFSourceResolver
     lpVtbl : IMFSourceResolverVTbl*
   end
@@ -9544,6 +9734,8 @@ lib LibWin32
     shutdown : Proc(IMFMediaSource*, HRESULT)
   end
 
+  IMFMediaSource_GUID = LibC::GUID.new("279a808d-aec7-40c8-9c6b-a6b492c78a66")
+  CLSID_IMFMediaSource = "279a808d-aec7-40c8-9c6b-a6b492c78a66"
   struct IMFMediaSource
     lpVtbl : IMFMediaSourceVTbl*
   end
@@ -9567,6 +9759,8 @@ lib LibWin32
     set_d3_d_manager : Proc(IMFMediaSourceEx*, IUnknown, HRESULT)
   end
 
+  IMFMediaSourceEx_GUID = LibC::GUID.new("3c9b2eb9-86d5-4514-a394-f56664f9f0d8")
+  CLSID_IMFMediaSourceEx = "3c9b2eb9-86d5-4514-a394-f56664f9f0d8"
   struct IMFMediaSourceEx
     lpVtbl : IMFMediaSourceExVTbl*
   end
@@ -9579,6 +9773,8 @@ lib LibWin32
     get_presentation_clock : Proc(IMFClockConsumer*, IMFPresentationClock*, HRESULT)
   end
 
+  IMFClockConsumer_GUID = LibC::GUID.new("6ef2a662-47c0-4666-b13d-cbb717f2fa2c")
+  CLSID_IMFClockConsumer = "6ef2a662-47c0-4666-b13d-cbb717f2fa2c"
   struct IMFClockConsumer
     lpVtbl : IMFClockConsumerVTbl*
   end
@@ -9596,6 +9792,8 @@ lib LibWin32
     request_sample : Proc(IMFMediaStream*, IUnknown, HRESULT)
   end
 
+  IMFMediaStream_GUID = LibC::GUID.new("d182108f-4ec6-443f-aa42-a71106ec825f")
+  CLSID_IMFMediaStream = "d182108f-4ec6-443f-aa42-a71106ec825f"
   struct IMFMediaStream
     lpVtbl : IMFMediaStreamVTbl*
   end
@@ -9615,6 +9813,8 @@ lib LibWin32
     shutdown : Proc(IMFMediaSink*, HRESULT)
   end
 
+  IMFMediaSink_GUID = LibC::GUID.new("6ef2a660-47c0-4666-b13d-cbb717f2fa2c")
+  CLSID_IMFMediaSink = "6ef2a660-47c0-4666-b13d-cbb717f2fa2c"
   struct IMFMediaSink
     lpVtbl : IMFMediaSinkVTbl*
   end
@@ -9635,6 +9835,8 @@ lib LibWin32
     flush : Proc(IMFStreamSink*, HRESULT)
   end
 
+  IMFStreamSink_GUID = LibC::GUID.new("0a97b3cf-8e7c-4a3d-8f8c-0c843dc247fb")
+  CLSID_IMFStreamSink = "0a97b3cf-8e7c-4a3d-8f8c-0c843dc247fb"
   struct IMFStreamSink
     lpVtbl : IMFStreamSinkVTbl*
   end
@@ -9649,6 +9851,8 @@ lib LibWin32
     allocate_sample : Proc(IMFVideoSampleAllocator*, IMFSample*, HRESULT)
   end
 
+  IMFVideoSampleAllocator_GUID = LibC::GUID.new("86cbc910-e533-4751-8e3b-f19b5b806a03")
+  CLSID_IMFVideoSampleAllocator = "86cbc910-e533-4751-8e3b-f19b5b806a03"
   struct IMFVideoSampleAllocator
     lpVtbl : IMFVideoSampleAllocatorVTbl*
   end
@@ -9660,6 +9864,8 @@ lib LibWin32
     notify_release : Proc(IMFVideoSampleAllocatorNotify*, HRESULT)
   end
 
+  IMFVideoSampleAllocatorNotify_GUID = LibC::GUID.new("a792cdbe-c374-4e89-8335-278e7b9956a4")
+  CLSID_IMFVideoSampleAllocatorNotify = "a792cdbe-c374-4e89-8335-278e7b9956a4"
   struct IMFVideoSampleAllocatorNotify
     lpVtbl : IMFVideoSampleAllocatorNotifyVTbl*
   end
@@ -9672,6 +9878,8 @@ lib LibWin32
     notify_prune : Proc(IMFVideoSampleAllocatorNotifyEx*, IMFSample, HRESULT)
   end
 
+  IMFVideoSampleAllocatorNotifyEx_GUID = LibC::GUID.new("3978aa1a-6d5b-4b7f-a340-90899189ae34")
+  CLSID_IMFVideoSampleAllocatorNotifyEx = "3978aa1a-6d5b-4b7f-a340-90899189ae34"
   struct IMFVideoSampleAllocatorNotifyEx
     lpVtbl : IMFVideoSampleAllocatorNotifyExVTbl*
   end
@@ -9684,6 +9892,8 @@ lib LibWin32
     get_free_sample_count : Proc(IMFVideoSampleAllocatorCallback*, Int32*, HRESULT)
   end
 
+  IMFVideoSampleAllocatorCallback_GUID = LibC::GUID.new("992388b4-3372-4f67-8b6f-c84c071f4751")
+  CLSID_IMFVideoSampleAllocatorCallback = "992388b4-3372-4f67-8b6f-c84c071f4751"
   struct IMFVideoSampleAllocatorCallback
     lpVtbl : IMFVideoSampleAllocatorCallbackVTbl*
   end
@@ -9699,6 +9909,8 @@ lib LibWin32
     initialize_sample_allocator_ex : Proc(IMFVideoSampleAllocatorEx*, UInt32, UInt32, IMFAttributes, IMFMediaType, HRESULT)
   end
 
+  IMFVideoSampleAllocatorEx_GUID = LibC::GUID.new("545b3a48-3283-4f62-866f-a62d8f598f9f")
+  CLSID_IMFVideoSampleAllocatorEx = "545b3a48-3283-4f62-866f-a62d8f598f9f"
   struct IMFVideoSampleAllocatorEx
     lpVtbl : IMFVideoSampleAllocatorExVTbl*
   end
@@ -9710,6 +9922,8 @@ lib LibWin32
     get_manager : Proc(IMFDXGIDeviceManagerSource*, IMFDXGIDeviceManager*, HRESULT)
   end
 
+  IMFDXGIDeviceManagerSource_GUID = LibC::GUID.new("20bc074b-7a8d-4609-8c3b-64a0a3b5d7ce")
+  CLSID_IMFDXGIDeviceManagerSource = "20bc074b-7a8d-4609-8c3b-64a0a3b5d7ce"
   struct IMFDXGIDeviceManagerSource
     lpVtbl : IMFDXGIDeviceManagerSourceVTbl*
   end
@@ -9726,6 +9940,8 @@ lib LibWin32
     set_constriction_size : Proc(IMFVideoProcessorControl*, SIZE*, HRESULT)
   end
 
+  IMFVideoProcessorControl_GUID = LibC::GUID.new("a3f675d5-6119-4f7f-a100-1d8b280f0efb")
+  CLSID_IMFVideoProcessorControl = "a3f675d5-6119-4f7f-a100-1d8b280f0efb"
   struct IMFVideoProcessorControl
     lpVtbl : IMFVideoProcessorControlVTbl*
   end
@@ -9745,6 +9961,8 @@ lib LibWin32
     get_supported_hardware_effects : Proc(IMFVideoProcessorControl2*, UInt32*, HRESULT)
   end
 
+  IMFVideoProcessorControl2_GUID = LibC::GUID.new("bde633d3-e1dc-4a7f-a693-bbae399c4a20")
+  CLSID_IMFVideoProcessorControl2 = "bde633d3-e1dc-4a7f-a693-bbae399c4a20"
   struct IMFVideoProcessorControl2
     lpVtbl : IMFVideoProcessorControl2VTbl*
   end
@@ -9768,6 +9986,8 @@ lib LibWin32
     set_output_device : Proc(IMFVideoProcessorControl3*, IUnknown, HRESULT)
   end
 
+  IMFVideoProcessorControl3_GUID = LibC::GUID.new("2424b3f2-eb23-40f1-91aa-74bddeea0883")
+  CLSID_IMFVideoProcessorControl3 = "2424b3f2-eb23-40f1-91aa-74bddeea0883"
   struct IMFVideoProcessorControl3
     lpVtbl : IMFVideoProcessorControl3VTbl*
   end
@@ -9779,6 +9999,8 @@ lib LibWin32
     on_app_service_connection_established : Proc(IMFVideoRendererEffectControl*, IUnknown, HRESULT)
   end
 
+  IMFVideoRendererEffectControl_GUID = LibC::GUID.new("604d33d7-cf23-41d5-8224-5bbbb1a87475")
+  CLSID_IMFVideoRendererEffectControl = "604d33d7-cf23-41d5-8224-5bbbb1a87475"
   struct IMFVideoRendererEffectControl
     lpVtbl : IMFVideoRendererEffectControlVTbl*
   end
@@ -9829,6 +10051,8 @@ lib LibWin32
     get_output_node_collection : Proc(IMFTopology*, IMFCollection*, HRESULT)
   end
 
+  IMFTopology_GUID = LibC::GUID.new("83cf873a-f6da-4bc8-823f-bacfd55dc433")
+  CLSID_IMFTopology = "83cf873a-f6da-4bc8-823f-bacfd55dc433"
   struct IMFTopology
     lpVtbl : IMFTopologyVTbl*
   end
@@ -9885,6 +10109,8 @@ lib LibWin32
     clone_from : Proc(IMFTopologyNode*, IMFTopologyNode, HRESULT)
   end
 
+  IMFTopologyNode_GUID = LibC::GUID.new("83cf873a-f6da-4bc8-823f-bacfd55dc430")
+  CLSID_IMFTopologyNode = "83cf873a-f6da-4bc8-823f-bacfd55dc430"
   struct IMFTopologyNode
     lpVtbl : IMFTopologyNodeVTbl*
   end
@@ -9896,6 +10122,8 @@ lib LibWin32
     get_service : Proc(IMFGetService*, Guid*, Guid*, Void**, HRESULT)
   end
 
+  IMFGetService_GUID = LibC::GUID.new("fa993888-4383-415a-a930-dd472a8cf6f7")
+  CLSID_IMFGetService = "fa993888-4383-415a-a930-dd472a8cf6f7"
   struct IMFGetService
     lpVtbl : IMFGetServiceVTbl*
   end
@@ -9911,6 +10139,8 @@ lib LibWin32
     get_properties : Proc(IMFClock*, MFCLOCK_PROPERTIES*, HRESULT)
   end
 
+  IMFClock_GUID = LibC::GUID.new("2eb1e945-18b8-4139-9b1a-d5d584818530")
+  CLSID_IMFClock = "2eb1e945-18b8-4139-9b1a-d5d584818530"
   struct IMFClock
     lpVtbl : IMFClockVTbl*
   end
@@ -9934,6 +10164,8 @@ lib LibWin32
     pause : Proc(IMFPresentationClock*, HRESULT)
   end
 
+  IMFPresentationClock_GUID = LibC::GUID.new("868ce85c-8ea9-4f55-ab82-b009a910a805")
+  CLSID_IMFPresentationClock = "868ce85c-8ea9-4f55-ab82-b009a910a805"
   struct IMFPresentationClock
     lpVtbl : IMFPresentationClockVTbl*
   end
@@ -9950,6 +10182,8 @@ lib LibWin32
     get_underlying_clock : Proc(IMFPresentationTimeSource*, IMFClock*, HRESULT)
   end
 
+  IMFPresentationTimeSource_GUID = LibC::GUID.new("7ff12cce-f76f-41c2-863b-1666c8e5e139")
+  CLSID_IMFPresentationTimeSource = "7ff12cce-f76f-41c2-863b-1666c8e5e139"
   struct IMFPresentationTimeSource
     lpVtbl : IMFPresentationTimeSourceVTbl*
   end
@@ -9965,6 +10199,8 @@ lib LibWin32
     on_clock_set_rate : Proc(IMFClockStateSink*, Int64, Float32, HRESULT)
   end
 
+  IMFClockStateSink_GUID = LibC::GUID.new("f6696e82-74f7-4f3d-a178-8a5e09c3659f")
+  CLSID_IMFClockStateSink = "f6696e82-74f7-4f3d-a178-8a5e09c3659f"
   struct IMFClockStateSink
     lpVtbl : IMFClockStateSinkVTbl*
   end
@@ -10010,6 +10246,8 @@ lib LibWin32
     clone : Proc(IMFPresentationDescriptor*, IMFPresentationDescriptor*, HRESULT)
   end
 
+  IMFPresentationDescriptor_GUID = LibC::GUID.new("03cb2711-24d7-4db6-a17f-f3a7a479a536")
+  CLSID_IMFPresentationDescriptor = "03cb2711-24d7-4db6-a17f-f3a7a479a536"
   struct IMFPresentationDescriptor
     lpVtbl : IMFPresentationDescriptorVTbl*
   end
@@ -10052,6 +10290,8 @@ lib LibWin32
     get_media_type_handler : Proc(IMFStreamDescriptor*, IMFMediaTypeHandler*, HRESULT)
   end
 
+  IMFStreamDescriptor_GUID = LibC::GUID.new("56c03d9c-9dbb-45f5-ab4b-d80f47c05938")
+  CLSID_IMFStreamDescriptor = "56c03d9c-9dbb-45f5-ab4b-d80f47c05938"
   struct IMFStreamDescriptor
     lpVtbl : IMFStreamDescriptorVTbl*
   end
@@ -10068,6 +10308,8 @@ lib LibWin32
     get_major_type : Proc(IMFMediaTypeHandler*, Guid*, HRESULT)
   end
 
+  IMFMediaTypeHandler_GUID = LibC::GUID.new("e93dcf6c-4b07-4e1e-8123-aa16ed6eadf5")
+  CLSID_IMFMediaTypeHandler = "e93dcf6c-4b07-4e1e-8123-aa16ed6eadf5"
   struct IMFMediaTypeHandler
     lpVtbl : IMFMediaTypeHandlerVTbl*
   end
@@ -10080,6 +10322,8 @@ lib LibWin32
     cancel_timer : Proc(IMFTimer*, IUnknown, HRESULT)
   end
 
+  IMFTimer_GUID = LibC::GUID.new("e56e4cbd-8f70-49d8-a0f8-edb3d6ab9bf2")
+  CLSID_IMFTimer = "e56e4cbd-8f70-49d8-a0f8-edb3d6ab9bf2"
   struct IMFTimer
     lpVtbl : IMFTimerVTbl*
   end
@@ -10092,6 +10336,8 @@ lib LibWin32
     get_shutdown_status : Proc(IMFShutdown*, MFSHUTDOWN_STATUS*, HRESULT)
   end
 
+  IMFShutdown_GUID = LibC::GUID.new("97ec2ea4-0e42-4937-97ac-9d6d328824e1")
+  CLSID_IMFShutdown = "97ec2ea4-0e42-4937-97ac-9d6d328824e1"
   struct IMFShutdown
     lpVtbl : IMFShutdownVTbl*
   end
@@ -10103,6 +10349,8 @@ lib LibWin32
     load : Proc(IMFTopoLoader*, IMFTopology, IMFTopology*, IMFTopology, HRESULT)
   end
 
+  IMFTopoLoader_GUID = LibC::GUID.new("de9a6157-f660-4643-b56a-df9f7998c7cd")
+  CLSID_IMFTopoLoader = "de9a6157-f660-4643-b56a-df9f7998c7cd"
   struct IMFTopoLoader
     lpVtbl : IMFTopoLoaderVTbl*
   end
@@ -10115,6 +10363,8 @@ lib LibWin32
     end_enable_content : Proc(IMFContentProtectionManager*, IMFAsyncResult, HRESULT)
   end
 
+  IMFContentProtectionManager_GUID = LibC::GUID.new("acf92459-6a61-42bd-b57c-b43e51203cb0")
+  CLSID_IMFContentProtectionManager = "acf92459-6a61-42bd-b57c-b43e51203cb0"
   struct IMFContentProtectionManager
     lpVtbl : IMFContentProtectionManagerVTbl*
   end
@@ -10132,6 +10382,8 @@ lib LibWin32
     cancel : Proc(IMFContentEnabler*, HRESULT)
   end
 
+  IMFContentEnabler_GUID = LibC::GUID.new("d3c4ef59-49ce-4381-9071-d5bcd044c770")
+  CLSID_IMFContentEnabler = "d3c4ef59-49ce-4381-9071-d5bcd044c770"
   struct IMFContentEnabler
     lpVtbl : IMFContentEnablerVTbl*
   end
@@ -10149,6 +10401,8 @@ lib LibWin32
     get_all_property_names : Proc(IMFMetadata*, PROPVARIANT*, HRESULT)
   end
 
+  IMFMetadata_GUID = LibC::GUID.new("f88cfb8c-ef16-4991-b450-cb8c69e51704")
+  CLSID_IMFMetadata = "f88cfb8c-ef16-4991-b450-cb8c69e51704"
   struct IMFMetadata
     lpVtbl : IMFMetadataVTbl*
   end
@@ -10160,6 +10414,8 @@ lib LibWin32
     get_mf_metadata : Proc(IMFMetadataProvider*, IMFPresentationDescriptor, UInt32, UInt32, IMFMetadata*, HRESULT)
   end
 
+  IMFMetadataProvider_GUID = LibC::GUID.new("56181d2d-e221-4adb-b1c8-3cee6a53f76f")
+  CLSID_IMFMetadataProvider = "56181d2d-e221-4adb-b1c8-3cee6a53f76f"
   struct IMFMetadataProvider
     lpVtbl : IMFMetadataProviderVTbl*
   end
@@ -10173,6 +10429,8 @@ lib LibWin32
     is_rate_supported : Proc(IMFRateSupport*, LibC::BOOL, Float32, Float32*, HRESULT)
   end
 
+  IMFRateSupport_GUID = LibC::GUID.new("0a9ccdbc-d797-4563-9667-94ec5d79292d")
+  CLSID_IMFRateSupport = "0a9ccdbc-d797-4563-9667-94ec5d79292d"
   struct IMFRateSupport
     lpVtbl : IMFRateSupportVTbl*
   end
@@ -10185,6 +10443,8 @@ lib LibWin32
     get_rate : Proc(IMFRateControl*, LibC::BOOL*, Float32*, HRESULT)
   end
 
+  IMFRateControl_GUID = LibC::GUID.new("88ddcd21-03c3-4275-91ed-55ee3929328f")
+  CLSID_IMFRateControl = "88ddcd21-03c3-4275-91ed-55ee3929328f"
   struct IMFRateControl
     lpVtbl : IMFRateControlVTbl*
   end
@@ -10199,6 +10459,8 @@ lib LibWin32
     end_convert_hns_to_timecode : Proc(IMFTimecodeTranslate*, IMFAsyncResult, PROPVARIANT*, HRESULT)
   end
 
+  IMFTimecodeTranslate_GUID = LibC::GUID.new("ab9d8661-f7e8-4ef4-9861-89f334f94e74")
+  CLSID_IMFTimecodeTranslate = "ab9d8661-f7e8-4ef4-9861-89f334f94e74"
   struct IMFTimecodeTranslate
     lpVtbl : IMFTimecodeTranslateVTbl*
   end
@@ -10210,6 +10472,8 @@ lib LibWin32
     get_nearest_key_frames : Proc(IMFSeekInfo*, Guid*, PROPVARIANT*, PROPVARIANT*, PROPVARIANT*, HRESULT)
   end
 
+  IMFSeekInfo_GUID = LibC::GUID.new("26afea53-d9ed-42b5-ab80-e64f9ee34779")
+  CLSID_IMFSeekInfo = "26afea53-d9ed-42b5-ab80-e64f9ee34779"
   struct IMFSeekInfo
     lpVtbl : IMFSeekInfoVTbl*
   end
@@ -10224,6 +10488,8 @@ lib LibWin32
     get_mute : Proc(IMFSimpleAudioVolume*, LibC::BOOL*, HRESULT)
   end
 
+  IMFSimpleAudioVolume_GUID = LibC::GUID.new("089edf13-cf71-4338-8d13-9e569dbdc319")
+  CLSID_IMFSimpleAudioVolume = "089edf13-cf71-4338-8d13-9e569dbdc319"
   struct IMFSimpleAudioVolume
     lpVtbl : IMFSimpleAudioVolumeVTbl*
   end
@@ -10239,6 +10505,8 @@ lib LibWin32
     get_all_volumes : Proc(IMFAudioStreamVolume*, UInt32, Float32*, HRESULT)
   end
 
+  IMFAudioStreamVolume_GUID = LibC::GUID.new("76b1bbdb-4ec8-4f36-b106-70a9316df593")
+  CLSID_IMFAudioStreamVolume = "76b1bbdb-4ec8-4f36-b106-70a9316df593"
   struct IMFAudioStreamVolume
     lpVtbl : IMFAudioStreamVolumeVTbl*
   end
@@ -10255,6 +10523,8 @@ lib LibWin32
     get_icon_path : Proc(IMFAudioPolicy*, LibC::LPWSTR*, HRESULT)
   end
 
+  IMFAudioPolicy_GUID = LibC::GUID.new("a0638c2b-6465-4395-9ae7-a321a9fd2856")
+  CLSID_IMFAudioPolicy = "a0638c2b-6465-4395-9ae7-a321a9fd2856"
   struct IMFAudioPolicy
     lpVtbl : IMFAudioPolicyVTbl*
   end
@@ -10273,6 +10543,8 @@ lib LibWin32
     on_shutdown : Proc(IMFSampleGrabberSinkCallback*, HRESULT)
   end
 
+  IMFSampleGrabberSinkCallback_GUID = LibC::GUID.new("8c7b80bf-ee42-4b59-b1df-55668e1bdca8")
+  CLSID_IMFSampleGrabberSinkCallback = "8c7b80bf-ee42-4b59-b1df-55668e1bdca8"
   struct IMFSampleGrabberSinkCallback
     lpVtbl : IMFSampleGrabberSinkCallbackVTbl*
   end
@@ -10292,6 +10564,8 @@ lib LibWin32
     on_process_sample_ex : Proc(IMFSampleGrabberSinkCallback2*, Guid*, UInt32, Int64, Int64, UInt8*, UInt32, IMFAttributes, HRESULT)
   end
 
+  IMFSampleGrabberSinkCallback2_GUID = LibC::GUID.new("ca86aa50-c46e-429e-ab27-16d6ac6844cb")
+  CLSID_IMFSampleGrabberSinkCallback2 = "ca86aa50-c46e-429e-ab27-16d6ac6844cb"
   struct IMFSampleGrabberSinkCallback2
     lpVtbl : IMFSampleGrabberSinkCallback2VTbl*
   end
@@ -10314,6 +10588,8 @@ lib LibWin32
     get_platform_work_queue_mmcss_task_id : Proc(IMFWorkQueueServices*, UInt32, UInt32*, HRESULT)
   end
 
+  IMFWorkQueueServices_GUID = LibC::GUID.new("35fe1bb8-a3a9-40fe-bbec-eb569c9ccca3")
+  CLSID_IMFWorkQueueServices = "35fe1bb8-a3a9-40fe-bbec-eb569c9ccca3"
   struct IMFWorkQueueServices
     lpVtbl : IMFWorkQueueServicesVTbl*
   end
@@ -10339,6 +10615,8 @@ lib LibWin32
     get_platform_work_queue_mmcss_priority : Proc(IMFWorkQueueServicesEx*, UInt32, Int32*, HRESULT)
   end
 
+  IMFWorkQueueServicesEx_GUID = LibC::GUID.new("96bf961b-40fe-42f1-ba9d-320238b49700")
+  CLSID_IMFWorkQueueServicesEx = "96bf961b-40fe-42f1-ba9d-320238b49700"
   struct IMFWorkQueueServicesEx
     lpVtbl : IMFWorkQueueServicesExVTbl*
   end
@@ -10355,6 +10633,8 @@ lib LibWin32
     shutdown : Proc(IMFQualityManager*, HRESULT)
   end
 
+  IMFQualityManager_GUID = LibC::GUID.new("8d009d86-5b9f-4115-b1fc-9f80d52ab8ab")
+  CLSID_IMFQualityManager = "8d009d86-5b9f-4115-b1fc-9f80d52ab8ab"
   struct IMFQualityManager
     lpVtbl : IMFQualityManagerVTbl*
   end
@@ -10370,6 +10650,8 @@ lib LibWin32
     drop_time : Proc(IMFQualityAdvise*, Int64, HRESULT)
   end
 
+  IMFQualityAdvise_GUID = LibC::GUID.new("ec15e2e9-e36b-4f7c-8758-77d452ef4ce7")
+  CLSID_IMFQualityAdvise = "ec15e2e9-e36b-4f7c-8758-77d452ef4ce7"
   struct IMFQualityAdvise
     lpVtbl : IMFQualityAdviseVTbl*
   end
@@ -10386,6 +10668,8 @@ lib LibWin32
     notify_quality_event : Proc(IMFQualityAdvise2*, IMFMediaEvent, UInt32*, HRESULT)
   end
 
+  IMFQualityAdvise2_GUID = LibC::GUID.new("f3706f0d-8ea2-4886-8000-7155e9ec2eae")
+  CLSID_IMFQualityAdvise2 = "f3706f0d-8ea2-4886-8000-7155e9ec2eae"
   struct IMFQualityAdvise2
     lpVtbl : IMFQualityAdvise2VTbl*
   end
@@ -10398,6 +10682,8 @@ lib LibWin32
     get_minimum_quality_level : Proc(IMFQualityAdviseLimits*, MF_QUALITY_LEVEL*, HRESULT)
   end
 
+  IMFQualityAdviseLimits_GUID = LibC::GUID.new("dfcd8e4d-30b5-4567-acaa-8eb5b7853dc9")
+  CLSID_IMFQualityAdviseLimits = "dfcd8e4d-30b5-4567-acaa-8eb5b7853dc9"
   struct IMFQualityAdviseLimits
     lpVtbl : IMFQualityAdviseLimitsVTbl*
   end
@@ -10411,6 +10697,8 @@ lib LibWin32
     set_work_queue : Proc(IMFRealTimeClient*, UInt32, HRESULT)
   end
 
+  IMFRealTimeClient_GUID = LibC::GUID.new("2347d60b-3fb5-480c-8803-8df3adcd3ef0")
+  CLSID_IMFRealTimeClient = "2347d60b-3fb5-480c-8803-8df3adcd3ef0"
   struct IMFRealTimeClient
     lpVtbl : IMFRealTimeClientVTbl*
   end
@@ -10424,6 +10712,8 @@ lib LibWin32
     set_work_queue_ex : Proc(IMFRealTimeClientEx*, UInt32, Int32, HRESULT)
   end
 
+  IMFRealTimeClientEx_GUID = LibC::GUID.new("03910848-ab16-4611-b100-17b88ae2f248")
+  CLSID_IMFRealTimeClientEx = "03910848-ab16-4611-b100-17b88ae2f248"
   struct IMFRealTimeClientEx
     lpVtbl : IMFRealTimeClientExVTbl*
   end
@@ -10439,6 +10729,8 @@ lib LibWin32
     update_topology_flags : Proc(IMFSequencerSource*, UInt32, UInt32, HRESULT)
   end
 
+  IMFSequencerSource_GUID = LibC::GUID.new("197cd219-19cb-4de1-a64c-acf2edcbe59e")
+  CLSID_IMFSequencerSource = "197cd219-19cb-4de1-a64c-acf2edcbe59e"
   struct IMFSequencerSource
     lpVtbl : IMFSequencerSourceVTbl*
   end
@@ -10450,6 +10742,8 @@ lib LibWin32
     get_media_source_topology : Proc(IMFMediaSourceTopologyProvider*, IMFPresentationDescriptor, IMFTopology*, HRESULT)
   end
 
+  IMFMediaSourceTopologyProvider_GUID = LibC::GUID.new("0e1d6009-c9f3-442d-8c51-a42d2d49452f")
+  CLSID_IMFMediaSourceTopologyProvider = "0e1d6009-c9f3-442d-8c51-a42d2d49452f"
   struct IMFMediaSourceTopologyProvider
     lpVtbl : IMFMediaSourceTopologyProviderVTbl*
   end
@@ -10461,6 +10755,8 @@ lib LibWin32
     force_end_of_presentation : Proc(IMFMediaSourcePresentationProvider*, IMFPresentationDescriptor, HRESULT)
   end
 
+  IMFMediaSourcePresentationProvider_GUID = LibC::GUID.new("0e1d600a-c9f3-442d-8c51-a42d2d49452f")
+  CLSID_IMFMediaSourcePresentationProvider = "0e1d600a-c9f3-442d-8c51-a42d2d49452f"
   struct IMFMediaSourcePresentationProvider
     lpVtbl : IMFMediaSourcePresentationProviderVTbl*
   end
@@ -10472,6 +10768,8 @@ lib LibWin32
     update_node_attributes : Proc(IMFTopologyNodeAttributeEditor*, UInt64, UInt32, MFTOPONODE_ATTRIBUTE_UPDATE*, HRESULT)
   end
 
+  IMFTopologyNodeAttributeEditor_GUID = LibC::GUID.new("676aa6dd-238a-410d-bb99-65668d01605a")
+  CLSID_IMFTopologyNodeAttributeEditor = "676aa6dd-238a-410d-bb99-65668d01605a"
   struct IMFTopologyNodeAttributeEditor
     lpVtbl : IMFTopologyNodeAttributeEditorVTbl*
   end
@@ -10485,6 +10783,8 @@ lib LibWin32
     stop_buffering : Proc(IMFByteStreamBuffering*, HRESULT)
   end
 
+  IMFByteStreamBuffering_GUID = LibC::GUID.new("6d66d782-1d4f-4db7-8c63-cb8c77f1ef5e")
+  CLSID_IMFByteStreamBuffering = "6d66d782-1d4f-4db7-8c63-cb8c77f1ef5e"
   struct IMFByteStreamBuffering
     lpVtbl : IMFByteStreamBufferingVTbl*
   end
@@ -10496,6 +10796,8 @@ lib LibWin32
     stop_background_transfer : Proc(IMFByteStreamCacheControl*, HRESULT)
   end
 
+  IMFByteStreamCacheControl_GUID = LibC::GUID.new("f5042ea4-7a96-4a75-aa7b-2be1ef7f88d5")
+  CLSID_IMFByteStreamCacheControl = "f5042ea4-7a96-4a75-aa7b-2be1ef7f88d5"
   struct IMFByteStreamCacheControl
     lpVtbl : IMFByteStreamCacheControlVTbl*
   end
@@ -10509,6 +10811,8 @@ lib LibWin32
     get_time_seek_result : Proc(IMFByteStreamTimeSeek*, UInt64*, UInt64*, UInt64*, HRESULT)
   end
 
+  IMFByteStreamTimeSeek_GUID = LibC::GUID.new("64976bfa-fb61-4041-9069-8c9a5f659beb")
+  CLSID_IMFByteStreamTimeSeek = "64976bfa-fb61-4041-9069-8c9a5f659beb"
   struct IMFByteStreamTimeSeek
     lpVtbl : IMFByteStreamTimeSeekVTbl*
   end
@@ -10523,6 +10827,8 @@ lib LibWin32
     is_background_transfer_active : Proc(IMFByteStreamCacheControl2*, LibC::BOOL*, HRESULT)
   end
 
+  IMFByteStreamCacheControl2_GUID = LibC::GUID.new("71ce469c-f34b-49ea-a56b-2d2a10e51149")
+  CLSID_IMFByteStreamCacheControl2 = "71ce469c-f34b-49ea-a56b-2d2a10e51149"
   struct IMFByteStreamCacheControl2
     lpVtbl : IMFByteStreamCacheControl2VTbl*
   end
@@ -10538,6 +10844,8 @@ lib LibWin32
     logged_on_user : Proc(IMFNetCredential*, LibC::BOOL*, HRESULT)
   end
 
+  IMFNetCredential_GUID = LibC::GUID.new("5b87ef6a-7ed8-434f-ba0e-184fac1628d1")
+  CLSID_IMFNetCredential = "5b87ef6a-7ed8-434f-ba0e-184fac1628d1"
   struct IMFNetCredential
     lpVtbl : IMFNetCredentialVTbl*
   end
@@ -10551,6 +10859,8 @@ lib LibWin32
     set_good : Proc(IMFNetCredentialManager*, IMFNetCredential, LibC::BOOL, HRESULT)
   end
 
+  IMFNetCredentialManager_GUID = LibC::GUID.new("5b87ef6b-7ed8-434f-ba0e-184fac1628d1")
+  CLSID_IMFNetCredentialManager = "5b87ef6b-7ed8-434f-ba0e-184fac1628d1"
   struct IMFNetCredentialManager
     lpVtbl : IMFNetCredentialManagerVTbl*
   end
@@ -10564,6 +10874,8 @@ lib LibWin32
     set_user_options : Proc(IMFNetCredentialCache*, IMFNetCredential, UInt32, HRESULT)
   end
 
+  IMFNetCredentialCache_GUID = LibC::GUID.new("5b87ef6c-7ed8-434f-ba0e-184fac1628d1")
+  CLSID_IMFNetCredentialCache = "5b87ef6c-7ed8-434f-ba0e-184fac1628d1"
   struct IMFNetCredentialCache
     lpVtbl : IMFNetCredentialCacheVTbl*
   end
@@ -10579,6 +10891,8 @@ lib LibWin32
     on_server_certificate : Proc(IMFSSLCertificateManager*, LibC::LPWSTR, UInt8*, UInt32, LibC::BOOL*, HRESULT)
   end
 
+  IMFSSLCertificateManager_GUID = LibC::GUID.new("61f7d887-1230-4a8b-aeba-8ad434d1a64d")
+  CLSID_IMFSSLCertificateManager = "61f7d887-1230-4a8b-aeba-8ad434d1a64d"
   struct IMFSSLCertificateManager
     lpVtbl : IMFSSLCertificateManagerVTbl*
   end
@@ -10591,6 +10905,8 @@ lib LibWin32
     on_sending_request : Proc(IMFNetResourceFilter*, LibC::LPWSTR, HRESULT)
   end
 
+  IMFNetResourceFilter_GUID = LibC::GUID.new("091878a3-bf11-4a5c-bc9f-33995b06ef2d")
+  CLSID_IMFNetResourceFilter = "091878a3-bf11-4a5c-bc9f-33995b06ef2d"
   struct IMFNetResourceFilter
     lpVtbl : IMFNetResourceFilterVTbl*
   end
@@ -10602,6 +10918,8 @@ lib LibWin32
     on_source_event : Proc(IMFSourceOpenMonitor*, IMFMediaEvent, HRESULT)
   end
 
+  IMFSourceOpenMonitor_GUID = LibC::GUID.new("059054b3-027c-494c-a27d-9113291cf87f")
+  CLSID_IMFSourceOpenMonitor = "059054b3-027c-494c-a27d-9113291cf87f"
   struct IMFSourceOpenMonitor
     lpVtbl : IMFSourceOpenMonitorVTbl*
   end
@@ -10617,6 +10935,8 @@ lib LibWin32
     clone : Proc(IMFNetProxyLocator*, IMFNetProxyLocator*, HRESULT)
   end
 
+  IMFNetProxyLocator_GUID = LibC::GUID.new("e9cd0383-a268-4bb4-82de-658d53574d41")
+  CLSID_IMFNetProxyLocator = "e9cd0383-a268-4bb4-82de-658d53574d41"
   struct IMFNetProxyLocator
     lpVtbl : IMFNetProxyLocatorVTbl*
   end
@@ -10628,6 +10948,8 @@ lib LibWin32
     create_proxy_locator : Proc(IMFNetProxyLocatorFactory*, LibC::LPWSTR, IMFNetProxyLocator*, HRESULT)
   end
 
+  IMFNetProxyLocatorFactory_GUID = LibC::GUID.new("e9cd0384-a268-4bb4-82de-658d53574d41")
+  CLSID_IMFNetProxyLocatorFactory = "e9cd0384-a268-4bb4-82de-658d53574d41"
   struct IMFNetProxyLocatorFactory
     lpVtbl : IMFNetProxyLocatorFactoryVTbl*
   end
@@ -10642,6 +10964,8 @@ lib LibWin32
     get_progress : Proc(IMFSaveJob*, UInt32*, HRESULT)
   end
 
+  IMFSaveJob_GUID = LibC::GUID.new("e9931663-80bf-4c6e-98af-5dcf58747d1f")
+  CLSID_IMFSaveJob = "e9931663-80bf-4c6e-98af-5dcf58747d1f"
   struct IMFSaveJob
     lpVtbl : IMFSaveJobVTbl*
   end
@@ -10655,6 +10979,8 @@ lib LibWin32
     reset_protocol_rollover_settings : Proc(IMFNetSchemeHandlerConfig*, HRESULT)
   end
 
+  IMFNetSchemeHandlerConfig_GUID = LibC::GUID.new("7be19e73-c9bf-468a-ac5a-a5e8653bec87")
+  CLSID_IMFNetSchemeHandlerConfig = "7be19e73-c9bf-468a-ac5a-a5e8653bec87"
   struct IMFNetSchemeHandlerConfig
     lpVtbl : IMFNetSchemeHandlerConfigVTbl*
   end
@@ -10668,6 +10994,8 @@ lib LibWin32
     cancel_object_creation : Proc(IMFSchemeHandler*, IUnknown, HRESULT)
   end
 
+  IMFSchemeHandler_GUID = LibC::GUID.new("6d4c7b74-52a0-4bb7-b0db-55f29f47a668")
+  CLSID_IMFSchemeHandler = "6d4c7b74-52a0-4bb7-b0db-55f29f47a668"
   struct IMFSchemeHandler
     lpVtbl : IMFSchemeHandlerVTbl*
   end
@@ -10682,6 +11010,8 @@ lib LibWin32
     get_max_number_of_bytes_required_for_resolution : Proc(IMFByteStreamHandler*, UInt64*, HRESULT)
   end
 
+  IMFByteStreamHandler_GUID = LibC::GUID.new("bb420aa4-765b-4a1f-91fe-d6a8a143924c")
+  CLSID_IMFByteStreamHandler = "bb420aa4-765b-4a1f-91fe-d6a8a143924c"
   struct IMFByteStreamHandler
     lpVtbl : IMFByteStreamHandlerVTbl*
   end
@@ -10693,6 +11023,8 @@ lib LibWin32
     get_input_trust_authority : Proc(IMFTrustedInput*, UInt32, Guid*, IUnknown*, HRESULT)
   end
 
+  IMFTrustedInput_GUID = LibC::GUID.new("542612c4-a1b8-4632-b521-de11ea64a0b0")
+  CLSID_IMFTrustedInput = "542612c4-a1b8-4632-b521-de11ea64a0b0"
   struct IMFTrustedInput
     lpVtbl : IMFTrustedInputVTbl*
   end
@@ -10709,6 +11041,8 @@ lib LibWin32
     reset : Proc(IMFInputTrustAuthority*, HRESULT)
   end
 
+  IMFInputTrustAuthority_GUID = LibC::GUID.new("d19f8e98-b126-4446-890c-5dcb7ad71453")
+  CLSID_IMFInputTrustAuthority = "d19f8e98-b126-4446-890c-5dcb7ad71453"
   struct IMFInputTrustAuthority
     lpVtbl : IMFInputTrustAuthorityVTbl*
   end
@@ -10722,6 +11056,8 @@ lib LibWin32
     is_final : Proc(IMFTrustedOutput*, LibC::BOOL*, HRESULT)
   end
 
+  IMFTrustedOutput_GUID = LibC::GUID.new("d19f8e95-b126-4446-890c-5dcb7ad71453")
+  CLSID_IMFTrustedOutput = "d19f8e95-b126-4446-890c-5dcb7ad71453"
   struct IMFTrustedOutput
     lpVtbl : IMFTrustedOutputVTbl*
   end
@@ -10734,6 +11070,8 @@ lib LibWin32
     set_policy : Proc(IMFOutputTrustAuthority*, IMFOutputPolicy*, UInt32, UInt8**, UInt32*, HRESULT)
   end
 
+  IMFOutputTrustAuthority_GUID = LibC::GUID.new("d19f8e94-b126-4446-890c-5dcb7ad71453")
+  CLSID_IMFOutputTrustAuthority = "d19f8e94-b126-4446-890c-5dcb7ad71453"
   struct IMFOutputTrustAuthority
     lpVtbl : IMFOutputTrustAuthorityVTbl*
   end
@@ -10777,6 +11115,8 @@ lib LibWin32
     get_minimum_grl_version : Proc(IMFOutputPolicy*, UInt32*, HRESULT)
   end
 
+  IMFOutputPolicy_GUID = LibC::GUID.new("7f00f10a-daed-41af-ab26-5fdfa4dfba3c")
+  CLSID_IMFOutputPolicy = "7f00f10a-daed-41af-ab26-5fdfa4dfba3c"
   struct IMFOutputPolicy
     lpVtbl : IMFOutputPolicyVTbl*
   end
@@ -10820,6 +11160,8 @@ lib LibWin32
     get_originator_id : Proc(IMFOutputSchema*, Guid*, HRESULT)
   end
 
+  IMFOutputSchema_GUID = LibC::GUID.new("7be0fc5b-abd9-44fb-a5c8-f50136e71599")
+  CLSID_IMFOutputSchema = "7be0fc5b-abd9-44fb-a5c8-f50136e71599"
   struct IMFOutputSchema
     lpVtbl : IMFOutputSchemaVTbl*
   end
@@ -10832,6 +11174,8 @@ lib LibWin32
     setup_session : Proc(IMFSecureChannel*, UInt8*, UInt32, HRESULT)
   end
 
+  IMFSecureChannel_GUID = LibC::GUID.new("d0ae555d-3b12-4d97-b060-0990bc5aeb67")
+  CLSID_IMFSecureChannel = "d0ae555d-3b12-4d97-b060-0990bc5aeb67"
   struct IMFSecureChannel
     lpVtbl : IMFSecureChannelVTbl*
   end
@@ -10847,6 +11191,8 @@ lib LibWin32
     init_input_protection : Proc(IMFSampleProtection*, UInt32, UInt32, UInt8*, UInt32, HRESULT)
   end
 
+  IMFSampleProtection_GUID = LibC::GUID.new("8e36395f-c7b9-43c4-a54d-512b4af63c95")
+  CLSID_IMFSampleProtection = "8e36395f-c7b9-43c4-a54d-512b4af63c95"
   struct IMFSampleProtection
     lpVtbl : IMFSampleProtectionVTbl*
   end
@@ -10858,6 +11204,8 @@ lib LibWin32
     notify_preroll : Proc(IMFMediaSinkPreroll*, Int64, HRESULT)
   end
 
+  IMFMediaSinkPreroll_GUID = LibC::GUID.new("5dfd4b2a-7674-4110-a4e6-8a68fd5f3688")
+  CLSID_IMFMediaSinkPreroll = "5dfd4b2a-7674-4110-a4e6-8a68fd5f3688"
   struct IMFMediaSinkPreroll
     lpVtbl : IMFMediaSinkPrerollVTbl*
   end
@@ -10879,6 +11227,8 @@ lib LibWin32
     end_finalize : Proc(IMFFinalizableMediaSink*, IMFAsyncResult, HRESULT)
   end
 
+  IMFFinalizableMediaSink_GUID = LibC::GUID.new("eaecb74a-9a50-42ce-9541-6a7f57aa4ad7")
+  CLSID_IMFFinalizableMediaSink = "eaecb74a-9a50-42ce-9541-6a7f57aa4ad7"
   struct IMFFinalizableMediaSink
     lpVtbl : IMFFinalizableMediaSinkVTbl*
   end
@@ -10890,6 +11240,8 @@ lib LibWin32
     start_streaming : Proc(IMFStreamingSinkConfig*, LibC::BOOL, UInt64, HRESULT)
   end
 
+  IMFStreamingSinkConfig_GUID = LibC::GUID.new("9db7aa41-3cc5-40d4-8509-555804ad34cc")
+  CLSID_IMFStreamingSinkConfig = "9db7aa41-3cc5-40d4-8509-555804ad34cc"
   struct IMFStreamingSinkConfig
     lpVtbl : IMFStreamingSinkConfigVTbl*
   end
@@ -10902,6 +11254,8 @@ lib LibWin32
     get_remote_host : Proc(IMFRemoteProxy*, Guid*, Void**, HRESULT)
   end
 
+  IMFRemoteProxy_GUID = LibC::GUID.new("994e23ad-1cc2-493c-b9fa-46f1cb040fa4")
+  CLSID_IMFRemoteProxy = "994e23ad-1cc2-493c-b9fa-46f1cb040fa4"
   struct IMFRemoteProxy
     lpVtbl : IMFRemoteProxyVTbl*
   end
@@ -10914,6 +11268,8 @@ lib LibWin32
     load_reference : Proc(IMFObjectReferenceStream*, Guid*, Void**, HRESULT)
   end
 
+  IMFObjectReferenceStream_GUID = LibC::GUID.new("09ef5be3-c8a7-469e-8b70-73bf25bb193f")
+  CLSID_IMFObjectReferenceStream = "09ef5be3-c8a7-469e-8b70-73bf25bb193f"
   struct IMFObjectReferenceStream
     lpVtbl : IMFObjectReferenceStreamVTbl*
   end
@@ -10927,6 +11283,8 @@ lib LibWin32
     create_object_by_clsid : Proc(IMFPMPHost*, Guid*, IStream, Guid*, Void**, HRESULT)
   end
 
+  IMFPMPHost_GUID = LibC::GUID.new("f70ca1a9-fdc7-4782-b994-adffb1c98606")
+  CLSID_IMFPMPHost = "f70ca1a9-fdc7-4782-b994-adffb1c98606"
   struct IMFPMPHost
     lpVtbl : IMFPMPHostVTbl*
   end
@@ -10938,6 +11296,8 @@ lib LibWin32
     set_pmp_host : Proc(IMFPMPClient*, IMFPMPHost, HRESULT)
   end
 
+  IMFPMPClient_GUID = LibC::GUID.new("6c4e655d-ead8-4421-b6b9-54dcdbbdf820")
+  CLSID_IMFPMPClient = "6c4e655d-ead8-4421-b6b9-54dcdbbdf820"
   struct IMFPMPClient
     lpVtbl : IMFPMPClientVTbl*
   end
@@ -10951,6 +11311,8 @@ lib LibWin32
     create_object_by_clsid : Proc(IMFPMPServer*, Guid*, Guid*, Void**, HRESULT)
   end
 
+  IMFPMPServer_GUID = LibC::GUID.new("994e23af-1cc2-493c-b9fa-46f1cb040fa4")
+  CLSID_IMFPMPServer = "994e23af-1cc2-493c-b9fa-46f1cb040fa4"
   struct IMFPMPServer
     lpVtbl : IMFPMPServerVTbl*
   end
@@ -10962,6 +11324,8 @@ lib LibWin32
     update_topology : Proc(IMFRemoteDesktopPlugin*, IMFTopology, HRESULT)
   end
 
+  IMFRemoteDesktopPlugin_GUID = LibC::GUID.new("1cde6309-cae0-4940-907e-c1ec9c3d1d4a")
+  CLSID_IMFRemoteDesktopPlugin = "1cde6309-cae0-4940-907e-c1ec9c3d1d4a"
   struct IMFRemoteDesktopPlugin
     lpVtbl : IMFRemoteDesktopPluginVTbl*
   end
@@ -10976,6 +11340,8 @@ lib LibWin32
     get_selected_style : Proc(IMFSAMIStyle*, LibC::LPWSTR*, HRESULT)
   end
 
+  IMFSAMIStyle_GUID = LibC::GUID.new("a7e025dd-5303-4a62-89d6-e747e1efac73")
+  CLSID_IMFSAMIStyle = "a7e025dd-5303-4a62-89d6-e747e1efac73"
   struct IMFSAMIStyle
     lpVtbl : IMFSAMIStyleVTbl*
   end
@@ -10992,6 +11358,8 @@ lib LibWin32
     get_container_attributes : Proc(IMFTranscodeProfile*, IMFAttributes*, HRESULT)
   end
 
+  IMFTranscodeProfile_GUID = LibC::GUID.new("4adfdba3-7ab0-4953-a62b-461e7ff3da1e")
+  CLSID_IMFTranscodeProfile = "4adfdba3-7ab0-4953-a62b-461e7ff3da1e"
   struct IMFTranscodeProfile
     lpVtbl : IMFTranscodeProfileVTbl*
   end
@@ -11006,6 +11374,8 @@ lib LibWin32
     get_sink_info : Proc(IMFTranscodeSinkInfoProvider*, MF_TRANSCODE_SINK_INFO*, HRESULT)
   end
 
+  IMFTranscodeSinkInfoProvider_GUID = LibC::GUID.new("8cffcd2e-5a03-4a3a-aff7-edcd107c620e")
+  CLSID_IMFTranscodeSinkInfoProvider = "8cffcd2e-5a03-4a3a-aff7-edcd107c620e"
   struct IMFTranscodeSinkInfoProvider
     lpVtbl : IMFTranscodeSinkInfoProviderVTbl*
   end
@@ -11017,6 +11387,8 @@ lib LibWin32
     unlock : Proc(IMFFieldOfUseMFTUnlock*, IUnknown, HRESULT)
   end
 
+  IMFFieldOfUseMFTUnlock_GUID = LibC::GUID.new("508e71d3-ec66-4fc3-8775-b4b9ed6ba847")
+  CLSID_IMFFieldOfUseMFTUnlock = "508e71d3-ec66-4fc3-8775-b4b9ed6ba847"
   struct IMFFieldOfUseMFTUnlock
     lpVtbl : IMFFieldOfUseMFTUnlockVTbl*
   end
@@ -11028,6 +11400,8 @@ lib LibWin32
     register_mf_ts : Proc(IMFLocalMFTRegistration*, MFT_REGISTRATION_INFO*, UInt32, HRESULT)
   end
 
+  IMFLocalMFTRegistration_GUID = LibC::GUID.new("149c4d73-b4be-4f8d-8b87-079e926b6add")
+  CLSID_IMFLocalMFTRegistration = "149c4d73-b4be-4f8d-8b87-079e926b6add"
   struct IMFLocalMFTRegistration
     lpVtbl : IMFLocalMFTRegistrationVTbl*
   end
@@ -11041,6 +11415,8 @@ lib LibWin32
     get_pixel_format : Proc(IMFCapturePhotoConfirmation*, Guid*, HRESULT)
   end
 
+  IMFCapturePhotoConfirmation_GUID = LibC::GUID.new("19f68549-ca8a-4706-a4ef-481dbc95e12c")
+  CLSID_IMFCapturePhotoConfirmation = "19f68549-ca8a-4706-a4ef-481dbc95e12c"
   struct IMFCapturePhotoConfirmation
     lpVtbl : IMFCapturePhotoConfirmationVTbl*
   end
@@ -11054,6 +11430,8 @@ lib LibWin32
     activate_class_by_id : Proc(IMFPMPHostApp*, LibC::LPWSTR, IStream, Guid*, Void**, HRESULT)
   end
 
+  IMFPMPHostApp_GUID = LibC::GUID.new("84d2054a-3aa1-4728-a3b0-440a418cf49c")
+  CLSID_IMFPMPHostApp = "84d2054a-3aa1-4728-a3b0-440a418cf49c"
   struct IMFPMPHostApp
     lpVtbl : IMFPMPHostAppVTbl*
   end
@@ -11065,6 +11443,8 @@ lib LibWin32
     set_pmp_host : Proc(IMFPMPClientApp*, IMFPMPHostApp, HRESULT)
   end
 
+  IMFPMPClientApp_GUID = LibC::GUID.new("c004f646-be2c-48f3-93a2-a0983eba1108")
+  CLSID_IMFPMPClientApp = "c004f646-be2c-48f3-93a2-a0983eba1108"
   struct IMFPMPClientApp
     lpVtbl : IMFPMPClientAppVTbl*
   end
@@ -11076,6 +11456,8 @@ lib LibWin32
     set_sample : Proc(IMFMediaStreamSourceSampleRequest*, IMFSample, HRESULT)
   end
 
+  IMFMediaStreamSourceSampleRequest_GUID = LibC::GUID.new("380b9af9-a85b-4e78-a2af-ea5ce645c6b4")
+  CLSID_IMFMediaStreamSourceSampleRequest = "380b9af9-a85b-4e78-a2af-ea5ce645c6b4"
   struct IMFMediaStreamSourceSampleRequest
     lpVtbl : IMFMediaStreamSourceSampleRequestVTbl*
   end
@@ -11087,6 +11469,8 @@ lib LibWin32
     set_allocator : Proc(IMFTrackedSample*, IMFAsyncCallback, IUnknown, HRESULT)
   end
 
+  IMFTrackedSample_GUID = LibC::GUID.new("245bf8e9-0755-40f7-88a5-ae0f18d55e17")
+  CLSID_IMFTrackedSample = "245bf8e9-0755-40f7-88a5-ae0f18d55e17"
   struct IMFTrackedSample
     lpVtbl : IMFTrackedSampleVTbl*
   end
@@ -11099,6 +11483,8 @@ lib LibWin32
     read_grl : Proc(IMFProtectedEnvironmentAccess*, UInt32*, UInt8**, HRESULT)
   end
 
+  IMFProtectedEnvironmentAccess_GUID = LibC::GUID.new("ef5dc845-f0d9-4ec9-b00c-cb5183d38434")
+  CLSID_IMFProtectedEnvironmentAccess = "ef5dc845-f0d9-4ec9-b00c-cb5183d38434"
   struct IMFProtectedEnvironmentAccess
     lpVtbl : IMFProtectedEnvironmentAccessVTbl*
   end
@@ -11110,6 +11496,8 @@ lib LibWin32
     get_procedure_address : Proc(IMFSignedLibrary*, PSTR, Void**, HRESULT)
   end
 
+  IMFSignedLibrary_GUID = LibC::GUID.new("4a724bca-ff6a-4c07-8e0d-7a358421cf06")
+  CLSID_IMFSignedLibrary = "4a724bca-ff6a-4c07-8e0d-7a358421cf06"
   struct IMFSignedLibrary
     lpVtbl : IMFSignedLibraryVTbl*
   end
@@ -11122,6 +11510,8 @@ lib LibWin32
     setup : Proc(IMFSystemId*, UInt32, UInt32, UInt8*, UInt32*, UInt8**, HRESULT)
   end
 
+  IMFSystemId_GUID = LibC::GUID.new("fff4af3a-1fc1-4ef9-a29b-d26c49e2f31a")
+  CLSID_IMFSystemId = "fff4af3a-1fc1-4ef9-a29b-d26c49e2f31a"
   struct IMFSystemId
     lpVtbl : IMFSystemIdVTbl*
   end
@@ -11134,6 +11524,8 @@ lib LibWin32
     get_private_data_byte_count : Proc(IMFContentProtectionDevice*, UInt32*, UInt32*, HRESULT)
   end
 
+  IMFContentProtectionDevice_GUID = LibC::GUID.new("e6257174-a060-4c9a-a088-3b1b471cad28")
+  CLSID_IMFContentProtectionDevice = "e6257174-a060-4c9a-a088-3b1b471cad28"
   struct IMFContentProtectionDevice
     lpVtbl : IMFContentProtectionDeviceVTbl*
   end
@@ -11145,6 +11537,8 @@ lib LibWin32
     initialize_hardware_key : Proc(IMFContentDecryptorContext*, UInt32, Void*, UInt64*, HRESULT)
   end
 
+  IMFContentDecryptorContext_GUID = LibC::GUID.new("7ec4b1bd-43fb-4763-85d2-64fcb5c5f4cb")
+  CLSID_IMFContentDecryptorContext = "7ec4b1bd-43fb-4763-85d2-64fcb5c5f4cb"
   struct IMFContentDecryptorContext
     lpVtbl : IMFContentDecryptorContextVTbl*
   end
@@ -11158,6 +11552,8 @@ lib LibWin32
     is_same_origin : Proc(IMFNetCrossOriginSupport*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
+  IMFNetCrossOriginSupport_GUID = LibC::GUID.new("bc2b7d44-a72d-49d5-8376-1480dee58b22")
+  CLSID_IMFNetCrossOriginSupport = "bc2b7d44-a72d-49d5-8376-1480dee58b22"
   struct IMFNetCrossOriginSupport
     lpVtbl : IMFNetCrossOriginSupportVTbl*
   end
@@ -11184,6 +11580,8 @@ lib LibWin32
     close : Proc(IMFHttpDownloadRequest*, HRESULT)
   end
 
+  IMFHttpDownloadRequest_GUID = LibC::GUID.new("f779fddf-26e7-4270-8a8b-b983d1859de0")
+  CLSID_IMFHttpDownloadRequest = "f779fddf-26e7-4270-8a8b-b983d1859de0"
   struct IMFHttpDownloadRequest
     lpVtbl : IMFHttpDownloadRequestVTbl*
   end
@@ -11197,6 +11595,8 @@ lib LibWin32
     close : Proc(IMFHttpDownloadSession*, HRESULT)
   end
 
+  IMFHttpDownloadSession_GUID = LibC::GUID.new("71fa9a2c-53ce-4662-a132-1a7e8cbf62db")
+  CLSID_IMFHttpDownloadSession = "71fa9a2c-53ce-4662-a132-1a7e8cbf62db"
   struct IMFHttpDownloadSession
     lpVtbl : IMFHttpDownloadSessionVTbl*
   end
@@ -11208,6 +11608,8 @@ lib LibWin32
     create_http_download_session : Proc(IMFHttpDownloadSessionProvider*, LibC::LPWSTR, IMFHttpDownloadSession*, HRESULT)
   end
 
+  IMFHttpDownloadSessionProvider_GUID = LibC::GUID.new("1b4cf4b9-3a16-4115-839d-03cc5c99df01")
+  CLSID_IMFHttpDownloadSessionProvider = "1b4cf4b9-3a16-4115-839d-03cc5c99df01"
   struct IMFHttpDownloadSessionProvider
     lpVtbl : IMFHttpDownloadSessionProviderVTbl*
   end
@@ -11232,6 +11634,8 @@ lib LibWin32
     set_media_type : Proc(IMFMediaSource2*, UInt32, IMFMediaType, HRESULT)
   end
 
+  IMFMediaSource2_GUID = LibC::GUID.new("fbb03414-d13b-4786-8319-5ac51fc0a136")
+  CLSID_IMFMediaSource2 = "fbb03414-d13b-4786-8319-5ac51fc0a136"
   struct IMFMediaSource2
     lpVtbl : IMFMediaSource2VTbl*
   end
@@ -11251,6 +11655,8 @@ lib LibWin32
     get_stream_state : Proc(IMFMediaStream2*, MF_STREAM_STATE*, HRESULT)
   end
 
+  IMFMediaStream2_GUID = LibC::GUID.new("c5bc37d6-75c7-46a1-a132-81b5f723c20f")
+  CLSID_IMFMediaStream2 = "c5bc37d6-75c7-46a1-a132-81b5f723c20f"
   struct IMFMediaStream2
     lpVtbl : IMFMediaStream2VTbl*
   end
@@ -11270,6 +11676,8 @@ lib LibWin32
     get_sensor_device_mode : Proc(IMFSensorDevice*, MFSensorDeviceMode*, HRESULT)
   end
 
+  IMFSensorDevice_GUID = LibC::GUID.new("fb9f48f2-2a18-4e28-9730-786f30f04dc4")
+  CLSID_IMFSensorDevice = "fb9f48f2-2a18-4e28-9730-786f30f04dc4"
   struct IMFSensorDevice
     lpVtbl : IMFSensorDeviceVTbl*
   end
@@ -11288,6 +11696,8 @@ lib LibWin32
     create_media_source : Proc(IMFSensorGroup*, IMFMediaSource*, HRESULT)
   end
 
+  IMFSensorGroup_GUID = LibC::GUID.new("4110243a-9757-461f-89f1-f22345bcab4e")
+  CLSID_IMFSensorGroup = "4110243a-9757-461f-89f1-f22345bcab4e"
   struct IMFSensorGroup
     lpVtbl : IMFSensorGroupVTbl*
   end
@@ -11331,6 +11741,8 @@ lib LibWin32
     clone_sensor_stream : Proc(IMFSensorStream*, IMFSensorStream*, HRESULT)
   end
 
+  IMFSensorStream_GUID = LibC::GUID.new("e9a42171-c56e-498a-8b39-eda5a070b7fc")
+  CLSID_IMFSensorStream = "e9a42171-c56e-498a-8b39-eda5a070b7fc"
   struct IMFSensorStream
     lpVtbl : IMFSensorStreamVTbl*
   end
@@ -11346,6 +11758,8 @@ lib LibWin32
     create_transform : Proc(IMFSensorTransformFactory*, Guid*, IMFAttributes, IMFDeviceTransform*, HRESULT)
   end
 
+  IMFSensorTransformFactory_GUID = LibC::GUID.new("eed9c2ee-66b4-4f18-a697-ac7d3960215c")
+  CLSID_IMFSensorTransformFactory = "eed9c2ee-66b4-4f18-a697-ac7d3960215c"
   struct IMFSensorTransformFactory
     lpVtbl : IMFSensorTransformFactoryVTbl*
   end
@@ -11360,6 +11774,8 @@ lib LibWin32
     add_blocked_control : Proc(IMFSensorProfile*, LibC::LPWSTR, HRESULT)
   end
 
+  IMFSensorProfile_GUID = LibC::GUID.new("22f765d1-8dab-4107-846d-56baf72215e7")
+  CLSID_IMFSensorProfile = "22f765d1-8dab-4107-846d-56baf72215e7"
   struct IMFSensorProfile
     lpVtbl : IMFSensorProfileVTbl*
   end
@@ -11376,6 +11792,8 @@ lib LibWin32
     remove_profile : Proc(IMFSensorProfileCollection*, SENSORPROFILEID*, Void)
   end
 
+  IMFSensorProfileCollection_GUID = LibC::GUID.new("c95ea55b-0187-48be-9353-8d2507662351")
+  CLSID_IMFSensorProfileCollection = "c95ea55b-0187-48be-9353-8d2507662351"
   struct IMFSensorProfileCollection
     lpVtbl : IMFSensorProfileCollectionVTbl*
   end
@@ -11390,6 +11808,8 @@ lib LibWin32
     get_report_time : Proc(IMFSensorProcessActivity*, FILETIME*, HRESULT)
   end
 
+  IMFSensorProcessActivity_GUID = LibC::GUID.new("39dc7f4a-b141-4719-813c-a7f46162a2b8")
+  CLSID_IMFSensorProcessActivity = "39dc7f4a-b141-4719-813c-a7f46162a2b8"
   struct IMFSensorProcessActivity
     lpVtbl : IMFSensorProcessActivityVTbl*
   end
@@ -11404,6 +11824,8 @@ lib LibWin32
     get_process_activity : Proc(IMFSensorActivityReport*, UInt32, IMFSensorProcessActivity*, HRESULT)
   end
 
+  IMFSensorActivityReport_GUID = LibC::GUID.new("3e8c4be1-a8c2-4528-90de-2851bde5fead")
+  CLSID_IMFSensorActivityReport = "3e8c4be1-a8c2-4528-90de-2851bde5fead"
   struct IMFSensorActivityReport
     lpVtbl : IMFSensorActivityReportVTbl*
   end
@@ -11417,6 +11839,8 @@ lib LibWin32
     get_activity_report_by_device_name : Proc(IMFSensorActivitiesReport*, LibC::LPWSTR, IMFSensorActivityReport*, HRESULT)
   end
 
+  IMFSensorActivitiesReport_GUID = LibC::GUID.new("683f7a5e-4a19-43cd-b1a9-dbf4ab3f7777")
+  CLSID_IMFSensorActivitiesReport = "683f7a5e-4a19-43cd-b1a9-dbf4ab3f7777"
   struct IMFSensorActivitiesReport
     lpVtbl : IMFSensorActivitiesReportVTbl*
   end
@@ -11428,6 +11852,8 @@ lib LibWin32
     on_activities_report : Proc(IMFSensorActivitiesReportCallback*, IMFSensorActivitiesReport, HRESULT)
   end
 
+  IMFSensorActivitiesReportCallback_GUID = LibC::GUID.new("de5072ee-dbe3-46dc-8a87-b6f631194751")
+  CLSID_IMFSensorActivitiesReportCallback = "de5072ee-dbe3-46dc-8a87-b6f631194751"
   struct IMFSensorActivitiesReportCallback
     lpVtbl : IMFSensorActivitiesReportCallbackVTbl*
   end
@@ -11440,6 +11866,8 @@ lib LibWin32
     stop : Proc(IMFSensorActivityMonitor*, HRESULT)
   end
 
+  IMFSensorActivityMonitor_GUID = LibC::GUID.new("d0cef145-b3f4-4340-a2e5-7a5080ca05cb")
+  CLSID_IMFSensorActivityMonitor = "d0cef145-b3f4-4340-a2e5-7a5080ca05cb"
   struct IMFSensorActivityMonitor
     lpVtbl : IMFSensorActivityMonitorVTbl*
   end
@@ -11453,6 +11881,8 @@ lib LibWin32
     get_distortion_model_type : Proc(IMFExtendedCameraIntrinsicModel*, MFCameraIntrinsic_DistortionModelType*, HRESULT)
   end
 
+  IMFExtendedCameraIntrinsicModel_GUID = LibC::GUID.new("5c595e64-4630-4231-855a-12842f733245")
+  CLSID_IMFExtendedCameraIntrinsicModel = "5c595e64-4630-4231-855a-12842f733245"
   struct IMFExtendedCameraIntrinsicModel
     lpVtbl : IMFExtendedCameraIntrinsicModelVTbl*
   end
@@ -11465,6 +11895,8 @@ lib LibWin32
     set_distortion_model : Proc(IMFExtendedCameraIntrinsicsDistortionModel6KT*, MFCameraIntrinsic_DistortionModel6KT*, HRESULT)
   end
 
+  IMFExtendedCameraIntrinsicsDistortionModel6KT_GUID = LibC::GUID.new("74c2653b-5f55-4eb1-9f0f-18b8f68b7d3d")
+  CLSID_IMFExtendedCameraIntrinsicsDistortionModel6KT = "74c2653b-5f55-4eb1-9f0f-18b8f68b7d3d"
   struct IMFExtendedCameraIntrinsicsDistortionModel6KT
     lpVtbl : IMFExtendedCameraIntrinsicsDistortionModel6KTVTbl*
   end
@@ -11477,6 +11909,8 @@ lib LibWin32
     set_distortion_model : Proc(IMFExtendedCameraIntrinsicsDistortionModelArcTan*, MFCameraIntrinsic_DistortionModelArcTan*, HRESULT)
   end
 
+  IMFExtendedCameraIntrinsicsDistortionModelArcTan_GUID = LibC::GUID.new("812d5f95-b572-45dc-bafc-ae24199ddda8")
+  CLSID_IMFExtendedCameraIntrinsicsDistortionModelArcTan = "812d5f95-b572-45dc-bafc-ae24199ddda8"
   struct IMFExtendedCameraIntrinsicsDistortionModelArcTan
     lpVtbl : IMFExtendedCameraIntrinsicsDistortionModelArcTanVTbl*
   end
@@ -11493,6 +11927,8 @@ lib LibWin32
     add_intrinsic_model : Proc(IMFExtendedCameraIntrinsics*, IMFExtendedCameraIntrinsicModel, HRESULT)
   end
 
+  IMFExtendedCameraIntrinsics_GUID = LibC::GUID.new("687f6dac-6987-4750-a16a-734d1e7a10fe")
+  CLSID_IMFExtendedCameraIntrinsics = "687f6dac-6987-4750-a16a-734d1e7a10fe"
   struct IMFExtendedCameraIntrinsics
     lpVtbl : IMFExtendedCameraIntrinsicsVTbl*
   end
@@ -11509,6 +11945,8 @@ lib LibWin32
     commit_settings : Proc(IMFExtendedCameraControl*, HRESULT)
   end
 
+  IMFExtendedCameraControl_GUID = LibC::GUID.new("38e33520-fca1-4845-a27a-68b7c6ab3789")
+  CLSID_IMFExtendedCameraControl = "38e33520-fca1-4845-a27a-68b7c6ab3789"
   struct IMFExtendedCameraControl
     lpVtbl : IMFExtendedCameraControlVTbl*
   end
@@ -11520,6 +11958,8 @@ lib LibWin32
     get_extended_camera_control : Proc(IMFExtendedCameraController*, UInt32, UInt32, IMFExtendedCameraControl*, HRESULT)
   end
 
+  IMFExtendedCameraController_GUID = LibC::GUID.new("b91ebfee-ca03-4af4-8a82-a31752f4a0fc")
+  CLSID_IMFExtendedCameraController = "b91ebfee-ca03-4af4-8a82-a31752f4a0fc"
   struct IMFExtendedCameraController
     lpVtbl : IMFExtendedCameraControllerVTbl*
   end
@@ -11531,6 +11971,8 @@ lib LibWin32
     get_relative_panel : Proc(IMFRelativePanelReport*, UInt32*, HRESULT)
   end
 
+  IMFRelativePanelReport_GUID = LibC::GUID.new("f25362ea-2c0e-447f-81e2-755914cdc0c3")
+  CLSID_IMFRelativePanelReport = "f25362ea-2c0e-447f-81e2-755914cdc0c3"
   struct IMFRelativePanelReport
     lpVtbl : IMFRelativePanelReportVTbl*
   end
@@ -11546,6 +11988,8 @@ lib LibWin32
     get_report : Proc(IMFRelativePanelWatcher*, IMFRelativePanelReport*, HRESULT)
   end
 
+  IMFRelativePanelWatcher_GUID = LibC::GUID.new("421af7f6-573e-4ad0-8fda-2e57cedb18c6")
+  CLSID_IMFRelativePanelWatcher = "421af7f6-573e-4ad0-8fda-2e57cedb18c6"
   struct IMFRelativePanelWatcher
     lpVtbl : IMFRelativePanelWatcherVTbl*
   end
@@ -11557,6 +12001,8 @@ lib LibWin32
     get_occlusion_state : Proc(IMFCameraOcclusionStateReport*, UInt32*, HRESULT)
   end
 
+  IMFCameraOcclusionStateReport_GUID = LibC::GUID.new("1640b2cf-74da-4462-a43b-b76d3bdc1434")
+  CLSID_IMFCameraOcclusionStateReport = "1640b2cf-74da-4462-a43b-b76d3bdc1434"
   struct IMFCameraOcclusionStateReport
     lpVtbl : IMFCameraOcclusionStateReportVTbl*
   end
@@ -11568,6 +12014,8 @@ lib LibWin32
     on_occlusion_state_report : Proc(IMFCameraOcclusionStateReportCallback*, IMFCameraOcclusionStateReport, HRESULT)
   end
 
+  IMFCameraOcclusionStateReportCallback_GUID = LibC::GUID.new("6e5841c7-3889-4019-9035-783fb19b5948")
+  CLSID_IMFCameraOcclusionStateReportCallback = "6e5841c7-3889-4019-9035-783fb19b5948"
   struct IMFCameraOcclusionStateReportCallback
     lpVtbl : IMFCameraOcclusionStateReportCallbackVTbl*
   end
@@ -11581,6 +12029,8 @@ lib LibWin32
     get_supported_states : Proc(IMFCameraOcclusionStateMonitor*, UInt32)
   end
 
+  IMFCameraOcclusionStateMonitor_GUID = LibC::GUID.new("cc692f46-c697-47e2-a72d-7b064617749b")
+  CLSID_IMFCameraOcclusionStateMonitor = "cc692f46-c697-47e2-a72d-7b064617749b"
   struct IMFCameraOcclusionStateMonitor
     lpVtbl : IMFCameraOcclusionStateMonitorVTbl*
   end
@@ -11596,6 +12046,8 @@ lib LibWin32
     initialize_capture_sample_allocator : Proc(IMFVideoCaptureSampleAllocator*, UInt32, UInt32, UInt32, UInt32, IMFAttributes, IMFMediaType, HRESULT)
   end
 
+  IMFVideoCaptureSampleAllocator_GUID = LibC::GUID.new("725b77c7-ca9f-4fe5-9d72-9946bf9b3c70")
+  CLSID_IMFVideoCaptureSampleAllocator = "725b77c7-ca9f-4fe5-9d72-9946bf9b3c70"
   struct IMFVideoCaptureSampleAllocator
     lpVtbl : IMFVideoCaptureSampleAllocatorVTbl*
   end
@@ -11608,6 +12060,8 @@ lib LibWin32
     get_allocator_usage : Proc(IMFSampleAllocatorControl*, UInt32, UInt32*, MFSampleAllocatorUsage*, HRESULT)
   end
 
+  IMFSampleAllocatorControl_GUID = LibC::GUID.new("da62b958-3a38-4a97-bd27-149c640c0771")
+  CLSID_IMFSampleAllocatorControl = "da62b958-3a38-4a97-bd27-149c640c0771"
   struct IMFSampleAllocatorControl
     lpVtbl : IMFSampleAllocatorControlVTbl*
   end
@@ -11625,6 +12079,8 @@ lib LibWin32
     get_encoding_configuration_property_store : Proc(IMFASFContentInfo*, UInt16, IPropertyStore*, HRESULT)
   end
 
+  IMFASFContentInfo_GUID = LibC::GUID.new("b1dca5cd-d5da-4451-8e9e-db5c59914ead")
+  CLSID_IMFASFContentInfo = "b1dca5cd-d5da-4451-8e9e-db5c59914ead"
   struct IMFASFContentInfo
     lpVtbl : IMFASFContentInfoVTbl*
   end
@@ -11681,6 +12137,8 @@ lib LibWin32
     clone : Proc(IMFASFProfile*, IMFASFProfile*, HRESULT)
   end
 
+  IMFASFProfile_GUID = LibC::GUID.new("d267bf6a-028b-4e0d-903d-43f0ef82d0d4")
+  CLSID_IMFASFProfile = "d267bf6a-028b-4e0d-903d-43f0ef82d0d4"
   struct IMFASFProfile
     lpVtbl : IMFASFProfileVTbl*
   end
@@ -11731,6 +12189,8 @@ lib LibWin32
     clone : Proc(IMFASFStreamConfig*, IMFASFStreamConfig*, HRESULT)
   end
 
+  IMFASFStreamConfig_GUID = LibC::GUID.new("9e8ae8d2-dbbd-4200-9aca-06e6df484913")
+  CLSID_IMFASFStreamConfig = "9e8ae8d2-dbbd-4200-9aca-06e6df484913"
   struct IMFASFStreamConfig
     lpVtbl : IMFASFStreamConfigVTbl*
   end
@@ -11750,6 +12210,8 @@ lib LibWin32
     clone : Proc(IMFASFMutualExclusion*, IMFASFMutualExclusion*, HRESULT)
   end
 
+  IMFASFMutualExclusion_GUID = LibC::GUID.new("12558291-e399-11d5-bc2a-00b0d0f3f4ab")
+  CLSID_IMFASFMutualExclusion = "12558291-e399-11d5-bc2a-00b0d0f3f4ab"
   struct IMFASFMutualExclusion
     lpVtbl : IMFASFMutualExclusionVTbl*
   end
@@ -11765,6 +12227,8 @@ lib LibWin32
     clone : Proc(IMFASFStreamPrioritization*, IMFASFStreamPrioritization*, HRESULT)
   end
 
+  IMFASFStreamPrioritization_GUID = LibC::GUID.new("699bdc27-bbaf-49ff-8e38-9c39c9b5e088")
+  CLSID_IMFASFStreamPrioritization = "699bdc27-bbaf-49ff-8e38-9c39c9b5e088"
   struct IMFASFStreamPrioritization
     lpVtbl : IMFASFStreamPrioritizationVTbl*
   end
@@ -11788,6 +12252,8 @@ lib LibWin32
     get_completed_index : Proc(IMFASFIndexer*, IMFMediaBuffer, UInt64, HRESULT)
   end
 
+  IMFASFIndexer_GUID = LibC::GUID.new("53590f48-dc3b-4297-813f-787761ad7b3e")
+  CLSID_IMFASFIndexer = "53590f48-dc3b-4297-813f-787761ad7b3e"
   struct IMFASFIndexer
     lpVtbl : IMFASFIndexerVTbl*
   end
@@ -11807,6 +12273,8 @@ lib LibWin32
     get_last_send_time : Proc(IMFASFSplitter*, UInt32*, HRESULT)
   end
 
+  IMFASFSplitter_GUID = LibC::GUID.new("12558295-e399-11d5-bc2a-00b0d0f3f4ab")
+  CLSID_IMFASFSplitter = "12558295-e399-11d5-bc2a-00b0d0f3f4ab"
   struct IMFASFSplitter
     lpVtbl : IMFASFSplitterVTbl*
   end
@@ -11826,6 +12294,8 @@ lib LibWin32
     set_sync_tolerance : Proc(IMFASFMultiplexer*, UInt32, HRESULT)
   end
 
+  IMFASFMultiplexer_GUID = LibC::GUID.new("57bdd80a-9b38-4838-b737-c58f670d7d4f")
+  CLSID_IMFASFMultiplexer = "57bdd80a-9b38-4838-b737-c58f670d7d4f"
   struct IMFASFMultiplexer
     lpVtbl : IMFASFMultiplexerVTbl*
   end
@@ -11850,6 +12320,8 @@ lib LibWin32
     set_stream_selector_flags : Proc(IMFASFStreamSelector*, UInt32, HRESULT)
   end
 
+  IMFASFStreamSelector_GUID = LibC::GUID.new("d01bad4a-4fa0-4a60-9349-c27e62da9d41")
+  CLSID_IMFASFStreamSelector = "d01bad4a-4fa0-4a60-9349-c27e62da9d41"
   struct IMFASFStreamSelector
     lpVtbl : IMFASFStreamSelectorVTbl*
   end
@@ -11862,6 +12334,8 @@ lib LibWin32
     get_chained_license_response : Proc(IMFDRMNetHelper*, UInt8**, UInt32*, HRESULT)
   end
 
+  IMFDRMNetHelper_GUID = LibC::GUID.new("3d1ff0ea-679a-4190-8d46-7fa69e8c7e15")
+  CLSID_IMFDRMNetHelper = "3d1ff0ea-679a-4190-8d46-7fa69e8c7e15"
   struct IMFDRMNetHelper
     lpVtbl : IMFDRMNetHelperVTbl*
   end
@@ -11873,6 +12347,8 @@ lib LibWin32
     on_event : Proc(IMFCaptureEngineOnEventCallback*, IMFMediaEvent, HRESULT)
   end
 
+  IMFCaptureEngineOnEventCallback_GUID = LibC::GUID.new("aeda51c0-9025-4983-9012-de597b88b089")
+  CLSID_IMFCaptureEngineOnEventCallback = "aeda51c0-9025-4983-9012-de597b88b089"
   struct IMFCaptureEngineOnEventCallback
     lpVtbl : IMFCaptureEngineOnEventCallbackVTbl*
   end
@@ -11884,6 +12360,8 @@ lib LibWin32
     on_sample : Proc(IMFCaptureEngineOnSampleCallback*, IMFSample, HRESULT)
   end
 
+  IMFCaptureEngineOnSampleCallback_GUID = LibC::GUID.new("52150b82-ab39-4467-980f-e48bf0822ecd")
+  CLSID_IMFCaptureEngineOnSampleCallback = "52150b82-ab39-4467-980f-e48bf0822ecd"
   struct IMFCaptureEngineOnSampleCallback
     lpVtbl : IMFCaptureEngineOnSampleCallbackVTbl*
   end
@@ -11899,6 +12377,8 @@ lib LibWin32
     remove_all_streams : Proc(IMFCaptureSink*, HRESULT)
   end
 
+  IMFCaptureSink_GUID = LibC::GUID.new("72d6135b-35e9-412c-b926-fd5265f2a885")
+  CLSID_IMFCaptureSink = "72d6135b-35e9-412c-b926-fd5265f2a885"
   struct IMFCaptureSink
     lpVtbl : IMFCaptureSinkVTbl*
   end
@@ -11920,6 +12400,8 @@ lib LibWin32
     set_rotation : Proc(IMFCaptureRecordSink*, UInt32, UInt32, HRESULT)
   end
 
+  IMFCaptureRecordSink_GUID = LibC::GUID.new("3323b55a-f92a-4fe2-8edc-e9bfc0634d77")
+  CLSID_IMFCaptureRecordSink = "3323b55a-f92a-4fe2-8edc-e9bfc0634d77"
   struct IMFCaptureRecordSink
     lpVtbl : IMFCaptureRecordSinkVTbl*
   end
@@ -11944,6 +12426,8 @@ lib LibWin32
     set_custom_sink : Proc(IMFCapturePreviewSink*, IMFMediaSink, HRESULT)
   end
 
+  IMFCapturePreviewSink_GUID = LibC::GUID.new("77346cfd-5b49-4d73-ace0-5b52a859f2e0")
+  CLSID_IMFCapturePreviewSink = "77346cfd-5b49-4d73-ace0-5b52a859f2e0"
   struct IMFCapturePreviewSink
     lpVtbl : IMFCapturePreviewSinkVTbl*
   end
@@ -11962,6 +12446,8 @@ lib LibWin32
     set_output_byte_stream : Proc(IMFCapturePhotoSink*, IMFByteStream, HRESULT)
   end
 
+  IMFCapturePhotoSink_GUID = LibC::GUID.new("d2d43cc8-48bb-4aa7-95db-10c06977e777")
+  CLSID_IMFCapturePhotoSink = "d2d43cc8-48bb-4aa7-95db-10c06977e777"
   struct IMFCapturePhotoSink
     lpVtbl : IMFCapturePhotoSinkVTbl*
   end
@@ -11986,6 +12472,8 @@ lib LibWin32
     get_stream_index_from_friendly_name : Proc(IMFCaptureSource*, UInt32, UInt32*, HRESULT)
   end
 
+  IMFCaptureSource_GUID = LibC::GUID.new("439a42a8-0d2c-4505-be83-f79b2a05d5c4")
+  CLSID_IMFCaptureSource = "439a42a8-0d2c-4505-be83-f79b2a05d5c4"
   struct IMFCaptureSource
     lpVtbl : IMFCaptureSourceVTbl*
   end
@@ -12004,6 +12492,8 @@ lib LibWin32
     get_source : Proc(IMFCaptureEngine*, IMFCaptureSource*, HRESULT)
   end
 
+  IMFCaptureEngine_GUID = LibC::GUID.new("a6bba433-176b-48b2-b375-53aa03473207")
+  CLSID_IMFCaptureEngine = "a6bba433-176b-48b2-b375-53aa03473207"
   struct IMFCaptureEngine
     lpVtbl : IMFCaptureEngineVTbl*
   end
@@ -12015,6 +12505,8 @@ lib LibWin32
     create_instance : Proc(IMFCaptureEngineClassFactory*, Guid*, Guid*, Void**, HRESULT)
   end
 
+  IMFCaptureEngineClassFactory_GUID = LibC::GUID.new("8f02d140-56fc-4302-a705-3a97c78be779")
+  CLSID_IMFCaptureEngineClassFactory = "8f02d140-56fc-4302-a705-3a97c78be779"
   struct IMFCaptureEngineClassFactory
     lpVtbl : IMFCaptureEngineClassFactoryVTbl*
   end
@@ -12027,6 +12519,8 @@ lib LibWin32
     on_synchronized_event : Proc(IMFCaptureEngineOnSampleCallback2*, IMFMediaEvent, HRESULT)
   end
 
+  IMFCaptureEngineOnSampleCallback2_GUID = LibC::GUID.new("e37ceed7-340f-4514-9f4d-9c2ae026100b")
+  CLSID_IMFCaptureEngineOnSampleCallback2 = "e37ceed7-340f-4514-9f4d-9c2ae026100b"
   struct IMFCaptureEngineOnSampleCallback2
     lpVtbl : IMFCaptureEngineOnSampleCallback2VTbl*
   end
@@ -12043,6 +12537,8 @@ lib LibWin32
     set_output_media_type : Proc(IMFCaptureSink2*, UInt32, IMFMediaType, IMFAttributes, HRESULT)
   end
 
+  IMFCaptureSink2_GUID = LibC::GUID.new("f9e4219e-6197-4b5e-b888-bee310ab2c59")
+  CLSID_IMFCaptureSink2 = "f9e4219e-6197-4b5e-b888-bee310ab2c59"
   struct IMFCaptureSink2
     lpVtbl : IMFCaptureSink2VTbl*
   end
@@ -12057,6 +12553,8 @@ lib LibWin32
     enqueue_resource_release : Proc(IMFD3D12SynchronizationObjectCommands*, ID3D12CommandQueue, HRESULT)
   end
 
+  IMFD3D12SynchronizationObjectCommands_GUID = LibC::GUID.new("09d0f835-92ff-4e53-8efa-40faa551f233")
+  CLSID_IMFD3D12SynchronizationObjectCommands = "09d0f835-92ff-4e53-8efa-40faa551f233"
   struct IMFD3D12SynchronizationObjectCommands
     lpVtbl : IMFD3D12SynchronizationObjectCommandsVTbl*
   end
@@ -12069,6 +12567,8 @@ lib LibWin32
     reset : Proc(IMFD3D12SynchronizationObject*, HRESULT)
   end
 
+  IMFD3D12SynchronizationObject_GUID = LibC::GUID.new("802302b0-82de-45e1-b421-f19ee5bdaf23")
+  CLSID_IMFD3D12SynchronizationObject = "802302b0-82de-45e1-b421-f19ee5bdaf23"
   struct IMFD3D12SynchronizationObject
     lpVtbl : IMFD3D12SynchronizationObjectVTbl*
   end
@@ -12098,6 +12598,8 @@ lib LibWin32
     set_extended_error_code : Proc(IMFMediaError*, HRESULT, HRESULT)
   end
 
+  IMFMediaError_GUID = LibC::GUID.new("fc0e10d2-ab2a-4501-a951-06bb1075184c")
+  CLSID_IMFMediaError = "fc0e10d2-ab2a-4501-a951-06bb1075184c"
   struct IMFMediaError
     lpVtbl : IMFMediaErrorVTbl*
   end
@@ -12114,6 +12616,8 @@ lib LibWin32
     clear : Proc(IMFMediaTimeRange*, HRESULT)
   end
 
+  IMFMediaTimeRange_GUID = LibC::GUID.new("db71a2fc-078a-414e-9df9-8c2531b0aa6c")
+  CLSID_IMFMediaTimeRange = "db71a2fc-078a-414e-9df9-8c2531b0aa6c"
   struct IMFMediaTimeRange
     lpVtbl : IMFMediaTimeRangeVTbl*
   end
@@ -12125,6 +12629,8 @@ lib LibWin32
     event_notify : Proc(IMFMediaEngineNotify*, UInt32, LibC::UINT_PTR, UInt32, HRESULT)
   end
 
+  IMFMediaEngineNotify_GUID = LibC::GUID.new("fee7c112-e776-42b5-9bbf-0048524e2bd5")
+  CLSID_IMFMediaEngineNotify = "fee7c112-e776-42b5-9bbf-0048524e2bd5"
   struct IMFMediaEngineNotify
     lpVtbl : IMFMediaEngineNotifyVTbl*
   end
@@ -12141,6 +12647,8 @@ lib LibWin32
     remove_all_elements : Proc(IMFMediaEngineSrcElements*, HRESULT)
   end
 
+  IMFMediaEngineSrcElements_GUID = LibC::GUID.new("7a5e5354-b114-4c72-b991-3131d75032ea")
+  CLSID_IMFMediaEngineSrcElements = "7a5e5354-b114-4c72-b991-3131d75032ea"
   struct IMFMediaEngineSrcElements
     lpVtbl : IMFMediaEngineSrcElementsVTbl*
   end
@@ -12193,6 +12701,8 @@ lib LibWin32
     on_video_stream_tick : Proc(IMFMediaEngine*, Int64*, HRESULT)
   end
 
+  IMFMediaEngine_GUID = LibC::GUID.new("98a1b0bb-03eb-4935-ae7c-93c1fa0e1c93")
+  CLSID_IMFMediaEngine = "98a1b0bb-03eb-4935-ae7c-93c1fa0e1c93"
   struct IMFMediaEngine
     lpVtbl : IMFMediaEngineVTbl*
   end
@@ -12282,6 +12792,8 @@ lib LibWin32
     enable_time_update_timer : Proc(IMFMediaEngineEx*, LibC::BOOL, HRESULT)
   end
 
+  IMFMediaEngineEx_GUID = LibC::GUID.new("83015ead-b1e6-40d0-a98a-37145ffe1ad1")
+  CLSID_IMFMediaEngineEx = "83015ead-b1e6-40d0-a98a-37145ffe1ad1"
   struct IMFMediaEngineEx
     lpVtbl : IMFMediaEngineExVTbl*
   end
@@ -12294,6 +12806,8 @@ lib LibWin32
     get_audio_endpoint_id : Proc(IMFMediaEngineAudioEndpointId*, LibC::LPWSTR*, HRESULT)
   end
 
+  IMFMediaEngineAudioEndpointId_GUID = LibC::GUID.new("7a3bac98-0e76-49fb-8c20-8a86fd98eaf2")
+  CLSID_IMFMediaEngineAudioEndpointId = "7a3bac98-0e76-49fb-8c20-8a86fd98eaf2"
   struct IMFMediaEngineAudioEndpointId
     lpVtbl : IMFMediaEngineAudioEndpointIdVTbl*
   end
@@ -12308,6 +12822,8 @@ lib LibWin32
     end_create_object : Proc(IMFMediaEngineExtension*, IMFAsyncResult, IUnknown*, HRESULT)
   end
 
+  IMFMediaEngineExtension_GUID = LibC::GUID.new("2f69d622-20b5-41e9-afdf-89ced1dda04e")
+  CLSID_IMFMediaEngineExtension = "2f69d622-20b5-41e9-afdf-89ced1dda04e"
   struct IMFMediaEngineExtension
     lpVtbl : IMFMediaEngineExtensionVTbl*
   end
@@ -12324,6 +12840,8 @@ lib LibWin32
     set_application_certificate : Proc(IMFMediaEngineProtectedContent*, UInt8*, UInt32, HRESULT)
   end
 
+  IMFMediaEngineProtectedContent_GUID = LibC::GUID.new("9f8021e8-9c8c-487e-bb5c-79aa4779938c")
+  CLSID_IMFMediaEngineProtectedContent = "9f8021e8-9c8c-487e-bb5c-79aa4779938c"
   struct IMFMediaEngineProtectedContent
     lpVtbl : IMFMediaEngineProtectedContentVTbl*
   end
@@ -12335,6 +12853,8 @@ lib LibWin32
     provide_input : Proc(IAudioSourceProvider*, UInt32, UInt32*, Float32*, HRESULT)
   end
 
+  IAudioSourceProvider_GUID = LibC::GUID.new("ebbaf249-afc2-4582-91c6-b60df2e84954")
+  CLSID_IAudioSourceProvider = "ebbaf249-afc2-4582-91c6-b60df2e84954"
   struct IAudioSourceProvider
     lpVtbl : IAudioSourceProviderVTbl*
   end
@@ -12348,6 +12868,8 @@ lib LibWin32
     disconnect_web_audio : Proc(IMFMediaEngineWebSupport*, HRESULT)
   end
 
+  IMFMediaEngineWebSupport_GUID = LibC::GUID.new("ba2743a1-07e0-48ef-84b6-9a2ed023ca6c")
+  CLSID_IMFMediaEngineWebSupport = "ba2743a1-07e0-48ef-84b6-9a2ed023ca6c"
   struct IMFMediaEngineWebSupport
     lpVtbl : IMFMediaEngineWebSupportVTbl*
   end
@@ -12361,6 +12883,8 @@ lib LibWin32
     on_source_close : Proc(IMFMediaSourceExtensionNotify*, Void)
   end
 
+  IMFMediaSourceExtensionNotify_GUID = LibC::GUID.new("a7901327-05dd-4469-a7b7-0e01979e361d")
+  CLSID_IMFMediaSourceExtensionNotify = "a7901327-05dd-4469-a7b7-0e01979e361d"
   struct IMFMediaSourceExtensionNotify
     lpVtbl : IMFMediaSourceExtensionNotifyVTbl*
   end
@@ -12373,6 +12897,8 @@ lib LibWin32
     on_remove_source_buffer : Proc(IMFBufferListNotify*, Void)
   end
 
+  IMFBufferListNotify_GUID = LibC::GUID.new("24cd47f7-81d8-4785-adb2-af697a963cd2")
+  CLSID_IMFBufferListNotify = "24cd47f7-81d8-4785-adb2-af697a963cd2"
   struct IMFBufferListNotify
     lpVtbl : IMFBufferListNotifyVTbl*
   end
@@ -12388,6 +12914,8 @@ lib LibWin32
     on_update_end : Proc(IMFSourceBufferNotify*, Void)
   end
 
+  IMFSourceBufferNotify_GUID = LibC::GUID.new("87e47623-2ceb-45d6-9b88-d8520c4dcbbc")
+  CLSID_IMFSourceBufferNotify = "87e47623-2ceb-45d6-9b88-d8520c4dcbbc"
   struct IMFSourceBufferNotify
     lpVtbl : IMFSourceBufferNotifyVTbl*
   end
@@ -12410,6 +12938,8 @@ lib LibWin32
     remove : Proc(IMFSourceBuffer*, Float64, Float64, HRESULT)
   end
 
+  IMFSourceBuffer_GUID = LibC::GUID.new("e2cd3a4b-af25-4d3d-9110-da0e6f8ee877")
+  CLSID_IMFSourceBuffer = "e2cd3a4b-af25-4d3d-9110-da0e6f8ee877"
   struct IMFSourceBuffer
     lpVtbl : IMFSourceBufferVTbl*
   end
@@ -12422,6 +12952,8 @@ lib LibWin32
     set_append_mode : Proc(IMFSourceBufferAppendMode*, MF_MSE_APPEND_MODE, HRESULT)
   end
 
+  IMFSourceBufferAppendMode_GUID = LibC::GUID.new("19666fb4-babe-4c55-bc03-0a074da37e2a")
+  CLSID_IMFSourceBufferAppendMode = "19666fb4-babe-4c55-bc03-0a074da37e2a"
   struct IMFSourceBufferAppendMode
     lpVtbl : IMFSourceBufferAppendModeVTbl*
   end
@@ -12434,6 +12966,8 @@ lib LibWin32
     get_source_buffer : Proc(IMFSourceBufferList*, UInt32, IMFSourceBuffer)
   end
 
+  IMFSourceBufferList_GUID = LibC::GUID.new("249981f8-8325-41f3-b80c-3b9e3aad0cbe")
+  CLSID_IMFSourceBufferList = "249981f8-8325-41f3-b80c-3b9e3aad0cbe"
   struct IMFSourceBufferList
     lpVtbl : IMFSourceBufferListVTbl*
   end
@@ -12454,6 +12988,8 @@ lib LibWin32
     get_source_buffer : Proc(IMFMediaSourceExtension*, UInt32, IMFSourceBuffer)
   end
 
+  IMFMediaSourceExtension_GUID = LibC::GUID.new("e467b94e-a713-4562-a802-816a42e9008a")
+  CLSID_IMFMediaSourceExtension = "e467b94e-a713-4562-a802-816a42e9008a"
   struct IMFMediaSourceExtension
     lpVtbl : IMFMediaSourceExtensionVTbl*
   end
@@ -12466,6 +13002,8 @@ lib LibWin32
     clear_live_seekable_range : Proc(IMFMediaSourceExtensionLiveSeekableRange*, HRESULT)
   end
 
+  IMFMediaSourceExtensionLiveSeekableRange_GUID = LibC::GUID.new("5d1abfd6-450a-4d92-9efc-d6b6cbc1f4da")
+  CLSID_IMFMediaSourceExtensionLiveSeekableRange = "5d1abfd6-450a-4d92-9efc-d6b6cbc1f4da"
   struct IMFMediaSourceExtensionLiveSeekableRange
     lpVtbl : IMFMediaSourceExtensionLiveSeekableRangeVTbl*
   end
@@ -12478,6 +13016,8 @@ lib LibWin32
     set_media_keys : Proc(IMFMediaEngineEME*, IMFMediaKeys, HRESULT)
   end
 
+  IMFMediaEngineEME_GUID = LibC::GUID.new("50dc93e4-ba4f-4275-ae66-83e836e57469")
+  CLSID_IMFMediaEngineEME = "50dc93e4-ba4f-4275-ae66-83e836e57469"
   struct IMFMediaEngineEME
     lpVtbl : IMFMediaEngineEMEVTbl*
   end
@@ -12496,6 +13036,8 @@ lib LibWin32
     get_key_system : Proc(IMFMediaEngineSrcElementsEx*, UInt32, UInt8**, HRESULT)
   end
 
+  IMFMediaEngineSrcElementsEx_GUID = LibC::GUID.new("654a6bb3-e1a3-424a-9908-53a43a0dfda0")
+  CLSID_IMFMediaEngineSrcElementsEx = "654a6bb3-e1a3-424a-9908-53a43a0dfda0"
   struct IMFMediaEngineSrcElementsEx
     lpVtbl : IMFMediaEngineSrcElementsExVTbl*
   end
@@ -12507,6 +13049,8 @@ lib LibWin32
     need_key : Proc(IMFMediaEngineNeedKeyNotify*, UInt8*, UInt32, Void)
   end
 
+  IMFMediaEngineNeedKeyNotify_GUID = LibC::GUID.new("46a30204-a696-4b18-8804-246b8f031bb1")
+  CLSID_IMFMediaEngineNeedKeyNotify = "46a30204-a696-4b18-8804-246b8f031bb1"
   struct IMFMediaEngineNeedKeyNotify
     lpVtbl : IMFMediaEngineNeedKeyNotifyVTbl*
   end
@@ -12521,6 +13065,8 @@ lib LibWin32
     get_suspend_notify : Proc(IMFMediaKeys*, IMFCdmSuspendNotify*, HRESULT)
   end
 
+  IMFMediaKeys_GUID = LibC::GUID.new("5cb31c05-61ff-418f-afda-caaf41421a38")
+  CLSID_IMFMediaKeys = "5cb31c05-61ff-418f-afda-caaf41421a38"
   struct IMFMediaKeys
     lpVtbl : IMFMediaKeysVTbl*
   end
@@ -12536,6 +13082,8 @@ lib LibWin32
     close : Proc(IMFMediaKeySession*, HRESULT)
   end
 
+  IMFMediaKeySession_GUID = LibC::GUID.new("24fa67d5-d1d0-4dc5-995c-c0efdc191fb5")
+  CLSID_IMFMediaKeySession = "24fa67d5-d1d0-4dc5-995c-c0efdc191fb5"
   struct IMFMediaKeySession
     lpVtbl : IMFMediaKeySessionVTbl*
   end
@@ -12549,6 +13097,8 @@ lib LibWin32
     key_error : Proc(IMFMediaKeySessionNotify*, UInt16, UInt32, Void)
   end
 
+  IMFMediaKeySessionNotify_GUID = LibC::GUID.new("6a0083f9-8947-4c1d-9ce0-cdee22b23135")
+  CLSID_IMFMediaKeySessionNotify = "6a0083f9-8947-4c1d-9ce0-cdee22b23135"
   struct IMFMediaKeySessionNotify
     lpVtbl : IMFMediaKeySessionNotifyVTbl*
   end
@@ -12561,6 +13111,8 @@ lib LibWin32
     rend : Proc(IMFCdmSuspendNotify*, HRESULT)
   end
 
+  IMFCdmSuspendNotify_GUID = LibC::GUID.new("7a5645d2-43bd-47fd-87b7-dcd24cc7d692")
+  CLSID_IMFCdmSuspendNotify = "7a5645d2-43bd-47fd-87b7-dcd24cc7d692"
   struct IMFCdmSuspendNotify
     lpVtbl : IMFCdmSuspendNotifyVTbl*
   end
@@ -12573,6 +13125,8 @@ lib LibWin32
     set : Proc(IMFHDCPStatus*, MF_HDCP_STATUS, HRESULT)
   end
 
+  IMFHDCPStatus_GUID = LibC::GUID.new("de400f54-5bf1-40cf-8964-0bea136b1e3d")
+  CLSID_IMFHDCPStatus = "de400f54-5bf1-40cf-8964-0bea136b1e3d"
   struct IMFHDCPStatus
     lpVtbl : IMFHDCPStatusVTbl*
   end
@@ -12584,6 +13138,8 @@ lib LibWin32
     get_opm_info : Proc(IMFMediaEngineOPMInfo*, MF_MEDIA_ENGINE_OPM_STATUS*, LibC::BOOL*, HRESULT)
   end
 
+  IMFMediaEngineOPMInfo_GUID = LibC::GUID.new("765763e6-6c01-4b01-bb0f-b829f60ed28c")
+  CLSID_IMFMediaEngineOPMInfo = "765763e6-6c01-4b01-bb0f-b829f60ed28c"
   struct IMFMediaEngineOPMInfo
     lpVtbl : IMFMediaEngineOPMInfoVTbl*
   end
@@ -12597,6 +13153,8 @@ lib LibWin32
     create_error : Proc(IMFMediaEngineClassFactory*, IMFMediaError*, HRESULT)
   end
 
+  IMFMediaEngineClassFactory_GUID = LibC::GUID.new("4d645ace-26aa-4688-9be1-df3516990b93")
+  CLSID_IMFMediaEngineClassFactory = "4d645ace-26aa-4688-9be1-df3516990b93"
   struct IMFMediaEngineClassFactory
     lpVtbl : IMFMediaEngineClassFactoryVTbl*
   end
@@ -12613,6 +13171,8 @@ lib LibWin32
     is_type_supported : Proc(IMFMediaEngineClassFactoryEx*, UInt8*, UInt8*, LibC::BOOL*, HRESULT)
   end
 
+  IMFMediaEngineClassFactoryEx_GUID = LibC::GUID.new("c56156c6-ea5b-48a5-9df8-fbe035d0929e")
+  CLSID_IMFMediaEngineClassFactoryEx = "c56156c6-ea5b-48a5-9df8-fbe035d0929e"
   struct IMFMediaEngineClassFactoryEx
     lpVtbl : IMFMediaEngineClassFactoryExVTbl*
   end
@@ -12624,6 +13184,8 @@ lib LibWin32
     create_media_keys2 : Proc(IMFMediaEngineClassFactory2*, UInt8*, UInt8*, UInt8*, IMFMediaKeys*, HRESULT)
   end
 
+  IMFMediaEngineClassFactory2_GUID = LibC::GUID.new("09083cef-867f-4bf6-8776-dee3a7b42fca")
+  CLSID_IMFMediaEngineClassFactory2 = "09083cef-867f-4bf6-8776-dee3a7b42fca"
   struct IMFMediaEngineClassFactory2
     lpVtbl : IMFMediaEngineClassFactory2VTbl*
   end
@@ -12635,6 +13197,8 @@ lib LibWin32
     is_type_supported_ex : Proc(IMFExtendedDRMTypeSupport*, UInt8*, UInt8*, MF_MEDIA_ENGINE_CANPLAY*, HRESULT)
   end
 
+  IMFExtendedDRMTypeSupport_GUID = LibC::GUID.new("332ec562-3758-468d-a784-e38f23552128")
+  CLSID_IMFExtendedDRMTypeSupport = "332ec562-3758-468d-a784-e38f23552128"
   struct IMFExtendedDRMTypeSupport
     lpVtbl : IMFExtendedDRMTypeSupportVTbl*
   end
@@ -12648,6 +13212,8 @@ lib LibWin32
     attach_media_source : Proc(IMFMediaEngineSupportsSourceTransfer*, IMFByteStream, IMFMediaSource, IMFMediaSourceExtension, HRESULT)
   end
 
+  IMFMediaEngineSupportsSourceTransfer_GUID = LibC::GUID.new("a724b056-1b2e-4642-a6f3-db9420c52908")
+  CLSID_IMFMediaEngineSupportsSourceTransfer = "a724b056-1b2e-4642-a6f3-db9420c52908"
   struct IMFMediaEngineSupportsSourceTransfer
     lpVtbl : IMFMediaEngineSupportsSourceTransferVTbl*
   end
@@ -12659,6 +13225,8 @@ lib LibWin32
     transfer_source_to_media_engine : Proc(IMFMediaEngineTransferSource*, IMFMediaEngine, HRESULT)
   end
 
+  IMFMediaEngineTransferSource_GUID = LibC::GUID.new("24230452-fe54-40cc-94f3-fcc394c340d6")
+  CLSID_IMFMediaEngineTransferSource = "24230452-fe54-40cc-94f3-fcc394c340d6"
   struct IMFMediaEngineTransferSource
     lpVtbl : IMFMediaEngineTransferSourceVTbl*
   end
@@ -12683,6 +13251,8 @@ lib LibWin32
     is_in_band_enabled : Proc(IMFTimedText*, LibC::BOOL)
   end
 
+  IMFTimedText_GUID = LibC::GUID.new("1f2a94c9-a3df-430d-9d0f-acd85ddc29af")
+  CLSID_IMFTimedText = "1f2a94c9-a3df-430d-9d0f-acd85ddc29af"
   struct IMFTimedText
     lpVtbl : IMFTimedTextVTbl*
   end
@@ -12700,6 +13270,8 @@ lib LibWin32
     reset : Proc(IMFTimedTextNotify*, Void)
   end
 
+  IMFTimedTextNotify_GUID = LibC::GUID.new("df6b87b6-ce12-45db-aba7-432fe054e57d")
+  CLSID_IMFTimedTextNotify = "df6b87b6-ce12-45db-aba7-432fe054e57d"
   struct IMFTimedTextNotify
     lpVtbl : IMFTimedTextNotifyVTbl*
   end
@@ -12723,6 +13295,8 @@ lib LibWin32
     get_cue_list : Proc(IMFTimedTextTrack*, IMFTimedTextCueList*, HRESULT)
   end
 
+  IMFTimedTextTrack_GUID = LibC::GUID.new("8822c32d-654e-4233-bf21-d7f2e67d30d4")
+  CLSID_IMFTimedTextTrack = "8822c32d-654e-4233-bf21-d7f2e67d30d4"
   struct IMFTimedTextTrack
     lpVtbl : IMFTimedTextTrackVTbl*
   end
@@ -12736,6 +13310,8 @@ lib LibWin32
     get_track_by_id : Proc(IMFTimedTextTrackList*, UInt32, IMFTimedTextTrack*, HRESULT)
   end
 
+  IMFTimedTextTrackList_GUID = LibC::GUID.new("23ff334c-442c-445f-bccc-edc438aa11e2")
+  CLSID_IMFTimedTextTrackList = "23ff334c-442c-445f-bccc-edc438aa11e2"
   struct IMFTimedTextTrackList
     lpVtbl : IMFTimedTextTrackListVTbl*
   end
@@ -12757,6 +13333,8 @@ lib LibWin32
     get_line : Proc(IMFTimedTextCue*, UInt32, IMFTimedTextFormattedText*, HRESULT)
   end
 
+  IMFTimedTextCue_GUID = LibC::GUID.new("1e560447-9a2b-43e1-a94c-b0aaabfbfbc9")
+  CLSID_IMFTimedTextCue = "1e560447-9a2b-43e1-a94c-b0aaabfbfbc9"
   struct IMFTimedTextCue
     lpVtbl : IMFTimedTextCueVTbl*
   end
@@ -12770,6 +13348,8 @@ lib LibWin32
     get_subformatting : Proc(IMFTimedTextFormattedText*, UInt32, UInt32*, UInt32*, IMFTimedTextStyle*, HRESULT)
   end
 
+  IMFTimedTextFormattedText_GUID = LibC::GUID.new("e13af3c1-4d47-4354-b1f5-e83ae0ecae60")
+  CLSID_IMFTimedTextFormattedText = "e13af3c1-4d47-4354-b1f5-e83ae0ecae60"
   struct IMFTimedTextFormattedText
     lpVtbl : IMFTimedTextFormattedTextVTbl*
   end
@@ -12793,6 +13373,8 @@ lib LibWin32
     get_text_outline : Proc(IMFTimedTextStyle*, MFARGB*, Float64*, Float64*, MF_TIMED_TEXT_UNIT_TYPE*, HRESULT)
   end
 
+  IMFTimedTextStyle_GUID = LibC::GUID.new("09b2455d-b834-4f01-a347-9052e21c450e")
+  CLSID_IMFTimedTextStyle = "09b2455d-b834-4f01-a347-9052e21c450e"
   struct IMFTimedTextStyle
     lpVtbl : IMFTimedTextStyleVTbl*
   end
@@ -12815,6 +13397,8 @@ lib LibWin32
     get_scroll_mode : Proc(IMFTimedTextRegion*, MF_TIMED_TEXT_SCROLL_MODE*, HRESULT)
   end
 
+  IMFTimedTextRegion_GUID = LibC::GUID.new("c8d22afc-bc47-4bdf-9b04-787e49ce3f58")
+  CLSID_IMFTimedTextRegion = "c8d22afc-bc47-4bdf-9b04-787e49ce3f58"
   struct IMFTimedTextRegion
     lpVtbl : IMFTimedTextRegionVTbl*
   end
@@ -12826,6 +13410,8 @@ lib LibWin32
     get_data : Proc(IMFTimedTextBinary*, UInt8**, UInt32*, HRESULT)
   end
 
+  IMFTimedTextBinary_GUID = LibC::GUID.new("4ae3a412-0545-43c4-bf6f-6b97a5c6c432")
+  CLSID_IMFTimedTextBinary = "4ae3a412-0545-43c4-bf6f-6b97a5c6c432"
   struct IMFTimedTextBinary
     lpVtbl : IMFTimedTextBinaryVTbl*
   end
@@ -12843,6 +13429,8 @@ lib LibWin32
     remove_cue : Proc(IMFTimedTextCueList*, IMFTimedTextCue, HRESULT)
   end
 
+  IMFTimedTextCueList_GUID = LibC::GUID.new("ad128745-211b-40a0-9981-fe65f166d0fd")
+  CLSID_IMFTimedTextCueList = "ad128745-211b-40a0-9981-fe65f166d0fd"
   struct IMFTimedTextCueList
     lpVtbl : IMFTimedTextCueListVTbl*
   end
@@ -12857,6 +13445,8 @@ lib LibWin32
     get_ruby_reserve : Proc(IMFTimedTextRuby*, MF_TIMED_TEXT_RUBY_RESERVE*, HRESULT)
   end
 
+  IMFTimedTextRuby_GUID = LibC::GUID.new("76c6a6f5-4955-4de5-b27b-14b734cc14b4")
+  CLSID_IMFTimedTextRuby = "76c6a6f5-4955-4de5-b27b-14b734cc14b4"
   struct IMFTimedTextRuby
     lpVtbl : IMFTimedTextRubyVTbl*
   end
@@ -12870,6 +13460,8 @@ lib LibWin32
     get_bouten_position : Proc(IMFTimedTextBouten*, MF_TIMED_TEXT_BOUTEN_POSITION*, HRESULT)
   end
 
+  IMFTimedTextBouten_GUID = LibC::GUID.new("3c5f3e8a-90c0-464e-8136-898d2975f847")
+  CLSID_IMFTimedTextBouten = "3c5f3e8a-90c0-464e-8136-898d2975f847"
   struct IMFTimedTextBouten
     lpVtbl : IMFTimedTextBoutenVTbl*
   end
@@ -12884,6 +13476,8 @@ lib LibWin32
     get_font_angle_in_degrees : Proc(IMFTimedTextStyle2*, Float64*, HRESULT)
   end
 
+  IMFTimedTextStyle2_GUID = LibC::GUID.new("db639199-c809-4c89-bfca-d0bbb9729d6e")
+  CLSID_IMFTimedTextStyle2 = "db639199-c809-4c89-bfca-d0bbb9729d6e"
   struct IMFTimedTextStyle2
     lpVtbl : IMFTimedTextStyle2VTbl*
   end
@@ -12896,6 +13490,8 @@ lib LibWin32
     waiting_for_key : Proc(IMFMediaEngineEMENotify*, Void)
   end
 
+  IMFMediaEngineEMENotify_GUID = LibC::GUID.new("9e184d15-cdb7-4f86-b49e-566689f4a601")
+  CLSID_IMFMediaEngineEMENotify = "9e184d15-cdb7-4f86-b49e-566689f4a601"
   struct IMFMediaEngineEMENotify
     lpVtbl : IMFMediaEngineEMENotifyVTbl*
   end
@@ -12911,6 +13507,8 @@ lib LibWin32
     key_status_change : Proc(IMFMediaKeySessionNotify2*, Void)
   end
 
+  IMFMediaKeySessionNotify2_GUID = LibC::GUID.new("c3a9e92a-da88-46b0-a110-6cf953026cb9")
+  CLSID_IMFMediaKeySessionNotify2 = "c3a9e92a-da88-46b0-a110-6cf953026cb9"
   struct IMFMediaKeySessionNotify2
     lpVtbl : IMFMediaKeySessionNotify2VTbl*
   end
@@ -12924,6 +13522,8 @@ lib LibWin32
     get_key_system : Proc(IMFMediaKeySystemAccess*, UInt8**, HRESULT)
   end
 
+  IMFMediaKeySystemAccess_GUID = LibC::GUID.new("aec63fda-7a97-4944-b35c-6c6df8085cc3")
+  CLSID_IMFMediaKeySystemAccess = "aec63fda-7a97-4944-b35c-6c6df8085cc3"
   struct IMFMediaKeySystemAccess
     lpVtbl : IMFMediaKeySystemAccessVTbl*
   end
@@ -12935,6 +13535,8 @@ lib LibWin32
     create_media_key_system_access : Proc(IMFMediaEngineClassFactory3*, UInt8*, IPropertyStore*, UInt32, IMFMediaKeySystemAccess*, HRESULT)
   end
 
+  IMFMediaEngineClassFactory3_GUID = LibC::GUID.new("3787614f-65f7-4003-b673-ead8293a0e60")
+  CLSID_IMFMediaEngineClassFactory3 = "3787614f-65f7-4003-b673-ead8293a0e60"
   struct IMFMediaEngineClassFactory3
     lpVtbl : IMFMediaEngineClassFactory3VTbl*
   end
@@ -12952,6 +13554,8 @@ lib LibWin32
     get_dom_exception : Proc(IMFMediaKeys2*, HRESULT, HRESULT*, HRESULT)
   end
 
+  IMFMediaKeys2_GUID = LibC::GUID.new("45892507-ad66-4de2-83a2-acbb13cd8d43")
+  CLSID_IMFMediaKeys2 = "45892507-ad66-4de2-83a2-acbb13cd8d43"
   struct IMFMediaKeys2
     lpVtbl : IMFMediaKeys2VTbl*
   end
@@ -12973,6 +13577,8 @@ lib LibWin32
     shutdown : Proc(IMFMediaKeySession2*, HRESULT)
   end
 
+  IMFMediaKeySession2_GUID = LibC::GUID.new("e9707e05-6d55-4636-b185-3de21210bd75")
+  CLSID_IMFMediaKeySession2 = "e9707e05-6d55-4636-b185-3de21210bd75"
   struct IMFMediaKeySession2
     lpVtbl : IMFMediaKeySession2VTbl*
   end
@@ -12984,6 +13590,8 @@ lib LibWin32
     create_content_decryption_module_factory : Proc(IMFMediaEngineClassFactory4*, LibC::LPWSTR, Guid*, Void**, HRESULT)
   end
 
+  IMFMediaEngineClassFactory4_GUID = LibC::GUID.new("fbe256c1-43cf-4a9b-8cb8-ce8632a34186")
+  CLSID_IMFMediaEngineClassFactory4 = "fbe256c1-43cf-4a9b-8cb8-ce8632a34186"
   struct IMFMediaEngineClassFactory4
     lpVtbl : IMFMediaEngineClassFactory4VTbl*
   end
@@ -12995,6 +13603,8 @@ lib LibWin32
     initialize : Proc(IMFDLNASinkInit*, IMFByteStream, LibC::BOOL, HRESULT)
   end
 
+  IMFDLNASinkInit_GUID = LibC::GUID.new("0c012799-1b61-4c10-bda9-04445be5f561")
+  CLSID_IMFDLNASinkInit = "0c012799-1b61-4c10-bda9-04445be5f561"
   struct IMFDLNASinkInit
     lpVtbl : IMFDLNASinkInitVTbl*
   end
@@ -13007,6 +13617,8 @@ lib LibWin32
     create_instance_from_object : Proc(IMFReadWriteClassFactory*, Guid*, IUnknown, IMFAttributes, Guid*, Void**, HRESULT)
   end
 
+  IMFReadWriteClassFactory_GUID = LibC::GUID.new("e7fe2e12-661c-40da-92f9-4f002ab67627")
+  CLSID_IMFReadWriteClassFactory = "e7fe2e12-661c-40da-92f9-4f002ab67627"
   struct IMFReadWriteClassFactory
     lpVtbl : IMFReadWriteClassFactoryVTbl*
   end
@@ -13027,6 +13639,8 @@ lib LibWin32
     get_presentation_attribute : Proc(IMFSourceReader*, UInt32, Guid*, PROPVARIANT*, HRESULT)
   end
 
+  IMFSourceReader_GUID = LibC::GUID.new("70ae66f2-c809-4e4f-8915-bdcb406b7993")
+  CLSID_IMFSourceReader = "70ae66f2-c809-4e4f-8915-bdcb406b7993"
   struct IMFSourceReader
     lpVtbl : IMFSourceReaderVTbl*
   end
@@ -13051,6 +13665,8 @@ lib LibWin32
     get_transform_for_stream : Proc(IMFSourceReaderEx*, UInt32, UInt32, Guid*, IMFTransform*, HRESULT)
   end
 
+  IMFSourceReaderEx_GUID = LibC::GUID.new("7b981cf0-560e-4116-9875-b099895f23d7")
+  CLSID_IMFSourceReaderEx = "7b981cf0-560e-4116-9875-b099895f23d7"
   struct IMFSourceReaderEx
     lpVtbl : IMFSourceReaderExVTbl*
   end
@@ -13064,6 +13680,8 @@ lib LibWin32
     on_event : Proc(IMFSourceReaderCallback*, UInt32, IMFMediaEvent, HRESULT)
   end
 
+  IMFSourceReaderCallback_GUID = LibC::GUID.new("deec8d99-fa1d-4d82-84c2-2c8969944867")
+  CLSID_IMFSourceReaderCallback = "deec8d99-fa1d-4d82-84c2-2c8969944867"
   struct IMFSourceReaderCallback
     lpVtbl : IMFSourceReaderCallbackVTbl*
   end
@@ -13079,6 +13697,8 @@ lib LibWin32
     on_stream_error : Proc(IMFSourceReaderCallback2*, UInt32, HRESULT, HRESULT)
   end
 
+  IMFSourceReaderCallback2_GUID = LibC::GUID.new("cf839fe6-8c2a-4dd2-b6ea-c22d6961af05")
+  CLSID_IMFSourceReaderCallback2 = "cf839fe6-8c2a-4dd2-b6ea-c22d6961af05"
   struct IMFSourceReaderCallback2
     lpVtbl : IMFSourceReaderCallback2VTbl*
   end
@@ -13100,6 +13720,8 @@ lib LibWin32
     get_statistics : Proc(IMFSinkWriter*, UInt32, MF_SINK_WRITER_STATISTICS*, HRESULT)
   end
 
+  IMFSinkWriter_GUID = LibC::GUID.new("3137f1cd-fe5e-4805-a5d8-fb477448cb3d")
+  CLSID_IMFSinkWriter = "3137f1cd-fe5e-4805-a5d8-fb477448cb3d"
   struct IMFSinkWriter
     lpVtbl : IMFSinkWriterVTbl*
   end
@@ -13122,6 +13744,8 @@ lib LibWin32
     get_transform_for_stream : Proc(IMFSinkWriterEx*, UInt32, UInt32, Guid*, IMFTransform*, HRESULT)
   end
 
+  IMFSinkWriterEx_GUID = LibC::GUID.new("588d72ab-5bc1-496a-8714-b70617141b25")
+  CLSID_IMFSinkWriterEx = "588d72ab-5bc1-496a-8714-b70617141b25"
   struct IMFSinkWriterEx
     lpVtbl : IMFSinkWriterExVTbl*
   end
@@ -13134,6 +13758,8 @@ lib LibWin32
     place_encoding_parameters : Proc(IMFSinkWriterEncoderConfig*, UInt32, IMFAttributes, HRESULT)
   end
 
+  IMFSinkWriterEncoderConfig_GUID = LibC::GUID.new("17c3779e-3cde-4ede-8c60-3899f5f53ad6")
+  CLSID_IMFSinkWriterEncoderConfig = "17c3779e-3cde-4ede-8c60-3899f5f53ad6"
   struct IMFSinkWriterEncoderConfig
     lpVtbl : IMFSinkWriterEncoderConfigVTbl*
   end
@@ -13146,6 +13772,8 @@ lib LibWin32
     on_marker : Proc(IMFSinkWriterCallback*, UInt32, Void*, HRESULT)
   end
 
+  IMFSinkWriterCallback_GUID = LibC::GUID.new("666f76de-33d2-41b9-a458-29ed0a972c58")
+  CLSID_IMFSinkWriterCallback = "666f76de-33d2-41b9-a458-29ed0a972c58"
   struct IMFSinkWriterCallback
     lpVtbl : IMFSinkWriterCallbackVTbl*
   end
@@ -13160,6 +13788,8 @@ lib LibWin32
     on_stream_error : Proc(IMFSinkWriterCallback2*, UInt32, HRESULT, HRESULT)
   end
 
+  IMFSinkWriterCallback2_GUID = LibC::GUID.new("2456bd58-c067-4513-84fe-8d0c88ffdc61")
+  CLSID_IMFSinkWriterCallback2 = "2456bd58-c067-4513-84fe-8d0c88ffdc61"
   struct IMFSinkWriterCallback2
     lpVtbl : IMFSinkWriterCallback2VTbl*
   end
@@ -13171,6 +13801,8 @@ lib LibWin32
     map_output_coordinate_to_input_stream : Proc(IMFVideoPositionMapper*, Float32, Float32, UInt32, UInt32, Float32*, Float32*, HRESULT)
   end
 
+  IMFVideoPositionMapper_GUID = LibC::GUID.new("1f6a9f17-e70b-4e24-8ae4-0b2c3ba7a4ae")
+  CLSID_IMFVideoPositionMapper = "1f6a9f17-e70b-4e24-8ae4-0b2c3ba7a4ae"
   struct IMFVideoPositionMapper
     lpVtbl : IMFVideoPositionMapperVTbl*
   end
@@ -13182,6 +13814,8 @@ lib LibWin32
     get_device_id : Proc(IMFVideoDeviceID*, Guid*, HRESULT)
   end
 
+  IMFVideoDeviceID_GUID = LibC::GUID.new("a38d9567-5a9c-4f3c-b293-8eb415b279ba")
+  CLSID_IMFVideoDeviceID = "a38d9567-5a9c-4f3c-b293-8eb415b279ba"
   struct IMFVideoDeviceID
     lpVtbl : IMFVideoDeviceIDVTbl*
   end
@@ -13208,6 +13842,8 @@ lib LibWin32
     get_fullscreen : Proc(IMFVideoDisplayControl*, LibC::BOOL*, HRESULT)
   end
 
+  IMFVideoDisplayControl_GUID = LibC::GUID.new("a490b1e4-ab84-4d31-a1b2-181e03b1077a")
+  CLSID_IMFVideoDisplayControl = "a490b1e4-ab84-4d31-a1b2-181e03b1077a"
   struct IMFVideoDisplayControl
     lpVtbl : IMFVideoDisplayControlVTbl*
   end
@@ -13225,6 +13861,8 @@ lib LibWin32
     get_current_media_type : Proc(IMFVideoPresenter*, IMFVideoMediaType*, HRESULT)
   end
 
+  IMFVideoPresenter_GUID = LibC::GUID.new("29aff080-182a-4a5d-af3b-448f3a6346cb")
+  CLSID_IMFVideoPresenter = "29aff080-182a-4a5d-af3b-448f3a6346cb"
   struct IMFVideoPresenter
     lpVtbl : IMFVideoPresenterVTbl*
   end
@@ -13238,6 +13876,8 @@ lib LibWin32
     clear : Proc(IMFDesiredSample*, Void)
   end
 
+  IMFDesiredSample_GUID = LibC::GUID.new("56c294d0-753e-4260-8d61-a3d8820b1d54")
+  CLSID_IMFDesiredSample = "56c294d0-753e-4260-8d61-a3d8820b1d54"
   struct IMFDesiredSample
     lpVtbl : IMFDesiredSampleVTbl*
   end
@@ -13252,6 +13892,8 @@ lib LibWin32
     get_stream_output_rect : Proc(IMFVideoMixerControl*, UInt32, MFVideoNormalizedRect*, HRESULT)
   end
 
+  IMFVideoMixerControl_GUID = LibC::GUID.new("a5c6c53f-c202-4aa5-9695-175ba8c508a5")
+  CLSID_IMFVideoMixerControl = "a5c6c53f-c202-4aa5-9695-175ba8c508a5"
   struct IMFVideoMixerControl
     lpVtbl : IMFVideoMixerControlVTbl*
   end
@@ -13268,6 +13910,8 @@ lib LibWin32
     get_mixing_prefs : Proc(IMFVideoMixerControl2*, UInt32*, HRESULT)
   end
 
+  IMFVideoMixerControl2_GUID = LibC::GUID.new("8459616d-966e-4930-b658-54fa7e5a16d3")
+  CLSID_IMFVideoMixerControl2 = "8459616d-966e-4930-b658-54fa7e5a16d3"
   struct IMFVideoMixerControl2
     lpVtbl : IMFVideoMixerControl2VTbl*
   end
@@ -13279,6 +13923,8 @@ lib LibWin32
     initialize_renderer : Proc(IMFVideoRenderer*, IMFTransform, IMFVideoPresenter, HRESULT)
   end
 
+  IMFVideoRenderer_GUID = LibC::GUID.new("dfdfd197-a9ca-43d8-b341-6af3503792cd")
+  CLSID_IMFVideoRenderer = "dfdfd197-a9ca-43d8-b341-6af3503792cd"
   struct IMFVideoRenderer
     lpVtbl : IMFVideoRendererVTbl*
   end
@@ -13291,6 +13937,8 @@ lib LibWin32
     get_number_of_streams : Proc(IEVRFilterConfig*, UInt32*, HRESULT)
   end
 
+  IEVRFilterConfig_GUID = LibC::GUID.new("83e91e85-82c1-4ea7-801d-85dc50b75086")
+  CLSID_IEVRFilterConfig = "83e91e85-82c1-4ea7-801d-85dc50b75086"
   struct IEVRFilterConfig
     lpVtbl : IEVRFilterConfigVTbl*
   end
@@ -13305,6 +13953,8 @@ lib LibWin32
     get_config_prefs : Proc(IEVRFilterConfigEx*, UInt32*, HRESULT)
   end
 
+  IEVRFilterConfigEx_GUID = LibC::GUID.new("aea36028-796d-454f-beee-b48071e24304")
+  CLSID_IEVRFilterConfigEx = "aea36028-796d-454f-beee-b48071e24304"
   struct IEVRFilterConfigEx
     lpVtbl : IEVRFilterConfigExVTbl*
   end
@@ -13316,6 +13966,8 @@ lib LibWin32
     lookup_service : Proc(IMFTopologyServiceLookup*, MF_SERVICE_LOOKUP_TYPE, UInt32, Guid*, Guid*, Void**, UInt32*, HRESULT)
   end
 
+  IMFTopologyServiceLookup_GUID = LibC::GUID.new("fa993889-4383-415a-a930-dd472a8cf6f7")
+  CLSID_IMFTopologyServiceLookup = "fa993889-4383-415a-a930-dd472a8cf6f7"
   struct IMFTopologyServiceLookup
     lpVtbl : IMFTopologyServiceLookupVTbl*
   end
@@ -13328,6 +13980,8 @@ lib LibWin32
     release_service_pointers : Proc(IMFTopologyServiceLookupClient*, HRESULT)
   end
 
+  IMFTopologyServiceLookupClient_GUID = LibC::GUID.new("fa99388a-4383-415a-a930-dd472a8cf6f7")
+  CLSID_IMFTopologyServiceLookupClient = "fa99388a-4383-415a-a930-dd472a8cf6f7"
   struct IMFTopologyServiceLookupClient
     lpVtbl : IMFTopologyServiceLookupClientVTbl*
   end
@@ -13342,6 +13996,8 @@ lib LibWin32
     disable_image_export : Proc(IEVRTrustedVideoPlugin*, LibC::BOOL, HRESULT)
   end
 
+  IEVRTrustedVideoPlugin_GUID = LibC::GUID.new("83a4ce40-7710-494b-a893-a472049af630")
+  CLSID_IEVRTrustedVideoPlugin = "83a4ce40-7710-494b-a893-a472049af630"
   struct IEVRTrustedVideoPlugin
     lpVtbl : IEVRTrustedVideoPluginVTbl*
   end
@@ -13388,6 +14044,8 @@ lib LibWin32
     shutdown : Proc(IMFPMediaPlayer*, HRESULT)
   end
 
+  IMFPMediaPlayer_GUID = LibC::GUID.new("a714590a-58af-430a-85bf-44f5ec838d85")
+  CLSID_IMFPMediaPlayer = "a714590a-58af-430a-85bf-44f5ec838d85"
   struct IMFPMediaPlayer
     lpVtbl : IMFPMediaPlayerVTbl*
   end
@@ -13417,6 +14075,8 @@ lib LibWin32
     get_metadata : Proc(IMFPMediaItem*, IPropertyStore*, HRESULT)
   end
 
+  IMFPMediaItem_GUID = LibC::GUID.new("90eb3e6b-ecbf-45cc-b1da-c6fe3ea70d57")
+  CLSID_IMFPMediaItem = "90eb3e6b-ecbf-45cc-b1da-c6fe3ea70d57"
   struct IMFPMediaItem
     lpVtbl : IMFPMediaItemVTbl*
   end
@@ -13428,6 +14088,8 @@ lib LibWin32
     on_media_player_event : Proc(IMFPMediaPlayerCallback*, MFP_EVENT_HEADER*, Void)
   end
 
+  IMFPMediaPlayerCallback_GUID = LibC::GUID.new("766c8ffb-5fdb-4fea-a28d-b912996f51bd")
+  CLSID_IMFPMediaPlayerCallback = "766c8ffb-5fdb-4fea-a28d-b912996f51bd"
   struct IMFPMediaPlayerCallback
     lpVtbl : IMFPMediaPlayerCallbackVTbl*
   end
@@ -13439,6 +14101,8 @@ lib LibWin32
     create_instance : Proc(IMFSharingEngineClassFactory*, UInt32, IMFAttributes, IUnknown*, HRESULT)
   end
 
+  IMFSharingEngineClassFactory_GUID = LibC::GUID.new("2ba61f92-8305-413b-9733-faf15f259384")
+  CLSID_IMFSharingEngineClassFactory = "2ba61f92-8305-413b-9733-faf15f259384"
   struct IMFSharingEngineClassFactory
     lpVtbl : IMFSharingEngineClassFactoryVTbl*
   end
@@ -13492,6 +14156,8 @@ lib LibWin32
     get_device : Proc(IMFMediaSharingEngine*, DEVICE_INFO*, HRESULT)
   end
 
+  IMFMediaSharingEngine_GUID = LibC::GUID.new("8d3ce1bf-2367-40e0-9eee-40d377cc1b46")
+  CLSID_IMFMediaSharingEngine = "8d3ce1bf-2367-40e0-9eee-40d377cc1b46"
   struct IMFMediaSharingEngine
     lpVtbl : IMFMediaSharingEngineVTbl*
   end
@@ -13503,6 +14169,8 @@ lib LibWin32
     create_instance : Proc(IMFMediaSharingEngineClassFactory*, UInt32, IMFAttributes, IMFMediaSharingEngine*, HRESULT)
   end
 
+  IMFMediaSharingEngineClassFactory_GUID = LibC::GUID.new("524d2bc4-b2b1-4fe5-8fac-fa4e4512b4e0")
+  CLSID_IMFMediaSharingEngineClassFactory = "524d2bc4-b2b1-4fe5-8fac-fa4e4512b4e0"
   struct IMFMediaSharingEngineClassFactory
     lpVtbl : IMFMediaSharingEngineClassFactoryVTbl*
   end
@@ -13516,6 +14184,8 @@ lib LibWin32
     shutdown : Proc(IMFImageSharingEngine*, HRESULT)
   end
 
+  IMFImageSharingEngine_GUID = LibC::GUID.new("cfa0ae8e-7e1c-44d2-ae68-fc4c148a6354")
+  CLSID_IMFImageSharingEngine = "cfa0ae8e-7e1c-44d2-ae68-fc4c148a6354"
   struct IMFImageSharingEngine
     lpVtbl : IMFImageSharingEngineVTbl*
   end
@@ -13527,6 +14197,8 @@ lib LibWin32
     create_instance_from_udn : Proc(IMFImageSharingEngineClassFactory*, UInt8*, IMFImageSharingEngine*, HRESULT)
   end
 
+  IMFImageSharingEngineClassFactory_GUID = LibC::GUID.new("1fc55727-a7fb-4fc8-83ae-8af024990af1")
+  CLSID_IMFImageSharingEngineClassFactory = "1fc55727-a7fb-4fc8-83ae-8af024990af1"
   struct IMFImageSharingEngineClassFactory
     lpVtbl : IMFImageSharingEngineClassFactoryVTbl*
   end
@@ -13539,6 +14211,8 @@ lib LibWin32
     disconnect : Proc(IPlayToControl*, HRESULT)
   end
 
+  IPlayToControl_GUID = LibC::GUID.new("607574eb-f4b6-45c1-b08c-cb715122901d")
+  CLSID_IPlayToControl = "607574eb-f4b6-45c1-b08c-cb715122901d"
   struct IPlayToControl
     lpVtbl : IPlayToControlVTbl*
   end
@@ -13552,6 +14226,8 @@ lib LibWin32
     get_capabilities : Proc(IPlayToControlWithCapabilities*, PLAYTO_SOURCE_CREATEFLAGS*, HRESULT)
   end
 
+  IPlayToControlWithCapabilities_GUID = LibC::GUID.new("aa9dd80f-c50a-4220-91c1-332287f82a34")
+  CLSID_IPlayToControlWithCapabilities = "aa9dd80f-c50a-4220-91c1-332287f82a34"
   struct IPlayToControlWithCapabilities
     lpVtbl : IPlayToControlWithCapabilitiesVTbl*
   end
@@ -13563,6 +14239,8 @@ lib LibWin32
     create_instance : Proc(IPlayToSourceClassFactory*, UInt32, IPlayToControl, IInspectable*, HRESULT)
   end
 
+  IPlayToSourceClassFactory_GUID = LibC::GUID.new("842b32a3-9b9b-4d1c-b3f3-49193248a554")
+  CLSID_IPlayToSourceClassFactory = "842b32a3-9b9b-4d1c-b3f3-49193248a554"
   struct IPlayToSourceClassFactory
     lpVtbl : IPlayToSourceClassFactoryVTbl*
   end
@@ -13575,6 +14253,8 @@ lib LibWin32
     get_stream_active_state : Proc(IEVRVideoStreamControl*, LibC::BOOL*, HRESULT)
   end
 
+  IEVRVideoStreamControl_GUID = LibC::GUID.new("d0cfe38b-93e7-4772-8957-0400c49a4485")
+  CLSID_IEVRVideoStreamControl = "d0cfe38b-93e7-4772-8957-0400c49a4485"
   struct IEVRVideoStreamControl
     lpVtbl : IEVRVideoStreamControlVTbl*
   end
@@ -13597,6 +14277,8 @@ lib LibWin32
     set_background_color : Proc(IMFVideoProcessor*, UInt32, HRESULT)
   end
 
+  IMFVideoProcessor_GUID = LibC::GUID.new("6ab0000c-fece-4d1f-a2ac-a9573530656e")
+  CLSID_IMFVideoProcessor = "6ab0000c-fece-4d1f-a2ac-a9573530656e"
   struct IMFVideoProcessor
     lpVtbl : IMFVideoProcessorVTbl*
   end
@@ -13611,6 +14293,8 @@ lib LibWin32
     get_alpha_bitmap_parameters : Proc(IMFVideoMixerBitmap*, MFVideoAlphaBitmapParams*, HRESULT)
   end
 
+  IMFVideoMixerBitmap_GUID = LibC::GUID.new("814c7b20-0fdb-4eec-af8f-f957c8f69edc")
+  CLSID_IMFVideoMixerBitmap = "814c7b20-0fdb-4eec-af8f-f957c8f69edc"
   struct IMFVideoMixerBitmap
     lpVtbl : IMFVideoMixerBitmapVTbl*
   end
@@ -13622,6 +14306,8 @@ lib LibWin32
     set_directx_device_manager : Proc(IAdvancedMediaCaptureInitializationSettings*, IMFDXGIDeviceManager, HRESULT)
   end
 
+  IAdvancedMediaCaptureInitializationSettings_GUID = LibC::GUID.new("3de21209-8ba6-4f2a-a577-2819b56ff14d")
+  CLSID_IAdvancedMediaCaptureInitializationSettings = "3de21209-8ba6-4f2a-a577-2819b56ff14d"
   struct IAdvancedMediaCaptureInitializationSettings
     lpVtbl : IAdvancedMediaCaptureInitializationSettingsVTbl*
   end
@@ -13633,6 +14319,8 @@ lib LibWin32
     get_directx_device_manager : Proc(IAdvancedMediaCaptureSettings*, IMFDXGIDeviceManager*, HRESULT)
   end
 
+  IAdvancedMediaCaptureSettings_GUID = LibC::GUID.new("24e0485f-a33e-4aa1-b564-6019b1d14f65")
+  CLSID_IAdvancedMediaCaptureSettings = "24e0485f-a33e-4aa1-b564-6019b1d14f65"
   struct IAdvancedMediaCaptureSettings
     lpVtbl : IAdvancedMediaCaptureSettingsVTbl*
   end
@@ -13644,6 +14332,8 @@ lib LibWin32
     get_advanced_media_capture_settings : Proc(IAdvancedMediaCapture*, IAdvancedMediaCaptureSettings*, HRESULT)
   end
 
+  IAdvancedMediaCapture_GUID = LibC::GUID.new("d0751585-d216-4344-b5bf-463b68f977bb")
+  CLSID_IAdvancedMediaCapture = "d0751585-d216-4344-b5bf-463b68f977bb"
   struct IAdvancedMediaCapture
     lpVtbl : IAdvancedMediaCaptureVTbl*
   end
@@ -13664,6 +14354,8 @@ lib LibWin32
     get_metadata_items : Proc(IMFSpatialAudioObjectBuffer*, ISpatialAudioMetadataItems*, HRESULT)
   end
 
+  IMFSpatialAudioObjectBuffer_GUID = LibC::GUID.new("d396ec8c-605e-4249-978d-72ad1c312872")
+  CLSID_IMFSpatialAudioObjectBuffer = "d396ec8c-605e-4249-978d-72ad1c312872"
   struct IMFSpatialAudioObjectBuffer
     lpVtbl : IMFSpatialAudioObjectBufferVTbl*
   end
@@ -13721,6 +14413,8 @@ lib LibWin32
     get_spatial_audio_object_by_index : Proc(IMFSpatialAudioSample*, UInt32, IMFSpatialAudioObjectBuffer*, HRESULT)
   end
 
+  IMFSpatialAudioSample_GUID = LibC::GUID.new("abf28a9b-3393-4290-ba79-5ffc46d986b2")
+  CLSID_IMFSpatialAudioSample = "abf28a9b-3393-4290-ba79-5ffc46d986b2"
   struct IMFSpatialAudioSample
     lpVtbl : IMFSpatialAudioSampleVTbl*
   end
@@ -13739,6 +14433,8 @@ lib LibWin32
     remove : Proc(IMFContentDecryptionModuleSession*, HRESULT)
   end
 
+  IMFContentDecryptionModuleSession_GUID = LibC::GUID.new("4e233efd-1dd2-49e8-b577-d63eee4c0d33")
+  CLSID_IMFContentDecryptionModuleSession = "4e233efd-1dd2-49e8-b577-d63eee4c0d33"
   struct IMFContentDecryptionModuleSession
     lpVtbl : IMFContentDecryptionModuleSessionVTbl*
   end
@@ -13751,6 +14447,8 @@ lib LibWin32
     key_status_changed : Proc(IMFContentDecryptionModuleSessionCallbacks*, HRESULT)
   end
 
+  IMFContentDecryptionModuleSessionCallbacks_GUID = LibC::GUID.new("3f96ee40-ad81-4096-8470-59a4b770f89a")
+  CLSID_IMFContentDecryptionModuleSessionCallbacks = "3f96ee40-ad81-4096-8470-59a4b770f89a"
   struct IMFContentDecryptionModuleSessionCallbacks
     lpVtbl : IMFContentDecryptionModuleSessionCallbacksVTbl*
   end
@@ -13768,6 +14466,8 @@ lib LibWin32
     get_protection_system_ids : Proc(IMFContentDecryptionModule*, Guid**, UInt32*, HRESULT)
   end
 
+  IMFContentDecryptionModule_GUID = LibC::GUID.new("87be986c-10be-4943-bf48-4b54ce1983a2")
+  CLSID_IMFContentDecryptionModule = "87be986c-10be-4943-bf48-4b54ce1983a2"
   struct IMFContentDecryptionModule
     lpVtbl : IMFContentDecryptionModuleVTbl*
   end
@@ -13781,6 +14481,8 @@ lib LibWin32
     get_key_system : Proc(IMFContentDecryptionModuleAccess*, LibC::LPWSTR*, HRESULT)
   end
 
+  IMFContentDecryptionModuleAccess_GUID = LibC::GUID.new("a853d1f4-e2a0-4303-9edc-f1a68ee43136")
+  CLSID_IMFContentDecryptionModuleAccess = "a853d1f4-e2a0-4303-9edc-f1a68ee43136"
   struct IMFContentDecryptionModuleAccess
     lpVtbl : IMFContentDecryptionModuleAccessVTbl*
   end
@@ -13793,6 +14495,8 @@ lib LibWin32
     create_content_decryption_module_access : Proc(IMFContentDecryptionModuleFactory*, LibC::LPWSTR, IPropertyStore*, UInt32, IMFContentDecryptionModuleAccess*, HRESULT)
   end
 
+  IMFContentDecryptionModuleFactory_GUID = LibC::GUID.new("7d5abf16-4cbb-4e08-b977-9ba59049943e")
+  CLSID_IMFContentDecryptionModuleFactory = "7d5abf16-4cbb-4e08-b977-9ba59049943e"
   struct IMFContentDecryptionModuleFactory
     lpVtbl : IMFContentDecryptionModuleFactoryVTbl*
   end
@@ -13805,6 +14509,8 @@ lib LibWin32
     shutdown : Proc(IMFCameraSyncObject*, Void)
   end
 
+  IMFCameraSyncObject_GUID = LibC::GUID.new("6338b23a-3042-49d2-a3ea-ec0fed815407")
+  CLSID_IMFCameraSyncObject = "6338b23a-3042-49d2-a3ea-ec0fed815407"
   struct IMFCameraSyncObject
     lpVtbl : IMFCameraSyncObjectVTbl*
   end
@@ -13856,6 +14562,8 @@ lib LibWin32
     shutdown : Proc(IMFVirtualCamera*, HRESULT)
   end
 
+  IMFVirtualCamera_GUID = LibC::GUID.new("1c08a864-ef6c-4c75-af59-5f2d68da9563")
+  CLSID_IMFVirtualCamera = "1c08a864-ef6c-4c75-af59-5f2d68da9563"
   struct IMFVirtualCamera
     lpVtbl : IMFVirtualCameraVTbl*
   end

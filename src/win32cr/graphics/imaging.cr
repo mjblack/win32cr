@@ -909,6 +909,8 @@ lib LibWin32
     has_alpha : Proc(IWICPalette*, LibC::BOOL*, HRESULT)
   end
 
+  IWICPalette_GUID = LibC::GUID.new("00000040-a8f2-4877-ba0a-fd2b6645fb94")
+  CLSID_IWICPalette = "00000040-a8f2-4877-ba0a-fd2b6645fb94"
   struct IWICPalette
     lpVtbl : IWICPaletteVTbl*
   end
@@ -924,6 +926,8 @@ lib LibWin32
     copy_pixels : Proc(IWICBitmapSource*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
   end
 
+  IWICBitmapSource_GUID = LibC::GUID.new("00000120-a8f2-4877-ba0a-fd2b6645fb94")
+  CLSID_IWICBitmapSource = "00000120-a8f2-4877-ba0a-fd2b6645fb94"
   struct IWICBitmapSource
     lpVtbl : IWICBitmapSourceVTbl*
   end
@@ -941,6 +945,8 @@ lib LibWin32
     can_convert : Proc(IWICFormatConverter*, Guid*, Guid*, LibC::BOOL*, HRESULT)
   end
 
+  IWICFormatConverter_GUID = LibC::GUID.new("00000301-a8f2-4877-ba0a-fd2b6645fb94")
+  CLSID_IWICFormatConverter = "00000301-a8f2-4877-ba0a-fd2b6645fb94"
   struct IWICFormatConverter
     lpVtbl : IWICFormatConverterVTbl*
   end
@@ -958,6 +964,8 @@ lib LibWin32
     can_convert : Proc(IWICPlanarFormatConverter*, Guid*, UInt32, Guid*, LibC::BOOL*, HRESULT)
   end
 
+  IWICPlanarFormatConverter_GUID = LibC::GUID.new("bebee9cb-83b0-4dcc-8132-b0aaa55eac96")
+  CLSID_IWICPlanarFormatConverter = "bebee9cb-83b0-4dcc-8132-b0aaa55eac96"
   struct IWICPlanarFormatConverter
     lpVtbl : IWICPlanarFormatConverterVTbl*
   end
@@ -974,6 +982,8 @@ lib LibWin32
     initialize : Proc(IWICBitmapScaler*, IWICBitmapSource, UInt32, UInt32, WICBitmapInterpolationMode, HRESULT)
   end
 
+  IWICBitmapScaler_GUID = LibC::GUID.new("00000302-a8f2-4877-ba0a-fd2b6645fb94")
+  CLSID_IWICBitmapScaler = "00000302-a8f2-4877-ba0a-fd2b6645fb94"
   struct IWICBitmapScaler
     lpVtbl : IWICBitmapScalerVTbl*
   end
@@ -990,6 +1000,8 @@ lib LibWin32
     initialize : Proc(IWICBitmapClipper*, IWICBitmapSource, WICRect*, HRESULT)
   end
 
+  IWICBitmapClipper_GUID = LibC::GUID.new("e4fbcf03-223d-4e81-9333-d635556dd1b5")
+  CLSID_IWICBitmapClipper = "e4fbcf03-223d-4e81-9333-d635556dd1b5"
   struct IWICBitmapClipper
     lpVtbl : IWICBitmapClipperVTbl*
   end
@@ -1006,6 +1018,8 @@ lib LibWin32
     initialize : Proc(IWICBitmapFlipRotator*, IWICBitmapSource, WICBitmapTransformOptions, HRESULT)
   end
 
+  IWICBitmapFlipRotator_GUID = LibC::GUID.new("5009834f-2d6a-41ce-9e1b-17c5aff7a782")
+  CLSID_IWICBitmapFlipRotator = "5009834f-2d6a-41ce-9e1b-17c5aff7a782"
   struct IWICBitmapFlipRotator
     lpVtbl : IWICBitmapFlipRotatorVTbl*
   end
@@ -1020,6 +1034,8 @@ lib LibWin32
     get_pixel_format : Proc(IWICBitmapLock*, Guid*, HRESULT)
   end
 
+  IWICBitmapLock_GUID = LibC::GUID.new("00000123-a8f2-4877-ba0a-fd2b6645fb94")
+  CLSID_IWICBitmapLock = "00000123-a8f2-4877-ba0a-fd2b6645fb94"
   struct IWICBitmapLock
     lpVtbl : IWICBitmapLockVTbl*
   end
@@ -1038,6 +1054,8 @@ lib LibWin32
     set_resolution : Proc(IWICBitmap*, Float64, Float64, HRESULT)
   end
 
+  IWICBitmap_GUID = LibC::GUID.new("00000121-a8f2-4877-ba0a-fd2b6645fb94")
+  CLSID_IWICBitmap = "00000121-a8f2-4877-ba0a-fd2b6645fb94"
   struct IWICBitmap
     lpVtbl : IWICBitmapVTbl*
   end
@@ -1054,6 +1072,8 @@ lib LibWin32
     get_exif_color_space : Proc(IWICColorContext*, UInt32*, HRESULT)
   end
 
+  IWICColorContext_GUID = LibC::GUID.new("3c613a02-34b2-44ea-9a7c-45aea9c6fd6d")
+  CLSID_IWICColorContext = "3c613a02-34b2-44ea-9a7c-45aea9c6fd6d"
   struct IWICColorContext
     lpVtbl : IWICColorContextVTbl*
   end
@@ -1070,6 +1090,8 @@ lib LibWin32
     initialize : Proc(IWICColorTransform*, IWICBitmapSource, IWICColorContext, IWICColorContext, Guid*, HRESULT)
   end
 
+  IWICColorTransform_GUID = LibC::GUID.new("b66f034f-d0e2-40ab-b436-6de39e321a94")
+  CLSID_IWICColorTransform = "b66f034f-d0e2-40ab-b436-6de39e321a94"
   struct IWICColorTransform
     lpVtbl : IWICColorTransformVTbl*
   end
@@ -1082,6 +1104,8 @@ lib LibWin32
     get_metadata_query_writer : Proc(IWICFastMetadataEncoder*, IWICMetadataQueryWriter*, HRESULT)
   end
 
+  IWICFastMetadataEncoder_GUID = LibC::GUID.new("b84e2c09-78c9-4ac4-8bd3-524ae1663a2f")
+  CLSID_IWICFastMetadataEncoder = "b84e2c09-78c9-4ac4-8bd3-524ae1663a2f"
   struct IWICFastMetadataEncoder
     lpVtbl : IWICFastMetadataEncoderVTbl*
   end
@@ -1107,6 +1131,8 @@ lib LibWin32
     initialize_from_i_stream_region : Proc(IWICStream*, IStream, ULARGE_INTEGER, ULARGE_INTEGER, HRESULT)
   end
 
+  IWICStream_GUID = LibC::GUID.new("135ff860-22b7-4ddf-b0f6-218f4f299a43")
+  CLSID_IWICStream = "135ff860-22b7-4ddf-b0f6-218f4f299a43"
   struct IWICStream
     lpVtbl : IWICStreamVTbl*
   end
@@ -1121,6 +1147,8 @@ lib LibWin32
     clone : Proc(IWICEnumMetadataItem*, IWICEnumMetadataItem*, HRESULT)
   end
 
+  IWICEnumMetadataItem_GUID = LibC::GUID.new("dc2bb46d-3f07-481e-8625-220c4aedbb33")
+  CLSID_IWICEnumMetadataItem = "dc2bb46d-3f07-481e-8625-220c4aedbb33"
   struct IWICEnumMetadataItem
     lpVtbl : IWICEnumMetadataItemVTbl*
   end
@@ -1135,6 +1163,8 @@ lib LibWin32
     get_enumerator : Proc(IWICMetadataQueryReader*, IEnumString*, HRESULT)
   end
 
+  IWICMetadataQueryReader_GUID = LibC::GUID.new("30989668-e1c9-4597-b395-458eedb808df")
+  CLSID_IWICMetadataQueryReader = "30989668-e1c9-4597-b395-458eedb808df"
   struct IWICMetadataQueryReader
     lpVtbl : IWICMetadataQueryReaderVTbl*
   end
@@ -1151,6 +1181,8 @@ lib LibWin32
     remove_metadata_by_name : Proc(IWICMetadataQueryWriter*, LibC::LPWSTR, HRESULT)
   end
 
+  IWICMetadataQueryWriter_GUID = LibC::GUID.new("a721791a-0def-4d06-bd91-2118bf1db10b")
+  CLSID_IWICMetadataQueryWriter = "a721791a-0def-4d06-bd91-2118bf1db10b"
   struct IWICMetadataQueryWriter
     lpVtbl : IWICMetadataQueryWriterVTbl*
   end
@@ -1171,6 +1203,8 @@ lib LibWin32
     get_metadata_query_writer : Proc(IWICBitmapEncoder*, IWICMetadataQueryWriter*, HRESULT)
   end
 
+  IWICBitmapEncoder_GUID = LibC::GUID.new("00000103-a8f2-4877-ba0a-fd2b6645fb94")
+  CLSID_IWICBitmapEncoder = "00000103-a8f2-4877-ba0a-fd2b6645fb94"
   struct IWICBitmapEncoder
     lpVtbl : IWICBitmapEncoderVTbl*
   end
@@ -1192,6 +1226,8 @@ lib LibWin32
     get_metadata_query_writer : Proc(IWICBitmapFrameEncode*, IWICMetadataQueryWriter*, HRESULT)
   end
 
+  IWICBitmapFrameEncode_GUID = LibC::GUID.new("00000105-a8f2-4877-ba0a-fd2b6645fb94")
+  CLSID_IWICBitmapFrameEncode = "00000105-a8f2-4877-ba0a-fd2b6645fb94"
   struct IWICBitmapFrameEncode
     lpVtbl : IWICBitmapFrameEncodeVTbl*
   end
@@ -1204,6 +1240,8 @@ lib LibWin32
     write_source : Proc(IWICPlanarBitmapFrameEncode*, IWICBitmapSource*, UInt32, WICRect*, HRESULT)
   end
 
+  IWICPlanarBitmapFrameEncode_GUID = LibC::GUID.new("f928b7b8-2221-40c1-b72e-7e82f1974d1a")
+  CLSID_IWICPlanarBitmapFrameEncode = "f928b7b8-2221-40c1-b72e-7e82f1974d1a"
   struct IWICPlanarBitmapFrameEncode
     lpVtbl : IWICPlanarBitmapFrameEncodeVTbl*
   end
@@ -1225,6 +1263,8 @@ lib LibWin32
     get_frame : Proc(IWICBitmapDecoder*, UInt32, IWICBitmapFrameDecode*, HRESULT)
   end
 
+  IWICBitmapDecoder_GUID = LibC::GUID.new("9edde9e7-8dee-47ea-99df-e6faf2ed44bf")
+  CLSID_IWICBitmapDecoder = "9edde9e7-8dee-47ea-99df-e6faf2ed44bf"
   struct IWICBitmapDecoder
     lpVtbl : IWICBitmapDecoderVTbl*
   end
@@ -1239,6 +1279,8 @@ lib LibWin32
     does_support_transform : Proc(IWICBitmapSourceTransform*, WICBitmapTransformOptions, LibC::BOOL*, HRESULT)
   end
 
+  IWICBitmapSourceTransform_GUID = LibC::GUID.new("3b16811b-6a43-4ec9-b713-3d5a0c13b940")
+  CLSID_IWICBitmapSourceTransform = "3b16811b-6a43-4ec9-b713-3d5a0c13b940"
   struct IWICBitmapSourceTransform
     lpVtbl : IWICBitmapSourceTransformVTbl*
   end
@@ -1251,6 +1293,8 @@ lib LibWin32
     copy_pixels : Proc(IWICPlanarBitmapSourceTransform*, WICRect*, UInt32, UInt32, WICBitmapTransformOptions, WICPlanarOptions, WICBitmapPlane*, UInt32, HRESULT)
   end
 
+  IWICPlanarBitmapSourceTransform_GUID = LibC::GUID.new("3aff9cce-be95-4303-b927-e7d16ff4a613")
+  CLSID_IWICPlanarBitmapSourceTransform = "3aff9cce-be95-4303-b927-e7d16ff4a613"
   struct IWICPlanarBitmapSourceTransform
     lpVtbl : IWICPlanarBitmapSourceTransformVTbl*
   end
@@ -1269,6 +1313,8 @@ lib LibWin32
     get_thumbnail : Proc(IWICBitmapFrameDecode*, IWICBitmapSource*, HRESULT)
   end
 
+  IWICBitmapFrameDecode_GUID = LibC::GUID.new("3b16811b-6a43-4ec9-a813-3d930c13b940")
+  CLSID_IWICBitmapFrameDecode = "3b16811b-6a43-4ec9-a813-3d930c13b940"
   struct IWICBitmapFrameDecode
     lpVtbl : IWICBitmapFrameDecodeVTbl*
   end
@@ -1282,6 +1328,8 @@ lib LibWin32
     set_current_level : Proc(IWICProgressiveLevelControl*, UInt32, HRESULT)
   end
 
+  IWICProgressiveLevelControl_GUID = LibC::GUID.new("daac296f-7aa5-4dbf-8d15-225c5976f891")
+  CLSID_IWICProgressiveLevelControl = "daac296f-7aa5-4dbf-8d15-225c5976f891"
   struct IWICProgressiveLevelControl
     lpVtbl : IWICProgressiveLevelControlVTbl*
   end
@@ -1293,6 +1341,8 @@ lib LibWin32
     notify : Proc(IWICProgressCallback*, UInt32, WICProgressOperation, Float64, HRESULT)
   end
 
+  IWICProgressCallback_GUID = LibC::GUID.new("4776f9cd-9517-45fa-bf24-e89c5ec5c60c")
+  CLSID_IWICProgressCallback = "4776f9cd-9517-45fa-bf24-e89c5ec5c60c"
   struct IWICProgressCallback
     lpVtbl : IWICProgressCallbackVTbl*
   end
@@ -1304,6 +1354,8 @@ lib LibWin32
     register_progress_notification : Proc(IWICBitmapCodecProgressNotification*, PFNProgressNotification, Void*, UInt32, HRESULT)
   end
 
+  IWICBitmapCodecProgressNotification_GUID = LibC::GUID.new("64c1024e-c3cf-4462-8078-88c2b11c46d9")
+  CLSID_IWICBitmapCodecProgressNotification = "64c1024e-c3cf-4462-8078-88c2b11c46d9"
   struct IWICBitmapCodecProgressNotification
     lpVtbl : IWICBitmapCodecProgressNotificationVTbl*
   end
@@ -1322,6 +1374,8 @@ lib LibWin32
     get_friendly_name : Proc(IWICComponentInfo*, UInt32, Char*, UInt32*, HRESULT)
   end
 
+  IWICComponentInfo_GUID = LibC::GUID.new("23bc3f0a-698b-4357-886b-f24d50671334")
+  CLSID_IWICComponentInfo = "23bc3f0a-698b-4357-886b-f24d50671334"
   struct IWICComponentInfo
     lpVtbl : IWICComponentInfoVTbl*
   end
@@ -1342,6 +1396,8 @@ lib LibWin32
     create_instance : Proc(IWICFormatConverterInfo*, IWICFormatConverter*, HRESULT)
   end
 
+  IWICFormatConverterInfo_GUID = LibC::GUID.new("9f34fb65-13f4-4f15-bc57-3726b5e53d9f")
+  CLSID_IWICFormatConverterInfo = "9f34fb65-13f4-4f15-bc57-3726b5e53d9f"
   struct IWICFormatConverterInfo
     lpVtbl : IWICFormatConverterInfoVTbl*
   end
@@ -1372,6 +1428,8 @@ lib LibWin32
     matches_mime_type : Proc(IWICBitmapCodecInfo*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
+  IWICBitmapCodecInfo_GUID = LibC::GUID.new("e87a44c4-b76e-4c47-8b09-298eb12a2714")
+  CLSID_IWICBitmapCodecInfo = "e87a44c4-b76e-4c47-8b09-298eb12a2714"
   struct IWICBitmapCodecInfo
     lpVtbl : IWICBitmapCodecInfoVTbl*
   end
@@ -1403,6 +1461,8 @@ lib LibWin32
     create_instance : Proc(IWICBitmapEncoderInfo*, IWICBitmapEncoder*, HRESULT)
   end
 
+  IWICBitmapEncoderInfo_GUID = LibC::GUID.new("94c9b4ee-a09f-4f92-8a1e-4a9bce7e76fb")
+  CLSID_IWICBitmapEncoderInfo = "94c9b4ee-a09f-4f92-8a1e-4a9bce7e76fb"
   struct IWICBitmapEncoderInfo
     lpVtbl : IWICBitmapEncoderInfoVTbl*
   end
@@ -1436,6 +1496,8 @@ lib LibWin32
     create_instance : Proc(IWICBitmapDecoderInfo*, IWICBitmapDecoder*, HRESULT)
   end
 
+  IWICBitmapDecoderInfo_GUID = LibC::GUID.new("d8cd007f-d08f-4191-9bfc-236ea7f0e4b5")
+  CLSID_IWICBitmapDecoderInfo = "d8cd007f-d08f-4191-9bfc-236ea7f0e4b5"
   struct IWICBitmapDecoderInfo
     lpVtbl : IWICBitmapDecoderInfoVTbl*
   end
@@ -1459,6 +1521,8 @@ lib LibWin32
     get_channel_mask : Proc(IWICPixelFormatInfo*, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
+  IWICPixelFormatInfo_GUID = LibC::GUID.new("e8eda601-3d48-431a-ab44-69059be88bbe")
+  CLSID_IWICPixelFormatInfo = "e8eda601-3d48-431a-ab44-69059be88bbe"
   struct IWICPixelFormatInfo
     lpVtbl : IWICPixelFormatInfoVTbl*
   end
@@ -1484,6 +1548,8 @@ lib LibWin32
     get_numeric_representation : Proc(IWICPixelFormatInfo2*, WICPixelFormatNumericRepresentation*, HRESULT)
   end
 
+  IWICPixelFormatInfo2_GUID = LibC::GUID.new("a9db33a2-af5f-43c7-b679-74f5984b5aa4")
+  CLSID_IWICPixelFormatInfo2 = "a9db33a2-af5f-43c7-b679-74f5984b5aa4"
   struct IWICPixelFormatInfo2
     lpVtbl : IWICPixelFormatInfo2VTbl*
   end
@@ -1519,6 +1585,8 @@ lib LibWin32
     create_query_writer_from_reader : Proc(IWICImagingFactory*, IWICMetadataQueryReader, Guid*, IWICMetadataQueryWriter*, HRESULT)
   end
 
+  IWICImagingFactory_GUID = LibC::GUID.new("ec5ec8a9-c395-4314-9c77-54d7a935ff70")
+  CLSID_IWICImagingFactory = "ec5ec8a9-c395-4314-9c77-54d7a935ff70"
   struct IWICImagingFactory
     lpVtbl : IWICImagingFactoryVTbl*
   end
@@ -1530,6 +1598,8 @@ lib LibWin32
     notify : Proc(IWICDevelopRawNotificationCallback*, UInt32, HRESULT)
   end
 
+  IWICDevelopRawNotificationCallback_GUID = LibC::GUID.new("95c75a6e-3e8c-4ec2-85a8-aebcc551e59b")
+  CLSID_IWICDevelopRawNotificationCallback = "95c75a6e-3e8c-4ec2-85a8-aebcc551e59b"
   struct IWICDevelopRawNotificationCallback
     lpVtbl : IWICDevelopRawNotificationCallbackVTbl*
   end
@@ -1580,6 +1650,8 @@ lib LibWin32
     set_notification_callback : Proc(IWICDevelopRaw*, IWICDevelopRawNotificationCallback, HRESULT)
   end
 
+  IWICDevelopRaw_GUID = LibC::GUID.new("fbec5e44-f7be-4b65-b7f8-c0c81fef026d")
+  CLSID_IWICDevelopRaw = "fbec5e44-f7be-4b65-b7f8-c0c81fef026d"
   struct IWICDevelopRaw
     lpVtbl : IWICDevelopRawVTbl*
   end
@@ -1592,6 +1664,8 @@ lib LibWin32
     get_frame : Proc(IWICDdsDecoder*, UInt32, UInt32, UInt32, IWICBitmapFrameDecode*, HRESULT)
   end
 
+  IWICDdsDecoder_GUID = LibC::GUID.new("409cd537-8532-40cb-9774-e2feb2df4e9c")
+  CLSID_IWICDdsDecoder = "409cd537-8532-40cb-9774-e2feb2df4e9c"
   struct IWICDdsDecoder
     lpVtbl : IWICDdsDecoderVTbl*
   end
@@ -1605,6 +1679,8 @@ lib LibWin32
     create_new_frame : Proc(IWICDdsEncoder*, IWICBitmapFrameEncode*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
+  IWICDdsEncoder_GUID = LibC::GUID.new("5cacdb4c-407e-41b3-b936-d0f010cd6732")
+  CLSID_IWICDdsEncoder = "5cacdb4c-407e-41b3-b936-d0f010cd6732"
   struct IWICDdsEncoder
     lpVtbl : IWICDdsEncoderVTbl*
   end
@@ -1618,6 +1694,8 @@ lib LibWin32
     copy_blocks : Proc(IWICDdsFrameDecode*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
   end
 
+  IWICDdsFrameDecode_GUID = LibC::GUID.new("3d4c0c61-18a4-41e4-bd80-481a4fc9f464")
+  CLSID_IWICDdsFrameDecode = "3d4c0c61-18a4-41e4-bd80-481a4fc9f464"
   struct IWICDdsFrameDecode
     lpVtbl : IWICDdsFrameDecodeVTbl*
   end
@@ -1638,6 +1716,8 @@ lib LibWin32
     copy_minimal_stream : Proc(IWICJpegFrameDecode*, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
+  IWICJpegFrameDecode_GUID = LibC::GUID.new("8939f66e-c46a-4c21-a9d1-98b327ce1679")
+  CLSID_IWICJpegFrameDecode = "8939f66e-c46a-4c21-a9d1-98b327ce1679"
   struct IWICJpegFrameDecode
     lpVtbl : IWICJpegFrameDecodeVTbl*
   end
@@ -1652,6 +1732,8 @@ lib LibWin32
     write_scan : Proc(IWICJpegFrameEncode*, UInt32, UInt8*, HRESULT)
   end
 
+  IWICJpegFrameEncode_GUID = LibC::GUID.new("2f0c601f-d2c6-468c-abfa-49495d983ed1")
+  CLSID_IWICJpegFrameEncode = "2f0c601f-d2c6-468c-abfa-49495d983ed1"
   struct IWICJpegFrameEncode
     lpVtbl : IWICJpegFrameEncodeVTbl*
   end
@@ -1666,6 +1748,8 @@ lib LibWin32
     get_enumerator : Proc(IWICMetadataBlockReader*, IEnumUnknown*, HRESULT)
   end
 
+  IWICMetadataBlockReader_GUID = LibC::GUID.new("feaa2a8d-b3f3-43e4-b25c-d1de990a1ae1")
+  CLSID_IWICMetadataBlockReader = "feaa2a8d-b3f3-43e4-b25c-d1de990a1ae1"
   struct IWICMetadataBlockReader
     lpVtbl : IWICMetadataBlockReaderVTbl*
   end
@@ -1685,6 +1769,8 @@ lib LibWin32
     remove_writer_by_index : Proc(IWICMetadataBlockWriter*, UInt32, HRESULT)
   end
 
+  IWICMetadataBlockWriter_GUID = LibC::GUID.new("08fb9676-b444-41e8-8dbe-6a53a542bff1")
+  CLSID_IWICMetadataBlockWriter = "08fb9676-b444-41e8-8dbe-6a53a542bff1"
   struct IWICMetadataBlockWriter
     lpVtbl : IWICMetadataBlockWriterVTbl*
   end
@@ -1701,6 +1787,8 @@ lib LibWin32
     get_enumerator : Proc(IWICMetadataReader*, IWICEnumMetadataItem*, HRESULT)
   end
 
+  IWICMetadataReader_GUID = LibC::GUID.new("9204fe99-d8fc-4fd5-a001-9536b067a899")
+  CLSID_IWICMetadataReader = "9204fe99-d8fc-4fd5-a001-9536b067a899"
   struct IWICMetadataReader
     lpVtbl : IWICMetadataReaderVTbl*
   end
@@ -1721,6 +1809,8 @@ lib LibWin32
     remove_value_by_index : Proc(IWICMetadataWriter*, UInt32, HRESULT)
   end
 
+  IWICMetadataWriter_GUID = LibC::GUID.new("f7836e16-3be0-470b-86bb-160d0aecd7de")
+  CLSID_IWICMetadataWriter = "f7836e16-3be0-470b-86bb-160d0aecd7de"
   struct IWICMetadataWriter
     lpVtbl : IWICMetadataWriterVTbl*
   end
@@ -1735,6 +1825,8 @@ lib LibWin32
     refresh_stream : Proc(IWICStreamProvider*, HRESULT)
   end
 
+  IWICStreamProvider_GUID = LibC::GUID.new("449494bc-b468-4927-96d7-ba90d31ab505")
+  CLSID_IWICStreamProvider = "449494bc-b468-4927-96d7-ba90d31ab505"
   struct IWICStreamProvider
     lpVtbl : IWICStreamProviderVTbl*
   end
@@ -1752,6 +1844,8 @@ lib LibWin32
     save_ex : Proc(IWICPersistStream*, IStream, UInt32, LibC::BOOL, HRESULT)
   end
 
+  IWICPersistStream_GUID = LibC::GUID.new("00675040-6908-45f8-86a3-49c7dfd6d9ad")
+  CLSID_IWICPersistStream = "00675040-6908-45f8-86a3-49c7dfd6d9ad"
   struct IWICPersistStream
     lpVtbl : IWICPersistStreamVTbl*
   end
@@ -1777,6 +1871,8 @@ lib LibWin32
     does_require_fixed_size : Proc(IWICMetadataHandlerInfo*, LibC::BOOL*, HRESULT)
   end
 
+  IWICMetadataHandlerInfo_GUID = LibC::GUID.new("aba958bf-c672-44d1-8d61-ce6df2e682c2")
+  CLSID_IWICMetadataHandlerInfo = "aba958bf-c672-44d1-8d61-ce6df2e682c2"
   struct IWICMetadataHandlerInfo
     lpVtbl : IWICMetadataHandlerInfoVTbl*
   end
@@ -1805,6 +1901,8 @@ lib LibWin32
     create_instance : Proc(IWICMetadataReaderInfo*, IWICMetadataReader*, HRESULT)
   end
 
+  IWICMetadataReaderInfo_GUID = LibC::GUID.new("eebf1f5b-07c1-4447-a3ab-22acaf78a804")
+  CLSID_IWICMetadataReaderInfo = "eebf1f5b-07c1-4447-a3ab-22acaf78a804"
   struct IWICMetadataReaderInfo
     lpVtbl : IWICMetadataReaderInfoVTbl*
   end
@@ -1832,6 +1930,8 @@ lib LibWin32
     create_instance : Proc(IWICMetadataWriterInfo*, IWICMetadataWriter*, HRESULT)
   end
 
+  IWICMetadataWriterInfo_GUID = LibC::GUID.new("b22e3fba-3925-4323-b5c1-9ebfc430f236")
+  CLSID_IWICMetadataWriterInfo = "b22e3fba-3925-4323-b5c1-9ebfc430f236"
   struct IWICMetadataWriterInfo
     lpVtbl : IWICMetadataWriterInfoVTbl*
   end
@@ -1874,6 +1974,8 @@ lib LibWin32
     create_encoder_property_bag : Proc(IWICComponentFactory*, PROPBAG2*, UInt32, IPropertyBag2*, HRESULT)
   end
 
+  IWICComponentFactory_GUID = LibC::GUID.new("412d0c3a-9650-44fa-af5b-dd2a06c8e8fb")
+  CLSID_IWICComponentFactory = "412d0c3a-9650-44fa-af5b-dd2a06c8e8fb"
   struct IWICComponentFactory
     lpVtbl : IWICComponentFactoryVTbl*
   end

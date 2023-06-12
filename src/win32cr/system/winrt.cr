@@ -138,6 +138,8 @@ lib LibWin32
     resolve : Proc(IAgileReference*, Guid*, Void**, HRESULT)
   end
 
+  IAgileReference_GUID = LibC::GUID.new("c03f6a43-65a4-9818-987e-e0b810d2a6f2")
+  CLSID_IAgileReference = "c03f6a43-65a4-9818-987e-e0b810d2a6f2"
   struct IAgileReference
     lpVtbl : IAgileReferenceVTbl*
   end
@@ -149,6 +151,8 @@ lib LibWin32
     on_uninitialize : Proc(IApartmentShutdown*, UInt64, Void)
   end
 
+  IApartmentShutdown_GUID = LibC::GUID.new("a2f05a09-27a2-42b5-bc0e-ac163ef49d9b")
+  CLSID_IApartmentShutdown = "a2f05a09-27a2-42b5-bc0e-ac163ef49d9b"
   struct IApartmentShutdown
     lpVtbl : IApartmentShutdownVTbl*
   end
@@ -163,6 +167,8 @@ lib LibWin32
     get_for_window : Proc(ISpatialInteractionManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  ISpatialInteractionManagerInterop_GUID = LibC::GUID.new("5c4ee536-6a98-4b86-a170-587013d6fd4b")
+  CLSID_ISpatialInteractionManagerInterop = "5c4ee536-6a98-4b86-a170-587013d6fd4b"
   struct ISpatialInteractionManagerInterop
     lpVtbl : ISpatialInteractionManagerInteropVTbl*
   end
@@ -177,6 +183,8 @@ lib LibWin32
     create_for_window : Proc(IHolographicSpaceInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IHolographicSpaceInterop_GUID = LibC::GUID.new("5c4ee536-6a98-4b86-a170-587013d6fd4b")
+  CLSID_IHolographicSpaceInterop = "5c4ee536-6a98-4b86-a170-587013d6fd4b"
   struct IHolographicSpaceInterop
     lpVtbl : IHolographicSpaceInteropVTbl*
   end
@@ -190,6 +198,8 @@ lib LibWin32
     get_trust_level : Proc(IInspectable*, TrustLevel*, HRESULT)
   end
 
+  IInspectable_GUID = LibC::GUID.new("af86e2e0-b12d-4c6a-9c5a-d7aa65101e90")
+  CLSID_IInspectable = "af86e2e0-b12d-4c6a-9c5a-d7aa65101e90"
   struct IInspectable
     lpVtbl : IInspectableVTbl*
   end
@@ -206,6 +216,8 @@ lib LibWin32
     show_add_account_for_window_async : Proc(IAccountsSettingsPaneInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IAccountsSettingsPaneInterop_GUID = LibC::GUID.new("d3ee12ad-3865-4362-9746-b75a682df0e6")
+  CLSID_IAccountsSettingsPaneInterop = "d3ee12ad-3865-4362-9746-b75a682df0e6"
   struct IAccountsSettingsPaneInterop
     lpVtbl : IAccountsSettingsPaneInteropVTbl*
   end
@@ -217,6 +229,8 @@ lib LibWin32
     open_for_extended_execution_async : Proc(IAppServiceConnectionExtendedExecution*, Guid*, Void**, HRESULT)
   end
 
+  IAppServiceConnectionExtendedExecution_GUID = LibC::GUID.new("65219584-f9cb-4ae3-81f9-a28a6ca450d9")
+  CLSID_IAppServiceConnectionExtendedExecution = "65219584-f9cb-4ae3-81f9-a28a6ca450d9"
   struct IAppServiceConnectionExtendedExecution
     lpVtbl : IAppServiceConnectionExtendedExecutionVTbl*
   end
@@ -228,6 +242,8 @@ lib LibWin32
     get_correlation_vector : Proc(ICorrelationVectorSource*, HSTRING*, HRESULT)
   end
 
+  ICorrelationVectorSource_GUID = LibC::GUID.new("152b8a3b-b9b9-4685-b56e-974847bc7545")
+  CLSID_ICorrelationVectorSource = "152b8a3b-b9b9-4685-b56e-974847bc7545"
   struct ICorrelationVectorSource
     lpVtbl : ICorrelationVectorSourceVTbl*
   end
@@ -240,6 +256,8 @@ lib LibWin32
     on_error : Proc(ICastingEventHandler*, CASTING_CONNECTION_ERROR_STATUS, LibC::LPWSTR, HRESULT)
   end
 
+  ICastingEventHandler_GUID = LibC::GUID.new("c79a6cb7-bebd-47a6-a2ad-4d45ad79c7bc")
+  CLSID_ICastingEventHandler = "c79a6cb7-bebd-47a6-a2ad-4d45ad79c7bc"
   struct ICastingEventHandler
     lpVtbl : ICastingEventHandlerVTbl*
   end
@@ -255,6 +273,8 @@ lib LibWin32
     un_advise : Proc(ICastingController*, UInt32, HRESULT)
   end
 
+  ICastingController_GUID = LibC::GUID.new("f0a56423-a664-4fbd-8b43-409a45e8d9a1")
+  CLSID_ICastingController = "f0a56423-a664-4fbd-8b43-409a45e8d9a1"
   struct ICastingController
     lpVtbl : ICastingControllerVTbl*
   end
@@ -267,6 +287,8 @@ lib LibWin32
     get_properties : Proc(ICastingSourceInfo*, INamedPropertyStore*, HRESULT)
   end
 
+  ICastingSourceInfo_GUID = LibC::GUID.new("45101ab7-7c3a-4bce-9500-12c09024b298")
+  CLSID_ICastingSourceInfo = "45101ab7-7c3a-4bce-9500-12c09024b298"
   struct ICastingSourceInfo
     lpVtbl : ICastingSourceInfoVTbl*
   end
@@ -281,6 +303,8 @@ lib LibWin32
     get_for_window : Proc(IDragDropManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IDragDropManagerInterop_GUID = LibC::GUID.new("5ad8cba7-4c01-4dac-9074-827894292d63")
+  CLSID_IDragDropManagerInterop = "5ad8cba7-4c01-4dac-9074-827894292d63"
   struct IDragDropManagerInterop
     lpVtbl : IDragDropManagerInteropVTbl*
   end
@@ -295,6 +319,8 @@ lib LibWin32
     get_for_window : Proc(IInputPaneInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IInputPaneInterop_GUID = LibC::GUID.new("75cf2c57-9195-4931-8332-f0b409e916af")
+  CLSID_IInputPaneInterop = "75cf2c57-9195-4931-8332-f0b409e916af"
   struct IInputPaneInterop
     lpVtbl : IInputPaneInteropVTbl*
   end
@@ -310,6 +336,8 @@ lib LibWin32
     show_play_to_ui_for_window : Proc(IPlayToManagerInterop*, LibC::HANDLE, HRESULT)
   end
 
+  IPlayToManagerInterop_GUID = LibC::GUID.new("24394699-1f2c-4eb3-8cd7-0ec1da42a540")
+  CLSID_IPlayToManagerInterop = "24394699-1f2c-4eb3-8cd7-0ec1da42a540"
   struct IPlayToManagerInterop
     lpVtbl : IPlayToManagerInteropVTbl*
   end
@@ -326,6 +354,8 @@ lib LibWin32
     put_next_correlation_vector_for_thread : Proc(ICorrelationVectorInformation*, HSTRING, HRESULT)
   end
 
+  ICorrelationVectorInformation_GUID = LibC::GUID.new("83c78b3c-d88b-4950-aa6e-22b8d22aabd3")
+  CLSID_ICorrelationVectorInformation = "83c78b3c-d88b-4950-aa6e-22b8d22aabd3"
   struct ICorrelationVectorInformation
     lpVtbl : ICorrelationVectorInformationVTbl*
   end
@@ -340,6 +370,8 @@ lib LibWin32
     get_for_window : Proc(IUIViewSettingsInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IUIViewSettingsInterop_GUID = LibC::GUID.new("3694dbf9-8f68-44be-8ff5-195c98ede8a6")
+  CLSID_IUIViewSettingsInterop = "3694dbf9-8f68-44be-8ff5-195c98ede8a6"
   struct IUIViewSettingsInterop
     lpVtbl : IUIViewSettingsInteropVTbl*
   end
@@ -354,6 +386,8 @@ lib LibWin32
     create_session_for_window : Proc(IUserActivityInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IUserActivityInterop_GUID = LibC::GUID.new("1ade314d-0e0a-40d9-824c-9a088a50059f")
+  CLSID_IUserActivityInterop = "1ade314d-0e0a-40d9-824c-9a088a50059f"
   struct IUserActivityInterop
     lpVtbl : IUserActivityInteropVTbl*
   end
@@ -368,6 +402,8 @@ lib LibWin32
     set_activity_source_host : Proc(IUserActivitySourceHostInterop*, HSTRING, HRESULT)
   end
 
+  IUserActivitySourceHostInterop_GUID = LibC::GUID.new("c15df8bc-8844-487a-b85b-7578e0f61419")
+  CLSID_IUserActivitySourceHostInterop = "c15df8bc-8844-487a-b85b-7578e0f61419"
   struct IUserActivitySourceHostInterop
     lpVtbl : IUserActivitySourceHostInteropVTbl*
   end
@@ -382,6 +418,8 @@ lib LibWin32
     get_for_window : Proc(IUserActivityRequestManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IUserActivityRequestManagerInterop_GUID = LibC::GUID.new("dd69f876-9699-4715-9095-e37ea30dfa1b")
+  CLSID_IUserActivityRequestManagerInterop = "dd69f876-9699-4715-9095-e37ea30dfa1b"
   struct IUserActivityRequestManagerInterop
     lpVtbl : IUserActivityRequestManagerInteropVTbl*
   end
@@ -396,6 +434,8 @@ lib LibWin32
     request_verification_for_window_async : Proc(IUserConsentVerifierInterop*, LibC::HANDLE, HSTRING, Guid*, Void**, HRESULT)
   end
 
+  IUserConsentVerifierInterop_GUID = LibC::GUID.new("39e050c3-4e74-441a-8dc0-b81104df949c")
+  CLSID_IUserConsentVerifierInterop = "39e050c3-4e74-441a-8dc0-b81104df949c"
   struct IUserConsentVerifierInterop
     lpVtbl : IUserConsentVerifierInteropVTbl*
   end
@@ -411,6 +451,8 @@ lib LibWin32
     request_token_with_web_account_for_window_async : Proc(IWebAuthenticationCoreManagerInterop*, LibC::HANDLE, IInspectable, IInspectable, Guid*, Void**, HRESULT)
   end
 
+  IWebAuthenticationCoreManagerInterop_GUID = LibC::GUID.new("f4b8e804-811e-4436-b69c-44cb67b72084")
+  CLSID_IWebAuthenticationCoreManagerInterop = "f4b8e804-811e-4436-b69c-44cb67b72084"
   struct IWebAuthenticationCoreManagerInterop
     lpVtbl : IWebAuthenticationCoreManagerInteropVTbl*
   end
@@ -423,6 +465,8 @@ lib LibWin32
     get_reference : Proc(IRestrictedErrorInfo*, UInt8**, HRESULT)
   end
 
+  IRestrictedErrorInfo_GUID = LibC::GUID.new("82ba7092-4c88-427d-a7bc-16dd93feb67e")
+  CLSID_IRestrictedErrorInfo = "82ba7092-4c88-427d-a7bc-16dd93feb67e"
   struct IRestrictedErrorInfo
     lpVtbl : IRestrictedErrorInfoVTbl*
   end
@@ -434,6 +478,8 @@ lib LibWin32
     get_language_exception : Proc(ILanguageExceptionErrorInfo*, IUnknown*, HRESULT)
   end
 
+  ILanguageExceptionErrorInfo_GUID = LibC::GUID.new("04a2dbf3-df83-116c-0946-0812abf6e07d")
+  CLSID_ILanguageExceptionErrorInfo = "04a2dbf3-df83-116c-0946-0812abf6e07d"
   struct ILanguageExceptionErrorInfo
     lpVtbl : ILanguageExceptionErrorInfoVTbl*
   end
@@ -445,6 +491,8 @@ lib LibWin32
     get_transformed_restricted_error_info : Proc(ILanguageExceptionTransform*, IRestrictedErrorInfo*, HRESULT)
   end
 
+  ILanguageExceptionTransform_GUID = LibC::GUID.new("feb5a271-a6cd-45ce-880a-696706badc65")
+  CLSID_ILanguageExceptionTransform = "feb5a271-a6cd-45ce-880a-696706badc65"
   struct ILanguageExceptionTransform
     lpVtbl : ILanguageExceptionTransformVTbl*
   end
@@ -456,6 +504,8 @@ lib LibWin32
     get_stack_back_trace : Proc(ILanguageExceptionStackBackTrace*, UInt32, LibC::UINT_PTR*, UInt32*, HRESULT)
   end
 
+  ILanguageExceptionStackBackTrace_GUID = LibC::GUID.new("cbe53fb5-f967-4258-8d34-42f5e25833de")
+  CLSID_ILanguageExceptionStackBackTrace = "cbe53fb5-f967-4258-8d34-42f5e25833de"
   struct ILanguageExceptionStackBackTrace
     lpVtbl : ILanguageExceptionStackBackTraceVTbl*
   end
@@ -470,6 +520,8 @@ lib LibWin32
     get_propagation_context_head : Proc(ILanguageExceptionErrorInfo2*, ILanguageExceptionErrorInfo2*, HRESULT)
   end
 
+  ILanguageExceptionErrorInfo2_GUID = LibC::GUID.new("5746e5c4-5b97-424c-b620-2822915734dd")
+  CLSID_ILanguageExceptionErrorInfo2 = "5746e5c4-5b97-424c-b620-2822915734dd"
   struct ILanguageExceptionErrorInfo2
     lpVtbl : ILanguageExceptionErrorInfo2VTbl*
   end
@@ -484,6 +536,8 @@ lib LibWin32
     activate_instance : Proc(IActivationFactory*, IInspectable*, HRESULT)
   end
 
+  IActivationFactory_GUID = LibC::GUID.new("00000035-0000-0000-c000-000000000046")
+  CLSID_IActivationFactory = "00000035-0000-0000-c000-000000000046"
   struct IActivationFactory
     lpVtbl : IActivationFactoryVTbl*
   end
@@ -495,6 +549,8 @@ lib LibWin32
     buffer : Proc(IBufferByteAccess*, UInt8**, HRESULT)
   end
 
+  IBufferByteAccess_GUID = LibC::GUID.new("905a0fef-bc53-11df-8c49-001e4fc686da")
+  CLSID_IBufferByteAccess = "905a0fef-bc53-11df-8c49-001e4fc686da"
   struct IBufferByteAccess
     lpVtbl : IBufferByteAccessVTbl*
   end
@@ -531,6 +587,8 @@ lib LibWin32
     get_buffer : Proc(IMemoryBufferByteAccess*, UInt8**, UInt32*, HRESULT)
   end
 
+  IMemoryBufferByteAccess_GUID = LibC::GUID.new("5b0d3235-4dba-4d44-865e-8f1d0e4fd04d")
+  CLSID_IMemoryBufferByteAccess = "5b0d3235-4dba-4d44-865e-8f1d0e4fd04d"
   struct IMemoryBufferByteAccess
     lpVtbl : IMemoryBufferByteAccessVTbl*
   end
@@ -542,6 +600,8 @@ lib LibWin32
     resolve : Proc(IWeakReference*, Guid*, Void**, HRESULT)
   end
 
+  IWeakReference_GUID = LibC::GUID.new("00000037-0000-0000-c000-000000000046")
+  CLSID_IWeakReference = "00000037-0000-0000-c000-000000000046"
   struct IWeakReference
     lpVtbl : IWeakReferenceVTbl*
   end
@@ -553,6 +613,8 @@ lib LibWin32
     get_weak_reference : Proc(IWeakReferenceSource*, IWeakReference*, HRESULT)
   end
 
+  IWeakReferenceSource_GUID = LibC::GUID.new("00000038-0000-0000-c000-000000000046")
+  CLSID_IWeakReferenceSource = "00000038-0000-0000-c000-000000000046"
   struct IWeakReferenceSource
     lpVtbl : IWeakReferenceSourceVTbl*
   end
@@ -567,6 +629,8 @@ lib LibWin32
     get_for_window : Proc(ISystemMediaTransportControlsInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  ISystemMediaTransportControlsInterop_GUID = LibC::GUID.new("ddb0472d-c911-4a1f-86d9-dc3d71a95f5a")
+  CLSID_ISystemMediaTransportControlsInterop = "ddb0472d-c911-4a1f-86d9-dc3d71a95f5a"
   struct ISystemMediaTransportControlsInterop
     lpVtbl : ISystemMediaTransportControlsInteropVTbl*
   end
@@ -578,6 +642,8 @@ lib LibWin32
     get_window : Proc(IShareWindowCommandEventArgsInterop*, HANDLE*, HRESULT)
   end
 
+  IShareWindowCommandEventArgsInterop_GUID = LibC::GUID.new("6571a721-643d-43d4-aca4-6b6f5f30f1ad")
+  CLSID_IShareWindowCommandEventArgsInterop = "6571a721-643d-43d4-aca4-6b6f5f30f1ad"
   struct IShareWindowCommandEventArgsInterop
     lpVtbl : IShareWindowCommandEventArgsInteropVTbl*
   end
@@ -589,6 +655,8 @@ lib LibWin32
     get_for_window : Proc(IShareWindowCommandSourceInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
+  IShareWindowCommandSourceInterop_GUID = LibC::GUID.new("461a191f-8424-43a6-a0fa-3451a22f56ab")
+  CLSID_IShareWindowCommandSourceInterop = "461a191f-8424-43a6-a0fa-3451a22f56ab"
   struct IShareWindowCommandSourceInterop
     lpVtbl : IShareWindowCommandSourceInteropVTbl*
   end
@@ -603,6 +671,8 @@ lib LibWin32
     pump_messages : Proc(IMessageDispatcher*, HRESULT)
   end
 
+  IMessageDispatcher_GUID = LibC::GUID.new("f5f84c8f-cfd0-4cd6-b66b-c5d26ff1689d")
+  CLSID_IMessageDispatcher = "f5f84c8f-cfd0-4cd6-b66b-c5d26ff1689d"
   struct IMessageDispatcher
     lpVtbl : IMessageDispatcherVTbl*
   end

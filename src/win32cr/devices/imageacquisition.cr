@@ -1361,6 +1361,8 @@ lib LibWin32
     add_device_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, HRESULT)
   end
 
+  IWiaDevMgr_GUID = LibC::GUID.new("5eb2502a-8cf1-11d1-bf92-0060081ed811")
+  CLSID_IWiaDevMgr = "5eb2502a-8cf1-11d1-bf92-0060081ed811"
   struct IWiaDevMgr
     lpVtbl : IWiaDevMgrVTbl*
   end
@@ -1376,6 +1378,8 @@ lib LibWin32
     get_count : Proc(IEnumWIA_DEV_INFO*, UInt32*, HRESULT)
   end
 
+  IEnumWIA_DEV_INFO_GUID = LibC::GUID.new("5e38b83c-8cf1-11d1-bf92-0060081ed811")
+  CLSID_IEnumWIA_DEV_INFO = "5e38b83c-8cf1-11d1-bf92-0060081ed811"
   struct IEnumWIA_DEV_INFO
     lpVtbl : IEnumWIA_DEV_INFOVTbl*
   end
@@ -1387,6 +1391,8 @@ lib LibWin32
     image_event_callback : Proc(IWiaEventCallback*, Guid*, UInt8*, UInt8*, UInt8*, UInt32, UInt8*, UInt32*, UInt32, HRESULT)
   end
 
+  IWiaEventCallback_GUID = LibC::GUID.new("ae6287b0-0084-11d2-973b-00a0c9068f2e")
+  CLSID_IWiaEventCallback = "ae6287b0-0084-11d2-973b-00a0c9068f2e"
   struct IWiaEventCallback
     lpVtbl : IWiaEventCallbackVTbl*
   end
@@ -1398,6 +1404,8 @@ lib LibWin32
     banded_data_callback : Proc(IWiaDataCallback*, Int32, Int32, Int32, Int32, Int32, Int32, Int32, UInt8*, HRESULT)
   end
 
+  IWiaDataCallback_GUID = LibC::GUID.new("a558a866-a5b0-11d2-a08f-00c04f72dc3c")
+  CLSID_IWiaDataCallback = "a558a866-a5b0-11d2-a08f-00c04f72dc3c"
   struct IWiaDataCallback
     lpVtbl : IWiaDataCallbackVTbl*
   end
@@ -1413,6 +1421,8 @@ lib LibWin32
     idt_get_extended_transfer_info : Proc(IWiaDataTransfer*, WIA_EXTENDED_TRANSFER_INFO*, HRESULT)
   end
 
+  IWiaDataTransfer_GUID = LibC::GUID.new("a6cef998-a5b0-11d2-a08f-00c04f72dc3c")
+  CLSID_IWiaDataTransfer = "a6cef998-a5b0-11d2-a08f-00c04f72dc3c"
   struct IWiaDataTransfer
     lpVtbl : IWiaDataTransferVTbl*
   end
@@ -1438,6 +1448,8 @@ lib LibWin32
     diagnostic : Proc(IWiaItem*, UInt32, UInt8*, HRESULT)
   end
 
+  IWiaItem_GUID = LibC::GUID.new("4db1ad10-3391-11d2-9a33-00c04fa36145")
+  CLSID_IWiaItem = "4db1ad10-3391-11d2-9a33-00c04fa36145"
   struct IWiaItem
     lpVtbl : IWiaItemVTbl*
   end
@@ -1464,6 +1476,8 @@ lib LibWin32
     set_property_stream : Proc(IWiaPropertyStorage*, Guid*, IStream, HRESULT)
   end
 
+  IWiaPropertyStorage_GUID = LibC::GUID.new("98b5e8a0-29cc-491a-aac0-e6db4fdcceb6")
+  CLSID_IWiaPropertyStorage = "98b5e8a0-29cc-491a-aac0-e6db4fdcceb6"
   struct IWiaPropertyStorage
     lpVtbl : IWiaPropertyStorageVTbl*
   end
@@ -1479,6 +1493,8 @@ lib LibWin32
     get_count : Proc(IEnumWiaItem*, UInt32*, HRESULT)
   end
 
+  IEnumWiaItem_GUID = LibC::GUID.new("5e8383fc-3391-11d2-9a33-00c04fa36145")
+  CLSID_IEnumWiaItem = "5e8383fc-3391-11d2-9a33-00c04fa36145"
   struct IEnumWiaItem
     lpVtbl : IEnumWiaItemVTbl*
   end
@@ -1494,6 +1510,8 @@ lib LibWin32
     get_count : Proc(IEnumWIA_DEV_CAPS*, UInt32*, HRESULT)
   end
 
+  IEnumWIA_DEV_CAPS_GUID = LibC::GUID.new("1fcc4287-aca6-11d2-a093-00c04f72dc3c")
+  CLSID_IEnumWIA_DEV_CAPS = "1fcc4287-aca6-11d2-a093-00c04f72dc3c"
   struct IEnumWIA_DEV_CAPS
     lpVtbl : IEnumWIA_DEV_CAPSVTbl*
   end
@@ -1509,6 +1527,8 @@ lib LibWin32
     get_count : Proc(IEnumWIA_FORMAT_INFO*, UInt32*, HRESULT)
   end
 
+  IEnumWIA_FORMAT_INFO_GUID = LibC::GUID.new("81befc5b-656d-44f1-b24c-d41d51b4dc81")
+  CLSID_IEnumWIA_FORMAT_INFO = "81befc5b-656d-44f1-b24c-d41d51b4dc81"
   struct IEnumWIA_FORMAT_INFO
     lpVtbl : IEnumWIA_FORMAT_INFOVTbl*
   end
@@ -1522,6 +1542,8 @@ lib LibWin32
     log : Proc(IWiaLog*, Int32, Int32, Int32, UInt8*, HRESULT)
   end
 
+  IWiaLog_GUID = LibC::GUID.new("a00c10b6-82a1-452f-8b6c-86062aad6890")
+  CLSID_IWiaLog = "a00c10b6-82a1-452f-8b6c-86062aad6890"
   struct IWiaLog
     lpVtbl : IWiaLogVTbl*
   end
@@ -1537,6 +1559,8 @@ lib LibWin32
     log_ex : Proc(IWiaLogEx*, Int32, Int32, Int32, Int32, UInt8*, HRESULT)
   end
 
+  IWiaLogEx_GUID = LibC::GUID.new("af1f22ac-7a40-4787-b421-aeb47a1fbd0b")
+  CLSID_IWiaLogEx = "af1f22ac-7a40-4787-b421-aeb47a1fbd0b"
   struct IWiaLogEx
     lpVtbl : IWiaLogExVTbl*
   end
@@ -1548,6 +1572,8 @@ lib LibWin32
     new_device_arrival : Proc(IWiaNotifyDevMgr*, HRESULT)
   end
 
+  IWiaNotifyDevMgr_GUID = LibC::GUID.new("70681ea0-e7bf-4291-9fb1-4e8813a3f78e")
+  CLSID_IWiaNotifyDevMgr = "70681ea0-e7bf-4291-9fb1-4e8813a3f78e"
   struct IWiaNotifyDevMgr
     lpVtbl : IWiaNotifyDevMgrVTbl*
   end
@@ -1561,6 +1587,8 @@ lib LibWin32
     cancel_pending_io : Proc(IWiaItemExtras*, HRESULT)
   end
 
+  IWiaItemExtras_GUID = LibC::GUID.new("6291ef2c-36ef-4532-876a-8e132593778d")
+  CLSID_IWiaItemExtras = "6291ef2c-36ef-4532-876a-8e132593778d"
   struct IWiaItemExtras
     lpVtbl : IWiaItemExtrasVTbl*
   end
@@ -1573,6 +1601,8 @@ lib LibWin32
     report_status : Proc(IWiaAppErrorHandler*, Int32, IWiaItem2, HRESULT, Int32, HRESULT)
   end
 
+  IWiaAppErrorHandler_GUID = LibC::GUID.new("6c16186c-d0a6-400c-80f4-d26986a0e734")
+  CLSID_IWiaAppErrorHandler = "6c16186c-d0a6-400c-80f4-d26986a0e734"
   struct IWiaAppErrorHandler
     lpVtbl : IWiaAppErrorHandlerVTbl*
   end
@@ -1585,6 +1615,8 @@ lib LibWin32
     get_status_description : Proc(IWiaErrorHandler*, Int32, IWiaItem2, HRESULT, UInt8**, HRESULT)
   end
 
+  IWiaErrorHandler_GUID = LibC::GUID.new("0e4a51b1-bc1f-443d-a835-72e890759ef3")
+  CLSID_IWiaErrorHandler = "0e4a51b1-bc1f-443d-a835-72e890759ef3"
   struct IWiaErrorHandler
     lpVtbl : IWiaErrorHandlerVTbl*
   end
@@ -1599,6 +1631,8 @@ lib LibWin32
     enum_wia_format_info : Proc(IWiaTransfer*, IEnumWIA_FORMAT_INFO*, HRESULT)
   end
 
+  IWiaTransfer_GUID = LibC::GUID.new("c39d6942-2f4e-4d04-92fe-4ef4d3a1de5a")
+  CLSID_IWiaTransfer = "c39d6942-2f4e-4d04-92fe-4ef4d3a1de5a"
   struct IWiaTransfer
     lpVtbl : IWiaTransferVTbl*
   end
@@ -1611,6 +1645,8 @@ lib LibWin32
     get_next_stream : Proc(IWiaTransferCallback*, Int32, UInt8*, UInt8*, IStream*, HRESULT)
   end
 
+  IWiaTransferCallback_GUID = LibC::GUID.new("27d4eaaf-28a6-4ca5-9aab-e678168b9527")
+  CLSID_IWiaTransferCallback = "27d4eaaf-28a6-4ca5-9aab-e678168b9527"
   struct IWiaTransferCallback
     lpVtbl : IWiaTransferCallbackVTbl*
   end
@@ -1622,6 +1658,8 @@ lib LibWin32
     detect_regions : Proc(IWiaSegmentationFilter*, Int32, IStream, IWiaItem2, HRESULT)
   end
 
+  IWiaSegmentationFilter_GUID = LibC::GUID.new("ec46a697-ac04-4447-8f65-ff63d5154b21")
+  CLSID_IWiaSegmentationFilter = "ec46a697-ac04-4447-8f65-ff63d5154b21"
   struct IWiaSegmentationFilter
     lpVtbl : IWiaSegmentationFilterVTbl*
   end
@@ -1636,6 +1674,8 @@ lib LibWin32
     apply_properties : Proc(IWiaImageFilter*, IWiaPropertyStorage, HRESULT)
   end
 
+  IWiaImageFilter_GUID = LibC::GUID.new("a8a79ffa-450b-41f1-8f87-849ccd94ebf6")
+  CLSID_IWiaImageFilter = "a8a79ffa-450b-41f1-8f87-849ccd94ebf6"
   struct IWiaImageFilter
     lpVtbl : IWiaImageFilterVTbl*
   end
@@ -1650,6 +1690,8 @@ lib LibWin32
     clear : Proc(IWiaPreview*, HRESULT)
   end
 
+  IWiaPreview_GUID = LibC::GUID.new("95c2b4fd-33f2-4d86-ad40-9431f0df08f7")
+  CLSID_IWiaPreview = "95c2b4fd-33f2-4d86-ad40-9431f0df08f7"
   struct IWiaPreview
     lpVtbl : IWiaPreviewVTbl*
   end
@@ -1665,6 +1707,8 @@ lib LibWin32
     get_count : Proc(IEnumWiaItem2*, UInt32*, HRESULT)
   end
 
+  IEnumWiaItem2_GUID = LibC::GUID.new("59970af4-cd0d-44d9-ab24-52295630e582")
+  CLSID_IEnumWiaItem2 = "59970af4-cd0d-44d9-ab24-52295630e582"
   struct IEnumWiaItem2
     lpVtbl : IEnumWiaItem2VTbl*
   end
@@ -1691,6 +1735,8 @@ lib LibWin32
     diagnostic : Proc(IWiaItem2*, UInt32, UInt8*, HRESULT)
   end
 
+  IWiaItem2_GUID = LibC::GUID.new("6cba0075-1287-407d-9b77-cf0e030435cc")
+  CLSID_IWiaItem2 = "6cba0075-1287-407d-9b77-cf0e030435cc"
   struct IWiaItem2
     lpVtbl : IWiaItem2VTbl*
   end
@@ -1709,6 +1755,8 @@ lib LibWin32
     get_image_dlg : Proc(IWiaDevMgr2*, Int32, UInt8*, LibC::HANDLE, UInt8*, UInt8*, Int32*, UInt8***, IWiaItem2*, HRESULT)
   end
 
+  IWiaDevMgr2_GUID = LibC::GUID.new("79c07cf1-cbdd-41ee-8ec3-f00080cada7a")
+  CLSID_IWiaDevMgr2 = "79c07cf1-cbdd-41ee-8ec3-f00080cada7a"
   struct IWiaDevMgr2
     lpVtbl : IWiaDevMgr2VTbl*
   end
@@ -1736,6 +1784,8 @@ lib LibWin32
     drv_un_initialize_wia : Proc(IWiaMiniDrv*, UInt8*, HRESULT)
   end
 
+  IWiaMiniDrv_GUID = LibC::GUID.new("d8cdee14-3c6c-11d2-9a35-00c04fa36145")
+  CLSID_IWiaMiniDrv = "d8cdee14-3c6c-11d2-9a35-00c04fa36145"
   struct IWiaMiniDrv
     lpVtbl : IWiaMiniDrvVTbl*
   end
@@ -1747,6 +1797,8 @@ lib LibWin32
     mini_drv_callback : Proc(IWiaMiniDrvCallBack*, Int32, Int32, Int32, Int32, Int32, MINIDRV_TRANSFER_CONTEXT*, Int32, HRESULT)
   end
 
+  IWiaMiniDrvCallBack_GUID = LibC::GUID.new("33a57d5a-3de8-11d2-9a36-00c04fa36145")
+  CLSID_IWiaMiniDrvCallBack = "33a57d5a-3de8-11d2-9a36-00c04fa36145"
   struct IWiaMiniDrvCallBack
     lpVtbl : IWiaMiniDrvCallBackVTbl*
   end
@@ -1759,6 +1811,8 @@ lib LibWin32
     send_message : Proc(IWiaMiniDrvTransferCallback*, Int32, WiaTransferParams*, HRESULT)
   end
 
+  IWiaMiniDrvTransferCallback_GUID = LibC::GUID.new("a9d2ee89-2ce5-4ff0-8adb-c961d1d774ca")
+  CLSID_IWiaMiniDrvTransferCallback = "a9d2ee89-2ce5-4ff0-8adb-c961d1d774ca"
   struct IWiaMiniDrvTransferCallback
     lpVtbl : IWiaMiniDrvTransferCallbackVTbl*
   end
@@ -1782,6 +1836,8 @@ lib LibWin32
     dump_item_data : Proc(IWiaDrvItem*, UInt8**, HRESULT)
   end
 
+  IWiaDrvItem_GUID = LibC::GUID.new("1f02b5c5-b00c-11d2-a094-00c04f72dc3c")
+  CLSID_IWiaDrvItem = "1f02b5c5-b00c-11d2-a094-00c04f72dc3c"
   struct IWiaDrvItem
     lpVtbl : IWiaDrvItemVTbl*
   end
@@ -1805,6 +1861,8 @@ lib LibWin32
     get_current_state : Proc(IWiaVideo*, WIAVIDEO_STATE*, HRESULT)
   end
 
+  IWiaVideo_GUID = LibC::GUID.new("d52920aa-db88-41f0-946c-e00dc0a19cfa")
+  CLSID_IWiaVideo = "d52920aa-db88-41f0-946c-e00dc0a19cfa"
   struct IWiaVideo
     lpVtbl : IWiaVideoVTbl*
   end
@@ -1817,6 +1875,8 @@ lib LibWin32
     get_device_icon : Proc(IWiaUIExtension2*, UInt8*, HANDLE*, UInt32, HRESULT)
   end
 
+  IWiaUIExtension2_GUID = LibC::GUID.new("305600d7-5088-46d7-9a15-b77b09cdba7a")
+  CLSID_IWiaUIExtension2 = "305600d7-5088-46d7-9a15-b77b09cdba7a"
   struct IWiaUIExtension2
     lpVtbl : IWiaUIExtension2VTbl*
   end
@@ -1830,6 +1890,8 @@ lib LibWin32
     get_device_bitmap_logo : Proc(IWiaUIExtension*, UInt8*, HBITMAP*, UInt32, UInt32, HRESULT)
   end
 
+  IWiaUIExtension_GUID = LibC::GUID.new("da319113-50ee-4c80-b460-57d005d44a2c")
+  CLSID_IWiaUIExtension = "da319113-50ee-4c80-b460-57d005d44a2c"
   struct IWiaUIExtension
     lpVtbl : IWiaUIExtensionVTbl*
   end

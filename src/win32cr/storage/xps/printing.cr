@@ -63,6 +63,8 @@ lib LibWin32
     close : Proc(IXpsPrintJobStream*, HRESULT)
   end
 
+  IXpsPrintJobStream_GUID = LibC::GUID.new("7a77dc5f-45d6-4dff-9307-d8cb846347ca")
+  CLSID_IXpsPrintJobStream = "7a77dc5f-45d6-4dff-9307-d8cb846347ca"
   struct IXpsPrintJobStream
     lpVtbl : IXpsPrintJobStreamVTbl*
   end
@@ -75,6 +77,8 @@ lib LibWin32
     get_job_status : Proc(IXpsPrintJob*, XPS_JOB_STATUS*, HRESULT)
   end
 
+  IXpsPrintJob_GUID = LibC::GUID.new("5ab89b06-8194-425f-ab3b-d7a96e350161")
+  CLSID_IXpsPrintJob = "5ab89b06-8194-425f-ab3b-d7a96e350161"
   struct IXpsPrintJob
     lpVtbl : IXpsPrintJobVTbl*
   end
@@ -88,6 +92,8 @@ lib LibWin32
     cancel : Proc(IPrintDocumentPackageTarget*, HRESULT)
   end
 
+  IPrintDocumentPackageTarget_GUID = LibC::GUID.new("1b8efec4-3019-4c27-964e-367202156906")
+  CLSID_IPrintDocumentPackageTarget = "1b8efec4-3019-4c27-964e-367202156906"
   struct IPrintDocumentPackageTarget
     lpVtbl : IPrintDocumentPackageTargetVTbl*
   end
@@ -103,6 +109,8 @@ lib LibWin32
     package_status_updated : Proc(IPrintDocumentPackageStatusEvent*, PrintDocumentPackageStatus*, HRESULT)
   end
 
+  IPrintDocumentPackageStatusEvent_GUID = LibC::GUID.new("ed90c8ad-5c34-4d05-a1ec-0e8a9b3ad7af")
+  CLSID_IPrintDocumentPackageStatusEvent = "ed90c8ad-5c34-4d05-a1ec-0e8a9b3ad7af"
   struct IPrintDocumentPackageStatusEvent
     lpVtbl : IPrintDocumentPackageStatusEventVTbl*
   end
@@ -114,6 +122,8 @@ lib LibWin32
     create_document_package_target_for_print_job : Proc(IPrintDocumentPackageTargetFactory*, LibC::LPWSTR, LibC::LPWSTR, IStream, IStream, IPrintDocumentPackageTarget*, HRESULT)
   end
 
+  IPrintDocumentPackageTargetFactory_GUID = LibC::GUID.new("d2959bf7-b31b-4a3d-9600-712eb1335ba4")
+  CLSID_IPrintDocumentPackageTargetFactory = "d2959bf7-b31b-4a3d-9600-712eb1335ba4"
   struct IPrintDocumentPackageTargetFactory
     lpVtbl : IPrintDocumentPackageTargetFactoryVTbl*
   end

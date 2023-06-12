@@ -1736,6 +1736,8 @@ lib LibWin32
     put_acc_value : Proc(IAccessible*, VARIANT, UInt8*, HRESULT)
   end
 
+  IAccessible_GUID = LibC::GUID.new("618736e0-3c3d-11cf-810c-00aa00389b71")
+  CLSID_IAccessible = "618736e0-3c3d-11cf-810c-00aa00389b71"
   struct IAccessible
     lpVtbl : IAccessibleVTbl*
   end
@@ -1747,6 +1749,8 @@ lib LibWin32
     accessible_object_from_id : Proc(IAccessibleHandler*, Int32, Int32, IAccessible*, HRESULT)
   end
 
+  IAccessibleHandler_GUID = LibC::GUID.new("03022430-abc4-11d0-bde2-00aa001a1953")
+  CLSID_IAccessibleHandler = "03022430-abc4-11d0-bde2-00aa001a1953"
   struct IAccessibleHandler
     lpVtbl : IAccessibleHandlerVTbl*
   end
@@ -1761,6 +1765,8 @@ lib LibWin32
     get_parent_accessible : Proc(IAccessibleWindowlessSite*, IAccessible*, HRESULT)
   end
 
+  IAccessibleWindowlessSite_GUID = LibC::GUID.new("bf3abd9c-76da-4389-9eb6-1427d25abab7")
+  CLSID_IAccessibleWindowlessSite = "bf3abd9c-76da-4389-9eb6-1427d25abab7"
   struct IAccessibleWindowlessSite
     lpVtbl : IAccessibleWindowlessSiteVTbl*
   end
@@ -1772,6 +1778,8 @@ lib LibWin32
     get_identity_string : Proc(IAccIdentity*, UInt32, UInt8**, UInt32*, HRESULT)
   end
 
+  IAccIdentity_GUID = LibC::GUID.new("7852b78d-1cfd-41c1-a615-9c0c85960b5f")
+  CLSID_IAccIdentity = "7852b78d-1cfd-41c1-a615-9c0c85960b5f"
   struct IAccIdentity
     lpVtbl : IAccIdentityVTbl*
   end
@@ -1783,6 +1791,8 @@ lib LibWin32
     get_prop_value : Proc(IAccPropServer*, UInt8*, UInt32, Guid, VARIANT*, LibC::BOOL*, HRESULT)
   end
 
+  IAccPropServer_GUID = LibC::GUID.new("76c0dbbb-15e0-4e7b-b61b-20eeea2001e0")
+  CLSID_IAccPropServer = "76c0dbbb-15e0-4e7b-b61b-20eeea2001e0"
   struct IAccPropServer
     lpVtbl : IAccPropServerVTbl*
   end
@@ -1808,6 +1818,8 @@ lib LibWin32
     decompose_hmenu_identity_string : Proc(IAccPropServices*, UInt8*, UInt32, HANDLE*, UInt32*, HRESULT)
   end
 
+  IAccPropServices_GUID = LibC::GUID.new("6e26e776-04f0-495d-80e4-3330352e3169")
+  CLSID_IAccPropServices = "6e26e776-04f0-495d-80e4-3330352e3169"
   struct IAccPropServices
     lpVtbl : IAccPropServicesVTbl*
   end
@@ -1822,6 +1834,8 @@ lib LibWin32
     get_host_raw_element_provider : Proc(IRawElementProviderSimple*, IRawElementProviderSimple*, HRESULT)
   end
 
+  IRawElementProviderSimple_GUID = LibC::GUID.new("d6dd68d1-86fd-4332-8666-9abedea2d24c")
+  CLSID_IRawElementProviderSimple = "d6dd68d1-86fd-4332-8666-9abedea2d24c"
   struct IRawElementProviderSimple
     lpVtbl : IRawElementProviderSimpleVTbl*
   end
@@ -1836,6 +1850,8 @@ lib LibWin32
     convert_returned_element : Proc(IAccessibleEx*, IRawElementProviderSimple, IAccessibleEx*, HRESULT)
   end
 
+  IAccessibleEx_GUID = LibC::GUID.new("f8b80ada-2c44-48d0-89be-5ff23c9cd875")
+  CLSID_IAccessibleEx = "f8b80ada-2c44-48d0-89be-5ff23c9cd875"
   struct IAccessibleEx
     lpVtbl : IAccessibleExVTbl*
   end
@@ -1851,6 +1867,8 @@ lib LibWin32
     show_context_menu : Proc(IRawElementProviderSimple2*, HRESULT)
   end
 
+  IRawElementProviderSimple2_GUID = LibC::GUID.new("a0a839a9-8da1-4a82-806a-8e0d44e79f56")
+  CLSID_IRawElementProviderSimple2 = "a0a839a9-8da1-4a82-806a-8e0d44e79f56"
   struct IRawElementProviderSimple2
     lpVtbl : IRawElementProviderSimple2VTbl*
   end
@@ -1867,6 +1885,8 @@ lib LibWin32
     get_metadata_value : Proc(IRawElementProviderSimple3*, Int32, Int32, VARIANT*, HRESULT)
   end
 
+  IRawElementProviderSimple3_GUID = LibC::GUID.new("fcf5d820-d7ec-4613-bdf6-42a84ce7daaf")
+  CLSID_IRawElementProviderSimple3 = "fcf5d820-d7ec-4613-bdf6-42a84ce7daaf"
   struct IRawElementProviderSimple3
     lpVtbl : IRawElementProviderSimple3VTbl*
   end
@@ -1879,6 +1899,8 @@ lib LibWin32
     get_focus : Proc(IRawElementProviderFragmentRoot*, IRawElementProviderFragment*, HRESULT)
   end
 
+  IRawElementProviderFragmentRoot_GUID = LibC::GUID.new("620ce2a5-ab8f-40a9-86cb-de3c75599b58")
+  CLSID_IRawElementProviderFragmentRoot = "620ce2a5-ab8f-40a9-86cb-de3c75599b58"
   struct IRawElementProviderFragmentRoot
     lpVtbl : IRawElementProviderFragmentRootVTbl*
   end
@@ -1895,6 +1917,8 @@ lib LibWin32
     get_fragment_root : Proc(IRawElementProviderFragment*, IRawElementProviderFragmentRoot*, HRESULT)
   end
 
+  IRawElementProviderFragment_GUID = LibC::GUID.new("f7063da8-8359-439c-9297-bbc5299a7d87")
+  CLSID_IRawElementProviderFragment = "f7063da8-8359-439c-9297-bbc5299a7d87"
   struct IRawElementProviderFragment
     lpVtbl : IRawElementProviderFragmentVTbl*
   end
@@ -1907,6 +1931,8 @@ lib LibWin32
     advise_event_removed : Proc(IRawElementProviderAdviseEvents*, Int32, SAFEARRAY*, HRESULT)
   end
 
+  IRawElementProviderAdviseEvents_GUID = LibC::GUID.new("a407b27b-0f6d-4427-9292-473c7bf93258")
+  CLSID_IRawElementProviderAdviseEvents = "a407b27b-0f6d-4427-9292-473c7bf93258"
   struct IRawElementProviderAdviseEvents
     lpVtbl : IRawElementProviderAdviseEventsVTbl*
   end
@@ -1918,6 +1944,8 @@ lib LibWin32
     get_override_provider_for_hwnd : Proc(IRawElementProviderHwndOverride*, LibC::HANDLE, IRawElementProviderSimple*, HRESULT)
   end
 
+  IRawElementProviderHwndOverride_GUID = LibC::GUID.new("1d5df27c-8947-4425-b8d9-79787bb460b8")
+  CLSID_IRawElementProviderHwndOverride = "1d5df27c-8947-4425-b8d9-79787bb460b8"
   struct IRawElementProviderHwndOverride
     lpVtbl : IRawElementProviderHwndOverrideVTbl*
   end
@@ -1931,6 +1959,8 @@ lib LibWin32
     add_structure_changed_event : Proc(IProxyProviderWinEventSink*, IRawElementProviderSimple, StructureChangeType, SAFEARRAY*, HRESULT)
   end
 
+  IProxyProviderWinEventSink_GUID = LibC::GUID.new("4fd82b78-a43e-46ac-9803-0a6969c7c183")
+  CLSID_IProxyProviderWinEventSink = "4fd82b78-a43e-46ac-9803-0a6969c7c183"
   struct IProxyProviderWinEventSink
     lpVtbl : IProxyProviderWinEventSinkVTbl*
   end
@@ -1942,6 +1972,8 @@ lib LibWin32
     respond_to_win_event : Proc(IProxyProviderWinEventHandler*, UInt32, LibC::HANDLE, Int32, Int32, IProxyProviderWinEventSink, HRESULT)
   end
 
+  IProxyProviderWinEventHandler_GUID = LibC::GUID.new("89592ad4-f4e0-43d5-a3b6-bad7e111b435")
+  CLSID_IProxyProviderWinEventHandler = "89592ad4-f4e0-43d5-a3b6-bad7e111b435"
   struct IProxyProviderWinEventHandler
     lpVtbl : IProxyProviderWinEventHandlerVTbl*
   end
@@ -1954,6 +1986,8 @@ lib LibWin32
     get_runtime_id_prefix : Proc(IRawElementProviderWindowlessSite*, SAFEARRAY**, HRESULT)
   end
 
+  IRawElementProviderWindowlessSite_GUID = LibC::GUID.new("0a2a93cc-bfad-42ac-9b2e-0991fb0d3ea0")
+  CLSID_IRawElementProviderWindowlessSite = "0a2a93cc-bfad-42ac-9b2e-0991fb0d3ea0"
   struct IRawElementProviderWindowlessSite
     lpVtbl : IRawElementProviderWindowlessSiteVTbl*
   end
@@ -1966,6 +2000,8 @@ lib LibWin32
     get_object_id_for_provider : Proc(IAccessibleHostingElementProviders*, IRawElementProviderSimple, Int32*, HRESULT)
   end
 
+  IAccessibleHostingElementProviders_GUID = LibC::GUID.new("33ac331b-943e-4020-b295-db37784974a3")
+  CLSID_IAccessibleHostingElementProviders = "33ac331b-943e-4020-b295-db37784974a3"
   struct IAccessibleHostingElementProviders
     lpVtbl : IAccessibleHostingElementProvidersVTbl*
   end
@@ -1977,6 +2013,8 @@ lib LibWin32
     get_embedded_accessibles : Proc(IRawElementProviderHostingAccessibles*, SAFEARRAY**, HRESULT)
   end
 
+  IRawElementProviderHostingAccessibles_GUID = LibC::GUID.new("24be0b07-d37d-487a-98cf-a13ed465e9b3")
+  CLSID_IRawElementProviderHostingAccessibles = "24be0b07-d37d-487a-98cf-a13ed465e9b3"
   struct IRawElementProviderHostingAccessibles
     lpVtbl : IRawElementProviderHostingAccessiblesVTbl*
   end
@@ -1989,6 +2027,8 @@ lib LibWin32
     get_dock_position : Proc(IDockProvider*, DockPosition*, HRESULT)
   end
 
+  IDockProvider_GUID = LibC::GUID.new("159bc72c-4ad3-485e-9637-d7052edf0146")
+  CLSID_IDockProvider = "159bc72c-4ad3-485e-9637-d7052edf0146"
   struct IDockProvider
     lpVtbl : IDockProviderVTbl*
   end
@@ -2002,6 +2042,8 @@ lib LibWin32
     get_expand_collapse_state : Proc(IExpandCollapseProvider*, ExpandCollapseState*, HRESULT)
   end
 
+  IExpandCollapseProvider_GUID = LibC::GUID.new("d847d3a5-cab0-4a98-8c32-ecb45c59ad24")
+  CLSID_IExpandCollapseProvider = "d847d3a5-cab0-4a98-8c32-ecb45c59ad24"
   struct IExpandCollapseProvider
     lpVtbl : IExpandCollapseProviderVTbl*
   end
@@ -2015,6 +2057,8 @@ lib LibWin32
     get_column_count : Proc(IGridProvider*, Int32*, HRESULT)
   end
 
+  IGridProvider_GUID = LibC::GUID.new("b17d6187-0907-464b-a168-0ef17a1572b1")
+  CLSID_IGridProvider = "b17d6187-0907-464b-a168-0ef17a1572b1"
   struct IGridProvider
     lpVtbl : IGridProviderVTbl*
   end
@@ -2030,6 +2074,8 @@ lib LibWin32
     get_containing_grid : Proc(IGridItemProvider*, IRawElementProviderSimple*, HRESULT)
   end
 
+  IGridItemProvider_GUID = LibC::GUID.new("d02541f1-fb81-4d64-ae32-f520f8a6dbd1")
+  CLSID_IGridItemProvider = "d02541f1-fb81-4d64-ae32-f520f8a6dbd1"
   struct IGridItemProvider
     lpVtbl : IGridItemProviderVTbl*
   end
@@ -2041,6 +2087,8 @@ lib LibWin32
     invoke : Proc(IInvokeProvider*, HRESULT)
   end
 
+  IInvokeProvider_GUID = LibC::GUID.new("54fcb24b-e18e-47a2-b4d3-eccbe77599a2")
+  CLSID_IInvokeProvider = "54fcb24b-e18e-47a2-b4d3-eccbe77599a2"
   struct IInvokeProvider
     lpVtbl : IInvokeProviderVTbl*
   end
@@ -2055,6 +2103,8 @@ lib LibWin32
     get_supported_views : Proc(IMultipleViewProvider*, SAFEARRAY**, HRESULT)
   end
 
+  IMultipleViewProvider_GUID = LibC::GUID.new("6278cab1-b556-4a1a-b4e0-418acc523201")
+  CLSID_IMultipleViewProvider = "6278cab1-b556-4a1a-b4e0-418acc523201"
   struct IMultipleViewProvider
     lpVtbl : IMultipleViewProviderVTbl*
   end
@@ -2072,6 +2122,8 @@ lib LibWin32
     get_small_change : Proc(IRangeValueProvider*, Float64*, HRESULT)
   end
 
+  IRangeValueProvider_GUID = LibC::GUID.new("36dc7aef-33e6-4691-afe1-2be7274b3d33")
+  CLSID_IRangeValueProvider = "36dc7aef-33e6-4691-afe1-2be7274b3d33"
   struct IRangeValueProvider
     lpVtbl : IRangeValueProviderVTbl*
   end
@@ -2083,6 +2135,8 @@ lib LibWin32
     scroll_into_view : Proc(IScrollItemProvider*, HRESULT)
   end
 
+  IScrollItemProvider_GUID = LibC::GUID.new("2360c714-4bf1-4b26-ba65-9b21316127eb")
+  CLSID_IScrollItemProvider = "2360c714-4bf1-4b26-ba65-9b21316127eb"
   struct IScrollItemProvider
     lpVtbl : IScrollItemProviderVTbl*
   end
@@ -2096,6 +2150,8 @@ lib LibWin32
     get_is_selection_required : Proc(ISelectionProvider*, LibC::BOOL*, HRESULT)
   end
 
+  ISelectionProvider_GUID = LibC::GUID.new("fb8b03af-3bdf-48d4-bd36-1a65793be168")
+  CLSID_ISelectionProvider = "fb8b03af-3bdf-48d4-bd36-1a65793be168"
   struct ISelectionProvider
     lpVtbl : ISelectionProviderVTbl*
   end
@@ -2113,6 +2169,8 @@ lib LibWin32
     get_item_count : Proc(ISelectionProvider2*, Int32*, HRESULT)
   end
 
+  ISelectionProvider2_GUID = LibC::GUID.new("14f68475-ee1c-44f6-a869-d239381f0fe7")
+  CLSID_ISelectionProvider2 = "14f68475-ee1c-44f6-a869-d239381f0fe7"
   struct ISelectionProvider2
     lpVtbl : ISelectionProvider2VTbl*
   end
@@ -2131,6 +2189,8 @@ lib LibWin32
     get_vertically_scrollable : Proc(IScrollProvider*, LibC::BOOL*, HRESULT)
   end
 
+  IScrollProvider_GUID = LibC::GUID.new("b38b8077-1fc3-42a5-8cae-d40c2215055a")
+  CLSID_IScrollProvider = "b38b8077-1fc3-42a5-8cae-d40c2215055a"
   struct IScrollProvider
     lpVtbl : IScrollProviderVTbl*
   end
@@ -2146,6 +2206,8 @@ lib LibWin32
     get_selection_container : Proc(ISelectionItemProvider*, IRawElementProviderSimple*, HRESULT)
   end
 
+  ISelectionItemProvider_GUID = LibC::GUID.new("2acad808-b2d4-452d-a407-91ff1ad167b2")
+  CLSID_ISelectionItemProvider = "2acad808-b2d4-452d-a407-91ff1ad167b2"
   struct ISelectionItemProvider
     lpVtbl : ISelectionItemProviderVTbl*
   end
@@ -2158,6 +2220,8 @@ lib LibWin32
     cancel : Proc(ISynchronizedInputProvider*, HRESULT)
   end
 
+  ISynchronizedInputProvider_GUID = LibC::GUID.new("29db1a06-02ce-4cf7-9b42-565d4fab20ee")
+  CLSID_ISynchronizedInputProvider = "29db1a06-02ce-4cf7-9b42-565d4fab20ee"
   struct ISynchronizedInputProvider
     lpVtbl : ISynchronizedInputProviderVTbl*
   end
@@ -2171,6 +2235,8 @@ lib LibWin32
     get_row_or_column_major : Proc(ITableProvider*, RowOrColumnMajor*, HRESULT)
   end
 
+  ITableProvider_GUID = LibC::GUID.new("9c860395-97b3-490a-b52a-858cc22af166")
+  CLSID_ITableProvider = "9c860395-97b3-490a-b52a-858cc22af166"
   struct ITableProvider
     lpVtbl : ITableProviderVTbl*
   end
@@ -2183,6 +2249,8 @@ lib LibWin32
     get_column_header_items : Proc(ITableItemProvider*, SAFEARRAY**, HRESULT)
   end
 
+  ITableItemProvider_GUID = LibC::GUID.new("b9734fa6-771f-4d78-9c90-2517999349cd")
+  CLSID_ITableItemProvider = "b9734fa6-771f-4d78-9c90-2517999349cd"
   struct ITableItemProvider
     lpVtbl : ITableItemProviderVTbl*
   end
@@ -2195,6 +2263,8 @@ lib LibWin32
     get_toggle_state : Proc(IToggleProvider*, ToggleState*, HRESULT)
   end
 
+  IToggleProvider_GUID = LibC::GUID.new("56d00bd0-c4f4-433c-a836-1a52a57e0892")
+  CLSID_IToggleProvider = "56d00bd0-c4f4-433c-a836-1a52a57e0892"
   struct IToggleProvider
     lpVtbl : IToggleProviderVTbl*
   end
@@ -2211,6 +2281,8 @@ lib LibWin32
     get_can_rotate : Proc(ITransformProvider*, LibC::BOOL*, HRESULT)
   end
 
+  ITransformProvider_GUID = LibC::GUID.new("6829ddc4-4f91-4ffa-b86f-bd3e2987cb4c")
+  CLSID_ITransformProvider = "6829ddc4-4f91-4ffa-b86f-bd3e2987cb4c"
   struct ITransformProvider
     lpVtbl : ITransformProviderVTbl*
   end
@@ -2224,6 +2296,8 @@ lib LibWin32
     get_is_read_only : Proc(IValueProvider*, LibC::BOOL*, HRESULT)
   end
 
+  IValueProvider_GUID = LibC::GUID.new("c7935180-6fb3-4201-b174-7df73adbf64a")
+  CLSID_IValueProvider = "c7935180-6fb3-4201-b174-7df73adbf64a"
   struct IValueProvider
     lpVtbl : IValueProviderVTbl*
   end
@@ -2243,6 +2317,8 @@ lib LibWin32
     get_is_topmost : Proc(IWindowProvider*, LibC::BOOL*, HRESULT)
   end
 
+  IWindowProvider_GUID = LibC::GUID.new("987df77b-db06-4d77-8f8a-86a9c3bb90b9")
+  CLSID_IWindowProvider = "987df77b-db06-4d77-8f8a-86a9c3bb90b9"
   struct IWindowProvider
     lpVtbl : IWindowProviderVTbl*
   end
@@ -2267,6 +2343,8 @@ lib LibWin32
     get_default_action : Proc(ILegacyIAccessibleProvider*, UInt8**, HRESULT)
   end
 
+  ILegacyIAccessibleProvider_GUID = LibC::GUID.new("e44c3566-915d-4070-99c6-047bff5a08f5")
+  CLSID_ILegacyIAccessibleProvider = "e44c3566-915d-4070-99c6-047bff5a08f5"
   struct ILegacyIAccessibleProvider
     lpVtbl : ILegacyIAccessibleProviderVTbl*
   end
@@ -2278,6 +2356,8 @@ lib LibWin32
     find_item_by_property : Proc(IItemContainerProvider*, IRawElementProviderSimple, Int32, VARIANT, IRawElementProviderSimple*, HRESULT)
   end
 
+  IItemContainerProvider_GUID = LibC::GUID.new("e747770b-39ce-4382-ab30-d8fb3f336f24")
+  CLSID_IItemContainerProvider = "e747770b-39ce-4382-ab30-d8fb3f336f24"
   struct IItemContainerProvider
     lpVtbl : IItemContainerProviderVTbl*
   end
@@ -2289,6 +2369,8 @@ lib LibWin32
     realize : Proc(IVirtualizedItemProvider*, HRESULT)
   end
 
+  IVirtualizedItemProvider_GUID = LibC::GUID.new("cb98b665-2d35-4fac-ad35-f3c60d0c0b8b")
+  CLSID_IVirtualizedItemProvider = "cb98b665-2d35-4fac-ad35-f3c60d0c0b8b"
   struct IVirtualizedItemProvider
     lpVtbl : IVirtualizedItemProviderVTbl*
   end
@@ -2300,6 +2382,8 @@ lib LibWin32
     get_underlying_object_model : Proc(IObjectModelProvider*, IUnknown*, HRESULT)
   end
 
+  IObjectModelProvider_GUID = LibC::GUID.new("3ad86ebd-f5ef-483d-bb18-b1042a475d64")
+  CLSID_IObjectModelProvider = "3ad86ebd-f5ef-483d-bb18-b1042a475d64"
   struct IObjectModelProvider
     lpVtbl : IObjectModelProviderVTbl*
   end
@@ -2315,6 +2399,8 @@ lib LibWin32
     get_target : Proc(IAnnotationProvider*, IRawElementProviderSimple*, HRESULT)
   end
 
+  IAnnotationProvider_GUID = LibC::GUID.new("f95c7e80-bd63-4601-9782-445ebff011fc")
+  CLSID_IAnnotationProvider = "f95c7e80-bd63-4601-9782-445ebff011fc"
   struct IAnnotationProvider
     lpVtbl : IAnnotationProviderVTbl*
   end
@@ -2332,6 +2418,8 @@ lib LibWin32
     get_extended_properties : Proc(IStylesProvider*, UInt8**, HRESULT)
   end
 
+  IStylesProvider_GUID = LibC::GUID.new("19b6b649-f5d7-4a6d-bdcb-129252be588a")
+  CLSID_IStylesProvider = "19b6b649-f5d7-4a6d-bdcb-129252be588a"
   struct IStylesProvider
     lpVtbl : IStylesProviderVTbl*
   end
@@ -2343,6 +2431,8 @@ lib LibWin32
     get_item_by_name : Proc(ISpreadsheetProvider*, LibC::LPWSTR, IRawElementProviderSimple*, HRESULT)
   end
 
+  ISpreadsheetProvider_GUID = LibC::GUID.new("6f6b5d35-5525-4f80-b758-85473832ffc7")
+  CLSID_ISpreadsheetProvider = "6f6b5d35-5525-4f80-b758-85473832ffc7"
   struct ISpreadsheetProvider
     lpVtbl : ISpreadsheetProviderVTbl*
   end
@@ -2356,6 +2446,8 @@ lib LibWin32
     get_annotation_types : Proc(ISpreadsheetItemProvider*, SAFEARRAY**, HRESULT)
   end
 
+  ISpreadsheetItemProvider_GUID = LibC::GUID.new("eaed4660-7b3d-4879-a2e6-365ce603f3d0")
+  CLSID_ISpreadsheetItemProvider = "eaed4660-7b3d-4879-a2e6-365ce603f3d0"
   struct ISpreadsheetItemProvider
     lpVtbl : ISpreadsheetItemProviderVTbl*
   end
@@ -2378,6 +2470,8 @@ lib LibWin32
     zoom_by_unit : Proc(ITransformProvider2*, ZoomUnit, HRESULT)
   end
 
+  ITransformProvider2_GUID = LibC::GUID.new("4758742f-7ac2-460c-bc48-09fc09308a93")
+  CLSID_ITransformProvider2 = "4758742f-7ac2-460c-bc48-09fc09308a93"
   struct ITransformProvider2
     lpVtbl : ITransformProvider2VTbl*
   end
@@ -2392,6 +2486,8 @@ lib LibWin32
     get_grabbed_items : Proc(IDragProvider*, SAFEARRAY**, HRESULT)
   end
 
+  IDragProvider_GUID = LibC::GUID.new("6aa7bbbb-7ff9-497d-904f-d20b897929d8")
+  CLSID_IDragProvider = "6aa7bbbb-7ff9-497d-904f-d20b897929d8"
   struct IDragProvider
     lpVtbl : IDragProviderVTbl*
   end
@@ -2404,6 +2500,8 @@ lib LibWin32
     get_drop_target_effects : Proc(IDropTargetProvider*, SAFEARRAY**, HRESULT)
   end
 
+  IDropTargetProvider_GUID = LibC::GUID.new("bae82bfd-358a-481c-85a0-d8b4d90a5d61")
+  CLSID_IDropTargetProvider = "bae82bfd-358a-481c-85a0-d8b4d90a5d61"
   struct IDropTargetProvider
     lpVtbl : IDropTargetProviderVTbl*
   end
@@ -2432,6 +2530,8 @@ lib LibWin32
     get_children : Proc(ITextRangeProvider*, SAFEARRAY**, HRESULT)
   end
 
+  ITextRangeProvider_GUID = LibC::GUID.new("5347ad7b-c355-46f8-aff5-909033582f63")
+  CLSID_ITextRangeProvider = "5347ad7b-c355-46f8-aff5-909033582f63"
   struct ITextRangeProvider
     lpVtbl : ITextRangeProviderVTbl*
   end
@@ -2448,6 +2548,8 @@ lib LibWin32
     get_supported_text_selection : Proc(ITextProvider*, SupportedTextSelection*, HRESULT)
   end
 
+  ITextProvider_GUID = LibC::GUID.new("3589c92c-63f3-4367-99bb-ada653b77cf2")
+  CLSID_ITextProvider = "3589c92c-63f3-4367-99bb-ada653b77cf2"
   struct ITextProvider
     lpVtbl : ITextProviderVTbl*
   end
@@ -2466,6 +2568,8 @@ lib LibWin32
     get_caret_range : Proc(ITextProvider2*, LibC::BOOL*, ITextRangeProvider*, HRESULT)
   end
 
+  ITextProvider2_GUID = LibC::GUID.new("0dc5e6ed-3e16-4bf1-8f9a-a979878bc195")
+  CLSID_ITextProvider2 = "0dc5e6ed-3e16-4bf1-8f9a-a979878bc195"
   struct ITextProvider2
     lpVtbl : ITextProvider2VTbl*
   end
@@ -2484,6 +2588,8 @@ lib LibWin32
     get_conversion_target : Proc(ITextEditProvider*, ITextRangeProvider*, HRESULT)
   end
 
+  ITextEditProvider_GUID = LibC::GUID.new("ea3605b4-3a05-400e-b5f9-4e91b40f6176")
+  CLSID_ITextEditProvider = "ea3605b4-3a05-400e-b5f9-4e91b40f6176"
   struct ITextEditProvider
     lpVtbl : ITextEditProviderVTbl*
   end
@@ -2513,6 +2619,8 @@ lib LibWin32
     show_context_menu : Proc(ITextRangeProvider2*, HRESULT)
   end
 
+  ITextRangeProvider2_GUID = LibC::GUID.new("9bbce42c-1921-4f18-89ca-dba1910a0386")
+  CLSID_ITextRangeProvider2 = "9bbce42c-1921-4f18-89ca-dba1910a0386"
   struct ITextRangeProvider2
     lpVtbl : ITextRangeProvider2VTbl*
   end
@@ -2525,6 +2633,8 @@ lib LibWin32
     get_text_range : Proc(ITextChildProvider*, ITextRangeProvider*, HRESULT)
   end
 
+  ITextChildProvider_GUID = LibC::GUID.new("4c2de2b9-c88f-4f88-a111-f1d336b7d1a9")
+  CLSID_ITextChildProvider = "4c2de2b9-c88f-4f88-a111-f1d336b7d1a9"
   struct ITextChildProvider
     lpVtbl : ITextChildProviderVTbl*
   end
@@ -2536,6 +2646,8 @@ lib LibWin32
     navigate : Proc(ICustomNavigationProvider*, NavigateDirection, IRawElementProviderSimple*, HRESULT)
   end
 
+  ICustomNavigationProvider_GUID = LibC::GUID.new("2062a28a-8c07-4b94-8e12-7037c622aeb8")
+  CLSID_ICustomNavigationProvider = "2062a28a-8c07-4b94-8e12-7037c622aeb8"
   struct ICustomNavigationProvider
     lpVtbl : ICustomNavigationProviderVTbl*
   end
@@ -2548,6 +2660,8 @@ lib LibWin32
     call_method : Proc(IUIAutomationPatternInstance*, UInt32, UIAutomationParameter*, UInt32, HRESULT)
   end
 
+  IUIAutomationPatternInstance_GUID = LibC::GUID.new("c03a7fe4-9431-409f-bed8-ae7c2299bc8d")
+  CLSID_IUIAutomationPatternInstance = "c03a7fe4-9431-409f-bed8-ae7c2299bc8d"
   struct IUIAutomationPatternInstance
     lpVtbl : IUIAutomationPatternInstanceVTbl*
   end
@@ -2560,6 +2674,8 @@ lib LibWin32
     dispatch : Proc(IUIAutomationPatternHandler*, IUnknown, UInt32, UIAutomationParameter*, UInt32, HRESULT)
   end
 
+  IUIAutomationPatternHandler_GUID = LibC::GUID.new("d97022f3-a947-465e-8b2a-ac4315fa54e8")
+  CLSID_IUIAutomationPatternHandler = "d97022f3-a947-465e-8b2a-ac4315fa54e8"
   struct IUIAutomationPatternHandler
     lpVtbl : IUIAutomationPatternHandlerVTbl*
   end
@@ -2573,6 +2689,8 @@ lib LibWin32
     register_pattern : Proc(IUIAutomationRegistrar*, UIAutomationPatternInfo*, Int32*, Int32*, UInt32, Int32*, UInt32, Int32*, HRESULT)
   end
 
+  IUIAutomationRegistrar_GUID = LibC::GUID.new("8609c4ec-4a1a-4d88-a357-5a66e060e1cf")
+  CLSID_IUIAutomationRegistrar = "8609c4ec-4a1a-4d88-a357-5a66e060e1cf"
   struct IUIAutomationRegistrar
     lpVtbl : IUIAutomationRegistrarVTbl*
   end
@@ -2665,6 +2783,8 @@ lib LibWin32
     get_clickable_point : Proc(IUIAutomationElement*, POINT*, LibC::BOOL*, HRESULT)
   end
 
+  IUIAutomationElement_GUID = LibC::GUID.new("d22108aa-8ac5-49a5-837b-37bbb3d7591e")
+  CLSID_IUIAutomationElement = "d22108aa-8ac5-49a5-837b-37bbb3d7591e"
   struct IUIAutomationElement
     lpVtbl : IUIAutomationElementVTbl*
   end
@@ -2677,6 +2797,8 @@ lib LibWin32
     get_element : Proc(IUIAutomationElementArray*, Int32, IUIAutomationElement*, HRESULT)
   end
 
+  IUIAutomationElementArray_GUID = LibC::GUID.new("14314595-b4bc-4055-95f2-58f2e42c9855")
+  CLSID_IUIAutomationElementArray = "14314595-b4bc-4055-95f2-58f2e42c9855"
   struct IUIAutomationElementArray
     lpVtbl : IUIAutomationElementArrayVTbl*
   end
@@ -2687,6 +2809,8 @@ lib LibWin32
     release : Proc(IUIAutomationCondition*, UInt32)
   end
 
+  IUIAutomationCondition_GUID = LibC::GUID.new("352ffba8-0973-437c-a61f-f64cafd81df9")
+  CLSID_IUIAutomationCondition = "352ffba8-0973-437c-a61f-f64cafd81df9"
   struct IUIAutomationCondition
     lpVtbl : IUIAutomationConditionVTbl*
   end
@@ -2698,6 +2822,8 @@ lib LibWin32
     get_boolean_value : Proc(IUIAutomationBoolCondition*, LibC::BOOL*, HRESULT)
   end
 
+  IUIAutomationBoolCondition_GUID = LibC::GUID.new("1b4e1f2e-75eb-4d0b-8952-5a69988e2307")
+  CLSID_IUIAutomationBoolCondition = "1b4e1f2e-75eb-4d0b-8952-5a69988e2307"
   struct IUIAutomationBoolCondition
     lpVtbl : IUIAutomationBoolConditionVTbl*
   end
@@ -2711,6 +2837,8 @@ lib LibWin32
     get_property_condition_flags : Proc(IUIAutomationPropertyCondition*, PropertyConditionFlags*, HRESULT)
   end
 
+  IUIAutomationPropertyCondition_GUID = LibC::GUID.new("99ebf2cb-5578-4267-9ad4-afd6ea77e94b")
+  CLSID_IUIAutomationPropertyCondition = "99ebf2cb-5578-4267-9ad4-afd6ea77e94b"
   struct IUIAutomationPropertyCondition
     lpVtbl : IUIAutomationPropertyConditionVTbl*
   end
@@ -2724,6 +2852,8 @@ lib LibWin32
     get_children : Proc(IUIAutomationAndCondition*, SAFEARRAY**, HRESULT)
   end
 
+  IUIAutomationAndCondition_GUID = LibC::GUID.new("a7d0af36-b912-45fe-9855-091ddc174aec")
+  CLSID_IUIAutomationAndCondition = "a7d0af36-b912-45fe-9855-091ddc174aec"
   struct IUIAutomationAndCondition
     lpVtbl : IUIAutomationAndConditionVTbl*
   end
@@ -2737,6 +2867,8 @@ lib LibWin32
     get_children : Proc(IUIAutomationOrCondition*, SAFEARRAY**, HRESULT)
   end
 
+  IUIAutomationOrCondition_GUID = LibC::GUID.new("8753f032-3db1-47b5-a1fc-6e34a266c712")
+  CLSID_IUIAutomationOrCondition = "8753f032-3db1-47b5-a1fc-6e34a266c712"
   struct IUIAutomationOrCondition
     lpVtbl : IUIAutomationOrConditionVTbl*
   end
@@ -2748,6 +2880,8 @@ lib LibWin32
     get_child : Proc(IUIAutomationNotCondition*, IUIAutomationCondition*, HRESULT)
   end
 
+  IUIAutomationNotCondition_GUID = LibC::GUID.new("f528b657-847b-498c-8896-d52b565407a1")
+  CLSID_IUIAutomationNotCondition = "f528b657-847b-498c-8896-d52b565407a1"
   struct IUIAutomationNotCondition
     lpVtbl : IUIAutomationNotConditionVTbl*
   end
@@ -2767,6 +2901,8 @@ lib LibWin32
     put_automation_element_mode : Proc(IUIAutomationCacheRequest*, AutomationElementMode, HRESULT)
   end
 
+  IUIAutomationCacheRequest_GUID = LibC::GUID.new("b32a92b5-bc25-4078-9c08-d7ee95c48e03")
+  CLSID_IUIAutomationCacheRequest = "b32a92b5-bc25-4078-9c08-d7ee95c48e03"
   struct IUIAutomationCacheRequest
     lpVtbl : IUIAutomationCacheRequestVTbl*
   end
@@ -2790,6 +2926,8 @@ lib LibWin32
     get_condition : Proc(IUIAutomationTreeWalker*, IUIAutomationCondition*, HRESULT)
   end
 
+  IUIAutomationTreeWalker_GUID = LibC::GUID.new("4042c624-389c-4afc-a630-9df854a541fc")
+  CLSID_IUIAutomationTreeWalker = "4042c624-389c-4afc-a630-9df854a541fc"
   struct IUIAutomationTreeWalker
     lpVtbl : IUIAutomationTreeWalkerVTbl*
   end
@@ -2801,6 +2939,8 @@ lib LibWin32
     handle_automation_event : Proc(IUIAutomationEventHandler*, IUIAutomationElement, Int32, HRESULT)
   end
 
+  IUIAutomationEventHandler_GUID = LibC::GUID.new("146c3c17-f12e-4e22-8c27-f894b9b79c69")
+  CLSID_IUIAutomationEventHandler = "146c3c17-f12e-4e22-8c27-f894b9b79c69"
   struct IUIAutomationEventHandler
     lpVtbl : IUIAutomationEventHandlerVTbl*
   end
@@ -2812,6 +2952,8 @@ lib LibWin32
     handle_property_changed_event : Proc(IUIAutomationPropertyChangedEventHandler*, IUIAutomationElement, Int32, VARIANT, HRESULT)
   end
 
+  IUIAutomationPropertyChangedEventHandler_GUID = LibC::GUID.new("40cd37d4-c756-4b0c-8c6f-bddfeeb13b50")
+  CLSID_IUIAutomationPropertyChangedEventHandler = "40cd37d4-c756-4b0c-8c6f-bddfeeb13b50"
   struct IUIAutomationPropertyChangedEventHandler
     lpVtbl : IUIAutomationPropertyChangedEventHandlerVTbl*
   end
@@ -2823,6 +2965,8 @@ lib LibWin32
     handle_structure_changed_event : Proc(IUIAutomationStructureChangedEventHandler*, IUIAutomationElement, StructureChangeType, SAFEARRAY*, HRESULT)
   end
 
+  IUIAutomationStructureChangedEventHandler_GUID = LibC::GUID.new("e81d1b4e-11c5-42f8-9754-e7036c79f054")
+  CLSID_IUIAutomationStructureChangedEventHandler = "e81d1b4e-11c5-42f8-9754-e7036c79f054"
   struct IUIAutomationStructureChangedEventHandler
     lpVtbl : IUIAutomationStructureChangedEventHandlerVTbl*
   end
@@ -2834,6 +2978,8 @@ lib LibWin32
     handle_focus_changed_event : Proc(IUIAutomationFocusChangedEventHandler*, IUIAutomationElement, HRESULT)
   end
 
+  IUIAutomationFocusChangedEventHandler_GUID = LibC::GUID.new("c270f6b5-5c69-4290-9745-7a7f97169468")
+  CLSID_IUIAutomationFocusChangedEventHandler = "c270f6b5-5c69-4290-9745-7a7f97169468"
   struct IUIAutomationFocusChangedEventHandler
     lpVtbl : IUIAutomationFocusChangedEventHandlerVTbl*
   end
@@ -2845,6 +2991,8 @@ lib LibWin32
     handle_text_edit_text_changed_event : Proc(IUIAutomationTextEditTextChangedEventHandler*, IUIAutomationElement, TextEditChangeType, SAFEARRAY*, HRESULT)
   end
 
+  IUIAutomationTextEditTextChangedEventHandler_GUID = LibC::GUID.new("92faa680-e704-4156-931a-e32d5bb38f3f")
+  CLSID_IUIAutomationTextEditTextChangedEventHandler = "92faa680-e704-4156-931a-e32d5bb38f3f"
   struct IUIAutomationTextEditTextChangedEventHandler
     lpVtbl : IUIAutomationTextEditTextChangedEventHandlerVTbl*
   end
@@ -2856,6 +3004,8 @@ lib LibWin32
     handle_changes_event : Proc(IUIAutomationChangesEventHandler*, IUIAutomationElement, UiaChangeInfo*, Int32, HRESULT)
   end
 
+  IUIAutomationChangesEventHandler_GUID = LibC::GUID.new("58edca55-2c3e-4980-b1b9-56c17f27a2a0")
+  CLSID_IUIAutomationChangesEventHandler = "58edca55-2c3e-4980-b1b9-56c17f27a2a0"
   struct IUIAutomationChangesEventHandler
     lpVtbl : IUIAutomationChangesEventHandlerVTbl*
   end
@@ -2867,6 +3017,8 @@ lib LibWin32
     handle_notification_event : Proc(IUIAutomationNotificationEventHandler*, IUIAutomationElement, NotificationKind, NotificationProcessing, UInt8*, UInt8*, HRESULT)
   end
 
+  IUIAutomationNotificationEventHandler_GUID = LibC::GUID.new("c7cb2637-e6c2-4d0c-85de-4948c02175c7")
+  CLSID_IUIAutomationNotificationEventHandler = "c7cb2637-e6c2-4d0c-85de-4948c02175c7"
   struct IUIAutomationNotificationEventHandler
     lpVtbl : IUIAutomationNotificationEventHandlerVTbl*
   end
@@ -2878,6 +3030,8 @@ lib LibWin32
     invoke : Proc(IUIAutomationInvokePattern*, HRESULT)
   end
 
+  IUIAutomationInvokePattern_GUID = LibC::GUID.new("fb377fbe-8ea6-46d5-9c73-6499642d3059")
+  CLSID_IUIAutomationInvokePattern = "fb377fbe-8ea6-46d5-9c73-6499642d3059"
   struct IUIAutomationInvokePattern
     lpVtbl : IUIAutomationInvokePatternVTbl*
   end
@@ -2891,6 +3045,8 @@ lib LibWin32
     get_cached_dock_position : Proc(IUIAutomationDockPattern*, DockPosition*, HRESULT)
   end
 
+  IUIAutomationDockPattern_GUID = LibC::GUID.new("fde5ef97-1464-48f6-90bf-43d0948e86ec")
+  CLSID_IUIAutomationDockPattern = "fde5ef97-1464-48f6-90bf-43d0948e86ec"
   struct IUIAutomationDockPattern
     lpVtbl : IUIAutomationDockPatternVTbl*
   end
@@ -2905,6 +3061,8 @@ lib LibWin32
     get_cached_expand_collapse_state : Proc(IUIAutomationExpandCollapsePattern*, ExpandCollapseState*, HRESULT)
   end
 
+  IUIAutomationExpandCollapsePattern_GUID = LibC::GUID.new("619be086-1f4e-4ee4-bafa-210128738730")
+  CLSID_IUIAutomationExpandCollapsePattern = "619be086-1f4e-4ee4-bafa-210128738730"
   struct IUIAutomationExpandCollapsePattern
     lpVtbl : IUIAutomationExpandCollapsePatternVTbl*
   end
@@ -2920,6 +3078,8 @@ lib LibWin32
     get_cached_column_count : Proc(IUIAutomationGridPattern*, Int32*, HRESULT)
   end
 
+  IUIAutomationGridPattern_GUID = LibC::GUID.new("414c3cdc-856b-4f5b-8538-3131c6302550")
+  CLSID_IUIAutomationGridPattern = "414c3cdc-856b-4f5b-8538-3131c6302550"
   struct IUIAutomationGridPattern
     lpVtbl : IUIAutomationGridPatternVTbl*
   end
@@ -2940,6 +3100,8 @@ lib LibWin32
     get_cached_column_span : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
   end
 
+  IUIAutomationGridItemPattern_GUID = LibC::GUID.new("78f8ef57-66c3-4e09-bd7c-e79b2004894d")
+  CLSID_IUIAutomationGridItemPattern = "78f8ef57-66c3-4e09-bd7c-e79b2004894d"
   struct IUIAutomationGridItemPattern
     lpVtbl : IUIAutomationGridItemPatternVTbl*
   end
@@ -2956,6 +3118,8 @@ lib LibWin32
     get_cached_supported_views : Proc(IUIAutomationMultipleViewPattern*, SAFEARRAY**, HRESULT)
   end
 
+  IUIAutomationMultipleViewPattern_GUID = LibC::GUID.new("8d253c91-1dc5-4bb5-b18f-ade16fa495e8")
+  CLSID_IUIAutomationMultipleViewPattern = "8d253c91-1dc5-4bb5-b18f-ade16fa495e8"
   struct IUIAutomationMultipleViewPattern
     lpVtbl : IUIAutomationMultipleViewPatternVTbl*
   end
@@ -2967,6 +3131,8 @@ lib LibWin32
     get_underlying_object_model : Proc(IUIAutomationObjectModelPattern*, IUnknown*, HRESULT)
   end
 
+  IUIAutomationObjectModelPattern_GUID = LibC::GUID.new("71c284b3-c14d-4d14-981e-19751b0d756d")
+  CLSID_IUIAutomationObjectModelPattern = "71c284b3-c14d-4d14-981e-19751b0d756d"
   struct IUIAutomationObjectModelPattern
     lpVtbl : IUIAutomationObjectModelPatternVTbl*
   end
@@ -2990,6 +3156,8 @@ lib LibWin32
     get_cached_small_change : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
   end
 
+  IUIAutomationRangeValuePattern_GUID = LibC::GUID.new("59213f4f-7346-49e5-b120-80555987a148")
+  CLSID_IUIAutomationRangeValuePattern = "59213f4f-7346-49e5-b120-80555987a148"
   struct IUIAutomationRangeValuePattern
     lpVtbl : IUIAutomationRangeValuePatternVTbl*
   end
@@ -3014,6 +3182,8 @@ lib LibWin32
     get_cached_vertically_scrollable : Proc(IUIAutomationScrollPattern*, LibC::BOOL*, HRESULT)
   end
 
+  IUIAutomationScrollPattern_GUID = LibC::GUID.new("88f4d42a-e881-459d-a77c-73bbbb7e02dc")
+  CLSID_IUIAutomationScrollPattern = "88f4d42a-e881-459d-a77c-73bbbb7e02dc"
   struct IUIAutomationScrollPattern
     lpVtbl : IUIAutomationScrollPatternVTbl*
   end
@@ -3025,6 +3195,8 @@ lib LibWin32
     scroll_into_view : Proc(IUIAutomationScrollItemPattern*, HRESULT)
   end
 
+  IUIAutomationScrollItemPattern_GUID = LibC::GUID.new("b488300f-d015-4f19-9c29-bb595e3645ef")
+  CLSID_IUIAutomationScrollItemPattern = "b488300f-d015-4f19-9c29-bb595e3645ef"
   struct IUIAutomationScrollItemPattern
     lpVtbl : IUIAutomationScrollItemPatternVTbl*
   end
@@ -3041,6 +3213,8 @@ lib LibWin32
     get_cached_is_selection_required : Proc(IUIAutomationSelectionPattern*, LibC::BOOL*, HRESULT)
   end
 
+  IUIAutomationSelectionPattern_GUID = LibC::GUID.new("5ed5202e-b2ac-47a6-b638-4b0bf140d78e")
+  CLSID_IUIAutomationSelectionPattern = "5ed5202e-b2ac-47a6-b638-4b0bf140d78e"
   struct IUIAutomationSelectionPattern
     lpVtbl : IUIAutomationSelectionPatternVTbl*
   end
@@ -3065,6 +3239,8 @@ lib LibWin32
     get_cached_item_count : Proc(IUIAutomationSelectionPattern2*, Int32*, HRESULT)
   end
 
+  IUIAutomationSelectionPattern2_GUID = LibC::GUID.new("0532bfae-c011-4e32-a343-6d642d798555")
+  CLSID_IUIAutomationSelectionPattern2 = "0532bfae-c011-4e32-a343-6d642d798555"
   struct IUIAutomationSelectionPattern2
     lpVtbl : IUIAutomationSelectionPattern2VTbl*
   end
@@ -3082,6 +3258,8 @@ lib LibWin32
     get_cached_selection_container : Proc(IUIAutomationSelectionItemPattern*, IUIAutomationElement*, HRESULT)
   end
 
+  IUIAutomationSelectionItemPattern_GUID = LibC::GUID.new("a8efa66a-0fda-421a-9194-38021f3578ea")
+  CLSID_IUIAutomationSelectionItemPattern = "a8efa66a-0fda-421a-9194-38021f3578ea"
   struct IUIAutomationSelectionItemPattern
     lpVtbl : IUIAutomationSelectionItemPatternVTbl*
   end
@@ -3094,6 +3272,8 @@ lib LibWin32
     cancel : Proc(IUIAutomationSynchronizedInputPattern*, HRESULT)
   end
 
+  IUIAutomationSynchronizedInputPattern_GUID = LibC::GUID.new("2233be0b-afb7-448b-9fda-3b378aa5eae1")
+  CLSID_IUIAutomationSynchronizedInputPattern = "2233be0b-afb7-448b-9fda-3b378aa5eae1"
   struct IUIAutomationSynchronizedInputPattern
     lpVtbl : IUIAutomationSynchronizedInputPatternVTbl*
   end
@@ -3110,6 +3290,8 @@ lib LibWin32
     get_cached_row_or_column_major : Proc(IUIAutomationTablePattern*, RowOrColumnMajor*, HRESULT)
   end
 
+  IUIAutomationTablePattern_GUID = LibC::GUID.new("620e691c-ea96-4710-a850-754b24ce2417")
+  CLSID_IUIAutomationTablePattern = "620e691c-ea96-4710-a850-754b24ce2417"
   struct IUIAutomationTablePattern
     lpVtbl : IUIAutomationTablePatternVTbl*
   end
@@ -3124,6 +3306,8 @@ lib LibWin32
     get_cached_column_header_items : Proc(IUIAutomationTableItemPattern*, IUIAutomationElementArray*, HRESULT)
   end
 
+  IUIAutomationTableItemPattern_GUID = LibC::GUID.new("0b964eb3-ef2e-4464-9c79-61d61737a27e")
+  CLSID_IUIAutomationTableItemPattern = "0b964eb3-ef2e-4464-9c79-61d61737a27e"
   struct IUIAutomationTableItemPattern
     lpVtbl : IUIAutomationTableItemPatternVTbl*
   end
@@ -3137,6 +3321,8 @@ lib LibWin32
     get_cached_toggle_state : Proc(IUIAutomationTogglePattern*, ToggleState*, HRESULT)
   end
 
+  IUIAutomationTogglePattern_GUID = LibC::GUID.new("94cf8058-9b8d-4ab9-8bfd-4cd0a33c8c70")
+  CLSID_IUIAutomationTogglePattern = "94cf8058-9b8d-4ab9-8bfd-4cd0a33c8c70"
   struct IUIAutomationTogglePattern
     lpVtbl : IUIAutomationTogglePatternVTbl*
   end
@@ -3156,6 +3342,8 @@ lib LibWin32
     get_cached_can_rotate : Proc(IUIAutomationTransformPattern*, LibC::BOOL*, HRESULT)
   end
 
+  IUIAutomationTransformPattern_GUID = LibC::GUID.new("a9b55844-a55d-4ef0-926d-569c16ff89bb")
+  CLSID_IUIAutomationTransformPattern = "a9b55844-a55d-4ef0-926d-569c16ff89bb"
   struct IUIAutomationTransformPattern
     lpVtbl : IUIAutomationTransformPatternVTbl*
   end
@@ -3171,6 +3359,8 @@ lib LibWin32
     get_cached_is_read_only : Proc(IUIAutomationValuePattern*, LibC::BOOL*, HRESULT)
   end
 
+  IUIAutomationValuePattern_GUID = LibC::GUID.new("a94cd8b1-0844-4cd6-9d2d-640537ab39e9")
+  CLSID_IUIAutomationValuePattern = "a94cd8b1-0844-4cd6-9d2d-640537ab39e9"
   struct IUIAutomationValuePattern
     lpVtbl : IUIAutomationValuePatternVTbl*
   end
@@ -3196,6 +3386,8 @@ lib LibWin32
     get_cached_window_interaction_state : Proc(IUIAutomationWindowPattern*, WindowInteractionState*, HRESULT)
   end
 
+  IUIAutomationWindowPattern_GUID = LibC::GUID.new("0faef453-9208-43ef-bbb2-3b485177864f")
+  CLSID_IUIAutomationWindowPattern = "0faef453-9208-43ef-bbb2-3b485177864f"
   struct IUIAutomationWindowPattern
     lpVtbl : IUIAutomationWindowPatternVTbl*
   end
@@ -3224,6 +3416,8 @@ lib LibWin32
     get_children : Proc(IUIAutomationTextRange*, IUIAutomationElementArray*, HRESULT)
   end
 
+  IUIAutomationTextRange_GUID = LibC::GUID.new("a543cc6a-f4ae-494b-8239-c814481187a8")
+  CLSID_IUIAutomationTextRange = "a543cc6a-f4ae-494b-8239-c814481187a8"
   struct IUIAutomationTextRange
     lpVtbl : IUIAutomationTextRangeVTbl*
   end
@@ -3253,6 +3447,8 @@ lib LibWin32
     show_context_menu : Proc(IUIAutomationTextRange2*, HRESULT)
   end
 
+  IUIAutomationTextRange2_GUID = LibC::GUID.new("bb9b40e0-5e04-46bd-9be0-4b601b9afad4")
+  CLSID_IUIAutomationTextRange2 = "bb9b40e0-5e04-46bd-9be0-4b601b9afad4"
   struct IUIAutomationTextRange2
     lpVtbl : IUIAutomationTextRange2VTbl*
   end
@@ -3285,6 +3481,8 @@ lib LibWin32
     get_attribute_values : Proc(IUIAutomationTextRange3*, Int32*, Int32, SAFEARRAY**, HRESULT)
   end
 
+  IUIAutomationTextRange3_GUID = LibC::GUID.new("6a315d69-5512-4c2e-85f0-53fce6dd4bc2")
+  CLSID_IUIAutomationTextRange3 = "6a315d69-5512-4c2e-85f0-53fce6dd4bc2"
   struct IUIAutomationTextRange3
     lpVtbl : IUIAutomationTextRange3VTbl*
   end
@@ -3297,6 +3495,8 @@ lib LibWin32
     get_element : Proc(IUIAutomationTextRangeArray*, Int32, IUIAutomationTextRange*, HRESULT)
   end
 
+  IUIAutomationTextRangeArray_GUID = LibC::GUID.new("ce4ae76a-e717-4c98-81ea-47371d028eb6")
+  CLSID_IUIAutomationTextRangeArray = "ce4ae76a-e717-4c98-81ea-47371d028eb6"
   struct IUIAutomationTextRangeArray
     lpVtbl : IUIAutomationTextRangeArrayVTbl*
   end
@@ -3313,6 +3513,8 @@ lib LibWin32
     get_supported_text_selection : Proc(IUIAutomationTextPattern*, SupportedTextSelection*, HRESULT)
   end
 
+  IUIAutomationTextPattern_GUID = LibC::GUID.new("32eba289-3583-42c9-9c59-3b6d9a1e9b6a")
+  CLSID_IUIAutomationTextPattern = "32eba289-3583-42c9-9c59-3b6d9a1e9b6a"
   struct IUIAutomationTextPattern
     lpVtbl : IUIAutomationTextPatternVTbl*
   end
@@ -3331,6 +3533,8 @@ lib LibWin32
     get_caret_range : Proc(IUIAutomationTextPattern2*, LibC::BOOL*, IUIAutomationTextRange*, HRESULT)
   end
 
+  IUIAutomationTextPattern2_GUID = LibC::GUID.new("506a921a-fcc9-409f-b23b-37eb74106872")
+  CLSID_IUIAutomationTextPattern2 = "506a921a-fcc9-409f-b23b-37eb74106872"
   struct IUIAutomationTextPattern2
     lpVtbl : IUIAutomationTextPattern2VTbl*
   end
@@ -3349,6 +3553,8 @@ lib LibWin32
     get_conversion_target : Proc(IUIAutomationTextEditPattern*, IUIAutomationTextRange*, HRESULT)
   end
 
+  IUIAutomationTextEditPattern_GUID = LibC::GUID.new("17e21576-996c-4870-99d9-bff323380c06")
+  CLSID_IUIAutomationTextEditPattern = "17e21576-996c-4870-99d9-bff323380c06"
   struct IUIAutomationTextEditPattern
     lpVtbl : IUIAutomationTextEditPatternVTbl*
   end
@@ -3360,6 +3566,8 @@ lib LibWin32
     navigate : Proc(IUIAutomationCustomNavigationPattern*, NavigateDirection, IUIAutomationElement*, HRESULT)
   end
 
+  IUIAutomationCustomNavigationPattern_GUID = LibC::GUID.new("01ea217a-1766-47ed-a6cc-acf492854b1f")
+  CLSID_IUIAutomationCustomNavigationPattern = "01ea217a-1766-47ed-a6cc-acf492854b1f"
   struct IUIAutomationCustomNavigationPattern
     lpVtbl : IUIAutomationCustomNavigationPatternVTbl*
   end
@@ -3371,6 +3579,8 @@ lib LibWin32
     handle_active_text_position_changed_event : Proc(IUIAutomationActiveTextPositionChangedEventHandler*, IUIAutomationElement, IUIAutomationTextRange, HRESULT)
   end
 
+  IUIAutomationActiveTextPositionChangedEventHandler_GUID = LibC::GUID.new("f97933b0-8dae-4496-8997-5ba015fe0d82")
+  CLSID_IUIAutomationActiveTextPositionChangedEventHandler = "f97933b0-8dae-4496-8997-5ba015fe0d82"
   struct IUIAutomationActiveTextPositionChangedEventHandler
     lpVtbl : IUIAutomationActiveTextPositionChangedEventHandlerVTbl*
   end
@@ -3405,6 +3615,8 @@ lib LibWin32
     get_i_accessible : Proc(IUIAutomationLegacyIAccessiblePattern*, IAccessible*, HRESULT)
   end
 
+  IUIAutomationLegacyIAccessiblePattern_GUID = LibC::GUID.new("828055ad-355b-4435-86d5-3b51c14a9b1b")
+  CLSID_IUIAutomationLegacyIAccessiblePattern = "828055ad-355b-4435-86d5-3b51c14a9b1b"
   struct IUIAutomationLegacyIAccessiblePattern
     lpVtbl : IUIAutomationLegacyIAccessiblePatternVTbl*
   end
@@ -3416,6 +3628,8 @@ lib LibWin32
     find_item_by_property : Proc(IUIAutomationItemContainerPattern*, IUIAutomationElement, Int32, VARIANT, IUIAutomationElement*, HRESULT)
   end
 
+  IUIAutomationItemContainerPattern_GUID = LibC::GUID.new("c690fdb2-27a8-423c-812d-429773c9084e")
+  CLSID_IUIAutomationItemContainerPattern = "c690fdb2-27a8-423c-812d-429773c9084e"
   struct IUIAutomationItemContainerPattern
     lpVtbl : IUIAutomationItemContainerPatternVTbl*
   end
@@ -3427,6 +3641,8 @@ lib LibWin32
     realize : Proc(IUIAutomationVirtualizedItemPattern*, HRESULT)
   end
 
+  IUIAutomationVirtualizedItemPattern_GUID = LibC::GUID.new("6ba3d7a6-04cf-4f11-8793-a8d1cde9969f")
+  CLSID_IUIAutomationVirtualizedItemPattern = "6ba3d7a6-04cf-4f11-8793-a8d1cde9969f"
   struct IUIAutomationVirtualizedItemPattern
     lpVtbl : IUIAutomationVirtualizedItemPatternVTbl*
   end
@@ -3447,6 +3663,8 @@ lib LibWin32
     get_cached_target : Proc(IUIAutomationAnnotationPattern*, IUIAutomationElement*, HRESULT)
   end
 
+  IUIAutomationAnnotationPattern_GUID = LibC::GUID.new("9a175b21-339e-41b1-8e8b-623f6b681098")
+  CLSID_IUIAutomationAnnotationPattern = "9a175b21-339e-41b1-8e8b-623f6b681098"
   struct IUIAutomationAnnotationPattern
     lpVtbl : IUIAutomationAnnotationPatternVTbl*
   end
@@ -3473,6 +3691,8 @@ lib LibWin32
     get_cached_extended_properties_as_array : Proc(IUIAutomationStylesPattern*, ExtendedProperty**, Int32*, HRESULT)
   end
 
+  IUIAutomationStylesPattern_GUID = LibC::GUID.new("85b5f0a2-bd79-484a-ad2b-388c9838d5fb")
+  CLSID_IUIAutomationStylesPattern = "85b5f0a2-bd79-484a-ad2b-388c9838d5fb"
   struct IUIAutomationStylesPattern
     lpVtbl : IUIAutomationStylesPatternVTbl*
   end
@@ -3484,6 +3704,8 @@ lib LibWin32
     get_item_by_name : Proc(IUIAutomationSpreadsheetPattern*, UInt8*, IUIAutomationElement*, HRESULT)
   end
 
+  IUIAutomationSpreadsheetPattern_GUID = LibC::GUID.new("7517a7c8-faae-4de9-9f08-29b91e8595c1")
+  CLSID_IUIAutomationSpreadsheetPattern = "7517a7c8-faae-4de9-9f08-29b91e8595c1"
   struct IUIAutomationSpreadsheetPattern
     lpVtbl : IUIAutomationSpreadsheetPatternVTbl*
   end
@@ -3500,6 +3722,8 @@ lib LibWin32
     get_cached_annotation_types : Proc(IUIAutomationSpreadsheetItemPattern*, SAFEARRAY**, HRESULT)
   end
 
+  IUIAutomationSpreadsheetItemPattern_GUID = LibC::GUID.new("7d4fb86c-8d34-40e1-8e83-62c15204e335")
+  CLSID_IUIAutomationSpreadsheetItemPattern = "7d4fb86c-8d34-40e1-8e83-62c15204e335"
   struct IUIAutomationSpreadsheetItemPattern
     lpVtbl : IUIAutomationSpreadsheetItemPatternVTbl*
   end
@@ -3529,6 +3753,8 @@ lib LibWin32
     get_cached_zoom_maximum : Proc(IUIAutomationTransformPattern2*, Float64*, HRESULT)
   end
 
+  IUIAutomationTransformPattern2_GUID = LibC::GUID.new("6d74d017-6ecb-4381-b38b-3c17a48ff1c2")
+  CLSID_IUIAutomationTransformPattern2 = "6d74d017-6ecb-4381-b38b-3c17a48ff1c2"
   struct IUIAutomationTransformPattern2
     lpVtbl : IUIAutomationTransformPattern2VTbl*
   end
@@ -3541,6 +3767,8 @@ lib LibWin32
     get_text_range : Proc(IUIAutomationTextChildPattern*, IUIAutomationTextRange*, HRESULT)
   end
 
+  IUIAutomationTextChildPattern_GUID = LibC::GUID.new("6552b038-ae05-40c8-abfd-aa08352aab86")
+  CLSID_IUIAutomationTextChildPattern = "6552b038-ae05-40c8-abfd-aa08352aab86"
   struct IUIAutomationTextChildPattern
     lpVtbl : IUIAutomationTextChildPatternVTbl*
   end
@@ -3559,6 +3787,8 @@ lib LibWin32
     get_cached_grabbed_items : Proc(IUIAutomationDragPattern*, IUIAutomationElementArray*, HRESULT)
   end
 
+  IUIAutomationDragPattern_GUID = LibC::GUID.new("1dc7b570-1f54-4bad-bcda-d36a722fb7bd")
+  CLSID_IUIAutomationDragPattern = "1dc7b570-1f54-4bad-bcda-d36a722fb7bd"
   struct IUIAutomationDragPattern
     lpVtbl : IUIAutomationDragPatternVTbl*
   end
@@ -3573,6 +3803,8 @@ lib LibWin32
     get_cached_drop_target_effects : Proc(IUIAutomationDropTargetPattern*, SAFEARRAY**, HRESULT)
   end
 
+  IUIAutomationDropTargetPattern_GUID = LibC::GUID.new("69a095f7-eee4-430e-a46b-fb73b1ae39a5")
+  CLSID_IUIAutomationDropTargetPattern = "69a095f7-eee4-430e-a46b-fb73b1ae39a5"
   struct IUIAutomationDropTargetPattern
     lpVtbl : IUIAutomationDropTargetPatternVTbl*
   end
@@ -3671,6 +3903,8 @@ lib LibWin32
     get_cached_flows_from : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
   end
 
+  IUIAutomationElement2_GUID = LibC::GUID.new("6749c683-f70d-4487-a698-5f79d55290d6")
+  CLSID_IUIAutomationElement2 = "6749c683-f70d-4487-a698-5f79d55290d6"
   struct IUIAutomationElement2
     lpVtbl : IUIAutomationElement2VTbl*
   end
@@ -3772,6 +4006,8 @@ lib LibWin32
     get_cached_is_peripheral : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
   end
 
+  IUIAutomationElement3_GUID = LibC::GUID.new("8471df34-aee0-4a01-a7de-7db9af12c296")
+  CLSID_IUIAutomationElement3 = "8471df34-aee0-4a01-a7de-7db9af12c296"
   struct IUIAutomationElement3
     lpVtbl : IUIAutomationElement3VTbl*
   end
@@ -3883,6 +4119,8 @@ lib LibWin32
     get_cached_annotation_objects : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
   end
 
+  IUIAutomationElement4_GUID = LibC::GUID.new("3b6e233c-52fb-4063-a4c9-77c075c2a06b")
+  CLSID_IUIAutomationElement4 = "3b6e233c-52fb-4063-a4c9-77c075c2a06b"
   struct IUIAutomationElement4
     lpVtbl : IUIAutomationElement4VTbl*
   end
@@ -3998,6 +4236,8 @@ lib LibWin32
     get_cached_localized_landmark_type : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
   end
 
+  IUIAutomationElement5_GUID = LibC::GUID.new("98141c1d-0d0e-4175-bbe2-6bff455842a7")
+  CLSID_IUIAutomationElement5 = "98141c1d-0d0e-4175-bbe2-6bff455842a7"
   struct IUIAutomationElement5
     lpVtbl : IUIAutomationElement5VTbl*
   end
@@ -4115,6 +4355,8 @@ lib LibWin32
     get_cached_full_description : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
   end
 
+  IUIAutomationElement6_GUID = LibC::GUID.new("4780d450-8bca-4977-afa5-a4a517f555e3")
+  CLSID_IUIAutomationElement6 = "4780d450-8bca-4977-afa5-a4a517f555e3"
   struct IUIAutomationElement6
     lpVtbl : IUIAutomationElement6VTbl*
   end
@@ -4237,6 +4479,8 @@ lib LibWin32
     get_current_metadata_value : Proc(IUIAutomationElement7*, Int32, Int32, VARIANT*, HRESULT)
   end
 
+  IUIAutomationElement7_GUID = LibC::GUID.new("204e8572-cfc3-4c11-b0c8-7da7420750b7")
+  CLSID_IUIAutomationElement7 = "204e8572-cfc3-4c11-b0c8-7da7420750b7"
   struct IUIAutomationElement7
     lpVtbl : IUIAutomationElement7VTbl*
   end
@@ -4361,6 +4605,8 @@ lib LibWin32
     get_cached_heading_level : Proc(IUIAutomationElement8*, Int32*, HRESULT)
   end
 
+  IUIAutomationElement8_GUID = LibC::GUID.new("8c60217d-5411-4cde-bcc0-1ceda223830c")
+  CLSID_IUIAutomationElement8 = "8c60217d-5411-4cde-bcc0-1ceda223830c"
   struct IUIAutomationElement8
     lpVtbl : IUIAutomationElement8VTbl*
   end
@@ -4487,6 +4733,8 @@ lib LibWin32
     get_cached_is_dialog : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
   end
 
+  IUIAutomationElement9_GUID = LibC::GUID.new("39325fac-039d-440e-a3a3-5eb81a5cecc3")
+  CLSID_IUIAutomationElement9 = "39325fac-039d-440e-a3a3-5eb81a5cecc3"
   struct IUIAutomationElement9
     lpVtbl : IUIAutomationElement9VTbl*
   end
@@ -4499,6 +4747,8 @@ lib LibWin32
     get_proxy_factory_id : Proc(IUIAutomationProxyFactory*, UInt8**, HRESULT)
   end
 
+  IUIAutomationProxyFactory_GUID = LibC::GUID.new("85b94ecd-849d-42b6-b94d-d6db23fdf5a4")
+  CLSID_IUIAutomationProxyFactory = "85b94ecd-849d-42b6-b94d-d6db23fdf5a4"
   struct IUIAutomationProxyFactory
     lpVtbl : IUIAutomationProxyFactoryVTbl*
   end
@@ -4522,6 +4772,8 @@ lib LibWin32
     get_win_events_for_automation_event : Proc(IUIAutomationProxyFactoryEntry*, Int32, Int32, SAFEARRAY**, HRESULT)
   end
 
+  IUIAutomationProxyFactoryEntry_GUID = LibC::GUID.new("d50e472e-b64b-490c-bca1-d30696f9f289")
+  CLSID_IUIAutomationProxyFactoryEntry = "d50e472e-b64b-490c-bca1-d30696f9f289"
   struct IUIAutomationProxyFactoryEntry
     lpVtbl : IUIAutomationProxyFactoryEntryVTbl*
   end
@@ -4541,6 +4793,8 @@ lib LibWin32
     restore_default_table : Proc(IUIAutomationProxyFactoryMapping*, HRESULT)
   end
 
+  IUIAutomationProxyFactoryMapping_GUID = LibC::GUID.new("09e31e18-872d-4873-93d1-1e541ec133fd")
+  CLSID_IUIAutomationProxyFactoryMapping = "09e31e18-872d-4873-93d1-1e541ec133fd"
   struct IUIAutomationProxyFactoryMapping
     lpVtbl : IUIAutomationProxyFactoryMappingVTbl*
   end
@@ -4558,6 +4812,8 @@ lib LibWin32
     add_text_edit_text_changed_event_handler : Proc(IUIAutomationEventHandlerGroup*, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
   end
 
+  IUIAutomationEventHandlerGroup_GUID = LibC::GUID.new("c9ee12f2-c13b-4408-997c-639914377f4e")
+  CLSID_IUIAutomationEventHandlerGroup = "c9ee12f2-c13b-4408-997c-639914377f4e"
   struct IUIAutomationEventHandlerGroup
     lpVtbl : IUIAutomationEventHandlerGroupVTbl*
   end
@@ -4623,6 +4879,8 @@ lib LibWin32
     element_from_i_accessible_build_cache : Proc(IUIAutomation*, IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
   end
 
+  IUIAutomation_GUID = LibC::GUID.new("30cbe57d-d9d0-452a-ab13-7ac5ac4825ee")
+  CLSID_IUIAutomation = "30cbe57d-d9d0-452a-ab13-7ac5ac4825ee"
   struct IUIAutomation
     lpVtbl : IUIAutomationVTbl*
   end
@@ -4694,6 +4952,8 @@ lib LibWin32
     put_transaction_timeout : Proc(IUIAutomation2*, UInt32, HRESULT)
   end
 
+  IUIAutomation2_GUID = LibC::GUID.new("34723aff-0c9d-49d0-9896-7ab52df8cd8a")
+  CLSID_IUIAutomation2 = "34723aff-0c9d-49d0-9896-7ab52df8cd8a"
   struct IUIAutomation2
     lpVtbl : IUIAutomation2VTbl*
   end
@@ -4767,6 +5027,8 @@ lib LibWin32
     remove_text_edit_text_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
   end
 
+  IUIAutomation3_GUID = LibC::GUID.new("73d768da-9b51-4b89-936e-c209290973e7")
+  CLSID_IUIAutomation3 = "73d768da-9b51-4b89-936e-c209290973e7"
   struct IUIAutomation3
     lpVtbl : IUIAutomation3VTbl*
   end
@@ -4842,6 +5104,8 @@ lib LibWin32
     remove_changes_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, IUIAutomationChangesEventHandler, HRESULT)
   end
 
+  IUIAutomation4_GUID = LibC::GUID.new("1189c02a-05f8-4319-8e21-e817e3db2860")
+  CLSID_IUIAutomation4 = "1189c02a-05f8-4319-8e21-e817e3db2860"
   struct IUIAutomation4
     lpVtbl : IUIAutomation4VTbl*
   end
@@ -4919,6 +5183,8 @@ lib LibWin32
     remove_notification_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, IUIAutomationNotificationEventHandler, HRESULT)
   end
 
+  IUIAutomation5_GUID = LibC::GUID.new("25f700c8-d816-4057-a9dc-3cbdee77e256")
+  CLSID_IUIAutomation5 = "25f700c8-d816-4057-a9dc-3cbdee77e256"
   struct IUIAutomation5
     lpVtbl : IUIAutomation5VTbl*
   end
@@ -5005,6 +5271,8 @@ lib LibWin32
     remove_active_text_position_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationActiveTextPositionChangedEventHandler, HRESULT)
   end
 
+  IUIAutomation6_GUID = LibC::GUID.new("aae072da-29e3-413d-87a7-192dbf81ed10")
+  CLSID_IUIAutomation6 = "aae072da-29e3-413d-87a7-192dbf81ed10"
   struct IUIAutomation6
     lpVtbl : IUIAutomation6VTbl*
   end

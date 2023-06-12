@@ -33,6 +33,8 @@ lib LibWin32
     set_issued_token : Proc(IChannelCredentials*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
+  IChannelCredentials_GUID = LibC::GUID.new("181b448c-c17c-4b17-ac6d-06699b93198f")
+  CLSID_IChannelCredentials = "181b448c-c17c-4b17-ac6d-06699b93198f"
   struct IChannelCredentials
     lpVtbl : IChannelCredentialsVTbl*
   end

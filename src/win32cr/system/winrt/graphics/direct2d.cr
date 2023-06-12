@@ -41,6 +41,8 @@ lib LibWin32
     get_source_count : Proc(IGraphicsEffectD2D1Interop*, UInt32*, HRESULT)
   end
 
+  IGraphicsEffectD2D1Interop_GUID = LibC::GUID.new("2fc57384-a068-44d7-a331-30982fcf7177")
+  CLSID_IGraphicsEffectD2D1Interop = "2fc57384-a068-44d7-a331-30982fcf7177"
   struct IGraphicsEffectD2D1Interop
     lpVtbl : IGraphicsEffectD2D1InteropVTbl*
   end
@@ -53,6 +55,8 @@ lib LibWin32
     try_get_geometry_using_factory : Proc(IGeometrySource2DInterop*, ID2D1Factory, ID2D1Geometry*, HRESULT)
   end
 
+  IGeometrySource2DInterop_GUID = LibC::GUID.new("0657af73-53fd-47cf-84ff-c8492d2a80a3")
+  CLSID_IGeometrySource2DInterop = "0657af73-53fd-47cf-84ff-c8492d2a80a3"
   struct IGeometrySource2DInterop
     lpVtbl : IGeometrySource2DInteropVTbl*
   end

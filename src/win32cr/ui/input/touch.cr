@@ -109,6 +109,8 @@ lib LibWin32
     manipulation_completed : Proc(IIManipulationEvents*, Float32, Float32, Float32, Float32, Float32, Float32, Float32, HRESULT)
   end
 
+  IIManipulationEvents_GUID = LibC::GUID.new("4f62c8da-9c53-4b22-93df-927a862bbb03")
+  CLSID_IIManipulationEvents = "4f62c8da-9c53-4b22-93df-927a862bbb03"
   struct IIManipulationEvents
     lpVtbl : IIManipulationEventsVTbl*
   end
@@ -168,6 +170,8 @@ lib LibWin32
     complete_time : Proc(IInertiaProcessor*, UInt32, HRESULT)
   end
 
+  IInertiaProcessor_GUID = LibC::GUID.new("18b00c6d-c5ee-41b1-90a9-9d4a929095ad")
+  CLSID_IInertiaProcessor = "18b00c6d-c5ee-41b1-90a9-9d4a929095ad"
   struct IInertiaProcessor
     lpVtbl : IInertiaProcessorVTbl*
   end
@@ -199,6 +203,8 @@ lib LibWin32
     put_minimum_scale_rotate_radius : Proc(IManipulationProcessor*, Float32, HRESULT)
   end
 
+  IManipulationProcessor_GUID = LibC::GUID.new("a22ac519-8300-48a0-bef4-f1be8737dba4")
+  CLSID_IManipulationProcessor = "a22ac519-8300-48a0-bef4-f1be8737dba4"
   struct IManipulationProcessor
     lpVtbl : IManipulationProcessorVTbl*
   end

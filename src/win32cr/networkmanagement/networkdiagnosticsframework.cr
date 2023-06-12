@@ -233,6 +233,8 @@ lib LibWin32
     cleanup : Proc(INetDiagHelper*, HRESULT)
   end
 
+  INetDiagHelper_GUID = LibC::GUID.new("c0b35746-ebf5-11d8-bbe9-505054503030")
+  CLSID_INetDiagHelper = "c0b35746-ebf5-11d8-bbe9-505054503030"
   struct INetDiagHelper
     lpVtbl : INetDiagHelperVTbl*
   end
@@ -244,6 +246,8 @@ lib LibWin32
     create_utility_instance : Proc(INetDiagHelperUtilFactory*, Guid*, Void**, HRESULT)
   end
 
+  INetDiagHelperUtilFactory_GUID = LibC::GUID.new("104613fb-bc57-4178-95ba-88809698354a")
+  CLSID_INetDiagHelperUtilFactory = "104613fb-bc57-4178-95ba-88809698354a"
   struct INetDiagHelperUtilFactory
     lpVtbl : INetDiagHelperUtilFactoryVTbl*
   end
@@ -257,6 +261,8 @@ lib LibWin32
     reproduce_failure : Proc(INetDiagHelperEx*, HRESULT)
   end
 
+  INetDiagHelperEx_GUID = LibC::GUID.new("972dab4d-e4e3-4fc6-ae54-5f65ccde4a15")
+  CLSID_INetDiagHelperEx = "972dab4d-e4e3-4fc6-ae54-5f65ccde4a15"
   struct INetDiagHelperEx
     lpVtbl : INetDiagHelperExVTbl*
   end
@@ -268,6 +274,8 @@ lib LibWin32
     get_attribute_info : Proc(INetDiagHelperInfo*, UInt32*, HelperAttributeInfo**, HRESULT)
   end
 
+  INetDiagHelperInfo_GUID = LibC::GUID.new("c0b35747-ebf5-11d8-bbe9-505054503030")
+  CLSID_INetDiagHelperInfo = "c0b35747-ebf5-11d8-bbe9-505054503030"
   struct INetDiagHelperInfo
     lpVtbl : INetDiagHelperInfoVTbl*
   end
@@ -279,6 +287,8 @@ lib LibWin32
     resolve_attributes : Proc(INetDiagExtensibleHelper*, UInt32, HELPER_ATTRIBUTE*, UInt32*, HELPER_ATTRIBUTE**, HRESULT)
   end
 
+  INetDiagExtensibleHelper_GUID = LibC::GUID.new("c0b35748-ebf5-11d8-bbe9-505054503030")
+  CLSID_INetDiagExtensibleHelper = "c0b35748-ebf5-11d8-bbe9-505054503030"
   struct INetDiagExtensibleHelper
     lpVtbl : INetDiagExtensibleHelperVTbl*
   end

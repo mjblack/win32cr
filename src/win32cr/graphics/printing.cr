@@ -3744,6 +3744,8 @@ lib LibWin32
     create_instance_of_msxml_object : Proc(IPrintCoreHelper*, Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)
   end
 
+  IPrintCoreHelper_GUID = LibC::GUID.new("a89ec53e-3905-49c6-9c1a-c0a88117fdb6")
+  CLSID_IPrintCoreHelper = "a89ec53e-3905-49c6-9c1a-c0a88117fdb6"
   struct IPrintCoreHelper
     lpVtbl : IPrintCoreHelperVTbl*
   end
@@ -3765,6 +3767,8 @@ lib LibWin32
     create_default_gdl_snapshot : Proc(IPrintCoreHelperUni*, UInt32, IStream*, HRESULT)
   end
 
+  IPrintCoreHelperUni_GUID = LibC::GUID.new("7e8e51d6-e5ee-4426-817b-958b9444eb79")
+  CLSID_IPrintCoreHelperUni = "7e8e51d6-e5ee-4426-817b-958b9444eb79"
   struct IPrintCoreHelperUni
     lpVtbl : IPrintCoreHelperUniVTbl*
   end
@@ -3787,6 +3791,8 @@ lib LibWin32
     get_named_command : Proc(IPrintCoreHelperUni2*, DEVMODEA*, UInt32, LibC::LPWSTR, UInt8**, UInt32*, HRESULT)
   end
 
+  IPrintCoreHelperUni2_GUID = LibC::GUID.new("6c8afdfc-ead0-4d2d-8071-9bf0175a6c3a")
+  CLSID_IPrintCoreHelperUni2 = "6c8afdfc-ead0-4d2d-8071-9bf0175a6c3a"
   struct IPrintCoreHelperUni2
     lpVtbl : IPrintCoreHelperUni2VTbl*
   end
@@ -3809,6 +3815,8 @@ lib LibWin32
     get_option_attribute : Proc(IPrintCoreHelperPS*, PSTR, PSTR, PSTR, UInt32*, UInt8**, UInt32*, HRESULT)
   end
 
+  IPrintCoreHelperPS_GUID = LibC::GUID.new("c2c14f6f-95d3-4d63-96cf-6bd9e6c907c2")
+  CLSID_IPrintCoreHelperPS = "c2c14f6f-95d3-4d63-96cf-6bd9e6c907c2"
   struct IPrintCoreHelperPS
     lpVtbl : IPrintCoreHelperPSVTbl*
   end
@@ -3821,6 +3829,8 @@ lib LibWin32
     dev_mode : Proc(IPrintOemCommon*, UInt32, OEMDMPARAM*, HRESULT)
   end
 
+  IPrintOemCommon_GUID = LibC::GUID.new("7f42285e-91d5-11d1-8820-00c04fb961ec")
+  CLSID_IPrintOemCommon = "7f42285e-91d5-11d1-8820-00c04fb961ec"
   struct IPrintOemCommon
     lpVtbl : IPrintOemCommonVTbl*
   end
@@ -3845,6 +3855,8 @@ lib LibWin32
     update_external_fonts : Proc(IPrintOemUI*, LibC::HANDLE, LibC::HANDLE, LibC::LPWSTR, HRESULT)
   end
 
+  IPrintOemUI_GUID = LibC::GUID.new("c6a7a9d0-774c-11d1-947f-00a0c90640b8")
+  CLSID_IPrintOemUI = "c6a7a9d0-774c-11d1-947f-00a0c90640b8"
   struct IPrintOemUI
     lpVtbl : IPrintOemUIVTbl*
   end
@@ -3872,6 +3884,8 @@ lib LibWin32
     document_event : Proc(IPrintOemUI2*, LibC::HANDLE, HDC, Int32, UInt32, Void*, UInt32, Void*, Int32*, HRESULT)
   end
 
+  IPrintOemUI2_GUID = LibC::GUID.new("292515f9-b54b-489b-9275-bab56821395e")
+  CLSID_IPrintOemUI2 = "292515f9-b54b-489b-9275-bab56821395e"
   struct IPrintOemUI2
     lpVtbl : IPrintOemUI2VTbl*
   end
@@ -3885,6 +3899,8 @@ lib LibWin32
     adjust_dpi : Proc(IPrintOemUIMXDC*, LibC::HANDLE, UInt32, DEVMODEA*, UInt32, Void*, Int32*, HRESULT)
   end
 
+  IPrintOemUIMXDC_GUID = LibC::GUID.new("7349d725-e2c1-4dca-afb5-c13e91bc9306")
+  CLSID_IPrintOemUIMXDC = "7349d725-e2c1-4dca-afb5-c13e91bc9306"
   struct IPrintOemUIMXDC
     lpVtbl : IPrintOemUIMXDCVTbl*
   end
@@ -3898,6 +3914,8 @@ lib LibWin32
     drv_update_ui_setting : Proc(IPrintOemDriverUI*, Void*, Void*, UInt32, UInt32, HRESULT)
   end
 
+  IPrintOemDriverUI_GUID = LibC::GUID.new("92b05d50-78bc-11d1-9480-00a0c90640b8")
+  CLSID_IPrintOemDriverUI = "92b05d50-78bc-11d1-9480-00a0c90640b8"
   struct IPrintOemDriverUI
     lpVtbl : IPrintOemDriverUIVTbl*
   end
@@ -3921,6 +3939,8 @@ lib LibWin32
     query_simulation_support : Proc(IPrintCoreUI2*, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
   end
 
+  IPrintCoreUI2_GUID = LibC::GUID.new("085ccfca-3adf-4c9e-b491-d851a6edc997")
+  CLSID_IPrintCoreUI2 = "085ccfca-3adf-4c9e-b491-d851a6edc997"
   struct IPrintCoreUI2
     lpVtbl : IPrintCoreUI2VTbl*
   end
@@ -3938,6 +3958,8 @@ lib LibWin32
     validate_print_ticket : Proc(IPrintTicketProvider*, IXMLDOMDocument2, HRESULT)
   end
 
+  IPrintTicketProvider_GUID = LibC::GUID.new("bb5116db-0a23-4c3a-a6b6-89e5558dfb5d")
+  CLSID_IPrintTicketProvider = "bb5116db-0a23-4c3a-a6b6-89e5558dfb5d"
   struct IPrintTicketProvider
     lpVtbl : IPrintTicketProviderVTbl*
   end
@@ -3957,6 +3979,8 @@ lib LibWin32
     get_print_device_resources : Proc(IPrintTicketProvider2*, LibC::LPWSTR, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)
   end
 
+  IPrintTicketProvider2_GUID = LibC::GUID.new("b8a70ab2-3dfc-4fec-a074-511b13c651cb")
+  CLSID_IPrintTicketProvider2 = "b8a70ab2-3dfc-4fec-a074-511b13c651cb"
   struct IPrintTicketProvider2
     lpVtbl : IPrintTicketProvider2VTbl*
   end
@@ -3974,6 +3998,8 @@ lib LibWin32
     get_namespace_uri : Proc(IPrintSchemaElement*, UInt8**, HRESULT)
   end
 
+  IPrintSchemaElement_GUID = LibC::GUID.new("724c1646-e64b-4bbf-8eb4-d45e4fd580da")
+  CLSID_IPrintSchemaElement = "724c1646-e64b-4bbf-8eb4-d45e4fd580da"
   struct IPrintSchemaElement
     lpVtbl : IPrintSchemaElementVTbl*
   end
@@ -3992,6 +4018,8 @@ lib LibWin32
     get_display_name : Proc(IPrintSchemaDisplayableElement*, UInt8**, HRESULT)
   end
 
+  IPrintSchemaDisplayableElement_GUID = LibC::GUID.new("af45af49-d6aa-407d-bf87-3912236e9d94")
+  CLSID_IPrintSchemaDisplayableElement = "af45af49-d6aa-407d-bf87-3912236e9d94"
   struct IPrintSchemaDisplayableElement
     lpVtbl : IPrintSchemaDisplayableElementVTbl*
   end
@@ -4013,6 +4041,8 @@ lib LibWin32
     get_property_value : Proc(IPrintSchemaOption*, UInt8*, UInt8*, IUnknown*, HRESULT)
   end
 
+  IPrintSchemaOption_GUID = LibC::GUID.new("66bb2f51-5844-4997-8d70-4b7cc221cf92")
+  CLSID_IPrintSchemaOption = "66bb2f51-5844-4997-8d70-4b7cc221cf92"
   struct IPrintSchemaOption
     lpVtbl : IPrintSchemaOptionVTbl*
   end
@@ -4036,6 +4066,8 @@ lib LibWin32
     get_height_in_microns : Proc(IPrintSchemaPageMediaSizeOption*, UInt32*, HRESULT)
   end
 
+  IPrintSchemaPageMediaSizeOption_GUID = LibC::GUID.new("68746729-f493-4830-a10f-69028774605d")
+  CLSID_IPrintSchemaPageMediaSizeOption = "68746729-f493-4830-a10f-69028774605d"
   struct IPrintSchemaPageMediaSizeOption
     lpVtbl : IPrintSchemaPageMediaSizeOptionVTbl*
   end
@@ -4058,6 +4090,8 @@ lib LibWin32
     get_pages_per_sheet : Proc(IPrintSchemaNUpOption*, UInt32*, HRESULT)
   end
 
+  IPrintSchemaNUpOption_GUID = LibC::GUID.new("1f6342f2-d848-42e3-8995-c10a9ef9a3ba")
+  CLSID_IPrintSchemaNUpOption = "1f6342f2-d848-42e3-8995-c10a9ef9a3ba"
   struct IPrintSchemaNUpOption
     lpVtbl : IPrintSchemaNUpOptionVTbl*
   end
@@ -4075,6 +4109,8 @@ lib LibWin32
     get__new_enum : Proc(IPrintSchemaOptionCollection*, IUnknown*, HRESULT)
   end
 
+  IPrintSchemaOptionCollection_GUID = LibC::GUID.new("baecb0bd-a946-4771-bc30-e8b24f8d45c1")
+  CLSID_IPrintSchemaOptionCollection = "baecb0bd-a946-4771-bc30-e8b24f8d45c1"
   struct IPrintSchemaOptionCollection
     lpVtbl : IPrintSchemaOptionCollectionVTbl*
   end
@@ -4098,6 +4134,8 @@ lib LibWin32
     get_display_ui : Proc(IPrintSchemaFeature*, LibC::BOOL*, HRESULT)
   end
 
+  IPrintSchemaFeature_GUID = LibC::GUID.new("ef189461-5d62-4626-8e57-ff83583c4826")
+  CLSID_IPrintSchemaFeature = "ef189461-5d62-4626-8e57-ff83583c4826"
   struct IPrintSchemaFeature
     lpVtbl : IPrintSchemaFeatureVTbl*
   end
@@ -4121,6 +4159,8 @@ lib LibWin32
     get_extent_height_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
   end
 
+  IPrintSchemaPageImageableSize_GUID = LibC::GUID.new("7c85bf5e-dc7c-4f61-839b-4107e1c9b68e")
+  CLSID_IPrintSchemaPageImageableSize = "7c85bf5e-dc7c-4f61-839b-4107e1c9b68e"
   struct IPrintSchemaPageImageableSize
     lpVtbl : IPrintSchemaPageImageableSizeVTbl*
   end
@@ -4144,6 +4184,8 @@ lib LibWin32
     get_range_max : Proc(IPrintSchemaParameterDefinition*, Int32*, HRESULT)
   end
 
+  IPrintSchemaParameterDefinition_GUID = LibC::GUID.new("b5ade81e-0e61-4fe1-81c6-c333e4ffe0f1")
+  CLSID_IPrintSchemaParameterDefinition = "b5ade81e-0e61-4fe1-81c6-c333e4ffe0f1"
   struct IPrintSchemaParameterDefinition
     lpVtbl : IPrintSchemaParameterDefinitionVTbl*
   end
@@ -4163,6 +4205,8 @@ lib LibWin32
     put_value : Proc(IPrintSchemaParameterInitializer*, VARIANT*, HRESULT)
   end
 
+  IPrintSchemaParameterInitializer_GUID = LibC::GUID.new("52027082-0b74-4648-9564-828cc6cb656c")
+  CLSID_IPrintSchemaParameterInitializer = "52027082-0b74-4648-9564-828cc6cb656c"
   struct IPrintSchemaParameterInitializer
     lpVtbl : IPrintSchemaParameterInitializerVTbl*
   end
@@ -4187,6 +4231,8 @@ lib LibWin32
     get_options : Proc(IPrintSchemaCapabilities*, IPrintSchemaFeature, IPrintSchemaOptionCollection*, HRESULT)
   end
 
+  IPrintSchemaCapabilities_GUID = LibC::GUID.new("5a577640-501d-4927-bcd0-5ef57a7ed175")
+  CLSID_IPrintSchemaCapabilities = "5a577640-501d-4927-bcd0-5ef57a7ed175"
   struct IPrintSchemaCapabilities
     lpVtbl : IPrintSchemaCapabilitiesVTbl*
   end
@@ -4212,6 +4258,8 @@ lib LibWin32
     get_parameter_definition : Proc(IPrintSchemaCapabilities2*, UInt8*, UInt8*, IPrintSchemaParameterDefinition*, HRESULT)
   end
 
+  IPrintSchemaCapabilities2_GUID = LibC::GUID.new("b58845f4-9970-4d87-a636-169fb82ed642")
+  CLSID_IPrintSchemaCapabilities2 = "b58845f4-9970-4d87-a636-169fb82ed642"
   struct IPrintSchemaCapabilities2
     lpVtbl : IPrintSchemaCapabilities2VTbl*
   end
@@ -4228,6 +4276,8 @@ lib LibWin32
     cancel : Proc(IPrintSchemaAsyncOperation*, HRESULT)
   end
 
+  IPrintSchemaAsyncOperation_GUID = LibC::GUID.new("143c8dcb-d37f-47f7-88e8-6b1d21f2c5f7")
+  CLSID_IPrintSchemaAsyncOperation = "143c8dcb-d37f-47f7-88e8-6b1d21f2c5f7"
   struct IPrintSchemaAsyncOperation
     lpVtbl : IPrintSchemaAsyncOperationVTbl*
   end
@@ -4253,6 +4303,8 @@ lib LibWin32
     put_job_copies_all_documents : Proc(IPrintSchemaTicket*, UInt32, HRESULT)
   end
 
+  IPrintSchemaTicket_GUID = LibC::GUID.new("e480b861-4708-4e6d-a5b4-a2b4eeb9baa4")
+  CLSID_IPrintSchemaTicket = "e480b861-4708-4e6d-a5b4-a2b4eeb9baa4"
   struct IPrintSchemaTicket
     lpVtbl : IPrintSchemaTicketVTbl*
   end
@@ -4279,6 +4331,8 @@ lib LibWin32
     get_parameter_initializer : Proc(IPrintSchemaTicket2*, UInt8*, UInt8*, IPrintSchemaParameterInitializer*, HRESULT)
   end
 
+  IPrintSchemaTicket2_GUID = LibC::GUID.new("2ec1f844-766a-47a1-91f4-2eeb6190f80c")
+  CLSID_IPrintSchemaTicket2 = "2ec1f844-766a-47a1-91f4-2eeb6190f80c"
   struct IPrintSchemaTicket2
     lpVtbl : IPrintSchemaTicket2VTbl*
   end
@@ -4294,6 +4348,8 @@ lib LibWin32
     completed : Proc(IPrintSchemaAsyncOperationEvent*, IPrintSchemaTicket, HRESULT, HRESULT)
   end
 
+  IPrintSchemaAsyncOperationEvent_GUID = LibC::GUID.new("23adbb16-0133-4906-b29a-1dce1d026379")
+  CLSID_IPrintSchemaAsyncOperationEvent = "23adbb16-0133-4906-b29a-1dce1d026379"
   struct IPrintSchemaAsyncOperationEvent
     lpVtbl : IPrintSchemaAsyncOperationEventVTbl*
   end
@@ -4310,6 +4366,8 @@ lib LibWin32
     write : Proc(IPrinterScriptableSequentialStream*, IDispatch, Int32*, HRESULT)
   end
 
+  IPrinterScriptableSequentialStream_GUID = LibC::GUID.new("2072838a-316f-467a-a949-27f68c44a854")
+  CLSID_IPrinterScriptableSequentialStream = "2072838a-316f-467a-a949-27f68c44a854"
   struct IPrinterScriptableSequentialStream
     lpVtbl : IPrinterScriptableSequentialStreamVTbl*
   end
@@ -4329,6 +4387,8 @@ lib LibWin32
     set_size : Proc(IPrinterScriptableStream*, Int32, HRESULT)
   end
 
+  IPrinterScriptableStream_GUID = LibC::GUID.new("7edf9a92-4750-41a5-a17f-879a6f4f7dcb")
+  CLSID_IPrinterScriptableStream = "7edf9a92-4750-41a5-a17f-879a6f4f7dcb"
   struct IPrinterScriptableStream
     lpVtbl : IPrinterScriptableStreamVTbl*
   end
@@ -4353,6 +4413,8 @@ lib LibWin32
     get_write_stream : Proc(IPrinterPropertyBag*, UInt8*, IStream*, HRESULT)
   end
 
+  IPrinterPropertyBag_GUID = LibC::GUID.new("fea77364-df95-4a23-a905-019b79a8e481")
+  CLSID_IPrinterPropertyBag = "fea77364-df95-4a23-a905-019b79a8e481"
   struct IPrinterPropertyBag
     lpVtbl : IPrinterPropertyBagVTbl*
   end
@@ -4377,6 +4439,8 @@ lib LibWin32
     get_write_stream : Proc(IPrinterScriptablePropertyBag*, UInt8*, IPrinterScriptableStream*, HRESULT)
   end
 
+  IPrinterScriptablePropertyBag_GUID = LibC::GUID.new("91c7765f-ed57-49ad-8b01-dc24816a5294")
+  CLSID_IPrinterScriptablePropertyBag = "91c7765f-ed57-49ad-8b01-dc24816a5294"
   struct IPrinterScriptablePropertyBag
     lpVtbl : IPrinterScriptablePropertyBagVTbl*
   end
@@ -4402,6 +4466,8 @@ lib LibWin32
     get_read_stream_as_xml : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IUnknown*, HRESULT)
   end
 
+  IPrinterScriptablePropertyBag2_GUID = LibC::GUID.new("2a1c53c4-8638-4b3e-b518-2773c94556a3")
+  CLSID_IPrinterScriptablePropertyBag2 = "2a1c53c4-8638-4b3e-b518-2773c94556a3"
   struct IPrinterScriptablePropertyBag2
     lpVtbl : IPrinterScriptablePropertyBag2VTbl*
   end
@@ -4420,6 +4486,8 @@ lib LibWin32
     get_properties : Proc(IPrinterQueue*, IPrinterPropertyBag*, HRESULT)
   end
 
+  IPrinterQueue_GUID = LibC::GUID.new("3580a828-07fe-4b94-ac1a-757d9d2d3056")
+  CLSID_IPrinterQueue = "3580a828-07fe-4b94-ac1a-757d9d2d3056"
   struct IPrinterQueue
     lpVtbl : IPrinterQueueVTbl*
   end
@@ -4437,6 +4505,8 @@ lib LibWin32
     request_cancel : Proc(IPrintJob*, HRESULT)
   end
 
+  IPrintJob_GUID = LibC::GUID.new("b771dab8-1282-41b7-858c-f206e4d20577")
+  CLSID_IPrintJob = "b771dab8-1282-41b7-858c-f206e4d20577"
   struct IPrintJob
     lpVtbl : IPrintJobVTbl*
   end
@@ -4454,6 +4524,8 @@ lib LibWin32
     get__new_enum : Proc(IPrintJobCollection*, IUnknown*, HRESULT)
   end
 
+  IPrintJobCollection_GUID = LibC::GUID.new("72b82a24-a598-4e87-895f-cdb23a49e9dc")
+  CLSID_IPrintJobCollection = "72b82a24-a598-4e87-895f-cdb23a49e9dc"
   struct IPrintJobCollection
     lpVtbl : IPrintJobCollectionVTbl*
   end
@@ -4469,6 +4541,8 @@ lib LibWin32
     on_changed : Proc(IPrinterQueueViewEvent*, IPrintJobCollection, UInt32, UInt32, UInt32, HRESULT)
   end
 
+  IPrinterQueueViewEvent_GUID = LibC::GUID.new("c5b6042b-fd21-404a-a0ef-e2fbb52b9080")
+  CLSID_IPrinterQueueViewEvent = "c5b6042b-fd21-404a-a0ef-e2fbb52b9080"
   struct IPrinterQueueViewEvent
     lpVtbl : IPrinterQueueViewEventVTbl*
   end
@@ -4484,6 +4558,8 @@ lib LibWin32
     set_view_range : Proc(IPrinterQueueView*, UInt32, UInt32, HRESULT)
   end
 
+  IPrinterQueueView_GUID = LibC::GUID.new("476e2969-3b2b-4b3f-8277-cff6056042aa")
+  CLSID_IPrinterQueueView = "476e2969-3b2b-4b3f-8277-cff6056042aa"
   struct IPrinterQueueView
     lpVtbl : IPrinterQueueViewVTbl*
   end
@@ -4499,6 +4575,8 @@ lib LibWin32
     on_bidi_response_received : Proc(IPrinterQueueEvent*, UInt8*, HRESULT, HRESULT)
   end
 
+  IPrinterQueueEvent_GUID = LibC::GUID.new("214685f6-7b78-4681-87e0-495f739273d1")
+  CLSID_IPrinterQueueEvent = "214685f6-7b78-4681-87e0-495f739273d1"
   struct IPrinterQueueEvent
     lpVtbl : IPrinterQueueEventVTbl*
   end
@@ -4510,6 +4588,8 @@ lib LibWin32
     completed : Proc(IPrinterBidiSetRequestCallback*, UInt8*, HRESULT, HRESULT)
   end
 
+  IPrinterBidiSetRequestCallback_GUID = LibC::GUID.new("c52d32dd-f2b4-4052-8502-ec4305ecb71f")
+  CLSID_IPrinterBidiSetRequestCallback = "c52d32dd-f2b4-4052-8502-ec4305ecb71f"
   struct IPrinterBidiSetRequestCallback
     lpVtbl : IPrinterBidiSetRequestCallbackVTbl*
   end
@@ -4521,6 +4601,8 @@ lib LibWin32
     cancel : Proc(IPrinterExtensionAsyncOperation*, HRESULT)
   end
 
+  IPrinterExtensionAsyncOperation_GUID = LibC::GUID.new("108d6a23-6a4b-4552-9448-68b427186acd")
+  CLSID_IPrinterExtensionAsyncOperation = "108d6a23-6a4b-4552-9448-68b427186acd"
   struct IPrinterExtensionAsyncOperation
     lpVtbl : IPrinterExtensionAsyncOperationVTbl*
   end
@@ -4541,6 +4623,8 @@ lib LibWin32
     get_printer_queue_view : Proc(IPrinterQueue2*, UInt32, UInt32, IPrinterQueueView*, HRESULT)
   end
 
+  IPrinterQueue2_GUID = LibC::GUID.new("8cd444e8-c9bb-49b3-8e38-e03209416131")
+  CLSID_IPrinterQueue2 = "8cd444e8-c9bb-49b3-8e38-e03209416131"
   struct IPrinterQueue2
     lpVtbl : IPrinterQueue2VTbl*
   end
@@ -4559,6 +4643,8 @@ lib LibWin32
     get_user_properties : Proc(IPrinterExtensionContext*, IPrinterPropertyBag*, HRESULT)
   end
 
+  IPrinterExtensionContext_GUID = LibC::GUID.new("39843bf2-c4d2-41fd-b4b2-aedbee5e1900")
+  CLSID_IPrinterExtensionContext = "39843bf2-c4d2-41fd-b4b2-aedbee5e1900"
   struct IPrinterExtensionContext
     lpVtbl : IPrinterExtensionContextVTbl*
   end
@@ -4575,6 +4661,8 @@ lib LibWin32
     complete : Proc(IPrinterExtensionRequest*, HRESULT)
   end
 
+  IPrinterExtensionRequest_GUID = LibC::GUID.new("39843bf3-c4d2-41fd-b4b2-aedbee5e1900")
+  CLSID_IPrinterExtensionRequest = "39843bf3-c4d2-41fd-b4b2-aedbee5e1900"
   struct IPrinterExtensionRequest
     lpVtbl : IPrinterExtensionRequestVTbl*
   end
@@ -4600,6 +4688,8 @@ lib LibWin32
     get_window_parent : Proc(IPrinterExtensionEventArgs*, LibC::HANDLE*, HRESULT)
   end
 
+  IPrinterExtensionEventArgs_GUID = LibC::GUID.new("39843bf4-c4d2-41fd-b4b2-aedbee5e1900")
+  CLSID_IPrinterExtensionEventArgs = "39843bf4-c4d2-41fd-b4b2-aedbee5e1900"
   struct IPrinterExtensionEventArgs
     lpVtbl : IPrinterExtensionEventArgsVTbl*
   end
@@ -4617,6 +4707,8 @@ lib LibWin32
     get__new_enum : Proc(IPrinterExtensionContextCollection*, IUnknown*, HRESULT)
   end
 
+  IPrinterExtensionContextCollection_GUID = LibC::GUID.new("fb476970-9bab-4861-811e-3e98b0c5addf")
+  CLSID_IPrinterExtensionContextCollection = "fb476970-9bab-4861-811e-3e98b0c5addf"
   struct IPrinterExtensionContextCollection
     lpVtbl : IPrinterExtensionContextCollectionVTbl*
   end
@@ -4633,6 +4725,8 @@ lib LibWin32
     on_printer_queues_enumerated : Proc(IPrinterExtensionEvent*, IPrinterExtensionContextCollection, HRESULT)
   end
 
+  IPrinterExtensionEvent_GUID = LibC::GUID.new("c093cb63-5ef5-4585-af8e-4d5637487b57")
+  CLSID_IPrinterExtensionEvent = "c093cb63-5ef5-4585-af8e-4d5637487b57"
   struct IPrinterExtensionEvent
     lpVtbl : IPrinterExtensionEventVTbl*
   end
@@ -4645,6 +4739,8 @@ lib LibWin32
     disable_events : Proc(IPrinterExtensionManager*, HRESULT)
   end
 
+  IPrinterExtensionManager_GUID = LibC::GUID.new("93c6eb8c-b001-4355-9629-8e8a1b3f8e77")
+  CLSID_IPrinterExtensionManager = "93c6eb8c-b001-4355-9629-8e8a1b3f8e77"
   struct IPrinterExtensionManager
     lpVtbl : IPrinterExtensionManagerVTbl*
   end
@@ -4662,6 +4758,8 @@ lib LibWin32
     get_user_properties : Proc(IPrinterScriptContext*, IPrinterScriptablePropertyBag*, HRESULT)
   end
 
+  IPrinterScriptContext_GUID = LibC::GUID.new("066acbca-8881-49c9-bb98-fae16b4889e1")
+  CLSID_IPrinterScriptContext = "066acbca-8881-49c9-bb98-fae16b4889e1"
   struct IPrinterScriptContext
     lpVtbl : IPrinterScriptContextVTbl*
   end
@@ -4674,6 +4772,8 @@ lib LibWin32
     release_data : Proc(IPrintAsyncNotifyDataObject*, HRESULT)
   end
 
+  IPrintAsyncNotifyDataObject_GUID = LibC::GUID.new("77cf513e-5d49-4789-9f30-d0822b335c0d")
+  CLSID_IPrintAsyncNotifyDataObject = "77cf513e-5d49-4789-9f30-d0822b335c0d"
   struct IPrintAsyncNotifyDataObject
     lpVtbl : IPrintAsyncNotifyDataObjectVTbl*
   end
@@ -4686,6 +4786,8 @@ lib LibWin32
     close_channel : Proc(IPrintAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, HRESULT)
   end
 
+  IPrintAsyncNotifyChannel_GUID = LibC::GUID.new("4a5031b1-1f3f-4db0-a462-4530ed8b0451")
+  CLSID_IPrintAsyncNotifyChannel = "4a5031b1-1f3f-4db0-a462-4530ed8b0451"
   struct IPrintAsyncNotifyChannel
     lpVtbl : IPrintAsyncNotifyChannelVTbl*
   end
@@ -4698,6 +4800,8 @@ lib LibWin32
     channel_closed : Proc(IPrintAsyncNotifyCallback*, IPrintAsyncNotifyChannel, IPrintAsyncNotifyDataObject, HRESULT)
   end
 
+  IPrintAsyncNotifyCallback_GUID = LibC::GUID.new("7def34c1-9d92-4c99-b3b3-db94a9d4191b")
+  CLSID_IPrintAsyncNotifyCallback = "7def34c1-9d92-4c99-b3b3-db94a9d4191b"
   struct IPrintAsyncNotifyCallback
     lpVtbl : IPrintAsyncNotifyCallbackVTbl*
   end
@@ -4710,6 +4814,8 @@ lib LibWin32
     unregister_for_notifications : Proc(IPrintAsyncNotifyRegistration*, HRESULT)
   end
 
+  IPrintAsyncNotifyRegistration_GUID = LibC::GUID.new("0f6f27b6-6f86-4591-9203-64c3bfadedfe")
+  CLSID_IPrintAsyncNotifyRegistration = "0f6f27b6-6f86-4591-9203-64c3bfadedfe"
   struct IPrintAsyncNotifyRegistration
     lpVtbl : IPrintAsyncNotifyRegistrationVTbl*
   end
@@ -4722,6 +4828,8 @@ lib LibWin32
     create_print_async_notify_registration : Proc(IPrintAsyncNotify*, Guid*, PrintAsyncNotifyUserFilter, PrintAsyncNotifyConversationStyle, IPrintAsyncNotifyCallback, IPrintAsyncNotifyRegistration*, HRESULT)
   end
 
+  IPrintAsyncNotify_GUID = LibC::GUID.new("532818f7-921b-4fb2-bff8-2f4fd52ebebf")
+  CLSID_IPrintAsyncNotify = "532818f7-921b-4fb2-bff8-2f4fd52ebebf"
   struct IPrintAsyncNotify
     lpVtbl : IPrintAsyncNotifyVTbl*
   end
@@ -4829,6 +4937,8 @@ lib LibWin32
     async_close_channel : Proc(IBidiAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, IPrintAsyncCookie, HRESULT)
   end
 
+  IBidiAsyncNotifyChannel_GUID = LibC::GUID.new("532818f7-921b-4fb2-bff8-2f4fd52ebebf")
+  CLSID_IBidiAsyncNotifyChannel = "532818f7-921b-4fb2-bff8-2f4fd52ebebf"
   struct IBidiAsyncNotifyChannel
     lpVtbl : IBidiAsyncNotifyChannelVTbl*
   end
@@ -4840,6 +4950,8 @@ lib LibWin32
     continue : Proc(IXpsRasterizerNotificationCallback*, HRESULT)
   end
 
+  IXpsRasterizerNotificationCallback_GUID = LibC::GUID.new("9ab8fd0d-cb94-49c2-9cb0-97ec1d5469d2")
+  CLSID_IXpsRasterizerNotificationCallback = "9ab8fd0d-cb94-49c2-9cb0-97ec1d5469d2"
   struct IXpsRasterizerNotificationCallback
     lpVtbl : IXpsRasterizerNotificationCallbackVTbl*
   end
@@ -4852,6 +4964,8 @@ lib LibWin32
     set_minimal_line_width : Proc(IXpsRasterizer*, Int32, HRESULT)
   end
 
+  IXpsRasterizer_GUID = LibC::GUID.new("7567cfc8-c156-47a8-9dac-11a2ae5bdd6b")
+  CLSID_IXpsRasterizer = "7567cfc8-c156-47a8-9dac-11a2ae5bdd6b"
   struct IXpsRasterizer
     lpVtbl : IXpsRasterizerVTbl*
   end
@@ -4863,6 +4977,8 @@ lib LibWin32
     create_rasterizer : Proc(IXpsRasterizationFactory*, IXpsOMPage, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, IXpsRasterizer*, HRESULT)
   end
 
+  IXpsRasterizationFactory_GUID = LibC::GUID.new("e094808a-24c6-482b-a3a7-c21ac9b55f17")
+  CLSID_IXpsRasterizationFactory = "e094808a-24c6-482b-a3a7-c21ac9b55f17"
   struct IXpsRasterizationFactory
     lpVtbl : IXpsRasterizationFactoryVTbl*
   end
@@ -4874,6 +4990,8 @@ lib LibWin32
     create_rasterizer : Proc(IXpsRasterizationFactory1*, IXpsOMPage, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, XPSRAS_PIXEL_FORMAT, IXpsRasterizer*, HRESULT)
   end
 
+  IXpsRasterizationFactory1_GUID = LibC::GUID.new("2d6e5f77-6414-4a1e-a8e0-d4194ce6a26f")
+  CLSID_IXpsRasterizationFactory1 = "2d6e5f77-6414-4a1e-a8e0-d4194ce6a26f"
   struct IXpsRasterizationFactory1
     lpVtbl : IXpsRasterizationFactory1VTbl*
   end
@@ -4885,6 +5003,8 @@ lib LibWin32
     create_rasterizer : Proc(IXpsRasterizationFactory2*, IXpsOMPage, Float32, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, XPSRAS_PIXEL_FORMAT, XPSRAS_BACKGROUND_COLOR, IXpsRasterizer*, HRESULT)
   end
 
+  IXpsRasterizationFactory2_GUID = LibC::GUID.new("9c16ce3e-10f5-41fd-9ddc-6826669c2ff6")
+  CLSID_IXpsRasterizationFactory2 = "9c16ce3e-10f5-41fd-9ddc-6826669c2ff6"
   struct IXpsRasterizationFactory2
     lpVtbl : IXpsRasterizationFactory2VTbl*
   end
@@ -4898,6 +5018,8 @@ lib LibWin32
     invalidate_preview : Proc(IPrintPreviewDxgiPackageTarget*, HRESULT)
   end
 
+  IPrintPreviewDxgiPackageTarget_GUID = LibC::GUID.new("1a6dd0ad-1e2a-4e99-a5ba-91f17818290e")
+  CLSID_IPrintPreviewDxgiPackageTarget = "1a6dd0ad-1e2a-4e99-a5ba-91f17818290e"
   struct IPrintPreviewDxgiPackageTarget
     lpVtbl : IPrintPreviewDxgiPackageTargetVTbl*
   end

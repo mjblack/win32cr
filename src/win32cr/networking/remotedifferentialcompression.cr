@@ -146,6 +146,8 @@ lib LibWin32
     serialize : Proc(IRdcGeneratorParameters*, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
+  IRdcGeneratorParameters_GUID = LibC::GUID.new("96236a71-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcGeneratorParameters = "96236a71-9dbc-11da-9e3f-0011114ae311"
   struct IRdcGeneratorParameters
     lpVtbl : IRdcGeneratorParametersVTbl*
   end
@@ -160,6 +162,8 @@ lib LibWin32
     set_hash_window_size : Proc(IRdcGeneratorFilterMaxParameters*, UInt32, HRESULT)
   end
 
+  IRdcGeneratorFilterMaxParameters_GUID = LibC::GUID.new("96236a72-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcGeneratorFilterMaxParameters = "96236a72-9dbc-11da-9e3f-0011114ae311"
   struct IRdcGeneratorFilterMaxParameters
     lpVtbl : IRdcGeneratorFilterMaxParametersVTbl*
   end
@@ -172,6 +176,8 @@ lib LibWin32
     process : Proc(IRdcGenerator*, LibC::BOOL, LibC::BOOL*, RdcBufferPointer*, UInt32, RdcBufferPointer**, RDC_ErrorCode*, HRESULT)
   end
 
+  IRdcGenerator_GUID = LibC::GUID.new("96236a73-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcGenerator = "96236a73-9dbc-11da-9e3f-0011114ae311"
   struct IRdcGenerator
     lpVtbl : IRdcGeneratorVTbl*
   end
@@ -185,6 +191,8 @@ lib LibWin32
     get_file_position : Proc(IRdcFileReader*, UInt64*, HRESULT)
   end
 
+  IRdcFileReader_GUID = LibC::GUID.new("96236a74-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcFileReader = "96236a74-9dbc-11da-9e3f-0011114ae311"
   struct IRdcFileReader
     lpVtbl : IRdcFileReaderVTbl*
   end
@@ -201,6 +209,8 @@ lib LibWin32
     delete_on_close : Proc(IRdcFileWriter*, HRESULT)
   end
 
+  IRdcFileWriter_GUID = LibC::GUID.new("96236a75-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcFileWriter = "96236a75-9dbc-11da-9e3f-0011114ae311"
   struct IRdcFileWriter
     lpVtbl : IRdcFileWriterVTbl*
   end
@@ -213,6 +223,8 @@ lib LibWin32
     read_signatures : Proc(IRdcSignatureReader*, RdcSignaturePointer*, LibC::BOOL*, HRESULT)
   end
 
+  IRdcSignatureReader_GUID = LibC::GUID.new("96236a76-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcSignatureReader = "96236a76-9dbc-11da-9e3f-0011114ae311"
   struct IRdcSignatureReader
     lpVtbl : IRdcSignatureReaderVTbl*
   end
@@ -224,6 +236,8 @@ lib LibWin32
     process : Proc(IRdcComparator*, LibC::BOOL, LibC::BOOL*, RdcBufferPointer*, RdcNeedPointer*, RDC_ErrorCode*, HRESULT)
   end
 
+  IRdcComparator_GUID = LibC::GUID.new("96236a77-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcComparator = "96236a77-9dbc-11da-9e3f-0011114ae311"
   struct IRdcComparator
     lpVtbl : IRdcComparatorVTbl*
   end
@@ -241,6 +255,8 @@ lib LibWin32
     get_rdc_version : Proc(IRdcLibrary*, UInt32*, UInt32*, HRESULT)
   end
 
+  IRdcLibrary_GUID = LibC::GUID.new("96236a78-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcLibrary = "96236a78-9dbc-11da-9e3f-0011114ae311"
   struct IRdcLibrary
     lpVtbl : IRdcLibraryVTbl*
   end
@@ -252,6 +268,8 @@ lib LibWin32
     report_progress : Proc(ISimilarityReportProgress*, UInt32, HRESULT)
   end
 
+  ISimilarityReportProgress_GUID = LibC::GUID.new("96236a7a-9dbc-11da-9e3f-0011114ae311")
+  CLSID_ISimilarityReportProgress = "96236a7a-9dbc-11da-9e3f-0011114ae311"
   struct ISimilarityReportProgress
     lpVtbl : ISimilarityReportProgressVTbl*
   end
@@ -263,6 +281,8 @@ lib LibWin32
     get_next_data : Proc(ISimilarityTableDumpState*, UInt32, UInt32*, LibC::BOOL*, SimilarityDumpData*, HRESULT)
   end
 
+  ISimilarityTableDumpState_GUID = LibC::GUID.new("96236a7b-9dbc-11da-9e3f-0011114ae311")
+  CLSID_ISimilarityTableDumpState = "96236a7b-9dbc-11da-9e3f-0011114ae311"
   struct ISimilarityTableDumpState
     lpVtbl : ISimilarityTableDumpStateVTbl*
   end
@@ -277,6 +297,8 @@ lib LibWin32
     get_view : Proc(ISimilarityTraitsMappedView*, UInt8**, UInt8**, Void)
   end
 
+  ISimilarityTraitsMappedView_GUID = LibC::GUID.new("96236a7c-9dbc-11da-9e3f-0011114ae311")
+  CLSID_ISimilarityTraitsMappedView = "96236a7c-9dbc-11da-9e3f-0011114ae311"
   struct ISimilarityTraitsMappedView
     lpVtbl : ISimilarityTraitsMappedViewVTbl*
   end
@@ -294,6 +316,8 @@ lib LibWin32
     create_view : Proc(ISimilarityTraitsMapping*, UInt32, RdcMappingAccessMode, ISimilarityTraitsMappedView*, HRESULT)
   end
 
+  ISimilarityTraitsMapping_GUID = LibC::GUID.new("96236a7d-9dbc-11da-9e3f-0011114ae311")
+  CLSID_ISimilarityTraitsMapping = "96236a7d-9dbc-11da-9e3f-0011114ae311"
   struct ISimilarityTraitsMapping
     lpVtbl : ISimilarityTraitsMappingVTbl*
   end
@@ -311,6 +335,8 @@ lib LibWin32
     get_last_index : Proc(ISimilarityTraitsTable*, UInt32*, HRESULT)
   end
 
+  ISimilarityTraitsTable_GUID = LibC::GUID.new("96236a7e-9dbc-11da-9e3f-0011114ae311")
+  CLSID_ISimilarityTraitsTable = "96236a7e-9dbc-11da-9e3f-0011114ae311"
   struct ISimilarityTraitsTable
     lpVtbl : ISimilarityTraitsTableVTbl*
   end
@@ -328,6 +354,8 @@ lib LibWin32
     get_record_count : Proc(ISimilarityFileIdTable*, UInt32*, HRESULT)
   end
 
+  ISimilarityFileIdTable_GUID = LibC::GUID.new("96236a7f-9dbc-11da-9e3f-0011114ae311")
+  CLSID_ISimilarityFileIdTable = "96236a7f-9dbc-11da-9e3f-0011114ae311"
   struct ISimilarityFileIdTable
     lpVtbl : ISimilarityFileIdTableVTbl*
   end
@@ -340,6 +368,8 @@ lib LibWin32
     results : Proc(IRdcSimilarityGenerator*, SimilarityData*, HRESULT)
   end
 
+  IRdcSimilarityGenerator_GUID = LibC::GUID.new("96236a80-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IRdcSimilarityGenerator = "96236a80-9dbc-11da-9e3f-0011114ae311"
   struct IRdcSimilarityGenerator
     lpVtbl : IRdcSimilarityGeneratorVTbl*
   end
@@ -352,6 +382,8 @@ lib LibWin32
     get_next_file_id : Proc(IFindSimilarResults*, UInt32*, SimilarityFileId*, HRESULT)
   end
 
+  IFindSimilarResults_GUID = LibC::GUID.new("96236a81-9dbc-11da-9e3f-0011114ae311")
+  CLSID_IFindSimilarResults = "96236a81-9dbc-11da-9e3f-0011114ae311"
   struct IFindSimilarResults
     lpVtbl : IFindSimilarResultsVTbl*
   end
@@ -369,6 +401,8 @@ lib LibWin32
     get_record_count : Proc(ISimilarity*, UInt32*, HRESULT)
   end
 
+  ISimilarity_GUID = LibC::GUID.new("96236a83-9dbc-11da-9e3f-0011114ae311")
+  CLSID_ISimilarity = "96236a83-9dbc-11da-9e3f-0011114ae311"
   struct ISimilarity
     lpVtbl : ISimilarityVTbl*
   end

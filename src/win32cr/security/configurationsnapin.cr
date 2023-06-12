@@ -95,6 +95,8 @@ lib LibWin32
     free_buffer : Proc(ISceSvcAttachmentPersistInfo*, Void*, HRESULT)
   end
 
+  ISceSvcAttachmentPersistInfo_GUID = LibC::GUID.new("6d90e0d0-200d-11d1-affb-00c04fb984f9")
+  CLSID_ISceSvcAttachmentPersistInfo = "6d90e0d0-200d-11d1-affb-00c04fb984f9"
   struct ISceSvcAttachmentPersistInfo
     lpVtbl : ISceSvcAttachmentPersistInfoVTbl*
   end
@@ -109,6 +111,8 @@ lib LibWin32
     close_handle : Proc(ISceSvcAttachmentData*, Void*, HRESULT)
   end
 
+  ISceSvcAttachmentData_GUID = LibC::GUID.new("17c35fde-200d-11d1-affb-00c04fb984f9")
+  CLSID_ISceSvcAttachmentData = "17c35fde-200d-11d1-affb-00c04fb984f9"
   struct ISceSvcAttachmentData
     lpVtbl : ISceSvcAttachmentDataVTbl*
   end

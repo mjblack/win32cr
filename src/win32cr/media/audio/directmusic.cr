@@ -640,6 +640,8 @@ lib LibWin32
     set_direct_sound : Proc(IDirectMusic*, IDirectSound, LibC::HANDLE, HRESULT)
   end
 
+  IDirectMusic_GUID = LibC::GUID.new("6536115a-7b2d-11d2-ba18-0000f875ac12")
+  CLSID_IDirectMusic = "6536115a-7b2d-11d2-ba18-0000f875ac12"
   struct IDirectMusic
     lpVtbl : IDirectMusicVTbl*
   end
@@ -660,6 +662,8 @@ lib LibWin32
     set_external_master_clock : Proc(IDirectMusic8*, IReferenceClock, HRESULT)
   end
 
+  IDirectMusic8_GUID = LibC::GUID.new("2d3629f7-813d-4939-8508-f05c6b75fd97")
+  CLSID_IDirectMusic8 = "2d3629f7-813d-4939-8508-f05c6b75fd97"
   struct IDirectMusic8
     lpVtbl : IDirectMusic8VTbl*
   end
@@ -683,6 +687,8 @@ lib LibWin32
     set_used_bytes : Proc(IDirectMusicBuffer*, UInt32, HRESULT)
   end
 
+  IDirectMusicBuffer_GUID = LibC::GUID.new("d2ac2878-b39b-11d1-8704-00600893b1bd")
+  CLSID_IDirectMusicBuffer = "d2ac2878-b39b-11d1-8704-00600893b1bd"
   struct IDirectMusicBuffer
     lpVtbl : IDirectMusicBufferVTbl*
   end
@@ -695,6 +701,8 @@ lib LibWin32
     set_patch : Proc(IDirectMusicInstrument*, UInt32, HRESULT)
   end
 
+  IDirectMusicInstrument_GUID = LibC::GUID.new("d2ac287d-b39b-11d1-8704-00600893b1bd")
+  CLSID_IDirectMusicInstrument = "d2ac287d-b39b-11d1-8704-00600893b1bd"
   struct IDirectMusicInstrument
     lpVtbl : IDirectMusicInstrumentVTbl*
   end
@@ -705,6 +713,8 @@ lib LibWin32
     release : Proc(IDirectMusicDownloadedInstrument*, UInt32)
   end
 
+  IDirectMusicDownloadedInstrument_GUID = LibC::GUID.new("d2ac287e-b39b-11d1-8704-00600893b1bd")
+  CLSID_IDirectMusicDownloadedInstrument = "d2ac287e-b39b-11d1-8704-00600893b1bd"
   struct IDirectMusicDownloadedInstrument
     lpVtbl : IDirectMusicDownloadedInstrumentVTbl*
   end
@@ -717,6 +727,8 @@ lib LibWin32
     enum_instrument : Proc(IDirectMusicCollection*, UInt32, UInt32*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
+  IDirectMusicCollection_GUID = LibC::GUID.new("d2ac287c-b39b-11d1-8704-00600893b1bd")
+  CLSID_IDirectMusicCollection = "d2ac287c-b39b-11d1-8704-00600893b1bd"
   struct IDirectMusicCollection
     lpVtbl : IDirectMusicCollectionVTbl*
   end
@@ -728,6 +740,8 @@ lib LibWin32
     get_buffer : Proc(IDirectMusicDownload*, Void**, UInt32*, HRESULT)
   end
 
+  IDirectMusicDownload_GUID = LibC::GUID.new("d2ac287b-b39b-11d1-8704-00600893b1bd")
+  CLSID_IDirectMusicDownload = "d2ac287b-b39b-11d1-8704-00600893b1bd"
   struct IDirectMusicDownload
     lpVtbl : IDirectMusicDownloadVTbl*
   end
@@ -744,6 +758,8 @@ lib LibWin32
     unload : Proc(IDirectMusicPortDownload*, IDirectMusicDownload, HRESULT)
   end
 
+  IDirectMusicPortDownload_GUID = LibC::GUID.new("d2ac287a-b39b-11d1-8704-00600893b1bd")
+  CLSID_IDirectMusicPortDownload = "d2ac287a-b39b-11d1-8704-00600893b1bd"
   struct IDirectMusicPortDownload
     lpVtbl : IDirectMusicPortDownloadVTbl*
   end
@@ -771,6 +787,8 @@ lib LibWin32
     get_format : Proc(IDirectMusicPort*, WAVEFORMATEX*, UInt32*, UInt32*, HRESULT)
   end
 
+  IDirectMusicPort_GUID = LibC::GUID.new("08f2d8c9-37c2-11d2-b9f9-0000f875ac12")
+  CLSID_IDirectMusicPort = "08f2d8c9-37c2-11d2-b9f9-0000f875ac12"
   struct IDirectMusicPort
     lpVtbl : IDirectMusicPortVTbl*
   end
@@ -782,6 +800,8 @@ lib LibWin32
     thru_channel : Proc(IDirectMusicThru*, UInt32, UInt32, UInt32, UInt32, IDirectMusicPort, HRESULT)
   end
 
+  IDirectMusicThru_GUID = LibC::GUID.new("ced153e7-3606-11d2-b9f9-0000f875ac12")
+  CLSID_IDirectMusicThru = "ced153e7-3606-11d2-b9f9-0000f875ac12"
   struct IDirectMusicThru
     lpVtbl : IDirectMusicThruVTbl*
   end
@@ -809,6 +829,8 @@ lib LibWin32
     get_append : Proc(IDirectMusicSynth*, UInt32*, HRESULT)
   end
 
+  IDirectMusicSynth_GUID = LibC::GUID.new("09823661-5c85-11d2-afa6-00aa0024d8b6")
+  CLSID_IDirectMusicSynth = "09823661-5c85-11d2-afa6-00aa0024d8b6"
   struct IDirectMusicSynth
     lpVtbl : IDirectMusicSynthVTbl*
   end
@@ -841,6 +863,8 @@ lib LibWin32
     assign_channel_to_buses : Proc(IDirectMusicSynth8*, UInt32, UInt32, UInt32*, UInt32, HRESULT)
   end
 
+  IDirectMusicSynth8_GUID = LibC::GUID.new("53cab625-2711-4c9f-9de7-1b7f925f6fc8")
+  CLSID_IDirectMusicSynth8 = "53cab625-2711-4c9f-9de7-1b7f925f6fc8"
   struct IDirectMusicSynth8
     lpVtbl : IDirectMusicSynth8VTbl*
   end
@@ -859,6 +883,8 @@ lib LibWin32
     get_desired_buffer_size : Proc(IDirectMusicSynthSink*, UInt32*, HRESULT)
   end
 
+  IDirectMusicSynthSink_GUID = LibC::GUID.new("09823663-5c85-11d2-afa6-00aa0024d8b6")
+  CLSID_IDirectMusicSynthSink = "09823663-5c85-11d2-afa6-00aa0024d8b6"
   struct IDirectMusicSynthSink
     lpVtbl : IDirectMusicSynthSinkVTbl*
   end

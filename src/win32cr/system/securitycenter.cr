@@ -81,6 +81,8 @@ lib LibWin32
     get_product_is_default : Proc(IWscProduct*, LibC::BOOL*, HRESULT)
   end
 
+  IWscProduct_GUID = LibC::GUID.new("8c38232e-3a45-4a27-92b0-1a16a975f669")
+  CLSID_IWscProduct = "8c38232e-3a45-4a27-92b0-1a16a975f669"
   struct IWscProduct
     lpVtbl : IWscProductVTbl*
   end
@@ -108,6 +110,8 @@ lib LibWin32
     get_firewall_public_profile_substatus : Proc(IWscProduct2*, WSC_SECURITY_PRODUCT_SUBSTATUS*, HRESULT)
   end
 
+  IWscProduct2_GUID = LibC::GUID.new("f896ca54-fe09-4403-86d4-23cb488d81d8")
+  CLSID_IWscProduct2 = "f896ca54-fe09-4403-86d4-23cb488d81d8"
   struct IWscProduct2
     lpVtbl : IWscProduct2VTbl*
   end
@@ -136,6 +140,8 @@ lib LibWin32
     get_antivirus_days_until_expired : Proc(IWscProduct3*, UInt32*, HRESULT)
   end
 
+  IWscProduct3_GUID = LibC::GUID.new("55536524-d1d1-4726-8c7c-04996a1904e7")
+  CLSID_IWscProduct3 = "55536524-d1d1-4726-8c7c-04996a1904e7"
   struct IWscProduct3
     lpVtbl : IWscProduct3VTbl*
   end
@@ -153,6 +159,8 @@ lib LibWin32
     get_item : Proc(IWSCProductList*, UInt32, IWscProduct*, HRESULT)
   end
 
+  IWSCProductList_GUID = LibC::GUID.new("722a338c-6e8e-4e72-ac27-1417fb0c81c2")
+  CLSID_IWSCProductList = "722a338c-6e8e-4e72-ac27-1417fb0c81c2"
   struct IWSCProductList
     lpVtbl : IWSCProductListVTbl*
   end
@@ -168,6 +176,8 @@ lib LibWin32
     set_default_product : Proc(IWSCDefaultProduct*, SECURITY_PRODUCT_TYPE, UInt8*, HRESULT)
   end
 
+  IWSCDefaultProduct_GUID = LibC::GUID.new("0476d69c-f21a-11e5-9ce9-5e5517507c66")
+  CLSID_IWSCDefaultProduct = "0476d69c-f21a-11e5-9ce9-5e5517507c66"
   struct IWSCDefaultProduct
     lpVtbl : IWSCDefaultProductVTbl*
   end

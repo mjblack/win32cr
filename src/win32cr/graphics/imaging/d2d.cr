@@ -24,6 +24,8 @@ lib LibWin32
     write_thumbnail : Proc(IWICImageEncoder*, ID2D1Image, IWICBitmapEncoder, WICImageParameters*, HRESULT)
   end
 
+  IWICImageEncoder_GUID = LibC::GUID.new("04c75bf8-3ce1-473b-acc5-3cc4f5e94999")
+  CLSID_IWICImageEncoder = "04c75bf8-3ce1-473b-acc5-3cc4f5e94999"
   struct IWICImageEncoder
     lpVtbl : IWICImageEncoderVTbl*
   end
@@ -60,6 +62,8 @@ lib LibWin32
     create_image_encoder : Proc(IWICImagingFactory2*, ID2D1Device, IWICImageEncoder*, HRESULT)
   end
 
+  IWICImagingFactory2_GUID = LibC::GUID.new("7b816b45-1996-4476-b132-de9e247c8af0")
+  CLSID_IWICImagingFactory2 = "7b816b45-1996-4476-b132-de9e247c8af0"
   struct IWICImagingFactory2
     lpVtbl : IWICImagingFactory2VTbl*
   end

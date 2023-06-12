@@ -4836,6 +4836,8 @@ lib LibWin32
     put_existing_ca_certificate : Proc(ICertSrvSetupKeyInformation*, VARIANT, HRESULT)
   end
 
+  ICertSrvSetupKeyInformation_GUID = LibC::GUID.new("6ba73778-36da-4c39-8a85-bcfa7d000793")
+  CLSID_ICertSrvSetupKeyInformation = "6ba73778-36da-4c39-8a85-bcfa7d000793"
   struct ICertSrvSetupKeyInformation
     lpVtbl : ICertSrvSetupKeyInformationVTbl*
   end
@@ -4854,6 +4856,8 @@ lib LibWin32
     add : Proc(ICertSrvSetupKeyInformationCollection*, ICertSrvSetupKeyInformation, HRESULT)
   end
 
+  ICertSrvSetupKeyInformationCollection_GUID = LibC::GUID.new("e65c8b00-e58f-41f9-a9ec-a28d7427c844")
+  CLSID_ICertSrvSetupKeyInformationCollection = "e65c8b00-e58f-41f9-a9ec-a28d7427c844"
   struct ICertSrvSetupKeyInformationCollection
     lpVtbl : ICertSrvSetupKeyInformationCollectionVTbl*
   end
@@ -4888,6 +4892,8 @@ lib LibWin32
     post_un_install : Proc(ICertSrvSetup*, HRESULT)
   end
 
+  ICertSrvSetup_GUID = LibC::GUID.new("b760a1bb-4784-44c0-8f12-555f0780ff25")
+  CLSID_ICertSrvSetup = "b760a1bb-4784-44c0-8f12-555f0780ff25"
   struct ICertSrvSetup
     lpVtbl : ICertSrvSetupVTbl*
   end
@@ -4914,6 +4920,8 @@ lib LibWin32
     post_un_install : Proc(IMSCEPSetup*, HRESULT)
   end
 
+  IMSCEPSetup_GUID = LibC::GUID.new("4f7761bb-9f3b-4592-9ee0-9a73259c313e")
+  CLSID_IMSCEPSetup = "4f7761bb-9f3b-4592-9ee0-9a73259c313e"
   struct IMSCEPSetup
     lpVtbl : IMSCEPSetupVTbl*
   end
@@ -4935,6 +4943,8 @@ lib LibWin32
     un_install : Proc(ICertificateEnrollmentServerSetup*, VARIANT*, VARIANT*, HRESULT)
   end
 
+  ICertificateEnrollmentServerSetup_GUID = LibC::GUID.new("70027fdb-9dd9-4921-8944-b35cb31bd2ec")
+  CLSID_ICertificateEnrollmentServerSetup = "70027fdb-9dd9-4921-8944-b35cb31bd2ec"
   struct ICertificateEnrollmentServerSetup
     lpVtbl : ICertificateEnrollmentServerSetupVTbl*
   end
@@ -4955,6 +4965,8 @@ lib LibWin32
     un_install : Proc(ICertificateEnrollmentPolicyServerSetup*, VARIANT*, HRESULT)
   end
 
+  ICertificateEnrollmentPolicyServerSetup_GUID = LibC::GUID.new("859252cc-238c-4a88-b8fd-a37e7d04e68b")
+  CLSID_ICertificateEnrollmentPolicyServerSetup = "859252cc-238c-4a88-b8fd-a37e7d04e68b"
   struct ICertificateEnrollmentPolicyServerSetup
     lpVtbl : ICertificateEnrollmentPolicyServerSetupVTbl*
   end

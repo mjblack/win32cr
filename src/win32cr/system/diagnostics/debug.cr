@@ -6722,6 +6722,8 @@ lib LibWin32
     set_thread_context : Proc(IDebugAdvanced*, Void*, UInt32, HRESULT)
   end
 
+  IDebugAdvanced_GUID = LibC::GUID.new("f2df5f53-071f-47bd-9de6-5734c3fed689")
+  CLSID_IDebugAdvanced = "f2df5f53-071f-47bd-9de6-5734c3fed689"
   struct IDebugAdvanced
     lpVtbl : IDebugAdvancedVTbl*
   end
@@ -6739,6 +6741,8 @@ lib LibWin32
     get_system_object_information : Proc(IDebugAdvanced2*, UInt32, UInt64, UInt32, Void*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugAdvanced2_GUID = LibC::GUID.new("716d14c9-119b-4ba5-af1f-0890e672416a")
+  CLSID_IDebugAdvanced2 = "716d14c9-119b-4ba5-af1f-0890e672416a"
   struct IDebugAdvanced2
     lpVtbl : IDebugAdvanced2VTbl*
   end
@@ -6759,6 +6763,8 @@ lib LibWin32
     get_symbol_information_wide : Proc(IDebugAdvanced3*, UInt32, UInt64, UInt32, Void*, UInt32, UInt32*, Char*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugAdvanced3_GUID = LibC::GUID.new("cba4abb4-84c4-444d-87ca-a04e13286739")
+  CLSID_IDebugAdvanced3 = "cba4abb4-84c4-444d-87ca-a04e13286739"
   struct IDebugAdvanced3
     lpVtbl : IDebugAdvanced3VTbl*
   end
@@ -6780,6 +6786,8 @@ lib LibWin32
     get_symbol_information_wide_ex : Proc(IDebugAdvanced4*, UInt32, UInt64, UInt32, Void*, UInt32, UInt32*, Char*, UInt32, UInt32*, SYMBOL_INFO_EX*, HRESULT)
   end
 
+  IDebugAdvanced4_GUID = LibC::GUID.new("d1069067-2a65-4bf0-ae97-76184b67856b")
+  CLSID_IDebugAdvanced4 = "d1069067-2a65-4bf0-ae97-76184b67856b"
   struct IDebugAdvanced4
     lpVtbl : IDebugAdvanced4VTbl*
   end
@@ -6811,6 +6819,8 @@ lib LibWin32
     get_parameters : Proc(IDebugBreakpoint*, DEBUG_BREAKPOINT_PARAMETERS*, HRESULT)
   end
 
+  IDebugBreakpoint_GUID = LibC::GUID.new("5bd9d474-5975-423a-b88b-65a8e7110e65")
+  CLSID_IDebugBreakpoint = "5bd9d474-5975-423a-b88b-65a8e7110e65"
   struct IDebugBreakpoint
     lpVtbl : IDebugBreakpointVTbl*
   end
@@ -6846,6 +6856,8 @@ lib LibWin32
     set_offset_expression_wide : Proc(IDebugBreakpoint2*, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugBreakpoint2_GUID = LibC::GUID.new("1b278d20-79f2-426e-a3f9-c1ddf375d48e")
+  CLSID_IDebugBreakpoint2 = "1b278d20-79f2-426e-a3f9-c1ddf375d48e"
   struct IDebugBreakpoint2
     lpVtbl : IDebugBreakpoint2VTbl*
   end
@@ -6882,6 +6894,8 @@ lib LibWin32
     get_guid : Proc(IDebugBreakpoint3*, Guid*, HRESULT)
   end
 
+  IDebugBreakpoint3_GUID = LibC::GUID.new("38f5c249-b448-43bb-9835-579d4ec02249")
+  CLSID_IDebugBreakpoint3 = "38f5c249-b448-43bb-9835-579d4ec02249"
   struct IDebugBreakpoint3
     lpVtbl : IDebugBreakpoint3VTbl*
   end
@@ -6937,6 +6951,8 @@ lib LibWin32
     flush_callbacks : Proc(IDebugClient*, HRESULT)
   end
 
+  IDebugClient_GUID = LibC::GUID.new("27fe5639-8407-4f47-8364-ee118fb08ac8")
+  CLSID_IDebugClient = "27fe5639-8407-4f47-8364-ee118fb08ac8"
   struct IDebugClient
     lpVtbl : IDebugClientVTbl*
   end
@@ -7000,6 +7016,8 @@ lib LibWin32
     abandon_current_process : Proc(IDebugClient2*, HRESULT)
   end
 
+  IDebugClient2_GUID = LibC::GUID.new("edbed635-372e-4dab-bbfe-ed0d2f63be81")
+  CLSID_IDebugClient2 = "edbed635-372e-4dab-bbfe-ed0d2f63be81"
   struct IDebugClient2
     lpVtbl : IDebugClient2VTbl*
   end
@@ -7067,6 +7085,8 @@ lib LibWin32
     create_process_and_attach_wide : Proc(IDebugClient3*, UInt64, LibC::LPWSTR, UInt32, UInt32, UInt32, HRESULT)
   end
 
+  IDebugClient3_GUID = LibC::GUID.new("dd492d7f-71b8-4ad6-a8dc-1c887479ff91")
+  CLSID_IDebugClient3 = "dd492d7f-71b8-4ad6-a8dc-1c887479ff91"
   struct IDebugClient3
     lpVtbl : IDebugClient3VTbl*
   end
@@ -7140,6 +7160,8 @@ lib LibWin32
     get_dump_file_wide : Proc(IDebugClient4*, UInt32, Char*, UInt32, UInt32*, UInt64*, UInt32*, HRESULT)
   end
 
+  IDebugClient4_GUID = LibC::GUID.new("ca83c3de-5089-4cf8-93c8-d892387f2a5e")
+  CLSID_IDebugClient4 = "ca83c3de-5089-4cf8-93c8-d892387f2a5e"
   struct IDebugClient4
     lpVtbl : IDebugClient4VTbl*
   end
@@ -7242,6 +7264,8 @@ lib LibWin32
     set_quit_lock_string_wide : Proc(IDebugClient5*, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugClient5_GUID = LibC::GUID.new("e3acb9d7-7ec2-4f0c-a0da-e81e0cbbe628")
+  CLSID_IDebugClient5 = "e3acb9d7-7ec2-4f0c-a0da-e81e0cbbe628"
   struct IDebugClient5
     lpVtbl : IDebugClient5VTbl*
   end
@@ -7345,6 +7369,8 @@ lib LibWin32
     set_event_context_callbacks : Proc(IDebugClient6*, IDebugEventContextCallbacks, HRESULT)
   end
 
+  IDebugClient6_GUID = LibC::GUID.new("fd28b4c5-c498-4686-a28e-62cad2154eb3")
+  CLSID_IDebugClient6 = "fd28b4c5-c498-4686-a28e-62cad2154eb3"
   struct IDebugClient6
     lpVtbl : IDebugClient6VTbl*
   end
@@ -7449,6 +7475,8 @@ lib LibWin32
     set_client_context : Proc(IDebugClient7*, Void*, UInt32, HRESULT)
   end
 
+  IDebugClient7_GUID = LibC::GUID.new("13586be3-542e-481e-b1f2-8497ba74f9a9")
+  CLSID_IDebugClient7 = "13586be3-542e-481e-b1f2-8497ba74f9a9"
   struct IDebugClient7
     lpVtbl : IDebugClient7VTbl*
   end
@@ -7554,6 +7582,8 @@ lib LibWin32
     open_dump_file_wide2 : Proc(IDebugClient8*, LibC::LPWSTR, UInt64, UInt32, HRESULT)
   end
 
+  IDebugClient8_GUID = LibC::GUID.new("cec43add-6375-469e-83d5-414e4033c19a")
+  CLSID_IDebugClient8 = "cec43add-6375-469e-83d5-414e4033c19a"
   struct IDebugClient8
     lpVtbl : IDebugClient8VTbl*
   end
@@ -7565,6 +7595,8 @@ lib LibWin32
     launch_plm_package_for_debug_wide : Proc(IDebugPlmClient*, UInt64, UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt32*, HRESULT)
   end
 
+  IDebugPlmClient_GUID = LibC::GUID.new("a02b66c4-aea3-4234-a9f7-fe4c383d4e29")
+  CLSID_IDebugPlmClient = "a02b66c4-aea3-4234-a9f7-fe4c383d4e29"
   struct IDebugPlmClient
     lpVtbl : IDebugPlmClientVTbl*
   end
@@ -7577,6 +7609,8 @@ lib LibWin32
     launch_plm_bg_task_for_debug_wide : Proc(IDebugPlmClient2*, UInt64, UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt32*, HRESULT)
   end
 
+  IDebugPlmClient2_GUID = LibC::GUID.new("597c980d-e7bd-4309-962c-9d9b69a7372c")
+  CLSID_IDebugPlmClient2 = "597c980d-e7bd-4309-962c-9d9b69a7372c"
   struct IDebugPlmClient2
     lpVtbl : IDebugPlmClient2VTbl*
   end
@@ -7598,6 +7632,8 @@ lib LibWin32
     activate_and_debug_plm_bg_task_wide : Proc(IDebugPlmClient3*, UInt64, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugPlmClient3_GUID = LibC::GUID.new("d4a5dbd1-ca02-4d90-856a-2a92bfd0f20f")
+  CLSID_IDebugPlmClient3 = "d4a5dbd1-ca02-4d90-856a-2a92bfd0f20f"
   struct IDebugPlmClient3
     lpVtbl : IDebugPlmClient3VTbl*
   end
@@ -7609,6 +7645,8 @@ lib LibWin32
     write : Proc(IDebugOutputStream*, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugOutputStream_GUID = LibC::GUID.new("7782d8f2-2b85-4059-ab88-28ceddca1c80")
+  CLSID_IDebugOutputStream = "7782d8f2-2b85-4059-ab88-28ceddca1c80"
   struct IDebugOutputStream
     lpVtbl : IDebugOutputStreamVTbl*
   end
@@ -7711,6 +7749,8 @@ lib LibWin32
     get_last_event_information : Proc(IDebugControl*, UInt32*, UInt32*, UInt32*, Void*, UInt32, UInt32*, UInt8*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugControl_GUID = LibC::GUID.new("5182e668-105e-416e-ad92-24ef800424ba")
+  CLSID_IDebugControl = "5182e668-105e-416e-ad92-24ef800424ba"
   struct IDebugControl
     lpVtbl : IDebugControlVTbl*
   end
@@ -7821,6 +7861,8 @@ lib LibWin32
     output_text_replacements : Proc(IDebugControl2*, UInt32, UInt32, HRESULT)
   end
 
+  IDebugControl2_GUID = LibC::GUID.new("d4366723-44df-4bed-8c7e-4c05424f4588")
+  CLSID_IDebugControl2 = "d4366723-44df-4bed-8c7e-4c05424f4588"
   struct IDebugControl2
     lpVtbl : IDebugControl2VTbl*
   end
@@ -7944,6 +7986,8 @@ lib LibWin32
     set_next_event_index : Proc(IDebugControl3*, UInt32, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugControl3_GUID = LibC::GUID.new("7df74a86-b03f-407f-90ab-a20dadcead08")
+  CLSID_IDebugControl3 = "7df74a86-b03f-407f-90ab-a20dadcead08"
   struct IDebugControl3
     lpVtbl : IDebugControl3VTbl*
   end
@@ -8120,6 +8164,8 @@ lib LibWin32
     reset_managed_status : Proc(IDebugControl4*, UInt32, HRESULT)
   end
 
+  IDebugControl4_GUID = LibC::GUID.new("94e60ce9-9b41-4b19-9fc0-6d9eb35272b3")
+  CLSID_IDebugControl4 = "94e60ce9-9b41-4b19-9fc0-6d9eb35272b3"
   struct IDebugControl4
     lpVtbl : IDebugControl4VTbl*
   end
@@ -8301,6 +8347,8 @@ lib LibWin32
     get_breakpoint_by_guid : Proc(IDebugControl5*, Guid*, IDebugBreakpoint3*, HRESULT)
   end
 
+  IDebugControl5_GUID = LibC::GUID.new("b2ffe162-2412-429f-8d1d-5bf6dd824696")
+  CLSID_IDebugControl5 = "b2ffe162-2412-429f-8d1d-5bf6dd824696"
   struct IDebugControl5
     lpVtbl : IDebugControl5VTbl*
   end
@@ -8484,6 +8532,8 @@ lib LibWin32
     get_synchronization_status : Proc(IDebugControl6*, UInt32*, UInt32*, HRESULT)
   end
 
+  IDebugControl6_GUID = LibC::GUID.new("bc0d583f-126d-43a1-9cc4-a860ab1d537b")
+  CLSID_IDebugControl6 = "bc0d583f-126d-43a1-9cc4-a860ab1d537b"
   struct IDebugControl6
     lpVtbl : IDebugControl6VTbl*
   end
@@ -8668,6 +8718,8 @@ lib LibWin32
     get_debuggee_type2 : Proc(IDebugControl7*, UInt32, UInt32*, UInt32*, HRESULT)
   end
 
+  IDebugControl7_GUID = LibC::GUID.new("b86fb3b1-80d4-475b-aea3-cf06539cf63a")
+  CLSID_IDebugControl7 = "b86fb3b1-80d4-475b-aea3-cf06539cf63a"
   struct IDebugControl7
     lpVtbl : IDebugControl7VTbl*
   end
@@ -8698,6 +8750,8 @@ lib LibWin32
     read_processor_system_data : Proc(IDebugDataSpaces*, UInt32, UInt32, Void*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugDataSpaces_GUID = LibC::GUID.new("88f7dfab-3ea7-4c3a-aefb-c4e8106173aa")
+  CLSID_IDebugDataSpaces = "88f7dfab-3ea7-4c3a-aefb-c4e8106173aa"
   struct IDebugDataSpaces
     lpVtbl : IDebugDataSpacesVTbl*
   end
@@ -8734,6 +8788,8 @@ lib LibWin32
     query_virtual : Proc(IDebugDataSpaces2*, UInt64, MEMORY_BASIC_INFORMATION64*, HRESULT)
   end
 
+  IDebugDataSpaces2_GUID = LibC::GUID.new("7a5e852f-96e9-468f-ac1b-0b3addc4a049")
+  CLSID_IDebugDataSpaces2 = "7a5e852f-96e9-468f-ac1b-0b3addc4a049"
   struct IDebugDataSpaces2
     lpVtbl : IDebugDataSpaces2VTbl*
   end
@@ -8775,6 +8831,8 @@ lib LibWin32
     end_enum_tagged : Proc(IDebugDataSpaces3*, UInt64, HRESULT)
   end
 
+  IDebugDataSpaces3_GUID = LibC::GUID.new("23f79d6c-8aaf-4f7c-a607-9995f5407e63")
+  CLSID_IDebugDataSpaces3 = "23f79d6c-8aaf-4f7c-a607-9995f5407e63"
   struct IDebugDataSpaces3
     lpVtbl : IDebugDataSpaces3VTbl*
   end
@@ -8826,6 +8884,8 @@ lib LibWin32
     write_physical2 : Proc(IDebugDataSpaces4*, UInt64, UInt32, Void*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugDataSpaces4_GUID = LibC::GUID.new("d98ada1f-29e9-4ef5-a6c0-e53349883212")
+  CLSID_IDebugDataSpaces4 = "d98ada1f-29e9-4ef5-a6c0-e53349883212"
   struct IDebugDataSpaces4
     lpVtbl : IDebugDataSpaces4VTbl*
   end
@@ -8850,6 +8910,8 @@ lib LibWin32
     change_symbol_state : Proc(IDebugEventCallbacks*, UInt32, UInt64, HRESULT)
   end
 
+  IDebugEventCallbacks_GUID = LibC::GUID.new("337be28b-5036-4d72-b6bf-c45fbb9f2eaa")
+  CLSID_IDebugEventCallbacks = "337be28b-5036-4d72-b6bf-c45fbb9f2eaa"
   struct IDebugEventCallbacks
     lpVtbl : IDebugEventCallbacksVTbl*
   end
@@ -8874,6 +8936,8 @@ lib LibWin32
     change_symbol_state : Proc(IDebugEventCallbacksWide*, UInt32, UInt64, HRESULT)
   end
 
+  IDebugEventCallbacksWide_GUID = LibC::GUID.new("0690e046-9c23-45ac-a04f-987ac29ad0d3")
+  CLSID_IDebugEventCallbacksWide = "0690e046-9c23-45ac-a04f-987ac29ad0d3"
   struct IDebugEventCallbacksWide
     lpVtbl : IDebugEventCallbacksWideVTbl*
   end
@@ -8898,6 +8962,8 @@ lib LibWin32
     change_symbol_state : Proc(IDebugEventContextCallbacks*, UInt32, UInt64, HRESULT)
   end
 
+  IDebugEventContextCallbacks_GUID = LibC::GUID.new("61a4905b-23f9-4247-b3c5-53d087529ab7")
+  CLSID_IDebugEventContextCallbacks = "61a4905b-23f9-4247-b3c5-53d087529ab7"
   struct IDebugEventContextCallbacks
     lpVtbl : IDebugEventContextCallbacksVTbl*
   end
@@ -8910,6 +8976,8 @@ lib LibWin32
     end_input : Proc(IDebugInputCallbacks*, HRESULT)
   end
 
+  IDebugInputCallbacks_GUID = LibC::GUID.new("9f50e42c-f136-499e-9a97-73036c94ed2d")
+  CLSID_IDebugInputCallbacks = "9f50e42c-f136-499e-9a97-73036c94ed2d"
   struct IDebugInputCallbacks
     lpVtbl : IDebugInputCallbacksVTbl*
   end
@@ -8921,6 +8989,8 @@ lib LibWin32
     output : Proc(IDebugOutputCallbacks*, UInt32, PSTR, HRESULT)
   end
 
+  IDebugOutputCallbacks_GUID = LibC::GUID.new("4bf58045-d654-4c40-b0af-683090f356dc")
+  CLSID_IDebugOutputCallbacks = "4bf58045-d654-4c40-b0af-683090f356dc"
   struct IDebugOutputCallbacks
     lpVtbl : IDebugOutputCallbacksVTbl*
   end
@@ -8932,6 +9002,8 @@ lib LibWin32
     output : Proc(IDebugOutputCallbacksWide*, UInt32, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugOutputCallbacksWide_GUID = LibC::GUID.new("4c7fd663-c394-4e26-8ef1-34ad5ed3764c")
+  CLSID_IDebugOutputCallbacksWide = "4c7fd663-c394-4e26-8ef1-34ad5ed3764c"
   struct IDebugOutputCallbacksWide
     lpVtbl : IDebugOutputCallbacksWideVTbl*
   end
@@ -8945,6 +9017,8 @@ lib LibWin32
     output2 : Proc(IDebugOutputCallbacks2*, UInt32, UInt32, UInt64, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugOutputCallbacks2_GUID = LibC::GUID.new("67721fe9-56d2-4a44-a325-2b65513ce6eb")
+  CLSID_IDebugOutputCallbacks2 = "67721fe9-56d2-4a44-a325-2b65513ce6eb"
   struct IDebugOutputCallbacks2
     lpVtbl : IDebugOutputCallbacks2VTbl*
   end
@@ -8966,6 +9040,8 @@ lib LibWin32
     get_frame_offset : Proc(IDebugRegisters*, UInt64*, HRESULT)
   end
 
+  IDebugRegisters_GUID = LibC::GUID.new("ce289126-9e84-45a7-937e-67bb18691493")
+  CLSID_IDebugRegisters = "ce289126-9e84-45a7-937e-67bb18691493"
   struct IDebugRegisters
     lpVtbl : IDebugRegistersVTbl*
   end
@@ -9002,6 +9078,8 @@ lib LibWin32
     get_frame_offset2 : Proc(IDebugRegisters2*, UInt32, UInt64*, HRESULT)
   end
 
+  IDebugRegisters2_GUID = LibC::GUID.new("1656afa9-19c6-4e3a-97e7-5dc9160cf9c4")
+  CLSID_IDebugRegisters2 = "1656afa9-19c6-4e3a-97e7-5dc9160cf9c4"
   struct IDebugRegisters2
     lpVtbl : IDebugRegisters2VTbl*
   end
@@ -9022,6 +9100,8 @@ lib LibWin32
     output_as_type : Proc(IDebugSymbolGroup*, UInt32, PSTR, HRESULT)
   end
 
+  IDebugSymbolGroup_GUID = LibC::GUID.new("f2528316-0f1a-4431-aeed-11d096e1e2ab")
+  CLSID_IDebugSymbolGroup = "f2528316-0f1a-4431-aeed-11d096e1e2ab"
   struct IDebugSymbolGroup
     lpVtbl : IDebugSymbolGroupVTbl*
   end
@@ -9055,6 +9135,8 @@ lib LibWin32
     get_symbol_entry_information : Proc(IDebugSymbolGroup2*, UInt32, DEBUG_SYMBOL_ENTRY*, HRESULT)
   end
 
+  IDebugSymbolGroup2_GUID = LibC::GUID.new("6a7ccc5f-fb5e-4dcc-b41c-6c20307bccc7")
+  CLSID_IDebugSymbolGroup2 = "6a7ccc5f-fb5e-4dcc-b41c-6c20307bccc7"
   struct IDebugSymbolGroup2
     lpVtbl : IDebugSymbolGroup2VTbl*
   end
@@ -9114,6 +9196,8 @@ lib LibWin32
     get_source_file_line_offsets : Proc(IDebugSymbols*, PSTR, UInt64*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugSymbols_GUID = LibC::GUID.new("8c31e98c-983a-48a5-9016-6fe5d667a950")
+  CLSID_IDebugSymbols = "8c31e98c-983a-48a5-9016-6fe5d667a950"
   struct IDebugSymbols
     lpVtbl : IDebugSymbolsVTbl*
   end
@@ -9181,6 +9265,8 @@ lib LibWin32
     set_type_options : Proc(IDebugSymbols2*, UInt32, HRESULT)
   end
 
+  IDebugSymbols2_GUID = LibC::GUID.new("3a707211-afdd-4495-ad4f-56fecdf8163f")
+  CLSID_IDebugSymbols2 = "3a707211-afdd-4495-ad4f-56fecdf8163f"
   struct IDebugSymbols2
     lpVtbl : IDebugSymbols2VTbl*
   end
@@ -9314,6 +9400,8 @@ lib LibWin32
     get_source_entry_by_source_entry : Proc(IDebugSymbols3*, DEBUG_SYMBOL_SOURCE_ENTRY*, UInt32, DEBUG_SYMBOL_SOURCE_ENTRY*, HRESULT)
   end
 
+  IDebugSymbols3_GUID = LibC::GUID.new("f02fbecc-50ac-4f36-9ad9-c975e8f32ff8")
+  CLSID_IDebugSymbols3 = "f02fbecc-50ac-4f36-9ad9-c975e8f32ff8"
   struct IDebugSymbols3
     lpVtbl : IDebugSymbols3VTbl*
   end
@@ -9454,6 +9542,8 @@ lib LibWin32
     output_symbol_by_inline_context : Proc(IDebugSymbols4*, UInt32, UInt32, UInt64, UInt32, HRESULT)
   end
 
+  IDebugSymbols4_GUID = LibC::GUID.new("e391bbd8-9d8c-4418-840b-c006592a1752")
+  CLSID_IDebugSymbols4 = "e391bbd8-9d8c-4418-840b-c006592a1752"
   struct IDebugSymbols4
     lpVtbl : IDebugSymbols4VTbl*
   end
@@ -9596,6 +9686,8 @@ lib LibWin32
     set_scope_frame_by_index_ex : Proc(IDebugSymbols5*, UInt32, UInt32, HRESULT)
   end
 
+  IDebugSymbols5_GUID = LibC::GUID.new("c65fa83e-1e69-475e-8e0e-b5d79e9cc17e")
+  CLSID_IDebugSymbols5 = "c65fa83e-1e69-475e-8e0e-b5d79e9cc17e"
   struct IDebugSymbols5
     lpVtbl : IDebugSymbols5VTbl*
   end
@@ -9635,6 +9727,8 @@ lib LibWin32
     get_current_process_executable_name : Proc(IDebugSystemObjects*, UInt8*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugSystemObjects_GUID = LibC::GUID.new("6b86fe2c-2c4f-4f0c-9da2-174311acc327")
+  CLSID_IDebugSystemObjects = "6b86fe2c-2c4f-4f0c-9da2-174311acc327"
   struct IDebugSystemObjects
     lpVtbl : IDebugSystemObjectsVTbl*
   end
@@ -9679,6 +9773,8 @@ lib LibWin32
     set_implicit_process_data_offset : Proc(IDebugSystemObjects2*, UInt64, HRESULT)
   end
 
+  IDebugSystemObjects2_GUID = LibC::GUID.new("0ae9f5ff-1852-4679-b055-494bee6407ee")
+  CLSID_IDebugSystemObjects2 = "0ae9f5ff-1852-4679-b055-494bee6407ee"
   struct IDebugSystemObjects2
     lpVtbl : IDebugSystemObjects2VTbl*
   end
@@ -9732,6 +9828,8 @@ lib LibWin32
     get_current_system_server_name : Proc(IDebugSystemObjects3*, UInt8*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugSystemObjects3_GUID = LibC::GUID.new("e9676e2f-e286-4ea3-b0f9-dfe5d9fc330e")
+  CLSID_IDebugSystemObjects3 = "e9676e2f-e286-4ea3-b0f9-dfe5d9fc330e"
   struct IDebugSystemObjects3
     lpVtbl : IDebugSystemObjects3VTbl*
   end
@@ -9787,6 +9885,8 @@ lib LibWin32
     get_current_system_server_name_wide : Proc(IDebugSystemObjects4*, Char*, UInt32, UInt32*, HRESULT)
   end
 
+  IDebugSystemObjects4_GUID = LibC::GUID.new("489468e6-7d0f-4af5-87ab-25207454d553")
+  CLSID_IDebugSystemObjects4 = "489468e6-7d0f-4af5-87ab-25207454d553"
   struct IDebugSystemObjects4
     lpVtbl : IDebugSystemObjects4VTbl*
   end
@@ -9846,6 +9946,8 @@ lib LibWin32
     get_data_model : Proc(IHostDataModelAccess*, IDataModelManager*, IDebugHost*, HRESULT)
   end
 
+  IHostDataModelAccess_GUID = LibC::GUID.new("f2bce54e-4835-4f8a-836e-7981e29904d1")
+  CLSID_IHostDataModelAccess = "f2bce54e-4835-4f8a-836e-7981e29904d1"
   struct IHostDataModelAccess
     lpVtbl : IHostDataModelAccessVTbl*
   end
@@ -9861,6 +9963,8 @@ lib LibWin32
     clear_keys : Proc(IKeyStore*, HRESULT)
   end
 
+  IKeyStore_GUID = LibC::GUID.new("0fc7557d-401d-4fca-9365-da1e9850697c")
+  CLSID_IKeyStore = "0fc7557d-401d-4fca-9365-da1e9850697c"
   struct IKeyStore
     lpVtbl : IKeyStoreVTbl*
   end
@@ -9904,6 +10008,8 @@ lib LibWin32
     is_equal_to : Proc(IModelObject*, IModelObject, Bool*, HRESULT)
   end
 
+  IModelObject_GUID = LibC::GUID.new("e28c7893-3f4b-4b96-baca-293cdc55f45d")
+  CLSID_IModelObject = "e28c7893-3f4b-4b96-baca-293cdc55f45d"
   struct IModelObject
     lpVtbl : IModelObjectVTbl*
   end
@@ -9934,6 +10040,8 @@ lib LibWin32
     acquire_named_model : Proc(IDataModelManager*, LibC::LPWSTR, IModelObject*, HRESULT)
   end
 
+  IDataModelManager_GUID = LibC::GUID.new("73fe19f4-a110-4500-8ed9-3c28896f508c")
+  CLSID_IDataModelManager = "73fe19f4-a110-4500-8ed9-3c28896f508c"
   struct IDataModelManager
     lpVtbl : IDataModelManagerVTbl*
   end
@@ -9951,6 +10059,8 @@ lib LibWin32
     set_key_value : Proc(IModelKeyReference*, IModelObject, HRESULT)
   end
 
+  IModelKeyReference_GUID = LibC::GUID.new("5253dcf8-5aff-4c62-b302-56a289e00998")
+  CLSID_IModelKeyReference = "5253dcf8-5aff-4c62-b302-56a289e00998"
   struct IModelKeyReference
     lpVtbl : IModelKeyReferenceVTbl*
   end
@@ -9963,6 +10073,8 @@ lib LibWin32
     set_value : Proc(IModelPropertyAccessor*, LibC::LPWSTR, IModelObject, IModelObject, HRESULT)
   end
 
+  IModelPropertyAccessor_GUID = LibC::GUID.new("5a0c63d9-0526-42b8-960c-9516a3254c85")
+  CLSID_IModelPropertyAccessor = "5a0c63d9-0526-42b8-960c-9516a3254c85"
   struct IModelPropertyAccessor
     lpVtbl : IModelPropertyAccessorVTbl*
   end
@@ -9974,6 +10086,8 @@ lib LibWin32
     call : Proc(IModelMethod*, IModelObject, UInt64, IModelObject*, IModelObject*, IKeyStore*, HRESULT)
   end
 
+  IModelMethod_GUID = LibC::GUID.new("80600c1f-b90b-4896-82ad-1c00207909e8")
+  CLSID_IModelMethod = "80600c1f-b90b-4896-82ad-1c00207909e8"
   struct IModelMethod
     lpVtbl : IModelMethodVTbl*
   end
@@ -9986,6 +10100,8 @@ lib LibWin32
     get_next : Proc(IKeyEnumerator*, UInt8**, IModelObject*, IKeyStore*, HRESULT)
   end
 
+  IKeyEnumerator_GUID = LibC::GUID.new("345fa92e-5e00-4319-9cae-971f7601cdcf")
+  CLSID_IKeyEnumerator = "345fa92e-5e00-4319-9cae-971f7601cdcf"
   struct IKeyEnumerator
     lpVtbl : IKeyEnumeratorVTbl*
   end
@@ -9998,6 +10114,8 @@ lib LibWin32
     get_next : Proc(IRawEnumerator*, UInt8**, SymbolKind*, IModelObject*, HRESULT)
   end
 
+  IRawEnumerator_GUID = LibC::GUID.new("e13613f9-3a3c-40b5-8f48-1e5ebfb9b21b")
+  CLSID_IRawEnumerator = "e13613f9-3a3c-40b5-8f48-1e5ebfb9b21b"
   struct IRawEnumerator
     lpVtbl : IRawEnumeratorVTbl*
   end
@@ -10010,6 +10128,8 @@ lib LibWin32
     get_name : Proc(IDataModelConcept*, UInt8**, HRESULT)
   end
 
+  IDataModelConcept_GUID = LibC::GUID.new("fcb98d1d-1114-4fbf-b24c-effcb5def0d3")
+  CLSID_IDataModelConcept = "fcb98d1d-1114-4fbf-b24c-effcb5def0d3"
   struct IDataModelConcept
     lpVtbl : IDataModelConceptVTbl*
   end
@@ -10021,6 +10141,8 @@ lib LibWin32
     to_display_string : Proc(IStringDisplayableConcept*, IModelObject, IKeyStore, UInt8**, HRESULT)
   end
 
+  IStringDisplayableConcept_GUID = LibC::GUID.new("d28e8d70-6c00-4205-940d-501016601ea3")
+  CLSID_IStringDisplayableConcept = "d28e8d70-6c00-4205-940d-501016601ea3"
   struct IStringDisplayableConcept
     lpVtbl : IStringDisplayableConceptVTbl*
   end
@@ -10032,6 +10154,8 @@ lib LibWin32
     get_containing_symbol : Proc(ICodeAddressConcept*, IModelObject, IDebugHostSymbol*, HRESULT)
   end
 
+  ICodeAddressConcept_GUID = LibC::GUID.new("c7371568-5c78-4a00-a4ab-6ef8823184cb")
+  CLSID_ICodeAddressConcept = "c7371568-5c78-4a00-a4ab-6ef8823184cb"
   struct ICodeAddressConcept
     lpVtbl : ICodeAddressConceptVTbl*
   end
@@ -10044,6 +10168,8 @@ lib LibWin32
     get_next : Proc(IModelIterator*, IModelObject*, UInt64, IModelObject*, IKeyStore*, HRESULT)
   end
 
+  IModelIterator_GUID = LibC::GUID.new("e4622136-927d-4490-874f-581f3e4e3688")
+  CLSID_IModelIterator = "e4622136-927d-4490-874f-581f3e4e3688"
   struct IModelIterator
     lpVtbl : IModelIteratorVTbl*
   end
@@ -10056,6 +10182,8 @@ lib LibWin32
     get_iterator : Proc(IIterableConcept*, IModelObject, IModelIterator*, HRESULT)
   end
 
+  IIterableConcept_GUID = LibC::GUID.new("f5d49d0c-0b02-4301-9c9b-b3a6037628f3")
+  CLSID_IIterableConcept = "f5d49d0c-0b02-4301-9c9b-b3a6037628f3"
   struct IIterableConcept
     lpVtbl : IIterableConceptVTbl*
   end
@@ -10069,6 +10197,8 @@ lib LibWin32
     set_at : Proc(IIndexableConcept*, IModelObject, UInt64, IModelObject*, IModelObject, HRESULT)
   end
 
+  IIndexableConcept_GUID = LibC::GUID.new("d1fad99f-3f53-4457-850c-8051df2d3fb5")
+  CLSID_IIndexableConcept = "d1fad99f-3f53-4457-850c-8051df2d3fb5"
   struct IIndexableConcept
     lpVtbl : IIndexableConceptVTbl*
   end
@@ -10080,6 +10210,8 @@ lib LibWin32
     cast_to_preferred_runtime_type : Proc(IPreferredRuntimeTypeConcept*, IModelObject, IModelObject*, HRESULT)
   end
 
+  IPreferredRuntimeTypeConcept_GUID = LibC::GUID.new("9d6c1d7b-a76f-4618-8068-5f76bd9a4e8a")
+  CLSID_IPreferredRuntimeTypeConcept = "9d6c1d7b-a76f-4618-8068-5f76bd9a4e8a"
   struct IPreferredRuntimeTypeConcept
     lpVtbl : IPreferredRuntimeTypeConceptVTbl*
   end
@@ -10093,6 +10225,8 @@ lib LibWin32
     get_default_metadata : Proc(IDebugHost*, IKeyStore*, HRESULT)
   end
 
+  IDebugHost_GUID = LibC::GUID.new("b8c74943-6b2c-4eeb-b5c5-35d378a6d99d")
+  CLSID_IDebugHost = "b8c74943-6b2c-4eeb-b5c5-35d378a6d99d"
   struct IDebugHost
     lpVtbl : IDebugHostVTbl*
   end
@@ -10104,6 +10238,8 @@ lib LibWin32
     is_equal_to : Proc(IDebugHostContext*, IDebugHostContext, Bool*, HRESULT)
   end
 
+  IDebugHostContext_GUID = LibC::GUID.new("a68c70d8-5ec0-46e5-b775-3134a48ea2e3")
+  CLSID_IDebugHostContext = "a68c70d8-5ec0-46e5-b775-3134a48ea2e3"
   struct IDebugHostContext
     lpVtbl : IDebugHostContextVTbl*
   end
@@ -10115,6 +10251,8 @@ lib LibWin32
     report_error : Proc(IDebugHostErrorSink*, ErrorClass, HRESULT, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugHostErrorSink_GUID = LibC::GUID.new("c8ff0f0b-fce9-467e-8bb3-5d69ef109c00")
+  CLSID_IDebugHostErrorSink = "c8ff0f0b-fce9-467e-8bb3-5d69ef109c00"
   struct IDebugHostErrorSink
     lpVtbl : IDebugHostErrorSinkVTbl*
   end
@@ -10132,6 +10270,8 @@ lib LibWin32
     compare_against : Proc(IDebugHostSymbol*, IDebugHostSymbol, UInt32, Bool*, HRESULT)
   end
 
+  IDebugHostSymbol_GUID = LibC::GUID.new("0f819103-87de-4e96-8277-e05cd441fb22")
+  CLSID_IDebugHostSymbol = "0f819103-87de-4e96-8277-e05cd441fb22"
   struct IDebugHostSymbol
     lpVtbl : IDebugHostSymbolVTbl*
   end
@@ -10144,6 +10284,8 @@ lib LibWin32
     get_next : Proc(IDebugHostSymbolEnumerator*, IDebugHostSymbol*, HRESULT)
   end
 
+  IDebugHostSymbolEnumerator_GUID = LibC::GUID.new("28d96c86-10a3-4976-b14e-eaef4790aa1f")
+  CLSID_IDebugHostSymbolEnumerator = "28d96c86-10a3-4976-b14e-eaef4790aa1f"
   struct IDebugHostSymbolEnumerator
     lpVtbl : IDebugHostSymbolEnumeratorVTbl*
   end
@@ -10167,6 +10309,8 @@ lib LibWin32
     find_symbol_by_name : Proc(IDebugHostModule*, LibC::LPWSTR, IDebugHostSymbol*, HRESULT)
   end
 
+  IDebugHostModule_GUID = LibC::GUID.new("c9ba3e18-d070-4378-bbd0-34613b346e1e")
+  CLSID_IDebugHostModule = "c9ba3e18-d070-4378-bbd0-34613b346e1e"
   struct IDebugHostModule
     lpVtbl : IDebugHostModuleVTbl*
   end
@@ -10203,6 +10347,8 @@ lib LibWin32
     get_generic_argument_at : Proc(IDebugHostType*, UInt64, IDebugHostSymbol*, HRESULT)
   end
 
+  IDebugHostType_GUID = LibC::GUID.new("3aadc353-2b14-4abb-9893-5e03458e07ee")
+  CLSID_IDebugHostType = "3aadc353-2b14-4abb-9893-5e03458e07ee"
   struct IDebugHostType
     lpVtbl : IDebugHostTypeVTbl*
   end
@@ -10221,6 +10367,8 @@ lib LibWin32
     get_value : Proc(IDebugHostConstant*, VARIANT*, HRESULT)
   end
 
+  IDebugHostConstant_GUID = LibC::GUID.new("62787edc-fa76-4690-bd71-5e8c3e2937ec")
+  CLSID_IDebugHostConstant = "62787edc-fa76-4690-bd71-5e8c3e2937ec"
   struct IDebugHostConstant
     lpVtbl : IDebugHostConstantVTbl*
   end
@@ -10242,6 +10390,8 @@ lib LibWin32
     get_value : Proc(IDebugHostField*, VARIANT*, HRESULT)
   end
 
+  IDebugHostField_GUID = LibC::GUID.new("e06f6495-16bc-4cc9-b11d-2a6b23fa72f3")
+  CLSID_IDebugHostField = "e06f6495-16bc-4cc9-b11d-2a6b23fa72f3"
   struct IDebugHostField
     lpVtbl : IDebugHostFieldVTbl*
   end
@@ -10262,6 +10412,8 @@ lib LibWin32
     get_value : Proc(IDebugHostData*, VARIANT*, HRESULT)
   end
 
+  IDebugHostData_GUID = LibC::GUID.new("a3d64993-826c-44fa-897d-926f2fe7ad0b")
+  CLSID_IDebugHostData = "a3d64993-826c-44fa-897d-926f2fe7ad0b"
   struct IDebugHostData
     lpVtbl : IDebugHostDataVTbl*
   end
@@ -10281,6 +10433,8 @@ lib LibWin32
     get_location : Proc(IDebugHostPublic*, Location*, HRESULT)
   end
 
+  IDebugHostPublic_GUID = LibC::GUID.new("6c597ac9-fb4d-4f6d-9f39-22488539f8f4")
+  CLSID_IDebugHostPublic = "6c597ac9-fb4d-4f6d-9f39-22488539f8f4"
   struct IDebugHostPublic
     lpVtbl : IDebugHostPublicVTbl*
   end
@@ -10299,6 +10453,8 @@ lib LibWin32
     get_offset : Proc(IDebugHostBaseClass*, UInt64*, HRESULT)
   end
 
+  IDebugHostBaseClass_GUID = LibC::GUID.new("b94d57d2-390b-40f7-b5b4-b6db897d974b")
+  CLSID_IDebugHostBaseClass = "b94d57d2-390b-40f7-b5b4-b6db897d974b"
   struct IDebugHostBaseClass
     lpVtbl : IDebugHostBaseClassVTbl*
   end
@@ -10316,6 +10472,8 @@ lib LibWin32
     get_most_derived_object : Proc(IDebugHostSymbols*, IDebugHostContext, Location, IDebugHostType, Location*, IDebugHostType*, HRESULT)
   end
 
+  IDebugHostSymbols_GUID = LibC::GUID.new("854fd751-c2e1-4eb2-b525-6619cb97a588")
+  CLSID_IDebugHostSymbols = "854fd751-c2e1-4eb2-b525-6619cb97a588"
   struct IDebugHostSymbols
     lpVtbl : IDebugHostSymbolsVTbl*
   end
@@ -10331,6 +10489,8 @@ lib LibWin32
     get_display_string_for_location : Proc(IDebugHostMemory*, IDebugHostContext, Location, UInt8, UInt8**, HRESULT)
   end
 
+  IDebugHostMemory_GUID = LibC::GUID.new("212149c9-9183-4a3e-b00e-4fd1dc95339b")
+  CLSID_IDebugHostMemory = "212149c9-9183-4a3e-b00e-4fd1dc95339b"
   struct IDebugHostMemory
     lpVtbl : IDebugHostMemoryVTbl*
   end
@@ -10343,6 +10503,8 @@ lib LibWin32
     evaluate_extended_expression : Proc(IDebugHostEvaluator*, IDebugHostContext, LibC::LPWSTR, IModelObject, IModelObject*, IKeyStore*, HRESULT)
   end
 
+  IDebugHostEvaluator_GUID = LibC::GUID.new("0fef9a21-577e-4997-ac7b-1c4883241d99")
+  CLSID_IDebugHostEvaluator = "0fef9a21-577e-4997-ac7b-1c4883241d99"
   struct IDebugHostEvaluator
     lpVtbl : IDebugHostEvaluatorVTbl*
   end
@@ -10354,6 +10516,8 @@ lib LibWin32
     is_match : Proc(IDebugHostModuleSignature*, IDebugHostModule, Bool*, HRESULT)
   end
 
+  IDebugHostModuleSignature_GUID = LibC::GUID.new("31e53a5a-01ee-4bbb-b899-4b46ae7d595c")
+  CLSID_IDebugHostModuleSignature = "31e53a5a-01ee-4bbb-b899-4b46ae7d595c"
   struct IDebugHostModuleSignature
     lpVtbl : IDebugHostModuleSignatureVTbl*
   end
@@ -10367,6 +10531,8 @@ lib LibWin32
     compare_against : Proc(IDebugHostTypeSignature*, IDebugHostTypeSignature, SignatureComparison*, HRESULT)
   end
 
+  IDebugHostTypeSignature_GUID = LibC::GUID.new("3aadc353-2b14-4abb-9893-5e03458e07ee")
+  CLSID_IDebugHostTypeSignature = "3aadc353-2b14-4abb-9893-5e03458e07ee"
   struct IDebugHostTypeSignature
     lpVtbl : IDebugHostTypeSignatureVTbl*
   end
@@ -10385,6 +10551,8 @@ lib LibWin32
     get_language : Proc(IDebugHostSymbol2*, LanguageKind*, HRESULT)
   end
 
+  IDebugHostSymbol2_GUID = LibC::GUID.new("21515b67-6720-4257-8a68-077dc944471c")
+  CLSID_IDebugHostSymbol2 = "21515b67-6720-4257-8a68-077dc944471c"
   struct IDebugHostSymbol2
     lpVtbl : IDebugHostSymbol2VTbl*
   end
@@ -10426,6 +10594,8 @@ lib LibWin32
     get_function_instance_pointer_type : Proc(IDebugHostType2*, IDebugHostType2*, HRESULT)
   end
 
+  IDebugHostType2_GUID = LibC::GUID.new("b28632b9-8506-4676-87ce-8f7e05e59876")
+  CLSID_IDebugHostType2 = "b28632b9-8506-4676-87ce-8f7e05e59876"
   struct IDebugHostType2
     lpVtbl : IDebugHostType2VTbl*
   end
@@ -10437,6 +10607,8 @@ lib LibWin32
     poll_user_interrupt : Proc(IDebugHostStatus*, Bool*, HRESULT)
   end
 
+  IDebugHostStatus_GUID = LibC::GUID.new("4f3e1ce2-86b2-4c7a-9c65-d0a9d0eecf44")
+  CLSID_IDebugHostStatus = "4f3e1ce2-86b2-4c7a-9c65-d0a9d0eecf44"
   struct IDebugHostStatus
     lpVtbl : IDebugHostStatusVTbl*
   end
@@ -10448,6 +10620,8 @@ lib LibWin32
     report_error : Proc(IDataModelScriptClient*, ErrorClass, HRESULT, LibC::LPWSTR, UInt32, UInt32, HRESULT)
   end
 
+  IDataModelScriptClient_GUID = LibC::GUID.new("3b362b0e-89f0-46c6-a663-dfdc95194aef")
+  CLSID_IDataModelScriptClient = "3b362b0e-89f0-46c6-a663-dfdc95194aef"
   struct IDataModelScriptClient
     lpVtbl : IDataModelScriptClientVTbl*
   end
@@ -10461,6 +10635,8 @@ lib LibWin32
     get_content : Proc(IDataModelScriptTemplate*, IStream*, HRESULT)
   end
 
+  IDataModelScriptTemplate_GUID = LibC::GUID.new("1303dec4-fa3b-4f1b-9224-b953d16babb5")
+  CLSID_IDataModelScriptTemplate = "1303dec4-fa3b-4f1b-9224-b953d16babb5"
   struct IDataModelScriptTemplate
     lpVtbl : IDataModelScriptTemplateVTbl*
   end
@@ -10478,6 +10654,8 @@ lib LibWin32
     invoke_main : Proc(IDataModelScript*, IDataModelScriptClient, HRESULT)
   end
 
+  IDataModelScript_GUID = LibC::GUID.new("7b4d30fc-b14a-49f8-8d87-d9a1480c97f7")
+  CLSID_IDataModelScript = "7b4d30fc-b14a-49f8-8d87-d9a1480c97f7"
   struct IDataModelScript
     lpVtbl : IDataModelScriptVTbl*
   end
@@ -10490,6 +10668,8 @@ lib LibWin32
     get_next : Proc(IDataModelScriptTemplateEnumerator*, IDataModelScriptTemplate*, HRESULT)
   end
 
+  IDataModelScriptTemplateEnumerator_GUID = LibC::GUID.new("69ce6ae2-2268-4e6f-b062-20ce62bfe677")
+  CLSID_IDataModelScriptTemplateEnumerator = "69ce6ae2-2268-4e6f-b062-20ce62bfe677"
   struct IDataModelScriptTemplateEnumerator
     lpVtbl : IDataModelScriptTemplateEnumeratorVTbl*
   end
@@ -10505,6 +10685,8 @@ lib LibWin32
     enumerate_templates : Proc(IDataModelScriptProvider*, IDataModelScriptTemplateEnumerator*, HRESULT)
   end
 
+  IDataModelScriptProvider_GUID = LibC::GUID.new("513461e0-4fca-48ce-8658-32f3e2056f3b")
+  CLSID_IDataModelScriptProvider = "513461e0-4fca-48ce-8658-32f3e2056f3b"
   struct IDataModelScriptProvider
     lpVtbl : IDataModelScriptProviderVTbl*
   end
@@ -10517,6 +10699,8 @@ lib LibWin32
     get_next : Proc(IDataModelScriptProviderEnumerator*, IDataModelScriptProvider*, HRESULT)
   end
 
+  IDataModelScriptProviderEnumerator_GUID = LibC::GUID.new("95ba00e2-704a-4fe2-a8f1-a7e7d8fb0941")
+  CLSID_IDataModelScriptProviderEnumerator = "95ba00e2-704a-4fe2-a8f1-a7e7d8fb0941"
   struct IDataModelScriptProviderEnumerator
     lpVtbl : IDataModelScriptProviderEnumeratorVTbl*
   end
@@ -10533,6 +10717,8 @@ lib LibWin32
     enumerate_script_providers : Proc(IDataModelScriptManager*, IDataModelScriptProviderEnumerator*, HRESULT)
   end
 
+  IDataModelScriptManager_GUID = LibC::GUID.new("6fd11e33-e5ad-410b-8011-68c6bc4bf80d")
+  CLSID_IDataModelScriptManager = "6fd11e33-e5ad-410b-8011-68c6bc4bf80d"
   struct IDataModelScriptManager
     lpVtbl : IDataModelScriptManagerVTbl*
   end
@@ -10546,6 +10732,8 @@ lib LibWin32
     enumerate_keys : Proc(IDynamicKeyProviderConcept*, IModelObject, IKeyEnumerator*, HRESULT)
   end
 
+  IDynamicKeyProviderConcept_GUID = LibC::GUID.new("e7983fa1-80a7-498c-988f-518ddc5d4025")
+  CLSID_IDynamicKeyProviderConcept = "e7983fa1-80a7-498c-988f-518ddc5d4025"
   struct IDynamicKeyProviderConcept
     lpVtbl : IDynamicKeyProviderConceptVTbl*
   end
@@ -10561,6 +10749,8 @@ lib LibWin32
     notify_destruct : Proc(IDynamicConceptProviderConcept*, HRESULT)
   end
 
+  IDynamicConceptProviderConcept_GUID = LibC::GUID.new("95a7f7dd-602e-483f-9d06-a15c0ee13174")
+  CLSID_IDynamicConceptProviderConcept = "95a7f7dd-602e-483f-9d06-a15c0ee13174"
   struct IDynamicConceptProviderConcept
     lpVtbl : IDynamicConceptProviderConceptVTbl*
   end
@@ -10573,6 +10763,8 @@ lib LibWin32
     get_namespace_object : Proc(IDataModelScriptHostContext*, IModelObject*, HRESULT)
   end
 
+  IDataModelScriptHostContext_GUID = LibC::GUID.new("014d366a-1f23-4981-9219-b2db8b402054")
+  CLSID_IDataModelScriptHostContext = "014d366a-1f23-4981-9219-b2db8b402054"
   struct IDataModelScriptHostContext
     lpVtbl : IDataModelScriptHostContextVTbl*
   end
@@ -10584,6 +10776,8 @@ lib LibWin32
     create_context : Proc(IDebugHostScriptHost*, IDataModelScript, IDataModelScriptHostContext*, HRESULT)
   end
 
+  IDebugHostScriptHost_GUID = LibC::GUID.new("b70334a4-b92c-4570-93a1-d3eb686649a0")
+  CLSID_IDebugHostScriptHost = "b70334a4-b92c-4570-93a1-d3eb686649a0"
   struct IDebugHostScriptHost
     lpVtbl : IDebugHostScriptHostVTbl*
   end
@@ -10598,6 +10792,8 @@ lib LibWin32
     enumerate_references : Proc(IDataModelNameBinder*, IModelObject, IKeyEnumerator*, HRESULT)
   end
 
+  IDataModelNameBinder_GUID = LibC::GUID.new("af352b7b-8292-4c01-b360-2dc3696c65e7")
+  CLSID_IDataModelNameBinder = "af352b7b-8292-4c01-b360-2dc3696c65e7"
   struct IDataModelNameBinder
     lpVtbl : IDataModelNameBinderVTbl*
   end
@@ -10616,6 +10812,8 @@ lib LibWin32
     override_context_object : Proc(IModelKeyReference2*, IModelObject, HRESULT)
   end
 
+  IModelKeyReference2_GUID = LibC::GUID.new("80e2f7c5-7159-4e92-887e-7e0347e88406")
+  CLSID_IModelKeyReference2 = "80e2f7c5-7159-4e92-887e-7e0347e88406"
   struct IModelKeyReference2
     lpVtbl : IModelKeyReference2VTbl*
   end
@@ -10629,6 +10827,8 @@ lib LibWin32
     assign_to : Proc(IDebugHostEvaluator2*, IModelObject, IModelObject, IModelObject*, IKeyStore*, HRESULT)
   end
 
+  IDebugHostEvaluator2_GUID = LibC::GUID.new("a117a435-1fb4-4092-a2ab-a929576c1e87")
+  CLSID_IDebugHostEvaluator2 = "a117a435-1fb4-4092-a2ab-a929576c1e87"
   struct IDebugHostEvaluator2
     lpVtbl : IDebugHostEvaluator2VTbl*
   end
@@ -10661,6 +10861,8 @@ lib LibWin32
     create_typed_intrinsic_object_ex : Proc(IDataModelManager2*, IDebugHostContext, VARIANT*, IDebugHostType, IModelObject*, HRESULT)
   end
 
+  IDataModelManager2_GUID = LibC::GUID.new("f412c5ea-2284-4622-a660-a697160d3312")
+  CLSID_IDataModelManager2 = "f412c5ea-2284-4622-a660-a697160d3312"
   struct IDataModelManager2
     lpVtbl : IDataModelManager2VTbl*
   end
@@ -10677,6 +10879,8 @@ lib LibWin32
     linearize_location : Proc(IDebugHostMemory2*, IDebugHostContext, Location, Location*, HRESULT)
   end
 
+  IDebugHostMemory2_GUID = LibC::GUID.new("eea033de-38f6-416b-a251-1d3771001270")
+  CLSID_IDebugHostMemory2 = "eea033de-38f6-416b-a251-1d3771001270"
   struct IDebugHostMemory2
     lpVtbl : IDebugHostMemory2VTbl*
   end
@@ -10689,6 +10893,8 @@ lib LibWin32
     destroy_function_alias : Proc(IDebugHostExtensibility*, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugHostExtensibility_GUID = LibC::GUID.new("3c2b24e1-11d0-4f86-8ae5-4df166f73253")
+  CLSID_IDebugHostExtensibility = "3c2b24e1-11d0-4f86-8ae5-4df166f73253"
   struct IDebugHostExtensibility
     lpVtbl : IDebugHostExtensibilityVTbl*
   end
@@ -10700,6 +10906,8 @@ lib LibWin32
     notify_debug_event : Proc(IDataModelScriptDebugClient*, ScriptDebugEventInformation*, IDataModelScript, IModelObject, ScriptExecutionKind*, HRESULT)
   end
 
+  IDataModelScriptDebugClient_GUID = LibC::GUID.new("53159b6d-d4c4-471b-a863-5b110ca800ca")
+  CLSID_IDataModelScriptDebugClient = "53159b6d-d4c4-471b-a863-5b110ca800ca"
   struct IDataModelScriptDebugClient
     lpVtbl : IDataModelScriptDebugClientVTbl*
   end
@@ -10712,6 +10920,8 @@ lib LibWin32
     get_next : Proc(IDataModelScriptDebugVariableSetEnumerator*, UInt8**, IModelObject*, IKeyStore*, HRESULT)
   end
 
+  IDataModelScriptDebugVariableSetEnumerator_GUID = LibC::GUID.new("0f9feed7-d045-4ac3-98a8-a98942cf6a35")
+  CLSID_IDataModelScriptDebugVariableSetEnumerator = "0f9feed7-d045-4ac3-98a8-a98942cf6a35"
   struct IDataModelScriptDebugVariableSetEnumerator
     lpVtbl : IDataModelScriptDebugVariableSetEnumeratorVTbl*
   end
@@ -10729,6 +10939,8 @@ lib LibWin32
     enumerate_arguments : Proc(IDataModelScriptDebugStackFrame*, IDataModelScriptDebugVariableSetEnumerator*, HRESULT)
   end
 
+  IDataModelScriptDebugStackFrame_GUID = LibC::GUID.new("dec6ed5e-6360-4941-ab4c-a26409de4f82")
+  CLSID_IDataModelScriptDebugStackFrame = "dec6ed5e-6360-4941-ab4c-a26409de4f82"
   struct IDataModelScriptDebugStackFrame
     lpVtbl : IDataModelScriptDebugStackFrameVTbl*
   end
@@ -10741,6 +10953,8 @@ lib LibWin32
     get_stack_frame : Proc(IDataModelScriptDebugStack*, UInt64, IDataModelScriptDebugStackFrame*, HRESULT)
   end
 
+  IDataModelScriptDebugStack_GUID = LibC::GUID.new("051364dd-e449-443e-9762-fe578f4a5473")
+  CLSID_IDataModelScriptDebugStack = "051364dd-e449-443e-9762-fe578f4a5473"
   struct IDataModelScriptDebugStack
     lpVtbl : IDataModelScriptDebugStackVTbl*
   end
@@ -10757,6 +10971,8 @@ lib LibWin32
     get_position : Proc(IDataModelScriptDebugBreakpoint*, ScriptDebugPosition*, ScriptDebugPosition*, UInt8**, HRESULT)
   end
 
+  IDataModelScriptDebugBreakpoint_GUID = LibC::GUID.new("6bb27b35-02e6-47cb-90a0-5371244032de")
+  CLSID_IDataModelScriptDebugBreakpoint = "6bb27b35-02e6-47cb-90a0-5371244032de"
   struct IDataModelScriptDebugBreakpoint
     lpVtbl : IDataModelScriptDebugBreakpointVTbl*
   end
@@ -10769,6 +10985,8 @@ lib LibWin32
     get_next : Proc(IDataModelScriptDebugBreakpointEnumerator*, IDataModelScriptDebugBreakpoint*, HRESULT)
   end
 
+  IDataModelScriptDebugBreakpointEnumerator_GUID = LibC::GUID.new("39484a75-b4f3-4799-86da-691afa57b299")
+  CLSID_IDataModelScriptDebugBreakpointEnumerator = "39484a75-b4f3-4799-86da-691afa57b299"
   struct IDataModelScriptDebugBreakpointEnumerator
     lpVtbl : IDataModelScriptDebugBreakpointEnumeratorVTbl*
   end
@@ -10789,6 +11007,8 @@ lib LibWin32
     stop_debugging : Proc(IDataModelScriptDebug*, IDataModelScriptDebugClient, HRESULT)
   end
 
+  IDataModelScriptDebug_GUID = LibC::GUID.new("de8e0945-9750-4471-ab76-a8f79d6ec350")
+  CLSID_IDataModelScriptDebug = "de8e0945-9750-4471-ab76-a8f79d6ec350"
   struct IDataModelScriptDebug
     lpVtbl : IDataModelScriptDebugVTbl*
   end
@@ -10810,6 +11030,8 @@ lib LibWin32
     set_breakpoint_at_function : Proc(IDataModelScriptDebug2*, LibC::LPWSTR, IDataModelScriptDebugBreakpoint*, HRESULT)
   end
 
+  IDataModelScriptDebug2_GUID = LibC::GUID.new("cbb10ed3-839e-426c-9243-e23535c1ae1a")
+  CLSID_IDataModelScriptDebug2 = "cbb10ed3-839e-426c-9243-e23535c1ae1a"
   struct IDataModelScriptDebug2
     lpVtbl : IDataModelScriptDebug2VTbl*
   end
@@ -10834,6 +11056,8 @@ lib LibWin32
     find_containing_symbol_by_rva : Proc(IDebugHostModule2*, UInt64, IDebugHostSymbol*, UInt64*, HRESULT)
   end
 
+  IDebugHostModule2_GUID = LibC::GUID.new("b51887e8-bcd0-4e8f-a8c7-434398b78c37")
+  CLSID_IDebugHostModule2 = "b51887e8-bcd0-4e8f-a8c7-434398b78c37"
   struct IDebugHostModule2
     lpVtbl : IDebugHostModule2VTbl*
   end
@@ -10845,6 +11069,8 @@ lib LibWin32
     compare_objects : Proc(IComparableConcept*, IModelObject, IModelObject, Int32*, HRESULT)
   end
 
+  IComparableConcept_GUID = LibC::GUID.new("a7830646-9f0c-4a31-ba19-503f33e6c8a3")
+  CLSID_IComparableConcept = "a7830646-9f0c-4a31-ba19-503f33e6c8a3"
   struct IComparableConcept
     lpVtbl : IComparableConceptVTbl*
   end
@@ -10856,6 +11082,8 @@ lib LibWin32
     are_objects_equal : Proc(IEquatableConcept*, IModelObject, IModelObject, Bool*, HRESULT)
   end
 
+  IEquatableConcept_GUID = LibC::GUID.new("c52d5d3d-609d-4d5d-8a82-46b0acdec4f4")
+  CLSID_IEquatableConcept = "c52d5d3d-609d-4d5d-8a82-46b0acdec4f4"
   struct IEquatableConcept
     lpVtbl : IEquatableConceptVTbl*
   end
@@ -10874,6 +11102,8 @@ lib LibWin32
     on_leave_script : Proc(IActiveScriptSite*, HRESULT)
   end
 
+  IActiveScriptSite_GUID = LibC::GUID.new("db01a1e3-a42b-11cf-8f20-00805f2cd064")
+  CLSID_IActiveScriptSite = "db01a1e3-a42b-11cf-8f20-00805f2cd064"
   struct IActiveScriptSite
     lpVtbl : IActiveScriptSiteVTbl*
   end
@@ -10887,6 +11117,8 @@ lib LibWin32
     get_source_line_text : Proc(IActiveScriptError*, UInt8**, HRESULT)
   end
 
+  IActiveScriptError_GUID = LibC::GUID.new("eae1ba61-a4ed-11cf-8f20-00805f2cd064")
+  CLSID_IActiveScriptError = "eae1ba61-a4ed-11cf-8f20-00805f2cd064"
   struct IActiveScriptError
     lpVtbl : IActiveScriptErrorVTbl*
   end
@@ -10901,6 +11133,8 @@ lib LibWin32
     get_source_position64 : Proc(IActiveScriptError64*, UInt64*, UInt32*, Int32*, HRESULT)
   end
 
+  IActiveScriptError64_GUID = LibC::GUID.new("b21fb2a1-5b8f-4963-8c21-21450f84ed7f")
+  CLSID_IActiveScriptError64 = "b21fb2a1-5b8f-4963-8c21-21450f84ed7f"
   struct IActiveScriptError64
     lpVtbl : IActiveScriptError64VTbl*
   end
@@ -10913,6 +11147,8 @@ lib LibWin32
     enable_modeless : Proc(IActiveScriptSiteWindow*, LibC::BOOL, HRESULT)
   end
 
+  IActiveScriptSiteWindow_GUID = LibC::GUID.new("d10f6761-83e9-11cf-8f20-00805f2cd064")
+  CLSID_IActiveScriptSiteWindow = "d10f6761-83e9-11cf-8f20-00805f2cd064"
   struct IActiveScriptSiteWindow
     lpVtbl : IActiveScriptSiteWindowVTbl*
   end
@@ -10924,6 +11160,8 @@ lib LibWin32
     get_ui_behavior : Proc(IActiveScriptSiteUIControl*, SCRIPTUICITEM, SCRIPTUICHANDLING*, HRESULT)
   end
 
+  IActiveScriptSiteUIControl_GUID = LibC::GUID.new("aedae97e-d7ee-4796-b960-7f092ae844ab")
+  CLSID_IActiveScriptSiteUIControl = "aedae97e-d7ee-4796-b960-7f092ae844ab"
   struct IActiveScriptSiteUIControl
     lpVtbl : IActiveScriptSiteUIControlVTbl*
   end
@@ -10935,6 +11173,8 @@ lib LibWin32
     query_continue : Proc(IActiveScriptSiteInterruptPoll*, HRESULT)
   end
 
+  IActiveScriptSiteInterruptPoll_GUID = LibC::GUID.new("539698a0-cdca-11cf-a5eb-00aa0047a063")
+  CLSID_IActiveScriptSiteInterruptPoll = "539698a0-cdca-11cf-a5eb-00aa0047a063"
   struct IActiveScriptSiteInterruptPoll
     lpVtbl : IActiveScriptSiteInterruptPollVTbl*
   end
@@ -10958,6 +11198,8 @@ lib LibWin32
     clone : Proc(IActiveScript*, IActiveScript*, HRESULT)
   end
 
+  IActiveScript_GUID = LibC::GUID.new("bb1a2ae1-a4f9-11cf-8f20-00805f2cd064")
+  CLSID_IActiveScript = "bb1a2ae1-a4f9-11cf-8f20-00805f2cd064"
   struct IActiveScript
     lpVtbl : IActiveScriptVTbl*
   end
@@ -10971,6 +11213,8 @@ lib LibWin32
     parse_script_text : Proc(IActiveScriptParse32*, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt32, UInt32, UInt32, VARIANT*, EXCEPINFO*, HRESULT)
   end
 
+  IActiveScriptParse32_GUID = LibC::GUID.new("bb1a2ae2-a4f9-11cf-8f20-00805f2cd064")
+  CLSID_IActiveScriptParse32 = "bb1a2ae2-a4f9-11cf-8f20-00805f2cd064"
   struct IActiveScriptParse32
     lpVtbl : IActiveScriptParse32VTbl*
   end
@@ -10984,6 +11228,8 @@ lib LibWin32
     parse_script_text : Proc(IActiveScriptParse64*, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt64, UInt32, UInt32, VARIANT*, EXCEPINFO*, HRESULT)
   end
 
+  IActiveScriptParse64_GUID = LibC::GUID.new("c7ef7658-e1ee-480e-97ea-d52cb4d76d17")
+  CLSID_IActiveScriptParse64 = "c7ef7658-e1ee-480e-97ea-d52cb4d76d17"
   struct IActiveScriptParse64
     lpVtbl : IActiveScriptParse64VTbl*
   end
@@ -10995,6 +11241,8 @@ lib LibWin32
     parse_procedure_text : Proc(IActiveScriptParseProcedureOld32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt32, UInt32, UInt32, IDispatch*, HRESULT)
   end
 
+  IActiveScriptParseProcedureOld32_GUID = LibC::GUID.new("1cff0050-6fdd-11d0-9328-00a0c90dcaa9")
+  CLSID_IActiveScriptParseProcedureOld32 = "1cff0050-6fdd-11d0-9328-00a0c90dcaa9"
   struct IActiveScriptParseProcedureOld32
     lpVtbl : IActiveScriptParseProcedureOld32VTbl*
   end
@@ -11006,6 +11254,8 @@ lib LibWin32
     parse_procedure_text : Proc(IActiveScriptParseProcedureOld64*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt64, UInt32, UInt32, IDispatch*, HRESULT)
   end
 
+  IActiveScriptParseProcedureOld64_GUID = LibC::GUID.new("21f57128-08c9-4638-ba12-22d15d88dc5c")
+  CLSID_IActiveScriptParseProcedureOld64 = "21f57128-08c9-4638-ba12-22d15d88dc5c"
   struct IActiveScriptParseProcedureOld64
     lpVtbl : IActiveScriptParseProcedureOld64VTbl*
   end
@@ -11017,6 +11267,8 @@ lib LibWin32
     parse_procedure_text : Proc(IActiveScriptParseProcedure32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt32, UInt32, UInt32, IDispatch*, HRESULT)
   end
 
+  IActiveScriptParseProcedure32_GUID = LibC::GUID.new("aa5b6a80-b834-11d0-932f-00a0c90dcaa9")
+  CLSID_IActiveScriptParseProcedure32 = "aa5b6a80-b834-11d0-932f-00a0c90dcaa9"
   struct IActiveScriptParseProcedure32
     lpVtbl : IActiveScriptParseProcedure32VTbl*
   end
@@ -11028,6 +11280,8 @@ lib LibWin32
     parse_procedure_text : Proc(IActiveScriptParseProcedure64*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt64, UInt32, UInt32, IDispatch*, HRESULT)
   end
 
+  IActiveScriptParseProcedure64_GUID = LibC::GUID.new("c64713b6-e029-4cc5-9200-438b72890b6a")
+  CLSID_IActiveScriptParseProcedure64 = "c64713b6-e029-4cc5-9200-438b72890b6a"
   struct IActiveScriptParseProcedure64
     lpVtbl : IActiveScriptParseProcedure64VTbl*
   end
@@ -11039,6 +11293,8 @@ lib LibWin32
     parse_procedure_text : Proc(IActiveScriptParseProcedure2_32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt32, UInt32, UInt32, IDispatch*, HRESULT)
   end
 
+  IActiveScriptParseProcedure2_32_GUID = LibC::GUID.new("71ee5b20-fb04-11d1-b3a8-00a0c911e8b2")
+  CLSID_IActiveScriptParseProcedure2_32 = "71ee5b20-fb04-11d1-b3a8-00a0c911e8b2"
   struct IActiveScriptParseProcedure2_32
     lpVtbl : IActiveScriptParseProcedure2_32VTbl*
   end
@@ -11050,6 +11306,8 @@ lib LibWin32
     parse_procedure_text : Proc(IActiveScriptParseProcedure2_64*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown, LibC::LPWSTR, UInt64, UInt32, UInt32, IDispatch*, HRESULT)
   end
 
+  IActiveScriptParseProcedure2_64_GUID = LibC::GUID.new("fe7c4271-210c-448d-9f54-76dab7047b28")
+  CLSID_IActiveScriptParseProcedure2_64 = "fe7c4271-210c-448d-9f54-76dab7047b28"
   struct IActiveScriptParseProcedure2_64
     lpVtbl : IActiveScriptParseProcedure2_64VTbl*
   end
@@ -11063,6 +11321,8 @@ lib LibWin32
     get_encode_prog_id : Proc(IActiveScriptEncode*, UInt8**, HRESULT)
   end
 
+  IActiveScriptEncode_GUID = LibC::GUID.new("bb1a2ae3-a4f9-11cf-8f20-00805f2cd064")
+  CLSID_IActiveScriptEncode = "bb1a2ae3-a4f9-11cf-8f20-00805f2cd064"
   struct IActiveScriptEncode
     lpVtbl : IActiveScriptEncodeVTbl*
   end
@@ -11074,6 +11334,8 @@ lib LibWin32
     encode_script_host_file : Proc(IActiveScriptHostEncode*, UInt8*, UInt8**, UInt32, UInt8*, HRESULT)
   end
 
+  IActiveScriptHostEncode_GUID = LibC::GUID.new("bee9b76e-cfe3-11d1-b747-00c04fc2b085")
+  CLSID_IActiveScriptHostEncode = "bee9b76e-cfe3-11d1-b747-00c04fc2b085"
   struct IActiveScriptHostEncode
     lpVtbl : IActiveScriptHostEncodeVTbl*
   end
@@ -11085,6 +11347,8 @@ lib LibWin32
     bind_handler : Proc(IBindEventHandler*, LibC::LPWSTR, IDispatch, HRESULT)
   end
 
+  IBindEventHandler_GUID = LibC::GUID.new("63cdbcb0-c1b1-11d0-9336-00a0c90dcaa9")
+  CLSID_IBindEventHandler = "63cdbcb0-c1b1-11d0-9336-00a0c90dcaa9"
   struct IBindEventHandler
     lpVtbl : IBindEventHandlerVTbl*
   end
@@ -11098,6 +11362,8 @@ lib LibWin32
     reset_stats : Proc(IActiveScriptStats*, HRESULT)
   end
 
+  IActiveScriptStats_GUID = LibC::GUID.new("b8da6310-e19b-11d0-933c-00a0c90dcaa9")
+  CLSID_IActiveScriptStats = "b8da6310-e19b-11d0-933c-00a0c90dcaa9"
   struct IActiveScriptStats
     lpVtbl : IActiveScriptStatsVTbl*
   end
@@ -11110,6 +11376,8 @@ lib LibWin32
     set_property : Proc(IActiveScriptProperty*, UInt32, VARIANT*, VARIANT*, HRESULT)
   end
 
+  IActiveScriptProperty_GUID = LibC::GUID.new("4954e0d0-fbc7-11d1-8410-006008c3fbfc")
+  CLSID_IActiveScriptProperty = "4954e0d0-fbc7-11d1-8410-006008c3fbfc"
   struct IActiveScriptProperty
     lpVtbl : IActiveScriptPropertyVTbl*
   end
@@ -11121,6 +11389,8 @@ lib LibWin32
     fire_event : Proc(ITridentEventSink*, LibC::LPWSTR, DISPPARAMS*, VARIANT*, EXCEPINFO*, HRESULT)
   end
 
+  ITridentEventSink_GUID = LibC::GUID.new("1dc9ca50-06ef-11d2-8415-006008c3fbfc")
+  CLSID_ITridentEventSink = "1dc9ca50-06ef-11d2-8415-006008c3fbfc"
   struct ITridentEventSink
     lpVtbl : ITridentEventSinkVTbl*
   end
@@ -11132,6 +11402,8 @@ lib LibWin32
     collect_garbage : Proc(IActiveScriptGarbageCollector*, SCRIPTGCTYPE, HRESULT)
   end
 
+  IActiveScriptGarbageCollector_GUID = LibC::GUID.new("6aa2c4a0-2b53-11d4-a2a0-00104bd35090")
+  CLSID_IActiveScriptGarbageCollector = "6aa2c4a0-2b53-11d4-a2a0-00104bd35090"
   struct IActiveScriptGarbageCollector
     lpVtbl : IActiveScriptGarbageCollectorVTbl*
   end
@@ -11143,6 +11415,8 @@ lib LibWin32
     get_sipoid : Proc(IActiveScriptSIPInfo*, Guid*, HRESULT)
   end
 
+  IActiveScriptSIPInfo_GUID = LibC::GUID.new("764651d0-38de-11d4-a2a3-00104bd35090")
+  CLSID_IActiveScriptSIPInfo = "764651d0-38de-11d4-a2a3-00104bd35090"
   struct IActiveScriptSIPInfo
     lpVtbl : IActiveScriptSIPInfoVTbl*
   end
@@ -11154,6 +11428,8 @@ lib LibWin32
     send_script_trace_info : Proc(IActiveScriptSiteTraceInfo*, SCRIPTTRACEINFO, Guid, UInt32, Int32, Int32, UInt64, HRESULT)
   end
 
+  IActiveScriptSiteTraceInfo_GUID = LibC::GUID.new("4b7272ae-1955-4bfe-98b0-780621888569")
+  CLSID_IActiveScriptSiteTraceInfo = "4b7272ae-1955-4bfe-98b0-780621888569"
   struct IActiveScriptSiteTraceInfo
     lpVtbl : IActiveScriptSiteTraceInfoVTbl*
   end
@@ -11166,6 +11442,8 @@ lib LibWin32
     stop_script_tracing : Proc(IActiveScriptTraceInfo*, HRESULT)
   end
 
+  IActiveScriptTraceInfo_GUID = LibC::GUID.new("c35456e7-bebf-4a1b-86a9-24d56be8b369")
+  CLSID_IActiveScriptTraceInfo = "c35456e7-bebf-4a1b-86a9-24d56be8b369"
   struct IActiveScriptTraceInfo
     lpVtbl : IActiveScriptTraceInfoVTbl*
   end
@@ -11177,6 +11455,8 @@ lib LibWin32
     str_comp : Proc(IActiveScriptStringCompare*, UInt8*, UInt8*, Int32*, HRESULT)
   end
 
+  IActiveScriptStringCompare_GUID = LibC::GUID.new("58562769-ed52-42f7-8403-4963514e1f11")
+  CLSID_IActiveScriptStringCompare = "58562769-ed52-42f7-8403-4963514e1f11"
   struct IActiveScriptStringCompare
     lpVtbl : IActiveScriptStringCompareVTbl*
   end
@@ -11192,6 +11472,8 @@ lib LibWin32
     get_parent : Proc(IDebugProperty*, IDebugProperty*, HRESULT)
   end
 
+  IDebugProperty_GUID = LibC::GUID.new("51973c50-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugProperty = "51973c50-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugProperty
     lpVtbl : IDebugPropertyVTbl*
   end
@@ -11207,6 +11489,8 @@ lib LibWin32
     get_count : Proc(IEnumDebugPropertyInfo*, UInt32*, HRESULT)
   end
 
+  IEnumDebugPropertyInfo_GUID = LibC::GUID.new("51973c51-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IEnumDebugPropertyInfo = "51973c51-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IEnumDebugPropertyInfo
     lpVtbl : IEnumDebugPropertyInfoVTbl*
   end
@@ -11224,6 +11508,8 @@ lib LibWin32
     enum_extended_members : Proc(IDebugExtendedProperty*, UInt32, UInt32, IEnumDebugExtendedPropertyInfo*, HRESULT)
   end
 
+  IDebugExtendedProperty_GUID = LibC::GUID.new("51973c52-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugExtendedProperty = "51973c52-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugExtendedProperty
     lpVtbl : IDebugExtendedPropertyVTbl*
   end
@@ -11239,6 +11525,8 @@ lib LibWin32
     get_count : Proc(IEnumDebugExtendedPropertyInfo*, UInt32*, HRESULT)
   end
 
+  IEnumDebugExtendedPropertyInfo_GUID = LibC::GUID.new("51973c53-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IEnumDebugExtendedPropertyInfo = "51973c53-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IEnumDebugExtendedPropertyInfo
     lpVtbl : IEnumDebugExtendedPropertyInfoVTbl*
   end
@@ -11253,6 +11541,8 @@ lib LibWin32
     set_predefined_value : Proc(IPerPropertyBrowsing2*, Int32, UInt32, HRESULT)
   end
 
+  IPerPropertyBrowsing2_GUID = LibC::GUID.new("51973c54-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IPerPropertyBrowsing2 = "51973c54-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IPerPropertyBrowsing2
     lpVtbl : IPerPropertyBrowsing2VTbl*
   end
@@ -11264,6 +11554,8 @@ lib LibWin32
     get_name : Proc(IDebugPropertyEnumType_All*, UInt8**, HRESULT)
   end
 
+  IDebugPropertyEnumType_All_GUID = LibC::GUID.new("51973c55-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugPropertyEnumType_All = "51973c55-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugPropertyEnumType_All
     lpVtbl : IDebugPropertyEnumType_AllVTbl*
   end
@@ -11275,6 +11567,8 @@ lib LibWin32
     get_name : Proc(IDebugPropertyEnumType_Locals*, UInt8**, HRESULT)
   end
 
+  IDebugPropertyEnumType_Locals_GUID = LibC::GUID.new("51973c56-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugPropertyEnumType_Locals = "51973c56-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugPropertyEnumType_Locals
     lpVtbl : IDebugPropertyEnumType_LocalsVTbl*
   end
@@ -11286,6 +11580,8 @@ lib LibWin32
     get_name : Proc(IDebugPropertyEnumType_Arguments*, UInt8**, HRESULT)
   end
 
+  IDebugPropertyEnumType_Arguments_GUID = LibC::GUID.new("51973c57-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugPropertyEnumType_Arguments = "51973c57-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugPropertyEnumType_Arguments
     lpVtbl : IDebugPropertyEnumType_ArgumentsVTbl*
   end
@@ -11297,6 +11593,8 @@ lib LibWin32
     get_name : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, UInt8**, HRESULT)
   end
 
+  IDebugPropertyEnumType_LocalsPlusArgs_GUID = LibC::GUID.new("51973c58-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugPropertyEnumType_LocalsPlusArgs = "51973c58-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugPropertyEnumType_LocalsPlusArgs
     lpVtbl : IDebugPropertyEnumType_LocalsPlusArgsVTbl*
   end
@@ -11308,6 +11606,8 @@ lib LibWin32
     get_name : Proc(IDebugPropertyEnumType_Registers*, UInt8**, HRESULT)
   end
 
+  IDebugPropertyEnumType_Registers_GUID = LibC::GUID.new("51973c59-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugPropertyEnumType_Registers = "51973c59-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugPropertyEnumType_Registers
     lpVtbl : IDebugPropertyEnumType_RegistersVTbl*
   end
@@ -11321,6 +11621,8 @@ lib LibWin32
     enum_code_contexts_of_position : Proc(IActiveScriptDebug32*, UInt32, UInt32, UInt32, IEnumDebugCodeContexts*, HRESULT)
   end
 
+  IActiveScriptDebug32_GUID = LibC::GUID.new("51973c10-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IActiveScriptDebug32 = "51973c10-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IActiveScriptDebug32
     lpVtbl : IActiveScriptDebug32VTbl*
   end
@@ -11334,6 +11636,8 @@ lib LibWin32
     enum_code_contexts_of_position : Proc(IActiveScriptDebug64*, UInt64, UInt32, UInt32, IEnumDebugCodeContexts*, HRESULT)
   end
 
+  IActiveScriptDebug64_GUID = LibC::GUID.new("bc437e23-f5b8-47f4-bb79-7d1ce5483b86")
+  CLSID_IActiveScriptDebug64 = "bc437e23-f5b8-47f4-bb79-7d1ce5483b86"
   struct IActiveScriptDebug64
     lpVtbl : IActiveScriptDebug64VTbl*
   end
@@ -11348,6 +11652,8 @@ lib LibWin32
     on_script_error_debug : Proc(IActiveScriptSiteDebug32*, IActiveScriptErrorDebug, LibC::BOOL*, LibC::BOOL*, HRESULT)
   end
 
+  IActiveScriptSiteDebug32_GUID = LibC::GUID.new("51973c11-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IActiveScriptSiteDebug32 = "51973c11-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IActiveScriptSiteDebug32
     lpVtbl : IActiveScriptSiteDebug32VTbl*
   end
@@ -11362,6 +11668,8 @@ lib LibWin32
     on_script_error_debug : Proc(IActiveScriptSiteDebug64*, IActiveScriptErrorDebug, LibC::BOOL*, LibC::BOOL*, HRESULT)
   end
 
+  IActiveScriptSiteDebug64_GUID = LibC::GUID.new("d6b96b0a-7463-402c-92ac-89984226942f")
+  CLSID_IActiveScriptSiteDebug64 = "d6b96b0a-7463-402c-92ac-89984226942f"
   struct IActiveScriptSiteDebug64
     lpVtbl : IActiveScriptSiteDebug64VTbl*
   end
@@ -11373,6 +11681,8 @@ lib LibWin32
     on_can_not_jit_script_error_debug : Proc(IActiveScriptSiteDebugEx*, IActiveScriptErrorDebug, LibC::BOOL*, HRESULT)
   end
 
+  IActiveScriptSiteDebugEx_GUID = LibC::GUID.new("bb722ccb-6ad2-41c6-b780-af9c03ee69f5")
+  CLSID_IActiveScriptSiteDebugEx = "bb722ccb-6ad2-41c6-b780-af9c03ee69f5"
   struct IActiveScriptSiteDebugEx
     lpVtbl : IActiveScriptSiteDebugExVTbl*
   end
@@ -11388,6 +11698,8 @@ lib LibWin32
     get_stack_frame : Proc(IActiveScriptErrorDebug*, IDebugStackFrame*, HRESULT)
   end
 
+  IActiveScriptErrorDebug_GUID = LibC::GUID.new("51973c12-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IActiveScriptErrorDebug = "51973c12-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IActiveScriptErrorDebug
     lpVtbl : IActiveScriptErrorDebugVTbl*
   end
@@ -11400,6 +11712,8 @@ lib LibWin32
     set_break_point : Proc(IDebugCodeContext*, BREAKPOINT_STATE, HRESULT)
   end
 
+  IDebugCodeContext_GUID = LibC::GUID.new("51973c13-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugCodeContext = "51973c13-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugCodeContext
     lpVtbl : IDebugCodeContextVTbl*
   end
@@ -11415,6 +11729,8 @@ lib LibWin32
     get_result_as_debug_property : Proc(IDebugExpression*, HRESULT*, IDebugProperty*, HRESULT)
   end
 
+  IDebugExpression_GUID = LibC::GUID.new("51973c14-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugExpression = "51973c14-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugExpression
     lpVtbl : IDebugExpressionVTbl*
   end
@@ -11427,6 +11743,8 @@ lib LibWin32
     get_language_info : Proc(IDebugExpressionContext*, UInt8**, Guid*, HRESULT)
   end
 
+  IDebugExpressionContext_GUID = LibC::GUID.new("51973c15-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugExpressionContext = "51973c15-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugExpressionContext
     lpVtbl : IDebugExpressionContextVTbl*
   end
@@ -11438,6 +11756,8 @@ lib LibWin32
     on_complete : Proc(IDebugExpressionCallBack*, HRESULT)
   end
 
+  IDebugExpressionCallBack_GUID = LibC::GUID.new("51973c16-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugExpressionCallBack = "51973c16-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugExpressionCallBack
     lpVtbl : IDebugExpressionCallBackVTbl*
   end
@@ -11453,6 +11773,8 @@ lib LibWin32
     get_debug_property : Proc(IDebugStackFrame*, IDebugProperty*, HRESULT)
   end
 
+  IDebugStackFrame_GUID = LibC::GUID.new("51973c17-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugStackFrame = "51973c17-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugStackFrame
     lpVtbl : IDebugStackFrameVTbl*
   end
@@ -11464,6 +11786,8 @@ lib LibWin32
     enum_stack_frames : Proc(IDebugStackFrameSniffer*, IEnumDebugStackFrames*, HRESULT)
   end
 
+  IDebugStackFrameSniffer_GUID = LibC::GUID.new("51973c18-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugStackFrameSniffer = "51973c18-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugStackFrameSniffer
     lpVtbl : IDebugStackFrameSnifferVTbl*
   end
@@ -11476,6 +11800,8 @@ lib LibWin32
     enum_stack_frames_ex32 : Proc(IDebugStackFrameSnifferEx32*, UInt32, IEnumDebugStackFrames*, HRESULT)
   end
 
+  IDebugStackFrameSnifferEx32_GUID = LibC::GUID.new("51973c19-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugStackFrameSnifferEx32 = "51973c19-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugStackFrameSnifferEx32
     lpVtbl : IDebugStackFrameSnifferEx32VTbl*
   end
@@ -11488,6 +11814,8 @@ lib LibWin32
     enum_stack_frames_ex64 : Proc(IDebugStackFrameSnifferEx64*, UInt64, IEnumDebugStackFrames64*, HRESULT)
   end
 
+  IDebugStackFrameSnifferEx64_GUID = LibC::GUID.new("8cd12af4-49c1-4d52-8d8a-c146f47581aa")
+  CLSID_IDebugStackFrameSnifferEx64 = "8cd12af4-49c1-4d52-8d8a-c146f47581aa"
   struct IDebugStackFrameSnifferEx64
     lpVtbl : IDebugStackFrameSnifferEx64VTbl*
   end
@@ -11501,6 +11829,8 @@ lib LibWin32
     in_progress_abort : Proc(IDebugSyncOperation*, HRESULT)
   end
 
+  IDebugSyncOperation_GUID = LibC::GUID.new("51973c1a-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugSyncOperation = "51973c1a-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugSyncOperation
     lpVtbl : IDebugSyncOperationVTbl*
   end
@@ -11516,6 +11846,8 @@ lib LibWin32
     get_result : Proc(IDebugAsyncOperation*, HRESULT*, IUnknown*, HRESULT)
   end
 
+  IDebugAsyncOperation_GUID = LibC::GUID.new("51973c1b-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugAsyncOperation = "51973c1b-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugAsyncOperation
     lpVtbl : IDebugAsyncOperationVTbl*
   end
@@ -11527,6 +11859,8 @@ lib LibWin32
     on_complete : Proc(IDebugAsyncOperationCallBack*, HRESULT)
   end
 
+  IDebugAsyncOperationCallBack_GUID = LibC::GUID.new("51973c1c-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugAsyncOperationCallBack = "51973c1c-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugAsyncOperationCallBack
     lpVtbl : IDebugAsyncOperationCallBackVTbl*
   end
@@ -11541,6 +11875,8 @@ lib LibWin32
     clone : Proc(IEnumDebugCodeContexts*, IEnumDebugCodeContexts*, HRESULT)
   end
 
+  IEnumDebugCodeContexts_GUID = LibC::GUID.new("51973c1d-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IEnumDebugCodeContexts = "51973c1d-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IEnumDebugCodeContexts
     lpVtbl : IEnumDebugCodeContextsVTbl*
   end
@@ -11555,6 +11891,8 @@ lib LibWin32
     clone : Proc(IEnumDebugStackFrames*, IEnumDebugStackFrames*, HRESULT)
   end
 
+  IEnumDebugStackFrames_GUID = LibC::GUID.new("51973c1e-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IEnumDebugStackFrames = "51973c1e-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IEnumDebugStackFrames
     lpVtbl : IEnumDebugStackFramesVTbl*
   end
@@ -11570,6 +11908,8 @@ lib LibWin32
     next64 : Proc(IEnumDebugStackFrames64*, UInt32, DebugStackFrameDescriptor64*, UInt32*, HRESULT)
   end
 
+  IEnumDebugStackFrames64_GUID = LibC::GUID.new("0dc38853-c1b0-4176-a984-b298361027af")
+  CLSID_IEnumDebugStackFrames64 = "0dc38853-c1b0-4176-a984-b298361027af"
   struct IEnumDebugStackFrames64
     lpVtbl : IEnumDebugStackFrames64VTbl*
   end
@@ -11582,6 +11922,8 @@ lib LibWin32
     get_document_class_id : Proc(IDebugDocumentInfo*, Guid*, HRESULT)
   end
 
+  IDebugDocumentInfo_GUID = LibC::GUID.new("51973c1f-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentInfo = "51973c1f-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentInfo
     lpVtbl : IDebugDocumentInfoVTbl*
   end
@@ -11595,6 +11937,8 @@ lib LibWin32
     get_document : Proc(IDebugDocumentProvider*, IDebugDocument*, HRESULT)
   end
 
+  IDebugDocumentProvider_GUID = LibC::GUID.new("51973c20-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentProvider = "51973c20-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentProvider
     lpVtbl : IDebugDocumentProviderVTbl*
   end
@@ -11607,6 +11951,8 @@ lib LibWin32
     get_document_class_id : Proc(IDebugDocument*, Guid*, HRESULT)
   end
 
+  IDebugDocument_GUID = LibC::GUID.new("51973c21-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocument = "51973c21-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocument
     lpVtbl : IDebugDocumentVTbl*
   end
@@ -11626,6 +11972,8 @@ lib LibWin32
     get_context_of_position : Proc(IDebugDocumentText*, UInt32, UInt32, IDebugDocumentContext*, HRESULT)
   end
 
+  IDebugDocumentText_GUID = LibC::GUID.new("51973c22-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentText = "51973c22-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentText
     lpVtbl : IDebugDocumentTextVTbl*
   end
@@ -11642,6 +11990,8 @@ lib LibWin32
     on_update_document_attributes : Proc(IDebugDocumentTextEvents*, UInt32, HRESULT)
   end
 
+  IDebugDocumentTextEvents_GUID = LibC::GUID.new("51973c23-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentTextEvents = "51973c23-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentTextEvents
     lpVtbl : IDebugDocumentTextEventsVTbl*
   end
@@ -11664,6 +12014,8 @@ lib LibWin32
     replace_text : Proc(IDebugDocumentTextAuthor*, UInt32, UInt32, Char*, HRESULT)
   end
 
+  IDebugDocumentTextAuthor_GUID = LibC::GUID.new("51973c24-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentTextAuthor = "51973c24-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentTextAuthor
     lpVtbl : IDebugDocumentTextAuthorVTbl*
   end
@@ -11677,6 +12029,8 @@ lib LibWin32
     notify_changed : Proc(IDebugDocumentTextExternalAuthor*, HRESULT)
   end
 
+  IDebugDocumentTextExternalAuthor_GUID = LibC::GUID.new("51973c25-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentTextExternalAuthor = "51973c25-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentTextExternalAuthor
     lpVtbl : IDebugDocumentTextExternalAuthorVTbl*
   end
@@ -11705,6 +12059,8 @@ lib LibWin32
     bring_document_context_to_top : Proc(IDebugDocumentHelper32*, IDebugDocumentContext, HRESULT)
   end
 
+  IDebugDocumentHelper32_GUID = LibC::GUID.new("51973c26-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentHelper32 = "51973c26-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentHelper32
     lpVtbl : IDebugDocumentHelper32VTbl*
   end
@@ -11733,6 +12089,8 @@ lib LibWin32
     bring_document_context_to_top : Proc(IDebugDocumentHelper64*, IDebugDocumentContext, HRESULT)
   end
 
+  IDebugDocumentHelper64_GUID = LibC::GUID.new("c4c7363c-20fd-47f9-bd82-4855e0150871")
+  CLSID_IDebugDocumentHelper64 = "c4c7363c-20fd-47f9-bd82-4855e0150871"
   struct IDebugDocumentHelper64
     lpVtbl : IDebugDocumentHelper64VTbl*
   end
@@ -11749,6 +12107,8 @@ lib LibWin32
     notify_changed : Proc(IDebugDocumentHost*, HRESULT)
   end
 
+  IDebugDocumentHost_GUID = LibC::GUID.new("51973c27-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentHost = "51973c27-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentHost
     lpVtbl : IDebugDocumentHostVTbl*
   end
@@ -11761,6 +12121,8 @@ lib LibWin32
     enum_code_contexts : Proc(IDebugDocumentContext*, IEnumDebugCodeContexts*, HRESULT)
   end
 
+  IDebugDocumentContext_GUID = LibC::GUID.new("51973c28-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugDocumentContext = "51973c28-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugDocumentContext
     lpVtbl : IDebugDocumentContextVTbl*
   end
@@ -11772,6 +12134,8 @@ lib LibWin32
     start_debug_session : Proc(IDebugSessionProvider*, IRemoteDebugApplication, HRESULT)
   end
 
+  IDebugSessionProvider_GUID = LibC::GUID.new("51973c29-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugSessionProvider = "51973c29-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugSessionProvider
     lpVtbl : IDebugSessionProviderVTbl*
   end
@@ -11788,6 +12152,8 @@ lib LibWin32
     on_debugger_event : Proc(IApplicationDebugger*, Guid*, IUnknown, HRESULT)
   end
 
+  IApplicationDebugger_GUID = LibC::GUID.new("51973c2a-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IApplicationDebugger = "51973c2a-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IApplicationDebugger
     lpVtbl : IApplicationDebuggerVTbl*
   end
@@ -11800,6 +12166,8 @@ lib LibWin32
     bring_document_context_to_top : Proc(IApplicationDebuggerUI*, IDebugDocumentContext, HRESULT)
   end
 
+  IApplicationDebuggerUI_GUID = LibC::GUID.new("51973c2b-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IApplicationDebuggerUI = "51973c2b-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IApplicationDebuggerUI
     lpVtbl : IApplicationDebuggerUIVTbl*
   end
@@ -11813,6 +12181,8 @@ lib LibWin32
     enum_applications : Proc(IMachineDebugManager*, IEnumRemoteDebugApplications*, HRESULT)
   end
 
+  IMachineDebugManager_GUID = LibC::GUID.new("51973c2c-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IMachineDebugManager = "51973c2c-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IMachineDebugManager
     lpVtbl : IMachineDebugManagerVTbl*
   end
@@ -11826,6 +12196,8 @@ lib LibWin32
     enum_applications : Proc(IMachineDebugManagerCookie*, IEnumRemoteDebugApplications*, HRESULT)
   end
 
+  IMachineDebugManagerCookie_GUID = LibC::GUID.new("51973c2d-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IMachineDebugManagerCookie = "51973c2d-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IMachineDebugManagerCookie
     lpVtbl : IMachineDebugManagerCookieVTbl*
   end
@@ -11838,6 +12210,8 @@ lib LibWin32
     on_remove_application : Proc(IMachineDebugManagerEvents*, IRemoteDebugApplication, UInt32, HRESULT)
   end
 
+  IMachineDebugManagerEvents_GUID = LibC::GUID.new("51973c2e-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IMachineDebugManagerEvents = "51973c2e-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IMachineDebugManagerEvents
     lpVtbl : IMachineDebugManagerEventsVTbl*
   end
@@ -11853,6 +12227,8 @@ lib LibWin32
     create_debug_document_helper : Proc(IProcessDebugManager32*, IUnknown, IDebugDocumentHelper32*, HRESULT)
   end
 
+  IProcessDebugManager32_GUID = LibC::GUID.new("51973c2f-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IProcessDebugManager32 = "51973c2f-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IProcessDebugManager32
     lpVtbl : IProcessDebugManager32VTbl*
   end
@@ -11868,6 +12244,8 @@ lib LibWin32
     create_debug_document_helper : Proc(IProcessDebugManager64*, IUnknown, IDebugDocumentHelper64*, HRESULT)
   end
 
+  IProcessDebugManager64_GUID = LibC::GUID.new("56b9fc1c-63a9-4cc1-ac21-087d69a17fab")
+  CLSID_IProcessDebugManager64 = "56b9fc1c-63a9-4cc1-ac21-087d69a17fab"
   struct IProcessDebugManager64
     lpVtbl : IProcessDebugManager64VTbl*
   end
@@ -11889,6 +12267,8 @@ lib LibWin32
     enum_global_expression_contexts : Proc(IRemoteDebugApplication*, IEnumDebugExpressionContexts*, HRESULT)
   end
 
+  IRemoteDebugApplication_GUID = LibC::GUID.new("51973c30-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IRemoteDebugApplication = "51973c30-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IRemoteDebugApplication
     lpVtbl : IRemoteDebugApplicationVTbl*
   end
@@ -11930,6 +12310,8 @@ lib LibWin32
     remove_global_expression_context_provider : Proc(IDebugApplication32*, UInt32, HRESULT)
   end
 
+  IDebugApplication32_GUID = LibC::GUID.new("51973c32-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugApplication32 = "51973c32-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugApplication32
     lpVtbl : IDebugApplication32VTbl*
   end
@@ -11971,6 +12353,8 @@ lib LibWin32
     remove_global_expression_context_provider : Proc(IDebugApplication64*, UInt64, HRESULT)
   end
 
+  IDebugApplication64_GUID = LibC::GUID.new("4dedc754-04c7-4f10-9e60-16a390fe6e62")
+  CLSID_IDebugApplication64 = "4dedc754-04c7-4f10-9e60-16a390fe6e62"
   struct IDebugApplication64
     lpVtbl : IDebugApplication64VTbl*
   end
@@ -11991,6 +12375,8 @@ lib LibWin32
     on_break_flag_change : Proc(IRemoteDebugApplicationEvents*, UInt32, IRemoteDebugApplicationThread, HRESULT)
   end
 
+  IRemoteDebugApplicationEvents_GUID = LibC::GUID.new("51973c33-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IRemoteDebugApplicationEvents = "51973c33-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IRemoteDebugApplicationEvents
     lpVtbl : IRemoteDebugApplicationEventsVTbl*
   end
@@ -12010,6 +12396,8 @@ lib LibWin32
     detach : Proc(IDebugApplicationNode*, HRESULT)
   end
 
+  IDebugApplicationNode_GUID = LibC::GUID.new("51973c34-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugApplicationNode = "51973c34-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugApplicationNode
     lpVtbl : IDebugApplicationNodeVTbl*
   end
@@ -12024,6 +12412,8 @@ lib LibWin32
     on_attach : Proc(IDebugApplicationNodeEvents*, IDebugApplicationNode, HRESULT)
   end
 
+  IDebugApplicationNodeEvents_GUID = LibC::GUID.new("51973c35-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugApplicationNodeEvents = "51973c35-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugApplicationNodeEvents
     lpVtbl : IDebugApplicationNodeEventsVTbl*
   end
@@ -12042,6 +12432,8 @@ lib LibWin32
     finish_on_attach : Proc(AsyncIDebugApplicationNodeEvents*, HRESULT)
   end
 
+  AsyncIDebugApplicationNodeEvents_GUID = LibC::GUID.new("a2e3aa3b-aa8d-4ebf-84cd-648b737b8c13")
+  CLSID_AsyncIDebugApplicationNodeEvents = "a2e3aa3b-aa8d-4ebf-84cd-648b737b8c13"
   struct AsyncIDebugApplicationNodeEvents
     lpVtbl : AsyncIDebugApplicationNodeEventsVTbl*
   end
@@ -12053,6 +12445,8 @@ lib LibWin32
     thread_call_handler : Proc(IDebugThreadCall32*, UInt32, UInt32, UInt32, HRESULT)
   end
 
+  IDebugThreadCall32_GUID = LibC::GUID.new("51973c36-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugThreadCall32 = "51973c36-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugThreadCall32
     lpVtbl : IDebugThreadCall32VTbl*
   end
@@ -12064,6 +12458,8 @@ lib LibWin32
     thread_call_handler : Proc(IDebugThreadCall64*, UInt64, UInt64, UInt64, HRESULT)
   end
 
+  IDebugThreadCall64_GUID = LibC::GUID.new("cb3fa335-e979-42fd-9fcf-a7546a0f3905")
+  CLSID_IDebugThreadCall64 = "cb3fa335-e979-42fd-9fcf-a7546a0f3905"
   struct IDebugThreadCall64
     lpVtbl : IDebugThreadCall64VTbl*
   end
@@ -12083,6 +12479,8 @@ lib LibWin32
     get_suspend_count : Proc(IRemoteDebugApplicationThread*, UInt32*, HRESULT)
   end
 
+  IRemoteDebugApplicationThread_GUID = LibC::GUID.new("51973c37-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IRemoteDebugApplicationThread = "51973c37-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IRemoteDebugApplicationThread
     lpVtbl : IRemoteDebugApplicationThreadVTbl*
   end
@@ -12107,6 +12505,8 @@ lib LibWin32
     set_state_string : Proc(IDebugApplicationThread*, LibC::LPWSTR, HRESULT)
   end
 
+  IDebugApplicationThread_GUID = LibC::GUID.new("51973c38-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugApplicationThread = "51973c38-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugApplicationThread
     lpVtbl : IDebugApplicationThreadVTbl*
   end
@@ -12132,6 +12532,8 @@ lib LibWin32
     synchronous_call_into_thread64 : Proc(IDebugApplicationThread64*, IDebugThreadCall64, UInt64, UInt64, UInt64, HRESULT)
   end
 
+  IDebugApplicationThread64_GUID = LibC::GUID.new("9dac5886-dbad-456d-9dee-5dec39ab3dda")
+  CLSID_IDebugApplicationThread64 = "9dac5886-dbad-456d-9dee-5dec39ab3dda"
   struct IDebugApplicationThread64
     lpVtbl : IDebugApplicationThread64VTbl*
   end
@@ -12143,6 +12545,8 @@ lib LibWin32
     set_debug_cookie : Proc(IDebugCookie*, UInt32, HRESULT)
   end
 
+  IDebugCookie_GUID = LibC::GUID.new("51973c39-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugCookie = "51973c39-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugCookie
     lpVtbl : IDebugCookieVTbl*
   end
@@ -12157,6 +12561,8 @@ lib LibWin32
     clone : Proc(IEnumDebugApplicationNodes*, IEnumDebugApplicationNodes*, HRESULT)
   end
 
+  IEnumDebugApplicationNodes_GUID = LibC::GUID.new("51973c3a-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IEnumDebugApplicationNodes = "51973c3a-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IEnumDebugApplicationNodes
     lpVtbl : IEnumDebugApplicationNodesVTbl*
   end
@@ -12171,6 +12577,8 @@ lib LibWin32
     clone : Proc(IEnumRemoteDebugApplications*, IEnumRemoteDebugApplications*, HRESULT)
   end
 
+  IEnumRemoteDebugApplications_GUID = LibC::GUID.new("51973c3b-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IEnumRemoteDebugApplications = "51973c3b-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IEnumRemoteDebugApplications
     lpVtbl : IEnumRemoteDebugApplicationsVTbl*
   end
@@ -12185,6 +12593,8 @@ lib LibWin32
     clone : Proc(IEnumRemoteDebugApplicationThreads*, IEnumRemoteDebugApplicationThreads*, HRESULT)
   end
 
+  IEnumRemoteDebugApplicationThreads_GUID = LibC::GUID.new("51973c3c-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IEnumRemoteDebugApplicationThreads = "51973c3c-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IEnumRemoteDebugApplicationThreads
     lpVtbl : IEnumRemoteDebugApplicationThreadsVTbl*
   end
@@ -12198,6 +12608,8 @@ lib LibWin32
     get_string_for_var_type : Proc(IDebugFormatter*, UInt16, TYPEDESC*, UInt8**, HRESULT)
   end
 
+  IDebugFormatter_GUID = LibC::GUID.new("51973c05-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugFormatter = "51973c05-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugFormatter
     lpVtbl : IDebugFormatterVTbl*
   end
@@ -12212,6 +12624,8 @@ lib LibWin32
     unadvise : Proc(ISimpleConnectionPoint*, UInt32, HRESULT)
   end
 
+  ISimpleConnectionPoint_GUID = LibC::GUID.new("51973c3e-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_ISimpleConnectionPoint = "51973c3e-cb0c-11d0-b5c9-00a0244a0e7a"
   struct ISimpleConnectionPoint
     lpVtbl : ISimpleConnectionPointVTbl*
   end
@@ -12225,6 +12639,8 @@ lib LibWin32
     create_simple_connection_point : Proc(IDebugHelper*, IDispatch, ISimpleConnectionPoint*, HRESULT)
   end
 
+  IDebugHelper_GUID = LibC::GUID.new("51973c3f-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IDebugHelper = "51973c3f-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IDebugHelper
     lpVtbl : IDebugHelperVTbl*
   end
@@ -12239,6 +12655,8 @@ lib LibWin32
     clone : Proc(IEnumDebugExpressionContexts*, IEnumDebugExpressionContexts*, HRESULT)
   end
 
+  IEnumDebugExpressionContexts_GUID = LibC::GUID.new("51973c40-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IEnumDebugExpressionContexts = "51973c40-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IEnumDebugExpressionContexts
     lpVtbl : IEnumDebugExpressionContextsVTbl*
   end
@@ -12250,6 +12668,8 @@ lib LibWin32
     enum_expression_contexts : Proc(IProvideExpressionContexts*, IEnumDebugExpressionContexts*, HRESULT)
   end
 
+  IProvideExpressionContexts_GUID = LibC::GUID.new("51973c41-cb0c-11d0-b5c9-00a0244a0e7a")
+  CLSID_IProvideExpressionContexts = "51973c41-cb0c-11d0-b5c9-00a0244a0e7a"
   struct IProvideExpressionContexts
     lpVtbl : IProvideExpressionContextsVTbl*
   end
@@ -12263,6 +12683,8 @@ lib LibWin32
     stop_profiling : Proc(IActiveScriptProfilerControl*, HRESULT, HRESULT)
   end
 
+  IActiveScriptProfilerControl_GUID = LibC::GUID.new("784b5ff0-69b0-47d1-a7dc-2518f4230e90")
+  CLSID_IActiveScriptProfilerControl = "784b5ff0-69b0-47d1-a7dc-2518f4230e90"
   struct IActiveScriptProfilerControl
     lpVtbl : IActiveScriptProfilerControlVTbl*
   end
@@ -12278,6 +12700,8 @@ lib LibWin32
     prepare_profiler_stop : Proc(IActiveScriptProfilerControl2*, HRESULT)
   end
 
+  IActiveScriptProfilerControl2_GUID = LibC::GUID.new("47810165-498f-40be-94f1-653557e9e7da")
+  CLSID_IActiveScriptProfilerControl2 = "47810165-498f-40be-94f1-653557e9e7da"
   struct IActiveScriptProfilerControl2
     lpVtbl : IActiveScriptProfilerControl2VTbl*
   end
@@ -12292,6 +12716,8 @@ lib LibWin32
     get_name_id_map : Proc(IActiveScriptProfilerHeapEnum*, LibC::LPWSTR***, UInt32*, HRESULT)
   end
 
+  IActiveScriptProfilerHeapEnum_GUID = LibC::GUID.new("32e4694e-0d37-419b-b93d-fa20ded6e8ea")
+  CLSID_IActiveScriptProfilerHeapEnum = "32e4694e-0d37-419b-b93d-fa20ded6e8ea"
   struct IActiveScriptProfilerHeapEnum
     lpVtbl : IActiveScriptProfilerHeapEnumVTbl*
   end
@@ -12308,6 +12734,8 @@ lib LibWin32
     enum_heap : Proc(IActiveScriptProfilerControl3*, IActiveScriptProfilerHeapEnum*, HRESULT)
   end
 
+  IActiveScriptProfilerControl3_GUID = LibC::GUID.new("0b403015-f381-4023-a5d0-6fed076de716")
+  CLSID_IActiveScriptProfilerControl3 = "0b403015-f381-4023-a5d0-6fed076de716"
   struct IActiveScriptProfilerControl3
     lpVtbl : IActiveScriptProfilerControl3VTbl*
   end
@@ -12325,6 +12753,8 @@ lib LibWin32
     summarize_heap : Proc(IActiveScriptProfilerControl4*, PROFILER_HEAP_SUMMARY*, HRESULT)
   end
 
+  IActiveScriptProfilerControl4_GUID = LibC::GUID.new("160f94fd-9dbc-40d4-9eac-2b71db3132f4")
+  CLSID_IActiveScriptProfilerControl4 = "160f94fd-9dbc-40d4-9eac-2b71db3132f4"
   struct IActiveScriptProfilerControl4
     lpVtbl : IActiveScriptProfilerControl4VTbl*
   end
@@ -12343,6 +12773,8 @@ lib LibWin32
     enum_heap2 : Proc(IActiveScriptProfilerControl5*, PROFILER_HEAP_ENUM_FLAGS, IActiveScriptProfilerHeapEnum*, HRESULT)
   end
 
+  IActiveScriptProfilerControl5_GUID = LibC::GUID.new("1c01a2d1-8f0f-46a5-9720-0d7ed2c62f0a")
+  CLSID_IActiveScriptProfilerControl5 = "1c01a2d1-8f0f-46a5-9720-0d7ed2c62f0a"
   struct IActiveScriptProfilerControl5
     lpVtbl : IActiveScriptProfilerControl5VTbl*
   end
@@ -12359,6 +12791,8 @@ lib LibWin32
     on_function_exit : Proc(IActiveScriptProfilerCallback*, Int32, Int32, HRESULT)
   end
 
+  IActiveScriptProfilerCallback_GUID = LibC::GUID.new("740eca23-7d9d-42e5-ba9d-f8b24b1c7a9b")
+  CLSID_IActiveScriptProfilerCallback = "740eca23-7d9d-42e5-ba9d-f8b24b1c7a9b"
   struct IActiveScriptProfilerCallback
     lpVtbl : IActiveScriptProfilerCallbackVTbl*
   end
@@ -12377,6 +12811,8 @@ lib LibWin32
     on_function_exit_by_name : Proc(IActiveScriptProfilerCallback2*, LibC::LPWSTR, PROFILER_SCRIPT_TYPE, HRESULT)
   end
 
+  IActiveScriptProfilerCallback2_GUID = LibC::GUID.new("31b7f8ad-a637-409c-b22f-040995b6103d")
+  CLSID_IActiveScriptProfilerCallback2 = "31b7f8ad-a637-409c-b22f-040995b6103d"
   struct IActiveScriptProfilerCallback2
     lpVtbl : IActiveScriptProfilerCallback2VTbl*
   end
@@ -12396,6 +12832,8 @@ lib LibWin32
     set_web_worker_id : Proc(IActiveScriptProfilerCallback3*, UInt32, HRESULT)
   end
 
+  IActiveScriptProfilerCallback3_GUID = LibC::GUID.new("6ac5ad25-2037-4687-91df-b59979d93d73")
+  CLSID_IActiveScriptProfilerCallback3 = "6ac5ad25-2037-4687-91df-b59979d93d73"
   struct IActiveScriptProfilerCallback3
     lpVtbl : IActiveScriptProfilerCallback3VTbl*
   end
@@ -12416,6 +12854,8 @@ lib LibWin32
     create_child_handler : Proc(IScriptNode*, LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::LPWSTR, LibC::LPWSTR, ITypeInfo, UInt32, UInt32, UInt32, IScriptEntry*, HRESULT)
   end
 
+  IScriptNode_GUID = LibC::GUID.new("0aee2a94-bcbb-11d0-8c72-00c04fc2b085")
+  CLSID_IScriptNode = "0aee2a94-bcbb-11d0-8c72-00c04fc2b085"
   struct IScriptNode
     lpVtbl : IScriptNodeVTbl*
   end
@@ -12447,6 +12887,8 @@ lib LibWin32
     get_range : Proc(IScriptEntry*, UInt32*, UInt32*, HRESULT)
   end
 
+  IScriptEntry_GUID = LibC::GUID.new("0aee2a95-bcbb-11d0-8c72-00c04fc2b085")
+  CLSID_IScriptEntry = "0aee2a95-bcbb-11d0-8c72-00c04fc2b085"
   struct IScriptEntry
     lpVtbl : IScriptEntryVTbl*
   end
@@ -12484,6 +12926,8 @@ lib LibWin32
     set_simple_event_name : Proc(IScriptScriptlet*, LibC::LPWSTR, HRESULT)
   end
 
+  IScriptScriptlet_GUID = LibC::GUID.new("0aee2a96-bcbb-11d0-8c72-00c04fc2b085")
+  CLSID_IScriptScriptlet = "0aee2a96-bcbb-11d0-8c72-00c04fc2b085"
   struct IScriptScriptlet
     lpVtbl : IScriptScriptletVTbl*
   end
@@ -12508,6 +12952,8 @@ lib LibWin32
     is_commit_char : Proc(IActiveScriptAuthor*, Char, LibC::BOOL*, HRESULT)
   end
 
+  IActiveScriptAuthor_GUID = LibC::GUID.new("9c109da0-7006-11d1-b36c-00a0c911e8b2")
+  CLSID_IActiveScriptAuthor = "9c109da0-7006-11d1-b36c-00a0c911e8b2"
   struct IActiveScriptAuthor
     lpVtbl : IActiveScriptAuthorVTbl*
   end
@@ -12519,6 +12965,8 @@ lib LibWin32
     parse_procedure_text : Proc(IActiveScriptAuthorProcedure*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, IDispatch, HRESULT)
   end
 
+  IActiveScriptAuthorProcedure_GUID = LibC::GUID.new("7e2d4b70-bd9a-11d0-9336-00a0c90dcaa9")
+  CLSID_IActiveScriptAuthorProcedure = "7e2d4b70-bd9a-11d0-9336-00a0c90dcaa9"
   struct IActiveScriptAuthorProcedure
     lpVtbl : IActiveScriptAuthorProcedureVTbl*
   end
@@ -12532,6 +12980,8 @@ lib LibWin32
     query_is_child_node : Proc(IDebugApplicationNode100*, IDebugDocument, HRESULT)
   end
 
+  IDebugApplicationNode100_GUID = LibC::GUID.new("90a7734e-841b-4f77-9384-a2891e76e7e2")
+  CLSID_IDebugApplicationNode100 = "90a7734e-841b-4f77-9384-a2891e76e7e2"
   struct IDebugApplicationNode100
     lpVtbl : IDebugApplicationNode100VTbl*
   end
@@ -12544,6 +12994,8 @@ lib LibWin32
     create_object_with_site_at_web_app : Proc(IWebAppDiagnosticsSetup*, Guid*, UInt32, Guid*, LibC::UINT_PTR, HRESULT)
   end
 
+  IWebAppDiagnosticsSetup_GUID = LibC::GUID.new("379bfbe1-c6c9-432a-93e1-6d17656c538c")
+  CLSID_IWebAppDiagnosticsSetup = "379bfbe1-c6c9-432a-93e1-6d17656c538c"
   struct IWebAppDiagnosticsSetup
     lpVtbl : IWebAppDiagnosticsSetupVTbl*
   end
@@ -12557,6 +13009,8 @@ lib LibWin32
     get_main_thread : Proc(IRemoteDebugApplication110*, IRemoteDebugApplicationThread*, HRESULT)
   end
 
+  IRemoteDebugApplication110_GUID = LibC::GUID.new("d5fe005b-2836-485e-b1f9-89d91aa24fd4")
+  CLSID_IRemoteDebugApplication110 = "d5fe005b-2836-485e-b1f9-89d91aa24fd4"
   struct IRemoteDebugApplication110
     lpVtbl : IRemoteDebugApplication110VTbl*
   end
@@ -12573,6 +13027,8 @@ lib LibWin32
     callable_wait_for_handles : Proc(IDebugApplication11032*, UInt32, LibC::HANDLE*, UInt32*, HRESULT)
   end
 
+  IDebugApplication11032_GUID = LibC::GUID.new("bdb3b5de-89f2-4e11-84a5-97445f941c7d")
+  CLSID_IDebugApplication11032 = "bdb3b5de-89f2-4e11-84a5-97445f941c7d"
   struct IDebugApplication11032
     lpVtbl : IDebugApplication11032VTbl*
   end
@@ -12589,6 +13045,8 @@ lib LibWin32
     callable_wait_for_handles : Proc(IDebugApplication11064*, UInt32, LibC::HANDLE*, UInt32*, HRESULT)
   end
 
+  IDebugApplication11064_GUID = LibC::GUID.new("2039d958-4eeb-496a-87bb-2e5201eadeef")
+  CLSID_IDebugApplication11064 = "2039d958-4eeb-496a-87bb-2e5201eadeef"
   struct IDebugApplication11064
     lpVtbl : IDebugApplication11064VTbl*
   end
@@ -12600,6 +13058,8 @@ lib LibWin32
     initialize : Proc(IWebAppDiagnosticsObjectInitialization*, HANDLE_PTR, IUnknown, HRESULT)
   end
 
+  IWebAppDiagnosticsObjectInitialization_GUID = LibC::GUID.new("16ff3a42-a5f5-432b-b625-8e8e16f57e15")
+  CLSID_IWebAppDiagnosticsObjectInitialization = "16ff3a42-a5f5-432b-b625-8e8e16f57e15"
   struct IWebAppDiagnosticsObjectInitialization
     lpVtbl : IWebAppDiagnosticsObjectInitializationVTbl*
   end
@@ -12616,6 +13076,8 @@ lib LibWin32
     get_capability_sid : Proc(IActiveScriptWinRTErrorDebug*, UInt8**, HRESULT)
   end
 
+  IActiveScriptWinRTErrorDebug_GUID = LibC::GUID.new("73a3f82a-0fe9-4b33-ba3b-fe095f697e0a")
+  CLSID_IActiveScriptWinRTErrorDebug = "73a3f82a-0fe9-4b33-ba3b-fe095f697e0a"
   struct IActiveScriptWinRTErrorDebug
     lpVtbl : IActiveScriptWinRTErrorDebugVTbl*
   end
@@ -12627,6 +13089,8 @@ lib LibWin32
     get_exception_thrown_kind : Proc(IActiveScriptErrorDebug110*, SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND*, HRESULT)
   end
 
+  IActiveScriptErrorDebug110_GUID = LibC::GUID.new("516e42b6-89a8-4530-937b-5f0708431442")
+  CLSID_IActiveScriptErrorDebug110 = "516e42b6-89a8-4530-937b-5f0708431442"
   struct IActiveScriptErrorDebug110
     lpVtbl : IActiveScriptErrorDebug110VTbl*
   end
@@ -12641,6 +13105,8 @@ lib LibWin32
     on_begin_thread_request : Proc(IDebugApplicationThreadEvents110*, HRESULT)
   end
 
+  IDebugApplicationThreadEvents110_GUID = LibC::GUID.new("84e5e468-d5da-48a8-83f4-40366429007b")
+  CLSID_IDebugApplicationThreadEvents110 = "84e5e468-d5da-48a8-83f4-40366429007b"
   struct IDebugApplicationThreadEvents110
     lpVtbl : IDebugApplicationThreadEvents110VTbl*
   end
@@ -12655,6 +13121,8 @@ lib LibWin32
     asynchronous_call_into_thread : Proc(IDebugApplicationThread11032*, IDebugThreadCall32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
   end
 
+  IDebugApplicationThread11032_GUID = LibC::GUID.new("2194ac5c-6561-404a-a2e9-f57d72de3702")
+  CLSID_IDebugApplicationThread11032 = "2194ac5c-6561-404a-a2e9-f57d72de3702"
   struct IDebugApplicationThread11032
     lpVtbl : IDebugApplicationThread11032VTbl*
   end
@@ -12669,6 +13137,8 @@ lib LibWin32
     asynchronous_call_into_thread : Proc(IDebugApplicationThread11064*, IDebugThreadCall64, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
   end
 
+  IDebugApplicationThread11064_GUID = LibC::GUID.new("420aa4cc-efd8-4dac-983b-47127826917d")
+  CLSID_IDebugApplicationThread11064 = "420aa4cc-efd8-4dac-983b-47127826917d"
   struct IDebugApplicationThread11064
     lpVtbl : IDebugApplicationThread11064VTbl*
   end
@@ -12680,6 +13150,8 @@ lib LibWin32
     get_error_info : Proc(IRemoteDebugCriticalErrorEvent110*, UInt8**, Int32*, UInt8**, IDebugDocumentContext*, HRESULT)
   end
 
+  IRemoteDebugCriticalErrorEvent110_GUID = LibC::GUID.new("2f69c611-6b14-47e8-9260-4bb7c52f504b")
+  CLSID_IRemoteDebugCriticalErrorEvent110 = "2f69c611-6b14-47e8-9260-4bb7c52f504b"
   struct IRemoteDebugCriticalErrorEvent110
     lpVtbl : IRemoteDebugCriticalErrorEvent110VTbl*
   end
@@ -12693,6 +13165,8 @@ lib LibWin32
     get_context_object : Proc(IScriptInvocationContext*, IUnknown*, HRESULT)
   end
 
+  IScriptInvocationContext_GUID = LibC::GUID.new("5d7741b7-af7e-4a2a-85e5-c77f4d0659fb")
+  CLSID_IScriptInvocationContext = "5d7741b7-af7e-4a2a-85e5-c77f4d0659fb"
   struct IScriptInvocationContext
     lpVtbl : IScriptInvocationContextVTbl*
   end
@@ -12710,6 +13184,8 @@ lib LibWin32
     get_script_invocation_context : Proc(IDebugStackFrame110*, IScriptInvocationContext*, HRESULT)
   end
 
+  IDebugStackFrame110_GUID = LibC::GUID.new("4b509611-b6ea-4b24-adcb-d0ccfd1a7e33")
+  CLSID_IDebugStackFrame110 = "4b509611-b6ea-4b24-adcb-d0ccfd1a7e33"
   struct IDebugStackFrame110
     lpVtbl : IDebugStackFrame110VTbl*
   end
@@ -12721,6 +13197,8 @@ lib LibWin32
     get_event_info : Proc(IRemoteDebugInfoEvent110*, DEBUG_EVENT_INFO_TYPE*, UInt8**, UInt8**, IDebugDocumentContext*, HRESULT)
   end
 
+  IRemoteDebugInfoEvent110_GUID = LibC::GUID.new("9ff56bb6-eb89-4c0f-8823-cc2a4c0b7f26")
+  CLSID_IRemoteDebugInfoEvent110 = "9ff56bb6-eb89-4c0f-8823-cc2a4c0b7f26"
   struct IRemoteDebugInfoEvent110
     lpVtbl : IRemoteDebugInfoEvent110VTbl*
   end
@@ -12732,6 +13210,8 @@ lib LibWin32
     open_virtual_process : Proc(IJsDebug*, UInt32, UInt64, IJsDebugDataTarget, IJsDebugProcess*, HRESULT)
   end
 
+  IJsDebug_GUID = LibC::GUID.new("be0e89da-2ac5-4c04-ac5e-59956aae3613")
+  CLSID_IJsDebug = "be0e89da-2ac5-4c04-ac5e-59956aae3613"
   struct IJsDebug
     lpVtbl : IJsDebugVTbl*
   end
@@ -12746,6 +13226,8 @@ lib LibWin32
     get_external_step_address : Proc(IJsDebugProcess*, UInt64*, HRESULT)
   end
 
+  IJsDebugProcess_GUID = LibC::GUID.new("3d587168-6a2d-4041-bd3b-0de674502862")
+  CLSID_IJsDebugProcess = "3d587168-6a2d-4041-bd3b-0de674502862"
   struct IJsDebugProcess
     lpVtbl : IJsDebugProcessVTbl*
   end
@@ -12757,6 +13239,8 @@ lib LibWin32
     get_next : Proc(IJsDebugStackWalker*, IJsDebugFrame*, HRESULT)
   end
 
+  IJsDebugStackWalker_GUID = LibC::GUID.new("db24b094-73c4-456c-a4ec-e90ea00bdfe3")
+  CLSID_IJsDebugStackWalker = "db24b094-73c4-456c-a4ec-e90ea00bdfe3"
   struct IJsDebugStackWalker
     lpVtbl : IJsDebugStackWalkerVTbl*
   end
@@ -12774,6 +13258,8 @@ lib LibWin32
     evaluate : Proc(IJsDebugFrame*, LibC::LPWSTR, IJsDebugProperty*, UInt8**, HRESULT)
   end
 
+  IJsDebugFrame_GUID = LibC::GUID.new("c9196637-ab9d-44b2-bad2-13b95b3f390e")
+  CLSID_IJsDebugFrame = "c9196637-ab9d-44b2-bad2-13b95b3f390e"
   struct IJsDebugFrame
     lpVtbl : IJsDebugFrameVTbl*
   end
@@ -12786,6 +13272,8 @@ lib LibWin32
     get_members : Proc(IJsDebugProperty*, JS_PROPERTY_MEMBERS, IJsEnumDebugProperty*, HRESULT)
   end
 
+  IJsDebugProperty_GUID = LibC::GUID.new("f8ffcf2b-3aa4-4320-85c3-52a312ba9633")
+  CLSID_IJsDebugProperty = "f8ffcf2b-3aa4-4320-85c3-52a312ba9633"
   struct IJsDebugProperty
     lpVtbl : IJsDebugPropertyVTbl*
   end
@@ -12798,6 +13286,8 @@ lib LibWin32
     get_count : Proc(IJsEnumDebugProperty*, UInt32*, HRESULT)
   end
 
+  IJsEnumDebugProperty_GUID = LibC::GUID.new("4092432f-2f0f-4fe1-b638-5b74a52cdcbe")
+  CLSID_IJsEnumDebugProperty = "4092432f-2f0f-4fe1-b638-5b74a52cdcbe"
   struct IJsEnumDebugProperty
     lpVtbl : IJsEnumDebugPropertyVTbl*
   end
@@ -12813,6 +13303,8 @@ lib LibWin32
     get_document_position : Proc(IJsDebugBreakPoint*, UInt64*, UInt32*, UInt32*, HRESULT)
   end
 
+  IJsDebugBreakPoint_GUID = LibC::GUID.new("df6773e3-ed8d-488b-8a3e-5812577d1542")
+  CLSID_IJsDebugBreakPoint = "df6773e3-ed8d-488b-8a3e-5812577d1542"
   struct IJsDebugBreakPoint
     lpVtbl : IJsDebugBreakPointVTbl*
   end
@@ -12825,6 +13317,8 @@ lib LibWin32
     reset : Proc(IEnumJsStackFrames*, HRESULT)
   end
 
+  IEnumJsStackFrames_GUID = LibC::GUID.new("5e7da34b-fb51-4791-abe7-cb5bdf419755")
+  CLSID_IEnumJsStackFrames = "5e7da34b-fb51-4791-abe7-cb5bdf419755"
   struct IEnumJsStackFrames
     lpVtbl : IEnumJsStackFramesVTbl*
   end
@@ -12844,6 +13338,8 @@ lib LibWin32
     get_thread_context : Proc(IJsDebugDataTarget*, UInt32, UInt32, UInt32, Void*, HRESULT)
   end
 
+  IJsDebugDataTarget_GUID = LibC::GUID.new("53b28977-53a1-48e5-9000-5d0dfa893931")
+  CLSID_IJsDebugDataTarget = "53b28977-53a1-48e5-9000-5d0dfa893931"
   struct IJsDebugDataTarget
     lpVtbl : IJsDebugDataTargetVTbl*
   end
@@ -12856,6 +13352,8 @@ lib LibWin32
     set_interface_safety_options : Proc(IObjectSafety*, Guid*, UInt32, UInt32, HRESULT)
   end
 
+  IObjectSafety_GUID = LibC::GUID.new("cb5bdc81-93c1-11cf-8f20-00805f2cd064")
+  CLSID_IObjectSafety = "cb5bdc81-93c1-11cf-8f20-00805f2cd064"
   struct IObjectSafety
     lpVtbl : IObjectSafetyVTbl*
   end

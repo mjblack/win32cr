@@ -37,6 +37,8 @@ lib LibWin32
     disconnect_object : Proc(IMarshal*, UInt32, HRESULT)
   end
 
+  IMarshal_GUID = LibC::GUID.new("00000003-0000-0000-c000-000000000046")
+  CLSID_IMarshal = "00000003-0000-0000-c000-000000000046"
   struct IMarshal
     lpVtbl : IMarshalVTbl*
   end
@@ -53,6 +55,8 @@ lib LibWin32
     disconnect_object : Proc(IMarshal2*, UInt32, HRESULT)
   end
 
+  IMarshal2_GUID = LibC::GUID.new("000001cf-0000-0000-c000-000000000046")
+  CLSID_IMarshal2 = "000001cf-0000-0000-c000-000000000046"
   struct IMarshal2
     lpVtbl : IMarshal2VTbl*
   end
@@ -75,6 +79,8 @@ lib LibWin32
     get_marshaling_context_attribute : Proc(IMarshalingStream*, CO_MARSHALING_CONTEXT_ATTRIBUTES, LibC::UINT_PTR*, HRESULT)
   end
 
+  IMarshalingStream_GUID = LibC::GUID.new("d8f2f5e6-6102-4863-9f26-389a4676efde")
+  CLSID_IMarshalingStream = "d8f2f5e6-6102-4863-9f26-389a4676efde"
   struct IMarshalingStream
     lpVtbl : IMarshalingStreamVTbl*
   end

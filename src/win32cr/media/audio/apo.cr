@@ -266,6 +266,8 @@ lib LibWin32
     get_uncompressed_audio_format : Proc(IAudioMediaType*, UNCOMPRESSEDAUDIOFORMAT*, HRESULT)
   end
 
+  IAudioMediaType_GUID = LibC::GUID.new("4e997f73-b71f-4798-873b-ed7dfcf15b4d")
+  CLSID_IAudioMediaType = "4e997f73-b71f-4798-873b-ed7dfcf15b4d"
   struct IAudioMediaType
     lpVtbl : IAudioMediaTypeVTbl*
   end
@@ -279,6 +281,8 @@ lib LibWin32
     calc_output_frames : Proc(IAudioProcessingObjectRT*, UInt32, UInt32)
   end
 
+  IAudioProcessingObjectRT_GUID = LibC::GUID.new("9e1d6a6d-ddbc-4e95-a4c7-ad64ba37846c")
+  CLSID_IAudioProcessingObjectRT = "9e1d6a6d-ddbc-4e95-a4c7-ad64ba37846c"
   struct IAudioProcessingObjectRT
     lpVtbl : IAudioProcessingObjectRTVTbl*
   end
@@ -291,6 +295,8 @@ lib LibWin32
     calc_max_output_frames : Proc(IAudioProcessingObjectVBR*, UInt32, UInt32*, HRESULT)
   end
 
+  IAudioProcessingObjectVBR_GUID = LibC::GUID.new("7ba1db8f-78ad-49cd-9591-f79d80a17c81")
+  CLSID_IAudioProcessingObjectVBR = "7ba1db8f-78ad-49cd-9591-f79d80a17c81"
   struct IAudioProcessingObjectVBR
     lpVtbl : IAudioProcessingObjectVBRVTbl*
   end
@@ -303,6 +309,8 @@ lib LibWin32
     unlock_for_process : Proc(IAudioProcessingObjectConfiguration*, HRESULT)
   end
 
+  IAudioProcessingObjectConfiguration_GUID = LibC::GUID.new("0e5ed805-aba6-49c3-8f9a-2b8c889c4fa8")
+  CLSID_IAudioProcessingObjectConfiguration = "0e5ed805-aba6-49c3-8f9a-2b8c889c4fa8"
   struct IAudioProcessingObjectConfiguration
     lpVtbl : IAudioProcessingObjectConfigurationVTbl*
   end
@@ -320,6 +328,8 @@ lib LibWin32
     get_input_channel_count : Proc(IAudioProcessingObject*, UInt32*, HRESULT)
   end
 
+  IAudioProcessingObject_GUID = LibC::GUID.new("fd7f2b29-24d0-4b5c-b177-592c39f9ca10")
+  CLSID_IAudioProcessingObject = "fd7f2b29-24d0-4b5c-b177-592c39f9ca10"
   struct IAudioProcessingObject
     lpVtbl : IAudioProcessingObjectVTbl*
   end
@@ -331,6 +341,8 @@ lib LibWin32
     set_audio_device_modules_manager : Proc(IAudioDeviceModulesClient*, IUnknown, HRESULT)
   end
 
+  IAudioDeviceModulesClient_GUID = LibC::GUID.new("98f37dac-d0b6-49f5-896a-aa4d169a4c48")
+  CLSID_IAudioDeviceModulesClient = "98f37dac-d0b6-49f5-896a-aa4d169a4c48"
   struct IAudioDeviceModulesClient
     lpVtbl : IAudioDeviceModulesClientVTbl*
   end
@@ -341,6 +353,8 @@ lib LibWin32
     release : Proc(IAudioSystemEffects*, UInt32)
   end
 
+  IAudioSystemEffects_GUID = LibC::GUID.new("5fa00f27-add6-499a-8a9d-6b98521fa75b")
+  CLSID_IAudioSystemEffects = "5fa00f27-add6-499a-8a9d-6b98521fa75b"
   struct IAudioSystemEffects
     lpVtbl : IAudioSystemEffectsVTbl*
   end
@@ -352,6 +366,8 @@ lib LibWin32
     get_effects_list : Proc(IAudioSystemEffects2*, Guid**, UInt32*, LibC::HANDLE, HRESULT)
   end
 
+  IAudioSystemEffects2_GUID = LibC::GUID.new("bafe99d2-7436-44ce-9e0e-4d89afbfff56")
+  CLSID_IAudioSystemEffects2 = "bafe99d2-7436-44ce-9e0e-4d89afbfff56"
   struct IAudioSystemEffects2
     lpVtbl : IAudioSystemEffects2VTbl*
   end
@@ -365,6 +381,8 @@ lib LibWin32
     get_format_representation : Proc(IAudioSystemEffectsCustomFormats*, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
+  IAudioSystemEffectsCustomFormats_GUID = LibC::GUID.new("b1176e34-bb7f-4f05-bebd-1b18a534e097")
+  CLSID_IAudioSystemEffectsCustomFormats = "b1176e34-bb7f-4f05-bebd-1b18a534e097"
   struct IAudioSystemEffectsCustomFormats
     lpVtbl : IAudioSystemEffectsCustomFormatsVTbl*
   end
@@ -378,6 +396,8 @@ lib LibWin32
     is_input_format_supported : Proc(IApoAuxiliaryInputConfiguration*, IAudioMediaType, IAudioMediaType*, HRESULT)
   end
 
+  IApoAuxiliaryInputConfiguration_GUID = LibC::GUID.new("4ceb0aab-fa19-48ed-a857-87771ae1b768")
+  CLSID_IApoAuxiliaryInputConfiguration = "4ceb0aab-fa19-48ed-a857-87771ae1b768"
   struct IApoAuxiliaryInputConfiguration
     lpVtbl : IApoAuxiliaryInputConfigurationVTbl*
   end
@@ -389,6 +409,8 @@ lib LibWin32
     accept_input : Proc(IApoAuxiliaryInputRT*, UInt32, APO_CONNECTION_PROPERTY*, Void)
   end
 
+  IApoAuxiliaryInputRT_GUID = LibC::GUID.new("f851809c-c177-49a0-b1b2-b66f017943ab")
+  CLSID_IApoAuxiliaryInputRT = "f851809c-c177-49a0-b1b2-b66f017943ab"
   struct IApoAuxiliaryInputRT
     lpVtbl : IApoAuxiliaryInputRTVTbl*
   end
@@ -399,6 +421,8 @@ lib LibWin32
     release : Proc(IApoAcousticEchoCancellation*, UInt32)
   end
 
+  IApoAcousticEchoCancellation_GUID = LibC::GUID.new("25385759-3236-4101-a943-25693dfb5d2d")
+  CLSID_IApoAcousticEchoCancellation = "25385759-3236-4101-a943-25693dfb5d2d"
   struct IApoAcousticEchoCancellation
     lpVtbl : IApoAcousticEchoCancellationVTbl*
   end
@@ -412,6 +436,8 @@ lib LibWin32
     set_audio_system_effect_state : Proc(IAudioSystemEffects3*, Guid, AUDIO_SYSTEMEFFECT_STATE, HRESULT)
   end
 
+  IAudioSystemEffects3_GUID = LibC::GUID.new("c58b31cd-fc6a-4255-bc1f-ad29bb0a4a17")
+  CLSID_IAudioSystemEffects3 = "c58b31cd-fc6a-4255-bc1f-ad29bb0a4a17"
   struct IAudioSystemEffects3
     lpVtbl : IAudioSystemEffects3VTbl*
   end
@@ -423,6 +449,8 @@ lib LibWin32
     get_real_time_work_queue : Proc(IAudioProcessingObjectRTQueueService*, UInt32*, HRESULT)
   end
 
+  IAudioProcessingObjectRTQueueService_GUID = LibC::GUID.new("acd65e2f-955b-4b57-b9bf-ac297bb752c9")
+  CLSID_IAudioProcessingObjectRTQueueService = "acd65e2f-955b-4b57-b9bf-ac297bb752c9"
   struct IAudioProcessingObjectRTQueueService
     lpVtbl : IAudioProcessingObjectRTQueueServiceVTbl*
   end
@@ -434,6 +462,8 @@ lib LibWin32
     apo_log : Proc(IAudioProcessingObjectLoggingService*, APO_LOG_LEVEL, LibC::LPWSTR, Void)
   end
 
+  IAudioProcessingObjectLoggingService_GUID = LibC::GUID.new("698f0107-1745-4708-95a5-d84478a62a65")
+  CLSID_IAudioProcessingObjectLoggingService = "698f0107-1745-4708-95a5-d84478a62a65"
   struct IAudioProcessingObjectLoggingService
     lpVtbl : IAudioProcessingObjectLoggingServiceVTbl*
   end
@@ -446,6 +476,8 @@ lib LibWin32
     handle_notification : Proc(IAudioProcessingObjectNotifications*, APO_NOTIFICATION*, Void)
   end
 
+  IAudioProcessingObjectNotifications_GUID = LibC::GUID.new("56b0c76f-02fd-4b21-a52e-9f8219fc86e4")
+  CLSID_IAudioProcessingObjectNotifications = "56b0c76f-02fd-4b21-a52e-9f8219fc86e4"
   struct IAudioProcessingObjectNotifications
     lpVtbl : IAudioProcessingObjectNotificationsVTbl*
   end

@@ -1681,6 +1681,8 @@ lib LibWin32
     create_device : Proc(IDirect3D9*, UInt32, D3DDEVTYPE, LibC::HANDLE, UInt32, D3DPRESENT_PARAMETERS*, IDirect3DDevice9*, HRESULT)
   end
 
+  IDirect3D9_GUID = LibC::GUID.new("81bdcbca-64d4-426d-ae8d-ad0147f4275c")
+  CLSID_IDirect3D9 = "81bdcbca-64d4-426d-ae8d-ad0147f4275c"
   struct IDirect3D9
     lpVtbl : IDirect3D9VTbl*
   end
@@ -1807,6 +1809,8 @@ lib LibWin32
     create_query : Proc(IDirect3DDevice9*, D3DQUERYTYPE, IDirect3DQuery9*, HRESULT)
   end
 
+  IDirect3DDevice9_GUID = LibC::GUID.new("d0223b96-bf7a-43fd-92bd-a43b0d82b9eb")
+  CLSID_IDirect3DDevice9 = "d0223b96-bf7a-43fd-92bd-a43b0d82b9eb"
   struct IDirect3DDevice9
     lpVtbl : IDirect3DDevice9VTbl*
   end
@@ -1820,6 +1824,8 @@ lib LibWin32
     apply : Proc(IDirect3DStateBlock9*, HRESULT)
   end
 
+  IDirect3DStateBlock9_GUID = LibC::GUID.new("b07c4fe5-310d-4ba8-a23c-4f0f206f218b")
+  CLSID_IDirect3DStateBlock9 = "b07c4fe5-310d-4ba8-a23c-4f0f206f218b"
   struct IDirect3DStateBlock9
     lpVtbl : IDirect3DStateBlock9VTbl*
   end
@@ -1837,6 +1843,8 @@ lib LibWin32
     get_present_parameters : Proc(IDirect3DSwapChain9*, D3DPRESENT_PARAMETERS*, HRESULT)
   end
 
+  IDirect3DSwapChain9_GUID = LibC::GUID.new("794950f2-adfc-458a-905e-10a10b0b503b")
+  CLSID_IDirect3DSwapChain9 = "794950f2-adfc-458a-905e-10a10b0b503b"
   struct IDirect3DSwapChain9
     lpVtbl : IDirect3DSwapChain9VTbl*
   end
@@ -1855,6 +1863,8 @@ lib LibWin32
     get_type : Proc(IDirect3DResource9*, D3DRESOURCETYPE)
   end
 
+  IDirect3DResource9_GUID = LibC::GUID.new("05eec05d-8f7d-4362-b999-d1baf357c704")
+  CLSID_IDirect3DResource9 = "05eec05d-8f7d-4362-b999-d1baf357c704"
   struct IDirect3DResource9
     lpVtbl : IDirect3DResource9VTbl*
   end
@@ -1867,6 +1877,8 @@ lib LibWin32
     get_declaration : Proc(IDirect3DVertexDeclaration9*, D3DVERTEXELEMENT9*, UInt32*, HRESULT)
   end
 
+  IDirect3DVertexDeclaration9_GUID = LibC::GUID.new("dd13c59c-36fa-4098-a8fb-c7ed39dc8546")
+  CLSID_IDirect3DVertexDeclaration9 = "dd13c59c-36fa-4098-a8fb-c7ed39dc8546"
   struct IDirect3DVertexDeclaration9
     lpVtbl : IDirect3DVertexDeclaration9VTbl*
   end
@@ -1879,6 +1891,8 @@ lib LibWin32
     get_function : Proc(IDirect3DVertexShader9*, Void*, UInt32*, HRESULT)
   end
 
+  IDirect3DVertexShader9_GUID = LibC::GUID.new("efc5557e-6265-4613-8a94-43857889eb36")
+  CLSID_IDirect3DVertexShader9 = "efc5557e-6265-4613-8a94-43857889eb36"
   struct IDirect3DVertexShader9
     lpVtbl : IDirect3DVertexShader9VTbl*
   end
@@ -1891,6 +1905,8 @@ lib LibWin32
     get_function : Proc(IDirect3DPixelShader9*, Void*, UInt32*, HRESULT)
   end
 
+  IDirect3DPixelShader9_GUID = LibC::GUID.new("6d3bdbdc-5b02-4415-b852-ce5e8bccb289")
+  CLSID_IDirect3DPixelShader9 = "6d3bdbdc-5b02-4415-b852-ce5e8bccb289"
   struct IDirect3DPixelShader9
     lpVtbl : IDirect3DPixelShader9VTbl*
   end
@@ -1915,6 +1931,8 @@ lib LibWin32
     generate_mip_sub_levels : Proc(IDirect3DBaseTexture9*, Void)
   end
 
+  IDirect3DBaseTexture9_GUID = LibC::GUID.new("580ca87e-1d3c-4d54-991d-b7d3e3c298ce")
+  CLSID_IDirect3DBaseTexture9 = "580ca87e-1d3c-4d54-991d-b7d3e3c298ce"
   struct IDirect3DBaseTexture9
     lpVtbl : IDirect3DBaseTexture9VTbl*
   end
@@ -1944,6 +1962,8 @@ lib LibWin32
     add_dirty_rect : Proc(IDirect3DTexture9*, RECT*, HRESULT)
   end
 
+  IDirect3DTexture9_GUID = LibC::GUID.new("85c31227-3de5-4f00-9b3a-f11ac38c18b5")
+  CLSID_IDirect3DTexture9 = "85c31227-3de5-4f00-9b3a-f11ac38c18b5"
   struct IDirect3DTexture9
     lpVtbl : IDirect3DTexture9VTbl*
   end
@@ -1973,6 +1993,8 @@ lib LibWin32
     add_dirty_box : Proc(IDirect3DVolumeTexture9*, D3DBOX*, HRESULT)
   end
 
+  IDirect3DVolumeTexture9_GUID = LibC::GUID.new("2518526c-e789-4111-a7b9-47ef328d13e6")
+  CLSID_IDirect3DVolumeTexture9 = "2518526c-e789-4111-a7b9-47ef328d13e6"
   struct IDirect3DVolumeTexture9
     lpVtbl : IDirect3DVolumeTexture9VTbl*
   end
@@ -2002,6 +2024,8 @@ lib LibWin32
     add_dirty_rect : Proc(IDirect3DCubeTexture9*, D3DCUBEMAP_FACES, RECT*, HRESULT)
   end
 
+  IDirect3DCubeTexture9_GUID = LibC::GUID.new("fff32f81-d953-473a-9223-93d652aba93f")
+  CLSID_IDirect3DCubeTexture9 = "fff32f81-d953-473a-9223-93d652aba93f"
   struct IDirect3DCubeTexture9
     lpVtbl : IDirect3DCubeTexture9VTbl*
   end
@@ -2023,6 +2047,8 @@ lib LibWin32
     get_desc : Proc(IDirect3DVertexBuffer9*, D3DVERTEXBUFFER_DESC*, HRESULT)
   end
 
+  IDirect3DVertexBuffer9_GUID = LibC::GUID.new("b64bb1b5-fd70-4df6-bf91-19d0a12455e3")
+  CLSID_IDirect3DVertexBuffer9 = "b64bb1b5-fd70-4df6-bf91-19d0a12455e3"
   struct IDirect3DVertexBuffer9
     lpVtbl : IDirect3DVertexBuffer9VTbl*
   end
@@ -2044,6 +2070,8 @@ lib LibWin32
     get_desc : Proc(IDirect3DIndexBuffer9*, D3DINDEXBUFFER_DESC*, HRESULT)
   end
 
+  IDirect3DIndexBuffer9_GUID = LibC::GUID.new("7c9dd65e-d3f7-4529-acee-785830acde35")
+  CLSID_IDirect3DIndexBuffer9 = "7c9dd65e-d3f7-4529-acee-785830acde35"
   struct IDirect3DIndexBuffer9
     lpVtbl : IDirect3DIndexBuffer9VTbl*
   end
@@ -2068,6 +2096,8 @@ lib LibWin32
     release_dc : Proc(IDirect3DSurface9*, HDC, HRESULT)
   end
 
+  IDirect3DSurface9_GUID = LibC::GUID.new("0cfbaf3a-9ff6-429a-99b3-a2796af8b89b")
+  CLSID_IDirect3DSurface9 = "0cfbaf3a-9ff6-429a-99b3-a2796af8b89b"
   struct IDirect3DSurface9
     lpVtbl : IDirect3DSurface9VTbl*
   end
@@ -2086,6 +2116,8 @@ lib LibWin32
     unlock_box : Proc(IDirect3DVolume9*, HRESULT)
   end
 
+  IDirect3DVolume9_GUID = LibC::GUID.new("24f416e6-1f67-4aa7-b88e-d33f6f3128a1")
+  CLSID_IDirect3DVolume9 = "24f416e6-1f67-4aa7-b88e-d33f6f3128a1"
   struct IDirect3DVolume9
     lpVtbl : IDirect3DVolume9VTbl*
   end
@@ -2101,6 +2133,8 @@ lib LibWin32
     get_data : Proc(IDirect3DQuery9*, Void*, UInt32, UInt32, HRESULT)
   end
 
+  IDirect3DQuery9_GUID = LibC::GUID.new("d9771460-a695-4f26-bbd3-27b840b541cc")
+  CLSID_IDirect3DQuery9 = "d9771460-a695-4f26-bbd3-27b840b541cc"
   struct IDirect3DQuery9
     lpVtbl : IDirect3DQuery9VTbl*
   end
@@ -2130,6 +2164,8 @@ lib LibWin32
     get_adapter_luid : Proc(IDirect3D9Ex*, UInt32, LUID*, HRESULT)
   end
 
+  IDirect3D9Ex_GUID = LibC::GUID.new("02177241-69fc-400c-8ff1-93a44df6861d")
+  CLSID_IDirect3D9Ex = "02177241-69fc-400c-8ff1-93a44df6861d"
   struct IDirect3D9Ex
     lpVtbl : IDirect3D9ExVTbl*
   end
@@ -2271,6 +2307,8 @@ lib LibWin32
     get_display_mode_ex : Proc(IDirect3DDevice9Ex*, UInt32, D3DDISPLAYMODEEX*, D3DDISPLAYROTATION*, HRESULT)
   end
 
+  IDirect3DDevice9Ex_GUID = LibC::GUID.new("b18b10ce-2649-405a-870f-95f777d4313a")
+  CLSID_IDirect3DDevice9Ex = "b18b10ce-2649-405a-870f-95f777d4313a"
   struct IDirect3DDevice9Ex
     lpVtbl : IDirect3DDevice9ExVTbl*
   end
@@ -2291,6 +2329,8 @@ lib LibWin32
     get_display_mode_ex : Proc(IDirect3DSwapChain9Ex*, D3DDISPLAYMODEEX*, D3DDISPLAYROTATION*, HRESULT)
   end
 
+  IDirect3DSwapChain9Ex_GUID = LibC::GUID.new("91886caf-1c3d-4d2e-a0ab-3e4c7d8d3303")
+  CLSID_IDirect3DSwapChain9Ex = "91886caf-1c3d-4d2e-a0ab-3e4c7d8d3303"
   struct IDirect3DSwapChain9Ex
     lpVtbl : IDirect3DSwapChain9ExVTbl*
   end
