@@ -220,27 +220,27 @@ lib LibWin32
   WDS_LOG_LEVEL_ERROR = 1_i32
   WDS_LOG_LEVEL_WARNING = 2_i32
   WDS_LOG_LEVEL_INFO = 3_i32
-  WdsTransportCacheable = LibC::GUID.new(0x70590b16_u32, 0xf146_u16, 0x46bd_u16, StaticArray[0xbd_u8, 0x9d_u8, 0x4a_u8, 0xaa_u8, 0x90_u8, 0x8_u8, 0x4b_u8, 0xf5_u8])
-  WdsTransportCollection = LibC::GUID.new(0xc7f18b09_u32, 0x391e_u16, 0x436e_u16, StaticArray[0xb1_u8, 0xb_u8, 0xc3_u8, 0xef_u8, 0x46_u8, 0xf2_u8, 0xc3_u8, 0x4f_u8])
-  WdsTransportManager = LibC::GUID.new(0xf21523f6_u32, 0x837c_u16, 0x4a58_u16, StaticArray[0xaf_u8, 0x99_u8, 0x8a_u8, 0x7e_u8, 0x27_u8, 0xf8_u8, 0xff_u8, 0x59_u8])
-  WdsTransportServer = LibC::GUID.new(0xea19b643_u32, 0x4adf_u16, 0x4413_u16, StaticArray[0x94_u8, 0x2c_u8, 0x14_u8, 0xf3_u8, 0x79_u8, 0x11_u8, 0x87_u8, 0x60_u8])
-  WdsTransportSetupManager = LibC::GUID.new(0xc7beeaad_u32, 0x9f04_u16, 0x4923_u16, StaticArray[0x9f_u8, 0xc_u8, 0xfb_u8, 0xf5_u8, 0x2b_u8, 0xc7_u8, 0x59_u8, 0xf_u8])
-  WdsTransportConfigurationManager = LibC::GUID.new(0x8743f674_u32, 0x904c_u16, 0x47ca_u16, StaticArray[0x85_u8, 0x12_u8, 0x35_u8, 0xfe_u8, 0x98_u8, 0xf6_u8, 0xb0_u8, 0xac_u8])
-  WdsTransportNamespaceManager = LibC::GUID.new(0xf08cdb63_u32, 0x85de_u16, 0x4a28_u16, StaticArray[0xa1_u8, 0xa9_u8, 0x5c_u8, 0xa3_u8, 0xe7_u8, 0xef_u8, 0xda_u8, 0x73_u8])
-  WdsTransportServicePolicy = LibC::GUID.new(0x65aceadc_u32, 0x2f0b_u16, 0x4f43_u16, StaticArray[0x9f_u8, 0x4d_u8, 0x81_u8, 0x18_u8, 0x65_u8, 0xd8_u8, 0xce_u8, 0xad_u8])
-  WdsTransportDiagnosticsPolicy = LibC::GUID.new(0xeb3333e1_u32, 0xa7ad_u16, 0x46f5_u16, StaticArray[0x80_u8, 0xd6_u8, 0x6b_u8, 0x74_u8, 0x2_u8, 0x4_u8, 0xe5_u8, 0x9_u8])
-  WdsTransportMulticastSessionPolicy = LibC::GUID.new(0x3c6bc3f4_u32, 0x6418_u16, 0x472a_u16, StaticArray[0xb6_u8, 0xf1_u8, 0x52_u8, 0xd4_u8, 0x57_u8, 0x19_u8, 0x54_u8, 0x37_u8])
-  WdsTransportNamespace = LibC::GUID.new(0xd8385768_u32, 0x732_u16, 0x4ec1_u16, StaticArray[0x95_u8, 0xea_u8, 0x16_u8, 0xda_u8, 0x58_u8, 0x19_u8, 0x8_u8, 0xa1_u8])
-  WdsTransportNamespaceAutoCast = LibC::GUID.new(0xb091f5a8_u32, 0x6a99_u16, 0x478d_u16, StaticArray[0xb2_u8, 0x3b_u8, 0x9_u8, 0xe8_u8, 0xfe_u8, 0xe0_u8, 0x45_u8, 0x74_u8])
-  WdsTransportNamespaceScheduledCast = LibC::GUID.new(0xbadc1897_u32, 0x7025_u16, 0x44eb_u16, StaticArray[0x91_u8, 0x8_u8, 0xfb_u8, 0x61_u8, 0xc4_u8, 0x5_u8, 0x57_u8, 0x92_u8])
-  WdsTransportNamespaceScheduledCastManualStart = LibC::GUID.new(0xd3e1a2aa_u32, 0xcaac_u16, 0x460e_u16, StaticArray[0xb9_u8, 0x8a_u8, 0x47_u8, 0xf9_u8, 0xf3_u8, 0x18_u8, 0xa1_u8, 0xfa_u8])
-  WdsTransportNamespaceScheduledCastAutoStart = LibC::GUID.new(0xa1107052_u32, 0x122c_u16, 0x4b81_u16, StaticArray[0x9b_u8, 0x7c_u8, 0x38_u8, 0x6e_u8, 0x68_u8, 0x55_u8, 0x38_u8, 0x3f_u8])
-  WdsTransportContent = LibC::GUID.new(0xa891fe7_u32, 0x4a3f_u16, 0x4c65_u16, StaticArray[0xb6_u8, 0xf2_u8, 0x14_u8, 0x67_u8, 0x61_u8, 0x96_u8, 0x79_u8, 0xea_u8])
-  WdsTransportSession = LibC::GUID.new(0x749ac4e0_u32, 0x67bc_u16, 0x4743_u16, StaticArray[0xbf_u8, 0xe5_u8, 0xca_u8, 0xcb_u8, 0x1f_u8, 0x26_u8, 0xf5_u8, 0x7f_u8])
-  WdsTransportClient = LibC::GUID.new(0x66d2c5e9_u32, 0xff6_u16, 0x49ec_u16, StaticArray[0x97_u8, 0x33_u8, 0xda_u8, 0xfb_u8, 0x1e_u8, 0x1_u8, 0xdf_u8, 0x1c_u8])
-  WdsTransportTftpClient = LibC::GUID.new(0x50343925_u32, 0x7c5c_u16, 0x4c8c_u16, StaticArray[0x96_u8, 0xc4_u8, 0xad_u8, 0x9f_u8, 0xa5_u8, 0x0_u8, 0x5f_u8, 0xba_u8])
-  WdsTransportTftpManager = LibC::GUID.new(0xc8e9dca2_u32, 0x3241_u16, 0x4e4d_u16, StaticArray[0xb8_u8, 0x6_u8, 0xbc_u8, 0x74_u8, 0x1_u8, 0x9d_u8, 0xfe_u8, 0xda_u8])
-  WdsTransportContentProvider = LibC::GUID.new(0xe0be741f_u32, 0x5a75_u16, 0x4eb9_u16, StaticArray[0x8a_u8, 0x2d_u8, 0x5e_u8, 0x18_u8, 0x9b_u8, 0x45_u8, 0xf3_u8, 0x27_u8])
+  CLSID_WdsTransportCacheable = LibC::GUID.new(0x70590b16_u32, 0xf146_u16, 0x46bd_u16, StaticArray[0xbd_u8, 0x9d_u8, 0x4a_u8, 0xaa_u8, 0x90_u8, 0x8_u8, 0x4b_u8, 0xf5_u8])
+  CLSID_WdsTransportCollection = LibC::GUID.new(0xc7f18b09_u32, 0x391e_u16, 0x436e_u16, StaticArray[0xb1_u8, 0xb_u8, 0xc3_u8, 0xef_u8, 0x46_u8, 0xf2_u8, 0xc3_u8, 0x4f_u8])
+  CLSID_WdsTransportManager = LibC::GUID.new(0xf21523f6_u32, 0x837c_u16, 0x4a58_u16, StaticArray[0xaf_u8, 0x99_u8, 0x8a_u8, 0x7e_u8, 0x27_u8, 0xf8_u8, 0xff_u8, 0x59_u8])
+  CLSID_WdsTransportServer = LibC::GUID.new(0xea19b643_u32, 0x4adf_u16, 0x4413_u16, StaticArray[0x94_u8, 0x2c_u8, 0x14_u8, 0xf3_u8, 0x79_u8, 0x11_u8, 0x87_u8, 0x60_u8])
+  CLSID_WdsTransportSetupManager = LibC::GUID.new(0xc7beeaad_u32, 0x9f04_u16, 0x4923_u16, StaticArray[0x9f_u8, 0xc_u8, 0xfb_u8, 0xf5_u8, 0x2b_u8, 0xc7_u8, 0x59_u8, 0xf_u8])
+  CLSID_WdsTransportConfigurationManager = LibC::GUID.new(0x8743f674_u32, 0x904c_u16, 0x47ca_u16, StaticArray[0x85_u8, 0x12_u8, 0x35_u8, 0xfe_u8, 0x98_u8, 0xf6_u8, 0xb0_u8, 0xac_u8])
+  CLSID_WdsTransportNamespaceManager = LibC::GUID.new(0xf08cdb63_u32, 0x85de_u16, 0x4a28_u16, StaticArray[0xa1_u8, 0xa9_u8, 0x5c_u8, 0xa3_u8, 0xe7_u8, 0xef_u8, 0xda_u8, 0x73_u8])
+  CLSID_WdsTransportServicePolicy = LibC::GUID.new(0x65aceadc_u32, 0x2f0b_u16, 0x4f43_u16, StaticArray[0x9f_u8, 0x4d_u8, 0x81_u8, 0x18_u8, 0x65_u8, 0xd8_u8, 0xce_u8, 0xad_u8])
+  CLSID_WdsTransportDiagnosticsPolicy = LibC::GUID.new(0xeb3333e1_u32, 0xa7ad_u16, 0x46f5_u16, StaticArray[0x80_u8, 0xd6_u8, 0x6b_u8, 0x74_u8, 0x2_u8, 0x4_u8, 0xe5_u8, 0x9_u8])
+  CLSID_WdsTransportMulticastSessionPolicy = LibC::GUID.new(0x3c6bc3f4_u32, 0x6418_u16, 0x472a_u16, StaticArray[0xb6_u8, 0xf1_u8, 0x52_u8, 0xd4_u8, 0x57_u8, 0x19_u8, 0x54_u8, 0x37_u8])
+  CLSID_WdsTransportNamespace = LibC::GUID.new(0xd8385768_u32, 0x732_u16, 0x4ec1_u16, StaticArray[0x95_u8, 0xea_u8, 0x16_u8, 0xda_u8, 0x58_u8, 0x19_u8, 0x8_u8, 0xa1_u8])
+  CLSID_WdsTransportNamespaceAutoCast = LibC::GUID.new(0xb091f5a8_u32, 0x6a99_u16, 0x478d_u16, StaticArray[0xb2_u8, 0x3b_u8, 0x9_u8, 0xe8_u8, 0xfe_u8, 0xe0_u8, 0x45_u8, 0x74_u8])
+  CLSID_WdsTransportNamespaceScheduledCast = LibC::GUID.new(0xbadc1897_u32, 0x7025_u16, 0x44eb_u16, StaticArray[0x91_u8, 0x8_u8, 0xfb_u8, 0x61_u8, 0xc4_u8, 0x5_u8, 0x57_u8, 0x92_u8])
+  CLSID_WdsTransportNamespaceScheduledCastManualStart = LibC::GUID.new(0xd3e1a2aa_u32, 0xcaac_u16, 0x460e_u16, StaticArray[0xb9_u8, 0x8a_u8, 0x47_u8, 0xf9_u8, 0xf3_u8, 0x18_u8, 0xa1_u8, 0xfa_u8])
+  CLSID_WdsTransportNamespaceScheduledCastAutoStart = LibC::GUID.new(0xa1107052_u32, 0x122c_u16, 0x4b81_u16, StaticArray[0x9b_u8, 0x7c_u8, 0x38_u8, 0x6e_u8, 0x68_u8, 0x55_u8, 0x38_u8, 0x3f_u8])
+  CLSID_WdsTransportContent = LibC::GUID.new(0xa891fe7_u32, 0x4a3f_u16, 0x4c65_u16, StaticArray[0xb6_u8, 0xf2_u8, 0x14_u8, 0x67_u8, 0x61_u8, 0x96_u8, 0x79_u8, 0xea_u8])
+  CLSID_WdsTransportSession = LibC::GUID.new(0x749ac4e0_u32, 0x67bc_u16, 0x4743_u16, StaticArray[0xbf_u8, 0xe5_u8, 0xca_u8, 0xcb_u8, 0x1f_u8, 0x26_u8, 0xf5_u8, 0x7f_u8])
+  CLSID_WdsTransportClient = LibC::GUID.new(0x66d2c5e9_u32, 0xff6_u16, 0x49ec_u16, StaticArray[0x97_u8, 0x33_u8, 0xda_u8, 0xfb_u8, 0x1e_u8, 0x1_u8, 0xdf_u8, 0x1c_u8])
+  CLSID_WdsTransportTftpClient = LibC::GUID.new(0x50343925_u32, 0x7c5c_u16, 0x4c8c_u16, StaticArray[0x96_u8, 0xc4_u8, 0xad_u8, 0x9f_u8, 0xa5_u8, 0x0_u8, 0x5f_u8, 0xba_u8])
+  CLSID_WdsTransportTftpManager = LibC::GUID.new(0xc8e9dca2_u32, 0x3241_u16, 0x4e4d_u16, StaticArray[0xb8_u8, 0x6_u8, 0xbc_u8, 0x74_u8, 0x1_u8, 0x9d_u8, 0xfe_u8, 0xda_u8])
+  CLSID_WdsTransportContentProvider = LibC::GUID.new(0xe0be741f_u32, 0x5a75_u16, 0x4eb9_u16, StaticArray[0x8a_u8, 0x2d_u8, 0x5e_u8, 0x18_u8, 0x9b_u8, 0x45_u8, 0xf3_u8, 0x27_u8])
 
   alias PFN_WdsCliTraceFunction = Proc(LibC::LPWSTR, Int8*, Void)
   alias PFN_WdsCliCallback = Proc(PFN_WDS_CLI_CALLBACK_MESSAGE_ID, LibC::UINT_PTR, LPARAM, Void*, Void)
@@ -518,8 +518,8 @@ lib LibWin32
     commit : Proc(IWdsTransportCacheable*, HRESULT)
   end
 
-  IWdsTransportCacheable_GUID = LibC::GUID.new("46ad894b-0bab-47dc-84b2-7b553f1d8f80")
-  CLSID_IWdsTransportCacheable = "46ad894b-0bab-47dc-84b2-7b553f1d8f80"
+  IWdsTransportCacheable_GUID = "46ad894b-0bab-47dc-84b2-7b553f1d8f80"
+  IID_IWdsTransportCacheable = LibC::GUID.new(0x46ad894b_u32, 0xbab_u16, 0x47dc_u16, StaticArray[0x84_u8, 0xb2_u8, 0x7b_u8, 0x55_u8, 0x3f_u8, 0x1d_u8, 0x8f_u8, 0x80_u8])
   struct IWdsTransportCacheable
     lpVtbl : IWdsTransportCacheableVTbl*
   end
@@ -537,8 +537,8 @@ lib LibWin32
     get__new_enum : Proc(IWdsTransportCollection*, IUnknown*, HRESULT)
   end
 
-  IWdsTransportCollection_GUID = LibC::GUID.new("b8ba4b1a-2ff4-43ab-996c-b2b10a91a6eb")
-  CLSID_IWdsTransportCollection = "b8ba4b1a-2ff4-43ab-996c-b2b10a91a6eb"
+  IWdsTransportCollection_GUID = "b8ba4b1a-2ff4-43ab-996c-b2b10a91a6eb"
+  IID_IWdsTransportCollection = LibC::GUID.new(0xb8ba4b1a_u32, 0x2ff4_u16, 0x43ab_u16, StaticArray[0x99_u8, 0x6c_u8, 0xb2_u8, 0xb1_u8, 0xa_u8, 0x91_u8, 0xa6_u8, 0xeb_u8])
   struct IWdsTransportCollection
     lpVtbl : IWdsTransportCollectionVTbl*
   end
@@ -554,8 +554,8 @@ lib LibWin32
     get_wds_transport_server : Proc(IWdsTransportManager*, UInt8*, IWdsTransportServer*, HRESULT)
   end
 
-  IWdsTransportManager_GUID = LibC::GUID.new("5b0d35f5-1b13-4afd-b878-6526dc340b5d")
-  CLSID_IWdsTransportManager = "5b0d35f5-1b13-4afd-b878-6526dc340b5d"
+  IWdsTransportManager_GUID = "5b0d35f5-1b13-4afd-b878-6526dc340b5d"
+  IID_IWdsTransportManager = LibC::GUID.new(0x5b0d35f5_u32, 0x1b13_u16, 0x4afd_u16, StaticArray[0xb8_u8, 0x78_u8, 0x65_u8, 0x26_u8, 0xdc_u8, 0x34_u8, 0xb_u8, 0x5d_u8])
   struct IWdsTransportManager
     lpVtbl : IWdsTransportManagerVTbl*
   end
@@ -575,8 +575,8 @@ lib LibWin32
     disconnect_client : Proc(IWdsTransportServer*, UInt32, WDSTRANSPORT_DISCONNECT_TYPE, HRESULT)
   end
 
-  IWdsTransportServer_GUID = LibC::GUID.new("09ccd093-830d-4344-a30a-73ae8e8fca90")
-  CLSID_IWdsTransportServer = "09ccd093-830d-4344-a30a-73ae8e8fca90"
+  IWdsTransportServer_GUID = "09ccd093-830d-4344-a30a-73ae8e8fca90"
+  IID_IWdsTransportServer = LibC::GUID.new(0x9ccd093_u32, 0x830d_u16, 0x4344_u16, StaticArray[0xa3_u8, 0xa_u8, 0x73_u8, 0xae_u8, 0x8e_u8, 0x8f_u8, 0xca_u8, 0x90_u8])
   struct IWdsTransportServer
     lpVtbl : IWdsTransportServerVTbl*
   end
@@ -597,8 +597,8 @@ lib LibWin32
     get_tftp_manager : Proc(IWdsTransportServer2*, IWdsTransportTftpManager*, HRESULT)
   end
 
-  IWdsTransportServer2_GUID = LibC::GUID.new("256e999f-6df4-4538-81b9-857b9ab8fb47")
-  CLSID_IWdsTransportServer2 = "256e999f-6df4-4538-81b9-857b9ab8fb47"
+  IWdsTransportServer2_GUID = "256e999f-6df4-4538-81b9-857b9ab8fb47"
+  IID_IWdsTransportServer2 = LibC::GUID.new(0x256e999f_u32, 0x6df4_u16, 0x4538_u16, StaticArray[0x81_u8, 0xb9_u8, 0x85_u8, 0x7b_u8, 0x9a_u8, 0xb8_u8, 0xfb_u8, 0x47_u8])
   struct IWdsTransportServer2
     lpVtbl : IWdsTransportServer2VTbl*
   end
@@ -618,8 +618,8 @@ lib LibWin32
     deregister_content_provider : Proc(IWdsTransportSetupManager*, UInt8*, HRESULT)
   end
 
-  IWdsTransportSetupManager_GUID = LibC::GUID.new("f7238425-efa8-40a4-aef9-c98d969c0b75")
-  CLSID_IWdsTransportSetupManager = "f7238425-efa8-40a4-aef9-c98d969c0b75"
+  IWdsTransportSetupManager_GUID = "f7238425-efa8-40a4-aef9-c98d969c0b75"
+  IID_IWdsTransportSetupManager = LibC::GUID.new(0xf7238425_u32, 0xefa8_u16, 0x40a4_u16, StaticArray[0xae_u8, 0xf9_u8, 0xc9_u8, 0x8d_u8, 0x96_u8, 0x9c_u8, 0xb_u8, 0x75_u8])
   struct IWdsTransportSetupManager
     lpVtbl : IWdsTransportSetupManagerVTbl*
   end
@@ -641,8 +641,8 @@ lib LibWin32
     get_content_providers : Proc(IWdsTransportSetupManager2*, IWdsTransportCollection*, HRESULT)
   end
 
-  IWdsTransportSetupManager2_GUID = LibC::GUID.new("02be79da-7e9e-4366-8b6e-2aa9a91be47f")
-  CLSID_IWdsTransportSetupManager2 = "02be79da-7e9e-4366-8b6e-2aa9a91be47f"
+  IWdsTransportSetupManager2_GUID = "02be79da-7e9e-4366-8b6e-2aa9a91be47f"
+  IID_IWdsTransportSetupManager2 = LibC::GUID.new(0x2be79da_u32, 0x7e9e_u16, 0x4366_u16, StaticArray[0x8b_u8, 0x6e_u8, 0x2a_u8, 0xa9_u8, 0xa9_u8, 0x1b_u8, 0xe4_u8, 0x7f_u8])
   struct IWdsTransportSetupManager2
     lpVtbl : IWdsTransportSetupManager2VTbl*
   end
@@ -666,8 +666,8 @@ lib LibWin32
     notify_wds_transport_services : Proc(IWdsTransportConfigurationManager*, WDSTRANSPORT_SERVICE_NOTIFICATION, HRESULT)
   end
 
-  IWdsTransportConfigurationManager_GUID = LibC::GUID.new("84cc4779-42dd-4792-891e-1321d6d74b44")
-  CLSID_IWdsTransportConfigurationManager = "84cc4779-42dd-4792-891e-1321d6d74b44"
+  IWdsTransportConfigurationManager_GUID = "84cc4779-42dd-4792-891e-1321d6d74b44"
+  IID_IWdsTransportConfigurationManager = LibC::GUID.new(0x84cc4779_u32, 0x42dd_u16, 0x4792_u16, StaticArray[0x89_u8, 0x1e_u8, 0x13_u8, 0x21_u8, 0xd6_u8, 0xd7_u8, 0x4b_u8, 0x44_u8])
   struct IWdsTransportConfigurationManager
     lpVtbl : IWdsTransportConfigurationManagerVTbl*
   end
@@ -692,8 +692,8 @@ lib LibWin32
     get_multicast_session_policy : Proc(IWdsTransportConfigurationManager2*, IWdsTransportMulticastSessionPolicy*, HRESULT)
   end
 
-  IWdsTransportConfigurationManager2_GUID = LibC::GUID.new("d0d85caf-a153-4f1d-a9dd-96f431c50717")
-  CLSID_IWdsTransportConfigurationManager2 = "d0d85caf-a153-4f1d-a9dd-96f431c50717"
+  IWdsTransportConfigurationManager2_GUID = "d0d85caf-a153-4f1d-a9dd-96f431c50717"
+  IID_IWdsTransportConfigurationManager2 = LibC::GUID.new(0xd0d85caf_u32, 0xa153_u16, 0x4f1d_u16, StaticArray[0xa9_u8, 0xdd_u8, 0x96_u8, 0xf4_u8, 0x31_u8, 0xc5_u8, 0x7_u8, 0x17_u8])
   struct IWdsTransportConfigurationManager2
     lpVtbl : IWdsTransportConfigurationManager2VTbl*
   end
@@ -711,8 +711,8 @@ lib LibWin32
     retrieve_namespaces : Proc(IWdsTransportNamespaceManager*, UInt8*, UInt8*, Int16, IWdsTransportCollection*, HRESULT)
   end
 
-  IWdsTransportNamespaceManager_GUID = LibC::GUID.new("3e22d9f6-3777-4d98-83e1-f98696717ba3")
-  CLSID_IWdsTransportNamespaceManager = "3e22d9f6-3777-4d98-83e1-f98696717ba3"
+  IWdsTransportNamespaceManager_GUID = "3e22d9f6-3777-4d98-83e1-f98696717ba3"
+  IID_IWdsTransportNamespaceManager = LibC::GUID.new(0x3e22d9f6_u32, 0x3777_u16, 0x4d98_u16, StaticArray[0x83_u8, 0xe1_u8, 0xf9_u8, 0x86_u8, 0x96_u8, 0x71_u8, 0x7b_u8, 0xa3_u8])
   struct IWdsTransportNamespaceManager
     lpVtbl : IWdsTransportNamespaceManagerVTbl*
   end
@@ -728,8 +728,8 @@ lib LibWin32
     retrieve_tftp_clients : Proc(IWdsTransportTftpManager*, IWdsTransportCollection*, HRESULT)
   end
 
-  IWdsTransportTftpManager_GUID = LibC::GUID.new("1327a7c8-ae8a-4fb3-8150-136227c37e9a")
-  CLSID_IWdsTransportTftpManager = "1327a7c8-ae8a-4fb3-8150-136227c37e9a"
+  IWdsTransportTftpManager_GUID = "1327a7c8-ae8a-4fb3-8150-136227c37e9a"
+  IID_IWdsTransportTftpManager = LibC::GUID.new(0x1327a7c8_u32, 0xae8a_u16, 0x4fb3_u16, StaticArray[0x81_u8, 0x50_u8, 0x13_u8, 0x62_u8, 0x27_u8, 0xc3_u8, 0x7e_u8, 0x9a_u8])
   struct IWdsTransportTftpManager
     lpVtbl : IWdsTransportTftpManagerVTbl*
   end
@@ -760,8 +760,8 @@ lib LibWin32
     put_network_profile : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_NETWORK_PROFILE_TYPE, HRESULT)
   end
 
-  IWdsTransportServicePolicy_GUID = LibC::GUID.new("b9468578-9f2b-48cc-b27a-a60799c2750c")
-  CLSID_IWdsTransportServicePolicy = "b9468578-9f2b-48cc-b27a-a60799c2750c"
+  IWdsTransportServicePolicy_GUID = "b9468578-9f2b-48cc-b27a-a60799c2750c"
+  IID_IWdsTransportServicePolicy = LibC::GUID.new(0xb9468578_u32, 0x9f2b_u16, 0x48cc_u16, StaticArray[0xb2_u8, 0x7a_u8, 0xa6_u8, 0x7_u8, 0x99_u8, 0xc2_u8, 0x75_u8, 0xc_u8])
   struct IWdsTransportServicePolicy
     lpVtbl : IWdsTransportServicePolicyVTbl*
   end
@@ -798,8 +798,8 @@ lib LibWin32
     put_enable_tftp_variable_window_extension : Proc(IWdsTransportServicePolicy2*, Int16, HRESULT)
   end
 
-  IWdsTransportServicePolicy2_GUID = LibC::GUID.new("65c19e5c-aa7e-4b91-8944-91e0e5572797")
-  CLSID_IWdsTransportServicePolicy2 = "65c19e5c-aa7e-4b91-8944-91e0e5572797"
+  IWdsTransportServicePolicy2_GUID = "65c19e5c-aa7e-4b91-8944-91e0e5572797"
+  IID_IWdsTransportServicePolicy2 = LibC::GUID.new(0x65c19e5c_u32, 0xaa7e_u16, 0x4b91_u16, StaticArray[0x89_u8, 0x44_u8, 0x91_u8, 0xe0_u8, 0xe5_u8, 0x57_u8, 0x27_u8, 0x97_u8])
   struct IWdsTransportServicePolicy2
     lpVtbl : IWdsTransportServicePolicy2VTbl*
   end
@@ -822,8 +822,8 @@ lib LibWin32
     put_components : Proc(IWdsTransportDiagnosticsPolicy*, UInt32, HRESULT)
   end
 
-  IWdsTransportDiagnosticsPolicy_GUID = LibC::GUID.new("13b33efc-7856-4f61-9a59-8de67b6b87b6")
-  CLSID_IWdsTransportDiagnosticsPolicy = "13b33efc-7856-4f61-9a59-8de67b6b87b6"
+  IWdsTransportDiagnosticsPolicy_GUID = "13b33efc-7856-4f61-9a59-8de67b6b87b6"
+  IID_IWdsTransportDiagnosticsPolicy = LibC::GUID.new(0x13b33efc_u32, 0x7856_u16, 0x4f61_u16, StaticArray[0x9a_u8, 0x59_u8, 0x8d_u8, 0xe6_u8, 0x7b_u8, 0x6b_u8, 0x87_u8, 0xb6_u8])
   struct IWdsTransportDiagnosticsPolicy
     lpVtbl : IWdsTransportDiagnosticsPolicyVTbl*
   end
@@ -850,8 +850,8 @@ lib LibWin32
     put_slow_client_fallback : Proc(IWdsTransportMulticastSessionPolicy*, Int16, HRESULT)
   end
 
-  IWdsTransportMulticastSessionPolicy_GUID = LibC::GUID.new("4e5753cf-68ec-4504-a951-4a003266606b")
-  CLSID_IWdsTransportMulticastSessionPolicy = "4e5753cf-68ec-4504-a951-4a003266606b"
+  IWdsTransportMulticastSessionPolicy_GUID = "4e5753cf-68ec-4504-a951-4a003266606b"
+  IID_IWdsTransportMulticastSessionPolicy = LibC::GUID.new(0x4e5753cf_u32, 0x68ec_u16, 0x4504_u16, StaticArray[0xa9_u8, 0x51_u8, 0x4a_u8, 0x0_u8, 0x32_u8, 0x66_u8, 0x60_u8, 0x6b_u8])
   struct IWdsTransportMulticastSessionPolicy
     lpVtbl : IWdsTransportMulticastSessionPolicyVTbl*
   end
@@ -887,8 +887,8 @@ lib LibWin32
     retrieve_contents : Proc(IWdsTransportNamespace*, IWdsTransportCollection*, HRESULT)
   end
 
-  IWdsTransportNamespace_GUID = LibC::GUID.new("fa561f57-fbef-4ed3-b056-127cb1b33b84")
-  CLSID_IWdsTransportNamespace = "fa561f57-fbef-4ed3-b056-127cb1b33b84"
+  IWdsTransportNamespace_GUID = "fa561f57-fbef-4ed3-b056-127cb1b33b84"
+  IID_IWdsTransportNamespace = LibC::GUID.new(0xfa561f57_u32, 0xfbef_u16, 0x4ed3_u16, StaticArray[0xb0_u8, 0x56_u8, 0x12_u8, 0x7c_u8, 0xb1_u8, 0xb3_u8, 0x3b_u8, 0x84_u8])
   struct IWdsTransportNamespace
     lpVtbl : IWdsTransportNamespaceVTbl*
   end
@@ -924,8 +924,8 @@ lib LibWin32
     retrieve_contents : Proc(IWdsTransportNamespaceAutoCast*, IWdsTransportCollection*, HRESULT)
   end
 
-  IWdsTransportNamespaceAutoCast_GUID = LibC::GUID.new("ad931a72-c4bd-4c41-8fbc-59c9c748df9e")
-  CLSID_IWdsTransportNamespaceAutoCast = "ad931a72-c4bd-4c41-8fbc-59c9c748df9e"
+  IWdsTransportNamespaceAutoCast_GUID = "ad931a72-c4bd-4c41-8fbc-59c9c748df9e"
+  IID_IWdsTransportNamespaceAutoCast = LibC::GUID.new(0xad931a72_u32, 0xc4bd_u16, 0x4c41_u16, StaticArray[0x8f_u8, 0xbc_u8, 0x59_u8, 0xc9_u8, 0xc7_u8, 0x48_u8, 0xdf_u8, 0x9e_u8])
   struct IWdsTransportNamespaceAutoCast
     lpVtbl : IWdsTransportNamespaceAutoCastVTbl*
   end
@@ -962,8 +962,8 @@ lib LibWin32
     start_transmission : Proc(IWdsTransportNamespaceScheduledCast*, HRESULT)
   end
 
-  IWdsTransportNamespaceScheduledCast_GUID = LibC::GUID.new("3840cecf-d76c-416e-a4cc-31c741d2874b")
-  CLSID_IWdsTransportNamespaceScheduledCast = "3840cecf-d76c-416e-a4cc-31c741d2874b"
+  IWdsTransportNamespaceScheduledCast_GUID = "3840cecf-d76c-416e-a4cc-31c741d2874b"
+  IID_IWdsTransportNamespaceScheduledCast = LibC::GUID.new(0x3840cecf_u32, 0xd76c_u16, 0x416e_u16, StaticArray[0xa4_u8, 0xcc_u8, 0x31_u8, 0xc7_u8, 0x41_u8, 0xd2_u8, 0x87_u8, 0x4b_u8])
   struct IWdsTransportNamespaceScheduledCast
     lpVtbl : IWdsTransportNamespaceScheduledCastVTbl*
   end
@@ -1000,8 +1000,8 @@ lib LibWin32
     start_transmission : Proc(IWdsTransportNamespaceScheduledCastManualStart*, HRESULT)
   end
 
-  IWdsTransportNamespaceScheduledCastManualStart_GUID = LibC::GUID.new("013e6e4c-e6a7-4fb5-b7ff-d9f5da805c31")
-  CLSID_IWdsTransportNamespaceScheduledCastManualStart = "013e6e4c-e6a7-4fb5-b7ff-d9f5da805c31"
+  IWdsTransportNamespaceScheduledCastManualStart_GUID = "013e6e4c-e6a7-4fb5-b7ff-d9f5da805c31"
+  IID_IWdsTransportNamespaceScheduledCastManualStart = LibC::GUID.new(0x13e6e4c_u32, 0xe6a7_u16, 0x4fb5_u16, StaticArray[0xb7_u8, 0xff_u8, 0xd9_u8, 0xf5_u8, 0xda_u8, 0x80_u8, 0x5c_u8, 0x31_u8])
   struct IWdsTransportNamespaceScheduledCastManualStart
     lpVtbl : IWdsTransportNamespaceScheduledCastManualStartVTbl*
   end
@@ -1042,8 +1042,8 @@ lib LibWin32
     put_start_time : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Float64, HRESULT)
   end
 
-  IWdsTransportNamespaceScheduledCastAutoStart_GUID = LibC::GUID.new("d606af3d-ea9c-4219-961e-7491d618d9b9")
-  CLSID_IWdsTransportNamespaceScheduledCastAutoStart = "d606af3d-ea9c-4219-961e-7491d618d9b9"
+  IWdsTransportNamespaceScheduledCastAutoStart_GUID = "d606af3d-ea9c-4219-961e-7491d618d9b9"
+  IID_IWdsTransportNamespaceScheduledCastAutoStart = LibC::GUID.new(0xd606af3d_u32, 0xea9c_u16, 0x4219_u16, StaticArray[0x96_u8, 0x1e_u8, 0x74_u8, 0x91_u8, 0xd6_u8, 0x18_u8, 0xd9_u8, 0xb9_u8])
   struct IWdsTransportNamespaceScheduledCastAutoStart
     lpVtbl : IWdsTransportNamespaceScheduledCastAutoStartVTbl*
   end
@@ -1063,8 +1063,8 @@ lib LibWin32
     terminate : Proc(IWdsTransportContent*, HRESULT)
   end
 
-  IWdsTransportContent_GUID = LibC::GUID.new("d405d711-0296-4ab4-a860-ac7d32e65798")
-  CLSID_IWdsTransportContent = "d405d711-0296-4ab4-a860-ac7d32e65798"
+  IWdsTransportContent_GUID = "d405d711-0296-4ab4-a860-ac7d32e65798"
+  IID_IWdsTransportContent = LibC::GUID.new(0xd405d711_u32, 0x296_u16, 0x4ab4_u16, StaticArray[0xa8_u8, 0x60_u8, 0xac_u8, 0x7d_u8, 0x32_u8, 0xe6_u8, 0x57_u8, 0x98_u8])
   struct IWdsTransportContent
     lpVtbl : IWdsTransportContentVTbl*
   end
@@ -1087,8 +1087,8 @@ lib LibWin32
     terminate : Proc(IWdsTransportSession*, HRESULT)
   end
 
-  IWdsTransportSession_GUID = LibC::GUID.new("f4efea88-65b1-4f30-a4b9-2793987796fb")
-  CLSID_IWdsTransportSession = "f4efea88-65b1-4f30-a4b9-2793987796fb"
+  IWdsTransportSession_GUID = "f4efea88-65b1-4f30-a4b9-2793987796fb"
+  IID_IWdsTransportSession = LibC::GUID.new(0xf4efea88_u32, 0x65b1_u16, 0x4f30_u16, StaticArray[0xa4_u8, 0xb9_u8, 0x27_u8, 0x93_u8, 0x98_u8, 0x77_u8, 0x96_u8, 0xfb_u8])
   struct IWdsTransportSession
     lpVtbl : IWdsTransportSessionVTbl*
   end
@@ -1115,8 +1115,8 @@ lib LibWin32
     disconnect : Proc(IWdsTransportClient*, WDSTRANSPORT_DISCONNECT_TYPE, HRESULT)
   end
 
-  IWdsTransportClient_GUID = LibC::GUID.new("b5dbc93a-cabe-46ca-837f-3e44e93c6545")
-  CLSID_IWdsTransportClient = "b5dbc93a-cabe-46ca-837f-3e44e93c6545"
+  IWdsTransportClient_GUID = "b5dbc93a-cabe-46ca-837f-3e44e93c6545"
+  IID_IWdsTransportClient = LibC::GUID.new(0xb5dbc93a_u32, 0xcabe_u16, 0x46ca_u16, StaticArray[0x83_u8, 0x7f_u8, 0x3e_u8, 0x44_u8, 0xe9_u8, 0x3c_u8, 0x65_u8, 0x45_u8])
   struct IWdsTransportClient
     lpVtbl : IWdsTransportClientVTbl*
   end
@@ -1138,8 +1138,8 @@ lib LibWin32
     get_window_size : Proc(IWdsTransportTftpClient*, UInt32*, HRESULT)
   end
 
-  IWdsTransportTftpClient_GUID = LibC::GUID.new("b022d3ae-884d-4d85-b146-53320e76ef62")
-  CLSID_IWdsTransportTftpClient = "b022d3ae-884d-4d85-b146-53320e76ef62"
+  IWdsTransportTftpClient_GUID = "b022d3ae-884d-4d85-b146-53320e76ef62"
+  IID_IWdsTransportTftpClient = LibC::GUID.new(0xb022d3ae_u32, 0x884d_u16, 0x4d85_u16, StaticArray[0xb1_u8, 0x46_u8, 0x53_u8, 0x32_u8, 0xe_u8, 0x76_u8, 0xef_u8, 0x62_u8])
   struct IWdsTransportTftpClient
     lpVtbl : IWdsTransportTftpClientVTbl*
   end
@@ -1158,8 +1158,8 @@ lib LibWin32
     get_initialization_routine : Proc(IWdsTransportContentProvider*, UInt8**, HRESULT)
   end
 
-  IWdsTransportContentProvider_GUID = LibC::GUID.new("b9489f24-f219-4acf-aad7-265c7c08a6ae")
-  CLSID_IWdsTransportContentProvider = "b9489f24-f219-4acf-aad7-265c7c08a6ae"
+  IWdsTransportContentProvider_GUID = "b9489f24-f219-4acf-aad7-265c7c08a6ae"
+  IID_IWdsTransportContentProvider = LibC::GUID.new(0xb9489f24_u32, 0xf219_u16, 0x4acf_u16, StaticArray[0xaa_u8, 0xd7_u8, 0x26_u8, 0x5c_u8, 0x7c_u8, 0x8_u8, 0xa6_u8, 0xae_u8])
   struct IWdsTransportContentProvider
     lpVtbl : IWdsTransportContentProviderVTbl*
   end
