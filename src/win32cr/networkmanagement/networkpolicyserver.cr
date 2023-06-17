@@ -8,9 +8,6 @@ require "../foundation.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   RADIUS_EXTENSION_VERSION = 1_u32
   CLSID_SdoMachine = LibC::GUID.new(0xe9218ae7_u32, 0x9e91_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x60_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x84_u8, 0x6b_u8, 0xc0_u8])

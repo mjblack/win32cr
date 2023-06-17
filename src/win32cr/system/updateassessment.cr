@@ -8,9 +8,6 @@ require "../system/com.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   CLSID_WaaSAssessor = LibC::GUID.new(0x98ef871_u32, 0xfa9f_u16, 0x46af_u16, StaticArray[0x89_u8, 0x58_u8, 0xc0_u8, 0x83_u8, 0x51_u8, 0x5d_u8, 0x7c_u8, 0x9c_u8])
 

@@ -8,9 +8,6 @@ require "../foundation.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   CGD_DEFAULT = 0_u32
   CGD_UNKNOWN_PROPERTY = 0_u32

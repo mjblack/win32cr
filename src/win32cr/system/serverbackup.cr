@@ -8,9 +8,6 @@ require "../foundation.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   WSB_MAX_OB_STATUS_VALUE_TYPE_PAIR = 5_u32
   WSB_MAX_OB_STATUS_ENTRY = 5_u32

@@ -10,9 +10,6 @@ require "../storage/vhd.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   IOCTL_STORAGE_BASE = 45_u32
   IOCTL_SCMBUS_BASE = 89_u32

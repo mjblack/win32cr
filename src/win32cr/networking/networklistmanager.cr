@@ -9,9 +9,6 @@ require "../system/ole.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   NLM_MAX_ADDRESS_LIST_SIZE = 10_u32
   NLM_UNKNOWN_DATAPLAN_STATUS = 4294967295_u32

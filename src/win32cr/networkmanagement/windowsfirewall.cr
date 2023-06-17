@@ -9,9 +9,6 @@ require "../security.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   NETCON_MAX_NAME_LEN = 256_u32
   S_OBJECT_NO_LONGER_VALID = 2_i32

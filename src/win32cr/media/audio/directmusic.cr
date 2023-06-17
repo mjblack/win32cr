@@ -13,9 +13,6 @@ require "../../media/multimedia.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   DMUS_MAX_DESCRIPTION = 128_u32
   DMUS_MAX_DRIVER = 128_u32
