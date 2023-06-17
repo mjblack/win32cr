@@ -55,8 +55,8 @@ lib LibWin32
     get_mode : Proc(IRandomAccessStreamFileAccessMode*, UInt32*, HRESULT)
   end
 
-  IRandomAccessStreamFileAccessMode_GUID = LibC::GUID.new("332e5848-2e15-458e-85c4-c911c0c3d6f4")
-  CLSID_IRandomAccessStreamFileAccessMode = "332e5848-2e15-458e-85c4-c911c0c3d6f4"
+  IRandomAccessStreamFileAccessMode_GUID = "332e5848-2e15-458e-85c4-c911c0c3d6f4"
+  IID_IRandomAccessStreamFileAccessMode = LibC::GUID.new(0x332e5848_u32, 0x2e15_u16, 0x458e_u16, StaticArray[0x85_u8, 0xc4_u8, 0xc9_u8, 0x11_u8, 0xc0_u8, 0xc3_u8, 0xd6_u8, 0xf4_u8])
   struct IRandomAccessStreamFileAccessMode
     lpVtbl : IRandomAccessStreamFileAccessModeVTbl*
   end
@@ -68,8 +68,8 @@ lib LibWin32
     on_broken_callback : Proc(IUnbufferedFileHandleOplockCallback*, HRESULT)
   end
 
-  IUnbufferedFileHandleOplockCallback_GUID = LibC::GUID.new("d1019a0e-6243-4329-8497-2e75894d7710")
-  CLSID_IUnbufferedFileHandleOplockCallback = "d1019a0e-6243-4329-8497-2e75894d7710"
+  IUnbufferedFileHandleOplockCallback_GUID = "d1019a0e-6243-4329-8497-2e75894d7710"
+  IID_IUnbufferedFileHandleOplockCallback = LibC::GUID.new(0xd1019a0e_u32, 0x6243_u16, 0x4329_u16, StaticArray[0x84_u8, 0x97_u8, 0x2e_u8, 0x75_u8, 0x89_u8, 0x4d_u8, 0x77_u8, 0x10_u8])
   struct IUnbufferedFileHandleOplockCallback
     lpVtbl : IUnbufferedFileHandleOplockCallbackVTbl*
   end
@@ -82,8 +82,8 @@ lib LibWin32
     close_unbuffered_file_handle : Proc(IUnbufferedFileHandleProvider*, HRESULT)
   end
 
-  IUnbufferedFileHandleProvider_GUID = LibC::GUID.new("a65c9109-42ab-4b94-a7b1-dd2e4e68515e")
-  CLSID_IUnbufferedFileHandleProvider = "a65c9109-42ab-4b94-a7b1-dd2e4e68515e"
+  IUnbufferedFileHandleProvider_GUID = "a65c9109-42ab-4b94-a7b1-dd2e4e68515e"
+  IID_IUnbufferedFileHandleProvider = LibC::GUID.new(0xa65c9109_u32, 0x42ab_u16, 0x4b94_u16, StaticArray[0xa7_u8, 0xb1_u8, 0xdd_u8, 0x2e_u8, 0x4e_u8, 0x68_u8, 0x51_u8, 0x5e_u8])
   struct IUnbufferedFileHandleProvider
     lpVtbl : IUnbufferedFileHandleProviderVTbl*
   end
@@ -95,8 +95,8 @@ lib LibWin32
     oplock_breaking : Proc(IOplockBreakingHandler*, HRESULT)
   end
 
-  IOplockBreakingHandler_GUID = LibC::GUID.new("826abe3d-3acd-47d3-84f2-88aaedcf6304")
-  CLSID_IOplockBreakingHandler = "826abe3d-3acd-47d3-84f2-88aaedcf6304"
+  IOplockBreakingHandler_GUID = "826abe3d-3acd-47d3-84f2-88aaedcf6304"
+  IID_IOplockBreakingHandler = LibC::GUID.new(0x826abe3d_u32, 0x3acd_u16, 0x47d3_u16, StaticArray[0x84_u8, 0xf2_u8, 0x88_u8, 0xaa_u8, 0xed_u8, 0xcf_u8, 0x63_u8, 0x4_u8])
   struct IOplockBreakingHandler
     lpVtbl : IOplockBreakingHandlerVTbl*
   end
@@ -108,8 +108,8 @@ lib LibWin32
     create : Proc(IStorageItemHandleAccess*, HANDLE_ACCESS_OPTIONS, HANDLE_SHARING_OPTIONS, HANDLE_OPTIONS, IOplockBreakingHandler, LibC::HANDLE*, HRESULT)
   end
 
-  IStorageItemHandleAccess_GUID = LibC::GUID.new("5ca296b2-2c25-4d22-b785-b885c8201e6a")
-  CLSID_IStorageItemHandleAccess = "5ca296b2-2c25-4d22-b785-b885c8201e6a"
+  IStorageItemHandleAccess_GUID = "5ca296b2-2c25-4d22-b785-b885c8201e6a"
+  IID_IStorageItemHandleAccess = LibC::GUID.new(0x5ca296b2_u32, 0x2c25_u16, 0x4d22_u16, StaticArray[0xb7_u8, 0x85_u8, 0xb8_u8, 0x85_u8, 0xc8_u8, 0x20_u8, 0x1e_u8, 0x6a_u8])
   struct IStorageItemHandleAccess
     lpVtbl : IStorageItemHandleAccessVTbl*
   end
@@ -121,8 +121,8 @@ lib LibWin32
     create : Proc(IStorageFolderHandleAccess*, LibC::LPWSTR, HANDLE_CREATION_OPTIONS, HANDLE_ACCESS_OPTIONS, HANDLE_SHARING_OPTIONS, HANDLE_OPTIONS, IOplockBreakingHandler, LibC::HANDLE*, HRESULT)
   end
 
-  IStorageFolderHandleAccess_GUID = LibC::GUID.new("df19938f-5462-48a0-be65-d2a3271a08d6")
-  CLSID_IStorageFolderHandleAccess = "df19938f-5462-48a0-be65-d2a3271a08d6"
+  IStorageFolderHandleAccess_GUID = "df19938f-5462-48a0-be65-d2a3271a08d6"
+  IID_IStorageFolderHandleAccess = LibC::GUID.new(0xdf19938f_u32, 0x5462_u16, 0x48a0_u16, StaticArray[0xbe_u8, 0x65_u8, 0xd2_u8, 0xa3_u8, 0x27_u8, 0x1a_u8, 0x8_u8, 0xd6_u8])
   struct IStorageFolderHandleAccess
     lpVtbl : IStorageFolderHandleAccessVTbl*
   end

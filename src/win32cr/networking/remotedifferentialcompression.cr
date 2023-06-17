@@ -36,22 +36,22 @@ lib LibWin32
   MSRDC_MAXIMUM_TRAITVALUE = 63_u32
   MSRDC_MINIMUM_MATCHESREQUIRED = 1_u32
   MSRDC_MAXIMUM_MATCHESREQUIRED = 16_u32
-  RdcLibrary = LibC::GUID.new(0x96236a85_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  RdcGeneratorParameters = LibC::GUID.new(0x96236a86_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  RdcGeneratorFilterMaxParameters = LibC::GUID.new(0x96236a87_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  RdcGenerator = LibC::GUID.new(0x96236a88_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  RdcFileReader = LibC::GUID.new(0x96236a89_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  RdcSignatureReader = LibC::GUID.new(0x96236a8a_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  RdcComparator = LibC::GUID.new(0x96236a8b_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  SimilarityReportProgress = LibC::GUID.new(0x96236a8d_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  SimilarityTableDumpState = LibC::GUID.new(0x96236a8e_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  SimilarityTraitsTable = LibC::GUID.new(0x96236a8f_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  SimilarityFileIdTable = LibC::GUID.new(0x96236a90_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  Similarity = LibC::GUID.new(0x96236a91_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  RdcSimilarityGenerator = LibC::GUID.new(0x96236a92_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  FindSimilarResults = LibC::GUID.new(0x96236a93_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  SimilarityTraitsMapping = LibC::GUID.new(0x96236a94_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
-  SimilarityTraitsMappedView = LibC::GUID.new(0x96236a95_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_RdcLibrary = LibC::GUID.new(0x96236a85_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_RdcGeneratorParameters = LibC::GUID.new(0x96236a86_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_RdcGeneratorFilterMaxParameters = LibC::GUID.new(0x96236a87_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_RdcGenerator = LibC::GUID.new(0x96236a88_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_RdcFileReader = LibC::GUID.new(0x96236a89_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_RdcSignatureReader = LibC::GUID.new(0x96236a8a_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_RdcComparator = LibC::GUID.new(0x96236a8b_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_SimilarityReportProgress = LibC::GUID.new(0x96236a8d_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_SimilarityTableDumpState = LibC::GUID.new(0x96236a8e_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_SimilarityTraitsTable = LibC::GUID.new(0x96236a8f_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_SimilarityFileIdTable = LibC::GUID.new(0x96236a90_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_Similarity = LibC::GUID.new(0x96236a91_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_RdcSimilarityGenerator = LibC::GUID.new(0x96236a92_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_FindSimilarResults = LibC::GUID.new(0x96236a93_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_SimilarityTraitsMapping = LibC::GUID.new(0x96236a94_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
+  CLSID_SimilarityTraitsMappedView = LibC::GUID.new(0x96236a95_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
 
 
   enum RDC_ErrorCode : Int32
@@ -146,8 +146,8 @@ lib LibWin32
     serialize : Proc(IRdcGeneratorParameters*, UInt32, UInt8*, UInt32*, HRESULT)
   end
 
-  IRdcGeneratorParameters_GUID = LibC::GUID.new("96236a71-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcGeneratorParameters = "96236a71-9dbc-11da-9e3f-0011114ae311"
+  IRdcGeneratorParameters_GUID = "96236a71-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcGeneratorParameters = LibC::GUID.new(0x96236a71_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcGeneratorParameters
     lpVtbl : IRdcGeneratorParametersVTbl*
   end
@@ -162,8 +162,8 @@ lib LibWin32
     set_hash_window_size : Proc(IRdcGeneratorFilterMaxParameters*, UInt32, HRESULT)
   end
 
-  IRdcGeneratorFilterMaxParameters_GUID = LibC::GUID.new("96236a72-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcGeneratorFilterMaxParameters = "96236a72-9dbc-11da-9e3f-0011114ae311"
+  IRdcGeneratorFilterMaxParameters_GUID = "96236a72-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcGeneratorFilterMaxParameters = LibC::GUID.new(0x96236a72_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcGeneratorFilterMaxParameters
     lpVtbl : IRdcGeneratorFilterMaxParametersVTbl*
   end
@@ -176,8 +176,8 @@ lib LibWin32
     process : Proc(IRdcGenerator*, LibC::BOOL, LibC::BOOL*, RdcBufferPointer*, UInt32, RdcBufferPointer**, RDC_ErrorCode*, HRESULT)
   end
 
-  IRdcGenerator_GUID = LibC::GUID.new("96236a73-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcGenerator = "96236a73-9dbc-11da-9e3f-0011114ae311"
+  IRdcGenerator_GUID = "96236a73-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcGenerator = LibC::GUID.new(0x96236a73_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcGenerator
     lpVtbl : IRdcGeneratorVTbl*
   end
@@ -191,8 +191,8 @@ lib LibWin32
     get_file_position : Proc(IRdcFileReader*, UInt64*, HRESULT)
   end
 
-  IRdcFileReader_GUID = LibC::GUID.new("96236a74-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcFileReader = "96236a74-9dbc-11da-9e3f-0011114ae311"
+  IRdcFileReader_GUID = "96236a74-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcFileReader = LibC::GUID.new(0x96236a74_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcFileReader
     lpVtbl : IRdcFileReaderVTbl*
   end
@@ -209,8 +209,8 @@ lib LibWin32
     delete_on_close : Proc(IRdcFileWriter*, HRESULT)
   end
 
-  IRdcFileWriter_GUID = LibC::GUID.new("96236a75-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcFileWriter = "96236a75-9dbc-11da-9e3f-0011114ae311"
+  IRdcFileWriter_GUID = "96236a75-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcFileWriter = LibC::GUID.new(0x96236a75_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcFileWriter
     lpVtbl : IRdcFileWriterVTbl*
   end
@@ -223,8 +223,8 @@ lib LibWin32
     read_signatures : Proc(IRdcSignatureReader*, RdcSignaturePointer*, LibC::BOOL*, HRESULT)
   end
 
-  IRdcSignatureReader_GUID = LibC::GUID.new("96236a76-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcSignatureReader = "96236a76-9dbc-11da-9e3f-0011114ae311"
+  IRdcSignatureReader_GUID = "96236a76-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcSignatureReader = LibC::GUID.new(0x96236a76_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcSignatureReader
     lpVtbl : IRdcSignatureReaderVTbl*
   end
@@ -236,8 +236,8 @@ lib LibWin32
     process : Proc(IRdcComparator*, LibC::BOOL, LibC::BOOL*, RdcBufferPointer*, RdcNeedPointer*, RDC_ErrorCode*, HRESULT)
   end
 
-  IRdcComparator_GUID = LibC::GUID.new("96236a77-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcComparator = "96236a77-9dbc-11da-9e3f-0011114ae311"
+  IRdcComparator_GUID = "96236a77-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcComparator = LibC::GUID.new(0x96236a77_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcComparator
     lpVtbl : IRdcComparatorVTbl*
   end
@@ -255,8 +255,8 @@ lib LibWin32
     get_rdc_version : Proc(IRdcLibrary*, UInt32*, UInt32*, HRESULT)
   end
 
-  IRdcLibrary_GUID = LibC::GUID.new("96236a78-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcLibrary = "96236a78-9dbc-11da-9e3f-0011114ae311"
+  IRdcLibrary_GUID = "96236a78-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcLibrary = LibC::GUID.new(0x96236a78_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcLibrary
     lpVtbl : IRdcLibraryVTbl*
   end
@@ -268,8 +268,8 @@ lib LibWin32
     report_progress : Proc(ISimilarityReportProgress*, UInt32, HRESULT)
   end
 
-  ISimilarityReportProgress_GUID = LibC::GUID.new("96236a7a-9dbc-11da-9e3f-0011114ae311")
-  CLSID_ISimilarityReportProgress = "96236a7a-9dbc-11da-9e3f-0011114ae311"
+  ISimilarityReportProgress_GUID = "96236a7a-9dbc-11da-9e3f-0011114ae311"
+  IID_ISimilarityReportProgress = LibC::GUID.new(0x96236a7a_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct ISimilarityReportProgress
     lpVtbl : ISimilarityReportProgressVTbl*
   end
@@ -281,8 +281,8 @@ lib LibWin32
     get_next_data : Proc(ISimilarityTableDumpState*, UInt32, UInt32*, LibC::BOOL*, SimilarityDumpData*, HRESULT)
   end
 
-  ISimilarityTableDumpState_GUID = LibC::GUID.new("96236a7b-9dbc-11da-9e3f-0011114ae311")
-  CLSID_ISimilarityTableDumpState = "96236a7b-9dbc-11da-9e3f-0011114ae311"
+  ISimilarityTableDumpState_GUID = "96236a7b-9dbc-11da-9e3f-0011114ae311"
+  IID_ISimilarityTableDumpState = LibC::GUID.new(0x96236a7b_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct ISimilarityTableDumpState
     lpVtbl : ISimilarityTableDumpStateVTbl*
   end
@@ -297,8 +297,8 @@ lib LibWin32
     get_view : Proc(ISimilarityTraitsMappedView*, UInt8**, UInt8**, Void)
   end
 
-  ISimilarityTraitsMappedView_GUID = LibC::GUID.new("96236a7c-9dbc-11da-9e3f-0011114ae311")
-  CLSID_ISimilarityTraitsMappedView = "96236a7c-9dbc-11da-9e3f-0011114ae311"
+  ISimilarityTraitsMappedView_GUID = "96236a7c-9dbc-11da-9e3f-0011114ae311"
+  IID_ISimilarityTraitsMappedView = LibC::GUID.new(0x96236a7c_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct ISimilarityTraitsMappedView
     lpVtbl : ISimilarityTraitsMappedViewVTbl*
   end
@@ -316,8 +316,8 @@ lib LibWin32
     create_view : Proc(ISimilarityTraitsMapping*, UInt32, RdcMappingAccessMode, ISimilarityTraitsMappedView*, HRESULT)
   end
 
-  ISimilarityTraitsMapping_GUID = LibC::GUID.new("96236a7d-9dbc-11da-9e3f-0011114ae311")
-  CLSID_ISimilarityTraitsMapping = "96236a7d-9dbc-11da-9e3f-0011114ae311"
+  ISimilarityTraitsMapping_GUID = "96236a7d-9dbc-11da-9e3f-0011114ae311"
+  IID_ISimilarityTraitsMapping = LibC::GUID.new(0x96236a7d_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct ISimilarityTraitsMapping
     lpVtbl : ISimilarityTraitsMappingVTbl*
   end
@@ -335,8 +335,8 @@ lib LibWin32
     get_last_index : Proc(ISimilarityTraitsTable*, UInt32*, HRESULT)
   end
 
-  ISimilarityTraitsTable_GUID = LibC::GUID.new("96236a7e-9dbc-11da-9e3f-0011114ae311")
-  CLSID_ISimilarityTraitsTable = "96236a7e-9dbc-11da-9e3f-0011114ae311"
+  ISimilarityTraitsTable_GUID = "96236a7e-9dbc-11da-9e3f-0011114ae311"
+  IID_ISimilarityTraitsTable = LibC::GUID.new(0x96236a7e_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct ISimilarityTraitsTable
     lpVtbl : ISimilarityTraitsTableVTbl*
   end
@@ -354,8 +354,8 @@ lib LibWin32
     get_record_count : Proc(ISimilarityFileIdTable*, UInt32*, HRESULT)
   end
 
-  ISimilarityFileIdTable_GUID = LibC::GUID.new("96236a7f-9dbc-11da-9e3f-0011114ae311")
-  CLSID_ISimilarityFileIdTable = "96236a7f-9dbc-11da-9e3f-0011114ae311"
+  ISimilarityFileIdTable_GUID = "96236a7f-9dbc-11da-9e3f-0011114ae311"
+  IID_ISimilarityFileIdTable = LibC::GUID.new(0x96236a7f_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct ISimilarityFileIdTable
     lpVtbl : ISimilarityFileIdTableVTbl*
   end
@@ -368,8 +368,8 @@ lib LibWin32
     results : Proc(IRdcSimilarityGenerator*, SimilarityData*, HRESULT)
   end
 
-  IRdcSimilarityGenerator_GUID = LibC::GUID.new("96236a80-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IRdcSimilarityGenerator = "96236a80-9dbc-11da-9e3f-0011114ae311"
+  IRdcSimilarityGenerator_GUID = "96236a80-9dbc-11da-9e3f-0011114ae311"
+  IID_IRdcSimilarityGenerator = LibC::GUID.new(0x96236a80_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IRdcSimilarityGenerator
     lpVtbl : IRdcSimilarityGeneratorVTbl*
   end
@@ -382,8 +382,8 @@ lib LibWin32
     get_next_file_id : Proc(IFindSimilarResults*, UInt32*, SimilarityFileId*, HRESULT)
   end
 
-  IFindSimilarResults_GUID = LibC::GUID.new("96236a81-9dbc-11da-9e3f-0011114ae311")
-  CLSID_IFindSimilarResults = "96236a81-9dbc-11da-9e3f-0011114ae311"
+  IFindSimilarResults_GUID = "96236a81-9dbc-11da-9e3f-0011114ae311"
+  IID_IFindSimilarResults = LibC::GUID.new(0x96236a81_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct IFindSimilarResults
     lpVtbl : IFindSimilarResultsVTbl*
   end
@@ -401,8 +401,8 @@ lib LibWin32
     get_record_count : Proc(ISimilarity*, UInt32*, HRESULT)
   end
 
-  ISimilarity_GUID = LibC::GUID.new("96236a83-9dbc-11da-9e3f-0011114ae311")
-  CLSID_ISimilarity = "96236a83-9dbc-11da-9e3f-0011114ae311"
+  ISimilarity_GUID = "96236a83-9dbc-11da-9e3f-0011114ae311"
+  IID_ISimilarity = LibC::GUID.new(0x96236a83_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
   struct ISimilarity
     lpVtbl : ISimilarityVTbl*
   end

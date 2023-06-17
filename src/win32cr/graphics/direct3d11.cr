@@ -4143,8 +4143,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11DeviceChild*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11DeviceChild_GUID = LibC::GUID.new("1841e5c8-16b0-489b-bcc8-44cfb0d5deae")
-  CLSID_ID3D11DeviceChild = "1841e5c8-16b0-489b-bcc8-44cfb0d5deae"
+  ID3D11DeviceChild_GUID = "1841e5c8-16b0-489b-bcc8-44cfb0d5deae"
+  IID_ID3D11DeviceChild = LibC::GUID.new(0x1841e5c8_u32, 0x16b0_u16, 0x489b_u16, StaticArray[0xbc_u8, 0xc8_u8, 0x44_u8, 0xcf_u8, 0xb0_u8, 0xd5_u8, 0xde_u8, 0xae_u8])
   struct ID3D11DeviceChild
     lpVtbl : ID3D11DeviceChildVTbl*
   end
@@ -4160,8 +4160,8 @@ lib LibWin32
     get_desc : Proc(ID3D11DepthStencilState*, D3D11_DEPTH_STENCIL_DESC*, Void)
   end
 
-  ID3D11DepthStencilState_GUID = LibC::GUID.new("03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1")
-  CLSID_ID3D11DepthStencilState = "03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1"
+  ID3D11DepthStencilState_GUID = "03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1"
+  IID_ID3D11DepthStencilState = LibC::GUID.new(0x3823efb_u32, 0x8d8f_u16, 0x4e1c_u16, StaticArray[0x9a_u8, 0xa2_u8, 0xf6_u8, 0x4b_u8, 0xb2_u8, 0xcb_u8, 0xfd_u8, 0xf1_u8])
   struct ID3D11DepthStencilState
     lpVtbl : ID3D11DepthStencilStateVTbl*
   end
@@ -4177,8 +4177,8 @@ lib LibWin32
     get_desc : Proc(ID3D11BlendState*, D3D11_BLEND_DESC*, Void)
   end
 
-  ID3D11BlendState_GUID = LibC::GUID.new("75b68faa-347d-4159-8f45-a0640f01cd9a")
-  CLSID_ID3D11BlendState = "75b68faa-347d-4159-8f45-a0640f01cd9a"
+  ID3D11BlendState_GUID = "75b68faa-347d-4159-8f45-a0640f01cd9a"
+  IID_ID3D11BlendState = LibC::GUID.new(0x75b68faa_u32, 0x347d_u16, 0x4159_u16, StaticArray[0x8f_u8, 0x45_u8, 0xa0_u8, 0x64_u8, 0xf_u8, 0x1_u8, 0xcd_u8, 0x9a_u8])
   struct ID3D11BlendState
     lpVtbl : ID3D11BlendStateVTbl*
   end
@@ -4194,8 +4194,8 @@ lib LibWin32
     get_desc : Proc(ID3D11RasterizerState*, D3D11_RASTERIZER_DESC*, Void)
   end
 
-  ID3D11RasterizerState_GUID = LibC::GUID.new("9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7")
-  CLSID_ID3D11RasterizerState = "9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7"
+  ID3D11RasterizerState_GUID = "9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7"
+  IID_ID3D11RasterizerState = LibC::GUID.new(0x9bb4ab81_u32, 0xab1a_u16, 0x4d8f_u16, StaticArray[0xb5_u8, 0x6_u8, 0xfc_u8, 0x4_u8, 0x20_u8, 0xb_u8, 0x6e_u8, 0xe7_u8])
   struct ID3D11RasterizerState
     lpVtbl : ID3D11RasterizerStateVTbl*
   end
@@ -4213,8 +4213,8 @@ lib LibWin32
     get_eviction_priority : Proc(ID3D11Resource*, UInt32)
   end
 
-  ID3D11Resource_GUID = LibC::GUID.new("dc8e63f3-d12b-4952-b47b-5e45026a862d")
-  CLSID_ID3D11Resource = "dc8e63f3-d12b-4952-b47b-5e45026a862d"
+  ID3D11Resource_GUID = "dc8e63f3-d12b-4952-b47b-5e45026a862d"
+  IID_ID3D11Resource = LibC::GUID.new(0xdc8e63f3_u32, 0xd12b_u16, 0x4952_u16, StaticArray[0xb4_u8, 0x7b_u8, 0x5e_u8, 0x45_u8, 0x2_u8, 0x6a_u8, 0x86_u8, 0x2d_u8])
   struct ID3D11Resource
     lpVtbl : ID3D11ResourceVTbl*
   end
@@ -4233,8 +4233,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Buffer*, D3D11_BUFFER_DESC*, Void)
   end
 
-  ID3D11Buffer_GUID = LibC::GUID.new("48570b85-d1ee-4fcd-a250-eb350722b037")
-  CLSID_ID3D11Buffer = "48570b85-d1ee-4fcd-a250-eb350722b037"
+  ID3D11Buffer_GUID = "48570b85-d1ee-4fcd-a250-eb350722b037"
+  IID_ID3D11Buffer = LibC::GUID.new(0x48570b85_u32, 0xd1ee_u16, 0x4fcd_u16, StaticArray[0xa2_u8, 0x50_u8, 0xeb_u8, 0x35_u8, 0x7_u8, 0x22_u8, 0xb0_u8, 0x37_u8])
   struct ID3D11Buffer
     lpVtbl : ID3D11BufferVTbl*
   end
@@ -4253,8 +4253,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Texture1D*, D3D11_TEXTURE1D_DESC*, Void)
   end
 
-  ID3D11Texture1D_GUID = LibC::GUID.new("f8fb5c27-c6b3-4f75-a4c8-439af2ef564c")
-  CLSID_ID3D11Texture1D = "f8fb5c27-c6b3-4f75-a4c8-439af2ef564c"
+  ID3D11Texture1D_GUID = "f8fb5c27-c6b3-4f75-a4c8-439af2ef564c"
+  IID_ID3D11Texture1D = LibC::GUID.new(0xf8fb5c27_u32, 0xc6b3_u16, 0x4f75_u16, StaticArray[0xa4_u8, 0xc8_u8, 0x43_u8, 0x9a_u8, 0xf2_u8, 0xef_u8, 0x56_u8, 0x4c_u8])
   struct ID3D11Texture1D
     lpVtbl : ID3D11Texture1DVTbl*
   end
@@ -4273,8 +4273,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Texture2D*, D3D11_TEXTURE2D_DESC*, Void)
   end
 
-  ID3D11Texture2D_GUID = LibC::GUID.new("6f15aaf2-d208-4e89-9ab4-489535d34f9c")
-  CLSID_ID3D11Texture2D = "6f15aaf2-d208-4e89-9ab4-489535d34f9c"
+  ID3D11Texture2D_GUID = "6f15aaf2-d208-4e89-9ab4-489535d34f9c"
+  IID_ID3D11Texture2D = LibC::GUID.new(0x6f15aaf2_u32, 0xd208_u16, 0x4e89_u16, StaticArray[0x9a_u8, 0xb4_u8, 0x48_u8, 0x95_u8, 0x35_u8, 0xd3_u8, 0x4f_u8, 0x9c_u8])
   struct ID3D11Texture2D
     lpVtbl : ID3D11Texture2DVTbl*
   end
@@ -4293,8 +4293,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Texture3D*, D3D11_TEXTURE3D_DESC*, Void)
   end
 
-  ID3D11Texture3D_GUID = LibC::GUID.new("037e866e-f56d-4357-a8af-9dabbe6e250e")
-  CLSID_ID3D11Texture3D = "037e866e-f56d-4357-a8af-9dabbe6e250e"
+  ID3D11Texture3D_GUID = "037e866e-f56d-4357-a8af-9dabbe6e250e"
+  IID_ID3D11Texture3D = LibC::GUID.new(0x37e866e_u32, 0xf56d_u16, 0x4357_u16, StaticArray[0xa8_u8, 0xaf_u8, 0x9d_u8, 0xab_u8, 0xbe_u8, 0x6e_u8, 0x25_u8, 0xe_u8])
   struct ID3D11Texture3D
     lpVtbl : ID3D11Texture3DVTbl*
   end
@@ -4310,8 +4310,8 @@ lib LibWin32
     get_resource : Proc(ID3D11View*, ID3D11Resource*, Void)
   end
 
-  ID3D11View_GUID = LibC::GUID.new("839d1216-bb2e-412b-b7f4-a9dbebe08ed1")
-  CLSID_ID3D11View = "839d1216-bb2e-412b-b7f4-a9dbebe08ed1"
+  ID3D11View_GUID = "839d1216-bb2e-412b-b7f4-a9dbebe08ed1"
+  IID_ID3D11View = LibC::GUID.new(0x839d1216_u32, 0xbb2e_u16, 0x412b_u16, StaticArray[0xb7_u8, 0xf4_u8, 0xa9_u8, 0xdb_u8, 0xeb_u8, 0xe0_u8, 0x8e_u8, 0xd1_u8])
   struct ID3D11View
     lpVtbl : ID3D11ViewVTbl*
   end
@@ -4328,8 +4328,8 @@ lib LibWin32
     get_desc : Proc(ID3D11ShaderResourceView*, D3D11_SHADER_RESOURCE_VIEW_DESC*, Void)
   end
 
-  ID3D11ShaderResourceView_GUID = LibC::GUID.new("b0e06fe0-8192-4e1a-b1ca-36d7414710b2")
-  CLSID_ID3D11ShaderResourceView = "b0e06fe0-8192-4e1a-b1ca-36d7414710b2"
+  ID3D11ShaderResourceView_GUID = "b0e06fe0-8192-4e1a-b1ca-36d7414710b2"
+  IID_ID3D11ShaderResourceView = LibC::GUID.new(0xb0e06fe0_u32, 0x8192_u16, 0x4e1a_u16, StaticArray[0xb1_u8, 0xca_u8, 0x36_u8, 0xd7_u8, 0x41_u8, 0x47_u8, 0x10_u8, 0xb2_u8])
   struct ID3D11ShaderResourceView
     lpVtbl : ID3D11ShaderResourceViewVTbl*
   end
@@ -4346,8 +4346,8 @@ lib LibWin32
     get_desc : Proc(ID3D11RenderTargetView*, D3D11_RENDER_TARGET_VIEW_DESC*, Void)
   end
 
-  ID3D11RenderTargetView_GUID = LibC::GUID.new("dfdba067-0b8d-4865-875b-d7b4516cc164")
-  CLSID_ID3D11RenderTargetView = "dfdba067-0b8d-4865-875b-d7b4516cc164"
+  ID3D11RenderTargetView_GUID = "dfdba067-0b8d-4865-875b-d7b4516cc164"
+  IID_ID3D11RenderTargetView = LibC::GUID.new(0xdfdba067_u32, 0xb8d_u16, 0x4865_u16, StaticArray[0x87_u8, 0x5b_u8, 0xd7_u8, 0xb4_u8, 0x51_u8, 0x6c_u8, 0xc1_u8, 0x64_u8])
   struct ID3D11RenderTargetView
     lpVtbl : ID3D11RenderTargetViewVTbl*
   end
@@ -4364,8 +4364,8 @@ lib LibWin32
     get_desc : Proc(ID3D11DepthStencilView*, D3D11_DEPTH_STENCIL_VIEW_DESC*, Void)
   end
 
-  ID3D11DepthStencilView_GUID = LibC::GUID.new("9fdac92a-1876-48c3-afad-25b94f84a9b6")
-  CLSID_ID3D11DepthStencilView = "9fdac92a-1876-48c3-afad-25b94f84a9b6"
+  ID3D11DepthStencilView_GUID = "9fdac92a-1876-48c3-afad-25b94f84a9b6"
+  IID_ID3D11DepthStencilView = LibC::GUID.new(0x9fdac92a_u32, 0x1876_u16, 0x48c3_u16, StaticArray[0xaf_u8, 0xad_u8, 0x25_u8, 0xb9_u8, 0x4f_u8, 0x84_u8, 0xa9_u8, 0xb6_u8])
   struct ID3D11DepthStencilView
     lpVtbl : ID3D11DepthStencilViewVTbl*
   end
@@ -4382,8 +4382,8 @@ lib LibWin32
     get_desc : Proc(ID3D11UnorderedAccessView*, D3D11_UNORDERED_ACCESS_VIEW_DESC*, Void)
   end
 
-  ID3D11UnorderedAccessView_GUID = LibC::GUID.new("28acf509-7f5c-48f6-8611-f316010a6380")
-  CLSID_ID3D11UnorderedAccessView = "28acf509-7f5c-48f6-8611-f316010a6380"
+  ID3D11UnorderedAccessView_GUID = "28acf509-7f5c-48f6-8611-f316010a6380"
+  IID_ID3D11UnorderedAccessView = LibC::GUID.new(0x28acf509_u32, 0x7f5c_u16, 0x48f6_u16, StaticArray[0x86_u8, 0x11_u8, 0xf3_u8, 0x16_u8, 0x1_u8, 0xa_u8, 0x63_u8, 0x80_u8])
   struct ID3D11UnorderedAccessView
     lpVtbl : ID3D11UnorderedAccessViewVTbl*
   end
@@ -4398,8 +4398,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11VertexShader*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11VertexShader_GUID = LibC::GUID.new("3b301d64-d678-4289-8897-22f8928b72f3")
-  CLSID_ID3D11VertexShader = "3b301d64-d678-4289-8897-22f8928b72f3"
+  ID3D11VertexShader_GUID = "3b301d64-d678-4289-8897-22f8928b72f3"
+  IID_ID3D11VertexShader = LibC::GUID.new(0x3b301d64_u32, 0xd678_u16, 0x4289_u16, StaticArray[0x88_u8, 0x97_u8, 0x22_u8, 0xf8_u8, 0x92_u8, 0x8b_u8, 0x72_u8, 0xf3_u8])
   struct ID3D11VertexShader
     lpVtbl : ID3D11VertexShaderVTbl*
   end
@@ -4414,8 +4414,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11HullShader*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11HullShader_GUID = LibC::GUID.new("8e5c6061-628a-4c8e-8264-bbe45cb3d5dd")
-  CLSID_ID3D11HullShader = "8e5c6061-628a-4c8e-8264-bbe45cb3d5dd"
+  ID3D11HullShader_GUID = "8e5c6061-628a-4c8e-8264-bbe45cb3d5dd"
+  IID_ID3D11HullShader = LibC::GUID.new(0x8e5c6061_u32, 0x628a_u16, 0x4c8e_u16, StaticArray[0x82_u8, 0x64_u8, 0xbb_u8, 0xe4_u8, 0x5c_u8, 0xb3_u8, 0xd5_u8, 0xdd_u8])
   struct ID3D11HullShader
     lpVtbl : ID3D11HullShaderVTbl*
   end
@@ -4430,8 +4430,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11DomainShader*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11DomainShader_GUID = LibC::GUID.new("f582c508-0f36-490c-9977-31eece268cfa")
-  CLSID_ID3D11DomainShader = "f582c508-0f36-490c-9977-31eece268cfa"
+  ID3D11DomainShader_GUID = "f582c508-0f36-490c-9977-31eece268cfa"
+  IID_ID3D11DomainShader = LibC::GUID.new(0xf582c508_u32, 0xf36_u16, 0x490c_u16, StaticArray[0x99_u8, 0x77_u8, 0x31_u8, 0xee_u8, 0xce_u8, 0x26_u8, 0x8c_u8, 0xfa_u8])
   struct ID3D11DomainShader
     lpVtbl : ID3D11DomainShaderVTbl*
   end
@@ -4446,8 +4446,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11GeometryShader*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11GeometryShader_GUID = LibC::GUID.new("38325b96-effb-4022-ba02-2e795b70275c")
-  CLSID_ID3D11GeometryShader = "38325b96-effb-4022-ba02-2e795b70275c"
+  ID3D11GeometryShader_GUID = "38325b96-effb-4022-ba02-2e795b70275c"
+  IID_ID3D11GeometryShader = LibC::GUID.new(0x38325b96_u32, 0xeffb_u16, 0x4022_u16, StaticArray[0xba_u8, 0x2_u8, 0x2e_u8, 0x79_u8, 0x5b_u8, 0x70_u8, 0x27_u8, 0x5c_u8])
   struct ID3D11GeometryShader
     lpVtbl : ID3D11GeometryShaderVTbl*
   end
@@ -4462,8 +4462,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11PixelShader*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11PixelShader_GUID = LibC::GUID.new("ea82e40d-51dc-4f33-93d4-db7c9125ae8c")
-  CLSID_ID3D11PixelShader = "ea82e40d-51dc-4f33-93d4-db7c9125ae8c"
+  ID3D11PixelShader_GUID = "ea82e40d-51dc-4f33-93d4-db7c9125ae8c"
+  IID_ID3D11PixelShader = LibC::GUID.new(0xea82e40d_u32, 0x51dc_u16, 0x4f33_u16, StaticArray[0x93_u8, 0xd4_u8, 0xdb_u8, 0x7c_u8, 0x91_u8, 0x25_u8, 0xae_u8, 0x8c_u8])
   struct ID3D11PixelShader
     lpVtbl : ID3D11PixelShaderVTbl*
   end
@@ -4478,8 +4478,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11ComputeShader*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11ComputeShader_GUID = LibC::GUID.new("4f5b196e-c2bd-495e-bd01-1fded38e4969")
-  CLSID_ID3D11ComputeShader = "4f5b196e-c2bd-495e-bd01-1fded38e4969"
+  ID3D11ComputeShader_GUID = "4f5b196e-c2bd-495e-bd01-1fded38e4969"
+  IID_ID3D11ComputeShader = LibC::GUID.new(0x4f5b196e_u32, 0xc2bd_u16, 0x495e_u16, StaticArray[0xbd_u8, 0x1_u8, 0x1f_u8, 0xde_u8, 0xd3_u8, 0x8e_u8, 0x49_u8, 0x69_u8])
   struct ID3D11ComputeShader
     lpVtbl : ID3D11ComputeShaderVTbl*
   end
@@ -4494,8 +4494,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11InputLayout*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11InputLayout_GUID = LibC::GUID.new("e4819ddc-4cf0-4025-bd26-5de82a3e07b7")
-  CLSID_ID3D11InputLayout = "e4819ddc-4cf0-4025-bd26-5de82a3e07b7"
+  ID3D11InputLayout_GUID = "e4819ddc-4cf0-4025-bd26-5de82a3e07b7"
+  IID_ID3D11InputLayout = LibC::GUID.new(0xe4819ddc_u32, 0x4cf0_u16, 0x4025_u16, StaticArray[0xbd_u8, 0x26_u8, 0x5d_u8, 0xe8_u8, 0x2a_u8, 0x3e_u8, 0x7_u8, 0xb7_u8])
   struct ID3D11InputLayout
     lpVtbl : ID3D11InputLayoutVTbl*
   end
@@ -4511,8 +4511,8 @@ lib LibWin32
     get_desc : Proc(ID3D11SamplerState*, D3D11_SAMPLER_DESC*, Void)
   end
 
-  ID3D11SamplerState_GUID = LibC::GUID.new("da6fea51-564c-4487-9810-f0d0f9b4e3a5")
-  CLSID_ID3D11SamplerState = "da6fea51-564c-4487-9810-f0d0f9b4e3a5"
+  ID3D11SamplerState_GUID = "da6fea51-564c-4487-9810-f0d0f9b4e3a5"
+  IID_ID3D11SamplerState = LibC::GUID.new(0xda6fea51_u32, 0x564c_u16, 0x4487_u16, StaticArray[0x98_u8, 0x10_u8, 0xf0_u8, 0xd0_u8, 0xf9_u8, 0xb4_u8, 0xe3_u8, 0xa5_u8])
   struct ID3D11SamplerState
     lpVtbl : ID3D11SamplerStateVTbl*
   end
@@ -4528,8 +4528,8 @@ lib LibWin32
     get_data_size : Proc(ID3D11Asynchronous*, UInt32)
   end
 
-  ID3D11Asynchronous_GUID = LibC::GUID.new("4b35d0cd-1e15-4258-9c98-1b1333f6dd3b")
-  CLSID_ID3D11Asynchronous = "4b35d0cd-1e15-4258-9c98-1b1333f6dd3b"
+  ID3D11Asynchronous_GUID = "4b35d0cd-1e15-4258-9c98-1b1333f6dd3b"
+  IID_ID3D11Asynchronous = LibC::GUID.new(0x4b35d0cd_u32, 0x1e15_u16, 0x4258_u16, StaticArray[0x9c_u8, 0x98_u8, 0x1b_u8, 0x13_u8, 0x33_u8, 0xf6_u8, 0xdd_u8, 0x3b_u8])
   struct ID3D11Asynchronous
     lpVtbl : ID3D11AsynchronousVTbl*
   end
@@ -4546,8 +4546,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Query*, D3D11_QUERY_DESC*, Void)
   end
 
-  ID3D11Query_GUID = LibC::GUID.new("d6c00747-87b7-425e-b84d-44d108560afd")
-  CLSID_ID3D11Query = "d6c00747-87b7-425e-b84d-44d108560afd"
+  ID3D11Query_GUID = "d6c00747-87b7-425e-b84d-44d108560afd"
+  IID_ID3D11Query = LibC::GUID.new(0xd6c00747_u32, 0x87b7_u16, 0x425e_u16, StaticArray[0xb8_u8, 0x4d_u8, 0x44_u8, 0xd1_u8, 0x8_u8, 0x56_u8, 0xa_u8, 0xfd_u8])
   struct ID3D11Query
     lpVtbl : ID3D11QueryVTbl*
   end
@@ -4564,8 +4564,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Predicate*, D3D11_QUERY_DESC*, Void)
   end
 
-  ID3D11Predicate_GUID = LibC::GUID.new("9eb576dd-9f77-4d86-81aa-8bab5fe490e2")
-  CLSID_ID3D11Predicate = "9eb576dd-9f77-4d86-81aa-8bab5fe490e2"
+  ID3D11Predicate_GUID = "9eb576dd-9f77-4d86-81aa-8bab5fe490e2"
+  IID_ID3D11Predicate = LibC::GUID.new(0x9eb576dd_u32, 0x9f77_u16, 0x4d86_u16, StaticArray[0x81_u8, 0xaa_u8, 0x8b_u8, 0xab_u8, 0x5f_u8, 0xe4_u8, 0x90_u8, 0xe2_u8])
   struct ID3D11Predicate
     lpVtbl : ID3D11PredicateVTbl*
   end
@@ -4582,8 +4582,8 @@ lib LibWin32
     get_desc : Proc(ID3D11Counter*, D3D11_COUNTER_DESC*, Void)
   end
 
-  ID3D11Counter_GUID = LibC::GUID.new("6e8c49fb-a371-4770-b440-29086022b741")
-  CLSID_ID3D11Counter = "6e8c49fb-a371-4770-b440-29086022b741"
+  ID3D11Counter_GUID = "6e8c49fb-a371-4770-b440-29086022b741"
+  IID_ID3D11Counter = LibC::GUID.new(0x6e8c49fb_u32, 0xa371_u16, 0x4770_u16, StaticArray[0xb4_u8, 0x40_u8, 0x29_u8, 0x8_u8, 0x60_u8, 0x22_u8, 0xb7_u8, 0x41_u8])
   struct ID3D11Counter
     lpVtbl : ID3D11CounterVTbl*
   end
@@ -4602,8 +4602,8 @@ lib LibWin32
     get_type_name : Proc(ID3D11ClassInstance*, UInt8*, LibC::UINT_PTR*, Void)
   end
 
-  ID3D11ClassInstance_GUID = LibC::GUID.new("a6cd7faa-b0b7-4a2f-9436-8662a65797cb")
-  CLSID_ID3D11ClassInstance = "a6cd7faa-b0b7-4a2f-9436-8662a65797cb"
+  ID3D11ClassInstance_GUID = "a6cd7faa-b0b7-4a2f-9436-8662a65797cb"
+  IID_ID3D11ClassInstance = LibC::GUID.new(0xa6cd7faa_u32, 0xb0b7_u16, 0x4a2f_u16, StaticArray[0x94_u8, 0x36_u8, 0x86_u8, 0x62_u8, 0xa6_u8, 0x57_u8, 0x97_u8, 0xcb_u8])
   struct ID3D11ClassInstance
     lpVtbl : ID3D11ClassInstanceVTbl*
   end
@@ -4620,8 +4620,8 @@ lib LibWin32
     create_class_instance : Proc(ID3D11ClassLinkage*, PSTR, UInt32, UInt32, UInt32, UInt32, ID3D11ClassInstance*, HRESULT)
   end
 
-  ID3D11ClassLinkage_GUID = LibC::GUID.new("ddf57cba-9543-46e4-a12b-f207a0fe7fed")
-  CLSID_ID3D11ClassLinkage = "ddf57cba-9543-46e4-a12b-f207a0fe7fed"
+  ID3D11ClassLinkage_GUID = "ddf57cba-9543-46e4-a12b-f207a0fe7fed"
+  IID_ID3D11ClassLinkage = LibC::GUID.new(0xddf57cba_u32, 0x9543_u16, 0x46e4_u16, StaticArray[0xa1_u8, 0x2b_u8, 0xf2_u8, 0x7_u8, 0xa0_u8, 0xfe_u8, 0x7f_u8, 0xed_u8])
   struct ID3D11ClassLinkage
     lpVtbl : ID3D11ClassLinkageVTbl*
   end
@@ -4637,8 +4637,8 @@ lib LibWin32
     get_context_flags : Proc(ID3D11CommandList*, UInt32)
   end
 
-  ID3D11CommandList_GUID = LibC::GUID.new("a24bc4d1-769e-43f7-8013-98ff566c18e2")
-  CLSID_ID3D11CommandList = "a24bc4d1-769e-43f7-8013-98ff566c18e2"
+  ID3D11CommandList_GUID = "a24bc4d1-769e-43f7-8013-98ff566c18e2"
+  IID_ID3D11CommandList = LibC::GUID.new(0xa24bc4d1_u32, 0x769e_u16, 0x43f7_u16, StaticArray[0x80_u8, 0x13_u8, 0x98_u8, 0xff_u8, 0x56_u8, 0x6c_u8, 0x18_u8, 0xe2_u8])
   struct ID3D11CommandList
     lpVtbl : ID3D11CommandListVTbl*
   end
@@ -4761,8 +4761,8 @@ lib LibWin32
     finish_command_list : Proc(ID3D11DeviceContext*, LibC::BOOL, ID3D11CommandList*, HRESULT)
   end
 
-  ID3D11DeviceContext_GUID = LibC::GUID.new("c0bfa96c-e089-44fb-8eaf-26f8796190da")
-  CLSID_ID3D11DeviceContext = "c0bfa96c-e089-44fb-8eaf-26f8796190da"
+  ID3D11DeviceContext_GUID = "c0bfa96c-e089-44fb-8eaf-26f8796190da"
+  IID_ID3D11DeviceContext = LibC::GUID.new(0xc0bfa96c_u32, 0xe089_u16, 0x44fb_u16, StaticArray[0x8e_u8, 0xaf_u8, 0x26_u8, 0xf8_u8, 0x79_u8, 0x61_u8, 0x90_u8, 0xda_u8])
   struct ID3D11DeviceContext
     lpVtbl : ID3D11DeviceContextVTbl*
   end
@@ -4779,8 +4779,8 @@ lib LibWin32
     get_driver_handle : Proc(ID3D11VideoDecoder*, LibC::HANDLE*, HRESULT)
   end
 
-  ID3D11VideoDecoder_GUID = LibC::GUID.new("3c9c5b51-995d-48d1-9b8d-fa5caeded65c")
-  CLSID_ID3D11VideoDecoder = "3c9c5b51-995d-48d1-9b8d-fa5caeded65c"
+  ID3D11VideoDecoder_GUID = "3c9c5b51-995d-48d1-9b8d-fa5caeded65c"
+  IID_ID3D11VideoDecoder = LibC::GUID.new(0x3c9c5b51_u32, 0x995d_u16, 0x48d1_u16, StaticArray[0x9b_u8, 0x8d_u8, 0xfa_u8, 0x5c_u8, 0xae_u8, 0xde_u8, 0xd6_u8, 0x5c_u8])
   struct ID3D11VideoDecoder
     lpVtbl : ID3D11VideoDecoderVTbl*
   end
@@ -4801,8 +4801,8 @@ lib LibWin32
     get_video_processor_filter_range : Proc(ID3D11VideoProcessorEnumerator*, D3D11_VIDEO_PROCESSOR_FILTER, D3D11_VIDEO_PROCESSOR_FILTER_RANGE*, HRESULT)
   end
 
-  ID3D11VideoProcessorEnumerator_GUID = LibC::GUID.new("31627037-53ab-4200-9061-05faa9ab45f9")
-  CLSID_ID3D11VideoProcessorEnumerator = "31627037-53ab-4200-9061-05faa9ab45f9"
+  ID3D11VideoProcessorEnumerator_GUID = "31627037-53ab-4200-9061-05faa9ab45f9"
+  IID_ID3D11VideoProcessorEnumerator = LibC::GUID.new(0x31627037_u32, 0x53ab_u16, 0x4200_u16, StaticArray[0x90_u8, 0x61_u8, 0x5_u8, 0xfa_u8, 0xa9_u8, 0xab_u8, 0x45_u8, 0xf9_u8])
   struct ID3D11VideoProcessorEnumerator
     lpVtbl : ID3D11VideoProcessorEnumeratorVTbl*
   end
@@ -4819,8 +4819,8 @@ lib LibWin32
     get_rate_conversion_caps : Proc(ID3D11VideoProcessor*, D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*, Void)
   end
 
-  ID3D11VideoProcessor_GUID = LibC::GUID.new("1d7b0652-185f-41c6-85ce-0c5be3d4ae6c")
-  CLSID_ID3D11VideoProcessor = "1d7b0652-185f-41c6-85ce-0c5be3d4ae6c"
+  ID3D11VideoProcessor_GUID = "1d7b0652-185f-41c6-85ce-0c5be3d4ae6c"
+  IID_ID3D11VideoProcessor = LibC::GUID.new(0x1d7b0652_u32, 0x185f_u16, 0x41c6_u16, StaticArray[0x85_u8, 0xce_u8, 0xc_u8, 0x5b_u8, 0xe3_u8, 0xd4_u8, 0xae_u8, 0x6c_u8])
   struct ID3D11VideoProcessor
     lpVtbl : ID3D11VideoProcessorVTbl*
   end
@@ -4838,8 +4838,8 @@ lib LibWin32
     get_channel_handle : Proc(ID3D11AuthenticatedChannel*, LibC::HANDLE*, Void)
   end
 
-  ID3D11AuthenticatedChannel_GUID = LibC::GUID.new("3015a308-dcbd-47aa-a747-192486d14d4a")
-  CLSID_ID3D11AuthenticatedChannel = "3015a308-dcbd-47aa-a747-192486d14d4a"
+  ID3D11AuthenticatedChannel_GUID = "3015a308-dcbd-47aa-a747-192486d14d4a"
+  IID_ID3D11AuthenticatedChannel = LibC::GUID.new(0x3015a308_u32, 0xdcbd_u16, 0x47aa_u16, StaticArray[0xa7_u8, 0x47_u8, 0x19_u8, 0x24_u8, 0x86_u8, 0xd1_u8, 0x4d_u8, 0x4a_u8])
   struct ID3D11AuthenticatedChannel
     lpVtbl : ID3D11AuthenticatedChannelVTbl*
   end
@@ -4859,8 +4859,8 @@ lib LibWin32
     get_crypto_session_handle : Proc(ID3D11CryptoSession*, LibC::HANDLE*, Void)
   end
 
-  ID3D11CryptoSession_GUID = LibC::GUID.new("9b32f9ad-bdcc-40a6-a39d-d5c865845720")
-  CLSID_ID3D11CryptoSession = "9b32f9ad-bdcc-40a6-a39d-d5c865845720"
+  ID3D11CryptoSession_GUID = "9b32f9ad-bdcc-40a6-a39d-d5c865845720"
+  IID_ID3D11CryptoSession = LibC::GUID.new(0x9b32f9ad_u32, 0xbdcc_u16, 0x40a6_u16, StaticArray[0xa3_u8, 0x9d_u8, 0xd5_u8, 0xc8_u8, 0x65_u8, 0x84_u8, 0x57_u8, 0x20_u8])
   struct ID3D11CryptoSession
     lpVtbl : ID3D11CryptoSessionVTbl*
   end
@@ -4877,8 +4877,8 @@ lib LibWin32
     get_desc : Proc(ID3D11VideoDecoderOutputView*, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, Void)
   end
 
-  ID3D11VideoDecoderOutputView_GUID = LibC::GUID.new("c2931aea-2a85-4f20-860f-fba1fd256e18")
-  CLSID_ID3D11VideoDecoderOutputView = "c2931aea-2a85-4f20-860f-fba1fd256e18"
+  ID3D11VideoDecoderOutputView_GUID = "c2931aea-2a85-4f20-860f-fba1fd256e18"
+  IID_ID3D11VideoDecoderOutputView = LibC::GUID.new(0xc2931aea_u32, 0x2a85_u16, 0x4f20_u16, StaticArray[0x86_u8, 0xf_u8, 0xfb_u8, 0xa1_u8, 0xfd_u8, 0x25_u8, 0x6e_u8, 0x18_u8])
   struct ID3D11VideoDecoderOutputView
     lpVtbl : ID3D11VideoDecoderOutputViewVTbl*
   end
@@ -4895,8 +4895,8 @@ lib LibWin32
     get_desc : Proc(ID3D11VideoProcessorInputView*, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, Void)
   end
 
-  ID3D11VideoProcessorInputView_GUID = LibC::GUID.new("11ec5a5f-51dc-4945-ab34-6e8c21300ea5")
-  CLSID_ID3D11VideoProcessorInputView = "11ec5a5f-51dc-4945-ab34-6e8c21300ea5"
+  ID3D11VideoProcessorInputView_GUID = "11ec5a5f-51dc-4945-ab34-6e8c21300ea5"
+  IID_ID3D11VideoProcessorInputView = LibC::GUID.new(0x11ec5a5f_u32, 0x51dc_u16, 0x4945_u16, StaticArray[0xab_u8, 0x34_u8, 0x6e_u8, 0x8c_u8, 0x21_u8, 0x30_u8, 0xe_u8, 0xa5_u8])
   struct ID3D11VideoProcessorInputView
     lpVtbl : ID3D11VideoProcessorInputViewVTbl*
   end
@@ -4913,8 +4913,8 @@ lib LibWin32
     get_desc : Proc(ID3D11VideoProcessorOutputView*, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, Void)
   end
 
-  ID3D11VideoProcessorOutputView_GUID = LibC::GUID.new("a048285e-25a9-4527-bd93-d68b68c44254")
-  CLSID_ID3D11VideoProcessorOutputView = "a048285e-25a9-4527-bd93-d68b68c44254"
+  ID3D11VideoProcessorOutputView_GUID = "a048285e-25a9-4527-bd93-d68b68c44254"
+  IID_ID3D11VideoProcessorOutputView = LibC::GUID.new(0xa048285e_u32, 0x25a9_u16, 0x4527_u16, StaticArray[0xbd_u8, 0x93_u8, 0xd6_u8, 0x8b_u8, 0x68_u8, 0xc4_u8, 0x42_u8, 0x54_u8])
   struct ID3D11VideoProcessorOutputView
     lpVtbl : ID3D11VideoProcessorOutputViewVTbl*
   end
@@ -4987,8 +4987,8 @@ lib LibWin32
     video_processor_get_stream_rotation : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)
   end
 
-  ID3D11VideoContext_GUID = LibC::GUID.new("61f21c45-3c0e-4a74-9cea-67100d9ad5e4")
-  CLSID_ID3D11VideoContext = "61f21c45-3c0e-4a74-9cea-67100d9ad5e4"
+  ID3D11VideoContext_GUID = "61f21c45-3c0e-4a74-9cea-67100d9ad5e4"
+  IID_ID3D11VideoContext = LibC::GUID.new(0x61f21c45_u32, 0x3c0e_u16, 0x4a74_u16, StaticArray[0x9c_u8, 0xea_u8, 0x67_u8, 0x10_u8, 0xd_u8, 0x9a_u8, 0xd5_u8, 0xe4_u8])
   struct ID3D11VideoContext
     lpVtbl : ID3D11VideoContextVTbl*
   end
@@ -5016,8 +5016,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3D11VideoDevice*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3D11VideoDevice_GUID = LibC::GUID.new("10ec4d5b-975a-4689-b9e4-d0aac30fe333")
-  CLSID_ID3D11VideoDevice = "10ec4d5b-975a-4689-b9e4-d0aac30fe333"
+  ID3D11VideoDevice_GUID = "10ec4d5b-975a-4689-b9e4-d0aac30fe333"
+  IID_ID3D11VideoDevice = LibC::GUID.new(0x10ec4d5b_u32, 0x975a_u16, 0x4689_u16, StaticArray[0xb9_u8, 0xe4_u8, 0xd0_u8, 0xaa_u8, 0xc3_u8, 0xf_u8, 0xe3_u8, 0x33_u8])
   struct ID3D11VideoDevice
     lpVtbl : ID3D11VideoDeviceVTbl*
   end
@@ -5068,8 +5068,8 @@ lib LibWin32
     get_exception_mode : Proc(ID3D11Device*, UInt32)
   end
 
-  ID3D11Device_GUID = LibC::GUID.new("db6f6ddb-ac77-4e88-8253-819df9bbf140")
-  CLSID_ID3D11Device = "db6f6ddb-ac77-4e88-8253-819df9bbf140"
+  ID3D11Device_GUID = "db6f6ddb-ac77-4e88-8253-819df9bbf140"
+  IID_ID3D11Device = LibC::GUID.new(0xdb6f6ddb_u32, 0xac77_u16, 0x4e88_u16, StaticArray[0x82_u8, 0x53_u8, 0x81_u8, 0x9d_u8, 0xf9_u8, 0xbb_u8, 0xf1_u8, 0x40_u8])
   struct ID3D11Device
     lpVtbl : ID3D11DeviceVTbl*
   end
@@ -5089,8 +5089,8 @@ lib LibWin32
     validate_context_for_dispatch : Proc(ID3D11Debug*, ID3D11DeviceContext, HRESULT)
   end
 
-  ID3D11Debug_GUID = LibC::GUID.new("79cf2233-7536-4948-9d36-1e4692dc5760")
-  CLSID_ID3D11Debug = "79cf2233-7536-4948-9d36-1e4692dc5760"
+  ID3D11Debug_GUID = "79cf2233-7536-4948-9d36-1e4692dc5760"
+  IID_ID3D11Debug = LibC::GUID.new(0x79cf2233_u32, 0x7536_u16, 0x4948_u16, StaticArray[0x9d_u8, 0x36_u8, 0x1e_u8, 0x46_u8, 0x92_u8, 0xdc_u8, 0x57_u8, 0x60_u8])
   struct ID3D11Debug
     lpVtbl : ID3D11DebugVTbl*
   end
@@ -5103,8 +5103,8 @@ lib LibWin32
     get_use_ref : Proc(ID3D11SwitchToRef*, LibC::BOOL)
   end
 
-  ID3D11SwitchToRef_GUID = LibC::GUID.new("1ef337e3-58e7-4f83-a692-db221f5ed47e")
-  CLSID_ID3D11SwitchToRef = "1ef337e3-58e7-4f83-a692-db221f5ed47e"
+  ID3D11SwitchToRef_GUID = "1ef337e3-58e7-4f83-a692-db221f5ed47e"
+  IID_ID3D11SwitchToRef = LibC::GUID.new(0x1ef337e3_u32, 0x58e7_u16, 0x4f83_u16, StaticArray[0xa6_u8, 0x92_u8, 0xdb_u8, 0x22_u8, 0x1f_u8, 0x5e_u8, 0xd4_u8, 0x7e_u8])
   struct ID3D11SwitchToRef
     lpVtbl : ID3D11SwitchToRefVTbl*
   end
@@ -5117,8 +5117,8 @@ lib LibWin32
     set_shader_tracking_options : Proc(ID3D11TracingDevice*, IUnknown, UInt32, HRESULT)
   end
 
-  ID3D11TracingDevice_GUID = LibC::GUID.new("1911c771-1587-413e-a7e0-fb26c3de0268")
-  CLSID_ID3D11TracingDevice = "1911c771-1587-413e-a7e0-fb26c3de0268"
+  ID3D11TracingDevice_GUID = "1911c771-1587-413e-a7e0-fb26c3de0268"
+  IID_ID3D11TracingDevice = LibC::GUID.new(0x1911c771_u32, 0x1587_u16, 0x413e_u16, StaticArray[0xa7_u8, 0xe0_u8, 0xfb_u8, 0x26_u8, 0xc3_u8, 0xde_u8, 0x2_u8, 0x68_u8])
   struct ID3D11TracingDevice
     lpVtbl : ID3D11TracingDeviceVTbl*
   end
@@ -5130,8 +5130,8 @@ lib LibWin32
     set_tracking_options : Proc(ID3D11RefTrackingOptions*, UInt32, HRESULT)
   end
 
-  ID3D11RefTrackingOptions_GUID = LibC::GUID.new("193dacdf-0db2-4c05-a55c-ef06cac56fd9")
-  CLSID_ID3D11RefTrackingOptions = "193dacdf-0db2-4c05-a55c-ef06cac56fd9"
+  ID3D11RefTrackingOptions_GUID = "193dacdf-0db2-4c05-a55c-ef06cac56fd9"
+  IID_ID3D11RefTrackingOptions = LibC::GUID.new(0x193dacdf_u32, 0xdb2_u16, 0x4c05_u16, StaticArray[0xa5_u8, 0x5c_u8, 0xef_u8, 0x6_u8, 0xca_u8, 0xc5_u8, 0x6f_u8, 0xd9_u8])
   struct ID3D11RefTrackingOptions
     lpVtbl : ID3D11RefTrackingOptionsVTbl*
   end
@@ -5143,8 +5143,8 @@ lib LibWin32
     set_tracking_options : Proc(ID3D11RefDefaultTrackingOptions*, UInt32, UInt32, HRESULT)
   end
 
-  ID3D11RefDefaultTrackingOptions_GUID = LibC::GUID.new("03916615-c644-418c-9bf4-75db5be63ca0")
-  CLSID_ID3D11RefDefaultTrackingOptions = "03916615-c644-418c-9bf4-75db5be63ca0"
+  ID3D11RefDefaultTrackingOptions_GUID = "03916615-c644-418c-9bf4-75db5be63ca0"
+  IID_ID3D11RefDefaultTrackingOptions = LibC::GUID.new(0x3916615_u32, 0xc644_u16, 0x418c_u16, StaticArray[0x9b_u8, 0xf4_u8, 0x75_u8, 0xdb_u8, 0x5b_u8, 0xe6_u8, 0x3c_u8, 0xa0_u8])
   struct ID3D11RefDefaultTrackingOptions
     lpVtbl : ID3D11RefDefaultTrackingOptionsVTbl*
   end
@@ -5190,8 +5190,8 @@ lib LibWin32
     get_mute_debug_output : Proc(ID3D11InfoQueue*, LibC::BOOL)
   end
 
-  ID3D11InfoQueue_GUID = LibC::GUID.new("6543dbb6-1b48-42f5-ab82-e97ec74326f6")
-  CLSID_ID3D11InfoQueue = "6543dbb6-1b48-42f5-ab82-e97ec74326f6"
+  ID3D11InfoQueue_GUID = "6543dbb6-1b48-42f5-ab82-e97ec74326f6"
+  IID_ID3D11InfoQueue = LibC::GUID.new(0x6543dbb6_u32, 0x1b48_u16, 0x42f5_u16, StaticArray[0xab_u8, 0x82_u8, 0xe9_u8, 0x7e_u8, 0xc7_u8, 0x43_u8, 0x26_u8, 0xf6_u8])
   struct ID3D11InfoQueue
     lpVtbl : ID3D11InfoQueueVTbl*
   end
@@ -5208,8 +5208,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11BlendState1*, D3D11_BLEND_DESC1*, Void)
   end
 
-  ID3D11BlendState1_GUID = LibC::GUID.new("cc86fabe-da55-401d-85e7-e3c9de2877e9")
-  CLSID_ID3D11BlendState1 = "cc86fabe-da55-401d-85e7-e3c9de2877e9"
+  ID3D11BlendState1_GUID = "cc86fabe-da55-401d-85e7-e3c9de2877e9"
+  IID_ID3D11BlendState1 = LibC::GUID.new(0xcc86fabe_u32, 0xda55_u16, 0x401d_u16, StaticArray[0x85_u8, 0xe7_u8, 0xe3_u8, 0xc9_u8, 0xde_u8, 0x28_u8, 0x77_u8, 0xe9_u8])
   struct ID3D11BlendState1
     lpVtbl : ID3D11BlendState1VTbl*
   end
@@ -5226,8 +5226,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11RasterizerState1*, D3D11_RASTERIZER_DESC1*, Void)
   end
 
-  ID3D11RasterizerState1_GUID = LibC::GUID.new("1217d7a6-5039-418c-b042-9cbe256afd6e")
-  CLSID_ID3D11RasterizerState1 = "1217d7a6-5039-418c-b042-9cbe256afd6e"
+  ID3D11RasterizerState1_GUID = "1217d7a6-5039-418c-b042-9cbe256afd6e"
+  IID_ID3D11RasterizerState1 = LibC::GUID.new(0x1217d7a6_u32, 0x5039_u16, 0x418c_u16, StaticArray[0xb0_u8, 0x42_u8, 0x9c_u8, 0xbe_u8, 0x25_u8, 0x6a_u8, 0xfd_u8, 0x6e_u8])
   struct ID3D11RasterizerState1
     lpVtbl : ID3D11RasterizerState1VTbl*
   end
@@ -5242,8 +5242,8 @@ lib LibWin32
     set_private_data_interface : Proc(ID3DDeviceContextState*, Guid*, IUnknown, HRESULT)
   end
 
-  ID3DDeviceContextState_GUID = LibC::GUID.new("5c1e0d8a-7c23-48f9-8c59-a92958ceff11")
-  CLSID_ID3DDeviceContextState = "5c1e0d8a-7c23-48f9-8c59-a92958ceff11"
+  ID3DDeviceContextState_GUID = "5c1e0d8a-7c23-48f9-8c59-a92958ceff11"
+  IID_ID3DDeviceContextState = LibC::GUID.new(0x5c1e0d8a_u32, 0x7c23_u16, 0x48f9_u16, StaticArray[0x8c_u8, 0x59_u8, 0xa9_u8, 0x29_u8, 0x58_u8, 0xce_u8, 0xff_u8, 0x11_u8])
   struct ID3DDeviceContextState
     lpVtbl : ID3DDeviceContextStateVTbl*
   end
@@ -5385,8 +5385,8 @@ lib LibWin32
     discard_view1 : Proc(ID3D11DeviceContext1*, ID3D11View, RECT*, UInt32, Void)
   end
 
-  ID3D11DeviceContext1_GUID = LibC::GUID.new("bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1")
-  CLSID_ID3D11DeviceContext1 = "bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1"
+  ID3D11DeviceContext1_GUID = "bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1"
+  IID_ID3D11DeviceContext1 = LibC::GUID.new(0xbb2c6faa_u32, 0xb5fb_u16, 0x4082_u16, StaticArray[0x8e_u8, 0x6b_u8, 0x38_u8, 0x8b_u8, 0x8c_u8, 0xfa_u8, 0x90_u8, 0xe1_u8])
   struct ID3D11DeviceContext1
     lpVtbl : ID3D11DeviceContext1VTbl*
   end
@@ -5473,8 +5473,8 @@ lib LibWin32
     video_processor_get_behavior_hints : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, UInt32, DXGI_FORMAT, UInt32, D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, UInt32*, HRESULT)
   end
 
-  ID3D11VideoContext1_GUID = LibC::GUID.new("a7f026da-a5f8-4487-a564-15e34357651e")
-  CLSID_ID3D11VideoContext1 = "a7f026da-a5f8-4487-a564-15e34357651e"
+  ID3D11VideoContext1_GUID = "a7f026da-a5f8-4487-a564-15e34357651e"
+  IID_ID3D11VideoContext1 = LibC::GUID.new(0xa7f026da_u32, 0xa5f8_u16, 0x4487_u16, StaticArray[0xa5_u8, 0x64_u8, 0x15_u8, 0xe3_u8, 0x43_u8, 0x57_u8, 0x65_u8, 0x1e_u8])
   struct ID3D11VideoContext1
     lpVtbl : ID3D11VideoContext1VTbl*
   end
@@ -5506,8 +5506,8 @@ lib LibWin32
     recommend_video_decoder_downsample_parameters : Proc(ID3D11VideoDevice1*, D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)
   end
 
-  ID3D11VideoDevice1_GUID = LibC::GUID.new("29da1d51-1321-4454-804b-f5fc9f861f0f")
-  CLSID_ID3D11VideoDevice1 = "29da1d51-1321-4454-804b-f5fc9f861f0f"
+  ID3D11VideoDevice1_GUID = "29da1d51-1321-4454-804b-f5fc9f861f0f"
+  IID_ID3D11VideoDevice1 = LibC::GUID.new(0x29da1d51_u32, 0x1321_u16, 0x4454_u16, StaticArray[0x80_u8, 0x4b_u8, 0xf5_u8, 0xfc_u8, 0x9f_u8, 0x86_u8, 0x1f_u8, 0xf_u8])
   struct ID3D11VideoDevice1
     lpVtbl : ID3D11VideoDevice1VTbl*
   end
@@ -5529,8 +5529,8 @@ lib LibWin32
     check_video_processor_format_conversion : Proc(ID3D11VideoProcessorEnumerator1*, DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, LibC::BOOL*, HRESULT)
   end
 
-  ID3D11VideoProcessorEnumerator1_GUID = LibC::GUID.new("465217f2-5568-43cf-b5b9-f61d54531ca1")
-  CLSID_ID3D11VideoProcessorEnumerator1 = "465217f2-5568-43cf-b5b9-f61d54531ca1"
+  ID3D11VideoProcessorEnumerator1_GUID = "465217f2-5568-43cf-b5b9-f61d54531ca1"
+  IID_ID3D11VideoProcessorEnumerator1 = LibC::GUID.new(0x465217f2_u32, 0x5568_u16, 0x43cf_u16, StaticArray[0xb5_u8, 0xb9_u8, 0xf6_u8, 0x1d_u8, 0x54_u8, 0x53_u8, 0x1c_u8, 0xa1_u8])
   struct ID3D11VideoProcessorEnumerator1
     lpVtbl : ID3D11VideoProcessorEnumerator1VTbl*
   end
@@ -5588,8 +5588,8 @@ lib LibWin32
     open_shared_resource_by_name : Proc(ID3D11Device1*, LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)
   end
 
-  ID3D11Device1_GUID = LibC::GUID.new("a04bfb29-08ef-43d6-a49c-a9bdbdcbe686")
-  CLSID_ID3D11Device1 = "a04bfb29-08ef-43d6-a49c-a9bdbdcbe686"
+  ID3D11Device1_GUID = "a04bfb29-08ef-43d6-a49c-a9bdbdcbe686"
+  IID_ID3D11Device1 = LibC::GUID.new(0xa04bfb29_u32, 0x8ef_u16, 0x43d6_u16, StaticArray[0xa4_u8, 0x9c_u8, 0xa9_u8, 0xbd_u8, 0xbd_u8, 0xcb_u8, 0xe6_u8, 0x86_u8])
   struct ID3D11Device1
     lpVtbl : ID3D11Device1VTbl*
   end
@@ -5604,8 +5604,8 @@ lib LibWin32
     get_status : Proc(ID3DUserDefinedAnnotation*, LibC::BOOL)
   end
 
-  ID3DUserDefinedAnnotation_GUID = LibC::GUID.new("b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab")
-  CLSID_ID3DUserDefinedAnnotation = "b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab"
+  ID3DUserDefinedAnnotation_GUID = "b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab"
+  IID_ID3DUserDefinedAnnotation = LibC::GUID.new(0xb2daad8b_u32, 0x3d4_u16, 0x4dbf_u16, StaticArray[0x95_u8, 0xeb_u8, 0x32_u8, 0xab_u8, 0x4b_u8, 0x63_u8, 0xd0_u8, 0xab_u8])
   struct ID3DUserDefinedAnnotation
     lpVtbl : ID3DUserDefinedAnnotationVTbl*
   end
@@ -5757,8 +5757,8 @@ lib LibWin32
     end_event : Proc(ID3D11DeviceContext2*, Void)
   end
 
-  ID3D11DeviceContext2_GUID = LibC::GUID.new("420d5b32-b90c-4da4-bef0-359f6a24a83a")
-  CLSID_ID3D11DeviceContext2 = "420d5b32-b90c-4da4-bef0-359f6a24a83a"
+  ID3D11DeviceContext2_GUID = "420d5b32-b90c-4da4-bef0-359f6a24a83a"
+  IID_ID3D11DeviceContext2 = LibC::GUID.new(0x420d5b32_u32, 0xb90c_u16, 0x4da4_u16, StaticArray[0xbe_u8, 0xf0_u8, 0x35_u8, 0x9f_u8, 0x6a_u8, 0x24_u8, 0xa8_u8, 0x3a_u8])
   struct ID3D11DeviceContext2
     lpVtbl : ID3D11DeviceContext2VTbl*
   end
@@ -5820,8 +5820,8 @@ lib LibWin32
     check_multisample_quality_levels1 : Proc(ID3D11Device2*, DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)
   end
 
-  ID3D11Device2_GUID = LibC::GUID.new("9d06dffa-d1e5-4d07-83a8-1bb123f2f841")
-  CLSID_ID3D11Device2 = "9d06dffa-d1e5-4d07-83a8-1bb123f2f841"
+  ID3D11Device2_GUID = "9d06dffa-d1e5-4d07-83a8-1bb123f2f841"
+  IID_ID3D11Device2 = LibC::GUID.new(0x9d06dffa_u32, 0xd1e5_u16, 0x4d07_u16, StaticArray[0x83_u8, 0xa8_u8, 0x1b_u8, 0xb1_u8, 0x23_u8, 0xf2_u8, 0xf8_u8, 0x41_u8])
   struct ID3D11Device2
     lpVtbl : ID3D11Device2VTbl*
   end
@@ -5841,8 +5841,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11Texture2D1*, D3D11_TEXTURE2D_DESC1*, Void)
   end
 
-  ID3D11Texture2D1_GUID = LibC::GUID.new("51218251-1e33-4617-9ccb-4d3a4367e7bb")
-  CLSID_ID3D11Texture2D1 = "51218251-1e33-4617-9ccb-4d3a4367e7bb"
+  ID3D11Texture2D1_GUID = "51218251-1e33-4617-9ccb-4d3a4367e7bb"
+  IID_ID3D11Texture2D1 = LibC::GUID.new(0x51218251_u32, 0x1e33_u16, 0x4617_u16, StaticArray[0x9c_u8, 0xcb_u8, 0x4d_u8, 0x3a_u8, 0x43_u8, 0x67_u8, 0xe7_u8, 0xbb_u8])
   struct ID3D11Texture2D1
     lpVtbl : ID3D11Texture2D1VTbl*
   end
@@ -5862,8 +5862,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11Texture3D1*, D3D11_TEXTURE3D_DESC1*, Void)
   end
 
-  ID3D11Texture3D1_GUID = LibC::GUID.new("0c711683-2853-4846-9bb0-f3e60639e46a")
-  CLSID_ID3D11Texture3D1 = "0c711683-2853-4846-9bb0-f3e60639e46a"
+  ID3D11Texture3D1_GUID = "0c711683-2853-4846-9bb0-f3e60639e46a"
+  IID_ID3D11Texture3D1 = LibC::GUID.new(0xc711683_u32, 0x2853_u16, 0x4846_u16, StaticArray[0x9b_u8, 0xb0_u8, 0xf3_u8, 0xe6_u8, 0x6_u8, 0x39_u8, 0xe4_u8, 0x6a_u8])
   struct ID3D11Texture3D1
     lpVtbl : ID3D11Texture3D1VTbl*
   end
@@ -5881,8 +5881,8 @@ lib LibWin32
     get_desc2 : Proc(ID3D11RasterizerState2*, D3D11_RASTERIZER_DESC2*, Void)
   end
 
-  ID3D11RasterizerState2_GUID = LibC::GUID.new("6fbd02fb-209f-46c4-b059-2ed15586a6ac")
-  CLSID_ID3D11RasterizerState2 = "6fbd02fb-209f-46c4-b059-2ed15586a6ac"
+  ID3D11RasterizerState2_GUID = "6fbd02fb-209f-46c4-b059-2ed15586a6ac"
+  IID_ID3D11RasterizerState2 = LibC::GUID.new(0x6fbd02fb_u32, 0x209f_u16, 0x46c4_u16, StaticArray[0xb0_u8, 0x59_u8, 0x2e_u8, 0xd1_u8, 0x55_u8, 0x86_u8, 0xa6_u8, 0xac_u8])
   struct ID3D11RasterizerState2
     lpVtbl : ID3D11RasterizerState2VTbl*
   end
@@ -5900,8 +5900,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11ShaderResourceView1*, D3D11_SHADER_RESOURCE_VIEW_DESC1*, Void)
   end
 
-  ID3D11ShaderResourceView1_GUID = LibC::GUID.new("91308b87-9040-411d-8c67-c39253ce3802")
-  CLSID_ID3D11ShaderResourceView1 = "91308b87-9040-411d-8c67-c39253ce3802"
+  ID3D11ShaderResourceView1_GUID = "91308b87-9040-411d-8c67-c39253ce3802"
+  IID_ID3D11ShaderResourceView1 = LibC::GUID.new(0x91308b87_u32, 0x9040_u16, 0x411d_u16, StaticArray[0x8c_u8, 0x67_u8, 0xc3_u8, 0x92_u8, 0x53_u8, 0xce_u8, 0x38_u8, 0x2_u8])
   struct ID3D11ShaderResourceView1
     lpVtbl : ID3D11ShaderResourceView1VTbl*
   end
@@ -5919,8 +5919,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11RenderTargetView1*, D3D11_RENDER_TARGET_VIEW_DESC1*, Void)
   end
 
-  ID3D11RenderTargetView1_GUID = LibC::GUID.new("ffbe2e23-f011-418a-ac56-5ceed7c5b94b")
-  CLSID_ID3D11RenderTargetView1 = "ffbe2e23-f011-418a-ac56-5ceed7c5b94b"
+  ID3D11RenderTargetView1_GUID = "ffbe2e23-f011-418a-ac56-5ceed7c5b94b"
+  IID_ID3D11RenderTargetView1 = LibC::GUID.new(0xffbe2e23_u32, 0xf011_u16, 0x418a_u16, StaticArray[0xac_u8, 0x56_u8, 0x5c_u8, 0xee_u8, 0xd7_u8, 0xc5_u8, 0xb9_u8, 0x4b_u8])
   struct ID3D11RenderTargetView1
     lpVtbl : ID3D11RenderTargetView1VTbl*
   end
@@ -5938,8 +5938,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11UnorderedAccessView1*, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, Void)
   end
 
-  ID3D11UnorderedAccessView1_GUID = LibC::GUID.new("7b3b6153-a886-4544-ab37-6537c8500403")
-  CLSID_ID3D11UnorderedAccessView1 = "7b3b6153-a886-4544-ab37-6537c8500403"
+  ID3D11UnorderedAccessView1_GUID = "7b3b6153-a886-4544-ab37-6537c8500403"
+  IID_ID3D11UnorderedAccessView1 = LibC::GUID.new(0x7b3b6153_u32, 0xa886_u16, 0x4544_u16, StaticArray[0xab_u8, 0x37_u8, 0x65_u8, 0x37_u8, 0xc8_u8, 0x50_u8, 0x4_u8, 0x3_u8])
   struct ID3D11UnorderedAccessView1
     lpVtbl : ID3D11UnorderedAccessView1VTbl*
   end
@@ -5957,8 +5957,8 @@ lib LibWin32
     get_desc1 : Proc(ID3D11Query1*, D3D11_QUERY_DESC1*, Void)
   end
 
-  ID3D11Query1_GUID = LibC::GUID.new("631b4766-36dc-461d-8db6-c47e13e60916")
-  CLSID_ID3D11Query1 = "631b4766-36dc-461d-8db6-c47e13e60916"
+  ID3D11Query1_GUID = "631b4766-36dc-461d-8db6-c47e13e60916"
+  IID_ID3D11Query1 = LibC::GUID.new(0x631b4766_u32, 0x36dc_u16, 0x461d_u16, StaticArray[0x8d_u8, 0xb6_u8, 0xc4_u8, 0x7e_u8, 0x13_u8, 0xe6_u8, 0x9_u8, 0x16_u8])
   struct ID3D11Query1
     lpVtbl : ID3D11Query1VTbl*
   end
@@ -6113,8 +6113,8 @@ lib LibWin32
     get_hardware_protection_state : Proc(ID3D11DeviceContext3*, LibC::BOOL*, Void)
   end
 
-  ID3D11DeviceContext3_GUID = LibC::GUID.new("b4e3c01d-e79e-4637-91b2-510e9f4c9b8f")
-  CLSID_ID3D11DeviceContext3 = "b4e3c01d-e79e-4637-91b2-510e9f4c9b8f"
+  ID3D11DeviceContext3_GUID = "b4e3c01d-e79e-4637-91b2-510e9f4c9b8f"
+  IID_ID3D11DeviceContext3 = LibC::GUID.new(0xb4e3c01d_u32, 0xe79e_u16, 0x4637_u16, StaticArray[0x91_u8, 0xb2_u8, 0x51_u8, 0xe_u8, 0x9f_u8, 0x4c_u8, 0x9b_u8, 0x8f_u8])
   struct ID3D11DeviceContext3
     lpVtbl : ID3D11DeviceContext3VTbl*
   end
@@ -6132,8 +6132,8 @@ lib LibWin32
     set_event_on_completion : Proc(ID3D11Fence*, UInt64, LibC::HANDLE, HRESULT)
   end
 
-  ID3D11Fence_GUID = LibC::GUID.new("affde9d1-1df7-4bb7-8a34-0f46251dab80")
-  CLSID_ID3D11Fence = "affde9d1-1df7-4bb7-8a34-0f46251dab80"
+  ID3D11Fence_GUID = "affde9d1-1df7-4bb7-8a34-0f46251dab80"
+  IID_ID3D11Fence = LibC::GUID.new(0xaffde9d1_u32, 0x1df7_u16, 0x4bb7_u16, StaticArray[0x8a_u8, 0x34_u8, 0xf_u8, 0x46_u8, 0x25_u8, 0x1d_u8, 0xab_u8, 0x80_u8])
   struct ID3D11Fence
     lpVtbl : ID3D11FenceVTbl*
   end
@@ -6290,8 +6290,8 @@ lib LibWin32
     wait : Proc(ID3D11DeviceContext4*, ID3D11Fence, UInt64, HRESULT)
   end
 
-  ID3D11DeviceContext4_GUID = LibC::GUID.new("917600da-f58c-4c33-98d8-3e15b390fa24")
-  CLSID_ID3D11DeviceContext4 = "917600da-f58c-4c33-98d8-3e15b390fa24"
+  ID3D11DeviceContext4_GUID = "917600da-f58c-4c33-98d8-3e15b390fa24"
+  IID_ID3D11DeviceContext4 = LibC::GUID.new(0x917600da_u32, 0xf58c_u16, 0x4c33_u16, StaticArray[0x98_u8, 0xd8_u8, 0x3e_u8, 0x15_u8, 0xb3_u8, 0x90_u8, 0xfa_u8, 0x24_u8])
   struct ID3D11DeviceContext4
     lpVtbl : ID3D11DeviceContext4VTbl*
   end
@@ -6364,8 +6364,8 @@ lib LibWin32
     read_from_subresource : Proc(ID3D11Device3*, Void*, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
   end
 
-  ID3D11Device3_GUID = LibC::GUID.new("a05c8c37-d2c6-4732-b3a0-9ce0b0dc9ae6")
-  CLSID_ID3D11Device3 = "a05c8c37-d2c6-4732-b3a0-9ce0b0dc9ae6"
+  ID3D11Device3_GUID = "a05c8c37-d2c6-4732-b3a0-9ce0b0dc9ae6"
+  IID_ID3D11Device3 = LibC::GUID.new(0xa05c8c37_u32, 0xd2c6_u16, 0x4732_u16, StaticArray[0xb3_u8, 0xa0_u8, 0x9c_u8, 0xe0_u8, 0xb0_u8, 0xdc_u8, 0x9a_u8, 0xe6_u8])
   struct ID3D11Device3
     lpVtbl : ID3D11Device3VTbl*
   end
@@ -6440,8 +6440,8 @@ lib LibWin32
     unregister_device_removed : Proc(ID3D11Device4*, UInt32, Void)
   end
 
-  ID3D11Device4_GUID = LibC::GUID.new("8992ab71-02e6-4b8d-ba48-b056dcda42c4")
-  CLSID_ID3D11Device4 = "8992ab71-02e6-4b8d-ba48-b056dcda42c4"
+  ID3D11Device4_GUID = "8992ab71-02e6-4b8d-ba48-b056dcda42c4"
+  IID_ID3D11Device4 = LibC::GUID.new(0x8992ab71_u32, 0x2e6_u16, 0x4b8d_u16, StaticArray[0xba_u8, 0x48_u8, 0xb0_u8, 0x56_u8, 0xdc_u8, 0xda_u8, 0x42_u8, 0xc4_u8])
   struct ID3D11Device4
     lpVtbl : ID3D11Device4VTbl*
   end
@@ -6518,8 +6518,8 @@ lib LibWin32
     create_fence : Proc(ID3D11Device5*, UInt64, D3D11_FENCE_FLAG, Guid*, Void**, HRESULT)
   end
 
-  ID3D11Device5_GUID = LibC::GUID.new("8ffde202-a0e7-45df-9e01-e837801b5ea0")
-  CLSID_ID3D11Device5 = "8ffde202-a0e7-45df-9e01-e837801b5ea0"
+  ID3D11Device5_GUID = "8ffde202-a0e7-45df-9e01-e837801b5ea0"
+  IID_ID3D11Device5 = LibC::GUID.new(0x8ffde202_u32, 0xa0e7_u16, 0x45df_u16, StaticArray[0x9e_u8, 0x1_u8, 0xe8_u8, 0x37_u8, 0x80_u8, 0x1b_u8, 0x5e_u8, 0xa0_u8])
   struct ID3D11Device5
     lpVtbl : ID3D11Device5VTbl*
   end
@@ -6534,8 +6534,8 @@ lib LibWin32
     get_multithread_protected : Proc(ID3D11Multithread*, LibC::BOOL)
   end
 
-  ID3D11Multithread_GUID = LibC::GUID.new("9b7e4e00-342c-4106-a19f-4f2704f689f0")
-  CLSID_ID3D11Multithread = "9b7e4e00-342c-4106-a19f-4f2704f689f0"
+  ID3D11Multithread_GUID = "9b7e4e00-342c-4106-a19f-4f2704f689f0"
+  IID_ID3D11Multithread = LibC::GUID.new(0x9b7e4e00_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
   struct ID3D11Multithread
     lpVtbl : ID3D11MultithreadVTbl*
   end
@@ -6626,8 +6626,8 @@ lib LibWin32
     video_processor_get_stream_hdr_meta_data : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)
   end
 
-  ID3D11VideoContext2_GUID = LibC::GUID.new("c4e7374c-6243-4d1b-ae87-52b4f740e261")
-  CLSID_ID3D11VideoContext2 = "c4e7374c-6243-4d1b-ae87-52b4f740e261"
+  ID3D11VideoContext2_GUID = "c4e7374c-6243-4d1b-ae87-52b4f740e261"
+  IID_ID3D11VideoContext2 = LibC::GUID.new(0xc4e7374c_u32, 0x6243_u16, 0x4d1b_u16, StaticArray[0xae_u8, 0x87_u8, 0x52_u8, 0xb4_u8, 0xf7_u8, 0x40_u8, 0xe2_u8, 0x61_u8])
   struct ID3D11VideoContext2
     lpVtbl : ID3D11VideoContext2VTbl*
   end
@@ -6661,8 +6661,8 @@ lib LibWin32
     negotiate_crypto_session_key_exchange_mt : Proc(ID3D11VideoDevice2*, ID3D11CryptoSession, D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, UInt32, Void*, HRESULT)
   end
 
-  ID3D11VideoDevice2_GUID = LibC::GUID.new("59c0cb01-35f0-4a70-8f67-87905c906a53")
-  CLSID_ID3D11VideoDevice2 = "59c0cb01-35f0-4a70-8f67-87905c906a53"
+  ID3D11VideoDevice2_GUID = "59c0cb01-35f0-4a70-8f67-87905c906a53"
+  IID_ID3D11VideoDevice2 = LibC::GUID.new(0x59c0cb01_u32, 0x35f0_u16, 0x4a70_u16, StaticArray[0x8f_u8, 0x67_u8, 0x87_u8, 0x90_u8, 0x5c_u8, 0x90_u8, 0x6a_u8, 0x53_u8])
   struct ID3D11VideoDevice2
     lpVtbl : ID3D11VideoDevice2VTbl*
   end
@@ -6755,8 +6755,8 @@ lib LibWin32
     submit_decoder_buffers2 : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC2*, HRESULT)
   end
 
-  ID3D11VideoContext3_GUID = LibC::GUID.new("a9e2faa0-cb39-418f-a0b7-d8aad4de672e")
-  CLSID_ID3D11VideoContext3 = "a9e2faa0-cb39-418f-a0b7-d8aad4de672e"
+  ID3D11VideoContext3_GUID = "a9e2faa0-cb39-418f-a0b7-d8aad4de672e"
+  IID_ID3D11VideoContext3 = LibC::GUID.new(0xa9e2faa0_u32, 0xcb39_u16, 0x418f_u16, StaticArray[0xa0_u8, 0xb7_u8, 0xd8_u8, 0xaa_u8, 0xd4_u8, 0xde_u8, 0x67_u8, 0x2e_u8])
   struct ID3D11VideoContext3
     lpVtbl : ID3D11VideoContext3VTbl*
   end
@@ -6775,8 +6775,8 @@ lib LibWin32
     implements_interface : Proc(ID3D11ShaderReflectionType*, ID3D11ShaderReflectionType, HRESULT)
   end
 
-  ID3D11ShaderReflectionType_GUID = LibC::GUID.new("6e6ffa6a-9bae-4613-a51e-91652d508c21")
-  CLSID_ID3D11ShaderReflectionType = "6e6ffa6a-9bae-4613-a51e-91652d508c21"
+  ID3D11ShaderReflectionType_GUID = "6e6ffa6a-9bae-4613-a51e-91652d508c21"
+  IID_ID3D11ShaderReflectionType = LibC::GUID.new(0x6e6ffa6a_u32, 0x9bae_u16, 0x4613_u16, StaticArray[0xa5_u8, 0x1e_u8, 0x91_u8, 0x65_u8, 0x2d_u8, 0x50_u8, 0x8c_u8, 0x21_u8])
   struct ID3D11ShaderReflectionType
     lpVtbl : ID3D11ShaderReflectionTypeVTbl*
   end
@@ -6788,8 +6788,8 @@ lib LibWin32
     get_interface_slot : Proc(ID3D11ShaderReflectionVariable*, UInt32, UInt32)
   end
 
-  ID3D11ShaderReflectionVariable_GUID = LibC::GUID.new("51f23923-f3e5-4bd1-91cb-606177d8db4c")
-  CLSID_ID3D11ShaderReflectionVariable = "51f23923-f3e5-4bd1-91cb-606177d8db4c"
+  ID3D11ShaderReflectionVariable_GUID = "51f23923-f3e5-4bd1-91cb-606177d8db4c"
+  IID_ID3D11ShaderReflectionVariable = LibC::GUID.new(0x51f23923_u32, 0xf3e5_u16, 0x4bd1_u16, StaticArray[0x91_u8, 0xcb_u8, 0x60_u8, 0x61_u8, 0x77_u8, 0xd8_u8, 0xdb_u8, 0x4c_u8])
   struct ID3D11ShaderReflectionVariable
     lpVtbl : ID3D11ShaderReflectionVariableVTbl*
   end
@@ -6800,8 +6800,8 @@ lib LibWin32
     get_variable_by_name : Proc(ID3D11ShaderReflectionConstantBuffer*, PSTR, ID3D11ShaderReflectionVariable)
   end
 
-  ID3D11ShaderReflectionConstantBuffer_GUID = LibC::GUID.new("eb62d63d-93dd-4318-8ae8-c6f83ad371b8")
-  CLSID_ID3D11ShaderReflectionConstantBuffer = "eb62d63d-93dd-4318-8ae8-c6f83ad371b8"
+  ID3D11ShaderReflectionConstantBuffer_GUID = "eb62d63d-93dd-4318-8ae8-c6f83ad371b8"
+  IID_ID3D11ShaderReflectionConstantBuffer = LibC::GUID.new(0xeb62d63d_u32, 0x93dd_u16, 0x4318_u16, StaticArray[0x8a_u8, 0xe8_u8, 0xc6_u8, 0xf8_u8, 0x3a_u8, 0xd3_u8, 0x71_u8, 0xb8_u8])
   struct ID3D11ShaderReflectionConstantBuffer
     lpVtbl : ID3D11ShaderReflectionConstantBufferVTbl*
   end
@@ -6831,8 +6831,8 @@ lib LibWin32
     get_requires_flags : Proc(ID3D11ShaderReflection*, UInt64)
   end
 
-  ID3D11ShaderReflection_GUID = LibC::GUID.new("8d536ca1-0cca-4956-a837-786963755584")
-  CLSID_ID3D11ShaderReflection = "8d536ca1-0cca-4956-a837-786963755584"
+  ID3D11ShaderReflection_GUID = "8d536ca1-0cca-4956-a837-786963755584"
+  IID_ID3D11ShaderReflection = LibC::GUID.new(0x8d536ca1_u32, 0xcca_u16, 0x4956_u16, StaticArray[0xa8_u8, 0x37_u8, 0x78_u8, 0x69_u8, 0x63_u8, 0x75_u8, 0x55_u8, 0x84_u8])
   struct ID3D11ShaderReflection
     lpVtbl : ID3D11ShaderReflectionVTbl*
   end
@@ -6845,8 +6845,8 @@ lib LibWin32
     get_function_by_index : Proc(ID3D11LibraryReflection*, Int32, ID3D11FunctionReflection)
   end
 
-  ID3D11LibraryReflection_GUID = LibC::GUID.new("54384f1b-5b3e-4bb7-ae01-60ba3097cbb6")
-  CLSID_ID3D11LibraryReflection = "54384f1b-5b3e-4bb7-ae01-60ba3097cbb6"
+  ID3D11LibraryReflection_GUID = "54384f1b-5b3e-4bb7-ae01-60ba3097cbb6"
+  IID_ID3D11LibraryReflection = LibC::GUID.new(0x54384f1b_u32, 0x5b3e_u16, 0x4bb7_u16, StaticArray[0xae_u8, 0x1_u8, 0x60_u8, 0xba_u8, 0x30_u8, 0x97_u8, 0xcb_u8, 0xb6_u8])
   struct ID3D11LibraryReflection
     lpVtbl : ID3D11LibraryReflectionVTbl*
   end
@@ -6861,8 +6861,8 @@ lib LibWin32
     get_function_parameter : Proc(ID3D11FunctionReflection*, Int32, ID3D11FunctionParameterReflection)
   end
 
-  ID3D11FunctionReflection_GUID = LibC::GUID.new("207bcecb-d683-4a06-a8a3-9b149b9f73a4")
-  CLSID_ID3D11FunctionReflection = "207bcecb-d683-4a06-a8a3-9b149b9f73a4"
+  ID3D11FunctionReflection_GUID = "207bcecb-d683-4a06-a8a3-9b149b9f73a4"
+  IID_ID3D11FunctionReflection = LibC::GUID.new(0x207bcecb_u32, 0xd683_u16, 0x4a06_u16, StaticArray[0xa8_u8, 0xa3_u8, 0x9b_u8, 0x14_u8, 0x9b_u8, 0x9f_u8, 0x73_u8, 0xa4_u8])
   struct ID3D11FunctionReflection
     lpVtbl : ID3D11FunctionReflectionVTbl*
   end
@@ -6871,8 +6871,8 @@ lib LibWin32
     get_desc : Proc(ID3D11FunctionParameterReflection*, D3D11_PARAMETER_DESC*, HRESULT)
   end
 
-  ID3D11FunctionParameterReflection_GUID = LibC::GUID.new("42757488-334f-47fe-982e-1a65d08cc462")
-  CLSID_ID3D11FunctionParameterReflection = "42757488-334f-47fe-982e-1a65d08cc462"
+  ID3D11FunctionParameterReflection_GUID = "42757488-334f-47fe-982e-1a65d08cc462"
+  IID_ID3D11FunctionParameterReflection = LibC::GUID.new(0x42757488_u32, 0x334f_u16, 0x47fe_u16, StaticArray[0x98_u8, 0x2e_u8, 0x1a_u8, 0x65_u8, 0xd0_u8, 0x8c_u8, 0xc4_u8, 0x62_u8])
   struct ID3D11FunctionParameterReflection
     lpVtbl : ID3D11FunctionParameterReflectionVTbl*
   end
@@ -6893,8 +6893,8 @@ lib LibWin32
     bind_resource_as_unordered_access_view_by_name : Proc(ID3D11ModuleInstance*, PSTR, UInt32, UInt32, HRESULT)
   end
 
-  ID3D11ModuleInstance_GUID = LibC::GUID.new("469e07f7-045a-48d5-aa12-68a478cdf75d")
-  CLSID_ID3D11ModuleInstance = "469e07f7-045a-48d5-aa12-68a478cdf75d"
+  ID3D11ModuleInstance_GUID = "469e07f7-045a-48d5-aa12-68a478cdf75d"
+  IID_ID3D11ModuleInstance = LibC::GUID.new(0x469e07f7_u32, 0x45a_u16, 0x48d5_u16, StaticArray[0xaa_u8, 0x12_u8, 0x68_u8, 0xa4_u8, 0x78_u8, 0xcd_u8, 0xf7_u8, 0x5d_u8])
   struct ID3D11ModuleInstance
     lpVtbl : ID3D11ModuleInstanceVTbl*
   end
@@ -6906,8 +6906,8 @@ lib LibWin32
     create_instance : Proc(ID3D11Module*, PSTR, ID3D11ModuleInstance*, HRESULT)
   end
 
-  ID3D11Module_GUID = LibC::GUID.new("cac701ee-80fc-4122-8242-10b39c8cec34")
-  CLSID_ID3D11Module = "cac701ee-80fc-4122-8242-10b39c8cec34"
+  ID3D11Module_GUID = "cac701ee-80fc-4122-8242-10b39c8cec34"
+  IID_ID3D11Module = LibC::GUID.new(0xcac701ee_u32, 0x80fc_u16, 0x4122_u16, StaticArray[0x82_u8, 0x42_u8, 0x10_u8, 0xb3_u8, 0x9c_u8, 0x8c_u8, 0xec_u8, 0x34_u8])
   struct ID3D11Module
     lpVtbl : ID3D11ModuleVTbl*
   end
@@ -6921,8 +6921,8 @@ lib LibWin32
     add_clip_plane_from_c_buffer : Proc(ID3D11Linker*, UInt32, UInt32, HRESULT)
   end
 
-  ID3D11Linker_GUID = LibC::GUID.new("59a6cd0e-e10d-4c1f-88c0-63aba1daf30e")
-  CLSID_ID3D11Linker = "59a6cd0e-e10d-4c1f-88c0-63aba1daf30e"
+  ID3D11Linker_GUID = "59a6cd0e-e10d-4c1f-88c0-63aba1daf30e"
+  IID_ID3D11Linker = LibC::GUID.new(0x59a6cd0e_u32, 0xe10d_u16, 0x4c1f_u16, StaticArray[0x88_u8, 0xc0_u8, 0x63_u8, 0xab_u8, 0xa1_u8, 0xda_u8, 0xf3_u8, 0xe_u8])
   struct ID3D11Linker
     lpVtbl : ID3D11LinkerVTbl*
   end
@@ -6933,8 +6933,8 @@ lib LibWin32
     release : Proc(ID3D11LinkingNode*, UInt32)
   end
 
-  ID3D11LinkingNode_GUID = LibC::GUID.new("d80dd70c-8d2f-4751-94a1-03c79b3556db")
-  CLSID_ID3D11LinkingNode = "d80dd70c-8d2f-4751-94a1-03c79b3556db"
+  ID3D11LinkingNode_GUID = "d80dd70c-8d2f-4751-94a1-03c79b3556db"
+  IID_ID3D11LinkingNode = LibC::GUID.new(0xd80dd70c_u32, 0x8d2f_u16, 0x4751_u16, StaticArray[0x94_u8, 0xa1_u8, 0x3_u8, 0xc7_u8, 0x9b_u8, 0x35_u8, 0x56_u8, 0xdb_u8])
   struct ID3D11LinkingNode
     lpVtbl : ID3D11LinkingNodeVTbl*
   end
@@ -6953,8 +6953,8 @@ lib LibWin32
     generate_hlsl : Proc(ID3D11FunctionLinkingGraph*, UInt32, ID3DBlob*, HRESULT)
   end
 
-  ID3D11FunctionLinkingGraph_GUID = LibC::GUID.new("54133220-1ce8-43d3-8236-9855c5ceecff")
-  CLSID_ID3D11FunctionLinkingGraph = "54133220-1ce8-43d3-8236-9855c5ceecff"
+  ID3D11FunctionLinkingGraph_GUID = "54133220-1ce8-43d3-8236-9855c5ceecff"
+  IID_ID3D11FunctionLinkingGraph = LibC::GUID.new(0x54133220_u32, 0x1ce8_u16, 0x43d3_u16, StaticArray[0x82_u8, 0x36_u8, 0x98_u8, 0x55_u8, 0xc5_u8, 0xce_u8, 0xec_u8, 0xff_u8])
   struct ID3D11FunctionLinkingGraph
     lpVtbl : ID3D11FunctionLinkingGraphVTbl*
   end
@@ -6973,8 +6973,8 @@ lib LibWin32
     get_read_register : Proc(ID3D11ShaderTrace*, UInt32, UInt32, D3D11_TRACE_REGISTER*, D3D11_TRACE_VALUE*, HRESULT)
   end
 
-  ID3D11ShaderTrace_GUID = LibC::GUID.new("36b013e6-2811-4845-baa7-d623fe0df104")
-  CLSID_ID3D11ShaderTrace = "36b013e6-2811-4845-baa7-d623fe0df104"
+  ID3D11ShaderTrace_GUID = "36b013e6-2811-4845-baa7-d623fe0df104"
+  IID_ID3D11ShaderTrace = LibC::GUID.new(0x36b013e6_u32, 0x2811_u16, 0x4845_u16, StaticArray[0xba_u8, 0xa7_u8, 0xd6_u8, 0x23_u8, 0xfe_u8, 0xd_u8, 0xf1_u8, 0x4_u8])
   struct ID3D11ShaderTrace
     lpVtbl : ID3D11ShaderTraceVTbl*
   end
@@ -6986,8 +6986,8 @@ lib LibWin32
     create_shader_trace : Proc(ID3D11ShaderTraceFactory*, IUnknown, D3D11_SHADER_TRACE_DESC*, ID3D11ShaderTrace*, HRESULT)
   end
 
-  ID3D11ShaderTraceFactory_GUID = LibC::GUID.new("1fbad429-66ab-41cc-9617-667ac10e4459")
-  CLSID_ID3D11ShaderTraceFactory = "1fbad429-66ab-41cc-9617-667ac10e4459"
+  ID3D11ShaderTraceFactory_GUID = "1fbad429-66ab-41cc-9617-667ac10e4459"
+  IID_ID3D11ShaderTraceFactory = LibC::GUID.new(0x1fbad429_u32, 0x66ab_u16, 0x41cc_u16, StaticArray[0x96_u8, 0x17_u8, 0x66_u8, 0x7a_u8, 0xc1_u8, 0xe_u8, 0x44_u8, 0x59_u8])
   struct ID3D11ShaderTraceFactory
     lpVtbl : ID3D11ShaderTraceFactoryVTbl*
   end
@@ -7001,8 +7001,8 @@ lib LibWin32
     multiscan : Proc(ID3DX11Scan*, D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, UInt32, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)
   end
 
-  ID3DX11Scan_GUID = LibC::GUID.new("5089b68f-e71d-4d38-be8e-f363b95a9405")
-  CLSID_ID3DX11Scan = "5089b68f-e71d-4d38-be8e-f363b95a9405"
+  ID3DX11Scan_GUID = "5089b68f-e71d-4d38-be8e-f363b95a9405"
+  IID_ID3DX11Scan = LibC::GUID.new(0x5089b68f_u32, 0xe71d_u16, 0x4d38_u16, StaticArray[0xbe_u8, 0x8e_u8, 0xf3_u8, 0x63_u8, 0xb9_u8, 0x5a_u8, 0x94_u8, 0x5_u8])
   struct ID3DX11Scan
     lpVtbl : ID3DX11ScanVTbl*
   end
@@ -7015,8 +7015,8 @@ lib LibWin32
     seg_scan : Proc(ID3DX11SegmentedScan*, D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)
   end
 
-  ID3DX11SegmentedScan_GUID = LibC::GUID.new("a915128c-d954-4c79-bfe1-64db923194d6")
-  CLSID_ID3DX11SegmentedScan = "a915128c-d954-4c79-bfe1-64db923194d6"
+  ID3DX11SegmentedScan_GUID = "a915128c-d954-4c79-bfe1-64db923194d6"
+  IID_ID3DX11SegmentedScan = LibC::GUID.new(0xa915128c_u32, 0xd954_u16, 0x4c79_u16, StaticArray[0xbf_u8, 0xe1_u8, 0x64_u8, 0xdb_u8, 0x92_u8, 0x31_u8, 0x94_u8, 0xd6_u8])
   struct ID3DX11SegmentedScan
     lpVtbl : ID3DX11SegmentedScanVTbl*
   end
@@ -7034,8 +7034,8 @@ lib LibWin32
     inverse_transform : Proc(ID3DX11FFT*, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView*, HRESULT)
   end
 
-  ID3DX11FFT_GUID = LibC::GUID.new("b3f7a938-4c93-4310-a675-b30d6de50553")
-  CLSID_ID3DX11FFT = "b3f7a938-4c93-4310-a675-b30d6de50553"
+  ID3DX11FFT_GUID = "b3f7a938-4c93-4310-a675-b30d6de50553"
+  IID_ID3DX11FFT = LibC::GUID.new(0xb3f7a938_u32, 0x4c93_u16, 0x4310_u16, StaticArray[0xa6_u8, 0x75_u8, 0xb3_u8, 0xd_u8, 0x6d_u8, 0xe5_u8, 0x5_u8, 0x53_u8])
   struct ID3DX11FFT
     lpVtbl : ID3DX11FFTVTbl*
   end

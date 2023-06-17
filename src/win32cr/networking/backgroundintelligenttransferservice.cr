@@ -221,18 +221,18 @@ lib LibWin32
   BITS_MC_FATAL_IGD_ERROR = -2145828855_i32
   BITS_MC_PEERCACHING_PORT = -2145828854_i32
   BITS_MC_WSD_PORT = -2145828853_i32
-  BackgroundCopyManager = LibC::GUID.new(0x4991d34b_u32, 0x80a1_u16, 0x4291_u16, StaticArray[0x83_u8, 0xb6_u8, 0x33_u8, 0x28_u8, 0x36_u8, 0x6b_u8, 0x90_u8, 0x97_u8])
-  BackgroundCopyManager1_5 = LibC::GUID.new(0xf087771f_u32, 0xd74f_u16, 0x4c1a_u16, StaticArray[0xbb_u8, 0x8a_u8, 0xe1_u8, 0x6a_u8, 0xca_u8, 0x91_u8, 0x24_u8, 0xea_u8])
-  BackgroundCopyManager2_0 = LibC::GUID.new(0x6d18ad12_u32, 0xbde3_u16, 0x4393_u16, StaticArray[0xb3_u8, 0x11_u8, 0x9_u8, 0x9c_u8, 0x34_u8, 0x6e_u8, 0x6d_u8, 0xf9_u8])
-  BackgroundCopyManager2_5 = LibC::GUID.new(0x3ca98d6_u32, 0xff5d_u16, 0x49b8_u16, StaticArray[0xab_u8, 0xc6_u8, 0x3_u8, 0xdd_u8, 0x84_u8, 0x12_u8, 0x70_u8, 0x20_u8])
-  BackgroundCopyManager3_0 = LibC::GUID.new(0x659cdea7_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
-  BackgroundCopyManager4_0 = LibC::GUID.new(0xbb6df56b_u32, 0xcace_u16, 0x11dc_u16, StaticArray[0x99_u8, 0x92_u8, 0x0_u8, 0x19_u8, 0xb9_u8, 0x3a_u8, 0x3a_u8, 0x84_u8])
-  BackgroundCopyManager5_0 = LibC::GUID.new(0x1ecca34c_u32, 0xe88a_u16, 0x44e3_u16, StaticArray[0x8d_u8, 0x6a_u8, 0x89_u8, 0x21_u8, 0xbd_u8, 0xe9_u8, 0xe4_u8, 0x52_u8])
-  BackgroundCopyManager10_1 = LibC::GUID.new(0x4bd3e4e1_u32, 0x7bd4_u16, 0x4a2b_u16, StaticArray[0x99_u8, 0x64_u8, 0x49_u8, 0x64_u8, 0x0_u8, 0xde_u8, 0x51_u8, 0x93_u8])
-  BackgroundCopyManager10_2 = LibC::GUID.new(0x4575438f_u32, 0xa6c8_u16, 0x4976_u16, StaticArray[0xb0_u8, 0xfe_u8, 0x2f_u8, 0x26_u8, 0xb8_u8, 0xd_u8, 0x95_u8, 0x9e_u8])
-  BackgroundCopyManager10_3 = LibC::GUID.new(0x5fd42ad5_u32, 0xc04e_u16, 0x4d36_u16, StaticArray[0xad_u8, 0xc7_u8, 0xe0_u8, 0x8f_u8, 0xf1_u8, 0x57_u8, 0x37_u8, 0xad_u8])
-  BITSExtensionSetupFactory = LibC::GUID.new(0xefbbab68_u32, 0x7286_u16, 0x4783_u16, StaticArray[0x94_u8, 0xbf_u8, 0x94_u8, 0x61_u8, 0xd8_u8, 0xb7_u8, 0xe7_u8, 0xe9_u8])
-  BackgroundCopyQMgr = LibC::GUID.new(0x69ad4aee_u32, 0x51be_u16, 0x439b_u16, StaticArray[0xa9_u8, 0x2c_u8, 0x86_u8, 0xae_u8, 0x49_u8, 0xe_u8, 0x8b_u8, 0x30_u8])
+  CLSID_BackgroundCopyManager = LibC::GUID.new(0x4991d34b_u32, 0x80a1_u16, 0x4291_u16, StaticArray[0x83_u8, 0xb6_u8, 0x33_u8, 0x28_u8, 0x36_u8, 0x6b_u8, 0x90_u8, 0x97_u8])
+  CLSID_BackgroundCopyManager1_5 = LibC::GUID.new(0xf087771f_u32, 0xd74f_u16, 0x4c1a_u16, StaticArray[0xbb_u8, 0x8a_u8, 0xe1_u8, 0x6a_u8, 0xca_u8, 0x91_u8, 0x24_u8, 0xea_u8])
+  CLSID_BackgroundCopyManager2_0 = LibC::GUID.new(0x6d18ad12_u32, 0xbde3_u16, 0x4393_u16, StaticArray[0xb3_u8, 0x11_u8, 0x9_u8, 0x9c_u8, 0x34_u8, 0x6e_u8, 0x6d_u8, 0xf9_u8])
+  CLSID_BackgroundCopyManager2_5 = LibC::GUID.new(0x3ca98d6_u32, 0xff5d_u16, 0x49b8_u16, StaticArray[0xab_u8, 0xc6_u8, 0x3_u8, 0xdd_u8, 0x84_u8, 0x12_u8, 0x70_u8, 0x20_u8])
+  CLSID_BackgroundCopyManager3_0 = LibC::GUID.new(0x659cdea7_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
+  CLSID_BackgroundCopyManager4_0 = LibC::GUID.new(0xbb6df56b_u32, 0xcace_u16, 0x11dc_u16, StaticArray[0x99_u8, 0x92_u8, 0x0_u8, 0x19_u8, 0xb9_u8, 0x3a_u8, 0x3a_u8, 0x84_u8])
+  CLSID_BackgroundCopyManager5_0 = LibC::GUID.new(0x1ecca34c_u32, 0xe88a_u16, 0x44e3_u16, StaticArray[0x8d_u8, 0x6a_u8, 0x89_u8, 0x21_u8, 0xbd_u8, 0xe9_u8, 0xe4_u8, 0x52_u8])
+  CLSID_BackgroundCopyManager10_1 = LibC::GUID.new(0x4bd3e4e1_u32, 0x7bd4_u16, 0x4a2b_u16, StaticArray[0x99_u8, 0x64_u8, 0x49_u8, 0x64_u8, 0x0_u8, 0xde_u8, 0x51_u8, 0x93_u8])
+  CLSID_BackgroundCopyManager10_2 = LibC::GUID.new(0x4575438f_u32, 0xa6c8_u16, 0x4976_u16, StaticArray[0xb0_u8, 0xfe_u8, 0x2f_u8, 0x26_u8, 0xb8_u8, 0xd_u8, 0x95_u8, 0x9e_u8])
+  CLSID_BackgroundCopyManager10_3 = LibC::GUID.new(0x5fd42ad5_u32, 0xc04e_u16, 0x4d36_u16, StaticArray[0xad_u8, 0xc7_u8, 0xe0_u8, 0x8f_u8, 0xf1_u8, 0x57_u8, 0x37_u8, 0xad_u8])
+  CLSID_BITSExtensionSetupFactory = LibC::GUID.new(0xefbbab68_u32, 0x7286_u16, 0x4783_u16, StaticArray[0x94_u8, 0xbf_u8, 0x94_u8, 0x61_u8, 0xd8_u8, 0xb7_u8, 0xe7_u8, 0xe9_u8])
+  CLSID_BackgroundCopyQMgr = LibC::GUID.new(0x69ad4aee_u32, 0x51be_u16, 0x439b_u16, StaticArray[0xa9_u8, 0x2c_u8, 0x86_u8, 0xae_u8, 0x49_u8, 0xe_u8, 0x8b_u8, 0x30_u8])
 
 
   enum BG_TOKEN : UInt32
@@ -414,8 +414,8 @@ lib LibWin32
     get_progress : Proc(IBackgroundCopyFile*, BG_FILE_PROGRESS*, HRESULT)
   end
 
-  IBackgroundCopyFile_GUID = LibC::GUID.new("01b7bd23-fb88-4a77-8490-5891d3e4653a")
-  CLSID_IBackgroundCopyFile = "01b7bd23-fb88-4a77-8490-5891d3e4653a"
+  IBackgroundCopyFile_GUID = "01b7bd23-fb88-4a77-8490-5891d3e4653a"
+  IID_IBackgroundCopyFile = LibC::GUID.new(0x1b7bd23_u32, 0xfb88_u16, 0x4a77_u16, StaticArray[0x84_u8, 0x90_u8, 0x58_u8, 0x91_u8, 0xd3_u8, 0xe4_u8, 0x65_u8, 0x3a_u8])
   struct IBackgroundCopyFile
     lpVtbl : IBackgroundCopyFileVTbl*
   end
@@ -431,8 +431,8 @@ lib LibWin32
     get_count : Proc(IEnumBackgroundCopyFiles*, UInt32*, HRESULT)
   end
 
-  IEnumBackgroundCopyFiles_GUID = LibC::GUID.new("ca51e165-c365-424c-8d41-24aaa4ff3c40")
-  CLSID_IEnumBackgroundCopyFiles = "ca51e165-c365-424c-8d41-24aaa4ff3c40"
+  IEnumBackgroundCopyFiles_GUID = "ca51e165-c365-424c-8d41-24aaa4ff3c40"
+  IID_IEnumBackgroundCopyFiles = LibC::GUID.new(0xca51e165_u32, 0xc365_u16, 0x424c_u16, StaticArray[0x8d_u8, 0x41_u8, 0x24_u8, 0xaa_u8, 0xa4_u8, 0xff_u8, 0x3c_u8, 0x40_u8])
   struct IEnumBackgroundCopyFiles
     lpVtbl : IEnumBackgroundCopyFilesVTbl*
   end
@@ -448,8 +448,8 @@ lib LibWin32
     get_protocol : Proc(IBackgroundCopyError*, LibC::LPWSTR*, HRESULT)
   end
 
-  IBackgroundCopyError_GUID = LibC::GUID.new("19c613a0-fcb8-4f28-81ae-897c3d078f81")
-  CLSID_IBackgroundCopyError = "19c613a0-fcb8-4f28-81ae-897c3d078f81"
+  IBackgroundCopyError_GUID = "19c613a0-fcb8-4f28-81ae-897c3d078f81"
+  IID_IBackgroundCopyError = LibC::GUID.new(0x19c613a0_u32, 0xfcb8_u16, 0x4f28_u16, StaticArray[0x81_u8, 0xae_u8, 0x89_u8, 0x7c_u8, 0x3d_u8, 0x7_u8, 0x8f_u8, 0x81_u8])
   struct IBackgroundCopyError
     lpVtbl : IBackgroundCopyErrorVTbl*
   end
@@ -492,8 +492,8 @@ lib LibWin32
     take_ownership : Proc(IBackgroundCopyJob*, HRESULT)
   end
 
-  IBackgroundCopyJob_GUID = LibC::GUID.new("37668d37-507e-4160-9316-26306d150b12")
-  CLSID_IBackgroundCopyJob = "37668d37-507e-4160-9316-26306d150b12"
+  IBackgroundCopyJob_GUID = "37668d37-507e-4160-9316-26306d150b12"
+  IID_IBackgroundCopyJob = LibC::GUID.new(0x37668d37_u32, 0x507e_u16, 0x4160_u16, StaticArray[0x93_u8, 0x16_u8, 0x26_u8, 0x30_u8, 0x6d_u8, 0x15_u8, 0xb_u8, 0x12_u8])
   struct IBackgroundCopyJob
     lpVtbl : IBackgroundCopyJobVTbl*
   end
@@ -509,8 +509,8 @@ lib LibWin32
     get_count : Proc(IEnumBackgroundCopyJobs*, UInt32*, HRESULT)
   end
 
-  IEnumBackgroundCopyJobs_GUID = LibC::GUID.new("1af4f612-3b71-466f-8f58-7b6f73ac57ad")
-  CLSID_IEnumBackgroundCopyJobs = "1af4f612-3b71-466f-8f58-7b6f73ac57ad"
+  IEnumBackgroundCopyJobs_GUID = "1af4f612-3b71-466f-8f58-7b6f73ac57ad"
+  IID_IEnumBackgroundCopyJobs = LibC::GUID.new(0x1af4f612_u32, 0x3b71_u16, 0x466f_u16, StaticArray[0x8f_u8, 0x58_u8, 0x7b_u8, 0x6f_u8, 0x73_u8, 0xac_u8, 0x57_u8, 0xad_u8])
   struct IEnumBackgroundCopyJobs
     lpVtbl : IEnumBackgroundCopyJobsVTbl*
   end
@@ -524,8 +524,8 @@ lib LibWin32
     job_modification : Proc(IBackgroundCopyCallback*, IBackgroundCopyJob, UInt32, HRESULT)
   end
 
-  IBackgroundCopyCallback_GUID = LibC::GUID.new("97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22")
-  CLSID_IBackgroundCopyCallback = "97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22"
+  IBackgroundCopyCallback_GUID = "97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22"
+  IID_IBackgroundCopyCallback = LibC::GUID.new(0x97ea99c7_u32, 0x186_u16, 0x4ad4_u16, StaticArray[0x8d_u8, 0xf9_u8, 0xc5_u8, 0xb4_u8, 0xe0_u8, 0xed_u8, 0x6b_u8, 0x22_u8])
   struct IBackgroundCopyCallback
     lpVtbl : IBackgroundCopyCallbackVTbl*
   end
@@ -542,8 +542,8 @@ lib LibWin32
     finish_job_modification : Proc(AsyncIBackgroundCopyCallback*, HRESULT)
   end
 
-  AsyncIBackgroundCopyCallback_GUID = LibC::GUID.new("ca29d251-b4bb-4679-a3d9-ae8006119d54")
-  CLSID_AsyncIBackgroundCopyCallback = "ca29d251-b4bb-4679-a3d9-ae8006119d54"
+  AsyncIBackgroundCopyCallback_GUID = "ca29d251-b4bb-4679-a3d9-ae8006119d54"
+  IID_AsyncIBackgroundCopyCallback = LibC::GUID.new(0xca29d251_u32, 0xb4bb_u16, 0x4679_u16, StaticArray[0xa3_u8, 0xd9_u8, 0xae_u8, 0x80_u8, 0x6_u8, 0x11_u8, 0x9d_u8, 0x54_u8])
   struct AsyncIBackgroundCopyCallback
     lpVtbl : AsyncIBackgroundCopyCallbackVTbl*
   end
@@ -558,8 +558,8 @@ lib LibWin32
     get_error_description : Proc(IBackgroundCopyManager*, HRESULT, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
-  IBackgroundCopyManager_GUID = LibC::GUID.new("5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c")
-  CLSID_IBackgroundCopyManager = "5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c"
+  IBackgroundCopyManager_GUID = "5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c"
+  IID_IBackgroundCopyManager = LibC::GUID.new(0x5ce34c0d_u32, 0xdc9_u16, 0x4c1f_u16, StaticArray[0x89_u8, 0x7c_u8, 0xda_u8, 0xa1_u8, 0xb7_u8, 0x8c_u8, 0xee_u8, 0x7c_u8])
   struct IBackgroundCopyManager
     lpVtbl : IBackgroundCopyManagerVTbl*
   end
@@ -610,8 +610,8 @@ lib LibWin32
     remove_credentials : Proc(IBackgroundCopyJob2*, BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)
   end
 
-  IBackgroundCopyJob2_GUID = LibC::GUID.new("54b50739-686f-45eb-9dff-d6a9a0faa9af")
-  CLSID_IBackgroundCopyJob2 = "54b50739-686f-45eb-9dff-d6a9a0faa9af"
+  IBackgroundCopyJob2_GUID = "54b50739-686f-45eb-9dff-d6a9a0faa9af"
+  IID_IBackgroundCopyJob2 = LibC::GUID.new(0x54b50739_u32, 0x686f_u16, 0x45eb_u16, StaticArray[0x9d_u8, 0xff_u8, 0xd6_u8, 0xa9_u8, 0xa0_u8, 0xfa_u8, 0xa9_u8, 0xaf_u8])
   struct IBackgroundCopyJob2
     lpVtbl : IBackgroundCopyJob2VTbl*
   end
@@ -666,8 +666,8 @@ lib LibWin32
     get_file_acl_flags : Proc(IBackgroundCopyJob3*, UInt32*, HRESULT)
   end
 
-  IBackgroundCopyJob3_GUID = LibC::GUID.new("443c8934-90ff-48ed-bcde-26f5c7450042")
-  CLSID_IBackgroundCopyJob3 = "443c8934-90ff-48ed-bcde-26f5c7450042"
+  IBackgroundCopyJob3_GUID = "443c8934-90ff-48ed-bcde-26f5c7450042"
+  IID_IBackgroundCopyJob3 = LibC::GUID.new(0x443c8934_u32, 0x90ff_u16, 0x48ed_u16, StaticArray[0xbc_u8, 0xde_u8, 0x26_u8, 0xf5_u8, 0xc7_u8, 0x45_u8, 0x0_u8, 0x42_u8])
   struct IBackgroundCopyJob3
     lpVtbl : IBackgroundCopyJob3VTbl*
   end
@@ -683,8 +683,8 @@ lib LibWin32
     set_remote_name : Proc(IBackgroundCopyFile2*, LibC::LPWSTR, HRESULT)
   end
 
-  IBackgroundCopyFile2_GUID = LibC::GUID.new("83e81b93-0873-474d-8a8c-f2018b1a939c")
-  CLSID_IBackgroundCopyFile2 = "83e81b93-0873-474d-8a8c-f2018b1a939c"
+  IBackgroundCopyFile2_GUID = "83e81b93-0873-474d-8a8c-f2018b1a939c"
+  IID_IBackgroundCopyFile2 = LibC::GUID.new(0x83e81b93_u32, 0x873_u16, 0x474d_u16, StaticArray[0x8a_u8, 0x8c_u8, 0xf2_u8, 0x1_u8, 0x8b_u8, 0x1a_u8, 0x93_u8, 0x9c_u8])
   struct IBackgroundCopyFile2
     lpVtbl : IBackgroundCopyFile2VTbl*
   end
@@ -703,8 +703,8 @@ lib LibWin32
     get_security_flags : Proc(IBackgroundCopyJobHttpOptions*, UInt32*, HRESULT)
   end
 
-  IBackgroundCopyJobHttpOptions_GUID = LibC::GUID.new("f1bd1079-9f01-4bdc-8036-f09b70095066")
-  CLSID_IBackgroundCopyJobHttpOptions = "f1bd1079-9f01-4bdc-8036-f09b70095066"
+  IBackgroundCopyJobHttpOptions_GUID = "f1bd1079-9f01-4bdc-8036-f09b70095066"
+  IID_IBackgroundCopyJobHttpOptions = LibC::GUID.new(0xf1bd1079_u32, 0x9f01_u16, 0x4bdc_u16, StaticArray[0x80_u8, 0x36_u8, 0xf0_u8, 0x9b_u8, 0x70_u8, 0x9_u8, 0x50_u8, 0x66_u8])
   struct IBackgroundCopyJobHttpOptions
     lpVtbl : IBackgroundCopyJobHttpOptionsVTbl*
   end
@@ -722,8 +722,8 @@ lib LibWin32
     get_file_ranges : Proc(IBitsPeerCacheRecord*, UInt32*, BG_FILE_RANGE**, HRESULT)
   end
 
-  IBitsPeerCacheRecord_GUID = LibC::GUID.new("659cdeaf-489e-11d9-a9cd-000d56965251")
-  CLSID_IBitsPeerCacheRecord = "659cdeaf-489e-11d9-a9cd-000d56965251"
+  IBitsPeerCacheRecord_GUID = "659cdeaf-489e-11d9-a9cd-000d56965251"
+  IID_IBitsPeerCacheRecord = LibC::GUID.new(0x659cdeaf_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
   struct IBitsPeerCacheRecord
     lpVtbl : IBitsPeerCacheRecordVTbl*
   end
@@ -739,8 +739,8 @@ lib LibWin32
     get_count : Proc(IEnumBitsPeerCacheRecords*, UInt32*, HRESULT)
   end
 
-  IEnumBitsPeerCacheRecords_GUID = LibC::GUID.new("659cdea4-489e-11d9-a9cd-000d56965251")
-  CLSID_IEnumBitsPeerCacheRecords = "659cdea4-489e-11d9-a9cd-000d56965251"
+  IEnumBitsPeerCacheRecords_GUID = "659cdea4-489e-11d9-a9cd-000d56965251"
+  IID_IEnumBitsPeerCacheRecords = LibC::GUID.new(0x659cdea4_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
   struct IEnumBitsPeerCacheRecords
     lpVtbl : IEnumBitsPeerCacheRecordsVTbl*
   end
@@ -754,8 +754,8 @@ lib LibWin32
     is_available : Proc(IBitsPeer*, LibC::BOOL*, HRESULT)
   end
 
-  IBitsPeer_GUID = LibC::GUID.new("659cdea2-489e-11d9-a9cd-000d56965251")
-  CLSID_IBitsPeer = "659cdea2-489e-11d9-a9cd-000d56965251"
+  IBitsPeer_GUID = "659cdea2-489e-11d9-a9cd-000d56965251"
+  IID_IBitsPeer = LibC::GUID.new(0x659cdea2_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
   struct IBitsPeer
     lpVtbl : IBitsPeerVTbl*
   end
@@ -771,8 +771,8 @@ lib LibWin32
     get_count : Proc(IEnumBitsPeers*, UInt32*, HRESULT)
   end
 
-  IEnumBitsPeers_GUID = LibC::GUID.new("659cdea5-489e-11d9-a9cd-000d56965251")
-  CLSID_IEnumBitsPeers = "659cdea5-489e-11d9-a9cd-000d56965251"
+  IEnumBitsPeers_GUID = "659cdea5-489e-11d9-a9cd-000d56965251"
+  IID_IEnumBitsPeers = LibC::GUID.new(0x659cdea5_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
   struct IEnumBitsPeers
     lpVtbl : IEnumBitsPeersVTbl*
   end
@@ -797,8 +797,8 @@ lib LibWin32
     discover_peers : Proc(IBitsPeerCacheAdministration*, HRESULT)
   end
 
-  IBitsPeerCacheAdministration_GUID = LibC::GUID.new("659cdead-489e-11d9-a9cd-000d56965251")
-  CLSID_IBitsPeerCacheAdministration = "659cdead-489e-11d9-a9cd-000d56965251"
+  IBitsPeerCacheAdministration_GUID = "659cdead-489e-11d9-a9cd-000d56965251"
+  IID_IBitsPeerCacheAdministration = LibC::GUID.new(0x659cdead_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
   struct IBitsPeerCacheAdministration
     lpVtbl : IBitsPeerCacheAdministrationVTbl*
   end
@@ -859,8 +859,8 @@ lib LibWin32
     get_maximum_download_time : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
   end
 
-  IBackgroundCopyJob4_GUID = LibC::GUID.new("659cdeae-489e-11d9-a9cd-000d56965251")
-  CLSID_IBackgroundCopyJob4 = "659cdeae-489e-11d9-a9cd-000d56965251"
+  IBackgroundCopyJob4_GUID = "659cdeae-489e-11d9-a9cd-000d56965251"
+  IID_IBackgroundCopyJob4 = LibC::GUID.new(0x659cdeae_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
   struct IBackgroundCopyJob4
     lpVtbl : IBackgroundCopyJob4VTbl*
   end
@@ -880,8 +880,8 @@ lib LibWin32
     is_downloaded_from_peer : Proc(IBackgroundCopyFile3*, LibC::BOOL*, HRESULT)
   end
 
-  IBackgroundCopyFile3_GUID = LibC::GUID.new("659cdeaa-489e-11d9-a9cd-000d56965251")
-  CLSID_IBackgroundCopyFile3 = "659cdeaa-489e-11d9-a9cd-000d56965251"
+  IBackgroundCopyFile3_GUID = "659cdeaa-489e-11d9-a9cd-000d56965251"
+  IID_IBackgroundCopyFile3 = LibC::GUID.new(0x659cdeaa_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
   struct IBackgroundCopyFile3
     lpVtbl : IBackgroundCopyFile3VTbl*
   end
@@ -896,8 +896,8 @@ lib LibWin32
     file_transferred : Proc(IBackgroundCopyCallback2*, IBackgroundCopyJob, IBackgroundCopyFile, HRESULT)
   end
 
-  IBackgroundCopyCallback2_GUID = LibC::GUID.new("659cdeac-489e-11d9-a9cd-000d56965251")
-  CLSID_IBackgroundCopyCallback2 = "659cdeac-489e-11d9-a9cd-000d56965251"
+  IBackgroundCopyCallback2_GUID = "659cdeac-489e-11d9-a9cd-000d56965251"
+  IID_IBackgroundCopyCallback2 = LibC::GUID.new(0x659cdeac_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
   struct IBackgroundCopyCallback2
     lpVtbl : IBackgroundCopyCallback2VTbl*
   end
@@ -913,8 +913,8 @@ lib LibWin32
     get_helper_token_sid : Proc(IBitsTokenOptions*, LibC::LPWSTR*, HRESULT)
   end
 
-  IBitsTokenOptions_GUID = LibC::GUID.new("9a2584c3-f7d2-457a-9a5e-22b67bffc7d2")
-  CLSID_IBitsTokenOptions = "9a2584c3-f7d2-457a-9a5e-22b67bffc7d2"
+  IBitsTokenOptions_GUID = "9a2584c3-f7d2-457a-9a5e-22b67bffc7d2"
+  IID_IBitsTokenOptions = LibC::GUID.new(0x9a2584c3_u32, 0xf7d2_u16, 0x457a_u16, StaticArray[0x9a_u8, 0x5e_u8, 0x22_u8, 0xb6_u8, 0x7b_u8, 0xff_u8, 0xc7_u8, 0xd2_u8])
   struct IBitsTokenOptions
     lpVtbl : IBitsTokenOptionsVTbl*
   end
@@ -935,8 +935,8 @@ lib LibWin32
     get_peer_download_stats : Proc(IBackgroundCopyFile4*, UInt64*, UInt64*, HRESULT)
   end
 
-  IBackgroundCopyFile4_GUID = LibC::GUID.new("ef7e0655-7888-4960-b0e5-730846e03492")
-  CLSID_IBackgroundCopyFile4 = "ef7e0655-7888-4960-b0e5-730846e03492"
+  IBackgroundCopyFile4_GUID = "ef7e0655-7888-4960-b0e5-730846e03492"
+  IID_IBackgroundCopyFile4 = LibC::GUID.new(0xef7e0655_u32, 0x7888_u16, 0x4960_u16, StaticArray[0xb0_u8, 0xe5_u8, 0x73_u8, 0x8_u8, 0x46_u8, 0xe0_u8, 0x34_u8, 0x92_u8])
   struct IBackgroundCopyFile4
     lpVtbl : IBackgroundCopyFile4VTbl*
   end
@@ -999,8 +999,8 @@ lib LibWin32
     get_property : Proc(IBackgroundCopyJob5*, BITS_JOB_PROPERTY_ID, BITS_JOB_PROPERTY_VALUE*, HRESULT)
   end
 
-  IBackgroundCopyJob5_GUID = LibC::GUID.new("e847030c-bbba-4657-af6d-484aa42bf1fe")
-  CLSID_IBackgroundCopyJob5 = "e847030c-bbba-4657-af6d-484aa42bf1fe"
+  IBackgroundCopyJob5_GUID = "e847030c-bbba-4657-af6d-484aa42bf1fe"
+  IID_IBackgroundCopyJob5 = LibC::GUID.new(0xe847030c_u32, 0xbbba_u16, 0x4657_u16, StaticArray[0xaf_u8, 0x6d_u8, 0x48_u8, 0x4a_u8, 0xa4_u8, 0x2b_u8, 0xf1_u8, 0xfe_u8])
   struct IBackgroundCopyJob5
     lpVtbl : IBackgroundCopyJob5VTbl*
   end
@@ -1023,8 +1023,8 @@ lib LibWin32
     get_property : Proc(IBackgroundCopyFile5*, BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE*, HRESULT)
   end
 
-  IBackgroundCopyFile5_GUID = LibC::GUID.new("85c1657f-dafc-40e8-8834-df18ea25717e")
-  CLSID_IBackgroundCopyFile5 = "85c1657f-dafc-40e8-8834-df18ea25717e"
+  IBackgroundCopyFile5_GUID = "85c1657f-dafc-40e8-8834-df18ea25717e"
+  IID_IBackgroundCopyFile5 = LibC::GUID.new(0x85c1657f_u32, 0xdafc_u16, 0x40e8_u16, StaticArray[0x88_u8, 0x34_u8, 0xdf_u8, 0x18_u8, 0xea_u8, 0x25_u8, 0x71_u8, 0x7e_u8])
   struct IBackgroundCopyFile5
     lpVtbl : IBackgroundCopyFile5VTbl*
   end
@@ -1040,8 +1040,8 @@ lib LibWin32
     file_ranges_transferred : Proc(IBackgroundCopyCallback3*, IBackgroundCopyJob, IBackgroundCopyFile, UInt32, BG_FILE_RANGE*, HRESULT)
   end
 
-  IBackgroundCopyCallback3_GUID = LibC::GUID.new("98c97bd2-e32b-4ad8-a528-95fd8b16bd42")
-  CLSID_IBackgroundCopyCallback3 = "98c97bd2-e32b-4ad8-a528-95fd8b16bd42"
+  IBackgroundCopyCallback3_GUID = "98c97bd2-e32b-4ad8-a528-95fd8b16bd42"
+  IID_IBackgroundCopyCallback3 = LibC::GUID.new(0x98c97bd2_u32, 0xe32b_u16, 0x4ad8_u16, StaticArray[0xa5_u8, 0x28_u8, 0x95_u8, 0xfd_u8, 0x8b_u8, 0x16_u8, 0xbd_u8, 0x42_u8])
   struct IBackgroundCopyCallback3
     lpVtbl : IBackgroundCopyCallback3VTbl*
   end
@@ -1067,8 +1067,8 @@ lib LibWin32
     get_filled_file_ranges : Proc(IBackgroundCopyFile6*, UInt32*, BG_FILE_RANGE**, HRESULT)
   end
 
-  IBackgroundCopyFile6_GUID = LibC::GUID.new("cf6784f7-d677-49fd-9368-cb47aee9d1ad")
-  CLSID_IBackgroundCopyFile6 = "cf6784f7-d677-49fd-9368-cb47aee9d1ad"
+  IBackgroundCopyFile6_GUID = "cf6784f7-d677-49fd-9368-cb47aee9d1ad"
+  IID_IBackgroundCopyFile6 = LibC::GUID.new(0xcf6784f7_u32, 0xd677_u16, 0x49fd_u16, StaticArray[0x93_u8, 0x68_u8, 0xcb_u8, 0x47_u8, 0xae_u8, 0xe9_u8, 0xd1_u8, 0xad_u8])
   struct IBackgroundCopyFile6
     lpVtbl : IBackgroundCopyFile6VTbl*
   end
@@ -1089,8 +1089,8 @@ lib LibWin32
     get_http_method : Proc(IBackgroundCopyJobHttpOptions2*, LibC::LPWSTR*, HRESULT)
   end
 
-  IBackgroundCopyJobHttpOptions2_GUID = LibC::GUID.new("b591a192-a405-4fc3-8323-4c5c542578fc")
-  CLSID_IBackgroundCopyJobHttpOptions2 = "b591a192-a405-4fc3-8323-4c5c542578fc"
+  IBackgroundCopyJobHttpOptions2_GUID = "b591a192-a405-4fc3-8323-4c5c542578fc"
+  IID_IBackgroundCopyJobHttpOptions2 = LibC::GUID.new(0xb591a192_u32, 0xa405_u16, 0x4fc3_u16, StaticArray[0x83_u8, 0x23_u8, 0x4c_u8, 0x5c_u8, 0x54_u8, 0x25_u8, 0x78_u8, 0xfc_u8])
   struct IBackgroundCopyJobHttpOptions2
     lpVtbl : IBackgroundCopyJobHttpOptions2VTbl*
   end
@@ -1102,8 +1102,8 @@ lib LibWin32
     validate_server_certificate : Proc(IBackgroundCopyServerCertificateValidationCallback*, IBackgroundCopyJob, IBackgroundCopyFile, UInt32, UInt8*, UInt32, UInt32, UInt8*, HRESULT)
   end
 
-  IBackgroundCopyServerCertificateValidationCallback_GUID = LibC::GUID.new("4cec0d02-def7-4158-813a-c32a46945ff7")
-  CLSID_IBackgroundCopyServerCertificateValidationCallback = "4cec0d02-def7-4158-813a-c32a46945ff7"
+  IBackgroundCopyServerCertificateValidationCallback_GUID = "4cec0d02-def7-4158-813a-c32a46945ff7"
+  IID_IBackgroundCopyServerCertificateValidationCallback = LibC::GUID.new(0x4cec0d02_u32, 0xdef7_u16, 0x4158_u16, StaticArray[0x81_u8, 0x3a_u8, 0xc3_u8, 0x2a_u8, 0x46_u8, 0x94_u8, 0x5f_u8, 0xf7_u8])
   struct IBackgroundCopyServerCertificateValidationCallback
     lpVtbl : IBackgroundCopyServerCertificateValidationCallbackVTbl*
   end
@@ -1126,8 +1126,8 @@ lib LibWin32
     make_custom_headers_write_only : Proc(IBackgroundCopyJobHttpOptions3*, HRESULT)
   end
 
-  IBackgroundCopyJobHttpOptions3_GUID = LibC::GUID.new("8a9263d3-fd4c-4eda-9b28-30132a4d4e3c")
-  CLSID_IBackgroundCopyJobHttpOptions3 = "8a9263d3-fd4c-4eda-9b28-30132a4d4e3c"
+  IBackgroundCopyJobHttpOptions3_GUID = "8a9263d3-fd4c-4eda-9b28-30132a4d4e3c"
+  IID_IBackgroundCopyJobHttpOptions3 = LibC::GUID.new(0x8a9263d3_u32, 0xfd4c_u16, 0x4eda_u16, StaticArray[0x9b_u8, 0x28_u8, 0x30_u8, 0x13_u8, 0x2a_u8, 0x4d_u8, 0x4e_u8, 0x3c_u8])
   struct IBackgroundCopyJobHttpOptions3
     lpVtbl : IBackgroundCopyJobHttpOptions3VTbl*
   end
@@ -1146,8 +1146,8 @@ lib LibWin32
     get_cleanup_task : Proc(IBITSExtensionSetup*, Guid*, IUnknown*, HRESULT)
   end
 
-  IBITSExtensionSetup_GUID = LibC::GUID.new("29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3")
-  CLSID_IBITSExtensionSetup = "29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3"
+  IBITSExtensionSetup_GUID = "29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3"
+  IID_IBITSExtensionSetup = LibC::GUID.new(0x29cfbbf7_u32, 0x9e4_u16, 0x4b97_u16, StaticArray[0xb0_u8, 0xbc_u8, 0xf2_u8, 0x28_u8, 0x7e_u8, 0x3d_u8, 0x8e_u8, 0xb3_u8])
   struct IBITSExtensionSetup
     lpVtbl : IBITSExtensionSetupVTbl*
   end
@@ -1163,8 +1163,8 @@ lib LibWin32
     get_object : Proc(IBITSExtensionSetupFactory*, UInt8*, IBITSExtensionSetup*, HRESULT)
   end
 
-  IBITSExtensionSetupFactory_GUID = LibC::GUID.new("d5d2d542-5503-4e64-8b48-72ef91a32ee1")
-  CLSID_IBITSExtensionSetupFactory = "d5d2d542-5503-4e64-8b48-72ef91a32ee1"
+  IBITSExtensionSetupFactory_GUID = "d5d2d542-5503-4e64-8b48-72ef91a32ee1"
+  IID_IBITSExtensionSetupFactory = LibC::GUID.new(0xd5d2d542_u32, 0x5503_u16, 0x4e64_u16, StaticArray[0x8b_u8, 0x48_u8, 0x72_u8, 0xef_u8, 0x91_u8, 0xa3_u8, 0x2e_u8, 0xe1_u8])
   struct IBITSExtensionSetupFactory
     lpVtbl : IBITSExtensionSetupFactoryVTbl*
   end
@@ -1183,8 +1183,8 @@ lib LibWin32
     get_job_id : Proc(IBackgroundCopyJob1*, Guid*, HRESULT)
   end
 
-  IBackgroundCopyJob1_GUID = LibC::GUID.new("59f5553c-2031-4629-bb18-2645a6970947")
-  CLSID_IBackgroundCopyJob1 = "59f5553c-2031-4629-bb18-2645a6970947"
+  IBackgroundCopyJob1_GUID = "59f5553c-2031-4629-bb18-2645a6970947"
+  IID_IBackgroundCopyJob1 = LibC::GUID.new(0x59f5553c_u32, 0x2031_u16, 0x4629_u16, StaticArray[0xbb_u8, 0x18_u8, 0x26_u8, 0x45_u8, 0xa6_u8, 0x97_u8, 0x9_u8, 0x47_u8])
   struct IBackgroundCopyJob1
     lpVtbl : IBackgroundCopyJob1VTbl*
   end
@@ -1200,8 +1200,8 @@ lib LibWin32
     get_count : Proc(IEnumBackgroundCopyJobs1*, UInt32*, HRESULT)
   end
 
-  IEnumBackgroundCopyJobs1_GUID = LibC::GUID.new("8baeba9d-8f1c-42c4-b82c-09ae79980d25")
-  CLSID_IEnumBackgroundCopyJobs1 = "8baeba9d-8f1c-42c4-b82c-09ae79980d25"
+  IEnumBackgroundCopyJobs1_GUID = "8baeba9d-8f1c-42c4-b82c-09ae79980d25"
+  IID_IEnumBackgroundCopyJobs1 = LibC::GUID.new(0x8baeba9d_u32, 0x8f1c_u16, 0x42c4_u16, StaticArray[0xb8_u8, 0x2c_u8, 0x9_u8, 0xae_u8, 0x79_u8, 0x98_u8, 0xd_u8, 0x25_u8])
   struct IEnumBackgroundCopyJobs1
     lpVtbl : IEnumBackgroundCopyJobs1VTbl*
   end
@@ -1227,8 +1227,8 @@ lib LibWin32
     set_notification_pointer : Proc(IBackgroundCopyGroup*, Guid*, IUnknown, HRESULT)
   end
 
-  IBackgroundCopyGroup_GUID = LibC::GUID.new("1ded80a7-53ea-424f-8a04-17fea9adc4f5")
-  CLSID_IBackgroundCopyGroup = "1ded80a7-53ea-424f-8a04-17fea9adc4f5"
+  IBackgroundCopyGroup_GUID = "1ded80a7-53ea-424f-8a04-17fea9adc4f5"
+  IID_IBackgroundCopyGroup = LibC::GUID.new(0x1ded80a7_u32, 0x53ea_u16, 0x424f_u16, StaticArray[0x8a_u8, 0x4_u8, 0x17_u8, 0xfe_u8, 0xa9_u8, 0xad_u8, 0xc4_u8, 0xf5_u8])
   struct IBackgroundCopyGroup
     lpVtbl : IBackgroundCopyGroupVTbl*
   end
@@ -1244,8 +1244,8 @@ lib LibWin32
     get_count : Proc(IEnumBackgroundCopyGroups*, UInt32*, HRESULT)
   end
 
-  IEnumBackgroundCopyGroups_GUID = LibC::GUID.new("d993e603-4aa4-47c5-8665-c20d39c2ba4f")
-  CLSID_IEnumBackgroundCopyGroups = "d993e603-4aa4-47c5-8665-c20d39c2ba4f"
+  IEnumBackgroundCopyGroups_GUID = "d993e603-4aa4-47c5-8665-c20d39c2ba4f"
+  IID_IEnumBackgroundCopyGroups = LibC::GUID.new(0xd993e603_u32, 0x4aa4_u16, 0x47c5_u16, StaticArray[0x86_u8, 0x65_u8, 0xc2_u8, 0xd_u8, 0x39_u8, 0xc2_u8, 0xba_u8, 0x4f_u8])
   struct IEnumBackgroundCopyGroups
     lpVtbl : IEnumBackgroundCopyGroupsVTbl*
   end
@@ -1259,8 +1259,8 @@ lib LibWin32
     on_progress_ex : Proc(IBackgroundCopyCallback1*, UInt32, IBackgroundCopyGroup, IBackgroundCopyJob1, UInt32, UInt32, UInt32, UInt8*, HRESULT)
   end
 
-  IBackgroundCopyCallback1_GUID = LibC::GUID.new("084f6593-3800-4e08-9b59-99fa59addf82")
-  CLSID_IBackgroundCopyCallback1 = "084f6593-3800-4e08-9b59-99fa59addf82"
+  IBackgroundCopyCallback1_GUID = "084f6593-3800-4e08-9b59-99fa59addf82"
+  IID_IBackgroundCopyCallback1 = LibC::GUID.new(0x84f6593_u32, 0x3800_u16, 0x4e08_u16, StaticArray[0x9b_u8, 0x59_u8, 0x99_u8, 0xfa_u8, 0x59_u8, 0xad_u8, 0xdf_u8, 0x82_u8])
   struct IBackgroundCopyCallback1
     lpVtbl : IBackgroundCopyCallback1VTbl*
   end
@@ -1274,8 +1274,8 @@ lib LibWin32
     enum_groups : Proc(IBackgroundCopyQMgr*, UInt32, IEnumBackgroundCopyGroups*, HRESULT)
   end
 
-  IBackgroundCopyQMgr_GUID = LibC::GUID.new("16f41c69-09f5-41d2-8cd8-3c08c47bc8a8")
-  CLSID_IBackgroundCopyQMgr = "16f41c69-09f5-41d2-8cd8-3c08c47bc8a8"
+  IBackgroundCopyQMgr_GUID = "16f41c69-09f5-41d2-8cd8-3c08c47bc8a8"
+  IID_IBackgroundCopyQMgr = LibC::GUID.new(0x16f41c69_u32, 0x9f5_u16, 0x41d2_u16, StaticArray[0x8c_u8, 0xd8_u8, 0x3c_u8, 0x8_u8, 0xc4_u8, 0x7b_u8, 0xc8_u8, 0xa8_u8])
   struct IBackgroundCopyQMgr
     lpVtbl : IBackgroundCopyQMgrVTbl*
   end

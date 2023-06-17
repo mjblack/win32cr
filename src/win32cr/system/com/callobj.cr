@@ -97,8 +97,8 @@ lib LibWin32
     invoke : Proc(ICallFrame*, Void*, HRESULT)
   end
 
-  ICallFrame_GUID = LibC::GUID.new("d573b4b0-894e-11d2-b8b6-00c04fb9618a")
-  CLSID_ICallFrame = "d573b4b0-894e-11d2-b8b6-00c04fb9618a"
+  ICallFrame_GUID = "d573b4b0-894e-11d2-b8b6-00c04fb9618a"
+  IID_ICallFrame = LibC::GUID.new(0xd573b4b0_u32, 0x894e_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
   struct ICallFrame
     lpVtbl : ICallFrameVTbl*
   end
@@ -113,8 +113,8 @@ lib LibWin32
     get_iid : Proc(ICallIndirect*, Guid*, LibC::BOOL*, UInt32*, LibC::LPWSTR*, HRESULT)
   end
 
-  ICallIndirect_GUID = LibC::GUID.new("d573b4b1-894e-11d2-b8b6-00c04fb9618a")
-  CLSID_ICallIndirect = "d573b4b1-894e-11d2-b8b6-00c04fb9618a"
+  ICallIndirect_GUID = "d573b4b1-894e-11d2-b8b6-00c04fb9618a"
+  IID_ICallIndirect = LibC::GUID.new(0xd573b4b1_u32, 0x894e_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
   struct ICallIndirect
     lpVtbl : ICallIndirectVTbl*
   end
@@ -131,8 +131,8 @@ lib LibWin32
     get_registered_sink : Proc(ICallInterceptor*, ICallFrameEvents*, HRESULT)
   end
 
-  ICallInterceptor_GUID = LibC::GUID.new("60c7ca75-896d-11d2-b8b6-00c04fb9618a")
-  CLSID_ICallInterceptor = "60c7ca75-896d-11d2-b8b6-00c04fb9618a"
+  ICallInterceptor_GUID = "60c7ca75-896d-11d2-b8b6-00c04fb9618a"
+  IID_ICallInterceptor = LibC::GUID.new(0x60c7ca75_u32, 0x896d_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
   struct ICallInterceptor
     lpVtbl : ICallInterceptorVTbl*
   end
@@ -144,8 +144,8 @@ lib LibWin32
     on_call : Proc(ICallFrameEvents*, ICallFrame, HRESULT)
   end
 
-  ICallFrameEvents_GUID = LibC::GUID.new("fd5e0843-fc91-11d0-97d7-00c04fb9618a")
-  CLSID_ICallFrameEvents = "fd5e0843-fc91-11d0-97d7-00c04fb9618a"
+  ICallFrameEvents_GUID = "fd5e0843-fc91-11d0-97d7-00c04fb9618a"
+  IID_ICallFrameEvents = LibC::GUID.new(0xfd5e0843_u32, 0xfc91_u16, 0x11d0_u16, StaticArray[0x97_u8, 0xd7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
   struct ICallFrameEvents
     lpVtbl : ICallFrameEventsVTbl*
   end
@@ -158,8 +158,8 @@ lib LibWin32
     release_marshal_data : Proc(ICallUnmarshal*, UInt32, Void*, UInt32, UInt32, UInt32, CALLFRAME_MARSHALCONTEXT*, HRESULT)
   end
 
-  ICallUnmarshal_GUID = LibC::GUID.new("5333b003-2e42-11d2-b89d-00c04fb9618a")
-  CLSID_ICallUnmarshal = "5333b003-2e42-11d2-b89d-00c04fb9618a"
+  ICallUnmarshal_GUID = "5333b003-2e42-11d2-b89d-00c04fb9618a"
+  IID_ICallUnmarshal = LibC::GUID.new(0x5333b003_u32, 0x2e42_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
   struct ICallUnmarshal
     lpVtbl : ICallUnmarshalVTbl*
   end
@@ -171,8 +171,8 @@ lib LibWin32
     on_walk_interface : Proc(ICallFrameWalker*, Guid*, Void**, LibC::BOOL, LibC::BOOL, HRESULT)
   end
 
-  ICallFrameWalker_GUID = LibC::GUID.new("08b23919-392d-11d2-b8a4-00c04fb9618a")
-  CLSID_ICallFrameWalker = "08b23919-392d-11d2-b8a4-00c04fb9618a"
+  ICallFrameWalker_GUID = "08b23919-392d-11d2-b8a4-00c04fb9618a"
+  IID_ICallFrameWalker = LibC::GUID.new(0x8b23919_u32, 0x392d_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
   struct ICallFrameWalker
     lpVtbl : ICallFrameWalkerVTbl*
   end
@@ -185,8 +185,8 @@ lib LibWin32
     get_iid : Proc(IInterfaceRelated*, Guid*, HRESULT)
   end
 
-  IInterfaceRelated_GUID = LibC::GUID.new("d1fb5a79-7706-11d1-adba-00c04fc2adc0")
-  CLSID_IInterfaceRelated = "d1fb5a79-7706-11d1-adba-00c04fc2adc0"
+  IInterfaceRelated_GUID = "d1fb5a79-7706-11d1-adba-00c04fc2adc0"
+  IID_IInterfaceRelated = LibC::GUID.new(0xd1fb5a79_u32, 0x7706_u16, 0x11d1_u16, StaticArray[0xad_u8, 0xba_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xad_u8, 0xc0_u8])
   struct IInterfaceRelated
     lpVtbl : IInterfaceRelatedVTbl*
   end

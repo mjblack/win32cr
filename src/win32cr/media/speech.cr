@@ -32,34 +32,34 @@ lib LibWin32
   Speech_StreamPos_Asap = 0_i32
   Speech_StreamPos_RealTime = -1_i32
   SpeechAllElements = -1_i32
-  SpNotifyTranslator = LibC::GUID.new(0xe2ae5372_u32, 0x5d40_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  SpObjectTokenCategory = LibC::GUID.new(0xa910187f_u32, 0xc7a_u16, 0x45ac_u16, StaticArray[0x92_u8, 0xcc_u8, 0x59_u8, 0xed_u8, 0xaf_u8, 0xb7_u8, 0x7b_u8, 0x53_u8])
-  SpObjectToken = LibC::GUID.new(0xef411752_u32, 0x3736_u16, 0x4cb4_u16, StaticArray[0x9c_u8, 0x8c_u8, 0x8e_u8, 0xf4_u8, 0xcc_u8, 0xb5_u8, 0x8e_u8, 0xfe_u8])
-  SpResourceManager = LibC::GUID.new(0x96749373_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
-  SpStreamFormatConverter = LibC::GUID.new(0x7013943a_u32, 0xe2ec_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x86_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf9_u8, 0xb5_u8])
-  SpMMAudioEnum = LibC::GUID.new(0xab1890a0_u32, 0xe91f_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
-  SpMMAudioIn = LibC::GUID.new(0xcf3d2e50_u32, 0x53f2_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  SpMMAudioOut = LibC::GUID.new(0xa8c680eb_u32, 0x3d32_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
-  SpStream = LibC::GUID.new(0x715d9c59_u32, 0x4442_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  SpVoice = LibC::GUID.new(0x96749377_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
-  SpSharedRecoContext = LibC::GUID.new(0x47206204_u32, 0x5eca_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  SpInprocRecognizer = LibC::GUID.new(0x41b89b6b_u32, 0x9399_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x23_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  SpSharedRecognizer = LibC::GUID.new(0x3bee4890_u32, 0x4fe9_u16, 0x4a37_u16, StaticArray[0x8c_u8, 0x1e_u8, 0x5e_u8, 0x7e_u8, 0x12_u8, 0x79_u8, 0x1c_u8, 0x1f_u8])
-  SpLexicon = LibC::GUID.new(0x655e396_u32, 0x25d0_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0x26_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf8_u8, 0x7c_u8])
-  SpUnCompressedLexicon = LibC::GUID.new(0xc9e37c15_u32, 0xdf92_u16, 0x4727_u16, StaticArray[0x85_u8, 0xd6_u8, 0x72_u8, 0xe5_u8, 0xee_u8, 0xb6_u8, 0x99_u8, 0x5a_u8])
-  SpCompressedLexicon = LibC::GUID.new(0x90903716_u32, 0x2f42_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0x26_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf8_u8, 0x7c_u8])
-  SpShortcut = LibC::GUID.new(0xd722f1a_u32, 0x9fcf_u16, 0x4e62_u16, StaticArray[0x96_u8, 0xd8_u8, 0x6d_u8, 0xf8_u8, 0xf0_u8, 0x1a_u8, 0x26_u8, 0xaa_u8])
-  SpPhoneConverter = LibC::GUID.new(0x9185f743_u32, 0x1143_u16, 0x4c28_u16, StaticArray[0x86_u8, 0xb5_u8, 0xbf_u8, 0xf1_u8, 0x4f_u8, 0x20_u8, 0xe5_u8, 0xc8_u8])
-  SpPhoneticAlphabetConverter = LibC::GUID.new(0x4f414126_u32, 0xdfe3_u16, 0x4629_u16, StaticArray[0x99_u8, 0xee_u8, 0x79_u8, 0x79_u8, 0x78_u8, 0x31_u8, 0x7e_u8, 0xad_u8])
-  SpNullPhoneConverter = LibC::GUID.new(0x455f24e9_u32, 0x7396_u16, 0x4a16_u16, StaticArray[0x97_u8, 0x15_u8, 0x7c_u8, 0xf_u8, 0xdb_u8, 0xe3_u8, 0xef_u8, 0xe3_u8])
-  SpTextSelectionInformation = LibC::GUID.new(0xf92030a_u32, 0xcbfd_u16, 0x4ab8_u16, StaticArray[0xa1_u8, 0x64_u8, 0xff_u8, 0x59_u8, 0x85_u8, 0x54_u8, 0x7f_u8, 0xf6_u8])
-  SpPhraseInfoBuilder = LibC::GUID.new(0xc23fc28d_u32, 0xc55f_u16, 0x4720_u16, StaticArray[0x8b_u8, 0x32_u8, 0x91_u8, 0xf7_u8, 0x3c_u8, 0x2b_u8, 0xd5_u8, 0xd1_u8])
-  SpAudioFormat = LibC::GUID.new(0x9ef96870_u32, 0xe160_u16, 0x4792_u16, StaticArray[0x82_u8, 0xd_u8, 0x48_u8, 0xcf_u8, 0x6_u8, 0x49_u8, 0xe4_u8, 0xec_u8])
-  SpWaveFormatEx = LibC::GUID.new(0xc79a574c_u32, 0x63be_u16, 0x44b9_u16, StaticArray[0x80_u8, 0x1f_u8, 0x28_u8, 0x3f_u8, 0x87_u8, 0xf8_u8, 0x98_u8, 0xbe_u8])
-  SpInProcRecoContext = LibC::GUID.new(0x73ad6842_u32, 0xace0_u16, 0x45e8_u16, StaticArray[0xa4_u8, 0xdd_u8, 0x87_u8, 0x95_u8, 0x88_u8, 0x1a_u8, 0x2c_u8, 0x2a_u8])
-  SpCustomStream = LibC::GUID.new(0x8dbef13f_u32, 0x1948_u16, 0x4aa8_u16, StaticArray[0x8c_u8, 0xf0_u8, 0x4_u8, 0x8e_u8, 0xeb_u8, 0xed_u8, 0x95_u8, 0xd8_u8])
-  SpFileStream = LibC::GUID.new(0x947812b3_u32, 0x2ae1_u16, 0x4644_u16, StaticArray[0xba_u8, 0x86_u8, 0x9e_u8, 0x90_u8, 0xde_u8, 0xd7_u8, 0xec_u8, 0x91_u8])
-  SpMemoryStream = LibC::GUID.new(0x5fb7ef7d_u32, 0xdff4_u16, 0x468a_u16, StaticArray[0xb6_u8, 0xb7_u8, 0x2f_u8, 0xcb_u8, 0xd1_u8, 0x88_u8, 0xf9_u8, 0x94_u8])
+  CLSID_SpNotifyTranslator = LibC::GUID.new(0xe2ae5372_u32, 0x5d40_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+  CLSID_SpObjectTokenCategory = LibC::GUID.new(0xa910187f_u32, 0xc7a_u16, 0x45ac_u16, StaticArray[0x92_u8, 0xcc_u8, 0x59_u8, 0xed_u8, 0xaf_u8, 0xb7_u8, 0x7b_u8, 0x53_u8])
+  CLSID_SpObjectToken = LibC::GUID.new(0xef411752_u32, 0x3736_u16, 0x4cb4_u16, StaticArray[0x9c_u8, 0x8c_u8, 0x8e_u8, 0xf4_u8, 0xcc_u8, 0xb5_u8, 0x8e_u8, 0xfe_u8])
+  CLSID_SpResourceManager = LibC::GUID.new(0x96749373_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+  CLSID_SpStreamFormatConverter = LibC::GUID.new(0x7013943a_u32, 0xe2ec_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x86_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf9_u8, 0xb5_u8])
+  CLSID_SpMMAudioEnum = LibC::GUID.new(0xab1890a0_u32, 0xe91f_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
+  CLSID_SpMMAudioIn = LibC::GUID.new(0xcf3d2e50_u32, 0x53f2_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+  CLSID_SpMMAudioOut = LibC::GUID.new(0xa8c680eb_u32, 0x3d32_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+  CLSID_SpStream = LibC::GUID.new(0x715d9c59_u32, 0x4442_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+  CLSID_SpVoice = LibC::GUID.new(0x96749377_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+  CLSID_SpSharedRecoContext = LibC::GUID.new(0x47206204_u32, 0x5eca_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+  CLSID_SpInprocRecognizer = LibC::GUID.new(0x41b89b6b_u32, 0x9399_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x23_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+  CLSID_SpSharedRecognizer = LibC::GUID.new(0x3bee4890_u32, 0x4fe9_u16, 0x4a37_u16, StaticArray[0x8c_u8, 0x1e_u8, 0x5e_u8, 0x7e_u8, 0x12_u8, 0x79_u8, 0x1c_u8, 0x1f_u8])
+  CLSID_SpLexicon = LibC::GUID.new(0x655e396_u32, 0x25d0_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0x26_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf8_u8, 0x7c_u8])
+  CLSID_SpUnCompressedLexicon = LibC::GUID.new(0xc9e37c15_u32, 0xdf92_u16, 0x4727_u16, StaticArray[0x85_u8, 0xd6_u8, 0x72_u8, 0xe5_u8, 0xee_u8, 0xb6_u8, 0x99_u8, 0x5a_u8])
+  CLSID_SpCompressedLexicon = LibC::GUID.new(0x90903716_u32, 0x2f42_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0x26_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf8_u8, 0x7c_u8])
+  CLSID_SpShortcut = LibC::GUID.new(0xd722f1a_u32, 0x9fcf_u16, 0x4e62_u16, StaticArray[0x96_u8, 0xd8_u8, 0x6d_u8, 0xf8_u8, 0xf0_u8, 0x1a_u8, 0x26_u8, 0xaa_u8])
+  CLSID_SpPhoneConverter = LibC::GUID.new(0x9185f743_u32, 0x1143_u16, 0x4c28_u16, StaticArray[0x86_u8, 0xb5_u8, 0xbf_u8, 0xf1_u8, 0x4f_u8, 0x20_u8, 0xe5_u8, 0xc8_u8])
+  CLSID_SpPhoneticAlphabetConverter = LibC::GUID.new(0x4f414126_u32, 0xdfe3_u16, 0x4629_u16, StaticArray[0x99_u8, 0xee_u8, 0x79_u8, 0x79_u8, 0x78_u8, 0x31_u8, 0x7e_u8, 0xad_u8])
+  CLSID_SpNullPhoneConverter = LibC::GUID.new(0x455f24e9_u32, 0x7396_u16, 0x4a16_u16, StaticArray[0x97_u8, 0x15_u8, 0x7c_u8, 0xf_u8, 0xdb_u8, 0xe3_u8, 0xef_u8, 0xe3_u8])
+  CLSID_SpTextSelectionInformation = LibC::GUID.new(0xf92030a_u32, 0xcbfd_u16, 0x4ab8_u16, StaticArray[0xa1_u8, 0x64_u8, 0xff_u8, 0x59_u8, 0x85_u8, 0x54_u8, 0x7f_u8, 0xf6_u8])
+  CLSID_SpPhraseInfoBuilder = LibC::GUID.new(0xc23fc28d_u32, 0xc55f_u16, 0x4720_u16, StaticArray[0x8b_u8, 0x32_u8, 0x91_u8, 0xf7_u8, 0x3c_u8, 0x2b_u8, 0xd5_u8, 0xd1_u8])
+  CLSID_SpAudioFormat = LibC::GUID.new(0x9ef96870_u32, 0xe160_u16, 0x4792_u16, StaticArray[0x82_u8, 0xd_u8, 0x48_u8, 0xcf_u8, 0x6_u8, 0x49_u8, 0xe4_u8, 0xec_u8])
+  CLSID_SpWaveFormatEx = LibC::GUID.new(0xc79a574c_u32, 0x63be_u16, 0x44b9_u16, StaticArray[0x80_u8, 0x1f_u8, 0x28_u8, 0x3f_u8, 0x87_u8, 0xf8_u8, 0x98_u8, 0xbe_u8])
+  CLSID_SpInProcRecoContext = LibC::GUID.new(0x73ad6842_u32, 0xace0_u16, 0x45e8_u16, StaticArray[0xa4_u8, 0xdd_u8, 0x87_u8, 0x95_u8, 0x88_u8, 0x1a_u8, 0x2c_u8, 0x2a_u8])
+  CLSID_SpCustomStream = LibC::GUID.new(0x8dbef13f_u32, 0x1948_u16, 0x4aa8_u16, StaticArray[0x8c_u8, 0xf0_u8, 0x4_u8, 0x8e_u8, 0xeb_u8, 0xed_u8, 0x95_u8, 0xd8_u8])
+  CLSID_SpFileStream = LibC::GUID.new(0x947812b3_u32, 0x2ae1_u16, 0x4644_u16, StaticArray[0xba_u8, 0x86_u8, 0x9e_u8, 0x90_u8, 0xde_u8, 0xd7_u8, 0xec_u8, 0x91_u8])
+  CLSID_SpMemoryStream = LibC::GUID.new(0x5fb7ef7d_u32, 0xdff4_u16, 0x468a_u16, StaticArray[0xb6_u8, 0xb7_u8, 0x2f_u8, 0xcb_u8, 0xd1_u8, 0x88_u8, 0xf9_u8, 0x94_u8])
 
   alias SPNOTIFYCALLBACK = Proc(LibC::UINT_PTR, LPARAM, Void)
 
@@ -1709,8 +1709,8 @@ lib LibWin32
     get_notify_event_handle : Proc(ISpNotifySource*, LibC::HANDLE)
   end
 
-  ISpNotifySource_GUID = LibC::GUID.new("5eff4aef-8487-11d2-961c-00c04f8ee628")
-  CLSID_ISpNotifySource = "5eff4aef-8487-11d2-961c-00c04f8ee628"
+  ISpNotifySource_GUID = "5eff4aef-8487-11d2-961c-00c04f8ee628"
+  IID_ISpNotifySource = LibC::GUID.new(0x5eff4aef_u32, 0x8487_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x1c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
   struct ISpNotifySource
     lpVtbl : ISpNotifySourceVTbl*
   end
@@ -1722,8 +1722,8 @@ lib LibWin32
     notify : Proc(ISpNotifySink*, HRESULT)
   end
 
-  ISpNotifySink_GUID = LibC::GUID.new("259684dc-37c3-11d2-9603-00c04f8ee628")
-  CLSID_ISpNotifySink = "259684dc-37c3-11d2-9603-00c04f8ee628"
+  ISpNotifySink_GUID = "259684dc-37c3-11d2-9603-00c04f8ee628"
+  IID_ISpNotifySink = LibC::GUID.new(0x259684dc_u32, 0x37c3_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
   struct ISpNotifySink
     lpVtbl : ISpNotifySinkVTbl*
   end
@@ -1741,8 +1741,8 @@ lib LibWin32
     get_event_handle : Proc(ISpNotifyTranslator*, LibC::HANDLE)
   end
 
-  ISpNotifyTranslator_GUID = LibC::GUID.new("aca16614-5d3d-11d2-960e-00c04f8ee628")
-  CLSID_ISpNotifyTranslator = "aca16614-5d3d-11d2-960e-00c04f8ee628"
+  ISpNotifyTranslator_GUID = "aca16614-5d3d-11d2-960e-00c04f8ee628"
+  IID_ISpNotifyTranslator = LibC::GUID.new(0xaca16614_u32, 0x5d3d_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
   struct ISpNotifyTranslator
     lpVtbl : ISpNotifyTranslatorVTbl*
   end
@@ -1765,8 +1765,8 @@ lib LibWin32
     enum_values : Proc(ISpDataKey*, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
-  ISpDataKey_GUID = LibC::GUID.new("14056581-e16c-11d2-bb90-00c04f8ee6c0")
-  CLSID_ISpDataKey = "14056581-e16c-11d2-bb90-00c04f8ee6c0"
+  ISpDataKey_GUID = "14056581-e16c-11d2-bb90-00c04f8ee6c0"
+  IID_ISpDataKey = LibC::GUID.new(0x14056581_u32, 0xe16c_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
   struct ISpDataKey
     lpVtbl : ISpDataKeyVTbl*
   end
@@ -1790,8 +1790,8 @@ lib LibWin32
     set_key : Proc(ISpRegDataKey*, HKEY, LibC::BOOL, HRESULT)
   end
 
-  ISpRegDataKey_GUID = LibC::GUID.new("92a66e2b-c830-4149-83df-6fc2ba1e7a5b")
-  CLSID_ISpRegDataKey = "92a66e2b-c830-4149-83df-6fc2ba1e7a5b"
+  ISpRegDataKey_GUID = "92a66e2b-c830-4149-83df-6fc2ba1e7a5b"
+  IID_ISpRegDataKey = LibC::GUID.new(0x92a66e2b_u32, 0xc830_u16, 0x4149_u16, StaticArray[0x83_u8, 0xdf_u8, 0x6f_u8, 0xc2_u8, 0xba_u8, 0x1e_u8, 0x7a_u8, 0x5b_u8])
   struct ISpRegDataKey
     lpVtbl : ISpRegDataKeyVTbl*
   end
@@ -1820,8 +1820,8 @@ lib LibWin32
     get_default_token_id : Proc(ISpObjectTokenCategory*, LibC::LPWSTR*, HRESULT)
   end
 
-  ISpObjectTokenCategory_GUID = LibC::GUID.new("2d3d3845-39af-4850-bbf9-40b49780011d")
-  CLSID_ISpObjectTokenCategory = "2d3d3845-39af-4850-bbf9-40b49780011d"
+  ISpObjectTokenCategory_GUID = "2d3d3845-39af-4850-bbf9-40b49780011d"
+  IID_ISpObjectTokenCategory = LibC::GUID.new(0x2d3d3845_u32, 0x39af_u16, 0x4850_u16, StaticArray[0xbb_u8, 0xf9_u8, 0x40_u8, 0xb4_u8, 0x97_u8, 0x80_u8, 0x1_u8, 0x1d_u8])
   struct ISpObjectTokenCategory
     lpVtbl : ISpObjectTokenCategoryVTbl*
   end
@@ -1854,8 +1854,8 @@ lib LibWin32
     matches_attributes : Proc(ISpObjectToken*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
-  ISpObjectToken_GUID = LibC::GUID.new("14056589-e16c-11d2-bb90-00c04f8ee6c0")
-  CLSID_ISpObjectToken = "14056589-e16c-11d2-bb90-00c04f8ee6c0"
+  ISpObjectToken_GUID = "14056589-e16c-11d2-bb90-00c04f8ee6c0"
+  IID_ISpObjectToken = LibC::GUID.new(0x14056589_u32, 0xe16c_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
   struct ISpObjectToken
     lpVtbl : ISpObjectTokenVTbl*
   end
@@ -1889,8 +1889,8 @@ lib LibWin32
     init_from_data_key : Proc(ISpObjectTokenInit*, LibC::LPWSTR, LibC::LPWSTR, ISpDataKey, HRESULT)
   end
 
-  ISpObjectTokenInit_GUID = LibC::GUID.new("b8aab0cf-346f-49d8-9499-c8b03f161d51")
-  CLSID_ISpObjectTokenInit = "b8aab0cf-346f-49d8-9499-c8b03f161d51"
+  ISpObjectTokenInit_GUID = "b8aab0cf-346f-49d8-9499-c8b03f161d51"
+  IID_ISpObjectTokenInit = LibC::GUID.new(0xb8aab0cf_u32, 0x346f_u16, 0x49d8_u16, StaticArray[0x94_u8, 0x99_u8, 0xc8_u8, 0xb0_u8, 0x3f_u8, 0x16_u8, 0x1d_u8, 0x51_u8])
   struct ISpObjectTokenInit
     lpVtbl : ISpObjectTokenInitVTbl*
   end
@@ -1907,8 +1907,8 @@ lib LibWin32
     get_count : Proc(IEnumSpObjectTokens*, UInt32*, HRESULT)
   end
 
-  IEnumSpObjectTokens_GUID = LibC::GUID.new("06b64f9e-7fda-11d2-b4f2-00c04f797396")
-  CLSID_IEnumSpObjectTokens = "06b64f9e-7fda-11d2-b4f2-00c04f797396"
+  IEnumSpObjectTokens_GUID = "06b64f9e-7fda-11d2-b4f2-00c04f797396"
+  IID_IEnumSpObjectTokens = LibC::GUID.new(0x6b64f9e_u32, 0x7fda_u16, 0x11d2_u16, StaticArray[0xb4_u8, 0xf2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
   struct IEnumSpObjectTokens
     lpVtbl : IEnumSpObjectTokensVTbl*
   end
@@ -1921,8 +1921,8 @@ lib LibWin32
     get_object_token : Proc(ISpObjectWithToken*, ISpObjectToken*, HRESULT)
   end
 
-  ISpObjectWithToken_GUID = LibC::GUID.new("5b559f40-e952-11d2-bb91-00c04f8ee6c0")
-  CLSID_ISpObjectWithToken = "5b559f40-e952-11d2-bb91-00c04f8ee6c0"
+  ISpObjectWithToken_GUID = "5b559f40-e952-11d2-bb91-00c04f8ee6c0"
+  IID_ISpObjectWithToken = LibC::GUID.new(0x5b559f40_u32, 0xe952_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
   struct ISpObjectWithToken
     lpVtbl : ISpObjectWithTokenVTbl*
   end
@@ -1936,8 +1936,8 @@ lib LibWin32
     get_object : Proc(ISpResourceManager*, Guid*, Guid*, Guid*, LibC::BOOL, Void**, HRESULT)
   end
 
-  ISpResourceManager_GUID = LibC::GUID.new("93384e18-5014-43d5-adbb-a78e055926bd")
-  CLSID_ISpResourceManager = "93384e18-5014-43d5-adbb-a78e055926bd"
+  ISpResourceManager_GUID = "93384e18-5014-43d5-adbb-a78e055926bd"
+  IID_ISpResourceManager = LibC::GUID.new(0x93384e18_u32, 0x5014_u16, 0x43d5_u16, StaticArray[0xad_u8, 0xbb_u8, 0xa7_u8, 0x8e_u8, 0x5_u8, 0x59_u8, 0x26_u8, 0xbd_u8])
   struct ISpResourceManager
     lpVtbl : ISpResourceManagerVTbl*
   end
@@ -1958,8 +1958,8 @@ lib LibWin32
     get_info : Proc(ISpEventSource*, SPEVENTSOURCEINFO*, HRESULT)
   end
 
-  ISpEventSource_GUID = LibC::GUID.new("be7a9cce-5f9e-11d2-960f-00c04f8ee628")
-  CLSID_ISpEventSource = "be7a9cce-5f9e-11d2-960f-00c04f8ee628"
+  ISpEventSource_GUID = "be7a9cce-5f9e-11d2-960f-00c04f8ee628"
+  IID_ISpEventSource = LibC::GUID.new(0xbe7a9cce_u32, 0x5f9e_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
   struct ISpEventSource
     lpVtbl : ISpEventSourceVTbl*
   end
@@ -1981,8 +1981,8 @@ lib LibWin32
     get_events_ex : Proc(ISpEventSource2*, UInt32, SPEVENTEX*, UInt32*, HRESULT)
   end
 
-  ISpEventSource2_GUID = LibC::GUID.new("2373a435-6a4b-429e-a6ac-d4231a61975b")
-  CLSID_ISpEventSource2 = "2373a435-6a4b-429e-a6ac-d4231a61975b"
+  ISpEventSource2_GUID = "2373a435-6a4b-429e-a6ac-d4231a61975b"
+  IID_ISpEventSource2 = LibC::GUID.new(0x2373a435_u32, 0x6a4b_u16, 0x429e_u16, StaticArray[0xa6_u8, 0xac_u8, 0xd4_u8, 0x23_u8, 0x1a_u8, 0x61_u8, 0x97_u8, 0x5b_u8])
   struct ISpEventSource2
     lpVtbl : ISpEventSource2VTbl*
   end
@@ -1995,8 +1995,8 @@ lib LibWin32
     get_event_interest : Proc(ISpEventSink*, UInt64*, HRESULT)
   end
 
-  ISpEventSink_GUID = LibC::GUID.new("be7a9cc9-5f9e-11d2-960f-00c04f8ee628")
-  CLSID_ISpEventSink = "be7a9cc9-5f9e-11d2-960f-00c04f8ee628"
+  ISpEventSink_GUID = "be7a9cc9-5f9e-11d2-960f-00c04f8ee628"
+  IID_ISpEventSink = LibC::GUID.new(0xbe7a9cc9_u32, 0x5f9e_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
   struct ISpEventSink
     lpVtbl : ISpEventSinkVTbl*
   end
@@ -2019,8 +2019,8 @@ lib LibWin32
     get_format : Proc(ISpStreamFormat*, Guid*, WAVEFORMATEX**, HRESULT)
   end
 
-  ISpStreamFormat_GUID = LibC::GUID.new("bed530be-2606-4f4d-a1c0-54c5cda5566f")
-  CLSID_ISpStreamFormat = "bed530be-2606-4f4d-a1c0-54c5cda5566f"
+  ISpStreamFormat_GUID = "bed530be-2606-4f4d-a1c0-54c5cda5566f"
+  IID_ISpStreamFormat = LibC::GUID.new(0xbed530be_u32, 0x2606_u16, 0x4f4d_u16, StaticArray[0xa1_u8, 0xc0_u8, 0x54_u8, 0xc5_u8, 0xcd_u8, 0xa5_u8, 0x56_u8, 0x6f_u8])
   struct ISpStreamFormat
     lpVtbl : ISpStreamFormatVTbl*
   end
@@ -2047,8 +2047,8 @@ lib LibWin32
     close : Proc(ISpStream*, HRESULT)
   end
 
-  ISpStream_GUID = LibC::GUID.new("12e3cca9-7518-44c5-a5e7-ba5a79cb929e")
-  CLSID_ISpStream = "12e3cca9-7518-44c5-a5e7-ba5a79cb929e"
+  ISpStream_GUID = "12e3cca9-7518-44c5-a5e7-ba5a79cb929e"
+  IID_ISpStream = LibC::GUID.new(0x12e3cca9_u32, 0x7518_u16, 0x44c5_u16, StaticArray[0xa5_u8, 0xe7_u8, 0xba_u8, 0x5a_u8, 0x79_u8, 0xcb_u8, 0x92_u8, 0x9e_u8])
   struct ISpStream
     lpVtbl : ISpStreamVTbl*
   end
@@ -2077,8 +2077,8 @@ lib LibWin32
     scale_base_to_converted_offset : Proc(ISpStreamFormatConverter*, UInt64, UInt64*, HRESULT)
   end
 
-  ISpStreamFormatConverter_GUID = LibC::GUID.new("678a932c-ea71-4446-9b41-78fda6280a29")
-  CLSID_ISpStreamFormatConverter = "678a932c-ea71-4446-9b41-78fda6280a29"
+  ISpStreamFormatConverter_GUID = "678a932c-ea71-4446-9b41-78fda6280a29"
+  IID_ISpStreamFormatConverter = LibC::GUID.new(0x678a932c_u32, 0xea71_u16, 0x4446_u16, StaticArray[0x9b_u8, 0x41_u8, 0x78_u8, 0xfd_u8, 0xa6_u8, 0x28_u8, 0xa_u8, 0x29_u8])
   struct ISpStreamFormatConverter
     lpVtbl : ISpStreamFormatConverterVTbl*
   end
@@ -2112,8 +2112,8 @@ lib LibWin32
     set_buffer_notify_size : Proc(ISpAudio*, UInt32, HRESULT)
   end
 
-  ISpAudio_GUID = LibC::GUID.new("c05c768f-fae8-4ec2-8e07-338321c12452")
-  CLSID_ISpAudio = "c05c768f-fae8-4ec2-8e07-338321c12452"
+  ISpAudio_GUID = "c05c768f-fae8-4ec2-8e07-338321c12452"
+  IID_ISpAudio = LibC::GUID.new(0xc05c768f_u32, 0xfae8_u16, 0x4ec2_u16, StaticArray[0x8e_u8, 0x7_u8, 0x33_u8, 0x83_u8, 0x21_u8, 0xc1_u8, 0x24_u8, 0x52_u8])
   struct ISpAudio
     lpVtbl : ISpAudioVTbl*
   end
@@ -2152,8 +2152,8 @@ lib LibWin32
     set_line_id : Proc(ISpMMSysAudio*, UInt32, HRESULT)
   end
 
-  ISpMMSysAudio_GUID = LibC::GUID.new("15806f6e-1d70-4b48-98e6-3b1a007509ab")
-  CLSID_ISpMMSysAudio = "15806f6e-1d70-4b48-98e6-3b1a007509ab"
+  ISpMMSysAudio_GUID = "15806f6e-1d70-4b48-98e6-3b1a007509ab"
+  IID_ISpMMSysAudio = LibC::GUID.new(0x15806f6e_u32, 0x1d70_u16, 0x4b48_u16, StaticArray[0x98_u8, 0xe6_u8, 0x3b_u8, 0x1a_u8, 0x0_u8, 0x75_u8, 0x9_u8, 0xab_u8])
   struct ISpMMSysAudio
     lpVtbl : ISpMMSysAudioVTbl*
   end
@@ -2166,8 +2166,8 @@ lib LibWin32
     append_transcript : Proc(ISpTranscript*, LibC::LPWSTR, HRESULT)
   end
 
-  ISpTranscript_GUID = LibC::GUID.new("10f63bce-201a-11d3-ac70-00c04f8ee6c0")
-  CLSID_ISpTranscript = "10f63bce-201a-11d3-ac70-00c04f8ee6c0"
+  ISpTranscript_GUID = "10f63bce-201a-11d3-ac70-00c04f8ee6c0"
+  IID_ISpTranscript = LibC::GUID.new(0x10f63bce_u32, 0x201a_u16, 0x11d3_u16, StaticArray[0xac_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
   struct ISpTranscript
     lpVtbl : ISpTranscriptVTbl*
   end
@@ -2184,8 +2184,8 @@ lib LibWin32
     get_words : Proc(ISpLexicon*, UInt32, UInt32*, UInt32*, SPWORDLIST*, HRESULT)
   end
 
-  ISpLexicon_GUID = LibC::GUID.new("da41a7c2-5383-4db2-916b-6c1719e3db58")
-  CLSID_ISpLexicon = "da41a7c2-5383-4db2-916b-6c1719e3db58"
+  ISpLexicon_GUID = "da41a7c2-5383-4db2-916b-6c1719e3db58"
+  IID_ISpLexicon = LibC::GUID.new(0xda41a7c2_u32, 0x5383_u16, 0x4db2_u16, StaticArray[0x91_u8, 0x6b_u8, 0x6c_u8, 0x17_u8, 0x19_u8, 0xe3_u8, 0xdb_u8, 0x58_u8])
   struct ISpLexicon
     lpVtbl : ISpLexiconVTbl*
   end
@@ -2203,8 +2203,8 @@ lib LibWin32
     add_lexicon : Proc(ISpContainerLexicon*, ISpLexicon, UInt32, HRESULT)
   end
 
-  ISpContainerLexicon_GUID = LibC::GUID.new("8565572f-c094-41cc-b56e-10bd9c3ff044")
-  CLSID_ISpContainerLexicon = "8565572f-c094-41cc-b56e-10bd9c3ff044"
+  ISpContainerLexicon_GUID = "8565572f-c094-41cc-b56e-10bd9c3ff044"
+  IID_ISpContainerLexicon = LibC::GUID.new(0x8565572f_u32, 0xc094_u16, 0x41cc_u16, StaticArray[0xb5_u8, 0x6e_u8, 0x10_u8, 0xbd_u8, 0x9c_u8, 0x3f_u8, 0xf0_u8, 0x44_u8])
   struct ISpContainerLexicon
     lpVtbl : ISpContainerLexiconVTbl*
   end
@@ -2223,8 +2223,8 @@ lib LibWin32
     get_generation_change : Proc(ISpShortcut*, UInt32*, SPSHORTCUTPAIRLIST*, HRESULT)
   end
 
-  ISpShortcut_GUID = LibC::GUID.new("3df681e2-ea56-11d9-8bde-f66bad1e3f3a")
-  CLSID_ISpShortcut = "3df681e2-ea56-11d9-8bde-f66bad1e3f3a"
+  ISpShortcut_GUID = "3df681e2-ea56-11d9-8bde-f66bad1e3f3a"
+  IID_ISpShortcut = LibC::GUID.new(0x3df681e2_u32, 0xea56_u16, 0x11d9_u16, StaticArray[0x8b_u8, 0xde_u8, 0xf6_u8, 0x6b_u8, 0xad_u8, 0x1e_u8, 0x3f_u8, 0x3a_u8])
   struct ISpShortcut
     lpVtbl : ISpShortcutVTbl*
   end
@@ -2239,8 +2239,8 @@ lib LibWin32
     id_to_phone : Proc(ISpPhoneConverter*, UInt16*, LibC::LPWSTR, HRESULT)
   end
 
-  ISpPhoneConverter_GUID = LibC::GUID.new("8445c581-0cac-4a38-abfe-9b2ce2826455")
-  CLSID_ISpPhoneConverter = "8445c581-0cac-4a38-abfe-9b2ce2826455"
+  ISpPhoneConverter_GUID = "8445c581-0cac-4a38-abfe-9b2ce2826455"
+  IID_ISpPhoneConverter = LibC::GUID.new(0x8445c581_u32, 0xcac_u16, 0x4a38_u16, StaticArray[0xab_u8, 0xfe_u8, 0x9b_u8, 0x2c_u8, 0xe2_u8, 0x82_u8, 0x64_u8, 0x55_u8])
   struct ISpPhoneConverter
     lpVtbl : ISpPhoneConverterVTbl*
   end
@@ -2256,8 +2256,8 @@ lib LibWin32
     get_max_convert_length : Proc(ISpPhoneticAlphabetConverter*, UInt32, LibC::BOOL, UInt32*, HRESULT)
   end
 
-  ISpPhoneticAlphabetConverter_GUID = LibC::GUID.new("133adcd4-19b4-4020-9fdc-842e78253b17")
-  CLSID_ISpPhoneticAlphabetConverter = "133adcd4-19b4-4020-9fdc-842e78253b17"
+  ISpPhoneticAlphabetConverter_GUID = "133adcd4-19b4-4020-9fdc-842e78253b17"
+  IID_ISpPhoneticAlphabetConverter = LibC::GUID.new(0x133adcd4_u32, 0x19b4_u16, 0x4020_u16, StaticArray[0x9f_u8, 0xdc_u8, 0x84_u8, 0x2e_u8, 0x78_u8, 0x25_u8, 0x3b_u8, 0x17_u8])
   struct ISpPhoneticAlphabetConverter
     lpVtbl : ISpPhoneticAlphabetConverterVTbl*
   end
@@ -2270,8 +2270,8 @@ lib LibWin32
     set_alphabet_to_ups : Proc(ISpPhoneticAlphabetSelection*, LibC::BOOL, HRESULT)
   end
 
-  ISpPhoneticAlphabetSelection_GUID = LibC::GUID.new("b2745efd-42ce-48ca-81f1-a96e02538a90")
-  CLSID_ISpPhoneticAlphabetSelection = "b2745efd-42ce-48ca-81f1-a96e02538a90"
+  ISpPhoneticAlphabetSelection_GUID = "b2745efd-42ce-48ca-81f1-a96e02538a90"
+  IID_ISpPhoneticAlphabetSelection = LibC::GUID.new(0xb2745efd_u32, 0x42ce_u16, 0x48ca_u16, StaticArray[0x81_u8, 0xf1_u8, 0xa9_u8, 0x6e_u8, 0x2_u8, 0x53_u8, 0x8a_u8, 0x90_u8])
   struct ISpPhoneticAlphabetSelection
     lpVtbl : ISpPhoneticAlphabetSelectionVTbl*
   end
@@ -2317,8 +2317,8 @@ lib LibWin32
     display_ui : Proc(ISpVoice*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)
   end
 
-  ISpVoice_GUID = LibC::GUID.new("6c44df74-72b9-4992-a1ec-ef996e0422d4")
-  CLSID_ISpVoice = "6c44df74-72b9-4992-a1ec-ef996e0422d4"
+  ISpVoice_GUID = "6c44df74-72b9-4992-a1ec-ef996e0422d4"
+  IID_ISpVoice = LibC::GUID.new(0x6c44df74_u32, 0x72b9_u16, 0x4992_u16, StaticArray[0xa1_u8, 0xec_u8, 0xef_u8, 0x99_u8, 0x6e_u8, 0x4_u8, 0x22_u8, 0xd4_u8])
   struct ISpVoice
     lpVtbl : ISpVoiceVTbl*
   end
@@ -2333,8 +2333,8 @@ lib LibWin32
     discard : Proc(ISpPhrase*, UInt32, HRESULT)
   end
 
-  ISpPhrase_GUID = LibC::GUID.new("1a5c0354-b621-4b5a-8791-d306ed379e53")
-  CLSID_ISpPhrase = "1a5c0354-b621-4b5a-8791-d306ed379e53"
+  ISpPhrase_GUID = "1a5c0354-b621-4b5a-8791-d306ed379e53"
+  IID_ISpPhrase = LibC::GUID.new(0x1a5c0354_u32, 0xb621_u16, 0x4b5a_u16, StaticArray[0x87_u8, 0x91_u8, 0xd3_u8, 0x6_u8, 0xed_u8, 0x37_u8, 0x9e_u8, 0x53_u8])
   struct ISpPhrase
     lpVtbl : ISpPhraseVTbl*
   end
@@ -2351,8 +2351,8 @@ lib LibWin32
     commit : Proc(ISpPhraseAlt*, HRESULT)
   end
 
-  ISpPhraseAlt_GUID = LibC::GUID.new("8fcebc98-4e49-4067-9c6c-d86a0e092e3d")
-  CLSID_ISpPhraseAlt = "8fcebc98-4e49-4067-9c6c-d86a0e092e3d"
+  ISpPhraseAlt_GUID = "8fcebc98-4e49-4067-9c6c-d86a0e092e3d"
+  IID_ISpPhraseAlt = LibC::GUID.new(0x8fcebc98_u32, 0x4e49_u16, 0x4067_u16, StaticArray[0x9c_u8, 0x6c_u8, 0xd8_u8, 0x6a_u8, 0xe_u8, 0x9_u8, 0x2e_u8, 0x3d_u8])
   struct ISpPhraseAlt
     lpVtbl : ISpPhraseAltVTbl*
   end
@@ -2370,8 +2370,8 @@ lib LibWin32
     get_audio : Proc(ISpPhrase2*, UInt32, UInt32, ISpStreamFormat*, HRESULT)
   end
 
-  ISpPhrase2_GUID = LibC::GUID.new("f264da52-e457-4696-b856-a737b717af79")
-  CLSID_ISpPhrase2 = "f264da52-e457-4696-b856-a737b717af79"
+  ISpPhrase2_GUID = "f264da52-e457-4696-b856-a737b717af79"
+  IID_ISpPhrase2 = LibC::GUID.new(0xf264da52_u32, 0xe457_u16, 0x4696_u16, StaticArray[0xb8_u8, 0x56_u8, 0xa7_u8, 0x37_u8, 0xb7_u8, 0x17_u8, 0xaf_u8, 0x79_u8])
   struct ISpPhrase2
     lpVtbl : ISpPhrase2VTbl*
   end
@@ -2393,8 +2393,8 @@ lib LibWin32
     get_reco_context : Proc(ISpRecoResult*, ISpRecoContext*, HRESULT)
   end
 
-  ISpRecoResult_GUID = LibC::GUID.new("20b053be-e235-43cd-9a2a-8d17a48b7842")
-  CLSID_ISpRecoResult = "20b053be-e235-43cd-9a2a-8d17a48b7842"
+  ISpRecoResult_GUID = "20b053be-e235-43cd-9a2a-8d17a48b7842"
+  IID_ISpRecoResult = LibC::GUID.new(0x20b053be_u32, 0xe235_u16, 0x43cd_u16, StaticArray[0x9a_u8, 0x2a_u8, 0x8d_u8, 0x17_u8, 0xa4_u8, 0x8b_u8, 0x78_u8, 0x42_u8])
   struct ISpRecoResult
     lpVtbl : ISpRecoResultVTbl*
   end
@@ -2419,8 +2419,8 @@ lib LibWin32
     set_text_feedback : Proc(ISpRecoResult2*, LibC::LPWSTR, LibC::BOOL, HRESULT)
   end
 
-  ISpRecoResult2_GUID = LibC::GUID.new("27cac6c4-88f2-41f2-8817-0c95e59f1e6e")
-  CLSID_ISpRecoResult2 = "27cac6c4-88f2-41f2-8817-0c95e59f1e6e"
+  ISpRecoResult2_GUID = "27cac6c4-88f2-41f2-8817-0c95e59f1e6e"
+  IID_ISpRecoResult2 = LibC::GUID.new(0x27cac6c4_u32, 0x88f2_u16, 0x41f2_u16, StaticArray[0x88_u8, 0x17_u8, 0xc_u8, 0x95_u8, 0xe5_u8, 0x9f_u8, 0x1e_u8, 0x6e_u8])
   struct ISpRecoResult2
     lpVtbl : ISpRecoResult2VTbl*
   end
@@ -2444,8 +2444,8 @@ lib LibWin32
     get_xml_error_info : Proc(ISpXMLRecoResult*, SPSEMANTICERRORINFO*, HRESULT)
   end
 
-  ISpXMLRecoResult_GUID = LibC::GUID.new("ae39362b-45a8-4074-9b9e-ccf49aa2d0b6")
-  CLSID_ISpXMLRecoResult = "ae39362b-45a8-4074-9b9e-ccf49aa2d0b6"
+  ISpXMLRecoResult_GUID = "ae39362b-45a8-4074-9b9e-ccf49aa2d0b6"
+  IID_ISpXMLRecoResult = LibC::GUID.new(0xae39362b_u32, 0x45a8_u16, 0x4074_u16, StaticArray[0x9b_u8, 0x9e_u8, 0xcc_u8, 0xf4_u8, 0x9a_u8, 0xa2_u8, 0xd0_u8, 0xb6_u8])
   struct ISpXMLRecoResult
     lpVtbl : ISpXMLRecoResultVTbl*
   end
@@ -2464,8 +2464,8 @@ lib LibWin32
     commit : Proc(ISpGrammarBuilder*, UInt32, HRESULT)
   end
 
-  ISpGrammarBuilder_GUID = LibC::GUID.new("8137828f-591a-4a42-be58-49ea7ebaac68")
-  CLSID_ISpGrammarBuilder = "8137828f-591a-4a42-be58-49ea7ebaac68"
+  ISpGrammarBuilder_GUID = "8137828f-591a-4a42-be58-49ea7ebaac68"
+  IID_ISpGrammarBuilder = LibC::GUID.new(0x8137828f_u32, 0x591a_u16, 0x4a42_u16, StaticArray[0xbe_u8, 0x58_u8, 0x49_u8, 0xea_u8, 0x7e_u8, 0xba_u8, 0xac_u8, 0x68_u8])
   struct ISpGrammarBuilder
     lpVtbl : ISpGrammarBuilderVTbl*
   end
@@ -2502,8 +2502,8 @@ lib LibWin32
     get_grammar_state : Proc(ISpRecoGrammar*, SPGRAMMARSTATE*, HRESULT)
   end
 
-  ISpRecoGrammar_GUID = LibC::GUID.new("2177db29-7f45-47d0-8554-067e91c80502")
-  CLSID_ISpRecoGrammar = "2177db29-7f45-47d0-8554-067e91c80502"
+  ISpRecoGrammar_GUID = "2177db29-7f45-47d0-8554-067e91c80502"
+  IID_ISpRecoGrammar = LibC::GUID.new(0x2177db29_u32, 0x7f45_u16, 0x47d0_u16, StaticArray[0x85_u8, 0x54_u8, 0x6_u8, 0x7e_u8, 0x91_u8, 0xc8_u8, 0x5_u8, 0x2_u8])
   struct ISpRecoGrammar
     lpVtbl : ISpRecoGrammarVTbl*
   end
@@ -2516,8 +2516,8 @@ lib LibWin32
     set_phonetic_alphabet : Proc(ISpGrammarBuilder2*, PHONETICALPHABET, HRESULT)
   end
 
-  ISpGrammarBuilder2_GUID = LibC::GUID.new("8ab10026-20cc-4b20-8c22-a49c9ba78f60")
-  CLSID_ISpGrammarBuilder2 = "8ab10026-20cc-4b20-8c22-a49c9ba78f60"
+  ISpGrammarBuilder2_GUID = "8ab10026-20cc-4b20-8c22-a49c9ba78f60"
+  IID_ISpGrammarBuilder2 = LibC::GUID.new(0x8ab10026_u32, 0x20cc_u16, 0x4b20_u16, StaticArray[0x8c_u8, 0x22_u8, 0xa4_u8, 0x9c_u8, 0x9b_u8, 0xa7_u8, 0x8f_u8, 0x60_u8])
   struct ISpGrammarBuilder2
     lpVtbl : ISpGrammarBuilder2VTbl*
   end
@@ -2536,8 +2536,8 @@ lib LibWin32
     set_sml_security_manager : Proc(ISpRecoGrammar2*, IInternetSecurityManager, HRESULT)
   end
 
-  ISpRecoGrammar2_GUID = LibC::GUID.new("4b37bc9e-9ed6-44a3-93d3-18f022b79ec3")
-  CLSID_ISpRecoGrammar2 = "4b37bc9e-9ed6-44a3-93d3-18f022b79ec3"
+  ISpRecoGrammar2_GUID = "4b37bc9e-9ed6-44a3-93d3-18f022b79ec3"
+  IID_ISpRecoGrammar2 = LibC::GUID.new(0x4b37bc9e_u32, 0x9ed6_u16, 0x44a3_u16, StaticArray[0x93_u8, 0xd3_u8, 0x18_u8, 0xf0_u8, 0x22_u8, 0xb7_u8, 0x9e_u8, 0xc3_u8])
   struct ISpRecoGrammar2
     lpVtbl : ISpRecoGrammar2VTbl*
   end
@@ -2555,8 +2555,8 @@ lib LibWin32
     release_local_copy : Proc(ISpeechResourceLoader*, UInt8*, HRESULT)
   end
 
-  ISpeechResourceLoader_GUID = LibC::GUID.new("b9ac5783-fcd0-4b21-b119-b4f8da8fd2c3")
-  CLSID_ISpeechResourceLoader = "b9ac5783-fcd0-4b21-b119-b4f8da8fd2c3"
+  ISpeechResourceLoader_GUID = "b9ac5783-fcd0-4b21-b119-b4f8da8fd2c3"
+  IID_ISpeechResourceLoader = LibC::GUID.new(0xb9ac5783_u32, 0xfcd0_u16, 0x4b21_u16, StaticArray[0xb1_u8, 0x19_u8, 0xb4_u8, 0xf8_u8, 0xda_u8, 0x8f_u8, 0xd2_u8, 0xc3_u8])
   struct ISpeechResourceLoader
     lpVtbl : ISpeechResourceLoaderVTbl*
   end
@@ -2595,8 +2595,8 @@ lib LibWin32
     get_context_state : Proc(ISpRecoContext*, SPCONTEXTSTATE*, HRESULT)
   end
 
-  ISpRecoContext_GUID = LibC::GUID.new("f740a62f-7c15-489e-8234-940a33d9272d")
-  CLSID_ISpRecoContext = "f740a62f-7c15-489e-8234-940a33d9272d"
+  ISpRecoContext_GUID = "f740a62f-7c15-489e-8234-940a33d9272d"
+  IID_ISpRecoContext = LibC::GUID.new(0xf740a62f_u32, 0x7c15_u16, 0x489e_u16, StaticArray[0x82_u8, 0x34_u8, 0x94_u8, 0xa_u8, 0x33_u8, 0xd9_u8, 0x27_u8, 0x2d_u8])
   struct ISpRecoContext
     lpVtbl : ISpRecoContextVTbl*
   end
@@ -2610,8 +2610,8 @@ lib LibWin32
     set_adaptation_data2 : Proc(ISpRecoContext2*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, SPADAPTATIONRELEVANCE, HRESULT)
   end
 
-  ISpRecoContext2_GUID = LibC::GUID.new("bead311c-52ff-437f-9464-6b21054ca73d")
-  CLSID_ISpRecoContext2 = "bead311c-52ff-437f-9464-6b21054ca73d"
+  ISpRecoContext2_GUID = "bead311c-52ff-437f-9464-6b21054ca73d"
+  IID_ISpRecoContext2 = LibC::GUID.new(0xbead311c_u32, 0x52ff_u16, 0x437f_u16, StaticArray[0x94_u8, 0x64_u8, 0x6b_u8, 0x21_u8, 0x5_u8, 0x4c_u8, 0xa7_u8, 0x3d_u8])
   struct ISpRecoContext2
     lpVtbl : ISpRecoContext2VTbl*
   end
@@ -2626,8 +2626,8 @@ lib LibWin32
     get_property_string : Proc(ISpProperties*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
-  ISpProperties_GUID = LibC::GUID.new("5b4fb971-b115-4de1-ad97-e482e3bf6ee4")
-  CLSID_ISpProperties = "5b4fb971-b115-4de1-ad97-e482e3bf6ee4"
+  ISpProperties_GUID = "5b4fb971-b115-4de1-ad97-e482e3bf6ee4"
+  IID_ISpProperties = LibC::GUID.new(0x5b4fb971_u32, 0xb115_u16, 0x4de1_u16, StaticArray[0xad_u8, 0x97_u8, 0xe4_u8, 0x82_u8, 0xe3_u8, 0xbf_u8, 0x6e_u8, 0xe4_u8])
   struct ISpProperties
     lpVtbl : ISpPropertiesVTbl*
   end
@@ -2658,8 +2658,8 @@ lib LibWin32
     emulate_recognition : Proc(ISpRecognizer*, ISpPhrase, HRESULT)
   end
 
-  ISpRecognizer_GUID = LibC::GUID.new("c2b5f241-daa0-4507-9e16-5a1eaa2b7a5c")
-  CLSID_ISpRecognizer = "c2b5f241-daa0-4507-9e16-5a1eaa2b7a5c"
+  ISpRecognizer_GUID = "c2b5f241-daa0-4507-9e16-5a1eaa2b7a5c"
+  IID_ISpRecognizer = LibC::GUID.new(0xc2b5f241_u32, 0xdaa0_u16, 0x4507_u16, StaticArray[0x9e_u8, 0x16_u8, 0x5a_u8, 0x1e_u8, 0xaa_u8, 0x2b_u8, 0x7a_u8, 0x5c_u8])
   struct ISpRecognizer
     lpVtbl : ISpRecognizerVTbl*
   end
@@ -2672,8 +2672,8 @@ lib LibWin32
     set_serialized_state : Proc(ISpSerializeState*, UInt8*, UInt32, UInt32, HRESULT)
   end
 
-  ISpSerializeState_GUID = LibC::GUID.new("21b501a0-0ec7-46c9-92c3-a2bc784c54b9")
-  CLSID_ISpSerializeState = "21b501a0-0ec7-46c9-92c3-a2bc784c54b9"
+  ISpSerializeState_GUID = "21b501a0-0ec7-46c9-92c3-a2bc784c54b9"
+  IID_ISpSerializeState = LibC::GUID.new(0x21b501a0_u32, 0xec7_u16, 0x46c9_u16, StaticArray[0x92_u8, 0xc3_u8, 0xa2_u8, 0xbc_u8, 0x78_u8, 0x4c_u8, 0x54_u8, 0xb9_u8])
   struct ISpSerializeState
     lpVtbl : ISpSerializeStateVTbl*
   end
@@ -2687,8 +2687,8 @@ lib LibWin32
     reset_acoustic_model_adaptation : Proc(ISpRecognizer2*, HRESULT)
   end
 
-  ISpRecognizer2_GUID = LibC::GUID.new("8fc6d974-c81e-4098-93c5-0147f61ed4d3")
-  CLSID_ISpRecognizer2 = "8fc6d974-c81e-4098-93c5-0147f61ed4d3"
+  ISpRecognizer2_GUID = "8fc6d974-c81e-4098-93c5-0147f61ed4d3"
+  IID_ISpRecognizer2 = LibC::GUID.new(0x8fc6d974_u32, 0xc81e_u16, 0x4098_u16, StaticArray[0x93_u8, 0xc5_u8, 0x1_u8, 0x47_u8, 0xf6_u8, 0x1e_u8, 0xd4_u8, 0xd3_u8])
   struct ISpRecognizer2
     lpVtbl : ISpRecognizer2VTbl*
   end
@@ -2701,8 +2701,8 @@ lib LibWin32
     get_pronunciations : Proc(ISpEnginePronunciation*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt16, SPWORDPRONUNCIATIONLIST*, HRESULT)
   end
 
-  ISpEnginePronunciation_GUID = LibC::GUID.new("c360ce4b-76d1-4214-ad68-52657d5083da")
-  CLSID_ISpEnginePronunciation = "c360ce4b-76d1-4214-ad68-52657d5083da"
+  ISpEnginePronunciation_GUID = "c360ce4b-76d1-4214-ad68-52657d5083da"
+  IID_ISpEnginePronunciation = LibC::GUID.new(0xc360ce4b_u32, 0x76d1_u16, 0x4214_u16, StaticArray[0xad_u8, 0x68_u8, 0x52_u8, 0x65_u8, 0x7d_u8, 0x50_u8, 0x83_u8, 0xda_u8])
   struct ISpEnginePronunciation
     lpVtbl : ISpEnginePronunciationVTbl*
   end
@@ -2715,8 +2715,8 @@ lib LibWin32
     set_full_stop_trail_space : Proc(ISpDisplayAlternates*, UInt32, HRESULT)
   end
 
-  ISpDisplayAlternates_GUID = LibC::GUID.new("c8d7c7e2-0dde-44b7-afe3-b0c991fbeb5e")
-  CLSID_ISpDisplayAlternates = "c8d7c7e2-0dde-44b7-afe3-b0c991fbeb5e"
+  ISpDisplayAlternates_GUID = "c8d7c7e2-0dde-44b7-afe3-b0c991fbeb5e"
+  IID_ISpDisplayAlternates = LibC::GUID.new(0xc8d7c7e2_u32, 0xdde_u16, 0x44b7_u16, StaticArray[0xaf_u8, 0xe3_u8, 0xb0_u8, 0xc9_u8, 0x91_u8, 0xfb_u8, 0xeb_u8, 0x5e_u8])
   struct ISpDisplayAlternates
     lpVtbl : ISpDisplayAlternatesVTbl*
   end
@@ -2743,8 +2743,8 @@ lib LibWin32
     enum_values : Proc(ISpeechDataKey*, Int32, UInt8**, HRESULT)
   end
 
-  ISpeechDataKey_GUID = LibC::GUID.new("ce17c09b-4efa-44d5-a4c9-59d9585ab0cd")
-  CLSID_ISpeechDataKey = "ce17c09b-4efa-44d5-a4c9-59d9585ab0cd"
+  ISpeechDataKey_GUID = "ce17c09b-4efa-44d5-a4c9-59d9585ab0cd"
+  IID_ISpeechDataKey = LibC::GUID.new(0xce17c09b_u32, 0x4efa_u16, 0x44d5_u16, StaticArray[0xa4_u8, 0xc9_u8, 0x59_u8, 0xd9_u8, 0x58_u8, 0x5a_u8, 0xb0_u8, 0xcd_u8])
   struct ISpeechDataKey
     lpVtbl : ISpeechDataKeyVTbl*
   end
@@ -2772,8 +2772,8 @@ lib LibWin32
     matches_attributes : Proc(ISpeechObjectToken*, UInt8*, Int16*, HRESULT)
   end
 
-  ISpeechObjectToken_GUID = LibC::GUID.new("c74a3adc-b727-4500-a84a-b526721c8b8c")
-  CLSID_ISpeechObjectToken = "c74a3adc-b727-4500-a84a-b526721c8b8c"
+  ISpeechObjectToken_GUID = "c74a3adc-b727-4500-a84a-b526721c8b8c"
+  IID_ISpeechObjectToken = LibC::GUID.new(0xc74a3adc_u32, 0xb727_u16, 0x4500_u16, StaticArray[0xa8_u8, 0x4a_u8, 0xb5_u8, 0x26_u8, 0x72_u8, 0x1c_u8, 0x8b_u8, 0x8c_u8])
   struct ISpeechObjectToken
     lpVtbl : ISpeechObjectTokenVTbl*
   end
@@ -2791,8 +2791,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechObjectTokens*, IUnknown*, HRESULT)
   end
 
-  ISpeechObjectTokens_GUID = LibC::GUID.new("9285b776-2e7b-4bc0-b53e-580eb6fa967f")
-  CLSID_ISpeechObjectTokens = "9285b776-2e7b-4bc0-b53e-580eb6fa967f"
+  ISpeechObjectTokens_GUID = "9285b776-2e7b-4bc0-b53e-580eb6fa967f"
+  IID_ISpeechObjectTokens = LibC::GUID.new(0x9285b776_u32, 0x2e7b_u16, 0x4bc0_u16, StaticArray[0xb5_u8, 0x3e_u8, 0x58_u8, 0xe_u8, 0xb6_u8, 0xfa_u8, 0x96_u8, 0x7f_u8])
   struct ISpeechObjectTokens
     lpVtbl : ISpeechObjectTokensVTbl*
   end
@@ -2813,8 +2813,8 @@ lib LibWin32
     enumerate_tokens : Proc(ISpeechObjectTokenCategory*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
   end
 
-  ISpeechObjectTokenCategory_GUID = LibC::GUID.new("ca7eac50-2d01-4145-86d4-5ae7d70f4469")
-  CLSID_ISpeechObjectTokenCategory = "ca7eac50-2d01-4145-86d4-5ae7d70f4469"
+  ISpeechObjectTokenCategory_GUID = "ca7eac50-2d01-4145-86d4-5ae7d70f4469"
+  IID_ISpeechObjectTokenCategory = LibC::GUID.new(0xca7eac50_u32, 0x2d01_u16, 0x4145_u16, StaticArray[0x86_u8, 0xd4_u8, 0x5a_u8, 0xe7_u8, 0xd7_u8, 0xf_u8, 0x44_u8, 0x69_u8])
   struct ISpeechObjectTokenCategory
     lpVtbl : ISpeechObjectTokenCategoryVTbl*
   end
@@ -2835,8 +2835,8 @@ lib LibWin32
     put_event_bias : Proc(ISpeechAudioBufferInfo*, Int32, HRESULT)
   end
 
-  ISpeechAudioBufferInfo_GUID = LibC::GUID.new("11b103d8-1142-4edf-a093-82fb3915f8cc")
-  CLSID_ISpeechAudioBufferInfo = "11b103d8-1142-4edf-a093-82fb3915f8cc"
+  ISpeechAudioBufferInfo_GUID = "11b103d8-1142-4edf-a093-82fb3915f8cc"
+  IID_ISpeechAudioBufferInfo = LibC::GUID.new(0x11b103d8_u32, 0x1142_u16, 0x4edf_u16, StaticArray[0xa0_u8, 0x93_u8, 0x82_u8, 0xfb_u8, 0x39_u8, 0x15_u8, 0xf8_u8, 0xcc_u8])
   struct ISpeechAudioBufferInfo
     lpVtbl : ISpeechAudioBufferInfoVTbl*
   end
@@ -2856,8 +2856,8 @@ lib LibWin32
     get_current_device_position : Proc(ISpeechAudioStatus*, VARIANT*, HRESULT)
   end
 
-  ISpeechAudioStatus_GUID = LibC::GUID.new("c62d9c91-7458-47f6-862d-1ef86fb0b278")
-  CLSID_ISpeechAudioStatus = "c62d9c91-7458-47f6-862d-1ef86fb0b278"
+  ISpeechAudioStatus_GUID = "c62d9c91-7458-47f6-862d-1ef86fb0b278"
+  IID_ISpeechAudioStatus = LibC::GUID.new(0xc62d9c91_u32, 0x7458_u16, 0x47f6_u16, StaticArray[0x86_u8, 0x2d_u8, 0x1e_u8, 0xf8_u8, 0x6f_u8, 0xb0_u8, 0xb2_u8, 0x78_u8])
   struct ISpeechAudioStatus
     lpVtbl : ISpeechAudioStatusVTbl*
   end
@@ -2878,8 +2878,8 @@ lib LibWin32
     set_wave_format_ex : Proc(ISpeechAudioFormat*, ISpeechWaveFormatEx, HRESULT)
   end
 
-  ISpeechAudioFormat_GUID = LibC::GUID.new("e6e9c590-3e18-40e3-8299-061f98bde7c7")
-  CLSID_ISpeechAudioFormat = "e6e9c590-3e18-40e3-8299-061f98bde7c7"
+  ISpeechAudioFormat_GUID = "e6e9c590-3e18-40e3-8299-061f98bde7c7"
+  IID_ISpeechAudioFormat = LibC::GUID.new(0xe6e9c590_u32, 0x3e18_u16, 0x40e3_u16, StaticArray[0x82_u8, 0x99_u8, 0x6_u8, 0x1f_u8, 0x98_u8, 0xbd_u8, 0xe7_u8, 0xc7_u8])
   struct ISpeechAudioFormat
     lpVtbl : ISpeechAudioFormatVTbl*
   end
@@ -2908,8 +2908,8 @@ lib LibWin32
     put_extra_data : Proc(ISpeechWaveFormatEx*, VARIANT, HRESULT)
   end
 
-  ISpeechWaveFormatEx_GUID = LibC::GUID.new("7a1ef0d5-1581-4741-88e4-209a49f11a10")
-  CLSID_ISpeechWaveFormatEx = "7a1ef0d5-1581-4741-88e4-209a49f11a10"
+  ISpeechWaveFormatEx_GUID = "7a1ef0d5-1581-4741-88e4-209a49f11a10"
+  IID_ISpeechWaveFormatEx = LibC::GUID.new(0x7a1ef0d5_u32, 0x1581_u16, 0x4741_u16, StaticArray[0x88_u8, 0xe4_u8, 0x20_u8, 0x9a_u8, 0x49_u8, 0xf1_u8, 0x1a_u8, 0x10_u8])
   struct ISpeechWaveFormatEx
     lpVtbl : ISpeechWaveFormatExVTbl*
   end
@@ -2929,8 +2929,8 @@ lib LibWin32
     seek : Proc(ISpeechBaseStream*, VARIANT, SpeechStreamSeekPositionType, VARIANT*, HRESULT)
   end
 
-  ISpeechBaseStream_GUID = LibC::GUID.new("6450336f-7d49-4ced-8097-49d6dee37294")
-  CLSID_ISpeechBaseStream = "6450336f-7d49-4ced-8097-49d6dee37294"
+  ISpeechBaseStream_GUID = "6450336f-7d49-4ced-8097-49d6dee37294"
+  IID_ISpeechBaseStream = LibC::GUID.new(0x6450336f_u32, 0x7d49_u16, 0x4ced_u16, StaticArray[0x80_u8, 0x97_u8, 0x49_u8, 0xd6_u8, 0xde_u8, 0xe3_u8, 0x72_u8, 0x94_u8])
   struct ISpeechBaseStream
     lpVtbl : ISpeechBaseStreamVTbl*
   end
@@ -2952,8 +2952,8 @@ lib LibWin32
     close : Proc(ISpeechFileStream*, HRESULT)
   end
 
-  ISpeechFileStream_GUID = LibC::GUID.new("af67f125-ab39-4e93-b4a2-cc2e66e182a7")
-  CLSID_ISpeechFileStream = "af67f125-ab39-4e93-b4a2-cc2e66e182a7"
+  ISpeechFileStream_GUID = "af67f125-ab39-4e93-b4a2-cc2e66e182a7"
+  IID_ISpeechFileStream = LibC::GUID.new(0xaf67f125_u32, 0xab39_u16, 0x4e93_u16, StaticArray[0xb4_u8, 0xa2_u8, 0xcc_u8, 0x2e_u8, 0x66_u8, 0xe1_u8, 0x82_u8, 0xa7_u8])
   struct ISpeechFileStream
     lpVtbl : ISpeechFileStreamVTbl*
   end
@@ -2975,8 +2975,8 @@ lib LibWin32
     get_data : Proc(ISpeechMemoryStream*, VARIANT*, HRESULT)
   end
 
-  ISpeechMemoryStream_GUID = LibC::GUID.new("eeb14b68-808b-4abe-a5ea-b51da7588008")
-  CLSID_ISpeechMemoryStream = "eeb14b68-808b-4abe-a5ea-b51da7588008"
+  ISpeechMemoryStream_GUID = "eeb14b68-808b-4abe-a5ea-b51da7588008"
+  IID_ISpeechMemoryStream = LibC::GUID.new(0xeeb14b68_u32, 0x808b_u16, 0x4abe_u16, StaticArray[0xa5_u8, 0xea_u8, 0xb5_u8, 0x1d_u8, 0xa7_u8, 0x58_u8, 0x80_u8, 0x8_u8])
   struct ISpeechMemoryStream
     lpVtbl : ISpeechMemoryStreamVTbl*
   end
@@ -2998,8 +2998,8 @@ lib LibWin32
     putref_base_stream : Proc(ISpeechCustomStream*, IUnknown, HRESULT)
   end
 
-  ISpeechCustomStream_GUID = LibC::GUID.new("1a9e9f4f-104f-4db8-a115-efd7fd0c97ae")
-  CLSID_ISpeechCustomStream = "1a9e9f4f-104f-4db8-a115-efd7fd0c97ae"
+  ISpeechCustomStream_GUID = "1a9e9f4f-104f-4db8-a115-efd7fd0c97ae"
+  IID_ISpeechCustomStream = LibC::GUID.new(0x1a9e9f4f_u32, 0x104f_u16, 0x4db8_u16, StaticArray[0xa1_u8, 0x15_u8, 0xef_u8, 0xd7_u8, 0xfd_u8, 0xc_u8, 0x97_u8, 0xae_u8])
   struct ISpeechCustomStream
     lpVtbl : ISpeechCustomStreamVTbl*
   end
@@ -3028,8 +3028,8 @@ lib LibWin32
     set_state : Proc(ISpeechAudio*, SpeechAudioState, HRESULT)
   end
 
-  ISpeechAudio_GUID = LibC::GUID.new("cff8e175-019e-11d3-a08e-00c04f8ef9b5")
-  CLSID_ISpeechAudio = "cff8e175-019e-11d3-a08e-00c04f8ef9b5"
+  ISpeechAudio_GUID = "cff8e175-019e-11d3-a08e-00c04f8ef9b5"
+  IID_ISpeechAudio = LibC::GUID.new(0xcff8e175_u32, 0x19e_u16, 0x11d3_u16, StaticArray[0xa0_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf9_u8, 0xb5_u8])
   struct ISpeechAudio
     lpVtbl : ISpeechAudioVTbl*
   end
@@ -3063,8 +3063,8 @@ lib LibWin32
     get_mm_handle : Proc(ISpeechMMSysAudio*, Int32*, HRESULT)
   end
 
-  ISpeechMMSysAudio_GUID = LibC::GUID.new("3c76af6d-1fd7-4831-81d1-3b71d5a13c44")
-  CLSID_ISpeechMMSysAudio = "3c76af6d-1fd7-4831-81d1-3b71d5a13c44"
+  ISpeechMMSysAudio_GUID = "3c76af6d-1fd7-4831-81d1-3b71d5a13c44"
+  IID_ISpeechMMSysAudio = LibC::GUID.new(0x3c76af6d_u32, 0x1fd7_u16, 0x4831_u16, StaticArray[0x81_u8, 0xd1_u8, 0x3b_u8, 0x71_u8, 0xd5_u8, 0xa1_u8, 0x3c_u8, 0x44_u8])
   struct ISpeechMMSysAudio
     lpVtbl : ISpeechMMSysAudioVTbl*
   end
@@ -3111,8 +3111,8 @@ lib LibWin32
     display_ui : Proc(ISpeechVoice*, Int32, UInt8*, UInt8*, VARIANT*, HRESULT)
   end
 
-  ISpeechVoice_GUID = LibC::GUID.new("269316d8-57bd-11d2-9eee-00c04f797396")
-  CLSID_ISpeechVoice = "269316d8-57bd-11d2-9eee-00c04f797396"
+  ISpeechVoice_GUID = "269316d8-57bd-11d2-9eee-00c04f797396"
+  IID_ISpeechVoice = LibC::GUID.new(0x269316d8_u32, 0x57bd_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xee_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
   struct ISpeechVoice
     lpVtbl : ISpeechVoiceVTbl*
   end
@@ -3139,8 +3139,8 @@ lib LibWin32
     get_viseme_id : Proc(ISpeechVoiceStatus*, Int16*, HRESULT)
   end
 
-  ISpeechVoiceStatus_GUID = LibC::GUID.new("8be47b07-57f6-11d2-9eee-00c04f797396")
-  CLSID_ISpeechVoiceStatus = "8be47b07-57f6-11d2-9eee-00c04f797396"
+  ISpeechVoiceStatus_GUID = "8be47b07-57f6-11d2-9eee-00c04f797396"
+  IID_ISpeechVoiceStatus = LibC::GUID.new(0x8be47b07_u32, 0x57f6_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xee_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
   struct ISpeechVoiceStatus
     lpVtbl : ISpeechVoiceStatusVTbl*
   end
@@ -3155,8 +3155,8 @@ lib LibWin32
     invoke : Proc(IISpeechVoiceEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IISpeechVoiceEvents_GUID = LibC::GUID.new("a372acd1-3bef-4bbd-8ffb-cb3e2b416af8")
-  CLSID_IISpeechVoiceEvents = "a372acd1-3bef-4bbd-8ffb-cb3e2b416af8"
+  IISpeechVoiceEvents_GUID = "a372acd1-3bef-4bbd-8ffb-cb3e2b416af8"
+  IID_IISpeechVoiceEvents = LibC::GUID.new(0xa372acd1_u32, 0x3bef_u16, 0x4bbd_u16, StaticArray[0x8f_u8, 0xfb_u8, 0xcb_u8, 0x3e_u8, 0x2b_u8, 0x41_u8, 0x6a_u8, 0xf8_u8])
   struct IISpeechVoiceEvents
     lpVtbl : IISpeechVoiceEventsVTbl*
   end
@@ -3197,8 +3197,8 @@ lib LibWin32
     get_profiles : Proc(ISpeechRecognizer*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
   end
 
-  ISpeechRecognizer_GUID = LibC::GUID.new("2d5f1c0c-bd75-4b08-9478-3b11fea2586c")
-  CLSID_ISpeechRecognizer = "2d5f1c0c-bd75-4b08-9478-3b11fea2586c"
+  ISpeechRecognizer_GUID = "2d5f1c0c-bd75-4b08-9478-3b11fea2586c"
+  IID_ISpeechRecognizer = LibC::GUID.new(0x2d5f1c0c_u32, 0xbd75_u16, 0x4b08_u16, StaticArray[0x94_u8, 0x78_u8, 0x3b_u8, 0x11_u8, 0xfe_u8, 0xa2_u8, 0x58_u8, 0x6c_u8])
   struct ISpeechRecognizer
     lpVtbl : ISpeechRecognizerVTbl*
   end
@@ -3219,8 +3219,8 @@ lib LibWin32
     get_supported_languages : Proc(ISpeechRecognizerStatus*, VARIANT*, HRESULT)
   end
 
-  ISpeechRecognizerStatus_GUID = LibC::GUID.new("bff9e781-53ec-484e-bb8a-0e1b5551e35c")
-  CLSID_ISpeechRecognizerStatus = "bff9e781-53ec-484e-bb8a-0e1b5551e35c"
+  ISpeechRecognizerStatus_GUID = "bff9e781-53ec-484e-bb8a-0e1b5551e35c"
+  IID_ISpeechRecognizerStatus = LibC::GUID.new(0xbff9e781_u32, 0x53ec_u16, 0x484e_u16, StaticArray[0xbb_u8, 0x8a_u8, 0xe_u8, 0x1b_u8, 0x55_u8, 0x51_u8, 0xe3_u8, 0x5c_u8])
   struct ISpeechRecognizerStatus
     lpVtbl : ISpeechRecognizerStatusVTbl*
   end
@@ -3260,8 +3260,8 @@ lib LibWin32
     set_adaptation_data : Proc(ISpeechRecoContext*, UInt8*, HRESULT)
   end
 
-  ISpeechRecoContext_GUID = LibC::GUID.new("580aa49d-7e1e-4809-b8e2-57da806104b8")
-  CLSID_ISpeechRecoContext = "580aa49d-7e1e-4809-b8e2-57da806104b8"
+  ISpeechRecoContext_GUID = "580aa49d-7e1e-4809-b8e2-57da806104b8"
+  IID_ISpeechRecoContext = LibC::GUID.new(0x580aa49d_u32, 0x7e1e_u16, 0x4809_u16, StaticArray[0xb8_u8, 0xe2_u8, 0x57_u8, 0xda_u8, 0x80_u8, 0x61_u8, 0x4_u8, 0xb8_u8])
   struct ISpeechRecoContext
     lpVtbl : ISpeechRecoContextVTbl*
   end
@@ -3295,8 +3295,8 @@ lib LibWin32
     is_pronounceable : Proc(ISpeechRecoGrammar*, UInt8*, SpeechWordPronounceable*, HRESULT)
   end
 
-  ISpeechRecoGrammar_GUID = LibC::GUID.new("b6d6f79f-2158-4e50-b5bc-9a9ccd852a09")
-  CLSID_ISpeechRecoGrammar = "b6d6f79f-2158-4e50-b5bc-9a9ccd852a09"
+  ISpeechRecoGrammar_GUID = "b6d6f79f-2158-4e50-b5bc-9a9ccd852a09"
+  IID_ISpeechRecoGrammar = LibC::GUID.new(0xb6d6f79f_u32, 0x2158_u16, 0x4e50_u16, StaticArray[0xb5_u8, 0xbc_u8, 0x9a_u8, 0x9c_u8, 0xcd_u8, 0x85_u8, 0x2a_u8, 0x9_u8])
   struct ISpeechRecoGrammar
     lpVtbl : ISpeechRecoGrammarVTbl*
   end
@@ -3311,8 +3311,8 @@ lib LibWin32
     invoke : Proc(IISpeechRecoContextEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IISpeechRecoContextEvents_GUID = LibC::GUID.new("7b8fcb42-0e9d-4f00-a048-7b04d6179d3d")
-  CLSID_IISpeechRecoContextEvents = "7b8fcb42-0e9d-4f00-a048-7b04d6179d3d"
+  IISpeechRecoContextEvents_GUID = "7b8fcb42-0e9d-4f00-a048-7b04d6179d3d"
+  IID_IISpeechRecoContextEvents = LibC::GUID.new(0x7b8fcb42_u32, 0xe9d_u16, 0x4f00_u16, StaticArray[0xa0_u8, 0x48_u8, 0x7b_u8, 0x4_u8, 0xd6_u8, 0x17_u8, 0x9d_u8, 0x3d_u8])
   struct IISpeechRecoContextEvents
     lpVtbl : IISpeechRecoContextEventsVTbl*
   end
@@ -3334,8 +3334,8 @@ lib LibWin32
     add_state : Proc(ISpeechGrammarRule*, ISpeechGrammarRuleState*, HRESULT)
   end
 
-  ISpeechGrammarRule_GUID = LibC::GUID.new("afe719cf-5dd1-44f2-999c-7a399f1cfccc")
-  CLSID_ISpeechGrammarRule = "afe719cf-5dd1-44f2-999c-7a399f1cfccc"
+  ISpeechGrammarRule_GUID = "afe719cf-5dd1-44f2-999c-7a399f1cfccc"
+  IID_ISpeechGrammarRule = LibC::GUID.new(0xafe719cf_u32, 0x5dd1_u16, 0x44f2_u16, StaticArray[0x99_u8, 0x9c_u8, 0x7a_u8, 0x39_u8, 0x9f_u8, 0x1c_u8, 0xfc_u8, 0xcc_u8])
   struct ISpeechGrammarRule
     lpVtbl : ISpeechGrammarRuleVTbl*
   end
@@ -3358,8 +3358,8 @@ lib LibWin32
     commit_and_save : Proc(ISpeechGrammarRules*, UInt8**, VARIANT*, HRESULT)
   end
 
-  ISpeechGrammarRules_GUID = LibC::GUID.new("6ffa3b44-fc2d-40d1-8afc-32911c7f1ad1")
-  CLSID_ISpeechGrammarRules = "6ffa3b44-fc2d-40d1-8afc-32911c7f1ad1"
+  ISpeechGrammarRules_GUID = "6ffa3b44-fc2d-40d1-8afc-32911c7f1ad1"
+  IID_ISpeechGrammarRules = LibC::GUID.new(0x6ffa3b44_u32, 0xfc2d_u16, 0x40d1_u16, StaticArray[0x8a_u8, 0xfc_u8, 0x32_u8, 0x91_u8, 0x1c_u8, 0x7f_u8, 0x1a_u8, 0xd1_u8])
   struct ISpeechGrammarRules
     lpVtbl : ISpeechGrammarRulesVTbl*
   end
@@ -3379,8 +3379,8 @@ lib LibWin32
     add_special_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, SpeechSpecialTransitionType, UInt8*, Int32, VARIANT*, Float32, HRESULT)
   end
 
-  ISpeechGrammarRuleState_GUID = LibC::GUID.new("d4286f2c-ee67-45ae-b928-28d695362eda")
-  CLSID_ISpeechGrammarRuleState = "d4286f2c-ee67-45ae-b928-28d695362eda"
+  ISpeechGrammarRuleState_GUID = "d4286f2c-ee67-45ae-b928-28d695362eda"
+  IID_ISpeechGrammarRuleState = LibC::GUID.new(0xd4286f2c_u32, 0xee67_u16, 0x45ae_u16, StaticArray[0xb9_u8, 0x28_u8, 0x28_u8, 0xd6_u8, 0x95_u8, 0x36_u8, 0x2e_u8, 0xda_u8])
   struct ISpeechGrammarRuleState
     lpVtbl : ISpeechGrammarRuleStateVTbl*
   end
@@ -3403,8 +3403,8 @@ lib LibWin32
     get_next_state : Proc(ISpeechGrammarRuleStateTransition*, ISpeechGrammarRuleState*, HRESULT)
   end
 
-  ISpeechGrammarRuleStateTransition_GUID = LibC::GUID.new("cafd1db1-41d1-4a06-9863-e2e81da17a9a")
-  CLSID_ISpeechGrammarRuleStateTransition = "cafd1db1-41d1-4a06-9863-e2e81da17a9a"
+  ISpeechGrammarRuleStateTransition_GUID = "cafd1db1-41d1-4a06-9863-e2e81da17a9a"
+  IID_ISpeechGrammarRuleStateTransition = LibC::GUID.new(0xcafd1db1_u32, 0x41d1_u16, 0x4a06_u16, StaticArray[0x98_u8, 0x63_u8, 0xe2_u8, 0xe8_u8, 0x1d_u8, 0xa1_u8, 0x7a_u8, 0x9a_u8])
   struct ISpeechGrammarRuleStateTransition
     lpVtbl : ISpeechGrammarRuleStateTransitionVTbl*
   end
@@ -3422,8 +3422,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechGrammarRuleStateTransitions*, IUnknown*, HRESULT)
   end
 
-  ISpeechGrammarRuleStateTransitions_GUID = LibC::GUID.new("eabce657-75bc-44a2-aa7f-c56476742963")
-  CLSID_ISpeechGrammarRuleStateTransitions = "eabce657-75bc-44a2-aa7f-c56476742963"
+  ISpeechGrammarRuleStateTransitions_GUID = "eabce657-75bc-44a2-aa7f-c56476742963"
+  IID_ISpeechGrammarRuleStateTransitions = LibC::GUID.new(0xeabce657_u32, 0x75bc_u16, 0x44a2_u16, StaticArray[0xaa_u8, 0x7f_u8, 0xc5_u8, 0x64_u8, 0x76_u8, 0x74_u8, 0x29_u8, 0x63_u8])
   struct ISpeechGrammarRuleStateTransitions
     lpVtbl : ISpeechGrammarRuleStateTransitionsVTbl*
   end
@@ -3446,8 +3446,8 @@ lib LibWin32
     get_selection_length : Proc(ISpeechTextSelectionInformation*, Int32*, HRESULT)
   end
 
-  ISpeechTextSelectionInformation_GUID = LibC::GUID.new("3b9c7e7a-6eee-4ded-9092-11657279adbe")
-  CLSID_ISpeechTextSelectionInformation = "3b9c7e7a-6eee-4ded-9092-11657279adbe"
+  ISpeechTextSelectionInformation_GUID = "3b9c7e7a-6eee-4ded-9092-11657279adbe"
+  IID_ISpeechTextSelectionInformation = LibC::GUID.new(0x3b9c7e7a_u32, 0x6eee_u16, 0x4ded_u16, StaticArray[0x90_u8, 0x92_u8, 0x11_u8, 0x65_u8, 0x72_u8, 0x79_u8, 0xad_u8, 0xbe_u8])
   struct ISpeechTextSelectionInformation
     lpVtbl : ISpeechTextSelectionInformationVTbl*
   end
@@ -3472,8 +3472,8 @@ lib LibWin32
     discard_result_info : Proc(ISpeechRecoResult*, SpeechDiscardType, HRESULT)
   end
 
-  ISpeechRecoResult_GUID = LibC::GUID.new("ed2879cf-ced9-4ee6-a534-de0191d5468d")
-  CLSID_ISpeechRecoResult = "ed2879cf-ced9-4ee6-a534-de0191d5468d"
+  ISpeechRecoResult_GUID = "ed2879cf-ced9-4ee6-a534-de0191d5468d"
+  IID_ISpeechRecoResult = LibC::GUID.new(0xed2879cf_u32, 0xced9_u16, 0x4ee6_u16, StaticArray[0xa5_u8, 0x34_u8, 0xde_u8, 0x1_u8, 0x91_u8, 0xd5_u8, 0x46_u8, 0x8d_u8])
   struct ISpeechRecoResult
     lpVtbl : ISpeechRecoResultVTbl*
   end
@@ -3499,8 +3499,8 @@ lib LibWin32
     set_text_feedback : Proc(ISpeechRecoResult2*, UInt8*, Int16, HRESULT)
   end
 
-  ISpeechRecoResult2_GUID = LibC::GUID.new("8e0a246d-d3c8-45de-8657-04290c458c3c")
-  CLSID_ISpeechRecoResult2 = "8e0a246d-d3c8-45de-8657-04290c458c3c"
+  ISpeechRecoResult2_GUID = "8e0a246d-d3c8-45de-8657-04290c458c3c"
+  IID_ISpeechRecoResult2 = LibC::GUID.new(0x8e0a246d_u32, 0xd3c8_u16, 0x45de_u16, StaticArray[0x86_u8, 0x57_u8, 0x4_u8, 0x29_u8, 0xc_u8, 0x45_u8, 0x8c_u8, 0x3c_u8])
   struct ISpeechRecoResult2
     lpVtbl : ISpeechRecoResult2VTbl*
   end
@@ -3519,8 +3519,8 @@ lib LibWin32
     get_offset_from_start : Proc(ISpeechRecoResultTimes*, VARIANT*, HRESULT)
   end
 
-  ISpeechRecoResultTimes_GUID = LibC::GUID.new("62b3b8fb-f6e7-41be-bdcb-056b1c29efc0")
-  CLSID_ISpeechRecoResultTimes = "62b3b8fb-f6e7-41be-bdcb-056b1c29efc0"
+  ISpeechRecoResultTimes_GUID = "62b3b8fb-f6e7-41be-bdcb-056b1c29efc0"
+  IID_ISpeechRecoResultTimes = LibC::GUID.new(0x62b3b8fb_u32, 0xf6e7_u16, 0x41be_u16, StaticArray[0xbd_u8, 0xcb_u8, 0x5_u8, 0x6b_u8, 0x1c_u8, 0x29_u8, 0xef_u8, 0xc0_u8])
   struct ISpeechRecoResultTimes
     lpVtbl : ISpeechRecoResultTimesVTbl*
   end
@@ -3540,8 +3540,8 @@ lib LibWin32
     commit : Proc(ISpeechPhraseAlternate*, HRESULT)
   end
 
-  ISpeechPhraseAlternate_GUID = LibC::GUID.new("27864a2a-2b9f-4cb8-92d3-0d2722fd1e73")
-  CLSID_ISpeechPhraseAlternate = "27864a2a-2b9f-4cb8-92d3-0d2722fd1e73"
+  ISpeechPhraseAlternate_GUID = "27864a2a-2b9f-4cb8-92d3-0d2722fd1e73"
+  IID_ISpeechPhraseAlternate = LibC::GUID.new(0x27864a2a_u32, 0x2b9f_u16, 0x4cb8_u16, StaticArray[0x92_u8, 0xd3_u8, 0xd_u8, 0x27_u8, 0x22_u8, 0xfd_u8, 0x1e_u8, 0x73_u8])
   struct ISpeechPhraseAlternate
     lpVtbl : ISpeechPhraseAlternateVTbl*
   end
@@ -3559,8 +3559,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechPhraseAlternates*, IUnknown*, HRESULT)
   end
 
-  ISpeechPhraseAlternates_GUID = LibC::GUID.new("b238b6d5-f276-4c3d-a6c1-2974801c3cc2")
-  CLSID_ISpeechPhraseAlternates = "b238b6d5-f276-4c3d-a6c1-2974801c3cc2"
+  ISpeechPhraseAlternates_GUID = "b238b6d5-f276-4c3d-a6c1-2974801c3cc2"
+  IID_ISpeechPhraseAlternates = LibC::GUID.new(0xb238b6d5_u32, 0xf276_u16, 0x4c3d_u16, StaticArray[0xa6_u8, 0xc1_u8, 0x29_u8, 0x74_u8, 0x80_u8, 0x1c_u8, 0x3c_u8, 0xc2_u8])
   struct ISpeechPhraseAlternates
     lpVtbl : ISpeechPhraseAlternatesVTbl*
   end
@@ -3591,8 +3591,8 @@ lib LibWin32
     get_display_attributes : Proc(ISpeechPhraseInfo*, Int32, Int32, Int16, SpeechDisplayAttributes*, HRESULT)
   end
 
-  ISpeechPhraseInfo_GUID = LibC::GUID.new("961559cf-4e67-4662-8bf0-d93f1fcd61b3")
-  CLSID_ISpeechPhraseInfo = "961559cf-4e67-4662-8bf0-d93f1fcd61b3"
+  ISpeechPhraseInfo_GUID = "961559cf-4e67-4662-8bf0-d93f1fcd61b3"
+  IID_ISpeechPhraseInfo = LibC::GUID.new(0x961559cf_u32, 0x4e67_u16, 0x4662_u16, StaticArray[0x8b_u8, 0xf0_u8, 0xd9_u8, 0x3f_u8, 0x1f_u8, 0xcd_u8, 0x61_u8, 0xb3_u8])
   struct ISpeechPhraseInfo
     lpVtbl : ISpeechPhraseInfoVTbl*
   end
@@ -3620,8 +3620,8 @@ lib LibWin32
     get_engine_confidence : Proc(ISpeechPhraseElement*, Float32*, HRESULT)
   end
 
-  ISpeechPhraseElement_GUID = LibC::GUID.new("e6176f96-e373-4801-b223-3b62c068c0b4")
-  CLSID_ISpeechPhraseElement = "e6176f96-e373-4801-b223-3b62c068c0b4"
+  ISpeechPhraseElement_GUID = "e6176f96-e373-4801-b223-3b62c068c0b4"
+  IID_ISpeechPhraseElement = LibC::GUID.new(0xe6176f96_u32, 0xe373_u16, 0x4801_u16, StaticArray[0xb2_u8, 0x23_u8, 0x3b_u8, 0x62_u8, 0xc0_u8, 0x68_u8, 0xc0_u8, 0xb4_u8])
   struct ISpeechPhraseElement
     lpVtbl : ISpeechPhraseElementVTbl*
   end
@@ -3639,8 +3639,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechPhraseElements*, IUnknown*, HRESULT)
   end
 
-  ISpeechPhraseElements_GUID = LibC::GUID.new("0626b328-3478-467d-a0b3-d0853b93dda3")
-  CLSID_ISpeechPhraseElements = "0626b328-3478-467d-a0b3-d0853b93dda3"
+  ISpeechPhraseElements_GUID = "0626b328-3478-467d-a0b3-d0853b93dda3"
+  IID_ISpeechPhraseElements = LibC::GUID.new(0x626b328_u32, 0x3478_u16, 0x467d_u16, StaticArray[0xa0_u8, 0xb3_u8, 0xd0_u8, 0x85_u8, 0x3b_u8, 0x93_u8, 0xdd_u8, 0xa3_u8])
   struct ISpeechPhraseElements
     lpVtbl : ISpeechPhraseElementsVTbl*
   end
@@ -3659,8 +3659,8 @@ lib LibWin32
     get_number_of_elements : Proc(ISpeechPhraseReplacement*, Int32*, HRESULT)
   end
 
-  ISpeechPhraseReplacement_GUID = LibC::GUID.new("2890a410-53a7-4fb5-94ec-06d4998e3d02")
-  CLSID_ISpeechPhraseReplacement = "2890a410-53a7-4fb5-94ec-06d4998e3d02"
+  ISpeechPhraseReplacement_GUID = "2890a410-53a7-4fb5-94ec-06d4998e3d02"
+  IID_ISpeechPhraseReplacement = LibC::GUID.new(0x2890a410_u32, 0x53a7_u16, 0x4fb5_u16, StaticArray[0x94_u8, 0xec_u8, 0x6_u8, 0xd4_u8, 0x99_u8, 0x8e_u8, 0x3d_u8, 0x2_u8])
   struct ISpeechPhraseReplacement
     lpVtbl : ISpeechPhraseReplacementVTbl*
   end
@@ -3678,8 +3678,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechPhraseReplacements*, IUnknown*, HRESULT)
   end
 
-  ISpeechPhraseReplacements_GUID = LibC::GUID.new("38bc662f-2257-4525-959e-2069d2596c05")
-  CLSID_ISpeechPhraseReplacements = "38bc662f-2257-4525-959e-2069d2596c05"
+  ISpeechPhraseReplacements_GUID = "38bc662f-2257-4525-959e-2069d2596c05"
+  IID_ISpeechPhraseReplacements = LibC::GUID.new(0x38bc662f_u32, 0x2257_u16, 0x4525_u16, StaticArray[0x95_u8, 0x9e_u8, 0x20_u8, 0x69_u8, 0xd2_u8, 0x59_u8, 0x6c_u8, 0x5_u8])
   struct ISpeechPhraseReplacements
     lpVtbl : ISpeechPhraseReplacementsVTbl*
   end
@@ -3703,8 +3703,8 @@ lib LibWin32
     get_children : Proc(ISpeechPhraseProperty*, ISpeechPhraseProperties*, HRESULT)
   end
 
-  ISpeechPhraseProperty_GUID = LibC::GUID.new("ce563d48-961e-4732-a2e1-378a42b430be")
-  CLSID_ISpeechPhraseProperty = "ce563d48-961e-4732-a2e1-378a42b430be"
+  ISpeechPhraseProperty_GUID = "ce563d48-961e-4732-a2e1-378a42b430be"
+  IID_ISpeechPhraseProperty = LibC::GUID.new(0xce563d48_u32, 0x961e_u16, 0x4732_u16, StaticArray[0xa2_u8, 0xe1_u8, 0x37_u8, 0x8a_u8, 0x42_u8, 0xb4_u8, 0x30_u8, 0xbe_u8])
   struct ISpeechPhraseProperty
     lpVtbl : ISpeechPhrasePropertyVTbl*
   end
@@ -3722,8 +3722,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechPhraseProperties*, IUnknown*, HRESULT)
   end
 
-  ISpeechPhraseProperties_GUID = LibC::GUID.new("08166b47-102e-4b23-a599-bdb98dbfd1f4")
-  CLSID_ISpeechPhraseProperties = "08166b47-102e-4b23-a599-bdb98dbfd1f4"
+  ISpeechPhraseProperties_GUID = "08166b47-102e-4b23-a599-bdb98dbfd1f4"
+  IID_ISpeechPhraseProperties = LibC::GUID.new(0x8166b47_u32, 0x102e_u16, 0x4b23_u16, StaticArray[0xa5_u8, 0x99_u8, 0xbd_u8, 0xb9_u8, 0x8d_u8, 0xbf_u8, 0xd1_u8, 0xf4_u8])
   struct ISpeechPhraseProperties
     lpVtbl : ISpeechPhrasePropertiesVTbl*
   end
@@ -3746,8 +3746,8 @@ lib LibWin32
     get_engine_confidence : Proc(ISpeechPhraseRule*, Float32*, HRESULT)
   end
 
-  ISpeechPhraseRule_GUID = LibC::GUID.new("a7bfe112-a4a0-48d9-b602-c313843f6964")
-  CLSID_ISpeechPhraseRule = "a7bfe112-a4a0-48d9-b602-c313843f6964"
+  ISpeechPhraseRule_GUID = "a7bfe112-a4a0-48d9-b602-c313843f6964"
+  IID_ISpeechPhraseRule = LibC::GUID.new(0xa7bfe112_u32, 0xa4a0_u16, 0x48d9_u16, StaticArray[0xb6_u8, 0x2_u8, 0xc3_u8, 0x13_u8, 0x84_u8, 0x3f_u8, 0x69_u8, 0x64_u8])
   struct ISpeechPhraseRule
     lpVtbl : ISpeechPhraseRuleVTbl*
   end
@@ -3765,8 +3765,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechPhraseRules*, IUnknown*, HRESULT)
   end
 
-  ISpeechPhraseRules_GUID = LibC::GUID.new("9047d593-01dd-4b72-81a3-e4a0ca69f407")
-  CLSID_ISpeechPhraseRules = "9047d593-01dd-4b72-81a3-e4a0ca69f407"
+  ISpeechPhraseRules_GUID = "9047d593-01dd-4b72-81a3-e4a0ca69f407"
+  IID_ISpeechPhraseRules = LibC::GUID.new(0x9047d593_u32, 0x1dd_u16, 0x4b72_u16, StaticArray[0x81_u8, 0xa3_u8, 0xe4_u8, 0xa0_u8, 0xca_u8, 0x69_u8, 0xf4_u8, 0x7_u8])
   struct ISpeechPhraseRules
     lpVtbl : ISpeechPhraseRulesVTbl*
   end
@@ -3789,8 +3789,8 @@ lib LibWin32
     get_generation_change : Proc(ISpeechLexicon*, Int32*, ISpeechLexiconWords*, HRESULT)
   end
 
-  ISpeechLexicon_GUID = LibC::GUID.new("3da7627a-c7ae-4b23-8708-638c50362c25")
-  CLSID_ISpeechLexicon = "3da7627a-c7ae-4b23-8708-638c50362c25"
+  ISpeechLexicon_GUID = "3da7627a-c7ae-4b23-8708-638c50362c25"
+  IID_ISpeechLexicon = LibC::GUID.new(0x3da7627a_u32, 0xc7ae_u16, 0x4b23_u16, StaticArray[0x87_u8, 0x8_u8, 0x63_u8, 0x8c_u8, 0x50_u8, 0x36_u8, 0x2c_u8, 0x25_u8])
   struct ISpeechLexicon
     lpVtbl : ISpeechLexiconVTbl*
   end
@@ -3808,8 +3808,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechLexiconWords*, IUnknown*, HRESULT)
   end
 
-  ISpeechLexiconWords_GUID = LibC::GUID.new("8d199862-415e-47d5-ac4f-faa608b424e6")
-  CLSID_ISpeechLexiconWords = "8d199862-415e-47d5-ac4f-faa608b424e6"
+  ISpeechLexiconWords_GUID = "8d199862-415e-47d5-ac4f-faa608b424e6"
+  IID_ISpeechLexiconWords = LibC::GUID.new(0x8d199862_u32, 0x415e_u16, 0x47d5_u16, StaticArray[0xac_u8, 0x4f_u8, 0xfa_u8, 0xa6_u8, 0x8_u8, 0xb4_u8, 0x24_u8, 0xe6_u8])
   struct ISpeechLexiconWords
     lpVtbl : ISpeechLexiconWordsVTbl*
   end
@@ -3828,8 +3828,8 @@ lib LibWin32
     get_pronunciations : Proc(ISpeechLexiconWord*, ISpeechLexiconPronunciations*, HRESULT)
   end
 
-  ISpeechLexiconWord_GUID = LibC::GUID.new("4e5b933c-c9be-48ed-8842-1ee51bb1d4ff")
-  CLSID_ISpeechLexiconWord = "4e5b933c-c9be-48ed-8842-1ee51bb1d4ff"
+  ISpeechLexiconWord_GUID = "4e5b933c-c9be-48ed-8842-1ee51bb1d4ff"
+  IID_ISpeechLexiconWord = LibC::GUID.new(0x4e5b933c_u32, 0xc9be_u16, 0x48ed_u16, StaticArray[0x88_u8, 0x42_u8, 0x1e_u8, 0xe5_u8, 0x1b_u8, 0xb1_u8, 0xd4_u8, 0xff_u8])
   struct ISpeechLexiconWord
     lpVtbl : ISpeechLexiconWordVTbl*
   end
@@ -3847,8 +3847,8 @@ lib LibWin32
     get__new_enum : Proc(ISpeechLexiconPronunciations*, IUnknown*, HRESULT)
   end
 
-  ISpeechLexiconPronunciations_GUID = LibC::GUID.new("72829128-5682-4704-a0d4-3e2bb6f2ead3")
-  CLSID_ISpeechLexiconPronunciations = "72829128-5682-4704-a0d4-3e2bb6f2ead3"
+  ISpeechLexiconPronunciations_GUID = "72829128-5682-4704-a0d4-3e2bb6f2ead3"
+  IID_ISpeechLexiconPronunciations = LibC::GUID.new(0x72829128_u32, 0x5682_u16, 0x4704_u16, StaticArray[0xa0_u8, 0xd4_u8, 0x3e_u8, 0x2b_u8, 0xb6_u8, 0xf2_u8, 0xea_u8, 0xd3_u8])
   struct ISpeechLexiconPronunciations
     lpVtbl : ISpeechLexiconPronunciationsVTbl*
   end
@@ -3868,8 +3868,8 @@ lib LibWin32
     get_symbolic : Proc(ISpeechLexiconPronunciation*, UInt8**, HRESULT)
   end
 
-  ISpeechLexiconPronunciation_GUID = LibC::GUID.new("95252c5d-9e43-4f4a-9899-48ee73352f9f")
-  CLSID_ISpeechLexiconPronunciation = "95252c5d-9e43-4f4a-9899-48ee73352f9f"
+  ISpeechLexiconPronunciation_GUID = "95252c5d-9e43-4f4a-9899-48ee73352f9f"
+  IID_ISpeechLexiconPronunciation = LibC::GUID.new(0x95252c5d_u32, 0x9e43_u16, 0x4f4a_u16, StaticArray[0x98_u8, 0x99_u8, 0x48_u8, 0xee_u8, 0x73_u8, 0x35_u8, 0x2f_u8, 0x9f_u8])
   struct ISpeechLexiconPronunciation
     lpVtbl : ISpeechLexiconPronunciationVTbl*
   end
@@ -3896,8 +3896,8 @@ lib LibWin32
     get_xml_error_info : Proc(ISpeechXMLRecoResult*, Int32*, UInt8**, UInt8**, UInt8**, Int32*, Int16*, HRESULT)
   end
 
-  ISpeechXMLRecoResult_GUID = LibC::GUID.new("aaec54af-8f85-4924-944d-b79d39d72e19")
-  CLSID_ISpeechXMLRecoResult = "aaec54af-8f85-4924-944d-b79d39d72e19"
+  ISpeechXMLRecoResult_GUID = "aaec54af-8f85-4924-944d-b79d39d72e19"
+  IID_ISpeechXMLRecoResult = LibC::GUID.new(0xaaec54af_u32, 0x8f85_u16, 0x4924_u16, StaticArray[0x94_u8, 0x4d_u8, 0xb7_u8, 0x9d_u8, 0x39_u8, 0xd7_u8, 0x2e_u8, 0x19_u8])
   struct ISpeechXMLRecoResult
     lpVtbl : ISpeechXMLRecoResultVTbl*
   end
@@ -3925,8 +3925,8 @@ lib LibWin32
     set_text_feedback : Proc(ISpeechRecoResultDispatch*, UInt8*, Int16, HRESULT)
   end
 
-  ISpeechRecoResultDispatch_GUID = LibC::GUID.new("6d60eb64-aced-40a6-bbf3-4e557f71dee2")
-  CLSID_ISpeechRecoResultDispatch = "6d60eb64-aced-40a6-bbf3-4e557f71dee2"
+  ISpeechRecoResultDispatch_GUID = "6d60eb64-aced-40a6-bbf3-4e557f71dee2"
+  IID_ISpeechRecoResultDispatch = LibC::GUID.new(0x6d60eb64_u32, 0xaced_u16, 0x40a6_u16, StaticArray[0xbb_u8, 0xf3_u8, 0x4e_u8, 0x55_u8, 0x7f_u8, 0x71_u8, 0xde_u8, 0xe2_u8])
   struct ISpeechRecoResultDispatch
     lpVtbl : ISpeechRecoResultDispatchVTbl*
   end
@@ -3942,8 +3942,8 @@ lib LibWin32
     restore_phrase_from_memory : Proc(ISpeechPhraseInfoBuilder*, VARIANT*, ISpeechPhraseInfo*, HRESULT)
   end
 
-  ISpeechPhraseInfoBuilder_GUID = LibC::GUID.new("3b151836-df3a-4e0a-846c-d2adc9334333")
-  CLSID_ISpeechPhraseInfoBuilder = "3b151836-df3a-4e0a-846c-d2adc9334333"
+  ISpeechPhraseInfoBuilder_GUID = "3b151836-df3a-4e0a-846c-d2adc9334333"
+  IID_ISpeechPhraseInfoBuilder = LibC::GUID.new(0x3b151836_u32, 0xdf3a_u16, 0x4e0a_u16, StaticArray[0x84_u8, 0x6c_u8, 0xd2_u8, 0xad_u8, 0xc9_u8, 0x33_u8, 0x43_u8, 0x33_u8])
   struct ISpeechPhraseInfoBuilder
     lpVtbl : ISpeechPhraseInfoBuilderVTbl*
   end
@@ -3962,8 +3962,8 @@ lib LibWin32
     id_to_phone : Proc(ISpeechPhoneConverter*, VARIANT, UInt8**, HRESULT)
   end
 
-  ISpeechPhoneConverter_GUID = LibC::GUID.new("c3e4f353-433f-43d6-89a1-6a62a7054c3d")
-  CLSID_ISpeechPhoneConverter = "c3e4f353-433f-43d6-89a1-6a62a7054c3d"
+  ISpeechPhoneConverter_GUID = "c3e4f353-433f-43d6-89a1-6a62a7054c3d"
+  IID_ISpeechPhoneConverter = LibC::GUID.new(0xc3e4f353_u32, 0x433f_u16, 0x43d6_u16, StaticArray[0x89_u8, 0xa1_u8, 0x6a_u8, 0x62_u8, 0xa7_u8, 0x5_u8, 0x4c_u8, 0x3d_u8])
   struct ISpeechPhoneConverter
     lpVtbl : ISpeechPhoneConverterVTbl*
   end

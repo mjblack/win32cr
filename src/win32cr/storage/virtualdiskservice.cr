@@ -1537,8 +1537,8 @@ lib LibWin32
     clone : Proc(IEnumVdsObject*, IEnumVdsObject*, HRESULT)
   end
 
-  IEnumVdsObject_GUID = LibC::GUID.new("118610b7-8d94-4030-b5b8-500889788e4e")
-  CLSID_IEnumVdsObject = "118610b7-8d94-4030-b5b8-500889788e4e"
+  IEnumVdsObject_GUID = "118610b7-8d94-4030-b5b8-500889788e4e"
+  IID_IEnumVdsObject = LibC::GUID.new(0x118610b7_u32, 0x8d94_u16, 0x4030_u16, StaticArray[0xb5_u8, 0xb8_u8, 0x50_u8, 0x8_u8, 0x89_u8, 0x78_u8, 0x8e_u8, 0x4e_u8])
   struct IEnumVdsObject
     lpVtbl : IEnumVdsObjectVTbl*
   end
@@ -1552,8 +1552,8 @@ lib LibWin32
     query_status : Proc(IVdsAsync*, HRESULT*, UInt32*, HRESULT)
   end
 
-  IVdsAsync_GUID = LibC::GUID.new("d5d23b6d-5a55-4492-9889-397a3c2d2dbc")
-  CLSID_IVdsAsync = "d5d23b6d-5a55-4492-9889-397a3c2d2dbc"
+  IVdsAsync_GUID = "d5d23b6d-5a55-4492-9889-397a3c2d2dbc"
+  IID_IVdsAsync = LibC::GUID.new(0xd5d23b6d_u32, 0x5a55_u16, 0x4492_u16, StaticArray[0x98_u8, 0x89_u8, 0x39_u8, 0x7a_u8, 0x3c_u8, 0x2d_u8, 0x2d_u8, 0xbc_u8])
   struct IVdsAsync
     lpVtbl : IVdsAsyncVTbl*
   end
@@ -1565,8 +1565,8 @@ lib LibWin32
     on_notify : Proc(IVdsAdviseSink*, Int32, VDS_NOTIFICATION*, HRESULT)
   end
 
-  IVdsAdviseSink_GUID = LibC::GUID.new("8326cd1d-cf59-4936-b786-5efc08798e25")
-  CLSID_IVdsAdviseSink = "8326cd1d-cf59-4936-b786-5efc08798e25"
+  IVdsAdviseSink_GUID = "8326cd1d-cf59-4936-b786-5efc08798e25"
+  IID_IVdsAdviseSink = LibC::GUID.new(0x8326cd1d_u32, 0xcf59_u16, 0x4936_u16, StaticArray[0xb7_u8, 0x86_u8, 0x5e_u8, 0xfc_u8, 0x8_u8, 0x79_u8, 0x8e_u8, 0x25_u8])
   struct IVdsAdviseSink
     lpVtbl : IVdsAdviseSinkVTbl*
   end
@@ -1578,8 +1578,8 @@ lib LibWin32
     get_properties : Proc(IVdsProvider*, VDS_PROVIDER_PROP*, HRESULT)
   end
 
-  IVdsProvider_GUID = LibC::GUID.new("10c5e575-7984-4e81-a56b-431f5f92ae42")
-  CLSID_IVdsProvider = "10c5e575-7984-4e81-a56b-431f5f92ae42"
+  IVdsProvider_GUID = "10c5e575-7984-4e81-a56b-431f5f92ae42"
+  IID_IVdsProvider = LibC::GUID.new(0x10c5e575_u32, 0x7984_u16, 0x4e81_u16, StaticArray[0xa5_u8, 0x6b_u8, 0x43_u8, 0x1f_u8, 0x5f_u8, 0x92_u8, 0xae_u8, 0x42_u8])
   struct IVdsProvider
     lpVtbl : IVdsProviderVTbl*
   end
@@ -1591,8 +1591,8 @@ lib LibWin32
     get_version_support : Proc(IVdsProviderSupport*, UInt32*, HRESULT)
   end
 
-  IVdsProviderSupport_GUID = LibC::GUID.new("1732be13-e8f9-4a03-bfbc-5f616aa66ce1")
-  CLSID_IVdsProviderSupport = "1732be13-e8f9-4a03-bfbc-5f616aa66ce1"
+  IVdsProviderSupport_GUID = "1732be13-e8f9-4a03-bfbc-5f616aa66ce1"
+  IID_IVdsProviderSupport = LibC::GUID.new(0x1732be13_u32, 0xe8f9_u16, 0x4a03_u16, StaticArray[0xbf_u8, 0xbc_u8, 0x5f_u8, 0x61_u8, 0x6a_u8, 0xa6_u8, 0x6c_u8, 0xe1_u8])
   struct IVdsProviderSupport
     lpVtbl : IVdsProviderSupportVTbl*
   end
@@ -1606,8 +1606,8 @@ lib LibWin32
     on_unload : Proc(IVdsProviderPrivate*, LibC::BOOL, HRESULT)
   end
 
-  IVdsProviderPrivate_GUID = LibC::GUID.new("11f3cd41-b7e8-48ff-9472-9dff018aa292")
-  CLSID_IVdsProviderPrivate = "11f3cd41-b7e8-48ff-9472-9dff018aa292"
+  IVdsProviderPrivate_GUID = "11f3cd41-b7e8-48ff-9472-9dff018aa292"
+  IID_IVdsProviderPrivate = LibC::GUID.new(0x11f3cd41_u32, 0xb7e8_u16, 0x48ff_u16, StaticArray[0x94_u8, 0x72_u8, 0x9d_u8, 0xff_u8, 0x1_u8, 0x8a_u8, 0xa2_u8, 0x92_u8])
   struct IVdsProviderPrivate
     lpVtbl : IVdsProviderPrivateVTbl*
   end
@@ -1621,8 +1621,8 @@ lib LibWin32
     refresh : Proc(IVdsHwProvider*, HRESULT)
   end
 
-  IVdsHwProvider_GUID = LibC::GUID.new("d99bdaae-b13a-4178-9fdb-e27f16b4603e")
-  CLSID_IVdsHwProvider = "d99bdaae-b13a-4178-9fdb-e27f16b4603e"
+  IVdsHwProvider_GUID = "d99bdaae-b13a-4178-9fdb-e27f16b4603e"
+  IID_IVdsHwProvider = LibC::GUID.new(0xd99bdaae_u32, 0xb13a_u16, 0x4178_u16, StaticArray[0x9f_u8, 0xdb_u8, 0xe2_u8, 0x7f_u8, 0x16_u8, 0xb4_u8, 0x60_u8, 0x3e_u8])
   struct IVdsHwProvider
     lpVtbl : IVdsHwProviderVTbl*
   end
@@ -1634,8 +1634,8 @@ lib LibWin32
     get_provider_type : Proc(IVdsHwProviderType*, VDS_HWPROVIDER_TYPE*, HRESULT)
   end
 
-  IVdsHwProviderType_GUID = LibC::GUID.new("3e0f5166-542d-4fc6-947a-012174240b7e")
-  CLSID_IVdsHwProviderType = "3e0f5166-542d-4fc6-947a-012174240b7e"
+  IVdsHwProviderType_GUID = "3e0f5166-542d-4fc6-947a-012174240b7e"
+  IID_IVdsHwProviderType = LibC::GUID.new(0x3e0f5166_u32, 0x542d_u16, 0x4fc6_u16, StaticArray[0x94_u8, 0x7a_u8, 0x1_u8, 0x21_u8, 0x74_u8, 0x24_u8, 0xb_u8, 0x7e_u8])
   struct IVdsHwProviderType
     lpVtbl : IVdsHwProviderTypeVTbl*
   end
@@ -1647,8 +1647,8 @@ lib LibWin32
     get_provider_type2 : Proc(IVdsHwProviderType2*, VDS_HWPROVIDER_TYPE*, HRESULT)
   end
 
-  IVdsHwProviderType2_GUID = LibC::GUID.new("8190236f-c4d0-4e81-8011-d69512fcc984")
-  CLSID_IVdsHwProviderType2 = "8190236f-c4d0-4e81-8011-d69512fcc984"
+  IVdsHwProviderType2_GUID = "8190236f-c4d0-4e81-8011-d69512fcc984"
+  IID_IVdsHwProviderType2 = LibC::GUID.new(0x8190236f_u32, 0xc4d0_u16, 0x4e81_u16, StaticArray[0x80_u8, 0x11_u8, 0xd6_u8, 0x95_u8, 0x12_u8, 0xfc_u8, 0xc9_u8, 0x84_u8])
   struct IVdsHwProviderType2
     lpVtbl : IVdsHwProviderType2VTbl*
   end
@@ -1662,8 +1662,8 @@ lib LibWin32
     query_max_lun_create_size_in_storage_pool : Proc(IVdsHwProviderStoragePools*, VDS_LUN_TYPE, Guid, VDS_HINTS2*, UInt64*, HRESULT)
   end
 
-  IVdsHwProviderStoragePools_GUID = LibC::GUID.new("d5b5937a-f188-4c79-b86c-11c920ad11b8")
-  CLSID_IVdsHwProviderStoragePools = "d5b5937a-f188-4c79-b86c-11c920ad11b8"
+  IVdsHwProviderStoragePools_GUID = "d5b5937a-f188-4c79-b86c-11c920ad11b8"
+  IID_IVdsHwProviderStoragePools = LibC::GUID.new(0xd5b5937a_u32, 0xf188_u16, 0x4c79_u16, StaticArray[0xb8_u8, 0x6c_u8, 0x11_u8, 0xc9_u8, 0x20_u8, 0xad_u8, 0x11_u8, 0xb8_u8])
   struct IVdsHwProviderStoragePools
     lpVtbl : IVdsHwProviderStoragePoolsVTbl*
   end
@@ -1686,8 +1686,8 @@ lib LibWin32
     query_max_lun_create_size : Proc(IVdsSubSystem*, VDS_LUN_TYPE, Guid*, Int32, VDS_HINTS*, UInt64*, HRESULT)
   end
 
-  IVdsSubSystem_GUID = LibC::GUID.new("6fcee2d3-6d90-4f91-80e2-a5c7caaca9d8")
-  CLSID_IVdsSubSystem = "6fcee2d3-6d90-4f91-80e2-a5c7caaca9d8"
+  IVdsSubSystem_GUID = "6fcee2d3-6d90-4f91-80e2-a5c7caaca9d8"
+  IID_IVdsSubSystem = LibC::GUID.new(0x6fcee2d3_u32, 0x6d90_u16, 0x4f91_u16, StaticArray[0x80_u8, 0xe2_u8, 0xa5_u8, 0xc7_u8, 0xca_u8, 0xac_u8, 0xa9_u8, 0xd8_u8])
   struct IVdsSubSystem
     lpVtbl : IVdsSubSystemVTbl*
   end
@@ -1702,8 +1702,8 @@ lib LibWin32
     query_max_lun_create_size2 : Proc(IVdsSubSystem2*, VDS_LUN_TYPE, Guid*, Int32, VDS_HINTS2*, UInt64*, HRESULT)
   end
 
-  IVdsSubSystem2_GUID = LibC::GUID.new("be666735-7800-4a77-9d9c-40f85b87e292")
-  CLSID_IVdsSubSystem2 = "be666735-7800-4a77-9d9c-40f85b87e292"
+  IVdsSubSystem2_GUID = "be666735-7800-4a77-9d9c-40f85b87e292"
+  IID_IVdsSubSystem2 = LibC::GUID.new(0xbe666735_u32, 0x7800_u16, 0x4a77_u16, StaticArray[0x9d_u8, 0x9c_u8, 0x40_u8, 0xf8_u8, 0x5b_u8, 0x87_u8, 0xe2_u8, 0x92_u8])
   struct IVdsSubSystem2
     lpVtbl : IVdsSubSystem2VTbl*
   end
@@ -1715,8 +1715,8 @@ lib LibWin32
     set_friendly_name : Proc(IVdsSubSystemNaming*, LibC::LPWSTR, HRESULT)
   end
 
-  IVdsSubSystemNaming_GUID = LibC::GUID.new("0d70faa3-9cd4-4900-aa20-6981b6aafc75")
-  CLSID_IVdsSubSystemNaming = "0d70faa3-9cd4-4900-aa20-6981b6aafc75"
+  IVdsSubSystemNaming_GUID = "0d70faa3-9cd4-4900-aa20-6981b6aafc75"
+  IID_IVdsSubSystemNaming = LibC::GUID.new(0xd70faa3_u32, 0x9cd4_u16, 0x4900_u16, StaticArray[0xaa_u8, 0x20_u8, 0x69_u8, 0x81_u8, 0xb6_u8, 0xaa_u8, 0xfc_u8, 0x75_u8])
   struct IVdsSubSystemNaming
     lpVtbl : IVdsSubSystemNamingVTbl*
   end
@@ -1731,8 +1731,8 @@ lib LibWin32
     set_ipsec_group_preshared_key : Proc(IVdsSubSystemIscsi*, VDS_ISCSI_IPSEC_KEY*, HRESULT)
   end
 
-  IVdsSubSystemIscsi_GUID = LibC::GUID.new("0027346f-40d0-4b45-8cec-5906dc0380c8")
-  CLSID_IVdsSubSystemIscsi = "0027346f-40d0-4b45-8cec-5906dc0380c8"
+  IVdsSubSystemIscsi_GUID = "0027346f-40d0-4b45-8cec-5906dc0380c8"
+  IID_IVdsSubSystemIscsi = LibC::GUID.new(0x27346f_u32, 0x40d0_u16, 0x4b45_u16, StaticArray[0x8c_u8, 0xec_u8, 0x59_u8, 0x6_u8, 0xdc_u8, 0x3_u8, 0x80_u8, 0xc8_u8])
   struct IVdsSubSystemIscsi
     lpVtbl : IVdsSubSystemIscsiVTbl*
   end
@@ -1744,8 +1744,8 @@ lib LibWin32
     get_supported_interconnects : Proc(IVdsSubSystemInterconnect*, UInt32*, HRESULT)
   end
 
-  IVdsSubSystemInterconnect_GUID = LibC::GUID.new("9e6fa560-c141-477b-83ba-0b6c38f7febf")
-  CLSID_IVdsSubSystemInterconnect = "9e6fa560-c141-477b-83ba-0b6c38f7febf"
+  IVdsSubSystemInterconnect_GUID = "9e6fa560-c141-477b-83ba-0b6c38f7febf"
+  IID_IVdsSubSystemInterconnect = LibC::GUID.new(0x9e6fa560_u32, 0xc141_u16, 0x477b_u16, StaticArray[0x83_u8, 0xba_u8, 0xb_u8, 0x6c_u8, 0x38_u8, 0xf7_u8, 0xfe_u8, 0xbf_u8])
   struct IVdsSubSystemInterconnect
     lpVtbl : IVdsSubSystemInterconnectVTbl*
   end
@@ -1761,8 +1761,8 @@ lib LibWin32
     set_status : Proc(IVdsControllerPort*, VDS_PORT_STATUS, HRESULT)
   end
 
-  IVdsControllerPort_GUID = LibC::GUID.new("18691d0d-4e7f-43e8-92e4-cf44beeed11c")
-  CLSID_IVdsControllerPort = "18691d0d-4e7f-43e8-92e4-cf44beeed11c"
+  IVdsControllerPort_GUID = "18691d0d-4e7f-43e8-92e4-cf44beeed11c"
+  IID_IVdsControllerPort = LibC::GUID.new(0x18691d0d_u32, 0x4e7f_u16, 0x43e8_u16, StaticArray[0x92_u8, 0xe4_u8, 0xcf_u8, 0x44_u8, 0xbe_u8, 0xee_u8, 0xd1_u8, 0x1c_u8])
   struct IVdsControllerPort
     lpVtbl : IVdsControllerPortVTbl*
   end
@@ -1781,8 +1781,8 @@ lib LibWin32
     set_status : Proc(IVdsController*, VDS_CONTROLLER_STATUS, HRESULT)
   end
 
-  IVdsController_GUID = LibC::GUID.new("cb53d96e-dffb-474a-a078-790d1e2bc082")
-  CLSID_IVdsController = "cb53d96e-dffb-474a-a078-790d1e2bc082"
+  IVdsController_GUID = "cb53d96e-dffb-474a-a078-790d1e2bc082"
+  IID_IVdsController = LibC::GUID.new(0xcb53d96e_u32, 0xdffb_u16, 0x474a_u16, StaticArray[0xa0_u8, 0x78_u8, 0x79_u8, 0xd_u8, 0x1e_u8, 0x2b_u8, 0xc0_u8, 0x82_u8])
   struct IVdsController
     lpVtbl : IVdsControllerVTbl*
   end
@@ -1794,8 +1794,8 @@ lib LibWin32
     query_controller_ports : Proc(IVdsControllerControllerPort*, IEnumVdsObject*, HRESULT)
   end
 
-  IVdsControllerControllerPort_GUID = LibC::GUID.new("ca5d735f-6bae-42c0-b30e-f2666045ce71")
-  CLSID_IVdsControllerControllerPort = "ca5d735f-6bae-42c0-b30e-f2666045ce71"
+  IVdsControllerControllerPort_GUID = "ca5d735f-6bae-42c0-b30e-f2666045ce71"
+  IID_IVdsControllerControllerPort = LibC::GUID.new(0xca5d735f_u32, 0x6bae_u16, 0x42c0_u16, StaticArray[0xb3_u8, 0xe_u8, 0xf2_u8, 0x66_u8, 0x60_u8, 0x45_u8, 0xce_u8, 0x71_u8])
   struct IVdsControllerControllerPort
     lpVtbl : IVdsControllerControllerPortVTbl*
   end
@@ -1812,8 +1812,8 @@ lib LibWin32
     set_status : Proc(IVdsDrive*, VDS_DRIVE_STATUS, HRESULT)
   end
 
-  IVdsDrive_GUID = LibC::GUID.new("ff24efa4-aade-4b6b-898b-eaa6a20887c7")
-  CLSID_IVdsDrive = "ff24efa4-aade-4b6b-898b-eaa6a20887c7"
+  IVdsDrive_GUID = "ff24efa4-aade-4b6b-898b-eaa6a20887c7"
+  IID_IVdsDrive = LibC::GUID.new(0xff24efa4_u32, 0xaade_u16, 0x4b6b_u16, StaticArray[0x89_u8, 0x8b_u8, 0xea_u8, 0xa6_u8, 0xa2_u8, 0x8_u8, 0x87_u8, 0xc7_u8])
   struct IVdsDrive
     lpVtbl : IVdsDriveVTbl*
   end
@@ -1825,8 +1825,8 @@ lib LibWin32
     get_properties2 : Proc(IVdsDrive2*, VDS_DRIVE_PROP2*, HRESULT)
   end
 
-  IVdsDrive2_GUID = LibC::GUID.new("60b5a730-addf-4436-8ca7-5769e2d1ffa4")
-  CLSID_IVdsDrive2 = "60b5a730-addf-4436-8ca7-5769e2d1ffa4"
+  IVdsDrive2_GUID = "60b5a730-addf-4436-8ca7-5769e2d1ffa4"
+  IID_IVdsDrive2 = LibC::GUID.new(0x60b5a730_u32, 0xaddf_u16, 0x4436_u16, StaticArray[0x8c_u8, 0xa7_u8, 0x57_u8, 0x69_u8, 0xe2_u8, 0xd1_u8, 0xff_u8, 0xa4_u8])
   struct IVdsDrive2
     lpVtbl : IVdsDrive2VTbl*
   end
@@ -1854,8 +1854,8 @@ lib LibWin32
     query_max_lun_extend_size : Proc(IVdsLun*, Guid*, Int32, UInt64*, HRESULT)
   end
 
-  IVdsLun_GUID = LibC::GUID.new("3540a9c7-e60f-4111-a840-8bba6c2c83d8")
-  CLSID_IVdsLun = "3540a9c7-e60f-4111-a840-8bba6c2c83d8"
+  IVdsLun_GUID = "3540a9c7-e60f-4111-a840-8bba6c2c83d8"
+  IID_IVdsLun = LibC::GUID.new(0x3540a9c7_u32, 0xe60f_u16, 0x4111_u16, StaticArray[0xa8_u8, 0x40_u8, 0x8b_u8, 0xba_u8, 0x6c_u8, 0x2c_u8, 0x83_u8, 0xd8_u8])
   struct IVdsLun
     lpVtbl : IVdsLunVTbl*
   end
@@ -1868,8 +1868,8 @@ lib LibWin32
     apply_hints2 : Proc(IVdsLun2*, VDS_HINTS2*, HRESULT)
   end
 
-  IVdsLun2_GUID = LibC::GUID.new("e5b3a735-9efb-499a-8071-4394d9ee6fcb")
-  CLSID_IVdsLun2 = "e5b3a735-9efb-499a-8071-4394d9ee6fcb"
+  IVdsLun2_GUID = "e5b3a735-9efb-499a-8071-4394d9ee6fcb"
+  IID_IVdsLun2 = LibC::GUID.new(0xe5b3a735_u32, 0x9efb_u16, 0x499a_u16, StaticArray[0x80_u8, 0x71_u8, 0x43_u8, 0x94_u8, 0xd9_u8, 0xee_u8, 0x6f_u8, 0xcb_u8])
   struct IVdsLun2
     lpVtbl : IVdsLun2VTbl*
   end
@@ -1881,8 +1881,8 @@ lib LibWin32
     set_friendly_name : Proc(IVdsLunNaming*, LibC::LPWSTR, HRESULT)
   end
 
-  IVdsLunNaming_GUID = LibC::GUID.new("907504cb-6b4e-4d88-a34d-17ba661fbb06")
-  CLSID_IVdsLunNaming = "907504cb-6b4e-4d88-a34d-17ba661fbb06"
+  IVdsLunNaming_GUID = "907504cb-6b4e-4d88-a34d-17ba661fbb06"
+  IID_IVdsLunNaming = LibC::GUID.new(0x907504cb_u32, 0x6b4e_u16, 0x4d88_u16, StaticArray[0xa3_u8, 0x4d_u8, 0x17_u8, 0xba_u8, 0x66_u8, 0x1f_u8, 0xbb_u8, 0x6_u8])
   struct IVdsLunNaming
     lpVtbl : IVdsLunNamingVTbl*
   end
@@ -1894,8 +1894,8 @@ lib LibWin32
     get_lun_number : Proc(IVdsLunNumber*, UInt32*, HRESULT)
   end
 
-  IVdsLunNumber_GUID = LibC::GUID.new("d3f95e46-54b3-41f9-b678-0f1871443a08")
-  CLSID_IVdsLunNumber = "d3f95e46-54b3-41f9-b678-0f1871443a08"
+  IVdsLunNumber_GUID = "d3f95e46-54b3-41f9-b678-0f1871443a08"
+  IID_IVdsLunNumber = LibC::GUID.new(0xd3f95e46_u32, 0x54b3_u16, 0x41f9_u16, StaticArray[0xb6_u8, 0x78_u8, 0xf_u8, 0x18_u8, 0x71_u8, 0x44_u8, 0x3a_u8, 0x8_u8])
   struct IVdsLunNumber
     lpVtbl : IVdsLunNumberVTbl*
   end
@@ -1908,8 +1908,8 @@ lib LibWin32
     query_active_controller_ports : Proc(IVdsLunControllerPorts*, IEnumVdsObject*, HRESULT)
   end
 
-  IVdsLunControllerPorts_GUID = LibC::GUID.new("451fe266-da6d-406a-bb60-82e534f85aeb")
-  CLSID_IVdsLunControllerPorts = "451fe266-da6d-406a-bb60-82e534f85aeb"
+  IVdsLunControllerPorts_GUID = "451fe266-da6d-406a-bb60-82e534f85aeb"
+  IID_IVdsLunControllerPorts = LibC::GUID.new(0x451fe266_u32, 0xda6d_u16, 0x406a_u16, StaticArray[0xbb_u8, 0x60_u8, 0x82_u8, 0xe5_u8, 0x34_u8, 0xf8_u8, 0x5a_u8, 0xeb_u8])
   struct IVdsLunControllerPorts
     lpVtbl : IVdsLunControllerPortsVTbl*
   end
@@ -1924,8 +1924,8 @@ lib LibWin32
     get_supported_lb_policies : Proc(IVdsLunMpio*, UInt32*, HRESULT)
   end
 
-  IVdsLunMpio_GUID = LibC::GUID.new("7c5fbae3-333a-48a1-a982-33c15788cde3")
-  CLSID_IVdsLunMpio = "7c5fbae3-333a-48a1-a982-33c15788cde3"
+  IVdsLunMpio_GUID = "7c5fbae3-333a-48a1-a982-33c15788cde3"
+  IID_IVdsLunMpio = LibC::GUID.new(0x7c5fbae3_u32, 0x333a_u16, 0x48a1_u16, StaticArray[0xa9_u8, 0x82_u8, 0x33_u8, 0xc1_u8, 0x57_u8, 0x88_u8, 0xcd_u8, 0xe3_u8])
   struct IVdsLunMpio
     lpVtbl : IVdsLunMpioVTbl*
   end
@@ -1938,8 +1938,8 @@ lib LibWin32
     query_associated_targets : Proc(IVdsLunIscsi*, IEnumVdsObject*, HRESULT)
   end
 
-  IVdsLunIscsi_GUID = LibC::GUID.new("0d7c1e64-b59b-45ae-b86a-2c2cc6a42067")
-  CLSID_IVdsLunIscsi = "0d7c1e64-b59b-45ae-b86a-2c2cc6a42067"
+  IVdsLunIscsi_GUID = "0d7c1e64-b59b-45ae-b86a-2c2cc6a42067"
+  IID_IVdsLunIscsi = LibC::GUID.new(0xd7c1e64_u32, 0xb59b_u16, 0x45ae_u16, StaticArray[0xb8_u8, 0x6a_u8, 0x2c_u8, 0x2c_u8, 0xc6_u8, 0xa4_u8, 0x20_u8, 0x67_u8])
   struct IVdsLunIscsi
     lpVtbl : IVdsLunIscsiVTbl*
   end
@@ -1955,8 +1955,8 @@ lib LibWin32
     apply_hints : Proc(IVdsLunPlex*, VDS_HINTS*, HRESULT)
   end
 
-  IVdsLunPlex_GUID = LibC::GUID.new("0ee1a790-5d2e-4abb-8c99-c481e8be2138")
-  CLSID_IVdsLunPlex = "0ee1a790-5d2e-4abb-8c99-c481e8be2138"
+  IVdsLunPlex_GUID = "0ee1a790-5d2e-4abb-8c99-c481e8be2138"
+  IID_IVdsLunPlex = LibC::GUID.new(0xee1a790_u32, 0x5d2e_u16, 0x4abb_u16, StaticArray[0x8c_u8, 0x99_u8, 0xc4_u8, 0x81_u8, 0xe8_u8, 0xbe_u8, 0x21_u8, 0x38_u8])
   struct IVdsLunPlex
     lpVtbl : IVdsLunPlexVTbl*
   end
@@ -1974,8 +1974,8 @@ lib LibWin32
     set_ipsec_security : Proc(IVdsIscsiPortal*, VDS_IPADDRESS*, UInt64, VDS_ISCSI_IPSEC_KEY*, HRESULT)
   end
 
-  IVdsIscsiPortal_GUID = LibC::GUID.new("7fa1499d-ec85-4a8a-a47b-ff69201fcd34")
-  CLSID_IVdsIscsiPortal = "7fa1499d-ec85-4a8a-a47b-ff69201fcd34"
+  IVdsIscsiPortal_GUID = "7fa1499d-ec85-4a8a-a47b-ff69201fcd34"
+  IID_IVdsIscsiPortal = LibC::GUID.new(0x7fa1499d_u32, 0xec85_u16, 0x4a8a_u16, StaticArray[0xa4_u8, 0x7b_u8, 0xff_u8, 0x69_u8, 0x20_u8, 0x1f_u8, 0xcd_u8, 0x34_u8])
   struct IVdsIscsiPortal
     lpVtbl : IVdsIscsiPortalVTbl*
   end
@@ -1996,8 +1996,8 @@ lib LibWin32
     get_connected_initiators : Proc(IVdsIscsiTarget*, LibC::LPWSTR**, Int32*, HRESULT)
   end
 
-  IVdsIscsiTarget_GUID = LibC::GUID.new("aa8f5055-83e5-4bcc-aa73-19851a36a849")
-  CLSID_IVdsIscsiTarget = "aa8f5055-83e5-4bcc-aa73-19851a36a849"
+  IVdsIscsiTarget_GUID = "aa8f5055-83e5-4bcc-aa73-19851a36a849"
+  IID_IVdsIscsiTarget = LibC::GUID.new(0xaa8f5055_u32, 0x83e5_u16, 0x4bcc_u16, StaticArray[0xaa_u8, 0x73_u8, 0x19_u8, 0x85_u8, 0x1a_u8, 0x36_u8, 0xa8_u8, 0x49_u8])
   struct IVdsIscsiTarget
     lpVtbl : IVdsIscsiTargetVTbl*
   end
@@ -2014,8 +2014,8 @@ lib LibWin32
     delete : Proc(IVdsIscsiPortalGroup*, IVdsAsync*, HRESULT)
   end
 
-  IVdsIscsiPortalGroup_GUID = LibC::GUID.new("fef5f89d-a3dd-4b36-bf28-e7dde045c593")
-  CLSID_IVdsIscsiPortalGroup = "fef5f89d-a3dd-4b36-bf28-e7dde045c593"
+  IVdsIscsiPortalGroup_GUID = "fef5f89d-a3dd-4b36-bf28-e7dde045c593"
+  IID_IVdsIscsiPortalGroup = LibC::GUID.new(0xfef5f89d_u32, 0xa3dd_u16, 0x4b36_u16, StaticArray[0xbf_u8, 0x28_u8, 0xe7_u8, 0xdd_u8, 0xe0_u8, 0x45_u8, 0xc5_u8, 0x93_u8])
   struct IVdsIscsiPortalGroup
     lpVtbl : IVdsIscsiPortalGroupVTbl*
   end
@@ -2032,8 +2032,8 @@ lib LibWin32
     query_allocated_storage_pools : Proc(IVdsStoragePool*, IEnumVdsObject*, HRESULT)
   end
 
-  IVdsStoragePool_GUID = LibC::GUID.new("932ca8cf-0eb3-4ba8-9620-22665d7f8450")
-  CLSID_IVdsStoragePool = "932ca8cf-0eb3-4ba8-9620-22665d7f8450"
+  IVdsStoragePool_GUID = "932ca8cf-0eb3-4ba8-9620-22665d7f8450"
+  IID_IVdsStoragePool = LibC::GUID.new(0x932ca8cf_u32, 0xeb3_u16, 0x4ba8_u16, StaticArray[0x96_u8, 0x20_u8, 0x22_u8, 0x66_u8, 0x5d_u8, 0x7f_u8, 0x84_u8, 0x50_u8])
   struct IVdsStoragePool
     lpVtbl : IVdsStoragePoolVTbl*
   end
@@ -2047,8 +2047,8 @@ lib LibWin32
     pulse_maintenance : Proc(IVdsMaintenance*, VDS_MAINTENANCE_OPERATION, UInt32, HRESULT)
   end
 
-  IVdsMaintenance_GUID = LibC::GUID.new("daebeef3-8523-47ed-a2b9-05cecce2a1ae")
-  CLSID_IVdsMaintenance = "daebeef3-8523-47ed-a2b9-05cecce2a1ae"
+  IVdsMaintenance_GUID = "daebeef3-8523-47ed-a2b9-05cecce2a1ae"
+  IID_IVdsMaintenance = LibC::GUID.new(0xdaebeef3_u32, 0x8523_u16, 0x47ed_u16, StaticArray[0xa2_u8, 0xb9_u8, 0x5_u8, 0xce_u8, 0xcc_u8, 0xe2_u8, 0xa1_u8, 0xae_u8])
   struct IVdsMaintenance
     lpVtbl : IVdsMaintenanceVTbl*
   end
@@ -2060,8 +2060,8 @@ lib LibWin32
     query_if_created_lun : Proc(IVdsHwProviderPrivate*, LibC::LPWSTR, VDS_LUN_INFORMATION*, Guid*, HRESULT)
   end
 
-  IVdsHwProviderPrivate_GUID = LibC::GUID.new("98f17bf3-9f33-4f12-8714-8b4075092c2e")
-  CLSID_IVdsHwProviderPrivate = "98f17bf3-9f33-4f12-8714-8b4075092c2e"
+  IVdsHwProviderPrivate_GUID = "98f17bf3-9f33-4f12-8714-8b4075092c2e"
+  IID_IVdsHwProviderPrivate = LibC::GUID.new(0x98f17bf3_u32, 0x9f33_u16, 0x4f12_u16, StaticArray[0x87_u8, 0x14_u8, 0x8b_u8, 0x40_u8, 0x75_u8, 0x9_u8, 0x2c_u8, 0x2e_u8])
   struct IVdsHwProviderPrivate
     lpVtbl : IVdsHwProviderPrivateVTbl*
   end
@@ -2073,8 +2073,8 @@ lib LibWin32
     set_all_path_statuses_from_hba_port : Proc(IVdsHwProviderPrivateMpio*, VDS_HBAPORT_PROP, VDS_PATH_STATUS, HRESULT)
   end
 
-  IVdsHwProviderPrivateMpio_GUID = LibC::GUID.new("310a7715-ac2b-4c6f-9827-3d742f351676")
-  CLSID_IVdsHwProviderPrivateMpio = "310a7715-ac2b-4c6f-9827-3d742f351676"
+  IVdsHwProviderPrivateMpio_GUID = "310a7715-ac2b-4c6f-9827-3d742f351676"
+  IID_IVdsHwProviderPrivateMpio = LibC::GUID.new(0x310a7715_u32, 0xac2b_u16, 0x4c6f_u16, StaticArray[0x98_u8, 0x27_u8, 0x3d_u8, 0x74_u8, 0x2f_u8, 0x35_u8, 0x16_u8, 0x76_u8])
   struct IVdsHwProviderPrivateMpio
     lpVtbl : IVdsHwProviderPrivateMpioVTbl*
   end
@@ -2087,8 +2087,8 @@ lib LibWin32
     unregister_provider : Proc(IVdsAdmin*, Guid, HRESULT)
   end
 
-  IVdsAdmin_GUID = LibC::GUID.new("d188e97d-85aa-4d33-abc6-26299a10ffc1")
-  CLSID_IVdsAdmin = "d188e97d-85aa-4d33-abc6-26299a10ffc1"
+  IVdsAdmin_GUID = "d188e97d-85aa-4d33-abc6-26299a10ffc1"
+  IID_IVdsAdmin = LibC::GUID.new(0xd188e97d_u32, 0x85aa_u16, 0x4d33_u16, StaticArray[0xab_u8, 0xc6_u8, 0x26_u8, 0x29_u8, 0x9a_u8, 0x10_u8, 0xff_u8, 0xc1_u8])
   struct IVdsAdmin
     lpVtbl : IVdsAdminVTbl*
   end

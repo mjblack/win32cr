@@ -115,9 +115,9 @@ lib LibWin32
   MSG_Event_ContentUsage = -1342177258_i32
   FACILITY_WPC = 2457_u32
   WPCPROV = "01090065-b467-4503-9b28-533766761087"
-  WpcSettingsProvider = LibC::GUID.new(0x355dffaa_u32, 0x3b9f_u16, 0x435c_u16, StaticArray[0xb4_u8, 0x28_u8, 0x5d_u8, 0x44_u8, 0x29_u8, 0xb_u8, 0xc5_u8, 0xf2_u8])
-  WpcProviderSupport = LibC::GUID.new(0xbb18c7a0_u32, 0x2186_u16, 0x4be0_u16, StaticArray[0x97_u8, 0xd8_u8, 0x4_u8, 0x84_u8, 0x7b_u8, 0x62_u8, 0x8e_u8, 0x2_u8])
-  WindowsParentalControls = LibC::GUID.new(0xe77cc89b_u32, 0x7401_u16, 0x4c04_u16, StaticArray[0x8c_u8, 0xed_u8, 0x14_u8, 0x9d_u8, 0xb3_u8, 0x5a_u8, 0xdd_u8, 0x4_u8])
+  CLSID_WpcSettingsProvider = LibC::GUID.new(0x355dffaa_u32, 0x3b9f_u16, 0x435c_u16, StaticArray[0xb4_u8, 0x28_u8, 0x5d_u8, 0x44_u8, 0x29_u8, 0xb_u8, 0xc5_u8, 0xf2_u8])
+  CLSID_WpcProviderSupport = LibC::GUID.new(0xbb18c7a0_u32, 0x2186_u16, 0x4be0_u16, StaticArray[0x97_u8, 0xd8_u8, 0x4_u8, 0x84_u8, 0x7b_u8, 0x62_u8, 0x8e_u8, 0x2_u8])
+  CLSID_WindowsParentalControls = LibC::GUID.new(0xe77cc89b_u32, 0x7401_u16, 0x4c04_u16, StaticArray[0x8c_u8, 0xed_u8, 0x14_u8, 0x9d_u8, 0xb3_u8, 0x5a_u8, 0xdd_u8, 0x4_u8])
 
 
   enum WPCFLAG_OVERRIDE : Int32
@@ -522,8 +522,8 @@ lib LibWin32
     disable : Proc(IWPCProviderState*, HRESULT)
   end
 
-  IWPCProviderState_GUID = LibC::GUID.new("50b6a267-c4bd-450b-adb5-759073837c9e")
-  CLSID_IWPCProviderState = "50b6a267-c4bd-450b-adb5-759073837c9e"
+  IWPCProviderState_GUID = "50b6a267-c4bd-450b-adb5-759073837c9e"
+  IID_IWPCProviderState = LibC::GUID.new(0x50b6a267_u32, 0xc4bd_u16, 0x450b_u16, StaticArray[0xad_u8, 0xb5_u8, 0x75_u8, 0x90_u8, 0x73_u8, 0x83_u8, 0x7c_u8, 0x9e_u8])
   struct IWPCProviderState
     lpVtbl : IWPCProviderStateVTbl*
   end
@@ -537,8 +537,8 @@ lib LibWin32
     request_override : Proc(IWPCProviderConfig*, LibC::HANDLE, UInt8*, WPCFLAG_RESTRICTION, HRESULT)
   end
 
-  IWPCProviderConfig_GUID = LibC::GUID.new("bef54196-2d02-4a26-b6e5-d65af295d0f1")
-  CLSID_IWPCProviderConfig = "bef54196-2d02-4a26-b6e5-d65af295d0f1"
+  IWPCProviderConfig_GUID = "bef54196-2d02-4a26-b6e5-d65af295d0f1"
+  IID_IWPCProviderConfig = LibC::GUID.new(0xbef54196_u32, 0x2d02_u16, 0x4a26_u16, StaticArray[0xb6_u8, 0xe5_u8, 0xd6_u8, 0x5a_u8, 0xf2_u8, 0x95_u8, 0xd0_u8, 0xf1_u8])
   struct IWPCProviderConfig
     lpVtbl : IWPCProviderConfigVTbl*
   end
@@ -552,8 +552,8 @@ lib LibWin32
     get_restrictions : Proc(IWPCSettings*, WPCFLAG_RESTRICTION*, HRESULT)
   end
 
-  IWPCSettings_GUID = LibC::GUID.new("8fdf6ca1-0189-47e4-b670-1a8a4636e340")
-  CLSID_IWPCSettings = "8fdf6ca1-0189-47e4-b670-1a8a4636e340"
+  IWPCSettings_GUID = "8fdf6ca1-0189-47e4-b670-1a8a4636e340"
+  IID_IWPCSettings = LibC::GUID.new(0x8fdf6ca1_u32, 0x189_u16, 0x47e4_u16, StaticArray[0xb6_u8, 0x70_u8, 0x1a_u8, 0x8a_u8, 0x46_u8, 0x36_u8, 0xe3_u8, 0x40_u8])
   struct IWPCSettings
     lpVtbl : IWPCSettingsVTbl*
   end
@@ -568,8 +568,8 @@ lib LibWin32
     is_blocked : Proc(IWPCGamesSettings*, Guid, UInt32*, HRESULT)
   end
 
-  IWPCGamesSettings_GUID = LibC::GUID.new("95e87780-e158-489e-b452-bbb850790715")
-  CLSID_IWPCGamesSettings = "95e87780-e158-489e-b452-bbb850790715"
+  IWPCGamesSettings_GUID = "95e87780-e158-489e-b452-bbb850790715"
+  IID_IWPCGamesSettings = LibC::GUID.new(0x95e87780_u32, 0xe158_u16, 0x489e_u16, StaticArray[0xb4_u8, 0x52_u8, 0xbb_u8, 0xb8_u8, 0x50_u8, 0x79_u8, 0x7_u8, 0x15_u8])
   struct IWPCGamesSettings
     lpVtbl : IWPCGamesSettingsVTbl*
   end
@@ -585,8 +585,8 @@ lib LibWin32
     request_url_override : Proc(IWPCWebSettings*, LibC::HANDLE, LibC::LPWSTR, UInt32, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
   end
 
-  IWPCWebSettings_GUID = LibC::GUID.new("ffccbdb8-0992-4c30-b0f1-1cbb09c240aa")
-  CLSID_IWPCWebSettings = "ffccbdb8-0992-4c30-b0f1-1cbb09c240aa"
+  IWPCWebSettings_GUID = "ffccbdb8-0992-4c30-b0f1-1cbb09c240aa"
+  IID_IWPCWebSettings = LibC::GUID.new(0xffccbdb8_u32, 0x992_u16, 0x4c30_u16, StaticArray[0xb0_u8, 0xf1_u8, 0x1c_u8, 0xbb_u8, 0x9_u8, 0xc2_u8, 0x40_u8, 0xaa_u8])
   struct IWPCWebSettings
     lpVtbl : IWPCWebSettingsVTbl*
   end
@@ -601,8 +601,8 @@ lib LibWin32
     get_web_filter_info : Proc(IWindowsParentalControlsCore*, Guid*, LibC::LPWSTR*, HRESULT)
   end
 
-  IWindowsParentalControlsCore_GUID = LibC::GUID.new("4ff40a0f-3f3b-4d7c-a41b-4f39d7b44d05")
-  CLSID_IWindowsParentalControlsCore = "4ff40a0f-3f3b-4d7c-a41b-4f39d7b44d05"
+  IWindowsParentalControlsCore_GUID = "4ff40a0f-3f3b-4d7c-a41b-4f39d7b44d05"
+  IID_IWindowsParentalControlsCore = LibC::GUID.new(0x4ff40a0f_u32, 0x3f3b_u16, 0x4d7c_u16, StaticArray[0xa4_u8, 0x1b_u8, 0x4f_u8, 0x39_u8, 0xd7_u8, 0xb4_u8, 0x4d_u8, 0x5_u8])
   struct IWindowsParentalControlsCore
     lpVtbl : IWindowsParentalControlsCoreVTbl*
   end
@@ -618,8 +618,8 @@ lib LibWin32
     get_games_settings : Proc(IWindowsParentalControls*, LibC::LPWSTR, IWPCGamesSettings*, HRESULT)
   end
 
-  IWindowsParentalControls_GUID = LibC::GUID.new("28b4d88b-e072-49e6-804d-26edbe21a7b9")
-  CLSID_IWindowsParentalControls = "28b4d88b-e072-49e6-804d-26edbe21a7b9"
+  IWindowsParentalControls_GUID = "28b4d88b-e072-49e6-804d-26edbe21a7b9"
+  IID_IWindowsParentalControls = LibC::GUID.new(0x28b4d88b_u32, 0xe072_u16, 0x49e6_u16, StaticArray[0x80_u8, 0x4d_u8, 0x26_u8, 0xed_u8, 0xbe_u8, 0x21_u8, 0xa7_u8, 0xb9_u8])
   struct IWindowsParentalControls
     lpVtbl : IWindowsParentalControlsVTbl*
   end
@@ -631,8 +631,8 @@ lib LibWin32
     get_current : Proc(IWPCProviderSupport*, Guid*, HRESULT)
   end
 
-  IWPCProviderSupport_GUID = LibC::GUID.new("41eba572-23ed-4779-bec1-8df96206c44c")
-  CLSID_IWPCProviderSupport = "41eba572-23ed-4779-bec1-8df96206c44c"
+  IWPCProviderSupport_GUID = "41eba572-23ed-4779-bec1-8df96206c44c"
+  IID_IWPCProviderSupport = LibC::GUID.new(0x41eba572_u32, 0x23ed_u16, 0x4779_u16, StaticArray[0xbe_u8, 0xc1_u8, 0x8d_u8, 0xf9_u8, 0x62_u8, 0x6_u8, 0xc4_u8, 0x4c_u8])
   struct IWPCProviderSupport
     lpVtbl : IWPCProviderSupportVTbl*
   end

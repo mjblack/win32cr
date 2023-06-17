@@ -27,8 +27,8 @@ lib LibWin32
     get_data : Proc(IAudioFrameNative*, Guid*, Void**, HRESULT)
   end
 
-  IAudioFrameNative_GUID = LibC::GUID.new("20be1e2e-930f-4746-9335-3c332f255093")
-  CLSID_IAudioFrameNative = "20be1e2e-930f-4746-9335-3c332f255093"
+  IAudioFrameNative_GUID = "20be1e2e-930f-4746-9335-3c332f255093"
+  IID_IAudioFrameNative = LibC::GUID.new(0x20be1e2e_u32, 0x930f_u16, 0x4746_u16, StaticArray[0x93_u8, 0x35_u8, 0x3c_u8, 0x33_u8, 0x2f_u8, 0x25_u8, 0x50_u8, 0x93_u8])
   struct IAudioFrameNative
     lpVtbl : IAudioFrameNativeVTbl*
   end
@@ -44,8 +44,8 @@ lib LibWin32
     get_device : Proc(IVideoFrameNative*, Guid*, Void**, HRESULT)
   end
 
-  IVideoFrameNative_GUID = LibC::GUID.new("26ba702b-314a-4620-aaf6-7a51aa58fa18")
-  CLSID_IVideoFrameNative = "26ba702b-314a-4620-aaf6-7a51aa58fa18"
+  IVideoFrameNative_GUID = "26ba702b-314a-4620-aaf6-7a51aa58fa18"
+  IID_IVideoFrameNative = LibC::GUID.new(0x26ba702b_u32, 0x314a_u16, 0x4620_u16, StaticArray[0xaa_u8, 0xf6_u8, 0x7a_u8, 0x51_u8, 0xaa_u8, 0x58_u8, 0xfa_u8, 0x18_u8])
   struct IVideoFrameNative
     lpVtbl : IVideoFrameNativeVTbl*
   end
@@ -60,8 +60,8 @@ lib LibWin32
     create_from_mf_sample : Proc(IAudioFrameNativeFactory*, IMFSample, LibC::BOOL, Guid*, Void**, HRESULT)
   end
 
-  IAudioFrameNativeFactory_GUID = LibC::GUID.new("7bd67cf8-bf7d-43e6-af8d-b170ee0c0110")
-  CLSID_IAudioFrameNativeFactory = "7bd67cf8-bf7d-43e6-af8d-b170ee0c0110"
+  IAudioFrameNativeFactory_GUID = "7bd67cf8-bf7d-43e6-af8d-b170ee0c0110"
+  IID_IAudioFrameNativeFactory = LibC::GUID.new(0x7bd67cf8_u32, 0xbf7d_u16, 0x43e6_u16, StaticArray[0xaf_u8, 0x8d_u8, 0xb1_u8, 0x70_u8, 0xee_u8, 0xc_u8, 0x1_u8, 0x10_u8])
   struct IAudioFrameNativeFactory
     lpVtbl : IAudioFrameNativeFactoryVTbl*
   end
@@ -76,8 +76,8 @@ lib LibWin32
     create_from_mf_sample : Proc(IVideoFrameNativeFactory*, IMFSample, Guid*, UInt32, UInt32, LibC::BOOL, MFVideoArea*, IMFDXGIDeviceManager, Guid*, Void**, HRESULT)
   end
 
-  IVideoFrameNativeFactory_GUID = LibC::GUID.new("69e3693e-8e1e-4e63-ac4c-7fdc21d9731d")
-  CLSID_IVideoFrameNativeFactory = "69e3693e-8e1e-4e63-ac4c-7fdc21d9731d"
+  IVideoFrameNativeFactory_GUID = "69e3693e-8e1e-4e63-ac4c-7fdc21d9731d"
+  IID_IVideoFrameNativeFactory = LibC::GUID.new(0x69e3693e_u32, 0x8e1e_u16, 0x4e63_u16, StaticArray[0xac_u8, 0x4c_u8, 0x7f_u8, 0xdc_u8, 0x21_u8, 0xd9_u8, 0x73_u8, 0x1d_u8])
   struct IVideoFrameNativeFactory
     lpVtbl : IVideoFrameNativeFactoryVTbl*
   end

@@ -65,8 +65,8 @@ lib LibWin32
     is_available : Proc(IPresentationBuffer*, UInt8*, HRESULT)
   end
 
-  IPresentationBuffer_GUID = LibC::GUID.new("2e217d3a-5abb-4138-9a13-a775593c89ca")
-  CLSID_IPresentationBuffer = "2e217d3a-5abb-4138-9a13-a775593c89ca"
+  IPresentationBuffer_GUID = "2e217d3a-5abb-4138-9a13-a775593c89ca"
+  IID_IPresentationBuffer = LibC::GUID.new(0x2e217d3a_u32, 0x5abb_u16, 0x4138_u16, StaticArray[0x9a_u8, 0x13_u8, 0xa7_u8, 0x75_u8, 0x59_u8, 0x3c_u8, 0x89_u8, 0xca_u8])
   struct IPresentationBuffer
     lpVtbl : IPresentationBufferVTbl*
   end
@@ -78,8 +78,8 @@ lib LibWin32
     set_tag : Proc(IPresentationContent*, LibC::UINT_PTR, Void)
   end
 
-  IPresentationContent_GUID = LibC::GUID.new("5668bb79-3d8e-415c-b215-f38020f2d252")
-  CLSID_IPresentationContent = "5668bb79-3d8e-415c-b215-f38020f2d252"
+  IPresentationContent_GUID = "5668bb79-3d8e-415c-b215-f38020f2d252"
+  IID_IPresentationContent = LibC::GUID.new(0x5668bb79_u32, 0x3d8e_u16, 0x415c_u16, StaticArray[0xb2_u8, 0x15_u8, 0xf3_u8, 0x80_u8, 0x20_u8, 0xf2_u8, 0xd2_u8, 0x52_u8])
   struct IPresentationContent
     lpVtbl : IPresentationContentVTbl*
   end
@@ -99,8 +99,8 @@ lib LibWin32
     set_letterboxing_margins : Proc(IPresentationSurface*, Float32, Float32, Float32, Float32, HRESULT)
   end
 
-  IPresentationSurface_GUID = LibC::GUID.new("956710fb-ea40-4eba-a3eb-4375a0eb4edc")
-  CLSID_IPresentationSurface = "956710fb-ea40-4eba-a3eb-4375a0eb4edc"
+  IPresentationSurface_GUID = "956710fb-ea40-4eba-a3eb-4375a0eb4edc"
+  IID_IPresentationSurface = LibC::GUID.new(0x956710fb_u32, 0xea40_u16, 0x4eba_u16, StaticArray[0xa3_u8, 0xeb_u8, 0x43_u8, 0x75_u8, 0xa0_u8, 0xeb_u8, 0x4e_u8, 0xdc_u8])
   struct IPresentationSurface
     lpVtbl : IPresentationSurfaceVTbl*
   end
@@ -113,8 +113,8 @@ lib LibWin32
     get_kind : Proc(IPresentStatistics*, PresentStatisticsKind)
   end
 
-  IPresentStatistics_GUID = LibC::GUID.new("b44b8bda-7282-495d-9dd7-ceadd8b4bb86")
-  CLSID_IPresentStatistics = "b44b8bda-7282-495d-9dd7-ceadd8b4bb86"
+  IPresentStatistics_GUID = "b44b8bda-7282-495d-9dd7-ceadd8b4bb86"
+  IID_IPresentStatistics = LibC::GUID.new(0xb44b8bda_u32, 0x7282_u16, 0x495d_u16, StaticArray[0x9d_u8, 0xd7_u8, 0xce_u8, 0xad_u8, 0xd8_u8, 0xb4_u8, 0xbb_u8, 0x86_u8])
   struct IPresentStatistics
     lpVtbl : IPresentStatisticsVTbl*
   end
@@ -138,8 +138,8 @@ lib LibWin32
     get_next_present_statistics : Proc(IPresentationManager*, IPresentStatistics*, HRESULT)
   end
 
-  IPresentationManager_GUID = LibC::GUID.new("fb562f82-6292-470a-88b1-843661e7f20c")
-  CLSID_IPresentationManager = "fb562f82-6292-470a-88b1-843661e7f20c"
+  IPresentationManager_GUID = "fb562f82-6292-470a-88b1-843661e7f20c"
+  IID_IPresentationManager = LibC::GUID.new(0xfb562f82_u32, 0x6292_u16, 0x470a_u16, StaticArray[0x88_u8, 0xb1_u8, 0x84_u8, 0x36_u8, 0x61_u8, 0xe7_u8, 0xf2_u8, 0xc_u8])
   struct IPresentationManager
     lpVtbl : IPresentationManagerVTbl*
   end
@@ -153,8 +153,8 @@ lib LibWin32
     create_presentation_manager : Proc(IPresentationFactory*, IPresentationManager*, HRESULT)
   end
 
-  IPresentationFactory_GUID = LibC::GUID.new("8fb37b58-1d74-4f64-a49c-1f97a80a2ec0")
-  CLSID_IPresentationFactory = "8fb37b58-1d74-4f64-a49c-1f97a80a2ec0"
+  IPresentationFactory_GUID = "8fb37b58-1d74-4f64-a49c-1f97a80a2ec0"
+  IID_IPresentationFactory = LibC::GUID.new(0x8fb37b58_u32, 0x1d74_u16, 0x4f64_u16, StaticArray[0xa4_u8, 0x9c_u8, 0x1f_u8, 0x97_u8, 0xa8_u8, 0xa_u8, 0x2e_u8, 0xc0_u8])
   struct IPresentationFactory
     lpVtbl : IPresentationFactoryVTbl*
   end
@@ -169,8 +169,8 @@ lib LibWin32
     get_present_status : Proc(IPresentStatusPresentStatistics*, PresentStatus)
   end
 
-  IPresentStatusPresentStatistics_GUID = LibC::GUID.new("c9ed2a41-79cb-435e-964e-c8553055420c")
-  CLSID_IPresentStatusPresentStatistics = "c9ed2a41-79cb-435e-964e-c8553055420c"
+  IPresentStatusPresentStatistics_GUID = "c9ed2a41-79cb-435e-964e-c8553055420c"
+  IID_IPresentStatusPresentStatistics = LibC::GUID.new(0xc9ed2a41_u32, 0x79cb_u16, 0x435e_u16, StaticArray[0x96_u8, 0x4e_u8, 0xc8_u8, 0x55_u8, 0x30_u8, 0x55_u8, 0x42_u8, 0xc_u8])
   struct IPresentStatusPresentStatistics
     lpVtbl : IPresentStatusPresentStatisticsVTbl*
   end
@@ -186,8 +186,8 @@ lib LibWin32
     get_display_instance_array : Proc(ICompositionFramePresentStatistics*, UInt32*, CompositionFrameDisplayInstance**, Void)
   end
 
-  ICompositionFramePresentStatistics_GUID = LibC::GUID.new("ab41d127-c101-4c0a-911d-f9f2e9d08e64")
-  CLSID_ICompositionFramePresentStatistics = "ab41d127-c101-4c0a-911d-f9f2e9d08e64"
+  ICompositionFramePresentStatistics_GUID = "ab41d127-c101-4c0a-911d-f9f2e9d08e64"
+  IID_ICompositionFramePresentStatistics = LibC::GUID.new(0xab41d127_u32, 0xc101_u16, 0x4c0a_u16, StaticArray[0x91_u8, 0x1d_u8, 0xf9_u8, 0xf2_u8, 0xe9_u8, 0xd0_u8, 0x8e_u8, 0x64_u8])
   struct ICompositionFramePresentStatistics
     lpVtbl : ICompositionFramePresentStatisticsVTbl*
   end
@@ -205,8 +205,8 @@ lib LibWin32
     get_present_duration : Proc(IIndependentFlipFramePresentStatistics*, SystemInterruptTime)
   end
 
-  IIndependentFlipFramePresentStatistics_GUID = LibC::GUID.new("8c93be27-ad94-4da0-8fd4-2413132d124e")
-  CLSID_IIndependentFlipFramePresentStatistics = "8c93be27-ad94-4da0-8fd4-2413132d124e"
+  IIndependentFlipFramePresentStatistics_GUID = "8c93be27-ad94-4da0-8fd4-2413132d124e"
+  IID_IIndependentFlipFramePresentStatistics = LibC::GUID.new(0x8c93be27_u32, 0xad94_u16, 0x4da0_u16, StaticArray[0x8f_u8, 0xd4_u8, 0x24_u8, 0x13_u8, 0x13_u8, 0x2d_u8, 0x12_u8, 0x4e_u8])
   struct IIndependentFlipFramePresentStatistics
     lpVtbl : IIndependentFlipFramePresentStatisticsVTbl*
   end

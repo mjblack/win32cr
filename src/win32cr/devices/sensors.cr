@@ -295,10 +295,10 @@ lib LibWin32
   GUID_SensorType_Temperature = "04fd0ec4-d5da-45fa-95a9-5db38ee19306"
   GUID_SensorType_HingeAngle = "82358065-f4c4-4da1-b272-13c23332a207"
   SENSOR_PROPERTY_LIST_HEADER_SIZE = 8_u32
-  SensorManager = LibC::GUID.new(0x77a1c827_u32, 0xfcd2_u16, 0x4689_u16, StaticArray[0x89_u8, 0x15_u8, 0x9d_u8, 0x61_u8, 0x3c_u8, 0xc5_u8, 0xfa_u8, 0x3e_u8])
-  SensorCollection = LibC::GUID.new(0x79c43adb_u32, 0xa429_u16, 0x469f_u16, StaticArray[0xaa_u8, 0x39_u8, 0x2f_u8, 0x2b_u8, 0x74_u8, 0xb7_u8, 0x59_u8, 0x37_u8])
-  Sensor = LibC::GUID.new(0xe97ced00_u32, 0x523a_u16, 0x4133_u16, StaticArray[0xbf_u8, 0x6f_u8, 0xd3_u8, 0xa2_u8, 0xda_u8, 0xe7_u8, 0xf6_u8, 0xba_u8])
-  SensorDataReport = LibC::GUID.new(0x4ea9d6ef_u32, 0x694b_u16, 0x4218_u16, StaticArray[0x88_u8, 0x16_u8, 0xcc_u8, 0xda_u8, 0x8d_u8, 0xa7_u8, 0x4b_u8, 0xba_u8])
+  CLSID_SensorManager = LibC::GUID.new(0x77a1c827_u32, 0xfcd2_u16, 0x4689_u16, StaticArray[0x89_u8, 0x15_u8, 0x9d_u8, 0x61_u8, 0x3c_u8, 0xc5_u8, 0xfa_u8, 0x3e_u8])
+  CLSID_SensorCollection = LibC::GUID.new(0x79c43adb_u32, 0xa429_u16, 0x469f_u16, StaticArray[0xaa_u8, 0x39_u8, 0x2f_u8, 0x2b_u8, 0x74_u8, 0xb7_u8, 0x59_u8, 0x37_u8])
+  CLSID_Sensor = LibC::GUID.new(0xe97ced00_u32, 0x523a_u16, 0x4133_u16, StaticArray[0xbf_u8, 0x6f_u8, 0xd3_u8, 0xa2_u8, 0xda_u8, 0xe7_u8, 0xf6_u8, 0xba_u8])
+  CLSID_SensorDataReport = LibC::GUID.new(0x4ea9d6ef_u32, 0x694b_u16, 0x4218_u16, StaticArray[0x88_u8, 0x16_u8, 0xcc_u8, 0xda_u8, 0x8d_u8, 0xa7_u8, 0x4b_u8, 0xba_u8])
 
 
   enum SensorState : Int32
@@ -501,8 +501,8 @@ lib LibWin32
     request_permissions : Proc(ISensorManager*, LibC::HANDLE, ISensorCollection, LibC::BOOL, HRESULT)
   end
 
-  ISensorManager_GUID = LibC::GUID.new("bd77db67-45a8-42dc-8d00-6dcf15f8377a")
-  CLSID_ISensorManager = "bd77db67-45a8-42dc-8d00-6dcf15f8377a"
+  ISensorManager_GUID = "bd77db67-45a8-42dc-8d00-6dcf15f8377a"
+  IID_ISensorManager = LibC::GUID.new(0xbd77db67_u32, 0x45a8_u16, 0x42dc_u16, StaticArray[0x8d_u8, 0x0_u8, 0x6d_u8, 0xcf_u8, 0x15_u8, 0xf8_u8, 0x37_u8, 0x7a_u8])
   struct ISensorManager
     lpVtbl : ISensorManagerVTbl*
   end
@@ -515,8 +515,8 @@ lib LibWin32
     check_location_capability : Proc(ILocationPermissions*, UInt32, HRESULT)
   end
 
-  ILocationPermissions_GUID = LibC::GUID.new("d5fb0a7f-e74e-44f5-8e02-4806863a274f")
-  CLSID_ILocationPermissions = "d5fb0a7f-e74e-44f5-8e02-4806863a274f"
+  ILocationPermissions_GUID = "d5fb0a7f-e74e-44f5-8e02-4806863a274f"
+  IID_ILocationPermissions = LibC::GUID.new(0xd5fb0a7f_u32, 0xe74e_u16, 0x44f5_u16, StaticArray[0x8e_u8, 0x2_u8, 0x48_u8, 0x6_u8, 0x86_u8, 0x3a_u8, 0x27_u8, 0x4f_u8])
   struct ILocationPermissions
     lpVtbl : ILocationPermissionsVTbl*
   end
@@ -533,8 +533,8 @@ lib LibWin32
     clear : Proc(ISensorCollection*, HRESULT)
   end
 
-  ISensorCollection_GUID = LibC::GUID.new("23571e11-e545-4dd8-a337-b89bf44b10df")
-  CLSID_ISensorCollection = "23571e11-e545-4dd8-a337-b89bf44b10df"
+  ISensorCollection_GUID = "23571e11-e545-4dd8-a337-b89bf44b10df"
+  IID_ISensorCollection = LibC::GUID.new(0x23571e11_u32, 0xe545_u16, 0x4dd8_u16, StaticArray[0xa3_u8, 0x37_u8, 0xb8_u8, 0x9b_u8, 0xf4_u8, 0x4b_u8, 0x10_u8, 0xdf_u8])
   struct ISensorCollection
     lpVtbl : ISensorCollectionVTbl*
   end
@@ -560,8 +560,8 @@ lib LibWin32
     set_event_sink : Proc(ISensor*, ISensorEvents, HRESULT)
   end
 
-  ISensor_GUID = LibC::GUID.new("5fa08f80-2657-458e-af75-46f73fa6ac5c")
-  CLSID_ISensor = "5fa08f80-2657-458e-af75-46f73fa6ac5c"
+  ISensor_GUID = "5fa08f80-2657-458e-af75-46f73fa6ac5c"
+  IID_ISensor = LibC::GUID.new(0x5fa08f80_u32, 0x2657_u16, 0x458e_u16, StaticArray[0xaf_u8, 0x75_u8, 0x46_u8, 0xf7_u8, 0x3f_u8, 0xa6_u8, 0xac_u8, 0x5c_u8])
   struct ISensor
     lpVtbl : ISensorVTbl*
   end
@@ -575,8 +575,8 @@ lib LibWin32
     get_sensor_values : Proc(ISensorDataReport*, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)
   end
 
-  ISensorDataReport_GUID = LibC::GUID.new("0ab9df9b-c4b5-4796-8898-0470706a2e1d")
-  CLSID_ISensorDataReport = "0ab9df9b-c4b5-4796-8898-0470706a2e1d"
+  ISensorDataReport_GUID = "0ab9df9b-c4b5-4796-8898-0470706a2e1d"
+  IID_ISensorDataReport = LibC::GUID.new(0xab9df9b_u32, 0xc4b5_u16, 0x4796_u16, StaticArray[0x88_u8, 0x98_u8, 0x4_u8, 0x70_u8, 0x70_u8, 0x6a_u8, 0x2e_u8, 0x1d_u8])
   struct ISensorDataReport
     lpVtbl : ISensorDataReportVTbl*
   end
@@ -588,8 +588,8 @@ lib LibWin32
     on_sensor_enter : Proc(ISensorManagerEvents*, ISensor, SensorState, HRESULT)
   end
 
-  ISensorManagerEvents_GUID = LibC::GUID.new("9b3b0b86-266a-4aad-b21f-fde5501001b7")
-  CLSID_ISensorManagerEvents = "9b3b0b86-266a-4aad-b21f-fde5501001b7"
+  ISensorManagerEvents_GUID = "9b3b0b86-266a-4aad-b21f-fde5501001b7"
+  IID_ISensorManagerEvents = LibC::GUID.new(0x9b3b0b86_u32, 0x266a_u16, 0x4aad_u16, StaticArray[0xb2_u8, 0x1f_u8, 0xfd_u8, 0xe5_u8, 0x50_u8, 0x10_u8, 0x1_u8, 0xb7_u8])
   struct ISensorManagerEvents
     lpVtbl : ISensorManagerEventsVTbl*
   end
@@ -604,8 +604,8 @@ lib LibWin32
     on_leave : Proc(ISensorEvents*, Guid*, HRESULT)
   end
 
-  ISensorEvents_GUID = LibC::GUID.new("5d8dcc91-4641-47e7-b7c3-b74f48a6c391")
-  CLSID_ISensorEvents = "5d8dcc91-4641-47e7-b7c3-b74f48a6c391"
+  ISensorEvents_GUID = "5d8dcc91-4641-47e7-b7c3-b74f48a6c391"
+  IID_ISensorEvents = LibC::GUID.new(0x5d8dcc91_u32, 0x4641_u16, 0x47e7_u16, StaticArray[0xb7_u8, 0xc3_u8, 0xb7_u8, 0x4f_u8, 0x48_u8, 0xa6_u8, 0xc3_u8, 0x91_u8])
   struct ISensorEvents
     lpVtbl : ISensorEventsVTbl*
   end

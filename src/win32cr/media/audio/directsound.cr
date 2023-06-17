@@ -555,8 +555,8 @@ lib LibWin32
     initialize : Proc(IDirectSound*, Guid*, HRESULT)
   end
 
-  IDirectSound_GUID = LibC::GUID.new("279afa83-4981-11ce-a521-0020af0be560")
-  CLSID_IDirectSound = "279afa83-4981-11ce-a521-0020af0be560"
+  IDirectSound_GUID = "279afa83-4981-11ce-a521-0020af0be560"
+  IID_IDirectSound = LibC::GUID.new(0x279afa83_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
   struct IDirectSound
     lpVtbl : IDirectSoundVTbl*
   end
@@ -576,8 +576,8 @@ lib LibWin32
     verify_certification : Proc(IDirectSound8*, UInt32*, HRESULT)
   end
 
-  IDirectSound8_GUID = LibC::GUID.new("c50a7e93-f395-4834-9ef6-7fa99de50966")
-  CLSID_IDirectSound8 = "c50a7e93-f395-4834-9ef6-7fa99de50966"
+  IDirectSound8_GUID = "c50a7e93-f395-4834-9ef6-7fa99de50966"
+  IID_IDirectSound8 = LibC::GUID.new(0xc50a7e93_u32, 0xf395_u16, 0x4834_u16, StaticArray[0x9e_u8, 0xf6_u8, 0x7f_u8, 0xa9_u8, 0x9d_u8, 0xe5_u8, 0x9_u8, 0x66_u8])
   struct IDirectSound8
     lpVtbl : IDirectSound8VTbl*
   end
@@ -606,8 +606,8 @@ lib LibWin32
     restore : Proc(IDirectSoundBuffer*, HRESULT)
   end
 
-  IDirectSoundBuffer_GUID = LibC::GUID.new("279afa85-4981-11ce-a521-0020af0be560")
-  CLSID_IDirectSoundBuffer = "279afa85-4981-11ce-a521-0020af0be560"
+  IDirectSoundBuffer_GUID = "279afa85-4981-11ce-a521-0020af0be560"
+  IID_IDirectSoundBuffer = LibC::GUID.new(0x279afa85_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
   struct IDirectSoundBuffer
     lpVtbl : IDirectSoundBufferVTbl*
   end
@@ -639,8 +639,8 @@ lib LibWin32
     get_object_in_path : Proc(IDirectSoundBuffer8*, Guid*, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IDirectSoundBuffer8_GUID = LibC::GUID.new("6825a449-7524-4d82-920f-50e36ab3ab1e")
-  CLSID_IDirectSoundBuffer8 = "6825a449-7524-4d82-920f-50e36ab3ab1e"
+  IDirectSoundBuffer8_GUID = "6825a449-7524-4d82-920f-50e36ab3ab1e"
+  IID_IDirectSoundBuffer8 = LibC::GUID.new(0x6825a449_u32, 0x7524_u16, 0x4d82_u16, StaticArray[0x92_u8, 0xf_u8, 0x50_u8, 0xe3_u8, 0x6a_u8, 0xb3_u8, 0xab_u8, 0x1e_u8])
   struct IDirectSoundBuffer8
     lpVtbl : IDirectSoundBuffer8VTbl*
   end
@@ -666,8 +666,8 @@ lib LibWin32
     commit_deferred_settings : Proc(IDirectSound3DListener*, HRESULT)
   end
 
-  IDirectSound3DListener_GUID = LibC::GUID.new("279afa84-4981-11ce-a521-0020af0be560")
-  CLSID_IDirectSound3DListener = "279afa84-4981-11ce-a521-0020af0be560"
+  IDirectSound3DListener_GUID = "279afa84-4981-11ce-a521-0020af0be560"
+  IID_IDirectSound3DListener = LibC::GUID.new(0x279afa84_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
   struct IDirectSound3DListener
     lpVtbl : IDirectSound3DListenerVTbl*
   end
@@ -696,8 +696,8 @@ lib LibWin32
     set_velocity : Proc(IDirectSound3DBuffer*, Float32, Float32, Float32, UInt32, HRESULT)
   end
 
-  IDirectSound3DBuffer_GUID = LibC::GUID.new("279afa86-4981-11ce-a521-0020af0be560")
-  CLSID_IDirectSound3DBuffer = "279afa86-4981-11ce-a521-0020af0be560"
+  IDirectSound3DBuffer_GUID = "279afa86-4981-11ce-a521-0020af0be560"
+  IID_IDirectSound3DBuffer = LibC::GUID.new(0x279afa86_u32, 0x4981_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
   struct IDirectSound3DBuffer
     lpVtbl : IDirectSound3DBufferVTbl*
   end
@@ -711,8 +711,8 @@ lib LibWin32
     initialize : Proc(IDirectSoundCapture*, Guid*, HRESULT)
   end
 
-  IDirectSoundCapture_GUID = LibC::GUID.new("b0210781-89cd-11d0-af08-00a0c925cd16")
-  CLSID_IDirectSoundCapture = "b0210781-89cd-11d0-af08-00a0c925cd16"
+  IDirectSoundCapture_GUID = "b0210781-89cd-11d0-af08-00a0c925cd16"
+  IID_IDirectSoundCapture = LibC::GUID.new(0xb0210781_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
   struct IDirectSoundCapture
     lpVtbl : IDirectSoundCaptureVTbl*
   end
@@ -732,8 +732,8 @@ lib LibWin32
     unlock : Proc(IDirectSoundCaptureBuffer*, Void*, UInt32, Void*, UInt32, HRESULT)
   end
 
-  IDirectSoundCaptureBuffer_GUID = LibC::GUID.new("b0210782-89cd-11d0-af08-00a0c925cd16")
-  CLSID_IDirectSoundCaptureBuffer = "b0210782-89cd-11d0-af08-00a0c925cd16"
+  IDirectSoundCaptureBuffer_GUID = "b0210782-89cd-11d0-af08-00a0c925cd16"
+  IID_IDirectSoundCaptureBuffer = LibC::GUID.new(0xb0210782_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
   struct IDirectSoundCaptureBuffer
     lpVtbl : IDirectSoundCaptureBufferVTbl*
   end
@@ -755,8 +755,8 @@ lib LibWin32
     get_fx_status : Proc(IDirectSoundCaptureBuffer8*, UInt32, UInt32*, HRESULT)
   end
 
-  IDirectSoundCaptureBuffer8_GUID = LibC::GUID.new("00990df4-0dbb-4872-833e-6d303e80aeb6")
-  CLSID_IDirectSoundCaptureBuffer8 = "00990df4-0dbb-4872-833e-6d303e80aeb6"
+  IDirectSoundCaptureBuffer8_GUID = "00990df4-0dbb-4872-833e-6d303e80aeb6"
+  IID_IDirectSoundCaptureBuffer8 = LibC::GUID.new(0x990df4_u32, 0xdbb_u16, 0x4872_u16, StaticArray[0x83_u8, 0x3e_u8, 0x6d_u8, 0x30_u8, 0x3e_u8, 0x80_u8, 0xae_u8, 0xb6_u8])
   struct IDirectSoundCaptureBuffer8
     lpVtbl : IDirectSoundCaptureBuffer8VTbl*
   end
@@ -768,8 +768,8 @@ lib LibWin32
     set_notification_positions : Proc(IDirectSoundNotify*, UInt32, DSBPOSITIONNOTIFY*, HRESULT)
   end
 
-  IDirectSoundNotify_GUID = LibC::GUID.new("b0210783-89cd-11d0-af08-00a0c925cd16")
-  CLSID_IDirectSoundNotify = "b0210783-89cd-11d0-af08-00a0c925cd16"
+  IDirectSoundNotify_GUID = "b0210783-89cd-11d0-af08-00a0c925cd16"
+  IID_IDirectSoundNotify = LibC::GUID.new(0xb0210783_u32, 0x89cd_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x25_u8, 0xcd_u8, 0x16_u8])
   struct IDirectSoundNotify
     lpVtbl : IDirectSoundNotifyVTbl*
   end
@@ -782,8 +782,8 @@ lib LibWin32
     get_all_parameters : Proc(IDirectSoundFXGargle*, DSFXGargle*, HRESULT)
   end
 
-  IDirectSoundFXGargle_GUID = LibC::GUID.new("d616f352-d622-11ce-aac5-0020af0b99a3")
-  CLSID_IDirectSoundFXGargle = "d616f352-d622-11ce-aac5-0020af0b99a3"
+  IDirectSoundFXGargle_GUID = "d616f352-d622-11ce-aac5-0020af0b99a3"
+  IID_IDirectSoundFXGargle = LibC::GUID.new(0xd616f352_u32, 0xd622_u16, 0x11ce_u16, StaticArray[0xaa_u8, 0xc5_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0x99_u8, 0xa3_u8])
   struct IDirectSoundFXGargle
     lpVtbl : IDirectSoundFXGargleVTbl*
   end
@@ -796,8 +796,8 @@ lib LibWin32
     get_all_parameters : Proc(IDirectSoundFXChorus*, DSFXChorus*, HRESULT)
   end
 
-  IDirectSoundFXChorus_GUID = LibC::GUID.new("880842e3-145f-43e6-a934-a71806e50547")
-  CLSID_IDirectSoundFXChorus = "880842e3-145f-43e6-a934-a71806e50547"
+  IDirectSoundFXChorus_GUID = "880842e3-145f-43e6-a934-a71806e50547"
+  IID_IDirectSoundFXChorus = LibC::GUID.new(0x880842e3_u32, 0x145f_u16, 0x43e6_u16, StaticArray[0xa9_u8, 0x34_u8, 0xa7_u8, 0x18_u8, 0x6_u8, 0xe5_u8, 0x5_u8, 0x47_u8])
   struct IDirectSoundFXChorus
     lpVtbl : IDirectSoundFXChorusVTbl*
   end
@@ -810,8 +810,8 @@ lib LibWin32
     get_all_parameters : Proc(IDirectSoundFXFlanger*, DSFXFlanger*, HRESULT)
   end
 
-  IDirectSoundFXFlanger_GUID = LibC::GUID.new("903e9878-2c92-4072-9b2c-ea68f5396783")
-  CLSID_IDirectSoundFXFlanger = "903e9878-2c92-4072-9b2c-ea68f5396783"
+  IDirectSoundFXFlanger_GUID = "903e9878-2c92-4072-9b2c-ea68f5396783"
+  IID_IDirectSoundFXFlanger = LibC::GUID.new(0x903e9878_u32, 0x2c92_u16, 0x4072_u16, StaticArray[0x9b_u8, 0x2c_u8, 0xea_u8, 0x68_u8, 0xf5_u8, 0x39_u8, 0x67_u8, 0x83_u8])
   struct IDirectSoundFXFlanger
     lpVtbl : IDirectSoundFXFlangerVTbl*
   end
@@ -824,8 +824,8 @@ lib LibWin32
     get_all_parameters : Proc(IDirectSoundFXEcho*, DSFXEcho*, HRESULT)
   end
 
-  IDirectSoundFXEcho_GUID = LibC::GUID.new("8bd28edf-50db-4e92-a2bd-445488d1ed42")
-  CLSID_IDirectSoundFXEcho = "8bd28edf-50db-4e92-a2bd-445488d1ed42"
+  IDirectSoundFXEcho_GUID = "8bd28edf-50db-4e92-a2bd-445488d1ed42"
+  IID_IDirectSoundFXEcho = LibC::GUID.new(0x8bd28edf_u32, 0x50db_u16, 0x4e92_u16, StaticArray[0xa2_u8, 0xbd_u8, 0x44_u8, 0x54_u8, 0x88_u8, 0xd1_u8, 0xed_u8, 0x42_u8])
   struct IDirectSoundFXEcho
     lpVtbl : IDirectSoundFXEchoVTbl*
   end
@@ -838,8 +838,8 @@ lib LibWin32
     get_all_parameters : Proc(IDirectSoundFXDistortion*, DSFXDistortion*, HRESULT)
   end
 
-  IDirectSoundFXDistortion_GUID = LibC::GUID.new("8ecf4326-455f-4d8b-bda9-8d5d3e9e3e0b")
-  CLSID_IDirectSoundFXDistortion = "8ecf4326-455f-4d8b-bda9-8d5d3e9e3e0b"
+  IDirectSoundFXDistortion_GUID = "8ecf4326-455f-4d8b-bda9-8d5d3e9e3e0b"
+  IID_IDirectSoundFXDistortion = LibC::GUID.new(0x8ecf4326_u32, 0x455f_u16, 0x4d8b_u16, StaticArray[0xbd_u8, 0xa9_u8, 0x8d_u8, 0x5d_u8, 0x3e_u8, 0x9e_u8, 0x3e_u8, 0xb_u8])
   struct IDirectSoundFXDistortion
     lpVtbl : IDirectSoundFXDistortionVTbl*
   end
@@ -852,8 +852,8 @@ lib LibWin32
     get_all_parameters : Proc(IDirectSoundFXCompressor*, DSFXCompressor*, HRESULT)
   end
 
-  IDirectSoundFXCompressor_GUID = LibC::GUID.new("4bbd1154-62f6-4e2c-a15c-d3b6c417f7a0")
-  CLSID_IDirectSoundFXCompressor = "4bbd1154-62f6-4e2c-a15c-d3b6c417f7a0"
+  IDirectSoundFXCompressor_GUID = "4bbd1154-62f6-4e2c-a15c-d3b6c417f7a0"
+  IID_IDirectSoundFXCompressor = LibC::GUID.new(0x4bbd1154_u32, 0x62f6_u16, 0x4e2c_u16, StaticArray[0xa1_u8, 0x5c_u8, 0xd3_u8, 0xb6_u8, 0xc4_u8, 0x17_u8, 0xf7_u8, 0xa0_u8])
   struct IDirectSoundFXCompressor
     lpVtbl : IDirectSoundFXCompressorVTbl*
   end
@@ -866,8 +866,8 @@ lib LibWin32
     get_all_parameters : Proc(IDirectSoundFXParamEq*, DSFXParamEq*, HRESULT)
   end
 
-  IDirectSoundFXParamEq_GUID = LibC::GUID.new("c03ca9fe-fe90-4204-8078-82334cd177da")
-  CLSID_IDirectSoundFXParamEq = "c03ca9fe-fe90-4204-8078-82334cd177da"
+  IDirectSoundFXParamEq_GUID = "c03ca9fe-fe90-4204-8078-82334cd177da"
+  IID_IDirectSoundFXParamEq = LibC::GUID.new(0xc03ca9fe_u32, 0xfe90_u16, 0x4204_u16, StaticArray[0x80_u8, 0x78_u8, 0x82_u8, 0x33_u8, 0x4c_u8, 0xd1_u8, 0x77_u8, 0xda_u8])
   struct IDirectSoundFXParamEq
     lpVtbl : IDirectSoundFXParamEqVTbl*
   end
@@ -884,8 +884,8 @@ lib LibWin32
     get_quality : Proc(IDirectSoundFXI3DL2Reverb*, Int32*, HRESULT)
   end
 
-  IDirectSoundFXI3DL2Reverb_GUID = LibC::GUID.new("4b166a6a-0d66-43f3-80e3-ee6280dee1a4")
-  CLSID_IDirectSoundFXI3DL2Reverb = "4b166a6a-0d66-43f3-80e3-ee6280dee1a4"
+  IDirectSoundFXI3DL2Reverb_GUID = "4b166a6a-0d66-43f3-80e3-ee6280dee1a4"
+  IID_IDirectSoundFXI3DL2Reverb = LibC::GUID.new(0x4b166a6a_u32, 0xd66_u16, 0x43f3_u16, StaticArray[0x80_u8, 0xe3_u8, 0xee_u8, 0x62_u8, 0x80_u8, 0xde_u8, 0xe1_u8, 0xa4_u8])
   struct IDirectSoundFXI3DL2Reverb
     lpVtbl : IDirectSoundFXI3DL2ReverbVTbl*
   end
@@ -898,8 +898,8 @@ lib LibWin32
     get_all_parameters : Proc(IDirectSoundFXWavesReverb*, DSFXWavesReverb*, HRESULT)
   end
 
-  IDirectSoundFXWavesReverb_GUID = LibC::GUID.new("46858c3a-0dc6-45e3-b760-d4eef16cb325")
-  CLSID_IDirectSoundFXWavesReverb = "46858c3a-0dc6-45e3-b760-d4eef16cb325"
+  IDirectSoundFXWavesReverb_GUID = "46858c3a-0dc6-45e3-b760-d4eef16cb325"
+  IID_IDirectSoundFXWavesReverb = LibC::GUID.new(0x46858c3a_u32, 0xdc6_u16, 0x45e3_u16, StaticArray[0xb7_u8, 0x60_u8, 0xd4_u8, 0xee_u8, 0xf1_u8, 0x6c_u8, 0xb3_u8, 0x25_u8])
   struct IDirectSoundFXWavesReverb
     lpVtbl : IDirectSoundFXWavesReverbVTbl*
   end
@@ -914,8 +914,8 @@ lib LibWin32
     reset : Proc(IDirectSoundCaptureFXAec*, HRESULT)
   end
 
-  IDirectSoundCaptureFXAec_GUID = LibC::GUID.new("ad74143d-903d-4ab7-8066-28d363036d65")
-  CLSID_IDirectSoundCaptureFXAec = "ad74143d-903d-4ab7-8066-28d363036d65"
+  IDirectSoundCaptureFXAec_GUID = "ad74143d-903d-4ab7-8066-28d363036d65"
+  IID_IDirectSoundCaptureFXAec = LibC::GUID.new(0xad74143d_u32, 0x903d_u16, 0x4ab7_u16, StaticArray[0x80_u8, 0x66_u8, 0x28_u8, 0xd3_u8, 0x63_u8, 0x3_u8, 0x6d_u8, 0x65_u8])
   struct IDirectSoundCaptureFXAec
     lpVtbl : IDirectSoundCaptureFXAecVTbl*
   end
@@ -929,8 +929,8 @@ lib LibWin32
     reset : Proc(IDirectSoundCaptureFXNoiseSuppress*, HRESULT)
   end
 
-  IDirectSoundCaptureFXNoiseSuppress_GUID = LibC::GUID.new("ed311e41-fbae-4175-9625-cd0854f693ca")
-  CLSID_IDirectSoundCaptureFXNoiseSuppress = "ed311e41-fbae-4175-9625-cd0854f693ca"
+  IDirectSoundCaptureFXNoiseSuppress_GUID = "ed311e41-fbae-4175-9625-cd0854f693ca"
+  IID_IDirectSoundCaptureFXNoiseSuppress = LibC::GUID.new(0xed311e41_u32, 0xfbae_u16, 0x4175_u16, StaticArray[0x96_u8, 0x25_u8, 0xcd_u8, 0x8_u8, 0x54_u8, 0xf6_u8, 0x93_u8, 0xca_u8])
   struct IDirectSoundCaptureFXNoiseSuppress
     lpVtbl : IDirectSoundCaptureFXNoiseSuppressVTbl*
   end
@@ -942,8 +942,8 @@ lib LibWin32
     initialize : Proc(IDirectSoundFullDuplex*, Guid*, Guid*, DSCBUFFERDESC*, DSBUFFERDESC*, LibC::HANDLE, UInt32, IDirectSoundCaptureBuffer8*, IDirectSoundBuffer8*, HRESULT)
   end
 
-  IDirectSoundFullDuplex_GUID = LibC::GUID.new("edcb4c7a-daab-4216-a42e-6c50596ddc1d")
-  CLSID_IDirectSoundFullDuplex = "edcb4c7a-daab-4216-a42e-6c50596ddc1d"
+  IDirectSoundFullDuplex_GUID = "edcb4c7a-daab-4216-a42e-6c50596ddc1d"
+  IID_IDirectSoundFullDuplex = LibC::GUID.new(0xedcb4c7a_u32, 0xdaab_u16, 0x4216_u16, StaticArray[0xa4_u8, 0x2e_u8, 0x6c_u8, 0x50_u8, 0x59_u8, 0x6d_u8, 0xdc_u8, 0x1d_u8])
   struct IDirectSoundFullDuplex
     lpVtbl : IDirectSoundFullDuplexVTbl*
   end

@@ -20,9 +20,9 @@ require "../../ui/shell/common.cr"
 {% end %}
 lib LibWin32
   PKEY_PIDSTR_MAX = 10_u32
-  InMemoryPropertyStore = LibC::GUID.new(0x9a02e012_u32, 0x6303_u16, 0x4e1e_u16, StaticArray[0xb9_u8, 0xa1_u8, 0x63_u8, 0xf_u8, 0x80_u8, 0x25_u8, 0x92_u8, 0xc5_u8])
-  InMemoryPropertyStoreMarshalByValue = LibC::GUID.new(0xd4ca0e2d_u32, 0x6da7_u16, 0x4b75_u16, StaticArray[0xa9_u8, 0x7c_u8, 0x5f_u8, 0x30_u8, 0x6f_u8, 0xe_u8, 0xae_u8, 0xdc_u8])
-  PropertySystem = LibC::GUID.new(0xb8967f85_u32, 0x58ae_u16, 0x4f46_u16, StaticArray[0x9f_u8, 0xb2_u8, 0x5d_u8, 0x79_u8, 0x4_u8, 0x79_u8, 0x8f_u8, 0x4b_u8])
+  CLSID_InMemoryPropertyStore = LibC::GUID.new(0x9a02e012_u32, 0x6303_u16, 0x4e1e_u16, StaticArray[0xb9_u8, 0xa1_u8, 0x63_u8, 0xf_u8, 0x80_u8, 0x25_u8, 0x92_u8, 0xc5_u8])
+  CLSID_InMemoryPropertyStoreMarshalByValue = LibC::GUID.new(0xd4ca0e2d_u32, 0x6da7_u16, 0x4b75_u16, StaticArray[0xa9_u8, 0x7c_u8, 0x5f_u8, 0x30_u8, 0x6f_u8, 0xe_u8, 0xae_u8, 0xdc_u8])
+  CLSID_PropertySystem = LibC::GUID.new(0xb8967f85_u32, 0x58ae_u16, 0x4f46_u16, StaticArray[0x9f_u8, 0xb2_u8, 0x5d_u8, 0x79_u8, 0x4_u8, 0x79_u8, 0x8f_u8, 0x4b_u8])
 
   type SERIALIZEDPROPSTORAGE = Void
 
@@ -349,8 +349,8 @@ lib LibWin32
     initialize : Proc(IInitializeWithFile*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
-  IInitializeWithFile_GUID = LibC::GUID.new("b7d14566-0509-4cce-a71f-0a554233bd9b")
-  CLSID_IInitializeWithFile = "b7d14566-0509-4cce-a71f-0a554233bd9b"
+  IInitializeWithFile_GUID = "b7d14566-0509-4cce-a71f-0a554233bd9b"
+  IID_IInitializeWithFile = LibC::GUID.new(0xb7d14566_u32, 0x509_u16, 0x4cce_u16, StaticArray[0xa7_u8, 0x1f_u8, 0xa_u8, 0x55_u8, 0x42_u8, 0x33_u8, 0xbd_u8, 0x9b_u8])
   struct IInitializeWithFile
     lpVtbl : IInitializeWithFileVTbl*
   end
@@ -362,8 +362,8 @@ lib LibWin32
     initialize : Proc(IInitializeWithStream*, IStream, UInt32, HRESULT)
   end
 
-  IInitializeWithStream_GUID = LibC::GUID.new("b824b49d-22ac-4161-ac8a-9916e8fa3f7f")
-  CLSID_IInitializeWithStream = "b824b49d-22ac-4161-ac8a-9916e8fa3f7f"
+  IInitializeWithStream_GUID = "b824b49d-22ac-4161-ac8a-9916e8fa3f7f"
+  IID_IInitializeWithStream = LibC::GUID.new(0xb824b49d_u32, 0x22ac_u16, 0x4161_u16, StaticArray[0xac_u8, 0x8a_u8, 0x99_u8, 0x16_u8, 0xe8_u8, 0xfa_u8, 0x3f_u8, 0x7f_u8])
   struct IInitializeWithStream
     lpVtbl : IInitializeWithStreamVTbl*
   end
@@ -379,8 +379,8 @@ lib LibWin32
     commit : Proc(IPropertyStore*, HRESULT)
   end
 
-  IPropertyStore_GUID = LibC::GUID.new("886d8eeb-8cf2-4446-8d02-cdba1dbdcf99")
-  CLSID_IPropertyStore = "886d8eeb-8cf2-4446-8d02-cdba1dbdcf99"
+  IPropertyStore_GUID = "886d8eeb-8cf2-4446-8d02-cdba1dbdcf99"
+  IID_IPropertyStore = LibC::GUID.new(0x886d8eeb_u32, 0x8cf2_u16, 0x4446_u16, StaticArray[0x8d_u8, 0x2_u8, 0xcd_u8, 0xba_u8, 0x1d_u8, 0xbd_u8, 0xcf_u8, 0x99_u8])
   struct IPropertyStore
     lpVtbl : IPropertyStoreVTbl*
   end
@@ -395,8 +395,8 @@ lib LibWin32
     get_name_at : Proc(INamedPropertyStore*, UInt32, UInt8**, HRESULT)
   end
 
-  INamedPropertyStore_GUID = LibC::GUID.new("71604b0f-97b0-4764-8577-2f13e98a1422")
-  CLSID_INamedPropertyStore = "71604b0f-97b0-4764-8577-2f13e98a1422"
+  INamedPropertyStore_GUID = "71604b0f-97b0-4764-8577-2f13e98a1422"
+  IID_INamedPropertyStore = LibC::GUID.new(0x71604b0f_u32, 0x97b0_u16, 0x4764_u16, StaticArray[0x85_u8, 0x77_u8, 0x2f_u8, 0x13_u8, 0xe9_u8, 0x8a_u8, 0x14_u8, 0x22_u8])
   struct INamedPropertyStore
     lpVtbl : INamedPropertyStoreVTbl*
   end
@@ -409,8 +409,8 @@ lib LibWin32
     get_property_key : Proc(IObjectWithPropertyKey*, PROPERTYKEY*, HRESULT)
   end
 
-  IObjectWithPropertyKey_GUID = LibC::GUID.new("fc0ca0a7-c316-4fd2-9031-3e628e6d4f23")
-  CLSID_IObjectWithPropertyKey = "fc0ca0a7-c316-4fd2-9031-3e628e6d4f23"
+  IObjectWithPropertyKey_GUID = "fc0ca0a7-c316-4fd2-9031-3e628e6d4f23"
+  IID_IObjectWithPropertyKey = LibC::GUID.new(0xfc0ca0a7_u32, 0xc316_u16, 0x4fd2_u16, StaticArray[0x90_u8, 0x31_u8, 0x3e_u8, 0x62_u8, 0x8e_u8, 0x6d_u8, 0x4f_u8, 0x23_u8])
   struct IObjectWithPropertyKey
     lpVtbl : IObjectWithPropertyKeyVTbl*
   end
@@ -424,8 +424,8 @@ lib LibWin32
     apply_to_prop_variant : Proc(IPropertyChange*, PROPVARIANT*, PROPVARIANT*, HRESULT)
   end
 
-  IPropertyChange_GUID = LibC::GUID.new("f917bc8a-1bba-4478-a245-1bde03eb9431")
-  CLSID_IPropertyChange = "f917bc8a-1bba-4478-a245-1bde03eb9431"
+  IPropertyChange_GUID = "f917bc8a-1bba-4478-a245-1bde03eb9431"
+  IID_IPropertyChange = LibC::GUID.new(0xf917bc8a_u32, 0x1bba_u16, 0x4478_u16, StaticArray[0xa2_u8, 0x45_u8, 0x1b_u8, 0xde_u8, 0x3_u8, 0xeb_u8, 0x94_u8, 0x31_u8])
   struct IPropertyChange
     lpVtbl : IPropertyChangeVTbl*
   end
@@ -443,8 +443,8 @@ lib LibWin32
     is_key_in_array : Proc(IPropertyChangeArray*, PROPERTYKEY*, HRESULT)
   end
 
-  IPropertyChangeArray_GUID = LibC::GUID.new("380f5cad-1b5e-42f2-805d-637fd392d31e")
-  CLSID_IPropertyChangeArray = "380f5cad-1b5e-42f2-805d-637fd392d31e"
+  IPropertyChangeArray_GUID = "380f5cad-1b5e-42f2-805d-637fd392d31e"
+  IID_IPropertyChangeArray = LibC::GUID.new(0x380f5cad_u32, 0x1b5e_u16, 0x42f2_u16, StaticArray[0x80_u8, 0x5d_u8, 0x63_u8, 0x7f_u8, 0xd3_u8, 0x92_u8, 0xd3_u8, 0x1e_u8])
   struct IPropertyChangeArray
     lpVtbl : IPropertyChangeArrayVTbl*
   end
@@ -456,8 +456,8 @@ lib LibWin32
     is_property_writable : Proc(IPropertyStoreCapabilities*, PROPERTYKEY*, HRESULT)
   end
 
-  IPropertyStoreCapabilities_GUID = LibC::GUID.new("c8e2d566-186e-4d49-bf41-6909ead56acc")
-  CLSID_IPropertyStoreCapabilities = "c8e2d566-186e-4d49-bf41-6909ead56acc"
+  IPropertyStoreCapabilities_GUID = "c8e2d566-186e-4d49-bf41-6909ead56acc"
+  IID_IPropertyStoreCapabilities = LibC::GUID.new(0xc8e2d566_u32, 0x186e_u16, 0x4d49_u16, StaticArray[0xbf_u8, 0x41_u8, 0x69_u8, 0x9_u8, 0xea_u8, 0xd5_u8, 0x6a_u8, 0xcc_u8])
   struct IPropertyStoreCapabilities
     lpVtbl : IPropertyStoreCapabilitiesVTbl*
   end
@@ -477,8 +477,8 @@ lib LibWin32
     set_value_and_state : Proc(IPropertyStoreCache*, PROPERTYKEY*, PROPVARIANT*, PSC_STATE, HRESULT)
   end
 
-  IPropertyStoreCache_GUID = LibC::GUID.new("3017056d-9a91-4e90-937d-746c72abbf4f")
-  CLSID_IPropertyStoreCache = "3017056d-9a91-4e90-937d-746c72abbf4f"
+  IPropertyStoreCache_GUID = "3017056d-9a91-4e90-937d-746c72abbf4f"
+  IID_IPropertyStoreCache = LibC::GUID.new(0x3017056d_u32, 0x9a91_u16, 0x4e90_u16, StaticArray[0x93_u8, 0x7d_u8, 0x74_u8, 0x6c_u8, 0x72_u8, 0xab_u8, 0xbf_u8, 0x4f_u8])
   struct IPropertyStoreCache
     lpVtbl : IPropertyStoreCacheVTbl*
   end
@@ -494,8 +494,8 @@ lib LibWin32
     get_display_text : Proc(IPropertyEnumType*, LibC::LPWSTR*, HRESULT)
   end
 
-  IPropertyEnumType_GUID = LibC::GUID.new("11e1fbf9-2d56-4a6b-8db3-7cd193a471f2")
-  CLSID_IPropertyEnumType = "11e1fbf9-2d56-4a6b-8db3-7cd193a471f2"
+  IPropertyEnumType_GUID = "11e1fbf9-2d56-4a6b-8db3-7cd193a471f2"
+  IID_IPropertyEnumType = LibC::GUID.new(0x11e1fbf9_u32, 0x2d56_u16, 0x4a6b_u16, StaticArray[0x8d_u8, 0xb3_u8, 0x7c_u8, 0xd1_u8, 0x93_u8, 0xa4_u8, 0x71_u8, 0xf2_u8])
   struct IPropertyEnumType
     lpVtbl : IPropertyEnumTypeVTbl*
   end
@@ -512,8 +512,8 @@ lib LibWin32
     get_image_reference : Proc(IPropertyEnumType2*, LibC::LPWSTR*, HRESULT)
   end
 
-  IPropertyEnumType2_GUID = LibC::GUID.new("9b6e051c-5ddd-4321-9070-fe2acb55e794")
-  CLSID_IPropertyEnumType2 = "9b6e051c-5ddd-4321-9070-fe2acb55e794"
+  IPropertyEnumType2_GUID = "9b6e051c-5ddd-4321-9070-fe2acb55e794"
+  IID_IPropertyEnumType2 = LibC::GUID.new(0x9b6e051c_u32, 0x5ddd_u16, 0x4321_u16, StaticArray[0x90_u8, 0x70_u8, 0xfe_u8, 0x2a_u8, 0xcb_u8, 0x55_u8, 0xe7_u8, 0x94_u8])
   struct IPropertyEnumType2
     lpVtbl : IPropertyEnumType2VTbl*
   end
@@ -528,8 +528,8 @@ lib LibWin32
     find_matching_index : Proc(IPropertyEnumTypeList*, PROPVARIANT*, UInt32*, HRESULT)
   end
 
-  IPropertyEnumTypeList_GUID = LibC::GUID.new("a99400f4-3d84-4557-94ba-1242fb2cc9a6")
-  CLSID_IPropertyEnumTypeList = "a99400f4-3d84-4557-94ba-1242fb2cc9a6"
+  IPropertyEnumTypeList_GUID = "a99400f4-3d84-4557-94ba-1242fb2cc9a6"
+  IID_IPropertyEnumTypeList = LibC::GUID.new(0xa99400f4_u32, 0x3d84_u16, 0x4557_u16, StaticArray[0x94_u8, 0xba_u8, 0x12_u8, 0x42_u8, 0xfb_u8, 0x2c_u8, 0xc9_u8, 0xa6_u8])
   struct IPropertyEnumTypeList
     lpVtbl : IPropertyEnumTypeListVTbl*
   end
@@ -561,8 +561,8 @@ lib LibWin32
     is_value_canonical : Proc(IPropertyDescription*, PROPVARIANT*, HRESULT)
   end
 
-  IPropertyDescription_GUID = LibC::GUID.new("6f79d558-3e96-4549-a1d1-7d75d2288814")
-  CLSID_IPropertyDescription = "6f79d558-3e96-4549-a1d1-7d75d2288814"
+  IPropertyDescription_GUID = "6f79d558-3e96-4549-a1d1-7d75d2288814"
+  IID_IPropertyDescription = LibC::GUID.new(0x6f79d558_u32, 0x3e96_u16, 0x4549_u16, StaticArray[0xa1_u8, 0xd1_u8, 0x7d_u8, 0x75_u8, 0xd2_u8, 0x28_u8, 0x88_u8, 0x14_u8])
   struct IPropertyDescription
     lpVtbl : IPropertyDescriptionVTbl*
   end
@@ -595,8 +595,8 @@ lib LibWin32
     get_image_reference_for_value : Proc(IPropertyDescription2*, PROPVARIANT*, LibC::LPWSTR*, HRESULT)
   end
 
-  IPropertyDescription2_GUID = LibC::GUID.new("57d2eded-5062-400e-b107-5dae79fe57a6")
-  CLSID_IPropertyDescription2 = "57d2eded-5062-400e-b107-5dae79fe57a6"
+  IPropertyDescription2_GUID = "57d2eded-5062-400e-b107-5dae79fe57a6"
+  IID_IPropertyDescription2 = LibC::GUID.new(0x57d2eded_u32, 0x5062_u16, 0x400e_u16, StaticArray[0xb1_u8, 0x7_u8, 0x5d_u8, 0xae_u8, 0x79_u8, 0xfe_u8, 0x57_u8, 0xa6_u8])
   struct IPropertyDescription2
     lpVtbl : IPropertyDescription2VTbl*
   end
@@ -630,8 +630,8 @@ lib LibWin32
     get_additional_sort_by_aliases : Proc(IPropertyDescriptionAliasInfo*, Guid*, Void**, HRESULT)
   end
 
-  IPropertyDescriptionAliasInfo_GUID = LibC::GUID.new("f67104fc-2af9-46fd-b32d-243c1404f3d1")
-  CLSID_IPropertyDescriptionAliasInfo = "f67104fc-2af9-46fd-b32d-243c1404f3d1"
+  IPropertyDescriptionAliasInfo_GUID = "f67104fc-2af9-46fd-b32d-243c1404f3d1"
+  IID_IPropertyDescriptionAliasInfo = LibC::GUID.new(0xf67104fc_u32, 0x2af9_u16, 0x46fd_u16, StaticArray[0xb3_u8, 0x2d_u8, 0x24_u8, 0x3c_u8, 0x14_u8, 0x4_u8, 0xf3_u8, 0xd1_u8])
   struct IPropertyDescriptionAliasInfo
     lpVtbl : IPropertyDescriptionAliasInfoVTbl*
   end
@@ -667,8 +667,8 @@ lib LibWin32
     get_max_size : Proc(IPropertyDescriptionSearchInfo*, UInt32*, HRESULT)
   end
 
-  IPropertyDescriptionSearchInfo_GUID = LibC::GUID.new("078f91bd-29a2-440f-924e-46a291524520")
-  CLSID_IPropertyDescriptionSearchInfo = "078f91bd-29a2-440f-924e-46a291524520"
+  IPropertyDescriptionSearchInfo_GUID = "078f91bd-29a2-440f-924e-46a291524520"
+  IID_IPropertyDescriptionSearchInfo = LibC::GUID.new(0x78f91bd_u32, 0x29a2_u16, 0x440f_u16, StaticArray[0x92_u8, 0x4e_u8, 0x46_u8, 0xa2_u8, 0x91_u8, 0x52_u8, 0x45_u8, 0x20_u8])
   struct IPropertyDescriptionSearchInfo
     lpVtbl : IPropertyDescriptionSearchInfoVTbl*
   end
@@ -701,8 +701,8 @@ lib LibWin32
     get_related_property : Proc(IPropertyDescriptionRelatedPropertyInfo*, LibC::LPWSTR, Guid*, Void**, HRESULT)
   end
 
-  IPropertyDescriptionRelatedPropertyInfo_GUID = LibC::GUID.new("507393f4-2a3d-4a60-b59e-d9c75716c2dd")
-  CLSID_IPropertyDescriptionRelatedPropertyInfo = "507393f4-2a3d-4a60-b59e-d9c75716c2dd"
+  IPropertyDescriptionRelatedPropertyInfo_GUID = "507393f4-2a3d-4a60-b59e-d9c75716c2dd"
+  IID_IPropertyDescriptionRelatedPropertyInfo = LibC::GUID.new(0x507393f4_u32, 0x2a3d_u16, 0x4a60_u16, StaticArray[0xb5_u8, 0x9e_u8, 0xd9_u8, 0xc7_u8, 0x57_u8, 0x16_u8, 0xc2_u8, 0xdd_u8])
   struct IPropertyDescriptionRelatedPropertyInfo
     lpVtbl : IPropertyDescriptionRelatedPropertyInfoVTbl*
   end
@@ -722,8 +722,8 @@ lib LibWin32
     refresh_property_schema : Proc(IPropertySystem*, HRESULT)
   end
 
-  IPropertySystem_GUID = LibC::GUID.new("ca724e8a-c3e6-442b-88a4-6fb0db8035a3")
-  CLSID_IPropertySystem = "ca724e8a-c3e6-442b-88a4-6fb0db8035a3"
+  IPropertySystem_GUID = "ca724e8a-c3e6-442b-88a4-6fb0db8035a3"
+  IID_IPropertySystem = LibC::GUID.new(0xca724e8a_u32, 0xc3e6_u16, 0x442b_u16, StaticArray[0x88_u8, 0xa4_u8, 0x6f_u8, 0xb0_u8, 0xdb_u8, 0x80_u8, 0x35_u8, 0xa3_u8])
   struct IPropertySystem
     lpVtbl : IPropertySystemVTbl*
   end
@@ -736,8 +736,8 @@ lib LibWin32
     get_at : Proc(IPropertyDescriptionList*, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IPropertyDescriptionList_GUID = LibC::GUID.new("1f9fc1d0-c39b-4b26-817f-011967d3440e")
-  CLSID_IPropertyDescriptionList = "1f9fc1d0-c39b-4b26-817f-011967d3440e"
+  IPropertyDescriptionList_GUID = "1f9fc1d0-c39b-4b26-817f-011967d3440e"
+  IID_IPropertyDescriptionList = LibC::GUID.new(0x1f9fc1d0_u32, 0xc39b_u16, 0x4b26_u16, StaticArray[0x81_u8, 0x7f_u8, 0x1_u8, 0x19_u8, 0x67_u8, 0xd3_u8, 0x44_u8, 0xe_u8])
   struct IPropertyDescriptionList
     lpVtbl : IPropertyDescriptionListVTbl*
   end
@@ -750,8 +750,8 @@ lib LibWin32
     get_property_store_for_keys : Proc(IPropertyStoreFactory*, PROPERTYKEY*, UInt32, GETPROPERTYSTOREFLAGS, Guid*, Void**, HRESULT)
   end
 
-  IPropertyStoreFactory_GUID = LibC::GUID.new("bc110b6d-57e8-4148-a9c6-91015ab2f3a5")
-  CLSID_IPropertyStoreFactory = "bc110b6d-57e8-4148-a9c6-91015ab2f3a5"
+  IPropertyStoreFactory_GUID = "bc110b6d-57e8-4148-a9c6-91015ab2f3a5"
+  IID_IPropertyStoreFactory = LibC::GUID.new(0xbc110b6d_u32, 0x57e8_u16, 0x4148_u16, StaticArray[0xa9_u8, 0xc6_u8, 0x91_u8, 0x1_u8, 0x5a_u8, 0xb2_u8, 0xf3_u8, 0xa5_u8])
   struct IPropertyStoreFactory
     lpVtbl : IPropertyStoreFactoryVTbl*
   end
@@ -765,8 +765,8 @@ lib LibWin32
     get_delayed_property_store : Proc(IDelayedPropertyStoreFactory*, GETPROPERTYSTOREFLAGS, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IDelayedPropertyStoreFactory_GUID = LibC::GUID.new("40d4577f-e237-4bdb-bd69-58f089431b6a")
-  CLSID_IDelayedPropertyStoreFactory = "40d4577f-e237-4bdb-bd69-58f089431b6a"
+  IDelayedPropertyStoreFactory_GUID = "40d4577f-e237-4bdb-bd69-58f089431b6a"
+  IID_IDelayedPropertyStoreFactory = LibC::GUID.new(0x40d4577f_u32, 0xe237_u16, 0x4bdb_u16, StaticArray[0xbd_u8, 0x69_u8, 0x58_u8, 0xf0_u8, 0x89_u8, 0x43_u8, 0x1b_u8, 0x6a_u8])
   struct IDelayedPropertyStoreFactory
     lpVtbl : IDelayedPropertyStoreFactoryVTbl*
   end
@@ -780,8 +780,8 @@ lib LibWin32
     get_property_storage : Proc(IPersistSerializedPropStorage*, SERIALIZEDPROPSTORAGE**, UInt32*, HRESULT)
   end
 
-  IPersistSerializedPropStorage_GUID = LibC::GUID.new("e318ad57-0aa0-450f-aca5-6fab7103d917")
-  CLSID_IPersistSerializedPropStorage = "e318ad57-0aa0-450f-aca5-6fab7103d917"
+  IPersistSerializedPropStorage_GUID = "e318ad57-0aa0-450f-aca5-6fab7103d917"
+  IID_IPersistSerializedPropStorage = LibC::GUID.new(0xe318ad57_u32, 0xaa0_u16, 0x450f_u16, StaticArray[0xac_u8, 0xa5_u8, 0x6f_u8, 0xab_u8, 0x71_u8, 0x3_u8, 0xd9_u8, 0x17_u8])
   struct IPersistSerializedPropStorage
     lpVtbl : IPersistSerializedPropStorageVTbl*
   end
@@ -797,8 +797,8 @@ lib LibWin32
     get_property_storage_buffer : Proc(IPersistSerializedPropStorage2*, SERIALIZEDPROPSTORAGE*, UInt32, UInt32*, HRESULT)
   end
 
-  IPersistSerializedPropStorage2_GUID = LibC::GUID.new("77effa68-4f98-4366-ba72-573b3d880571")
-  CLSID_IPersistSerializedPropStorage2 = "77effa68-4f98-4366-ba72-573b3d880571"
+  IPersistSerializedPropStorage2_GUID = "77effa68-4f98-4366-ba72-573b3d880571"
+  IID_IPersistSerializedPropStorage2 = LibC::GUID.new(0x77effa68_u32, 0x4f98_u16, 0x4366_u16, StaticArray[0xba_u8, 0x72_u8, 0x57_u8, 0x3b_u8, 0x3d_u8, 0x88_u8, 0x5_u8, 0x71_u8])
   struct IPersistSerializedPropStorage2
     lpVtbl : IPersistSerializedPropStorage2VTbl*
   end
@@ -810,8 +810,8 @@ lib LibWin32
     schema_refreshed : Proc(IPropertySystemChangeNotify*, HRESULT)
   end
 
-  IPropertySystemChangeNotify_GUID = LibC::GUID.new("fa955fd9-38be-4879-a6ce-824cf52d609f")
-  CLSID_IPropertySystemChangeNotify = "fa955fd9-38be-4879-a6ce-824cf52d609f"
+  IPropertySystemChangeNotify_GUID = "fa955fd9-38be-4879-a6ce-824cf52d609f"
+  IID_IPropertySystemChangeNotify = LibC::GUID.new(0xfa955fd9_u32, 0x38be_u16, 0x4879_u16, StaticArray[0xa6_u8, 0xce_u8, 0x82_u8, 0x4c_u8, 0xf5_u8, 0x2d_u8, 0x60_u8, 0x9f_u8])
   struct IPropertySystemChangeNotify
     lpVtbl : IPropertySystemChangeNotifyVTbl*
   end
@@ -823,8 +823,8 @@ lib LibWin32
     create_object : Proc(ICreateObject*, Guid*, IUnknown, Guid*, Void**, HRESULT)
   end
 
-  ICreateObject_GUID = LibC::GUID.new("75121952-e0d0-43e5-9380-1d80483acf72")
-  CLSID_ICreateObject = "75121952-e0d0-43e5-9380-1d80483acf72"
+  ICreateObject_GUID = "75121952-e0d0-43e5-9380-1d80483acf72"
+  IID_ICreateObject = LibC::GUID.new(0x75121952_u32, 0xe0d0_u16, 0x43e5_u16, StaticArray[0x93_u8, 0x80_u8, 0x1d_u8, 0x80_u8, 0x48_u8, 0x3a_u8, 0xcf_u8, 0x72_u8])
   struct ICreateObject
     lpVtbl : ICreateObjectVTbl*
   end
@@ -843,8 +843,8 @@ lib LibWin32
     get_help_info : Proc(IPropertyUI*, Guid*, UInt32, Char*, UInt32, UInt32*, HRESULT)
   end
 
-  IPropertyUI_GUID = LibC::GUID.new("757a7d9f-919a-4118-99d7-dbb208c8cc66")
-  CLSID_IPropertyUI = "757a7d9f-919a-4118-99d7-dbb208c8cc66"
+  IPropertyUI_GUID = "757a7d9f-919a-4118-99d7-dbb208c8cc66"
+  IID_IPropertyUI = LibC::GUID.new(0x757a7d9f_u32, 0x919a_u16, 0x4118_u16, StaticArray[0x99_u8, 0xd7_u8, 0xdb_u8, 0xb2_u8, 0x8_u8, 0xc8_u8, 0xcc_u8, 0x66_u8])
   struct IPropertyUI
     lpVtbl : IPropertyUIVTbl*
   end
@@ -1530,8 +1530,4 @@ lib LibWin32
 
   # Params # hwnd : LibC::HANDLE [In],riid : Guid* [In],ppv : Void** [In]
   fun SHGetPropertyStoreForWindow(hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
-end
-struct LibWin32::PROPERTYKEY
-  def initialize(@fmtid : Guid, @pid : UInt32)
-  end
 end

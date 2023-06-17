@@ -13,7 +13,7 @@ require "../foundation.cr"
 {% end %}
 lib LibWin32
   RADIUS_EXTENSION_VERSION = 1_u32
-  SdoMachine = LibC::GUID.new(0xe9218ae7_u32, 0x9e91_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x60_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x84_u8, 0x6b_u8, 0xc0_u8])
+  CLSID_SdoMachine = LibC::GUID.new(0xe9218ae7_u32, 0x9e91_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x60_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x84_u8, 0x6b_u8, 0xc0_u8])
 
   alias PRADIUS_EXTENSION_INIT = Proc(UInt32)
   alias PRADIUS_EXTENSION_TERM = Proc(Void)
@@ -796,8 +796,8 @@ lib LibWin32
     get_sdo_schema : Proc(ISdoMachine*, IUnknown*, HRESULT)
   end
 
-  ISdoMachine_GUID = LibC::GUID.new("479f6e75-49a2-11d2-8eca-00c04fc2f519")
-  CLSID_ISdoMachine = "479f6e75-49a2-11d2-8eca-00c04fc2f519"
+  ISdoMachine_GUID = "479f6e75-49a2-11d2-8eca-00c04fc2f519"
+  IID_ISdoMachine = LibC::GUID.new(0x479f6e75_u32, 0x49a2_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xca_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf5_u8, 0x19_u8])
   struct ISdoMachine
     lpVtbl : ISdoMachineVTbl*
   end
@@ -826,8 +826,8 @@ lib LibWin32
     reload : Proc(ISdoMachine2*, HRESULT)
   end
 
-  ISdoMachine2_GUID = LibC::GUID.new("518e5ffe-d8ce-4f7e-a5db-b40a35419d3b")
-  CLSID_ISdoMachine2 = "518e5ffe-d8ce-4f7e-a5db-b40a35419d3b"
+  ISdoMachine2_GUID = "518e5ffe-d8ce-4f7e-a5db-b40a35419d3b"
+  IID_ISdoMachine2 = LibC::GUID.new(0x518e5ffe_u32, 0xd8ce_u16, 0x4f7e_u16, StaticArray[0xa5_u8, 0xdb_u8, 0xb4_u8, 0xa_u8, 0x35_u8, 0x41_u8, 0x9d_u8, 0x3b_u8])
   struct ISdoMachine2
     lpVtbl : ISdoMachine2VTbl*
   end
@@ -846,8 +846,8 @@ lib LibWin32
     reset_service : Proc(ISdoServiceControl*, HRESULT)
   end
 
-  ISdoServiceControl_GUID = LibC::GUID.new("479f6e74-49a2-11d2-8eca-00c04fc2f519")
-  CLSID_ISdoServiceControl = "479f6e74-49a2-11d2-8eca-00c04fc2f519"
+  ISdoServiceControl_GUID = "479f6e74-49a2-11d2-8eca-00c04fc2f519"
+  IID_ISdoServiceControl = LibC::GUID.new(0x479f6e74_u32, 0x49a2_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xca_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf5_u8, 0x19_u8])
   struct ISdoServiceControl
     lpVtbl : ISdoServiceControlVTbl*
   end
@@ -869,8 +869,8 @@ lib LibWin32
     get__new_enum : Proc(ISdo*, IUnknown*, HRESULT)
   end
 
-  ISdo_GUID = LibC::GUID.new("56bc53de-96db-11d1-bf3f-000000000000")
-  CLSID_ISdo = "56bc53de-96db-11d1-bf3f-000000000000"
+  ISdo_GUID = "56bc53de-96db-11d1-bf3f-000000000000"
+  IID_ISdo = LibC::GUID.new(0x56bc53de_u32, 0x96db_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x3f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct ISdo
     lpVtbl : ISdoVTbl*
   end
@@ -893,8 +893,8 @@ lib LibWin32
     get__new_enum : Proc(ISdoCollection*, IUnknown*, HRESULT)
   end
 
-  ISdoCollection_GUID = LibC::GUID.new("56bc53e2-96db-11d1-bf3f-000000000000")
-  CLSID_ISdoCollection = "56bc53e2-96db-11d1-bf3f-000000000000"
+  ISdoCollection_GUID = "56bc53e2-96db-11d1-bf3f-000000000000"
+  IID_ISdoCollection = LibC::GUID.new(0x56bc53e2_u32, 0x96db_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x3f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct ISdoCollection
     lpVtbl : ISdoCollectionVTbl*
   end
@@ -919,8 +919,8 @@ lib LibWin32
     add_to_sdo_as_property : Proc(ITemplateSdo*, IDispatch, Int32, HRESULT)
   end
 
-  ITemplateSdo_GUID = LibC::GUID.new("8aa85302-d2e2-4e20-8b1f-a571e437d6c9")
-  CLSID_ITemplateSdo = "8aa85302-d2e2-4e20-8b1f-a571e437d6c9"
+  ITemplateSdo_GUID = "8aa85302-d2e2-4e20-8b1f-a571e437d6c9"
+  IID_ITemplateSdo = LibC::GUID.new(0x8aa85302_u32, 0xd2e2_u16, 0x4e20_u16, StaticArray[0x8b_u8, 0x1f_u8, 0xa5_u8, 0x71_u8, 0xe4_u8, 0x37_u8, 0xd6_u8, 0xc9_u8])
   struct ITemplateSdo
     lpVtbl : ITemplateSdoVTbl*
   end
@@ -940,8 +940,8 @@ lib LibWin32
     get_attribute_id : Proc(ISdoDictionaryOld*, UInt8*, ATTRIBUTEID*, HRESULT)
   end
 
-  ISdoDictionaryOld_GUID = LibC::GUID.new("d432e5f4-53d8-11d2-9a3a-00c04fb998ac")
-  CLSID_ISdoDictionaryOld = "d432e5f4-53d8-11d2-9a3a-00c04fb998ac"
+  ISdoDictionaryOld_GUID = "d432e5f4-53d8-11d2-9a3a-00c04fb998ac"
+  IID_ISdoDictionaryOld = LibC::GUID.new(0xd432e5f4_u32, 0x53d8_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x98_u8, 0xac_u8])
   struct ISdoDictionaryOld
     lpVtbl : ISdoDictionaryOldVTbl*
   end

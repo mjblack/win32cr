@@ -63,16 +63,16 @@ lib LibWin32
   UPNP_E_VALUE_TOO_LONG = -2147180496_i32
   UPNP_E_DEVICE_RUNNING = -2147180495_i32
   UPNP_E_DEVICE_NOTREGISTERED = -2147180494_i32
-  UPnPDeviceFinder = LibC::GUID.new(0xe2085f28_u32, 0xfeb7_u16, 0x404a_u16, StaticArray[0xb8_u8, 0xe7_u8, 0xe6_u8, 0x59_u8, 0xbd_u8, 0xea_u8, 0xaa_u8, 0x2_u8])
-  UPnPDevices = LibC::GUID.new(0xb9e84ffd_u32, 0xad3c_u16, 0x40a4_u16, StaticArray[0xb8_u8, 0x35_u8, 0x8_u8, 0x82_u8, 0xeb_u8, 0xcb_u8, 0xaa_u8, 0xa8_u8])
-  UPnPDevice = LibC::GUID.new(0xa32552c5_u32, 0xba61_u16, 0x457a_u16, StaticArray[0xb5_u8, 0x9a_u8, 0xa2_u8, 0x56_u8, 0x1e_u8, 0x12_u8, 0x5e_u8, 0x33_u8])
-  UPnPServices = LibC::GUID.new(0xc0bc4b4a_u32, 0xa406_u16, 0x4efc_u16, StaticArray[0x93_u8, 0x2f_u8, 0xb8_u8, 0x54_u8, 0x6b_u8, 0x81_u8, 0x0_u8, 0xcc_u8])
-  UPnPService = LibC::GUID.new(0xc624ba95_u32, 0xfbcb_u16, 0x4409_u16, StaticArray[0x8c_u8, 0x3_u8, 0x8c_u8, 0xce_u8, 0xec_u8, 0x53_u8, 0x3e_u8, 0xf1_u8])
-  UPnPDescriptionDocument = LibC::GUID.new(0x1d8a9b47_u32, 0x3a28_u16, 0x4ce2_u16, StaticArray[0x8a_u8, 0x4b_u8, 0xbd_u8, 0x34_u8, 0xe4_u8, 0x5b_u8, 0xce_u8, 0xeb_u8])
-  UPnPDeviceFinderEx = LibC::GUID.new(0x181b54fc_u32, 0x380b_u16, 0x4a75_u16, StaticArray[0xb3_u8, 0xf1_u8, 0x4a_u8, 0xc4_u8, 0x5e_u8, 0x96_u8, 0x5_u8, 0xb0_u8])
-  UPnPDescriptionDocumentEx = LibC::GUID.new(0x33fd0563_u32, 0xd81a_u16, 0x4393_u16, StaticArray[0x83_u8, 0xcc_u8, 0x1_u8, 0x95_u8, 0xb1_u8, 0xda_u8, 0x2f_u8, 0x91_u8])
-  UPnPRegistrar = LibC::GUID.new(0x204810b9_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
-  UPnPRemoteEndpointInfo = LibC::GUID.new(0x2e5e84e9_u32, 0x4049_u16, 0x4244_u16, StaticArray[0xb7_u8, 0x28_u8, 0x2d_u8, 0x24_u8, 0x22_u8, 0x71_u8, 0x57_u8, 0xc7_u8])
+  CLSID_UPnPDeviceFinder = LibC::GUID.new(0xe2085f28_u32, 0xfeb7_u16, 0x404a_u16, StaticArray[0xb8_u8, 0xe7_u8, 0xe6_u8, 0x59_u8, 0xbd_u8, 0xea_u8, 0xaa_u8, 0x2_u8])
+  CLSID_UPnPDevices = LibC::GUID.new(0xb9e84ffd_u32, 0xad3c_u16, 0x40a4_u16, StaticArray[0xb8_u8, 0x35_u8, 0x8_u8, 0x82_u8, 0xeb_u8, 0xcb_u8, 0xaa_u8, 0xa8_u8])
+  CLSID_UPnPDevice = LibC::GUID.new(0xa32552c5_u32, 0xba61_u16, 0x457a_u16, StaticArray[0xb5_u8, 0x9a_u8, 0xa2_u8, 0x56_u8, 0x1e_u8, 0x12_u8, 0x5e_u8, 0x33_u8])
+  CLSID_UPnPServices = LibC::GUID.new(0xc0bc4b4a_u32, 0xa406_u16, 0x4efc_u16, StaticArray[0x93_u8, 0x2f_u8, 0xb8_u8, 0x54_u8, 0x6b_u8, 0x81_u8, 0x0_u8, 0xcc_u8])
+  CLSID_UPnPService = LibC::GUID.new(0xc624ba95_u32, 0xfbcb_u16, 0x4409_u16, StaticArray[0x8c_u8, 0x3_u8, 0x8c_u8, 0xce_u8, 0xec_u8, 0x53_u8, 0x3e_u8, 0xf1_u8])
+  CLSID_UPnPDescriptionDocument = LibC::GUID.new(0x1d8a9b47_u32, 0x3a28_u16, 0x4ce2_u16, StaticArray[0x8a_u8, 0x4b_u8, 0xbd_u8, 0x34_u8, 0xe4_u8, 0x5b_u8, 0xce_u8, 0xeb_u8])
+  CLSID_UPnPDeviceFinderEx = LibC::GUID.new(0x181b54fc_u32, 0x380b_u16, 0x4a75_u16, StaticArray[0xb3_u8, 0xf1_u8, 0x4a_u8, 0xc4_u8, 0x5e_u8, 0x96_u8, 0x5_u8, 0xb0_u8])
+  CLSID_UPnPDescriptionDocumentEx = LibC::GUID.new(0x33fd0563_u32, 0xd81a_u16, 0x4393_u16, StaticArray[0x83_u8, 0xcc_u8, 0x1_u8, 0x95_u8, 0xb1_u8, 0xda_u8, 0x2f_u8, 0x91_u8])
+  CLSID_UPnPRegistrar = LibC::GUID.new(0x204810b9_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
+  CLSID_UPnPRemoteEndpointInfo = LibC::GUID.new(0x2e5e84e9_u32, 0x4049_u16, 0x4244_u16, StaticArray[0xb7_u8, 0x28_u8, 0x2d_u8, 0x24_u8, 0x22_u8, 0x71_u8, 0x57_u8, 0xc7_u8])
 
   alias SW_DEVICE_CREATE_CALLBACK = Proc(HSWDEVICE, HRESULT, Void*, LibC::LPWSTR, Void)
 
@@ -119,8 +119,8 @@ lib LibWin32
     find_by_udn : Proc(IUPnPDeviceFinder*, UInt8*, IUPnPDevice*, HRESULT)
   end
 
-  IUPnPDeviceFinder_GUID = LibC::GUID.new("adda3d55-6f72-4319-bff9-18600a539b10")
-  CLSID_IUPnPDeviceFinder = "adda3d55-6f72-4319-bff9-18600a539b10"
+  IUPnPDeviceFinder_GUID = "adda3d55-6f72-4319-bff9-18600a539b10"
+  IID_IUPnPDeviceFinder = LibC::GUID.new(0xadda3d55_u32, 0x6f72_u16, 0x4319_u16, StaticArray[0xbf_u8, 0xf9_u8, 0x18_u8, 0x60_u8, 0xa_u8, 0x53_u8, 0x9b_u8, 0x10_u8])
   struct IUPnPDeviceFinder
     lpVtbl : IUPnPDeviceFinderVTbl*
   end
@@ -133,8 +133,8 @@ lib LibWin32
     get_address_family : Proc(IUPnPAddressFamilyControl*, Int32*, HRESULT)
   end
 
-  IUPnPAddressFamilyControl_GUID = LibC::GUID.new("e3bf6178-694e-459f-a5a6-191ea0ffa1c7")
-  CLSID_IUPnPAddressFamilyControl = "e3bf6178-694e-459f-a5a6-191ea0ffa1c7"
+  IUPnPAddressFamilyControl_GUID = "e3bf6178-694e-459f-a5a6-191ea0ffa1c7"
+  IID_IUPnPAddressFamilyControl = LibC::GUID.new(0xe3bf6178_u32, 0x694e_u16, 0x459f_u16, StaticArray[0xa5_u8, 0xa6_u8, 0x19_u8, 0x1e_u8, 0xa0_u8, 0xff_u8, 0xa1_u8, 0xc7_u8])
   struct IUPnPAddressFamilyControl
     lpVtbl : IUPnPAddressFamilyControlVTbl*
   end
@@ -146,8 +146,8 @@ lib LibWin32
     add_request_headers : Proc(IUPnPHttpHeaderControl*, UInt8*, HRESULT)
   end
 
-  IUPnPHttpHeaderControl_GUID = LibC::GUID.new("0405af4f-8b5c-447c-80f2-b75984a31f3c")
-  CLSID_IUPnPHttpHeaderControl = "0405af4f-8b5c-447c-80f2-b75984a31f3c"
+  IUPnPHttpHeaderControl_GUID = "0405af4f-8b5c-447c-80f2-b75984a31f3c"
+  IID_IUPnPHttpHeaderControl = LibC::GUID.new(0x405af4f_u32, 0x8b5c_u16, 0x447c_u16, StaticArray[0x80_u8, 0xf2_u8, 0xb7_u8, 0x59_u8, 0x84_u8, 0xa3_u8, 0x1f_u8, 0x3c_u8])
   struct IUPnPHttpHeaderControl
     lpVtbl : IUPnPHttpHeaderControlVTbl*
   end
@@ -161,8 +161,8 @@ lib LibWin32
     search_complete : Proc(IUPnPDeviceFinderCallback*, Int32, HRESULT)
   end
 
-  IUPnPDeviceFinderCallback_GUID = LibC::GUID.new("415a984a-88b3-49f3-92af-0508bedf0d6c")
-  CLSID_IUPnPDeviceFinderCallback = "415a984a-88b3-49f3-92af-0508bedf0d6c"
+  IUPnPDeviceFinderCallback_GUID = "415a984a-88b3-49f3-92af-0508bedf0d6c"
+  IID_IUPnPDeviceFinderCallback = LibC::GUID.new(0x415a984a_u32, 0x88b3_u16, 0x49f3_u16, StaticArray[0x92_u8, 0xaf_u8, 0x5_u8, 0x8_u8, 0xbe_u8, 0xdf_u8, 0xd_u8, 0x6c_u8])
   struct IUPnPDeviceFinderCallback
     lpVtbl : IUPnPDeviceFinderCallbackVTbl*
   end
@@ -180,8 +180,8 @@ lib LibWin32
     get_item : Proc(IUPnPServices*, UInt8*, IUPnPService*, HRESULT)
   end
 
-  IUPnPServices_GUID = LibC::GUID.new("3f8c8e9e-9a7a-4dc8-bc41-ff31fa374956")
-  CLSID_IUPnPServices = "3f8c8e9e-9a7a-4dc8-bc41-ff31fa374956"
+  IUPnPServices_GUID = "3f8c8e9e-9a7a-4dc8-bc41-ff31fa374956"
+  IID_IUPnPServices = LibC::GUID.new(0x3f8c8e9e_u32, 0x9a7a_u16, 0x4dc8_u16, StaticArray[0xbc_u8, 0x41_u8, 0xff_u8, 0x31_u8, 0xfa_u8, 0x37_u8, 0x49_u8, 0x56_u8])
   struct IUPnPServices
     lpVtbl : IUPnPServicesVTbl*
   end
@@ -202,8 +202,8 @@ lib LibWin32
     get_last_transport_status : Proc(IUPnPService*, Int32*, HRESULT)
   end
 
-  IUPnPService_GUID = LibC::GUID.new("a295019c-dc65-47dd-90dc-7fe918a1ab44")
-  CLSID_IUPnPService = "a295019c-dc65-47dd-90dc-7fe918a1ab44"
+  IUPnPService_GUID = "a295019c-dc65-47dd-90dc-7fe918a1ab44"
+  IID_IUPnPService = LibC::GUID.new(0xa295019c_u32, 0xdc65_u16, 0x47dd_u16, StaticArray[0x90_u8, 0xdc_u8, 0x7f_u8, 0xe9_u8, 0x18_u8, 0xa1_u8, 0xab_u8, 0x44_u8])
   struct IUPnPService
     lpVtbl : IUPnPServiceVTbl*
   end
@@ -215,8 +215,8 @@ lib LibWin32
     async_operation_complete : Proc(IUPnPAsyncResult*, UInt64, HRESULT)
   end
 
-  IUPnPAsyncResult_GUID = LibC::GUID.new("4d65fd08-d13e-4274-9c8b-dd8d028c8644")
-  CLSID_IUPnPAsyncResult = "4d65fd08-d13e-4274-9c8b-dd8d028c8644"
+  IUPnPAsyncResult_GUID = "4d65fd08-d13e-4274-9c8b-dd8d028c8644"
+  IID_IUPnPAsyncResult = LibC::GUID.new(0x4d65fd08_u32, 0xd13e_u16, 0x4274_u16, StaticArray[0x9c_u8, 0x8b_u8, 0xdd_u8, 0x8d_u8, 0x2_u8, 0x8c_u8, 0x86_u8, 0x44_u8])
   struct IUPnPAsyncResult
     lpVtbl : IUPnPAsyncResultVTbl*
   end
@@ -236,8 +236,8 @@ lib LibWin32
     cancel_async_operation : Proc(IUPnPServiceAsync*, UInt64, HRESULT)
   end
 
-  IUPnPServiceAsync_GUID = LibC::GUID.new("098bdaf5-5ec1-49e7-a260-b3a11dd8680c")
-  CLSID_IUPnPServiceAsync = "098bdaf5-5ec1-49e7-a260-b3a11dd8680c"
+  IUPnPServiceAsync_GUID = "098bdaf5-5ec1-49e7-a260-b3a11dd8680c"
+  IID_IUPnPServiceAsync = LibC::GUID.new(0x98bdaf5_u32, 0x5ec1_u16, 0x49e7_u16, StaticArray[0xa2_u8, 0x60_u8, 0xb3_u8, 0xa1_u8, 0x1d_u8, 0xd8_u8, 0x68_u8, 0xc_u8])
   struct IUPnPServiceAsync
     lpVtbl : IUPnPServiceAsyncVTbl*
   end
@@ -250,8 +250,8 @@ lib LibWin32
     service_instance_died : Proc(IUPnPServiceCallback*, IUPnPService, HRESULT)
   end
 
-  IUPnPServiceCallback_GUID = LibC::GUID.new("31fadca9-ab73-464b-b67d-5c1d0f83c8b8")
-  CLSID_IUPnPServiceCallback = "31fadca9-ab73-464b-b67d-5c1d0f83c8b8"
+  IUPnPServiceCallback_GUID = "31fadca9-ab73-464b-b67d-5c1d0f83c8b8"
+  IID_IUPnPServiceCallback = LibC::GUID.new(0x31fadca9_u32, 0xab73_u16, 0x464b_u16, StaticArray[0xb6_u8, 0x7d_u8, 0x5c_u8, 0x1d_u8, 0xf_u8, 0x83_u8, 0xc8_u8, 0xb8_u8])
   struct IUPnPServiceCallback
     lpVtbl : IUPnPServiceCallbackVTbl*
   end
@@ -263,8 +263,8 @@ lib LibWin32
     set_service_enum_property : Proc(IUPnPServiceEnumProperty*, UInt32, HRESULT)
   end
 
-  IUPnPServiceEnumProperty_GUID = LibC::GUID.new("38873b37-91bb-49f4-b249-2e8efbb8a816")
-  CLSID_IUPnPServiceEnumProperty = "38873b37-91bb-49f4-b249-2e8efbb8a816"
+  IUPnPServiceEnumProperty_GUID = "38873b37-91bb-49f4-b249-2e8efbb8a816"
+  IID_IUPnPServiceEnumProperty = LibC::GUID.new(0x38873b37_u32, 0x91bb_u16, 0x49f4_u16, StaticArray[0xb2_u8, 0x49_u8, 0x2e_u8, 0x8e_u8, 0xfb_u8, 0xb8_u8, 0xa8_u8, 0x16_u8])
   struct IUPnPServiceEnumProperty
     lpVtbl : IUPnPServiceEnumPropertyVTbl*
   end
@@ -277,8 +277,8 @@ lib LibWin32
     get_document : Proc(IUPnPServiceDocumentAccess*, UInt8**, HRESULT)
   end
 
-  IUPnPServiceDocumentAccess_GUID = LibC::GUID.new("21905529-0a5e-4589-825d-7e6d87ea6998")
-  CLSID_IUPnPServiceDocumentAccess = "21905529-0a5e-4589-825d-7e6d87ea6998"
+  IUPnPServiceDocumentAccess_GUID = "21905529-0a5e-4589-825d-7e6d87ea6998"
+  IID_IUPnPServiceDocumentAccess = LibC::GUID.new(0x21905529_u32, 0xa5e_u16, 0x4589_u16, StaticArray[0x82_u8, 0x5d_u8, 0x7e_u8, 0x6d_u8, 0x87_u8, 0xea_u8, 0x69_u8, 0x98_u8])
   struct IUPnPServiceDocumentAccess
     lpVtbl : IUPnPServiceDocumentAccessVTbl*
   end
@@ -296,8 +296,8 @@ lib LibWin32
     get_item : Proc(IUPnPDevices*, UInt8*, IUPnPDevice*, HRESULT)
   end
 
-  IUPnPDevices_GUID = LibC::GUID.new("fdbc0c73-bda3-4c66-ac4f-f2d96fdad68c")
-  CLSID_IUPnPDevices = "fdbc0c73-bda3-4c66-ac4f-f2d96fdad68c"
+  IUPnPDevices_GUID = "fdbc0c73-bda3-4c66-ac4f-f2d96fdad68c"
+  IID_IUPnPDevices = LibC::GUID.new(0xfdbc0c73_u32, 0xbda3_u16, 0x4c66_u16, StaticArray[0xac_u8, 0x4f_u8, 0xf2_u8, 0xd9_u8, 0x6f_u8, 0xda_u8, 0xd6_u8, 0x8c_u8])
   struct IUPnPDevices
     lpVtbl : IUPnPDevicesVTbl*
   end
@@ -331,8 +331,8 @@ lib LibWin32
     get_services : Proc(IUPnPDevice*, IUPnPServices*, HRESULT)
   end
 
-  IUPnPDevice_GUID = LibC::GUID.new("3d44d0d1-98c9-4889-acd1-f9d674bf2221")
-  CLSID_IUPnPDevice = "3d44d0d1-98c9-4889-acd1-f9d674bf2221"
+  IUPnPDevice_GUID = "3d44d0d1-98c9-4889-acd1-f9d674bf2221"
+  IID_IUPnPDevice = LibC::GUID.new(0x3d44d0d1_u32, 0x98c9_u16, 0x4889_u16, StaticArray[0xac_u8, 0xd1_u8, 0xf9_u8, 0xd6_u8, 0x74_u8, 0xbf_u8, 0x22_u8, 0x21_u8])
   struct IUPnPDevice
     lpVtbl : IUPnPDeviceVTbl*
   end
@@ -344,8 +344,8 @@ lib LibWin32
     get_document_url : Proc(IUPnPDeviceDocumentAccess*, UInt8**, HRESULT)
   end
 
-  IUPnPDeviceDocumentAccess_GUID = LibC::GUID.new("e7772804-3287-418e-9072-cf2b47238981")
-  CLSID_IUPnPDeviceDocumentAccess = "e7772804-3287-418e-9072-cf2b47238981"
+  IUPnPDeviceDocumentAccess_GUID = "e7772804-3287-418e-9072-cf2b47238981"
+  IID_IUPnPDeviceDocumentAccess = LibC::GUID.new(0xe7772804_u32, 0x3287_u16, 0x418e_u16, StaticArray[0x90_u8, 0x72_u8, 0xcf_u8, 0x2b_u8, 0x47_u8, 0x23_u8, 0x89_u8, 0x81_u8])
   struct IUPnPDeviceDocumentAccess
     lpVtbl : IUPnPDeviceDocumentAccessVTbl*
   end
@@ -357,8 +357,8 @@ lib LibWin32
     get_document : Proc(IUPnPDeviceDocumentAccessEx*, UInt8**, HRESULT)
   end
 
-  IUPnPDeviceDocumentAccessEx_GUID = LibC::GUID.new("c4bc4050-6178-4bd1-a4b8-6398321f3247")
-  CLSID_IUPnPDeviceDocumentAccessEx = "c4bc4050-6178-4bd1-a4b8-6398321f3247"
+  IUPnPDeviceDocumentAccessEx_GUID = "c4bc4050-6178-4bd1-a4b8-6398321f3247"
+  IID_IUPnPDeviceDocumentAccessEx = LibC::GUID.new(0xc4bc4050_u32, 0x6178_u16, 0x4bd1_u16, StaticArray[0xa4_u8, 0xb8_u8, 0x63_u8, 0x98_u8, 0x32_u8, 0x1f_u8, 0x32_u8, 0x47_u8])
   struct IUPnPDeviceDocumentAccessEx
     lpVtbl : IUPnPDeviceDocumentAccessExVTbl*
   end
@@ -380,8 +380,8 @@ lib LibWin32
     device_by_udn : Proc(IUPnPDescriptionDocument*, UInt8*, IUPnPDevice*, HRESULT)
   end
 
-  IUPnPDescriptionDocument_GUID = LibC::GUID.new("11d1c1b2-7daa-4c9e-9595-7f82ed206d1e")
-  CLSID_IUPnPDescriptionDocument = "11d1c1b2-7daa-4c9e-9595-7f82ed206d1e"
+  IUPnPDescriptionDocument_GUID = "11d1c1b2-7daa-4c9e-9595-7f82ed206d1e"
+  IID_IUPnPDescriptionDocument = LibC::GUID.new(0x11d1c1b2_u32, 0x7daa_u16, 0x4c9e_u16, StaticArray[0x95_u8, 0x95_u8, 0x7f_u8, 0x82_u8, 0xed_u8, 0x20_u8, 0x6d_u8, 0x1e_u8])
   struct IUPnPDescriptionDocument
     lpVtbl : IUPnPDescriptionDocumentVTbl*
   end
@@ -393,8 +393,8 @@ lib LibWin32
     device_added_with_interface : Proc(IUPnPDeviceFinderAddCallbackWithInterface*, Int32, IUPnPDevice, Guid*, HRESULT)
   end
 
-  IUPnPDeviceFinderAddCallbackWithInterface_GUID = LibC::GUID.new("983dfc0b-1796-44df-8975-ca545b620ee5")
-  CLSID_IUPnPDeviceFinderAddCallbackWithInterface = "983dfc0b-1796-44df-8975-ca545b620ee5"
+  IUPnPDeviceFinderAddCallbackWithInterface_GUID = "983dfc0b-1796-44df-8975-ca545b620ee5"
+  IID_IUPnPDeviceFinderAddCallbackWithInterface = LibC::GUID.new(0x983dfc0b_u32, 0x1796_u16, 0x44df_u16, StaticArray[0x89_u8, 0x75_u8, 0xca_u8, 0x54_u8, 0x5b_u8, 0x62_u8, 0xe_u8, 0xe5_u8])
   struct IUPnPDeviceFinderAddCallbackWithInterface
     lpVtbl : IUPnPDeviceFinderAddCallbackWithInterfaceVTbl*
   end
@@ -406,8 +406,8 @@ lib LibWin32
     load_complete : Proc(IUPnPDescriptionDocumentCallback*, HRESULT, HRESULT)
   end
 
-  IUPnPDescriptionDocumentCallback_GUID = LibC::GUID.new("77394c69-5486-40d6-9bc3-4991983e02da")
-  CLSID_IUPnPDescriptionDocumentCallback = "77394c69-5486-40d6-9bc3-4991983e02da"
+  IUPnPDescriptionDocumentCallback_GUID = "77394c69-5486-40d6-9bc3-4991983e02da"
+  IID_IUPnPDescriptionDocumentCallback = LibC::GUID.new(0x77394c69_u32, 0x5486_u16, 0x40d6_u16, StaticArray[0x9b_u8, 0xc3_u8, 0x49_u8, 0x91_u8, 0x98_u8, 0x3e_u8, 0x2_u8, 0xda_u8])
   struct IUPnPDescriptionDocumentCallback
     lpVtbl : IUPnPDescriptionDocumentCallbackVTbl*
   end
@@ -420,8 +420,8 @@ lib LibWin32
     on_state_changed_safe : Proc(IUPnPEventSink*, VARIANT, HRESULT)
   end
 
-  IUPnPEventSink_GUID = LibC::GUID.new("204810b4-73b2-11d4-bf42-00b0d0118b56")
-  CLSID_IUPnPEventSink = "204810b4-73b2-11d4-bf42-00b0d0118b56"
+  IUPnPEventSink_GUID = "204810b4-73b2-11d4-bf42-00b0d0118b56"
+  IID_IUPnPEventSink = LibC::GUID.new(0x204810b4_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
   struct IUPnPEventSink
     lpVtbl : IUPnPEventSinkVTbl*
   end
@@ -434,8 +434,8 @@ lib LibWin32
     unadvise : Proc(IUPnPEventSource*, IUPnPEventSink, HRESULT)
   end
 
-  IUPnPEventSource_GUID = LibC::GUID.new("204810b5-73b2-11d4-bf42-00b0d0118b56")
-  CLSID_IUPnPEventSource = "204810b5-73b2-11d4-bf42-00b0d0118b56"
+  IUPnPEventSource_GUID = "204810b5-73b2-11d4-bf42-00b0d0118b56"
+  IID_IUPnPEventSource = LibC::GUID.new(0x204810b5_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
   struct IUPnPEventSource
     lpVtbl : IUPnPEventSourceVTbl*
   end
@@ -452,8 +452,8 @@ lib LibWin32
     unregister_device_provider : Proc(IUPnPRegistrar*, UInt8*, HRESULT)
   end
 
-  IUPnPRegistrar_GUID = LibC::GUID.new("204810b6-73b2-11d4-bf42-00b0d0118b56")
-  CLSID_IUPnPRegistrar = "204810b6-73b2-11d4-bf42-00b0d0118b56"
+  IUPnPRegistrar_GUID = "204810b6-73b2-11d4-bf42-00b0d0118b56"
+  IID_IUPnPRegistrar = LibC::GUID.new(0x204810b6_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
   struct IUPnPRegistrar
     lpVtbl : IUPnPRegistrarVTbl*
   end
@@ -466,8 +466,8 @@ lib LibWin32
     reregister_running_device : Proc(IUPnPReregistrar*, UInt8*, UInt8*, IUnknown, UInt8*, UInt8*, Int32, HRESULT)
   end
 
-  IUPnPReregistrar_GUID = LibC::GUID.new("204810b7-73b2-11d4-bf42-00b0d0118b56")
-  CLSID_IUPnPReregistrar = "204810b7-73b2-11d4-bf42-00b0d0118b56"
+  IUPnPReregistrar_GUID = "204810b7-73b2-11d4-bf42-00b0d0118b56"
+  IID_IUPnPReregistrar = LibC::GUID.new(0x204810b7_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
   struct IUPnPReregistrar
     lpVtbl : IUPnPReregistrarVTbl*
   end
@@ -480,8 +480,8 @@ lib LibWin32
     get_service_object : Proc(IUPnPDeviceControl*, UInt8*, UInt8*, IDispatch*, HRESULT)
   end
 
-  IUPnPDeviceControl_GUID = LibC::GUID.new("204810ba-73b2-11d4-bf42-00b0d0118b56")
-  CLSID_IUPnPDeviceControl = "204810ba-73b2-11d4-bf42-00b0d0118b56"
+  IUPnPDeviceControl_GUID = "204810ba-73b2-11d4-bf42-00b0d0118b56"
+  IID_IUPnPDeviceControl = LibC::GUID.new(0x204810ba_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
   struct IUPnPDeviceControl
     lpVtbl : IUPnPDeviceControlVTbl*
   end
@@ -493,8 +493,8 @@ lib LibWin32
     get_additional_response_headers : Proc(IUPnPDeviceControlHttpHeaders*, UInt8**, HRESULT)
   end
 
-  IUPnPDeviceControlHttpHeaders_GUID = LibC::GUID.new("204810bb-73b2-11d4-bf42-00b0d0118b56")
-  CLSID_IUPnPDeviceControlHttpHeaders = "204810bb-73b2-11d4-bf42-00b0d0118b56"
+  IUPnPDeviceControlHttpHeaders_GUID = "204810bb-73b2-11d4-bf42-00b0d0118b56"
+  IID_IUPnPDeviceControlHttpHeaders = LibC::GUID.new(0x204810bb_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
   struct IUPnPDeviceControlHttpHeaders
     lpVtbl : IUPnPDeviceControlHttpHeadersVTbl*
   end
@@ -507,8 +507,8 @@ lib LibWin32
     stop : Proc(IUPnPDeviceProvider*, HRESULT)
   end
 
-  IUPnPDeviceProvider_GUID = LibC::GUID.new("204810b8-73b2-11d4-bf42-00b0d0118b56")
-  CLSID_IUPnPDeviceProvider = "204810b8-73b2-11d4-bf42-00b0d0118b56"
+  IUPnPDeviceProvider_GUID = "204810b8-73b2-11d4-bf42-00b0d0118b56"
+  IID_IUPnPDeviceProvider = LibC::GUID.new(0x204810b8_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
   struct IUPnPDeviceProvider
     lpVtbl : IUPnPDeviceProviderVTbl*
   end
@@ -522,8 +522,8 @@ lib LibWin32
     get_guid_value : Proc(IUPnPRemoteEndpointInfo*, UInt8*, Guid*, HRESULT)
   end
 
-  IUPnPRemoteEndpointInfo_GUID = LibC::GUID.new("c92eb863-0269-4aff-9c72-75321bba2952")
-  CLSID_IUPnPRemoteEndpointInfo = "c92eb863-0269-4aff-9c72-75321bba2952"
+  IUPnPRemoteEndpointInfo_GUID = "c92eb863-0269-4aff-9c72-75321bba2952"
+  IID_IUPnPRemoteEndpointInfo = LibC::GUID.new(0xc92eb863_u32, 0x269_u16, 0x4aff_u16, StaticArray[0x9c_u8, 0x72_u8, 0x75_u8, 0x32_u8, 0x1b_u8, 0xba_u8, 0x29_u8, 0x52_u8])
   struct IUPnPRemoteEndpointInfo
     lpVtbl : IUPnPRemoteEndpointInfoVTbl*
   end

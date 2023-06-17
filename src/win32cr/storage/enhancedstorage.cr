@@ -1315,10 +1315,10 @@ lib LibWin32
   ES_VENDOR_ERROR_START = 49152_u32
   ES_VENDOR_ERROR_END = 65535_u32
   FACILITY_ENHANCED_STORAGE = 4_u32
-  EnumEnhancedStorageACT = LibC::GUID.new(0xfe841493_u32, 0x835c_u16, 0x4fa3_u16, StaticArray[0xb6_u8, 0xcc_u8, 0xb4_u8, 0xb2_u8, 0xd4_u8, 0x71_u8, 0x98_u8, 0x48_u8])
-  EnhancedStorageACT = LibC::GUID.new(0xaf076a15_u32, 0x2ece_u16, 0x4ad4_u16, StaticArray[0xbb_u8, 0x21_u8, 0x29_u8, 0xf0_u8, 0x40_u8, 0xe1_u8, 0x76_u8, 0xd8_u8])
-  EnhancedStorageSilo = LibC::GUID.new(0xcb25220c_u32, 0x76c7_u16, 0x4fee_u16, StaticArray[0x84_u8, 0x2b_u8, 0xf3_u8, 0x38_u8, 0x3c_u8, 0xd0_u8, 0x22_u8, 0xbc_u8])
-  EnhancedStorageSiloAction = LibC::GUID.new(0x886d29dd_u32, 0xb506_u16, 0x466b_u16, StaticArray[0x9f_u8, 0xbf_u8, 0xb4_u8, 0x4f_u8, 0xf3_u8, 0x83_u8, 0xfb_u8, 0x3f_u8])
+  CLSID_EnumEnhancedStorageACT = LibC::GUID.new(0xfe841493_u32, 0x835c_u16, 0x4fa3_u16, StaticArray[0xb6_u8, 0xcc_u8, 0xb4_u8, 0xb2_u8, 0xd4_u8, 0x71_u8, 0x98_u8, 0x48_u8])
+  CLSID_EnhancedStorageACT = LibC::GUID.new(0xaf076a15_u32, 0x2ece_u16, 0x4ad4_u16, StaticArray[0xbb_u8, 0x21_u8, 0x29_u8, 0xf0_u8, 0x40_u8, 0xe1_u8, 0x76_u8, 0xd8_u8])
+  CLSID_EnhancedStorageSilo = LibC::GUID.new(0xcb25220c_u32, 0x76c7_u16, 0x4fee_u16, StaticArray[0x84_u8, 0x2b_u8, 0xf3_u8, 0x38_u8, 0x3c_u8, 0xd0_u8, 0x22_u8, 0xbc_u8])
+  CLSID_EnhancedStorageSiloAction = LibC::GUID.new(0x886d29dd_u32, 0xb506_u16, 0x466b_u16, StaticArray[0x9f_u8, 0xbf_u8, 0xb4_u8, 0x4f_u8, 0xf3_u8, 0x83_u8, 0xfb_u8, 0x3f_u8])
 
 
   enum ACT_AUTHORIZATION_STATE_VALUE : Int32
@@ -1376,8 +1376,8 @@ lib LibWin32
     get_matching_act : Proc(IEnumEnhancedStorageACT*, LibC::LPWSTR, IEnhancedStorageACT*, HRESULT)
   end
 
-  IEnumEnhancedStorageACT_GUID = LibC::GUID.new("09b224bd-1335-4631-a7ff-cfd3a92646d7")
-  CLSID_IEnumEnhancedStorageACT = "09b224bd-1335-4631-a7ff-cfd3a92646d7"
+  IEnumEnhancedStorageACT_GUID = "09b224bd-1335-4631-a7ff-cfd3a92646d7"
+  IID_IEnumEnhancedStorageACT = LibC::GUID.new(0x9b224bd_u32, 0x1335_u16, 0x4631_u16, StaticArray[0xa7_u8, 0xff_u8, 0xcf_u8, 0xd3_u8, 0xa9_u8, 0x26_u8, 0x46_u8, 0xd7_u8])
   struct IEnumEnhancedStorageACT
     lpVtbl : IEnumEnhancedStorageACTVTbl*
   end
@@ -1394,8 +1394,8 @@ lib LibWin32
     get_silos : Proc(IEnhancedStorageACT*, IEnhancedStorageSilo**, UInt32*, HRESULT)
   end
 
-  IEnhancedStorageACT_GUID = LibC::GUID.new("6e7781f4-e0f2-4239-b976-a01abab52930")
-  CLSID_IEnhancedStorageACT = "6e7781f4-e0f2-4239-b976-a01abab52930"
+  IEnhancedStorageACT_GUID = "6e7781f4-e0f2-4239-b976-a01abab52930"
+  IID_IEnhancedStorageACT = LibC::GUID.new(0x6e7781f4_u32, 0xe0f2_u16, 0x4239_u16, StaticArray[0xb9_u8, 0x76_u8, 0xa0_u8, 0x1a_u8, 0xba_u8, 0xb5_u8, 0x29_u8, 0x30_u8])
   struct IEnhancedStorageACT
     lpVtbl : IEnhancedStorageACTVTbl*
   end
@@ -1414,8 +1414,8 @@ lib LibWin32
     is_device_removable : Proc(IEnhancedStorageACT2*, LibC::BOOL*, HRESULT)
   end
 
-  IEnhancedStorageACT2_GUID = LibC::GUID.new("4da57d2e-8eb3-41f6-a07e-98b52b88242b")
-  CLSID_IEnhancedStorageACT2 = "4da57d2e-8eb3-41f6-a07e-98b52b88242b"
+  IEnhancedStorageACT2_GUID = "4da57d2e-8eb3-41f6-a07e-98b52b88242b"
+  IID_IEnhancedStorageACT2 = LibC::GUID.new(0x4da57d2e_u32, 0x8eb3_u16, 0x41f6_u16, StaticArray[0xa0_u8, 0x7e_u8, 0x98_u8, 0xb5_u8, 0x2b_u8, 0x88_u8, 0x24_u8, 0x2b_u8])
   struct IEnhancedStorageACT2
     lpVtbl : IEnhancedStorageACT2VTbl*
   end
@@ -1437,8 +1437,8 @@ lib LibWin32
     get_shell_ext_support : Proc(IEnhancedStorageACT3*, LibC::BOOL*, HRESULT)
   end
 
-  IEnhancedStorageACT3_GUID = LibC::GUID.new("022150a1-113d-11df-bb61-001aa01bbc58")
-  CLSID_IEnhancedStorageACT3 = "022150a1-113d-11df-bb61-001aa01bbc58"
+  IEnhancedStorageACT3_GUID = "022150a1-113d-11df-bb61-001aa01bbc58"
+  IID_IEnhancedStorageACT3 = LibC::GUID.new(0x22150a1_u32, 0x113d_u16, 0x11df_u16, StaticArray[0xbb_u8, 0x61_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
   struct IEnhancedStorageACT3
     lpVtbl : IEnhancedStorageACT3VTbl*
   end
@@ -1454,8 +1454,8 @@ lib LibWin32
     get_device_path : Proc(IEnhancedStorageSilo*, LibC::LPWSTR*, HRESULT)
   end
 
-  IEnhancedStorageSilo_GUID = LibC::GUID.new("5aef78c6-2242-4703-bf49-44b29357a359")
-  CLSID_IEnhancedStorageSilo = "5aef78c6-2242-4703-bf49-44b29357a359"
+  IEnhancedStorageSilo_GUID = "5aef78c6-2242-4703-bf49-44b29357a359"
+  IID_IEnhancedStorageSilo = LibC::GUID.new(0x5aef78c6_u32, 0x2242_u16, 0x4703_u16, StaticArray[0xbf_u8, 0x49_u8, 0x44_u8, 0xb2_u8, 0x93_u8, 0x57_u8, 0xa3_u8, 0x59_u8])
   struct IEnhancedStorageSilo
     lpVtbl : IEnhancedStorageSiloVTbl*
   end
@@ -1469,8 +1469,8 @@ lib LibWin32
     invoke : Proc(IEnhancedStorageSiloAction*, HRESULT)
   end
 
-  IEnhancedStorageSiloAction_GUID = LibC::GUID.new("b6f7f311-206f-4ff8-9c4b-27efee77a86f")
-  CLSID_IEnhancedStorageSiloAction = "b6f7f311-206f-4ff8-9c4b-27efee77a86f"
+  IEnhancedStorageSiloAction_GUID = "b6f7f311-206f-4ff8-9c4b-27efee77a86f"
+  IID_IEnhancedStorageSiloAction = LibC::GUID.new(0xb6f7f311_u32, 0x206f_u16, 0x4ff8_u16, StaticArray[0x9c_u8, 0x4b_u8, 0x27_u8, 0xef_u8, 0xee_u8, 0x77_u8, 0xa8_u8, 0x6f_u8])
   struct IEnhancedStorageSiloAction
     lpVtbl : IEnhancedStorageSiloActionVTbl*
   end

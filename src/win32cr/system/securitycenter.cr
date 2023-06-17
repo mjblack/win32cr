@@ -15,8 +15,8 @@ require "../system/threading.cr"
 @[Link("wscapi")]
 {% end %}
 lib LibWin32
-  WSCProductList = LibC::GUID.new(0x17072f7b_u32, 0x9abe_u16, 0x4a74_u16, StaticArray[0xa2_u8, 0x61_u8, 0x1e_u8, 0xb7_u8, 0x6b_u8, 0x55_u8, 0x10_u8, 0x7a_u8])
-  WSCDefaultProduct = LibC::GUID.new(0x2981a36e_u32, 0xf22d_u16, 0x11e5_u16, StaticArray[0x9c_u8, 0xe9_u8, 0x5e_u8, 0x55_u8, 0x17_u8, 0x50_u8, 0x7c_u8, 0x66_u8])
+  CLSID_WSCProductList = LibC::GUID.new(0x17072f7b_u32, 0x9abe_u16, 0x4a74_u16, StaticArray[0xa2_u8, 0x61_u8, 0x1e_u8, 0xb7_u8, 0x6b_u8, 0x55_u8, 0x10_u8, 0x7a_u8])
+  CLSID_WSCDefaultProduct = LibC::GUID.new(0x2981a36e_u32, 0xf22d_u16, 0x11e5_u16, StaticArray[0x9c_u8, 0xe9_u8, 0x5e_u8, 0x55_u8, 0x17_u8, 0x50_u8, 0x7c_u8, 0x66_u8])
 
 
   enum WSC_SECURITY_PRODUCT_SUBSTATUS : Int32
@@ -81,8 +81,8 @@ lib LibWin32
     get_product_is_default : Proc(IWscProduct*, LibC::BOOL*, HRESULT)
   end
 
-  IWscProduct_GUID = LibC::GUID.new("8c38232e-3a45-4a27-92b0-1a16a975f669")
-  CLSID_IWscProduct = "8c38232e-3a45-4a27-92b0-1a16a975f669"
+  IWscProduct_GUID = "8c38232e-3a45-4a27-92b0-1a16a975f669"
+  IID_IWscProduct = LibC::GUID.new(0x8c38232e_u32, 0x3a45_u16, 0x4a27_u16, StaticArray[0x92_u8, 0xb0_u8, 0x1a_u8, 0x16_u8, 0xa9_u8, 0x75_u8, 0xf6_u8, 0x69_u8])
   struct IWscProduct
     lpVtbl : IWscProductVTbl*
   end
@@ -110,8 +110,8 @@ lib LibWin32
     get_firewall_public_profile_substatus : Proc(IWscProduct2*, WSC_SECURITY_PRODUCT_SUBSTATUS*, HRESULT)
   end
 
-  IWscProduct2_GUID = LibC::GUID.new("f896ca54-fe09-4403-86d4-23cb488d81d8")
-  CLSID_IWscProduct2 = "f896ca54-fe09-4403-86d4-23cb488d81d8"
+  IWscProduct2_GUID = "f896ca54-fe09-4403-86d4-23cb488d81d8"
+  IID_IWscProduct2 = LibC::GUID.new(0xf896ca54_u32, 0xfe09_u16, 0x4403_u16, StaticArray[0x86_u8, 0xd4_u8, 0x23_u8, 0xcb_u8, 0x48_u8, 0x8d_u8, 0x81_u8, 0xd8_u8])
   struct IWscProduct2
     lpVtbl : IWscProduct2VTbl*
   end
@@ -140,8 +140,8 @@ lib LibWin32
     get_antivirus_days_until_expired : Proc(IWscProduct3*, UInt32*, HRESULT)
   end
 
-  IWscProduct3_GUID = LibC::GUID.new("55536524-d1d1-4726-8c7c-04996a1904e7")
-  CLSID_IWscProduct3 = "55536524-d1d1-4726-8c7c-04996a1904e7"
+  IWscProduct3_GUID = "55536524-d1d1-4726-8c7c-04996a1904e7"
+  IID_IWscProduct3 = LibC::GUID.new(0x55536524_u32, 0xd1d1_u16, 0x4726_u16, StaticArray[0x8c_u8, 0x7c_u8, 0x4_u8, 0x99_u8, 0x6a_u8, 0x19_u8, 0x4_u8, 0xe7_u8])
   struct IWscProduct3
     lpVtbl : IWscProduct3VTbl*
   end
@@ -159,8 +159,8 @@ lib LibWin32
     get_item : Proc(IWSCProductList*, UInt32, IWscProduct*, HRESULT)
   end
 
-  IWSCProductList_GUID = LibC::GUID.new("722a338c-6e8e-4e72-ac27-1417fb0c81c2")
-  CLSID_IWSCProductList = "722a338c-6e8e-4e72-ac27-1417fb0c81c2"
+  IWSCProductList_GUID = "722a338c-6e8e-4e72-ac27-1417fb0c81c2"
+  IID_IWSCProductList = LibC::GUID.new(0x722a338c_u32, 0x6e8e_u16, 0x4e72_u16, StaticArray[0xac_u8, 0x27_u8, 0x14_u8, 0x17_u8, 0xfb_u8, 0xc_u8, 0x81_u8, 0xc2_u8])
   struct IWSCProductList
     lpVtbl : IWSCProductListVTbl*
   end
@@ -176,8 +176,8 @@ lib LibWin32
     set_default_product : Proc(IWSCDefaultProduct*, SECURITY_PRODUCT_TYPE, UInt8*, HRESULT)
   end
 
-  IWSCDefaultProduct_GUID = LibC::GUID.new("0476d69c-f21a-11e5-9ce9-5e5517507c66")
-  CLSID_IWSCDefaultProduct = "0476d69c-f21a-11e5-9ce9-5e5517507c66"
+  IWSCDefaultProduct_GUID = "0476d69c-f21a-11e5-9ce9-5e5517507c66"
+  IID_IWSCDefaultProduct = LibC::GUID.new(0x476d69c_u32, 0xf21a_u16, 0x11e5_u16, StaticArray[0x9c_u8, 0xe9_u8, 0x5e_u8, 0x55_u8, 0x17_u8, 0x50_u8, 0x7c_u8, 0x66_u8])
   struct IWSCDefaultProduct
     lpVtbl : IWSCDefaultProductVTbl*
   end

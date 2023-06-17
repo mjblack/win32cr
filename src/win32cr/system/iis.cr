@@ -877,7 +877,7 @@ lib LibWin32
   GUID_IIS_ASP_TRACE_TRACE_PROVIDER = "06b94d9a-b15e-456e-a4ef-37c984a2cb4b"
   GUID_IIS_WWW_GLOBAL_TRACE_PROVIDER = "d55d3bc9-cba9-44df-827e-132d3a4596c2"
   GUID_IIS_ISAPI_TRACE_PROVIDER = "a1c2040e-8840-4c31-ba11-9871031a19ea"
-  FtpProvider = LibC::GUID.new(0x70bdc667_u32, 0x33b2_u16, 0x45f0_u16, StaticArray[0xac_u8, 0x52_u8, 0xc3_u8, 0xca_u8, 0x46_u8, 0xf7_u8, 0xa6_u8, 0x56_u8])
+  CLSID_FtpProvider = LibC::GUID.new(0x70bdc667_u32, 0x33b2_u16, 0x45f0_u16, StaticArray[0xac_u8, 0x52_u8, 0xc3_u8, 0xca_u8, 0x46_u8, 0xf7_u8, 0xa6_u8, 0x56_u8])
 
   type IIS_CRYPTO_BLOB = Void
 
@@ -1297,8 +1297,8 @@ lib LibWin32
     construct : Proc(IFtpProviderConstruct*, SAFEARRAY*, HRESULT)
   end
 
-  IFtpProviderConstruct_GUID = LibC::GUID.new("4d1a3f7b-412d-447c-b199-64f967e9a2da")
-  CLSID_IFtpProviderConstruct = "4d1a3f7b-412d-447c-b199-64f967e9a2da"
+  IFtpProviderConstruct_GUID = "4d1a3f7b-412d-447c-b199-64f967e9a2da"
+  IID_IFtpProviderConstruct = LibC::GUID.new(0x4d1a3f7b_u32, 0x412d_u16, 0x447c_u16, StaticArray[0xb1_u8, 0x99_u8, 0x64_u8, 0xf9_u8, 0x67_u8, 0xe9_u8, 0xa2_u8, 0xda_u8])
   struct IFtpProviderConstruct
     lpVtbl : IFtpProviderConstructVTbl*
   end
@@ -1310,8 +1310,8 @@ lib LibWin32
     authenticate_user : Proc(IFtpAuthenticationProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
   end
 
-  IFtpAuthenticationProvider_GUID = LibC::GUID.new("4659f95c-d5a8-4707-b2fc-6fd5794246cf")
-  CLSID_IFtpAuthenticationProvider = "4659f95c-d5a8-4707-b2fc-6fd5794246cf"
+  IFtpAuthenticationProvider_GUID = "4659f95c-d5a8-4707-b2fc-6fd5794246cf"
+  IID_IFtpAuthenticationProvider = LibC::GUID.new(0x4659f95c_u32, 0xd5a8_u16, 0x4707_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x6f_u8, 0xd5_u8, 0x79_u8, 0x42_u8, 0x46_u8, 0xcf_u8])
   struct IFtpAuthenticationProvider
     lpVtbl : IFtpAuthenticationProviderVTbl*
   end
@@ -1324,8 +1324,8 @@ lib LibWin32
     finish_authenticate_user : Proc(AsyncIFtpAuthenticationProvider*, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
   end
 
-  AsyncIFtpAuthenticationProvider_GUID = LibC::GUID.new("c24efb65-9f3e-4996-8fb1-ce166916bab5")
-  CLSID_AsyncIFtpAuthenticationProvider = "c24efb65-9f3e-4996-8fb1-ce166916bab5"
+  AsyncIFtpAuthenticationProvider_GUID = "c24efb65-9f3e-4996-8fb1-ce166916bab5"
+  IID_AsyncIFtpAuthenticationProvider = LibC::GUID.new(0xc24efb65_u32, 0x9f3e_u16, 0x4996_u16, StaticArray[0x8f_u8, 0xb1_u8, 0xce_u8, 0x16_u8, 0x69_u8, 0x16_u8, 0xba_u8, 0xb5_u8])
   struct AsyncIFtpAuthenticationProvider
     lpVtbl : AsyncIFtpAuthenticationProviderVTbl*
   end
@@ -1337,8 +1337,8 @@ lib LibWin32
     is_user_in_role : Proc(IFtpRoleProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
-  IFtpRoleProvider_GUID = LibC::GUID.new("909c850d-8ca0-4674-96b8-cc2941535725")
-  CLSID_IFtpRoleProvider = "909c850d-8ca0-4674-96b8-cc2941535725"
+  IFtpRoleProvider_GUID = "909c850d-8ca0-4674-96b8-cc2941535725"
+  IID_IFtpRoleProvider = LibC::GUID.new(0x909c850d_u32, 0x8ca0_u16, 0x4674_u16, StaticArray[0x96_u8, 0xb8_u8, 0xcc_u8, 0x29_u8, 0x41_u8, 0x53_u8, 0x57_u8, 0x25_u8])
   struct IFtpRoleProvider
     lpVtbl : IFtpRoleProviderVTbl*
   end
@@ -1351,8 +1351,8 @@ lib LibWin32
     finish_is_user_in_role : Proc(AsyncIFtpRoleProvider*, LibC::BOOL*, HRESULT)
   end
 
-  AsyncIFtpRoleProvider_GUID = LibC::GUID.new("3e83bf99-70ec-41ca-84b6-aca7c7a62caf")
-  CLSID_AsyncIFtpRoleProvider = "3e83bf99-70ec-41ca-84b6-aca7c7a62caf"
+  AsyncIFtpRoleProvider_GUID = "3e83bf99-70ec-41ca-84b6-aca7c7a62caf"
+  IID_AsyncIFtpRoleProvider = LibC::GUID.new(0x3e83bf99_u32, 0x70ec_u16, 0x41ca_u16, StaticArray[0x84_u8, 0xb6_u8, 0xac_u8, 0xa7_u8, 0xc7_u8, 0xa6_u8, 0x2c_u8, 0xaf_u8])
   struct AsyncIFtpRoleProvider
     lpVtbl : AsyncIFtpRoleProviderVTbl*
   end
@@ -1364,8 +1364,8 @@ lib LibWin32
     get_user_home_directory_data : Proc(IFtpHomeDirectoryProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
-  IFtpHomeDirectoryProvider_GUID = LibC::GUID.new("0933b392-18dd-4097-8b9c-83325c35d9a6")
-  CLSID_IFtpHomeDirectoryProvider = "0933b392-18dd-4097-8b9c-83325c35d9a6"
+  IFtpHomeDirectoryProvider_GUID = "0933b392-18dd-4097-8b9c-83325c35d9a6"
+  IID_IFtpHomeDirectoryProvider = LibC::GUID.new(0x933b392_u32, 0x18dd_u16, 0x4097_u16, StaticArray[0x8b_u8, 0x9c_u8, 0x83_u8, 0x32_u8, 0x5c_u8, 0x35_u8, 0xd9_u8, 0xa6_u8])
   struct IFtpHomeDirectoryProvider
     lpVtbl : IFtpHomeDirectoryProviderVTbl*
   end
@@ -1378,8 +1378,8 @@ lib LibWin32
     finish_get_user_home_directory_data : Proc(AsyncIFtpHomeDirectoryProvider*, LibC::LPWSTR*, HRESULT)
   end
 
-  AsyncIFtpHomeDirectoryProvider_GUID = LibC::GUID.new("73f81638-6295-42bd-a2be-4a657f7c479c")
-  CLSID_AsyncIFtpHomeDirectoryProvider = "73f81638-6295-42bd-a2be-4a657f7c479c"
+  AsyncIFtpHomeDirectoryProvider_GUID = "73f81638-6295-42bd-a2be-4a657f7c479c"
+  IID_AsyncIFtpHomeDirectoryProvider = LibC::GUID.new(0x73f81638_u32, 0x6295_u16, 0x42bd_u16, StaticArray[0xa2_u8, 0xbe_u8, 0x4a_u8, 0x65_u8, 0x7f_u8, 0x7c_u8, 0x47_u8, 0x9c_u8])
   struct AsyncIFtpHomeDirectoryProvider
     lpVtbl : AsyncIFtpHomeDirectoryProviderVTbl*
   end
@@ -1391,8 +1391,8 @@ lib LibWin32
     log : Proc(IFtpLogProvider*, LOGGING_PARAMETERS*, HRESULT)
   end
 
-  IFtpLogProvider_GUID = LibC::GUID.new("a18a94cc-8299-4408-816c-7c3baca1a40e")
-  CLSID_IFtpLogProvider = "a18a94cc-8299-4408-816c-7c3baca1a40e"
+  IFtpLogProvider_GUID = "a18a94cc-8299-4408-816c-7c3baca1a40e"
+  IID_IFtpLogProvider = LibC::GUID.new(0xa18a94cc_u32, 0x8299_u16, 0x4408_u16, StaticArray[0x81_u8, 0x6c_u8, 0x7c_u8, 0x3b_u8, 0xac_u8, 0xa1_u8, 0xa4_u8, 0xe_u8])
   struct IFtpLogProvider
     lpVtbl : IFtpLogProviderVTbl*
   end
@@ -1405,8 +1405,8 @@ lib LibWin32
     finish_log : Proc(AsyncIFtpLogProvider*, HRESULT)
   end
 
-  AsyncIFtpLogProvider_GUID = LibC::GUID.new("00a0ae46-2498-48b2-95e6-df678ed7d49f")
-  CLSID_AsyncIFtpLogProvider = "00a0ae46-2498-48b2-95e6-df678ed7d49f"
+  AsyncIFtpLogProvider_GUID = "00a0ae46-2498-48b2-95e6-df678ed7d49f"
+  IID_AsyncIFtpLogProvider = LibC::GUID.new(0xa0ae46_u32, 0x2498_u16, 0x48b2_u16, StaticArray[0x95_u8, 0xe6_u8, 0xdf_u8, 0x67_u8, 0x8e_u8, 0xd7_u8, 0xd4_u8, 0x9f_u8])
   struct AsyncIFtpLogProvider
     lpVtbl : AsyncIFtpLogProviderVTbl*
   end
@@ -1418,8 +1418,8 @@ lib LibWin32
     get_user_access_permission : Proc(IFtpAuthorizationProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, FTP_ACCESS*, HRESULT)
   end
 
-  IFtpAuthorizationProvider_GUID = LibC::GUID.new("a50ae7a1-a35a-42b4-a4f3-f4f7057a05d1")
-  CLSID_IFtpAuthorizationProvider = "a50ae7a1-a35a-42b4-a4f3-f4f7057a05d1"
+  IFtpAuthorizationProvider_GUID = "a50ae7a1-a35a-42b4-a4f3-f4f7057a05d1"
+  IID_IFtpAuthorizationProvider = LibC::GUID.new(0xa50ae7a1_u32, 0xa35a_u16, 0x42b4_u16, StaticArray[0xa4_u8, 0xf3_u8, 0xf4_u8, 0xf7_u8, 0x5_u8, 0x7a_u8, 0x5_u8, 0xd1_u8])
   struct IFtpAuthorizationProvider
     lpVtbl : IFtpAuthorizationProviderVTbl*
   end
@@ -1432,8 +1432,8 @@ lib LibWin32
     finish_get_user_access_permission : Proc(AsyncIFtpAuthorizationProvider*, FTP_ACCESS*, HRESULT)
   end
 
-  AsyncIFtpAuthorizationProvider_GUID = LibC::GUID.new("860dc339-07e5-4a5c-9c61-8820cea012bc")
-  CLSID_AsyncIFtpAuthorizationProvider = "860dc339-07e5-4a5c-9c61-8820cea012bc"
+  AsyncIFtpAuthorizationProvider_GUID = "860dc339-07e5-4a5c-9c61-8820cea012bc"
+  IID_AsyncIFtpAuthorizationProvider = LibC::GUID.new(0x860dc339_u32, 0x7e5_u16, 0x4a5c_u16, StaticArray[0x9c_u8, 0x61_u8, 0x88_u8, 0x20_u8, 0xce_u8, 0xa0_u8, 0x12_u8, 0xbc_u8])
   struct AsyncIFtpAuthorizationProvider
     lpVtbl : AsyncIFtpAuthorizationProviderVTbl*
   end
@@ -1445,8 +1445,8 @@ lib LibWin32
     handle_preprocess : Proc(IFtpPreprocessProvider*, PRE_PROCESS_PARAMETERS*, FTP_PROCESS_STATUS*, HRESULT)
   end
 
-  IFtpPreprocessProvider_GUID = LibC::GUID.new("a3c19b60-5a28-471a-8f93-ab30411cee82")
-  CLSID_IFtpPreprocessProvider = "a3c19b60-5a28-471a-8f93-ab30411cee82"
+  IFtpPreprocessProvider_GUID = "a3c19b60-5a28-471a-8f93-ab30411cee82"
+  IID_IFtpPreprocessProvider = LibC::GUID.new(0xa3c19b60_u32, 0x5a28_u16, 0x471a_u16, StaticArray[0x8f_u8, 0x93_u8, 0xab_u8, 0x30_u8, 0x41_u8, 0x1c_u8, 0xee_u8, 0x82_u8])
   struct IFtpPreprocessProvider
     lpVtbl : IFtpPreprocessProviderVTbl*
   end
@@ -1459,8 +1459,8 @@ lib LibWin32
     finish_handle_preprocess : Proc(AsyncIFtpPreprocessProvider*, FTP_PROCESS_STATUS*, HRESULT)
   end
 
-  AsyncIFtpPreprocessProvider_GUID = LibC::GUID.new("6ff5fd8f-fd8e-48b1-a3e0-bf7073db4db5")
-  CLSID_AsyncIFtpPreprocessProvider = "6ff5fd8f-fd8e-48b1-a3e0-bf7073db4db5"
+  AsyncIFtpPreprocessProvider_GUID = "6ff5fd8f-fd8e-48b1-a3e0-bf7073db4db5"
+  IID_AsyncIFtpPreprocessProvider = LibC::GUID.new(0x6ff5fd8f_u32, 0xfd8e_u16, 0x48b1_u16, StaticArray[0xa3_u8, 0xe0_u8, 0xbf_u8, 0x70_u8, 0x73_u8, 0xdb_u8, 0x4d_u8, 0xb5_u8])
   struct AsyncIFtpPreprocessProvider
     lpVtbl : AsyncIFtpPreprocessProviderVTbl*
   end
@@ -1472,8 +1472,8 @@ lib LibWin32
     handle_postprocess : Proc(IFtpPostprocessProvider*, POST_PROCESS_PARAMETERS*, FTP_PROCESS_STATUS*, HRESULT)
   end
 
-  IFtpPostprocessProvider_GUID = LibC::GUID.new("4522cbc6-16cd-49ad-8653-9a2c579e4280")
-  CLSID_IFtpPostprocessProvider = "4522cbc6-16cd-49ad-8653-9a2c579e4280"
+  IFtpPostprocessProvider_GUID = "4522cbc6-16cd-49ad-8653-9a2c579e4280"
+  IID_IFtpPostprocessProvider = LibC::GUID.new(0x4522cbc6_u32, 0x16cd_u16, 0x49ad_u16, StaticArray[0x86_u8, 0x53_u8, 0x9a_u8, 0x2c_u8, 0x57_u8, 0x9e_u8, 0x42_u8, 0x80_u8])
   struct IFtpPostprocessProvider
     lpVtbl : IFtpPostprocessProviderVTbl*
   end
@@ -1486,8 +1486,8 @@ lib LibWin32
     finish_handle_postprocess : Proc(AsyncIFtpPostprocessProvider*, FTP_PROCESS_STATUS*, HRESULT)
   end
 
-  AsyncIFtpPostprocessProvider_GUID = LibC::GUID.new("a16b2542-9694-4eb1-a564-6c2e91fdc133")
-  CLSID_AsyncIFtpPostprocessProvider = "a16b2542-9694-4eb1-a564-6c2e91fdc133"
+  AsyncIFtpPostprocessProvider_GUID = "a16b2542-9694-4eb1-a564-6c2e91fdc133"
+  IID_AsyncIFtpPostprocessProvider = LibC::GUID.new(0xa16b2542_u32, 0x9694_u16, 0x4eb1_u16, StaticArray[0xa5_u8, 0x64_u8, 0x6c_u8, 0x2e_u8, 0x91_u8, 0xfd_u8, 0xc1_u8, 0x33_u8])
   struct AsyncIFtpPostprocessProvider
     lpVtbl : AsyncIFtpPostprocessProviderVTbl*
   end
@@ -1501,8 +1501,8 @@ lib LibWin32
     terminate : Proc(IADMEXT*, HRESULT)
   end
 
-  IADMEXT_GUID = LibC::GUID.new("51dfe970-f6f2-11d0-b9bd-00a0c922e750")
-  CLSID_IADMEXT = "51dfe970-f6f2-11d0-b9bd-00a0c922e750"
+  IADMEXT_GUID = "51dfe970-f6f2-11d0-b9bd-00a0c922e750"
+  IID_IADMEXT = LibC::GUID.new(0x51dfe970_u32, 0xf6f2_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xbd_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
   struct IADMEXT
     lpVtbl : IADMEXTVTbl*
   end
@@ -1544,8 +1544,8 @@ lib LibWin32
     get_server_guid : Proc(IMSAdminBaseW*, HRESULT)
   end
 
-  IMSAdminBaseW_GUID = LibC::GUID.new("70b51430-b6ca-11d0-b9b9-00a0c922e750")
-  CLSID_IMSAdminBaseW = "70b51430-b6ca-11d0-b9b9-00a0c922e750"
+  IMSAdminBaseW_GUID = "70b51430-b6ca-11d0-b9b9-00a0c922e750"
+  IID_IMSAdminBaseW = LibC::GUID.new(0x70b51430_u32, 0xb6ca_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
   struct IMSAdminBaseW
     lpVtbl : IMSAdminBaseWVTbl*
   end
@@ -1593,8 +1593,8 @@ lib LibWin32
     enum_history : Proc(IMSAdminBase2W*, Char*, UInt32*, UInt32*, FILETIME*, UInt32, HRESULT)
   end
 
-  IMSAdminBase2W_GUID = LibC::GUID.new("8298d101-f992-43b7-8eca-5052d885b995")
-  CLSID_IMSAdminBase2W = "8298d101-f992-43b7-8eca-5052d885b995"
+  IMSAdminBase2W_GUID = "8298d101-f992-43b7-8eca-5052d885b995"
+  IID_IMSAdminBase2W = LibC::GUID.new(0x8298d101_u32, 0xf992_u16, 0x43b7_u16, StaticArray[0x8e_u8, 0xca_u8, 0x50_u8, 0x52_u8, 0xd8_u8, 0x85_u8, 0xb9_u8, 0x95_u8])
   struct IMSAdminBase2W
     lpVtbl : IMSAdminBase2WVTbl*
   end
@@ -1643,8 +1643,8 @@ lib LibWin32
     get_child_paths : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, Char*, UInt32*, HRESULT)
   end
 
-  IMSAdminBase3W_GUID = LibC::GUID.new("f612954d-3b0b-4c56-9563-227b7be624b4")
-  CLSID_IMSAdminBase3W = "f612954d-3b0b-4c56-9563-227b7be624b4"
+  IMSAdminBase3W_GUID = "f612954d-3b0b-4c56-9563-227b7be624b4"
+  IID_IMSAdminBase3W = LibC::GUID.new(0xf612954d_u32, 0x3b0b_u16, 0x4c56_u16, StaticArray[0x95_u8, 0x63_u8, 0x22_u8, 0x7b_u8, 0x7b_u8, 0xe6_u8, 0x24_u8, 0xb4_u8])
   struct IMSAdminBase3W
     lpVtbl : IMSAdminBase3WVTbl*
   end
@@ -1656,8 +1656,8 @@ lib LibWin32
     enumerate_paths_in_file : Proc(IMSImpExpHelpW*, LibC::LPWSTR, LibC::LPWSTR, UInt32, Char*, UInt32*, HRESULT)
   end
 
-  IMSImpExpHelpW_GUID = LibC::GUID.new("29ff67ff-8050-480f-9f30-cc41635f2f9d")
-  CLSID_IMSImpExpHelpW = "29ff67ff-8050-480f-9f30-cc41635f2f9d"
+  IMSImpExpHelpW_GUID = "29ff67ff-8050-480f-9f30-cc41635f2f9d"
+  IID_IMSImpExpHelpW = LibC::GUID.new(0x29ff67ff_u32, 0x8050_u16, 0x480f_u16, StaticArray[0x9f_u8, 0x30_u8, 0xcc_u8, 0x41_u8, 0x63_u8, 0x5f_u8, 0x2f_u8, 0x9d_u8])
   struct IMSImpExpHelpW
     lpVtbl : IMSImpExpHelpWVTbl*
   end
@@ -1670,8 +1670,8 @@ lib LibWin32
     shutdown_notify : Proc(IMSAdminBaseSinkW*, HRESULT)
   end
 
-  IMSAdminBaseSinkW_GUID = LibC::GUID.new("a9e69612-b80d-11d0-b9b9-00a0c922e750")
-  CLSID_IMSAdminBaseSinkW = "a9e69612-b80d-11d0-b9b9-00a0c922e750"
+  IMSAdminBaseSinkW_GUID = "a9e69612-b80d-11d0-b9b9-00a0c922e750"
+  IID_IMSAdminBaseSinkW = LibC::GUID.new(0xa9e69612_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
   struct IMSAdminBaseSinkW
     lpVtbl : IMSAdminBaseSinkWVTbl*
   end
@@ -1686,8 +1686,8 @@ lib LibWin32
     finish_shutdown_notify : Proc(AsyncIMSAdminBaseSinkW*, HRESULT)
   end
 
-  AsyncIMSAdminBaseSinkW_GUID = LibC::GUID.new("a9e69613-b80d-11d0-b9b9-00a0c922e750")
-  CLSID_AsyncIMSAdminBaseSinkW = "a9e69613-b80d-11d0-b9b9-00a0c922e750"
+  AsyncIMSAdminBaseSinkW_GUID = "a9e69613-b80d-11d0-b9b9-00a0c922e750"
+  IID_AsyncIMSAdminBaseSinkW = LibC::GUID.new(0xa9e69613_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
   struct AsyncIMSAdminBaseSinkW
     lpVtbl : AsyncIMSAdminBaseSinkWVTbl*
   end

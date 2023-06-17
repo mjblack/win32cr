@@ -100,7 +100,7 @@ lib LibWin32
   PKEY_WCN_DeviceType_SubCategoryOUI = PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 17_u32)
   PKEY_WCN_DeviceType_SubCategory = PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 18_u32)
   PKEY_WCN_SSID = PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 32_u32)
-  WCNDeviceObject = LibC::GUID.new(0xc100bea7_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
+  CLSID_WCNDeviceObject = LibC::GUID.new(0xc100bea7_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
 
 
   enum WCN_ATTRIBUTE_TYPE : Int32
@@ -386,8 +386,8 @@ lib LibWin32
     set_nfc_password_params : Proc(IWCNDevice*, WCN_PASSWORD_TYPE, UInt32, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, HRESULT)
   end
 
-  IWCNDevice_GUID = LibC::GUID.new("c100be9c-d33a-4a4b-bf23-bbef4663d017")
-  CLSID_IWCNDevice = "c100be9c-d33a-4a4b-bf23-bbef4663d017"
+  IWCNDevice_GUID = "c100be9c-d33a-4a4b-bf23-bbef4663d017"
+  IID_IWCNDevice = LibC::GUID.new(0xc100be9c_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
   struct IWCNDevice
     lpVtbl : IWCNDeviceVTbl*
   end
@@ -400,8 +400,8 @@ lib LibWin32
     connect_failed : Proc(IWCNConnectNotify*, HRESULT, HRESULT)
   end
 
-  IWCNConnectNotify_GUID = LibC::GUID.new("c100be9f-d33a-4a4b-bf23-bbef4663d017")
-  CLSID_IWCNConnectNotify = "c100be9f-d33a-4a4b-bf23-bbef4663d017"
+  IWCNConnectNotify_GUID = "c100be9f-d33a-4a4b-bf23-bbef4663d017"
+  IID_IWCNConnectNotify = LibC::GUID.new(0xc100be9f_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
   struct IWCNConnectNotify
     lpVtbl : IWCNConnectNotifyVTbl*
   end

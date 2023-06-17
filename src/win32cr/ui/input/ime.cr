@@ -653,7 +653,7 @@ lib LibWin32
   IPAWS_MINSIZEFIXED = 196608_i32
   CLSID_ImePlugInDictDictionaryList_CHS = "7bf0129b-5bef-4de4-9b0b-5edb66ac2fa6"
   CLSID_ImePlugInDictDictionaryList_JPN = "4fe2776b-b0f9-4396-b5fc-e9d4cf1ec195"
-  CActiveIMM = LibC::GUID.new(0x4955dd33_u32, 0xb159_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
+  CLSID_CActiveIMM = LibC::GUID.new(0x4955dd33_u32, 0xb159_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
 
   alias IMCENUMPROC = Proc(HIMC, LPARAM, LibC::BOOL)
   alias REGISTERWORDENUMPROCA = Proc(PSTR, UInt32, PSTR, Void*, Int32)
@@ -1194,8 +1194,8 @@ lib LibWin32
     invoke_dict_tool_dialog : Proc(IFECommon*, IMEDLG*, HRESULT)
   end
 
-  IFECommon_GUID = LibC::GUID.new("019f7151-e6db-11d0-83c3-00c04fddb82e")
-  CLSID_IFECommon = "019f7151-e6db-11d0-83c3-00c04fddb82e"
+  IFECommon_GUID = "019f7151-e6db-11d0-83c3-00c04fddb82e"
+  IID_IFECommon = LibC::GUID.new(0x19f7151_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
   struct IFECommon
     lpVtbl : IFECommonVTbl*
   end
@@ -1212,8 +1212,8 @@ lib LibWin32
     get_conversion : Proc(IFELanguage*, UInt8*, Int32, Int32, UInt8**, HRESULT)
   end
 
-  IFELanguage_GUID = LibC::GUID.new("019f7152-e6db-11d0-83c3-00c04fddb82e")
-  CLSID_IFELanguage = "019f7152-e6db-11d0-83c3-00c04fddb82e"
+  IFELanguage_GUID = "019f7152-e6db-11d0-83c3-00c04fddb82e"
+  IID_IFELanguage = LibC::GUID.new(0x19f7152_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
   struct IFELanguage
     lpVtbl : IFELanguageVTbl*
   end
@@ -1241,8 +1241,8 @@ lib LibWin32
     convert_from_user_to_sys : Proc(IFEDictionary*, HRESULT)
   end
 
-  IFEDictionary_GUID = LibC::GUID.new("019f7153-e6db-11d0-83c3-00c04fddb82e")
-  CLSID_IFEDictionary = "019f7153-e6db-11d0-83c3-00c04fddb82e"
+  IFEDictionary_GUID = "019f7153-e6db-11d0-83c3-00c04fddb82e"
+  IID_IFEDictionary = LibC::GUID.new(0x19f7153_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
   struct IFEDictionary
     lpVtbl : IFEDictionaryVTbl*
   end
@@ -1254,8 +1254,8 @@ lib LibWin32
     get_applet_iid_list : Proc(IImeSpecifyApplets*, Guid*, APPLETIDLIST*, HRESULT)
   end
 
-  IImeSpecifyApplets_GUID = LibC::GUID.new("5d8e643c-c3a9-11d1-afef-00805f0c8b6d")
-  CLSID_IImeSpecifyApplets = "5d8e643c-c3a9-11d1-afef-00805f0c8b6d"
+  IImeSpecifyApplets_GUID = "5d8e643c-c3a9-11d1-afef-00805f0c8b6d"
+  IID_IImeSpecifyApplets = LibC::GUID.new(0x5d8e643c_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
   struct IImeSpecifyApplets
     lpVtbl : IImeSpecifyAppletsVTbl*
   end
@@ -1271,8 +1271,8 @@ lib LibWin32
     notify : Proc(IImePadApplet*, IUnknown, Int32, LibC::UINT_PTR, LPARAM, HRESULT)
   end
 
-  IImePadApplet_GUID = LibC::GUID.new("5d8e643b-c3a9-11d1-afef-00805f0c8b6d")
-  CLSID_IImePadApplet = "5d8e643b-c3a9-11d1-afef-00805f0c8b6d"
+  IImePadApplet_GUID = "5d8e643b-c3a9-11d1-afef-00805f0c8b6d"
+  IID_IImePadApplet = LibC::GUID.new(0x5d8e643b_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
   struct IImePadApplet
     lpVtbl : IImePadAppletVTbl*
   end
@@ -1284,8 +1284,8 @@ lib LibWin32
     request : Proc(IImePad*, IImePadApplet, IME_PAD_REQUEST_FLAGS, LibC::UINT_PTR, LPARAM, HRESULT)
   end
 
-  IImePad_GUID = LibC::GUID.new("5d8e643a-c3a9-11d1-afef-00805f0c8b6d")
-  CLSID_IImePad = "5d8e643a-c3a9-11d1-afef-00805f0c8b6d"
+  IImePad_GUID = "5d8e643a-c3a9-11d1-afef-00805f0c8b6d"
+  IID_IImePad = LibC::GUID.new(0x5d8e643a_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
   struct IImePad
     lpVtbl : IImePadVTbl*
   end
@@ -1298,8 +1298,8 @@ lib LibWin32
     delete_dictionary : Proc(IImePlugInDictDictionaryList*, UInt8*, HRESULT)
   end
 
-  IImePlugInDictDictionaryList_GUID = LibC::GUID.new("98752974-b0a6-489b-8f6f-bff3769c8eeb")
-  CLSID_IImePlugInDictDictionaryList = "98752974-b0a6-489b-8f6f-bff3769c8eeb"
+  IImePlugInDictDictionaryList_GUID = "98752974-b0a6-489b-8f6f-bff3769c8eeb"
+  IID_IImePlugInDictDictionaryList = LibC::GUID.new(0x98752974_u32, 0xb0a6_u16, 0x489b_u16, StaticArray[0x8f_u8, 0x6f_u8, 0xbf_u8, 0xf3_u8, 0x76_u8, 0x9c_u8, 0x8e_u8, 0xeb_u8])
   struct IImePlugInDictDictionaryList
     lpVtbl : IImePlugInDictDictionaryListVTbl*
   end
@@ -1314,8 +1314,8 @@ lib LibWin32
     skip : Proc(IEnumRegisterWordA*, UInt32, HRESULT)
   end
 
-  IEnumRegisterWordA_GUID = LibC::GUID.new("08c03412-f96b-11d0-a475-00aa006bcc59")
-  CLSID_IEnumRegisterWordA = "08c03412-f96b-11d0-a475-00aa006bcc59"
+  IEnumRegisterWordA_GUID = "08c03412-f96b-11d0-a475-00aa006bcc59"
+  IID_IEnumRegisterWordA = LibC::GUID.new(0x8c03412_u32, 0xf96b_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x75_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
   struct IEnumRegisterWordA
     lpVtbl : IEnumRegisterWordAVTbl*
   end
@@ -1330,8 +1330,8 @@ lib LibWin32
     skip : Proc(IEnumRegisterWordW*, UInt32, HRESULT)
   end
 
-  IEnumRegisterWordW_GUID = LibC::GUID.new("4955dd31-b159-11d0-8fcf-00aa006bcc59")
-  CLSID_IEnumRegisterWordW = "4955dd31-b159-11d0-8fcf-00aa006bcc59"
+  IEnumRegisterWordW_GUID = "4955dd31-b159-11d0-8fcf-00aa006bcc59"
+  IID_IEnumRegisterWordW = LibC::GUID.new(0x4955dd31_u32, 0xb159_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
   struct IEnumRegisterWordW
     lpVtbl : IEnumRegisterWordWVTbl*
   end
@@ -1346,8 +1346,8 @@ lib LibWin32
     skip : Proc(IEnumInputContext*, UInt32, HRESULT)
   end
 
-  IEnumInputContext_GUID = LibC::GUID.new("09b5eab0-f997-11d1-93d4-0060b067b86e")
-  CLSID_IEnumInputContext = "09b5eab0-f997-11d1-93d4-0060b067b86e"
+  IEnumInputContext_GUID = "09b5eab0-f997-11d1-93d4-0060b067b86e"
+  IID_IEnumInputContext = LibC::GUID.new(0x9b5eab0_u32, 0xf997_u16, 0x11d1_u16, StaticArray[0x93_u8, 0xd4_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
   struct IEnumInputContext
     lpVtbl : IEnumInputContextVTbl*
   end
@@ -1360,8 +1360,8 @@ lib LibWin32
     unregister_ime : Proc(IActiveIMMRegistrar*, Guid*, HRESULT)
   end
 
-  IActiveIMMRegistrar_GUID = LibC::GUID.new("b3458082-bd00-11d1-939b-0060b067b86e")
-  CLSID_IActiveIMMRegistrar = "b3458082-bd00-11d1-939b-0060b067b86e"
+  IActiveIMMRegistrar_GUID = "b3458082-bd00-11d1-939b-0060b067b86e"
+  IID_IActiveIMMRegistrar = LibC::GUID.new(0xb3458082_u32, 0xbd00_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x9b_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
   struct IActiveIMMRegistrar
     lpVtbl : IActiveIMMRegistrarVTbl*
   end
@@ -1377,8 +1377,8 @@ lib LibWin32
     resume : Proc(IActiveIMMMessagePumpOwner*, UInt32, HRESULT)
   end
 
-  IActiveIMMMessagePumpOwner_GUID = LibC::GUID.new("b5cf2cfa-8aeb-11d1-9364-0060b067b86e")
-  CLSID_IActiveIMMMessagePumpOwner = "b5cf2cfa-8aeb-11d1-9364-0060b067b86e"
+  IActiveIMMMessagePumpOwner_GUID = "b5cf2cfa-8aeb-11d1-9364-0060b067b86e"
+  IID_IActiveIMMMessagePumpOwner = LibC::GUID.new(0xb5cf2cfa_u32, 0x8aeb_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x64_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
   struct IActiveIMMMessagePumpOwner
     lpVtbl : IActiveIMMMessagePumpOwnerVTbl*
   end
@@ -1457,8 +1457,8 @@ lib LibWin32
     enum_input_context : Proc(IActiveIMMApp*, UInt32, IEnumInputContext*, HRESULT)
   end
 
-  IActiveIMMApp_GUID = LibC::GUID.new("08c0e040-62d1-11d1-9326-0060b067b86e")
-  CLSID_IActiveIMMApp = "08c0e040-62d1-11d1-9326-0060b067b86e"
+  IActiveIMMApp_GUID = "08c0e040-62d1-11d1-9326-0060b067b86e"
+  IID_IActiveIMMApp = LibC::GUID.new(0x8c0e040_u32, 0x62d1_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x26_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
   struct IActiveIMMApp
     lpVtbl : IActiveIMMAppVTbl*
   end
@@ -1557,8 +1557,8 @@ lib LibWin32
     is_sleeping : Proc(IActiveIMMIME*, HRESULT)
   end
 
-  IActiveIMMIME_GUID = LibC::GUID.new("08c03411-f96b-11d0-a475-00aa006bcc59")
-  CLSID_IActiveIMMIME = "08c03411-f96b-11d0-a475-00aa006bcc59"
+  IActiveIMMIME_GUID = "08c03411-f96b-11d0-a475-00aa006bcc59"
+  IID_IActiveIMMIME = LibC::GUID.new(0x8c03411_u32, 0xf96b_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x75_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
   struct IActiveIMMIME
     lpVtbl : IActiveIMMIMEVTbl*
   end
@@ -1586,8 +1586,8 @@ lib LibWin32
     get_lang_id : Proc(IActiveIME*, UInt16*, HRESULT)
   end
 
-  IActiveIME_GUID = LibC::GUID.new("6fe20962-d077-11d0-8fe7-00aa006bcc59")
-  CLSID_IActiveIME = "6fe20962-d077-11d0-8fe7-00aa006bcc59"
+  IActiveIME_GUID = "6fe20962-d077-11d0-8fe7-00aa006bcc59"
+  IID_IActiveIME = LibC::GUID.new(0x6fe20962_u32, 0xd077_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xe7_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
   struct IActiveIME
     lpVtbl : IActiveIMEVTbl*
   end
@@ -1617,8 +1617,8 @@ lib LibWin32
     unsleep : Proc(IActiveIME2*, LibC::BOOL, HRESULT)
   end
 
-  IActiveIME2_GUID = LibC::GUID.new("e1c4bf0e-2d53-11d2-93e1-0060b067b86e")
-  CLSID_IActiveIME2 = "e1c4bf0e-2d53-11d2-93e1-0060b067b86e"
+  IActiveIME2_GUID = "e1c4bf0e-2d53-11d2-93e1-0060b067b86e"
+  IID_IActiveIME2 = LibC::GUID.new(0xe1c4bf0e_u32, 0x2d53_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe1_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
   struct IActiveIME2
     lpVtbl : IActiveIME2VTbl*
   end

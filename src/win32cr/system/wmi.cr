@@ -75,51 +75,51 @@ lib LibWin32
   WBEMS_DISPID_PROGRESS = 3_u32
   WBEMS_DISPID_OBJECT_PUT = 4_u32
   WBEMS_DISPID_CONNECTION_READY = 5_u32
-  WbemDefPath = LibC::GUID.new(0xcf4cc405_u32, 0xe2c5_u16, 0x4ddd_u16, StaticArray[0xb3_u8, 0xce_u8, 0x5e_u8, 0x75_u8, 0x82_u8, 0xd8_u8, 0xc9_u8, 0xfa_u8])
-  WbemQuery = LibC::GUID.new(0xeac8a024_u32, 0x21e2_u16, 0x4523_u16, StaticArray[0xad_u8, 0x73_u8, 0xa7_u8, 0x1a_u8, 0xa_u8, 0xa2_u8, 0xf5_u8, 0x6a_u8])
-  WbemLocator = LibC::GUID.new(0x4590f811_u32, 0x1d3a_u16, 0x11d0_u16, StaticArray[0x89_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
-  WbemContext = LibC::GUID.new(0x674b6698_u32, 0xee92_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x71_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
-  UnsecuredApartment = LibC::GUID.new(0x49bd2028_u32, 0x1523_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
-  WbemClassObject = LibC::GUID.new(0x9a653086_u32, 0x174f_u16, 0x11d2_u16, StaticArray[0xb5_u8, 0xf9_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0x70_u8, 0x3e_u8, 0xfd_u8])
-  MofCompiler = LibC::GUID.new(0x6daf9757_u32, 0x2e37_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
-  WbemStatusCodeText = LibC::GUID.new(0xeb87e1bd_u32, 0x3233_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
-  WbemBackupRestore = LibC::GUID.new(0xc49e32c6_u32, 0xbc8b_u16, 0x11d2_u16, StaticArray[0x85_u8, 0xd4_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x83_u8, 0x4_u8])
-  WbemRefresher = LibC::GUID.new(0xc71566f2_u32, 0x561e_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x87_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
-  WbemObjectTextSrc = LibC::GUID.new(0x8d1c559d_u32, 0x84f0_u16, 0x4bb3_u16, StaticArray[0xa7_u8, 0xd5_u8, 0x56_u8, 0xa7_u8, 0x43_u8, 0x5a_u8, 0x9b_u8, 0xa6_u8])
-  WbemAdministrativeLocator = LibC::GUID.new(0xcb8555cc_u32, 0x9128_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x9b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
-  WbemAuthenticatedLocator = LibC::GUID.new(0xcd184336_u32, 0x9128_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x9b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
-  WbemUnauthenticatedLocator = LibC::GUID.new(0x443e7b79_u32, 0xde31_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x40_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xcc_u8, 0x4b_u8, 0x4a_u8])
-  WbemDecoupledRegistrar = LibC::GUID.new(0x4cfc7932_u32, 0xf9d_u16, 0x4bef_u16, StaticArray[0x9c_u8, 0x32_u8, 0x8e_u8, 0xa2_u8, 0xa6_u8, 0xb5_u8, 0x6f_u8, 0xcb_u8])
-  WbemDecoupledBasicEventProvider = LibC::GUID.new(0xf5f75737_u32, 0x2843_u16, 0x4f22_u16, StaticArray[0x93_u8, 0x3d_u8, 0xc7_u8, 0x6a_u8, 0x97_u8, 0xcd_u8, 0xa6_u8, 0x2f_u8])
-  SWbemLocator = LibC::GUID.new(0x76a64158_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemNamedValueSet = LibC::GUID.new(0x9aed384e_u32, 0xce8b_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemObjectPath = LibC::GUID.new(0x5791bc26_u32, 0xce9c_u16, 0x11d1_u16, StaticArray[0x97_u8, 0xbf_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0x84_u8, 0x9c_u8])
-  SWbemLastError = LibC::GUID.new(0xc2feeeac_u32, 0xcfcd_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemSink = LibC::GUID.new(0x75718c9a_u32, 0xf029_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xc2_u8, 0x23_u8])
-  SWbemDateTime = LibC::GUID.new(0x47dfbe54_u32, 0xcf76_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
-  SWbemRefresher = LibC::GUID.new(0xd269bf5c_u32, 0xd9c1_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
-  SWbemServices = LibC::GUID.new(0x4b83d63_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemServicesEx = LibC::GUID.new(0x62e522dc_u32, 0x8cf3_u16, 0x40a8_u16, StaticArray[0x8b_u8, 0x2e_u8, 0x37_u8, 0xd5_u8, 0x95_u8, 0x65_u8, 0x1e_u8, 0x40_u8])
-  SWbemObject = LibC::GUID.new(0x4b83d62_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemObjectEx = LibC::GUID.new(0xd6bdafb2_u32, 0x9435_u16, 0x491f_u16, StaticArray[0xbb_u8, 0x87_u8, 0x6a_u8, 0xa0_u8, 0xf0_u8, 0xbc_u8, 0x31_u8, 0xa2_u8])
-  SWbemObjectSet = LibC::GUID.new(0x4b83d61_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemNamedValue = LibC::GUID.new(0x4b83d60_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemQualifier = LibC::GUID.new(0x4b83d5f_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemQualifierSet = LibC::GUID.new(0x4b83d5e_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemProperty = LibC::GUID.new(0x4b83d5d_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemPropertySet = LibC::GUID.new(0x4b83d5c_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemMethod = LibC::GUID.new(0x4b83d5b_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemMethodSet = LibC::GUID.new(0x4b83d5a_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemEventSource = LibC::GUID.new(0x4b83d58_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemSecurity = LibC::GUID.new(0xb54d66e9_u32, 0x2287_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemPrivilege = LibC::GUID.new(0x26ee67bc_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemPrivilegeSet = LibC::GUID.new(0x26ee67be_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
-  SWbemRefreshableItem = LibC::GUID.new(0x8c6854bc_u32, 0xde4b_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x90_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
-  WMIExtension = LibC::GUID.new(0xf0975afe_u32, 0x5c7f_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x74_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0x2a_u8, 0xfb_u8, 0x41_u8])
-  WbemLevel1Login = LibC::GUID.new(0x8bc3f05e_u32, 0xd86b_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x75_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
-  WbemLocalAddrRes = LibC::GUID.new(0xa1044801_u32, 0x8f7e_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
-  WbemUninitializedClassObject = LibC::GUID.new(0x7a0227f6_u32, 0x7108_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
-  WbemDCOMTransport = LibC::GUID.new(0xf7ce2e13_u32, 0x8c90_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
+  CLSID_WbemDefPath = LibC::GUID.new(0xcf4cc405_u32, 0xe2c5_u16, 0x4ddd_u16, StaticArray[0xb3_u8, 0xce_u8, 0x5e_u8, 0x75_u8, 0x82_u8, 0xd8_u8, 0xc9_u8, 0xfa_u8])
+  CLSID_WbemQuery = LibC::GUID.new(0xeac8a024_u32, 0x21e2_u16, 0x4523_u16, StaticArray[0xad_u8, 0x73_u8, 0xa7_u8, 0x1a_u8, 0xa_u8, 0xa2_u8, 0xf5_u8, 0x6a_u8])
+  CLSID_WbemLocator = LibC::GUID.new(0x4590f811_u32, 0x1d3a_u16, 0x11d0_u16, StaticArray[0x89_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
+  CLSID_WbemContext = LibC::GUID.new(0x674b6698_u32, 0xee92_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x71_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
+  CLSID_UnsecuredApartment = LibC::GUID.new(0x49bd2028_u32, 0x1523_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
+  CLSID_WbemClassObject = LibC::GUID.new(0x9a653086_u32, 0x174f_u16, 0x11d2_u16, StaticArray[0xb5_u8, 0xf9_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0x70_u8, 0x3e_u8, 0xfd_u8])
+  CLSID_MofCompiler = LibC::GUID.new(0x6daf9757_u32, 0x2e37_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
+  CLSID_WbemStatusCodeText = LibC::GUID.new(0xeb87e1bd_u32, 0x3233_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
+  CLSID_WbemBackupRestore = LibC::GUID.new(0xc49e32c6_u32, 0xbc8b_u16, 0x11d2_u16, StaticArray[0x85_u8, 0xd4_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x83_u8, 0x4_u8])
+  CLSID_WbemRefresher = LibC::GUID.new(0xc71566f2_u32, 0x561e_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x87_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
+  CLSID_WbemObjectTextSrc = LibC::GUID.new(0x8d1c559d_u32, 0x84f0_u16, 0x4bb3_u16, StaticArray[0xa7_u8, 0xd5_u8, 0x56_u8, 0xa7_u8, 0x43_u8, 0x5a_u8, 0x9b_u8, 0xa6_u8])
+  CLSID_WbemAdministrativeLocator = LibC::GUID.new(0xcb8555cc_u32, 0x9128_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x9b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
+  CLSID_WbemAuthenticatedLocator = LibC::GUID.new(0xcd184336_u32, 0x9128_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x9b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
+  CLSID_WbemUnauthenticatedLocator = LibC::GUID.new(0x443e7b79_u32, 0xde31_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x40_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xcc_u8, 0x4b_u8, 0x4a_u8])
+  CLSID_WbemDecoupledRegistrar = LibC::GUID.new(0x4cfc7932_u32, 0xf9d_u16, 0x4bef_u16, StaticArray[0x9c_u8, 0x32_u8, 0x8e_u8, 0xa2_u8, 0xa6_u8, 0xb5_u8, 0x6f_u8, 0xcb_u8])
+  CLSID_WbemDecoupledBasicEventProvider = LibC::GUID.new(0xf5f75737_u32, 0x2843_u16, 0x4f22_u16, StaticArray[0x93_u8, 0x3d_u8, 0xc7_u8, 0x6a_u8, 0x97_u8, 0xcd_u8, 0xa6_u8, 0x2f_u8])
+  CLSID_SWbemLocator = LibC::GUID.new(0x76a64158_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemNamedValueSet = LibC::GUID.new(0x9aed384e_u32, 0xce8b_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemObjectPath = LibC::GUID.new(0x5791bc26_u32, 0xce9c_u16, 0x11d1_u16, StaticArray[0x97_u8, 0xbf_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0x84_u8, 0x9c_u8])
+  CLSID_SWbemLastError = LibC::GUID.new(0xc2feeeac_u32, 0xcfcd_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemSink = LibC::GUID.new(0x75718c9a_u32, 0xf029_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xc2_u8, 0x23_u8])
+  CLSID_SWbemDateTime = LibC::GUID.new(0x47dfbe54_u32, 0xcf76_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
+  CLSID_SWbemRefresher = LibC::GUID.new(0xd269bf5c_u32, 0xd9c1_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
+  CLSID_SWbemServices = LibC::GUID.new(0x4b83d63_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemServicesEx = LibC::GUID.new(0x62e522dc_u32, 0x8cf3_u16, 0x40a8_u16, StaticArray[0x8b_u8, 0x2e_u8, 0x37_u8, 0xd5_u8, 0x95_u8, 0x65_u8, 0x1e_u8, 0x40_u8])
+  CLSID_SWbemObject = LibC::GUID.new(0x4b83d62_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemObjectEx = LibC::GUID.new(0xd6bdafb2_u32, 0x9435_u16, 0x491f_u16, StaticArray[0xbb_u8, 0x87_u8, 0x6a_u8, 0xa0_u8, 0xf0_u8, 0xbc_u8, 0x31_u8, 0xa2_u8])
+  CLSID_SWbemObjectSet = LibC::GUID.new(0x4b83d61_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemNamedValue = LibC::GUID.new(0x4b83d60_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemQualifier = LibC::GUID.new(0x4b83d5f_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemQualifierSet = LibC::GUID.new(0x4b83d5e_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemProperty = LibC::GUID.new(0x4b83d5d_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemPropertySet = LibC::GUID.new(0x4b83d5c_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemMethod = LibC::GUID.new(0x4b83d5b_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemMethodSet = LibC::GUID.new(0x4b83d5a_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemEventSource = LibC::GUID.new(0x4b83d58_u32, 0x21ae_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemSecurity = LibC::GUID.new(0xb54d66e9_u32, 0x2287_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemPrivilege = LibC::GUID.new(0x26ee67bc_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemPrivilegeSet = LibC::GUID.new(0x26ee67be_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
+  CLSID_SWbemRefreshableItem = LibC::GUID.new(0x8c6854bc_u32, 0xde4b_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x90_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
+  CLSID_WMIExtension = LibC::GUID.new(0xf0975afe_u32, 0x5c7f_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x74_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0x2a_u8, 0xfb_u8, 0x41_u8])
+  CLSID_WbemLevel1Login = LibC::GUID.new(0x8bc3f05e_u32, 0xd86b_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x75_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
+  CLSID_WbemLocalAddrRes = LibC::GUID.new(0xa1044801_u32, 0x8f7e_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
+  CLSID_WbemUninitializedClassObject = LibC::GUID.new(0x7a0227f6_u32, 0x7108_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
+  CLSID_WbemDCOMTransport = LibC::GUID.new(0xf7ce2e13_u32, 0x8c90_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
 
   type MI_Module_Self = Void
 
@@ -2265,8 +2265,8 @@ lib LibWin32
     get_text : Proc(IWbemPathKeyList*, Int32, UInt32*, Char*, HRESULT)
   end
 
-  IWbemPathKeyList_GUID = LibC::GUID.new("9ae62877-7544-4bb0-aa26-a13824659ed6")
-  CLSID_IWbemPathKeyList = "9ae62877-7544-4bb0-aa26-a13824659ed6"
+  IWbemPathKeyList_GUID = "9ae62877-7544-4bb0-aa26-a13824659ed6"
+  IID_IWbemPathKeyList = LibC::GUID.new(0x9ae62877_u32, 0x7544_u16, 0x4bb0_u16, StaticArray[0xaa_u8, 0x26_u8, 0xa1_u8, 0x38_u8, 0x24_u8, 0x65_u8, 0x9e_u8, 0xd6_u8])
   struct IWbemPathKeyList
     lpVtbl : IWbemPathKeyListVTbl*
   end
@@ -2303,8 +2303,8 @@ lib LibWin32
     is_same_class_name : Proc(IWbemPath*, LibC::LPWSTR, LibC::BOOL)
   end
 
-  IWbemPath_GUID = LibC::GUID.new("3bc15af2-736c-477e-9e51-238af8667dcc")
-  CLSID_IWbemPath = "3bc15af2-736c-477e-9e51-238af8667dcc"
+  IWbemPath_GUID = "3bc15af2-736c-477e-9e51-238af8667dcc"
+  IID_IWbemPath = LibC::GUID.new(0x3bc15af2_u32, 0x736c_u16, 0x477e_u16, StaticArray[0x9e_u8, 0x51_u8, 0x23_u8, 0x8a_u8, 0xf8_u8, 0x66_u8, 0x7d_u8, 0xcc_u8])
   struct IWbemPath
     lpVtbl : IWbemPathVTbl*
   end
@@ -2322,8 +2322,8 @@ lib LibWin32
     get_query_info : Proc(IWbemQuery*, UInt32, UInt32, UInt32, Void*, HRESULT)
   end
 
-  IWbemQuery_GUID = LibC::GUID.new("81166f58-dd98-11d3-a120-00105a1f515a")
-  CLSID_IWbemQuery = "81166f58-dd98-11d3-a120-00105a1f515a"
+  IWbemQuery_GUID = "81166f58-dd98-11d3-a120-00105a1f515a"
+  IID_IWbemQuery = LibC::GUID.new(0x81166f58_u32, 0xdd98_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x20_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
   struct IWbemQuery
     lpVtbl : IWbemQueryVTbl*
   end
@@ -2358,8 +2358,8 @@ lib LibWin32
     get_method_origin : Proc(IWbemClassObject*, LibC::LPWSTR, UInt8**, HRESULT)
   end
 
-  IWbemClassObject_GUID = LibC::GUID.new("dc12a681-737f-11cf-884d-00aa004b2e24")
-  CLSID_IWbemClassObject = "dc12a681-737f-11cf-884d-00aa004b2e24"
+  IWbemClassObject_GUID = "dc12a681-737f-11cf-884d-00aa004b2e24"
+  IID_IWbemClassObject = LibC::GUID.new(0xdc12a681_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
   struct IWbemClassObject
     lpVtbl : IWbemClassObjectVTbl*
   end
@@ -2404,8 +2404,8 @@ lib LibWin32
     unlock : Proc(IWbemObjectAccess*, Int32, HRESULT)
   end
 
-  IWbemObjectAccess_GUID = LibC::GUID.new("49353c9a-516b-11d1-aea6-00c04fb68820")
-  CLSID_IWbemObjectAccess = "49353c9a-516b-11d1-aea6-00c04fb68820"
+  IWbemObjectAccess_GUID = "49353c9a-516b-11d1-aea6-00c04fb68820"
+  IID_IWbemObjectAccess = LibC::GUID.new(0x49353c9a_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemObjectAccess
     lpVtbl : IWbemObjectAccessVTbl*
   end
@@ -2423,8 +2423,8 @@ lib LibWin32
     end_enumeration : Proc(IWbemQualifierSet*, HRESULT)
   end
 
-  IWbemQualifierSet_GUID = LibC::GUID.new("dc12a680-737f-11cf-884d-00aa004b2e24")
-  CLSID_IWbemQualifierSet = "dc12a680-737f-11cf-884d-00aa004b2e24"
+  IWbemQualifierSet_GUID = "dc12a680-737f-11cf-884d-00aa004b2e24"
+  IID_IWbemQualifierSet = LibC::GUID.new(0xdc12a680_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
   struct IWbemQualifierSet
     lpVtbl : IWbemQualifierSetVTbl*
   end
@@ -2458,8 +2458,8 @@ lib LibWin32
     exec_method_async : Proc(IWbemServices*, UInt8*, UInt8*, Int32, IWbemContext, IWbemClassObject, IWbemObjectSink, HRESULT)
   end
 
-  IWbemServices_GUID = LibC::GUID.new("9556dc99-828c-11cf-a37e-00aa003240c7")
-  CLSID_IWbemServices = "9556dc99-828c-11cf-a37e-00aa003240c7"
+  IWbemServices_GUID = "9556dc99-828c-11cf-a37e-00aa003240c7"
+  IID_IWbemServices = LibC::GUID.new(0x9556dc99_u32, 0x828c_u16, 0x11cf_u16, StaticArray[0xa3_u8, 0x7e_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
   struct IWbemServices
     lpVtbl : IWbemServicesVTbl*
   end
@@ -2471,8 +2471,8 @@ lib LibWin32
     connect_server : Proc(IWbemLocator*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, UInt8*, IWbemContext, IWbemServices*, HRESULT)
   end
 
-  IWbemLocator_GUID = LibC::GUID.new("dc12a687-737f-11cf-884d-00aa004b2e24")
-  CLSID_IWbemLocator = "dc12a687-737f-11cf-884d-00aa004b2e24"
+  IWbemLocator_GUID = "dc12a687-737f-11cf-884d-00aa004b2e24"
+  IID_IWbemLocator = LibC::GUID.new(0xdc12a687_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
   struct IWbemLocator
     lpVtbl : IWbemLocatorVTbl*
   end
@@ -2485,8 +2485,8 @@ lib LibWin32
     set_status : Proc(IWbemObjectSink*, Int32, HRESULT, UInt8*, IWbemClassObject, HRESULT)
   end
 
-  IWbemObjectSink_GUID = LibC::GUID.new("7c857801-7381-11cf-884d-00aa004b2e24")
-  CLSID_IWbemObjectSink = "7c857801-7381-11cf-884d-00aa004b2e24"
+  IWbemObjectSink_GUID = "7c857801-7381-11cf-884d-00aa004b2e24"
+  IID_IWbemObjectSink = LibC::GUID.new(0x7c857801_u32, 0x7381_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
   struct IWbemObjectSink
     lpVtbl : IWbemObjectSinkVTbl*
   end
@@ -2502,8 +2502,8 @@ lib LibWin32
     skip : Proc(IEnumWbemClassObject*, Int32, UInt32, HRESULT)
   end
 
-  IEnumWbemClassObject_GUID = LibC::GUID.new("027947e1-d731-11ce-a357-000000000001")
-  CLSID_IEnumWbemClassObject = "027947e1-d731-11ce-a357-000000000001"
+  IEnumWbemClassObject_GUID = "027947e1-d731-11ce-a357-000000000001"
+  IID_IEnumWbemClassObject = LibC::GUID.new(0x27947e1_u32, 0xd731_u16, 0x11ce_u16, StaticArray[0xa3_u8, 0x57_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1_u8])
   struct IEnumWbemClassObject
     lpVtbl : IEnumWbemClassObjectVTbl*
   end
@@ -2518,8 +2518,8 @@ lib LibWin32
     get_call_status : Proc(IWbemCallResult*, Int32, Int32*, HRESULT)
   end
 
-  IWbemCallResult_GUID = LibC::GUID.new("44aca675-e8fc-11d0-a07c-00c04fb68820")
-  CLSID_IWbemCallResult = "44aca675-e8fc-11d0-a07c-00c04fb68820"
+  IWbemCallResult_GUID = "44aca675-e8fc-11d0-a07c-00c04fb68820"
+  IID_IWbemCallResult = LibC::GUID.new(0x44aca675_u32, 0xe8fc_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x7c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemCallResult
     lpVtbl : IWbemCallResultVTbl*
   end
@@ -2539,8 +2539,8 @@ lib LibWin32
     delete_all : Proc(IWbemContext*, HRESULT)
   end
 
-  IWbemContext_GUID = LibC::GUID.new("44aca674-e8fc-11d0-a07c-00c04fb68820")
-  CLSID_IWbemContext = "44aca674-e8fc-11d0-a07c-00c04fb68820"
+  IWbemContext_GUID = "44aca674-e8fc-11d0-a07c-00c04fb68820"
+  IID_IWbemContext = LibC::GUID.new(0x44aca674_u32, 0xe8fc_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x7c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemContext
     lpVtbl : IWbemContextVTbl*
   end
@@ -2552,8 +2552,8 @@ lib LibWin32
     create_object_stub : Proc(IUnsecuredApartment*, IUnknown, IUnknown*, HRESULT)
   end
 
-  IUnsecuredApartment_GUID = LibC::GUID.new("1cfaba8c-1523-11d1-ad79-00c04fd8fdff")
-  CLSID_IUnsecuredApartment = "1cfaba8c-1523-11d1-ad79-00c04fd8fdff"
+  IUnsecuredApartment_GUID = "1cfaba8c-1523-11d1-ad79-00c04fd8fdff"
+  IID_IUnsecuredApartment = LibC::GUID.new(0x1cfaba8c_u32, 0x1523_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
   struct IUnsecuredApartment
     lpVtbl : IUnsecuredApartmentVTbl*
   end
@@ -2566,8 +2566,8 @@ lib LibWin32
     create_sink_stub : Proc(IWbemUnsecuredApartment*, IWbemObjectSink, UInt32, LibC::LPWSTR, IWbemObjectSink*, HRESULT)
   end
 
-  IWbemUnsecuredApartment_GUID = LibC::GUID.new("31739d04-3471-4cf4-9a7c-57a44ae71956")
-  CLSID_IWbemUnsecuredApartment = "31739d04-3471-4cf4-9a7c-57a44ae71956"
+  IWbemUnsecuredApartment_GUID = "31739d04-3471-4cf4-9a7c-57a44ae71956"
+  IID_IWbemUnsecuredApartment = LibC::GUID.new(0x31739d04_u32, 0x3471_u16, 0x4cf4_u16, StaticArray[0x9a_u8, 0x7c_u8, 0x57_u8, 0xa4_u8, 0x4a_u8, 0xe7_u8, 0x19_u8, 0x56_u8])
   struct IWbemUnsecuredApartment
     lpVtbl : IWbemUnsecuredApartmentVTbl*
   end
@@ -2580,8 +2580,8 @@ lib LibWin32
     get_facility_code_text : Proc(IWbemStatusCodeText*, HRESULT, UInt32, Int32, UInt8**, HRESULT)
   end
 
-  IWbemStatusCodeText_GUID = LibC::GUID.new("eb87e1bc-3233-11d2-aec9-00c04fb68820")
-  CLSID_IWbemStatusCodeText = "eb87e1bc-3233-11d2-aec9-00c04fb68820"
+  IWbemStatusCodeText_GUID = "eb87e1bc-3233-11d2-aec9-00c04fb68820"
+  IID_IWbemStatusCodeText = LibC::GUID.new(0xeb87e1bc_u32, 0x3233_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemStatusCodeText
     lpVtbl : IWbemStatusCodeTextVTbl*
   end
@@ -2594,8 +2594,8 @@ lib LibWin32
     restore : Proc(IWbemBackupRestore*, LibC::LPWSTR, Int32, HRESULT)
   end
 
-  IWbemBackupRestore_GUID = LibC::GUID.new("c49e32c7-bc8b-11d2-85d4-00105a1f8304")
-  CLSID_IWbemBackupRestore = "c49e32c7-bc8b-11d2-85d4-00105a1f8304"
+  IWbemBackupRestore_GUID = "c49e32c7-bc8b-11d2-85d4-00105a1f8304"
+  IID_IWbemBackupRestore = LibC::GUID.new(0xc49e32c7_u32, 0xbc8b_u16, 0x11d2_u16, StaticArray[0x85_u8, 0xd4_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x83_u8, 0x4_u8])
   struct IWbemBackupRestore
     lpVtbl : IWbemBackupRestoreVTbl*
   end
@@ -2610,8 +2610,8 @@ lib LibWin32
     resume : Proc(IWbemBackupRestoreEx*, HRESULT)
   end
 
-  IWbemBackupRestoreEx_GUID = LibC::GUID.new("a359dec5-e813-4834-8a2a-ba7f1d777d76")
-  CLSID_IWbemBackupRestoreEx = "a359dec5-e813-4834-8a2a-ba7f1d777d76"
+  IWbemBackupRestoreEx_GUID = "a359dec5-e813-4834-8a2a-ba7f1d777d76"
+  IID_IWbemBackupRestoreEx = LibC::GUID.new(0xa359dec5_u32, 0xe813_u16, 0x4834_u16, StaticArray[0x8a_u8, 0x2a_u8, 0xba_u8, 0x7f_u8, 0x1d_u8, 0x77_u8, 0x7d_u8, 0x76_u8])
   struct IWbemBackupRestoreEx
     lpVtbl : IWbemBackupRestoreExVTbl*
   end
@@ -2623,8 +2623,8 @@ lib LibWin32
     refresh : Proc(IWbemRefresher*, Int32, HRESULT)
   end
 
-  IWbemRefresher_GUID = LibC::GUID.new("49353c99-516b-11d1-aea6-00c04fb68820")
-  CLSID_IWbemRefresher = "49353c99-516b-11d1-aea6-00c04fb68820"
+  IWbemRefresher_GUID = "49353c99-516b-11d1-aea6-00c04fb68820"
+  IID_IWbemRefresher = LibC::GUID.new(0x49353c99_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemRefresher
     lpVtbl : IWbemRefresherVTbl*
   end
@@ -2639,8 +2639,8 @@ lib LibWin32
     remove_all : Proc(IWbemHiPerfEnum*, Int32, HRESULT)
   end
 
-  IWbemHiPerfEnum_GUID = LibC::GUID.new("2705c288-79ae-11d2-b348-00105a1f8177")
-  CLSID_IWbemHiPerfEnum = "2705c288-79ae-11d2-b348-00105a1f8177"
+  IWbemHiPerfEnum_GUID = "2705c288-79ae-11d2-b348-00105a1f8177"
+  IID_IWbemHiPerfEnum = LibC::GUID.new(0x2705c288_u32, 0x79ae_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x48_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x81_u8, 0x77_u8])
   struct IWbemHiPerfEnum
     lpVtbl : IWbemHiPerfEnumVTbl*
   end
@@ -2656,8 +2656,8 @@ lib LibWin32
     add_enum : Proc(IWbemConfigureRefresher*, IWbemServices, LibC::LPWSTR, Int32, IWbemContext, IWbemHiPerfEnum*, Int32*, HRESULT)
   end
 
-  IWbemConfigureRefresher_GUID = LibC::GUID.new("49353c92-516b-11d1-aea6-00c04fb68820")
-  CLSID_IWbemConfigureRefresher = "49353c92-516b-11d1-aea6-00c04fb68820"
+  IWbemConfigureRefresher_GUID = "49353c92-516b-11d1-aea6-00c04fb68820"
+  IID_IWbemConfigureRefresher = LibC::GUID.new(0x49353c92_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemConfigureRefresher
     lpVtbl : IWbemConfigureRefresherVTbl*
   end
@@ -2675,8 +2675,8 @@ lib LibWin32
     write_stream_parameter : Proc(IWbemObjectSinkEx*, UInt8*, VARIANT*, UInt32, UInt32, HRESULT)
   end
 
-  IWbemObjectSinkEx_GUID = LibC::GUID.new("e7d35cfa-348b-485e-b524-252725d697ca")
-  CLSID_IWbemObjectSinkEx = "e7d35cfa-348b-485e-b524-252725d697ca"
+  IWbemObjectSinkEx_GUID = "e7d35cfa-348b-485e-b524-252725d697ca"
+  IID_IWbemObjectSinkEx = LibC::GUID.new(0xe7d35cfa_u32, 0x348b_u16, 0x485e_u16, StaticArray[0xb5_u8, 0x24_u8, 0x25_u8, 0x27_u8, 0x25_u8, 0xd6_u8, 0x97_u8, 0xca_u8])
   struct IWbemObjectSinkEx
     lpVtbl : IWbemObjectSinkExVTbl*
   end
@@ -2688,8 +2688,8 @@ lib LibWin32
     shutdown : Proc(IWbemShutdown*, Int32, UInt32, IWbemContext, HRESULT)
   end
 
-  IWbemShutdown_GUID = LibC::GUID.new("b7b31df9-d515-11d3-a11c-00105a1f515a")
-  CLSID_IWbemShutdown = "b7b31df9-d515-11d3-a11c-00105a1f515a"
+  IWbemShutdown_GUID = "b7b31df9-d515-11d3-a11c-00105a1f515a"
+  IID_IWbemShutdown = LibC::GUID.new(0xb7b31df9_u32, 0xd515_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x1c_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
   struct IWbemShutdown
     lpVtbl : IWbemShutdownVTbl*
   end
@@ -2702,8 +2702,8 @@ lib LibWin32
     create_from_text : Proc(IWbemObjectTextSrc*, Int32, UInt8*, UInt32, IWbemContext, IWbemClassObject*, HRESULT)
   end
 
-  IWbemObjectTextSrc_GUID = LibC::GUID.new("bfbf883a-cad7-11d3-a11b-00105a1f515a")
-  CLSID_IWbemObjectTextSrc = "bfbf883a-cad7-11d3-a11b-00105a1f515a"
+  IWbemObjectTextSrc_GUID = "bfbf883a-cad7-11d3-a11b-00105a1f515a"
+  IID_IWbemObjectTextSrc = LibC::GUID.new(0xbfbf883a_u32, 0xcad7_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x1b_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
   struct IWbemObjectTextSrc
     lpVtbl : IWbemObjectTextSrcVTbl*
   end
@@ -2717,8 +2717,8 @@ lib LibWin32
     create_bmof : Proc(IMofCompiler*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, Int32, Int32, WBEM_COMPILE_STATUS_INFO*, HRESULT)
   end
 
-  IMofCompiler_GUID = LibC::GUID.new("6daf974e-2e37-11d2-aec9-00c04fb68820")
-  CLSID_IMofCompiler = "6daf974e-2e37-11d2-aec9-00c04fb68820"
+  IMofCompiler_GUID = "6daf974e-2e37-11d2-aec9-00c04fb68820"
+  IID_IMofCompiler = LibC::GUID.new(0x6daf974e_u32, 0x2e37_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IMofCompiler
     lpVtbl : IMofCompilerVTbl*
   end
@@ -2731,8 +2731,8 @@ lib LibWin32
     put_property : Proc(IWbemPropertyProvider*, Int32, UInt8*, UInt8*, UInt8*, UInt8*, VARIANT*, HRESULT)
   end
 
-  IWbemPropertyProvider_GUID = LibC::GUID.new("ce61e841-65bc-11d0-b6bd-00aa003240c7")
-  CLSID_IWbemPropertyProvider = "ce61e841-65bc-11d0-b6bd-00aa003240c7"
+  IWbemPropertyProvider_GUID = "ce61e841-65bc-11d0-b6bd-00aa003240c7"
+  IID_IWbemPropertyProvider = LibC::GUID.new(0xce61e841_u32, 0x65bc_u16, 0x11d0_u16, StaticArray[0xb6_u8, 0xbd_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
   struct IWbemPropertyProvider
     lpVtbl : IWbemPropertyProviderVTbl*
   end
@@ -2744,8 +2744,8 @@ lib LibWin32
     indicate_to_consumer : Proc(IWbemUnboundObjectSink*, IWbemClassObject, Int32, IWbemClassObject*, HRESULT)
   end
 
-  IWbemUnboundObjectSink_GUID = LibC::GUID.new("e246107b-b06e-11d0-ad61-00c04fd8fdff")
-  CLSID_IWbemUnboundObjectSink = "e246107b-b06e-11d0-ad61-00c04fd8fdff"
+  IWbemUnboundObjectSink_GUID = "e246107b-b06e-11d0-ad61-00c04fd8fdff"
+  IID_IWbemUnboundObjectSink = LibC::GUID.new(0xe246107b_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
   struct IWbemUnboundObjectSink
     lpVtbl : IWbemUnboundObjectSinkVTbl*
   end
@@ -2757,8 +2757,8 @@ lib LibWin32
     provide_events : Proc(IWbemEventProvider*, IWbemObjectSink, Int32, HRESULT)
   end
 
-  IWbemEventProvider_GUID = LibC::GUID.new("e245105b-b06e-11d0-ad61-00c04fd8fdff")
-  CLSID_IWbemEventProvider = "e245105b-b06e-11d0-ad61-00c04fd8fdff"
+  IWbemEventProvider_GUID = "e245105b-b06e-11d0-ad61-00c04fd8fdff"
+  IID_IWbemEventProvider = LibC::GUID.new(0xe245105b_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
   struct IWbemEventProvider
     lpVtbl : IWbemEventProviderVTbl*
   end
@@ -2771,8 +2771,8 @@ lib LibWin32
     cancel_query : Proc(IWbemEventProviderQuerySink*, UInt32, HRESULT)
   end
 
-  IWbemEventProviderQuerySink_GUID = LibC::GUID.new("580acaf8-fa1c-11d0-ad72-00c04fd8fdff")
-  CLSID_IWbemEventProviderQuerySink = "580acaf8-fa1c-11d0-ad72-00c04fd8fdff"
+  IWbemEventProviderQuerySink_GUID = "580acaf8-fa1c-11d0-ad72-00c04fd8fdff"
+  IID_IWbemEventProviderQuerySink = LibC::GUID.new(0x580acaf8_u32, 0xfa1c_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
   struct IWbemEventProviderQuerySink
     lpVtbl : IWbemEventProviderQuerySinkVTbl*
   end
@@ -2784,8 +2784,8 @@ lib LibWin32
     access_check : Proc(IWbemEventProviderSecurity*, UInt16*, UInt16*, Int32, UInt8*, HRESULT)
   end
 
-  IWbemEventProviderSecurity_GUID = LibC::GUID.new("631f7d96-d993-11d2-b339-00105a1f4aaf")
-  CLSID_IWbemEventProviderSecurity = "631f7d96-d993-11d2-b339-00105a1f4aaf"
+  IWbemEventProviderSecurity_GUID = "631f7d96-d993-11d2-b339-00105a1f4aaf"
+  IID_IWbemEventProviderSecurity = LibC::GUID.new(0x631f7d96_u32, 0xd993_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x39_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x4a_u8, 0xaf_u8])
   struct IWbemEventProviderSecurity
     lpVtbl : IWbemEventProviderSecurityVTbl*
   end
@@ -2797,8 +2797,8 @@ lib LibWin32
     find_consumer : Proc(IWbemEventConsumerProvider*, IWbemClassObject, IWbemUnboundObjectSink*, HRESULT)
   end
 
-  IWbemEventConsumerProvider_GUID = LibC::GUID.new("e246107a-b06e-11d0-ad61-00c04fd8fdff")
-  CLSID_IWbemEventConsumerProvider = "e246107a-b06e-11d0-ad61-00c04fd8fdff"
+  IWbemEventConsumerProvider_GUID = "e246107a-b06e-11d0-ad61-00c04fd8fdff"
+  IID_IWbemEventConsumerProvider = LibC::GUID.new(0xe246107a_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
   struct IWbemEventConsumerProvider
     lpVtbl : IWbemEventConsumerProviderVTbl*
   end
@@ -2810,8 +2810,8 @@ lib LibWin32
     set_status : Proc(IWbemProviderInitSink*, Int32, Int32, HRESULT)
   end
 
-  IWbemProviderInitSink_GUID = LibC::GUID.new("1be41571-91dd-11d1-aeb2-00c04fb68820")
-  CLSID_IWbemProviderInitSink = "1be41571-91dd-11d1-aeb2-00c04fb68820"
+  IWbemProviderInitSink_GUID = "1be41571-91dd-11d1-aeb2-00c04fb68820"
+  IID_IWbemProviderInitSink = LibC::GUID.new(0x1be41571_u32, 0x91dd_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xb2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemProviderInitSink
     lpVtbl : IWbemProviderInitSinkVTbl*
   end
@@ -2823,8 +2823,8 @@ lib LibWin32
     initialize : Proc(IWbemProviderInit*, LibC::LPWSTR, Int32, LibC::LPWSTR, LibC::LPWSTR, IWbemServices, IWbemContext, IWbemProviderInitSink, HRESULT)
   end
 
-  IWbemProviderInit_GUID = LibC::GUID.new("1be41572-91dd-11d1-aeb2-00c04fb68820")
-  CLSID_IWbemProviderInit = "1be41572-91dd-11d1-aeb2-00c04fb68820"
+  IWbemProviderInit_GUID = "1be41572-91dd-11d1-aeb2-00c04fb68820"
+  IID_IWbemProviderInit = LibC::GUID.new(0x1be41572_u32, 0x91dd_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xb2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemProviderInit
     lpVtbl : IWbemProviderInitVTbl*
   end
@@ -2841,8 +2841,8 @@ lib LibWin32
     get_objects : Proc(IWbemHiPerfProvider*, IWbemServices, Int32, IWbemObjectAccess*, Int32, IWbemContext, HRESULT)
   end
 
-  IWbemHiPerfProvider_GUID = LibC::GUID.new("49353c93-516b-11d1-aea6-00c04fb68820")
-  CLSID_IWbemHiPerfProvider = "49353c93-516b-11d1-aea6-00c04fb68820"
+  IWbemHiPerfProvider_GUID = "49353c93-516b-11d1-aea6-00c04fb68820"
+  IID_IWbemHiPerfProvider = LibC::GUID.new(0x49353c93_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemHiPerfProvider
     lpVtbl : IWbemHiPerfProviderVTbl*
   end
@@ -2855,8 +2855,8 @@ lib LibWin32
     un_register : Proc(IWbemDecoupledRegistrar*, HRESULT)
   end
 
-  IWbemDecoupledRegistrar_GUID = LibC::GUID.new("1005cbcf-e64f-4646-bcd3-3a089d8a84b4")
-  CLSID_IWbemDecoupledRegistrar = "1005cbcf-e64f-4646-bcd3-3a089d8a84b4"
+  IWbemDecoupledRegistrar_GUID = "1005cbcf-e64f-4646-bcd3-3a089d8a84b4"
+  IID_IWbemDecoupledRegistrar = LibC::GUID.new(0x1005cbcf_u32, 0xe64f_u16, 0x4646_u16, StaticArray[0xbc_u8, 0xd3_u8, 0x3a_u8, 0x8_u8, 0x9d_u8, 0x8a_u8, 0x84_u8, 0xb4_u8])
   struct IWbemDecoupledRegistrar
     lpVtbl : IWbemDecoupledRegistrarVTbl*
   end
@@ -2868,8 +2868,8 @@ lib LibWin32
     set_registration_object : Proc(IWbemProviderIdentity*, Int32, IWbemClassObject, HRESULT)
   end
 
-  IWbemProviderIdentity_GUID = LibC::GUID.new("631f7d97-d993-11d2-b339-00105a1f4aaf")
-  CLSID_IWbemProviderIdentity = "631f7d97-d993-11d2-b339-00105a1f4aaf"
+  IWbemProviderIdentity_GUID = "631f7d97-d993-11d2-b339-00105a1f4aaf"
+  IID_IWbemProviderIdentity = LibC::GUID.new(0x631f7d97_u32, 0xd993_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x39_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x4a_u8, 0xaf_u8])
   struct IWbemProviderIdentity
     lpVtbl : IWbemProviderIdentityVTbl*
   end
@@ -2884,8 +2884,8 @@ lib LibWin32
     get_service : Proc(IWbemDecoupledBasicEventProvider*, Int32, IWbemContext, IWbemServices*, HRESULT)
   end
 
-  IWbemDecoupledBasicEventProvider_GUID = LibC::GUID.new("86336d20-ca11-4786-9ef1-bc8a946b42fc")
-  CLSID_IWbemDecoupledBasicEventProvider = "86336d20-ca11-4786-9ef1-bc8a946b42fc"
+  IWbemDecoupledBasicEventProvider_GUID = "86336d20-ca11-4786-9ef1-bc8a946b42fc"
+  IID_IWbemDecoupledBasicEventProvider = LibC::GUID.new(0x86336d20_u32, 0xca11_u16, 0x4786_u16, StaticArray[0x9e_u8, 0xf1_u8, 0xbc_u8, 0x8a_u8, 0x94_u8, 0x6b_u8, 0x42_u8, 0xfc_u8])
   struct IWbemDecoupledBasicEventProvider
     lpVtbl : IWbemDecoupledBasicEventProviderVTbl*
   end
@@ -2902,8 +2902,8 @@ lib LibWin32
     set_batching_parameters : Proc(IWbemEventSink*, Int32, UInt32, UInt32, HRESULT)
   end
 
-  IWbemEventSink_GUID = LibC::GUID.new("3ae0080a-7e3a-4366-bf89-0feedc931659")
-  CLSID_IWbemEventSink = "3ae0080a-7e3a-4366-bf89-0feedc931659"
+  IWbemEventSink_GUID = "3ae0080a-7e3a-4366-bf89-0feedc931659"
+  IID_IWbemEventSink = LibC::GUID.new(0x3ae0080a_u32, 0x7e3a_u16, 0x4366_u16, StaticArray[0xbf_u8, 0x89_u8, 0xf_u8, 0xee_u8, 0xdc_u8, 0x93_u8, 0x16_u8, 0x59_u8])
   struct IWbemEventSink
     lpVtbl : IWbemEventSinkVTbl*
   end
@@ -2937,8 +2937,8 @@ lib LibWin32
     get_security_ : Proc(ISWbemServices*, ISWbemSecurity*, HRESULT)
   end
 
-  ISWbemServices_GUID = LibC::GUID.new("76a6415c-cb41-11d1-8b02-00600806d9b6")
-  CLSID_ISWbemServices = "76a6415c-cb41-11d1-8b02-00600806d9b6"
+  ISWbemServices_GUID = "76a6415c-cb41-11d1-8b02-00600806d9b6"
+  IID_ISWbemServices = LibC::GUID.new(0x76a6415c_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemServices
     lpVtbl : ISWbemServicesVTbl*
   end
@@ -2955,8 +2955,8 @@ lib LibWin32
     get_security_ : Proc(ISWbemLocator*, ISWbemSecurity*, HRESULT)
   end
 
-  ISWbemLocator_GUID = LibC::GUID.new("76a6415b-cb41-11d1-8b02-00600806d9b6")
-  CLSID_ISWbemLocator = "76a6415b-cb41-11d1-8b02-00600806d9b6"
+  ISWbemLocator_GUID = "76a6415b-cb41-11d1-8b02-00600806d9b6"
+  IID_ISWbemLocator = LibC::GUID.new(0x76a6415b_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemLocator
     lpVtbl : ISWbemLocatorVTbl*
   end
@@ -2996,8 +2996,8 @@ lib LibWin32
     get_security_ : Proc(ISWbemObject*, ISWbemSecurity*, HRESULT)
   end
 
-  ISWbemObject_GUID = LibC::GUID.new("76a6415a-cb41-11d1-8b02-00600806d9b6")
-  CLSID_ISWbemObject = "76a6415a-cb41-11d1-8b02-00600806d9b6"
+  ISWbemObject_GUID = "76a6415a-cb41-11d1-8b02-00600806d9b6"
+  IID_ISWbemObject = LibC::GUID.new(0x76a6415a_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemObject
     lpVtbl : ISWbemObjectVTbl*
   end
@@ -3017,8 +3017,8 @@ lib LibWin32
     item_index : Proc(ISWbemObjectSet*, Int32, ISWbemObject*, HRESULT)
   end
 
-  ISWbemObjectSet_GUID = LibC::GUID.new("76a6415f-cb41-11d1-8b02-00600806d9b6")
-  CLSID_ISWbemObjectSet = "76a6415f-cb41-11d1-8b02-00600806d9b6"
+  ISWbemObjectSet_GUID = "76a6415f-cb41-11d1-8b02-00600806d9b6"
+  IID_ISWbemObjectSet = LibC::GUID.new(0x76a6415f_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemObjectSet
     lpVtbl : ISWbemObjectSetVTbl*
   end
@@ -3036,8 +3036,8 @@ lib LibWin32
     get_name : Proc(ISWbemNamedValue*, UInt8**, HRESULT)
   end
 
-  ISWbemNamedValue_GUID = LibC::GUID.new("76a64164-cb41-11d1-8b02-00600806d9b6")
-  CLSID_ISWbemNamedValue = "76a64164-cb41-11d1-8b02-00600806d9b6"
+  ISWbemNamedValue_GUID = "76a64164-cb41-11d1-8b02-00600806d9b6"
+  IID_ISWbemNamedValue = LibC::GUID.new(0x76a64164_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemNamedValue
     lpVtbl : ISWbemNamedValueVTbl*
   end
@@ -3059,8 +3059,8 @@ lib LibWin32
     delete_all : Proc(ISWbemNamedValueSet*, HRESULT)
   end
 
-  ISWbemNamedValueSet_GUID = LibC::GUID.new("cf2376ea-ce8c-11d1-8b05-00600806d9b6")
-  CLSID_ISWbemNamedValueSet = "cf2376ea-ce8c-11d1-8b05-00600806d9b6"
+  ISWbemNamedValueSet_GUID = "cf2376ea-ce8c-11d1-8b05-00600806d9b6"
+  IID_ISWbemNamedValueSet = LibC::GUID.new(0xcf2376ea_u32, 0xce8c_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemNamedValueSet
     lpVtbl : ISWbemNamedValueSetVTbl*
   end
@@ -3086,8 +3086,8 @@ lib LibWin32
     get_is_amended : Proc(ISWbemQualifier*, Int16*, HRESULT)
   end
 
-  ISWbemQualifier_GUID = LibC::GUID.new("79b05932-d3b7-11d1-8b06-00600806d9b6")
-  CLSID_ISWbemQualifier = "79b05932-d3b7-11d1-8b06-00600806d9b6"
+  ISWbemQualifier_GUID = "79b05932-d3b7-11d1-8b06-00600806d9b6"
+  IID_ISWbemQualifier = LibC::GUID.new(0x79b05932_u32, 0xd3b7_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x6_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemQualifier
     lpVtbl : ISWbemQualifierVTbl*
   end
@@ -3107,8 +3107,8 @@ lib LibWin32
     remove : Proc(ISWbemQualifierSet*, UInt8*, Int32, HRESULT)
   end
 
-  ISWbemQualifierSet_GUID = LibC::GUID.new("9b16ed16-d3df-11d1-8b08-00600806d9b6")
-  CLSID_ISWbemQualifierSet = "9b16ed16-d3df-11d1-8b08-00600806d9b6"
+  ISWbemQualifierSet_GUID = "9b16ed16-d3df-11d1-8b08-00600806d9b6"
+  IID_ISWbemQualifierSet = LibC::GUID.new(0x9b16ed16_u32, 0xd3df_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x8_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemQualifierSet
     lpVtbl : ISWbemQualifierSetVTbl*
   end
@@ -3131,8 +3131,8 @@ lib LibWin32
     get_is_array : Proc(ISWbemProperty*, Int16*, HRESULT)
   end
 
-  ISWbemProperty_GUID = LibC::GUID.new("1a388f98-d4ba-11d1-8b09-00600806d9b6")
-  CLSID_ISWbemProperty = "1a388f98-d4ba-11d1-8b09-00600806d9b6"
+  ISWbemProperty_GUID = "1a388f98-d4ba-11d1-8b09-00600806d9b6"
+  IID_ISWbemProperty = LibC::GUID.new(0x1a388f98_u32, 0xd4ba_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemProperty
     lpVtbl : ISWbemPropertyVTbl*
   end
@@ -3152,8 +3152,8 @@ lib LibWin32
     remove : Proc(ISWbemPropertySet*, UInt8*, Int32, HRESULT)
   end
 
-  ISWbemPropertySet_GUID = LibC::GUID.new("dea0a7b2-d4ba-11d1-8b09-00600806d9b6")
-  CLSID_ISWbemPropertySet = "dea0a7b2-d4ba-11d1-8b09-00600806d9b6"
+  ISWbemPropertySet_GUID = "dea0a7b2-d4ba-11d1-8b09-00600806d9b6"
+  IID_ISWbemPropertySet = LibC::GUID.new(0xdea0a7b2_u32, 0xd4ba_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemPropertySet
     lpVtbl : ISWbemPropertySetVTbl*
   end
@@ -3173,8 +3173,8 @@ lib LibWin32
     get_qualifiers_ : Proc(ISWbemMethod*, ISWbemQualifierSet*, HRESULT)
   end
 
-  ISWbemMethod_GUID = LibC::GUID.new("422e8e90-d955-11d1-8b09-00600806d9b6")
-  CLSID_ISWbemMethod = "422e8e90-d955-11d1-8b09-00600806d9b6"
+  ISWbemMethod_GUID = "422e8e90-d955-11d1-8b09-00600806d9b6"
+  IID_ISWbemMethod = LibC::GUID.new(0x422e8e90_u32, 0xd955_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemMethod
     lpVtbl : ISWbemMethodVTbl*
   end
@@ -3192,8 +3192,8 @@ lib LibWin32
     get_count : Proc(ISWbemMethodSet*, Int32*, HRESULT)
   end
 
-  ISWbemMethodSet_GUID = LibC::GUID.new("c93ba292-d955-11d1-8b09-00600806d9b6")
-  CLSID_ISWbemMethodSet = "c93ba292-d955-11d1-8b09-00600806d9b6"
+  ISWbemMethodSet_GUID = "c93ba292-d955-11d1-8b09-00600806d9b6"
+  IID_ISWbemMethodSet = LibC::GUID.new(0xc93ba292_u32, 0xd955_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemMethodSet
     lpVtbl : ISWbemMethodSetVTbl*
   end
@@ -3210,8 +3210,8 @@ lib LibWin32
     get_security_ : Proc(ISWbemEventSource*, ISWbemSecurity*, HRESULT)
   end
 
-  ISWbemEventSource_GUID = LibC::GUID.new("27d54d92-0ebe-11d2-8b22-00600806d9b6")
-  CLSID_ISWbemEventSource = "27d54d92-0ebe-11d2-8b22-00600806d9b6"
+  ISWbemEventSource_GUID = "27d54d92-0ebe-11d2-8b22-00600806d9b6"
+  IID_ISWbemEventSource = LibC::GUID.new(0x27d54d92_u32, 0xebe_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x22_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemEventSource
     lpVtbl : ISWbemEventSourceVTbl*
   end
@@ -3249,8 +3249,8 @@ lib LibWin32
     put_authority : Proc(ISWbemObjectPath*, UInt8*, HRESULT)
   end
 
-  ISWbemObjectPath_GUID = LibC::GUID.new("5791bc27-ce9c-11d1-97bf-0000f81e849c")
-  CLSID_ISWbemObjectPath = "5791bc27-ce9c-11d1-97bf-0000f81e849c"
+  ISWbemObjectPath_GUID = "5791bc27-ce9c-11d1-97bf-0000f81e849c"
+  IID_ISWbemObjectPath = LibC::GUID.new(0x5791bc27_u32, 0xce9c_u16, 0x11d1_u16, StaticArray[0x97_u8, 0xbf_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0x84_u8, 0x9c_u8])
   struct ISWbemObjectPath
     lpVtbl : ISWbemObjectPathVTbl*
   end
@@ -3290,8 +3290,8 @@ lib LibWin32
     get_security_ : Proc(ISWbemLastError*, ISWbemSecurity*, HRESULT)
   end
 
-  ISWbemLastError_GUID = LibC::GUID.new("d962db84-d4bb-11d1-8b09-00600806d9b6")
-  CLSID_ISWbemLastError = "d962db84-d4bb-11d1-8b09-00600806d9b6"
+  ISWbemLastError_GUID = "d962db84-d4bb-11d1-8b09-00600806d9b6"
+  IID_ISWbemLastError = LibC::GUID.new(0xd962db84_u32, 0xd4bb_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemLastError
     lpVtbl : ISWbemLastErrorVTbl*
   end
@@ -3306,8 +3306,8 @@ lib LibWin32
     invoke : Proc(ISWbemSinkEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  ISWbemSinkEvents_GUID = LibC::GUID.new("75718ca0-f029-11d1-a1ac-00c04fb6c223")
-  CLSID_ISWbemSinkEvents = "75718ca0-f029-11d1-a1ac-00c04fb6c223"
+  ISWbemSinkEvents_GUID = "75718ca0-f029-11d1-a1ac-00c04fb6c223"
+  IID_ISWbemSinkEvents = LibC::GUID.new(0x75718ca0_u32, 0xf029_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xc2_u8, 0x23_u8])
   struct ISWbemSinkEvents
     lpVtbl : ISWbemSinkEventsVTbl*
   end
@@ -3323,8 +3323,8 @@ lib LibWin32
     cancel : Proc(ISWbemSink*, HRESULT)
   end
 
-  ISWbemSink_GUID = LibC::GUID.new("75718c9f-f029-11d1-a1ac-00c04fb6c223")
-  CLSID_ISWbemSink = "75718c9f-f029-11d1-a1ac-00c04fb6c223"
+  ISWbemSink_GUID = "75718c9f-f029-11d1-a1ac-00c04fb6c223"
+  IID_ISWbemSink = LibC::GUID.new(0x75718c9f_u32, 0xf029_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xc2_u8, 0x23_u8])
   struct ISWbemSink
     lpVtbl : ISWbemSinkVTbl*
   end
@@ -3344,8 +3344,8 @@ lib LibWin32
     get_privileges : Proc(ISWbemSecurity*, ISWbemPrivilegeSet*, HRESULT)
   end
 
-  ISWbemSecurity_GUID = LibC::GUID.new("b54d66e6-2287-11d2-8b33-00600806d9b6")
-  CLSID_ISWbemSecurity = "b54d66e6-2287-11d2-8b33-00600806d9b6"
+  ISWbemSecurity_GUID = "b54d66e6-2287-11d2-8b33-00600806d9b6"
+  IID_ISWbemSecurity = LibC::GUID.new(0xb54d66e6_u32, 0x2287_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemSecurity
     lpVtbl : ISWbemSecurityVTbl*
   end
@@ -3365,8 +3365,8 @@ lib LibWin32
     get_identifier : Proc(ISWbemPrivilege*, WbemPrivilegeEnum*, HRESULT)
   end
 
-  ISWbemPrivilege_GUID = LibC::GUID.new("26ee67bd-5804-11d2-8b4a-00600806d9b6")
-  CLSID_ISWbemPrivilege = "26ee67bd-5804-11d2-8b4a-00600806d9b6"
+  ISWbemPrivilege_GUID = "26ee67bd-5804-11d2-8b4a-00600806d9b6"
+  IID_ISWbemPrivilege = LibC::GUID.new(0x26ee67bd_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemPrivilege
     lpVtbl : ISWbemPrivilegeVTbl*
   end
@@ -3388,8 +3388,8 @@ lib LibWin32
     add_as_string : Proc(ISWbemPrivilegeSet*, UInt8*, Int16, ISWbemPrivilege*, HRESULT)
   end
 
-  ISWbemPrivilegeSet_GUID = LibC::GUID.new("26ee67bf-5804-11d2-8b4a-00600806d9b6")
-  CLSID_ISWbemPrivilegeSet = "26ee67bf-5804-11d2-8b4a-00600806d9b6"
+  ISWbemPrivilegeSet_GUID = "26ee67bf-5804-11d2-8b4a-00600806d9b6"
+  IID_ISWbemPrivilegeSet = LibC::GUID.new(0x26ee67bf_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
   struct ISWbemPrivilegeSet
     lpVtbl : ISWbemPrivilegeSetVTbl*
   end
@@ -3425,8 +3425,8 @@ lib LibWin32
     put_async : Proc(ISWbemServicesEx*, ISWbemSink, ISWbemObjectEx, Int32, IDispatch, IDispatch, HRESULT)
   end
 
-  ISWbemServicesEx_GUID = LibC::GUID.new("d2f68443-85dc-427e-91d8-366554cc754c")
-  CLSID_ISWbemServicesEx = "d2f68443-85dc-427e-91d8-366554cc754c"
+  ISWbemServicesEx_GUID = "d2f68443-85dc-427e-91d8-366554cc754c"
+  IID_ISWbemServicesEx = LibC::GUID.new(0xd2f68443_u32, 0x85dc_u16, 0x427e_u16, StaticArray[0x91_u8, 0xd8_u8, 0x36_u8, 0x65_u8, 0x54_u8, 0xcc_u8, 0x75_u8, 0x4c_u8])
   struct ISWbemServicesEx
     lpVtbl : ISWbemServicesExVTbl*
   end
@@ -3470,8 +3470,8 @@ lib LibWin32
     set_from_text_ : Proc(ISWbemObjectEx*, UInt8*, WbemObjectTextFormatEnum, Int32, IDispatch, HRESULT)
   end
 
-  ISWbemObjectEx_GUID = LibC::GUID.new("269ad56a-8a67-4129-bc8c-0506dcfe9880")
-  CLSID_ISWbemObjectEx = "269ad56a-8a67-4129-bc8c-0506dcfe9880"
+  ISWbemObjectEx_GUID = "269ad56a-8a67-4129-bc8c-0506dcfe9880"
+  IID_ISWbemObjectEx = LibC::GUID.new(0x269ad56a_u32, 0x8a67_u16, 0x4129_u16, StaticArray[0xbc_u8, 0x8c_u8, 0x5_u8, 0x6_u8, 0xdc_u8, 0xfe_u8, 0x98_u8, 0x80_u8])
   struct ISWbemObjectEx
     lpVtbl : ISWbemObjectExVTbl*
   end
@@ -3526,8 +3526,8 @@ lib LibWin32
     set_file_time : Proc(ISWbemDateTime*, UInt8*, Int16, HRESULT)
   end
 
-  ISWbemDateTime_GUID = LibC::GUID.new("5e97458a-cf77-11d3-b38f-00105a1f473a")
-  CLSID_ISWbemDateTime = "5e97458a-cf77-11d3-b38f-00105a1f473a"
+  ISWbemDateTime_GUID = "5e97458a-cf77-11d3-b38f-00105a1f473a"
+  IID_ISWbemDateTime = LibC::GUID.new(0x5e97458a_u32, 0xcf77_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
   struct ISWbemDateTime
     lpVtbl : ISWbemDateTimeVTbl*
   end
@@ -3552,8 +3552,8 @@ lib LibWin32
     delete_all : Proc(ISWbemRefresher*, HRESULT)
   end
 
-  ISWbemRefresher_GUID = LibC::GUID.new("14d8250e-d9c2-11d3-b38f-00105a1f473a")
-  CLSID_ISWbemRefresher = "14d8250e-d9c2-11d3-b38f-00105a1f473a"
+  ISWbemRefresher_GUID = "14d8250e-d9c2-11d3-b38f-00105a1f473a"
+  IID_ISWbemRefresher = LibC::GUID.new(0x14d8250e_u32, 0xd9c2_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
   struct ISWbemRefresher
     lpVtbl : ISWbemRefresherVTbl*
   end
@@ -3574,8 +3574,8 @@ lib LibWin32
     remove : Proc(ISWbemRefreshableItem*, Int32, HRESULT)
   end
 
-  ISWbemRefreshableItem_GUID = LibC::GUID.new("5ad4bf92-daab-11d3-b38f-00105a1f473a")
-  CLSID_ISWbemRefreshableItem = "5ad4bf92-daab-11d3-b38f-00105a1f473a"
+  ISWbemRefreshableItem_GUID = "5ad4bf92-daab-11d3-b38f-00105a1f473a"
+  IID_ISWbemRefreshableItem = LibC::GUID.new(0x5ad4bf92_u32, 0xdaab_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
   struct ISWbemRefreshableItem
     lpVtbl : ISWbemRefreshableItemVTbl*
   end
@@ -3593,8 +3593,8 @@ lib LibWin32
     get_wmi_services : Proc(IWMIExtension*, ISWbemServices*, HRESULT)
   end
 
-  IWMIExtension_GUID = LibC::GUID.new("adc1f06e-5c7e-11d2-8b74-00104b2afb41")
-  CLSID_IWMIExtension = "adc1f06e-5c7e-11d2-8b74-00104b2afb41"
+  IWMIExtension_GUID = "adc1f06e-5c7e-11d2-8b74-00104b2afb41"
+  IID_IWMIExtension = LibC::GUID.new(0xadc1f06e_u32, 0x5c7e_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x74_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0x2a_u8, 0xfb_u8, 0x41_u8])
   struct IWMIExtension
     lpVtbl : IWMIExtensionVTbl*
   end
@@ -3606,8 +3606,8 @@ lib LibWin32
     initialize : Proc(IWbemTransport*, HRESULT)
   end
 
-  IWbemTransport_GUID = LibC::GUID.new("553fe584-2156-11d0-b6ae-00aa003240c7")
-  CLSID_IWbemTransport = "553fe584-2156-11d0-b6ae-00aa003240c7"
+  IWbemTransport_GUID = "553fe584-2156-11d0-b6ae-00aa003240c7"
+  IID_IWbemTransport = LibC::GUID.new(0x553fe584_u32, 0x2156_u16, 0x11d0_u16, StaticArray[0xb6_u8, 0xae_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
   struct IWbemTransport
     lpVtbl : IWbemTransportVTbl*
   end
@@ -3622,8 +3622,8 @@ lib LibWin32
     ntlm_login : Proc(IWbemLevel1Login*, LibC::LPWSTR, LibC::LPWSTR, Int32, IWbemContext, IWbemServices*, HRESULT)
   end
 
-  IWbemLevel1Login_GUID = LibC::GUID.new("f309ad18-d86a-11d0-a075-00c04fb68820")
-  CLSID_IWbemLevel1Login = "f309ad18-d86a-11d0-a075-00c04fb68820"
+  IWbemLevel1Login_GUID = "f309ad18-d86a-11d0-a075-00c04fb68820"
+  IID_IWbemLevel1Login = LibC::GUID.new(0xf309ad18_u32, 0xd86a_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x75_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
   struct IWbemLevel1Login
     lpVtbl : IWbemLevel1LoginVTbl*
   end
@@ -3635,8 +3635,8 @@ lib LibWin32
     connector_login : Proc(IWbemConnectorLogin*, LibC::LPWSTR, LibC::LPWSTR, Int32, IWbemContext, Guid*, Void**, HRESULT)
   end
 
-  IWbemConnectorLogin_GUID = LibC::GUID.new("d8ec9cb1-b135-4f10-8b1b-c7188bb0d186")
-  CLSID_IWbemConnectorLogin = "d8ec9cb1-b135-4f10-8b1b-c7188bb0d186"
+  IWbemConnectorLogin_GUID = "d8ec9cb1-b135-4f10-8b1b-c7188bb0d186"
+  IID_IWbemConnectorLogin = LibC::GUID.new(0xd8ec9cb1_u32, 0xb135_u16, 0x4f10_u16, StaticArray[0x8b_u8, 0x1b_u8, 0xc7_u8, 0x18_u8, 0x8b_u8, 0xb0_u8, 0xd1_u8, 0x86_u8])
   struct IWbemConnectorLogin
     lpVtbl : IWbemConnectorLoginVTbl*
   end
@@ -3648,8 +3648,8 @@ lib LibWin32
     resolve : Proc(IWbemAddressResolution*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt8**, HRESULT)
   end
 
-  IWbemAddressResolution_GUID = LibC::GUID.new("f7ce2e12-8c90-11d1-9e7b-00c04fc324a8")
-  CLSID_IWbemAddressResolution = "f7ce2e12-8c90-11d1-9e7b-00c04fc324a8"
+  IWbemAddressResolution_GUID = "f7ce2e12-8c90-11d1-9e7b-00c04fc324a8"
+  IID_IWbemAddressResolution = LibC::GUID.new(0xf7ce2e12_u32, 0x8c90_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
   struct IWbemAddressResolution
     lpVtbl : IWbemAddressResolutionVTbl*
   end
@@ -3661,8 +3661,8 @@ lib LibWin32
     connect_server : Proc(IWbemClientTransport*, UInt8*, UInt32, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, UInt8*, IWbemContext, IWbemServices*, HRESULT)
   end
 
-  IWbemClientTransport_GUID = LibC::GUID.new("f7ce2e11-8c90-11d1-9e7b-00c04fc324a8")
-  CLSID_IWbemClientTransport = "f7ce2e11-8c90-11d1-9e7b-00c04fc324a8"
+  IWbemClientTransport_GUID = "f7ce2e11-8c90-11d1-9e7b-00c04fc324a8"
+  IID_IWbemClientTransport = LibC::GUID.new(0xf7ce2e11_u32, 0x8c90_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
   struct IWbemClientTransport
     lpVtbl : IWbemClientTransportVTbl*
   end
@@ -3676,8 +3676,8 @@ lib LibWin32
     cancel : Proc(IWbemClientConnectionTransport*, Int32, IWbemObjectSink, HRESULT)
   end
 
-  IWbemClientConnectionTransport_GUID = LibC::GUID.new("a889c72a-fcc1-4a9e-af61-ed071333fb5b")
-  CLSID_IWbemClientConnectionTransport = "a889c72a-fcc1-4a9e-af61-ed071333fb5b"
+  IWbemClientConnectionTransport_GUID = "a889c72a-fcc1-4a9e-af61-ed071333fb5b"
+  IID_IWbemClientConnectionTransport = LibC::GUID.new(0xa889c72a_u32, 0xfcc1_u16, 0x4a9e_u16, StaticArray[0xaf_u8, 0x61_u8, 0xed_u8, 0x7_u8, 0x13_u8, 0x33_u8, 0xfb_u8, 0x5b_u8])
   struct IWbemClientConnectionTransport
     lpVtbl : IWbemClientConnectionTransportVTbl*
   end
@@ -3692,8 +3692,8 @@ lib LibWin32
     set_server_namespace : Proc(IWbemConstructClassObject*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IWbemConstructClassObject_GUID = LibC::GUID.new("9ef76194-70d5-11d1-ad90-00c04fd8fdff")
-  CLSID_IWbemConstructClassObject = "9ef76194-70d5-11d1-ad90-00c04fd8fdff"
+  IWbemConstructClassObject_GUID = "9ef76194-70d5-11d1-ad90-00c04fd8fdff"
+  IID_IWbemConstructClassObject = LibC::GUID.new(0x9ef76194_u32, 0x70d5_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
   struct IWbemConstructClassObject
     lpVtbl : IWbemConstructClassObjectVTbl*
   end

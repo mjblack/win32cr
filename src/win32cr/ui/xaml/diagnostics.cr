@@ -133,8 +133,8 @@ lib LibWin32
     on_visual_tree_change : Proc(IVisualTreeServiceCallback*, ParentChildRelation, VisualElement, VisualMutationType, HRESULT)
   end
 
-  IVisualTreeServiceCallback_GUID = LibC::GUID.new("aa7a8931-80e4-4fec-8f3b-553f87b4966e")
-  CLSID_IVisualTreeServiceCallback = "aa7a8931-80e4-4fec-8f3b-553f87b4966e"
+  IVisualTreeServiceCallback_GUID = "aa7a8931-80e4-4fec-8f3b-553f87b4966e"
+  IID_IVisualTreeServiceCallback = LibC::GUID.new(0xaa7a8931_u32, 0x80e4_u16, 0x4fec_u16, StaticArray[0x8f_u8, 0x3b_u8, 0x55_u8, 0x3f_u8, 0x87_u8, 0xb4_u8, 0x96_u8, 0x6e_u8])
   struct IVisualTreeServiceCallback
     lpVtbl : IVisualTreeServiceCallbackVTbl*
   end
@@ -147,8 +147,8 @@ lib LibWin32
     on_element_state_changed : Proc(IVisualTreeServiceCallback2*, UInt64, VisualElementState, LibC::LPWSTR, HRESULT)
   end
 
-  IVisualTreeServiceCallback2_GUID = LibC::GUID.new("bad9eb88-ae77-4397-b948-5fa2db0a19ea")
-  CLSID_IVisualTreeServiceCallback2 = "bad9eb88-ae77-4397-b948-5fa2db0a19ea"
+  IVisualTreeServiceCallback2_GUID = "bad9eb88-ae77-4397-b948-5fa2db0a19ea"
+  IID_IVisualTreeServiceCallback2 = LibC::GUID.new(0xbad9eb88_u32, 0xae77_u16, 0x4397_u16, StaticArray[0xb9_u8, 0x48_u8, 0x5f_u8, 0xa2_u8, 0xdb_u8, 0xa_u8, 0x19_u8, 0xea_u8])
   struct IVisualTreeServiceCallback2
     lpVtbl : IVisualTreeServiceCallback2VTbl*
   end
@@ -171,8 +171,8 @@ lib LibWin32
     clear_children : Proc(IVisualTreeService*, UInt64, HRESULT)
   end
 
-  IVisualTreeService_GUID = LibC::GUID.new("a593b11a-d17f-48bb-8f66-83910731c8a5")
-  CLSID_IVisualTreeService = "a593b11a-d17f-48bb-8f66-83910731c8a5"
+  IVisualTreeService_GUID = "a593b11a-d17f-48bb-8f66-83910731c8a5"
+  IID_IVisualTreeService = LibC::GUID.new(0xa593b11a_u32, 0xd17f_u16, 0x48bb_u16, StaticArray[0x8f_u8, 0x66_u8, 0x83_u8, 0x91_u8, 0x7_u8, 0x31_u8, 0xc8_u8, 0xa5_u8])
   struct IVisualTreeService
     lpVtbl : IVisualTreeServiceVTbl*
   end
@@ -191,8 +191,8 @@ lib LibWin32
     get_initialization_data : Proc(IXamlDiagnostics*, UInt8**, HRESULT)
   end
 
-  IXamlDiagnostics_GUID = LibC::GUID.new("18c9e2b6-3f43-4116-9f2b-ff935d7770d2")
-  CLSID_IXamlDiagnostics = "18c9e2b6-3f43-4116-9f2b-ff935d7770d2"
+  IXamlDiagnostics_GUID = "18c9e2b6-3f43-4116-9f2b-ff935d7770d2"
+  IID_IXamlDiagnostics = LibC::GUID.new(0x18c9e2b6_u32, 0x3f43_u16, 0x4116_u16, StaticArray[0x9f_u8, 0x2b_u8, 0xff_u8, 0x93_u8, 0x5d_u8, 0x77_u8, 0x70_u8, 0xd2_u8])
   struct IXamlDiagnostics
     lpVtbl : IXamlDiagnosticsVTbl*
   end
@@ -207,8 +207,8 @@ lib LibWin32
     get_source_bitmap_description : Proc(IBitmapData*, BitmapDescription*, HRESULT)
   end
 
-  IBitmapData_GUID = LibC::GUID.new("d1a34ef2-cad8-4635-a3d2-fcda8d3f3caf")
-  CLSID_IBitmapData = "d1a34ef2-cad8-4635-a3d2-fcda8d3f3caf"
+  IBitmapData_GUID = "d1a34ef2-cad8-4635-a3d2-fcda8d3f3caf"
+  IID_IBitmapData = LibC::GUID.new(0xd1a34ef2_u32, 0xcad8_u16, 0x4635_u16, StaticArray[0xa3_u8, 0xd2_u8, 0xfc_u8, 0xda_u8, 0x8d_u8, 0x3f_u8, 0x3c_u8, 0xaf_u8])
   struct IBitmapData
     lpVtbl : IBitmapDataVTbl*
   end
@@ -235,8 +235,8 @@ lib LibWin32
     render_target_bitmap : Proc(IVisualTreeService2*, UInt64, RenderTargetBitmapOptions, UInt32, UInt32, IBitmapData*, HRESULT)
   end
 
-  IVisualTreeService2_GUID = LibC::GUID.new("130f5136-ec43-4f61-89c7-9801a36d2e95")
-  CLSID_IVisualTreeService2 = "130f5136-ec43-4f61-89c7-9801a36d2e95"
+  IVisualTreeService2_GUID = "130f5136-ec43-4f61-89c7-9801a36d2e95"
+  IID_IVisualTreeService2 = LibC::GUID.new(0x130f5136_u32, 0xec43_u16, 0x4f61_u16, StaticArray[0x89_u8, 0xc7_u8, 0x98_u8, 0x1_u8, 0xa3_u8, 0x6d_u8, 0x2e_u8, 0x95_u8])
   struct IVisualTreeService2
     lpVtbl : IVisualTreeService2VTbl*
   end
@@ -267,8 +267,8 @@ lib LibWin32
     remove_dictionary_item : Proc(IVisualTreeService3*, UInt64, UInt64, HRESULT)
   end
 
-  IVisualTreeService3_GUID = LibC::GUID.new("0e79c6e0-85a0-4be8-b41a-655cf1fd19bd")
-  CLSID_IVisualTreeService3 = "0e79c6e0-85a0-4be8-b41a-655cf1fd19bd"
+  IVisualTreeService3_GUID = "0e79c6e0-85a0-4be8-b41a-655cf1fd19bd"
+  IID_IVisualTreeService3 = LibC::GUID.new(0xe79c6e0_u32, 0x85a0_u16, 0x4be8_u16, StaticArray[0xb4_u8, 0x1a_u8, 0x65_u8, 0x5c_u8, 0xf1_u8, 0xfd_u8, 0x19_u8, 0xbd_u8])
   struct IVisualTreeService3
     lpVtbl : IVisualTreeService3VTbl*
   end

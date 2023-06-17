@@ -128,8 +128,8 @@ lib LibWin32
     get_buffer_and_length : Proc(IMediaBuffer*, UInt8**, UInt32*, HRESULT)
   end
 
-  IMediaBuffer_GUID = LibC::GUID.new("59eff8b9-938c-4a26-82f2-95cb84cdc837")
-  CLSID_IMediaBuffer = "59eff8b9-938c-4a26-82f2-95cb84cdc837"
+  IMediaBuffer_GUID = "59eff8b9-938c-4a26-82f2-95cb84cdc837"
+  IID_IMediaBuffer = LibC::GUID.new(0x59eff8b9_u32, 0x938c_u16, 0x4a26_u16, StaticArray[0x82_u8, 0xf2_u8, 0x95_u8, 0xcb_u8, 0x84_u8, 0xcd_u8, 0xc8_u8, 0x37_u8])
   struct IMediaBuffer
     lpVtbl : IMediaBufferVTbl*
   end
@@ -161,8 +161,8 @@ lib LibWin32
     lock : Proc(IMediaObject*, Int32, HRESULT)
   end
 
-  IMediaObject_GUID = LibC::GUID.new("d8ad0f58-5494-4102-97c5-ec798e59bcf4")
-  CLSID_IMediaObject = "d8ad0f58-5494-4102-97c5-ec798e59bcf4"
+  IMediaObject_GUID = "d8ad0f58-5494-4102-97c5-ec798e59bcf4"
+  IID_IMediaObject = LibC::GUID.new(0xd8ad0f58_u32, 0x5494_u16, 0x4102_u16, StaticArray[0x97_u8, 0xc5_u8, 0xec_u8, 0x79_u8, 0x8e_u8, 0x59_u8, 0xbc_u8, 0xf4_u8])
   struct IMediaObject
     lpVtbl : IMediaObjectVTbl*
   end
@@ -177,8 +177,8 @@ lib LibWin32
     clone : Proc(IEnumDMO*, IEnumDMO*, HRESULT)
   end
 
-  IEnumDMO_GUID = LibC::GUID.new("2c3cd98a-2bfa-4a53-9c27-5249ba64ba0f")
-  CLSID_IEnumDMO = "2c3cd98a-2bfa-4a53-9c27-5249ba64ba0f"
+  IEnumDMO_GUID = "2c3cd98a-2bfa-4a53-9c27-5249ba64ba0f"
+  IID_IEnumDMO = LibC::GUID.new(0x2c3cd98a_u32, 0x2bfa_u16, 0x4a53_u16, StaticArray[0x9c_u8, 0x27_u8, 0x52_u8, 0x49_u8, 0xba_u8, 0x64_u8, 0xba_u8, 0xf_u8])
   struct IEnumDMO
     lpVtbl : IEnumDMOVTbl*
   end
@@ -192,8 +192,8 @@ lib LibWin32
     get_latency : Proc(IMediaObjectInPlace*, Int64*, HRESULT)
   end
 
-  IMediaObjectInPlace_GUID = LibC::GUID.new("651b9ad0-0fc7-4aa9-9538-d89931010741")
-  CLSID_IMediaObjectInPlace = "651b9ad0-0fc7-4aa9-9538-d89931010741"
+  IMediaObjectInPlace_GUID = "651b9ad0-0fc7-4aa9-9538-d89931010741"
+  IID_IMediaObjectInPlace = LibC::GUID.new(0x651b9ad0_u32, 0xfc7_u16, 0x4aa9_u16, StaticArray[0x95_u8, 0x38_u8, 0xd8_u8, 0x99_u8, 0x31_u8, 0x1_u8, 0x7_u8, 0x41_u8])
   struct IMediaObjectInPlace
     lpVtbl : IMediaObjectInPlaceVTbl*
   end
@@ -207,8 +207,8 @@ lib LibWin32
     get_status : Proc(IDMOQualityControl*, UInt32*, HRESULT)
   end
 
-  IDMOQualityControl_GUID = LibC::GUID.new("65abea96-cf36-453f-af8a-705e98f16260")
-  CLSID_IDMOQualityControl = "65abea96-cf36-453f-af8a-705e98f16260"
+  IDMOQualityControl_GUID = "65abea96-cf36-453f-af8a-705e98f16260"
+  IID_IDMOQualityControl = LibC::GUID.new(0x65abea96_u32, 0xcf36_u16, 0x453f_u16, StaticArray[0xaf_u8, 0x8a_u8, 0x70_u8, 0x5e_u8, 0x98_u8, 0xf1_u8, 0x62_u8, 0x60_u8])
   struct IDMOQualityControl
     lpVtbl : IDMOQualityControlVTbl*
   end
@@ -223,8 +223,8 @@ lib LibWin32
     get_current_sample_requirements : Proc(IDMOVideoOutputOptimizations*, UInt32, UInt32*, HRESULT)
   end
 
-  IDMOVideoOutputOptimizations_GUID = LibC::GUID.new("be8f4f4e-5b16-4d29-b350-7f6b5d9298ac")
-  CLSID_IDMOVideoOutputOptimizations = "be8f4f4e-5b16-4d29-b350-7f6b5d9298ac"
+  IDMOVideoOutputOptimizations_GUID = "be8f4f4e-5b16-4d29-b350-7f6b5d9298ac"
+  IID_IDMOVideoOutputOptimizations = LibC::GUID.new(0xbe8f4f4e_u32, 0x5b16_u16, 0x4d29_u16, StaticArray[0xb3_u8, 0x50_u8, 0x7f_u8, 0x6b_u8, 0x5d_u8, 0x92_u8, 0x98_u8, 0xac_u8])
   struct IDMOVideoOutputOptimizations
     lpVtbl : IDMOVideoOutputOptimizationsVTbl*
   end

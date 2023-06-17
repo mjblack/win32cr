@@ -19,7 +19,7 @@ lib LibWin32
   DEVPKEY_AudioEndpointPlugin_DataFlow = PROPERTYKEY.new(LibC::GUID.new(0x12d83bd7_u32, 0xcf12_u16, 0x46be_u16, StaticArray[0x85_u8, 0x40_u8, 0x81_u8, 0x27_u8, 0x10_u8, 0xd3_u8, 0x2_u8, 0x1c_u8]), 2_u32)
   DEVPKEY_AudioEndpointPlugin_PnPInterface = PROPERTYKEY.new(LibC::GUID.new(0x12d83bd7_u32, 0xcf12_u16, 0x46be_u16, StaticArray[0x85_u8, 0x40_u8, 0x81_u8, 0x27_u8, 0x10_u8, 0xd3_u8, 0x2_u8, 0x1c_u8]), 3_u32)
   DEVPKEY_AudioEndpointPlugin2_FactoryCLSID = PROPERTYKEY.new(LibC::GUID.new(0x12d83bd7_u32, 0xcf12_u16, 0x46be_u16, StaticArray[0x85_u8, 0x40_u8, 0x81_u8, 0x27_u8, 0x10_u8, 0xd3_u8, 0x2_u8, 0x1c_u8]), 4_u32)
-  DEVINTERFACE_AUDIOENDPOINTPLUGIN = LibC::GUID.new(0x9f2f7b66_u32, 0x65ac_u16, 0x4fa6_u16, StaticArray[0x8a_u8, 0xe4_u8, 0x12_u8, 0x3c_u8, 0x78_u8, 0xb8_u8, 0x93_u8, 0x13_u8])
+  CLSID_DEVINTERFACE_AUDIOENDPOINTPLUGIN = LibC::GUID.new(0x9f2f7b66_u32, 0x65ac_u16, 0x4fa6_u16, StaticArray[0x8a_u8, 0xe4_u8, 0x12_u8, 0x3c_u8, 0x78_u8, 0xb8_u8, 0x93_u8, 0x13_u8])
 
 
   enum EndpointConnectorType : Int32
@@ -45,8 +45,8 @@ lib LibWin32
     reset_to_default : Proc(IAudioEndpointFormatControl*, UInt32, HRESULT)
   end
 
-  IAudioEndpointFormatControl_GUID = LibC::GUID.new("784cfd40-9f89-456e-a1a6-873b006a664e")
-  CLSID_IAudioEndpointFormatControl = "784cfd40-9f89-456e-a1a6-873b006a664e"
+  IAudioEndpointFormatControl_GUID = "784cfd40-9f89-456e-a1a6-873b006a664e"
+  IID_IAudioEndpointFormatControl = LibC::GUID.new(0x784cfd40_u32, 0x9f89_u16, 0x456e_u16, StaticArray[0xa1_u8, 0xa6_u8, 0x87_u8, 0x3b_u8, 0x0_u8, 0x6a_u8, 0x66_u8, 0x4e_u8])
   struct IAudioEndpointFormatControl
     lpVtbl : IAudioEndpointFormatControlVTbl*
   end
@@ -60,8 +60,8 @@ lib LibWin32
     get_channel_volumes : Proc(IAudioEndpointOffloadStreamVolume*, UInt32, Float32*, HRESULT)
   end
 
-  IAudioEndpointOffloadStreamVolume_GUID = LibC::GUID.new("64f1dd49-71ca-4281-8672-3a9eddd1d0b6")
-  CLSID_IAudioEndpointOffloadStreamVolume = "64f1dd49-71ca-4281-8672-3a9eddd1d0b6"
+  IAudioEndpointOffloadStreamVolume_GUID = "64f1dd49-71ca-4281-8672-3a9eddd1d0b6"
+  IID_IAudioEndpointOffloadStreamVolume = LibC::GUID.new(0x64f1dd49_u32, 0x71ca_u16, 0x4281_u16, StaticArray[0x86_u8, 0x72_u8, 0x3a_u8, 0x9e_u8, 0xdd_u8, 0xd1_u8, 0xd0_u8, 0xb6_u8])
   struct IAudioEndpointOffloadStreamVolume
     lpVtbl : IAudioEndpointOffloadStreamVolumeVTbl*
   end
@@ -74,8 +74,8 @@ lib LibWin32
     get_mute : Proc(IAudioEndpointOffloadStreamMute*, UInt8*, HRESULT)
   end
 
-  IAudioEndpointOffloadStreamMute_GUID = LibC::GUID.new("dfe21355-5ec2-40e0-8d6b-710ac3c00249")
-  CLSID_IAudioEndpointOffloadStreamMute = "dfe21355-5ec2-40e0-8d6b-710ac3c00249"
+  IAudioEndpointOffloadStreamMute_GUID = "dfe21355-5ec2-40e0-8d6b-710ac3c00249"
+  IID_IAudioEndpointOffloadStreamMute = LibC::GUID.new(0xdfe21355_u32, 0x5ec2_u16, 0x40e0_u16, StaticArray[0x8d_u8, 0x6b_u8, 0x71_u8, 0xa_u8, 0xc3_u8, 0xc0_u8, 0x2_u8, 0x49_u8])
   struct IAudioEndpointOffloadStreamMute
     lpVtbl : IAudioEndpointOffloadStreamMuteVTbl*
   end
@@ -88,8 +88,8 @@ lib LibWin32
     get_metering_data : Proc(IAudioEndpointOffloadStreamMeter*, UInt32, Float32*, HRESULT)
   end
 
-  IAudioEndpointOffloadStreamMeter_GUID = LibC::GUID.new("e1546dce-9dd1-418b-9ab2-348ced161c86")
-  CLSID_IAudioEndpointOffloadStreamMeter = "e1546dce-9dd1-418b-9ab2-348ced161c86"
+  IAudioEndpointOffloadStreamMeter_GUID = "e1546dce-9dd1-418b-9ab2-348ced161c86"
+  IID_IAudioEndpointOffloadStreamMeter = LibC::GUID.new(0xe1546dce_u32, 0x9dd1_u16, 0x418b_u16, StaticArray[0x9a_u8, 0xb2_u8, 0x34_u8, 0x8c_u8, 0xed_u8, 0x16_u8, 0x1c_u8, 0x86_u8])
   struct IAudioEndpointOffloadStreamMeter
     lpVtbl : IAudioEndpointOffloadStreamMeterVTbl*
   end
@@ -102,8 +102,8 @@ lib LibWin32
     release_output_data_pointer_for_last_buffer : Proc(IAudioEndpointLastBufferControl*, APO_CONNECTION_PROPERTY*, Void)
   end
 
-  IAudioEndpointLastBufferControl_GUID = LibC::GUID.new("f8520dd3-8f9d-4437-9861-62f584c33dd6")
-  CLSID_IAudioEndpointLastBufferControl = "f8520dd3-8f9d-4437-9861-62f584c33dd6"
+  IAudioEndpointLastBufferControl_GUID = "f8520dd3-8f9d-4437-9861-62f584c33dd6"
+  IID_IAudioEndpointLastBufferControl = LibC::GUID.new(0xf8520dd3_u32, 0x8f9d_u16, 0x4437_u16, StaticArray[0x98_u8, 0x61_u8, 0x62_u8, 0xf5_u8, 0x84_u8, 0xc3_u8, 0x3d_u8, 0xd6_u8])
   struct IAudioEndpointLastBufferControl
     lpVtbl : IAudioEndpointLastBufferControlVTbl*
   end
@@ -116,8 +116,8 @@ lib LibWin32
     get_local_effects_state : Proc(IAudioLfxControl*, LibC::BOOL*, HRESULT)
   end
 
-  IAudioLfxControl_GUID = LibC::GUID.new("076a6922-d802-4f83-baf6-409d9ca11bfe")
-  CLSID_IAudioLfxControl = "076a6922-d802-4f83-baf6-409d9ca11bfe"
+  IAudioLfxControl_GUID = "076a6922-d802-4f83-baf6-409d9ca11bfe"
+  IID_IAudioLfxControl = LibC::GUID.new(0x76a6922_u32, 0xd802_u16, 0x4f83_u16, StaticArray[0xba_u8, 0xf6_u8, 0x40_u8, 0x9d_u8, 0x9c_u8, 0xa1_u8, 0x1b_u8, 0xfe_u8])
   struct IAudioLfxControl
     lpVtbl : IAudioLfxControlVTbl*
   end
@@ -133,8 +133,8 @@ lib LibWin32
     get_gfx_state : Proc(IHardwareAudioEngineBase*, IMMDevice, LibC::BOOL*, HRESULT)
   end
 
-  IHardwareAudioEngineBase_GUID = LibC::GUID.new("eddce3e4-f3c1-453a-b461-223563cbd886")
-  CLSID_IHardwareAudioEngineBase = "eddce3e4-f3c1-453a-b461-223563cbd886"
+  IHardwareAudioEngineBase_GUID = "eddce3e4-f3c1-453a-b461-223563cbd886"
+  IID_IHardwareAudioEngineBase = LibC::GUID.new(0xeddce3e4_u32, 0xf3c1_u16, 0x453a_u16, StaticArray[0xb4_u8, 0x61_u8, 0x22_u8, 0x35_u8, 0x63_u8, 0xcb_u8, 0xd8_u8, 0x86_u8])
   struct IHardwareAudioEngineBase
     lpVtbl : IHardwareAudioEngineBaseVTbl*
   end
@@ -146,8 +146,8 @@ lib LibWin32
     on_notify : Proc(IAudioEndpointVolumeCallback*, AUDIO_VOLUME_NOTIFICATION_DATA*, HRESULT)
   end
 
-  IAudioEndpointVolumeCallback_GUID = LibC::GUID.new("657804fa-d6ad-4496-8a60-352752af4f89")
-  CLSID_IAudioEndpointVolumeCallback = "657804fa-d6ad-4496-8a60-352752af4f89"
+  IAudioEndpointVolumeCallback_GUID = "657804fa-d6ad-4496-8a60-352752af4f89"
+  IID_IAudioEndpointVolumeCallback = LibC::GUID.new(0x657804fa_u32, 0xd6ad_u16, 0x4496_u16, StaticArray[0x8a_u8, 0x60_u8, 0x35_u8, 0x27_u8, 0x52_u8, 0xaf_u8, 0x4f_u8, 0x89_u8])
   struct IAudioEndpointVolumeCallback
     lpVtbl : IAudioEndpointVolumeCallbackVTbl*
   end
@@ -176,8 +176,8 @@ lib LibWin32
     get_volume_range : Proc(IAudioEndpointVolume*, Float32*, Float32*, Float32*, HRESULT)
   end
 
-  IAudioEndpointVolume_GUID = LibC::GUID.new("5cdf2c82-841e-4546-9722-0cf74078229a")
-  CLSID_IAudioEndpointVolume = "5cdf2c82-841e-4546-9722-0cf74078229a"
+  IAudioEndpointVolume_GUID = "5cdf2c82-841e-4546-9722-0cf74078229a"
+  IID_IAudioEndpointVolume = LibC::GUID.new(0x5cdf2c82_u32, 0x841e_u16, 0x4546_u16, StaticArray[0x97_u8, 0x22_u8, 0xc_u8, 0xf7_u8, 0x40_u8, 0x78_u8, 0x22_u8, 0x9a_u8])
   struct IAudioEndpointVolume
     lpVtbl : IAudioEndpointVolumeVTbl*
   end
@@ -207,8 +207,8 @@ lib LibWin32
     get_volume_range_channel : Proc(IAudioEndpointVolumeEx*, UInt32, Float32*, Float32*, Float32*, HRESULT)
   end
 
-  IAudioEndpointVolumeEx_GUID = LibC::GUID.new("66e11784-f695-4f28-a505-a7080081a78f")
-  CLSID_IAudioEndpointVolumeEx = "66e11784-f695-4f28-a505-a7080081a78f"
+  IAudioEndpointVolumeEx_GUID = "66e11784-f695-4f28-a505-a7080081a78f"
+  IID_IAudioEndpointVolumeEx = LibC::GUID.new(0x66e11784_u32, 0xf695_u16, 0x4f28_u16, StaticArray[0xa5_u8, 0x5_u8, 0xa7_u8, 0x8_u8, 0x0_u8, 0x81_u8, 0xa7_u8, 0x8f_u8])
   struct IAudioEndpointVolumeEx
     lpVtbl : IAudioEndpointVolumeExVTbl*
   end
@@ -223,8 +223,8 @@ lib LibWin32
     query_hardware_support : Proc(IAudioMeterInformation*, UInt32*, HRESULT)
   end
 
-  IAudioMeterInformation_GUID = LibC::GUID.new("c02216f6-8c67-4b5b-9d00-d008e73e0064")
-  CLSID_IAudioMeterInformation = "c02216f6-8c67-4b5b-9d00-d008e73e0064"
+  IAudioMeterInformation_GUID = "c02216f6-8c67-4b5b-9d00-d008e73e0064"
+  IID_IAudioMeterInformation = LibC::GUID.new(0xc02216f6_u32, 0x8c67_u16, 0x4b5b_u16, StaticArray[0x9d_u8, 0x0_u8, 0xd0_u8, 0x8_u8, 0xe7_u8, 0x3e_u8, 0x0_u8, 0x64_u8])
   struct IAudioMeterInformation
     lpVtbl : IAudioMeterInformationVTbl*
   end

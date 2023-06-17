@@ -156,9 +156,9 @@ lib LibWin32
   AUTHZ_WPD_CATEGORY_FLAG = 16_u32
   AUTHZ_FLAG_ALLOW_MULTIPLE_SOURCE_INSTANCES = 1_u32
   OLESCRIPT_E_SYNTAX = -2147352319_i32
-  AzAuthorizationStore = LibC::GUID.new(0xb2bcff59_u32, 0xa757_u16, 0x4b0b_u16, StaticArray[0xa1_u8, 0xbc_u8, 0xea_u8, 0x69_u8, 0x98_u8, 0x1d_u8, 0xa6_u8, 0x9e_u8])
-  AzBizRuleContext = LibC::GUID.new(0x5c2dc96f_u32, 0x8d51_u16, 0x434b_u16, StaticArray[0xb3_u8, 0x3c_u8, 0x37_u8, 0x9b_u8, 0xcc_u8, 0xae_u8, 0x77_u8, 0xc3_u8])
-  AzPrincipalLocator = LibC::GUID.new(0x483afb5d_u32, 0x70df_u16, 0x4e16_u16, StaticArray[0xab_u8, 0xdc_u8, 0xa1_u8, 0xde_u8, 0x4d_u8, 0x1_u8, 0x5a_u8, 0x3e_u8])
+  CLSID_AzAuthorizationStore = LibC::GUID.new(0xb2bcff59_u32, 0xa757_u16, 0x4b0b_u16, StaticArray[0xa1_u8, 0xbc_u8, 0xea_u8, 0x69_u8, 0x98_u8, 0x1d_u8, 0xa6_u8, 0x9e_u8])
+  CLSID_AzBizRuleContext = LibC::GUID.new(0x5c2dc96f_u32, 0x8d51_u16, 0x434b_u16, StaticArray[0xb3_u8, 0x3c_u8, 0x37_u8, 0x9b_u8, 0xcc_u8, 0xae_u8, 0x77_u8, 0xc3_u8])
+  CLSID_AzPrincipalLocator = LibC::GUID.new(0x483afb5d_u32, 0x70df_u16, 0x4e16_u16, StaticArray[0xab_u8, 0xdc_u8, 0xa1_u8, 0xde_u8, 0x4d_u8, 0x1_u8, 0x5a_u8, 0x3e_u8])
 
   alias PFN_AUTHZ_DYNAMIC_ACCESS_CHECK = Proc(AUTHZ_CLIENT_CONTEXT_HANDLE, ACE_HEADER*, Void*, LibC::BOOL*, LibC::BOOL)
   alias PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS = Proc(AUTHZ_CLIENT_CONTEXT_HANDLE, Void*, SID_AND_ATTRIBUTES**, UInt32*, SID_AND_ATTRIBUTES**, UInt32*, LibC::BOOL)
@@ -770,8 +770,8 @@ lib LibWin32
     close_application : Proc(IAzAuthorizationStore*, UInt8*, Int32, HRESULT)
   end
 
-  IAzAuthorizationStore_GUID = LibC::GUID.new("edbd9ca9-9b82-4f6a-9e8b-98301e450f14")
-  CLSID_IAzAuthorizationStore = "edbd9ca9-9b82-4f6a-9e8b-98301e450f14"
+  IAzAuthorizationStore_GUID = "edbd9ca9-9b82-4f6a-9e8b-98301e450f14"
+  IID_IAzAuthorizationStore = LibC::GUID.new(0xedbd9ca9_u32, 0x9b82_u16, 0x4f6a_u16, StaticArray[0x9e_u8, 0x8b_u8, 0x98_u8, 0x30_u8, 0x1e_u8, 0x45_u8, 0xf_u8, 0x14_u8])
   struct IAzAuthorizationStore
     lpVtbl : IAzAuthorizationStoreVTbl*
   end
@@ -839,8 +839,8 @@ lib LibWin32
     create_application2 : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, IAzApplication2*, HRESULT)
   end
 
-  IAzAuthorizationStore2_GUID = LibC::GUID.new("b11e5584-d577-4273-b6c5-0973e0f8e80d")
-  CLSID_IAzAuthorizationStore2 = "b11e5584-d577-4273-b6c5-0973e0f8e80d"
+  IAzAuthorizationStore2_GUID = "b11e5584-d577-4273-b6c5-0973e0f8e80d"
+  IID_IAzAuthorizationStore2 = LibC::GUID.new(0xb11e5584_u32, 0xd577_u16, 0x4273_u16, StaticArray[0xb6_u8, 0xc5_u8, 0x9_u8, 0x73_u8, 0xe0_u8, 0xf8_u8, 0xe8_u8, 0xd_u8])
   struct IAzAuthorizationStore2
     lpVtbl : IAzAuthorizationStore2VTbl*
   end
@@ -913,8 +913,8 @@ lib LibWin32
     get_schema_version : Proc(IAzAuthorizationStore3*, Int32*, Int32*, HRESULT)
   end
 
-  IAzAuthorizationStore3_GUID = LibC::GUID.new("abc08425-0c86-4fa0-9be3-7189956c926e")
-  CLSID_IAzAuthorizationStore3 = "abc08425-0c86-4fa0-9be3-7189956c926e"
+  IAzAuthorizationStore3_GUID = "abc08425-0c86-4fa0-9be3-7189956c926e"
+  IID_IAzAuthorizationStore3 = LibC::GUID.new(0xabc08425_u32, 0xc86_u16, 0x4fa0_u16, StaticArray[0x9b_u8, 0xe3_u8, 0x71_u8, 0x89_u8, 0x95_u8, 0x6c_u8, 0x92_u8, 0x6e_u8])
   struct IAzAuthorizationStore3
     lpVtbl : IAzAuthorizationStore3VTbl*
   end
@@ -990,8 +990,8 @@ lib LibWin32
     delete_delegated_policy_user_name : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
   end
 
-  IAzApplication_GUID = LibC::GUID.new("987bc7c7-b813-4d27-bede-6ba5ae867e95")
-  CLSID_IAzApplication = "987bc7c7-b813-4d27-bede-6ba5ae867e95"
+  IAzApplication_GUID = "987bc7c7-b813-4d27-bede-6ba5ae867e95"
+  IID_IAzApplication = LibC::GUID.new(0x987bc7c7_u32, 0xb813_u16, 0x4d27_u16, StaticArray[0xbe_u8, 0xde_u8, 0x6b_u8, 0xa5_u8, 0xae_u8, 0x86_u8, 0x7e_u8, 0x95_u8])
   struct IAzApplication
     lpVtbl : IAzApplicationVTbl*
   end
@@ -1069,8 +1069,8 @@ lib LibWin32
     initialize_client_context2 : Proc(IAzApplication2*, UInt8*, VARIANT, IAzClientContext2*, HRESULT)
   end
 
-  IAzApplication2_GUID = LibC::GUID.new("086a68af-a249-437c-b18d-d4d86d6a9660")
-  CLSID_IAzApplication2 = "086a68af-a249-437c-b18d-d4d86d6a9660"
+  IAzApplication2_GUID = "086a68af-a249-437c-b18d-d4d86d6a9660"
+  IID_IAzApplication2 = LibC::GUID.new(0x86a68af_u32, 0xa249_u16, 0x437c_u16, StaticArray[0xb1_u8, 0x8d_u8, 0xd4_u8, 0xd8_u8, 0x6d_u8, 0x6a_u8, 0x96_u8, 0x60_u8])
   struct IAzApplication2
     lpVtbl : IAzApplication2VTbl*
   end
@@ -1088,8 +1088,8 @@ lib LibWin32
     get__new_enum : Proc(IAzApplications*, IUnknown*, HRESULT)
   end
 
-  IAzApplications_GUID = LibC::GUID.new("929b11a9-95c5-4a84-a29a-20ad42c2f16c")
-  CLSID_IAzApplications = "929b11a9-95c5-4a84-a29a-20ad42c2f16c"
+  IAzApplications_GUID = "929b11a9-95c5-4a84-a29a-20ad42c2f16c"
+  IID_IAzApplications = LibC::GUID.new(0x929b11a9_u32, 0x95c5_u16, 0x4a84_u16, StaticArray[0xa2_u8, 0x9a_u8, 0x20_u8, 0xad_u8, 0x42_u8, 0xc2_u8, 0xf1_u8, 0x6c_u8])
   struct IAzApplications
     lpVtbl : IAzApplicationsVTbl*
   end
@@ -1116,8 +1116,8 @@ lib LibWin32
     submit : Proc(IAzOperation*, Int32, VARIANT, HRESULT)
   end
 
-  IAzOperation_GUID = LibC::GUID.new("5e56b24f-ea01-4d61-be44-c49b5e4eaf74")
-  CLSID_IAzOperation = "5e56b24f-ea01-4d61-be44-c49b5e4eaf74"
+  IAzOperation_GUID = "5e56b24f-ea01-4d61-be44-c49b5e4eaf74"
+  IID_IAzOperation = LibC::GUID.new(0x5e56b24f_u32, 0xea01_u16, 0x4d61_u16, StaticArray[0xbe_u8, 0x44_u8, 0xc4_u8, 0x9b_u8, 0x5e_u8, 0x4e_u8, 0xaf_u8, 0x74_u8])
   struct IAzOperation
     lpVtbl : IAzOperationVTbl*
   end
@@ -1135,8 +1135,8 @@ lib LibWin32
     get__new_enum : Proc(IAzOperations*, IUnknown*, HRESULT)
   end
 
-  IAzOperations_GUID = LibC::GUID.new("90ef9c07-9706-49d9-af80-0438a5f3ec35")
-  CLSID_IAzOperations = "90ef9c07-9706-49d9-af80-0438a5f3ec35"
+  IAzOperations_GUID = "90ef9c07-9706-49d9-af80-0438a5f3ec35"
+  IID_IAzOperations = LibC::GUID.new(0x90ef9c07_u32, 0x9706_u16, 0x49d9_u16, StaticArray[0xaf_u8, 0x80_u8, 0x4_u8, 0x38_u8, 0xa5_u8, 0xf3_u8, 0xec_u8, 0x35_u8])
   struct IAzOperations
     lpVtbl : IAzOperationsVTbl*
   end
@@ -1177,8 +1177,8 @@ lib LibWin32
     submit : Proc(IAzTask*, Int32, VARIANT, HRESULT)
   end
 
-  IAzTask_GUID = LibC::GUID.new("cb94e592-2e0e-4a6c-a336-b89a6dc1e388")
-  CLSID_IAzTask = "cb94e592-2e0e-4a6c-a336-b89a6dc1e388"
+  IAzTask_GUID = "cb94e592-2e0e-4a6c-a336-b89a6dc1e388"
+  IID_IAzTask = LibC::GUID.new(0xcb94e592_u32, 0x2e0e_u16, 0x4a6c_u16, StaticArray[0xa3_u8, 0x36_u8, 0xb8_u8, 0x9a_u8, 0x6d_u8, 0xc1_u8, 0xe3_u8, 0x88_u8])
   struct IAzTask
     lpVtbl : IAzTaskVTbl*
   end
@@ -1196,8 +1196,8 @@ lib LibWin32
     get__new_enum : Proc(IAzTasks*, IUnknown*, HRESULT)
   end
 
-  IAzTasks_GUID = LibC::GUID.new("b338ccab-4c85-4388-8c0a-c58592bad398")
-  CLSID_IAzTasks = "b338ccab-4c85-4388-8c0a-c58592bad398"
+  IAzTasks_GUID = "b338ccab-4c85-4388-8c0a-c58592bad398"
+  IID_IAzTasks = LibC::GUID.new(0xb338ccab_u32, 0x4c85_u16, 0x4388_u16, StaticArray[0x8c_u8, 0xa_u8, 0xc5_u8, 0x85_u8, 0x92_u8, 0xba_u8, 0xd3_u8, 0x98_u8])
   struct IAzTasks
     lpVtbl : IAzTasksVTbl*
   end
@@ -1250,8 +1250,8 @@ lib LibWin32
     delete_policy_reader_name : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
   end
 
-  IAzScope_GUID = LibC::GUID.new("00e52487-e08d-4514-b62e-877d5645f5ab")
-  CLSID_IAzScope = "00e52487-e08d-4514-b62e-877d5645f5ab"
+  IAzScope_GUID = "00e52487-e08d-4514-b62e-877d5645f5ab"
+  IID_IAzScope = LibC::GUID.new(0xe52487_u32, 0xe08d_u16, 0x4514_u16, StaticArray[0xb6_u8, 0x2e_u8, 0x87_u8, 0x7d_u8, 0x56_u8, 0x45_u8, 0xf5_u8, 0xab_u8])
   struct IAzScope
     lpVtbl : IAzScopeVTbl*
   end
@@ -1269,8 +1269,8 @@ lib LibWin32
     get__new_enum : Proc(IAzScopes*, IUnknown*, HRESULT)
   end
 
-  IAzScopes_GUID = LibC::GUID.new("78e14853-9f5e-406d-9b91-6bdba6973510")
-  CLSID_IAzScopes = "78e14853-9f5e-406d-9b91-6bdba6973510"
+  IAzScopes_GUID = "78e14853-9f5e-406d-9b91-6bdba6973510"
+  IID_IAzScopes = LibC::GUID.new(0x78e14853_u32, 0x9f5e_u16, 0x406d_u16, StaticArray[0x9b_u8, 0x91_u8, 0x6b_u8, 0xdb_u8, 0xa6_u8, 0x97_u8, 0x35_u8, 0x10_u8])
   struct IAzScopes
     lpVtbl : IAzScopesVTbl*
   end
@@ -1317,8 +1317,8 @@ lib LibWin32
     get_non_members_name : Proc(IAzApplicationGroup*, VARIANT*, HRESULT)
   end
 
-  IAzApplicationGroup_GUID = LibC::GUID.new("f1b744cd-58a6-4e06-9fbf-36f6d779e21e")
-  CLSID_IAzApplicationGroup = "f1b744cd-58a6-4e06-9fbf-36f6d779e21e"
+  IAzApplicationGroup_GUID = "f1b744cd-58a6-4e06-9fbf-36f6d779e21e"
+  IID_IAzApplicationGroup = LibC::GUID.new(0xf1b744cd_u32, 0x58a6_u16, 0x4e06_u16, StaticArray[0x9f_u8, 0xbf_u8, 0x36_u8, 0xf6_u8, 0xd7_u8, 0x79_u8, 0xe2_u8, 0x1e_u8])
   struct IAzApplicationGroup
     lpVtbl : IAzApplicationGroupVTbl*
   end
@@ -1336,8 +1336,8 @@ lib LibWin32
     get__new_enum : Proc(IAzApplicationGroups*, IUnknown*, HRESULT)
   end
 
-  IAzApplicationGroups_GUID = LibC::GUID.new("4ce66ad5-9f3c-469d-a911-b99887a7e685")
-  CLSID_IAzApplicationGroups = "4ce66ad5-9f3c-469d-a911-b99887a7e685"
+  IAzApplicationGroups_GUID = "4ce66ad5-9f3c-469d-a911-b99887a7e685"
+  IID_IAzApplicationGroups = LibC::GUID.new(0x4ce66ad5_u32, 0x9f3c_u16, 0x469d_u16, StaticArray[0xa9_u8, 0x11_u8, 0xb9_u8, 0x98_u8, 0x87_u8, 0xa7_u8, 0xe6_u8, 0x85_u8])
   struct IAzApplicationGroups
     lpVtbl : IAzApplicationGroupsVTbl*
   end
@@ -1379,8 +1379,8 @@ lib LibWin32
     get_members_name : Proc(IAzRole*, VARIANT*, HRESULT)
   end
 
-  IAzRole_GUID = LibC::GUID.new("859e0d8d-62d7-41d8-a034-c0cd5d43fdfa")
-  CLSID_IAzRole = "859e0d8d-62d7-41d8-a034-c0cd5d43fdfa"
+  IAzRole_GUID = "859e0d8d-62d7-41d8-a034-c0cd5d43fdfa"
+  IID_IAzRole = LibC::GUID.new(0x859e0d8d_u32, 0x62d7_u16, 0x41d8_u16, StaticArray[0xa0_u8, 0x34_u8, 0xc0_u8, 0xcd_u8, 0x5d_u8, 0x43_u8, 0xfd_u8, 0xfa_u8])
   struct IAzRole
     lpVtbl : IAzRoleVTbl*
   end
@@ -1398,8 +1398,8 @@ lib LibWin32
     get__new_enum : Proc(IAzRoles*, IUnknown*, HRESULT)
   end
 
-  IAzRoles_GUID = LibC::GUID.new("95e0f119-13b4-4dae-b65f-2f7d60d822e4")
-  CLSID_IAzRoles = "95e0f119-13b4-4dae-b65f-2f7d60d822e4"
+  IAzRoles_GUID = "95e0f119-13b4-4dae-b65f-2f7d60d822e4"
+  IID_IAzRoles = LibC::GUID.new(0x95e0f119_u32, 0x13b4_u16, 0x4dae_u16, StaticArray[0xb6_u8, 0x5f_u8, 0x2f_u8, 0x7d_u8, 0x60_u8, 0xd8_u8, 0x22_u8, 0xe4_u8])
   struct IAzRoles
     lpVtbl : IAzRolesVTbl*
   end
@@ -1427,8 +1427,8 @@ lib LibWin32
     put_role_for_access_check : Proc(IAzClientContext*, UInt8*, HRESULT)
   end
 
-  IAzClientContext_GUID = LibC::GUID.new("eff1f00b-488a-466d-afd9-a401c5f9eef5")
-  CLSID_IAzClientContext = "eff1f00b-488a-466d-afd9-a401c5f9eef5"
+  IAzClientContext_GUID = "eff1f00b-488a-466d-afd9-a401c5f9eef5"
+  IID_IAzClientContext = LibC::GUID.new(0xeff1f00b_u32, 0x488a_u16, 0x466d_u16, StaticArray[0xaf_u8, 0xd9_u8, 0xa4_u8, 0x1_u8, 0xc5_u8, 0xf9_u8, 0xee_u8, 0xf5_u8])
   struct IAzClientContext
     lpVtbl : IAzClientContextVTbl*
   end
@@ -1462,8 +1462,8 @@ lib LibWin32
     get_ldap_query_dn : Proc(IAzClientContext2*, UInt8**, HRESULT)
   end
 
-  IAzClientContext2_GUID = LibC::GUID.new("2b0c92b8-208a-488a-8f81-e4edb22111cd")
-  CLSID_IAzClientContext2 = "2b0c92b8-208a-488a-8f81-e4edb22111cd"
+  IAzClientContext2_GUID = "2b0c92b8-208a-488a-8f81-e4edb22111cd"
+  IID_IAzClientContext2 = LibC::GUID.new(0x2b0c92b8_u32, 0x208a_u16, 0x488a_u16, StaticArray[0x8f_u8, 0x81_u8, 0xe4_u8, 0xed_u8, 0xb2_u8, 0x21_u8, 0x11_u8, 0xcd_u8])
   struct IAzClientContext2
     lpVtbl : IAzClientContext2VTbl*
   end
@@ -1482,8 +1482,8 @@ lib LibWin32
     get_parameter : Proc(IAzBizRuleContext*, UInt8*, VARIANT*, HRESULT)
   end
 
-  IAzBizRuleContext_GUID = LibC::GUID.new("e192f17d-d59f-455e-a152-940316cd77b2")
-  CLSID_IAzBizRuleContext = "e192f17d-d59f-455e-a152-940316cd77b2"
+  IAzBizRuleContext_GUID = "e192f17d-d59f-455e-a152-940316cd77b2"
+  IID_IAzBizRuleContext = LibC::GUID.new(0xe192f17d_u32, 0xd59f_u16, 0x455e_u16, StaticArray[0xa1_u8, 0x52_u8, 0x94_u8, 0x3_u8, 0x16_u8, 0xcd_u8, 0x77_u8, 0xb2_u8])
   struct IAzBizRuleContext
     lpVtbl : IAzBizRuleContextVTbl*
   end
@@ -1504,8 +1504,8 @@ lib LibWin32
     get_count : Proc(IAzBizRuleParameters*, UInt32*, HRESULT)
   end
 
-  IAzBizRuleParameters_GUID = LibC::GUID.new("fc17685f-e25d-4dcd-bae1-276ec9533cb5")
-  CLSID_IAzBizRuleParameters = "fc17685f-e25d-4dcd-bae1-276ec9533cb5"
+  IAzBizRuleParameters_GUID = "fc17685f-e25d-4dcd-bae1-276ec9533cb5"
+  IID_IAzBizRuleParameters = LibC::GUID.new(0xfc17685f_u32, 0xe25d_u16, 0x4dcd_u16, StaticArray[0xba_u8, 0xe1_u8, 0x27_u8, 0x6e_u8, 0xc9_u8, 0x53_u8, 0x3c_u8, 0xb5_u8])
   struct IAzBizRuleParameters
     lpVtbl : IAzBizRuleParametersVTbl*
   end
@@ -1526,8 +1526,8 @@ lib LibWin32
     get_count : Proc(IAzBizRuleInterfaces*, UInt32*, HRESULT)
   end
 
-  IAzBizRuleInterfaces_GUID = LibC::GUID.new("e94128c7-e9da-44cc-b0bd-53036f3aab3d")
-  CLSID_IAzBizRuleInterfaces = "e94128c7-e9da-44cc-b0bd-53036f3aab3d"
+  IAzBizRuleInterfaces_GUID = "e94128c7-e9da-44cc-b0bd-53036f3aab3d"
+  IID_IAzBizRuleInterfaces = LibC::GUID.new(0xe94128c7_u32, 0xe9da_u16, 0x44cc_u16, StaticArray[0xb0_u8, 0xbd_u8, 0x53_u8, 0x3_u8, 0x6f_u8, 0x3a_u8, 0xab_u8, 0x3d_u8])
   struct IAzBizRuleInterfaces
     lpVtbl : IAzBizRuleInterfacesVTbl*
   end
@@ -1569,8 +1569,8 @@ lib LibWin32
     get_sids : Proc(IAzClientContext3*, VARIANT*, HRESULT)
   end
 
-  IAzClientContext3_GUID = LibC::GUID.new("11894fde-1deb-4b4b-8907-6d1cda1f5d4f")
-  CLSID_IAzClientContext3 = "11894fde-1deb-4b4b-8907-6d1cda1f5d4f"
+  IAzClientContext3_GUID = "11894fde-1deb-4b4b-8907-6d1cda1f5d4f"
+  IID_IAzClientContext3 = LibC::GUID.new(0x11894fde_u32, 0x1deb_u16, 0x4b4b_u16, StaticArray[0x89_u8, 0x7_u8, 0x6d_u8, 0x1c_u8, 0xda_u8, 0x1f_u8, 0x5d_u8, 0x4f_u8])
   struct IAzClientContext3
     lpVtbl : IAzClientContext3VTbl*
   end
@@ -1631,8 +1631,8 @@ lib LibWin32
     delete_role_assignment : Proc(IAzScope2*, UInt8*, HRESULT)
   end
 
-  IAzScope2_GUID = LibC::GUID.new("ee9fe8c9-c9f3-40e2-aa12-d1d8599727fd")
-  CLSID_IAzScope2 = "ee9fe8c9-c9f3-40e2-aa12-d1d8599727fd"
+  IAzScope2_GUID = "ee9fe8c9-c9f3-40e2-aa12-d1d8599727fd"
+  IID_IAzScope2 = LibC::GUID.new(0xee9fe8c9_u32, 0xc9f3_u16, 0x40e2_u16, StaticArray[0xaa_u8, 0x12_u8, 0xd1_u8, 0xd8_u8, 0x59_u8, 0x97_u8, 0x27_u8, 0xfd_u8])
   struct IAzScope2
     lpVtbl : IAzScope2VTbl*
   end
@@ -1724,8 +1724,8 @@ lib LibWin32
     put_biz_rules_enabled : Proc(IAzApplication3*, Int16, HRESULT)
   end
 
-  IAzApplication3_GUID = LibC::GUID.new("181c845e-7196-4a7d-ac2e-020c0bb7a303")
-  CLSID_IAzApplication3 = "181c845e-7196-4a7d-ac2e-020c0bb7a303"
+  IAzApplication3_GUID = "181c845e-7196-4a7d-ac2e-020c0bb7a303"
+  IID_IAzApplication3 = LibC::GUID.new(0x181c845e_u32, 0x7196_u16, 0x4a7d_u16, StaticArray[0xac_u8, 0x2e_u8, 0x2_u8, 0xc_u8, 0xb_u8, 0xb7_u8, 0xa3_u8, 0x3_u8])
   struct IAzApplication3
     lpVtbl : IAzApplication3VTbl*
   end
@@ -1753,8 +1753,8 @@ lib LibWin32
     role_assignments : Proc(IAzOperation2*, UInt8*, Int16, IAzRoleAssignments*, HRESULT)
   end
 
-  IAzOperation2_GUID = LibC::GUID.new("1f5ea01f-44a2-4184-9c48-a75b4dcc8ccc")
-  CLSID_IAzOperation2 = "1f5ea01f-44a2-4184-9c48-a75b4dcc8ccc"
+  IAzOperation2_GUID = "1f5ea01f-44a2-4184-9c48-a75b4dcc8ccc"
+  IID_IAzOperation2 = LibC::GUID.new(0x1f5ea01f_u32, 0x44a2_u16, 0x4184_u16, StaticArray[0x9c_u8, 0x48_u8, 0xa7_u8, 0x5b_u8, 0x4d_u8, 0xcc_u8, 0x8c_u8, 0xcc_u8])
   struct IAzOperation2
     lpVtbl : IAzOperation2VTbl*
   end
@@ -1772,8 +1772,8 @@ lib LibWin32
     get__new_enum : Proc(IAzRoleDefinitions*, IUnknown*, HRESULT)
   end
 
-  IAzRoleDefinitions_GUID = LibC::GUID.new("881f25a5-d755-4550-957a-d503a3b34001")
-  CLSID_IAzRoleDefinitions = "881f25a5-d755-4550-957a-d503a3b34001"
+  IAzRoleDefinitions_GUID = "881f25a5-d755-4550-957a-d503a3b34001"
+  IID_IAzRoleDefinitions = LibC::GUID.new(0x881f25a5_u32, 0xd755_u16, 0x4550_u16, StaticArray[0x95_u8, 0x7a_u8, 0xd5_u8, 0x3_u8, 0xa3_u8, 0xb3_u8, 0x40_u8, 0x1_u8])
   struct IAzRoleDefinitions
     lpVtbl : IAzRoleDefinitionsVTbl*
   end
@@ -1818,8 +1818,8 @@ lib LibWin32
     get_role_definitions : Proc(IAzRoleDefinition*, IAzRoleDefinitions*, HRESULT)
   end
 
-  IAzRoleDefinition_GUID = LibC::GUID.new("d97fcea1-2599-44f1-9fc3-58e9fbe09466")
-  CLSID_IAzRoleDefinition = "d97fcea1-2599-44f1-9fc3-58e9fbe09466"
+  IAzRoleDefinition_GUID = "d97fcea1-2599-44f1-9fc3-58e9fbe09466"
+  IID_IAzRoleDefinition = LibC::GUID.new(0xd97fcea1_u32, 0x2599_u16, 0x44f1_u16, StaticArray[0x9f_u8, 0xc3_u8, 0x58_u8, 0xe9_u8, 0xfb_u8, 0xe0_u8, 0x94_u8, 0x66_u8])
   struct IAzRoleDefinition
     lpVtbl : IAzRoleDefinitionVTbl*
   end
@@ -1865,8 +1865,8 @@ lib LibWin32
     get_scope : Proc(IAzRoleAssignment*, IAzScope*, HRESULT)
   end
 
-  IAzRoleAssignment_GUID = LibC::GUID.new("55647d31-0d5a-4fa3-b4ac-2b5f9ad5ab76")
-  CLSID_IAzRoleAssignment = "55647d31-0d5a-4fa3-b4ac-2b5f9ad5ab76"
+  IAzRoleAssignment_GUID = "55647d31-0d5a-4fa3-b4ac-2b5f9ad5ab76"
+  IID_IAzRoleAssignment = LibC::GUID.new(0x55647d31_u32, 0xd5a_u16, 0x4fa3_u16, StaticArray[0xb4_u8, 0xac_u8, 0x2b_u8, 0x5f_u8, 0x9a_u8, 0xd5_u8, 0xab_u8, 0x76_u8])
   struct IAzRoleAssignment
     lpVtbl : IAzRoleAssignmentVTbl*
   end
@@ -1884,8 +1884,8 @@ lib LibWin32
     get__new_enum : Proc(IAzRoleAssignments*, IUnknown*, HRESULT)
   end
 
-  IAzRoleAssignments_GUID = LibC::GUID.new("9c80b900-fceb-4d73-a0f4-c83b0bbf2481")
-  CLSID_IAzRoleAssignments = "9c80b900-fceb-4d73-a0f4-c83b0bbf2481"
+  IAzRoleAssignments_GUID = "9c80b900-fceb-4d73-a0f4-c83b0bbf2481"
+  IID_IAzRoleAssignments = LibC::GUID.new(0x9c80b900_u32, 0xfceb_u16, 0x4d73_u16, StaticArray[0xa0_u8, 0xf4_u8, 0xc8_u8, 0x3b_u8, 0xb_u8, 0xbf_u8, 0x24_u8, 0x81_u8])
   struct IAzRoleAssignments
     lpVtbl : IAzRoleAssignmentsVTbl*
   end
@@ -1902,8 +1902,8 @@ lib LibWin32
     get_object_picker : Proc(IAzPrincipalLocator*, IAzObjectPicker*, HRESULT)
   end
 
-  IAzPrincipalLocator_GUID = LibC::GUID.new("e5c3507d-ad6a-4992-9c7f-74ab480b44cc")
-  CLSID_IAzPrincipalLocator = "e5c3507d-ad6a-4992-9c7f-74ab480b44cc"
+  IAzPrincipalLocator_GUID = "e5c3507d-ad6a-4992-9c7f-74ab480b44cc"
+  IID_IAzPrincipalLocator = LibC::GUID.new(0xe5c3507d_u32, 0xad6a_u16, 0x4992_u16, StaticArray[0x9c_u8, 0x7f_u8, 0x74_u8, 0xab_u8, 0x48_u8, 0xb_u8, 0x44_u8, 0xcc_u8])
   struct IAzPrincipalLocator
     lpVtbl : IAzPrincipalLocatorVTbl*
   end
@@ -1920,8 +1920,8 @@ lib LibWin32
     names_from_sids : Proc(IAzNameResolver*, VARIANT, VARIANT*, VARIANT*, HRESULT)
   end
 
-  IAzNameResolver_GUID = LibC::GUID.new("504d0f15-73e2-43df-a870-a64f40714f53")
-  CLSID_IAzNameResolver = "504d0f15-73e2-43df-a870-a64f40714f53"
+  IAzNameResolver_GUID = "504d0f15-73e2-43df-a870-a64f40714f53"
+  IID_IAzNameResolver = LibC::GUID.new(0x504d0f15_u32, 0x73e2_u16, 0x43df_u16, StaticArray[0xa8_u8, 0x70_u8, 0xa6_u8, 0x4f_u8, 0x40_u8, 0x71_u8, 0x4f_u8, 0x53_u8])
   struct IAzNameResolver
     lpVtbl : IAzNameResolverVTbl*
   end
@@ -1938,8 +1938,8 @@ lib LibWin32
     get_name : Proc(IAzObjectPicker*, UInt8**, HRESULT)
   end
 
-  IAzObjectPicker_GUID = LibC::GUID.new("63130a48-699a-42d8-bf01-c62ac3fb79f9")
-  CLSID_IAzObjectPicker = "63130a48-699a-42d8-bf01-c62ac3fb79f9"
+  IAzObjectPicker_GUID = "63130a48-699a-42d8-bf01-c62ac3fb79f9"
+  IID_IAzObjectPicker = LibC::GUID.new(0x63130a48_u32, 0x699a_u16, 0x42d8_u16, StaticArray[0xbf_u8, 0x1_u8, 0xc6_u8, 0x2a_u8, 0xc3_u8, 0xfb_u8, 0x79_u8, 0xf9_u8])
   struct IAzObjectPicker
     lpVtbl : IAzObjectPickerVTbl*
   end
@@ -1993,8 +1993,8 @@ lib LibWin32
     role_assignments : Proc(IAzApplicationGroup2*, UInt8*, Int16, IAzRoleAssignments*, HRESULT)
   end
 
-  IAzApplicationGroup2_GUID = LibC::GUID.new("3f0613fc-b71a-464e-a11d-5b881a56cefa")
-  CLSID_IAzApplicationGroup2 = "3f0613fc-b71a-464e-a11d-5b881a56cefa"
+  IAzApplicationGroup2_GUID = "3f0613fc-b71a-464e-a11d-5b881a56cefa"
+  IID_IAzApplicationGroup2 = LibC::GUID.new(0x3f0613fc_u32, 0xb71a_u16, 0x464e_u16, StaticArray[0xa1_u8, 0x1d_u8, 0x5b_u8, 0x88_u8, 0x1a_u8, 0x56_u8, 0xce_u8, 0xfa_u8])
   struct IAzApplicationGroup2
     lpVtbl : IAzApplicationGroup2VTbl*
   end
@@ -2036,8 +2036,8 @@ lib LibWin32
     role_assignments : Proc(IAzTask2*, UInt8*, Int16, IAzRoleAssignments*, HRESULT)
   end
 
-  IAzTask2_GUID = LibC::GUID.new("03a9a5ee-48c8-4832-9025-aad503c46526")
-  CLSID_IAzTask2 = "03a9a5ee-48c8-4832-9025-aad503c46526"
+  IAzTask2_GUID = "03a9a5ee-48c8-4832-9025-aad503c46526"
+  IID_IAzTask2 = LibC::GUID.new(0x3a9a5ee_u32, 0x48c8_u16, 0x4832_u16, StaticArray[0x90_u8, 0x25_u8, 0xaa_u8, 0xd5_u8, 0x3_u8, 0xc4_u8, 0x65_u8, 0x26_u8])
   struct IAzTask2
     lpVtbl : IAzTask2VTbl*
   end

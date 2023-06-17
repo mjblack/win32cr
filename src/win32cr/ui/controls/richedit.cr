@@ -1900,8 +1900,8 @@ lib LibWin32
     import_data_object : Proc(IRichEditOle*, IDataObject, UInt16, LibC::IntPtrT, HRESULT)
   end
 
-  IRichEditOle_GUID = LibC::GUID.new("00020d00-0000-0000-c000-000000000046")
-  CLSID_IRichEditOle = "00020d00-0000-0000-c000-000000000046"
+  IRichEditOle_GUID = "00020d00-0000-0000-c000-000000000046"
+  IID_IRichEditOle = LibC::GUID.new(0x20d00_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IRichEditOle
     lpVtbl : IRichEditOleVTbl*
   end
@@ -1922,8 +1922,8 @@ lib LibWin32
     get_context_menu : Proc(IRichEditOleCallback*, RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE, IOleObject, CHARRANGE*, HANDLE*, HRESULT)
   end
 
-  IRichEditOleCallback_GUID = LibC::GUID.new("00020d03-0000-0000-c000-000000000046")
-  CLSID_IRichEditOleCallback = "00020d03-0000-0000-c000-000000000046"
+  IRichEditOleCallback_GUID = "00020d03-0000-0000-c000-000000000046"
+  IID_IRichEditOleCallback = LibC::GUID.new(0x20d03_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IRichEditOleCallback
     lpVtbl : IRichEditOleCallbackVTbl*
   end
@@ -1957,8 +1957,8 @@ lib LibWin32
     range_from_point : Proc(ITextDocument*, Int32, Int32, ITextRange*, HRESULT)
   end
 
-  ITextDocument_GUID = LibC::GUID.new("8cc497c0-a1df-11ce-8098-00aa0047be5d")
-  CLSID_ITextDocument = "8cc497c0-a1df-11ce-8098-00aa0047be5d"
+  ITextDocument_GUID = "8cc497c0-a1df-11ce-8098-00aa0047be5d"
+  IID_ITextDocument = LibC::GUID.new(0x8cc497c0_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
   struct ITextDocument
     lpVtbl : ITextDocumentVTbl*
   end
@@ -2024,8 +2024,8 @@ lib LibWin32
     get_embedded_object : Proc(ITextRange*, IUnknown*, HRESULT)
   end
 
-  ITextRange_GUID = LibC::GUID.new("8cc497c2-a1df-11ce-8098-00aa0047be5d")
-  CLSID_ITextRange = "8cc497c2-a1df-11ce-8098-00aa0047be5d"
+  ITextRange_GUID = "8cc497c2-a1df-11ce-8098-00aa0047be5d"
+  IID_ITextRange = LibC::GUID.new(0x8cc497c2_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
   struct ITextRange
     lpVtbl : ITextRangeVTbl*
   end
@@ -2101,8 +2101,8 @@ lib LibWin32
     type_text : Proc(ITextSelection*, UInt8*, HRESULT)
   end
 
-  ITextSelection_GUID = LibC::GUID.new("8cc497c1-a1df-11ce-8098-00aa0047be5d")
-  CLSID_ITextSelection = "8cc497c1-a1df-11ce-8098-00aa0047be5d"
+  ITextSelection_GUID = "8cc497c1-a1df-11ce-8098-00aa0047be5d"
+  IID_ITextSelection = LibC::GUID.new(0x8cc497c1_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
   struct ITextSelection
     lpVtbl : ITextSelectionVTbl*
   end
@@ -2172,8 +2172,8 @@ lib LibWin32
     set_weight : Proc(ITextFont*, Int32, HRESULT)
   end
 
-  ITextFont_GUID = LibC::GUID.new("8cc497c3-a1df-11ce-8098-00aa0047be5d")
-  CLSID_ITextFont = "8cc497c3-a1df-11ce-8098-00aa0047be5d"
+  ITextFont_GUID = "8cc497c3-a1df-11ce-8098-00aa0047be5d"
+  IID_ITextFont = LibC::GUID.new(0x8cc497c3_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
   struct ITextFont
     lpVtbl : ITextFontVTbl*
   end
@@ -2236,8 +2236,8 @@ lib LibWin32
     get_tab : Proc(ITextPara*, Int32, Float32*, Int32*, Int32*, HRESULT)
   end
 
-  ITextPara_GUID = LibC::GUID.new("8cc497c4-a1df-11ce-8098-00aa0047be5d")
-  CLSID_ITextPara = "8cc497c4-a1df-11ce-8098-00aa0047be5d"
+  ITextPara_GUID = "8cc497c4-a1df-11ce-8098-00aa0047be5d"
+  IID_ITextPara = LibC::GUID.new(0x8cc497c4_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
   struct ITextPara
     lpVtbl : ITextParaVTbl*
   end
@@ -2255,8 +2255,8 @@ lib LibWin32
     get_count : Proc(ITextStoryRanges*, Int32*, HRESULT)
   end
 
-  ITextStoryRanges_GUID = LibC::GUID.new("8cc497c5-a1df-11ce-8098-00aa0047be5d")
-  CLSID_ITextStoryRanges = "8cc497c5-a1df-11ce-8098-00aa0047be5d"
+  ITextStoryRanges_GUID = "8cc497c5-a1df-11ce-8098-00aa0047be5d"
+  IID_ITextStoryRanges = LibC::GUID.new(0x8cc497c5_u32, 0xa1df_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xbe_u8, 0x5d_u8])
   struct ITextStoryRanges
     lpVtbl : ITextStoryRangesVTbl*
   end
@@ -2334,8 +2334,8 @@ lib LibWin32
     get_story : Proc(ITextDocument2*, Int32, ITextStory*, HRESULT)
   end
 
-  ITextDocument2_GUID = LibC::GUID.new("c241f5e0-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextDocument2 = "c241f5e0-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextDocument2_GUID = "c241f5e0-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextDocument2 = LibC::GUID.new(0xc241f5e0_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextDocument2
     lpVtbl : ITextDocument2VTbl*
   end
@@ -2451,8 +2451,8 @@ lib LibWin32
     insert_image : Proc(ITextRange2*, Int32, Int32, Int32, TEXT_ALIGN_OPTIONS, UInt8*, IStream, HRESULT)
   end
 
-  ITextRange2_GUID = LibC::GUID.new("c241f5e2-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextRange2 = "c241f5e2-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextRange2_GUID = "c241f5e2-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextRange2 = LibC::GUID.new(0xc241f5e2_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextRange2
     lpVtbl : ITextRange2VTbl*
   end
@@ -2568,8 +2568,8 @@ lib LibWin32
     insert_image : Proc(ITextSelection2*, Int32, Int32, Int32, TEXT_ALIGN_OPTIONS, UInt8*, IStream, HRESULT)
   end
 
-  ITextSelection2_GUID = LibC::GUID.new("c241f5e1-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextSelection2 = "c241f5e1-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextSelection2_GUID = "c241f5e1-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextSelection2 = LibC::GUID.new(0xc241f5e1_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextSelection2
     lpVtbl : ITextSelection2VTbl*
   end
@@ -2685,8 +2685,8 @@ lib LibWin32
     set_property : Proc(ITextFont2*, Int32, Int32, HRESULT)
   end
 
-  ITextFont2_GUID = LibC::GUID.new("c241f5e3-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextFont2 = "c241f5e3-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextFont2_GUID = "c241f5e3-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextFont2 = LibC::GUID.new(0xc241f5e3_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextFont2
     lpVtbl : ITextFont2VTbl*
   end
@@ -2765,8 +2765,8 @@ lib LibWin32
     set_property : Proc(ITextPara2*, Int32, Int32, HRESULT)
   end
 
-  ITextPara2_GUID = LibC::GUID.new("c241f5e4-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextPara2 = "c241f5e4-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextPara2_GUID = "c241f5e4-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextPara2 = LibC::GUID.new(0xc241f5e4_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextPara2
     lpVtbl : ITextPara2VTbl*
   end
@@ -2785,8 +2785,8 @@ lib LibWin32
     item2 : Proc(ITextStoryRanges2*, Int32, ITextRange2*, HRESULT)
   end
 
-  ITextStoryRanges2_GUID = LibC::GUID.new("c241f5e5-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextStoryRanges2 = "c241f5e5-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextStoryRanges2_GUID = "c241f5e5-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextStoryRanges2 = LibC::GUID.new(0xc241f5e5_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextStoryRanges2
     lpVtbl : ITextStoryRanges2VTbl*
   end
@@ -2809,8 +2809,8 @@ lib LibWin32
     set_text : Proc(ITextStory*, Int32, UInt8*, HRESULT)
   end
 
-  ITextStory_GUID = LibC::GUID.new("c241f5f3-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextStory = "c241f5f3-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextStory_GUID = "c241f5f3-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextStory = LibC::GUID.new(0xc241f5f3_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextStory
     lpVtbl : ITextStoryVTbl*
   end
@@ -2842,8 +2842,8 @@ lib LibWin32
     swap : Proc(ITextStrings*, HRESULT)
   end
 
-  ITextStrings_GUID = LibC::GUID.new("c241f5e7-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextStrings = "c241f5e7-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextStrings_GUID = "c241f5e7-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextStrings = LibC::GUID.new(0xc241f5e7_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextStrings
     lpVtbl : ITextStringsVTbl*
   end
@@ -2904,8 +2904,8 @@ lib LibWin32
     set_property : Proc(ITextRow*, Int32, Int32, HRESULT)
   end
 
-  ITextRow_GUID = LibC::GUID.new("c241f5ef-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextRow = "c241f5ef-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextRow_GUID = "c241f5ef-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextRow = LibC::GUID.new(0xc241f5ef_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextRow
     lpVtbl : ITextRowVTbl*
   end
@@ -2920,8 +2920,8 @@ lib LibWin32
     invoke : Proc(ITextDisplays*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  ITextDisplays_GUID = LibC::GUID.new("c241f5f2-7206-11d8-a2c7-00a0d1d6c6b3")
-  CLSID_ITextDisplays = "c241f5f2-7206-11d8-a2c7-00a0d1d6c6b3"
+  ITextDisplays_GUID = "c241f5f2-7206-11d8-a2c7-00a0d1d6c6b3"
+  IID_ITextDisplays = LibC::GUID.new(0xc241f5f2_u32, 0x7206_u16, 0x11d8_u16, StaticArray[0xa2_u8, 0xc7_u8, 0x0_u8, 0xa0_u8, 0xd1_u8, 0xd6_u8, 0xc6_u8, 0xb3_u8])
   struct ITextDisplays
     lpVtbl : ITextDisplaysVTbl*
   end
@@ -2979,8 +2979,8 @@ lib LibWin32
     release_call_manager : Proc(ITextDocument2Old*, IUnknown, HRESULT)
   end
 
-  ITextDocument2Old_GUID = LibC::GUID.new("01c25500-4268-11d1-883a-3c8b00c10000")
-  CLSID_ITextDocument2Old = "01c25500-4268-11d1-883a-3c8b00c10000"
+  ITextDocument2Old_GUID = "01c25500-4268-11d1-883a-3c8b00c10000"
+  IID_ITextDocument2Old = LibC::GUID.new(0x1c25500_u32, 0x4268_u16, 0x11d1_u16, StaticArray[0x88_u8, 0x3a_u8, 0x3c_u8, 0x8b_u8, 0x0_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
   struct ITextDocument2Old
     lpVtbl : ITextDocument2OldVTbl*
   end

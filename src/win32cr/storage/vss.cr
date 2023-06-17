@@ -99,8 +99,8 @@ lib LibWin32
   VSS_E_ASRERROR_CRITICAL_DISK_CANNOT_BE_EXCLUDED = -2147212267_i32
   VSS_E_ASRERROR_SYSTEM_PARTITION_HIDDEN = -2147212266_i32
   VSS_E_FSS_TIMEOUT = -2147212265_i32
-  VssSnapshotMgmt = LibC::GUID.new(0xb5a2c52_u32, 0x3eb9_u16, 0x470a_u16, StaticArray[0x96_u8, 0xe2_u8, 0x6c_u8, 0x6d_u8, 0x45_u8, 0x70_u8, 0xe4_u8, 0xf_u8])
-  VSSCoordinator = LibC::GUID.new(0xe579ab5f_u32, 0x1cc4_u16, 0x44b4_u16, StaticArray[0xbe_u8, 0xd9_u8, 0xde_u8, 0x9_u8, 0x91_u8, 0xff_u8, 0x6_u8, 0x23_u8])
+  CLSID_VssSnapshotMgmt = LibC::GUID.new(0xb5a2c52_u32, 0x3eb9_u16, 0x470a_u16, StaticArray[0x96_u8, 0xe2_u8, 0x6c_u8, 0x6d_u8, 0x45_u8, 0x70_u8, 0xe4_u8, 0xf_u8])
+  CLSID_VSSCoordinator = LibC::GUID.new(0xe579ab5f_u32, 0x1cc4_u16, 0x44b4_u16, StaticArray[0xbe_u8, 0xd9_u8, 0xde_u8, 0x9_u8, 0x91_u8, 0xff_u8, 0x6_u8, 0x23_u8])
 
   type IVssExamineWriterMetadata = Void
 
@@ -497,8 +497,8 @@ lib LibWin32
     clone : Proc(IVssEnumObject*, IVssEnumObject*, HRESULT)
   end
 
-  IVssEnumObject_GUID = LibC::GUID.new("ae1c7110-2f60-11d3-8a39-00c04f72d8e3")
-  CLSID_IVssEnumObject = "ae1c7110-2f60-11d3-8a39-00c04f72d8e3"
+  IVssEnumObject_GUID = "ae1c7110-2f60-11d3-8a39-00c04f72d8e3"
+  IID_IVssEnumObject = LibC::GUID.new(0xae1c7110_u32, 0x2f60_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd8_u8, 0xe3_u8])
   struct IVssEnumObject
     lpVtbl : IVssEnumObjectVTbl*
   end
@@ -512,8 +512,8 @@ lib LibWin32
     query_status : Proc(IVssAsync*, HRESULT*, Int32*, HRESULT)
   end
 
-  IVssAsync_GUID = LibC::GUID.new("507c37b4-cf5b-4e95-b0af-14eb9767467e")
-  CLSID_IVssAsync = "507c37b4-cf5b-4e95-b0af-14eb9767467e"
+  IVssAsync_GUID = "507c37b4-cf5b-4e95-b0af-14eb9767467e"
+  IID_IVssAsync = LibC::GUID.new(0x507c37b4_u32, 0xcf5b_u16, 0x4e95_u16, StaticArray[0xb0_u8, 0xaf_u8, 0x14_u8, 0xeb_u8, 0x97_u8, 0x67_u8, 0x46_u8, 0x7e_u8])
   struct IVssAsync
     lpVtbl : IVssAsyncVTbl*
   end
@@ -590,8 +590,8 @@ lib LibWin32
     get_differenced_file : Proc(IVssComponent*, UInt32, UInt8**, UInt8**, LibC::BOOL*, UInt8**, FILETIME*, HRESULT)
   end
 
-  IVssComponent_GUID = LibC::GUID.new("d2c72c96-c121-4518-b627-e5a93d010ead")
-  CLSID_IVssComponent = "d2c72c96-c121-4518-b627-e5a93d010ead"
+  IVssComponent_GUID = "d2c72c96-c121-4518-b627-e5a93d010ead"
+  IID_IVssComponent = LibC::GUID.new(0xd2c72c96_u32, 0xc121_u16, 0x4518_u16, StaticArray[0xb6_u8, 0x27_u8, 0xe5_u8, 0xa9_u8, 0x3d_u8, 0x1_u8, 0xe_u8, 0xad_u8])
   struct IVssComponent
     lpVtbl : IVssComponentVTbl*
   end
@@ -657,8 +657,8 @@ lib LibWin32
     get_restore_name : Proc(IVssComponentEx*, UInt8**, HRESULT)
   end
 
-  IVssComponentEx_GUID = LibC::GUID.new("156c8b5e-f131-4bd7-9c97-d1923be7e1fa")
-  CLSID_IVssComponentEx = "156c8b5e-f131-4bd7-9c97-d1923be7e1fa"
+  IVssComponentEx_GUID = "156c8b5e-f131-4bd7-9c97-d1923be7e1fa"
+  IID_IVssComponentEx = LibC::GUID.new(0x156c8b5e_u32, 0xf131_u16, 0x4bd7_u16, StaticArray[0x9c_u8, 0x97_u8, 0xd1_u8, 0x92_u8, 0x3b_u8, 0xe7_u8, 0xe1_u8, 0xfa_u8])
   struct IVssComponentEx
     lpVtbl : IVssComponentExVTbl*
   end
@@ -716,8 +716,8 @@ lib LibWin32
     get_failure : Proc(IVssComponentEx2*, HRESULT*, HRESULT*, UInt8**, UInt32*, HRESULT)
   end
 
-  IVssComponentEx2_GUID = LibC::GUID.new("3b5be0f2-07a9-4e4b-bdd3-cfdc8e2c0d2d")
-  CLSID_IVssComponentEx2 = "3b5be0f2-07a9-4e4b-bdd3-cfdc8e2c0d2d"
+  IVssComponentEx2_GUID = "3b5be0f2-07a9-4e4b-bdd3-cfdc8e2c0d2d"
+  IID_IVssComponentEx2 = LibC::GUID.new(0x3b5be0f2_u32, 0x7a9_u16, 0x4e4b_u16, StaticArray[0xbd_u8, 0xd3_u8, 0xcf_u8, 0xdc_u8, 0x8e_u8, 0x2c_u8, 0xd_u8, 0x2d_u8])
   struct IVssComponentEx2
     lpVtbl : IVssComponentEx2VTbl*
   end
@@ -786,8 +786,8 @@ lib LibWin32
     save_as_xml : Proc(IVssCreateExpressWriterMetadata*, UInt8**, HRESULT)
   end
 
-  IVssCreateExpressWriterMetadata_GUID = LibC::GUID.new("9c772e77-b26e-427f-92dd-c996f41ea5e3")
-  CLSID_IVssCreateExpressWriterMetadata = "9c772e77-b26e-427f-92dd-c996f41ea5e3"
+  IVssCreateExpressWriterMetadata_GUID = "9c772e77-b26e-427f-92dd-c996f41ea5e3"
+  IID_IVssCreateExpressWriterMetadata = LibC::GUID.new(0x9c772e77_u32, 0xb26e_u16, 0x427f_u16, StaticArray[0x92_u8, 0xdd_u8, 0xc9_u8, 0x96_u8, 0xf4_u8, 0x1e_u8, 0xa5_u8, 0xe3_u8])
   struct IVssCreateExpressWriterMetadata
     lpVtbl : IVssCreateExpressWriterMetadataVTbl*
   end
@@ -802,8 +802,8 @@ lib LibWin32
     unregister : Proc(IVssExpressWriter*, Guid, HRESULT)
   end
 
-  IVssExpressWriter_GUID = LibC::GUID.new("e33affdc-59c7-47b1-97d5-4266598f6235")
-  CLSID_IVssExpressWriter = "e33affdc-59c7-47b1-97d5-4266598f6235"
+  IVssExpressWriter_GUID = "e33affdc-59c7-47b1-97d5-4266598f6235"
+  IID_IVssExpressWriter = LibC::GUID.new(0xe33affdc_u32, 0x59c7_u16, 0x47b1_u16, StaticArray[0x97_u8, 0xd5_u8, 0x42_u8, 0x66_u8, 0x59_u8, 0x8f_u8, 0x62_u8, 0x35_u8])
   struct IVssExpressWriter
     lpVtbl : IVssExpressWriterVTbl*
   end
@@ -817,8 +817,8 @@ lib LibWin32
     query_snapshots_by_volume : Proc(IVssSnapshotMgmt*, UInt16*, Guid, IVssEnumObject*, HRESULT)
   end
 
-  IVssSnapshotMgmt_GUID = LibC::GUID.new("fa7df749-66e7-4986-a27f-e2f04ae53772")
-  CLSID_IVssSnapshotMgmt = "fa7df749-66e7-4986-a27f-e2f04ae53772"
+  IVssSnapshotMgmt_GUID = "fa7df749-66e7-4986-a27f-e2f04ae53772"
+  IID_IVssSnapshotMgmt = LibC::GUID.new(0xfa7df749_u32, 0x66e7_u16, 0x4986_u16, StaticArray[0xa2_u8, 0x7f_u8, 0xe2_u8, 0xf0_u8, 0x4a_u8, 0xe5_u8, 0x37_u8, 0x72_u8])
   struct IVssSnapshotMgmt
     lpVtbl : IVssSnapshotMgmtVTbl*
   end
@@ -830,8 +830,8 @@ lib LibWin32
     get_min_diff_area_size : Proc(IVssSnapshotMgmt2*, Int64*, HRESULT)
   end
 
-  IVssSnapshotMgmt2_GUID = LibC::GUID.new("0f61ec39-fe82-45f2-a3f0-768b5d427102")
-  CLSID_IVssSnapshotMgmt2 = "0f61ec39-fe82-45f2-a3f0-768b5d427102"
+  IVssSnapshotMgmt2_GUID = "0f61ec39-fe82-45f2-a3f0-768b5d427102"
+  IID_IVssSnapshotMgmt2 = LibC::GUID.new(0xf61ec39_u32, 0xfe82_u16, 0x45f2_u16, StaticArray[0xa3_u8, 0xf0_u8, 0x76_u8, 0x8b_u8, 0x5d_u8, 0x42_u8, 0x71_u8, 0x2_u8])
   struct IVssSnapshotMgmt2
     lpVtbl : IVssSnapshotMgmt2VTbl*
   end
@@ -848,8 +848,8 @@ lib LibWin32
     query_diff_areas_for_snapshot : Proc(IVssDifferentialSoftwareSnapshotMgmt*, Guid, IVssEnumMgmtObject*, HRESULT)
   end
 
-  IVssDifferentialSoftwareSnapshotMgmt_GUID = LibC::GUID.new("214a0f28-b737-4026-b847-4f9e37d79529")
-  CLSID_IVssDifferentialSoftwareSnapshotMgmt = "214a0f28-b737-4026-b847-4f9e37d79529"
+  IVssDifferentialSoftwareSnapshotMgmt_GUID = "214a0f28-b737-4026-b847-4f9e37d79529"
+  IID_IVssDifferentialSoftwareSnapshotMgmt = LibC::GUID.new(0x214a0f28_u32, 0xb737_u16, 0x4026_u16, StaticArray[0xb8_u8, 0x47_u8, 0x4f_u8, 0x9e_u8, 0x37_u8, 0xd7_u8, 0x95_u8, 0x29_u8])
   struct IVssDifferentialSoftwareSnapshotMgmt
     lpVtbl : IVssDifferentialSoftwareSnapshotMgmtVTbl*
   end
@@ -870,8 +870,8 @@ lib LibWin32
     set_snapshot_priority : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, Guid, UInt8, HRESULT)
   end
 
-  IVssDifferentialSoftwareSnapshotMgmt2_GUID = LibC::GUID.new("949d7353-675f-4275-8969-f044c6277815")
-  CLSID_IVssDifferentialSoftwareSnapshotMgmt2 = "949d7353-675f-4275-8969-f044c6277815"
+  IVssDifferentialSoftwareSnapshotMgmt2_GUID = "949d7353-675f-4275-8969-f044c6277815"
+  IID_IVssDifferentialSoftwareSnapshotMgmt2 = LibC::GUID.new(0x949d7353_u32, 0x675f_u16, 0x4275_u16, StaticArray[0x89_u8, 0x69_u8, 0xf0_u8, 0x44_u8, 0xc6_u8, 0x27_u8, 0x78_u8, 0x15_u8])
   struct IVssDifferentialSoftwareSnapshotMgmt2
     lpVtbl : IVssDifferentialSoftwareSnapshotMgmt2VTbl*
   end
@@ -897,8 +897,8 @@ lib LibWin32
     query_snapshot_delta_bitmap : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, Guid, Guid, UInt32*, UInt32*, UInt8**, HRESULT)
   end
 
-  IVssDifferentialSoftwareSnapshotMgmt3_GUID = LibC::GUID.new("383f7e71-a4c5-401f-b27f-f826289f8458")
-  CLSID_IVssDifferentialSoftwareSnapshotMgmt3 = "383f7e71-a4c5-401f-b27f-f826289f8458"
+  IVssDifferentialSoftwareSnapshotMgmt3_GUID = "383f7e71-a4c5-401f-b27f-f826289f8458"
+  IID_IVssDifferentialSoftwareSnapshotMgmt3 = LibC::GUID.new(0x383f7e71_u32, 0xa4c5_u16, 0x401f_u16, StaticArray[0xb2_u8, 0x7f_u8, 0xf8_u8, 0x26_u8, 0x28_u8, 0x9f_u8, 0x84_u8, 0x58_u8])
   struct IVssDifferentialSoftwareSnapshotMgmt3
     lpVtbl : IVssDifferentialSoftwareSnapshotMgmt3VTbl*
   end
@@ -913,8 +913,8 @@ lib LibWin32
     clone : Proc(IVssEnumMgmtObject*, IVssEnumMgmtObject*, HRESULT)
   end
 
-  IVssEnumMgmtObject_GUID = LibC::GUID.new("01954e6b-9254-4e6e-808c-c9e05d007696")
-  CLSID_IVssEnumMgmtObject = "01954e6b-9254-4e6e-808c-c9e05d007696"
+  IVssEnumMgmtObject_GUID = "01954e6b-9254-4e6e-808c-c9e05d007696"
+  IID_IVssEnumMgmtObject = LibC::GUID.new(0x1954e6b_u32, 0x9254_u16, 0x4e6e_u16, StaticArray[0x80_u8, 0x8c_u8, 0xc9_u8, 0xe0_u8, 0x5d_u8, 0x0_u8, 0x76_u8, 0x96_u8])
   struct IVssEnumMgmtObject
     lpVtbl : IVssEnumMgmtObjectVTbl*
   end
@@ -929,8 +929,8 @@ lib LibWin32
     abort_all_snapshots_in_progress : Proc(IVssAdmin*, HRESULT)
   end
 
-  IVssAdmin_GUID = LibC::GUID.new("77ed5996-2f63-11d3-8a39-00c04f72d8e3")
-  CLSID_IVssAdmin = "77ed5996-2f63-11d3-8a39-00c04f72d8e3"
+  IVssAdmin_GUID = "77ed5996-2f63-11d3-8a39-00c04f72d8e3"
+  IID_IVssAdmin = LibC::GUID.new(0x77ed5996_u32, 0x2f63_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd8_u8, 0xe3_u8])
   struct IVssAdmin
     lpVtbl : IVssAdminVTbl*
   end
@@ -948,8 +948,8 @@ lib LibWin32
     set_provider_context : Proc(IVssAdminEx*, Guid, Int32, HRESULT)
   end
 
-  IVssAdminEx_GUID = LibC::GUID.new("7858a9f8-b1fa-41a6-964f-b9b36b8cd8d8")
-  CLSID_IVssAdminEx = "7858a9f8-b1fa-41a6-964f-b9b36b8cd8d8"
+  IVssAdminEx_GUID = "7858a9f8-b1fa-41a6-964f-b9b36b8cd8d8"
+  IID_IVssAdminEx = LibC::GUID.new(0x7858a9f8_u32, 0xb1fa_u16, 0x41a6_u16, StaticArray[0x96_u8, 0x4f_u8, 0xb9_u8, 0xb3_u8, 0x6b_u8, 0x8c_u8, 0xd8_u8, 0xd8_u8])
   struct IVssAdminEx
     lpVtbl : IVssAdminExVTbl*
   end
@@ -970,8 +970,8 @@ lib LibWin32
     query_revert_status : Proc(IVssSoftwareSnapshotProvider*, UInt16*, IVssAsync*, HRESULT)
   end
 
-  IVssSoftwareSnapshotProvider_GUID = LibC::GUID.new("609e123e-2c5a-44d3-8f01-0b1d9a47d1ff")
-  CLSID_IVssSoftwareSnapshotProvider = "609e123e-2c5a-44d3-8f01-0b1d9a47d1ff"
+  IVssSoftwareSnapshotProvider_GUID = "609e123e-2c5a-44d3-8f01-0b1d9a47d1ff"
+  IID_IVssSoftwareSnapshotProvider = LibC::GUID.new(0x609e123e_u32, 0x2c5a_u16, 0x44d3_u16, StaticArray[0x8f_u8, 0x1_u8, 0xb_u8, 0x1d_u8, 0x9a_u8, 0x47_u8, 0xd1_u8, 0xff_u8])
   struct IVssSoftwareSnapshotProvider
     lpVtbl : IVssSoftwareSnapshotProviderVTbl*
   end
@@ -989,8 +989,8 @@ lib LibWin32
     abort_snapshots : Proc(IVssProviderCreateSnapshotSet*, Guid, HRESULT)
   end
 
-  IVssProviderCreateSnapshotSet_GUID = LibC::GUID.new("5f894e5b-1e39-4778-8e23-9abad9f0e08c")
-  CLSID_IVssProviderCreateSnapshotSet = "5f894e5b-1e39-4778-8e23-9abad9f0e08c"
+  IVssProviderCreateSnapshotSet_GUID = "5f894e5b-1e39-4778-8e23-9abad9f0e08c"
+  IID_IVssProviderCreateSnapshotSet = LibC::GUID.new(0x5f894e5b_u32, 0x1e39_u16, 0x4778_u16, StaticArray[0x8e_u8, 0x23_u8, 0x9a_u8, 0xba_u8, 0xd9_u8, 0xf0_u8, 0xe0_u8, 0x8c_u8])
   struct IVssProviderCreateSnapshotSet
     lpVtbl : IVssProviderCreateSnapshotSetVTbl*
   end
@@ -1003,8 +1003,8 @@ lib LibWin32
     on_unload : Proc(IVssProviderNotifications*, LibC::BOOL, HRESULT)
   end
 
-  IVssProviderNotifications_GUID = LibC::GUID.new("e561901f-03a5-4afe-86d0-72baeece7004")
-  CLSID_IVssProviderNotifications = "e561901f-03a5-4afe-86d0-72baeece7004"
+  IVssProviderNotifications_GUID = "e561901f-03a5-4afe-86d0-72baeece7004"
+  IID_IVssProviderNotifications = LibC::GUID.new(0xe561901f_u32, 0x3a5_u16, 0x4afe_u16, StaticArray[0x86_u8, 0xd0_u8, 0x72_u8, 0xba_u8, 0xee_u8, 0xce_u8, 0x70_u8, 0x4_u8])
   struct IVssProviderNotifications
     lpVtbl : IVssProviderNotificationsVTbl*
   end
@@ -1021,8 +1021,8 @@ lib LibWin32
     on_lun_empty : Proc(IVssHardwareSnapshotProvider*, UInt16*, VDS_LUN_INFORMATION*, HRESULT)
   end
 
-  IVssHardwareSnapshotProvider_GUID = LibC::GUID.new("9593a157-44e9-4344-bbeb-44fbf9b06b10")
-  CLSID_IVssHardwareSnapshotProvider = "9593a157-44e9-4344-bbeb-44fbf9b06b10"
+  IVssHardwareSnapshotProvider_GUID = "9593a157-44e9-4344-bbeb-44fbf9b06b10"
+  IID_IVssHardwareSnapshotProvider = LibC::GUID.new(0x9593a157_u32, 0x44e9_u16, 0x4344_u16, StaticArray[0xbb_u8, 0xeb_u8, 0x44_u8, 0xfb_u8, 0xf9_u8, 0xb0_u8, 0x6b_u8, 0x10_u8])
   struct IVssHardwareSnapshotProvider
     lpVtbl : IVssHardwareSnapshotProviderVTbl*
   end
@@ -1043,8 +1043,8 @@ lib LibWin32
     on_reuse_luns : Proc(IVssHardwareSnapshotProviderEx*, VDS_LUN_INFORMATION*, VDS_LUN_INFORMATION*, UInt32, HRESULT)
   end
 
-  IVssHardwareSnapshotProviderEx_GUID = LibC::GUID.new("7f5ba925-cdb1-4d11-a71f-339eb7e709fd")
-  CLSID_IVssHardwareSnapshotProviderEx = "7f5ba925-cdb1-4d11-a71f-339eb7e709fd"
+  IVssHardwareSnapshotProviderEx_GUID = "7f5ba925-cdb1-4d11-a71f-339eb7e709fd"
+  IID_IVssHardwareSnapshotProviderEx = LibC::GUID.new(0x7f5ba925_u32, 0xcdb1_u16, 0x4d11_u16, StaticArray[0xa7_u8, 0x1f_u8, 0x33_u8, 0x9e_u8, 0xb7_u8, 0xe7_u8, 0x9_u8, 0xfd_u8])
   struct IVssHardwareSnapshotProviderEx
     lpVtbl : IVssHardwareSnapshotProviderExVTbl*
   end
@@ -1063,8 +1063,8 @@ lib LibWin32
     set_snapshot_property : Proc(IVssFileShareSnapshotProvider*, Guid, VSS_SNAPSHOT_PROPERTY_ID, VARIANT, HRESULT)
   end
 
-  IVssFileShareSnapshotProvider_GUID = LibC::GUID.new("c8636060-7c2e-11df-8c4a-0800200c9a66")
-  CLSID_IVssFileShareSnapshotProvider = "c8636060-7c2e-11df-8c4a-0800200c9a66"
+  IVssFileShareSnapshotProvider_GUID = "c8636060-7c2e-11df-8c4a-0800200c9a66"
+  IID_IVssFileShareSnapshotProvider = LibC::GUID.new(0xc8636060_u32, 0x7c2e_u16, 0x11df_u16, StaticArray[0x8c_u8, 0x4a_u8, 0x8_u8, 0x0_u8, 0x20_u8, 0xc_u8, 0x9a_u8, 0x66_u8])
   struct IVssFileShareSnapshotProvider
     lpVtbl : IVssFileShareSnapshotProviderVTbl*
   end

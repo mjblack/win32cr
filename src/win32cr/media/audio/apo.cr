@@ -266,8 +266,8 @@ lib LibWin32
     get_uncompressed_audio_format : Proc(IAudioMediaType*, UNCOMPRESSEDAUDIOFORMAT*, HRESULT)
   end
 
-  IAudioMediaType_GUID = LibC::GUID.new("4e997f73-b71f-4798-873b-ed7dfcf15b4d")
-  CLSID_IAudioMediaType = "4e997f73-b71f-4798-873b-ed7dfcf15b4d"
+  IAudioMediaType_GUID = "4e997f73-b71f-4798-873b-ed7dfcf15b4d"
+  IID_IAudioMediaType = LibC::GUID.new(0x4e997f73_u32, 0xb71f_u16, 0x4798_u16, StaticArray[0x87_u8, 0x3b_u8, 0xed_u8, 0x7d_u8, 0xfc_u8, 0xf1_u8, 0x5b_u8, 0x4d_u8])
   struct IAudioMediaType
     lpVtbl : IAudioMediaTypeVTbl*
   end
@@ -281,8 +281,8 @@ lib LibWin32
     calc_output_frames : Proc(IAudioProcessingObjectRT*, UInt32, UInt32)
   end
 
-  IAudioProcessingObjectRT_GUID = LibC::GUID.new("9e1d6a6d-ddbc-4e95-a4c7-ad64ba37846c")
-  CLSID_IAudioProcessingObjectRT = "9e1d6a6d-ddbc-4e95-a4c7-ad64ba37846c"
+  IAudioProcessingObjectRT_GUID = "9e1d6a6d-ddbc-4e95-a4c7-ad64ba37846c"
+  IID_IAudioProcessingObjectRT = LibC::GUID.new(0x9e1d6a6d_u32, 0xddbc_u16, 0x4e95_u16, StaticArray[0xa4_u8, 0xc7_u8, 0xad_u8, 0x64_u8, 0xba_u8, 0x37_u8, 0x84_u8, 0x6c_u8])
   struct IAudioProcessingObjectRT
     lpVtbl : IAudioProcessingObjectRTVTbl*
   end
@@ -295,8 +295,8 @@ lib LibWin32
     calc_max_output_frames : Proc(IAudioProcessingObjectVBR*, UInt32, UInt32*, HRESULT)
   end
 
-  IAudioProcessingObjectVBR_GUID = LibC::GUID.new("7ba1db8f-78ad-49cd-9591-f79d80a17c81")
-  CLSID_IAudioProcessingObjectVBR = "7ba1db8f-78ad-49cd-9591-f79d80a17c81"
+  IAudioProcessingObjectVBR_GUID = "7ba1db8f-78ad-49cd-9591-f79d80a17c81"
+  IID_IAudioProcessingObjectVBR = LibC::GUID.new(0x7ba1db8f_u32, 0x78ad_u16, 0x49cd_u16, StaticArray[0x95_u8, 0x91_u8, 0xf7_u8, 0x9d_u8, 0x80_u8, 0xa1_u8, 0x7c_u8, 0x81_u8])
   struct IAudioProcessingObjectVBR
     lpVtbl : IAudioProcessingObjectVBRVTbl*
   end
@@ -309,8 +309,8 @@ lib LibWin32
     unlock_for_process : Proc(IAudioProcessingObjectConfiguration*, HRESULT)
   end
 
-  IAudioProcessingObjectConfiguration_GUID = LibC::GUID.new("0e5ed805-aba6-49c3-8f9a-2b8c889c4fa8")
-  CLSID_IAudioProcessingObjectConfiguration = "0e5ed805-aba6-49c3-8f9a-2b8c889c4fa8"
+  IAudioProcessingObjectConfiguration_GUID = "0e5ed805-aba6-49c3-8f9a-2b8c889c4fa8"
+  IID_IAudioProcessingObjectConfiguration = LibC::GUID.new(0xe5ed805_u32, 0xaba6_u16, 0x49c3_u16, StaticArray[0x8f_u8, 0x9a_u8, 0x2b_u8, 0x8c_u8, 0x88_u8, 0x9c_u8, 0x4f_u8, 0xa8_u8])
   struct IAudioProcessingObjectConfiguration
     lpVtbl : IAudioProcessingObjectConfigurationVTbl*
   end
@@ -328,8 +328,8 @@ lib LibWin32
     get_input_channel_count : Proc(IAudioProcessingObject*, UInt32*, HRESULT)
   end
 
-  IAudioProcessingObject_GUID = LibC::GUID.new("fd7f2b29-24d0-4b5c-b177-592c39f9ca10")
-  CLSID_IAudioProcessingObject = "fd7f2b29-24d0-4b5c-b177-592c39f9ca10"
+  IAudioProcessingObject_GUID = "fd7f2b29-24d0-4b5c-b177-592c39f9ca10"
+  IID_IAudioProcessingObject = LibC::GUID.new(0xfd7f2b29_u32, 0x24d0_u16, 0x4b5c_u16, StaticArray[0xb1_u8, 0x77_u8, 0x59_u8, 0x2c_u8, 0x39_u8, 0xf9_u8, 0xca_u8, 0x10_u8])
   struct IAudioProcessingObject
     lpVtbl : IAudioProcessingObjectVTbl*
   end
@@ -341,8 +341,8 @@ lib LibWin32
     set_audio_device_modules_manager : Proc(IAudioDeviceModulesClient*, IUnknown, HRESULT)
   end
 
-  IAudioDeviceModulesClient_GUID = LibC::GUID.new("98f37dac-d0b6-49f5-896a-aa4d169a4c48")
-  CLSID_IAudioDeviceModulesClient = "98f37dac-d0b6-49f5-896a-aa4d169a4c48"
+  IAudioDeviceModulesClient_GUID = "98f37dac-d0b6-49f5-896a-aa4d169a4c48"
+  IID_IAudioDeviceModulesClient = LibC::GUID.new(0x98f37dac_u32, 0xd0b6_u16, 0x49f5_u16, StaticArray[0x89_u8, 0x6a_u8, 0xaa_u8, 0x4d_u8, 0x16_u8, 0x9a_u8, 0x4c_u8, 0x48_u8])
   struct IAudioDeviceModulesClient
     lpVtbl : IAudioDeviceModulesClientVTbl*
   end
@@ -353,8 +353,8 @@ lib LibWin32
     release : Proc(IAudioSystemEffects*, UInt32)
   end
 
-  IAudioSystemEffects_GUID = LibC::GUID.new("5fa00f27-add6-499a-8a9d-6b98521fa75b")
-  CLSID_IAudioSystemEffects = "5fa00f27-add6-499a-8a9d-6b98521fa75b"
+  IAudioSystemEffects_GUID = "5fa00f27-add6-499a-8a9d-6b98521fa75b"
+  IID_IAudioSystemEffects = LibC::GUID.new(0x5fa00f27_u32, 0xadd6_u16, 0x499a_u16, StaticArray[0x8a_u8, 0x9d_u8, 0x6b_u8, 0x98_u8, 0x52_u8, 0x1f_u8, 0xa7_u8, 0x5b_u8])
   struct IAudioSystemEffects
     lpVtbl : IAudioSystemEffectsVTbl*
   end
@@ -366,8 +366,8 @@ lib LibWin32
     get_effects_list : Proc(IAudioSystemEffects2*, Guid**, UInt32*, LibC::HANDLE, HRESULT)
   end
 
-  IAudioSystemEffects2_GUID = LibC::GUID.new("bafe99d2-7436-44ce-9e0e-4d89afbfff56")
-  CLSID_IAudioSystemEffects2 = "bafe99d2-7436-44ce-9e0e-4d89afbfff56"
+  IAudioSystemEffects2_GUID = "bafe99d2-7436-44ce-9e0e-4d89afbfff56"
+  IID_IAudioSystemEffects2 = LibC::GUID.new(0xbafe99d2_u32, 0x7436_u16, 0x44ce_u16, StaticArray[0x9e_u8, 0xe_u8, 0x4d_u8, 0x89_u8, 0xaf_u8, 0xbf_u8, 0xff_u8, 0x56_u8])
   struct IAudioSystemEffects2
     lpVtbl : IAudioSystemEffects2VTbl*
   end
@@ -381,8 +381,8 @@ lib LibWin32
     get_format_representation : Proc(IAudioSystemEffectsCustomFormats*, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
-  IAudioSystemEffectsCustomFormats_GUID = LibC::GUID.new("b1176e34-bb7f-4f05-bebd-1b18a534e097")
-  CLSID_IAudioSystemEffectsCustomFormats = "b1176e34-bb7f-4f05-bebd-1b18a534e097"
+  IAudioSystemEffectsCustomFormats_GUID = "b1176e34-bb7f-4f05-bebd-1b18a534e097"
+  IID_IAudioSystemEffectsCustomFormats = LibC::GUID.new(0xb1176e34_u32, 0xbb7f_u16, 0x4f05_u16, StaticArray[0xbe_u8, 0xbd_u8, 0x1b_u8, 0x18_u8, 0xa5_u8, 0x34_u8, 0xe0_u8, 0x97_u8])
   struct IAudioSystemEffectsCustomFormats
     lpVtbl : IAudioSystemEffectsCustomFormatsVTbl*
   end
@@ -396,8 +396,8 @@ lib LibWin32
     is_input_format_supported : Proc(IApoAuxiliaryInputConfiguration*, IAudioMediaType, IAudioMediaType*, HRESULT)
   end
 
-  IApoAuxiliaryInputConfiguration_GUID = LibC::GUID.new("4ceb0aab-fa19-48ed-a857-87771ae1b768")
-  CLSID_IApoAuxiliaryInputConfiguration = "4ceb0aab-fa19-48ed-a857-87771ae1b768"
+  IApoAuxiliaryInputConfiguration_GUID = "4ceb0aab-fa19-48ed-a857-87771ae1b768"
+  IID_IApoAuxiliaryInputConfiguration = LibC::GUID.new(0x4ceb0aab_u32, 0xfa19_u16, 0x48ed_u16, StaticArray[0xa8_u8, 0x57_u8, 0x87_u8, 0x77_u8, 0x1a_u8, 0xe1_u8, 0xb7_u8, 0x68_u8])
   struct IApoAuxiliaryInputConfiguration
     lpVtbl : IApoAuxiliaryInputConfigurationVTbl*
   end
@@ -409,8 +409,8 @@ lib LibWin32
     accept_input : Proc(IApoAuxiliaryInputRT*, UInt32, APO_CONNECTION_PROPERTY*, Void)
   end
 
-  IApoAuxiliaryInputRT_GUID = LibC::GUID.new("f851809c-c177-49a0-b1b2-b66f017943ab")
-  CLSID_IApoAuxiliaryInputRT = "f851809c-c177-49a0-b1b2-b66f017943ab"
+  IApoAuxiliaryInputRT_GUID = "f851809c-c177-49a0-b1b2-b66f017943ab"
+  IID_IApoAuxiliaryInputRT = LibC::GUID.new(0xf851809c_u32, 0xc177_u16, 0x49a0_u16, StaticArray[0xb1_u8, 0xb2_u8, 0xb6_u8, 0x6f_u8, 0x1_u8, 0x79_u8, 0x43_u8, 0xab_u8])
   struct IApoAuxiliaryInputRT
     lpVtbl : IApoAuxiliaryInputRTVTbl*
   end
@@ -421,8 +421,8 @@ lib LibWin32
     release : Proc(IApoAcousticEchoCancellation*, UInt32)
   end
 
-  IApoAcousticEchoCancellation_GUID = LibC::GUID.new("25385759-3236-4101-a943-25693dfb5d2d")
-  CLSID_IApoAcousticEchoCancellation = "25385759-3236-4101-a943-25693dfb5d2d"
+  IApoAcousticEchoCancellation_GUID = "25385759-3236-4101-a943-25693dfb5d2d"
+  IID_IApoAcousticEchoCancellation = LibC::GUID.new(0x25385759_u32, 0x3236_u16, 0x4101_u16, StaticArray[0xa9_u8, 0x43_u8, 0x25_u8, 0x69_u8, 0x3d_u8, 0xfb_u8, 0x5d_u8, 0x2d_u8])
   struct IApoAcousticEchoCancellation
     lpVtbl : IApoAcousticEchoCancellationVTbl*
   end
@@ -436,8 +436,8 @@ lib LibWin32
     set_audio_system_effect_state : Proc(IAudioSystemEffects3*, Guid, AUDIO_SYSTEMEFFECT_STATE, HRESULT)
   end
 
-  IAudioSystemEffects3_GUID = LibC::GUID.new("c58b31cd-fc6a-4255-bc1f-ad29bb0a4a17")
-  CLSID_IAudioSystemEffects3 = "c58b31cd-fc6a-4255-bc1f-ad29bb0a4a17"
+  IAudioSystemEffects3_GUID = "c58b31cd-fc6a-4255-bc1f-ad29bb0a4a17"
+  IID_IAudioSystemEffects3 = LibC::GUID.new(0xc58b31cd_u32, 0xfc6a_u16, 0x4255_u16, StaticArray[0xbc_u8, 0x1f_u8, 0xad_u8, 0x29_u8, 0xbb_u8, 0xa_u8, 0x4a_u8, 0x17_u8])
   struct IAudioSystemEffects3
     lpVtbl : IAudioSystemEffects3VTbl*
   end
@@ -449,8 +449,8 @@ lib LibWin32
     get_real_time_work_queue : Proc(IAudioProcessingObjectRTQueueService*, UInt32*, HRESULT)
   end
 
-  IAudioProcessingObjectRTQueueService_GUID = LibC::GUID.new("acd65e2f-955b-4b57-b9bf-ac297bb752c9")
-  CLSID_IAudioProcessingObjectRTQueueService = "acd65e2f-955b-4b57-b9bf-ac297bb752c9"
+  IAudioProcessingObjectRTQueueService_GUID = "acd65e2f-955b-4b57-b9bf-ac297bb752c9"
+  IID_IAudioProcessingObjectRTQueueService = LibC::GUID.new(0xacd65e2f_u32, 0x955b_u16, 0x4b57_u16, StaticArray[0xb9_u8, 0xbf_u8, 0xac_u8, 0x29_u8, 0x7b_u8, 0xb7_u8, 0x52_u8, 0xc9_u8])
   struct IAudioProcessingObjectRTQueueService
     lpVtbl : IAudioProcessingObjectRTQueueServiceVTbl*
   end
@@ -462,8 +462,8 @@ lib LibWin32
     apo_log : Proc(IAudioProcessingObjectLoggingService*, APO_LOG_LEVEL, LibC::LPWSTR, Void)
   end
 
-  IAudioProcessingObjectLoggingService_GUID = LibC::GUID.new("698f0107-1745-4708-95a5-d84478a62a65")
-  CLSID_IAudioProcessingObjectLoggingService = "698f0107-1745-4708-95a5-d84478a62a65"
+  IAudioProcessingObjectLoggingService_GUID = "698f0107-1745-4708-95a5-d84478a62a65"
+  IID_IAudioProcessingObjectLoggingService = LibC::GUID.new(0x698f0107_u32, 0x1745_u16, 0x4708_u16, StaticArray[0x95_u8, 0xa5_u8, 0xd8_u8, 0x44_u8, 0x78_u8, 0xa6_u8, 0x2a_u8, 0x65_u8])
   struct IAudioProcessingObjectLoggingService
     lpVtbl : IAudioProcessingObjectLoggingServiceVTbl*
   end
@@ -476,8 +476,8 @@ lib LibWin32
     handle_notification : Proc(IAudioProcessingObjectNotifications*, APO_NOTIFICATION*, Void)
   end
 
-  IAudioProcessingObjectNotifications_GUID = LibC::GUID.new("56b0c76f-02fd-4b21-a52e-9f8219fc86e4")
-  CLSID_IAudioProcessingObjectNotifications = "56b0c76f-02fd-4b21-a52e-9f8219fc86e4"
+  IAudioProcessingObjectNotifications_GUID = "56b0c76f-02fd-4b21-a52e-9f8219fc86e4"
+  IID_IAudioProcessingObjectNotifications = LibC::GUID.new(0x56b0c76f_u32, 0x2fd_u16, 0x4b21_u16, StaticArray[0xa5_u8, 0x2e_u8, 0x9f_u8, 0x82_u8, 0x19_u8, 0xfc_u8, 0x86_u8, 0xe4_u8])
   struct IAudioProcessingObjectNotifications
     lpVtbl : IAudioProcessingObjectNotificationsVTbl*
   end

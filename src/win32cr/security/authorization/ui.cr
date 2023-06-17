@@ -148,8 +148,8 @@ lib LibWin32
     property_sheet_page_callback : Proc(ISecurityInformation*, LibC::HANDLE, PSPCB_MESSAGE, SI_PAGE_TYPE, HRESULT)
   end
 
-  ISecurityInformation_GUID = LibC::GUID.new("965fc360-16ff-11d0-91cb-00aa00bbb723")
-  CLSID_ISecurityInformation = "965fc360-16ff-11d0-91cb-00aa00bbb723"
+  ISecurityInformation_GUID = "965fc360-16ff-11d0-91cb-00aa00bbb723"
+  IID_ISecurityInformation = LibC::GUID.new(0x965fc360_u32, 0x16ff_u16, 0x11d0_u16, StaticArray[0x91_u8, 0xcb_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbb_u8, 0xb7_u8, 0x23_u8])
   struct ISecurityInformation
     lpVtbl : ISecurityInformationVTbl*
   end
@@ -162,8 +162,8 @@ lib LibWin32
     lookup_sids : Proc(ISecurityInformation2*, UInt32, PSID*, IDataObject*, HRESULT)
   end
 
-  ISecurityInformation2_GUID = LibC::GUID.new("c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
-  CLSID_ISecurityInformation2 = "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a"
+  ISecurityInformation2_GUID = "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a"
+  IID_ISecurityInformation2 = LibC::GUID.new(0xc3ccfdb4_u32, 0x6f88_u16, 0x11d2_u16, StaticArray[0xa3_u8, 0xce_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb1_u8, 0x78_u8, 0x2a_u8])
   struct ISecurityInformation2
     lpVtbl : ISecurityInformation2VTbl*
   end
@@ -175,8 +175,8 @@ lib LibWin32
     get_effective_permission : Proc(IEffectivePermission*, Guid*, PSID, LibC::LPWSTR, SECURITY_DESCRIPTOR*, OBJECT_TYPE_LIST**, UInt32*, UInt32**, UInt32*, HRESULT)
   end
 
-  IEffectivePermission_GUID = LibC::GUID.new("3853dc76-9f35-407c-88a1-d19344365fbc")
-  CLSID_IEffectivePermission = "3853dc76-9f35-407c-88a1-d19344365fbc"
+  IEffectivePermission_GUID = "3853dc76-9f35-407c-88a1-d19344365fbc"
+  IID_IEffectivePermission = LibC::GUID.new(0x3853dc76_u32, 0x9f35_u16, 0x407c_u16, StaticArray[0x88_u8, 0xa1_u8, 0xd1_u8, 0x93_u8, 0x44_u8, 0x36_u8, 0x5f_u8, 0xbc_u8])
   struct IEffectivePermission
     lpVtbl : IEffectivePermissionVTbl*
   end
@@ -188,8 +188,8 @@ lib LibWin32
     get_inherit_source : Proc(ISecurityObjectTypeInfo*, UInt32, ACL*, INHERITED_FROMA**, HRESULT)
   end
 
-  ISecurityObjectTypeInfo_GUID = LibC::GUID.new("fc3066eb-79ef-444b-9111-d18a75ebf2fa")
-  CLSID_ISecurityObjectTypeInfo = "fc3066eb-79ef-444b-9111-d18a75ebf2fa"
+  ISecurityObjectTypeInfo_GUID = "fc3066eb-79ef-444b-9111-d18a75ebf2fa"
+  IID_ISecurityObjectTypeInfo = LibC::GUID.new(0xfc3066eb_u32, 0x79ef_u16, 0x444b_u16, StaticArray[0x91_u8, 0x11_u8, 0xd1_u8, 0x8a_u8, 0x75_u8, 0xeb_u8, 0xf2_u8, 0xfa_u8])
   struct ISecurityObjectTypeInfo
     lpVtbl : ISecurityObjectTypeInfoVTbl*
   end
@@ -202,8 +202,8 @@ lib LibWin32
     open_elevated_editor : Proc(ISecurityInformation3*, LibC::HANDLE, SI_PAGE_TYPE, HRESULT)
   end
 
-  ISecurityInformation3_GUID = LibC::GUID.new("e2cdc9cc-31bd-4f8f-8c8b-b641af516a1a")
-  CLSID_ISecurityInformation3 = "e2cdc9cc-31bd-4f8f-8c8b-b641af516a1a"
+  ISecurityInformation3_GUID = "e2cdc9cc-31bd-4f8f-8c8b-b641af516a1a"
+  IID_ISecurityInformation3 = LibC::GUID.new(0xe2cdc9cc_u32, 0x31bd_u16, 0x4f8f_u16, StaticArray[0x8c_u8, 0x8b_u8, 0xb6_u8, 0x41_u8, 0xaf_u8, 0x51_u8, 0x6a_u8, 0x1a_u8])
   struct ISecurityInformation3
     lpVtbl : ISecurityInformation3VTbl*
   end
@@ -215,8 +215,8 @@ lib LibWin32
     get_secondary_security : Proc(ISecurityInformation4*, SECURITY_OBJECT**, UInt32*, HRESULT)
   end
 
-  ISecurityInformation4_GUID = LibC::GUID.new("ea961070-cd14-4621-ace4-f63c03e583e4")
-  CLSID_ISecurityInformation4 = "ea961070-cd14-4621-ace4-f63c03e583e4"
+  ISecurityInformation4_GUID = "ea961070-cd14-4621-ace4-f63c03e583e4"
+  IID_ISecurityInformation4 = LibC::GUID.new(0xea961070_u32, 0xcd14_u16, 0x4621_u16, StaticArray[0xac_u8, 0xe4_u8, 0xf6_u8, 0x3c_u8, 0x3_u8, 0xe5_u8, 0x83_u8, 0xe4_u8])
   struct ISecurityInformation4
     lpVtbl : ISecurityInformation4VTbl*
   end
@@ -228,8 +228,8 @@ lib LibWin32
     compute_effective_permission_with_secondary_security : Proc(IEffectivePermission2*, PSID, PSID, LibC::LPWSTR, SECURITY_OBJECT*, UInt32, TOKEN_GROUPS*, AUTHZ_SID_OPERATION*, TOKEN_GROUPS*, AUTHZ_SID_OPERATION*, AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, EFFPERM_RESULT_LIST*, HRESULT)
   end
 
-  IEffectivePermission2_GUID = LibC::GUID.new("941fabca-dd47-4fca-90bb-b0e10255f20d")
-  CLSID_IEffectivePermission2 = "941fabca-dd47-4fca-90bb-b0e10255f20d"
+  IEffectivePermission2_GUID = "941fabca-dd47-4fca-90bb-b0e10255f20d"
+  IID_IEffectivePermission2 = LibC::GUID.new(0x941fabca_u32, 0xdd47_u16, 0x4fca_u16, StaticArray[0x90_u8, 0xbb_u8, 0xb0_u8, 0xe1_u8, 0x2_u8, 0x55_u8, 0xf2_u8, 0xd_u8])
   struct IEffectivePermission2
     lpVtbl : IEffectivePermission2VTbl*
   end

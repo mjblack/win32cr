@@ -20,7 +20,7 @@ require "../system/registry.cr"
 @[Link("userenv")]
 {% end %}
 lib LibWin32
-  IsolatedAppLauncher = LibC::GUID.new(0xbc812430_u32, 0xe75e_u16, 0x4fd1_u16, StaticArray[0x96_u8, 0x41_u8, 0x1f_u8, 0x9f_u8, 0x1e_u8, 0x2d_u8, 0x9a_u8, 0x1f_u8])
+  CLSID_IsolatedAppLauncher = LibC::GUID.new(0xbc812430_u32, 0xe75e_u16, 0x4fd1_u16, StaticArray[0x96_u8, 0x41_u8, 0x1f_u8, 0x9f_u8, 0x1e_u8, 0x2d_u8, 0x9a_u8, 0x1f_u8])
 
   struct IsolatedAppLauncherTelemetryParameters
     enable_for_launch : LibC::BOOL
@@ -35,8 +35,8 @@ lib LibWin32
     launch : Proc(IIsolatedAppLauncher*, LibC::LPWSTR, LibC::LPWSTR, IsolatedAppLauncherTelemetryParameters*, HRESULT)
   end
 
-  IIsolatedAppLauncher_GUID = LibC::GUID.new("f686878f-7b42-4cc4-96fb-f4f3b6e3d24d")
-  CLSID_IIsolatedAppLauncher = "f686878f-7b42-4cc4-96fb-f4f3b6e3d24d"
+  IIsolatedAppLauncher_GUID = "f686878f-7b42-4cc4-96fb-f4f3b6e3d24d"
+  IID_IIsolatedAppLauncher = LibC::GUID.new(0xf686878f_u32, 0x7b42_u16, 0x4cc4_u16, StaticArray[0x96_u8, 0xfb_u8, 0xf4_u8, 0xf3_u8, 0xb6_u8, 0xe3_u8, 0xd2_u8, 0x4d_u8])
   struct IIsolatedAppLauncher
     lpVtbl : IIsolatedAppLauncherVTbl*
   end

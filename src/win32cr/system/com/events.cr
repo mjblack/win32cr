@@ -12,12 +12,12 @@ require "../../foundation.cr"
 {% else %}
 {% end %}
 lib LibWin32
-  CEventSystem = LibC::GUID.new(0x4e14fba2_u32, 0x2e22_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
-  CEventPublisher = LibC::GUID.new(0xab944620_u32, 0x79c6_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
-  CEventClass = LibC::GUID.new(0xcdbec9c0_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
-  CEventSubscription = LibC::GUID.new(0x7542e960_u32, 0x79c7_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
-  EventObjectChange = LibC::GUID.new(0xd0565000_u32, 0x9df4_u16, 0x11d1_u16, StaticArray[0xa2_u8, 0x81_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xca_u8, 0xa_u8, 0xa7_u8])
-  EventObjectChange2 = LibC::GUID.new(0xbb07bacd_u32, 0xcd56_u16, 0x4e63_u16, StaticArray[0xa8_u8, 0xff_u8, 0xcb_u8, 0xf0_u8, 0x35_u8, 0x5f_u8, 0xb9_u8, 0xf4_u8])
+  CLSID_CEventSystem = LibC::GUID.new(0x4e14fba2_u32, 0x2e22_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
+  CLSID_CEventPublisher = LibC::GUID.new(0xab944620_u32, 0x79c6_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+  CLSID_CEventClass = LibC::GUID.new(0xcdbec9c0_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+  CLSID_CEventSubscription = LibC::GUID.new(0x7542e960_u32, 0x79c7_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+  CLSID_EventObjectChange = LibC::GUID.new(0xd0565000_u32, 0x9df4_u16, 0x11d1_u16, StaticArray[0xa2_u8, 0x81_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xca_u8, 0xa_u8, 0xa7_u8])
+  CLSID_EventObjectChange2 = LibC::GUID.new(0xbb07bacd_u32, 0xcd56_u16, 0x4e63_u16, StaticArray[0xa8_u8, 0xff_u8, 0xcb_u8, 0xf0_u8, 0x35_u8, 0x5f_u8, 0xb9_u8, 0xf4_u8])
 
 
   enum EOC_ChangeType : Int32
@@ -52,8 +52,8 @@ lib LibWin32
     remove_s : Proc(IEventSystem*, UInt8*, UInt8*, HRESULT)
   end
 
-  IEventSystem_GUID = LibC::GUID.new("4e14fb9f-2e22-11d1-9964-00c04fbbb345")
-  CLSID_IEventSystem = "4e14fb9f-2e22-11d1-9964-00c04fbbb345"
+  IEventSystem_GUID = "4e14fb9f-2e22-11d1-9964-00c04fbbb345"
+  IID_IEventSystem = LibC::GUID.new(0x4e14fb9f_u32, 0x2e22_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
   struct IEventSystem
     lpVtbl : IEventSystemVTbl*
   end
@@ -82,8 +82,8 @@ lib LibWin32
     get_default_property_collection : Proc(IEventPublisher*, IEventObjectCollection*, HRESULT)
   end
 
-  IEventPublisher_GUID = LibC::GUID.new("e341516b-2e32-11d1-9964-00c04fbbb345")
-  CLSID_IEventPublisher = "e341516b-2e32-11d1-9964-00c04fbbb345"
+  IEventPublisher_GUID = "e341516b-2e32-11d1-9964-00c04fbbb345"
+  IID_IEventPublisher = LibC::GUID.new(0xe341516b_u32, 0x2e32_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
   struct IEventPublisher
     lpVtbl : IEventPublisherVTbl*
   end
@@ -112,8 +112,8 @@ lib LibWin32
     put_type_lib : Proc(IEventClass*, UInt8*, HRESULT)
   end
 
-  IEventClass_GUID = LibC::GUID.new("fb2b72a0-7a68-11d1-88f9-0080c7d771bf")
-  CLSID_IEventClass = "fb2b72a0-7a68-11d1-88f9-0080c7d771bf"
+  IEventClass_GUID = "fb2b72a0-7a68-11d1-88f9-0080c7d771bf"
+  IID_IEventClass = LibC::GUID.new(0xfb2b72a0_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
   struct IEventClass
     lpVtbl : IEventClassVTbl*
   end
@@ -150,8 +150,8 @@ lib LibWin32
     put_fire_in_parallel : Proc(IEventClass2*, LibC::BOOL, HRESULT)
   end
 
-  IEventClass2_GUID = LibC::GUID.new("fb2b72a1-7a68-11d1-88f9-0080c7d771bf")
-  CLSID_IEventClass2 = "fb2b72a1-7a68-11d1-88f9-0080c7d771bf"
+  IEventClass2_GUID = "fb2b72a1-7a68-11d1-88f9-0080c7d771bf"
+  IID_IEventClass2 = LibC::GUID.new(0xfb2b72a1_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
   struct IEventClass2
     lpVtbl : IEventClass2VTbl*
   end
@@ -200,8 +200,8 @@ lib LibWin32
     put_interface_id : Proc(IEventSubscription*, UInt8*, HRESULT)
   end
 
-  IEventSubscription_GUID = LibC::GUID.new("4a6b0e15-2e38-11d1-9965-00c04fbbb345")
-  CLSID_IEventSubscription = "4a6b0e15-2e38-11d1-9965-00c04fbbb345"
+  IEventSubscription_GUID = "4a6b0e15-2e38-11d1-9965-00c04fbbb345"
+  IID_IEventSubscription = LibC::GUID.new(0x4a6b0e15_u32, 0x2e38_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x65_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
   struct IEventSubscription
     lpVtbl : IEventSubscriptionVTbl*
   end
@@ -217,8 +217,8 @@ lib LibWin32
     fire_subscription : Proc(IFiringControl*, IEventSubscription, HRESULT)
   end
 
-  IFiringControl_GUID = LibC::GUID.new("e0498c93-4efe-11d1-9971-00c04fbbb345")
-  CLSID_IFiringControl = "e0498c93-4efe-11d1-9971-00c04fbbb345"
+  IFiringControl_GUID = "e0498c93-4efe-11d1-9971-00c04fbbb345"
+  IID_IFiringControl = LibC::GUID.new(0xe0498c93_u32, 0x4efe_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x71_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
   struct IFiringControl
     lpVtbl : IFiringControlVTbl*
   end
@@ -231,8 +231,8 @@ lib LibWin32
     prepare_to_fire : Proc(IPublisherFilter*, UInt8*, IFiringControl, HRESULT)
   end
 
-  IPublisherFilter_GUID = LibC::GUID.new("465e5cc0-7b26-11d1-88fb-0080c7d771bf")
-  CLSID_IPublisherFilter = "465e5cc0-7b26-11d1-88fb-0080c7d771bf"
+  IPublisherFilter_GUID = "465e5cc0-7b26-11d1-88fb-0080c7d771bf"
+  IID_IPublisherFilter = LibC::GUID.new(0x465e5cc0_u32, 0x7b26_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xfb_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
   struct IPublisherFilter
     lpVtbl : IPublisherFilterVTbl*
   end
@@ -245,8 +245,8 @@ lib LibWin32
     prepare_to_fire : Proc(IMultiInterfacePublisherFilter*, Guid*, UInt8*, IFiringControl, HRESULT)
   end
 
-  IMultiInterfacePublisherFilter_GUID = LibC::GUID.new("465e5cc1-7b26-11d1-88fb-0080c7d771bf")
-  CLSID_IMultiInterfacePublisherFilter = "465e5cc1-7b26-11d1-88fb-0080c7d771bf"
+  IMultiInterfacePublisherFilter_GUID = "465e5cc1-7b26-11d1-88fb-0080c7d771bf"
+  IID_IMultiInterfacePublisherFilter = LibC::GUID.new(0x465e5cc1_u32, 0x7b26_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xfb_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
   struct IMultiInterfacePublisherFilter
     lpVtbl : IMultiInterfacePublisherFilterVTbl*
   end
@@ -260,8 +260,8 @@ lib LibWin32
     changed_publisher : Proc(IEventObjectChange*, EOC_ChangeType, UInt8*, HRESULT)
   end
 
-  IEventObjectChange_GUID = LibC::GUID.new("f4a07d70-2e25-11d1-9964-00c04fbbb345")
-  CLSID_IEventObjectChange = "f4a07d70-2e25-11d1-9964-00c04fbbb345"
+  IEventObjectChange_GUID = "f4a07d70-2e25-11d1-9964-00c04fbbb345"
+  IID_IEventObjectChange = LibC::GUID.new(0xf4a07d70_u32, 0x2e25_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
   struct IEventObjectChange
     lpVtbl : IEventObjectChangeVTbl*
   end
@@ -274,8 +274,8 @@ lib LibWin32
     changed_event_class : Proc(IEventObjectChange2*, COMEVENTSYSCHANGEINFO*, HRESULT)
   end
 
-  IEventObjectChange2_GUID = LibC::GUID.new("7701a9c3-bd68-438f-83e0-67bf4f53a422")
-  CLSID_IEventObjectChange2 = "7701a9c3-bd68-438f-83e0-67bf4f53a422"
+  IEventObjectChange2_GUID = "7701a9c3-bd68-438f-83e0-67bf4f53a422"
+  IID_IEventObjectChange2 = LibC::GUID.new(0x7701a9c3_u32, 0xbd68_u16, 0x438f_u16, StaticArray[0x83_u8, 0xe0_u8, 0x67_u8, 0xbf_u8, 0x4f_u8, 0x53_u8, 0xa4_u8, 0x22_u8])
   struct IEventObjectChange2
     lpVtbl : IEventObjectChange2VTbl*
   end
@@ -290,8 +290,8 @@ lib LibWin32
     skip : Proc(IEnumEventObject*, UInt32, HRESULT)
   end
 
-  IEnumEventObject_GUID = LibC::GUID.new("f4a07d63-2e25-11d1-9964-00c04fbbb345")
-  CLSID_IEnumEventObject = "f4a07d63-2e25-11d1-9964-00c04fbbb345"
+  IEnumEventObject_GUID = "f4a07d63-2e25-11d1-9964-00c04fbbb345"
+  IID_IEnumEventObject = LibC::GUID.new(0xf4a07d63_u32, 0x2e25_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
   struct IEnumEventObject
     lpVtbl : IEnumEventObjectVTbl*
   end
@@ -312,8 +312,8 @@ lib LibWin32
     remove : Proc(IEventObjectCollection*, UInt8*, HRESULT)
   end
 
-  IEventObjectCollection_GUID = LibC::GUID.new("f89ac270-d4eb-11d1-b682-00805fc79216")
-  CLSID_IEventObjectCollection = "f89ac270-d4eb-11d1-b682-00805fc79216"
+  IEventObjectCollection_GUID = "f89ac270-d4eb-11d1-b682-00805fc79216"
+  IID_IEventObjectCollection = LibC::GUID.new(0xf89ac270_u32, 0xd4eb_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0x82_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x16_u8])
   struct IEventObjectCollection
     lpVtbl : IEventObjectCollectionVTbl*
   end
@@ -332,8 +332,8 @@ lib LibWin32
     put_value : Proc(IEventProperty*, VARIANT*, HRESULT)
   end
 
-  IEventProperty_GUID = LibC::GUID.new("da538ee2-f4de-11d1-b6bb-00805fc79216")
-  CLSID_IEventProperty = "da538ee2-f4de-11d1-b6bb-00805fc79216"
+  IEventProperty_GUID = "da538ee2-f4de-11d1-b6bb-00805fc79216"
+  IID_IEventProperty = LibC::GUID.new(0xda538ee2_u32, 0xf4de_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0xbb_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x16_u8])
   struct IEventProperty
     lpVtbl : IEventPropertyVTbl*
   end
@@ -353,8 +353,8 @@ lib LibWin32
     set_default_query : Proc(IEventControl*, UInt8*, UInt8*, Int32*, HRESULT)
   end
 
-  IEventControl_GUID = LibC::GUID.new("0343e2f4-86f6-11d1-b760-00c04fb926af")
-  CLSID_IEventControl = "0343e2f4-86f6-11d1-b760-00c04fb926af"
+  IEventControl_GUID = "0343e2f4-86f6-11d1-b760-00c04fb926af"
+  IID_IEventControl = LibC::GUID.new(0x343e2f4_u32, 0x86f6_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x60_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x26_u8, 0xaf_u8])
   struct IEventControl
     lpVtbl : IEventControlVTbl*
   end
@@ -372,8 +372,8 @@ lib LibWin32
     put_fire_in_parallel : Proc(IMultiInterfaceEventControl*, LibC::BOOL, HRESULT)
   end
 
-  IMultiInterfaceEventControl_GUID = LibC::GUID.new("0343e2f5-86f6-11d1-b760-00c04fb926af")
-  CLSID_IMultiInterfaceEventControl = "0343e2f5-86f6-11d1-b760-00c04fb926af"
+  IMultiInterfaceEventControl_GUID = "0343e2f5-86f6-11d1-b760-00c04fb926af"
+  IID_IMultiInterfaceEventControl = LibC::GUID.new(0x343e2f5_u32, 0x86f6_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x60_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x26_u8, 0xaf_u8])
   struct IMultiInterfaceEventControl
     lpVtbl : IMultiInterfaceEventControlVTbl*
   end
@@ -384,8 +384,8 @@ lib LibWin32
     release : Proc(IDontSupportEventSubscription*, UInt32)
   end
 
-  IDontSupportEventSubscription_GUID = LibC::GUID.new("784121f1-62a6-4b89-855f-d65f296de83a")
-  CLSID_IDontSupportEventSubscription = "784121f1-62a6-4b89-855f-d65f296de83a"
+  IDontSupportEventSubscription_GUID = "784121f1-62a6-4b89-855f-d65f296de83a"
+  IID_IDontSupportEventSubscription = LibC::GUID.new(0x784121f1_u32, 0x62a6_u16, 0x4b89_u16, StaticArray[0x85_u8, 0x5f_u8, 0xd6_u8, 0x5f_u8, 0x29_u8, 0x6d_u8, 0xe8_u8, 0x3a_u8])
   struct IDontSupportEventSubscription
     lpVtbl : IDontSupportEventSubscriptionVTbl*
   end

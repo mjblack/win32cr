@@ -1988,7 +1988,7 @@ lib LibWin32
   RTUTILS_MAX_PROTOCOL_DLL_LEN = 48_u32
   MAX_PROTOCOL_NAME_LEN = 40_u32
   MAX_PROTOCOL_DLL_LEN = 48_u32
-  NetProvisioning = LibC::GUID.new(0x2aa2b5fe_u32, 0xb846_u16, 0x4d07_u16, StaticArray[0x81_u8, 0xc_u8, 0xb2_u8, 0x1e_u8, 0xe4_u8, 0x53_u8, 0x20_u8, 0xe3_u8])
+  CLSID_NetProvisioning = LibC::GUID.new(0x2aa2b5fe_u32, 0xb846_u16, 0x4d07_u16, StaticArray[0x81_u8, 0xc_u8, 0xb2_u8, 0x1e_u8, 0xe4_u8, 0x53_u8, 0x20_u8, 0xe3_u8])
 
   alias WORKERFUNCTION = Proc(Void*, Void)
 
@@ -4013,8 +4013,8 @@ lib LibWin32
     clone : Proc(IEnumNetCfgBindingInterface*, IEnumNetCfgBindingInterface*, HRESULT)
   end
 
-  IEnumNetCfgBindingInterface_GUID = LibC::GUID.new("c0e8ae90-306e-11d1-aacf-00805fc1270e")
-  CLSID_IEnumNetCfgBindingInterface = "c0e8ae90-306e-11d1-aacf-00805fc1270e"
+  IEnumNetCfgBindingInterface_GUID = "c0e8ae90-306e-11d1-aacf-00805fc1270e"
+  IID_IEnumNetCfgBindingInterface = LibC::GUID.new(0xc0e8ae90_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct IEnumNetCfgBindingInterface
     lpVtbl : IEnumNetCfgBindingInterfaceVTbl*
   end
@@ -4029,8 +4029,8 @@ lib LibWin32
     clone : Proc(IEnumNetCfgBindingPath*, IEnumNetCfgBindingPath*, HRESULT)
   end
 
-  IEnumNetCfgBindingPath_GUID = LibC::GUID.new("c0e8ae91-306e-11d1-aacf-00805fc1270e")
-  CLSID_IEnumNetCfgBindingPath = "c0e8ae91-306e-11d1-aacf-00805fc1270e"
+  IEnumNetCfgBindingPath_GUID = "c0e8ae91-306e-11d1-aacf-00805fc1270e"
+  IID_IEnumNetCfgBindingPath = LibC::GUID.new(0xc0e8ae91_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct IEnumNetCfgBindingPath
     lpVtbl : IEnumNetCfgBindingPathVTbl*
   end
@@ -4045,8 +4045,8 @@ lib LibWin32
     clone : Proc(IEnumNetCfgComponent*, IEnumNetCfgComponent*, HRESULT)
   end
 
-  IEnumNetCfgComponent_GUID = LibC::GUID.new("c0e8ae92-306e-11d1-aacf-00805fc1270e")
-  CLSID_IEnumNetCfgComponent = "c0e8ae92-306e-11d1-aacf-00805fc1270e"
+  IEnumNetCfgComponent_GUID = "c0e8ae92-306e-11d1-aacf-00805fc1270e"
+  IID_IEnumNetCfgComponent = LibC::GUID.new(0xc0e8ae92_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct IEnumNetCfgComponent
     lpVtbl : IEnumNetCfgComponentVTbl*
   end
@@ -4064,8 +4064,8 @@ lib LibWin32
     query_net_cfg_class : Proc(INetCfg*, Guid*, Guid*, Void**, HRESULT)
   end
 
-  INetCfg_GUID = LibC::GUID.new("c0e8ae93-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfg = "c0e8ae93-306e-11d1-aacf-00805fc1270e"
+  INetCfg_GUID = "c0e8ae93-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfg = LibC::GUID.new(0xc0e8ae93_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfg
     lpVtbl : INetCfgVTbl*
   end
@@ -4079,8 +4079,8 @@ lib LibWin32
     is_write_locked : Proc(INetCfgLock*, LibC::LPWSTR*, HRESULT)
   end
 
-  INetCfgLock_GUID = LibC::GUID.new("c0e8ae9f-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgLock = "c0e8ae9f-306e-11d1-aacf-00805fc1270e"
+  INetCfgLock_GUID = "c0e8ae9f-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgLock = LibC::GUID.new(0xc0e8ae9f_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgLock
     lpVtbl : INetCfgLockVTbl*
   end
@@ -4094,8 +4094,8 @@ lib LibWin32
     get_lower_component : Proc(INetCfgBindingInterface*, INetCfgComponent*, HRESULT)
   end
 
-  INetCfgBindingInterface_GUID = LibC::GUID.new("c0e8ae94-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgBindingInterface = "c0e8ae94-306e-11d1-aacf-00805fc1270e"
+  INetCfgBindingInterface_GUID = "c0e8ae94-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgBindingInterface = LibC::GUID.new(0xc0e8ae94_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgBindingInterface
     lpVtbl : INetCfgBindingInterfaceVTbl*
   end
@@ -4114,8 +4114,8 @@ lib LibWin32
     enum_binding_interfaces : Proc(INetCfgBindingPath*, IEnumNetCfgBindingInterface*, HRESULT)
   end
 
-  INetCfgBindingPath_GUID = LibC::GUID.new("c0e8ae96-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgBindingPath = "c0e8ae96-306e-11d1-aacf-00805fc1270e"
+  INetCfgBindingPath_GUID = "c0e8ae96-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgBindingPath = LibC::GUID.new(0xc0e8ae96_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgBindingPath
     lpVtbl : INetCfgBindingPathVTbl*
   end
@@ -4128,8 +4128,8 @@ lib LibWin32
     enum_components : Proc(INetCfgClass*, IEnumNetCfgComponent*, HRESULT)
   end
 
-  INetCfgClass_GUID = LibC::GUID.new("c0e8ae97-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgClass = "c0e8ae97-306e-11d1-aacf-00805fc1270e"
+  INetCfgClass_GUID = "c0e8ae97-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgClass = LibC::GUID.new(0xc0e8ae97_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgClass
     lpVtbl : INetCfgClassVTbl*
   end
@@ -4143,8 +4143,8 @@ lib LibWin32
     de_install : Proc(INetCfgClassSetup*, INetCfgComponent, OBO_TOKEN*, LibC::LPWSTR*, HRESULT)
   end
 
-  INetCfgClassSetup_GUID = LibC::GUID.new("c0e8ae9d-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgClassSetup = "c0e8ae9d-306e-11d1-aacf-00805fc1270e"
+  INetCfgClassSetup_GUID = "c0e8ae9d-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgClassSetup = LibC::GUID.new(0xc0e8ae9d_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgClassSetup
     lpVtbl : INetCfgClassSetupVTbl*
   end
@@ -4159,8 +4159,8 @@ lib LibWin32
     update_non_enumerated_component : Proc(INetCfgClassSetup2*, INetCfgComponent, UInt32, UInt32, HRESULT)
   end
 
-  INetCfgClassSetup2_GUID = LibC::GUID.new("c0e8aea0-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgClassSetup2 = "c0e8aea0-306e-11d1-aacf-00805fc1270e"
+  INetCfgClassSetup2_GUID = "c0e8aea0-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgClassSetup2 = LibC::GUID.new(0xc0e8aea0_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgClassSetup2
     lpVtbl : INetCfgClassSetup2VTbl*
   end
@@ -4183,8 +4183,8 @@ lib LibWin32
     raise_property_ui : Proc(INetCfgComponent*, LibC::HANDLE, UInt32, IUnknown, HRESULT)
   end
 
-  INetCfgComponent_GUID = LibC::GUID.new("c0e8ae99-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgComponent = "c0e8ae99-306e-11d1-aacf-00805fc1270e"
+  INetCfgComponent_GUID = "c0e8ae99-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgComponent = LibC::GUID.new(0xc0e8ae99_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgComponent
     lpVtbl : INetCfgComponentVTbl*
   end
@@ -4203,8 +4203,8 @@ lib LibWin32
     move_after : Proc(INetCfgComponentBindings*, INetCfgBindingPath, INetCfgBindingPath, HRESULT)
   end
 
-  INetCfgComponentBindings_GUID = LibC::GUID.new("c0e8ae9e-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgComponentBindings = "c0e8ae9e-306e-11d1-aacf-00805fc1270e"
+  INetCfgComponentBindings_GUID = "c0e8ae9e-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgComponentBindings = LibC::GUID.new(0xc0e8ae9e_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgComponentBindings
     lpVtbl : INetCfgComponentBindingsVTbl*
   end
@@ -4219,8 +4219,8 @@ lib LibWin32
     hr_setup_set_first_multi_sz_field : Proc(INetCfgSysPrep*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  INetCfgSysPrep_GUID = LibC::GUID.new("c0e8ae98-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgSysPrep = "c0e8ae98-306e-11d1-aacf-00805fc1270e"
+  INetCfgSysPrep_GUID = "c0e8ae98-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgSysPrep = LibC::GUID.new(0xc0e8ae98_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgSysPrep
     lpVtbl : INetCfgSysPrepVTbl*
   end
@@ -4232,8 +4232,8 @@ lib LibWin32
     send_pnp_reconfig : Proc(INetCfgPnpReconfigCallback*, NCPNP_RECONFIG_LAYER, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)
   end
 
-  INetCfgPnpReconfigCallback_GUID = LibC::GUID.new("8d84bd35-e227-11d2-b700-00a0c98a6a85")
-  CLSID_INetCfgPnpReconfigCallback = "8d84bd35-e227-11d2-b700-00a0c98a6a85"
+  INetCfgPnpReconfigCallback_GUID = "8d84bd35-e227-11d2-b700-00a0c98a6a85"
+  IID_INetCfgPnpReconfigCallback = LibC::GUID.new(0x8d84bd35_u32, 0xe227_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8a_u8, 0x6a_u8, 0x85_u8])
   struct INetCfgPnpReconfigCallback
     lpVtbl : INetCfgPnpReconfigCallbackVTbl*
   end
@@ -4248,8 +4248,8 @@ lib LibWin32
     cancel_changes : Proc(INetCfgComponentControl*, HRESULT)
   end
 
-  INetCfgComponentControl_GUID = LibC::GUID.new("932238df-bea1-11d0-9298-00c04fc99dcf")
-  CLSID_INetCfgComponentControl = "932238df-bea1-11d0-9298-00c04fc99dcf"
+  INetCfgComponentControl_GUID = "932238df-bea1-11d0-9298-00c04fc99dcf"
+  IID_INetCfgComponentControl = LibC::GUID.new(0x932238df_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
   struct INetCfgComponentControl
     lpVtbl : INetCfgComponentControlVTbl*
   end
@@ -4264,8 +4264,8 @@ lib LibWin32
     removing : Proc(INetCfgComponentSetup*, HRESULT)
   end
 
-  INetCfgComponentSetup_GUID = LibC::GUID.new("932238e3-bea1-11d0-9298-00c04fc99dcf")
-  CLSID_INetCfgComponentSetup = "932238e3-bea1-11d0-9298-00c04fc99dcf"
+  INetCfgComponentSetup_GUID = "932238e3-bea1-11d0-9298-00c04fc99dcf"
+  IID_INetCfgComponentSetup = LibC::GUID.new(0x932238e3_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
   struct INetCfgComponentSetup
     lpVtbl : INetCfgComponentSetupVTbl*
   end
@@ -4282,8 +4282,8 @@ lib LibWin32
     cancel_properties : Proc(INetCfgComponentPropertyUi*, HRESULT)
   end
 
-  INetCfgComponentPropertyUi_GUID = LibC::GUID.new("932238e0-bea1-11d0-9298-00c04fc99dcf")
-  CLSID_INetCfgComponentPropertyUi = "932238e0-bea1-11d0-9298-00c04fc99dcf"
+  INetCfgComponentPropertyUi_GUID = "932238e0-bea1-11d0-9298-00c04fc99dcf"
+  IID_INetCfgComponentPropertyUi = LibC::GUID.new(0x932238e0_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
   struct INetCfgComponentPropertyUi
     lpVtbl : INetCfgComponentPropertyUiVTbl*
   end
@@ -4296,8 +4296,8 @@ lib LibWin32
     notify_binding_path : Proc(INetCfgComponentNotifyBinding*, UInt32, INetCfgBindingPath, HRESULT)
   end
 
-  INetCfgComponentNotifyBinding_GUID = LibC::GUID.new("932238e1-bea1-11d0-9298-00c04fc99dcf")
-  CLSID_INetCfgComponentNotifyBinding = "932238e1-bea1-11d0-9298-00c04fc99dcf"
+  INetCfgComponentNotifyBinding_GUID = "932238e1-bea1-11d0-9298-00c04fc99dcf"
+  IID_INetCfgComponentNotifyBinding = LibC::GUID.new(0x932238e1_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
   struct INetCfgComponentNotifyBinding
     lpVtbl : INetCfgComponentNotifyBindingVTbl*
   end
@@ -4312,8 +4312,8 @@ lib LibWin32
     sys_notify_component : Proc(INetCfgComponentNotifyGlobal*, UInt32, INetCfgComponent, HRESULT)
   end
 
-  INetCfgComponentNotifyGlobal_GUID = LibC::GUID.new("932238e2-bea1-11d0-9298-00c04fc99dcf")
-  CLSID_INetCfgComponentNotifyGlobal = "932238e2-bea1-11d0-9298-00c04fc99dcf"
+  INetCfgComponentNotifyGlobal_GUID = "932238e2-bea1-11d0-9298-00c04fc99dcf"
+  IID_INetCfgComponentNotifyGlobal = LibC::GUID.new(0x932238e2_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
   struct INetCfgComponentNotifyGlobal
     lpVtbl : INetCfgComponentNotifyGlobalVTbl*
   end
@@ -4327,8 +4327,8 @@ lib LibWin32
     remove_interfaces_from_adapter : Proc(INetCfgComponentUpperEdge*, INetCfgComponent, UInt32, Guid*, HRESULT)
   end
 
-  INetCfgComponentUpperEdge_GUID = LibC::GUID.new("932238e4-bea1-11d0-9298-00c04fc99dcf")
-  CLSID_INetCfgComponentUpperEdge = "932238e4-bea1-11d0-9298-00c04fc99dcf"
+  INetCfgComponentUpperEdge_GUID = "932238e4-bea1-11d0-9298-00c04fc99dcf"
+  IID_INetCfgComponentUpperEdge = LibC::GUID.new(0x932238e4_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
   struct INetCfgComponentUpperEdge
     lpVtbl : INetCfgComponentUpperEdgeVTbl*
   end
@@ -4340,8 +4340,8 @@ lib LibWin32
     get_device_guid : Proc(INetLanConnectionUiInfo*, Guid*, HRESULT)
   end
 
-  INetLanConnectionUiInfo_GUID = LibC::GUID.new("c08956a6-1cd3-11d1-b1c5-00805fc1270e")
-  CLSID_INetLanConnectionUiInfo = "c08956a6-1cd3-11d1-b1c5-00805fc1270e"
+  INetLanConnectionUiInfo_GUID = "c08956a6-1cd3-11d1-b1c5-00805fc1270e"
+  IID_INetLanConnectionUiInfo = LibC::GUID.new(0xc08956a6_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetLanConnectionUiInfo
     lpVtbl : INetLanConnectionUiInfoVTbl*
   end
@@ -4353,8 +4353,8 @@ lib LibWin32
     get_ui_info : Proc(INetRasConnectionIpUiInfo*, RASCON_IPUI*, HRESULT)
   end
 
-  INetRasConnectionIpUiInfo_GUID = LibC::GUID.new("faedcf58-31fe-11d1-aad2-00805fc1270e")
-  CLSID_INetRasConnectionIpUiInfo = "faedcf58-31fe-11d1-aad2-00805fc1270e"
+  INetRasConnectionIpUiInfo_GUID = "faedcf58-31fe-11d1-aad2-00805fc1270e"
+  IID_INetRasConnectionIpUiInfo = LibC::GUID.new(0xfaedcf58_u32, 0x31fe_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xd2_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetRasConnectionIpUiInfo
     lpVtbl : INetRasConnectionIpUiInfoVTbl*
   end
@@ -4367,8 +4367,8 @@ lib LibWin32
     restore_adapter_parameters : Proc(INetCfgComponentSysPrep*, LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)
   end
 
-  INetCfgComponentSysPrep_GUID = LibC::GUID.new("c0e8ae9a-306e-11d1-aacf-00805fc1270e")
-  CLSID_INetCfgComponentSysPrep = "c0e8ae9a-306e-11d1-aacf-00805fc1270e"
+  INetCfgComponentSysPrep_GUID = "c0e8ae9a-306e-11d1-aacf-00805fc1270e"
+  IID_INetCfgComponentSysPrep = LibC::GUID.new(0xc0e8ae9a_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
   struct INetCfgComponentSysPrep
     lpVtbl : INetCfgComponentSysPrepVTbl*
   end
@@ -4381,8 +4381,8 @@ lib LibWin32
     query : Proc(IProvisioningDomain*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IXMLDOMNodeList*, HRESULT)
   end
 
-  IProvisioningDomain_GUID = LibC::GUID.new("c96fbd50-24dd-11d8-89fb-00904b2ea9c6")
-  CLSID_IProvisioningDomain = "c96fbd50-24dd-11d8-89fb-00904b2ea9c6"
+  IProvisioningDomain_GUID = "c96fbd50-24dd-11d8-89fb-00904b2ea9c6"
+  IID_IProvisioningDomain = LibC::GUID.new(0xc96fbd50_u32, 0x24dd_u16, 0x11d8_u16, StaticArray[0x89_u8, 0xfb_u8, 0x0_u8, 0x90_u8, 0x4b_u8, 0x2e_u8, 0xa9_u8, 0xc6_u8])
   struct IProvisioningDomain
     lpVtbl : IProvisioningDomainVTbl*
   end
@@ -4394,8 +4394,8 @@ lib LibWin32
     create_profile : Proc(IProvisioningProfileWireless*, UInt8*, UInt8*, Guid*, UInt32*, HRESULT)
   end
 
-  IProvisioningProfileWireless_GUID = LibC::GUID.new("c96fbd51-24dd-11d8-89fb-00904b2ea9c6")
-  CLSID_IProvisioningProfileWireless = "c96fbd51-24dd-11d8-89fb-00904b2ea9c6"
+  IProvisioningProfileWireless_GUID = "c96fbd51-24dd-11d8-89fb-00904b2ea9c6"
+  IID_IProvisioningProfileWireless = LibC::GUID.new(0xc96fbd51_u32, 0x24dd_u16, 0x11d8_u16, StaticArray[0x89_u8, 0xfb_u8, 0x0_u8, 0x90_u8, 0x4b_u8, 0x2e_u8, 0xa9_u8, 0xc6_u8])
   struct IProvisioningProfileWireless
     lpVtbl : IProvisioningProfileWirelessVTbl*
   end

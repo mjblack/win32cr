@@ -857,8 +857,8 @@ lib LibWin32
     get_parent : Proc(IDXGIObject*, Guid*, Void**, HRESULT)
   end
 
-  IDXGIObject_GUID = LibC::GUID.new("aec22fb8-76f3-4639-9be0-28eb43a67a2e")
-  CLSID_IDXGIObject = "aec22fb8-76f3-4639-9be0-28eb43a67a2e"
+  IDXGIObject_GUID = "aec22fb8-76f3-4639-9be0-28eb43a67a2e"
+  IID_IDXGIObject = LibC::GUID.new(0xaec22fb8_u32, 0x76f3_u16, 0x4639_u16, StaticArray[0x9b_u8, 0xe0_u8, 0x28_u8, 0xeb_u8, 0x43_u8, 0xa6_u8, 0x7a_u8, 0x2e_u8])
   struct IDXGIObject
     lpVtbl : IDXGIObjectVTbl*
   end
@@ -874,8 +874,8 @@ lib LibWin32
     get_device : Proc(IDXGIDeviceSubObject*, Guid*, Void**, HRESULT)
   end
 
-  IDXGIDeviceSubObject_GUID = LibC::GUID.new("3d3e0379-f9de-4d58-bb6c-18d62992f1a6")
-  CLSID_IDXGIDeviceSubObject = "3d3e0379-f9de-4d58-bb6c-18d62992f1a6"
+  IDXGIDeviceSubObject_GUID = "3d3e0379-f9de-4d58-bb6c-18d62992f1a6"
+  IID_IDXGIDeviceSubObject = LibC::GUID.new(0x3d3e0379_u32, 0xf9de_u16, 0x4d58_u16, StaticArray[0xbb_u8, 0x6c_u8, 0x18_u8, 0xd6_u8, 0x29_u8, 0x92_u8, 0xf1_u8, 0xa6_u8])
   struct IDXGIDeviceSubObject
     lpVtbl : IDXGIDeviceSubObjectVTbl*
   end
@@ -895,8 +895,8 @@ lib LibWin32
     get_eviction_priority : Proc(IDXGIResource*, UInt32*, HRESULT)
   end
 
-  IDXGIResource_GUID = LibC::GUID.new("035f3ab4-482e-4e50-b41f-8a7f8bd8960b")
-  CLSID_IDXGIResource = "035f3ab4-482e-4e50-b41f-8a7f8bd8960b"
+  IDXGIResource_GUID = "035f3ab4-482e-4e50-b41f-8a7f8bd8960b"
+  IID_IDXGIResource = LibC::GUID.new(0x35f3ab4_u32, 0x482e_u16, 0x4e50_u16, StaticArray[0xb4_u8, 0x1f_u8, 0x8a_u8, 0x7f_u8, 0x8b_u8, 0xd8_u8, 0x96_u8, 0xb_u8])
   struct IDXGIResource
     lpVtbl : IDXGIResourceVTbl*
   end
@@ -914,8 +914,8 @@ lib LibWin32
     release_sync : Proc(IDXGIKeyedMutex*, UInt64, HRESULT)
   end
 
-  IDXGIKeyedMutex_GUID = LibC::GUID.new("9d8e1289-d7b3-465f-8126-250e349af85d")
-  CLSID_IDXGIKeyedMutex = "9d8e1289-d7b3-465f-8126-250e349af85d"
+  IDXGIKeyedMutex_GUID = "9d8e1289-d7b3-465f-8126-250e349af85d"
+  IID_IDXGIKeyedMutex = LibC::GUID.new(0x9d8e1289_u32, 0xd7b3_u16, 0x465f_u16, StaticArray[0x81_u8, 0x26_u8, 0x25_u8, 0xe_u8, 0x34_u8, 0x9a_u8, 0xf8_u8, 0x5d_u8])
   struct IDXGIKeyedMutex
     lpVtbl : IDXGIKeyedMutexVTbl*
   end
@@ -934,8 +934,8 @@ lib LibWin32
     unmap : Proc(IDXGISurface*, HRESULT)
   end
 
-  IDXGISurface_GUID = LibC::GUID.new("cafcb56c-6ac3-4889-bf47-9e23bbd260ec")
-  CLSID_IDXGISurface = "cafcb56c-6ac3-4889-bf47-9e23bbd260ec"
+  IDXGISurface_GUID = "cafcb56c-6ac3-4889-bf47-9e23bbd260ec"
+  IID_IDXGISurface = LibC::GUID.new(0xcafcb56c_u32, 0x6ac3_u16, 0x4889_u16, StaticArray[0xbf_u8, 0x47_u8, 0x9e_u8, 0x23_u8, 0xbb_u8, 0xd2_u8, 0x60_u8, 0xec_u8])
   struct IDXGISurface
     lpVtbl : IDXGISurfaceVTbl*
   end
@@ -956,8 +956,8 @@ lib LibWin32
     release_dc : Proc(IDXGISurface1*, RECT*, HRESULT)
   end
 
-  IDXGISurface1_GUID = LibC::GUID.new("4ae63092-6327-4c1b-80ae-bfe12ea32b86")
-  CLSID_IDXGISurface1 = "4ae63092-6327-4c1b-80ae-bfe12ea32b86"
+  IDXGISurface1_GUID = "4ae63092-6327-4c1b-80ae-bfe12ea32b86"
+  IID_IDXGISurface1 = LibC::GUID.new(0x4ae63092_u32, 0x6327_u16, 0x4c1b_u16, StaticArray[0x80_u8, 0xae_u8, 0xbf_u8, 0xe1_u8, 0x2e_u8, 0xa3_u8, 0x2b_u8, 0x86_u8])
   struct IDXGISurface1
     lpVtbl : IDXGISurface1VTbl*
   end
@@ -975,8 +975,8 @@ lib LibWin32
     check_interface_support : Proc(IDXGIAdapter*, Guid*, LARGE_INTEGER*, HRESULT)
   end
 
-  IDXGIAdapter_GUID = LibC::GUID.new("2411e7e1-12ac-4ccf-bd14-9798e8534dc0")
-  CLSID_IDXGIAdapter = "2411e7e1-12ac-4ccf-bd14-9798e8534dc0"
+  IDXGIAdapter_GUID = "2411e7e1-12ac-4ccf-bd14-9798e8534dc0"
+  IID_IDXGIAdapter = LibC::GUID.new(0x2411e7e1_u32, 0x12ac_u16, 0x4ccf_u16, StaticArray[0xbd_u8, 0x14_u8, 0x97_u8, 0x98_u8, 0xe8_u8, 0x53_u8, 0x4d_u8, 0xc0_u8])
   struct IDXGIAdapter
     lpVtbl : IDXGIAdapterVTbl*
   end
@@ -1003,8 +1003,8 @@ lib LibWin32
     get_frame_statistics : Proc(IDXGIOutput*, DXGI_FRAME_STATISTICS*, HRESULT)
   end
 
-  IDXGIOutput_GUID = LibC::GUID.new("ae02eedb-c735-4690-8d52-5a8dc20213aa")
-  CLSID_IDXGIOutput = "ae02eedb-c735-4690-8d52-5a8dc20213aa"
+  IDXGIOutput_GUID = "ae02eedb-c735-4690-8d52-5a8dc20213aa"
+  IID_IDXGIOutput = LibC::GUID.new(0xae02eedb_u32, 0xc735_u16, 0x4690_u16, StaticArray[0x8d_u8, 0x52_u8, 0x5a_u8, 0x8d_u8, 0xc2_u8, 0x2_u8, 0x13_u8, 0xaa_u8])
   struct IDXGIOutput
     lpVtbl : IDXGIOutputVTbl*
   end
@@ -1030,8 +1030,8 @@ lib LibWin32
     get_last_present_count : Proc(IDXGISwapChain*, UInt32*, HRESULT)
   end
 
-  IDXGISwapChain_GUID = LibC::GUID.new("310d36a0-d2e7-4c0a-aa04-6a9d23b8886a")
-  CLSID_IDXGISwapChain = "310d36a0-d2e7-4c0a-aa04-6a9d23b8886a"
+  IDXGISwapChain_GUID = "310d36a0-d2e7-4c0a-aa04-6a9d23b8886a"
+  IID_IDXGISwapChain = LibC::GUID.new(0x310d36a0_u32, 0xd2e7_u16, 0x4c0a_u16, StaticArray[0xaa_u8, 0x4_u8, 0x6a_u8, 0x9d_u8, 0x23_u8, 0xb8_u8, 0x88_u8, 0x6a_u8])
   struct IDXGISwapChain
     lpVtbl : IDXGISwapChainVTbl*
   end
@@ -1051,8 +1051,8 @@ lib LibWin32
     create_software_adapter : Proc(IDXGIFactory*, HINSTANCE, IDXGIAdapter*, HRESULT)
   end
 
-  IDXGIFactory_GUID = LibC::GUID.new("7b7166ec-21c7-44ae-b21a-c9ae321ae369")
-  CLSID_IDXGIFactory = "7b7166ec-21c7-44ae-b21a-c9ae321ae369"
+  IDXGIFactory_GUID = "7b7166ec-21c7-44ae-b21a-c9ae321ae369"
+  IID_IDXGIFactory = LibC::GUID.new(0x7b7166ec_u32, 0x21c7_u16, 0x44ae_u16, StaticArray[0xb2_u8, 0x1a_u8, 0xc9_u8, 0xae_u8, 0x32_u8, 0x1a_u8, 0xe3_u8, 0x69_u8])
   struct IDXGIFactory
     lpVtbl : IDXGIFactoryVTbl*
   end
@@ -1072,8 +1072,8 @@ lib LibWin32
     get_gpu_thread_priority : Proc(IDXGIDevice*, Int32*, HRESULT)
   end
 
-  IDXGIDevice_GUID = LibC::GUID.new("54ec77fa-1377-44e6-8c32-88fd5f44c84c")
-  CLSID_IDXGIDevice = "54ec77fa-1377-44e6-8c32-88fd5f44c84c"
+  IDXGIDevice_GUID = "54ec77fa-1377-44e6-8c32-88fd5f44c84c"
+  IID_IDXGIDevice = LibC::GUID.new(0x54ec77fa_u32, 0x1377_u16, 0x44e6_u16, StaticArray[0x8c_u8, 0x32_u8, 0x88_u8, 0xfd_u8, 0x5f_u8, 0x44_u8, 0xc8_u8, 0x4c_u8])
   struct IDXGIDevice
     lpVtbl : IDXGIDeviceVTbl*
   end
@@ -1095,8 +1095,8 @@ lib LibWin32
     is_current : Proc(IDXGIFactory1*, LibC::BOOL)
   end
 
-  IDXGIFactory1_GUID = LibC::GUID.new("770aae78-f26f-4dba-a829-253c83d1b387")
-  CLSID_IDXGIFactory1 = "770aae78-f26f-4dba-a829-253c83d1b387"
+  IDXGIFactory1_GUID = "770aae78-f26f-4dba-a829-253c83d1b387"
+  IID_IDXGIFactory1 = LibC::GUID.new(0x770aae78_u32, 0xf26f_u16, 0x4dba_u16, StaticArray[0xa8_u8, 0x29_u8, 0x25_u8, 0x3c_u8, 0x83_u8, 0xd1_u8, 0xb3_u8, 0x87_u8])
   struct IDXGIFactory1
     lpVtbl : IDXGIFactory1VTbl*
   end
@@ -1115,8 +1115,8 @@ lib LibWin32
     get_desc1 : Proc(IDXGIAdapter1*, DXGI_ADAPTER_DESC1*, HRESULT)
   end
 
-  IDXGIAdapter1_GUID = LibC::GUID.new("29038f61-3839-4626-91fd-086879011a05")
-  CLSID_IDXGIAdapter1 = "29038f61-3839-4626-91fd-086879011a05"
+  IDXGIAdapter1_GUID = "29038f61-3839-4626-91fd-086879011a05"
+  IID_IDXGIAdapter1 = LibC::GUID.new(0x29038f61_u32, 0x3839_u16, 0x4626_u16, StaticArray[0x91_u8, 0xfd_u8, 0x8_u8, 0x68_u8, 0x79_u8, 0x1_u8, 0x1a_u8, 0x5_u8])
   struct IDXGIAdapter1
     lpVtbl : IDXGIAdapter1VTbl*
   end
@@ -1138,8 +1138,8 @@ lib LibWin32
     get_maximum_frame_latency : Proc(IDXGIDevice1*, UInt32*, HRESULT)
   end
 
-  IDXGIDevice1_GUID = LibC::GUID.new("77db970f-6276-48ba-ba28-070143b4392c")
-  CLSID_IDXGIDevice1 = "77db970f-6276-48ba-ba28-070143b4392c"
+  IDXGIDevice1_GUID = "77db970f-6276-48ba-ba28-070143b4392c"
+  IID_IDXGIDevice1 = LibC::GUID.new(0x77db970f_u32, 0x6276_u16, 0x48ba_u16, StaticArray[0xba_u8, 0x28_u8, 0x7_u8, 0x1_u8, 0x43_u8, 0xb4_u8, 0x39_u8, 0x2c_u8])
   struct IDXGIDevice1
     lpVtbl : IDXGIDevice1VTbl*
   end
@@ -1152,8 +1152,8 @@ lib LibWin32
     set_stereo_enabled : Proc(IDXGIDisplayControl*, LibC::BOOL, Void)
   end
 
-  IDXGIDisplayControl_GUID = LibC::GUID.new("ea9dbf1a-c88e-4486-854a-98aa0138f30c")
-  CLSID_IDXGIDisplayControl = "ea9dbf1a-c88e-4486-854a-98aa0138f30c"
+  IDXGIDisplayControl_GUID = "ea9dbf1a-c88e-4486-854a-98aa0138f30c"
+  IID_IDXGIDisplayControl = LibC::GUID.new(0xea9dbf1a_u32, 0xc88e_u16, 0x4486_u16, StaticArray[0x85_u8, 0x4a_u8, 0x98_u8, 0xaa_u8, 0x1_u8, 0x38_u8, 0xf3_u8, 0xc_u8])
   struct IDXGIDisplayControl
     lpVtbl : IDXGIDisplayControlVTbl*
   end
@@ -1176,8 +1176,8 @@ lib LibWin32
     release_frame : Proc(IDXGIOutputDuplication*, HRESULT)
   end
 
-  IDXGIOutputDuplication_GUID = LibC::GUID.new("191cfac3-a341-470d-b26e-a864f428319c")
-  CLSID_IDXGIOutputDuplication = "191cfac3-a341-470d-b26e-a864f428319c"
+  IDXGIOutputDuplication_GUID = "191cfac3-a341-470d-b26e-a864f428319c"
+  IID_IDXGIOutputDuplication = LibC::GUID.new(0x191cfac3_u32, 0xa341_u16, 0x470d_u16, StaticArray[0xb2_u8, 0x6e_u8, 0xa8_u8, 0x64_u8, 0xf4_u8, 0x28_u8, 0x31_u8, 0x9c_u8])
   struct IDXGIOutputDuplication
     lpVtbl : IDXGIOutputDuplicationVTbl*
   end
@@ -1199,8 +1199,8 @@ lib LibWin32
     get_resource : Proc(IDXGISurface2*, Guid*, Void**, UInt32*, HRESULT)
   end
 
-  IDXGISurface2_GUID = LibC::GUID.new("aba496dd-b617-4cb8-a866-bc44d7eb1fa2")
-  CLSID_IDXGISurface2 = "aba496dd-b617-4cb8-a866-bc44d7eb1fa2"
+  IDXGISurface2_GUID = "aba496dd-b617-4cb8-a866-bc44d7eb1fa2"
+  IID_IDXGISurface2 = LibC::GUID.new(0xaba496dd_u32, 0xb617_u16, 0x4cb8_u16, StaticArray[0xa8_u8, 0x66_u8, 0xbc_u8, 0x44_u8, 0xd7_u8, 0xeb_u8, 0x1f_u8, 0xa2_u8])
   struct IDXGISurface2
     lpVtbl : IDXGISurface2VTbl*
   end
@@ -1222,8 +1222,8 @@ lib LibWin32
     create_shared_handle : Proc(IDXGIResource1*, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
   end
 
-  IDXGIResource1_GUID = LibC::GUID.new("30961379-4609-4a41-998e-54fe567ee0c1")
-  CLSID_IDXGIResource1 = "30961379-4609-4a41-998e-54fe567ee0c1"
+  IDXGIResource1_GUID = "30961379-4609-4a41-998e-54fe567ee0c1"
+  IID_IDXGIResource1 = LibC::GUID.new(0x30961379_u32, 0x4609_u16, 0x4a41_u16, StaticArray[0x99_u8, 0x8e_u8, 0x54_u8, 0xfe_u8, 0x56_u8, 0x7e_u8, 0xe0_u8, 0xc1_u8])
   struct IDXGIResource1
     lpVtbl : IDXGIResource1VTbl*
   end
@@ -1248,8 +1248,8 @@ lib LibWin32
     enqueue_set_event : Proc(IDXGIDevice2*, LibC::HANDLE, HRESULT)
   end
 
-  IDXGIDevice2_GUID = LibC::GUID.new("05008617-fbfd-4051-a790-144884b4f6a9")
-  CLSID_IDXGIDevice2 = "05008617-fbfd-4051-a790-144884b4f6a9"
+  IDXGIDevice2_GUID = "05008617-fbfd-4051-a790-144884b4f6a9"
+  IID_IDXGIDevice2 = LibC::GUID.new(0x5008617_u32, 0xfbfd_u16, 0x4051_u16, StaticArray[0xa7_u8, 0x90_u8, 0x14_u8, 0x48_u8, 0x84_u8, 0xb4_u8, 0xf6_u8, 0xa9_u8])
   struct IDXGIDevice2
     lpVtbl : IDXGIDevice2VTbl*
   end
@@ -1286,8 +1286,8 @@ lib LibWin32
     get_rotation : Proc(IDXGISwapChain1*, DXGI_MODE_ROTATION*, HRESULT)
   end
 
-  IDXGISwapChain1_GUID = LibC::GUID.new("790a45f7-0d42-4876-983a-0a55cfe6f4aa")
-  CLSID_IDXGISwapChain1 = "790a45f7-0d42-4876-983a-0a55cfe6f4aa"
+  IDXGISwapChain1_GUID = "790a45f7-0d42-4876-983a-0a55cfe6f4aa"
+  IID_IDXGISwapChain1 = LibC::GUID.new(0x790a45f7_u32, 0xd42_u16, 0x4876_u16, StaticArray[0x98_u8, 0x3a_u8, 0xa_u8, 0x55_u8, 0xcf_u8, 0xe6_u8, 0xf4_u8, 0xaa_u8])
   struct IDXGISwapChain1
     lpVtbl : IDXGISwapChain1VTbl*
   end
@@ -1320,8 +1320,8 @@ lib LibWin32
     create_swap_chain_for_composition : Proc(IDXGIFactory2*, IUnknown, DXGI_SWAP_CHAIN_DESC1*, IDXGIOutput, IDXGISwapChain1*, HRESULT)
   end
 
-  IDXGIFactory2_GUID = LibC::GUID.new("50c83a1c-e072-4c48-87b0-3630fa36a6d0")
-  CLSID_IDXGIFactory2 = "50c83a1c-e072-4c48-87b0-3630fa36a6d0"
+  IDXGIFactory2_GUID = "50c83a1c-e072-4c48-87b0-3630fa36a6d0"
+  IID_IDXGIFactory2 = LibC::GUID.new(0x50c83a1c_u32, 0xe072_u16, 0x4c48_u16, StaticArray[0x87_u8, 0xb0_u8, 0x36_u8, 0x30_u8, 0xfa_u8, 0x36_u8, 0xa6_u8, 0xd0_u8])
   struct IDXGIFactory2
     lpVtbl : IDXGIFactory2VTbl*
   end
@@ -1341,8 +1341,8 @@ lib LibWin32
     get_desc2 : Proc(IDXGIAdapter2*, DXGI_ADAPTER_DESC2*, HRESULT)
   end
 
-  IDXGIAdapter2_GUID = LibC::GUID.new("0aa1ae0a-fa0e-4b84-8644-e05ff8e5acb5")
-  CLSID_IDXGIAdapter2 = "0aa1ae0a-fa0e-4b84-8644-e05ff8e5acb5"
+  IDXGIAdapter2_GUID = "0aa1ae0a-fa0e-4b84-8644-e05ff8e5acb5"
+  IID_IDXGIAdapter2 = LibC::GUID.new(0xaa1ae0a_u32, 0xfa0e_u16, 0x4b84_u16, StaticArray[0x86_u8, 0x44_u8, 0xe0_u8, 0x5f_u8, 0xf8_u8, 0xe5_u8, 0xac_u8, 0xb5_u8])
   struct IDXGIAdapter2
     lpVtbl : IDXGIAdapter2VTbl*
   end
@@ -1373,8 +1373,8 @@ lib LibWin32
     duplicate_output : Proc(IDXGIOutput1*, IUnknown, IDXGIOutputDuplication*, HRESULT)
   end
 
-  IDXGIOutput1_GUID = LibC::GUID.new("00cddea8-939b-4b83-a340-a685226666cc")
-  CLSID_IDXGIOutput1 = "00cddea8-939b-4b83-a340-a685226666cc"
+  IDXGIOutput1_GUID = "00cddea8-939b-4b83-a340-a685226666cc"
+  IID_IDXGIOutput1 = LibC::GUID.new(0xcddea8_u32, 0x939b_u16, 0x4b83_u16, StaticArray[0xa3_u8, 0x40_u8, 0xa6_u8, 0x85_u8, 0x22_u8, 0x66_u8, 0x66_u8, 0xcc_u8])
   struct IDXGIOutput1
     lpVtbl : IDXGIOutput1VTbl*
   end
@@ -1400,8 +1400,8 @@ lib LibWin32
     trim : Proc(IDXGIDevice3*, Void)
   end
 
-  IDXGIDevice3_GUID = LibC::GUID.new("6007896c-3244-4afd-bf18-a6d3beda5023")
-  CLSID_IDXGIDevice3 = "6007896c-3244-4afd-bf18-a6d3beda5023"
+  IDXGIDevice3_GUID = "6007896c-3244-4afd-bf18-a6d3beda5023"
+  IID_IDXGIDevice3 = LibC::GUID.new(0x6007896c_u32, 0x3244_u16, 0x4afd_u16, StaticArray[0xbf_u8, 0x18_u8, 0xa6_u8, 0xd3_u8, 0xbe_u8, 0xda_u8, 0x50_u8, 0x23_u8])
   struct IDXGIDevice3
     lpVtbl : IDXGIDevice3VTbl*
   end
@@ -1445,8 +1445,8 @@ lib LibWin32
     get_matrix_transform : Proc(IDXGISwapChain2*, DXGI_MATRIX_3X2_F*, HRESULT)
   end
 
-  IDXGISwapChain2_GUID = LibC::GUID.new("a8be2ac4-199f-4946-b331-79599fb98de7")
-  CLSID_IDXGISwapChain2 = "a8be2ac4-199f-4946-b331-79599fb98de7"
+  IDXGISwapChain2_GUID = "a8be2ac4-199f-4946-b331-79599fb98de7"
+  IID_IDXGISwapChain2 = LibC::GUID.new(0xa8be2ac4_u32, 0x199f_u16, 0x4946_u16, StaticArray[0xb3_u8, 0x31_u8, 0x79_u8, 0x59_u8, 0x9f_u8, 0xb9_u8, 0x8d_u8, 0xe7_u8])
   struct IDXGISwapChain2
     lpVtbl : IDXGISwapChain2VTbl*
   end
@@ -1478,8 +1478,8 @@ lib LibWin32
     supports_overlays : Proc(IDXGIOutput2*, LibC::BOOL)
   end
 
-  IDXGIOutput2_GUID = LibC::GUID.new("595e39d1-2724-4663-99b1-da969de28364")
-  CLSID_IDXGIOutput2 = "595e39d1-2724-4663-99b1-da969de28364"
+  IDXGIOutput2_GUID = "595e39d1-2724-4663-99b1-da969de28364"
+  IID_IDXGIOutput2 = LibC::GUID.new(0x595e39d1_u32, 0x2724_u16, 0x4663_u16, StaticArray[0x99_u8, 0xb1_u8, 0xda_u8, 0x96_u8, 0x9d_u8, 0xe2_u8, 0x83_u8, 0x64_u8])
   struct IDXGIOutput2
     lpVtbl : IDXGIOutput2VTbl*
   end
@@ -1513,8 +1513,8 @@ lib LibWin32
     get_creation_flags : Proc(IDXGIFactory3*, UInt32)
   end
 
-  IDXGIFactory3_GUID = LibC::GUID.new("25483823-cd46-4c7d-86ca-47aa95b837bd")
-  CLSID_IDXGIFactory3 = "25483823-cd46-4c7d-86ca-47aa95b837bd"
+  IDXGIFactory3_GUID = "25483823-cd46-4c7d-86ca-47aa95b837bd"
+  IID_IDXGIFactory3 = LibC::GUID.new(0x25483823_u32, 0xcd46_u16, 0x4c7d_u16, StaticArray[0x86_u8, 0xca_u8, 0x47_u8, 0xaa_u8, 0x95_u8, 0xb8_u8, 0x37_u8, 0xbd_u8])
   struct IDXGIFactory3
     lpVtbl : IDXGIFactory3VTbl*
   end
@@ -1534,8 +1534,8 @@ lib LibWin32
     get_color_space : Proc(IDXGIDecodeSwapChain*, DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS)
   end
 
-  IDXGIDecodeSwapChain_GUID = LibC::GUID.new("2633066b-4514-4c7a-8fd8-12ea98059d18")
-  CLSID_IDXGIDecodeSwapChain = "2633066b-4514-4c7a-8fd8-12ea98059d18"
+  IDXGIDecodeSwapChain_GUID = "2633066b-4514-4c7a-8fd8-12ea98059d18"
+  IID_IDXGIDecodeSwapChain = LibC::GUID.new(0x2633066b_u32, 0x4514_u16, 0x4c7a_u16, StaticArray[0x8f_u8, 0xd8_u8, 0x12_u8, 0xea_u8, 0x98_u8, 0x5_u8, 0x9d_u8, 0x18_u8])
   struct IDXGIDecodeSwapChain
     lpVtbl : IDXGIDecodeSwapChainVTbl*
   end
@@ -1548,8 +1548,8 @@ lib LibWin32
     create_decode_swap_chain_for_composition_surface_handle : Proc(IDXGIFactoryMedia*, IUnknown, LibC::HANDLE, DXGI_DECODE_SWAP_CHAIN_DESC*, IDXGIResource, IDXGIOutput, IDXGIDecodeSwapChain*, HRESULT)
   end
 
-  IDXGIFactoryMedia_GUID = LibC::GUID.new("41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12")
-  CLSID_IDXGIFactoryMedia = "41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12"
+  IDXGIFactoryMedia_GUID = "41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12"
+  IID_IDXGIFactoryMedia = LibC::GUID.new(0x41e7d1f2_u32, 0xa591_u16, 0x4f7b_u16, StaticArray[0xa2_u8, 0xe5_u8, 0xfa_u8, 0x9c_u8, 0x84_u8, 0x3e_u8, 0x1c_u8, 0x12_u8])
   struct IDXGIFactoryMedia
     lpVtbl : IDXGIFactoryMediaVTbl*
   end
@@ -1563,8 +1563,8 @@ lib LibWin32
     check_present_duration_support : Proc(IDXGISwapChainMedia*, UInt32, UInt32*, UInt32*, HRESULT)
   end
 
-  IDXGISwapChainMedia_GUID = LibC::GUID.new("dd95b90b-f05f-4f6a-bd65-25bfb264bd84")
-  CLSID_IDXGISwapChainMedia = "dd95b90b-f05f-4f6a-bd65-25bfb264bd84"
+  IDXGISwapChainMedia_GUID = "dd95b90b-f05f-4f6a-bd65-25bfb264bd84"
+  IID_IDXGISwapChainMedia = LibC::GUID.new(0xdd95b90b_u32, 0xf05f_u16, 0x4f6a_u16, StaticArray[0xbd_u8, 0x65_u8, 0x25_u8, 0xbf_u8, 0xb2_u8, 0x64_u8, 0xbd_u8, 0x84_u8])
   struct IDXGISwapChainMedia
     lpVtbl : IDXGISwapChainMediaVTbl*
   end
@@ -1597,8 +1597,8 @@ lib LibWin32
     check_overlay_support : Proc(IDXGIOutput3*, DXGI_FORMAT, IUnknown, UInt32*, HRESULT)
   end
 
-  IDXGIOutput3_GUID = LibC::GUID.new("8a6bb301-7e7e-41f4-a8e0-5b32f7f99b18")
-  CLSID_IDXGIOutput3 = "8a6bb301-7e7e-41f4-a8e0-5b32f7f99b18"
+  IDXGIOutput3_GUID = "8a6bb301-7e7e-41f4-a8e0-5b32f7f99b18"
+  IID_IDXGIOutput3 = LibC::GUID.new(0x8a6bb301_u32, 0x7e7e_u16, 0x41f4_u16, StaticArray[0xa8_u8, 0xe0_u8, 0x5b_u8, 0x32_u8, 0xf7_u8, 0xf9_u8, 0x9b_u8, 0x18_u8])
   struct IDXGIOutput3
     lpVtbl : IDXGIOutput3VTbl*
   end
@@ -1646,8 +1646,8 @@ lib LibWin32
     resize_buffers1 : Proc(IDXGISwapChain3*, UInt32, UInt32, UInt32, DXGI_FORMAT, UInt32, UInt32*, IUnknown*, HRESULT)
   end
 
-  IDXGISwapChain3_GUID = LibC::GUID.new("94d99bdb-f1f8-4ab0-b236-7da0170edab1")
-  CLSID_IDXGISwapChain3 = "94d99bdb-f1f8-4ab0-b236-7da0170edab1"
+  IDXGISwapChain3_GUID = "94d99bdb-f1f8-4ab0-b236-7da0170edab1"
+  IID_IDXGISwapChain3 = LibC::GUID.new(0x94d99bdb_u32, 0xf1f8_u16, 0x4ab0_u16, StaticArray[0xb2_u8, 0x36_u8, 0x7d_u8, 0xa0_u8, 0x17_u8, 0xe_u8, 0xda_u8, 0xb1_u8])
   struct IDXGISwapChain3
     lpVtbl : IDXGISwapChain3VTbl*
   end
@@ -1681,8 +1681,8 @@ lib LibWin32
     check_overlay_color_space_support : Proc(IDXGIOutput4*, DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, IUnknown, UInt32*, HRESULT)
   end
 
-  IDXGIOutput4_GUID = LibC::GUID.new("dc7dca35-2196-414d-9f53-617884032a60")
-  CLSID_IDXGIOutput4 = "dc7dca35-2196-414d-9f53-617884032a60"
+  IDXGIOutput4_GUID = "dc7dca35-2196-414d-9f53-617884032a60"
+  IID_IDXGIOutput4 = LibC::GUID.new(0xdc7dca35_u32, 0x2196_u16, 0x414d_u16, StaticArray[0x9f_u8, 0x53_u8, 0x61_u8, 0x78_u8, 0x84_u8, 0x3_u8, 0x2a_u8, 0x60_u8])
   struct IDXGIOutput4
     lpVtbl : IDXGIOutput4VTbl*
   end
@@ -1718,8 +1718,8 @@ lib LibWin32
     enum_warp_adapter : Proc(IDXGIFactory4*, Guid*, Void**, HRESULT)
   end
 
-  IDXGIFactory4_GUID = LibC::GUID.new("1bc6ea02-ef36-464f-bf0c-21ca39e5168a")
-  CLSID_IDXGIFactory4 = "1bc6ea02-ef36-464f-bf0c-21ca39e5168a"
+  IDXGIFactory4_GUID = "1bc6ea02-ef36-464f-bf0c-21ca39e5168a"
+  IID_IDXGIFactory4 = LibC::GUID.new(0x1bc6ea02_u32, 0xef36_u16, 0x464f_u16, StaticArray[0xbf_u8, 0xc_u8, 0x21_u8, 0xca_u8, 0x39_u8, 0xe5_u8, 0x16_u8, 0x8a_u8])
   struct IDXGIFactory4
     lpVtbl : IDXGIFactory4VTbl*
   end
@@ -1745,8 +1745,8 @@ lib LibWin32
     unregister_video_memory_budget_change_notification : Proc(IDXGIAdapter3*, UInt32, Void)
   end
 
-  IDXGIAdapter3_GUID = LibC::GUID.new("645967a4-1392-4310-a798-8053ce3e93fd")
-  CLSID_IDXGIAdapter3 = "645967a4-1392-4310-a798-8053ce3e93fd"
+  IDXGIAdapter3_GUID = "645967a4-1392-4310-a798-8053ce3e93fd"
+  IID_IDXGIAdapter3 = LibC::GUID.new(0x645967a4_u32, 0x1392_u16, 0x4310_u16, StaticArray[0xa7_u8, 0x98_u8, 0x80_u8, 0x53_u8, 0xce_u8, 0x3e_u8, 0x93_u8, 0xfd_u8])
   struct IDXGIAdapter3
     lpVtbl : IDXGIAdapter3VTbl*
   end
@@ -1781,8 +1781,8 @@ lib LibWin32
     duplicate_output1 : Proc(IDXGIOutput5*, IUnknown, UInt32, UInt32, DXGI_FORMAT*, IDXGIOutputDuplication*, HRESULT)
   end
 
-  IDXGIOutput5_GUID = LibC::GUID.new("80a07424-ab52-42eb-833c-0c42fd282d98")
-  CLSID_IDXGIOutput5 = "80a07424-ab52-42eb-833c-0c42fd282d98"
+  IDXGIOutput5_GUID = "80a07424-ab52-42eb-833c-0c42fd282d98"
+  IID_IDXGIOutput5 = LibC::GUID.new(0x80a07424_u32, 0xab52_u16, 0x42eb_u16, StaticArray[0x83_u8, 0x3c_u8, 0xc_u8, 0x42_u8, 0xfd_u8, 0x28_u8, 0x2d_u8, 0x98_u8])
   struct IDXGIOutput5
     lpVtbl : IDXGIOutput5VTbl*
   end
@@ -1831,8 +1831,8 @@ lib LibWin32
     set_hdr_meta_data : Proc(IDXGISwapChain4*, DXGI_HDR_METADATA_TYPE, UInt32, Void*, HRESULT)
   end
 
-  IDXGISwapChain4_GUID = LibC::GUID.new("3d585d5a-bd4a-489e-b1f4-3dbcb6452ffb")
-  CLSID_IDXGISwapChain4 = "3d585d5a-bd4a-489e-b1f4-3dbcb6452ffb"
+  IDXGISwapChain4_GUID = "3d585d5a-bd4a-489e-b1f4-3dbcb6452ffb"
+  IID_IDXGISwapChain4 = LibC::GUID.new(0x3d585d5a_u32, 0xbd4a_u16, 0x489e_u16, StaticArray[0xb1_u8, 0xf4_u8, 0x3d_u8, 0xbc_u8, 0xb6_u8, 0x45_u8, 0x2f_u8, 0xfb_u8])
   struct IDXGISwapChain4
     lpVtbl : IDXGISwapChain4VTbl*
   end
@@ -1860,8 +1860,8 @@ lib LibWin32
     reclaim_resources1 : Proc(IDXGIDevice4*, UInt32, IDXGIResource*, DXGI_RECLAIM_RESOURCE_RESULTS*, HRESULT)
   end
 
-  IDXGIDevice4_GUID = LibC::GUID.new("95b4f95f-d8da-4ca4-9ee6-3b76d5968a10")
-  CLSID_IDXGIDevice4 = "95b4f95f-d8da-4ca4-9ee6-3b76d5968a10"
+  IDXGIDevice4_GUID = "95b4f95f-d8da-4ca4-9ee6-3b76d5968a10"
+  IID_IDXGIDevice4 = LibC::GUID.new(0x95b4f95f_u32, 0xd8da_u16, 0x4ca4_u16, StaticArray[0x9e_u8, 0xe6_u8, 0x3b_u8, 0x76_u8, 0xd5_u8, 0x96_u8, 0x8a_u8, 0x10_u8])
   struct IDXGIDevice4
     lpVtbl : IDXGIDevice4VTbl*
   end
@@ -1898,8 +1898,8 @@ lib LibWin32
     check_feature_support : Proc(IDXGIFactory5*, DXGI_FEATURE, Void*, UInt32, HRESULT)
   end
 
-  IDXGIFactory5_GUID = LibC::GUID.new("7632e1f5-ee65-4dca-87fd-84cd75f8838d")
-  CLSID_IDXGIFactory5 = "7632e1f5-ee65-4dca-87fd-84cd75f8838d"
+  IDXGIFactory5_GUID = "7632e1f5-ee65-4dca-87fd-84cd75f8838d"
+  IID_IDXGIFactory5 = LibC::GUID.new(0x7632e1f5_u32, 0xee65_u16, 0x4dca_u16, StaticArray[0x87_u8, 0xfd_u8, 0x84_u8, 0xcd_u8, 0x75_u8, 0xf8_u8, 0x83_u8, 0x8d_u8])
   struct IDXGIFactory5
     lpVtbl : IDXGIFactory5VTbl*
   end
@@ -1926,8 +1926,8 @@ lib LibWin32
     get_desc3 : Proc(IDXGIAdapter4*, DXGI_ADAPTER_DESC3*, HRESULT)
   end
 
-  IDXGIAdapter4_GUID = LibC::GUID.new("3c8d99d1-4fbf-4181-a82c-af66bf7bd24e")
-  CLSID_IDXGIAdapter4 = "3c8d99d1-4fbf-4181-a82c-af66bf7bd24e"
+  IDXGIAdapter4_GUID = "3c8d99d1-4fbf-4181-a82c-af66bf7bd24e"
+  IID_IDXGIAdapter4 = LibC::GUID.new(0x3c8d99d1_u32, 0x4fbf_u16, 0x4181_u16, StaticArray[0xa8_u8, 0x2c_u8, 0xaf_u8, 0x66_u8, 0xbf_u8, 0x7b_u8, 0xd2_u8, 0x4e_u8])
   struct IDXGIAdapter4
     lpVtbl : IDXGIAdapter4VTbl*
   end
@@ -1964,8 +1964,8 @@ lib LibWin32
     check_hardware_composition_support : Proc(IDXGIOutput6*, UInt32*, HRESULT)
   end
 
-  IDXGIOutput6_GUID = LibC::GUID.new("068346e8-aaec-4b84-add7-137f513f77a1")
-  CLSID_IDXGIOutput6 = "068346e8-aaec-4b84-add7-137f513f77a1"
+  IDXGIOutput6_GUID = "068346e8-aaec-4b84-add7-137f513f77a1"
+  IID_IDXGIOutput6 = LibC::GUID.new(0x68346e8_u32, 0xaaec_u16, 0x4b84_u16, StaticArray[0xad_u8, 0xd7_u8, 0x13_u8, 0x7f_u8, 0x51_u8, 0x3f_u8, 0x77_u8, 0xa1_u8])
   struct IDXGIOutput6
     lpVtbl : IDXGIOutput6VTbl*
   end
@@ -2003,8 +2003,8 @@ lib LibWin32
     enum_adapter_by_gpu_preference : Proc(IDXGIFactory6*, UInt32, DXGI_GPU_PREFERENCE, Guid*, Void**, HRESULT)
   end
 
-  IDXGIFactory6_GUID = LibC::GUID.new("c1b6694f-ff09-44a9-b03c-77900a0a1d17")
-  CLSID_IDXGIFactory6 = "c1b6694f-ff09-44a9-b03c-77900a0a1d17"
+  IDXGIFactory6_GUID = "c1b6694f-ff09-44a9-b03c-77900a0a1d17"
+  IID_IDXGIFactory6 = LibC::GUID.new(0xc1b6694f_u32, 0xff09_u16, 0x44a9_u16, StaticArray[0xb0_u8, 0x3c_u8, 0x77_u8, 0x90_u8, 0xa_u8, 0xa_u8, 0x1d_u8, 0x17_u8])
   struct IDXGIFactory6
     lpVtbl : IDXGIFactory6VTbl*
   end
@@ -2044,8 +2044,8 @@ lib LibWin32
     unregister_adapters_changed_event : Proc(IDXGIFactory7*, UInt32, HRESULT)
   end
 
-  IDXGIFactory7_GUID = LibC::GUID.new("a4966eed-76db-44da-84c1-ee9a7afb20a8")
-  CLSID_IDXGIFactory7 = "a4966eed-76db-44da-84c1-ee9a7afb20a8"
+  IDXGIFactory7_GUID = "a4966eed-76db-44da-84c1-ee9a7afb20a8"
+  IID_IDXGIFactory7 = LibC::GUID.new(0xa4966eed_u32, 0x76db_u16, 0x44da_u16, StaticArray[0x84_u8, 0xc1_u8, 0xee_u8, 0x9a_u8, 0x7a_u8, 0xfb_u8, 0x20_u8, 0xa8_u8])
   struct IDXGIFactory7
     lpVtbl : IDXGIFactory7VTbl*
   end
@@ -2093,8 +2093,8 @@ lib LibWin32
     get_mute_debug_output : Proc(IDXGIInfoQueue*, Guid, LibC::BOOL)
   end
 
-  IDXGIInfoQueue_GUID = LibC::GUID.new("d67441c7-672a-476f-9e82-cd55b44949ce")
-  CLSID_IDXGIInfoQueue = "d67441c7-672a-476f-9e82-cd55b44949ce"
+  IDXGIInfoQueue_GUID = "d67441c7-672a-476f-9e82-cd55b44949ce"
+  IID_IDXGIInfoQueue = LibC::GUID.new(0xd67441c7_u32, 0x672a_u16, 0x476f_u16, StaticArray[0x9e_u8, 0x82_u8, 0xcd_u8, 0x55_u8, 0xb4_u8, 0x49_u8, 0x49_u8, 0xce_u8])
   struct IDXGIInfoQueue
     lpVtbl : IDXGIInfoQueueVTbl*
   end
@@ -2106,8 +2106,8 @@ lib LibWin32
     report_live_objects : Proc(IDXGIDebug*, Guid, DXGI_DEBUG_RLO_FLAGS, HRESULT)
   end
 
-  IDXGIDebug_GUID = LibC::GUID.new("119e7452-de9e-40fe-8806-88f90c12b441")
-  CLSID_IDXGIDebug = "119e7452-de9e-40fe-8806-88f90c12b441"
+  IDXGIDebug_GUID = "119e7452-de9e-40fe-8806-88f90c12b441"
+  IID_IDXGIDebug = LibC::GUID.new(0x119e7452_u32, 0xde9e_u16, 0x40fe_u16, StaticArray[0x88_u8, 0x6_u8, 0x88_u8, 0xf9_u8, 0xc_u8, 0x12_u8, 0xb4_u8, 0x41_u8])
   struct IDXGIDebug
     lpVtbl : IDXGIDebugVTbl*
   end
@@ -2122,8 +2122,8 @@ lib LibWin32
     is_leak_tracking_enabled_for_thread : Proc(IDXGIDebug1*, LibC::BOOL)
   end
 
-  IDXGIDebug1_GUID = LibC::GUID.new("c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550")
-  CLSID_IDXGIDebug1 = "c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550"
+  IDXGIDebug1_GUID = "c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550"
+  IID_IDXGIDebug1 = LibC::GUID.new(0xc5a05f0c_u32, 0x16f2_u16, 0x4adf_u16, StaticArray[0x9f_u8, 0x4d_u8, 0xa8_u8, 0xc4_u8, 0xd5_u8, 0x8a_u8, 0xc5_u8, 0x50_u8])
   struct IDXGIDebug1
     lpVtbl : IDXGIDebug1VTbl*
   end
@@ -2136,8 +2136,8 @@ lib LibWin32
     end_capture : Proc(IDXGraphicsAnalysis*, Void)
   end
 
-  IDXGraphicsAnalysis_GUID = LibC::GUID.new("9f251514-9d4d-4902-9d60-18988ab7d4b5")
-  CLSID_IDXGraphicsAnalysis = "9f251514-9d4d-4902-9d60-18988ab7d4b5"
+  IDXGraphicsAnalysis_GUID = "9f251514-9d4d-4902-9d60-18988ab7d4b5"
+  IID_IDXGraphicsAnalysis = LibC::GUID.new(0x9f251514_u32, 0x9d4d_u16, 0x4902_u16, StaticArray[0x9d_u8, 0x60_u8, 0x18_u8, 0x98_u8, 0x8a_u8, 0xb7_u8, 0xd4_u8, 0xb5_u8])
   struct IDXGraphicsAnalysis
     lpVtbl : IDXGraphicsAnalysisVTbl*
   end

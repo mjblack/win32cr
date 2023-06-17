@@ -18,8 +18,8 @@ lib LibWin32
   UI_ALL_COMMANDS = 0_u32
   UI_COLLECTION_INVALIDINDEX = 4294967295_u32
   LIBID_UIRibbon = "942f35c2-e83b-45ef-b085-ac295dd63d5b"
-  UIRibbonFramework = LibC::GUID.new(0x926749fa_u32, 0x2615_u16, 0x4987_u16, StaticArray[0x88_u8, 0x45_u8, 0xc3_u8, 0x3e_u8, 0x65_u8, 0xf2_u8, 0xb9_u8, 0x57_u8])
-  UIRibbonImageFromBitmapFactory = LibC::GUID.new(0xf7434b6_u32, 0x59b6_u16, 0x4250_u16, StaticArray[0x99_u8, 0x9e_u8, 0xd1_u8, 0x68_u8, 0xd6_u8, 0xae_u8, 0x42_u8, 0x93_u8])
+  CLSID_UIRibbonFramework = LibC::GUID.new(0x926749fa_u32, 0x2615_u16, 0x4987_u16, StaticArray[0x88_u8, 0x45_u8, 0xc3_u8, 0x3e_u8, 0x65_u8, 0xf2_u8, 0xb9_u8, 0x57_u8])
+  CLSID_UIRibbonImageFromBitmapFactory = LibC::GUID.new(0xf7434b6_u32, 0x59b6_u16, 0x4250_u16, StaticArray[0x99_u8, 0x9e_u8, 0xd1_u8, 0x68_u8, 0xd6_u8, 0xae_u8, 0x42_u8, 0x93_u8])
 
 
   enum UI_CONTEXTAVAILABILITY : Int32
@@ -164,8 +164,8 @@ lib LibWin32
     get_value : Proc(IUISimplePropertySet*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
-  IUISimplePropertySet_GUID = LibC::GUID.new("c205bb48-5b1c-4219-a106-15bd0a5f24e2")
-  CLSID_IUISimplePropertySet = "c205bb48-5b1c-4219-a106-15bd0a5f24e2"
+  IUISimplePropertySet_GUID = "c205bb48-5b1c-4219-a106-15bd0a5f24e2"
+  IID_IUISimplePropertySet = LibC::GUID.new(0xc205bb48_u32, 0x5b1c_u16, 0x4219_u16, StaticArray[0xa1_u8, 0x6_u8, 0x15_u8, 0xbd_u8, 0xa_u8, 0x5f_u8, 0x24_u8, 0xe2_u8])
   struct IUISimplePropertySet
     lpVtbl : IUISimplePropertySetVTbl*
   end
@@ -179,8 +179,8 @@ lib LibWin32
     save_settings_to_stream : Proc(IUIRibbon*, IStream, HRESULT)
   end
 
-  IUIRibbon_GUID = LibC::GUID.new("803982ab-370a-4f7e-a9e7-8784036a6e26")
-  CLSID_IUIRibbon = "803982ab-370a-4f7e-a9e7-8784036a6e26"
+  IUIRibbon_GUID = "803982ab-370a-4f7e-a9e7-8784036a6e26"
+  IID_IUIRibbon = LibC::GUID.new(0x803982ab_u32, 0x370a_u16, 0x4f7e_u16, StaticArray[0xa9_u8, 0xe7_u8, 0x87_u8, 0x84_u8, 0x3_u8, 0x6a_u8, 0x6e_u8, 0x26_u8])
   struct IUIRibbon
     lpVtbl : IUIRibbonVTbl*
   end
@@ -200,8 +200,8 @@ lib LibWin32
     set_modes : Proc(IUIFramework*, Int32, HRESULT)
   end
 
-  IUIFramework_GUID = LibC::GUID.new("f4f0385d-6872-43a8-ad09-4c339cb3f5c5")
-  CLSID_IUIFramework = "f4f0385d-6872-43a8-ad09-4c339cb3f5c5"
+  IUIFramework_GUID = "f4f0385d-6872-43a8-ad09-4c339cb3f5c5"
+  IID_IUIFramework = LibC::GUID.new(0xf4f0385d_u32, 0x6872_u16, 0x43a8_u16, StaticArray[0xad_u8, 0x9_u8, 0x4c_u8, 0x33_u8, 0x9c_u8, 0xb3_u8, 0xf5_u8, 0xc5_u8])
   struct IUIFramework
     lpVtbl : IUIFrameworkVTbl*
   end
@@ -213,8 +213,8 @@ lib LibWin32
     on_ui_event : Proc(IUIEventLogger*, UI_EVENTPARAMS*, Void)
   end
 
-  IUIEventLogger_GUID = LibC::GUID.new("ec3e1034-dbf4-41a1-95d5-03e0f1026e05")
-  CLSID_IUIEventLogger = "ec3e1034-dbf4-41a1-95d5-03e0f1026e05"
+  IUIEventLogger_GUID = "ec3e1034-dbf4-41a1-95d5-03e0f1026e05"
+  IID_IUIEventLogger = LibC::GUID.new(0xec3e1034_u32, 0xdbf4_u16, 0x41a1_u16, StaticArray[0x95_u8, 0xd5_u8, 0x3_u8, 0xe0_u8, 0xf1_u8, 0x2_u8, 0x6e_u8, 0x5_u8])
   struct IUIEventLogger
     lpVtbl : IUIEventLoggerVTbl*
   end
@@ -226,8 +226,8 @@ lib LibWin32
     set_event_logger : Proc(IUIEventingManager*, IUIEventLogger, HRESULT)
   end
 
-  IUIEventingManager_GUID = LibC::GUID.new("3be6ea7f-9a9b-4198-9368-9b0f923bd534")
-  CLSID_IUIEventingManager = "3be6ea7f-9a9b-4198-9368-9b0f923bd534"
+  IUIEventingManager_GUID = "3be6ea7f-9a9b-4198-9368-9b0f923bd534"
+  IID_IUIEventingManager = LibC::GUID.new(0x3be6ea7f_u32, 0x9a9b_u16, 0x4198_u16, StaticArray[0x93_u8, 0x68_u8, 0x9b_u8, 0xf_u8, 0x92_u8, 0x3b_u8, 0xd5_u8, 0x34_u8])
   struct IUIEventingManager
     lpVtbl : IUIEventingManagerVTbl*
   end
@@ -239,8 +239,8 @@ lib LibWin32
     show_at_location : Proc(IUIContextualUI*, Int32, Int32, HRESULT)
   end
 
-  IUIContextualUI_GUID = LibC::GUID.new("eea11f37-7c46-437c-8e55-b52122b29293")
-  CLSID_IUIContextualUI = "eea11f37-7c46-437c-8e55-b52122b29293"
+  IUIContextualUI_GUID = "eea11f37-7c46-437c-8e55-b52122b29293"
+  IID_IUIContextualUI = LibC::GUID.new(0xeea11f37_u32, 0x7c46_u16, 0x437c_u16, StaticArray[0x8e_u8, 0x55_u8, 0xb5_u8, 0x21_u8, 0x22_u8, 0xb2_u8, 0x92_u8, 0x93_u8])
   struct IUIContextualUI
     lpVtbl : IUIContextualUIVTbl*
   end
@@ -258,8 +258,8 @@ lib LibWin32
     clear : Proc(IUICollection*, HRESULT)
   end
 
-  IUICollection_GUID = LibC::GUID.new("df4f45bf-6f9d-4dd7-9d68-d8f9cd18c4db")
-  CLSID_IUICollection = "df4f45bf-6f9d-4dd7-9d68-d8f9cd18c4db"
+  IUICollection_GUID = "df4f45bf-6f9d-4dd7-9d68-d8f9cd18c4db"
+  IID_IUICollection = LibC::GUID.new(0xdf4f45bf_u32, 0x6f9d_u16, 0x4dd7_u16, StaticArray[0x9d_u8, 0x68_u8, 0xd8_u8, 0xf9_u8, 0xcd_u8, 0x18_u8, 0xc4_u8, 0xdb_u8])
   struct IUICollection
     lpVtbl : IUICollectionVTbl*
   end
@@ -271,8 +271,8 @@ lib LibWin32
     on_changed : Proc(IUICollectionChangedEvent*, UI_COLLECTIONCHANGE, UInt32, IUnknown, UInt32, IUnknown, HRESULT)
   end
 
-  IUICollectionChangedEvent_GUID = LibC::GUID.new("6502ae91-a14d-44b5-bbd0-62aacc581d52")
-  CLSID_IUICollectionChangedEvent = "6502ae91-a14d-44b5-bbd0-62aacc581d52"
+  IUICollectionChangedEvent_GUID = "6502ae91-a14d-44b5-bbd0-62aacc581d52"
+  IID_IUICollectionChangedEvent = LibC::GUID.new(0x6502ae91_u32, 0xa14d_u16, 0x44b5_u16, StaticArray[0xbb_u8, 0xd0_u8, 0x62_u8, 0xaa_u8, 0xcc_u8, 0x58_u8, 0x1d_u8, 0x52_u8])
   struct IUICollectionChangedEvent
     lpVtbl : IUICollectionChangedEventVTbl*
   end
@@ -285,8 +285,8 @@ lib LibWin32
     update_property : Proc(IUICommandHandler*, UInt32, PROPERTYKEY*, PROPVARIANT*, PROPVARIANT*, HRESULT)
   end
 
-  IUICommandHandler_GUID = LibC::GUID.new("75ae0a2d-dc03-4c9f-8883-069660d0beb6")
-  CLSID_IUICommandHandler = "75ae0a2d-dc03-4c9f-8883-069660d0beb6"
+  IUICommandHandler_GUID = "75ae0a2d-dc03-4c9f-8883-069660d0beb6"
+  IID_IUICommandHandler = LibC::GUID.new(0x75ae0a2d_u32, 0xdc03_u16, 0x4c9f_u16, StaticArray[0x88_u8, 0x83_u8, 0x6_u8, 0x96_u8, 0x60_u8, 0xd0_u8, 0xbe_u8, 0xb6_u8])
   struct IUICommandHandler
     lpVtbl : IUICommandHandlerVTbl*
   end
@@ -300,8 +300,8 @@ lib LibWin32
     on_destroy_ui_command : Proc(IUIApplication*, UInt32, UI_COMMANDTYPE, IUICommandHandler, HRESULT)
   end
 
-  IUIApplication_GUID = LibC::GUID.new("d428903c-729a-491d-910d-682a08ff2522")
-  CLSID_IUIApplication = "d428903c-729a-491d-910d-682a08ff2522"
+  IUIApplication_GUID = "d428903c-729a-491d-910d-682a08ff2522"
+  IID_IUIApplication = LibC::GUID.new(0xd428903c_u32, 0x729a_u16, 0x491d_u16, StaticArray[0x91_u8, 0xd_u8, 0x68_u8, 0x2a_u8, 0x8_u8, 0xff_u8, 0x25_u8, 0x22_u8])
   struct IUIApplication
     lpVtbl : IUIApplicationVTbl*
   end
@@ -313,8 +313,8 @@ lib LibWin32
     get_bitmap : Proc(IUIImage*, HBITMAP*, HRESULT)
   end
 
-  IUIImage_GUID = LibC::GUID.new("23c8c838-4de6-436b-ab01-5554bb7c30dd")
-  CLSID_IUIImage = "23c8c838-4de6-436b-ab01-5554bb7c30dd"
+  IUIImage_GUID = "23c8c838-4de6-436b-ab01-5554bb7c30dd"
+  IID_IUIImage = LibC::GUID.new(0x23c8c838_u32, 0x4de6_u16, 0x436b_u16, StaticArray[0xab_u8, 0x1_u8, 0x55_u8, 0x54_u8, 0xbb_u8, 0x7c_u8, 0x30_u8, 0xdd_u8])
   struct IUIImage
     lpVtbl : IUIImageVTbl*
   end
@@ -326,8 +326,8 @@ lib LibWin32
     create_image : Proc(IUIImageFromBitmap*, HBITMAP, UI_OWNERSHIP, IUIImage*, HRESULT)
   end
 
-  IUIImageFromBitmap_GUID = LibC::GUID.new("18aba7f3-4c1c-4ba2-bf6c-f5c3326fa816")
-  CLSID_IUIImageFromBitmap = "18aba7f3-4c1c-4ba2-bf6c-f5c3326fa816"
+  IUIImageFromBitmap_GUID = "18aba7f3-4c1c-4ba2-bf6c-f5c3326fa816"
+  IID_IUIImageFromBitmap = LibC::GUID.new(0x18aba7f3_u32, 0x4c1c_u16, 0x4ba2_u16, StaticArray[0xbf_u8, 0x6c_u8, 0xf5_u8, 0xc3_u8, 0x32_u8, 0x6f_u8, 0xa8_u8, 0x16_u8])
   struct IUIImageFromBitmap
     lpVtbl : IUIImageFromBitmapVTbl*
   end

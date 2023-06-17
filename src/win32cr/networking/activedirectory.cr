@@ -499,31 +499,31 @@ lib LibWin32
   STATUS_SEVERITY_WARNING = 2_u32
   STATUS_SEVERITY_ERROR = 3_u32
   CLSID_DsObjectPicker = "17d6ccd8-3b7b-11d2-b9e0-00c04fd8dbf7"
-  PropertyEntry = LibC::GUID.new(0x72d3edc2_u32, 0xa4c4_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
-  PropertyValue = LibC::GUID.new(0x7b9e38b0_u32, 0xa97c_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
-  AccessControlEntry = LibC::GUID.new(0xb75ac000_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
-  AccessControlList = LibC::GUID.new(0xb85ea052_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
-  SecurityDescriptor = LibC::GUID.new(0xb958f73c_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
-  LargeInteger = LibC::GUID.new(0x927971f5_u32, 0x939_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0xe1_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
-  NameTranslate = LibC::GUID.new(0x274fae1f_u32, 0x3626_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  CaseIgnoreList = LibC::GUID.new(0x15f88a55_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  FaxNumber = LibC::GUID.new(0xa5062215_u32, 0x4681_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  NetAddress = LibC::GUID.new(0xb0b71247_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  OctetList = LibC::GUID.new(0x1241400f_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  Email = LibC::GUID.new(0x8f92a857_u32, 0x478e_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  Path = LibC::GUID.new(0xb2538919_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  ReplicaPointer = LibC::GUID.new(0xf5d1badf_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  Timestamp = LibC::GUID.new(0xb2bed2eb_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  PostalAddress = LibC::GUID.new(0xa75afcd_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  BackLink = LibC::GUID.new(0xfcbf906f_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  TypedName = LibC::GUID.new(0xb33143cb_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  Hold = LibC::GUID.new(0xb3ad3e13_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  Pathname = LibC::GUID.new(0x80d0d78_u32, 0xf421_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
-  ADSystemInfo = LibC::GUID.new(0x50b6327f_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
-  WinNTSystemInfo = LibC::GUID.new(0x66182ec4_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
-  DNWithBinary = LibC::GUID.new(0x7e99c0a3_u32, 0xf935_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
-  DNWithString = LibC::GUID.new(0x334857cc_u32, 0xf934_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
-  ADsSecurityUtility = LibC::GUID.new(0xf270c64a_u32, 0xffb8_u16, 0x4ae4_u16, StaticArray[0x85_u8, 0xfe_u8, 0x3a_u8, 0x75_u8, 0xe5_u8, 0x34_u8, 0x79_u8, 0x66_u8])
+  CLSID_PropertyEntry = LibC::GUID.new(0x72d3edc2_u32, 0xa4c4_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
+  CLSID_PropertyValue = LibC::GUID.new(0x7b9e38b0_u32, 0xa97c_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
+  CLSID_AccessControlEntry = LibC::GUID.new(0xb75ac000_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
+  CLSID_AccessControlList = LibC::GUID.new(0xb85ea052_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
+  CLSID_SecurityDescriptor = LibC::GUID.new(0xb958f73c_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
+  CLSID_LargeInteger = LibC::GUID.new(0x927971f5_u32, 0x939_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0xe1_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
+  CLSID_NameTranslate = LibC::GUID.new(0x274fae1f_u32, 0x3626_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_CaseIgnoreList = LibC::GUID.new(0x15f88a55_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_FaxNumber = LibC::GUID.new(0xa5062215_u32, 0x4681_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_NetAddress = LibC::GUID.new(0xb0b71247_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_OctetList = LibC::GUID.new(0x1241400f_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_Email = LibC::GUID.new(0x8f92a857_u32, 0x478e_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_Path = LibC::GUID.new(0xb2538919_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_ReplicaPointer = LibC::GUID.new(0xf5d1badf_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_Timestamp = LibC::GUID.new(0xb2bed2eb_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_PostalAddress = LibC::GUID.new(0xa75afcd_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_BackLink = LibC::GUID.new(0xfcbf906f_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_TypedName = LibC::GUID.new(0xb33143cb_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_Hold = LibC::GUID.new(0xb3ad3e13_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_Pathname = LibC::GUID.new(0x80d0d78_u32, 0xf421_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
+  CLSID_ADSystemInfo = LibC::GUID.new(0x50b6327f_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
+  CLSID_WinNTSystemInfo = LibC::GUID.new(0x66182ec4_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
+  CLSID_DNWithBinary = LibC::GUID.new(0x7e99c0a3_u32, 0xf935_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
+  CLSID_DNWithString = LibC::GUID.new(0x334857cc_u32, 0xf934_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
+  CLSID_ADsSecurityUtility = LibC::GUID.new(0xf270c64a_u32, 0xffb8_u16, 0x4ae4_u16, StaticArray[0x85_u8, 0xfe_u8, 0x3a_u8, 0x75_u8, 0xe5_u8, 0x34_u8, 0x79_u8, 0x66_u8])
 
   alias LPCQADDFORMSPROC = Proc(LPARAM, CQFORM*, HRESULT)
   alias LPCQADDPAGESPROC = Proc(LPARAM, Guid*, CQPAGE*, HRESULT)
@@ -1872,8 +1872,8 @@ lib LibWin32
     add_pages : Proc(IQueryForm*, LPCQADDPAGESPROC, LPARAM, HRESULT)
   end
 
-  IQueryForm_GUID = LibC::GUID.new("8cfcee30-39bd-11d0-b8d1-00a024ab2dbb")
-  CLSID_IQueryForm = "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb"
+  IQueryForm_GUID = "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb"
+  IID_IQueryForm = LibC::GUID.new(0x8cfcee30_u32, 0x39bd_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0xd1_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0xab_u8, 0x2d_u8, 0xbb_u8])
   struct IQueryForm
     lpVtbl : IQueryFormVTbl*
   end
@@ -1892,8 +1892,8 @@ lib LibWin32
     clear : Proc(IPersistQuery*, HRESULT)
   end
 
-  IPersistQuery_GUID = LibC::GUID.new("1a3114b8-a62e-11d0-a6c5-00a0c906af45")
-  CLSID_IPersistQuery = "1a3114b8-a62e-11d0-a6c5-00a0c906af45"
+  IPersistQuery_GUID = "1a3114b8-a62e-11d0-a6c5-00a0c906af45"
+  IID_IPersistQuery = LibC::GUID.new(0x1a3114b8_u32, 0xa62e_u16, 0x11d0_u16, StaticArray[0xa6_u8, 0xc5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0xaf_u8, 0x45_u8])
   struct IPersistQuery
     lpVtbl : IPersistQueryVTbl*
   end
@@ -1905,8 +1905,8 @@ lib LibWin32
     open_query_window : Proc(ICommonQuery*, LibC::HANDLE, OPENQUERYWINDOW*, IDataObject*, HRESULT)
   end
 
-  ICommonQuery_GUID = LibC::GUID.new("ab50dec0-6f1d-11d0-a1c4-00aa00c16e65")
-  CLSID_ICommonQuery = "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65"
+  ICommonQuery_GUID = "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65"
+  IID_ICommonQuery = LibC::GUID.new(0xab50dec0_u32, 0x6f1d_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0xc4_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xc1_u8, 0x6e_u8, 0x65_u8])
   struct ICommonQuery
     lpVtbl : ICommonQueryVTbl*
   end
@@ -1934,8 +1934,8 @@ lib LibWin32
     get_info_ex : Proc(IADs*, VARIANT, Int32, HRESULT)
   end
 
-  IADs_GUID = LibC::GUID.new("fd8256d0-fd15-11ce-abc4-02608c9e7553")
-  CLSID_IADs = "fd8256d0-fd15-11ce-abc4-02608c9e7553"
+  IADs_GUID = "fd8256d0-fd15-11ce-abc4-02608c9e7553"
+  IID_IADs = LibC::GUID.new(0xfd8256d0_u32, 0xfd15_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
   struct IADs
     lpVtbl : IADsVTbl*
   end
@@ -1961,8 +1961,8 @@ lib LibWin32
     move_here : Proc(IADsContainer*, UInt8*, UInt8*, IDispatch*, HRESULT)
   end
 
-  IADsContainer_GUID = LibC::GUID.new("001677d0-fd16-11ce-abc4-02608c9e7553")
-  CLSID_IADsContainer = "001677d0-fd16-11ce-abc4-02608c9e7553"
+  IADsContainer_GUID = "001677d0-fd16-11ce-abc4-02608c9e7553"
+  IID_IADsContainer = LibC::GUID.new(0x1677d0_u32, 0xfd16_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
   struct IADsContainer
     lpVtbl : IADsContainerVTbl*
   end
@@ -1981,8 +1981,8 @@ lib LibWin32
     get_object : Proc(IADsCollection*, UInt8*, VARIANT*, HRESULT)
   end
 
-  IADsCollection_GUID = LibC::GUID.new("72b945e0-253b-11cf-a988-00aa006bc149")
-  CLSID_IADsCollection = "72b945e0-253b-11cf-a988-00aa006bc149"
+  IADsCollection_GUID = "72b945e0-253b-11cf-a988-00aa006bc149"
+  IID_IADsCollection = LibC::GUID.new(0x72b945e0_u32, 0x253b_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsCollection
     lpVtbl : IADsCollectionVTbl*
   end
@@ -2001,8 +2001,8 @@ lib LibWin32
     put_filter : Proc(IADsMembers*, VARIANT, HRESULT)
   end
 
-  IADsMembers_GUID = LibC::GUID.new("451a0030-72ec-11cf-b03b-00aa006e0975")
-  CLSID_IADsMembers = "451a0030-72ec-11cf-b03b-00aa006e0975"
+  IADsMembers_GUID = "451a0030-72ec-11cf-b03b-00aa006e0975"
+  IID_IADsMembers = LibC::GUID.new(0x451a0030_u32, 0x72ec_u16, 0x11cf_u16, StaticArray[0xb0_u8, 0x3b_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0x9_u8, 0x75_u8])
   struct IADsMembers
     lpVtbl : IADsMembersVTbl*
   end
@@ -2026,8 +2026,8 @@ lib LibWin32
     purge_property_list : Proc(IADsPropertyList*, HRESULT)
   end
 
-  IADsPropertyList_GUID = LibC::GUID.new("c6f602b6-8f69-11d0-8528-00c04fd8d503")
-  CLSID_IADsPropertyList = "c6f602b6-8f69-11d0-8528-00c04fd8d503"
+  IADsPropertyList_GUID = "c6f602b6-8f69-11d0-8528-00c04fd8d503"
+  IID_IADsPropertyList = LibC::GUID.new(0xc6f602b6_u32, 0x8f69_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x28_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsPropertyList
     lpVtbl : IADsPropertyListVTbl*
   end
@@ -2051,8 +2051,8 @@ lib LibWin32
     put_values : Proc(IADsPropertyEntry*, VARIANT, HRESULT)
   end
 
-  IADsPropertyEntry_GUID = LibC::GUID.new("05792c8e-941f-11d0-8529-00c04fd8d503")
-  CLSID_IADsPropertyEntry = "05792c8e-941f-11d0-8529-00c04fd8d503"
+  IADsPropertyEntry_GUID = "05792c8e-941f-11d0-8529-00c04fd8d503"
+  IID_IADsPropertyEntry = LibC::GUID.new(0x5792c8e_u32, 0x941f_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x29_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsPropertyEntry
     lpVtbl : IADsPropertyEntryVTbl*
   end
@@ -2092,8 +2092,8 @@ lib LibWin32
     put_utc_time : Proc(IADsPropertyValue*, Float64, HRESULT)
   end
 
-  IADsPropertyValue_GUID = LibC::GUID.new("79fa9ad0-a97c-11d0-8534-00c04fd8d503")
-  CLSID_IADsPropertyValue = "79fa9ad0-a97c-11d0-8534-00c04fd8d503"
+  IADsPropertyValue_GUID = "79fa9ad0-a97c-11d0-8534-00c04fd8d503"
+  IID_IADsPropertyValue = LibC::GUID.new(0x79fa9ad0_u32, 0xa97c_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsPropertyValue
     lpVtbl : IADsPropertyValueVTbl*
   end
@@ -2110,8 +2110,8 @@ lib LibWin32
     put_object_property : Proc(IADsPropertyValue2*, Int32, VARIANT, HRESULT)
   end
 
-  IADsPropertyValue2_GUID = LibC::GUID.new("306e831c-5bc7-11d1-a3b8-00c04fb950dc")
-  CLSID_IADsPropertyValue2 = "306e831c-5bc7-11d1-a3b8-00c04fb950dc"
+  IADsPropertyValue2_GUID = "306e831c-5bc7-11d1-a3b8-00c04fb950dc"
+  IID_IADsPropertyValue2 = LibC::GUID.new(0x306e831c_u32, 0x5bc7_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsPropertyValue2
     lpVtbl : IADsPropertyValue2VTbl*
   end
@@ -2127,8 +2127,8 @@ lib LibWin32
     adsi_invoke : Proc(IPrivateDispatch*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IPrivateDispatch_GUID = LibC::GUID.new("86ab4bbe-65f6-11d1-8c13-00c04fd8d503")
-  CLSID_IPrivateDispatch = "86ab4bbe-65f6-11d1-8c13-00c04fd8d503"
+  IPrivateDispatch_GUID = "86ab4bbe-65f6-11d1-8c13-00c04fd8d503"
+  IID_IPrivateDispatch = LibC::GUID.new(0x86ab4bbe_u32, 0x65f6_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x13_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IPrivateDispatch
     lpVtbl : IPrivateDispatchVTbl*
   end
@@ -2141,8 +2141,8 @@ lib LibWin32
     adsi_release_object : Proc(IPrivateUnknown*, HRESULT)
   end
 
-  IPrivateUnknown_GUID = LibC::GUID.new("89126bab-6ead-11d1-8c18-00c04fd8d503")
-  CLSID_IPrivateUnknown = "89126bab-6ead-11d1-8c18-00c04fd8d503"
+  IPrivateUnknown_GUID = "89126bab-6ead-11d1-8c18-00c04fd8d503"
+  IID_IPrivateUnknown = LibC::GUID.new(0x89126bab_u32, 0x6ead_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x18_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IPrivateUnknown
     lpVtbl : IPrivateUnknownVTbl*
   end
@@ -2156,8 +2156,8 @@ lib LibWin32
     private_invoke : Proc(IADsExtension*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IADsExtension_GUID = LibC::GUID.new("3d35553c-d2b0-11d1-b17b-0000f87593a0")
-  CLSID_IADsExtension = "3d35553c-d2b0-11d1-b17b-0000f87593a0"
+  IADsExtension_GUID = "3d35553c-d2b0-11d1-b17b-0000f87593a0"
+  IID_IADsExtension = LibC::GUID.new(0x3d35553c_u32, 0xd2b0_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0x7b_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x93_u8, 0xa0_u8])
   struct IADsExtension
     lpVtbl : IADsExtensionVTbl*
   end
@@ -2173,8 +2173,8 @@ lib LibWin32
     delete_object : Proc(IADsDeleteOps*, Int32, HRESULT)
   end
 
-  IADsDeleteOps_GUID = LibC::GUID.new("b2bd0902-8878-11d1-8c21-00c04fd8d503")
-  CLSID_IADsDeleteOps = "b2bd0902-8878-11d1-8c21-00c04fd8d503"
+  IADsDeleteOps_GUID = "b2bd0902-8878-11d1-8c21-00c04fd8d503"
+  IID_IADsDeleteOps = LibC::GUID.new(0xb2bd0902_u32, 0x8878_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x21_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsDeleteOps
     lpVtbl : IADsDeleteOpsVTbl*
   end
@@ -2204,8 +2204,8 @@ lib LibWin32
     put_default_container : Proc(IADsNamespaces*, UInt8*, HRESULT)
   end
 
-  IADsNamespaces_GUID = LibC::GUID.new("28b96ba0-b330-11cf-a9ad-00aa006bc149")
-  CLSID_IADsNamespaces = "28b96ba0-b330-11cf-a9ad-00aa006bc149"
+  IADsNamespaces_GUID = "28b96ba0-b330-11cf-a9ad-00aa006bc149"
+  IID_IADsNamespaces = LibC::GUID.new(0x28b96ba0_u32, 0xb330_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0xad_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsNamespaces
     lpVtbl : IADsNamespacesVTbl*
   end
@@ -2263,8 +2263,8 @@ lib LibWin32
     qualifiers : Proc(IADsClass*, IADsCollection*, HRESULT)
   end
 
-  IADsClass_GUID = LibC::GUID.new("c8f93dd0-4ae0-11cf-9e73-00aa004a5691")
-  CLSID_IADsClass = "c8f93dd0-4ae0-11cf-9e73-00aa004a5691"
+  IADsClass_GUID = "c8f93dd0-4ae0-11cf-9e73-00aa004a5691"
+  IID_IADsClass = LibC::GUID.new(0xc8f93dd0_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
   struct IADsClass
     lpVtbl : IADsClassVTbl*
   end
@@ -2303,8 +2303,8 @@ lib LibWin32
     qualifiers : Proc(IADsProperty*, IADsCollection*, HRESULT)
   end
 
-  IADsProperty_GUID = LibC::GUID.new("c8f93dd3-4ae0-11cf-9e73-00aa004a5691")
-  CLSID_IADsProperty = "c8f93dd3-4ae0-11cf-9e73-00aa004a5691"
+  IADsProperty_GUID = "c8f93dd3-4ae0-11cf-9e73-00aa004a5691"
+  IID_IADsProperty = LibC::GUID.new(0xc8f93dd3_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
   struct IADsProperty
     lpVtbl : IADsPropertyVTbl*
   end
@@ -2334,8 +2334,8 @@ lib LibWin32
     put_ole_auto_data_type : Proc(IADsSyntax*, Int32, HRESULT)
   end
 
-  IADsSyntax_GUID = LibC::GUID.new("c8f93dd2-4ae0-11cf-9e73-00aa004a5691")
-  CLSID_IADsSyntax = "c8f93dd2-4ae0-11cf-9e73-00aa004a5691"
+  IADsSyntax_GUID = "c8f93dd2-4ae0-11cf-9e73-00aa004a5691"
+  IID_IADsSyntax = LibC::GUID.new(0xc8f93dd2_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
   struct IADsSyntax
     lpVtbl : IADsSyntaxVTbl*
   end
@@ -2371,8 +2371,8 @@ lib LibWin32
     put_see_also : Proc(IADsLocality*, VARIANT, HRESULT)
   end
 
-  IADsLocality_GUID = LibC::GUID.new("a05e03a2-effe-11cf-8abc-00c04fd8d503")
-  CLSID_IADsLocality = "a05e03a2-effe-11cf-8abc-00c04fd8d503"
+  IADsLocality_GUID = "a05e03a2-effe-11cf-8abc-00c04fd8d503"
+  IID_IADsLocality = LibC::GUID.new(0xa05e03a2_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsLocality
     lpVtbl : IADsLocalityVTbl*
   end
@@ -2412,8 +2412,8 @@ lib LibWin32
     put_see_also : Proc(IADsO*, VARIANT, HRESULT)
   end
 
-  IADsO_GUID = LibC::GUID.new("a1cd2dc6-effe-11cf-8abc-00c04fd8d503")
-  CLSID_IADsO = "a1cd2dc6-effe-11cf-8abc-00c04fd8d503"
+  IADsO_GUID = "a1cd2dc6-effe-11cf-8abc-00c04fd8d503"
+  IID_IADsO = LibC::GUID.new(0xa1cd2dc6_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsO
     lpVtbl : IADsOVTbl*
   end
@@ -2455,8 +2455,8 @@ lib LibWin32
     put_business_category : Proc(IADsOU*, UInt8*, HRESULT)
   end
 
-  IADsOU_GUID = LibC::GUID.new("a2f733b8-effe-11cf-8abc-00c04fd8d503")
-  CLSID_IADsOU = "a2f733b8-effe-11cf-8abc-00c04fd8d503"
+  IADsOU_GUID = "a2f733b8-effe-11cf-8abc-00c04fd8d503"
+  IID_IADsOU = LibC::GUID.new(0xa2f733b8_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsOU
     lpVtbl : IADsOUVTbl*
   end
@@ -2501,8 +2501,8 @@ lib LibWin32
     put_lockout_observation_interval : Proc(IADsDomain*, Int32, HRESULT)
   end
 
-  IADsDomain_GUID = LibC::GUID.new("00e4c220-fd16-11ce-abc4-02608c9e7553")
-  CLSID_IADsDomain = "00e4c220-fd16-11ce-abc4-02608c9e7553"
+  IADsDomain_GUID = "00e4c220-fd16-11ce-abc4-02608c9e7553"
+  IID_IADsDomain = LibC::GUID.new(0xe4c220_u32, 0xfd16_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
   struct IADsDomain
     lpVtbl : IADsDomainVTbl*
   end
@@ -2562,8 +2562,8 @@ lib LibWin32
     put_net_addresses : Proc(IADsComputer*, VARIANT, HRESULT)
   end
 
-  IADsComputer_GUID = LibC::GUID.new("efe3cc70-1d9f-11cf-b1f3-02608c9e7553")
-  CLSID_IADsComputer = "efe3cc70-1d9f-11cf-b1f3-02608c9e7553"
+  IADsComputer_GUID = "efe3cc70-1d9f-11cf-b1f3-02608c9e7553"
+  IID_IADsComputer = LibC::GUID.new(0xefe3cc70_u32, 0x1d9f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xf3_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
   struct IADsComputer
     lpVtbl : IADsComputerVTbl*
   end
@@ -2593,8 +2593,8 @@ lib LibWin32
     shutdown : Proc(IADsComputerOperations*, Int16, HRESULT)
   end
 
-  IADsComputerOperations_GUID = LibC::GUID.new("ef497680-1d9f-11cf-b1f3-02608c9e7553")
-  CLSID_IADsComputerOperations = "ef497680-1d9f-11cf-b1f3-02608c9e7553"
+  IADsComputerOperations_GUID = "ef497680-1d9f-11cf-b1f3-02608c9e7553"
+  IID_IADsComputerOperations = LibC::GUID.new(0xef497680_u32, 0x1d9f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xf3_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
   struct IADsComputerOperations
     lpVtbl : IADsComputerOperationsVTbl*
   end
@@ -2628,8 +2628,8 @@ lib LibWin32
     remove : Proc(IADsGroup*, UInt8*, HRESULT)
   end
 
-  IADsGroup_GUID = LibC::GUID.new("27636b00-410f-11cf-b1ff-02608c9e7553")
-  CLSID_IADsGroup = "27636b00-410f-11cf-b1ff-02608c9e7553"
+  IADsGroup_GUID = "27636b00-410f-11cf-b1ff-02608c9e7553"
+  IID_IADsGroup = LibC::GUID.new(0x27636b00_u32, 0x410f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xff_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
   struct IADsGroup
     lpVtbl : IADsGroupVTbl*
   end
@@ -2748,8 +2748,8 @@ lib LibWin32
     change_password : Proc(IADsUser*, UInt8*, UInt8*, HRESULT)
   end
 
-  IADsUser_GUID = LibC::GUID.new("3e37e320-17e2-11cf-abc4-02608c9e7553")
-  CLSID_IADsUser = "3e37e320-17e2-11cf-abc4-02608c9e7553"
+  IADsUser_GUID = "3e37e320-17e2-11cf-abc4-02608c9e7553"
+  IID_IADsUser = LibC::GUID.new(0x3e37e320_u32, 0x17e2_u16, 0x11cf_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
   struct IADsUser
     lpVtbl : IADsUserVTbl*
   end
@@ -2803,8 +2803,8 @@ lib LibWin32
     put_net_addresses : Proc(IADsPrintQueue*, VARIANT, HRESULT)
   end
 
-  IADsPrintQueue_GUID = LibC::GUID.new("b15160d0-1226-11cf-a985-00aa006bc149")
-  CLSID_IADsPrintQueue = "b15160d0-1226-11cf-a985-00aa006bc149"
+  IADsPrintQueue_GUID = "b15160d0-1226-11cf-a985-00aa006bc149"
+  IID_IADsPrintQueue = LibC::GUID.new(0xb15160d0_u32, 0x1226_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x85_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsPrintQueue
     lpVtbl : IADsPrintQueueVTbl*
   end
@@ -2837,8 +2837,8 @@ lib LibWin32
     purge : Proc(IADsPrintQueueOperations*, HRESULT)
   end
 
-  IADsPrintQueueOperations_GUID = LibC::GUID.new("124be5c0-156e-11cf-a986-00aa006bc149")
-  CLSID_IADsPrintQueueOperations = "124be5c0-156e-11cf-a986-00aa006bc149"
+  IADsPrintQueueOperations_GUID = "124be5c0-156e-11cf-a986-00aa006bc149"
+  IID_IADsPrintQueueOperations = LibC::GUID.new(0x124be5c0_u32, 0x156e_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x86_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsPrintQueueOperations
     lpVtbl : IADsPrintQueueOperationsVTbl*
   end
@@ -2884,8 +2884,8 @@ lib LibWin32
     put_notify_path : Proc(IADsPrintJob*, UInt8*, HRESULT)
   end
 
-  IADsPrintJob_GUID = LibC::GUID.new("32fb6780-1ed0-11cf-a988-00aa006bc149")
-  CLSID_IADsPrintJob = "32fb6780-1ed0-11cf-a988-00aa006bc149"
+  IADsPrintJob_GUID = "32fb6780-1ed0-11cf-a988-00aa006bc149"
+  IID_IADsPrintJob = LibC::GUID.new(0x32fb6780_u32, 0x1ed0_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsPrintJob
     lpVtbl : IADsPrintJobVTbl*
   end
@@ -2920,8 +2920,8 @@ lib LibWin32
     resume : Proc(IADsPrintJobOperations*, HRESULT)
   end
 
-  IADsPrintJobOperations_GUID = LibC::GUID.new("9a52db30-1ecf-11cf-a988-00aa006bc149")
-  CLSID_IADsPrintJobOperations = "9a52db30-1ecf-11cf-a988-00aa006bc149"
+  IADsPrintJobOperations_GUID = "9a52db30-1ecf-11cf-a988-00aa006bc149"
+  IID_IADsPrintJobOperations = LibC::GUID.new(0x9a52db30_u32, 0x1ecf_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsPrintJobOperations
     lpVtbl : IADsPrintJobOperationsVTbl*
   end
@@ -2973,8 +2973,8 @@ lib LibWin32
     put_dependencies : Proc(IADsService*, VARIANT, HRESULT)
   end
 
-  IADsService_GUID = LibC::GUID.new("68af66e0-31ca-11cf-a98a-00aa006bc149")
-  CLSID_IADsService = "68af66e0-31ca-11cf-a98a-00aa006bc149"
+  IADsService_GUID = "68af66e0-31ca-11cf-a98a-00aa006bc149"
+  IID_IADsService = LibC::GUID.new(0x68af66e0_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsService
     lpVtbl : IADsServiceVTbl*
   end
@@ -3008,8 +3008,8 @@ lib LibWin32
     set_password : Proc(IADsServiceOperations*, UInt8*, HRESULT)
   end
 
-  IADsServiceOperations_GUID = LibC::GUID.new("5d7b33f0-31ca-11cf-a98a-00aa006bc149")
-  CLSID_IADsServiceOperations = "5d7b33f0-31ca-11cf-a98a-00aa006bc149"
+  IADsServiceOperations_GUID = "5d7b33f0-31ca-11cf-a98a-00aa006bc149"
+  IID_IADsServiceOperations = LibC::GUID.new(0x5d7b33f0_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsServiceOperations
     lpVtbl : IADsServiceOperationsVTbl*
   end
@@ -3065,8 +3065,8 @@ lib LibWin32
     put_max_user_count : Proc(IADsFileService*, Int32, HRESULT)
   end
 
-  IADsFileService_GUID = LibC::GUID.new("a89d1900-31ca-11cf-a98a-00aa006bc149")
-  CLSID_IADsFileService = "a89d1900-31ca-11cf-a98a-00aa006bc149"
+  IADsFileService_GUID = "a89d1900-31ca-11cf-a98a-00aa006bc149"
+  IID_IADsFileService = LibC::GUID.new(0xa89d1900_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsFileService
     lpVtbl : IADsFileServiceVTbl*
   end
@@ -3102,8 +3102,8 @@ lib LibWin32
     resources : Proc(IADsFileServiceOperations*, IADsCollection*, HRESULT)
   end
 
-  IADsFileServiceOperations_GUID = LibC::GUID.new("a02ded10-31ca-11cf-a98a-00aa006bc149")
-  CLSID_IADsFileServiceOperations = "a02ded10-31ca-11cf-a98a-00aa006bc149"
+  IADsFileServiceOperations_GUID = "a02ded10-31ca-11cf-a98a-00aa006bc149"
+  IID_IADsFileServiceOperations = LibC::GUID.new(0xa02ded10_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsFileServiceOperations
     lpVtbl : IADsFileServiceOperationsVTbl*
   end
@@ -3140,8 +3140,8 @@ lib LibWin32
     put_max_user_count : Proc(IADsFileShare*, Int32, HRESULT)
   end
 
-  IADsFileShare_GUID = LibC::GUID.new("eb6dcaf0-4b83-11cf-a995-00aa006bc149")
-  CLSID_IADsFileShare = "eb6dcaf0-4b83-11cf-a995-00aa006bc149"
+  IADsFileShare_GUID = "eb6dcaf0-4b83-11cf-a995-00aa006bc149"
+  IID_IADsFileShare = LibC::GUID.new(0xeb6dcaf0_u32, 0x4b83_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x95_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
   struct IADsFileShare
     lpVtbl : IADsFileShareVTbl*
   end
@@ -3175,8 +3175,8 @@ lib LibWin32
     get_idle_time : Proc(IADsSession*, Int32*, HRESULT)
   end
 
-  IADsSession_GUID = LibC::GUID.new("398b7da0-4aab-11cf-ae2c-00aa006ebfb9")
-  CLSID_IADsSession = "398b7da0-4aab-11cf-ae2c-00aa006ebfb9"
+  IADsSession_GUID = "398b7da0-4aab-11cf-ae2c-00aa006ebfb9"
+  IID_IADsSession = LibC::GUID.new(0x398b7da0_u32, 0x4aab_u16, 0x11cf_u16, StaticArray[0xae_u8, 0x2c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0xbf_u8, 0xb9_u8])
   struct IADsSession
     lpVtbl : IADsSessionVTbl*
   end
@@ -3208,8 +3208,8 @@ lib LibWin32
     get_lock_count : Proc(IADsResource*, Int32*, HRESULT)
   end
 
-  IADsResource_GUID = LibC::GUID.new("34a05b20-4aab-11cf-ae2c-00aa006ebfb9")
-  CLSID_IADsResource = "34a05b20-4aab-11cf-ae2c-00aa006ebfb9"
+  IADsResource_GUID = "34a05b20-4aab-11cf-ae2c-00aa006ebfb9"
+  IID_IADsResource = LibC::GUID.new(0x34a05b20_u32, 0x4aab_u16, 0x11cf_u16, StaticArray[0xae_u8, 0x2c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0xbf_u8, 0xb9_u8])
   struct IADsResource
     lpVtbl : IADsResourceVTbl*
   end
@@ -3225,8 +3225,8 @@ lib LibWin32
     open_ds_object : Proc(IADsOpenDSObject*, UInt8*, UInt8*, UInt8*, Int32, IDispatch*, HRESULT)
   end
 
-  IADsOpenDSObject_GUID = LibC::GUID.new("ddf2891e-0f9c-11d0-8ad4-00c04fd8d503")
-  CLSID_IADsOpenDSObject = "ddf2891e-0f9c-11d0-8ad4-00c04fd8d503"
+  IADsOpenDSObject_GUID = "ddf2891e-0f9c-11d0-8ad4-00c04fd8d503"
+  IID_IADsOpenDSObject = LibC::GUID.new(0xddf2891e_u32, 0xf9c_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsOpenDSObject
     lpVtbl : IADsOpenDSObjectVTbl*
   end
@@ -3242,8 +3242,8 @@ lib LibWin32
     delete_ds_object : Proc(IDirectoryObject*, LibC::LPWSTR, HRESULT)
   end
 
-  IDirectoryObject_GUID = LibC::GUID.new("e798de2c-22e4-11d0-84fe-00c04fd8d503")
-  CLSID_IDirectoryObject = "e798de2c-22e4-11d0-84fe-00c04fd8d503"
+  IDirectoryObject_GUID = "e798de2c-22e4-11d0-84fe-00c04fd8d503"
+  IID_IDirectoryObject = LibC::GUID.new(0xe798de2c_u32, 0x22e4_u16, 0x11d0_u16, StaticArray[0x84_u8, 0xfe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IDirectoryObject
     lpVtbl : IDirectoryObjectVTbl*
   end
@@ -3264,8 +3264,8 @@ lib LibWin32
     close_search_handle : Proc(IDirectorySearch*, LibC::IntPtrT, HRESULT)
   end
 
-  IDirectorySearch_GUID = LibC::GUID.new("109ba8ec-92f0-11d0-a790-00c04fd8d5a8")
-  CLSID_IDirectorySearch = "109ba8ec-92f0-11d0-a790-00c04fd8d5a8"
+  IDirectorySearch_GUID = "109ba8ec-92f0-11d0-a790-00c04fd8d5a8"
+  IID_IDirectorySearch = LibC::GUID.new(0x109ba8ec_u32, 0x92f0_u16, 0x11d0_u16, StaticArray[0xa7_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
   struct IDirectorySearch
     lpVtbl : IDirectorySearchVTbl*
   end
@@ -3284,8 +3284,8 @@ lib LibWin32
     delete_class_definition : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR, HRESULT)
   end
 
-  IDirectorySchemaMgmt_GUID = LibC::GUID.new("75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8")
-  CLSID_IDirectorySchemaMgmt = "75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8"
+  IDirectorySchemaMgmt_GUID = "75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8"
+  IID_IDirectorySchemaMgmt = LibC::GUID.new(0x75db3b9c_u32, 0xa4d8_u16, 0x11d0_u16, StaticArray[0xa7_u8, 0x9c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
   struct IDirectorySchemaMgmt
     lpVtbl : IDirectorySchemaMgmtVTbl*
   end
@@ -3300,8 +3300,8 @@ lib LibWin32
     restore_interface : Proc(IADsAggregatee*, Guid*, HRESULT)
   end
 
-  IADsAggregatee_GUID = LibC::GUID.new("1346ce8c-9039-11d0-8528-00c04fd8d503")
-  CLSID_IADsAggregatee = "1346ce8c-9039-11d0-8528-00c04fd8d503"
+  IADsAggregatee_GUID = "1346ce8c-9039-11d0-8528-00c04fd8d503"
+  IID_IADsAggregatee = LibC::GUID.new(0x1346ce8c_u32, 0x9039_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x28_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsAggregatee
     lpVtbl : IADsAggregateeVTbl*
   end
@@ -3314,8 +3314,8 @@ lib LibWin32
     disconnect_as_aggregator : Proc(IADsAggregator*, HRESULT)
   end
 
-  IADsAggregator_GUID = LibC::GUID.new("52db5fb0-941f-11d0-8529-00c04fd8d503")
-  CLSID_IADsAggregator = "52db5fb0-941f-11d0-8529-00c04fd8d503"
+  IADsAggregator_GUID = "52db5fb0-941f-11d0-8529-00c04fd8d503"
+  IID_IADsAggregator = LibC::GUID.new(0x52db5fb0_u32, 0x941f_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x29_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsAggregator
     lpVtbl : IADsAggregatorVTbl*
   end
@@ -3344,8 +3344,8 @@ lib LibWin32
     put_trustee : Proc(IADsAccessControlEntry*, UInt8*, HRESULT)
   end
 
-  IADsAccessControlEntry_GUID = LibC::GUID.new("b4f3a14c-9bdd-11d0-852c-00c04fd8d503")
-  CLSID_IADsAccessControlEntry = "b4f3a14c-9bdd-11d0-852c-00c04fd8d503"
+  IADsAccessControlEntry_GUID = "b4f3a14c-9bdd-11d0-852c-00c04fd8d503"
+  IID_IADsAccessControlEntry = LibC::GUID.new(0xb4f3a14c_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsAccessControlEntry
     lpVtbl : IADsAccessControlEntryVTbl*
   end
@@ -3368,8 +3368,8 @@ lib LibWin32
     get__new_enum : Proc(IADsAccessControlList*, IUnknown*, HRESULT)
   end
 
-  IADsAccessControlList_GUID = LibC::GUID.new("b7ee91cc-9bdd-11d0-852c-00c04fd8d503")
-  CLSID_IADsAccessControlList = "b7ee91cc-9bdd-11d0-852c-00c04fd8d503"
+  IADsAccessControlList_GUID = "b7ee91cc-9bdd-11d0-852c-00c04fd8d503"
+  IID_IADsAccessControlList = LibC::GUID.new(0xb7ee91cc_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsAccessControlList
     lpVtbl : IADsAccessControlListVTbl*
   end
@@ -3405,8 +3405,8 @@ lib LibWin32
     copy_security_descriptor : Proc(IADsSecurityDescriptor*, IDispatch*, HRESULT)
   end
 
-  IADsSecurityDescriptor_GUID = LibC::GUID.new("b8c787ca-9bdd-11d0-852c-00c04fd8d503")
-  CLSID_IADsSecurityDescriptor = "b8c787ca-9bdd-11d0-852c-00c04fd8d503"
+  IADsSecurityDescriptor_GUID = "b8c787ca-9bdd-11d0-852c-00c04fd8d503"
+  IID_IADsSecurityDescriptor = LibC::GUID.new(0xb8c787ca_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsSecurityDescriptor
     lpVtbl : IADsSecurityDescriptorVTbl*
   end
@@ -3425,8 +3425,8 @@ lib LibWin32
     put_low_part : Proc(IADsLargeInteger*, Int32, HRESULT)
   end
 
-  IADsLargeInteger_GUID = LibC::GUID.new("9068270b-0939-11d1-8be1-00c04fd8d503")
-  CLSID_IADsLargeInteger = "9068270b-0939-11d1-8be1-00c04fd8d503"
+  IADsLargeInteger_GUID = "9068270b-0939-11d1-8be1-00c04fd8d503"
+  IID_IADsLargeInteger = LibC::GUID.new(0x9068270b_u32, 0x939_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0xe1_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
   struct IADsLargeInteger
     lpVtbl : IADsLargeIntegerVTbl*
   end
@@ -3448,8 +3448,8 @@ lib LibWin32
     get_ex : Proc(IADsNameTranslate*, Int32, VARIANT*, HRESULT)
   end
 
-  IADsNameTranslate_GUID = LibC::GUID.new("b1b272a3-3625-11d1-a3a4-00c04fb950dc")
-  CLSID_IADsNameTranslate = "b1b272a3-3625-11d1-a3a4-00c04fb950dc"
+  IADsNameTranslate_GUID = "b1b272a3-3625-11d1-a3a4-00c04fb950dc"
+  IID_IADsNameTranslate = LibC::GUID.new(0xb1b272a3_u32, 0x3625_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsNameTranslate
     lpVtbl : IADsNameTranslateVTbl*
   end
@@ -3466,8 +3466,8 @@ lib LibWin32
     put_case_ignore_list : Proc(IADsCaseIgnoreList*, VARIANT, HRESULT)
   end
 
-  IADsCaseIgnoreList_GUID = LibC::GUID.new("7b66b533-4680-11d1-a3b4-00c04fb950dc")
-  CLSID_IADsCaseIgnoreList = "7b66b533-4680-11d1-a3b4-00c04fb950dc"
+  IADsCaseIgnoreList_GUID = "7b66b533-4680-11d1-a3b4-00c04fb950dc"
+  IID_IADsCaseIgnoreList = LibC::GUID.new(0x7b66b533_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsCaseIgnoreList
     lpVtbl : IADsCaseIgnoreListVTbl*
   end
@@ -3486,8 +3486,8 @@ lib LibWin32
     put_parameters : Proc(IADsFaxNumber*, VARIANT, HRESULT)
   end
 
-  IADsFaxNumber_GUID = LibC::GUID.new("a910dea9-4680-11d1-a3b4-00c04fb950dc")
-  CLSID_IADsFaxNumber = "a910dea9-4680-11d1-a3b4-00c04fb950dc"
+  IADsFaxNumber_GUID = "a910dea9-4680-11d1-a3b4-00c04fb950dc"
+  IID_IADsFaxNumber = LibC::GUID.new(0xa910dea9_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsFaxNumber
     lpVtbl : IADsFaxNumberVTbl*
   end
@@ -3506,8 +3506,8 @@ lib LibWin32
     put_address : Proc(IADsNetAddress*, VARIANT, HRESULT)
   end
 
-  IADsNetAddress_GUID = LibC::GUID.new("b21a50a9-4080-11d1-a3ac-00c04fb950dc")
-  CLSID_IADsNetAddress = "b21a50a9-4080-11d1-a3ac-00c04fb950dc"
+  IADsNetAddress_GUID = "b21a50a9-4080-11d1-a3ac-00c04fb950dc"
+  IID_IADsNetAddress = LibC::GUID.new(0xb21a50a9_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsNetAddress
     lpVtbl : IADsNetAddressVTbl*
   end
@@ -3524,8 +3524,8 @@ lib LibWin32
     put_octet_list : Proc(IADsOctetList*, VARIANT, HRESULT)
   end
 
-  IADsOctetList_GUID = LibC::GUID.new("7b28b80f-4680-11d1-a3b4-00c04fb950dc")
-  CLSID_IADsOctetList = "7b28b80f-4680-11d1-a3b4-00c04fb950dc"
+  IADsOctetList_GUID = "7b28b80f-4680-11d1-a3b4-00c04fb950dc"
+  IID_IADsOctetList = LibC::GUID.new(0x7b28b80f_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsOctetList
     lpVtbl : IADsOctetListVTbl*
   end
@@ -3544,8 +3544,8 @@ lib LibWin32
     put_address : Proc(IADsEmail*, UInt8*, HRESULT)
   end
 
-  IADsEmail_GUID = LibC::GUID.new("97af011a-478e-11d1-a3b4-00c04fb950dc")
-  CLSID_IADsEmail = "97af011a-478e-11d1-a3b4-00c04fb950dc"
+  IADsEmail_GUID = "97af011a-478e-11d1-a3b4-00c04fb950dc"
+  IID_IADsEmail = LibC::GUID.new(0x97af011a_u32, 0x478e_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsEmail
     lpVtbl : IADsEmailVTbl*
   end
@@ -3566,8 +3566,8 @@ lib LibWin32
     put_path : Proc(IADsPath*, UInt8*, HRESULT)
   end
 
-  IADsPath_GUID = LibC::GUID.new("b287fcd5-4080-11d1-a3ac-00c04fb950dc")
-  CLSID_IADsPath = "b287fcd5-4080-11d1-a3ac-00c04fb950dc"
+  IADsPath_GUID = "b287fcd5-4080-11d1-a3ac-00c04fb950dc"
+  IID_IADsPath = LibC::GUID.new(0xb287fcd5_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsPath
     lpVtbl : IADsPathVTbl*
   end
@@ -3592,8 +3592,8 @@ lib LibWin32
     put_replica_address_hints : Proc(IADsReplicaPointer*, VARIANT, HRESULT)
   end
 
-  IADsReplicaPointer_GUID = LibC::GUID.new("f60fb803-4080-11d1-a3ac-00c04fb950dc")
-  CLSID_IADsReplicaPointer = "f60fb803-4080-11d1-a3ac-00c04fb950dc"
+  IADsReplicaPointer_GUID = "f60fb803-4080-11d1-a3ac-00c04fb950dc"
+  IID_IADsReplicaPointer = LibC::GUID.new(0xf60fb803_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsReplicaPointer
     lpVtbl : IADsReplicaPointerVTbl*
   end
@@ -3615,8 +3615,8 @@ lib LibWin32
     copy_acl : Proc(IADsAcl*, IDispatch*, HRESULT)
   end
 
-  IADsAcl_GUID = LibC::GUID.new("8452d3ab-0869-11d1-a377-00c04fb950dc")
-  CLSID_IADsAcl = "8452d3ab-0869-11d1-a377-00c04fb950dc"
+  IADsAcl_GUID = "8452d3ab-0869-11d1-a377-00c04fb950dc"
+  IID_IADsAcl = LibC::GUID.new(0x8452d3ab_u32, 0x869_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0x77_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsAcl
     lpVtbl : IADsAclVTbl*
   end
@@ -3635,8 +3635,8 @@ lib LibWin32
     put_event_id : Proc(IADsTimestamp*, Int32, HRESULT)
   end
 
-  IADsTimestamp_GUID = LibC::GUID.new("b2f5a901-4080-11d1-a3ac-00c04fb950dc")
-  CLSID_IADsTimestamp = "b2f5a901-4080-11d1-a3ac-00c04fb950dc"
+  IADsTimestamp_GUID = "b2f5a901-4080-11d1-a3ac-00c04fb950dc"
+  IID_IADsTimestamp = LibC::GUID.new(0xb2f5a901_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsTimestamp
     lpVtbl : IADsTimestampVTbl*
   end
@@ -3653,8 +3653,8 @@ lib LibWin32
     put_postal_address : Proc(IADsPostalAddress*, VARIANT, HRESULT)
   end
 
-  IADsPostalAddress_GUID = LibC::GUID.new("7adecf29-4680-11d1-a3b4-00c04fb950dc")
-  CLSID_IADsPostalAddress = "7adecf29-4680-11d1-a3b4-00c04fb950dc"
+  IADsPostalAddress_GUID = "7adecf29-4680-11d1-a3b4-00c04fb950dc"
+  IID_IADsPostalAddress = LibC::GUID.new(0x7adecf29_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsPostalAddress
     lpVtbl : IADsPostalAddressVTbl*
   end
@@ -3673,8 +3673,8 @@ lib LibWin32
     put_object_name : Proc(IADsBackLink*, UInt8*, HRESULT)
   end
 
-  IADsBackLink_GUID = LibC::GUID.new("fd1302bd-4080-11d1-a3ac-00c04fb950dc")
-  CLSID_IADsBackLink = "fd1302bd-4080-11d1-a3ac-00c04fb950dc"
+  IADsBackLink_GUID = "fd1302bd-4080-11d1-a3ac-00c04fb950dc"
+  IID_IADsBackLink = LibC::GUID.new(0xfd1302bd_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsBackLink
     lpVtbl : IADsBackLinkVTbl*
   end
@@ -3695,8 +3695,8 @@ lib LibWin32
     put_interval : Proc(IADsTypedName*, Int32, HRESULT)
   end
 
-  IADsTypedName_GUID = LibC::GUID.new("b371a349-4080-11d1-a3ac-00c04fb950dc")
-  CLSID_IADsTypedName = "b371a349-4080-11d1-a3ac-00c04fb950dc"
+  IADsTypedName_GUID = "b371a349-4080-11d1-a3ac-00c04fb950dc"
+  IID_IADsTypedName = LibC::GUID.new(0xb371a349_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsTypedName
     lpVtbl : IADsTypedNameVTbl*
   end
@@ -3715,8 +3715,8 @@ lib LibWin32
     put_amount : Proc(IADsHold*, Int32, HRESULT)
   end
 
-  IADsHold_GUID = LibC::GUID.new("b3eb3b37-4080-11d1-a3ac-00c04fb950dc")
-  CLSID_IADsHold = "b3eb3b37-4080-11d1-a3ac-00c04fb950dc"
+  IADsHold_GUID = "b3eb3b37-4080-11d1-a3ac-00c04fb950dc"
+  IID_IADsHold = LibC::GUID.new(0xb3eb3b37_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsHold
     lpVtbl : IADsHoldVTbl*
   end
@@ -3733,8 +3733,8 @@ lib LibWin32
     set_option : Proc(IADsObjectOptions*, Int32, VARIANT, HRESULT)
   end
 
-  IADsObjectOptions_GUID = LibC::GUID.new("46f14fda-232b-11d1-a808-00c04fd8d5a8")
-  CLSID_IADsObjectOptions = "46f14fda-232b-11d1-a808-00c04fd8d5a8"
+  IADsObjectOptions_GUID = "46f14fda-232b-11d1-a808-00c04fd8d5a8"
+  IID_IADsObjectOptions = LibC::GUID.new(0x46f14fda_u32, 0x232b_u16, 0x11d1_u16, StaticArray[0xa8_u8, 0x8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
   struct IADsObjectOptions
     lpVtbl : IADsObjectOptionsVTbl*
   end
@@ -3760,8 +3760,8 @@ lib LibWin32
     put_escaped_mode : Proc(IADsPathname*, Int32, HRESULT)
   end
 
-  IADsPathname_GUID = LibC::GUID.new("d592aed4-f420-11d0-a36e-00c04fb950dc")
-  CLSID_IADsPathname = "d592aed4-f420-11d0-a36e-00c04fb950dc"
+  IADsPathname_GUID = "d592aed4-f420-11d0-a36e-00c04fb950dc"
+  IID_IADsPathname = LibC::GUID.new(0xd592aed4_u32, 0xf420_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
   struct IADsPathname
     lpVtbl : IADsPathnameVTbl*
   end
@@ -3789,8 +3789,8 @@ lib LibWin32
     get_trees : Proc(IADsADSystemInfo*, VARIANT*, HRESULT)
   end
 
-  IADsADSystemInfo_GUID = LibC::GUID.new("5bb11929-afd1-11d2-9cb9-0000f87a369e")
-  CLSID_IADsADSystemInfo = "5bb11929-afd1-11d2-9cb9-0000f87a369e"
+  IADsADSystemInfo_GUID = "5bb11929-afd1-11d2-9cb9-0000f87a369e"
+  IID_IADsADSystemInfo = LibC::GUID.new(0x5bb11929_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
   struct IADsADSystemInfo
     lpVtbl : IADsADSystemInfoVTbl*
   end
@@ -3809,8 +3809,8 @@ lib LibWin32
     get_pdc : Proc(IADsWinNTSystemInfo*, UInt8**, HRESULT)
   end
 
-  IADsWinNTSystemInfo_GUID = LibC::GUID.new("6c6d65dc-afd1-11d2-9cb9-0000f87a369e")
-  CLSID_IADsWinNTSystemInfo = "6c6d65dc-afd1-11d2-9cb9-0000f87a369e"
+  IADsWinNTSystemInfo_GUID = "6c6d65dc-afd1-11d2-9cb9-0000f87a369e"
+  IID_IADsWinNTSystemInfo = LibC::GUID.new(0x6c6d65dc_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
   struct IADsWinNTSystemInfo
     lpVtbl : IADsWinNTSystemInfoVTbl*
   end
@@ -3829,8 +3829,8 @@ lib LibWin32
     put_dn_string : Proc(IADsDNWithBinary*, UInt8*, HRESULT)
   end
 
-  IADsDNWithBinary_GUID = LibC::GUID.new("7e99c0a2-f935-11d2-ba96-00c04fb6d0d1")
-  CLSID_IADsDNWithBinary = "7e99c0a2-f935-11d2-ba96-00c04fb6d0d1"
+  IADsDNWithBinary_GUID = "7e99c0a2-f935-11d2-ba96-00c04fb6d0d1"
+  IID_IADsDNWithBinary = LibC::GUID.new(0x7e99c0a2_u32, 0xf935_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
   struct IADsDNWithBinary
     lpVtbl : IADsDNWithBinaryVTbl*
   end
@@ -3849,8 +3849,8 @@ lib LibWin32
     put_dn_string : Proc(IADsDNWithString*, UInt8*, HRESULT)
   end
 
-  IADsDNWithString_GUID = LibC::GUID.new("370df02e-f934-11d2-ba96-00c04fb6d0d1")
-  CLSID_IADsDNWithString = "370df02e-f934-11d2-ba96-00c04fb6d0d1"
+  IADsDNWithString_GUID = "370df02e-f934-11d2-ba96-00c04fb6d0d1"
+  IID_IADsDNWithString = LibC::GUID.new(0x370df02e_u32, 0xf934_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
   struct IADsDNWithString
     lpVtbl : IADsDNWithStringVTbl*
   end
@@ -3870,8 +3870,8 @@ lib LibWin32
     put_security_mask : Proc(IADsSecurityUtility*, Int32, HRESULT)
   end
 
-  IADsSecurityUtility_GUID = LibC::GUID.new("a63251b2-5f21-474b-ab52-4a8efad10895")
-  CLSID_IADsSecurityUtility = "a63251b2-5f21-474b-ab52-4a8efad10895"
+  IADsSecurityUtility_GUID = "a63251b2-5f21-474b-ab52-4a8efad10895"
+  IID_IADsSecurityUtility = LibC::GUID.new(0xa63251b2_u32, 0x5f21_u16, 0x474b_u16, StaticArray[0xab_u8, 0x52_u8, 0x4a_u8, 0x8e_u8, 0xfa_u8, 0xd1_u8, 0x8_u8, 0x95_u8])
   struct IADsSecurityUtility
     lpVtbl : IADsSecurityUtilityVTbl*
   end
@@ -3887,8 +3887,8 @@ lib LibWin32
     set_computer : Proc(IDsBrowseDomainTree*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IDsBrowseDomainTree_GUID = LibC::GUID.new("7cabcf1e-78f5-11d2-960c-00c04fa31a86")
-  CLSID_IDsBrowseDomainTree = "7cabcf1e-78f5-11d2-960c-00c04fa31a86"
+  IDsBrowseDomainTree_GUID = "7cabcf1e-78f5-11d2-960c-00c04fa31a86"
+  IID_IDsBrowseDomainTree = LibC::GUID.new(0x7cabcf1e_u32, 0x78f5_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x1a_u8, 0x86_u8])
   struct IDsBrowseDomainTree
     lpVtbl : IDsBrowseDomainTreeVTbl*
   end
@@ -3910,8 +3910,8 @@ lib LibWin32
     get_attribute_a_ds_type : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, ADSTYPEENUM)
   end
 
-  IDsDisplaySpecifier_GUID = LibC::GUID.new("1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")
-  CLSID_IDsDisplaySpecifier = "1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86"
+  IDsDisplaySpecifier_GUID = "1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86"
+  IID_IDsDisplaySpecifier = LibC::GUID.new(0x1ab4a8c0_u32, 0x6a0b_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x49_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x1a_u8, 0x86_u8])
   struct IDsDisplaySpecifier
     lpVtbl : IDsDisplaySpecifierVTbl*
   end
@@ -3924,8 +3924,8 @@ lib LibWin32
     invoke_dialog : Proc(IDsObjectPicker*, LibC::HANDLE, IDataObject*, HRESULT)
   end
 
-  IDsObjectPicker_GUID = LibC::GUID.new("0c87e64e-3b7a-11d2-b9e0-00c04fd8dbf7")
-  CLSID_IDsObjectPicker = "0c87e64e-3b7a-11d2-b9e0-00c04fd8dbf7"
+  IDsObjectPicker_GUID = "0c87e64e-3b7a-11d2-b9e0-00c04fd8dbf7"
+  IID_IDsObjectPicker = LibC::GUID.new(0xc87e64e_u32, 0x3b7a_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xe0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xdb_u8, 0xf7_u8])
   struct IDsObjectPicker
     lpVtbl : IDsObjectPickerVTbl*
   end
@@ -3939,8 +3939,8 @@ lib LibWin32
     set_credentials : Proc(IDsObjectPickerCredentials*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IDsObjectPickerCredentials_GUID = LibC::GUID.new("e2d3ec9b-d041-445a-8f16-4748de8fb1cf")
-  CLSID_IDsObjectPickerCredentials = "e2d3ec9b-d041-445a-8f16-4748de8fb1cf"
+  IDsObjectPickerCredentials_GUID = "e2d3ec9b-d041-445a-8f16-4748de8fb1cf"
+  IID_IDsObjectPickerCredentials = LibC::GUID.new(0xe2d3ec9b_u32, 0xd041_u16, 0x445a_u16, StaticArray[0x8f_u8, 0x16_u8, 0x47_u8, 0x48_u8, 0xde_u8, 0x8f_u8, 0xb1_u8, 0xcf_u8])
   struct IDsObjectPickerCredentials
     lpVtbl : IDsObjectPickerCredentialsVTbl*
   end
@@ -3953,8 +3953,8 @@ lib LibWin32
     create_modal : Proc(IDsAdminCreateObj*, LibC::HANDLE, IADs*, HRESULT)
   end
 
-  IDsAdminCreateObj_GUID = LibC::GUID.new("53554a38-f902-11d2-82b9-00c04f68928b")
-  CLSID_IDsAdminCreateObj = "53554a38-f902-11d2-82b9-00c04f68928b"
+  IDsAdminCreateObj_GUID = "53554a38-f902-11d2-82b9-00c04f68928b"
+  IID_IDsAdminCreateObj = LibC::GUID.new(0x53554a38_u32, 0xf902_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
   struct IDsAdminCreateObj
     lpVtbl : IDsAdminCreateObjVTbl*
   end
@@ -3967,8 +3967,8 @@ lib LibWin32
     get_page_counts : Proc(IDsAdminNewObj*, Int32*, Int32*, HRESULT)
   end
 
-  IDsAdminNewObj_GUID = LibC::GUID.new("f2573587-e6fc-11d2-82af-00c04f68928b")
-  CLSID_IDsAdminNewObj = "f2573587-e6fc-11d2-82af-00c04f68928b"
+  IDsAdminNewObj_GUID = "f2573587-e6fc-11d2-82af-00c04f68928b"
+  IID_IDsAdminNewObj = LibC::GUID.new(0xf2573587_u32, 0xe6fc_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xaf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
   struct IDsAdminNewObj
     lpVtbl : IDsAdminNewObjVTbl*
   end
@@ -3981,8 +3981,8 @@ lib LibWin32
     commit : Proc(IDsAdminNewObjPrimarySite*, HRESULT)
   end
 
-  IDsAdminNewObjPrimarySite_GUID = LibC::GUID.new("be2b487e-f904-11d2-82b9-00c04f68928b")
-  CLSID_IDsAdminNewObjPrimarySite = "be2b487e-f904-11d2-82b9-00c04f68928b"
+  IDsAdminNewObjPrimarySite_GUID = "be2b487e-f904-11d2-82b9-00c04f68928b"
+  IID_IDsAdminNewObjPrimarySite = LibC::GUID.new(0xbe2b487e_u32, 0xf904_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
   struct IDsAdminNewObjPrimarySite
     lpVtbl : IDsAdminNewObjPrimarySiteVTbl*
   end
@@ -3999,8 +3999,8 @@ lib LibWin32
     get_summary_info : Proc(IDsAdminNewObjExt*, UInt8**, HRESULT)
   end
 
-  IDsAdminNewObjExt_GUID = LibC::GUID.new("6088eae2-e7bf-11d2-82af-00c04f68928b")
-  CLSID_IDsAdminNewObjExt = "6088eae2-e7bf-11d2-82af-00c04f68928b"
+  IDsAdminNewObjExt_GUID = "6088eae2-e7bf-11d2-82af-00c04f68928b"
+  IID_IDsAdminNewObjExt = LibC::GUID.new(0x6088eae2_u32, 0xe7bf_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xaf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
   struct IDsAdminNewObjExt
     lpVtbl : IDsAdminNewObjExtVTbl*
   end
@@ -4015,8 +4015,8 @@ lib LibWin32
     rend : Proc(IDsAdminNotifyHandler*, HRESULT)
   end
 
-  IDsAdminNotifyHandler_GUID = LibC::GUID.new("e4a2b8b3-5a18-11d2-97c1-00a0c9a06d2d")
-  CLSID_IDsAdminNotifyHandler = "e4a2b8b3-5a18-11d2-97c1-00a0c9a06d2d"
+  IDsAdminNotifyHandler_GUID = "e4a2b8b3-5a18-11d2-97c1-00a0c9a06d2d"
+  IID_IDsAdminNotifyHandler = LibC::GUID.new(0xe4a2b8b3_u32, 0x5a18_u16, 0x11d2_u16, StaticArray[0x97_u8, 0xc1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa0_u8, 0x6d_u8, 0x2d_u8])
   struct IDsAdminNotifyHandler
     lpVtbl : IDsAdminNotifyHandlerVTbl*
   end

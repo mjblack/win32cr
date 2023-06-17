@@ -268,8 +268,8 @@ lib LibWin32
     bind_region : Proc(IFilter*, FILTERREGION, Guid*, Void**, Int32)
   end
 
-  IFilter_GUID = LibC::GUID.new("89bcb740-6119-101a-bcb7-00dd010655af")
-  CLSID_IFilter = "89bcb740-6119-101a-bcb7-00dd010655af"
+  IFilter_GUID = "89bcb740-6119-101a-bcb7-00dd010655af"
+  IID_IFilter = LibC::GUID.new(0x89bcb740_u32, 0x6119_u16, 0x101a_u16, StaticArray[0xbc_u8, 0xb7_u8, 0x0_u8, 0xdd_u8, 0x1_u8, 0x6_u8, 0x55_u8, 0xaf_u8])
   struct IFilter
     lpVtbl : IFilterVTbl*
   end
@@ -282,8 +282,8 @@ lib LibWin32
     put_phrase : Proc(IPhraseSink*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
-  IPhraseSink_GUID = LibC::GUID.new("cc906ff0-c058-101a-b554-08002b33b0e6")
-  CLSID_IPhraseSink = "cc906ff0-c058-101a-b554-08002b33b0e6"
+  IPhraseSink_GUID = "cc906ff0-c058-101a-b554-08002b33b0e6"
+  IID_IPhraseSink = LibC::GUID.new(0xcc906ff0_u32, 0xc058_u16, 0x101a_u16, StaticArray[0xb5_u8, 0x54_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x33_u8, 0xb0_u8, 0xe6_u8])
   struct IPhraseSink
     lpVtbl : IPhraseSinkVTbl*
   end

@@ -552,8 +552,8 @@ lib LibWin32
   ERROR_WSMAN_VIRTUALACCOUNT_NOTSUPPORTED_DOWNLEVEL = 2150859260_u32
   ERROR_WSMAN_RUNASUSER_MANAGEDACCOUNT_LOGON_FAILED = 2150859261_u32
   ERROR_WSMAN_CERTMAPPING_CREDENTIAL_MANAGEMENT_FAILIED = 2150859262_u32
-  WSMan = LibC::GUID.new(0xbced617b_u32, 0xec03_u16, 0x420b_u16, StaticArray[0x85_u8, 0x8_u8, 0x97_u8, 0x7d_u8, 0xc7_u8, 0xa6_u8, 0x86_u8, 0xbd_u8])
-  WSManInternal = LibC::GUID.new(0x7de087a5_u32, 0x5dcb_u16, 0x4df7_u16, StaticArray[0xbb_u8, 0x12_u8, 0x9_u8, 0x24_u8, 0xad_u8, 0x8f_u8, 0xbd_u8, 0x9a_u8])
+  CLSID_WSMan = LibC::GUID.new(0xbced617b_u32, 0xec03_u16, 0x420b_u16, StaticArray[0x85_u8, 0x8_u8, 0x97_u8, 0x7d_u8, 0xc7_u8, 0xa6_u8, 0x86_u8, 0xbd_u8])
+  CLSID_WSManInternal = LibC::GUID.new(0x7de087a5_u32, 0x5dcb_u16, 0x4df7_u16, StaticArray[0xbb_u8, 0x12_u8, 0x9_u8, 0x24_u8, 0xad_u8, 0x8f_u8, 0xbd_u8, 0x9a_u8])
 
   type WSMAN_API = Void
   type WSMAN_SESSION = Void
@@ -880,8 +880,8 @@ lib LibWin32
     get_error : Proc(IWSMan*, UInt8**, HRESULT)
   end
 
-  IWSMan_GUID = LibC::GUID.new("190d8637-5cd3-496d-ad24-69636bb5a3b5")
-  CLSID_IWSMan = "190d8637-5cd3-496d-ad24-69636bb5a3b5"
+  IWSMan_GUID = "190d8637-5cd3-496d-ad24-69636bb5a3b5"
+  IID_IWSMan = LibC::GUID.new(0x190d8637_u32, 0x5cd3_u16, 0x496d_u16, StaticArray[0xad_u8, 0x24_u8, 0x69_u8, 0x63_u8, 0x6b_u8, 0xb5_u8, 0xa3_u8, 0xb5_u8])
   struct IWSMan
     lpVtbl : IWSManVTbl*
   end
@@ -920,8 +920,8 @@ lib LibWin32
     enumeration_flag_return_object : Proc(IWSManEx*, Int32*, HRESULT)
   end
 
-  IWSManEx_GUID = LibC::GUID.new("2d53bdaa-798e-49e6-a1aa-74d01256f411")
-  CLSID_IWSManEx = "2d53bdaa-798e-49e6-a1aa-74d01256f411"
+  IWSManEx_GUID = "2d53bdaa-798e-49e6-a1aa-74d01256f411"
+  IID_IWSManEx = LibC::GUID.new(0x2d53bdaa_u32, 0x798e_u16, 0x49e6_u16, StaticArray[0xa1_u8, 0xaa_u8, 0x74_u8, 0xd0_u8, 0x12_u8, 0x56_u8, 0xf4_u8, 0x11_u8])
   struct IWSManEx
     lpVtbl : IWSManExVTbl*
   end
@@ -961,8 +961,8 @@ lib LibWin32
     session_flag_use_client_certificate : Proc(IWSManEx2*, Int32*, HRESULT)
   end
 
-  IWSManEx2_GUID = LibC::GUID.new("1d1b5ae0-42d9-4021-8261-3987619512e9")
-  CLSID_IWSManEx2 = "1d1b5ae0-42d9-4021-8261-3987619512e9"
+  IWSManEx2_GUID = "1d1b5ae0-42d9-4021-8261-3987619512e9"
+  IID_IWSManEx2 = LibC::GUID.new(0x1d1b5ae0_u32, 0x42d9_u16, 0x4021_u16, StaticArray[0x82_u8, 0x61_u8, 0x39_u8, 0x87_u8, 0x61_u8, 0x95_u8, 0x12_u8, 0xe9_u8])
   struct IWSManEx2
     lpVtbl : IWSManEx2VTbl*
   end
@@ -1009,8 +1009,8 @@ lib LibWin32
     session_flag_use_ssl : Proc(IWSManEx3*, Int32*, HRESULT)
   end
 
-  IWSManEx3_GUID = LibC::GUID.new("6400e966-011d-4eac-8474-049e0848afad")
-  CLSID_IWSManEx3 = "6400e966-011d-4eac-8474-049e0848afad"
+  IWSManEx3_GUID = "6400e966-011d-4eac-8474-049e0848afad"
+  IID_IWSManEx3 = LibC::GUID.new(0x6400e966_u32, 0x11d_u16, 0x4eac_u16, StaticArray[0x84_u8, 0x74_u8, 0x4_u8, 0x9e_u8, 0x8_u8, 0x48_u8, 0xaf_u8, 0xad_u8])
   struct IWSManEx3
     lpVtbl : IWSManEx3VTbl*
   end
@@ -1028,8 +1028,8 @@ lib LibWin32
     put_password : Proc(IWSManConnectionOptions*, UInt8*, HRESULT)
   end
 
-  IWSManConnectionOptions_GUID = LibC::GUID.new("f704e861-9e52-464f-b786-da5eb2320fdd")
-  CLSID_IWSManConnectionOptions = "f704e861-9e52-464f-b786-da5eb2320fdd"
+  IWSManConnectionOptions_GUID = "f704e861-9e52-464f-b786-da5eb2320fdd"
+  IID_IWSManConnectionOptions = LibC::GUID.new(0xf704e861_u32, 0x9e52_u16, 0x464f_u16, StaticArray[0xb7_u8, 0x86_u8, 0xda_u8, 0x5e_u8, 0xb2_u8, 0x32_u8, 0xf_u8, 0xdd_u8])
   struct IWSManConnectionOptions
     lpVtbl : IWSManConnectionOptionsVTbl*
   end
@@ -1049,8 +1049,8 @@ lib LibWin32
     put_certificate_thumbprint : Proc(IWSManConnectionOptionsEx*, UInt8*, HRESULT)
   end
 
-  IWSManConnectionOptionsEx_GUID = LibC::GUID.new("ef43edf7-2a48-4d93-9526-8bd6ab6d4a6b")
-  CLSID_IWSManConnectionOptionsEx = "ef43edf7-2a48-4d93-9526-8bd6ab6d4a6b"
+  IWSManConnectionOptionsEx_GUID = "ef43edf7-2a48-4d93-9526-8bd6ab6d4a6b"
+  IID_IWSManConnectionOptionsEx = LibC::GUID.new(0xef43edf7_u32, 0x2a48_u16, 0x4d93_u16, StaticArray[0x95_u8, 0x26_u8, 0x8b_u8, 0xd6_u8, 0xab_u8, 0x6d_u8, 0x4a_u8, 0x6b_u8])
   struct IWSManConnectionOptionsEx
     lpVtbl : IWSManConnectionOptionsExVTbl*
   end
@@ -1078,8 +1078,8 @@ lib LibWin32
     proxy_authentication_use_digest : Proc(IWSManConnectionOptionsEx2*, Int32*, HRESULT)
   end
 
-  IWSManConnectionOptionsEx2_GUID = LibC::GUID.new("f500c9ec-24ee-48ab-b38d-fc9a164c658e")
-  CLSID_IWSManConnectionOptionsEx2 = "f500c9ec-24ee-48ab-b38d-fc9a164c658e"
+  IWSManConnectionOptionsEx2_GUID = "f500c9ec-24ee-48ab-b38d-fc9a164c658e"
+  IID_IWSManConnectionOptionsEx2 = LibC::GUID.new(0xf500c9ec_u32, 0x24ee_u16, 0x48ab_u16, StaticArray[0xb3_u8, 0x8d_u8, 0xfc_u8, 0x9a_u8, 0x16_u8, 0x4c_u8, 0x65_u8, 0x8e_u8])
   struct IWSManConnectionOptionsEx2
     lpVtbl : IWSManConnectionOptionsEx2VTbl*
   end
@@ -1106,8 +1106,8 @@ lib LibWin32
     put_timeout : Proc(IWSManSession*, Int32, HRESULT)
   end
 
-  IWSManSession_GUID = LibC::GUID.new("fc84fc58-1286-40c4-9da0-c8ef6ec241e0")
-  CLSID_IWSManSession = "fc84fc58-1286-40c4-9da0-c8ef6ec241e0"
+  IWSManSession_GUID = "fc84fc58-1286-40c4-9da0-c8ef6ec241e0"
+  IID_IWSManSession = LibC::GUID.new(0xfc84fc58_u32, 0x1286_u16, 0x40c4_u16, StaticArray[0x9d_u8, 0xa0_u8, 0xc8_u8, 0xef_u8, 0x6e_u8, 0xc2_u8, 0x41_u8, 0xe0_u8])
   struct IWSManSession
     lpVtbl : IWSManSessionVTbl*
   end
@@ -1125,8 +1125,8 @@ lib LibWin32
     get_error : Proc(IWSManEnumerator*, UInt8**, HRESULT)
   end
 
-  IWSManEnumerator_GUID = LibC::GUID.new("f3457ca9-abb9-4fa5-b850-90e8ca300e7f")
-  CLSID_IWSManEnumerator = "f3457ca9-abb9-4fa5-b850-90e8ca300e7f"
+  IWSManEnumerator_GUID = "f3457ca9-abb9-4fa5-b850-90e8ca300e7f"
+  IID_IWSManEnumerator = LibC::GUID.new(0xf3457ca9_u32, 0xabb9_u16, 0x4fa5_u16, StaticArray[0xb8_u8, 0x50_u8, 0x90_u8, 0xe8_u8, 0xca_u8, 0x30_u8, 0xe_u8, 0x7f_u8])
   struct IWSManEnumerator
     lpVtbl : IWSManEnumeratorVTbl*
   end
@@ -1154,8 +1154,8 @@ lib LibWin32
     get_error : Proc(IWSManResourceLocator*, UInt8**, HRESULT)
   end
 
-  IWSManResourceLocator_GUID = LibC::GUID.new("a7a1ba28-de41-466a-ad0a-c4059ead7428")
-  CLSID_IWSManResourceLocator = "a7a1ba28-de41-466a-ad0a-c4059ead7428"
+  IWSManResourceLocator_GUID = "a7a1ba28-de41-466a-ad0a-c4059ead7428"
+  IID_IWSManResourceLocator = LibC::GUID.new(0xa7a1ba28_u32, 0xde41_u16, 0x466a_u16, StaticArray[0xad_u8, 0xa_u8, 0xc4_u8, 0x5_u8, 0x9e_u8, 0xad_u8, 0x74_u8, 0x28_u8])
   struct IWSManResourceLocator
     lpVtbl : IWSManResourceLocatorVTbl*
   end
@@ -1166,8 +1166,8 @@ lib LibWin32
     release : Proc(IWSManResourceLocatorInternal*, UInt32)
   end
 
-  IWSManResourceLocatorInternal_GUID = LibC::GUID.new("effaead7-7ec8-4716-b9be-f2e7e9fb4adb")
-  CLSID_IWSManResourceLocatorInternal = "effaead7-7ec8-4716-b9be-f2e7e9fb4adb"
+  IWSManResourceLocatorInternal_GUID = "effaead7-7ec8-4716-b9be-f2e7e9fb4adb"
+  IID_IWSManResourceLocatorInternal = LibC::GUID.new(0xeffaead7_u32, 0x7ec8_u16, 0x4716_u16, StaticArray[0xb9_u8, 0xbe_u8, 0xf2_u8, 0xe7_u8, 0xe9_u8, 0xfb_u8, 0x4a_u8, 0xdb_u8])
   struct IWSManResourceLocatorInternal
     lpVtbl : IWSManResourceLocatorInternalVTbl*
   end
@@ -1183,8 +1183,8 @@ lib LibWin32
     config_sddl : Proc(IWSManInternal*, IDispatch, VARIANT, Int32, UInt8**, HRESULT)
   end
 
-  IWSManInternal_GUID = LibC::GUID.new("04ae2b1d-9954-4d99-94a9-a961e72c3a13")
-  CLSID_IWSManInternal = "04ae2b1d-9954-4d99-94a9-a961e72c3a13"
+  IWSManInternal_GUID = "04ae2b1d-9954-4d99-94a9-a961e72c3a13"
+  IID_IWSManInternal = LibC::GUID.new(0x4ae2b1d_u32, 0x9954_u16, 0x4d99_u16, StaticArray[0x94_u8, 0xa9_u8, 0xa9_u8, 0x61_u8, 0xe7_u8, 0x2c_u8, 0x3a_u8, 0x13_u8])
   struct IWSManInternal
     lpVtbl : IWSManInternalVTbl*
   end

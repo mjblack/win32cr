@@ -12,7 +12,7 @@ require "../system/com.cr"
 {% else %}
 {% end %}
 lib LibWin32
-  WaaSAssessor = LibC::GUID.new(0x98ef871_u32, 0xfa9f_u16, 0x46af_u16, StaticArray[0x89_u8, 0x58_u8, 0xc0_u8, 0x83_u8, 0x51_u8, 0x5d_u8, 0x7c_u8, 0x9c_u8])
+  CLSID_WaaSAssessor = LibC::GUID.new(0x98ef871_u32, 0xfa9f_u16, 0x46af_u16, StaticArray[0x89_u8, 0x58_u8, 0xc0_u8, 0x83_u8, 0x51_u8, 0x5d_u8, 0x7c_u8, 0x9c_u8])
 
 
   enum UpdateImpactLevel : Int32
@@ -63,8 +63,8 @@ lib LibWin32
     get_os_update_assessment : Proc(IWaaSAssessor*, OSUpdateAssessment*, HRESULT)
   end
 
-  IWaaSAssessor_GUID = LibC::GUID.new("2347bbef-1a3b-45a4-902d-3e09c269b45e")
-  CLSID_IWaaSAssessor = "2347bbef-1a3b-45a4-902d-3e09c269b45e"
+  IWaaSAssessor_GUID = "2347bbef-1a3b-45a4-902d-3e09c269b45e"
+  IID_IWaaSAssessor = LibC::GUID.new(0x2347bbef_u32, 0x1a3b_u16, 0x45a4_u16, StaticArray[0x90_u8, 0x2d_u8, 0x3e_u8, 0x9_u8, 0xc2_u8, 0x69_u8, 0xb4_u8, 0x5e_u8])
   struct IWaaSAssessor
     lpVtbl : IWaaSAssessorVTbl*
   end

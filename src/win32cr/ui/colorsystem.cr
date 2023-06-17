@@ -528,8 +528,8 @@ lib LibWin32
     get_neutral_axis : Proc(IDeviceModelPlugIn*, UInt32, XYZColorF*, HRESULT)
   end
 
-  IDeviceModelPlugIn_GUID = LibC::GUID.new("1cd63475-07c4-46fe-a903-d655316d11fd")
-  CLSID_IDeviceModelPlugIn = "1cd63475-07c4-46fe-a903-d655316d11fd"
+  IDeviceModelPlugIn_GUID = "1cd63475-07c4-46fe-a903-d655316d11fd"
+  IID_IDeviceModelPlugIn = LibC::GUID.new(0x1cd63475_u32, 0x7c4_u16, 0x46fe_u16, StaticArray[0xa9_u8, 0x3_u8, 0xd6_u8, 0x55_u8, 0x31_u8, 0x6d_u8, 0x11_u8, 0xfd_u8])
   struct IDeviceModelPlugIn
     lpVtbl : IDeviceModelPlugInVTbl*
   end
@@ -542,8 +542,8 @@ lib LibWin32
     source_to_destination_appearance_colors : Proc(IGamutMapModelPlugIn*, UInt32, JChColorF*, JChColorF*, HRESULT)
   end
 
-  IGamutMapModelPlugIn_GUID = LibC::GUID.new("2dd80115-ad1e-41f6-a219-a4f4b583d1f9")
-  CLSID_IGamutMapModelPlugIn = "2dd80115-ad1e-41f6-a219-a4f4b583d1f9"
+  IGamutMapModelPlugIn_GUID = "2dd80115-ad1e-41f6-a219-a4f4b583d1f9"
+  IID_IGamutMapModelPlugIn = LibC::GUID.new(0x2dd80115_u32, 0xad1e_u16, 0x41f6_u16, StaticArray[0xa2_u8, 0x19_u8, 0xa4_u8, 0xf4_u8, 0xb5_u8, 0x83_u8, 0xd1_u8, 0xf9_u8])
   struct IGamutMapModelPlugIn
     lpVtbl : IGamutMapModelPlugInVTbl*
   end

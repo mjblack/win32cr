@@ -908,7 +908,7 @@ lib LibWin32
   HTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH = 123_u32
   HTTP_WEB_SOCKET_MIN_KEEPALIVE_VALUE = 10000_u32
   INTERNET_GLOBAL_CALLBACK_SENDING_HTTP_HEADERS = 1_u32
-  ProofOfPossessionCookieInfoManager = LibC::GUID.new(0xa9927f85_u32, 0xa304_u16, 0x4390_u16, StaticArray[0x8b_u8, 0x23_u8, 0xa7_u8, 0x5f_u8, 0x1c_u8, 0x66_u8, 0x86_u8, 0x0_u8])
+  CLSID_ProofOfPossessionCookieInfoManager = LibC::GUID.new(0xa9927f85_u32, 0xa304_u16, 0x4390_u16, StaticArray[0x8b_u8, 0x23_u8, 0xa7_u8, 0x5f_u8, 0x1c_u8, 0x66_u8, 0x86_u8, 0x0_u8])
 
   alias LPINTERNET_STATUS_CALLBACK = Proc(Void*, LibC::UINT_PTR, UInt32, Void*, UInt32, Void)
   alias GOPHER_ATTRIBUTE_ENUMERATOR = Proc(GOPHER_ATTRIBUTE_TYPE*, UInt32, LibC::BOOL)
@@ -1188,7 +1188,7 @@ lib LibWin32
     time_zone : GOPHER_TIMEZONE_ATTRIBUTE_TYPE
     provider : GOPHER_PROVIDER_ATTRIBUTE_TYPE
     version : GOPHER_VERSION_ATTRIBUTE_TYPE
-    abstract : GOPHER_ABSTRACT_ATTRIBUTE_TYPE
+    vabstract : GOPHER_ABSTRACT_ATTRIBUTE_TYPE
     view : GOPHER_VIEW_ATTRIBUTE_TYPE
     veronica : GOPHER_VERONICA_ATTRIBUTE_TYPE
     ask : GOPHER_ASK_ATTRIBUTE_TYPE
@@ -1737,8 +1737,8 @@ lib LibWin32
     on_event : Proc(IDialEventSink*, UInt32, UInt32, HRESULT)
   end
 
-  IDialEventSink_GUID = LibC::GUID.new("2d86f4ff-6e2d-4488-b2e9-6934afd41bea")
-  CLSID_IDialEventSink = "2d86f4ff-6e2d-4488-b2e9-6934afd41bea"
+  IDialEventSink_GUID = "2d86f4ff-6e2d-4488-b2e9-6934afd41bea"
+  IID_IDialEventSink = LibC::GUID.new(0x2d86f4ff_u32, 0x6e2d_u16, 0x4488_u16, StaticArray[0xb2_u8, 0xe9_u8, 0x69_u8, 0x34_u8, 0xaf_u8, 0xd4_u8, 0x1b_u8, 0xea_u8])
   struct IDialEventSink
     lpVtbl : IDialEventSinkVTbl*
   end
@@ -1756,8 +1756,8 @@ lib LibWin32
     get_connect_handle : Proc(IDialEngine*, LibC::UINT_PTR*, HRESULT)
   end
 
-  IDialEngine_GUID = LibC::GUID.new("39fd782b-7905-40d5-9148-3c9b190423d5")
-  CLSID_IDialEngine = "39fd782b-7905-40d5-9148-3c9b190423d5"
+  IDialEngine_GUID = "39fd782b-7905-40d5-9148-3c9b190423d5"
+  IID_IDialEngine = LibC::GUID.new(0x39fd782b_u32, 0x7905_u16, 0x40d5_u16, StaticArray[0x91_u8, 0x48_u8, 0x3c_u8, 0x9b_u8, 0x19_u8, 0x4_u8, 0x23_u8, 0xd5_u8])
   struct IDialEngine
     lpVtbl : IDialEngineVTbl*
   end
@@ -1770,8 +1770,8 @@ lib LibWin32
     get_bitmap : Proc(IDialBranding*, UInt32, HBITMAP*, HRESULT)
   end
 
-  IDialBranding_GUID = LibC::GUID.new("8aecafa9-4306-43cc-8c5a-765f2979cc16")
-  CLSID_IDialBranding = "8aecafa9-4306-43cc-8c5a-765f2979cc16"
+  IDialBranding_GUID = "8aecafa9-4306-43cc-8c5a-765f2979cc16"
+  IID_IDialBranding = LibC::GUID.new(0x8aecafa9_u32, 0x4306_u16, 0x43cc_u16, StaticArray[0x8c_u8, 0x5a_u8, 0x76_u8, 0x5f_u8, 0x29_u8, 0x79_u8, 0xcc_u8, 0x16_u8])
   struct IDialBranding
     lpVtbl : IDialBrandingVTbl*
   end
@@ -1783,8 +1783,8 @@ lib LibWin32
     get_cookie_info_for_uri : Proc(IProofOfPossessionCookieInfoManager*, LibC::LPWSTR, UInt32*, ProofOfPossessionCookieInfo**, HRESULT)
   end
 
-  IProofOfPossessionCookieInfoManager_GUID = LibC::GUID.new("cdaece56-4edf-43df-b113-88e4556fa1bb")
-  CLSID_IProofOfPossessionCookieInfoManager = "cdaece56-4edf-43df-b113-88e4556fa1bb"
+  IProofOfPossessionCookieInfoManager_GUID = "cdaece56-4edf-43df-b113-88e4556fa1bb"
+  IID_IProofOfPossessionCookieInfoManager = LibC::GUID.new(0xcdaece56_u32, 0x4edf_u16, 0x43df_u16, StaticArray[0xb1_u8, 0x13_u8, 0x88_u8, 0xe4_u8, 0x55_u8, 0x6f_u8, 0xa1_u8, 0xbb_u8])
   struct IProofOfPossessionCookieInfoManager
     lpVtbl : IProofOfPossessionCookieInfoManagerVTbl*
   end
@@ -1796,8 +1796,8 @@ lib LibWin32
     get_cookie_info_with_uri_for_account : Proc(IProofOfPossessionCookieInfoManager2*, IInspectable, LibC::LPWSTR, UInt32*, ProofOfPossessionCookieInfo**, HRESULT)
   end
 
-  IProofOfPossessionCookieInfoManager2_GUID = LibC::GUID.new("15e41407-b42f-4ae7-9966-34a087b2d713")
-  CLSID_IProofOfPossessionCookieInfoManager2 = "15e41407-b42f-4ae7-9966-34a087b2d713"
+  IProofOfPossessionCookieInfoManager2_GUID = "15e41407-b42f-4ae7-9966-34a087b2d713"
+  IID_IProofOfPossessionCookieInfoManager2 = LibC::GUID.new(0x15e41407_u32, 0xb42f_u16, 0x4ae7_u16, StaticArray[0x99_u8, 0x66_u8, 0x34_u8, 0xa0_u8, 0x87_u8, 0xb2_u8, 0xd7_u8, 0x13_u8])
   struct IProofOfPossessionCookieInfoManager2
     lpVtbl : IProofOfPossessionCookieInfoManager2VTbl*
   end

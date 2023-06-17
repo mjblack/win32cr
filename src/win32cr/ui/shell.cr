@@ -1636,126 +1636,126 @@ lib LibWin32
   CTF_OLEINITIALIZE = 2048_i32
   CTF_COINIT_MTA = 4096_i32
   CTF_NOADDREFLIB = 8192_i32
-  QueryCancelAutoPlay = LibC::GUID.new(0x331f1768_u32, 0x5a9_u16, 0x4ddd_u16, StaticArray[0xb8_u8, 0x6e_u8, 0xda_u8, 0xe3_u8, 0x4d_u8, 0xdc_u8, 0x99_u8, 0x8a_u8])
-  TimeCategorizer = LibC::GUID.new(0x3bb4118f_u32, 0xddfd_u16, 0x4d30_u16, StaticArray[0xa3_u8, 0x48_u8, 0x9f_u8, 0xb5_u8, 0xd6_u8, 0xbf_u8, 0x1a_u8, 0xfe_u8])
-  AlphabeticalCategorizer = LibC::GUID.new(0x3c2654c6_u32, 0x7372_u16, 0x4f6b_u16, StaticArray[0xb3_u8, 0x10_u8, 0x55_u8, 0xd6_u8, 0x12_u8, 0x8f_u8, 0x49_u8, 0xd2_u8])
-  MergedCategorizer = LibC::GUID.new(0x8e827c11_u32, 0x33e7_u16, 0x4bc1_u16, StaticArray[0xb2_u8, 0x42_u8, 0x8c_u8, 0xd9_u8, 0xa1_u8, 0xc2_u8, 0xb3_u8, 0x4_u8])
-  ImageProperties = LibC::GUID.new(0x7ab770c7_u32, 0xe23_u16, 0x4d7a_u16, StaticArray[0x8a_u8, 0xa2_u8, 0x19_u8, 0xbf_u8, 0xad_u8, 0x47_u8, 0x98_u8, 0x29_u8])
-  CDBurn = LibC::GUID.new(0xfbeb8a05_u32, 0xbeee_u16, 0x4442_u16, StaticArray[0x80_u8, 0x4e_u8, 0x40_u8, 0x9d_u8, 0x6c_u8, 0x45_u8, 0x15_u8, 0xe9_u8])
-  StartMenuPin = LibC::GUID.new(0xa2a9545d_u32, 0xa0c2_u16, 0x42b4_u16, StaticArray[0x97_u8, 0x8_u8, 0xa0_u8, 0xb2_u8, 0xba_u8, 0xdd_u8, 0x77_u8, 0xc8_u8])
-  WebWizardHost = LibC::GUID.new(0xc827f149_u32, 0x55c1_u16, 0x4d28_u16, StaticArray[0x93_u8, 0x5e_u8, 0x57_u8, 0xe4_u8, 0x7c_u8, 0xae_u8, 0xd9_u8, 0x73_u8])
-  PublishDropTarget = LibC::GUID.new(0xcc6eeffb_u32, 0x43f6_u16, 0x46c5_u16, StaticArray[0x96_u8, 0x19_u8, 0x51_u8, 0xd5_u8, 0x71_u8, 0x96_u8, 0x7f_u8, 0x7d_u8])
-  PublishingWizard = LibC::GUID.new(0x6b33163c_u32, 0x76a5_u16, 0x4b6c_u16, StaticArray[0xbf_u8, 0x21_u8, 0x45_u8, 0xde_u8, 0x9c_u8, 0xd5_u8, 0x3_u8, 0xa1_u8])
-  InternetPrintOrdering = LibC::GUID.new(0xadd36aa8_u32, 0x751a_u16, 0x4579_u16, StaticArray[0xa2_u8, 0x66_u8, 0xd6_u8, 0x6f_u8, 0x52_u8, 0x2_u8, 0xcc_u8, 0xbb_u8])
-  FolderViewHost = LibC::GUID.new(0x20b1cb23_u32, 0x6968_u16, 0x4eb9_u16, StaticArray[0xb7_u8, 0xd4_u8, 0xa6_u8, 0x6d_u8, 0x0_u8, 0xd0_u8, 0x7c_u8, 0xee_u8])
-  ExplorerBrowser = LibC::GUID.new(0x71f96385_u32, 0xddd6_u16, 0x48d3_u16, StaticArray[0xa0_u8, 0xc1_u8, 0xae_u8, 0x6_u8, 0xe8_u8, 0xb0_u8, 0x55_u8, 0xfb_u8])
-  ImageRecompress = LibC::GUID.new(0x6e33091c_u32, 0xd2f8_u16, 0x4740_u16, StaticArray[0xb5_u8, 0x5e_u8, 0x2e_u8, 0x11_u8, 0xd1_u8, 0x47_u8, 0x7a_u8, 0x2c_u8])
-  TrayBandSiteService = LibC::GUID.new(0xf60ad0a0_u32, 0xe5e1_u16, 0x45cb_u16, StaticArray[0xb5_u8, 0x1a_u8, 0xe1_u8, 0x5b_u8, 0x9f_u8, 0x8b_u8, 0x29_u8, 0x34_u8])
-  TrayDeskBand = LibC::GUID.new(0xe6442437_u32, 0x6c68_u16, 0x4f52_u16, StaticArray[0x94_u8, 0xdd_u8, 0x2c_u8, 0xfe_u8, 0xd2_u8, 0x67_u8, 0xef_u8, 0xb9_u8])
-  AttachmentServices = LibC::GUID.new(0x4125dd96_u32, 0xe03a_u16, 0x4103_u16, StaticArray[0x8f_u8, 0x70_u8, 0xe0_u8, 0x59_u8, 0x7d_u8, 0x80_u8, 0x3b_u8, 0x9c_u8])
-  DocPropShellExtension = LibC::GUID.new(0x883373c3_u32, 0xbf89_u16, 0x11d1_u16, StaticArray[0xbe_u8, 0x35_u8, 0x8_u8, 0x0_u8, 0x36_u8, 0xb1_u8, 0x1a_u8, 0x3_u8])
-  FSCopyHandler = LibC::GUID.new(0xd197380a_u32, 0xa79_u16, 0x4dc8_u16, StaticArray[0xa0_u8, 0x33_u8, 0xed_u8, 0x88_u8, 0x2c_u8, 0x2f_u8, 0xa1_u8, 0x4b_u8])
-  PreviousVersions = LibC::GUID.new(0x596ab062_u32, 0xb4d2_u16, 0x4215_u16, StaticArray[0x9f_u8, 0x74_u8, 0xe9_u8, 0x10_u8, 0x9b_u8, 0xa_u8, 0x81_u8, 0x53_u8])
-  NamespaceTreeControl = LibC::GUID.new(0xae054212_u32, 0x3535_u16, 0x4430_u16, StaticArray[0x83_u8, 0xed_u8, 0xd5_u8, 0x1_u8, 0xaa_u8, 0x66_u8, 0x80_u8, 0xe6_u8])
-  IENamespaceTreeControl = LibC::GUID.new(0xace52d03_u32, 0xe5cd_u16, 0x4b20_u16, StaticArray[0x82_u8, 0xff_u8, 0xe7_u8, 0x1b_u8, 0x11_u8, 0xbe_u8, 0xae_u8, 0x1d_u8])
-  ApplicationAssociationRegistrationUI = LibC::GUID.new(0x1968106d_u32, 0xf3b5_u16, 0x44cf_u16, StaticArray[0x89_u8, 0xe_u8, 0x11_u8, 0x6f_u8, 0xcb_u8, 0x9e_u8, 0xce_u8, 0xf1_u8])
-  DesktopGadget = LibC::GUID.new(0x924ccc1b_u32, 0x6562_u16, 0x4c85_u16, StaticArray[0x86_u8, 0x57_u8, 0xd1_u8, 0x77_u8, 0x92_u8, 0x52_u8, 0x22_u8, 0xb6_u8])
-  AccessibilityDockingService = LibC::GUID.new(0x29ce1d46_u32, 0xb481_u16, 0x4aa0_u16, StaticArray[0xa0_u8, 0x8a_u8, 0xd3_u8, 0xeb_u8, 0xc8_u8, 0xac_u8, 0xa4_u8, 0x2_u8])
-  ExecuteFolder = LibC::GUID.new(0x11dbb47c_u32, 0xa525_u16, 0x400b_u16, StaticArray[0x9e_u8, 0x80_u8, 0xa5_u8, 0x46_u8, 0x15_u8, 0xa0_u8, 0x90_u8, 0xc0_u8])
-  VirtualDesktopManager = LibC::GUID.new(0xaa509086_u32, 0x5ca9_u16, 0x4c25_u16, StaticArray[0x8f_u8, 0x95_u8, 0x58_u8, 0x9d_u8, 0x3c_u8, 0x7_u8, 0xb4_u8, 0x8a_u8])
-  StorageProviderBanners = LibC::GUID.new(0x7ccdf9f4_u32, 0xe576_u16, 0x455a_u16, StaticArray[0x8b_u8, 0xc7_u8, 0xf6_u8, 0xec_u8, 0x68_u8, 0xd6_u8, 0xf0_u8, 0x63_u8])
-  DesktopWallpaper = LibC::GUID.new(0xc2cf3110_u32, 0x460e_u16, 0x4fc1_u16, StaticArray[0xb9_u8, 0xd0_u8, 0x8a_u8, 0x1c_u8, 0xc_u8, 0x9c_u8, 0xc4_u8, 0xbd_u8])
-  ShellDesktop = LibC::GUID.new(0x21400_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  ShellFSFolder = LibC::GUID.new(0xf3364ba0_u32, 0x65b9_u16, 0x11ce_u16, StaticArray[0xa9_u8, 0xba_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xe8_u8, 0x37_u8])
-  NetworkPlaces = LibC::GUID.new(0x208d2c60_u32, 0x3aea_u16, 0x1069_u16, StaticArray[0xa2_u8, 0xd7_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x30_u8, 0x30_u8, 0x9d_u8])
-  ShellLink = LibC::GUID.new(0x21401_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  DriveSizeCategorizer = LibC::GUID.new(0x94357b53_u32, 0xca29_u16, 0x4b78_u16, StaticArray[0x83_u8, 0xae_u8, 0xe8_u8, 0xfe_u8, 0x74_u8, 0x9_u8, 0x13_u8, 0x4f_u8])
-  DriveTypeCategorizer = LibC::GUID.new(0xb0a8f3cf_u32, 0x4333_u16, 0x4bab_u16, StaticArray[0x88_u8, 0x73_u8, 0x1c_u8, 0xcb_u8, 0x1c_u8, 0xad_u8, 0xa4_u8, 0x8b_u8])
-  FreeSpaceCategorizer = LibC::GUID.new(0xb5607793_u32, 0x24ac_u16, 0x44c7_u16, StaticArray[0x82_u8, 0xe2_u8, 0x83_u8, 0x17_u8, 0x26_u8, 0xaa_u8, 0x6c_u8, 0xb7_u8])
-  SizeCategorizer = LibC::GUID.new(0x55d7b852_u32, 0xf6d1_u16, 0x42f2_u16, StaticArray[0xaa_u8, 0x75_u8, 0x87_u8, 0x28_u8, 0xa1_u8, 0xb2_u8, 0xd2_u8, 0x64_u8])
-  PropertiesUI = LibC::GUID.new(0xd912f8cf_u32, 0x396_u16, 0x4915_u16, StaticArray[0x88_u8, 0x4e_u8, 0xfb_u8, 0x42_u8, 0x5d_u8, 0x32_u8, 0x94_u8, 0x3b_u8])
-  UserNotification = LibC::GUID.new(0x10890e_u32, 0x8789_u16, 0x413c_u16, StaticArray[0xad_u8, 0xbc_u8, 0x48_u8, 0xf5_u8, 0xb5_u8, 0x11_u8, 0xb3_u8, 0xaf_u8])
-  TaskbarList = LibC::GUID.new(0x56fdf344_u32, 0xfd6d_u16, 0x11d0_u16, StaticArray[0x95_u8, 0x8a_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa0_u8, 0x90_u8])
-  ShellItem = LibC::GUID.new(0x9ac9fbe1_u32, 0xe0a2_u16, 0x4ad6_u16, StaticArray[0xb4_u8, 0xee_u8, 0xe2_u8, 0x12_u8, 0x1_u8, 0x3e_u8, 0xa9_u8, 0x17_u8])
-  NamespaceWalker = LibC::GUID.new(0x72eb61e0_u32, 0x8672_u16, 0x4303_u16, StaticArray[0x91_u8, 0x75_u8, 0xf2_u8, 0xe4_u8, 0xc6_u8, 0x8b_u8, 0x2e_u8, 0x7c_u8])
-  FileOperation = LibC::GUID.new(0x3ad05575_u32, 0x8857_u16, 0x4850_u16, StaticArray[0x92_u8, 0x77_u8, 0x11_u8, 0xb8_u8, 0x5b_u8, 0xdb_u8, 0x8e_u8, 0x9_u8])
-  FileOpenDialog = LibC::GUID.new(0xdc1c5a9c_u32, 0xe88a_u16, 0x4dde_u16, StaticArray[0xa5_u8, 0xa1_u8, 0x60_u8, 0xf8_u8, 0x2a_u8, 0x20_u8, 0xae_u8, 0xf7_u8])
-  FileSaveDialog = LibC::GUID.new(0xc0b4e2f3_u32, 0xba21_u16, 0x4773_u16, StaticArray[0x8d_u8, 0xba_u8, 0x33_u8, 0x5e_u8, 0xc9_u8, 0x46_u8, 0xeb_u8, 0x8b_u8])
-  KnownFolderManager = LibC::GUID.new(0x4df0c730_u32, 0xdf9d_u16, 0x4ae3_u16, StaticArray[0x91_u8, 0x53_u8, 0xaa_u8, 0x6b_u8, 0x82_u8, 0xe9_u8, 0x79_u8, 0x5a_u8])
-  SharingConfigurationManager = LibC::GUID.new(0x49f371e1_u32, 0x8c5c_u16, 0x4d9c_u16, StaticArray[0x9a_u8, 0x3b_u8, 0x54_u8, 0xa6_u8, 0x82_u8, 0x7f_u8, 0x51_u8, 0x3c_u8])
-  NetworkConnections = LibC::GUID.new(0x7007acc7_u32, 0x3202_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xd2_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
-  ScheduledTasks = LibC::GUID.new(0xd6277990_u32, 0x4c6a_u16, 0x11cf_u16, StaticArray[0x8d_u8, 0x87_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf5_u8, 0xbf_u8])
-  ApplicationAssociationRegistration = LibC::GUID.new(0x591209c7_u32, 0x767b_u16, 0x42b2_u16, StaticArray[0x9f_u8, 0xba_u8, 0x44_u8, 0xee_u8, 0x46_u8, 0x15_u8, 0xf2_u8, 0xc7_u8])
-  SearchFolderItemFactory = LibC::GUID.new(0x14010e02_u32, 0xbbbd_u16, 0x41f0_u16, StaticArray[0x88_u8, 0xe3_u8, 0xed_u8, 0xa3_u8, 0x71_u8, 0x21_u8, 0x65_u8, 0x84_u8])
-  OpenControlPanel = LibC::GUID.new(0x6622d85_u32, 0x6856_u16, 0x4460_u16, StaticArray[0x8d_u8, 0xe1_u8, 0xa8_u8, 0x19_u8, 0x21_u8, 0xb4_u8, 0x1c_u8, 0x4b_u8])
-  MailRecipient = LibC::GUID.new(0x9e56be60_u32, 0xc50f_u16, 0x11cf_u16, StaticArray[0x9a_u8, 0x2c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x90_u8, 0xce_u8])
-  NetworkExplorerFolder = LibC::GUID.new(0xf02c1a0d_u32, 0xbe21_u16, 0x4350_u16, StaticArray[0x88_u8, 0xb0_u8, 0x73_u8, 0x67_u8, 0xfc_u8, 0x96_u8, 0xef_u8, 0x3c_u8])
-  DestinationList = LibC::GUID.new(0x77f10cf0_u32, 0x3db5_u16, 0x4966_u16, StaticArray[0xb5_u8, 0x20_u8, 0xb7_u8, 0xc5_u8, 0x4f_u8, 0xd3_u8, 0x5e_u8, 0xd6_u8])
-  ApplicationDestinations = LibC::GUID.new(0x86c14003_u32, 0x4d6b_u16, 0x4ef3_u16, StaticArray[0xa7_u8, 0xb4_u8, 0x5_u8, 0x6_u8, 0x66_u8, 0x3b_u8, 0x2e_u8, 0x68_u8])
-  ApplicationDocumentLists = LibC::GUID.new(0x86bec222_u32, 0x30f2_u16, 0x47e0_u16, StaticArray[0x9f_u8, 0x25_u8, 0x60_u8, 0xd1_u8, 0x1c_u8, 0xd7_u8, 0x5c_u8, 0x28_u8])
-  HomeGroup = LibC::GUID.new(0xde77ba04_u32, 0x3c92_u16, 0x4d11_u16, StaticArray[0xa1_u8, 0xa5_u8, 0x42_u8, 0x35_u8, 0x2a_u8, 0x53_u8, 0xe0_u8, 0xe3_u8])
-  ShellLibrary = LibC::GUID.new(0xd9b3211d_u32, 0xe57f_u16, 0x4426_u16, StaticArray[0xaa_u8, 0xef_u8, 0x30_u8, 0xa8_u8, 0x6_u8, 0xad_u8, 0xd3_u8, 0x97_u8])
-  AppStartupLink = LibC::GUID.new(0x273eb5e7_u32, 0x88b0_u16, 0x4843_u16, StaticArray[0xbf_u8, 0xef_u8, 0xe2_u8, 0xc8_u8, 0x1d_u8, 0x43_u8, 0xaa_u8, 0xe5_u8])
-  EnumerableObjectCollection = LibC::GUID.new(0x2d3468c1_u32, 0x36a7_u16, 0x43b6_u16, StaticArray[0xac_u8, 0x24_u8, 0xd3_u8, 0xf0_u8, 0x2f_u8, 0xd9_u8, 0x60_u8, 0x7a_u8])
-  FrameworkInputPane = LibC::GUID.new(0xd5120aa3_u32, 0x46ba_u16, 0x44c5_u16, StaticArray[0x82_u8, 0x2d_u8, 0xca_u8, 0x80_u8, 0x92_u8, 0xc1_u8, 0xfc_u8, 0x72_u8])
-  DefFolderMenu = LibC::GUID.new(0xc63382be_u32, 0x7933_u16, 0x48d0_u16, StaticArray[0x9a_u8, 0xc8_u8, 0x85_u8, 0xfb_u8, 0x46_u8, 0xbe_u8, 0x2f_u8, 0xdd_u8])
-  AppVisibility = LibC::GUID.new(0x7e5fe3d9_u32, 0x985f_u16, 0x4908_u16, StaticArray[0x91_u8, 0xf9_u8, 0xee_u8, 0x19_u8, 0xf9_u8, 0xfd_u8, 0x15_u8, 0x14_u8])
-  AppShellVerbHandler = LibC::GUID.new(0x4ed3a719_u32, 0xcea8_u16, 0x4bd9_u16, StaticArray[0x91_u8, 0xd_u8, 0xe2_u8, 0x52_u8, 0xf9_u8, 0x97_u8, 0xaf_u8, 0xc2_u8])
-  ExecuteUnknown = LibC::GUID.new(0xe44e9428_u32, 0xbdbc_u16, 0x4987_u16, StaticArray[0xa0_u8, 0x99_u8, 0x40_u8, 0xdc_u8, 0x8f_u8, 0xd2_u8, 0x55_u8, 0xe7_u8])
-  PackageDebugSettings = LibC::GUID.new(0xb1aec16f_u32, 0x2383_u16, 0x4852_u16, StaticArray[0xb0_u8, 0xe9_u8, 0x8f_u8, 0xb_u8, 0x1d_u8, 0xc6_u8, 0x6b_u8, 0x4d_u8])
-  SuspensionDependencyManager = LibC::GUID.new(0x6b273fc5_u32, 0x61fd_u16, 0x4918_u16, StaticArray[0x95_u8, 0xa2_u8, 0xc3_u8, 0xb5_u8, 0xe9_u8, 0xd7_u8, 0xf5_u8, 0x81_u8])
-  ApplicationActivationManager = LibC::GUID.new(0x45ba127d_u32, 0x10a8_u16, 0x46ea_u16, StaticArray[0x8a_u8, 0xb7_u8, 0x56_u8, 0xea_u8, 0x90_u8, 0x78_u8, 0x94_u8, 0x3c_u8])
-  ApplicationDesignModeSettings = LibC::GUID.new(0x958a6fb5_u32, 0xdcb2_u16, 0x4faf_u16, StaticArray[0xaa_u8, 0xfd_u8, 0x7f_u8, 0xb0_u8, 0x54_u8, 0xad_u8, 0x1a_u8, 0x3b_u8])
-  WebBrowser_V1 = LibC::GUID.new(0xeab22ac3_u32, 0x30c1_u16, 0x11cf_u16, StaticArray[0xa7_u8, 0xeb_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0x5b_u8, 0xae_u8, 0xb_u8])
-  WebBrowser = LibC::GUID.new(0x8856f961_u32, 0x340a_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0x6b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x5_u8, 0xa2_u8])
-  InternetExplorer = LibC::GUID.new(0x2df01_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  InternetExplorerMedium = LibC::GUID.new(0xd5e8041d_u32, 0x920f_u16, 0x45e9_u16, StaticArray[0xb8_u8, 0xfb_u8, 0xb1_u8, 0xde_u8, 0xb8_u8, 0x2c_u8, 0x6e_u8, 0x5e_u8])
-  ShellBrowserWindow = LibC::GUID.new(0xc08afd90_u32, 0xf2a1_u16, 0x11d1_u16, StaticArray[0x84_u8, 0x55_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1f_u8, 0x38_u8, 0x80_u8])
-  ShellWindows = LibC::GUID.new(0x9ba05972_u32, 0xf6a8_u16, 0x11cf_u16, StaticArray[0xa4_u8, 0x42_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x8f_u8, 0x39_u8])
-  ShellUIHelper = LibC::GUID.new(0x64ab4bb7_u32, 0x111e_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfb_u8, 0xe1_u8])
-  ShellNameSpace = LibC::GUID.new(0x55136805_u32, 0xb2de_u16, 0x11d1_u16, StaticArray[0xb9_u8, 0xf2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8b_u8, 0xc5_u8, 0x47_u8])
-  CScriptErrorList = LibC::GUID.new(0xefd01300_u32, 0x160f_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x2e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xf7_u8, 0xef_u8, 0xca_u8])
-  ShellFolderViewOC = LibC::GUID.new(0x9ba05971_u32, 0xf6a8_u16, 0x11cf_u16, StaticArray[0xa4_u8, 0x42_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x8f_u8, 0x39_u8])
-  ShellFolderItem = LibC::GUID.new(0x2fe352ea_u32, 0xfd1f_u16, 0x11d2_u16, StaticArray[0xb1_u8, 0xf4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xeb_u8, 0x3e_u8])
-  ShellLinkObject = LibC::GUID.new(0x11219420_u32, 0x1768_u16, 0x11d1_u16, StaticArray[0x95_u8, 0xbe_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x4f_u8])
-  ShellFolderView = LibC::GUID.new(0x62112aa1_u32, 0xebe4_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0xfb_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xe7_u8, 0x29_u8, 0x2d_u8])
-  Shell = LibC::GUID.new(0x13709620_u32, 0xc279_u16, 0x11ce_u16, StaticArray[0xa4_u8, 0x9e_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
-  ShellDispatchInproc = LibC::GUID.new(0xa89a860_u32, 0xd7b1_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
-  FileSearchBand = LibC::GUID.new(0xc4ee31f3_u32, 0x4768_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x5c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa8_u8, 0x3d_u8, 0xa1_u8])
-  PasswordCredentialProvider = LibC::GUID.new(0x60b78e88_u32, 0xead8_u16, 0x445c_u16, StaticArray[0x9c_u8, 0xfd_u8, 0xb_u8, 0x87_u8, 0xf7_u8, 0x4e_u8, 0xa6_u8, 0xcd_u8])
-  V1PasswordCredentialProvider = LibC::GUID.new(0x6f45dc1e_u32, 0x5384_u16, 0x457a_u16, StaticArray[0xbc_u8, 0x13_u8, 0x2c_u8, 0xd8_u8, 0x1b_u8, 0xd_u8, 0x28_u8, 0xed_u8])
-  PINLogonCredentialProvider = LibC::GUID.new(0xcb82ea12_u32, 0x9f71_u16, 0x446d_u16, StaticArray[0x89_u8, 0xe1_u8, 0x8d_u8, 0x9_u8, 0x24_u8, 0xe1_u8, 0x25_u8, 0x6e_u8])
-  NPCredentialProvider = LibC::GUID.new(0x3dd6bec0_u32, 0x8193_u16, 0x4ffe_u16, StaticArray[0xae_u8, 0x25_u8, 0xe0_u8, 0x8e_u8, 0x39_u8, 0xea_u8, 0x40_u8, 0x63_u8])
-  SmartcardCredentialProvider = LibC::GUID.new(0x8fd7e19c_u32, 0x3bf7_u16, 0x489b_u16, StaticArray[0xa7_u8, 0x2c_u8, 0x84_u8, 0x6a_u8, 0xb3_u8, 0x67_u8, 0x8c_u8, 0x96_u8])
-  V1SmartcardCredentialProvider = LibC::GUID.new(0x8bf9a910_u32, 0xa8ff_u16, 0x457f_u16, StaticArray[0x99_u8, 0x9f_u8, 0xa5_u8, 0xca_u8, 0x10_u8, 0xb4_u8, 0xa8_u8, 0x85_u8])
-  SmartcardPinProvider = LibC::GUID.new(0x94596c7e_u32, 0x3744_u16, 0x41ce_u16, StaticArray[0x89_u8, 0x3e_u8, 0xbb_u8, 0xf0_u8, 0x91_u8, 0x22_u8, 0xf7_u8, 0x6a_u8])
-  SmartcardReaderSelectionProvider = LibC::GUID.new(0x1b283861_u32, 0x754f_u16, 0x4022_u16, StaticArray[0xad_u8, 0x47_u8, 0xa5_u8, 0xea_u8, 0xaa_u8, 0x61_u8, 0x88_u8, 0x94_u8])
-  SmartcardWinRTProvider = LibC::GUID.new(0x1ee7337f_u32, 0x85ac_u16, 0x45e2_u16, StaticArray[0xa2_u8, 0x3c_u8, 0x37_u8, 0xc7_u8, 0x53_u8, 0x20_u8, 0x97_u8, 0x69_u8])
-  GenericCredentialProvider = LibC::GUID.new(0x25cbb996_u32, 0x92ed_u16, 0x457e_u16, StaticArray[0xb2_u8, 0x8c_u8, 0x47_u8, 0x74_u8, 0x8_u8, 0x4b_u8, 0xd5_u8, 0x62_u8])
-  RASProvider = LibC::GUID.new(0x5537e283_u32, 0xb1e7_u16, 0x4ef8_u16, StaticArray[0x9c_u8, 0x6e_u8, 0x7a_u8, 0xb0_u8, 0xaf_u8, 0xe5_u8, 0x5_u8, 0x6d_u8])
-  OnexCredentialProvider = LibC::GUID.new(0x7aa0886_u32, 0xcc8d_u16, 0x4e19_u16, StaticArray[0xa4_u8, 0x10_u8, 0x1c_u8, 0x75_u8, 0xaf_u8, 0x68_u8, 0x6e_u8, 0x62_u8])
-  OnexPlapSmartcardCredentialProvider = LibC::GUID.new(0x33c86cd6_u32, 0x705f_u16, 0x4ba1_u16, StaticArray[0x9a_u8, 0xdb_u8, 0x67_u8, 0x7_u8, 0xb_u8, 0x83_u8, 0x77_u8, 0x75_u8])
-  VaultProvider = LibC::GUID.new(0x503739d0_u32, 0x4c5e_u16, 0x4cfd_u16, StaticArray[0xb3_u8, 0xba_u8, 0xd8_u8, 0x81_u8, 0x33_u8, 0x4f_u8, 0xd_u8, 0xf2_u8])
-  WinBioCredentialProvider = LibC::GUID.new(0xbec09223_u32, 0xb018_u16, 0x416d_u16, StaticArray[0xa0_u8, 0xac_u8, 0x52_u8, 0x39_u8, 0x71_u8, 0xb6_u8, 0x39_u8, 0xf5_u8])
-  V1WinBioCredentialProvider = LibC::GUID.new(0xac3ac249_u32, 0xe820_u16, 0x4343_u16, StaticArray[0xa6_u8, 0x5b_u8, 0x37_u8, 0x7a_u8, 0xc6_u8, 0x34_u8, 0xdc_u8, 0x9_u8])
-  SyncMgrClient = LibC::GUID.new(0x1202db60_u32, 0x1dac_u16, 0x42c5_u16, StaticArray[0xae_u8, 0xd5_u8, 0x1a_u8, 0xbd_u8, 0xd4_u8, 0x32_u8, 0x24_u8, 0x8e_u8])
-  SyncMgrControl = LibC::GUID.new(0x1a1f4206_u32, 0x688_u16, 0x4e7f_u16, StaticArray[0xbe_u8, 0x3_u8, 0xd8_u8, 0x2e_u8, 0xc6_u8, 0x9d_u8, 0xf9_u8, 0xa5_u8])
-  SyncMgrScheduleWizard = LibC::GUID.new(0x8d8b8e30_u32, 0xc451_u16, 0x421b_u16, StaticArray[0x85_u8, 0x53_u8, 0xd2_u8, 0x97_u8, 0x6a_u8, 0xfa_u8, 0x64_u8, 0x8c_u8])
-  SyncMgrFolder = LibC::GUID.new(0x9c73f5e5_u32, 0x7ae7_u16, 0x4e32_u16, StaticArray[0xa8_u8, 0xe8_u8, 0x8d_u8, 0x23_u8, 0xb8_u8, 0x52_u8, 0x55_u8, 0xbf_u8])
-  SyncSetupFolder = LibC::GUID.new(0x2e9e59c0_u32, 0xb437_u16, 0x4981_u16, StaticArray[0xa6_u8, 0x47_u8, 0x9c_u8, 0x34_u8, 0xb9_u8, 0xb9_u8, 0x8_u8, 0x91_u8])
-  ConflictFolder = LibC::GUID.new(0x289978ac_u32, 0xa101_u16, 0x4341_u16, StaticArray[0xa8_u8, 0x17_u8, 0x21_u8, 0xeb_u8, 0xa7_u8, 0xfd_u8, 0x4_u8, 0x6d_u8])
-  SyncResultsFolder = LibC::GUID.new(0x71d99464_u32, 0x3b6b_u16, 0x475c_u16, StaticArray[0xb2_u8, 0x41_u8, 0xe1_u8, 0x58_u8, 0x83_u8, 0x20_u8, 0x75_u8, 0x29_u8])
-  SimpleConflictPresenter = LibC::GUID.new(0x7a0f6ab7_u32, 0xed84_u16, 0x46b6_u16, StaticArray[0xb4_u8, 0x7e_u8, 0x2_u8, 0xaa_u8, 0x15_u8, 0x9a_u8, 0x15_u8, 0x2b_u8])
-  InputPanelConfiguration = LibC::GUID.new(0x2853add3_u32, 0xf096_u16, 0x4c63_u16, StaticArray[0xa7_u8, 0x8f_u8, 0x7f_u8, 0xa3_u8, 0xea_u8, 0x83_u8, 0x7f_u8, 0xb7_u8])
-  LocalThumbnailCache = LibC::GUID.new(0x50ef4544_u32, 0xac9f_u16, 0x4a8e_u16, StaticArray[0xb2_u8, 0x1b_u8, 0x8a_u8, 0x26_u8, 0x18_u8, 0xd_u8, 0xb1_u8, 0x3f_u8])
-  SharedBitmap = LibC::GUID.new(0x4db26476_u32, 0x6787_u16, 0x4046_u16, StaticArray[0xb8_u8, 0x36_u8, 0xe8_u8, 0x41_u8, 0x2a_u8, 0x9e_u8, 0x8a_u8, 0x27_u8])
-  ShellImageDataFactory = LibC::GUID.new(0x66e4e4fb_u32, 0xf385_u16, 0x4dd0_u16, StaticArray[0x8d_u8, 0x74_u8, 0xa2_u8, 0xef_u8, 0xd1_u8, 0xbc_u8, 0x61_u8, 0x78_u8])
-  SyncMgr = LibC::GUID.new(0x6295df27_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
-  ThumbnailStreamCache = LibC::GUID.new(0xcbe0fed3_u32, 0x4b91_u16, 0x4e90_u16, StaticArray[0x83_u8, 0x54_u8, 0x8a_u8, 0x8c_u8, 0x84_u8, 0xec_u8, 0x68_u8, 0x72_u8])
-  TrackShellMenu = LibC::GUID.new(0x8278f931_u32, 0x2a3e_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x8f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
-  ImageTranscode = LibC::GUID.new(0x17b75166_u32, 0x928f_u16, 0x417d_u16, StaticArray[0x96_u8, 0x85_u8, 0x64_u8, 0xaa_u8, 0x13_u8, 0x55_u8, 0x65_u8, 0xc1_u8])
-  ShowInputPaneAnimationCoordinator = LibC::GUID.new(0x1f046abf_u32, 0x3202_u16, 0x4dc1_u16, StaticArray[0x8c_u8, 0xb5_u8, 0x3c_u8, 0x67_u8, 0x61_u8, 0x7c_u8, 0xe1_u8, 0xfa_u8])
-  HideInputPaneAnimationCoordinator = LibC::GUID.new(0x384742b1_u32, 0x2a77_u16, 0x4cb3_u16, StaticArray[0x8c_u8, 0xf8_u8, 0x11_u8, 0x36_u8, 0xf5_u8, 0xe1_u8, 0x7e_u8, 0x59_u8])
+  CLSID_QueryCancelAutoPlay = LibC::GUID.new(0x331f1768_u32, 0x5a9_u16, 0x4ddd_u16, StaticArray[0xb8_u8, 0x6e_u8, 0xda_u8, 0xe3_u8, 0x4d_u8, 0xdc_u8, 0x99_u8, 0x8a_u8])
+  CLSID_TimeCategorizer = LibC::GUID.new(0x3bb4118f_u32, 0xddfd_u16, 0x4d30_u16, StaticArray[0xa3_u8, 0x48_u8, 0x9f_u8, 0xb5_u8, 0xd6_u8, 0xbf_u8, 0x1a_u8, 0xfe_u8])
+  CLSID_AlphabeticalCategorizer = LibC::GUID.new(0x3c2654c6_u32, 0x7372_u16, 0x4f6b_u16, StaticArray[0xb3_u8, 0x10_u8, 0x55_u8, 0xd6_u8, 0x12_u8, 0x8f_u8, 0x49_u8, 0xd2_u8])
+  CLSID_MergedCategorizer = LibC::GUID.new(0x8e827c11_u32, 0x33e7_u16, 0x4bc1_u16, StaticArray[0xb2_u8, 0x42_u8, 0x8c_u8, 0xd9_u8, 0xa1_u8, 0xc2_u8, 0xb3_u8, 0x4_u8])
+  CLSID_ImageProperties = LibC::GUID.new(0x7ab770c7_u32, 0xe23_u16, 0x4d7a_u16, StaticArray[0x8a_u8, 0xa2_u8, 0x19_u8, 0xbf_u8, 0xad_u8, 0x47_u8, 0x98_u8, 0x29_u8])
+  CLSID_CDBurn = LibC::GUID.new(0xfbeb8a05_u32, 0xbeee_u16, 0x4442_u16, StaticArray[0x80_u8, 0x4e_u8, 0x40_u8, 0x9d_u8, 0x6c_u8, 0x45_u8, 0x15_u8, 0xe9_u8])
+  CLSID_StartMenuPin = LibC::GUID.new(0xa2a9545d_u32, 0xa0c2_u16, 0x42b4_u16, StaticArray[0x97_u8, 0x8_u8, 0xa0_u8, 0xb2_u8, 0xba_u8, 0xdd_u8, 0x77_u8, 0xc8_u8])
+  CLSID_WebWizardHost = LibC::GUID.new(0xc827f149_u32, 0x55c1_u16, 0x4d28_u16, StaticArray[0x93_u8, 0x5e_u8, 0x57_u8, 0xe4_u8, 0x7c_u8, 0xae_u8, 0xd9_u8, 0x73_u8])
+  CLSID_PublishDropTarget = LibC::GUID.new(0xcc6eeffb_u32, 0x43f6_u16, 0x46c5_u16, StaticArray[0x96_u8, 0x19_u8, 0x51_u8, 0xd5_u8, 0x71_u8, 0x96_u8, 0x7f_u8, 0x7d_u8])
+  CLSID_PublishingWizard = LibC::GUID.new(0x6b33163c_u32, 0x76a5_u16, 0x4b6c_u16, StaticArray[0xbf_u8, 0x21_u8, 0x45_u8, 0xde_u8, 0x9c_u8, 0xd5_u8, 0x3_u8, 0xa1_u8])
+  CLSID_InternetPrintOrdering = LibC::GUID.new(0xadd36aa8_u32, 0x751a_u16, 0x4579_u16, StaticArray[0xa2_u8, 0x66_u8, 0xd6_u8, 0x6f_u8, 0x52_u8, 0x2_u8, 0xcc_u8, 0xbb_u8])
+  CLSID_FolderViewHost = LibC::GUID.new(0x20b1cb23_u32, 0x6968_u16, 0x4eb9_u16, StaticArray[0xb7_u8, 0xd4_u8, 0xa6_u8, 0x6d_u8, 0x0_u8, 0xd0_u8, 0x7c_u8, 0xee_u8])
+  CLSID_ExplorerBrowser = LibC::GUID.new(0x71f96385_u32, 0xddd6_u16, 0x48d3_u16, StaticArray[0xa0_u8, 0xc1_u8, 0xae_u8, 0x6_u8, 0xe8_u8, 0xb0_u8, 0x55_u8, 0xfb_u8])
+  CLSID_ImageRecompress = LibC::GUID.new(0x6e33091c_u32, 0xd2f8_u16, 0x4740_u16, StaticArray[0xb5_u8, 0x5e_u8, 0x2e_u8, 0x11_u8, 0xd1_u8, 0x47_u8, 0x7a_u8, 0x2c_u8])
+  CLSID_TrayBandSiteService = LibC::GUID.new(0xf60ad0a0_u32, 0xe5e1_u16, 0x45cb_u16, StaticArray[0xb5_u8, 0x1a_u8, 0xe1_u8, 0x5b_u8, 0x9f_u8, 0x8b_u8, 0x29_u8, 0x34_u8])
+  CLSID_TrayDeskBand = LibC::GUID.new(0xe6442437_u32, 0x6c68_u16, 0x4f52_u16, StaticArray[0x94_u8, 0xdd_u8, 0x2c_u8, 0xfe_u8, 0xd2_u8, 0x67_u8, 0xef_u8, 0xb9_u8])
+  CLSID_AttachmentServices = LibC::GUID.new(0x4125dd96_u32, 0xe03a_u16, 0x4103_u16, StaticArray[0x8f_u8, 0x70_u8, 0xe0_u8, 0x59_u8, 0x7d_u8, 0x80_u8, 0x3b_u8, 0x9c_u8])
+  CLSID_DocPropShellExtension = LibC::GUID.new(0x883373c3_u32, 0xbf89_u16, 0x11d1_u16, StaticArray[0xbe_u8, 0x35_u8, 0x8_u8, 0x0_u8, 0x36_u8, 0xb1_u8, 0x1a_u8, 0x3_u8])
+  CLSID_FSCopyHandler = LibC::GUID.new(0xd197380a_u32, 0xa79_u16, 0x4dc8_u16, StaticArray[0xa0_u8, 0x33_u8, 0xed_u8, 0x88_u8, 0x2c_u8, 0x2f_u8, 0xa1_u8, 0x4b_u8])
+  CLSID_PreviousVersions = LibC::GUID.new(0x596ab062_u32, 0xb4d2_u16, 0x4215_u16, StaticArray[0x9f_u8, 0x74_u8, 0xe9_u8, 0x10_u8, 0x9b_u8, 0xa_u8, 0x81_u8, 0x53_u8])
+  CLSID_NamespaceTreeControl = LibC::GUID.new(0xae054212_u32, 0x3535_u16, 0x4430_u16, StaticArray[0x83_u8, 0xed_u8, 0xd5_u8, 0x1_u8, 0xaa_u8, 0x66_u8, 0x80_u8, 0xe6_u8])
+  CLSID_IENamespaceTreeControl = LibC::GUID.new(0xace52d03_u32, 0xe5cd_u16, 0x4b20_u16, StaticArray[0x82_u8, 0xff_u8, 0xe7_u8, 0x1b_u8, 0x11_u8, 0xbe_u8, 0xae_u8, 0x1d_u8])
+  CLSID_ApplicationAssociationRegistrationUI = LibC::GUID.new(0x1968106d_u32, 0xf3b5_u16, 0x44cf_u16, StaticArray[0x89_u8, 0xe_u8, 0x11_u8, 0x6f_u8, 0xcb_u8, 0x9e_u8, 0xce_u8, 0xf1_u8])
+  CLSID_DesktopGadget = LibC::GUID.new(0x924ccc1b_u32, 0x6562_u16, 0x4c85_u16, StaticArray[0x86_u8, 0x57_u8, 0xd1_u8, 0x77_u8, 0x92_u8, 0x52_u8, 0x22_u8, 0xb6_u8])
+  CLSID_AccessibilityDockingService = LibC::GUID.new(0x29ce1d46_u32, 0xb481_u16, 0x4aa0_u16, StaticArray[0xa0_u8, 0x8a_u8, 0xd3_u8, 0xeb_u8, 0xc8_u8, 0xac_u8, 0xa4_u8, 0x2_u8])
+  CLSID_ExecuteFolder = LibC::GUID.new(0x11dbb47c_u32, 0xa525_u16, 0x400b_u16, StaticArray[0x9e_u8, 0x80_u8, 0xa5_u8, 0x46_u8, 0x15_u8, 0xa0_u8, 0x90_u8, 0xc0_u8])
+  CLSID_VirtualDesktopManager = LibC::GUID.new(0xaa509086_u32, 0x5ca9_u16, 0x4c25_u16, StaticArray[0x8f_u8, 0x95_u8, 0x58_u8, 0x9d_u8, 0x3c_u8, 0x7_u8, 0xb4_u8, 0x8a_u8])
+  CLSID_StorageProviderBanners = LibC::GUID.new(0x7ccdf9f4_u32, 0xe576_u16, 0x455a_u16, StaticArray[0x8b_u8, 0xc7_u8, 0xf6_u8, 0xec_u8, 0x68_u8, 0xd6_u8, 0xf0_u8, 0x63_u8])
+  CLSID_DesktopWallpaper = LibC::GUID.new(0xc2cf3110_u32, 0x460e_u16, 0x4fc1_u16, StaticArray[0xb9_u8, 0xd0_u8, 0x8a_u8, 0x1c_u8, 0xc_u8, 0x9c_u8, 0xc4_u8, 0xbd_u8])
+  CLSID_ShellDesktop = LibC::GUID.new(0x21400_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+  CLSID_ShellFSFolder = LibC::GUID.new(0xf3364ba0_u32, 0x65b9_u16, 0x11ce_u16, StaticArray[0xa9_u8, 0xba_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xe8_u8, 0x37_u8])
+  CLSID_NetworkPlaces = LibC::GUID.new(0x208d2c60_u32, 0x3aea_u16, 0x1069_u16, StaticArray[0xa2_u8, 0xd7_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x30_u8, 0x30_u8, 0x9d_u8])
+  CLSID_ShellLink = LibC::GUID.new(0x21401_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+  CLSID_DriveSizeCategorizer = LibC::GUID.new(0x94357b53_u32, 0xca29_u16, 0x4b78_u16, StaticArray[0x83_u8, 0xae_u8, 0xe8_u8, 0xfe_u8, 0x74_u8, 0x9_u8, 0x13_u8, 0x4f_u8])
+  CLSID_DriveTypeCategorizer = LibC::GUID.new(0xb0a8f3cf_u32, 0x4333_u16, 0x4bab_u16, StaticArray[0x88_u8, 0x73_u8, 0x1c_u8, 0xcb_u8, 0x1c_u8, 0xad_u8, 0xa4_u8, 0x8b_u8])
+  CLSID_FreeSpaceCategorizer = LibC::GUID.new(0xb5607793_u32, 0x24ac_u16, 0x44c7_u16, StaticArray[0x82_u8, 0xe2_u8, 0x83_u8, 0x17_u8, 0x26_u8, 0xaa_u8, 0x6c_u8, 0xb7_u8])
+  CLSID_SizeCategorizer = LibC::GUID.new(0x55d7b852_u32, 0xf6d1_u16, 0x42f2_u16, StaticArray[0xaa_u8, 0x75_u8, 0x87_u8, 0x28_u8, 0xa1_u8, 0xb2_u8, 0xd2_u8, 0x64_u8])
+  CLSID_PropertiesUI = LibC::GUID.new(0xd912f8cf_u32, 0x396_u16, 0x4915_u16, StaticArray[0x88_u8, 0x4e_u8, 0xfb_u8, 0x42_u8, 0x5d_u8, 0x32_u8, 0x94_u8, 0x3b_u8])
+  CLSID_UserNotification = LibC::GUID.new(0x10890e_u32, 0x8789_u16, 0x413c_u16, StaticArray[0xad_u8, 0xbc_u8, 0x48_u8, 0xf5_u8, 0xb5_u8, 0x11_u8, 0xb3_u8, 0xaf_u8])
+  CLSID_TaskbarList = LibC::GUID.new(0x56fdf344_u32, 0xfd6d_u16, 0x11d0_u16, StaticArray[0x95_u8, 0x8a_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa0_u8, 0x90_u8])
+  CLSID_ShellItem = LibC::GUID.new(0x9ac9fbe1_u32, 0xe0a2_u16, 0x4ad6_u16, StaticArray[0xb4_u8, 0xee_u8, 0xe2_u8, 0x12_u8, 0x1_u8, 0x3e_u8, 0xa9_u8, 0x17_u8])
+  CLSID_NamespaceWalker = LibC::GUID.new(0x72eb61e0_u32, 0x8672_u16, 0x4303_u16, StaticArray[0x91_u8, 0x75_u8, 0xf2_u8, 0xe4_u8, 0xc6_u8, 0x8b_u8, 0x2e_u8, 0x7c_u8])
+  CLSID_FileOperation = LibC::GUID.new(0x3ad05575_u32, 0x8857_u16, 0x4850_u16, StaticArray[0x92_u8, 0x77_u8, 0x11_u8, 0xb8_u8, 0x5b_u8, 0xdb_u8, 0x8e_u8, 0x9_u8])
+  CLSID_FileOpenDialog = LibC::GUID.new(0xdc1c5a9c_u32, 0xe88a_u16, 0x4dde_u16, StaticArray[0xa5_u8, 0xa1_u8, 0x60_u8, 0xf8_u8, 0x2a_u8, 0x20_u8, 0xae_u8, 0xf7_u8])
+  CLSID_FileSaveDialog = LibC::GUID.new(0xc0b4e2f3_u32, 0xba21_u16, 0x4773_u16, StaticArray[0x8d_u8, 0xba_u8, 0x33_u8, 0x5e_u8, 0xc9_u8, 0x46_u8, 0xeb_u8, 0x8b_u8])
+  CLSID_KnownFolderManager = LibC::GUID.new(0x4df0c730_u32, 0xdf9d_u16, 0x4ae3_u16, StaticArray[0x91_u8, 0x53_u8, 0xaa_u8, 0x6b_u8, 0x82_u8, 0xe9_u8, 0x79_u8, 0x5a_u8])
+  CLSID_SharingConfigurationManager = LibC::GUID.new(0x49f371e1_u32, 0x8c5c_u16, 0x4d9c_u16, StaticArray[0x9a_u8, 0x3b_u8, 0x54_u8, 0xa6_u8, 0x82_u8, 0x7f_u8, 0x51_u8, 0x3c_u8])
+  CLSID_NetworkConnections = LibC::GUID.new(0x7007acc7_u32, 0x3202_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xd2_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
+  CLSID_ScheduledTasks = LibC::GUID.new(0xd6277990_u32, 0x4c6a_u16, 0x11cf_u16, StaticArray[0x8d_u8, 0x87_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf5_u8, 0xbf_u8])
+  CLSID_ApplicationAssociationRegistration = LibC::GUID.new(0x591209c7_u32, 0x767b_u16, 0x42b2_u16, StaticArray[0x9f_u8, 0xba_u8, 0x44_u8, 0xee_u8, 0x46_u8, 0x15_u8, 0xf2_u8, 0xc7_u8])
+  CLSID_SearchFolderItemFactory = LibC::GUID.new(0x14010e02_u32, 0xbbbd_u16, 0x41f0_u16, StaticArray[0x88_u8, 0xe3_u8, 0xed_u8, 0xa3_u8, 0x71_u8, 0x21_u8, 0x65_u8, 0x84_u8])
+  CLSID_OpenControlPanel = LibC::GUID.new(0x6622d85_u32, 0x6856_u16, 0x4460_u16, StaticArray[0x8d_u8, 0xe1_u8, 0xa8_u8, 0x19_u8, 0x21_u8, 0xb4_u8, 0x1c_u8, 0x4b_u8])
+  CLSID_MailRecipient = LibC::GUID.new(0x9e56be60_u32, 0xc50f_u16, 0x11cf_u16, StaticArray[0x9a_u8, 0x2c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x90_u8, 0xce_u8])
+  CLSID_NetworkExplorerFolder = LibC::GUID.new(0xf02c1a0d_u32, 0xbe21_u16, 0x4350_u16, StaticArray[0x88_u8, 0xb0_u8, 0x73_u8, 0x67_u8, 0xfc_u8, 0x96_u8, 0xef_u8, 0x3c_u8])
+  CLSID_DestinationList = LibC::GUID.new(0x77f10cf0_u32, 0x3db5_u16, 0x4966_u16, StaticArray[0xb5_u8, 0x20_u8, 0xb7_u8, 0xc5_u8, 0x4f_u8, 0xd3_u8, 0x5e_u8, 0xd6_u8])
+  CLSID_ApplicationDestinations = LibC::GUID.new(0x86c14003_u32, 0x4d6b_u16, 0x4ef3_u16, StaticArray[0xa7_u8, 0xb4_u8, 0x5_u8, 0x6_u8, 0x66_u8, 0x3b_u8, 0x2e_u8, 0x68_u8])
+  CLSID_ApplicationDocumentLists = LibC::GUID.new(0x86bec222_u32, 0x30f2_u16, 0x47e0_u16, StaticArray[0x9f_u8, 0x25_u8, 0x60_u8, 0xd1_u8, 0x1c_u8, 0xd7_u8, 0x5c_u8, 0x28_u8])
+  CLSID_HomeGroup = LibC::GUID.new(0xde77ba04_u32, 0x3c92_u16, 0x4d11_u16, StaticArray[0xa1_u8, 0xa5_u8, 0x42_u8, 0x35_u8, 0x2a_u8, 0x53_u8, 0xe0_u8, 0xe3_u8])
+  CLSID_ShellLibrary = LibC::GUID.new(0xd9b3211d_u32, 0xe57f_u16, 0x4426_u16, StaticArray[0xaa_u8, 0xef_u8, 0x30_u8, 0xa8_u8, 0x6_u8, 0xad_u8, 0xd3_u8, 0x97_u8])
+  CLSID_AppStartupLink = LibC::GUID.new(0x273eb5e7_u32, 0x88b0_u16, 0x4843_u16, StaticArray[0xbf_u8, 0xef_u8, 0xe2_u8, 0xc8_u8, 0x1d_u8, 0x43_u8, 0xaa_u8, 0xe5_u8])
+  CLSID_EnumerableObjectCollection = LibC::GUID.new(0x2d3468c1_u32, 0x36a7_u16, 0x43b6_u16, StaticArray[0xac_u8, 0x24_u8, 0xd3_u8, 0xf0_u8, 0x2f_u8, 0xd9_u8, 0x60_u8, 0x7a_u8])
+  CLSID_FrameworkInputPane = LibC::GUID.new(0xd5120aa3_u32, 0x46ba_u16, 0x44c5_u16, StaticArray[0x82_u8, 0x2d_u8, 0xca_u8, 0x80_u8, 0x92_u8, 0xc1_u8, 0xfc_u8, 0x72_u8])
+  CLSID_DefFolderMenu = LibC::GUID.new(0xc63382be_u32, 0x7933_u16, 0x48d0_u16, StaticArray[0x9a_u8, 0xc8_u8, 0x85_u8, 0xfb_u8, 0x46_u8, 0xbe_u8, 0x2f_u8, 0xdd_u8])
+  CLSID_AppVisibility = LibC::GUID.new(0x7e5fe3d9_u32, 0x985f_u16, 0x4908_u16, StaticArray[0x91_u8, 0xf9_u8, 0xee_u8, 0x19_u8, 0xf9_u8, 0xfd_u8, 0x15_u8, 0x14_u8])
+  CLSID_AppShellVerbHandler = LibC::GUID.new(0x4ed3a719_u32, 0xcea8_u16, 0x4bd9_u16, StaticArray[0x91_u8, 0xd_u8, 0xe2_u8, 0x52_u8, 0xf9_u8, 0x97_u8, 0xaf_u8, 0xc2_u8])
+  CLSID_ExecuteUnknown = LibC::GUID.new(0xe44e9428_u32, 0xbdbc_u16, 0x4987_u16, StaticArray[0xa0_u8, 0x99_u8, 0x40_u8, 0xdc_u8, 0x8f_u8, 0xd2_u8, 0x55_u8, 0xe7_u8])
+  CLSID_PackageDebugSettings = LibC::GUID.new(0xb1aec16f_u32, 0x2383_u16, 0x4852_u16, StaticArray[0xb0_u8, 0xe9_u8, 0x8f_u8, 0xb_u8, 0x1d_u8, 0xc6_u8, 0x6b_u8, 0x4d_u8])
+  CLSID_SuspensionDependencyManager = LibC::GUID.new(0x6b273fc5_u32, 0x61fd_u16, 0x4918_u16, StaticArray[0x95_u8, 0xa2_u8, 0xc3_u8, 0xb5_u8, 0xe9_u8, 0xd7_u8, 0xf5_u8, 0x81_u8])
+  CLSID_ApplicationActivationManager = LibC::GUID.new(0x45ba127d_u32, 0x10a8_u16, 0x46ea_u16, StaticArray[0x8a_u8, 0xb7_u8, 0x56_u8, 0xea_u8, 0x90_u8, 0x78_u8, 0x94_u8, 0x3c_u8])
+  CLSID_ApplicationDesignModeSettings = LibC::GUID.new(0x958a6fb5_u32, 0xdcb2_u16, 0x4faf_u16, StaticArray[0xaa_u8, 0xfd_u8, 0x7f_u8, 0xb0_u8, 0x54_u8, 0xad_u8, 0x1a_u8, 0x3b_u8])
+  CLSID_WebBrowser_V1 = LibC::GUID.new(0xeab22ac3_u32, 0x30c1_u16, 0x11cf_u16, StaticArray[0xa7_u8, 0xeb_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0x5b_u8, 0xae_u8, 0xb_u8])
+  CLSID_WebBrowser = LibC::GUID.new(0x8856f961_u32, 0x340a_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0x6b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x5_u8, 0xa2_u8])
+  CLSID_InternetExplorer = LibC::GUID.new(0x2df01_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+  CLSID_InternetExplorerMedium = LibC::GUID.new(0xd5e8041d_u32, 0x920f_u16, 0x45e9_u16, StaticArray[0xb8_u8, 0xfb_u8, 0xb1_u8, 0xde_u8, 0xb8_u8, 0x2c_u8, 0x6e_u8, 0x5e_u8])
+  CLSID_ShellBrowserWindow = LibC::GUID.new(0xc08afd90_u32, 0xf2a1_u16, 0x11d1_u16, StaticArray[0x84_u8, 0x55_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1f_u8, 0x38_u8, 0x80_u8])
+  CLSID_ShellWindows = LibC::GUID.new(0x9ba05972_u32, 0xf6a8_u16, 0x11cf_u16, StaticArray[0xa4_u8, 0x42_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x8f_u8, 0x39_u8])
+  CLSID_ShellUIHelper = LibC::GUID.new(0x64ab4bb7_u32, 0x111e_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfb_u8, 0xe1_u8])
+  CLSID_ShellNameSpace = LibC::GUID.new(0x55136805_u32, 0xb2de_u16, 0x11d1_u16, StaticArray[0xb9_u8, 0xf2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8b_u8, 0xc5_u8, 0x47_u8])
+  CLSID_CScriptErrorList = LibC::GUID.new(0xefd01300_u32, 0x160f_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x2e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xf7_u8, 0xef_u8, 0xca_u8])
+  CLSID_ShellFolderViewOC = LibC::GUID.new(0x9ba05971_u32, 0xf6a8_u16, 0x11cf_u16, StaticArray[0xa4_u8, 0x42_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x8f_u8, 0x39_u8])
+  CLSID_ShellFolderItem = LibC::GUID.new(0x2fe352ea_u32, 0xfd1f_u16, 0x11d2_u16, StaticArray[0xb1_u8, 0xf4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xeb_u8, 0x3e_u8])
+  CLSID_ShellLinkObject = LibC::GUID.new(0x11219420_u32, 0x1768_u16, 0x11d1_u16, StaticArray[0x95_u8, 0xbe_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x4f_u8])
+  CLSID_ShellFolderView = LibC::GUID.new(0x62112aa1_u32, 0xebe4_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0xfb_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xe7_u8, 0x29_u8, 0x2d_u8])
+  CLSID_Shell = LibC::GUID.new(0x13709620_u32, 0xc279_u16, 0x11ce_u16, StaticArray[0xa4_u8, 0x9e_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
+  CLSID_ShellDispatchInproc = LibC::GUID.new(0xa89a860_u32, 0xd7b1_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
+  CLSID_FileSearchBand = LibC::GUID.new(0xc4ee31f3_u32, 0x4768_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x5c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa8_u8, 0x3d_u8, 0xa1_u8])
+  CLSID_PasswordCredentialProvider = LibC::GUID.new(0x60b78e88_u32, 0xead8_u16, 0x445c_u16, StaticArray[0x9c_u8, 0xfd_u8, 0xb_u8, 0x87_u8, 0xf7_u8, 0x4e_u8, 0xa6_u8, 0xcd_u8])
+  CLSID_V1PasswordCredentialProvider = LibC::GUID.new(0x6f45dc1e_u32, 0x5384_u16, 0x457a_u16, StaticArray[0xbc_u8, 0x13_u8, 0x2c_u8, 0xd8_u8, 0x1b_u8, 0xd_u8, 0x28_u8, 0xed_u8])
+  CLSID_PINLogonCredentialProvider = LibC::GUID.new(0xcb82ea12_u32, 0x9f71_u16, 0x446d_u16, StaticArray[0x89_u8, 0xe1_u8, 0x8d_u8, 0x9_u8, 0x24_u8, 0xe1_u8, 0x25_u8, 0x6e_u8])
+  CLSID_NPCredentialProvider = LibC::GUID.new(0x3dd6bec0_u32, 0x8193_u16, 0x4ffe_u16, StaticArray[0xae_u8, 0x25_u8, 0xe0_u8, 0x8e_u8, 0x39_u8, 0xea_u8, 0x40_u8, 0x63_u8])
+  CLSID_SmartcardCredentialProvider = LibC::GUID.new(0x8fd7e19c_u32, 0x3bf7_u16, 0x489b_u16, StaticArray[0xa7_u8, 0x2c_u8, 0x84_u8, 0x6a_u8, 0xb3_u8, 0x67_u8, 0x8c_u8, 0x96_u8])
+  CLSID_V1SmartcardCredentialProvider = LibC::GUID.new(0x8bf9a910_u32, 0xa8ff_u16, 0x457f_u16, StaticArray[0x99_u8, 0x9f_u8, 0xa5_u8, 0xca_u8, 0x10_u8, 0xb4_u8, 0xa8_u8, 0x85_u8])
+  CLSID_SmartcardPinProvider = LibC::GUID.new(0x94596c7e_u32, 0x3744_u16, 0x41ce_u16, StaticArray[0x89_u8, 0x3e_u8, 0xbb_u8, 0xf0_u8, 0x91_u8, 0x22_u8, 0xf7_u8, 0x6a_u8])
+  CLSID_SmartcardReaderSelectionProvider = LibC::GUID.new(0x1b283861_u32, 0x754f_u16, 0x4022_u16, StaticArray[0xad_u8, 0x47_u8, 0xa5_u8, 0xea_u8, 0xaa_u8, 0x61_u8, 0x88_u8, 0x94_u8])
+  CLSID_SmartcardWinRTProvider = LibC::GUID.new(0x1ee7337f_u32, 0x85ac_u16, 0x45e2_u16, StaticArray[0xa2_u8, 0x3c_u8, 0x37_u8, 0xc7_u8, 0x53_u8, 0x20_u8, 0x97_u8, 0x69_u8])
+  CLSID_GenericCredentialProvider = LibC::GUID.new(0x25cbb996_u32, 0x92ed_u16, 0x457e_u16, StaticArray[0xb2_u8, 0x8c_u8, 0x47_u8, 0x74_u8, 0x8_u8, 0x4b_u8, 0xd5_u8, 0x62_u8])
+  CLSID_RASProvider = LibC::GUID.new(0x5537e283_u32, 0xb1e7_u16, 0x4ef8_u16, StaticArray[0x9c_u8, 0x6e_u8, 0x7a_u8, 0xb0_u8, 0xaf_u8, 0xe5_u8, 0x5_u8, 0x6d_u8])
+  CLSID_OnexCredentialProvider = LibC::GUID.new(0x7aa0886_u32, 0xcc8d_u16, 0x4e19_u16, StaticArray[0xa4_u8, 0x10_u8, 0x1c_u8, 0x75_u8, 0xaf_u8, 0x68_u8, 0x6e_u8, 0x62_u8])
+  CLSID_OnexPlapSmartcardCredentialProvider = LibC::GUID.new(0x33c86cd6_u32, 0x705f_u16, 0x4ba1_u16, StaticArray[0x9a_u8, 0xdb_u8, 0x67_u8, 0x7_u8, 0xb_u8, 0x83_u8, 0x77_u8, 0x75_u8])
+  CLSID_VaultProvider = LibC::GUID.new(0x503739d0_u32, 0x4c5e_u16, 0x4cfd_u16, StaticArray[0xb3_u8, 0xba_u8, 0xd8_u8, 0x81_u8, 0x33_u8, 0x4f_u8, 0xd_u8, 0xf2_u8])
+  CLSID_WinBioCredentialProvider = LibC::GUID.new(0xbec09223_u32, 0xb018_u16, 0x416d_u16, StaticArray[0xa0_u8, 0xac_u8, 0x52_u8, 0x39_u8, 0x71_u8, 0xb6_u8, 0x39_u8, 0xf5_u8])
+  CLSID_V1WinBioCredentialProvider = LibC::GUID.new(0xac3ac249_u32, 0xe820_u16, 0x4343_u16, StaticArray[0xa6_u8, 0x5b_u8, 0x37_u8, 0x7a_u8, 0xc6_u8, 0x34_u8, 0xdc_u8, 0x9_u8])
+  CLSID_SyncMgrClient = LibC::GUID.new(0x1202db60_u32, 0x1dac_u16, 0x42c5_u16, StaticArray[0xae_u8, 0xd5_u8, 0x1a_u8, 0xbd_u8, 0xd4_u8, 0x32_u8, 0x24_u8, 0x8e_u8])
+  CLSID_SyncMgrControl = LibC::GUID.new(0x1a1f4206_u32, 0x688_u16, 0x4e7f_u16, StaticArray[0xbe_u8, 0x3_u8, 0xd8_u8, 0x2e_u8, 0xc6_u8, 0x9d_u8, 0xf9_u8, 0xa5_u8])
+  CLSID_SyncMgrScheduleWizard = LibC::GUID.new(0x8d8b8e30_u32, 0xc451_u16, 0x421b_u16, StaticArray[0x85_u8, 0x53_u8, 0xd2_u8, 0x97_u8, 0x6a_u8, 0xfa_u8, 0x64_u8, 0x8c_u8])
+  CLSID_SyncMgrFolder = LibC::GUID.new(0x9c73f5e5_u32, 0x7ae7_u16, 0x4e32_u16, StaticArray[0xa8_u8, 0xe8_u8, 0x8d_u8, 0x23_u8, 0xb8_u8, 0x52_u8, 0x55_u8, 0xbf_u8])
+  CLSID_SyncSetupFolder = LibC::GUID.new(0x2e9e59c0_u32, 0xb437_u16, 0x4981_u16, StaticArray[0xa6_u8, 0x47_u8, 0x9c_u8, 0x34_u8, 0xb9_u8, 0xb9_u8, 0x8_u8, 0x91_u8])
+  CLSID_ConflictFolder = LibC::GUID.new(0x289978ac_u32, 0xa101_u16, 0x4341_u16, StaticArray[0xa8_u8, 0x17_u8, 0x21_u8, 0xeb_u8, 0xa7_u8, 0xfd_u8, 0x4_u8, 0x6d_u8])
+  CLSID_SyncResultsFolder = LibC::GUID.new(0x71d99464_u32, 0x3b6b_u16, 0x475c_u16, StaticArray[0xb2_u8, 0x41_u8, 0xe1_u8, 0x58_u8, 0x83_u8, 0x20_u8, 0x75_u8, 0x29_u8])
+  CLSID_SimpleConflictPresenter = LibC::GUID.new(0x7a0f6ab7_u32, 0xed84_u16, 0x46b6_u16, StaticArray[0xb4_u8, 0x7e_u8, 0x2_u8, 0xaa_u8, 0x15_u8, 0x9a_u8, 0x15_u8, 0x2b_u8])
+  CLSID_InputPanelConfiguration = LibC::GUID.new(0x2853add3_u32, 0xf096_u16, 0x4c63_u16, StaticArray[0xa7_u8, 0x8f_u8, 0x7f_u8, 0xa3_u8, 0xea_u8, 0x83_u8, 0x7f_u8, 0xb7_u8])
+  CLSID_LocalThumbnailCache = LibC::GUID.new(0x50ef4544_u32, 0xac9f_u16, 0x4a8e_u16, StaticArray[0xb2_u8, 0x1b_u8, 0x8a_u8, 0x26_u8, 0x18_u8, 0xd_u8, 0xb1_u8, 0x3f_u8])
+  CLSID_SharedBitmap = LibC::GUID.new(0x4db26476_u32, 0x6787_u16, 0x4046_u16, StaticArray[0xb8_u8, 0x36_u8, 0xe8_u8, 0x41_u8, 0x2a_u8, 0x9e_u8, 0x8a_u8, 0x27_u8])
+  CLSID_ShellImageDataFactory = LibC::GUID.new(0x66e4e4fb_u32, 0xf385_u16, 0x4dd0_u16, StaticArray[0x8d_u8, 0x74_u8, 0xa2_u8, 0xef_u8, 0xd1_u8, 0xbc_u8, 0x61_u8, 0x78_u8])
+  CLSID_SyncMgr = LibC::GUID.new(0x6295df27_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
+  CLSID_ThumbnailStreamCache = LibC::GUID.new(0xcbe0fed3_u32, 0x4b91_u16, 0x4e90_u16, StaticArray[0x83_u8, 0x54_u8, 0x8a_u8, 0x8c_u8, 0x84_u8, 0xec_u8, 0x68_u8, 0x72_u8])
+  CLSID_TrackShellMenu = LibC::GUID.new(0x8278f931_u32, 0x2a3e_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x8f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
+  CLSID_ImageTranscode = LibC::GUID.new(0x17b75166_u32, 0x928f_u16, 0x417d_u16, StaticArray[0x96_u8, 0x85_u8, 0x64_u8, 0xaa_u8, 0x13_u8, 0x55_u8, 0x65_u8, 0xc1_u8])
+  CLSID_ShowInputPaneAnimationCoordinator = LibC::GUID.new(0x1f046abf_u32, 0x3202_u16, 0x4dc1_u16, StaticArray[0x8c_u8, 0xb5_u8, 0x3c_u8, 0x67_u8, 0x61_u8, 0x7c_u8, 0xe1_u8, 0xfa_u8])
+  CLSID_HideInputPaneAnimationCoordinator = LibC::GUID.new(0x384742b1_u32, 0x2a77_u16, 0x4cb3_u16, StaticArray[0x8c_u8, 0xf8_u8, 0x11_u8, 0x36_u8, 0xf5_u8, 0xe1_u8, 0x7e_u8, 0x59_u8])
 
   type APPSTATE_REGISTRATION = Void
   type APPCONSTRAIN_REGISTRATION = Void
@@ -5670,8 +5670,8 @@ lib LibWin32
     you_are_a_replica : Proc(INotifyReplica*, UInt32, IMoniker*, HRESULT)
   end
 
-  INotifyReplica_GUID = LibC::GUID.new("99180163-da16-101a-935c-444553540000")
-  CLSID_INotifyReplica = "99180163-da16-101a-935c-444553540000"
+  INotifyReplica_GUID = "99180163-da16-101a-935c-444553540000"
+  IID_INotifyReplica = LibC::GUID.new(0x99180163_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct INotifyReplica
     lpVtbl : INotifyReplicaVTbl*
   end
@@ -5685,8 +5685,8 @@ lib LibWin32
     get_command_string : Proc(IContextMenu*, LibC::UINT_PTR, UInt32, UInt32*, PSTR, UInt32, HRESULT)
   end
 
-  IContextMenu_GUID = LibC::GUID.new("000214e4-0000-0000-c000-000000000046")
-  CLSID_IContextMenu = "000214e4-0000-0000-c000-000000000046"
+  IContextMenu_GUID = "000214e4-0000-0000-c000-000000000046"
+  IID_IContextMenu = LibC::GUID.new(0x214e4_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IContextMenu
     lpVtbl : IContextMenuVTbl*
   end
@@ -5701,8 +5701,8 @@ lib LibWin32
     handle_menu_msg : Proc(IContextMenu2*, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
   end
 
-  IContextMenu2_GUID = LibC::GUID.new("000214f4-0000-0000-c000-000000000046")
-  CLSID_IContextMenu2 = "000214f4-0000-0000-c000-000000000046"
+  IContextMenu2_GUID = "000214f4-0000-0000-c000-000000000046"
+  IID_IContextMenu2 = LibC::GUID.new(0x214f4_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IContextMenu2
     lpVtbl : IContextMenu2VTbl*
   end
@@ -5718,8 +5718,8 @@ lib LibWin32
     handle_menu_msg2 : Proc(IContextMenu3*, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
   end
 
-  IContextMenu3_GUID = LibC::GUID.new("bcfce0a0-ec17-11d0-8d10-00a0c90f2719")
-  CLSID_IContextMenu3 = "bcfce0a0-ec17-11d0-8d10-00a0c90f2719"
+  IContextMenu3_GUID = "bcfce0a0-ec17-11d0-8d10-00a0c90f2719"
+  IID_IContextMenu3 = LibC::GUID.new(0xbcfce0a0_u32, 0xec17_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x10_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xf_u8, 0x27_u8, 0x19_u8])
   struct IContextMenu3
     lpVtbl : IContextMenu3VTbl*
   end
@@ -5737,8 +5737,8 @@ lib LibWin32
     execute : Proc(IExecuteCommand*, HRESULT)
   end
 
-  IExecuteCommand_GUID = LibC::GUID.new("7f9185b0-cb92-43c5-80a9-92277a4f7b54")
-  CLSID_IExecuteCommand = "7f9185b0-cb92-43c5-80a9-92277a4f7b54"
+  IExecuteCommand_GUID = "7f9185b0-cb92-43c5-80a9-92277a4f7b54"
+  IID_IExecuteCommand = LibC::GUID.new(0x7f9185b0_u32, 0xcb92_u16, 0x43c5_u16, StaticArray[0x80_u8, 0xa9_u8, 0x92_u8, 0x27_u8, 0x7a_u8, 0x4f_u8, 0x7b_u8, 0x54_u8])
   struct IExecuteCommand
     lpVtbl : IExecuteCommandVTbl*
   end
@@ -5751,8 +5751,8 @@ lib LibWin32
     initialize : Proc(IPersistFolder*, ITEMIDLIST*, HRESULT)
   end
 
-  IPersistFolder_GUID = LibC::GUID.new("000214ea-0000-0000-c000-000000000046")
-  CLSID_IPersistFolder = "000214ea-0000-0000-c000-000000000046"
+  IPersistFolder_GUID = "000214ea-0000-0000-c000-000000000046"
+  IID_IPersistFolder = LibC::GUID.new(0x214ea_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IPersistFolder
     lpVtbl : IPersistFolderVTbl*
   end
@@ -5768,8 +5768,8 @@ lib LibWin32
     is_running : Proc(IRunnableTask*, UInt32)
   end
 
-  IRunnableTask_GUID = LibC::GUID.new("85788d00-6807-11d0-b810-00c04fd706ec")
-  CLSID_IRunnableTask = "85788d00-6807-11d0-b810-00c04fd706ec"
+  IRunnableTask_GUID = "85788d00-6807-11d0-b810-00c04fd706ec"
+  IID_IRunnableTask = LibC::GUID.new(0x85788d00_u32, 0x6807_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x10_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x6_u8, 0xec_u8])
   struct IRunnableTask
     lpVtbl : IRunnableTaskVTbl*
   end
@@ -5784,8 +5784,8 @@ lib LibWin32
     status : Proc(IShellTaskScheduler*, UInt32, UInt32, HRESULT)
   end
 
-  IShellTaskScheduler_GUID = LibC::GUID.new("6ccb7be0-6807-11d0-b810-00c04fd706ec")
-  CLSID_IShellTaskScheduler = "6ccb7be0-6807-11d0-b810-00c04fd706ec"
+  IShellTaskScheduler_GUID = "6ccb7be0-6807-11d0-b810-00c04fd706ec"
+  IID_IShellTaskScheduler = LibC::GUID.new(0x6ccb7be0_u32, 0x6807_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x10_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x6_u8, 0xec_u8])
   struct IShellTaskScheduler
     lpVtbl : IShellTaskSchedulerVTbl*
   end
@@ -5799,8 +5799,8 @@ lib LibWin32
     get_cur_folder : Proc(IPersistFolder2*, ITEMIDLIST**, HRESULT)
   end
 
-  IPersistFolder2_GUID = LibC::GUID.new("1ac3d9f0-175c-11d1-95be-00609797ea4f")
-  CLSID_IPersistFolder2 = "1ac3d9f0-175c-11d1-95be-00609797ea4f"
+  IPersistFolder2_GUID = "1ac3d9f0-175c-11d1-95be-00609797ea4f"
+  IID_IPersistFolder2 = LibC::GUID.new(0x1ac3d9f0_u32, 0x175c_u16, 0x11d1_u16, StaticArray[0x95_u8, 0xbe_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x4f_u8])
   struct IPersistFolder2
     lpVtbl : IPersistFolder2VTbl*
   end
@@ -5816,8 +5816,8 @@ lib LibWin32
     get_folder_target_info : Proc(IPersistFolder3*, PERSIST_FOLDER_TARGET_INFO*, HRESULT)
   end
 
-  IPersistFolder3_GUID = LibC::GUID.new("cef04fdf-fe72-11d2-87a5-00c04f6837cf")
-  CLSID_IPersistFolder3 = "cef04fdf-fe72-11d2-87a5-00c04f6837cf"
+  IPersistFolder3_GUID = "cef04fdf-fe72-11d2-87a5-00c04f6837cf"
+  IID_IPersistFolder3 = LibC::GUID.new(0xcef04fdf_u32, 0xfe72_u16, 0x11d2_u16, StaticArray[0x87_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x37_u8, 0xcf_u8])
   struct IPersistFolder3
     lpVtbl : IPersistFolder3VTbl*
   end
@@ -5831,8 +5831,8 @@ lib LibWin32
     get_id_list : Proc(IPersistIDList*, ITEMIDLIST**, HRESULT)
   end
 
-  IPersistIDList_GUID = LibC::GUID.new("1079acfc-29bd-11d3-8e0d-00c04f6837d5")
-  CLSID_IPersistIDList = "1079acfc-29bd-11d3-8e0d-00c04f6837d5"
+  IPersistIDList_GUID = "1079acfc-29bd-11d3-8e0d-00c04f6837d5"
+  IID_IPersistIDList = LibC::GUID.new(0x1079acfc_u32, 0x29bd_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x37_u8, 0xd5_u8])
   struct IPersistIDList
     lpVtbl : IPersistIDListVTbl*
   end
@@ -5847,8 +5847,8 @@ lib LibWin32
     clone : Proc(IEnumIDList*, IEnumIDList*, HRESULT)
   end
 
-  IEnumIDList_GUID = LibC::GUID.new("000214f2-0000-0000-c000-000000000046")
-  CLSID_IEnumIDList = "000214f2-0000-0000-c000-000000000046"
+  IEnumIDList_GUID = "000214f2-0000-0000-c000-000000000046"
+  IID_IEnumIDList = LibC::GUID.new(0x214f2_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IEnumIDList
     lpVtbl : IEnumIDListVTbl*
   end
@@ -5863,8 +5863,8 @@ lib LibWin32
     clone : Proc(IEnumFullIDList*, IEnumFullIDList*, HRESULT)
   end
 
-  IEnumFullIDList_GUID = LibC::GUID.new("d0191542-7954-4908-bc06-b2360bbe45ba")
-  CLSID_IEnumFullIDList = "d0191542-7954-4908-bc06-b2360bbe45ba"
+  IEnumFullIDList_GUID = "d0191542-7954-4908-bc06-b2360bbe45ba"
+  IID_IEnumFullIDList = LibC::GUID.new(0xd0191542_u32, 0x7954_u16, 0x4908_u16, StaticArray[0xbc_u8, 0x6_u8, 0xb2_u8, 0x36_u8, 0xb_u8, 0xbe_u8, 0x45_u8, 0xba_u8])
   struct IEnumFullIDList
     lpVtbl : IEnumFullIDListVTbl*
   end
@@ -5877,8 +5877,8 @@ lib LibWin32
     show_resolve_conflict_ui_async : Proc(IFileSyncMergeHandler*, LibC::LPWSTR, HMONITOR, HRESULT)
   end
 
-  IFileSyncMergeHandler_GUID = LibC::GUID.new("d97b5aac-c792-433c-975d-35c4eadc7a9d")
-  CLSID_IFileSyncMergeHandler = "d97b5aac-c792-433c-975d-35c4eadc7a9d"
+  IFileSyncMergeHandler_GUID = "d97b5aac-c792-433c-975d-35c4eadc7a9d"
+  IID_IFileSyncMergeHandler = LibC::GUID.new(0xd97b5aac_u32, 0xc792_u16, 0x433c_u16, StaticArray[0x97_u8, 0x5d_u8, 0x35_u8, 0xc4_u8, 0xea_u8, 0xdc_u8, 0x7a_u8, 0x9d_u8])
   struct IFileSyncMergeHandler
     lpVtbl : IFileSyncMergeHandlerVTbl*
   end
@@ -5891,8 +5891,8 @@ lib LibWin32
     get_mode : Proc(IObjectWithFolderEnumMode*, FOLDER_ENUM_MODE*, HRESULT)
   end
 
-  IObjectWithFolderEnumMode_GUID = LibC::GUID.new("6a9d9026-0e6e-464c-b000-42ecc07de673")
-  CLSID_IObjectWithFolderEnumMode = "6a9d9026-0e6e-464c-b000-42ecc07de673"
+  IObjectWithFolderEnumMode_GUID = "6a9d9026-0e6e-464c-b000-42ecc07de673"
+  IID_IObjectWithFolderEnumMode = LibC::GUID.new(0x6a9d9026_u32, 0xe6e_u16, 0x464c_u16, StaticArray[0xb0_u8, 0x0_u8, 0x42_u8, 0xec_u8, 0xc0_u8, 0x7d_u8, 0xe6_u8, 0x73_u8])
   struct IObjectWithFolderEnumMode
     lpVtbl : IObjectWithFolderEnumModeVTbl*
   end
@@ -5905,8 +5905,8 @@ lib LibWin32
     get_item : Proc(IParseAndCreateItem*, Guid*, Void**, HRESULT)
   end
 
-  IParseAndCreateItem_GUID = LibC::GUID.new("67efed0e-e827-4408-b493-78f3982b685c")
-  CLSID_IParseAndCreateItem = "67efed0e-e827-4408-b493-78f3982b685c"
+  IParseAndCreateItem_GUID = "67efed0e-e827-4408-b493-78f3982b685c"
+  IID_IParseAndCreateItem = LibC::GUID.new(0x67efed0e_u32, 0xe827_u16, 0x4408_u16, StaticArray[0xb4_u8, 0x93_u8, 0x78_u8, 0xf3_u8, 0x98_u8, 0x2b_u8, 0x68_u8, 0x5c_u8])
   struct IParseAndCreateItem
     lpVtbl : IParseAndCreateItemVTbl*
   end
@@ -5927,8 +5927,8 @@ lib LibWin32
     set_name_of : Proc(IShellFolder*, LibC::HANDLE, ITEMIDLIST*, LibC::LPWSTR, UInt32, ITEMIDLIST**, HRESULT)
   end
 
-  IShellFolder_GUID = LibC::GUID.new("000214e6-0000-0000-c000-000000000046")
-  CLSID_IShellFolder = "000214e6-0000-0000-c000-000000000046"
+  IShellFolder_GUID = "000214e6-0000-0000-c000-000000000046"
+  IID_IShellFolder = LibC::GUID.new(0x214e6_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellFolder
     lpVtbl : IShellFolderVTbl*
   end
@@ -5943,8 +5943,8 @@ lib LibWin32
     clone : Proc(IEnumExtraSearch*, IEnumExtraSearch*, HRESULT)
   end
 
-  IEnumExtraSearch_GUID = LibC::GUID.new("0e700be1-9db6-11d1-a1ce-00c04fd75d13")
-  CLSID_IEnumExtraSearch = "0e700be1-9db6-11d1-a1ce-00c04fd75d13"
+  IEnumExtraSearch_GUID = "0e700be1-9db6-11d1-a1ce-00c04fd75d13"
+  IID_IEnumExtraSearch = LibC::GUID.new(0xe700be1_u32, 0x9db6_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xce_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x5d_u8, 0x13_u8])
   struct IEnumExtraSearch
     lpVtbl : IEnumExtraSearchVTbl*
   end
@@ -5972,8 +5972,8 @@ lib LibWin32
     map_column_to_scid : Proc(IShellFolder2*, UInt32, PROPERTYKEY*, HRESULT)
   end
 
-  IShellFolder2_GUID = LibC::GUID.new("93f2f68c-1d1b-11d3-a30e-00c04f79abd1")
-  CLSID_IShellFolder2 = "93f2f68c-1d1b-11d3-a30e-00c04f79abd1"
+  IShellFolder2_GUID = "93f2f68c-1d1b-11d3-a30e-00c04f79abd1"
+  IID_IShellFolder2 = LibC::GUID.new(0x93f2f68c_u32, 0x1d1b_u16, 0x11d3_u16, StaticArray[0xa3_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xab_u8, 0xd1_u8])
   struct IShellFolder2
     lpVtbl : IShellFolder2VTbl*
   end
@@ -5997,8 +5997,8 @@ lib LibWin32
     get_item_object : Proc(IShellView*, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IShellView_GUID = LibC::GUID.new("000214e3-0000-0000-c000-000000000046")
-  CLSID_IShellView = "000214e3-0000-0000-c000-000000000046"
+  IShellView_GUID = "000214e3-0000-0000-c000-000000000046"
+  IID_IShellView = LibC::GUID.new(0x214e3_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellView
     lpVtbl : IShellViewVTbl*
   end
@@ -6026,8 +6026,8 @@ lib LibWin32
     select_and_position_item : Proc(IShellView2*, ITEMIDLIST*, UInt32, POINT*, HRESULT)
   end
 
-  IShellView2_GUID = LibC::GUID.new("88e39e80-3578-11cf-ae69-08002b2e1262")
-  CLSID_IShellView2 = "88e39e80-3578-11cf-ae69-08002b2e1262"
+  IShellView2_GUID = "88e39e80-3578-11cf-ae69-08002b2e1262"
+  IID_IShellView2 = LibC::GUID.new(0x88e39e80_u32, 0x3578_u16, 0x11cf_u16, StaticArray[0xae_u8, 0x69_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2e_u8, 0x12_u8, 0x62_u8])
   struct IShellView2
     lpVtbl : IShellView2VTbl*
   end
@@ -6052,8 +6052,8 @@ lib LibWin32
     select_and_position_items : Proc(IFolderView*, UInt32, ITEMIDLIST**, POINT*, UInt32, HRESULT)
   end
 
-  IFolderView_GUID = LibC::GUID.new("cde725b0-ccc9-4519-917e-325d72fab4ce")
-  CLSID_IFolderView = "cde725b0-ccc9-4519-917e-325d72fab4ce"
+  IFolderView_GUID = "cde725b0-ccc9-4519-917e-325d72fab4ce"
+  IID_IFolderView = LibC::GUID.new(0xcde725b0_u32, 0xccc9_u16, 0x4519_u16, StaticArray[0x91_u8, 0x7e_u8, 0x32_u8, 0x5d_u8, 0x72_u8, 0xfa_u8, 0xb4_u8, 0xce_u8])
   struct IFolderView
     lpVtbl : IFolderViewVTbl*
   end
@@ -6103,8 +6103,8 @@ lib LibWin32
     do_rename : Proc(IFolderView2*, HRESULT)
   end
 
-  IFolderView2_GUID = LibC::GUID.new("1af3a467-214f-4298-908e-06b03e0b39f9")
-  CLSID_IFolderView2 = "1af3a467-214f-4298-908e-06b03e0b39f9"
+  IFolderView2_GUID = "1af3a467-214f-4298-908e-06b03e0b39f9"
+  IID_IFolderView2 = LibC::GUID.new(0x1af3a467_u32, 0x214f_u16, 0x4298_u16, StaticArray[0x90_u8, 0x8e_u8, 0x6_u8, 0xb0_u8, 0x3e_u8, 0xb_u8, 0x39_u8, 0xf9_u8])
   struct IFolderView2
     lpVtbl : IFolderView2VTbl*
   end
@@ -6122,8 +6122,8 @@ lib LibWin32
     get_group_subset_count : Proc(IFolderViewSettings*, UInt32*, HRESULT)
   end
 
-  IFolderViewSettings_GUID = LibC::GUID.new("ae8c987d-8797-4ed3-be72-2a47dd938db0")
-  CLSID_IFolderViewSettings = "ae8c987d-8797-4ed3-be72-2a47dd938db0"
+  IFolderViewSettings_GUID = "ae8c987d-8797-4ed3-be72-2a47dd938db0"
+  IID_IFolderViewSettings = LibC::GUID.new(0xae8c987d_u32, 0x8797_u16, 0x4ed3_u16, StaticArray[0xbe_u8, 0x72_u8, 0x2a_u8, 0x47_u8, 0xdd_u8, 0x93_u8, 0x8d_u8, 0xb0_u8])
   struct IFolderViewSettings
     lpVtbl : IFolderViewSettingsVTbl*
   end
@@ -6135,8 +6135,8 @@ lib LibWin32
     initialize : Proc(IInitializeNetworkFolder*, ITEMIDLIST*, ITEMIDLIST*, UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IInitializeNetworkFolder_GUID = LibC::GUID.new("6e0f9881-42a8-4f2a-97f8-8af4e026d92d")
-  CLSID_IInitializeNetworkFolder = "6e0f9881-42a8-4f2a-97f8-8af4e026d92d"
+  IInitializeNetworkFolder_GUID = "6e0f9881-42a8-4f2a-97f8-8af4e026d92d"
+  IID_IInitializeNetworkFolder = LibC::GUID.new(0x6e0f9881_u32, 0x42a8_u16, 0x4f2a_u16, StaticArray[0x97_u8, 0xf8_u8, 0x8a_u8, 0xf4_u8, 0xe0_u8, 0x26_u8, 0xd9_u8, 0x2d_u8])
   struct IInitializeNetworkFolder
     lpVtbl : IInitializeNetworkFolderVTbl*
   end
@@ -6150,8 +6150,8 @@ lib LibWin32
     get_provider : Proc(INetworkFolderInternal*, UInt32, ITEMIDLIST**, UInt32, Char*, HRESULT)
   end
 
-  INetworkFolderInternal_GUID = LibC::GUID.new("ceb38218-c971-47bb-a703-f0bc99ccdb81")
-  CLSID_INetworkFolderInternal = "ceb38218-c971-47bb-a703-f0bc99ccdb81"
+  INetworkFolderInternal_GUID = "ceb38218-c971-47bb-a703-f0bc99ccdb81"
+  IID_INetworkFolderInternal = LibC::GUID.new(0xceb38218_u32, 0xc971_u16, 0x47bb_u16, StaticArray[0xa7_u8, 0x3_u8, 0xf0_u8, 0xbc_u8, 0x99_u8, 0xcc_u8, 0xdb_u8, 0x81_u8])
   struct INetworkFolderInternal
     lpVtbl : INetworkFolderInternalVTbl*
   end
@@ -6165,8 +6165,8 @@ lib LibWin32
     set_text_color : Proc(IPreviewHandlerVisuals*, UInt32, HRESULT)
   end
 
-  IPreviewHandlerVisuals_GUID = LibC::GUID.new("196bf9a5-b346-4ef0-aa1e-5dcdb76768b1")
-  CLSID_IPreviewHandlerVisuals = "196bf9a5-b346-4ef0-aa1e-5dcdb76768b1"
+  IPreviewHandlerVisuals_GUID = "196bf9a5-b346-4ef0-aa1e-5dcdb76768b1"
+  IID_IPreviewHandlerVisuals = LibC::GUID.new(0x196bf9a5_u32, 0xb346_u16, 0x4ef0_u16, StaticArray[0xaa_u8, 0x1e_u8, 0x5d_u8, 0xcd_u8, 0xb7_u8, 0x67_u8, 0x68_u8, 0xb1_u8])
   struct IPreviewHandlerVisuals
     lpVtbl : IPreviewHandlerVisualsVTbl*
   end
@@ -6180,8 +6180,8 @@ lib LibWin32
     include_object : Proc(ICommDlgBrowser*, IShellView, ITEMIDLIST*, HRESULT)
   end
 
-  ICommDlgBrowser_GUID = LibC::GUID.new("000214f1-0000-0000-c000-000000000046")
-  CLSID_ICommDlgBrowser = "000214f1-0000-0000-c000-000000000046"
+  ICommDlgBrowser_GUID = "000214f1-0000-0000-c000-000000000046"
+  IID_ICommDlgBrowser = LibC::GUID.new(0x214f1_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct ICommDlgBrowser
     lpVtbl : ICommDlgBrowserVTbl*
   end
@@ -6198,8 +6198,8 @@ lib LibWin32
     get_view_flags : Proc(ICommDlgBrowser2*, UInt32*, HRESULT)
   end
 
-  ICommDlgBrowser2_GUID = LibC::GUID.new("10339516-2894-11d2-9039-00c04f8eeb3e")
-  CLSID_ICommDlgBrowser2 = "10339516-2894-11d2-9039-00c04f8eeb3e"
+  ICommDlgBrowser2_GUID = "10339516-2894-11d2-9039-00c04f8eeb3e"
+  IID_ICommDlgBrowser2 = LibC::GUID.new(0x10339516_u32, 0x2894_u16, 0x11d2_u16, StaticArray[0x90_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xeb_u8, 0x3e_u8])
   struct ICommDlgBrowser2
     lpVtbl : ICommDlgBrowser2VTbl*
   end
@@ -6215,8 +6215,8 @@ lib LibWin32
     set_columns : Proc(IColumnManager*, PROPERTYKEY*, UInt32, HRESULT)
   end
 
-  IColumnManager_GUID = LibC::GUID.new("d8ec27bb-3f3b-4042-b10a-4acfd924d453")
-  CLSID_IColumnManager = "d8ec27bb-3f3b-4042-b10a-4acfd924d453"
+  IColumnManager_GUID = "d8ec27bb-3f3b-4042-b10a-4acfd924d453"
+  IID_IColumnManager = LibC::GUID.new(0xd8ec27bb_u32, 0x3f3b_u16, 0x4042_u16, StaticArray[0xb1_u8, 0xa_u8, 0x4a_u8, 0xcf_u8, 0xd9_u8, 0x24_u8, 0xd4_u8, 0x53_u8])
   struct IColumnManager
     lpVtbl : IColumnManagerVTbl*
   end
@@ -6228,8 +6228,8 @@ lib LibWin32
     set_filter : Proc(IFolderFilterSite*, IUnknown, HRESULT)
   end
 
-  IFolderFilterSite_GUID = LibC::GUID.new("c0a651f5-b48b-11d2-b5ed-006097c686f6")
-  CLSID_IFolderFilterSite = "c0a651f5-b48b-11d2-b5ed-006097c686f6"
+  IFolderFilterSite_GUID = "c0a651f5-b48b-11d2-b5ed-006097c686f6"
+  IID_IFolderFilterSite = LibC::GUID.new(0xc0a651f5_u32, 0xb48b_u16, 0x11d2_u16, StaticArray[0xb5_u8, 0xed_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc6_u8, 0x86_u8, 0xf6_u8])
   struct IFolderFilterSite
     lpVtbl : IFolderFilterSiteVTbl*
   end
@@ -6242,8 +6242,8 @@ lib LibWin32
     get_enum_flags : Proc(IFolderFilter*, IShellFolder, ITEMIDLIST*, HANDLE*, UInt32*, HRESULT)
   end
 
-  IFolderFilter_GUID = LibC::GUID.new("9cc22886-dc8e-11d2-b1d0-00c04f8eeb3e")
-  CLSID_IFolderFilter = "9cc22886-dc8e-11d2-b1d0-00c04f8eeb3e"
+  IFolderFilter_GUID = "9cc22886-dc8e-11d2-b1d0-00c04f8eeb3e"
+  IID_IFolderFilter = LibC::GUID.new(0x9cc22886_u32, 0xdc8e_u16, 0x11d2_u16, StaticArray[0xb1_u8, 0xd0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xeb_u8, 0x3e_u8])
   struct IFolderFilter
     lpVtbl : IFolderFilterVTbl*
   end
@@ -6255,8 +6255,8 @@ lib LibWin32
     on_focus_change_is : Proc(IInputObjectSite*, IUnknown, LibC::BOOL, HRESULT)
   end
 
-  IInputObjectSite_GUID = LibC::GUID.new("f1db8392-7331-11d0-8c99-00a0c92dbfe8")
-  CLSID_IInputObjectSite = "f1db8392-7331-11d0-8c99-00a0c92dbfe8"
+  IInputObjectSite_GUID = "f1db8392-7331-11d0-8c99-00a0c92dbfe8"
+  IID_IInputObjectSite = LibC::GUID.new(0xf1db8392_u32, 0x7331_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x99_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
   struct IInputObjectSite
     lpVtbl : IInputObjectSiteVTbl*
   end
@@ -6270,8 +6270,8 @@ lib LibWin32
     translate_accelerator_io : Proc(IInputObject*, MSG*, HRESULT)
   end
 
-  IInputObject_GUID = LibC::GUID.new("68284faa-6a48-11d0-8c78-00c04fd918b4")
-  CLSID_IInputObject = "68284faa-6a48-11d0-8c78-00c04fd918b4"
+  IInputObject_GUID = "68284faa-6a48-11d0-8c78-00c04fd918b4"
+  IID_IInputObject = LibC::GUID.new(0x68284faa_u32, 0x6a48_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x78_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xb4_u8])
   struct IInputObject
     lpVtbl : IInputObjectVTbl*
   end
@@ -6286,8 +6286,8 @@ lib LibWin32
     translate_accelerator_global : Proc(IInputObject2*, MSG*, HRESULT)
   end
 
-  IInputObject2_GUID = LibC::GUID.new("6915c085-510b-44cd-94af-28dfa56cf92b")
-  CLSID_IInputObject2 = "6915c085-510b-44cd-94af-28dfa56cf92b"
+  IInputObject2_GUID = "6915c085-510b-44cd-94af-28dfa56cf92b"
+  IID_IInputObject2 = LibC::GUID.new(0x6915c085_u32, 0x510b_u16, 0x44cd_u16, StaticArray[0x94_u8, 0xaf_u8, 0x28_u8, 0xdf_u8, 0xa5_u8, 0x6c_u8, 0xf9_u8, 0x2b_u8])
   struct IInputObject2
     lpVtbl : IInputObject2VTbl*
   end
@@ -6299,8 +6299,8 @@ lib LibWin32
     get_icon_of : Proc(IShellIcon*, ITEMIDLIST*, UInt32, Int32*, HRESULT)
   end
 
-  IShellIcon_GUID = LibC::GUID.new("000214e5-0000-0000-c000-000000000046")
-  CLSID_IShellIcon = "000214e5-0000-0000-c000-000000000046"
+  IShellIcon_GUID = "000214e5-0000-0000-c000-000000000046"
+  IID_IShellIcon = LibC::GUID.new(0x214e5_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellIcon
     lpVtbl : IShellIconVTbl*
   end
@@ -6326,8 +6326,8 @@ lib LibWin32
     set_toolbar_items : Proc(IShellBrowser*, TBBUTTON*, UInt32, UInt32, HRESULT)
   end
 
-  IShellBrowser_GUID = LibC::GUID.new("000214e2-0000-0000-c000-000000000046")
-  CLSID_IShellBrowser = "000214e2-0000-0000-c000-000000000046"
+  IShellBrowser_GUID = "000214e2-0000-0000-c000-000000000046"
+  IID_IShellBrowser = LibC::GUID.new(0x214e2_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellBrowser
     lpVtbl : IShellBrowserVTbl*
   end
@@ -6340,8 +6340,8 @@ lib LibWin32
     revoke_service : Proc(IProfferService*, UInt32, HRESULT)
   end
 
-  IProfferService_GUID = LibC::GUID.new("cb728b20-f786-11ce-92ad-00aa00a74cd0")
-  CLSID_IProfferService = "cb728b20-f786-11ce-92ad-00aa00a74cd0"
+  IProfferService_GUID = "cb728b20-f786-11ce-92ad-00aa00a74cd0"
+  IID_IProfferService = LibC::GUID.new(0xcb728b20_u32, 0xf786_u16, 0x11ce_u16, StaticArray[0x92_u8, 0xad_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa7_u8, 0x4c_u8, 0xd0_u8])
   struct IProfferService
     lpVtbl : IProfferServiceVTbl*
   end
@@ -6353,8 +6353,8 @@ lib LibWin32
     get_service_ids : Proc(IGetServiceIds*, UInt32*, Guid**, HRESULT)
   end
 
-  IGetServiceIds_GUID = LibC::GUID.new("4a073526-6103-4e21-b7bc-f519d1524e5d")
-  CLSID_IGetServiceIds = "4a073526-6103-4e21-b7bc-f519d1524e5d"
+  IGetServiceIds_GUID = "4a073526-6103-4e21-b7bc-f519d1524e5d"
+  IID_IGetServiceIds = LibC::GUID.new(0x4a073526_u32, 0x6103_u16, 0x4e21_u16, StaticArray[0xb7_u8, 0xbc_u8, 0xf5_u8, 0x19_u8, 0xd1_u8, 0x52_u8, 0x4e_u8, 0x5d_u8])
   struct IGetServiceIds
     lpVtbl : IGetServiceIdsVTbl*
   end
@@ -6370,8 +6370,8 @@ lib LibWin32
     compare : Proc(IShellItem*, IShellItem, UInt32, Int32*, HRESULT)
   end
 
-  IShellItem_GUID = LibC::GUID.new("43826d1e-e718-42ee-bc55-a1e261c37bfe")
-  CLSID_IShellItem = "43826d1e-e718-42ee-bc55-a1e261c37bfe"
+  IShellItem_GUID = "43826d1e-e718-42ee-bc55-a1e261c37bfe"
+  IID_IShellItem = LibC::GUID.new(0x43826d1e_u32, 0xe718_u16, 0x42ee_u16, StaticArray[0xbc_u8, 0x55_u8, 0xa1_u8, 0xe2_u8, 0x61_u8, 0xc3_u8, 0x7b_u8, 0xfe_u8])
   struct IShellItem
     lpVtbl : IShellItemVTbl*
   end
@@ -6400,8 +6400,8 @@ lib LibWin32
     get_bool : Proc(IShellItem2*, PROPERTYKEY*, LibC::BOOL*, HRESULT)
   end
 
-  IShellItem2_GUID = LibC::GUID.new("7e9fb0d3-919f-4307-ab2e-9b1860310c93")
-  CLSID_IShellItem2 = "7e9fb0d3-919f-4307-ab2e-9b1860310c93"
+  IShellItem2_GUID = "7e9fb0d3-919f-4307-ab2e-9b1860310c93"
+  IID_IShellItem2 = LibC::GUID.new(0x7e9fb0d3_u32, 0x919f_u16, 0x4307_u16, StaticArray[0xab_u8, 0x2e_u8, 0x9b_u8, 0x18_u8, 0x60_u8, 0x31_u8, 0xc_u8, 0x93_u8])
   struct IShellItem2
     lpVtbl : IShellItem2VTbl*
   end
@@ -6413,8 +6413,8 @@ lib LibWin32
     get_image : Proc(IShellItemImageFactory*, SIZE, SIIGBF, HBITMAP*, HRESULT)
   end
 
-  IShellItemImageFactory_GUID = LibC::GUID.new("bcc18b79-ba16-442f-80c4-8a59c30c463b")
-  CLSID_IShellItemImageFactory = "bcc18b79-ba16-442f-80c4-8a59c30c463b"
+  IShellItemImageFactory_GUID = "bcc18b79-ba16-442f-80c4-8a59c30c463b"
+  IID_IShellItemImageFactory = LibC::GUID.new(0xbcc18b79_u32, 0xba16_u16, 0x442f_u16, StaticArray[0x80_u8, 0xc4_u8, 0x8a_u8, 0x59_u8, 0xc3_u8, 0xc_u8, 0x46_u8, 0x3b_u8])
   struct IShellItemImageFactory
     lpVtbl : IShellItemImageFactoryVTbl*
   end
@@ -6429,8 +6429,8 @@ lib LibWin32
     clone : Proc(IEnumShellItems*, IEnumShellItems*, HRESULT)
   end
 
-  IEnumShellItems_GUID = LibC::GUID.new("70629033-e363-4a28-a567-0db78006e6d7")
-  CLSID_IEnumShellItems = "70629033-e363-4a28-a567-0db78006e6d7"
+  IEnumShellItems_GUID = "70629033-e363-4a28-a567-0db78006e6d7"
+  IID_IEnumShellItems = LibC::GUID.new(0x70629033_u32, 0xe363_u16, 0x4a28_u16, StaticArray[0xa5_u8, 0x67_u8, 0xd_u8, 0xb7_u8, 0x80_u8, 0x6_u8, 0xe6_u8, 0xd7_u8])
   struct IEnumShellItems
     lpVtbl : IEnumShellItemsVTbl*
   end
@@ -6448,8 +6448,8 @@ lib LibWin32
     property_failure : Proc(ITransferAdviseSink*, IShellItem, PROPERTYKEY*, HRESULT, HRESULT)
   end
 
-  ITransferAdviseSink_GUID = LibC::GUID.new("d594d0d8-8da7-457b-b3b4-ce5dbaac0b88")
-  CLSID_ITransferAdviseSink = "d594d0d8-8da7-457b-b3b4-ce5dbaac0b88"
+  ITransferAdviseSink_GUID = "d594d0d8-8da7-457b-b3b4-ce5dbaac0b88"
+  IID_ITransferAdviseSink = LibC::GUID.new(0xd594d0d8_u32, 0x8da7_u16, 0x457b_u16, StaticArray[0xb3_u8, 0xb4_u8, 0xce_u8, 0x5d_u8, 0xba_u8, 0xac_u8, 0xb_u8, 0x88_u8])
   struct ITransferAdviseSink
     lpVtbl : ITransferAdviseSinkVTbl*
   end
@@ -6473,8 +6473,8 @@ lib LibWin32
     leave_folder : Proc(ITransferSource*, IShellItem, HRESULT)
   end
 
-  ITransferSource_GUID = LibC::GUID.new("00adb003-bde9-45c6-8e29-d09f9353e108")
-  CLSID_ITransferSource = "00adb003-bde9-45c6-8e29-d09f9353e108"
+  ITransferSource_GUID = "00adb003-bde9-45c6-8e29-d09f9353e108"
+  IID_ITransferSource = LibC::GUID.new(0xadb003_u32, 0xbde9_u16, 0x45c6_u16, StaticArray[0x8e_u8, 0x29_u8, 0xd0_u8, 0x9f_u8, 0x93_u8, 0x53_u8, 0xe1_u8, 0x8_u8])
   struct ITransferSource
     lpVtbl : ITransferSourceVTbl*
   end
@@ -6489,8 +6489,8 @@ lib LibWin32
     clone : Proc(IEnumResources*, IEnumResources*, HRESULT)
   end
 
-  IEnumResources_GUID = LibC::GUID.new("2dd81fe3-a83c-4da9-a330-47249d345ba1")
-  CLSID_IEnumResources = "2dd81fe3-a83c-4da9-a330-47249d345ba1"
+  IEnumResources_GUID = "2dd81fe3-a83c-4da9-a330-47249d345ba1"
+  IID_IEnumResources = LibC::GUID.new(0x2dd81fe3_u32, 0xa83c_u16, 0x4da9_u16, StaticArray[0xa3_u8, 0x30_u8, 0x47_u8, 0x24_u8, 0x9d_u8, 0x34_u8, 0x5b_u8, 0xa1_u8])
   struct IEnumResources
     lpVtbl : IEnumResourcesVTbl*
   end
@@ -6511,8 +6511,8 @@ lib LibWin32
     mark_for_delete : Proc(IShellItemResources*, HRESULT)
   end
 
-  IShellItemResources_GUID = LibC::GUID.new("ff5693be-2ce0-4d48-b5c5-40817d1acdb9")
-  CLSID_IShellItemResources = "ff5693be-2ce0-4d48-b5c5-40817d1acdb9"
+  IShellItemResources_GUID = "ff5693be-2ce0-4d48-b5c5-40817d1acdb9"
+  IID_IShellItemResources = LibC::GUID.new(0xff5693be_u32, 0x2ce0_u16, 0x4d48_u16, StaticArray[0xb5_u8, 0xc5_u8, 0x40_u8, 0x81_u8, 0x7d_u8, 0x1a_u8, 0xcd_u8, 0xb9_u8])
   struct IShellItemResources
     lpVtbl : IShellItemResourcesVTbl*
   end
@@ -6526,8 +6526,8 @@ lib LibWin32
     create_item : Proc(ITransferDestination*, LibC::LPWSTR, UInt32, UInt64, UInt32, Guid*, Void**, Guid*, Void**, HRESULT)
   end
 
-  ITransferDestination_GUID = LibC::GUID.new("48addd32-3ca5-4124-abe3-b5a72531b207")
-  CLSID_ITransferDestination = "48addd32-3ca5-4124-abe3-b5a72531b207"
+  ITransferDestination_GUID = "48addd32-3ca5-4124-abe3-b5a72531b207"
+  IID_ITransferDestination = LibC::GUID.new(0x48addd32_u32, 0x3ca5_u16, 0x4124_u16, StaticArray[0xab_u8, 0xe3_u8, 0xb5_u8, 0xa7_u8, 0x25_u8, 0x31_u8, 0xb2_u8, 0x7_u8])
   struct ITransferDestination
     lpVtbl : ITransferDestinationVTbl*
   end
@@ -6554,8 +6554,8 @@ lib LibWin32
     resume_timer : Proc(IFileOperationProgressSink*, HRESULT)
   end
 
-  IFileOperationProgressSink_GUID = LibC::GUID.new("04b0f1a7-9490-44bc-96e1-4296a31252e2")
-  CLSID_IFileOperationProgressSink = "04b0f1a7-9490-44bc-96e1-4296a31252e2"
+  IFileOperationProgressSink_GUID = "04b0f1a7-9490-44bc-96e1-4296a31252e2"
+  IID_IFileOperationProgressSink = LibC::GUID.new(0x4b0f1a7_u32, 0x9490_u16, 0x44bc_u16, StaticArray[0x96_u8, 0xe1_u8, 0x42_u8, 0x96_u8, 0xa3_u8, 0x12_u8, 0x52_u8, 0xe2_u8])
   struct IFileOperationProgressSink
     lpVtbl : IFileOperationProgressSinkVTbl*
   end
@@ -6573,8 +6573,8 @@ lib LibWin32
     enum_items : Proc(IShellItemArray*, IEnumShellItems*, HRESULT)
   end
 
-  IShellItemArray_GUID = LibC::GUID.new("b63ea76d-1f85-456f-a19c-48159efa858b")
-  CLSID_IShellItemArray = "b63ea76d-1f85-456f-a19c-48159efa858b"
+  IShellItemArray_GUID = "b63ea76d-1f85-456f-a19c-48159efa858b"
+  IID_IShellItemArray = LibC::GUID.new(0xb63ea76d_u32, 0x1f85_u16, 0x456f_u16, StaticArray[0xa1_u8, 0x9c_u8, 0x48_u8, 0x15_u8, 0x9e_u8, 0xfa_u8, 0x85_u8, 0x8b_u8])
   struct IShellItemArray
     lpVtbl : IShellItemArrayVTbl*
   end
@@ -6586,8 +6586,8 @@ lib LibWin32
     initialize : Proc(IInitializeWithItem*, IShellItem, UInt32, HRESULT)
   end
 
-  IInitializeWithItem_GUID = LibC::GUID.new("7f73be3f-fb79-493c-a6c7-7ee14e245841")
-  CLSID_IInitializeWithItem = "7f73be3f-fb79-493c-a6c7-7ee14e245841"
+  IInitializeWithItem_GUID = "7f73be3f-fb79-493c-a6c7-7ee14e245841"
+  IID_IInitializeWithItem = LibC::GUID.new(0x7f73be3f_u32, 0xfb79_u16, 0x493c_u16, StaticArray[0xa6_u8, 0xc7_u8, 0x7e_u8, 0xe1_u8, 0x4e_u8, 0x24_u8, 0x58_u8, 0x41_u8])
   struct IInitializeWithItem
     lpVtbl : IInitializeWithItemVTbl*
   end
@@ -6600,8 +6600,8 @@ lib LibWin32
     get_selection : Proc(IObjectWithSelection*, Guid*, Void**, HRESULT)
   end
 
-  IObjectWithSelection_GUID = LibC::GUID.new("1c9cd5bb-98e9-4491-a60f-31aacc72b83c")
-  CLSID_IObjectWithSelection = "1c9cd5bb-98e9-4491-a60f-31aacc72b83c"
+  IObjectWithSelection_GUID = "1c9cd5bb-98e9-4491-a60f-31aacc72b83c"
+  IID_IObjectWithSelection = LibC::GUID.new(0x1c9cd5bb_u32, 0x98e9_u16, 0x4491_u16, StaticArray[0xa6_u8, 0xf_u8, 0x31_u8, 0xaa_u8, 0xcc_u8, 0x72_u8, 0xb8_u8, 0x3c_u8])
   struct IObjectWithSelection
     lpVtbl : IObjectWithSelectionVTbl*
   end
@@ -6613,8 +6613,8 @@ lib LibWin32
     remove_back_references : Proc(IObjectWithBackReferences*, HRESULT)
   end
 
-  IObjectWithBackReferences_GUID = LibC::GUID.new("321a6a6a-d61f-4bf3-97ae-14be2986bb36")
-  CLSID_IObjectWithBackReferences = "321a6a6a-d61f-4bf3-97ae-14be2986bb36"
+  IObjectWithBackReferences_GUID = "321a6a6a-d61f-4bf3-97ae-14be2986bb36"
+  IID_IObjectWithBackReferences = LibC::GUID.new(0x321a6a6a_u32, 0xd61f_u16, 0x4bf3_u16, StaticArray[0x97_u8, 0xae_u8, 0x14_u8, 0xbe_u8, 0x29_u8, 0x86_u8, 0xbb_u8, 0x36_u8])
   struct IObjectWithBackReferences
     lpVtbl : IObjectWithBackReferencesVTbl*
   end
@@ -6631,8 +6631,8 @@ lib LibWin32
     create_category : Proc(ICategoryProvider*, Guid*, Guid*, Void**, HRESULT)
   end
 
-  ICategoryProvider_GUID = LibC::GUID.new("9af64809-5864-4c26-a720-c1f78c086ee3")
-  CLSID_ICategoryProvider = "9af64809-5864-4c26-a720-c1f78c086ee3"
+  ICategoryProvider_GUID = "9af64809-5864-4c26-a720-c1f78c086ee3"
+  IID_ICategoryProvider = LibC::GUID.new(0x9af64809_u32, 0x5864_u16, 0x4c26_u16, StaticArray[0xa7_u8, 0x20_u8, 0xc1_u8, 0xf7_u8, 0x8c_u8, 0x8_u8, 0x6e_u8, 0xe3_u8])
   struct ICategoryProvider
     lpVtbl : ICategoryProviderVTbl*
   end
@@ -6647,8 +6647,8 @@ lib LibWin32
     compare_category : Proc(ICategorizer*, CATSORT_FLAGS, UInt32, UInt32, HRESULT)
   end
 
-  ICategorizer_GUID = LibC::GUID.new("a3b14589-9174-49a8-89a3-06a1ae2b9ba7")
-  CLSID_ICategorizer = "a3b14589-9174-49a8-89a3-06a1ae2b9ba7"
+  ICategorizer_GUID = "a3b14589-9174-49a8-89a3-06a1ae2b9ba7"
+  IID_ICategorizer = LibC::GUID.new(0xa3b14589_u32, 0x9174_u16, 0x49a8_u16, StaticArray[0x89_u8, 0xa3_u8, 0x6_u8, 0xa1_u8, 0xae_u8, 0x2b_u8, 0x9b_u8, 0xa7_u8])
   struct ICategorizer
     lpVtbl : ICategorizerVTbl*
   end
@@ -6664,8 +6664,8 @@ lib LibWin32
     show : Proc(IDropTargetHelper*, LibC::BOOL, HRESULT)
   end
 
-  IDropTargetHelper_GUID = LibC::GUID.new("4657278b-411b-11d2-839a-00c04fd918d0")
-  CLSID_IDropTargetHelper = "4657278b-411b-11d2-839a-00c04fd918d0"
+  IDropTargetHelper_GUID = "4657278b-411b-11d2-839a-00c04fd918d0"
+  IID_IDropTargetHelper = LibC::GUID.new(0x4657278b_u32, 0x411b_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x9a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
   struct IDropTargetHelper
     lpVtbl : IDropTargetHelperVTbl*
   end
@@ -6678,8 +6678,8 @@ lib LibWin32
     initialize_from_window : Proc(IDragSourceHelper*, LibC::HANDLE, POINT*, IDataObject, HRESULT)
   end
 
-  IDragSourceHelper_GUID = LibC::GUID.new("de5bf786-477a-11d2-839d-00c04fd918d0")
-  CLSID_IDragSourceHelper = "de5bf786-477a-11d2-839d-00c04fd918d0"
+  IDragSourceHelper_GUID = "de5bf786-477a-11d2-839d-00c04fd918d0"
+  IID_IDragSourceHelper = LibC::GUID.new(0xde5bf786_u32, 0x477a_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
   struct IDragSourceHelper
     lpVtbl : IDragSourceHelperVTbl*
   end
@@ -6708,8 +6708,8 @@ lib LibWin32
     set_path : Proc(IShellLinkA*, PSTR, HRESULT)
   end
 
-  IShellLinkA_GUID = LibC::GUID.new("000214ee-0000-0000-c000-000000000046")
-  CLSID_IShellLinkA = "000214ee-0000-0000-c000-000000000046"
+  IShellLinkA_GUID = "000214ee-0000-0000-c000-000000000046"
+  IID_IShellLinkA = LibC::GUID.new(0x214ee_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellLinkA
     lpVtbl : IShellLinkAVTbl*
   end
@@ -6738,8 +6738,8 @@ lib LibWin32
     set_path : Proc(IShellLinkW*, LibC::LPWSTR, HRESULT)
   end
 
-  IShellLinkW_GUID = LibC::GUID.new("000214f9-0000-0000-c000-000000000046")
-  CLSID_IShellLinkW = "000214f9-0000-0000-c000-000000000046"
+  IShellLinkW_GUID = "000214f9-0000-0000-c000-000000000046"
+  IID_IShellLinkW = LibC::GUID.new(0x214f9_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellLinkW
     lpVtbl : IShellLinkWVTbl*
   end
@@ -6755,8 +6755,8 @@ lib LibWin32
     set_flags : Proc(IShellLinkDataList*, UInt32, HRESULT)
   end
 
-  IShellLinkDataList_GUID = LibC::GUID.new("45e2b4ae-b1c3-11d0-b92f-00a0c90312e1")
-  CLSID_IShellLinkDataList = "45e2b4ae-b1c3-11d0-b92f-00a0c90312e1"
+  IShellLinkDataList_GUID = "45e2b4ae-b1c3-11d0-b92f-00a0c90312e1"
+  IID_IShellLinkDataList = LibC::GUID.new(0x45e2b4ae_u32, 0xb1c3_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0x2f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0x12_u8, 0xe1_u8])
   struct IShellLinkDataList
     lpVtbl : IShellLinkDataListVTbl*
   end
@@ -6768,8 +6768,8 @@ lib LibWin32
     resolve_shell_link : Proc(IResolveShellLink*, IUnknown, LibC::HANDLE, UInt32, HRESULT)
   end
 
-  IResolveShellLink_GUID = LibC::GUID.new("5cd52983-9449-11d2-963a-00c04f79adf0")
-  CLSID_IResolveShellLink = "5cd52983-9449-11d2-963a-00c04f79adf0"
+  IResolveShellLink_GUID = "5cd52983-9449-11d2-963a-00c04f79adf0"
+  IID_IResolveShellLink = LibC::GUID.new(0x5cd52983_u32, 0x9449_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xad_u8, 0xf0_u8])
   struct IResolveShellLink
     lpVtbl : IResolveShellLinkVTbl*
   end
@@ -6782,8 +6782,8 @@ lib LibWin32
     stop : Proc(IActionProgressDialog*, HRESULT)
   end
 
-  IActionProgressDialog_GUID = LibC::GUID.new("49ff1172-eadc-446d-9285-156453a6431c")
-  CLSID_IActionProgressDialog = "49ff1172-eadc-446d-9285-156453a6431c"
+  IActionProgressDialog_GUID = "49ff1172-eadc-446d-9285-156453a6431c"
+  IID_IActionProgressDialog = LibC::GUID.new(0x49ff1172_u32, 0xeadc_u16, 0x446d_u16, StaticArray[0x92_u8, 0x85_u8, 0x15_u8, 0x64_u8, 0x53_u8, 0xa6_u8, 0x43_u8, 0x1c_u8])
   struct IActionProgressDialog
     lpVtbl : IActionProgressDialogVTbl*
   end
@@ -6800,8 +6800,8 @@ lib LibWin32
     rend : Proc(IActionProgress*, HRESULT)
   end
 
-  IActionProgress_GUID = LibC::GUID.new("49ff1173-eadc-446d-9285-156453a6431c")
-  CLSID_IActionProgress = "49ff1173-eadc-446d-9285-156453a6431c"
+  IActionProgress_GUID = "49ff1173-eadc-446d-9285-156453a6431c"
+  IID_IActionProgress = LibC::GUID.new(0x49ff1173_u32, 0xeadc_u16, 0x446d_u16, StaticArray[0x92_u8, 0x85_u8, 0x15_u8, 0x64_u8, 0x53_u8, 0xa6_u8, 0x43_u8, 0x1c_u8])
   struct IActionProgress
     lpVtbl : IActionProgressVTbl*
   end
@@ -6813,8 +6813,8 @@ lib LibWin32
     initialize : Proc(IShellExtInit*, ITEMIDLIST*, IDataObject, HKEY, HRESULT)
   end
 
-  IShellExtInit_GUID = LibC::GUID.new("000214e8-0000-0000-c000-000000000046")
-  CLSID_IShellExtInit = "000214e8-0000-0000-c000-000000000046"
+  IShellExtInit_GUID = "000214e8-0000-0000-c000-000000000046"
+  IID_IShellExtInit = LibC::GUID.new(0x214e8_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellExtInit
     lpVtbl : IShellExtInitVTbl*
   end
@@ -6827,8 +6827,8 @@ lib LibWin32
     replace_page : Proc(IShellPropSheetExt*, UInt32, LPFNSVADDPROPSHEETPAGE, LPARAM, HRESULT)
   end
 
-  IShellPropSheetExt_GUID = LibC::GUID.new("000214e9-0000-0000-c000-000000000046")
-  CLSID_IShellPropSheetExt = "000214e9-0000-0000-c000-000000000046"
+  IShellPropSheetExt_GUID = "000214e9-0000-0000-c000-000000000046"
+  IID_IShellPropSheetExt = LibC::GUID.new(0x214e9_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellPropSheetExt
     lpVtbl : IShellPropSheetExtVTbl*
   end
@@ -6840,8 +6840,8 @@ lib LibWin32
     initialize : Proc(IRemoteComputer*, LibC::LPWSTR, LibC::BOOL, HRESULT)
   end
 
-  IRemoteComputer_GUID = LibC::GUID.new("000214fe-0000-0000-c000-000000000046")
-  CLSID_IRemoteComputer = "000214fe-0000-0000-c000-000000000046"
+  IRemoteComputer_GUID = "000214fe-0000-0000-c000-000000000046"
+  IID_IRemoteComputer = LibC::GUID.new(0x214fe_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IRemoteComputer
     lpVtbl : IRemoteComputerVTbl*
   end
@@ -6853,8 +6853,8 @@ lib LibWin32
     query_continue : Proc(IQueryContinue*, HRESULT)
   end
 
-  IQueryContinue_GUID = LibC::GUID.new("7307055c-b24a-486b-9f25-163e597a28a9")
-  CLSID_IQueryContinue = "7307055c-b24a-486b-9f25-163e597a28a9"
+  IQueryContinue_GUID = "7307055c-b24a-486b-9f25-163e597a28a9"
+  IID_IQueryContinue = LibC::GUID.new(0x7307055c_u32, 0xb24a_u16, 0x486b_u16, StaticArray[0x9f_u8, 0x25_u8, 0x16_u8, 0x3e_u8, 0x59_u8, 0x7a_u8, 0x28_u8, 0xa9_u8])
   struct IQueryContinue
     lpVtbl : IQueryContinueVTbl*
   end
@@ -6866,8 +6866,8 @@ lib LibWin32
     get_cancel_event : Proc(IObjectWithCancelEvent*, LibC::HANDLE*, HRESULT)
   end
 
-  IObjectWithCancelEvent_GUID = LibC::GUID.new("f279b885-0ae9-4b85-ac06-ddecf9408941")
-  CLSID_IObjectWithCancelEvent = "f279b885-0ae9-4b85-ac06-ddecf9408941"
+  IObjectWithCancelEvent_GUID = "f279b885-0ae9-4b85-ac06-ddecf9408941"
+  IID_IObjectWithCancelEvent = LibC::GUID.new(0xf279b885_u32, 0xae9_u16, 0x4b85_u16, StaticArray[0xac_u8, 0x6_u8, 0xdd_u8, 0xec_u8, 0xf9_u8, 0x40_u8, 0x89_u8, 0x41_u8])
   struct IObjectWithCancelEvent
     lpVtbl : IObjectWithCancelEventVTbl*
   end
@@ -6883,8 +6883,8 @@ lib LibWin32
     play_sound : Proc(IUserNotification*, LibC::LPWSTR, HRESULT)
   end
 
-  IUserNotification_GUID = LibC::GUID.new("ba9711ba-5893-4787-a7e1-41277151550b")
-  CLSID_IUserNotification = "ba9711ba-5893-4787-a7e1-41277151550b"
+  IUserNotification_GUID = "ba9711ba-5893-4787-a7e1-41277151550b"
+  IID_IUserNotification = LibC::GUID.new(0xba9711ba_u32, 0x5893_u16, 0x4787_u16, StaticArray[0xa7_u8, 0xe1_u8, 0x41_u8, 0x27_u8, 0x71_u8, 0x51_u8, 0x55_u8, 0xb_u8])
   struct IUserNotification
     lpVtbl : IUserNotificationVTbl*
   end
@@ -6897,8 +6897,8 @@ lib LibWin32
     get_max_length : Proc(IItemNameLimits*, LibC::LPWSTR, Int32*, HRESULT)
   end
 
-  IItemNameLimits_GUID = LibC::GUID.new("1df0d7f1-b267-4d28-8b10-12e23202a5c4")
-  CLSID_IItemNameLimits = "1df0d7f1-b267-4d28-8b10-12e23202a5c4"
+  IItemNameLimits_GUID = "1df0d7f1-b267-4d28-8b10-12e23202a5c4"
+  IID_IItemNameLimits = LibC::GUID.new(0x1df0d7f1_u32, 0xb267_u16, 0x4d28_u16, StaticArray[0x8b_u8, 0x10_u8, 0x12_u8, 0xe2_u8, 0x32_u8, 0x2_u8, 0xa5_u8, 0xc4_u8])
   struct IItemNameLimits
     lpVtbl : IItemNameLimitsVTbl*
   end
@@ -6921,8 +6921,8 @@ lib LibWin32
     get_id_list : Proc(ISearchFolderItemFactory*, ITEMIDLIST**, HRESULT)
   end
 
-  ISearchFolderItemFactory_GUID = LibC::GUID.new("a0ffbc28-5482-4366-be27-3e81e78e06c2")
-  CLSID_ISearchFolderItemFactory = "a0ffbc28-5482-4366-be27-3e81e78e06c2"
+  ISearchFolderItemFactory_GUID = "a0ffbc28-5482-4366-be27-3e81e78e06c2"
+  IID_ISearchFolderItemFactory = LibC::GUID.new(0xa0ffbc28_u32, 0x5482_u16, 0x4366_u16, StaticArray[0xbe_u8, 0x27_u8, 0x3e_u8, 0x81_u8, 0xe7_u8, 0x8e_u8, 0x6_u8, 0xc2_u8])
   struct ISearchFolderItemFactory
     lpVtbl : ISearchFolderItemFactoryVTbl*
   end
@@ -6935,8 +6935,8 @@ lib LibWin32
     extract : Proc(IExtractImage*, HBITMAP*, HRESULT)
   end
 
-  IExtractImage_GUID = LibC::GUID.new("bb2e617c-0920-11d1-9a0b-00c04fc2d6c1")
-  CLSID_IExtractImage = "bb2e617c-0920-11d1-9a0b-00c04fc2d6c1"
+  IExtractImage_GUID = "bb2e617c-0920-11d1-9a0b-00c04fc2d6c1"
+  IID_IExtractImage = LibC::GUID.new(0xbb2e617c_u32, 0x920_u16, 0x11d1_u16, StaticArray[0x9a_u8, 0xb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xd6_u8, 0xc1_u8])
   struct IExtractImage
     lpVtbl : IExtractImageVTbl*
   end
@@ -6950,8 +6950,8 @@ lib LibWin32
     get_date_stamp : Proc(IExtractImage2*, FILETIME*, HRESULT)
   end
 
-  IExtractImage2_GUID = LibC::GUID.new("953bb1ee-93b4-11d1-98a3-00c04fb687da")
-  CLSID_IExtractImage2 = "953bb1ee-93b4-11d1-98a3-00c04fb687da"
+  IExtractImage2_GUID = "953bb1ee-93b4-11d1-98a3-00c04fb687da"
+  IID_IExtractImage2 = LibC::GUID.new(0x953bb1ee_u32, 0x93b4_u16, 0x11d1_u16, StaticArray[0x98_u8, 0xa3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x87_u8, 0xda_u8])
   struct IExtractImage2
     lpVtbl : IExtractImage2VTbl*
   end
@@ -6963,8 +6963,8 @@ lib LibWin32
     get_thumbnail_handler : Proc(IThumbnailHandlerFactory*, ITEMIDLIST*, IBindCtx, Guid*, Void**, HRESULT)
   end
 
-  IThumbnailHandlerFactory_GUID = LibC::GUID.new("e35b4b2e-00da-4bc1-9f13-38bc11f5d417")
-  CLSID_IThumbnailHandlerFactory = "e35b4b2e-00da-4bc1-9f13-38bc11f5d417"
+  IThumbnailHandlerFactory_GUID = "e35b4b2e-00da-4bc1-9f13-38bc11f5d417"
+  IID_IThumbnailHandlerFactory = LibC::GUID.new(0xe35b4b2e_u32, 0xda_u16, 0x4bc1_u16, StaticArray[0x9f_u8, 0x13_u8, 0x38_u8, 0xbc_u8, 0x11_u8, 0xf5_u8, 0xd4_u8, 0x17_u8])
   struct IThumbnailHandlerFactory
     lpVtbl : IThumbnailHandlerFactoryVTbl*
   end
@@ -6977,8 +6977,8 @@ lib LibWin32
     get_parent_and_item : Proc(IParentAndItem*, ITEMIDLIST**, IShellFolder*, ITEMIDLIST**, HRESULT)
   end
 
-  IParentAndItem_GUID = LibC::GUID.new("b3a4b685-b685-4805-99d9-5dead2873236")
-  CLSID_IParentAndItem = "b3a4b685-b685-4805-99d9-5dead2873236"
+  IParentAndItem_GUID = "b3a4b685-b685-4805-99d9-5dead2873236"
+  IID_IParentAndItem = LibC::GUID.new(0xb3a4b685_u32, 0xb685_u16, 0x4805_u16, StaticArray[0x99_u8, 0xd9_u8, 0x5d_u8, 0xea_u8, 0xd2_u8, 0x87_u8, 0x32_u8, 0x36_u8])
   struct IParentAndItem
     lpVtbl : IParentAndItemVTbl*
   end
@@ -6994,8 +6994,8 @@ lib LibWin32
     resize_border_dw : Proc(IDockingWindow*, RECT*, IUnknown, LibC::BOOL, HRESULT)
   end
 
-  IDockingWindow_GUID = LibC::GUID.new("012dd920-7b26-11d0-8ca9-00a0c92dbfe8")
-  CLSID_IDockingWindow = "012dd920-7b26-11d0-8ca9-00a0c92dbfe8"
+  IDockingWindow_GUID = "012dd920-7b26-11d0-8ca9-00a0c92dbfe8"
+  IID_IDockingWindow = LibC::GUID.new(0x12dd920_u32, 0x7b26_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
   struct IDockingWindow
     lpVtbl : IDockingWindowVTbl*
   end
@@ -7012,8 +7012,8 @@ lib LibWin32
     get_band_info : Proc(IDeskBand*, UInt32, UInt32, DESKBANDINFO*, HRESULT)
   end
 
-  IDeskBand_GUID = LibC::GUID.new("eb0fe172-1a3a-11d0-89b3-00a0c90a90ac")
-  CLSID_IDeskBand = "eb0fe172-1a3a-11d0-89b3-00a0c90a90ac"
+  IDeskBand_GUID = "eb0fe172-1a3a-11d0-89b3-00a0c90a90ac"
+  IID_IDeskBand = LibC::GUID.new(0xeb0fe172_u32, 0x1a3a_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xb3_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x90_u8, 0xac_u8])
   struct IDeskBand
     lpVtbl : IDeskBandVTbl*
   end
@@ -7025,8 +7025,8 @@ lib LibWin32
     get_default_band_width : Proc(IDeskBandInfo*, UInt32, UInt32, Int32*, HRESULT)
   end
 
-  IDeskBandInfo_GUID = LibC::GUID.new("77e425fc-cbf9-4307-ba6a-bb5727745661")
-  CLSID_IDeskBandInfo = "77e425fc-cbf9-4307-ba6a-bb5727745661"
+  IDeskBandInfo_GUID = "77e425fc-cbf9-4307-ba6a-bb5727745661"
+  IID_IDeskBandInfo = LibC::GUID.new(0x77e425fc_u32, 0xcbf9_u16, 0x4307_u16, StaticArray[0xba_u8, 0x6a_u8, 0xbb_u8, 0x57_u8, 0x27_u8, 0x74_u8, 0x56_u8, 0x61_u8])
   struct IDeskBandInfo
     lpVtbl : IDeskBandInfoVTbl*
   end
@@ -7042,8 +7042,8 @@ lib LibWin32
     set_active_alt : Proc(ITaskbarList*, LibC::HANDLE, HRESULT)
   end
 
-  ITaskbarList_GUID = LibC::GUID.new("56fdf342-fd6d-11d0-958a-006097c9a090")
-  CLSID_ITaskbarList = "56fdf342-fd6d-11d0-958a-006097c9a090"
+  ITaskbarList_GUID = "56fdf342-fd6d-11d0-958a-006097c9a090"
+  IID_ITaskbarList = LibC::GUID.new(0x56fdf342_u32, 0xfd6d_u16, 0x11d0_u16, StaticArray[0x95_u8, 0x8a_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa0_u8, 0x90_u8])
   struct ITaskbarList
     lpVtbl : ITaskbarListVTbl*
   end
@@ -7060,8 +7060,8 @@ lib LibWin32
     mark_fullscreen_window : Proc(ITaskbarList2*, LibC::HANDLE, LibC::BOOL, HRESULT)
   end
 
-  ITaskbarList2_GUID = LibC::GUID.new("602d4995-b13a-429b-a66e-1935e44f4317")
-  CLSID_ITaskbarList2 = "602d4995-b13a-429b-a66e-1935e44f4317"
+  ITaskbarList2_GUID = "602d4995-b13a-429b-a66e-1935e44f4317"
+  IID_ITaskbarList2 = LibC::GUID.new(0x602d4995_u32, 0xb13a_u16, 0x429b_u16, StaticArray[0xa6_u8, 0x6e_u8, 0x19_u8, 0x35_u8, 0xe4_u8, 0x4f_u8, 0x43_u8, 0x17_u8])
   struct ITaskbarList2
     lpVtbl : ITaskbarList2VTbl*
   end
@@ -7090,8 +7090,8 @@ lib LibWin32
     set_thumbnail_clip : Proc(ITaskbarList3*, LibC::HANDLE, RECT*, HRESULT)
   end
 
-  ITaskbarList3_GUID = LibC::GUID.new("ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf")
-  CLSID_ITaskbarList3 = "ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf"
+  ITaskbarList3_GUID = "ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf"
+  IID_ITaskbarList3 = LibC::GUID.new(0xea1afb91_u32, 0x9e28_u16, 0x4b86_u16, StaticArray[0x90_u8, 0xe9_u8, 0x9e_u8, 0x9f_u8, 0x8a_u8, 0x5e_u8, 0xef_u8, 0xaf_u8])
   struct ITaskbarList3
     lpVtbl : ITaskbarList3VTbl*
   end
@@ -7121,8 +7121,8 @@ lib LibWin32
     set_tab_properties : Proc(ITaskbarList4*, LibC::HANDLE, STPFLAG, HRESULT)
   end
 
-  ITaskbarList4_GUID = LibC::GUID.new("c43dc798-95d1-4bea-9030-bb99e2983a1a")
-  CLSID_ITaskbarList4 = "c43dc798-95d1-4bea-9030-bb99e2983a1a"
+  ITaskbarList4_GUID = "c43dc798-95d1-4bea-9030-bb99e2983a1a"
+  IID_ITaskbarList4 = LibC::GUID.new(0xc43dc798_u32, 0x95d1_u16, 0x4bea_u16, StaticArray[0x90_u8, 0x30_u8, 0xbb_u8, 0x99_u8, 0xe2_u8, 0x98_u8, 0x3a_u8, 0x1a_u8])
   struct ITaskbarList4
     lpVtbl : ITaskbarList4VTbl*
   end
@@ -7137,8 +7137,8 @@ lib LibWin32
     on_navigation_failed : Proc(IExplorerBrowserEvents*, ITEMIDLIST*, HRESULT)
   end
 
-  IExplorerBrowserEvents_GUID = LibC::GUID.new("361bbdc7-e6ee-4e13-be58-58e2240c810f")
-  CLSID_IExplorerBrowserEvents = "361bbdc7-e6ee-4e13-be58-58e2240c810f"
+  IExplorerBrowserEvents_GUID = "361bbdc7-e6ee-4e13-be58-58e2240c810f"
+  IID_IExplorerBrowserEvents = LibC::GUID.new(0x361bbdc7_u32, 0xe6ee_u16, 0x4e13_u16, StaticArray[0xbe_u8, 0x58_u8, 0x58_u8, 0xe2_u8, 0x24_u8, 0xc_u8, 0x81_u8, 0xf_u8])
   struct IExplorerBrowserEvents
     lpVtbl : IExplorerBrowserEventsVTbl*
   end
@@ -7164,8 +7164,8 @@ lib LibWin32
     get_current_view : Proc(IExplorerBrowser*, Guid*, Void**, HRESULT)
   end
 
-  IExplorerBrowser_GUID = LibC::GUID.new("dfd3b6b5-c10c-4be9-85f6-a66969f402f6")
-  CLSID_IExplorerBrowser = "dfd3b6b5-c10c-4be9-85f6-a66969f402f6"
+  IExplorerBrowser_GUID = "dfd3b6b5-c10c-4be9-85f6-a66969f402f6"
+  IID_IExplorerBrowser = LibC::GUID.new(0xdfd3b6b5_u32, 0xc10c_u16, 0x4be9_u16, StaticArray[0x85_u8, 0xf6_u8, 0xa6_u8, 0x69_u8, 0x69_u8, 0xf4_u8, 0x2_u8, 0xf6_u8])
   struct IExplorerBrowser
     lpVtbl : IExplorerBrowserVTbl*
   end
@@ -7180,8 +7180,8 @@ lib LibWin32
     clone : Proc(IEnumObjects*, IEnumObjects*, HRESULT)
   end
 
-  IEnumObjects_GUID = LibC::GUID.new("2c1c7e2e-2d0e-4059-831e-1e6f82335c2e")
-  CLSID_IEnumObjects = "2c1c7e2e-2d0e-4059-831e-1e6f82335c2e"
+  IEnumObjects_GUID = "2c1c7e2e-2d0e-4059-831e-1e6f82335c2e"
+  IID_IEnumObjects = LibC::GUID.new(0x2c1c7e2e_u32, 0x2d0e_u16, 0x4059_u16, StaticArray[0x83_u8, 0x1e_u8, 0x1e_u8, 0x6f_u8, 0x82_u8, 0x33_u8, 0x5c_u8, 0x2e_u8])
   struct IEnumObjects
     lpVtbl : IEnumObjectsVTbl*
   end
@@ -7203,8 +7203,8 @@ lib LibWin32
     get_operation_status : Proc(IOperationsProgressDialog*, PDOPSTATUS*, HRESULT)
   end
 
-  IOperationsProgressDialog_GUID = LibC::GUID.new("0c9fb851-e5c9-43eb-a370-f0677b13874c")
-  CLSID_IOperationsProgressDialog = "0c9fb851-e5c9-43eb-a370-f0677b13874c"
+  IOperationsProgressDialog_GUID = "0c9fb851-e5c9-43eb-a370-f0677b13874c"
+  IID_IOperationsProgressDialog = LibC::GUID.new(0xc9fb851_u32, 0xe5c9_u16, 0x43eb_u16, StaticArray[0xa3_u8, 0x70_u8, 0xf0_u8, 0x67_u8, 0x7b_u8, 0x13_u8, 0x87_u8, 0x4c_u8])
   struct IOperationsProgressDialog
     lpVtbl : IOperationsProgressDialogVTbl*
   end
@@ -7217,8 +7217,8 @@ lib LibWin32
     get_cancel_information : Proc(IIOCancelInformation*, UInt32*, UInt32*, HRESULT)
   end
 
-  IIOCancelInformation_GUID = LibC::GUID.new("f5b0bf81-8cb5-4b1b-9449-1a159e0c733c")
-  CLSID_IIOCancelInformation = "f5b0bf81-8cb5-4b1b-9449-1a159e0c733c"
+  IIOCancelInformation_GUID = "f5b0bf81-8cb5-4b1b-9449-1a159e0c733c"
+  IID_IIOCancelInformation = LibC::GUID.new(0xf5b0bf81_u32, 0x8cb5_u16, 0x4b1b_u16, StaticArray[0x94_u8, 0x49_u8, 0x1a_u8, 0x15_u8, 0x9e_u8, 0xc_u8, 0x73_u8, 0x3c_u8])
   struct IIOCancelInformation
     lpVtbl : IIOCancelInformationVTbl*
   end
@@ -7249,8 +7249,8 @@ lib LibWin32
     get_any_operations_aborted : Proc(IFileOperation*, LibC::BOOL*, HRESULT)
   end
 
-  IFileOperation_GUID = LibC::GUID.new("947aab5f-0a5c-4c13-b4d6-4bf7836fc9f8")
-  CLSID_IFileOperation = "947aab5f-0a5c-4c13-b4d6-4bf7836fc9f8"
+  IFileOperation_GUID = "947aab5f-0a5c-4c13-b4d6-4bf7836fc9f8"
+  IID_IFileOperation = LibC::GUID.new(0x947aab5f_u32, 0xa5c_u16, 0x4c13_u16, StaticArray[0xb4_u8, 0xd6_u8, 0x4b_u8, 0xf7_u8, 0x83_u8, 0x6f_u8, 0xc9_u8, 0xf8_u8])
   struct IFileOperation
     lpVtbl : IFileOperationVTbl*
   end
@@ -7282,8 +7282,8 @@ lib LibWin32
     set_operation_flags2 : Proc(IFileOperation2*, FILE_OPERATION_FLAGS2, HRESULT)
   end
 
-  IFileOperation2_GUID = LibC::GUID.new("cd8f23c1-8f61-4916-909d-55bdd0918753")
-  CLSID_IFileOperation2 = "cd8f23c1-8f61-4916-909d-55bdd0918753"
+  IFileOperation2_GUID = "cd8f23c1-8f61-4916-909d-55bdd0918753"
+  IID_IFileOperation2 = LibC::GUID.new(0xcd8f23c1_u32, 0x8f61_u16, 0x4916_u16, StaticArray[0x90_u8, 0x9d_u8, 0x55_u8, 0xbd_u8, 0xd0_u8, 0x91_u8, 0x87_u8, 0x53_u8])
   struct IFileOperation2
     lpVtbl : IFileOperation2VTbl*
   end
@@ -7295,8 +7295,8 @@ lib LibWin32
     query_object : Proc(IObjectProvider*, Guid*, Guid*, Void**, HRESULT)
   end
 
-  IObjectProvider_GUID = LibC::GUID.new("a6087428-3be3-4d73-b308-7c04a540bf1a")
-  CLSID_IObjectProvider = "a6087428-3be3-4d73-b308-7c04a540bf1a"
+  IObjectProvider_GUID = "a6087428-3be3-4d73-b308-7c04a540bf1a"
+  IID_IObjectProvider = LibC::GUID.new(0xa6087428_u32, 0x3be3_u16, 0x4d73_u16, StaticArray[0xb3_u8, 0x8_u8, 0x7c_u8, 0x4_u8, 0xa5_u8, 0x40_u8, 0xbf_u8, 0x1a_u8])
   struct IObjectProvider
     lpVtbl : IObjectProviderVTbl*
   end
@@ -7311,8 +7311,8 @@ lib LibWin32
     initialize_progress_dialog : Proc(INamespaceWalkCB*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
   end
 
-  INamespaceWalkCB_GUID = LibC::GUID.new("d92995f8-cf5e-4a76-bf59-ead39ea2b97e")
-  CLSID_INamespaceWalkCB = "d92995f8-cf5e-4a76-bf59-ead39ea2b97e"
+  INamespaceWalkCB_GUID = "d92995f8-cf5e-4a76-bf59-ead39ea2b97e"
+  IID_INamespaceWalkCB = LibC::GUID.new(0xd92995f8_u32, 0xcf5e_u16, 0x4a76_u16, StaticArray[0xbf_u8, 0x59_u8, 0xea_u8, 0xd3_u8, 0x9e_u8, 0xa2_u8, 0xb9_u8, 0x7e_u8])
   struct INamespaceWalkCB
     lpVtbl : INamespaceWalkCBVTbl*
   end
@@ -7328,8 +7328,8 @@ lib LibWin32
     walk_complete : Proc(INamespaceWalkCB2*, HRESULT, HRESULT)
   end
 
-  INamespaceWalkCB2_GUID = LibC::GUID.new("7ac7492b-c38e-438a-87db-68737844ff70")
-  CLSID_INamespaceWalkCB2 = "7ac7492b-c38e-438a-87db-68737844ff70"
+  INamespaceWalkCB2_GUID = "7ac7492b-c38e-438a-87db-68737844ff70"
+  IID_INamespaceWalkCB2 = LibC::GUID.new(0x7ac7492b_u32, 0xc38e_u16, 0x438a_u16, StaticArray[0x87_u8, 0xdb_u8, 0x68_u8, 0x73_u8, 0x78_u8, 0x44_u8, 0xff_u8, 0x70_u8])
   struct INamespaceWalkCB2
     lpVtbl : INamespaceWalkCB2VTbl*
   end
@@ -7342,8 +7342,8 @@ lib LibWin32
     get_id_array_result : Proc(INamespaceWalk*, UInt32*, ITEMIDLIST***, HRESULT)
   end
 
-  INamespaceWalk_GUID = LibC::GUID.new("57ced8a7-3f4a-432c-9350-30f24483f74f")
-  CLSID_INamespaceWalk = "57ced8a7-3f4a-432c-9350-30f24483f74f"
+  INamespaceWalk_GUID = "57ced8a7-3f4a-432c-9350-30f24483f74f"
+  IID_INamespaceWalk = LibC::GUID.new(0x57ced8a7_u32, 0x3f4a_u16, 0x432c_u16, StaticArray[0x93_u8, 0x50_u8, 0x30_u8, 0xf2_u8, 0x44_u8, 0x83_u8, 0xf7_u8, 0x4f_u8])
   struct INamespaceWalk
     lpVtbl : INamespaceWalkVTbl*
   end
@@ -7362,8 +7362,8 @@ lib LibWin32
     get_band_site_info : Proc(IBandSite*, BANDSITEINFO*, HRESULT)
   end
 
-  IBandSite_GUID = LibC::GUID.new("4cf504b0-de96-11d0-8b3f-00a0c911e8e5")
-  CLSID_IBandSite = "4cf504b0-de96-11d0-8b3f-00a0c911e8e5"
+  IBandSite_GUID = "4cf504b0-de96-11d0-8b3f-00a0c911e8e5"
+  IID_IBandSite = LibC::GUID.new(0x4cf504b0_u32, 0xde96_u16, 0x11d0_u16, StaticArray[0x8b_u8, 0x3f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xe8_u8, 0xe5_u8])
   struct IBandSite
     lpVtbl : IBandSiteVTbl*
   end
@@ -7375,8 +7375,8 @@ lib LibWin32
     show : Proc(IModalWindow*, LibC::HANDLE, HRESULT)
   end
 
-  IModalWindow_GUID = LibC::GUID.new("b4db1657-70d7-485e-8e3e-6fcb5a5c1802")
-  CLSID_IModalWindow = "b4db1657-70d7-485e-8e3e-6fcb5a5c1802"
+  IModalWindow_GUID = "b4db1657-70d7-485e-8e3e-6fcb5a5c1802"
+  IID_IModalWindow = LibC::GUID.new(0xb4db1657_u32, 0x70d7_u16, 0x485e_u16, StaticArray[0x8e_u8, 0x3e_u8, 0x6f_u8, 0xcb_u8, 0x5a_u8, 0x5c_u8, 0x18_u8, 0x2_u8])
   struct IModalWindow
     lpVtbl : IModalWindowVTbl*
   end
@@ -7388,8 +7388,8 @@ lib LibWin32
     do_context_menu_popup : Proc(IContextMenuSite*, IUnknown, UInt32, POINT, HRESULT)
   end
 
-  IContextMenuSite_GUID = LibC::GUID.new("0811aebe-0b87-4c54-9e72-548cf649016b")
-  CLSID_IContextMenuSite = "0811aebe-0b87-4c54-9e72-548cf649016b"
+  IContextMenuSite_GUID = "0811aebe-0b87-4c54-9e72-548cf649016b"
+  IID_IContextMenuSite = LibC::GUID.new(0x811aebe_u32, 0xb87_u16, 0x4c54_u16, StaticArray[0x9e_u8, 0x72_u8, 0x54_u8, 0x8c_u8, 0xf6_u8, 0x49_u8, 0x1_u8, 0x6b_u8])
   struct IContextMenuSite
     lpVtbl : IContextMenuSiteVTbl*
   end
@@ -7402,8 +7402,8 @@ lib LibWin32
     translate_menu_message : Proc(IMenuBand*, MSG*, LRESULT*, HRESULT)
   end
 
-  IMenuBand_GUID = LibC::GUID.new("568804cd-cbd7-11d0-9816-00c04fd91972")
-  CLSID_IMenuBand = "568804cd-cbd7-11d0-9816-00c04fd91972"
+  IMenuBand_GUID = "568804cd-cbd7-11d0-9816-00c04fd91972"
+  IID_IMenuBand = LibC::GUID.new(0x568804cd_u32, 0xcbd7_u16, 0x11d0_u16, StaticArray[0x98_u8, 0x16_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x19_u8, 0x72_u8])
   struct IMenuBand
     lpVtbl : IMenuBandVTbl*
   end
@@ -7416,8 +7416,8 @@ lib LibWin32
     set_check_state : Proc(IRegTreeItem*, LibC::BOOL, HRESULT)
   end
 
-  IRegTreeItem_GUID = LibC::GUID.new("a9521922-0812-4d44-9ec3-7fd38c726f3d")
-  CLSID_IRegTreeItem = "a9521922-0812-4d44-9ec3-7fd38c726f3d"
+  IRegTreeItem_GUID = "a9521922-0812-4d44-9ec3-7fd38c726f3d"
+  IID_IRegTreeItem = LibC::GUID.new(0xa9521922_u32, 0x812_u16, 0x4d44_u16, StaticArray[0x9e_u8, 0xc3_u8, 0x7f_u8, 0xd3_u8, 0x8c_u8, 0x72_u8, 0x6f_u8, 0x3d_u8])
   struct IRegTreeItem
     lpVtbl : IRegTreeItemVTbl*
   end
@@ -7433,8 +7433,8 @@ lib LibWin32
     on_pos_rect_change_db : Proc(IDeskBar*, RECT*, HRESULT)
   end
 
-  IDeskBar_GUID = LibC::GUID.new("eb0fe173-1a3a-11d0-89b3-00a0c90a90ac")
-  CLSID_IDeskBar = "eb0fe173-1a3a-11d0-89b3-00a0c90a90ac"
+  IDeskBar_GUID = "eb0fe173-1a3a-11d0-89b3-00a0c90a90ac"
+  IID_IDeskBar = LibC::GUID.new(0xeb0fe173_u32, 0x1a3a_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xb3_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x90_u8, 0xac_u8])
   struct IDeskBar
     lpVtbl : IDeskBarVTbl*
   end
@@ -7453,8 +7453,8 @@ lib LibWin32
     set_sub_menu : Proc(IMenuPopup*, IMenuPopup, LibC::BOOL, HRESULT)
   end
 
-  IMenuPopup_GUID = LibC::GUID.new("d1e7afeb-6a2e-11d0-8c78-00c04fd918b4")
-  CLSID_IMenuPopup = "d1e7afeb-6a2e-11d0-8c78-00c04fd918b4"
+  IMenuPopup_GUID = "d1e7afeb-6a2e-11d0-8c78-00c04fd918b4"
+  IID_IMenuPopup = LibC::GUID.new(0xd1e7afeb_u32, 0x6a2e_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x78_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xb4_u8])
   struct IMenuPopup
     lpVtbl : IMenuPopupVTbl*
   end
@@ -7470,8 +7470,8 @@ lib LibWin32
     close_file : Proc(IFileIsInUse*, HRESULT)
   end
 
-  IFileIsInUse_GUID = LibC::GUID.new("64a1cbf0-3a1a-4461-9158-376969693950")
-  CLSID_IFileIsInUse = "64a1cbf0-3a1a-4461-9158-376969693950"
+  IFileIsInUse_GUID = "64a1cbf0-3a1a-4461-9158-376969693950"
+  IID_IFileIsInUse = LibC::GUID.new(0x64a1cbf0_u32, 0x3a1a_u16, 0x4461_u16, StaticArray[0x91_u8, 0x58_u8, 0x37_u8, 0x69_u8, 0x69_u8, 0x69_u8, 0x39_u8, 0x50_u8])
   struct IFileIsInUse
     lpVtbl : IFileIsInUseVTbl*
   end
@@ -7489,8 +7489,8 @@ lib LibWin32
     on_overwrite : Proc(IFileDialogEvents*, IFileDialog, IShellItem, FDE_OVERWRITE_RESPONSE*, HRESULT)
   end
 
-  IFileDialogEvents_GUID = LibC::GUID.new("973510db-7d7f-452b-8975-74a85828d354")
-  CLSID_IFileDialogEvents = "973510db-7d7f-452b-8975-74a85828d354"
+  IFileDialogEvents_GUID = "973510db-7d7f-452b-8975-74a85828d354"
+  IID_IFileDialogEvents = LibC::GUID.new(0x973510db_u32, 0x7d7f_u16, 0x452b_u16, StaticArray[0x89_u8, 0x75_u8, 0x74_u8, 0xa8_u8, 0x58_u8, 0x28_u8, 0xd3_u8, 0x54_u8])
   struct IFileDialogEvents
     lpVtbl : IFileDialogEventsVTbl*
   end
@@ -7525,8 +7525,8 @@ lib LibWin32
     set_filter : Proc(IFileDialog*, IShellItemFilter, HRESULT)
   end
 
-  IFileDialog_GUID = LibC::GUID.new("42f85136-db7e-439c-85f1-e4075d135fc8")
-  CLSID_IFileDialog = "42f85136-db7e-439c-85f1-e4075d135fc8"
+  IFileDialog_GUID = "42f85136-db7e-439c-85f1-e4075d135fc8"
+  IID_IFileDialog = LibC::GUID.new(0x42f85136_u32, 0xdb7e_u16, 0x439c_u16, StaticArray[0x85_u8, 0xf1_u8, 0xe4_u8, 0x7_u8, 0x5d_u8, 0x13_u8, 0x5f_u8, 0xc8_u8])
   struct IFileDialog
     lpVtbl : IFileDialogVTbl*
   end
@@ -7566,8 +7566,8 @@ lib LibWin32
     apply_properties : Proc(IFileSaveDialog*, IShellItem, IPropertyStore, LibC::HANDLE, IFileOperationProgressSink, HRESULT)
   end
 
-  IFileSaveDialog_GUID = LibC::GUID.new("84bccd23-5fde-4cdb-aea4-af64b83d78ab")
-  CLSID_IFileSaveDialog = "84bccd23-5fde-4cdb-aea4-af64b83d78ab"
+  IFileSaveDialog_GUID = "84bccd23-5fde-4cdb-aea4-af64b83d78ab"
+  IID_IFileSaveDialog = LibC::GUID.new(0x84bccd23_u32, 0x5fde_u16, 0x4cdb_u16, StaticArray[0xae_u8, 0xa4_u8, 0xaf_u8, 0x64_u8, 0xb8_u8, 0x3d_u8, 0x78_u8, 0xab_u8])
   struct IFileSaveDialog
     lpVtbl : IFileSaveDialogVTbl*
   end
@@ -7604,8 +7604,8 @@ lib LibWin32
     get_selected_items : Proc(IFileOpenDialog*, IShellItemArray*, HRESULT)
   end
 
-  IFileOpenDialog_GUID = LibC::GUID.new("d57c7288-d4ad-4768-be02-9d969532d960")
-  CLSID_IFileOpenDialog = "d57c7288-d4ad-4768-be02-9d969532d960"
+  IFileOpenDialog_GUID = "d57c7288-d4ad-4768-be02-9d969532d960"
+  IID_IFileOpenDialog = LibC::GUID.new(0xd57c7288_u32, 0xd4ad_u16, 0x4768_u16, StaticArray[0xbe_u8, 0x2_u8, 0x9d_u8, 0x96_u8, 0x95_u8, 0x32_u8, 0xd9_u8, 0x60_u8])
   struct IFileOpenDialog
     lpVtbl : IFileOpenDialogVTbl*
   end
@@ -7643,8 +7643,8 @@ lib LibWin32
     set_control_item_text : Proc(IFileDialogCustomize*, UInt32, UInt32, LibC::LPWSTR, HRESULT)
   end
 
-  IFileDialogCustomize_GUID = LibC::GUID.new("e6fdd21a-163f-4975-9c8c-a69f1ba37034")
-  CLSID_IFileDialogCustomize = "e6fdd21a-163f-4975-9c8c-a69f1ba37034"
+  IFileDialogCustomize_GUID = "e6fdd21a-163f-4975-9c8c-a69f1ba37034"
+  IID_IFileDialogCustomize = LibC::GUID.new(0xe6fdd21a_u32, 0x163f_u16, 0x4975_u16, StaticArray[0x9c_u8, 0x8c_u8, 0xa6_u8, 0x9f_u8, 0x1b_u8, 0xa3_u8, 0x70_u8, 0x34_u8])
   struct IFileDialogCustomize
     lpVtbl : IFileDialogCustomizeVTbl*
   end
@@ -7661,8 +7661,8 @@ lib LibWin32
     clear_user_associations : Proc(IApplicationAssociationRegistration*, HRESULT)
   end
 
-  IApplicationAssociationRegistration_GUID = LibC::GUID.new("4e530b0a-e611-4c77-a3ac-9031d022281b")
-  CLSID_IApplicationAssociationRegistration = "4e530b0a-e611-4c77-a3ac-9031d022281b"
+  IApplicationAssociationRegistration_GUID = "4e530b0a-e611-4c77-a3ac-9031d022281b"
+  IID_IApplicationAssociationRegistration = LibC::GUID.new(0x4e530b0a_u32, 0xe611_u16, 0x4c77_u16, StaticArray[0xa3_u8, 0xac_u8, 0x90_u8, 0x31_u8, 0xd0_u8, 0x22_u8, 0x28_u8, 0x1b_u8])
   struct IApplicationAssociationRegistration
     lpVtbl : IApplicationAssociationRegistrationVTbl*
   end
@@ -7674,8 +7674,8 @@ lib LibWin32
     set_item_alloc : Proc(IDelegateFolder*, IMalloc, HRESULT)
   end
 
-  IDelegateFolder_GUID = LibC::GUID.new("add8ba80-002b-11d0-8f0f-00c04fd7d062")
-  CLSID_IDelegateFolder = "add8ba80-002b-11d0-8f0f-00c04fd7d062"
+  IDelegateFolder_GUID = "add8ba80-002b-11d0-8f0f-00c04fd7d062"
+  IID_IDelegateFolder = LibC::GUID.new(0xadd8ba80_u32, 0x2b_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xd0_u8, 0x62_u8])
   struct IDelegateFolder
     lpVtbl : IDelegateFolderVTbl*
   end
@@ -7687,8 +7687,8 @@ lib LibWin32
     get_frame_options : Proc(IBrowserFrameOptions*, UInt32, UInt32*, HRESULT)
   end
 
-  IBrowserFrameOptions_GUID = LibC::GUID.new("10df43c8-1dbe-11d3-8b34-006097df5bd4")
-  CLSID_IBrowserFrameOptions = "10df43c8-1dbe-11d3-8b34-006097df5bd4"
+  IBrowserFrameOptions_GUID = "10df43c8-1dbe-11d3-8b34-006097df5bd4"
+  IID_IBrowserFrameOptions = LibC::GUID.new(0x10df43c8_u32, 0x1dbe_u16, 0x11d3_u16, StaticArray[0x8b_u8, 0x34_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xdf_u8, 0x5b_u8, 0xd4_u8])
   struct IBrowserFrameOptions
     lpVtbl : IBrowserFrameOptionsVTbl*
   end
@@ -7700,8 +7700,8 @@ lib LibWin32
     evaluate_new_window : Proc(INewWindowManager*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, UInt32, UInt32, HRESULT)
   end
 
-  INewWindowManager_GUID = LibC::GUID.new("d2bc4c84-3f72-4a52-a604-7bcbf3982cbb")
-  CLSID_INewWindowManager = "d2bc4c84-3f72-4a52-a604-7bcbf3982cbb"
+  INewWindowManager_GUID = "d2bc4c84-3f72-4a52-a604-7bcbf3982cbb"
+  IID_INewWindowManager = LibC::GUID.new(0xd2bc4c84_u32, 0x3f72_u16, 0x4a52_u16, StaticArray[0xa6_u8, 0x4_u8, 0x7b_u8, 0xcb_u8, 0xf3_u8, 0x98_u8, 0x2c_u8, 0xbb_u8])
   struct INewWindowManager
     lpVtbl : INewWindowManagerVTbl*
   end
@@ -7724,8 +7724,8 @@ lib LibWin32
     clear_client_state : Proc(IAttachmentExecute*, HRESULT)
   end
 
-  IAttachmentExecute_GUID = LibC::GUID.new("73db1241-1e85-4581-8e4f-a81e1d0f8c57")
-  CLSID_IAttachmentExecute = "73db1241-1e85-4581-8e4f-a81e1d0f8c57"
+  IAttachmentExecute_GUID = "73db1241-1e85-4581-8e4f-a81e1d0f8c57"
+  IID_IAttachmentExecute = LibC::GUID.new(0x73db1241_u32, 0x1e85_u16, 0x4581_u16, StaticArray[0x8e_u8, 0x4f_u8, 0xa8_u8, 0x1e_u8, 0x1d_u8, 0xf_u8, 0x8c_u8, 0x57_u8])
   struct IAttachmentExecute
     lpVtbl : IAttachmentExecuteVTbl*
   end
@@ -7737,8 +7737,8 @@ lib LibWin32
     callback_sm : Proc(IShellMenuCallback*, SMDATA*, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
   end
 
-  IShellMenuCallback_GUID = LibC::GUID.new("4ca300a1-9b8d-11d1-8b22-00c04fd918d0")
-  CLSID_IShellMenuCallback = "4ca300a1-9b8d-11d1-8b22-00c04fd918d0"
+  IShellMenuCallback_GUID = "4ca300a1-9b8d-11d1-8b22-00c04fd918d0"
+  IID_IShellMenuCallback = LibC::GUID.new(0x4ca300a1_u32, 0x9b8d_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x22_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
   struct IShellMenuCallback
     lpVtbl : IShellMenuCallbackVTbl*
   end
@@ -7758,8 +7758,8 @@ lib LibWin32
     set_menu_toolbar : Proc(IShellMenu*, IUnknown, UInt32, HRESULT)
   end
 
-  IShellMenu_GUID = LibC::GUID.new("ee1f7637-e138-11d1-8379-00c04fd918d0")
-  CLSID_IShellMenu = "ee1f7637-e138-11d1-8379-00c04fd918d0"
+  IShellMenu_GUID = "ee1f7637-e138-11d1-8379-00c04fd918d0"
+  IID_IShellMenu = LibC::GUID.new(0xee1f7637_u32, 0xe138_u16, 0x11d1_u16, StaticArray[0x83_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
   struct IShellMenu
     lpVtbl : IShellMenuVTbl*
   end
@@ -7779,8 +7779,8 @@ lib LibWin32
     get_folder_definition : Proc(IKnownFolder*, KNOWNFOLDER_DEFINITION*, HRESULT)
   end
 
-  IKnownFolder_GUID = LibC::GUID.new("3aa7af7e-9b36-420c-a8e3-f77d4674a488")
-  CLSID_IKnownFolder = "3aa7af7e-9b36-420c-a8e3-f77d4674a488"
+  IKnownFolder_GUID = "3aa7af7e-9b36-420c-a8e3-f77d4674a488"
+  IID_IKnownFolder = LibC::GUID.new(0x3aa7af7e_u32, 0x9b36_u16, 0x420c_u16, StaticArray[0xa8_u8, 0xe3_u8, 0xf7_u8, 0x7d_u8, 0x46_u8, 0x74_u8, 0xa4_u8, 0x88_u8])
   struct IKnownFolder
     lpVtbl : IKnownFolderVTbl*
   end
@@ -7801,8 +7801,8 @@ lib LibWin32
     redirect : Proc(IKnownFolderManager*, Guid*, LibC::HANDLE, UInt32, LibC::LPWSTR, UInt32, Guid*, LibC::LPWSTR*, HRESULT)
   end
 
-  IKnownFolderManager_GUID = LibC::GUID.new("8be2d872-86aa-4d47-b776-32cca40c7018")
-  CLSID_IKnownFolderManager = "8be2d872-86aa-4d47-b776-32cca40c7018"
+  IKnownFolderManager_GUID = "8be2d872-86aa-4d47-b776-32cca40c7018"
+  IID_IKnownFolderManager = LibC::GUID.new(0x8be2d872_u32, 0x86aa_u16, 0x4d47_u16, StaticArray[0xb7_u8, 0x76_u8, 0x32_u8, 0xcc_u8, 0xa4_u8, 0xc_u8, 0x70_u8, 0x18_u8])
   struct IKnownFolderManager
     lpVtbl : IKnownFolderManagerVTbl*
   end
@@ -7820,8 +7820,8 @@ lib LibWin32
     are_printers_shared : Proc(ISharingConfigurationManager*, HRESULT)
   end
 
-  ISharingConfigurationManager_GUID = LibC::GUID.new("b4cd448a-9c86-4466-9201-2e62105b87ae")
-  CLSID_ISharingConfigurationManager = "b4cd448a-9c86-4466-9201-2e62105b87ae"
+  ISharingConfigurationManager_GUID = "b4cd448a-9c86-4466-9201-2e62105b87ae"
+  IID_ISharingConfigurationManager = LibC::GUID.new(0xb4cd448a_u32, 0x9c86_u16, 0x4466_u16, StaticArray[0x92_u8, 0x1_u8, 0x2e_u8, 0x62_u8, 0x10_u8, 0x5b_u8, 0x87_u8, 0xae_u8])
   struct ISharingConfigurationManager
     lpVtbl : ISharingConfigurationManagerVTbl*
   end
@@ -7834,8 +7834,8 @@ lib LibWin32
     get_item : Proc(IRelatedItem*, IShellItem*, HRESULT)
   end
 
-  IRelatedItem_GUID = LibC::GUID.new("a73ce67a-8ab1-44f1-8d43-d2fcbf6b1cd0")
-  CLSID_IRelatedItem = "a73ce67a-8ab1-44f1-8d43-d2fcbf6b1cd0"
+  IRelatedItem_GUID = "a73ce67a-8ab1-44f1-8d43-d2fcbf6b1cd0"
+  IID_IRelatedItem = LibC::GUID.new(0xa73ce67a_u32, 0x8ab1_u16, 0x44f1_u16, StaticArray[0x8d_u8, 0x43_u8, 0xd2_u8, 0xfc_u8, 0xbf_u8, 0x6b_u8, 0x1c_u8, 0xd0_u8])
   struct IRelatedItem
     lpVtbl : IRelatedItemVTbl*
   end
@@ -7848,8 +7848,8 @@ lib LibWin32
     get_item : Proc(IIdentityName*, IShellItem*, HRESULT)
   end
 
-  IIdentityName_GUID = LibC::GUID.new("7d903fca-d6f9-4810-8332-946c0177e247")
-  CLSID_IIdentityName = "7d903fca-d6f9-4810-8332-946c0177e247"
+  IIdentityName_GUID = "7d903fca-d6f9-4810-8332-946c0177e247"
+  IID_IIdentityName = LibC::GUID.new(0x7d903fca_u32, 0xd6f9_u16, 0x4810_u16, StaticArray[0x83_u8, 0x32_u8, 0x94_u8, 0x6c_u8, 0x1_u8, 0x77_u8, 0xe2_u8, 0x47_u8])
   struct IIdentityName
     lpVtbl : IIdentityNameVTbl*
   end
@@ -7862,8 +7862,8 @@ lib LibWin32
     get_item : Proc(IDelegateItem*, IShellItem*, HRESULT)
   end
 
-  IDelegateItem_GUID = LibC::GUID.new("3c5a1c94-c951-4cb7-bb6d-3b93f30cce93")
-  CLSID_IDelegateItem = "3c5a1c94-c951-4cb7-bb6d-3b93f30cce93"
+  IDelegateItem_GUID = "3c5a1c94-c951-4cb7-bb6d-3b93f30cce93"
+  IID_IDelegateItem = LibC::GUID.new(0x3c5a1c94_u32, 0xc951_u16, 0x4cb7_u16, StaticArray[0xbb_u8, 0x6d_u8, 0x3b_u8, 0x93_u8, 0xf3_u8, 0xc_u8, 0xce_u8, 0x93_u8])
   struct IDelegateItem
     lpVtbl : IDelegateItemVTbl*
   end
@@ -7876,8 +7876,8 @@ lib LibWin32
     get_item : Proc(ICurrentItem*, IShellItem*, HRESULT)
   end
 
-  ICurrentItem_GUID = LibC::GUID.new("240a7174-d653-4a1d-a6d3-d4943cfbfe3d")
-  CLSID_ICurrentItem = "240a7174-d653-4a1d-a6d3-d4943cfbfe3d"
+  ICurrentItem_GUID = "240a7174-d653-4a1d-a6d3-d4943cfbfe3d"
+  IID_ICurrentItem = LibC::GUID.new(0x240a7174_u32, 0xd653_u16, 0x4a1d_u16, StaticArray[0xa6_u8, 0xd3_u8, 0xd4_u8, 0x94_u8, 0x3c_u8, 0xfb_u8, 0xfe_u8, 0x3d_u8])
   struct ICurrentItem
     lpVtbl : ICurrentItemVTbl*
   end
@@ -7890,8 +7890,8 @@ lib LibWin32
     get_item : Proc(ITransferMediumItem*, IShellItem*, HRESULT)
   end
 
-  ITransferMediumItem_GUID = LibC::GUID.new("77f295d5-2d6f-4e19-b8ae-322f3e721ab5")
-  CLSID_ITransferMediumItem = "77f295d5-2d6f-4e19-b8ae-322f3e721ab5"
+  ITransferMediumItem_GUID = "77f295d5-2d6f-4e19-b8ae-322f3e721ab5"
+  IID_ITransferMediumItem = LibC::GUID.new(0x77f295d5_u32, 0x2d6f_u16, 0x4e19_u16, StaticArray[0xb8_u8, 0xae_u8, 0x32_u8, 0x2f_u8, 0x3e_u8, 0x72_u8, 0x1a_u8, 0xb5_u8])
   struct ITransferMediumItem
     lpVtbl : ITransferMediumItemVTbl*
   end
@@ -7904,8 +7904,8 @@ lib LibWin32
     get_item : Proc(IDisplayItem*, IShellItem*, HRESULT)
   end
 
-  IDisplayItem_GUID = LibC::GUID.new("c6fd5997-9f6b-4888-8703-94e80e8cde3f")
-  CLSID_IDisplayItem = "c6fd5997-9f6b-4888-8703-94e80e8cde3f"
+  IDisplayItem_GUID = "c6fd5997-9f6b-4888-8703-94e80e8cde3f"
+  IID_IDisplayItem = LibC::GUID.new(0xc6fd5997_u32, 0x9f6b_u16, 0x4888_u16, StaticArray[0x87_u8, 0x3_u8, 0x94_u8, 0xe8_u8, 0xe_u8, 0x8c_u8, 0xde_u8, 0x3f_u8])
   struct IDisplayItem
     lpVtbl : IDisplayItemVTbl*
   end
@@ -7918,8 +7918,8 @@ lib LibWin32
     get_item : Proc(IViewStateIdentityItem*, IShellItem*, HRESULT)
   end
 
-  IViewStateIdentityItem_GUID = LibC::GUID.new("9d264146-a94f-4195-9f9f-3bb12ce0c955")
-  CLSID_IViewStateIdentityItem = "9d264146-a94f-4195-9f9f-3bb12ce0c955"
+  IViewStateIdentityItem_GUID = "9d264146-a94f-4195-9f9f-3bb12ce0c955"
+  IID_IViewStateIdentityItem = LibC::GUID.new(0x9d264146_u32, 0xa94f_u16, 0x4195_u16, StaticArray[0x9f_u8, 0x9f_u8, 0x3b_u8, 0xb1_u8, 0x2c_u8, 0xe0_u8, 0xc9_u8, 0x55_u8])
   struct IViewStateIdentityItem
     lpVtbl : IViewStateIdentityItemVTbl*
   end
@@ -7932,8 +7932,8 @@ lib LibWin32
     get_item : Proc(IPreviewItem*, IShellItem*, HRESULT)
   end
 
-  IPreviewItem_GUID = LibC::GUID.new("36149969-0a8f-49c8-8b00-4aecb20222fb")
-  CLSID_IPreviewItem = "36149969-0a8f-49c8-8b00-4aecb20222fb"
+  IPreviewItem_GUID = "36149969-0a8f-49c8-8b00-4aecb20222fb"
+  IID_IPreviewItem = LibC::GUID.new(0x36149969_u32, 0xa8f_u16, 0x49c8_u16, StaticArray[0x8b_u8, 0x0_u8, 0x4a_u8, 0xec_u8, 0xb2_u8, 0x2_u8, 0x22_u8, 0xfb_u8])
   struct IPreviewItem
     lpVtbl : IPreviewItemVTbl*
   end
@@ -7945,8 +7945,8 @@ lib LibWin32
     get_destination_stream : Proc(IDestinationStreamFactory*, IStream*, HRESULT)
   end
 
-  IDestinationStreamFactory_GUID = LibC::GUID.new("8a87781b-39a7-4a1f-aab3-a39b9c34a7d9")
-  CLSID_IDestinationStreamFactory = "8a87781b-39a7-4a1f-aab3-a39b9c34a7d9"
+  IDestinationStreamFactory_GUID = "8a87781b-39a7-4a1f-aab3-a39b9c34a7d9"
+  IID_IDestinationStreamFactory = LibC::GUID.new(0x8a87781b_u32, 0x39a7_u16, 0x4a1f_u16, StaticArray[0xaa_u8, 0xb3_u8, 0xa3_u8, 0x9b_u8, 0x9c_u8, 0x34_u8, 0xa7_u8, 0xd9_u8])
   struct IDestinationStreamFactory
     lpVtbl : IDestinationStreamFactoryVTbl*
   end
@@ -7964,8 +7964,8 @@ lib LibWin32
     set_environment_variable : Proc(ICreateProcessInputs*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  ICreateProcessInputs_GUID = LibC::GUID.new("f6ef6140-e26f-4d82-bac4-e9ba5fd239a8")
-  CLSID_ICreateProcessInputs = "f6ef6140-e26f-4d82-bac4-e9ba5fd239a8"
+  ICreateProcessInputs_GUID = "f6ef6140-e26f-4d82-bac4-e9ba5fd239a8"
+  IID_ICreateProcessInputs = LibC::GUID.new(0xf6ef6140_u32, 0xe26f_u16, 0x4d82_u16, StaticArray[0xba_u8, 0xc4_u8, 0xe9_u8, 0xba_u8, 0x5f_u8, 0xd2_u8, 0x39_u8, 0xa8_u8])
   struct ICreateProcessInputs
     lpVtbl : ICreateProcessInputsVTbl*
   end
@@ -7977,8 +7977,8 @@ lib LibWin32
     on_creating : Proc(ICreatingProcess*, ICreateProcessInputs, HRESULT)
   end
 
-  ICreatingProcess_GUID = LibC::GUID.new("c2b937a9-3110-4398-8a56-f34c6342d244")
-  CLSID_ICreatingProcess = "c2b937a9-3110-4398-8a56-f34c6342d244"
+  ICreatingProcess_GUID = "c2b937a9-3110-4398-8a56-f34c6342d244"
+  IID_ICreatingProcess = LibC::GUID.new(0xc2b937a9_u32, 0x3110_u16, 0x4398_u16, StaticArray[0x8a_u8, 0x56_u8, 0xf3_u8, 0x4c_u8, 0x63_u8, 0x42_u8, 0xd2_u8, 0x44_u8])
   struct ICreatingProcess
     lpVtbl : ICreatingProcessVTbl*
   end
@@ -7991,8 +7991,8 @@ lib LibWin32
     set_tab_grouping_preference : Proc(ILaunchUIContext*, UInt32, HRESULT)
   end
 
-  ILaunchUIContext_GUID = LibC::GUID.new("1791e8f6-21c7-4340-882a-a6a93e3fd73b")
-  CLSID_ILaunchUIContext = "1791e8f6-21c7-4340-882a-a6a93e3fd73b"
+  ILaunchUIContext_GUID = "1791e8f6-21c7-4340-882a-a6a93e3fd73b"
+  IID_ILaunchUIContext = LibC::GUID.new(0x1791e8f6_u32, 0x21c7_u16, 0x4340_u16, StaticArray[0x88_u8, 0x2a_u8, 0xa6_u8, 0xa9_u8, 0x3e_u8, 0x3f_u8, 0xd7_u8, 0x3b_u8])
   struct ILaunchUIContext
     lpVtbl : ILaunchUIContextVTbl*
   end
@@ -8004,8 +8004,8 @@ lib LibWin32
     update_context : Proc(ILaunchUIContextProvider*, ILaunchUIContext, HRESULT)
   end
 
-  ILaunchUIContextProvider_GUID = LibC::GUID.new("0d12c4c8-a3d9-4e24-94c1-0e20c5a956c4")
-  CLSID_ILaunchUIContextProvider = "0d12c4c8-a3d9-4e24-94c1-0e20c5a956c4"
+  ILaunchUIContextProvider_GUID = "0d12c4c8-a3d9-4e24-94c1-0e20c5a956c4"
+  IID_ILaunchUIContextProvider = LibC::GUID.new(0xd12c4c8_u32, 0xa3d9_u16, 0x4e24_u16, StaticArray[0x94_u8, 0xc1_u8, 0xe_u8, 0x20_u8, 0xc5_u8, 0xa9_u8, 0x56_u8, 0xc4_u8])
   struct ILaunchUIContextProvider
     lpVtbl : ILaunchUIContextProviderVTbl*
   end
@@ -8018,8 +8018,8 @@ lib LibWin32
     select_and_edit_item : Proc(INewMenuClient*, ITEMIDLIST*, Int32, HRESULT)
   end
 
-  INewMenuClient_GUID = LibC::GUID.new("dcb07fdc-3bb5-451c-90be-966644fed7b0")
-  CLSID_INewMenuClient = "dcb07fdc-3bb5-451c-90be-966644fed7b0"
+  INewMenuClient_GUID = "dcb07fdc-3bb5-451c-90be-966644fed7b0"
+  IID_INewMenuClient = LibC::GUID.new(0xdcb07fdc_u32, 0x3bb5_u16, 0x451c_u16, StaticArray[0x90_u8, 0xbe_u8, 0x96_u8, 0x66_u8, 0x44_u8, 0xfe_u8, 0xd7_u8, 0xb0_u8])
   struct INewMenuClient
     lpVtbl : INewMenuClientVTbl*
   end
@@ -8031,8 +8031,8 @@ lib LibWin32
     initialize : Proc(IInitializeWithBindCtx*, IBindCtx, HRESULT)
   end
 
-  IInitializeWithBindCtx_GUID = LibC::GUID.new("71c0d2bc-726d-45cc-a6c0-2e31c1db2159")
-  CLSID_IInitializeWithBindCtx = "71c0d2bc-726d-45cc-a6c0-2e31c1db2159"
+  IInitializeWithBindCtx_GUID = "71c0d2bc-726d-45cc-a6c0-2e31c1db2159"
+  IID_IInitializeWithBindCtx = LibC::GUID.new(0x71c0d2bc_u32, 0x726d_u16, 0x45cc_u16, StaticArray[0xa6_u8, 0xc0_u8, 0x2e_u8, 0x31_u8, 0xc1_u8, 0xdb_u8, 0x21_u8, 0x59_u8])
   struct IInitializeWithBindCtx
     lpVtbl : IInitializeWithBindCtxVTbl*
   end
@@ -8045,8 +8045,8 @@ lib LibWin32
     get_enum_flags_for_item : Proc(IShellItemFilter*, IShellItem, UInt32*, HRESULT)
   end
 
-  IShellItemFilter_GUID = LibC::GUID.new("2659b475-eeb8-48b7-8f07-b378810f48cf")
-  CLSID_IShellItemFilter = "2659b475-eeb8-48b7-8f07-b378810f48cf"
+  IShellItemFilter_GUID = "2659b475-eeb8-48b7-8f07-b378810f48cf"
+  IID_IShellItemFilter = LibC::GUID.new(0x2659b475_u32, 0xeeb8_u16, 0x48b7_u16, StaticArray[0x8f_u8, 0x7_u8, 0xb3_u8, 0x78_u8, 0x81_u8, 0xf_u8, 0x48_u8, 0xcf_u8])
   struct IShellItemFilter
     lpVtbl : IShellItemFilterVTbl*
   end
@@ -8076,8 +8076,8 @@ lib LibWin32
     collapse_all : Proc(INameSpaceTreeControl*, HRESULT)
   end
 
-  INameSpaceTreeControl_GUID = LibC::GUID.new("028212a3-b627-47e9-8856-c14265554e4f")
-  CLSID_INameSpaceTreeControl = "028212a3-b627-47e9-8856-c14265554e4f"
+  INameSpaceTreeControl_GUID = "028212a3-b627-47e9-8856-c14265554e4f"
+  IID_INameSpaceTreeControl = LibC::GUID.new(0x28212a3_u32, 0xb627_u16, 0x47e9_u16, StaticArray[0x88_u8, 0x56_u8, 0xc1_u8, 0x42_u8, 0x65_u8, 0x55_u8, 0x4e_u8, 0x4f_u8])
   struct INameSpaceTreeControl
     lpVtbl : INameSpaceTreeControlVTbl*
   end
@@ -8089,8 +8089,8 @@ lib LibWin32
     get_folder_capabilities : Proc(INameSpaceTreeControlFolderCapabilities*, NSTCFOLDERCAPABILITIES, NSTCFOLDERCAPABILITIES*, HRESULT)
   end
 
-  INameSpaceTreeControlFolderCapabilities_GUID = LibC::GUID.new("e9701183-e6b3-4ff2-8568-813615fec7be")
-  CLSID_INameSpaceTreeControlFolderCapabilities = "e9701183-e6b3-4ff2-8568-813615fec7be"
+  INameSpaceTreeControlFolderCapabilities_GUID = "e9701183-e6b3-4ff2-8568-813615fec7be"
+  IID_INameSpaceTreeControlFolderCapabilities = LibC::GUID.new(0xe9701183_u32, 0xe6b3_u16, 0x4ff2_u16, StaticArray[0x85_u8, 0x68_u8, 0x81_u8, 0x36_u8, 0x15_u8, 0xfe_u8, 0xc7_u8, 0xbe_u8])
   struct INameSpaceTreeControlFolderCapabilities
     lpVtbl : INameSpaceTreeControlFolderCapabilitiesVTbl*
   end
@@ -8108,8 +8108,8 @@ lib LibWin32
     translate_accelerator : Proc(IPreviewHandler*, MSG*, HRESULT)
   end
 
-  IPreviewHandler_GUID = LibC::GUID.new("8895b1c6-b41f-4c1c-a562-0d564250836f")
-  CLSID_IPreviewHandler = "8895b1c6-b41f-4c1c-a562-0d564250836f"
+  IPreviewHandler_GUID = "8895b1c6-b41f-4c1c-a562-0d564250836f"
+  IID_IPreviewHandler = LibC::GUID.new(0x8895b1c6_u32, 0xb41f_u16, 0x4c1c_u16, StaticArray[0xa5_u8, 0x62_u8, 0xd_u8, 0x56_u8, 0x42_u8, 0x50_u8, 0x83_u8, 0x6f_u8])
   struct IPreviewHandler
     lpVtbl : IPreviewHandlerVTbl*
   end
@@ -8122,8 +8122,8 @@ lib LibWin32
     translate_accelerator : Proc(IPreviewHandlerFrame*, MSG*, HRESULT)
   end
 
-  IPreviewHandlerFrame_GUID = LibC::GUID.new("fec87aaf-35f9-447a-adb7-20234491401a")
-  CLSID_IPreviewHandlerFrame = "fec87aaf-35f9-447a-adb7-20234491401a"
+  IPreviewHandlerFrame_GUID = "fec87aaf-35f9-447a-adb7-20234491401a"
+  IID_IPreviewHandlerFrame = LibC::GUID.new(0xfec87aaf_u32, 0x35f9_u16, 0x447a_u16, StaticArray[0xad_u8, 0xb7_u8, 0x20_u8, 0x23_u8, 0x44_u8, 0x91_u8, 0x40_u8, 0x1a_u8])
   struct IPreviewHandlerFrame
     lpVtbl : IPreviewHandlerFrameVTbl*
   end
@@ -8135,8 +8135,8 @@ lib LibWin32
     get_pane_state : Proc(IExplorerPaneVisibility*, Guid*, UInt32*, HRESULT)
   end
 
-  IExplorerPaneVisibility_GUID = LibC::GUID.new("e07010ec-bc17-44c0-97b0-46c7c95b9edc")
-  CLSID_IExplorerPaneVisibility = "e07010ec-bc17-44c0-97b0-46c7c95b9edc"
+  IExplorerPaneVisibility_GUID = "e07010ec-bc17-44c0-97b0-46c7c95b9edc"
+  IID_IExplorerPaneVisibility = LibC::GUID.new(0xe07010ec_u32, 0xbc17_u16, 0x44c0_u16, StaticArray[0x97_u8, 0xb0_u8, 0x46_u8, 0xc7_u8, 0xc9_u8, 0x5b_u8, 0x9e_u8, 0xdc_u8])
   struct IExplorerPaneVisibility
     lpVtbl : IExplorerPaneVisibilityVTbl*
   end
@@ -8148,8 +8148,8 @@ lib LibWin32
     call_back : Proc(IContextMenuCB*, IShellFolder, LibC::HANDLE, IDataObject, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
   end
 
-  IContextMenuCB_GUID = LibC::GUID.new("3409e930-5a39-11d1-83fa-00a0c90dc849")
-  CLSID_IContextMenuCB = "3409e930-5a39-11d1-83fa-00a0c90dc849"
+  IContextMenuCB_GUID = "3409e930-5a39-11d1-83fa-00a0c90dc849"
+  IID_IContextMenuCB = LibC::GUID.new(0x3409e930_u32, 0x5a39_u16, 0x11d1_u16, StaticArray[0x83_u8, 0xfa_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xc8_u8, 0x49_u8])
   struct IContextMenuCB
     lpVtbl : IContextMenuCBVTbl*
   end
@@ -8166,8 +8166,8 @@ lib LibWin32
     set_default_icon : Proc(IDefaultExtractIconInit*, LibC::LPWSTR, Int32, HRESULT)
   end
 
-  IDefaultExtractIconInit_GUID = LibC::GUID.new("41ded17d-d6b3-4261-997d-88c60e4b1d58")
-  CLSID_IDefaultExtractIconInit = "41ded17d-d6b3-4261-997d-88c60e4b1d58"
+  IDefaultExtractIconInit_GUID = "41ded17d-d6b3-4261-997d-88c60e4b1d58"
+  IID_IDefaultExtractIconInit = LibC::GUID.new(0x41ded17d_u32, 0xd6b3_u16, 0x4261_u16, StaticArray[0x99_u8, 0x7d_u8, 0x88_u8, 0xc6_u8, 0xe_u8, 0x4b_u8, 0x1d_u8, 0x58_u8])
   struct IDefaultExtractIconInit
     lpVtbl : IDefaultExtractIconInitVTbl*
   end
@@ -8186,8 +8186,8 @@ lib LibWin32
     enum_sub_commands : Proc(IExplorerCommand*, IEnumExplorerCommand*, HRESULT)
   end
 
-  IExplorerCommand_GUID = LibC::GUID.new("a08ce4d0-fa25-44ab-b57c-c7b1c323e0b9")
-  CLSID_IExplorerCommand = "a08ce4d0-fa25-44ab-b57c-c7b1c323e0b9"
+  IExplorerCommand_GUID = "a08ce4d0-fa25-44ab-b57c-c7b1c323e0b9"
+  IID_IExplorerCommand = LibC::GUID.new(0xa08ce4d0_u32, 0xfa25_u16, 0x44ab_u16, StaticArray[0xb5_u8, 0x7c_u8, 0xc7_u8, 0xb1_u8, 0xc3_u8, 0x23_u8, 0xe0_u8, 0xb9_u8])
   struct IExplorerCommand
     lpVtbl : IExplorerCommandVTbl*
   end
@@ -8199,8 +8199,8 @@ lib LibWin32
     get_state : Proc(IExplorerCommandState*, IShellItemArray, LibC::BOOL, UInt32*, HRESULT)
   end
 
-  IExplorerCommandState_GUID = LibC::GUID.new("bddacb60-7657-47ae-8445-d23e1acf82ae")
-  CLSID_IExplorerCommandState = "bddacb60-7657-47ae-8445-d23e1acf82ae"
+  IExplorerCommandState_GUID = "bddacb60-7657-47ae-8445-d23e1acf82ae"
+  IID_IExplorerCommandState = LibC::GUID.new(0xbddacb60_u32, 0x7657_u16, 0x47ae_u16, StaticArray[0x84_u8, 0x45_u8, 0xd2_u8, 0x3e_u8, 0x1a_u8, 0xcf_u8, 0x82_u8, 0xae_u8])
   struct IExplorerCommandState
     lpVtbl : IExplorerCommandStateVTbl*
   end
@@ -8212,8 +8212,8 @@ lib LibWin32
     initialize : Proc(IInitializeCommand*, LibC::LPWSTR, IPropertyBag, HRESULT)
   end
 
-  IInitializeCommand_GUID = LibC::GUID.new("85075acf-231f-40ea-9610-d26b7b58f638")
-  CLSID_IInitializeCommand = "85075acf-231f-40ea-9610-d26b7b58f638"
+  IInitializeCommand_GUID = "85075acf-231f-40ea-9610-d26b7b58f638"
+  IID_IInitializeCommand = LibC::GUID.new(0x85075acf_u32, 0x231f_u16, 0x40ea_u16, StaticArray[0x96_u8, 0x10_u8, 0xd2_u8, 0x6b_u8, 0x7b_u8, 0x58_u8, 0xf6_u8, 0x38_u8])
   struct IInitializeCommand
     lpVtbl : IInitializeCommandVTbl*
   end
@@ -8228,8 +8228,8 @@ lib LibWin32
     clone : Proc(IEnumExplorerCommand*, IEnumExplorerCommand*, HRESULT)
   end
 
-  IEnumExplorerCommand_GUID = LibC::GUID.new("a88826f8-186f-4987-aade-ea0cef8fbfe8")
-  CLSID_IEnumExplorerCommand = "a88826f8-186f-4987-aade-ea0cef8fbfe8"
+  IEnumExplorerCommand_GUID = "a88826f8-186f-4987-aade-ea0cef8fbfe8"
+  IID_IEnumExplorerCommand = LibC::GUID.new(0xa88826f8_u32, 0x186f_u16, 0x4987_u16, StaticArray[0xaa_u8, 0xde_u8, 0xea_u8, 0xc_u8, 0xef_u8, 0x8f_u8, 0xbf_u8, 0xe8_u8])
   struct IEnumExplorerCommand
     lpVtbl : IEnumExplorerCommandVTbl*
   end
@@ -8242,8 +8242,8 @@ lib LibWin32
     get_command : Proc(IExplorerCommandProvider*, Guid*, Guid*, Void**, HRESULT)
   end
 
-  IExplorerCommandProvider_GUID = LibC::GUID.new("64961751-0835-43c0-8ffe-d57686530e64")
-  CLSID_IExplorerCommandProvider = "64961751-0835-43c0-8ffe-d57686530e64"
+  IExplorerCommandProvider_GUID = "64961751-0835-43c0-8ffe-d57686530e64"
+  IID_IExplorerCommandProvider = LibC::GUID.new(0x64961751_u32, 0x835_u16, 0x43c0_u16, StaticArray[0x8f_u8, 0xfe_u8, 0xd5_u8, 0x76_u8, 0x86_u8, 0x53_u8, 0xe_u8, 0x64_u8])
   struct IExplorerCommandProvider
     lpVtbl : IExplorerCommandProviderVTbl*
   end
@@ -8257,8 +8257,8 @@ lib LibWin32
     get_current_view : Proc(IOpenControlPanel*, CPVIEW*, HRESULT)
   end
 
-  IOpenControlPanel_GUID = LibC::GUID.new("d11ad862-66de-4df4-bf6c-1f5621996af1")
-  CLSID_IOpenControlPanel = "d11ad862-66de-4df4-bf6c-1f5621996af1"
+  IOpenControlPanel_GUID = "d11ad862-66de-4df4-bf6c-1f5621996af1"
+  IID_IOpenControlPanel = LibC::GUID.new(0xd11ad862_u32, 0x66de_u16, 0x4df4_u16, StaticArray[0xbf_u8, 0x6c_u8, 0x1f_u8, 0x56_u8, 0x21_u8, 0x99_u8, 0x6a_u8, 0xf1_u8])
   struct IOpenControlPanel
     lpVtbl : IOpenControlPanelVTbl*
   end
@@ -8271,8 +8271,8 @@ lib LibWin32
     get_find_data : Proc(IFileSystemBindData*, WIN32_FIND_DATAW*, HRESULT)
   end
 
-  IFileSystemBindData_GUID = LibC::GUID.new("01e18d10-4d8b-11d2-855d-006008059367")
-  CLSID_IFileSystemBindData = "01e18d10-4d8b-11d2-855d-006008059367"
+  IFileSystemBindData_GUID = "01e18d10-4d8b-11d2-855d-006008059367"
+  IID_IFileSystemBindData = LibC::GUID.new(0x1e18d10_u32, 0x4d8b_u16, 0x11d2_u16, StaticArray[0x85_u8, 0x5d_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x67_u8])
   struct IFileSystemBindData
     lpVtbl : IFileSystemBindDataVTbl*
   end
@@ -8289,8 +8289,8 @@ lib LibWin32
     get_junction_clsid : Proc(IFileSystemBindData2*, Guid*, HRESULT)
   end
 
-  IFileSystemBindData2_GUID = LibC::GUID.new("3acf075f-71db-4afa-81f0-3fc4fdf2a5b8")
-  CLSID_IFileSystemBindData2 = "3acf075f-71db-4afa-81f0-3fc4fdf2a5b8"
+  IFileSystemBindData2_GUID = "3acf075f-71db-4afa-81f0-3fc4fdf2a5b8"
+  IID_IFileSystemBindData2 = LibC::GUID.new(0x3acf075f_u32, 0x71db_u16, 0x4afa_u16, StaticArray[0x81_u8, 0xf0_u8, 0x3f_u8, 0xc4_u8, 0xfd_u8, 0xf2_u8, 0xa5_u8, 0xb8_u8])
   struct IFileSystemBindData2
     lpVtbl : IFileSystemBindData2VTbl*
   end
@@ -8310,8 +8310,8 @@ lib LibWin32
     abort_list : Proc(ICustomDestinationList*, HRESULT)
   end
 
-  ICustomDestinationList_GUID = LibC::GUID.new("6332debf-87b5-4670-90c0-5e57b408a49e")
-  CLSID_ICustomDestinationList = "6332debf-87b5-4670-90c0-5e57b408a49e"
+  ICustomDestinationList_GUID = "6332debf-87b5-4670-90c0-5e57b408a49e"
+  IID_ICustomDestinationList = LibC::GUID.new(0x6332debf_u32, 0x87b5_u16, 0x4670_u16, StaticArray[0x90_u8, 0xc0_u8, 0x5e_u8, 0x57_u8, 0xb4_u8, 0x8_u8, 0xa4_u8, 0x9e_u8])
   struct ICustomDestinationList
     lpVtbl : ICustomDestinationListVTbl*
   end
@@ -8325,8 +8325,8 @@ lib LibWin32
     remove_all_destinations : Proc(IApplicationDestinations*, HRESULT)
   end
 
-  IApplicationDestinations_GUID = LibC::GUID.new("12337d35-94c6-48a0-bce7-6a9c69d4d600")
-  CLSID_IApplicationDestinations = "12337d35-94c6-48a0-bce7-6a9c69d4d600"
+  IApplicationDestinations_GUID = "12337d35-94c6-48a0-bce7-6a9c69d4d600"
+  IID_IApplicationDestinations = LibC::GUID.new(0x12337d35_u32, 0x94c6_u16, 0x48a0_u16, StaticArray[0xbc_u8, 0xe7_u8, 0x6a_u8, 0x9c_u8, 0x69_u8, 0xd4_u8, 0xd6_u8, 0x0_u8])
   struct IApplicationDestinations
     lpVtbl : IApplicationDestinationsVTbl*
   end
@@ -8339,8 +8339,8 @@ lib LibWin32
     get_list : Proc(IApplicationDocumentLists*, APPDOCLISTTYPE, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IApplicationDocumentLists_GUID = LibC::GUID.new("3c594f9f-9f30-47a1-979a-c9e83d3d0a06")
-  CLSID_IApplicationDocumentLists = "3c594f9f-9f30-47a1-979a-c9e83d3d0a06"
+  IApplicationDocumentLists_GUID = "3c594f9f-9f30-47a1-979a-c9e83d3d0a06"
+  IID_IApplicationDocumentLists = LibC::GUID.new(0x3c594f9f_u32, 0x9f30_u16, 0x47a1_u16, StaticArray[0x97_u8, 0x9a_u8, 0xc9_u8, 0xe8_u8, 0x3d_u8, 0x3d_u8, 0xa_u8, 0x6_u8])
   struct IApplicationDocumentLists
     lpVtbl : IApplicationDocumentListsVTbl*
   end
@@ -8353,8 +8353,8 @@ lib LibWin32
     get_app_id : Proc(IObjectWithAppUserModelID*, LibC::LPWSTR*, HRESULT)
   end
 
-  IObjectWithAppUserModelID_GUID = LibC::GUID.new("36db0196-9665-46d1-9ba7-d3709eecf9ed")
-  CLSID_IObjectWithAppUserModelID = "36db0196-9665-46d1-9ba7-d3709eecf9ed"
+  IObjectWithAppUserModelID_GUID = "36db0196-9665-46d1-9ba7-d3709eecf9ed"
+  IID_IObjectWithAppUserModelID = LibC::GUID.new(0x36db0196_u32, 0x9665_u16, 0x46d1_u16, StaticArray[0x9b_u8, 0xa7_u8, 0xd3_u8, 0x70_u8, 0x9e_u8, 0xec_u8, 0xf9_u8, 0xed_u8])
   struct IObjectWithAppUserModelID
     lpVtbl : IObjectWithAppUserModelIDVTbl*
   end
@@ -8367,8 +8367,8 @@ lib LibWin32
     get_prog_id : Proc(IObjectWithProgID*, LibC::LPWSTR*, HRESULT)
   end
 
-  IObjectWithProgID_GUID = LibC::GUID.new("71e806fb-8dee-46fc-bf8c-7748a8a1ae13")
-  CLSID_IObjectWithProgID = "71e806fb-8dee-46fc-bf8c-7748a8a1ae13"
+  IObjectWithProgID_GUID = "71e806fb-8dee-46fc-bf8c-7748a8a1ae13"
+  IID_IObjectWithProgID = LibC::GUID.new(0x71e806fb_u32, 0x8dee_u16, 0x46fc_u16, StaticArray[0xbf_u8, 0x8c_u8, 0x77_u8, 0x48_u8, 0xa8_u8, 0xa1_u8, 0xae_u8, 0x13_u8])
   struct IObjectWithProgID
     lpVtbl : IObjectWithProgIDVTbl*
   end
@@ -8380,8 +8380,8 @@ lib LibWin32
     update : Proc(IUpdateIDList*, IBindCtx, ITEMIDLIST*, ITEMIDLIST**, HRESULT)
   end
 
-  IUpdateIDList_GUID = LibC::GUID.new("6589b6d2-5f8d-4b9e-b7e0-23cdd9717d8c")
-  CLSID_IUpdateIDList = "6589b6d2-5f8d-4b9e-b7e0-23cdd9717d8c"
+  IUpdateIDList_GUID = "6589b6d2-5f8d-4b9e-b7e0-23cdd9717d8c"
+  IID_IUpdateIDList = LibC::GUID.new(0x6589b6d2_u32, 0x5f8d_u16, 0x4b9e_u16, StaticArray[0xb7_u8, 0xe0_u8, 0x23_u8, 0xcd_u8, 0xd9_u8, 0x71_u8, 0x7d_u8, 0x8c_u8])
   struct IUpdateIDList
     lpVtbl : IUpdateIDListVTbl*
   end
@@ -8408,8 +8408,8 @@ lib LibWin32
     enable : Proc(IDesktopWallpaper*, LibC::BOOL, HRESULT)
   end
 
-  IDesktopWallpaper_GUID = LibC::GUID.new("b92b56a9-8b55-4e14-9a89-0199bbb6f93b")
-  CLSID_IDesktopWallpaper = "b92b56a9-8b55-4e14-9a89-0199bbb6f93b"
+  IDesktopWallpaper_GUID = "b92b56a9-8b55-4e14-9a89-0199bbb6f93b"
+  IID_IDesktopWallpaper = LibC::GUID.new(0xb92b56a9_u32, 0x8b55_u16, 0x4e14_u16, StaticArray[0x9a_u8, 0x89_u8, 0x1_u8, 0x99_u8, 0xbb_u8, 0xb6_u8, 0xf9_u8, 0x3b_u8])
   struct IDesktopWallpaper
     lpVtbl : IDesktopWallpaperVTbl*
   end
@@ -8422,8 +8422,8 @@ lib LibWin32
     show_sharing_wizard : Proc(IHomeGroup*, LibC::HANDLE, HOMEGROUPSHARINGCHOICES*, HRESULT)
   end
 
-  IHomeGroup_GUID = LibC::GUID.new("7a3bd1d9-35a9-4fb3-a467-f48cac35e2d0")
-  CLSID_IHomeGroup = "7a3bd1d9-35a9-4fb3-a467-f48cac35e2d0"
+  IHomeGroup_GUID = "7a3bd1d9-35a9-4fb3-a467-f48cac35e2d0"
+  IID_IHomeGroup = LibC::GUID.new(0x7a3bd1d9_u32, 0x35a9_u16, 0x4fb3_u16, StaticArray[0xa4_u8, 0x67_u8, 0xf4_u8, 0x8c_u8, 0xac_u8, 0x35_u8, 0xe2_u8, 0xd0_u8])
   struct IHomeGroup
     lpVtbl : IHomeGroupVTbl*
   end
@@ -8435,8 +8435,8 @@ lib LibWin32
     initialize : Proc(IInitializeWithPropertyStore*, IPropertyStore, HRESULT)
   end
 
-  IInitializeWithPropertyStore_GUID = LibC::GUID.new("c3e12eb5-7d8d-44f8-b6dd-0e77b34d6de4")
-  CLSID_IInitializeWithPropertyStore = "c3e12eb5-7d8d-44f8-b6dd-0e77b34d6de4"
+  IInitializeWithPropertyStore_GUID = "c3e12eb5-7d8d-44f8-b6dd-0e77b34d6de4"
+  IID_IInitializeWithPropertyStore = LibC::GUID.new(0xc3e12eb5_u32, 0x7d8d_u16, 0x44f8_u16, StaticArray[0xb6_u8, 0xdd_u8, 0xe_u8, 0x77_u8, 0xb3_u8, 0x4d_u8, 0x6d_u8, 0xe4_u8])
   struct IInitializeWithPropertyStore
     lpVtbl : IInitializeWithPropertyStoreVTbl*
   end
@@ -8448,8 +8448,8 @@ lib LibWin32
     get_results : Proc(IOpenSearchSource*, LibC::HANDLE, LibC::LPWSTR, UInt32, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IOpenSearchSource_GUID = LibC::GUID.new("f0ee7333-e6fc-479b-9f25-a860c234a38e")
-  CLSID_IOpenSearchSource = "f0ee7333-e6fc-479b-9f25-a860c234a38e"
+  IOpenSearchSource_GUID = "f0ee7333-e6fc-479b-9f25-a860c234a38e"
+  IID_IOpenSearchSource = LibC::GUID.new(0xf0ee7333_u32, 0xe6fc_u16, 0x479b_u16, StaticArray[0x9f_u8, 0x25_u8, 0xa8_u8, 0x60_u8, 0xc2_u8, 0x34_u8, 0xa3_u8, 0x8e_u8])
   struct IOpenSearchSource
     lpVtbl : IOpenSearchSourceVTbl*
   end
@@ -8477,8 +8477,8 @@ lib LibWin32
     save_in_known_folder : Proc(IShellLibrary*, Guid*, LibC::LPWSTR, LIBRARYSAVEFLAGS, IShellItem*, HRESULT)
   end
 
-  IShellLibrary_GUID = LibC::GUID.new("11a66efa-382e-451a-9234-1e0e12ef3085")
-  CLSID_IShellLibrary = "11a66efa-382e-451a-9234-1e0e12ef3085"
+  IShellLibrary_GUID = "11a66efa-382e-451a-9234-1e0e12ef3085"
+  IID_IShellLibrary = LibC::GUID.new(0x11a66efa_u32, 0x382e_u16, 0x451a_u16, StaticArray[0x92_u8, 0x34_u8, 0x1e_u8, 0xe_u8, 0x12_u8, 0xef_u8, 0x30_u8, 0x85_u8])
   struct IShellLibrary
     lpVtbl : IShellLibraryVTbl*
   end
@@ -8493,8 +8493,8 @@ lib LibWin32
     set_handler_clsid : Proc(IDefaultFolderMenuInitialize*, Guid*, HRESULT)
   end
 
-  IDefaultFolderMenuInitialize_GUID = LibC::GUID.new("7690aa79-f8fc-4615-a327-36f7d18f5d91")
-  CLSID_IDefaultFolderMenuInitialize = "7690aa79-f8fc-4615-a327-36f7d18f5d91"
+  IDefaultFolderMenuInitialize_GUID = "7690aa79-f8fc-4615-a327-36f7d18f5d91"
+  IID_IDefaultFolderMenuInitialize = LibC::GUID.new(0x7690aa79_u32, 0xf8fc_u16, 0x4615_u16, StaticArray[0xa3_u8, 0x27_u8, 0x36_u8, 0xf7_u8, 0xd1_u8, 0x8f_u8, 0x5d_u8, 0x91_u8])
   struct IDefaultFolderMenuInitialize
     lpVtbl : IDefaultFolderMenuInitializeVTbl*
   end
@@ -8508,8 +8508,8 @@ lib LibWin32
     activate_for_protocol : Proc(IApplicationActivationManager*, LibC::LPWSTR, IShellItemArray, UInt32*, HRESULT)
   end
 
-  IApplicationActivationManager_GUID = LibC::GUID.new("2e941141-7f97-4756-ba1d-9decde894a3d")
-  CLSID_IApplicationActivationManager = "2e941141-7f97-4756-ba1d-9decde894a3d"
+  IApplicationActivationManager_GUID = "2e941141-7f97-4756-ba1d-9decde894a3d"
+  IID_IApplicationActivationManager = LibC::GUID.new(0x2e941141_u32, 0x7f97_u16, 0x4756_u16, StaticArray[0xba_u8, 0x1d_u8, 0x9d_u8, 0xec_u8, 0xde_u8, 0x89_u8, 0x4a_u8, 0x3d_u8])
   struct IApplicationActivationManager
     lpVtbl : IApplicationActivationManagerVTbl*
   end
@@ -8523,8 +8523,8 @@ lib LibWin32
     move_window_to_desktop : Proc(IVirtualDesktopManager*, LibC::HANDLE, Guid*, HRESULT)
   end
 
-  IVirtualDesktopManager_GUID = LibC::GUID.new("a5cd92ff-29be-454c-8d04-d82879fb3f1b")
-  CLSID_IVirtualDesktopManager = "a5cd92ff-29be-454c-8d04-d82879fb3f1b"
+  IVirtualDesktopManager_GUID = "a5cd92ff-29be-454c-8d04-d82879fb3f1b"
+  IID_IVirtualDesktopManager = LibC::GUID.new(0xa5cd92ff_u32, 0x29be_u16, 0x454c_u16, StaticArray[0x8d_u8, 0x4_u8, 0xd8_u8, 0x28_u8, 0x79_u8, 0xfb_u8, 0x3f_u8, 0x1b_u8])
   struct IVirtualDesktopManager
     lpVtbl : IVirtualDesktopManagerVTbl*
   end
@@ -8537,8 +8537,8 @@ lib LibWin32
     invoke : Proc(IAssocHandlerInvoker*, HRESULT)
   end
 
-  IAssocHandlerInvoker_GUID = LibC::GUID.new("92218cab-ecaa-4335-8133-807fd234c2ee")
-  CLSID_IAssocHandlerInvoker = "92218cab-ecaa-4335-8133-807fd234c2ee"
+  IAssocHandlerInvoker_GUID = "92218cab-ecaa-4335-8133-807fd234c2ee"
+  IID_IAssocHandlerInvoker = LibC::GUID.new(0x92218cab_u32, 0xecaa_u16, 0x4335_u16, StaticArray[0x81_u8, 0x33_u8, 0x80_u8, 0x7f_u8, 0xd2_u8, 0x34_u8, 0xc2_u8, 0xee_u8])
   struct IAssocHandlerInvoker
     lpVtbl : IAssocHandlerInvokerVTbl*
   end
@@ -8556,8 +8556,8 @@ lib LibWin32
     create_invoker : Proc(IAssocHandler*, IDataObject, IAssocHandlerInvoker*, HRESULT)
   end
 
-  IAssocHandler_GUID = LibC::GUID.new("f04061ac-1659-4a3f-a954-775aa57fc083")
-  CLSID_IAssocHandler = "f04061ac-1659-4a3f-a954-775aa57fc083"
+  IAssocHandler_GUID = "f04061ac-1659-4a3f-a954-775aa57fc083"
+  IID_IAssocHandler = LibC::GUID.new(0xf04061ac_u32, 0x1659_u16, 0x4a3f_u16, StaticArray[0xa9_u8, 0x54_u8, 0x77_u8, 0x5a_u8, 0xa5_u8, 0x7f_u8, 0xc0_u8, 0x83_u8])
   struct IAssocHandler
     lpVtbl : IAssocHandlerVTbl*
   end
@@ -8569,8 +8569,8 @@ lib LibWin32
     next : Proc(IEnumAssocHandlers*, UInt32, IAssocHandler*, UInt32*, HRESULT)
   end
 
-  IEnumAssocHandlers_GUID = LibC::GUID.new("973810ae-9599-4b88-9e4d-6ee98c9552da")
-  CLSID_IEnumAssocHandlers = "973810ae-9599-4b88-9e4d-6ee98c9552da"
+  IEnumAssocHandlers_GUID = "973810ae-9599-4b88-9e4d-6ee98c9552da"
+  IID_IEnumAssocHandlers = LibC::GUID.new(0x973810ae_u32, 0x9599_u16, 0x4b88_u16, StaticArray[0x9e_u8, 0x4d_u8, 0x6e_u8, 0xe9_u8, 0x8c_u8, 0x95_u8, 0x52_u8, 0xda_u8])
   struct IEnumAssocHandlers
     lpVtbl : IEnumAssocHandlersVTbl*
   end
@@ -8583,8 +8583,8 @@ lib LibWin32
     set_data_object : Proc(IDataObjectProvider*, IDataObject, HRESULT)
   end
 
-  IDataObjectProvider_GUID = LibC::GUID.new("3d25f6d6-4b2a-433c-9184-7c33ad35d001")
-  CLSID_IDataObjectProvider = "3d25f6d6-4b2a-433c-9184-7c33ad35d001"
+  IDataObjectProvider_GUID = "3d25f6d6-4b2a-433c-9184-7c33ad35d001"
+  IID_IDataObjectProvider = LibC::GUID.new(0x3d25f6d6_u32, 0x4b2a_u16, 0x433c_u16, StaticArray[0x91_u8, 0x84_u8, 0x7c_u8, 0x33_u8, 0xad_u8, 0x35_u8, 0xd0_u8, 0x1_u8])
   struct IDataObjectProvider
     lpVtbl : IDataObjectProviderVTbl*
   end
@@ -8597,8 +8597,8 @@ lib LibWin32
     show_share_ui_for_window : Proc(IDataTransferManagerInterop*, LibC::HANDLE, HRESULT)
   end
 
-  IDataTransferManagerInterop_GUID = LibC::GUID.new("3a3dcd6c-3eab-43dc-bcde-45671ce800c8")
-  CLSID_IDataTransferManagerInterop = "3a3dcd6c-3eab-43dc-bcde-45671ce800c8"
+  IDataTransferManagerInterop_GUID = "3a3dcd6c-3eab-43dc-bcde-45671ce800c8"
+  IID_IDataTransferManagerInterop = LibC::GUID.new(0x3a3dcd6c_u32, 0x3eab_u16, 0x43dc_u16, StaticArray[0xbc_u8, 0xde_u8, 0x45_u8, 0x67_u8, 0x1c_u8, 0xe8_u8, 0x0_u8, 0xc8_u8])
   struct IDataTransferManagerInterop
     lpVtbl : IDataTransferManagerInteropVTbl*
   end
@@ -8611,8 +8611,8 @@ lib LibWin32
     hiding : Proc(IFrameworkInputPaneHandler*, LibC::BOOL, HRESULT)
   end
 
-  IFrameworkInputPaneHandler_GUID = LibC::GUID.new("226c537b-1e76-4d9e-a760-33db29922f18")
-  CLSID_IFrameworkInputPaneHandler = "226c537b-1e76-4d9e-a760-33db29922f18"
+  IFrameworkInputPaneHandler_GUID = "226c537b-1e76-4d9e-a760-33db29922f18"
+  IID_IFrameworkInputPaneHandler = LibC::GUID.new(0x226c537b_u32, 0x1e76_u16, 0x4d9e_u16, StaticArray[0xa7_u8, 0x60_u8, 0x33_u8, 0xdb_u8, 0x29_u8, 0x92_u8, 0x2f_u8, 0x18_u8])
   struct IFrameworkInputPaneHandler
     lpVtbl : IFrameworkInputPaneHandlerVTbl*
   end
@@ -8627,8 +8627,8 @@ lib LibWin32
     location : Proc(IFrameworkInputPane*, RECT*, HRESULT)
   end
 
-  IFrameworkInputPane_GUID = LibC::GUID.new("5752238b-24f0-495a-82f1-2fd593056796")
-  CLSID_IFrameworkInputPane = "5752238b-24f0-495a-82f1-2fd593056796"
+  IFrameworkInputPane_GUID = "5752238b-24f0-495a-82f1-2fd593056796"
+  IID_IFrameworkInputPane = LibC::GUID.new(0x5752238b_u32, 0x24f0_u16, 0x495a_u16, StaticArray[0x82_u8, 0xf1_u8, 0x2f_u8, 0xd5_u8, 0x93_u8, 0x5_u8, 0x67_u8, 0x96_u8])
   struct IFrameworkInputPane
     lpVtbl : IFrameworkInputPaneVTbl*
   end
@@ -8641,8 +8641,8 @@ lib LibWin32
     launcher_visibility_change : Proc(IAppVisibilityEvents*, LibC::BOOL, HRESULT)
   end
 
-  IAppVisibilityEvents_GUID = LibC::GUID.new("6584ce6b-7d82-49c2-89c9-c6bc02ba8c38")
-  CLSID_IAppVisibilityEvents = "6584ce6b-7d82-49c2-89c9-c6bc02ba8c38"
+  IAppVisibilityEvents_GUID = "6584ce6b-7d82-49c2-89c9-c6bc02ba8c38"
+  IID_IAppVisibilityEvents = LibC::GUID.new(0x6584ce6b_u32, 0x7d82_u16, 0x49c2_u16, StaticArray[0x89_u8, 0xc9_u8, 0xc6_u8, 0xbc_u8, 0x2_u8, 0xba_u8, 0x8c_u8, 0x38_u8])
   struct IAppVisibilityEvents
     lpVtbl : IAppVisibilityEventsVTbl*
   end
@@ -8657,8 +8657,8 @@ lib LibWin32
     unadvise : Proc(IAppVisibility*, UInt32, HRESULT)
   end
 
-  IAppVisibility_GUID = LibC::GUID.new("2246ea2d-caea-4444-a3c4-6de827e44313")
-  CLSID_IAppVisibility = "2246ea2d-caea-4444-a3c4-6de827e44313"
+  IAppVisibility_GUID = "2246ea2d-caea-4444-a3c4-6de827e44313"
+  IID_IAppVisibility = LibC::GUID.new(0x2246ea2d_u32, 0xcaea_u16, 0x4444_u16, StaticArray[0xa3_u8, 0xc4_u8, 0x6d_u8, 0xe8_u8, 0x27_u8, 0xe4_u8, 0x43_u8, 0x13_u8])
   struct IAppVisibility
     lpVtbl : IAppVisibilityVTbl*
   end
@@ -8670,8 +8670,8 @@ lib LibWin32
     on_state_changed : Proc(IPackageExecutionStateChangeNotification*, LibC::LPWSTR, PACKAGE_EXECUTION_STATE, HRESULT)
   end
 
-  IPackageExecutionStateChangeNotification_GUID = LibC::GUID.new("1bb12a62-2ad8-432b-8ccf-0c2c52afcd5b")
-  CLSID_IPackageExecutionStateChangeNotification = "1bb12a62-2ad8-432b-8ccf-0c2c52afcd5b"
+  IPackageExecutionStateChangeNotification_GUID = "1bb12a62-2ad8-432b-8ccf-0c2c52afcd5b"
+  IID_IPackageExecutionStateChangeNotification = LibC::GUID.new(0x1bb12a62_u32, 0x2ad8_u16, 0x432b_u16, StaticArray[0x8c_u8, 0xcf_u8, 0xc_u8, 0x2c_u8, 0x52_u8, 0xaf_u8, 0xcd_u8, 0x5b_u8])
   struct IPackageExecutionStateChangeNotification
     lpVtbl : IPackageExecutionStateChangeNotificationVTbl*
   end
@@ -8697,8 +8697,8 @@ lib LibWin32
     unregister_for_package_state_changes : Proc(IPackageDebugSettings*, UInt32, HRESULT)
   end
 
-  IPackageDebugSettings_GUID = LibC::GUID.new("f27c3930-8029-4ad1-94e3-3dba417810c1")
-  CLSID_IPackageDebugSettings = "f27c3930-8029-4ad1-94e3-3dba417810c1"
+  IPackageDebugSettings_GUID = "f27c3930-8029-4ad1-94e3-3dba417810c1"
+  IID_IPackageDebugSettings = LibC::GUID.new(0xf27c3930_u32, 0x8029_u16, 0x4ad1_u16, StaticArray[0x94_u8, 0xe3_u8, 0x3d_u8, 0xba_u8, 0x41_u8, 0x78_u8, 0x10_u8, 0xc1_u8])
   struct IPackageDebugSettings
     lpVtbl : IPackageDebugSettingsVTbl*
   end
@@ -8725,8 +8725,8 @@ lib LibWin32
     enumerate_apps : Proc(IPackageDebugSettings2*, LibC::LPWSTR, UInt32*, LibC::LPWSTR**, LibC::LPWSTR**, HRESULT)
   end
 
-  IPackageDebugSettings2_GUID = LibC::GUID.new("6e3194bb-ab82-4d22-93f5-fabda40e7b16")
-  CLSID_IPackageDebugSettings2 = "6e3194bb-ab82-4d22-93f5-fabda40e7b16"
+  IPackageDebugSettings2_GUID = "6e3194bb-ab82-4d22-93f5-fabda40e7b16"
+  IID_IPackageDebugSettings2 = LibC::GUID.new(0x6e3194bb_u32, 0xab82_u16, 0x4d22_u16, StaticArray[0x93_u8, 0xf5_u8, 0xfa_u8, 0xbd_u8, 0xa4_u8, 0xe_u8, 0x7b_u8, 0x16_u8])
   struct IPackageDebugSettings2
     lpVtbl : IPackageDebugSettings2VTbl*
   end
@@ -8740,8 +8740,8 @@ lib LibWin32
     ungroup_child_from_parent : Proc(ISuspensionDependencyManager*, LibC::HANDLE, HRESULT)
   end
 
-  ISuspensionDependencyManager_GUID = LibC::GUID.new("52b83a42-2543-416a-81d9-c0de7969c8b3")
-  CLSID_ISuspensionDependencyManager = "52b83a42-2543-416a-81d9-c0de7969c8b3"
+  ISuspensionDependencyManager_GUID = "52b83a42-2543-416a-81d9-c0de7969c8b3"
+  IID_ISuspensionDependencyManager = LibC::GUID.new(0x52b83a42_u32, 0x2543_u16, 0x416a_u16, StaticArray[0x81_u8, 0xd9_u8, 0xc0_u8, 0xde_u8, 0x79_u8, 0x69_u8, 0xc8_u8, 0xb3_u8])
   struct ISuspensionDependencyManager
     lpVtbl : ISuspensionDependencyManagerVTbl*
   end
@@ -8753,8 +8753,8 @@ lib LibWin32
     get_value : Proc(IExecuteCommandApplicationHostEnvironment*, AHE_TYPE*, HRESULT)
   end
 
-  IExecuteCommandApplicationHostEnvironment_GUID = LibC::GUID.new("18b21aa9-e184-4ff0-9f5e-f882d03771b3")
-  CLSID_IExecuteCommandApplicationHostEnvironment = "18b21aa9-e184-4ff0-9f5e-f882d03771b3"
+  IExecuteCommandApplicationHostEnvironment_GUID = "18b21aa9-e184-4ff0-9f5e-f882d03771b3"
+  IID_IExecuteCommandApplicationHostEnvironment = LibC::GUID.new(0x18b21aa9_u32, 0xe184_u16, 0x4ff0_u16, StaticArray[0x9f_u8, 0x5e_u8, 0xf8_u8, 0x82_u8, 0xd0_u8, 0x37_u8, 0x71_u8, 0xb3_u8])
   struct IExecuteCommandApplicationHostEnvironment
     lpVtbl : IExecuteCommandApplicationHostEnvironmentVTbl*
   end
@@ -8766,8 +8766,8 @@ lib LibWin32
     get_ui_mode : Proc(IExecuteCommandHost*, EC_HOST_UI_MODE*, HRESULT)
   end
 
-  IExecuteCommandHost_GUID = LibC::GUID.new("4b6832a2-5f04-4c9d-b89d-727a15d103e7")
-  CLSID_IExecuteCommandHost = "4b6832a2-5f04-4c9d-b89d-727a15d103e7"
+  IExecuteCommandHost_GUID = "4b6832a2-5f04-4c9d-b89d-727a15d103e7"
+  IID_IExecuteCommandHost = LibC::GUID.new(0x4b6832a2_u32, 0x5f04_u16, 0x4c9d_u16, StaticArray[0xb8_u8, 0x9d_u8, 0x72_u8, 0x7a_u8, 0x15_u8, 0xd1_u8, 0x3_u8, 0xe7_u8])
   struct IExecuteCommandHost
     lpVtbl : IExecuteCommandHostVTbl*
   end
@@ -8784,8 +8784,8 @@ lib LibWin32
     trigger_edge_gesture : Proc(IApplicationDesignModeSettings*, EDGE_GESTURE_KIND, HRESULT)
   end
 
-  IApplicationDesignModeSettings_GUID = LibC::GUID.new("2a3dee9a-e31d-46d6-8508-bcc597db3557")
-  CLSID_IApplicationDesignModeSettings = "2a3dee9a-e31d-46d6-8508-bcc597db3557"
+  IApplicationDesignModeSettings_GUID = "2a3dee9a-e31d-46d6-8508-bcc597db3557"
+  IID_IApplicationDesignModeSettings = LibC::GUID.new(0x2a3dee9a_u32, 0xe31d_u16, 0x46d6_u16, StaticArray[0x85_u8, 0x8_u8, 0xbc_u8, 0xc5_u8, 0x97_u8, 0xdb_u8, 0x35_u8, 0x57_u8])
   struct IApplicationDesignModeSettings
     lpVtbl : IApplicationDesignModeSettingsVTbl*
   end
@@ -8809,8 +8809,8 @@ lib LibWin32
     get_application_view_orientation : Proc(IApplicationDesignModeSettings2*, SIZE, APPLICATION_VIEW_ORIENTATION*, HRESULT)
   end
 
-  IApplicationDesignModeSettings2_GUID = LibC::GUID.new("490514e1-675a-4d6e-a58d-e54901b4ca2f")
-  CLSID_IApplicationDesignModeSettings2 = "490514e1-675a-4d6e-a58d-e54901b4ca2f"
+  IApplicationDesignModeSettings2_GUID = "490514e1-675a-4d6e-a58d-e54901b4ca2f"
+  IID_IApplicationDesignModeSettings2 = LibC::GUID.new(0x490514e1_u32, 0x675a_u16, 0x4d6e_u16, StaticArray[0xa5_u8, 0x8d_u8, 0xe5_u8, 0x49_u8, 0x1_u8, 0xb4_u8, 0xca_u8, 0x2f_u8])
   struct IApplicationDesignModeSettings2
     lpVtbl : IApplicationDesignModeSettings2VTbl*
   end
@@ -8822,8 +8822,8 @@ lib LibWin32
     get_monitor : Proc(ILaunchTargetMonitor*, HMONITOR*, HRESULT)
   end
 
-  ILaunchTargetMonitor_GUID = LibC::GUID.new("266fbc7e-490d-46ed-a96b-2274db252003")
-  CLSID_ILaunchTargetMonitor = "266fbc7e-490d-46ed-a96b-2274db252003"
+  ILaunchTargetMonitor_GUID = "266fbc7e-490d-46ed-a96b-2274db252003"
+  IID_ILaunchTargetMonitor = LibC::GUID.new(0x266fbc7e_u32, 0x490d_u16, 0x46ed_u16, StaticArray[0xa9_u8, 0x6b_u8, 0x22_u8, 0x74_u8, 0xdb_u8, 0x25_u8, 0x20_u8, 0x3_u8])
   struct ILaunchTargetMonitor
     lpVtbl : ILaunchTargetMonitorVTbl*
   end
@@ -8836,8 +8836,8 @@ lib LibWin32
     get_source_view_size_preference : Proc(ILaunchSourceViewSizePreference*, APPLICATION_VIEW_SIZE_PREFERENCE*, HRESULT)
   end
 
-  ILaunchSourceViewSizePreference_GUID = LibC::GUID.new("e5aa01f7-1fb8-4830-8720-4e6734cbd5f3")
-  CLSID_ILaunchSourceViewSizePreference = "e5aa01f7-1fb8-4830-8720-4e6734cbd5f3"
+  ILaunchSourceViewSizePreference_GUID = "e5aa01f7-1fb8-4830-8720-4e6734cbd5f3"
+  IID_ILaunchSourceViewSizePreference = LibC::GUID.new(0xe5aa01f7_u32, 0x1fb8_u16, 0x4830_u16, StaticArray[0x87_u8, 0x20_u8, 0x4e_u8, 0x67_u8, 0x34_u8, 0xcb_u8, 0xd5_u8, 0xf3_u8])
   struct ILaunchSourceViewSizePreference
     lpVtbl : ILaunchSourceViewSizePreferenceVTbl*
   end
@@ -8849,8 +8849,8 @@ lib LibWin32
     get_target_view_size_preference : Proc(ILaunchTargetViewSizePreference*, APPLICATION_VIEW_SIZE_PREFERENCE*, HRESULT)
   end
 
-  ILaunchTargetViewSizePreference_GUID = LibC::GUID.new("2f0666c6-12f7-4360-b511-a394a0553725")
-  CLSID_ILaunchTargetViewSizePreference = "2f0666c6-12f7-4360-b511-a394a0553725"
+  ILaunchTargetViewSizePreference_GUID = "2f0666c6-12f7-4360-b511-a394a0553725"
+  IID_ILaunchTargetViewSizePreference = LibC::GUID.new(0x2f0666c6_u32, 0x12f7_u16, 0x4360_u16, StaticArray[0xb5_u8, 0x11_u8, 0xa3_u8, 0x94_u8, 0xa0_u8, 0x55_u8, 0x37_u8, 0x25_u8])
   struct ILaunchTargetViewSizePreference
     lpVtbl : ILaunchTargetViewSizePreferenceVTbl*
   end
@@ -8862,8 +8862,8 @@ lib LibWin32
     get_app_user_model_id : Proc(ILaunchSourceAppUserModelId*, LibC::LPWSTR*, HRESULT)
   end
 
-  ILaunchSourceAppUserModelId_GUID = LibC::GUID.new("989191ac-28ff-4cf0-9584-e0d078bc2396")
-  CLSID_ILaunchSourceAppUserModelId = "989191ac-28ff-4cf0-9584-e0d078bc2396"
+  ILaunchSourceAppUserModelId_GUID = "989191ac-28ff-4cf0-9584-e0d078bc2396"
+  IID_ILaunchSourceAppUserModelId = LibC::GUID.new(0x989191ac_u32, 0x28ff_u16, 0x4cf0_u16, StaticArray[0x95_u8, 0x84_u8, 0xe0_u8, 0xd0_u8, 0x78_u8, 0xbc_u8, 0x23_u8, 0x96_u8])
   struct ILaunchSourceAppUserModelId
     lpVtbl : ILaunchSourceAppUserModelIdVTbl*
   end
@@ -8875,8 +8875,8 @@ lib LibWin32
     initialize : Proc(IInitializeWithWindow*, LibC::HANDLE, HRESULT)
   end
 
-  IInitializeWithWindow_GUID = LibC::GUID.new("3e68d4bd-7135-4d10-8018-9fb6d9f33fa1")
-  CLSID_IInitializeWithWindow = "3e68d4bd-7135-4d10-8018-9fb6d9f33fa1"
+  IInitializeWithWindow_GUID = "3e68d4bd-7135-4d10-8018-9fb6d9f33fa1"
+  IID_IInitializeWithWindow = LibC::GUID.new(0x3e68d4bd_u32, 0x7135_u16, 0x4d10_u16, StaticArray[0x80_u8, 0x18_u8, 0x9f_u8, 0xb6_u8, 0xd9_u8, 0xf3_u8, 0x3f_u8, 0xa1_u8])
   struct IInitializeWithWindow
     lpVtbl : IInitializeWithWindowVTbl*
   end
@@ -8890,8 +8890,8 @@ lib LibWin32
     get_application_icon_reference : Proc(IHandlerInfo*, LibC::LPWSTR*, HRESULT)
   end
 
-  IHandlerInfo_GUID = LibC::GUID.new("997706ef-f880-453b-8118-39e1a2d2655a")
-  CLSID_IHandlerInfo = "997706ef-f880-453b-8118-39e1a2d2655a"
+  IHandlerInfo_GUID = "997706ef-f880-453b-8118-39e1a2d2655a"
+  IID_IHandlerInfo = LibC::GUID.new(0x997706ef_u32, 0xf880_u16, 0x453b_u16, StaticArray[0x81_u8, 0x18_u8, 0x39_u8, 0xe1_u8, 0xa2_u8, 0xd2_u8, 0x65_u8, 0x5a_u8])
   struct IHandlerInfo
     lpVtbl : IHandlerInfoVTbl*
   end
@@ -8906,8 +8906,8 @@ lib LibWin32
     get_application_id : Proc(IHandlerInfo2*, LibC::LPWSTR*, HRESULT)
   end
 
-  IHandlerInfo2_GUID = LibC::GUID.new("31cca04c-04d3-4ea9-90de-97b15e87a532")
-  CLSID_IHandlerInfo2 = "31cca04c-04d3-4ea9-90de-97b15e87a532"
+  IHandlerInfo2_GUID = "31cca04c-04d3-4ea9-90de-97b15e87a532"
+  IID_IHandlerInfo2 = LibC::GUID.new(0x31cca04c_u32, 0x4d3_u16, 0x4ea9_u16, StaticArray[0x90_u8, 0xde_u8, 0x97_u8, 0xb1_u8, 0x5e_u8, 0x87_u8, 0xa5_u8, 0x32_u8])
   struct IHandlerInfo2
     lpVtbl : IHandlerInfo2VTbl*
   end
@@ -8920,8 +8920,8 @@ lib LibWin32
     before_create_process : Proc(IHandlerActivationHost*, LibC::LPWSTR, LibC::LPWSTR, IHandlerInfo, HRESULT)
   end
 
-  IHandlerActivationHost_GUID = LibC::GUID.new("35094a87-8bb1-4237-96c6-c417eebdb078")
-  CLSID_IHandlerActivationHost = "35094a87-8bb1-4237-96c6-c417eebdb078"
+  IHandlerActivationHost_GUID = "35094a87-8bb1-4237-96c6-c417eebdb078"
+  IID_IHandlerActivationHost = LibC::GUID.new(0x35094a87_u32, 0x8bb1_u16, 0x4237_u16, StaticArray[0x96_u8, 0xc6_u8, 0xc4_u8, 0x17_u8, 0xee_u8, 0xbd_u8, 0xb0_u8, 0x78_u8])
   struct IHandlerActivationHost
     lpVtbl : IHandlerActivationHostVTbl*
   end
@@ -8937,8 +8937,8 @@ lib LibWin32
     get_key_state : Proc(IAppActivationUIInfo*, UInt32*, HRESULT)
   end
 
-  IAppActivationUIInfo_GUID = LibC::GUID.new("abad189d-9fa3-4278-b3ca-8ca448a88dcb")
-  CLSID_IAppActivationUIInfo = "abad189d-9fa3-4278-b3ca-8ca448a88dcb"
+  IAppActivationUIInfo_GUID = "abad189d-9fa3-4278-b3ca-8ca448a88dcb"
+  IID_IAppActivationUIInfo = LibC::GUID.new(0xabad189d_u32, 0x9fa3_u16, 0x4278_u16, StaticArray[0xb3_u8, 0xca_u8, 0x8c_u8, 0xa4_u8, 0x48_u8, 0xa8_u8, 0x8d_u8, 0xcb_u8])
   struct IAppActivationUIInfo
     lpVtbl : IAppActivationUIInfoVTbl*
   end
@@ -8950,8 +8950,8 @@ lib LibWin32
     show_contact_card_for_window : Proc(IContactManagerInterop*, LibC::HANDLE, IUnknown, RECT*, FLYOUT_PLACEMENT, HRESULT)
   end
 
-  IContactManagerInterop_GUID = LibC::GUID.new("99eacba7-e073-43b6-a896-55afe48a0833")
-  CLSID_IContactManagerInterop = "99eacba7-e073-43b6-a896-55afe48a0833"
+  IContactManagerInterop_GUID = "99eacba7-e073-43b6-a896-55afe48a0833"
+  IID_IContactManagerInterop = LibC::GUID.new(0x99eacba7_u32, 0xe073_u16, 0x43b6_u16, StaticArray[0xa8_u8, 0x96_u8, 0x55_u8, 0xaf_u8, 0xe4_u8, 0x8a_u8, 0x8_u8, 0x33_u8])
   struct IContactManagerInterop
     lpVtbl : IContactManagerInteropVTbl*
   end
@@ -8965,8 +8965,8 @@ lib LibWin32
     get_priority : Proc(IShellIconOverlayIdentifier*, Int32*, HRESULT)
   end
 
-  IShellIconOverlayIdentifier_GUID = LibC::GUID.new("0c6c4200-c589-11d0-999a-00c04fd655e1")
-  CLSID_IShellIconOverlayIdentifier = "0c6c4200-c589-11d0-999a-00c04fd655e1"
+  IShellIconOverlayIdentifier_GUID = "0c6c4200-c589-11d0-999a-00c04fd655e1"
+  IID_IShellIconOverlayIdentifier = LibC::GUID.new(0xc6c4200_u32, 0xc589_u16, 0x11d0_u16, StaticArray[0x99_u8, 0x9a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x55_u8, 0xe1_u8])
   struct IShellIconOverlayIdentifier
     lpVtbl : IShellIconOverlayIdentifierVTbl*
   end
@@ -8978,8 +8978,8 @@ lib LibWin32
     on_banner_event : Proc(IBannerNotificationHandler*, BANNER_NOTIFICATION*, HRESULT)
   end
 
-  IBannerNotificationHandler_GUID = LibC::GUID.new("8d7b2ba7-db05-46a8-823c-d2b6de08ee91")
-  CLSID_IBannerNotificationHandler = "8d7b2ba7-db05-46a8-823c-d2b6de08ee91"
+  IBannerNotificationHandler_GUID = "8d7b2ba7-db05-46a8-823c-d2b6de08ee91"
+  IID_IBannerNotificationHandler = LibC::GUID.new(0x8d7b2ba7_u32, 0xdb05_u16, 0x46a8_u16, StaticArray[0x82_u8, 0x3c_u8, 0xd2_u8, 0xb6_u8, 0xde_u8, 0x8_u8, 0xee_u8, 0x91_u8])
   struct IBannerNotificationHandler
     lpVtbl : IBannerNotificationHandlerVTbl*
   end
@@ -8993,8 +8993,8 @@ lib LibWin32
     get_sort_type : Proc(ISortColumnArray*, SORT_ORDER_TYPE*, HRESULT)
   end
 
-  ISortColumnArray_GUID = LibC::GUID.new("6dfc60fb-f2e9-459b-beb5-288f1a7c7d54")
-  CLSID_ISortColumnArray = "6dfc60fb-f2e9-459b-beb5-288f1a7c7d54"
+  ISortColumnArray_GUID = "6dfc60fb-f2e9-459b-beb5-288f1a7c7d54"
+  IID_ISortColumnArray = LibC::GUID.new(0x6dfc60fb_u32, 0xf2e9_u16, 0x459b_u16, StaticArray[0xbe_u8, 0xb5_u8, 0x28_u8, 0x8f_u8, 0x1a_u8, 0x7c_u8, 0x7d_u8, 0x54_u8])
   struct ISortColumnArray
     lpVtbl : ISortColumnArrayVTbl*
   end
@@ -9011,8 +9011,8 @@ lib LibWin32
     remove_key : Proc(IPropertyKeyStore*, PROPERTYKEY*, HRESULT)
   end
 
-  IPropertyKeyStore_GUID = LibC::GUID.new("75bd59aa-f23b-4963-aba4-0b355752a91b")
-  CLSID_IPropertyKeyStore = "75bd59aa-f23b-4963-aba4-0b355752a91b"
+  IPropertyKeyStore_GUID = "75bd59aa-f23b-4963-aba4-0b355752a91b"
+  IID_IPropertyKeyStore = LibC::GUID.new(0x75bd59aa_u32, 0xf23b_u16, 0x4963_u16, StaticArray[0xab_u8, 0xa4_u8, 0xb_u8, 0x35_u8, 0x57_u8, 0x52_u8, 0xa9_u8, 0x1b_u8])
   struct IPropertyKeyStore
     lpVtbl : IPropertyKeyStoreVTbl*
   end
@@ -9025,8 +9025,8 @@ lib LibWin32
     set_code_page : Proc(IQueryCodePage*, UInt32, HRESULT)
   end
 
-  IQueryCodePage_GUID = LibC::GUID.new("c7b236ce-ee80-11d0-985f-006008059382")
-  CLSID_IQueryCodePage = "c7b236ce-ee80-11d0-985f-006008059382"
+  IQueryCodePage_GUID = "c7b236ce-ee80-11d0-985f-006008059382"
+  IID_IQueryCodePage = LibC::GUID.new(0xc7b236ce_u32, 0xee80_u16, 0x11d0_u16, StaticArray[0x98_u8, 0x5f_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
   struct IQueryCodePage
     lpVtbl : IQueryCodePageVTbl*
   end
@@ -9039,8 +9039,8 @@ lib LibWin32
     get_folder_view_options : Proc(IFolderViewOptions*, FOLDERVIEWOPTIONS*, HRESULT)
   end
 
-  IFolderViewOptions_GUID = LibC::GUID.new("3cc974d2-b302-4d36-ad3e-06d93f695d3f")
-  CLSID_IFolderViewOptions = "3cc974d2-b302-4d36-ad3e-06d93f695d3f"
+  IFolderViewOptions_GUID = "3cc974d2-b302-4d36-ad3e-06d93f695d3f"
+  IID_IFolderViewOptions = LibC::GUID.new(0x3cc974d2_u32, 0xb302_u16, 0x4d36_u16, StaticArray[0xad_u8, 0x3e_u8, 0x6_u8, 0xd9_u8, 0x3f_u8, 0x69_u8, 0x5d_u8, 0x3f_u8])
   struct IFolderViewOptions
     lpVtbl : IFolderViewOptionsVTbl*
   end
@@ -9069,8 +9069,8 @@ lib LibWin32
     create_view_window3 : Proc(IShellView3*, IShellBrowser, IShellView, UInt32, FOLDERFLAGS, FOLDERFLAGS, FOLDERVIEWMODE, Guid*, RECT*, HANDLE*, HRESULT)
   end
 
-  IShellView3_GUID = LibC::GUID.new("ec39fa88-f8af-41c5-8421-38bed28f4673")
-  CLSID_IShellView3 = "ec39fa88-f8af-41c5-8421-38bed28f4673"
+  IShellView3_GUID = "ec39fa88-f8af-41c5-8421-38bed28f4673"
+  IID_IShellView3 = LibC::GUID.new(0xec39fa88_u32, 0xf8af_u16, 0x41c5_u16, StaticArray[0x84_u8, 0x21_u8, 0x38_u8, 0xbe_u8, 0xd2_u8, 0x8f_u8, 0x46_u8, 0x73_u8])
   struct IShellView3
     lpVtbl : IShellView3VTbl*
   end
@@ -9083,8 +9083,8 @@ lib LibWin32
     get_text : Proc(ISearchBoxInfo*, LibC::LPWSTR*, HRESULT)
   end
 
-  ISearchBoxInfo_GUID = LibC::GUID.new("6af6e03f-d664-4ef4-9626-f7e0ed36755e")
-  CLSID_ISearchBoxInfo = "6af6e03f-d664-4ef4-9626-f7e0ed36755e"
+  ISearchBoxInfo_GUID = "6af6e03f-d664-4ef4-9626-f7e0ed36755e"
+  IID_ISearchBoxInfo = LibC::GUID.new(0x6af6e03f_u32, 0xd664_u16, 0x4ef4_u16, StaticArray[0x96_u8, 0x26_u8, 0xf7_u8, 0xe0_u8, 0xed_u8, 0x36_u8, 0x75_u8, 0x5e_u8])
   struct ISearchBoxInfo
     lpVtbl : ISearchBoxInfoVTbl*
   end
@@ -9103,8 +9103,8 @@ lib LibWin32
     set_theme : Proc(IVisualProperties*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IVisualProperties_GUID = LibC::GUID.new("e693cf68-d967-4112-8763-99172aee5e5a")
-  CLSID_IVisualProperties = "e693cf68-d967-4112-8763-99172aee5e5a"
+  IVisualProperties_GUID = "e693cf68-d967-4112-8763-99172aee5e5a"
+  IID_IVisualProperties = LibC::GUID.new(0xe693cf68_u32, 0xd967_u16, 0x4112_u16, StaticArray[0x87_u8, 0x63_u8, 0x99_u8, 0x17_u8, 0x2a_u8, 0xee_u8, 0x5e_u8, 0x5a_u8])
   struct IVisualProperties
     lpVtbl : IVisualPropertiesVTbl*
   end
@@ -9124,8 +9124,8 @@ lib LibWin32
     on_pre_view_created : Proc(ICommDlgBrowser3*, IShellView, HRESULT)
   end
 
-  ICommDlgBrowser3_GUID = LibC::GUID.new("c8ad25a1-3294-41ee-8165-71174bd01c57")
-  CLSID_ICommDlgBrowser3 = "c8ad25a1-3294-41ee-8165-71174bd01c57"
+  ICommDlgBrowser3_GUID = "c8ad25a1-3294-41ee-8165-71174bd01c57"
+  IID_ICommDlgBrowser3 = LibC::GUID.new(0xc8ad25a1_u32, 0x3294_u16, 0x41ee_u16, StaticArray[0x81_u8, 0x65_u8, 0x71_u8, 0x17_u8, 0x4b_u8, 0xd0_u8, 0x1c_u8, 0x57_u8])
   struct ICommDlgBrowser3
     lpVtbl : ICommDlgBrowser3VTbl*
   end
@@ -9137,8 +9137,8 @@ lib LibWin32
     on_picture_change : Proc(IUserAccountChangeCallback*, LibC::LPWSTR, HRESULT)
   end
 
-  IUserAccountChangeCallback_GUID = LibC::GUID.new("a561e69a-b4b8-4113-91a5-64c6bcca3430")
-  CLSID_IUserAccountChangeCallback = "a561e69a-b4b8-4113-91a5-64c6bcca3430"
+  IUserAccountChangeCallback_GUID = "a561e69a-b4b8-4113-91a5-64c6bcca3430"
+  IID_IUserAccountChangeCallback = LibC::GUID.new(0xa561e69a_u32, 0xb4b8_u16, 0x4113_u16, StaticArray[0x91_u8, 0xa5_u8, 0x64_u8, 0xc6_u8, 0xbc_u8, 0xca_u8, 0x34_u8, 0x30_u8])
   struct IUserAccountChangeCallback
     lpVtbl : IUserAccountChangeCallbackVTbl*
   end
@@ -9164,8 +9164,8 @@ lib LibWin32
     cancel_io : Proc(IStreamAsync*, HRESULT)
   end
 
-  IStreamAsync_GUID = LibC::GUID.new("fe0b6665-e0ca-49b9-a178-2b5cb48d92a5")
-  CLSID_IStreamAsync = "fe0b6665-e0ca-49b9-a178-2b5cb48d92a5"
+  IStreamAsync_GUID = "fe0b6665-e0ca-49b9-a178-2b5cb48d92a5"
+  IID_IStreamAsync = LibC::GUID.new(0xfe0b6665_u32, 0xe0ca_u16, 0x49b9_u16, StaticArray[0xa1_u8, 0x78_u8, 0x2b_u8, 0x5c_u8, 0xb4_u8, 0x8d_u8, 0x92_u8, 0xa5_u8])
   struct IStreamAsync
     lpVtbl : IStreamAsyncVTbl*
   end
@@ -9177,8 +9177,8 @@ lib LibWin32
     get_sector_size : Proc(IStreamUnbufferedInfo*, UInt32*, HRESULT)
   end
 
-  IStreamUnbufferedInfo_GUID = LibC::GUID.new("8a68fdda-1fdc-4c20-8ceb-416643b5a625")
-  CLSID_IStreamUnbufferedInfo = "8a68fdda-1fdc-4c20-8ceb-416643b5a625"
+  IStreamUnbufferedInfo_GUID = "8a68fdda-1fdc-4c20-8ceb-416643b5a625"
+  IID_IStreamUnbufferedInfo = LibC::GUID.new(0x8a68fdda_u32, 0x1fdc_u16, 0x4c20_u16, StaticArray[0x8c_u8, 0xeb_u8, 0x41_u8, 0x66_u8, 0x43_u8, 0xb5_u8, 0xa6_u8, 0x25_u8])
   struct IStreamUnbufferedInfo
     lpVtbl : IStreamUnbufferedInfoVTbl*
   end
@@ -9192,8 +9192,8 @@ lib LibWin32
     set_flags : Proc(IDragSourceHelper2*, UInt32, HRESULT)
   end
 
-  IDragSourceHelper2_GUID = LibC::GUID.new("83e07d0d-0c5f-4163-bf1a-60b274051e40")
-  CLSID_IDragSourceHelper2 = "83e07d0d-0c5f-4163-bf1a-60b274051e40"
+  IDragSourceHelper2_GUID = "83e07d0d-0c5f-4163-bf1a-60b274051e40"
+  IID_IDragSourceHelper2 = LibC::GUID.new(0x83e07d0d_u32, 0xc5f_u16, 0x4163_u16, StaticArray[0xbf_u8, 0x1a_u8, 0x60_u8, 0xb2_u8, 0x74_u8, 0x5_u8, 0x1e_u8, 0x40_u8])
   struct IDragSourceHelper2
     lpVtbl : IDragSourceHelper2VTbl*
   end
@@ -9207,8 +9207,8 @@ lib LibWin32
     handle_event_with_content : Proc(IHWEventHandler*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IDataObject, HRESULT)
   end
 
-  IHWEventHandler_GUID = LibC::GUID.new("c1fb73d0-ec3a-4ba2-b512-8cdb9187b6d1")
-  CLSID_IHWEventHandler = "c1fb73d0-ec3a-4ba2-b512-8cdb9187b6d1"
+  IHWEventHandler_GUID = "c1fb73d0-ec3a-4ba2-b512-8cdb9187b6d1"
+  IID_IHWEventHandler = LibC::GUID.new(0xc1fb73d0_u32, 0xec3a_u16, 0x4ba2_u16, StaticArray[0xb5_u8, 0x12_u8, 0x8c_u8, 0xdb_u8, 0x91_u8, 0x87_u8, 0xb6_u8, 0xd1_u8])
   struct IHWEventHandler
     lpVtbl : IHWEventHandlerVTbl*
   end
@@ -9223,8 +9223,8 @@ lib LibWin32
     handle_event_with_hwnd : Proc(IHWEventHandler2*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::HANDLE, HRESULT)
   end
 
-  IHWEventHandler2_GUID = LibC::GUID.new("cfcc809f-295d-42e8-9ffc-424b33c487e6")
-  CLSID_IHWEventHandler2 = "cfcc809f-295d-42e8-9ffc-424b33c487e6"
+  IHWEventHandler2_GUID = "cfcc809f-295d-42e8-9ffc-424b33c487e6"
+  IID_IHWEventHandler2 = LibC::GUID.new(0xcfcc809f_u32, 0x295d_u16, 0x42e8_u16, StaticArray[0x9f_u8, 0xfc_u8, 0x42_u8, 0x4b_u8, 0x33_u8, 0xc4_u8, 0x87_u8, 0xe6_u8])
   struct IHWEventHandler2
     lpVtbl : IHWEventHandler2VTbl*
   end
@@ -9236,8 +9236,8 @@ lib LibWin32
     allow_auto_play : Proc(IQueryCancelAutoPlay*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, HRESULT)
   end
 
-  IQueryCancelAutoPlay_GUID = LibC::GUID.new("ddefe873-6997-4e68-be26-39b633adbe12")
-  CLSID_IQueryCancelAutoPlay = "ddefe873-6997-4e68-be26-39b633adbe12"
+  IQueryCancelAutoPlay_GUID = "ddefe873-6997-4e68-be26-39b633adbe12"
+  IID_IQueryCancelAutoPlay = LibC::GUID.new(0xddefe873_u32, 0x6997_u16, 0x4e68_u16, StaticArray[0xbe_u8, 0x26_u8, 0x39_u8, 0xb6_u8, 0x33_u8, 0xad_u8, 0xbe_u8, 0x12_u8])
   struct IQueryCancelAutoPlay
     lpVtbl : IQueryCancelAutoPlayVTbl*
   end
@@ -9249,8 +9249,8 @@ lib LibWin32
     get_dynamic_info : Proc(IDynamicHWHandler*, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
-  IDynamicHWHandler_GUID = LibC::GUID.new("dc2601d7-059e-42fc-a09d-2afd21b6d5f7")
-  CLSID_IDynamicHWHandler = "dc2601d7-059e-42fc-a09d-2afd21b6d5f7"
+  IDynamicHWHandler_GUID = "dc2601d7-059e-42fc-a09d-2afd21b6d5f7"
+  IID_IDynamicHWHandler = LibC::GUID.new(0xdc2601d7_u32, 0x59e_u16, 0x42fc_u16, StaticArray[0xa0_u8, 0x9d_u8, 0x2a_u8, 0xfd_u8, 0x21_u8, 0xb6_u8, 0xd5_u8, 0xf7_u8])
   struct IDynamicHWHandler
     lpVtbl : IDynamicHWHandlerVTbl*
   end
@@ -9264,8 +9264,8 @@ lib LibWin32
     on_context_menu : Proc(IUserNotificationCallback*, POINT*, HRESULT)
   end
 
-  IUserNotificationCallback_GUID = LibC::GUID.new("19108294-0441-4aff-8013-fa0a730b0bea")
-  CLSID_IUserNotificationCallback = "19108294-0441-4aff-8013-fa0a730b0bea"
+  IUserNotificationCallback_GUID = "19108294-0441-4aff-8013-fa0a730b0bea"
+  IID_IUserNotificationCallback = LibC::GUID.new(0x19108294_u32, 0x441_u16, 0x4aff_u16, StaticArray[0x80_u8, 0x13_u8, 0xfa_u8, 0xa_u8, 0x73_u8, 0xb_u8, 0xb_u8, 0xea_u8])
   struct IUserNotificationCallback
     lpVtbl : IUserNotificationCallbackVTbl*
   end
@@ -9281,8 +9281,8 @@ lib LibWin32
     play_sound : Proc(IUserNotification2*, LibC::LPWSTR, HRESULT)
   end
 
-  IUserNotification2_GUID = LibC::GUID.new("215913cc-57eb-4fab-ab5a-e5fa7bea2a6c")
-  CLSID_IUserNotification2 = "215913cc-57eb-4fab-ab5a-e5fa7bea2a6c"
+  IUserNotification2_GUID = "215913cc-57eb-4fab-ab5a-e5fa7bea2a6c"
+  IID_IUserNotification2 = LibC::GUID.new(0x215913cc_u32, 0x57eb_u16, 0x4fab_u16, StaticArray[0xab_u8, 0x5a_u8, 0xe5_u8, 0xfa_u8, 0x7b_u8, 0xea_u8, 0x2a_u8, 0x6c_u8])
   struct IUserNotification2
     lpVtbl : IUserNotification2VTbl*
   end
@@ -9302,8 +9302,8 @@ lib LibWin32
     get_composition_state : Proc(IDeskBand2*, LibC::BOOL*, HRESULT)
   end
 
-  IDeskBand2_GUID = LibC::GUID.new("79d16de4-abee-4021-8d9d-9169b261d657")
-  CLSID_IDeskBand2 = "79d16de4-abee-4021-8d9d-9169b261d657"
+  IDeskBand2_GUID = "79d16de4-abee-4021-8d9d-9169b261d657"
+  IID_IDeskBand2 = LibC::GUID.new(0x79d16de4_u32, 0xabee_u16, 0x4021_u16, StaticArray[0x8d_u8, 0x9d_u8, 0x91_u8, 0x69_u8, 0xb2_u8, 0x61_u8, 0xd6_u8, 0x57_u8])
   struct IDeskBand2
     lpVtbl : IDeskBand2VTbl*
   end
@@ -9315,8 +9315,8 @@ lib LibWin32
     remove_from_list : Proc(IStartMenuPinnedList*, IShellItem, HRESULT)
   end
 
-  IStartMenuPinnedList_GUID = LibC::GUID.new("4cd19ada-25a5-4a32-b3b7-347bee5be36b")
-  CLSID_IStartMenuPinnedList = "4cd19ada-25a5-4a32-b3b7-347bee5be36b"
+  IStartMenuPinnedList_GUID = "4cd19ada-25a5-4a32-b3b7-347bee5be36b"
+  IID_IStartMenuPinnedList = LibC::GUID.new(0x4cd19ada_u32, 0x25a5_u16, 0x4a32_u16, StaticArray[0xb3_u8, 0xb7_u8, 0x34_u8, 0x7b_u8, 0xee_u8, 0x5b_u8, 0xe3_u8, 0x6b_u8])
   struct IStartMenuPinnedList
     lpVtbl : IStartMenuPinnedListVTbl*
   end
@@ -9330,8 +9330,8 @@ lib LibWin32
     has_recordable_drive : Proc(ICDBurn*, LibC::BOOL*, HRESULT)
   end
 
-  ICDBurn_GUID = LibC::GUID.new("3d73a659-e5d0-4d42-afc0-5121ba425c8d")
-  CLSID_ICDBurn = "3d73a659-e5d0-4d42-afc0-5121ba425c8d"
+  ICDBurn_GUID = "3d73a659-e5d0-4d42-afc0-5121ba425c8d"
+  IID_ICDBurn = LibC::GUID.new(0x3d73a659_u32, 0xe5d0_u16, 0x4d42_u16, StaticArray[0xaf_u8, 0xc0_u8, 0x51_u8, 0x21_u8, 0xba_u8, 0x42_u8, 0x5c_u8, 0x8d_u8])
   struct ICDBurn
     lpVtbl : ICDBurnVTbl*
   end
@@ -9345,8 +9345,8 @@ lib LibWin32
     get_cancelled_page : Proc(IWizardSite*, HPROPSHEETPAGE*, HRESULT)
   end
 
-  IWizardSite_GUID = LibC::GUID.new("88960f5b-422f-4e7b-8013-73415381c3c3")
-  CLSID_IWizardSite = "88960f5b-422f-4e7b-8013-73415381c3c3"
+  IWizardSite_GUID = "88960f5b-422f-4e7b-8013-73415381c3c3"
+  IID_IWizardSite = LibC::GUID.new(0x88960f5b_u32, 0x422f_u16, 0x4e7b_u16, StaticArray[0x80_u8, 0x13_u8, 0x73_u8, 0x41_u8, 0x53_u8, 0x81_u8, 0xc3_u8, 0xc3_u8])
   struct IWizardSite
     lpVtbl : IWizardSiteVTbl*
   end
@@ -9360,8 +9360,8 @@ lib LibWin32
     get_last_page : Proc(IWizardExtension*, HPROPSHEETPAGE*, HRESULT)
   end
 
-  IWizardExtension_GUID = LibC::GUID.new("c02ea696-86cc-491e-9b23-74394a0444a8")
-  CLSID_IWizardExtension = "c02ea696-86cc-491e-9b23-74394a0444a8"
+  IWizardExtension_GUID = "c02ea696-86cc-491e-9b23-74394a0444a8"
+  IID_IWizardExtension = LibC::GUID.new(0xc02ea696_u32, 0x86cc_u16, 0x491e_u16, StaticArray[0x9b_u8, 0x23_u8, 0x74_u8, 0x39_u8, 0x4a_u8, 0x4_u8, 0x44_u8, 0xa8_u8])
   struct IWizardExtension
     lpVtbl : IWizardExtensionVTbl*
   end
@@ -9377,8 +9377,8 @@ lib LibWin32
     set_error_url : Proc(IWebWizardExtension*, LibC::LPWSTR, HRESULT)
   end
 
-  IWebWizardExtension_GUID = LibC::GUID.new("0e6b3f66-98d1-48c0-a222-fbde74e2fbc5")
-  CLSID_IWebWizardExtension = "0e6b3f66-98d1-48c0-a222-fbde74e2fbc5"
+  IWebWizardExtension_GUID = "0e6b3f66-98d1-48c0-a222-fbde74e2fbc5"
+  IID_IWebWizardExtension = LibC::GUID.new(0xe6b3f66_u32, 0x98d1_u16, 0x48c0_u16, StaticArray[0xa2_u8, 0x22_u8, 0xfb_u8, 0xde_u8, 0x74_u8, 0xe2_u8, 0xfb_u8, 0xc5_u8])
   struct IWebWizardExtension
     lpVtbl : IWebWizardExtensionVTbl*
   end
@@ -9394,8 +9394,8 @@ lib LibWin32
     get_transfer_manifest : Proc(IPublishingWizard*, HRESULT*, IXMLDOMDocument*, HRESULT)
   end
 
-  IPublishingWizard_GUID = LibC::GUID.new("aa9198bb-ccec-472d-beed-19a4f6733f7a")
-  CLSID_IPublishingWizard = "aa9198bb-ccec-472d-beed-19a4f6733f7a"
+  IPublishingWizard_GUID = "aa9198bb-ccec-472d-beed-19a4f6733f7a"
+  IID_IPublishingWizard = LibC::GUID.new(0xaa9198bb_u32, 0xccec_u16, 0x472d_u16, StaticArray[0xbe_u8, 0xed_u8, 0x19_u8, 0xa4_u8, 0xf6_u8, 0x73_u8, 0x3f_u8, 0x7a_u8])
   struct IPublishingWizard
     lpVtbl : IPublishingWizardVTbl*
   end
@@ -9407,8 +9407,8 @@ lib LibWin32
     initialize : Proc(IFolderViewHost*, LibC::HANDLE, IDataObject, RECT*, HRESULT)
   end
 
-  IFolderViewHost_GUID = LibC::GUID.new("1ea58f02-d55a-411d-b09e-9e65ac21605b")
-  CLSID_IFolderViewHost = "1ea58f02-d55a-411d-b09e-9e65ac21605b"
+  IFolderViewHost_GUID = "1ea58f02-d55a-411d-b09e-9e65ac21605b"
+  IID_IFolderViewHost = LibC::GUID.new(0x1ea58f02_u32, 0xd55a_u16, 0x411d_u16, StaticArray[0xb0_u8, 0x9e_u8, 0x9e_u8, 0x65_u8, 0xac_u8, 0x21_u8, 0x60_u8, 0x5b_u8])
   struct IFolderViewHost
     lpVtbl : IFolderViewHostVTbl*
   end
@@ -9420,8 +9420,8 @@ lib LibWin32
     set_accessible_name : Proc(IAccessibleObject*, LibC::LPWSTR, HRESULT)
   end
 
-  IAccessibleObject_GUID = LibC::GUID.new("95a391c5-9ed4-4c28-8401-ab9e06719e11")
-  CLSID_IAccessibleObject = "95a391c5-9ed4-4c28-8401-ab9e06719e11"
+  IAccessibleObject_GUID = "95a391c5-9ed4-4c28-8401-ab9e06719e11"
+  IID_IAccessibleObject = LibC::GUID.new(0x95a391c5_u32, 0x9ed4_u16, 0x4c28_u16, StaticArray[0x84_u8, 0x1_u8, 0xab_u8, 0x9e_u8, 0x6_u8, 0x71_u8, 0x9e_u8, 0x11_u8])
   struct IAccessibleObject
     lpVtbl : IAccessibleObjectVTbl*
   end
@@ -9437,8 +9437,8 @@ lib LibWin32
     remove_all : Proc(IResultsFolder*, HRESULT)
   end
 
-  IResultsFolder_GUID = LibC::GUID.new("96e5ae6d-6ae1-4b1c-900c-c6480eaa8828")
-  CLSID_IResultsFolder = "96e5ae6d-6ae1-4b1c-900c-c6480eaa8828"
+  IResultsFolder_GUID = "96e5ae6d-6ae1-4b1c-900c-c6480eaa8828"
+  IID_IResultsFolder = LibC::GUID.new(0x96e5ae6d_u32, 0x6ae1_u16, 0x4b1c_u16, StaticArray[0x90_u8, 0xc_u8, 0xc6_u8, 0x48_u8, 0xe_u8, 0xaa_u8, 0x88_u8, 0x28_u8])
   struct IResultsFolder
     lpVtbl : IResultsFolderVTbl*
   end
@@ -9451,8 +9451,8 @@ lib LibWin32
     reset_enumerator : Proc(IAutoCompleteDropDown*, HRESULT)
   end
 
-  IAutoCompleteDropDown_GUID = LibC::GUID.new("3cd141f4-3c6a-11d2-bcaa-00c04fd929db")
-  CLSID_IAutoCompleteDropDown = "3cd141f4-3c6a-11d2-bcaa-00c04fd929db"
+  IAutoCompleteDropDown_GUID = "3cd141f4-3c6a-11d2-bcaa-00c04fd929db"
+  IID_IAutoCompleteDropDown = LibC::GUID.new(0x3cd141f4_u32, 0x3c6a_u16, 0x11d2_u16, StaticArray[0xbc_u8, 0xaa_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x29_u8, 0xdb_u8])
   struct IAutoCompleteDropDown
     lpVtbl : IAutoCompleteDropDownVTbl*
   end
@@ -9464,8 +9464,8 @@ lib LibWin32
     get_supported_action_types : Proc(ICDBurnExt*, UInt32*, HRESULT)
   end
 
-  ICDBurnExt_GUID = LibC::GUID.new("2271dcca-74fc-4414-8fb7-c56b05ace2d7")
-  CLSID_ICDBurnExt = "2271dcca-74fc-4414-8fb7-c56b05ace2d7"
+  ICDBurnExt_GUID = "2271dcca-74fc-4414-8fb7-c56b05ace2d7"
+  IID_ICDBurnExt = LibC::GUID.new(0x2271dcca_u32, 0x74fc_u16, 0x4414_u16, StaticArray[0x8f_u8, 0xb7_u8, 0xc5_u8, 0x6b_u8, 0x5_u8, 0xac_u8, 0xe2_u8, 0xd7_u8])
   struct ICDBurnExt
     lpVtbl : ICDBurnExtVTbl*
   end
@@ -9477,8 +9477,8 @@ lib LibWin32
     enum_ready : Proc(IEnumReadyCallback*, HRESULT)
   end
 
-  IEnumReadyCallback_GUID = LibC::GUID.new("61e00d45-8fff-4e60-924e-6537b61612dd")
-  CLSID_IEnumReadyCallback = "61e00d45-8fff-4e60-924e-6537b61612dd"
+  IEnumReadyCallback_GUID = "61e00d45-8fff-4e60-924e-6537b61612dd"
+  IID_IEnumReadyCallback = LibC::GUID.new(0x61e00d45_u32, 0x8fff_u16, 0x4e60_u16, StaticArray[0x92_u8, 0x4e_u8, 0x65_u8, 0x37_u8, 0xb6_u8, 0x16_u8, 0x12_u8, 0xdd_u8])
   struct IEnumReadyCallback
     lpVtbl : IEnumReadyCallbackVTbl*
   end
@@ -9491,8 +9491,8 @@ lib LibWin32
     create_enum_id_list_from_contents : Proc(IEnumerableView*, ITEMIDLIST*, UInt32, IEnumIDList*, HRESULT)
   end
 
-  IEnumerableView_GUID = LibC::GUID.new("8c8bf236-1aec-495f-9894-91d57c3c686f")
-  CLSID_IEnumerableView = "8c8bf236-1aec-495f-9894-91d57c3c686f"
+  IEnumerableView_GUID = "8c8bf236-1aec-495f-9894-91d57c3c686f"
+  IID_IEnumerableView = LibC::GUID.new(0x8c8bf236_u32, 0x1aec_u16, 0x495f_u16, StaticArray[0x98_u8, 0x94_u8, 0x91_u8, 0xd5_u8, 0x7c_u8, 0x3c_u8, 0x68_u8, 0x6f_u8])
   struct IEnumerableView
     lpVtbl : IEnumerableViewVTbl*
   end
@@ -9504,8 +9504,8 @@ lib LibWin32
     insert_item : Proc(IInsertItem*, ITEMIDLIST*, HRESULT)
   end
 
-  IInsertItem_GUID = LibC::GUID.new("d2b57227-3d23-4b95-93c0-492bd454c356")
-  CLSID_IInsertItem = "d2b57227-3d23-4b95-93c0-492bd454c356"
+  IInsertItem_GUID = "d2b57227-3d23-4b95-93c0-492bd454c356"
+  IID_IInsertItem = LibC::GUID.new(0xd2b57227_u32, 0x3d23_u16, 0x4b95_u16, StaticArray[0x93_u8, 0xc0_u8, 0x49_u8, 0x2b_u8, 0xd4_u8, 0x54_u8, 0xc3_u8, 0x56_u8])
   struct IInsertItem
     lpVtbl : IInsertItemVTbl*
   end
@@ -9520,8 +9520,8 @@ lib LibWin32
     set_no_text : Proc(IFolderBandPriv*, LibC::BOOL, HRESULT)
   end
 
-  IFolderBandPriv_GUID = LibC::GUID.new("47c01f95-e185-412c-b5c5-4f27df965aea")
-  CLSID_IFolderBandPriv = "47c01f95-e185-412c-b5c5-4f27df965aea"
+  IFolderBandPriv_GUID = "47c01f95-e185-412c-b5c5-4f27df965aea"
+  IID_IFolderBandPriv = LibC::GUID.new(0x47c01f95_u32, 0xe185_u16, 0x412c_u16, StaticArray[0xb5_u8, 0xc5_u8, 0x4f_u8, 0x27_u8, 0xdf_u8, 0x96_u8, 0x5a_u8, 0xea_u8])
   struct IFolderBandPriv
     lpVtbl : IFolderBandPrivVTbl*
   end
@@ -9533,8 +9533,8 @@ lib LibWin32
     recompress_image : Proc(IImageRecompress*, IShellItem, Int32, Int32, Int32, IStorage, IStream*, HRESULT)
   end
 
-  IImageRecompress_GUID = LibC::GUID.new("505f1513-6b3e-4892-a272-59f8889a4d3e")
-  CLSID_IImageRecompress = "505f1513-6b3e-4892-a272-59f8889a4d3e"
+  IImageRecompress_GUID = "505f1513-6b3e-4892-a272-59f8889a4d3e"
+  IID_IImageRecompress = LibC::GUID.new(0x505f1513_u32, 0x6b3e_u16, 0x4892_u16, StaticArray[0xa2_u8, 0x72_u8, 0x59_u8, 0xf8_u8, 0x88_u8, 0x9a_u8, 0x4d_u8, 0x3e_u8])
   struct IImageRecompress
     lpVtbl : IImageRecompressVTbl*
   end
@@ -9549,8 +9549,8 @@ lib LibWin32
     on_control_activating : Proc(IFileDialogControlEvents*, IFileDialogCustomize, UInt32, HRESULT)
   end
 
-  IFileDialogControlEvents_GUID = LibC::GUID.new("36116642-d713-4b97-9b83-7484a9d00433")
-  CLSID_IFileDialogControlEvents = "36116642-d713-4b97-9b83-7484a9d00433"
+  IFileDialogControlEvents_GUID = "36116642-d713-4b97-9b83-7484a9d00433"
+  IID_IFileDialogControlEvents = LibC::GUID.new(0x36116642_u32, 0xd713_u16, 0x4b97_u16, StaticArray[0x9b_u8, 0x83_u8, 0x74_u8, 0x84_u8, 0xa9_u8, 0xd0_u8, 0x4_u8, 0x33_u8])
   struct IFileDialogControlEvents
     lpVtbl : IFileDialogControlEventsVTbl*
   end
@@ -9587,8 +9587,8 @@ lib LibWin32
     set_navigation_root : Proc(IFileDialog2*, IShellItem, HRESULT)
   end
 
-  IFileDialog2_GUID = LibC::GUID.new("61744fc7-85b5-4791-a9b0-272276309b13")
-  CLSID_IFileDialog2 = "61744fc7-85b5-4791-a9b0-272276309b13"
+  IFileDialog2_GUID = "61744fc7-85b5-4791-a9b0-272276309b13"
+  IID_IFileDialog2 = LibC::GUID.new(0x61744fc7_u32, 0x85b5_u16, 0x4791_u16, StaticArray[0xa9_u8, 0xb0_u8, 0x27_u8, 0x22_u8, 0x76_u8, 0x30_u8, 0x9b_u8, 0x13_u8])
   struct IFileDialog2
     lpVtbl : IFileDialog2VTbl*
   end
@@ -9600,8 +9600,8 @@ lib LibWin32
     launch_advanced_association_ui : Proc(IApplicationAssociationRegistrationUI*, LibC::LPWSTR, HRESULT)
   end
 
-  IApplicationAssociationRegistrationUI_GUID = LibC::GUID.new("1f76a169-f994-40ac-8fc8-0959e8874710")
-  CLSID_IApplicationAssociationRegistrationUI = "1f76a169-f994-40ac-8fc8-0959e8874710"
+  IApplicationAssociationRegistrationUI_GUID = "1f76a169-f994-40ac-8fc8-0959e8874710"
+  IID_IApplicationAssociationRegistrationUI = LibC::GUID.new(0x1f76a169_u32, 0xf994_u16, 0x40ac_u16, StaticArray[0x8f_u8, 0xc8_u8, 0x9_u8, 0x59_u8, 0xe8_u8, 0x87_u8, 0x47_u8, 0x10_u8])
   struct IApplicationAssociationRegistrationUI
     lpVtbl : IApplicationAssociationRegistrationUIVTbl*
   end
@@ -9613,8 +9613,8 @@ lib LibWin32
     run : Proc(IShellRunDll*, LibC::LPWSTR, HRESULT)
   end
 
-  IShellRunDll_GUID = LibC::GUID.new("fce4bde0-4b68-4b80-8e9c-7426315a7388")
-  CLSID_IShellRunDll = "fce4bde0-4b68-4b80-8e9c-7426315a7388"
+  IShellRunDll_GUID = "fce4bde0-4b68-4b80-8e9c-7426315a7388"
+  IID_IShellRunDll = LibC::GUID.new(0xfce4bde0_u32, 0x4b68_u16, 0x4b80_u16, StaticArray[0x8e_u8, 0x9c_u8, 0x74_u8, 0x26_u8, 0x31_u8, 0x5a_u8, 0x73_u8, 0x88_u8])
   struct IShellRunDll
     lpVtbl : IShellRunDllVTbl*
   end
@@ -9626,8 +9626,8 @@ lib LibWin32
     are_snapshots_available : Proc(IPreviousVersionsInfo*, LibC::LPWSTR, LibC::BOOL, LibC::BOOL*, HRESULT)
   end
 
-  IPreviousVersionsInfo_GUID = LibC::GUID.new("76e54780-ad74-48e3-a695-3ba9a0aff10d")
-  CLSID_IPreviousVersionsInfo = "76e54780-ad74-48e3-a695-3ba9a0aff10d"
+  IPreviousVersionsInfo_GUID = "76e54780-ad74-48e3-a695-3ba9a0aff10d"
+  IID_IPreviousVersionsInfo = LibC::GUID.new(0x76e54780_u32, 0xad74_u16, 0x48e3_u16, StaticArray[0xa6_u8, 0x95_u8, 0x3b_u8, 0xa9_u8, 0xa0_u8, 0xaf_u8, 0xf1_u8, 0xd_u8])
   struct IPreviousVersionsInfo
     lpVtbl : IPreviousVersionsInfoVTbl*
   end
@@ -9640,8 +9640,8 @@ lib LibWin32
     get_item : Proc(IUseToBrowseItem*, IShellItem*, HRESULT)
   end
 
-  IUseToBrowseItem_GUID = LibC::GUID.new("05edda5c-98a3-4717-8adb-c5e7da991eb1")
-  CLSID_IUseToBrowseItem = "05edda5c-98a3-4717-8adb-c5e7da991eb1"
+  IUseToBrowseItem_GUID = "05edda5c-98a3-4717-8adb-c5e7da991eb1"
+  IID_IUseToBrowseItem = LibC::GUID.new(0x5edda5c_u32, 0x98a3_u16, 0x4717_u16, StaticArray[0x8a_u8, 0xdb_u8, 0xc5_u8, 0xe7_u8, 0xda_u8, 0x99_u8, 0x1e_u8, 0xb1_u8])
   struct IUseToBrowseItem
     lpVtbl : IUseToBrowseItemVTbl*
   end
@@ -9675,8 +9675,8 @@ lib LibWin32
     get_control_style2 : Proc(INameSpaceTreeControl2*, NSTCSTYLE2, NSTCSTYLE2*, HRESULT)
   end
 
-  INameSpaceTreeControl2_GUID = LibC::GUID.new("7cc7aed8-290e-49bc-8945-c1401cc9306c")
-  CLSID_INameSpaceTreeControl2 = "7cc7aed8-290e-49bc-8945-c1401cc9306c"
+  INameSpaceTreeControl2_GUID = "7cc7aed8-290e-49bc-8945-c1401cc9306c"
+  IID_INameSpaceTreeControl2 = LibC::GUID.new(0x7cc7aed8_u32, 0x290e_u16, 0x49bc_u16, StaticArray[0x89_u8, 0x45_u8, 0xc1_u8, 0x40_u8, 0x1c_u8, 0xc9_u8, 0x30_u8, 0x6c_u8])
   struct INameSpaceTreeControl2
     lpVtbl : INameSpaceTreeControl2VTbl*
   end
@@ -9705,8 +9705,8 @@ lib LibWin32
     on_get_default_icon_index : Proc(INameSpaceTreeControlEvents*, IShellItem, Int32*, Int32*, HRESULT)
   end
 
-  INameSpaceTreeControlEvents_GUID = LibC::GUID.new("93d77985-b3d8-4484-8318-672cdda002ce")
-  CLSID_INameSpaceTreeControlEvents = "93d77985-b3d8-4484-8318-672cdda002ce"
+  INameSpaceTreeControlEvents_GUID = "93d77985-b3d8-4484-8318-672cdda002ce"
+  IID_INameSpaceTreeControlEvents = LibC::GUID.new(0x93d77985_u32, 0xb3d8_u16, 0x4484_u16, StaticArray[0x83_u8, 0x18_u8, 0x67_u8, 0x2c_u8, 0xdd_u8, 0xa0_u8, 0x2_u8, 0xce_u8])
   struct INameSpaceTreeControlEvents
     lpVtbl : INameSpaceTreeControlEventsVTbl*
   end
@@ -9723,8 +9723,8 @@ lib LibWin32
     on_drag_leave : Proc(INameSpaceTreeControlDropHandler*, IShellItem, HRESULT)
   end
 
-  INameSpaceTreeControlDropHandler_GUID = LibC::GUID.new("f9c665d6-c2f2-4c19-bf33-8322d7352f51")
-  CLSID_INameSpaceTreeControlDropHandler = "f9c665d6-c2f2-4c19-bf33-8322d7352f51"
+  INameSpaceTreeControlDropHandler_GUID = "f9c665d6-c2f2-4c19-bf33-8322d7352f51"
+  IID_INameSpaceTreeControlDropHandler = LibC::GUID.new(0xf9c665d6_u32, 0xc2f2_u16, 0x4c19_u16, StaticArray[0xbf_u8, 0x33_u8, 0x83_u8, 0x22_u8, 0xd7_u8, 0x35_u8, 0x2f_u8, 0x51_u8])
   struct INameSpaceTreeControlDropHandler
     lpVtbl : INameSpaceTreeControlDropHandlerVTbl*
   end
@@ -9738,8 +9738,8 @@ lib LibWin32
     on_get_accessibility_role : Proc(INameSpaceTreeAccessible*, IShellItem, VARIANT*, HRESULT)
   end
 
-  INameSpaceTreeAccessible_GUID = LibC::GUID.new("71f312de-43ed-4190-8477-e9536b82350b")
-  CLSID_INameSpaceTreeAccessible = "71f312de-43ed-4190-8477-e9536b82350b"
+  INameSpaceTreeAccessible_GUID = "71f312de-43ed-4190-8477-e9536b82350b"
+  IID_INameSpaceTreeAccessible = LibC::GUID.new(0x71f312de_u32, 0x43ed_u16, 0x4190_u16, StaticArray[0x84_u8, 0x77_u8, 0xe9_u8, 0x53_u8, 0x6b_u8, 0x82_u8, 0x35_u8, 0xb_u8])
   struct INameSpaceTreeAccessible
     lpVtbl : INameSpaceTreeAccessibleVTbl*
   end
@@ -9754,8 +9754,8 @@ lib LibWin32
     item_post_paint : Proc(INameSpaceTreeControlCustomDraw*, HDC, RECT*, NSTCCUSTOMDRAW*, HRESULT)
   end
 
-  INameSpaceTreeControlCustomDraw_GUID = LibC::GUID.new("2d3ba758-33ee-42d5-bb7b-5f3431d86c78")
-  CLSID_INameSpaceTreeControlCustomDraw = "2d3ba758-33ee-42d5-bb7b-5f3431d86c78"
+  INameSpaceTreeControlCustomDraw_GUID = "2d3ba758-33ee-42d5-bb7b-5f3431d86c78"
+  IID_INameSpaceTreeControlCustomDraw = LibC::GUID.new(0x2d3ba758_u32, 0x33ee_u16, 0x42d5_u16, StaticArray[0xbb_u8, 0x7b_u8, 0x5f_u8, 0x34_u8, 0x31_u8, 0xd8_u8, 0x6c_u8, 0x78_u8])
   struct INameSpaceTreeControlCustomDraw
     lpVtbl : INameSpaceTreeControlCustomDrawVTbl*
   end
@@ -9770,8 +9770,8 @@ lib LibWin32
     desk_band_registration_changed : Proc(ITrayDeskBand*, HRESULT)
   end
 
-  ITrayDeskBand_GUID = LibC::GUID.new("6d67e846-5b9c-4db8-9cbc-dde12f4254f1")
-  CLSID_ITrayDeskBand = "6d67e846-5b9c-4db8-9cbc-dde12f4254f1"
+  ITrayDeskBand_GUID = "6d67e846-5b9c-4db8-9cbc-dde12f4254f1"
+  IID_ITrayDeskBand = LibC::GUID.new(0x6d67e846_u32, 0x5b9c_u16, 0x4db8_u16, StaticArray[0x9c_u8, 0xbc_u8, 0xdd_u8, 0xe1_u8, 0x2f_u8, 0x42_u8, 0x54_u8, 0xf1_u8])
   struct ITrayDeskBand
     lpVtbl : ITrayDeskBandVTbl*
   end
@@ -9785,8 +9785,8 @@ lib LibWin32
     destroy_band : Proc(IBandHost*, Guid*, HRESULT)
   end
 
-  IBandHost_GUID = LibC::GUID.new("b9075c7c-d48e-403f-ab99-d6c77a1084ac")
-  CLSID_IBandHost = "b9075c7c-d48e-403f-ab99-d6c77a1084ac"
+  IBandHost_GUID = "b9075c7c-d48e-403f-ab99-d6c77a1084ac"
+  IID_IBandHost = LibC::GUID.new(0xb9075c7c_u32, 0xd48e_u16, 0x403f_u16, StaticArray[0xab_u8, 0x99_u8, 0xd6_u8, 0xc7_u8, 0x7a_u8, 0x10_u8, 0x84_u8, 0xac_u8])
   struct IBandHost
     lpVtbl : IBandHostVTbl*
   end
@@ -9798,8 +9798,8 @@ lib LibWin32
     computer_info_changed : Proc(IComputerInfoChangeNotify*, HRESULT)
   end
 
-  IComputerInfoChangeNotify_GUID = LibC::GUID.new("0df60d92-6818-46d6-b358-d66170dde466")
-  CLSID_IComputerInfoChangeNotify = "0df60d92-6818-46d6-b358-d66170dde466"
+  IComputerInfoChangeNotify_GUID = "0df60d92-6818-46d6-b358-d66170dde466"
+  IID_IComputerInfoChangeNotify = LibC::GUID.new(0xdf60d92_u32, 0x6818_u16, 0x46d6_u16, StaticArray[0xb3_u8, 0x58_u8, 0xd6_u8, 0x61_u8, 0x70_u8, 0xdd_u8, 0xe4_u8, 0x66_u8])
   struct IComputerInfoChangeNotify
     lpVtbl : IComputerInfoChangeNotifyVTbl*
   end
@@ -9811,8 +9811,8 @@ lib LibWin32
     run_gadget : Proc(IDesktopGadget*, LibC::LPWSTR, HRESULT)
   end
 
-  IDesktopGadget_GUID = LibC::GUID.new("c1646bc4-f298-4f91-a204-eb2dd1709d1a")
-  CLSID_IDesktopGadget = "c1646bc4-f298-4f91-a204-eb2dd1709d1a"
+  IDesktopGadget_GUID = "c1646bc4-f298-4f91-a204-eb2dd1709d1a"
+  IID_IDesktopGadget = LibC::GUID.new(0xc1646bc4_u32, 0xf298_u16, 0x4f91_u16, StaticArray[0xa2_u8, 0x4_u8, 0xeb_u8, 0x2d_u8, 0xd1_u8, 0x70_u8, 0x9d_u8, 0x1a_u8])
   struct IDesktopGadget
     lpVtbl : IDesktopGadgetVTbl*
   end
@@ -9824,8 +9824,8 @@ lib LibWin32
     undocked : Proc(IAccessibilityDockingServiceCallback*, UNDOCK_REASON, HRESULT)
   end
 
-  IAccessibilityDockingServiceCallback_GUID = LibC::GUID.new("157733fd-a592-42e5-b594-248468c5a81b")
-  CLSID_IAccessibilityDockingServiceCallback = "157733fd-a592-42e5-b594-248468c5a81b"
+  IAccessibilityDockingServiceCallback_GUID = "157733fd-a592-42e5-b594-248468c5a81b"
+  IID_IAccessibilityDockingServiceCallback = LibC::GUID.new(0x157733fd_u32, 0xa592_u16, 0x42e5_u16, StaticArray[0xb5_u8, 0x94_u8, 0x24_u8, 0x84_u8, 0x68_u8, 0xc5_u8, 0xa8_u8, 0x1b_u8])
   struct IAccessibilityDockingServiceCallback
     lpVtbl : IAccessibilityDockingServiceCallbackVTbl*
   end
@@ -9839,8 +9839,8 @@ lib LibWin32
     undock_window : Proc(IAccessibilityDockingService*, LibC::HANDLE, HRESULT)
   end
 
-  IAccessibilityDockingService_GUID = LibC::GUID.new("8849dc22-cedf-4c95-998d-051419dd3f76")
-  CLSID_IAccessibilityDockingService = "8849dc22-cedf-4c95-998d-051419dd3f76"
+  IAccessibilityDockingService_GUID = "8849dc22-cedf-4c95-998d-051419dd3f76"
+  IID_IAccessibilityDockingService = LibC::GUID.new(0x8849dc22_u32, 0xcedf_u16, 0x4c95_u16, StaticArray[0x99_u8, 0x8d_u8, 0x5_u8, 0x14_u8, 0x19_u8, 0xdd_u8, 0x3f_u8, 0x76_u8])
   struct IAccessibilityDockingService
     lpVtbl : IAccessibilityDockingServiceVTbl*
   end
@@ -9855,8 +9855,8 @@ lib LibWin32
     get_banner : Proc(IStorageProviderBanners*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
-  IStorageProviderBanners_GUID = LibC::GUID.new("5efb46d7-47c0-4b68-acda-ded47c90ec91")
-  CLSID_IStorageProviderBanners = "5efb46d7-47c0-4b68-acda-ded47c90ec91"
+  IStorageProviderBanners_GUID = "5efb46d7-47c0-4b68-acda-ded47c90ec91"
+  IID_IStorageProviderBanners = LibC::GUID.new(0x5efb46d7_u32, 0x47c0_u16, 0x4b68_u16, StaticArray[0xac_u8, 0xda_u8, 0xde_u8, 0xd4_u8, 0x7c_u8, 0x90_u8, 0xec_u8, 0x91_u8])
   struct IStorageProviderBanners
     lpVtbl : IStorageProviderBannersVTbl*
   end
@@ -9868,8 +9868,8 @@ lib LibWin32
     copy_callback : Proc(IStorageProviderCopyHook*, LibC::HANDLE, UInt32, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
   end
 
-  IStorageProviderCopyHook_GUID = LibC::GUID.new("7bf992a9-af7a-4dba-b2e5-4d080b1ecbc6")
-  CLSID_IStorageProviderCopyHook = "7bf992a9-af7a-4dba-b2e5-4d080b1ecbc6"
+  IStorageProviderCopyHook_GUID = "7bf992a9-af7a-4dba-b2e5-4d080b1ecbc6"
+  IID_IStorageProviderCopyHook = LibC::GUID.new(0x7bf992a9_u32, 0xaf7a_u16, 0x4dba_u16, StaticArray[0xb2_u8, 0xe5_u8, 0x4d_u8, 0x8_u8, 0xb_u8, 0x1e_u8, 0xcb_u8, 0xc6_u8])
   struct IStorageProviderCopyHook
     lpVtbl : IStorageProviderCopyHookVTbl*
   end
@@ -9909,8 +9909,8 @@ lib LibWin32
     get_busy : Proc(IWebBrowser*, Int16*, HRESULT)
   end
 
-  IWebBrowser_GUID = LibC::GUID.new("eab22ac1-30c1-11cf-a7eb-0000c05bae0b")
-  CLSID_IWebBrowser = "eab22ac1-30c1-11cf-a7eb-0000c05bae0b"
+  IWebBrowser_GUID = "eab22ac1-30c1-11cf-a7eb-0000c05bae0b"
+  IID_IWebBrowser = LibC::GUID.new(0xeab22ac1_u32, 0x30c1_u16, 0x11cf_u16, StaticArray[0xa7_u8, 0xeb_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0x5b_u8, 0xae_u8, 0xb_u8])
   struct IWebBrowser
     lpVtbl : IWebBrowserVTbl*
   end
@@ -9925,8 +9925,8 @@ lib LibWin32
     invoke : Proc(DWebBrowserEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DWebBrowserEvents_GUID = LibC::GUID.new("eab22ac2-30c1-11cf-a7eb-0000c05bae0b")
-  CLSID_DWebBrowserEvents = "eab22ac2-30c1-11cf-a7eb-0000c05bae0b"
+  DWebBrowserEvents_GUID = "eab22ac2-30c1-11cf-a7eb-0000c05bae0b"
+  IID_DWebBrowserEvents = LibC::GUID.new(0xeab22ac2_u32, 0x30c1_u16, 0x11cf_u16, StaticArray[0xa7_u8, 0xeb_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0x5b_u8, 0xae_u8, 0xb_u8])
   struct DWebBrowserEvents
     lpVtbl : DWebBrowserEventsVTbl*
   end
@@ -9986,8 +9986,8 @@ lib LibWin32
     put_full_screen : Proc(IWebBrowserApp*, Int16, HRESULT)
   end
 
-  IWebBrowserApp_GUID = LibC::GUID.new("0002df05-0000-0000-c000-000000000046")
-  CLSID_IWebBrowserApp = "0002df05-0000-0000-c000-000000000046"
+  IWebBrowserApp_GUID = "0002df05-0000-0000-c000-000000000046"
+  IID_IWebBrowserApp = LibC::GUID.new(0x2df05_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IWebBrowserApp
     lpVtbl : IWebBrowserAppVTbl*
   end
@@ -10066,8 +10066,8 @@ lib LibWin32
     put_resizable : Proc(IWebBrowser2*, Int16, HRESULT)
   end
 
-  IWebBrowser2_GUID = LibC::GUID.new("d30c1661-cdaf-11d0-8a3e-00c04fc9e26e")
-  CLSID_IWebBrowser2 = "d30c1661-cdaf-11d0-8a3e-00c04fc9e26e"
+  IWebBrowser2_GUID = "d30c1661-cdaf-11d0-8a3e-00c04fc9e26e"
+  IID_IWebBrowser2 = LibC::GUID.new(0xd30c1661_u32, 0xcdaf_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0x3e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xe2_u8, 0x6e_u8])
   struct IWebBrowser2
     lpVtbl : IWebBrowser2VTbl*
   end
@@ -10082,8 +10082,8 @@ lib LibWin32
     invoke : Proc(DWebBrowserEvents2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DWebBrowserEvents2_GUID = LibC::GUID.new("34a715a0-6587-11d0-924a-0020afc7ac4d")
-  CLSID_DWebBrowserEvents2 = "34a715a0-6587-11d0-924a-0020afc7ac4d"
+  DWebBrowserEvents2_GUID = "34a715a0-6587-11d0-924a-0020afc7ac4d"
+  IID_DWebBrowserEvents2 = LibC::GUID.new(0x34a715a0_u32, 0x6587_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x4a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xc7_u8, 0xac_u8, 0x4d_u8])
   struct DWebBrowserEvents2
     lpVtbl : DWebBrowserEvents2VTbl*
   end
@@ -10098,8 +10098,8 @@ lib LibWin32
     invoke : Proc(DShellWindowsEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DShellWindowsEvents_GUID = LibC::GUID.new("fe4106e0-399a-11d0-a48c-00a0c90a8f39")
-  CLSID_DShellWindowsEvents = "fe4106e0-399a-11d0-a48c-00a0c90a8f39"
+  DShellWindowsEvents_GUID = "fe4106e0-399a-11d0-a48c-00a0c90a8f39"
+  IID_DShellWindowsEvents = LibC::GUID.new(0xfe4106e0_u32, 0x399a_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x8f_u8, 0x39_u8])
   struct DShellWindowsEvents
     lpVtbl : DShellWindowsEventsVTbl*
   end
@@ -10125,8 +10125,8 @@ lib LibWin32
     process_attach_detach : Proc(IShellWindows*, Int16, HRESULT)
   end
 
-  IShellWindows_GUID = LibC::GUID.new("85cb6900-4d95-11cf-960c-0080c7f4ee85")
-  CLSID_IShellWindows = "85cb6900-4d95-11cf-960c-0080c7f4ee85"
+  IShellWindows_GUID = "85cb6900-4d95-11cf-960c-0080c7f4ee85"
+  IID_IShellWindows = LibC::GUID.new(0x85cb6900_u32, 0x4d95_u16, 0x11cf_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xf4_u8, 0xee_u8, 0x85_u8])
   struct IShellWindows
     lpVtbl : IShellWindowsVTbl*
   end
@@ -10154,8 +10154,8 @@ lib LibWin32
     show_browser_ui : Proc(IShellUIHelper*, UInt8*, VARIANT*, VARIANT*, HRESULT)
   end
 
-  IShellUIHelper_GUID = LibC::GUID.new("729fe2f8-1ea8-11d1-8f85-00c04fc2fbe1")
-  CLSID_IShellUIHelper = "729fe2f8-1ea8-11d1-8f85-00c04fc2fbe1"
+  IShellUIHelper_GUID = "729fe2f8-1ea8-11d1-8f85-00c04fc2fbe1"
+  IID_IShellUIHelper = LibC::GUID.new(0x729fe2f8_u32, 0x1ea8_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x85_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfb_u8, 0xe1_u8])
   struct IShellUIHelper
     lpVtbl : IShellUIHelperVTbl*
   end
@@ -10199,8 +10199,8 @@ lib LibWin32
     search_guide_url : Proc(IShellUIHelper2*, UInt8**, HRESULT)
   end
 
-  IShellUIHelper2_GUID = LibC::GUID.new("a7fe6eda-1932-4281-b881-87b31b8bc52c")
-  CLSID_IShellUIHelper2 = "a7fe6eda-1932-4281-b881-87b31b8bc52c"
+  IShellUIHelper2_GUID = "a7fe6eda-1932-4281-b881-87b31b8bc52c"
+  IID_IShellUIHelper2 = LibC::GUID.new(0xa7fe6eda_u32, 0x1932_u16, 0x4281_u16, StaticArray[0xb8_u8, 0x81_u8, 0x87_u8, 0xb3_u8, 0x1b_u8, 0x8b_u8, 0xc5_u8, 0x2c_u8])
   struct IShellUIHelper2
     lpVtbl : IShellUIHelper2VTbl*
   end
@@ -10257,8 +10257,8 @@ lib LibWin32
     show_in_private_help : Proc(IShellUIHelper3*, HRESULT)
   end
 
-  IShellUIHelper3_GUID = LibC::GUID.new("528df2ec-d419-40bc-9b6d-dcdbf9c1b25d")
-  CLSID_IShellUIHelper3 = "528df2ec-d419-40bc-9b6d-dcdbf9c1b25d"
+  IShellUIHelper3_GUID = "528df2ec-d419-40bc-9b6d-dcdbf9c1b25d"
+  IID_IShellUIHelper3 = LibC::GUID.new(0x528df2ec_u32, 0xd419_u16, 0x40bc_u16, StaticArray[0x9b_u8, 0x6d_u8, 0xdc_u8, 0xdb_u8, 0xf9_u8, 0xc1_u8, 0xb2_u8, 0x5d_u8])
   struct IShellUIHelper3
     lpVtbl : IShellUIHelper3VTbl*
   end
@@ -10333,8 +10333,8 @@ lib LibWin32
     ms_active_x_filtering_enabled : Proc(IShellUIHelper4*, Int16*, HRESULT)
   end
 
-  IShellUIHelper4_GUID = LibC::GUID.new("b36e6a53-8073-499e-824c-d776330a333e")
-  CLSID_IShellUIHelper4 = "b36e6a53-8073-499e-824c-d776330a333e"
+  IShellUIHelper4_GUID = "b36e6a53-8073-499e-824c-d776330a333e"
+  IID_IShellUIHelper4 = LibC::GUID.new(0xb36e6a53_u32, 0x8073_u16, 0x499e_u16, StaticArray[0x82_u8, 0x4c_u8, 0xd7_u8, 0x76_u8, 0x33_u8, 0xa_u8, 0x33_u8, 0x3e_u8])
   struct IShellUIHelper4
     lpVtbl : IShellUIHelper4VTbl*
   end
@@ -10416,8 +10416,8 @@ lib LibWin32
     ms_change_default_browser : Proc(IShellUIHelper5*, Int16, HRESULT)
   end
 
-  IShellUIHelper5_GUID = LibC::GUID.new("a2a08b09-103d-4d3f-b91c-ea455ca82efa")
-  CLSID_IShellUIHelper5 = "a2a08b09-103d-4d3f-b91c-ea455ca82efa"
+  IShellUIHelper5_GUID = "a2a08b09-103d-4d3f-b91c-ea455ca82efa"
+  IID_IShellUIHelper5 = LibC::GUID.new(0xa2a08b09_u32, 0x103d_u16, 0x4d3f_u16, StaticArray[0xb9_u8, 0x1c_u8, 0xea_u8, 0x45_u8, 0x5c_u8, 0xa8_u8, 0x2e_u8, 0xfa_u8])
   struct IShellUIHelper5
     lpVtbl : IShellUIHelper5VTbl*
   end
@@ -10513,8 +10513,8 @@ lib LibWin32
     ms_launch_internet_options : Proc(IShellUIHelper6*, HRESULT)
   end
 
-  IShellUIHelper6_GUID = LibC::GUID.new("987a573e-46ee-4e89-96ab-ddf7f8fdc98c")
-  CLSID_IShellUIHelper6 = "987a573e-46ee-4e89-96ab-ddf7f8fdc98c"
+  IShellUIHelper6_GUID = "987a573e-46ee-4e89-96ab-ddf7f8fdc98c"
+  IID_IShellUIHelper6 = LibC::GUID.new(0x987a573e_u32, 0x46ee_u16, 0x4e89_u16, StaticArray[0x96_u8, 0xab_u8, 0xdd_u8, 0xf7_u8, 0xf8_u8, 0xfd_u8, 0xc9_u8, 0x8c_u8])
   struct IShellUIHelper6
     lpVtbl : IShellUIHelper6VTbl*
   end
@@ -10619,8 +10619,8 @@ lib LibWin32
     launch_ie : Proc(IShellUIHelper7*, UInt8*, Int16, HRESULT)
   end
 
-  IShellUIHelper7_GUID = LibC::GUID.new("60e567c8-9573-4ab2-a264-637c6c161cb1")
-  CLSID_IShellUIHelper7 = "60e567c8-9573-4ab2-a264-637c6c161cb1"
+  IShellUIHelper7_GUID = "60e567c8-9573-4ab2-a264-637c6c161cb1"
+  IID_IShellUIHelper7 = LibC::GUID.new(0x60e567c8_u32, 0x9573_u16, 0x4ab2_u16, StaticArray[0xa2_u8, 0x64_u8, 0x63_u8, 0x7c_u8, 0x6c_u8, 0x16_u8, 0x1c_u8, 0xb1_u8])
   struct IShellUIHelper7
     lpVtbl : IShellUIHelper7VTbl*
   end
@@ -10732,8 +10732,8 @@ lib LibWin32
     launch_in_hvsi : Proc(IShellUIHelper8*, UInt8*, HRESULT)
   end
 
-  IShellUIHelper8_GUID = LibC::GUID.new("66debcf2-05b0-4f07-b49b-b96241a65db2")
-  CLSID_IShellUIHelper8 = "66debcf2-05b0-4f07-b49b-b96241a65db2"
+  IShellUIHelper8_GUID = "66debcf2-05b0-4f07-b49b-b96241a65db2"
+  IID_IShellUIHelper8 = LibC::GUID.new(0x66debcf2_u32, 0x5b0_u16, 0x4f07_u16, StaticArray[0xb4_u8, 0x9b_u8, 0xb9_u8, 0x62_u8, 0x41_u8, 0xa6_u8, 0x5d_u8, 0xb2_u8])
   struct IShellUIHelper8
     lpVtbl : IShellUIHelper8VTbl*
   end
@@ -10846,8 +10846,8 @@ lib LibWin32
     get_os_sku : Proc(IShellUIHelper9*, UInt32*, HRESULT)
   end
 
-  IShellUIHelper9_GUID = LibC::GUID.new("6cdf73b0-7f2f-451f-bc0f-63e0f3284e54")
-  CLSID_IShellUIHelper9 = "6cdf73b0-7f2f-451f-bc0f-63e0f3284e54"
+  IShellUIHelper9_GUID = "6cdf73b0-7f2f-451f-bc0f-63e0f3284e54"
+  IID_IShellUIHelper9 = LibC::GUID.new(0x6cdf73b0_u32, 0x7f2f_u16, 0x451f_u16, StaticArray[0xbc_u8, 0xf_u8, 0x63_u8, 0xe0_u8, 0xf3_u8, 0x28_u8, 0x4e_u8, 0x54_u8])
   struct IShellUIHelper9
     lpVtbl : IShellUIHelper9VTbl*
   end
@@ -10862,8 +10862,8 @@ lib LibWin32
     invoke : Proc(DShellNameSpaceEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DShellNameSpaceEvents_GUID = LibC::GUID.new("55136806-b2de-11d1-b9f2-00a0c98bc547")
-  CLSID_DShellNameSpaceEvents = "55136806-b2de-11d1-b9f2-00a0c98bc547"
+  DShellNameSpaceEvents_GUID = "55136806-b2de-11d1-b9f2-00a0c98bc547"
+  IID_DShellNameSpaceEvents = LibC::GUID.new(0x55136806_u32, 0xb2de_u16, 0x11d1_u16, StaticArray[0xb9_u8, 0xf2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8b_u8, 0xc5_u8, 0x47_u8])
   struct DShellNameSpaceEvents
     lpVtbl : DShellNameSpaceEventsVTbl*
   end
@@ -10891,8 +10891,8 @@ lib LibWin32
     set_root : Proc(IShellFavoritesNameSpace*, UInt8*, HRESULT)
   end
 
-  IShellFavoritesNameSpace_GUID = LibC::GUID.new("55136804-b2de-11d1-b9f2-00a0c98bc547")
-  CLSID_IShellFavoritesNameSpace = "55136804-b2de-11d1-b9f2-00a0c98bc547"
+  IShellFavoritesNameSpace_GUID = "55136804-b2de-11d1-b9f2-00a0c98bc547"
+  IID_IShellFavoritesNameSpace = LibC::GUID.new(0x55136804_u32, 0xb2de_u16, 0x11d1_u16, StaticArray[0xb9_u8, 0xf2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8b_u8, 0xc5_u8, 0x47_u8])
   struct IShellFavoritesNameSpace
     lpVtbl : IShellFavoritesNameSpaceVTbl*
   end
@@ -10941,8 +10941,8 @@ lib LibWin32
     unselect_all : Proc(IShellNameSpace*, HRESULT)
   end
 
-  IShellNameSpace_GUID = LibC::GUID.new("e572d3c9-37be-4ae2-825d-d521763e3108")
-  CLSID_IShellNameSpace = "e572d3c9-37be-4ae2-825d-d521763e3108"
+  IShellNameSpace_GUID = "e572d3c9-37be-4ae2-825d-d521763e3108"
+  IID_IShellNameSpace = LibC::GUID.new(0xe572d3c9_u32, 0x37be_u16, 0x4ae2_u16, StaticArray[0x82_u8, 0x5d_u8, 0xd5_u8, 0x21_u8, 0x76_u8, 0x3e_u8, 0x31_u8, 0x8_u8])
   struct IShellNameSpace
     lpVtbl : IShellNameSpaceVTbl*
   end
@@ -10971,8 +10971,8 @@ lib LibWin32
     set_per_error_display : Proc(IScriptErrorList*, LibC::BOOL, HRESULT)
   end
 
-  IScriptErrorList_GUID = LibC::GUID.new("f3470f24-15fd-11d2-bb2e-00805ff7efca")
-  CLSID_IScriptErrorList = "f3470f24-15fd-11d2-bb2e-00805ff7efca"
+  IScriptErrorList_GUID = "f3470f24-15fd-11d2-bb2e-00805ff7efca"
+  IID_IScriptErrorList = LibC::GUID.new(0xf3470f24_u32, 0x15fd_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x2e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xf7_u8, 0xef_u8, 0xca_u8])
   struct IScriptErrorList
     lpVtbl : IScriptErrorListVTbl*
   end
@@ -10988,8 +10988,8 @@ lib LibWin32
     set_folder_view : Proc(IFolderViewOC*, IDispatch, HRESULT)
   end
 
-  IFolderViewOC_GUID = LibC::GUID.new("9ba05970-f6a8-11cf-a442-00a0c90a8f39")
-  CLSID_IFolderViewOC = "9ba05970-f6a8-11cf-a442-00a0c90a8f39"
+  IFolderViewOC_GUID = "9ba05970-f6a8-11cf-a442-00a0c90a8f39"
+  IID_IFolderViewOC = LibC::GUID.new(0x9ba05970_u32, 0xf6a8_u16, 0x11cf_u16, StaticArray[0xa4_u8, 0x42_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x8f_u8, 0x39_u8])
   struct IFolderViewOC
     lpVtbl : IFolderViewOCVTbl*
   end
@@ -11004,8 +11004,8 @@ lib LibWin32
     invoke : Proc(DShellFolderViewEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DShellFolderViewEvents_GUID = LibC::GUID.new("62112aa2-ebe4-11cf-a5fb-0020afe7292d")
-  CLSID_DShellFolderViewEvents = "62112aa2-ebe4-11cf-a5fb-0020afe7292d"
+  DShellFolderViewEvents_GUID = "62112aa2-ebe4-11cf-a5fb-0020afe7292d"
+  IID_DShellFolderViewEvents = LibC::GUID.new(0x62112aa2_u32, 0xebe4_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0xfb_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xe7_u8, 0x29_u8, 0x2d_u8])
   struct DShellFolderViewEvents
     lpVtbl : DShellFolderViewEventsVTbl*
   end
@@ -11022,8 +11022,8 @@ lib LibWin32
     get_value : Proc(DFConstraint*, VARIANT*, HRESULT)
   end
 
-  DFConstraint_GUID = LibC::GUID.new("4a3df050-23bd-11d2-939f-00a0c91eedba")
-  CLSID_DFConstraint = "4a3df050-23bd-11d2-939f-00a0c91eedba"
+  DFConstraint_GUID = "4a3df050-23bd-11d2-939f-00a0c91eedba"
+  IID_DFConstraint = LibC::GUID.new(0x4a3df050_u32, 0x23bd_u16, 0x11d2_u16, StaticArray[0x93_u8, 0x9f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1e_u8, 0xed_u8, 0xba_u8])
   struct DFConstraint
     lpVtbl : DFConstraintVTbl*
   end
@@ -11055,8 +11055,8 @@ lib LibWin32
     invoke_verb : Proc(FolderItem*, VARIANT, HRESULT)
   end
 
-  FolderItem_GUID = LibC::GUID.new("fac32c80-cbe4-11ce-8350-444553540000")
-  CLSID_FolderItem = "fac32c80-cbe4-11ce-8350-444553540000"
+  FolderItem_GUID = "fac32c80-cbe4-11ce-8350-444553540000"
+  IID_FolderItem = LibC::GUID.new(0xfac32c80_u32, 0xcbe4_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct FolderItem
     lpVtbl : FolderItemVTbl*
   end
@@ -11076,8 +11076,8 @@ lib LibWin32
     _new_enum : Proc(FolderItems*, IUnknown*, HRESULT)
   end
 
-  FolderItems_GUID = LibC::GUID.new("744129e0-cbe5-11ce-8350-444553540000")
-  CLSID_FolderItems = "744129e0-cbe5-11ce-8350-444553540000"
+  FolderItems_GUID = "744129e0-cbe5-11ce-8350-444553540000"
+  IID_FolderItems = LibC::GUID.new(0x744129e0_u32, 0xcbe5_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct FolderItems
     lpVtbl : FolderItemsVTbl*
   end
@@ -11096,8 +11096,8 @@ lib LibWin32
     do_it : Proc(FolderItemVerb*, HRESULT)
   end
 
-  FolderItemVerb_GUID = LibC::GUID.new("08ec3e00-50b0-11cf-960c-0080c7f4ee85")
-  CLSID_FolderItemVerb = "08ec3e00-50b0-11cf-960c-0080c7f4ee85"
+  FolderItemVerb_GUID = "08ec3e00-50b0-11cf-960c-0080c7f4ee85"
+  IID_FolderItemVerb = LibC::GUID.new(0x8ec3e00_u32, 0x50b0_u16, 0x11cf_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xf4_u8, 0xee_u8, 0x85_u8])
   struct FolderItemVerb
     lpVtbl : FolderItemVerbVTbl*
   end
@@ -11117,8 +11117,8 @@ lib LibWin32
     _new_enum : Proc(FolderItemVerbs*, IUnknown*, HRESULT)
   end
 
-  FolderItemVerbs_GUID = LibC::GUID.new("1f8352c0-50b0-11cf-960c-0080c7f4ee85")
-  CLSID_FolderItemVerbs = "1f8352c0-50b0-11cf-960c-0080c7f4ee85"
+  FolderItemVerbs_GUID = "1f8352c0-50b0-11cf-960c-0080c7f4ee85"
+  IID_FolderItemVerbs = LibC::GUID.new(0x1f8352c0_u32, 0x50b0_u16, 0x11cf_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xf4_u8, 0xee_u8, 0x85_u8])
   struct FolderItemVerbs
     lpVtbl : FolderItemVerbsVTbl*
   end
@@ -11143,8 +11143,8 @@ lib LibWin32
     get_details_of : Proc(Folder*, VARIANT, Int32, UInt8**, HRESULT)
   end
 
-  Folder_GUID = LibC::GUID.new("bbcbde60-c3ff-11ce-8350-444553540000")
-  CLSID_Folder = "bbcbde60-c3ff-11ce-8350-444553540000"
+  Folder_GUID = "bbcbde60-c3ff-11ce-8350-444553540000"
+  IID_Folder = LibC::GUID.new(0xbbcbde60_u32, 0xc3ff_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct Folder
     lpVtbl : FolderVTbl*
   end
@@ -11174,8 +11174,8 @@ lib LibWin32
     dismissed_web_view_barricade : Proc(Folder2*, HRESULT)
   end
 
-  Folder2_GUID = LibC::GUID.new("f0d2d8ef-3890-11d2-bf8b-00c04fb93661")
-  CLSID_Folder2 = "f0d2d8ef-3890-11d2-bf8b-00c04fb93661"
+  Folder2_GUID = "f0d2d8ef-3890-11d2-bf8b-00c04fb93661"
+  IID_Folder2 = LibC::GUID.new(0xf0d2d8ef_u32, 0x3890_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x8b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x36_u8, 0x61_u8])
   struct Folder2
     lpVtbl : Folder2VTbl*
   end
@@ -11207,8 +11207,8 @@ lib LibWin32
     put_show_web_view_barricade : Proc(Folder3*, Int16, HRESULT)
   end
 
-  Folder3_GUID = LibC::GUID.new("a7ae5f64-c4d7-4d7f-9307-4d24ee54b841")
-  CLSID_Folder3 = "a7ae5f64-c4d7-4d7f-9307-4d24ee54b841"
+  Folder3_GUID = "a7ae5f64-c4d7-4d7f-9307-4d24ee54b841"
+  IID_Folder3 = LibC::GUID.new(0xa7ae5f64_u32, 0xc4d7_u16, 0x4d7f_u16, StaticArray[0x93_u8, 0x7_u8, 0x4d_u8, 0x24_u8, 0xee_u8, 0x54_u8, 0xb8_u8, 0x41_u8])
   struct Folder3
     lpVtbl : Folder3VTbl*
   end
@@ -11242,8 +11242,8 @@ lib LibWin32
     extended_property : Proc(FolderItem2*, UInt8*, VARIANT*, HRESULT)
   end
 
-  FolderItem2_GUID = LibC::GUID.new("edc817aa-92b8-11d1-b075-00c04fc33aa5")
-  CLSID_FolderItem2 = "edc817aa-92b8-11d1-b075-00c04fc33aa5"
+  FolderItem2_GUID = "edc817aa-92b8-11d1-b075-00c04fc33aa5"
+  IID_FolderItem2 = LibC::GUID.new(0xedc817aa_u32, 0x92b8_u16, 0x11d1_u16, StaticArray[0xb0_u8, 0x75_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x3a_u8, 0xa5_u8])
   struct FolderItem2
     lpVtbl : FolderItem2VTbl*
   end
@@ -11264,8 +11264,8 @@ lib LibWin32
     invoke_verb_ex : Proc(FolderItems2*, VARIANT, VARIANT, HRESULT)
   end
 
-  FolderItems2_GUID = LibC::GUID.new("c94f0ad0-f363-11d2-a327-00c04f8eec7f")
-  CLSID_FolderItems2 = "c94f0ad0-f363-11d2-a327-00c04f8eec7f"
+  FolderItems2_GUID = "c94f0ad0-f363-11d2-a327-00c04f8eec7f"
+  IID_FolderItems2 = LibC::GUID.new(0xc94f0ad0_u32, 0xf363_u16, 0x11d2_u16, StaticArray[0xa3_u8, 0x27_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xec_u8, 0x7f_u8])
   struct FolderItems2
     lpVtbl : FolderItems2VTbl*
   end
@@ -11288,8 +11288,8 @@ lib LibWin32
     get_verbs : Proc(FolderItems3*, FolderItemVerbs*, HRESULT)
   end
 
-  FolderItems3_GUID = LibC::GUID.new("eaa7c309-bbec-49d5-821d-64d966cb667f")
-  CLSID_FolderItems3 = "eaa7c309-bbec-49d5-821d-64d966cb667f"
+  FolderItems3_GUID = "eaa7c309-bbec-49d5-821d-64d966cb667f"
+  IID_FolderItems3 = LibC::GUID.new(0xeaa7c309_u32, 0xbbec_u16, 0x49d5_u16, StaticArray[0x82_u8, 0x1d_u8, 0x64_u8, 0xd9_u8, 0x66_u8, 0xcb_u8, 0x66_u8, 0x7f_u8])
   struct FolderItems3
     lpVtbl : FolderItems3VTbl*
   end
@@ -11320,8 +11320,8 @@ lib LibWin32
     save : Proc(IShellLinkDual*, VARIANT, HRESULT)
   end
 
-  IShellLinkDual_GUID = LibC::GUID.new("88a05c00-f000-11ce-8350-444553540000")
-  CLSID_IShellLinkDual = "88a05c00-f000-11ce-8350-444553540000"
+  IShellLinkDual_GUID = "88a05c00-f000-11ce-8350-444553540000"
+  IID_IShellLinkDual = LibC::GUID.new(0x88a05c00_u32, 0xf000_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct IShellLinkDual
     lpVtbl : IShellLinkDualVTbl*
   end
@@ -11353,8 +11353,8 @@ lib LibWin32
     get_target : Proc(IShellLinkDual2*, FolderItem*, HRESULT)
   end
 
-  IShellLinkDual2_GUID = LibC::GUID.new("317ee249-f12e-11d2-b1e4-00c04f8eeb3e")
-  CLSID_IShellLinkDual2 = "317ee249-f12e-11d2-b1e4-00c04f8eeb3e"
+  IShellLinkDual2_GUID = "317ee249-f12e-11d2-b1e4-00c04f8eeb3e"
+  IID_IShellLinkDual2 = LibC::GUID.new(0x317ee249_u32, 0xf12e_u16, 0x11d2_u16, StaticArray[0xb1_u8, 0xe4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xeb_u8, 0x3e_u8])
   struct IShellLinkDual2
     lpVtbl : IShellLinkDual2VTbl*
   end
@@ -11378,8 +11378,8 @@ lib LibWin32
     get_view_options : Proc(IShellFolderViewDual*, Int32*, HRESULT)
   end
 
-  IShellFolderViewDual_GUID = LibC::GUID.new("e7a1af80-4d96-11cf-960c-0080c7f4ee85")
-  CLSID_IShellFolderViewDual = "e7a1af80-4d96-11cf-960c-0080c7f4ee85"
+  IShellFolderViewDual_GUID = "e7a1af80-4d96-11cf-960c-0080c7f4ee85"
+  IID_IShellFolderViewDual = LibC::GUID.new(0xe7a1af80_u32, 0x4d96_u16, 0x11cf_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xf4_u8, 0xee_u8, 0x85_u8])
   struct IShellFolderViewDual
     lpVtbl : IShellFolderViewDualVTbl*
   end
@@ -11406,8 +11406,8 @@ lib LibWin32
     select_item_relative : Proc(IShellFolderViewDual2*, Int32, HRESULT)
   end
 
-  IShellFolderViewDual2_GUID = LibC::GUID.new("31c147b6-0ade-4a3c-b514-ddf932ef6d17")
-  CLSID_IShellFolderViewDual2 = "31c147b6-0ade-4a3c-b514-ddf932ef6d17"
+  IShellFolderViewDual2_GUID = "31c147b6-0ade-4a3c-b514-ddf932ef6d17"
+  IID_IShellFolderViewDual2 = LibC::GUID.new(0x31c147b6_u32, 0xade_u16, 0x4a3c_u16, StaticArray[0xb5_u8, 0x14_u8, 0xdd_u8, 0xf9_u8, 0x32_u8, 0xef_u8, 0x6d_u8, 0x17_u8])
   struct IShellFolderViewDual2
     lpVtbl : IShellFolderViewDual2VTbl*
   end
@@ -11443,8 +11443,8 @@ lib LibWin32
     filter_view : Proc(IShellFolderViewDual3*, UInt8*, HRESULT)
   end
 
-  IShellFolderViewDual3_GUID = LibC::GUID.new("29ec8e6c-46d3-411f-baaa-611a6c9cac66")
-  CLSID_IShellFolderViewDual3 = "29ec8e6c-46d3-411f-baaa-611a6c9cac66"
+  IShellFolderViewDual3_GUID = "29ec8e6c-46d3-411f-baaa-611a6c9cac66"
+  IID_IShellFolderViewDual3 = LibC::GUID.new(0x29ec8e6c_u32, 0x46d3_u16, 0x411f_u16, StaticArray[0xba_u8, 0xaa_u8, 0x61_u8, 0x1a_u8, 0x6c_u8, 0x9c_u8, 0xac_u8, 0x66_u8])
   struct IShellFolderViewDual3
     lpVtbl : IShellFolderViewDual3VTbl*
   end
@@ -11482,8 +11482,8 @@ lib LibWin32
     control_panel_item : Proc(IShellDispatch*, UInt8*, HRESULT)
   end
 
-  IShellDispatch_GUID = LibC::GUID.new("d8f015c0-c278-11ce-a49e-444553540000")
-  CLSID_IShellDispatch = "d8f015c0-c278-11ce-a49e-444553540000"
+  IShellDispatch_GUID = "d8f015c0-c278-11ce-a49e-444553540000"
+  IID_IShellDispatch = LibC::GUID.new(0xd8f015c0_u32, 0xc278_u16, 0x11ce_u16, StaticArray[0xa4_u8, 0x9e_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct IShellDispatch
     lpVtbl : IShellDispatchVTbl*
   end
@@ -11530,8 +11530,8 @@ lib LibWin32
     show_browser_bar : Proc(IShellDispatch2*, UInt8*, VARIANT, VARIANT*, HRESULT)
   end
 
-  IShellDispatch2_GUID = LibC::GUID.new("a4c6892c-3ba9-11d2-9dea-00c04fb16162")
-  CLSID_IShellDispatch2 = "a4c6892c-3ba9-11d2-9dea-00c04fb16162"
+  IShellDispatch2_GUID = "a4c6892c-3ba9-11d2-9dea-00c04fb16162"
+  IID_IShellDispatch2 = LibC::GUID.new(0xa4c6892c_u32, 0x3ba9_u16, 0x11d2_u16, StaticArray[0x9d_u8, 0xea_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb1_u8, 0x61_u8, 0x62_u8])
   struct IShellDispatch2
     lpVtbl : IShellDispatch2VTbl*
   end
@@ -11579,8 +11579,8 @@ lib LibWin32
     add_to_recent : Proc(IShellDispatch3*, VARIANT, UInt8*, HRESULT)
   end
 
-  IShellDispatch3_GUID = LibC::GUID.new("177160ca-bb5a-411c-841d-bd38facdeaa0")
-  CLSID_IShellDispatch3 = "177160ca-bb5a-411c-841d-bd38facdeaa0"
+  IShellDispatch3_GUID = "177160ca-bb5a-411c-841d-bd38facdeaa0"
+  IID_IShellDispatch3 = LibC::GUID.new(0x177160ca_u32, 0xbb5a_u16, 0x411c_u16, StaticArray[0x84_u8, 0x1d_u8, 0xbd_u8, 0x38_u8, 0xfa_u8, 0xcd_u8, 0xea_u8, 0xa0_u8])
   struct IShellDispatch3
     lpVtbl : IShellDispatch3VTbl*
   end
@@ -11632,8 +11632,8 @@ lib LibWin32
     get_setting : Proc(IShellDispatch4*, Int32, Int16*, HRESULT)
   end
 
-  IShellDispatch4_GUID = LibC::GUID.new("efd84b2d-4bcf-4298-be25-eb542a59fbda")
-  CLSID_IShellDispatch4 = "efd84b2d-4bcf-4298-be25-eb542a59fbda"
+  IShellDispatch4_GUID = "efd84b2d-4bcf-4298-be25-eb542a59fbda"
+  IID_IShellDispatch4 = LibC::GUID.new(0xefd84b2d_u32, 0x4bcf_u16, 0x4298_u16, StaticArray[0xbe_u8, 0x25_u8, 0xeb_u8, 0x54_u8, 0x2a_u8, 0x59_u8, 0xfb_u8, 0xda_u8])
   struct IShellDispatch4
     lpVtbl : IShellDispatch4VTbl*
   end
@@ -11686,8 +11686,8 @@ lib LibWin32
     window_switcher : Proc(IShellDispatch5*, HRESULT)
   end
 
-  IShellDispatch5_GUID = LibC::GUID.new("866738b9-6cf2-4de8-8767-f794ebe74f4e")
-  CLSID_IShellDispatch5 = "866738b9-6cf2-4de8-8767-f794ebe74f4e"
+  IShellDispatch5_GUID = "866738b9-6cf2-4de8-8767-f794ebe74f4e"
+  IID_IShellDispatch5 = LibC::GUID.new(0x866738b9_u32, 0x6cf2_u16, 0x4de8_u16, StaticArray[0x87_u8, 0x67_u8, 0xf7_u8, 0x94_u8, 0xeb_u8, 0xe7_u8, 0x4f_u8, 0x4e_u8])
   struct IShellDispatch5
     lpVtbl : IShellDispatch5VTbl*
   end
@@ -11741,8 +11741,8 @@ lib LibWin32
     search_command : Proc(IShellDispatch6*, HRESULT)
   end
 
-  IShellDispatch6_GUID = LibC::GUID.new("286e6f1b-7113-4355-9562-96b7e9d64c54")
-  CLSID_IShellDispatch6 = "286e6f1b-7113-4355-9562-96b7e9d64c54"
+  IShellDispatch6_GUID = "286e6f1b-7113-4355-9562-96b7e9d64c54"
+  IID_IShellDispatch6 = LibC::GUID.new(0x286e6f1b_u32, 0x7113_u16, 0x4355_u16, StaticArray[0x95_u8, 0x62_u8, 0x96_u8, 0xb7_u8, 0xe9_u8, 0xd6_u8, 0x4c_u8, 0x54_u8])
   struct IShellDispatch6
     lpVtbl : IShellDispatch6VTbl*
   end
@@ -11762,8 +11762,8 @@ lib LibWin32
     get_query_file : Proc(IFileSearchBand*, VARIANT*, HRESULT)
   end
 
-  IFileSearchBand_GUID = LibC::GUID.new("2d91eea1-9932-11d2-be86-00a0c9a83da1")
-  CLSID_IFileSearchBand = "2d91eea1-9932-11d2-be86-00a0c9a83da1"
+  IFileSearchBand_GUID = "2d91eea1-9932-11d2-be86-00a0c9a83da1"
+  IID_IFileSearchBand = LibC::GUID.new(0x2d91eea1_u32, 0x9932_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x86_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa8_u8, 0x3d_u8, 0xa1_u8])
   struct IFileSearchBand
     lpVtbl : IFileSearchBandVTbl*
   end
@@ -11787,8 +11787,8 @@ lib LibWin32
     set_header_text : Proc(IWebWizardHost*, UInt8*, UInt8*, HRESULT)
   end
 
-  IWebWizardHost_GUID = LibC::GUID.new("18bcc359-4990-4bfb-b951-3c83702be5f9")
-  CLSID_IWebWizardHost = "18bcc359-4990-4bfb-b951-3c83702be5f9"
+  IWebWizardHost_GUID = "18bcc359-4990-4bfb-b951-3c83702be5f9"
+  IID_IWebWizardHost = LibC::GUID.new(0x18bcc359_u32, 0x4990_u16, 0x4bfb_u16, StaticArray[0xb9_u8, 0x51_u8, 0x3c_u8, 0x83_u8, 0x70_u8, 0x2b_u8, 0xe5_u8, 0xf9_u8])
   struct IWebWizardHost
     lpVtbl : IWebWizardHostVTbl*
   end
@@ -11813,8 +11813,8 @@ lib LibWin32
     sign_string : Proc(IWebWizardHost2*, UInt8*, UInt8**, HRESULT)
   end
 
-  IWebWizardHost2_GUID = LibC::GUID.new("f9c013dc-3c23-4041-8e39-cfb402f7ea59")
-  CLSID_IWebWizardHost2 = "f9c013dc-3c23-4041-8e39-cfb402f7ea59"
+  IWebWizardHost2_GUID = "f9c013dc-3c23-4041-8e39-cfb402f7ea59"
+  IID_IWebWizardHost2 = LibC::GUID.new(0xf9c013dc_u32, 0x3c23_u16, 0x4041_u16, StaticArray[0x8e_u8, 0x39_u8, 0xcf_u8, 0xb4_u8, 0x2_u8, 0xf7_u8, 0xea_u8, 0x59_u8])
   struct IWebWizardHost2
     lpVtbl : IWebWizardHost2VTbl*
   end
@@ -11839,8 +11839,8 @@ lib LibWin32
     passport_authenticate : Proc(INewWDEvents*, UInt8*, Int16*, HRESULT)
   end
 
-  INewWDEvents_GUID = LibC::GUID.new("0751c551-7568-41c9-8e5b-e22e38919236")
-  CLSID_INewWDEvents = "0751c551-7568-41c9-8e5b-e22e38919236"
+  INewWDEvents_GUID = "0751c551-7568-41c9-8e5b-e22e38919236"
+  IID_INewWDEvents = LibC::GUID.new(0x751c551_u32, 0x7568_u16, 0x41c9_u16, StaticArray[0x8e_u8, 0x5b_u8, 0xe2_u8, 0x2e_u8, 0x38_u8, 0x91_u8, 0x92_u8, 0x36_u8])
   struct INewWDEvents
     lpVtbl : INewWDEventsVTbl*
   end
@@ -11853,8 +11853,8 @@ lib LibWin32
     enable : Proc(IAutoComplete*, LibC::BOOL, HRESULT)
   end
 
-  IAutoComplete_GUID = LibC::GUID.new("00bb2762-6a77-11d0-a535-00c04fd7d062")
-  CLSID_IAutoComplete = "00bb2762-6a77-11d0-a535-00c04fd7d062"
+  IAutoComplete_GUID = "00bb2762-6a77-11d0-a535-00c04fd7d062"
+  IID_IAutoComplete = LibC::GUID.new(0xbb2762_u32, 0x6a77_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x35_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xd0_u8, 0x62_u8])
   struct IAutoComplete
     lpVtbl : IAutoCompleteVTbl*
   end
@@ -11869,8 +11869,8 @@ lib LibWin32
     get_options : Proc(IAutoComplete2*, UInt32*, HRESULT)
   end
 
-  IAutoComplete2_GUID = LibC::GUID.new("eac04bc0-3791-11d2-bb95-0060977b464c")
-  CLSID_IAutoComplete2 = "eac04bc0-3791-11d2-bb95-0060977b464c"
+  IAutoComplete2_GUID = "eac04bc0-3791-11d2-bb95-0060977b464c"
+  IID_IAutoComplete2 = LibC::GUID.new(0xeac04bc0_u32, 0x3791_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x95_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x7b_u8, 0x46_u8, 0x4c_u8])
   struct IAutoComplete2
     lpVtbl : IAutoComplete2VTbl*
   end
@@ -11888,8 +11888,8 @@ lib LibWin32
     get_enum_options : Proc(IEnumACString*, UInt32*, HRESULT)
   end
 
-  IEnumACString_GUID = LibC::GUID.new("8e74c210-cf9d-4eaf-a403-7356428f0a5a")
-  CLSID_IEnumACString = "8e74c210-cf9d-4eaf-a403-7356428f0a5a"
+  IEnumACString_GUID = "8e74c210-cf9d-4eaf-a403-7356428f0a5a"
+  IID_IEnumACString = LibC::GUID.new(0x8e74c210_u32, 0xcf9d_u16, 0x4eaf_u16, StaticArray[0xa4_u8, 0x3_u8, 0x73_u8, 0x56_u8, 0x42_u8, 0x8f_u8, 0xa_u8, 0x5a_u8])
   struct IEnumACString
     lpVtbl : IEnumACStringVTbl*
   end
@@ -11905,8 +11905,8 @@ lib LibWin32
     end_operation : Proc(IDataObjectAsyncCapability*, HRESULT, IBindCtx, UInt32, HRESULT)
   end
 
-  IDataObjectAsyncCapability_GUID = LibC::GUID.new("3d8b0590-f691-11d2-8ea9-006097df5bd4")
-  CLSID_IDataObjectAsyncCapability = "3d8b0590-f691-11d2-8ea9-006097df5bd4"
+  IDataObjectAsyncCapability_GUID = "3d8b0590-f691-11d2-8ea9-006097df5bd4"
+  IID_IDataObjectAsyncCapability = LibC::GUID.new(0x3d8b0590_u32, 0xf691_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xa9_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xdf_u8, 0x5b_u8, 0xd4_u8])
   struct IDataObjectAsyncCapability
     lpVtbl : IDataObjectAsyncCapabilityVTbl*
   end
@@ -11919,8 +11919,8 @@ lib LibWin32
     extract : Proc(IExtractIconA*, PSTR, UInt32, HANDLE*, HANDLE*, UInt32, HRESULT)
   end
 
-  IExtractIconA_GUID = LibC::GUID.new("000214eb-0000-0000-c000-000000000046")
-  CLSID_IExtractIconA = "000214eb-0000-0000-c000-000000000046"
+  IExtractIconA_GUID = "000214eb-0000-0000-c000-000000000046"
+  IID_IExtractIconA = LibC::GUID.new(0x214eb_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IExtractIconA
     lpVtbl : IExtractIconAVTbl*
   end
@@ -11933,8 +11933,8 @@ lib LibWin32
     extract : Proc(IExtractIconW*, LibC::LPWSTR, UInt32, HANDLE*, HANDLE*, UInt32, HRESULT)
   end
 
-  IExtractIconW_GUID = LibC::GUID.new("000214fa-0000-0000-c000-000000000046")
-  CLSID_IExtractIconW = "000214fa-0000-0000-c000-000000000046"
+  IExtractIconW_GUID = "000214fa-0000-0000-c000-000000000046"
+  IID_IExtractIconW = LibC::GUID.new(0x214fa_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IExtractIconW
     lpVtbl : IExtractIconWVTbl*
   end
@@ -11950,8 +11950,8 @@ lib LibWin32
     overlay_index_from_image_index : Proc(IShellIconOverlayManager*, Int32, Int32*, LibC::BOOL, HRESULT)
   end
 
-  IShellIconOverlayManager_GUID = LibC::GUID.new("f10b5e34-dd3b-42a7-aa7d-2f4ec54bb09b")
-  CLSID_IShellIconOverlayManager = "f10b5e34-dd3b-42a7-aa7d-2f4ec54bb09b"
+  IShellIconOverlayManager_GUID = "f10b5e34-dd3b-42a7-aa7d-2f4ec54bb09b"
+  IID_IShellIconOverlayManager = LibC::GUID.new(0xf10b5e34_u32, 0xdd3b_u16, 0x42a7_u16, StaticArray[0xaa_u8, 0x7d_u8, 0x2f_u8, 0x4e_u8, 0xc5_u8, 0x4b_u8, 0xb0_u8, 0x9b_u8])
   struct IShellIconOverlayManager
     lpVtbl : IShellIconOverlayManagerVTbl*
   end
@@ -11964,8 +11964,8 @@ lib LibWin32
     get_overlay_icon_index : Proc(IShellIconOverlay*, ITEMIDLIST*, Int32*, HRESULT)
   end
 
-  IShellIconOverlay_GUID = LibC::GUID.new("7d688a70-c613-11d0-999b-00c04fd655e1")
-  CLSID_IShellIconOverlay = "7d688a70-c613-11d0-999b-00c04fd655e1"
+  IShellIconOverlay_GUID = "7d688a70-c613-11d0-999b-00c04fd655e1"
+  IID_IShellIconOverlay = LibC::GUID.new(0x7d688a70_u32, 0xc613_u16, 0x11d0_u16, StaticArray[0x99_u8, 0x9b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x55_u8, 0xe1_u8])
   struct IShellIconOverlay
     lpVtbl : IShellIconOverlayVTbl*
   end
@@ -11977,8 +11977,8 @@ lib LibWin32
     translate : Proc(IURLSearchHook*, Char*, UInt32, HRESULT)
   end
 
-  IURLSearchHook_GUID = LibC::GUID.new("ac60f6a0-0fd9-11d0-99cb-00c04fd64497")
-  CLSID_IURLSearchHook = "ac60f6a0-0fd9-11d0-99cb-00c04fd64497"
+  IURLSearchHook_GUID = "ac60f6a0-0fd9-11d0-99cb-00c04fd64497"
+  IID_IURLSearchHook = LibC::GUID.new(0xac60f6a0_u32, 0xfd9_u16, 0x11d0_u16, StaticArray[0x99_u8, 0xcb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x44_u8, 0x97_u8])
   struct IURLSearchHook
     lpVtbl : IURLSearchHookVTbl*
   end
@@ -11992,8 +11992,8 @@ lib LibWin32
     get_search_style : Proc(ISearchContext*, UInt32*, HRESULT)
   end
 
-  ISearchContext_GUID = LibC::GUID.new("09f656a2-41af-480c-88f7-16cc0d164615")
-  CLSID_ISearchContext = "09f656a2-41af-480c-88f7-16cc0d164615"
+  ISearchContext_GUID = "09f656a2-41af-480c-88f7-16cc0d164615"
+  IID_ISearchContext = LibC::GUID.new(0x9f656a2_u32, 0x41af_u16, 0x480c_u16, StaticArray[0x88_u8, 0xf7_u8, 0x16_u8, 0xcc_u8, 0xd_u8, 0x16_u8, 0x46_u8, 0x15_u8])
   struct ISearchContext
     lpVtbl : ISearchContextVTbl*
   end
@@ -12006,8 +12006,8 @@ lib LibWin32
     translate_with_search_context : Proc(IURLSearchHook2*, Char*, UInt32, ISearchContext, HRESULT)
   end
 
-  IURLSearchHook2_GUID = LibC::GUID.new("5ee44da4-6d32-46e3-86bc-07540dedd0e0")
-  CLSID_IURLSearchHook2 = "5ee44da4-6d32-46e3-86bc-07540dedd0e0"
+  IURLSearchHook2_GUID = "5ee44da4-6d32-46e3-86bc-07540dedd0e0"
+  IID_IURLSearchHook2 = LibC::GUID.new(0x5ee44da4_u32, 0x6d32_u16, 0x46e3_u16, StaticArray[0x86_u8, 0xbc_u8, 0x7_u8, 0x54_u8, 0xd_u8, 0xed_u8, 0xd0_u8, 0xe0_u8])
   struct IURLSearchHook2
     lpVtbl : IURLSearchHook2VTbl*
   end
@@ -12020,8 +12020,8 @@ lib LibWin32
     column_click : Proc(IShellDetails*, UInt32, HRESULT)
   end
 
-  IShellDetails_GUID = LibC::GUID.new("000214ec-0000-0000-c000-000000000046")
-  CLSID_IShellDetails = "000214ec-0000-0000-c000-000000000046"
+  IShellDetails_GUID = "000214ec-0000-0000-c000-000000000046"
+  IID_IShellDetails = LibC::GUID.new(0x214ec_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IShellDetails
     lpVtbl : IShellDetailsVTbl*
   end
@@ -12034,8 +12034,8 @@ lib LibWin32
     remove : Proc(IObjMgr*, IUnknown, HRESULT)
   end
 
-  IObjMgr_GUID = LibC::GUID.new("00bb2761-6a77-11d0-a535-00c04fd7d062")
-  CLSID_IObjMgr = "00bb2761-6a77-11d0-a535-00c04fd7d062"
+  IObjMgr_GUID = "00bb2761-6a77-11d0-a535-00c04fd7d062"
+  IID_IObjMgr = LibC::GUID.new(0xbb2761_u32, 0x6a77_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x35_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xd0_u8, 0x62_u8])
   struct IObjMgr
     lpVtbl : IObjMgrVTbl*
   end
@@ -12047,8 +12047,8 @@ lib LibWin32
     expand : Proc(IACList*, LibC::LPWSTR, HRESULT)
   end
 
-  IACList_GUID = LibC::GUID.new("77a130b0-94fd-11d0-a544-00c04fd7d062")
-  CLSID_IACList = "77a130b0-94fd-11d0-a544-00c04fd7d062"
+  IACList_GUID = "77a130b0-94fd-11d0-a544-00c04fd7d062"
+  IID_IACList = LibC::GUID.new(0x77a130b0_u32, 0x94fd_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x44_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xd0_u8, 0x62_u8])
   struct IACList
     lpVtbl : IACListVTbl*
   end
@@ -12062,8 +12062,8 @@ lib LibWin32
     get_options : Proc(IACList2*, UInt32*, HRESULT)
   end
 
-  IACList2_GUID = LibC::GUID.new("470141a0-5186-11d2-bbb6-0060977b464c")
-  CLSID_IACList2 = "470141a0-5186-11d2-bbb6-0060977b464c"
+  IACList2_GUID = "470141a0-5186-11d2-bbb6-0060977b464c"
+  IID_IACList2 = LibC::GUID.new(0x470141a0_u32, 0x5186_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0xb6_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x7b_u8, 0x46_u8, 0x4c_u8])
   struct IACList2
     lpVtbl : IACList2VTbl*
   end
@@ -12084,8 +12084,8 @@ lib LibWin32
     timer : Proc(IProgressDialog*, UInt32, Void*, HRESULT)
   end
 
-  IProgressDialog_GUID = LibC::GUID.new("ebbc7c04-315e-11d2-b62f-006097df5bd4")
-  CLSID_IProgressDialog = "ebbc7c04-315e-11d2-b62f-006097df5bd4"
+  IProgressDialog_GUID = "ebbc7c04-315e-11d2-b62f-006097df5bd4"
+  IID_IProgressDialog = LibC::GUID.new(0xebbc7c04_u32, 0x315e_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x2f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xdf_u8, 0x5b_u8, 0xd4_u8])
   struct IProgressDialog
     lpVtbl : IProgressDialogVTbl*
   end
@@ -12101,8 +12101,8 @@ lib LibWin32
     set_border_space_dw : Proc(IDockingWindowSite*, IUnknown, RECT*, HRESULT)
   end
 
-  IDockingWindowSite_GUID = LibC::GUID.new("2a342fc2-7b26-11d0-8ca9-00a0c92dbfe8")
-  CLSID_IDockingWindowSite = "2a342fc2-7b26-11d0-8ca9-00a0c92dbfe8"
+  IDockingWindowSite_GUID = "2a342fc2-7b26-11d0-8ca9-00a0c92dbfe8"
+  IID_IDockingWindowSite = LibC::GUID.new(0x2a342fc2_u32, 0x7b26_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
   struct IDockingWindowSite
     lpVtbl : IDockingWindowSiteVTbl*
   end
@@ -12114,8 +12114,8 @@ lib LibWin32
     on_change : Proc(IShellChangeNotify*, Int32, ITEMIDLIST*, ITEMIDLIST*, HRESULT)
   end
 
-  IShellChangeNotify_GUID = LibC::GUID.new("d82be2b1-5764-11d0-a96e-00c04fd705a2")
-  CLSID_IShellChangeNotify = "d82be2b1-5764-11d0-a96e-00c04fd705a2"
+  IShellChangeNotify_GUID = "d82be2b1-5764-11d0-a96e-00c04fd705a2"
+  IID_IShellChangeNotify = LibC::GUID.new(0xd82be2b1_u32, 0x5764_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x5_u8, 0xa2_u8])
   struct IShellChangeNotify
     lpVtbl : IShellChangeNotifyVTbl*
   end
@@ -12128,8 +12128,8 @@ lib LibWin32
     get_info_flags : Proc(IQueryInfo*, UInt32*, HRESULT)
   end
 
-  IQueryInfo_GUID = LibC::GUID.new("00021500-0000-0000-c000-000000000046")
-  CLSID_IQueryInfo = "00021500-0000-0000-c000-000000000046"
+  IQueryInfo_GUID = "00021500-0000-0000-c000-000000000046"
+  IID_IQueryInfo = LibC::GUID.new(0x21500_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct IQueryInfo
     lpVtbl : IQueryInfoVTbl*
   end
@@ -12141,8 +12141,8 @@ lib LibWin32
     message_sfvcb : Proc(IShellFolderViewCB*, SFVM_MESSAGE_ID, LibC::UINT_PTR, LPARAM, HRESULT)
   end
 
-  IShellFolderViewCB_GUID = LibC::GUID.new("2047e320-f2a9-11ce-ae65-08002b2e1262")
-  CLSID_IShellFolderViewCB = "2047e320-f2a9-11ce-ae65-08002b2e1262"
+  IShellFolderViewCB_GUID = "2047e320-f2a9-11ce-ae65-08002b2e1262"
+  IID_IShellFolderViewCB = LibC::GUID.new(0x2047e320_u32, 0xf2a9_u16, 0x11ce_u16, StaticArray[0xae_u8, 0x65_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2e_u8, 0x12_u8, 0x62_u8])
   struct IShellFolderViewCB
     lpVtbl : IShellFolderViewCBVTbl*
   end
@@ -12181,8 +12181,8 @@ lib LibWin32
     set_automation_object : Proc(IShellFolderView*, IDispatch, HRESULT)
   end
 
-  IShellFolderView_GUID = LibC::GUID.new("37a378c0-f82d-11ce-ae65-08002b2e1262")
-  CLSID_IShellFolderView = "37a378c0-f82d-11ce-ae65-08002b2e1262"
+  IShellFolderView_GUID = "37a378c0-f82d-11ce-ae65-08002b2e1262"
+  IID_IShellFolderView = LibC::GUID.new(0x37a378c0_u32, 0xf82d_u16, 0x11ce_u16, StaticArray[0xae_u8, 0x65_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2e_u8, 0x12_u8, 0x62_u8])
   struct IShellFolderView
     lpVtbl : IShellFolderViewVTbl*
   end
@@ -12196,8 +12196,8 @@ lib LibWin32
     remove_property_npb : Proc(INamedPropertyBag*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  INamedPropertyBag_GUID = LibC::GUID.new("fb700430-952c-11d1-946f-000000000000")
-  CLSID_INamedPropertyBag = "fb700430-952c-11d1-946f-000000000000"
+  INamedPropertyBag_GUID = "fb700430-952c-11d1-946f-000000000000"
+  IID_INamedPropertyBag = LibC::GUID.new(0xfb700430_u32, 0x952c_u16, 0x11d1_u16, StaticArray[0x94_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct INamedPropertyBag
     lpVtbl : INamedPropertyBagVTbl*
   end
@@ -12214,8 +12214,8 @@ lib LibWin32
     get_extension : Proc(INewShortcutHookA*, UInt8*, Int32, HRESULT)
   end
 
-  INewShortcutHookA_GUID = LibC::GUID.new("000214e1-0000-0000-c000-000000000046")
-  CLSID_INewShortcutHookA = "000214e1-0000-0000-c000-000000000046"
+  INewShortcutHookA_GUID = "000214e1-0000-0000-c000-000000000046"
+  IID_INewShortcutHookA = LibC::GUID.new(0x214e1_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct INewShortcutHookA
     lpVtbl : INewShortcutHookAVTbl*
   end
@@ -12232,8 +12232,8 @@ lib LibWin32
     get_extension : Proc(INewShortcutHookW*, Char*, Int32, HRESULT)
   end
 
-  INewShortcutHookW_GUID = LibC::GUID.new("000214f7-0000-0000-c000-000000000046")
-  CLSID_INewShortcutHookW = "000214f7-0000-0000-c000-000000000046"
+  INewShortcutHookW_GUID = "000214f7-0000-0000-c000-000000000046"
+  IID_INewShortcutHookW = LibC::GUID.new(0x214f7_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct INewShortcutHookW
     lpVtbl : INewShortcutHookWVTbl*
   end
@@ -12245,8 +12245,8 @@ lib LibWin32
     copy_callback : Proc(ICopyHookA*, LibC::HANDLE, UInt32, UInt32, PSTR, UInt32, PSTR, UInt32, UInt32)
   end
 
-  ICopyHookA_GUID = LibC::GUID.new("000214ef-0000-0000-c000-000000000046")
-  CLSID_ICopyHookA = "000214ef-0000-0000-c000-000000000046"
+  ICopyHookA_GUID = "000214ef-0000-0000-c000-000000000046"
+  IID_ICopyHookA = LibC::GUID.new(0x214ef_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct ICopyHookA
     lpVtbl : ICopyHookAVTbl*
   end
@@ -12258,8 +12258,8 @@ lib LibWin32
     copy_callback : Proc(ICopyHookW*, LibC::HANDLE, UInt32, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32)
   end
 
-  ICopyHookW_GUID = LibC::GUID.new("000214fc-0000-0000-c000-000000000046")
-  CLSID_ICopyHookW = "000214fc-0000-0000-c000-000000000046"
+  ICopyHookW_GUID = "000214fc-0000-0000-c000-000000000046"
+  IID_ICopyHookW = LibC::GUID.new(0x214fc_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
   struct ICopyHookW
     lpVtbl : ICopyHookWVTbl*
   end
@@ -12272,8 +12272,8 @@ lib LibWin32
     set_directory : Proc(ICurrentWorkingDirectory*, LibC::LPWSTR, HRESULT)
   end
 
-  ICurrentWorkingDirectory_GUID = LibC::GUID.new("91956d21-9276-11d1-921a-006097df5bd4")
-  CLSID_ICurrentWorkingDirectory = "91956d21-9276-11d1-921a-006097df5bd4"
+  ICurrentWorkingDirectory_GUID = "91956d21-9276-11d1-921a-006097df5bd4"
+  IID_ICurrentWorkingDirectory = LibC::GUID.new(0x91956d21_u32, 0x9276_u16, 0x11d1_u16, StaticArray[0x92_u8, 0x1a_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xdf_u8, 0x5b_u8, 0xd4_u8])
   struct ICurrentWorkingDirectory
     lpVtbl : ICurrentWorkingDirectoryVTbl*
   end
@@ -12289,8 +12289,8 @@ lib LibWin32
     find_toolbar : Proc(IDockingWindowFrame*, LibC::LPWSTR, Guid*, Void**, HRESULT)
   end
 
-  IDockingWindowFrame_GUID = LibC::GUID.new("47d2657a-7b27-11d0-8ca9-00a0c92dbfe8")
-  CLSID_IDockingWindowFrame = "47d2657a-7b27-11d0-8ca9-00a0c92dbfe8"
+  IDockingWindowFrame_GUID = "47d2657a-7b27-11d0-8ca9-00a0c92dbfe8"
+  IID_IDockingWindowFrame = LibC::GUID.new(0x47d2657a_u32, 0x7b27_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
   struct IDockingWindowFrame
     lpVtbl : IDockingWindowFrameVTbl*
   end
@@ -12302,8 +12302,8 @@ lib LibWin32
     capture_thumbnail : Proc(IThumbnailCapture*, SIZE*, IUnknown, HBITMAP*, HRESULT)
   end
 
-  IThumbnailCapture_GUID = LibC::GUID.new("4ea39266-7211-409f-b622-f63dbd16c533")
-  CLSID_IThumbnailCapture = "4ea39266-7211-409f-b622-f63dbd16c533"
+  IThumbnailCapture_GUID = "4ea39266-7211-409f-b622-f63dbd16c533"
+  IID_IThumbnailCapture = LibC::GUID.new(0x4ea39266_u32, 0x7211_u16, 0x409f_u16, StaticArray[0xb6_u8, 0x22_u8, 0xf6_u8, 0x3d_u8, 0xbd_u8, 0x16_u8, 0xc5_u8, 0x33_u8])
   struct IThumbnailCapture
     lpVtbl : IThumbnailCaptureVTbl*
   end
@@ -12317,8 +12317,8 @@ lib LibWin32
     get_band_info_sfb : Proc(IShellFolderBand*, BANDINFOSFB*, HRESULT)
   end
 
-  IShellFolderBand_GUID = LibC::GUID.new("7fe80cc8-c247-11d0-b93a-00a0c90312e1")
-  CLSID_IShellFolderBand = "7fe80cc8-c247-11d0-b93a-00a0c90312e1"
+  IShellFolderBand_GUID = "7fe80cc8-c247-11d0-b93a-00a0c90312e1"
+  IID_IShellFolderBand = LibC::GUID.new(0x7fe80cc8_u32, 0xc247_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0x3a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0x12_u8, 0xe1_u8])
   struct IShellFolderBand
     lpVtbl : IShellFolderBandVTbl*
   end
@@ -12335,8 +12335,8 @@ lib LibWin32
     get_size : Proc(IDeskBarClient*, UInt32, RECT*, HRESULT)
   end
 
-  IDeskBarClient_GUID = LibC::GUID.new("eb0fe175-1a3a-11d0-89b3-00a0c90a90ac")
-  CLSID_IDeskBarClient = "eb0fe175-1a3a-11d0-89b3-00a0c90a90ac"
+  IDeskBarClient_GUID = "eb0fe175-1a3a-11d0-89b3-00a0c90a90ac"
+  IID_IDeskBarClient = LibC::GUID.new(0xeb0fe175_u32, 0x1a3a_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xb3_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x90_u8, 0xac_u8])
   struct IDeskBarClient
     lpVtbl : IDeskBarClientVTbl*
   end
@@ -12350,8 +12350,8 @@ lib LibWin32
     get_item_data : Proc(IColumnProvider*, PROPERTYKEY*, SHCOLUMNDATA*, VARIANT*, HRESULT)
   end
 
-  IColumnProvider_GUID = LibC::GUID.new("e8025004-1c42-11d2-be2c-00a0c9a83da1")
-  CLSID_IColumnProvider = "e8025004-1c42-11d2-be2c-00a0c9a83da1"
+  IColumnProvider_GUID = "e8025004-1c42-11d2-be2c-00a0c9a83da1"
+  IID_IColumnProvider = LibC::GUID.new(0xe8025004_u32, 0x1c42_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x2c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa8_u8, 0x3d_u8, 0xa1_u8])
   struct IColumnProvider
     lpVtbl : IColumnProviderVTbl*
   end
@@ -12363,8 +12363,8 @@ lib LibWin32
     on_set_title : Proc(IDocViewSite*, VARIANT*, HRESULT)
   end
 
-  IDocViewSite_GUID = LibC::GUID.new("87d605e0-c511-11cf-89a9-00a0c9054129")
-  CLSID_IDocViewSite = "87d605e0-c511-11cf-89a9-00a0c9054129"
+  IDocViewSite_GUID = "87d605e0-c511-11cf-89a9-00a0c9054129"
+  IID_IDocViewSite = LibC::GUID.new(0x87d605e0_u32, 0xc511_u16, 0x11cf_u16, StaticArray[0x89_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x29_u8])
   struct IDocViewSite
     lpVtbl : IDocViewSiteVTbl*
   end
@@ -12376,8 +12376,8 @@ lib LibWin32
     initialize : Proc(IInitializeObject*, HRESULT)
   end
 
-  IInitializeObject_GUID = LibC::GUID.new("4622ad16-ff23-11d0-8d34-00a0c90f2719")
-  CLSID_IInitializeObject = "4622ad16-ff23-11d0-8d34-00a0c90f2719"
+  IInitializeObject_GUID = "4622ad16-ff23-11d0-8d34-00a0c90f2719"
+  IID_IInitializeObject = LibC::GUID.new(0x4622ad16_u32, 0xff23_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x34_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xf_u8, 0x27_u8, 0x19_u8])
   struct IInitializeObject
     lpVtbl : IInitializeObjectVTbl*
   end
@@ -12392,8 +12392,8 @@ lib LibWin32
     get_bitmap : Proc(IBanneredBar*, HBITMAP*, HRESULT)
   end
 
-  IBanneredBar_GUID = LibC::GUID.new("596a9a94-013e-11d1-8d34-00a0c90f2719")
-  CLSID_IBanneredBar = "596a9a94-013e-11d1-8d34-00a0c90f2719"
+  IBanneredBar_GUID = "596a9a94-013e-11d1-8d34-00a0c90f2719"
+  IID_IBanneredBar = LibC::GUID.new(0x596a9a94_u32, 0x13e_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x34_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xf_u8, 0x27_u8, 0x19_u8])
   struct IBanneredBar
     lpVtbl : IBanneredBarVTbl*
   end
@@ -12409,8 +12409,8 @@ lib LibWin32
     get_enum : Proc(IQueryAssociations*, UInt32, ASSOCENUM, LibC::LPWSTR, Guid*, Void**, HRESULT)
   end
 
-  IQueryAssociations_GUID = LibC::GUID.new("c46ca590-3c3f-11d2-bee6-0000f805ca57")
-  CLSID_IQueryAssociations = "c46ca590-3c3f-11d2-bee6-0000f805ca57"
+  IQueryAssociations_GUID = "c46ca590-3c3f-11d2-bee6-0000f805ca57"
+  IID_IQueryAssociations = LibC::GUID.new(0xc46ca590_u32, 0x3c3f_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0xe6_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x5_u8, 0xca_u8, 0x57_u8])
   struct IQueryAssociations
     lpVtbl : IQueryAssociationsVTbl*
   end
@@ -12426,8 +12426,8 @@ lib LibWin32
     is_installed : Proc(IShellApp*, HRESULT)
   end
 
-  IShellApp_GUID = LibC::GUID.new("a3e14960-935f-11d1-b8b8-006008059382")
-  CLSID_IShellApp = "a3e14960-935f-11d1-b8b8-006008059382"
+  IShellApp_GUID = "a3e14960-935f-11d1-b8b8-006008059382"
+  IID_IShellApp = LibC::GUID.new(0xa3e14960_u32, 0x935f_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0xb8_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
   struct IShellApp
     lpVtbl : IShellAppVTbl*
   end
@@ -12446,8 +12446,8 @@ lib LibWin32
     unschedule : Proc(IPublishedApp*, HRESULT)
   end
 
-  IPublishedApp_GUID = LibC::GUID.new("1bc752e0-9046-11d1-b8b3-006008059382")
-  CLSID_IPublishedApp = "1bc752e0-9046-11d1-b8b3-006008059382"
+  IPublishedApp_GUID = "1bc752e0-9046-11d1-b8b3-006008059382"
+  IID_IPublishedApp = LibC::GUID.new(0x1bc752e0_u32, 0x9046_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0xb3_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
   struct IPublishedApp
     lpVtbl : IPublishedAppVTbl*
   end
@@ -12467,8 +12467,8 @@ lib LibWin32
     install2 : Proc(IPublishedApp2*, SYSTEMTIME*, LibC::HANDLE, HRESULT)
   end
 
-  IPublishedApp2_GUID = LibC::GUID.new("12b81347-1b3a-4a04-aa61-3f768b67fd7e")
-  CLSID_IPublishedApp2 = "12b81347-1b3a-4a04-aa61-3f768b67fd7e"
+  IPublishedApp2_GUID = "12b81347-1b3a-4a04-aa61-3f768b67fd7e"
+  IID_IPublishedApp2 = LibC::GUID.new(0x12b81347_u32, 0x1b3a_u16, 0x4a04_u16, StaticArray[0xaa_u8, 0x61_u8, 0x3f_u8, 0x76_u8, 0x8b_u8, 0x67_u8, 0xfd_u8, 0x7e_u8])
   struct IPublishedApp2
     lpVtbl : IPublishedApp2VTbl*
   end
@@ -12481,8 +12481,8 @@ lib LibWin32
     reset : Proc(IEnumPublishedApps*, HRESULT)
   end
 
-  IEnumPublishedApps_GUID = LibC::GUID.new("0b124f8c-91f0-11d1-b8b5-006008059382")
-  CLSID_IEnumPublishedApps = "0b124f8c-91f0-11d1-b8b5-006008059382"
+  IEnumPublishedApps_GUID = "0b124f8c-91f0-11d1-b8b5-006008059382"
+  IID_IEnumPublishedApps = LibC::GUID.new(0xb124f8c_u32, 0x91f0_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0xb5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
   struct IEnumPublishedApps
     lpVtbl : IEnumPublishedAppsVTbl*
   end
@@ -12497,8 +12497,8 @@ lib LibWin32
     enum_apps : Proc(IAppPublisher*, Guid*, IEnumPublishedApps*, HRESULT)
   end
 
-  IAppPublisher_GUID = LibC::GUID.new("07250a10-9cf9-11d1-9076-006008059382")
-  CLSID_IAppPublisher = "07250a10-9cf9-11d1-9076-006008059382"
+  IAppPublisher_GUID = "07250a10-9cf9-11d1-9076-006008059382"
+  IID_IAppPublisher = LibC::GUID.new(0x7250a10_u32, 0x9cf9_u16, 0x11d1_u16, StaticArray[0x90_u8, 0x76_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
   struct IAppPublisher
     lpVtbl : IAppPublisherVTbl*
   end
@@ -12526,8 +12526,8 @@ lib LibWin32
     report_result : Proc(ICredentialProviderCredential*, NTSTATUS, NTSTATUS, LibC::LPWSTR*, CREDENTIAL_PROVIDER_STATUS_ICON*, HRESULT)
   end
 
-  ICredentialProviderCredential_GUID = LibC::GUID.new("63913a93-40c1-481a-818d-4072ff8c70cc")
-  CLSID_ICredentialProviderCredential = "63913a93-40c1-481a-818d-4072ff8c70cc"
+  ICredentialProviderCredential_GUID = "63913a93-40c1-481a-818d-4072ff8c70cc"
+  IID_ICredentialProviderCredential = LibC::GUID.new(0x63913a93_u32, 0x40c1_u16, 0x481a_u16, StaticArray[0x81_u8, 0x8d_u8, 0x40_u8, 0x72_u8, 0xff_u8, 0x8c_u8, 0x70_u8, 0xcc_u8])
   struct ICredentialProviderCredential
     lpVtbl : ICredentialProviderCredentialVTbl*
   end
@@ -12540,8 +12540,8 @@ lib LibWin32
     set_status_message : Proc(IQueryContinueWithStatus*, LibC::LPWSTR, HRESULT)
   end
 
-  IQueryContinueWithStatus_GUID = LibC::GUID.new("9090be5b-502b-41fb-bccc-0049a6c7254b")
-  CLSID_IQueryContinueWithStatus = "9090be5b-502b-41fb-bccc-0049a6c7254b"
+  IQueryContinueWithStatus_GUID = "9090be5b-502b-41fb-bccc-0049a6c7254b"
+  IID_IQueryContinueWithStatus = LibC::GUID.new(0x9090be5b_u32, 0x502b_u16, 0x41fb_u16, StaticArray[0xbc_u8, 0xcc_u8, 0x0_u8, 0x49_u8, 0xa6_u8, 0xc7_u8, 0x25_u8, 0x4b_u8])
   struct IQueryContinueWithStatus
     lpVtbl : IQueryContinueWithStatusVTbl*
   end
@@ -12571,8 +12571,8 @@ lib LibWin32
     disconnect : Proc(IConnectableCredentialProviderCredential*, HRESULT)
   end
 
-  IConnectableCredentialProviderCredential_GUID = LibC::GUID.new("9387928b-ac75-4bf9-8ab2-2b93c4a55290")
-  CLSID_IConnectableCredentialProviderCredential = "9387928b-ac75-4bf9-8ab2-2b93c4a55290"
+  IConnectableCredentialProviderCredential_GUID = "9387928b-ac75-4bf9-8ab2-2b93c4a55290"
+  IID_IConnectableCredentialProviderCredential = LibC::GUID.new(0x9387928b_u32, 0xac75_u16, 0x4bf9_u16, StaticArray[0x8a_u8, 0xb2_u8, 0x2b_u8, 0x93_u8, 0xc4_u8, 0xa5_u8, 0x52_u8, 0x90_u8])
   struct IConnectableCredentialProviderCredential
     lpVtbl : IConnectableCredentialProviderCredentialVTbl*
   end
@@ -12593,8 +12593,8 @@ lib LibWin32
     on_creating_window : Proc(ICredentialProviderCredentialEvents*, HANDLE*, HRESULT)
   end
 
-  ICredentialProviderCredentialEvents_GUID = LibC::GUID.new("fa6fa76b-66b7-4b11-95f1-86171118e816")
-  CLSID_ICredentialProviderCredentialEvents = "fa6fa76b-66b7-4b11-95f1-86171118e816"
+  ICredentialProviderCredentialEvents_GUID = "fa6fa76b-66b7-4b11-95f1-86171118e816"
+  IID_ICredentialProviderCredentialEvents = LibC::GUID.new(0xfa6fa76b_u32, 0x66b7_u16, 0x4b11_u16, StaticArray[0x95_u8, 0xf1_u8, 0x86_u8, 0x17_u8, 0x11_u8, 0x18_u8, 0xe8_u8, 0x16_u8])
   struct ICredentialProviderCredentialEvents
     lpVtbl : ICredentialProviderCredentialEventsVTbl*
   end
@@ -12613,8 +12613,8 @@ lib LibWin32
     get_credential_at : Proc(ICredentialProvider*, UInt32, ICredentialProviderCredential*, HRESULT)
   end
 
-  ICredentialProvider_GUID = LibC::GUID.new("d27c3481-5a1c-45b2-8aaa-c20ebbe8229e")
-  CLSID_ICredentialProvider = "d27c3481-5a1c-45b2-8aaa-c20ebbe8229e"
+  ICredentialProvider_GUID = "d27c3481-5a1c-45b2-8aaa-c20ebbe8229e"
+  IID_ICredentialProvider = LibC::GUID.new(0xd27c3481_u32, 0x5a1c_u16, 0x45b2_u16, StaticArray[0x8a_u8, 0xaa_u8, 0xc2_u8, 0xe_u8, 0xbb_u8, 0xe8_u8, 0x22_u8, 0x9e_u8])
   struct ICredentialProvider
     lpVtbl : ICredentialProviderVTbl*
   end
@@ -12626,8 +12626,8 @@ lib LibWin32
     credentials_changed : Proc(ICredentialProviderEvents*, LibC::UINT_PTR, HRESULT)
   end
 
-  ICredentialProviderEvents_GUID = LibC::GUID.new("34201e5a-a787-41a3-a5a4-bd6dcf2a854e")
-  CLSID_ICredentialProviderEvents = "34201e5a-a787-41a3-a5a4-bd6dcf2a854e"
+  ICredentialProviderEvents_GUID = "34201e5a-a787-41a3-a5a4-bd6dcf2a854e"
+  IID_ICredentialProviderEvents = LibC::GUID.new(0x34201e5a_u32, 0xa787_u16, 0x41a3_u16, StaticArray[0xa5_u8, 0xa4_u8, 0xbd_u8, 0x6d_u8, 0xcf_u8, 0x2a_u8, 0x85_u8, 0x4e_u8])
   struct ICredentialProviderEvents
     lpVtbl : ICredentialProviderEventsVTbl*
   end
@@ -12640,8 +12640,8 @@ lib LibWin32
     update_remote_credential : Proc(ICredentialProviderFilter*, CREDENTIAL_PROVIDER_CREDENTIAL_SERIALIZATION*, CREDENTIAL_PROVIDER_CREDENTIAL_SERIALIZATION*, HRESULT)
   end
 
-  ICredentialProviderFilter_GUID = LibC::GUID.new("a5da53f9-d475-4080-a120-910c4a739880")
-  CLSID_ICredentialProviderFilter = "a5da53f9-d475-4080-a120-910c4a739880"
+  ICredentialProviderFilter_GUID = "a5da53f9-d475-4080-a120-910c4a739880"
+  IID_ICredentialProviderFilter = LibC::GUID.new(0xa5da53f9_u32, 0xd475_u16, 0x4080_u16, StaticArray[0xa1_u8, 0x20_u8, 0x91_u8, 0xc_u8, 0x4a_u8, 0x73_u8, 0x98_u8, 0x80_u8])
   struct ICredentialProviderFilter
     lpVtbl : ICredentialProviderFilterVTbl*
   end
@@ -12670,8 +12670,8 @@ lib LibWin32
     get_user_sid : Proc(ICredentialProviderCredential2*, LibC::LPWSTR*, HRESULT)
   end
 
-  ICredentialProviderCredential2_GUID = LibC::GUID.new("fd672c54-40ea-4d6e-9b49-cfb1a7507bd7")
-  CLSID_ICredentialProviderCredential2 = "fd672c54-40ea-4d6e-9b49-cfb1a7507bd7"
+  ICredentialProviderCredential2_GUID = "fd672c54-40ea-4d6e-9b49-cfb1a7507bd7"
+  IID_ICredentialProviderCredential2 = LibC::GUID.new(0xfd672c54_u32, 0x40ea_u16, 0x4d6e_u16, StaticArray[0x9b_u8, 0x49_u8, 0xcf_u8, 0xb1_u8, 0xa7_u8, 0x50_u8, 0x7b_u8, 0xd7_u8])
   struct ICredentialProviderCredential2
     lpVtbl : ICredentialProviderCredential2VTbl*
   end
@@ -12683,8 +12683,8 @@ lib LibWin32
     get_field_options : Proc(ICredentialProviderCredentialWithFieldOptions*, UInt32, CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS*, HRESULT)
   end
 
-  ICredentialProviderCredentialWithFieldOptions_GUID = LibC::GUID.new("dbc6fb30-c843-49e3-a645-573e6f39446a")
-  CLSID_ICredentialProviderCredentialWithFieldOptions = "dbc6fb30-c843-49e3-a645-573e6f39446a"
+  ICredentialProviderCredentialWithFieldOptions_GUID = "dbc6fb30-c843-49e3-a645-573e6f39446a"
+  IID_ICredentialProviderCredentialWithFieldOptions = LibC::GUID.new(0xdbc6fb30_u32, 0xc843_u16, 0x49e3_u16, StaticArray[0xa6_u8, 0x45_u8, 0x57_u8, 0x3e_u8, 0x6f_u8, 0x39_u8, 0x44_u8, 0x6a_u8])
   struct ICredentialProviderCredentialWithFieldOptions
     lpVtbl : ICredentialProviderCredentialWithFieldOptionsVTbl*
   end
@@ -12708,8 +12708,8 @@ lib LibWin32
     set_field_options : Proc(ICredentialProviderCredentialEvents2*, ICredentialProviderCredential, UInt32, CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS, HRESULT)
   end
 
-  ICredentialProviderCredentialEvents2_GUID = LibC::GUID.new("b53c00b6-9922-4b78-b1f4-ddfe774dc39b")
-  CLSID_ICredentialProviderCredentialEvents2 = "b53c00b6-9922-4b78-b1f4-ddfe774dc39b"
+  ICredentialProviderCredentialEvents2_GUID = "b53c00b6-9922-4b78-b1f4-ddfe774dc39b"
+  IID_ICredentialProviderCredentialEvents2 = LibC::GUID.new(0xb53c00b6_u32, 0x9922_u16, 0x4b78_u16, StaticArray[0xb1_u8, 0xf4_u8, 0xdd_u8, 0xfe_u8, 0x77_u8, 0x4d_u8, 0xc3_u8, 0x9b_u8])
   struct ICredentialProviderCredentialEvents2
     lpVtbl : ICredentialProviderCredentialEvents2VTbl*
   end
@@ -12724,8 +12724,8 @@ lib LibWin32
     get_value : Proc(ICredentialProviderUser*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
-  ICredentialProviderUser_GUID = LibC::GUID.new("13793285-3ea6-40fd-b420-15f47da41fbb")
-  CLSID_ICredentialProviderUser = "13793285-3ea6-40fd-b420-15f47da41fbb"
+  ICredentialProviderUser_GUID = "13793285-3ea6-40fd-b420-15f47da41fbb"
+  IID_ICredentialProviderUser = LibC::GUID.new(0x13793285_u32, 0x3ea6_u16, 0x40fd_u16, StaticArray[0xb4_u8, 0x20_u8, 0x15_u8, 0xf4_u8, 0x7d_u8, 0xa4_u8, 0x1f_u8, 0xbb_u8])
   struct ICredentialProviderUser
     lpVtbl : ICredentialProviderUserVTbl*
   end
@@ -12740,8 +12740,8 @@ lib LibWin32
     get_at : Proc(ICredentialProviderUserArray*, UInt32, ICredentialProviderUser*, HRESULT)
   end
 
-  ICredentialProviderUserArray_GUID = LibC::GUID.new("90c119ae-0f18-4520-a1f1-114366a40fe8")
-  CLSID_ICredentialProviderUserArray = "90c119ae-0f18-4520-a1f1-114366a40fe8"
+  ICredentialProviderUserArray_GUID = "90c119ae-0f18-4520-a1f1-114366a40fe8"
+  IID_ICredentialProviderUserArray = LibC::GUID.new(0x90c119ae_u32, 0xf18_u16, 0x4520_u16, StaticArray[0xa1_u8, 0xf1_u8, 0x11_u8, 0x43_u8, 0x66_u8, 0xa4_u8, 0xf_u8, 0xe8_u8])
   struct ICredentialProviderUserArray
     lpVtbl : ICredentialProviderUserArrayVTbl*
   end
@@ -12753,8 +12753,8 @@ lib LibWin32
     set_user_array : Proc(ICredentialProviderSetUserArray*, ICredentialProviderUserArray, HRESULT)
   end
 
-  ICredentialProviderSetUserArray_GUID = LibC::GUID.new("095c1484-1c0c-4388-9c6d-500e61bf84bd")
-  CLSID_ICredentialProviderSetUserArray = "095c1484-1c0c-4388-9c6d-500e61bf84bd"
+  ICredentialProviderSetUserArray_GUID = "095c1484-1c0c-4388-9c6d-500e61bf84bd"
+  IID_ICredentialProviderSetUserArray = LibC::GUID.new(0x95c1484_u32, 0x1c0c_u16, 0x4388_u16, StaticArray[0x9c_u8, 0x6d_u8, 0x50_u8, 0xe_u8, 0x61_u8, 0xbf_u8, 0x84_u8, 0xbd_u8])
   struct ICredentialProviderSetUserArray
     lpVtbl : ICredentialProviderSetUserArrayVTbl*
   end
@@ -12767,8 +12767,8 @@ lib LibWin32
     bind_to_handler : Proc(ISyncMgrHandlerCollection*, LibC::LPWSTR, Guid*, Void**, HRESULT)
   end
 
-  ISyncMgrHandlerCollection_GUID = LibC::GUID.new("a7f337a3-d20b-45cb-9ed7-87d094ca5045")
-  CLSID_ISyncMgrHandlerCollection = "a7f337a3-d20b-45cb-9ed7-87d094ca5045"
+  ISyncMgrHandlerCollection_GUID = "a7f337a3-d20b-45cb-9ed7-87d094ca5045"
+  IID_ISyncMgrHandlerCollection = LibC::GUID.new(0xa7f337a3_u32, 0xd20b_u16, 0x45cb_u16, StaticArray[0x9e_u8, 0xd7_u8, 0x87_u8, 0xd0_u8, 0x94_u8, 0xca_u8, 0x50_u8, 0x45_u8])
   struct ISyncMgrHandlerCollection
     lpVtbl : ISyncMgrHandlerCollectionVTbl*
   end
@@ -12787,8 +12787,8 @@ lib LibWin32
     synchronize : Proc(ISyncMgrHandler*, LibC::LPWSTR*, UInt32, LibC::HANDLE, ISyncMgrSessionCreator, IUnknown, HRESULT)
   end
 
-  ISyncMgrHandler_GUID = LibC::GUID.new("04ec2e43-ac77-49f9-9b98-0307ef7a72a2")
-  CLSID_ISyncMgrHandler = "04ec2e43-ac77-49f9-9b98-0307ef7a72a2"
+  ISyncMgrHandler_GUID = "04ec2e43-ac77-49f9-9b98-0307ef7a72a2"
+  IID_ISyncMgrHandler = LibC::GUID.new(0x4ec2e43_u32, 0xac77_u16, 0x49f9_u16, StaticArray[0x9b_u8, 0x98_u8, 0x3_u8, 0x7_u8, 0xef_u8, 0x7a_u8, 0x72_u8, 0xa2_u8])
   struct ISyncMgrHandler
     lpVtbl : ISyncMgrHandlerVTbl*
   end
@@ -12806,8 +12806,8 @@ lib LibWin32
     is_connected : Proc(ISyncMgrHandlerInfo*, HRESULT)
   end
 
-  ISyncMgrHandlerInfo_GUID = LibC::GUID.new("4ff1d798-ecf7-4524-aa81-1e362a0aef3a")
-  CLSID_ISyncMgrHandlerInfo = "4ff1d798-ecf7-4524-aa81-1e362a0aef3a"
+  ISyncMgrHandlerInfo_GUID = "4ff1d798-ecf7-4524-aa81-1e362a0aef3a"
+  IID_ISyncMgrHandlerInfo = LibC::GUID.new(0x4ff1d798_u32, 0xecf7_u16, 0x4524_u16, StaticArray[0xaa_u8, 0x81_u8, 0x1e_u8, 0x36_u8, 0x2a_u8, 0xa_u8, 0xef_u8, 0x3a_u8])
   struct ISyncMgrHandlerInfo
     lpVtbl : ISyncMgrHandlerInfoVTbl*
   end
@@ -12821,8 +12821,8 @@ lib LibWin32
     get_sync_item_count : Proc(ISyncMgrSyncItemContainer*, UInt32*, HRESULT)
   end
 
-  ISyncMgrSyncItemContainer_GUID = LibC::GUID.new("90701133-be32-4129-a65c-99e616cafff4")
-  CLSID_ISyncMgrSyncItemContainer = "90701133-be32-4129-a65c-99e616cafff4"
+  ISyncMgrSyncItemContainer_GUID = "90701133-be32-4129-a65c-99e616cafff4"
+  IID_ISyncMgrSyncItemContainer = LibC::GUID.new(0x90701133_u32, 0xbe32_u16, 0x4129_u16, StaticArray[0xa6_u8, 0x5c_u8, 0x99_u8, 0xe6_u8, 0x16_u8, 0xca_u8, 0xff_u8, 0xf4_u8])
   struct ISyncMgrSyncItemContainer
     lpVtbl : ISyncMgrSyncItemContainerVTbl*
   end
@@ -12841,8 +12841,8 @@ lib LibWin32
     delete : Proc(ISyncMgrSyncItem*, HRESULT)
   end
 
-  ISyncMgrSyncItem_GUID = LibC::GUID.new("b20b24ce-2593-4f04-bd8b-7ad6c45051cd")
-  CLSID_ISyncMgrSyncItem = "b20b24ce-2593-4f04-bd8b-7ad6c45051cd"
+  ISyncMgrSyncItem_GUID = "b20b24ce-2593-4f04-bd8b-7ad6c45051cd"
+  IID_ISyncMgrSyncItem = LibC::GUID.new(0xb20b24ce_u32, 0x2593_u16, 0x4f04_u16, StaticArray[0xbd_u8, 0x8b_u8, 0x7a_u8, 0xd6_u8, 0xc4_u8, 0x50_u8, 0x51_u8, 0xcd_u8])
   struct ISyncMgrSyncItem
     lpVtbl : ISyncMgrSyncItemVTbl*
   end
@@ -12858,8 +12858,8 @@ lib LibWin32
     is_connected : Proc(ISyncMgrSyncItemInfo*, HRESULT)
   end
 
-  ISyncMgrSyncItemInfo_GUID = LibC::GUID.new("e7fd9502-be0c-4464-90a1-2b5277031232")
-  CLSID_ISyncMgrSyncItemInfo = "e7fd9502-be0c-4464-90a1-2b5277031232"
+  ISyncMgrSyncItemInfo_GUID = "e7fd9502-be0c-4464-90a1-2b5277031232"
+  IID_ISyncMgrSyncItemInfo = LibC::GUID.new(0xe7fd9502_u32, 0xbe0c_u16, 0x4464_u16, StaticArray[0x90_u8, 0xa1_u8, 0x2b_u8, 0x52_u8, 0x77_u8, 0x3_u8, 0x12_u8, 0x32_u8])
   struct ISyncMgrSyncItemInfo
     lpVtbl : ISyncMgrSyncItemInfoVTbl*
   end
@@ -12874,8 +12874,8 @@ lib LibWin32
     clone : Proc(IEnumSyncMgrSyncItems*, IEnumSyncMgrSyncItems*, HRESULT)
   end
 
-  IEnumSyncMgrSyncItems_GUID = LibC::GUID.new("54b3abf3-f085-4181-b546-e29c403c726b")
-  CLSID_IEnumSyncMgrSyncItems = "54b3abf3-f085-4181-b546-e29c403c726b"
+  IEnumSyncMgrSyncItems_GUID = "54b3abf3-f085-4181-b546-e29c403c726b"
+  IID_IEnumSyncMgrSyncItems = LibC::GUID.new(0x54b3abf3_u32, 0xf085_u16, 0x4181_u16, StaticArray[0xb5_u8, 0x46_u8, 0xe2_u8, 0x9c_u8, 0x40_u8, 0x3c_u8, 0x72_u8, 0x6b_u8])
   struct IEnumSyncMgrSyncItems
     lpVtbl : IEnumSyncMgrSyncItemsVTbl*
   end
@@ -12887,8 +12887,8 @@ lib LibWin32
     create_session : Proc(ISyncMgrSessionCreator*, LibC::LPWSTR, LibC::LPWSTR*, UInt32, ISyncMgrSyncCallback*, HRESULT)
   end
 
-  ISyncMgrSessionCreator_GUID = LibC::GUID.new("17f48517-f305-4321-a08d-b25a834918fd")
-  CLSID_ISyncMgrSessionCreator = "17f48517-f305-4321-a08d-b25a834918fd"
+  ISyncMgrSessionCreator_GUID = "17f48517-f305-4321-a08d-b25a834918fd"
+  IID_ISyncMgrSessionCreator = LibC::GUID.new(0x17f48517_u32, 0xf305_u16, 0x4321_u16, StaticArray[0xa0_u8, 0x8d_u8, 0xb2_u8, 0x5a_u8, 0x83_u8, 0x49_u8, 0x18_u8, 0xfd_u8])
   struct ISyncMgrSessionCreator
     lpVtbl : ISyncMgrSessionCreatorVTbl*
   end
@@ -12909,8 +12909,8 @@ lib LibWin32
     report_manual_sync : Proc(ISyncMgrSyncCallback*, HRESULT)
   end
 
-  ISyncMgrSyncCallback_GUID = LibC::GUID.new("884ccd87-b139-4937-a4ba-4f8e19513fbe")
-  CLSID_ISyncMgrSyncCallback = "884ccd87-b139-4937-a4ba-4f8e19513fbe"
+  ISyncMgrSyncCallback_GUID = "884ccd87-b139-4937-a4ba-4f8e19513fbe"
+  IID_ISyncMgrSyncCallback = LibC::GUID.new(0x884ccd87_u32, 0xb139_u16, 0x4937_u16, StaticArray[0xa4_u8, 0xba_u8, 0x4f_u8, 0x8e_u8, 0x19_u8, 0x51_u8, 0x3f_u8, 0xbe_u8])
   struct ISyncMgrSyncCallback
     lpVtbl : ISyncMgrSyncCallbackVTbl*
   end
@@ -12922,8 +12922,8 @@ lib LibWin32
     run : Proc(ISyncMgrUIOperation*, LibC::HANDLE, HRESULT)
   end
 
-  ISyncMgrUIOperation_GUID = LibC::GUID.new("fc7cfa47-dfe1-45b5-a049-8cfd82bec271")
-  CLSID_ISyncMgrUIOperation = "fc7cfa47-dfe1-45b5-a049-8cfd82bec271"
+  ISyncMgrUIOperation_GUID = "fc7cfa47-dfe1-45b5-a049-8cfd82bec271"
+  IID_ISyncMgrUIOperation = LibC::GUID.new(0xfc7cfa47_u32, 0xdfe1_u16, 0x45b5_u16, StaticArray[0xa0_u8, 0x49_u8, 0x8c_u8, 0xfd_u8, 0x82_u8, 0xbe_u8, 0xc2_u8, 0x71_u8])
   struct ISyncMgrUIOperation
     lpVtbl : ISyncMgrUIOperationVTbl*
   end
@@ -12936,8 +12936,8 @@ lib LibWin32
     init : Proc(ISyncMgrEventLinkUIOperation*, Guid*, ISyncMgrEvent, HRESULT)
   end
 
-  ISyncMgrEventLinkUIOperation_GUID = LibC::GUID.new("64522e52-848b-4015-89ce-5a36f00b94ff")
-  CLSID_ISyncMgrEventLinkUIOperation = "64522e52-848b-4015-89ce-5a36f00b94ff"
+  ISyncMgrEventLinkUIOperation_GUID = "64522e52-848b-4015-89ce-5a36f00b94ff"
+  IID_ISyncMgrEventLinkUIOperation = LibC::GUID.new(0x64522e52_u32, 0x848b_u16, 0x4015_u16, StaticArray[0x89_u8, 0xce_u8, 0x5a_u8, 0x36_u8, 0xf0_u8, 0xb_u8, 0x94_u8, 0xff_u8])
   struct ISyncMgrEventLinkUIOperation
     lpVtbl : ISyncMgrEventLinkUIOperationVTbl*
   end
@@ -12950,8 +12950,8 @@ lib LibWin32
     init_wizard : Proc(ISyncMgrScheduleWizardUIOperation*, LibC::LPWSTR, HRESULT)
   end
 
-  ISyncMgrScheduleWizardUIOperation_GUID = LibC::GUID.new("459a6c84-21d2-4ddc-8a53-f023a46066f2")
-  CLSID_ISyncMgrScheduleWizardUIOperation = "459a6c84-21d2-4ddc-8a53-f023a46066f2"
+  ISyncMgrScheduleWizardUIOperation_GUID = "459a6c84-21d2-4ddc-8a53-f023a46066f2"
+  IID_ISyncMgrScheduleWizardUIOperation = LibC::GUID.new(0x459a6c84_u32, 0x21d2_u16, 0x4ddc_u16, StaticArray[0x8a_u8, 0x53_u8, 0xf0_u8, 0x23_u8, 0xa4_u8, 0x60_u8, 0x66_u8, 0xf2_u8])
   struct ISyncMgrScheduleWizardUIOperation
     lpVtbl : ISyncMgrScheduleWizardUIOperationVTbl*
   end
@@ -12963,8 +12963,8 @@ lib LibWin32
     result : Proc(ISyncMgrSyncResult*, SYNCMGR_PROGRESS_STATUS, UInt32, UInt32, HRESULT)
   end
 
-  ISyncMgrSyncResult_GUID = LibC::GUID.new("2b90f17e-5a3e-4b33-bb7f-1bc48056b94d")
-  CLSID_ISyncMgrSyncResult = "2b90f17e-5a3e-4b33-bb7f-1bc48056b94d"
+  ISyncMgrSyncResult_GUID = "2b90f17e-5a3e-4b33-bb7f-1bc48056b94d"
+  IID_ISyncMgrSyncResult = LibC::GUID.new(0x2b90f17e_u32, 0x5a3e_u16, 0x4b33_u16, StaticArray[0xbb_u8, 0x7f_u8, 0x1b_u8, 0xc4_u8, 0x80_u8, 0x56_u8, 0xb9_u8, 0x4d_u8])
   struct ISyncMgrSyncResult
     lpVtbl : ISyncMgrSyncResultVTbl*
   end
@@ -12990,8 +12990,8 @@ lib LibWin32
     enable_item : Proc(ISyncMgrControl*, LibC::BOOL, LibC::LPWSTR, LibC::LPWSTR, LibC::HANDLE, SYNCMGR_CONTROL_FLAGS, HRESULT)
   end
 
-  ISyncMgrControl_GUID = LibC::GUID.new("9b63616c-36b2-46bc-959f-c1593952d19b")
-  CLSID_ISyncMgrControl = "9b63616c-36b2-46bc-959f-c1593952d19b"
+  ISyncMgrControl_GUID = "9b63616c-36b2-46bc-959f-c1593952d19b"
+  IID_ISyncMgrControl = LibC::GUID.new(0x9b63616c_u32, 0x36b2_u16, 0x46bc_u16, StaticArray[0x95_u8, 0x9f_u8, 0xc1_u8, 0x59_u8, 0x39_u8, 0x52_u8, 0xd1_u8, 0x9b_u8])
   struct ISyncMgrControl
     lpVtbl : ISyncMgrControlVTbl*
   end
@@ -13006,8 +13006,8 @@ lib LibWin32
     remove_event : Proc(ISyncMgrEventStore*, Guid*, UInt32, HRESULT)
   end
 
-  ISyncMgrEventStore_GUID = LibC::GUID.new("37e412f9-016e-44c2-81ff-db3add774266")
-  CLSID_ISyncMgrEventStore = "37e412f9-016e-44c2-81ff-db3add774266"
+  ISyncMgrEventStore_GUID = "37e412f9-016e-44c2-81ff-db3add774266"
+  IID_ISyncMgrEventStore = LibC::GUID.new(0x37e412f9_u32, 0x16e_u16, 0x44c2_u16, StaticArray[0x81_u8, 0xff_u8, 0xdb_u8, 0x3a_u8, 0xdd_u8, 0x77_u8, 0x42_u8, 0x66_u8])
   struct ISyncMgrEventStore
     lpVtbl : ISyncMgrEventStoreVTbl*
   end
@@ -13029,8 +13029,8 @@ lib LibWin32
     get_context : Proc(ISyncMgrEvent*, LibC::LPWSTR*, HRESULT)
   end
 
-  ISyncMgrEvent_GUID = LibC::GUID.new("fee0ef8b-46bd-4db4-b7e6-ff2c687313bc")
-  CLSID_ISyncMgrEvent = "fee0ef8b-46bd-4db4-b7e6-ff2c687313bc"
+  ISyncMgrEvent_GUID = "fee0ef8b-46bd-4db4-b7e6-ff2c687313bc"
+  IID_ISyncMgrEvent = LibC::GUID.new(0xfee0ef8b_u32, 0x46bd_u16, 0x4db4_u16, StaticArray[0xb7_u8, 0xe6_u8, 0xff_u8, 0x2c_u8, 0x68_u8, 0x73_u8, 0x13_u8, 0xbc_u8])
   struct ISyncMgrEvent
     lpVtbl : ISyncMgrEventVTbl*
   end
@@ -13045,8 +13045,8 @@ lib LibWin32
     clone : Proc(IEnumSyncMgrEvents*, IEnumSyncMgrEvents*, HRESULT)
   end
 
-  IEnumSyncMgrEvents_GUID = LibC::GUID.new("c81a1d4e-8cf7-4683-80e0-bcae88d677b6")
-  CLSID_IEnumSyncMgrEvents = "c81a1d4e-8cf7-4683-80e0-bcae88d677b6"
+  IEnumSyncMgrEvents_GUID = "c81a1d4e-8cf7-4683-80e0-bcae88d677b6"
+  IID_IEnumSyncMgrEvents = LibC::GUID.new(0xc81a1d4e_u32, 0x8cf7_u16, 0x4683_u16, StaticArray[0x80_u8, 0xe0_u8, 0xbc_u8, 0xae_u8, 0x88_u8, 0xd6_u8, 0x77_u8, 0xb6_u8])
   struct IEnumSyncMgrEvents
     lpVtbl : IEnumSyncMgrEventsVTbl*
   end
@@ -13061,8 +13061,8 @@ lib LibWin32
     get_count : Proc(ISyncMgrConflictStore*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)
   end
 
-  ISyncMgrConflictStore_GUID = LibC::GUID.new("cf8fc579-c396-4774-85f1-d908a831156e")
-  CLSID_ISyncMgrConflictStore = "cf8fc579-c396-4774-85f1-d908a831156e"
+  ISyncMgrConflictStore_GUID = "cf8fc579-c396-4774-85f1-d908a831156e"
+  IID_ISyncMgrConflictStore = LibC::GUID.new(0xcf8fc579_u32, 0xc396_u16, 0x4774_u16, StaticArray[0x85_u8, 0xf1_u8, 0xd9_u8, 0x8_u8, 0xa8_u8, 0x31_u8, 0x15_u8, 0x6e_u8])
   struct ISyncMgrConflictStore
     lpVtbl : ISyncMgrConflictStoreVTbl*
   end
@@ -13077,8 +13077,8 @@ lib LibWin32
     clone : Proc(IEnumSyncMgrConflict*, IEnumSyncMgrConflict*, HRESULT)
   end
 
-  IEnumSyncMgrConflict_GUID = LibC::GUID.new("82705914-dda3-4893-ba99-49de6c8c8036")
-  CLSID_IEnumSyncMgrConflict = "82705914-dda3-4893-ba99-49de6c8c8036"
+  IEnumSyncMgrConflict_GUID = "82705914-dda3-4893-ba99-49de6c8c8036"
+  IID_IEnumSyncMgrConflict = LibC::GUID.new(0x82705914_u32, 0xdda3_u16, 0x4893_u16, StaticArray[0xba_u8, 0x99_u8, 0x49_u8, 0xde_u8, 0x6c_u8, 0x8c_u8, 0x80_u8, 0x36_u8])
   struct IEnumSyncMgrConflict
     lpVtbl : IEnumSyncMgrConflictVTbl*
   end
@@ -13094,8 +13094,8 @@ lib LibWin32
     get_resolution_handler : Proc(ISyncMgrConflict*, Guid*, Void**, HRESULT)
   end
 
-  ISyncMgrConflict_GUID = LibC::GUID.new("9c204249-c443-4ba4-85ed-c972681db137")
-  CLSID_ISyncMgrConflict = "9c204249-c443-4ba4-85ed-c972681db137"
+  ISyncMgrConflict_GUID = "9c204249-c443-4ba4-85ed-c972681db137"
+  IID_ISyncMgrConflict = LibC::GUID.new(0x9c204249_u32, 0xc443_u16, 0x4ba4_u16, StaticArray[0x85_u8, 0xed_u8, 0xc9_u8, 0x72_u8, 0x68_u8, 0x1d_u8, 0xb1_u8, 0x37_u8])
   struct ISyncMgrConflict
     lpVtbl : ISyncMgrConflictVTbl*
   end
@@ -13111,8 +13111,8 @@ lib LibWin32
     keep_items : Proc(ISyncMgrResolutionHandler*, ISyncMgrConflictResolutionItems, SYNCMGR_RESOLUTION_FEEDBACK*, HRESULT)
   end
 
-  ISyncMgrResolutionHandler_GUID = LibC::GUID.new("40a3d052-8bff-4c4b-a338-d4a395700de9")
-  CLSID_ISyncMgrResolutionHandler = "40a3d052-8bff-4c4b-a338-d4a395700de9"
+  ISyncMgrResolutionHandler_GUID = "40a3d052-8bff-4c4b-a338-d4a395700de9"
+  IID_ISyncMgrResolutionHandler = LibC::GUID.new(0x40a3d052_u32, 0x8bff_u16, 0x4c4b_u16, StaticArray[0xa3_u8, 0x38_u8, 0xd4_u8, 0xa3_u8, 0x95_u8, 0x70_u8, 0xd_u8, 0xe9_u8])
   struct ISyncMgrResolutionHandler
     lpVtbl : ISyncMgrResolutionHandlerVTbl*
   end
@@ -13124,8 +13124,8 @@ lib LibWin32
     present_conflict : Proc(ISyncMgrConflictPresenter*, ISyncMgrConflict, ISyncMgrConflictResolveInfo, HRESULT)
   end
 
-  ISyncMgrConflictPresenter_GUID = LibC::GUID.new("0b4f5353-fd2b-42cd-8763-4779f2d508a3")
-  CLSID_ISyncMgrConflictPresenter = "0b4f5353-fd2b-42cd-8763-4779f2d508a3"
+  ISyncMgrConflictPresenter_GUID = "0b4f5353-fd2b-42cd-8763-4779f2d508a3"
+  IID_ISyncMgrConflictPresenter = LibC::GUID.new(0xb4f5353_u32, 0xfd2b_u16, 0x42cd_u16, StaticArray[0x87_u8, 0x63_u8, 0x47_u8, 0x79_u8, 0xf2_u8, 0xd5_u8, 0x8_u8, 0xa3_u8])
   struct ISyncMgrConflictPresenter
     lpVtbl : ISyncMgrConflictPresenterVTbl*
   end
@@ -13144,8 +13144,8 @@ lib LibWin32
     set_item_choices : Proc(ISyncMgrConflictResolveInfo*, UInt32*, UInt32, HRESULT)
   end
 
-  ISyncMgrConflictResolveInfo_GUID = LibC::GUID.new("c405a219-25a2-442e-8743-b845a2cee93f")
-  CLSID_ISyncMgrConflictResolveInfo = "c405a219-25a2-442e-8743-b845a2cee93f"
+  ISyncMgrConflictResolveInfo_GUID = "c405a219-25a2-442e-8743-b845a2cee93f"
+  IID_ISyncMgrConflictResolveInfo = LibC::GUID.new(0xc405a219_u32, 0x25a2_u16, 0x442e_u16, StaticArray[0x87_u8, 0x43_u8, 0xb8_u8, 0x45_u8, 0xa2_u8, 0xce_u8, 0xe9_u8, 0x3f_u8])
   struct ISyncMgrConflictResolveInfo
     lpVtbl : ISyncMgrConflictResolveInfoVTbl*
   end
@@ -13157,8 +13157,8 @@ lib LibWin32
     get_conflict_id_list : Proc(ISyncMgrConflictFolder*, ISyncMgrConflict, ITEMIDLIST**, HRESULT)
   end
 
-  ISyncMgrConflictFolder_GUID = LibC::GUID.new("59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69")
-  CLSID_ISyncMgrConflictFolder = "59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69"
+  ISyncMgrConflictFolder_GUID = "59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69"
+  IID_ISyncMgrConflictFolder = LibC::GUID.new(0x59287f5e_u32, 0xbc81_u16, 0x4fca_u16, StaticArray[0xa7_u8, 0xf1_u8, 0xe5_u8, 0xa8_u8, 0xec_u8, 0xdb_u8, 0x1d_u8, 0x69_u8])
   struct ISyncMgrConflictFolder
     lpVtbl : ISyncMgrConflictFolderVTbl*
   end
@@ -13171,8 +13171,8 @@ lib LibWin32
     get_item : Proc(ISyncMgrConflictItems*, UInt32, CONFIRM_CONFLICT_ITEM*, HRESULT)
   end
 
-  ISyncMgrConflictItems_GUID = LibC::GUID.new("9c7ead52-8023-4936-a4db-d2a9a99e436a")
-  CLSID_ISyncMgrConflictItems = "9c7ead52-8023-4936-a4db-d2a9a99e436a"
+  ISyncMgrConflictItems_GUID = "9c7ead52-8023-4936-a4db-d2a9a99e436a"
+  IID_ISyncMgrConflictItems = LibC::GUID.new(0x9c7ead52_u32, 0x8023_u16, 0x4936_u16, StaticArray[0xa4_u8, 0xdb_u8, 0xd2_u8, 0xa9_u8, 0xa9_u8, 0x9e_u8, 0x43_u8, 0x6a_u8])
   struct ISyncMgrConflictItems
     lpVtbl : ISyncMgrConflictItemsVTbl*
   end
@@ -13185,8 +13185,8 @@ lib LibWin32
     get_item : Proc(ISyncMgrConflictResolutionItems*, UInt32, CONFIRM_CONFLICT_RESULT_INFO*, HRESULT)
   end
 
-  ISyncMgrConflictResolutionItems_GUID = LibC::GUID.new("458725b9-129d-4135-a998-9ceafec27007")
-  CLSID_ISyncMgrConflictResolutionItems = "458725b9-129d-4135-a998-9ceafec27007"
+  ISyncMgrConflictResolutionItems_GUID = "458725b9-129d-4135-a998-9ceafec27007"
+  IID_ISyncMgrConflictResolutionItems = LibC::GUID.new(0x458725b9_u32, 0x129d_u16, 0x4135_u16, StaticArray[0xa9_u8, 0x98_u8, 0x9c_u8, 0xea_u8, 0xfe_u8, 0xc2_u8, 0x70_u8, 0x7_u8])
   struct ISyncMgrConflictResolutionItems
     lpVtbl : ISyncMgrConflictResolutionItemsVTbl*
   end
@@ -13198,8 +13198,8 @@ lib LibWin32
     enable_focus_tracking : Proc(IInputPanelConfiguration*, HRESULT)
   end
 
-  IInputPanelConfiguration_GUID = LibC::GUID.new("41c81592-514c-48bd-a22e-e6af638521a6")
-  CLSID_IInputPanelConfiguration = "41c81592-514c-48bd-a22e-e6af638521a6"
+  IInputPanelConfiguration_GUID = "41c81592-514c-48bd-a22e-e6af638521a6"
+  IID_IInputPanelConfiguration = LibC::GUID.new(0x41c81592_u32, 0x514c_u16, 0x48bd_u16, StaticArray[0xa2_u8, 0x2e_u8, 0xe6_u8, 0xaf_u8, 0x63_u8, 0x85_u8, 0x21_u8, 0xa6_u8])
   struct IInputPanelConfiguration
     lpVtbl : IInputPanelConfigurationVTbl*
   end
@@ -13211,8 +13211,8 @@ lib LibWin32
     require_touch_in_edit_control : Proc(IInputPanelInvocationConfiguration*, HRESULT)
   end
 
-  IInputPanelInvocationConfiguration_GUID = LibC::GUID.new("a213f136-3b45-4362-a332-efb6547cd432")
-  CLSID_IInputPanelInvocationConfiguration = "a213f136-3b45-4362-a332-efb6547cd432"
+  IInputPanelInvocationConfiguration_GUID = "a213f136-3b45-4362-a332-efb6547cd432"
+  IID_IInputPanelInvocationConfiguration = LibC::GUID.new(0xa213f136_u32, 0x3b45_u16, 0x4362_u16, StaticArray[0xa3_u8, 0x32_u8, 0xef_u8, 0xb6_u8, 0x54_u8, 0x7c_u8, 0xd4_u8, 0x32_u8])
   struct IInputPanelInvocationConfiguration
     lpVtbl : IInputPanelInvocationConfigurationVTbl*
   end
@@ -13228,8 +13228,8 @@ lib LibWin32
     detach : Proc(ISharedBitmap*, HBITMAP*, HRESULT)
   end
 
-  ISharedBitmap_GUID = LibC::GUID.new("091162a4-bc96-411f-aae8-c5122cd03363")
-  CLSID_ISharedBitmap = "091162a4-bc96-411f-aae8-c5122cd03363"
+  ISharedBitmap_GUID = "091162a4-bc96-411f-aae8-c5122cd03363"
+  IID_ISharedBitmap = LibC::GUID.new(0x91162a4_u32, 0xbc96_u16, 0x411f_u16, StaticArray[0xaa_u8, 0xe8_u8, 0xc5_u8, 0x12_u8, 0x2c_u8, 0xd0_u8, 0x33_u8, 0x63_u8])
   struct ISharedBitmap
     lpVtbl : ISharedBitmapVTbl*
   end
@@ -13242,8 +13242,8 @@ lib LibWin32
     get_thumbnail_by_id : Proc(IThumbnailCache*, WTS_THUMBNAILID, UInt32, ISharedBitmap*, WTS_CACHEFLAGS*, HRESULT)
   end
 
-  IThumbnailCache_GUID = LibC::GUID.new("f676c15d-596a-4ce2-8234-33996f445db1")
-  CLSID_IThumbnailCache = "f676c15d-596a-4ce2-8234-33996f445db1"
+  IThumbnailCache_GUID = "f676c15d-596a-4ce2-8234-33996f445db1"
+  IID_IThumbnailCache = LibC::GUID.new(0xf676c15d_u32, 0x596a_u16, 0x4ce2_u16, StaticArray[0x82_u8, 0x34_u8, 0x33_u8, 0x99_u8, 0x6f_u8, 0x44_u8, 0x5d_u8, 0xb1_u8])
   struct IThumbnailCache
     lpVtbl : IThumbnailCacheVTbl*
   end
@@ -13255,8 +13255,8 @@ lib LibWin32
     get_thumbnail : Proc(IThumbnailProvider*, UInt32, HBITMAP*, WTS_ALPHATYPE*, HRESULT)
   end
 
-  IThumbnailProvider_GUID = LibC::GUID.new("e357fccd-a995-4576-b01f-234630154e96")
-  CLSID_IThumbnailProvider = "e357fccd-a995-4576-b01f-234630154e96"
+  IThumbnailProvider_GUID = "e357fccd-a995-4576-b01f-234630154e96"
+  IID_IThumbnailProvider = LibC::GUID.new(0xe357fccd_u32, 0xa995_u16, 0x4576_u16, StaticArray[0xb0_u8, 0x1f_u8, 0x23_u8, 0x46_u8, 0x30_u8, 0x15_u8, 0x4e_u8, 0x96_u8])
   struct IThumbnailProvider
     lpVtbl : IThumbnailProviderVTbl*
   end
@@ -13268,8 +13268,8 @@ lib LibWin32
     set_context : Proc(IThumbnailSettings*, WTS_CONTEXTFLAGS, HRESULT)
   end
 
-  IThumbnailSettings_GUID = LibC::GUID.new("f4376f00-bef5-4d45-80f3-1e023bbf1209")
-  CLSID_IThumbnailSettings = "f4376f00-bef5-4d45-80f3-1e023bbf1209"
+  IThumbnailSettings_GUID = "f4376f00-bef5-4d45-80f3-1e023bbf1209"
+  IID_IThumbnailSettings = LibC::GUID.new(0xf4376f00_u32, 0xbef5_u16, 0x4d45_u16, StaticArray[0x80_u8, 0xf3_u8, 0x1e_u8, 0x2_u8, 0x3b_u8, 0xbf_u8, 0x12_u8, 0x9_u8])
   struct IThumbnailSettings
     lpVtbl : IThumbnailSettingsVTbl*
   end
@@ -13281,8 +13281,8 @@ lib LibWin32
     page_in_thumbnail : Proc(IThumbnailCachePrimer*, IShellItem, WTS_FLAGS, UInt32, HRESULT)
   end
 
-  IThumbnailCachePrimer_GUID = LibC::GUID.new("0f03f8fe-2b26-46f0-965a-212aa8d66b76")
-  CLSID_IThumbnailCachePrimer = "0f03f8fe-2b26-46f0-965a-212aa8d66b76"
+  IThumbnailCachePrimer_GUID = "0f03f8fe-2b26-46f0-965a-212aa8d66b76"
+  IID_IThumbnailCachePrimer = LibC::GUID.new(0xf03f8fe_u32, 0x2b26_u16, 0x46f0_u16, StaticArray[0x96_u8, 0x5a_u8, 0x21_u8, 0x2a_u8, 0xa8_u8, 0xd6_u8, 0x6b_u8, 0x76_u8])
   struct IThumbnailCachePrimer
     lpVtbl : IThumbnailCachePrimerVTbl*
   end
@@ -13297,8 +13297,8 @@ lib LibWin32
     get_data_format_from_path : Proc(IShellImageDataFactory*, LibC::LPWSTR, Guid*, HRESULT)
   end
 
-  IShellImageDataFactory_GUID = LibC::GUID.new("9be8ed5c-edab-4d75-90f3-bd5bdbb21c82")
-  CLSID_IShellImageDataFactory = "9be8ed5c-edab-4d75-90f3-bd5bdbb21c82"
+  IShellImageDataFactory_GUID = "9be8ed5c-edab-4d75-90f3-bd5bdbb21c82"
+  IID_IShellImageDataFactory = LibC::GUID.new(0x9be8ed5c_u32, 0xedab_u16, 0x4d75_u16, StaticArray[0x90_u8, 0xf3_u8, 0xbd_u8, 0x5b_u8, 0xdb_u8, 0xb2_u8, 0x1c_u8, 0x82_u8])
   struct IShellImageDataFactory
     lpVtbl : IShellImageDataFactoryVTbl*
   end
@@ -13339,8 +13339,8 @@ lib LibWin32
     replace_frame : Proc(IShellImageData*, UInt8*, HRESULT)
   end
 
-  IShellImageData_GUID = LibC::GUID.new("bfdeec12-8040-4403-a5ea-9e07dafcf530")
-  CLSID_IShellImageData = "bfdeec12-8040-4403-a5ea-9e07dafcf530"
+  IShellImageData_GUID = "bfdeec12-8040-4403-a5ea-9e07dafcf530"
+  IID_IShellImageData = LibC::GUID.new(0xbfdeec12_u32, 0x8040_u16, 0x4403_u16, StaticArray[0xa5_u8, 0xea_u8, 0x9e_u8, 0x7_u8, 0xda_u8, 0xfc_u8, 0xf5_u8, 0x30_u8])
   struct IShellImageData
     lpVtbl : IShellImageDataVTbl*
   end
@@ -13352,8 +13352,8 @@ lib LibWin32
     query_abort : Proc(IShellImageDataAbort*, HRESULT)
   end
 
-  IShellImageDataAbort_GUID = LibC::GUID.new("53fb8e58-50c0-4003-b4aa-0c8df28e7f3a")
-  CLSID_IShellImageDataAbort = "53fb8e58-50c0-4003-b4aa-0c8df28e7f3a"
+  IShellImageDataAbort_GUID = "53fb8e58-50c0-4003-b4aa-0c8df28e7f3a"
+  IID_IShellImageDataAbort = LibC::GUID.new(0x53fb8e58_u32, 0x50c0_u16, 0x4003_u16, StaticArray[0xb4_u8, 0xaa_u8, 0xc_u8, 0x8d_u8, 0xf2_u8, 0x8e_u8, 0x7f_u8, 0x3a_u8])
   struct IShellImageDataAbort
     lpVtbl : IShellImageDataAbortVTbl*
   end
@@ -13366,8 +13366,8 @@ lib LibWin32
     save_properties : Proc(IStorageProviderPropertyHandler*, IPropertyStore, HRESULT)
   end
 
-  IStorageProviderPropertyHandler_GUID = LibC::GUID.new("301dfbe5-524c-4b0f-8b2d-21c40b3a2988")
-  CLSID_IStorageProviderPropertyHandler = "301dfbe5-524c-4b0f-8b2d-21c40b3a2988"
+  IStorageProviderPropertyHandler_GUID = "301dfbe5-524c-4b0f-8b2d-21c40b3a2988"
+  IID_IStorageProviderPropertyHandler = LibC::GUID.new(0x301dfbe5_u32, 0x524c_u16, 0x4b0f_u16, StaticArray[0x8b_u8, 0x2d_u8, 0x21_u8, 0xc4_u8, 0xb_u8, 0x3a_u8, 0x29_u8, 0x88_u8])
   struct IStorageProviderPropertyHandler
     lpVtbl : IStorageProviderPropertyHandlerVTbl*
   end
@@ -13381,8 +13381,8 @@ lib LibWin32
     get_property_handler_from_file_id : Proc(IStorageProviderHandler*, LibC::LPWSTR, IStorageProviderPropertyHandler*, HRESULT)
   end
 
-  IStorageProviderHandler_GUID = LibC::GUID.new("162c6fb5-44d3-435b-903d-e613fa093fb5")
-  CLSID_IStorageProviderHandler = "162c6fb5-44d3-435b-903d-e613fa093fb5"
+  IStorageProviderHandler_GUID = "162c6fb5-44d3-435b-903d-e613fa093fb5"
+  IID_IStorageProviderHandler = LibC::GUID.new(0x162c6fb5_u32, 0x44d3_u16, 0x435b_u16, StaticArray[0x90_u8, 0x3d_u8, 0xe6_u8, 0x13_u8, 0xfa_u8, 0x9_u8, 0x3f_u8, 0xb5_u8])
   struct IStorageProviderHandler
     lpVtbl : IStorageProviderHandlerVTbl*
   end
@@ -13402,8 +13402,8 @@ lib LibWin32
     establish_connection : Proc(ISyncMgrSynchronizeCallback*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
-  ISyncMgrSynchronizeCallback_GUID = LibC::GUID.new("6295df41-35ee-11d1-8707-00c04fd93327")
-  CLSID_ISyncMgrSynchronizeCallback = "6295df41-35ee-11d1-8707-00c04fd93327"
+  ISyncMgrSynchronizeCallback_GUID = "6295df41-35ee-11d1-8707-00c04fd93327"
+  IID_ISyncMgrSynchronizeCallback = LibC::GUID.new(0x6295df41_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
   struct ISyncMgrSynchronizeCallback
     lpVtbl : ISyncMgrSynchronizeCallbackVTbl*
   end
@@ -13418,8 +13418,8 @@ lib LibWin32
     clone : Proc(ISyncMgrEnumItems*, ISyncMgrEnumItems*, HRESULT)
   end
 
-  ISyncMgrEnumItems_GUID = LibC::GUID.new("6295df2a-35ee-11d1-8707-00c04fd93327")
-  CLSID_ISyncMgrEnumItems = "6295df2a-35ee-11d1-8707-00c04fd93327"
+  ISyncMgrEnumItems_GUID = "6295df2a-35ee-11d1-8707-00c04fd93327"
+  IID_ISyncMgrEnumItems = LibC::GUID.new(0x6295df2a_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
   struct ISyncMgrEnumItems
     lpVtbl : ISyncMgrEnumItemsVTbl*
   end
@@ -13440,8 +13440,8 @@ lib LibWin32
     show_error : Proc(ISyncMgrSynchronize*, LibC::HANDLE, Guid*, HRESULT)
   end
 
-  ISyncMgrSynchronize_GUID = LibC::GUID.new("6295df40-35ee-11d1-8707-00c04fd93327")
-  CLSID_ISyncMgrSynchronize = "6295df40-35ee-11d1-8707-00c04fd93327"
+  ISyncMgrSynchronize_GUID = "6295df40-35ee-11d1-8707-00c04fd93327"
+  IID_ISyncMgrSynchronize = LibC::GUID.new(0x6295df40_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
   struct ISyncMgrSynchronize
     lpVtbl : ISyncMgrSynchronizeVTbl*
   end
@@ -13454,8 +13454,8 @@ lib LibWin32
     update_all : Proc(ISyncMgrSynchronizeInvoke*, HRESULT)
   end
 
-  ISyncMgrSynchronizeInvoke_GUID = LibC::GUID.new("6295df2c-35ee-11d1-8707-00c04fd93327")
-  CLSID_ISyncMgrSynchronizeInvoke = "6295df2c-35ee-11d1-8707-00c04fd93327"
+  ISyncMgrSynchronizeInvoke_GUID = "6295df2c-35ee-11d1-8707-00c04fd93327"
+  IID_ISyncMgrSynchronizeInvoke = LibC::GUID.new(0x6295df2c_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
   struct ISyncMgrSynchronizeInvoke
     lpVtbl : ISyncMgrSynchronizeInvokeVTbl*
   end
@@ -13469,8 +13469,8 @@ lib LibWin32
     get_handler_registration_info : Proc(ISyncMgrRegister*, Guid*, UInt32*, HRESULT)
   end
 
-  ISyncMgrRegister_GUID = LibC::GUID.new("6295df42-35ee-11d1-8707-00c04fd93327")
-  CLSID_ISyncMgrRegister = "6295df42-35ee-11d1-8707-00c04fd93327"
+  ISyncMgrRegister_GUID = "6295df42-35ee-11d1-8707-00c04fd93327"
+  IID_ISyncMgrRegister = LibC::GUID.new(0x6295df42_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
   struct ISyncMgrRegister
     lpVtbl : ISyncMgrRegisterVTbl*
   end
@@ -13483,8 +13483,8 @@ lib LibWin32
     set_thumbnail_stream : Proc(IThumbnailStreamCache*, LibC::LPWSTR, UInt64, SIZE, IStream, HRESULT)
   end
 
-  IThumbnailStreamCache_GUID = LibC::GUID.new("90e11430-9569-41d8-ae75-6d4d2ae7cca0")
-  CLSID_IThumbnailStreamCache = "90e11430-9569-41d8-ae75-6d4d2ae7cca0"
+  IThumbnailStreamCache_GUID = "90e11430-9569-41d8-ae75-6d4d2ae7cca0"
+  IID_IThumbnailStreamCache = LibC::GUID.new(0x90e11430_u32, 0x9569_u16, 0x41d8_u16, StaticArray[0xae_u8, 0x75_u8, 0x6d_u8, 0x4d_u8, 0x2a_u8, 0xe7_u8, 0xcc_u8, 0xa0_u8])
   struct IThumbnailStreamCache
     lpVtbl : IThumbnailStreamCacheVTbl*
   end
@@ -13497,8 +13497,8 @@ lib LibWin32
     get_url : Proc(ITravelLogEntry*, LibC::LPWSTR*, HRESULT)
   end
 
-  ITravelLogEntry_GUID = LibC::GUID.new("7ebfdd87-ad18-11d3-a4c5-00c04f72d6b8")
-  CLSID_ITravelLogEntry = "7ebfdd87-ad18-11d3-a4c5-00c04f72d6b8"
+  ITravelLogEntry_GUID = "7ebfdd87-ad18-11d3-a4c5-00c04f72d6b8"
+  IID_ITravelLogEntry = LibC::GUID.new(0x7ebfdd87_u32, 0xad18_u16, 0x11d3_u16, StaticArray[0xa4_u8, 0xc5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd6_u8, 0xb8_u8])
   struct ITravelLogEntry
     lpVtbl : ITravelLogEntryVTbl*
   end
@@ -13512,8 +13512,8 @@ lib LibWin32
     load_history_position : Proc(ITravelLogClient*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
-  ITravelLogClient_GUID = LibC::GUID.new("241c033e-e659-43da-aa4d-4086dbc4758d")
-  CLSID_ITravelLogClient = "241c033e-e659-43da-aa4d-4086dbc4758d"
+  ITravelLogClient_GUID = "241c033e-e659-43da-aa4d-4086dbc4758d"
+  IID_ITravelLogClient = LibC::GUID.new(0x241c033e_u32, 0xe659_u16, 0x43da_u16, StaticArray[0xaa_u8, 0x4d_u8, 0x40_u8, 0x86_u8, 0xdb_u8, 0xc4_u8, 0x75_u8, 0x8d_u8])
   struct ITravelLogClient
     lpVtbl : ITravelLogClientVTbl*
   end
@@ -13528,8 +13528,8 @@ lib LibWin32
     clone : Proc(IEnumTravelLogEntry*, IEnumTravelLogEntry*, HRESULT)
   end
 
-  IEnumTravelLogEntry_GUID = LibC::GUID.new("7ebfdd85-ad18-11d3-a4c5-00c04f72d6b8")
-  CLSID_IEnumTravelLogEntry = "7ebfdd85-ad18-11d3-a4c5-00c04f72d6b8"
+  IEnumTravelLogEntry_GUID = "7ebfdd85-ad18-11d3-a4c5-00c04f72d6b8"
+  IID_IEnumTravelLogEntry = LibC::GUID.new(0x7ebfdd85_u32, 0xad18_u16, 0x11d3_u16, StaticArray[0xa4_u8, 0xc5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd6_u8, 0xb8_u8])
   struct IEnumTravelLogEntry
     lpVtbl : IEnumTravelLogEntryVTbl*
   end
@@ -13547,8 +13547,8 @@ lib LibWin32
     get_relative_entry : Proc(ITravelLogStg*, Int32, ITravelLogEntry*, HRESULT)
   end
 
-  ITravelLogStg_GUID = LibC::GUID.new("7ebfdd80-ad18-11d3-a4c5-00c04f72d6b8")
-  CLSID_ITravelLogStg = "7ebfdd80-ad18-11d3-a4c5-00c04f72d6b8"
+  ITravelLogStg_GUID = "7ebfdd80-ad18-11d3-a4c5-00c04f72d6b8"
+  IID_ITravelLogStg = LibC::GUID.new(0x7ebfdd80_u32, 0xad18_u16, 0x11d3_u16, StaticArray[0xa4_u8, 0xc5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd6_u8, 0xb8_u8])
   struct ITravelLogStg
     lpVtbl : ITravelLogStgVTbl*
   end
@@ -13573,8 +13573,8 @@ lib LibWin32
     get_additional_params : Proc(IHlink*, LibC::LPWSTR*, HRESULT)
   end
 
-  IHlink_GUID = LibC::GUID.new("79eac9c3-baf9-11ce-8c82-00aa004ba90b")
-  CLSID_IHlink = "79eac9c3-baf9-11ce-8c82-00aa004ba90b"
+  IHlink_GUID = "79eac9c3-baf9-11ce-8c82-00aa004ba90b"
+  IID_IHlink = LibC::GUID.new(0x79eac9c3_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
   struct IHlink
     lpVtbl : IHlinkVTbl*
   end
@@ -13589,8 +13589,8 @@ lib LibWin32
     on_navigation_complete : Proc(IHlinkSite*, UInt32, UInt32, HRESULT, LibC::LPWSTR, HRESULT)
   end
 
-  IHlinkSite_GUID = LibC::GUID.new("79eac9c2-baf9-11ce-8c82-00aa004ba90b")
-  CLSID_IHlinkSite = "79eac9c2-baf9-11ce-8c82-00aa004ba90b"
+  IHlinkSite_GUID = "79eac9c2-baf9-11ce-8c82-00aa004ba90b"
+  IID_IHlinkSite = LibC::GUID.new(0x79eac9c2_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
   struct IHlinkSite
     lpVtbl : IHlinkSiteVTbl*
   end
@@ -13606,8 +13606,8 @@ lib LibWin32
     get_friendly_name : Proc(IHlinkTarget*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
   end
 
-  IHlinkTarget_GUID = LibC::GUID.new("79eac9c4-baf9-11ce-8c82-00aa004ba90b")
-  CLSID_IHlinkTarget = "79eac9c4-baf9-11ce-8c82-00aa004ba90b"
+  IHlinkTarget_GUID = "79eac9c4-baf9-11ce-8c82-00aa004ba90b"
+  IID_IHlinkTarget = LibC::GUID.new(0x79eac9c4_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
   struct IHlinkTarget
     lpVtbl : IHlinkTargetVTbl*
   end
@@ -13623,8 +13623,8 @@ lib LibWin32
     update_hlink : Proc(IHlinkFrame*, UInt32, IMoniker, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IHlinkFrame_GUID = LibC::GUID.new("79eac9c5-baf9-11ce-8c82-00aa004ba90b")
-  CLSID_IHlinkFrame = "79eac9c5-baf9-11ce-8c82-00aa004ba90b"
+  IHlinkFrame_GUID = "79eac9c5-baf9-11ce-8c82-00aa004ba90b"
+  IID_IHlinkFrame = LibC::GUID.new(0x79eac9c5_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
   struct IHlinkFrame
     lpVtbl : IHlinkFrameVTbl*
   end
@@ -13639,8 +13639,8 @@ lib LibWin32
     clone : Proc(IEnumHLITEM*, IEnumHLITEM*, HRESULT)
   end
 
-  IEnumHLITEM_GUID = LibC::GUID.new("79eac9c6-baf9-11ce-8c82-00aa004ba90b")
-  CLSID_IEnumHLITEM = "79eac9c6-baf9-11ce-8c82-00aa004ba90b"
+  IEnumHLITEM_GUID = "79eac9c6-baf9-11ce-8c82-00aa004ba90b"
+  IID_IEnumHLITEM = LibC::GUID.new(0x79eac9c6_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
   struct IEnumHLITEM
     lpVtbl : IEnumHLITEMVTbl*
   end
@@ -13665,8 +13665,8 @@ lib LibWin32
     close : Proc(IHlinkBrowseContext*, UInt32, HRESULT)
   end
 
-  IHlinkBrowseContext_GUID = LibC::GUID.new("79eac9c7-baf9-11ce-8c82-00aa004ba90b")
-  CLSID_IHlinkBrowseContext = "79eac9c7-baf9-11ce-8c82-00aa004ba90b"
+  IHlinkBrowseContext_GUID = "79eac9c7-baf9-11ce-8c82-00aa004ba90b"
+  IID_IHlinkBrowseContext = LibC::GUID.new(0x79eac9c7_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
   struct IHlinkBrowseContext
     lpVtbl : IHlinkBrowseContextVTbl*
   end
@@ -13679,8 +13679,8 @@ lib LibWin32
     set_authenticate_data : Proc(IExtensionServices*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IExtensionServices_GUID = LibC::GUID.new("79eac9cb-baf9-11ce-8c82-00aa004ba90b")
-  CLSID_IExtensionServices = "79eac9cb-baf9-11ce-8c82-00aa004ba90b"
+  IExtensionServices_GUID = "79eac9cb-baf9-11ce-8c82-00aa004ba90b"
+  IID_IExtensionServices = LibC::GUID.new(0x79eac9cb_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
   struct IExtensionServices
     lpVtbl : IExtensionServicesVTbl*
   end
@@ -13694,8 +13694,8 @@ lib LibWin32
     get_pidl : Proc(ITravelEntry*, ITEMIDLIST**, HRESULT)
   end
 
-  ITravelEntry_GUID = LibC::GUID.new("f46edb3b-bc2f-11d0-9412-00aa00a3ebd3")
-  CLSID_ITravelEntry = "f46edb3b-bc2f-11d0-9412-00aa00a3ebd3"
+  ITravelEntry_GUID = "f46edb3b-bc2f-11d0-9412-00aa00a3ebd3"
+  IID_ITravelEntry = LibC::GUID.new(0xf46edb3b_u32, 0xbc2f_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x12_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xeb_u8, 0xd3_u8])
   struct ITravelEntry
     lpVtbl : ITravelEntryVTbl*
   end
@@ -13717,8 +13717,8 @@ lib LibWin32
     revert : Proc(ITravelLog*, HRESULT)
   end
 
-  ITravelLog_GUID = LibC::GUID.new("66a9cb08-4802-11d2-a561-00a0c92dbfe8")
-  CLSID_ITravelLog = "66a9cb08-4802-11d2-a561-00a0c92dbfe8"
+  ITravelLog_GUID = "66a9cb08-4802-11d2-a561-00a0c92dbfe8"
+  IID_ITravelLog = LibC::GUID.new(0x66a9cb08_u32, 0x4802_u16, 0x11d2_u16, StaticArray[0xa5_u8, 0x61_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
   struct ITravelLog
     lpVtbl : ITravelLogVTbl*
   end
@@ -13749,8 +13749,8 @@ lib LibWin32
     on_invoke : Proc(IExpDispSupportXP*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IExpDispSupportXP_GUID = LibC::GUID.new("2f0dd58c-f789-4f14-99fb-9293b3c9c212")
-  CLSID_IExpDispSupportXP = "2f0dd58c-f789-4f14-99fb-9293b3c9c212"
+  IExpDispSupportXP_GUID = "2f0dd58c-f789-4f14-99fb-9293b3c9c212"
+  IID_IExpDispSupportXP = LibC::GUID.new(0x2f0dd58c_u32, 0xf789_u16, 0x4f14_u16, StaticArray[0x99_u8, 0xfb_u8, 0x92_u8, 0x93_u8, 0xb3_u8, 0xc9_u8, 0xc2_u8, 0x12_u8])
   struct IExpDispSupportXP
     lpVtbl : IExpDispSupportXPVTbl*
   end
@@ -13764,8 +13764,8 @@ lib LibWin32
     on_invoke : Proc(IExpDispSupport*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IExpDispSupport_GUID = LibC::GUID.new("0d7d1d00-6fc0-11d0-a974-00c04fd705a2")
-  CLSID_IExpDispSupport = "0d7d1d00-6fc0-11d0-a974-00c04fd705a2"
+  IExpDispSupport_GUID = "0d7d1d00-6fc0-11d0-a974-00c04fd705a2"
+  IID_IExpDispSupport = LibC::GUID.new(0xd7d1d00_u32, 0x6fc0_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0x74_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x5_u8, 0xa2_u8])
   struct IExpDispSupport
     lpVtbl : IExpDispSupportVTbl*
   end
@@ -13806,8 +13806,8 @@ lib LibWin32
     register_window : Proc(IBrowserService*, LibC::BOOL, Int32, HRESULT)
   end
 
-  IBrowserService_GUID = LibC::GUID.new("02ba3b52-0547-11d1-b833-00c04fc9b31f")
-  CLSID_IBrowserService = "02ba3b52-0547-11d1-b833-00c04fc9b31f"
+  IBrowserService_GUID = "02ba3b52-0547-11d1-b833-00c04fc9b31f"
+  IID_IBrowserService = LibC::GUID.new(0x2ba3b52_u32, 0x547_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
   struct IBrowserService
     lpVtbl : IBrowserServiceVTbl*
   end
@@ -13819,8 +13819,8 @@ lib LibWin32
     set_owner : Proc(IShellService*, IUnknown, HRESULT)
   end
 
-  IShellService_GUID = LibC::GUID.new("5836fb00-8187-11cf-a12b-00aa004ae837")
-  CLSID_IShellService = "5836fb00-8187-11cf-a12b-00aa004ae837"
+  IShellService_GUID = "5836fb00-8187-11cf-a12b-00aa004ae837"
+  IID_IShellService = LibC::GUID.new(0x5836fb00_u32, 0x8187_u16, 0x11cf_u16, StaticArray[0xa1_u8, 0x2b_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xe8_u8, 0x37_u8])
   struct IShellService
     lpVtbl : IShellServiceVTbl*
   end
@@ -13923,8 +13923,8 @@ lib LibWin32
     v_check_zone_crossing : Proc(IBrowserService2*, ITEMIDLIST*, HRESULT)
   end
 
-  IBrowserService2_GUID = LibC::GUID.new("68bd21cc-438b-11d2-a560-00a0c92dbfe8")
-  CLSID_IBrowserService2 = "68bd21cc-438b-11d2-a560-00a0c92dbfe8"
+  IBrowserService2_GUID = "68bd21cc-438b-11d2-a560-00a0c92dbfe8"
+  IID_IBrowserService2 = LibC::GUID.new(0x68bd21cc_u32, 0x438b_u16, 0x11d2_u16, StaticArray[0xa5_u8, 0x60_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
   struct IBrowserService2
     lpVtbl : IBrowserService2VTbl*
   end
@@ -14029,8 +14029,8 @@ lib LibWin32
     ie_parse_display_name_ex : Proc(IBrowserService3*, UInt32, LibC::LPWSTR, UInt32, ITEMIDLIST**, HRESULT)
   end
 
-  IBrowserService3_GUID = LibC::GUID.new("27d7ce21-762d-48f3-86f3-40e2fd3749c4")
-  CLSID_IBrowserService3 = "27d7ce21-762d-48f3-86f3-40e2fd3749c4"
+  IBrowserService3_GUID = "27d7ce21-762d-48f3-86f3-40e2fd3749c4"
+  IID_IBrowserService3 = LibC::GUID.new(0x27d7ce21_u32, 0x762d_u16, 0x48f3_u16, StaticArray[0x86_u8, 0xf3_u8, 0x40_u8, 0xe2_u8, 0xfd_u8, 0x37_u8, 0x49_u8, 0xc4_u8])
   struct IBrowserService3
     lpVtbl : IBrowserService3VTbl*
   end
@@ -14138,8 +14138,8 @@ lib LibWin32
     _resize_all_borders : Proc(IBrowserService4*, HRESULT)
   end
 
-  IBrowserService4_GUID = LibC::GUID.new("639f1bff-e135-4096-abd8-e0f504d649a4")
-  CLSID_IBrowserService4 = "639f1bff-e135-4096-abd8-e0f504d649a4"
+  IBrowserService4_GUID = "639f1bff-e135-4096-abd8-e0f504d649a4"
+  IID_IBrowserService4 = LibC::GUID.new(0x639f1bff_u32, 0xe135_u16, 0x4096_u16, StaticArray[0xab_u8, 0xd8_u8, 0xe0_u8, 0xf5_u8, 0x4_u8, 0xd6_u8, 0x49_u8, 0xa4_u8])
   struct IBrowserService4
     lpVtbl : IBrowserService4VTbl*
   end
@@ -14161,8 +14161,8 @@ lib LibWin32
     popup : Proc(ITrackShellMenu*, LibC::HANDLE, POINTL*, RECTL*, Int32, HRESULT)
   end
 
-  ITrackShellMenu_GUID = LibC::GUID.new("8278f932-2a3e-11d2-838f-00c04fd918d0")
-  CLSID_ITrackShellMenu = "8278f932-2a3e-11d2-838f-00c04fd918d0"
+  ITrackShellMenu_GUID = "8278f932-2a3e-11d2-838f-00c04fd918d0"
+  IID_ITrackShellMenu = LibC::GUID.new(0x8278f932_u32, 0x2a3e_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x8f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
   struct ITrackShellMenu
     lpVtbl : ITrackShellMenuVTbl*
   end
@@ -14174,8 +14174,8 @@ lib LibWin32
     transcode_image : Proc(ITranscodeImage*, IShellItem, UInt32, UInt32, UInt32, IStream, UInt32*, UInt32*, HRESULT)
   end
 
-  ITranscodeImage_GUID = LibC::GUID.new("bae86ddd-dc11-421c-b7ab-cc55d1d65c44")
-  CLSID_ITranscodeImage = "bae86ddd-dc11-421c-b7ab-cc55d1d65c44"
+  ITranscodeImage_GUID = "bae86ddd-dc11-421c-b7ab-cc55d1d65c44"
+  IID_ITranscodeImage = LibC::GUID.new(0xbae86ddd_u32, 0xdc11_u16, 0x421c_u16, StaticArray[0xb7_u8, 0xab_u8, 0xcc_u8, 0x55_u8, 0xd1_u8, 0xd6_u8, 0x5c_u8, 0x44_u8])
   struct ITranscodeImage
     lpVtbl : ITranscodeImageVTbl*
   end
@@ -14189,8 +14189,8 @@ lib LibWin32
     invoke_command : Proc(IUniformResourceLocatorA*, Urlinvokecommandinfoa*, HRESULT)
   end
 
-  IUniformResourceLocatorA_GUID = LibC::GUID.new("fbf23b80-e3f0-101b-8488-00aa003e56f8")
-  CLSID_IUniformResourceLocatorA = "fbf23b80-e3f0-101b-8488-00aa003e56f8"
+  IUniformResourceLocatorA_GUID = "fbf23b80-e3f0-101b-8488-00aa003e56f8"
+  IID_IUniformResourceLocatorA = LibC::GUID.new(0xfbf23b80_u32, 0xe3f0_u16, 0x101b_u16, StaticArray[0x84_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3e_u8, 0x56_u8, 0xf8_u8])
   struct IUniformResourceLocatorA
     lpVtbl : IUniformResourceLocatorAVTbl*
   end
@@ -14204,8 +14204,8 @@ lib LibWin32
     invoke_command : Proc(IUniformResourceLocatorW*, Urlinvokecommandinfow*, HRESULT)
   end
 
-  IUniformResourceLocatorW_GUID = LibC::GUID.new("cabb0da0-da57-11cf-9974-0020afd79762")
-  CLSID_IUniformResourceLocatorW = "cabb0da0-da57-11cf-9974-0020afd79762"
+  IUniformResourceLocatorW_GUID = "cabb0da0-da57-11cf-9974-0020afd79762"
+  IID_IUniformResourceLocatorW = LibC::GUID.new(0xcabb0da0_u32, 0xda57_u16, 0x11cf_u16, StaticArray[0x99_u8, 0x74_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xd7_u8, 0x97_u8, 0x62_u8])
   struct IUniformResourceLocatorW
     lpVtbl : IUniformResourceLocatorWVTbl*
   end
@@ -14217,8 +14217,8 @@ lib LibWin32
     add_animation : Proc(IInputPaneAnimationCoordinator*, IUnknown, IDCompositionAnimation, HRESULT)
   end
 
-  IInputPaneAnimationCoordinator_GUID = LibC::GUID.new("2af16ba9-2de5-4b75-82d9-01372afbffb4")
-  CLSID_IInputPaneAnimationCoordinator = "2af16ba9-2de5-4b75-82d9-01372afbffb4"
+  IInputPaneAnimationCoordinator_GUID = "2af16ba9-2de5-4b75-82d9-01372afbffb4"
+  IID_IInputPaneAnimationCoordinator = LibC::GUID.new(0x2af16ba9_u32, 0x2de5_u16, 0x4b75_u16, StaticArray[0x82_u8, 0xd9_u8, 0x1_u8, 0x37_u8, 0x2a_u8, 0xfb_u8, 0xff_u8, 0xb4_u8])
   struct IInputPaneAnimationCoordinator
     lpVtbl : IInputPaneAnimationCoordinatorVTbl*
   end

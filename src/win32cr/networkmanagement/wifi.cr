@@ -814,7 +814,7 @@ lib LibWin32
   DEVPKEY_WiFiDirectServices_ServiceConfigMethods = PROPERTYKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 6_u32)
   DEVPKEY_WiFiDirectServices_RequestServiceInformation = PROPERTYKEY.new(LibC::GUID.new(0x31b37743_u32, 0x7c5e_u16, 0x4005_u16, StaticArray[0x93_u8, 0xe6_u8, 0xe9_u8, 0x53_u8, 0xf9_u8, 0x2b_u8, 0x82_u8, 0xe9_u8]), 7_u32)
   DEVPKEY_WiFi_InterfaceGuid = PROPERTYKEY.new(LibC::GUID.new(0xef1167eb_u32, 0xcbfc_u16, 0x4341_u16, StaticArray[0xa5_u8, 0x68_u8, 0xa7_u8, 0xc9_u8, 0x1a_u8, 0x68_u8, 0x98_u8, 0x2c_u8]), 2_u32)
-  Dot11AdHocManager = LibC::GUID.new(0xdd06a84f_u32, 0x83bd_u16, 0x4d01_u16, StaticArray[0x8a_u8, 0xb9_u8, 0x23_u8, 0x89_u8, 0xfe_u8, 0xa0_u8, 0x86_u8, 0x9e_u8])
+  CLSID_Dot11AdHocManager = LibC::GUID.new(0xdd06a84f_u32, 0x83bd_u16, 0x4d01_u16, StaticArray[0x8a_u8, 0xb9_u8, 0x23_u8, 0x89_u8, 0xfe_u8, 0xa0_u8, 0x86_u8, 0x9e_u8])
 
   alias WLAN_NOTIFICATION_CALLBACK = Proc(L2_NOTIFICATION_DATA*, Void*, Void)
   alias WFD_OPEN_SESSION_COMPLETE_CALLBACK = Proc(LibC::HANDLE, Void*, Guid, UInt32, UInt32, Void)
@@ -3334,8 +3334,8 @@ lib LibWin32
     get_network : Proc(IDot11AdHocManager*, Guid*, IDot11AdHocNetwork*, HRESULT)
   end
 
-  IDot11AdHocManager_GUID = LibC::GUID.new("8f10cc26-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IDot11AdHocManager = "8f10cc26-cf0d-42a0-acbe-e2de7007384d"
+  IDot11AdHocManager_GUID = "8f10cc26-cf0d-42a0-acbe-e2de7007384d"
+  IID_IDot11AdHocManager = LibC::GUID.new(0x8f10cc26_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IDot11AdHocManager
     lpVtbl : IDot11AdHocManagerVTbl*
   end
@@ -3350,8 +3350,8 @@ lib LibWin32
     on_interface_remove : Proc(IDot11AdHocManagerNotificationSink*, Guid*, HRESULT)
   end
 
-  IDot11AdHocManagerNotificationSink_GUID = LibC::GUID.new("8f10cc27-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IDot11AdHocManagerNotificationSink = "8f10cc27-cf0d-42a0-acbe-e2de7007384d"
+  IDot11AdHocManagerNotificationSink_GUID = "8f10cc27-cf0d-42a0-acbe-e2de7007384d"
+  IID_IDot11AdHocManagerNotificationSink = LibC::GUID.new(0x8f10cc27_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IDot11AdHocManagerNotificationSink
     lpVtbl : IDot11AdHocManagerNotificationSinkVTbl*
   end
@@ -3366,8 +3366,8 @@ lib LibWin32
     clone : Proc(IEnumDot11AdHocNetworks*, IEnumDot11AdHocNetworks*, HRESULT)
   end
 
-  IEnumDot11AdHocNetworks_GUID = LibC::GUID.new("8f10cc28-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IEnumDot11AdHocNetworks = "8f10cc28-cf0d-42a0-acbe-e2de7007384d"
+  IEnumDot11AdHocNetworks_GUID = "8f10cc28-cf0d-42a0-acbe-e2de7007384d"
+  IID_IEnumDot11AdHocNetworks = LibC::GUID.new(0x8f10cc28_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IEnumDot11AdHocNetworks
     lpVtbl : IEnumDot11AdHocNetworksVTbl*
   end
@@ -3390,8 +3390,8 @@ lib LibWin32
     disconnect : Proc(IDot11AdHocNetwork*, HRESULT)
   end
 
-  IDot11AdHocNetwork_GUID = LibC::GUID.new("8f10cc29-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IDot11AdHocNetwork = "8f10cc29-cf0d-42a0-acbe-e2de7007384d"
+  IDot11AdHocNetwork_GUID = "8f10cc29-cf0d-42a0-acbe-e2de7007384d"
+  IID_IDot11AdHocNetwork = LibC::GUID.new(0x8f10cc29_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IDot11AdHocNetwork
     lpVtbl : IDot11AdHocNetworkVTbl*
   end
@@ -3404,8 +3404,8 @@ lib LibWin32
     on_connect_fail : Proc(IDot11AdHocNetworkNotificationSink*, DOT11_ADHOC_CONNECT_FAIL_REASON, HRESULT)
   end
 
-  IDot11AdHocNetworkNotificationSink_GUID = LibC::GUID.new("8f10cc2a-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IDot11AdHocNetworkNotificationSink = "8f10cc2a-cf0d-42a0-acbe-e2de7007384d"
+  IDot11AdHocNetworkNotificationSink_GUID = "8f10cc2a-cf0d-42a0-acbe-e2de7007384d"
+  IID_IDot11AdHocNetworkNotificationSink = LibC::GUID.new(0x8f10cc2a_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IDot11AdHocNetworkNotificationSink
     lpVtbl : IDot11AdHocNetworkNotificationSinkVTbl*
   end
@@ -3425,8 +3425,8 @@ lib LibWin32
     get_status : Proc(IDot11AdHocInterface*, DOT11_ADHOC_NETWORK_CONNECTION_STATUS*, HRESULT)
   end
 
-  IDot11AdHocInterface_GUID = LibC::GUID.new("8f10cc2b-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IDot11AdHocInterface = "8f10cc2b-cf0d-42a0-acbe-e2de7007384d"
+  IDot11AdHocInterface_GUID = "8f10cc2b-cf0d-42a0-acbe-e2de7007384d"
+  IID_IDot11AdHocInterface = LibC::GUID.new(0x8f10cc2b_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IDot11AdHocInterface
     lpVtbl : IDot11AdHocInterfaceVTbl*
   end
@@ -3441,8 +3441,8 @@ lib LibWin32
     clone : Proc(IEnumDot11AdHocInterfaces*, IEnumDot11AdHocInterfaces*, HRESULT)
   end
 
-  IEnumDot11AdHocInterfaces_GUID = LibC::GUID.new("8f10cc2c-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IEnumDot11AdHocInterfaces = "8f10cc2c-cf0d-42a0-acbe-e2de7007384d"
+  IEnumDot11AdHocInterfaces_GUID = "8f10cc2c-cf0d-42a0-acbe-e2de7007384d"
+  IID_IEnumDot11AdHocInterfaces = LibC::GUID.new(0x8f10cc2c_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IEnumDot11AdHocInterfaces
     lpVtbl : IEnumDot11AdHocInterfacesVTbl*
   end
@@ -3457,8 +3457,8 @@ lib LibWin32
     clone : Proc(IEnumDot11AdHocSecuritySettings*, IEnumDot11AdHocSecuritySettings*, HRESULT)
   end
 
-  IEnumDot11AdHocSecuritySettings_GUID = LibC::GUID.new("8f10cc2d-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IEnumDot11AdHocSecuritySettings = "8f10cc2d-cf0d-42a0-acbe-e2de7007384d"
+  IEnumDot11AdHocSecuritySettings_GUID = "8f10cc2d-cf0d-42a0-acbe-e2de7007384d"
+  IID_IEnumDot11AdHocSecuritySettings = LibC::GUID.new(0x8f10cc2d_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IEnumDot11AdHocSecuritySettings
     lpVtbl : IEnumDot11AdHocSecuritySettingsVTbl*
   end
@@ -3471,8 +3471,8 @@ lib LibWin32
     get_dot11_cipher_algorithm : Proc(IDot11AdHocSecuritySettings*, DOT11_ADHOC_CIPHER_ALGORITHM*, HRESULT)
   end
 
-  IDot11AdHocSecuritySettings_GUID = LibC::GUID.new("8f10cc2e-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IDot11AdHocSecuritySettings = "8f10cc2e-cf0d-42a0-acbe-e2de7007384d"
+  IDot11AdHocSecuritySettings_GUID = "8f10cc2e-cf0d-42a0-acbe-e2de7007384d"
+  IID_IDot11AdHocSecuritySettings = LibC::GUID.new(0x8f10cc2e_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IDot11AdHocSecuritySettings
     lpVtbl : IDot11AdHocSecuritySettingsVTbl*
   end
@@ -3484,8 +3484,8 @@ lib LibWin32
     on_connection_status_change : Proc(IDot11AdHocInterfaceNotificationSink*, DOT11_ADHOC_NETWORK_CONNECTION_STATUS, HRESULT)
   end
 
-  IDot11AdHocInterfaceNotificationSink_GUID = LibC::GUID.new("8f10cc2f-cf0d-42a0-acbe-e2de7007384d")
-  CLSID_IDot11AdHocInterfaceNotificationSink = "8f10cc2f-cf0d-42a0-acbe-e2de7007384d"
+  IDot11AdHocInterfaceNotificationSink_GUID = "8f10cc2f-cf0d-42a0-acbe-e2de7007384d"
+  IID_IDot11AdHocInterfaceNotificationSink = LibC::GUID.new(0x8f10cc2f_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
   struct IDot11AdHocInterfaceNotificationSink
     lpVtbl : IDot11AdHocInterfaceNotificationSinkVTbl*
   end

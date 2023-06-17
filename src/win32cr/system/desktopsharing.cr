@@ -136,23 +136,23 @@ lib LibWin32
   DISPID_RDPSRAPI_EVENT_VIEW_MOUSE_BUTTON_RECEIVED = 700_u32
   DISPID_RDPSRAPI_EVENT_VIEW_MOUSE_MOVE_RECEIVED = 701_u32
   DISPID_RDPSRAPI_EVENT_VIEW_MOUSE_WHEEL_RECEIVED = 702_u32
-  RDPViewer = LibC::GUID.new(0x32be5ed2_u32, 0x5c86_u16, 0x480f_u16, StaticArray[0xa9_u8, 0x14_u8, 0xf_u8, 0xf8_u8, 0x88_u8, 0x5a_u8, 0x1b_u8, 0x3f_u8])
-  RDPSRAPISessionProperties = LibC::GUID.new(0xdd7594ff_u32, 0xea2a_u16, 0x4c06_u16, StaticArray[0x8f_u8, 0xdf_u8, 0x13_u8, 0x2d_u8, 0xe4_u8, 0x8b_u8, 0x65_u8, 0x10_u8])
-  RDPSRAPIInvitationManager = LibC::GUID.new(0x53d9c9db_u32, 0x75ab_u16, 0x4271_u16, StaticArray[0x94_u8, 0x8a_u8, 0x4c_u8, 0x4e_u8, 0xb3_u8, 0x6a_u8, 0x8f_u8, 0x2b_u8])
-  RDPSRAPIInvitation = LibC::GUID.new(0x49174dc6_u32, 0x731_u16, 0x4b5e_u16, StaticArray[0x8e_u8, 0xe1_u8, 0x83_u8, 0xa6_u8, 0x3d_u8, 0x38_u8, 0x68_u8, 0xfa_u8])
-  RDPSRAPIAttendeeManager = LibC::GUID.new(0xd7b13a01_u32, 0xf7d4_u16, 0x42a6_u16, StaticArray[0x85_u8, 0x95_u8, 0x12_u8, 0xfc_u8, 0x8c_u8, 0x24_u8, 0xe8_u8, 0x51_u8])
-  RDPSRAPIAttendee = LibC::GUID.new(0x74f93bb5_u32, 0x755f_u16, 0x488e_u16, StaticArray[0x8a_u8, 0x29_u8, 0x23_u8, 0x90_u8, 0x10_u8, 0x8a_u8, 0xef_u8, 0x55_u8])
-  RDPSRAPIAttendeeDisconnectInfo = LibC::GUID.new(0xb47d7250_u32, 0x5bdb_u16, 0x405d_u16, StaticArray[0xb4_u8, 0x87_u8, 0xca_u8, 0xad_u8, 0x9c_u8, 0x56_u8, 0xf4_u8, 0xf8_u8])
-  RDPSRAPIApplicationFilter = LibC::GUID.new(0xe35ace89_u32, 0xc7e8_u16, 0x427e_u16, StaticArray[0xa4_u8, 0xf9_u8, 0xb9_u8, 0xda_u8, 0x7_u8, 0x28_u8, 0x26_u8, 0xbd_u8])
-  RDPSRAPIApplicationList = LibC::GUID.new(0x9e31c815_u32, 0x7433_u16, 0x4876_u16, StaticArray[0x97_u8, 0xfb_u8, 0xed_u8, 0x59_u8, 0xfe_u8, 0x2b_u8, 0xaa_u8, 0x22_u8])
-  RDPSRAPIApplication = LibC::GUID.new(0xc116a484_u32, 0x4b25_u16, 0x4b9f_u16, StaticArray[0x8a_u8, 0x54_u8, 0xb9_u8, 0x34_u8, 0xb0_u8, 0x6e_u8, 0x57_u8, 0xfa_u8])
-  RDPSRAPIWindowList = LibC::GUID.new(0x9c21e2b8_u32, 0x5dd4_u16, 0x42cc_u16, StaticArray[0x81_u8, 0xba_u8, 0x1c_u8, 0x9_u8, 0x98_u8, 0x52_u8, 0xe6_u8, 0xfa_u8])
-  RDPSRAPIWindow = LibC::GUID.new(0x3cf46db_u32, 0xce45_u16, 0x4d36_u16, StaticArray[0x86_u8, 0xed_u8, 0xed_u8, 0x28_u8, 0xb7_u8, 0x43_u8, 0x98_u8, 0xbf_u8])
-  RDPSRAPITcpConnectionInfo = LibC::GUID.new(0xbe49db3f_u32, 0xebb6_u16, 0x4278_u16, StaticArray[0x8c_u8, 0xe0_u8, 0xd5_u8, 0x45_u8, 0x58_u8, 0x33_u8, 0xea_u8, 0xee_u8])
-  RDPSession = LibC::GUID.new(0x9b78f0e6_u32, 0x3e05_u16, 0x4a5b_u16, StaticArray[0xb2_u8, 0xe8_u8, 0xe7_u8, 0x43_u8, 0xa8_u8, 0x95_u8, 0x6b_u8, 0x65_u8])
-  RDPSRAPIFrameBuffer = LibC::GUID.new(0xa4f66bcc_u32, 0x538e_u16, 0x4101_u16, StaticArray[0x95_u8, 0x1d_u8, 0x30_u8, 0x84_u8, 0x7a_u8, 0xdb_u8, 0x51_u8, 0x1_u8])
-  RDPTransportStreamBuffer = LibC::GUID.new(0x8d4a1c69_u32, 0xf17f_u16, 0x4549_u16, StaticArray[0xa6_u8, 0x99_u8, 0x76_u8, 0x1c_u8, 0x6e_u8, 0x6b_u8, 0x5c_u8, 0xa_u8])
-  RDPTransportStreamEvents = LibC::GUID.new(0x31e3ab20_u32, 0x5350_u16, 0x483f_u16, StaticArray[0x9d_u8, 0xc6_u8, 0x67_u8, 0x48_u8, 0x66_u8, 0x5e_u8, 0xfd_u8, 0xeb_u8])
+  CLSID_RDPViewer = LibC::GUID.new(0x32be5ed2_u32, 0x5c86_u16, 0x480f_u16, StaticArray[0xa9_u8, 0x14_u8, 0xf_u8, 0xf8_u8, 0x88_u8, 0x5a_u8, 0x1b_u8, 0x3f_u8])
+  CLSID_RDPSRAPISessionProperties = LibC::GUID.new(0xdd7594ff_u32, 0xea2a_u16, 0x4c06_u16, StaticArray[0x8f_u8, 0xdf_u8, 0x13_u8, 0x2d_u8, 0xe4_u8, 0x8b_u8, 0x65_u8, 0x10_u8])
+  CLSID_RDPSRAPIInvitationManager = LibC::GUID.new(0x53d9c9db_u32, 0x75ab_u16, 0x4271_u16, StaticArray[0x94_u8, 0x8a_u8, 0x4c_u8, 0x4e_u8, 0xb3_u8, 0x6a_u8, 0x8f_u8, 0x2b_u8])
+  CLSID_RDPSRAPIInvitation = LibC::GUID.new(0x49174dc6_u32, 0x731_u16, 0x4b5e_u16, StaticArray[0x8e_u8, 0xe1_u8, 0x83_u8, 0xa6_u8, 0x3d_u8, 0x38_u8, 0x68_u8, 0xfa_u8])
+  CLSID_RDPSRAPIAttendeeManager = LibC::GUID.new(0xd7b13a01_u32, 0xf7d4_u16, 0x42a6_u16, StaticArray[0x85_u8, 0x95_u8, 0x12_u8, 0xfc_u8, 0x8c_u8, 0x24_u8, 0xe8_u8, 0x51_u8])
+  CLSID_RDPSRAPIAttendee = LibC::GUID.new(0x74f93bb5_u32, 0x755f_u16, 0x488e_u16, StaticArray[0x8a_u8, 0x29_u8, 0x23_u8, 0x90_u8, 0x10_u8, 0x8a_u8, 0xef_u8, 0x55_u8])
+  CLSID_RDPSRAPIAttendeeDisconnectInfo = LibC::GUID.new(0xb47d7250_u32, 0x5bdb_u16, 0x405d_u16, StaticArray[0xb4_u8, 0x87_u8, 0xca_u8, 0xad_u8, 0x9c_u8, 0x56_u8, 0xf4_u8, 0xf8_u8])
+  CLSID_RDPSRAPIApplicationFilter = LibC::GUID.new(0xe35ace89_u32, 0xc7e8_u16, 0x427e_u16, StaticArray[0xa4_u8, 0xf9_u8, 0xb9_u8, 0xda_u8, 0x7_u8, 0x28_u8, 0x26_u8, 0xbd_u8])
+  CLSID_RDPSRAPIApplicationList = LibC::GUID.new(0x9e31c815_u32, 0x7433_u16, 0x4876_u16, StaticArray[0x97_u8, 0xfb_u8, 0xed_u8, 0x59_u8, 0xfe_u8, 0x2b_u8, 0xaa_u8, 0x22_u8])
+  CLSID_RDPSRAPIApplication = LibC::GUID.new(0xc116a484_u32, 0x4b25_u16, 0x4b9f_u16, StaticArray[0x8a_u8, 0x54_u8, 0xb9_u8, 0x34_u8, 0xb0_u8, 0x6e_u8, 0x57_u8, 0xfa_u8])
+  CLSID_RDPSRAPIWindowList = LibC::GUID.new(0x9c21e2b8_u32, 0x5dd4_u16, 0x42cc_u16, StaticArray[0x81_u8, 0xba_u8, 0x1c_u8, 0x9_u8, 0x98_u8, 0x52_u8, 0xe6_u8, 0xfa_u8])
+  CLSID_RDPSRAPIWindow = LibC::GUID.new(0x3cf46db_u32, 0xce45_u16, 0x4d36_u16, StaticArray[0x86_u8, 0xed_u8, 0xed_u8, 0x28_u8, 0xb7_u8, 0x43_u8, 0x98_u8, 0xbf_u8])
+  CLSID_RDPSRAPITcpConnectionInfo = LibC::GUID.new(0xbe49db3f_u32, 0xebb6_u16, 0x4278_u16, StaticArray[0x8c_u8, 0xe0_u8, 0xd5_u8, 0x45_u8, 0x58_u8, 0x33_u8, 0xea_u8, 0xee_u8])
+  CLSID_RDPSession = LibC::GUID.new(0x9b78f0e6_u32, 0x3e05_u16, 0x4a5b_u16, StaticArray[0xb2_u8, 0xe8_u8, 0xe7_u8, 0x43_u8, 0xa8_u8, 0x95_u8, 0x6b_u8, 0x65_u8])
+  CLSID_RDPSRAPIFrameBuffer = LibC::GUID.new(0xa4f66bcc_u32, 0x538e_u16, 0x4101_u16, StaticArray[0x95_u8, 0x1d_u8, 0x30_u8, 0x84_u8, 0x7a_u8, 0xdb_u8, 0x51_u8, 0x1_u8])
+  CLSID_RDPTransportStreamBuffer = LibC::GUID.new(0x8d4a1c69_u32, 0xf17f_u16, 0x4549_u16, StaticArray[0xa6_u8, 0x99_u8, 0x76_u8, 0x1c_u8, 0x6e_u8, 0x6b_u8, 0x5c_u8, 0xa_u8])
+  CLSID_RDPTransportStreamEvents = LibC::GUID.new(0x31e3ab20_u32, 0x5350_u16, 0x483f_u16, StaticArray[0x9d_u8, 0xc6_u8, 0x67_u8, 0x48_u8, 0x66_u8, 0x5e_u8, 0xfd_u8, 0xeb_u8])
 
 
   enum CTRL_LEVEL : Int32
@@ -254,8 +254,8 @@ lib LibWin32
     get_clx_cmd_line : Proc(IRDPSRAPIDebug*, UInt8**, HRESULT)
   end
 
-  IRDPSRAPIDebug_GUID = LibC::GUID.new("aa1e42b5-496d-4ca4-a690-348dcb2ec4ad")
-  CLSID_IRDPSRAPIDebug = "aa1e42b5-496d-4ca4-a690-348dcb2ec4ad"
+  IRDPSRAPIDebug_GUID = "aa1e42b5-496d-4ca4-a690-348dcb2ec4ad"
+  IID_IRDPSRAPIDebug = LibC::GUID.new(0xaa1e42b5_u32, 0x496d_u16, 0x4ca4_u16, StaticArray[0xa6_u8, 0x90_u8, 0x34_u8, 0x8d_u8, 0xcb_u8, 0x2e_u8, 0xc4_u8, 0xad_u8])
   struct IRDPSRAPIDebug
     lpVtbl : IRDPSRAPIDebugVTbl*
   end
@@ -267,8 +267,8 @@ lib LibWin32
     log_value : Proc(IRDPSRAPIPerfCounterLogger*, Int64, HRESULT)
   end
 
-  IRDPSRAPIPerfCounterLogger_GUID = LibC::GUID.new("071c2533-0fa4-4e8f-ae83-9c10b4305ab5")
-  CLSID_IRDPSRAPIPerfCounterLogger = "071c2533-0fa4-4e8f-ae83-9c10b4305ab5"
+  IRDPSRAPIPerfCounterLogger_GUID = "071c2533-0fa4-4e8f-ae83-9c10b4305ab5"
+  IID_IRDPSRAPIPerfCounterLogger = LibC::GUID.new(0x71c2533_u32, 0xfa4_u16, 0x4e8f_u16, StaticArray[0xae_u8, 0x83_u8, 0x9c_u8, 0x10_u8, 0xb4_u8, 0x30_u8, 0x5a_u8, 0xb5_u8])
   struct IRDPSRAPIPerfCounterLogger
     lpVtbl : IRDPSRAPIPerfCounterLoggerVTbl*
   end
@@ -280,8 +280,8 @@ lib LibWin32
     create_logger : Proc(IRDPSRAPIPerfCounterLoggingManager*, UInt8*, IRDPSRAPIPerfCounterLogger*, HRESULT)
   end
 
-  IRDPSRAPIPerfCounterLoggingManager_GUID = LibC::GUID.new("9a512c86-ac6e-4a8e-b1a4-fcef363f6e64")
-  CLSID_IRDPSRAPIPerfCounterLoggingManager = "9a512c86-ac6e-4a8e-b1a4-fcef363f6e64"
+  IRDPSRAPIPerfCounterLoggingManager_GUID = "9a512c86-ac6e-4a8e-b1a4-fcef363f6e64"
+  IID_IRDPSRAPIPerfCounterLoggingManager = LibC::GUID.new(0x9a512c86_u32, 0xac6e_u16, 0x4a8e_u16, StaticArray[0xb1_u8, 0xa4_u8, 0xfc_u8, 0xef_u8, 0x36_u8, 0x3f_u8, 0x6e_u8, 0x64_u8])
   struct IRDPSRAPIPerfCounterLoggingManager
     lpVtbl : IRDPSRAPIPerfCounterLoggingManagerVTbl*
   end
@@ -297,8 +297,8 @@ lib LibWin32
     free_buffer : Proc(IRDPSRAPIAudioStream*, HRESULT)
   end
 
-  IRDPSRAPIAudioStream_GUID = LibC::GUID.new("e3e30ef9-89c6-4541-ba3b-19336ac6d31c")
-  CLSID_IRDPSRAPIAudioStream = "e3e30ef9-89c6-4541-ba3b-19336ac6d31c"
+  IRDPSRAPIAudioStream_GUID = "e3e30ef9-89c6-4541-ba3b-19336ac6d31c"
+  IID_IRDPSRAPIAudioStream = LibC::GUID.new(0xe3e30ef9_u32, 0x89c6_u16, 0x4541_u16, StaticArray[0xba_u8, 0x3b_u8, 0x19_u8, 0x33_u8, 0x6a_u8, 0xc6_u8, 0xd3_u8, 0x1c_u8])
   struct IRDPSRAPIAudioStream
     lpVtbl : IRDPSRAPIAudioStreamVTbl*
   end
@@ -310,8 +310,8 @@ lib LibWin32
     on_paste_from_clipboard : Proc(IRDPSRAPIClipboardUseEvents*, UInt32, IDispatch, Int16*, HRESULT)
   end
 
-  IRDPSRAPIClipboardUseEvents_GUID = LibC::GUID.new("d559f59a-7a27-4138-8763-247ce5f659a8")
-  CLSID_IRDPSRAPIClipboardUseEvents = "d559f59a-7a27-4138-8763-247ce5f659a8"
+  IRDPSRAPIClipboardUseEvents_GUID = "d559f59a-7a27-4138-8763-247ce5f659a8"
+  IID_IRDPSRAPIClipboardUseEvents = LibC::GUID.new(0xd559f59a_u32, 0x7a27_u16, 0x4138_u16, StaticArray[0x87_u8, 0x63_u8, 0x24_u8, 0x7c_u8, 0xe5_u8, 0xf6_u8, 0x59_u8, 0xa8_u8])
   struct IRDPSRAPIClipboardUseEvents
     lpVtbl : IRDPSRAPIClipboardUseEventsVTbl*
   end
@@ -333,8 +333,8 @@ lib LibWin32
     get_flags : Proc(IRDPSRAPIWindow*, UInt32*, HRESULT)
   end
 
-  IRDPSRAPIWindow_GUID = LibC::GUID.new("beafe0f9-c77b-4933-ba9f-a24cddcc27cf")
-  CLSID_IRDPSRAPIWindow = "beafe0f9-c77b-4933-ba9f-a24cddcc27cf"
+  IRDPSRAPIWindow_GUID = "beafe0f9-c77b-4933-ba9f-a24cddcc27cf"
+  IID_IRDPSRAPIWindow = LibC::GUID.new(0xbeafe0f9_u32, 0xc77b_u16, 0x4933_u16, StaticArray[0xba_u8, 0x9f_u8, 0xa2_u8, 0x4c_u8, 0xdd_u8, 0xcc_u8, 0x27_u8, 0xcf_u8])
   struct IRDPSRAPIWindow
     lpVtbl : IRDPSRAPIWindowVTbl*
   end
@@ -351,8 +351,8 @@ lib LibWin32
     get_item : Proc(IRDPSRAPIWindowList*, Int32, IRDPSRAPIWindow*, HRESULT)
   end
 
-  IRDPSRAPIWindowList_GUID = LibC::GUID.new("8a05ce44-715a-4116-a189-a118f30a07bd")
-  CLSID_IRDPSRAPIWindowList = "8a05ce44-715a-4116-a189-a118f30a07bd"
+  IRDPSRAPIWindowList_GUID = "8a05ce44-715a-4116-a189-a118f30a07bd"
+  IID_IRDPSRAPIWindowList = LibC::GUID.new(0x8a05ce44_u32, 0x715a_u16, 0x4116_u16, StaticArray[0xa1_u8, 0x89_u8, 0xa1_u8, 0x18_u8, 0xf3_u8, 0xa_u8, 0x7_u8, 0xbd_u8])
   struct IRDPSRAPIWindowList
     lpVtbl : IRDPSRAPIWindowListVTbl*
   end
@@ -373,8 +373,8 @@ lib LibWin32
     get_flags : Proc(IRDPSRAPIApplication*, UInt32*, HRESULT)
   end
 
-  IRDPSRAPIApplication_GUID = LibC::GUID.new("41e7a09d-eb7a-436e-935d-780ca2628324")
-  CLSID_IRDPSRAPIApplication = "41e7a09d-eb7a-436e-935d-780ca2628324"
+  IRDPSRAPIApplication_GUID = "41e7a09d-eb7a-436e-935d-780ca2628324"
+  IID_IRDPSRAPIApplication = LibC::GUID.new(0x41e7a09d_u32, 0xeb7a_u16, 0x436e_u16, StaticArray[0x93_u8, 0x5d_u8, 0x78_u8, 0xc_u8, 0xa2_u8, 0x62_u8, 0x83_u8, 0x24_u8])
   struct IRDPSRAPIApplication
     lpVtbl : IRDPSRAPIApplicationVTbl*
   end
@@ -391,8 +391,8 @@ lib LibWin32
     get_item : Proc(IRDPSRAPIApplicationList*, Int32, IRDPSRAPIApplication*, HRESULT)
   end
 
-  IRDPSRAPIApplicationList_GUID = LibC::GUID.new("d4b4aeb3-22dc-4837-b3b6-42ea2517849a")
-  CLSID_IRDPSRAPIApplicationList = "d4b4aeb3-22dc-4837-b3b6-42ea2517849a"
+  IRDPSRAPIApplicationList_GUID = "d4b4aeb3-22dc-4837-b3b6-42ea2517849a"
+  IID_IRDPSRAPIApplicationList = LibC::GUID.new(0xd4b4aeb3_u32, 0x22dc_u16, 0x4837_u16, StaticArray[0xb3_u8, 0xb6_u8, 0x42_u8, 0xea_u8, 0x25_u8, 0x17_u8, 0x84_u8, 0x9a_u8])
   struct IRDPSRAPIApplicationList
     lpVtbl : IRDPSRAPIApplicationListVTbl*
   end
@@ -411,8 +411,8 @@ lib LibWin32
     put_enabled : Proc(IRDPSRAPIApplicationFilter*, Int16, HRESULT)
   end
 
-  IRDPSRAPIApplicationFilter_GUID = LibC::GUID.new("d20f10ca-6637-4f06-b1d5-277ea7e5160d")
-  CLSID_IRDPSRAPIApplicationFilter = "d20f10ca-6637-4f06-b1d5-277ea7e5160d"
+  IRDPSRAPIApplicationFilter_GUID = "d20f10ca-6637-4f06-b1d5-277ea7e5160d"
+  IID_IRDPSRAPIApplicationFilter = LibC::GUID.new(0xd20f10ca_u32, 0x6637_u16, 0x4f06_u16, StaticArray[0xb1_u8, 0xd5_u8, 0x27_u8, 0x7e_u8, 0xa7_u8, 0xe5_u8, 0x16_u8, 0xd_u8])
   struct IRDPSRAPIApplicationFilter
     lpVtbl : IRDPSRAPIApplicationFilterVTbl*
   end
@@ -429,8 +429,8 @@ lib LibWin32
     put_property : Proc(IRDPSRAPISessionProperties*, UInt8*, VARIANT, HRESULT)
   end
 
-  IRDPSRAPISessionProperties_GUID = LibC::GUID.new("339b24f2-9bc0-4f16-9aac-f165433d13d4")
-  CLSID_IRDPSRAPISessionProperties = "339b24f2-9bc0-4f16-9aac-f165433d13d4"
+  IRDPSRAPISessionProperties_GUID = "339b24f2-9bc0-4f16-9aac-f165433d13d4"
+  IID_IRDPSRAPISessionProperties = LibC::GUID.new(0x339b24f2_u32, 0x9bc0_u16, 0x4f16_u16, StaticArray[0x9a_u8, 0xac_u8, 0xf1_u8, 0x65_u8, 0x43_u8, 0x3d_u8, 0x13_u8, 0xd4_u8])
   struct IRDPSRAPISessionProperties
     lpVtbl : IRDPSRAPISessionPropertiesVTbl*
   end
@@ -452,8 +452,8 @@ lib LibWin32
     put_revoked : Proc(IRDPSRAPIInvitation*, Int16, HRESULT)
   end
 
-  IRDPSRAPIInvitation_GUID = LibC::GUID.new("4fac1d43-fc51-45bb-b1b4-2b53aa562fa3")
-  CLSID_IRDPSRAPIInvitation = "4fac1d43-fc51-45bb-b1b4-2b53aa562fa3"
+  IRDPSRAPIInvitation_GUID = "4fac1d43-fc51-45bb-b1b4-2b53aa562fa3"
+  IID_IRDPSRAPIInvitation = LibC::GUID.new(0x4fac1d43_u32, 0xfc51_u16, 0x45bb_u16, StaticArray[0xb1_u8, 0xb4_u8, 0x2b_u8, 0x53_u8, 0xaa_u8, 0x56_u8, 0x2f_u8, 0xa3_u8])
   struct IRDPSRAPIInvitation
     lpVtbl : IRDPSRAPIInvitationVTbl*
   end
@@ -472,8 +472,8 @@ lib LibWin32
     create_invitation : Proc(IRDPSRAPIInvitationManager*, UInt8*, UInt8*, UInt8*, Int32, IRDPSRAPIInvitation*, HRESULT)
   end
 
-  IRDPSRAPIInvitationManager_GUID = LibC::GUID.new("4722b049-92c3-4c2d-8a65-f7348f644dcf")
-  CLSID_IRDPSRAPIInvitationManager = "4722b049-92c3-4c2d-8a65-f7348f644dcf"
+  IRDPSRAPIInvitationManager_GUID = "4722b049-92c3-4c2d-8a65-f7348f644dcf"
+  IID_IRDPSRAPIInvitationManager = LibC::GUID.new(0x4722b049_u32, 0x92c3_u16, 0x4c2d_u16, StaticArray[0x8a_u8, 0x65_u8, 0xf7_u8, 0x34_u8, 0x8f_u8, 0x64_u8, 0x4d_u8, 0xcf_u8])
   struct IRDPSRAPIInvitationManager
     lpVtbl : IRDPSRAPIInvitationManagerVTbl*
   end
@@ -493,8 +493,8 @@ lib LibWin32
     get_peer_ip : Proc(IRDPSRAPITcpConnectionInfo*, UInt8**, HRESULT)
   end
 
-  IRDPSRAPITcpConnectionInfo_GUID = LibC::GUID.new("f74049a4-3d06-4028-8193-0a8c29bc2452")
-  CLSID_IRDPSRAPITcpConnectionInfo = "f74049a4-3d06-4028-8193-0a8c29bc2452"
+  IRDPSRAPITcpConnectionInfo_GUID = "f74049a4-3d06-4028-8193-0a8c29bc2452"
+  IID_IRDPSRAPITcpConnectionInfo = LibC::GUID.new(0xf74049a4_u32, 0x3d06_u16, 0x4028_u16, StaticArray[0x81_u8, 0x93_u8, 0xa_u8, 0x8c_u8, 0x29_u8, 0xbc_u8, 0x24_u8, 0x52_u8])
   struct IRDPSRAPITcpConnectionInfo
     lpVtbl : IRDPSRAPITcpConnectionInfoVTbl*
   end
@@ -517,8 +517,8 @@ lib LibWin32
     get_connectivity_info : Proc(IRDPSRAPIAttendee*, IUnknown*, HRESULT)
   end
 
-  IRDPSRAPIAttendee_GUID = LibC::GUID.new("ec0671b3-1b78-4b80-a464-9132247543e3")
-  CLSID_IRDPSRAPIAttendee = "ec0671b3-1b78-4b80-a464-9132247543e3"
+  IRDPSRAPIAttendee_GUID = "ec0671b3-1b78-4b80-a464-9132247543e3"
+  IID_IRDPSRAPIAttendee = LibC::GUID.new(0xec0671b3_u32, 0x1b78_u16, 0x4b80_u16, StaticArray[0xa4_u8, 0x64_u8, 0x91_u8, 0x32_u8, 0x24_u8, 0x75_u8, 0x43_u8, 0xe3_u8])
   struct IRDPSRAPIAttendee
     lpVtbl : IRDPSRAPIAttendeeVTbl*
   end
@@ -535,8 +535,8 @@ lib LibWin32
     get_item : Proc(IRDPSRAPIAttendeeManager*, Int32, IRDPSRAPIAttendee*, HRESULT)
   end
 
-  IRDPSRAPIAttendeeManager_GUID = LibC::GUID.new("ba3a37e8-33da-4749-8da0-07fa34da7944")
-  CLSID_IRDPSRAPIAttendeeManager = "ba3a37e8-33da-4749-8da0-07fa34da7944"
+  IRDPSRAPIAttendeeManager_GUID = "ba3a37e8-33da-4749-8da0-07fa34da7944"
+  IID_IRDPSRAPIAttendeeManager = LibC::GUID.new(0xba3a37e8_u32, 0x33da_u16, 0x4749_u16, StaticArray[0x8d_u8, 0xa0_u8, 0x7_u8, 0xfa_u8, 0x34_u8, 0xda_u8, 0x79_u8, 0x44_u8])
   struct IRDPSRAPIAttendeeManager
     lpVtbl : IRDPSRAPIAttendeeManagerVTbl*
   end
@@ -554,8 +554,8 @@ lib LibWin32
     get_code : Proc(IRDPSRAPIAttendeeDisconnectInfo*, Int32*, HRESULT)
   end
 
-  IRDPSRAPIAttendeeDisconnectInfo_GUID = LibC::GUID.new("c187689f-447c-44a1-9c14-fffbb3b7ec17")
-  CLSID_IRDPSRAPIAttendeeDisconnectInfo = "c187689f-447c-44a1-9c14-fffbb3b7ec17"
+  IRDPSRAPIAttendeeDisconnectInfo_GUID = "c187689f-447c-44a1-9c14-fffbb3b7ec17"
+  IID_IRDPSRAPIAttendeeDisconnectInfo = LibC::GUID.new(0xc187689f_u32, 0x447c_u16, 0x44a1_u16, StaticArray[0x9c_u8, 0x14_u8, 0xff_u8, 0xfb_u8, 0xb3_u8, 0xb7_u8, 0xec_u8, 0x17_u8])
   struct IRDPSRAPIAttendeeDisconnectInfo
     lpVtbl : IRDPSRAPIAttendeeDisconnectInfoVTbl*
   end
@@ -575,8 +575,8 @@ lib LibWin32
     get_priority : Proc(IRDPSRAPIVirtualChannel*, CHANNEL_PRIORITY*, HRESULT)
   end
 
-  IRDPSRAPIVirtualChannel_GUID = LibC::GUID.new("05e12f95-28b3-4c9a-8780-d0248574a1e0")
-  CLSID_IRDPSRAPIVirtualChannel = "05e12f95-28b3-4c9a-8780-d0248574a1e0"
+  IRDPSRAPIVirtualChannel_GUID = "05e12f95-28b3-4c9a-8780-d0248574a1e0"
+  IID_IRDPSRAPIVirtualChannel = LibC::GUID.new(0x5e12f95_u32, 0x28b3_u16, 0x4c9a_u16, StaticArray[0x87_u8, 0x80_u8, 0xd0_u8, 0x24_u8, 0x85_u8, 0x74_u8, 0xa1_u8, 0xe0_u8])
   struct IRDPSRAPIVirtualChannel
     lpVtbl : IRDPSRAPIVirtualChannelVTbl*
   end
@@ -594,8 +594,8 @@ lib LibWin32
     create_virtual_channel : Proc(IRDPSRAPIVirtualChannelManager*, UInt8*, CHANNEL_PRIORITY, UInt32, IRDPSRAPIVirtualChannel*, HRESULT)
   end
 
-  IRDPSRAPIVirtualChannelManager_GUID = LibC::GUID.new("0d11c661-5d0d-4ee4-89df-2166ae1fdfed")
-  CLSID_IRDPSRAPIVirtualChannelManager = "0d11c661-5d0d-4ee4-89df-2166ae1fdfed"
+  IRDPSRAPIVirtualChannelManager_GUID = "0d11c661-5d0d-4ee4-89df-2166ae1fdfed"
+  IID_IRDPSRAPIVirtualChannelManager = LibC::GUID.new(0xd11c661_u32, 0x5d0d_u16, 0x4ee4_u16, StaticArray[0x89_u8, 0xdf_u8, 0x21_u8, 0x66_u8, 0xae_u8, 0x1f_u8, 0xdf_u8, 0xed_u8])
   struct IRDPSRAPIVirtualChannelManager
     lpVtbl : IRDPSRAPIVirtualChannelManagerVTbl*
   end
@@ -624,8 +624,8 @@ lib LibWin32
     start_reverse_connect_listener : Proc(IRDPSRAPIViewer*, UInt8*, UInt8*, UInt8*, UInt8**, HRESULT)
   end
 
-  IRDPSRAPIViewer_GUID = LibC::GUID.new("c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5")
-  CLSID_IRDPSRAPIViewer = "c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5"
+  IRDPSRAPIViewer_GUID = "c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5"
+  IID_IRDPSRAPIViewer = LibC::GUID.new(0xc6bfcd38_u32, 0x8ce9_u16, 0x404d_u16, StaticArray[0x8a_u8, 0xe8_u8, 0xf3_u8, 0x1d_u8, 0x0_u8, 0xc6_u8, 0x5c_u8, 0xb5_u8])
   struct IRDPSRAPIViewer
     lpVtbl : IRDPSRAPIViewerVTbl*
   end
@@ -644,8 +644,8 @@ lib LibWin32
     end_touch_frame : Proc(IRDPViewerInputSink*, HRESULT)
   end
 
-  IRDPViewerInputSink_GUID = LibC::GUID.new("bb590853-a6c5-4a7b-8dd4-76b69eea12d5")
-  CLSID_IRDPViewerInputSink = "bb590853-a6c5-4a7b-8dd4-76b69eea12d5"
+  IRDPViewerInputSink_GUID = "bb590853-a6c5-4a7b-8dd4-76b69eea12d5"
+  IID_IRDPViewerInputSink = LibC::GUID.new(0xbb590853_u32, 0xa6c5_u16, 0x4a7b_u16, StaticArray[0x8d_u8, 0xd4_u8, 0x76_u8, 0xb6_u8, 0x9e_u8, 0xea_u8, 0x12_u8, 0xd5_u8])
   struct IRDPViewerInputSink
     lpVtbl : IRDPViewerInputSinkVTbl*
   end
@@ -664,8 +664,8 @@ lib LibWin32
     get_frame_buffer_bits : Proc(IRDPSRAPIFrameBuffer*, Int32, Int32, Int32, Int32, SAFEARRAY**, HRESULT)
   end
 
-  IRDPSRAPIFrameBuffer_GUID = LibC::GUID.new("3d67e7d2-b27b-448e-81b3-c6110ed8b4be")
-  CLSID_IRDPSRAPIFrameBuffer = "3d67e7d2-b27b-448e-81b3-c6110ed8b4be"
+  IRDPSRAPIFrameBuffer_GUID = "3d67e7d2-b27b-448e-81b3-c6110ed8b4be"
+  IID_IRDPSRAPIFrameBuffer = LibC::GUID.new(0x3d67e7d2_u32, 0xb27b_u16, 0x448e_u16, StaticArray[0x81_u8, 0xb3_u8, 0xc6_u8, 0x11_u8, 0xe_u8, 0xd8_u8, 0xb4_u8, 0xbe_u8])
   struct IRDPSRAPIFrameBuffer
     lpVtbl : IRDPSRAPIFrameBufferVTbl*
   end
@@ -686,8 +686,8 @@ lib LibWin32
     put_context : Proc(IRDPSRAPITransportStreamBuffer*, IUnknown, HRESULT)
   end
 
-  IRDPSRAPITransportStreamBuffer_GUID = LibC::GUID.new("81c80290-5085-44b0-b460-f865c39cb4a9")
-  CLSID_IRDPSRAPITransportStreamBuffer = "81c80290-5085-44b0-b460-f865c39cb4a9"
+  IRDPSRAPITransportStreamBuffer_GUID = "81c80290-5085-44b0-b460-f865c39cb4a9"
+  IID_IRDPSRAPITransportStreamBuffer = LibC::GUID.new(0x81c80290_u32, 0x5085_u16, 0x44b0_u16, StaticArray[0xb4_u8, 0x60_u8, 0xf8_u8, 0x65_u8, 0xc3_u8, 0x9c_u8, 0xb4_u8, 0xa9_u8])
   struct IRDPSRAPITransportStreamBuffer
     lpVtbl : IRDPSRAPITransportStreamBufferVTbl*
   end
@@ -701,8 +701,8 @@ lib LibWin32
     on_stream_closed : Proc(IRDPSRAPITransportStreamEvents*, HRESULT, Void)
   end
 
-  IRDPSRAPITransportStreamEvents_GUID = LibC::GUID.new("ea81c254-f5af-4e40-982e-3e63bb595276")
-  CLSID_IRDPSRAPITransportStreamEvents = "ea81c254-f5af-4e40-982e-3e63bb595276"
+  IRDPSRAPITransportStreamEvents_GUID = "ea81c254-f5af-4e40-982e-3e63bb595276"
+  IID_IRDPSRAPITransportStreamEvents = LibC::GUID.new(0xea81c254_u32, 0xf5af_u16, 0x4e40_u16, StaticArray[0x98_u8, 0x2e_u8, 0x3e_u8, 0x63_u8, 0xbb_u8, 0x59_u8, 0x52_u8, 0x76_u8])
   struct IRDPSRAPITransportStreamEvents
     lpVtbl : IRDPSRAPITransportStreamEventsVTbl*
   end
@@ -719,8 +719,8 @@ lib LibWin32
     close : Proc(IRDPSRAPITransportStream*, HRESULT)
   end
 
-  IRDPSRAPITransportStream_GUID = LibC::GUID.new("36cfa065-43bb-4ef7-aed7-9b88a5053036")
-  CLSID_IRDPSRAPITransportStream = "36cfa065-43bb-4ef7-aed7-9b88a5053036"
+  IRDPSRAPITransportStream_GUID = "36cfa065-43bb-4ef7-aed7-9b88a5053036"
+  IID_IRDPSRAPITransportStream = LibC::GUID.new(0x36cfa065_u32, 0x43bb_u16, 0x4ef7_u16, StaticArray[0xae_u8, 0xd7_u8, 0x9b_u8, 0x88_u8, 0xa5_u8, 0x5_u8, 0x30_u8, 0x36_u8])
   struct IRDPSRAPITransportStream
     lpVtbl : IRDPSRAPITransportStreamVTbl*
   end
@@ -749,8 +749,8 @@ lib LibWin32
     get_desktop_shared_rect : Proc(IRDPSRAPISharingSession*, Int32*, Int32*, Int32*, Int32*, HRESULT)
   end
 
-  IRDPSRAPISharingSession_GUID = LibC::GUID.new("eeb20886-e470-4cf6-842b-2739c0ec5cfb")
-  CLSID_IRDPSRAPISharingSession = "eeb20886-e470-4cf6-842b-2739c0ec5cfb"
+  IRDPSRAPISharingSession_GUID = "eeb20886-e470-4cf6-842b-2739c0ec5cfb"
+  IID_IRDPSRAPISharingSession = LibC::GUID.new(0xeeb20886_u32, 0xe470_u16, 0x4cf6_u16, StaticArray[0x84_u8, 0x2b_u8, 0x27_u8, 0x39_u8, 0xc0_u8, 0xec_u8, 0x5c_u8, 0xfb_u8])
   struct IRDPSRAPISharingSession
     lpVtbl : IRDPSRAPISharingSessionVTbl*
   end
@@ -782,8 +782,8 @@ lib LibWin32
     send_control_level_change_response : Proc(IRDPSRAPISharingSession2*, IRDPSRAPIAttendee, CTRL_LEVEL, Int32, HRESULT)
   end
 
-  IRDPSRAPISharingSession2_GUID = LibC::GUID.new("fee4ee57-e3e8-4205-8fb0-8fd1d0675c21")
-  CLSID_IRDPSRAPISharingSession2 = "fee4ee57-e3e8-4205-8fb0-8fd1d0675c21"
+  IRDPSRAPISharingSession2_GUID = "fee4ee57-e3e8-4205-8fb0-8fd1d0675c21"
+  IID_IRDPSRAPISharingSession2 = LibC::GUID.new(0xfee4ee57_u32, 0xe3e8_u16, 0x4205_u16, StaticArray[0x8f_u8, 0xb0_u8, 0x8f_u8, 0xd1_u8, 0xd0_u8, 0x67_u8, 0x5c_u8, 0x21_u8])
   struct IRDPSRAPISharingSession2
     lpVtbl : IRDPSRAPISharingSession2VTbl*
   end
@@ -798,8 +798,8 @@ lib LibWin32
     invoke : Proc(IIRDPSessionEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIRDPSessionEvents_GUID = LibC::GUID.new("98a97042-6698-40e9-8efd-b3200990004b")
-  CLSID_IIRDPSessionEvents = "98a97042-6698-40e9-8efd-b3200990004b"
+  IIRDPSessionEvents_GUID = "98a97042-6698-40e9-8efd-b3200990004b"
+  IID_IIRDPSessionEvents = LibC::GUID.new(0x98a97042_u32, 0x6698_u16, 0x40e9_u16, StaticArray[0x8e_u8, 0xfd_u8, 0xb3_u8, 0x20_u8, 0x9_u8, 0x90_u8, 0x0_u8, 0x4b_u8])
   struct IIRDPSessionEvents
     lpVtbl : IIRDPSessionEventsVTbl*
   end

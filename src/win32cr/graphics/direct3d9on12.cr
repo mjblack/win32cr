@@ -39,8 +39,8 @@ lib LibWin32
     return_underlying_resource : Proc(IDirect3DDevice9On12*, IDirect3DResource9, UInt32, UInt64*, ID3D12Fence*, HRESULT)
   end
 
-  IDirect3DDevice9On12_GUID = LibC::GUID.new("e7fda234-b589-4049-940d-8878977531c8")
-  CLSID_IDirect3DDevice9On12 = "e7fda234-b589-4049-940d-8878977531c8"
+  IDirect3DDevice9On12_GUID = "e7fda234-b589-4049-940d-8878977531c8"
+  IID_IDirect3DDevice9On12 = LibC::GUID.new(0xe7fda234_u32, 0xb589_u16, 0x4049_u16, StaticArray[0x94_u8, 0xd_u8, 0x88_u8, 0x78_u8, 0x97_u8, 0x75_u8, 0x31_u8, 0xc8_u8])
   struct IDirect3DDevice9On12
     lpVtbl : IDirect3DDevice9On12VTbl*
   end

@@ -246,46 +246,46 @@ lib LibWin32
   CLUSTER_HEALTH_FAULT_RESERVED = 6_u32
   CLUS_CREATE_CRYPT_CONTAINER_NOT_FOUND = 1_u32
   SET_APPINSTANCE_CSV_FLAGS_VALID_ONLY_IF_CSV_COORDINATOR = 1_u32
-  ClusApplication = LibC::GUID.new(0xf2e606e5_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  Cluster = LibC::GUID.new(0xf2e606e3_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusVersion = LibC::GUID.new(0xf2e60715_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResType = LibC::GUID.new(0xf2e6070f_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusProperty = LibC::GUID.new(0xf2e606fd_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusProperties = LibC::GUID.new(0xf2e606ff_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  DomainNames = LibC::GUID.new(0xf2e606e1_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusNetwork = LibC::GUID.new(0xf2e606f1_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusNetInterface = LibC::GUID.new(0xf2e606ed_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusNetInterfaces = LibC::GUID.new(0xf2e606ef_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResDependencies = LibC::GUID.new(0xf2e60703_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResGroupResources = LibC::GUID.new(0xf2e606e9_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResTypeResources = LibC::GUID.new(0xf2e60713_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResGroupPreferredOwnerNodes = LibC::GUID.new(0xf2e606e7_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResPossibleOwnerNodes = LibC::GUID.new(0xf2e6070d_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusNetworks = LibC::GUID.new(0xf2e606f3_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusNetworkNetInterfaces = LibC::GUID.new(0xf2e606f5_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusNodeNetInterfaces = LibC::GUID.new(0xf2e606fb_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusRefObject = LibC::GUID.new(0xf2e60701_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusterNames = LibC::GUID.new(0xf2e606eb_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusNode = LibC::GUID.new(0xf2e606f7_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusNodes = LibC::GUID.new(0xf2e606f9_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResGroup = LibC::GUID.new(0xf2e60705_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResGroups = LibC::GUID.new(0xf2e60707_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResource = LibC::GUID.new(0xf2e60709_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResources = LibC::GUID.new(0xf2e6070b_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResTypes = LibC::GUID.new(0xf2e60711_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResTypePossibleOwnerNodes = LibC::GUID.new(0xf2e60717_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusPropertyValue = LibC::GUID.new(0xf2e60719_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusPropertyValues = LibC::GUID.new(0xf2e6071b_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusPropertyValueData = LibC::GUID.new(0xf2e6071d_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusPartition = LibC::GUID.new(0xf2e6071f_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusPartitionEx = LibC::GUID.new(0x53d51d26_u32, 0xb51b_u16, 0x4a79_u16, StaticArray[0xb2_u8, 0xc3_u8, 0x50_u8, 0x48_u8, 0xd9_u8, 0x3a_u8, 0x98_u8, 0xfc_u8])
-  ClusPartitions = LibC::GUID.new(0xf2e60721_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusDisk = LibC::GUID.new(0xf2e60723_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusDisks = LibC::GUID.new(0xf2e60725_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusScsiAddress = LibC::GUID.new(0xf2e60727_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusRegistryKeys = LibC::GUID.new(0xf2e60729_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusCryptoKeys = LibC::GUID.new(0xf2e6072b_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
-  ClusResDependents = LibC::GUID.new(0xf2e6072d_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusApplication = LibC::GUID.new(0xf2e606e5_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_Cluster = LibC::GUID.new(0xf2e606e3_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusVersion = LibC::GUID.new(0xf2e60715_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResType = LibC::GUID.new(0xf2e6070f_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusProperty = LibC::GUID.new(0xf2e606fd_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusProperties = LibC::GUID.new(0xf2e606ff_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_DomainNames = LibC::GUID.new(0xf2e606e1_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusNetwork = LibC::GUID.new(0xf2e606f1_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusNetInterface = LibC::GUID.new(0xf2e606ed_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusNetInterfaces = LibC::GUID.new(0xf2e606ef_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResDependencies = LibC::GUID.new(0xf2e60703_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResGroupResources = LibC::GUID.new(0xf2e606e9_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResTypeResources = LibC::GUID.new(0xf2e60713_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResGroupPreferredOwnerNodes = LibC::GUID.new(0xf2e606e7_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResPossibleOwnerNodes = LibC::GUID.new(0xf2e6070d_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusNetworks = LibC::GUID.new(0xf2e606f3_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusNetworkNetInterfaces = LibC::GUID.new(0xf2e606f5_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusNodeNetInterfaces = LibC::GUID.new(0xf2e606fb_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusRefObject = LibC::GUID.new(0xf2e60701_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusterNames = LibC::GUID.new(0xf2e606eb_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusNode = LibC::GUID.new(0xf2e606f7_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusNodes = LibC::GUID.new(0xf2e606f9_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResGroup = LibC::GUID.new(0xf2e60705_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResGroups = LibC::GUID.new(0xf2e60707_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResource = LibC::GUID.new(0xf2e60709_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResources = LibC::GUID.new(0xf2e6070b_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResTypes = LibC::GUID.new(0xf2e60711_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResTypePossibleOwnerNodes = LibC::GUID.new(0xf2e60717_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusPropertyValue = LibC::GUID.new(0xf2e60719_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusPropertyValues = LibC::GUID.new(0xf2e6071b_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusPropertyValueData = LibC::GUID.new(0xf2e6071d_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusPartition = LibC::GUID.new(0xf2e6071f_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusPartitionEx = LibC::GUID.new(0x53d51d26_u32, 0xb51b_u16, 0x4a79_u16, StaticArray[0xb2_u8, 0xc3_u8, 0x50_u8, 0x48_u8, 0xd9_u8, 0x3a_u8, 0x98_u8, 0xfc_u8])
+  CLSID_ClusPartitions = LibC::GUID.new(0xf2e60721_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusDisk = LibC::GUID.new(0xf2e60723_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusDisks = LibC::GUID.new(0xf2e60725_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusScsiAddress = LibC::GUID.new(0xf2e60727_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusRegistryKeys = LibC::GUID.new(0xf2e60729_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusCryptoKeys = LibC::GUID.new(0xf2e6072b_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
+  CLSID_ClusResDependents = LibC::GUID.new(0xf2e6072d_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
 
   type HCLUSTER = Void
   type HNODE = Void
@@ -2866,8 +2866,8 @@ lib LibWin32
     get_icon : Proc(IGetClusterUIInfo*, HANDLE)
   end
 
-  IGetClusterUIInfo_GUID = LibC::GUID.new("97dede50-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IGetClusterUIInfo = "97dede50-fc6b-11cf-b5f5-00a0c90ab505"
+  IGetClusterUIInfo_GUID = "97dede50-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IGetClusterUIInfo = LibC::GUID.new(0x97dede50_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IGetClusterUIInfo
     lpVtbl : IGetClusterUIInfoVTbl*
   end
@@ -2881,8 +2881,8 @@ lib LibWin32
     get_object_count : Proc(IGetClusterDataInfo*, Int32)
   end
 
-  IGetClusterDataInfo_GUID = LibC::GUID.new("97dede51-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IGetClusterDataInfo = "97dede51-fc6b-11cf-b5f5-00a0c90ab505"
+  IGetClusterDataInfo_GUID = "97dede51-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IGetClusterDataInfo = LibC::GUID.new(0x97dede51_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IGetClusterDataInfo
     lpVtbl : IGetClusterDataInfoVTbl*
   end
@@ -2895,8 +2895,8 @@ lib LibWin32
     get_object_type : Proc(IGetClusterObjectInfo*, Int32, CLUADMEX_OBJECT_TYPE)
   end
 
-  IGetClusterObjectInfo_GUID = LibC::GUID.new("97dede52-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IGetClusterObjectInfo = "97dede52-fc6b-11cf-b5f5-00a0c90ab505"
+  IGetClusterObjectInfo_GUID = "97dede52-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IGetClusterObjectInfo = LibC::GUID.new(0x97dede52_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IGetClusterObjectInfo
     lpVtbl : IGetClusterObjectInfoVTbl*
   end
@@ -2908,8 +2908,8 @@ lib LibWin32
     get_node_handle : Proc(IGetClusterNodeInfo*, Int32, HNODE**)
   end
 
-  IGetClusterNodeInfo_GUID = LibC::GUID.new("97dede53-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IGetClusterNodeInfo = "97dede53-fc6b-11cf-b5f5-00a0c90ab505"
+  IGetClusterNodeInfo_GUID = "97dede53-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IGetClusterNodeInfo = LibC::GUID.new(0x97dede53_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IGetClusterNodeInfo
     lpVtbl : IGetClusterNodeInfoVTbl*
   end
@@ -2921,8 +2921,8 @@ lib LibWin32
     get_group_handle : Proc(IGetClusterGroupInfo*, Int32, HGROUP**)
   end
 
-  IGetClusterGroupInfo_GUID = LibC::GUID.new("97dede54-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IGetClusterGroupInfo = "97dede54-fc6b-11cf-b5f5-00a0c90ab505"
+  IGetClusterGroupInfo_GUID = "97dede54-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IGetClusterGroupInfo = LibC::GUID.new(0x97dede54_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IGetClusterGroupInfo
     lpVtbl : IGetClusterGroupInfoVTbl*
   end
@@ -2936,8 +2936,8 @@ lib LibWin32
     get_resource_network_name : Proc(IGetClusterResourceInfo*, Int32, UInt8*, UInt32*, LibC::BOOL)
   end
 
-  IGetClusterResourceInfo_GUID = LibC::GUID.new("97dede55-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IGetClusterResourceInfo = "97dede55-fc6b-11cf-b5f5-00a0c90ab505"
+  IGetClusterResourceInfo_GUID = "97dede55-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IGetClusterResourceInfo = LibC::GUID.new(0x97dede55_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IGetClusterResourceInfo
     lpVtbl : IGetClusterResourceInfoVTbl*
   end
@@ -2949,8 +2949,8 @@ lib LibWin32
     get_network_handle : Proc(IGetClusterNetworkInfo*, Int32, HNETWORK**)
   end
 
-  IGetClusterNetworkInfo_GUID = LibC::GUID.new("97dede56-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IGetClusterNetworkInfo = "97dede56-fc6b-11cf-b5f5-00a0c90ab505"
+  IGetClusterNetworkInfo_GUID = "97dede56-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IGetClusterNetworkInfo = LibC::GUID.new(0x97dede56_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IGetClusterNetworkInfo
     lpVtbl : IGetClusterNetworkInfoVTbl*
   end
@@ -2962,8 +2962,8 @@ lib LibWin32
     get_net_interface_handle : Proc(IGetClusterNetInterfaceInfo*, Int32, HNETINTERFACE**)
   end
 
-  IGetClusterNetInterfaceInfo_GUID = LibC::GUID.new("97dede57-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IGetClusterNetInterfaceInfo = "97dede57-fc6b-11cf-b5f5-00a0c90ab505"
+  IGetClusterNetInterfaceInfo_GUID = "97dede57-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IGetClusterNetInterfaceInfo = LibC::GUID.new(0x97dede57_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IGetClusterNetInterfaceInfo
     lpVtbl : IGetClusterNetInterfaceInfoVTbl*
   end
@@ -2975,8 +2975,8 @@ lib LibWin32
     add_property_sheet_page : Proc(IWCPropertySheetCallback*, Int32*, HRESULT)
   end
 
-  IWCPropertySheetCallback_GUID = LibC::GUID.new("97dede60-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWCPropertySheetCallback = "97dede60-fc6b-11cf-b5f5-00a0c90ab505"
+  IWCPropertySheetCallback_GUID = "97dede60-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWCPropertySheetCallback = LibC::GUID.new(0x97dede60_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWCPropertySheetCallback
     lpVtbl : IWCPropertySheetCallbackVTbl*
   end
@@ -2988,8 +2988,8 @@ lib LibWin32
     create_property_sheet_pages : Proc(IWEExtendPropertySheet*, IUnknown, IWCPropertySheetCallback, HRESULT)
   end
 
-  IWEExtendPropertySheet_GUID = LibC::GUID.new("97dede61-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWEExtendPropertySheet = "97dede61-fc6b-11cf-b5f5-00a0c90ab505"
+  IWEExtendPropertySheet_GUID = "97dede61-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWEExtendPropertySheet = LibC::GUID.new(0x97dede61_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWEExtendPropertySheet
     lpVtbl : IWEExtendPropertySheetVTbl*
   end
@@ -3002,8 +3002,8 @@ lib LibWin32
     enable_next : Proc(IWCWizardCallback*, Int32*, LibC::BOOL, HRESULT)
   end
 
-  IWCWizardCallback_GUID = LibC::GUID.new("97dede62-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWCWizardCallback = "97dede62-fc6b-11cf-b5f5-00a0c90ab505"
+  IWCWizardCallback_GUID = "97dede62-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWCWizardCallback = LibC::GUID.new(0x97dede62_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWCWizardCallback
     lpVtbl : IWCWizardCallbackVTbl*
   end
@@ -3015,8 +3015,8 @@ lib LibWin32
     create_wizard_pages : Proc(IWEExtendWizard*, IUnknown, IWCWizardCallback, HRESULT)
   end
 
-  IWEExtendWizard_GUID = LibC::GUID.new("97dede63-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWEExtendWizard = "97dede63-fc6b-11cf-b5f5-00a0c90ab505"
+  IWEExtendWizard_GUID = "97dede63-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWEExtendWizard = LibC::GUID.new(0x97dede63_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWEExtendWizard
     lpVtbl : IWEExtendWizardVTbl*
   end
@@ -3028,8 +3028,8 @@ lib LibWin32
     add_extension_menu_item : Proc(IWCContextMenuCallback*, UInt8*, UInt8*, UInt32, UInt32, UInt32, HRESULT)
   end
 
-  IWCContextMenuCallback_GUID = LibC::GUID.new("97dede64-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWCContextMenuCallback = "97dede64-fc6b-11cf-b5f5-00a0c90ab505"
+  IWCContextMenuCallback_GUID = "97dede64-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWCContextMenuCallback = LibC::GUID.new(0x97dede64_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWCContextMenuCallback
     lpVtbl : IWCContextMenuCallbackVTbl*
   end
@@ -3041,8 +3041,8 @@ lib LibWin32
     add_context_menu_items : Proc(IWEExtendContextMenu*, IUnknown, IWCContextMenuCallback, HRESULT)
   end
 
-  IWEExtendContextMenu_GUID = LibC::GUID.new("97dede65-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWEExtendContextMenu = "97dede65-fc6b-11cf-b5f5-00a0c90ab505"
+  IWEExtendContextMenu_GUID = "97dede65-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWEExtendContextMenu = LibC::GUID.new(0x97dede65_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWEExtendContextMenu
     lpVtbl : IWEExtendContextMenuVTbl*
   end
@@ -3054,8 +3054,8 @@ lib LibWin32
     invoke_command : Proc(IWEInvokeCommand*, UInt32, IUnknown, HRESULT)
   end
 
-  IWEInvokeCommand_GUID = LibC::GUID.new("97dede66-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWEInvokeCommand = "97dede66-fc6b-11cf-b5f5-00a0c90ab505"
+  IWEInvokeCommand_GUID = "97dede66-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWEInvokeCommand = LibC::GUID.new(0x97dede66_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWEInvokeCommand
     lpVtbl : IWEInvokeCommandVTbl*
   end
@@ -3068,8 +3068,8 @@ lib LibWin32
     enable_next : Proc(IWCWizard97Callback*, Int32*, LibC::BOOL, HRESULT)
   end
 
-  IWCWizard97Callback_GUID = LibC::GUID.new("97dede67-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWCWizard97Callback = "97dede67-fc6b-11cf-b5f5-00a0c90ab505"
+  IWCWizard97Callback_GUID = "97dede67-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWCWizard97Callback = LibC::GUID.new(0x97dede67_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWCWizard97Callback
     lpVtbl : IWCWizard97CallbackVTbl*
   end
@@ -3081,8 +3081,8 @@ lib LibWin32
     create_wizard97_pages : Proc(IWEExtendWizard97*, IUnknown, IWCWizard97Callback, HRESULT)
   end
 
-  IWEExtendWizard97_GUID = LibC::GUID.new("97dede68-fc6b-11cf-b5f5-00a0c90ab505")
-  CLSID_IWEExtendWizard97 = "97dede68-fc6b-11cf-b5f5-00a0c90ab505"
+  IWEExtendWizard97_GUID = "97dede68-fc6b-11cf-b5f5-00a0c90ab505"
+  IID_IWEExtendWizard97 = LibC::GUID.new(0x97dede68_u32, 0xfc6b_u16, 0x11cf_u16, StaticArray[0xb5_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0xb5_u8, 0x5_u8])
   struct IWEExtendWizard97
     lpVtbl : IWEExtendWizard97VTbl*
   end
@@ -3100,8 +3100,8 @@ lib LibWin32
     open_cluster : Proc(ISClusApplication*, UInt8*, ISCluster*, HRESULT)
   end
 
-  ISClusApplication_GUID = LibC::GUID.new("f2e606e6-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusApplication = "f2e606e6-2631-11d1-89f1-00a0c90d061e"
+  ISClusApplication_GUID = "f2e606e6-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusApplication = LibC::GUID.new(0xf2e606e6_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusApplication
     lpVtbl : ISClusApplicationVTbl*
   end
@@ -3120,8 +3120,8 @@ lib LibWin32
     get_item : Proc(ISDomainNames*, VARIANT, UInt8**, HRESULT)
   end
 
-  ISDomainNames_GUID = LibC::GUID.new("f2e606e2-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISDomainNames = "f2e606e2-2631-11d1-89f1-00a0c90d061e"
+  ISDomainNames_GUID = "f2e606e2-2631-11d1-89f1-00a0c90d061e"
+  IID_ISDomainNames = LibC::GUID.new(0xf2e606e2_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISDomainNames
     lpVtbl : ISDomainNamesVTbl*
   end
@@ -3141,8 +3141,8 @@ lib LibWin32
     get_domain_name : Proc(ISClusterNames*, UInt8**, HRESULT)
   end
 
-  ISClusterNames_GUID = LibC::GUID.new("f2e606ec-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusterNames = "f2e606ec-2631-11d1-89f1-00a0c90d061e"
+  ISClusterNames_GUID = "f2e606ec-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusterNames = LibC::GUID.new(0xf2e606ec_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusterNames
     lpVtbl : ISClusterNamesVTbl*
   end
@@ -3158,8 +3158,8 @@ lib LibWin32
     get_handle : Proc(ISClusRefObject*, LibC::UINT_PTR*, HRESULT)
   end
 
-  ISClusRefObject_GUID = LibC::GUID.new("f2e60702-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusRefObject = "f2e60702-2631-11d1-89f1-00a0c90d061e"
+  ISClusRefObject_GUID = "f2e60702-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusRefObject = LibC::GUID.new(0xf2e60702_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusRefObject
     lpVtbl : ISClusRefObjectVTbl*
   end
@@ -3184,8 +3184,8 @@ lib LibWin32
     get_mixed_version : Proc(ISClusVersion*, VARIANT*, HRESULT)
   end
 
-  ISClusVersion_GUID = LibC::GUID.new("f2e60716-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusVersion = "f2e60716-2631-11d1-89f1-00a0c90d061e"
+  ISClusVersion_GUID = "f2e60716-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusVersion = LibC::GUID.new(0xf2e60716_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusVersion
     lpVtbl : ISClusVersionVTbl*
   end
@@ -3221,8 +3221,8 @@ lib LibWin32
     get_net_interfaces : Proc(ISCluster*, ISClusNetInterfaces*, HRESULT)
   end
 
-  ISCluster_GUID = LibC::GUID.new("f2e606e4-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISCluster = "f2e606e4-2631-11d1-89f1-00a0c90d061e"
+  ISCluster_GUID = "f2e606e4-2631-11d1-89f1-00a0c90d061e"
+  IID_ISCluster = LibC::GUID.new(0xf2e606e4_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISCluster
     lpVtbl : ISClusterVTbl*
   end
@@ -3251,8 +3251,8 @@ lib LibWin32
     get_net_interfaces : Proc(ISClusNode*, ISClusNodeNetInterfaces*, HRESULT)
   end
 
-  ISClusNode_GUID = LibC::GUID.new("f2e606f8-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusNode = "f2e606f8-2631-11d1-89f1-00a0c90d061e"
+  ISClusNode_GUID = "f2e606f8-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusNode = LibC::GUID.new(0xf2e606f8_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusNode
     lpVtbl : ISClusNodeVTbl*
   end
@@ -3271,8 +3271,8 @@ lib LibWin32
     get_item : Proc(ISClusNodes*, VARIANT, ISClusNode*, HRESULT)
   end
 
-  ISClusNodes_GUID = LibC::GUID.new("f2e606fa-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusNodes = "f2e606fa-2631-11d1-89f1-00a0c90d061e"
+  ISClusNodes_GUID = "f2e606fa-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusNodes = LibC::GUID.new(0xf2e606fa_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusNodes
     lpVtbl : ISClusNodesVTbl*
   end
@@ -3298,8 +3298,8 @@ lib LibWin32
     get_cluster : Proc(ISClusNetwork*, ISCluster*, HRESULT)
   end
 
-  ISClusNetwork_GUID = LibC::GUID.new("f2e606f2-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusNetwork = "f2e606f2-2631-11d1-89f1-00a0c90d061e"
+  ISClusNetwork_GUID = "f2e606f2-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusNetwork = LibC::GUID.new(0xf2e606f2_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusNetwork
     lpVtbl : ISClusNetworkVTbl*
   end
@@ -3318,8 +3318,8 @@ lib LibWin32
     get_item : Proc(ISClusNetworks*, VARIANT, ISClusNetwork*, HRESULT)
   end
 
-  ISClusNetworks_GUID = LibC::GUID.new("f2e606f4-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusNetworks = "f2e606f4-2631-11d1-89f1-00a0c90d061e"
+  ISClusNetworks_GUID = "f2e606f4-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusNetworks = LibC::GUID.new(0xf2e606f4_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusNetworks
     lpVtbl : ISClusNetworksVTbl*
   end
@@ -3342,8 +3342,8 @@ lib LibWin32
     get_cluster : Proc(ISClusNetInterface*, ISCluster*, HRESULT)
   end
 
-  ISClusNetInterface_GUID = LibC::GUID.new("f2e606ee-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusNetInterface = "f2e606ee-2631-11d1-89f1-00a0c90d061e"
+  ISClusNetInterface_GUID = "f2e606ee-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusNetInterface = LibC::GUID.new(0xf2e606ee_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusNetInterface
     lpVtbl : ISClusNetInterfaceVTbl*
   end
@@ -3362,8 +3362,8 @@ lib LibWin32
     get_item : Proc(ISClusNetInterfaces*, VARIANT, ISClusNetInterface*, HRESULT)
   end
 
-  ISClusNetInterfaces_GUID = LibC::GUID.new("f2e606f0-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusNetInterfaces = "f2e606f0-2631-11d1-89f1-00a0c90d061e"
+  ISClusNetInterfaces_GUID = "f2e606f0-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusNetInterfaces = LibC::GUID.new(0xf2e606f0_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusNetInterfaces
     lpVtbl : ISClusNetInterfacesVTbl*
   end
@@ -3382,8 +3382,8 @@ lib LibWin32
     get_item : Proc(ISClusNodeNetInterfaces*, VARIANT, ISClusNetInterface*, HRESULT)
   end
 
-  ISClusNodeNetInterfaces_GUID = LibC::GUID.new("f2e606fc-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusNodeNetInterfaces = "f2e606fc-2631-11d1-89f1-00a0c90d061e"
+  ISClusNodeNetInterfaces_GUID = "f2e606fc-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusNodeNetInterfaces = LibC::GUID.new(0xf2e606fc_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusNodeNetInterfaces
     lpVtbl : ISClusNodeNetInterfacesVTbl*
   end
@@ -3402,8 +3402,8 @@ lib LibWin32
     get_item : Proc(ISClusNetworkNetInterfaces*, VARIANT, ISClusNetInterface*, HRESULT)
   end
 
-  ISClusNetworkNetInterfaces_GUID = LibC::GUID.new("f2e606f6-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusNetworkNetInterfaces = "f2e606f6-2631-11d1-89f1-00a0c90d061e"
+  ISClusNetworkNetInterfaces_GUID = "f2e606f6-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusNetworkNetInterfaces = LibC::GUID.new(0xf2e606f6_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusNetworkNetInterfaces
     lpVtbl : ISClusNetworkNetInterfacesVTbl*
   end
@@ -3434,8 +3434,8 @@ lib LibWin32
     get_cluster : Proc(ISClusResGroup*, ISCluster*, HRESULT)
   end
 
-  ISClusResGroup_GUID = LibC::GUID.new("f2e60706-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResGroup = "f2e60706-2631-11d1-89f1-00a0c90d061e"
+  ISClusResGroup_GUID = "f2e60706-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResGroup = LibC::GUID.new(0xf2e60706_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResGroup
     lpVtbl : ISClusResGroupVTbl*
   end
@@ -3456,8 +3456,8 @@ lib LibWin32
     delete_item : Proc(ISClusResGroups*, VARIANT, HRESULT)
   end
 
-  ISClusResGroups_GUID = LibC::GUID.new("f2e60708-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResGroups = "f2e60708-2631-11d1-89f1-00a0c90d061e"
+  ISClusResGroups_GUID = "f2e60708-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResGroups = LibC::GUID.new(0xf2e60708_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResGroups
     lpVtbl : ISClusResGroupsVTbl*
   end
@@ -3504,8 +3504,8 @@ lib LibWin32
     put_maintenance_mode : Proc(ISClusResource*, LibC::BOOL, HRESULT)
   end
 
-  ISClusResource_GUID = LibC::GUID.new("f2e6070a-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResource = "f2e6070a-2631-11d1-89f1-00a0c90d061e"
+  ISClusResource_GUID = "f2e6070a-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResource = LibC::GUID.new(0xf2e6070a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResource
     lpVtbl : ISClusResourceVTbl*
   end
@@ -3528,8 +3528,8 @@ lib LibWin32
     remove_item : Proc(ISClusResDependencies*, VARIANT, HRESULT)
   end
 
-  ISClusResDependencies_GUID = LibC::GUID.new("f2e60704-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResDependencies = "f2e60704-2631-11d1-89f1-00a0c90d061e"
+  ISClusResDependencies_GUID = "f2e60704-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResDependencies = LibC::GUID.new(0xf2e60704_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResDependencies
     lpVtbl : ISClusResDependenciesVTbl*
   end
@@ -3550,8 +3550,8 @@ lib LibWin32
     delete_item : Proc(ISClusResGroupResources*, VARIANT, HRESULT)
   end
 
-  ISClusResGroupResources_GUID = LibC::GUID.new("f2e606ea-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResGroupResources = "f2e606ea-2631-11d1-89f1-00a0c90d061e"
+  ISClusResGroupResources_GUID = "f2e606ea-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResGroupResources = LibC::GUID.new(0xf2e606ea_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResGroupResources
     lpVtbl : ISClusResGroupResourcesVTbl*
   end
@@ -3572,8 +3572,8 @@ lib LibWin32
     delete_item : Proc(ISClusResTypeResources*, VARIANT, HRESULT)
   end
 
-  ISClusResTypeResources_GUID = LibC::GUID.new("f2e60714-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResTypeResources = "f2e60714-2631-11d1-89f1-00a0c90d061e"
+  ISClusResTypeResources_GUID = "f2e60714-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResTypeResources = LibC::GUID.new(0xf2e60714_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResTypeResources
     lpVtbl : ISClusResTypeResourcesVTbl*
   end
@@ -3594,8 +3594,8 @@ lib LibWin32
     delete_item : Proc(ISClusResources*, VARIANT, HRESULT)
   end
 
-  ISClusResources_GUID = LibC::GUID.new("f2e6070c-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResources = "f2e6070c-2631-11d1-89f1-00a0c90d061e"
+  ISClusResources_GUID = "f2e6070c-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResources = LibC::GUID.new(0xf2e6070c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResources
     lpVtbl : ISClusResourcesVTbl*
   end
@@ -3619,8 +3619,8 @@ lib LibWin32
     add_item : Proc(ISClusResGroupPreferredOwnerNodes*, ISClusNode, HRESULT)
   end
 
-  ISClusResGroupPreferredOwnerNodes_GUID = LibC::GUID.new("f2e606e8-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResGroupPreferredOwnerNodes = "f2e606e8-2631-11d1-89f1-00a0c90d061e"
+  ISClusResGroupPreferredOwnerNodes_GUID = "f2e606e8-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResGroupPreferredOwnerNodes = LibC::GUID.new(0xf2e606e8_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResGroupPreferredOwnerNodes
     lpVtbl : ISClusResGroupPreferredOwnerNodesVTbl*
   end
@@ -3642,8 +3642,8 @@ lib LibWin32
     get_modified : Proc(ISClusResPossibleOwnerNodes*, VARIANT*, HRESULT)
   end
 
-  ISClusResPossibleOwnerNodes_GUID = LibC::GUID.new("f2e6070e-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResPossibleOwnerNodes = "f2e6070e-2631-11d1-89f1-00a0c90d061e"
+  ISClusResPossibleOwnerNodes_GUID = "f2e6070e-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResPossibleOwnerNodes = LibC::GUID.new(0xf2e6070e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResPossibleOwnerNodes
     lpVtbl : ISClusResPossibleOwnerNodesVTbl*
   end
@@ -3662,8 +3662,8 @@ lib LibWin32
     get_item : Proc(ISClusResTypePossibleOwnerNodes*, VARIANT, ISClusNode*, HRESULT)
   end
 
-  ISClusResTypePossibleOwnerNodes_GUID = LibC::GUID.new("f2e60718-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResTypePossibleOwnerNodes = "f2e60718-2631-11d1-89f1-00a0c90d061e"
+  ISClusResTypePossibleOwnerNodes_GUID = "f2e60718-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResTypePossibleOwnerNodes = LibC::GUID.new(0xf2e60718_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResTypePossibleOwnerNodes
     lpVtbl : ISClusResTypePossibleOwnerNodesVTbl*
   end
@@ -3688,8 +3688,8 @@ lib LibWin32
     get_available_disks : Proc(ISClusResType*, ISClusDisks*, HRESULT)
   end
 
-  ISClusResType_GUID = LibC::GUID.new("f2e60710-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResType = "f2e60710-2631-11d1-89f1-00a0c90d061e"
+  ISClusResType_GUID = "f2e60710-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResType = LibC::GUID.new(0xf2e60710_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResType
     lpVtbl : ISClusResTypeVTbl*
   end
@@ -3710,8 +3710,8 @@ lib LibWin32
     delete_item : Proc(ISClusResTypes*, VARIANT, HRESULT)
   end
 
-  ISClusResTypes_GUID = LibC::GUID.new("f2e60712-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResTypes = "f2e60712-2631-11d1-89f1-00a0c90d061e"
+  ISClusResTypes_GUID = "f2e60712-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResTypes = LibC::GUID.new(0xf2e60712_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResTypes
     lpVtbl : ISClusResTypesVTbl*
   end
@@ -3741,8 +3741,8 @@ lib LibWin32
     use_default_value : Proc(ISClusProperty*, HRESULT)
   end
 
-  ISClusProperty_GUID = LibC::GUID.new("f2e606fe-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusProperty = "f2e606fe-2631-11d1-89f1-00a0c90d061e"
+  ISClusProperty_GUID = "f2e606fe-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusProperty = LibC::GUID.new(0xf2e606fe_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusProperty
     lpVtbl : ISClusPropertyVTbl*
   end
@@ -3766,8 +3766,8 @@ lib LibWin32
     get_data : Proc(ISClusPropertyValue*, ISClusPropertyValueData*, HRESULT)
   end
 
-  ISClusPropertyValue_GUID = LibC::GUID.new("f2e6071a-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusPropertyValue = "f2e6071a-2631-11d1-89f1-00a0c90d061e"
+  ISClusPropertyValue_GUID = "f2e6071a-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusPropertyValue = LibC::GUID.new(0xf2e6071a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusPropertyValue
     lpVtbl : ISClusPropertyValueVTbl*
   end
@@ -3787,8 +3787,8 @@ lib LibWin32
     remove_item : Proc(ISClusPropertyValues*, VARIANT, HRESULT)
   end
 
-  ISClusPropertyValues_GUID = LibC::GUID.new("f2e6071c-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusPropertyValues = "f2e6071c-2631-11d1-89f1-00a0c90d061e"
+  ISClusPropertyValues_GUID = "f2e6071c-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusPropertyValues = LibC::GUID.new(0xf2e6071c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusPropertyValues
     lpVtbl : ISClusPropertyValuesVTbl*
   end
@@ -3814,8 +3814,8 @@ lib LibWin32
     get_modified : Proc(ISClusProperties*, VARIANT*, HRESULT)
   end
 
-  ISClusProperties_GUID = LibC::GUID.new("f2e60700-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusProperties = "f2e60700-2631-11d1-89f1-00a0c90d061e"
+  ISClusProperties_GUID = "f2e60700-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusProperties = LibC::GUID.new(0xf2e60700_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusProperties
     lpVtbl : ISClusPropertiesVTbl*
   end
@@ -3835,8 +3835,8 @@ lib LibWin32
     remove_item : Proc(ISClusPropertyValueData*, VARIANT, HRESULT)
   end
 
-  ISClusPropertyValueData_GUID = LibC::GUID.new("f2e6071e-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusPropertyValueData = "f2e6071e-2631-11d1-89f1-00a0c90d061e"
+  ISClusPropertyValueData_GUID = "f2e6071e-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusPropertyValueData = LibC::GUID.new(0xf2e6071e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusPropertyValueData
     lpVtbl : ISClusPropertyValueDataVTbl*
   end
@@ -3858,8 +3858,8 @@ lib LibWin32
     get_file_system : Proc(ISClusPartition*, UInt8**, HRESULT)
   end
 
-  ISClusPartition_GUID = LibC::GUID.new("f2e60720-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusPartition = "f2e60720-2631-11d1-89f1-00a0c90d061e"
+  ISClusPartition_GUID = "f2e60720-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusPartition = LibC::GUID.new(0xf2e60720_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusPartition
     lpVtbl : ISClusPartitionVTbl*
   end
@@ -3886,8 +3886,8 @@ lib LibWin32
     get_volume_guid : Proc(ISClusPartitionEx*, UInt8**, HRESULT)
   end
 
-  ISClusPartitionEx_GUID = LibC::GUID.new("8802d4fe-b32e-4ad1-9dbd-64f18e1166ce")
-  CLSID_ISClusPartitionEx = "8802d4fe-b32e-4ad1-9dbd-64f18e1166ce"
+  ISClusPartitionEx_GUID = "8802d4fe-b32e-4ad1-9dbd-64f18e1166ce"
+  IID_ISClusPartitionEx = LibC::GUID.new(0x8802d4fe_u32, 0xb32e_u16, 0x4ad1_u16, StaticArray[0x9d_u8, 0xbd_u8, 0x64_u8, 0xf1_u8, 0x8e_u8, 0x11_u8, 0x66_u8, 0xce_u8])
   struct ISClusPartitionEx
     lpVtbl : ISClusPartitionExVTbl*
   end
@@ -3905,8 +3905,8 @@ lib LibWin32
     get_item : Proc(ISClusPartitions*, VARIANT, ISClusPartition*, HRESULT)
   end
 
-  ISClusPartitions_GUID = LibC::GUID.new("f2e60722-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusPartitions = "f2e60722-2631-11d1-89f1-00a0c90d061e"
+  ISClusPartitions_GUID = "f2e60722-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusPartitions = LibC::GUID.new(0xf2e60722_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusPartitions
     lpVtbl : ISClusPartitionsVTbl*
   end
@@ -3925,8 +3925,8 @@ lib LibWin32
     get_partitions : Proc(ISClusDisk*, ISClusPartitions*, HRESULT)
   end
 
-  ISClusDisk_GUID = LibC::GUID.new("f2e60724-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusDisk = "f2e60724-2631-11d1-89f1-00a0c90d061e"
+  ISClusDisk_GUID = "f2e60724-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusDisk = LibC::GUID.new(0xf2e60724_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusDisk
     lpVtbl : ISClusDiskVTbl*
   end
@@ -3944,8 +3944,8 @@ lib LibWin32
     get_item : Proc(ISClusDisks*, VARIANT, ISClusDisk*, HRESULT)
   end
 
-  ISClusDisks_GUID = LibC::GUID.new("f2e60726-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusDisks = "f2e60726-2631-11d1-89f1-00a0c90d061e"
+  ISClusDisks_GUID = "f2e60726-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusDisks = LibC::GUID.new(0xf2e60726_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusDisks
     lpVtbl : ISClusDisksVTbl*
   end
@@ -3964,8 +3964,8 @@ lib LibWin32
     get_lun : Proc(ISClusScsiAddress*, VARIANT*, HRESULT)
   end
 
-  ISClusScsiAddress_GUID = LibC::GUID.new("f2e60728-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusScsiAddress = "f2e60728-2631-11d1-89f1-00a0c90d061e"
+  ISClusScsiAddress_GUID = "f2e60728-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusScsiAddress = LibC::GUID.new(0xf2e60728_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusScsiAddress
     lpVtbl : ISClusScsiAddressVTbl*
   end
@@ -3986,8 +3986,8 @@ lib LibWin32
     remove_item : Proc(ISClusRegistryKeys*, VARIANT, HRESULT)
   end
 
-  ISClusRegistryKeys_GUID = LibC::GUID.new("f2e6072a-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusRegistryKeys = "f2e6072a-2631-11d1-89f1-00a0c90d061e"
+  ISClusRegistryKeys_GUID = "f2e6072a-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusRegistryKeys = LibC::GUID.new(0xf2e6072a_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusRegistryKeys
     lpVtbl : ISClusRegistryKeysVTbl*
   end
@@ -4008,8 +4008,8 @@ lib LibWin32
     remove_item : Proc(ISClusCryptoKeys*, VARIANT, HRESULT)
   end
 
-  ISClusCryptoKeys_GUID = LibC::GUID.new("f2e6072c-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusCryptoKeys = "f2e6072c-2631-11d1-89f1-00a0c90d061e"
+  ISClusCryptoKeys_GUID = "f2e6072c-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusCryptoKeys = LibC::GUID.new(0xf2e6072c_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusCryptoKeys
     lpVtbl : ISClusCryptoKeysVTbl*
   end
@@ -4032,8 +4032,8 @@ lib LibWin32
     remove_item : Proc(ISClusResDependents*, VARIANT, HRESULT)
   end
 
-  ISClusResDependents_GUID = LibC::GUID.new("f2e6072e-2631-11d1-89f1-00a0c90d061e")
-  CLSID_ISClusResDependents = "f2e6072e-2631-11d1-89f1-00a0c90d061e"
+  ISClusResDependents_GUID = "f2e6072e-2631-11d1-89f1-00a0c90d061e"
+  IID_ISClusResDependents = LibC::GUID.new(0xf2e6072e_u32, 0x2631_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xf1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0x6_u8, 0x1e_u8])
   struct ISClusResDependents
     lpVtbl : ISClusResDependentsVTbl*
   end

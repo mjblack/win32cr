@@ -564,23 +564,23 @@ lib LibWin32
   DISPID_XMLDSIG_SIGNATURE = 8_u32
   DISPID_XMLDSIG_STORE = 9_u32
   DISPID_XMLDSIG_VERIFY = 10_u32
-  DOMDocument = LibC::GUID.new(0x2933bf90_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
-  DOMFreeThreadedDocument = LibC::GUID.new(0x2933bf91_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
-  XMLHTTPRequest = LibC::GUID.new(0xed8c108e_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
-  XMLDSOControl = LibC::GUID.new(0x550dda30_u32, 0x541_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa9_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0xec_u8, 0x3d_u8, 0x39_u8])
-  XMLDocument = LibC::GUID.new(0xcfc399af_u32, 0xd876_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0x10_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
-  DOMDocument60 = LibC::GUID.new(0x88d96a05_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  FreeThreadedDOMDocument60 = LibC::GUID.new(0x88d96a06_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  XMLSchemaCache60 = LibC::GUID.new(0x88d96a07_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  XSLTemplate60 = LibC::GUID.new(0x88d96a08_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  XMLHTTP60 = LibC::GUID.new(0x88d96a0a_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  FreeThreadedXMLHTTP60 = LibC::GUID.new(0x88d96a09_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  ServerXMLHTTP60 = LibC::GUID.new(0x88d96a0b_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  SAXXMLReader60 = LibC::GUID.new(0x88d96a0c_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  MXXMLWriter60 = LibC::GUID.new(0x88d96a0f_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  MXHTMLWriter60 = LibC::GUID.new(0x88d96a10_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  SAXAttributes60 = LibC::GUID.new(0x88d96a0e_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
-  MXNamespaceManager60 = LibC::GUID.new(0x88d96a11_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_DOMDocument = LibC::GUID.new(0x2933bf90_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
+  CLSID_DOMFreeThreadedDocument = LibC::GUID.new(0x2933bf91_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
+  CLSID_XMLHTTPRequest = LibC::GUID.new(0xed8c108e_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
+  CLSID_XMLDSOControl = LibC::GUID.new(0x550dda30_u32, 0x541_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa9_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0xec_u8, 0x3d_u8, 0x39_u8])
+  CLSID_XMLDocument = LibC::GUID.new(0xcfc399af_u32, 0xd876_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0x10_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
+  CLSID_DOMDocument60 = LibC::GUID.new(0x88d96a05_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_FreeThreadedDOMDocument60 = LibC::GUID.new(0x88d96a06_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_XMLSchemaCache60 = LibC::GUID.new(0x88d96a07_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_XSLTemplate60 = LibC::GUID.new(0x88d96a08_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_XMLHTTP60 = LibC::GUID.new(0x88d96a0a_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_FreeThreadedXMLHTTP60 = LibC::GUID.new(0x88d96a09_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_ServerXMLHTTP60 = LibC::GUID.new(0x88d96a0b_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_SAXXMLReader60 = LibC::GUID.new(0x88d96a0c_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_MXXMLWriter60 = LibC::GUID.new(0x88d96a0f_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_MXHTMLWriter60 = LibC::GUID.new(0x88d96a10_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_SAXAttributes60 = LibC::GUID.new(0x88d96a0e_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
+  CLSID_MXNamespaceManager60 = LibC::GUID.new(0x88d96a11_u32, 0xf192_u16, 0x11d4_u16, StaticArray[0xa6_u8, 0x5f_u8, 0x0_u8, 0x40_u8, 0x96_u8, 0x32_u8, 0x51_u8, 0xe5_u8])
 
 
   enum DOMNodeType : Int32
@@ -879,8 +879,8 @@ lib LibWin32
     has_feature : Proc(IXMLDOMImplementation*, UInt8*, UInt8*, Int16*, HRESULT)
   end
 
-  IXMLDOMImplementation_GUID = LibC::GUID.new("2933bf8f-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMImplementation = "2933bf8f-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMImplementation_GUID = "2933bf8f-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMImplementation = LibC::GUID.new(0x2933bf8f_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMImplementation
     lpVtbl : IXMLDOMImplementationVTbl*
   end
@@ -931,8 +931,8 @@ lib LibWin32
     transform_node_to_object : Proc(IXMLDOMNode*, IXMLDOMNode, VARIANT, HRESULT)
   end
 
-  IXMLDOMNode_GUID = LibC::GUID.new("2933bf80-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMNode = "2933bf80-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMNode_GUID = "2933bf80-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMNode = LibC::GUID.new(0x2933bf80_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMNode
     lpVtbl : IXMLDOMNodeVTbl*
   end
@@ -983,8 +983,8 @@ lib LibWin32
     transform_node_to_object : Proc(IXMLDOMDocumentFragment*, IXMLDOMNode, VARIANT, HRESULT)
   end
 
-  IXMLDOMDocumentFragment_GUID = LibC::GUID.new("3efaa413-272f-11d2-836f-0000f87a7782")
-  CLSID_IXMLDOMDocumentFragment = "3efaa413-272f-11d2-836f-0000f87a7782"
+  IXMLDOMDocumentFragment_GUID = "3efaa413-272f-11d2-836f-0000f87a7782"
+  IID_IXMLDOMDocumentFragment = LibC::GUID.new(0x3efaa413_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
   struct IXMLDOMDocumentFragment
     lpVtbl : IXMLDOMDocumentFragmentVTbl*
   end
@@ -1068,8 +1068,8 @@ lib LibWin32
     put_ontransformnode : Proc(IXMLDOMDocument*, VARIANT, HRESULT)
   end
 
-  IXMLDOMDocument_GUID = LibC::GUID.new("2933bf81-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMDocument = "2933bf81-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMDocument_GUID = "2933bf81-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMDocument = LibC::GUID.new(0x2933bf81_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMDocument
     lpVtbl : IXMLDOMDocumentVTbl*
   end
@@ -1089,8 +1089,8 @@ lib LibWin32
     get__new_enum : Proc(IXMLDOMNodeList*, IUnknown*, HRESULT)
   end
 
-  IXMLDOMNodeList_GUID = LibC::GUID.new("2933bf82-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMNodeList = "2933bf82-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMNodeList_GUID = "2933bf82-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMNodeList = LibC::GUID.new(0x2933bf82_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMNodeList
     lpVtbl : IXMLDOMNodeListVTbl*
   end
@@ -1115,8 +1115,8 @@ lib LibWin32
     get__new_enum : Proc(IXMLDOMNamedNodeMap*, IUnknown*, HRESULT)
   end
 
-  IXMLDOMNamedNodeMap_GUID = LibC::GUID.new("2933bf83-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMNamedNodeMap = "2933bf83-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMNamedNodeMap_GUID = "2933bf83-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMNamedNodeMap = LibC::GUID.new(0x2933bf83_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMNamedNodeMap
     lpVtbl : IXMLDOMNamedNodeMapVTbl*
   end
@@ -1175,8 +1175,8 @@ lib LibWin32
     replace_data : Proc(IXMLDOMCharacterData*, Int32, Int32, UInt8*, HRESULT)
   end
 
-  IXMLDOMCharacterData_GUID = LibC::GUID.new("2933bf84-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMCharacterData = "2933bf84-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMCharacterData_GUID = "2933bf84-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMCharacterData = LibC::GUID.new(0x2933bf84_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMCharacterData
     lpVtbl : IXMLDOMCharacterDataVTbl*
   end
@@ -1230,8 +1230,8 @@ lib LibWin32
     put_value : Proc(IXMLDOMAttribute*, VARIANT, HRESULT)
   end
 
-  IXMLDOMAttribute_GUID = LibC::GUID.new("2933bf85-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMAttribute = "2933bf85-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMAttribute_GUID = "2933bf85-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMAttribute = LibC::GUID.new(0x2933bf85_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMAttribute
     lpVtbl : IXMLDOMAttributeVTbl*
   end
@@ -1291,8 +1291,8 @@ lib LibWin32
     normalize : Proc(IXMLDOMElement*, HRESULT)
   end
 
-  IXMLDOMElement_GUID = LibC::GUID.new("2933bf86-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMElement = "2933bf86-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMElement_GUID = "2933bf86-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMElement = LibC::GUID.new(0x2933bf86_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMElement
     lpVtbl : IXMLDOMElementVTbl*
   end
@@ -1352,8 +1352,8 @@ lib LibWin32
     split_text : Proc(IXMLDOMText*, Int32, IXMLDOMText*, HRESULT)
   end
 
-  IXMLDOMText_GUID = LibC::GUID.new("2933bf87-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMText = "2933bf87-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMText_GUID = "2933bf87-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMText = LibC::GUID.new(0x2933bf87_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMText
     lpVtbl : IXMLDOMTextVTbl*
   end
@@ -1412,8 +1412,8 @@ lib LibWin32
     replace_data : Proc(IXMLDOMComment*, Int32, Int32, UInt8*, HRESULT)
   end
 
-  IXMLDOMComment_GUID = LibC::GUID.new("2933bf88-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMComment = "2933bf88-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMComment_GUID = "2933bf88-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMComment = LibC::GUID.new(0x2933bf88_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMComment
     lpVtbl : IXMLDOMCommentVTbl*
   end
@@ -1467,8 +1467,8 @@ lib LibWin32
     put_data : Proc(IXMLDOMProcessingInstruction*, UInt8*, HRESULT)
   end
 
-  IXMLDOMProcessingInstruction_GUID = LibC::GUID.new("2933bf89-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMProcessingInstruction = "2933bf89-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMProcessingInstruction_GUID = "2933bf89-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMProcessingInstruction = LibC::GUID.new(0x2933bf89_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMProcessingInstruction
     lpVtbl : IXMLDOMProcessingInstructionVTbl*
   end
@@ -1528,8 +1528,8 @@ lib LibWin32
     split_text : Proc(IXMLDOMCDATASection*, Int32, IXMLDOMText*, HRESULT)
   end
 
-  IXMLDOMCDATASection_GUID = LibC::GUID.new("2933bf8a-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMCDATASection = "2933bf8a-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMCDATASection_GUID = "2933bf8a-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMCDATASection = LibC::GUID.new(0x2933bf8a_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMCDATASection
     lpVtbl : IXMLDOMCDATASectionVTbl*
   end
@@ -1583,8 +1583,8 @@ lib LibWin32
     get_notations : Proc(IXMLDOMDocumentType*, IXMLDOMNamedNodeMap*, HRESULT)
   end
 
-  IXMLDOMDocumentType_GUID = LibC::GUID.new("2933bf8b-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMDocumentType = "2933bf8b-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMDocumentType_GUID = "2933bf8b-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMDocumentType = LibC::GUID.new(0x2933bf8b_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMDocumentType
     lpVtbl : IXMLDOMDocumentTypeVTbl*
   end
@@ -1637,8 +1637,8 @@ lib LibWin32
     get_system_id : Proc(IXMLDOMNotation*, VARIANT*, HRESULT)
   end
 
-  IXMLDOMNotation_GUID = LibC::GUID.new("2933bf8c-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMNotation = "2933bf8c-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMNotation_GUID = "2933bf8c-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMNotation = LibC::GUID.new(0x2933bf8c_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMNotation
     lpVtbl : IXMLDOMNotationVTbl*
   end
@@ -1692,8 +1692,8 @@ lib LibWin32
     get_notation_name : Proc(IXMLDOMEntity*, UInt8**, HRESULT)
   end
 
-  IXMLDOMEntity_GUID = LibC::GUID.new("2933bf8d-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMEntity = "2933bf8d-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMEntity_GUID = "2933bf8d-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMEntity = LibC::GUID.new(0x2933bf8d_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMEntity
     lpVtbl : IXMLDOMEntityVTbl*
   end
@@ -1744,8 +1744,8 @@ lib LibWin32
     transform_node_to_object : Proc(IXMLDOMEntityReference*, IXMLDOMNode, VARIANT, HRESULT)
   end
 
-  IXMLDOMEntityReference_GUID = LibC::GUID.new("2933bf8e-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMEntityReference = "2933bf8e-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMEntityReference_GUID = "2933bf8e-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMEntityReference = LibC::GUID.new(0x2933bf8e_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMEntityReference
     lpVtbl : IXMLDOMEntityReferenceVTbl*
   end
@@ -1767,8 +1767,8 @@ lib LibWin32
     get_filepos : Proc(IXMLDOMParseError*, Int32*, HRESULT)
   end
 
-  IXMLDOMParseError_GUID = LibC::GUID.new("3efaa426-272f-11d2-836f-0000f87a7782")
-  CLSID_IXMLDOMParseError = "3efaa426-272f-11d2-836f-0000f87a7782"
+  IXMLDOMParseError_GUID = "3efaa426-272f-11d2-836f-0000f87a7782"
+  IID_IXMLDOMParseError = LibC::GUID.new(0x3efaa426_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
   struct IXMLDOMParseError
     lpVtbl : IXMLDOMParseErrorVTbl*
   end
@@ -1828,8 +1828,8 @@ lib LibWin32
     format_time : Proc(IXTLRuntime*, VARIANT, UInt8*, VARIANT, UInt8**, HRESULT)
   end
 
-  IXTLRuntime_GUID = LibC::GUID.new("3efaa425-272f-11d2-836f-0000f87a7782")
-  CLSID_IXTLRuntime = "3efaa425-272f-11d2-836f-0000f87a7782"
+  IXTLRuntime_GUID = "3efaa425-272f-11d2-836f-0000f87a7782"
+  IID_IXTLRuntime = LibC::GUID.new(0x3efaa425_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
   struct IXTLRuntime
     lpVtbl : IXTLRuntimeVTbl*
   end
@@ -1844,8 +1844,8 @@ lib LibWin32
     invoke : Proc(XMLDOMDocumentEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  XMLDOMDocumentEvents_GUID = LibC::GUID.new("3efaa427-272f-11d2-836f-0000f87a7782")
-  CLSID_XMLDOMDocumentEvents = "3efaa427-272f-11d2-836f-0000f87a7782"
+  XMLDOMDocumentEvents_GUID = "3efaa427-272f-11d2-836f-0000f87a7782"
+  IID_XMLDOMDocumentEvents = LibC::GUID.new(0x3efaa427_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
   struct XMLDOMDocumentEvents
     lpVtbl : XMLDOMDocumentEventsVTbl*
   end
@@ -1874,8 +1874,8 @@ lib LibWin32
     put_onreadystatechange : Proc(IXMLHttpRequest*, IDispatch, HRESULT)
   end
 
-  IXMLHttpRequest_GUID = LibC::GUID.new("ed8c108d-4349-11d2-91a4-00c04f7969e8")
-  CLSID_IXMLHttpRequest = "ed8c108d-4349-11d2-91a4-00c04f7969e8"
+  IXMLHttpRequest_GUID = "ed8c108d-4349-11d2-91a4-00c04f7969e8"
+  IID_IXMLHttpRequest = LibC::GUID.new(0xed8c108d_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
   struct IXMLHttpRequest
     lpVtbl : IXMLHttpRequestVTbl*
   end
@@ -1895,8 +1895,8 @@ lib LibWin32
     get_ready_state : Proc(IXMLDSOControl*, Int32*, HRESULT)
   end
 
-  IXMLDSOControl_GUID = LibC::GUID.new("310afa62-0575-11d2-9ca9-0060b0ec3d39")
-  CLSID_IXMLDSOControl = "310afa62-0575-11d2-9ca9-0060b0ec3d39"
+  IXMLDSOControl_GUID = "310afa62-0575-11d2-9ca9-0060b0ec3d39"
+  IID_IXMLDSOControl = LibC::GUID.new(0x310afa62_u32, 0x575_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa9_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0xec_u8, 0x3d_u8, 0x39_u8])
   struct IXMLDSOControl
     lpVtbl : IXMLDSOControlVTbl*
   end
@@ -1915,8 +1915,8 @@ lib LibWin32
     item : Proc(IXMLElementCollection*, VARIANT, VARIANT, IDispatch*, HRESULT)
   end
 
-  IXMLElementCollection_GUID = LibC::GUID.new("65725580-9b5d-11d0-9bfe-00c04fc99c8e")
-  CLSID_IXMLElementCollection = "65725580-9b5d-11d0-9bfe-00c04fc99c8e"
+  IXMLElementCollection_GUID = "65725580-9b5d-11d0-9bfe-00c04fc99c8e"
+  IID_IXMLElementCollection = LibC::GUID.new(0x65725580_u32, 0x9b5d_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0xfe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
   struct IXMLElementCollection
     lpVtbl : IXMLElementCollectionVTbl*
   end
@@ -1945,8 +1945,8 @@ lib LibWin32
     create_element : Proc(IXMLDocument*, VARIANT, VARIANT, IXMLElement*, HRESULT)
   end
 
-  IXMLDocument_GUID = LibC::GUID.new("f52e2b61-18a1-11d1-b105-00805f49916b")
-  CLSID_IXMLDocument = "f52e2b61-18a1-11d1-b105-00805f49916b"
+  IXMLDocument_GUID = "f52e2b61-18a1-11d1-b105-00805f49916b"
+  IID_IXMLDocument = LibC::GUID.new(0xf52e2b61_u32, 0x18a1_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0x5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x49_u8, 0x91_u8, 0x6b_u8])
   struct IXMLDocument
     lpVtbl : IXMLDocumentVTbl*
   end
@@ -1977,8 +1977,8 @@ lib LibWin32
     put_async : Proc(IXMLDocument2*, Int16, HRESULT)
   end
 
-  IXMLDocument2_GUID = LibC::GUID.new("2b8de2fe-8d2d-11d1-b2fc-00c04fd915a9")
-  CLSID_IXMLDocument2 = "2b8de2fe-8d2d-11d1-b2fc-00c04fd915a9"
+  IXMLDocument2_GUID = "2b8de2fe-8d2d-11d1-b2fc-00c04fd915a9"
+  IID_IXMLDocument2 = LibC::GUID.new(0x2b8de2fe_u32, 0x8d2d_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x15_u8, 0xa9_u8])
   struct IXMLDocument2
     lpVtbl : IXMLDocument2VTbl*
   end
@@ -2005,8 +2005,8 @@ lib LibWin32
     remove_child : Proc(IXMLElement*, IXMLElement, HRESULT)
   end
 
-  IXMLElement_GUID = LibC::GUID.new("3f7f31ac-e15f-11d0-9c25-00c04fc99c8e")
-  CLSID_IXMLElement = "3f7f31ac-e15f-11d0-9c25-00c04fc99c8e"
+  IXMLElement_GUID = "3f7f31ac-e15f-11d0-9c25-00c04fc99c8e"
+  IID_IXMLElement = LibC::GUID.new(0x3f7f31ac_u32, 0xe15f_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0x25_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
   struct IXMLElement
     lpVtbl : IXMLElementVTbl*
   end
@@ -2034,8 +2034,8 @@ lib LibWin32
     get_attributes : Proc(IXMLElement2*, IXMLElementCollection*, HRESULT)
   end
 
-  IXMLElement2_GUID = LibC::GUID.new("2b8de2ff-8d2d-11d1-b2fc-00c04fd915a9")
-  CLSID_IXMLElement2 = "2b8de2ff-8d2d-11d1-b2fc-00c04fd915a9"
+  IXMLElement2_GUID = "2b8de2ff-8d2d-11d1-b2fc-00c04fd915a9"
+  IID_IXMLElement2 = LibC::GUID.new(0x2b8de2ff_u32, 0x8d2d_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x15_u8, 0xa9_u8])
   struct IXMLElement2
     lpVtbl : IXMLElement2VTbl*
   end
@@ -2052,8 +2052,8 @@ lib LibWin32
     get_value : Proc(IXMLAttribute*, UInt8**, HRESULT)
   end
 
-  IXMLAttribute_GUID = LibC::GUID.new("d4d4a0fc-3b73-11d1-b2b4-00c04fb92596")
-  CLSID_IXMLAttribute = "d4d4a0fc-3b73-11d1-b2b4-00c04fb92596"
+  IXMLAttribute_GUID = "d4d4a0fc-3b73-11d1-b2b4-00c04fb92596"
+  IID_IXMLAttribute = LibC::GUID.new(0xd4d4a0fc_u32, 0x3b73_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x25_u8, 0x96_u8])
   struct IXMLAttribute
     lpVtbl : IXMLAttributeVTbl*
   end
@@ -2065,8 +2065,8 @@ lib LibWin32
     get_error_info : Proc(IXMLError*, XML_ERROR*, HRESULT)
   end
 
-  IXMLError_GUID = LibC::GUID.new("948c5ad3-c58d-11d0-9c0b-00c04fc99c8e")
-  CLSID_IXMLError = "948c5ad3-c58d-11d0-9c0b-00c04fc99c8e"
+  IXMLError_GUID = "948c5ad3-c58d-11d0-9c0b-00c04fc99c8e"
+  IID_IXMLError = LibC::GUID.new(0x948c5ad3_u32, 0xc58d_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0xb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
   struct IXMLError
     lpVtbl : IXMLErrorVTbl*
   end
@@ -2156,8 +2156,8 @@ lib LibWin32
     get_property : Proc(IXMLDOMDocument2*, UInt8*, VARIANT*, HRESULT)
   end
 
-  IXMLDOMDocument2_GUID = LibC::GUID.new("2933bf95-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMDocument2 = "2933bf95-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMDocument2_GUID = "2933bf95-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMDocument2 = LibC::GUID.new(0x2933bf95_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMDocument2
     lpVtbl : IXMLDOMDocument2VTbl*
   end
@@ -2249,8 +2249,8 @@ lib LibWin32
     import_node : Proc(IXMLDOMDocument3*, IXMLDOMNode, Int16, IXMLDOMNode*, HRESULT)
   end
 
-  IXMLDOMDocument3_GUID = LibC::GUID.new("2933bf96-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXMLDOMDocument3 = "2933bf96-7b36-11d2-b20e-00c04f983e60"
+  IXMLDOMDocument3_GUID = "2933bf96-7b36-11d2-b20e-00c04f983e60"
+  IID_IXMLDOMDocument3 = LibC::GUID.new(0x2933bf96_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXMLDOMDocument3
     lpVtbl : IXMLDOMDocument3VTbl*
   end
@@ -2272,8 +2272,8 @@ lib LibWin32
     get__new_enum : Proc(IXMLDOMSchemaCollection*, IUnknown*, HRESULT)
   end
 
-  IXMLDOMSchemaCollection_GUID = LibC::GUID.new("373984c8-b845-449b-91e7-45ac83036ade")
-  CLSID_IXMLDOMSchemaCollection = "373984c8-b845-449b-91e7-45ac83036ade"
+  IXMLDOMSchemaCollection_GUID = "373984c8-b845-449b-91e7-45ac83036ade"
+  IID_IXMLDOMSchemaCollection = LibC::GUID.new(0x373984c8_u32, 0xb845_u16, 0x449b_u16, StaticArray[0x91_u8, 0xe7_u8, 0x45_u8, 0xac_u8, 0x83_u8, 0x3_u8, 0x6a_u8, 0xde_u8])
   struct IXMLDOMSchemaCollection
     lpVtbl : IXMLDOMSchemaCollectionVTbl*
   end
@@ -2304,8 +2304,8 @@ lib LibWin32
     set_property : Proc(IXMLDOMSelection*, UInt8*, VARIANT, HRESULT)
   end
 
-  IXMLDOMSelection_GUID = LibC::GUID.new("aa634fc7-5888-44a7-a257-3a47150d3a0e")
-  CLSID_IXMLDOMSelection = "aa634fc7-5888-44a7-a257-3a47150d3a0e"
+  IXMLDOMSelection_GUID = "aa634fc7-5888-44a7-a257-3a47150d3a0e"
+  IID_IXMLDOMSelection = LibC::GUID.new(0xaa634fc7_u32, 0x5888_u16, 0x44a7_u16, StaticArray[0xa2_u8, 0x57_u8, 0x3a_u8, 0x47_u8, 0x15_u8, 0xd_u8, 0x3a_u8, 0xe_u8])
   struct IXMLDOMSelection
     lpVtbl : IXMLDOMSelectionVTbl*
   end
@@ -2331,8 +2331,8 @@ lib LibWin32
     get_error_parameters_count : Proc(IXMLDOMParseError2*, Int32*, HRESULT)
   end
 
-  IXMLDOMParseError2_GUID = LibC::GUID.new("3efaa428-272f-11d2-836f-0000f87a7782")
-  CLSID_IXMLDOMParseError2 = "3efaa428-272f-11d2-836f-0000f87a7782"
+  IXMLDOMParseError2_GUID = "3efaa428-272f-11d2-836f-0000f87a7782"
+  IID_IXMLDOMParseError2 = LibC::GUID.new(0x3efaa428_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
   struct IXMLDOMParseError2
     lpVtbl : IXMLDOMParseError2VTbl*
   end
@@ -2352,8 +2352,8 @@ lib LibWin32
     get__new_enum : Proc(IXMLDOMParseErrorCollection*, IUnknown*, HRESULT)
   end
 
-  IXMLDOMParseErrorCollection_GUID = LibC::GUID.new("3efaa429-272f-11d2-836f-0000f87a7782")
-  CLSID_IXMLDOMParseErrorCollection = "3efaa429-272f-11d2-836f-0000f87a7782"
+  IXMLDOMParseErrorCollection_GUID = "3efaa429-272f-11d2-836f-0000f87a7782"
+  IID_IXMLDOMParseErrorCollection = LibC::GUID.new(0x3efaa429_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
   struct IXMLDOMParseErrorCollection
     lpVtbl : IXMLDOMParseErrorCollectionVTbl*
   end
@@ -2382,8 +2382,8 @@ lib LibWin32
     get_stylesheet : Proc(IXSLProcessor*, IXMLDOMNode*, HRESULT)
   end
 
-  IXSLProcessor_GUID = LibC::GUID.new("2933bf92-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXSLProcessor = "2933bf92-7b36-11d2-b20e-00c04f983e60"
+  IXSLProcessor_GUID = "2933bf92-7b36-11d2-b20e-00c04f983e60"
+  IID_IXSLProcessor = LibC::GUID.new(0x2933bf92_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXSLProcessor
     lpVtbl : IXSLProcessorVTbl*
   end
@@ -2401,8 +2401,8 @@ lib LibWin32
     create_processor : Proc(IXSLTemplate*, IXSLProcessor*, HRESULT)
   end
 
-  IXSLTemplate_GUID = LibC::GUID.new("2933bf93-7b36-11d2-b20e-00c04f983e60")
-  CLSID_IXSLTemplate = "2933bf93-7b36-11d2-b20e-00c04f983e60"
+  IXSLTemplate_GUID = "2933bf93-7b36-11d2-b20e-00c04f983e60"
+  IID_IXSLTemplate = LibC::GUID.new(0x2933bf93_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
   struct IXSLTemplate
     lpVtbl : IXSLTemplateVTbl*
   end
@@ -2431,8 +2431,8 @@ lib LibWin32
     put_onreadystatechange : Proc(IXMLHTTPRequest*, IDispatch, HRESULT)
   end
 
-  IXMLHTTPRequest_GUID = LibC::GUID.new("ed8c108d-4349-11d2-91a4-00c04f7969e8")
-  CLSID_IXMLHTTPRequest = "ed8c108d-4349-11d2-91a4-00c04f7969e8"
+  IXMLHTTPRequest_GUID = "ed8c108d-4349-11d2-91a4-00c04f7969e8"
+  IID_IXMLHTTPRequest = LibC::GUID.new(0xed8c108d_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
   struct IXMLHTTPRequest
     lpVtbl : IXMLHTTPRequestVTbl*
   end
@@ -2465,8 +2465,8 @@ lib LibWin32
     set_option : Proc(IServerXMLHTTPRequest*, SERVERXMLHTTP_OPTION, VARIANT, HRESULT)
   end
 
-  IServerXMLHTTPRequest_GUID = LibC::GUID.new("2e9196bf-13ba-4dd4-91ca-6c571f281495")
-  CLSID_IServerXMLHTTPRequest = "2e9196bf-13ba-4dd4-91ca-6c571f281495"
+  IServerXMLHTTPRequest_GUID = "2e9196bf-13ba-4dd4-91ca-6c571f281495"
+  IID_IServerXMLHTTPRequest = LibC::GUID.new(0x2e9196bf_u32, 0x13ba_u16, 0x4dd4_u16, StaticArray[0x91_u8, 0xca_u8, 0x6c_u8, 0x57_u8, 0x1f_u8, 0x28_u8, 0x14_u8, 0x95_u8])
   struct IServerXMLHTTPRequest
     lpVtbl : IServerXMLHTTPRequestVTbl*
   end
@@ -2501,8 +2501,8 @@ lib LibWin32
     set_proxy_credentials : Proc(IServerXMLHTTPRequest2*, UInt8*, UInt8*, HRESULT)
   end
 
-  IServerXMLHTTPRequest2_GUID = LibC::GUID.new("2e01311b-c322-4b0a-bd77-b90cfdc8dce7")
-  CLSID_IServerXMLHTTPRequest2 = "2e01311b-c322-4b0a-bd77-b90cfdc8dce7"
+  IServerXMLHTTPRequest2_GUID = "2e01311b-c322-4b0a-bd77-b90cfdc8dce7"
+  IID_IServerXMLHTTPRequest2 = LibC::GUID.new(0x2e01311b_u32, 0xc322_u16, 0x4b0a_u16, StaticArray[0xbd_u8, 0x77_u8, 0xb9_u8, 0xc_u8, 0xfd_u8, 0xc8_u8, 0xdc_u8, 0xe7_u8])
   struct IServerXMLHTTPRequest2
     lpVtbl : IServerXMLHTTPRequest2VTbl*
   end
@@ -2531,8 +2531,8 @@ lib LibWin32
     parse_url : Proc(ISAXXMLReader*, LibC::LPWSTR, HRESULT)
   end
 
-  ISAXXMLReader_GUID = LibC::GUID.new("a4f96ed0-f829-476e-81c0-cdc7bd2a0802")
-  CLSID_ISAXXMLReader = "a4f96ed0-f829-476e-81c0-cdc7bd2a0802"
+  ISAXXMLReader_GUID = "a4f96ed0-f829-476e-81c0-cdc7bd2a0802"
+  IID_ISAXXMLReader = LibC::GUID.new(0xa4f96ed0_u32, 0xf829_u16, 0x476e_u16, StaticArray[0x81_u8, 0xc0_u8, 0xcd_u8, 0xc7_u8, 0xbd_u8, 0x2a_u8, 0x8_u8, 0x2_u8])
   struct ISAXXMLReader
     lpVtbl : ISAXXMLReaderVTbl*
   end
@@ -2563,8 +2563,8 @@ lib LibWin32
     put_parent : Proc(ISAXXMLFilter*, ISAXXMLReader, HRESULT)
   end
 
-  ISAXXMLFilter_GUID = LibC::GUID.new("70409222-ca09-4475-acb8-40312fe8d145")
-  CLSID_ISAXXMLFilter = "70409222-ca09-4475-acb8-40312fe8d145"
+  ISAXXMLFilter_GUID = "70409222-ca09-4475-acb8-40312fe8d145"
+  IID_ISAXXMLFilter = LibC::GUID.new(0x70409222_u32, 0xca09_u16, 0x4475_u16, StaticArray[0xac_u8, 0xb8_u8, 0x40_u8, 0x31_u8, 0x2f_u8, 0xe8_u8, 0xd1_u8, 0x45_u8])
   struct ISAXXMLFilter
     lpVtbl : ISAXXMLFilterVTbl*
   end
@@ -2579,8 +2579,8 @@ lib LibWin32
     get_system_id : Proc(ISAXLocator*, UInt16**, HRESULT)
   end
 
-  ISAXLocator_GUID = LibC::GUID.new("9b7e472a-0de4-4640-bff3-84d38a051c31")
-  CLSID_ISAXLocator = "9b7e472a-0de4-4640-bff3-84d38a051c31"
+  ISAXLocator_GUID = "9b7e472a-0de4-4640-bff3-84d38a051c31"
+  IID_ISAXLocator = LibC::GUID.new(0x9b7e472a_u32, 0xde4_u16, 0x4640_u16, StaticArray[0xbf_u8, 0xf3_u8, 0x84_u8, 0xd3_u8, 0x8a_u8, 0x5_u8, 0x1c_u8, 0x31_u8])
   struct ISAXLocator
     lpVtbl : ISAXLocatorVTbl*
   end
@@ -2592,8 +2592,8 @@ lib LibWin32
     resolve_entity : Proc(ISAXEntityResolver*, LibC::LPWSTR, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
-  ISAXEntityResolver_GUID = LibC::GUID.new("99bca7bd-e8c4-4d5f-a0cf-6d907901ff07")
-  CLSID_ISAXEntityResolver = "99bca7bd-e8c4-4d5f-a0cf-6d907901ff07"
+  ISAXEntityResolver_GUID = "99bca7bd-e8c4-4d5f-a0cf-6d907901ff07"
+  IID_ISAXEntityResolver = LibC::GUID.new(0x99bca7bd_u32, 0xe8c4_u16, 0x4d5f_u16, StaticArray[0xa0_u8, 0xcf_u8, 0x6d_u8, 0x90_u8, 0x79_u8, 0x1_u8, 0xff_u8, 0x7_u8])
   struct ISAXEntityResolver
     lpVtbl : ISAXEntityResolverVTbl*
   end
@@ -2615,8 +2615,8 @@ lib LibWin32
     skipped_entity : Proc(ISAXContentHandler*, LibC::LPWSTR, Int32, HRESULT)
   end
 
-  ISAXContentHandler_GUID = LibC::GUID.new("1545cdfa-9e4e-4497-a8a4-2bf7d0112c44")
-  CLSID_ISAXContentHandler = "1545cdfa-9e4e-4497-a8a4-2bf7d0112c44"
+  ISAXContentHandler_GUID = "1545cdfa-9e4e-4497-a8a4-2bf7d0112c44"
+  IID_ISAXContentHandler = LibC::GUID.new(0x1545cdfa_u32, 0x9e4e_u16, 0x4497_u16, StaticArray[0xa8_u8, 0xa4_u8, 0x2b_u8, 0xf7_u8, 0xd0_u8, 0x11_u8, 0x2c_u8, 0x44_u8])
   struct ISAXContentHandler
     lpVtbl : ISAXContentHandlerVTbl*
   end
@@ -2629,8 +2629,8 @@ lib LibWin32
     unparsed_entity_decl : Proc(ISAXDTDHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
   end
 
-  ISAXDTDHandler_GUID = LibC::GUID.new("e15c1baf-afb3-4d60-8c36-19a8c45defed")
-  CLSID_ISAXDTDHandler = "e15c1baf-afb3-4d60-8c36-19a8c45defed"
+  ISAXDTDHandler_GUID = "e15c1baf-afb3-4d60-8c36-19a8c45defed"
+  IID_ISAXDTDHandler = LibC::GUID.new(0xe15c1baf_u32, 0xafb3_u16, 0x4d60_u16, StaticArray[0x8c_u8, 0x36_u8, 0x19_u8, 0xa8_u8, 0xc4_u8, 0x5d_u8, 0xef_u8, 0xed_u8])
   struct ISAXDTDHandler
     lpVtbl : ISAXDTDHandlerVTbl*
   end
@@ -2644,8 +2644,8 @@ lib LibWin32
     ignorable_warning : Proc(ISAXErrorHandler*, ISAXLocator, LibC::LPWSTR, HRESULT, HRESULT)
   end
 
-  ISAXErrorHandler_GUID = LibC::GUID.new("a60511c4-ccf5-479e-98a3-dc8dc545b7d0")
-  CLSID_ISAXErrorHandler = "a60511c4-ccf5-479e-98a3-dc8dc545b7d0"
+  ISAXErrorHandler_GUID = "a60511c4-ccf5-479e-98a3-dc8dc545b7d0"
+  IID_ISAXErrorHandler = LibC::GUID.new(0xa60511c4_u32, 0xccf5_u16, 0x479e_u16, StaticArray[0x98_u8, 0xa3_u8, 0xdc_u8, 0x8d_u8, 0xc5_u8, 0x45_u8, 0xb7_u8, 0xd0_u8])
   struct ISAXErrorHandler
     lpVtbl : ISAXErrorHandlerVTbl*
   end
@@ -2663,8 +2663,8 @@ lib LibWin32
     comment : Proc(ISAXLexicalHandler*, LibC::LPWSTR, Int32, HRESULT)
   end
 
-  ISAXLexicalHandler_GUID = LibC::GUID.new("7f85d5f5-47a8-4497-bda5-84ba04819ea6")
-  CLSID_ISAXLexicalHandler = "7f85d5f5-47a8-4497-bda5-84ba04819ea6"
+  ISAXLexicalHandler_GUID = "7f85d5f5-47a8-4497-bda5-84ba04819ea6"
+  IID_ISAXLexicalHandler = LibC::GUID.new(0x7f85d5f5_u32, 0x47a8_u16, 0x4497_u16, StaticArray[0xbd_u8, 0xa5_u8, 0x84_u8, 0xba_u8, 0x4_u8, 0x81_u8, 0x9e_u8, 0xa6_u8])
   struct ISAXLexicalHandler
     lpVtbl : ISAXLexicalHandlerVTbl*
   end
@@ -2679,8 +2679,8 @@ lib LibWin32
     external_entity_decl : Proc(ISAXDeclHandler*, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, LibC::LPWSTR, Int32, HRESULT)
   end
 
-  ISAXDeclHandler_GUID = LibC::GUID.new("862629ac-771a-47b2-8337-4e6843c1be90")
-  CLSID_ISAXDeclHandler = "862629ac-771a-47b2-8337-4e6843c1be90"
+  ISAXDeclHandler_GUID = "862629ac-771a-47b2-8337-4e6843c1be90"
+  IID_ISAXDeclHandler = LibC::GUID.new(0x862629ac_u32, 0x771a_u16, 0x47b2_u16, StaticArray[0x83_u8, 0x37_u8, 0x4e_u8, 0x68_u8, 0x43_u8, 0xc1_u8, 0xbe_u8, 0x90_u8])
   struct ISAXDeclHandler
     lpVtbl : ISAXDeclHandlerVTbl*
   end
@@ -2704,8 +2704,8 @@ lib LibWin32
     get_value_from_q_name : Proc(ISAXAttributes*, LibC::LPWSTR, Int32, UInt16**, Int32*, HRESULT)
   end
 
-  ISAXAttributes_GUID = LibC::GUID.new("f078abe1-45d2-4832-91ea-4466ce2f25c9")
-  CLSID_ISAXAttributes = "f078abe1-45d2-4832-91ea-4466ce2f25c9"
+  ISAXAttributes_GUID = "f078abe1-45d2-4832-91ea-4466ce2f25c9"
+  IID_ISAXAttributes = LibC::GUID.new(0xf078abe1_u32, 0x45d2_u16, 0x4832_u16, StaticArray[0x91_u8, 0xea_u8, 0x44_u8, 0x66_u8, 0xce_u8, 0x2f_u8, 0x25_u8, 0xc9_u8])
   struct ISAXAttributes
     lpVtbl : ISAXAttributesVTbl*
   end
@@ -2738,8 +2738,8 @@ lib LibWin32
     parse_url : Proc(IVBSAXXMLReader*, UInt8*, HRESULT)
   end
 
-  IVBSAXXMLReader_GUID = LibC::GUID.new("8c033caa-6cd6-4f73-b728-4531af74945f")
-  CLSID_IVBSAXXMLReader = "8c033caa-6cd6-4f73-b728-4531af74945f"
+  IVBSAXXMLReader_GUID = "8c033caa-6cd6-4f73-b728-4531af74945f"
+  IID_IVBSAXXMLReader = LibC::GUID.new(0x8c033caa_u32, 0x6cd6_u16, 0x4f73_u16, StaticArray[0xb7_u8, 0x28_u8, 0x45_u8, 0x31_u8, 0xaf_u8, 0x74_u8, 0x94_u8, 0x5f_u8])
   struct IVBSAXXMLReader
     lpVtbl : IVBSAXXMLReaderVTbl*
   end
@@ -2756,8 +2756,8 @@ lib LibWin32
     putref_parent : Proc(IVBSAXXMLFilter*, IVBSAXXMLReader, HRESULT)
   end
 
-  IVBSAXXMLFilter_GUID = LibC::GUID.new("1299eb1b-5b88-433e-82de-82ca75ad4e04")
-  CLSID_IVBSAXXMLFilter = "1299eb1b-5b88-433e-82de-82ca75ad4e04"
+  IVBSAXXMLFilter_GUID = "1299eb1b-5b88-433e-82de-82ca75ad4e04"
+  IID_IVBSAXXMLFilter = LibC::GUID.new(0x1299eb1b_u32, 0x5b88_u16, 0x433e_u16, StaticArray[0x82_u8, 0xde_u8, 0x82_u8, 0xca_u8, 0x75_u8, 0xad_u8, 0x4e_u8, 0x4_u8])
   struct IVBSAXXMLFilter
     lpVtbl : IVBSAXXMLFilterVTbl*
   end
@@ -2776,8 +2776,8 @@ lib LibWin32
     get_system_id : Proc(IVBSAXLocator*, UInt8**, HRESULT)
   end
 
-  IVBSAXLocator_GUID = LibC::GUID.new("796e7ac5-5aa2-4eff-acad-3faaf01a3288")
-  CLSID_IVBSAXLocator = "796e7ac5-5aa2-4eff-acad-3faaf01a3288"
+  IVBSAXLocator_GUID = "796e7ac5-5aa2-4eff-acad-3faaf01a3288"
+  IID_IVBSAXLocator = LibC::GUID.new(0x796e7ac5_u32, 0x5aa2_u16, 0x4eff_u16, StaticArray[0xac_u8, 0xad_u8, 0x3f_u8, 0xaa_u8, 0xf0_u8, 0x1a_u8, 0x32_u8, 0x88_u8])
   struct IVBSAXLocator
     lpVtbl : IVBSAXLocatorVTbl*
   end
@@ -2793,8 +2793,8 @@ lib LibWin32
     resolve_entity : Proc(IVBSAXEntityResolver*, UInt8**, UInt8**, VARIANT*, HRESULT)
   end
 
-  IVBSAXEntityResolver_GUID = LibC::GUID.new("0c05d096-f45b-4aca-ad1a-aa0bc25518dc")
-  CLSID_IVBSAXEntityResolver = "0c05d096-f45b-4aca-ad1a-aa0bc25518dc"
+  IVBSAXEntityResolver_GUID = "0c05d096-f45b-4aca-ad1a-aa0bc25518dc"
+  IID_IVBSAXEntityResolver = LibC::GUID.new(0xc05d096_u32, 0xf45b_u16, 0x4aca_u16, StaticArray[0xad_u8, 0x1a_u8, 0xaa_u8, 0xb_u8, 0xc2_u8, 0x55_u8, 0x18_u8, 0xdc_u8])
   struct IVBSAXEntityResolver
     lpVtbl : IVBSAXEntityResolverVTbl*
   end
@@ -2820,8 +2820,8 @@ lib LibWin32
     skipped_entity : Proc(IVBSAXContentHandler*, UInt8**, HRESULT)
   end
 
-  IVBSAXContentHandler_GUID = LibC::GUID.new("2ed7290a-4dd5-4b46-bb26-4e4155e77faa")
-  CLSID_IVBSAXContentHandler = "2ed7290a-4dd5-4b46-bb26-4e4155e77faa"
+  IVBSAXContentHandler_GUID = "2ed7290a-4dd5-4b46-bb26-4e4155e77faa"
+  IID_IVBSAXContentHandler = LibC::GUID.new(0x2ed7290a_u32, 0x4dd5_u16, 0x4b46_u16, StaticArray[0xbb_u8, 0x26_u8, 0x4e_u8, 0x41_u8, 0x55_u8, 0xe7_u8, 0x7f_u8, 0xaa_u8])
   struct IVBSAXContentHandler
     lpVtbl : IVBSAXContentHandlerVTbl*
   end
@@ -2838,8 +2838,8 @@ lib LibWin32
     unparsed_entity_decl : Proc(IVBSAXDTDHandler*, UInt8**, UInt8**, UInt8**, UInt8**, HRESULT)
   end
 
-  IVBSAXDTDHandler_GUID = LibC::GUID.new("24fb3297-302d-4620-ba39-3a732d850558")
-  CLSID_IVBSAXDTDHandler = "24fb3297-302d-4620-ba39-3a732d850558"
+  IVBSAXDTDHandler_GUID = "24fb3297-302d-4620-ba39-3a732d850558"
+  IID_IVBSAXDTDHandler = LibC::GUID.new(0x24fb3297_u32, 0x302d_u16, 0x4620_u16, StaticArray[0xba_u8, 0x39_u8, 0x3a_u8, 0x73_u8, 0x2d_u8, 0x85_u8, 0x5_u8, 0x58_u8])
   struct IVBSAXDTDHandler
     lpVtbl : IVBSAXDTDHandlerVTbl*
   end
@@ -2857,8 +2857,8 @@ lib LibWin32
     ignorable_warning : Proc(IVBSAXErrorHandler*, IVBSAXLocator, UInt8**, Int32, HRESULT)
   end
 
-  IVBSAXErrorHandler_GUID = LibC::GUID.new("d963d3fe-173c-4862-9095-b92f66995f52")
-  CLSID_IVBSAXErrorHandler = "d963d3fe-173c-4862-9095-b92f66995f52"
+  IVBSAXErrorHandler_GUID = "d963d3fe-173c-4862-9095-b92f66995f52"
+  IID_IVBSAXErrorHandler = LibC::GUID.new(0xd963d3fe_u32, 0x173c_u16, 0x4862_u16, StaticArray[0x90_u8, 0x95_u8, 0xb9_u8, 0x2f_u8, 0x66_u8, 0x99_u8, 0x5f_u8, 0x52_u8])
   struct IVBSAXErrorHandler
     lpVtbl : IVBSAXErrorHandlerVTbl*
   end
@@ -2880,8 +2880,8 @@ lib LibWin32
     comment : Proc(IVBSAXLexicalHandler*, UInt8**, HRESULT)
   end
 
-  IVBSAXLexicalHandler_GUID = LibC::GUID.new("032aac35-8c0e-4d9d-979f-e3b702935576")
-  CLSID_IVBSAXLexicalHandler = "032aac35-8c0e-4d9d-979f-e3b702935576"
+  IVBSAXLexicalHandler_GUID = "032aac35-8c0e-4d9d-979f-e3b702935576"
+  IID_IVBSAXLexicalHandler = LibC::GUID.new(0x32aac35_u32, 0x8c0e_u16, 0x4d9d_u16, StaticArray[0x97_u8, 0x9f_u8, 0xe3_u8, 0xb7_u8, 0x2_u8, 0x93_u8, 0x55_u8, 0x76_u8])
   struct IVBSAXLexicalHandler
     lpVtbl : IVBSAXLexicalHandlerVTbl*
   end
@@ -2900,8 +2900,8 @@ lib LibWin32
     external_entity_decl : Proc(IVBSAXDeclHandler*, UInt8**, UInt8**, UInt8**, HRESULT)
   end
 
-  IVBSAXDeclHandler_GUID = LibC::GUID.new("e8917260-7579-4be1-b5dd-7afbfa6f077b")
-  CLSID_IVBSAXDeclHandler = "e8917260-7579-4be1-b5dd-7afbfa6f077b"
+  IVBSAXDeclHandler_GUID = "e8917260-7579-4be1-b5dd-7afbfa6f077b"
+  IID_IVBSAXDeclHandler = LibC::GUID.new(0xe8917260_u32, 0x7579_u16, 0x4be1_u16, StaticArray[0xb5_u8, 0xdd_u8, 0x7a_u8, 0xfb_u8, 0xfa_u8, 0x6f_u8, 0x7_u8, 0x7b_u8])
   struct IVBSAXDeclHandler
     lpVtbl : IVBSAXDeclHandlerVTbl*
   end
@@ -2928,8 +2928,8 @@ lib LibWin32
     get_value_from_q_name : Proc(IVBSAXAttributes*, UInt8*, UInt8**, HRESULT)
   end
 
-  IVBSAXAttributes_GUID = LibC::GUID.new("10dc0586-132b-4cac-8bb3-db00ac8b7ee0")
-  CLSID_IVBSAXAttributes = "10dc0586-132b-4cac-8bb3-db00ac8b7ee0"
+  IVBSAXAttributes_GUID = "10dc0586-132b-4cac-8bb3-db00ac8b7ee0"
+  IID_IVBSAXAttributes = LibC::GUID.new(0x10dc0586_u32, 0x132b_u16, 0x4cac_u16, StaticArray[0x8b_u8, 0xb3_u8, 0xdb_u8, 0x0_u8, 0xac_u8, 0x8b_u8, 0x7e_u8, 0xe0_u8])
   struct IVBSAXAttributes
     lpVtbl : IVBSAXAttributesVTbl*
   end
@@ -2961,8 +2961,8 @@ lib LibWin32
     flush : Proc(IMXWriter*, HRESULT)
   end
 
-  IMXWriter_GUID = LibC::GUID.new("4d7ff4ba-1565-4ea8-94e1-6e724a46f98d")
-  CLSID_IMXWriter = "4d7ff4ba-1565-4ea8-94e1-6e724a46f98d"
+  IMXWriter_GUID = "4d7ff4ba-1565-4ea8-94e1-6e724a46f98d"
+  IID_IMXWriter = LibC::GUID.new(0x4d7ff4ba_u32, 0x1565_u16, 0x4ea8_u16, StaticArray[0x94_u8, 0xe1_u8, 0x6e_u8, 0x72_u8, 0x4a_u8, 0x46_u8, 0xf9_u8, 0x8d_u8])
   struct IMXWriter
     lpVtbl : IMXWriterVTbl*
   end
@@ -2988,8 +2988,8 @@ lib LibWin32
     set_value : Proc(IMXAttributes*, Int32, UInt8*, HRESULT)
   end
 
-  IMXAttributes_GUID = LibC::GUID.new("f10d27cc-3ec0-415c-8ed8-77ab1c5e7262")
-  CLSID_IMXAttributes = "f10d27cc-3ec0-415c-8ed8-77ab1c5e7262"
+  IMXAttributes_GUID = "f10d27cc-3ec0-415c-8ed8-77ab1c5e7262"
+  IID_IMXAttributes = LibC::GUID.new(0xf10d27cc_u32, 0x3ec0_u16, 0x415c_u16, StaticArray[0x8e_u8, 0xd8_u8, 0x77_u8, 0xab_u8, 0x1c_u8, 0x5e_u8, 0x72_u8, 0x62_u8])
   struct IMXAttributes
     lpVtbl : IMXAttributesVTbl*
   end
@@ -3007,8 +3007,8 @@ lib LibWin32
     suspend : Proc(IMXReaderControl*, HRESULT)
   end
 
-  IMXReaderControl_GUID = LibC::GUID.new("808f4e35-8d5a-4fbe-8466-33a41279ed30")
-  CLSID_IMXReaderControl = "808f4e35-8d5a-4fbe-8466-33a41279ed30"
+  IMXReaderControl_GUID = "808f4e35-8d5a-4fbe-8466-33a41279ed30"
+  IID_IMXReaderControl = LibC::GUID.new(0x808f4e35_u32, 0x8d5a_u16, 0x4fbe_u16, StaticArray[0x84_u8, 0x66_u8, 0x33_u8, 0xa4_u8, 0x12_u8, 0x79_u8, 0xed_u8, 0x30_u8])
   struct IMXReaderControl
     lpVtbl : IMXReaderControlVTbl*
   end
@@ -3024,8 +3024,8 @@ lib LibWin32
     schema_element_decl : Proc(IMXSchemaDeclHandler*, ISchemaElement, HRESULT)
   end
 
-  IMXSchemaDeclHandler_GUID = LibC::GUID.new("fa4bb38c-faf9-4cca-9302-d1dd0fe520db")
-  CLSID_IMXSchemaDeclHandler = "fa4bb38c-faf9-4cca-9302-d1dd0fe520db"
+  IMXSchemaDeclHandler_GUID = "fa4bb38c-faf9-4cca-9302-d1dd0fe520db"
+  IID_IMXSchemaDeclHandler = LibC::GUID.new(0xfa4bb38c_u32, 0xfaf9_u16, 0x4cca_u16, StaticArray[0x93_u8, 0x2_u8, 0xd1_u8, 0xdd_u8, 0xf_u8, 0xe5_u8, 0x20_u8, 0xdb_u8])
   struct IMXSchemaDeclHandler
     lpVtbl : IMXSchemaDeclHandlerVTbl*
   end
@@ -3043,8 +3043,8 @@ lib LibWin32
     get__new_enum : Proc(IMXNamespacePrefixes*, IUnknown*, HRESULT)
   end
 
-  IMXNamespacePrefixes_GUID = LibC::GUID.new("c90352f4-643c-4fbc-bb23-e996eb2d51fd")
-  CLSID_IMXNamespacePrefixes = "c90352f4-643c-4fbc-bb23-e996eb2d51fd"
+  IMXNamespacePrefixes_GUID = "c90352f4-643c-4fbc-bb23-e996eb2d51fd"
+  IID_IMXNamespacePrefixes = LibC::GUID.new(0xc90352f4_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
   struct IMXNamespacePrefixes
     lpVtbl : IMXNamespacePrefixesVTbl*
   end
@@ -3070,8 +3070,8 @@ lib LibWin32
     get_uri_from_node : Proc(IVBMXNamespaceManager*, UInt8*, IXMLDOMNode, VARIANT*, HRESULT)
   end
 
-  IVBMXNamespaceManager_GUID = LibC::GUID.new("c90352f5-643c-4fbc-bb23-e996eb2d51fd")
-  CLSID_IVBMXNamespaceManager = "c90352f5-643c-4fbc-bb23-e996eb2d51fd"
+  IVBMXNamespaceManager_GUID = "c90352f5-643c-4fbc-bb23-e996eb2d51fd"
+  IID_IVBMXNamespaceManager = LibC::GUID.new(0xc90352f5_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
   struct IVBMXNamespaceManager
     lpVtbl : IVBMXNamespaceManagerVTbl*
   end
@@ -3092,8 +3092,8 @@ lib LibWin32
     get_uri : Proc(IMXNamespaceManager*, LibC::LPWSTR, IXMLDOMNode, Char*, Int32*, HRESULT)
   end
 
-  IMXNamespaceManager_GUID = LibC::GUID.new("c90352f6-643c-4fbc-bb23-e996eb2d51fd")
-  CLSID_IMXNamespaceManager = "c90352f6-643c-4fbc-bb23-e996eb2d51fd"
+  IMXNamespaceManager_GUID = "c90352f6-643c-4fbc-bb23-e996eb2d51fd"
+  IID_IMXNamespaceManager = LibC::GUID.new(0xc90352f6_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
   struct IMXNamespaceManager
     lpVtbl : IMXNamespaceManagerVTbl*
   end
@@ -3120,8 +3120,8 @@ lib LibWin32
     putref_error_handler : Proc(IMXXMLFilter*, IUnknown, HRESULT)
   end
 
-  IMXXMLFilter_GUID = LibC::GUID.new("c90352f7-643c-4fbc-bb23-e996eb2d51fd")
-  CLSID_IMXXMLFilter = "c90352f7-643c-4fbc-bb23-e996eb2d51fd"
+  IMXXMLFilter_GUID = "c90352f7-643c-4fbc-bb23-e996eb2d51fd"
+  IID_IMXXMLFilter = LibC::GUID.new(0xc90352f7_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
   struct IMXXMLFilter
     lpVtbl : IMXXMLFilterVTbl*
   end
@@ -3148,8 +3148,8 @@ lib LibWin32
     get_declaration : Proc(IXMLDOMSchemaCollection2*, IXMLDOMNode, ISchemaItem*, HRESULT)
   end
 
-  IXMLDOMSchemaCollection2_GUID = LibC::GUID.new("50ea08b0-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_IXMLDOMSchemaCollection2 = "50ea08b0-dd1b-4664-9a50-c2f40f4bd79a"
+  IXMLDOMSchemaCollection2_GUID = "50ea08b0-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_IXMLDOMSchemaCollection2 = LibC::GUID.new(0x50ea08b0_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct IXMLDOMSchemaCollection2
     lpVtbl : IXMLDOMSchemaCollection2VTbl*
   end
@@ -3167,8 +3167,8 @@ lib LibWin32
     get__new_enum : Proc(ISchemaStringCollection*, IUnknown*, HRESULT)
   end
 
-  ISchemaStringCollection_GUID = LibC::GUID.new("50ea08b1-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaStringCollection = "50ea08b1-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaStringCollection_GUID = "50ea08b1-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaStringCollection = LibC::GUID.new(0x50ea08b1_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaStringCollection
     lpVtbl : ISchemaStringCollectionVTbl*
   end
@@ -3188,8 +3188,8 @@ lib LibWin32
     get__new_enum : Proc(ISchemaItemCollection*, IUnknown*, HRESULT)
   end
 
-  ISchemaItemCollection_GUID = LibC::GUID.new("50ea08b2-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaItemCollection = "50ea08b2-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaItemCollection_GUID = "50ea08b2-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaItemCollection = LibC::GUID.new(0x50ea08b2_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaItemCollection
     lpVtbl : ISchemaItemCollectionVTbl*
   end
@@ -3211,8 +3211,8 @@ lib LibWin32
     write_annotation : Proc(ISchemaItem*, IUnknown, Int16*, HRESULT)
   end
 
-  ISchemaItem_GUID = LibC::GUID.new("50ea08b3-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaItem = "50ea08b3-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaItem_GUID = "50ea08b3-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaItem = LibC::GUID.new(0x50ea08b3_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaItem
     lpVtbl : ISchemaItemVTbl*
   end
@@ -3243,8 +3243,8 @@ lib LibWin32
     get_schema_locations : Proc(ISchema*, ISchemaStringCollection*, HRESULT)
   end
 
-  ISchema_GUID = LibC::GUID.new("50ea08b4-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchema = "50ea08b4-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchema_GUID = "50ea08b4-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchema = LibC::GUID.new(0x50ea08b4_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchema
     lpVtbl : ISchemaVTbl*
   end
@@ -3268,8 +3268,8 @@ lib LibWin32
     get_max_occurs : Proc(ISchemaParticle*, VARIANT*, HRESULT)
   end
 
-  ISchemaParticle_GUID = LibC::GUID.new("50ea08b5-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaParticle = "50ea08b5-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaParticle_GUID = "50ea08b5-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaParticle = LibC::GUID.new(0x50ea08b5_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaParticle
     lpVtbl : ISchemaParticleVTbl*
   end
@@ -3297,8 +3297,8 @@ lib LibWin32
     get_is_reference : Proc(ISchemaAttribute*, Int16*, HRESULT)
   end
 
-  ISchemaAttribute_GUID = LibC::GUID.new("50ea08b6-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaAttribute = "50ea08b6-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaAttribute_GUID = "50ea08b6-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaAttribute = LibC::GUID.new(0x50ea08b6_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaAttribute
     lpVtbl : ISchemaAttributeVTbl*
   end
@@ -3333,8 +3333,8 @@ lib LibWin32
     get_is_reference : Proc(ISchemaElement*, Int16*, HRESULT)
   end
 
-  ISchemaElement_GUID = LibC::GUID.new("50ea08b7-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaElement = "50ea08b7-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaElement_GUID = "50ea08b7-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaElement = LibC::GUID.new(0x50ea08b7_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaElement
     lpVtbl : ISchemaElementVTbl*
   end
@@ -3373,8 +3373,8 @@ lib LibWin32
     get_patterns : Proc(ISchemaType*, ISchemaStringCollection*, HRESULT)
   end
 
-  ISchemaType_GUID = LibC::GUID.new("50ea08b8-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaType = "50ea08b8-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaType_GUID = "50ea08b8-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaType = LibC::GUID.new(0x50ea08b8_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaType
     lpVtbl : ISchemaTypeVTbl*
   end
@@ -3419,8 +3419,8 @@ lib LibWin32
     get_prohibited_substitutions : Proc(ISchemaComplexType*, SCHEMADERIVATIONMETHOD*, HRESULT)
   end
 
-  ISchemaComplexType_GUID = LibC::GUID.new("50ea08b9-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaComplexType = "50ea08b9-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaComplexType_GUID = "50ea08b9-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaComplexType = LibC::GUID.new(0x50ea08b9_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaComplexType
     lpVtbl : ISchemaComplexTypeVTbl*
   end
@@ -3444,8 +3444,8 @@ lib LibWin32
     get_attributes : Proc(ISchemaAttributeGroup*, ISchemaItemCollection*, HRESULT)
   end
 
-  ISchemaAttributeGroup_GUID = LibC::GUID.new("50ea08ba-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaAttributeGroup = "50ea08ba-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaAttributeGroup_GUID = "50ea08ba-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaAttributeGroup = LibC::GUID.new(0x50ea08ba_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaAttributeGroup
     lpVtbl : ISchemaAttributeGroupVTbl*
   end
@@ -3470,8 +3470,8 @@ lib LibWin32
     get_particles : Proc(ISchemaModelGroup*, ISchemaItemCollection*, HRESULT)
   end
 
-  ISchemaModelGroup_GUID = LibC::GUID.new("50ea08bb-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaModelGroup = "50ea08bb-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaModelGroup_GUID = "50ea08bb-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaModelGroup = LibC::GUID.new(0x50ea08bb_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaModelGroup
     lpVtbl : ISchemaModelGroupVTbl*
   end
@@ -3497,8 +3497,8 @@ lib LibWin32
     get_process_contents : Proc(ISchemaAny*, SCHEMAPROCESSCONTENTS*, HRESULT)
   end
 
-  ISchemaAny_GUID = LibC::GUID.new("50ea08bc-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaAny = "50ea08bc-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaAny_GUID = "50ea08bc-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaAny = LibC::GUID.new(0x50ea08bc_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaAny
     lpVtbl : ISchemaAnyVTbl*
   end
@@ -3523,8 +3523,8 @@ lib LibWin32
     get_referenced_key : Proc(ISchemaIdentityConstraint*, ISchemaIdentityConstraint*, HRESULT)
   end
 
-  ISchemaIdentityConstraint_GUID = LibC::GUID.new("50ea08bd-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaIdentityConstraint = "50ea08bd-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaIdentityConstraint_GUID = "50ea08bd-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaIdentityConstraint = LibC::GUID.new(0x50ea08bd_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaIdentityConstraint
     lpVtbl : ISchemaIdentityConstraintVTbl*
   end
@@ -3548,8 +3548,8 @@ lib LibWin32
     get_public_identifier : Proc(ISchemaNotation*, UInt8**, HRESULT)
   end
 
-  ISchemaNotation_GUID = LibC::GUID.new("50ea08be-dd1b-4664-9a50-c2f40f4bd79a")
-  CLSID_ISchemaNotation = "50ea08be-dd1b-4664-9a50-c2f40f4bd79a"
+  ISchemaNotation_GUID = "50ea08be-dd1b-4664-9a50-c2f40f4bd79a"
+  IID_ISchemaNotation = LibC::GUID.new(0x50ea08be_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
   struct ISchemaNotation
     lpVtbl : ISchemaNotationVTbl*
   end
@@ -3565,8 +3565,8 @@ lib LibWin32
     on_error : Proc(IXMLHTTPRequest2Callback*, IXMLHTTPRequest2, HRESULT, HRESULT)
   end
 
-  IXMLHTTPRequest2Callback_GUID = LibC::GUID.new("a44a9299-e321-40de-8866-341b41669162")
-  CLSID_IXMLHTTPRequest2Callback = "a44a9299-e321-40de-8866-341b41669162"
+  IXMLHTTPRequest2Callback_GUID = "a44a9299-e321-40de-8866-341b41669162"
+  IID_IXMLHTTPRequest2Callback = LibC::GUID.new(0xa44a9299_u32, 0xe321_u16, 0x40de_u16, StaticArray[0x88_u8, 0x66_u8, 0x34_u8, 0x1b_u8, 0x41_u8, 0x66_u8, 0x91_u8, 0x62_u8])
   struct IXMLHTTPRequest2Callback
     lpVtbl : IXMLHTTPRequest2CallbackVTbl*
   end
@@ -3587,8 +3587,8 @@ lib LibWin32
     get_response_header : Proc(IXMLHTTPRequest2*, LibC::LPWSTR, UInt16**, HRESULT)
   end
 
-  IXMLHTTPRequest2_GUID = LibC::GUID.new("e5d37dc0-552a-4d52-9cc0-a14d546fbd04")
-  CLSID_IXMLHTTPRequest2 = "e5d37dc0-552a-4d52-9cc0-a14d546fbd04"
+  IXMLHTTPRequest2_GUID = "e5d37dc0-552a-4d52-9cc0-a14d546fbd04"
+  IID_IXMLHTTPRequest2 = LibC::GUID.new(0xe5d37dc0_u32, 0x552a_u16, 0x4d52_u16, StaticArray[0x9c_u8, 0xc0_u8, 0xa1_u8, 0x4d_u8, 0x54_u8, 0x6f_u8, 0xbd_u8, 0x4_u8])
   struct IXMLHTTPRequest2
     lpVtbl : IXMLHTTPRequest2VTbl*
   end
@@ -3606,8 +3606,8 @@ lib LibWin32
     on_client_certificate_requested : Proc(IXMLHTTPRequest3Callback*, IXMLHTTPRequest3, UInt32, UInt16**, HRESULT)
   end
 
-  IXMLHTTPRequest3Callback_GUID = LibC::GUID.new("b9e57830-8c6c-4a6f-9c13-47772bb047bb")
-  CLSID_IXMLHTTPRequest3Callback = "b9e57830-8c6c-4a6f-9c13-47772bb047bb"
+  IXMLHTTPRequest3Callback_GUID = "b9e57830-8c6c-4a6f-9c13-47772bb047bb"
+  IID_IXMLHTTPRequest3Callback = LibC::GUID.new(0xb9e57830_u32, 0x8c6c_u16, 0x4a6f_u16, StaticArray[0x9c_u8, 0x13_u8, 0x47_u8, 0x77_u8, 0x2b_u8, 0xb0_u8, 0x47_u8, 0xbb_u8])
   struct IXMLHTTPRequest3Callback
     lpVtbl : IXMLHTTPRequest3CallbackVTbl*
   end
@@ -3629,8 +3629,8 @@ lib LibWin32
     set_client_certificate : Proc(IXMLHTTPRequest3*, UInt32, UInt8*, LibC::LPWSTR, HRESULT)
   end
 
-  IXMLHTTPRequest3_GUID = LibC::GUID.new("a1c9feee-0617-4f23-9d58-8961ea43567c")
-  CLSID_IXMLHTTPRequest3 = "a1c9feee-0617-4f23-9d58-8961ea43567c"
+  IXMLHTTPRequest3_GUID = "a1c9feee-0617-4f23-9d58-8961ea43567c"
+  IID_IXMLHTTPRequest3 = LibC::GUID.new(0xa1c9feee_u32, 0x617_u16, 0x4f23_u16, StaticArray[0x9d_u8, 0x58_u8, 0x89_u8, 0x61_u8, 0xea_u8, 0x43_u8, 0x56_u8, 0x7c_u8])
   struct IXMLHTTPRequest3
     lpVtbl : IXMLHTTPRequest3VTbl*
   end

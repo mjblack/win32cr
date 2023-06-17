@@ -15,7 +15,7 @@ require "../system/ole.cr"
 lib LibWin32
   NLM_MAX_ADDRESS_LIST_SIZE = 10_u32
   NLM_UNKNOWN_DATAPLAN_STATUS = 4294967295_u32
-  NetworkListManager = LibC::GUID.new(0xdcb00c01_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
+  CLSID_NetworkListManager = LibC::GUID.new(0xdcb00c01_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
 
 
   enum NLM_CONNECTION_COST : Int32
@@ -127,8 +127,8 @@ lib LibWin32
     clear_simulated_profile_info : Proc(INetworkListManager*, HRESULT)
   end
 
-  INetworkListManager_GUID = LibC::GUID.new("dcb00000-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkListManager = "dcb00000-570f-4a9b-8d69-199fdba5723b"
+  INetworkListManager_GUID = "dcb00000-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkListManager = LibC::GUID.new(0xdcb00000_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkListManager
     lpVtbl : INetworkListManagerVTbl*
   end
@@ -140,8 +140,8 @@ lib LibWin32
     connectivity_changed : Proc(INetworkListManagerEvents*, NLM_CONNECTIVITY, HRESULT)
   end
 
-  INetworkListManagerEvents_GUID = LibC::GUID.new("dcb00001-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkListManagerEvents = "dcb00001-570f-4a9b-8d69-199fdba5723b"
+  INetworkListManagerEvents_GUID = "dcb00001-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkListManagerEvents = LibC::GUID.new(0xdcb00001_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkListManagerEvents
     lpVtbl : INetworkListManagerEventsVTbl*
   end
@@ -169,8 +169,8 @@ lib LibWin32
     set_category : Proc(INetwork*, NLM_NETWORK_CATEGORY, HRESULT)
   end
 
-  INetwork_GUID = LibC::GUID.new("dcb00002-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetwork = "dcb00002-570f-4a9b-8d69-199fdba5723b"
+  INetwork_GUID = "dcb00002-570f-4a9b-8d69-199fdba5723b"
+  IID_INetwork = LibC::GUID.new(0xdcb00002_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetwork
     lpVtbl : INetworkVTbl*
   end
@@ -190,8 +190,8 @@ lib LibWin32
     clone : Proc(IEnumNetworks*, IEnumNetworks*, HRESULT)
   end
 
-  IEnumNetworks_GUID = LibC::GUID.new("dcb00003-570f-4a9b-8d69-199fdba5723b")
-  CLSID_IEnumNetworks = "dcb00003-570f-4a9b-8d69-199fdba5723b"
+  IEnumNetworks_GUID = "dcb00003-570f-4a9b-8d69-199fdba5723b"
+  IID_IEnumNetworks = LibC::GUID.new(0xdcb00003_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct IEnumNetworks
     lpVtbl : IEnumNetworksVTbl*
   end
@@ -206,8 +206,8 @@ lib LibWin32
     network_property_changed : Proc(INetworkEvents*, Guid, NLM_NETWORK_PROPERTY_CHANGE, HRESULT)
   end
 
-  INetworkEvents_GUID = LibC::GUID.new("dcb00004-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkEvents = "dcb00004-570f-4a9b-8d69-199fdba5723b"
+  INetworkEvents_GUID = "dcb00004-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkEvents = LibC::GUID.new(0xdcb00004_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkEvents
     lpVtbl : INetworkEventsVTbl*
   end
@@ -229,8 +229,8 @@ lib LibWin32
     get_domain_type : Proc(INetworkConnection*, NLM_DOMAIN_TYPE*, HRESULT)
   end
 
-  INetworkConnection_GUID = LibC::GUID.new("dcb00005-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkConnection = "dcb00005-570f-4a9b-8d69-199fdba5723b"
+  INetworkConnection_GUID = "dcb00005-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkConnection = LibC::GUID.new(0xdcb00005_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkConnection
     lpVtbl : INetworkConnectionVTbl*
   end
@@ -250,8 +250,8 @@ lib LibWin32
     clone : Proc(IEnumNetworkConnections*, IEnumNetworkConnections*, HRESULT)
   end
 
-  IEnumNetworkConnections_GUID = LibC::GUID.new("dcb00006-570f-4a9b-8d69-199fdba5723b")
-  CLSID_IEnumNetworkConnections = "dcb00006-570f-4a9b-8d69-199fdba5723b"
+  IEnumNetworkConnections_GUID = "dcb00006-570f-4a9b-8d69-199fdba5723b"
+  IID_IEnumNetworkConnections = LibC::GUID.new(0xdcb00006_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct IEnumNetworkConnections
     lpVtbl : IEnumNetworkConnectionsVTbl*
   end
@@ -264,8 +264,8 @@ lib LibWin32
     network_connection_property_changed : Proc(INetworkConnectionEvents*, Guid, NLM_CONNECTION_PROPERTY_CHANGE, HRESULT)
   end
 
-  INetworkConnectionEvents_GUID = LibC::GUID.new("dcb00007-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkConnectionEvents = "dcb00007-570f-4a9b-8d69-199fdba5723b"
+  INetworkConnectionEvents_GUID = "dcb00007-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkConnectionEvents = LibC::GUID.new(0xdcb00007_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkConnectionEvents
     lpVtbl : INetworkConnectionEventsVTbl*
   end
@@ -279,8 +279,8 @@ lib LibWin32
     set_destination_addresses : Proc(INetworkCostManager*, UInt32, NLM_SOCKADDR*, Int16, HRESULT)
   end
 
-  INetworkCostManager_GUID = LibC::GUID.new("dcb00008-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkCostManager = "dcb00008-570f-4a9b-8d69-199fdba5723b"
+  INetworkCostManager_GUID = "dcb00008-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkCostManager = LibC::GUID.new(0xdcb00008_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkCostManager
     lpVtbl : INetworkCostManagerVTbl*
   end
@@ -293,8 +293,8 @@ lib LibWin32
     data_plan_status_changed : Proc(INetworkCostManagerEvents*, NLM_SOCKADDR*, HRESULT)
   end
 
-  INetworkCostManagerEvents_GUID = LibC::GUID.new("dcb00009-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkCostManagerEvents = "dcb00009-570f-4a9b-8d69-199fdba5723b"
+  INetworkCostManagerEvents_GUID = "dcb00009-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkCostManagerEvents = LibC::GUID.new(0xdcb00009_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkCostManagerEvents
     lpVtbl : INetworkCostManagerEventsVTbl*
   end
@@ -307,8 +307,8 @@ lib LibWin32
     get_data_plan_status : Proc(INetworkConnectionCost*, NLM_DATAPLAN_STATUS*, HRESULT)
   end
 
-  INetworkConnectionCost_GUID = LibC::GUID.new("dcb0000a-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkConnectionCost = "dcb0000a-570f-4a9b-8d69-199fdba5723b"
+  INetworkConnectionCost_GUID = "dcb0000a-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkConnectionCost = LibC::GUID.new(0xdcb0000a_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkConnectionCost
     lpVtbl : INetworkConnectionCostVTbl*
   end
@@ -321,8 +321,8 @@ lib LibWin32
     connection_data_plan_status_changed : Proc(INetworkConnectionCostEvents*, Guid, HRESULT)
   end
 
-  INetworkConnectionCostEvents_GUID = LibC::GUID.new("dcb0000b-570f-4a9b-8d69-199fdba5723b")
-  CLSID_INetworkConnectionCostEvents = "dcb0000b-570f-4a9b-8d69-199fdba5723b"
+  INetworkConnectionCostEvents_GUID = "dcb0000b-570f-4a9b-8d69-199fdba5723b"
+  IID_INetworkConnectionCostEvents = LibC::GUID.new(0xdcb0000b_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
   struct INetworkConnectionCostEvents
     lpVtbl : INetworkConnectionCostEventsVTbl*
   end

@@ -479,7 +479,7 @@ lib LibWin32
   PROCESS_TRACE_MODE_RAW_TIMESTAMP = 4096_u32
   PROCESS_TRACE_MODE_EVENT_RECORD = 268435456_u32
   CLSID_TraceRelogger = "7b40792d-05ff-44c4-9058-f440c71f17d4"
-  CTraceRelogger = LibC::GUID.new(0x7b40792d_u32, 0x5ff_u16, 0x44c4_u16, StaticArray[0x90_u8, 0x58_u8, 0xf4_u8, 0x40_u8, 0xc7_u8, 0x1f_u8, 0x17_u8, 0xd4_u8])
+  CLSID_CTraceRelogger = LibC::GUID.new(0x7b40792d_u32, 0x5ff_u16, 0x44c4_u16, StaticArray[0x90_u8, 0x58_u8, 0xf4_u8, 0x40_u8, 0xc7_u8, 0x1f_u8, 0x17_u8, 0xd4_u8])
 
   alias PEVENT_TRACE_BUFFER_CALLBACKW = Proc(EVENT_TRACE_LOGFILEW*, UInt32)
   alias PEVENT_TRACE_BUFFER_CALLBACKA = Proc(EVENT_TRACE_LOGFILEA*, UInt32)
@@ -816,7 +816,7 @@ lib LibWin32
   end
   union EVENT_TRACE_HEADER_Anonymous2_e__Union
     version : UInt32
-    class : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
+    klass : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
   end
   union EVENT_TRACE_HEADER_Anonymous1_e__Union
     field_type_flags : UInt16
@@ -833,7 +833,7 @@ lib LibWin32
   end
   union EVENT_INSTANCE_HEADER_Anonymous2_e__Union
     version : UInt32
-    class : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
+    klass : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
   end
   union EVENT_INSTANCE_HEADER_Anonymous1_e__Union
     field_type_flags : UInt16
@@ -1645,8 +1645,8 @@ lib LibWin32
     set_provider_id : Proc(ITraceEvent*, Guid*, HRESULT)
   end
 
-  ITraceEvent_GUID = LibC::GUID.new("8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb")
-  CLSID_ITraceEvent = "8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb"
+  ITraceEvent_GUID = "8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb"
+  IID_ITraceEvent = LibC::GUID.new(0x8cc97f40_u32, 0x9028_u16, 0x4ff3_u16, StaticArray[0x9b_u8, 0x62_u8, 0x7d_u8, 0x1f_u8, 0x79_u8, 0xca_u8, 0x7b_u8, 0xcb_u8])
   struct ITraceEvent
     lpVtbl : ITraceEventVTbl*
   end
@@ -1660,8 +1660,8 @@ lib LibWin32
     on_event : Proc(ITraceEventCallback*, ITraceEvent, ITraceRelogger, HRESULT)
   end
 
-  ITraceEventCallback_GUID = LibC::GUID.new("3ed25501-593f-43e9-8f38-3ab46f5a4a52")
-  CLSID_ITraceEventCallback = "3ed25501-593f-43e9-8f38-3ab46f5a4a52"
+  ITraceEventCallback_GUID = "3ed25501-593f-43e9-8f38-3ab46f5a4a52"
+  IID_ITraceEventCallback = LibC::GUID.new(0x3ed25501_u32, 0x593f_u16, 0x43e9_u16, StaticArray[0x8f_u8, 0x38_u8, 0x3a_u8, 0xb4_u8, 0x6f_u8, 0x5a_u8, 0x4a_u8, 0x52_u8])
   struct ITraceEventCallback
     lpVtbl : ITraceEventCallbackVTbl*
   end
@@ -1681,8 +1681,8 @@ lib LibWin32
     cancel : Proc(ITraceRelogger*, HRESULT)
   end
 
-  ITraceRelogger_GUID = LibC::GUID.new("f754ad43-3bcc-4286-8009-9c5da214e84e")
-  CLSID_ITraceRelogger = "f754ad43-3bcc-4286-8009-9c5da214e84e"
+  ITraceRelogger_GUID = "f754ad43-3bcc-4286-8009-9c5da214e84e"
+  IID_ITraceRelogger = LibC::GUID.new(0xf754ad43_u32, 0x3bcc_u16, 0x4286_u16, StaticArray[0x80_u8, 0x9_u8, 0x9c_u8, 0x5d_u8, 0xa2_u8, 0x14_u8, 0xe8_u8, 0x4e_u8])
   struct ITraceRelogger
     lpVtbl : ITraceReloggerVTbl*
   end

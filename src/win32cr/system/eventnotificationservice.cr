@@ -26,7 +26,7 @@ lib LibWin32
   SENSGUID_EVENTCLASS_LOGON = "d5978630-5b9f-11d1-8dd2-00aa004abd5e"
   SENSGUID_EVENTCLASS_ONNOW = "d5978640-5b9f-11d1-8dd2-00aa004abd5e"
   SENSGUID_EVENTCLASS_LOGON2 = "d5978650-5b9f-11d1-8dd2-00aa004abd5e"
-  SENS = LibC::GUID.new(0xd597cafe_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
+  CLSID_SENS = LibC::GUID.new(0xd597cafe_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
 
 
   enum SENS_CONNECTION_TYPE : UInt32
@@ -63,8 +63,8 @@ lib LibWin32
     destination_reachable_no_qoc_info : Proc(ISensNetwork*, UInt8*, UInt8*, UInt32, HRESULT)
   end
 
-  ISensNetwork_GUID = LibC::GUID.new("d597bab1-5b9f-11d1-8dd2-00aa004abd5e")
-  CLSID_ISensNetwork = "d597bab1-5b9f-11d1-8dd2-00aa004abd5e"
+  ISensNetwork_GUID = "d597bab1-5b9f-11d1-8dd2-00aa004abd5e"
+  IID_ISensNetwork = LibC::GUID.new(0xd597bab1_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
   struct ISensNetwork
     lpVtbl : ISensNetworkVTbl*
   end
@@ -82,8 +82,8 @@ lib LibWin32
     battery_low : Proc(ISensOnNow*, UInt32, HRESULT)
   end
 
-  ISensOnNow_GUID = LibC::GUID.new("d597bab2-5b9f-11d1-8dd2-00aa004abd5e")
-  CLSID_ISensOnNow = "d597bab2-5b9f-11d1-8dd2-00aa004abd5e"
+  ISensOnNow_GUID = "d597bab2-5b9f-11d1-8dd2-00aa004abd5e"
+  IID_ISensOnNow = LibC::GUID.new(0xd597bab2_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
   struct ISensOnNow
     lpVtbl : ISensOnNowVTbl*
   end
@@ -105,8 +105,8 @@ lib LibWin32
     stop_screen_saver : Proc(ISensLogon*, UInt8*, HRESULT)
   end
 
-  ISensLogon_GUID = LibC::GUID.new("d597bab3-5b9f-11d1-8dd2-00aa004abd5e")
-  CLSID_ISensLogon = "d597bab3-5b9f-11d1-8dd2-00aa004abd5e"
+  ISensLogon_GUID = "d597bab3-5b9f-11d1-8dd2-00aa004abd5e"
+  IID_ISensLogon = LibC::GUID.new(0xd597bab3_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
   struct ISensLogon
     lpVtbl : ISensLogonVTbl*
   end
@@ -126,8 +126,8 @@ lib LibWin32
     post_shell : Proc(ISensLogon2*, UInt8*, UInt32, HRESULT)
   end
 
-  ISensLogon2_GUID = LibC::GUID.new("d597bab4-5b9f-11d1-8dd2-00aa004abd5e")
-  CLSID_ISensLogon2 = "d597bab4-5b9f-11d1-8dd2-00aa004abd5e"
+  ISensLogon2_GUID = "d597bab4-5b9f-11d1-8dd2-00aa004abd5e"
+  IID_ISensLogon2 = LibC::GUID.new(0xd597bab4_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
   struct ISensLogon2
     lpVtbl : ISensLogon2VTbl*
   end

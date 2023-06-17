@@ -185,8 +185,8 @@ lib LibWin32
     unadvise : Proc(IReferenceClock*, LibC::UINT_PTR, HRESULT)
   end
 
-  IReferenceClock_GUID = LibC::GUID.new("56a86897-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IReferenceClock = "56a86897-0ad4-11ce-b03a-0020af0ba770"
+  IReferenceClock_GUID = "56a86897-0ad4-11ce-b03a-0020af0ba770"
+  IID_IReferenceClock = LibC::GUID.new(0x56a86897_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IReferenceClock
     lpVtbl : IReferenceClockVTbl*
   end
@@ -199,8 +199,8 @@ lib LibWin32
     get_default_timer_resolution : Proc(IReferenceClockTimerControl*, Int64*, HRESULT)
   end
 
-  IReferenceClockTimerControl_GUID = LibC::GUID.new("ebec459c-2eca-4d42-a8af-30df557614b8")
-  CLSID_IReferenceClockTimerControl = "ebec459c-2eca-4d42-a8af-30df557614b8"
+  IReferenceClockTimerControl_GUID = "ebec459c-2eca-4d42-a8af-30df557614b8"
+  IID_IReferenceClockTimerControl = LibC::GUID.new(0xebec459c_u32, 0x2eca_u16, 0x4d42_u16, StaticArray[0xa8_u8, 0xaf_u8, 0x30_u8, 0xdf_u8, 0x55_u8, 0x76_u8, 0x14_u8, 0xb8_u8])
   struct IReferenceClockTimerControl
     lpVtbl : IReferenceClockTimerControlVTbl*
   end
@@ -215,8 +215,8 @@ lib LibWin32
     unadvise : Proc(IReferenceClock2*, LibC::UINT_PTR, HRESULT)
   end
 
-  IReferenceClock2_GUID = LibC::GUID.new("36b73885-c2c8-11cf-8b46-00805f6cef60")
-  CLSID_IReferenceClock2 = "36b73885-c2c8-11cf-8b46-00805f6cef60"
+  IReferenceClock2_GUID = "36b73885-c2c8-11cf-8b46-00805f6cef60"
+  IID_IReferenceClock2 = LibC::GUID.new(0x36b73885_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
   struct IReferenceClock2
     lpVtbl : IReferenceClock2VTbl*
   end
