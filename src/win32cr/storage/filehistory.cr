@@ -57,8 +57,8 @@ lib LibWin32
   FH_STATE_NO_ERROR = 255_u32
   FH_STATE_BACKUP_NOT_SUPPORTED = 2064_u32
   FH_STATE_RUNNING = 256_u32
-  FhConfigMgr = LibC::GUID.new(0xed43bb3c_u32, 0x9e9_u16, 0x498a_u16, StaticArray[0x9d_u8, 0xf6_u8, 0x21_u8, 0x77_u8, 0x24_u8, 0x4c_u8, 0x6d_u8, 0xb4_u8])
-  FhReassociation = LibC::GUID.new(0x4d728e35_u32, 0x16fa_u16, 0x4320_u16, StaticArray[0x9e_u8, 0x8b_u8, 0xbf_u8, 0xd7_u8, 0x10_u8, 0xa_u8, 0x88_u8, 0x46_u8])
+  CLSID_FhConfigMgr = LibC::GUID.new(0xed43bb3c_u32, 0x9e9_u16, 0x498a_u16, StaticArray[0x9d_u8, 0xf6_u8, 0x21_u8, 0x77_u8, 0x24_u8, 0x4c_u8, 0x6d_u8, 0xb4_u8])
+  CLSID_FhReassociation = LibC::GUID.new(0x4d728e35_u32, 0x16fa_u16, 0x4320_u16, StaticArray[0x9e_u8, 0x8b_u8, 0xbf_u8, 0xd7_u8, 0x10_u8, 0xa_u8, 0x88_u8, 0x46_u8])
 
 
   enum FH_TARGET_PROPERTY_TYPE : Int32
@@ -131,8 +131,8 @@ lib LibWin32
     get_numerical_property : Proc(IFhTarget*, FH_TARGET_PROPERTY_TYPE, UInt64*, HRESULT)
   end
 
-  IFhTarget_GUID = LibC::GUID.new("d87965fd-2bad-4657-bd3b-9567eb300ced")
-  CLSID_IFhTarget = "d87965fd-2bad-4657-bd3b-9567eb300ced"
+  IFhTarget_GUID = "d87965fd-2bad-4657-bd3b-9567eb300ced"
+  IID_IFhTarget = LibC::GUID.new(0xd87965fd_u32, 0x2bad_u16, 0x4657_u16, StaticArray[0xbd_u8, 0x3b_u8, 0x95_u8, 0x67_u8, 0xeb_u8, 0x30_u8, 0xc_u8, 0xed_u8])
   struct IFhTarget
     lpVtbl : IFhTargetVTbl*
   end
@@ -145,8 +145,8 @@ lib LibWin32
     get_item : Proc(IFhScopeIterator*, UInt8**, HRESULT)
   end
 
-  IFhScopeIterator_GUID = LibC::GUID.new("3197abce-532a-44c6-8615-f3666566a720")
-  CLSID_IFhScopeIterator = "3197abce-532a-44c6-8615-f3666566a720"
+  IFhScopeIterator_GUID = "3197abce-532a-44c6-8615-f3666566a720"
+  IID_IFhScopeIterator = LibC::GUID.new(0x3197abce_u32, 0x532a_u16, 0x44c6_u16, StaticArray[0x86_u8, 0x15_u8, 0xf3_u8, 0x66_u8, 0x65_u8, 0x66_u8, 0xa7_u8, 0x20_u8])
   struct IFhScopeIterator
     lpVtbl : IFhScopeIteratorVTbl*
   end
@@ -171,8 +171,8 @@ lib LibWin32
     query_protection_status : Proc(IFhConfigMgr*, UInt32*, UInt8**, HRESULT)
   end
 
-  IFhConfigMgr_GUID = LibC::GUID.new("6a5fea5b-bf8f-4ee5-b8c3-44d8a0d7331c")
-  CLSID_IFhConfigMgr = "6a5fea5b-bf8f-4ee5-b8c3-44d8a0d7331c"
+  IFhConfigMgr_GUID = "6a5fea5b-bf8f-4ee5-b8c3-44d8a0d7331c"
+  IID_IFhConfigMgr = LibC::GUID.new(0x6a5fea5b_u32, 0xbf8f_u16, 0x4ee5_u16, StaticArray[0xb8_u8, 0xc3_u8, 0x44_u8, 0xd8_u8, 0xa0_u8, 0xd7_u8, 0x33_u8, 0x1c_u8])
   struct IFhConfigMgr
     lpVtbl : IFhConfigMgrVTbl*
   end
@@ -188,8 +188,8 @@ lib LibWin32
     perform_reassociation : Proc(IFhReassociation*, LibC::BOOL, HRESULT)
   end
 
-  IFhReassociation_GUID = LibC::GUID.new("6544a28a-f68d-47ac-91ef-16b2b36aa3ee")
-  CLSID_IFhReassociation = "6544a28a-f68d-47ac-91ef-16b2b36aa3ee"
+  IFhReassociation_GUID = "6544a28a-f68d-47ac-91ef-16b2b36aa3ee"
+  IID_IFhReassociation = LibC::GUID.new(0x6544a28a_u32, 0xf68d_u16, 0x47ac_u16, StaticArray[0x91_u8, 0xef_u8, 0x16_u8, 0xb2_u8, 0xb3_u8, 0x6a_u8, 0xa3_u8, 0xee_u8])
   struct IFhReassociation
     lpVtbl : IFhReassociationVTbl*
   end

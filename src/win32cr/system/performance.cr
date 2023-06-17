@@ -205,34 +205,34 @@ lib LibWin32
   PLA_CAPABILITY_LEGACY_SVC = 16_u32
   PLA_CAPABILITY_AUTOLOGGER = 32_u32
   S_PDH = "04d66358-c4a1-419b-8023-23b73902de2c"
-  DataCollectorSet = LibC::GUID.new(0x3837521_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  TraceSession = LibC::GUID.new(0x383751c_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  TraceSessionCollection = LibC::GUID.new(0x3837530_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  TraceDataProvider = LibC::GUID.new(0x3837513_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  TraceDataProviderCollection = LibC::GUID.new(0x3837511_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  DataCollectorSetCollection = LibC::GUID.new(0x3837525_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  LegacyDataCollectorSet = LibC::GUID.new(0x3837526_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  LegacyDataCollectorSetCollection = LibC::GUID.new(0x3837527_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  LegacyTraceSession = LibC::GUID.new(0x3837528_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  LegacyTraceSessionCollection = LibC::GUID.new(0x3837529_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  ServerDataCollectorSet = LibC::GUID.new(0x3837531_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  ServerDataCollectorSetCollection = LibC::GUID.new(0x3837532_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  SystemDataCollectorSet = LibC::GUID.new(0x3837546_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  SystemDataCollectorSetCollection = LibC::GUID.new(0x3837547_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  BootTraceSession = LibC::GUID.new(0x3837538_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  BootTraceSessionCollection = LibC::GUID.new(0x3837539_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  SystemMonitor = LibC::GUID.new(0xc4d2d8e0_u32, 0xd1dd_u16, 0x11ce_u16, StaticArray[0x94_u8, 0xf_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  CounterItem = LibC::GUID.new(0xc4d2d8e0_u32, 0xd1dd_u16, 0x11ce_u16, StaticArray[0x94_u8, 0xf_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x48_u8])
-  Counters = LibC::GUID.new(0xb2b066d2_u32, 0x2aac_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2f_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  LogFileItem = LibC::GUID.new(0x16ec5be8_u32, 0xdf93_u16, 0x4237_u16, StaticArray[0x94_u8, 0xe4_u8, 0x9e_u8, 0xe9_u8, 0x18_u8, 0x11_u8, 0x1d_u8, 0x71_u8])
-  LogFiles = LibC::GUID.new(0x2735d9fd_u32, 0xf6b9_u16, 0x4f19_u16, StaticArray[0xa5_u8, 0xd9_u8, 0xe2_u8, 0xd0_u8, 0x68_u8, 0x58_u8, 0x4b_u8, 0xc5_u8])
-  CounterItem2 = LibC::GUID.new(0x43196c62_u32, 0xc31f_u16, 0x4ce3_u16, StaticArray[0xa0_u8, 0x2e_u8, 0x79_u8, 0xef_u8, 0xe0_u8, 0xf6_u8, 0xa5_u8, 0x25_u8])
-  SystemMonitor2 = LibC::GUID.new(0x7f30578c_u32, 0x5f38_u16, 0x4612_u16, StaticArray[0xac_u8, 0xfe_u8, 0x6e_u8, 0xd0_u8, 0x4c_u8, 0x7b_u8, 0x7a_u8, 0xf8_u8])
-  AppearPropPage = LibC::GUID.new(0xe49741e9_u32, 0x93a8_u16, 0x4ab1_u16, StaticArray[0x8e_u8, 0x96_u8, 0xbf_u8, 0x44_u8, 0x82_u8, 0x28_u8, 0x2e_u8, 0x9c_u8])
-  GeneralPropPage = LibC::GUID.new(0xc3e5d3d2_u32, 0x1a03_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2d_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  GraphPropPage = LibC::GUID.new(0xc3e5d3d3_u32, 0x1a03_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2d_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  SourcePropPage = LibC::GUID.new(0xcf32aa1_u32, 0x7571_u16, 0x11d0_u16, StaticArray[0x93_u8, 0xc4_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
-  CounterPropPage = LibC::GUID.new(0xcf948561_u32, 0xede8_u16, 0x11ce_u16, StaticArray[0x94_u8, 0x1e_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+  CLSID_DataCollectorSet = LibC::GUID.new(0x3837521_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_TraceSession = LibC::GUID.new(0x383751c_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_TraceSessionCollection = LibC::GUID.new(0x3837530_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_TraceDataProvider = LibC::GUID.new(0x3837513_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_TraceDataProviderCollection = LibC::GUID.new(0x3837511_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_DataCollectorSetCollection = LibC::GUID.new(0x3837525_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_LegacyDataCollectorSet = LibC::GUID.new(0x3837526_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_LegacyDataCollectorSetCollection = LibC::GUID.new(0x3837527_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_LegacyTraceSession = LibC::GUID.new(0x3837528_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_LegacyTraceSessionCollection = LibC::GUID.new(0x3837529_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_ServerDataCollectorSet = LibC::GUID.new(0x3837531_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_ServerDataCollectorSetCollection = LibC::GUID.new(0x3837532_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_SystemDataCollectorSet = LibC::GUID.new(0x3837546_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_SystemDataCollectorSetCollection = LibC::GUID.new(0x3837547_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_BootTraceSession = LibC::GUID.new(0x3837538_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_BootTraceSessionCollection = LibC::GUID.new(0x3837539_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+  CLSID_SystemMonitor = LibC::GUID.new(0xc4d2d8e0_u32, 0xd1dd_u16, 0x11ce_u16, StaticArray[0x94_u8, 0xf_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+  CLSID_CounterItem = LibC::GUID.new(0xc4d2d8e0_u32, 0xd1dd_u16, 0x11ce_u16, StaticArray[0x94_u8, 0xf_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x48_u8])
+  CLSID_Counters = LibC::GUID.new(0xb2b066d2_u32, 0x2aac_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2f_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+  CLSID_LogFileItem = LibC::GUID.new(0x16ec5be8_u32, 0xdf93_u16, 0x4237_u16, StaticArray[0x94_u8, 0xe4_u8, 0x9e_u8, 0xe9_u8, 0x18_u8, 0x11_u8, 0x1d_u8, 0x71_u8])
+  CLSID_LogFiles = LibC::GUID.new(0x2735d9fd_u32, 0xf6b9_u16, 0x4f19_u16, StaticArray[0xa5_u8, 0xd9_u8, 0xe2_u8, 0xd0_u8, 0x68_u8, 0x58_u8, 0x4b_u8, 0xc5_u8])
+  CLSID_CounterItem2 = LibC::GUID.new(0x43196c62_u32, 0xc31f_u16, 0x4ce3_u16, StaticArray[0xa0_u8, 0x2e_u8, 0x79_u8, 0xef_u8, 0xe0_u8, 0xf6_u8, 0xa5_u8, 0x25_u8])
+  CLSID_SystemMonitor2 = LibC::GUID.new(0x7f30578c_u32, 0x5f38_u16, 0x4612_u16, StaticArray[0xac_u8, 0xfe_u8, 0x6e_u8, 0xd0_u8, 0x4c_u8, 0x7b_u8, 0x7a_u8, 0xf8_u8])
+  CLSID_AppearPropPage = LibC::GUID.new(0xe49741e9_u32, 0x93a8_u16, 0x4ab1_u16, StaticArray[0x8e_u8, 0x96_u8, 0xbf_u8, 0x44_u8, 0x82_u8, 0x28_u8, 0x2e_u8, 0x9c_u8])
+  CLSID_GeneralPropPage = LibC::GUID.new(0xc3e5d3d2_u32, 0x1a03_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2d_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+  CLSID_GraphPropPage = LibC::GUID.new(0xc3e5d3d3_u32, 0x1a03_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2d_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+  CLSID_SourcePropPage = LibC::GUID.new(0xcf32aa1_u32, 0x7571_u16, 0x11d0_u16, StaticArray[0x93_u8, 0xc4_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
+  CLSID_CounterPropPage = LibC::GUID.new(0xcf948561_u32, 0xede8_u16, 0x11ce_u16, StaticArray[0x94_u8, 0x1e_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
 
   alias PLA_CABEXTRACT_CALLBACK = Proc(LibC::LPWSTR, Void*, Void)
   alias PERFLIBREQUEST = Proc(UInt32, Void*, UInt32, UInt32)
@@ -958,8 +958,8 @@ lib LibWin32
     get_value : Proc(IDataCollectorSet*, UInt8*, UInt8**, HRESULT)
   end
 
-  IDataCollectorSet_GUID = LibC::GUID.new("03837520-098b-11d8-9414-505054503030")
-  CLSID_IDataCollectorSet = "03837520-098b-11d8-9414-505054503030"
+  IDataCollectorSet_GUID = "03837520-098b-11d8-9414-505054503030"
+  IID_IDataCollectorSet = LibC::GUID.new(0x3837520_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IDataCollectorSet
     lpVtbl : IDataCollectorSetVTbl*
   end
@@ -999,8 +999,8 @@ lib LibWin32
     extract : Proc(IDataManager*, UInt8*, UInt8*, HRESULT)
   end
 
-  IDataManager_GUID = LibC::GUID.new("03837541-098b-11d8-9414-505054503030")
-  CLSID_IDataManager = "03837541-098b-11d8-9414-505054503030"
+  IDataManager_GUID = "03837541-098b-11d8-9414-505054503030"
+  IID_IDataManager = LibC::GUID.new(0x3837541_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IDataManager
     lpVtbl : IDataManagerVTbl*
   end
@@ -1023,8 +1023,8 @@ lib LibWin32
     put_send_cab_to : Proc(IFolderAction*, UInt8*, HRESULT)
   end
 
-  IFolderAction_GUID = LibC::GUID.new("03837543-098b-11d8-9414-505054503030")
-  CLSID_IFolderAction = "03837543-098b-11d8-9414-505054503030"
+  IFolderAction_GUID = "03837543-098b-11d8-9414-505054503030"
+  IID_IFolderAction = LibC::GUID.new(0x3837543_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IFolderAction
     lpVtbl : IFolderActionVTbl*
   end
@@ -1047,8 +1047,8 @@ lib LibWin32
     create_folder_action : Proc(IFolderActionCollection*, IFolderAction*, HRESULT)
   end
 
-  IFolderActionCollection_GUID = LibC::GUID.new("03837544-098b-11d8-9414-505054503030")
-  CLSID_IFolderActionCollection = "03837544-098b-11d8-9414-505054503030"
+  IFolderActionCollection_GUID = "03837544-098b-11d8-9414-505054503030"
+  IID_IFolderActionCollection = LibC::GUID.new(0x3837544_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IFolderActionCollection
     lpVtbl : IFolderActionCollectionVTbl*
   end
@@ -1088,8 +1088,8 @@ lib LibWin32
     create_output_location : Proc(IDataCollector*, Int16, UInt8**, HRESULT)
   end
 
-  IDataCollector_GUID = LibC::GUID.new("038374ff-098b-11d8-9414-505054503030")
-  CLSID_IDataCollector = "038374ff-098b-11d8-9414-505054503030"
+  IDataCollector_GUID = "038374ff-098b-11d8-9414-505054503030"
+  IID_IDataCollector = LibC::GUID.new(0x38374ff_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IDataCollector
     lpVtbl : IDataCollectorVTbl*
   end
@@ -1139,8 +1139,8 @@ lib LibWin32
     put_segment_max_records : Proc(IPerformanceCounterDataCollector*, UInt32, HRESULT)
   end
 
-  IPerformanceCounterDataCollector_GUID = LibC::GUID.new("03837506-098b-11d8-9414-505054503030")
-  CLSID_IPerformanceCounterDataCollector = "03837506-098b-11d8-9414-505054503030"
+  IPerformanceCounterDataCollector_GUID = "03837506-098b-11d8-9414-505054503030"
+  IID_IPerformanceCounterDataCollector = LibC::GUID.new(0x3837506_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IPerformanceCounterDataCollector
     lpVtbl : IPerformanceCounterDataCollectorVTbl*
   end
@@ -1220,8 +1220,8 @@ lib LibWin32
     get_trace_data_providers : Proc(ITraceDataCollector*, ITraceDataProviderCollection*, HRESULT)
   end
 
-  ITraceDataCollector_GUID = LibC::GUID.new("0383750b-098b-11d8-9414-505054503030")
-  CLSID_ITraceDataCollector = "0383750b-098b-11d8-9414-505054503030"
+  ITraceDataCollector_GUID = "0383750b-098b-11d8-9414-505054503030"
+  IID_ITraceDataCollector = LibC::GUID.new(0x383750b_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct ITraceDataCollector
     lpVtbl : ITraceDataCollectorVTbl*
   end
@@ -1279,8 +1279,8 @@ lib LibWin32
     put_system_state_file : Proc(IConfigurationDataCollector*, UInt8*, HRESULT)
   end
 
-  IConfigurationDataCollector_GUID = LibC::GUID.new("03837514-098b-11d8-9414-505054503030")
-  CLSID_IConfigurationDataCollector = "03837514-098b-11d8-9414-505054503030"
+  IConfigurationDataCollector_GUID = "03837514-098b-11d8-9414-505054503030"
+  IID_IConfigurationDataCollector = LibC::GUID.new(0x3837514_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IConfigurationDataCollector
     lpVtbl : IConfigurationDataCollectorVTbl*
   end
@@ -1336,8 +1336,8 @@ lib LibWin32
     put_trigger_data_collector_set : Proc(IAlertDataCollector*, UInt8*, HRESULT)
   end
 
-  IAlertDataCollector_GUID = LibC::GUID.new("03837516-098b-11d8-9414-505054503030")
-  CLSID_IAlertDataCollector = "03837516-098b-11d8-9414-505054503030"
+  IAlertDataCollector_GUID = "03837516-098b-11d8-9414-505054503030"
+  IID_IAlertDataCollector = LibC::GUID.new(0x3837516_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IAlertDataCollector
     lpVtbl : IAlertDataCollectorVTbl*
   end
@@ -1391,8 +1391,8 @@ lib LibWin32
     put_exclude_apis : Proc(IApiTracingDataCollector*, SAFEARRAY*, HRESULT)
   end
 
-  IApiTracingDataCollector_GUID = LibC::GUID.new("0383751a-098b-11d8-9414-505054503030")
-  CLSID_IApiTracingDataCollector = "0383751a-098b-11d8-9414-505054503030"
+  IApiTracingDataCollector_GUID = "0383751a-098b-11d8-9414-505054503030"
+  IID_IApiTracingDataCollector = LibC::GUID.new(0x383751a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IApiTracingDataCollector
     lpVtbl : IApiTracingDataCollectorVTbl*
   end
@@ -1416,8 +1416,8 @@ lib LibWin32
     create_data_collector : Proc(IDataCollectorCollection*, DataCollectorType, IDataCollector*, HRESULT)
   end
 
-  IDataCollectorCollection_GUID = LibC::GUID.new("03837502-098b-11d8-9414-505054503030")
-  CLSID_IDataCollectorCollection = "03837502-098b-11d8-9414-505054503030"
+  IDataCollectorCollection_GUID = "03837502-098b-11d8-9414-505054503030"
+  IID_IDataCollectorCollection = LibC::GUID.new(0x3837502_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IDataCollectorCollection
     lpVtbl : IDataCollectorCollectionVTbl*
   end
@@ -1440,8 +1440,8 @@ lib LibWin32
     get_data_collector_sets : Proc(IDataCollectorSetCollection*, UInt8*, UInt8*, HRESULT)
   end
 
-  IDataCollectorSetCollection_GUID = LibC::GUID.new("03837524-098b-11d8-9414-505054503030")
-  CLSID_IDataCollectorSetCollection = "03837524-098b-11d8-9414-505054503030"
+  IDataCollectorSetCollection_GUID = "03837524-098b-11d8-9414-505054503030"
+  IID_IDataCollectorSetCollection = LibC::GUID.new(0x3837524_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IDataCollectorSetCollection
     lpVtbl : IDataCollectorSetCollectionVTbl*
   end
@@ -1475,8 +1475,8 @@ lib LibWin32
     get_registered_processes : Proc(ITraceDataProvider*, IValueMap*, HRESULT)
   end
 
-  ITraceDataProvider_GUID = LibC::GUID.new("03837512-098b-11d8-9414-505054503030")
-  CLSID_ITraceDataProvider = "03837512-098b-11d8-9414-505054503030"
+  ITraceDataProvider_GUID = "03837512-098b-11d8-9414-505054503030"
+  IID_ITraceDataProvider = LibC::GUID.new(0x3837512_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct ITraceDataProvider
     lpVtbl : ITraceDataProviderVTbl*
   end
@@ -1501,8 +1501,8 @@ lib LibWin32
     get_trace_data_providers_by_process : Proc(ITraceDataProviderCollection*, UInt8*, UInt32, HRESULT)
   end
 
-  ITraceDataProviderCollection_GUID = LibC::GUID.new("03837510-098b-11d8-9414-505054503030")
-  CLSID_ITraceDataProviderCollection = "03837510-098b-11d8-9414-505054503030"
+  ITraceDataProviderCollection_GUID = "03837510-098b-11d8-9414-505054503030"
+  IID_ITraceDataProviderCollection = LibC::GUID.new(0x3837510_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct ITraceDataProviderCollection
     lpVtbl : ITraceDataProviderCollectionVTbl*
   end
@@ -1525,8 +1525,8 @@ lib LibWin32
     put_days : Proc(ISchedule*, WeekDays, HRESULT)
   end
 
-  ISchedule_GUID = LibC::GUID.new("0383753a-098b-11d8-9414-505054503030")
-  CLSID_ISchedule = "0383753a-098b-11d8-9414-505054503030"
+  ISchedule_GUID = "0383753a-098b-11d8-9414-505054503030"
+  IID_ISchedule = LibC::GUID.new(0x383753a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct ISchedule
     lpVtbl : IScheduleVTbl*
   end
@@ -1549,8 +1549,8 @@ lib LibWin32
     create_schedule : Proc(IScheduleCollection*, ISchedule*, HRESULT)
   end
 
-  IScheduleCollection_GUID = LibC::GUID.new("0383753d-098b-11d8-9414-505054503030")
-  CLSID_IScheduleCollection = "0383753d-098b-11d8-9414-505054503030"
+  IScheduleCollection_GUID = "0383753d-098b-11d8-9414-505054503030"
+  IID_IScheduleCollection = LibC::GUID.new(0x383753d_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IScheduleCollection
     lpVtbl : IScheduleCollectionVTbl*
   end
@@ -1575,8 +1575,8 @@ lib LibWin32
     put_value_map_type : Proc(IValueMapItem*, ValueMapType, HRESULT)
   end
 
-  IValueMapItem_GUID = LibC::GUID.new("03837533-098b-11d8-9414-505054503030")
-  CLSID_IValueMapItem = "03837533-098b-11d8-9414-505054503030"
+  IValueMapItem_GUID = "03837533-098b-11d8-9414-505054503030"
+  IID_IValueMapItem = LibC::GUID.new(0x3837533_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IValueMapItem
     lpVtbl : IValueMapItemVTbl*
   end
@@ -1605,8 +1605,8 @@ lib LibWin32
     create_value_map_item : Proc(IValueMap*, IValueMapItem*, HRESULT)
   end
 
-  IValueMap_GUID = LibC::GUID.new("03837534-098b-11d8-9414-505054503030")
-  CLSID_IValueMap = "03837534-098b-11d8-9414-505054503030"
+  IValueMap_GUID = "03837534-098b-11d8-9414-505054503030"
+  IID_IValueMap = LibC::GUID.new(0x3837534_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct IValueMap
     lpVtbl : IValueMapVTbl*
   end
@@ -1629,8 +1629,8 @@ lib LibWin32
     get_statistics : Proc(ICounterItem*, Float64*, Float64*, Float64*, Int32*, HRESULT)
   end
 
-  ICounterItem_GUID = LibC::GUID.new("771a9520-ee28-11ce-941e-008029004347")
-  CLSID_ICounterItem = "771a9520-ee28-11ce-941e-008029004347"
+  ICounterItem_GUID = "771a9520-ee28-11ce-941e-008029004347"
+  IID_ICounterItem = LibC::GUID.new(0x771a9520_u32, 0xee28_u16, 0x11ce_u16, StaticArray[0x94_u8, 0x1e_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
   struct ICounterItem
     lpVtbl : ICounterItemVTbl*
   end
@@ -1658,8 +1658,8 @@ lib LibWin32
     get_data_at : Proc(ICounterItem2*, Int32, SysmonDataType, VARIANT*, HRESULT)
   end
 
-  ICounterItem2_GUID = LibC::GUID.new("eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9")
-  CLSID_ICounterItem2 = "eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9"
+  ICounterItem2_GUID = "eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9"
+  IID_ICounterItem2 = LibC::GUID.new(0xeefcd4e1_u32, 0xea1c_u16, 0x4435_u16, StaticArray[0xb7_u8, 0xf4_u8, 0xe3_u8, 0x41_u8, 0xba_u8, 0x3_u8, 0xb4_u8, 0xf9_u8])
   struct ICounterItem2
     lpVtbl : ICounterItem2VTbl*
   end
@@ -1687,8 +1687,8 @@ lib LibWin32
     get_data_at : Proc(IICounterItemUnion*, Int32, SysmonDataType, VARIANT*, HRESULT)
   end
 
-  IICounterItemUnion_GUID = LibC::GUID.new("de1a6b74-9182-4c41-8e2c-24c2cd30ee83")
-  CLSID_IICounterItemUnion = "de1a6b74-9182-4c41-8e2c-24c2cd30ee83"
+  IICounterItemUnion_GUID = "de1a6b74-9182-4c41-8e2c-24c2cd30ee83"
+  IID_IICounterItemUnion = LibC::GUID.new(0xde1a6b74_u32, 0x9182_u16, 0x4c41_u16, StaticArray[0x8e_u8, 0x2c_u8, 0x24_u8, 0xc2_u8, 0xcd_u8, 0x30_u8, 0xee_u8, 0x83_u8])
   struct IICounterItemUnion
     lpVtbl : IICounterItemUnionVTbl*
   end
@@ -1703,8 +1703,8 @@ lib LibWin32
     invoke : Proc(DICounterItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DICounterItem_GUID = LibC::GUID.new("c08c4ff2-0e2e-11cf-942c-008029004347")
-  CLSID_DICounterItem = "c08c4ff2-0e2e-11cf-942c-008029004347"
+  DICounterItem_GUID = "c08c4ff2-0e2e-11cf-942c-008029004347"
+  IID_DICounterItem = LibC::GUID.new(0xc08c4ff2_u32, 0xe2e_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2c_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
   struct DICounterItem
     lpVtbl : DICounterItemVTbl*
   end
@@ -1724,8 +1724,8 @@ lib LibWin32
     remove : Proc(ICounters*, VARIANT, HRESULT)
   end
 
-  ICounters_GUID = LibC::GUID.new("79167962-28fc-11cf-942f-008029004347")
-  CLSID_ICounters = "79167962-28fc-11cf-942f-008029004347"
+  ICounters_GUID = "79167962-28fc-11cf-942f-008029004347"
+  IID_ICounters = LibC::GUID.new(0x79167962_u32, 0x28fc_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2f_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
   struct ICounters
     lpVtbl : ICountersVTbl*
   end
@@ -1737,8 +1737,8 @@ lib LibWin32
     get_path : Proc(ILogFileItem*, UInt8**, HRESULT)
   end
 
-  ILogFileItem_GUID = LibC::GUID.new("d6b518dd-05c7-418a-89e6-4f9ce8c6841e")
-  CLSID_ILogFileItem = "d6b518dd-05c7-418a-89e6-4f9ce8c6841e"
+  ILogFileItem_GUID = "d6b518dd-05c7-418a-89e6-4f9ce8c6841e"
+  IID_ILogFileItem = LibC::GUID.new(0xd6b518dd_u32, 0x5c7_u16, 0x418a_u16, StaticArray[0x89_u8, 0xe6_u8, 0x4f_u8, 0x9c_u8, 0xe8_u8, 0xc6_u8, 0x84_u8, 0x1e_u8])
   struct ILogFileItem
     lpVtbl : ILogFileItemVTbl*
   end
@@ -1753,8 +1753,8 @@ lib LibWin32
     invoke : Proc(DILogFileItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DILogFileItem_GUID = LibC::GUID.new("8d093ffc-f777-4917-82d1-833fbc54c58f")
-  CLSID_DILogFileItem = "8d093ffc-f777-4917-82d1-833fbc54c58f"
+  DILogFileItem_GUID = "8d093ffc-f777-4917-82d1-833fbc54c58f"
+  IID_DILogFileItem = LibC::GUID.new(0x8d093ffc_u32, 0xf777_u16, 0x4917_u16, StaticArray[0x82_u8, 0xd1_u8, 0x83_u8, 0x3f_u8, 0xbc_u8, 0x54_u8, 0xc5_u8, 0x8f_u8])
   struct DILogFileItem
     lpVtbl : DILogFileItemVTbl*
   end
@@ -1774,8 +1774,8 @@ lib LibWin32
     remove : Proc(ILogFiles*, VARIANT, HRESULT)
   end
 
-  ILogFiles_GUID = LibC::GUID.new("6a2a97e6-6851-41ea-87ad-2a8225335865")
-  CLSID_ILogFiles = "6a2a97e6-6851-41ea-87ad-2a8225335865"
+  ILogFiles_GUID = "6a2a97e6-6851-41ea-87ad-2a8225335865"
+  IID_ILogFiles = LibC::GUID.new(0x6a2a97e6_u32, 0x6851_u16, 0x41ea_u16, StaticArray[0x87_u8, 0xad_u8, 0x2a_u8, 0x82_u8, 0x25_u8, 0x33_u8, 0x58_u8, 0x65_u8])
   struct ILogFiles
     lpVtbl : ILogFilesVTbl*
   end
@@ -1862,8 +1862,8 @@ lib LibWin32
     get_sql_log_set_name : Proc(ISystemMonitor*, UInt8**, HRESULT)
   end
 
-  ISystemMonitor_GUID = LibC::GUID.new("194eb241-c32c-11cf-9398-00aa00a3ddea")
-  CLSID_ISystemMonitor = "194eb241-c32c-11cf-9398-00aa00a3ddea"
+  ISystemMonitor_GUID = "194eb241-c32c-11cf-9398-00aa00a3ddea"
+  IID_ISystemMonitor = LibC::GUID.new(0x194eb241_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
   struct ISystemMonitor
     lpVtbl : ISystemMonitorVTbl*
   end
@@ -1970,8 +1970,8 @@ lib LibWin32
     load_settings : Proc(ISystemMonitor2*, UInt8*, HRESULT)
   end
 
-  ISystemMonitor2_GUID = LibC::GUID.new("08e3206a-5fd2-4fde-a8a5-8cb3b63d2677")
-  CLSID_ISystemMonitor2 = "08e3206a-5fd2-4fde-a8a5-8cb3b63d2677"
+  ISystemMonitor2_GUID = "08e3206a-5fd2-4fde-a8a5-8cb3b63d2677"
+  IID_ISystemMonitor2 = LibC::GUID.new(0x8e3206a_u32, 0x5fd2_u16, 0x4fde_u16, StaticArray[0xa8_u8, 0xa5_u8, 0x8c_u8, 0xb3_u8, 0xb6_u8, 0x3d_u8, 0x26_u8, 0x77_u8])
   struct ISystemMonitor2
     lpVtbl : ISystemMonitor2VTbl*
   end
@@ -2078,8 +2078,8 @@ lib LibWin32
     load_settings : Proc(IISystemMonitorUnion*, UInt8*, HRESULT)
   end
 
-  IISystemMonitorUnion_GUID = LibC::GUID.new("c8a77338-265f-4de5-aa25-c7da1ce5a8f4")
-  CLSID_IISystemMonitorUnion = "c8a77338-265f-4de5-aa25-c7da1ce5a8f4"
+  IISystemMonitorUnion_GUID = "c8a77338-265f-4de5-aa25-c7da1ce5a8f4"
+  IID_IISystemMonitorUnion = LibC::GUID.new(0xc8a77338_u32, 0x265f_u16, 0x4de5_u16, StaticArray[0xaa_u8, 0x25_u8, 0xc7_u8, 0xda_u8, 0x1c_u8, 0xe5_u8, 0xa8_u8, 0xf4_u8])
   struct IISystemMonitorUnion
     lpVtbl : IISystemMonitorUnionVTbl*
   end
@@ -2094,8 +2094,8 @@ lib LibWin32
     invoke : Proc(DISystemMonitor*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DISystemMonitor_GUID = LibC::GUID.new("13d73d81-c32e-11cf-9398-00aa00a3ddea")
-  CLSID_DISystemMonitor = "13d73d81-c32e-11cf-9398-00aa00a3ddea"
+  DISystemMonitor_GUID = "13d73d81-c32e-11cf-9398-00aa00a3ddea"
+  IID_DISystemMonitor = LibC::GUID.new(0x13d73d81_u32, 0xc32e_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
   struct DISystemMonitor
     lpVtbl : DISystemMonitorVTbl*
   end
@@ -2110,8 +2110,8 @@ lib LibWin32
     invoke : Proc(DISystemMonitorInternal*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DISystemMonitorInternal_GUID = LibC::GUID.new("194eb242-c32c-11cf-9398-00aa00a3ddea")
-  CLSID_DISystemMonitorInternal = "194eb242-c32c-11cf-9398-00aa00a3ddea"
+  DISystemMonitorInternal_GUID = "194eb242-c32c-11cf-9398-00aa00a3ddea"
+  IID_DISystemMonitorInternal = LibC::GUID.new(0x194eb242_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
   struct DISystemMonitorInternal
     lpVtbl : DISystemMonitorInternalVTbl*
   end
@@ -2127,8 +2127,8 @@ lib LibWin32
     on_dbl_click : Proc(ISystemMonitorEvents*, Int32, Void)
   end
 
-  ISystemMonitorEvents_GUID = LibC::GUID.new("ee660ea0-4abd-11cf-943a-008029004347")
-  CLSID_ISystemMonitorEvents = "ee660ea0-4abd-11cf-943a-008029004347"
+  ISystemMonitorEvents_GUID = "ee660ea0-4abd-11cf-943a-008029004347"
+  IID_ISystemMonitorEvents = LibC::GUID.new(0xee660ea0_u32, 0x4abd_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
   struct ISystemMonitorEvents
     lpVtbl : ISystemMonitorEventsVTbl*
   end
@@ -2143,8 +2143,8 @@ lib LibWin32
     invoke : Proc(DISystemMonitorEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  DISystemMonitorEvents_GUID = LibC::GUID.new("84979930-4ab3-11cf-943a-008029004347")
-  CLSID_DISystemMonitorEvents = "84979930-4ab3-11cf-943a-008029004347"
+  DISystemMonitorEvents_GUID = "84979930-4ab3-11cf-943a-008029004347"
+  IID_DISystemMonitorEvents = LibC::GUID.new(0x84979930_u32, 0x4ab3_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
   struct DISystemMonitorEvents
     lpVtbl : DISystemMonitorEventsVTbl*
   end

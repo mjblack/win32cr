@@ -25,8 +25,8 @@ lib LibWin32
     activate : Proc(INotificationActivationCallback*, LibC::LPWSTR, LibC::LPWSTR, NOTIFICATION_USER_INPUT_DATA*, UInt32, HRESULT)
   end
 
-  INotificationActivationCallback_GUID = LibC::GUID.new("53e31837-6600-4a81-9395-75cffe746f94")
-  CLSID_INotificationActivationCallback = "53e31837-6600-4a81-9395-75cffe746f94"
+  INotificationActivationCallback_GUID = "53e31837-6600-4a81-9395-75cffe746f94"
+  IID_INotificationActivationCallback = LibC::GUID.new(0x53e31837_u32, 0x6600_u16, 0x4a81_u16, StaticArray[0x93_u8, 0x95_u8, 0x75_u8, 0xcf_u8, 0xfe_u8, 0x74_u8, 0x6f_u8, 0x94_u8])
   struct INotificationActivationCallback
     lpVtbl : INotificationActivationCallbackVTbl*
   end

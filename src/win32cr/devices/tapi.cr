@@ -1135,11 +1135,11 @@ lib LibWin32
   Atypole = 2_i32
   Atyppicture = 3_i32
   Atypmax = 4_i32
-  TAPI = LibC::GUID.new(0x21d6d48e_u32, 0xa88b_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xdd_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
-  DispatchMapper = LibC::GUID.new(0xe9225296_u32, 0xc759_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
-  RequestMakeCall = LibC::GUID.new(0xac48ffe0_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
-  Rendezvous = LibC::GUID.new(0xf1029e5b_u32, 0xcb5b_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x59_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
-  McastAddressAllocation = LibC::GUID.new(0xdf0daef2_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
+  CLSID_TAPI = LibC::GUID.new(0x21d6d48e_u32, 0xa88b_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xdd_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
+  CLSID_DispatchMapper = LibC::GUID.new(0xe9225296_u32, 0xc759_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
+  CLSID_RequestMakeCall = LibC::GUID.new(0xac48ffe0_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
+  CLSID_Rendezvous = LibC::GUID.new(0xf1029e5b_u32, 0xcb5b_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x59_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
+  CLSID_McastAddressAllocation = LibC::GUID.new(0xdf0daef2_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
 
   alias LINECALLBACK = Proc(UInt32, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, Void)
   alias PHONECALLBACK = Proc(UInt32, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, Void)
@@ -2895,8 +2895,8 @@ lib LibWin32
     get_event_filter : Proc(ITTAPI*, Int32*, HRESULT)
   end
 
-  ITTAPI_GUID = LibC::GUID.new("b1efc382-9355-11d0-835c-00aa003ccabd")
-  CLSID_ITTAPI = "b1efc382-9355-11d0-835c-00aa003ccabd"
+  ITTAPI_GUID = "b1efc382-9355-11d0-835c-00aa003ccabd"
+  IID_ITTAPI = LibC::GUID.new(0xb1efc382_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITTAPI
     lpVtbl : ITTAPIVTbl*
   end
@@ -2930,8 +2930,8 @@ lib LibWin32
     create_empty_collection_object : Proc(ITTAPI2*, ITCollection2*, HRESULT)
   end
 
-  ITTAPI2_GUID = LibC::GUID.new("54fbdc8c-d90f-4dad-9695-b373097f094b")
-  CLSID_ITTAPI2 = "54fbdc8c-d90f-4dad-9695-b373097f094b"
+  ITTAPI2_GUID = "54fbdc8c-d90f-4dad-9695-b373097f094b"
+  IID_ITTAPI2 = LibC::GUID.new(0x54fbdc8c_u32, 0xd90f_u16, 0x4dad_u16, StaticArray[0x96_u8, 0x95_u8, 0xb3_u8, 0x73_u8, 0x9_u8, 0x7f_u8, 0x9_u8, 0x4b_u8])
   struct ITTAPI2
     lpVtbl : ITTAPI2VTbl*
   end
@@ -2948,8 +2948,8 @@ lib LibWin32
     query_media_type : Proc(ITMediaSupport*, Int32, Int16*, HRESULT)
   end
 
-  ITMediaSupport_GUID = LibC::GUID.new("b1efc384-9355-11d0-835c-00aa003ccabd")
-  CLSID_ITMediaSupport = "b1efc384-9355-11d0-835c-00aa003ccabd"
+  ITMediaSupport_GUID = "b1efc384-9355-11d0-835c-00aa003ccabd"
+  IID_ITMediaSupport = LibC::GUID.new(0xb1efc384_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITMediaSupport
     lpVtbl : ITMediaSupportVTbl*
   end
@@ -2971,8 +2971,8 @@ lib LibWin32
     get_media_types : Proc(ITPluggableTerminalClassInfo*, Int32*, HRESULT)
   end
 
-  ITPluggableTerminalClassInfo_GUID = LibC::GUID.new("41757f4a-cf09-4b34-bc96-0a79d2390076")
-  CLSID_ITPluggableTerminalClassInfo = "41757f4a-cf09-4b34-bc96-0a79d2390076"
+  ITPluggableTerminalClassInfo_GUID = "41757f4a-cf09-4b34-bc96-0a79d2390076"
+  IID_ITPluggableTerminalClassInfo = LibC::GUID.new(0x41757f4a_u32, 0xcf09_u16, 0x4b34_u16, StaticArray[0xbc_u8, 0x96_u8, 0xa_u8, 0x79_u8, 0xd2_u8, 0x39_u8, 0x0_u8, 0x76_u8])
   struct ITPluggableTerminalClassInfo
     lpVtbl : ITPluggableTerminalClassInfoVTbl*
   end
@@ -2989,8 +2989,8 @@ lib LibWin32
     get_clsid : Proc(ITPluggableTerminalSuperclassInfo*, UInt8**, HRESULT)
   end
 
-  ITPluggableTerminalSuperclassInfo_GUID = LibC::GUID.new("6d54e42c-4625-4359-a6f7-631999107e05")
-  CLSID_ITPluggableTerminalSuperclassInfo = "6d54e42c-4625-4359-a6f7-631999107e05"
+  ITPluggableTerminalSuperclassInfo_GUID = "6d54e42c-4625-4359-a6f7-631999107e05"
+  IID_ITPluggableTerminalSuperclassInfo = LibC::GUID.new(0x6d54e42c_u32, 0x4625_u16, 0x4359_u16, StaticArray[0xa6_u8, 0xf7_u8, 0x63_u8, 0x19_u8, 0x99_u8, 0x10_u8, 0x7e_u8, 0x5_u8])
   struct ITPluggableTerminalSuperclassInfo
     lpVtbl : ITPluggableTerminalSuperclassInfoVTbl*
   end
@@ -3011,8 +3011,8 @@ lib LibWin32
     get_default_static_terminal : Proc(ITTerminalSupport*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)
   end
 
-  ITTerminalSupport_GUID = LibC::GUID.new("b1efc385-9355-11d0-835c-00aa003ccabd")
-  CLSID_ITTerminalSupport = "b1efc385-9355-11d0-835c-00aa003ccabd"
+  ITTerminalSupport_GUID = "b1efc385-9355-11d0-835c-00aa003ccabd"
+  IID_ITTerminalSupport = LibC::GUID.new(0xb1efc385_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITTerminalSupport
     lpVtbl : ITTerminalSupportVTbl*
   end
@@ -3037,8 +3037,8 @@ lib LibWin32
     enumerate_pluggable_terminal_classes : Proc(ITTerminalSupport2*, Guid, Int32, IEnumPluggableTerminalClassInfo*, HRESULT)
   end
 
-  ITTerminalSupport2_GUID = LibC::GUID.new("f3eb39bc-1b1f-4e99-a0c0-56305c4dd591")
-  CLSID_ITTerminalSupport2 = "f3eb39bc-1b1f-4e99-a0c0-56305c4dd591"
+  ITTerminalSupport2_GUID = "f3eb39bc-1b1f-4e99-a0c0-56305c4dd591"
+  IID_ITTerminalSupport2 = LibC::GUID.new(0xf3eb39bc_u32, 0x1b1f_u16, 0x4e99_u16, StaticArray[0xa0_u8, 0xc0_u8, 0x56_u8, 0x30_u8, 0x5c_u8, 0x4d_u8, 0xd5_u8, 0x91_u8])
   struct ITTerminalSupport2
     lpVtbl : ITTerminalSupport2VTbl*
   end
@@ -3068,8 +3068,8 @@ lib LibWin32
     get_do_not_disturb : Proc(ITAddress*, Int16*, HRESULT)
   end
 
-  ITAddress_GUID = LibC::GUID.new("b1efc386-9355-11d0-835c-00aa003ccabd")
-  CLSID_ITAddress = "b1efc386-9355-11d0-835c-00aa003ccabd"
+  ITAddress_GUID = "b1efc386-9355-11d0-835c-00aa003ccabd"
+  IID_ITAddress = LibC::GUID.new(0xb1efc386_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITAddress
     lpVtbl : ITAddressVTbl*
   end
@@ -3109,8 +3109,8 @@ lib LibWin32
     negotiate_ext_version : Proc(ITAddress2*, Int32, Int32, Int32*, HRESULT)
   end
 
-  ITAddress2_GUID = LibC::GUID.new("b0ae5d9b-be51-46c9-b0f7-dfa8a22a8bc4")
-  CLSID_ITAddress2 = "b0ae5d9b-be51-46c9-b0f7-dfa8a22a8bc4"
+  ITAddress2_GUID = "b0ae5d9b-be51-46c9-b0f7-dfa8a22a8bc4"
+  IID_ITAddress2 = LibC::GUID.new(0xb0ae5d9b_u32, 0xbe51_u16, 0x46c9_u16, StaticArray[0xb0_u8, 0xf7_u8, 0xdf_u8, 0xa8_u8, 0xa2_u8, 0x2a_u8, 0x8b_u8, 0xc4_u8])
   struct ITAddress2
     lpVtbl : ITAddress2VTbl*
   end
@@ -3133,8 +3133,8 @@ lib LibWin32
     enumerate_device_classes : Proc(ITAddressCapabilities*, IEnumBstr*, HRESULT)
   end
 
-  ITAddressCapabilities_GUID = LibC::GUID.new("8df232f5-821b-11d1-bb5c-00c04fb6809f")
-  CLSID_ITAddressCapabilities = "8df232f5-821b-11d1-bb5c-00c04fb6809f"
+  ITAddressCapabilities_GUID = "8df232f5-821b-11d1-bb5c-00c04fb6809f"
+  IID_ITAddressCapabilities = LibC::GUID.new(0x8df232f5_u32, 0x821b_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITAddressCapabilities
     lpVtbl : ITAddressCapabilitiesVTbl*
   end
@@ -3182,8 +3182,8 @@ lib LibWin32
     negotiate_ext_version : Proc(ITPhone*, Int32, Int32, Int32*, HRESULT)
   end
 
-  ITPhone_GUID = LibC::GUID.new("09d48db4-10cc-4388-9de7-a8465618975a")
-  CLSID_ITPhone = "09d48db4-10cc-4388-9de7-a8465618975a"
+  ITPhone_GUID = "09d48db4-10cc-4388-9de7-a8465618975a"
+  IID_ITPhone = LibC::GUID.new(0x9d48db4_u32, 0x10cc_u16, 0x4388_u16, StaticArray[0x9d_u8, 0xe7_u8, 0xa8_u8, 0x46_u8, 0x56_u8, 0x18_u8, 0x97_u8, 0x5a_u8])
   struct ITPhone
     lpVtbl : ITPhoneVTbl*
   end
@@ -3230,8 +3230,8 @@ lib LibWin32
     get_selected_calls : Proc(ITAutomatedPhoneControl*, VARIANT*, HRESULT)
   end
 
-  ITAutomatedPhoneControl_GUID = LibC::GUID.new("1ee1af0e-6159-4a61-b79b-6a4ba3fc9dfc")
-  CLSID_ITAutomatedPhoneControl = "1ee1af0e-6159-4a61-b79b-6a4ba3fc9dfc"
+  ITAutomatedPhoneControl_GUID = "1ee1af0e-6159-4a61-b79b-6a4ba3fc9dfc"
+  IID_ITAutomatedPhoneControl = LibC::GUID.new(0x1ee1af0e_u32, 0x6159_u16, 0x4a61_u16, StaticArray[0xb7_u8, 0x9b_u8, 0x6a_u8, 0x4b_u8, 0xa3_u8, 0xfc_u8, 0x9d_u8, 0xfc_u8])
   struct ITAutomatedPhoneControl
     lpVtbl : ITAutomatedPhoneControlVTbl*
   end
@@ -3264,8 +3264,8 @@ lib LibWin32
     remove_from_conference : Proc(ITBasicCallControl*, HRESULT)
   end
 
-  ITBasicCallControl_GUID = LibC::GUID.new("b1efc389-9355-11d0-835c-00aa003ccabd")
-  CLSID_ITBasicCallControl = "b1efc389-9355-11d0-835c-00aa003ccabd"
+  ITBasicCallControl_GUID = "b1efc389-9355-11d0-835c-00aa003ccabd"
+  IID_ITBasicCallControl = LibC::GUID.new(0xb1efc389_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITBasicCallControl
     lpVtbl : ITBasicCallControlVTbl*
   end
@@ -3293,8 +3293,8 @@ lib LibWin32
     release_user_user_info : Proc(ITCallInfo*, HRESULT)
   end
 
-  ITCallInfo_GUID = LibC::GUID.new("350f85d1-1227-11d3-83d4-00c04fb6809f")
-  CLSID_ITCallInfo = "350f85d1-1227-11d3-83d4-00c04fb6809f"
+  ITCallInfo_GUID = "350f85d1-1227-11d3-83d4-00c04fb6809f"
+  IID_ITCallInfo = LibC::GUID.new(0x350f85d1_u32, 0x1227_u16, 0x11d3_u16, StaticArray[0x83_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITCallInfo
     lpVtbl : ITCallInfoVTbl*
   end
@@ -3324,8 +3324,8 @@ lib LibWin32
     put_event_filter : Proc(ITCallInfo2*, TAPI_EVENT, Int32, Int16, HRESULT)
   end
 
-  ITCallInfo2_GUID = LibC::GUID.new("94d70ca6-7ab0-4daa-81ca-b8f8643faec1")
-  CLSID_ITCallInfo2 = "94d70ca6-7ab0-4daa-81ca-b8f8643faec1"
+  ITCallInfo2_GUID = "94d70ca6-7ab0-4daa-81ca-b8f8643faec1"
+  IID_ITCallInfo2 = LibC::GUID.new(0x94d70ca6_u32, 0x7ab0_u16, 0x4daa_u16, StaticArray[0x81_u8, 0xca_u8, 0xb8_u8, 0xf8_u8, 0x64_u8, 0x3f_u8, 0xae_u8, 0xc1_u8])
   struct ITCallInfo2
     lpVtbl : ITCallInfo2VTbl*
   end
@@ -3346,8 +3346,8 @@ lib LibWin32
     get_direction : Proc(ITTerminal*, TERMINAL_DIRECTION*, HRESULT)
   end
 
-  ITTerminal_GUID = LibC::GUID.new("b1efc38a-9355-11d0-835c-00aa003ccabd")
-  CLSID_ITTerminal = "b1efc38a-9355-11d0-835c-00aa003ccabd"
+  ITTerminal_GUID = "b1efc38a-9355-11d0-835c-00aa003ccabd"
+  IID_ITTerminal = LibC::GUID.new(0xb1efc38a_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITTerminal
     lpVtbl : ITTerminalVTbl*
   end
@@ -3368,8 +3368,8 @@ lib LibWin32
     remove_track_terminal : Proc(ITMultiTrackTerminal*, ITTerminal, HRESULT)
   end
 
-  ITMultiTrackTerminal_GUID = LibC::GUID.new("fe040091-ade8-4072-95c9-bf7de8c54b44")
-  CLSID_ITMultiTrackTerminal = "fe040091-ade8-4072-95c9-bf7de8c54b44"
+  ITMultiTrackTerminal_GUID = "fe040091-ade8-4072-95c9-bf7de8c54b44"
+  IID_ITMultiTrackTerminal = LibC::GUID.new(0xfe040091_u32, 0xade8_u16, 0x4072_u16, StaticArray[0x95_u8, 0xc9_u8, 0xbf_u8, 0x7d_u8, 0xe8_u8, 0xc5_u8, 0x4b_u8, 0x44_u8])
   struct ITMultiTrackTerminal
     lpVtbl : ITMultiTrackTerminalVTbl*
   end
@@ -3390,8 +3390,8 @@ lib LibWin32
     get_empty_audio_format_for_scripting : Proc(ITFileTrack*, ITScriptableAudioFormat*, HRESULT)
   end
 
-  ITFileTrack_GUID = LibC::GUID.new("31ca6ea9-c08a-4bea-8811-8e9c1ba3ea3a")
-  CLSID_ITFileTrack = "31ca6ea9-c08a-4bea-8811-8e9c1ba3ea3a"
+  ITFileTrack_GUID = "31ca6ea9-c08a-4bea-8811-8e9c1ba3ea3a"
+  IID_ITFileTrack = LibC::GUID.new(0x31ca6ea9_u32, 0xc08a_u16, 0x4bea_u16, StaticArray[0x88_u8, 0x11_u8, 0x8e_u8, 0x9c_u8, 0x1b_u8, 0xa3_u8, 0xea_u8, 0x3a_u8])
   struct ITFileTrack
     lpVtbl : ITFileTrackVTbl*
   end
@@ -3408,8 +3408,8 @@ lib LibWin32
     get_play_list : Proc(ITMediaPlayback*, VARIANT*, HRESULT)
   end
 
-  ITMediaPlayback_GUID = LibC::GUID.new("627e8ae6-ae4c-4a69-bb63-2ad625404b77")
-  CLSID_ITMediaPlayback = "627e8ae6-ae4c-4a69-bb63-2ad625404b77"
+  ITMediaPlayback_GUID = "627e8ae6-ae4c-4a69-bb63-2ad625404b77"
+  IID_ITMediaPlayback = LibC::GUID.new(0x627e8ae6_u32, 0xae4c_u16, 0x4a69_u16, StaticArray[0xbb_u8, 0x63_u8, 0x2a_u8, 0xd6_u8, 0x25_u8, 0x40_u8, 0x4b_u8, 0x77_u8])
   struct ITMediaPlayback
     lpVtbl : ITMediaPlaybackVTbl*
   end
@@ -3426,8 +3426,8 @@ lib LibWin32
     get_file_name : Proc(ITMediaRecord*, UInt8**, HRESULT)
   end
 
-  ITMediaRecord_GUID = LibC::GUID.new("f5dd4592-5476-4cc1-9d4d-fad3eefe7db2")
-  CLSID_ITMediaRecord = "f5dd4592-5476-4cc1-9d4d-fad3eefe7db2"
+  ITMediaRecord_GUID = "f5dd4592-5476-4cc1-9d4d-fad3eefe7db2"
+  IID_ITMediaRecord = LibC::GUID.new(0xf5dd4592_u32, 0x5476_u16, 0x4cc1_u16, StaticArray[0x9d_u8, 0x4d_u8, 0xfa_u8, 0xd3_u8, 0xee_u8, 0xfe_u8, 0x7d_u8, 0xb2_u8])
   struct ITMediaRecord
     lpVtbl : ITMediaRecordVTbl*
   end
@@ -3446,8 +3446,8 @@ lib LibWin32
     get_media_state : Proc(ITMediaControl*, TERMINAL_MEDIA_STATE*, HRESULT)
   end
 
-  ITMediaControl_GUID = LibC::GUID.new("c445dde8-5199-4bc7-9807-5ffb92e42e09")
-  CLSID_ITMediaControl = "c445dde8-5199-4bc7-9807-5ffb92e42e09"
+  ITMediaControl_GUID = "c445dde8-5199-4bc7-9807-5ffb92e42e09"
+  IID_ITMediaControl = LibC::GUID.new(0xc445dde8_u32, 0x5199_u16, 0x4bc7_u16, StaticArray[0x98_u8, 0x7_u8, 0x5f_u8, 0xfb_u8, 0x92_u8, 0xe4_u8, 0x2e_u8, 0x9_u8])
   struct ITMediaControl
     lpVtbl : ITMediaControlVTbl*
   end
@@ -3466,8 +3466,8 @@ lib LibWin32
     get_balance : Proc(ITBasicAudioTerminal*, Int32*, HRESULT)
   end
 
-  ITBasicAudioTerminal_GUID = LibC::GUID.new("b1efc38d-9355-11d0-835c-00aa003ccabd")
-  CLSID_ITBasicAudioTerminal = "b1efc38d-9355-11d0-835c-00aa003ccabd"
+  ITBasicAudioTerminal_GUID = "b1efc38d-9355-11d0-835c-00aa003ccabd"
+  IID_ITBasicAudioTerminal = LibC::GUID.new(0xb1efc38d_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITBasicAudioTerminal
     lpVtbl : ITBasicAudioTerminalVTbl*
   end
@@ -3483,8 +3483,8 @@ lib LibWin32
     get_wave_id : Proc(ITStaticAudioTerminal*, Int32*, HRESULT)
   end
 
-  ITStaticAudioTerminal_GUID = LibC::GUID.new("a86b7871-d14c-48e6-922e-a8d15f984800")
-  CLSID_ITStaticAudioTerminal = "a86b7871-d14c-48e6-922e-a8d15f984800"
+  ITStaticAudioTerminal_GUID = "a86b7871-d14c-48e6-922e-a8d15f984800"
+  IID_ITStaticAudioTerminal = LibC::GUID.new(0xa86b7871_u32, 0xd14c_u16, 0x48e6_u16, StaticArray[0x92_u8, 0x2e_u8, 0xa8_u8, 0xd1_u8, 0x5f_u8, 0x98_u8, 0x48_u8, 0x0_u8])
   struct ITStaticAudioTerminal
     lpVtbl : ITStaticAudioTerminalVTbl*
   end
@@ -3504,8 +3504,8 @@ lib LibWin32
     get_state : Proc(ITCallHub*, CALLHUB_STATE*, HRESULT)
   end
 
-  ITCallHub_GUID = LibC::GUID.new("a3c1544e-5b92-11d1-8f4e-00c04fb6809f")
-  CLSID_ITCallHub = "a3c1544e-5b92-11d1-8f4e-00c04fb6809f"
+  ITCallHub_GUID = "a3c1544e-5b92-11d1-8f4e-00c04fb6809f"
+  IID_ITCallHub = LibC::GUID.new(0xa3c1544e_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITCallHub
     lpVtbl : ITCallHubVTbl*
   end
@@ -3519,8 +3519,8 @@ lib LibWin32
     set_dev_config : Proc(ITLegacyAddressMediaControl*, UInt8*, UInt32, UInt8*, HRESULT)
   end
 
-  ITLegacyAddressMediaControl_GUID = LibC::GUID.new("ab493640-4c0b-11d2-a046-00c04fb6809f")
-  CLSID_ITLegacyAddressMediaControl = "ab493640-4c0b-11d2-a046-00c04fb6809f"
+  ITLegacyAddressMediaControl_GUID = "ab493640-4c0b-11d2-a046-00c04fb6809f"
+  IID_ITLegacyAddressMediaControl = LibC::GUID.new(0xab493640_u32, 0x4c0b_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x46_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITLegacyAddressMediaControl
     lpVtbl : ITLegacyAddressMediaControlVTbl*
   end
@@ -3540,8 +3540,8 @@ lib LibWin32
     get_event_interface : Proc(ITPrivateEvent*, IDispatch*, HRESULT)
   end
 
-  ITPrivateEvent_GUID = LibC::GUID.new("0e269cd0-10d4-4121-9c22-9c85d625650d")
-  CLSID_ITPrivateEvent = "0e269cd0-10d4-4121-9c22-9c85d625650d"
+  ITPrivateEvent_GUID = "0e269cd0-10d4-4121-9c22-9c85d625650d"
+  IID_ITPrivateEvent = LibC::GUID.new(0xe269cd0_u32, 0x10d4_u16, 0x4121_u16, StaticArray[0x9c_u8, 0x22_u8, 0x9c_u8, 0x85_u8, 0xd6_u8, 0x25_u8, 0x65_u8, 0xd_u8])
   struct ITPrivateEvent
     lpVtbl : ITPrivateEventVTbl*
   end
@@ -3557,8 +3557,8 @@ lib LibWin32
     config_dialog_edit : Proc(ITLegacyAddressMediaControl2*, LibC::HANDLE, UInt8*, UInt32, UInt8*, UInt32*, UInt8**, HRESULT)
   end
 
-  ITLegacyAddressMediaControl2_GUID = LibC::GUID.new("b0ee512b-a531-409e-9dd9-4099fe86c738")
-  CLSID_ITLegacyAddressMediaControl2 = "b0ee512b-a531-409e-9dd9-4099fe86c738"
+  ITLegacyAddressMediaControl2_GUID = "b0ee512b-a531-409e-9dd9-4099fe86c738"
+  IID_ITLegacyAddressMediaControl2 = LibC::GUID.new(0xb0ee512b_u32, 0xa531_u16, 0x409e_u16, StaticArray[0x9d_u8, 0xd9_u8, 0x40_u8, 0x99_u8, 0xfe_u8, 0x86_u8, 0xc7_u8, 0x38_u8])
   struct ITLegacyAddressMediaControl2
     lpVtbl : ITLegacyAddressMediaControl2VTbl*
   end
@@ -3578,8 +3578,8 @@ lib LibWin32
     monitor_media : Proc(ITLegacyCallMediaControl*, Int32, HRESULT)
   end
 
-  ITLegacyCallMediaControl_GUID = LibC::GUID.new("d624582f-cc23-4436-b8a5-47c625c8045d")
-  CLSID_ITLegacyCallMediaControl = "d624582f-cc23-4436-b8a5-47c625c8045d"
+  ITLegacyCallMediaControl_GUID = "d624582f-cc23-4436-b8a5-47c625c8045d"
+  IID_ITLegacyCallMediaControl = LibC::GUID.new(0xd624582f_u32, 0xcc23_u16, 0x4436_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x47_u8, 0xc6_u8, 0x25_u8, 0xc8_u8, 0x4_u8, 0x5d_u8])
   struct ITLegacyCallMediaControl
     lpVtbl : ITLegacyCallMediaControlVTbl*
   end
@@ -3609,8 +3609,8 @@ lib LibWin32
     get_id_as_variant : Proc(ITLegacyCallMediaControl2*, UInt8*, VARIANT*, HRESULT)
   end
 
-  ITLegacyCallMediaControl2_GUID = LibC::GUID.new("57ca332d-7bc2-44f1-a60c-936fe8d7ce73")
-  CLSID_ITLegacyCallMediaControl2 = "57ca332d-7bc2-44f1-a60c-936fe8d7ce73"
+  ITLegacyCallMediaControl2_GUID = "57ca332d-7bc2-44f1-a60c-936fe8d7ce73"
+  IID_ITLegacyCallMediaControl2 = LibC::GUID.new(0x57ca332d_u32, 0x7bc2_u16, 0x44f1_u16, StaticArray[0xa6_u8, 0xc_u8, 0x93_u8, 0x6f_u8, 0xe8_u8, 0xd7_u8, 0xce_u8, 0x73_u8])
   struct ITLegacyCallMediaControl2
     lpVtbl : ITLegacyCallMediaControl2VTbl*
   end
@@ -3631,8 +3631,8 @@ lib LibWin32
     put_frequency : Proc(ITDetectTone*, Int32, Int32, HRESULT)
   end
 
-  ITDetectTone_GUID = LibC::GUID.new("961f79bd-3097-49df-a1d6-909b77e89ca0")
-  CLSID_ITDetectTone = "961f79bd-3097-49df-a1d6-909b77e89ca0"
+  ITDetectTone_GUID = "961f79bd-3097-49df-a1d6-909b77e89ca0"
+  IID_ITDetectTone = LibC::GUID.new(0x961f79bd_u32, 0x3097_u16, 0x49df_u16, StaticArray[0xa1_u8, 0xd6_u8, 0x90_u8, 0x9b_u8, 0x77_u8, 0xe8_u8, 0x9c_u8, 0xa0_u8])
   struct ITDetectTone
     lpVtbl : ITDetectToneVTbl*
   end
@@ -3655,8 +3655,8 @@ lib LibWin32
     put_volume : Proc(ITCustomTone*, Int32, HRESULT)
   end
 
-  ITCustomTone_GUID = LibC::GUID.new("357ad764-b3c6-4b2a-8fa5-0722827a9254")
-  CLSID_ITCustomTone = "357ad764-b3c6-4b2a-8fa5-0722827a9254"
+  ITCustomTone_GUID = "357ad764-b3c6-4b2a-8fa5-0722827a9254"
+  IID_ITCustomTone = LibC::GUID.new(0x357ad764_u32, 0xb3c6_u16, 0x4b2a_u16, StaticArray[0x8f_u8, 0xa5_u8, 0x7_u8, 0x22_u8, 0x82_u8, 0x7a_u8, 0x92_u8, 0x54_u8])
   struct ITCustomTone
     lpVtbl : ITCustomToneVTbl*
   end
@@ -3671,8 +3671,8 @@ lib LibWin32
     clone : Proc(IEnumPhone*, IEnumPhone*, HRESULT)
   end
 
-  IEnumPhone_GUID = LibC::GUID.new("f15b7669-4780-4595-8c89-fb369c8cf7aa")
-  CLSID_IEnumPhone = "f15b7669-4780-4595-8c89-fb369c8cf7aa"
+  IEnumPhone_GUID = "f15b7669-4780-4595-8c89-fb369c8cf7aa"
+  IID_IEnumPhone = LibC::GUID.new(0xf15b7669_u32, 0x4780_u16, 0x4595_u16, StaticArray[0x8c_u8, 0x89_u8, 0xfb_u8, 0x36_u8, 0x9c_u8, 0x8c_u8, 0xf7_u8, 0xaa_u8])
   struct IEnumPhone
     lpVtbl : IEnumPhoneVTbl*
   end
@@ -3687,8 +3687,8 @@ lib LibWin32
     clone : Proc(IEnumTerminal*, IEnumTerminal*, HRESULT)
   end
 
-  IEnumTerminal_GUID = LibC::GUID.new("ae269cf4-935e-11d0-835c-00aa003ccabd")
-  CLSID_IEnumTerminal = "ae269cf4-935e-11d0-835c-00aa003ccabd"
+  IEnumTerminal_GUID = "ae269cf4-935e-11d0-835c-00aa003ccabd"
+  IID_IEnumTerminal = LibC::GUID.new(0xae269cf4_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct IEnumTerminal
     lpVtbl : IEnumTerminalVTbl*
   end
@@ -3703,8 +3703,8 @@ lib LibWin32
     clone : Proc(IEnumTerminalClass*, IEnumTerminalClass*, HRESULT)
   end
 
-  IEnumTerminalClass_GUID = LibC::GUID.new("ae269cf5-935e-11d0-835c-00aa003ccabd")
-  CLSID_IEnumTerminalClass = "ae269cf5-935e-11d0-835c-00aa003ccabd"
+  IEnumTerminalClass_GUID = "ae269cf5-935e-11d0-835c-00aa003ccabd"
+  IID_IEnumTerminalClass = LibC::GUID.new(0xae269cf5_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct IEnumTerminalClass
     lpVtbl : IEnumTerminalClassVTbl*
   end
@@ -3719,8 +3719,8 @@ lib LibWin32
     clone : Proc(IEnumCall*, IEnumCall*, HRESULT)
   end
 
-  IEnumCall_GUID = LibC::GUID.new("ae269cf6-935e-11d0-835c-00aa003ccabd")
-  CLSID_IEnumCall = "ae269cf6-935e-11d0-835c-00aa003ccabd"
+  IEnumCall_GUID = "ae269cf6-935e-11d0-835c-00aa003ccabd"
+  IID_IEnumCall = LibC::GUID.new(0xae269cf6_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct IEnumCall
     lpVtbl : IEnumCallVTbl*
   end
@@ -3735,8 +3735,8 @@ lib LibWin32
     clone : Proc(IEnumAddress*, IEnumAddress*, HRESULT)
   end
 
-  IEnumAddress_GUID = LibC::GUID.new("1666fca1-9363-11d0-835c-00aa003ccabd")
-  CLSID_IEnumAddress = "1666fca1-9363-11d0-835c-00aa003ccabd"
+  IEnumAddress_GUID = "1666fca1-9363-11d0-835c-00aa003ccabd"
+  IID_IEnumAddress = LibC::GUID.new(0x1666fca1_u32, 0x9363_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct IEnumAddress
     lpVtbl : IEnumAddressVTbl*
   end
@@ -3751,8 +3751,8 @@ lib LibWin32
     clone : Proc(IEnumCallHub*, IEnumCallHub*, HRESULT)
   end
 
-  IEnumCallHub_GUID = LibC::GUID.new("a3c15450-5b92-11d1-8f4e-00c04fb6809f")
-  CLSID_IEnumCallHub = "a3c15450-5b92-11d1-8f4e-00c04fb6809f"
+  IEnumCallHub_GUID = "a3c15450-5b92-11d1-8f4e-00c04fb6809f"
+  IID_IEnumCallHub = LibC::GUID.new(0xa3c15450_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct IEnumCallHub
     lpVtbl : IEnumCallHubVTbl*
   end
@@ -3767,8 +3767,8 @@ lib LibWin32
     clone : Proc(IEnumBstr*, IEnumBstr*, HRESULT)
   end
 
-  IEnumBstr_GUID = LibC::GUID.new("35372049-0bc6-11d2-a033-00c04fb6809f")
-  CLSID_IEnumBstr = "35372049-0bc6-11d2-a033-00c04fb6809f"
+  IEnumBstr_GUID = "35372049-0bc6-11d2-a033-00c04fb6809f"
+  IID_IEnumBstr = LibC::GUID.new(0x35372049_u32, 0xbc6_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct IEnumBstr
     lpVtbl : IEnumBstrVTbl*
   end
@@ -3783,8 +3783,8 @@ lib LibWin32
     clone : Proc(IEnumPluggableTerminalClassInfo*, IEnumPluggableTerminalClassInfo*, HRESULT)
   end
 
-  IEnumPluggableTerminalClassInfo_GUID = LibC::GUID.new("4567450c-dbee-4e3f-aaf5-37bf9ebf5e29")
-  CLSID_IEnumPluggableTerminalClassInfo = "4567450c-dbee-4e3f-aaf5-37bf9ebf5e29"
+  IEnumPluggableTerminalClassInfo_GUID = "4567450c-dbee-4e3f-aaf5-37bf9ebf5e29"
+  IID_IEnumPluggableTerminalClassInfo = LibC::GUID.new(0x4567450c_u32, 0xdbee_u16, 0x4e3f_u16, StaticArray[0xaa_u8, 0xf5_u8, 0x37_u8, 0xbf_u8, 0x9e_u8, 0xbf_u8, 0x5e_u8, 0x29_u8])
   struct IEnumPluggableTerminalClassInfo
     lpVtbl : IEnumPluggableTerminalClassInfoVTbl*
   end
@@ -3799,8 +3799,8 @@ lib LibWin32
     clone : Proc(IEnumPluggableSuperclassInfo*, IEnumPluggableSuperclassInfo*, HRESULT)
   end
 
-  IEnumPluggableSuperclassInfo_GUID = LibC::GUID.new("e9586a80-89e6-4cff-931d-478d5751f4c0")
-  CLSID_IEnumPluggableSuperclassInfo = "e9586a80-89e6-4cff-931d-478d5751f4c0"
+  IEnumPluggableSuperclassInfo_GUID = "e9586a80-89e6-4cff-931d-478d5751f4c0"
+  IID_IEnumPluggableSuperclassInfo = LibC::GUID.new(0xe9586a80_u32, 0x89e6_u16, 0x4cff_u16, StaticArray[0x93_u8, 0x1d_u8, 0x47_u8, 0x8d_u8, 0x57_u8, 0x51_u8, 0xf4_u8, 0xc0_u8])
   struct IEnumPluggableSuperclassInfo
     lpVtbl : IEnumPluggableSuperclassInfoVTbl*
   end
@@ -3824,8 +3824,8 @@ lib LibWin32
     get_call : Proc(ITPhoneEvent*, ITCallInfo*, HRESULT)
   end
 
-  ITPhoneEvent_GUID = LibC::GUID.new("8f942dd8-64ed-4aaf-a77d-b23db0837ead")
-  CLSID_ITPhoneEvent = "8f942dd8-64ed-4aaf-a77d-b23db0837ead"
+  ITPhoneEvent_GUID = "8f942dd8-64ed-4aaf-a77d-b23db0837ead"
+  IID_ITPhoneEvent = LibC::GUID.new(0x8f942dd8_u32, 0x64ed_u16, 0x4aaf_u16, StaticArray[0xa7_u8, 0x7d_u8, 0xb2_u8, 0x3d_u8, 0xb0_u8, 0x83_u8, 0x7e_u8, 0xad_u8])
   struct ITPhoneEvent
     lpVtbl : ITPhoneEventVTbl*
   end
@@ -3844,8 +3844,8 @@ lib LibWin32
     get_callback_instance : Proc(ITCallStateEvent*, Int32*, HRESULT)
   end
 
-  ITCallStateEvent_GUID = LibC::GUID.new("62f47097-95c9-11d0-835d-00aa003ccabd")
-  CLSID_ITCallStateEvent = "62f47097-95c9-11d0-835d-00aa003ccabd"
+  ITCallStateEvent_GUID = "62f47097-95c9-11d0-835d-00aa003ccabd"
+  IID_ITCallStateEvent = LibC::GUID.new(0x62f47097_u32, 0x95c9_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITCallStateEvent
     lpVtbl : ITCallStateEventVTbl*
   end
@@ -3864,8 +3864,8 @@ lib LibWin32
     get_l_param3 : Proc(ITPhoneDeviceSpecificEvent*, Int32*, HRESULT)
   end
 
-  ITPhoneDeviceSpecificEvent_GUID = LibC::GUID.new("63ffb2a6-872b-4cd3-a501-326e8fb40af7")
-  CLSID_ITPhoneDeviceSpecificEvent = "63ffb2a6-872b-4cd3-a501-326e8fb40af7"
+  ITPhoneDeviceSpecificEvent_GUID = "63ffb2a6-872b-4cd3-a501-326e8fb40af7"
+  IID_ITPhoneDeviceSpecificEvent = LibC::GUID.new(0x63ffb2a6_u32, 0x872b_u16, 0x4cd3_u16, StaticArray[0xa5_u8, 0x1_u8, 0x32_u8, 0x6e_u8, 0x8f_u8, 0xb4_u8, 0xa_u8, 0xf7_u8])
   struct ITPhoneDeviceSpecificEvent
     lpVtbl : ITPhoneDeviceSpecificEventVTbl*
   end
@@ -3886,8 +3886,8 @@ lib LibWin32
     get_cause : Proc(ITCallMediaEvent*, CALL_MEDIA_EVENT_CAUSE*, HRESULT)
   end
 
-  ITCallMediaEvent_GUID = LibC::GUID.new("ff36b87f-ec3a-11d0-8ee4-00c04fb6809f")
-  CLSID_ITCallMediaEvent = "ff36b87f-ec3a-11d0-8ee4-00c04fb6809f"
+  ITCallMediaEvent_GUID = "ff36b87f-ec3a-11d0-8ee4-00c04fb6809f"
+  IID_ITCallMediaEvent = LibC::GUID.new(0xff36b87f_u32, 0xec3a_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITCallMediaEvent
     lpVtbl : ITCallMediaEventVTbl*
   end
@@ -3907,8 +3907,8 @@ lib LibWin32
     get_callback_instance : Proc(ITDigitDetectionEvent*, Int32*, HRESULT)
   end
 
-  ITDigitDetectionEvent_GUID = LibC::GUID.new("80d3bfac-57d9-11d2-a04a-00c04fb6809f")
-  CLSID_ITDigitDetectionEvent = "80d3bfac-57d9-11d2-a04a-00c04fb6809f"
+  ITDigitDetectionEvent_GUID = "80d3bfac-57d9-11d2-a04a-00c04fb6809f"
+  IID_ITDigitDetectionEvent = LibC::GUID.new(0x80d3bfac_u32, 0x57d9_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITDigitDetectionEvent
     lpVtbl : ITDigitDetectionEventVTbl*
   end
@@ -3927,8 +3927,8 @@ lib LibWin32
     get_callback_instance : Proc(ITDigitGenerationEvent*, Int32*, HRESULT)
   end
 
-  ITDigitGenerationEvent_GUID = LibC::GUID.new("80d3bfad-57d9-11d2-a04a-00c04fb6809f")
-  CLSID_ITDigitGenerationEvent = "80d3bfad-57d9-11d2-a04a-00c04fb6809f"
+  ITDigitGenerationEvent_GUID = "80d3bfad-57d9-11d2-a04a-00c04fb6809f"
+  IID_ITDigitGenerationEvent = LibC::GUID.new(0x80d3bfad_u32, 0x57d9_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITDigitGenerationEvent
     lpVtbl : ITDigitGenerationEventVTbl*
   end
@@ -3948,8 +3948,8 @@ lib LibWin32
     get_callback_instance : Proc(ITDigitsGatheredEvent*, Int32*, HRESULT)
   end
 
-  ITDigitsGatheredEvent_GUID = LibC::GUID.new("e52ec4c1-cba3-441a-9e6a-93cb909e9724")
-  CLSID_ITDigitsGatheredEvent = "e52ec4c1-cba3-441a-9e6a-93cb909e9724"
+  ITDigitsGatheredEvent_GUID = "e52ec4c1-cba3-441a-9e6a-93cb909e9724"
+  IID_ITDigitsGatheredEvent = LibC::GUID.new(0xe52ec4c1_u32, 0xcba3_u16, 0x441a_u16, StaticArray[0x9e_u8, 0x6a_u8, 0x93_u8, 0xcb_u8, 0x90_u8, 0x9e_u8, 0x97_u8, 0x24_u8])
   struct ITDigitsGatheredEvent
     lpVtbl : ITDigitsGatheredEventVTbl*
   end
@@ -3968,8 +3968,8 @@ lib LibWin32
     get_callback_instance : Proc(ITToneDetectionEvent*, Int32*, HRESULT)
   end
 
-  ITToneDetectionEvent_GUID = LibC::GUID.new("407e0faf-d047-4753-b0c6-8e060373fecd")
-  CLSID_ITToneDetectionEvent = "407e0faf-d047-4753-b0c6-8e060373fecd"
+  ITToneDetectionEvent_GUID = "407e0faf-d047-4753-b0c6-8e060373fecd"
+  IID_ITToneDetectionEvent = LibC::GUID.new(0x407e0faf_u32, 0xd047_u16, 0x4753_u16, StaticArray[0xb0_u8, 0xc6_u8, 0x8e_u8, 0x6_u8, 0x3_u8, 0x73_u8, 0xfe_u8, 0xcd_u8])
   struct ITToneDetectionEvent
     lpVtbl : ITToneDetectionEventVTbl*
   end
@@ -3988,8 +3988,8 @@ lib LibWin32
     get_callback_instance : Proc(ITTAPIObjectEvent*, Int32*, HRESULT)
   end
 
-  ITTAPIObjectEvent_GUID = LibC::GUID.new("f4854d48-937a-11d1-bb58-00c04fb6809f")
-  CLSID_ITTAPIObjectEvent = "f4854d48-937a-11d1-bb58-00c04fb6809f"
+  ITTAPIObjectEvent_GUID = "f4854d48-937a-11d1-bb58-00c04fb6809f"
+  IID_ITTAPIObjectEvent = LibC::GUID.new(0xf4854d48_u32, 0x937a_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x58_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITTAPIObjectEvent
     lpVtbl : ITTAPIObjectEventVTbl*
   end
@@ -4009,8 +4009,8 @@ lib LibWin32
     get_phone : Proc(ITTAPIObjectEvent2*, ITPhone*, HRESULT)
   end
 
-  ITTAPIObjectEvent2_GUID = LibC::GUID.new("359dda6e-68ce-4383-bf0b-169133c41b46")
-  CLSID_ITTAPIObjectEvent2 = "359dda6e-68ce-4383-bf0b-169133c41b46"
+  ITTAPIObjectEvent2_GUID = "359dda6e-68ce-4383-bf0b-169133c41b46"
+  IID_ITTAPIObjectEvent2 = LibC::GUID.new(0x359dda6e_u32, 0x68ce_u16, 0x4383_u16, StaticArray[0xbf_u8, 0xb_u8, 0x16_u8, 0x91_u8, 0x33_u8, 0xc4_u8, 0x1b_u8, 0x46_u8])
   struct ITTAPIObjectEvent2
     lpVtbl : ITTAPIObjectEvent2VTbl*
   end
@@ -4022,8 +4022,8 @@ lib LibWin32
     event : Proc(ITTAPIEventNotification*, TAPI_EVENT, IDispatch, HRESULT)
   end
 
-  ITTAPIEventNotification_GUID = LibC::GUID.new("eddb9426-3b91-11d1-8f30-00c04fb6809f")
-  CLSID_ITTAPIEventNotification = "eddb9426-3b91-11d1-8f30-00c04fb6809f"
+  ITTAPIEventNotification_GUID = "eddb9426-3b91-11d1-8f30-00c04fb6809f"
+  IID_ITTAPIEventNotification = LibC::GUID.new(0xeddb9426_u32, 0x3b91_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITTAPIEventNotification
     lpVtbl : ITTAPIEventNotificationVTbl*
   end
@@ -4041,8 +4041,8 @@ lib LibWin32
     get_call : Proc(ITCallHubEvent*, ITCallInfo*, HRESULT)
   end
 
-  ITCallHubEvent_GUID = LibC::GUID.new("a3c15451-5b92-11d1-8f4e-00c04fb6809f")
-  CLSID_ITCallHubEvent = "a3c15451-5b92-11d1-8f4e-00c04fb6809f"
+  ITCallHubEvent_GUID = "a3c15451-5b92-11d1-8f4e-00c04fb6809f"
+  IID_ITCallHubEvent = LibC::GUID.new(0xa3c15451_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITCallHubEvent
     lpVtbl : ITCallHubEventVTbl*
   end
@@ -4060,8 +4060,8 @@ lib LibWin32
     get_terminal : Proc(ITAddressEvent*, ITTerminal*, HRESULT)
   end
 
-  ITAddressEvent_GUID = LibC::GUID.new("831ce2d1-83b5-11d1-bb5c-00c04fb6809f")
-  CLSID_ITAddressEvent = "831ce2d1-83b5-11d1-bb5c-00c04fb6809f"
+  ITAddressEvent_GUID = "831ce2d1-83b5-11d1-bb5c-00c04fb6809f"
+  IID_ITAddressEvent = LibC::GUID.new(0x831ce2d1_u32, 0x83b5_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITAddressEvent
     lpVtbl : ITAddressEventVTbl*
   end
@@ -4081,8 +4081,8 @@ lib LibWin32
     get_l_param3 : Proc(ITAddressDeviceSpecificEvent*, Int32*, HRESULT)
   end
 
-  ITAddressDeviceSpecificEvent_GUID = LibC::GUID.new("3acb216b-40bd-487a-8672-5ce77bd7e3a3")
-  CLSID_ITAddressDeviceSpecificEvent = "3acb216b-40bd-487a-8672-5ce77bd7e3a3"
+  ITAddressDeviceSpecificEvent_GUID = "3acb216b-40bd-487a-8672-5ce77bd7e3a3"
+  IID_ITAddressDeviceSpecificEvent = LibC::GUID.new(0x3acb216b_u32, 0x40bd_u16, 0x487a_u16, StaticArray[0x86_u8, 0x72_u8, 0x5c_u8, 0xe7_u8, 0x7b_u8, 0xd7_u8, 0xe3_u8, 0xa3_u8])
   struct ITAddressDeviceSpecificEvent
     lpVtbl : ITAddressDeviceSpecificEventVTbl*
   end
@@ -4103,8 +4103,8 @@ lib LibWin32
     get_error : Proc(ITFileTerminalEvent*, HRESULT*, HRESULT)
   end
 
-  ITFileTerminalEvent_GUID = LibC::GUID.new("e4a7fbac-8c17-4427-9f55-9f589ac8af00")
-  CLSID_ITFileTerminalEvent = "e4a7fbac-8c17-4427-9f55-9f589ac8af00"
+  ITFileTerminalEvent_GUID = "e4a7fbac-8c17-4427-9f55-9f589ac8af00"
+  IID_ITFileTerminalEvent = LibC::GUID.new(0xe4a7fbac_u32, 0x8c17_u16, 0x4427_u16, StaticArray[0x9f_u8, 0x55_u8, 0x9f_u8, 0x58_u8, 0x9a_u8, 0xc8_u8, 0xaf_u8, 0x0_u8])
   struct ITFileTerminalEvent
     lpVtbl : ITFileTerminalEventVTbl*
   end
@@ -4122,8 +4122,8 @@ lib LibWin32
     get_error : Proc(ITTTSTerminalEvent*, HRESULT*, HRESULT)
   end
 
-  ITTTSTerminalEvent_GUID = LibC::GUID.new("d964788f-95a5-461d-ab0c-b9900a6c2713")
-  CLSID_ITTTSTerminalEvent = "d964788f-95a5-461d-ab0c-b9900a6c2713"
+  ITTTSTerminalEvent_GUID = "d964788f-95a5-461d-ab0c-b9900a6c2713"
+  IID_ITTTSTerminalEvent = LibC::GUID.new(0xd964788f_u32, 0x95a5_u16, 0x461d_u16, StaticArray[0xab_u8, 0xc_u8, 0xb9_u8, 0x90_u8, 0xa_u8, 0x6c_u8, 0x27_u8, 0x13_u8])
   struct ITTTSTerminalEvent
     lpVtbl : ITTTSTerminalEventVTbl*
   end
@@ -4141,8 +4141,8 @@ lib LibWin32
     get_error : Proc(ITASRTerminalEvent*, HRESULT*, HRESULT)
   end
 
-  ITASRTerminalEvent_GUID = LibC::GUID.new("ee016a02-4fa9-467c-933f-5a15b12377d7")
-  CLSID_ITASRTerminalEvent = "ee016a02-4fa9-467c-933f-5a15b12377d7"
+  ITASRTerminalEvent_GUID = "ee016a02-4fa9-467c-933f-5a15b12377d7"
+  IID_ITASRTerminalEvent = LibC::GUID.new(0xee016a02_u32, 0x4fa9_u16, 0x467c_u16, StaticArray[0x93_u8, 0x3f_u8, 0x5a_u8, 0x15_u8, 0xb1_u8, 0x23_u8, 0x77_u8, 0xd7_u8])
   struct ITASRTerminalEvent
     lpVtbl : ITASRTerminalEventVTbl*
   end
@@ -4160,8 +4160,8 @@ lib LibWin32
     get_error : Proc(ITToneTerminalEvent*, HRESULT*, HRESULT)
   end
 
-  ITToneTerminalEvent_GUID = LibC::GUID.new("e6f56009-611f-4945-bbd2-2d0ce5612056")
-  CLSID_ITToneTerminalEvent = "e6f56009-611f-4945-bbd2-2d0ce5612056"
+  ITToneTerminalEvent_GUID = "e6f56009-611f-4945-bbd2-2d0ce5612056"
+  IID_ITToneTerminalEvent = LibC::GUID.new(0xe6f56009_u32, 0x611f_u16, 0x4945_u16, StaticArray[0xbb_u8, 0xd2_u8, 0x2d_u8, 0xc_u8, 0xe5_u8, 0x61_u8, 0x20_u8, 0x56_u8])
   struct ITToneTerminalEvent
     lpVtbl : ITToneTerminalEventVTbl*
   end
@@ -4179,8 +4179,8 @@ lib LibWin32
     get_media_type : Proc(ITQOSEvent*, Int32*, HRESULT)
   end
 
-  ITQOSEvent_GUID = LibC::GUID.new("cfa3357c-ad77-11d1-bb68-00c04fb6809f")
-  CLSID_ITQOSEvent = "cfa3357c-ad77-11d1-bb68-00c04fb6809f"
+  ITQOSEvent_GUID = "cfa3357c-ad77-11d1-bb68-00c04fb6809f"
+  IID_ITQOSEvent = LibC::GUID.new(0xcfa3357c_u32, 0xad77_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x68_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITQOSEvent
     lpVtbl : ITQOSEventVTbl*
   end
@@ -4198,8 +4198,8 @@ lib LibWin32
     get_callback_instance : Proc(ITCallInfoChangeEvent*, Int32*, HRESULT)
   end
 
-  ITCallInfoChangeEvent_GUID = LibC::GUID.new("5d4b65f9-e51c-11d1-a02f-00c04fb6809f")
-  CLSID_ITCallInfoChangeEvent = "5d4b65f9-e51c-11d1-a02f-00c04fb6809f"
+  ITCallInfoChangeEvent_GUID = "5d4b65f9-e51c-11d1-a02f-00c04fb6809f"
+  IID_ITCallInfoChangeEvent = LibC::GUID.new(0x5d4b65f9_u32, 0xe51c_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITCallInfoChangeEvent
     lpVtbl : ITCallInfoChangeEventVTbl*
   end
@@ -4215,8 +4215,8 @@ lib LibWin32
     make_call : Proc(ITRequest*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
-  ITRequest_GUID = LibC::GUID.new("ac48ffdf-f8c4-11d1-a030-00c04fb6809f")
-  CLSID_ITRequest = "ac48ffdf-f8c4-11d1-a030-00c04fb6809f"
+  ITRequest_GUID = "ac48ffdf-f8c4-11d1-a030-00c04fb6809f"
+  IID_ITRequest = LibC::GUID.new(0xac48ffdf_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITRequest
     lpVtbl : ITRequestVTbl*
   end
@@ -4237,8 +4237,8 @@ lib LibWin32
     get_comment : Proc(ITRequestEvent*, UInt8**, HRESULT)
   end
 
-  ITRequestEvent_GUID = LibC::GUID.new("ac48ffde-f8c4-11d1-a030-00c04fb6809f")
-  CLSID_ITRequestEvent = "ac48ffde-f8c4-11d1-a030-00c04fb6809f"
+  ITRequestEvent_GUID = "ac48ffde-f8c4-11d1-a030-00c04fb6809f"
+  IID_ITRequestEvent = LibC::GUID.new(0xac48ffde_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITRequestEvent
     lpVtbl : ITRequestEventVTbl*
   end
@@ -4256,8 +4256,8 @@ lib LibWin32
     get__new_enum : Proc(ITCollection*, IUnknown*, HRESULT)
   end
 
-  ITCollection_GUID = LibC::GUID.new("5ec5acf2-9c02-11d0-8362-00aa003ccabd")
-  CLSID_ITCollection = "5ec5acf2-9c02-11d0-8362-00aa003ccabd"
+  ITCollection_GUID = "5ec5acf2-9c02-11d0-8362-00aa003ccabd"
+  IID_ITCollection = LibC::GUID.new(0x5ec5acf2_u32, 0x9c02_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x62_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
   struct ITCollection
     lpVtbl : ITCollectionVTbl*
   end
@@ -4277,8 +4277,8 @@ lib LibWin32
     remove : Proc(ITCollection2*, Int32, HRESULT)
   end
 
-  ITCollection2_GUID = LibC::GUID.new("e6dddda5-a6d3-48ff-8737-d32fc4d95477")
-  CLSID_ITCollection2 = "e6dddda5-a6d3-48ff-8737-d32fc4d95477"
+  ITCollection2_GUID = "e6dddda5-a6d3-48ff-8737-d32fc4d95477"
+  IID_ITCollection2 = LibC::GUID.new(0xe6dddda5_u32, 0xa6d3_u16, 0x48ff_u16, StaticArray[0x87_u8, 0x37_u8, 0xd3_u8, 0x2f_u8, 0xc4_u8, 0xd9_u8, 0x54_u8, 0x77_u8])
   struct ITCollection2
     lpVtbl : ITCollection2VTbl*
   end
@@ -4300,8 +4300,8 @@ lib LibWin32
     clear : Proc(ITForwardInformation*, HRESULT)
   end
 
-  ITForwardInformation_GUID = LibC::GUID.new("449f659e-88a3-11d1-bb5d-00c04fb6809f")
-  CLSID_ITForwardInformation = "449f659e-88a3-11d1-bb5d-00c04fb6809f"
+  ITForwardInformation_GUID = "449f659e-88a3-11d1-bb5d-00c04fb6809f"
+  IID_ITForwardInformation = LibC::GUID.new(0x449f659e_u32, 0x88a3_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITForwardInformation
     lpVtbl : ITForwardInformationVTbl*
   end
@@ -4327,8 +4327,8 @@ lib LibWin32
     get_forward_type_caller_address_type : Proc(ITForwardInformation2*, Int32, Int32*, HRESULT)
   end
 
-  ITForwardInformation2_GUID = LibC::GUID.new("5229b4ed-b260-4382-8e1a-5df3a8a4ccc0")
-  CLSID_ITForwardInformation2 = "5229b4ed-b260-4382-8e1a-5df3a8a4ccc0"
+  ITForwardInformation2_GUID = "5229b4ed-b260-4382-8e1a-5df3a8a4ccc0"
+  IID_ITForwardInformation2 = LibC::GUID.new(0x5229b4ed_u32, 0xb260_u16, 0x4382_u16, StaticArray[0x8e_u8, 0x1a_u8, 0x5d_u8, 0xf3_u8, 0xa8_u8, 0xa4_u8, 0xcc_u8, 0xc0_u8])
   struct ITForwardInformation2
     lpVtbl : ITForwardInformation2VTbl*
   end
@@ -4349,8 +4349,8 @@ lib LibWin32
     get_calling_cards : Proc(ITAddressTranslation*, VARIANT*, HRESULT)
   end
 
-  ITAddressTranslation_GUID = LibC::GUID.new("0c4d8f03-8ddb-11d1-a09e-00805fc147d3")
-  CLSID_ITAddressTranslation = "0c4d8f03-8ddb-11d1-a09e-00805fc147d3"
+  ITAddressTranslation_GUID = "0c4d8f03-8ddb-11d1-a09e-00805fc147d3"
+  IID_ITAddressTranslation = LibC::GUID.new(0xc4d8f03_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITAddressTranslation
     lpVtbl : ITAddressTranslationVTbl*
   end
@@ -4370,8 +4370,8 @@ lib LibWin32
     get_translation_results : Proc(ITAddressTranslationInfo*, Int32*, HRESULT)
   end
 
-  ITAddressTranslationInfo_GUID = LibC::GUID.new("afc15945-8d40-11d1-a09e-00805fc147d3")
-  CLSID_ITAddressTranslationInfo = "afc15945-8d40-11d1-a09e-00805fc147d3"
+  ITAddressTranslationInfo_GUID = "afc15945-8d40-11d1-a09e-00805fc147d3"
+  IID_ITAddressTranslationInfo = LibC::GUID.new(0xafc15945_u32, 0x8d40_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITAddressTranslationInfo
     lpVtbl : ITAddressTranslationInfoVTbl*
   end
@@ -4397,8 +4397,8 @@ lib LibWin32
     get_cancel_call_waiting_code : Proc(ITLocationInfo*, UInt8**, HRESULT)
   end
 
-  ITLocationInfo_GUID = LibC::GUID.new("0c4d8eff-8ddb-11d1-a09e-00805fc147d3")
-  CLSID_ITLocationInfo = "0c4d8eff-8ddb-11d1-a09e-00805fc147d3"
+  ITLocationInfo_GUID = "0c4d8eff-8ddb-11d1-a09e-00805fc147d3"
+  IID_ITLocationInfo = LibC::GUID.new(0xc4d8eff_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITLocationInfo
     lpVtbl : ITLocationInfoVTbl*
   end
@@ -4413,8 +4413,8 @@ lib LibWin32
     clone : Proc(IEnumLocation*, IEnumLocation*, HRESULT)
   end
 
-  IEnumLocation_GUID = LibC::GUID.new("0c4d8f01-8ddb-11d1-a09e-00805fc147d3")
-  CLSID_IEnumLocation = "0c4d8f01-8ddb-11d1-a09e-00805fc147d3"
+  IEnumLocation_GUID = "0c4d8f01-8ddb-11d1-a09e-00805fc147d3"
+  IID_IEnumLocation = LibC::GUID.new(0xc4d8f01_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct IEnumLocation
     lpVtbl : IEnumLocationVTbl*
   end
@@ -4436,8 +4436,8 @@ lib LibWin32
     get_international_dialing_rule : Proc(ITCallingCard*, UInt8**, HRESULT)
   end
 
-  ITCallingCard_GUID = LibC::GUID.new("0c4d8f00-8ddb-11d1-a09e-00805fc147d3")
-  CLSID_ITCallingCard = "0c4d8f00-8ddb-11d1-a09e-00805fc147d3"
+  ITCallingCard_GUID = "0c4d8f00-8ddb-11d1-a09e-00805fc147d3"
+  IID_ITCallingCard = LibC::GUID.new(0xc4d8f00_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITCallingCard
     lpVtbl : ITCallingCardVTbl*
   end
@@ -4452,8 +4452,8 @@ lib LibWin32
     clone : Proc(IEnumCallingCard*, IEnumCallingCard*, HRESULT)
   end
 
-  IEnumCallingCard_GUID = LibC::GUID.new("0c4d8f02-8ddb-11d1-a09e-00805fc147d3")
-  CLSID_IEnumCallingCard = "0c4d8f02-8ddb-11d1-a09e-00805fc147d3"
+  IEnumCallingCard_GUID = "0c4d8f02-8ddb-11d1-a09e-00805fc147d3"
+  IID_IEnumCallingCard = LibC::GUID.new(0xc4d8f02_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct IEnumCallingCard
     lpVtbl : IEnumCallingCardVTbl*
   end
@@ -4471,8 +4471,8 @@ lib LibWin32
     get_callback_instance : Proc(ITCallNotificationEvent*, Int32*, HRESULT)
   end
 
-  ITCallNotificationEvent_GUID = LibC::GUID.new("895801df-3dd6-11d1-8f30-00c04fb6809f")
-  CLSID_ITCallNotificationEvent = "895801df-3dd6-11d1-8f30-00c04fb6809f"
+  ITCallNotificationEvent_GUID = "895801df-3dd6-11d1-8f30-00c04fb6809f"
+  IID_ITCallNotificationEvent = LibC::GUID.new(0x895801df_u32, 0x3dd6_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITCallNotificationEvent
     lpVtbl : ITCallNotificationEventVTbl*
   end
@@ -4488,8 +4488,8 @@ lib LibWin32
     query_dispatch_interface : Proc(ITDispatchMapper*, UInt8*, IDispatch, IDispatch*, HRESULT)
   end
 
-  ITDispatchMapper_GUID = LibC::GUID.new("e9225295-c759-11d1-a02b-00c04fb6809f")
-  CLSID_ITDispatchMapper = "e9225295-c759-11d1-a02b-00c04fb6809f"
+  ITDispatchMapper_GUID = "e9225295-c759-11d1-a02b-00c04fb6809f"
+  IID_ITDispatchMapper = LibC::GUID.new(0xe9225295_u32, 0xc759_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITDispatchMapper
     lpVtbl : ITDispatchMapperVTbl*
   end
@@ -4508,8 +4508,8 @@ lib LibWin32
     get_streams : Proc(ITStreamControl*, VARIANT*, HRESULT)
   end
 
-  ITStreamControl_GUID = LibC::GUID.new("ee3bd604-3868-11d2-a045-00c04fb6809f")
-  CLSID_ITStreamControl = "ee3bd604-3868-11d2-a045-00c04fb6809f"
+  ITStreamControl_GUID = "ee3bd604-3868-11d2-a045-00c04fb6809f"
+  IID_ITStreamControl = LibC::GUID.new(0xee3bd604_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITStreamControl
     lpVtbl : ITStreamControlVTbl*
   end
@@ -4534,8 +4534,8 @@ lib LibWin32
     get_terminals : Proc(ITStream*, VARIANT*, HRESULT)
   end
 
-  ITStream_GUID = LibC::GUID.new("ee3bd605-3868-11d2-a045-00c04fb6809f")
-  CLSID_ITStream = "ee3bd605-3868-11d2-a045-00c04fb6809f"
+  ITStream_GUID = "ee3bd605-3868-11d2-a045-00c04fb6809f"
+  IID_ITStream = LibC::GUID.new(0xee3bd605_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITStream
     lpVtbl : ITStreamVTbl*
   end
@@ -4550,8 +4550,8 @@ lib LibWin32
     clone : Proc(IEnumStream*, IEnumStream*, HRESULT)
   end
 
-  IEnumStream_GUID = LibC::GUID.new("ee3bd606-3868-11d2-a045-00c04fb6809f")
-  CLSID_IEnumStream = "ee3bd606-3868-11d2-a045-00c04fb6809f"
+  IEnumStream_GUID = "ee3bd606-3868-11d2-a045-00c04fb6809f"
+  IID_IEnumStream = LibC::GUID.new(0xee3bd606_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct IEnumStream
     lpVtbl : IEnumStreamVTbl*
   end
@@ -4570,8 +4570,8 @@ lib LibWin32
     get_sub_streams : Proc(ITSubStreamControl*, VARIANT*, HRESULT)
   end
 
-  ITSubStreamControl_GUID = LibC::GUID.new("ee3bd607-3868-11d2-a045-00c04fb6809f")
-  CLSID_ITSubStreamControl = "ee3bd607-3868-11d2-a045-00c04fb6809f"
+  ITSubStreamControl_GUID = "ee3bd607-3868-11d2-a045-00c04fb6809f"
+  IID_ITSubStreamControl = LibC::GUID.new(0xee3bd607_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITSubStreamControl
     lpVtbl : ITSubStreamControlVTbl*
   end
@@ -4594,8 +4594,8 @@ lib LibWin32
     get_stream : Proc(ITSubStream*, ITStream*, HRESULT)
   end
 
-  ITSubStream_GUID = LibC::GUID.new("ee3bd608-3868-11d2-a045-00c04fb6809f")
-  CLSID_ITSubStream = "ee3bd608-3868-11d2-a045-00c04fb6809f"
+  ITSubStream_GUID = "ee3bd608-3868-11d2-a045-00c04fb6809f"
+  IID_ITSubStream = LibC::GUID.new(0xee3bd608_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITSubStream
     lpVtbl : ITSubStreamVTbl*
   end
@@ -4610,8 +4610,8 @@ lib LibWin32
     clone : Proc(IEnumSubStream*, IEnumSubStream*, HRESULT)
   end
 
-  IEnumSubStream_GUID = LibC::GUID.new("ee3bd609-3868-11d2-a045-00c04fb6809f")
-  CLSID_IEnumSubStream = "ee3bd609-3868-11d2-a045-00c04fb6809f"
+  IEnumSubStream_GUID = "ee3bd609-3868-11d2-a045-00c04fb6809f"
+  IID_IEnumSubStream = LibC::GUID.new(0xee3bd609_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct IEnumSubStream
     lpVtbl : IEnumSubStreamVTbl*
   end
@@ -4627,8 +4627,8 @@ lib LibWin32
     is_full_duplex : Proc(ITLegacyWaveSupport*, FULLDUPLEX_SUPPORT*, HRESULT)
   end
 
-  ITLegacyWaveSupport_GUID = LibC::GUID.new("207823ea-e252-11d2-b77e-0080c7135381")
-  CLSID_ITLegacyWaveSupport = "207823ea-e252-11d2-b77e-0080c7135381"
+  ITLegacyWaveSupport_GUID = "207823ea-e252-11d2-b77e-0080c7135381"
+  IID_ITLegacyWaveSupport = LibC::GUID.new(0x207823ea_u32, 0xe252_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x7e_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x13_u8, 0x53_u8, 0x81_u8])
   struct ITLegacyWaveSupport
     lpVtbl : ITLegacyWaveSupportVTbl*
   end
@@ -4664,8 +4664,8 @@ lib LibWin32
     unselect_terminal_on_call : Proc(ITBasicCallControl2*, ITTerminal, HRESULT)
   end
 
-  ITBasicCallControl2_GUID = LibC::GUID.new("161a4a56-1e99-4b3f-a46a-168f38a5ee4c")
-  CLSID_ITBasicCallControl2 = "161a4a56-1e99-4b3f-a46a-168f38a5ee4c"
+  ITBasicCallControl2_GUID = "161a4a56-1e99-4b3f-a46a-168f38a5ee4c"
+  IID_ITBasicCallControl2 = LibC::GUID.new(0x161a4a56_u32, 0x1e99_u16, 0x4b3f_u16, StaticArray[0xa4_u8, 0x6a_u8, 0x16_u8, 0x8f_u8, 0x38_u8, 0xa5_u8, 0xee_u8, 0x4c_u8])
   struct ITBasicCallControl2
     lpVtbl : ITBasicCallControl2VTbl*
   end
@@ -4692,8 +4692,8 @@ lib LibWin32
     put_format_tag : Proc(ITScriptableAudioFormat*, Int32, HRESULT)
   end
 
-  ITScriptableAudioFormat_GUID = LibC::GUID.new("b87658bd-3c59-4f64-be74-aede3e86a81e")
-  CLSID_ITScriptableAudioFormat = "b87658bd-3c59-4f64-be74-aede3e86a81e"
+  ITScriptableAudioFormat_GUID = "b87658bd-3c59-4f64-be74-aede3e86a81e"
+  IID_ITScriptableAudioFormat = LibC::GUID.new(0xb87658bd_u32, 0x3c59_u16, 0x4f64_u16, StaticArray[0xbe_u8, 0x74_u8, 0xae_u8, 0xde_u8, 0x3e_u8, 0x86_u8, 0xa8_u8, 0x1e_u8])
   struct ITScriptableAudioFormat
     lpVtbl : ITScriptableAudioFormatVTbl*
   end
@@ -4725,8 +4725,8 @@ lib LibWin32
     get_agent_sessions : Proc(ITAgent*, VARIANT*, HRESULT)
   end
 
-  ITAgent_GUID = LibC::GUID.new("5770ece5-4b27-11d1-bf80-00805fc147d3")
-  CLSID_ITAgent = "5770ece5-4b27-11d1-bf80-00805fc147d3"
+  ITAgent_GUID = "5770ece5-4b27-11d1-bf80-00805fc147d3"
+  IID_ITAgent = LibC::GUID.new(0x5770ece5_u32, 0x4b27_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITAgent
     lpVtbl : ITAgentVTbl*
   end
@@ -4758,8 +4758,8 @@ lib LibWin32
     get_average_time_to_answer : Proc(ITAgentSession*, Int32*, HRESULT)
   end
 
-  ITAgentSession_GUID = LibC::GUID.new("5afc3147-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_ITAgentSession = "5afc3147-4bcc-11d1-bf80-00805fc147d3"
+  ITAgentSession_GUID = "5afc3147-4bcc-11d1-bf80-00805fc147d3"
+  IID_ITAgentSession = LibC::GUID.new(0x5afc3147_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITAgentSession
     lpVtbl : ITAgentSessionVTbl*
   end
@@ -4777,8 +4777,8 @@ lib LibWin32
     get_queues : Proc(ITACDGroup*, VARIANT*, HRESULT)
   end
 
-  ITACDGroup_GUID = LibC::GUID.new("5afc3148-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_ITACDGroup = "5afc3148-4bcc-11d1-bf80-00805fc147d3"
+  ITACDGroup_GUID = "5afc3148-4bcc-11d1-bf80-00805fc147d3"
+  IID_ITACDGroup = LibC::GUID.new(0x5afc3148_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITACDGroup
     lpVtbl : ITACDGroupVTbl*
   end
@@ -4805,8 +4805,8 @@ lib LibWin32
     get_name : Proc(ITQueue*, UInt8**, HRESULT)
   end
 
-  ITQueue_GUID = LibC::GUID.new("5afc3149-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_ITQueue = "5afc3149-4bcc-11d1-bf80-00805fc147d3"
+  ITQueue_GUID = "5afc3149-4bcc-11d1-bf80-00805fc147d3"
+  IID_ITQueue = LibC::GUID.new(0x5afc3149_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITQueue
     lpVtbl : ITQueueVTbl*
   end
@@ -4823,8 +4823,8 @@ lib LibWin32
     get_event : Proc(ITAgentEvent*, AGENT_EVENT*, HRESULT)
   end
 
-  ITAgentEvent_GUID = LibC::GUID.new("5afc314a-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_ITAgentEvent = "5afc314a-4bcc-11d1-bf80-00805fc147d3"
+  ITAgentEvent_GUID = "5afc314a-4bcc-11d1-bf80-00805fc147d3"
+  IID_ITAgentEvent = LibC::GUID.new(0x5afc314a_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITAgentEvent
     lpVtbl : ITAgentEventVTbl*
   end
@@ -4841,8 +4841,8 @@ lib LibWin32
     get_event : Proc(ITAgentSessionEvent*, AGENT_SESSION_EVENT*, HRESULT)
   end
 
-  ITAgentSessionEvent_GUID = LibC::GUID.new("5afc314b-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_ITAgentSessionEvent = "5afc314b-4bcc-11d1-bf80-00805fc147d3"
+  ITAgentSessionEvent_GUID = "5afc314b-4bcc-11d1-bf80-00805fc147d3"
+  IID_ITAgentSessionEvent = LibC::GUID.new(0x5afc314b_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITAgentSessionEvent
     lpVtbl : ITAgentSessionEventVTbl*
   end
@@ -4859,8 +4859,8 @@ lib LibWin32
     get_event : Proc(ITACDGroupEvent*, ACDGROUP_EVENT*, HRESULT)
   end
 
-  ITACDGroupEvent_GUID = LibC::GUID.new("297f3032-bd11-11d1-a0a7-00805fc147d3")
-  CLSID_ITACDGroupEvent = "297f3032-bd11-11d1-a0a7-00805fc147d3"
+  ITACDGroupEvent_GUID = "297f3032-bd11-11d1-a0a7-00805fc147d3"
+  IID_ITACDGroupEvent = LibC::GUID.new(0x297f3032_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITACDGroupEvent
     lpVtbl : ITACDGroupEventVTbl*
   end
@@ -4877,8 +4877,8 @@ lib LibWin32
     get_event : Proc(ITQueueEvent*, ACDQUEUE_EVENT*, HRESULT)
   end
 
-  ITQueueEvent_GUID = LibC::GUID.new("297f3033-bd11-11d1-a0a7-00805fc147d3")
-  CLSID_ITQueueEvent = "297f3033-bd11-11d1-a0a7-00805fc147d3"
+  ITQueueEvent_GUID = "297f3033-bd11-11d1-a0a7-00805fc147d3"
+  IID_ITQueueEvent = LibC::GUID.new(0x297f3033_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITQueueEvent
     lpVtbl : ITQueueEventVTbl*
   end
@@ -4895,8 +4895,8 @@ lib LibWin32
     get_event : Proc(ITAgentHandlerEvent*, AGENTHANDLER_EVENT*, HRESULT)
   end
 
-  ITAgentHandlerEvent_GUID = LibC::GUID.new("297f3034-bd11-11d1-a0a7-00805fc147d3")
-  CLSID_ITAgentHandlerEvent = "297f3034-bd11-11d1-a0a7-00805fc147d3"
+  ITAgentHandlerEvent_GUID = "297f3034-bd11-11d1-a0a7-00805fc147d3"
+  IID_ITAgentHandlerEvent = LibC::GUID.new(0x297f3034_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITAgentHandlerEvent
     lpVtbl : ITAgentHandlerEventVTbl*
   end
@@ -4913,8 +4913,8 @@ lib LibWin32
     get_agent_handlers : Proc(ITTAPICallCenter*, VARIANT*, HRESULT)
   end
 
-  ITTAPICallCenter_GUID = LibC::GUID.new("5afc3154-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_ITTAPICallCenter = "5afc3154-4bcc-11d1-bf80-00805fc147d3"
+  ITTAPICallCenter_GUID = "5afc3154-4bcc-11d1-bf80-00805fc147d3"
+  IID_ITTAPICallCenter = LibC::GUID.new(0x5afc3154_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITTAPICallCenter
     lpVtbl : ITTAPICallCenterVTbl*
   end
@@ -4936,8 +4936,8 @@ lib LibWin32
     get_usable_addresses : Proc(ITAgentHandler*, VARIANT*, HRESULT)
   end
 
-  ITAgentHandler_GUID = LibC::GUID.new("587e8c22-9802-11d1-a0a4-00805fc147d3")
-  CLSID_ITAgentHandler = "587e8c22-9802-11d1-a0a4-00805fc147d3"
+  ITAgentHandler_GUID = "587e8c22-9802-11d1-a0a4-00805fc147d3"
+  IID_ITAgentHandler = LibC::GUID.new(0x587e8c22_u32, 0x9802_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct ITAgentHandler
     lpVtbl : ITAgentHandlerVTbl*
   end
@@ -4952,8 +4952,8 @@ lib LibWin32
     clone : Proc(IEnumAgent*, IEnumAgent*, HRESULT)
   end
 
-  IEnumAgent_GUID = LibC::GUID.new("5afc314d-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_IEnumAgent = "5afc314d-4bcc-11d1-bf80-00805fc147d3"
+  IEnumAgent_GUID = "5afc314d-4bcc-11d1-bf80-00805fc147d3"
+  IID_IEnumAgent = LibC::GUID.new(0x5afc314d_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct IEnumAgent
     lpVtbl : IEnumAgentVTbl*
   end
@@ -4968,8 +4968,8 @@ lib LibWin32
     clone : Proc(IEnumAgentSession*, IEnumAgentSession*, HRESULT)
   end
 
-  IEnumAgentSession_GUID = LibC::GUID.new("5afc314e-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_IEnumAgentSession = "5afc314e-4bcc-11d1-bf80-00805fc147d3"
+  IEnumAgentSession_GUID = "5afc314e-4bcc-11d1-bf80-00805fc147d3"
+  IID_IEnumAgentSession = LibC::GUID.new(0x5afc314e_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct IEnumAgentSession
     lpVtbl : IEnumAgentSessionVTbl*
   end
@@ -4984,8 +4984,8 @@ lib LibWin32
     clone : Proc(IEnumQueue*, IEnumQueue*, HRESULT)
   end
 
-  IEnumQueue_GUID = LibC::GUID.new("5afc3158-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_IEnumQueue = "5afc3158-4bcc-11d1-bf80-00805fc147d3"
+  IEnumQueue_GUID = "5afc3158-4bcc-11d1-bf80-00805fc147d3"
+  IID_IEnumQueue = LibC::GUID.new(0x5afc3158_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct IEnumQueue
     lpVtbl : IEnumQueueVTbl*
   end
@@ -5000,8 +5000,8 @@ lib LibWin32
     clone : Proc(IEnumACDGroup*, IEnumACDGroup*, HRESULT)
   end
 
-  IEnumACDGroup_GUID = LibC::GUID.new("5afc3157-4bcc-11d1-bf80-00805fc147d3")
-  CLSID_IEnumACDGroup = "5afc3157-4bcc-11d1-bf80-00805fc147d3"
+  IEnumACDGroup_GUID = "5afc3157-4bcc-11d1-bf80-00805fc147d3"
+  IID_IEnumACDGroup = LibC::GUID.new(0x5afc3157_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct IEnumACDGroup
     lpVtbl : IEnumACDGroupVTbl*
   end
@@ -5016,8 +5016,8 @@ lib LibWin32
     clone : Proc(IEnumAgentHandler*, IEnumAgentHandler*, HRESULT)
   end
 
-  IEnumAgentHandler_GUID = LibC::GUID.new("587e8c28-9802-11d1-a0a4-00805fc147d3")
-  CLSID_IEnumAgentHandler = "587e8c28-9802-11d1-a0a4-00805fc147d3"
+  IEnumAgentHandler_GUID = "587e8c28-9802-11d1-a0a4-00805fc147d3"
+  IID_IEnumAgentHandler = LibC::GUID.new(0x587e8c28_u32, 0x9802_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
   struct IEnumAgentHandler
     lpVtbl : IEnumAgentHandlerVTbl*
   end
@@ -5030,8 +5030,8 @@ lib LibWin32
     put_media_format : Proc(ITAMMediaFormat*, AM_MEDIA_TYPE*, HRESULT)
   end
 
-  ITAMMediaFormat_GUID = LibC::GUID.new("0364eb00-4a77-11d1-a671-006097c9a2e8")
-  CLSID_ITAMMediaFormat = "0364eb00-4a77-11d1-a671-006097c9a2e8"
+  ITAMMediaFormat_GUID = "0364eb00-4a77-11d1-a671-006097c9a2e8"
+  IID_ITAMMediaFormat = LibC::GUID.new(0x364eb00_u32, 0x4a77_u16, 0x11d1_u16, StaticArray[0xa6_u8, 0x71_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa2_u8, 0xe8_u8])
   struct ITAMMediaFormat
     lpVtbl : ITAMMediaFormatVTbl*
   end
@@ -5048,8 +5048,8 @@ lib LibWin32
     get_buffer_size : Proc(ITAllocatorProperties*, UInt32*, HRESULT)
   end
 
-  ITAllocatorProperties_GUID = LibC::GUID.new("c1bc3c90-bcfe-11d1-9745-00c04fd91ac0")
-  CLSID_ITAllocatorProperties = "c1bc3c90-bcfe-11d1-9745-00c04fd91ac0"
+  ITAllocatorProperties_GUID = "c1bc3c90-bcfe-11d1-9745-00c04fd91ac0"
+  IID_ITAllocatorProperties = LibC::GUID.new(0xc1bc3c90_u32, 0xbcfe_u16, 0x11d1_u16, StaticArray[0x97_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
   struct ITAllocatorProperties
     lpVtbl : ITAllocatorPropertiesVTbl*
   end
@@ -5061,8 +5061,8 @@ lib LibWin32
     fire_event : Proc(ITPluggableTerminalEventSink*, MSP_EVENT_INFO*, HRESULT)
   end
 
-  ITPluggableTerminalEventSink_GUID = LibC::GUID.new("6e0887be-ba1a-492e-bd10-4020ec5e33e0")
-  CLSID_ITPluggableTerminalEventSink = "6e0887be-ba1a-492e-bd10-4020ec5e33e0"
+  ITPluggableTerminalEventSink_GUID = "6e0887be-ba1a-492e-bd10-4020ec5e33e0"
+  IID_ITPluggableTerminalEventSink = LibC::GUID.new(0x6e0887be_u32, 0xba1a_u16, 0x492e_u16, StaticArray[0xbd_u8, 0x10_u8, 0x40_u8, 0x20_u8, 0xec_u8, 0x5e_u8, 0x33_u8, 0xe0_u8])
   struct ITPluggableTerminalEventSink
     lpVtbl : ITPluggableTerminalEventSinkVTbl*
   end
@@ -5075,8 +5075,8 @@ lib LibWin32
     unregister_sink : Proc(ITPluggableTerminalEventSinkRegistration*, HRESULT)
   end
 
-  ITPluggableTerminalEventSinkRegistration_GUID = LibC::GUID.new("f7115709-a216-4957-a759-060ab32a90d1")
-  CLSID_ITPluggableTerminalEventSinkRegistration = "f7115709-a216-4957-a759-060ab32a90d1"
+  ITPluggableTerminalEventSinkRegistration_GUID = "f7115709-a216-4957-a759-060ab32a90d1"
+  IID_ITPluggableTerminalEventSinkRegistration = LibC::GUID.new(0xf7115709_u32, 0xa216_u16, 0x4957_u16, StaticArray[0xa7_u8, 0x59_u8, 0x6_u8, 0xa_u8, 0xb3_u8, 0x2a_u8, 0x90_u8, 0xd1_u8])
   struct ITPluggableTerminalEventSinkRegistration
     lpVtbl : ITPluggableTerminalEventSinkRegistrationVTbl*
   end
@@ -5093,8 +5093,8 @@ lib LibWin32
     get_event : Proc(ITMSPAddress*, UInt32*, UInt8*, HRESULT)
   end
 
-  ITMSPAddress_GUID = LibC::GUID.new("ee3bd600-3868-11d2-a045-00c04fb6809f")
-  CLSID_ITMSPAddress = "ee3bd600-3868-11d2-a045-00c04fb6809f"
+  ITMSPAddress_GUID = "ee3bd600-3868-11d2-a045-00c04fb6809f"
+  IID_ITMSPAddress = LibC::GUID.new(0xee3bd600_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
   struct ITMSPAddress
     lpVtbl : ITMSPAddressVTbl*
   end
@@ -5109,8 +5109,8 @@ lib LibWin32
     invoke : Proc(ITTAPIDispatchEventNotification*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  ITTAPIDispatchEventNotification_GUID = LibC::GUID.new("9f34325b-7e62-11d2-9457-00c04f8ec888")
-  CLSID_ITTAPIDispatchEventNotification = "9f34325b-7e62-11d2-9457-00c04f8ec888"
+  ITTAPIDispatchEventNotification_GUID = "9f34325b-7e62-11d2-9457-00c04f8ec888"
+  IID_ITTAPIDispatchEventNotification = LibC::GUID.new(0x9f34325b_u32, 0x7e62_u16, 0x11d2_u16, StaticArray[0x94_u8, 0x57_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xc8_u8, 0x88_u8])
   struct ITTAPIDispatchEventNotification
     lpVtbl : ITTAPIDispatchEventNotificationVTbl*
   end
@@ -5140,8 +5140,8 @@ lib LibWin32
     put_stop_time : Proc(ITDirectoryObjectConference*, Float64, HRESULT)
   end
 
-  ITDirectoryObjectConference_GUID = LibC::GUID.new("f1029e5d-cb5b-11d0-8d59-00c04fd91ac0")
-  CLSID_ITDirectoryObjectConference = "f1029e5d-cb5b-11d0-8d59-00c04fd91ac0"
+  ITDirectoryObjectConference_GUID = "f1029e5d-cb5b-11d0-8d59-00c04fd91ac0"
+  IID_ITDirectoryObjectConference = LibC::GUID.new(0xf1029e5d_u32, 0xcb5b_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x59_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
   struct ITDirectoryObjectConference
     lpVtbl : ITDirectoryObjectConferenceVTbl*
   end
@@ -5158,8 +5158,8 @@ lib LibWin32
     put_ip_phone_primary : Proc(ITDirectoryObjectUser*, UInt8*, HRESULT)
   end
 
-  ITDirectoryObjectUser_GUID = LibC::GUID.new("34621d6f-6cff-11d1-aff7-00c04fc31fee")
-  CLSID_ITDirectoryObjectUser = "34621d6f-6cff-11d1-aff7-00c04fc31fee"
+  ITDirectoryObjectUser_GUID = "34621d6f-6cff-11d1-aff7-00c04fc31fee"
+  IID_ITDirectoryObjectUser = LibC::GUID.new(0x34621d6f_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
   struct ITDirectoryObjectUser
     lpVtbl : ITDirectoryObjectUserVTbl*
   end
@@ -5174,8 +5174,8 @@ lib LibWin32
     clone : Proc(IEnumDialableAddrs*, IEnumDialableAddrs*, HRESULT)
   end
 
-  IEnumDialableAddrs_GUID = LibC::GUID.new("34621d70-6cff-11d1-aff7-00c04fc31fee")
-  CLSID_IEnumDialableAddrs = "34621d70-6cff-11d1-aff7-00c04fc31fee"
+  IEnumDialableAddrs_GUID = "34621d70-6cff-11d1-aff7-00c04fc31fee"
+  IID_IEnumDialableAddrs = LibC::GUID.new(0x34621d70_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
   struct IEnumDialableAddrs
     lpVtbl : IEnumDialableAddrsVTbl*
   end
@@ -5197,8 +5197,8 @@ lib LibWin32
     put_security_descriptor : Proc(ITDirectoryObject*, IDispatch, HRESULT)
   end
 
-  ITDirectoryObject_GUID = LibC::GUID.new("34621d6e-6cff-11d1-aff7-00c04fc31fee")
-  CLSID_ITDirectoryObject = "34621d6e-6cff-11d1-aff7-00c04fc31fee"
+  ITDirectoryObject_GUID = "34621d6e-6cff-11d1-aff7-00c04fc31fee"
+  IID_ITDirectoryObject = LibC::GUID.new(0x34621d6e_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
   struct ITDirectoryObject
     lpVtbl : ITDirectoryObjectVTbl*
   end
@@ -5213,8 +5213,8 @@ lib LibWin32
     clone : Proc(IEnumDirectoryObject*, IEnumDirectoryObject*, HRESULT)
   end
 
-  IEnumDirectoryObject_GUID = LibC::GUID.new("06c9b64a-306d-11d1-9774-00c04fd91ac0")
-  CLSID_IEnumDirectoryObject = "06c9b64a-306d-11d1-9774-00c04fd91ac0"
+  IEnumDirectoryObject_GUID = "06c9b64a-306d-11d1-9774-00c04fd91ac0"
+  IID_IEnumDirectoryObject = LibC::GUID.new(0x6c9b64a_u32, 0x306d_u16, 0x11d1_u16, StaticArray[0x97_u8, 0x74_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
   struct IEnumDirectoryObject
     lpVtbl : IEnumDirectoryObjectVTbl*
   end
@@ -5231,8 +5231,8 @@ lib LibWin32
     put_port : Proc(ITILSConfig*, Int32, HRESULT)
   end
 
-  ITILSConfig_GUID = LibC::GUID.new("34621d72-6cff-11d1-aff7-00c04fc31fee")
-  CLSID_ITILSConfig = "34621d72-6cff-11d1-aff7-00c04fc31fee"
+  ITILSConfig_GUID = "34621d72-6cff-11d1-aff7-00c04fc31fee"
+  IID_ITILSConfig = LibC::GUID.new(0x34621d72_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
   struct ITILSConfig
     lpVtbl : ITILSConfigVTbl*
   end
@@ -5261,8 +5261,8 @@ lib LibWin32
     enumerate_directory_objects : Proc(ITDirectory*, DIRECTORY_OBJECT_TYPE, UInt8*, IEnumDirectoryObject*, HRESULT)
   end
 
-  ITDirectory_GUID = LibC::GUID.new("34621d6c-6cff-11d1-aff7-00c04fc31fee")
-  CLSID_ITDirectory = "34621d6c-6cff-11d1-aff7-00c04fc31fee"
+  ITDirectory_GUID = "34621d6c-6cff-11d1-aff7-00c04fc31fee"
+  IID_ITDirectory = LibC::GUID.new(0x34621d6c_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
   struct ITDirectory
     lpVtbl : ITDirectoryVTbl*
   end
@@ -5277,8 +5277,8 @@ lib LibWin32
     clone : Proc(IEnumDirectory*, IEnumDirectory*, HRESULT)
   end
 
-  IEnumDirectory_GUID = LibC::GUID.new("34621d6d-6cff-11d1-aff7-00c04fc31fee")
-  CLSID_IEnumDirectory = "34621d6d-6cff-11d1-aff7-00c04fc31fee"
+  IEnumDirectory_GUID = "34621d6d-6cff-11d1-aff7-00c04fc31fee"
+  IID_IEnumDirectory = LibC::GUID.new(0x34621d6d_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
   struct IEnumDirectory
     lpVtbl : IEnumDirectoryVTbl*
   end
@@ -5297,8 +5297,8 @@ lib LibWin32
     create_directory_object : Proc(ITRendezvous*, DIRECTORY_OBJECT_TYPE, UInt8*, ITDirectoryObject*, HRESULT)
   end
 
-  ITRendezvous_GUID = LibC::GUID.new("34621d6b-6cff-11d1-aff7-00c04fc31fee")
-  CLSID_ITRendezvous = "34621d6b-6cff-11d1-aff7-00c04fc31fee"
+  ITRendezvous_GUID = "34621d6b-6cff-11d1-aff7-00c04fc31fee"
+  IID_ITRendezvous = LibC::GUID.new(0x34621d6b_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
   struct ITRendezvous
     lpVtbl : ITRendezvousVTbl*
   end
@@ -5318,8 +5318,8 @@ lib LibWin32
     get_ttl : Proc(IMcastScope*, Int32*, HRESULT)
   end
 
-  IMcastScope_GUID = LibC::GUID.new("df0daef4-a289-11d1-8697-006008b0e5d2")
-  CLSID_IMcastScope = "df0daef4-a289-11d1-8697-006008b0e5d2"
+  IMcastScope_GUID = "df0daef4-a289-11d1-8697-006008b0e5d2"
+  IID_IMcastScope = LibC::GUID.new(0xdf0daef4_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
   struct IMcastScope
     lpVtbl : IMcastScopeVTbl*
   end
@@ -5344,8 +5344,8 @@ lib LibWin32
     enumerate_addresses : Proc(IMcastLeaseInfo*, IEnumBstr*, HRESULT)
   end
 
-  IMcastLeaseInfo_GUID = LibC::GUID.new("df0daefd-a289-11d1-8697-006008b0e5d2")
-  CLSID_IMcastLeaseInfo = "df0daefd-a289-11d1-8697-006008b0e5d2"
+  IMcastLeaseInfo_GUID = "df0daefd-a289-11d1-8697-006008b0e5d2"
+  IID_IMcastLeaseInfo = LibC::GUID.new(0xdf0daefd_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
   struct IMcastLeaseInfo
     lpVtbl : IMcastLeaseInfoVTbl*
   end
@@ -5360,8 +5360,8 @@ lib LibWin32
     clone : Proc(IEnumMcastScope*, IEnumMcastScope*, HRESULT)
   end
 
-  IEnumMcastScope_GUID = LibC::GUID.new("df0daf09-a289-11d1-8697-006008b0e5d2")
-  CLSID_IEnumMcastScope = "df0daf09-a289-11d1-8697-006008b0e5d2"
+  IEnumMcastScope_GUID = "df0daf09-a289-11d1-8697-006008b0e5d2"
+  IID_IEnumMcastScope = LibC::GUID.new(0xdf0daf09_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
   struct IEnumMcastScope
     lpVtbl : IEnumMcastScopeVTbl*
   end
@@ -5383,8 +5383,8 @@ lib LibWin32
     create_lease_info_from_variant : Proc(IMcastAddressAllocation*, Float64, Float64, VARIANT, UInt8*, UInt8*, IMcastLeaseInfo*, HRESULT)
   end
 
-  IMcastAddressAllocation_GUID = LibC::GUID.new("df0daef1-a289-11d1-8697-006008b0e5d2")
-  CLSID_IMcastAddressAllocation = "df0daef1-a289-11d1-8697-006008b0e5d2"
+  IMcastAddressAllocation_GUID = "df0daef1-a289-11d1-8697-006008b0e5d2"
+  IID_IMcastAddressAllocation = LibC::GUID.new(0xdf0daef1_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
   struct IMcastAddressAllocation
     lpVtbl : IMcastAddressAllocationVTbl*
   end

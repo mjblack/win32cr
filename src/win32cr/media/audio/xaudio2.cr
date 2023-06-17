@@ -235,12 +235,12 @@ lib LibWin32
   X3DAUDIO_CALCULATE_EMITTER_ANGLE = 64_u32
   X3DAUDIO_CALCULATE_ZEROCENTER = 65536_u32
   X3DAUDIO_CALCULATE_REDIRECT_TO_LFE = 131072_u32
-  FXEQ = LibC::GUID.new(0xf5e01117_u32, 0xd6c4_u16, 0x485a_u16, StaticArray[0xa3_u8, 0xf5_u8, 0x69_u8, 0x51_u8, 0x96_u8, 0xf3_u8, 0xdb_u8, 0xfa_u8])
-  FXMasteringLimiter = LibC::GUID.new(0xc4137916_u32, 0x2be1_u16, 0x46fd_u16, StaticArray[0x85_u8, 0x99_u8, 0x44_u8, 0x15_u8, 0x36_u8, 0xf4_u8, 0x98_u8, 0x56_u8])
-  FXReverb = LibC::GUID.new(0x7d9aca56_u32, 0xcb68_u16, 0x4807_u16, StaticArray[0xb6_u8, 0x32_u8, 0xb1_u8, 0x37_u8, 0x35_u8, 0x2e_u8, 0x85_u8, 0x96_u8])
-  FXEcho = LibC::GUID.new(0x5039d740_u32, 0xf736_u16, 0x449a_u16, StaticArray[0x84_u8, 0xd3_u8, 0xa5_u8, 0x62_u8, 0x2_u8, 0x55_u8, 0x7b_u8, 0x87_u8])
-  AudioVolumeMeter = LibC::GUID.new(0x4fc3b166_u32, 0x972a_u16, 0x40cf_u16, StaticArray[0xbc_u8, 0x37_u8, 0x7d_u8, 0xb0_u8, 0x3d_u8, 0xb2_u8, 0xfb_u8, 0xa3_u8])
-  AudioReverb = LibC::GUID.new(0xc2633b16_u32, 0x471b_u16, 0x4498_u16, StaticArray[0xb8_u8, 0xc5_u8, 0x4f_u8, 0x9_u8, 0x59_u8, 0xe2_u8, 0xec_u8, 0x9_u8])
+  CLSID_FXEQ = LibC::GUID.new(0xf5e01117_u32, 0xd6c4_u16, 0x485a_u16, StaticArray[0xa3_u8, 0xf5_u8, 0x69_u8, 0x51_u8, 0x96_u8, 0xf3_u8, 0xdb_u8, 0xfa_u8])
+  CLSID_FXMasteringLimiter = LibC::GUID.new(0xc4137916_u32, 0x2be1_u16, 0x46fd_u16, StaticArray[0x85_u8, 0x99_u8, 0x44_u8, 0x15_u8, 0x36_u8, 0xf4_u8, 0x98_u8, 0x56_u8])
+  CLSID_FXReverb = LibC::GUID.new(0x7d9aca56_u32, 0xcb68_u16, 0x4807_u16, StaticArray[0xb6_u8, 0x32_u8, 0xb1_u8, 0x37_u8, 0x35_u8, 0x2e_u8, 0x85_u8, 0x96_u8])
+  CLSID_FXEcho = LibC::GUID.new(0x5039d740_u32, 0xf736_u16, 0x449a_u16, StaticArray[0x84_u8, 0xd3_u8, 0xa5_u8, 0x62_u8, 0x2_u8, 0x55_u8, 0x7b_u8, 0x87_u8])
+  CLSID_AudioVolumeMeter = LibC::GUID.new(0x4fc3b166_u32, 0x972a_u16, 0x40cf_u16, StaticArray[0xbc_u8, 0x37_u8, 0x7d_u8, 0xb0_u8, 0x3d_u8, 0xb2_u8, 0xfb_u8, 0xa3_u8])
+  CLSID_AudioReverb = LibC::GUID.new(0xc2633b16_u32, 0x471b_u16, 0x4498_u16, StaticArray[0xb8_u8, 0xc5_u8, 0x4f_u8, 0x9_u8, 0x59_u8, 0xe2_u8, 0xec_u8, 0x9_u8])
 
 
   enum XAPO_BUFFER_FLAGS : Int32
@@ -494,8 +494,8 @@ lib LibWin32
     calc_output_frames : Proc(IXAPO*, UInt32, UInt32)
   end
 
-  IXAPO_GUID = LibC::GUID.new("a410b984-9839-4819-a0be-2856ae6b3adb")
-  CLSID_IXAPO = "a410b984-9839-4819-a0be-2856ae6b3adb"
+  IXAPO_GUID = "a410b984-9839-4819-a0be-2856ae6b3adb"
+  IID_IXAPO = LibC::GUID.new(0xa410b984_u32, 0x9839_u16, 0x4819_u16, StaticArray[0xa0_u8, 0xbe_u8, 0x28_u8, 0x56_u8, 0xae_u8, 0x6b_u8, 0x3a_u8, 0xdb_u8])
   struct IXAPO
     lpVtbl : IXAPOVTbl*
   end
@@ -508,8 +508,8 @@ lib LibWin32
     get_parameters : Proc(IXAPOParameters*, Void*, UInt32, Void)
   end
 
-  IXAPOParameters_GUID = LibC::GUID.new("26d95c66-80f2-499a-ad54-5ae7f01c6d98")
-  CLSID_IXAPOParameters = "26d95c66-80f2-499a-ad54-5ae7f01c6d98"
+  IXAPOParameters_GUID = "26d95c66-80f2-499a-ad54-5ae7f01c6d98"
+  IID_IXAPOParameters = LibC::GUID.new(0x26d95c66_u32, 0x80f2_u16, 0x499a_u16, StaticArray[0xad_u8, 0x54_u8, 0x5a_u8, 0xe7_u8, 0xf0_u8, 0x1c_u8, 0x6d_u8, 0x98_u8])
   struct IXAPOParameters
     lpVtbl : IXAPOParametersVTbl*
   end
@@ -530,8 +530,8 @@ lib LibWin32
     set_debug_configuration : Proc(IXAudio2*, XAUDIO2_DEBUG_CONFIGURATION*, Void*, Void)
   end
 
-  IXAudio2_GUID = LibC::GUID.new("2b02e3cf-2e0b-4ec3-be45-1b2a3fe7210d")
-  CLSID_IXAudio2 = "2b02e3cf-2e0b-4ec3-be45-1b2a3fe7210d"
+  IXAudio2_GUID = "2b02e3cf-2e0b-4ec3-be45-1b2a3fe7210d"
+  IID_IXAudio2 = LibC::GUID.new(0x2b02e3cf_u32, 0x2e0b_u16, 0x4ec3_u16, StaticArray[0xbe_u8, 0x45_u8, 0x1b_u8, 0x2a_u8, 0x3f_u8, 0xe7_u8, 0x21_u8, 0xd_u8])
   struct IXAudio2
     lpVtbl : IXAudio2VTbl*
   end
@@ -544,8 +544,8 @@ lib LibWin32
     get_processor : Proc(IXAudio2Extension*, UInt32*, Void)
   end
 
-  IXAudio2Extension_GUID = LibC::GUID.new("84ac29bb-d619-44d2-b197-e4acf7df3ed6")
-  CLSID_IXAudio2Extension = "84ac29bb-d619-44d2-b197-e4acf7df3ed6"
+  IXAudio2Extension_GUID = "84ac29bb-d619-44d2-b197-e4acf7df3ed6"
+  IID_IXAudio2Extension = LibC::GUID.new(0x84ac29bb_u32, 0xd619_u16, 0x44d2_u16, StaticArray[0xb1_u8, 0x97_u8, 0xe4_u8, 0xac_u8, 0xf7_u8, 0xdf_u8, 0x3e_u8, 0xd6_u8])
   struct IXAudio2Extension
     lpVtbl : IXAudio2ExtensionVTbl*
   end
@@ -699,8 +699,8 @@ lib LibWin32
     set_environment : Proc(IXAPOHrtfParameters*, HrtfEnvironment, HRESULT)
   end
 
-  IXAPOHrtfParameters_GUID = LibC::GUID.new("15b3cd66-e9de-4464-b6e6-2bc3cf63d455")
-  CLSID_IXAPOHrtfParameters = "15b3cd66-e9de-4464-b6e6-2bc3cf63d455"
+  IXAPOHrtfParameters_GUID = "15b3cd66-e9de-4464-b6e6-2bc3cf63d455"
+  IID_IXAPOHrtfParameters = LibC::GUID.new(0x15b3cd66_u32, 0xe9de_u16, 0x4464_u16, StaticArray[0xb6_u8, 0xe6_u8, 0x2b_u8, 0xc3_u8, 0xcf_u8, 0x63_u8, 0xd4_u8, 0x55_u8])
   struct IXAPOHrtfParameters
     lpVtbl : IXAPOHrtfParametersVTbl*
   end

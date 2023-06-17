@@ -117,40 +117,40 @@ lib LibWin32
   GPO_BROWSE_INITTOALL = 16_u32
   GPO_BROWSE_NOUSERGPOS = 32_u32
   GPO_BROWSE_SENDAPPLYONEDIT = 64_u32
-  GPM = LibC::GUID.new(0xf5694708_u32, 0x88fe_u16, 0x4b35_u16, StaticArray[0xba_u8, 0xbf_u8, 0xe5_u8, 0x61_u8, 0x62_u8, 0xd5_u8, 0xfb_u8, 0xc8_u8])
-  GPMDomain = LibC::GUID.new(0x710901be_u32, 0x1050_u16, 0x4cb1_u16, StaticArray[0x83_u8, 0x8a_u8, 0xc5_u8, 0xcf_u8, 0xf2_u8, 0x59_u8, 0xe1_u8, 0x83_u8])
-  GPMSitesContainer = LibC::GUID.new(0x229f5c42_u32, 0x852c_u16, 0x4b30_u16, StaticArray[0x94_u8, 0x5f_u8, 0xc5_u8, 0x22_u8, 0xbe_u8, 0x9b_u8, 0xd3_u8, 0x86_u8])
-  GPMBackupDir = LibC::GUID.new(0xfce4a59d_u32, 0xf21_u16, 0x4afa_u16, StaticArray[0xb8_u8, 0x59_u8, 0xe6_u8, 0xd0_u8, 0xc6_u8, 0x2c_u8, 0xd1_u8, 0xc_u8])
-  GPMSOM = LibC::GUID.new(0x32d93fac_u32, 0x450e_u16, 0x44cf_u16, StaticArray[0x82_u8, 0x9c_u8, 0x8b_u8, 0x22_u8, 0xff_u8, 0x6b_u8, 0xda_u8, 0xe1_u8])
-  GPMSearchCriteria = LibC::GUID.new(0x17aaca26_u32, 0x5ce0_u16, 0x44fa_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x52_u8, 0x59_u8, 0xe6_u8, 0x48_u8, 0x35_u8, 0x66_u8])
-  GPMPermission = LibC::GUID.new(0x5871a40a_u32, 0xe9c0_u16, 0x46ec_u16, StaticArray[0x91_u8, 0x3e_u8, 0x94_u8, 0x4e_u8, 0xf9_u8, 0x22_u8, 0x5a_u8, 0x94_u8])
-  GPMSecurityInfo = LibC::GUID.new(0x547a5e8f_u32, 0x9162_u16, 0x4516_u16, StaticArray[0xa4_u8, 0xdf_u8, 0x9d_u8, 0xdb_u8, 0x96_u8, 0x86_u8, 0xd8_u8, 0x46_u8])
-  GPMBackup = LibC::GUID.new(0xed1a54b8_u32, 0x5efa_u16, 0x482a_u16, StaticArray[0x93_u8, 0xc0_u8, 0x8a_u8, 0xd8_u8, 0x6f_u8, 0xd_u8, 0x68_u8, 0xc3_u8])
-  GPMBackupCollection = LibC::GUID.new(0xeb8f035b_u32, 0x70db_u16, 0x4a9f_u16, StaticArray[0x96_u8, 0x76_u8, 0x37_u8, 0xc2_u8, 0x59_u8, 0x94_u8, 0xe9_u8, 0xdc_u8])
-  GPMSOMCollection = LibC::GUID.new(0x24c1f147_u32, 0x3720_u16, 0x4f5b_u16, StaticArray[0xa9_u8, 0xc3_u8, 0x6_u8, 0xb4_u8, 0xe4_u8, 0xf9_u8, 0x31_u8, 0xd2_u8])
-  GPMWMIFilter = LibC::GUID.new(0x626745d8_u32, 0xdea_u16, 0x4062_u16, StaticArray[0xbf_u8, 0x60_u8, 0xcf_u8, 0xc5_u8, 0xb1_u8, 0xca_u8, 0x12_u8, 0x86_u8])
-  GPMWMIFilterCollection = LibC::GUID.new(0x74dc6d28_u32, 0xe820_u16, 0x47d6_u16, StaticArray[0xa0_u8, 0xb8_u8, 0xf0_u8, 0x8d_u8, 0x93_u8, 0xd7_u8, 0xfa_u8, 0x33_u8])
-  GPMRSOP = LibC::GUID.new(0x489b0caf_u32, 0x9ec2_u16, 0x4eb7_u16, StaticArray[0x91_u8, 0xf5_u8, 0xb6_u8, 0xf7_u8, 0x1d_u8, 0x43_u8, 0xda_u8, 0x8c_u8])
-  GPMGPO = LibC::GUID.new(0xd2ce2994_u32, 0x59b5_u16, 0x4064_u16, StaticArray[0xb5_u8, 0x81_u8, 0x4d_u8, 0x68_u8, 0x48_u8, 0x6a_u8, 0x16_u8, 0xc4_u8])
-  GPMGPOCollection = LibC::GUID.new(0x7a057325_u32, 0x832d_u16, 0x4de3_u16, StaticArray[0xa4_u8, 0x1f_u8, 0xc7_u8, 0x80_u8, 0x43_u8, 0x6a_u8, 0x4e_u8, 0x9_u8])
-  GPMGPOLink = LibC::GUID.new(0xc1df9880_u32, 0x5303_u16, 0x42c6_u16, StaticArray[0x8a_u8, 0x3c_u8, 0x4_u8, 0x88_u8, 0xe1_u8, 0xbf_u8, 0x73_u8, 0x64_u8])
-  GPMGPOLinksCollection = LibC::GUID.new(0xf6ed581a_u32, 0x49a5_u16, 0x47e2_u16, StaticArray[0xb7_u8, 0x71_u8, 0xfd_u8, 0x8d_u8, 0xc0_u8, 0x2b_u8, 0x62_u8, 0x59_u8])
-  GPMAsyncCancel = LibC::GUID.new(0x372796a9_u32, 0x76ec_u16, 0x479d_u16, StaticArray[0xad_u8, 0x6c_u8, 0x55_u8, 0x63_u8, 0x18_u8, 0xed_u8, 0x5f_u8, 0x9d_u8])
-  GPMStatusMsgCollection = LibC::GUID.new(0x2824e4be_u32, 0x4bcc_u16, 0x4cac_u16, StaticArray[0x9e_u8, 0x60_u8, 0xe_u8, 0x3e_u8, 0xd7_u8, 0xf1_u8, 0x24_u8, 0x96_u8])
-  GPMStatusMessage = LibC::GUID.new(0x4b77cc94_u32, 0xd255_u16, 0x409b_u16, StaticArray[0xbc_u8, 0x62_u8, 0x37_u8, 0x8_u8, 0x81_u8, 0x71_u8, 0x5a_u8, 0x19_u8])
-  GPMTrustee = LibC::GUID.new(0xc54a700d_u32, 0x19b6_u16, 0x4211_u16, StaticArray[0xbc_u8, 0xb0_u8, 0xe8_u8, 0xe2_u8, 0x47_u8, 0x5e_u8, 0x47_u8, 0x1e_u8])
-  GPMClientSideExtension = LibC::GUID.new(0xc1a2e70e_u32, 0x659c_u16, 0x4b1a_u16, StaticArray[0x94_u8, 0xb_u8, 0xf8_u8, 0x8b_u8, 0xa_u8, 0xf9_u8, 0xc8_u8, 0xa4_u8])
-  GPMCSECollection = LibC::GUID.new(0xcf92b828_u32, 0x2d44_u16, 0x4b61_u16, StaticArray[0xb1_u8, 0xa_u8, 0xb3_u8, 0x27_u8, 0xaf_u8, 0xd4_u8, 0x2d_u8, 0xa8_u8])
-  GPMConstants = LibC::GUID.new(0x3855e880_u32, 0xcd9e_u16, 0x4d0c_u16, StaticArray[0x9e_u8, 0xaf_u8, 0x15_u8, 0x79_u8, 0x28_u8, 0x3a_u8, 0x18_u8, 0x88_u8])
-  GPMResult = LibC::GUID.new(0x92101ac0_u32, 0x9287_u16, 0x4206_u16, StaticArray[0xa3_u8, 0xb2_u8, 0x4b_u8, 0xdb_u8, 0x73_u8, 0xd2_u8, 0x25_u8, 0xf6_u8])
-  GPMMapEntryCollection = LibC::GUID.new(0xcf75d5b_u32, 0xa3a1_u16, 0x4c55_u16, StaticArray[0xb4_u8, 0xfe_u8, 0x9e_u8, 0x14_u8, 0x9c_u8, 0x41_u8, 0xf6_u8, 0x6d_u8])
-  GPMMapEntry = LibC::GUID.new(0x8c975253_u32, 0x5431_u16, 0x4471_u16, StaticArray[0xb3_u8, 0x5d_u8, 0x6_u8, 0x26_u8, 0xc9_u8, 0x28_u8, 0x25_u8, 0x8a_u8])
-  GPMMigrationTable = LibC::GUID.new(0x55af4043_u32, 0x2a06_u16, 0x4f72_u16, StaticArray[0xab_u8, 0xef_u8, 0x63_u8, 0x1b_u8, 0x44_u8, 0x7_u8, 0x9c_u8, 0x76_u8])
-  GPMBackupDirEx = LibC::GUID.new(0xe8c0988a_u32, 0xcf03_u16, 0x4c5b_u16, StaticArray[0x8b_u8, 0xe2_u8, 0x2a_u8, 0xa9_u8, 0xad_u8, 0x32_u8, 0xaa_u8, 0xda_u8])
-  GPMStarterGPOBackupCollection = LibC::GUID.new(0xe75ea59d_u32, 0x1aeb_u16, 0x4cb5_u16, StaticArray[0xa7_u8, 0x8a_u8, 0x28_u8, 0x1d_u8, 0xaa_u8, 0x58_u8, 0x24_u8, 0x6_u8])
-  GPMStarterGPOBackup = LibC::GUID.new(0x389e400a_u32, 0xd8ef_u16, 0x455b_u16, StaticArray[0xa8_u8, 0x61_u8, 0x5f_u8, 0x9c_u8, 0xa3_u8, 0x4a_u8, 0x6a_u8, 0x2_u8])
-  GPMTemplate = LibC::GUID.new(0xecf1d454_u32, 0x71da_u16, 0x4e2f_u16, StaticArray[0xa8_u8, 0xc0_u8, 0x81_u8, 0x85_u8, 0x46_u8, 0x59_u8, 0x11_u8, 0xd9_u8])
-  GPMStarterGPOCollection = LibC::GUID.new(0x82f8aa8b_u32, 0x49ba_u16, 0x43b2_u16, StaticArray[0x95_u8, 0x6e_u8, 0x33_u8, 0x97_u8, 0xf9_u8, 0xb9_u8, 0x4c_u8, 0x3a_u8])
+  CLSID_GPM = LibC::GUID.new(0xf5694708_u32, 0x88fe_u16, 0x4b35_u16, StaticArray[0xba_u8, 0xbf_u8, 0xe5_u8, 0x61_u8, 0x62_u8, 0xd5_u8, 0xfb_u8, 0xc8_u8])
+  CLSID_GPMDomain = LibC::GUID.new(0x710901be_u32, 0x1050_u16, 0x4cb1_u16, StaticArray[0x83_u8, 0x8a_u8, 0xc5_u8, 0xcf_u8, 0xf2_u8, 0x59_u8, 0xe1_u8, 0x83_u8])
+  CLSID_GPMSitesContainer = LibC::GUID.new(0x229f5c42_u32, 0x852c_u16, 0x4b30_u16, StaticArray[0x94_u8, 0x5f_u8, 0xc5_u8, 0x22_u8, 0xbe_u8, 0x9b_u8, 0xd3_u8, 0x86_u8])
+  CLSID_GPMBackupDir = LibC::GUID.new(0xfce4a59d_u32, 0xf21_u16, 0x4afa_u16, StaticArray[0xb8_u8, 0x59_u8, 0xe6_u8, 0xd0_u8, 0xc6_u8, 0x2c_u8, 0xd1_u8, 0xc_u8])
+  CLSID_GPMSOM = LibC::GUID.new(0x32d93fac_u32, 0x450e_u16, 0x44cf_u16, StaticArray[0x82_u8, 0x9c_u8, 0x8b_u8, 0x22_u8, 0xff_u8, 0x6b_u8, 0xda_u8, 0xe1_u8])
+  CLSID_GPMSearchCriteria = LibC::GUID.new(0x17aaca26_u32, 0x5ce0_u16, 0x44fa_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x52_u8, 0x59_u8, 0xe6_u8, 0x48_u8, 0x35_u8, 0x66_u8])
+  CLSID_GPMPermission = LibC::GUID.new(0x5871a40a_u32, 0xe9c0_u16, 0x46ec_u16, StaticArray[0x91_u8, 0x3e_u8, 0x94_u8, 0x4e_u8, 0xf9_u8, 0x22_u8, 0x5a_u8, 0x94_u8])
+  CLSID_GPMSecurityInfo = LibC::GUID.new(0x547a5e8f_u32, 0x9162_u16, 0x4516_u16, StaticArray[0xa4_u8, 0xdf_u8, 0x9d_u8, 0xdb_u8, 0x96_u8, 0x86_u8, 0xd8_u8, 0x46_u8])
+  CLSID_GPMBackup = LibC::GUID.new(0xed1a54b8_u32, 0x5efa_u16, 0x482a_u16, StaticArray[0x93_u8, 0xc0_u8, 0x8a_u8, 0xd8_u8, 0x6f_u8, 0xd_u8, 0x68_u8, 0xc3_u8])
+  CLSID_GPMBackupCollection = LibC::GUID.new(0xeb8f035b_u32, 0x70db_u16, 0x4a9f_u16, StaticArray[0x96_u8, 0x76_u8, 0x37_u8, 0xc2_u8, 0x59_u8, 0x94_u8, 0xe9_u8, 0xdc_u8])
+  CLSID_GPMSOMCollection = LibC::GUID.new(0x24c1f147_u32, 0x3720_u16, 0x4f5b_u16, StaticArray[0xa9_u8, 0xc3_u8, 0x6_u8, 0xb4_u8, 0xe4_u8, 0xf9_u8, 0x31_u8, 0xd2_u8])
+  CLSID_GPMWMIFilter = LibC::GUID.new(0x626745d8_u32, 0xdea_u16, 0x4062_u16, StaticArray[0xbf_u8, 0x60_u8, 0xcf_u8, 0xc5_u8, 0xb1_u8, 0xca_u8, 0x12_u8, 0x86_u8])
+  CLSID_GPMWMIFilterCollection = LibC::GUID.new(0x74dc6d28_u32, 0xe820_u16, 0x47d6_u16, StaticArray[0xa0_u8, 0xb8_u8, 0xf0_u8, 0x8d_u8, 0x93_u8, 0xd7_u8, 0xfa_u8, 0x33_u8])
+  CLSID_GPMRSOP = LibC::GUID.new(0x489b0caf_u32, 0x9ec2_u16, 0x4eb7_u16, StaticArray[0x91_u8, 0xf5_u8, 0xb6_u8, 0xf7_u8, 0x1d_u8, 0x43_u8, 0xda_u8, 0x8c_u8])
+  CLSID_GPMGPO = LibC::GUID.new(0xd2ce2994_u32, 0x59b5_u16, 0x4064_u16, StaticArray[0xb5_u8, 0x81_u8, 0x4d_u8, 0x68_u8, 0x48_u8, 0x6a_u8, 0x16_u8, 0xc4_u8])
+  CLSID_GPMGPOCollection = LibC::GUID.new(0x7a057325_u32, 0x832d_u16, 0x4de3_u16, StaticArray[0xa4_u8, 0x1f_u8, 0xc7_u8, 0x80_u8, 0x43_u8, 0x6a_u8, 0x4e_u8, 0x9_u8])
+  CLSID_GPMGPOLink = LibC::GUID.new(0xc1df9880_u32, 0x5303_u16, 0x42c6_u16, StaticArray[0x8a_u8, 0x3c_u8, 0x4_u8, 0x88_u8, 0xe1_u8, 0xbf_u8, 0x73_u8, 0x64_u8])
+  CLSID_GPMGPOLinksCollection = LibC::GUID.new(0xf6ed581a_u32, 0x49a5_u16, 0x47e2_u16, StaticArray[0xb7_u8, 0x71_u8, 0xfd_u8, 0x8d_u8, 0xc0_u8, 0x2b_u8, 0x62_u8, 0x59_u8])
+  CLSID_GPMAsyncCancel = LibC::GUID.new(0x372796a9_u32, 0x76ec_u16, 0x479d_u16, StaticArray[0xad_u8, 0x6c_u8, 0x55_u8, 0x63_u8, 0x18_u8, 0xed_u8, 0x5f_u8, 0x9d_u8])
+  CLSID_GPMStatusMsgCollection = LibC::GUID.new(0x2824e4be_u32, 0x4bcc_u16, 0x4cac_u16, StaticArray[0x9e_u8, 0x60_u8, 0xe_u8, 0x3e_u8, 0xd7_u8, 0xf1_u8, 0x24_u8, 0x96_u8])
+  CLSID_GPMStatusMessage = LibC::GUID.new(0x4b77cc94_u32, 0xd255_u16, 0x409b_u16, StaticArray[0xbc_u8, 0x62_u8, 0x37_u8, 0x8_u8, 0x81_u8, 0x71_u8, 0x5a_u8, 0x19_u8])
+  CLSID_GPMTrustee = LibC::GUID.new(0xc54a700d_u32, 0x19b6_u16, 0x4211_u16, StaticArray[0xbc_u8, 0xb0_u8, 0xe8_u8, 0xe2_u8, 0x47_u8, 0x5e_u8, 0x47_u8, 0x1e_u8])
+  CLSID_GPMClientSideExtension = LibC::GUID.new(0xc1a2e70e_u32, 0x659c_u16, 0x4b1a_u16, StaticArray[0x94_u8, 0xb_u8, 0xf8_u8, 0x8b_u8, 0xa_u8, 0xf9_u8, 0xc8_u8, 0xa4_u8])
+  CLSID_GPMCSECollection = LibC::GUID.new(0xcf92b828_u32, 0x2d44_u16, 0x4b61_u16, StaticArray[0xb1_u8, 0xa_u8, 0xb3_u8, 0x27_u8, 0xaf_u8, 0xd4_u8, 0x2d_u8, 0xa8_u8])
+  CLSID_GPMConstants = LibC::GUID.new(0x3855e880_u32, 0xcd9e_u16, 0x4d0c_u16, StaticArray[0x9e_u8, 0xaf_u8, 0x15_u8, 0x79_u8, 0x28_u8, 0x3a_u8, 0x18_u8, 0x88_u8])
+  CLSID_GPMResult = LibC::GUID.new(0x92101ac0_u32, 0x9287_u16, 0x4206_u16, StaticArray[0xa3_u8, 0xb2_u8, 0x4b_u8, 0xdb_u8, 0x73_u8, 0xd2_u8, 0x25_u8, 0xf6_u8])
+  CLSID_GPMMapEntryCollection = LibC::GUID.new(0xcf75d5b_u32, 0xa3a1_u16, 0x4c55_u16, StaticArray[0xb4_u8, 0xfe_u8, 0x9e_u8, 0x14_u8, 0x9c_u8, 0x41_u8, 0xf6_u8, 0x6d_u8])
+  CLSID_GPMMapEntry = LibC::GUID.new(0x8c975253_u32, 0x5431_u16, 0x4471_u16, StaticArray[0xb3_u8, 0x5d_u8, 0x6_u8, 0x26_u8, 0xc9_u8, 0x28_u8, 0x25_u8, 0x8a_u8])
+  CLSID_GPMMigrationTable = LibC::GUID.new(0x55af4043_u32, 0x2a06_u16, 0x4f72_u16, StaticArray[0xab_u8, 0xef_u8, 0x63_u8, 0x1b_u8, 0x44_u8, 0x7_u8, 0x9c_u8, 0x76_u8])
+  CLSID_GPMBackupDirEx = LibC::GUID.new(0xe8c0988a_u32, 0xcf03_u16, 0x4c5b_u16, StaticArray[0x8b_u8, 0xe2_u8, 0x2a_u8, 0xa9_u8, 0xad_u8, 0x32_u8, 0xaa_u8, 0xda_u8])
+  CLSID_GPMStarterGPOBackupCollection = LibC::GUID.new(0xe75ea59d_u32, 0x1aeb_u16, 0x4cb5_u16, StaticArray[0xa7_u8, 0x8a_u8, 0x28_u8, 0x1d_u8, 0xaa_u8, 0x58_u8, 0x24_u8, 0x6_u8])
+  CLSID_GPMStarterGPOBackup = LibC::GUID.new(0x389e400a_u32, 0xd8ef_u16, 0x455b_u16, StaticArray[0xa8_u8, 0x61_u8, 0x5f_u8, 0x9c_u8, 0xa3_u8, 0x4a_u8, 0x6a_u8, 0x2_u8])
+  CLSID_GPMTemplate = LibC::GUID.new(0xecf1d454_u32, 0x71da_u16, 0x4e2f_u16, StaticArray[0xa8_u8, 0xc0_u8, 0x81_u8, 0x85_u8, 0x46_u8, 0x59_u8, 0x11_u8, 0xd9_u8])
+  CLSID_GPMStarterGPOCollection = LibC::GUID.new(0x82f8aa8b_u32, 0x49ba_u16, 0x43b2_u16, StaticArray[0x95_u8, 0x6e_u8, 0x33_u8, 0x97_u8, 0xf9_u8, 0xb9_u8, 0x4c_u8, 0x3a_u8])
 
   alias PFNSTATUSMESSAGECALLBACK = Proc(LibC::BOOL, LibC::LPWSTR, UInt32)
   alias PFNPROCESSGROUPPOLICY = Proc(UInt32, LibC::HANDLE, HKEY, GROUP_POLICY_OBJECTA*, GROUP_POLICY_OBJECTA*, LibC::UINT_PTR, LibC::BOOL*, PFNSTATUSMESSAGECALLBACK, UInt32)
@@ -430,8 +430,8 @@ lib LibWin32
     initialize_reporting : Proc(IGPM*, UInt8*, HRESULT)
   end
 
-  IGPM_GUID = LibC::GUID.new("f5fae809-3bd6-4da9-a65e-17665b41d763")
-  CLSID_IGPM = "f5fae809-3bd6-4da9-a65e-17665b41d763"
+  IGPM_GUID = "f5fae809-3bd6-4da9-a65e-17665b41d763"
+  IID_IGPM = LibC::GUID.new(0xf5fae809_u32, 0x3bd6_u16, 0x4da9_u16, StaticArray[0xa6_u8, 0x5e_u8, 0x17_u8, 0x66_u8, 0x5b_u8, 0x41_u8, 0xd7_u8, 0x63_u8])
   struct IGPM
     lpVtbl : IGPMVTbl*
   end
@@ -456,8 +456,8 @@ lib LibWin32
     search_wmi_filters : Proc(IGPMDomain*, IGPMSearchCriteria, IGPMWMIFilterCollection*, HRESULT)
   end
 
-  IGPMDomain_GUID = LibC::GUID.new("6b21cc14-5a00-4f44-a738-feec8a94c7e3")
-  CLSID_IGPMDomain = "6b21cc14-5a00-4f44-a738-feec8a94c7e3"
+  IGPMDomain_GUID = "6b21cc14-5a00-4f44-a738-feec8a94c7e3"
+  IID_IGPMDomain = LibC::GUID.new(0x6b21cc14_u32, 0x5a00_u16, 0x4f44_u16, StaticArray[0xa7_u8, 0x38_u8, 0xfe_u8, 0xec_u8, 0x8a_u8, 0x94_u8, 0xc7_u8, 0xe3_u8])
   struct IGPMDomain
     lpVtbl : IGPMDomainVTbl*
   end
@@ -475,8 +475,8 @@ lib LibWin32
     search_backups : Proc(IGPMBackupDir*, IGPMSearchCriteria, IGPMBackupCollection*, HRESULT)
   end
 
-  IGPMBackupDir_GUID = LibC::GUID.new("b1568bed-0a93-4acc-810f-afe7081019b9")
-  CLSID_IGPMBackupDir = "b1568bed-0a93-4acc-810f-afe7081019b9"
+  IGPMBackupDir_GUID = "b1568bed-0a93-4acc-810f-afe7081019b9"
+  IID_IGPMBackupDir = LibC::GUID.new(0xb1568bed_u32, 0xa93_u16, 0x4acc_u16, StaticArray[0x81_u8, 0xf_u8, 0xaf_u8, 0xe7_u8, 0x8_u8, 0x10_u8, 0x19_u8, 0xb9_u8])
   struct IGPMBackupDir
     lpVtbl : IGPMBackupDirVTbl*
   end
@@ -496,8 +496,8 @@ lib LibWin32
     search_sites : Proc(IGPMSitesContainer*, IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)
   end
 
-  IGPMSitesContainer_GUID = LibC::GUID.new("4725a899-2782-4d27-a6bb-d499246ffd72")
-  CLSID_IGPMSitesContainer = "4725a899-2782-4d27-a6bb-d499246ffd72"
+  IGPMSitesContainer_GUID = "4725a899-2782-4d27-a6bb-d499246ffd72"
+  IID_IGPMSitesContainer = LibC::GUID.new(0x4725a899_u32, 0x2782_u16, 0x4d27_u16, StaticArray[0xa6_u8, 0xbb_u8, 0xd4_u8, 0x99_u8, 0x24_u8, 0x6f_u8, 0xfd_u8, 0x72_u8])
   struct IGPMSitesContainer
     lpVtbl : IGPMSitesContainerVTbl*
   end
@@ -513,8 +513,8 @@ lib LibWin32
     add : Proc(IGPMSearchCriteria*, GPMSearchProperty, GPMSearchOperation, VARIANT, HRESULT)
   end
 
-  IGPMSearchCriteria_GUID = LibC::GUID.new("d6f11c42-829b-48d4-83f5-3615b67dfc22")
-  CLSID_IGPMSearchCriteria = "d6f11c42-829b-48d4-83f5-3615b67dfc22"
+  IGPMSearchCriteria_GUID = "d6f11c42-829b-48d4-83f5-3615b67dfc22"
+  IID_IGPMSearchCriteria = LibC::GUID.new(0xd6f11c42_u32, 0x829b_u16, 0x48d4_u16, StaticArray[0x83_u8, 0xf5_u8, 0x36_u8, 0x15_u8, 0xb6_u8, 0x7d_u8, 0xfc_u8, 0x22_u8])
   struct IGPMSearchCriteria
     lpVtbl : IGPMSearchCriteriaVTbl*
   end
@@ -534,8 +534,8 @@ lib LibWin32
     get_trustee_type : Proc(IGPMTrustee*, Int32*, HRESULT)
   end
 
-  IGPMTrustee_GUID = LibC::GUID.new("3b466da8-c1a4-4b2a-999a-befcdd56cefb")
-  CLSID_IGPMTrustee = "3b466da8-c1a4-4b2a-999a-befcdd56cefb"
+  IGPMTrustee_GUID = "3b466da8-c1a4-4b2a-999a-befcdd56cefb"
+  IID_IGPMTrustee = LibC::GUID.new(0x3b466da8_u32, 0xc1a4_u16, 0x4b2a_u16, StaticArray[0x99_u8, 0x9a_u8, 0xbe_u8, 0xfc_u8, 0xdd_u8, 0x56_u8, 0xce_u8, 0xfb_u8])
   struct IGPMTrustee
     lpVtbl : IGPMTrusteeVTbl*
   end
@@ -555,8 +555,8 @@ lib LibWin32
     get_trustee : Proc(IGPMPermission*, IGPMTrustee*, HRESULT)
   end
 
-  IGPMPermission_GUID = LibC::GUID.new("35ebca40-e1a1-4a02-8905-d79416fb464a")
-  CLSID_IGPMPermission = "35ebca40-e1a1-4a02-8905-d79416fb464a"
+  IGPMPermission_GUID = "35ebca40-e1a1-4a02-8905-d79416fb464a"
+  IID_IGPMPermission = LibC::GUID.new(0x35ebca40_u32, 0xe1a1_u16, 0x4a02_u16, StaticArray[0x89_u8, 0x5_u8, 0xd7_u8, 0x94_u8, 0x16_u8, 0xfb_u8, 0x46_u8, 0x4a_u8])
   struct IGPMPermission
     lpVtbl : IGPMPermissionVTbl*
   end
@@ -577,8 +577,8 @@ lib LibWin32
     remove_trustee : Proc(IGPMSecurityInfo*, UInt8*, HRESULT)
   end
 
-  IGPMSecurityInfo_GUID = LibC::GUID.new("b6c31ed4-1c93-4d3e-ae84-eb6d61161b60")
-  CLSID_IGPMSecurityInfo = "b6c31ed4-1c93-4d3e-ae84-eb6d61161b60"
+  IGPMSecurityInfo_GUID = "b6c31ed4-1c93-4d3e-ae84-eb6d61161b60"
+  IID_IGPMSecurityInfo = LibC::GUID.new(0xb6c31ed4_u32, 0x1c93_u16, 0x4d3e_u16, StaticArray[0xae_u8, 0x84_u8, 0xeb_u8, 0x6d_u8, 0x61_u8, 0x16_u8, 0x1b_u8, 0x60_u8])
   struct IGPMSecurityInfo
     lpVtbl : IGPMSecurityInfoVTbl*
   end
@@ -603,8 +603,8 @@ lib LibWin32
     generate_report_to_file : Proc(IGPMBackup*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
   end
 
-  IGPMBackup_GUID = LibC::GUID.new("d8a16a35-3b0d-416b-8d02-4df6f95a7119")
-  CLSID_IGPMBackup = "d8a16a35-3b0d-416b-8d02-4df6f95a7119"
+  IGPMBackup_GUID = "d8a16a35-3b0d-416b-8d02-4df6f95a7119"
+  IID_IGPMBackup = LibC::GUID.new(0xd8a16a35_u32, 0x3b0d_u16, 0x416b_u16, StaticArray[0x8d_u8, 0x2_u8, 0x4d_u8, 0xf6_u8, 0xf9_u8, 0x5a_u8, 0x71_u8, 0x19_u8])
   struct IGPMBackup
     lpVtbl : IGPMBackupVTbl*
   end
@@ -622,8 +622,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMBackupCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMBackupCollection_GUID = LibC::GUID.new("c786fc0f-26d8-4bab-a745-39ca7e800cac")
-  CLSID_IGPMBackupCollection = "c786fc0f-26d8-4bab-a745-39ca7e800cac"
+  IGPMBackupCollection_GUID = "c786fc0f-26d8-4bab-a745-39ca7e800cac"
+  IID_IGPMBackupCollection = LibC::GUID.new(0xc786fc0f_u32, 0x26d8_u16, 0x4bab_u16, StaticArray[0xa7_u8, 0x45_u8, 0x39_u8, 0xca_u8, 0x7e_u8, 0x80_u8, 0xc_u8, 0xac_u8])
   struct IGPMBackupCollection
     lpVtbl : IGPMBackupCollectionVTbl*
   end
@@ -648,8 +648,8 @@ lib LibWin32
     set_security_info : Proc(IGPMSOM*, IGPMSecurityInfo, HRESULT)
   end
 
-  IGPMSOM_GUID = LibC::GUID.new("c0a7f09e-05a1-4f0c-8158-9e5c33684f6b")
-  CLSID_IGPMSOM = "c0a7f09e-05a1-4f0c-8158-9e5c33684f6b"
+  IGPMSOM_GUID = "c0a7f09e-05a1-4f0c-8158-9e5c33684f6b"
+  IID_IGPMSOM = LibC::GUID.new(0xc0a7f09e_u32, 0x5a1_u16, 0x4f0c_u16, StaticArray[0x81_u8, 0x58_u8, 0x9e_u8, 0x5c_u8, 0x33_u8, 0x68_u8, 0x4f_u8, 0x6b_u8])
   struct IGPMSOM
     lpVtbl : IGPMSOMVTbl*
   end
@@ -667,8 +667,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMSOMCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMSOMCollection_GUID = LibC::GUID.new("adc1688e-00e4-4495-abba-bed200df0cab")
-  CLSID_IGPMSOMCollection = "adc1688e-00e4-4495-abba-bed200df0cab"
+  IGPMSOMCollection_GUID = "adc1688e-00e4-4495-abba-bed200df0cab"
+  IID_IGPMSOMCollection = LibC::GUID.new(0xadc1688e_u32, 0xe4_u16, 0x4495_u16, StaticArray[0xab_u8, 0xba_u8, 0xbe_u8, 0xd2_u8, 0x0_u8, 0xdf_u8, 0xc_u8, 0xab_u8])
   struct IGPMSOMCollection
     lpVtbl : IGPMSOMCollectionVTbl*
   end
@@ -691,8 +691,8 @@ lib LibWin32
     set_security_info : Proc(IGPMWMIFilter*, IGPMSecurityInfo, HRESULT)
   end
 
-  IGPMWMIFilter_GUID = LibC::GUID.new("ef2ff9b4-3c27-459a-b979-038305cec75d")
-  CLSID_IGPMWMIFilter = "ef2ff9b4-3c27-459a-b979-038305cec75d"
+  IGPMWMIFilter_GUID = "ef2ff9b4-3c27-459a-b979-038305cec75d"
+  IID_IGPMWMIFilter = LibC::GUID.new(0xef2ff9b4_u32, 0x3c27_u16, 0x459a_u16, StaticArray[0xb9_u8, 0x79_u8, 0x3_u8, 0x83_u8, 0x5_u8, 0xce_u8, 0xc7_u8, 0x5d_u8])
   struct IGPMWMIFilter
     lpVtbl : IGPMWMIFilterVTbl*
   end
@@ -710,8 +710,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMWMIFilterCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMWMIFilterCollection_GUID = LibC::GUID.new("5782d582-1a36-4661-8a94-c3c32551945b")
-  CLSID_IGPMWMIFilterCollection = "5782d582-1a36-4661-8a94-c3c32551945b"
+  IGPMWMIFilterCollection_GUID = "5782d582-1a36-4661-8a94-c3c32551945b"
+  IID_IGPMWMIFilterCollection = LibC::GUID.new(0x5782d582_u32, 0x1a36_u16, 0x4661_u16, StaticArray[0x8a_u8, 0x94_u8, 0xc3_u8, 0xc3_u8, 0x25_u8, 0x51_u8, 0x94_u8, 0x5b_u8])
   struct IGPMWMIFilterCollection
     lpVtbl : IGPMWMIFilterCollectionVTbl*
   end
@@ -761,8 +761,8 @@ lib LibWin32
     generate_report_to_file : Proc(IGPMRSOP*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
   end
 
-  IGPMRSOP_GUID = LibC::GUID.new("49ed785a-3237-4ff2-b1f0-fdf5a8d5a1ee")
-  CLSID_IGPMRSOP = "49ed785a-3237-4ff2-b1f0-fdf5a8d5a1ee"
+  IGPMRSOP_GUID = "49ed785a-3237-4ff2-b1f0-fdf5a8d5a1ee"
+  IID_IGPMRSOP = LibC::GUID.new(0x49ed785a_u32, 0x3237_u16, 0x4ff2_u16, StaticArray[0xb1_u8, 0xf0_u8, 0xfd_u8, 0xf5_u8, 0xa8_u8, 0xd5_u8, 0xa1_u8, 0xee_u8])
   struct IGPMRSOP
     lpVtbl : IGPMRSOPVTbl*
   end
@@ -806,8 +806,8 @@ lib LibWin32
     make_acl_consistent : Proc(IGPMGPO*, HRESULT)
   end
 
-  IGPMGPO_GUID = LibC::GUID.new("58cc4352-1ca3-48e5-9864-1da4d6e0d60f")
-  CLSID_IGPMGPO = "58cc4352-1ca3-48e5-9864-1da4d6e0d60f"
+  IGPMGPO_GUID = "58cc4352-1ca3-48e5-9864-1da4d6e0d60f"
+  IID_IGPMGPO = LibC::GUID.new(0x58cc4352_u32, 0x1ca3_u16, 0x48e5_u16, StaticArray[0x98_u8, 0x64_u8, 0x1d_u8, 0xa4_u8, 0xd6_u8, 0xe0_u8, 0xd6_u8, 0xf_u8])
   struct IGPMGPO
     lpVtbl : IGPMGPOVTbl*
   end
@@ -825,8 +825,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMGPOCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMGPOCollection_GUID = LibC::GUID.new("f0f0d5cf-70ca-4c39-9e29-b642f8726c01")
-  CLSID_IGPMGPOCollection = "f0f0d5cf-70ca-4c39-9e29-b642f8726c01"
+  IGPMGPOCollection_GUID = "f0f0d5cf-70ca-4c39-9e29-b642f8726c01"
+  IID_IGPMGPOCollection = LibC::GUID.new(0xf0f0d5cf_u32, 0x70ca_u16, 0x4c39_u16, StaticArray[0x9e_u8, 0x29_u8, 0xb6_u8, 0x42_u8, 0xf8_u8, 0x72_u8, 0x6c_u8, 0x1_u8])
   struct IGPMGPOCollection
     lpVtbl : IGPMGPOCollectionVTbl*
   end
@@ -850,8 +850,8 @@ lib LibWin32
     delete : Proc(IGPMGPOLink*, HRESULT)
   end
 
-  IGPMGPOLink_GUID = LibC::GUID.new("434b99bd-5de7-478a-809c-c251721df70c")
-  CLSID_IGPMGPOLink = "434b99bd-5de7-478a-809c-c251721df70c"
+  IGPMGPOLink_GUID = "434b99bd-5de7-478a-809c-c251721df70c"
+  IID_IGPMGPOLink = LibC::GUID.new(0x434b99bd_u32, 0x5de7_u16, 0x478a_u16, StaticArray[0x80_u8, 0x9c_u8, 0xc2_u8, 0x51_u8, 0x72_u8, 0x1d_u8, 0xf7_u8, 0xc_u8])
   struct IGPMGPOLink
     lpVtbl : IGPMGPOLinkVTbl*
   end
@@ -869,8 +869,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMGPOLinksCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMGPOLinksCollection_GUID = LibC::GUID.new("189d7b68-16bd-4d0d-a2ec-2e6aa2288c7f")
-  CLSID_IGPMGPOLinksCollection = "189d7b68-16bd-4d0d-a2ec-2e6aa2288c7f"
+  IGPMGPOLinksCollection_GUID = "189d7b68-16bd-4d0d-a2ec-2e6aa2288c7f"
+  IID_IGPMGPOLinksCollection = LibC::GUID.new(0x189d7b68_u32, 0x16bd_u16, 0x4d0d_u16, StaticArray[0xa2_u8, 0xec_u8, 0x2e_u8, 0x6a_u8, 0xa2_u8, 0x28_u8, 0x8c_u8, 0x7f_u8])
   struct IGPMGPOLinksCollection
     lpVtbl : IGPMGPOLinksCollectionVTbl*
   end
@@ -888,8 +888,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMCSECollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMCSECollection_GUID = LibC::GUID.new("2e52a97d-0a4a-4a6f-85db-201622455da0")
-  CLSID_IGPMCSECollection = "2e52a97d-0a4a-4a6f-85db-201622455da0"
+  IGPMCSECollection_GUID = "2e52a97d-0a4a-4a6f-85db-201622455da0"
+  IID_IGPMCSECollection = LibC::GUID.new(0x2e52a97d_u32, 0xa4a_u16, 0x4a6f_u16, StaticArray[0x85_u8, 0xdb_u8, 0x20_u8, 0x16_u8, 0x22_u8, 0x45_u8, 0x5d_u8, 0xa0_u8])
   struct IGPMCSECollection
     lpVtbl : IGPMCSECollectionVTbl*
   end
@@ -908,8 +908,8 @@ lib LibWin32
     is_computer_enabled : Proc(IGPMClientSideExtension*, Int16*, HRESULT)
   end
 
-  IGPMClientSideExtension_GUID = LibC::GUID.new("69da7488-b8db-415e-9266-901be4d49928")
-  CLSID_IGPMClientSideExtension = "69da7488-b8db-415e-9266-901be4d49928"
+  IGPMClientSideExtension_GUID = "69da7488-b8db-415e-9266-901be4d49928"
+  IID_IGPMClientSideExtension = LibC::GUID.new(0x69da7488_u32, 0xb8db_u16, 0x415e_u16, StaticArray[0x92_u8, 0x66_u8, 0x90_u8, 0x1b_u8, 0xe4_u8, 0xd4_u8, 0x99_u8, 0x28_u8])
   struct IGPMClientSideExtension
     lpVtbl : IGPMClientSideExtensionVTbl*
   end
@@ -925,8 +925,8 @@ lib LibWin32
     cancel : Proc(IGPMAsyncCancel*, HRESULT)
   end
 
-  IGPMAsyncCancel_GUID = LibC::GUID.new("ddc67754-be67-4541-8166-f48166868c9c")
-  CLSID_IGPMAsyncCancel = "ddc67754-be67-4541-8166-f48166868c9c"
+  IGPMAsyncCancel_GUID = "ddc67754-be67-4541-8166-f48166868c9c"
+  IID_IGPMAsyncCancel = LibC::GUID.new(0xddc67754_u32, 0xbe67_u16, 0x4541_u16, StaticArray[0x81_u8, 0x66_u8, 0xf4_u8, 0x81_u8, 0x66_u8, 0x86_u8, 0x8c_u8, 0x9c_u8])
   struct IGPMAsyncCancel
     lpVtbl : IGPMAsyncCancelVTbl*
   end
@@ -942,8 +942,8 @@ lib LibWin32
     status : Proc(IGPMAsyncProgress*, Int32, Int32, HRESULT, VARIANT*, IGPMStatusMsgCollection, HRESULT)
   end
 
-  IGPMAsyncProgress_GUID = LibC::GUID.new("6aac29f8-5948-4324-bf70-423818942dbc")
-  CLSID_IGPMAsyncProgress = "6aac29f8-5948-4324-bf70-423818942dbc"
+  IGPMAsyncProgress_GUID = "6aac29f8-5948-4324-bf70-423818942dbc"
+  IID_IGPMAsyncProgress = LibC::GUID.new(0x6aac29f8_u32, 0x5948_u16, 0x4324_u16, StaticArray[0xbf_u8, 0x70_u8, 0x42_u8, 0x38_u8, 0x18_u8, 0x94_u8, 0x2d_u8, 0xbc_u8])
   struct IGPMAsyncProgress
     lpVtbl : IGPMAsyncProgressVTbl*
   end
@@ -961,8 +961,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMStatusMsgCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMStatusMsgCollection_GUID = LibC::GUID.new("9b6e1af0-1a92-40f3-a59d-f36ac1f728b7")
-  CLSID_IGPMStatusMsgCollection = "9b6e1af0-1a92-40f3-a59d-f36ac1f728b7"
+  IGPMStatusMsgCollection_GUID = "9b6e1af0-1a92-40f3-a59d-f36ac1f728b7"
+  IID_IGPMStatusMsgCollection = LibC::GUID.new(0x9b6e1af0_u32, 0x1a92_u16, 0x40f3_u16, StaticArray[0xa5_u8, 0x9d_u8, 0xf3_u8, 0x6a_u8, 0xc1_u8, 0xf7_u8, 0x28_u8, 0xb7_u8])
   struct IGPMStatusMsgCollection
     lpVtbl : IGPMStatusMsgCollectionVTbl*
   end
@@ -983,8 +983,8 @@ lib LibWin32
     get_message : Proc(IGPMStatusMessage*, UInt8**, HRESULT)
   end
 
-  IGPMStatusMessage_GUID = LibC::GUID.new("8496c22f-f3de-4a1f-8f58-603caaa93d7b")
-  CLSID_IGPMStatusMessage = "8496c22f-f3de-4a1f-8f58-603caaa93d7b"
+  IGPMStatusMessage_GUID = "8496c22f-f3de-4a1f-8f58-603caaa93d7b"
+  IID_IGPMStatusMessage = LibC::GUID.new(0x8496c22f_u32, 0xf3de_u16, 0x4a1f_u16, StaticArray[0x8f_u8, 0x58_u8, 0x60_u8, 0x3c_u8, 0xaa_u8, 0xa9_u8, 0x3d_u8, 0x7b_u8])
   struct IGPMStatusMessage
     lpVtbl : IGPMStatusMessageVTbl*
   end
@@ -1059,8 +1059,8 @@ lib LibWin32
     get_rsop_planning_assume_comp_wql_filter_true : Proc(IGPMConstants*, Int32*, HRESULT)
   end
 
-  IGPMConstants_GUID = LibC::GUID.new("50ef73e6-d35c-4c8d-be63-7ea5d2aac5c4")
-  CLSID_IGPMConstants = "50ef73e6-d35c-4c8d-be63-7ea5d2aac5c4"
+  IGPMConstants_GUID = "50ef73e6-d35c-4c8d-be63-7ea5d2aac5c4"
+  IID_IGPMConstants = LibC::GUID.new(0x50ef73e6_u32, 0xd35c_u16, 0x4c8d_u16, StaticArray[0xbe_u8, 0x63_u8, 0x7e_u8, 0xa5_u8, 0xd2_u8, 0xaa_u8, 0xc5_u8, 0xc4_u8])
   struct IGPMConstants
     lpVtbl : IGPMConstantsVTbl*
   end
@@ -1078,8 +1078,8 @@ lib LibWin32
     overall_status : Proc(IGPMResult*, HRESULT)
   end
 
-  IGPMResult_GUID = LibC::GUID.new("86dff7e9-f76f-42ab-9570-cebc6be8a52d")
-  CLSID_IGPMResult = "86dff7e9-f76f-42ab-9570-cebc6be8a52d"
+  IGPMResult_GUID = "86dff7e9-f76f-42ab-9570-cebc6be8a52d"
+  IID_IGPMResult = LibC::GUID.new(0x86dff7e9_u32, 0xf76f_u16, 0x42ab_u16, StaticArray[0x95_u8, 0x70_u8, 0xce_u8, 0xbc_u8, 0x6b_u8, 0xe8_u8, 0xa5_u8, 0x2d_u8])
   struct IGPMResult
     lpVtbl : IGPMResultVTbl*
   end
@@ -1097,8 +1097,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMMapEntryCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMMapEntryCollection_GUID = LibC::GUID.new("bb0bf49b-e53f-443f-b807-8be22bfb6d42")
-  CLSID_IGPMMapEntryCollection = "bb0bf49b-e53f-443f-b807-8be22bfb6d42"
+  IGPMMapEntryCollection_GUID = "bb0bf49b-e53f-443f-b807-8be22bfb6d42"
+  IID_IGPMMapEntryCollection = LibC::GUID.new(0xbb0bf49b_u32, 0xe53f_u16, 0x443f_u16, StaticArray[0xb8_u8, 0x7_u8, 0x8b_u8, 0xe2_u8, 0x2b_u8, 0xfb_u8, 0x6d_u8, 0x42_u8])
   struct IGPMMapEntryCollection
     lpVtbl : IGPMMapEntryCollectionVTbl*
   end
@@ -1117,8 +1117,8 @@ lib LibWin32
     get_entry_type : Proc(IGPMMapEntry*, GPMEntryType*, HRESULT)
   end
 
-  IGPMMapEntry_GUID = LibC::GUID.new("8e79ad06-2381-4444-be4c-ff693e6e6f2b")
-  CLSID_IGPMMapEntry = "8e79ad06-2381-4444-be4c-ff693e6e6f2b"
+  IGPMMapEntry_GUID = "8e79ad06-2381-4444-be4c-ff693e6e6f2b"
+  IID_IGPMMapEntry = LibC::GUID.new(0x8e79ad06_u32, 0x2381_u16, 0x4444_u16, StaticArray[0xbe_u8, 0x4c_u8, 0xff_u8, 0x69_u8, 0x3e_u8, 0x6e_u8, 0x6f_u8, 0x2b_u8])
   struct IGPMMapEntry
     lpVtbl : IGPMMapEntryVTbl*
   end
@@ -1141,8 +1141,8 @@ lib LibWin32
     get_entries : Proc(IGPMMigrationTable*, IGPMMapEntryCollection*, HRESULT)
   end
 
-  IGPMMigrationTable_GUID = LibC::GUID.new("48f823b1-efaf-470b-b6ed-40d14ee1a4ec")
-  CLSID_IGPMMigrationTable = "48f823b1-efaf-470b-b6ed-40d14ee1a4ec"
+  IGPMMigrationTable_GUID = "48f823b1-efaf-470b-b6ed-40d14ee1a4ec"
+  IID_IGPMMigrationTable = LibC::GUID.new(0x48f823b1_u32, 0xefaf_u16, 0x470b_u16, StaticArray[0xb6_u8, 0xed_u8, 0x40_u8, 0xd1_u8, 0x4e_u8, 0xe1_u8, 0xa4_u8, 0xec_u8])
   struct IGPMMigrationTable
     lpVtbl : IGPMMigrationTableVTbl*
   end
@@ -1161,8 +1161,8 @@ lib LibWin32
     search_backups : Proc(IGPMBackupDirEx*, IGPMSearchCriteria, VARIANT*, HRESULT)
   end
 
-  IGPMBackupDirEx_GUID = LibC::GUID.new("f8dc55ed-3ba0-4864-aad4-d365189ee1d5")
-  CLSID_IGPMBackupDirEx = "f8dc55ed-3ba0-4864-aad4-d365189ee1d5"
+  IGPMBackupDirEx_GUID = "f8dc55ed-3ba0-4864-aad4-d365189ee1d5"
+  IID_IGPMBackupDirEx = LibC::GUID.new(0xf8dc55ed_u32, 0x3ba0_u16, 0x4864_u16, StaticArray[0xaa_u8, 0xd4_u8, 0xd3_u8, 0x65_u8, 0x18_u8, 0x9e_u8, 0xe1_u8, 0xd5_u8])
   struct IGPMBackupDirEx
     lpVtbl : IGPMBackupDirExVTbl*
   end
@@ -1180,8 +1180,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMStarterGPOBackupCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMStarterGPOBackupCollection_GUID = LibC::GUID.new("c998031d-add0-4bb5-8dea-298505d8423b")
-  CLSID_IGPMStarterGPOBackupCollection = "c998031d-add0-4bb5-8dea-298505d8423b"
+  IGPMStarterGPOBackupCollection_GUID = "c998031d-add0-4bb5-8dea-298505d8423b"
+  IID_IGPMStarterGPOBackupCollection = LibC::GUID.new(0xc998031d_u32, 0xadd0_u16, 0x4bb5_u16, StaticArray[0x8d_u8, 0xea_u8, 0x29_u8, 0x85_u8, 0x5_u8, 0xd8_u8, 0x42_u8, 0x3b_u8])
   struct IGPMStarterGPOBackupCollection
     lpVtbl : IGPMStarterGPOBackupCollectionVTbl*
   end
@@ -1207,8 +1207,8 @@ lib LibWin32
     generate_report_to_file : Proc(IGPMStarterGPOBackup*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
   end
 
-  IGPMStarterGPOBackup_GUID = LibC::GUID.new("51d98eda-a87e-43dd-b80a-0b66ef1938d6")
-  CLSID_IGPMStarterGPOBackup = "51d98eda-a87e-43dd-b80a-0b66ef1938d6"
+  IGPMStarterGPOBackup_GUID = "51d98eda-a87e-43dd-b80a-0b66ef1938d6"
+  IID_IGPMStarterGPOBackup = LibC::GUID.new(0x51d98eda_u32, 0xa87e_u16, 0x43dd_u16, StaticArray[0xb8_u8, 0xa_u8, 0xb_u8, 0x66_u8, 0xef_u8, 0x19_u8, 0x38_u8, 0xd6_u8])
   struct IGPMStarterGPOBackup
     lpVtbl : IGPMStarterGPOBackupVTbl*
   end
@@ -1237,8 +1237,8 @@ lib LibWin32
     initialize_reporting_ex : Proc(IGPM2*, UInt8*, Int32, HRESULT)
   end
 
-  IGPM2_GUID = LibC::GUID.new("00238f8a-3d86-41ac-8f5e-06a6638a634a")
-  CLSID_IGPM2 = "00238f8a-3d86-41ac-8f5e-06a6638a634a"
+  IGPM2_GUID = "00238f8a-3d86-41ac-8f5e-06a6638a634a"
+  IID_IGPM2 = LibC::GUID.new(0x238f8a_u32, 0x3d86_u16, 0x41ac_u16, StaticArray[0x8f_u8, 0x5e_u8, 0x6_u8, 0xa6_u8, 0x63_u8, 0x8a_u8, 0x63_u8, 0x4a_u8])
   struct IGPM2
     lpVtbl : IGPM2VTbl*
   end
@@ -1274,8 +1274,8 @@ lib LibWin32
     set_security_info : Proc(IGPMStarterGPO*, IGPMSecurityInfo, HRESULT)
   end
 
-  IGPMStarterGPO_GUID = LibC::GUID.new("dfc3f61b-8880-4490-9337-d29c7ba8c2f0")
-  CLSID_IGPMStarterGPO = "dfc3f61b-8880-4490-9337-d29c7ba8c2f0"
+  IGPMStarterGPO_GUID = "dfc3f61b-8880-4490-9337-d29c7ba8c2f0"
+  IID_IGPMStarterGPO = LibC::GUID.new(0xdfc3f61b_u32, 0x8880_u16, 0x4490_u16, StaticArray[0x93_u8, 0x37_u8, 0xd2_u8, 0x9c_u8, 0x7b_u8, 0xa8_u8, 0xc2_u8, 0xf0_u8])
   struct IGPMStarterGPO
     lpVtbl : IGPMStarterGPOVTbl*
   end
@@ -1293,8 +1293,8 @@ lib LibWin32
     get__new_enum : Proc(IGPMStarterGPOCollection*, IEnumVARIANT*, HRESULT)
   end
 
-  IGPMStarterGPOCollection_GUID = LibC::GUID.new("2e522729-2219-44ad-933a-64dfd650c423")
-  CLSID_IGPMStarterGPOCollection = "2e522729-2219-44ad-933a-64dfd650c423"
+  IGPMStarterGPOCollection_GUID = "2e522729-2219-44ad-933a-64dfd650c423"
+  IID_IGPMStarterGPOCollection = LibC::GUID.new(0x2e522729_u32, 0x2219_u16, 0x44ad_u16, StaticArray[0x93_u8, 0x3a_u8, 0x64_u8, 0xdf_u8, 0xd6_u8, 0x50_u8, 0xc4_u8, 0x23_u8])
   struct IGPMStarterGPOCollection
     lpVtbl : IGPMStarterGPOCollectionVTbl*
   end
@@ -1325,8 +1325,8 @@ lib LibWin32
     restore_starter_gpo : Proc(IGPMDomain2*, IGPMStarterGPOBackup, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
   end
 
-  IGPMDomain2_GUID = LibC::GUID.new("7ca6bb8b-f1eb-490a-938d-3c4e51c768e6")
-  CLSID_IGPMDomain2 = "7ca6bb8b-f1eb-490a-938d-3c4e51c768e6"
+  IGPMDomain2_GUID = "7ca6bb8b-f1eb-490a-938d-3c4e51c768e6"
+  IID_IGPMDomain2 = LibC::GUID.new(0x7ca6bb8b_u32, 0xf1eb_u16, 0x490a_u16, StaticArray[0x93_u8, 0x8d_u8, 0x3c_u8, 0x4e_u8, 0x51_u8, 0xc7_u8, 0x68_u8, 0xe6_u8])
   struct IGPMDomain2
     lpVtbl : IGPMDomain2VTbl*
   end
@@ -1416,8 +1416,8 @@ lib LibWin32
     get_report_comments : Proc(IGPMConstants2*, GPMReportingOptions*, HRESULT)
   end
 
-  IGPMConstants2_GUID = LibC::GUID.new("05ae21b0-ac09-4032-a26f-9e7da786dc19")
-  CLSID_IGPMConstants2 = "05ae21b0-ac09-4032-a26f-9e7da786dc19"
+  IGPMConstants2_GUID = "05ae21b0-ac09-4032-a26f-9e7da786dc19"
+  IID_IGPMConstants2 = LibC::GUID.new(0x5ae21b0_u32, 0xac09_u16, 0x4032_u16, StaticArray[0xa2_u8, 0x6f_u8, 0x9e_u8, 0x7d_u8, 0xa7_u8, 0x86_u8, 0xdc_u8, 0x19_u8])
   struct IGPMConstants2
     lpVtbl : IGPMConstants2VTbl*
   end
@@ -1463,8 +1463,8 @@ lib LibWin32
     put_description : Proc(IGPMGPO2*, UInt8*, HRESULT)
   end
 
-  IGPMGPO2_GUID = LibC::GUID.new("8a66a210-b78b-4d99-88e2-c306a817c925")
-  CLSID_IGPMGPO2 = "8a66a210-b78b-4d99-88e2-c306a817c925"
+  IGPMGPO2_GUID = "8a66a210-b78b-4d99-88e2-c306a817c925"
+  IID_IGPMGPO2 = LibC::GUID.new(0x8a66a210_u32, 0xb78b_u16, 0x4d99_u16, StaticArray[0x88_u8, 0xe2_u8, 0xc3_u8, 0x6_u8, 0xa8_u8, 0x17_u8, 0xc9_u8, 0x25_u8])
   struct IGPMGPO2
     lpVtbl : IGPMGPO2VTbl*
   end
@@ -1499,8 +1499,8 @@ lib LibWin32
     put_infrastructure_flags : Proc(IGPMDomain3*, UInt32, HRESULT)
   end
 
-  IGPMDomain3_GUID = LibC::GUID.new("0077fdfe-88c7-4acf-a11d-d10a7c310a03")
-  CLSID_IGPMDomain3 = "0077fdfe-88c7-4acf-a11d-d10a7c310a03"
+  IGPMDomain3_GUID = "0077fdfe-88c7-4acf-a11d-d10a7c310a03"
+  IID_IGPMDomain3 = LibC::GUID.new(0x77fdfe_u32, 0x88c7_u16, 0x4acf_u16, StaticArray[0xa1_u8, 0x1d_u8, 0xd1_u8, 0xa_u8, 0x7c_u8, 0x31_u8, 0xa_u8, 0x3_u8])
   struct IGPMDomain3
     lpVtbl : IGPMDomain3VTbl*
   end
@@ -1549,8 +1549,8 @@ lib LibWin32
     put_infrastructure_flags : Proc(IGPMGPO3*, UInt32, HRESULT)
   end
 
-  IGPMGPO3_GUID = LibC::GUID.new("7cf123a1-f94a-4112-bfae-6aa1db9cb248")
-  CLSID_IGPMGPO3 = "7cf123a1-f94a-4112-bfae-6aa1db9cb248"
+  IGPMGPO3_GUID = "7cf123a1-f94a-4112-bfae-6aa1db9cb248"
+  IID_IGPMGPO3 = LibC::GUID.new(0x7cf123a1_u32, 0xf94a_u16, 0x4112_u16, StaticArray[0xbf_u8, 0xae_u8, 0x6a_u8, 0xa1_u8, 0xdb_u8, 0x9c_u8, 0xb2_u8, 0x48_u8])
   struct IGPMGPO3
     lpVtbl : IGPMGPO3VTbl*
   end
@@ -1570,8 +1570,8 @@ lib LibWin32
     policy_changed : Proc(IGPEInformation*, LibC::BOOL, LibC::BOOL, Guid*, Guid*, HRESULT)
   end
 
-  IGPEInformation_GUID = LibC::GUID.new("8fc0b735-a0e1-11d1-a7d3-0000f87571e3")
-  CLSID_IGPEInformation = "8fc0b735-a0e1-11d1-a7d3-0000f87571e3"
+  IGPEInformation_GUID = "8fc0b735-a0e1-11d1-a7d3-0000f87571e3"
+  IID_IGPEInformation = LibC::GUID.new(0x8fc0b735_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
   struct IGPEInformation
     lpVtbl : IGPEInformationVTbl*
   end
@@ -1600,8 +1600,8 @@ lib LibWin32
     get_property_sheet_pages : Proc(IGroupPolicyObject*, HPROPSHEETPAGE**, UInt32*, HRESULT)
   end
 
-  IGroupPolicyObject_GUID = LibC::GUID.new("ea502723-a23d-11d1-a7d3-0000f87571e3")
-  CLSID_IGroupPolicyObject = "ea502723-a23d-11d1-a7d3-0000f87571e3"
+  IGroupPolicyObject_GUID = "ea502723-a23d-11d1-a7d3-0000f87571e3"
+  IID_IGroupPolicyObject = LibC::GUID.new(0xea502723_u32, 0xa23d_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
   struct IGroupPolicyObject
     lpVtbl : IGroupPolicyObjectVTbl*
   end
@@ -1615,8 +1615,8 @@ lib LibWin32
     get_event_log_entry_text : Proc(IRSOPInformation*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
-  IRSOPInformation_GUID = LibC::GUID.new("9a5a81b5-d9c7-49ef-9d11-ddf50968c48d")
-  CLSID_IRSOPInformation = "9a5a81b5-d9c7-49ef-9d11-ddf50968c48d"
+  IRSOPInformation_GUID = "9a5a81b5-d9c7-49ef-9d11-ddf50968c48d"
+  IID_IRSOPInformation = LibC::GUID.new(0x9a5a81b5_u32, 0xd9c7_u16, 0x49ef_u16, StaticArray[0x9d_u8, 0x11_u8, 0xdd_u8, 0xf5_u8, 0x9_u8, 0x68_u8, 0xc4_u8, 0x8d_u8])
   struct IRSOPInformation
     lpVtbl : IRSOPInformationVTbl*
   end

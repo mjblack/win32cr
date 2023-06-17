@@ -296,8 +296,8 @@ lib LibWin32
     enumerate_model_outputs : Proc(IWinMLModel*, UInt32, WINML_VARIABLE_DESC**, HRESULT)
   end
 
-  IWinMLModel_GUID = LibC::GUID.new("e2eeb6a9-f31f-4055-a521-e30b5b33664a")
-  CLSID_IWinMLModel = "e2eeb6a9-f31f-4055-a521-e30b5b33664a"
+  IWinMLModel_GUID = "e2eeb6a9-f31f-4055-a521-e30b5b33664a"
+  IID_IWinMLModel = LibC::GUID.new(0xe2eeb6a9_u32, 0xf31f_u16, 0x4055_u16, StaticArray[0xa5_u8, 0x21_u8, 0xe3_u8, 0xb_u8, 0x5b_u8, 0x33_u8, 0x66_u8, 0x4a_u8])
   struct IWinMLModel
     lpVtbl : IWinMLModelVTbl*
   end
@@ -311,8 +311,8 @@ lib LibWin32
     clear : Proc(IWinMLEvaluationContext*, HRESULT)
   end
 
-  IWinMLEvaluationContext_GUID = LibC::GUID.new("95848f9e-583d-4054-af12-916387cd8426")
-  CLSID_IWinMLEvaluationContext = "95848f9e-583d-4054-af12-916387cd8426"
+  IWinMLEvaluationContext_GUID = "95848f9e-583d-4054-af12-916387cd8426"
+  IID_IWinMLEvaluationContext = LibC::GUID.new(0x95848f9e_u32, 0x583d_u16, 0x4054_u16, StaticArray[0xaf_u8, 0x12_u8, 0x91_u8, 0x63_u8, 0x87_u8, 0xcd_u8, 0x84_u8, 0x26_u8])
   struct IWinMLEvaluationContext
     lpVtbl : IWinMLEvaluationContextVTbl*
   end
@@ -326,8 +326,8 @@ lib LibWin32
     evaluate_model : Proc(IWinMLRuntime*, IWinMLEvaluationContext, HRESULT)
   end
 
-  IWinMLRuntime_GUID = LibC::GUID.new("a0425329-40ae-48d9-bce3-829ef7b8a41a")
-  CLSID_IWinMLRuntime = "a0425329-40ae-48d9-bce3-829ef7b8a41a"
+  IWinMLRuntime_GUID = "a0425329-40ae-48d9-bce3-829ef7b8a41a"
+  IID_IWinMLRuntime = LibC::GUID.new(0xa0425329_u32, 0x40ae_u16, 0x48d9_u16, StaticArray[0xbc_u8, 0xe3_u8, 0x82_u8, 0x9e_u8, 0xf7_u8, 0xb8_u8, 0xa4_u8, 0x1a_u8])
   struct IWinMLRuntime
     lpVtbl : IWinMLRuntimeVTbl*
   end
@@ -339,8 +339,8 @@ lib LibWin32
     create_runtime : Proc(IWinMLRuntimeFactory*, WINML_RUNTIME_TYPE, IWinMLRuntime*, HRESULT)
   end
 
-  IWinMLRuntimeFactory_GUID = LibC::GUID.new("a807b84d-4ae5-4bc0-a76a-941aa246bd41")
-  CLSID_IWinMLRuntimeFactory = "a807b84d-4ae5-4bc0-a76a-941aa246bd41"
+  IWinMLRuntimeFactory_GUID = "a807b84d-4ae5-4bc0-a76a-941aa246bd41"
+  IID_IWinMLRuntimeFactory = LibC::GUID.new(0xa807b84d_u32, 0x4ae5_u16, 0x4bc0_u16, StaticArray[0xa7_u8, 0x6a_u8, 0x94_u8, 0x1a_u8, 0xa2_u8, 0x46_u8, 0xbd_u8, 0x41_u8])
   struct IWinMLRuntimeFactory
     lpVtbl : IWinMLRuntimeFactoryVTbl*
   end
@@ -355,8 +355,8 @@ lib LibWin32
     get_string_attribute_element : Proc(IMLOperatorAttributes*, PSTR, UInt32, UInt32, UInt8*, HRESULT)
   end
 
-  IMLOperatorAttributes_GUID = LibC::GUID.new("4b1b1759-ec40-466c-aab4-beb5347fd24c")
-  CLSID_IMLOperatorAttributes = "4b1b1759-ec40-466c-aab4-beb5347fd24c"
+  IMLOperatorAttributes_GUID = "4b1b1759-ec40-466c-aab4-beb5347fd24c"
+  IID_IMLOperatorAttributes = LibC::GUID.new(0x4b1b1759_u32, 0xec40_u16, 0x466c_u16, StaticArray[0xaa_u8, 0xb4_u8, 0xbe_u8, 0xb5_u8, 0x34_u8, 0x7f_u8, 0xd2_u8, 0x4c_u8])
   struct IMLOperatorAttributes
     lpVtbl : IMLOperatorAttributesVTbl*
   end
@@ -372,8 +372,8 @@ lib LibWin32
     get_output_tensor_shape : Proc(IMLOperatorTensorShapeDescription*, UInt32, UInt32, UInt32*, HRESULT)
   end
 
-  IMLOperatorTensorShapeDescription_GUID = LibC::GUID.new("f20e8cbe-3b28-4248-be95-f96fbc6e4643")
-  CLSID_IMLOperatorTensorShapeDescription = "f20e8cbe-3b28-4248-be95-f96fbc6e4643"
+  IMLOperatorTensorShapeDescription_GUID = "f20e8cbe-3b28-4248-be95-f96fbc6e4643"
+  IID_IMLOperatorTensorShapeDescription = LibC::GUID.new(0xf20e8cbe_u32, 0x3b28_u16, 0x4248_u16, StaticArray[0xbe_u8, 0x95_u8, 0xf9_u8, 0x6f_u8, 0xbc_u8, 0x6e_u8, 0x46_u8, 0x43_u8])
   struct IMLOperatorTensorShapeDescription
     lpVtbl : IMLOperatorTensorShapeDescriptionVTbl*
   end
@@ -397,8 +397,8 @@ lib LibWin32
     get_execution_interface : Proc(IMLOperatorKernelCreationContext*, IUnknown*, Void)
   end
 
-  IMLOperatorKernelCreationContext_GUID = LibC::GUID.new("5459b53d-a0fc-4665-addd-70171ef7e631")
-  CLSID_IMLOperatorKernelCreationContext = "5459b53d-a0fc-4665-addd-70171ef7e631"
+  IMLOperatorKernelCreationContext_GUID = "5459b53d-a0fc-4665-addd-70171ef7e631"
+  IID_IMLOperatorKernelCreationContext = LibC::GUID.new(0x5459b53d_u32, 0xa0fc_u16, 0x4665_u16, StaticArray[0xad_u8, 0xdd_u8, 0x70_u8, 0x17_u8, 0x1e_u8, 0xf7_u8, 0xe6_u8, 0x31_u8])
   struct IMLOperatorKernelCreationContext
     lpVtbl : IMLOperatorKernelCreationContextVTbl*
   end
@@ -416,8 +416,8 @@ lib LibWin32
     get_data_interface : Proc(IMLOperatorTensor*, IUnknown*, Void)
   end
 
-  IMLOperatorTensor_GUID = LibC::GUID.new("7fe41f41-f430-440e-aece-54416dc8b9db")
-  CLSID_IMLOperatorTensor = "7fe41f41-f430-440e-aece-54416dc8b9db"
+  IMLOperatorTensor_GUID = "7fe41f41-f430-440e-aece-54416dc8b9db"
+  IID_IMLOperatorTensor = LibC::GUID.new(0x7fe41f41_u32, 0xf430_u16, 0x440e_u16, StaticArray[0xae_u8, 0xce_u8, 0x54_u8, 0x41_u8, 0x6d_u8, 0xc8_u8, 0xb9_u8, 0xdb_u8])
   struct IMLOperatorTensor
     lpVtbl : IMLOperatorTensorVTbl*
   end
@@ -433,8 +433,8 @@ lib LibWin32
     get_execution_interface : Proc(IMLOperatorKernelContext*, IUnknown*, Void)
   end
 
-  IMLOperatorKernelContext_GUID = LibC::GUID.new("82536a28-f022-4769-9d3f-8b278f84c0c3")
-  CLSID_IMLOperatorKernelContext = "82536a28-f022-4769-9d3f-8b278f84c0c3"
+  IMLOperatorKernelContext_GUID = "82536a28-f022-4769-9d3f-8b278f84c0c3"
+  IID_IMLOperatorKernelContext = LibC::GUID.new(0x82536a28_u32, 0xf022_u16, 0x4769_u16, StaticArray[0x9d_u8, 0x3f_u8, 0x8b_u8, 0x27_u8, 0x8f_u8, 0x84_u8, 0xc0_u8, 0xc3_u8])
   struct IMLOperatorKernelContext
     lpVtbl : IMLOperatorKernelContextVTbl*
   end
@@ -446,8 +446,8 @@ lib LibWin32
     compute : Proc(IMLOperatorKernel*, IMLOperatorKernelContext, HRESULT)
   end
 
-  IMLOperatorKernel_GUID = LibC::GUID.new("11c4b4a0-b467-4eaa-a1a6-b961d8d0ed79")
-  CLSID_IMLOperatorKernel = "11c4b4a0-b467-4eaa-a1a6-b961d8d0ed79"
+  IMLOperatorKernel_GUID = "11c4b4a0-b467-4eaa-a1a6-b961d8d0ed79"
+  IID_IMLOperatorKernel = LibC::GUID.new(0x11c4b4a0_u32, 0xb467_u16, 0x4eaa_u16, StaticArray[0xa1_u8, 0xa6_u8, 0xb9_u8, 0x61_u8, 0xd8_u8, 0xd0_u8, 0xed_u8, 0x79_u8])
   struct IMLOperatorKernel
     lpVtbl : IMLOperatorKernelVTbl*
   end
@@ -470,8 +470,8 @@ lib LibWin32
     set_output_tensor_shape : Proc(IMLOperatorShapeInferenceContext*, UInt32, UInt32, UInt32*, HRESULT)
   end
 
-  IMLOperatorShapeInferenceContext_GUID = LibC::GUID.new("105b6b29-5408-4a68-9959-09b5955a3492")
-  CLSID_IMLOperatorShapeInferenceContext = "105b6b29-5408-4a68-9959-09b5955a3492"
+  IMLOperatorShapeInferenceContext_GUID = "105b6b29-5408-4a68-9959-09b5955a3492"
+  IID_IMLOperatorShapeInferenceContext = LibC::GUID.new(0x105b6b29_u32, 0x5408_u16, 0x4a68_u16, StaticArray[0x99_u8, 0x59_u8, 0x9_u8, 0xb5_u8, 0x95_u8, 0x5a_u8, 0x34_u8, 0x92_u8])
   struct IMLOperatorShapeInferenceContext
     lpVtbl : IMLOperatorShapeInferenceContextVTbl*
   end
@@ -492,8 +492,8 @@ lib LibWin32
     set_output_edge_description : Proc(IMLOperatorTypeInferenceContext*, UInt32, MLOperatorEdgeDescription*, HRESULT)
   end
 
-  IMLOperatorTypeInferenceContext_GUID = LibC::GUID.new("ec893bb1-f938-427b-8488-c8dcf775f138")
-  CLSID_IMLOperatorTypeInferenceContext = "ec893bb1-f938-427b-8488-c8dcf775f138"
+  IMLOperatorTypeInferenceContext_GUID = "ec893bb1-f938-427b-8488-c8dcf775f138"
+  IID_IMLOperatorTypeInferenceContext = LibC::GUID.new(0xec893bb1_u32, 0xf938_u16, 0x427b_u16, StaticArray[0x84_u8, 0x88_u8, 0xc8_u8, 0xdc_u8, 0xf7_u8, 0x75_u8, 0xf1_u8, 0x38_u8])
   struct IMLOperatorTypeInferenceContext
     lpVtbl : IMLOperatorTypeInferenceContextVTbl*
   end
@@ -505,8 +505,8 @@ lib LibWin32
     infer_output_types : Proc(IMLOperatorTypeInferrer*, IMLOperatorTypeInferenceContext, HRESULT)
   end
 
-  IMLOperatorTypeInferrer_GUID = LibC::GUID.new("781aeb48-9bcb-4797-bf77-8bf455217beb")
-  CLSID_IMLOperatorTypeInferrer = "781aeb48-9bcb-4797-bf77-8bf455217beb"
+  IMLOperatorTypeInferrer_GUID = "781aeb48-9bcb-4797-bf77-8bf455217beb"
+  IID_IMLOperatorTypeInferrer = LibC::GUID.new(0x781aeb48_u32, 0x9bcb_u16, 0x4797_u16, StaticArray[0xbf_u8, 0x77_u8, 0x8b_u8, 0xf4_u8, 0x55_u8, 0x21_u8, 0x7b_u8, 0xeb_u8])
   struct IMLOperatorTypeInferrer
     lpVtbl : IMLOperatorTypeInferrerVTbl*
   end
@@ -518,8 +518,8 @@ lib LibWin32
     infer_output_shapes : Proc(IMLOperatorShapeInferrer*, IMLOperatorShapeInferenceContext, HRESULT)
   end
 
-  IMLOperatorShapeInferrer_GUID = LibC::GUID.new("540be5be-a6c9-40ee-83f6-d2b8b40a7798")
-  CLSID_IMLOperatorShapeInferrer = "540be5be-a6c9-40ee-83f6-d2b8b40a7798"
+  IMLOperatorShapeInferrer_GUID = "540be5be-a6c9-40ee-83f6-d2b8b40a7798"
+  IID_IMLOperatorShapeInferrer = LibC::GUID.new(0x540be5be_u32, 0xa6c9_u16, 0x40ee_u16, StaticArray[0x83_u8, 0xf6_u8, 0xd2_u8, 0xb8_u8, 0xb4_u8, 0xa_u8, 0x77_u8, 0x98_u8])
   struct IMLOperatorShapeInferrer
     lpVtbl : IMLOperatorShapeInferrerVTbl*
   end
@@ -531,8 +531,8 @@ lib LibWin32
     create_kernel : Proc(IMLOperatorKernelFactory*, IMLOperatorKernelCreationContext, IMLOperatorKernel*, HRESULT)
   end
 
-  IMLOperatorKernelFactory_GUID = LibC::GUID.new("ef15ad6f-0dc9-4908-ab35-a575a30dfbf8")
-  CLSID_IMLOperatorKernelFactory = "ef15ad6f-0dc9-4908-ab35-a575a30dfbf8"
+  IMLOperatorKernelFactory_GUID = "ef15ad6f-0dc9-4908-ab35-a575a30dfbf8"
+  IID_IMLOperatorKernelFactory = LibC::GUID.new(0xef15ad6f_u32, 0xdc9_u16, 0x4908_u16, StaticArray[0xab_u8, 0x35_u8, 0xa5_u8, 0x75_u8, 0xa3_u8, 0xd_u8, 0xfb_u8, 0xf8_u8])
   struct IMLOperatorKernelFactory
     lpVtbl : IMLOperatorKernelFactoryVTbl*
   end
@@ -545,8 +545,8 @@ lib LibWin32
     register_operator_kernel : Proc(IMLOperatorRegistry*, MLOperatorKernelDescription*, IMLOperatorKernelFactory, IMLOperatorShapeInferrer, HRESULT)
   end
 
-  IMLOperatorRegistry_GUID = LibC::GUID.new("2af9dd2d-b516-4672-9ab5-530c208493ad")
-  CLSID_IMLOperatorRegistry = "2af9dd2d-b516-4672-9ab5-530c208493ad"
+  IMLOperatorRegistry_GUID = "2af9dd2d-b516-4672-9ab5-530c208493ad"
+  IID_IMLOperatorRegistry = LibC::GUID.new(0x2af9dd2d_u32, 0xb516_u16, 0x4672_u16, StaticArray[0x9a_u8, 0xb5_u8, 0x53_u8, 0xc_u8, 0x20_u8, 0x84_u8, 0x93_u8, 0xad_u8])
   struct IMLOperatorRegistry
     lpVtbl : IMLOperatorRegistryVTbl*
   end

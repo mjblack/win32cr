@@ -749,8 +749,8 @@ lib LibWin32
     get_buffer_size : Proc(ID3DBlob*, LibC::UINT_PTR)
   end
 
-  ID3DBlob_GUID = LibC::GUID.new("8ba5fb08-5195-40e2-ac58-0d989c3a0102")
-  CLSID_ID3DBlob = "8ba5fb08-5195-40e2-ac58-0d989c3a0102"
+  ID3DBlob_GUID = "8ba5fb08-5195-40e2-ac58-0d989c3a0102"
+  IID_ID3DBlob = LibC::GUID.new(0x8ba5fb08_u32, 0x5195_u16, 0x40e2_u16, StaticArray[0xac_u8, 0x58_u8, 0xd_u8, 0x98_u8, 0x9c_u8, 0x3a_u8, 0x1_u8, 0x2_u8])
   struct ID3DBlob
     lpVtbl : ID3DBlobVTbl*
   end
@@ -763,8 +763,8 @@ lib LibWin32
     unregister_destruction_callback : Proc(ID3DDestructionNotifier*, UInt32, HRESULT)
   end
 
-  ID3DDestructionNotifier_GUID = LibC::GUID.new("a06eb39a-50da-425b-8c31-4eecd6c270f3")
-  CLSID_ID3DDestructionNotifier = "a06eb39a-50da-425b-8c31-4eecd6c270f3"
+  ID3DDestructionNotifier_GUID = "a06eb39a-50da-425b-8c31-4eecd6c270f3"
+  IID_ID3DDestructionNotifier = LibC::GUID.new(0xa06eb39a_u32, 0x50da_u16, 0x425b_u16, StaticArray[0x8c_u8, 0x31_u8, 0x4e_u8, 0xec_u8, 0xd6_u8, 0xc2_u8, 0x70_u8, 0xf3_u8])
   struct ID3DDestructionNotifier
     lpVtbl : ID3DDestructionNotifierVTbl*
   end

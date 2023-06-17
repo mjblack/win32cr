@@ -291,34 +291,34 @@ lib LibWin32
   InkCollectorDefaultMargin = -2147483648_i32
   GUID_GESTURE_DATA = "41e4ec0f-26aa-455a-9aa5-2cd36cf63fb9"
   GUID_DYNAMIC_RENDERER_CACHED_DATA = "bf531b92-25bf-4a95-89ad-0e476b34b4f5"
-  InkDisp = LibC::GUID.new(0x937c1a34_u32, 0x151d_u16, 0x4610_u16, StaticArray[0x9c_u8, 0xa6_u8, 0xa8_u8, 0xcc_u8, 0x9b_u8, 0xdb_u8, 0x5d_u8, 0x83_u8])
-  InkOverlay = LibC::GUID.new(0x65d00646_u32, 0xcde3_u16, 0x4a88_u16, StaticArray[0x91_u8, 0x63_u8, 0x67_u8, 0x69_u8, 0xf0_u8, 0xf1_u8, 0xa9_u8, 0x7d_u8])
-  InkPicture = LibC::GUID.new(0x4a1e553_u32, 0xfe36_u16, 0x4fde_u16, StaticArray[0x86_u8, 0x5e_u8, 0x34_u8, 0x41_u8, 0x94_u8, 0xe6_u8, 0x94_u8, 0x24_u8])
-  InkCollector = LibC::GUID.new(0x43fb1553_u32, 0xad74_u16, 0x4ee8_u16, StaticArray[0x88_u8, 0xe4_u8, 0x3e_u8, 0x6d_u8, 0xaa_u8, 0xc9_u8, 0x15_u8, 0xdb_u8])
-  InkDrawingAttributes = LibC::GUID.new(0xd8bf32a2_u32, 0x5a5_u16, 0x44c3_u16, StaticArray[0xb3_u8, 0xaa_u8, 0x5e_u8, 0x80_u8, 0xac_u8, 0x7d_u8, 0x25_u8, 0x76_u8])
-  InkRectangle = LibC::GUID.new(0x43b07326_u32, 0xaae0_u16, 0x4b62_u16, StaticArray[0xa8_u8, 0x3d_u8, 0x5f_u8, 0xd7_u8, 0x68_u8, 0xb7_u8, 0x35_u8, 0x3c_u8])
-  InkRenderer = LibC::GUID.new(0x9c1cc6e4_u32, 0xd7eb_u16, 0x4eeb_u16, StaticArray[0x90_u8, 0x91_u8, 0x15_u8, 0xa7_u8, 0xc8_u8, 0x79_u8, 0x1e_u8, 0xd9_u8])
-  InkTransform = LibC::GUID.new(0xe3d5d93c_u32, 0x1663_u16, 0x4a78_u16, StaticArray[0xa1_u8, 0xa7_u8, 0x22_u8, 0x37_u8, 0x5d_u8, 0xfe_u8, 0xba_u8, 0xee_u8])
-  InkRecognizers = LibC::GUID.new(0x9fd4e808_u32, 0xf6e6_u16, 0x4e65_u16, StaticArray[0x98_u8, 0xd3_u8, 0xaa_u8, 0x39_u8, 0x5_u8, 0x4c_u8, 0x12_u8, 0x55_u8])
-  InkRecognizerContext = LibC::GUID.new(0xaac46a37_u32, 0x9229_u16, 0x4fc0_u16, StaticArray[0x8c_u8, 0xce_u8, 0x44_u8, 0x97_u8, 0x56_u8, 0x9b_u8, 0xf4_u8, 0xd1_u8])
-  InkRecognizerGuide = LibC::GUID.new(0x8770d941_u32, 0xa63a_u16, 0x4671_u16, StaticArray[0xa3_u8, 0x75_u8, 0x28_u8, 0x55_u8, 0xa1_u8, 0x8e_u8, 0xba_u8, 0x73_u8])
-  InkTablets = LibC::GUID.new(0x6e4fcb12_u32, 0x510a_u16, 0x4d40_u16, StaticArray[0x93_u8, 0x4_u8, 0x1d_u8, 0xa1_u8, 0xa_u8, 0xe9_u8, 0x14_u8, 0x7c_u8])
-  InkWordList = LibC::GUID.new(0x9de85094_u32, 0xf71f_u16, 0x44f1_u16, StaticArray[0x84_u8, 0x71_u8, 0x15_u8, 0xa2_u8, 0xfa_u8, 0x76_u8, 0xfc_u8, 0xf3_u8])
-  InkStrokes = LibC::GUID.new(0x48f491bc_u32, 0x240e_u16, 0x4860_u16, StaticArray[0xb0_u8, 0x79_u8, 0xa1_u8, 0xe9_u8, 0x4d_u8, 0x3d_u8, 0x2c_u8, 0x86_u8])
-  Ink = LibC::GUID.new(0x13de4a42_u32, 0x8d21_u16, 0x4c8e_u16, StaticArray[0xbf_u8, 0x9c_u8, 0x8f_u8, 0x69_u8, 0xcb_u8, 0x6_u8, 0x8f_u8, 0xca_u8])
-  SketchInk = LibC::GUID.new(0xf0291081_u32, 0xe87c_u16, 0x4e07_u16, StaticArray[0x97_u8, 0xda_u8, 0xa0_u8, 0xa0_u8, 0x37_u8, 0x61_u8, 0xe5_u8, 0x86_u8])
-  InkDivider = LibC::GUID.new(0x8854f6a0_u32, 0x4683_u16, 0x4ae7_u16, StaticArray[0x91_u8, 0x91_u8, 0x75_u8, 0x2f_u8, 0xe6_u8, 0x46_u8, 0x12_u8, 0xc3_u8])
-  HandwrittenTextInsertion = LibC::GUID.new(0x9f074ee2_u32, 0xe6e9_u16, 0x4d8a_u16, StaticArray[0xa0_u8, 0x47_u8, 0xeb_u8, 0x5b_u8, 0x5c_u8, 0x3c_u8, 0x55_u8, 0xda_u8])
-  PenInputPanel = LibC::GUID.new(0xf744e496_u32, 0x1b5a_u16, 0x489e_u16, StaticArray[0x81_u8, 0xdc_u8, 0xfb_u8, 0xd7_u8, 0xac_u8, 0x62_u8, 0x98_u8, 0xa8_u8])
-  TextInputPanel = LibC::GUID.new(0xf9b189d7_u32, 0x228b_u16, 0x4f2b_u16, StaticArray[0x86_u8, 0x50_u8, 0xb9_u8, 0x7f_u8, 0x59_u8, 0xe0_u8, 0x2c_u8, 0x8c_u8])
-  PenInputPanel_Internal = LibC::GUID.new(0x802b1fb9_u32, 0x56b_u16, 0x4720_u16, StaticArray[0xb0_u8, 0xcc_u8, 0x80_u8, 0xd2_u8, 0x3b_u8, 0x71_u8, 0x17_u8, 0x1e_u8])
-  InkEdit = LibC::GUID.new(0xe5ca59f5_u32, 0x57c4_u16, 0x4dd8_u16, StaticArray[0x9b_u8, 0xd6_u8, 0x1d_u8, 0xee_u8, 0xed_u8, 0xd2_u8, 0x7a_u8, 0xf4_u8])
-  MathInputControl = LibC::GUID.new(0xc561816c_u32, 0x14d8_u16, 0x4090_u16, StaticArray[0x83_u8, 0xc_u8, 0x98_u8, 0xd9_u8, 0x94_u8, 0xb2_u8, 0x1c_u8, 0x7b_u8])
-  RealTimeStylus = LibC::GUID.new(0xe26b366d_u32, 0xf998_u16, 0x43ce_u16, StaticArray[0x83_u8, 0x6f_u8, 0xcb_u8, 0x6d_u8, 0x90_u8, 0x44_u8, 0x32_u8, 0xb0_u8])
-  DynamicRenderer = LibC::GUID.new(0xecd32aea_u32, 0x746f_u16, 0x4dcb_u16, StaticArray[0xbf_u8, 0x68_u8, 0x8_u8, 0x27_u8, 0x57_u8, 0xfa_u8, 0xff_u8, 0x18_u8])
-  GestureRecognizer = LibC::GUID.new(0xea30c654_u32, 0xc62c_u16, 0x441f_u16, StaticArray[0xac_u8, 0x0_u8, 0x95_u8, 0xf9_u8, 0xa1_u8, 0x96_u8, 0x78_u8, 0x2c_u8])
-  StrokeBuilder = LibC::GUID.new(0xe810cee7_u32, 0x6e51_u16, 0x4cb0_u16, StaticArray[0xaa_u8, 0x3a_u8, 0xb_u8, 0x98_u8, 0x5b_u8, 0x70_u8, 0xda_u8, 0xf7_u8])
-  TipAutoCompleteClient = LibC::GUID.new(0x807c1e6c_u32, 0x1d00_u16, 0x453f_u16, StaticArray[0xb9_u8, 0x20_u8, 0xb6_u8, 0x1b_u8, 0xb7_u8, 0xcd_u8, 0xd9_u8, 0x97_u8])
+  CLSID_InkDisp = LibC::GUID.new(0x937c1a34_u32, 0x151d_u16, 0x4610_u16, StaticArray[0x9c_u8, 0xa6_u8, 0xa8_u8, 0xcc_u8, 0x9b_u8, 0xdb_u8, 0x5d_u8, 0x83_u8])
+  CLSID_InkOverlay = LibC::GUID.new(0x65d00646_u32, 0xcde3_u16, 0x4a88_u16, StaticArray[0x91_u8, 0x63_u8, 0x67_u8, 0x69_u8, 0xf0_u8, 0xf1_u8, 0xa9_u8, 0x7d_u8])
+  CLSID_InkPicture = LibC::GUID.new(0x4a1e553_u32, 0xfe36_u16, 0x4fde_u16, StaticArray[0x86_u8, 0x5e_u8, 0x34_u8, 0x41_u8, 0x94_u8, 0xe6_u8, 0x94_u8, 0x24_u8])
+  CLSID_InkCollector = LibC::GUID.new(0x43fb1553_u32, 0xad74_u16, 0x4ee8_u16, StaticArray[0x88_u8, 0xe4_u8, 0x3e_u8, 0x6d_u8, 0xaa_u8, 0xc9_u8, 0x15_u8, 0xdb_u8])
+  CLSID_InkDrawingAttributes = LibC::GUID.new(0xd8bf32a2_u32, 0x5a5_u16, 0x44c3_u16, StaticArray[0xb3_u8, 0xaa_u8, 0x5e_u8, 0x80_u8, 0xac_u8, 0x7d_u8, 0x25_u8, 0x76_u8])
+  CLSID_InkRectangle = LibC::GUID.new(0x43b07326_u32, 0xaae0_u16, 0x4b62_u16, StaticArray[0xa8_u8, 0x3d_u8, 0x5f_u8, 0xd7_u8, 0x68_u8, 0xb7_u8, 0x35_u8, 0x3c_u8])
+  CLSID_InkRenderer = LibC::GUID.new(0x9c1cc6e4_u32, 0xd7eb_u16, 0x4eeb_u16, StaticArray[0x90_u8, 0x91_u8, 0x15_u8, 0xa7_u8, 0xc8_u8, 0x79_u8, 0x1e_u8, 0xd9_u8])
+  CLSID_InkTransform = LibC::GUID.new(0xe3d5d93c_u32, 0x1663_u16, 0x4a78_u16, StaticArray[0xa1_u8, 0xa7_u8, 0x22_u8, 0x37_u8, 0x5d_u8, 0xfe_u8, 0xba_u8, 0xee_u8])
+  CLSID_InkRecognizers = LibC::GUID.new(0x9fd4e808_u32, 0xf6e6_u16, 0x4e65_u16, StaticArray[0x98_u8, 0xd3_u8, 0xaa_u8, 0x39_u8, 0x5_u8, 0x4c_u8, 0x12_u8, 0x55_u8])
+  CLSID_InkRecognizerContext = LibC::GUID.new(0xaac46a37_u32, 0x9229_u16, 0x4fc0_u16, StaticArray[0x8c_u8, 0xce_u8, 0x44_u8, 0x97_u8, 0x56_u8, 0x9b_u8, 0xf4_u8, 0xd1_u8])
+  CLSID_InkRecognizerGuide = LibC::GUID.new(0x8770d941_u32, 0xa63a_u16, 0x4671_u16, StaticArray[0xa3_u8, 0x75_u8, 0x28_u8, 0x55_u8, 0xa1_u8, 0x8e_u8, 0xba_u8, 0x73_u8])
+  CLSID_InkTablets = LibC::GUID.new(0x6e4fcb12_u32, 0x510a_u16, 0x4d40_u16, StaticArray[0x93_u8, 0x4_u8, 0x1d_u8, 0xa1_u8, 0xa_u8, 0xe9_u8, 0x14_u8, 0x7c_u8])
+  CLSID_InkWordList = LibC::GUID.new(0x9de85094_u32, 0xf71f_u16, 0x44f1_u16, StaticArray[0x84_u8, 0x71_u8, 0x15_u8, 0xa2_u8, 0xfa_u8, 0x76_u8, 0xfc_u8, 0xf3_u8])
+  CLSID_InkStrokes = LibC::GUID.new(0x48f491bc_u32, 0x240e_u16, 0x4860_u16, StaticArray[0xb0_u8, 0x79_u8, 0xa1_u8, 0xe9_u8, 0x4d_u8, 0x3d_u8, 0x2c_u8, 0x86_u8])
+  CLSID_Ink = LibC::GUID.new(0x13de4a42_u32, 0x8d21_u16, 0x4c8e_u16, StaticArray[0xbf_u8, 0x9c_u8, 0x8f_u8, 0x69_u8, 0xcb_u8, 0x6_u8, 0x8f_u8, 0xca_u8])
+  CLSID_SketchInk = LibC::GUID.new(0xf0291081_u32, 0xe87c_u16, 0x4e07_u16, StaticArray[0x97_u8, 0xda_u8, 0xa0_u8, 0xa0_u8, 0x37_u8, 0x61_u8, 0xe5_u8, 0x86_u8])
+  CLSID_InkDivider = LibC::GUID.new(0x8854f6a0_u32, 0x4683_u16, 0x4ae7_u16, StaticArray[0x91_u8, 0x91_u8, 0x75_u8, 0x2f_u8, 0xe6_u8, 0x46_u8, 0x12_u8, 0xc3_u8])
+  CLSID_HandwrittenTextInsertion = LibC::GUID.new(0x9f074ee2_u32, 0xe6e9_u16, 0x4d8a_u16, StaticArray[0xa0_u8, 0x47_u8, 0xeb_u8, 0x5b_u8, 0x5c_u8, 0x3c_u8, 0x55_u8, 0xda_u8])
+  CLSID_PenInputPanel = LibC::GUID.new(0xf744e496_u32, 0x1b5a_u16, 0x489e_u16, StaticArray[0x81_u8, 0xdc_u8, 0xfb_u8, 0xd7_u8, 0xac_u8, 0x62_u8, 0x98_u8, 0xa8_u8])
+  CLSID_TextInputPanel = LibC::GUID.new(0xf9b189d7_u32, 0x228b_u16, 0x4f2b_u16, StaticArray[0x86_u8, 0x50_u8, 0xb9_u8, 0x7f_u8, 0x59_u8, 0xe0_u8, 0x2c_u8, 0x8c_u8])
+  CLSID_PenInputPanel_Internal = LibC::GUID.new(0x802b1fb9_u32, 0x56b_u16, 0x4720_u16, StaticArray[0xb0_u8, 0xcc_u8, 0x80_u8, 0xd2_u8, 0x3b_u8, 0x71_u8, 0x17_u8, 0x1e_u8])
+  CLSID_InkEdit = LibC::GUID.new(0xe5ca59f5_u32, 0x57c4_u16, 0x4dd8_u16, StaticArray[0x9b_u8, 0xd6_u8, 0x1d_u8, 0xee_u8, 0xed_u8, 0xd2_u8, 0x7a_u8, 0xf4_u8])
+  CLSID_MathInputControl = LibC::GUID.new(0xc561816c_u32, 0x14d8_u16, 0x4090_u16, StaticArray[0x83_u8, 0xc_u8, 0x98_u8, 0xd9_u8, 0x94_u8, 0xb2_u8, 0x1c_u8, 0x7b_u8])
+  CLSID_RealTimeStylus = LibC::GUID.new(0xe26b366d_u32, 0xf998_u16, 0x43ce_u16, StaticArray[0x83_u8, 0x6f_u8, 0xcb_u8, 0x6d_u8, 0x90_u8, 0x44_u8, 0x32_u8, 0xb0_u8])
+  CLSID_DynamicRenderer = LibC::GUID.new(0xecd32aea_u32, 0x746f_u16, 0x4dcb_u16, StaticArray[0xbf_u8, 0x68_u8, 0x8_u8, 0x27_u8, 0x57_u8, 0xfa_u8, 0xff_u8, 0x18_u8])
+  CLSID_GestureRecognizer = LibC::GUID.new(0xea30c654_u32, 0xc62c_u16, 0x441f_u16, StaticArray[0xac_u8, 0x0_u8, 0x95_u8, 0xf9_u8, 0xa1_u8, 0x96_u8, 0x78_u8, 0x2c_u8])
+  CLSID_StrokeBuilder = LibC::GUID.new(0xe810cee7_u32, 0x6e51_u16, 0x4cb0_u16, StaticArray[0xaa_u8, 0x3a_u8, 0xb_u8, 0x98_u8, 0x5b_u8, 0x70_u8, 0xda_u8, 0xf7_u8])
+  CLSID_TipAutoCompleteClient = LibC::GUID.new(0x807c1e6c_u32, 0x1d00_u16, 0x453f_u16, StaticArray[0xb9_u8, 0x20_u8, 0xb6_u8, 0x1b_u8, 0xb7_u8, 0xcd_u8, 0xd9_u8, 0x97_u8])
 
   alias PfnRecoCallback = Proc(UInt32, UInt8*, HRECOCONTEXT, HRESULT)
 
@@ -1656,8 +1656,8 @@ lib LibWin32
     set_rectangle : Proc(IInkRectangle*, Int32, Int32, Int32, Int32, HRESULT)
   end
 
-  IInkRectangle_GUID = LibC::GUID.new("9794ff82-6071-4717-8a8b-6ac7c64a686e")
-  CLSID_IInkRectangle = "9794ff82-6071-4717-8a8b-6ac7c64a686e"
+  IInkRectangle_GUID = "9794ff82-6071-4717-8a8b-6ac7c64a686e"
+  IID_IInkRectangle = LibC::GUID.new(0x9794ff82_u32, 0x6071_u16, 0x4717_u16, StaticArray[0x8a_u8, 0x8b_u8, 0x6a_u8, 0xc7_u8, 0xc6_u8, 0x4a_u8, 0x68_u8, 0x6e_u8])
   struct IInkRectangle
     lpVtbl : IInkRectangleVTbl*
   end
@@ -1675,8 +1675,8 @@ lib LibWin32
     put_data : Proc(IInkExtendedProperty*, VARIANT, HRESULT)
   end
 
-  IInkExtendedProperty_GUID = LibC::GUID.new("db489209-b7c3-411d-90f6-1548cfff271e")
-  CLSID_IInkExtendedProperty = "db489209-b7c3-411d-90f6-1548cfff271e"
+  IInkExtendedProperty_GUID = "db489209-b7c3-411d-90f6-1548cfff271e"
+  IID_IInkExtendedProperty = LibC::GUID.new(0xdb489209_u32, 0xb7c3_u16, 0x411d_u16, StaticArray[0x90_u8, 0xf6_u8, 0x15_u8, 0x48_u8, 0xcf_u8, 0xff_u8, 0x27_u8, 0x1e_u8])
   struct IInkExtendedProperty
     lpVtbl : IInkExtendedPropertyVTbl*
   end
@@ -1698,8 +1698,8 @@ lib LibWin32
     does_property_exist : Proc(IInkExtendedProperties*, UInt8*, Int16*, HRESULT)
   end
 
-  IInkExtendedProperties_GUID = LibC::GUID.new("89f2a8be-95a9-4530-8b8f-88e971e3e25f")
-  CLSID_IInkExtendedProperties = "89f2a8be-95a9-4530-8b8f-88e971e3e25f"
+  IInkExtendedProperties_GUID = "89f2a8be-95a9-4530-8b8f-88e971e3e25f"
+  IID_IInkExtendedProperties = LibC::GUID.new(0x89f2a8be_u32, 0x95a9_u16, 0x4530_u16, StaticArray[0x8b_u8, 0x8f_u8, 0x88_u8, 0xe9_u8, 0x71_u8, 0xe3_u8, 0xe2_u8, 0x5f_u8])
   struct IInkExtendedProperties
     lpVtbl : IInkExtendedPropertiesVTbl*
   end
@@ -1734,8 +1734,8 @@ lib LibWin32
     clone : Proc(IInkDrawingAttributes*, IInkDrawingAttributes*, HRESULT)
   end
 
-  IInkDrawingAttributes_GUID = LibC::GUID.new("bf519b75-0a15-4623-adc9-c00d436a8092")
-  CLSID_IInkDrawingAttributes = "bf519b75-0a15-4623-adc9-c00d436a8092"
+  IInkDrawingAttributes_GUID = "bf519b75-0a15-4623-adc9-c00d436a8092"
+  IID_IInkDrawingAttributes = LibC::GUID.new(0xbf519b75_u32, 0xa15_u16, 0x4623_u16, StaticArray[0xad_u8, 0xc9_u8, 0xc0_u8, 0xd_u8, 0x43_u8, 0x6a_u8, 0x80_u8, 0x92_u8])
   struct IInkDrawingAttributes
     lpVtbl : IInkDrawingAttributesVTbl*
   end
@@ -1772,8 +1772,8 @@ lib LibWin32
     put_data : Proc(IInkTransform*, XFORM, HRESULT)
   end
 
-  IInkTransform_GUID = LibC::GUID.new("615f1d43-8703-4565-88e2-8201d2ecd7b7")
-  CLSID_IInkTransform = "615f1d43-8703-4565-88e2-8201d2ecd7b7"
+  IInkTransform_GUID = "615f1d43-8703-4565-88e2-8201d2ecd7b7"
+  IID_IInkTransform = LibC::GUID.new(0x615f1d43_u32, 0x8703_u16, 0x4565_u16, StaticArray[0x88_u8, 0xe2_u8, 0x82_u8, 0x1_u8, 0xd2_u8, 0xec_u8, 0xd7_u8, 0xb7_u8])
   struct IInkTransform
     lpVtbl : IInkTransformVTbl*
   end
@@ -1791,8 +1791,8 @@ lib LibWin32
     get_hot_point : Proc(IInkGesture*, Int32*, Int32*, HRESULT)
   end
 
-  IInkGesture_GUID = LibC::GUID.new("3bdc0a97-04e5-4e26-b813-18f052d41def")
-  CLSID_IInkGesture = "3bdc0a97-04e5-4e26-b813-18f052d41def"
+  IInkGesture_GUID = "3bdc0a97-04e5-4e26-b813-18f052d41def"
+  IID_IInkGesture = LibC::GUID.new(0x3bdc0a97_u32, 0x4e5_u16, 0x4e26_u16, StaticArray[0xb8_u8, 0x13_u8, 0x18_u8, 0xf0_u8, 0x52_u8, 0xd4_u8, 0x1d_u8, 0xef_u8])
   struct IInkGesture
     lpVtbl : IInkGestureVTbl*
   end
@@ -1814,8 +1814,8 @@ lib LibWin32
     get_buttons : Proc(IInkCursor*, IInkCursorButtons*, HRESULT)
   end
 
-  IInkCursor_GUID = LibC::GUID.new("ad30c630-40c5-4350-8405-9c71012fc558")
-  CLSID_IInkCursor = "ad30c630-40c5-4350-8405-9c71012fc558"
+  IInkCursor_GUID = "ad30c630-40c5-4350-8405-9c71012fc558"
+  IID_IInkCursor = LibC::GUID.new(0xad30c630_u32, 0x40c5_u16, 0x4350_u16, StaticArray[0x84_u8, 0x5_u8, 0x9c_u8, 0x71_u8, 0x1_u8, 0x2f_u8, 0xc5_u8, 0x58_u8])
   struct IInkCursor
     lpVtbl : IInkCursorVTbl*
   end
@@ -1833,8 +1833,8 @@ lib LibWin32
     item : Proc(IInkCursors*, Int32, IInkCursor*, HRESULT)
   end
 
-  IInkCursors_GUID = LibC::GUID.new("a248c1ac-c698-4e06-9e5c-d57f77c7e647")
-  CLSID_IInkCursors = "a248c1ac-c698-4e06-9e5c-d57f77c7e647"
+  IInkCursors_GUID = "a248c1ac-c698-4e06-9e5c-d57f77c7e647"
+  IID_IInkCursors = LibC::GUID.new(0xa248c1ac_u32, 0xc698_u16, 0x4e06_u16, StaticArray[0x9e_u8, 0x5c_u8, 0xd5_u8, 0x7f_u8, 0x77_u8, 0xc7_u8, 0xe6_u8, 0x47_u8])
   struct IInkCursors
     lpVtbl : IInkCursorsVTbl*
   end
@@ -1852,8 +1852,8 @@ lib LibWin32
     get_state : Proc(IInkCursorButton*, InkCursorButtonState*, HRESULT)
   end
 
-  IInkCursorButton_GUID = LibC::GUID.new("85ef9417-1d59-49b2-a13c-702c85430894")
-  CLSID_IInkCursorButton = "85ef9417-1d59-49b2-a13c-702c85430894"
+  IInkCursorButton_GUID = "85ef9417-1d59-49b2-a13c-702c85430894"
+  IID_IInkCursorButton = LibC::GUID.new(0x85ef9417_u32, 0x1d59_u16, 0x49b2_u16, StaticArray[0xa1_u8, 0x3c_u8, 0x70_u8, 0x2c_u8, 0x85_u8, 0x43_u8, 0x8_u8, 0x94_u8])
   struct IInkCursorButton
     lpVtbl : IInkCursorButtonVTbl*
   end
@@ -1871,8 +1871,8 @@ lib LibWin32
     item : Proc(IInkCursorButtons*, VARIANT, IInkCursorButton*, HRESULT)
   end
 
-  IInkCursorButtons_GUID = LibC::GUID.new("3671cc40-b624-4671-9fa0-db119d952d54")
-  CLSID_IInkCursorButtons = "3671cc40-b624-4671-9fa0-db119d952d54"
+  IInkCursorButtons_GUID = "3671cc40-b624-4671-9fa0-db119d952d54"
+  IID_IInkCursorButtons = LibC::GUID.new(0x3671cc40_u32, 0xb624_u16, 0x4671_u16, StaticArray[0x9f_u8, 0xa0_u8, 0xdb_u8, 0x11_u8, 0x9d_u8, 0x95_u8, 0x2d_u8, 0x54_u8])
   struct IInkCursorButtons
     lpVtbl : IInkCursorButtonsVTbl*
   end
@@ -1893,8 +1893,8 @@ lib LibWin32
     get_property_metrics : Proc(IInkTablet*, UInt8*, Int32*, Int32*, TabletPropertyMetricUnit*, Float32*, HRESULT)
   end
 
-  IInkTablet_GUID = LibC::GUID.new("2de25eaa-6ef8-42d5-aee9-185bc81b912d")
-  CLSID_IInkTablet = "2de25eaa-6ef8-42d5-aee9-185bc81b912d"
+  IInkTablet_GUID = "2de25eaa-6ef8-42d5-aee9-185bc81b912d"
+  IID_IInkTablet = LibC::GUID.new(0x2de25eaa_u32, 0x6ef8_u16, 0x42d5_u16, StaticArray[0xae_u8, 0xe9_u8, 0x18_u8, 0x5b_u8, 0xc8_u8, 0x1b_u8, 0x91_u8, 0x2d_u8])
   struct IInkTablet
     lpVtbl : IInkTabletVTbl*
   end
@@ -1910,8 +1910,8 @@ lib LibWin32
     get_device_kind : Proc(IInkTablet2*, TabletDeviceKind*, HRESULT)
   end
 
-  IInkTablet2_GUID = LibC::GUID.new("90c91ad2-fa36-49d6-9516-ce8d570f6f85")
-  CLSID_IInkTablet2 = "90c91ad2-fa36-49d6-9516-ce8d570f6f85"
+  IInkTablet2_GUID = "90c91ad2-fa36-49d6-9516-ce8d570f6f85"
+  IID_IInkTablet2 = LibC::GUID.new(0x90c91ad2_u32, 0xfa36_u16, 0x49d6_u16, StaticArray[0x95_u8, 0x16_u8, 0xce_u8, 0x8d_u8, 0x57_u8, 0xf_u8, 0x6f_u8, 0x85_u8])
   struct IInkTablet2
     lpVtbl : IInkTablet2VTbl*
   end
@@ -1928,8 +1928,8 @@ lib LibWin32
     get_maximum_cursors : Proc(IInkTablet3*, UInt32*, HRESULT)
   end
 
-  IInkTablet3_GUID = LibC::GUID.new("7e313997-1327-41dd-8ca9-79f24be17250")
-  CLSID_IInkTablet3 = "7e313997-1327-41dd-8ca9-79f24be17250"
+  IInkTablet3_GUID = "7e313997-1327-41dd-8ca9-79f24be17250"
+  IID_IInkTablet3 = LibC::GUID.new(0x7e313997_u32, 0x1327_u16, 0x41dd_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x79_u8, 0xf2_u8, 0x4b_u8, 0xe1_u8, 0x72_u8, 0x50_u8])
   struct IInkTablet3
     lpVtbl : IInkTablet3VTbl*
   end
@@ -1949,8 +1949,8 @@ lib LibWin32
     is_packet_property_supported : Proc(IInkTablets*, UInt8*, Int16*, HRESULT)
   end
 
-  IInkTablets_GUID = LibC::GUID.new("112086d9-7779-4535-a699-862b43ac1863")
-  CLSID_IInkTablets = "112086d9-7779-4535-a699-862b43ac1863"
+  IInkTablets_GUID = "112086d9-7779-4535-a699-862b43ac1863"
+  IID_IInkTablets = LibC::GUID.new(0x112086d9_u32, 0x7779_u16, 0x4535_u16, StaticArray[0xa6_u8, 0x99_u8, 0x86_u8, 0x2b_u8, 0x43_u8, 0xac_u8, 0x18_u8, 0x63_u8])
   struct IInkTablets
     lpVtbl : IInkTabletsVTbl*
   end
@@ -1998,8 +1998,8 @@ lib LibWin32
     scale_transform : Proc(IInkStrokeDisp*, Float32, Float32, HRESULT)
   end
 
-  IInkStrokeDisp_GUID = LibC::GUID.new("43242fea-91d1-4a72-963e-fbb91829cfa2")
-  CLSID_IInkStrokeDisp = "43242fea-91d1-4a72-963e-fbb91829cfa2"
+  IInkStrokeDisp_GUID = "43242fea-91d1-4a72-963e-fbb91829cfa2"
+  IID_IInkStrokeDisp = LibC::GUID.new(0x43242fea_u32, 0x91d1_u16, 0x4a72_u16, StaticArray[0x96_u8, 0x3e_u8, 0xfb_u8, 0xb9_u8, 0x18_u8, 0x29_u8, 0xcf_u8, 0xa2_u8])
   struct IInkStrokeDisp
     lpVtbl : IInkStrokeDispVTbl*
   end
@@ -2034,8 +2034,8 @@ lib LibWin32
     remove_recognition_result : Proc(IInkStrokes*, HRESULT)
   end
 
-  IInkStrokes_GUID = LibC::GUID.new("f1f4c9d8-590a-4963-b3ae-1935671bb6f3")
-  CLSID_IInkStrokes = "f1f4c9d8-590a-4963-b3ae-1935671bb6f3"
+  IInkStrokes_GUID = "f1f4c9d8-590a-4963-b3ae-1935671bb6f3"
+  IID_IInkStrokes = LibC::GUID.new(0xf1f4c9d8_u32, 0x590a_u16, 0x4963_u16, StaticArray[0xb3_u8, 0xae_u8, 0x19_u8, 0x35_u8, 0x67_u8, 0x1b_u8, 0xb6_u8, 0xf3_u8])
   struct IInkStrokes
     lpVtbl : IInkStrokesVTbl*
   end
@@ -2056,8 +2056,8 @@ lib LibWin32
     clear : Proc(IInkCustomStrokes*, HRESULT)
   end
 
-  IInkCustomStrokes_GUID = LibC::GUID.new("7e23a88f-c30e-420f-9bdb-28902543f0c1")
-  CLSID_IInkCustomStrokes = "7e23a88f-c30e-420f-9bdb-28902543f0c1"
+  IInkCustomStrokes_GUID = "7e23a88f-c30e-420f-9bdb-28902543f0c1"
+  IID_IInkCustomStrokes = LibC::GUID.new(0x7e23a88f_u32, 0xc30e_u16, 0x420f_u16, StaticArray[0x9b_u8, 0xdb_u8, 0x28_u8, 0x90_u8, 0x25_u8, 0x43_u8, 0xf0_u8, 0xc1_u8])
   struct IInkCustomStrokes
     lpVtbl : IInkCustomStrokesVTbl*
   end
@@ -2072,8 +2072,8 @@ lib LibWin32
     invoke : Proc(IIInkStrokesEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIInkStrokesEvents_GUID = LibC::GUID.new("f33053ec-5d25-430a-928f-76a6491dde15")
-  CLSID_IIInkStrokesEvents = "f33053ec-5d25-430a-928f-76a6491dde15"
+  IIInkStrokesEvents_GUID = "f33053ec-5d25-430a-928f-76a6491dde15"
+  IID_IIInkStrokesEvents = LibC::GUID.new(0xf33053ec_u32, 0x5d25_u16, 0x430a_u16, StaticArray[0x92_u8, 0x8f_u8, 0x76_u8, 0xa6_u8, 0x49_u8, 0x1d_u8, 0xde_u8, 0x15_u8])
   struct IIInkStrokesEvents
     lpVtbl : IIInkStrokesEventsVTbl*
   end
@@ -2113,8 +2113,8 @@ lib LibWin32
     clipboard_paste : Proc(IInkDisp*, Int32, Int32, IDataObject, IInkStrokes*, HRESULT)
   end
 
-  IInkDisp_GUID = LibC::GUID.new("9d398fa0-c4e2-4fcd-9973-975caaf47ea6")
-  CLSID_IInkDisp = "9d398fa0-c4e2-4fcd-9973-975caaf47ea6"
+  IInkDisp_GUID = "9d398fa0-c4e2-4fcd-9973-975caaf47ea6"
+  IID_IInkDisp = LibC::GUID.new(0x9d398fa0_u32, 0xc4e2_u16, 0x4fcd_u16, StaticArray[0x99_u8, 0x73_u8, 0x97_u8, 0x5c_u8, 0xaa_u8, 0xf4_u8, 0x7e_u8, 0xa6_u8])
   struct IInkDisp
     lpVtbl : IInkDispVTbl*
   end
@@ -2129,8 +2129,8 @@ lib LibWin32
     invoke : Proc(IIInkEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIInkEvents_GUID = LibC::GUID.new("427b1865-ca3f-479a-83a9-0f420f2a0073")
-  CLSID_IIInkEvents = "427b1865-ca3f-479a-83a9-0f420f2a0073"
+  IIInkEvents_GUID = "427b1865-ca3f-479a-83a9-0f420f2a0073"
+  IID_IIInkEvents = LibC::GUID.new(0x427b1865_u32, 0xca3f_u16, 0x479a_u16, StaticArray[0x83_u8, 0xa9_u8, 0xf_u8, 0x42_u8, 0xf_u8, 0x2a_u8, 0x0_u8, 0x73_u8])
   struct IIInkEvents
     lpVtbl : IIInkEventsVTbl*
   end
@@ -2160,8 +2160,8 @@ lib LibWin32
     scale_transform : Proc(IInkRenderer*, Float32, Float32, Int16, HRESULT)
   end
 
-  IInkRenderer_GUID = LibC::GUID.new("e6257a9c-b511-4f4c-a8b0-a7dbc9506b83")
-  CLSID_IInkRenderer = "e6257a9c-b511-4f4c-a8b0-a7dbc9506b83"
+  IInkRenderer_GUID = "e6257a9c-b511-4f4c-a8b0-a7dbc9506b83"
+  IID_IInkRenderer = LibC::GUID.new(0xe6257a9c_u32, 0xb511_u16, 0x4f4c_u16, StaticArray[0xa8_u8, 0xb0_u8, 0xa7_u8, 0xdb_u8, 0xc9_u8, 0x50_u8, 0x6b_u8, 0x83_u8])
   struct IInkRenderer
     lpVtbl : IInkRendererVTbl*
   end
@@ -2216,8 +2216,8 @@ lib LibWin32
     set_event_interest : Proc(IInkCollector*, InkCollectorEventInterest, Int16, HRESULT)
   end
 
-  IInkCollector_GUID = LibC::GUID.new("f0f060b5-8b1f-4a7c-89ec-880692588a4f")
-  CLSID_IInkCollector = "f0f060b5-8b1f-4a7c-89ec-880692588a4f"
+  IInkCollector_GUID = "f0f060b5-8b1f-4a7c-89ec-880692588a4f"
+  IID_IInkCollector = LibC::GUID.new(0xf0f060b5_u32, 0x8b1f_u16, 0x4a7c_u16, StaticArray[0x89_u8, 0xec_u8, 0x88_u8, 0x6_u8, 0x92_u8, 0x58_u8, 0x8a_u8, 0x4f_u8])
   struct IInkCollector
     lpVtbl : IInkCollectorVTbl*
   end
@@ -2232,8 +2232,8 @@ lib LibWin32
     invoke : Proc(IIInkCollectorEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIInkCollectorEvents_GUID = LibC::GUID.new("11a583f2-712d-4fea-abcf-ab4af38ea06b")
-  CLSID_IIInkCollectorEvents = "11a583f2-712d-4fea-abcf-ab4af38ea06b"
+  IIInkCollectorEvents_GUID = "11a583f2-712d-4fea-abcf-ab4af38ea06b"
+  IID_IIInkCollectorEvents = LibC::GUID.new(0x11a583f2_u32, 0x712d_u16, 0x4fea_u16, StaticArray[0xab_u8, 0xcf_u8, 0xab_u8, 0x4a_u8, 0xf3_u8, 0x8e_u8, 0xa0_u8, 0x6b_u8])
   struct IIInkCollectorEvents
     lpVtbl : IIInkCollectorEventsVTbl*
   end
@@ -2302,8 +2302,8 @@ lib LibWin32
     set_event_interest : Proc(IInkOverlay*, InkCollectorEventInterest, Int16, HRESULT)
   end
 
-  IInkOverlay_GUID = LibC::GUID.new("b82a463b-c1c5-45a3-997c-deab5651b67a")
-  CLSID_IInkOverlay = "b82a463b-c1c5-45a3-997c-deab5651b67a"
+  IInkOverlay_GUID = "b82a463b-c1c5-45a3-997c-deab5651b67a"
+  IID_IInkOverlay = LibC::GUID.new(0xb82a463b_u32, 0xc1c5_u16, 0x45a3_u16, StaticArray[0x99_u8, 0x7c_u8, 0xde_u8, 0xab_u8, 0x56_u8, 0x51_u8, 0xb6_u8, 0x7a_u8])
   struct IInkOverlay
     lpVtbl : IInkOverlayVTbl*
   end
@@ -2318,8 +2318,8 @@ lib LibWin32
     invoke : Proc(IIInkOverlayEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIInkOverlayEvents_GUID = LibC::GUID.new("31179b69-e563-489e-b16f-712f1e8a0651")
-  CLSID_IIInkOverlayEvents = "31179b69-e563-489e-b16f-712f1e8a0651"
+  IIInkOverlayEvents_GUID = "31179b69-e563-489e-b16f-712f1e8a0651"
+  IID_IIInkOverlayEvents = LibC::GUID.new(0x31179b69_u32, 0xe563_u16, 0x489e_u16, StaticArray[0xb1_u8, 0x6f_u8, 0x71_u8, 0x2f_u8, 0x1e_u8, 0x8a_u8, 0x6_u8, 0x51_u8])
   struct IIInkOverlayEvents
     lpVtbl : IIInkOverlayEventsVTbl*
   end
@@ -2393,8 +2393,8 @@ lib LibWin32
     put_enabled : Proc(IInkPicture*, Int16, HRESULT)
   end
 
-  IInkPicture_GUID = LibC::GUID.new("e85662e0-379a-40d7-9b5c-757d233f9923")
-  CLSID_IInkPicture = "e85662e0-379a-40d7-9b5c-757d233f9923"
+  IInkPicture_GUID = "e85662e0-379a-40d7-9b5c-757d233f9923"
+  IID_IInkPicture = LibC::GUID.new(0xe85662e0_u32, 0x379a_u16, 0x40d7_u16, StaticArray[0x9b_u8, 0x5c_u8, 0x75_u8, 0x7d_u8, 0x23_u8, 0x3f_u8, 0x99_u8, 0x23_u8])
   struct IInkPicture
     lpVtbl : IInkPictureVTbl*
   end
@@ -2409,8 +2409,8 @@ lib LibWin32
     invoke : Proc(IIInkPictureEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIInkPictureEvents_GUID = LibC::GUID.new("60ff4fee-22ff-4484-acc1-d308d9cd7ea3")
-  CLSID_IIInkPictureEvents = "60ff4fee-22ff-4484-acc1-d308d9cd7ea3"
+  IIInkPictureEvents_GUID = "60ff4fee-22ff-4484-acc1-d308d9cd7ea3"
+  IID_IIInkPictureEvents = LibC::GUID.new(0x60ff4fee_u32, 0x22ff_u16, 0x4484_u16, StaticArray[0xac_u8, 0xc1_u8, 0xd3_u8, 0x8_u8, 0xd9_u8, 0xcd_u8, 0x7e_u8, 0xa3_u8])
   struct IIInkPictureEvents
     lpVtbl : IIInkPictureEventsVTbl*
   end
@@ -2432,8 +2432,8 @@ lib LibWin32
     create_recognizer_context : Proc(IInkRecognizer*, IInkRecognizerContext*, HRESULT)
   end
 
-  IInkRecognizer_GUID = LibC::GUID.new("782bf7cf-034b-4396-8a32-3a1833cf6b56")
-  CLSID_IInkRecognizer = "782bf7cf-034b-4396-8a32-3a1833cf6b56"
+  IInkRecognizer_GUID = "782bf7cf-034b-4396-8a32-3a1833cf6b56"
+  IID_IInkRecognizer = LibC::GUID.new(0x782bf7cf_u32, 0x34b_u16, 0x4396_u16, StaticArray[0x8a_u8, 0x32_u8, 0x3a_u8, 0x18_u8, 0x33_u8, 0xcf_u8, 0x6b_u8, 0x56_u8])
   struct IInkRecognizer
     lpVtbl : IInkRecognizerVTbl*
   end
@@ -2450,8 +2450,8 @@ lib LibWin32
     get_unicode_ranges : Proc(IInkRecognizer2*, VARIANT*, HRESULT)
   end
 
-  IInkRecognizer2_GUID = LibC::GUID.new("6110118a-3a75-4ad6-b2aa-04b2b72bbe65")
-  CLSID_IInkRecognizer2 = "6110118a-3a75-4ad6-b2aa-04b2b72bbe65"
+  IInkRecognizer2_GUID = "6110118a-3a75-4ad6-b2aa-04b2b72bbe65"
+  IID_IInkRecognizer2 = LibC::GUID.new(0x6110118a_u32, 0x3a75_u16, 0x4ad6_u16, StaticArray[0xb2_u8, 0xaa_u8, 0x4_u8, 0xb2_u8, 0xb7_u8, 0x2b_u8, 0xbe_u8, 0x65_u8])
   struct IInkRecognizer2
     lpVtbl : IInkRecognizer2VTbl*
   end
@@ -2470,8 +2470,8 @@ lib LibWin32
     item : Proc(IInkRecognizers*, Int32, IInkRecognizer*, HRESULT)
   end
 
-  IInkRecognizers_GUID = LibC::GUID.new("9ccc4f12-b0b7-4a8b-bf58-4aeca4e8cefd")
-  CLSID_IInkRecognizers = "9ccc4f12-b0b7-4a8b-bf58-4aeca4e8cefd"
+  IInkRecognizers_GUID = "9ccc4f12-b0b7-4a8b-bf58-4aeca4e8cefd"
+  IID_IInkRecognizers = LibC::GUID.new(0x9ccc4f12_u32, 0xb0b7_u16, 0x4a8b_u16, StaticArray[0xbf_u8, 0x58_u8, 0x4a_u8, 0xec_u8, 0xa4_u8, 0xe8_u8, 0xce_u8, 0xfd_u8])
   struct IInkRecognizers
     lpVtbl : IInkRecognizersVTbl*
   end
@@ -2486,8 +2486,8 @@ lib LibWin32
     invoke : Proc(IIInkRecognitionEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIInkRecognitionEvents_GUID = LibC::GUID.new("17bce92f-2e21-47fd-9d33-3c6afbfd8c59")
-  CLSID_IIInkRecognitionEvents = "17bce92f-2e21-47fd-9d33-3c6afbfd8c59"
+  IIInkRecognitionEvents_GUID = "17bce92f-2e21-47fd-9d33-3c6afbfd8c59"
+  IID_IIInkRecognitionEvents = LibC::GUID.new(0x17bce92f_u32, 0x2e21_u16, 0x47fd_u16, StaticArray[0x9d_u8, 0x33_u8, 0x3c_u8, 0x6a_u8, 0xfb_u8, 0xfd_u8, 0x8c_u8, 0x59_u8])
   struct IIInkRecognitionEvents
     lpVtbl : IIInkRecognitionEventsVTbl*
   end
@@ -2526,8 +2526,8 @@ lib LibWin32
     is_string_supported : Proc(IInkRecognizerContext*, UInt8*, Int16*, HRESULT)
   end
 
-  IInkRecognizerContext_GUID = LibC::GUID.new("c68f52f9-32a3-4625-906c-44fc23b40958")
-  CLSID_IInkRecognizerContext = "c68f52f9-32a3-4625-906c-44fc23b40958"
+  IInkRecognizerContext_GUID = "c68f52f9-32a3-4625-906c-44fc23b40958"
+  IID_IInkRecognizerContext = LibC::GUID.new(0xc68f52f9_u32, 0x32a3_u16, 0x4625_u16, StaticArray[0x90_u8, 0x6c_u8, 0x44_u8, 0xfc_u8, 0x23_u8, 0xb4_u8, 0x9_u8, 0x58_u8])
   struct IInkRecognizerContext
     lpVtbl : IInkRecognizerContextVTbl*
   end
@@ -2544,8 +2544,8 @@ lib LibWin32
     put_enabled_unicode_ranges : Proc(IInkRecognizerContext2*, VARIANT, HRESULT)
   end
 
-  IInkRecognizerContext2_GUID = LibC::GUID.new("d6f0e32f-73d8-408e-8e9f-5fea592c363f")
-  CLSID_IInkRecognizerContext2 = "d6f0e32f-73d8-408e-8e9f-5fea592c363f"
+  IInkRecognizerContext2_GUID = "d6f0e32f-73d8-408e-8e9f-5fea592c363f"
+  IID_IInkRecognizerContext2 = LibC::GUID.new(0xd6f0e32f_u32, 0x73d8_u16, 0x408e_u16, StaticArray[0x8e_u8, 0x9f_u8, 0x5f_u8, 0xea_u8, 0x59_u8, 0x2c_u8, 0x36_u8, 0x3f_u8])
   struct IInkRecognizerContext2
     lpVtbl : IInkRecognizerContext2VTbl*
   end
@@ -2567,8 +2567,8 @@ lib LibWin32
     set_result_on_strokes : Proc(IInkRecognitionResult*, HRESULT)
   end
 
-  IInkRecognitionResult_GUID = LibC::GUID.new("3bc129a8-86cd-45ad-bde8-e0d32d61c16d")
-  CLSID_IInkRecognitionResult = "3bc129a8-86cd-45ad-bde8-e0d32d61c16d"
+  IInkRecognitionResult_GUID = "3bc129a8-86cd-45ad-bde8-e0d32d61c16d"
+  IID_IInkRecognitionResult = LibC::GUID.new(0x3bc129a8_u32, 0x86cd_u16, 0x45ad_u16, StaticArray[0xbd_u8, 0xe8_u8, 0xe0_u8, 0xd3_u8, 0x2d_u8, 0x61_u8, 0xc1_u8, 0x6d_u8])
   struct IInkRecognitionResult
     lpVtbl : IInkRecognitionResultVTbl*
   end
@@ -2598,8 +2598,8 @@ lib LibWin32
     get_property_value : Proc(IInkRecognitionAlternate*, UInt8*, VARIANT*, HRESULT)
   end
 
-  IInkRecognitionAlternate_GUID = LibC::GUID.new("b7e660ad-77e4-429b-adda-873780d1fc4a")
-  CLSID_IInkRecognitionAlternate = "b7e660ad-77e4-429b-adda-873780d1fc4a"
+  IInkRecognitionAlternate_GUID = "b7e660ad-77e4-429b-adda-873780d1fc4a"
+  IID_IInkRecognitionAlternate = LibC::GUID.new(0xb7e660ad_u32, 0x77e4_u16, 0x429b_u16, StaticArray[0xad_u8, 0xda_u8, 0x87_u8, 0x37_u8, 0x80_u8, 0xd1_u8, 0xfc_u8, 0x4a_u8])
   struct IInkRecognitionAlternate
     lpVtbl : IInkRecognitionAlternateVTbl*
   end
@@ -2618,8 +2618,8 @@ lib LibWin32
     item : Proc(IInkRecognitionAlternates*, Int32, IInkRecognitionAlternate*, HRESULT)
   end
 
-  IInkRecognitionAlternates_GUID = LibC::GUID.new("286a167f-9f19-4c61-9d53-4f07be622b84")
-  CLSID_IInkRecognitionAlternates = "286a167f-9f19-4c61-9d53-4f07be622b84"
+  IInkRecognitionAlternates_GUID = "286a167f-9f19-4c61-9d53-4f07be622b84"
+  IID_IInkRecognitionAlternates = LibC::GUID.new(0x286a167f_u32, 0x9f19_u16, 0x4c61_u16, StaticArray[0x9d_u8, 0x53_u8, 0x4f_u8, 0x7_u8, 0xbe_u8, 0x62_u8, 0x2b_u8, 0x84_u8])
   struct IInkRecognitionAlternates
     lpVtbl : IInkRecognitionAlternatesVTbl*
   end
@@ -2646,8 +2646,8 @@ lib LibWin32
     put_guide_data : Proc(IInkRecognizerGuide*, InkRecoGuide, HRESULT)
   end
 
-  IInkRecognizerGuide_GUID = LibC::GUID.new("d934be07-7b84-4208-9136-83c20994e905")
-  CLSID_IInkRecognizerGuide = "d934be07-7b84-4208-9136-83c20994e905"
+  IInkRecognizerGuide_GUID = "d934be07-7b84-4208-9136-83c20994e905"
+  IID_IInkRecognizerGuide = LibC::GUID.new(0xd934be07_u32, 0x7b84_u16, 0x4208_u16, StaticArray[0x91_u8, 0x36_u8, 0x83_u8, 0xc2_u8, 0x9_u8, 0x94_u8, 0xe9_u8, 0x5_u8])
   struct IInkRecognizerGuide
     lpVtbl : IInkRecognizerGuideVTbl*
   end
@@ -2665,8 +2665,8 @@ lib LibWin32
     merge : Proc(IInkWordList*, IInkWordList, HRESULT)
   end
 
-  IInkWordList_GUID = LibC::GUID.new("76ba3491-cb2f-406b-9961-0e0c4cdaaef2")
-  CLSID_IInkWordList = "76ba3491-cb2f-406b-9961-0e0c4cdaaef2"
+  IInkWordList_GUID = "76ba3491-cb2f-406b-9961-0e0c4cdaaef2"
+  IID_IInkWordList = LibC::GUID.new(0x76ba3491_u32, 0xcb2f_u16, 0x406b_u16, StaticArray[0x99_u8, 0x61_u8, 0xe_u8, 0xc_u8, 0x4c_u8, 0xda_u8, 0xae_u8, 0xf2_u8])
   struct IInkWordList
     lpVtbl : IInkWordListVTbl*
   end
@@ -2682,8 +2682,8 @@ lib LibWin32
     add_words : Proc(IInkWordList2*, UInt8*, HRESULT)
   end
 
-  IInkWordList2_GUID = LibC::GUID.new("14542586-11bf-4f5f-b6e7-49d0744aab6e")
-  CLSID_IInkWordList2 = "14542586-11bf-4f5f-b6e7-49d0744aab6e"
+  IInkWordList2_GUID = "14542586-11bf-4f5f-b6e7-49d0744aab6e"
+  IID_IInkWordList2 = LibC::GUID.new(0x14542586_u32, 0x11bf_u16, 0x4f5f_u16, StaticArray[0xb6_u8, 0xe7_u8, 0x49_u8, 0xd0_u8, 0x74_u8, 0x4a_u8, 0xab_u8, 0x6e_u8])
   struct IInkWordList2
     lpVtbl : IInkWordList2VTbl*
   end
@@ -2698,8 +2698,8 @@ lib LibWin32
     invoke : Proc(IInk*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IInk_GUID = LibC::GUID.new("03f8e511-43a1-11d3-8bb6-0080c7d6bad5")
-  CLSID_IInk = "03f8e511-43a1-11d3-8bb6-0080c7d6bad5"
+  IInk_GUID = "03f8e511-43a1-11d3-8bb6-0080c7d6bad5"
+  IID_IInk = LibC::GUID.new(0x3f8e511_u32, 0x43a1_u16, 0x11d3_u16, StaticArray[0x8b_u8, 0xb6_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd6_u8, 0xba_u8, 0xd5_u8])
   struct IInk
     lpVtbl : IInkVTbl*
   end
@@ -2716,8 +2716,8 @@ lib LibWin32
     recognize : Proc(IInkLineInfo*, HRESULT)
   end
 
-  IInkLineInfo_GUID = LibC::GUID.new("9c1c5ad6-f22f-4de4-b453-a2cc482e7c33")
-  CLSID_IInkLineInfo = "9c1c5ad6-f22f-4de4-b453-a2cc482e7c33"
+  IInkLineInfo_GUID = "9c1c5ad6-f22f-4de4-b453-a2cc482e7c33"
+  IID_IInkLineInfo = LibC::GUID.new(0x9c1c5ad6_u32, 0xf22f_u16, 0x4de4_u16, StaticArray[0xb4_u8, 0x53_u8, 0xa2_u8, 0xcc_u8, 0x48_u8, 0x2e_u8, 0x7c_u8, 0x33_u8])
   struct IInkLineInfo
     lpVtbl : IInkLineInfoVTbl*
   end
@@ -2732,8 +2732,8 @@ lib LibWin32
     invoke : Proc(ISketchInk*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  ISketchInk_GUID = LibC::GUID.new("b4563688-98eb-4646-b279-44da14d45748")
-  CLSID_ISketchInk = "b4563688-98eb-4646-b279-44da14d45748"
+  ISketchInk_GUID = "b4563688-98eb-4646-b279-44da14d45748"
+  IID_ISketchInk = LibC::GUID.new(0xb4563688_u32, 0x98eb_u16, 0x4646_u16, StaticArray[0xb2_u8, 0x79_u8, 0x44_u8, 0xda_u8, 0x14_u8, 0xd4_u8, 0x57_u8, 0x48_u8])
   struct ISketchInk
     lpVtbl : ISketchInkVTbl*
   end
@@ -2755,8 +2755,8 @@ lib LibWin32
     divide : Proc(IInkDivider*, IInkDivisionResult*, HRESULT)
   end
 
-  IInkDivider_GUID = LibC::GUID.new("5de00405-f9a4-4651-b0c5-c317defd58b9")
-  CLSID_IInkDivider = "5de00405-f9a4-4651-b0c5-c317defd58b9"
+  IInkDivider_GUID = "5de00405-f9a4-4651-b0c5-c317defd58b9"
+  IID_IInkDivider = LibC::GUID.new(0x5de00405_u32, 0xf9a4_u16, 0x4651_u16, StaticArray[0xb0_u8, 0xc5_u8, 0xc3_u8, 0x17_u8, 0xde_u8, 0xfd_u8, 0x58_u8, 0xb9_u8])
   struct IInkDivider
     lpVtbl : IInkDividerVTbl*
   end
@@ -2773,8 +2773,8 @@ lib LibWin32
     result_by_type : Proc(IInkDivisionResult*, InkDivisionType, IInkDivisionUnits*, HRESULT)
   end
 
-  IInkDivisionResult_GUID = LibC::GUID.new("2dbec0a7-74c7-4b38-81eb-aa8ef0c24900")
-  CLSID_IInkDivisionResult = "2dbec0a7-74c7-4b38-81eb-aa8ef0c24900"
+  IInkDivisionResult_GUID = "2dbec0a7-74c7-4b38-81eb-aa8ef0c24900"
+  IID_IInkDivisionResult = LibC::GUID.new(0x2dbec0a7_u32, 0x74c7_u16, 0x4b38_u16, StaticArray[0x81_u8, 0xeb_u8, 0xaa_u8, 0x8e_u8, 0xf0_u8, 0xc2_u8, 0x49_u8, 0x0_u8])
   struct IInkDivisionResult
     lpVtbl : IInkDivisionResultVTbl*
   end
@@ -2793,8 +2793,8 @@ lib LibWin32
     get_rotation_transform : Proc(IInkDivisionUnit*, IInkTransform*, HRESULT)
   end
 
-  IInkDivisionUnit_GUID = LibC::GUID.new("85aee342-48b0-4244-9dd5-1ed435410fab")
-  CLSID_IInkDivisionUnit = "85aee342-48b0-4244-9dd5-1ed435410fab"
+  IInkDivisionUnit_GUID = "85aee342-48b0-4244-9dd5-1ed435410fab"
+  IID_IInkDivisionUnit = LibC::GUID.new(0x85aee342_u32, 0x48b0_u16, 0x4244_u16, StaticArray[0x9d_u8, 0xd5_u8, 0x1e_u8, 0xd4_u8, 0x35_u8, 0x41_u8, 0xf_u8, 0xab_u8])
   struct IInkDivisionUnit
     lpVtbl : IInkDivisionUnitVTbl*
   end
@@ -2812,8 +2812,8 @@ lib LibWin32
     item : Proc(IInkDivisionUnits*, Int32, IInkDivisionUnit*, HRESULT)
   end
 
-  IInkDivisionUnits_GUID = LibC::GUID.new("1bb5ddc2-31cc-4135-ab82-2c66c9f00c41")
-  CLSID_IInkDivisionUnits = "1bb5ddc2-31cc-4135-ab82-2c66c9f00c41"
+  IInkDivisionUnits_GUID = "1bb5ddc2-31cc-4135-ab82-2c66c9f00c41"
+  IID_IInkDivisionUnits = LibC::GUID.new(0x1bb5ddc2_u32, 0x31cc_u16, 0x4135_u16, StaticArray[0xab_u8, 0x82_u8, 0x2c_u8, 0x66_u8, 0xc9_u8, 0xf0_u8, 0xc_u8, 0x41_u8])
   struct IInkDivisionUnits
     lpVtbl : IInkDivisionUnitsVTbl*
   end
@@ -2853,8 +2853,8 @@ lib LibWin32
     enable_tsf : Proc(IPenInputPanel*, Int16, HRESULT)
   end
 
-  IPenInputPanel_GUID = LibC::GUID.new("fa7a4083-5747-4040-a182-0b0e9fd4fac7")
-  CLSID_IPenInputPanel = "fa7a4083-5747-4040-a182-0b0e9fd4fac7"
+  IPenInputPanel_GUID = "fa7a4083-5747-4040-a182-0b0e9fd4fac7"
+  IID_IPenInputPanel = LibC::GUID.new(0xfa7a4083_u32, 0x5747_u16, 0x4040_u16, StaticArray[0xa1_u8, 0x82_u8, 0xb_u8, 0xe_u8, 0x9f_u8, 0xd4_u8, 0xfa_u8, 0xc7_u8])
   struct IPenInputPanel
     lpVtbl : IPenInputPanelVTbl*
   end
@@ -2869,8 +2869,8 @@ lib LibWin32
     invoke : Proc(IIPenInputPanelEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIPenInputPanelEvents_GUID = LibC::GUID.new("b7e489da-3719-439f-848f-e7acbd820f17")
-  CLSID_IIPenInputPanelEvents = "b7e489da-3719-439f-848f-e7acbd820f17"
+  IIPenInputPanelEvents_GUID = "b7e489da-3719-439f-848f-e7acbd820f17"
+  IID_IIPenInputPanelEvents = LibC::GUID.new(0xb7e489da_u32, 0x3719_u16, 0x439f_u16, StaticArray[0x84_u8, 0x8f_u8, 0xe7_u8, 0xac_u8, 0xbd_u8, 0x82_u8, 0xf_u8, 0x17_u8])
   struct IIPenInputPanelEvents
     lpVtbl : IIPenInputPanelEventsVTbl*
   end
@@ -2883,8 +2883,8 @@ lib LibWin32
     insert_ink_recognition_result : Proc(IHandwrittenTextInsertion*, IInkRecognitionResult, UInt32, LibC::BOOL, HRESULT)
   end
 
-  IHandwrittenTextInsertion_GUID = LibC::GUID.new("56fdea97-ecd6-43e7-aa3a-816be7785860")
-  CLSID_IHandwrittenTextInsertion = "56fdea97-ecd6-43e7-aa3a-816be7785860"
+  IHandwrittenTextInsertion_GUID = "56fdea97-ecd6-43e7-aa3a-816be7785860"
+  IID_IHandwrittenTextInsertion = LibC::GUID.new(0x56fdea97_u32, 0xecd6_u16, 0x43e7_u16, StaticArray[0xaa_u8, 0x3a_u8, 0x81_u8, 0x6b_u8, 0xe7_u8, 0x78_u8, 0x58_u8, 0x60_u8])
   struct IHandwrittenTextInsertion
     lpVtbl : IHandwrittenTextInsertionVTbl*
   end
@@ -2907,8 +2907,8 @@ lib LibWin32
     text_inserted : Proc(ITextInputPanelEventSink*, SAFEARRAY*, HRESULT)
   end
 
-  ITextInputPanelEventSink_GUID = LibC::GUID.new("27560408-8e64-4fe1-804e-421201584b31")
-  CLSID_ITextInputPanelEventSink = "27560408-8e64-4fe1-804e-421201584b31"
+  ITextInputPanelEventSink_GUID = "27560408-8e64-4fe1-804e-421201584b31"
+  IID_ITextInputPanelEventSink = LibC::GUID.new(0x27560408_u32, 0x8e64_u16, 0x4fe1_u16, StaticArray[0x80_u8, 0x4e_u8, 0x42_u8, 0x12_u8, 0x1_u8, 0x58_u8, 0x4b_u8, 0x31_u8])
   struct ITextInputPanelEventSink
     lpVtbl : ITextInputPanelEventSinkVTbl*
   end
@@ -2944,8 +2944,8 @@ lib LibWin32
     unadvise : Proc(ITextInputPanel*, ITextInputPanelEventSink, HRESULT)
   end
 
-  ITextInputPanel_GUID = LibC::GUID.new("6b6a65a5-6af3-46c2-b6ea-56cd1f80df71")
-  CLSID_ITextInputPanel = "6b6a65a5-6af3-46c2-b6ea-56cd1f80df71"
+  ITextInputPanel_GUID = "6b6a65a5-6af3-46c2-b6ea-56cd1f80df71"
+  IID_ITextInputPanel = LibC::GUID.new(0x6b6a65a5_u32, 0x6af3_u16, 0x46c2_u16, StaticArray[0xb6_u8, 0xea_u8, 0x56_u8, 0xcd_u8, 0x1f_u8, 0x80_u8, 0xdf_u8, 0x71_u8])
   struct ITextInputPanel
     lpVtbl : ITextInputPanelVTbl*
   end
@@ -2960,8 +2960,8 @@ lib LibWin32
     put_attached_edit_window64 : Proc(IInputPanelWindowHandle*, Int64, HRESULT)
   end
 
-  IInputPanelWindowHandle_GUID = LibC::GUID.new("4af81847-fdc4-4fc3-ad0b-422479c1b935")
-  CLSID_IInputPanelWindowHandle = "4af81847-fdc4-4fc3-ad0b-422479c1b935"
+  IInputPanelWindowHandle_GUID = "4af81847-fdc4-4fc3-ad0b-422479c1b935"
+  IID_IInputPanelWindowHandle = LibC::GUID.new(0x4af81847_u32, 0xfdc4_u16, 0x4fc3_u16, StaticArray[0xad_u8, 0xb_u8, 0x42_u8, 0x24_u8, 0x79_u8, 0xc1_u8, 0xb9_u8, 0x35_u8])
   struct IInputPanelWindowHandle
     lpVtbl : IInputPanelWindowHandleVTbl*
   end
@@ -2973,8 +2973,8 @@ lib LibWin32
     is_tip_running : Proc(ITextInputPanelRunInfo*, LibC::BOOL*, HRESULT)
   end
 
-  ITextInputPanelRunInfo_GUID = LibC::GUID.new("9f424568-1920-48cc-9811-a993cbf5adba")
-  CLSID_ITextInputPanelRunInfo = "9f424568-1920-48cc-9811-a993cbf5adba"
+  ITextInputPanelRunInfo_GUID = "9f424568-1920-48cc-9811-a993cbf5adba"
+  IID_ITextInputPanelRunInfo = LibC::GUID.new(0x9f424568_u32, 0x1920_u16, 0x48cc_u16, StaticArray[0x98_u8, 0x11_u8, 0xa9_u8, 0x93_u8, 0xcb_u8, 0xf5_u8, 0xad_u8, 0xba_u8])
   struct ITextInputPanelRunInfo
     lpVtbl : ITextInputPanelRunInfoVTbl*
   end
@@ -3066,8 +3066,8 @@ lib LibWin32
     refresh : Proc(IInkEdit*, HRESULT)
   end
 
-  IInkEdit_GUID = LibC::GUID.new("f2127a19-fbfb-4aed-8464-3f36d78cfefb")
-  CLSID_IInkEdit = "f2127a19-fbfb-4aed-8464-3f36d78cfefb"
+  IInkEdit_GUID = "f2127a19-fbfb-4aed-8464-3f36d78cfefb"
+  IID_IInkEdit = LibC::GUID.new(0xf2127a19_u32, 0xfbfb_u16, 0x4aed_u16, StaticArray[0x84_u8, 0x64_u8, 0x3f_u8, 0x36_u8, 0xd7_u8, 0x8c_u8, 0xfe_u8, 0xfb_u8])
   struct IInkEdit
     lpVtbl : IInkEditVTbl*
   end
@@ -3082,8 +3082,8 @@ lib LibWin32
     invoke : Proc(IIInkEditEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIInkEditEvents_GUID = LibC::GUID.new("e3b0b797-a72e-46db-a0d7-6c9eba8e9bbc")
-  CLSID_IIInkEditEvents = "e3b0b797-a72e-46db-a0d7-6c9eba8e9bbc"
+  IIInkEditEvents_GUID = "e3b0b797-a72e-46db-a0d7-6c9eba8e9bbc"
+  IID_IIInkEditEvents = LibC::GUID.new(0xe3b0b797_u32, 0xa72e_u16, 0x46db_u16, StaticArray[0xa0_u8, 0xd7_u8, 0x6c_u8, 0x9e_u8, 0xba_u8, 0x8e_u8, 0x9b_u8, 0xbc_u8])
   struct IIInkEditEvents
     lpVtbl : IIInkEditEventsVTbl*
   end
@@ -3115,8 +3115,8 @@ lib LibWin32
     get_hover_icon : Proc(IMathInputControl*, IPictureDisp*, HRESULT)
   end
 
-  IMathInputControl_GUID = LibC::GUID.new("eba615aa-fac6-4738-ba5f-ff09e9fe473e")
-  CLSID_IMathInputControl = "eba615aa-fac6-4738-ba5f-ff09e9fe473e"
+  IMathInputControl_GUID = "eba615aa-fac6-4738-ba5f-ff09e9fe473e"
+  IID_IMathInputControl = LibC::GUID.new(0xeba615aa_u32, 0xfac6_u16, 0x4738_u16, StaticArray[0xba_u8, 0x5f_u8, 0xff_u8, 0x9_u8, 0xe9_u8, 0xfe_u8, 0x47_u8, 0x3e_u8])
   struct IMathInputControl
     lpVtbl : IMathInputControlVTbl*
   end
@@ -3131,8 +3131,8 @@ lib LibWin32
     invoke : Proc(IIMathInputControlEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIMathInputControlEvents_GUID = LibC::GUID.new("683336b5-a47d-4358-96f9-875a472ae70a")
-  CLSID_IIMathInputControlEvents = "683336b5-a47d-4358-96f9-875a472ae70a"
+  IIMathInputControlEvents_GUID = "683336b5-a47d-4358-96f9-875a472ae70a"
+  IID_IIMathInputControlEvents = LibC::GUID.new(0x683336b5_u32, 0xa47d_u16, 0x4358_u16, StaticArray[0x96_u8, 0xf9_u8, 0x87_u8, 0x5a_u8, 0x47_u8, 0x2a_u8, 0xe7_u8, 0xa_u8])
   struct IIMathInputControlEvents
     lpVtbl : IIMathInputControlEventsVTbl*
   end
@@ -3174,8 +3174,8 @@ lib LibWin32
     get_packet_description_data : Proc(IRealTimeStylus*, UInt32, Float32*, Float32*, UInt32*, PACKET_PROPERTY**, HRESULT)
   end
 
-  IRealTimeStylus_GUID = LibC::GUID.new("a8bb5d22-3144-4a7b-93cd-f34a16be513a")
-  CLSID_IRealTimeStylus = "a8bb5d22-3144-4a7b-93cd-f34a16be513a"
+  IRealTimeStylus_GUID = "a8bb5d22-3144-4a7b-93cd-f34a16be513a"
+  IID_IRealTimeStylus = LibC::GUID.new(0xa8bb5d22_u32, 0x3144_u16, 0x4a7b_u16, StaticArray[0x93_u8, 0xcd_u8, 0xf3_u8, 0x4a_u8, 0x16_u8, 0xbe_u8, 0x51_u8, 0x3a_u8])
   struct IRealTimeStylus
     lpVtbl : IRealTimeStylusVTbl*
   end
@@ -3188,8 +3188,8 @@ lib LibWin32
     put_flicks_enabled : Proc(IRealTimeStylus2*, LibC::BOOL, HRESULT)
   end
 
-  IRealTimeStylus2_GUID = LibC::GUID.new("b5f2a6cd-3179-4a3e-b9c4-bb5865962be2")
-  CLSID_IRealTimeStylus2 = "b5f2a6cd-3179-4a3e-b9c4-bb5865962be2"
+  IRealTimeStylus2_GUID = "b5f2a6cd-3179-4a3e-b9c4-bb5865962be2"
+  IID_IRealTimeStylus2 = LibC::GUID.new(0xb5f2a6cd_u32, 0x3179_u16, 0x4a3e_u16, StaticArray[0xb9_u8, 0xc4_u8, 0xbb_u8, 0x58_u8, 0x65_u8, 0x96_u8, 0x2b_u8, 0xe2_u8])
   struct IRealTimeStylus2
     lpVtbl : IRealTimeStylus2VTbl*
   end
@@ -3202,8 +3202,8 @@ lib LibWin32
     put_multi_touch_enabled : Proc(IRealTimeStylus3*, LibC::BOOL, HRESULT)
   end
 
-  IRealTimeStylus3_GUID = LibC::GUID.new("d70230a3-6986-4051-b57a-1cf69f4d9db5")
-  CLSID_IRealTimeStylus3 = "d70230a3-6986-4051-b57a-1cf69f4d9db5"
+  IRealTimeStylus3_GUID = "d70230a3-6986-4051-b57a-1cf69f4d9db5"
+  IID_IRealTimeStylus3 = LibC::GUID.new(0xd70230a3_u32, 0x6986_u16, 0x4051_u16, StaticArray[0xb5_u8, 0x7a_u8, 0x1c_u8, 0xf6_u8, 0x9f_u8, 0x4d_u8, 0x9d_u8, 0xb5_u8])
   struct IRealTimeStylus3
     lpVtbl : IRealTimeStylus3VTbl*
   end
@@ -3216,8 +3216,8 @@ lib LibWin32
     release_lock : Proc(IRealTimeStylusSynchronization*, RealTimeStylusLockType, HRESULT)
   end
 
-  IRealTimeStylusSynchronization_GUID = LibC::GUID.new("aa87eab8-ab4a-4cea-b5cb-46d84c6a2509")
-  CLSID_IRealTimeStylusSynchronization = "aa87eab8-ab4a-4cea-b5cb-46d84c6a2509"
+  IRealTimeStylusSynchronization_GUID = "aa87eab8-ab4a-4cea-b5cb-46d84c6a2509"
+  IID_IRealTimeStylusSynchronization = LibC::GUID.new(0xaa87eab8_u32, 0xab4a_u16, 0x4cea_u16, StaticArray[0xb5_u8, 0xcb_u8, 0x46_u8, 0xd8_u8, 0x4c_u8, 0x6a_u8, 0x25_u8, 0x9_u8])
   struct IRealTimeStylusSynchronization
     lpVtbl : IRealTimeStylusSynchronizationVTbl*
   end
@@ -3234,8 +3234,8 @@ lib LibWin32
     putref_ink : Proc(IStrokeBuilder*, IInkDisp, HRESULT)
   end
 
-  IStrokeBuilder_GUID = LibC::GUID.new("a5fd4e2d-c44b-4092-9177-260905eb672b")
-  CLSID_IStrokeBuilder = "a5fd4e2d-c44b-4092-9177-260905eb672b"
+  IStrokeBuilder_GUID = "a5fd4e2d-c44b-4092-9177-260905eb672b"
+  IID_IStrokeBuilder = LibC::GUID.new(0xa5fd4e2d_u32, 0xc44b_u16, 0x4092_u16, StaticArray[0x91_u8, 0x77_u8, 0x26_u8, 0x9_u8, 0x5_u8, 0xeb_u8, 0x67_u8, 0x2b_u8])
   struct IStrokeBuilder
     lpVtbl : IStrokeBuilderVTbl*
   end
@@ -3263,8 +3263,8 @@ lib LibWin32
     data_interest : Proc(IStylusPlugin*, RealTimeStylusDataInterest*, HRESULT)
   end
 
-  IStylusPlugin_GUID = LibC::GUID.new("a81436d8-4757-4fd1-a185-133f97c6c545")
-  CLSID_IStylusPlugin = "a81436d8-4757-4fd1-a185-133f97c6c545"
+  IStylusPlugin_GUID = "a81436d8-4757-4fd1-a185-133f97c6c545"
+  IID_IStylusPlugin = LibC::GUID.new(0xa81436d8_u32, 0x4757_u16, 0x4fd1_u16, StaticArray[0xa1_u8, 0x85_u8, 0x13_u8, 0x3f_u8, 0x97_u8, 0xc6_u8, 0xc5_u8, 0x45_u8])
   struct IStylusPlugin
     lpVtbl : IStylusPluginVTbl*
   end
@@ -3292,8 +3292,8 @@ lib LibWin32
     data_interest : Proc(IStylusSyncPlugin*, RealTimeStylusDataInterest*, HRESULT)
   end
 
-  IStylusSyncPlugin_GUID = LibC::GUID.new("a157b174-482f-4d71-a3f6-3a41ddd11be9")
-  CLSID_IStylusSyncPlugin = "a157b174-482f-4d71-a3f6-3a41ddd11be9"
+  IStylusSyncPlugin_GUID = "a157b174-482f-4d71-a3f6-3a41ddd11be9"
+  IID_IStylusSyncPlugin = LibC::GUID.new(0xa157b174_u32, 0x482f_u16, 0x4d71_u16, StaticArray[0xa3_u8, 0xf6_u8, 0x3a_u8, 0x41_u8, 0xdd_u8, 0xd1_u8, 0x1b_u8, 0xe9_u8])
   struct IStylusSyncPlugin
     lpVtbl : IStylusSyncPluginVTbl*
   end
@@ -3321,8 +3321,8 @@ lib LibWin32
     data_interest : Proc(IStylusAsyncPlugin*, RealTimeStylusDataInterest*, HRESULT)
   end
 
-  IStylusAsyncPlugin_GUID = LibC::GUID.new("a7cca85a-31bc-4cd2-aadc-3289a3af11c8")
-  CLSID_IStylusAsyncPlugin = "a7cca85a-31bc-4cd2-aadc-3289a3af11c8"
+  IStylusAsyncPlugin_GUID = "a7cca85a-31bc-4cd2-aadc-3289a3af11c8"
+  IID_IStylusAsyncPlugin = LibC::GUID.new(0xa7cca85a_u32, 0x31bc_u16, 0x4cd2_u16, StaticArray[0xaa_u8, 0xdc_u8, 0x32_u8, 0x89_u8, 0xa3_u8, 0xaf_u8, 0x11_u8, 0xc8_u8])
   struct IStylusAsyncPlugin
     lpVtbl : IStylusAsyncPluginVTbl*
   end
@@ -3348,8 +3348,8 @@ lib LibWin32
     draw : Proc(IDynamicRenderer*, HANDLE_PTR, HRESULT)
   end
 
-  IDynamicRenderer_GUID = LibC::GUID.new("a079468e-7165-46f9-b7af-98ad01a93009")
-  CLSID_IDynamicRenderer = "a079468e-7165-46f9-b7af-98ad01a93009"
+  IDynamicRenderer_GUID = "a079468e-7165-46f9-b7af-98ad01a93009"
+  IID_IDynamicRenderer = LibC::GUID.new(0xa079468e_u32, 0x7165_u16, 0x46f9_u16, StaticArray[0xb7_u8, 0xaf_u8, 0x98_u8, 0xad_u8, 0x1_u8, 0xa9_u8, 0x30_u8, 0x9_u8])
   struct IDynamicRenderer
     lpVtbl : IDynamicRendererVTbl*
   end
@@ -3366,8 +3366,8 @@ lib LibWin32
     reset : Proc(IGestureRecognizer*, HRESULT)
   end
 
-  IGestureRecognizer_GUID = LibC::GUID.new("ae9ef86b-7054-45e3-ae22-3174dc8811b7")
-  CLSID_IGestureRecognizer = "ae9ef86b-7054-45e3-ae22-3174dc8811b7"
+  IGestureRecognizer_GUID = "ae9ef86b-7054-45e3-ae22-3174dc8811b7"
+  IID_IGestureRecognizer = LibC::GUID.new(0xae9ef86b_u32, 0x7054_u16, 0x45e3_u16, StaticArray[0xae_u8, 0x22_u8, 0x31_u8, 0x74_u8, 0xdc_u8, 0x88_u8, 0x11_u8, 0xb7_u8])
   struct IGestureRecognizer
     lpVtbl : IGestureRecognizerVTbl*
   end
@@ -3380,8 +3380,8 @@ lib LibWin32
     show : Proc(ITipAutoCompleteProvider*, LibC::BOOL, HRESULT)
   end
 
-  ITipAutoCompleteProvider_GUID = LibC::GUID.new("7c6cf46d-8404-46b9-ad33-f5b6036d4007")
-  CLSID_ITipAutoCompleteProvider = "7c6cf46d-8404-46b9-ad33-f5b6036d4007"
+  ITipAutoCompleteProvider_GUID = "7c6cf46d-8404-46b9-ad33-f5b6036d4007"
+  IID_ITipAutoCompleteProvider = LibC::GUID.new(0x7c6cf46d_u32, 0x8404_u16, 0x46b9_u16, StaticArray[0xad_u8, 0x33_u8, 0xf5_u8, 0xb6_u8, 0x3_u8, 0x6d_u8, 0x40_u8, 0x7_u8])
   struct ITipAutoCompleteProvider
     lpVtbl : ITipAutoCompleteProviderVTbl*
   end
@@ -3397,8 +3397,8 @@ lib LibWin32
     request_show_ui : Proc(ITipAutoCompleteClient*, LibC::HANDLE, LibC::BOOL*, HRESULT)
   end
 
-  ITipAutoCompleteClient_GUID = LibC::GUID.new("5e078e03-8265-4bbe-9487-d242edbef910")
-  CLSID_ITipAutoCompleteClient = "5e078e03-8265-4bbe-9487-d242edbef910"
+  ITipAutoCompleteClient_GUID = "5e078e03-8265-4bbe-9487-d242edbef910"
+  IID_ITipAutoCompleteClient = LibC::GUID.new(0x5e078e03_u32, 0x8265_u16, 0x4bbe_u16, StaticArray[0x94_u8, 0x87_u8, 0xd2_u8, 0x42_u8, 0xed_u8, 0xbe_u8, 0xf9_u8, 0x10_u8])
   struct ITipAutoCompleteClient
     lpVtbl : ITipAutoCompleteClientVTbl*
   end

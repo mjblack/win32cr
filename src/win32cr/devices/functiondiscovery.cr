@@ -295,12 +295,12 @@ lib LibWin32
   E_FDPAIRING_AUTHNOTALLOWED = -1882193914_i32
   E_FDPAIRING_IPBUSDISABLED = -1882193913_i32
   E_FDPAIRING_NOPROFILES = -1882193912_i32
-  PNPXAssociation = LibC::GUID.new(0xcee8ccc9_u32, 0x4f6b_u16, 0x4469_u16, StaticArray[0xa2_u8, 0x35_u8, 0x5a_u8, 0x22_u8, 0x86_u8, 0x9e_u8, 0xef_u8, 0x3_u8])
-  PNPXPairingHandler = LibC::GUID.new(0xb8a27942_u32, 0xade7_u16, 0x4085_u16, StaticArray[0xaa_u8, 0x6e_u8, 0x4f_u8, 0xad_u8, 0xc7_u8, 0xad_u8, 0xa1_u8, 0xef_u8])
-  FunctionDiscovery = LibC::GUID.new(0xc72be2ec_u32, 0x8e90_u16, 0x452c_u16, StaticArray[0xb2_u8, 0x9a_u8, 0xab_u8, 0x8f_u8, 0xf1_u8, 0xc0_u8, 0x71_u8, 0xfc_u8])
-  PropertyStore = LibC::GUID.new(0xe4796550_u32, 0xdf61_u16, 0x448b_u16, StaticArray[0x91_u8, 0x93_u8, 0x13_u8, 0xfc_u8, 0x13_u8, 0x41_u8, 0xb1_u8, 0x63_u8])
-  FunctionInstanceCollection = LibC::GUID.new(0xba818ce5_u32, 0xb55f_u16, 0x443f_u16, StaticArray[0xad_u8, 0x39_u8, 0x2f_u8, 0xe8_u8, 0x9b_u8, 0xe6_u8, 0x19_u8, 0x1f_u8])
-  PropertyStoreCollection = LibC::GUID.new(0xedd36029_u32, 0xd753_u16, 0x4862_u16, StaticArray[0xaa_u8, 0x5b_u8, 0x5b_u8, 0xcc_u8, 0xad_u8, 0x2a_u8, 0x4d_u8, 0x29_u8])
+  CLSID_PNPXAssociation = LibC::GUID.new(0xcee8ccc9_u32, 0x4f6b_u16, 0x4469_u16, StaticArray[0xa2_u8, 0x35_u8, 0x5a_u8, 0x22_u8, 0x86_u8, 0x9e_u8, 0xef_u8, 0x3_u8])
+  CLSID_PNPXPairingHandler = LibC::GUID.new(0xb8a27942_u32, 0xade7_u16, 0x4085_u16, StaticArray[0xaa_u8, 0x6e_u8, 0x4f_u8, 0xad_u8, 0xc7_u8, 0xad_u8, 0xa1_u8, 0xef_u8])
+  CLSID_FunctionDiscovery = LibC::GUID.new(0xc72be2ec_u32, 0x8e90_u16, 0x452c_u16, StaticArray[0xb2_u8, 0x9a_u8, 0xab_u8, 0x8f_u8, 0xf1_u8, 0xc0_u8, 0x71_u8, 0xfc_u8])
+  CLSID_PropertyStore = LibC::GUID.new(0xe4796550_u32, 0xdf61_u16, 0x448b_u16, StaticArray[0x91_u8, 0x93_u8, 0x13_u8, 0xfc_u8, 0x13_u8, 0x41_u8, 0xb1_u8, 0x63_u8])
+  CLSID_FunctionInstanceCollection = LibC::GUID.new(0xba818ce5_u32, 0xb55f_u16, 0x443f_u16, StaticArray[0xad_u8, 0x39_u8, 0x2f_u8, 0xe8_u8, 0x9b_u8, 0xe6_u8, 0x19_u8, 0x1f_u8])
+  CLSID_PropertyStoreCollection = LibC::GUID.new(0xedd36029_u32, 0xd753_u16, 0x4862_u16, StaticArray[0xaa_u8, 0x5b_u8, 0x5b_u8, 0xcc_u8, 0xad_u8, 0x2a_u8, 0x4d_u8, 0x29_u8])
 
 
   enum PropertyConstraint : Int32
@@ -342,8 +342,8 @@ lib LibWin32
     on_event : Proc(IFunctionDiscoveryNotification*, UInt32, UInt64, LibC::LPWSTR, HRESULT)
   end
 
-  IFunctionDiscoveryNotification_GUID = LibC::GUID.new("5f6c1ba8-5330-422e-a368-572b244d3f87")
-  CLSID_IFunctionDiscoveryNotification = "5f6c1ba8-5330-422e-a368-572b244d3f87"
+  IFunctionDiscoveryNotification_GUID = "5f6c1ba8-5330-422e-a368-572b244d3f87"
+  IID_IFunctionDiscoveryNotification = LibC::GUID.new(0x5f6c1ba8_u32, 0x5330_u16, 0x422e_u16, StaticArray[0xa3_u8, 0x68_u8, 0x57_u8, 0x2b_u8, 0x24_u8, 0x4d_u8, 0x3f_u8, 0x87_u8])
   struct IFunctionDiscoveryNotification
     lpVtbl : IFunctionDiscoveryNotificationVTbl*
   end
@@ -360,8 +360,8 @@ lib LibWin32
     remove_instance : Proc(IFunctionDiscovery*, SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IFunctionDiscovery_GUID = LibC::GUID.new("4df99b70-e148-4432-b004-4c9eeb535a5e")
-  CLSID_IFunctionDiscovery = "4df99b70-e148-4432-b004-4c9eeb535a5e"
+  IFunctionDiscovery_GUID = "4df99b70-e148-4432-b004-4c9eeb535a5e"
+  IID_IFunctionDiscovery = LibC::GUID.new(0x4df99b70_u32, 0xe148_u16, 0x4432_u16, StaticArray[0xb0_u8, 0x4_u8, 0x4c_u8, 0x9e_u8, 0xeb_u8, 0x53_u8, 0x5a_u8, 0x5e_u8])
   struct IFunctionDiscovery
     lpVtbl : IFunctionDiscoveryVTbl*
   end
@@ -377,8 +377,8 @@ lib LibWin32
     get_category : Proc(IFunctionInstance*, UInt16**, UInt16**, HRESULT)
   end
 
-  IFunctionInstance_GUID = LibC::GUID.new("33591c10-0bed-4f02-b0ab-1530d5533ee9")
-  CLSID_IFunctionInstance = "33591c10-0bed-4f02-b0ab-1530d5533ee9"
+  IFunctionInstance_GUID = "33591c10-0bed-4f02-b0ab-1530d5533ee9"
+  IID_IFunctionInstance = LibC::GUID.new(0x33591c10_u32, 0xbed_u16, 0x4f02_u16, StaticArray[0xb0_u8, 0xab_u8, 0x15_u8, 0x30_u8, 0xd5_u8, 0x53_u8, 0x3e_u8, 0xe9_u8])
   struct IFunctionInstance
     lpVtbl : IFunctionInstanceVTbl*
   end
@@ -396,8 +396,8 @@ lib LibWin32
     delete_all : Proc(IFunctionInstanceCollection*, HRESULT)
   end
 
-  IFunctionInstanceCollection_GUID = LibC::GUID.new("f0a3d895-855c-42a2-948d-2f97d450ecb1")
-  CLSID_IFunctionInstanceCollection = "f0a3d895-855c-42a2-948d-2f97d450ecb1"
+  IFunctionInstanceCollection_GUID = "f0a3d895-855c-42a2-948d-2f97d450ecb1"
+  IID_IFunctionInstanceCollection = LibC::GUID.new(0xf0a3d895_u32, 0x855c_u16, 0x42a2_u16, StaticArray[0x94_u8, 0x8d_u8, 0x2f_u8, 0x97_u8, 0xd4_u8, 0x50_u8, 0xec_u8, 0xb1_u8])
   struct IFunctionInstanceCollection
     lpVtbl : IFunctionInstanceCollectionVTbl*
   end
@@ -415,8 +415,8 @@ lib LibWin32
     delete_all : Proc(IPropertyStoreCollection*, HRESULT)
   end
 
-  IPropertyStoreCollection_GUID = LibC::GUID.new("d14d9c30-12d2-42d8-bce4-c60c2bb226fa")
-  CLSID_IPropertyStoreCollection = "d14d9c30-12d2-42d8-bce4-c60c2bb226fa"
+  IPropertyStoreCollection_GUID = "d14d9c30-12d2-42d8-bce4-c60c2bb226fa"
+  IID_IPropertyStoreCollection = LibC::GUID.new(0xd14d9c30_u32, 0x12d2_u16, 0x42d8_u16, StaticArray[0xbc_u8, 0xe4_u8, 0xc6_u8, 0xc_u8, 0x2b_u8, 0xb2_u8, 0x26_u8, 0xfa_u8])
   struct IPropertyStoreCollection
     lpVtbl : IPropertyStoreCollectionVTbl*
   end
@@ -428,8 +428,8 @@ lib LibWin32
     execute : Proc(IFunctionInstanceQuery*, IFunctionInstance*, HRESULT)
   end
 
-  IFunctionInstanceQuery_GUID = LibC::GUID.new("6242bc6b-90ec-4b37-bb46-e229fd84ed95")
-  CLSID_IFunctionInstanceQuery = "6242bc6b-90ec-4b37-bb46-e229fd84ed95"
+  IFunctionInstanceQuery_GUID = "6242bc6b-90ec-4b37-bb46-e229fd84ed95"
+  IID_IFunctionInstanceQuery = LibC::GUID.new(0x6242bc6b_u32, 0x90ec_u16, 0x4b37_u16, StaticArray[0xbb_u8, 0x46_u8, 0xe2_u8, 0x29_u8, 0xfd_u8, 0x84_u8, 0xed_u8, 0x95_u8])
   struct IFunctionInstanceQuery
     lpVtbl : IFunctionInstanceQueryVTbl*
   end
@@ -443,8 +443,8 @@ lib LibWin32
     execute : Proc(IFunctionInstanceCollectionQuery*, IFunctionInstanceCollection*, HRESULT)
   end
 
-  IFunctionInstanceCollectionQuery_GUID = LibC::GUID.new("57cc6fd2-c09a-4289-bb72-25f04142058e")
-  CLSID_IFunctionInstanceCollectionQuery = "57cc6fd2-c09a-4289-bb72-25f04142058e"
+  IFunctionInstanceCollectionQuery_GUID = "57cc6fd2-c09a-4289-bb72-25f04142058e"
+  IID_IFunctionInstanceCollectionQuery = LibC::GUID.new(0x57cc6fd2_u32, 0xc09a_u16, 0x4289_u16, StaticArray[0xbb_u8, 0x72_u8, 0x25_u8, 0xf0_u8, 0x41_u8, 0x42_u8, 0x5_u8, 0x8e_u8])
   struct IFunctionInstanceCollectionQuery
     lpVtbl : IFunctionInstanceCollectionQueryVTbl*
   end
@@ -463,8 +463,8 @@ lib LibWin32
     instance_released : Proc(IFunctionDiscoveryProvider*, IFunctionInstance, LibC::IntPtrT, HRESULT)
   end
 
-  IFunctionDiscoveryProvider_GUID = LibC::GUID.new("dcde394f-1478-4813-a402-f6fb10657222")
-  CLSID_IFunctionDiscoveryProvider = "dcde394f-1478-4813-a402-f6fb10657222"
+  IFunctionDiscoveryProvider_GUID = "dcde394f-1478-4813-a402-f6fb10657222"
+  IID_IFunctionDiscoveryProvider = LibC::GUID.new(0xdcde394f_u32, 0x1478_u16, 0x4813_u16, StaticArray[0xa4_u8, 0x2_u8, 0xf6_u8, 0xfb_u8, 0x10_u8, 0x65_u8, 0x72_u8, 0x22_u8])
   struct IFunctionDiscoveryProvider
     lpVtbl : IFunctionDiscoveryProviderVTbl*
   end
@@ -479,8 +479,8 @@ lib LibWin32
     set_value : Proc(IProviderProperties*, IFunctionInstance, LibC::IntPtrT, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
-  IProviderProperties_GUID = LibC::GUID.new("cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17")
-  CLSID_IProviderProperties = "cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17"
+  IProviderProperties_GUID = "cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17"
+  IID_IProviderProperties = LibC::GUID.new(0xcf986ea6_u32, 0x3b5f_u16, 0x4c5f_u16, StaticArray[0xb8_u8, 0x8a_u8, 0x2f_u8, 0x8b_u8, 0x20_u8, 0xce_u8, 0xef_u8, 0x17_u8])
   struct IProviderProperties
     lpVtbl : IProviderPropertiesVTbl*
   end
@@ -493,8 +493,8 @@ lib LibWin32
     remove_instance : Proc(IProviderPublishing*, SystemVisibilityFlags, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IProviderPublishing_GUID = LibC::GUID.new("cd1b9a04-206c-4a05-a0c8-1635a21a2b7c")
-  CLSID_IProviderPublishing = "cd1b9a04-206c-4a05-a0c8-1635a21a2b7c"
+  IProviderPublishing_GUID = "cd1b9a04-206c-4a05-a0c8-1635a21a2b7c"
+  IID_IProviderPublishing = LibC::GUID.new(0xcd1b9a04_u32, 0x206c_u16, 0x4a05_u16, StaticArray[0xa0_u8, 0xc8_u8, 0x16_u8, 0x35_u8, 0xa2_u8, 0x1a_u8, 0x2b_u8, 0x7c_u8])
   struct IProviderPublishing
     lpVtbl : IProviderPublishingVTbl*
   end
@@ -508,8 +508,8 @@ lib LibWin32
     create_function_instance_collection : Proc(IFunctionDiscoveryProviderFactory*, IFunctionInstanceCollection*, HRESULT)
   end
 
-  IFunctionDiscoveryProviderFactory_GUID = LibC::GUID.new("86443ff0-1ad5-4e68-a45a-40c2c329de3b")
-  CLSID_IFunctionDiscoveryProviderFactory = "86443ff0-1ad5-4e68-a45a-40c2c329de3b"
+  IFunctionDiscoveryProviderFactory_GUID = "86443ff0-1ad5-4e68-a45a-40c2c329de3b"
+  IID_IFunctionDiscoveryProviderFactory = LibC::GUID.new(0x86443ff0_u32, 0x1ad5_u16, 0x4e68_u16, StaticArray[0xa4_u8, 0x5a_u8, 0x40_u8, 0xc2_u8, 0xc3_u8, 0x29_u8, 0xde_u8, 0x3b_u8])
   struct IFunctionDiscoveryProviderFactory
     lpVtbl : IFunctionDiscoveryProviderFactoryVTbl*
   end
@@ -524,8 +524,8 @@ lib LibWin32
     get_property_constraints : Proc(IFunctionDiscoveryProviderQuery*, IProviderPropertyConstraintCollection*, HRESULT)
   end
 
-  IFunctionDiscoveryProviderQuery_GUID = LibC::GUID.new("6876ea98-baec-46db-bc20-75a76e267a3a")
-  CLSID_IFunctionDiscoveryProviderQuery = "6876ea98-baec-46db-bc20-75a76e267a3a"
+  IFunctionDiscoveryProviderQuery_GUID = "6876ea98-baec-46db-bc20-75a76e267a3a"
+  IID_IFunctionDiscoveryProviderQuery = LibC::GUID.new(0x6876ea98_u32, 0xbaec_u16, 0x46db_u16, StaticArray[0xbc_u8, 0x20_u8, 0x75_u8, 0xa7_u8, 0x6e_u8, 0x26_u8, 0x7a_u8, 0x3a_u8])
   struct IFunctionDiscoveryProviderQuery
     lpVtbl : IFunctionDiscoveryProviderQueryVTbl*
   end
@@ -542,8 +542,8 @@ lib LibWin32
     reset : Proc(IProviderQueryConstraintCollection*, HRESULT)
   end
 
-  IProviderQueryConstraintCollection_GUID = LibC::GUID.new("9c243e11-3261-4bcd-b922-84a873d460ae")
-  CLSID_IProviderQueryConstraintCollection = "9c243e11-3261-4bcd-b922-84a873d460ae"
+  IProviderQueryConstraintCollection_GUID = "9c243e11-3261-4bcd-b922-84a873d460ae"
+  IID_IProviderQueryConstraintCollection = LibC::GUID.new(0x9c243e11_u32, 0x3261_u16, 0x4bcd_u16, StaticArray[0xb9_u8, 0x22_u8, 0x84_u8, 0xa8_u8, 0x73_u8, 0xd4_u8, 0x60_u8, 0xae_u8])
   struct IProviderQueryConstraintCollection
     lpVtbl : IProviderQueryConstraintCollectionVTbl*
   end
@@ -560,8 +560,8 @@ lib LibWin32
     reset : Proc(IProviderPropertyConstraintCollection*, HRESULT)
   end
 
-  IProviderPropertyConstraintCollection_GUID = LibC::GUID.new("f4fae42f-5778-4a13-8540-b5fd8c1398dd")
-  CLSID_IProviderPropertyConstraintCollection = "f4fae42f-5778-4a13-8540-b5fd8c1398dd"
+  IProviderPropertyConstraintCollection_GUID = "f4fae42f-5778-4a13-8540-b5fd8c1398dd"
+  IID_IProviderPropertyConstraintCollection = LibC::GUID.new(0xf4fae42f_u32, 0x5778_u16, 0x4a13_u16, StaticArray[0x85_u8, 0x40_u8, 0xb5_u8, 0xfd_u8, 0x8c_u8, 0x13_u8, 0x98_u8, 0xdd_u8])
   struct IProviderPropertyConstraintCollection
     lpVtbl : IProviderPropertyConstraintCollectionVTbl*
   end
@@ -573,8 +573,8 @@ lib LibWin32
     initialize : Proc(IFunctionDiscoveryServiceProvider*, IFunctionInstance, Guid*, Void**, HRESULT)
   end
 
-  IFunctionDiscoveryServiceProvider_GUID = LibC::GUID.new("4c81ed02-1b04-43f2-a451-69966cbcd1c2")
-  CLSID_IFunctionDiscoveryServiceProvider = "4c81ed02-1b04-43f2-a451-69966cbcd1c2"
+  IFunctionDiscoveryServiceProvider_GUID = "4c81ed02-1b04-43f2-a451-69966cbcd1c2"
+  IID_IFunctionDiscoveryServiceProvider = LibC::GUID.new(0x4c81ed02_u32, 0x1b04_u16, 0x43f2_u16, StaticArray[0xa4_u8, 0x51_u8, 0x69_u8, 0x96_u8, 0x6c_u8, 0xbc_u8, 0xd1_u8, 0xc2_u8])
   struct IFunctionDiscoveryServiceProvider
     lpVtbl : IFunctionDiscoveryServiceProviderVTbl*
   end
@@ -588,8 +588,8 @@ lib LibWin32
     delete : Proc(IPNPXAssociation*, LibC::LPWSTR, HRESULT)
   end
 
-  IPNPXAssociation_GUID = LibC::GUID.new("0bd7e521-4da6-42d5-81ba-1981b6b94075")
-  CLSID_IPNPXAssociation = "0bd7e521-4da6-42d5-81ba-1981b6b94075"
+  IPNPXAssociation_GUID = "0bd7e521-4da6-42d5-81ba-1981b6b94075"
+  IID_IPNPXAssociation = LibC::GUID.new(0xbd7e521_u32, 0x4da6_u16, 0x42d5_u16, StaticArray[0x81_u8, 0xba_u8, 0x19_u8, 0x81_u8, 0xb6_u8, 0xb9_u8, 0x40_u8, 0x75_u8])
   struct IPNPXAssociation
     lpVtbl : IPNPXAssociationVTbl*
   end
@@ -603,8 +603,8 @@ lib LibWin32
     delete : Proc(IPNPXDeviceAssociation*, LibC::LPWSTR, IFunctionDiscoveryNotification, HRESULT)
   end
 
-  IPNPXDeviceAssociation_GUID = LibC::GUID.new("eed366d0-35b8-4fc5-8d20-7e5bd31f6ded")
-  CLSID_IPNPXDeviceAssociation = "eed366d0-35b8-4fc5-8d20-7e5bd31f6ded"
+  IPNPXDeviceAssociation_GUID = "eed366d0-35b8-4fc5-8d20-7e5bd31f6ded"
+  IID_IPNPXDeviceAssociation = LibC::GUID.new(0xeed366d0_u32, 0x35b8_u16, 0x4fc5_u16, StaticArray[0x8d_u8, 0x20_u8, 0x7e_u8, 0x5b_u8, 0xd3_u8, 0x1f_u8, 0x6d_u8, 0xed_u8])
   struct IPNPXDeviceAssociation
     lpVtbl : IPNPXDeviceAssociationVTbl*
   end

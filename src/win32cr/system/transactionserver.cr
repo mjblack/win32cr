@@ -12,13 +12,13 @@ require "../foundation.cr"
 {% else %}
 {% end %}
 lib LibWin32
-  Catalog = LibC::GUID.new(0x6eb22881_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
-  CatalogObject = LibC::GUID.new(0x6eb22882_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
-  CatalogCollection = LibC::GUID.new(0x6eb22883_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
-  ComponentUtil = LibC::GUID.new(0x6eb22884_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
-  PackageUtil = LibC::GUID.new(0x6eb22885_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
-  RemoteComponentUtil = LibC::GUID.new(0x6eb22886_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
-  RoleAssociationUtil = LibC::GUID.new(0x6eb22887_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
+  CLSID_Catalog = LibC::GUID.new(0x6eb22881_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
+  CLSID_CatalogObject = LibC::GUID.new(0x6eb22882_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
+  CLSID_CatalogCollection = LibC::GUID.new(0x6eb22883_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
+  CLSID_ComponentUtil = LibC::GUID.new(0x6eb22884_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
+  CLSID_PackageUtil = LibC::GUID.new(0x6eb22885_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
+  CLSID_RemoteComponentUtil = LibC::GUID.new(0x6eb22886_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
+  CLSID_RoleAssociationUtil = LibC::GUID.new(0x6eb22887_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
 
 
   enum MIDL___MIDL_itf_mtxadmin_0107_0001 : Int32
@@ -92,8 +92,8 @@ lib LibWin32
     get_minor_version : Proc(ICatalog*, Int32*, HRESULT)
   end
 
-  ICatalog_GUID = LibC::GUID.new("6eb22870-8a19-11d0-81b6-00a0c9231c29")
-  CLSID_ICatalog = "6eb22870-8a19-11d0-81b6-00a0c9231c29"
+  ICatalog_GUID = "6eb22870-8a19-11d0-81b6-00a0c9231c29"
+  IID_ICatalog = LibC::GUID.new(0x6eb22870_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
   struct ICatalog
     lpVtbl : ICatalogVTbl*
   end
@@ -112,8 +112,8 @@ lib LibWin32
     get_clsi_ds : Proc(IComponentUtil*, UInt8*, UInt8*, SAFEARRAY**, HRESULT)
   end
 
-  IComponentUtil_GUID = LibC::GUID.new("6eb22873-8a19-11d0-81b6-00a0c9231c29")
-  CLSID_IComponentUtil = "6eb22873-8a19-11d0-81b6-00a0c9231c29"
+  IComponentUtil_GUID = "6eb22873-8a19-11d0-81b6-00a0c9231c29"
+  IID_IComponentUtil = LibC::GUID.new(0x6eb22873_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
   struct IComponentUtil
     lpVtbl : IComponentUtilVTbl*
   end
@@ -131,8 +131,8 @@ lib LibWin32
     shutdown_package : Proc(IPackageUtil*, UInt8*, HRESULT)
   end
 
-  IPackageUtil_GUID = LibC::GUID.new("6eb22874-8a19-11d0-81b6-00a0c9231c29")
-  CLSID_IPackageUtil = "6eb22874-8a19-11d0-81b6-00a0c9231c29"
+  IPackageUtil_GUID = "6eb22874-8a19-11d0-81b6-00a0c9231c29"
+  IID_IPackageUtil = LibC::GUID.new(0x6eb22874_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
   struct IPackageUtil
     lpVtbl : IPackageUtilVTbl*
   end
@@ -149,8 +149,8 @@ lib LibWin32
     install_remote_component_by_name : Proc(IRemoteComponentUtil*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
-  IRemoteComponentUtil_GUID = LibC::GUID.new("6eb22875-8a19-11d0-81b6-00a0c9231c29")
-  CLSID_IRemoteComponentUtil = "6eb22875-8a19-11d0-81b6-00a0c9231c29"
+  IRemoteComponentUtil_GUID = "6eb22875-8a19-11d0-81b6-00a0c9231c29"
+  IID_IRemoteComponentUtil = LibC::GUID.new(0x6eb22875_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
   struct IRemoteComponentUtil
     lpVtbl : IRemoteComponentUtilVTbl*
   end
@@ -167,8 +167,8 @@ lib LibWin32
     associate_role_by_name : Proc(IRoleAssociationUtil*, UInt8*, HRESULT)
   end
 
-  IRoleAssociationUtil_GUID = LibC::GUID.new("6eb22876-8a19-11d0-81b6-00a0c9231c29")
-  CLSID_IRoleAssociationUtil = "6eb22876-8a19-11d0-81b6-00a0c9231c29"
+  IRoleAssociationUtil_GUID = "6eb22876-8a19-11d0-81b6-00a0c9231c29"
+  IID_IRoleAssociationUtil = LibC::GUID.new(0x6eb22876_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
   struct IRoleAssociationUtil
     lpVtbl : IRoleAssociationUtilVTbl*
   end

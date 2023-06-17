@@ -56,8 +56,8 @@ lib LibWin32
     get_for_window : Proc(IProtectionPolicyManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
   end
 
-  IProtectionPolicyManagerInterop_GUID = LibC::GUID.new("4652651d-c1fe-4ba1-9f0a-c0f56596f721")
-  CLSID_IProtectionPolicyManagerInterop = "4652651d-c1fe-4ba1-9f0a-c0f56596f721"
+  IProtectionPolicyManagerInterop_GUID = "4652651d-c1fe-4ba1-9f0a-c0f56596f721"
+  IID_IProtectionPolicyManagerInterop = LibC::GUID.new(0x4652651d_u32, 0xc1fe_u16, 0x4ba1_u16, StaticArray[0x9f_u8, 0xa_u8, 0xc0_u8, 0xf5_u8, 0x65_u8, 0x96_u8, 0xf7_u8, 0x21_u8])
   struct IProtectionPolicyManagerInterop
     lpVtbl : IProtectionPolicyManagerInteropVTbl*
   end
@@ -76,8 +76,8 @@ lib LibWin32
     request_access_for_app_with_message_for_window_async : Proc(IProtectionPolicyManagerInterop2*, LibC::HANDLE, HSTRING, HSTRING, IUnknown, HSTRING, Guid*, Void**, HRESULT)
   end
 
-  IProtectionPolicyManagerInterop2_GUID = LibC::GUID.new("157cfbe4-a78d-4156-b384-61fdac41e686")
-  CLSID_IProtectionPolicyManagerInterop2 = "157cfbe4-a78d-4156-b384-61fdac41e686"
+  IProtectionPolicyManagerInterop2_GUID = "157cfbe4-a78d-4156-b384-61fdac41e686"
+  IID_IProtectionPolicyManagerInterop2 = LibC::GUID.new(0x157cfbe4_u32, 0xa78d_u16, 0x4156_u16, StaticArray[0xb3_u8, 0x84_u8, 0x61_u8, 0xfd_u8, 0xac_u8, 0x41_u8, 0xe6_u8, 0x86_u8])
   struct IProtectionPolicyManagerInterop2
     lpVtbl : IProtectionPolicyManagerInterop2VTbl*
   end
@@ -97,8 +97,8 @@ lib LibWin32
     request_access_to_files_for_process_with_message_and_behavior_for_window_async : Proc(IProtectionPolicyManagerInterop3*, LibC::HANDLE, IUnknown, UInt32, IUnknown, HSTRING, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IProtectionPolicyManagerInterop3_GUID = LibC::GUID.new("c1c03933-b398-4d93-b0fd-2972adf802c2")
-  CLSID_IProtectionPolicyManagerInterop3 = "c1c03933-b398-4d93-b0fd-2972adf802c2"
+  IProtectionPolicyManagerInterop3_GUID = "c1c03933-b398-4d93-b0fd-2972adf802c2"
+  IID_IProtectionPolicyManagerInterop3 = LibC::GUID.new(0xc1c03933_u32, 0xb398_u16, 0x4d93_u16, StaticArray[0xb0_u8, 0xfd_u8, 0x29_u8, 0x72_u8, 0xad_u8, 0xf8_u8, 0x2_u8, 0xc2_u8])
   struct IProtectionPolicyManagerInterop3
     lpVtbl : IProtectionPolicyManagerInterop3VTbl*
   end

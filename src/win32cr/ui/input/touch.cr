@@ -17,8 +17,8 @@ lib LibWin32
   alias HGESTUREINFO = LibC::IntPtrT
   alias HTOUCHINPUT = LibC::IntPtrT
 
-  InertiaProcessor = LibC::GUID.new(0xabb27087_u32, 0x4ce0_u16, 0x4e58_u16, StaticArray[0xa0_u8, 0xcb_u8, 0xe2_u8, 0x4d_u8, 0xf9_u8, 0x68_u8, 0x14_u8, 0xbe_u8])
-  ManipulationProcessor = LibC::GUID.new(0x597d4fb0_u32, 0x47fd_u16, 0x4aff_u16, StaticArray[0x89_u8, 0xb9_u8, 0xc6_u8, 0xcf_u8, 0xae_u8, 0x8c_u8, 0xf0_u8, 0x8e_u8])
+  CLSID_InertiaProcessor = LibC::GUID.new(0xabb27087_u32, 0x4ce0_u16, 0x4e58_u16, StaticArray[0xa0_u8, 0xcb_u8, 0xe2_u8, 0x4d_u8, 0xf9_u8, 0x68_u8, 0x14_u8, 0xbe_u8])
+  CLSID_ManipulationProcessor = LibC::GUID.new(0x597d4fb0_u32, 0x47fd_u16, 0x4aff_u16, StaticArray[0x89_u8, 0xb9_u8, 0xc6_u8, 0xcf_u8, 0xae_u8, 0x8c_u8, 0xf0_u8, 0x8e_u8])
 
 
   enum GESTURECONFIG_ID : UInt32
@@ -109,8 +109,8 @@ lib LibWin32
     manipulation_completed : Proc(IIManipulationEvents*, Float32, Float32, Float32, Float32, Float32, Float32, Float32, HRESULT)
   end
 
-  IIManipulationEvents_GUID = LibC::GUID.new("4f62c8da-9c53-4b22-93df-927a862bbb03")
-  CLSID_IIManipulationEvents = "4f62c8da-9c53-4b22-93df-927a862bbb03"
+  IIManipulationEvents_GUID = "4f62c8da-9c53-4b22-93df-927a862bbb03"
+  IID_IIManipulationEvents = LibC::GUID.new(0x4f62c8da_u32, 0x9c53_u16, 0x4b22_u16, StaticArray[0x93_u8, 0xdf_u8, 0x92_u8, 0x7a_u8, 0x86_u8, 0x2b_u8, 0xbb_u8, 0x3_u8])
   struct IIManipulationEvents
     lpVtbl : IIManipulationEventsVTbl*
   end
@@ -170,8 +170,8 @@ lib LibWin32
     complete_time : Proc(IInertiaProcessor*, UInt32, HRESULT)
   end
 
-  IInertiaProcessor_GUID = LibC::GUID.new("18b00c6d-c5ee-41b1-90a9-9d4a929095ad")
-  CLSID_IInertiaProcessor = "18b00c6d-c5ee-41b1-90a9-9d4a929095ad"
+  IInertiaProcessor_GUID = "18b00c6d-c5ee-41b1-90a9-9d4a929095ad"
+  IID_IInertiaProcessor = LibC::GUID.new(0x18b00c6d_u32, 0xc5ee_u16, 0x41b1_u16, StaticArray[0x90_u8, 0xa9_u8, 0x9d_u8, 0x4a_u8, 0x92_u8, 0x90_u8, 0x95_u8, 0xad_u8])
   struct IInertiaProcessor
     lpVtbl : IInertiaProcessorVTbl*
   end
@@ -203,8 +203,8 @@ lib LibWin32
     put_minimum_scale_rotate_radius : Proc(IManipulationProcessor*, Float32, HRESULT)
   end
 
-  IManipulationProcessor_GUID = LibC::GUID.new("a22ac519-8300-48a0-bef4-f1be8737dba4")
-  CLSID_IManipulationProcessor = "a22ac519-8300-48a0-bef4-f1be8737dba4"
+  IManipulationProcessor_GUID = "a22ac519-8300-48a0-bef4-f1be8737dba4"
+  IID_IManipulationProcessor = LibC::GUID.new(0xa22ac519_u32, 0x8300_u16, 0x48a0_u16, StaticArray[0xbe_u8, 0xf4_u8, 0xf1_u8, 0xbe_u8, 0x87_u8, 0x37_u8, 0xdb_u8, 0xa4_u8])
   struct IManipulationProcessor
     lpVtbl : IManipulationProcessorVTbl*
   end

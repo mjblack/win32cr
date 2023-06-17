@@ -233,8 +233,8 @@ lib LibWin32
     cleanup : Proc(INetDiagHelper*, HRESULT)
   end
 
-  INetDiagHelper_GUID = LibC::GUID.new("c0b35746-ebf5-11d8-bbe9-505054503030")
-  CLSID_INetDiagHelper = "c0b35746-ebf5-11d8-bbe9-505054503030"
+  INetDiagHelper_GUID = "c0b35746-ebf5-11d8-bbe9-505054503030"
+  IID_INetDiagHelper = LibC::GUID.new(0xc0b35746_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct INetDiagHelper
     lpVtbl : INetDiagHelperVTbl*
   end
@@ -246,8 +246,8 @@ lib LibWin32
     create_utility_instance : Proc(INetDiagHelperUtilFactory*, Guid*, Void**, HRESULT)
   end
 
-  INetDiagHelperUtilFactory_GUID = LibC::GUID.new("104613fb-bc57-4178-95ba-88809698354a")
-  CLSID_INetDiagHelperUtilFactory = "104613fb-bc57-4178-95ba-88809698354a"
+  INetDiagHelperUtilFactory_GUID = "104613fb-bc57-4178-95ba-88809698354a"
+  IID_INetDiagHelperUtilFactory = LibC::GUID.new(0x104613fb_u32, 0xbc57_u16, 0x4178_u16, StaticArray[0x95_u8, 0xba_u8, 0x88_u8, 0x80_u8, 0x96_u8, 0x98_u8, 0x35_u8, 0x4a_u8])
   struct INetDiagHelperUtilFactory
     lpVtbl : INetDiagHelperUtilFactoryVTbl*
   end
@@ -261,8 +261,8 @@ lib LibWin32
     reproduce_failure : Proc(INetDiagHelperEx*, HRESULT)
   end
 
-  INetDiagHelperEx_GUID = LibC::GUID.new("972dab4d-e4e3-4fc6-ae54-5f65ccde4a15")
-  CLSID_INetDiagHelperEx = "972dab4d-e4e3-4fc6-ae54-5f65ccde4a15"
+  INetDiagHelperEx_GUID = "972dab4d-e4e3-4fc6-ae54-5f65ccde4a15"
+  IID_INetDiagHelperEx = LibC::GUID.new(0x972dab4d_u32, 0xe4e3_u16, 0x4fc6_u16, StaticArray[0xae_u8, 0x54_u8, 0x5f_u8, 0x65_u8, 0xcc_u8, 0xde_u8, 0x4a_u8, 0x15_u8])
   struct INetDiagHelperEx
     lpVtbl : INetDiagHelperExVTbl*
   end
@@ -274,8 +274,8 @@ lib LibWin32
     get_attribute_info : Proc(INetDiagHelperInfo*, UInt32*, HelperAttributeInfo**, HRESULT)
   end
 
-  INetDiagHelperInfo_GUID = LibC::GUID.new("c0b35747-ebf5-11d8-bbe9-505054503030")
-  CLSID_INetDiagHelperInfo = "c0b35747-ebf5-11d8-bbe9-505054503030"
+  INetDiagHelperInfo_GUID = "c0b35747-ebf5-11d8-bbe9-505054503030"
+  IID_INetDiagHelperInfo = LibC::GUID.new(0xc0b35747_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct INetDiagHelperInfo
     lpVtbl : INetDiagHelperInfoVTbl*
   end
@@ -287,8 +287,8 @@ lib LibWin32
     resolve_attributes : Proc(INetDiagExtensibleHelper*, UInt32, HELPER_ATTRIBUTE*, UInt32*, HELPER_ATTRIBUTE**, HRESULT)
   end
 
-  INetDiagExtensibleHelper_GUID = LibC::GUID.new("c0b35748-ebf5-11d8-bbe9-505054503030")
-  CLSID_INetDiagExtensibleHelper = "c0b35748-ebf5-11d8-bbe9-505054503030"
+  INetDiagExtensibleHelper_GUID = "c0b35748-ebf5-11d8-bbe9-505054503030"
+  IID_INetDiagExtensibleHelper = LibC::GUID.new(0xc0b35748_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
   struct INetDiagExtensibleHelper
     lpVtbl : INetDiagExtensibleHelperVTbl*
   end

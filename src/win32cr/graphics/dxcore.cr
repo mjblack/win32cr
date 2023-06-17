@@ -104,8 +104,8 @@ lib LibWin32
     get_factory : Proc(IDXCoreAdapter*, Guid*, Void**, HRESULT)
   end
 
-  IDXCoreAdapter_GUID = LibC::GUID.new("f0db4c7f-fe5a-42a2-bd62-f2a6cf6fc83e")
-  CLSID_IDXCoreAdapter = "f0db4c7f-fe5a-42a2-bd62-f2a6cf6fc83e"
+  IDXCoreAdapter_GUID = "f0db4c7f-fe5a-42a2-bd62-f2a6cf6fc83e"
+  IID_IDXCoreAdapter = LibC::GUID.new(0xf0db4c7f_u32, 0xfe5a_u16, 0x42a2_u16, StaticArray[0xbd_u8, 0x62_u8, 0xf2_u8, 0xa6_u8, 0xcf_u8, 0x6f_u8, 0xc8_u8, 0x3e_u8])
   struct IDXCoreAdapter
     lpVtbl : IDXCoreAdapterVTbl*
   end
@@ -122,8 +122,8 @@ lib LibWin32
     is_adapter_preference_supported : Proc(IDXCoreAdapterList*, DXCoreAdapterPreference, Bool)
   end
 
-  IDXCoreAdapterList_GUID = LibC::GUID.new("526c7776-40e9-459b-b711-f32ad76dfc28")
-  CLSID_IDXCoreAdapterList = "526c7776-40e9-459b-b711-f32ad76dfc28"
+  IDXCoreAdapterList_GUID = "526c7776-40e9-459b-b711-f32ad76dfc28"
+  IID_IDXCoreAdapterList = LibC::GUID.new(0x526c7776_u32, 0x40e9_u16, 0x459b_u16, StaticArray[0xb7_u8, 0x11_u8, 0xf3_u8, 0x2a_u8, 0xd7_u8, 0x6d_u8, 0xfc_u8, 0x28_u8])
   struct IDXCoreAdapterList
     lpVtbl : IDXCoreAdapterListVTbl*
   end
@@ -139,8 +139,8 @@ lib LibWin32
     unregister_event_notification : Proc(IDXCoreAdapterFactory*, UInt32, HRESULT)
   end
 
-  IDXCoreAdapterFactory_GUID = LibC::GUID.new("78ee5945-c36e-4b13-a669-005dd11c0f06")
-  CLSID_IDXCoreAdapterFactory = "78ee5945-c36e-4b13-a669-005dd11c0f06"
+  IDXCoreAdapterFactory_GUID = "78ee5945-c36e-4b13-a669-005dd11c0f06"
+  IID_IDXCoreAdapterFactory = LibC::GUID.new(0x78ee5945_u32, 0xc36e_u16, 0x4b13_u16, StaticArray[0xa6_u8, 0x69_u8, 0x0_u8, 0x5d_u8, 0xd1_u8, 0x1c_u8, 0xf_u8, 0x6_u8])
   struct IDXCoreAdapterFactory
     lpVtbl : IDXCoreAdapterFactoryVTbl*
   end

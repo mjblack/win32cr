@@ -795,10 +795,10 @@ lib LibWin32
   ELS_GUID_TRANSLITERATION_HANGUL_DECOMPOSITION = "4ba2a721-e43d-41b7-b330-536ae1e48863"
   UMSGPAT_ARG_NAME_NOT_NUMBER = -1_i32
   UMSGPAT_ARG_NAME_NOT_VALID = -2_i32
-  SpellCheckerFactory = LibC::GUID.new(0x7ab36653_u32, 0x1796_u16, 0x484b_u16, StaticArray[0xbd_u8, 0xfa_u8, 0xe7_u8, 0x4f_u8, 0x1d_u8, 0xb7_u8, 0xc1_u8, 0xdc_u8])
-  CMLangString = LibC::GUID.new(0xc04d65cf_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
-  CMLangConvertCharset = LibC::GUID.new(0xd66d6f99_u32, 0xcdaa_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x22_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
-  CMultiLanguage = LibC::GUID.new(0x275c23e2_u32, 0x3747_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3f_u8, 0x86_u8, 0x46_u8])
+  CLSID_SpellCheckerFactory = LibC::GUID.new(0x7ab36653_u32, 0x1796_u16, 0x484b_u16, StaticArray[0xbd_u8, 0xfa_u8, 0xe7_u8, 0x4f_u8, 0x1d_u8, 0xb7_u8, 0xc1_u8, 0xdc_u8])
+  CLSID_CMLangString = LibC::GUID.new(0xc04d65cf_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
+  CLSID_CMLangConvertCharset = LibC::GUID.new(0xd66d6f99_u32, 0xcdaa_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x22_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
+  CLSID_CMultiLanguage = LibC::GUID.new(0x275c23e2_u32, 0x3747_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3f_u8, 0x86_u8, 0x46_u8])
 
   type UEnumeration = Void
   type UResourceBundle = Void
@@ -4006,8 +4006,8 @@ lib LibWin32
     get_replacement : Proc(ISpellingError*, LibC::LPWSTR*, HRESULT)
   end
 
-  ISpellingError_GUID = LibC::GUID.new("b7c82d61-fbe8-4b47-9b27-6c0d2e0de0a3")
-  CLSID_ISpellingError = "b7c82d61-fbe8-4b47-9b27-6c0d2e0de0a3"
+  ISpellingError_GUID = "b7c82d61-fbe8-4b47-9b27-6c0d2e0de0a3"
+  IID_ISpellingError = LibC::GUID.new(0xb7c82d61_u32, 0xfbe8_u16, 0x4b47_u16, StaticArray[0x9b_u8, 0x27_u8, 0x6c_u8, 0xd_u8, 0x2e_u8, 0xd_u8, 0xe0_u8, 0xa3_u8])
   struct ISpellingError
     lpVtbl : ISpellingErrorVTbl*
   end
@@ -4019,8 +4019,8 @@ lib LibWin32
     next : Proc(IEnumSpellingError*, ISpellingError*, HRESULT)
   end
 
-  IEnumSpellingError_GUID = LibC::GUID.new("803e3bd4-2828-4410-8290-418d1d73c762")
-  CLSID_IEnumSpellingError = "803e3bd4-2828-4410-8290-418d1d73c762"
+  IEnumSpellingError_GUID = "803e3bd4-2828-4410-8290-418d1d73c762"
+  IID_IEnumSpellingError = LibC::GUID.new(0x803e3bd4_u32, 0x2828_u16, 0x4410_u16, StaticArray[0x82_u8, 0x90_u8, 0x41_u8, 0x8d_u8, 0x1d_u8, 0x73_u8, 0xc7_u8, 0x62_u8])
   struct IEnumSpellingError
     lpVtbl : IEnumSpellingErrorVTbl*
   end
@@ -4035,8 +4035,8 @@ lib LibWin32
     get_labels : Proc(IOptionDescription*, IEnumString*, HRESULT)
   end
 
-  IOptionDescription_GUID = LibC::GUID.new("432e5f85-35cf-4606-a801-6f70277e1d7a")
-  CLSID_IOptionDescription = "432e5f85-35cf-4606-a801-6f70277e1d7a"
+  IOptionDescription_GUID = "432e5f85-35cf-4606-a801-6f70277e1d7a"
+  IID_IOptionDescription = LibC::GUID.new(0x432e5f85_u32, 0x35cf_u16, 0x4606_u16, StaticArray[0xa8_u8, 0x1_u8, 0x6f_u8, 0x70_u8, 0x27_u8, 0x7e_u8, 0x1d_u8, 0x7a_u8])
   struct IOptionDescription
     lpVtbl : IOptionDescriptionVTbl*
   end
@@ -4048,8 +4048,8 @@ lib LibWin32
     invoke : Proc(ISpellCheckerChangedEventHandler*, ISpellChecker, HRESULT)
   end
 
-  ISpellCheckerChangedEventHandler_GUID = LibC::GUID.new("0b83a5b0-792f-4eab-9799-acf52c5ed08a")
-  CLSID_ISpellCheckerChangedEventHandler = "0b83a5b0-792f-4eab-9799-acf52c5ed08a"
+  ISpellCheckerChangedEventHandler_GUID = "0b83a5b0-792f-4eab-9799-acf52c5ed08a"
+  IID_ISpellCheckerChangedEventHandler = LibC::GUID.new(0xb83a5b0_u32, 0x792f_u16, 0x4eab_u16, StaticArray[0x97_u8, 0x99_u8, 0xac_u8, 0xf5_u8, 0x2c_u8, 0x5e_u8, 0xd0_u8, 0x8a_u8])
   struct ISpellCheckerChangedEventHandler
     lpVtbl : ISpellCheckerChangedEventHandlerVTbl*
   end
@@ -4074,8 +4074,8 @@ lib LibWin32
     comprehensive_check : Proc(ISpellChecker*, LibC::LPWSTR, IEnumSpellingError*, HRESULT)
   end
 
-  ISpellChecker_GUID = LibC::GUID.new("b6fd0b71-e2bc-4653-8d05-f197e412770b")
-  CLSID_ISpellChecker = "b6fd0b71-e2bc-4653-8d05-f197e412770b"
+  ISpellChecker_GUID = "b6fd0b71-e2bc-4653-8d05-f197e412770b"
+  IID_ISpellChecker = LibC::GUID.new(0xb6fd0b71_u32, 0xe2bc_u16, 0x4653_u16, StaticArray[0x8d_u8, 0x5_u8, 0xf1_u8, 0x97_u8, 0xe4_u8, 0x12_u8, 0x77_u8, 0xb_u8])
   struct ISpellChecker
     lpVtbl : ISpellCheckerVTbl*
   end
@@ -4101,8 +4101,8 @@ lib LibWin32
     remove : Proc(ISpellChecker2*, LibC::LPWSTR, HRESULT)
   end
 
-  ISpellChecker2_GUID = LibC::GUID.new("e7ed1c71-87f7-4378-a840-c9200dacee47")
-  CLSID_ISpellChecker2 = "e7ed1c71-87f7-4378-a840-c9200dacee47"
+  ISpellChecker2_GUID = "e7ed1c71-87f7-4378-a840-c9200dacee47"
+  IID_ISpellChecker2 = LibC::GUID.new(0xe7ed1c71_u32, 0x87f7_u16, 0x4378_u16, StaticArray[0xa8_u8, 0x40_u8, 0xc9_u8, 0x20_u8, 0xd_u8, 0xac_u8, 0xee_u8, 0x47_u8])
   struct ISpellChecker2
     lpVtbl : ISpellChecker2VTbl*
   end
@@ -4116,8 +4116,8 @@ lib LibWin32
     create_spell_checker : Proc(ISpellCheckerFactory*, LibC::LPWSTR, ISpellChecker*, HRESULT)
   end
 
-  ISpellCheckerFactory_GUID = LibC::GUID.new("8e018a9d-2415-4677-bf08-794ea61f94bb")
-  CLSID_ISpellCheckerFactory = "8e018a9d-2415-4677-bf08-794ea61f94bb"
+  ISpellCheckerFactory_GUID = "8e018a9d-2415-4677-bf08-794ea61f94bb"
+  IID_ISpellCheckerFactory = LibC::GUID.new(0x8e018a9d_u32, 0x2415_u16, 0x4677_u16, StaticArray[0xbf_u8, 0x8_u8, 0x79_u8, 0x4e_u8, 0xa6_u8, 0x1f_u8, 0x94_u8, 0xbb_u8])
   struct ISpellCheckerFactory
     lpVtbl : ISpellCheckerFactoryVTbl*
   end
@@ -4130,8 +4130,8 @@ lib LibWin32
     unregister_user_dictionary : Proc(IUserDictionariesRegistrar*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
   end
 
-  IUserDictionariesRegistrar_GUID = LibC::GUID.new("aa176b85-0e12-4844-8e1a-eef1da77f586")
-  CLSID_IUserDictionariesRegistrar = "aa176b85-0e12-4844-8e1a-eef1da77f586"
+  IUserDictionariesRegistrar_GUID = "aa176b85-0e12-4844-8e1a-eef1da77f586"
+  IID_IUserDictionariesRegistrar = LibC::GUID.new(0xaa176b85_u32, 0xe12_u16, 0x4844_u16, StaticArray[0x8e_u8, 0x1a_u8, 0xee_u8, 0xf1_u8, 0xda_u8, 0x77_u8, 0xf5_u8, 0x86_u8])
   struct IUserDictionariesRegistrar
     lpVtbl : IUserDictionariesRegistrarVTbl*
   end
@@ -4152,8 +4152,8 @@ lib LibWin32
     initialize_wordlist : Proc(ISpellCheckProvider*, WORDLIST_TYPE, IEnumString, HRESULT)
   end
 
-  ISpellCheckProvider_GUID = LibC::GUID.new("73e976e0-8ed4-4eb1-80d7-1be0a16b0c38")
-  CLSID_ISpellCheckProvider = "73e976e0-8ed4-4eb1-80d7-1be0a16b0c38"
+  ISpellCheckProvider_GUID = "73e976e0-8ed4-4eb1-80d7-1be0a16b0c38"
+  IID_ISpellCheckProvider = LibC::GUID.new(0x73e976e0_u32, 0x8ed4_u16, 0x4eb1_u16, StaticArray[0x80_u8, 0xd7_u8, 0x1b_u8, 0xe0_u8, 0xa1_u8, 0x6b_u8, 0xc_u8, 0x38_u8])
   struct ISpellCheckProvider
     lpVtbl : ISpellCheckProviderVTbl*
   end
@@ -4165,8 +4165,8 @@ lib LibWin32
     comprehensive_check : Proc(IComprehensiveSpellCheckProvider*, LibC::LPWSTR, IEnumSpellingError*, HRESULT)
   end
 
-  IComprehensiveSpellCheckProvider_GUID = LibC::GUID.new("0c58f8de-8e94-479e-9717-70c42c4ad2c3")
-  CLSID_IComprehensiveSpellCheckProvider = "0c58f8de-8e94-479e-9717-70c42c4ad2c3"
+  IComprehensiveSpellCheckProvider_GUID = "0c58f8de-8e94-479e-9717-70c42c4ad2c3"
+  IID_IComprehensiveSpellCheckProvider = LibC::GUID.new(0xc58f8de_u32, 0x8e94_u16, 0x479e_u16, StaticArray[0x97_u8, 0x17_u8, 0x70_u8, 0xc4_u8, 0x2c_u8, 0x4a_u8, 0xd2_u8, 0xc3_u8])
   struct IComprehensiveSpellCheckProvider
     lpVtbl : IComprehensiveSpellCheckProviderVTbl*
   end
@@ -4180,8 +4180,8 @@ lib LibWin32
     create_spell_check_provider : Proc(ISpellCheckProviderFactory*, LibC::LPWSTR, ISpellCheckProvider*, HRESULT)
   end
 
-  ISpellCheckProviderFactory_GUID = LibC::GUID.new("9f671e11-77d6-4c92-aefb-615215e3a4be")
-  CLSID_ISpellCheckProviderFactory = "9f671e11-77d6-4c92-aefb-615215e3a4be"
+  ISpellCheckProviderFactory_GUID = "9f671e11-77d6-4c92-aefb-615215e3a4be"
+  IID_ISpellCheckProviderFactory = LibC::GUID.new(0x9f671e11_u32, 0x77d6_u16, 0x4c92_u16, StaticArray[0xae_u8, 0xfb_u8, 0x61_u8, 0x52_u8, 0x15_u8, 0xe3_u8, 0xa4_u8, 0xbe_u8])
   struct ISpellCheckProviderFactory
     lpVtbl : ISpellCheckProviderFactoryVTbl*
   end
@@ -4197,8 +4197,8 @@ lib LibWin32
     delete : Proc(IMLangStringBufW*, Int32, Int32, HRESULT)
   end
 
-  IMLangStringBufW_GUID = LibC::GUID.new("d24acd21-ba72-11d0-b188-00aa0038c969")
-  CLSID_IMLangStringBufW = "d24acd21-ba72-11d0-b188-00aa0038c969"
+  IMLangStringBufW_GUID = "d24acd21-ba72-11d0-b188-00aa0038c969"
+  IID_IMLangStringBufW = LibC::GUID.new(0xd24acd21_u32, 0xba72_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
   struct IMLangStringBufW
     lpVtbl : IMLangStringBufWVTbl*
   end
@@ -4214,8 +4214,8 @@ lib LibWin32
     delete : Proc(IMLangStringBufA*, Int32, Int32, HRESULT)
   end
 
-  IMLangStringBufA_GUID = LibC::GUID.new("d24acd23-ba72-11d0-b188-00aa0038c969")
-  CLSID_IMLangStringBufA = "d24acd23-ba72-11d0-b188-00aa0038c969"
+  IMLangStringBufA_GUID = "d24acd23-ba72-11d0-b188-00aa0038c969"
+  IID_IMLangStringBufA = LibC::GUID.new(0xd24acd23_u32, 0xba72_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
   struct IMLangStringBufA
     lpVtbl : IMLangStringBufAVTbl*
   end
@@ -4230,8 +4230,8 @@ lib LibWin32
     get_ml_str : Proc(IMLangString*, Int32, Int32, IUnknown, UInt32, Guid*, IUnknown*, Int32*, Int32*, HRESULT)
   end
 
-  IMLangString_GUID = LibC::GUID.new("c04d65ce-b70d-11d0-b188-00aa0038c969")
-  CLSID_IMLangString = "c04d65ce-b70d-11d0-b188-00aa0038c969"
+  IMLangString_GUID = "c04d65ce-b70d-11d0-b188-00aa0038c969"
+  IID_IMLangString = LibC::GUID.new(0xc04d65ce_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
   struct IMLangString
     lpVtbl : IMLangStringVTbl*
   end
@@ -4254,8 +4254,8 @@ lib LibWin32
     get_locale : Proc(IMLangStringWStr*, Int32, Int32, UInt32*, Int32*, Int32*, HRESULT)
   end
 
-  IMLangStringWStr_GUID = LibC::GUID.new("c04d65d0-b70d-11d0-b188-00aa0038c969")
-  CLSID_IMLangStringWStr = "c04d65d0-b70d-11d0-b188-00aa0038c969"
+  IMLangStringWStr_GUID = "c04d65d0-b70d-11d0-b188-00aa0038c969"
+  IID_IMLangStringWStr = LibC::GUID.new(0xc04d65d0_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
   struct IMLangStringWStr
     lpVtbl : IMLangStringWStrVTbl*
   end
@@ -4278,8 +4278,8 @@ lib LibWin32
     get_locale : Proc(IMLangStringAStr*, Int32, Int32, UInt32*, Int32*, Int32*, HRESULT)
   end
 
-  IMLangStringAStr_GUID = LibC::GUID.new("c04d65d2-b70d-11d0-b188-00aa0038c969")
-  CLSID_IMLangStringAStr = "c04d65d2-b70d-11d0-b188-00aa0038c969"
+  IMLangStringAStr_GUID = "c04d65d2-b70d-11d0-b188-00aa0038c969"
+  IID_IMLangStringAStr = LibC::GUID.new(0xc04d65d2_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
   struct IMLangStringAStr
     lpVtbl : IMLangStringAStrVTbl*
   end
@@ -4293,8 +4293,8 @@ lib LibWin32
     break_line_a : Proc(IMLangLineBreakConsole*, UInt32, UInt32, UInt8*, Int32, Int32, Int32*, Int32*, HRESULT)
   end
 
-  IMLangLineBreakConsole_GUID = LibC::GUID.new("f5be2ee1-bfd7-11d0-b188-00aa0038c969")
-  CLSID_IMLangLineBreakConsole = "f5be2ee1-bfd7-11d0-b188-00aa0038c969"
+  IMLangLineBreakConsole_GUID = "f5be2ee1-bfd7-11d0-b188-00aa0038c969"
+  IID_IMLangLineBreakConsole = LibC::GUID.new(0xf5be2ee1_u32, 0xbfd7_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
   struct IMLangLineBreakConsole
     lpVtbl : IMLangLineBreakConsoleVTbl*
   end
@@ -4309,8 +4309,8 @@ lib LibWin32
     skip : Proc(IEnumCodePage*, UInt32, HRESULT)
   end
 
-  IEnumCodePage_GUID = LibC::GUID.new("275c23e3-3747-11d0-9fea-00aa003f8646")
-  CLSID_IEnumCodePage = "275c23e3-3747-11d0-9fea-00aa003f8646"
+  IEnumCodePage_GUID = "275c23e3-3747-11d0-9fea-00aa003f8646"
+  IID_IEnumCodePage = LibC::GUID.new(0x275c23e3_u32, 0x3747_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3f_u8, 0x86_u8, 0x46_u8])
   struct IEnumCodePage
     lpVtbl : IEnumCodePageVTbl*
   end
@@ -4325,8 +4325,8 @@ lib LibWin32
     skip : Proc(IEnumRfc1766*, UInt32, HRESULT)
   end
 
-  IEnumRfc1766_GUID = LibC::GUID.new("3dc39d1d-c030-11d0-b81b-00c04fc9b31f")
-  CLSID_IEnumRfc1766 = "3dc39d1d-c030-11d0-b81b-00c04fc9b31f"
+  IEnumRfc1766_GUID = "3dc39d1d-c030-11d0-b81b-00c04fc9b31f"
+  IID_IEnumRfc1766 = LibC::GUID.new(0x3dc39d1d_u32, 0xc030_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x1b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
   struct IEnumRfc1766
     lpVtbl : IEnumRfc1766VTbl*
   end
@@ -4341,8 +4341,8 @@ lib LibWin32
     skip : Proc(IEnumScript*, UInt32, HRESULT)
   end
 
-  IEnumScript_GUID = LibC::GUID.new("ae5f1430-388b-11d2-8380-00c04f8f5da1")
-  CLSID_IEnumScript = "ae5f1430-388b-11d2-8380-00c04f8f5da1"
+  IEnumScript_GUID = "ae5f1430-388b-11d2-8380-00c04f8f5da1"
+  IID_IEnumScript = LibC::GUID.new(0xae5f1430_u32, 0x388b_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x80_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0xa1_u8])
   struct IEnumScript
     lpVtbl : IEnumScriptVTbl*
   end
@@ -4360,8 +4360,8 @@ lib LibWin32
     do_conversion_from_unicode : Proc(IMLangConvertCharset*, Char*, UInt32*, PSTR, UInt32*, HRESULT)
   end
 
-  IMLangConvertCharset_GUID = LibC::GUID.new("d66d6f98-cdaa-11d0-b822-00c04fc9b31f")
-  CLSID_IMLangConvertCharset = "d66d6f98-cdaa-11d0-b822-00c04fc9b31f"
+  IMLangConvertCharset_GUID = "d66d6f98-cdaa-11d0-b822-00c04fc9b31f"
+  IID_IMLangConvertCharset = LibC::GUID.new(0xd66d6f98_u32, 0xcdaa_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x22_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
   struct IMLangConvertCharset
     lpVtbl : IMLangConvertCharsetVTbl*
   end
@@ -4387,8 +4387,8 @@ lib LibWin32
     create_convert_charset : Proc(IMultiLanguage*, UInt32, UInt32, UInt32, IMLangConvertCharset*, HRESULT)
   end
 
-  IMultiLanguage_GUID = LibC::GUID.new("275c23e1-3747-11d0-9fea-00aa003f8646")
-  CLSID_IMultiLanguage = "275c23e1-3747-11d0-9fea-00aa003f8646"
+  IMultiLanguage_GUID = "275c23e1-3747-11d0-9fea-00aa003f8646"
+  IID_IMultiLanguage = LibC::GUID.new(0x275c23e1_u32, 0x3747_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3f_u8, 0x86_u8, 0x46_u8])
   struct IMultiLanguage
     lpVtbl : IMultiLanguageVTbl*
   end
@@ -4426,8 +4426,8 @@ lib LibWin32
     validate_code_page_ex : Proc(IMultiLanguage2*, UInt32, LibC::HANDLE, UInt32, HRESULT)
   end
 
-  IMultiLanguage2_GUID = LibC::GUID.new("dccfc164-2b38-11d2-b7ec-00c04f8f5d9a")
-  CLSID_IMultiLanguage2 = "dccfc164-2b38-11d2-b7ec-00c04f8f5d9a"
+  IMultiLanguage2_GUID = "dccfc164-2b38-11d2-b7ec-00c04f8f5d9a"
+  IID_IMultiLanguage2 = LibC::GUID.new(0xdccfc164_u32, 0x2b38_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0xec_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0x9a_u8])
   struct IMultiLanguage2
     lpVtbl : IMultiLanguage2VTbl*
   end
@@ -4442,8 +4442,8 @@ lib LibWin32
     code_pages_to_code_page : Proc(IMLangCodePages*, UInt32, UInt32, UInt32*, HRESULT)
   end
 
-  IMLangCodePages_GUID = LibC::GUID.new("359f3443-bd4a-11d0-b188-00aa0038c969")
-  CLSID_IMLangCodePages = "359f3443-bd4a-11d0-b188-00aa0038c969"
+  IMLangCodePages_GUID = "359f3443-bd4a-11d0-b188-00aa0038c969"
+  IID_IMLangCodePages = LibC::GUID.new(0x359f3443_u32, 0xbd4a_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
   struct IMLangCodePages
     lpVtbl : IMLangCodePagesVTbl*
   end
@@ -4462,8 +4462,8 @@ lib LibWin32
     reset_font_mapping : Proc(IMLangFontLink*, HRESULT)
   end
 
-  IMLangFontLink_GUID = LibC::GUID.new("359f3441-bd4a-11d0-b188-00aa0038c969")
-  CLSID_IMLangFontLink = "359f3441-bd4a-11d0-b188-00aa0038c969"
+  IMLangFontLink_GUID = "359f3441-bd4a-11d0-b188-00aa0038c969"
+  IID_IMLangFontLink = LibC::GUID.new(0x359f3441_u32, 0xbd4a_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
   struct IMLangFontLink
     lpVtbl : IMLangFontLinkVTbl*
   end
@@ -4485,8 +4485,8 @@ lib LibWin32
     code_page_to_script_id : Proc(IMLangFontLink2*, UInt32, UInt8*, HRESULT)
   end
 
-  IMLangFontLink2_GUID = LibC::GUID.new("dccfc162-2b38-11d2-b7ec-00c04f8f5d9a")
-  CLSID_IMLangFontLink2 = "dccfc162-2b38-11d2-b7ec-00c04f8f5d9a"
+  IMLangFontLink2_GUID = "dccfc162-2b38-11d2-b7ec-00c04f8f5d9a"
+  IID_IMLangFontLink2 = LibC::GUID.new(0xdccfc162_u32, 0x2b38_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0xec_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0x9a_u8])
   struct IMLangFontLink2
     lpVtbl : IMLangFontLink2VTbl*
   end
@@ -4526,8 +4526,8 @@ lib LibWin32
     detect_outbound_code_page_in_i_stream : Proc(IMultiLanguage3*, UInt32, IStream, UInt32*, UInt32, UInt32*, UInt32*, LibC::LPWSTR, HRESULT)
   end
 
-  IMultiLanguage3_GUID = LibC::GUID.new("4e5868ab-b157-4623-9acc-6a1d9caebe04")
-  CLSID_IMultiLanguage3 = "4e5868ab-b157-4623-9acc-6a1d9caebe04"
+  IMultiLanguage3_GUID = "4e5868ab-b157-4623-9acc-6a1d9caebe04"
+  IID_IMultiLanguage3 = LibC::GUID.new(0x4e5868ab_u32, 0xb157_u16, 0x4623_u16, StaticArray[0x9a_u8, 0xcc_u8, 0x6a_u8, 0x1d_u8, 0x9c_u8, 0xae_u8, 0xbe_u8, 0x4_u8])
   struct IMultiLanguage3
     lpVtbl : IMultiLanguage3VTbl*
   end

@@ -1538,11 +1538,11 @@ lib LibWin32
   AUDIT_STORE_EXPORT = 1074070020_i32
   AUDIT_STORE_DELETE = 1074070021_i32
   AUDIT_SERVICE_IDLE_STOP = 1074070022_i32
-  CCertSrvSetupKeyInformation = LibC::GUID.new(0x38373906_u32, 0x5433_u16, 0x4633_u16, StaticArray[0xb0_u8, 0xfb_u8, 0x29_u8, 0xb7_u8, 0xe7_u8, 0x82_u8, 0x62_u8, 0xe1_u8])
-  CCertSrvSetup = LibC::GUID.new(0x961f180f_u32, 0xf55c_u16, 0x413d_u16, StaticArray[0xa9_u8, 0xb3_u8, 0x7d_u8, 0x2a_u8, 0xf4_u8, 0xd8_u8, 0xe4_u8, 0x2f_u8])
-  CMSCEPSetup = LibC::GUID.new(0xaa4f5c02_u32, 0x8e7c_u16, 0x49c4_u16, StaticArray[0x94_u8, 0xfa_u8, 0x67_u8, 0xa5_u8, 0xcc_u8, 0x5e_u8, 0xad_u8, 0xb4_u8])
-  CCertificateEnrollmentServerSetup = LibC::GUID.new(0x9902f3bc_u32, 0x88af_u16, 0x4cf8_u16, StaticArray[0xae_u8, 0x62_u8, 0x71_u8, 0x40_u8, 0x53_u8, 0x15_u8, 0x52_u8, 0xb6_u8])
-  CCertificateEnrollmentPolicyServerSetup = LibC::GUID.new(0xafe2fa32_u32, 0x41b1_u16, 0x459d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x49_u8, 0xad_u8, 0xd8_u8, 0xa7_u8, 0x21_u8, 0x82_u8])
+  CLSID_CCertSrvSetupKeyInformation = LibC::GUID.new(0x38373906_u32, 0x5433_u16, 0x4633_u16, StaticArray[0xb0_u8, 0xfb_u8, 0x29_u8, 0xb7_u8, 0xe7_u8, 0x82_u8, 0x62_u8, 0xe1_u8])
+  CLSID_CCertSrvSetup = LibC::GUID.new(0x961f180f_u32, 0xf55c_u16, 0x413d_u16, StaticArray[0xa9_u8, 0xb3_u8, 0x7d_u8, 0x2a_u8, 0xf4_u8, 0xd8_u8, 0xe4_u8, 0x2f_u8])
+  CLSID_CMSCEPSetup = LibC::GUID.new(0xaa4f5c02_u32, 0x8e7c_u16, 0x49c4_u16, StaticArray[0x94_u8, 0xfa_u8, 0x67_u8, 0xa5_u8, 0xcc_u8, 0x5e_u8, 0xad_u8, 0xb4_u8])
+  CLSID_CCertificateEnrollmentServerSetup = LibC::GUID.new(0x9902f3bc_u32, 0x88af_u16, 0x4cf8_u16, StaticArray[0xae_u8, 0x62_u8, 0x71_u8, 0x40_u8, 0x53_u8, 0x15_u8, 0x52_u8, 0xb6_u8])
+  CLSID_CCertificateEnrollmentPolicyServerSetup = LibC::GUID.new(0xafe2fa32_u32, 0x41b1_u16, 0x459d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x49_u8, 0xad_u8, 0xd8_u8, 0xa7_u8, 0x21_u8, 0x82_u8])
 
   alias PFN_NCRYPT_ALLOC = Proc(LibC::UINT_PTR, Void*)
   alias PFN_NCRYPT_FREE = Proc(Void*, Void)
@@ -4836,8 +4836,8 @@ lib LibWin32
     put_existing_ca_certificate : Proc(ICertSrvSetupKeyInformation*, VARIANT, HRESULT)
   end
 
-  ICertSrvSetupKeyInformation_GUID = LibC::GUID.new("6ba73778-36da-4c39-8a85-bcfa7d000793")
-  CLSID_ICertSrvSetupKeyInformation = "6ba73778-36da-4c39-8a85-bcfa7d000793"
+  ICertSrvSetupKeyInformation_GUID = "6ba73778-36da-4c39-8a85-bcfa7d000793"
+  IID_ICertSrvSetupKeyInformation = LibC::GUID.new(0x6ba73778_u32, 0x36da_u16, 0x4c39_u16, StaticArray[0x8a_u8, 0x85_u8, 0xbc_u8, 0xfa_u8, 0x7d_u8, 0x0_u8, 0x7_u8, 0x93_u8])
   struct ICertSrvSetupKeyInformation
     lpVtbl : ICertSrvSetupKeyInformationVTbl*
   end
@@ -4856,8 +4856,8 @@ lib LibWin32
     add : Proc(ICertSrvSetupKeyInformationCollection*, ICertSrvSetupKeyInformation, HRESULT)
   end
 
-  ICertSrvSetupKeyInformationCollection_GUID = LibC::GUID.new("e65c8b00-e58f-41f9-a9ec-a28d7427c844")
-  CLSID_ICertSrvSetupKeyInformationCollection = "e65c8b00-e58f-41f9-a9ec-a28d7427c844"
+  ICertSrvSetupKeyInformationCollection_GUID = "e65c8b00-e58f-41f9-a9ec-a28d7427c844"
+  IID_ICertSrvSetupKeyInformationCollection = LibC::GUID.new(0xe65c8b00_u32, 0xe58f_u16, 0x41f9_u16, StaticArray[0xa9_u8, 0xec_u8, 0xa2_u8, 0x8d_u8, 0x74_u8, 0x27_u8, 0xc8_u8, 0x44_u8])
   struct ICertSrvSetupKeyInformationCollection
     lpVtbl : ICertSrvSetupKeyInformationCollectionVTbl*
   end
@@ -4892,8 +4892,8 @@ lib LibWin32
     post_un_install : Proc(ICertSrvSetup*, HRESULT)
   end
 
-  ICertSrvSetup_GUID = LibC::GUID.new("b760a1bb-4784-44c0-8f12-555f0780ff25")
-  CLSID_ICertSrvSetup = "b760a1bb-4784-44c0-8f12-555f0780ff25"
+  ICertSrvSetup_GUID = "b760a1bb-4784-44c0-8f12-555f0780ff25"
+  IID_ICertSrvSetup = LibC::GUID.new(0xb760a1bb_u32, 0x4784_u16, 0x44c0_u16, StaticArray[0x8f_u8, 0x12_u8, 0x55_u8, 0x5f_u8, 0x7_u8, 0x80_u8, 0xff_u8, 0x25_u8])
   struct ICertSrvSetup
     lpVtbl : ICertSrvSetupVTbl*
   end
@@ -4920,8 +4920,8 @@ lib LibWin32
     post_un_install : Proc(IMSCEPSetup*, HRESULT)
   end
 
-  IMSCEPSetup_GUID = LibC::GUID.new("4f7761bb-9f3b-4592-9ee0-9a73259c313e")
-  CLSID_IMSCEPSetup = "4f7761bb-9f3b-4592-9ee0-9a73259c313e"
+  IMSCEPSetup_GUID = "4f7761bb-9f3b-4592-9ee0-9a73259c313e"
+  IID_IMSCEPSetup = LibC::GUID.new(0x4f7761bb_u32, 0x9f3b_u16, 0x4592_u16, StaticArray[0x9e_u8, 0xe0_u8, 0x9a_u8, 0x73_u8, 0x25_u8, 0x9c_u8, 0x31_u8, 0x3e_u8])
   struct IMSCEPSetup
     lpVtbl : IMSCEPSetupVTbl*
   end
@@ -4943,8 +4943,8 @@ lib LibWin32
     un_install : Proc(ICertificateEnrollmentServerSetup*, VARIANT*, VARIANT*, HRESULT)
   end
 
-  ICertificateEnrollmentServerSetup_GUID = LibC::GUID.new("70027fdb-9dd9-4921-8944-b35cb31bd2ec")
-  CLSID_ICertificateEnrollmentServerSetup = "70027fdb-9dd9-4921-8944-b35cb31bd2ec"
+  ICertificateEnrollmentServerSetup_GUID = "70027fdb-9dd9-4921-8944-b35cb31bd2ec"
+  IID_ICertificateEnrollmentServerSetup = LibC::GUID.new(0x70027fdb_u32, 0x9dd9_u16, 0x4921_u16, StaticArray[0x89_u8, 0x44_u8, 0xb3_u8, 0x5c_u8, 0xb3_u8, 0x1b_u8, 0xd2_u8, 0xec_u8])
   struct ICertificateEnrollmentServerSetup
     lpVtbl : ICertificateEnrollmentServerSetupVTbl*
   end
@@ -4965,8 +4965,8 @@ lib LibWin32
     un_install : Proc(ICertificateEnrollmentPolicyServerSetup*, VARIANT*, HRESULT)
   end
 
-  ICertificateEnrollmentPolicyServerSetup_GUID = LibC::GUID.new("859252cc-238c-4a88-b8fd-a37e7d04e68b")
-  CLSID_ICertificateEnrollmentPolicyServerSetup = "859252cc-238c-4a88-b8fd-a37e7d04e68b"
+  ICertificateEnrollmentPolicyServerSetup_GUID = "859252cc-238c-4a88-b8fd-a37e7d04e68b"
+  IID_ICertificateEnrollmentPolicyServerSetup = LibC::GUID.new(0x859252cc_u32, 0x238c_u16, 0x4a88_u16, StaticArray[0xb8_u8, 0xfd_u8, 0xa3_u8, 0x7e_u8, 0x7d_u8, 0x4_u8, 0xe6_u8, 0x8b_u8])
   struct ICertificateEnrollmentPolicyServerSetup
     lpVtbl : ICertificateEnrollmentPolicyServerSetupVTbl*
   end

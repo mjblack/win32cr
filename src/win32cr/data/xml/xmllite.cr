@@ -202,8 +202,8 @@ lib LibWin32
     is_eof : Proc(IXmlReader*, LibC::BOOL)
   end
 
-  IXmlReader_GUID = LibC::GUID.new("7279fc81-709d-4095-b63d-69fe4b0d9030")
-  CLSID_IXmlReader = "7279fc81-709d-4095-b63d-69fe4b0d9030"
+  IXmlReader_GUID = "7279fc81-709d-4095-b63d-69fe4b0d9030"
+  IID_IXmlReader = LibC::GUID.new(0x7279fc81_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
   struct IXmlReader
     lpVtbl : IXmlReaderVTbl*
   end
@@ -215,8 +215,8 @@ lib LibWin32
     resolve_uri : Proc(IXmlResolver*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown*, HRESULT)
   end
 
-  IXmlResolver_GUID = LibC::GUID.new("7279fc82-709d-4095-b63d-69fe4b0d9030")
-  CLSID_IXmlResolver = "7279fc82-709d-4095-b63d-69fe4b0d9030"
+  IXmlResolver_GUID = "7279fc82-709d-4095-b63d-69fe4b0d9030"
+  IID_IXmlResolver = LibC::GUID.new(0x7279fc82_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
   struct IXmlResolver
     lpVtbl : IXmlResolverVTbl*
   end
@@ -256,8 +256,8 @@ lib LibWin32
     flush : Proc(IXmlWriter*, HRESULT)
   end
 
-  IXmlWriter_GUID = LibC::GUID.new("7279fc88-709d-4095-b63d-69fe4b0d9030")
-  CLSID_IXmlWriter = "7279fc88-709d-4095-b63d-69fe4b0d9030"
+  IXmlWriter_GUID = "7279fc88-709d-4095-b63d-69fe4b0d9030"
+  IID_IXmlWriter = LibC::GUID.new(0x7279fc88_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
   struct IXmlWriter
     lpVtbl : IXmlWriterVTbl*
   end
@@ -296,8 +296,8 @@ lib LibWin32
     flush : Proc(IXmlWriterLite*, HRESULT)
   end
 
-  IXmlWriterLite_GUID = LibC::GUID.new("862494c6-1310-4aad-b3cd-2dbeebf670d3")
-  CLSID_IXmlWriterLite = "862494c6-1310-4aad-b3cd-2dbeebf670d3"
+  IXmlWriterLite_GUID = "862494c6-1310-4aad-b3cd-2dbeebf670d3"
+  IID_IXmlWriterLite = LibC::GUID.new(0x862494c6_u32, 0x1310_u16, 0x4aad_u16, StaticArray[0xb3_u8, 0xcd_u8, 0x2d_u8, 0xbe_u8, 0xeb_u8, 0xf6_u8, 0x70_u8, 0xd3_u8])
   struct IXmlWriterLite
     lpVtbl : IXmlWriterLiteVTbl*
   end

@@ -13,8 +13,8 @@ require "../foundation.cr"
 {% end %}
 lib LibWin32
   DEDUP_CHUNKLIB_MAX_CHUNKS_ENUM = 1024_u32
-  DedupBackupSupport = LibC::GUID.new(0x73d6b2ad_u32, 0x2984_u16, 0x4715_u16, StaticArray[0xb2_u8, 0xe3_u8, 0x92_u8, 0x4c_u8, 0x14_u8, 0x97_u8, 0x44_u8, 0xdd_u8])
-  DedupDataPort = LibC::GUID.new(0x8f107207_u32, 0x1829_u16, 0x48b2_u16, StaticArray[0xa6_u8, 0x4b_u8, 0xe6_u8, 0x1f_u8, 0x8e_u8, 0xd_u8, 0x9a_u8, 0xcb_u8])
+  CLSID_DedupBackupSupport = LibC::GUID.new(0x73d6b2ad_u32, 0x2984_u16, 0x4715_u16, StaticArray[0xb2_u8, 0xe3_u8, 0x92_u8, 0x4c_u8, 0x14_u8, 0x97_u8, 0x44_u8, 0xdd_u8])
+  CLSID_DedupDataPort = LibC::GUID.new(0x8f107207_u32, 0x1829_u16, 0x48b2_u16, StaticArray[0xa6_u8, 0x4b_u8, 0xe6_u8, 0x1f_u8, 0x8e_u8, 0xd_u8, 0x9a_u8, 0xcb_u8])
 
 
   enum DEDUP_BACKUP_SUPPORT_PARAM_TYPE : Int32
@@ -121,8 +121,8 @@ lib LibWin32
     preview_container_read : Proc(IDedupReadFileCallback*, UInt8*, UInt32, DDP_FILE_EXTENT*, HRESULT)
   end
 
-  IDedupReadFileCallback_GUID = LibC::GUID.new("7bacc67a-2f1d-42d0-897e-6ff62dd533bb")
-  CLSID_IDedupReadFileCallback = "7bacc67a-2f1d-42d0-897e-6ff62dd533bb"
+  IDedupReadFileCallback_GUID = "7bacc67a-2f1d-42d0-897e-6ff62dd533bb"
+  IID_IDedupReadFileCallback = LibC::GUID.new(0x7bacc67a_u32, 0x2f1d_u16, 0x42d0_u16, StaticArray[0x89_u8, 0x7e_u8, 0x6f_u8, 0xf6_u8, 0x2d_u8, 0xd5_u8, 0x33_u8, 0xbb_u8])
   struct IDedupReadFileCallback
     lpVtbl : IDedupReadFileCallbackVTbl*
   end
@@ -134,8 +134,8 @@ lib LibWin32
     restore_files : Proc(IDedupBackupSupport*, UInt32, UInt8**, IDedupReadFileCallback, UInt32, HRESULT*, HRESULT)
   end
 
-  IDedupBackupSupport_GUID = LibC::GUID.new("c719d963-2b2d-415e-acf7-7eb7ca596ff4")
-  CLSID_IDedupBackupSupport = "c719d963-2b2d-415e-acf7-7eb7ca596ff4"
+  IDedupBackupSupport_GUID = "c719d963-2b2d-415e-acf7-7eb7ca596ff4"
+  IID_IDedupBackupSupport = LibC::GUID.new(0xc719d963_u32, 0x2b2d_u16, 0x415e_u16, StaticArray[0xac_u8, 0xf7_u8, 0x7e_u8, 0xb7_u8, 0xca_u8, 0x59_u8, 0x6f_u8, 0xf4_u8])
   struct IDedupBackupSupport
     lpVtbl : IDedupBackupSupportVTbl*
   end
@@ -150,8 +150,8 @@ lib LibWin32
     start_chunking : Proc(IDedupChunkLibrary*, Guid, IUnknown*, HRESULT)
   end
 
-  IDedupChunkLibrary_GUID = LibC::GUID.new("bb5144d7-2720-4dcc-8777-78597416ec23")
-  CLSID_IDedupChunkLibrary = "bb5144d7-2720-4dcc-8777-78597416ec23"
+  IDedupChunkLibrary_GUID = "bb5144d7-2720-4dcc-8777-78597416ec23"
+  IID_IDedupChunkLibrary = LibC::GUID.new(0xbb5144d7_u32, 0x2720_u16, 0x4dcc_u16, StaticArray[0x87_u8, 0x77_u8, 0x78_u8, 0x59_u8, 0x74_u8, 0x16_u8, 0xec_u8, 0x23_u8])
   struct IDedupChunkLibrary
     lpVtbl : IDedupChunkLibraryVTbl*
   end
@@ -166,8 +166,8 @@ lib LibWin32
     reset : Proc(IDedupIterateChunksHash32*, HRESULT)
   end
 
-  IDedupIterateChunksHash32_GUID = LibC::GUID.new("90b584d3-72aa-400f-9767-cad866a5a2d8")
-  CLSID_IDedupIterateChunksHash32 = "90b584d3-72aa-400f-9767-cad866a5a2d8"
+  IDedupIterateChunksHash32_GUID = "90b584d3-72aa-400f-9767-cad866a5a2d8"
+  IID_IDedupIterateChunksHash32 = LibC::GUID.new(0x90b584d3_u32, 0x72aa_u16, 0x400f_u16, StaticArray[0x97_u8, 0x67_u8, 0xca_u8, 0xd8_u8, 0x66_u8, 0xa5_u8, 0xa2_u8, 0xd8_u8])
   struct IDedupIterateChunksHash32
     lpVtbl : IDedupIterateChunksHash32VTbl*
   end
@@ -190,8 +190,8 @@ lib LibWin32
     get_request_results : Proc(IDedupDataPort*, Guid, UInt32, HRESULT*, UInt32*, DedupDataPortRequestStatus*, HRESULT**, HRESULT)
   end
 
-  IDedupDataPort_GUID = LibC::GUID.new("7963d734-40a9-4ea3-bbf6-5a89d26f7ae8")
-  CLSID_IDedupDataPort = "7963d734-40a9-4ea3-bbf6-5a89d26f7ae8"
+  IDedupDataPort_GUID = "7963d734-40a9-4ea3-bbf6-5a89d26f7ae8"
+  IID_IDedupDataPort = LibC::GUID.new(0x7963d734_u32, 0x40a9_u16, 0x4ea3_u16, StaticArray[0xbb_u8, 0xf6_u8, 0x5a_u8, 0x89_u8, 0xd2_u8, 0x6f_u8, 0x7a_u8, 0xe8_u8])
   struct IDedupDataPort
     lpVtbl : IDedupDataPortVTbl*
   end
@@ -205,8 +205,8 @@ lib LibWin32
     get_volume_data_port : Proc(IDedupDataPortManager*, UInt32, UInt8*, IDedupDataPort*, HRESULT)
   end
 
-  IDedupDataPortManager_GUID = LibC::GUID.new("44677452-b90a-445e-8192-cdcfe81511fb")
-  CLSID_IDedupDataPortManager = "44677452-b90a-445e-8192-cdcfe81511fb"
+  IDedupDataPortManager_GUID = "44677452-b90a-445e-8192-cdcfe81511fb"
+  IID_IDedupDataPortManager = LibC::GUID.new(0x44677452_u32, 0xb90a_u16, 0x445e_u16, StaticArray[0x81_u8, 0x92_u8, 0xcd_u8, 0xcf_u8, 0xe8_u8, 0x15_u8, 0x11_u8, 0xfb_u8])
   struct IDedupDataPortManager
     lpVtbl : IDedupDataPortManagerVTbl*
   end

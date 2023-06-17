@@ -301,44 +301,44 @@ lib LibWin32
   IMAPI_E_CANNOT_WRITE_TO_MEDIA = -2147220948_i32
   IMAPI_E_TRACK_NOT_BIG_ENOUGH = -2147220947_i32
   IMAPI_E_BOOTIMAGE_AND_NONBLANK_DISC = -2147220946_i32
-  MsftDiscMaster2 = LibC::GUID.new(0x2735412e_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftDiscRecorder2 = LibC::GUID.new(0x2735412d_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftWriteEngine2 = LibC::GUID.new(0x2735412c_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftDiscFormat2Erase = LibC::GUID.new(0x2735412b_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftDiscFormat2Data = LibC::GUID.new(0x2735412a_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftDiscFormat2TrackAtOnce = LibC::GUID.new(0x27354129_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftDiscFormat2RawCD = LibC::GUID.new(0x27354128_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftStreamZero = LibC::GUID.new(0x27354127_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftStreamPrng001 = LibC::GUID.new(0x27354126_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftStreamConcatenate = LibC::GUID.new(0x27354125_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftStreamInterleave = LibC::GUID.new(0x27354124_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftWriteSpeedDescriptor = LibC::GUID.new(0x27354123_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftMultisessionSequential = LibC::GUID.new(0x27354122_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  MsftMultisessionRandomWrite = LibC::GUID.new(0xb507ca24_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
-  MsftRawCDImageCreator = LibC::GUID.new(0x25983561_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
-  BootOptions = LibC::GUID.new(0x2c941fce_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  FsiStream = LibC::GUID.new(0x2c941fcd_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  FileSystemImageResult = LibC::GUID.new(0x2c941fcc_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  ProgressItem = LibC::GUID.new(0x2c941fcb_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  EnumProgressItems = LibC::GUID.new(0x2c941fca_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  ProgressItems = LibC::GUID.new(0x2c941fc9_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  FsiDirectoryItem = LibC::GUID.new(0x2c941fc8_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  FsiFileItem = LibC::GUID.new(0x2c941fc7_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  EnumFsiItems = LibC::GUID.new(0x2c941fc6_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  FsiNamedStreams = LibC::GUID.new(0xc6b6f8ed_u32, 0x6d19_u16, 0x44b4_u16, StaticArray[0xb5_u8, 0x39_u8, 0xb1_u8, 0x59_u8, 0xb7_u8, 0x93_u8, 0xa3_u8, 0x2d_u8])
-  MsftFileSystemImage = LibC::GUID.new(0x2c941fc5_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  MsftIsoImageManager = LibC::GUID.new(0xceee3b62_u32, 0x8f56_u16, 0x4056_u16, StaticArray[0x86_u8, 0x9b_u8, 0xef_u8, 0x16_u8, 0x91_u8, 0x7e_u8, 0x3e_u8, 0xfc_u8])
-  BlockRange = LibC::GUID.new(0xb507ca27_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
-  BlockRangeList = LibC::GUID.new(0xb507ca28_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
-  MSDiscRecorderObj = LibC::GUID.new(0x520cca61_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
-  MSDiscMasterObj = LibC::GUID.new(0x520cca63_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
-  MSEnumDiscRecordersObj = LibC::GUID.new(0x8a03567a_u32, 0x63cb_u16, 0x4ba8_u16, StaticArray[0xba_u8, 0xf6_u8, 0x52_u8, 0x11_u8, 0x98_u8, 0x16_u8, 0xd1_u8, 0xef_u8])
-  tagIMMPID_MP_STRUCT = LibC::GUID.new(0x13384cf0_u32, 0xb3c4_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0x92_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc8_u8, 0xb_u8])
-  tagIMMPID_RP_STRUCT = LibC::GUID.new(0x79e82048_u32, 0xd320_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
-  tagIMMPID_MPV_STRUCT = LibC::GUID.new(0xcbe69706_u32, 0xc9bd_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
-  tagIMMPID_RPV_STRUCT = LibC::GUID.new(0x79e82049_u32, 0xd320_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
-  tagIMMPID_NMP_STRUCT = LibC::GUID.new(0x7433a9aa_u32, 0x20e2_u16, 0x11d2_u16, StaticArray[0x94_u8, 0xd6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x79_u8, 0xf1_u8])
-  tagIMMPID_CPV_STRUCT = LibC::GUID.new(0xa2a76b2a_u32, 0xe52d_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x5b_u8, 0x82_u8])
+  CLSID_MsftDiscMaster2 = LibC::GUID.new(0x2735412e_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftDiscRecorder2 = LibC::GUID.new(0x2735412d_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftWriteEngine2 = LibC::GUID.new(0x2735412c_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftDiscFormat2Erase = LibC::GUID.new(0x2735412b_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftDiscFormat2Data = LibC::GUID.new(0x2735412a_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftDiscFormat2TrackAtOnce = LibC::GUID.new(0x27354129_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftDiscFormat2RawCD = LibC::GUID.new(0x27354128_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftStreamZero = LibC::GUID.new(0x27354127_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftStreamPrng001 = LibC::GUID.new(0x27354126_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftStreamConcatenate = LibC::GUID.new(0x27354125_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftStreamInterleave = LibC::GUID.new(0x27354124_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftWriteSpeedDescriptor = LibC::GUID.new(0x27354123_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftMultisessionSequential = LibC::GUID.new(0x27354122_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+  CLSID_MsftMultisessionRandomWrite = LibC::GUID.new(0xb507ca24_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+  CLSID_MsftRawCDImageCreator = LibC::GUID.new(0x25983561_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
+  CLSID_BootOptions = LibC::GUID.new(0x2c941fce_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_FsiStream = LibC::GUID.new(0x2c941fcd_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_FileSystemImageResult = LibC::GUID.new(0x2c941fcc_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_ProgressItem = LibC::GUID.new(0x2c941fcb_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_EnumProgressItems = LibC::GUID.new(0x2c941fca_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_ProgressItems = LibC::GUID.new(0x2c941fc9_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_FsiDirectoryItem = LibC::GUID.new(0x2c941fc8_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_FsiFileItem = LibC::GUID.new(0x2c941fc7_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_EnumFsiItems = LibC::GUID.new(0x2c941fc6_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_FsiNamedStreams = LibC::GUID.new(0xc6b6f8ed_u32, 0x6d19_u16, 0x44b4_u16, StaticArray[0xb5_u8, 0x39_u8, 0xb1_u8, 0x59_u8, 0xb7_u8, 0x93_u8, 0xa3_u8, 0x2d_u8])
+  CLSID_MsftFileSystemImage = LibC::GUID.new(0x2c941fc5_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+  CLSID_MsftIsoImageManager = LibC::GUID.new(0xceee3b62_u32, 0x8f56_u16, 0x4056_u16, StaticArray[0x86_u8, 0x9b_u8, 0xef_u8, 0x16_u8, 0x91_u8, 0x7e_u8, 0x3e_u8, 0xfc_u8])
+  CLSID_BlockRange = LibC::GUID.new(0xb507ca27_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+  CLSID_BlockRangeList = LibC::GUID.new(0xb507ca28_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+  CLSID_MSDiscRecorderObj = LibC::GUID.new(0x520cca61_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+  CLSID_MSDiscMasterObj = LibC::GUID.new(0x520cca63_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+  CLSID_MSEnumDiscRecordersObj = LibC::GUID.new(0x8a03567a_u32, 0x63cb_u16, 0x4ba8_u16, StaticArray[0xba_u8, 0xf6_u8, 0x52_u8, 0x11_u8, 0x98_u8, 0x16_u8, 0xd1_u8, 0xef_u8])
+  CLSID_tagIMMPID_MP_STRUCT = LibC::GUID.new(0x13384cf0_u32, 0xb3c4_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0x92_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc8_u8, 0xb_u8])
+  CLSID_tagIMMPID_RP_STRUCT = LibC::GUID.new(0x79e82048_u32, 0xd320_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
+  CLSID_tagIMMPID_MPV_STRUCT = LibC::GUID.new(0xcbe69706_u32, 0xc9bd_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
+  CLSID_tagIMMPID_RPV_STRUCT = LibC::GUID.new(0x79e82049_u32, 0xd320_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
+  CLSID_tagIMMPID_NMP_STRUCT = LibC::GUID.new(0x7433a9aa_u32, 0x20e2_u16, 0x11d2_u16, StaticArray[0x94_u8, 0xd6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x79_u8, 0xf1_u8])
+  CLSID_tagIMMPID_CPV_STRUCT = LibC::GUID.new(0xa2a76b2a_u32, 0xe52d_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x5b_u8, 0x82_u8])
 
   type MSGSESS = Void
 
@@ -774,8 +774,8 @@ lib LibWin32
     get_is_supported_environment : Proc(IDiscMaster2*, Int16*, HRESULT)
   end
 
-  IDiscMaster2_GUID = LibC::GUID.new("27354130-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscMaster2 = "27354130-7f64-5b0f-8f00-5d77afbe261e"
+  IDiscMaster2_GUID = "27354130-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscMaster2 = LibC::GUID.new(0x27354130_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscMaster2
     lpVtbl : IDiscMaster2VTbl*
   end
@@ -792,8 +792,8 @@ lib LibWin32
     notify_device_removed : Proc(DDiscMaster2Events*, IDispatch, UInt8*, HRESULT)
   end
 
-  DDiscMaster2Events_GUID = LibC::GUID.new("27354131-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_DDiscMaster2Events = "27354131-7f64-5b0f-8f00-5d77afbe261e"
+  DDiscMaster2Events_GUID = "27354131-7f64-5b0f-8f00-5d77afbe261e"
+  IID_DDiscMaster2Events = LibC::GUID.new(0x27354131_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct DDiscMaster2Events
     lpVtbl : DDiscMaster2EventsVTbl*
   end
@@ -822,8 +822,8 @@ lib LibWin32
     get_maximum_page_aligned_transfer_size : Proc(IDiscRecorder2Ex*, UInt32*, HRESULT)
   end
 
-  IDiscRecorder2Ex_GUID = LibC::GUID.new("27354132-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscRecorder2Ex = "27354132-7f64-5b0f-8f00-5d77afbe261e"
+  IDiscRecorder2Ex_GUID = "27354132-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscRecorder2Ex = LibC::GUID.new(0x27354132_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscRecorder2Ex
     lpVtbl : IDiscRecorder2ExVTbl*
   end
@@ -859,8 +859,8 @@ lib LibWin32
     get_exclusive_access_owner : Proc(IDiscRecorder2*, UInt8**, HRESULT)
   end
 
-  IDiscRecorder2_GUID = LibC::GUID.new("27354133-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscRecorder2 = "27354133-7f64-5b0f-8f00-5d77afbe261e"
+  IDiscRecorder2_GUID = "27354133-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscRecorder2 = LibC::GUID.new(0x27354133_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscRecorder2
     lpVtbl : IDiscRecorder2VTbl*
   end
@@ -888,8 +888,8 @@ lib LibWin32
     get_write_in_progress : Proc(IWriteEngine2*, Int16*, HRESULT)
   end
 
-  IWriteEngine2_GUID = LibC::GUID.new("27354135-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IWriteEngine2 = "27354135-7f64-5b0f-8f00-5d77afbe261e"
+  IWriteEngine2_GUID = "27354135-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IWriteEngine2 = LibC::GUID.new(0x27354135_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IWriteEngine2
     lpVtbl : IWriteEngine2VTbl*
   end
@@ -911,8 +911,8 @@ lib LibWin32
     get_free_system_buffer : Proc(IWriteEngine2EventArgs*, Int32*, HRESULT)
   end
 
-  IWriteEngine2EventArgs_GUID = LibC::GUID.new("27354136-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IWriteEngine2EventArgs = "27354136-7f64-5b0f-8f00-5d77afbe261e"
+  IWriteEngine2EventArgs_GUID = "27354136-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IWriteEngine2EventArgs = LibC::GUID.new(0x27354136_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IWriteEngine2EventArgs
     lpVtbl : IWriteEngine2EventArgsVTbl*
   end
@@ -928,8 +928,8 @@ lib LibWin32
     update : Proc(DWriteEngine2Events*, IDispatch, IDispatch, HRESULT)
   end
 
-  DWriteEngine2Events_GUID = LibC::GUID.new("27354137-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_DWriteEngine2Events = "27354137-7f64-5b0f-8f00-5d77afbe261e"
+  DWriteEngine2Events_GUID = "27354137-7f64-5b0f-8f00-5d77afbe261e"
+  IID_DWriteEngine2Events = LibC::GUID.new(0x27354137_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct DWriteEngine2Events
     lpVtbl : DWriteEngine2EventsVTbl*
   end
@@ -949,8 +949,8 @@ lib LibWin32
     get_supported_media_types : Proc(IDiscFormat2*, SAFEARRAY**, HRESULT)
   end
 
-  IDiscFormat2_GUID = LibC::GUID.new("27354152-8f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscFormat2 = "27354152-8f64-5b0f-8f00-5d77afbe261e"
+  IDiscFormat2_GUID = "27354152-8f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscFormat2 = LibC::GUID.new(0x27354152_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscFormat2
     lpVtbl : IDiscFormat2VTbl*
   end
@@ -978,8 +978,8 @@ lib LibWin32
     erase_media : Proc(IDiscFormat2Erase*, HRESULT)
   end
 
-  IDiscFormat2Erase_GUID = LibC::GUID.new("27354156-8f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscFormat2Erase = "27354156-8f64-5b0f-8f00-5d77afbe261e"
+  IDiscFormat2Erase_GUID = "27354156-8f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscFormat2Erase = LibC::GUID.new(0x27354156_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscFormat2Erase
     lpVtbl : IDiscFormat2EraseVTbl*
   end
@@ -995,8 +995,8 @@ lib LibWin32
     update : Proc(DDiscFormat2EraseEvents*, IDispatch, Int32, Int32, HRESULT)
   end
 
-  DDiscFormat2EraseEvents_GUID = LibC::GUID.new("2735413a-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_DDiscFormat2EraseEvents = "2735413a-7f64-5b0f-8f00-5d77afbe261e"
+  DDiscFormat2EraseEvents_GUID = "2735413a-7f64-5b0f-8f00-5d77afbe261e"
+  IID_DDiscFormat2EraseEvents = LibC::GUID.new(0x2735413a_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct DDiscFormat2EraseEvents
     lpVtbl : DDiscFormat2EraseEventsVTbl*
   end
@@ -1048,8 +1048,8 @@ lib LibWin32
     set_write_speed : Proc(IDiscFormat2Data*, Int32, Int16, HRESULT)
   end
 
-  IDiscFormat2Data_GUID = LibC::GUID.new("27354153-9f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscFormat2Data = "27354153-9f64-5b0f-8f00-5d77afbe261e"
+  IDiscFormat2Data_GUID = "27354153-9f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscFormat2Data = LibC::GUID.new(0x27354153_u32, 0x9f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscFormat2Data
     lpVtbl : IDiscFormat2DataVTbl*
   end
@@ -1065,8 +1065,8 @@ lib LibWin32
     update : Proc(DDiscFormat2DataEvents*, IDispatch, IDispatch, HRESULT)
   end
 
-  DDiscFormat2DataEvents_GUID = LibC::GUID.new("2735413c-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_DDiscFormat2DataEvents = "2735413c-7f64-5b0f-8f00-5d77afbe261e"
+  DDiscFormat2DataEvents_GUID = "2735413c-7f64-5b0f-8f00-5d77afbe261e"
+  IID_DDiscFormat2DataEvents = LibC::GUID.new(0x2735413c_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct DDiscFormat2DataEvents
     lpVtbl : DDiscFormat2DataEventsVTbl*
   end
@@ -1092,8 +1092,8 @@ lib LibWin32
     get_current_action : Proc(IDiscFormat2DataEventArgs*, IMAPI_FORMAT2_DATA_WRITE_ACTION*, HRESULT)
   end
 
-  IDiscFormat2DataEventArgs_GUID = LibC::GUID.new("2735413d-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscFormat2DataEventArgs = "2735413d-7f64-5b0f-8f00-5d77afbe261e"
+  IDiscFormat2DataEventArgs_GUID = "2735413d-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscFormat2DataEventArgs = LibC::GUID.new(0x2735413d_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscFormat2DataEventArgs
     lpVtbl : IDiscFormat2DataEventArgsVTbl*
   end
@@ -1138,8 +1138,8 @@ lib LibWin32
     get_supported_write_speed_descriptors : Proc(IDiscFormat2TrackAtOnce*, SAFEARRAY**, HRESULT)
   end
 
-  IDiscFormat2TrackAtOnce_GUID = LibC::GUID.new("27354154-8f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscFormat2TrackAtOnce = "27354154-8f64-5b0f-8f00-5d77afbe261e"
+  IDiscFormat2TrackAtOnce_GUID = "27354154-8f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscFormat2TrackAtOnce = LibC::GUID.new(0x27354154_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscFormat2TrackAtOnce
     lpVtbl : IDiscFormat2TrackAtOnceVTbl*
   end
@@ -1155,8 +1155,8 @@ lib LibWin32
     update : Proc(DDiscFormat2TrackAtOnceEvents*, IDispatch, IDispatch, HRESULT)
   end
 
-  DDiscFormat2TrackAtOnceEvents_GUID = LibC::GUID.new("2735413f-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_DDiscFormat2TrackAtOnceEvents = "2735413f-7f64-5b0f-8f00-5d77afbe261e"
+  DDiscFormat2TrackAtOnceEvents_GUID = "2735413f-7f64-5b0f-8f00-5d77afbe261e"
+  IID_DDiscFormat2TrackAtOnceEvents = LibC::GUID.new(0x2735413f_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct DDiscFormat2TrackAtOnceEvents
     lpVtbl : DDiscFormat2TrackAtOnceEventsVTbl*
   end
@@ -1182,8 +1182,8 @@ lib LibWin32
     get_remaining_time : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
   end
 
-  IDiscFormat2TrackAtOnceEventArgs_GUID = LibC::GUID.new("27354140-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscFormat2TrackAtOnceEventArgs = "27354140-7f64-5b0f-8f00-5d77afbe261e"
+  IDiscFormat2TrackAtOnceEventArgs_GUID = "27354140-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscFormat2TrackAtOnceEventArgs = LibC::GUID.new(0x27354140_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscFormat2TrackAtOnceEventArgs
     lpVtbl : IDiscFormat2TrackAtOnceEventArgsVTbl*
   end
@@ -1227,8 +1227,8 @@ lib LibWin32
     get_supported_write_speed_descriptors : Proc(IDiscFormat2RawCD*, SAFEARRAY**, HRESULT)
   end
 
-  IDiscFormat2RawCD_GUID = LibC::GUID.new("27354155-8f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscFormat2RawCD = "27354155-8f64-5b0f-8f00-5d77afbe261e"
+  IDiscFormat2RawCD_GUID = "27354155-8f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscFormat2RawCD = LibC::GUID.new(0x27354155_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscFormat2RawCD
     lpVtbl : IDiscFormat2RawCDVTbl*
   end
@@ -1244,8 +1244,8 @@ lib LibWin32
     update : Proc(DDiscFormat2RawCDEvents*, IDispatch, IDispatch, HRESULT)
   end
 
-  DDiscFormat2RawCDEvents_GUID = LibC::GUID.new("27354142-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_DDiscFormat2RawCDEvents = "27354142-7f64-5b0f-8f00-5d77afbe261e"
+  DDiscFormat2RawCDEvents_GUID = "27354142-7f64-5b0f-8f00-5d77afbe261e"
+  IID_DDiscFormat2RawCDEvents = LibC::GUID.new(0x27354142_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct DDiscFormat2RawCDEvents
     lpVtbl : DDiscFormat2RawCDEventsVTbl*
   end
@@ -1270,8 +1270,8 @@ lib LibWin32
     get_remaining_time : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
   end
 
-  IDiscFormat2RawCDEventArgs_GUID = LibC::GUID.new("27354143-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IDiscFormat2RawCDEventArgs = "27354143-7f64-5b0f-8f00-5d77afbe261e"
+  IDiscFormat2RawCDEventArgs_GUID = "27354143-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IDiscFormat2RawCDEventArgs = LibC::GUID.new(0x27354143_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IDiscFormat2RawCDEventArgs
     lpVtbl : IDiscFormat2RawCDEventArgsVTbl*
   end
@@ -1284,8 +1284,8 @@ lib LibWin32
     get_burn_verification_level : Proc(IBurnVerification*, IMAPI_BURN_VERIFICATION_LEVEL*, HRESULT)
   end
 
-  IBurnVerification_GUID = LibC::GUID.new("d2ffd834-958b-426d-8470-2a13879c6a91")
-  CLSID_IBurnVerification = "d2ffd834-958b-426d-8470-2a13879c6a91"
+  IBurnVerification_GUID = "d2ffd834-958b-426d-8470-2a13879c6a91"
+  IID_IBurnVerification = LibC::GUID.new(0xd2ffd834_u32, 0x958b_u16, 0x426d_u16, StaticArray[0x84_u8, 0x70_u8, 0x2a_u8, 0x13_u8, 0x87_u8, 0x9c_u8, 0x6a_u8, 0x91_u8])
   struct IBurnVerification
     lpVtbl : IBurnVerificationVTbl*
   end
@@ -1303,8 +1303,8 @@ lib LibWin32
     get_write_speed : Proc(IWriteSpeedDescriptor*, Int32*, HRESULT)
   end
 
-  IWriteSpeedDescriptor_GUID = LibC::GUID.new("27354144-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IWriteSpeedDescriptor = "27354144-7f64-5b0f-8f00-5d77afbe261e"
+  IWriteSpeedDescriptor_GUID = "27354144-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IWriteSpeedDescriptor = LibC::GUID.new(0x27354144_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IWriteSpeedDescriptor
     lpVtbl : IWriteSpeedDescriptorVTbl*
   end
@@ -1323,8 +1323,8 @@ lib LibWin32
     get_import_recorder : Proc(IMultisession*, IDiscRecorder2*, HRESULT)
   end
 
-  IMultisession_GUID = LibC::GUID.new("27354150-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IMultisession = "27354150-7f64-5b0f-8f00-5d77afbe261e"
+  IMultisession_GUID = "27354150-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IMultisession = LibC::GUID.new(0x27354150_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IMultisession
     lpVtbl : IMultisessionVTbl*
   end
@@ -1348,8 +1348,8 @@ lib LibWin32
     get_free_sectors_on_media : Proc(IMultisessionSequential*, Int32*, HRESULT)
   end
 
-  IMultisessionSequential_GUID = LibC::GUID.new("27354151-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IMultisessionSequential = "27354151-7f64-5b0f-8f00-5d77afbe261e"
+  IMultisessionSequential_GUID = "27354151-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IMultisessionSequential = LibC::GUID.new(0x27354151_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IMultisessionSequential
     lpVtbl : IMultisessionSequentialVTbl*
   end
@@ -1374,8 +1374,8 @@ lib LibWin32
     get_write_unit_size : Proc(IMultisessionSequential2*, Int32*, HRESULT)
   end
 
-  IMultisessionSequential2_GUID = LibC::GUID.new("b507ca22-2204-11dd-966a-001aa01bbc58")
-  CLSID_IMultisessionSequential2 = "b507ca22-2204-11dd-966a-001aa01bbc58"
+  IMultisessionSequential2_GUID = "b507ca22-2204-11dd-966a-001aa01bbc58"
+  IID_IMultisessionSequential2 = LibC::GUID.new(0xb507ca22_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
   struct IMultisessionSequential2
     lpVtbl : IMultisessionSequential2VTbl*
   end
@@ -1397,8 +1397,8 @@ lib LibWin32
     get_total_sectors_on_media : Proc(IMultisessionRandomWrite*, Int32*, HRESULT)
   end
 
-  IMultisessionRandomWrite_GUID = LibC::GUID.new("b507ca23-2204-11dd-966a-001aa01bbc58")
-  CLSID_IMultisessionRandomWrite = "b507ca23-2204-11dd-966a-001aa01bbc58"
+  IMultisessionRandomWrite_GUID = "b507ca23-2204-11dd-966a-001aa01bbc58"
+  IID_IMultisessionRandomWrite = LibC::GUID.new(0xb507ca23_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
   struct IMultisessionRandomWrite
     lpVtbl : IMultisessionRandomWriteVTbl*
   end
@@ -1424,8 +1424,8 @@ lib LibWin32
     get_extended_seed : Proc(IStreamPseudoRandomBased*, UInt32**, UInt32*, HRESULT)
   end
 
-  IStreamPseudoRandomBased_GUID = LibC::GUID.new("27354145-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IStreamPseudoRandomBased = "27354145-7f64-5b0f-8f00-5d77afbe261e"
+  IStreamPseudoRandomBased_GUID = "27354145-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IStreamPseudoRandomBased = LibC::GUID.new(0x27354145_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IStreamPseudoRandomBased
     lpVtbl : IStreamPseudoRandomBasedVTbl*
   end
@@ -1451,8 +1451,8 @@ lib LibWin32
     append2 : Proc(IStreamConcatenate*, IStream*, UInt32, HRESULT)
   end
 
-  IStreamConcatenate_GUID = LibC::GUID.new("27354146-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IStreamConcatenate = "27354146-7f64-5b0f-8f00-5d77afbe261e"
+  IStreamConcatenate_GUID = "27354146-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IStreamConcatenate = LibC::GUID.new(0x27354146_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IStreamConcatenate
     lpVtbl : IStreamConcatenateVTbl*
   end
@@ -1475,8 +1475,8 @@ lib LibWin32
     initialize : Proc(IStreamInterleave*, IStream*, UInt32*, UInt32, HRESULT)
   end
 
-  IStreamInterleave_GUID = LibC::GUID.new("27354147-7f64-5b0f-8f00-5d77afbe261e")
-  CLSID_IStreamInterleave = "27354147-7f64-5b0f-8f00-5d77afbe261e"
+  IStreamInterleave_GUID = "27354147-7f64-5b0f-8f00-5d77afbe261e"
+  IID_IStreamInterleave = LibC::GUID.new(0x27354147_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
   struct IStreamInterleave
     lpVtbl : IStreamInterleaveVTbl*
   end
@@ -1510,8 +1510,8 @@ lib LibWin32
     get_expected_table_of_contents : Proc(IRawCDImageCreator*, SAFEARRAY**, HRESULT)
   end
 
-  IRawCDImageCreator_GUID = LibC::GUID.new("25983550-9d65-49ce-b335-40630d901227")
-  CLSID_IRawCDImageCreator = "25983550-9d65-49ce-b335-40630d901227"
+  IRawCDImageCreator_GUID = "25983550-9d65-49ce-b335-40630d901227"
+  IID_IRawCDImageCreator = LibC::GUID.new(0x25983550_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
   struct IRawCDImageCreator
     lpVtbl : IRawCDImageCreatorVTbl*
   end
@@ -1539,8 +1539,8 @@ lib LibWin32
     clear_track_index : Proc(IRawCDImageTrackInfo*, Int32, HRESULT)
   end
 
-  IRawCDImageTrackInfo_GUID = LibC::GUID.new("25983551-9d65-49ce-b335-40630d901227")
-  CLSID_IRawCDImageTrackInfo = "25983551-9d65-49ce-b335-40630d901227"
+  IRawCDImageTrackInfo_GUID = "25983551-9d65-49ce-b335-40630d901227"
+  IID_IRawCDImageTrackInfo = LibC::GUID.new(0x25983551_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
   struct IRawCDImageTrackInfo
     lpVtbl : IRawCDImageTrackInfoVTbl*
   end
@@ -1557,8 +1557,8 @@ lib LibWin32
     get_end_lba : Proc(IBlockRange*, Int32*, HRESULT)
   end
 
-  IBlockRange_GUID = LibC::GUID.new("b507ca25-2204-11dd-966a-001aa01bbc58")
-  CLSID_IBlockRange = "b507ca25-2204-11dd-966a-001aa01bbc58"
+  IBlockRange_GUID = "b507ca25-2204-11dd-966a-001aa01bbc58"
+  IID_IBlockRange = LibC::GUID.new(0xb507ca25_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
   struct IBlockRange
     lpVtbl : IBlockRangeVTbl*
   end
@@ -1574,8 +1574,8 @@ lib LibWin32
     get_block_ranges : Proc(IBlockRangeList*, SAFEARRAY**, HRESULT)
   end
 
-  IBlockRangeList_GUID = LibC::GUID.new("b507ca26-2204-11dd-966a-001aa01bbc58")
-  CLSID_IBlockRangeList = "b507ca26-2204-11dd-966a-001aa01bbc58"
+  IBlockRangeList_GUID = "b507ca26-2204-11dd-966a-001aa01bbc58"
+  IID_IBlockRangeList = LibC::GUID.new(0xb507ca26_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
   struct IBlockRangeList
     lpVtbl : IBlockRangeListVTbl*
   end
@@ -1599,8 +1599,8 @@ lib LibWin32
     assign_boot_image : Proc(IBootOptions*, IStream, HRESULT)
   end
 
-  IBootOptions_GUID = LibC::GUID.new("2c941fd4-975b-59be-a960-9a2a262853a5")
-  CLSID_IBootOptions = "2c941fd4-975b-59be-a960-9a2a262853a5"
+  IBootOptions_GUID = "2c941fd4-975b-59be-a960-9a2a262853a5"
+  IID_IBootOptions = LibC::GUID.new(0x2c941fd4_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IBootOptions
     lpVtbl : IBootOptionsVTbl*
   end
@@ -1619,8 +1619,8 @@ lib LibWin32
     get_block_count : Proc(IProgressItem*, UInt32*, HRESULT)
   end
 
-  IProgressItem_GUID = LibC::GUID.new("2c941fd5-975b-59be-a960-9a2a262853a5")
-  CLSID_IProgressItem = "2c941fd5-975b-59be-a960-9a2a262853a5"
+  IProgressItem_GUID = "2c941fd5-975b-59be-a960-9a2a262853a5"
+  IID_IProgressItem = LibC::GUID.new(0x2c941fd5_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IProgressItem
     lpVtbl : IProgressItemVTbl*
   end
@@ -1635,8 +1635,8 @@ lib LibWin32
     clone : Proc(IEnumProgressItems*, IEnumProgressItems*, HRESULT)
   end
 
-  IEnumProgressItems_GUID = LibC::GUID.new("2c941fd6-975b-59be-a960-9a2a262853a5")
-  CLSID_IEnumProgressItems = "2c941fd6-975b-59be-a960-9a2a262853a5"
+  IEnumProgressItems_GUID = "2c941fd6-975b-59be-a960-9a2a262853a5"
+  IID_IEnumProgressItems = LibC::GUID.new(0x2c941fd6_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IEnumProgressItems
     lpVtbl : IEnumProgressItemsVTbl*
   end
@@ -1657,8 +1657,8 @@ lib LibWin32
     get_enum_progress_items : Proc(IProgressItems*, IEnumProgressItems*, HRESULT)
   end
 
-  IProgressItems_GUID = LibC::GUID.new("2c941fd7-975b-59be-a960-9a2a262853a5")
-  CLSID_IProgressItems = "2c941fd7-975b-59be-a960-9a2a262853a5"
+  IProgressItems_GUID = "2c941fd7-975b-59be-a960-9a2a262853a5"
+  IID_IProgressItems = LibC::GUID.new(0x2c941fd7_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IProgressItems
     lpVtbl : IProgressItemsVTbl*
   end
@@ -1678,8 +1678,8 @@ lib LibWin32
     get_disc_id : Proc(IFileSystemImageResult*, UInt8**, HRESULT)
   end
 
-  IFileSystemImageResult_GUID = LibC::GUID.new("2c941fd8-975b-59be-a960-9a2a262853a5")
-  CLSID_IFileSystemImageResult = "2c941fd8-975b-59be-a960-9a2a262853a5"
+  IFileSystemImageResult_GUID = "2c941fd8-975b-59be-a960-9a2a262853a5"
+  IID_IFileSystemImageResult = LibC::GUID.new(0x2c941fd8_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IFileSystemImageResult
     lpVtbl : IFileSystemImageResultVTbl*
   end
@@ -1700,8 +1700,8 @@ lib LibWin32
     get_modified_blocks : Proc(IFileSystemImageResult2*, IBlockRangeList*, HRESULT)
   end
 
-  IFileSystemImageResult2_GUID = LibC::GUID.new("b507ca29-2204-11dd-966a-001aa01bbc58")
-  CLSID_IFileSystemImageResult2 = "b507ca29-2204-11dd-966a-001aa01bbc58"
+  IFileSystemImageResult2_GUID = "b507ca29-2204-11dd-966a-001aa01bbc58"
+  IID_IFileSystemImageResult2 = LibC::GUID.new(0xb507ca29_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
   struct IFileSystemImageResult2
     lpVtbl : IFileSystemImageResult2VTbl*
   end
@@ -1728,8 +1728,8 @@ lib LibWin32
     file_system_path : Proc(IFsiItem*, FsiFileSystems, UInt8**, HRESULT)
   end
 
-  IFsiItem_GUID = LibC::GUID.new("2c941fd9-975b-59be-a960-9a2a262853a5")
-  CLSID_IFsiItem = "2c941fd9-975b-59be-a960-9a2a262853a5"
+  IFsiItem_GUID = "2c941fd9-975b-59be-a960-9a2a262853a5"
+  IID_IFsiItem = LibC::GUID.new(0x2c941fd9_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IFsiItem
     lpVtbl : IFsiItemVTbl*
   end
@@ -1744,8 +1744,8 @@ lib LibWin32
     clone : Proc(IEnumFsiItems*, IEnumFsiItems*, HRESULT)
   end
 
-  IEnumFsiItems_GUID = LibC::GUID.new("2c941fda-975b-59be-a960-9a2a262853a5")
-  CLSID_IEnumFsiItems = "2c941fda-975b-59be-a960-9a2a262853a5"
+  IEnumFsiItems_GUID = "2c941fda-975b-59be-a960-9a2a262853a5"
+  IID_IEnumFsiItems = LibC::GUID.new(0x2c941fda_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IEnumFsiItems
     lpVtbl : IEnumFsiItemsVTbl*
   end
@@ -1777,8 +1777,8 @@ lib LibWin32
     put_data : Proc(IFsiFileItem*, IStream, HRESULT)
   end
 
-  IFsiFileItem_GUID = LibC::GUID.new("2c941fdb-975b-59be-a960-9a2a262853a5")
-  CLSID_IFsiFileItem = "2c941fdb-975b-59be-a960-9a2a262853a5"
+  IFsiFileItem_GUID = "2c941fdb-975b-59be-a960-9a2a262853a5"
+  IID_IFsiFileItem = LibC::GUID.new(0x2c941fdb_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IFsiFileItem
     lpVtbl : IFsiFileItemVTbl*
   end
@@ -1816,8 +1816,8 @@ lib LibWin32
     put_is_real_time : Proc(IFsiFileItem2*, Int16, HRESULT)
   end
 
-  IFsiFileItem2_GUID = LibC::GUID.new("199d0c19-11e1-40eb-8ec2-c8c822a07792")
-  CLSID_IFsiFileItem2 = "199d0c19-11e1-40eb-8ec2-c8c822a07792"
+  IFsiFileItem2_GUID = "199d0c19-11e1-40eb-8ec2-c8c822a07792"
+  IID_IFsiFileItem2 = LibC::GUID.new(0x199d0c19_u32, 0x11e1_u16, 0x40eb_u16, StaticArray[0x8e_u8, 0xc2_u8, 0xc8_u8, 0xc8_u8, 0x22_u8, 0xa0_u8, 0x77_u8, 0x92_u8])
   struct IFsiFileItem2
     lpVtbl : IFsiFileItem2VTbl*
   end
@@ -1836,8 +1836,8 @@ lib LibWin32
     get_enum_named_streams : Proc(IFsiNamedStreams*, IEnumFsiItems*, HRESULT)
   end
 
-  IFsiNamedStreams_GUID = LibC::GUID.new("ed79ba56-5294-4250-8d46-f9aecee23459")
-  CLSID_IFsiNamedStreams = "ed79ba56-5294-4250-8d46-f9aecee23459"
+  IFsiNamedStreams_GUID = "ed79ba56-5294-4250-8d46-f9aecee23459"
+  IID_IFsiNamedStreams = LibC::GUID.new(0xed79ba56_u32, 0x5294_u16, 0x4250_u16, StaticArray[0x8d_u8, 0x46_u8, 0xf9_u8, 0xae_u8, 0xce_u8, 0xe2_u8, 0x34_u8, 0x59_u8])
   struct IFsiNamedStreams
     lpVtbl : IFsiNamedStreamsVTbl*
   end
@@ -1874,8 +1874,8 @@ lib LibWin32
     remove_tree : Proc(IFsiDirectoryItem*, UInt8*, HRESULT)
   end
 
-  IFsiDirectoryItem_GUID = LibC::GUID.new("2c941fdc-975b-59be-a960-9a2a262853a5")
-  CLSID_IFsiDirectoryItem = "2c941fdc-975b-59be-a960-9a2a262853a5"
+  IFsiDirectoryItem_GUID = "2c941fdc-975b-59be-a960-9a2a262853a5"
+  IID_IFsiDirectoryItem = LibC::GUID.new(0x2c941fdc_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IFsiDirectoryItem
     lpVtbl : IFsiDirectoryItemVTbl*
   end
@@ -1913,8 +1913,8 @@ lib LibWin32
     add_tree_with_named_streams : Proc(IFsiDirectoryItem2*, UInt8*, Int16, HRESULT)
   end
 
-  IFsiDirectoryItem2_GUID = LibC::GUID.new("f7fb4b9b-6d96-4d7b-9115-201b144811ef")
-  CLSID_IFsiDirectoryItem2 = "f7fb4b9b-6d96-4d7b-9115-201b144811ef"
+  IFsiDirectoryItem2_GUID = "f7fb4b9b-6d96-4d7b-9115-201b144811ef"
+  IID_IFsiDirectoryItem2 = LibC::GUID.new(0xf7fb4b9b_u32, 0x6d96_u16, 0x4d7b_u16, StaticArray[0x91_u8, 0x15_u8, 0x20_u8, 0x1b_u8, 0x14_u8, 0x48_u8, 0x11_u8, 0xef_u8])
   struct IFsiDirectoryItem2
     lpVtbl : IFsiDirectoryItem2VTbl*
   end
@@ -1979,8 +1979,8 @@ lib LibWin32
     put_multisession_interfaces : Proc(IFileSystemImage*, SAFEARRAY*, HRESULT)
   end
 
-  IFileSystemImage_GUID = LibC::GUID.new("2c941fe1-975b-59be-a960-9a2a262853a5")
-  CLSID_IFileSystemImage = "2c941fe1-975b-59be-a960-9a2a262853a5"
+  IFileSystemImage_GUID = "2c941fe1-975b-59be-a960-9a2a262853a5"
+  IID_IFileSystemImage = LibC::GUID.new(0x2c941fe1_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct IFileSystemImage
     lpVtbl : IFileSystemImageVTbl*
   end
@@ -2047,8 +2047,8 @@ lib LibWin32
     put_boot_image_options_array : Proc(IFileSystemImage2*, SAFEARRAY*, HRESULT)
   end
 
-  IFileSystemImage2_GUID = LibC::GUID.new("d7644b2c-1537-4767-b62f-f1387b02ddfd")
-  CLSID_IFileSystemImage2 = "d7644b2c-1537-4767-b62f-f1387b02ddfd"
+  IFileSystemImage2_GUID = "d7644b2c-1537-4767-b62f-f1387b02ddfd"
+  IID_IFileSystemImage2 = LibC::GUID.new(0xd7644b2c_u32, 0x1537_u16, 0x4767_u16, StaticArray[0xb6_u8, 0x2f_u8, 0xf1_u8, 0x38_u8, 0x7b_u8, 0x2_u8, 0xdd_u8, 0xfd_u8])
   struct IFileSystemImage2
     lpVtbl : IFileSystemImage2VTbl*
   end
@@ -2118,8 +2118,8 @@ lib LibWin32
     probe_specific_file_system : Proc(IFileSystemImage3*, FsiFileSystems, Int16*, HRESULT)
   end
 
-  IFileSystemImage3_GUID = LibC::GUID.new("7cff842c-7e97-4807-8304-910dd8f7c051")
-  CLSID_IFileSystemImage3 = "7cff842c-7e97-4807-8304-910dd8f7c051"
+  IFileSystemImage3_GUID = "7cff842c-7e97-4807-8304-910dd8f7c051"
+  IID_IFileSystemImage3 = LibC::GUID.new(0x7cff842c_u32, 0x7e97_u16, 0x4807_u16, StaticArray[0x83_u8, 0x4_u8, 0x91_u8, 0xd_u8, 0xd8_u8, 0xf7_u8, 0xc0_u8, 0x51_u8])
   struct IFileSystemImage3
     lpVtbl : IFileSystemImage3VTbl*
   end
@@ -2135,8 +2135,8 @@ lib LibWin32
     update : Proc(DFileSystemImageEvents*, IDispatch, UInt8*, Int32, Int32, HRESULT)
   end
 
-  DFileSystemImageEvents_GUID = LibC::GUID.new("2c941fdf-975b-59be-a960-9a2a262853a5")
-  CLSID_DFileSystemImageEvents = "2c941fdf-975b-59be-a960-9a2a262853a5"
+  DFileSystemImageEvents_GUID = "2c941fdf-975b-59be-a960-9a2a262853a5"
+  IID_DFileSystemImageEvents = LibC::GUID.new(0x2c941fdf_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
   struct DFileSystemImageEvents
     lpVtbl : DFileSystemImageEventsVTbl*
   end
@@ -2152,8 +2152,8 @@ lib LibWin32
     update_import : Proc(DFileSystemImageImportEvents*, IDispatch, FsiFileSystems, UInt8*, Int32, Int32, Int32, Int32, HRESULT)
   end
 
-  DFileSystemImageImportEvents_GUID = LibC::GUID.new("d25c30f9-4087-4366-9e24-e55be286424b")
-  CLSID_DFileSystemImageImportEvents = "d25c30f9-4087-4366-9e24-e55be286424b"
+  DFileSystemImageImportEvents_GUID = "d25c30f9-4087-4366-9e24-e55be286424b"
+  IID_DFileSystemImageImportEvents = LibC::GUID.new(0xd25c30f9_u32, 0x4087_u16, 0x4366_u16, StaticArray[0x9e_u8, 0x24_u8, 0xe5_u8, 0x5b_u8, 0xe2_u8, 0x86_u8, 0x42_u8, 0x4b_u8])
   struct DFileSystemImageImportEvents
     lpVtbl : DFileSystemImageImportEventsVTbl*
   end
@@ -2173,8 +2173,8 @@ lib LibWin32
     validate : Proc(IIsoImageManager*, HRESULT)
   end
 
-  IIsoImageManager_GUID = LibC::GUID.new("6ca38be5-fbbb-4800-95a1-a438865eb0d4")
-  CLSID_IIsoImageManager = "6ca38be5-fbbb-4800-95a1-a438865eb0d4"
+  IIsoImageManager_GUID = "6ca38be5-fbbb-4800-95a1-a438865eb0d4"
+  IID_IIsoImageManager = LibC::GUID.new(0x6ca38be5_u32, 0xfbbb_u16, 0x4800_u16, StaticArray[0x95_u8, 0xa1_u8, 0xa4_u8, 0x38_u8, 0x86_u8, 0x5e_u8, 0xb0_u8, 0xd4_u8])
   struct IIsoImageManager
     lpVtbl : IIsoImageManagerVTbl*
   end
@@ -2200,8 +2200,8 @@ lib LibWin32
     close : Proc(IDiscRecorder*, HRESULT)
   end
 
-  IDiscRecorder_GUID = LibC::GUID.new("85ac9776-ca88-4cf2-894e-09598c078a41")
-  CLSID_IDiscRecorder = "85ac9776-ca88-4cf2-894e-09598c078a41"
+  IDiscRecorder_GUID = "85ac9776-ca88-4cf2-894e-09598c078a41"
+  IID_IDiscRecorder = LibC::GUID.new(0x85ac9776_u32, 0xca88_u16, 0x4cf2_u16, StaticArray[0x89_u8, 0x4e_u8, 0x9_u8, 0x59_u8, 0x8c_u8, 0x7_u8, 0x8a_u8, 0x41_u8])
   struct IDiscRecorder
     lpVtbl : IDiscRecorderVTbl*
   end
@@ -2216,8 +2216,8 @@ lib LibWin32
     clone : Proc(IEnumDiscRecorders*, IEnumDiscRecorders*, HRESULT)
   end
 
-  IEnumDiscRecorders_GUID = LibC::GUID.new("9b1921e1-54ac-11d3-9144-00104ba11c5e")
-  CLSID_IEnumDiscRecorders = "9b1921e1-54ac-11d3-9144-00104ba11c5e"
+  IEnumDiscRecorders_GUID = "9b1921e1-54ac-11d3-9144-00104ba11c5e"
+  IID_IEnumDiscRecorders = LibC::GUID.new(0x9b1921e1_u32, 0x54ac_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
   struct IEnumDiscRecorders
     lpVtbl : IEnumDiscRecordersVTbl*
   end
@@ -2232,8 +2232,8 @@ lib LibWin32
     clone : Proc(IEnumDiscMasterFormats*, IEnumDiscMasterFormats*, HRESULT)
   end
 
-  IEnumDiscMasterFormats_GUID = LibC::GUID.new("ddf445e1-54ba-11d3-9144-00104ba11c5e")
-  CLSID_IEnumDiscMasterFormats = "ddf445e1-54ba-11d3-9144-00104ba11c5e"
+  IEnumDiscMasterFormats_GUID = "ddf445e1-54ba-11d3-9144-00104ba11c5e"
+  IID_IEnumDiscMasterFormats = LibC::GUID.new(0xddf445e1_u32, 0x54ba_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
   struct IEnumDiscMasterFormats
     lpVtbl : IEnumDiscMasterFormatsVTbl*
   end
@@ -2252,8 +2252,8 @@ lib LibWin32
     close_audio_track : Proc(IRedbookDiscMaster*, HRESULT)
   end
 
-  IRedbookDiscMaster_GUID = LibC::GUID.new("e3bc42cd-4e5c-11d3-9144-00104ba11c5e")
-  CLSID_IRedbookDiscMaster = "e3bc42cd-4e5c-11d3-9144-00104ba11c5e"
+  IRedbookDiscMaster_GUID = "e3bc42cd-4e5c-11d3-9144-00104ba11c5e"
+  IID_IRedbookDiscMaster = LibC::GUID.new(0xe3bc42cd_u32, 0x4e5c_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
   struct IRedbookDiscMaster
     lpVtbl : IRedbookDiscMasterVTbl*
   end
@@ -2270,8 +2270,8 @@ lib LibWin32
     set_joliet_properties : Proc(IJolietDiscMaster*, IPropertyStorage, HRESULT)
   end
 
-  IJolietDiscMaster_GUID = LibC::GUID.new("e3bc42ce-4e5c-11d3-9144-00104ba11c5e")
-  CLSID_IJolietDiscMaster = "e3bc42ce-4e5c-11d3-9144-00104ba11c5e"
+  IJolietDiscMaster_GUID = "e3bc42ce-4e5c-11d3-9144-00104ba11c5e"
+  IID_IJolietDiscMaster = LibC::GUID.new(0xe3bc42ce_u32, 0x4e5c_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
   struct IJolietDiscMaster
     lpVtbl : IJolietDiscMasterVTbl*
   end
@@ -2291,8 +2291,8 @@ lib LibWin32
     notify_erase_complete : Proc(IDiscMasterProgressEvents*, HRESULT, HRESULT)
   end
 
-  IDiscMasterProgressEvents_GUID = LibC::GUID.new("ec9e51c1-4e5d-11d3-9144-00104ba11c5e")
-  CLSID_IDiscMasterProgressEvents = "ec9e51c1-4e5d-11d3-9144-00104ba11c5e"
+  IDiscMasterProgressEvents_GUID = "ec9e51c1-4e5d-11d3-9144-00104ba11c5e"
+  IID_IDiscMasterProgressEvents = LibC::GUID.new(0xec9e51c1_u32, 0x4e5d_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
   struct IDiscMasterProgressEvents
     lpVtbl : IDiscMasterProgressEventsVTbl*
   end
@@ -2315,8 +2315,8 @@ lib LibWin32
     close : Proc(IDiscMaster*, HRESULT)
   end
 
-  IDiscMaster_GUID = LibC::GUID.new("520cca62-51a5-11d3-9144-00104ba11c5e")
-  CLSID_IDiscMaster = "520cca62-51a5-11d3-9144-00104ba11c5e"
+  IDiscMaster_GUID = "520cca62-51a5-11d3-9144-00104ba11c5e"
+  IID_IDiscMaster = LibC::GUID.new(0x520cca62_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
   struct IDiscMaster
     lpVtbl : IDiscMasterVTbl*
   end

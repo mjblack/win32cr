@@ -121,8 +121,8 @@ lib LibWin32
     rend : Proc(IDCompositionAnimation*, Float64, Float32, HRESULT)
   end
 
-  IDCompositionAnimation_GUID = LibC::GUID.new("cbfd91d9-51b2-45e4-b3de-d19ccfb863c5")
-  CLSID_IDCompositionAnimation = "cbfd91d9-51b2-45e4-b3de-d19ccfb863c5"
+  IDCompositionAnimation_GUID = "cbfd91d9-51b2-45e4-b3de-d19ccfb863c5"
+  IID_IDCompositionAnimation = LibC::GUID.new(0xcbfd91d9_u32, 0x51b2_u16, 0x45e4_u16, StaticArray[0xb3_u8, 0xde_u8, 0xd1_u8, 0x9c_u8, 0xcf_u8, 0xb8_u8, 0x63_u8, 0xc5_u8])
   struct IDCompositionAnimation
     lpVtbl : IDCompositionAnimationVTbl*
   end
@@ -157,8 +157,8 @@ lib LibWin32
     check_device_state : Proc(IDCompositionDevice*, LibC::BOOL*, HRESULT)
   end
 
-  IDCompositionDevice_GUID = LibC::GUID.new("c37ea93a-e7aa-450d-b16f-9746cb0407f3")
-  CLSID_IDCompositionDevice = "c37ea93a-e7aa-450d-b16f-9746cb0407f3"
+  IDCompositionDevice_GUID = "c37ea93a-e7aa-450d-b16f-9746cb0407f3"
+  IID_IDCompositionDevice = LibC::GUID.new(0xc37ea93a_u32, 0xe7aa_u16, 0x450d_u16, StaticArray[0xb1_u8, 0x6f_u8, 0x97_u8, 0x46_u8, 0xcb_u8, 0x4_u8, 0x7_u8, 0xf3_u8])
   struct IDCompositionDevice
     lpVtbl : IDCompositionDeviceVTbl*
   end
@@ -170,8 +170,8 @@ lib LibWin32
     set_root : Proc(IDCompositionTarget*, IDCompositionVisual, HRESULT)
   end
 
-  IDCompositionTarget_GUID = LibC::GUID.new("eacdd04c-117e-4e17-88f4-d1b12b0e3d89")
-  CLSID_IDCompositionTarget = "eacdd04c-117e-4e17-88f4-d1b12b0e3d89"
+  IDCompositionTarget_GUID = "eacdd04c-117e-4e17-88f4-d1b12b0e3d89"
+  IID_IDCompositionTarget = LibC::GUID.new(0xeacdd04c_u32, 0x117e_u16, 0x4e17_u16, StaticArray[0x88_u8, 0xf4_u8, 0xd1_u8, 0xb1_u8, 0x2b_u8, 0xe_u8, 0x3d_u8, 0x89_u8])
   struct IDCompositionTarget
     lpVtbl : IDCompositionTargetVTbl*
   end
@@ -199,8 +199,8 @@ lib LibWin32
     set_composite_mode : Proc(IDCompositionVisual*, DCOMPOSITION_COMPOSITE_MODE, HRESULT)
   end
 
-  IDCompositionVisual_GUID = LibC::GUID.new("4d93059d-097b-4651-9a60-f0f25116e2f3")
-  CLSID_IDCompositionVisual = "4d93059d-097b-4651-9a60-f0f25116e2f3"
+  IDCompositionVisual_GUID = "4d93059d-097b-4651-9a60-f0f25116e2f3"
+  IID_IDCompositionVisual = LibC::GUID.new(0x4d93059d_u32, 0x97b_u16, 0x4651_u16, StaticArray[0x9a_u8, 0x60_u8, 0xf0_u8, 0xf2_u8, 0x51_u8, 0x16_u8, 0xe2_u8, 0xf3_u8])
   struct IDCompositionVisual
     lpVtbl : IDCompositionVisualVTbl*
   end
@@ -211,8 +211,8 @@ lib LibWin32
     release : Proc(IDCompositionEffect*, UInt32)
   end
 
-  IDCompositionEffect_GUID = LibC::GUID.new("ec81b08f-bfcb-4e8d-b193-a915587999e8")
-  CLSID_IDCompositionEffect = "ec81b08f-bfcb-4e8d-b193-a915587999e8"
+  IDCompositionEffect_GUID = "ec81b08f-bfcb-4e8d-b193-a915587999e8"
+  IID_IDCompositionEffect = LibC::GUID.new(0xec81b08f_u32, 0xbfcb_u16, 0x4e8d_u16, StaticArray[0xb1_u8, 0x93_u8, 0xa9_u8, 0x15_u8, 0x58_u8, 0x79_u8, 0x99_u8, 0xe8_u8])
   struct IDCompositionEffect
     lpVtbl : IDCompositionEffectVTbl*
   end
@@ -223,8 +223,8 @@ lib LibWin32
     release : Proc(IDCompositionTransform3D*, UInt32)
   end
 
-  IDCompositionTransform3D_GUID = LibC::GUID.new("71185722-246b-41f2-aad1-0443f7f4bfc2")
-  CLSID_IDCompositionTransform3D = "71185722-246b-41f2-aad1-0443f7f4bfc2"
+  IDCompositionTransform3D_GUID = "71185722-246b-41f2-aad1-0443f7f4bfc2"
+  IID_IDCompositionTransform3D = LibC::GUID.new(0x71185722_u32, 0x246b_u16, 0x41f2_u16, StaticArray[0xaa_u8, 0xd1_u8, 0x4_u8, 0x43_u8, 0xf7_u8, 0xf4_u8, 0xbf_u8, 0xc2_u8])
   struct IDCompositionTransform3D
     lpVtbl : IDCompositionTransform3DVTbl*
   end
@@ -235,8 +235,8 @@ lib LibWin32
     release : Proc(IDCompositionTransform*, UInt32)
   end
 
-  IDCompositionTransform_GUID = LibC::GUID.new("fd55faa7-37e0-4c20-95d2-9be45bc33f55")
-  CLSID_IDCompositionTransform = "fd55faa7-37e0-4c20-95d2-9be45bc33f55"
+  IDCompositionTransform_GUID = "fd55faa7-37e0-4c20-95d2-9be45bc33f55"
+  IID_IDCompositionTransform = LibC::GUID.new(0xfd55faa7_u32, 0x37e0_u16, 0x4c20_u16, StaticArray[0x95_u8, 0xd2_u8, 0x9b_u8, 0xe4_u8, 0x5b_u8, 0xc3_u8, 0x3f_u8, 0x55_u8])
   struct IDCompositionTransform
     lpVtbl : IDCompositionTransformVTbl*
   end
@@ -251,8 +251,8 @@ lib LibWin32
     set_offset_y2 : Proc(IDCompositionTranslateTransform*, Float32, HRESULT)
   end
 
-  IDCompositionTranslateTransform_GUID = LibC::GUID.new("06791122-c6f0-417d-8323-269e987f5954")
-  CLSID_IDCompositionTranslateTransform = "06791122-c6f0-417d-8323-269e987f5954"
+  IDCompositionTranslateTransform_GUID = "06791122-c6f0-417d-8323-269e987f5954"
+  IID_IDCompositionTranslateTransform = LibC::GUID.new(0x6791122_u32, 0xc6f0_u16, 0x417d_u16, StaticArray[0x83_u8, 0x23_u8, 0x26_u8, 0x9e_u8, 0x98_u8, 0x7f_u8, 0x59_u8, 0x54_u8])
   struct IDCompositionTranslateTransform
     lpVtbl : IDCompositionTranslateTransformVTbl*
   end
@@ -271,8 +271,8 @@ lib LibWin32
     set_center_y2 : Proc(IDCompositionScaleTransform*, Float32, HRESULT)
   end
 
-  IDCompositionScaleTransform_GUID = LibC::GUID.new("71fde914-40ef-45ef-bd51-68b037c339f9")
-  CLSID_IDCompositionScaleTransform = "71fde914-40ef-45ef-bd51-68b037c339f9"
+  IDCompositionScaleTransform_GUID = "71fde914-40ef-45ef-bd51-68b037c339f9"
+  IID_IDCompositionScaleTransform = LibC::GUID.new(0x71fde914_u32, 0x40ef_u16, 0x45ef_u16, StaticArray[0xbd_u8, 0x51_u8, 0x68_u8, 0xb0_u8, 0x37_u8, 0xc3_u8, 0x39_u8, 0xf9_u8])
   struct IDCompositionScaleTransform
     lpVtbl : IDCompositionScaleTransformVTbl*
   end
@@ -289,8 +289,8 @@ lib LibWin32
     set_center_y2 : Proc(IDCompositionRotateTransform*, Float32, HRESULT)
   end
 
-  IDCompositionRotateTransform_GUID = LibC::GUID.new("641ed83c-ae96-46c5-90dc-32774cc5c6d5")
-  CLSID_IDCompositionRotateTransform = "641ed83c-ae96-46c5-90dc-32774cc5c6d5"
+  IDCompositionRotateTransform_GUID = "641ed83c-ae96-46c5-90dc-32774cc5c6d5"
+  IID_IDCompositionRotateTransform = LibC::GUID.new(0x641ed83c_u32, 0xae96_u16, 0x46c5_u16, StaticArray[0x90_u8, 0xdc_u8, 0x32_u8, 0x77_u8, 0x4c_u8, 0xc5_u8, 0xc6_u8, 0xd5_u8])
   struct IDCompositionRotateTransform
     lpVtbl : IDCompositionRotateTransformVTbl*
   end
@@ -309,8 +309,8 @@ lib LibWin32
     set_center_y2 : Proc(IDCompositionSkewTransform*, Float32, HRESULT)
   end
 
-  IDCompositionSkewTransform_GUID = LibC::GUID.new("e57aa735-dcdb-4c72-9c61-0591f58889ee")
-  CLSID_IDCompositionSkewTransform = "e57aa735-dcdb-4c72-9c61-0591f58889ee"
+  IDCompositionSkewTransform_GUID = "e57aa735-dcdb-4c72-9c61-0591f58889ee"
+  IID_IDCompositionSkewTransform = LibC::GUID.new(0xe57aa735_u32, 0xdcdb_u16, 0x4c72_u16, StaticArray[0x9c_u8, 0x61_u8, 0x5_u8, 0x91_u8, 0xf5_u8, 0x88_u8, 0x89_u8, 0xee_u8])
   struct IDCompositionSkewTransform
     lpVtbl : IDCompositionSkewTransformVTbl*
   end
@@ -324,8 +324,8 @@ lib LibWin32
     set_matrix_element2 : Proc(IDCompositionMatrixTransform*, Int32, Int32, Float32, HRESULT)
   end
 
-  IDCompositionMatrixTransform_GUID = LibC::GUID.new("16cdff07-c503-419c-83f2-0965c7af1fa6")
-  CLSID_IDCompositionMatrixTransform = "16cdff07-c503-419c-83f2-0965c7af1fa6"
+  IDCompositionMatrixTransform_GUID = "16cdff07-c503-419c-83f2-0965c7af1fa6"
+  IID_IDCompositionMatrixTransform = LibC::GUID.new(0x16cdff07_u32, 0xc503_u16, 0x419c_u16, StaticArray[0x83_u8, 0xf2_u8, 0x9_u8, 0x65_u8, 0xc7_u8, 0xaf_u8, 0x1f_u8, 0xa6_u8])
   struct IDCompositionMatrixTransform
     lpVtbl : IDCompositionMatrixTransformVTbl*
   end
@@ -339,8 +339,8 @@ lib LibWin32
     set_transform3_d : Proc(IDCompositionEffectGroup*, IDCompositionTransform3D, HRESULT)
   end
 
-  IDCompositionEffectGroup_GUID = LibC::GUID.new("a7929a74-e6b2-4bd6-8b95-4040119ca34d")
-  CLSID_IDCompositionEffectGroup = "a7929a74-e6b2-4bd6-8b95-4040119ca34d"
+  IDCompositionEffectGroup_GUID = "a7929a74-e6b2-4bd6-8b95-4040119ca34d"
+  IID_IDCompositionEffectGroup = LibC::GUID.new(0xa7929a74_u32, 0xe6b2_u16, 0x4bd6_u16, StaticArray[0x8b_u8, 0x95_u8, 0x40_u8, 0x40_u8, 0x11_u8, 0x9c_u8, 0xa3_u8, 0x4d_u8])
   struct IDCompositionEffectGroup
     lpVtbl : IDCompositionEffectGroupVTbl*
   end
@@ -357,8 +357,8 @@ lib LibWin32
     set_offset_z2 : Proc(IDCompositionTranslateTransform3D*, Float32, HRESULT)
   end
 
-  IDCompositionTranslateTransform3D_GUID = LibC::GUID.new("91636d4b-9ba1-4532-aaf7-e3344994d788")
-  CLSID_IDCompositionTranslateTransform3D = "91636d4b-9ba1-4532-aaf7-e3344994d788"
+  IDCompositionTranslateTransform3D_GUID = "91636d4b-9ba1-4532-aaf7-e3344994d788"
+  IID_IDCompositionTranslateTransform3D = LibC::GUID.new(0x91636d4b_u32, 0x9ba1_u16, 0x4532_u16, StaticArray[0xaa_u8, 0xf7_u8, 0xe3_u8, 0x34_u8, 0x49_u8, 0x94_u8, 0xd7_u8, 0x88_u8])
   struct IDCompositionTranslateTransform3D
     lpVtbl : IDCompositionTranslateTransform3DVTbl*
   end
@@ -381,8 +381,8 @@ lib LibWin32
     set_center_z2 : Proc(IDCompositionScaleTransform3D*, Float32, HRESULT)
   end
 
-  IDCompositionScaleTransform3D_GUID = LibC::GUID.new("2a9e9ead-364b-4b15-a7c4-a1997f78b389")
-  CLSID_IDCompositionScaleTransform3D = "2a9e9ead-364b-4b15-a7c4-a1997f78b389"
+  IDCompositionScaleTransform3D_GUID = "2a9e9ead-364b-4b15-a7c4-a1997f78b389"
+  IID_IDCompositionScaleTransform3D = LibC::GUID.new(0x2a9e9ead_u32, 0x364b_u16, 0x4b15_u16, StaticArray[0xa7_u8, 0xc4_u8, 0xa1_u8, 0x99_u8, 0x7f_u8, 0x78_u8, 0xb3_u8, 0x89_u8])
   struct IDCompositionScaleTransform3D
     lpVtbl : IDCompositionScaleTransform3DVTbl*
   end
@@ -407,8 +407,8 @@ lib LibWin32
     set_center_z2 : Proc(IDCompositionRotateTransform3D*, Float32, HRESULT)
   end
 
-  IDCompositionRotateTransform3D_GUID = LibC::GUID.new("d8f5b23f-d429-4a91-b55a-d2f45fd75b18")
-  CLSID_IDCompositionRotateTransform3D = "d8f5b23f-d429-4a91-b55a-d2f45fd75b18"
+  IDCompositionRotateTransform3D_GUID = "d8f5b23f-d429-4a91-b55a-d2f45fd75b18"
+  IID_IDCompositionRotateTransform3D = LibC::GUID.new(0xd8f5b23f_u32, 0xd429_u16, 0x4a91_u16, StaticArray[0xb5_u8, 0x5a_u8, 0xd2_u8, 0xf4_u8, 0x5f_u8, 0xd7_u8, 0x5b_u8, 0x18_u8])
   struct IDCompositionRotateTransform3D
     lpVtbl : IDCompositionRotateTransform3DVTbl*
   end
@@ -422,8 +422,8 @@ lib LibWin32
     set_matrix_element2 : Proc(IDCompositionMatrixTransform3D*, Int32, Int32, Float32, HRESULT)
   end
 
-  IDCompositionMatrixTransform3D_GUID = LibC::GUID.new("4b3363f0-643b-41b7-b6e0-ccf22d34467c")
-  CLSID_IDCompositionMatrixTransform3D = "4b3363f0-643b-41b7-b6e0-ccf22d34467c"
+  IDCompositionMatrixTransform3D_GUID = "4b3363f0-643b-41b7-b6e0-ccf22d34467c"
+  IID_IDCompositionMatrixTransform3D = LibC::GUID.new(0x4b3363f0_u32, 0x643b_u16, 0x41b7_u16, StaticArray[0xb6_u8, 0xe0_u8, 0xcc_u8, 0xf2_u8, 0x2d_u8, 0x34_u8, 0x46_u8, 0x7c_u8])
   struct IDCompositionMatrixTransform3D
     lpVtbl : IDCompositionMatrixTransform3DVTbl*
   end
@@ -434,8 +434,8 @@ lib LibWin32
     release : Proc(IDCompositionClip*, UInt32)
   end
 
-  IDCompositionClip_GUID = LibC::GUID.new("64ac3703-9d3f-45ec-a109-7cac0e7a13a7")
-  CLSID_IDCompositionClip = "64ac3703-9d3f-45ec-a109-7cac0e7a13a7"
+  IDCompositionClip_GUID = "64ac3703-9d3f-45ec-a109-7cac0e7a13a7"
+  IID_IDCompositionClip = LibC::GUID.new(0x64ac3703_u32, 0x9d3f_u16, 0x45ec_u16, StaticArray[0xa1_u8, 0x9_u8, 0x7c_u8, 0xac_u8, 0xe_u8, 0x7a_u8, 0x13_u8, 0xa7_u8])
   struct IDCompositionClip
     lpVtbl : IDCompositionClipVTbl*
   end
@@ -470,8 +470,8 @@ lib LibWin32
     set_bottom_right_radius_y2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
   end
 
-  IDCompositionRectangleClip_GUID = LibC::GUID.new("9842ad7d-d9cf-4908-aed7-48b51da5e7c2")
-  CLSID_IDCompositionRectangleClip = "9842ad7d-d9cf-4908-aed7-48b51da5e7c2"
+  IDCompositionRectangleClip_GUID = "9842ad7d-d9cf-4908-aed7-48b51da5e7c2"
+  IID_IDCompositionRectangleClip = LibC::GUID.new(0x9842ad7d_u32, 0xd9cf_u16, 0x4908_u16, StaticArray[0xae_u8, 0xd7_u8, 0x48_u8, 0xb5_u8, 0x1d_u8, 0xa5_u8, 0xe7_u8, 0xc2_u8])
   struct IDCompositionRectangleClip
     lpVtbl : IDCompositionRectangleClipVTbl*
   end
@@ -487,8 +487,8 @@ lib LibWin32
     scroll : Proc(IDCompositionSurface*, RECT*, RECT*, Int32, Int32, HRESULT)
   end
 
-  IDCompositionSurface_GUID = LibC::GUID.new("bb8a4953-2c99-4f5a-96f5-4819027fa3ac")
-  CLSID_IDCompositionSurface = "bb8a4953-2c99-4f5a-96f5-4819027fa3ac"
+  IDCompositionSurface_GUID = "bb8a4953-2c99-4f5a-96f5-4819027fa3ac"
+  IID_IDCompositionSurface = LibC::GUID.new(0xbb8a4953_u32, 0x2c99_u16, 0x4f5a_u16, StaticArray[0x96_u8, 0xf5_u8, 0x48_u8, 0x19_u8, 0x2_u8, 0x7f_u8, 0xa3_u8, 0xac_u8])
   struct IDCompositionSurface
     lpVtbl : IDCompositionSurfaceVTbl*
   end
@@ -506,8 +506,8 @@ lib LibWin32
     trim : Proc(IDCompositionVirtualSurface*, RECT*, UInt32, HRESULT)
   end
 
-  IDCompositionVirtualSurface_GUID = LibC::GUID.new("ae471c51-5f53-4a24-8d3e-d0c39c30b3f0")
-  CLSID_IDCompositionVirtualSurface = "ae471c51-5f53-4a24-8d3e-d0c39c30b3f0"
+  IDCompositionVirtualSurface_GUID = "ae471c51-5f53-4a24-8d3e-d0c39c30b3f0"
+  IID_IDCompositionVirtualSurface = LibC::GUID.new(0xae471c51_u32, 0x5f53_u16, 0x4a24_u16, StaticArray[0x8d_u8, 0x3e_u8, 0xd0_u8, 0xc3_u8, 0x9c_u8, 0x30_u8, 0xb3_u8, 0xf0_u8])
   struct IDCompositionVirtualSurface
     lpVtbl : IDCompositionVirtualSurfaceVTbl*
   end
@@ -539,8 +539,8 @@ lib LibWin32
     create_animation : Proc(IDCompositionDevice2*, IDCompositionAnimation*, HRESULT)
   end
 
-  IDCompositionDevice2_GUID = LibC::GUID.new("75f6468d-1b8e-447c-9bc6-75fea80b5b25")
-  CLSID_IDCompositionDevice2 = "75f6468d-1b8e-447c-9bc6-75fea80b5b25"
+  IDCompositionDevice2_GUID = "75f6468d-1b8e-447c-9bc6-75fea80b5b25"
+  IID_IDCompositionDevice2 = LibC::GUID.new(0x75f6468d_u32, 0x1b8e_u16, 0x447c_u16, StaticArray[0x9b_u8, 0xc6_u8, 0x75_u8, 0xfe_u8, 0xa8_u8, 0xb_u8, 0x5b_u8, 0x25_u8])
   struct IDCompositionDevice2
     lpVtbl : IDCompositionDevice2VTbl*
   end
@@ -575,8 +575,8 @@ lib LibWin32
     create_surface_from_hwnd : Proc(IDCompositionDesktopDevice*, LibC::HANDLE, IUnknown*, HRESULT)
   end
 
-  IDCompositionDesktopDevice_GUID = LibC::GUID.new("5f4633fe-1e08-4cb8-8c75-ce24333f5602")
-  CLSID_IDCompositionDesktopDevice = "5f4633fe-1e08-4cb8-8c75-ce24333f5602"
+  IDCompositionDesktopDevice_GUID = "5f4633fe-1e08-4cb8-8c75-ce24333f5602"
+  IID_IDCompositionDesktopDevice = LibC::GUID.new(0x5f4633fe_u32, 0x1e08_u16, 0x4cb8_u16, StaticArray[0x8c_u8, 0x75_u8, 0xce_u8, 0x24_u8, 0x33_u8, 0x3f_u8, 0x56_u8, 0x2_u8])
   struct IDCompositionDesktopDevice
     lpVtbl : IDCompositionDesktopDeviceVTbl*
   end
@@ -589,8 +589,8 @@ lib LibWin32
     disable_debug_counters : Proc(IDCompositionDeviceDebug*, HRESULT)
   end
 
-  IDCompositionDeviceDebug_GUID = LibC::GUID.new("a1a3c64a-224f-4a81-9773-4f03a89d3c6c")
-  CLSID_IDCompositionDeviceDebug = "a1a3c64a-224f-4a81-9773-4f03a89d3c6c"
+  IDCompositionDeviceDebug_GUID = "a1a3c64a-224f-4a81-9773-4f03a89d3c6c"
+  IID_IDCompositionDeviceDebug = LibC::GUID.new(0xa1a3c64a_u32, 0x224f_u16, 0x4a81_u16, StaticArray[0x97_u8, 0x73_u8, 0x4f_u8, 0x3_u8, 0xa8_u8, 0x9d_u8, 0x3c_u8, 0x6c_u8])
   struct IDCompositionDeviceDebug
     lpVtbl : IDCompositionDeviceDebugVTbl*
   end
@@ -603,8 +603,8 @@ lib LibWin32
     create_virtual_surface : Proc(IDCompositionSurfaceFactory*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)
   end
 
-  IDCompositionSurfaceFactory_GUID = LibC::GUID.new("e334bc12-3937-4e02-85eb-fcf4eb30d2c8")
-  CLSID_IDCompositionSurfaceFactory = "e334bc12-3937-4e02-85eb-fcf4eb30d2c8"
+  IDCompositionSurfaceFactory_GUID = "e334bc12-3937-4e02-85eb-fcf4eb30d2c8"
+  IID_IDCompositionSurfaceFactory = LibC::GUID.new(0xe334bc12_u32, 0x3937_u16, 0x4e02_u16, StaticArray[0x85_u8, 0xeb_u8, 0xfc_u8, 0xf4_u8, 0xeb_u8, 0x30_u8, 0xd2_u8, 0xc8_u8])
   struct IDCompositionSurfaceFactory
     lpVtbl : IDCompositionSurfaceFactoryVTbl*
   end
@@ -634,8 +634,8 @@ lib LibWin32
     set_back_face_visibility : Proc(IDCompositionVisual2*, DCOMPOSITION_BACKFACE_VISIBILITY, HRESULT)
   end
 
-  IDCompositionVisual2_GUID = LibC::GUID.new("e8de1639-4331-4b26-bc5f-6a321d347a85")
-  CLSID_IDCompositionVisual2 = "e8de1639-4331-4b26-bc5f-6a321d347a85"
+  IDCompositionVisual2_GUID = "e8de1639-4331-4b26-bc5f-6a321d347a85"
+  IID_IDCompositionVisual2 = LibC::GUID.new(0xe8de1639_u32, 0x4331_u16, 0x4b26_u16, StaticArray[0xbc_u8, 0x5f_u8, 0x6a_u8, 0x32_u8, 0x1d_u8, 0x34_u8, 0x7a_u8, 0x85_u8])
   struct IDCompositionVisual2
     lpVtbl : IDCompositionVisual2VTbl*
   end
@@ -669,8 +669,8 @@ lib LibWin32
     disable_redraw_regions : Proc(IDCompositionVisualDebug*, HRESULT)
   end
 
-  IDCompositionVisualDebug_GUID = LibC::GUID.new("fed2b808-5eb4-43a0-aea3-35f65280f91b")
-  CLSID_IDCompositionVisualDebug = "fed2b808-5eb4-43a0-aea3-35f65280f91b"
+  IDCompositionVisualDebug_GUID = "fed2b808-5eb4-43a0-aea3-35f65280f91b"
+  IID_IDCompositionVisualDebug = LibC::GUID.new(0xfed2b808_u32, 0x5eb4_u16, 0x43a0_u16, StaticArray[0xae_u8, 0xa3_u8, 0x35_u8, 0xf6_u8, 0x52_u8, 0x80_u8, 0xf9_u8, 0x1b_u8])
   struct IDCompositionVisualDebug
     lpVtbl : IDCompositionVisualDebugVTbl*
   end
@@ -712,8 +712,8 @@ lib LibWin32
     set_visible : Proc(IDCompositionVisual3*, LibC::BOOL, HRESULT)
   end
 
-  IDCompositionVisual3_GUID = LibC::GUID.new("2775f462-b6c1-4015-b0be-b3e7d6a4976d")
-  CLSID_IDCompositionVisual3 = "2775f462-b6c1-4015-b0be-b3e7d6a4976d"
+  IDCompositionVisual3_GUID = "2775f462-b6c1-4015-b0be-b3e7d6a4976d"
+  IID_IDCompositionVisual3 = LibC::GUID.new(0x2775f462_u32, 0xb6c1_u16, 0x4015_u16, StaticArray[0xb0_u8, 0xbe_u8, 0xb3_u8, 0xe7_u8, 0xd6_u8, 0xa4_u8, 0x97_u8, 0x6d_u8])
   struct IDCompositionVisual3
     lpVtbl : IDCompositionVisual3VTbl*
   end
@@ -758,8 +758,8 @@ lib LibWin32
     create_affine_transform2_d_effect : Proc(IDCompositionDevice3*, IDCompositionAffineTransform2DEffect*, HRESULT)
   end
 
-  IDCompositionDevice3_GUID = LibC::GUID.new("0987cb06-f916-48bf-8d35-ce7641781bd9")
-  CLSID_IDCompositionDevice3 = "0987cb06-f916-48bf-8d35-ce7641781bd9"
+  IDCompositionDevice3_GUID = "0987cb06-f916-48bf-8d35-ce7641781bd9"
+  IID_IDCompositionDevice3 = LibC::GUID.new(0x987cb06_u32, 0xf916_u16, 0x48bf_u16, StaticArray[0x8d_u8, 0x35_u8, 0xce_u8, 0x76_u8, 0x41_u8, 0x78_u8, 0x1b_u8, 0xd9_u8])
   struct IDCompositionDevice3
     lpVtbl : IDCompositionDevice3VTbl*
   end
@@ -771,8 +771,8 @@ lib LibWin32
     set_input : Proc(IDCompositionFilterEffect*, UInt32, IUnknown, UInt32, HRESULT)
   end
 
-  IDCompositionFilterEffect_GUID = LibC::GUID.new("30c421d5-8cb2-4e9f-b133-37be270d4ac2")
-  CLSID_IDCompositionFilterEffect = "30c421d5-8cb2-4e9f-b133-37be270d4ac2"
+  IDCompositionFilterEffect_GUID = "30c421d5-8cb2-4e9f-b133-37be270d4ac2"
+  IID_IDCompositionFilterEffect = LibC::GUID.new(0x30c421d5_u32, 0x8cb2_u16, 0x4e9f_u16, StaticArray[0xb1_u8, 0x33_u8, 0x37_u8, 0xbe_u8, 0x27_u8, 0xd_u8, 0x4a_u8, 0xc2_u8])
   struct IDCompositionFilterEffect
     lpVtbl : IDCompositionFilterEffectVTbl*
   end
@@ -787,8 +787,8 @@ lib LibWin32
     set_border_mode : Proc(IDCompositionGaussianBlurEffect*, D2D1_BORDER_MODE, HRESULT)
   end
 
-  IDCompositionGaussianBlurEffect_GUID = LibC::GUID.new("45d4d0b7-1bd4-454e-8894-2bfa68443033")
-  CLSID_IDCompositionGaussianBlurEffect = "45d4d0b7-1bd4-454e-8894-2bfa68443033"
+  IDCompositionGaussianBlurEffect_GUID = "45d4d0b7-1bd4-454e-8894-2bfa68443033"
+  IID_IDCompositionGaussianBlurEffect = LibC::GUID.new(0x45d4d0b7_u32, 0x1bd4_u16, 0x454e_u16, StaticArray[0x88_u8, 0x94_u8, 0x2b_u8, 0xfa_u8, 0x68_u8, 0x44_u8, 0x30_u8, 0x33_u8])
   struct IDCompositionGaussianBlurEffect
     lpVtbl : IDCompositionGaussianBlurEffectVTbl*
   end
@@ -810,8 +810,8 @@ lib LibWin32
     set_black_point_y2 : Proc(IDCompositionBrightnessEffect*, Float32, HRESULT)
   end
 
-  IDCompositionBrightnessEffect_GUID = LibC::GUID.new("6027496e-cb3a-49ab-934f-d798da4f7da6")
-  CLSID_IDCompositionBrightnessEffect = "6027496e-cb3a-49ab-934f-d798da4f7da6"
+  IDCompositionBrightnessEffect_GUID = "6027496e-cb3a-49ab-934f-d798da4f7da6"
+  IID_IDCompositionBrightnessEffect = LibC::GUID.new(0x6027496e_u32, 0xcb3a_u16, 0x49ab_u16, StaticArray[0x93_u8, 0x4f_u8, 0xd7_u8, 0x98_u8, 0xda_u8, 0x4f_u8, 0x7d_u8, 0xa6_u8])
   struct IDCompositionBrightnessEffect
     lpVtbl : IDCompositionBrightnessEffectVTbl*
   end
@@ -828,8 +828,8 @@ lib LibWin32
     set_clamp_output : Proc(IDCompositionColorMatrixEffect*, LibC::BOOL, HRESULT)
   end
 
-  IDCompositionColorMatrixEffect_GUID = LibC::GUID.new("c1170a22-3ce2-4966-90d4-55408bfc84c4")
-  CLSID_IDCompositionColorMatrixEffect = "c1170a22-3ce2-4966-90d4-55408bfc84c4"
+  IDCompositionColorMatrixEffect_GUID = "c1170a22-3ce2-4966-90d4-55408bfc84c4"
+  IID_IDCompositionColorMatrixEffect = LibC::GUID.new(0xc1170a22_u32, 0x3ce2_u16, 0x4966_u16, StaticArray[0x90_u8, 0xd4_u8, 0x55_u8, 0x40_u8, 0x8b_u8, 0xfc_u8, 0x84_u8, 0xc4_u8])
   struct IDCompositionColorMatrixEffect
     lpVtbl : IDCompositionColorMatrixEffectVTbl*
   end
@@ -852,8 +852,8 @@ lib LibWin32
     set_alpha2 : Proc(IDCompositionShadowEffect*, Float32, HRESULT)
   end
 
-  IDCompositionShadowEffect_GUID = LibC::GUID.new("4ad18ac0-cfd2-4c2f-bb62-96e54fdb6879")
-  CLSID_IDCompositionShadowEffect = "4ad18ac0-cfd2-4c2f-bb62-96e54fdb6879"
+  IDCompositionShadowEffect_GUID = "4ad18ac0-cfd2-4c2f-bb62-96e54fdb6879"
+  IID_IDCompositionShadowEffect = LibC::GUID.new(0x4ad18ac0_u32, 0xcfd2_u16, 0x4c2f_u16, StaticArray[0xbb_u8, 0x62_u8, 0x96_u8, 0xe5_u8, 0x4f_u8, 0xdb_u8, 0x68_u8, 0x79_u8])
   struct IDCompositionShadowEffect
     lpVtbl : IDCompositionShadowEffectVTbl*
   end
@@ -867,8 +867,8 @@ lib LibWin32
     set_angle2 : Proc(IDCompositionHueRotationEffect*, Float32, HRESULT)
   end
 
-  IDCompositionHueRotationEffect_GUID = LibC::GUID.new("6db9f920-0770-4781-b0c6-381912f9d167")
-  CLSID_IDCompositionHueRotationEffect = "6db9f920-0770-4781-b0c6-381912f9d167"
+  IDCompositionHueRotationEffect_GUID = "6db9f920-0770-4781-b0c6-381912f9d167"
+  IID_IDCompositionHueRotationEffect = LibC::GUID.new(0x6db9f920_u32, 0x770_u16, 0x4781_u16, StaticArray[0xb0_u8, 0xc6_u8, 0x38_u8, 0x19_u8, 0x12_u8, 0xf9_u8, 0xd1_u8, 0x67_u8])
   struct IDCompositionHueRotationEffect
     lpVtbl : IDCompositionHueRotationEffectVTbl*
   end
@@ -882,8 +882,8 @@ lib LibWin32
     set_saturation2 : Proc(IDCompositionSaturationEffect*, Float32, HRESULT)
   end
 
-  IDCompositionSaturationEffect_GUID = LibC::GUID.new("a08debda-3258-4fa4-9f16-9174d3fe93b1")
-  CLSID_IDCompositionSaturationEffect = "a08debda-3258-4fa4-9f16-9174d3fe93b1"
+  IDCompositionSaturationEffect_GUID = "a08debda-3258-4fa4-9f16-9174d3fe93b1"
+  IID_IDCompositionSaturationEffect = LibC::GUID.new(0xa08debda_u32, 0x3258_u16, 0x4fa4_u16, StaticArray[0x9f_u8, 0x16_u8, 0x91_u8, 0x74_u8, 0xd3_u8, 0xfe_u8, 0x93_u8, 0xb1_u8])
   struct IDCompositionSaturationEffect
     lpVtbl : IDCompositionSaturationEffectVTbl*
   end
@@ -902,8 +902,8 @@ lib LibWin32
     set_stitchable : Proc(IDCompositionTurbulenceEffect*, LibC::BOOL, HRESULT)
   end
 
-  IDCompositionTurbulenceEffect_GUID = LibC::GUID.new("a6a55bda-c09c-49f3-9193-a41922c89715")
-  CLSID_IDCompositionTurbulenceEffect = "a6a55bda-c09c-49f3-9193-a41922c89715"
+  IDCompositionTurbulenceEffect_GUID = "a6a55bda-c09c-49f3-9193-a41922c89715"
+  IID_IDCompositionTurbulenceEffect = LibC::GUID.new(0xa6a55bda_u32, 0xc09c_u16, 0x49f3_u16, StaticArray[0x91_u8, 0x93_u8, 0xa4_u8, 0x19_u8, 0x22_u8, 0xc8_u8, 0x97_u8, 0x15_u8])
   struct IDCompositionTurbulenceEffect
     lpVtbl : IDCompositionTurbulenceEffectVTbl*
   end
@@ -936,8 +936,8 @@ lib LibWin32
     set_clamp_output : Proc(IDCompositionLinearTransferEffect*, LibC::BOOL, HRESULT)
   end
 
-  IDCompositionLinearTransferEffect_GUID = LibC::GUID.new("4305ee5b-c4a0-4c88-9385-67124e017683")
-  CLSID_IDCompositionLinearTransferEffect = "4305ee5b-c4a0-4c88-9385-67124e017683"
+  IDCompositionLinearTransferEffect_GUID = "4305ee5b-c4a0-4c88-9385-67124e017683"
+  IID_IDCompositionLinearTransferEffect = LibC::GUID.new(0x4305ee5b_u32, 0xc4a0_u16, 0x4c88_u16, StaticArray[0x93_u8, 0x85_u8, 0x67_u8, 0x12_u8, 0x4e_u8, 0x1_u8, 0x76_u8, 0x83_u8])
   struct IDCompositionLinearTransferEffect
     lpVtbl : IDCompositionLinearTransferEffectVTbl*
   end
@@ -966,8 +966,8 @@ lib LibWin32
     set_alpha_table_value2 : Proc(IDCompositionTableTransferEffect*, UInt32, Float32, HRESULT)
   end
 
-  IDCompositionTableTransferEffect_GUID = LibC::GUID.new("9b7e82e2-69c5-4eb4-a5f5-a7033f5132cd")
-  CLSID_IDCompositionTableTransferEffect = "9b7e82e2-69c5-4eb4-a5f5-a7033f5132cd"
+  IDCompositionTableTransferEffect_GUID = "9b7e82e2-69c5-4eb4-a5f5-a7033f5132cd"
+  IID_IDCompositionTableTransferEffect = LibC::GUID.new(0x9b7e82e2_u32, 0x69c5_u16, 0x4eb4_u16, StaticArray[0xa5_u8, 0xf5_u8, 0xa7_u8, 0x3_u8, 0x3f_u8, 0x51_u8, 0x32_u8, 0xcd_u8])
   struct IDCompositionTableTransferEffect
     lpVtbl : IDCompositionTableTransferEffectVTbl*
   end
@@ -980,8 +980,8 @@ lib LibWin32
     set_mode : Proc(IDCompositionCompositeEffect*, D2D1_COMPOSITE_MODE, HRESULT)
   end
 
-  IDCompositionCompositeEffect_GUID = LibC::GUID.new("576616c0-a231-494d-a38d-00fd5ec4db46")
-  CLSID_IDCompositionCompositeEffect = "576616c0-a231-494d-a38d-00fd5ec4db46"
+  IDCompositionCompositeEffect_GUID = "576616c0-a231-494d-a38d-00fd5ec4db46"
+  IID_IDCompositionCompositeEffect = LibC::GUID.new(0x576616c0_u32, 0xa231_u16, 0x494d_u16, StaticArray[0xa3_u8, 0x8d_u8, 0x0_u8, 0xfd_u8, 0x5e_u8, 0xc4_u8, 0xdb_u8, 0x46_u8])
   struct IDCompositionCompositeEffect
     lpVtbl : IDCompositionCompositeEffectVTbl*
   end
@@ -994,8 +994,8 @@ lib LibWin32
     set_mode : Proc(IDCompositionBlendEffect*, D2D1_BLEND_MODE, HRESULT)
   end
 
-  IDCompositionBlendEffect_GUID = LibC::GUID.new("33ecdc0a-578a-4a11-9c14-0cb90517f9c5")
-  CLSID_IDCompositionBlendEffect = "33ecdc0a-578a-4a11-9c14-0cb90517f9c5"
+  IDCompositionBlendEffect_GUID = "33ecdc0a-578a-4a11-9c14-0cb90517f9c5"
+  IID_IDCompositionBlendEffect = LibC::GUID.new(0x33ecdc0a_u32, 0x578a_u16, 0x4a11_u16, StaticArray[0x9c_u8, 0x14_u8, 0xc_u8, 0xb9_u8, 0x5_u8, 0x17_u8, 0xf9_u8, 0xc5_u8])
   struct IDCompositionBlendEffect
     lpVtbl : IDCompositionBlendEffectVTbl*
   end
@@ -1017,8 +1017,8 @@ lib LibWin32
     set_coefficient42 : Proc(IDCompositionArithmeticCompositeEffect*, Float32, HRESULT)
   end
 
-  IDCompositionArithmeticCompositeEffect_GUID = LibC::GUID.new("3b67dfa8-e3dd-4e61-b640-46c2f3d739dc")
-  CLSID_IDCompositionArithmeticCompositeEffect = "3b67dfa8-e3dd-4e61-b640-46c2f3d739dc"
+  IDCompositionArithmeticCompositeEffect_GUID = "3b67dfa8-e3dd-4e61-b640-46c2f3d739dc"
+  IID_IDCompositionArithmeticCompositeEffect = LibC::GUID.new(0x3b67dfa8_u32, 0xe3dd_u16, 0x4e61_u16, StaticArray[0xb6_u8, 0x40_u8, 0x46_u8, 0xc2_u8, 0xf3_u8, 0xd7_u8, 0x39_u8, 0xdc_u8])
   struct IDCompositionArithmeticCompositeEffect
     lpVtbl : IDCompositionArithmeticCompositeEffectVTbl*
   end
@@ -1037,8 +1037,8 @@ lib LibWin32
     set_sharpness2 : Proc(IDCompositionAffineTransform2DEffect*, Float32, HRESULT)
   end
 
-  IDCompositionAffineTransform2DEffect_GUID = LibC::GUID.new("0b74b9e8-cdd6-492f-bbbc-5ed32157026d")
-  CLSID_IDCompositionAffineTransform2DEffect = "0b74b9e8-cdd6-492f-bbbc-5ed32157026d"
+  IDCompositionAffineTransform2DEffect_GUID = "0b74b9e8-cdd6-492f-bbbc-5ed32157026d"
+  IID_IDCompositionAffineTransform2DEffect = LibC::GUID.new(0xb74b9e8_u32, 0xcdd6_u16, 0x492f_u16, StaticArray[0xbb_u8, 0xbc_u8, 0x5e_u8, 0xd3_u8, 0x21_u8, 0x57_u8, 0x2_u8, 0x6d_u8])
   struct IDCompositionAffineTransform2DEffect
     lpVtbl : IDCompositionAffineTransform2DEffectVTbl*
   end
@@ -1053,8 +1053,8 @@ lib LibWin32
     start_new_trail : Proc(IDCompositionDelegatedInkTrail*, D2D1_COLOR_F*, HRESULT)
   end
 
-  IDCompositionDelegatedInkTrail_GUID = LibC::GUID.new("c2448e9b-547d-4057-8cf5-8144ede1c2da")
-  CLSID_IDCompositionDelegatedInkTrail = "c2448e9b-547d-4057-8cf5-8144ede1c2da"
+  IDCompositionDelegatedInkTrail_GUID = "c2448e9b-547d-4057-8cf5-8144ede1c2da"
+  IID_IDCompositionDelegatedInkTrail = LibC::GUID.new(0xc2448e9b_u32, 0x547d_u16, 0x4057_u16, StaticArray[0x8c_u8, 0xf5_u8, 0x81_u8, 0x44_u8, 0xed_u8, 0xe1_u8, 0xc2_u8, 0xda_u8])
   struct IDCompositionDelegatedInkTrail
     lpVtbl : IDCompositionDelegatedInkTrailVTbl*
   end
@@ -1067,8 +1067,8 @@ lib LibWin32
     create_delegated_ink_trail_for_swap_chain : Proc(IDCompositionInkTrailDevice*, IUnknown, IDCompositionDelegatedInkTrail*, HRESULT)
   end
 
-  IDCompositionInkTrailDevice_GUID = LibC::GUID.new("df0c7cec-cdeb-4d4a-b91c-721bf22f4e6c")
-  CLSID_IDCompositionInkTrailDevice = "df0c7cec-cdeb-4d4a-b91c-721bf22f4e6c"
+  IDCompositionInkTrailDevice_GUID = "df0c7cec-cdeb-4d4a-b91c-721bf22f4e6c"
+  IID_IDCompositionInkTrailDevice = LibC::GUID.new(0xdf0c7cec_u32, 0xcdeb_u16, 0x4d4a_u16, StaticArray[0xb9_u8, 0x1c_u8, 0x72_u8, 0x1b_u8, 0xf2_u8, 0x2f_u8, 0x4e_u8, 0x6c_u8])
   struct IDCompositionInkTrailDevice
     lpVtbl : IDCompositionInkTrailDeviceVTbl*
   end

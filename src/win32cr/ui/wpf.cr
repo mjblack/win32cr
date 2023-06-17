@@ -62,8 +62,8 @@ lib LibWin32
     get_format : Proc(IMILBitmapEffectConnectorInfo*, UInt32, Guid*, HRESULT)
   end
 
-  IMILBitmapEffectConnectorInfo_GUID = LibC::GUID.new("f66d2e4b-b46b-42fc-859e-3da0ecdb3c43")
-  CLSID_IMILBitmapEffectConnectorInfo = "f66d2e4b-b46b-42fc-859e-3da0ecdb3c43"
+  IMILBitmapEffectConnectorInfo_GUID = "f66d2e4b-b46b-42fc-859e-3da0ecdb3c43"
+  IID_IMILBitmapEffectConnectorInfo = LibC::GUID.new(0xf66d2e4b_u32, 0xb46b_u16, 0x42fc_u16, StaticArray[0x85_u8, 0x9e_u8, 0x3d_u8, 0xa0_u8, 0xec_u8, 0xdb_u8, 0x3c_u8, 0x43_u8])
   struct IMILBitmapEffectConnectorInfo
     lpVtbl : IMILBitmapEffectConnectorInfoVTbl*
   end
@@ -78,8 +78,8 @@ lib LibWin32
     get_output_connector_info : Proc(IMILBitmapEffectConnectionsInfo*, UInt32, IMILBitmapEffectConnectorInfo*, HRESULT)
   end
 
-  IMILBitmapEffectConnectionsInfo_GUID = LibC::GUID.new("476b538a-c765-4237-ba4a-d6a880ff0cfc")
-  CLSID_IMILBitmapEffectConnectionsInfo = "476b538a-c765-4237-ba4a-d6a880ff0cfc"
+  IMILBitmapEffectConnectionsInfo_GUID = "476b538a-c765-4237-ba4a-d6a880ff0cfc"
+  IID_IMILBitmapEffectConnectionsInfo = LibC::GUID.new(0x476b538a_u32, 0xc765_u16, 0x4237_u16, StaticArray[0xba_u8, 0x4a_u8, 0xd6_u8, 0xa8_u8, 0x80_u8, 0xff_u8, 0xc_u8, 0xfc_u8])
   struct IMILBitmapEffectConnectionsInfo
     lpVtbl : IMILBitmapEffectConnectionsInfoVTbl*
   end
@@ -92,8 +92,8 @@ lib LibWin32
     get_output_connector : Proc(IMILBitmapEffectConnections*, UInt32, IMILBitmapEffectOutputConnector*, HRESULT)
   end
 
-  IMILBitmapEffectConnections_GUID = LibC::GUID.new("c2b5d861-9b1a-4374-89b0-dec4874d6a81")
-  CLSID_IMILBitmapEffectConnections = "c2b5d861-9b1a-4374-89b0-dec4874d6a81"
+  IMILBitmapEffectConnections_GUID = "c2b5d861-9b1a-4374-89b0-dec4874d6a81"
+  IID_IMILBitmapEffectConnections = LibC::GUID.new(0xc2b5d861_u32, 0x9b1a_u16, 0x4374_u16, StaticArray[0x89_u8, 0xb0_u8, 0xde_u8, 0xc4_u8, 0x87_u8, 0x4d_u8, 0x6a_u8, 0x81_u8])
   struct IMILBitmapEffectConnections
     lpVtbl : IMILBitmapEffectConnectionsVTbl*
   end
@@ -107,8 +107,8 @@ lib LibWin32
     set_input_source : Proc(IMILBitmapEffect*, UInt32, IWICBitmapSource, HRESULT)
   end
 
-  IMILBitmapEffect_GUID = LibC::GUID.new("8a6ff321-c944-4a1b-9944-9954af301258")
-  CLSID_IMILBitmapEffect = "8a6ff321-c944-4a1b-9944-9954af301258"
+  IMILBitmapEffect_GUID = "8a6ff321-c944-4a1b-9944-9954af301258"
+  IID_IMILBitmapEffect = LibC::GUID.new(0x8a6ff321_u32, 0xc944_u16, 0x4a1b_u16, StaticArray[0x99_u8, 0x44_u8, 0x99_u8, 0x54_u8, 0xaf_u8, 0x30_u8, 0x12_u8, 0x58_u8])
   struct IMILBitmapEffect
     lpVtbl : IMILBitmapEffectVTbl*
   end
@@ -126,8 +126,8 @@ lib LibWin32
     initialize : Proc(IMILBitmapEffectImpl*, IUnknown, HRESULT)
   end
 
-  IMILBitmapEffectImpl_GUID = LibC::GUID.new("cc2468f2-9936-47be-b4af-06b5df5dbcbb")
-  CLSID_IMILBitmapEffectImpl = "cc2468f2-9936-47be-b4af-06b5df5dbcbb"
+  IMILBitmapEffectImpl_GUID = "cc2468f2-9936-47be-b4af-06b5df5dbcbb"
+  IID_IMILBitmapEffectImpl = LibC::GUID.new(0xcc2468f2_u32, 0x9936_u16, 0x47be_u16, StaticArray[0xb4_u8, 0xaf_u8, 0x6_u8, 0xb5_u8, 0xdf_u8, 0x5d_u8, 0xbc_u8, 0xbb_u8])
   struct IMILBitmapEffectImpl
     lpVtbl : IMILBitmapEffectImplVTbl*
   end
@@ -141,8 +141,8 @@ lib LibWin32
     add : Proc(IMILBitmapEffectGroup*, IMILBitmapEffect, HRESULT)
   end
 
-  IMILBitmapEffectGroup_GUID = LibC::GUID.new("2f952360-698a-4ac6-81a1-bcfdf08eb8e8")
-  CLSID_IMILBitmapEffectGroup = "2f952360-698a-4ac6-81a1-bcfdf08eb8e8"
+  IMILBitmapEffectGroup_GUID = "2f952360-698a-4ac6-81a1-bcfdf08eb8e8"
+  IID_IMILBitmapEffectGroup = LibC::GUID.new(0x2f952360_u32, 0x698a_u16, 0x4ac6_u16, StaticArray[0x81_u8, 0xa1_u8, 0xbc_u8, 0xfd_u8, 0xf0_u8, 0x8e_u8, 0xb8_u8, 0xe8_u8])
   struct IMILBitmapEffectGroup
     lpVtbl : IMILBitmapEffectGroupVTbl*
   end
@@ -156,8 +156,8 @@ lib LibWin32
     get_children : Proc(IMILBitmapEffectGroupImpl*, IMILBitmapEffects*, HRESULT)
   end
 
-  IMILBitmapEffectGroupImpl_GUID = LibC::GUID.new("78fed518-1cfc-4807-8b85-6b6e51398f62")
-  CLSID_IMILBitmapEffectGroupImpl = "78fed518-1cfc-4807-8b85-6b6e51398f62"
+  IMILBitmapEffectGroupImpl_GUID = "78fed518-1cfc-4807-8b85-6b6e51398f62"
+  IID_IMILBitmapEffectGroupImpl = LibC::GUID.new(0x78fed518_u32, 0x1cfc_u16, 0x4807_u16, StaticArray[0x8b_u8, 0x85_u8, 0x6b_u8, 0x6e_u8, 0x51_u8, 0x39_u8, 0x8f_u8, 0x62_u8])
   struct IMILBitmapEffectGroupImpl
     lpVtbl : IMILBitmapEffectGroupImplVTbl*
   end
@@ -176,8 +176,8 @@ lib LibWin32
     set_region_of_interest : Proc(IMILBitmapEffectRenderContext*, MilRectD*, HRESULT)
   end
 
-  IMILBitmapEffectRenderContext_GUID = LibC::GUID.new("12a2ec7e-2d33-44b2-b334-1abb7846e390")
-  CLSID_IMILBitmapEffectRenderContext = "12a2ec7e-2d33-44b2-b334-1abb7846e390"
+  IMILBitmapEffectRenderContext_GUID = "12a2ec7e-2d33-44b2-b334-1abb7846e390"
+  IID_IMILBitmapEffectRenderContext = LibC::GUID.new(0x12a2ec7e_u32, 0x2d33_u16, 0x44b2_u16, StaticArray[0xb3_u8, 0x34_u8, 0x1a_u8, 0xbb_u8, 0x78_u8, 0x46_u8, 0xe3_u8, 0x90_u8])
   struct IMILBitmapEffectRenderContext
     lpVtbl : IMILBitmapEffectRenderContextVTbl*
   end
@@ -193,8 +193,8 @@ lib LibWin32
     update_output_bounds : Proc(IMILBitmapEffectRenderContextImpl*, MilRectD*, HRESULT)
   end
 
-  IMILBitmapEffectRenderContextImpl_GUID = LibC::GUID.new("4d25accb-797d-4fd2-b128-dffeff84fcc3")
-  CLSID_IMILBitmapEffectRenderContextImpl = "4d25accb-797d-4fd2-b128-dffeff84fcc3"
+  IMILBitmapEffectRenderContextImpl_GUID = "4d25accb-797d-4fd2-b128-dffeff84fcc3"
+  IID_IMILBitmapEffectRenderContextImpl = LibC::GUID.new(0x4d25accb_u32, 0x797d_u16, 0x4fd2_u16, StaticArray[0xb1_u8, 0x28_u8, 0xdf_u8, 0xfe_u8, 0xff_u8, 0x84_u8, 0xfc_u8, 0xc3_u8])
   struct IMILBitmapEffectRenderContextImpl
     lpVtbl : IMILBitmapEffectRenderContextImplVTbl*
   end
@@ -208,8 +208,8 @@ lib LibWin32
     create_effect_outer : Proc(IMILBitmapEffectFactory*, IMILBitmapEffect*, HRESULT)
   end
 
-  IMILBitmapEffectFactory_GUID = LibC::GUID.new("33a9df34-a403-4ec7-b07e-bc0682370845")
-  CLSID_IMILBitmapEffectFactory = "33a9df34-a403-4ec7-b07e-bc0682370845"
+  IMILBitmapEffectFactory_GUID = "33a9df34-a403-4ec7-b07e-bc0682370845"
+  IID_IMILBitmapEffectFactory = LibC::GUID.new(0x33a9df34_u32, 0xa403_u16, 0x4ec7_u16, StaticArray[0xb0_u8, 0x7e_u8, 0xbc_u8, 0x6_u8, 0x82_u8, 0x37_u8, 0x8_u8, 0x45_u8])
   struct IMILBitmapEffectFactory
     lpVtbl : IMILBitmapEffectFactoryVTbl*
   end
@@ -226,8 +226,8 @@ lib LibWin32
     get_affine_matrix : Proc(IMILBitmapEffectPrimitive*, UInt32, MilMatrix3x2D*, HRESULT)
   end
 
-  IMILBitmapEffectPrimitive_GUID = LibC::GUID.new("67e31025-3091-4dfc-98d6-dd494551461d")
-  CLSID_IMILBitmapEffectPrimitive = "67e31025-3091-4dfc-98d6-dd494551461d"
+  IMILBitmapEffectPrimitive_GUID = "67e31025-3091-4dfc-98d6-dd494551461d"
+  IID_IMILBitmapEffectPrimitive = LibC::GUID.new(0x67e31025_u32, 0x3091_u16, 0x4dfc_u16, StaticArray[0x98_u8, 0xd6_u8, 0xdd_u8, 0x49_u8, 0x45_u8, 0x51_u8, 0x46_u8, 0x1d_u8])
   struct IMILBitmapEffectPrimitive
     lpVtbl : IMILBitmapEffectPrimitiveVTbl*
   end
@@ -240,8 +240,8 @@ lib LibWin32
     is_volatile : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32, Int16*, HRESULT)
   end
 
-  IMILBitmapEffectPrimitiveImpl_GUID = LibC::GUID.new("ce41e00b-efa6-44e7-b007-dd042e3ae126")
-  CLSID_IMILBitmapEffectPrimitiveImpl = "ce41e00b-efa6-44e7-b007-dd042e3ae126"
+  IMILBitmapEffectPrimitiveImpl_GUID = "ce41e00b-efa6-44e7-b007-dd042e3ae126"
+  IID_IMILBitmapEffectPrimitiveImpl = LibC::GUID.new(0xce41e00b_u32, 0xefa6_u16, 0x44e7_u16, StaticArray[0xb0_u8, 0x7_u8, 0xdd_u8, 0x4_u8, 0x2e_u8, 0x3a_u8, 0xe1_u8, 0x26_u8])
   struct IMILBitmapEffectPrimitiveImpl
     lpVtbl : IMILBitmapEffectPrimitiveImplVTbl*
   end
@@ -256,8 +256,8 @@ lib LibWin32
     get_count : Proc(IMILBitmapEffects*, UInt32*, HRESULT)
   end
 
-  IMILBitmapEffects_GUID = LibC::GUID.new("51ac3dce-67c5-448b-9180-ad3eabddd5dd")
-  CLSID_IMILBitmapEffects = "51ac3dce-67c5-448b-9180-ad3eabddd5dd"
+  IMILBitmapEffects_GUID = "51ac3dce-67c5-448b-9180-ad3eabddd5dd"
+  IID_IMILBitmapEffects = LibC::GUID.new(0x51ac3dce_u32, 0x67c5_u16, 0x448b_u16, StaticArray[0x91_u8, 0x80_u8, 0xad_u8, 0x3e_u8, 0xab_u8, 0xdd_u8, 0xd5_u8, 0xdd_u8])
   struct IMILBitmapEffects
     lpVtbl : IMILBitmapEffectsVTbl*
   end
@@ -274,8 +274,8 @@ lib LibWin32
     get_bitmap_effect : Proc(IMILBitmapEffectConnector*, IMILBitmapEffect*, HRESULT)
   end
 
-  IMILBitmapEffectConnector_GUID = LibC::GUID.new("f59567b3-76c1-4d47-ba1e-79f955e350ef")
-  CLSID_IMILBitmapEffectConnector = "f59567b3-76c1-4d47-ba1e-79f955e350ef"
+  IMILBitmapEffectConnector_GUID = "f59567b3-76c1-4d47-ba1e-79f955e350ef"
+  IID_IMILBitmapEffectConnector = LibC::GUID.new(0xf59567b3_u32, 0x76c1_u16, 0x4d47_u16, StaticArray[0xba_u8, 0x1e_u8, 0x79_u8, 0xf9_u8, 0x55_u8, 0xe3_u8, 0x50_u8, 0xef_u8])
   struct IMILBitmapEffectConnector
     lpVtbl : IMILBitmapEffectConnectorVTbl*
   end
@@ -294,8 +294,8 @@ lib LibWin32
     get_connection : Proc(IMILBitmapEffectInputConnector*, IMILBitmapEffectOutputConnector*, HRESULT)
   end
 
-  IMILBitmapEffectInputConnector_GUID = LibC::GUID.new("a9b4ecaa-7a3c-45e7-8573-f4b81b60dd6c")
-  CLSID_IMILBitmapEffectInputConnector = "a9b4ecaa-7a3c-45e7-8573-f4b81b60dd6c"
+  IMILBitmapEffectInputConnector_GUID = "a9b4ecaa-7a3c-45e7-8573-f4b81b60dd6c"
+  IID_IMILBitmapEffectInputConnector = LibC::GUID.new(0xa9b4ecaa_u32, 0x7a3c_u16, 0x45e7_u16, StaticArray[0x85_u8, 0x73_u8, 0xf4_u8, 0xb8_u8, 0x1b_u8, 0x60_u8, 0xdd_u8, 0x6c_u8])
   struct IMILBitmapEffectInputConnector
     lpVtbl : IMILBitmapEffectInputConnectorVTbl*
   end
@@ -314,8 +314,8 @@ lib LibWin32
     get_connection : Proc(IMILBitmapEffectOutputConnector*, UInt32, IMILBitmapEffectInputConnector*, HRESULT)
   end
 
-  IMILBitmapEffectOutputConnector_GUID = LibC::GUID.new("92957aad-841b-4866-82ec-8752468b07fd")
-  CLSID_IMILBitmapEffectOutputConnector = "92957aad-841b-4866-82ec-8752468b07fd"
+  IMILBitmapEffectOutputConnector_GUID = "92957aad-841b-4866-82ec-8752468b07fd"
+  IID_IMILBitmapEffectOutputConnector = LibC::GUID.new(0x92957aad_u32, 0x841b_u16, 0x4866_u16, StaticArray[0x82_u8, 0xec_u8, 0x87_u8, 0x52_u8, 0x46_u8, 0x8b_u8, 0x7_u8, 0xfd_u8])
   struct IMILBitmapEffectOutputConnector
     lpVtbl : IMILBitmapEffectOutputConnectorVTbl*
   end
@@ -328,8 +328,8 @@ lib LibWin32
     remove_back_link : Proc(IMILBitmapEffectOutputConnectorImpl*, IMILBitmapEffectInputConnector, HRESULT)
   end
 
-  IMILBitmapEffectOutputConnectorImpl_GUID = LibC::GUID.new("21fae777-8b39-4bfa-9f2d-f3941ed36913")
-  CLSID_IMILBitmapEffectOutputConnectorImpl = "21fae777-8b39-4bfa-9f2d-f3941ed36913"
+  IMILBitmapEffectOutputConnectorImpl_GUID = "21fae777-8b39-4bfa-9f2d-f3941ed36913"
+  IID_IMILBitmapEffectOutputConnectorImpl = LibC::GUID.new(0x21fae777_u32, 0x8b39_u16, 0x4bfa_u16, StaticArray[0x9f_u8, 0x2d_u8, 0xf3_u8, 0x94_u8, 0x1e_u8, 0xd3_u8, 0x69_u8, 0x13_u8])
   struct IMILBitmapEffectOutputConnectorImpl
     lpVtbl : IMILBitmapEffectOutputConnectorImplVTbl*
   end
@@ -341,8 +341,8 @@ lib LibWin32
     get_input_connector : Proc(IMILBitmapEffectInteriorInputConnector*, IMILBitmapEffectInputConnector*, HRESULT)
   end
 
-  IMILBitmapEffectInteriorInputConnector_GUID = LibC::GUID.new("20287e9e-86a2-4e15-953d-eb1438a5b842")
-  CLSID_IMILBitmapEffectInteriorInputConnector = "20287e9e-86a2-4e15-953d-eb1438a5b842"
+  IMILBitmapEffectInteriorInputConnector_GUID = "20287e9e-86a2-4e15-953d-eb1438a5b842"
+  IID_IMILBitmapEffectInteriorInputConnector = LibC::GUID.new(0x20287e9e_u32, 0x86a2_u16, 0x4e15_u16, StaticArray[0x95_u8, 0x3d_u8, 0xeb_u8, 0x14_u8, 0x38_u8, 0xa5_u8, 0xb8_u8, 0x42_u8])
   struct IMILBitmapEffectInteriorInputConnector
     lpVtbl : IMILBitmapEffectInteriorInputConnectorVTbl*
   end
@@ -354,8 +354,8 @@ lib LibWin32
     get_output_connector : Proc(IMILBitmapEffectInteriorOutputConnector*, IMILBitmapEffectOutputConnector*, HRESULT)
   end
 
-  IMILBitmapEffectInteriorOutputConnector_GUID = LibC::GUID.new("00bbb6dc-acc9-4bfc-b344-8bee383dfefa")
-  CLSID_IMILBitmapEffectInteriorOutputConnector = "00bbb6dc-acc9-4bfc-b344-8bee383dfefa"
+  IMILBitmapEffectInteriorOutputConnector_GUID = "00bbb6dc-acc9-4bfc-b344-8bee383dfefa"
+  IID_IMILBitmapEffectInteriorOutputConnector = LibC::GUID.new(0xbbb6dc_u32, 0xacc9_u16, 0x4bfc_u16, StaticArray[0xb3_u8, 0x44_u8, 0x8b_u8, 0xee_u8, 0x38_u8, 0x3d_u8, 0xfe_u8, 0xfa_u8])
   struct IMILBitmapEffectInteriorOutputConnector
     lpVtbl : IMILBitmapEffectInteriorOutputConnectorVTbl*
   end
@@ -368,8 +368,8 @@ lib LibWin32
     dirty_region : Proc(IMILBitmapEffectEvents*, IMILBitmapEffect, MilRectD*, HRESULT)
   end
 
-  IMILBitmapEffectEvents_GUID = LibC::GUID.new("2e880dd8-f8ce-457b-8199-d60bb3d7ef98")
-  CLSID_IMILBitmapEffectEvents = "2e880dd8-f8ce-457b-8199-d60bb3d7ef98"
+  IMILBitmapEffectEvents_GUID = "2e880dd8-f8ce-457b-8199-d60bb3d7ef98"
+  IID_IMILBitmapEffectEvents = LibC::GUID.new(0x2e880dd8_u32, 0xf8ce_u16, 0x457b_u16, StaticArray[0x81_u8, 0x99_u8, 0xd6_u8, 0xb_u8, 0xb3_u8, 0xd7_u8, 0xef_u8, 0x98_u8])
   struct IMILBitmapEffectEvents
     lpVtbl : IMILBitmapEffectEventsVTbl*
   end

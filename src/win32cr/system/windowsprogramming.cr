@@ -594,10 +594,10 @@ lib LibWin32
   DELETE_BROWSING_HISTORY_PASSWORDS = 16_u32
   DELETE_BROWSING_HISTORY_PRESERVEFAVORITES = 32_u32
   DELETE_BROWSING_HISTORY_DOWNLOADHISTORY = 64_u32
-  CameraUIControl = LibC::GUID.new(0x16d5a2be_u32, 0xb1c5_u16, 0x47b3_u16, StaticArray[0x8e_u8, 0xae_u8, 0xcc_u8, 0xbc_u8, 0xf4_u8, 0x52_u8, 0xc7_u8, 0xe8_u8])
-  EditionUpgradeHelper = LibC::GUID.new(0x1776df3_u32, 0xb9af_u16, 0x4e50_u16, StaticArray[0x9b_u8, 0x1c_u8, 0x56_u8, 0xe9_u8, 0x31_u8, 0x16_u8, 0xd7_u8, 0x4_u8])
-  EditionUpgradeBroker = LibC::GUID.new(0xc4270827_u32, 0x4f39_u16, 0x45df_u16, StaticArray[0x92_u8, 0x88_u8, 0x12_u8, 0xff_u8, 0x6b_u8, 0x85_u8, 0xa9_u8, 0x21_u8])
-  DefaultBrowserSyncSettings = LibC::GUID.new(0x3ac83423_u32, 0x3112_u16, 0x4aa6_u16, StaticArray[0x9b_u8, 0x5b_u8, 0x1f_u8, 0xeb_u8, 0x23_u8, 0xd0_u8, 0xc5_u8, 0xf9_u8])
+  CLSID_CameraUIControl = LibC::GUID.new(0x16d5a2be_u32, 0xb1c5_u16, 0x47b3_u16, StaticArray[0x8e_u8, 0xae_u8, 0xcc_u8, 0xbc_u8, 0xf4_u8, 0x52_u8, 0xc7_u8, 0xe8_u8])
+  CLSID_EditionUpgradeHelper = LibC::GUID.new(0x1776df3_u32, 0xb9af_u16, 0x4e50_u16, StaticArray[0x9b_u8, 0x1c_u8, 0x56_u8, 0xe9_u8, 0x31_u8, 0x16_u8, 0xd7_u8, 0x4_u8])
+  CLSID_EditionUpgradeBroker = LibC::GUID.new(0xc4270827_u32, 0x4f39_u16, 0x45df_u16, StaticArray[0x92_u8, 0x88_u8, 0x12_u8, 0xff_u8, 0x6b_u8, 0x85_u8, 0xa9_u8, 0x21_u8])
+  CLSID_DefaultBrowserSyncSettings = LibC::GUID.new(0x3ac83423_u32, 0x3112_u16, 0x4aa6_u16, StaticArray[0x9b_u8, 0x5b_u8, 0x1f_u8, 0xeb_u8, 0x23_u8, 0xd0_u8, 0xc5_u8, 0xf9_u8])
 
   type D3DHAL_CALLBACKS = Void
   type D3DHAL_GLOBALDRIVERDATA = Void
@@ -1311,8 +1311,8 @@ lib LibWin32
     on_closed : Proc(ICameraUIControlEventCallback*, Void)
   end
 
-  ICameraUIControlEventCallback_GUID = LibC::GUID.new("1bfa0c2c-fbcd-4776-bda4-88bf974e74f4")
-  CLSID_ICameraUIControlEventCallback = "1bfa0c2c-fbcd-4776-bda4-88bf974e74f4"
+  ICameraUIControlEventCallback_GUID = "1bfa0c2c-fbcd-4776-bda4-88bf974e74f4"
+  IID_ICameraUIControlEventCallback = LibC::GUID.new(0x1bfa0c2c_u32, 0xfbcd_u16, 0x4776_u16, StaticArray[0xbd_u8, 0xa4_u8, 0x88_u8, 0xbf_u8, 0x97_u8, 0x4e_u8, 0x74_u8, 0xf4_u8])
   struct ICameraUIControlEventCallback
     lpVtbl : ICameraUIControlEventCallbackVTbl*
   end
@@ -1331,8 +1331,8 @@ lib LibWin32
     remove_captured_item : Proc(ICameraUIControl*, LibC::LPWSTR, HRESULT)
   end
 
-  ICameraUIControl_GUID = LibC::GUID.new("b8733adf-3d68-4b8f-bb08-e28a0bed0376")
-  CLSID_ICameraUIControl = "b8733adf-3d68-4b8f-bb08-e28a0bed0376"
+  ICameraUIControl_GUID = "b8733adf-3d68-4b8f-bb08-e28a0bed0376"
+  IID_ICameraUIControl = LibC::GUID.new(0xb8733adf_u32, 0x3d68_u16, 0x4b8f_u16, StaticArray[0xbb_u8, 0x8_u8, 0xe2_u8, 0x8a_u8, 0xb_u8, 0xed_u8, 0x3_u8, 0x76_u8])
   struct ICameraUIControl
     lpVtbl : ICameraUIControlVTbl*
   end
@@ -1348,8 +1348,8 @@ lib LibWin32
     get_genuine_local_status : Proc(IEditionUpgradeHelper*, LibC::BOOL*, HRESULT)
   end
 
-  IEditionUpgradeHelper_GUID = LibC::GUID.new("d3e9e342-5deb-43b6-849e-6913b85d503a")
-  CLSID_IEditionUpgradeHelper = "d3e9e342-5deb-43b6-849e-6913b85d503a"
+  IEditionUpgradeHelper_GUID = "d3e9e342-5deb-43b6-849e-6913b85d503a"
+  IID_IEditionUpgradeHelper = LibC::GUID.new(0xd3e9e342_u32, 0x5deb_u16, 0x43b6_u16, StaticArray[0x84_u8, 0x9e_u8, 0x69_u8, 0x13_u8, 0xb8_u8, 0x5d_u8, 0x50_u8, 0x3a_u8])
   struct IEditionUpgradeHelper
     lpVtbl : IEditionUpgradeHelperVTbl*
   end
@@ -1361,8 +1361,8 @@ lib LibWin32
     get_s_mode : Proc(IWindowsLockModeHelper*, LibC::BOOL*, HRESULT)
   end
 
-  IWindowsLockModeHelper_GUID = LibC::GUID.new("f342d19e-cc22-4648-bb5d-03ccf75b47c5")
-  CLSID_IWindowsLockModeHelper = "f342d19e-cc22-4648-bb5d-03ccf75b47c5"
+  IWindowsLockModeHelper_GUID = "f342d19e-cc22-4648-bb5d-03ccf75b47c5"
+  IID_IWindowsLockModeHelper = LibC::GUID.new(0xf342d19e_u32, 0xcc22_u16, 0x4648_u16, StaticArray[0xbb_u8, 0x5d_u8, 0x3_u8, 0xcc_u8, 0xf7_u8, 0x5b_u8, 0x47_u8, 0xc5_u8])
   struct IWindowsLockModeHelper
     lpVtbl : IWindowsLockModeHelperVTbl*
   end
@@ -1377,8 +1377,8 @@ lib LibWin32
     can_upgrade : Proc(IEditionUpgradeBroker*, HRESULT)
   end
 
-  IEditionUpgradeBroker_GUID = LibC::GUID.new("ff19cbcf-9455-4937-b872-6b7929a460af")
-  CLSID_IEditionUpgradeBroker = "ff19cbcf-9455-4937-b872-6b7929a460af"
+  IEditionUpgradeBroker_GUID = "ff19cbcf-9455-4937-b872-6b7929a460af"
+  IID_IEditionUpgradeBroker = LibC::GUID.new(0xff19cbcf_u32, 0x9455_u16, 0x4937_u16, StaticArray[0xb8_u8, 0x72_u8, 0x6b_u8, 0x79_u8, 0x29_u8, 0xa4_u8, 0x60_u8, 0xaf_u8])
   struct IEditionUpgradeBroker
     lpVtbl : IEditionUpgradeBrokerVTbl*
   end
@@ -1390,8 +1390,8 @@ lib LibWin32
     can_activate_client_vm : Proc(IContainerActivationHelper*, Int16*, HRESULT)
   end
 
-  IContainerActivationHelper_GUID = LibC::GUID.new("b524f93f-80d5-4ec7-ae9e-d66e93ade1fa")
-  CLSID_IContainerActivationHelper = "b524f93f-80d5-4ec7-ae9e-d66e93ade1fa"
+  IContainerActivationHelper_GUID = "b524f93f-80d5-4ec7-ae9e-d66e93ade1fa"
+  IID_IContainerActivationHelper = LibC::GUID.new(0xb524f93f_u32, 0x80d5_u16, 0x4ec7_u16, StaticArray[0xae_u8, 0x9e_u8, 0xd6_u8, 0x6e_u8, 0x93_u8, 0xad_u8, 0xe1_u8, 0xfa_u8])
   struct IContainerActivationHelper
     lpVtbl : IContainerActivationHelperVTbl*
   end
@@ -1403,8 +1403,8 @@ lib LibWin32
     show_toast : Proc(IClipServiceNotificationHelper*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
-  IClipServiceNotificationHelper_GUID = LibC::GUID.new("c39948f0-6142-44fd-98ca-e1681a8d68b5")
-  CLSID_IClipServiceNotificationHelper = "c39948f0-6142-44fd-98ca-e1681a8d68b5"
+  IClipServiceNotificationHelper_GUID = "c39948f0-6142-44fd-98ca-e1681a8d68b5"
+  IID_IClipServiceNotificationHelper = LibC::GUID.new(0xc39948f0_u32, 0x6142_u16, 0x44fd_u16, StaticArray[0x98_u8, 0xca_u8, 0xe1_u8, 0x68_u8, 0x1a_u8, 0x8d_u8, 0x68_u8, 0xb5_u8])
   struct IClipServiceNotificationHelper
     lpVtbl : IClipServiceNotificationHelperVTbl*
   end
@@ -1416,8 +1416,8 @@ lib LibWin32
     is_enabled : Proc(IDefaultBrowserSyncSettings*, LibC::BOOL)
   end
 
-  IDefaultBrowserSyncSettings_GUID = LibC::GUID.new("7a27faad-5ae6-4255-9030-c530936292e3")
-  CLSID_IDefaultBrowserSyncSettings = "7a27faad-5ae6-4255-9030-c530936292e3"
+  IDefaultBrowserSyncSettings_GUID = "7a27faad-5ae6-4255-9030-c530936292e3"
+  IID_IDefaultBrowserSyncSettings = LibC::GUID.new(0x7a27faad_u32, 0x5ae6_u16, 0x4255_u16, StaticArray[0x90_u8, 0x30_u8, 0xc5_u8, 0x30_u8, 0x93_u8, 0x62_u8, 0x92_u8, 0xe3_u8])
   struct IDefaultBrowserSyncSettings
     lpVtbl : IDefaultBrowserSyncSettingsVTbl*
   end
@@ -1429,8 +1429,8 @@ lib LibWin32
     delete_browsing_history : Proc(IDeleteBrowsingHistory*, UInt32, HRESULT)
   end
 
-  IDeleteBrowsingHistory_GUID = LibC::GUID.new("cf38ed4b-2be7-4461-8b5e-9a466dc82ae3")
-  CLSID_IDeleteBrowsingHistory = "cf38ed4b-2be7-4461-8b5e-9a466dc82ae3"
+  IDeleteBrowsingHistory_GUID = "cf38ed4b-2be7-4461-8b5e-9a466dc82ae3"
+  IID_IDeleteBrowsingHistory = LibC::GUID.new(0xcf38ed4b_u32, 0x2be7_u16, 0x4461_u16, StaticArray[0x8b_u8, 0x5e_u8, 0x9a_u8, 0x46_u8, 0x6d_u8, 0xc8_u8, 0x2a_u8, 0xe3_u8])
   struct IDeleteBrowsingHistory
     lpVtbl : IDeleteBrowsingHistoryVTbl*
   end

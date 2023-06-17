@@ -3010,8 +3010,8 @@ lib LibWin32
     get_account_status : Proc(IDiskQuotaUser*, UInt32*, HRESULT)
   end
 
-  IDiskQuotaUser_GUID = LibC::GUID.new("7988b574-ec89-11cf-9c00-00aa00a14f56")
-  CLSID_IDiskQuotaUser = "7988b574-ec89-11cf-9c00-00aa00a14f56"
+  IDiskQuotaUser_GUID = "7988b574-ec89-11cf-9c00-00aa00a14f56"
+  IID_IDiskQuotaUser = LibC::GUID.new(0x7988b574_u32, 0xec89_u16, 0x11cf_u16, StaticArray[0x9c_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa1_u8, 0x4f_u8, 0x56_u8])
   struct IDiskQuotaUser
     lpVtbl : IDiskQuotaUserVTbl*
   end
@@ -3026,8 +3026,8 @@ lib LibWin32
     clone : Proc(IEnumDiskQuotaUsers*, IEnumDiskQuotaUsers*, HRESULT)
   end
 
-  IEnumDiskQuotaUsers_GUID = LibC::GUID.new("7988b577-ec89-11cf-9c00-00aa00a14f56")
-  CLSID_IEnumDiskQuotaUsers = "7988b577-ec89-11cf-9c00-00aa00a14f56"
+  IEnumDiskQuotaUsers_GUID = "7988b577-ec89-11cf-9c00-00aa00a14f56"
+  IID_IEnumDiskQuotaUsers = LibC::GUID.new(0x7988b577_u32, 0xec89_u16, 0x11cf_u16, StaticArray[0x9c_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa1_u8, 0x4f_u8, 0x56_u8])
   struct IEnumDiskQuotaUsers
     lpVtbl : IEnumDiskQuotaUsersVTbl*
   end
@@ -3042,8 +3042,8 @@ lib LibWin32
     flush_to_disk : Proc(IDiskQuotaUserBatch*, HRESULT)
   end
 
-  IDiskQuotaUserBatch_GUID = LibC::GUID.new("7988b576-ec89-11cf-9c00-00aa00a14f56")
-  CLSID_IDiskQuotaUserBatch = "7988b576-ec89-11cf-9c00-00aa00a14f56"
+  IDiskQuotaUserBatch_GUID = "7988b576-ec89-11cf-9c00-00aa00a14f56"
+  IID_IDiskQuotaUserBatch = LibC::GUID.new(0x7988b576_u32, 0xec89_u16, 0x11cf_u16, StaticArray[0x9c_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa1_u8, 0x4f_u8, 0x56_u8])
   struct IDiskQuotaUserBatch
     lpVtbl : IDiskQuotaUserBatchVTbl*
   end
@@ -3077,8 +3077,8 @@ lib LibWin32
     shutdown_name_resolution : Proc(IDiskQuotaControl*, HRESULT)
   end
 
-  IDiskQuotaControl_GUID = LibC::GUID.new("7988b572-ec89-11cf-9c00-00aa00a14f56")
-  CLSID_IDiskQuotaControl = "7988b572-ec89-11cf-9c00-00aa00a14f56"
+  IDiskQuotaControl_GUID = "7988b572-ec89-11cf-9c00-00aa00a14f56"
+  IID_IDiskQuotaControl = LibC::GUID.new(0x7988b572_u32, 0xec89_u16, 0x11cf_u16, StaticArray[0x9c_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa1_u8, 0x4f_u8, 0x56_u8])
   struct IDiskQuotaControl
     lpVtbl : IDiskQuotaControlVTbl*
   end
@@ -3090,8 +3090,8 @@ lib LibWin32
     on_user_name_changed : Proc(IDiskQuotaEvents*, IDiskQuotaUser, HRESULT)
   end
 
-  IDiskQuotaEvents_GUID = LibC::GUID.new("7988b579-ec89-11cf-9c00-00aa00a14f56")
-  CLSID_IDiskQuotaEvents = "7988b579-ec89-11cf-9c00-00aa00a14f56"
+  IDiskQuotaEvents_GUID = "7988b579-ec89-11cf-9c00-00aa00a14f56"
+  IID_IDiskQuotaEvents = LibC::GUID.new(0x7988b579_u32, 0xec89_u16, 0x11cf_u16, StaticArray[0x9c_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa1_u8, 0x4f_u8, 0x56_u8])
   struct IDiskQuotaEvents
     lpVtbl : IDiskQuotaEventsVTbl*
   end

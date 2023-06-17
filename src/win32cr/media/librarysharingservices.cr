@@ -12,7 +12,7 @@ require "../foundation.cr"
 {% else %}
 {% end %}
 lib LibWin32
-  WindowsMediaLibrarySharingServices = LibC::GUID.new(0xad581b00_u32, 0x7b64_u16, 0x4e59_u16, StaticArray[0xa3_u8, 0x8d_u8, 0xd2_u8, 0xc5_u8, 0xbf_u8, 0x51_u8, 0xdd_u8, 0xb3_u8])
+  CLSID_WindowsMediaLibrarySharingServices = LibC::GUID.new(0xad581b00_u32, 0x7b64_u16, 0x4e59_u16, StaticArray[0xa3_u8, 0x8d_u8, 0xd2_u8, 0xc5_u8, 0xbf_u8, 0x51_u8, 0xdd_u8, 0xb3_u8])
 
 
   enum WindowsMediaLibrarySharingDeviceAuthorizationStatus : Int32
@@ -34,8 +34,8 @@ lib LibWin32
     get_value : Proc(IWindowsMediaLibrarySharingDeviceProperty*, VARIANT*, HRESULT)
   end
 
-  IWindowsMediaLibrarySharingDeviceProperty_GUID = LibC::GUID.new("81e26927-7a7d-40a7-81d4-bddc02960e3e")
-  CLSID_IWindowsMediaLibrarySharingDeviceProperty = "81e26927-7a7d-40a7-81d4-bddc02960e3e"
+  IWindowsMediaLibrarySharingDeviceProperty_GUID = "81e26927-7a7d-40a7-81d4-bddc02960e3e"
+  IID_IWindowsMediaLibrarySharingDeviceProperty = LibC::GUID.new(0x81e26927_u32, 0x7a7d_u16, 0x40a7_u16, StaticArray[0x81_u8, 0xd4_u8, 0xbd_u8, 0xdc_u8, 0x2_u8, 0x96_u8, 0xe_u8, 0x3e_u8])
   struct IWindowsMediaLibrarySharingDeviceProperty
     lpVtbl : IWindowsMediaLibrarySharingDevicePropertyVTbl*
   end
@@ -53,8 +53,8 @@ lib LibWin32
     get_property : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt8*, IWindowsMediaLibrarySharingDeviceProperty*, HRESULT)
   end
 
-  IWindowsMediaLibrarySharingDeviceProperties_GUID = LibC::GUID.new("c4623214-6b06-40c5-a623-b2ff4c076bfd")
-  CLSID_IWindowsMediaLibrarySharingDeviceProperties = "c4623214-6b06-40c5-a623-b2ff4c076bfd"
+  IWindowsMediaLibrarySharingDeviceProperties_GUID = "c4623214-6b06-40c5-a623-b2ff4c076bfd"
+  IID_IWindowsMediaLibrarySharingDeviceProperties = LibC::GUID.new(0xc4623214_u32, 0x6b06_u16, 0x40c5_u16, StaticArray[0xa6_u8, 0x23_u8, 0xb2_u8, 0xff_u8, 0x4c_u8, 0x7_u8, 0x6b_u8, 0xfd_u8])
   struct IWindowsMediaLibrarySharingDeviceProperties
     lpVtbl : IWindowsMediaLibrarySharingDevicePropertiesVTbl*
   end
@@ -73,8 +73,8 @@ lib LibWin32
     get_properties : Proc(IWindowsMediaLibrarySharingDevice*, IWindowsMediaLibrarySharingDeviceProperties*, HRESULT)
   end
 
-  IWindowsMediaLibrarySharingDevice_GUID = LibC::GUID.new("3dccc293-4fd9-4191-a25b-8e57c5d27bd4")
-  CLSID_IWindowsMediaLibrarySharingDevice = "3dccc293-4fd9-4191-a25b-8e57c5d27bd4"
+  IWindowsMediaLibrarySharingDevice_GUID = "3dccc293-4fd9-4191-a25b-8e57c5d27bd4"
+  IID_IWindowsMediaLibrarySharingDevice = LibC::GUID.new(0x3dccc293_u32, 0x4fd9_u16, 0x4191_u16, StaticArray[0xa2_u8, 0x5b_u8, 0x8e_u8, 0x57_u8, 0xc5_u8, 0xd2_u8, 0x7b_u8, 0xd4_u8])
   struct IWindowsMediaLibrarySharingDevice
     lpVtbl : IWindowsMediaLibrarySharingDeviceVTbl*
   end
@@ -92,8 +92,8 @@ lib LibWin32
     get_device : Proc(IWindowsMediaLibrarySharingDevices*, UInt8*, IWindowsMediaLibrarySharingDevice*, HRESULT)
   end
 
-  IWindowsMediaLibrarySharingDevices_GUID = LibC::GUID.new("1803f9d6-fe6d-4546-bf5b-992fe8ec12d1")
-  CLSID_IWindowsMediaLibrarySharingDevices = "1803f9d6-fe6d-4546-bf5b-992fe8ec12d1"
+  IWindowsMediaLibrarySharingDevices_GUID = "1803f9d6-fe6d-4546-bf5b-992fe8ec12d1"
+  IID_IWindowsMediaLibrarySharingDevices = LibC::GUID.new(0x1803f9d6_u32, 0xfe6d_u16, 0x4546_u16, StaticArray[0xbf_u8, 0x5b_u8, 0x99_u8, 0x2f_u8, 0xe8_u8, 0xec_u8, 0x12_u8, 0xd1_u8])
   struct IWindowsMediaLibrarySharingDevices
     lpVtbl : IWindowsMediaLibrarySharingDevicesVTbl*
   end
@@ -127,8 +127,8 @@ lib LibWin32
     get_custom_settings_applied : Proc(IWindowsMediaLibrarySharingServices*, Int16*, HRESULT)
   end
 
-  IWindowsMediaLibrarySharingServices_GUID = LibC::GUID.new("01f5f85e-0a81-40da-a7c8-21ef3af8440c")
-  CLSID_IWindowsMediaLibrarySharingServices = "01f5f85e-0a81-40da-a7c8-21ef3af8440c"
+  IWindowsMediaLibrarySharingServices_GUID = "01f5f85e-0a81-40da-a7c8-21ef3af8440c"
+  IID_IWindowsMediaLibrarySharingServices = LibC::GUID.new(0x1f5f85e_u32, 0xa81_u16, 0x40da_u16, StaticArray[0xa7_u8, 0xc8_u8, 0x21_u8, 0xef_u8, 0x3a_u8, 0xf8_u8, 0x44_u8, 0xc_u8])
   struct IWindowsMediaLibrarySharingServices
     lpVtbl : IWindowsMediaLibrarySharingServicesVTbl*
   end

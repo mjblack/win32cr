@@ -466,8 +466,8 @@ lib LibWin32
     save_to_mem : Proc(IITPropList*, Void*, UInt32, HRESULT)
   end
 
-  IITPropList_GUID = LibC::GUID.new("1f403bb1-9997-11d0-a850-00aa006c7d01")
-  CLSID_IITPropList = "1f403bb1-9997-11d0-a850-00aa006c7d01"
+  IITPropList_GUID = "1f403bb1-9997-11d0-a850-00aa006c7d01"
+  IID_IITPropList = LibC::GUID.new(0x1f403bb1_u32, 0x9997_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x50_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
   struct IITPropList
     lpVtbl : IITPropListVTbl*
   end
@@ -483,8 +483,8 @@ lib LibWin32
     get_object_persistence : Proc(IITDatabase*, LibC::LPWSTR, UInt32, Void**, LibC::BOOL, HRESULT)
   end
 
-  IITDatabase_GUID = LibC::GUID.new("8fa0d5a2-dedf-11d0-9a61-00c04fb68bf7")
-  CLSID_IITDatabase = "8fa0d5a2-dedf-11d0-9a61-00c04fb68bf7"
+  IITDatabase_GUID = "8fa0d5a2-dedf-11d0-9a61-00c04fb68bf7"
+  IID_IITDatabase = LibC::GUID.new(0x8fa0d5a2_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   struct IITDatabase
     lpVtbl : IITDatabaseVTbl*
   end
@@ -508,8 +508,8 @@ lib LibWin32
     get_data_columns : Proc(IITWordWheel*, IITResultSet, HRESULT)
   end
 
-  IITWordWheel_GUID = LibC::GUID.new("8fa0d5a4-dedf-11d0-9a61-00c04fb68bf7")
-  CLSID_IITWordWheel = "8fa0d5a4-dedf-11d0-9a61-00c04fb68bf7"
+  IITWordWheel_GUID = "8fa0d5a4-dedf-11d0-9a61-00c04fb68bf7"
+  IID_IITWordWheel = LibC::GUID.new(0x8fa0d5a4_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   struct IITWordWheel
     lpVtbl : IITWordWheelVTbl*
   end
@@ -522,8 +522,8 @@ lib LibWin32
     put_word : Proc(IStemSink*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
-  IStemSink_GUID = LibC::GUID.new("fe77c330-7f42-11ce-be57-00aa0051fe20")
-  CLSID_IStemSink = "fe77c330-7f42-11ce-be57-00aa0051fe20"
+  IStemSink_GUID = "fe77c330-7f42-11ce-be57-00aa0051fe20"
+  IID_IStemSink = LibC::GUID.new(0xfe77c330_u32, 0x7f42_u16, 0x11ce_u16, StaticArray[0xbe_u8, 0x57_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x51_u8, 0xfe_u8, 0x20_u8])
   struct IStemSink
     lpVtbl : IStemSinkVTbl*
   end
@@ -539,8 +539,8 @@ lib LibWin32
     load_external_stemmer_data : Proc(IStemmerConfig*, IStream, UInt32, HRESULT)
   end
 
-  IStemmerConfig_GUID = LibC::GUID.new("8fa0d5a7-dedf-11d0-9a61-00c04fb68bf7")
-  CLSID_IStemmerConfig = "8fa0d5a7-dedf-11d0-9a61-00c04fb68bf7"
+  IStemmerConfig_GUID = "8fa0d5a7-dedf-11d0-9a61-00c04fb68bf7"
+  IID_IStemmerConfig = LibC::GUID.new(0x8fa0d5a7_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   struct IStemmerConfig
     lpVtbl : IStemmerConfigVTbl*
   end
@@ -560,8 +560,8 @@ lib LibWin32
     get_word_stemmer : Proc(IWordBreakerConfig*, IStemmer*, HRESULT)
   end
 
-  IWordBreakerConfig_GUID = LibC::GUID.new("8fa0d5a6-dedf-11d0-9a61-00c04fb68bf7")
-  CLSID_IWordBreakerConfig = "8fa0d5a6-dedf-11d0-9a61-00c04fb68bf7"
+  IWordBreakerConfig_GUID = "8fa0d5a6-dedf-11d0-9a61-00c04fb68bf7"
+  IID_IWordBreakerConfig = LibC::GUID.new(0x8fa0d5a6_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   struct IWordBreakerConfig
     lpVtbl : IWordBreakerConfigVTbl*
   end
@@ -602,8 +602,8 @@ lib LibWin32
     get_column_status : Proc(IITResultSet*, COLUMNSTATUS*, HRESULT)
   end
 
-  IITResultSet_GUID = LibC::GUID.new("3bb91d41-998b-11d0-a850-00aa006c7d01")
-  CLSID_IITResultSet = "3bb91d41-998b-11d0-a850-00aa006c7d01"
+  IITResultSet_GUID = "3bb91d41-998b-11d0-a850-00aa006c7d01"
+  IID_IITResultSet = LibC::GUID.new(0x3bb91d41_u32, 0x998b_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x50_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
   struct IITResultSet
     lpVtbl : IITResultSetVTbl*
   end

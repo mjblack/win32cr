@@ -41,10 +41,10 @@ lib LibWin32
   SIDESHOW_EVENTID_APPLICATION_EXIT = 4294901761_u32
   CONTENT_ID_HOME = 1_u32
   VERSION_1_WINDOWS_7 = 0_u32
-  SideShowSession = LibC::GUID.new(0xe20543b9_u32, 0xf785_u16, 0x4ea2_u16, StaticArray[0x98_u8, 0x1e_u8, 0xc4_u8, 0xff_u8, 0xa7_u8, 0x6b_u8, 0xbc_u8, 0x7c_u8])
-  SideShowNotification = LibC::GUID.new(0xce3e86f_u32, 0xd5cd_u16, 0x4525_u16, StaticArray[0xa7_u8, 0x66_u8, 0x1a_u8, 0xba_u8, 0xb1_u8, 0xa7_u8, 0x52_u8, 0xf5_u8])
-  SideShowKeyCollection = LibC::GUID.new(0xdfbbdbf8_u32, 0x18de_u16, 0x49b8_u16, StaticArray[0x83_u8, 0xdc_u8, 0xeb_u8, 0xc7_u8, 0x27_u8, 0xc6_u8, 0x2d_u8, 0x94_u8])
-  SideShowPropVariantCollection = LibC::GUID.new(0xe640f415_u32, 0x539e_u16, 0x4923_u16, StaticArray[0x96_u8, 0xcd_u8, 0x5f_u8, 0x9_u8, 0x3b_u8, 0xc2_u8, 0x50_u8, 0xcd_u8])
+  CLSID_SideShowSession = LibC::GUID.new(0xe20543b9_u32, 0xf785_u16, 0x4ea2_u16, StaticArray[0x98_u8, 0x1e_u8, 0xc4_u8, 0xff_u8, 0xa7_u8, 0x6b_u8, 0xbc_u8, 0x7c_u8])
+  CLSID_SideShowNotification = LibC::GUID.new(0xce3e86f_u32, 0xd5cd_u16, 0x4525_u16, StaticArray[0xa7_u8, 0x66_u8, 0x1a_u8, 0xba_u8, 0xb1_u8, 0xa7_u8, 0x52_u8, 0xf5_u8])
+  CLSID_SideShowKeyCollection = LibC::GUID.new(0xdfbbdbf8_u32, 0x18de_u16, 0x49b8_u16, StaticArray[0x83_u8, 0xdc_u8, 0xeb_u8, 0xc7_u8, 0x27_u8, 0xc6_u8, 0x2d_u8, 0x94_u8])
+  CLSID_SideShowPropVariantCollection = LibC::GUID.new(0xe640f415_u32, 0x539e_u16, 0x4923_u16, StaticArray[0x96_u8, 0xcd_u8, 0x5f_u8, 0x9_u8, 0x3b_u8, 0xc2_u8, 0x50_u8, 0xcd_u8])
 
 
   enum SIDESHOW_SCREEN_TYPE : Int32
@@ -139,8 +139,8 @@ lib LibWin32
     register_notifications : Proc(ISideShowSession*, Guid*, ISideShowNotificationManager*, HRESULT)
   end
 
-  ISideShowSession_GUID = LibC::GUID.new("e22331ee-9e7d-4922-9fc2-ab7aa41ce491")
-  CLSID_ISideShowSession = "e22331ee-9e7d-4922-9fc2-ab7aa41ce491"
+  ISideShowSession_GUID = "e22331ee-9e7d-4922-9fc2-ab7aa41ce491"
+  IID_ISideShowSession = LibC::GUID.new(0xe22331ee_u32, 0x9e7d_u16, 0x4922_u16, StaticArray[0x9f_u8, 0xc2_u8, 0xab_u8, 0x7a_u8, 0xa4_u8, 0x1c_u8, 0xe4_u8, 0x91_u8])
   struct ISideShowSession
     lpVtbl : ISideShowSessionVTbl*
   end
@@ -154,8 +154,8 @@ lib LibWin32
     revoke_all : Proc(ISideShowNotificationManager*, HRESULT)
   end
 
-  ISideShowNotificationManager_GUID = LibC::GUID.new("63cea909-f2b9-4302-b5e1-c68e6d9ab833")
-  CLSID_ISideShowNotificationManager = "63cea909-f2b9-4302-b5e1-c68e6d9ab833"
+  ISideShowNotificationManager_GUID = "63cea909-f2b9-4302-b5e1-c68e6d9ab833"
+  IID_ISideShowNotificationManager = LibC::GUID.new(0x63cea909_u32, 0xf2b9_u16, 0x4302_u16, StaticArray[0xb5_u8, 0xe1_u8, 0xc6_u8, 0x8e_u8, 0x6d_u8, 0x9a_u8, 0xb8_u8, 0x33_u8])
   struct ISideShowNotificationManager
     lpVtbl : ISideShowNotificationManagerVTbl*
   end
@@ -176,8 +176,8 @@ lib LibWin32
     put_expiration_time : Proc(ISideShowNotification*, SYSTEMTIME*, HRESULT)
   end
 
-  ISideShowNotification_GUID = LibC::GUID.new("03c93300-8ab2-41c5-9b79-46127a30e148")
-  CLSID_ISideShowNotification = "03c93300-8ab2-41c5-9b79-46127a30e148"
+  ISideShowNotification_GUID = "03c93300-8ab2-41c5-9b79-46127a30e148"
+  IID_ISideShowNotification = LibC::GUID.new(0x3c93300_u32, 0x8ab2_u16, 0x41c5_u16, StaticArray[0x9b_u8, 0x79_u8, 0x46_u8, 0x12_u8, 0x7a_u8, 0x30_u8, 0xe1_u8, 0x48_u8])
   struct ISideShowNotification
     lpVtbl : ISideShowNotificationVTbl*
   end
@@ -193,8 +193,8 @@ lib LibWin32
     get_device_capabilities : Proc(ISideShowContentManager*, ISideShowCapabilitiesCollection*, HRESULT)
   end
 
-  ISideShowContentManager_GUID = LibC::GUID.new("a5d5b66b-eef9-41db-8d7e-e17c33ab10b0")
-  CLSID_ISideShowContentManager = "a5d5b66b-eef9-41db-8d7e-e17c33ab10b0"
+  ISideShowContentManager_GUID = "a5d5b66b-eef9-41db-8d7e-e17c33ab10b0"
+  IID_ISideShowContentManager = LibC::GUID.new(0xa5d5b66b_u32, 0xeef9_u16, 0x41db_u16, StaticArray[0x8d_u8, 0x7e_u8, 0xe1_u8, 0x7c_u8, 0x33_u8, 0xab_u8, 0x10_u8, 0xb0_u8])
   struct ISideShowContentManager
     lpVtbl : ISideShowContentManagerVTbl*
   end
@@ -208,8 +208,8 @@ lib LibWin32
     get_differentiate_content : Proc(ISideShowContent*, LibC::BOOL*, HRESULT)
   end
 
-  ISideShowContent_GUID = LibC::GUID.new("c18552ed-74ff-4fec-be07-4cfed29d4887")
-  CLSID_ISideShowContent = "c18552ed-74ff-4fec-be07-4cfed29d4887"
+  ISideShowContent_GUID = "c18552ed-74ff-4fec-be07-4cfed29d4887"
+  IID_ISideShowContent = LibC::GUID.new(0xc18552ed_u32, 0x74ff_u16, 0x4fec_u16, StaticArray[0xbe_u8, 0x7_u8, 0x4c_u8, 0xfe_u8, 0xd2_u8, 0x9d_u8, 0x48_u8, 0x87_u8])
   struct ISideShowContent
     lpVtbl : ISideShowContentVTbl*
   end
@@ -224,8 +224,8 @@ lib LibWin32
     device_removed : Proc(ISideShowEvents*, ISideShowCapabilities, HRESULT)
   end
 
-  ISideShowEvents_GUID = LibC::GUID.new("61feca4c-deb4-4a7e-8d75-51f1132d615b")
-  CLSID_ISideShowEvents = "61feca4c-deb4-4a7e-8d75-51f1132d615b"
+  ISideShowEvents_GUID = "61feca4c-deb4-4a7e-8d75-51f1132d615b"
+  IID_ISideShowEvents = LibC::GUID.new(0x61feca4c_u32, 0xdeb4_u16, 0x4a7e_u16, StaticArray[0x8d_u8, 0x75_u8, 0x51_u8, 0xf1_u8, 0x13_u8, 0x2d_u8, 0x61_u8, 0x5b_u8])
   struct ISideShowEvents
     lpVtbl : ISideShowEventsVTbl*
   end
@@ -237,8 +237,8 @@ lib LibWin32
     get_capability : Proc(ISideShowCapabilities*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
   end
 
-  ISideShowCapabilities_GUID = LibC::GUID.new("535e1379-c09e-4a54-a511-597bab3a72b8")
-  CLSID_ISideShowCapabilities = "535e1379-c09e-4a54-a511-597bab3a72b8"
+  ISideShowCapabilities_GUID = "535e1379-c09e-4a54-a511-597bab3a72b8"
+  IID_ISideShowCapabilities = LibC::GUID.new(0x535e1379_u32, 0xc09e_u16, 0x4a54_u16, StaticArray[0xa5_u8, 0x11_u8, 0x59_u8, 0x7b_u8, 0xab_u8, 0x3a_u8, 0x72_u8, 0xb8_u8])
   struct ISideShowCapabilities
     lpVtbl : ISideShowCapabilitiesVTbl*
   end
@@ -251,8 +251,8 @@ lib LibWin32
     get_at : Proc(ISideShowCapabilitiesCollection*, UInt32, ISideShowCapabilities*, HRESULT)
   end
 
-  ISideShowCapabilitiesCollection_GUID = LibC::GUID.new("50305597-5e0d-4ff7-b3af-33d0d9bd52dd")
-  CLSID_ISideShowCapabilitiesCollection = "50305597-5e0d-4ff7-b3af-33d0d9bd52dd"
+  ISideShowCapabilitiesCollection_GUID = "50305597-5e0d-4ff7-b3af-33d0d9bd52dd"
+  IID_ISideShowCapabilitiesCollection = LibC::GUID.new(0x50305597_u32, 0x5e0d_u16, 0x4ff7_u16, StaticArray[0xb3_u8, 0xaf_u8, 0x33_u8, 0xd0_u8, 0xd9_u8, 0xbd_u8, 0x52_u8, 0xdd_u8])
   struct ISideShowCapabilitiesCollection
     lpVtbl : ISideShowCapabilitiesCollectionVTbl*
   end
@@ -265,8 +265,8 @@ lib LibWin32
     get_capabilities : Proc(ISideShowBulkCapabilities*, ISideShowKeyCollection, ISideShowPropVariantCollection*, HRESULT)
   end
 
-  ISideShowBulkCapabilities_GUID = LibC::GUID.new("3a2b7fbc-3ad5-48bd-bbf1-0e6cfbd10807")
-  CLSID_ISideShowBulkCapabilities = "3a2b7fbc-3ad5-48bd-bbf1-0e6cfbd10807"
+  ISideShowBulkCapabilities_GUID = "3a2b7fbc-3ad5-48bd-bbf1-0e6cfbd10807"
+  IID_ISideShowBulkCapabilities = LibC::GUID.new(0x3a2b7fbc_u32, 0x3ad5_u16, 0x48bd_u16, StaticArray[0xbb_u8, 0xf1_u8, 0xe_u8, 0x6c_u8, 0xfb_u8, 0xd1_u8, 0x8_u8, 0x7_u8])
   struct ISideShowBulkCapabilities
     lpVtbl : ISideShowBulkCapabilitiesVTbl*
   end
@@ -282,8 +282,8 @@ lib LibWin32
     remove_at : Proc(ISideShowKeyCollection*, UInt32, HRESULT)
   end
 
-  ISideShowKeyCollection_GUID = LibC::GUID.new("045473bc-a37b-4957-b144-68105411ed8e")
-  CLSID_ISideShowKeyCollection = "045473bc-a37b-4957-b144-68105411ed8e"
+  ISideShowKeyCollection_GUID = "045473bc-a37b-4957-b144-68105411ed8e"
+  IID_ISideShowKeyCollection = LibC::GUID.new(0x45473bc_u32, 0xa37b_u16, 0x4957_u16, StaticArray[0xb1_u8, 0x44_u8, 0x68_u8, 0x10_u8, 0x54_u8, 0x11_u8, 0xed_u8, 0x8e_u8])
   struct ISideShowKeyCollection
     lpVtbl : ISideShowKeyCollectionVTbl*
   end
@@ -299,8 +299,8 @@ lib LibWin32
     remove_at : Proc(ISideShowPropVariantCollection*, UInt32, HRESULT)
   end
 
-  ISideShowPropVariantCollection_GUID = LibC::GUID.new("2ea7a549-7bff-4aae-bab0-22d43111de49")
-  CLSID_ISideShowPropVariantCollection = "2ea7a549-7bff-4aae-bab0-22d43111de49"
+  ISideShowPropVariantCollection_GUID = "2ea7a549-7bff-4aae-bab0-22d43111de49"
+  IID_ISideShowPropVariantCollection = LibC::GUID.new(0x2ea7a549_u32, 0x7bff_u16, 0x4aae_u16, StaticArray[0xba_u8, 0xb0_u8, 0x22_u8, 0xd4_u8, 0x31_u8, 0x11_u8, 0xde_u8, 0x49_u8])
   struct ISideShowPropVariantCollection
     lpVtbl : ISideShowPropVariantCollectionVTbl*
   end

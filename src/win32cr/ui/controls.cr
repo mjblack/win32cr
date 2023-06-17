@@ -1757,7 +1757,7 @@ lib LibWin32
   EM_SETIMESTATUS = 216_u32
   EM_GETIMESTATUS = 217_u32
   EM_ENABLEFEATURE = 218_u32
-  ImageList = LibC::GUID.new(0x7c476ba2_u32, 0x2b1_u16, 0x48f4_u16, StaticArray[0x80_u8, 0x48_u8, 0xb2_u8, 0x46_u8, 0x19_u8, 0xdd_u8, 0xc0_u8, 0x58_u8])
+  CLSID_ImageList = LibC::GUID.new(0x7c476ba2_u32, 0x2b1_u16, 0x48f4_u16, StaticArray[0x80_u8, 0x48_u8, 0xb2_u8, 0x46_u8, 0x19_u8, 0xdd_u8, 0xc0_u8, 0x58_u8])
 
   alias LPFNPSPCALLBACKA = Proc(LibC::HANDLE, PSPCB_MESSAGE, PROPSHEETPAGEA*, UInt32)
   alias LPFNPSPCALLBACKW = Proc(LibC::HANDLE, PSPCB_MESSAGE, PROPSHEETPAGEW*, UInt32)
@@ -4916,8 +4916,8 @@ lib LibWin32
     get_overlay_image : Proc(IImageList*, Int32, Int32*, HRESULT)
   end
 
-  IImageList_GUID = LibC::GUID.new("46eb5926-582e-4017-9fdf-e8998daa0950")
-  CLSID_IImageList = "46eb5926-582e-4017-9fdf-e8998daa0950"
+  IImageList_GUID = "46eb5926-582e-4017-9fdf-e8998daa0950"
+  IID_IImageList = LibC::GUID.new(0x46eb5926_u32, 0x582e_u16, 0x4017_u16, StaticArray[0x9f_u8, 0xdf_u8, 0xe8_u8, 0x99_u8, 0x8d_u8, 0xaa_u8, 0x9_u8, 0x50_u8])
   struct IImageList
     lpVtbl : IImageListVTbl*
   end
@@ -4969,8 +4969,8 @@ lib LibWin32
     replace_from_image_list : Proc(IImageList2*, Int32, IImageList, Int32, IUnknown, UInt32, HRESULT)
   end
 
-  IImageList2_GUID = LibC::GUID.new("192b9d83-50fc-457b-90a0-2b82a8b5dae1")
-  CLSID_IImageList2 = "192b9d83-50fc-457b-90a0-2b82a8b5dae1"
+  IImageList2_GUID = "192b9d83-50fc-457b-90a0-2b82a8b5dae1"
+  IID_IImageList2 = LibC::GUID.new(0x192b9d83_u32, 0x50fc_u16, 0x457b_u16, StaticArray[0x90_u8, 0xa0_u8, 0x2b_u8, 0x82_u8, 0xa8_u8, 0xb5_u8, 0xda_u8, 0xe1_u8])
   struct IImageList2
     lpVtbl : IImageList2VTbl*
   end

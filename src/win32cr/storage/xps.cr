@@ -109,9 +109,9 @@ lib LibWin32
   XPS_E_RELATIONSHIP_EXTERNAL = -2142108406_i32
   XPS_E_NOT_ENOUGH_GRADIENT_STOPS = -2142108405_i32
   XPS_E_PACKAGE_WRITER_NOT_CLOSED = -2142108404_i32
-  XpsOMObjectFactory = LibC::GUID.new(0xe974d26d_u32, 0x3d9b_u16, 0x4d47_u16, StaticArray[0x88_u8, 0xcc_u8, 0x38_u8, 0x72_u8, 0xf2_u8, 0xdc_u8, 0x35_u8, 0x85_u8])
-  XpsOMThumbnailGenerator = LibC::GUID.new(0x7e4a23e2_u32, 0xb969_u16, 0x4761_u16, StaticArray[0xbe_u8, 0x35_u8, 0x1a_u8, 0x8c_u8, 0xed_u8, 0x58_u8, 0xe3_u8, 0x23_u8])
-  XpsSignatureManager = LibC::GUID.new(0xb0c43320_u32, 0x2315_u16, 0x44a2_u16, StaticArray[0xb7_u8, 0xa_u8, 0x9_u8, 0x43_u8, 0xa1_u8, 0x40_u8, 0xa8_u8, 0xee_u8])
+  CLSID_XpsOMObjectFactory = LibC::GUID.new(0xe974d26d_u32, 0x3d9b_u16, 0x4d47_u16, StaticArray[0x88_u8, 0xcc_u8, 0x38_u8, 0x72_u8, 0xf2_u8, 0xdc_u8, 0x35_u8, 0x85_u8])
+  CLSID_XpsOMThumbnailGenerator = LibC::GUID.new(0x7e4a23e2_u32, 0xb969_u16, 0x4761_u16, StaticArray[0xbe_u8, 0x35_u8, 0x1a_u8, 0x8c_u8, 0xed_u8, 0x58_u8, 0xe3_u8, 0x23_u8])
+  CLSID_XpsSignatureManager = LibC::GUID.new(0xb0c43320_u32, 0x2315_u16, 0x44a2_u16, StaticArray[0xb7_u8, 0xa_u8, 0x9_u8, 0x43_u8, 0xa1_u8, 0x40_u8, 0xa8_u8, 0xee_u8])
 
   alias ABORTPROC = Proc(HDC, Int32, LibC::BOOL)
 
@@ -438,8 +438,8 @@ lib LibWin32
     get_type : Proc(IXpsOMShareable*, XPS_OBJECT_TYPE*, HRESULT)
   end
 
-  IXpsOMShareable_GUID = LibC::GUID.new("7137398f-2fc1-454d-8c6a-2c3115a16ece")
-  CLSID_IXpsOMShareable = "7137398f-2fc1-454d-8c6a-2c3115a16ece"
+  IXpsOMShareable_GUID = "7137398f-2fc1-454d-8c6a-2c3115a16ece"
+  IID_IXpsOMShareable = LibC::GUID.new(0x7137398f_u32, 0x2fc1_u16, 0x454d_u16, StaticArray[0x8c_u8, 0x6a_u8, 0x2c_u8, 0x31_u8, 0x15_u8, 0xa1_u8, 0x6e_u8, 0xce_u8])
   struct IXpsOMShareable
     lpVtbl : IXpsOMShareableVTbl*
   end
@@ -477,8 +477,8 @@ lib LibWin32
     set_language : Proc(IXpsOMVisual*, LibC::LPWSTR, HRESULT)
   end
 
-  IXpsOMVisual_GUID = LibC::GUID.new("bc3e7333-fb0b-4af3-a819-0b4eaad0d2fd")
-  CLSID_IXpsOMVisual = "bc3e7333-fb0b-4af3-a819-0b4eaad0d2fd"
+  IXpsOMVisual_GUID = "bc3e7333-fb0b-4af3-a819-0b4eaad0d2fd"
+  IID_IXpsOMVisual = LibC::GUID.new(0xbc3e7333_u32, 0xfb0b_u16, 0x4af3_u16, StaticArray[0xa8_u8, 0x19_u8, 0xb_u8, 0x4e_u8, 0xaa_u8, 0xd0_u8, 0xd2_u8, 0xfd_u8])
   struct IXpsOMVisual
     lpVtbl : IXpsOMVisualVTbl*
   end
@@ -491,8 +491,8 @@ lib LibWin32
     set_part_name : Proc(IXpsOMPart*, IOpcPartUri, HRESULT)
   end
 
-  IXpsOMPart_GUID = LibC::GUID.new("74eb2f0b-a91e-4486-afac-0fabeca3dfc6")
-  CLSID_IXpsOMPart = "74eb2f0b-a91e-4486-afac-0fabeca3dfc6"
+  IXpsOMPart_GUID = "74eb2f0b-a91e-4486-afac-0fabeca3dfc6"
+  IID_IXpsOMPart = LibC::GUID.new(0x74eb2f0b_u32, 0xa91e_u16, 0x4486_u16, StaticArray[0xaf_u8, 0xac_u8, 0xf_u8, 0xab_u8, 0xec_u8, 0xa3_u8, 0xdf_u8, 0xc6_u8])
   struct IXpsOMPart
     lpVtbl : IXpsOMPartVTbl*
   end
@@ -521,8 +521,8 @@ lib LibWin32
     set_device_font_name : Proc(IXpsOMGlyphsEditor*, LibC::LPWSTR, HRESULT)
   end
 
-  IXpsOMGlyphsEditor_GUID = LibC::GUID.new("a5ab8616-5b16-4b9f-9629-89b323ed7909")
-  CLSID_IXpsOMGlyphsEditor = "a5ab8616-5b16-4b9f-9629-89b323ed7909"
+  IXpsOMGlyphsEditor_GUID = "a5ab8616-5b16-4b9f-9629-89b323ed7909"
+  IID_IXpsOMGlyphsEditor = LibC::GUID.new(0xa5ab8616_u32, 0x5b16_u16, 0x4b9f_u16, StaticArray[0x96_u8, 0x29_u8, 0x89_u8, 0xb3_u8, 0x23_u8, 0xed_u8, 0x79_u8, 0x9_u8])
   struct IXpsOMGlyphsEditor
     lpVtbl : IXpsOMGlyphsEditorVTbl*
   end
@@ -587,8 +587,8 @@ lib LibWin32
     clone : Proc(IXpsOMGlyphs*, IXpsOMGlyphs*, HRESULT)
   end
 
-  IXpsOMGlyphs_GUID = LibC::GUID.new("819b3199-0a5a-4b64-bec7-a9e17e780de2")
-  CLSID_IXpsOMGlyphs = "819b3199-0a5a-4b64-bec7-a9e17e780de2"
+  IXpsOMGlyphs_GUID = "819b3199-0a5a-4b64-bec7-a9e17e780de2"
+  IID_IXpsOMGlyphs = LibC::GUID.new(0x819b3199_u32, 0xa5a_u16, 0x4b64_u16, StaticArray[0xbe_u8, 0xc7_u8, 0xa9_u8, 0xe1_u8, 0x7e_u8, 0x78_u8, 0xd_u8, 0xe2_u8])
   struct IXpsOMGlyphs
     lpVtbl : IXpsOMGlyphsVTbl*
   end
@@ -605,8 +605,8 @@ lib LibWin32
     append : Proc(IXpsOMDashCollection*, XPS_DASH*, HRESULT)
   end
 
-  IXpsOMDashCollection_GUID = LibC::GUID.new("081613f4-74eb-48f2-83b3-37a9ce2d7dc6")
-  CLSID_IXpsOMDashCollection = "081613f4-74eb-48f2-83b3-37a9ce2d7dc6"
+  IXpsOMDashCollection_GUID = "081613f4-74eb-48f2-83b3-37a9ce2d7dc6"
+  IID_IXpsOMDashCollection = LibC::GUID.new(0x81613f4_u32, 0x74eb_u16, 0x48f2_u16, StaticArray[0x83_u8, 0xb3_u8, 0x37_u8, 0xa9_u8, 0xce_u8, 0x2d_u8, 0x7d_u8, 0xc6_u8])
   struct IXpsOMDashCollection
     lpVtbl : IXpsOMDashCollectionVTbl*
   end
@@ -622,8 +622,8 @@ lib LibWin32
     clone : Proc(IXpsOMMatrixTransform*, IXpsOMMatrixTransform*, HRESULT)
   end
 
-  IXpsOMMatrixTransform_GUID = LibC::GUID.new("b77330ff-bb37-4501-a93e-f1b1e50bfc46")
-  CLSID_IXpsOMMatrixTransform = "b77330ff-bb37-4501-a93e-f1b1e50bfc46"
+  IXpsOMMatrixTransform_GUID = "b77330ff-bb37-4501-a93e-f1b1e50bfc46"
+  IID_IXpsOMMatrixTransform = LibC::GUID.new(0xb77330ff_u32, 0xbb37_u16, 0x4501_u16, StaticArray[0xa9_u8, 0x3e_u8, 0xf1_u8, 0xb1_u8, 0xe5_u8, 0xb_u8, 0xfc_u8, 0x46_u8])
   struct IXpsOMMatrixTransform
     lpVtbl : IXpsOMMatrixTransformVTbl*
   end
@@ -645,8 +645,8 @@ lib LibWin32
     clone : Proc(IXpsOMGeometry*, IXpsOMGeometry*, HRESULT)
   end
 
-  IXpsOMGeometry_GUID = LibC::GUID.new("64fcf3d7-4d58-44ba-ad73-a13af6492072")
-  CLSID_IXpsOMGeometry = "64fcf3d7-4d58-44ba-ad73-a13af6492072"
+  IXpsOMGeometry_GUID = "64fcf3d7-4d58-44ba-ad73-a13af6492072"
+  IID_IXpsOMGeometry = LibC::GUID.new(0x64fcf3d7_u32, 0x4d58_u16, 0x44ba_u16, StaticArray[0xad_u8, 0x73_u8, 0xa1_u8, 0x3a_u8, 0xf6_u8, 0x49_u8, 0x20_u8, 0x72_u8])
   struct IXpsOMGeometry
     lpVtbl : IXpsOMGeometryVTbl*
   end
@@ -672,8 +672,8 @@ lib LibWin32
     clone : Proc(IXpsOMGeometryFigure*, IXpsOMGeometryFigure*, HRESULT)
   end
 
-  IXpsOMGeometryFigure_GUID = LibC::GUID.new("d410dc83-908c-443e-8947-b1795d3c165a")
-  CLSID_IXpsOMGeometryFigure = "d410dc83-908c-443e-8947-b1795d3c165a"
+  IXpsOMGeometryFigure_GUID = "d410dc83-908c-443e-8947-b1795d3c165a"
+  IID_IXpsOMGeometryFigure = LibC::GUID.new(0xd410dc83_u32, 0x908c_u16, 0x443e_u16, StaticArray[0x89_u8, 0x47_u8, 0xb1_u8, 0x79_u8, 0x5d_u8, 0x3c_u8, 0x16_u8, 0x5a_u8])
   struct IXpsOMGeometryFigure
     lpVtbl : IXpsOMGeometryFigureVTbl*
   end
@@ -690,8 +690,8 @@ lib LibWin32
     append : Proc(IXpsOMGeometryFigureCollection*, IXpsOMGeometryFigure, HRESULT)
   end
 
-  IXpsOMGeometryFigureCollection_GUID = LibC::GUID.new("fd48c3f3-a58e-4b5a-8826-1de54abe72b2")
-  CLSID_IXpsOMGeometryFigureCollection = "fd48c3f3-a58e-4b5a-8826-1de54abe72b2"
+  IXpsOMGeometryFigureCollection_GUID = "fd48c3f3-a58e-4b5a-8826-1de54abe72b2"
+  IID_IXpsOMGeometryFigureCollection = LibC::GUID.new(0xfd48c3f3_u32, 0xa58e_u16, 0x4b5a_u16, StaticArray[0x88_u8, 0x26_u8, 0x1d_u8, 0xe5_u8, 0x4a_u8, 0xbe_u8, 0x72_u8, 0xb2_u8])
   struct IXpsOMGeometryFigureCollection
     lpVtbl : IXpsOMGeometryFigureCollectionVTbl*
   end
@@ -766,8 +766,8 @@ lib LibWin32
     clone : Proc(IXpsOMPath*, IXpsOMPath*, HRESULT)
   end
 
-  IXpsOMPath_GUID = LibC::GUID.new("37d38bb6-3ee9-4110-9312-14b194163337")
-  CLSID_IXpsOMPath = "37d38bb6-3ee9-4110-9312-14b194163337"
+  IXpsOMPath_GUID = "37d38bb6-3ee9-4110-9312-14b194163337"
+  IID_IXpsOMPath = LibC::GUID.new(0x37d38bb6_u32, 0x3ee9_u16, 0x4110_u16, StaticArray[0x93_u8, 0x12_u8, 0x14_u8, 0xb1_u8, 0x94_u8, 0x16_u8, 0x33_u8, 0x37_u8])
   struct IXpsOMPath
     lpVtbl : IXpsOMPathVTbl*
   end
@@ -782,8 +782,8 @@ lib LibWin32
     set_opacity : Proc(IXpsOMBrush*, Float32, HRESULT)
   end
 
-  IXpsOMBrush_GUID = LibC::GUID.new("56a3f80c-ea4c-4187-a57b-a2a473b2b42b")
-  CLSID_IXpsOMBrush = "56a3f80c-ea4c-4187-a57b-a2a473b2b42b"
+  IXpsOMBrush_GUID = "56a3f80c-ea4c-4187-a57b-a2a473b2b42b"
+  IID_IXpsOMBrush = LibC::GUID.new(0x56a3f80c_u32, 0xea4c_u16, 0x4187_u16, StaticArray[0xa5_u8, 0x7b_u8, 0xa2_u8, 0xa4_u8, 0x73_u8, 0xb2_u8, 0xb4_u8, 0x2b_u8])
   struct IXpsOMBrush
     lpVtbl : IXpsOMBrushVTbl*
   end
@@ -800,8 +800,8 @@ lib LibWin32
     append : Proc(IXpsOMGradientStopCollection*, IXpsOMGradientStop, HRESULT)
   end
 
-  IXpsOMGradientStopCollection_GUID = LibC::GUID.new("c9174c3a-3cd3-4319-bda4-11a39392ceef")
-  CLSID_IXpsOMGradientStopCollection = "c9174c3a-3cd3-4319-bda4-11a39392ceef"
+  IXpsOMGradientStopCollection_GUID = "c9174c3a-3cd3-4319-bda4-11a39392ceef"
+  IID_IXpsOMGradientStopCollection = LibC::GUID.new(0xc9174c3a_u32, 0x3cd3_u16, 0x4319_u16, StaticArray[0xbd_u8, 0xa4_u8, 0x11_u8, 0xa3_u8, 0x93_u8, 0x92_u8, 0xce_u8, 0xef_u8])
   struct IXpsOMGradientStopCollection
     lpVtbl : IXpsOMGradientStopCollectionVTbl*
   end
@@ -819,8 +819,8 @@ lib LibWin32
     clone : Proc(IXpsOMSolidColorBrush*, IXpsOMSolidColorBrush*, HRESULT)
   end
 
-  IXpsOMSolidColorBrush_GUID = LibC::GUID.new("a06f9f05-3be9-4763-98a8-094fc672e488")
-  CLSID_IXpsOMSolidColorBrush = "a06f9f05-3be9-4763-98a8-094fc672e488"
+  IXpsOMSolidColorBrush_GUID = "a06f9f05-3be9-4763-98a8-094fc672e488"
+  IID_IXpsOMSolidColorBrush = LibC::GUID.new(0xa06f9f05_u32, 0x3be9_u16, 0x4763_u16, StaticArray[0x98_u8, 0xa8_u8, 0x9_u8, 0x4f_u8, 0xc6_u8, 0x72_u8, 0xe4_u8, 0x88_u8])
   struct IXpsOMSolidColorBrush
     lpVtbl : IXpsOMSolidColorBrushVTbl*
   end
@@ -846,8 +846,8 @@ lib LibWin32
     set_tile_mode : Proc(IXpsOMTileBrush*, XPS_TILE_MODE, HRESULT)
   end
 
-  IXpsOMTileBrush_GUID = LibC::GUID.new("0fc2328d-d722-4a54-b2ec-be90218a789e")
-  CLSID_IXpsOMTileBrush = "0fc2328d-d722-4a54-b2ec-be90218a789e"
+  IXpsOMTileBrush_GUID = "0fc2328d-d722-4a54-b2ec-be90218a789e"
+  IID_IXpsOMTileBrush = LibC::GUID.new(0xfc2328d_u32, 0xd722_u16, 0x4a54_u16, StaticArray[0xb2_u8, 0xec_u8, 0xbe_u8, 0x90_u8, 0x21_u8, 0x8a_u8, 0x78_u8, 0x9e_u8])
   struct IXpsOMTileBrush
     lpVtbl : IXpsOMTileBrushVTbl*
   end
@@ -879,8 +879,8 @@ lib LibWin32
     clone : Proc(IXpsOMVisualBrush*, IXpsOMVisualBrush*, HRESULT)
   end
 
-  IXpsOMVisualBrush_GUID = LibC::GUID.new("97e294af-5b37-46b4-8057-874d2f64119b")
-  CLSID_IXpsOMVisualBrush = "97e294af-5b37-46b4-8057-874d2f64119b"
+  IXpsOMVisualBrush_GUID = "97e294af-5b37-46b4-8057-874d2f64119b"
+  IID_IXpsOMVisualBrush = LibC::GUID.new(0x97e294af_u32, 0x5b37_u16, 0x46b4_u16, StaticArray[0x80_u8, 0x57_u8, 0x87_u8, 0x4d_u8, 0x2f_u8, 0x64_u8, 0x11_u8, 0x9b_u8])
   struct IXpsOMVisualBrush
     lpVtbl : IXpsOMVisualBrushVTbl*
   end
@@ -911,8 +911,8 @@ lib LibWin32
     clone : Proc(IXpsOMImageBrush*, IXpsOMImageBrush*, HRESULT)
   end
 
-  IXpsOMImageBrush_GUID = LibC::GUID.new("3df0b466-d382-49ef-8550-dd94c80242e4")
-  CLSID_IXpsOMImageBrush = "3df0b466-d382-49ef-8550-dd94c80242e4"
+  IXpsOMImageBrush_GUID = "3df0b466-d382-49ef-8550-dd94c80242e4"
+  IID_IXpsOMImageBrush = LibC::GUID.new(0x3df0b466_u32, 0xd382_u16, 0x49ef_u16, StaticArray[0x85_u8, 0x50_u8, 0xdd_u8, 0x94_u8, 0xc8_u8, 0x2_u8, 0x42_u8, 0xe4_u8])
   struct IXpsOMImageBrush
     lpVtbl : IXpsOMImageBrushVTbl*
   end
@@ -929,8 +929,8 @@ lib LibWin32
     clone : Proc(IXpsOMGradientStop*, IXpsOMGradientStop*, HRESULT)
   end
 
-  IXpsOMGradientStop_GUID = LibC::GUID.new("5cf4f5cc-3969-49b5-a70a-5550b618fe49")
-  CLSID_IXpsOMGradientStop = "5cf4f5cc-3969-49b5-a70a-5550b618fe49"
+  IXpsOMGradientStop_GUID = "5cf4f5cc-3969-49b5-a70a-5550b618fe49"
+  IID_IXpsOMGradientStop = LibC::GUID.new(0x5cf4f5cc_u32, 0x3969_u16, 0x49b5_u16, StaticArray[0xa7_u8, 0xa_u8, 0x55_u8, 0x50_u8, 0xb6_u8, 0x18_u8, 0xfe_u8, 0x49_u8])
   struct IXpsOMGradientStop
     lpVtbl : IXpsOMGradientStopVTbl*
   end
@@ -955,8 +955,8 @@ lib LibWin32
     set_color_interpolation_mode : Proc(IXpsOMGradientBrush*, XPS_COLOR_INTERPOLATION, HRESULT)
   end
 
-  IXpsOMGradientBrush_GUID = LibC::GUID.new("edb59622-61a2-42c3-bace-acf2286c06bf")
-  CLSID_IXpsOMGradientBrush = "edb59622-61a2-42c3-bace-acf2286c06bf"
+  IXpsOMGradientBrush_GUID = "edb59622-61a2-42c3-bace-acf2286c06bf"
+  IID_IXpsOMGradientBrush = LibC::GUID.new(0xedb59622_u32, 0x61a2_u16, 0x42c3_u16, StaticArray[0xba_u8, 0xce_u8, 0xac_u8, 0xf2_u8, 0x28_u8, 0x6c_u8, 0x6_u8, 0xbf_u8])
   struct IXpsOMGradientBrush
     lpVtbl : IXpsOMGradientBrushVTbl*
   end
@@ -986,8 +986,8 @@ lib LibWin32
     clone : Proc(IXpsOMLinearGradientBrush*, IXpsOMLinearGradientBrush*, HRESULT)
   end
 
-  IXpsOMLinearGradientBrush_GUID = LibC::GUID.new("005e279f-c30d-40ff-93ec-1950d3c528db")
-  CLSID_IXpsOMLinearGradientBrush = "005e279f-c30d-40ff-93ec-1950d3c528db"
+  IXpsOMLinearGradientBrush_GUID = "005e279f-c30d-40ff-93ec-1950d3c528db"
+  IID_IXpsOMLinearGradientBrush = LibC::GUID.new(0x5e279f_u32, 0xc30d_u16, 0x40ff_u16, StaticArray[0x93_u8, 0xec_u8, 0x19_u8, 0x50_u8, 0xd3_u8, 0xc5_u8, 0x28_u8, 0xdb_u8])
   struct IXpsOMLinearGradientBrush
     lpVtbl : IXpsOMLinearGradientBrushVTbl*
   end
@@ -1019,8 +1019,8 @@ lib LibWin32
     clone : Proc(IXpsOMRadialGradientBrush*, IXpsOMRadialGradientBrush*, HRESULT)
   end
 
-  IXpsOMRadialGradientBrush_GUID = LibC::GUID.new("75f207e5-08bf-413c-96b1-b82b4064176b")
-  CLSID_IXpsOMRadialGradientBrush = "75f207e5-08bf-413c-96b1-b82b4064176b"
+  IXpsOMRadialGradientBrush_GUID = "75f207e5-08bf-413c-96b1-b82b4064176b"
+  IID_IXpsOMRadialGradientBrush = LibC::GUID.new(0x75f207e5_u32, 0x8bf_u16, 0x413c_u16, StaticArray[0x96_u8, 0xb1_u8, 0xb8_u8, 0x2b_u8, 0x40_u8, 0x64_u8, 0x17_u8, 0x6b_u8])
   struct IXpsOMRadialGradientBrush
     lpVtbl : IXpsOMRadialGradientBrushVTbl*
   end
@@ -1033,8 +1033,8 @@ lib LibWin32
     set_part_name : Proc(IXpsOMResource*, IOpcPartUri, HRESULT)
   end
 
-  IXpsOMResource_GUID = LibC::GUID.new("da2ac0a2-73a2-4975-ad14-74097c3ff3a5")
-  CLSID_IXpsOMResource = "da2ac0a2-73a2-4975-ad14-74097c3ff3a5"
+  IXpsOMResource_GUID = "da2ac0a2-73a2-4975-ad14-74097c3ff3a5"
+  IID_IXpsOMResource = LibC::GUID.new(0xda2ac0a2_u32, 0x73a2_u16, 0x4975_u16, StaticArray[0xad_u8, 0x14_u8, 0x74_u8, 0x9_u8, 0x7c_u8, 0x3f_u8, 0xf3_u8, 0xa5_u8])
   struct IXpsOMResource
     lpVtbl : IXpsOMResourceVTbl*
   end
@@ -1049,8 +1049,8 @@ lib LibWin32
     get_remote_dictionary_resources : Proc(IXpsOMPartResources*, IXpsOMRemoteDictionaryResourceCollection*, HRESULT)
   end
 
-  IXpsOMPartResources_GUID = LibC::GUID.new("f4cf7729-4864-4275-99b3-a8717163ecaf")
-  CLSID_IXpsOMPartResources = "f4cf7729-4864-4275-99b3-a8717163ecaf"
+  IXpsOMPartResources_GUID = "f4cf7729-4864-4275-99b3-a8717163ecaf"
+  IID_IXpsOMPartResources = LibC::GUID.new(0xf4cf7729_u32, 0x4864_u16, 0x4275_u16, StaticArray[0x99_u8, 0xb3_u8, 0xa8_u8, 0x71_u8, 0x71_u8, 0x63_u8, 0xec_u8, 0xaf_u8])
   struct IXpsOMPartResources
     lpVtbl : IXpsOMPartResourcesVTbl*
   end
@@ -1071,8 +1071,8 @@ lib LibWin32
     clone : Proc(IXpsOMDictionary*, IXpsOMDictionary*, HRESULT)
   end
 
-  IXpsOMDictionary_GUID = LibC::GUID.new("897c86b8-8eaf-4ae3-bdde-56419fcf4236")
-  CLSID_IXpsOMDictionary = "897c86b8-8eaf-4ae3-bdde-56419fcf4236"
+  IXpsOMDictionary_GUID = "897c86b8-8eaf-4ae3-bdde-56419fcf4236"
+  IID_IXpsOMDictionary = LibC::GUID.new(0x897c86b8_u32, 0x8eaf_u16, 0x4ae3_u16, StaticArray[0xbd_u8, 0xde_u8, 0x56_u8, 0x41_u8, 0x9f_u8, 0xcf_u8, 0x42_u8, 0x36_u8])
   struct IXpsOMDictionary
     lpVtbl : IXpsOMDictionaryVTbl*
   end
@@ -1088,8 +1088,8 @@ lib LibWin32
     get_embedding_option : Proc(IXpsOMFontResource*, XPS_FONT_EMBEDDING*, HRESULT)
   end
 
-  IXpsOMFontResource_GUID = LibC::GUID.new("a8c45708-47d9-4af4-8d20-33b48c9b8485")
-  CLSID_IXpsOMFontResource = "a8c45708-47d9-4af4-8d20-33b48c9b8485"
+  IXpsOMFontResource_GUID = "a8c45708-47d9-4af4-8d20-33b48c9b8485"
+  IID_IXpsOMFontResource = LibC::GUID.new(0xa8c45708_u32, 0x47d9_u16, 0x4af4_u16, StaticArray[0x8d_u8, 0x20_u8, 0x33_u8, 0xb4_u8, 0x8c_u8, 0x9b_u8, 0x84_u8, 0x85_u8])
   struct IXpsOMFontResource
     lpVtbl : IXpsOMFontResourceVTbl*
   end
@@ -1107,8 +1107,8 @@ lib LibWin32
     get_by_part_name : Proc(IXpsOMFontResourceCollection*, IOpcPartUri, IXpsOMFontResource*, HRESULT)
   end
 
-  IXpsOMFontResourceCollection_GUID = LibC::GUID.new("70b4a6bb-88d4-4fa8-aaf9-6d9c596fdbad")
-  CLSID_IXpsOMFontResourceCollection = "70b4a6bb-88d4-4fa8-aaf9-6d9c596fdbad"
+  IXpsOMFontResourceCollection_GUID = "70b4a6bb-88d4-4fa8-aaf9-6d9c596fdbad"
+  IID_IXpsOMFontResourceCollection = LibC::GUID.new(0x70b4a6bb_u32, 0x88d4_u16, 0x4fa8_u16, StaticArray[0xaa_u8, 0xf9_u8, 0x6d_u8, 0x9c_u8, 0x59_u8, 0x6f_u8, 0xdb_u8, 0xad_u8])
   struct IXpsOMFontResourceCollection
     lpVtbl : IXpsOMFontResourceCollectionVTbl*
   end
@@ -1124,8 +1124,8 @@ lib LibWin32
     get_image_type : Proc(IXpsOMImageResource*, XPS_IMAGE_TYPE*, HRESULT)
   end
 
-  IXpsOMImageResource_GUID = LibC::GUID.new("3db8417d-ae50-485e-9a44-d7758f78a23f")
-  CLSID_IXpsOMImageResource = "3db8417d-ae50-485e-9a44-d7758f78a23f"
+  IXpsOMImageResource_GUID = "3db8417d-ae50-485e-9a44-d7758f78a23f"
+  IID_IXpsOMImageResource = LibC::GUID.new(0x3db8417d_u32, 0xae50_u16, 0x485e_u16, StaticArray[0x9a_u8, 0x44_u8, 0xd7_u8, 0x75_u8, 0x8f_u8, 0x78_u8, 0xa2_u8, 0x3f_u8])
   struct IXpsOMImageResource
     lpVtbl : IXpsOMImageResourceVTbl*
   end
@@ -1143,8 +1143,8 @@ lib LibWin32
     get_by_part_name : Proc(IXpsOMImageResourceCollection*, IOpcPartUri, IXpsOMImageResource*, HRESULT)
   end
 
-  IXpsOMImageResourceCollection_GUID = LibC::GUID.new("7a4a1a71-9cde-4b71-b33f-62de843eabfe")
-  CLSID_IXpsOMImageResourceCollection = "7a4a1a71-9cde-4b71-b33f-62de843eabfe"
+  IXpsOMImageResourceCollection_GUID = "7a4a1a71-9cde-4b71-b33f-62de843eabfe"
+  IID_IXpsOMImageResourceCollection = LibC::GUID.new(0x7a4a1a71_u32, 0x9cde_u16, 0x4b71_u16, StaticArray[0xb3_u8, 0x3f_u8, 0x62_u8, 0xde_u8, 0x84_u8, 0x3e_u8, 0xab_u8, 0xfe_u8])
   struct IXpsOMImageResourceCollection
     lpVtbl : IXpsOMImageResourceCollectionVTbl*
   end
@@ -1159,8 +1159,8 @@ lib LibWin32
     set_content : Proc(IXpsOMColorProfileResource*, IStream, IOpcPartUri, HRESULT)
   end
 
-  IXpsOMColorProfileResource_GUID = LibC::GUID.new("67bd7d69-1eef-4bb1-b5e7-6f4f87be8abe")
-  CLSID_IXpsOMColorProfileResource = "67bd7d69-1eef-4bb1-b5e7-6f4f87be8abe"
+  IXpsOMColorProfileResource_GUID = "67bd7d69-1eef-4bb1-b5e7-6f4f87be8abe"
+  IID_IXpsOMColorProfileResource = LibC::GUID.new(0x67bd7d69_u32, 0x1eef_u16, 0x4bb1_u16, StaticArray[0xb5_u8, 0xe7_u8, 0x6f_u8, 0x4f_u8, 0x87_u8, 0xbe_u8, 0x8a_u8, 0xbe_u8])
   struct IXpsOMColorProfileResource
     lpVtbl : IXpsOMColorProfileResourceVTbl*
   end
@@ -1178,8 +1178,8 @@ lib LibWin32
     get_by_part_name : Proc(IXpsOMColorProfileResourceCollection*, IOpcPartUri, IXpsOMColorProfileResource*, HRESULT)
   end
 
-  IXpsOMColorProfileResourceCollection_GUID = LibC::GUID.new("12759630-5fba-4283-8f7d-cca849809edb")
-  CLSID_IXpsOMColorProfileResourceCollection = "12759630-5fba-4283-8f7d-cca849809edb"
+  IXpsOMColorProfileResourceCollection_GUID = "12759630-5fba-4283-8f7d-cca849809edb"
+  IID_IXpsOMColorProfileResourceCollection = LibC::GUID.new(0x12759630_u32, 0x5fba_u16, 0x4283_u16, StaticArray[0x8f_u8, 0x7d_u8, 0xcc_u8, 0xa8_u8, 0x49_u8, 0x80_u8, 0x9e_u8, 0xdb_u8])
   struct IXpsOMColorProfileResourceCollection
     lpVtbl : IXpsOMColorProfileResourceCollectionVTbl*
   end
@@ -1194,8 +1194,8 @@ lib LibWin32
     set_content : Proc(IXpsOMPrintTicketResource*, IStream, IOpcPartUri, HRESULT)
   end
 
-  IXpsOMPrintTicketResource_GUID = LibC::GUID.new("e7ff32d2-34aa-499b-bbe9-9cd4ee6c59f7")
-  CLSID_IXpsOMPrintTicketResource = "e7ff32d2-34aa-499b-bbe9-9cd4ee6c59f7"
+  IXpsOMPrintTicketResource_GUID = "e7ff32d2-34aa-499b-bbe9-9cd4ee6c59f7"
+  IID_IXpsOMPrintTicketResource = LibC::GUID.new(0xe7ff32d2_u32, 0x34aa_u16, 0x499b_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x9c_u8, 0xd4_u8, 0xee_u8, 0x6c_u8, 0x59_u8, 0xf7_u8])
   struct IXpsOMPrintTicketResource
     lpVtbl : IXpsOMPrintTicketResourceVTbl*
   end
@@ -1210,8 +1210,8 @@ lib LibWin32
     set_dictionary : Proc(IXpsOMRemoteDictionaryResource*, IXpsOMDictionary, HRESULT)
   end
 
-  IXpsOMRemoteDictionaryResource_GUID = LibC::GUID.new("c9bd7cd4-e16a-4bf8-8c84-c950af7a3061")
-  CLSID_IXpsOMRemoteDictionaryResource = "c9bd7cd4-e16a-4bf8-8c84-c950af7a3061"
+  IXpsOMRemoteDictionaryResource_GUID = "c9bd7cd4-e16a-4bf8-8c84-c950af7a3061"
+  IID_IXpsOMRemoteDictionaryResource = LibC::GUID.new(0xc9bd7cd4_u32, 0xe16a_u16, 0x4bf8_u16, StaticArray[0x8c_u8, 0x84_u8, 0xc9_u8, 0x50_u8, 0xaf_u8, 0x7a_u8, 0x30_u8, 0x61_u8])
   struct IXpsOMRemoteDictionaryResource
     lpVtbl : IXpsOMRemoteDictionaryResourceVTbl*
   end
@@ -1229,8 +1229,8 @@ lib LibWin32
     get_by_part_name : Proc(IXpsOMRemoteDictionaryResourceCollection*, IOpcPartUri, IXpsOMRemoteDictionaryResource*, HRESULT)
   end
 
-  IXpsOMRemoteDictionaryResourceCollection_GUID = LibC::GUID.new("5c38db61-7fec-464a-87bd-41e3bef018be")
-  CLSID_IXpsOMRemoteDictionaryResourceCollection = "5c38db61-7fec-464a-87bd-41e3bef018be"
+  IXpsOMRemoteDictionaryResourceCollection_GUID = "5c38db61-7fec-464a-87bd-41e3bef018be"
+  IID_IXpsOMRemoteDictionaryResourceCollection = LibC::GUID.new(0x5c38db61_u32, 0x7fec_u16, 0x464a_u16, StaticArray[0x87_u8, 0xbd_u8, 0x41_u8, 0xe3_u8, 0xbe_u8, 0xf0_u8, 0x18_u8, 0xbe_u8])
   struct IXpsOMRemoteDictionaryResourceCollection
     lpVtbl : IXpsOMRemoteDictionaryResourceCollectionVTbl*
   end
@@ -1248,8 +1248,8 @@ lib LibWin32
     get_by_part_name : Proc(IXpsOMSignatureBlockResourceCollection*, IOpcPartUri, IXpsOMSignatureBlockResource*, HRESULT)
   end
 
-  IXpsOMSignatureBlockResourceCollection_GUID = LibC::GUID.new("ab8f5d8e-351b-4d33-aaed-fa56f0022931")
-  CLSID_IXpsOMSignatureBlockResourceCollection = "ab8f5d8e-351b-4d33-aaed-fa56f0022931"
+  IXpsOMSignatureBlockResourceCollection_GUID = "ab8f5d8e-351b-4d33-aaed-fa56f0022931"
+  IID_IXpsOMSignatureBlockResourceCollection = LibC::GUID.new(0xab8f5d8e_u32, 0x351b_u16, 0x4d33_u16, StaticArray[0xaa_u8, 0xed_u8, 0xfa_u8, 0x56_u8, 0xf0_u8, 0x2_u8, 0x29_u8, 0x31_u8])
   struct IXpsOMSignatureBlockResourceCollection
     lpVtbl : IXpsOMSignatureBlockResourceCollectionVTbl*
   end
@@ -1265,8 +1265,8 @@ lib LibWin32
     set_content : Proc(IXpsOMDocumentStructureResource*, IStream, IOpcPartUri, HRESULT)
   end
 
-  IXpsOMDocumentStructureResource_GUID = LibC::GUID.new("85febc8a-6b63-48a9-af07-7064e4ecff30")
-  CLSID_IXpsOMDocumentStructureResource = "85febc8a-6b63-48a9-af07-7064e4ecff30"
+  IXpsOMDocumentStructureResource_GUID = "85febc8a-6b63-48a9-af07-7064e4ecff30"
+  IID_IXpsOMDocumentStructureResource = LibC::GUID.new(0x85febc8a_u32, 0x6b63_u16, 0x48a9_u16, StaticArray[0xaf_u8, 0x7_u8, 0x70_u8, 0x64_u8, 0xe4_u8, 0xec_u8, 0xff_u8, 0x30_u8])
   struct IXpsOMDocumentStructureResource
     lpVtbl : IXpsOMDocumentStructureResourceVTbl*
   end
@@ -1282,8 +1282,8 @@ lib LibWin32
     set_content : Proc(IXpsOMStoryFragmentsResource*, IStream, IOpcPartUri, HRESULT)
   end
 
-  IXpsOMStoryFragmentsResource_GUID = LibC::GUID.new("c2b3ca09-0473-4282-87ae-1780863223f0")
-  CLSID_IXpsOMStoryFragmentsResource = "c2b3ca09-0473-4282-87ae-1780863223f0"
+  IXpsOMStoryFragmentsResource_GUID = "c2b3ca09-0473-4282-87ae-1780863223f0"
+  IID_IXpsOMStoryFragmentsResource = LibC::GUID.new(0xc2b3ca09_u32, 0x473_u16, 0x4282_u16, StaticArray[0x87_u8, 0xae_u8, 0x17_u8, 0x80_u8, 0x86_u8, 0x32_u8, 0x23_u8, 0xf0_u8])
   struct IXpsOMStoryFragmentsResource
     lpVtbl : IXpsOMStoryFragmentsResourceVTbl*
   end
@@ -1299,8 +1299,8 @@ lib LibWin32
     set_content : Proc(IXpsOMSignatureBlockResource*, IStream, IOpcPartUri, HRESULT)
   end
 
-  IXpsOMSignatureBlockResource_GUID = LibC::GUID.new("4776ad35-2e04-4357-8743-ebf6c171a905")
-  CLSID_IXpsOMSignatureBlockResource = "4776ad35-2e04-4357-8743-ebf6c171a905"
+  IXpsOMSignatureBlockResource_GUID = "4776ad35-2e04-4357-8743-ebf6c171a905"
+  IID_IXpsOMSignatureBlockResource = LibC::GUID.new(0x4776ad35_u32, 0x2e04_u16, 0x4357_u16, StaticArray[0x87_u8, 0x43_u8, 0xeb_u8, 0xf6_u8, 0xc1_u8, 0x71_u8, 0xa9_u8, 0x5_u8])
   struct IXpsOMSignatureBlockResource
     lpVtbl : IXpsOMSignatureBlockResourceVTbl*
   end
@@ -1317,8 +1317,8 @@ lib LibWin32
     append : Proc(IXpsOMVisualCollection*, IXpsOMVisual, HRESULT)
   end
 
-  IXpsOMVisualCollection_GUID = LibC::GUID.new("94d8abde-ab91-46a8-82b7-f5b05ef01a96")
-  CLSID_IXpsOMVisualCollection = "94d8abde-ab91-46a8-82b7-f5b05ef01a96"
+  IXpsOMVisualCollection_GUID = "94d8abde-ab91-46a8-82b7-f5b05ef01a96"
+  IID_IXpsOMVisualCollection = LibC::GUID.new(0x94d8abde_u32, 0xab91_u16, 0x46a8_u16, StaticArray[0x82_u8, 0xb7_u8, 0xf5_u8, 0xb0_u8, 0x5e_u8, 0xf0_u8, 0x1a_u8, 0x96_u8])
   struct IXpsOMVisualCollection
     lpVtbl : IXpsOMVisualCollectionVTbl*
   end
@@ -1369,8 +1369,8 @@ lib LibWin32
     clone : Proc(IXpsOMCanvas*, IXpsOMCanvas*, HRESULT)
   end
 
-  IXpsOMCanvas_GUID = LibC::GUID.new("221d1452-331e-47c6-87e9-6ccefb9b5ba3")
-  CLSID_IXpsOMCanvas = "221d1452-331e-47c6-87e9-6ccefb9b5ba3"
+  IXpsOMCanvas_GUID = "221d1452-331e-47c6-87e9-6ccefb9b5ba3"
+  IID_IXpsOMCanvas = LibC::GUID.new(0x221d1452_u32, 0x331e_u16, 0x47c6_u16, StaticArray[0x87_u8, 0xe9_u8, 0x6c_u8, 0xce_u8, 0xfb_u8, 0x9b_u8, 0x5b_u8, 0xa3_u8])
   struct IXpsOMCanvas
     lpVtbl : IXpsOMCanvasVTbl*
   end
@@ -1405,8 +1405,8 @@ lib LibWin32
     clone : Proc(IXpsOMPage*, IXpsOMPage*, HRESULT)
   end
 
-  IXpsOMPage_GUID = LibC::GUID.new("d3e18888-f120-4fee-8c68-35296eae91d4")
-  CLSID_IXpsOMPage = "d3e18888-f120-4fee-8c68-35296eae91d4"
+  IXpsOMPage_GUID = "d3e18888-f120-4fee-8c68-35296eae91d4"
+  IID_IXpsOMPage = LibC::GUID.new(0xd3e18888_u32, 0xf120_u16, 0x4fee_u16, StaticArray[0x8c_u8, 0x68_u8, 0x35_u8, 0x29_u8, 0x6e_u8, 0xae_u8, 0x91_u8, 0xd4_u8])
   struct IXpsOMPage
     lpVtbl : IXpsOMPageVTbl*
   end
@@ -1434,8 +1434,8 @@ lib LibWin32
     clone : Proc(IXpsOMPageReference*, IXpsOMPageReference*, HRESULT)
   end
 
-  IXpsOMPageReference_GUID = LibC::GUID.new("ed360180-6f92-4998-890d-2f208531a0a0")
-  CLSID_IXpsOMPageReference = "ed360180-6f92-4998-890d-2f208531a0a0"
+  IXpsOMPageReference_GUID = "ed360180-6f92-4998-890d-2f208531a0a0"
+  IID_IXpsOMPageReference = LibC::GUID.new(0xed360180_u32, 0x6f92_u16, 0x4998_u16, StaticArray[0x89_u8, 0xd_u8, 0x2f_u8, 0x20_u8, 0x85_u8, 0x31_u8, 0xa0_u8, 0xa0_u8])
   struct IXpsOMPageReference
     lpVtbl : IXpsOMPageReferenceVTbl*
   end
@@ -1452,8 +1452,8 @@ lib LibWin32
     append : Proc(IXpsOMPageReferenceCollection*, IXpsOMPageReference, HRESULT)
   end
 
-  IXpsOMPageReferenceCollection_GUID = LibC::GUID.new("ca16ba4d-e7b9-45c5-958b-f98022473745")
-  CLSID_IXpsOMPageReferenceCollection = "ca16ba4d-e7b9-45c5-958b-f98022473745"
+  IXpsOMPageReferenceCollection_GUID = "ca16ba4d-e7b9-45c5-958b-f98022473745"
+  IID_IXpsOMPageReferenceCollection = LibC::GUID.new(0xca16ba4d_u32, 0xe7b9_u16, 0x45c5_u16, StaticArray[0x95_u8, 0x8b_u8, 0xf9_u8, 0x80_u8, 0x22_u8, 0x47_u8, 0x37_u8, 0x45_u8])
   struct IXpsOMPageReferenceCollection
     lpVtbl : IXpsOMPageReferenceCollectionVTbl*
   end
@@ -1474,8 +1474,8 @@ lib LibWin32
     clone : Proc(IXpsOMDocument*, IXpsOMDocument*, HRESULT)
   end
 
-  IXpsOMDocument_GUID = LibC::GUID.new("2c2c94cb-ac5f-4254-8ee9-23948309d9f0")
-  CLSID_IXpsOMDocument = "2c2c94cb-ac5f-4254-8ee9-23948309d9f0"
+  IXpsOMDocument_GUID = "2c2c94cb-ac5f-4254-8ee9-23948309d9f0"
+  IID_IXpsOMDocument = LibC::GUID.new(0x2c2c94cb_u32, 0xac5f_u16, 0x4254_u16, StaticArray[0x8e_u8, 0xe9_u8, 0x23_u8, 0x94_u8, 0x83_u8, 0x9_u8, 0xd9_u8, 0xf0_u8])
   struct IXpsOMDocument
     lpVtbl : IXpsOMDocumentVTbl*
   end
@@ -1492,8 +1492,8 @@ lib LibWin32
     append : Proc(IXpsOMDocumentCollection*, IXpsOMDocument, HRESULT)
   end
 
-  IXpsOMDocumentCollection_GUID = LibC::GUID.new("d1c87f0d-e947-4754-8a25-971478f7e83e")
-  CLSID_IXpsOMDocumentCollection = "d1c87f0d-e947-4754-8a25-971478f7e83e"
+  IXpsOMDocumentCollection_GUID = "d1c87f0d-e947-4754-8a25-971478f7e83e"
+  IID_IXpsOMDocumentCollection = LibC::GUID.new(0xd1c87f0d_u32, 0xe947_u16, 0x4754_u16, StaticArray[0x8a_u8, 0x25_u8, 0x97_u8, 0x14_u8, 0x78_u8, 0xf7_u8, 0xe8_u8, 0x3e_u8])
   struct IXpsOMDocumentCollection
     lpVtbl : IXpsOMDocumentCollectionVTbl*
   end
@@ -1510,8 +1510,8 @@ lib LibWin32
     set_print_ticket_resource : Proc(IXpsOMDocumentSequence*, IXpsOMPrintTicketResource, HRESULT)
   end
 
-  IXpsOMDocumentSequence_GUID = LibC::GUID.new("56492eb4-d8d5-425e-8256-4c2b64ad0264")
-  CLSID_IXpsOMDocumentSequence = "56492eb4-d8d5-425e-8256-4c2b64ad0264"
+  IXpsOMDocumentSequence_GUID = "56492eb4-d8d5-425e-8256-4c2b64ad0264"
+  IID_IXpsOMDocumentSequence = LibC::GUID.new(0x56492eb4_u32, 0xd8d5_u16, 0x425e_u16, StaticArray[0x82_u8, 0x56_u8, 0x4c_u8, 0x2b_u8, 0x64_u8, 0xad_u8, 0x2_u8, 0x64_u8])
   struct IXpsOMDocumentSequence
     lpVtbl : IXpsOMDocumentSequenceVTbl*
   end
@@ -1558,8 +1558,8 @@ lib LibWin32
     clone : Proc(IXpsOMCoreProperties*, IXpsOMCoreProperties*, HRESULT)
   end
 
-  IXpsOMCoreProperties_GUID = LibC::GUID.new("3340fe8f-4027-4aa1-8f5f-d35ae45fe597")
-  CLSID_IXpsOMCoreProperties = "3340fe8f-4027-4aa1-8f5f-d35ae45fe597"
+  IXpsOMCoreProperties_GUID = "3340fe8f-4027-4aa1-8f5f-d35ae45fe597"
+  IID_IXpsOMCoreProperties = LibC::GUID.new(0x3340fe8f_u32, 0x4027_u16, 0x4aa1_u16, StaticArray[0x8f_u8, 0x5f_u8, 0xd3_u8, 0x5a_u8, 0xe4_u8, 0x5f_u8, 0xe5_u8, 0x97_u8])
   struct IXpsOMCoreProperties
     lpVtbl : IXpsOMCorePropertiesVTbl*
   end
@@ -1580,8 +1580,8 @@ lib LibWin32
     write_to_stream : Proc(IXpsOMPackage*, ISequentialStream, LibC::BOOL, HRESULT)
   end
 
-  IXpsOMPackage_GUID = LibC::GUID.new("18c3df65-81e1-4674-91dc-fc452f5a416f")
-  CLSID_IXpsOMPackage = "18c3df65-81e1-4674-91dc-fc452f5a416f"
+  IXpsOMPackage_GUID = "18c3df65-81e1-4674-91dc-fc452f5a416f"
+  IID_IXpsOMPackage = LibC::GUID.new(0x18c3df65_u32, 0x81e1_u16, 0x4674_u16, StaticArray[0x91_u8, 0xdc_u8, 0xfc_u8, 0x45_u8, 0x2f_u8, 0x5a_u8, 0x41_u8, 0x6f_u8])
   struct IXpsOMPackage
     lpVtbl : IXpsOMPackageVTbl*
   end
@@ -1629,8 +1629,8 @@ lib LibWin32
     create_read_only_stream_on_file : Proc(IXpsOMObjectFactory*, LibC::LPWSTR, IStream*, HRESULT)
   end
 
-  IXpsOMObjectFactory_GUID = LibC::GUID.new("f9b2a685-a50d-4fc2-b764-b56e093ea0ca")
-  CLSID_IXpsOMObjectFactory = "f9b2a685-a50d-4fc2-b764-b56e093ea0ca"
+  IXpsOMObjectFactory_GUID = "f9b2a685-a50d-4fc2-b764-b56e093ea0ca"
+  IID_IXpsOMObjectFactory = LibC::GUID.new(0xf9b2a685_u32, 0xa50d_u16, 0x4fc2_u16, StaticArray[0xb7_u8, 0x64_u8, 0xb5_u8, 0x6e_u8, 0x9_u8, 0x3e_u8, 0xa0_u8, 0xca_u8])
   struct IXpsOMObjectFactory
     lpVtbl : IXpsOMObjectFactoryVTbl*
   end
@@ -1643,8 +1643,8 @@ lib LibWin32
     get_at : Proc(IXpsOMNameCollection*, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
-  IXpsOMNameCollection_GUID = LibC::GUID.new("4bddf8ec-c915-421b-a166-d173d25653d2")
-  CLSID_IXpsOMNameCollection = "4bddf8ec-c915-421b-a166-d173d25653d2"
+  IXpsOMNameCollection_GUID = "4bddf8ec-c915-421b-a166-d173d25653d2"
+  IID_IXpsOMNameCollection = LibC::GUID.new(0x4bddf8ec_u32, 0xc915_u16, 0x421b_u16, StaticArray[0xa1_u8, 0x66_u8, 0xd1_u8, 0x73_u8, 0xd2_u8, 0x56_u8, 0x53_u8, 0xd2_u8])
   struct IXpsOMNameCollection
     lpVtbl : IXpsOMNameCollectionVTbl*
   end
@@ -1661,8 +1661,8 @@ lib LibWin32
     append : Proc(IXpsOMPartUriCollection*, IOpcPartUri, HRESULT)
   end
 
-  IXpsOMPartUriCollection_GUID = LibC::GUID.new("57c650d4-067c-4893-8c33-f62a0633730f")
-  CLSID_IXpsOMPartUriCollection = "57c650d4-067c-4893-8c33-f62a0633730f"
+  IXpsOMPartUriCollection_GUID = "57c650d4-067c-4893-8c33-f62a0633730f"
+  IID_IXpsOMPartUriCollection = LibC::GUID.new(0x57c650d4_u32, 0x67c_u16, 0x4893_u16, StaticArray[0x8c_u8, 0x33_u8, 0xf6_u8, 0x2a_u8, 0x6_u8, 0x33_u8, 0x73_u8, 0xf_u8])
   struct IXpsOMPartUriCollection
     lpVtbl : IXpsOMPartUriCollectionVTbl*
   end
@@ -1678,8 +1678,8 @@ lib LibWin32
     is_closed : Proc(IXpsOMPackageWriter*, LibC::BOOL*, HRESULT)
   end
 
-  IXpsOMPackageWriter_GUID = LibC::GUID.new("4e2aa182-a443-42c6-b41b-4f8e9de73ff9")
-  CLSID_IXpsOMPackageWriter = "4e2aa182-a443-42c6-b41b-4f8e9de73ff9"
+  IXpsOMPackageWriter_GUID = "4e2aa182-a443-42c6-b41b-4f8e9de73ff9"
+  IID_IXpsOMPackageWriter = LibC::GUID.new(0x4e2aa182_u32, 0xa443_u16, 0x42c6_u16, StaticArray[0xb4_u8, 0x1b_u8, 0x4f_u8, 0x8e_u8, 0x9d_u8, 0xe7_u8, 0x3f_u8, 0xf9_u8])
   struct IXpsOMPackageWriter
     lpVtbl : IXpsOMPackageWriterVTbl*
   end
@@ -1691,8 +1691,8 @@ lib LibWin32
     create_xps_om_package_writer : Proc(IXpsOMPackageTarget*, IOpcPartUri, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)
   end
 
-  IXpsOMPackageTarget_GUID = LibC::GUID.new("219a9db0-4959-47d0-8034-b1ce84f41a4d")
-  CLSID_IXpsOMPackageTarget = "219a9db0-4959-47d0-8034-b1ce84f41a4d"
+  IXpsOMPackageTarget_GUID = "219a9db0-4959-47d0-8034-b1ce84f41a4d"
+  IID_IXpsOMPackageTarget = LibC::GUID.new(0x219a9db0_u32, 0x4959_u16, 0x47d0_u16, StaticArray[0x80_u8, 0x34_u8, 0xb1_u8, 0xce_u8, 0x84_u8, 0xf4_u8, 0x1a_u8, 0x4d_u8])
   struct IXpsOMPackageTarget
     lpVtbl : IXpsOMPackageTargetVTbl*
   end
@@ -1704,8 +1704,8 @@ lib LibWin32
     generate_thumbnail : Proc(IXpsOMThumbnailGenerator*, IXpsOMPage, XPS_IMAGE_TYPE, XPS_THUMBNAIL_SIZE, IOpcPartUri, IXpsOMImageResource*, HRESULT)
   end
 
-  IXpsOMThumbnailGenerator_GUID = LibC::GUID.new("15b873d5-1971-41e8-83a3-6578403064c7")
-  CLSID_IXpsOMThumbnailGenerator = "15b873d5-1971-41e8-83a3-6578403064c7"
+  IXpsOMThumbnailGenerator_GUID = "15b873d5-1971-41e8-83a3-6578403064c7"
+  IID_IXpsOMThumbnailGenerator = LibC::GUID.new(0x15b873d5_u32, 0x1971_u16, 0x41e8_u16, StaticArray[0x83_u8, 0xa3_u8, 0x65_u8, 0x78_u8, 0x40_u8, 0x30_u8, 0x64_u8, 0xc7_u8])
   struct IXpsOMThumbnailGenerator
     lpVtbl : IXpsOMThumbnailGeneratorVTbl*
   end
@@ -1765,8 +1765,8 @@ lib LibWin32
     create_remote_dictionary_resource_from_stream1 : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMPartResources, IXpsOMRemoteDictionaryResource*, HRESULT)
   end
 
-  IXpsOMObjectFactory1_GUID = LibC::GUID.new("0a91b617-d612-4181-bf7c-be5824e9cc8f")
-  CLSID_IXpsOMObjectFactory1 = "0a91b617-d612-4181-bf7c-be5824e9cc8f"
+  IXpsOMObjectFactory1_GUID = "0a91b617-d612-4181-bf7c-be5824e9cc8f"
+  IID_IXpsOMObjectFactory1 = LibC::GUID.new(0xa91b617_u32, 0xd612_u16, 0x4181_u16, StaticArray[0xbf_u8, 0x7c_u8, 0xbe_u8, 0x58_u8, 0x24_u8, 0xe9_u8, 0xcc_u8, 0x8f_u8])
   struct IXpsOMObjectFactory1
     lpVtbl : IXpsOMObjectFactory1VTbl*
   end
@@ -1790,8 +1790,8 @@ lib LibWin32
     write_to_stream1 : Proc(IXpsOMPackage1*, ISequentialStream, LibC::BOOL, XPS_DOCUMENT_TYPE, HRESULT)
   end
 
-  IXpsOMPackage1_GUID = LibC::GUID.new("95a9435e-12bb-461b-8e7f-c6adb04cd96a")
-  CLSID_IXpsOMPackage1 = "95a9435e-12bb-461b-8e7f-c6adb04cd96a"
+  IXpsOMPackage1_GUID = "95a9435e-12bb-461b-8e7f-c6adb04cd96a"
+  IID_IXpsOMPackage1 = LibC::GUID.new(0x95a9435e_u32, 0x12bb_u16, 0x461b_u16, StaticArray[0x8e_u8, 0x7f_u8, 0xc6_u8, 0xad_u8, 0xb0_u8, 0x4c_u8, 0xd9_u8, 0x6a_u8])
   struct IXpsOMPackage1
     lpVtbl : IXpsOMPackage1VTbl*
   end
@@ -1828,8 +1828,8 @@ lib LibWin32
     write1 : Proc(IXpsOMPage1*, ISequentialStream, LibC::BOOL, XPS_DOCUMENT_TYPE, HRESULT)
   end
 
-  IXpsOMPage1_GUID = LibC::GUID.new("305b60ef-6892-4dda-9cbb-3aa65974508a")
-  CLSID_IXpsOMPage1 = "305b60ef-6892-4dda-9cbb-3aa65974508a"
+  IXpsOMPage1_GUID = "305b60ef-6892-4dda-9cbb-3aa65974508a"
+  IID_IXpsOMPage1 = LibC::GUID.new(0x305b60ef_u32, 0x6892_u16, 0x4dda_u16, StaticArray[0x9c_u8, 0xbb_u8, 0x3a_u8, 0xa6_u8, 0x59_u8, 0x74_u8, 0x50_u8, 0x8a_u8])
   struct IXpsOMPage1
     lpVtbl : IXpsOMPage1VTbl*
   end
@@ -1843,8 +1843,8 @@ lib LibWin32
     get_xps_type : Proc(IXpsDocumentPackageTarget*, XPS_DOCUMENT_TYPE*, HRESULT)
   end
 
-  IXpsDocumentPackageTarget_GUID = LibC::GUID.new("3b0b6d38-53ad-41da-b212-d37637a6714e")
-  CLSID_IXpsDocumentPackageTarget = "3b0b6d38-53ad-41da-b212-d37637a6714e"
+  IXpsDocumentPackageTarget_GUID = "3b0b6d38-53ad-41da-b212-d37637a6714e"
+  IID_IXpsDocumentPackageTarget = LibC::GUID.new(0x3b0b6d38_u32, 0x53ad_u16, 0x41da_u16, StaticArray[0xb2_u8, 0x12_u8, 0xd3_u8, 0x76_u8, 0x37_u8, 0xa6_u8, 0x71_u8, 0x4e_u8])
   struct IXpsDocumentPackageTarget
     lpVtbl : IXpsDocumentPackageTargetVTbl*
   end
@@ -1861,8 +1861,8 @@ lib LibWin32
     write1 : Proc(IXpsOMRemoteDictionaryResource1*, ISequentialStream, XPS_DOCUMENT_TYPE, HRESULT)
   end
 
-  IXpsOMRemoteDictionaryResource1_GUID = LibC::GUID.new("bf8fc1d4-9d46-4141-ba5f-94bb9250d041")
-  CLSID_IXpsOMRemoteDictionaryResource1 = "bf8fc1d4-9d46-4141-ba5f-94bb9250d041"
+  IXpsOMRemoteDictionaryResource1_GUID = "bf8fc1d4-9d46-4141-ba5f-94bb9250d041"
+  IID_IXpsOMRemoteDictionaryResource1 = LibC::GUID.new(0xbf8fc1d4_u32, 0x9d46_u16, 0x4141_u16, StaticArray[0xba_u8, 0x5f_u8, 0x94_u8, 0xbb_u8, 0x92_u8, 0x50_u8, 0xd0_u8, 0x41_u8])
   struct IXpsOMRemoteDictionaryResource1
     lpVtbl : IXpsOMRemoteDictionaryResource1VTbl*
   end
@@ -1880,8 +1880,8 @@ lib LibWin32
     set_model_print_ticket : Proc(IXpsOMPackageWriter3D*, IOpcPartUri, IStream, HRESULT)
   end
 
-  IXpsOMPackageWriter3D_GUID = LibC::GUID.new("e8a45033-640e-43fa-9bdf-fddeaa31c6a0")
-  CLSID_IXpsOMPackageWriter3D = "e8a45033-640e-43fa-9bdf-fddeaa31c6a0"
+  IXpsOMPackageWriter3D_GUID = "e8a45033-640e-43fa-9bdf-fddeaa31c6a0"
+  IID_IXpsOMPackageWriter3D = LibC::GUID.new(0xe8a45033_u32, 0x640e_u16, 0x43fa_u16, StaticArray[0x9b_u8, 0xdf_u8, 0xfd_u8, 0xde_u8, 0xaa_u8, 0x31_u8, 0xc6_u8, 0xa0_u8])
   struct IXpsOMPackageWriter3D
     lpVtbl : IXpsOMPackageWriter3DVTbl*
   end
@@ -1894,8 +1894,8 @@ lib LibWin32
     get_xps_om_factory : Proc(IXpsDocumentPackageTarget3D*, IXpsOMObjectFactory*, HRESULT)
   end
 
-  IXpsDocumentPackageTarget3D_GUID = LibC::GUID.new("60ba71b8-3101-4984-9199-f4ea775ff01d")
-  CLSID_IXpsDocumentPackageTarget3D = "60ba71b8-3101-4984-9199-f4ea775ff01d"
+  IXpsDocumentPackageTarget3D_GUID = "60ba71b8-3101-4984-9199-f4ea775ff01d"
+  IID_IXpsDocumentPackageTarget3D = LibC::GUID.new(0x60ba71b8_u32, 0x3101_u16, 0x4984_u16, StaticArray[0x91_u8, 0x99_u8, 0xf4_u8, 0xea_u8, 0x77_u8, 0x5f_u8, 0xf0_u8, 0x1d_u8])
   struct IXpsDocumentPackageTarget3D
     lpVtbl : IXpsDocumentPackageTarget3DVTbl*
   end
@@ -1923,8 +1923,8 @@ lib LibWin32
     set_flags : Proc(IXpsSigningOptions*, XPS_SIGN_FLAGS, HRESULT)
   end
 
-  IXpsSigningOptions_GUID = LibC::GUID.new("7718eae4-3215-49be-af5b-594fef7fcfa6")
-  CLSID_IXpsSigningOptions = "7718eae4-3215-49be-af5b-594fef7fcfa6"
+  IXpsSigningOptions_GUID = "7718eae4-3215-49be-af5b-594fef7fcfa6"
+  IID_IXpsSigningOptions = LibC::GUID.new(0x7718eae4_u32, 0x3215_u16, 0x49be_u16, StaticArray[0xaf_u8, 0x5b_u8, 0x59_u8, 0x4f_u8, 0xef_u8, 0x7f_u8, 0xcf_u8, 0xa6_u8])
   struct IXpsSigningOptions
     lpVtbl : IXpsSigningOptionsVTbl*
   end
@@ -1938,8 +1938,8 @@ lib LibWin32
     remove_at : Proc(IXpsSignatureCollection*, UInt32, HRESULT)
   end
 
-  IXpsSignatureCollection_GUID = LibC::GUID.new("a2d1d95d-add2-4dff-ab27-6b9c645ff322")
-  CLSID_IXpsSignatureCollection = "a2d1d95d-add2-4dff-ab27-6b9c645ff322"
+  IXpsSignatureCollection_GUID = "a2d1d95d-add2-4dff-ab27-6b9c645ff322"
+  IID_IXpsSignatureCollection = LibC::GUID.new(0xa2d1d95d_u32, 0xadd2_u16, 0x4dff_u16, StaticArray[0xab_u8, 0x27_u8, 0x6b_u8, 0x9c_u8, 0x64_u8, 0x5f_u8, 0xf3_u8, 0x22_u8])
   struct IXpsSignatureCollection
     lpVtbl : IXpsSignatureCollectionVTbl*
   end
@@ -1962,8 +1962,8 @@ lib LibWin32
     set_signature_xml : Proc(IXpsSignature*, UInt8*, UInt32, HRESULT)
   end
 
-  IXpsSignature_GUID = LibC::GUID.new("6ae4c93e-1ade-42fb-898b-3a5658284857")
-  CLSID_IXpsSignature = "6ae4c93e-1ade-42fb-898b-3a5658284857"
+  IXpsSignature_GUID = "6ae4c93e-1ade-42fb-898b-3a5658284857"
+  IID_IXpsSignature = LibC::GUID.new(0x6ae4c93e_u32, 0x1ade_u16, 0x42fb_u16, StaticArray[0x89_u8, 0x8b_u8, 0x3a_u8, 0x56_u8, 0x58_u8, 0x28_u8, 0x48_u8, 0x57_u8])
   struct IXpsSignature
     lpVtbl : IXpsSignatureVTbl*
   end
@@ -1977,8 +1977,8 @@ lib LibWin32
     remove_at : Proc(IXpsSignatureBlockCollection*, UInt32, HRESULT)
   end
 
-  IXpsSignatureBlockCollection_GUID = LibC::GUID.new("23397050-fe99-467a-8dce-9237f074ffe4")
-  CLSID_IXpsSignatureBlockCollection = "23397050-fe99-467a-8dce-9237f074ffe4"
+  IXpsSignatureBlockCollection_GUID = "23397050-fe99-467a-8dce-9237f074ffe4"
+  IID_IXpsSignatureBlockCollection = LibC::GUID.new(0x23397050_u32, 0xfe99_u16, 0x467a_u16, StaticArray[0x8d_u8, 0xce_u8, 0x92_u8, 0x37_u8, 0xf0_u8, 0x74_u8, 0xff_u8, 0xe4_u8])
   struct IXpsSignatureBlockCollection
     lpVtbl : IXpsSignatureBlockCollectionVTbl*
   end
@@ -1994,8 +1994,8 @@ lib LibWin32
     create_request : Proc(IXpsSignatureBlock*, LibC::LPWSTR, IXpsSignatureRequest*, HRESULT)
   end
 
-  IXpsSignatureBlock_GUID = LibC::GUID.new("151fac09-0b97-4ac6-a323-5e4297d4322b")
-  CLSID_IXpsSignatureBlock = "151fac09-0b97-4ac6-a323-5e4297d4322b"
+  IXpsSignatureBlock_GUID = "151fac09-0b97-4ac6-a323-5e4297d4322b"
+  IID_IXpsSignatureBlock = LibC::GUID.new(0x151fac09_u32, 0xb97_u16, 0x4ac6_u16, StaticArray[0xa3_u8, 0x23_u8, 0x5e_u8, 0x42_u8, 0x97_u8, 0xd4_u8, 0x32_u8, 0x2b_u8])
   struct IXpsSignatureBlock
     lpVtbl : IXpsSignatureBlockVTbl*
   end
@@ -2009,8 +2009,8 @@ lib LibWin32
     remove_at : Proc(IXpsSignatureRequestCollection*, UInt32, HRESULT)
   end
 
-  IXpsSignatureRequestCollection_GUID = LibC::GUID.new("f0253e68-9f19-412e-9b4f-54d3b0ac6cd9")
-  CLSID_IXpsSignatureRequestCollection = "f0253e68-9f19-412e-9b4f-54d3b0ac6cd9"
+  IXpsSignatureRequestCollection_GUID = "f0253e68-9f19-412e-9b4f-54d3b0ac6cd9"
+  IID_IXpsSignatureRequestCollection = LibC::GUID.new(0xf0253e68_u32, 0x9f19_u16, 0x412e_u16, StaticArray[0x9b_u8, 0x4f_u8, 0x54_u8, 0xd3_u8, 0xb0_u8, 0xac_u8, 0x6c_u8, 0xd9_u8])
   struct IXpsSignatureRequestCollection
     lpVtbl : IXpsSignatureRequestCollectionVTbl*
   end
@@ -2033,8 +2033,8 @@ lib LibWin32
     get_signature : Proc(IXpsSignatureRequest*, IXpsSignature*, HRESULT)
   end
 
-  IXpsSignatureRequest_GUID = LibC::GUID.new("ac58950b-7208-4b2d-b2c4-951083d3b8eb")
-  CLSID_IXpsSignatureRequest = "ac58950b-7208-4b2d-b2c4-951083d3b8eb"
+  IXpsSignatureRequest_GUID = "ac58950b-7208-4b2d-b2c4-951083d3b8eb"
+  IID_IXpsSignatureRequest = LibC::GUID.new(0xac58950b_u32, 0x7208_u16, 0x4b2d_u16, StaticArray[0xb2_u8, 0xc4_u8, 0x95_u8, 0x10_u8, 0x83_u8, 0xd3_u8, 0xb8_u8, 0xeb_u8])
   struct IXpsSignatureRequest
     lpVtbl : IXpsSignatureRequestVTbl*
   end
@@ -2056,8 +2056,8 @@ lib LibWin32
     save_package_to_stream : Proc(IXpsSignatureManager*, IStream, HRESULT)
   end
 
-  IXpsSignatureManager_GUID = LibC::GUID.new("d3e8d338-fdc4-4afc-80b5-d532a1782ee1")
-  CLSID_IXpsSignatureManager = "d3e8d338-fdc4-4afc-80b5-d532a1782ee1"
+  IXpsSignatureManager_GUID = "d3e8d338-fdc4-4afc-80b5-d532a1782ee1"
+  IID_IXpsSignatureManager = LibC::GUID.new(0xd3e8d338_u32, 0xfdc4_u16, 0x4afc_u16, StaticArray[0x80_u8, 0xb5_u8, 0xd5_u8, 0x32_u8, 0xa1_u8, 0x78_u8, 0x2e_u8, 0xe1_u8])
   struct IXpsSignatureManager
     lpVtbl : IXpsSignatureManagerVTbl*
   end

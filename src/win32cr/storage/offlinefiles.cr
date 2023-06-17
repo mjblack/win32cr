@@ -111,8 +111,8 @@ lib LibWin32
   OFFLINEFILES_SYNC_ITEM_CHANGE_WRITETIME = 2_u32
   OFFLINEFILES_SYNC_ITEM_CHANGE_FILESIZE = 4_u32
   OFFLINEFILES_SYNC_ITEM_CHANGE_ATTRIBUTES = 8_u32
-  OfflineFilesSetting = LibC::GUID.new(0xfd3659e9_u32, 0xa920_u16, 0x4123_u16, StaticArray[0xad_u8, 0x64_u8, 0x7f_u8, 0xc7_u8, 0x6c_u8, 0x7a_u8, 0xac_u8, 0xdf_u8])
-  OfflineFilesCache = LibC::GUID.new(0x48c6be7c_u32, 0x3871_u16, 0x43cc_u16, StaticArray[0xb4_u8, 0x6f_u8, 0x14_u8, 0x49_u8, 0xa1_u8, 0xbb_u8, 0x2f_u8, 0xf3_u8])
+  CLSID_OfflineFilesSetting = LibC::GUID.new(0xfd3659e9_u32, 0xa920_u16, 0x4123_u16, StaticArray[0xad_u8, 0x64_u8, 0x7f_u8, 0xc7_u8, 0x6c_u8, 0x7a_u8, 0xac_u8, 0xdf_u8])
+  CLSID_OfflineFilesCache = LibC::GUID.new(0x48c6be7c_u32, 0x3871_u16, 0x43cc_u16, StaticArray[0xb4_u8, 0x6f_u8, 0x14_u8, 0x49_u8, 0xa1_u8, 0xbb_u8, 0x2f_u8, 0xf3_u8])
 
 
   enum OFFLINEFILES_ITEM_TYPE : Int32
@@ -347,8 +347,8 @@ lib LibWin32
     ping : Proc(IOfflineFilesEvents*, HRESULT)
   end
 
-  IOfflineFilesEvents_GUID = LibC::GUID.new("e25585c1-0caa-4eb1-873b-1cae5b77c314")
-  CLSID_IOfflineFilesEvents = "e25585c1-0caa-4eb1-873b-1cae5b77c314"
+  IOfflineFilesEvents_GUID = "e25585c1-0caa-4eb1-873b-1cae5b77c314"
+  IID_IOfflineFilesEvents = LibC::GUID.new(0xe25585c1_u32, 0xcaa_u16, 0x4eb1_u16, StaticArray[0x87_u8, 0x3b_u8, 0x1c_u8, 0xae_u8, 0x5b_u8, 0x77_u8, 0xc3_u8, 0x14_u8])
   struct IOfflineFilesEvents
     lpVtbl : IOfflineFilesEventsVTbl*
   end
@@ -393,8 +393,8 @@ lib LibWin32
     settings_changes_applied : Proc(IOfflineFilesEvents2*, HRESULT)
   end
 
-  IOfflineFilesEvents2_GUID = LibC::GUID.new("1ead8f56-ff76-4faa-a795-6f6ef792498b")
-  CLSID_IOfflineFilesEvents2 = "1ead8f56-ff76-4faa-a795-6f6ef792498b"
+  IOfflineFilesEvents2_GUID = "1ead8f56-ff76-4faa-a795-6f6ef792498b"
+  IID_IOfflineFilesEvents2 = LibC::GUID.new(0x1ead8f56_u32, 0xff76_u16, 0x4faa_u16, StaticArray[0xa7_u8, 0x95_u8, 0x6f_u8, 0x6e_u8, 0xf7_u8, 0x92_u8, 0x49_u8, 0x8b_u8])
   struct IOfflineFilesEvents2
     lpVtbl : IOfflineFilesEvents2VTbl*
   end
@@ -442,8 +442,8 @@ lib LibWin32
     prefetch_file_end : Proc(IOfflineFilesEvents3*, LibC::LPWSTR, HRESULT, HRESULT)
   end
 
-  IOfflineFilesEvents3_GUID = LibC::GUID.new("9ba04a45-ee69-42f0-9ab1-7db5c8805808")
-  CLSID_IOfflineFilesEvents3 = "9ba04a45-ee69-42f0-9ab1-7db5c8805808"
+  IOfflineFilesEvents3_GUID = "9ba04a45-ee69-42f0-9ab1-7db5c8805808"
+  IID_IOfflineFilesEvents3 = LibC::GUID.new(0x9ba04a45_u32, 0xee69_u16, 0x42f0_u16, StaticArray[0x9a_u8, 0xb1_u8, 0x7d_u8, 0xb5_u8, 0xc8_u8, 0x80_u8, 0x58_u8, 0x8_u8])
   struct IOfflineFilesEvents3
     lpVtbl : IOfflineFilesEvents3VTbl*
   end
@@ -493,8 +493,8 @@ lib LibWin32
     prefetch_close_handle_end : Proc(IOfflineFilesEvents4*, UInt32, UInt32, HRESULT, HRESULT)
   end
 
-  IOfflineFilesEvents4_GUID = LibC::GUID.new("dbd69b1e-c7d2-473e-b35f-9d8c24c0c484")
-  CLSID_IOfflineFilesEvents4 = "dbd69b1e-c7d2-473e-b35f-9d8c24c0c484"
+  IOfflineFilesEvents4_GUID = "dbd69b1e-c7d2-473e-b35f-9d8c24c0c484"
+  IID_IOfflineFilesEvents4 = LibC::GUID.new(0xdbd69b1e_u32, 0xc7d2_u16, 0x473e_u16, StaticArray[0xb3_u8, 0x5f_u8, 0x9d_u8, 0x8c_u8, 0x24_u8, 0xc0_u8, 0xc4_u8, 0x84_u8])
   struct IOfflineFilesEvents4
     lpVtbl : IOfflineFilesEvents4VTbl*
   end
@@ -508,8 +508,8 @@ lib LibWin32
     get_excluded_events : Proc(IOfflineFilesEventsFilter*, UInt32, OFFLINEFILES_EVENTS*, UInt32*, HRESULT)
   end
 
-  IOfflineFilesEventsFilter_GUID = LibC::GUID.new("33fc4e1b-0716-40fa-ba65-6e62a84a846f")
-  CLSID_IOfflineFilesEventsFilter = "33fc4e1b-0716-40fa-ba65-6e62a84a846f"
+  IOfflineFilesEventsFilter_GUID = "33fc4e1b-0716-40fa-ba65-6e62a84a846f"
+  IID_IOfflineFilesEventsFilter = LibC::GUID.new(0x33fc4e1b_u32, 0x716_u16, 0x40fa_u16, StaticArray[0xba_u8, 0x65_u8, 0x6e_u8, 0x62_u8, 0xa8_u8, 0x4a_u8, 0x84_u8, 0x6f_u8])
   struct IOfflineFilesEventsFilter
     lpVtbl : IOfflineFilesEventsFilterVTbl*
   end
@@ -522,8 +522,8 @@ lib LibWin32
     get_description : Proc(IOfflineFilesErrorInfo*, LibC::LPWSTR*, HRESULT)
   end
 
-  IOfflineFilesErrorInfo_GUID = LibC::GUID.new("7112fa5f-7571-435a-8eb7-195c7c1429bc")
-  CLSID_IOfflineFilesErrorInfo = "7112fa5f-7571-435a-8eb7-195c7c1429bc"
+  IOfflineFilesErrorInfo_GUID = "7112fa5f-7571-435a-8eb7-195c7c1429bc"
+  IID_IOfflineFilesErrorInfo = LibC::GUID.new(0x7112fa5f_u32, 0x7571_u16, 0x435a_u16, StaticArray[0x8e_u8, 0xb7_u8, 0x19_u8, 0x5c_u8, 0x7c_u8, 0x14_u8, 0x29_u8, 0xbc_u8])
   struct IOfflineFilesErrorInfo
     lpVtbl : IOfflineFilesErrorInfoVTbl*
   end
@@ -537,8 +537,8 @@ lib LibWin32
     get_file_size : Proc(IOfflineFilesSyncErrorItemInfo*, LARGE_INTEGER*, HRESULT)
   end
 
-  IOfflineFilesSyncErrorItemInfo_GUID = LibC::GUID.new("ecdbaf0d-6a18-4d55-8017-108f7660ba44")
-  CLSID_IOfflineFilesSyncErrorItemInfo = "ecdbaf0d-6a18-4d55-8017-108f7660ba44"
+  IOfflineFilesSyncErrorItemInfo_GUID = "ecdbaf0d-6a18-4d55-8017-108f7660ba44"
+  IID_IOfflineFilesSyncErrorItemInfo = LibC::GUID.new(0xecdbaf0d_u32, 0x6a18_u16, 0x4d55_u16, StaticArray[0x80_u8, 0x17_u8, 0x10_u8, 0x8f_u8, 0x76_u8, 0x60_u8, 0xba_u8, 0x44_u8])
   struct IOfflineFilesSyncErrorItemInfo
     lpVtbl : IOfflineFilesSyncErrorItemInfoVTbl*
   end
@@ -558,8 +558,8 @@ lib LibWin32
     get_original_info : Proc(IOfflineFilesSyncErrorInfo*, IOfflineFilesSyncErrorItemInfo*, HRESULT)
   end
 
-  IOfflineFilesSyncErrorInfo_GUID = LibC::GUID.new("59f95e46-eb54-49d1-be76-de95458d01b0")
-  CLSID_IOfflineFilesSyncErrorInfo = "59f95e46-eb54-49d1-be76-de95458d01b0"
+  IOfflineFilesSyncErrorInfo_GUID = "59f95e46-eb54-49d1-be76-de95458d01b0"
+  IID_IOfflineFilesSyncErrorInfo = LibC::GUID.new(0x59f95e46_u32, 0xeb54_u16, 0x49d1_u16, StaticArray[0xbe_u8, 0x76_u8, 0xde_u8, 0x95_u8, 0x45_u8, 0x8d_u8, 0x1_u8, 0xb0_u8])
   struct IOfflineFilesSyncErrorInfo
     lpVtbl : IOfflineFilesSyncErrorInfoVTbl*
   end
@@ -573,8 +573,8 @@ lib LibWin32
     rend : Proc(IOfflineFilesProgress*, HRESULT, HRESULT)
   end
 
-  IOfflineFilesProgress_GUID = LibC::GUID.new("fad63237-c55b-4911-9850-bcf96d4c979e")
-  CLSID_IOfflineFilesProgress = "fad63237-c55b-4911-9850-bcf96d4c979e"
+  IOfflineFilesProgress_GUID = "fad63237-c55b-4911-9850-bcf96d4c979e"
+  IID_IOfflineFilesProgress = LibC::GUID.new(0xfad63237_u32, 0xc55b_u16, 0x4911_u16, StaticArray[0x98_u8, 0x50_u8, 0xbc_u8, 0xf9_u8, 0x6d_u8, 0x4c_u8, 0x97_u8, 0x9e_u8])
   struct IOfflineFilesProgress
     lpVtbl : IOfflineFilesProgressVTbl*
   end
@@ -590,8 +590,8 @@ lib LibWin32
     item_result : Proc(IOfflineFilesSimpleProgress*, LibC::LPWSTR, HRESULT, OFFLINEFILES_OP_RESPONSE*, HRESULT)
   end
 
-  IOfflineFilesSimpleProgress_GUID = LibC::GUID.new("c34f7f9b-c43d-4f9d-a776-c0eb6de5d401")
-  CLSID_IOfflineFilesSimpleProgress = "c34f7f9b-c43d-4f9d-a776-c0eb6de5d401"
+  IOfflineFilesSimpleProgress_GUID = "c34f7f9b-c43d-4f9d-a776-c0eb6de5d401"
+  IID_IOfflineFilesSimpleProgress = LibC::GUID.new(0xc34f7f9b_u32, 0xc43d_u16, 0x4f9d_u16, StaticArray[0xa7_u8, 0x76_u8, 0xc0_u8, 0xeb_u8, 0x6d_u8, 0xe5_u8, 0xd4_u8, 0x1_u8])
   struct IOfflineFilesSimpleProgress
     lpVtbl : IOfflineFilesSimpleProgressVTbl*
   end
@@ -607,8 +607,8 @@ lib LibWin32
     sync_item_result : Proc(IOfflineFilesSyncProgress*, LibC::LPWSTR, HRESULT, IOfflineFilesSyncErrorInfo, OFFLINEFILES_OP_RESPONSE*, HRESULT)
   end
 
-  IOfflineFilesSyncProgress_GUID = LibC::GUID.new("6931f49a-6fc7-4c1b-b265-56793fc451b7")
-  CLSID_IOfflineFilesSyncProgress = "6931f49a-6fc7-4c1b-b265-56793fc451b7"
+  IOfflineFilesSyncProgress_GUID = "6931f49a-6fc7-4c1b-b265-56793fc451b7"
+  IID_IOfflineFilesSyncProgress = LibC::GUID.new(0x6931f49a_u32, 0x6fc7_u16, 0x4c1b_u16, StaticArray[0xb2_u8, 0x65_u8, 0x56_u8, 0x79_u8, 0x3f_u8, 0xc4_u8, 0x51_u8, 0xb7_u8])
   struct IOfflineFilesSyncProgress
     lpVtbl : IOfflineFilesSyncProgressVTbl*
   end
@@ -620,8 +620,8 @@ lib LibWin32
     resolve_conflict : Proc(IOfflineFilesSyncConflictHandler*, LibC::LPWSTR, UInt32, OFFLINEFILES_SYNC_STATE, UInt32, OFFLINEFILES_SYNC_CONFLICT_RESOLVE*, LibC::LPWSTR*, HRESULT)
   end
 
-  IOfflineFilesSyncConflictHandler_GUID = LibC::GUID.new("b6dd5092-c65c-46b6-97b8-fadd08e7e1be")
-  CLSID_IOfflineFilesSyncConflictHandler = "b6dd5092-c65c-46b6-97b8-fadd08e7e1be"
+  IOfflineFilesSyncConflictHandler_GUID = "b6dd5092-c65c-46b6-97b8-fadd08e7e1be"
+  IID_IOfflineFilesSyncConflictHandler = LibC::GUID.new(0xb6dd5092_u32, 0xc65c_u16, 0x46b6_u16, StaticArray[0x97_u8, 0xb8_u8, 0xfa_u8, 0xdd_u8, 0x8_u8, 0xe7_u8, 0xe1_u8, 0xbe_u8])
   struct IOfflineFilesSyncConflictHandler
     lpVtbl : IOfflineFilesSyncConflictHandlerVTbl*
   end
@@ -635,8 +635,8 @@ lib LibWin32
     get_pattern_filter : Proc(IOfflineFilesItemFilter*, Char*, UInt32, HRESULT)
   end
 
-  IOfflineFilesItemFilter_GUID = LibC::GUID.new("f4b5a26c-dc05-4f20-ada4-551f1077be5c")
-  CLSID_IOfflineFilesItemFilter = "f4b5a26c-dc05-4f20-ada4-551f1077be5c"
+  IOfflineFilesItemFilter_GUID = "f4b5a26c-dc05-4f20-ada4-551f1077be5c"
+  IID_IOfflineFilesItemFilter = LibC::GUID.new(0xf4b5a26c_u32, 0xdc05_u16, 0x4f20_u16, StaticArray[0xad_u8, 0xa4_u8, 0x55_u8, 0x1f_u8, 0x10_u8, 0x77_u8, 0xbe_u8, 0x5c_u8])
   struct IOfflineFilesItemFilter
     lpVtbl : IOfflineFilesItemFilterVTbl*
   end
@@ -652,8 +652,8 @@ lib LibWin32
     is_marked_for_deletion : Proc(IOfflineFilesItem*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesItem_GUID = LibC::GUID.new("4a753da6-e044-4f12-a718-5d14d079a906")
-  CLSID_IOfflineFilesItem = "4a753da6-e044-4f12-a718-5d14d079a906"
+  IOfflineFilesItem_GUID = "4a753da6-e044-4f12-a718-5d14d079a906"
+  IID_IOfflineFilesItem = LibC::GUID.new(0x4a753da6_u32, 0xe044_u16, 0x4f12_u16, StaticArray[0xa7_u8, 0x18_u8, 0x5d_u8, 0x14_u8, 0xd0_u8, 0x79_u8, 0xa9_u8, 0x6_u8])
   struct IOfflineFilesItem
     lpVtbl : IOfflineFilesItemVTbl*
   end
@@ -669,8 +669,8 @@ lib LibWin32
     is_marked_for_deletion : Proc(IOfflineFilesServerItem*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesServerItem_GUID = LibC::GUID.new("9b1c9576-a92b-4151-8e9e-7c7b3ec2e016")
-  CLSID_IOfflineFilesServerItem = "9b1c9576-a92b-4151-8e9e-7c7b3ec2e016"
+  IOfflineFilesServerItem_GUID = "9b1c9576-a92b-4151-8e9e-7c7b3ec2e016"
+  IID_IOfflineFilesServerItem = LibC::GUID.new(0x9b1c9576_u32, 0xa92b_u16, 0x4151_u16, StaticArray[0x8e_u8, 0x9e_u8, 0x7c_u8, 0x7b_u8, 0x3e_u8, 0xc2_u8, 0xe0_u8, 0x16_u8])
   struct IOfflineFilesServerItem
     lpVtbl : IOfflineFilesServerItemVTbl*
   end
@@ -686,8 +686,8 @@ lib LibWin32
     is_marked_for_deletion : Proc(IOfflineFilesShareItem*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesShareItem_GUID = LibC::GUID.new("bab7e48d-4804-41b5-a44d-0f199b06b145")
-  CLSID_IOfflineFilesShareItem = "bab7e48d-4804-41b5-a44d-0f199b06b145"
+  IOfflineFilesShareItem_GUID = "bab7e48d-4804-41b5-a44d-0f199b06b145"
+  IID_IOfflineFilesShareItem = LibC::GUID.new(0xbab7e48d_u32, 0x4804_u16, 0x41b5_u16, StaticArray[0xa4_u8, 0x4d_u8, 0xf_u8, 0x19_u8, 0x9b_u8, 0x6_u8, 0xb1_u8, 0x45_u8])
   struct IOfflineFilesShareItem
     lpVtbl : IOfflineFilesShareItemVTbl*
   end
@@ -703,8 +703,8 @@ lib LibWin32
     is_marked_for_deletion : Proc(IOfflineFilesDirectoryItem*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesDirectoryItem_GUID = LibC::GUID.new("2273597a-a08c-4a00-a37a-c1ae4e9a1cfd")
-  CLSID_IOfflineFilesDirectoryItem = "2273597a-a08c-4a00-a37a-c1ae4e9a1cfd"
+  IOfflineFilesDirectoryItem_GUID = "2273597a-a08c-4a00-a37a-c1ae4e9a1cfd"
+  IID_IOfflineFilesDirectoryItem = LibC::GUID.new(0x2273597a_u32, 0xa08c_u16, 0x4a00_u16, StaticArray[0xa3_u8, 0x7a_u8, 0xc1_u8, 0xae_u8, 0x4e_u8, 0x9a_u8, 0x1c_u8, 0xfd_u8])
   struct IOfflineFilesDirectoryItem
     lpVtbl : IOfflineFilesDirectoryItemVTbl*
   end
@@ -722,8 +722,8 @@ lib LibWin32
     is_encrypted : Proc(IOfflineFilesFileItem*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesFileItem_GUID = LibC::GUID.new("8dfadead-26c2-4eff-8a72-6b50723d9a00")
-  CLSID_IOfflineFilesFileItem = "8dfadead-26c2-4eff-8a72-6b50723d9a00"
+  IOfflineFilesFileItem_GUID = "8dfadead-26c2-4eff-8a72-6b50723d9a00"
+  IID_IOfflineFilesFileItem = LibC::GUID.new(0x8dfadead_u32, 0x26c2_u16, 0x4eff_u16, StaticArray[0x8a_u8, 0x72_u8, 0x6b_u8, 0x50_u8, 0x72_u8, 0x3d_u8, 0x9a_u8, 0x0_u8])
   struct IOfflineFilesFileItem
     lpVtbl : IOfflineFilesFileItemVTbl*
   end
@@ -738,8 +738,8 @@ lib LibWin32
     clone : Proc(IEnumOfflineFilesItems*, IEnumOfflineFilesItems*, HRESULT)
   end
 
-  IEnumOfflineFilesItems_GUID = LibC::GUID.new("da70e815-c361-4407-bc0b-0d7046e5f2cd")
-  CLSID_IEnumOfflineFilesItems = "da70e815-c361-4407-bc0b-0d7046e5f2cd"
+  IEnumOfflineFilesItems_GUID = "da70e815-c361-4407-bc0b-0d7046e5f2cd"
+  IID_IEnumOfflineFilesItems = LibC::GUID.new(0xda70e815_u32, 0xc361_u16, 0x4407_u16, StaticArray[0xbc_u8, 0xb_u8, 0xd_u8, 0x70_u8, 0x46_u8, 0xe5_u8, 0xf2_u8, 0xcd_u8])
   struct IEnumOfflineFilesItems
     lpVtbl : IEnumOfflineFilesItemsVTbl*
   end
@@ -752,8 +752,8 @@ lib LibWin32
     enum_items_ex : Proc(IOfflineFilesItemContainer*, IOfflineFilesItemFilter, IOfflineFilesItemFilter, IOfflineFilesItemFilter, IOfflineFilesItemFilter, UInt32, UInt32, IEnumOfflineFilesItems*, HRESULT)
   end
 
-  IOfflineFilesItemContainer_GUID = LibC::GUID.new("3836f049-9413-45dd-bf46-b5aaa82dc310")
-  CLSID_IOfflineFilesItemContainer = "3836f049-9413-45dd-bf46-b5aaa82dc310"
+  IOfflineFilesItemContainer_GUID = "3836f049-9413-45dd-bf46-b5aaa82dc310"
+  IID_IOfflineFilesItemContainer = LibC::GUID.new(0x3836f049_u32, 0x9413_u16, 0x45dd_u16, StaticArray[0xbf_u8, 0x46_u8, 0xb5_u8, 0xaa_u8, 0xa8_u8, 0x2d_u8, 0xc3_u8, 0x10_u8])
   struct IOfflineFilesItemContainer
     lpVtbl : IOfflineFilesItemContainerVTbl*
   end
@@ -770,8 +770,8 @@ lib LibWin32
     is_locally_modified_time : Proc(IOfflineFilesChangeInfo*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesChangeInfo_GUID = LibC::GUID.new("a96e6fa4-e0d1-4c29-960b-ee508fe68c72")
-  CLSID_IOfflineFilesChangeInfo = "a96e6fa4-e0d1-4c29-960b-ee508fe68c72"
+  IOfflineFilesChangeInfo_GUID = "a96e6fa4-e0d1-4c29-960b-ee508fe68c72"
+  IID_IOfflineFilesChangeInfo = LibC::GUID.new(0xa96e6fa4_u32, 0xe0d1_u16, 0x4c29_u16, StaticArray[0x96_u8, 0xb_u8, 0xee_u8, 0x50_u8, 0x8f_u8, 0xe6_u8, 0x8c_u8, 0x72_u8])
   struct IOfflineFilesChangeInfo
     lpVtbl : IOfflineFilesChangeInfoVTbl*
   end
@@ -784,8 +784,8 @@ lib LibWin32
     remote_dirty_byte_count : Proc(IOfflineFilesDirtyInfo*, LARGE_INTEGER*, HRESULT)
   end
 
-  IOfflineFilesDirtyInfo_GUID = LibC::GUID.new("0f50ce33-bac9-4eaa-a11d-da0e527d047d")
-  CLSID_IOfflineFilesDirtyInfo = "0f50ce33-bac9-4eaa-a11d-da0e527d047d"
+  IOfflineFilesDirtyInfo_GUID = "0f50ce33-bac9-4eaa-a11d-da0e527d047d"
+  IID_IOfflineFilesDirtyInfo = LibC::GUID.new(0xf50ce33_u32, 0xbac9_u16, 0x4eaa_u16, StaticArray[0xa1_u8, 0x1d_u8, 0xda_u8, 0xe_u8, 0x52_u8, 0x7d_u8, 0x4_u8, 0x7d_u8])
   struct IOfflineFilesDirtyInfo
     lpVtbl : IOfflineFilesDirtyInfoVTbl*
   end
@@ -799,8 +799,8 @@ lib LibWin32
     get_file_size : Proc(IOfflineFilesFileSysInfo*, OFFLINEFILES_ITEM_COPY, LARGE_INTEGER*, HRESULT)
   end
 
-  IOfflineFilesFileSysInfo_GUID = LibC::GUID.new("bc1a163f-7bfd-4d88-9c66-96ea9a6a3d6b")
-  CLSID_IOfflineFilesFileSysInfo = "bc1a163f-7bfd-4d88-9c66-96ea9a6a3d6b"
+  IOfflineFilesFileSysInfo_GUID = "bc1a163f-7bfd-4d88-9c66-96ea9a6a3d6b"
+  IID_IOfflineFilesFileSysInfo = LibC::GUID.new(0xbc1a163f_u32, 0x7bfd_u16, 0x4d88_u16, StaticArray[0x9c_u8, 0x66_u8, 0x96_u8, 0xea_u8, 0x9a_u8, 0x6a_u8, 0x3d_u8, 0x6b_u8])
   struct IOfflineFilesFileSysInfo
     lpVtbl : IOfflineFilesFileSysInfoVTbl*
   end
@@ -816,8 +816,8 @@ lib LibWin32
     is_pinned_for_folder_redirection : Proc(IOfflineFilesPinInfo*, LibC::BOOL*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesPinInfo_GUID = LibC::GUID.new("5b2b0655-b3fd-497d-adeb-bd156bc8355b")
-  CLSID_IOfflineFilesPinInfo = "5b2b0655-b3fd-497d-adeb-bd156bc8355b"
+  IOfflineFilesPinInfo_GUID = "5b2b0655-b3fd-497d-adeb-bd156bc8355b"
+  IID_IOfflineFilesPinInfo = LibC::GUID.new(0x5b2b0655_u32, 0xb3fd_u16, 0x497d_u16, StaticArray[0xad_u8, 0xeb_u8, 0xbd_u8, 0x15_u8, 0x6b_u8, 0xc8_u8, 0x35_u8, 0x5b_u8])
   struct IOfflineFilesPinInfo
     lpVtbl : IOfflineFilesPinInfoVTbl*
   end
@@ -834,8 +834,8 @@ lib LibWin32
     is_partly_pinned : Proc(IOfflineFilesPinInfo2*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesPinInfo2_GUID = LibC::GUID.new("623c58a2-42ed-4ad7-b69a-0f1b30a72d0d")
-  CLSID_IOfflineFilesPinInfo2 = "623c58a2-42ed-4ad7-b69a-0f1b30a72d0d"
+  IOfflineFilesPinInfo2_GUID = "623c58a2-42ed-4ad7-b69a-0f1b30a72d0d"
+  IID_IOfflineFilesPinInfo2 = LibC::GUID.new(0x623c58a2_u32, 0x42ed_u16, 0x4ad7_u16, StaticArray[0xb6_u8, 0x9a_u8, 0xf_u8, 0x1b_u8, 0x30_u8, 0xa7_u8, 0x2d_u8, 0xd_u8])
   struct IOfflineFilesPinInfo2
     lpVtbl : IOfflineFilesPinInfo2VTbl*
   end
@@ -847,8 +847,8 @@ lib LibWin32
     is_transparently_cached : Proc(IOfflineFilesTransparentCacheInfo*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesTransparentCacheInfo_GUID = LibC::GUID.new("bcaf4a01-5b68-4b56-a6a1-8d2786ede8e3")
-  CLSID_IOfflineFilesTransparentCacheInfo = "bcaf4a01-5b68-4b56-a6a1-8d2786ede8e3"
+  IOfflineFilesTransparentCacheInfo_GUID = "bcaf4a01-5b68-4b56-a6a1-8d2786ede8e3"
+  IID_IOfflineFilesTransparentCacheInfo = LibC::GUID.new(0xbcaf4a01_u32, 0x5b68_u16, 0x4b56_u16, StaticArray[0xa6_u8, 0xa1_u8, 0x8d_u8, 0x27_u8, 0x86_u8, 0xed_u8, 0xe8_u8, 0xe3_u8])
   struct IOfflineFilesTransparentCacheInfo
     lpVtbl : IOfflineFilesTransparentCacheInfoVTbl*
   end
@@ -860,8 +860,8 @@ lib LibWin32
     is_ghosted : Proc(IOfflineFilesGhostInfo*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesGhostInfo_GUID = LibC::GUID.new("2b09d48c-8ab5-464f-a755-a59d92f99429")
-  CLSID_IOfflineFilesGhostInfo = "2b09d48c-8ab5-464f-a755-a59d92f99429"
+  IOfflineFilesGhostInfo_GUID = "2b09d48c-8ab5-464f-a755-a59d92f99429"
+  IID_IOfflineFilesGhostInfo = LibC::GUID.new(0x2b09d48c_u32, 0x8ab5_u16, 0x464f_u16, StaticArray[0xa7_u8, 0x55_u8, 0xa5_u8, 0x9d_u8, 0x92_u8, 0xf9_u8, 0x94_u8, 0x29_u8])
   struct IOfflineFilesGhostInfo
     lpVtbl : IOfflineFilesGhostInfoVTbl*
   end
@@ -876,8 +876,8 @@ lib LibWin32
     transition_offline : Proc(IOfflineFilesConnectionInfo*, LibC::HANDLE, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesConnectionInfo_GUID = LibC::GUID.new("efb23a09-a867-4be8-83a6-86969a7d0856")
-  CLSID_IOfflineFilesConnectionInfo = "efb23a09-a867-4be8-83a6-86969a7d0856"
+  IOfflineFilesConnectionInfo_GUID = "efb23a09-a867-4be8-83a6-86969a7d0856"
+  IID_IOfflineFilesConnectionInfo = LibC::GUID.new(0xefb23a09_u32, 0xa867_u16, 0x4be8_u16, StaticArray[0x83_u8, 0xa6_u8, 0x86_u8, 0x96_u8, 0x9a_u8, 0x7d_u8, 0x8_u8, 0x56_u8])
   struct IOfflineFilesConnectionInfo
     lpVtbl : IOfflineFilesConnectionInfoVTbl*
   end
@@ -891,8 +891,8 @@ lib LibWin32
     is_share_dfs_junction : Proc(IOfflineFilesShareInfo*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesShareInfo_GUID = LibC::GUID.new("7bcc43e7-31ce-4ca4-8ccd-1cff2dc494da")
-  CLSID_IOfflineFilesShareInfo = "7bcc43e7-31ce-4ca4-8ccd-1cff2dc494da"
+  IOfflineFilesShareInfo_GUID = "7bcc43e7-31ce-4ca4-8ccd-1cff2dc494da"
+  IID_IOfflineFilesShareInfo = LibC::GUID.new(0x7bcc43e7_u32, 0x31ce_u16, 0x4ca4_u16, StaticArray[0x8c_u8, 0xcd_u8, 0x1c_u8, 0xff_u8, 0x2d_u8, 0xc4_u8, 0x94_u8, 0xda_u8])
   struct IOfflineFilesShareInfo
     lpVtbl : IOfflineFilesShareInfoVTbl*
   end
@@ -904,8 +904,8 @@ lib LibWin32
     suspend_root : Proc(IOfflineFilesSuspend*, LibC::BOOL, HRESULT)
   end
 
-  IOfflineFilesSuspend_GUID = LibC::GUID.new("62c4560f-bc0b-48ca-ad9d-34cb528d99a9")
-  CLSID_IOfflineFilesSuspend = "62c4560f-bc0b-48ca-ad9d-34cb528d99a9"
+  IOfflineFilesSuspend_GUID = "62c4560f-bc0b-48ca-ad9d-34cb528d99a9"
+  IID_IOfflineFilesSuspend = LibC::GUID.new(0x62c4560f_u32, 0xbc0b_u16, 0x48ca_u16, StaticArray[0xad_u8, 0x9d_u8, 0x34_u8, 0xcb_u8, 0x52_u8, 0x8d_u8, 0x99_u8, 0xa9_u8])
   struct IOfflineFilesSuspend
     lpVtbl : IOfflineFilesSuspendVTbl*
   end
@@ -917,8 +917,8 @@ lib LibWin32
     is_suspended : Proc(IOfflineFilesSuspendInfo*, LibC::BOOL*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesSuspendInfo_GUID = LibC::GUID.new("a457c25b-4e9c-4b04-85af-8932ccd97889")
-  CLSID_IOfflineFilesSuspendInfo = "a457c25b-4e9c-4b04-85af-8932ccd97889"
+  IOfflineFilesSuspendInfo_GUID = "a457c25b-4e9c-4b04-85af-8932ccd97889"
+  IID_IOfflineFilesSuspendInfo = LibC::GUID.new(0xa457c25b_u32, 0x4e9c_u16, 0x4b04_u16, StaticArray[0x85_u8, 0xaf_u8, 0x89_u8, 0x32_u8, 0xcc_u8, 0xd9_u8, 0x78_u8, 0x89_u8])
   struct IOfflineFilesSuspendInfo
     lpVtbl : IOfflineFilesSuspendInfoVTbl*
   end
@@ -938,8 +938,8 @@ lib LibWin32
     get_value : Proc(IOfflineFilesSetting*, VARIANT*, LibC::BOOL*, HRESULT)
   end
 
-  IOfflineFilesSetting_GUID = LibC::GUID.new("d871d3f7-f613-48a1-827e-7a34e560fff6")
-  CLSID_IOfflineFilesSetting = "d871d3f7-f613-48a1-827e-7a34e560fff6"
+  IOfflineFilesSetting_GUID = "d871d3f7-f613-48a1-827e-7a34e560fff6"
+  IID_IOfflineFilesSetting = LibC::GUID.new(0xd871d3f7_u32, 0xf613_u16, 0x48a1_u16, StaticArray[0x82_u8, 0x7e_u8, 0x7a_u8, 0x34_u8, 0xe5_u8, 0x60_u8, 0xff_u8, 0xf6_u8])
   struct IOfflineFilesSetting
     lpVtbl : IOfflineFilesSettingVTbl*
   end
@@ -954,8 +954,8 @@ lib LibWin32
     clone : Proc(IEnumOfflineFilesSettings*, IEnumOfflineFilesSettings*, HRESULT)
   end
 
-  IEnumOfflineFilesSettings_GUID = LibC::GUID.new("729680c4-1a38-47bc-9e5c-02c51562ac30")
-  CLSID_IEnumOfflineFilesSettings = "729680c4-1a38-47bc-9e5c-02c51562ac30"
+  IEnumOfflineFilesSettings_GUID = "729680c4-1a38-47bc-9e5c-02c51562ac30"
+  IID_IEnumOfflineFilesSettings = LibC::GUID.new(0x729680c4_u32, 0x1a38_u16, 0x47bc_u16, StaticArray[0x9e_u8, 0x5c_u8, 0x2_u8, 0xc5_u8, 0x15_u8, 0x62_u8, 0xac_u8, 0x30_u8])
   struct IEnumOfflineFilesSettings
     lpVtbl : IEnumOfflineFilesSettingsVTbl*
   end
@@ -983,8 +983,8 @@ lib LibWin32
     is_path_cacheable : Proc(IOfflineFilesCache*, LibC::LPWSTR, LibC::BOOL*, OFFLINEFILES_CACHING_MODE*, HRESULT)
   end
 
-  IOfflineFilesCache_GUID = LibC::GUID.new("855d6203-7914-48b9-8d40-4c56f5acffc5")
-  CLSID_IOfflineFilesCache = "855d6203-7914-48b9-8d40-4c56f5acffc5"
+  IOfflineFilesCache_GUID = "855d6203-7914-48b9-8d40-4c56f5acffc5"
+  IID_IOfflineFilesCache = LibC::GUID.new(0x855d6203_u32, 0x7914_u16, 0x48b9_u16, StaticArray[0x8d_u8, 0x40_u8, 0x4c_u8, 0x56_u8, 0xf5_u8, 0xac_u8, 0xff_u8, 0xc5_u8])
   struct IOfflineFilesCache
     lpVtbl : IOfflineFilesCacheVTbl*
   end
@@ -1013,8 +1013,8 @@ lib LibWin32
     rename_item_ex : Proc(IOfflineFilesCache2*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, HRESULT)
   end
 
-  IOfflineFilesCache2_GUID = LibC::GUID.new("8c075039-1551-4ed9-8781-56705c04d3c0")
-  CLSID_IOfflineFilesCache2 = "8c075039-1551-4ed9-8781-56705c04d3c0"
+  IOfflineFilesCache2_GUID = "8c075039-1551-4ed9-8781-56705c04d3c0"
+  IID_IOfflineFilesCache2 = LibC::GUID.new(0x8c075039_u32, 0x1551_u16, 0x4ed9_u16, StaticArray[0x87_u8, 0x81_u8, 0x56_u8, 0x70_u8, 0x5c_u8, 0x4_u8, 0xd3_u8, 0xc0_u8])
   struct IOfflineFilesCache2
     lpVtbl : IOfflineFilesCache2VTbl*
   end

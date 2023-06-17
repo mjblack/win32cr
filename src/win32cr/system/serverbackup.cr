@@ -59,8 +59,8 @@ lib LibWin32
     check_consistency : Proc(IWsbApplicationBackupSupport*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, LibC::LPWSTR*, IWsbApplicationAsync*, HRESULT)
   end
 
-  IWsbApplicationBackupSupport_GUID = LibC::GUID.new("1eff3510-4a27-46ad-b9e0-08332f0f4f6d")
-  CLSID_IWsbApplicationBackupSupport = "1eff3510-4a27-46ad-b9e0-08332f0f4f6d"
+  IWsbApplicationBackupSupport_GUID = "1eff3510-4a27-46ad-b9e0-08332f0f4f6d"
+  IID_IWsbApplicationBackupSupport = LibC::GUID.new(0x1eff3510_u32, 0x4a27_u16, 0x46ad_u16, StaticArray[0xb9_u8, 0xe0_u8, 0x8_u8, 0x33_u8, 0x2f_u8, 0xf_u8, 0x4f_u8, 0x6d_u8])
   struct IWsbApplicationBackupSupport
     lpVtbl : IWsbApplicationBackupSupportVTbl*
   end
@@ -75,8 +75,8 @@ lib LibWin32
     is_roll_forward_supported : Proc(IWsbApplicationRestoreSupport*, UInt8*, HRESULT)
   end
 
-  IWsbApplicationRestoreSupport_GUID = LibC::GUID.new("8d3bdb38-4ee8-4718-85f9-c7dbc4ab77aa")
-  CLSID_IWsbApplicationRestoreSupport = "8d3bdb38-4ee8-4718-85f9-c7dbc4ab77aa"
+  IWsbApplicationRestoreSupport_GUID = "8d3bdb38-4ee8-4718-85f9-c7dbc4ab77aa"
+  IID_IWsbApplicationRestoreSupport = LibC::GUID.new(0x8d3bdb38_u32, 0x4ee8_u16, 0x4718_u16, StaticArray[0x85_u8, 0xf9_u8, 0xc7_u8, 0xdb_u8, 0xc4_u8, 0xab_u8, 0x77_u8, 0xaa_u8])
   struct IWsbApplicationRestoreSupport
     lpVtbl : IWsbApplicationRestoreSupportVTbl*
   end
@@ -89,8 +89,8 @@ lib LibWin32
     abort : Proc(IWsbApplicationAsync*, HRESULT)
   end
 
-  IWsbApplicationAsync_GUID = LibC::GUID.new("0843f6f7-895c-44a6-b0c2-05a5022aa3a1")
-  CLSID_IWsbApplicationAsync = "0843f6f7-895c-44a6-b0c2-05a5022aa3a1"
+  IWsbApplicationAsync_GUID = "0843f6f7-895c-44a6-b0c2-05a5022aa3a1"
+  IID_IWsbApplicationAsync = LibC::GUID.new(0x843f6f7_u32, 0x895c_u16, 0x44a6_u16, StaticArray[0xb0_u8, 0xc2_u8, 0x5_u8, 0xa5_u8, 0x2_u8, 0x2a_u8, 0xa3_u8, 0xa1_u8])
   struct IWsbApplicationAsync
     lpVtbl : IWsbApplicationAsyncVTbl*
   end

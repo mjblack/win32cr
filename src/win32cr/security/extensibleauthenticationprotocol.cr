@@ -878,8 +878,8 @@ lib LibWin32
     remove_protocol : Proc(IRouterProtocolConfig*, LibC::LPWSTR, UInt32, UInt32, LibC::HANDLE, UInt32, IUnknown, LibC::UINT_PTR, HRESULT)
   end
 
-  IRouterProtocolConfig_GUID = LibC::GUID.new("66a2db16-d706-11d0-a37b-00c04fc9da04")
-  CLSID_IRouterProtocolConfig = "66a2db16-d706-11d0-a37b-00c04fc9da04"
+  IRouterProtocolConfig_GUID = "66a2db16-d706-11d0-a37b-00c04fc9da04"
+  IID_IRouterProtocolConfig = LibC::GUID.new(0x66a2db16_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
   struct IRouterProtocolConfig
     lpVtbl : IRouterProtocolConfigVTbl*
   end
@@ -895,8 +895,8 @@ lib LibWin32
     deactivate : Proc(IAuthenticationProviderConfig*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
   end
 
-  IAuthenticationProviderConfig_GUID = LibC::GUID.new("66a2db17-d706-11d0-a37b-00c04fc9da04")
-  CLSID_IAuthenticationProviderConfig = "66a2db17-d706-11d0-a37b-00c04fc9da04"
+  IAuthenticationProviderConfig_GUID = "66a2db17-d706-11d0-a37b-00c04fc9da04"
+  IID_IAuthenticationProviderConfig = LibC::GUID.new(0x66a2db17_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
   struct IAuthenticationProviderConfig
     lpVtbl : IAuthenticationProviderConfigVTbl*
   end
@@ -912,8 +912,8 @@ lib LibWin32
     deactivate : Proc(IAccountingProviderConfig*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
   end
 
-  IAccountingProviderConfig_GUID = LibC::GUID.new("66a2db18-d706-11d0-a37b-00c04fc9da04")
-  CLSID_IAccountingProviderConfig = "66a2db18-d706-11d0-a37b-00c04fc9da04"
+  IAccountingProviderConfig_GUID = "66a2db18-d706-11d0-a37b-00c04fc9da04"
+  IID_IAccountingProviderConfig = LibC::GUID.new(0x66a2db18_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
   struct IAccountingProviderConfig
     lpVtbl : IAccountingProviderConfigVTbl*
   end
@@ -929,8 +929,8 @@ lib LibWin32
     router_invoke_credentials_ui : Proc(IEAPProviderConfig*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
   end
 
-  IEAPProviderConfig_GUID = LibC::GUID.new("66a2db19-d706-11d0-a37b-00c04fc9da04")
-  CLSID_IEAPProviderConfig = "66a2db19-d706-11d0-a37b-00c04fc9da04"
+  IEAPProviderConfig_GUID = "66a2db19-d706-11d0-a37b-00c04fc9da04"
+  IID_IEAPProviderConfig = LibC::GUID.new(0x66a2db19_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
   struct IEAPProviderConfig
     lpVtbl : IEAPProviderConfigVTbl*
   end
@@ -948,8 +948,8 @@ lib LibWin32
     get_global_config : Proc(IEAPProviderConfig2*, UInt32, UInt8**, UInt32*, HRESULT)
   end
 
-  IEAPProviderConfig2_GUID = LibC::GUID.new("d565917a-85c4-4466-856e-671c3742ea9a")
-  CLSID_IEAPProviderConfig2 = "d565917a-85c4-4466-856e-671c3742ea9a"
+  IEAPProviderConfig2_GUID = "d565917a-85c4-4466-856e-671c3742ea9a"
+  IID_IEAPProviderConfig2 = LibC::GUID.new(0xd565917a_u32, 0x85c4_u16, 0x4466_u16, StaticArray[0x85_u8, 0x6e_u8, 0x67_u8, 0x1c_u8, 0x37_u8, 0x42_u8, 0xea_u8, 0x9a_u8])
   struct IEAPProviderConfig2
     lpVtbl : IEAPProviderConfig2VTbl*
   end
@@ -968,8 +968,8 @@ lib LibWin32
     server_invoke_certificate_config_ui : Proc(IEAPProviderConfig3*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt8*, UInt32, UInt8**, UInt32*, LibC::UINT_PTR, HRESULT)
   end
 
-  IEAPProviderConfig3_GUID = LibC::GUID.new("b78ecd12-68bb-4f86-9bf0-8438dd3be982")
-  CLSID_IEAPProviderConfig3 = "b78ecd12-68bb-4f86-9bf0-8438dd3be982"
+  IEAPProviderConfig3_GUID = "b78ecd12-68bb-4f86-9bf0-8438dd3be982"
+  IID_IEAPProviderConfig3 = LibC::GUID.new(0xb78ecd12_u32, 0x68bb_u16, 0x4f86_u16, StaticArray[0x9b_u8, 0xf0_u8, 0x84_u8, 0x38_u8, 0xdd_u8, 0x3b_u8, 0xe9_u8, 0x82_u8])
   struct IEAPProviderConfig3
     lpVtbl : IEAPProviderConfig3VTbl*
   end

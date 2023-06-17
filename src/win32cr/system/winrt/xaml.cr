@@ -36,8 +36,8 @@ lib LibWin32
     end_draw : Proc(ISurfaceImageSourceNative*, HRESULT)
   end
 
-  ISurfaceImageSourceNative_GUID = LibC::GUID.new("f2e9edc1-d307-4525-9886-0fafaa44163c")
-  CLSID_ISurfaceImageSourceNative = "f2e9edc1-d307-4525-9886-0fafaa44163c"
+  ISurfaceImageSourceNative_GUID = "f2e9edc1-d307-4525-9886-0fafaa44163c"
+  IID_ISurfaceImageSourceNative = LibC::GUID.new(0xf2e9edc1_u32, 0xd307_u16, 0x4525_u16, StaticArray[0x98_u8, 0x86_u8, 0xf_u8, 0xaf_u8, 0xaa_u8, 0x44_u8, 0x16_u8, 0x3c_u8])
   struct ISurfaceImageSourceNative
     lpVtbl : ISurfaceImageSourceNativeVTbl*
   end
@@ -49,8 +49,8 @@ lib LibWin32
     updates_needed : Proc(IVirtualSurfaceUpdatesCallbackNative*, HRESULT)
   end
 
-  IVirtualSurfaceUpdatesCallbackNative_GUID = LibC::GUID.new("dbf2e947-8e6c-4254-9eee-7738f71386c9")
-  CLSID_IVirtualSurfaceUpdatesCallbackNative = "dbf2e947-8e6c-4254-9eee-7738f71386c9"
+  IVirtualSurfaceUpdatesCallbackNative_GUID = "dbf2e947-8e6c-4254-9eee-7738f71386c9"
+  IID_IVirtualSurfaceUpdatesCallbackNative = LibC::GUID.new(0xdbf2e947_u32, 0x8e6c_u16, 0x4254_u16, StaticArray[0x9e_u8, 0xee_u8, 0x77_u8, 0x38_u8, 0xf7_u8, 0x13_u8, 0x86_u8, 0xc9_u8])
   struct IVirtualSurfaceUpdatesCallbackNative
     lpVtbl : IVirtualSurfaceUpdatesCallbackNativeVTbl*
   end
@@ -70,8 +70,8 @@ lib LibWin32
     resize : Proc(IVirtualSurfaceImageSourceNative*, Int32, Int32, HRESULT)
   end
 
-  IVirtualSurfaceImageSourceNative_GUID = LibC::GUID.new("e9550983-360b-4f53-b391-afd695078691")
-  CLSID_IVirtualSurfaceImageSourceNative = "e9550983-360b-4f53-b391-afd695078691"
+  IVirtualSurfaceImageSourceNative_GUID = "e9550983-360b-4f53-b391-afd695078691"
+  IID_IVirtualSurfaceImageSourceNative = LibC::GUID.new(0xe9550983_u32, 0x360b_u16, 0x4f53_u16, StaticArray[0xb3_u8, 0x91_u8, 0xaf_u8, 0xd6_u8, 0x95_u8, 0x7_u8, 0x86_u8, 0x91_u8])
   struct IVirtualSurfaceImageSourceNative
     lpVtbl : IVirtualSurfaceImageSourceNativeVTbl*
   end
@@ -83,8 +83,8 @@ lib LibWin32
     set_swap_chain : Proc(ISwapChainBackgroundPanelNative*, IDXGISwapChain, HRESULT)
   end
 
-  ISwapChainBackgroundPanelNative_GUID = LibC::GUID.new("43bebd4e-add5-4035-8f85-5608d08e9dc9")
-  CLSID_ISwapChainBackgroundPanelNative = "43bebd4e-add5-4035-8f85-5608d08e9dc9"
+  ISwapChainBackgroundPanelNative_GUID = "43bebd4e-add5-4035-8f85-5608d08e9dc9"
+  IID_ISwapChainBackgroundPanelNative = LibC::GUID.new(0x43bebd4e_u32, 0xadd5_u16, 0x4035_u16, StaticArray[0x8f_u8, 0x85_u8, 0x56_u8, 0x8_u8, 0xd0_u8, 0x8e_u8, 0x9d_u8, 0xc9_u8])
   struct ISwapChainBackgroundPanelNative
     lpVtbl : ISwapChainBackgroundPanelNativeVTbl*
   end
@@ -96,8 +96,8 @@ lib LibWin32
     flush_all_surfaces_with_device : Proc(ISurfaceImageSourceManagerNative*, IUnknown, HRESULT)
   end
 
-  ISurfaceImageSourceManagerNative_GUID = LibC::GUID.new("4c8798b7-1d88-4a0f-b59b-b93f600de8c8")
-  CLSID_ISurfaceImageSourceManagerNative = "4c8798b7-1d88-4a0f-b59b-b93f600de8c8"
+  ISurfaceImageSourceManagerNative_GUID = "4c8798b7-1d88-4a0f-b59b-b93f600de8c8"
+  IID_ISurfaceImageSourceManagerNative = LibC::GUID.new(0x4c8798b7_u32, 0x1d88_u16, 0x4a0f_u16, StaticArray[0xb5_u8, 0x9b_u8, 0xb9_u8, 0x3f_u8, 0x60_u8, 0xd_u8, 0xe8_u8, 0xc8_u8])
   struct ISurfaceImageSourceManagerNative
     lpVtbl : ISurfaceImageSourceManagerNativeVTbl*
   end
@@ -113,8 +113,8 @@ lib LibWin32
     resume_draw : Proc(ISurfaceImageSourceNativeWithD2D*, HRESULT)
   end
 
-  ISurfaceImageSourceNativeWithD2D_GUID = LibC::GUID.new("54298223-41e1-4a41-9c08-02e8256864a1")
-  CLSID_ISurfaceImageSourceNativeWithD2D = "54298223-41e1-4a41-9c08-02e8256864a1"
+  ISurfaceImageSourceNativeWithD2D_GUID = "54298223-41e1-4a41-9c08-02e8256864a1"
+  IID_ISurfaceImageSourceNativeWithD2D = LibC::GUID.new(0x54298223_u32, 0x41e1_u16, 0x4a41_u16, StaticArray[0x9c_u8, 0x8_u8, 0x2_u8, 0xe8_u8, 0x25_u8, 0x68_u8, 0x64_u8, 0xa1_u8])
   struct ISurfaceImageSourceNativeWithD2D
     lpVtbl : ISurfaceImageSourceNativeWithD2DVTbl*
   end
@@ -126,8 +126,8 @@ lib LibWin32
     set_swap_chain : Proc(ISwapChainPanelNative*, IDXGISwapChain, HRESULT)
   end
 
-  ISwapChainPanelNative_GUID = LibC::GUID.new("f92f19d2-3ade-45a6-a20c-f6f1ea90554b")
-  CLSID_ISwapChainPanelNative = "f92f19d2-3ade-45a6-a20c-f6f1ea90554b"
+  ISwapChainPanelNative_GUID = "f92f19d2-3ade-45a6-a20c-f6f1ea90554b"
+  IID_ISwapChainPanelNative = LibC::GUID.new(0xf92f19d2_u32, 0x3ade_u16, 0x45a6_u16, StaticArray[0xa2_u8, 0xc_u8, 0xf6_u8, 0xf1_u8, 0xea_u8, 0x90_u8, 0x55_u8, 0x4b_u8])
   struct ISwapChainPanelNative
     lpVtbl : ISwapChainPanelNativeVTbl*
   end
@@ -140,8 +140,8 @@ lib LibWin32
     set_swap_chain_handle : Proc(ISwapChainPanelNative2*, LibC::HANDLE, HRESULT)
   end
 
-  ISwapChainPanelNative2_GUID = LibC::GUID.new("d5a2f60c-37b2-44a2-937b-8d8eb9726821")
-  CLSID_ISwapChainPanelNative2 = "d5a2f60c-37b2-44a2-937b-8d8eb9726821"
+  ISwapChainPanelNative2_GUID = "d5a2f60c-37b2-44a2-937b-8d8eb9726821"
+  IID_ISwapChainPanelNative2 = LibC::GUID.new(0xd5a2f60c_u32, 0x37b2_u16, 0x44a2_u16, StaticArray[0x93_u8, 0x7b_u8, 0x8d_u8, 0x8e_u8, 0xb9_u8, 0x72_u8, 0x68_u8, 0x21_u8])
   struct ISwapChainPanelNative2
     lpVtbl : ISwapChainPanelNative2VTbl*
   end
@@ -154,8 +154,8 @@ lib LibWin32
     get_window_handle : Proc(IDesktopWindowXamlSourceNative*, HANDLE*, HRESULT)
   end
 
-  IDesktopWindowXamlSourceNative_GUID = LibC::GUID.new("3cbcf1bf-2f76-4e9c-96ab-e84b37972554")
-  CLSID_IDesktopWindowXamlSourceNative = "3cbcf1bf-2f76-4e9c-96ab-e84b37972554"
+  IDesktopWindowXamlSourceNative_GUID = "3cbcf1bf-2f76-4e9c-96ab-e84b37972554"
+  IID_IDesktopWindowXamlSourceNative = LibC::GUID.new(0x3cbcf1bf_u32, 0x2f76_u16, 0x4e9c_u16, StaticArray[0x96_u8, 0xab_u8, 0xe8_u8, 0x4b_u8, 0x37_u8, 0x97_u8, 0x25_u8, 0x54_u8])
   struct IDesktopWindowXamlSourceNative
     lpVtbl : IDesktopWindowXamlSourceNativeVTbl*
   end
@@ -169,8 +169,8 @@ lib LibWin32
     pre_translate_message : Proc(IDesktopWindowXamlSourceNative2*, MSG*, LibC::BOOL*, HRESULT)
   end
 
-  IDesktopWindowXamlSourceNative2_GUID = LibC::GUID.new("e3dcd8c7-3057-4692-99c3-7b7720afda31")
-  CLSID_IDesktopWindowXamlSourceNative2 = "e3dcd8c7-3057-4692-99c3-7b7720afda31"
+  IDesktopWindowXamlSourceNative2_GUID = "e3dcd8c7-3057-4692-99c3-7b7720afda31"
+  IID_IDesktopWindowXamlSourceNative2 = LibC::GUID.new(0xe3dcd8c7_u32, 0x3057_u16, 0x4692_u16, StaticArray[0x99_u8, 0xc3_u8, 0x7b_u8, 0x77_u8, 0x20_u8, 0xaf_u8, 0xda_u8, 0x31_u8])
   struct IDesktopWindowXamlSourceNative2
     lpVtbl : IDesktopWindowXamlSourceNative2VTbl*
   end
@@ -185,8 +185,8 @@ lib LibWin32
     unpeg : Proc(IReferenceTrackerTarget*, HRESULT)
   end
 
-  IReferenceTrackerTarget_GUID = LibC::GUID.new("64bd43f8-bfee-4ec4-b7eb-2935158dae21")
-  CLSID_IReferenceTrackerTarget = "64bd43f8-bfee-4ec4-b7eb-2935158dae21"
+  IReferenceTrackerTarget_GUID = "64bd43f8-bfee-4ec4-b7eb-2935158dae21"
+  IID_IReferenceTrackerTarget = LibC::GUID.new(0x64bd43f8_u32, 0xbfee_u16, 0x4ec4_u16, StaticArray[0xb7_u8, 0xeb_u8, 0x29_u8, 0x35_u8, 0x15_u8, 0x8d_u8, 0xae_u8, 0x21_u8])
   struct IReferenceTrackerTarget
     lpVtbl : IReferenceTrackerTargetVTbl*
   end
@@ -204,8 +204,8 @@ lib LibWin32
     peg_from_tracker_source : Proc(IReferenceTracker*, HRESULT)
   end
 
-  IReferenceTracker_GUID = LibC::GUID.new("11d3b13a-180e-4789-a8be-7712882893e6")
-  CLSID_IReferenceTracker = "11d3b13a-180e-4789-a8be-7712882893e6"
+  IReferenceTracker_GUID = "11d3b13a-180e-4789-a8be-7712882893e6"
+  IID_IReferenceTracker = LibC::GUID.new(0x11d3b13a_u32, 0x180e_u16, 0x4789_u16, StaticArray[0xa8_u8, 0xbe_u8, 0x77_u8, 0x12_u8, 0x88_u8, 0x28_u8, 0x93_u8, 0xe6_u8])
   struct IReferenceTracker
     lpVtbl : IReferenceTrackerVTbl*
   end
@@ -220,8 +220,8 @@ lib LibWin32
     set_reference_tracker_host : Proc(IReferenceTrackerManager*, IReferenceTrackerHost, HRESULT)
   end
 
-  IReferenceTrackerManager_GUID = LibC::GUID.new("3cf184b4-7ccb-4dda-8455-7e6ce99a3298")
-  CLSID_IReferenceTrackerManager = "3cf184b4-7ccb-4dda-8455-7e6ce99a3298"
+  IReferenceTrackerManager_GUID = "3cf184b4-7ccb-4dda-8455-7e6ce99a3298"
+  IID_IReferenceTrackerManager = LibC::GUID.new(0x3cf184b4_u32, 0x7ccb_u16, 0x4dda_u16, StaticArray[0x84_u8, 0x55_u8, 0x7e_u8, 0x6c_u8, 0xe9_u8, 0x9a_u8, 0x32_u8, 0x98_u8])
   struct IReferenceTrackerManager
     lpVtbl : IReferenceTrackerManagerVTbl*
   end
@@ -233,8 +233,8 @@ lib LibWin32
     found_tracker_target : Proc(IFindReferenceTargetsCallback*, IReferenceTrackerTarget, HRESULT)
   end
 
-  IFindReferenceTargetsCallback_GUID = LibC::GUID.new("04b3486c-4687-4229-8d14-505ab584dd88")
-  CLSID_IFindReferenceTargetsCallback = "04b3486c-4687-4229-8d14-505ab584dd88"
+  IFindReferenceTargetsCallback_GUID = "04b3486c-4687-4229-8d14-505ab584dd88"
+  IID_IFindReferenceTargetsCallback = LibC::GUID.new(0x4b3486c_u32, 0x4687_u16, 0x4229_u16, StaticArray[0x8d_u8, 0x14_u8, 0x50_u8, 0x5a_u8, 0xb5_u8, 0x84_u8, 0xdd_u8, 0x88_u8])
   struct IFindReferenceTargetsCallback
     lpVtbl : IFindReferenceTargetsCallbackVTbl*
   end
@@ -251,8 +251,8 @@ lib LibWin32
     remove_memory_pressure : Proc(IReferenceTrackerHost*, UInt64, HRESULT)
   end
 
-  IReferenceTrackerHost_GUID = LibC::GUID.new("29a71c6a-3c42-4416-a39d-e2825a07a773")
-  CLSID_IReferenceTrackerHost = "29a71c6a-3c42-4416-a39d-e2825a07a773"
+  IReferenceTrackerHost_GUID = "29a71c6a-3c42-4416-a39d-e2825a07a773"
+  IID_IReferenceTrackerHost = LibC::GUID.new(0x29a71c6a_u32, 0x3c42_u16, 0x4416_u16, StaticArray[0xa3_u8, 0x9d_u8, 0xe2_u8, 0x82_u8, 0x5a_u8, 0x7_u8, 0xa7_u8, 0x73_u8])
   struct IReferenceTrackerHost
     lpVtbl : IReferenceTrackerHostVTbl*
   end
@@ -263,8 +263,8 @@ lib LibWin32
     release : Proc(IReferenceTrackerExtension*, UInt32)
   end
 
-  IReferenceTrackerExtension_GUID = LibC::GUID.new("4e897caa-59d5-4613-8f8c-f7ebd1f399b0")
-  CLSID_IReferenceTrackerExtension = "4e897caa-59d5-4613-8f8c-f7ebd1f399b0"
+  IReferenceTrackerExtension_GUID = "4e897caa-59d5-4613-8f8c-f7ebd1f399b0"
+  IID_IReferenceTrackerExtension = LibC::GUID.new(0x4e897caa_u32, 0x59d5_u16, 0x4613_u16, StaticArray[0x8f_u8, 0x8c_u8, 0xf7_u8, 0xeb_u8, 0xd1_u8, 0xf3_u8, 0x99_u8, 0xb0_u8])
   struct IReferenceTrackerExtension
     lpVtbl : IReferenceTrackerExtensionVTbl*
   end
@@ -279,8 +279,8 @@ lib LibWin32
     try_get_safe_tracker_value : Proc(ITrackerOwner*, TrackerHandle__*, IUnknown*, UInt8)
   end
 
-  ITrackerOwner_GUID = LibC::GUID.new("eb24c20b-9816-4ac7-8cff-36f67a118f4e")
-  CLSID_ITrackerOwner = "eb24c20b-9816-4ac7-8cff-36f67a118f4e"
+  ITrackerOwner_GUID = "eb24c20b-9816-4ac7-8cff-36f67a118f4e"
+  IID_ITrackerOwner = LibC::GUID.new(0xeb24c20b_u32, 0x9816_u16, 0x4ac7_u16, StaticArray[0x8c_u8, 0xff_u8, 0x36_u8, 0xf6_u8, 0x7a_u8, 0x11_u8, 0x8f_u8, 0x4e_u8])
   struct ITrackerOwner
     lpVtbl : ITrackerOwnerVTbl*
   end

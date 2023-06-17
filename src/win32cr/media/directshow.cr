@@ -1035,300 +1035,300 @@ lib LibWin32
   STREAMBUFFER_EC_PRIMARY_AUDIO = 814_i32
   STREAMBUFFER_EC_RATE_CHANGING_FOR_SETPOSITIONS = 815_i32
   STREAMBUFFER_EC_SETPOSITIONS_EVENTS_DONE = 816_i32
-  FilgraphManager = LibC::GUID.new(0xe436ebb3_u32, 0x524f_u16, 0x11ce_u16, StaticArray[0x9f_u8, 0x53_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
-  SystemTuningSpaces = LibC::GUID.new(0xd02aac50_u32, 0x27e_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
-  TuningSpace = LibC::GUID.new(0x5ffdc5e6_u32, 0xb83a_u16, 0x4b55_u16, StaticArray[0xb6_u8, 0xe8_u8, 0xc6_u8, 0x9e_u8, 0x76_u8, 0x5f_u8, 0xe9_u8, 0xdb_u8])
-  ChannelIDTuningSpace = LibC::GUID.new(0xcc829a2f_u32, 0x3365_u16, 0x463f_u16, StaticArray[0xaf_u8, 0x13_u8, 0x81_u8, 0xdb_u8, 0xb6_u8, 0xf3_u8, 0xa5_u8, 0x55_u8])
-  ATSCTuningSpace = LibC::GUID.new(0xa2e30750_u32, 0x6c3d_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  DigitalCableTuningSpace = LibC::GUID.new(0xd9bb4cee_u32, 0xb87a_u16, 0x47f1_u16, StaticArray[0xac_u8, 0x92_u8, 0xb0_u8, 0x8d_u8, 0x9c_u8, 0x78_u8, 0x13_u8, 0xfc_u8])
-  AnalogRadioTuningSpace = LibC::GUID.new(0x8a674b4c_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  AuxInTuningSpace = LibC::GUID.new(0xf9769a06_u32, 0x7aca_u16, 0x4e39_u16, StaticArray[0x9c_u8, 0xfb_u8, 0x97_u8, 0xbb_u8, 0x35_u8, 0xf0_u8, 0xe7_u8, 0x7e_u8])
-  AnalogTVTuningSpace = LibC::GUID.new(0x8a674b4d_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  DVBTuningSpace = LibC::GUID.new(0xc6b14b32_u32, 0x76aa_u16, 0x4a86_u16, StaticArray[0xa7_u8, 0xac_u8, 0x5c_u8, 0x79_u8, 0xaa_u8, 0xf5_u8, 0x8d_u8, 0xa7_u8])
-  DVBSTuningSpace = LibC::GUID.new(0xb64016f3_u32, 0xc9a2_u16, 0x4066_u16, StaticArray[0x96_u8, 0xf0_u8, 0xbd_u8, 0x95_u8, 0x63_u8, 0x31_u8, 0x47_u8, 0x26_u8])
-  ComponentTypes = LibC::GUID.new(0xa1a2b1c4_u32, 0xe3a_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
-  ComponentType = LibC::GUID.new(0x823535a0_u32, 0x318_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
-  LanguageComponentType = LibC::GUID.new(0x1be49f30_u32, 0xe1b_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
-  MPEG2ComponentType = LibC::GUID.new(0x418008f3_u32, 0xcf67_u16, 0x4668_u16, StaticArray[0x96_u8, 0x28_u8, 0x10_u8, 0xdc_u8, 0x52_u8, 0xbe_u8, 0x1d_u8, 0x8_u8])
-  ATSCComponentType = LibC::GUID.new(0xa8dcf3d5_u32, 0x780_u16, 0x4ef4_u16, StaticArray[0x8a_u8, 0x83_u8, 0x2c_u8, 0xff_u8, 0xaa_u8, 0xcb_u8, 0x8a_u8, 0xce_u8])
-  Components = LibC::GUID.new(0x809b6661_u32, 0x94c4_u16, 0x49e6_u16, StaticArray[0xb6_u8, 0xec_u8, 0x3f_u8, 0xf_u8, 0x86_u8, 0x22_u8, 0x15_u8, 0xaa_u8])
-  Component = LibC::GUID.new(0x59dc47a8_u32, 0x116c_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
-  MPEG2Component = LibC::GUID.new(0x55cb2d7_u32, 0x2969_u16, 0x45cd_u16, StaticArray[0x91_u8, 0x4b_u8, 0x76_u8, 0x89_u8, 0x7_u8, 0x22_u8, 0xf1_u8, 0x12_u8])
-  AnalogAudioComponentType = LibC::GUID.new(0x28ab0005_u32, 0xe845_u16, 0x4ffa_u16, StaticArray[0xaa_u8, 0x9b_u8, 0xf4_u8, 0x66_u8, 0x52_u8, 0x36_u8, 0x14_u8, 0x1c_u8])
-  TuneRequest = LibC::GUID.new(0xb46e0d38_u32, 0xab35_u16, 0x4a06_u16, StaticArray[0xa1_u8, 0x37_u8, 0x70_u8, 0x57_u8, 0x6b_u8, 0x1_u8, 0xb3_u8, 0x9f_u8])
-  ChannelIDTuneRequest = LibC::GUID.new(0x3a9428a7_u32, 0x31a4_u16, 0x45e9_u16, StaticArray[0x9e_u8, 0xfb_u8, 0xe0_u8, 0x55_u8, 0xbf_u8, 0x7b_u8, 0xb3_u8, 0xdb_u8])
-  ChannelTuneRequest = LibC::GUID.new(0x369b4e5_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  ATSCChannelTuneRequest = LibC::GUID.new(0x369b4e6_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  DigitalCableTuneRequest = LibC::GUID.new(0x26ec0b63_u32, 0xaa90_u16, 0x458a_u16, StaticArray[0x8d_u8, 0xf4_u8, 0x56_u8, 0x59_u8, 0xf2_u8, 0xc8_u8, 0xa1_u8, 0x8a_u8])
-  MPEG2TuneRequest = LibC::GUID.new(0x955ac62_u32, 0xbf2e_u16, 0x4cba_u16, StaticArray[0xa2_u8, 0xb9_u8, 0xa6_u8, 0x3f_u8, 0x77_u8, 0x2d_u8, 0x46_u8, 0xcf_u8])
-  MPEG2TuneRequestFactory = LibC::GUID.new(0x2c63e4eb_u32, 0x4cea_u16, 0x41b8_u16, StaticArray[0x91_u8, 0x9c_u8, 0xe9_u8, 0x47_u8, 0xea_u8, 0x19_u8, 0xa7_u8, 0x7c_u8])
-  Locator = LibC::GUID.new(0x888c883_u32, 0xac4f_u16, 0x4943_u16, StaticArray[0xb5_u8, 0x16_u8, 0x2c_u8, 0x38_u8, 0xd9_u8, 0xb3_u8, 0x45_u8, 0x62_u8])
-  DigitalLocator = LibC::GUID.new(0x6e50cc0d_u32, 0xc19b_u16, 0x4bf6_u16, StaticArray[0x81_u8, 0xb_u8, 0x5b_u8, 0xd6_u8, 0x7_u8, 0x61_u8, 0xf5_u8, 0xcc_u8])
-  AnalogLocator = LibC::GUID.new(0x49638b91_u32, 0x48ab_u16, 0x48b7_u16, StaticArray[0xa4_u8, 0x7a_u8, 0x7d_u8, 0xe_u8, 0x75_u8, 0xa0_u8, 0x8e_u8, 0xde_u8])
-  ATSCLocator = LibC::GUID.new(0x8872ff1b_u32, 0x98fa_u16, 0x4d7a_u16, StaticArray[0x8d_u8, 0x93_u8, 0xc9_u8, 0xf1_u8, 0x5_u8, 0x5f_u8, 0x85_u8, 0xbb_u8])
-  DigitalCableLocator = LibC::GUID.new(0x3c06416_u32, 0xd127_u16, 0x407a_u16, StaticArray[0xab_u8, 0x4c_u8, 0xfd_u8, 0xd2_u8, 0x79_u8, 0xab_u8, 0xbe_u8, 0x5d_u8])
-  DVBTLocator = LibC::GUID.new(0x9cd64701_u32, 0xbdf3_u16, 0x4d14_u16, StaticArray[0x8e_u8, 0x3_u8, 0xf1_u8, 0x29_u8, 0x83_u8, 0xd8_u8, 0x66_u8, 0x64_u8])
-  DVBTLocator2 = LibC::GUID.new(0xefe3fa02_u32, 0x45d7_u16, 0x4920_u16, StaticArray[0xbe_u8, 0x96_u8, 0x53_u8, 0xfa_u8, 0x7f_u8, 0x35_u8, 0xb0_u8, 0xe6_u8])
-  DVBSLocator = LibC::GUID.new(0x1df7d126_u32, 0x4050_u16, 0x47f0_u16, StaticArray[0xa7_u8, 0xcf_u8, 0x4c_u8, 0x4c_u8, 0xa9_u8, 0x24_u8, 0x13_u8, 0x33_u8])
-  DVBCLocator = LibC::GUID.new(0xc531d9fd_u32, 0x9685_u16, 0x4028_u16, StaticArray[0x8b_u8, 0x68_u8, 0x6e_u8, 0x12_u8, 0x32_u8, 0x7_u8, 0x9f_u8, 0x1e_u8])
-  ISDBSLocator = LibC::GUID.new(0x6504afed_u32, 0xa629_u16, 0x455c_u16, StaticArray[0xa7_u8, 0xf1_u8, 0x4_u8, 0x96_u8, 0x4d_u8, 0xea_u8, 0x5c_u8, 0xc4_u8])
-  DVBTuneRequest = LibC::GUID.new(0x15d6504a_u32, 0x5494_u16, 0x499c_u16, StaticArray[0x88_u8, 0x6c_u8, 0x97_u8, 0x3c_u8, 0x9e_u8, 0x53_u8, 0xb9_u8, 0xf1_u8])
-  CreatePropBagOnRegKey = LibC::GUID.new(0x8a674b49_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  BroadcastEventService = LibC::GUID.new(0xb3ffb92_u32, 0x919_u16, 0x4934_u16, StaticArray[0x9d_u8, 0x5b_u8, 0x61_u8, 0x9c_u8, 0x71_u8, 0x9d_u8, 0x2_u8, 0x2_u8])
-  TunerMarshaler = LibC::GUID.new(0x6438570b_u32, 0xc08_u16, 0x4a25_u16, StaticArray[0x95_u8, 0x4_u8, 0x80_u8, 0x12_u8, 0xbb_u8, 0x4d_u8, 0x50_u8, 0xcf_u8])
-  PersistTuneXmlUtility = LibC::GUID.new(0xe77026b0_u32, 0xb97f_u16, 0x4cbb_u16, StaticArray[0xb7_u8, 0xfb_u8, 0xf4_u8, 0xf0_u8, 0x3a_u8, 0xd6_u8, 0x9f_u8, 0x11_u8])
-  ESEventService = LibC::GUID.new(0xc20447fc_u32, 0xec60_u16, 0x475e_u16, StaticArray[0x81_u8, 0x3f_u8, 0xd2_u8, 0xb0_u8, 0xa6_u8, 0xde_u8, 0xce_u8, 0xfe_u8])
-  ESEventFactory = LibC::GUID.new(0x8e8a07da_u32, 0x71f8_u16, 0x40c1_u16, StaticArray[0xa9_u8, 0x29_u8, 0x5e_u8, 0x3a_u8, 0x86_u8, 0x8a_u8, 0xc2_u8, 0xc6_u8])
-  XDSToRat = LibC::GUID.new(0xc5c5c5f0_u32, 0x3abc_u16, 0x11d6_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa0_u8, 0xc0_u8, 0x26_u8])
-  EvalRat = LibC::GUID.new(0xc5c5c5f1_u32, 0x3abc_u16, 0x11d6_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa0_u8, 0xc0_u8, 0x26_u8])
-  ETFilter = LibC::GUID.new(0xc4c4c4f1_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
-  DTFilter = LibC::GUID.new(0xc4c4c4f2_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
-  XDSCodec = LibC::GUID.new(0xc4c4c4f3_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
-  CXDSData = LibC::GUID.new(0xc4c4c4f4_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
-  MSVidAnalogTunerDevice = LibC::GUID.new(0x1c15d484_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidBDATunerDevice = LibC::GUID.new(0xa2e3074e_u32, 0x6c3d_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidFilePlaybackDevice = LibC::GUID.new(0x37b0353c_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidWebDVD = LibC::GUID.new(0x11b3619_u32, 0xfe63_u16, 0x4814_u16, StaticArray[0x8a_u8, 0x84_u8, 0x15_u8, 0xa1_u8, 0x94_u8, 0xce_u8, 0x9c_u8, 0xe3_u8])
-  MSVidWebDVDAdm = LibC::GUID.new(0xfa7c375b_u32, 0x66a7_u16, 0x4280_u16, StaticArray[0x87_u8, 0x9d_u8, 0xfd_u8, 0x45_u8, 0x9c_u8, 0x84_u8, 0xbb_u8, 0x2_u8])
-  MSVidVideoRenderer = LibC::GUID.new(0x37b03543_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidVMR9 = LibC::GUID.new(0x24dc3975_u32, 0x9bf_u16, 0x4231_u16, StaticArray[0x86_u8, 0x55_u8, 0x3e_u8, 0xe7_u8, 0x1f_u8, 0x43_u8, 0x83_u8, 0x7d_u8])
-  MSVidEVR = LibC::GUID.new(0xc45268a2_u32, 0xfa81_u16, 0x4e19_u16, StaticArray[0xb1_u8, 0xe3_u8, 0x72_u8, 0xed_u8, 0xbd_u8, 0x60_u8, 0xae_u8, 0xda_u8])
-  MSVidAudioRenderer = LibC::GUID.new(0x37b03544_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidGenericSink = LibC::GUID.new(0x4a5869cf_u32, 0x929d_u16, 0x4040_u16, StaticArray[0xae_u8, 0x3_u8, 0xfc_u8, 0xaf_u8, 0xc5_u8, 0xb9_u8, 0xcd_u8, 0x42_u8])
-  MSVidStreamBufferSink = LibC::GUID.new(0x9e77aac4_u32, 0x35e5_u16, 0x42a1_u16, StaticArray[0xbd_u8, 0xc2_u8, 0x8f_u8, 0x3f_u8, 0xf3_u8, 0x99_u8, 0x84_u8, 0x7c_u8])
-  MSVidStreamBufferSource = LibC::GUID.new(0xad8e510d_u32, 0x217f_u16, 0x409b_u16, StaticArray[0x80_u8, 0x76_u8, 0x29_u8, 0xc5_u8, 0xe7_u8, 0x3b_u8, 0x98_u8, 0xe8_u8])
-  MSVidStreamBufferV2Source = LibC::GUID.new(0xfd351ea1_u32, 0x4173_u16, 0x4af4_u16, StaticArray[0x82_u8, 0x1d_u8, 0x80_u8, 0xd4_u8, 0xae_u8, 0x97_u8, 0x90_u8, 0x48_u8])
-  MSVidEncoder = LibC::GUID.new(0xbb530c63_u32, 0xd9df_u16, 0x4b49_u16, StaticArray[0x94_u8, 0x39_u8, 0x63_u8, 0x45_u8, 0x39_u8, 0x62_u8, 0xe5_u8, 0x98_u8])
-  MSVidITVCapture = LibC::GUID.new(0x5740a302_u32, 0xef0b_u16, 0x45ce_u16, StaticArray[0xbf_u8, 0x3b_u8, 0x44_u8, 0x70_u8, 0xa1_u8, 0x4a_u8, 0x89_u8, 0x80_u8])
-  MSVidITVPlayback = LibC::GUID.new(0x9e797ed0_u32, 0x5253_u16, 0x4243_u16, StaticArray[0xa9_u8, 0xb7_u8, 0xbd_u8, 0x6_u8, 0xc5_u8, 0x8f_u8, 0x8e_u8, 0xf3_u8])
-  MSVidCCA = LibC::GUID.new(0x86151827_u32, 0xe47b_u16, 0x45ee_u16, StaticArray[0x84_u8, 0x21_u8, 0xd1_u8, 0xe_u8, 0x6e_u8, 0x69_u8, 0x9_u8, 0x79_u8])
-  MSVidClosedCaptioning = LibC::GUID.new(0x7f9cb14d_u32, 0x48e4_u16, 0x43b6_u16, StaticArray[0x93_u8, 0x46_u8, 0x1a_u8, 0xeb_u8, 0xc3_u8, 0x9c_u8, 0x64_u8, 0xd3_u8])
-  MSVidClosedCaptioningSI = LibC::GUID.new(0x92ed88bf_u32, 0x879e_u16, 0x448f_u16, StaticArray[0xb6_u8, 0xb6_u8, 0xa3_u8, 0x85_u8, 0xbc_u8, 0xeb_u8, 0x84_u8, 0x6d_u8])
-  MSVidDataServices = LibC::GUID.new(0x334125c0_u32, 0x77e5_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidXDS = LibC::GUID.new(0x149eedf_u32, 0xd08f_u16, 0x4142_u16, StaticArray[0x8d_u8, 0x73_u8, 0xd2_u8, 0x39_u8, 0x3_u8, 0xd2_u8, 0x1e_u8, 0x90_u8])
-  MSVidAnalogCaptureToDataServices = LibC::GUID.new(0xc5702cd6_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidDataServicesToStreamBufferSink = LibC::GUID.new(0x38f03426_u32, 0xe83b_u16, 0x4e68_u16, StaticArray[0xb6_u8, 0x5b_u8, 0xdc_u8, 0xae_u8, 0x73_u8, 0x30_u8, 0x48_u8, 0x38_u8])
-  MSVidDataServicesToXDS = LibC::GUID.new(0x429ec6e_u32, 0x1144_u16, 0x4bed_u16, StaticArray[0xb8_u8, 0x8b_u8, 0x2f_u8, 0xb9_u8, 0x89_u8, 0x9a_u8, 0x4a_u8, 0x3d_u8])
-  MSVidAnalogCaptureToXDS = LibC::GUID.new(0x3540d440_u32, 0x5b1d_u16, 0x49cb_u16, StaticArray[0x82_u8, 0x1a_u8, 0xe8_u8, 0x4b_u8, 0x8c_u8, 0xf0_u8, 0x65_u8, 0xa7_u8])
-  MSVidCtl = LibC::GUID.new(0xb0edf163_u32, 0x910a_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidInputDevices = LibC::GUID.new(0xc5702ccc_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidOutputDevices = LibC::GUID.new(0xc5702ccd_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidVideoRendererDevices = LibC::GUID.new(0xc5702cce_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidAudioRendererDevices = LibC::GUID.new(0xc5702ccf_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidFeatures = LibC::GUID.new(0xc5702cd0_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidGenericComposite = LibC::GUID.new(0x2764bce5_u32, 0xcc39_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidAnalogCaptureToOverlayMixer = LibC::GUID.new(0xe18af75a_u32, 0x8af_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  MSVidWebDVDToVideoRenderer = LibC::GUID.new(0x267db0b3_u32, 0x55e3_u16, 0x4902_u16, StaticArray[0x94_u8, 0x9b_u8, 0xdf_u8, 0x8f_u8, 0x5c_u8, 0xec_u8, 0x1_u8, 0x91_u8])
-  MSVidWebDVDToAudioRenderer = LibC::GUID.new(0x8d04238e_u32, 0x9fd1_u16, 0x41c6_u16, StaticArray[0x8d_u8, 0xe3_u8, 0x9e_u8, 0x1e_u8, 0xe3_u8, 0x9_u8, 0xe9_u8, 0x35_u8])
-  MSVidMPEG2DecoderToClosedCaptioning = LibC::GUID.new(0x6ad28ee1_u32, 0x5002_u16, 0x4e71_u16, StaticArray[0xaa_u8, 0xf7_u8, 0xbd_u8, 0x7_u8, 0x79_u8, 0x7_u8, 0xb1_u8, 0xa4_u8])
-  MSVidAnalogCaptureToStreamBufferSink = LibC::GUID.new(0x9f50e8b1_u32, 0x9530_u16, 0x4ddc_u16, StaticArray[0x82_u8, 0x5e_u8, 0x1a_u8, 0xf8_u8, 0x1d_u8, 0x47_u8, 0xae_u8, 0xd6_u8])
-  MSVidDigitalCaptureToStreamBufferSink = LibC::GUID.new(0xabe40035_u32, 0x27c3_u16, 0x4a2f_u16, StaticArray[0x81_u8, 0x53_u8, 0x66_u8, 0x24_u8, 0x47_u8, 0x16_u8, 0x8_u8, 0xaf_u8])
-  MSVidITVToStreamBufferSink = LibC::GUID.new(0x92b94828_u32, 0x1af7_u16, 0x4e6e_u16, StaticArray[0x9e_u8, 0xbf_u8, 0x77_u8, 0x6_u8, 0x57_u8, 0xf7_u8, 0x7a_u8, 0xf5_u8])
-  MSVidCCAToStreamBufferSink = LibC::GUID.new(0x3ef76d68_u32, 0x8661_u16, 0x4843_u16, StaticArray[0x8b_u8, 0x8f_u8, 0xc3_u8, 0x71_u8, 0x63_u8, 0xd8_u8, 0xc9_u8, 0xce_u8])
-  MSVidEncoderToStreamBufferSink = LibC::GUID.new(0xa0b9b497_u32, 0xafbc_u16, 0x45ad_u16, StaticArray[0xa8_u8, 0xa6_u8, 0x9b_u8, 0x7_u8, 0x7c_u8, 0x40_u8, 0xd4_u8, 0xf2_u8])
-  MSVidFilePlaybackToVideoRenderer = LibC::GUID.new(0xb401c5eb_u32, 0x8457_u16, 0x427f_u16, StaticArray[0x84_u8, 0xea_u8, 0xa4_u8, 0xd2_u8, 0x36_u8, 0x33_u8, 0x64_u8, 0xb0_u8])
-  MSVidFilePlaybackToAudioRenderer = LibC::GUID.new(0xcc23f537_u32, 0x18d4_u16, 0x4ece_u16, StaticArray[0x93_u8, 0xbd_u8, 0x20_u8, 0x7a_u8, 0x84_u8, 0x72_u8, 0x69_u8, 0x79_u8])
-  MSVidAnalogTVToEncoder = LibC::GUID.new(0x28953661_u32, 0x231_u16, 0x41db_u16, StaticArray[0x89_u8, 0x86_u8, 0x21_u8, 0xff_u8, 0x43_u8, 0x88_u8, 0xee_u8, 0x9b_u8])
-  MSVidStreamBufferSourceToVideoRenderer = LibC::GUID.new(0x3c4708dc_u32, 0xb181_u16, 0x46a8_u16, StaticArray[0x8d_u8, 0xa8_u8, 0x4a_u8, 0xb0_u8, 0x37_u8, 0x17_u8, 0x58_u8, 0xcd_u8])
-  MSVidAnalogCaptureToCCA = LibC::GUID.new(0x942b7909_u32, 0xa28e_u16, 0x49a1_u16, StaticArray[0xa2_u8, 0x7_u8, 0x34_u8, 0xeb_u8, 0xcb_u8, 0xcb_u8, 0x4b_u8, 0x3b_u8])
-  MSVidDigitalCaptureToCCA = LibC::GUID.new(0x73d14237_u32, 0xb9db_u16, 0x4efa_u16, StaticArray[0xa6_u8, 0xdd_u8, 0x84_u8, 0x35_u8, 0x4_u8, 0x21_u8, 0xfb_u8, 0x2f_u8])
-  MSVidDigitalCaptureToITV = LibC::GUID.new(0x5d8e73f7_u32, 0x4989_u16, 0x4ac8_u16, StaticArray[0x8a_u8, 0x98_u8, 0x39_u8, 0xba_u8, 0xd_u8, 0x32_u8, 0x53_u8, 0x2_u8])
-  MSVidSBESourceToITV = LibC::GUID.new(0x2291478c_u32, 0x5ee3_u16, 0x4bef_u16, StaticArray[0xab_u8, 0x5d_u8, 0xb5_u8, 0xff_u8, 0x2c_u8, 0xf5_u8, 0x83_u8, 0x52_u8])
-  MSVidSBESourceToCC = LibC::GUID.new(0x9193a8f9_u32, 0xcba_u16, 0x400e_u16, StaticArray[0xaa_u8, 0x97_u8, 0xeb_u8, 0x47_u8, 0x9_u8, 0x16_u8, 0x45_u8, 0x76_u8])
-  MSVidSBESourceToGenericSink = LibC::GUID.new(0x991da7e5_u32, 0x953f_u16, 0x435b_u16, StaticArray[0xbe_u8, 0x5e_u8, 0xb9_u8, 0x2a_u8, 0x5_u8, 0xed_u8, 0xfc_u8, 0x42_u8])
-  MSVidCCToVMR = LibC::GUID.new(0xc4bf2784_u32, 0xae00_u16, 0x41ba_u16, StaticArray[0x98_u8, 0x28_u8, 0x9c_u8, 0x95_u8, 0x3b_u8, 0xd3_u8, 0xc5_u8, 0x4a_u8])
-  MSVidCCToAR = LibC::GUID.new(0xd76334ca_u32, 0xd89e_u16, 0x4baf_u16, StaticArray[0x86_u8, 0xab_u8, 0xdd_u8, 0xb5_u8, 0x93_u8, 0x72_u8, 0xaf_u8, 0xc2_u8])
-  MSEventBinder = LibC::GUID.new(0x577faa18_u32, 0x4518_u16, 0x445e_u16, StaticArray[0x8f_u8, 0x70_u8, 0x14_u8, 0x73_u8, 0xf8_u8, 0xcf_u8, 0x4b_u8, 0xa4_u8])
-  MSVidStreamBufferRecordingControl = LibC::GUID.new(0xcaafdd83_u32, 0xcefc_u16, 0x4e3d_u16, StaticArray[0xba_u8, 0x3_u8, 0x17_u8, 0x5f_u8, 0x17_u8, 0xa2_u8, 0x4f_u8, 0x91_u8])
-  MSVidRect = LibC::GUID.new(0xcb4276e6_u32, 0x7d5f_u16, 0x4cf1_u16, StaticArray[0x97_u8, 0x27_u8, 0x62_u8, 0x9c_u8, 0x5e_u8, 0x6d_u8, 0xb6_u8, 0xae_u8])
-  MSVidDevice = LibC::GUID.new(0x6e40476f_u32, 0x9c49_u16, 0x4c3e_u16, StaticArray[0x8b_u8, 0xb9_u8, 0x85_u8, 0x87_u8, 0x95_u8, 0x8e_u8, 0xff_u8, 0x74_u8])
-  MSVidDevice2 = LibC::GUID.new(0x30997f7d_u32, 0xb3b5_u16, 0x4a1c_u16, StaticArray[0x98_u8, 0x3a_u8, 0x1f_u8, 0xe8_u8, 0x9_u8, 0x8c_u8, 0xb7_u8, 0x7d_u8])
-  MSVidInputDevice = LibC::GUID.new(0xac1972f2_u32, 0x138a_u16, 0x4ca3_u16, StaticArray[0x90_u8, 0xda_u8, 0xae_u8, 0x51_u8, 0x11_u8, 0x2e_u8, 0xda_u8, 0x28_u8])
-  MSVidVideoInputDevice = LibC::GUID.new(0x95f4820b_u32, 0xbb3a_u16, 0x4e2d_u16, StaticArray[0xbc_u8, 0x64_u8, 0x5b_u8, 0x81_u8, 0x7b_u8, 0xc2_u8, 0xc3_u8, 0xe_u8])
-  MSVidVideoPlaybackDevice = LibC::GUID.new(0x1990d634_u32, 0x1a5e_u16, 0x4071_u16, StaticArray[0xa3_u8, 0x4a_u8, 0x53_u8, 0xaa_u8, 0xff_u8, 0xce_u8, 0x9f_u8, 0x36_u8])
-  MSVidFeature = LibC::GUID.new(0x7748530b_u32, 0xc08a_u16, 0x47ea_u16, StaticArray[0xb2_u8, 0x4c_u8, 0xbe_u8, 0x86_u8, 0x95_u8, 0xff_u8, 0x40_u8, 0x5f_u8])
-  MSVidOutput = LibC::GUID.new(0x87eb890d_u32, 0x3ad_u16, 0x4e9d_u16, StaticArray[0x98_u8, 0x66_u8, 0x37_u8, 0x6e_u8, 0x5e_u8, 0xc5_u8, 0x72_u8, 0xed_u8])
-  SectionList = LibC::GUID.new(0x73da5d04_u32, 0x4347_u16, 0x45d3_u16, StaticArray[0xa9_u8, 0xdc_u8, 0xfa_u8, 0xe9_u8, 0xdd_u8, 0xbe_u8, 0x55_u8, 0x8d_u8])
-  Mpeg2Stream = LibC::GUID.new(0xf91d96c7_u32, 0x8509_u16, 0x4d0b_u16, StaticArray[0xab_u8, 0x26_u8, 0xa0_u8, 0xdd_u8, 0x10_u8, 0x90_u8, 0x4b_u8, 0xb7_u8])
-  Mpeg2Data = LibC::GUID.new(0xc666e115_u32, 0xbb62_u16, 0x4027_u16, StaticArray[0xa1_u8, 0x13_u8, 0x82_u8, 0xd6_u8, 0x43_u8, 0xfe_u8, 0x2d_u8, 0x99_u8])
-  Mpeg2DataLib = LibC::GUID.new(0xdbaf6c1b_u32, 0xb6a4_u16, 0x4898_u16, StaticArray[0xae_u8, 0x65_u8, 0x20_u8, 0x4f_u8, 0xd_u8, 0x95_u8, 0x9_u8, 0xa1_u8])
-  TIFLoad = LibC::GUID.new(0x14eb8748_u32, 0x1753_u16, 0x4393_u16, StaticArray[0x95_u8, 0xae_u8, 0x4f_u8, 0x7e_u8, 0x7a_u8, 0x87_u8, 0xaa_u8, 0xd6_u8])
-  EVENTID_TuningChanging = LibC::GUID.new(0x83183c03_u32, 0xc09e_u16, 0x45c4_u16, StaticArray[0xa7_u8, 0x19_u8, 0x80_u8, 0x7a_u8, 0x94_u8, 0x95_u8, 0x2b_u8, 0xf9_u8])
-  EVENTID_TuningChanged = LibC::GUID.new(0x9d7e6235_u32, 0x4b7d_u16, 0x425d_u16, StaticArray[0xa6_u8, 0xd1_u8, 0xd7_u8, 0x17_u8, 0xc3_u8, 0x3b_u8, 0x9c_u8, 0x4c_u8])
-  EVENTID_CandidatePostTuneData = LibC::GUID.new(0x9f02d3d0_u32, 0x9f06_u16, 0x4369_u16, StaticArray[0x9f_u8, 0x1e_u8, 0x3a_u8, 0xd6_u8, 0xca_u8, 0x19_u8, 0x80_u8, 0x7e_u8])
-  EVENTID_CADenialCountChanged = LibC::GUID.new(0x2a65c528_u32, 0x2249_u16, 0x4070_u16, StaticArray[0xac_u8, 0x16_u8, 0x0_u8, 0x39_u8, 0xc_u8, 0xdf_u8, 0xb2_u8, 0xdd_u8])
-  EVENTID_SignalStatusChanged = LibC::GUID.new(0x6d9cfaf2_u32, 0x702d_u16, 0x4b01_u16, StaticArray[0x8d_u8, 0xff_u8, 0x68_u8, 0x92_u8, 0xad_u8, 0x20_u8, 0xd1_u8, 0x91_u8])
-  EVENTID_NewSignalAcquired = LibC::GUID.new(0xc87ec52d_u32, 0xcd18_u16, 0x404a_u16, StaticArray[0xa0_u8, 0x76_u8, 0xc0_u8, 0x2a_u8, 0x27_u8, 0x3d_u8, 0x3d_u8, 0xe7_u8])
-  EVENTID_EASMessageReceived = LibC::GUID.new(0xd10df9d5_u32, 0xc261_u16, 0x4b85_u16, StaticArray[0x9e_u8, 0x8a_u8, 0x51_u8, 0x7b_u8, 0x32_u8, 0x99_u8, 0xca_u8, 0xb2_u8])
-  EVENTID_PSITable = LibC::GUID.new(0x1b9c3703_u32, 0xd447_u16, 0x4e16_u16, StaticArray[0x97_u8, 0xbb_u8, 0x1_u8, 0x79_u8, 0x9f_u8, 0xc0_u8, 0x31_u8, 0xed_u8])
-  EVENTID_ServiceTerminated = LibC::GUID.new(0xa1d591c_u32, 0xe0d2_u16, 0x4f8e_u16, StaticArray[0x89_u8, 0x60_u8, 0x23_u8, 0x35_u8, 0xbe_u8, 0xf4_u8, 0x5c_u8, 0xcb_u8])
-  EVENTID_CardStatusChanged = LibC::GUID.new(0xa265faea_u32, 0xf874_u16, 0x4b38_u16, StaticArray[0x9f_u8, 0xf7_u8, 0xc5_u8, 0x3d_u8, 0x2_u8, 0x96_u8, 0x99_u8, 0x96_u8])
-  EVENTID_DRMParingStatusChanged = LibC::GUID.new(0x906f5_u32, 0xf0d1_u16, 0x41d6_u16, StaticArray[0xa7_u8, 0xdf_u8, 0x40_u8, 0x28_u8, 0x69_u8, 0x76_u8, 0x69_u8, 0xf6_u8])
-  EVENTID_DRMParingStepComplete = LibC::GUID.new(0x5b2ebf78_u32, 0xb752_u16, 0x4420_u16, StaticArray[0xb4_u8, 0x1e_u8, 0xa4_u8, 0x72_u8, 0xdc_u8, 0x95_u8, 0x82_u8, 0x8e_u8])
-  EVENTID_MMIMessage = LibC::GUID.new(0x52c29af_u32, 0x9a4_u16, 0x4b93_u16, StaticArray[0x89_u8, 0xf_u8, 0xbd_u8, 0x6a_u8, 0x34_u8, 0x89_u8, 0x68_u8, 0xa4_u8])
-  EVENTID_EntitlementChanged = LibC::GUID.new(0x9071ad5d_u32, 0x2359_u16, 0x4c95_u16, StaticArray[0x86_u8, 0x94_u8, 0xaf_u8, 0xa8_u8, 0x1d_u8, 0x70_u8, 0xbf_u8, 0xd5_u8])
-  EVENTID_STBChannelNumber = LibC::GUID.new(0x17c4d730_u32, 0xd0f0_u16, 0x413a_u16, StaticArray[0x8c_u8, 0x99_u8, 0x50_u8, 0x4_u8, 0x69_u8, 0xde_u8, 0x35_u8, 0xad_u8])
-  EVENTID_BDAEventingServicePendingEvent = LibC::GUID.new(0x5ca51711_u32, 0x5ddc_u16, 0x41a6_u16, StaticArray[0x94_u8, 0x30_u8, 0xe4_u8, 0x1b_u8, 0x8b_u8, 0x3b_u8, 0xbc_u8, 0x5b_u8])
-  EVENTID_BDAConditionalAccessTAG = LibC::GUID.new(0xefc3a459_u32, 0xae8b_u16, 0x4b4a_u16, StaticArray[0x8f_u8, 0xe9_u8, 0x79_u8, 0xa0_u8, 0xd0_u8, 0x97_u8, 0xf3_u8, 0xea_u8])
-  EVENTTYPE_CASDescrambleFailureEvent = LibC::GUID.new(0xb2127d42_u32, 0x7be5_u16, 0x4f4b_u16, StaticArray[0x91_u8, 0x30_u8, 0x66_u8, 0x79_u8, 0x89_u8, 0x9f_u8, 0x4f_u8, 0x4b_u8])
-  EVENTID_CASFailureSpanningEvent = LibC::GUID.new(0xead831ae_u32, 0x5529_u16, 0x4d1f_u16, StaticArray[0xaf_u8, 0xce_u8, 0xd_u8, 0x8c_u8, 0xd1_u8, 0x25_u8, 0x7d_u8, 0x30_u8])
-  EVENTID_ChannelChangeSpanningEvent = LibC::GUID.new(0x9067c5e5_u32, 0x4c5c_u16, 0x4205_u16, StaticArray[0x86_u8, 0xc8_u8, 0x7a_u8, 0xfe_u8, 0x20_u8, 0xfe_u8, 0x1e_u8, 0xfa_u8])
-  EVENTID_ChannelTypeSpanningEvent = LibC::GUID.new(0x72ab1d51_u32, 0x87d2_u16, 0x489b_u16, StaticArray[0xba_u8, 0x11_u8, 0xe_u8, 0x8_u8, 0xdc_u8, 0x21_u8, 0x2_u8, 0x43_u8])
-  EVENTID_ChannelInfoSpanningEvent = LibC::GUID.new(0x41f36d80_u32, 0x4132_u16, 0x4cc2_u16, StaticArray[0xb1_u8, 0x21_u8, 0x1_u8, 0xa4_u8, 0x32_u8, 0x19_u8, 0xd8_u8, 0x1b_u8])
-  EVENTID_RRTSpanningEvent = LibC::GUID.new(0xf6cfc8f4_u32, 0xda93_u16, 0x4f2f_u16, StaticArray[0xbf_u8, 0xf8_u8, 0xba_u8, 0x1e_u8, 0xe6_u8, 0xfc_u8, 0xa3_u8, 0xa2_u8])
-  EVENTID_CSDescriptorSpanningEvent = LibC::GUID.new(0xefe779d9_u32, 0x97f0_u16, 0x4786_u16, StaticArray[0x80_u8, 0xd_u8, 0x95_u8, 0xcf_u8, 0x50_u8, 0x5d_u8, 0xdc_u8, 0x66_u8])
-  EVENTID_CtxADescriptorSpanningEvent = LibC::GUID.new(0x3ab4a2e6_u32, 0x4247_u16, 0x4b34_u16, StaticArray[0x89_u8, 0x6c_u8, 0x30_u8, 0xaf_u8, 0xa5_u8, 0xd2_u8, 0x1c_u8, 0x24_u8])
-  EVENTID_DVBScramblingControlSpanningEvent = LibC::GUID.new(0x4bd4e1c4_u32, 0x90a1_u16, 0x4109_u16, StaticArray[0x82_u8, 0x36_u8, 0x27_u8, 0xf0_u8, 0xe_u8, 0x7d_u8, 0xcc_u8, 0x5b_u8])
-  EVENTID_SignalAndServiceStatusSpanningEvent = LibC::GUID.new(0x8068c5cb_u32, 0x3c04_u16, 0x492b_u16, StaticArray[0xb4_u8, 0x7d_u8, 0x3_u8, 0x8_u8, 0x82_u8, 0xd_u8, 0xce_u8, 0x51_u8])
-  EVENTID_EmmMessageSpanningEvent = LibC::GUID.new(0x6bf00268_u32, 0x4f7e_u16, 0x4294_u16, StaticArray[0xaa_u8, 0x87_u8, 0xe9_u8, 0xe9_u8, 0x53_u8, 0xe4_u8, 0x3f_u8, 0x14_u8])
-  EVENTID_AudioTypeSpanningEvent = LibC::GUID.new(0x501cbfbe_u32, 0xb849_u16, 0x42ce_u16, StaticArray[0x9b_u8, 0xe9_u8, 0x3d_u8, 0xb8_u8, 0x69_u8, 0xfb_u8, 0x82_u8, 0xb3_u8])
-  EVENTID_StreamTypeSpanningEvent = LibC::GUID.new(0x82af2ebc_u32, 0x30a6_u16, 0x4264_u16, StaticArray[0xa8_u8, 0xb_u8, 0xad_u8, 0x2e_u8, 0x13_u8, 0x72_u8, 0xac_u8, 0x60_u8])
-  EVENTID_ARIBcontentSpanningEvent = LibC::GUID.new(0x3a954083_u32, 0x93d0_u16, 0x463e_u16, StaticArray[0x90_u8, 0xb2_u8, 0x7_u8, 0x42_u8, 0xc4_u8, 0x96_u8, 0xed_u8, 0xf0_u8])
-  EVENTID_LanguageSpanningEvent = LibC::GUID.new(0xe292666d_u32, 0x9c02_u16, 0x448d_u16, StaticArray[0xaa_u8, 0x8d_u8, 0x78_u8, 0x1a_u8, 0x93_u8, 0xfd_u8, 0xc3_u8, 0x95_u8])
-  EVENTID_DualMonoSpanningEvent = LibC::GUID.new(0xa9a29b56_u32, 0xa84b_u16, 0x488c_u16, StaticArray[0x89_u8, 0xd5_u8, 0xd_u8, 0x4e_u8, 0x76_u8, 0x57_u8, 0xc8_u8, 0xce_u8])
-  EVENTID_PIDListSpanningEvent = LibC::GUID.new(0x47fc8f65_u32, 0xe2bb_u16, 0x4634_u16, StaticArray[0x9c_u8, 0xef_u8, 0xfd_u8, 0xbf_u8, 0xe6_u8, 0x26_u8, 0x1d_u8, 0x5c_u8])
-  EVENTID_AudioDescriptorSpanningEvent = LibC::GUID.new(0x107bd41c_u32, 0xa6da_u16, 0x4691_u16, StaticArray[0x83_u8, 0x69_u8, 0x11_u8, 0xb2_u8, 0xcd_u8, 0xaa_u8, 0x28_u8, 0x8e_u8])
-  EVENTID_SubtitleSpanningEvent = LibC::GUID.new(0x5dcec048_u32, 0xd0b9_u16, 0x4163_u16, StaticArray[0x87_u8, 0x2c_u8, 0x4f_u8, 0x32_u8, 0x22_u8, 0x3b_u8, 0xe8_u8, 0x8a_u8])
-  EVENTID_TeletextSpanningEvent = LibC::GUID.new(0x9599d950_u32, 0x5f33_u16, 0x4617_u16, StaticArray[0xaf_u8, 0x7c_u8, 0x1e_u8, 0x54_u8, 0xb5_u8, 0x10_u8, 0xda_u8, 0xa3_u8])
-  EVENTID_StreamIDSpanningEvent = LibC::GUID.new(0xcaf1ab68_u32, 0xe153_u16, 0x4d41_u16, StaticArray[0xa6_u8, 0xb3_u8, 0xa7_u8, 0xc9_u8, 0x98_u8, 0xdb_u8, 0x75_u8, 0xee_u8])
-  EVENTID_PBDAParentalControlEvent = LibC::GUID.new(0xf947aa85_u32, 0xfb52_u16, 0x48e8_u16, StaticArray[0xb9_u8, 0xc5_u8, 0xe1_u8, 0xe1_u8, 0xf4_u8, 0x11_u8, 0xa5_u8, 0x1a_u8])
-  EVENTID_TuneFailureEvent = LibC::GUID.new(0xd97287b2_u32, 0x2dfd_u16, 0x436a_u16, StaticArray[0x94_u8, 0x85_u8, 0x99_u8, 0xd7_u8, 0xd4_u8, 0xab_u8, 0x5a_u8, 0x69_u8])
-  EVENTID_TuneFailureSpanningEvent = LibC::GUID.new(0x6f8aa455_u32, 0x5ee1_u16, 0x48ab_u16, StaticArray[0xa2_u8, 0x7c_u8, 0x4c_u8, 0x8d_u8, 0x70_u8, 0xb9_u8, 0xae_u8, 0xba_u8])
-  EVENTID_DvbParentalRatingDescriptor = LibC::GUID.new(0x2a67a58d_u32, 0xeca5_u16, 0x4eac_u16, StaticArray[0xab_u8, 0xcb_u8, 0xe7_u8, 0x34_u8, 0xd3_u8, 0x77_u8, 0x6d_u8, 0xa_u8])
-  EVENTID_DFNWithNoActualAVData = LibC::GUID.new(0xf5689ffe_u32, 0x55f9_u16, 0x4bb3_u16, StaticArray[0x96_u8, 0xbe_u8, 0xae_u8, 0x97_u8, 0x1c_u8, 0x63_u8, 0xba_u8, 0xe0_u8])
-  KSDATAFORMAT_TYPE_BDA_ANTENNA = LibC::GUID.new(0x71985f41_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSDATAFORMAT_SUBTYPE_BDA_MPEG2_TRANSPORT = LibC::GUID.new(0xf4aeb342_u32, 0x329_u16, 0x4fdd_u16, StaticArray[0xa8_u8, 0xfd_u8, 0x4a_u8, 0xff_u8, 0x49_u8, 0x26_u8, 0xc9_u8, 0x78_u8])
-  KSDATAFORMAT_SPECIFIER_BDA_TRANSPORT = LibC::GUID.new(0x8deda6fd_u32, 0xac5f_u16, 0x4334_u16, StaticArray[0x8e_u8, 0xcf_u8, 0xa4_u8, 0xba_u8, 0x8f_u8, 0xa7_u8, 0xd0_u8, 0xf0_u8])
-  KSDATAFORMAT_TYPE_BDA_IF_SIGNAL = LibC::GUID.new(0x61be0b47_u32, 0xa5eb_u16, 0x499b_u16, StaticArray[0x9a_u8, 0x85_u8, 0x5b_u8, 0x16_u8, 0xc0_u8, 0x7f_u8, 0x12_u8, 0x58_u8])
-  KSDATAFORMAT_TYPE_MPEG2_SECTIONS = LibC::GUID.new(0x455f176c_u32, 0x4b06_u16, 0x47ce_u16, StaticArray[0x9a_u8, 0xef_u8, 0x8c_u8, 0xae_u8, 0xf7_u8, 0x3d_u8, 0xf7_u8, 0xb5_u8])
-  KSDATAFORMAT_SUBTYPE_ATSC_SI = LibC::GUID.new(0xb3c7397c_u32, 0xd303_u16, 0x414d_u16, StaticArray[0xb3_u8, 0x3c_u8, 0x4e_u8, 0xd2_u8, 0xc9_u8, 0xd2_u8, 0x97_u8, 0x33_u8])
-  KSDATAFORMAT_SUBTYPE_DVB_SI = LibC::GUID.new(0xe9dd31a3_u32, 0x221d_u16, 0x4adb_u16, StaticArray[0x85_u8, 0x32_u8, 0x9a_u8, 0xf3_u8, 0x9_u8, 0xc1_u8, 0xa4_u8, 0x8_u8])
-  KSDATAFORMAT_SUBTYPE_BDA_OPENCABLE_PSIP = LibC::GUID.new(0x762e3f66_u32, 0x336f_u16, 0x48d1_u16, StaticArray[0xbf_u8, 0x83_u8, 0x2b_u8, 0x0_u8, 0x35_u8, 0x2c_u8, 0x11_u8, 0xf0_u8])
-  KSDATAFORMAT_SUBTYPE_BDA_OPENCABLE_OOB_PSIP = LibC::GUID.new(0x951727db_u32, 0xd2ce_u16, 0x4528_u16, StaticArray[0x96_u8, 0xf6_u8, 0x33_u8, 0x1_u8, 0xfa_u8, 0xbb_u8, 0x2d_u8, 0xe0_u8])
-  KSDATAFORMAT_SUBTYPE_ISDB_SI = LibC::GUID.new(0x4a2eeb99_u32, 0x6458_u16, 0x4538_u16, StaticArray[0xb1_u8, 0x87_u8, 0x4_u8, 0x1_u8, 0x7c_u8, 0x41_u8, 0x41_u8, 0x3f_u8])
-  KSDATAFORMAT_SUBTYPE_PBDA_TRANSPORT_RAW = LibC::GUID.new(0xd7aed42_u32, 0xcb9a_u16, 0x11db_u16, StaticArray[0x97_u8, 0x5_u8, 0x0_u8, 0x50_u8, 0x56_u8, 0xc0_u8, 0x0_u8, 0x8_u8])
-  PINNAME_BDA_TRANSPORT = LibC::GUID.new(0x78216a81_u32, 0xcfa8_u16, 0x493e_u16, StaticArray[0x97_u8, 0x11_u8, 0x36_u8, 0xa6_u8, 0x1c_u8, 0x8_u8, 0xbd_u8, 0x9d_u8])
-  PINNAME_BDA_ANALOG_VIDEO = LibC::GUID.new(0x5c0c8281_u32, 0x5667_u16, 0x486c_u16, StaticArray[0x84_u8, 0x82_u8, 0x63_u8, 0xe3_u8, 0x1f_u8, 0x1_u8, 0xa6_u8, 0xe9_u8])
-  PINNAME_BDA_ANALOG_AUDIO = LibC::GUID.new(0xd28a580a_u32, 0x9b1f_u16, 0x4b0c_u16, StaticArray[0x9c_u8, 0x33_u8, 0x9b_u8, 0xf0_u8, 0xa8_u8, 0xea_u8, 0x63_u8, 0x6b_u8])
-  PINNAME_BDA_FM_RADIO = LibC::GUID.new(0xd2855fed_u32, 0xb2d3_u16, 0x4eeb_u16, StaticArray[0x9b_u8, 0xd0_u8, 0x19_u8, 0x34_u8, 0x36_u8, 0xa2_u8, 0xf8_u8, 0x90_u8])
-  PINNAME_BDA_IF_PIN = LibC::GUID.new(0x1a9d4a42_u32, 0xf3cd_u16, 0x48a1_u16, StaticArray[0x9a_u8, 0xea_u8, 0x71_u8, 0xde_u8, 0x13_u8, 0x3c_u8, 0xbe_u8, 0x14_u8])
-  PINNAME_BDA_OPENCABLE_PSIP_PIN = LibC::GUID.new(0x297bb104_u32, 0xe5c9_u16, 0x4ace_u16, StaticArray[0xb1_u8, 0x23_u8, 0x95_u8, 0xc3_u8, 0xcb_u8, 0xb2_u8, 0x4d_u8, 0x4f_u8])
-  KSPROPSETID_BdaEthernetFilter = LibC::GUID.new(0x71985f43_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSPROPSETID_BdaIPv4Filter = LibC::GUID.new(0x71985f44_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSPROPSETID_BdaIPv6Filter = LibC::GUID.new(0xe1785a74_u32, 0x2a23_u16, 0x4fb3_u16, StaticArray[0x92_u8, 0x45_u8, 0xa8_u8, 0xf8_u8, 0x80_u8, 0x17_u8, 0xef_u8, 0x33_u8])
-  KSPROPSETID_BdaSignalStats = LibC::GUID.new(0x1347d106_u32, 0xcf3a_u16, 0x428a_u16, StaticArray[0xa5_u8, 0xcb_u8, 0xac_u8, 0xd_u8, 0x9a_u8, 0x2a_u8, 0x43_u8, 0x38_u8])
-  KSMETHODSETID_BdaChangeSync = LibC::GUID.new(0xfd0a5af3_u32, 0xb41d_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0x95_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSMETHODSETID_BdaDeviceConfiguration = LibC::GUID.new(0x71985f45_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSPROPSETID_BdaTopology = LibC::GUID.new(0xa14ee835_u32, 0xa23_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSPROPSETID_BdaPinControl = LibC::GUID.new(0xded49d5_u32, 0xa8b7_u16, 0x4d5d_u16, StaticArray[0x97_u8, 0xa1_u8, 0x12_u8, 0xb0_u8, 0xc1_u8, 0x95_u8, 0x87_u8, 0x4d_u8])
-  KSEVENTSETID_BdaPinEvent = LibC::GUID.new(0x104781cd_u32, 0x50bd_u16, 0x40d5_u16, StaticArray[0x95_u8, 0xfb_u8, 0x8_u8, 0x7e_u8, 0xe_u8, 0x86_u8, 0xa5_u8, 0x91_u8])
-  KSPROPSETID_BdaVoidTransform = LibC::GUID.new(0x71985f46_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSPROPSETID_BdaNullTransform = LibC::GUID.new(0xddf15b0d_u32, 0xbd25_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSPROPSETID_BdaFrequencyFilter = LibC::GUID.new(0x71985f47_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSEVENTSETID_BdaTunerEvent = LibC::GUID.new(0xaab59e17_u32, 0x1c9_u16, 0x4ebf_u16, StaticArray[0x93_u8, 0xf2_u8, 0xfc_u8, 0x3b_u8, 0x79_u8, 0xb4_u8, 0x6f_u8, 0x91_u8])
-  KSPROPSETID_BdaLNBInfo = LibC::GUID.new(0x992cf102_u32, 0x49f9_u16, 0x4719_u16, StaticArray[0xa6_u8, 0x64_u8, 0xc4_u8, 0xf2_u8, 0x3e_u8, 0x24_u8, 0x8_u8, 0xf4_u8])
-  KSPROPSETID_BdaDiseqCommand = LibC::GUID.new(0xf84e2ab0_u32, 0x3c6b_u16, 0x45e3_u16, StaticArray[0xa0_u8, 0xfc_u8, 0x86_u8, 0x69_u8, 0xd4_u8, 0xb8_u8, 0x1f_u8, 0x11_u8])
-  KSEVENTSETID_BdaDiseqCEvent = LibC::GUID.new(0x8b19bbf0_u32, 0x4184_u16, 0x43ac_u16, StaticArray[0xad_u8, 0x3c_u8, 0xc_u8, 0x88_u8, 0x9b_u8, 0xe4_u8, 0xc2_u8, 0x12_u8])
-  KSPROPSETID_BdaDigitalDemodulator = LibC::GUID.new(0xef30f379_u32, 0x985b_u16, 0x4d10_u16, StaticArray[0xb6_u8, 0x40_u8, 0xa7_u8, 0x9d_u8, 0x5e_u8, 0x4_u8, 0xe1_u8, 0xe0_u8])
-  KSPROPSETID_BdaAutodemodulate = LibC::GUID.new(0xddf15b12_u32, 0xbd25_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSPROPSETID_BdaTableSection = LibC::GUID.new(0x516b99c5_u32, 0x971c_u16, 0x4aaf_u16, StaticArray[0xb3_u8, 0xf3_u8, 0xd9_u8, 0xfd_u8, 0xa8_u8, 0xa1_u8, 0x5e_u8, 0x16_u8])
-  KSPROPSETID_BdaPIDFilter = LibC::GUID.new(0xd0a67d65_u32, 0x8df_u16, 0x4fec_u16, StaticArray[0x85_u8, 0x33_u8, 0xe5_u8, 0xb5_u8, 0x50_u8, 0x41_u8, 0xb_u8, 0x85_u8])
-  KSPROPSETID_BdaCA = LibC::GUID.new(0xb0693766_u32, 0x5278_u16, 0x4ec6_u16, StaticArray[0xb9_u8, 0xe1_u8, 0x3c_u8, 0xe4_u8, 0x5_u8, 0x60_u8, 0xef_u8, 0x5a_u8])
-  KSEVENTSETID_BdaCAEvent = LibC::GUID.new(0x488c4ccc_u32, 0xb768_u16, 0x4129_u16, StaticArray[0x8e_u8, 0xb1_u8, 0xb0_u8, 0xa_u8, 0x7_u8, 0x1f_u8, 0x90_u8, 0x68_u8])
-  KSMETHODSETID_BdaDrmService = LibC::GUID.new(0xbff6b5bb_u32, 0xb0ae_u16, 0x484c_u16, StaticArray[0x9d_u8, 0xca_u8, 0x73_u8, 0x52_u8, 0x8f_u8, 0xb0_u8, 0xb4_u8, 0x6e_u8])
-  KSMETHODSETID_BdaWmdrmSession = LibC::GUID.new(0x4be6fa3d_u32, 0x7cd_u16, 0x4139_u16, StaticArray[0x8b_u8, 0x80_u8, 0x8c_u8, 0x18_u8, 0xba_u8, 0x3a_u8, 0xec_u8, 0x88_u8])
-  KSMETHODSETID_BdaWmdrmTuner = LibC::GUID.new(0x86d979cf_u32, 0xa8a7_u16, 0x4f94_u16, StaticArray[0xb5_u8, 0xfb_u8, 0x14_u8, 0xc0_u8, 0xac_u8, 0xa6_u8, 0x8f_u8, 0xe6_u8])
-  KSMETHODSETID_BdaEventing = LibC::GUID.new(0xf99492da_u32, 0x6193_u16, 0x4eb0_u16, StaticArray[0x86_u8, 0x90_u8, 0x66_u8, 0x86_u8, 0xcb_u8, 0xff_u8, 0x71_u8, 0x3e_u8])
-  KSEVENTSETID_BdaEvent = LibC::GUID.new(0xae7e55b2_u32, 0x96d7_u16, 0x4e29_u16, StaticArray[0x90_u8, 0x8f_u8, 0x62_u8, 0xf9_u8, 0x5b_u8, 0x2a_u8, 0x16_u8, 0x79_u8])
-  KSMETHODSETID_BdaDebug = LibC::GUID.new(0xd4a90ec_u32, 0xc69d_u16, 0x4ee2_u16, StaticArray[0x8c_u8, 0x5a_u8, 0xfb_u8, 0x1f_u8, 0x63_u8, 0xa5_u8, 0xd_u8, 0xa1_u8])
-  KSMETHODSETID_BdaTuner = LibC::GUID.new(0xb774102f_u32, 0xac07_u16, 0x478a_u16, StaticArray[0x82_u8, 0x28_u8, 0x27_u8, 0x42_u8, 0xd9_u8, 0x61_u8, 0xfa_u8, 0x7e_u8])
-  KSMETHODSETID_BdaNameValueA = LibC::GUID.new(0xc24096d_u32, 0x5ff5_u16, 0x47de_u16, StaticArray[0xa8_u8, 0x56_u8, 0x6_u8, 0x2e_u8, 0x58_u8, 0x7e_u8, 0x37_u8, 0x27_u8])
-  KSMETHODSETID_BdaNameValue = LibC::GUID.new(0x36e07304_u32, 0x9f0d_u16, 0x4e88_u16, StaticArray[0x91_u8, 0x18_u8, 0xac_u8, 0xb_u8, 0xa3_u8, 0x17_u8, 0xb7_u8, 0xf2_u8])
-  KSMETHODSETID_BdaMux = LibC::GUID.new(0x942aafec_u32, 0x4c05_u16, 0x4c74_u16, StaticArray[0xb8_u8, 0xeb_u8, 0x87_u8, 0x6_u8, 0xc2_u8, 0xa4_u8, 0x94_u8, 0x3f_u8])
-  KSMETHODSETID_BdaScanning = LibC::GUID.new(0x12eb49df_u32, 0x6249_u16, 0x47f3_u16, StaticArray[0xb1_u8, 0x90_u8, 0xe2_u8, 0x1e_u8, 0x6e_u8, 0x2f_u8, 0x8a_u8, 0x9c_u8])
-  KSMETHODSETID_BdaGuideDataDeliveryService = LibC::GUID.new(0x8d9d5562_u32, 0x1589_u16, 0x417d_u16, StaticArray[0x99_u8, 0xce_u8, 0xac_u8, 0x53_u8, 0x1d_u8, 0xda_u8, 0x19_u8, 0xf9_u8])
-  KSMETHODSETID_BdaConditionalAccessService = LibC::GUID.new(0x10ced3b4_u32, 0x320b_u16, 0x41bf_u16, StaticArray[0x98_u8, 0x24_u8, 0x1b_u8, 0x2e_u8, 0x68_u8, 0xe7_u8, 0x1e_u8, 0xb9_u8])
-  KSMETHODSETID_BdaIsdbConditionalAccess = LibC::GUID.new(0x5e68c627_u32, 0x16c2_u16, 0x4e6c_u16, StaticArray[0xb1_u8, 0xe2_u8, 0xd0_u8, 0x1_u8, 0x70_u8, 0xcd_u8, 0xaa_u8, 0xf_u8])
-  KSMETHODSETID_BdaTSSelector = LibC::GUID.new(0x1dcfafe9_u32, 0xb45e_u16, 0x41b3_u16, StaticArray[0xbb_u8, 0x2a_u8, 0x56_u8, 0x1e_u8, 0xb1_u8, 0x29_u8, 0xae_u8, 0x98_u8])
-  KSMETHODSETID_BdaUserActivity = LibC::GUID.new(0xeda5c834_u32, 0x4531_u16, 0x483c_u16, StaticArray[0xbe_u8, 0xa_u8, 0x94_u8, 0xe6_u8, 0xc9_u8, 0x6f_u8, 0xf3_u8, 0x96_u8])
-  KSCATEGORY_BDA_RECEIVER_COMPONENT = LibC::GUID.new(0xfd0a5af4_u32, 0xb41d_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0x95_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSCATEGORY_BDA_NETWORK_TUNER = LibC::GUID.new(0x71985f48_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSCATEGORY_BDA_NETWORK_EPG = LibC::GUID.new(0x71985f49_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSCATEGORY_BDA_IP_SINK = LibC::GUID.new(0x71985f4a_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSCATEGORY_BDA_NETWORK_PROVIDER = LibC::GUID.new(0x71985f4b_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSCATEGORY_BDA_TRANSPORT_INFORMATION = LibC::GUID.new(0xa2e3074f_u32, 0x6c3d_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
-  KSNODE_BDA_RF_TUNER = LibC::GUID.new(0x71985f4c_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSNODE_BDA_ANALOG_DEMODULATOR = LibC::GUID.new(0x634db199_u32, 0x27dd_u16, 0x46b8_u16, StaticArray[0xac_u8, 0xfb_u8, 0xec_u8, 0xc9_u8, 0x8e_u8, 0x61_u8, 0xa2_u8, 0xad_u8])
-  KSNODE_BDA_QAM_DEMODULATOR = LibC::GUID.new(0x71985f4d_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSNODE_BDA_QPSK_DEMODULATOR = LibC::GUID.new(0x6390c905_u32, 0x27c1_u16, 0x4d67_u16, StaticArray[0xbd_u8, 0xb7_u8, 0x77_u8, 0xc5_u8, 0xd_u8, 0x7_u8, 0x93_u8, 0x0_u8])
-  KSNODE_BDA_8VSB_DEMODULATOR = LibC::GUID.new(0x71985f4f_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSNODE_BDA_COFDM_DEMODULATOR = LibC::GUID.new(0x2dac6e05_u32, 0xedbe_u16, 0x4b9c_u16, StaticArray[0xb3_u8, 0x87_u8, 0x1b_u8, 0x6f_u8, 0xad_u8, 0x7d_u8, 0x64_u8, 0x95_u8])
-  KSNODE_BDA_8PSK_DEMODULATOR = LibC::GUID.new(0xe957a0e7_u32, 0xdd98_u16, 0x4a3c_u16, StaticArray[0x81_u8, 0xb_u8, 0x35_u8, 0x25_u8, 0x15_u8, 0x7a_u8, 0xb6_u8, 0x2e_u8])
-  KSNODE_BDA_ISDB_T_DEMODULATOR = LibC::GUID.new(0xfcea3ae3_u32, 0x2cb2_u16, 0x464d_u16, StaticArray[0x8f_u8, 0x5d_u8, 0x30_u8, 0x5c_u8, 0xb_u8, 0xb7_u8, 0x78_u8, 0xa2_u8])
-  KSNODE_BDA_ISDB_S_DEMODULATOR = LibC::GUID.new(0xedde230a_u32, 0x9086_u16, 0x432d_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x66_u8, 0x70_u8, 0x26_u8, 0x38_u8, 0x7_u8, 0xe9_u8])
-  KSNODE_BDA_OPENCABLE_POD = LibC::GUID.new(0x345812a0_u32, 0xfb7c_u16, 0x4790_u16, StaticArray[0xaa_u8, 0x7e_u8, 0xb1_u8, 0xdb_u8, 0x88_u8, 0xac_u8, 0x19_u8, 0xc9_u8])
-  KSNODE_BDA_COMMON_CA_POD = LibC::GUID.new(0xd83ef8fc_u32, 0xf3b8_u16, 0x45ab_u16, StaticArray[0x8b_u8, 0x71_u8, 0xec_u8, 0xf7_u8, 0xc3_u8, 0x39_u8, 0xde_u8, 0xb4_u8])
-  KSNODE_BDA_PID_FILTER = LibC::GUID.new(0xf5412789_u32, 0xb0a0_u16, 0x44e1_u16, StaticArray[0xae_u8, 0x4f_u8, 0xee_u8, 0x99_u8, 0x9b_u8, 0x1b_u8, 0x7f_u8, 0xbe_u8])
-  KSNODE_BDA_IP_SINK = LibC::GUID.new(0x71985f4e_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
-  KSNODE_BDA_VIDEO_ENCODER = LibC::GUID.new(0xd98429e3_u32, 0x65c9_u16, 0x4ac4_u16, StaticArray[0x93_u8, 0xaa_u8, 0x76_u8, 0x67_u8, 0x82_u8, 0x83_u8, 0x3b_u8, 0x7a_u8])
-  KSNODE_BDA_PBDA_CAS = LibC::GUID.new(0xc026869f_u32, 0x7129_u16, 0x4e71_u16, StaticArray[0x86_u8, 0x96_u8, 0xec_u8, 0x8f_u8, 0x75_u8, 0x29_u8, 0x9b_u8, 0x77_u8])
-  KSNODE_BDA_PBDA_ISDBCAS = LibC::GUID.new(0xf2cf2ab3_u32, 0x5b9d_u16, 0x40ae_u16, StaticArray[0xab_u8, 0x7c_u8, 0x4e_u8, 0x7a_u8, 0xd0_u8, 0xbd_u8, 0x1c_u8, 0x52_u8])
-  KSNODE_BDA_PBDA_TUNER = LibC::GUID.new(0xaa5e8286_u32, 0x593c_u16, 0x4979_u16, StaticArray[0x94_u8, 0x94_u8, 0x46_u8, 0xa2_u8, 0xa9_u8, 0xdf_u8, 0xe0_u8, 0x76_u8])
-  KSNODE_BDA_PBDA_MUX = LibC::GUID.new(0xf88c7787_u32, 0x6678_u16, 0x4f4b_u16, StaticArray[0xa1_u8, 0x3e_u8, 0xda_u8, 0x9_u8, 0x86_u8, 0x1d_u8, 0x68_u8, 0x2b_u8])
-  KSNODE_BDA_PBDA_DRM = LibC::GUID.new(0x9eeebd03_u32, 0xeea1_u16, 0x450f_u16, StaticArray[0x96_u8, 0xae_u8, 0x63_u8, 0x3e_u8, 0x6d_u8, 0xe6_u8, 0x3c_u8, 0xce_u8])
-  KSNODE_BDA_DRI_DRM = LibC::GUID.new(0x4f95ad74_u32, 0xcefb_u16, 0x42d2_u16, StaticArray[0x94_u8, 0xa9_u8, 0x68_u8, 0xc5_u8, 0xb2_u8, 0xc1_u8, 0xaa_u8, 0xbe_u8])
-  KSNODE_BDA_TS_SELECTOR = LibC::GUID.new(0x5eddf185_u32, 0xfed1_u16, 0x4f45_u16, StaticArray[0x96_u8, 0x85_u8, 0xbb_u8, 0xb7_u8, 0x3c_u8, 0x32_u8, 0x3c_u8, 0xfc_u8])
-  PINNAME_IPSINK_INPUT = LibC::GUID.new(0x3fdffa70_u32, 0xac9a_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x17_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
-  KSDATAFORMAT_TYPE_BDA_IP = LibC::GUID.new(0xe25f7b8e_u32, 0xcccc_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x25_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
-  KSDATAFORMAT_SUBTYPE_BDA_IP = LibC::GUID.new(0x5a9a213c_u32, 0xdb08_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
-  KSDATAFORMAT_SPECIFIER_BDA_IP = LibC::GUID.new(0x6b891420_u32, 0xdb09_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
-  KSDATAFORMAT_TYPE_BDA_IP_CONTROL = LibC::GUID.new(0xdadd5799_u32, 0x7d5b_u16, 0x4b63_u16, StaticArray[0x80_u8, 0xfb_u8, 0xd1_u8, 0x44_u8, 0x2f_u8, 0x26_u8, 0xb6_u8, 0x21_u8])
-  KSDATAFORMAT_SUBTYPE_BDA_IP_CONTROL = LibC::GUID.new(0x499856e8_u32, 0xe85b_u16, 0x48ed_u16, StaticArray[0x9b_u8, 0xea_u8, 0x41_u8, 0xd_u8, 0xd_u8, 0xd4_u8, 0xef_u8, 0x81_u8])
-  PINNAME_MPE = LibC::GUID.new(0xc1b06d73_u32, 0x1dbb_u16, 0x11d3_u16, StaticArray[0x8f_u8, 0x46_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
-  KSDATAFORMAT_TYPE_MPE = LibC::GUID.new(0x455f176c_u32, 0x4b06_u16, 0x47ce_u16, StaticArray[0x9a_u8, 0xef_u8, 0x8c_u8, 0xae_u8, 0xf7_u8, 0x3d_u8, 0xf7_u8, 0xb5_u8])
-  DIGITAL_CABLE_NETWORK_TYPE = LibC::GUID.new(0x143827ab_u32, 0xf77b_u16, 0x498d_u16, StaticArray[0x81_u8, 0xca_u8, 0x5a_u8, 0x0_u8, 0x7a_u8, 0xec_u8, 0x28_u8, 0xbf_u8])
-  ANALOG_TV_NETWORK_TYPE = LibC::GUID.new(0xb820d87e_u32, 0xe0e3_u16, 0x478f_u16, StaticArray[0x8a_u8, 0x38_u8, 0x4e_u8, 0x13_u8, 0xf7_u8, 0xb3_u8, 0xdf_u8, 0x42_u8])
-  ANALOG_AUXIN_NETWORK_TYPE = LibC::GUID.new(0x742ef867_u32, 0x9e1_u16, 0x40a3_u16, StaticArray[0x82_u8, 0xd3_u8, 0x96_u8, 0x69_u8, 0xba_u8, 0x35_u8, 0x32_u8, 0x5f_u8])
-  ANALOG_FM_NETWORK_TYPE = LibC::GUID.new(0x7728087b_u32, 0x2bb9_u16, 0x4e30_u16, StaticArray[0x80_u8, 0x78_u8, 0x44_u8, 0x94_u8, 0x76_u8, 0xe5_u8, 0x9d_u8, 0xbb_u8])
-  ISDB_TERRESTRIAL_TV_NETWORK_TYPE = LibC::GUID.new(0x95037f6f_u32, 0x3ac7_u16, 0x4452_u16, StaticArray[0xb6_u8, 0xc4_u8, 0x45_u8, 0xa9_u8, 0xce_u8, 0x92_u8, 0x92_u8, 0xa2_u8])
-  ISDB_T_NETWORK_TYPE = LibC::GUID.new(0xfc3855a6_u32, 0xc901_u16, 0x4f2e_u16, StaticArray[0xab_u8, 0xa8_u8, 0x90_u8, 0x81_u8, 0x5a_u8, 0xfc_u8, 0x6c_u8, 0x83_u8])
-  ISDB_SATELLITE_TV_NETWORK_TYPE = LibC::GUID.new(0xb0a4e6a0_u32, 0x6a1a_u16, 0x4b83_u16, StaticArray[0xbb_u8, 0x5b_u8, 0x90_u8, 0x3e_u8, 0x1d_u8, 0x90_u8, 0xe6_u8, 0xb6_u8])
-  ISDB_S_NETWORK_TYPE = LibC::GUID.new(0xa1e78202_u32, 0x1459_u16, 0x41b1_u16, StaticArray[0x9c_u8, 0xa9_u8, 0x2a_u8, 0x92_u8, 0x58_u8, 0x7a_u8, 0x42_u8, 0xcc_u8])
-  ISDB_CABLE_TV_NETWORK_TYPE = LibC::GUID.new(0xc974ddb5_u32, 0x41fe_u16, 0x4b25_u16, StaticArray[0x97_u8, 0x41_u8, 0x92_u8, 0xf0_u8, 0x49_u8, 0xf1_u8, 0xd5_u8, 0xd1_u8])
-  DIRECT_TV_SATELLITE_TV_NETWORK_TYPE = LibC::GUID.new(0x93b66fb5_u32, 0x93d4_u16, 0x4323_u16, StaticArray[0x92_u8, 0x1c_u8, 0xc1_u8, 0xf5_u8, 0x2d_u8, 0xf6_u8, 0x1d_u8, 0x3f_u8])
-  ECHOSTAR_SATELLITE_TV_NETWORK_TYPE = LibC::GUID.new(0xc4f6b31b_u32, 0xc6bf_u16, 0x4759_u16, StaticArray[0x88_u8, 0x6f_u8, 0xa7_u8, 0x38_u8, 0x6d_u8, 0xca_u8, 0x27_u8, 0xa0_u8])
-  ATSC_TERRESTRIAL_TV_NETWORK_TYPE = LibC::GUID.new(0xdad2fdd_u32, 0x5fd7_u16, 0x11d3_u16, StaticArray[0x8f_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
-  DVB_TERRESTRIAL_TV_NETWORK_TYPE = LibC::GUID.new(0x216c62df_u32, 0x6d7f_u16, 0x4e9a_u16, StaticArray[0x85_u8, 0x71_u8, 0x5_u8, 0xf1_u8, 0x4e_u8, 0xdb_u8, 0x76_u8, 0x6a_u8])
-  BSKYB_TERRESTRIAL_TV_NETWORK_TYPE = LibC::GUID.new(0x9e9e46c6_u32, 0x3aba_u16, 0x4f08_u16, StaticArray[0xad_u8, 0xe_u8, 0xcc_u8, 0x5a_u8, 0xc8_u8, 0x14_u8, 0x8c_u8, 0x2b_u8])
-  DVB_SATELLITE_TV_NETWORK_TYPE = LibC::GUID.new(0xfa4b375a_u32, 0x45b4_u16, 0x4d45_u16, StaticArray[0x84_u8, 0x40_u8, 0x26_u8, 0x39_u8, 0x57_u8, 0xb1_u8, 0x16_u8, 0x23_u8])
-  DVB_CABLE_TV_NETWORK_TYPE = LibC::GUID.new(0xdc0c0fe7_u32, 0x485_u16, 0x4266_u16, StaticArray[0xb9_u8, 0x3f_u8, 0x68_u8, 0xfb_u8, 0xf8_u8, 0xe_u8, 0xd8_u8, 0x34_u8])
-  BDA_DEBUG_DATA_AVAILABLE = LibC::GUID.new(0x69c24f54_u32, 0x9983_u16, 0x497e_u16, StaticArray[0xb4_u8, 0x15_u8, 0x28_u8, 0x2b_u8, 0xe4_u8, 0xc5_u8, 0x55_u8, 0xfb_u8])
-  BDA_DEBUG_DATA_TYPE_STRING = LibC::GUID.new(0xa806e767_u32, 0xde5c_u16, 0x430c_u16, StaticArray[0x80_u8, 0xbf_u8, 0xa2_u8, 0x1e_u8, 0xbe_u8, 0x6_u8, 0xc7_u8, 0x48_u8])
-  EVENTID_BDA_IsdbCASResponse = LibC::GUID.new(0xd4cb1966_u32, 0x41bc_u16, 0x4ced_u16, StaticArray[0x9a_u8, 0x20_u8, 0xfd_u8, 0xce_u8, 0xac_u8, 0x78_u8, 0xf7_u8, 0xd_u8])
-  EVENTID_BDA_CASRequestTuner = LibC::GUID.new(0xcf39a9d8_u32, 0xf5d3_u16, 0x4685_u16, StaticArray[0xbe_u8, 0x57_u8, 0xed_u8, 0x81_u8, 0xdb_u8, 0xa4_u8, 0x6b_u8, 0x27_u8])
-  EVENTID_BDA_CASReleaseTuner = LibC::GUID.new(0x20c1a16b_u32, 0x441f_u16, 0x49a5_u16, StaticArray[0xbb_u8, 0x5c_u8, 0xe9_u8, 0xa0_u8, 0x44_u8, 0x95_u8, 0xc6_u8, 0xc1_u8])
-  EVENTID_BDA_CASOpenMMI = LibC::GUID.new(0x85dac915_u32, 0xe593_u16, 0x410d_u16, StaticArray[0x84_u8, 0x71_u8, 0xd6_u8, 0x81_u8, 0x21_u8, 0x5_u8, 0xf2_u8, 0x8e_u8])
-  EVENTID_BDA_CASCloseMMI = LibC::GUID.new(0x5d0f550f_u32, 0xde2e_u16, 0x479d_u16, StaticArray[0x83_u8, 0x45_u8, 0xec_u8, 0xe_u8, 0x95_u8, 0x57_u8, 0xe8_u8, 0xa2_u8])
-  EVENTID_BDA_CASBroadcastMMI = LibC::GUID.new(0x676876f0_u32, 0x1132_u16, 0x404c_u16, StaticArray[0xa7_u8, 0xca_u8, 0xe7_u8, 0x20_u8, 0x69_u8, 0xa9_u8, 0xd5_u8, 0x4f_u8])
-  EVENTID_BDA_TunerSignalLock = LibC::GUID.new(0x1872e740_u32, 0xf573_u16, 0x429b_u16, StaticArray[0xa0_u8, 0xe_u8, 0xd9_u8, 0xc1_u8, 0xe4_u8, 0x8_u8, 0xaf_u8, 0x9_u8])
-  EVENTID_BDA_TunerNoSignal = LibC::GUID.new(0xe29b382b_u32, 0x1edd_u16, 0x4930_u16, StaticArray[0xbc_u8, 0x46_u8, 0x68_u8, 0x2f_u8, 0xd7_u8, 0x2d_u8, 0x2d_u8, 0xfb_u8])
-  EVENTID_BDA_GPNVValueUpdate = LibC::GUID.new(0xff75c68c_u32, 0xf416_u16, 0x4e7e_u16, StaticArray[0xbf_u8, 0x17_u8, 0x6d_u8, 0x55_u8, 0xc5_u8, 0xdf_u8, 0x15_u8, 0x75_u8])
-  EVENTID_BDA_UpdateDrmStatus = LibC::GUID.new(0x65a6f681_u32, 0x1462_u16, 0x473b_u16, StaticArray[0x88_u8, 0xce_u8, 0xcb_u8, 0x73_u8, 0x14_u8, 0x27_u8, 0xbd_u8, 0xb5_u8])
-  EVENTID_BDA_UpdateScanState = LibC::GUID.new(0x55702b50_u32, 0x7b49_u16, 0x42b8_u16, StaticArray[0xa8_u8, 0x2f_u8, 0x4a_u8, 0xfb_u8, 0x69_u8, 0x1b_u8, 0x6_u8, 0x28_u8])
-  EVENTID_BDA_GuideDataAvailable = LibC::GUID.new(0x98db717a_u32, 0x478a_u16, 0x4cd4_u16, StaticArray[0x92_u8, 0xd0_u8, 0x95_u8, 0xf6_u8, 0x6b_u8, 0x89_u8, 0xe5_u8, 0xb1_u8])
-  EVENTID_BDA_GuideServiceInformationUpdated = LibC::GUID.new(0xa1c3ea2b_u32, 0x175f_u16, 0x4458_u16, StaticArray[0xb7_u8, 0x35_u8, 0x50_u8, 0x7d_u8, 0x22_u8, 0xdb_u8, 0x23_u8, 0xa6_u8])
-  EVENTID_BDA_GuideDataError = LibC::GUID.new(0xac33c448_u32, 0x6f73_u16, 0x4fd7_u16, StaticArray[0xb3_u8, 0x41_u8, 0x59_u8, 0x4c_u8, 0x36_u8, 0xd_u8, 0x8d_u8, 0x74_u8])
-  EVENTID_BDA_DiseqCResponseAvailable = LibC::GUID.new(0xefa628f8_u32, 0x1f2c_u16, 0x4b67_u16, StaticArray[0x9e_u8, 0xa5_u8, 0xac_u8, 0xf6_u8, 0xfa_u8, 0x9a_u8, 0x1f_u8, 0x36_u8])
-  EVENTID_BDA_LbigsOpenConnection = LibC::GUID.new(0x356207b2_u32, 0x6f31_u16, 0x4eb0_u16, StaticArray[0xa2_u8, 0x71_u8, 0xb3_u8, 0xfa_u8, 0x6b_u8, 0xb7_u8, 0x68_u8, 0xf_u8])
-  EVENTID_BDA_LbigsSendData = LibC::GUID.new(0x1123277b_u32, 0xf1c6_u16, 0x4154_u16, StaticArray[0x8b_u8, 0xd_u8, 0x48_u8, 0xe6_u8, 0x15_u8, 0x70_u8, 0x59_u8, 0xaa_u8])
-  EVENTID_BDA_LbigsCloseConnectionHandle = LibC::GUID.new(0xc2f08b99_u32, 0x65ef_u16, 0x4314_u16, StaticArray[0x96_u8, 0x71_u8, 0xe9_u8, 0x9d_u8, 0x4c_u8, 0xce_u8, 0xb_u8, 0xae_u8])
-  EVENTID_BDA_EncoderSignalLock = LibC::GUID.new(0x5ec90eb9_u32, 0x39fa_u16, 0x4cfc_u16, StaticArray[0xb9_u8, 0x3f_u8, 0x0_u8, 0xbb_u8, 0x11_u8, 0x7_u8, 0x7f_u8, 0x5e_u8])
-  EVENTID_BDA_FdcStatus = LibC::GUID.new(0x5f25366_u32, 0xd0eb_u16, 0x43d2_u16, StaticArray[0xbc_u8, 0x3c_u8, 0x68_u8, 0x2b_u8, 0x86_u8, 0x3d_u8, 0xf1_u8, 0x42_u8])
-  EVENTID_BDA_FdcTableSection = LibC::GUID.new(0x6a0cd757_u32, 0x4ce3_u16, 0x4e5b_u16, StaticArray[0x94_u8, 0x44_u8, 0x71_u8, 0x87_u8, 0xb8_u8, 0x71_u8, 0x52_u8, 0xc5_u8])
-  EVENTID_BDA_TransprtStreamSelectorInfo = LibC::GUID.new(0xc40f9f85_u32, 0x9d0_u16, 0x489c_u16, StaticArray[0x9e_u8, 0x9c_u8, 0xa_u8, 0xbb_u8, 0xb5_u8, 0x69_u8, 0x51_u8, 0xb0_u8])
-  EVENTID_BDA_RatingPinReset = LibC::GUID.new(0xc6e048c0_u32, 0xc574_u16, 0x4c26_u16, StaticArray[0xbc_u8, 0xda_u8, 0x2f_u8, 0x4d_u8, 0x35_u8, 0xeb_u8, 0x5e_u8, 0x85_u8])
-  PBDA_ALWAYS_TUNE_IN_MUX = LibC::GUID.new(0x1e1d7141_u32, 0x583f_u16, 0x4ac2_u16, StaticArray[0xb0_u8, 0x19_u8, 0x1f_u8, 0x43_u8, 0xe_u8, 0xda_u8, 0xf_u8, 0x4c_u8])
-  BDANETWORKTYPE_ATSC = LibC::GUID.new(0x71985f51_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_FilgraphManager = LibC::GUID.new(0xe436ebb3_u32, 0x524f_u16, 0x11ce_u16, StaticArray[0x9f_u8, 0x53_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
+  CLSID_SystemTuningSpaces = LibC::GUID.new(0xd02aac50_u32, 0x27e_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
+  CLSID_TuningSpace = LibC::GUID.new(0x5ffdc5e6_u32, 0xb83a_u16, 0x4b55_u16, StaticArray[0xb6_u8, 0xe8_u8, 0xc6_u8, 0x9e_u8, 0x76_u8, 0x5f_u8, 0xe9_u8, 0xdb_u8])
+  CLSID_ChannelIDTuningSpace = LibC::GUID.new(0xcc829a2f_u32, 0x3365_u16, 0x463f_u16, StaticArray[0xaf_u8, 0x13_u8, 0x81_u8, 0xdb_u8, 0xb6_u8, 0xf3_u8, 0xa5_u8, 0x55_u8])
+  CLSID_ATSCTuningSpace = LibC::GUID.new(0xa2e30750_u32, 0x6c3d_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_DigitalCableTuningSpace = LibC::GUID.new(0xd9bb4cee_u32, 0xb87a_u16, 0x47f1_u16, StaticArray[0xac_u8, 0x92_u8, 0xb0_u8, 0x8d_u8, 0x9c_u8, 0x78_u8, 0x13_u8, 0xfc_u8])
+  CLSID_AnalogRadioTuningSpace = LibC::GUID.new(0x8a674b4c_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_AuxInTuningSpace = LibC::GUID.new(0xf9769a06_u32, 0x7aca_u16, 0x4e39_u16, StaticArray[0x9c_u8, 0xfb_u8, 0x97_u8, 0xbb_u8, 0x35_u8, 0xf0_u8, 0xe7_u8, 0x7e_u8])
+  CLSID_AnalogTVTuningSpace = LibC::GUID.new(0x8a674b4d_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_DVBTuningSpace = LibC::GUID.new(0xc6b14b32_u32, 0x76aa_u16, 0x4a86_u16, StaticArray[0xa7_u8, 0xac_u8, 0x5c_u8, 0x79_u8, 0xaa_u8, 0xf5_u8, 0x8d_u8, 0xa7_u8])
+  CLSID_DVBSTuningSpace = LibC::GUID.new(0xb64016f3_u32, 0xc9a2_u16, 0x4066_u16, StaticArray[0x96_u8, 0xf0_u8, 0xbd_u8, 0x95_u8, 0x63_u8, 0x31_u8, 0x47_u8, 0x26_u8])
+  CLSID_ComponentTypes = LibC::GUID.new(0xa1a2b1c4_u32, 0xe3a_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
+  CLSID_ComponentType = LibC::GUID.new(0x823535a0_u32, 0x318_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
+  CLSID_LanguageComponentType = LibC::GUID.new(0x1be49f30_u32, 0xe1b_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
+  CLSID_MPEG2ComponentType = LibC::GUID.new(0x418008f3_u32, 0xcf67_u16, 0x4668_u16, StaticArray[0x96_u8, 0x28_u8, 0x10_u8, 0xdc_u8, 0x52_u8, 0xbe_u8, 0x1d_u8, 0x8_u8])
+  CLSID_ATSCComponentType = LibC::GUID.new(0xa8dcf3d5_u32, 0x780_u16, 0x4ef4_u16, StaticArray[0x8a_u8, 0x83_u8, 0x2c_u8, 0xff_u8, 0xaa_u8, 0xcb_u8, 0x8a_u8, 0xce_u8])
+  CLSID_Components = LibC::GUID.new(0x809b6661_u32, 0x94c4_u16, 0x49e6_u16, StaticArray[0xb6_u8, 0xec_u8, 0x3f_u8, 0xf_u8, 0x86_u8, 0x22_u8, 0x15_u8, 0xaa_u8])
+  CLSID_Component = LibC::GUID.new(0x59dc47a8_u32, 0x116c_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
+  CLSID_MPEG2Component = LibC::GUID.new(0x55cb2d7_u32, 0x2969_u16, 0x45cd_u16, StaticArray[0x91_u8, 0x4b_u8, 0x76_u8, 0x89_u8, 0x7_u8, 0x22_u8, 0xf1_u8, 0x12_u8])
+  CLSID_AnalogAudioComponentType = LibC::GUID.new(0x28ab0005_u32, 0xe845_u16, 0x4ffa_u16, StaticArray[0xaa_u8, 0x9b_u8, 0xf4_u8, 0x66_u8, 0x52_u8, 0x36_u8, 0x14_u8, 0x1c_u8])
+  CLSID_TuneRequest = LibC::GUID.new(0xb46e0d38_u32, 0xab35_u16, 0x4a06_u16, StaticArray[0xa1_u8, 0x37_u8, 0x70_u8, 0x57_u8, 0x6b_u8, 0x1_u8, 0xb3_u8, 0x9f_u8])
+  CLSID_ChannelIDTuneRequest = LibC::GUID.new(0x3a9428a7_u32, 0x31a4_u16, 0x45e9_u16, StaticArray[0x9e_u8, 0xfb_u8, 0xe0_u8, 0x55_u8, 0xbf_u8, 0x7b_u8, 0xb3_u8, 0xdb_u8])
+  CLSID_ChannelTuneRequest = LibC::GUID.new(0x369b4e5_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_ATSCChannelTuneRequest = LibC::GUID.new(0x369b4e6_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_DigitalCableTuneRequest = LibC::GUID.new(0x26ec0b63_u32, 0xaa90_u16, 0x458a_u16, StaticArray[0x8d_u8, 0xf4_u8, 0x56_u8, 0x59_u8, 0xf2_u8, 0xc8_u8, 0xa1_u8, 0x8a_u8])
+  CLSID_MPEG2TuneRequest = LibC::GUID.new(0x955ac62_u32, 0xbf2e_u16, 0x4cba_u16, StaticArray[0xa2_u8, 0xb9_u8, 0xa6_u8, 0x3f_u8, 0x77_u8, 0x2d_u8, 0x46_u8, 0xcf_u8])
+  CLSID_MPEG2TuneRequestFactory = LibC::GUID.new(0x2c63e4eb_u32, 0x4cea_u16, 0x41b8_u16, StaticArray[0x91_u8, 0x9c_u8, 0xe9_u8, 0x47_u8, 0xea_u8, 0x19_u8, 0xa7_u8, 0x7c_u8])
+  CLSID_Locator = LibC::GUID.new(0x888c883_u32, 0xac4f_u16, 0x4943_u16, StaticArray[0xb5_u8, 0x16_u8, 0x2c_u8, 0x38_u8, 0xd9_u8, 0xb3_u8, 0x45_u8, 0x62_u8])
+  CLSID_DigitalLocator = LibC::GUID.new(0x6e50cc0d_u32, 0xc19b_u16, 0x4bf6_u16, StaticArray[0x81_u8, 0xb_u8, 0x5b_u8, 0xd6_u8, 0x7_u8, 0x61_u8, 0xf5_u8, 0xcc_u8])
+  CLSID_AnalogLocator = LibC::GUID.new(0x49638b91_u32, 0x48ab_u16, 0x48b7_u16, StaticArray[0xa4_u8, 0x7a_u8, 0x7d_u8, 0xe_u8, 0x75_u8, 0xa0_u8, 0x8e_u8, 0xde_u8])
+  CLSID_ATSCLocator = LibC::GUID.new(0x8872ff1b_u32, 0x98fa_u16, 0x4d7a_u16, StaticArray[0x8d_u8, 0x93_u8, 0xc9_u8, 0xf1_u8, 0x5_u8, 0x5f_u8, 0x85_u8, 0xbb_u8])
+  CLSID_DigitalCableLocator = LibC::GUID.new(0x3c06416_u32, 0xd127_u16, 0x407a_u16, StaticArray[0xab_u8, 0x4c_u8, 0xfd_u8, 0xd2_u8, 0x79_u8, 0xab_u8, 0xbe_u8, 0x5d_u8])
+  CLSID_DVBTLocator = LibC::GUID.new(0x9cd64701_u32, 0xbdf3_u16, 0x4d14_u16, StaticArray[0x8e_u8, 0x3_u8, 0xf1_u8, 0x29_u8, 0x83_u8, 0xd8_u8, 0x66_u8, 0x64_u8])
+  CLSID_DVBTLocator2 = LibC::GUID.new(0xefe3fa02_u32, 0x45d7_u16, 0x4920_u16, StaticArray[0xbe_u8, 0x96_u8, 0x53_u8, 0xfa_u8, 0x7f_u8, 0x35_u8, 0xb0_u8, 0xe6_u8])
+  CLSID_DVBSLocator = LibC::GUID.new(0x1df7d126_u32, 0x4050_u16, 0x47f0_u16, StaticArray[0xa7_u8, 0xcf_u8, 0x4c_u8, 0x4c_u8, 0xa9_u8, 0x24_u8, 0x13_u8, 0x33_u8])
+  CLSID_DVBCLocator = LibC::GUID.new(0xc531d9fd_u32, 0x9685_u16, 0x4028_u16, StaticArray[0x8b_u8, 0x68_u8, 0x6e_u8, 0x12_u8, 0x32_u8, 0x7_u8, 0x9f_u8, 0x1e_u8])
+  CLSID_ISDBSLocator = LibC::GUID.new(0x6504afed_u32, 0xa629_u16, 0x455c_u16, StaticArray[0xa7_u8, 0xf1_u8, 0x4_u8, 0x96_u8, 0x4d_u8, 0xea_u8, 0x5c_u8, 0xc4_u8])
+  CLSID_DVBTuneRequest = LibC::GUID.new(0x15d6504a_u32, 0x5494_u16, 0x499c_u16, StaticArray[0x88_u8, 0x6c_u8, 0x97_u8, 0x3c_u8, 0x9e_u8, 0x53_u8, 0xb9_u8, 0xf1_u8])
+  CLSID_CreatePropBagOnRegKey = LibC::GUID.new(0x8a674b49_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_BroadcastEventService = LibC::GUID.new(0xb3ffb92_u32, 0x919_u16, 0x4934_u16, StaticArray[0x9d_u8, 0x5b_u8, 0x61_u8, 0x9c_u8, 0x71_u8, 0x9d_u8, 0x2_u8, 0x2_u8])
+  CLSID_TunerMarshaler = LibC::GUID.new(0x6438570b_u32, 0xc08_u16, 0x4a25_u16, StaticArray[0x95_u8, 0x4_u8, 0x80_u8, 0x12_u8, 0xbb_u8, 0x4d_u8, 0x50_u8, 0xcf_u8])
+  CLSID_PersistTuneXmlUtility = LibC::GUID.new(0xe77026b0_u32, 0xb97f_u16, 0x4cbb_u16, StaticArray[0xb7_u8, 0xfb_u8, 0xf4_u8, 0xf0_u8, 0x3a_u8, 0xd6_u8, 0x9f_u8, 0x11_u8])
+  CLSID_ESEventService = LibC::GUID.new(0xc20447fc_u32, 0xec60_u16, 0x475e_u16, StaticArray[0x81_u8, 0x3f_u8, 0xd2_u8, 0xb0_u8, 0xa6_u8, 0xde_u8, 0xce_u8, 0xfe_u8])
+  CLSID_ESEventFactory = LibC::GUID.new(0x8e8a07da_u32, 0x71f8_u16, 0x40c1_u16, StaticArray[0xa9_u8, 0x29_u8, 0x5e_u8, 0x3a_u8, 0x86_u8, 0x8a_u8, 0xc2_u8, 0xc6_u8])
+  CLSID_XDSToRat = LibC::GUID.new(0xc5c5c5f0_u32, 0x3abc_u16, 0x11d6_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa0_u8, 0xc0_u8, 0x26_u8])
+  CLSID_EvalRat = LibC::GUID.new(0xc5c5c5f1_u32, 0x3abc_u16, 0x11d6_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa0_u8, 0xc0_u8, 0x26_u8])
+  CLSID_ETFilter = LibC::GUID.new(0xc4c4c4f1_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
+  CLSID_DTFilter = LibC::GUID.new(0xc4c4c4f2_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
+  CLSID_XDSCodec = LibC::GUID.new(0xc4c4c4f3_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
+  CLSID_CXDSData = LibC::GUID.new(0xc4c4c4f4_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
+  CLSID_MSVidAnalogTunerDevice = LibC::GUID.new(0x1c15d484_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidBDATunerDevice = LibC::GUID.new(0xa2e3074e_u32, 0x6c3d_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidFilePlaybackDevice = LibC::GUID.new(0x37b0353c_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidWebDVD = LibC::GUID.new(0x11b3619_u32, 0xfe63_u16, 0x4814_u16, StaticArray[0x8a_u8, 0x84_u8, 0x15_u8, 0xa1_u8, 0x94_u8, 0xce_u8, 0x9c_u8, 0xe3_u8])
+  CLSID_MSVidWebDVDAdm = LibC::GUID.new(0xfa7c375b_u32, 0x66a7_u16, 0x4280_u16, StaticArray[0x87_u8, 0x9d_u8, 0xfd_u8, 0x45_u8, 0x9c_u8, 0x84_u8, 0xbb_u8, 0x2_u8])
+  CLSID_MSVidVideoRenderer = LibC::GUID.new(0x37b03543_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidVMR9 = LibC::GUID.new(0x24dc3975_u32, 0x9bf_u16, 0x4231_u16, StaticArray[0x86_u8, 0x55_u8, 0x3e_u8, 0xe7_u8, 0x1f_u8, 0x43_u8, 0x83_u8, 0x7d_u8])
+  CLSID_MSVidEVR = LibC::GUID.new(0xc45268a2_u32, 0xfa81_u16, 0x4e19_u16, StaticArray[0xb1_u8, 0xe3_u8, 0x72_u8, 0xed_u8, 0xbd_u8, 0x60_u8, 0xae_u8, 0xda_u8])
+  CLSID_MSVidAudioRenderer = LibC::GUID.new(0x37b03544_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidGenericSink = LibC::GUID.new(0x4a5869cf_u32, 0x929d_u16, 0x4040_u16, StaticArray[0xae_u8, 0x3_u8, 0xfc_u8, 0xaf_u8, 0xc5_u8, 0xb9_u8, 0xcd_u8, 0x42_u8])
+  CLSID_MSVidStreamBufferSink = LibC::GUID.new(0x9e77aac4_u32, 0x35e5_u16, 0x42a1_u16, StaticArray[0xbd_u8, 0xc2_u8, 0x8f_u8, 0x3f_u8, 0xf3_u8, 0x99_u8, 0x84_u8, 0x7c_u8])
+  CLSID_MSVidStreamBufferSource = LibC::GUID.new(0xad8e510d_u32, 0x217f_u16, 0x409b_u16, StaticArray[0x80_u8, 0x76_u8, 0x29_u8, 0xc5_u8, 0xe7_u8, 0x3b_u8, 0x98_u8, 0xe8_u8])
+  CLSID_MSVidStreamBufferV2Source = LibC::GUID.new(0xfd351ea1_u32, 0x4173_u16, 0x4af4_u16, StaticArray[0x82_u8, 0x1d_u8, 0x80_u8, 0xd4_u8, 0xae_u8, 0x97_u8, 0x90_u8, 0x48_u8])
+  CLSID_MSVidEncoder = LibC::GUID.new(0xbb530c63_u32, 0xd9df_u16, 0x4b49_u16, StaticArray[0x94_u8, 0x39_u8, 0x63_u8, 0x45_u8, 0x39_u8, 0x62_u8, 0xe5_u8, 0x98_u8])
+  CLSID_MSVidITVCapture = LibC::GUID.new(0x5740a302_u32, 0xef0b_u16, 0x45ce_u16, StaticArray[0xbf_u8, 0x3b_u8, 0x44_u8, 0x70_u8, 0xa1_u8, 0x4a_u8, 0x89_u8, 0x80_u8])
+  CLSID_MSVidITVPlayback = LibC::GUID.new(0x9e797ed0_u32, 0x5253_u16, 0x4243_u16, StaticArray[0xa9_u8, 0xb7_u8, 0xbd_u8, 0x6_u8, 0xc5_u8, 0x8f_u8, 0x8e_u8, 0xf3_u8])
+  CLSID_MSVidCCA = LibC::GUID.new(0x86151827_u32, 0xe47b_u16, 0x45ee_u16, StaticArray[0x84_u8, 0x21_u8, 0xd1_u8, 0xe_u8, 0x6e_u8, 0x69_u8, 0x9_u8, 0x79_u8])
+  CLSID_MSVidClosedCaptioning = LibC::GUID.new(0x7f9cb14d_u32, 0x48e4_u16, 0x43b6_u16, StaticArray[0x93_u8, 0x46_u8, 0x1a_u8, 0xeb_u8, 0xc3_u8, 0x9c_u8, 0x64_u8, 0xd3_u8])
+  CLSID_MSVidClosedCaptioningSI = LibC::GUID.new(0x92ed88bf_u32, 0x879e_u16, 0x448f_u16, StaticArray[0xb6_u8, 0xb6_u8, 0xa3_u8, 0x85_u8, 0xbc_u8, 0xeb_u8, 0x84_u8, 0x6d_u8])
+  CLSID_MSVidDataServices = LibC::GUID.new(0x334125c0_u32, 0x77e5_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidXDS = LibC::GUID.new(0x149eedf_u32, 0xd08f_u16, 0x4142_u16, StaticArray[0x8d_u8, 0x73_u8, 0xd2_u8, 0x39_u8, 0x3_u8, 0xd2_u8, 0x1e_u8, 0x90_u8])
+  CLSID_MSVidAnalogCaptureToDataServices = LibC::GUID.new(0xc5702cd6_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidDataServicesToStreamBufferSink = LibC::GUID.new(0x38f03426_u32, 0xe83b_u16, 0x4e68_u16, StaticArray[0xb6_u8, 0x5b_u8, 0xdc_u8, 0xae_u8, 0x73_u8, 0x30_u8, 0x48_u8, 0x38_u8])
+  CLSID_MSVidDataServicesToXDS = LibC::GUID.new(0x429ec6e_u32, 0x1144_u16, 0x4bed_u16, StaticArray[0xb8_u8, 0x8b_u8, 0x2f_u8, 0xb9_u8, 0x89_u8, 0x9a_u8, 0x4a_u8, 0x3d_u8])
+  CLSID_MSVidAnalogCaptureToXDS = LibC::GUID.new(0x3540d440_u32, 0x5b1d_u16, 0x49cb_u16, StaticArray[0x82_u8, 0x1a_u8, 0xe8_u8, 0x4b_u8, 0x8c_u8, 0xf0_u8, 0x65_u8, 0xa7_u8])
+  CLSID_MSVidCtl = LibC::GUID.new(0xb0edf163_u32, 0x910a_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidInputDevices = LibC::GUID.new(0xc5702ccc_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidOutputDevices = LibC::GUID.new(0xc5702ccd_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidVideoRendererDevices = LibC::GUID.new(0xc5702cce_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidAudioRendererDevices = LibC::GUID.new(0xc5702ccf_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidFeatures = LibC::GUID.new(0xc5702cd0_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidGenericComposite = LibC::GUID.new(0x2764bce5_u32, 0xcc39_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidAnalogCaptureToOverlayMixer = LibC::GUID.new(0xe18af75a_u32, 0x8af_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_MSVidWebDVDToVideoRenderer = LibC::GUID.new(0x267db0b3_u32, 0x55e3_u16, 0x4902_u16, StaticArray[0x94_u8, 0x9b_u8, 0xdf_u8, 0x8f_u8, 0x5c_u8, 0xec_u8, 0x1_u8, 0x91_u8])
+  CLSID_MSVidWebDVDToAudioRenderer = LibC::GUID.new(0x8d04238e_u32, 0x9fd1_u16, 0x41c6_u16, StaticArray[0x8d_u8, 0xe3_u8, 0x9e_u8, 0x1e_u8, 0xe3_u8, 0x9_u8, 0xe9_u8, 0x35_u8])
+  CLSID_MSVidMPEG2DecoderToClosedCaptioning = LibC::GUID.new(0x6ad28ee1_u32, 0x5002_u16, 0x4e71_u16, StaticArray[0xaa_u8, 0xf7_u8, 0xbd_u8, 0x7_u8, 0x79_u8, 0x7_u8, 0xb1_u8, 0xa4_u8])
+  CLSID_MSVidAnalogCaptureToStreamBufferSink = LibC::GUID.new(0x9f50e8b1_u32, 0x9530_u16, 0x4ddc_u16, StaticArray[0x82_u8, 0x5e_u8, 0x1a_u8, 0xf8_u8, 0x1d_u8, 0x47_u8, 0xae_u8, 0xd6_u8])
+  CLSID_MSVidDigitalCaptureToStreamBufferSink = LibC::GUID.new(0xabe40035_u32, 0x27c3_u16, 0x4a2f_u16, StaticArray[0x81_u8, 0x53_u8, 0x66_u8, 0x24_u8, 0x47_u8, 0x16_u8, 0x8_u8, 0xaf_u8])
+  CLSID_MSVidITVToStreamBufferSink = LibC::GUID.new(0x92b94828_u32, 0x1af7_u16, 0x4e6e_u16, StaticArray[0x9e_u8, 0xbf_u8, 0x77_u8, 0x6_u8, 0x57_u8, 0xf7_u8, 0x7a_u8, 0xf5_u8])
+  CLSID_MSVidCCAToStreamBufferSink = LibC::GUID.new(0x3ef76d68_u32, 0x8661_u16, 0x4843_u16, StaticArray[0x8b_u8, 0x8f_u8, 0xc3_u8, 0x71_u8, 0x63_u8, 0xd8_u8, 0xc9_u8, 0xce_u8])
+  CLSID_MSVidEncoderToStreamBufferSink = LibC::GUID.new(0xa0b9b497_u32, 0xafbc_u16, 0x45ad_u16, StaticArray[0xa8_u8, 0xa6_u8, 0x9b_u8, 0x7_u8, 0x7c_u8, 0x40_u8, 0xd4_u8, 0xf2_u8])
+  CLSID_MSVidFilePlaybackToVideoRenderer = LibC::GUID.new(0xb401c5eb_u32, 0x8457_u16, 0x427f_u16, StaticArray[0x84_u8, 0xea_u8, 0xa4_u8, 0xd2_u8, 0x36_u8, 0x33_u8, 0x64_u8, 0xb0_u8])
+  CLSID_MSVidFilePlaybackToAudioRenderer = LibC::GUID.new(0xcc23f537_u32, 0x18d4_u16, 0x4ece_u16, StaticArray[0x93_u8, 0xbd_u8, 0x20_u8, 0x7a_u8, 0x84_u8, 0x72_u8, 0x69_u8, 0x79_u8])
+  CLSID_MSVidAnalogTVToEncoder = LibC::GUID.new(0x28953661_u32, 0x231_u16, 0x41db_u16, StaticArray[0x89_u8, 0x86_u8, 0x21_u8, 0xff_u8, 0x43_u8, 0x88_u8, 0xee_u8, 0x9b_u8])
+  CLSID_MSVidStreamBufferSourceToVideoRenderer = LibC::GUID.new(0x3c4708dc_u32, 0xb181_u16, 0x46a8_u16, StaticArray[0x8d_u8, 0xa8_u8, 0x4a_u8, 0xb0_u8, 0x37_u8, 0x17_u8, 0x58_u8, 0xcd_u8])
+  CLSID_MSVidAnalogCaptureToCCA = LibC::GUID.new(0x942b7909_u32, 0xa28e_u16, 0x49a1_u16, StaticArray[0xa2_u8, 0x7_u8, 0x34_u8, 0xeb_u8, 0xcb_u8, 0xcb_u8, 0x4b_u8, 0x3b_u8])
+  CLSID_MSVidDigitalCaptureToCCA = LibC::GUID.new(0x73d14237_u32, 0xb9db_u16, 0x4efa_u16, StaticArray[0xa6_u8, 0xdd_u8, 0x84_u8, 0x35_u8, 0x4_u8, 0x21_u8, 0xfb_u8, 0x2f_u8])
+  CLSID_MSVidDigitalCaptureToITV = LibC::GUID.new(0x5d8e73f7_u32, 0x4989_u16, 0x4ac8_u16, StaticArray[0x8a_u8, 0x98_u8, 0x39_u8, 0xba_u8, 0xd_u8, 0x32_u8, 0x53_u8, 0x2_u8])
+  CLSID_MSVidSBESourceToITV = LibC::GUID.new(0x2291478c_u32, 0x5ee3_u16, 0x4bef_u16, StaticArray[0xab_u8, 0x5d_u8, 0xb5_u8, 0xff_u8, 0x2c_u8, 0xf5_u8, 0x83_u8, 0x52_u8])
+  CLSID_MSVidSBESourceToCC = LibC::GUID.new(0x9193a8f9_u32, 0xcba_u16, 0x400e_u16, StaticArray[0xaa_u8, 0x97_u8, 0xeb_u8, 0x47_u8, 0x9_u8, 0x16_u8, 0x45_u8, 0x76_u8])
+  CLSID_MSVidSBESourceToGenericSink = LibC::GUID.new(0x991da7e5_u32, 0x953f_u16, 0x435b_u16, StaticArray[0xbe_u8, 0x5e_u8, 0xb9_u8, 0x2a_u8, 0x5_u8, 0xed_u8, 0xfc_u8, 0x42_u8])
+  CLSID_MSVidCCToVMR = LibC::GUID.new(0xc4bf2784_u32, 0xae00_u16, 0x41ba_u16, StaticArray[0x98_u8, 0x28_u8, 0x9c_u8, 0x95_u8, 0x3b_u8, 0xd3_u8, 0xc5_u8, 0x4a_u8])
+  CLSID_MSVidCCToAR = LibC::GUID.new(0xd76334ca_u32, 0xd89e_u16, 0x4baf_u16, StaticArray[0x86_u8, 0xab_u8, 0xdd_u8, 0xb5_u8, 0x93_u8, 0x72_u8, 0xaf_u8, 0xc2_u8])
+  CLSID_MSEventBinder = LibC::GUID.new(0x577faa18_u32, 0x4518_u16, 0x445e_u16, StaticArray[0x8f_u8, 0x70_u8, 0x14_u8, 0x73_u8, 0xf8_u8, 0xcf_u8, 0x4b_u8, 0xa4_u8])
+  CLSID_MSVidStreamBufferRecordingControl = LibC::GUID.new(0xcaafdd83_u32, 0xcefc_u16, 0x4e3d_u16, StaticArray[0xba_u8, 0x3_u8, 0x17_u8, 0x5f_u8, 0x17_u8, 0xa2_u8, 0x4f_u8, 0x91_u8])
+  CLSID_MSVidRect = LibC::GUID.new(0xcb4276e6_u32, 0x7d5f_u16, 0x4cf1_u16, StaticArray[0x97_u8, 0x27_u8, 0x62_u8, 0x9c_u8, 0x5e_u8, 0x6d_u8, 0xb6_u8, 0xae_u8])
+  CLSID_MSVidDevice = LibC::GUID.new(0x6e40476f_u32, 0x9c49_u16, 0x4c3e_u16, StaticArray[0x8b_u8, 0xb9_u8, 0x85_u8, 0x87_u8, 0x95_u8, 0x8e_u8, 0xff_u8, 0x74_u8])
+  CLSID_MSVidDevice2 = LibC::GUID.new(0x30997f7d_u32, 0xb3b5_u16, 0x4a1c_u16, StaticArray[0x98_u8, 0x3a_u8, 0x1f_u8, 0xe8_u8, 0x9_u8, 0x8c_u8, 0xb7_u8, 0x7d_u8])
+  CLSID_MSVidInputDevice = LibC::GUID.new(0xac1972f2_u32, 0x138a_u16, 0x4ca3_u16, StaticArray[0x90_u8, 0xda_u8, 0xae_u8, 0x51_u8, 0x11_u8, 0x2e_u8, 0xda_u8, 0x28_u8])
+  CLSID_MSVidVideoInputDevice = LibC::GUID.new(0x95f4820b_u32, 0xbb3a_u16, 0x4e2d_u16, StaticArray[0xbc_u8, 0x64_u8, 0x5b_u8, 0x81_u8, 0x7b_u8, 0xc2_u8, 0xc3_u8, 0xe_u8])
+  CLSID_MSVidVideoPlaybackDevice = LibC::GUID.new(0x1990d634_u32, 0x1a5e_u16, 0x4071_u16, StaticArray[0xa3_u8, 0x4a_u8, 0x53_u8, 0xaa_u8, 0xff_u8, 0xce_u8, 0x9f_u8, 0x36_u8])
+  CLSID_MSVidFeature = LibC::GUID.new(0x7748530b_u32, 0xc08a_u16, 0x47ea_u16, StaticArray[0xb2_u8, 0x4c_u8, 0xbe_u8, 0x86_u8, 0x95_u8, 0xff_u8, 0x40_u8, 0x5f_u8])
+  CLSID_MSVidOutput = LibC::GUID.new(0x87eb890d_u32, 0x3ad_u16, 0x4e9d_u16, StaticArray[0x98_u8, 0x66_u8, 0x37_u8, 0x6e_u8, 0x5e_u8, 0xc5_u8, 0x72_u8, 0xed_u8])
+  CLSID_SectionList = LibC::GUID.new(0x73da5d04_u32, 0x4347_u16, 0x45d3_u16, StaticArray[0xa9_u8, 0xdc_u8, 0xfa_u8, 0xe9_u8, 0xdd_u8, 0xbe_u8, 0x55_u8, 0x8d_u8])
+  CLSID_Mpeg2Stream = LibC::GUID.new(0xf91d96c7_u32, 0x8509_u16, 0x4d0b_u16, StaticArray[0xab_u8, 0x26_u8, 0xa0_u8, 0xdd_u8, 0x10_u8, 0x90_u8, 0x4b_u8, 0xb7_u8])
+  CLSID_Mpeg2Data = LibC::GUID.new(0xc666e115_u32, 0xbb62_u16, 0x4027_u16, StaticArray[0xa1_u8, 0x13_u8, 0x82_u8, 0xd6_u8, 0x43_u8, 0xfe_u8, 0x2d_u8, 0x99_u8])
+  CLSID_Mpeg2DataLib = LibC::GUID.new(0xdbaf6c1b_u32, 0xb6a4_u16, 0x4898_u16, StaticArray[0xae_u8, 0x65_u8, 0x20_u8, 0x4f_u8, 0xd_u8, 0x95_u8, 0x9_u8, 0xa1_u8])
+  CLSID_TIFLoad = LibC::GUID.new(0x14eb8748_u32, 0x1753_u16, 0x4393_u16, StaticArray[0x95_u8, 0xae_u8, 0x4f_u8, 0x7e_u8, 0x7a_u8, 0x87_u8, 0xaa_u8, 0xd6_u8])
+  CLSID_EVENTID_TuningChanging = LibC::GUID.new(0x83183c03_u32, 0xc09e_u16, 0x45c4_u16, StaticArray[0xa7_u8, 0x19_u8, 0x80_u8, 0x7a_u8, 0x94_u8, 0x95_u8, 0x2b_u8, 0xf9_u8])
+  CLSID_EVENTID_TuningChanged = LibC::GUID.new(0x9d7e6235_u32, 0x4b7d_u16, 0x425d_u16, StaticArray[0xa6_u8, 0xd1_u8, 0xd7_u8, 0x17_u8, 0xc3_u8, 0x3b_u8, 0x9c_u8, 0x4c_u8])
+  CLSID_EVENTID_CandidatePostTuneData = LibC::GUID.new(0x9f02d3d0_u32, 0x9f06_u16, 0x4369_u16, StaticArray[0x9f_u8, 0x1e_u8, 0x3a_u8, 0xd6_u8, 0xca_u8, 0x19_u8, 0x80_u8, 0x7e_u8])
+  CLSID_EVENTID_CADenialCountChanged = LibC::GUID.new(0x2a65c528_u32, 0x2249_u16, 0x4070_u16, StaticArray[0xac_u8, 0x16_u8, 0x0_u8, 0x39_u8, 0xc_u8, 0xdf_u8, 0xb2_u8, 0xdd_u8])
+  CLSID_EVENTID_SignalStatusChanged = LibC::GUID.new(0x6d9cfaf2_u32, 0x702d_u16, 0x4b01_u16, StaticArray[0x8d_u8, 0xff_u8, 0x68_u8, 0x92_u8, 0xad_u8, 0x20_u8, 0xd1_u8, 0x91_u8])
+  CLSID_EVENTID_NewSignalAcquired = LibC::GUID.new(0xc87ec52d_u32, 0xcd18_u16, 0x404a_u16, StaticArray[0xa0_u8, 0x76_u8, 0xc0_u8, 0x2a_u8, 0x27_u8, 0x3d_u8, 0x3d_u8, 0xe7_u8])
+  CLSID_EVENTID_EASMessageReceived = LibC::GUID.new(0xd10df9d5_u32, 0xc261_u16, 0x4b85_u16, StaticArray[0x9e_u8, 0x8a_u8, 0x51_u8, 0x7b_u8, 0x32_u8, 0x99_u8, 0xca_u8, 0xb2_u8])
+  CLSID_EVENTID_PSITable = LibC::GUID.new(0x1b9c3703_u32, 0xd447_u16, 0x4e16_u16, StaticArray[0x97_u8, 0xbb_u8, 0x1_u8, 0x79_u8, 0x9f_u8, 0xc0_u8, 0x31_u8, 0xed_u8])
+  CLSID_EVENTID_ServiceTerminated = LibC::GUID.new(0xa1d591c_u32, 0xe0d2_u16, 0x4f8e_u16, StaticArray[0x89_u8, 0x60_u8, 0x23_u8, 0x35_u8, 0xbe_u8, 0xf4_u8, 0x5c_u8, 0xcb_u8])
+  CLSID_EVENTID_CardStatusChanged = LibC::GUID.new(0xa265faea_u32, 0xf874_u16, 0x4b38_u16, StaticArray[0x9f_u8, 0xf7_u8, 0xc5_u8, 0x3d_u8, 0x2_u8, 0x96_u8, 0x99_u8, 0x96_u8])
+  CLSID_EVENTID_DRMParingStatusChanged = LibC::GUID.new(0x906f5_u32, 0xf0d1_u16, 0x41d6_u16, StaticArray[0xa7_u8, 0xdf_u8, 0x40_u8, 0x28_u8, 0x69_u8, 0x76_u8, 0x69_u8, 0xf6_u8])
+  CLSID_EVENTID_DRMParingStepComplete = LibC::GUID.new(0x5b2ebf78_u32, 0xb752_u16, 0x4420_u16, StaticArray[0xb4_u8, 0x1e_u8, 0xa4_u8, 0x72_u8, 0xdc_u8, 0x95_u8, 0x82_u8, 0x8e_u8])
+  CLSID_EVENTID_MMIMessage = LibC::GUID.new(0x52c29af_u32, 0x9a4_u16, 0x4b93_u16, StaticArray[0x89_u8, 0xf_u8, 0xbd_u8, 0x6a_u8, 0x34_u8, 0x89_u8, 0x68_u8, 0xa4_u8])
+  CLSID_EVENTID_EntitlementChanged = LibC::GUID.new(0x9071ad5d_u32, 0x2359_u16, 0x4c95_u16, StaticArray[0x86_u8, 0x94_u8, 0xaf_u8, 0xa8_u8, 0x1d_u8, 0x70_u8, 0xbf_u8, 0xd5_u8])
+  CLSID_EVENTID_STBChannelNumber = LibC::GUID.new(0x17c4d730_u32, 0xd0f0_u16, 0x413a_u16, StaticArray[0x8c_u8, 0x99_u8, 0x50_u8, 0x4_u8, 0x69_u8, 0xde_u8, 0x35_u8, 0xad_u8])
+  CLSID_EVENTID_BDAEventingServicePendingEvent = LibC::GUID.new(0x5ca51711_u32, 0x5ddc_u16, 0x41a6_u16, StaticArray[0x94_u8, 0x30_u8, 0xe4_u8, 0x1b_u8, 0x8b_u8, 0x3b_u8, 0xbc_u8, 0x5b_u8])
+  CLSID_EVENTID_BDAConditionalAccessTAG = LibC::GUID.new(0xefc3a459_u32, 0xae8b_u16, 0x4b4a_u16, StaticArray[0x8f_u8, 0xe9_u8, 0x79_u8, 0xa0_u8, 0xd0_u8, 0x97_u8, 0xf3_u8, 0xea_u8])
+  CLSID_EVENTTYPE_CASDescrambleFailureEvent = LibC::GUID.new(0xb2127d42_u32, 0x7be5_u16, 0x4f4b_u16, StaticArray[0x91_u8, 0x30_u8, 0x66_u8, 0x79_u8, 0x89_u8, 0x9f_u8, 0x4f_u8, 0x4b_u8])
+  CLSID_EVENTID_CASFailureSpanningEvent = LibC::GUID.new(0xead831ae_u32, 0x5529_u16, 0x4d1f_u16, StaticArray[0xaf_u8, 0xce_u8, 0xd_u8, 0x8c_u8, 0xd1_u8, 0x25_u8, 0x7d_u8, 0x30_u8])
+  CLSID_EVENTID_ChannelChangeSpanningEvent = LibC::GUID.new(0x9067c5e5_u32, 0x4c5c_u16, 0x4205_u16, StaticArray[0x86_u8, 0xc8_u8, 0x7a_u8, 0xfe_u8, 0x20_u8, 0xfe_u8, 0x1e_u8, 0xfa_u8])
+  CLSID_EVENTID_ChannelTypeSpanningEvent = LibC::GUID.new(0x72ab1d51_u32, 0x87d2_u16, 0x489b_u16, StaticArray[0xba_u8, 0x11_u8, 0xe_u8, 0x8_u8, 0xdc_u8, 0x21_u8, 0x2_u8, 0x43_u8])
+  CLSID_EVENTID_ChannelInfoSpanningEvent = LibC::GUID.new(0x41f36d80_u32, 0x4132_u16, 0x4cc2_u16, StaticArray[0xb1_u8, 0x21_u8, 0x1_u8, 0xa4_u8, 0x32_u8, 0x19_u8, 0xd8_u8, 0x1b_u8])
+  CLSID_EVENTID_RRTSpanningEvent = LibC::GUID.new(0xf6cfc8f4_u32, 0xda93_u16, 0x4f2f_u16, StaticArray[0xbf_u8, 0xf8_u8, 0xba_u8, 0x1e_u8, 0xe6_u8, 0xfc_u8, 0xa3_u8, 0xa2_u8])
+  CLSID_EVENTID_CSDescriptorSpanningEvent = LibC::GUID.new(0xefe779d9_u32, 0x97f0_u16, 0x4786_u16, StaticArray[0x80_u8, 0xd_u8, 0x95_u8, 0xcf_u8, 0x50_u8, 0x5d_u8, 0xdc_u8, 0x66_u8])
+  CLSID_EVENTID_CtxADescriptorSpanningEvent = LibC::GUID.new(0x3ab4a2e6_u32, 0x4247_u16, 0x4b34_u16, StaticArray[0x89_u8, 0x6c_u8, 0x30_u8, 0xaf_u8, 0xa5_u8, 0xd2_u8, 0x1c_u8, 0x24_u8])
+  CLSID_EVENTID_DVBScramblingControlSpanningEvent = LibC::GUID.new(0x4bd4e1c4_u32, 0x90a1_u16, 0x4109_u16, StaticArray[0x82_u8, 0x36_u8, 0x27_u8, 0xf0_u8, 0xe_u8, 0x7d_u8, 0xcc_u8, 0x5b_u8])
+  CLSID_EVENTID_SignalAndServiceStatusSpanningEvent = LibC::GUID.new(0x8068c5cb_u32, 0x3c04_u16, 0x492b_u16, StaticArray[0xb4_u8, 0x7d_u8, 0x3_u8, 0x8_u8, 0x82_u8, 0xd_u8, 0xce_u8, 0x51_u8])
+  CLSID_EVENTID_EmmMessageSpanningEvent = LibC::GUID.new(0x6bf00268_u32, 0x4f7e_u16, 0x4294_u16, StaticArray[0xaa_u8, 0x87_u8, 0xe9_u8, 0xe9_u8, 0x53_u8, 0xe4_u8, 0x3f_u8, 0x14_u8])
+  CLSID_EVENTID_AudioTypeSpanningEvent = LibC::GUID.new(0x501cbfbe_u32, 0xb849_u16, 0x42ce_u16, StaticArray[0x9b_u8, 0xe9_u8, 0x3d_u8, 0xb8_u8, 0x69_u8, 0xfb_u8, 0x82_u8, 0xb3_u8])
+  CLSID_EVENTID_StreamTypeSpanningEvent = LibC::GUID.new(0x82af2ebc_u32, 0x30a6_u16, 0x4264_u16, StaticArray[0xa8_u8, 0xb_u8, 0xad_u8, 0x2e_u8, 0x13_u8, 0x72_u8, 0xac_u8, 0x60_u8])
+  CLSID_EVENTID_ARIBcontentSpanningEvent = LibC::GUID.new(0x3a954083_u32, 0x93d0_u16, 0x463e_u16, StaticArray[0x90_u8, 0xb2_u8, 0x7_u8, 0x42_u8, 0xc4_u8, 0x96_u8, 0xed_u8, 0xf0_u8])
+  CLSID_EVENTID_LanguageSpanningEvent = LibC::GUID.new(0xe292666d_u32, 0x9c02_u16, 0x448d_u16, StaticArray[0xaa_u8, 0x8d_u8, 0x78_u8, 0x1a_u8, 0x93_u8, 0xfd_u8, 0xc3_u8, 0x95_u8])
+  CLSID_EVENTID_DualMonoSpanningEvent = LibC::GUID.new(0xa9a29b56_u32, 0xa84b_u16, 0x488c_u16, StaticArray[0x89_u8, 0xd5_u8, 0xd_u8, 0x4e_u8, 0x76_u8, 0x57_u8, 0xc8_u8, 0xce_u8])
+  CLSID_EVENTID_PIDListSpanningEvent = LibC::GUID.new(0x47fc8f65_u32, 0xe2bb_u16, 0x4634_u16, StaticArray[0x9c_u8, 0xef_u8, 0xfd_u8, 0xbf_u8, 0xe6_u8, 0x26_u8, 0x1d_u8, 0x5c_u8])
+  CLSID_EVENTID_AudioDescriptorSpanningEvent = LibC::GUID.new(0x107bd41c_u32, 0xa6da_u16, 0x4691_u16, StaticArray[0x83_u8, 0x69_u8, 0x11_u8, 0xb2_u8, 0xcd_u8, 0xaa_u8, 0x28_u8, 0x8e_u8])
+  CLSID_EVENTID_SubtitleSpanningEvent = LibC::GUID.new(0x5dcec048_u32, 0xd0b9_u16, 0x4163_u16, StaticArray[0x87_u8, 0x2c_u8, 0x4f_u8, 0x32_u8, 0x22_u8, 0x3b_u8, 0xe8_u8, 0x8a_u8])
+  CLSID_EVENTID_TeletextSpanningEvent = LibC::GUID.new(0x9599d950_u32, 0x5f33_u16, 0x4617_u16, StaticArray[0xaf_u8, 0x7c_u8, 0x1e_u8, 0x54_u8, 0xb5_u8, 0x10_u8, 0xda_u8, 0xa3_u8])
+  CLSID_EVENTID_StreamIDSpanningEvent = LibC::GUID.new(0xcaf1ab68_u32, 0xe153_u16, 0x4d41_u16, StaticArray[0xa6_u8, 0xb3_u8, 0xa7_u8, 0xc9_u8, 0x98_u8, 0xdb_u8, 0x75_u8, 0xee_u8])
+  CLSID_EVENTID_PBDAParentalControlEvent = LibC::GUID.new(0xf947aa85_u32, 0xfb52_u16, 0x48e8_u16, StaticArray[0xb9_u8, 0xc5_u8, 0xe1_u8, 0xe1_u8, 0xf4_u8, 0x11_u8, 0xa5_u8, 0x1a_u8])
+  CLSID_EVENTID_TuneFailureEvent = LibC::GUID.new(0xd97287b2_u32, 0x2dfd_u16, 0x436a_u16, StaticArray[0x94_u8, 0x85_u8, 0x99_u8, 0xd7_u8, 0xd4_u8, 0xab_u8, 0x5a_u8, 0x69_u8])
+  CLSID_EVENTID_TuneFailureSpanningEvent = LibC::GUID.new(0x6f8aa455_u32, 0x5ee1_u16, 0x48ab_u16, StaticArray[0xa2_u8, 0x7c_u8, 0x4c_u8, 0x8d_u8, 0x70_u8, 0xb9_u8, 0xae_u8, 0xba_u8])
+  CLSID_EVENTID_DvbParentalRatingDescriptor = LibC::GUID.new(0x2a67a58d_u32, 0xeca5_u16, 0x4eac_u16, StaticArray[0xab_u8, 0xcb_u8, 0xe7_u8, 0x34_u8, 0xd3_u8, 0x77_u8, 0x6d_u8, 0xa_u8])
+  CLSID_EVENTID_DFNWithNoActualAVData = LibC::GUID.new(0xf5689ffe_u32, 0x55f9_u16, 0x4bb3_u16, StaticArray[0x96_u8, 0xbe_u8, 0xae_u8, 0x97_u8, 0x1c_u8, 0x63_u8, 0xba_u8, 0xe0_u8])
+  CLSID_KSDATAFORMAT_TYPE_BDA_ANTENNA = LibC::GUID.new(0x71985f41_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_BDA_MPEG2_TRANSPORT = LibC::GUID.new(0xf4aeb342_u32, 0x329_u16, 0x4fdd_u16, StaticArray[0xa8_u8, 0xfd_u8, 0x4a_u8, 0xff_u8, 0x49_u8, 0x26_u8, 0xc9_u8, 0x78_u8])
+  CLSID_KSDATAFORMAT_SPECIFIER_BDA_TRANSPORT = LibC::GUID.new(0x8deda6fd_u32, 0xac5f_u16, 0x4334_u16, StaticArray[0x8e_u8, 0xcf_u8, 0xa4_u8, 0xba_u8, 0x8f_u8, 0xa7_u8, 0xd0_u8, 0xf0_u8])
+  CLSID_KSDATAFORMAT_TYPE_BDA_IF_SIGNAL = LibC::GUID.new(0x61be0b47_u32, 0xa5eb_u16, 0x499b_u16, StaticArray[0x9a_u8, 0x85_u8, 0x5b_u8, 0x16_u8, 0xc0_u8, 0x7f_u8, 0x12_u8, 0x58_u8])
+  CLSID_KSDATAFORMAT_TYPE_MPEG2_SECTIONS = LibC::GUID.new(0x455f176c_u32, 0x4b06_u16, 0x47ce_u16, StaticArray[0x9a_u8, 0xef_u8, 0x8c_u8, 0xae_u8, 0xf7_u8, 0x3d_u8, 0xf7_u8, 0xb5_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_ATSC_SI = LibC::GUID.new(0xb3c7397c_u32, 0xd303_u16, 0x414d_u16, StaticArray[0xb3_u8, 0x3c_u8, 0x4e_u8, 0xd2_u8, 0xc9_u8, 0xd2_u8, 0x97_u8, 0x33_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_DVB_SI = LibC::GUID.new(0xe9dd31a3_u32, 0x221d_u16, 0x4adb_u16, StaticArray[0x85_u8, 0x32_u8, 0x9a_u8, 0xf3_u8, 0x9_u8, 0xc1_u8, 0xa4_u8, 0x8_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_BDA_OPENCABLE_PSIP = LibC::GUID.new(0x762e3f66_u32, 0x336f_u16, 0x48d1_u16, StaticArray[0xbf_u8, 0x83_u8, 0x2b_u8, 0x0_u8, 0x35_u8, 0x2c_u8, 0x11_u8, 0xf0_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_BDA_OPENCABLE_OOB_PSIP = LibC::GUID.new(0x951727db_u32, 0xd2ce_u16, 0x4528_u16, StaticArray[0x96_u8, 0xf6_u8, 0x33_u8, 0x1_u8, 0xfa_u8, 0xbb_u8, 0x2d_u8, 0xe0_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_ISDB_SI = LibC::GUID.new(0x4a2eeb99_u32, 0x6458_u16, 0x4538_u16, StaticArray[0xb1_u8, 0x87_u8, 0x4_u8, 0x1_u8, 0x7c_u8, 0x41_u8, 0x41_u8, 0x3f_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_PBDA_TRANSPORT_RAW = LibC::GUID.new(0xd7aed42_u32, 0xcb9a_u16, 0x11db_u16, StaticArray[0x97_u8, 0x5_u8, 0x0_u8, 0x50_u8, 0x56_u8, 0xc0_u8, 0x0_u8, 0x8_u8])
+  CLSID_PINNAME_BDA_TRANSPORT = LibC::GUID.new(0x78216a81_u32, 0xcfa8_u16, 0x493e_u16, StaticArray[0x97_u8, 0x11_u8, 0x36_u8, 0xa6_u8, 0x1c_u8, 0x8_u8, 0xbd_u8, 0x9d_u8])
+  CLSID_PINNAME_BDA_ANALOG_VIDEO = LibC::GUID.new(0x5c0c8281_u32, 0x5667_u16, 0x486c_u16, StaticArray[0x84_u8, 0x82_u8, 0x63_u8, 0xe3_u8, 0x1f_u8, 0x1_u8, 0xa6_u8, 0xe9_u8])
+  CLSID_PINNAME_BDA_ANALOG_AUDIO = LibC::GUID.new(0xd28a580a_u32, 0x9b1f_u16, 0x4b0c_u16, StaticArray[0x9c_u8, 0x33_u8, 0x9b_u8, 0xf0_u8, 0xa8_u8, 0xea_u8, 0x63_u8, 0x6b_u8])
+  CLSID_PINNAME_BDA_FM_RADIO = LibC::GUID.new(0xd2855fed_u32, 0xb2d3_u16, 0x4eeb_u16, StaticArray[0x9b_u8, 0xd0_u8, 0x19_u8, 0x34_u8, 0x36_u8, 0xa2_u8, 0xf8_u8, 0x90_u8])
+  CLSID_PINNAME_BDA_IF_PIN = LibC::GUID.new(0x1a9d4a42_u32, 0xf3cd_u16, 0x48a1_u16, StaticArray[0x9a_u8, 0xea_u8, 0x71_u8, 0xde_u8, 0x13_u8, 0x3c_u8, 0xbe_u8, 0x14_u8])
+  CLSID_PINNAME_BDA_OPENCABLE_PSIP_PIN = LibC::GUID.new(0x297bb104_u32, 0xe5c9_u16, 0x4ace_u16, StaticArray[0xb1_u8, 0x23_u8, 0x95_u8, 0xc3_u8, 0xcb_u8, 0xb2_u8, 0x4d_u8, 0x4f_u8])
+  CLSID_KSPROPSETID_BdaEthernetFilter = LibC::GUID.new(0x71985f43_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSPROPSETID_BdaIPv4Filter = LibC::GUID.new(0x71985f44_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSPROPSETID_BdaIPv6Filter = LibC::GUID.new(0xe1785a74_u32, 0x2a23_u16, 0x4fb3_u16, StaticArray[0x92_u8, 0x45_u8, 0xa8_u8, 0xf8_u8, 0x80_u8, 0x17_u8, 0xef_u8, 0x33_u8])
+  CLSID_KSPROPSETID_BdaSignalStats = LibC::GUID.new(0x1347d106_u32, 0xcf3a_u16, 0x428a_u16, StaticArray[0xa5_u8, 0xcb_u8, 0xac_u8, 0xd_u8, 0x9a_u8, 0x2a_u8, 0x43_u8, 0x38_u8])
+  CLSID_KSMETHODSETID_BdaChangeSync = LibC::GUID.new(0xfd0a5af3_u32, 0xb41d_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0x95_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSMETHODSETID_BdaDeviceConfiguration = LibC::GUID.new(0x71985f45_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSPROPSETID_BdaTopology = LibC::GUID.new(0xa14ee835_u32, 0xa23_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSPROPSETID_BdaPinControl = LibC::GUID.new(0xded49d5_u32, 0xa8b7_u16, 0x4d5d_u16, StaticArray[0x97_u8, 0xa1_u8, 0x12_u8, 0xb0_u8, 0xc1_u8, 0x95_u8, 0x87_u8, 0x4d_u8])
+  CLSID_KSEVENTSETID_BdaPinEvent = LibC::GUID.new(0x104781cd_u32, 0x50bd_u16, 0x40d5_u16, StaticArray[0x95_u8, 0xfb_u8, 0x8_u8, 0x7e_u8, 0xe_u8, 0x86_u8, 0xa5_u8, 0x91_u8])
+  CLSID_KSPROPSETID_BdaVoidTransform = LibC::GUID.new(0x71985f46_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSPROPSETID_BdaNullTransform = LibC::GUID.new(0xddf15b0d_u32, 0xbd25_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSPROPSETID_BdaFrequencyFilter = LibC::GUID.new(0x71985f47_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSEVENTSETID_BdaTunerEvent = LibC::GUID.new(0xaab59e17_u32, 0x1c9_u16, 0x4ebf_u16, StaticArray[0x93_u8, 0xf2_u8, 0xfc_u8, 0x3b_u8, 0x79_u8, 0xb4_u8, 0x6f_u8, 0x91_u8])
+  CLSID_KSPROPSETID_BdaLNBInfo = LibC::GUID.new(0x992cf102_u32, 0x49f9_u16, 0x4719_u16, StaticArray[0xa6_u8, 0x64_u8, 0xc4_u8, 0xf2_u8, 0x3e_u8, 0x24_u8, 0x8_u8, 0xf4_u8])
+  CLSID_KSPROPSETID_BdaDiseqCommand = LibC::GUID.new(0xf84e2ab0_u32, 0x3c6b_u16, 0x45e3_u16, StaticArray[0xa0_u8, 0xfc_u8, 0x86_u8, 0x69_u8, 0xd4_u8, 0xb8_u8, 0x1f_u8, 0x11_u8])
+  CLSID_KSEVENTSETID_BdaDiseqCEvent = LibC::GUID.new(0x8b19bbf0_u32, 0x4184_u16, 0x43ac_u16, StaticArray[0xad_u8, 0x3c_u8, 0xc_u8, 0x88_u8, 0x9b_u8, 0xe4_u8, 0xc2_u8, 0x12_u8])
+  CLSID_KSPROPSETID_BdaDigitalDemodulator = LibC::GUID.new(0xef30f379_u32, 0x985b_u16, 0x4d10_u16, StaticArray[0xb6_u8, 0x40_u8, 0xa7_u8, 0x9d_u8, 0x5e_u8, 0x4_u8, 0xe1_u8, 0xe0_u8])
+  CLSID_KSPROPSETID_BdaAutodemodulate = LibC::GUID.new(0xddf15b12_u32, 0xbd25_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSPROPSETID_BdaTableSection = LibC::GUID.new(0x516b99c5_u32, 0x971c_u16, 0x4aaf_u16, StaticArray[0xb3_u8, 0xf3_u8, 0xd9_u8, 0xfd_u8, 0xa8_u8, 0xa1_u8, 0x5e_u8, 0x16_u8])
+  CLSID_KSPROPSETID_BdaPIDFilter = LibC::GUID.new(0xd0a67d65_u32, 0x8df_u16, 0x4fec_u16, StaticArray[0x85_u8, 0x33_u8, 0xe5_u8, 0xb5_u8, 0x50_u8, 0x41_u8, 0xb_u8, 0x85_u8])
+  CLSID_KSPROPSETID_BdaCA = LibC::GUID.new(0xb0693766_u32, 0x5278_u16, 0x4ec6_u16, StaticArray[0xb9_u8, 0xe1_u8, 0x3c_u8, 0xe4_u8, 0x5_u8, 0x60_u8, 0xef_u8, 0x5a_u8])
+  CLSID_KSEVENTSETID_BdaCAEvent = LibC::GUID.new(0x488c4ccc_u32, 0xb768_u16, 0x4129_u16, StaticArray[0x8e_u8, 0xb1_u8, 0xb0_u8, 0xa_u8, 0x7_u8, 0x1f_u8, 0x90_u8, 0x68_u8])
+  CLSID_KSMETHODSETID_BdaDrmService = LibC::GUID.new(0xbff6b5bb_u32, 0xb0ae_u16, 0x484c_u16, StaticArray[0x9d_u8, 0xca_u8, 0x73_u8, 0x52_u8, 0x8f_u8, 0xb0_u8, 0xb4_u8, 0x6e_u8])
+  CLSID_KSMETHODSETID_BdaWmdrmSession = LibC::GUID.new(0x4be6fa3d_u32, 0x7cd_u16, 0x4139_u16, StaticArray[0x8b_u8, 0x80_u8, 0x8c_u8, 0x18_u8, 0xba_u8, 0x3a_u8, 0xec_u8, 0x88_u8])
+  CLSID_KSMETHODSETID_BdaWmdrmTuner = LibC::GUID.new(0x86d979cf_u32, 0xa8a7_u16, 0x4f94_u16, StaticArray[0xb5_u8, 0xfb_u8, 0x14_u8, 0xc0_u8, 0xac_u8, 0xa6_u8, 0x8f_u8, 0xe6_u8])
+  CLSID_KSMETHODSETID_BdaEventing = LibC::GUID.new(0xf99492da_u32, 0x6193_u16, 0x4eb0_u16, StaticArray[0x86_u8, 0x90_u8, 0x66_u8, 0x86_u8, 0xcb_u8, 0xff_u8, 0x71_u8, 0x3e_u8])
+  CLSID_KSEVENTSETID_BdaEvent = LibC::GUID.new(0xae7e55b2_u32, 0x96d7_u16, 0x4e29_u16, StaticArray[0x90_u8, 0x8f_u8, 0x62_u8, 0xf9_u8, 0x5b_u8, 0x2a_u8, 0x16_u8, 0x79_u8])
+  CLSID_KSMETHODSETID_BdaDebug = LibC::GUID.new(0xd4a90ec_u32, 0xc69d_u16, 0x4ee2_u16, StaticArray[0x8c_u8, 0x5a_u8, 0xfb_u8, 0x1f_u8, 0x63_u8, 0xa5_u8, 0xd_u8, 0xa1_u8])
+  CLSID_KSMETHODSETID_BdaTuner = LibC::GUID.new(0xb774102f_u32, 0xac07_u16, 0x478a_u16, StaticArray[0x82_u8, 0x28_u8, 0x27_u8, 0x42_u8, 0xd9_u8, 0x61_u8, 0xfa_u8, 0x7e_u8])
+  CLSID_KSMETHODSETID_BdaNameValueA = LibC::GUID.new(0xc24096d_u32, 0x5ff5_u16, 0x47de_u16, StaticArray[0xa8_u8, 0x56_u8, 0x6_u8, 0x2e_u8, 0x58_u8, 0x7e_u8, 0x37_u8, 0x27_u8])
+  CLSID_KSMETHODSETID_BdaNameValue = LibC::GUID.new(0x36e07304_u32, 0x9f0d_u16, 0x4e88_u16, StaticArray[0x91_u8, 0x18_u8, 0xac_u8, 0xb_u8, 0xa3_u8, 0x17_u8, 0xb7_u8, 0xf2_u8])
+  CLSID_KSMETHODSETID_BdaMux = LibC::GUID.new(0x942aafec_u32, 0x4c05_u16, 0x4c74_u16, StaticArray[0xb8_u8, 0xeb_u8, 0x87_u8, 0x6_u8, 0xc2_u8, 0xa4_u8, 0x94_u8, 0x3f_u8])
+  CLSID_KSMETHODSETID_BdaScanning = LibC::GUID.new(0x12eb49df_u32, 0x6249_u16, 0x47f3_u16, StaticArray[0xb1_u8, 0x90_u8, 0xe2_u8, 0x1e_u8, 0x6e_u8, 0x2f_u8, 0x8a_u8, 0x9c_u8])
+  CLSID_KSMETHODSETID_BdaGuideDataDeliveryService = LibC::GUID.new(0x8d9d5562_u32, 0x1589_u16, 0x417d_u16, StaticArray[0x99_u8, 0xce_u8, 0xac_u8, 0x53_u8, 0x1d_u8, 0xda_u8, 0x19_u8, 0xf9_u8])
+  CLSID_KSMETHODSETID_BdaConditionalAccessService = LibC::GUID.new(0x10ced3b4_u32, 0x320b_u16, 0x41bf_u16, StaticArray[0x98_u8, 0x24_u8, 0x1b_u8, 0x2e_u8, 0x68_u8, 0xe7_u8, 0x1e_u8, 0xb9_u8])
+  CLSID_KSMETHODSETID_BdaIsdbConditionalAccess = LibC::GUID.new(0x5e68c627_u32, 0x16c2_u16, 0x4e6c_u16, StaticArray[0xb1_u8, 0xe2_u8, 0xd0_u8, 0x1_u8, 0x70_u8, 0xcd_u8, 0xaa_u8, 0xf_u8])
+  CLSID_KSMETHODSETID_BdaTSSelector = LibC::GUID.new(0x1dcfafe9_u32, 0xb45e_u16, 0x41b3_u16, StaticArray[0xbb_u8, 0x2a_u8, 0x56_u8, 0x1e_u8, 0xb1_u8, 0x29_u8, 0xae_u8, 0x98_u8])
+  CLSID_KSMETHODSETID_BdaUserActivity = LibC::GUID.new(0xeda5c834_u32, 0x4531_u16, 0x483c_u16, StaticArray[0xbe_u8, 0xa_u8, 0x94_u8, 0xe6_u8, 0xc9_u8, 0x6f_u8, 0xf3_u8, 0x96_u8])
+  CLSID_KSCATEGORY_BDA_RECEIVER_COMPONENT = LibC::GUID.new(0xfd0a5af4_u32, 0xb41d_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0x95_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSCATEGORY_BDA_NETWORK_TUNER = LibC::GUID.new(0x71985f48_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSCATEGORY_BDA_NETWORK_EPG = LibC::GUID.new(0x71985f49_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSCATEGORY_BDA_IP_SINK = LibC::GUID.new(0x71985f4a_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSCATEGORY_BDA_NETWORK_PROVIDER = LibC::GUID.new(0x71985f4b_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSCATEGORY_BDA_TRANSPORT_INFORMATION = LibC::GUID.new(0xa2e3074f_u32, 0x6c3d_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
+  CLSID_KSNODE_BDA_RF_TUNER = LibC::GUID.new(0x71985f4c_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSNODE_BDA_ANALOG_DEMODULATOR = LibC::GUID.new(0x634db199_u32, 0x27dd_u16, 0x46b8_u16, StaticArray[0xac_u8, 0xfb_u8, 0xec_u8, 0xc9_u8, 0x8e_u8, 0x61_u8, 0xa2_u8, 0xad_u8])
+  CLSID_KSNODE_BDA_QAM_DEMODULATOR = LibC::GUID.new(0x71985f4d_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSNODE_BDA_QPSK_DEMODULATOR = LibC::GUID.new(0x6390c905_u32, 0x27c1_u16, 0x4d67_u16, StaticArray[0xbd_u8, 0xb7_u8, 0x77_u8, 0xc5_u8, 0xd_u8, 0x7_u8, 0x93_u8, 0x0_u8])
+  CLSID_KSNODE_BDA_8VSB_DEMODULATOR = LibC::GUID.new(0x71985f4f_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSNODE_BDA_COFDM_DEMODULATOR = LibC::GUID.new(0x2dac6e05_u32, 0xedbe_u16, 0x4b9c_u16, StaticArray[0xb3_u8, 0x87_u8, 0x1b_u8, 0x6f_u8, 0xad_u8, 0x7d_u8, 0x64_u8, 0x95_u8])
+  CLSID_KSNODE_BDA_8PSK_DEMODULATOR = LibC::GUID.new(0xe957a0e7_u32, 0xdd98_u16, 0x4a3c_u16, StaticArray[0x81_u8, 0xb_u8, 0x35_u8, 0x25_u8, 0x15_u8, 0x7a_u8, 0xb6_u8, 0x2e_u8])
+  CLSID_KSNODE_BDA_ISDB_T_DEMODULATOR = LibC::GUID.new(0xfcea3ae3_u32, 0x2cb2_u16, 0x464d_u16, StaticArray[0x8f_u8, 0x5d_u8, 0x30_u8, 0x5c_u8, 0xb_u8, 0xb7_u8, 0x78_u8, 0xa2_u8])
+  CLSID_KSNODE_BDA_ISDB_S_DEMODULATOR = LibC::GUID.new(0xedde230a_u32, 0x9086_u16, 0x432d_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x66_u8, 0x70_u8, 0x26_u8, 0x38_u8, 0x7_u8, 0xe9_u8])
+  CLSID_KSNODE_BDA_OPENCABLE_POD = LibC::GUID.new(0x345812a0_u32, 0xfb7c_u16, 0x4790_u16, StaticArray[0xaa_u8, 0x7e_u8, 0xb1_u8, 0xdb_u8, 0x88_u8, 0xac_u8, 0x19_u8, 0xc9_u8])
+  CLSID_KSNODE_BDA_COMMON_CA_POD = LibC::GUID.new(0xd83ef8fc_u32, 0xf3b8_u16, 0x45ab_u16, StaticArray[0x8b_u8, 0x71_u8, 0xec_u8, 0xf7_u8, 0xc3_u8, 0x39_u8, 0xde_u8, 0xb4_u8])
+  CLSID_KSNODE_BDA_PID_FILTER = LibC::GUID.new(0xf5412789_u32, 0xb0a0_u16, 0x44e1_u16, StaticArray[0xae_u8, 0x4f_u8, 0xee_u8, 0x99_u8, 0x9b_u8, 0x1b_u8, 0x7f_u8, 0xbe_u8])
+  CLSID_KSNODE_BDA_IP_SINK = LibC::GUID.new(0x71985f4e_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
+  CLSID_KSNODE_BDA_VIDEO_ENCODER = LibC::GUID.new(0xd98429e3_u32, 0x65c9_u16, 0x4ac4_u16, StaticArray[0x93_u8, 0xaa_u8, 0x76_u8, 0x67_u8, 0x82_u8, 0x83_u8, 0x3b_u8, 0x7a_u8])
+  CLSID_KSNODE_BDA_PBDA_CAS = LibC::GUID.new(0xc026869f_u32, 0x7129_u16, 0x4e71_u16, StaticArray[0x86_u8, 0x96_u8, 0xec_u8, 0x8f_u8, 0x75_u8, 0x29_u8, 0x9b_u8, 0x77_u8])
+  CLSID_KSNODE_BDA_PBDA_ISDBCAS = LibC::GUID.new(0xf2cf2ab3_u32, 0x5b9d_u16, 0x40ae_u16, StaticArray[0xab_u8, 0x7c_u8, 0x4e_u8, 0x7a_u8, 0xd0_u8, 0xbd_u8, 0x1c_u8, 0x52_u8])
+  CLSID_KSNODE_BDA_PBDA_TUNER = LibC::GUID.new(0xaa5e8286_u32, 0x593c_u16, 0x4979_u16, StaticArray[0x94_u8, 0x94_u8, 0x46_u8, 0xa2_u8, 0xa9_u8, 0xdf_u8, 0xe0_u8, 0x76_u8])
+  CLSID_KSNODE_BDA_PBDA_MUX = LibC::GUID.new(0xf88c7787_u32, 0x6678_u16, 0x4f4b_u16, StaticArray[0xa1_u8, 0x3e_u8, 0xda_u8, 0x9_u8, 0x86_u8, 0x1d_u8, 0x68_u8, 0x2b_u8])
+  CLSID_KSNODE_BDA_PBDA_DRM = LibC::GUID.new(0x9eeebd03_u32, 0xeea1_u16, 0x450f_u16, StaticArray[0x96_u8, 0xae_u8, 0x63_u8, 0x3e_u8, 0x6d_u8, 0xe6_u8, 0x3c_u8, 0xce_u8])
+  CLSID_KSNODE_BDA_DRI_DRM = LibC::GUID.new(0x4f95ad74_u32, 0xcefb_u16, 0x42d2_u16, StaticArray[0x94_u8, 0xa9_u8, 0x68_u8, 0xc5_u8, 0xb2_u8, 0xc1_u8, 0xaa_u8, 0xbe_u8])
+  CLSID_KSNODE_BDA_TS_SELECTOR = LibC::GUID.new(0x5eddf185_u32, 0xfed1_u16, 0x4f45_u16, StaticArray[0x96_u8, 0x85_u8, 0xbb_u8, 0xb7_u8, 0x3c_u8, 0x32_u8, 0x3c_u8, 0xfc_u8])
+  CLSID_PINNAME_IPSINK_INPUT = LibC::GUID.new(0x3fdffa70_u32, 0xac9a_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x17_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
+  CLSID_KSDATAFORMAT_TYPE_BDA_IP = LibC::GUID.new(0xe25f7b8e_u32, 0xcccc_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x25_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_BDA_IP = LibC::GUID.new(0x5a9a213c_u32, 0xdb08_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
+  CLSID_KSDATAFORMAT_SPECIFIER_BDA_IP = LibC::GUID.new(0x6b891420_u32, 0xdb09_u16, 0x11d2_u16, StaticArray[0x8f_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
+  CLSID_KSDATAFORMAT_TYPE_BDA_IP_CONTROL = LibC::GUID.new(0xdadd5799_u32, 0x7d5b_u16, 0x4b63_u16, StaticArray[0x80_u8, 0xfb_u8, 0xd1_u8, 0x44_u8, 0x2f_u8, 0x26_u8, 0xb6_u8, 0x21_u8])
+  CLSID_KSDATAFORMAT_SUBTYPE_BDA_IP_CONTROL = LibC::GUID.new(0x499856e8_u32, 0xe85b_u16, 0x48ed_u16, StaticArray[0x9b_u8, 0xea_u8, 0x41_u8, 0xd_u8, 0xd_u8, 0xd4_u8, 0xef_u8, 0x81_u8])
+  CLSID_PINNAME_MPE = LibC::GUID.new(0xc1b06d73_u32, 0x1dbb_u16, 0x11d3_u16, StaticArray[0x8f_u8, 0x46_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
+  CLSID_KSDATAFORMAT_TYPE_MPE = LibC::GUID.new(0x455f176c_u32, 0x4b06_u16, 0x47ce_u16, StaticArray[0x9a_u8, 0xef_u8, 0x8c_u8, 0xae_u8, 0xf7_u8, 0x3d_u8, 0xf7_u8, 0xb5_u8])
+  CLSID_DIGITAL_CABLE_NETWORK_TYPE = LibC::GUID.new(0x143827ab_u32, 0xf77b_u16, 0x498d_u16, StaticArray[0x81_u8, 0xca_u8, 0x5a_u8, 0x0_u8, 0x7a_u8, 0xec_u8, 0x28_u8, 0xbf_u8])
+  CLSID_ANALOG_TV_NETWORK_TYPE = LibC::GUID.new(0xb820d87e_u32, 0xe0e3_u16, 0x478f_u16, StaticArray[0x8a_u8, 0x38_u8, 0x4e_u8, 0x13_u8, 0xf7_u8, 0xb3_u8, 0xdf_u8, 0x42_u8])
+  CLSID_ANALOG_AUXIN_NETWORK_TYPE = LibC::GUID.new(0x742ef867_u32, 0x9e1_u16, 0x40a3_u16, StaticArray[0x82_u8, 0xd3_u8, 0x96_u8, 0x69_u8, 0xba_u8, 0x35_u8, 0x32_u8, 0x5f_u8])
+  CLSID_ANALOG_FM_NETWORK_TYPE = LibC::GUID.new(0x7728087b_u32, 0x2bb9_u16, 0x4e30_u16, StaticArray[0x80_u8, 0x78_u8, 0x44_u8, 0x94_u8, 0x76_u8, 0xe5_u8, 0x9d_u8, 0xbb_u8])
+  CLSID_ISDB_TERRESTRIAL_TV_NETWORK_TYPE = LibC::GUID.new(0x95037f6f_u32, 0x3ac7_u16, 0x4452_u16, StaticArray[0xb6_u8, 0xc4_u8, 0x45_u8, 0xa9_u8, 0xce_u8, 0x92_u8, 0x92_u8, 0xa2_u8])
+  CLSID_ISDB_T_NETWORK_TYPE = LibC::GUID.new(0xfc3855a6_u32, 0xc901_u16, 0x4f2e_u16, StaticArray[0xab_u8, 0xa8_u8, 0x90_u8, 0x81_u8, 0x5a_u8, 0xfc_u8, 0x6c_u8, 0x83_u8])
+  CLSID_ISDB_SATELLITE_TV_NETWORK_TYPE = LibC::GUID.new(0xb0a4e6a0_u32, 0x6a1a_u16, 0x4b83_u16, StaticArray[0xbb_u8, 0x5b_u8, 0x90_u8, 0x3e_u8, 0x1d_u8, 0x90_u8, 0xe6_u8, 0xb6_u8])
+  CLSID_ISDB_S_NETWORK_TYPE = LibC::GUID.new(0xa1e78202_u32, 0x1459_u16, 0x41b1_u16, StaticArray[0x9c_u8, 0xa9_u8, 0x2a_u8, 0x92_u8, 0x58_u8, 0x7a_u8, 0x42_u8, 0xcc_u8])
+  CLSID_ISDB_CABLE_TV_NETWORK_TYPE = LibC::GUID.new(0xc974ddb5_u32, 0x41fe_u16, 0x4b25_u16, StaticArray[0x97_u8, 0x41_u8, 0x92_u8, 0xf0_u8, 0x49_u8, 0xf1_u8, 0xd5_u8, 0xd1_u8])
+  CLSID_DIRECT_TV_SATELLITE_TV_NETWORK_TYPE = LibC::GUID.new(0x93b66fb5_u32, 0x93d4_u16, 0x4323_u16, StaticArray[0x92_u8, 0x1c_u8, 0xc1_u8, 0xf5_u8, 0x2d_u8, 0xf6_u8, 0x1d_u8, 0x3f_u8])
+  CLSID_ECHOSTAR_SATELLITE_TV_NETWORK_TYPE = LibC::GUID.new(0xc4f6b31b_u32, 0xc6bf_u16, 0x4759_u16, StaticArray[0x88_u8, 0x6f_u8, 0xa7_u8, 0x38_u8, 0x6d_u8, 0xca_u8, 0x27_u8, 0xa0_u8])
+  CLSID_ATSC_TERRESTRIAL_TV_NETWORK_TYPE = LibC::GUID.new(0xdad2fdd_u32, 0x5fd7_u16, 0x11d3_u16, StaticArray[0x8f_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
+  CLSID_DVB_TERRESTRIAL_TV_NETWORK_TYPE = LibC::GUID.new(0x216c62df_u32, 0x6d7f_u16, 0x4e9a_u16, StaticArray[0x85_u8, 0x71_u8, 0x5_u8, 0xf1_u8, 0x4e_u8, 0xdb_u8, 0x76_u8, 0x6a_u8])
+  CLSID_BSKYB_TERRESTRIAL_TV_NETWORK_TYPE = LibC::GUID.new(0x9e9e46c6_u32, 0x3aba_u16, 0x4f08_u16, StaticArray[0xad_u8, 0xe_u8, 0xcc_u8, 0x5a_u8, 0xc8_u8, 0x14_u8, 0x8c_u8, 0x2b_u8])
+  CLSID_DVB_SATELLITE_TV_NETWORK_TYPE = LibC::GUID.new(0xfa4b375a_u32, 0x45b4_u16, 0x4d45_u16, StaticArray[0x84_u8, 0x40_u8, 0x26_u8, 0x39_u8, 0x57_u8, 0xb1_u8, 0x16_u8, 0x23_u8])
+  CLSID_DVB_CABLE_TV_NETWORK_TYPE = LibC::GUID.new(0xdc0c0fe7_u32, 0x485_u16, 0x4266_u16, StaticArray[0xb9_u8, 0x3f_u8, 0x68_u8, 0xfb_u8, 0xf8_u8, 0xe_u8, 0xd8_u8, 0x34_u8])
+  CLSID_BDA_DEBUG_DATA_AVAILABLE = LibC::GUID.new(0x69c24f54_u32, 0x9983_u16, 0x497e_u16, StaticArray[0xb4_u8, 0x15_u8, 0x28_u8, 0x2b_u8, 0xe4_u8, 0xc5_u8, 0x55_u8, 0xfb_u8])
+  CLSID_BDA_DEBUG_DATA_TYPE_STRING = LibC::GUID.new(0xa806e767_u32, 0xde5c_u16, 0x430c_u16, StaticArray[0x80_u8, 0xbf_u8, 0xa2_u8, 0x1e_u8, 0xbe_u8, 0x6_u8, 0xc7_u8, 0x48_u8])
+  CLSID_EVENTID_BDA_IsdbCASResponse = LibC::GUID.new(0xd4cb1966_u32, 0x41bc_u16, 0x4ced_u16, StaticArray[0x9a_u8, 0x20_u8, 0xfd_u8, 0xce_u8, 0xac_u8, 0x78_u8, 0xf7_u8, 0xd_u8])
+  CLSID_EVENTID_BDA_CASRequestTuner = LibC::GUID.new(0xcf39a9d8_u32, 0xf5d3_u16, 0x4685_u16, StaticArray[0xbe_u8, 0x57_u8, 0xed_u8, 0x81_u8, 0xdb_u8, 0xa4_u8, 0x6b_u8, 0x27_u8])
+  CLSID_EVENTID_BDA_CASReleaseTuner = LibC::GUID.new(0x20c1a16b_u32, 0x441f_u16, 0x49a5_u16, StaticArray[0xbb_u8, 0x5c_u8, 0xe9_u8, 0xa0_u8, 0x44_u8, 0x95_u8, 0xc6_u8, 0xc1_u8])
+  CLSID_EVENTID_BDA_CASOpenMMI = LibC::GUID.new(0x85dac915_u32, 0xe593_u16, 0x410d_u16, StaticArray[0x84_u8, 0x71_u8, 0xd6_u8, 0x81_u8, 0x21_u8, 0x5_u8, 0xf2_u8, 0x8e_u8])
+  CLSID_EVENTID_BDA_CASCloseMMI = LibC::GUID.new(0x5d0f550f_u32, 0xde2e_u16, 0x479d_u16, StaticArray[0x83_u8, 0x45_u8, 0xec_u8, 0xe_u8, 0x95_u8, 0x57_u8, 0xe8_u8, 0xa2_u8])
+  CLSID_EVENTID_BDA_CASBroadcastMMI = LibC::GUID.new(0x676876f0_u32, 0x1132_u16, 0x404c_u16, StaticArray[0xa7_u8, 0xca_u8, 0xe7_u8, 0x20_u8, 0x69_u8, 0xa9_u8, 0xd5_u8, 0x4f_u8])
+  CLSID_EVENTID_BDA_TunerSignalLock = LibC::GUID.new(0x1872e740_u32, 0xf573_u16, 0x429b_u16, StaticArray[0xa0_u8, 0xe_u8, 0xd9_u8, 0xc1_u8, 0xe4_u8, 0x8_u8, 0xaf_u8, 0x9_u8])
+  CLSID_EVENTID_BDA_TunerNoSignal = LibC::GUID.new(0xe29b382b_u32, 0x1edd_u16, 0x4930_u16, StaticArray[0xbc_u8, 0x46_u8, 0x68_u8, 0x2f_u8, 0xd7_u8, 0x2d_u8, 0x2d_u8, 0xfb_u8])
+  CLSID_EVENTID_BDA_GPNVValueUpdate = LibC::GUID.new(0xff75c68c_u32, 0xf416_u16, 0x4e7e_u16, StaticArray[0xbf_u8, 0x17_u8, 0x6d_u8, 0x55_u8, 0xc5_u8, 0xdf_u8, 0x15_u8, 0x75_u8])
+  CLSID_EVENTID_BDA_UpdateDrmStatus = LibC::GUID.new(0x65a6f681_u32, 0x1462_u16, 0x473b_u16, StaticArray[0x88_u8, 0xce_u8, 0xcb_u8, 0x73_u8, 0x14_u8, 0x27_u8, 0xbd_u8, 0xb5_u8])
+  CLSID_EVENTID_BDA_UpdateScanState = LibC::GUID.new(0x55702b50_u32, 0x7b49_u16, 0x42b8_u16, StaticArray[0xa8_u8, 0x2f_u8, 0x4a_u8, 0xfb_u8, 0x69_u8, 0x1b_u8, 0x6_u8, 0x28_u8])
+  CLSID_EVENTID_BDA_GuideDataAvailable = LibC::GUID.new(0x98db717a_u32, 0x478a_u16, 0x4cd4_u16, StaticArray[0x92_u8, 0xd0_u8, 0x95_u8, 0xf6_u8, 0x6b_u8, 0x89_u8, 0xe5_u8, 0xb1_u8])
+  CLSID_EVENTID_BDA_GuideServiceInformationUpdated = LibC::GUID.new(0xa1c3ea2b_u32, 0x175f_u16, 0x4458_u16, StaticArray[0xb7_u8, 0x35_u8, 0x50_u8, 0x7d_u8, 0x22_u8, 0xdb_u8, 0x23_u8, 0xa6_u8])
+  CLSID_EVENTID_BDA_GuideDataError = LibC::GUID.new(0xac33c448_u32, 0x6f73_u16, 0x4fd7_u16, StaticArray[0xb3_u8, 0x41_u8, 0x59_u8, 0x4c_u8, 0x36_u8, 0xd_u8, 0x8d_u8, 0x74_u8])
+  CLSID_EVENTID_BDA_DiseqCResponseAvailable = LibC::GUID.new(0xefa628f8_u32, 0x1f2c_u16, 0x4b67_u16, StaticArray[0x9e_u8, 0xa5_u8, 0xac_u8, 0xf6_u8, 0xfa_u8, 0x9a_u8, 0x1f_u8, 0x36_u8])
+  CLSID_EVENTID_BDA_LbigsOpenConnection = LibC::GUID.new(0x356207b2_u32, 0x6f31_u16, 0x4eb0_u16, StaticArray[0xa2_u8, 0x71_u8, 0xb3_u8, 0xfa_u8, 0x6b_u8, 0xb7_u8, 0x68_u8, 0xf_u8])
+  CLSID_EVENTID_BDA_LbigsSendData = LibC::GUID.new(0x1123277b_u32, 0xf1c6_u16, 0x4154_u16, StaticArray[0x8b_u8, 0xd_u8, 0x48_u8, 0xe6_u8, 0x15_u8, 0x70_u8, 0x59_u8, 0xaa_u8])
+  CLSID_EVENTID_BDA_LbigsCloseConnectionHandle = LibC::GUID.new(0xc2f08b99_u32, 0x65ef_u16, 0x4314_u16, StaticArray[0x96_u8, 0x71_u8, 0xe9_u8, 0x9d_u8, 0x4c_u8, 0xce_u8, 0xb_u8, 0xae_u8])
+  CLSID_EVENTID_BDA_EncoderSignalLock = LibC::GUID.new(0x5ec90eb9_u32, 0x39fa_u16, 0x4cfc_u16, StaticArray[0xb9_u8, 0x3f_u8, 0x0_u8, 0xbb_u8, 0x11_u8, 0x7_u8, 0x7f_u8, 0x5e_u8])
+  CLSID_EVENTID_BDA_FdcStatus = LibC::GUID.new(0x5f25366_u32, 0xd0eb_u16, 0x43d2_u16, StaticArray[0xbc_u8, 0x3c_u8, 0x68_u8, 0x2b_u8, 0x86_u8, 0x3d_u8, 0xf1_u8, 0x42_u8])
+  CLSID_EVENTID_BDA_FdcTableSection = LibC::GUID.new(0x6a0cd757_u32, 0x4ce3_u16, 0x4e5b_u16, StaticArray[0x94_u8, 0x44_u8, 0x71_u8, 0x87_u8, 0xb8_u8, 0x71_u8, 0x52_u8, 0xc5_u8])
+  CLSID_EVENTID_BDA_TransprtStreamSelectorInfo = LibC::GUID.new(0xc40f9f85_u32, 0x9d0_u16, 0x489c_u16, StaticArray[0x9e_u8, 0x9c_u8, 0xa_u8, 0xbb_u8, 0xb5_u8, 0x69_u8, 0x51_u8, 0xb0_u8])
+  CLSID_EVENTID_BDA_RatingPinReset = LibC::GUID.new(0xc6e048c0_u32, 0xc574_u16, 0x4c26_u16, StaticArray[0xbc_u8, 0xda_u8, 0x2f_u8, 0x4d_u8, 0x35_u8, 0xeb_u8, 0x5e_u8, 0x85_u8])
+  CLSID_PBDA_ALWAYS_TUNE_IN_MUX = LibC::GUID.new(0x1e1d7141_u32, 0x583f_u16, 0x4ac2_u16, StaticArray[0xb0_u8, 0x19_u8, 0x1f_u8, 0x43_u8, 0xe_u8, 0xda_u8, 0xf_u8, 0x4c_u8])
+  CLSID_BDANETWORKTYPE_ATSC = LibC::GUID.new(0x71985f51_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
 
   alias AMGETERRORTEXTPROCA = Proc(HRESULT, PSTR, UInt32, LibC::BOOL)
   alias AMGETERRORTEXTPROCW = Proc(HRESULT, LibC::LPWSTR, UInt32, LibC::BOOL)
@@ -6455,8 +6455,8 @@ lib LibWin32
     create_class_enumerator : Proc(ICreateDevEnum*, Guid*, IEnumMoniker*, UInt32, HRESULT)
   end
 
-  ICreateDevEnum_GUID = LibC::GUID.new("29840822-5b84-11d0-bd3b-00a0c911ce86")
-  CLSID_ICreateDevEnum = "29840822-5b84-11d0-bd3b-00a0c911ce86"
+  ICreateDevEnum_GUID = "29840822-5b84-11d0-bd3b-00a0c911ce86"
+  IID_ICreateDevEnum = LibC::GUID.new(0x29840822_u32, 0x5b84_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x3b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
   struct ICreateDevEnum
     lpVtbl : ICreateDevEnumVTbl*
   end
@@ -6482,8 +6482,8 @@ lib LibWin32
     new_segment : Proc(IPin*, Int64, Int64, Float64, HRESULT)
   end
 
-  IPin_GUID = LibC::GUID.new("56a86891-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IPin = "56a86891-0ad4-11ce-b03a-0020af0ba770"
+  IPin_GUID = "56a86891-0ad4-11ce-b03a-0020af0ba770"
+  IID_IPin = LibC::GUID.new(0x56a86891_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IPin
     lpVtbl : IPinVTbl*
   end
@@ -6498,8 +6498,8 @@ lib LibWin32
     clone : Proc(IEnumPins*, IEnumPins*, HRESULT)
   end
 
-  IEnumPins_GUID = LibC::GUID.new("56a86892-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IEnumPins = "56a86892-0ad4-11ce-b03a-0020af0ba770"
+  IEnumPins_GUID = "56a86892-0ad4-11ce-b03a-0020af0ba770"
+  IID_IEnumPins = LibC::GUID.new(0x56a86892_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IEnumPins
     lpVtbl : IEnumPinsVTbl*
   end
@@ -6514,8 +6514,8 @@ lib LibWin32
     clone : Proc(IEnumMediaTypes*, IEnumMediaTypes*, HRESULT)
   end
 
-  IEnumMediaTypes_GUID = LibC::GUID.new("89c31040-846b-11ce-97d3-00aa0055595a")
-  CLSID_IEnumMediaTypes = "89c31040-846b-11ce-97d3-00aa0055595a"
+  IEnumMediaTypes_GUID = "89c31040-846b-11ce-97d3-00aa0055595a"
+  IID_IEnumMediaTypes = LibC::GUID.new(0x89c31040_u32, 0x846b_u16, 0x11ce_u16, StaticArray[0x97_u8, 0xd3_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x55_u8, 0x59_u8, 0x5a_u8])
   struct IEnumMediaTypes
     lpVtbl : IEnumMediaTypesVTbl*
   end
@@ -6534,8 +6534,8 @@ lib LibWin32
     set_default_sync_source : Proc(IFilterGraph*, HRESULT)
   end
 
-  IFilterGraph_GUID = LibC::GUID.new("56a8689f-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IFilterGraph = "56a8689f-0ad4-11ce-b03a-0020af0ba770"
+  IFilterGraph_GUID = "56a8689f-0ad4-11ce-b03a-0020af0ba770"
+  IID_IFilterGraph = LibC::GUID.new(0x56a8689f_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IFilterGraph
     lpVtbl : IFilterGraphVTbl*
   end
@@ -6550,8 +6550,8 @@ lib LibWin32
     clone : Proc(IEnumFilters*, IEnumFilters*, HRESULT)
   end
 
-  IEnumFilters_GUID = LibC::GUID.new("56a86893-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IEnumFilters = "56a86893-0ad4-11ce-b03a-0020af0ba770"
+  IEnumFilters_GUID = "56a86893-0ad4-11ce-b03a-0020af0ba770"
+  IID_IEnumFilters = LibC::GUID.new(0x56a86893_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IEnumFilters
     lpVtbl : IEnumFiltersVTbl*
   end
@@ -6569,8 +6569,8 @@ lib LibWin32
     get_sync_source : Proc(IMediaFilter*, IReferenceClock*, HRESULT)
   end
 
-  IMediaFilter_GUID = LibC::GUID.new("56a86899-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMediaFilter = "56a86899-0ad4-11ce-b03a-0020af0ba770"
+  IMediaFilter_GUID = "56a86899-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMediaFilter = LibC::GUID.new(0x56a86899_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMediaFilter
     lpVtbl : IMediaFilterVTbl*
   end
@@ -6593,8 +6593,8 @@ lib LibWin32
     query_vendor_info : Proc(IBaseFilter*, LibC::LPWSTR*, HRESULT)
   end
 
-  IBaseFilter_GUID = LibC::GUID.new("56a86895-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IBaseFilter = "56a86895-0ad4-11ce-b03a-0020af0ba770"
+  IBaseFilter_GUID = "56a86895-0ad4-11ce-b03a-0020af0ba770"
+  IID_IBaseFilter = LibC::GUID.new(0x56a86895_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IBaseFilter
     lpVtbl : IBaseFilterVTbl*
   end
@@ -6621,8 +6621,8 @@ lib LibWin32
     set_media_time : Proc(IMediaSample*, Int64*, Int64*, HRESULT)
   end
 
-  IMediaSample_GUID = LibC::GUID.new("56a8689a-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMediaSample = "56a8689a-0ad4-11ce-b03a-0020af0ba770"
+  IMediaSample_GUID = "56a8689a-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMediaSample = LibC::GUID.new(0x56a8689a_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMediaSample
     lpVtbl : IMediaSampleVTbl*
   end
@@ -6651,8 +6651,8 @@ lib LibWin32
     set_properties : Proc(IMediaSample2*, UInt32, UInt8*, HRESULT)
   end
 
-  IMediaSample2_GUID = LibC::GUID.new("36b73884-c2c8-11cf-8b46-00805f6cef60")
-  CLSID_IMediaSample2 = "36b73884-c2c8-11cf-8b46-00805f6cef60"
+  IMediaSample2_GUID = "36b73884-c2c8-11cf-8b46-00805f6cef60"
+  IID_IMediaSample2 = LibC::GUID.new(0x36b73884_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
   struct IMediaSample2
     lpVtbl : IMediaSample2VTbl*
   end
@@ -6664,8 +6664,8 @@ lib LibWin32
     get_surface : Proc(IMediaSample2Config*, IUnknown*, HRESULT)
   end
 
-  IMediaSample2Config_GUID = LibC::GUID.new("68961e68-832b-41ea-bc91-63593f3e70e3")
-  CLSID_IMediaSample2Config = "68961e68-832b-41ea-bc91-63593f3e70e3"
+  IMediaSample2Config_GUID = "68961e68-832b-41ea-bc91-63593f3e70e3"
+  IID_IMediaSample2Config = LibC::GUID.new(0x68961e68_u32, 0x832b_u16, 0x41ea_u16, StaticArray[0xbc_u8, 0x91_u8, 0x63_u8, 0x59_u8, 0x3f_u8, 0x3e_u8, 0x70_u8, 0xe3_u8])
   struct IMediaSample2Config
     lpVtbl : IMediaSample2ConfigVTbl*
   end
@@ -6682,8 +6682,8 @@ lib LibWin32
     release_buffer : Proc(IMemAllocator*, IMediaSample, HRESULT)
   end
 
-  IMemAllocator_GUID = LibC::GUID.new("56a8689c-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMemAllocator = "56a8689c-0ad4-11ce-b03a-0020af0ba770"
+  IMemAllocator_GUID = "56a8689c-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMemAllocator = LibC::GUID.new(0x56a8689c_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMemAllocator
     lpVtbl : IMemAllocatorVTbl*
   end
@@ -6702,8 +6702,8 @@ lib LibWin32
     get_free_count : Proc(IMemAllocatorCallbackTemp*, Int32*, HRESULT)
   end
 
-  IMemAllocatorCallbackTemp_GUID = LibC::GUID.new("379a0cf0-c1de-11d2-abf5-00a0c905f375")
-  CLSID_IMemAllocatorCallbackTemp = "379a0cf0-c1de-11d2-abf5-00a0c905f375"
+  IMemAllocatorCallbackTemp_GUID = "379a0cf0-c1de-11d2-abf5-00a0c905f375"
+  IID_IMemAllocatorCallbackTemp = LibC::GUID.new(0x379a0cf0_u32, 0xc1de_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IMemAllocatorCallbackTemp
     lpVtbl : IMemAllocatorCallbackTempVTbl*
   end
@@ -6715,8 +6715,8 @@ lib LibWin32
     notify_release : Proc(IMemAllocatorNotifyCallbackTemp*, HRESULT)
   end
 
-  IMemAllocatorNotifyCallbackTemp_GUID = LibC::GUID.new("92980b30-c1de-11d2-abf5-00a0c905f375")
-  CLSID_IMemAllocatorNotifyCallbackTemp = "92980b30-c1de-11d2-abf5-00a0c905f375"
+  IMemAllocatorNotifyCallbackTemp_GUID = "92980b30-c1de-11d2-abf5-00a0c905f375"
+  IID_IMemAllocatorNotifyCallbackTemp = LibC::GUID.new(0x92980b30_u32, 0xc1de_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IMemAllocatorNotifyCallbackTemp
     lpVtbl : IMemAllocatorNotifyCallbackTempVTbl*
   end
@@ -6733,8 +6733,8 @@ lib LibWin32
     receive_can_block : Proc(IMemInputPin*, HRESULT)
   end
 
-  IMemInputPin_GUID = LibC::GUID.new("56a8689d-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMemInputPin = "56a8689d-0ad4-11ce-b03a-0020af0ba770"
+  IMemInputPin_GUID = "56a8689d-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMemInputPin = LibC::GUID.new(0x56a8689d_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMemInputPin
     lpVtbl : IMemInputPinVTbl*
   end
@@ -6747,8 +6747,8 @@ lib LibWin32
     unregister : Proc(IAMovieSetup*, HRESULT)
   end
 
-  IAMovieSetup_GUID = LibC::GUID.new("a3d8cec0-7e5a-11cf-bbc5-00805f6cef20")
-  CLSID_IAMovieSetup = "a3d8cec0-7e5a-11cf-bbc5-00805f6cef20"
+  IAMovieSetup_GUID = "a3d8cec0-7e5a-11cf-bbc5-00805f6cef20"
+  IID_IAMovieSetup = LibC::GUID.new(0xa3d8cec0_u32, 0x7e5a_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x20_u8])
   struct IAMovieSetup
     lpVtbl : IAMovieSetupVTbl*
   end
@@ -6776,8 +6776,8 @@ lib LibWin32
     get_preroll : Proc(IMediaSeeking*, Int64*, HRESULT)
   end
 
-  IMediaSeeking_GUID = LibC::GUID.new("36b73880-c2c8-11cf-8b46-00805f6cef60")
-  CLSID_IMediaSeeking = "36b73880-c2c8-11cf-8b46-00805f6cef60"
+  IMediaSeeking_GUID = "36b73880-c2c8-11cf-8b46-00805f6cef60"
+  IID_IMediaSeeking = LibC::GUID.new(0x36b73880_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
   struct IMediaSeeking
     lpVtbl : IMediaSeekingVTbl*
   end
@@ -6792,8 +6792,8 @@ lib LibWin32
     clone : Proc(IEnumRegFilters*, IEnumRegFilters*, HRESULT)
   end
 
-  IEnumRegFilters_GUID = LibC::GUID.new("56a868a4-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IEnumRegFilters = "56a868a4-0ad4-11ce-b03a-0020af0ba770"
+  IEnumRegFilters_GUID = "56a868a4-0ad4-11ce-b03a-0020af0ba770"
+  IID_IEnumRegFilters = LibC::GUID.new(0x56a868a4_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IEnumRegFilters
     lpVtbl : IEnumRegFiltersVTbl*
   end
@@ -6812,8 +6812,8 @@ lib LibWin32
     enum_matching_filters : Proc(IFilterMapper*, IEnumRegFilters*, UInt32, LibC::BOOL, Guid, Guid, LibC::BOOL, LibC::BOOL, Guid, Guid, HRESULT)
   end
 
-  IFilterMapper_GUID = LibC::GUID.new("56a868a3-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IFilterMapper = "56a868a3-0ad4-11ce-b03a-0020af0ba770"
+  IFilterMapper_GUID = "56a868a3-0ad4-11ce-b03a-0020af0ba770"
+  IID_IFilterMapper = LibC::GUID.new(0x56a868a3_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IFilterMapper
     lpVtbl : IFilterMapperVTbl*
   end
@@ -6828,8 +6828,8 @@ lib LibWin32
     enum_matching_filters : Proc(IFilterMapper2*, IEnumMoniker*, UInt32, LibC::BOOL, UInt32, LibC::BOOL, UInt32, Guid*, REGPINMEDIUM*, Guid*, LibC::BOOL, LibC::BOOL, UInt32, Guid*, REGPINMEDIUM*, Guid*, HRESULT)
   end
 
-  IFilterMapper2_GUID = LibC::GUID.new("b79bb0b0-33c1-11d1-abe1-00a0c905f375")
-  CLSID_IFilterMapper2 = "b79bb0b0-33c1-11d1-abe1-00a0c905f375"
+  IFilterMapper2_GUID = "b79bb0b0-33c1-11d1-abe1-00a0c905f375"
+  IID_IFilterMapper2 = LibC::GUID.new(0xb79bb0b0_u32, 0x33c1_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IFilterMapper2
     lpVtbl : IFilterMapper2VTbl*
   end
@@ -6845,8 +6845,8 @@ lib LibWin32
     get_i_create_dev_enum : Proc(IFilterMapper3*, ICreateDevEnum*, HRESULT)
   end
 
-  IFilterMapper3_GUID = LibC::GUID.new("b79bb0b1-33c1-11d1-abe1-00a0c905f375")
-  CLSID_IFilterMapper3 = "b79bb0b1-33c1-11d1-abe1-00a0c905f375"
+  IFilterMapper3_GUID = "b79bb0b1-33c1-11d1-abe1-00a0c905f375"
+  IID_IFilterMapper3 = LibC::GUID.new(0xb79bb0b1_u32, 0x33c1_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IFilterMapper3
     lpVtbl : IFilterMapper3VTbl*
   end
@@ -6859,8 +6859,8 @@ lib LibWin32
     set_sink : Proc(IQualityControl*, IQualityControl, HRESULT)
   end
 
-  IQualityControl_GUID = LibC::GUID.new("56a868a5-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IQualityControl = "56a868a5-0ad4-11ce-b03a-0020af0ba770"
+  IQualityControl_GUID = "56a868a5-0ad4-11ce-b03a-0020af0ba770"
+  IID_IQualityControl = LibC::GUID.new(0x56a868a5_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IQualityControl
     lpVtbl : IQualityControlVTbl*
   end
@@ -6875,8 +6875,8 @@ lib LibWin32
     on_position_change : Proc(IOverlayNotify*, RECT*, RECT*, HRESULT)
   end
 
-  IOverlayNotify_GUID = LibC::GUID.new("56a868a0-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IOverlayNotify = "56a868a0-0ad4-11ce-b03a-0020af0ba770"
+  IOverlayNotify_GUID = "56a868a0-0ad4-11ce-b03a-0020af0ba770"
+  IID_IOverlayNotify = LibC::GUID.new(0x56a868a0_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IOverlayNotify
     lpVtbl : IOverlayNotifyVTbl*
   end
@@ -6892,8 +6892,8 @@ lib LibWin32
     on_display_change : Proc(IOverlayNotify2*, HMONITOR, HRESULT)
   end
 
-  IOverlayNotify2_GUID = LibC::GUID.new("680efa10-d535-11d1-87c8-00a0c9223196")
-  CLSID_IOverlayNotify2 = "680efa10-d535-11d1-87c8-00a0c9223196"
+  IOverlayNotify2_GUID = "680efa10-d535-11d1-87c8-00a0c9223196"
+  IID_IOverlayNotify2 = LibC::GUID.new(0x680efa10_u32, 0xd535_u16, 0x11d1_u16, StaticArray[0x87_u8, 0xc8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
   struct IOverlayNotify2
     lpVtbl : IOverlayNotify2VTbl*
   end
@@ -6914,8 +6914,8 @@ lib LibWin32
     unadvise : Proc(IOverlay*, HRESULT)
   end
 
-  IOverlay_GUID = LibC::GUID.new("56a868a1-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IOverlay = "56a868a1-0ad4-11ce-b03a-0020af0ba770"
+  IOverlay_GUID = "56a868a1-0ad4-11ce-b03a-0020af0ba770"
+  IID_IOverlay = LibC::GUID.new(0x56a868a1_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IOverlay
     lpVtbl : IOverlayVTbl*
   end
@@ -6927,8 +6927,8 @@ lib LibWin32
     notify : Proc(IMediaEventSink*, Int32, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
   end
 
-  IMediaEventSink_GUID = LibC::GUID.new("56a868a2-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMediaEventSink = "56a868a2-0ad4-11ce-b03a-0020af0ba770"
+  IMediaEventSink_GUID = "56a868a2-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMediaEventSink = LibC::GUID.new(0x56a868a2_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMediaEventSink
     lpVtbl : IMediaEventSinkVTbl*
   end
@@ -6941,8 +6941,8 @@ lib LibWin32
     get_cur_file : Proc(IFileSourceFilter*, LibC::LPWSTR*, AM_MEDIA_TYPE*, HRESULT)
   end
 
-  IFileSourceFilter_GUID = LibC::GUID.new("56a868a6-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IFileSourceFilter = "56a868a6-0ad4-11ce-b03a-0020af0ba770"
+  IFileSourceFilter_GUID = "56a868a6-0ad4-11ce-b03a-0020af0ba770"
+  IID_IFileSourceFilter = LibC::GUID.new(0x56a868a6_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IFileSourceFilter
     lpVtbl : IFileSourceFilterVTbl*
   end
@@ -6955,8 +6955,8 @@ lib LibWin32
     get_cur_file : Proc(IFileSinkFilter*, LibC::LPWSTR*, AM_MEDIA_TYPE*, HRESULT)
   end
 
-  IFileSinkFilter_GUID = LibC::GUID.new("a2104830-7c70-11cf-8bce-00aa00a3f1a6")
-  CLSID_IFileSinkFilter = "a2104830-7c70-11cf-8bce-00aa00a3f1a6"
+  IFileSinkFilter_GUID = "a2104830-7c70-11cf-8bce-00aa00a3f1a6"
+  IID_IFileSinkFilter = LibC::GUID.new(0xa2104830_u32, 0x7c70_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0xce_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xf1_u8, 0xa6_u8])
   struct IFileSinkFilter
     lpVtbl : IFileSinkFilterVTbl*
   end
@@ -6971,8 +6971,8 @@ lib LibWin32
     get_mode : Proc(IFileSinkFilter2*, UInt32*, HRESULT)
   end
 
-  IFileSinkFilter2_GUID = LibC::GUID.new("00855b90-ce1b-11d0-bd4f-00a0c911ce86")
-  CLSID_IFileSinkFilter2 = "00855b90-ce1b-11d0-bd4f-00a0c911ce86"
+  IFileSinkFilter2_GUID = "00855b90-ce1b-11d0-bd4f-00a0c911ce86"
+  IID_IFileSinkFilter2 = LibC::GUID.new(0x855b90_u32, 0xce1b_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x4f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
   struct IFileSinkFilter2
     lpVtbl : IFileSinkFilter2VTbl*
   end
@@ -6998,8 +6998,8 @@ lib LibWin32
     should_operation_continue : Proc(IGraphBuilder*, HRESULT)
   end
 
-  IGraphBuilder_GUID = LibC::GUID.new("56a868a9-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IGraphBuilder = "56a868a9-0ad4-11ce-b03a-0020af0ba770"
+  IGraphBuilder_GUID = "56a868a9-0ad4-11ce-b03a-0020af0ba770"
+  IID_IGraphBuilder = LibC::GUID.new(0x56a868a9_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IGraphBuilder
     lpVtbl : IGraphBuilderVTbl*
   end
@@ -7018,8 +7018,8 @@ lib LibWin32
     copy_capture_file : Proc(ICaptureGraphBuilder*, LibC::LPWSTR, LibC::LPWSTR, Int32, IAMCopyCaptureFileProgress, HRESULT)
   end
 
-  ICaptureGraphBuilder_GUID = LibC::GUID.new("bf87b6e0-8c27-11d0-b3f0-00aa003761c5")
-  CLSID_ICaptureGraphBuilder = "bf87b6e0-8c27-11d0-b3f0-00aa003761c5"
+  ICaptureGraphBuilder_GUID = "bf87b6e0-8c27-11d0-b3f0-00aa003761c5"
+  IID_ICaptureGraphBuilder = LibC::GUID.new(0xbf87b6e0_u32, 0x8c27_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
   struct ICaptureGraphBuilder
     lpVtbl : ICaptureGraphBuilderVTbl*
   end
@@ -7031,8 +7031,8 @@ lib LibWin32
     progress : Proc(IAMCopyCaptureFileProgress*, Int32, HRESULT)
   end
 
-  IAMCopyCaptureFileProgress_GUID = LibC::GUID.new("670d1d20-a068-11d0-b3f0-00aa003761c5")
-  CLSID_IAMCopyCaptureFileProgress = "670d1d20-a068-11d0-b3f0-00aa003761c5"
+  IAMCopyCaptureFileProgress_GUID = "670d1d20-a068-11d0-b3f0-00aa003761c5"
+  IID_IAMCopyCaptureFileProgress = LibC::GUID.new(0x670d1d20_u32, 0xa068_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
   struct IAMCopyCaptureFileProgress
     lpVtbl : IAMCopyCaptureFileProgressVTbl*
   end
@@ -7052,8 +7052,8 @@ lib LibWin32
     find_pin : Proc(ICaptureGraphBuilder2*, IUnknown, PIN_DIRECTION, Guid*, Guid*, LibC::BOOL, Int32, IPin*, HRESULT)
   end
 
-  ICaptureGraphBuilder2_GUID = LibC::GUID.new("93e5a4e0-2d50-11d2-abfa-00a0c9c6e38d")
-  CLSID_ICaptureGraphBuilder2 = "93e5a4e0-2d50-11d2-abfa-00a0c9c6e38d"
+  ICaptureGraphBuilder2_GUID = "93e5a4e0-2d50-11d2-abfa-00a0c9c6e38d"
+  IID_ICaptureGraphBuilder2 = LibC::GUID.new(0x93e5a4e0_u32, 0x2d50_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xfa_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc6_u8, 0xe3_u8, 0x8d_u8])
   struct ICaptureGraphBuilder2
     lpVtbl : ICaptureGraphBuilder2VTbl*
   end
@@ -7082,8 +7082,8 @@ lib LibWin32
     render_ex : Proc(IFilterGraph2*, IPin, UInt32, UInt32*, HRESULT)
   end
 
-  IFilterGraph2_GUID = LibC::GUID.new("36b73882-c2c8-11cf-8b46-00805f6cef60")
-  CLSID_IFilterGraph2 = "36b73882-c2c8-11cf-8b46-00805f6cef60"
+  IFilterGraph2_GUID = "36b73882-c2c8-11cf-8b46-00805f6cef60"
+  IID_IFilterGraph2 = LibC::GUID.new(0x36b73882_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
   struct IFilterGraph2
     lpVtbl : IFilterGraph2VTbl*
   end
@@ -7113,8 +7113,8 @@ lib LibWin32
     set_sync_source_ex : Proc(IFilterGraph3*, IReferenceClock, IReferenceClock, IBaseFilter, HRESULT)
   end
 
-  IFilterGraph3_GUID = LibC::GUID.new("aaf38154-b80b-422f-91e6-b66467509a07")
-  CLSID_IFilterGraph3 = "aaf38154-b80b-422f-91e6-b66467509a07"
+  IFilterGraph3_GUID = "aaf38154-b80b-422f-91e6-b66467509a07"
+  IID_IFilterGraph3 = LibC::GUID.new(0xaaf38154_u32, 0xb80b_u16, 0x422f_u16, StaticArray[0x91_u8, 0xe6_u8, 0xb6_u8, 0x64_u8, 0x67_u8, 0x50_u8, 0x9a_u8, 0x7_u8])
   struct IFilterGraph3
     lpVtbl : IFilterGraph3VTbl*
   end
@@ -7127,8 +7127,8 @@ lib LibWin32
     backout : Proc(IStreamBuilder*, IPin, IGraphBuilder, HRESULT)
   end
 
-  IStreamBuilder_GUID = LibC::GUID.new("56a868bf-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IStreamBuilder = "56a868bf-0ad4-11ce-b03a-0020af0ba770"
+  IStreamBuilder_GUID = "56a868bf-0ad4-11ce-b03a-0020af0ba770"
+  IID_IStreamBuilder = LibC::GUID.new(0x56a868bf_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IStreamBuilder
     lpVtbl : IStreamBuilderVTbl*
   end
@@ -7147,8 +7147,8 @@ lib LibWin32
     end_flush : Proc(IAsyncReader*, HRESULT)
   end
 
-  IAsyncReader_GUID = LibC::GUID.new("56a868aa-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IAsyncReader = "56a868aa-0ad4-11ce-b03a-0020af0ba770"
+  IAsyncReader_GUID = "56a868aa-0ad4-11ce-b03a-0020af0ba770"
+  IID_IAsyncReader = LibC::GUID.new(0x56a868aa_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IAsyncReader
     lpVtbl : IAsyncReaderVTbl*
   end
@@ -7160,8 +7160,8 @@ lib LibWin32
     query_version : Proc(IGraphVersion*, Int32*, HRESULT)
   end
 
-  IGraphVersion_GUID = LibC::GUID.new("56a868ab-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IGraphVersion = "56a868ab-0ad4-11ce-b03a-0020af0ba770"
+  IGraphVersion_GUID = "56a868ab-0ad4-11ce-b03a-0020af0ba770"
+  IID_IGraphVersion = LibC::GUID.new(0x56a868ab_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IGraphVersion
     lpVtbl : IGraphVersionVTbl*
   end
@@ -7174,8 +7174,8 @@ lib LibWin32
     release_resource : Proc(IResourceConsumer*, Int32, HRESULT)
   end
 
-  IResourceConsumer_GUID = LibC::GUID.new("56a868ad-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IResourceConsumer = "56a868ad-0ad4-11ce-b03a-0020af0ba770"
+  IResourceConsumer_GUID = "56a868ad-0ad4-11ce-b03a-0020af0ba770"
+  IID_IResourceConsumer = LibC::GUID.new(0x56a868ad_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IResourceConsumer
     lpVtbl : IResourceConsumerVTbl*
   end
@@ -7194,8 +7194,8 @@ lib LibWin32
     release_focus : Proc(IResourceManager*, IUnknown, HRESULT)
   end
 
-  IResourceManager_GUID = LibC::GUID.new("56a868ac-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IResourceManager = "56a868ac-0ad4-11ce-b03a-0020af0ba770"
+  IResourceManager_GUID = "56a868ac-0ad4-11ce-b03a-0020af0ba770"
+  IID_IResourceManager = LibC::GUID.new(0x56a868ac_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IResourceManager
     lpVtbl : IResourceManagerVTbl*
   end
@@ -7211,8 +7211,8 @@ lib LibWin32
     notify_graph_change : Proc(IDistributorNotify*, HRESULT)
   end
 
-  IDistributorNotify_GUID = LibC::GUID.new("56a868af-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IDistributorNotify = "56a868af-0ad4-11ce-b03a-0020af0ba770"
+  IDistributorNotify_GUID = "56a868af-0ad4-11ce-b03a-0020af0ba770"
+  IID_IDistributorNotify = LibC::GUID.new(0x56a868af_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IDistributorNotify
     lpVtbl : IDistributorNotifyVTbl*
   end
@@ -7226,8 +7226,8 @@ lib LibWin32
     get_info : Proc(IAMStreamControl*, AM_STREAM_INFO*, HRESULT)
   end
 
-  IAMStreamControl_GUID = LibC::GUID.new("36b73881-c2c8-11cf-8b46-00805f6cef60")
-  CLSID_IAMStreamControl = "36b73881-c2c8-11cf-8b46-00805f6cef60"
+  IAMStreamControl_GUID = "36b73881-c2c8-11cf-8b46-00805f6cef60"
+  IID_IAMStreamControl = LibC::GUID.new(0x36b73881_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
   struct IAMStreamControl
     lpVtbl : IAMStreamControlVTbl*
   end
@@ -7239,8 +7239,8 @@ lib LibWin32
     init : Proc(ISeekingPassThru*, LibC::BOOL, IPin, HRESULT)
   end
 
-  ISeekingPassThru_GUID = LibC::GUID.new("36b73883-c2c8-11cf-8b46-00805f6cef60")
-  CLSID_ISeekingPassThru = "36b73883-c2c8-11cf-8b46-00805f6cef60"
+  ISeekingPassThru_GUID = "36b73883-c2c8-11cf-8b46-00805f6cef60"
+  IID_ISeekingPassThru = LibC::GUID.new(0x36b73883_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
   struct ISeekingPassThru
     lpVtbl : ISeekingPassThruVTbl*
   end
@@ -7255,8 +7255,8 @@ lib LibWin32
     get_stream_caps : Proc(IAMStreamConfig*, Int32, AM_MEDIA_TYPE**, UInt8*, HRESULT)
   end
 
-  IAMStreamConfig_GUID = LibC::GUID.new("c6e13340-30ac-11d0-a18c-00a0c9118956")
-  CLSID_IAMStreamConfig = "c6e13340-30ac-11d0-a18c-00a0c9118956"
+  IAMStreamConfig_GUID = "c6e13340-30ac-11d0-a18c-00a0c9118956"
+  IID_IAMStreamConfig = LibC::GUID.new(0xc6e13340_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMStreamConfig
     lpVtbl : IAMStreamConfigVTbl*
   end
@@ -7271,8 +7271,8 @@ lib LibWin32
     get_interleaving : Proc(IConfigInterleaving*, Int64*, Int64*, HRESULT)
   end
 
-  IConfigInterleaving_GUID = LibC::GUID.new("bee3d220-157b-11d0-bd23-00a0c911ce86")
-  CLSID_IConfigInterleaving = "bee3d220-157b-11d0-bd23-00a0c911ce86"
+  IConfigInterleaving_GUID = "bee3d220-157b-11d0-bd23-00a0c911ce86"
+  IID_IConfigInterleaving = LibC::GUID.new(0xbee3d220_u32, 0x157b_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x23_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
   struct IConfigInterleaving
     lpVtbl : IConfigInterleavingVTbl*
   end
@@ -7287,8 +7287,8 @@ lib LibWin32
     get_output_compatibility_index : Proc(IConfigAviMux*, LibC::BOOL*, HRESULT)
   end
 
-  IConfigAviMux_GUID = LibC::GUID.new("5acd6aa0-f482-11ce-8b67-00aa00a3f1a6")
-  CLSID_IConfigAviMux = "5acd6aa0-f482-11ce-8b67-00aa00a3f1a6"
+  IConfigAviMux_GUID = "5acd6aa0-f482-11ce-8b67-00aa00a3f1a6"
+  IID_IConfigAviMux = LibC::GUID.new(0x5acd6aa0_u32, 0xf482_u16, 0x11ce_u16, StaticArray[0x8b_u8, 0x67_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xf1_u8, 0xa6_u8])
   struct IConfigAviMux
     lpVtbl : IConfigAviMuxVTbl*
   end
@@ -7310,8 +7310,8 @@ lib LibWin32
     override_frame_size : Proc(IAMVideoCompression*, Int32, Int32, HRESULT)
   end
 
-  IAMVideoCompression_GUID = LibC::GUID.new("c6e13343-30ac-11d0-a18c-00a0c9118956")
-  CLSID_IAMVideoCompression = "c6e13343-30ac-11d0-a18c-00a0c9118956"
+  IAMVideoCompression_GUID = "c6e13343-30ac-11d0-a18c-00a0c9118956"
+  IID_IAMVideoCompression = LibC::GUID.new(0xc6e13343_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMVideoCompression
     lpVtbl : IAMVideoCompressionVTbl*
   end
@@ -7325,8 +7325,8 @@ lib LibWin32
     send_driver_message : Proc(IAMVfwCaptureDialogs*, Int32, Int32, Int32, Int32, HRESULT)
   end
 
-  IAMVfwCaptureDialogs_GUID = LibC::GUID.new("d8d715a0-6e5e-11d0-b3f0-00aa003761c5")
-  CLSID_IAMVfwCaptureDialogs = "d8d715a0-6e5e-11d0-b3f0-00aa003761c5"
+  IAMVfwCaptureDialogs_GUID = "d8d715a0-6e5e-11d0-b3f0-00aa003761c5"
+  IID_IAMVfwCaptureDialogs = LibC::GUID.new(0xd8d715a0_u32, 0x6e5e_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
   struct IAMVfwCaptureDialogs
     lpVtbl : IAMVfwCaptureDialogsVTbl*
   end
@@ -7341,8 +7341,8 @@ lib LibWin32
     send_driver_message : Proc(IAMVfwCompressDialogs*, Int32, Int32, Int32, HRESULT)
   end
 
-  IAMVfwCompressDialogs_GUID = LibC::GUID.new("d8d715a3-6e5e-11d0-b3f0-00aa003761c5")
-  CLSID_IAMVfwCompressDialogs = "d8d715a3-6e5e-11d0-b3f0-00aa003761c5"
+  IAMVfwCompressDialogs_GUID = "d8d715a3-6e5e-11d0-b3f0-00aa003761c5"
+  IID_IAMVfwCompressDialogs = LibC::GUID.new(0xd8d715a3_u32, 0x6e5e_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
   struct IAMVfwCompressDialogs
     lpVtbl : IAMVfwCompressDialogsVTbl*
   end
@@ -7357,8 +7357,8 @@ lib LibWin32
     get_average_frame_size : Proc(IAMDroppedFrames*, Int32*, HRESULT)
   end
 
-  IAMDroppedFrames_GUID = LibC::GUID.new("c6e13344-30ac-11d0-a18c-00a0c9118956")
-  CLSID_IAMDroppedFrames = "c6e13344-30ac-11d0-a18c-00a0c9118956"
+  IAMDroppedFrames_GUID = "c6e13344-30ac-11d0-a18c-00a0c9118956"
+  IID_IAMDroppedFrames = LibC::GUID.new(0xc6e13344_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMDroppedFrames
     lpVtbl : IAMDroppedFramesVTbl*
   end
@@ -7385,8 +7385,8 @@ lib LibWin32
     get_bass_range : Proc(IAMAudioInputMixer*, Float64*, HRESULT)
   end
 
-  IAMAudioInputMixer_GUID = LibC::GUID.new("54c39221-8380-11d0-b3f0-00aa003761c5")
-  CLSID_IAMAudioInputMixer = "54c39221-8380-11d0-b3f0-00aa003761c5"
+  IAMAudioInputMixer_GUID = "54c39221-8380-11d0-b3f0-00aa003761c5"
+  IID_IAMAudioInputMixer = LibC::GUID.new(0x54c39221_u32, 0x8380_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
   struct IAMAudioInputMixer
     lpVtbl : IAMAudioInputMixerVTbl*
   end
@@ -7399,8 +7399,8 @@ lib LibWin32
     get_allocator_properties : Proc(IAMBufferNegotiation*, ALLOCATOR_PROPERTIES*, HRESULT)
   end
 
-  IAMBufferNegotiation_GUID = LibC::GUID.new("56ed71a0-af5f-11d0-b3f0-00aa003761c5")
-  CLSID_IAMBufferNegotiation = "56ed71a0-af5f-11d0-b3f0-00aa003761c5"
+  IAMBufferNegotiation_GUID = "56ed71a0-af5f-11d0-b3f0-00aa003761c5"
+  IID_IAMBufferNegotiation = LibC::GUID.new(0x56ed71a0_u32, 0xaf5f_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
   struct IAMBufferNegotiation
     lpVtbl : IAMBufferNegotiationVTbl*
   end
@@ -7420,8 +7420,8 @@ lib LibWin32
     get_output_enable : Proc(IAMAnalogVideoDecoder*, Int32*, HRESULT)
   end
 
-  IAMAnalogVideoDecoder_GUID = LibC::GUID.new("c6e13350-30ac-11d0-a18c-00a0c9118956")
-  CLSID_IAMAnalogVideoDecoder = "c6e13350-30ac-11d0-a18c-00a0c9118956"
+  IAMAnalogVideoDecoder_GUID = "c6e13350-30ac-11d0-a18c-00a0c9118956"
+  IID_IAMAnalogVideoDecoder = LibC::GUID.new(0xc6e13350_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMAnalogVideoDecoder
     lpVtbl : IAMAnalogVideoDecoderVTbl*
   end
@@ -7435,8 +7435,8 @@ lib LibWin32
     get : Proc(IAMVideoProcAmp*, Int32, Int32*, Int32*, HRESULT)
   end
 
-  IAMVideoProcAmp_GUID = LibC::GUID.new("c6e13360-30ac-11d0-a18c-00a0c9118956")
-  CLSID_IAMVideoProcAmp = "c6e13360-30ac-11d0-a18c-00a0c9118956"
+  IAMVideoProcAmp_GUID = "c6e13360-30ac-11d0-a18c-00a0c9118956"
+  IID_IAMVideoProcAmp = LibC::GUID.new(0xc6e13360_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMVideoProcAmp
     lpVtbl : IAMVideoProcAmpVTbl*
   end
@@ -7450,8 +7450,8 @@ lib LibWin32
     get : Proc(IAMCameraControl*, Int32, Int32*, Int32*, HRESULT)
   end
 
-  IAMCameraControl_GUID = LibC::GUID.new("c6e13370-30ac-11d0-a18c-00a0c9118956")
-  CLSID_IAMCameraControl = "c6e13370-30ac-11d0-a18c-00a0c9118956"
+  IAMCameraControl_GUID = "c6e13370-30ac-11d0-a18c-00a0c9118956"
+  IID_IAMCameraControl = LibC::GUID.new(0xc6e13370_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMCameraControl
     lpVtbl : IAMCameraControlVTbl*
   end
@@ -7468,8 +7468,8 @@ lib LibWin32
     get_frame_rate_list : Proc(IAMVideoControl*, IPin, Int32, SIZE, Int32*, Int64**, HRESULT)
   end
 
-  IAMVideoControl_GUID = LibC::GUID.new("6a2e0670-28e4-11d0-a18c-00a0c9118956")
-  CLSID_IAMVideoControl = "6a2e0670-28e4-11d0-a18c-00a0c9118956"
+  IAMVideoControl_GUID = "6a2e0670-28e4-11d0-a18c-00a0c9118956"
+  IID_IAMVideoControl = LibC::GUID.new(0x6a2e0670_u32, 0x28e4_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMVideoControl
     lpVtbl : IAMVideoControlVTbl*
   end
@@ -7485,8 +7485,8 @@ lib LibWin32
     get_crossbar_pin_info : Proc(IAMCrossbar*, LibC::BOOL, Int32, Int32*, Int32*, HRESULT)
   end
 
-  IAMCrossbar_GUID = LibC::GUID.new("c6e13380-30ac-11d0-a18c-00a0c9118956")
-  CLSID_IAMCrossbar = "c6e13380-30ac-11d0-a18c-00a0c9118956"
+  IAMCrossbar_GUID = "c6e13380-30ac-11d0-a18c-00a0c9118956"
+  IID_IAMCrossbar = LibC::GUID.new(0xc6e13380_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMCrossbar
     lpVtbl : IAMCrossbarVTbl*
   end
@@ -7512,8 +7512,8 @@ lib LibWin32
     un_register_notification_call_back : Proc(IAMTuner*, IAMTunerNotification, HRESULT)
   end
 
-  IAMTuner_GUID = LibC::GUID.new("211a8761-03ac-11d1-8d13-00aa00bd8339")
-  CLSID_IAMTuner = "211a8761-03ac-11d1-8d13-00aa00bd8339"
+  IAMTuner_GUID = "211a8761-03ac-11d1-8d13-00aa00bd8339"
+  IID_IAMTuner = LibC::GUID.new(0x211a8761_u32, 0x3ac_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x13_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0x83_u8, 0x39_u8])
   struct IAMTuner
     lpVtbl : IAMTunerVTbl*
   end
@@ -7525,8 +7525,8 @@ lib LibWin32
     on_event : Proc(IAMTunerNotification*, AMTunerEventType, HRESULT)
   end
 
-  IAMTunerNotification_GUID = LibC::GUID.new("211a8760-03ac-11d1-8d13-00aa00bd8339")
-  CLSID_IAMTunerNotification = "211a8760-03ac-11d1-8d13-00aa00bd8339"
+  IAMTunerNotification_GUID = "211a8760-03ac-11d1-8d13-00aa00bd8339"
+  IID_IAMTunerNotification = LibC::GUID.new(0x211a8760_u32, 0x3ac_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x13_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0x83_u8, 0x39_u8])
   struct IAMTunerNotification
     lpVtbl : IAMTunerNotificationVTbl*
   end
@@ -7563,8 +7563,8 @@ lib LibWin32
     get_audio_frequency : Proc(IAMTVTuner*, Int32*, HRESULT)
   end
 
-  IAMTVTuner_GUID = LibC::GUID.new("211a8766-03ac-11d1-8d13-00aa00bd8339")
-  CLSID_IAMTVTuner = "211a8766-03ac-11d1-8d13-00aa00bd8339"
+  IAMTVTuner_GUID = "211a8766-03ac-11d1-8d13-00aa00bd8339"
+  IID_IAMTVTuner = LibC::GUID.new(0x211a8766_u32, 0x3ac_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x13_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0x83_u8, 0x39_u8])
   struct IAMTVTuner
     lpVtbl : IAMTVTunerVTbl*
   end
@@ -7593,8 +7593,8 @@ lib LibWin32
     is_taping_permitted : Proc(IBPCSatelliteTuner*, HRESULT)
   end
 
-  IBPCSatelliteTuner_GUID = LibC::GUID.new("211a8765-03ac-11d1-8d13-00aa00bd8339")
-  CLSID_IBPCSatelliteTuner = "211a8765-03ac-11d1-8d13-00aa00bd8339"
+  IBPCSatelliteTuner_GUID = "211a8765-03ac-11d1-8d13-00aa00bd8339"
+  IID_IBPCSatelliteTuner = LibC::GUID.new(0x211a8765_u32, 0x3ac_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x13_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0x83_u8, 0x39_u8])
   struct IBPCSatelliteTuner
     lpVtbl : IBPCSatelliteTunerVTbl*
   end
@@ -7611,8 +7611,8 @@ lib LibWin32
     un_register_notification_call_back : Proc(IAMTVAudio*, IAMTunerNotification, HRESULT)
   end
 
-  IAMTVAudio_GUID = LibC::GUID.new("83ec1c30-23d1-11d1-99e6-00a0c9560266")
-  CLSID_IAMTVAudio = "83ec1c30-23d1-11d1-99e6-00a0c9560266"
+  IAMTVAudio_GUID = "83ec1c30-23d1-11d1-99e6-00a0c9560266"
+  IID_IAMTVAudio = LibC::GUID.new(0x83ec1c30_u32, 0x23d1_u16, 0x11d1_u16, StaticArray[0x99_u8, 0xe6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x56_u8, 0x2_u8, 0x66_u8])
   struct IAMTVAudio
     lpVtbl : IAMTVAudioVTbl*
   end
@@ -7624,8 +7624,8 @@ lib LibWin32
     on_event : Proc(IAMTVAudioNotification*, AMTVAudioEventType, HRESULT)
   end
 
-  IAMTVAudioNotification_GUID = LibC::GUID.new("83ec1c33-23d1-11d1-99e6-00a0c9560266")
-  CLSID_IAMTVAudioNotification = "83ec1c33-23d1-11d1-99e6-00a0c9560266"
+  IAMTVAudioNotification_GUID = "83ec1c33-23d1-11d1-99e6-00a0c9560266"
+  IID_IAMTVAudioNotification = LibC::GUID.new(0x83ec1c33_u32, 0x23d1_u16, 0x11d1_u16, StaticArray[0x99_u8, 0xe6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x56_u8, 0x2_u8, 0x66_u8])
   struct IAMTVAudioNotification
     lpVtbl : IAMTVAudioNotificationVTbl*
   end
@@ -7643,8 +7643,8 @@ lib LibWin32
     get_cc_enable : Proc(IAMAnalogVideoEncoder*, Int32*, HRESULT)
   end
 
-  IAMAnalogVideoEncoder_GUID = LibC::GUID.new("c6e133b0-30ac-11d0-a18c-00a0c9118956")
-  CLSID_IAMAnalogVideoEncoder = "c6e133b0-30ac-11d0-a18c-00a0c9118956"
+  IAMAnalogVideoEncoder_GUID = "c6e133b0-30ac-11d0-a18c-00a0c9118956"
+  IID_IAMAnalogVideoEncoder = LibC::GUID.new(0xc6e133b0_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
   struct IAMAnalogVideoEncoder
     lpVtbl : IAMAnalogVideoEncoderVTbl*
   end
@@ -7658,8 +7658,8 @@ lib LibWin32
     enum_property : Proc(IMediaPropertyBag*, UInt32, VARIANT*, VARIANT*, HRESULT)
   end
 
-  IMediaPropertyBag_GUID = LibC::GUID.new("6025a880-c0d5-11d0-bd4e-00a0c911ce86")
-  CLSID_IMediaPropertyBag = "6025a880-c0d5-11d0-bd4e-00a0c911ce86"
+  IMediaPropertyBag_GUID = "6025a880-c0d5-11d0-bd4e-00a0c911ce86"
+  IID_IMediaPropertyBag = LibC::GUID.new(0x6025a880_u32, 0xc0d5_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x4e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
   struct IMediaPropertyBag
     lpVtbl : IMediaPropertyBagVTbl*
   end
@@ -7674,8 +7674,8 @@ lib LibWin32
     save : Proc(IPersistMediaPropertyBag*, IMediaPropertyBag, LibC::BOOL, LibC::BOOL, HRESULT)
   end
 
-  IPersistMediaPropertyBag_GUID = LibC::GUID.new("5738e040-b67f-11d0-bd4d-00a0c911ce86")
-  CLSID_IPersistMediaPropertyBag = "5738e040-b67f-11d0-bd4d-00a0c911ce86"
+  IPersistMediaPropertyBag_GUID = "5738e040-b67f-11d0-bd4d-00a0c911ce86"
+  IID_IPersistMediaPropertyBag = LibC::GUID.new(0x5738e040_u32, 0xb67f_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x4d_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
   struct IPersistMediaPropertyBag
     lpVtbl : IPersistMediaPropertyBagVTbl*
   end
@@ -7687,8 +7687,8 @@ lib LibWin32
     get_physical_type : Proc(IAMPhysicalPinInfo*, Int32*, LibC::LPWSTR*, HRESULT)
   end
 
-  IAMPhysicalPinInfo_GUID = LibC::GUID.new("f938c991-3029-11cf-8c44-00aa006b6814")
-  CLSID_IAMPhysicalPinInfo = "f938c991-3029-11cf-8c44-00aa006b6814"
+  IAMPhysicalPinInfo_GUID = "f938c991-3029-11cf-8c44-00aa006b6814"
+  IID_IAMPhysicalPinInfo = LibC::GUID.new(0xf938c991_u32, 0x3029_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x44_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
   struct IAMPhysicalPinInfo
     lpVtbl : IAMPhysicalPinInfoVTbl*
   end
@@ -7707,8 +7707,8 @@ lib LibWin32
     get_device_port : Proc(IAMExtDevice*, Int32*, HRESULT)
   end
 
-  IAMExtDevice_GUID = LibC::GUID.new("b5730a90-1a2c-11cf-8c23-00aa006b6814")
-  CLSID_IAMExtDevice = "b5730a90-1a2c-11cf-8c23-00aa006b6814"
+  IAMExtDevice_GUID = "b5730a90-1a2c-11cf-8c23-00aa006b6814"
+  IID_IAMExtDevice = LibC::GUID.new(0xb5730a90_u32, 0x1a2c_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x23_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
   struct IAMExtDevice
     lpVtbl : IAMExtDeviceVTbl*
   end
@@ -7747,8 +7747,8 @@ lib LibWin32
     put_edit_start : Proc(IAMExtTransport*, Int32, HRESULT)
   end
 
-  IAMExtTransport_GUID = LibC::GUID.new("a03cd5f0-3045-11cf-8c44-00aa006b6814")
-  CLSID_IAMExtTransport = "a03cd5f0-3045-11cf-8c44-00aa006b6814"
+  IAMExtTransport_GUID = "a03cd5f0-3045-11cf-8c44-00aa006b6814"
+  IID_IAMExtTransport = LibC::GUID.new(0xa03cd5f0_u32, 0x3045_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x44_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
   struct IAMExtTransport
     lpVtbl : IAMExtTransportVTbl*
   end
@@ -7764,8 +7764,8 @@ lib LibWin32
     get_timecode : Proc(IAMTimecodeReader*, TIMECODE_SAMPLE*, HRESULT)
   end
 
-  IAMTimecodeReader_GUID = LibC::GUID.new("9b496ce1-811b-11cf-8c77-00aa006b6814")
-  CLSID_IAMTimecodeReader = "9b496ce1-811b-11cf-8c77-00aa006b6814"
+  IAMTimecodeReader_GUID = "9b496ce1-811b-11cf-8c77-00aa006b6814"
+  IID_IAMTimecodeReader = LibC::GUID.new(0x9b496ce1_u32, 0x811b_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x77_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
   struct IAMTimecodeReader
     lpVtbl : IAMTimecodeReaderVTbl*
   end
@@ -7782,8 +7782,8 @@ lib LibWin32
     get_timecode : Proc(IAMTimecodeGenerator*, TIMECODE_SAMPLE*, HRESULT)
   end
 
-  IAMTimecodeGenerator_GUID = LibC::GUID.new("9b496ce0-811b-11cf-8c77-00aa006b6814")
-  CLSID_IAMTimecodeGenerator = "9b496ce0-811b-11cf-8c77-00aa006b6814"
+  IAMTimecodeGenerator_GUID = "9b496ce0-811b-11cf-8c77-00aa006b6814"
+  IID_IAMTimecodeGenerator = LibC::GUID.new(0x9b496ce0_u32, 0x811b_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x77_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
   struct IAMTimecodeGenerator
     lpVtbl : IAMTimecodeGeneratorVTbl*
   end
@@ -7798,8 +7798,8 @@ lib LibWin32
     set_tc_display : Proc(IAMTimecodeDisplay*, Int32, Int32, HRESULT)
   end
 
-  IAMTimecodeDisplay_GUID = LibC::GUID.new("9b496ce2-811b-11cf-8c77-00aa006b6814")
-  CLSID_IAMTimecodeDisplay = "9b496ce2-811b-11cf-8c77-00aa006b6814"
+  IAMTimecodeDisplay_GUID = "9b496ce2-811b-11cf-8c77-00aa006b6814"
+  IID_IAMTimecodeDisplay = LibC::GUID.new(0x9b496ce2_u32, 0x811b_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x77_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
   struct IAMTimecodeDisplay
     lpVtbl : IAMTimecodeDisplayVTbl*
   end
@@ -7815,8 +7815,8 @@ lib LibWin32
     get_dev_memory_object : Proc(IAMDevMemoryAllocator*, IUnknown*, IUnknown, HRESULT)
   end
 
-  IAMDevMemoryAllocator_GUID = LibC::GUID.new("c6545bf0-e76b-11d0-bd52-00a0c911ce86")
-  CLSID_IAMDevMemoryAllocator = "c6545bf0-e76b-11d0-bd52-00a0c911ce86"
+  IAMDevMemoryAllocator_GUID = "c6545bf0-e76b-11d0-bd52-00a0c911ce86"
+  IID_IAMDevMemoryAllocator = LibC::GUID.new(0xc6545bf0_u32, 0xe76b_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x52_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
   struct IAMDevMemoryAllocator
     lpVtbl : IAMDevMemoryAllocatorVTbl*
   end
@@ -7830,8 +7830,8 @@ lib LibWin32
     get_dev_id : Proc(IAMDevMemoryControl*, UInt32*, HRESULT)
   end
 
-  IAMDevMemoryControl_GUID = LibC::GUID.new("c6545bf1-e76b-11d0-bd52-00a0c911ce86")
-  CLSID_IAMDevMemoryControl = "c6545bf1-e76b-11d0-bd52-00a0c911ce86"
+  IAMDevMemoryControl_GUID = "c6545bf1-e76b-11d0-bd52-00a0c911ce86"
+  IID_IAMDevMemoryControl = LibC::GUID.new(0xc6545bf1_u32, 0xe76b_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x52_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
   struct IAMDevMemoryControl
     lpVtbl : IAMDevMemoryControlVTbl*
   end
@@ -7845,8 +7845,8 @@ lib LibWin32
     enable : Proc(IAMStreamSelect*, Int32, UInt32, HRESULT)
   end
 
-  IAMStreamSelect_GUID = LibC::GUID.new("c1960960-17f5-11d1-abe1-00a0c905f375")
-  CLSID_IAMStreamSelect = "c1960960-17f5-11d1-abe1-00a0c905f375"
+  IAMStreamSelect_GUID = "c1960960-17f5-11d1-abe1-00a0c905f375"
+  IID_IAMStreamSelect = LibC::GUID.new(0xc1960960_u32, 0x17f5_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IAMStreamSelect
     lpVtbl : IAMStreamSelectVTbl*
   end
@@ -7858,8 +7858,8 @@ lib LibWin32
     reserve : Proc(IAMResourceControl*, UInt32, Void*, HRESULT)
   end
 
-  IAMResourceControl_GUID = LibC::GUID.new("8389d2d0-77d7-11d1-abe6-00a0c905f375")
-  CLSID_IAMResourceControl = "8389d2d0-77d7-11d1-abe6-00a0c905f375"
+  IAMResourceControl_GUID = "8389d2d0-77d7-11d1-abe6-00a0c905f375"
+  IID_IAMResourceControl = LibC::GUID.new(0x8389d2d0_u32, 0x77d7_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IAMResourceControl
     lpVtbl : IAMResourceControlVTbl*
   end
@@ -7871,8 +7871,8 @@ lib LibWin32
     set_clock_delta : Proc(IAMClockAdjust*, Int64, HRESULT)
   end
 
-  IAMClockAdjust_GUID = LibC::GUID.new("4d5466b0-a49c-11d1-abe8-00a0c905f375")
-  CLSID_IAMClockAdjust = "4d5466b0-a49c-11d1-abe8-00a0c905f375"
+  IAMClockAdjust_GUID = "4d5466b0-a49c-11d1-abe8-00a0c905f375"
+  IID_IAMClockAdjust = LibC::GUID.new(0x4d5466b0_u32, 0xa49c_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IAMClockAdjust
     lpVtbl : IAMClockAdjustVTbl*
   end
@@ -7884,8 +7884,8 @@ lib LibWin32
     get_misc_flags : Proc(IAMFilterMiscFlags*, UInt32)
   end
 
-  IAMFilterMiscFlags_GUID = LibC::GUID.new("2dd74950-a890-11d1-abe8-00a0c905f375")
-  CLSID_IAMFilterMiscFlags = "2dd74950-a890-11d1-abe8-00a0c905f375"
+  IAMFilterMiscFlags_GUID = "2dd74950-a890-11d1-abe8-00a0c905f375"
+  IID_IAMFilterMiscFlags = LibC::GUID.new(0x2dd74950_u32, 0xa890_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IAMFilterMiscFlags
     lpVtbl : IAMFilterMiscFlagsVTbl*
   end
@@ -7899,8 +7899,8 @@ lib LibWin32
     draw_video_image_draw : Proc(IDrawVideoImage*, HDC, RECT*, RECT*, HRESULT)
   end
 
-  IDrawVideoImage_GUID = LibC::GUID.new("48efb120-ab49-11d2-aed2-00a0c995e8d5")
-  CLSID_IDrawVideoImage = "48efb120-ab49-11d2-aed2-00a0c995e8d5"
+  IDrawVideoImage_GUID = "48efb120-ab49-11d2-aed2-00a0c995e8d5"
+  IID_IDrawVideoImage = LibC::GUID.new(0x48efb120_u32, 0xab49_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xd2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x95_u8, 0xe8_u8, 0xd5_u8])
   struct IDrawVideoImage
     lpVtbl : IDrawVideoImageVTbl*
   end
@@ -7913,8 +7913,8 @@ lib LibWin32
     reset_decimation_image_size : Proc(IDecimateVideoImage*, HRESULT)
   end
 
-  IDecimateVideoImage_GUID = LibC::GUID.new("2e5ea3e0-e924-11d2-b6da-00a0c995e8df")
-  CLSID_IDecimateVideoImage = "2e5ea3e0-e924-11d2-b6da-00a0c995e8df"
+  IDecimateVideoImage_GUID = "2e5ea3e0-e924-11d2-b6da-00a0c995e8df"
+  IID_IDecimateVideoImage = LibC::GUID.new(0x2e5ea3e0_u32, 0xe924_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0xda_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x95_u8, 0xe8_u8, 0xdf_u8])
   struct IDecimateVideoImage
     lpVtbl : IDecimateVideoImageVTbl*
   end
@@ -7927,8 +7927,8 @@ lib LibWin32
     set_decimation_usage : Proc(IAMVideoDecimationProperties*, DECIMATION_USAGE, HRESULT)
   end
 
-  IAMVideoDecimationProperties_GUID = LibC::GUID.new("60d32930-13da-11d3-9ec6-c4fcaef5c7be")
-  CLSID_IAMVideoDecimationProperties = "60d32930-13da-11d3-9ec6-c4fcaef5c7be"
+  IAMVideoDecimationProperties_GUID = "60d32930-13da-11d3-9ec6-c4fcaef5c7be"
+  IID_IAMVideoDecimationProperties = LibC::GUID.new(0x60d32930_u32, 0x13da_u16, 0x11d3_u16, StaticArray[0x9e_u8, 0xc6_u8, 0xc4_u8, 0xfc_u8, 0xae_u8, 0xf5_u8, 0xc7_u8, 0xbe_u8])
   struct IAMVideoDecimationProperties
     lpVtbl : IAMVideoDecimationPropertiesVTbl*
   end
@@ -7942,8 +7942,8 @@ lib LibWin32
     cancel_step : Proc(IVideoFrameStep*, HRESULT)
   end
 
-  IVideoFrameStep_GUID = LibC::GUID.new("e46a9787-2b71-444d-a4b5-1fab7b708d6a")
-  CLSID_IVideoFrameStep = "e46a9787-2b71-444d-a4b5-1fab7b708d6a"
+  IVideoFrameStep_GUID = "e46a9787-2b71-444d-a4b5-1fab7b708d6a"
+  IID_IVideoFrameStep = LibC::GUID.new(0xe46a9787_u32, 0x2b71_u16, 0x444d_u16, StaticArray[0xa4_u8, 0xb5_u8, 0x1f_u8, 0xab_u8, 0x7b_u8, 0x70_u8, 0x8d_u8, 0x6a_u8])
   struct IVideoFrameStep
     lpVtbl : IVideoFrameStepVTbl*
   end
@@ -7955,8 +7955,8 @@ lib LibWin32
     get_latency : Proc(IAMLatency*, Int64*, HRESULT)
   end
 
-  IAMLatency_GUID = LibC::GUID.new("62ea93ba-ec62-11d2-b770-00c04fb6bd3d")
-  CLSID_IAMLatency = "62ea93ba-ec62-11d2-b770-00c04fb6bd3d"
+  IAMLatency_GUID = "62ea93ba-ec62-11d2-b770-00c04fb6bd3d"
+  IID_IAMLatency = LibC::GUID.new(0x62ea93ba_u32, 0xec62_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbd_u8, 0x3d_u8])
   struct IAMLatency
     lpVtbl : IAMLatencyVTbl*
   end
@@ -7974,8 +7974,8 @@ lib LibWin32
     set_max_stream_offset : Proc(IAMPushSource*, Int64, HRESULT)
   end
 
-  IAMPushSource_GUID = LibC::GUID.new("f185fe76-e64e-11d2-b76e-00c04fb6bd3d")
-  CLSID_IAMPushSource = "f185fe76-e64e-11d2-b76e-00c04fb6bd3d"
+  IAMPushSource_GUID = "f185fe76-e64e-11d2-b76e-00c04fb6bd3d"
+  IID_IAMPushSource = LibC::GUID.new(0xf185fe76_u32, 0xe64e_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbd_u8, 0x3d_u8])
   struct IAMPushSource
     lpVtbl : IAMPushSourceVTbl*
   end
@@ -7989,8 +7989,8 @@ lib LibWin32
     disassociate : Proc(IAMDeviceRemoval*, HRESULT)
   end
 
-  IAMDeviceRemoval_GUID = LibC::GUID.new("f90a6130-b658-11d2-ae49-0000f8754b99")
-  CLSID_IAMDeviceRemoval = "f90a6130-b658-11d2-ae49-0000f8754b99"
+  IAMDeviceRemoval_GUID = "f90a6130-b658-11d2-ae49-0000f8754b99"
+  IID_IAMDeviceRemoval = LibC::GUID.new(0xf90a6130_u32, 0xb658_u16, 0x11d2_u16, StaticArray[0xae_u8, 0x49_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x4b_u8, 0x99_u8])
   struct IAMDeviceRemoval
     lpVtbl : IAMDeviceRemovalVTbl*
   end
@@ -8003,8 +8003,8 @@ lib LibWin32
     put_i_format_resolution : Proc(IDVEnc*, Int32, Int32, Int32, UInt8, DVINFO*, HRESULT)
   end
 
-  IDVEnc_GUID = LibC::GUID.new("d18e17a0-aacb-11d0-afb0-00aa00b67a42")
-  CLSID_IDVEnc = "d18e17a0-aacb-11d0-afb0-00aa00b67a42"
+  IDVEnc_GUID = "d18e17a0-aacb-11d0-afb0-00aa00b67a42"
+  IID_IDVEnc = LibC::GUID.new(0xd18e17a0_u32, 0xaacb_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0xb0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb6_u8, 0x7a_u8, 0x42_u8])
   struct IDVEnc
     lpVtbl : IDVEncVTbl*
   end
@@ -8017,8 +8017,8 @@ lib LibWin32
     put_ip_display : Proc(IIPDVDec*, Int32, HRESULT)
   end
 
-  IIPDVDec_GUID = LibC::GUID.new("b8e8bd60-0bfe-11d0-af91-00aa00b67a42")
-  CLSID_IIPDVDec = "b8e8bd60-0bfe-11d0-af91-00aa00b67a42"
+  IIPDVDec_GUID = "b8e8bd60-0bfe-11d0-af91-00aa00b67a42"
+  IID_IIPDVDec = LibC::GUID.new(0xb8e8bd60_u32, 0xbfe_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x91_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb6_u8, 0x7a_u8, 0x42_u8])
   struct IIPDVDec
     lpVtbl : IIPDVDecVTbl*
   end
@@ -8030,8 +8030,8 @@ lib LibWin32
     set_rgb219 : Proc(IDVRGB219*, LibC::BOOL, HRESULT)
   end
 
-  IDVRGB219_GUID = LibC::GUID.new("58473a19-2bc8-4663-8012-25f81babddd1")
-  CLSID_IDVRGB219 = "58473a19-2bc8-4663-8012-25f81babddd1"
+  IDVRGB219_GUID = "58473a19-2bc8-4663-8012-25f81babddd1"
+  IID_IDVRGB219 = LibC::GUID.new(0x58473a19_u32, 0x2bc8_u16, 0x4663_u16, StaticArray[0x80_u8, 0x12_u8, 0x25_u8, 0xf8_u8, 0x1b_u8, 0xab_u8, 0xdd_u8, 0xd1_u8])
   struct IDVRGB219
     lpVtbl : IDVRGB219VTbl*
   end
@@ -8043,8 +8043,8 @@ lib LibWin32
     discard_alternate_video_frames : Proc(IDVSplitter*, Int32, HRESULT)
   end
 
-  IDVSplitter_GUID = LibC::GUID.new("92a3a302-da7c-4a1f-ba7e-1802bb5d2d02")
-  CLSID_IDVSplitter = "92a3a302-da7c-4a1f-ba7e-1802bb5d2d02"
+  IDVSplitter_GUID = "92a3a302-da7c-4a1f-ba7e-1802bb5d2d02"
+  IID_IDVSplitter = LibC::GUID.new(0x92a3a302_u32, 0xda7c_u16, 0x4a1f_u16, StaticArray[0xba_u8, 0x7e_u8, 0x18_u8, 0x2_u8, 0xbb_u8, 0x5d_u8, 0x2d_u8, 0x2_u8])
   struct IDVSplitter
     lpVtbl : IDVSplitterVTbl*
   end
@@ -8056,8 +8056,8 @@ lib LibWin32
     get_stat_param : Proc(IAMAudioRendererStats*, UInt32, UInt32*, UInt32*, HRESULT)
   end
 
-  IAMAudioRendererStats_GUID = LibC::GUID.new("22320cb2-d41a-11d2-bf7c-d7cb9df0bf93")
-  CLSID_IAMAudioRendererStats = "22320cb2-d41a-11d2-bf7c-d7cb9df0bf93"
+  IAMAudioRendererStats_GUID = "22320cb2-d41a-11d2-bf7c-d7cb9df0bf93"
+  IID_IAMAudioRendererStats = LibC::GUID.new(0x22320cb2_u32, 0xd41a_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x7c_u8, 0xd7_u8, 0xcb_u8, 0x9d_u8, 0xf0_u8, 0xbf_u8, 0x93_u8])
   struct IAMAudioRendererStats
     lpVtbl : IAMAudioRendererStatsVTbl*
   end
@@ -8071,8 +8071,8 @@ lib LibWin32
     set_max_graph_latency : Proc(IAMGraphStreams*, Int64, HRESULT)
   end
 
-  IAMGraphStreams_GUID = LibC::GUID.new("632105fa-072e-11d3-8af9-00c04fb6bd3d")
-  CLSID_IAMGraphStreams = "632105fa-072e-11d3-8af9-00c04fb6bd3d"
+  IAMGraphStreams_GUID = "632105fa-072e-11d3-8af9-00c04fb6bd3d"
+  IID_IAMGraphStreams = LibC::GUID.new(0x632105fa_u32, 0x72e_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0xf9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbd_u8, 0x3d_u8])
   struct IAMGraphStreams
     lpVtbl : IAMGraphStreamsVTbl*
   end
@@ -8086,8 +8086,8 @@ lib LibWin32
     get_overlay_fx : Proc(IAMOverlayFX*, UInt32*, HRESULT)
   end
 
-  IAMOverlayFX_GUID = LibC::GUID.new("62fae250-7e65-4460-bfc9-6398b322073c")
-  CLSID_IAMOverlayFX = "62fae250-7e65-4460-bfc9-6398b322073c"
+  IAMOverlayFX_GUID = "62fae250-7e65-4460-bfc9-6398b322073c"
+  IID_IAMOverlayFX = LibC::GUID.new(0x62fae250_u32, 0x7e65_u16, 0x4460_u16, StaticArray[0xbf_u8, 0xc9_u8, 0x63_u8, 0x98_u8, 0xb3_u8, 0x22_u8, 0x7_u8, 0x3c_u8])
   struct IAMOverlayFX
     lpVtbl : IAMOverlayFXVTbl*
   end
@@ -8100,8 +8100,8 @@ lib LibWin32
     abort_operation : Proc(IAMOpenProgress*, HRESULT)
   end
 
-  IAMOpenProgress_GUID = LibC::GUID.new("8e1c39a1-de53-11cf-aa63-0080c744528d")
-  CLSID_IAMOpenProgress = "8e1c39a1-de53-11cf-aa63-0080c744528d"
+  IAMOpenProgress_GUID = "8e1c39a1-de53-11cf-aa63-0080c744528d"
+  IID_IAMOpenProgress = LibC::GUID.new(0x8e1c39a1_u32, 0xde53_u16, 0x11cf_u16, StaticArray[0xaa_u8, 0x63_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x44_u8, 0x52_u8, 0x8d_u8])
   struct IAMOpenProgress
     lpVtbl : IAMOpenProgressVTbl*
   end
@@ -8115,8 +8115,8 @@ lib LibWin32
     delete_output_pin : Proc(IMpeg2Demultiplexer*, LibC::LPWSTR, HRESULT)
   end
 
-  IMpeg2Demultiplexer_GUID = LibC::GUID.new("436eee9c-264f-4242-90e1-4e330c107512")
-  CLSID_IMpeg2Demultiplexer = "436eee9c-264f-4242-90e1-4e330c107512"
+  IMpeg2Demultiplexer_GUID = "436eee9c-264f-4242-90e1-4e330c107512"
+  IID_IMpeg2Demultiplexer = LibC::GUID.new(0x436eee9c_u32, 0x264f_u16, 0x4242_u16, StaticArray[0x90_u8, 0xe1_u8, 0x4e_u8, 0x33_u8, 0xc_u8, 0x10_u8, 0x75_u8, 0x12_u8])
   struct IMpeg2Demultiplexer
     lpVtbl : IMpeg2DemultiplexerVTbl*
   end
@@ -8131,8 +8131,8 @@ lib LibWin32
     clone : Proc(IEnumStreamIdMap*, IEnumStreamIdMap*, HRESULT)
   end
 
-  IEnumStreamIdMap_GUID = LibC::GUID.new("945c1566-6202-46fc-96c7-d87f289c6534")
-  CLSID_IEnumStreamIdMap = "945c1566-6202-46fc-96c7-d87f289c6534"
+  IEnumStreamIdMap_GUID = "945c1566-6202-46fc-96c7-d87f289c6534"
+  IID_IEnumStreamIdMap = LibC::GUID.new(0x945c1566_u32, 0x6202_u16, 0x46fc_u16, StaticArray[0x96_u8, 0xc7_u8, 0xd8_u8, 0x7f_u8, 0x28_u8, 0x9c_u8, 0x65_u8, 0x34_u8])
   struct IEnumStreamIdMap
     lpVtbl : IEnumStreamIdMapVTbl*
   end
@@ -8146,8 +8146,8 @@ lib LibWin32
     enum_stream_id_map : Proc(IMPEG2StreamIdMap*, IEnumStreamIdMap*, HRESULT)
   end
 
-  IMPEG2StreamIdMap_GUID = LibC::GUID.new("d0e04c47-25b8-4369-925a-362a01d95444")
-  CLSID_IMPEG2StreamIdMap = "d0e04c47-25b8-4369-925a-362a01d95444"
+  IMPEG2StreamIdMap_GUID = "d0e04c47-25b8-4369-925a-362a01d95444"
+  IID_IMPEG2StreamIdMap = LibC::GUID.new(0xd0e04c47_u32, 0x25b8_u16, 0x4369_u16, StaticArray[0x92_u8, 0x5a_u8, 0x36_u8, 0x2a_u8, 0x1_u8, 0xd9_u8, 0x54_u8, 0x44_u8])
   struct IMPEG2StreamIdMap
     lpVtbl : IMPEG2StreamIdMapVTbl*
   end
@@ -8159,8 +8159,8 @@ lib LibWin32
     register_service : Proc(IRegisterServiceProvider*, Guid*, IUnknown, HRESULT)
   end
 
-  IRegisterServiceProvider_GUID = LibC::GUID.new("7b3a2f01-0751-48dd-b556-004785171c54")
-  CLSID_IRegisterServiceProvider = "7b3a2f01-0751-48dd-b556-004785171c54"
+  IRegisterServiceProvider_GUID = "7b3a2f01-0751-48dd-b556-004785171c54"
+  IID_IRegisterServiceProvider = LibC::GUID.new(0x7b3a2f01_u32, 0x751_u16, 0x48dd_u16, StaticArray[0xb5_u8, 0x56_u8, 0x0_u8, 0x47_u8, 0x85_u8, 0x17_u8, 0x1c_u8, 0x54_u8])
   struct IRegisterServiceProvider
     lpVtbl : IRegisterServiceProviderVTbl*
   end
@@ -8173,8 +8173,8 @@ lib LibWin32
     get_error_tolerance : Proc(IAMClockSlave*, UInt32*, HRESULT)
   end
 
-  IAMClockSlave_GUID = LibC::GUID.new("9fd52741-176d-4b36-8f51-ca8f933223be")
-  CLSID_IAMClockSlave = "9fd52741-176d-4b36-8f51-ca8f933223be"
+  IAMClockSlave_GUID = "9fd52741-176d-4b36-8f51-ca8f933223be"
+  IID_IAMClockSlave = LibC::GUID.new(0x9fd52741_u32, 0x176d_u16, 0x4b36_u16, StaticArray[0x8f_u8, 0x51_u8, 0xca_u8, 0x8f_u8, 0x93_u8, 0x32_u8, 0x23_u8, 0xbe_u8])
   struct IAMClockSlave
     lpVtbl : IAMClockSlaveVTbl*
   end
@@ -8187,8 +8187,8 @@ lib LibWin32
     created_filter : Proc(IAMGraphBuilderCallback*, IBaseFilter, HRESULT)
   end
 
-  IAMGraphBuilderCallback_GUID = LibC::GUID.new("4995f511-9ddb-4f12-bd3b-f04611807b79")
-  CLSID_IAMGraphBuilderCallback = "4995f511-9ddb-4f12-bd3b-f04611807b79"
+  IAMGraphBuilderCallback_GUID = "4995f511-9ddb-4f12-bd3b-f04611807b79"
+  IID_IAMGraphBuilderCallback = LibC::GUID.new(0x4995f511_u32, 0x9ddb_u16, 0x4f12_u16, StaticArray[0xbd_u8, 0x3b_u8, 0xf0_u8, 0x46_u8, 0x11_u8, 0x80_u8, 0x7b_u8, 0x79_u8])
   struct IAMGraphBuilderCallback
     lpVtbl : IAMGraphBuilderCallbackVTbl*
   end
@@ -8200,8 +8200,8 @@ lib LibWin32
     unable_to_render : Proc(IAMFilterGraphCallback*, IPin, HRESULT)
   end
 
-  IAMFilterGraphCallback_GUID = LibC::GUID.new("56a868fd-0ad4-11ce-b0a3-0020af0ba770")
-  CLSID_IAMFilterGraphCallback = "56a868fd-0ad4-11ce-b0a3-0020af0ba770"
+  IAMFilterGraphCallback_GUID = "56a868fd-0ad4-11ce-b0a3-0020af0ba770"
+  IID_IAMFilterGraphCallback = LibC::GUID.new(0x56a868fd_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0xa3_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IAMFilterGraphCallback
     lpVtbl : IAMFilterGraphCallbackVTbl*
   end
@@ -8213,8 +8213,8 @@ lib LibWin32
     get_capabilities_key : Proc(IGetCapabilitiesKey*, HKEY*, HRESULT)
   end
 
-  IGetCapabilitiesKey_GUID = LibC::GUID.new("a8809222-07bb-48ea-951c-33158100625b")
-  CLSID_IGetCapabilitiesKey = "a8809222-07bb-48ea-951c-33158100625b"
+  IGetCapabilitiesKey_GUID = "a8809222-07bb-48ea-951c-33158100625b"
+  IID_IGetCapabilitiesKey = LibC::GUID.new(0xa8809222_u32, 0x7bb_u16, 0x48ea_u16, StaticArray[0x95_u8, 0x1c_u8, 0x33_u8, 0x15_u8, 0x81_u8, 0x0_u8, 0x62_u8, 0x5b_u8])
   struct IGetCapabilitiesKey
     lpVtbl : IGetCapabilitiesKeyVTbl*
   end
@@ -8232,8 +8232,8 @@ lib LibWin32
     set_value : Proc(IEncoderAPI*, Guid*, VARIANT*, HRESULT)
   end
 
-  IEncoderAPI_GUID = LibC::GUID.new("70423839-6acc-4b23-b079-21dbf08156a5")
-  CLSID_IEncoderAPI = "70423839-6acc-4b23-b079-21dbf08156a5"
+  IEncoderAPI_GUID = "70423839-6acc-4b23-b079-21dbf08156a5"
+  IID_IEncoderAPI = LibC::GUID.new(0x70423839_u32, 0x6acc_u16, 0x4b23_u16, StaticArray[0xb0_u8, 0x79_u8, 0x21_u8, 0xdb_u8, 0xf0_u8, 0x81_u8, 0x56_u8, 0xa5_u8])
   struct IEncoderAPI
     lpVtbl : IEncoderAPIVTbl*
   end
@@ -8251,8 +8251,8 @@ lib LibWin32
     set_value : Proc(IVideoEncoder*, Guid*, VARIANT*, HRESULT)
   end
 
-  IVideoEncoder_GUID = LibC::GUID.new("02997c3b-8e1b-460e-9270-545e0de9563e")
-  CLSID_IVideoEncoder = "02997c3b-8e1b-460e-9270-545e0de9563e"
+  IVideoEncoder_GUID = "02997c3b-8e1b-460e-9270-545e0de9563e"
+  IID_IVideoEncoder = LibC::GUID.new(0x2997c3b_u32, 0x8e1b_u16, 0x460e_u16, StaticArray[0x92_u8, 0x70_u8, 0x54_u8, 0x5e_u8, 0xd_u8, 0xe9_u8, 0x56_u8, 0x3e_u8])
   struct IVideoEncoder
     lpVtbl : IVideoEncoderVTbl*
   end
@@ -8264,8 +8264,8 @@ lib LibWin32
     get_decoder_caps : Proc(IAMDecoderCaps*, UInt32, UInt32*, HRESULT)
   end
 
-  IAMDecoderCaps_GUID = LibC::GUID.new("c0dff467-d499-4986-972b-e1d9090fa941")
-  CLSID_IAMDecoderCaps = "c0dff467-d499-4986-972b-e1d9090fa941"
+  IAMDecoderCaps_GUID = "c0dff467-d499-4986-972b-e1d9090fa941"
+  IID_IAMDecoderCaps = LibC::GUID.new(0xc0dff467_u32, 0xd499_u16, 0x4986_u16, StaticArray[0x97_u8, 0x2b_u8, 0xe1_u8, 0xd9_u8, 0x9_u8, 0xf_u8, 0xa9_u8, 0x41_u8])
   struct IAMDecoderCaps
     lpVtbl : IAMDecoderCapsVTbl*
   end
@@ -8280,8 +8280,8 @@ lib LibWin32
     protection_status : Proc(IAMCertifiedOutputProtection*, AMCOPPStatusInput*, AMCOPPStatusOutput*, HRESULT)
   end
 
-  IAMCertifiedOutputProtection_GUID = LibC::GUID.new("6feded3e-0ff1-4901-a2f1-43f7012c8515")
-  CLSID_IAMCertifiedOutputProtection = "6feded3e-0ff1-4901-a2f1-43f7012c8515"
+  IAMCertifiedOutputProtection_GUID = "6feded3e-0ff1-4901-a2f1-43f7012c8515"
+  IID_IAMCertifiedOutputProtection = LibC::GUID.new(0x6feded3e_u32, 0xff1_u16, 0x4901_u16, StaticArray[0xa2_u8, 0xf1_u8, 0x43_u8, 0xf7_u8, 0x1_u8, 0x2c_u8, 0x85_u8, 0x15_u8])
   struct IAMCertifiedOutputProtection
     lpVtbl : IAMCertifiedOutputProtectionVTbl*
   end
@@ -8294,8 +8294,8 @@ lib LibWin32
     set_timestamp_mode : Proc(IAMAsyncReaderTimestampScaling*, LibC::BOOL, HRESULT)
   end
 
-  IAMAsyncReaderTimestampScaling_GUID = LibC::GUID.new("cf7b26fc-9a00-485b-8147-3e789d5e8f67")
-  CLSID_IAMAsyncReaderTimestampScaling = "cf7b26fc-9a00-485b-8147-3e789d5e8f67"
+  IAMAsyncReaderTimestampScaling_GUID = "cf7b26fc-9a00-485b-8147-3e789d5e8f67"
+  IID_IAMAsyncReaderTimestampScaling = LibC::GUID.new(0xcf7b26fc_u32, 0x9a00_u16, 0x485b_u16, StaticArray[0x81_u8, 0x47_u8, 0x3e_u8, 0x78_u8, 0x9d_u8, 0x5e_u8, 0x8f_u8, 0x67_u8])
   struct IAMAsyncReaderTimestampScaling
     lpVtbl : IAMAsyncReaderTimestampScalingVTbl*
   end
@@ -8313,8 +8313,8 @@ lib LibWin32
     is_legacy_disabled : Proc(IAMPluginControl*, LibC::LPWSTR, HRESULT)
   end
 
-  IAMPluginControl_GUID = LibC::GUID.new("0e26a181-f40c-4635-8786-976284b52981")
-  CLSID_IAMPluginControl = "0e26a181-f40c-4635-8786-976284b52981"
+  IAMPluginControl_GUID = "0e26a181-f40c-4635-8786-976284b52981"
+  IID_IAMPluginControl = LibC::GUID.new(0xe26a181_u32, 0xf40c_u16, 0x4635_u16, StaticArray[0x87_u8, 0x86_u8, 0x97_u8, 0x62_u8, 0x84_u8, 0xb5_u8, 0x29_u8, 0x81_u8])
   struct IAMPluginControl
     lpVtbl : IAMPluginControlVTbl*
   end
@@ -8329,8 +8329,8 @@ lib LibWin32
     dynamic_disconnect : Proc(IPinConnection*, HRESULT)
   end
 
-  IPinConnection_GUID = LibC::GUID.new("4a9a62d3-27d4-403d-91e9-89f540e55534")
-  CLSID_IPinConnection = "4a9a62d3-27d4-403d-91e9-89f540e55534"
+  IPinConnection_GUID = "4a9a62d3-27d4-403d-91e9-89f540e55534"
+  IID_IPinConnection = LibC::GUID.new(0x4a9a62d3_u32, 0x27d4_u16, 0x403d_u16, StaticArray[0x91_u8, 0xe9_u8, 0x89_u8, 0xf5_u8, 0x40_u8, 0xe5_u8, 0x55_u8, 0x34_u8])
   struct IPinConnection
     lpVtbl : IPinConnectionVTbl*
   end
@@ -8342,8 +8342,8 @@ lib LibWin32
     block : Proc(IPinFlowControl*, UInt32, LibC::HANDLE, HRESULT)
   end
 
-  IPinFlowControl_GUID = LibC::GUID.new("c56e9858-dbf3-4f6b-8119-384af2060deb")
-  CLSID_IPinFlowControl = "c56e9858-dbf3-4f6b-8119-384af2060deb"
+  IPinFlowControl_GUID = "c56e9858-dbf3-4f6b-8119-384af2060deb"
+  IID_IPinFlowControl = LibC::GUID.new(0xc56e9858_u32, 0xdbf3_u16, 0x4f6b_u16, StaticArray[0x81_u8, 0x19_u8, 0x38_u8, 0x4a_u8, 0xf2_u8, 0x6_u8, 0xd_u8, 0xeb_u8])
   struct IPinFlowControl
     lpVtbl : IPinFlowControlVTbl*
   end
@@ -8364,8 +8364,8 @@ lib LibWin32
     remove_filter_ex : Proc(IGraphConfig*, IBaseFilter, UInt32, HRESULT)
   end
 
-  IGraphConfig_GUID = LibC::GUID.new("03a1eb8e-32bf-4245-8502-114d08a9cb88")
-  CLSID_IGraphConfig = "03a1eb8e-32bf-4245-8502-114d08a9cb88"
+  IGraphConfig_GUID = "03a1eb8e-32bf-4245-8502-114d08a9cb88"
+  IID_IGraphConfig = LibC::GUID.new(0x3a1eb8e_u32, 0x32bf_u16, 0x4245_u16, StaticArray[0x85_u8, 0x2_u8, 0x11_u8, 0x4d_u8, 0x8_u8, 0xa9_u8, 0xcb_u8, 0x88_u8])
   struct IGraphConfig
     lpVtbl : IGraphConfigVTbl*
   end
@@ -8377,8 +8377,8 @@ lib LibWin32
     reconfigure : Proc(IGraphConfigCallback*, Void*, UInt32, HRESULT)
   end
 
-  IGraphConfigCallback_GUID = LibC::GUID.new("ade0fd60-d19d-11d2-abf6-00a0c905f375")
-  CLSID_IGraphConfigCallback = "ade0fd60-d19d-11d2-abf6-00a0c905f375"
+  IGraphConfigCallback_GUID = "ade0fd60-d19d-11d2-abf6-00a0c905f375"
+  IID_IGraphConfigCallback = LibC::GUID.new(0xade0fd60_u32, 0xd19d_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xf6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IGraphConfigCallback
     lpVtbl : IGraphConfigCallbackVTbl*
   end
@@ -8393,8 +8393,8 @@ lib LibWin32
     remove_chain : Proc(IFilterChain*, IBaseFilter, IBaseFilter, HRESULT)
   end
 
-  IFilterChain_GUID = LibC::GUID.new("dcfbdcf6-0dc2-45f5-9ab2-7c330ea09c29")
-  CLSID_IFilterChain = "dcfbdcf6-0dc2-45f5-9ab2-7c330ea09c29"
+  IFilterChain_GUID = "dcfbdcf6-0dc2-45f5-9ab2-7c330ea09c29"
+  IID_IFilterChain = LibC::GUID.new(0xdcfbdcf6_u32, 0xdc2_u16, 0x45f5_u16, StaticArray[0x9a_u8, 0xb2_u8, 0x7c_u8, 0x33_u8, 0xe_u8, 0xa0_u8, 0x9c_u8, 0x29_u8])
   struct IFilterChain
     lpVtbl : IFilterChainVTbl*
   end
@@ -8408,8 +8408,8 @@ lib LibWin32
     present_image : Proc(IVMRImagePresenter*, LibC::UINT_PTR, VMRPRESENTATIONINFO*, HRESULT)
   end
 
-  IVMRImagePresenter_GUID = LibC::GUID.new("ce704fe7-e71e-41fb-baa2-c4403e1182f5")
-  CLSID_IVMRImagePresenter = "ce704fe7-e71e-41fb-baa2-c4403e1182f5"
+  IVMRImagePresenter_GUID = "ce704fe7-e71e-41fb-baa2-c4403e1182f5"
+  IID_IVMRImagePresenter = LibC::GUID.new(0xce704fe7_u32, 0xe71e_u16, 0x41fb_u16, StaticArray[0xba_u8, 0xa2_u8, 0xc4_u8, 0x40_u8, 0x3e_u8, 0x11_u8, 0x82_u8, 0xf5_u8])
   struct IVMRImagePresenter
     lpVtbl : IVMRImagePresenterVTbl*
   end
@@ -8424,8 +8424,8 @@ lib LibWin32
     advise_notify : Proc(IVMRSurfaceAllocator*, IVMRSurfaceAllocatorNotify, HRESULT)
   end
 
-  IVMRSurfaceAllocator_GUID = LibC::GUID.new("31ce832e-4484-458b-8cca-f4d7e3db0b52")
-  CLSID_IVMRSurfaceAllocator = "31ce832e-4484-458b-8cca-f4d7e3db0b52"
+  IVMRSurfaceAllocator_GUID = "31ce832e-4484-458b-8cca-f4d7e3db0b52"
+  IID_IVMRSurfaceAllocator = LibC::GUID.new(0x31ce832e_u32, 0x4484_u16, 0x458b_u16, StaticArray[0x8c_u8, 0xca_u8, 0xf4_u8, 0xd7_u8, 0xe3_u8, 0xdb_u8, 0xb_u8, 0x52_u8])
   struct IVMRSurfaceAllocator
     lpVtbl : IVMRSurfaceAllocatorVTbl*
   end
@@ -8442,8 +8442,8 @@ lib LibWin32
     set_border_color : Proc(IVMRSurfaceAllocatorNotify*, UInt32, HRESULT)
   end
 
-  IVMRSurfaceAllocatorNotify_GUID = LibC::GUID.new("aada05a8-5a4e-4729-af0b-cea27aed51e2")
-  CLSID_IVMRSurfaceAllocatorNotify = "aada05a8-5a4e-4729-af0b-cea27aed51e2"
+  IVMRSurfaceAllocatorNotify_GUID = "aada05a8-5a4e-4729-af0b-cea27aed51e2"
+  IID_IVMRSurfaceAllocatorNotify = LibC::GUID.new(0xaada05a8_u32, 0x5a4e_u16, 0x4729_u16, StaticArray[0xaf_u8, 0xb_u8, 0xce_u8, 0xa2_u8, 0x7a_u8, 0xed_u8, 0x51_u8, 0xe2_u8])
   struct IVMRSurfaceAllocatorNotify
     lpVtbl : IVMRSurfaceAllocatorNotifyVTbl*
   end
@@ -8469,8 +8469,8 @@ lib LibWin32
     get_color_key : Proc(IVMRWindowlessControl*, UInt32*, HRESULT)
   end
 
-  IVMRWindowlessControl_GUID = LibC::GUID.new("0eb1088c-4dcd-46f0-878f-39dae86a51b7")
-  CLSID_IVMRWindowlessControl = "0eb1088c-4dcd-46f0-878f-39dae86a51b7"
+  IVMRWindowlessControl_GUID = "0eb1088c-4dcd-46f0-878f-39dae86a51b7"
+  IID_IVMRWindowlessControl = LibC::GUID.new(0xeb1088c_u32, 0x4dcd_u16, 0x46f0_u16, StaticArray[0x87_u8, 0x8f_u8, 0x39_u8, 0xda_u8, 0xe8_u8, 0x6a_u8, 0x51_u8, 0xb7_u8])
   struct IVMRWindowlessControl
     lpVtbl : IVMRWindowlessControlVTbl*
   end
@@ -8491,8 +8491,8 @@ lib LibWin32
     get_mixing_prefs : Proc(IVMRMixerControl*, UInt32*, HRESULT)
   end
 
-  IVMRMixerControl_GUID = LibC::GUID.new("1c1a17b0-bed0-415d-974b-dc6696131599")
-  CLSID_IVMRMixerControl = "1c1a17b0-bed0-415d-974b-dc6696131599"
+  IVMRMixerControl_GUID = "1c1a17b0-bed0-415d-974b-dc6696131599"
+  IID_IVMRMixerControl = LibC::GUID.new(0x1c1a17b0_u32, 0xbed0_u16, 0x415d_u16, StaticArray[0x97_u8, 0x4b_u8, 0xdc_u8, 0x66_u8, 0x96_u8, 0x13_u8, 0x15_u8, 0x99_u8])
   struct IVMRMixerControl
     lpVtbl : IVMRMixerControlVTbl*
   end
@@ -8508,8 +8508,8 @@ lib LibWin32
     get_available_monitors : Proc(IVMRMonitorConfig*, VMRMONITORINFO*, UInt32, UInt32*, HRESULT)
   end
 
-  IVMRMonitorConfig_GUID = LibC::GUID.new("9cf0b1b6-fbaa-4b7f-88cf-cf1f130a0dce")
-  CLSID_IVMRMonitorConfig = "9cf0b1b6-fbaa-4b7f-88cf-cf1f130a0dce"
+  IVMRMonitorConfig_GUID = "9cf0b1b6-fbaa-4b7f-88cf-cf1f130a0dce"
+  IID_IVMRMonitorConfig = LibC::GUID.new(0x9cf0b1b6_u32, 0xfbaa_u16, 0x4b7f_u16, StaticArray[0x88_u8, 0xcf_u8, 0xcf_u8, 0x1f_u8, 0x13_u8, 0xa_u8, 0xd_u8, 0xce_u8])
   struct IVMRMonitorConfig
     lpVtbl : IVMRMonitorConfigVTbl*
   end
@@ -8527,8 +8527,8 @@ lib LibWin32
     get_rendering_mode : Proc(IVMRFilterConfig*, UInt32*, HRESULT)
   end
 
-  IVMRFilterConfig_GUID = LibC::GUID.new("9e5530c5-7034-48b4-bb46-0b8a6efc8e36")
-  CLSID_IVMRFilterConfig = "9e5530c5-7034-48b4-bb46-0b8a6efc8e36"
+  IVMRFilterConfig_GUID = "9e5530c5-7034-48b4-bb46-0b8a6efc8e36"
+  IID_IVMRFilterConfig = LibC::GUID.new(0x9e5530c5_u32, 0x7034_u16, 0x48b4_u16, StaticArray[0xbb_u8, 0x46_u8, 0xb_u8, 0x8a_u8, 0x6e_u8, 0xfc_u8, 0x8e_u8, 0x36_u8])
   struct IVMRFilterConfig
     lpVtbl : IVMRFilterConfigVTbl*
   end
@@ -8541,8 +8541,8 @@ lib LibWin32
     set_aspect_ratio_mode : Proc(IVMRAspectRatioControl*, UInt32, HRESULT)
   end
 
-  IVMRAspectRatioControl_GUID = LibC::GUID.new("ede80b5c-bad6-4623-b537-65586c9f8dfd")
-  CLSID_IVMRAspectRatioControl = "ede80b5c-bad6-4623-b537-65586c9f8dfd"
+  IVMRAspectRatioControl_GUID = "ede80b5c-bad6-4623-b537-65586c9f8dfd"
+  IID_IVMRAspectRatioControl = LibC::GUID.new(0xede80b5c_u32, 0xbad6_u16, 0x4623_u16, StaticArray[0xb5_u8, 0x37_u8, 0x65_u8, 0x58_u8, 0x6c_u8, 0x9f_u8, 0x8d_u8, 0xfd_u8])
   struct IVMRAspectRatioControl
     lpVtbl : IVMRAspectRatioControlVTbl*
   end
@@ -8560,8 +8560,8 @@ lib LibWin32
     get_actual_deinterlace_mode : Proc(IVMRDeinterlaceControl*, UInt32, Guid*, HRESULT)
   end
 
-  IVMRDeinterlaceControl_GUID = LibC::GUID.new("bb057577-0db8-4e6a-87a7-1a8c9a505a0f")
-  CLSID_IVMRDeinterlaceControl = "bb057577-0db8-4e6a-87a7-1a8c9a505a0f"
+  IVMRDeinterlaceControl_GUID = "bb057577-0db8-4e6a-87a7-1a8c9a505a0f"
+  IID_IVMRDeinterlaceControl = LibC::GUID.new(0xbb057577_u32, 0xdb8_u16, 0x4e6a_u16, StaticArray[0x87_u8, 0xa7_u8, 0x1a_u8, 0x8c_u8, 0x9a_u8, 0x50_u8, 0x5a_u8, 0xf_u8])
   struct IVMRDeinterlaceControl
     lpVtbl : IVMRDeinterlaceControlVTbl*
   end
@@ -8575,8 +8575,8 @@ lib LibWin32
     get_alpha_bitmap_parameters : Proc(IVMRMixerBitmap*, VMRALPHABITMAP*, HRESULT)
   end
 
-  IVMRMixerBitmap_GUID = LibC::GUID.new("1e673275-0257-40aa-af20-7c608d4a0428")
-  CLSID_IVMRMixerBitmap = "1e673275-0257-40aa-af20-7c608d4a0428"
+  IVMRMixerBitmap_GUID = "1e673275-0257-40aa-af20-7c608d4a0428"
+  IID_IVMRMixerBitmap = LibC::GUID.new(0x1e673275_u32, 0x257_u16, 0x40aa_u16, StaticArray[0xaf_u8, 0x20_u8, 0x7c_u8, 0x60_u8, 0x8d_u8, 0x4a_u8, 0x4_u8, 0x28_u8])
   struct IVMRMixerBitmap
     lpVtbl : IVMRMixerBitmapVTbl*
   end
@@ -8591,8 +8591,8 @@ lib LibWin32
     composite_image : Proc(IVMRImageCompositor*, IUnknown, IDirectDrawSurface7, AM_MEDIA_TYPE*, Int64, Int64, UInt32, VMRVIDEOSTREAMINFO*, UInt32, HRESULT)
   end
 
-  IVMRImageCompositor_GUID = LibC::GUID.new("7a4fb5af-479f-4074-bb40-ce6722e43c82")
-  CLSID_IVMRImageCompositor = "7a4fb5af-479f-4074-bb40-ce6722e43c82"
+  IVMRImageCompositor_GUID = "7a4fb5af-479f-4074-bb40-ce6722e43c82"
+  IID_IVMRImageCompositor = LibC::GUID.new(0x7a4fb5af_u32, 0x479f_u16, 0x4074_u16, StaticArray[0xbb_u8, 0x40_u8, 0xce_u8, 0x67_u8, 0x22_u8, 0xe4_u8, 0x3c_u8, 0x82_u8])
   struct IVMRImageCompositor
     lpVtbl : IVMRImageCompositorVTbl*
   end
@@ -8607,8 +8607,8 @@ lib LibWin32
     get_stream_active_state : Proc(IVMRVideoStreamControl*, LibC::BOOL*, HRESULT)
   end
 
-  IVMRVideoStreamControl_GUID = LibC::GUID.new("058d1f11-2a54-4bef-bd54-df706626b727")
-  CLSID_IVMRVideoStreamControl = "058d1f11-2a54-4bef-bd54-df706626b727"
+  IVMRVideoStreamControl_GUID = "058d1f11-2a54-4bef-bd54-df706626b727"
+  IID_IVMRVideoStreamControl = LibC::GUID.new(0x58d1f11_u32, 0x2a54_u16, 0x4bef_u16, StaticArray[0xbd_u8, 0x54_u8, 0xdf_u8, 0x70_u8, 0x66_u8, 0x26_u8, 0xb7_u8, 0x27_u8])
   struct IVMRVideoStreamControl
     lpVtbl : IVMRVideoStreamControlVTbl*
   end
@@ -8623,8 +8623,8 @@ lib LibWin32
     get_surface : Proc(IVMRSurface*, IDirectDrawSurface7*, HRESULT)
   end
 
-  IVMRSurface_GUID = LibC::GUID.new("a9849bbe-9ec8-4263-b764-62730f0d15d0")
-  CLSID_IVMRSurface = "a9849bbe-9ec8-4263-b764-62730f0d15d0"
+  IVMRSurface_GUID = "a9849bbe-9ec8-4263-b764-62730f0d15d0"
+  IID_IVMRSurface = LibC::GUID.new(0xa9849bbe_u32, 0x9ec8_u16, 0x4263_u16, StaticArray[0xb7_u8, 0x64_u8, 0x62_u8, 0x73_u8, 0xf_u8, 0xd_u8, 0x15_u8, 0xd0_u8])
   struct IVMRSurface
     lpVtbl : IVMRSurfaceVTbl*
   end
@@ -8637,8 +8637,8 @@ lib LibWin32
     get_rendering_prefs : Proc(IVMRImagePresenterConfig*, UInt32*, HRESULT)
   end
 
-  IVMRImagePresenterConfig_GUID = LibC::GUID.new("9f3a1c85-8555-49ba-935f-be5b5b29d178")
-  CLSID_IVMRImagePresenterConfig = "9f3a1c85-8555-49ba-935f-be5b5b29d178"
+  IVMRImagePresenterConfig_GUID = "9f3a1c85-8555-49ba-935f-be5b5b29d178"
+  IID_IVMRImagePresenterConfig = LibC::GUID.new(0x9f3a1c85_u32, 0x8555_u16, 0x49ba_u16, StaticArray[0x93_u8, 0x5f_u8, 0xbe_u8, 0x5b_u8, 0x5b_u8, 0x29_u8, 0xd1_u8, 0x78_u8])
   struct IVMRImagePresenterConfig
     lpVtbl : IVMRImagePresenterConfigVTbl*
   end
@@ -8653,8 +8653,8 @@ lib LibWin32
     get_xlc_mode_dd_obj_and_primary_surface : Proc(IVMRImagePresenterExclModeConfig*, IDirectDraw7*, IDirectDrawSurface7*, HRESULT)
   end
 
-  IVMRImagePresenterExclModeConfig_GUID = LibC::GUID.new("e6f7ce40-4673-44f1-8f77-5499d68cb4ea")
-  CLSID_IVMRImagePresenterExclModeConfig = "e6f7ce40-4673-44f1-8f77-5499d68cb4ea"
+  IVMRImagePresenterExclModeConfig_GUID = "e6f7ce40-4673-44f1-8f77-5499d68cb4ea"
+  IID_IVMRImagePresenterExclModeConfig = LibC::GUID.new(0xe6f7ce40_u32, 0x4673_u16, 0x44f1_u16, StaticArray[0x8f_u8, 0x77_u8, 0x54_u8, 0x99_u8, 0xd6_u8, 0x8c_u8, 0xb4_u8, 0xea_u8])
   struct IVMRImagePresenterExclModeConfig
     lpVtbl : IVMRImagePresenterExclModeConfigVTbl*
   end
@@ -8667,8 +8667,8 @@ lib LibWin32
     get_video_port_index : Proc(IVPManager*, UInt32*, HRESULT)
   end
 
-  IVPManager_GUID = LibC::GUID.new("aac18c18-e186-46d2-825d-a1f8dc8e395a")
-  CLSID_IVPManager = "aac18c18-e186-46d2-825d-a1f8dc8e395a"
+  IVPManager_GUID = "aac18c18-e186-46d2-825d-a1f8dc8e395a"
+  IID_IVPManager = LibC::GUID.new(0xaac18c18_u32, 0xe186_u16, 0x46d2_u16, StaticArray[0x82_u8, 0x5d_u8, 0xa1_u8, 0xf8_u8, 0xdc_u8, 0x8e_u8, 0x39_u8, 0x5a_u8])
   struct IVPManager
     lpVtbl : IVPManagerVTbl*
   end
@@ -8714,8 +8714,8 @@ lib LibWin32
     chapter_play_auto_stop : Proc(IDvdControl*, UInt32, UInt32, UInt32, HRESULT)
   end
 
-  IDvdControl_GUID = LibC::GUID.new("a70efe61-e2a3-11d0-a9be-00aa0061be93")
-  CLSID_IDvdControl = "a70efe61-e2a3-11d0-a9be-00aa0061be93"
+  IDvdControl_GUID = "a70efe61-e2a3-11d0-a9be-00aa0061be93"
+  IID_IDvdControl = LibC::GUID.new(0xa70efe61_u32, 0xe2a3_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xbe_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x61_u8, 0xbe_u8, 0x93_u8])
   struct IDvdControl
     lpVtbl : IDvdControlVTbl*
   end
@@ -8749,8 +8749,8 @@ lib LibWin32
     get_root : Proc(IDvdInfo*, UInt8*, UInt32, UInt32*, HRESULT)
   end
 
-  IDvdInfo_GUID = LibC::GUID.new("a70efe60-e2a3-11d0-a9be-00aa0061be93")
-  CLSID_IDvdInfo = "a70efe60-e2a3-11d0-a9be-00aa0061be93"
+  IDvdInfo_GUID = "a70efe60-e2a3-11d0-a9be-00aa0061be93"
+  IID_IDvdInfo = LibC::GUID.new(0xa70efe60_u32, 0xe2a3_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xbe_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x61_u8, 0xbe_u8, 0x93_u8])
   struct IDvdInfo
     lpVtbl : IDvdInfoVTbl*
   end
@@ -8763,8 +8763,8 @@ lib LibWin32
     wait_for_end : Proc(IDvdCmd*, HRESULT)
   end
 
-  IDvdCmd_GUID = LibC::GUID.new("5a4a97e4-94ee-4a55-9751-74b5643aa27d")
-  CLSID_IDvdCmd = "5a4a97e4-94ee-4a55-9751-74b5643aa27d"
+  IDvdCmd_GUID = "5a4a97e4-94ee-4a55-9751-74b5643aa27d"
+  IID_IDvdCmd = LibC::GUID.new(0x5a4a97e4_u32, 0x94ee_u16, 0x4a55_u16, StaticArray[0x97_u8, 0x51_u8, 0x74_u8, 0xb5_u8, 0x64_u8, 0x3a_u8, 0xa2_u8, 0x7d_u8])
   struct IDvdCmd
     lpVtbl : IDvdCmdVTbl*
   end
@@ -8777,8 +8777,8 @@ lib LibWin32
     get_parental_level : Proc(IDvdState*, UInt32*, HRESULT)
   end
 
-  IDvdState_GUID = LibC::GUID.new("86303d6d-1c4a-4087-ab42-f711167048ef")
-  CLSID_IDvdState = "86303d6d-1c4a-4087-ab42-f711167048ef"
+  IDvdState_GUID = "86303d6d-1c4a-4087-ab42-f711167048ef"
+  IID_IDvdState = LibC::GUID.new(0x86303d6d_u32, 0x1c4a_u16, 0x4087_u16, StaticArray[0xab_u8, 0x42_u8, 0xf7_u8, 0x11_u8, 0x16_u8, 0x70_u8, 0x48_u8, 0xef_u8])
   struct IDvdState
     lpVtbl : IDvdStateVTbl*
   end
@@ -8829,8 +8829,8 @@ lib LibWin32
     select_default_subpicture_language : Proc(IDvdControl2*, UInt32, DVD_SUBPICTURE_LANG_EXT, HRESULT)
   end
 
-  IDvdControl2_GUID = LibC::GUID.new("33bc7430-eec0-11d2-8201-00a0c9d74842")
-  CLSID_IDvdControl2 = "33bc7430-eec0-11d2-8201-00a0c9d74842"
+  IDvdControl2_GUID = "33bc7430-eec0-11d2-8201-00a0c9d74842"
+  IID_IDvdControl2 = LibC::GUID.new(0x33bc7430_u32, 0xeec0_u16, 0x11d2_u16, StaticArray[0x82_u8, 0x1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd7_u8, 0x48_u8, 0x42_u8])
   struct IDvdControl2
     lpVtbl : IDvdControl2VTbl*
   end
@@ -8880,8 +8880,8 @@ lib LibWin32
     is_subpicture_stream_enabled : Proc(IDvdInfo2*, UInt32, LibC::BOOL*, HRESULT)
   end
 
-  IDvdInfo2_GUID = LibC::GUID.new("34151510-eec0-11d2-8201-00a0c9d74842")
-  CLSID_IDvdInfo2 = "34151510-eec0-11d2-8201-00a0c9d74842"
+  IDvdInfo2_GUID = "34151510-eec0-11d2-8201-00a0c9d74842"
+  IID_IDvdInfo2 = LibC::GUID.new(0x34151510_u32, 0xeec0_u16, 0x11d2_u16, StaticArray[0x82_u8, 0x1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd7_u8, 0x48_u8, 0x42_u8])
   struct IDvdInfo2
     lpVtbl : IDvdInfo2VTbl*
   end
@@ -8895,8 +8895,8 @@ lib LibWin32
     render_dvd_video_volume : Proc(IDvdGraphBuilder*, LibC::LPWSTR, UInt32, AM_DVD_RENDERSTATUS*, HRESULT)
   end
 
-  IDvdGraphBuilder_GUID = LibC::GUID.new("fcc152b6-f372-11d0-8e00-00c04fd7c08b")
-  CLSID_IDvdGraphBuilder = "fcc152b6-f372-11d0-8e00-00c04fd7c08b"
+  IDvdGraphBuilder_GUID = "fcc152b6-f372-11d0-8e00-00c04fd7c08b"
+  IID_IDvdGraphBuilder = LibC::GUID.new(0xfcc152b6_u32, 0xf372_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xc0_u8, 0x8b_u8])
   struct IDvdGraphBuilder
     lpVtbl : IDvdGraphBuilderVTbl*
   end
@@ -8914,8 +8914,8 @@ lib LibWin32
     set_callback_interface : Proc(IDDrawExclModeVideo*, IDDrawExclModeVideoCallback, UInt32, HRESULT)
   end
 
-  IDDrawExclModeVideo_GUID = LibC::GUID.new("153acc21-d83b-11d1-82bf-00a0c9696c8f")
-  CLSID_IDDrawExclModeVideo = "153acc21-d83b-11d1-82bf-00a0c9696c8f"
+  IDDrawExclModeVideo_GUID = "153acc21-d83b-11d1-82bf-00a0c9696c8f"
+  IID_IDDrawExclModeVideo = LibC::GUID.new(0x153acc21_u32, 0xd83b_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xbf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x6c_u8, 0x8f_u8])
   struct IDDrawExclModeVideo
     lpVtbl : IDDrawExclModeVideoVTbl*
   end
@@ -8929,8 +8929,8 @@ lib LibWin32
     on_update_size : Proc(IDDrawExclModeVideoCallback*, UInt32, UInt32, UInt32, UInt32, HRESULT)
   end
 
-  IDDrawExclModeVideoCallback_GUID = LibC::GUID.new("913c24a0-20ab-11d2-9038-00a0c9697298")
-  CLSID_IDDrawExclModeVideoCallback = "913c24a0-20ab-11d2-9038-00a0c9697298"
+  IDDrawExclModeVideoCallback_GUID = "913c24a0-20ab-11d2-9038-00a0c9697298"
+  IID_IDDrawExclModeVideoCallback = LibC::GUID.new(0x913c24a0_u32, 0x20ab_u16, 0x11d2_u16, StaticArray[0x90_u8, 0x38_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x72_u8, 0x98_u8])
   struct IDDrawExclModeVideoCallback
     lpVtbl : IDDrawExclModeVideoCallbackVTbl*
   end
@@ -8948,8 +8948,8 @@ lib LibWin32
     un_register_device_filter : Proc(IBDA_NetworkProvider*, UInt32, HRESULT)
   end
 
-  IBDA_NetworkProvider_GUID = LibC::GUID.new("fd501041-8ebe-11ce-8183-00aa00577da2")
-  CLSID_IBDA_NetworkProvider = "fd501041-8ebe-11ce-8183-00aa00577da2"
+  IBDA_NetworkProvider_GUID = "fd501041-8ebe-11ce-8183-00aa00577da2"
+  IID_IBDA_NetworkProvider = LibC::GUID.new(0xfd501041_u32, 0x8ebe_u16, 0x11ce_u16, StaticArray[0x81_u8, 0x83_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x57_u8, 0x7d_u8, 0xa2_u8])
   struct IBDA_NetworkProvider
     lpVtbl : IBDA_NetworkProviderVTbl*
   end
@@ -8965,8 +8965,8 @@ lib LibWin32
     get_multicast_mode : Proc(IBDA_EthernetFilter*, UInt32*, HRESULT)
   end
 
-  IBDA_EthernetFilter_GUID = LibC::GUID.new("71985f43-1ca1-11d3-9cc8-00c04f7971e0")
-  CLSID_IBDA_EthernetFilter = "71985f43-1ca1-11d3-9cc8-00c04f7971e0"
+  IBDA_EthernetFilter_GUID = "71985f43-1ca1-11d3-9cc8-00c04f7971e0"
+  IID_IBDA_EthernetFilter = LibC::GUID.new(0x71985f43_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
   struct IBDA_EthernetFilter
     lpVtbl : IBDA_EthernetFilterVTbl*
   end
@@ -8982,8 +8982,8 @@ lib LibWin32
     get_multicast_mode : Proc(IBDA_IPV4Filter*, UInt32*, HRESULT)
   end
 
-  IBDA_IPV4Filter_GUID = LibC::GUID.new("71985f44-1ca1-11d3-9cc8-00c04f7971e0")
-  CLSID_IBDA_IPV4Filter = "71985f44-1ca1-11d3-9cc8-00c04f7971e0"
+  IBDA_IPV4Filter_GUID = "71985f44-1ca1-11d3-9cc8-00c04f7971e0"
+  IID_IBDA_IPV4Filter = LibC::GUID.new(0x71985f44_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
   struct IBDA_IPV4Filter
     lpVtbl : IBDA_IPV4FilterVTbl*
   end
@@ -8999,8 +8999,8 @@ lib LibWin32
     get_multicast_mode : Proc(IBDA_IPV6Filter*, UInt32*, HRESULT)
   end
 
-  IBDA_IPV6Filter_GUID = LibC::GUID.new("e1785a74-2a23-4fb3-9245-a8f88017ef33")
-  CLSID_IBDA_IPV6Filter = "e1785a74-2a23-4fb3-9245-a8f88017ef33"
+  IBDA_IPV6Filter_GUID = "e1785a74-2a23-4fb3-9245-a8f88017ef33"
+  IID_IBDA_IPV6Filter = LibC::GUID.new(0xe1785a74_u32, 0x2a23_u16, 0x4fb3_u16, StaticArray[0x92_u8, 0x45_u8, 0xa8_u8, 0xf8_u8, 0x80_u8, 0x17_u8, 0xef_u8, 0x33_u8])
   struct IBDA_IPV6Filter
     lpVtbl : IBDA_IPV6FilterVTbl*
   end
@@ -9015,8 +9015,8 @@ lib LibWin32
     get_change_state : Proc(IBDA_DeviceControl*, UInt32*, HRESULT)
   end
 
-  IBDA_DeviceControl_GUID = LibC::GUID.new("fd0a5af3-b41d-11d2-9c95-00c04f7971e0")
-  CLSID_IBDA_DeviceControl = "fd0a5af3-b41d-11d2-9c95-00c04f7971e0"
+  IBDA_DeviceControl_GUID = "fd0a5af3-b41d-11d2-9c95-00c04f7971e0"
+  IID_IBDA_DeviceControl = LibC::GUID.new(0xfd0a5af3_u32, 0xb41d_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0x95_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
   struct IBDA_DeviceControl
     lpVtbl : IBDA_DeviceControlVTbl*
   end
@@ -9030,8 +9030,8 @@ lib LibWin32
     registration_context : Proc(IBDA_PinControl*, UInt32*, HRESULT)
   end
 
-  IBDA_PinControl_GUID = LibC::GUID.new("0ded49d5-a8b7-4d5d-97a1-12b0c195874d")
-  CLSID_IBDA_PinControl = "0ded49d5-a8b7-4d5d-97a1-12b0c195874d"
+  IBDA_PinControl_GUID = "0ded49d5-a8b7-4d5d-97a1-12b0c195874d"
+  IID_IBDA_PinControl = LibC::GUID.new(0xded49d5_u32, 0xa8b7_u16, 0x4d5d_u16, StaticArray[0x97_u8, 0xa1_u8, 0x12_u8, 0xb0_u8, 0xc1_u8, 0x95_u8, 0x87_u8, 0x4d_u8])
   struct IBDA_PinControl
     lpVtbl : IBDA_PinControlVTbl*
   end
@@ -9048,8 +9048,8 @@ lib LibWin32
     get_tuning_space : Proc(IBDA_SignalProperties*, Guid*, HRESULT)
   end
 
-  IBDA_SignalProperties_GUID = LibC::GUID.new("d2f1644b-b409-11d2-bc69-00a0c9ee9e16")
-  CLSID_IBDA_SignalProperties = "d2f1644b-b409-11d2-bc69-00a0c9ee9e16"
+  IBDA_SignalProperties_GUID = "d2f1644b-b409-11d2-bc69-00a0c9ee9e16"
+  IID_IBDA_SignalProperties = LibC::GUID.new(0xd2f1644b_u32, 0xb409_u16, 0x11d2_u16, StaticArray[0xbc_u8, 0x69_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xee_u8, 0x9e_u8, 0x16_u8])
   struct IBDA_SignalProperties
     lpVtbl : IBDA_SignalPropertiesVTbl*
   end
@@ -9070,8 +9070,8 @@ lib LibWin32
     get_sample_time : Proc(IBDA_SignalStatistics*, Int32*, HRESULT)
   end
 
-  IBDA_SignalStatistics_GUID = LibC::GUID.new("1347d106-cf3a-428a-a5cb-ac0d9a2a4338")
-  CLSID_IBDA_SignalStatistics = "1347d106-cf3a-428a-a5cb-ac0d9a2a4338"
+  IBDA_SignalStatistics_GUID = "1347d106-cf3a-428a-a5cb-ac0d9a2a4338"
+  IID_IBDA_SignalStatistics = LibC::GUID.new(0x1347d106_u32, 0xcf3a_u16, 0x428a_u16, StaticArray[0xa5_u8, 0xcb_u8, 0xac_u8, 0xd_u8, 0x9a_u8, 0x2a_u8, 0x43_u8, 0x38_u8])
   struct IBDA_SignalStatistics
     lpVtbl : IBDA_SignalStatisticsVTbl*
   end
@@ -9093,8 +9093,8 @@ lib LibWin32
     get_control_node : Proc(IBDA_Topology*, UInt32, UInt32, UInt32, IUnknown*, HRESULT)
   end
 
-  IBDA_Topology_GUID = LibC::GUID.new("79b56888-7fea-4690-b45d-38fd3c7849be")
-  CLSID_IBDA_Topology = "79b56888-7fea-4690-b45d-38fd3c7849be"
+  IBDA_Topology_GUID = "79b56888-7fea-4690-b45d-38fd3c7849be"
+  IID_IBDA_Topology = LibC::GUID.new(0x79b56888_u32, 0x7fea_u16, 0x4690_u16, StaticArray[0xb4_u8, 0x5d_u8, 0x38_u8, 0xfd_u8, 0x3c_u8, 0x78_u8, 0x49_u8, 0xbe_u8])
   struct IBDA_Topology
     lpVtbl : IBDA_TopologyVTbl*
   end
@@ -9107,8 +9107,8 @@ lib LibWin32
     stop : Proc(IBDA_VoidTransform*, HRESULT)
   end
 
-  IBDA_VoidTransform_GUID = LibC::GUID.new("71985f46-1ca1-11d3-9cc8-00c04f7971e0")
-  CLSID_IBDA_VoidTransform = "71985f46-1ca1-11d3-9cc8-00c04f7971e0"
+  IBDA_VoidTransform_GUID = "71985f46-1ca1-11d3-9cc8-00c04f7971e0"
+  IID_IBDA_VoidTransform = LibC::GUID.new(0x71985f46_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
   struct IBDA_VoidTransform
     lpVtbl : IBDA_VoidTransformVTbl*
   end
@@ -9121,8 +9121,8 @@ lib LibWin32
     stop : Proc(IBDA_NullTransform*, HRESULT)
   end
 
-  IBDA_NullTransform_GUID = LibC::GUID.new("ddf15b0d-bd25-11d2-9ca0-00c04f7971e0")
-  CLSID_IBDA_NullTransform = "ddf15b0d-bd25-11d2-9ca0-00c04f7971e0"
+  IBDA_NullTransform_GUID = "ddf15b0d-bd25-11d2-9ca0-00c04f7971e0"
+  IID_IBDA_NullTransform = LibC::GUID.new(0xddf15b0d_u32, 0xbd25_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
   struct IBDA_NullTransform
     lpVtbl : IBDA_NullTransformVTbl*
   end
@@ -9145,8 +9145,8 @@ lib LibWin32
     get_frequency_multiplier : Proc(IBDA_FrequencyFilter*, UInt32*, HRESULT)
   end
 
-  IBDA_FrequencyFilter_GUID = LibC::GUID.new("71985f47-1ca1-11d3-9cc8-00c04f7971e0")
-  CLSID_IBDA_FrequencyFilter = "71985f47-1ca1-11d3-9cc8-00c04f7971e0"
+  IBDA_FrequencyFilter_GUID = "71985f47-1ca1-11d3-9cc8-00c04f7971e0"
+  IID_IBDA_FrequencyFilter = LibC::GUID.new(0x71985f47_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
   struct IBDA_FrequencyFilter
     lpVtbl : IBDA_FrequencyFilterVTbl*
   end
@@ -9163,8 +9163,8 @@ lib LibWin32
     get_high_low_switch_frequency : Proc(IBDA_LNBInfo*, UInt32*, HRESULT)
   end
 
-  IBDA_LNBInfo_GUID = LibC::GUID.new("992cf102-49f9-4719-a664-c4f23e2408f4")
-  CLSID_IBDA_LNBInfo = "992cf102-49f9-4719-a664-c4f23e2408f4"
+  IBDA_LNBInfo_GUID = "992cf102-49f9-4719-a664-c4f23e2408f4"
+  IID_IBDA_LNBInfo = LibC::GUID.new(0x992cf102_u32, 0x49f9_u16, 0x4719_u16, StaticArray[0xa6_u8, 0x64_u8, 0xc4_u8, 0xf2_u8, 0x3e_u8, 0x24_u8, 0x8_u8, 0xf4_u8])
   struct IBDA_LNBInfo
     lpVtbl : IBDA_LNBInfoVTbl*
   end
@@ -9181,8 +9181,8 @@ lib LibWin32
     get_diseq_response : Proc(IBDA_DiseqCommand*, UInt32, UInt32*, UInt8*, HRESULT)
   end
 
-  IBDA_DiseqCommand_GUID = LibC::GUID.new("f84e2ab0-3c6b-45e3-a0fc-8669d4b81f11")
-  CLSID_IBDA_DiseqCommand = "f84e2ab0-3c6b-45e3-a0fc-8669d4b81f11"
+  IBDA_DiseqCommand_GUID = "f84e2ab0-3c6b-45e3-a0fc-8669d4b81f11"
+  IID_IBDA_DiseqCommand = LibC::GUID.new(0xf84e2ab0_u32, 0x3c6b_u16, 0x45e3_u16, StaticArray[0xa0_u8, 0xfc_u8, 0x86_u8, 0x69_u8, 0xd4_u8, 0xb8_u8, 0x1f_u8, 0x11_u8])
   struct IBDA_DiseqCommand
     lpVtbl : IBDA_DiseqCommandVTbl*
   end
@@ -9194,8 +9194,8 @@ lib LibWin32
     put_auto_demodulate : Proc(IBDA_AutoDemodulate*, HRESULT)
   end
 
-  IBDA_AutoDemodulate_GUID = LibC::GUID.new("ddf15b12-bd25-11d2-9ca0-00c04f7971e0")
-  CLSID_IBDA_AutoDemodulate = "ddf15b12-bd25-11d2-9ca0-00c04f7971e0"
+  IBDA_AutoDemodulate_GUID = "ddf15b12-bd25-11d2-9ca0-00c04f7971e0"
+  IID_IBDA_AutoDemodulate = LibC::GUID.new(0xddf15b12_u32, 0xbd25_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
   struct IBDA_AutoDemodulate
     lpVtbl : IBDA_AutoDemodulateVTbl*
   end
@@ -9210,8 +9210,8 @@ lib LibWin32
     get_aux_input_count : Proc(IBDA_AutoDemodulateEx*, UInt32*, UInt32*, HRESULT)
   end
 
-  IBDA_AutoDemodulateEx_GUID = LibC::GUID.new("34518d13-1182-48e6-b28f-b24987787326")
-  CLSID_IBDA_AutoDemodulateEx = "34518d13-1182-48e6-b28f-b24987787326"
+  IBDA_AutoDemodulateEx_GUID = "34518d13-1182-48e6-b28f-b24987787326"
+  IID_IBDA_AutoDemodulateEx = LibC::GUID.new(0x34518d13_u32, 0x1182_u16, 0x48e6_u16, StaticArray[0xb2_u8, 0x8f_u8, 0xb2_u8, 0x49_u8, 0x87_u8, 0x78_u8, 0x73_u8, 0x26_u8])
   struct IBDA_AutoDemodulateEx
     lpVtbl : IBDA_AutoDemodulateExVTbl*
   end
@@ -9236,8 +9236,8 @@ lib LibWin32
     get_spectral_inversion : Proc(IBDA_DigitalDemodulator*, SpectralInversion*, HRESULT)
   end
 
-  IBDA_DigitalDemodulator_GUID = LibC::GUID.new("ef30f379-985b-4d10-b640-a79d5e04e1e0")
-  CLSID_IBDA_DigitalDemodulator = "ef30f379-985b-4d10-b640-a79d5e04e1e0"
+  IBDA_DigitalDemodulator_GUID = "ef30f379-985b-4d10-b640-a79d5e04e1e0"
+  IID_IBDA_DigitalDemodulator = LibC::GUID.new(0xef30f379_u32, 0x985b_u16, 0x4d10_u16, StaticArray[0xb6_u8, 0x40_u8, 0xa7_u8, 0x9d_u8, 0x5e_u8, 0x4_u8, 0xe1_u8, 0xe0_u8])
   struct IBDA_DigitalDemodulator
     lpVtbl : IBDA_DigitalDemodulatorVTbl*
   end
@@ -9270,8 +9270,8 @@ lib LibWin32
     get_pilot : Proc(IBDA_DigitalDemodulator2*, Pilot*, HRESULT)
   end
 
-  IBDA_DigitalDemodulator2_GUID = LibC::GUID.new("525ed3ee-5cf3-4e1e-9a06-5368a84f9a6e")
-  CLSID_IBDA_DigitalDemodulator2 = "525ed3ee-5cf3-4e1e-9a06-5368a84f9a6e"
+  IBDA_DigitalDemodulator2_GUID = "525ed3ee-5cf3-4e1e-9a06-5368a84f9a6e"
+  IID_IBDA_DigitalDemodulator2 = LibC::GUID.new(0x525ed3ee_u32, 0x5cf3_u16, 0x4e1e_u16, StaticArray[0x9a_u8, 0x6_u8, 0x53_u8, 0x68_u8, 0xa8_u8, 0x4f_u8, 0x9a_u8, 0x6e_u8])
   struct IBDA_DigitalDemodulator2
     lpVtbl : IBDA_DigitalDemodulator2VTbl*
   end
@@ -9308,8 +9308,8 @@ lib LibWin32
     get_plp_number : Proc(IBDA_DigitalDemodulator3*, UInt32*, HRESULT)
   end
 
-  IBDA_DigitalDemodulator3_GUID = LibC::GUID.new("13f19604-7d32-4359-93a2-a05205d90ac9")
-  CLSID_IBDA_DigitalDemodulator3 = "13f19604-7d32-4359-93a2-a05205d90ac9"
+  IBDA_DigitalDemodulator3_GUID = "13f19604-7d32-4359-93a2-a05205d90ac9"
+  IID_IBDA_DigitalDemodulator3 = LibC::GUID.new(0x13f19604_u32, 0x7d32_u16, 0x4359_u16, StaticArray[0x93_u8, 0xa2_u8, 0xa0_u8, 0x52_u8, 0x5_u8, 0xd9_u8, 0xa_u8, 0xc9_u8])
   struct IBDA_DigitalDemodulator3
     lpVtbl : IBDA_DigitalDemodulator3VTbl*
   end
@@ -9322,8 +9322,8 @@ lib LibWin32
     put_substream_types : Proc(ICCSubStreamFiltering*, Int32, HRESULT)
   end
 
-  ICCSubStreamFiltering_GUID = LibC::GUID.new("4b2bd7ea-8347-467b-8dbf-62f784929cc3")
-  CLSID_ICCSubStreamFiltering = "4b2bd7ea-8347-467b-8dbf-62f784929cc3"
+  ICCSubStreamFiltering_GUID = "4b2bd7ea-8347-467b-8dbf-62f784929cc3"
+  IID_ICCSubStreamFiltering = LibC::GUID.new(0x4b2bd7ea_u32, 0x8347_u16, 0x467b_u16, StaticArray[0x8d_u8, 0xbf_u8, 0x62_u8, 0xf7_u8, 0x84_u8, 0x92_u8, 0x9c_u8, 0xc3_u8])
   struct ICCSubStreamFiltering
     lpVtbl : ICCSubStreamFilteringVTbl*
   end
@@ -9336,8 +9336,8 @@ lib LibWin32
     get_adapter_ip_address : Proc(IBDA_IPSinkControl*, UInt32*, UInt8**, HRESULT)
   end
 
-  IBDA_IPSinkControl_GUID = LibC::GUID.new("3f4dc8e2-4050-11d3-8f4b-00c04f7971e2")
-  CLSID_IBDA_IPSinkControl = "3f4dc8e2-4050-11d3-8f4b-00c04f7971e2"
+  IBDA_IPSinkControl_GUID = "3f4dc8e2-4050-11d3-8f4b-00c04f7971e2"
+  IID_IBDA_IPSinkControl = LibC::GUID.new(0x3f4dc8e2_u32, 0x4050_u16, 0x11d3_u16, StaticArray[0x8f_u8, 0x4b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
   struct IBDA_IPSinkControl
     lpVtbl : IBDA_IPSinkControlVTbl*
   end
@@ -9351,8 +9351,8 @@ lib LibWin32
     get_adapter_description : Proc(IBDA_IPSinkInfo*, UInt8**, HRESULT)
   end
 
-  IBDA_IPSinkInfo_GUID = LibC::GUID.new("a750108f-492e-4d51-95f7-649b23ff7ad7")
-  CLSID_IBDA_IPSinkInfo = "a750108f-492e-4d51-95f7-649b23ff7ad7"
+  IBDA_IPSinkInfo_GUID = "a750108f-492e-4d51-95f7-649b23ff7ad7"
+  IID_IBDA_IPSinkInfo = LibC::GUID.new(0xa750108f_u32, 0x492e_u16, 0x4d51_u16, StaticArray[0x95_u8, 0xf7_u8, 0x64_u8, 0x9b_u8, 0x23_u8, 0xff_u8, 0x7a_u8, 0xd7_u8])
   struct IBDA_IPSinkInfo
     lpVtbl : IBDA_IPSinkInfoVTbl*
   end
@@ -9367,8 +9367,8 @@ lib LibWin32
     clone : Proc(IEnumPIDMap*, IEnumPIDMap*, HRESULT)
   end
 
-  IEnumPIDMap_GUID = LibC::GUID.new("afb6c2a2-2c41-11d3-8a60-0000f81e0e4a")
-  CLSID_IEnumPIDMap = "afb6c2a2-2c41-11d3-8a60-0000f81e0e4a"
+  IEnumPIDMap_GUID = "afb6c2a2-2c41-11d3-8a60-0000f81e0e4a"
+  IID_IEnumPIDMap = LibC::GUID.new(0xafb6c2a2_u32, 0x2c41_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x60_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0xe_u8, 0x4a_u8])
   struct IEnumPIDMap
     lpVtbl : IEnumPIDMapVTbl*
   end
@@ -9382,8 +9382,8 @@ lib LibWin32
     enum_pid_map : Proc(IMPEG2PIDMap*, IEnumPIDMap*, HRESULT)
   end
 
-  IMPEG2PIDMap_GUID = LibC::GUID.new("afb6c2a1-2c41-11d3-8a60-0000f81e0e4a")
-  CLSID_IMPEG2PIDMap = "afb6c2a1-2c41-11d3-8a60-0000f81e0e4a"
+  IMPEG2PIDMap_GUID = "afb6c2a1-2c41-11d3-8a60-0000f81e0e4a"
+  IID_IMPEG2PIDMap = LibC::GUID.new(0xafb6c2a1_u32, 0x2c41_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x60_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0xe_u8, 0x4a_u8])
   struct IMPEG2PIDMap
     lpVtbl : IMPEG2PIDMapVTbl*
   end
@@ -9400,8 +9400,8 @@ lib LibWin32
     get_country_code_list : Proc(IFrequencyMap*, UInt32*, UInt32**, HRESULT)
   end
 
-  IFrequencyMap_GUID = LibC::GUID.new("06fb45c1-693c-4ea7-b79f-7a6a54d8def2")
-  CLSID_IFrequencyMap = "06fb45c1-693c-4ea7-b79f-7a6a54d8def2"
+  IFrequencyMap_GUID = "06fb45c1-693c-4ea7-b79f-7a6a54d8def2"
+  IID_IFrequencyMap = LibC::GUID.new(0x6fb45c1_u32, 0x693c_u16, 0x4ea7_u16, StaticArray[0xb7_u8, 0x9f_u8, 0x7a_u8, 0x6a_u8, 0x54_u8, 0xd8_u8, 0xde_u8, 0xf2_u8])
   struct IFrequencyMap
     lpVtbl : IFrequencyMapVTbl*
   end
@@ -9413,8 +9413,8 @@ lib LibWin32
     get_eas_message : Proc(IBDA_EasMessage*, UInt32, IUnknown*, HRESULT)
   end
 
-  IBDA_EasMessage_GUID = LibC::GUID.new("d806973d-3ebe-46de-8fbb-6358fe784208")
-  CLSID_IBDA_EasMessage = "d806973d-3ebe-46de-8fbb-6358fe784208"
+  IBDA_EasMessage_GUID = "d806973d-3ebe-46de-8fbb-6358fe784208"
+  IID_IBDA_EasMessage = LibC::GUID.new(0xd806973d_u32, 0x3ebe_u16, 0x46de_u16, StaticArray[0x8f_u8, 0xbb_u8, 0x63_u8, 0x58_u8, 0xfe_u8, 0x78_u8, 0x42_u8, 0x8_u8])
   struct IBDA_EasMessage
     lpVtbl : IBDA_EasMessageVTbl*
   end
@@ -9426,8 +9426,8 @@ lib LibWin32
     get_pat_table_tick_count : Proc(IBDA_TransportStreamInfo*, UInt32*, HRESULT)
   end
 
-  IBDA_TransportStreamInfo_GUID = LibC::GUID.new("8e882535-5f86-47ab-86cf-c281a72a0549")
-  CLSID_IBDA_TransportStreamInfo = "8e882535-5f86-47ab-86cf-c281a72a0549"
+  IBDA_TransportStreamInfo_GUID = "8e882535-5f86-47ab-86cf-c281a72a0549"
+  IID_IBDA_TransportStreamInfo = LibC::GUID.new(0x8e882535_u32, 0x5f86_u16, 0x47ab_u16, StaticArray[0x86_u8, 0xcf_u8, 0xc2_u8, 0x81_u8, 0xa7_u8, 0x2a_u8, 0x5_u8, 0x49_u8])
   struct IBDA_TransportStreamInfo
     lpVtbl : IBDA_TransportStreamInfoVTbl*
   end
@@ -9448,8 +9448,8 @@ lib LibWin32
     inform_ui_closed : Proc(IBDA_ConditionalAccess*, UInt8, UICloseReasonType, HRESULT)
   end
 
-  IBDA_ConditionalAccess_GUID = LibC::GUID.new("cd51f1e0-7be9-4123-8482-a2a796c0a6b0")
-  CLSID_IBDA_ConditionalAccess = "cd51f1e0-7be9-4123-8482-a2a796c0a6b0"
+  IBDA_ConditionalAccess_GUID = "cd51f1e0-7be9-4123-8482-a2a796c0a6b0"
+  IID_IBDA_ConditionalAccess = LibC::GUID.new(0xcd51f1e0_u32, 0x7be9_u16, 0x4123_u16, StaticArray[0x84_u8, 0x82_u8, 0xa2_u8, 0xa7_u8, 0x96_u8, 0xc0_u8, 0xa6_u8, 0xb0_u8])
   struct IBDA_ConditionalAccess
     lpVtbl : IBDA_ConditionalAccessVTbl*
   end
@@ -9462,8 +9462,8 @@ lib LibWin32
     write : Proc(IBDA_DiagnosticProperties*, LibC::LPWSTR, VARIANT*, HRESULT)
   end
 
-  IBDA_DiagnosticProperties_GUID = LibC::GUID.new("20e80cb5-c543-4c1b-8eb3-49e719eee7d4")
-  CLSID_IBDA_DiagnosticProperties = "20e80cb5-c543-4c1b-8eb3-49e719eee7d4"
+  IBDA_DiagnosticProperties_GUID = "20e80cb5-c543-4c1b-8eb3-49e719eee7d4"
+  IID_IBDA_DiagnosticProperties = LibC::GUID.new(0x20e80cb5_u32, 0xc543_u16, 0x4c1b_u16, StaticArray[0x8e_u8, 0xb3_u8, 0x49_u8, 0xe7_u8, 0x19_u8, 0xee_u8, 0xe7_u8, 0xd4_u8])
   struct IBDA_DiagnosticProperties
     lpVtbl : IBDA_DiagnosticPropertiesVTbl*
   end
@@ -9476,8 +9476,8 @@ lib LibWin32
     perform_drm_pairing : Proc(IBDA_DRM*, LibC::BOOL, HRESULT)
   end
 
-  IBDA_DRM_GUID = LibC::GUID.new("f98d88b0-1992-4cd6-a6d9-b9afab99330d")
-  CLSID_IBDA_DRM = "f98d88b0-1992-4cd6-a6d9-b9afab99330d"
+  IBDA_DRM_GUID = "f98d88b0-1992-4cd6-a6d9-b9afab99330d"
+  IID_IBDA_DRM = LibC::GUID.new(0xf98d88b0_u32, 0x1992_u16, 0x4cd6_u16, StaticArray[0xa6_u8, 0xd9_u8, 0xb9_u8, 0xaf_u8, 0xab_u8, 0x99_u8, 0x33_u8, 0xd_u8])
   struct IBDA_DRM
     lpVtbl : IBDA_DRMVTbl*
   end
@@ -9491,8 +9491,8 @@ lib LibWin32
     set_value : Proc(IBDA_NameValueService*, UInt32, UInt8*, UInt8*, UInt8*, UInt32, HRESULT)
   end
 
-  IBDA_NameValueService_GUID = LibC::GUID.new("7f0b3150-7b81-4ad4-98e3-7e9097094301")
-  CLSID_IBDA_NameValueService = "7f0b3150-7b81-4ad4-98e3-7e9097094301"
+  IBDA_NameValueService_GUID = "7f0b3150-7b81-4ad4-98e3-7e9097094301"
+  IID_IBDA_NameValueService = LibC::GUID.new(0x7f0b3150_u32, 0x7b81_u16, 0x4ad4_u16, StaticArray[0x98_u8, 0xe3_u8, 0x7e_u8, 0x90_u8, 0x97_u8, 0x9_u8, 0x43_u8, 0x1_u8])
   struct IBDA_NameValueService
     lpVtbl : IBDA_NameValueServiceVTbl*
   end
@@ -9508,8 +9508,8 @@ lib LibWin32
     create_dialog_request_number : Proc(IBDA_ConditionalAccessEx*, UInt32*, HRESULT)
   end
 
-  IBDA_ConditionalAccessEx_GUID = LibC::GUID.new("497c3418-23cb-44ba-bb62-769f506fcea7")
-  CLSID_IBDA_ConditionalAccessEx = "497c3418-23cb-44ba-bb62-769f506fcea7"
+  IBDA_ConditionalAccessEx_GUID = "497c3418-23cb-44ba-bb62-769f506fcea7"
+  IID_IBDA_ConditionalAccessEx = LibC::GUID.new(0x497c3418_u32, 0x23cb_u16, 0x44ba_u16, StaticArray[0xbb_u8, 0x62_u8, 0x76_u8, 0x9f_u8, 0x50_u8, 0x6f_u8, 0xce_u8, 0xa7_u8])
   struct IBDA_ConditionalAccessEx
     lpVtbl : IBDA_ConditionalAccessExVTbl*
   end
@@ -9521,8 +9521,8 @@ lib LibWin32
     set_isdb_cas_request : Proc(IBDA_ISDBConditionalAccess*, UInt32, UInt32, UInt8*, HRESULT)
   end
 
-  IBDA_ISDBConditionalAccess_GUID = LibC::GUID.new("5e68c627-16c2-4e6c-b1e2-d00170cdaa0f")
-  CLSID_IBDA_ISDBConditionalAccess = "5e68c627-16c2-4e6c-b1e2-d00170cdaa0f"
+  IBDA_ISDBConditionalAccess_GUID = "5e68c627-16c2-4e6c-b1e2-d00170cdaa0f"
+  IID_IBDA_ISDBConditionalAccess = LibC::GUID.new(0x5e68c627_u32, 0x16c2_u16, 0x4e6c_u16, StaticArray[0xb1_u8, 0xe2_u8, 0xd0_u8, 0x1_u8, 0x70_u8, 0xcd_u8, 0xaa_u8, 0xf_u8])
   struct IBDA_ISDBConditionalAccess
     lpVtbl : IBDA_ISDBConditionalAccessVTbl*
   end
@@ -9534,8 +9534,8 @@ lib LibWin32
     complete_event : Proc(IBDA_EventingService*, UInt32, UInt32, HRESULT)
   end
 
-  IBDA_EventingService_GUID = LibC::GUID.new("207c413f-00dc-4c61-bad6-6fee1ff07064")
-  CLSID_IBDA_EventingService = "207c413f-00dc-4c61-bad6-6fee1ff07064"
+  IBDA_EventingService_GUID = "207c413f-00dc-4c61-bad6-6fee1ff07064"
+  IID_IBDA_EventingService = LibC::GUID.new(0x207c413f_u32, 0xdc_u16, 0x4c61_u16, StaticArray[0xba_u8, 0xd6_u8, 0x6f_u8, 0xee_u8, 0x1f_u8, 0xf0_u8, 0x70_u8, 0x64_u8])
   struct IBDA_EventingService
     lpVtbl : IBDA_EventingServiceVTbl*
   end
@@ -9548,8 +9548,8 @@ lib LibWin32
     enum_capability : Proc(IBDA_AUX*, UInt32, UInt32*, Guid*, UInt32*, UInt32*, UInt64*, HRESULT)
   end
 
-  IBDA_AUX_GUID = LibC::GUID.new("7def4c09-6e66-4567-a819-f0e17f4a81ab")
-  CLSID_IBDA_AUX = "7def4c09-6e66-4567-a819-f0e17f4a81ab"
+  IBDA_AUX_GUID = "7def4c09-6e66-4567-a819-f0e17f4a81ab"
+  IID_IBDA_AUX = LibC::GUID.new(0x7def4c09_u32, 0x6e66_u16, 0x4567_u16, StaticArray[0xa8_u8, 0x19_u8, 0xf0_u8, 0xe1_u8, 0x7f_u8, 0x4a_u8, 0x81_u8, 0xab_u8])
   struct IBDA_AUX
     lpVtbl : IBDA_AUXVTbl*
   end
@@ -9565,8 +9565,8 @@ lib LibWin32
     get_state : Proc(IBDA_Encoder*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt32*, UInt64*, LibC::BOOL*, Int32*, UInt32*, HRESULT)
   end
 
-  IBDA_Encoder_GUID = LibC::GUID.new("3a8bad59-59fe-4559-a0ba-396cfaa98ae3")
-  CLSID_IBDA_Encoder = "3a8bad59-59fe-4559-a0ba-396cfaa98ae3"
+  IBDA_Encoder_GUID = "3a8bad59-59fe-4559-a0ba-396cfaa98ae3"
+  IID_IBDA_Encoder = LibC::GUID.new(0x3a8bad59_u32, 0x59fe_u16, 0x4559_u16, StaticArray[0xa0_u8, 0xba_u8, 0x39_u8, 0x6c_u8, 0xfa_u8, 0xa9_u8, 0x8a_u8, 0xe3_u8])
   struct IBDA_Encoder
     lpVtbl : IBDA_EncoderVTbl*
   end
@@ -9584,8 +9584,8 @@ lib LibWin32
     get_table_section : Proc(IBDA_FDC*, UInt32*, UInt32, UInt32*, UInt8*, HRESULT)
   end
 
-  IBDA_FDC_GUID = LibC::GUID.new("138adc7e-58ae-437f-b0b4-c9fe19d5b4ac")
-  CLSID_IBDA_FDC = "138adc7e-58ae-437f-b0b4-c9fe19d5b4ac"
+  IBDA_FDC_GUID = "138adc7e-58ae-437f-b0b4-c9fe19d5b4ac"
+  IID_IBDA_FDC = LibC::GUID.new(0x138adc7e_u32, 0x58ae_u16, 0x437f_u16, StaticArray[0xb0_u8, 0xb4_u8, 0xc9_u8, 0xfe_u8, 0x19_u8, 0xd5_u8, 0xb4_u8, 0xac_u8])
   struct IBDA_FDC
     lpVtbl : IBDA_FDCVTbl*
   end
@@ -9602,8 +9602,8 @@ lib LibWin32
     get_service_info_from_tune_xml : Proc(IBDA_GuideDataDeliveryService*, UInt8*, UInt8**, HRESULT)
   end
 
-  IBDA_GuideDataDeliveryService_GUID = LibC::GUID.new("c0afcb73-23e7-4bc6-bafa-fdc167b4719f")
-  CLSID_IBDA_GuideDataDeliveryService = "c0afcb73-23e7-4bc6-bafa-fdc167b4719f"
+  IBDA_GuideDataDeliveryService_GUID = "c0afcb73-23e7-4bc6-bafa-fdc167b4719f"
+  IID_IBDA_GuideDataDeliveryService = LibC::GUID.new(0xc0afcb73_u32, 0x23e7_u16, 0x4bc6_u16, StaticArray[0xba_u8, 0xfa_u8, 0xfd_u8, 0xc1_u8, 0x67_u8, 0xb4_u8, 0x71_u8, 0x9f_u8])
   struct IBDA_GuideDataDeliveryService
     lpVtbl : IBDA_GuideDataDeliveryServiceVTbl*
   end
@@ -9616,8 +9616,8 @@ lib LibWin32
     get_drm_status : Proc(IBDA_DRMService*, UInt8**, Guid*, HRESULT)
   end
 
-  IBDA_DRMService_GUID = LibC::GUID.new("bff6b5bb-b0ae-484c-9dca-73528fb0b46e")
-  CLSID_IBDA_DRMService = "bff6b5bb-b0ae-484c-9dca-73528fb0b46e"
+  IBDA_DRMService_GUID = "bff6b5bb-b0ae-484c-9dca-73528fb0b46e"
+  IID_IBDA_DRMService = LibC::GUID.new(0xbff6b5bb_u32, 0xb0ae_u16, 0x484c_u16, StaticArray[0x9d_u8, 0xca_u8, 0x73_u8, 0x52_u8, 0x8f_u8, 0xb0_u8, 0xb4_u8, 0x6e_u8])
   struct IBDA_DRMService
     lpVtbl : IBDA_DRMServiceVTbl*
   end
@@ -9636,8 +9636,8 @@ lib LibWin32
     get_key_info : Proc(IBDA_WMDRMSession*, UInt32*, UInt8*, HRESULT)
   end
 
-  IBDA_WMDRMSession_GUID = LibC::GUID.new("4be6fa3d-07cd-4139-8b80-8c18ba3aec88")
-  CLSID_IBDA_WMDRMSession = "4be6fa3d-07cd-4139-8b80-8c18ba3aec88"
+  IBDA_WMDRMSession_GUID = "4be6fa3d-07cd-4139-8b80-8c18ba3aec88"
+  IID_IBDA_WMDRMSession = LibC::GUID.new(0x4be6fa3d_u32, 0x7cd_u16, 0x4139_u16, StaticArray[0x8b_u8, 0x80_u8, 0x8c_u8, 0x18_u8, 0xba_u8, 0x3a_u8, 0xec_u8, 0x88_u8])
   struct IBDA_WMDRMSession
     lpVtbl : IBDA_WMDRMSessionVTbl*
   end
@@ -9654,8 +9654,8 @@ lib LibWin32
     get_start_code_profile : Proc(IBDA_WMDRMTuner*, UInt32*, UInt8*, HRESULT)
   end
 
-  IBDA_WMDRMTuner_GUID = LibC::GUID.new("86d979cf-a8a7-4f94-b5fb-14c0aca68fe6")
-  CLSID_IBDA_WMDRMTuner = "86d979cf-a8a7-4f94-b5fb-14c0aca68fe6"
+  IBDA_WMDRMTuner_GUID = "86d979cf-a8a7-4f94-b5fb-14c0aca68fe6"
+  IID_IBDA_WMDRMTuner = LibC::GUID.new(0x86d979cf_u32, 0xa8a7_u16, 0x4f94_u16, StaticArray[0xb5_u8, 0xfb_u8, 0x14_u8, 0xc0_u8, 0xac_u8, 0xa6_u8, 0x8f_u8, 0xe6_u8])
   struct IBDA_WMDRMTuner
     lpVtbl : IBDA_WMDRMTunerVTbl*
   end
@@ -9669,8 +9669,8 @@ lib LibWin32
     get_pairing_status : Proc(IBDA_DRIDRMService*, BDA_DrmPairingError*, HRESULT)
   end
 
-  IBDA_DRIDRMService_GUID = LibC::GUID.new("1f9bc2a5-44a3-4c52-aab1-0bbce5a1381d")
-  CLSID_IBDA_DRIDRMService = "1f9bc2a5-44a3-4c52-aab1-0bbce5a1381d"
+  IBDA_DRIDRMService_GUID = "1f9bc2a5-44a3-4c52-aab1-0bbce5a1381d"
+  IID_IBDA_DRIDRMService = LibC::GUID.new(0x1f9bc2a5_u32, 0x44a3_u16, 0x4c52_u16, StaticArray[0xaa_u8, 0xb1_u8, 0xb_u8, 0xbc_u8, 0xe5_u8, 0xa1_u8, 0x38_u8, 0x1d_u8])
   struct IBDA_DRIDRMService
     lpVtbl : IBDA_DRIDRMServiceVTbl*
   end
@@ -9688,8 +9688,8 @@ lib LibWin32
     get_last_cardea_error : Proc(IBDA_DRIWMDRMSession*, UInt32*, HRESULT)
   end
 
-  IBDA_DRIWMDRMSession_GUID = LibC::GUID.new("05c690f8-56db-4bb2-b053-79c12098bb26")
-  CLSID_IBDA_DRIWMDRMSession = "05c690f8-56db-4bb2-b053-79c12098bb26"
+  IBDA_DRIWMDRMSession_GUID = "05c690f8-56db-4bb2-b053-79c12098bb26"
+  IID_IBDA_DRIWMDRMSession = LibC::GUID.new(0x5c690f8_u32, 0x56db_u16, 0x4bb2_u16, StaticArray[0xb0_u8, 0x53_u8, 0x79_u8, 0xc1_u8, 0x20_u8, 0x98_u8, 0xbb_u8, 0x26_u8])
   struct IBDA_DRIWMDRMSession
     lpVtbl : IBDA_DRIWMDRMSessionVTbl*
   end
@@ -9702,8 +9702,8 @@ lib LibWin32
     get_pid_list : Proc(IBDA_MUX*, UInt32*, BDA_MUX_PIDLISTITEM*, HRESULT)
   end
 
-  IBDA_MUX_GUID = LibC::GUID.new("942aafec-4c05-4c74-b8eb-8706c2a4943f")
-  CLSID_IBDA_MUX = "942aafec-4c05-4c74-b8eb-8706c2a4943f"
+  IBDA_MUX_GUID = "942aafec-4c05-4c74-b8eb-8706c2a4943f"
+  IID_IBDA_MUX = LibC::GUID.new(0x942aafec_u32, 0x4c05_u16, 0x4c74_u16, StaticArray[0xb8_u8, 0xeb_u8, 0x87_u8, 0x6_u8, 0xc2_u8, 0xa4_u8, 0x94_u8, 0x3f_u8])
   struct IBDA_MUX
     lpVtbl : IBDA_MUXVTbl*
   end
@@ -9716,8 +9716,8 @@ lib LibWin32
     get_ts_information : Proc(IBDA_TransportStreamSelector*, UInt32*, UInt8*, HRESULT)
   end
 
-  IBDA_TransportStreamSelector_GUID = LibC::GUID.new("1dcfafe9-b45e-41b3-bb2a-561eb129ae98")
-  CLSID_IBDA_TransportStreamSelector = "1dcfafe9-b45e-41b3-bb2a-561eb129ae98"
+  IBDA_TransportStreamSelector_GUID = "1dcfafe9-b45e-41b3-bb2a-561eb129ae98"
+  IID_IBDA_TransportStreamSelector = LibC::GUID.new(0x1dcfafe9_u32, 0xb45e_u16, 0x41b3_u16, StaticArray[0xbb_u8, 0x2a_u8, 0x56_u8, 0x1e_u8, 0xb1_u8, 0x29_u8, 0xae_u8, 0x98_u8])
   struct IBDA_TransportStreamSelector
     lpVtbl : IBDA_TransportStreamSelectorVTbl*
   end
@@ -9731,8 +9731,8 @@ lib LibWin32
     user_activity_detected : Proc(IBDA_UserActivityService*, HRESULT)
   end
 
-  IBDA_UserActivityService_GUID = LibC::GUID.new("53b14189-e478-4b7a-a1ff-506db4b99dfe")
-  CLSID_IBDA_UserActivityService = "53b14189-e478-4b7a-a1ff-506db4b99dfe"
+  IBDA_UserActivityService_GUID = "53b14189-e478-4b7a-a1ff-506db4b99dfe"
+  IID_IBDA_UserActivityService = LibC::GUID.new(0x53b14189_u32, 0xe478_u16, 0x4b7a_u16, StaticArray[0xa1_u8, 0xff_u8, 0x50_u8, 0x6d_u8, 0xb4_u8, 0xb9_u8, 0x9d_u8, 0xfe_u8])
   struct IBDA_UserActivityService
     lpVtbl : IBDA_UserActivityServiceVTbl*
   end
@@ -9748,8 +9748,8 @@ lib LibWin32
     get_string_data : Proc(IESEvent*, UInt8**, HRESULT)
   end
 
-  IESEvent_GUID = LibC::GUID.new("1f0e5357-af43-44e6-8547-654c645145d2")
-  CLSID_IESEvent = "1f0e5357-af43-44e6-8547-654c645145d2"
+  IESEvent_GUID = "1f0e5357-af43-44e6-8547-654c645145d2"
+  IID_IESEvent = LibC::GUID.new(0x1f0e5357_u32, 0xaf43_u16, 0x44e6_u16, StaticArray[0x85_u8, 0x47_u8, 0x65_u8, 0x4c_u8, 0x64_u8, 0x51_u8, 0x45_u8, 0xd2_u8])
   struct IESEvent
     lpVtbl : IESEventVTbl*
   end
@@ -9761,8 +9761,8 @@ lib LibWin32
     on_es_event_received : Proc(IESEvents*, Guid, IESEvent, HRESULT)
   end
 
-  IESEvents_GUID = LibC::GUID.new("abd414bf-cfe5-4e5e-af5b-4b4e49c5bfeb")
-  CLSID_IESEvents = "abd414bf-cfe5-4e5e-af5b-4b4e49c5bfeb"
+  IESEvents_GUID = "abd414bf-cfe5-4e5e-af5b-4b4e49c5bfeb"
+  IID_IESEvents = LibC::GUID.new(0xabd414bf_u32, 0xcfe5_u16, 0x4e5e_u16, StaticArray[0xaf_u8, 0x5b_u8, 0x4b_u8, 0x4e_u8, 0x49_u8, 0xc5_u8, 0xbf_u8, 0xeb_u8])
   struct IESEvents
     lpVtbl : IESEventsVTbl*
   end
@@ -9774,8 +9774,8 @@ lib LibWin32
     fire : Proc(IBroadcastEvent*, Guid, HRESULT)
   end
 
-  IBroadcastEvent_GUID = LibC::GUID.new("3b21263f-26e8-489d-aac4-924f7efd9511")
-  CLSID_IBroadcastEvent = "3b21263f-26e8-489d-aac4-924f7efd9511"
+  IBroadcastEvent_GUID = "3b21263f-26e8-489d-aac4-924f7efd9511"
+  IID_IBroadcastEvent = LibC::GUID.new(0x3b21263f_u32, 0x26e8_u16, 0x489d_u16, StaticArray[0xaa_u8, 0xc4_u8, 0x92_u8, 0x4f_u8, 0x7e_u8, 0xfd_u8, 0x95_u8, 0x11_u8])
   struct IBroadcastEvent
     lpVtbl : IBroadcastEventVTbl*
   end
@@ -9788,8 +9788,8 @@ lib LibWin32
     fire_ex : Proc(IBroadcastEventEx*, Guid, UInt32, UInt32, UInt32, UInt32, HRESULT)
   end
 
-  IBroadcastEventEx_GUID = LibC::GUID.new("3d9e3887-1929-423f-8021-43682de95448")
-  CLSID_IBroadcastEventEx = "3d9e3887-1929-423f-8021-43682de95448"
+  IBroadcastEventEx_GUID = "3d9e3887-1929-423f-8021-43682de95448"
+  IID_IBroadcastEventEx = LibC::GUID.new(0x3d9e3887_u32, 0x1929_u16, 0x423f_u16, StaticArray[0x80_u8, 0x21_u8, 0x43_u8, 0x68_u8, 0x2d_u8, 0xe9_u8, 0x54_u8, 0x48_u8])
   struct IBroadcastEventEx
     lpVtbl : IBroadcastEventExVTbl*
   end
@@ -9826,8 +9826,8 @@ lib LibWin32
     put_enable_http : Proc(IAMNetShowConfig*, Int16, HRESULT)
   end
 
-  IAMNetShowConfig_GUID = LibC::GUID.new("fa2aa8f1-8b62-11d0-a520-000000000000")
-  CLSID_IAMNetShowConfig = "fa2aa8f1-8b62-11d0-a520-000000000000"
+  IAMNetShowConfig_GUID = "fa2aa8f1-8b62-11d0-a520-000000000000"
+  IID_IAMNetShowConfig = LibC::GUID.new(0xfa2aa8f1_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct IAMNetShowConfig
     lpVtbl : IAMNetShowConfigVTbl*
   end
@@ -9848,8 +9848,8 @@ lib LibWin32
     get_contact_email : Proc(IAMChannelInfo*, UInt8**, HRESULT)
   end
 
-  IAMChannelInfo_GUID = LibC::GUID.new("fa2aa8f2-8b62-11d0-a520-000000000000")
-  CLSID_IAMChannelInfo = "fa2aa8f2-8b62-11d0-a520-000000000000"
+  IAMChannelInfo_GUID = "fa2aa8f2-8b62-11d0-a520-000000000000"
+  IID_IAMChannelInfo = LibC::GUID.new(0xfa2aa8f2_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct IAMChannelInfo
     lpVtbl : IAMChannelInfoVTbl*
   end
@@ -9871,8 +9871,8 @@ lib LibWin32
     get_buffering_progress : Proc(IAMNetworkStatus*, Int32*, HRESULT)
   end
 
-  IAMNetworkStatus_GUID = LibC::GUID.new("fa2aa8f3-8b62-11d0-a520-000000000000")
-  CLSID_IAMNetworkStatus = "fa2aa8f3-8b62-11d0-a520-000000000000"
+  IAMNetworkStatus_GUID = "fa2aa8f3-8b62-11d0-a520-000000000000"
+  IID_IAMNetworkStatus = LibC::GUID.new(0xfa2aa8f3_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct IAMNetworkStatus
     lpVtbl : IAMNetworkStatusVTbl*
   end
@@ -9894,8 +9894,8 @@ lib LibWin32
     get_playback_speed : Proc(IAMExtendedSeeking*, Float64*, HRESULT)
   end
 
-  IAMExtendedSeeking_GUID = LibC::GUID.new("fa2aa8f9-8b62-11d0-a520-000000000000")
-  CLSID_IAMExtendedSeeking = "fa2aa8f9-8b62-11d0-a520-000000000000"
+  IAMExtendedSeeking_GUID = "fa2aa8f9-8b62-11d0-a520-000000000000"
+  IID_IAMExtendedSeeking = LibC::GUID.new(0xfa2aa8f9_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct IAMExtendedSeeking
     lpVtbl : IAMExtendedSeekingVTbl*
   end
@@ -9919,8 +9919,8 @@ lib LibWin32
     get_source_link : Proc(IAMNetShowExProps*, UInt8**, HRESULT)
   end
 
-  IAMNetShowExProps_GUID = LibC::GUID.new("fa2aa8f5-8b62-11d0-a520-000000000000")
-  CLSID_IAMNetShowExProps = "fa2aa8f5-8b62-11d0-a520-000000000000"
+  IAMNetShowExProps_GUID = "fa2aa8f5-8b62-11d0-a520-000000000000"
+  IID_IAMNetShowExProps = LibC::GUID.new(0xfa2aa8f5_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct IAMNetShowExProps
     lpVtbl : IAMNetShowExPropsVTbl*
   end
@@ -9938,8 +9938,8 @@ lib LibWin32
     get_error_code : Proc(IAMExtendedErrorInfo*, Int32*, HRESULT)
   end
 
-  IAMExtendedErrorInfo_GUID = LibC::GUID.new("fa2aa8f6-8b62-11d0-a520-000000000000")
-  CLSID_IAMExtendedErrorInfo = "fa2aa8f6-8b62-11d0-a520-000000000000"
+  IAMExtendedErrorInfo_GUID = "fa2aa8f6-8b62-11d0-a520-000000000000"
+  IID_IAMExtendedErrorInfo = LibC::GUID.new(0xfa2aa8f6_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct IAMExtendedErrorInfo
     lpVtbl : IAMExtendedErrorInfoVTbl*
   end
@@ -9967,8 +9967,8 @@ lib LibWin32
     get_more_info_text : Proc(IAMMediaContent*, UInt8**, HRESULT)
   end
 
-  IAMMediaContent_GUID = LibC::GUID.new("fa2aa8f4-8b62-11d0-a520-000000000000")
-  CLSID_IAMMediaContent = "fa2aa8f4-8b62-11d0-a520-000000000000"
+  IAMMediaContent_GUID = "fa2aa8f4-8b62-11d0-a520-000000000000"
+  IID_IAMMediaContent = LibC::GUID.new(0xfa2aa8f4_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
   struct IAMMediaContent
     lpVtbl : IAMMediaContentVTbl*
   end
@@ -9986,8 +9986,8 @@ lib LibWin32
     get_playlist_count : Proc(IAMMediaContent2*, Int32*, HRESULT)
   end
 
-  IAMMediaContent2_GUID = LibC::GUID.new("ce8f78c1-74d9-11d2-b09d-00a0c9a81117")
-  CLSID_IAMMediaContent2 = "ce8f78c1-74d9-11d2-b09d-00a0c9a81117"
+  IAMMediaContent2_GUID = "ce8f78c1-74d9-11d2-b09d-00a0c9a81117"
+  IID_IAMMediaContent2 = LibC::GUID.new(0xce8f78c1_u32, 0x74d9_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0x9d_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa8_u8, 0x11_u8, 0x17_u8])
   struct IAMMediaContent2
     lpVtbl : IAMMediaContent2VTbl*
   end
@@ -10004,8 +10004,8 @@ lib LibWin32
     get_preroll : Proc(IAMNetShowPreroll*, Int16*, HRESULT)
   end
 
-  IAMNetShowPreroll_GUID = LibC::GUID.new("aae7e4e2-6388-11d1-8d93-006097c9a2b2")
-  CLSID_IAMNetShowPreroll = "aae7e4e2-6388-11d1-8d93-006097c9a2b2"
+  IAMNetShowPreroll_GUID = "aae7e4e2-6388-11d1-8d93-006097c9a2b2"
+  IID_IAMNetShowPreroll = LibC::GUID.new(0xaae7e4e2_u32, 0x6388_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x93_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa2_u8, 0xb2_u8])
   struct IAMNetShowPreroll
     lpVtbl : IAMNetShowPrerollVTbl*
   end
@@ -10018,8 +10018,8 @@ lib LibWin32
     get_user_agent : Proc(IDShowPlugin*, UInt8**, HRESULT)
   end
 
-  IDShowPlugin_GUID = LibC::GUID.new("4746b7c8-700e-11d1-becc-00c04fb6e937")
-  CLSID_IDShowPlugin = "4746b7c8-700e-11d1-becc-00c04fb6e937"
+  IDShowPlugin_GUID = "4746b7c8-700e-11d1-becc-00c04fb6e937"
+  IID_IDShowPlugin = LibC::GUID.new(0x4746b7c8_u32, 0x700e_u16, 0x11d1_u16, StaticArray[0xbe_u8, 0xcc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xe9_u8, 0x37_u8])
   struct IDShowPlugin
     lpVtbl : IDShowPluginVTbl*
   end
@@ -10074,8 +10074,8 @@ lib LibWin32
     flush : Proc(IAMParse*, HRESULT)
   end
 
-  IAMParse_GUID = LibC::GUID.new("c47a3420-005c-11d2-9038-00a0c9697298")
-  CLSID_IAMParse = "c47a3420-005c-11d2-9038-00a0c9697298"
+  IAMParse_GUID = "c47a3420-005c-11d2-9038-00a0c9697298"
+  IID_IAMParse = LibC::GUID.new(0xc47a3420_u32, 0x5c_u16, 0x11d2_u16, StaticArray[0x90_u8, 0x38_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x72_u8, 0x98_u8])
   struct IAMParse
     lpVtbl : IAMParseVTbl*
   end
@@ -10093,8 +10093,8 @@ lib LibWin32
     get__new_enum : Proc(IAMCollection*, IUnknown*, HRESULT)
   end
 
-  IAMCollection_GUID = LibC::GUID.new("56a868b9-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IAMCollection = "56a868b9-0ad4-11ce-b03a-0020af0ba770"
+  IAMCollection_GUID = "56a868b9-0ad4-11ce-b03a-0020af0ba770"
+  IID_IAMCollection = LibC::GUID.new(0x56a868b9_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IAMCollection
     lpVtbl : IAMCollectionVTbl*
   end
@@ -10118,8 +10118,8 @@ lib LibWin32
     stop_when_ready : Proc(IMediaControl*, HRESULT)
   end
 
-  IMediaControl_GUID = LibC::GUID.new("56a868b1-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMediaControl = "56a868b1-0ad4-11ce-b03a-0020af0ba770"
+  IMediaControl_GUID = "56a868b1-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMediaControl = LibC::GUID.new(0x56a868b1_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMediaControl
     lpVtbl : IMediaControlVTbl*
   end
@@ -10140,8 +10140,8 @@ lib LibWin32
     free_event_params : Proc(IMediaEvent*, Int32, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
   end
 
-  IMediaEvent_GUID = LibC::GUID.new("56a868b6-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMediaEvent = "56a868b6-0ad4-11ce-b03a-0020af0ba770"
+  IMediaEvent_GUID = "56a868b6-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMediaEvent = LibC::GUID.new(0x56a868b6_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMediaEvent
     lpVtbl : IMediaEventVTbl*
   end
@@ -10165,8 +10165,8 @@ lib LibWin32
     get_notify_flags : Proc(IMediaEventEx*, Int32*, HRESULT)
   end
 
-  IMediaEventEx_GUID = LibC::GUID.new("56a868c0-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMediaEventEx = "56a868c0-0ad4-11ce-b03a-0020af0ba770"
+  IMediaEventEx_GUID = "56a868c0-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMediaEventEx = LibC::GUID.new(0x56a868c0_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMediaEventEx
     lpVtbl : IMediaEventExVTbl*
   end
@@ -10192,8 +10192,8 @@ lib LibWin32
     can_seek_backward : Proc(IMediaPosition*, Int32*, HRESULT)
   end
 
-  IMediaPosition_GUID = LibC::GUID.new("56a868b2-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMediaPosition = "56a868b2-0ad4-11ce-b03a-0020af0ba770"
+  IMediaPosition_GUID = "56a868b2-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMediaPosition = LibC::GUID.new(0x56a868b2_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMediaPosition
     lpVtbl : IMediaPositionVTbl*
   end
@@ -10212,8 +10212,8 @@ lib LibWin32
     get_balance : Proc(IBasicAudio*, Int32*, HRESULT)
   end
 
-  IBasicAudio_GUID = LibC::GUID.new("56a868b3-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IBasicAudio = "56a868b3-0ad4-11ce-b03a-0020af0ba770"
+  IBasicAudio_GUID = "56a868b3-0ad4-11ce-b03a-0020af0ba770"
+  IID_IBasicAudio = LibC::GUID.new(0x56a868b3_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IBasicAudio
     lpVtbl : IBasicAudioVTbl*
   end
@@ -10267,8 +10267,8 @@ lib LibWin32
     is_cursor_hidden : Proc(IVideoWindow*, Int32*, HRESULT)
   end
 
-  IVideoWindow_GUID = LibC::GUID.new("56a868b4-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IVideoWindow = "56a868b4-0ad4-11ce-b03a-0020af0ba770"
+  IVideoWindow_GUID = "56a868b4-0ad4-11ce-b03a-0020af0ba770"
+  IID_IVideoWindow = LibC::GUID.new(0x56a868b4_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IVideoWindow
     lpVtbl : IVideoWindowVTbl*
   end
@@ -10315,8 +10315,8 @@ lib LibWin32
     is_using_default_destination : Proc(IBasicVideo*, HRESULT)
   end
 
-  IBasicVideo_GUID = LibC::GUID.new("56a868b5-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IBasicVideo = "56a868b5-0ad4-11ce-b03a-0020af0ba770"
+  IBasicVideo_GUID = "56a868b5-0ad4-11ce-b03a-0020af0ba770"
+  IID_IBasicVideo = LibC::GUID.new(0x56a868b5_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IBasicVideo
     lpVtbl : IBasicVideoVTbl*
   end
@@ -10364,8 +10364,8 @@ lib LibWin32
     get_preferred_aspect_ratio : Proc(IBasicVideo2*, Int32*, Int32*, HRESULT)
   end
 
-  IBasicVideo2_GUID = LibC::GUID.new("329bb360-f6ea-11d1-9038-00a0c9697298")
-  CLSID_IBasicVideo2 = "329bb360-f6ea-11d1-9038-00a0c9697298"
+  IBasicVideo2_GUID = "329bb360-f6ea-11d1-9038-00a0c9697298"
+  IID_IBasicVideo2 = LibC::GUID.new(0x329bb360_u32, 0xf6ea_u16, 0x11d1_u16, StaticArray[0x90_u8, 0x38_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x72_u8, 0x98_u8])
   struct IBasicVideo2
     lpVtbl : IBasicVideo2VTbl*
   end
@@ -10380,8 +10380,8 @@ lib LibWin32
     get_h_result : Proc(IDeferredCommand*, HRESULT*, HRESULT)
   end
 
-  IDeferredCommand_GUID = LibC::GUID.new("56a868b8-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IDeferredCommand = "56a868b8-0ad4-11ce-b03a-0020af0ba770"
+  IDeferredCommand_GUID = "56a868b8-0ad4-11ce-b03a-0020af0ba770"
+  IID_IDeferredCommand = LibC::GUID.new(0x56a868b8_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IDeferredCommand
     lpVtbl : IDeferredCommandVTbl*
   end
@@ -10394,8 +10394,8 @@ lib LibWin32
     invoke_at_presentation_time : Proc(IQueueCommand*, IDeferredCommand*, Float64, Guid*, Int32, Int16, Int32, VARIANT*, VARIANT*, Int16*, HRESULT)
   end
 
-  IQueueCommand_GUID = LibC::GUID.new("56a868b7-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IQueueCommand = "56a868b7-0ad4-11ce-b03a-0020af0ba770"
+  IQueueCommand_GUID = "56a868b7-0ad4-11ce-b03a-0020af0ba770"
+  IID_IQueueCommand = LibC::GUID.new(0x56a868b7_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IQueueCommand
     lpVtbl : IQueueCommandVTbl*
   end
@@ -10418,8 +10418,8 @@ lib LibWin32
     put_filename : Proc(IFilterInfo*, UInt8*, HRESULT)
   end
 
-  IFilterInfo_GUID = LibC::GUID.new("56a868ba-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IFilterInfo = "56a868ba-0ad4-11ce-b03a-0020af0ba770"
+  IFilterInfo_GUID = "56a868ba-0ad4-11ce-b03a-0020af0ba770"
+  IID_IFilterInfo = LibC::GUID.new(0x56a868ba_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IFilterInfo
     lpVtbl : IFilterInfoVTbl*
   end
@@ -10436,8 +10436,8 @@ lib LibWin32
     filter : Proc(IRegFilterInfo*, IDispatch*, HRESULT)
   end
 
-  IRegFilterInfo_GUID = LibC::GUID.new("56a868bb-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IRegFilterInfo = "56a868bb-0ad4-11ce-b03a-0020af0ba770"
+  IRegFilterInfo_GUID = "56a868bb-0ad4-11ce-b03a-0020af0ba770"
+  IID_IRegFilterInfo = LibC::GUID.new(0x56a868bb_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IRegFilterInfo
     lpVtbl : IRegFilterInfoVTbl*
   end
@@ -10454,8 +10454,8 @@ lib LibWin32
     get_subtype : Proc(IMediaTypeInfo*, UInt8**, HRESULT)
   end
 
-  IMediaTypeInfo_GUID = LibC::GUID.new("56a868bc-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IMediaTypeInfo = "56a868bc-0ad4-11ce-b03a-0020af0ba770"
+  IMediaTypeInfo_GUID = "56a868bc-0ad4-11ce-b03a-0020af0ba770"
+  IID_IMediaTypeInfo = LibC::GUID.new(0x56a868bc_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IMediaTypeInfo
     lpVtbl : IMediaTypeInfoVTbl*
   end
@@ -10483,8 +10483,8 @@ lib LibWin32
     render : Proc(IPinInfo*, HRESULT)
   end
 
-  IPinInfo_GUID = LibC::GUID.new("56a868bd-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IPinInfo = "56a868bd-0ad4-11ce-b03a-0020af0ba770"
+  IPinInfo_GUID = "56a868bd-0ad4-11ce-b03a-0020af0ba770"
+  IID_IPinInfo = LibC::GUID.new(0x56a868bd_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IPinInfo
     lpVtbl : IPinInfoVTbl*
   end
@@ -10505,8 +10505,8 @@ lib LibWin32
     add_value : Proc(IAMStats*, Int32, Float64, HRESULT)
   end
 
-  IAMStats_GUID = LibC::GUID.new("bc9bcf80-dcd2-11d2-abf6-00a0c905f375")
-  CLSID_IAMStats = "bc9bcf80-dcd2-11d2-abf6-00a0c905f375"
+  IAMStats_GUID = "bc9bcf80-dcd2-11d2-abf6-00a0c905f375"
+  IID_IAMStats = LibC::GUID.new(0xbc9bcf80_u32, 0xdcd2_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xf6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
   struct IAMStats
     lpVtbl : IAMStatsVTbl*
   end
@@ -10520,8 +10520,8 @@ lib LibWin32
     get_create_video_accelerator_data : Proc(IAMVideoAcceleratorNotify*, Guid*, UInt32*, Void**, HRESULT)
   end
 
-  IAMVideoAcceleratorNotify_GUID = LibC::GUID.new("256a6a21-fbad-11d1-82bf-00a0c9696c8f")
-  CLSID_IAMVideoAcceleratorNotify = "256a6a21-fbad-11d1-82bf-00a0c9696c8f"
+  IAMVideoAcceleratorNotify_GUID = "256a6a21-fbad-11d1-82bf-00a0c9696c8f"
+  IID_IAMVideoAcceleratorNotify = LibC::GUID.new(0x256a6a21_u32, 0xfbad_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xbf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x6c_u8, 0x8f_u8])
   struct IAMVideoAcceleratorNotify
     lpVtbl : IAMVideoAcceleratorNotifyVTbl*
   end
@@ -10544,8 +10544,8 @@ lib LibWin32
     display_frame : Proc(IAMVideoAccelerator*, UInt32, IMediaSample, HRESULT)
   end
 
-  IAMVideoAccelerator_GUID = LibC::GUID.new("256a6a22-fbad-11d1-82bf-00a0c9696c8f")
-  CLSID_IAMVideoAccelerator = "256a6a22-fbad-11d1-82bf-00a0c9696c8f"
+  IAMVideoAccelerator_GUID = "256a6a22-fbad-11d1-82bf-00a0c9696c8f"
+  IID_IAMVideoAccelerator = LibC::GUID.new(0x256a6a22_u32, 0xfbad_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xbf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x6c_u8, 0x8f_u8])
   struct IAMVideoAccelerator
     lpVtbl : IAMVideoAcceleratorVTbl*
   end
@@ -10592,8 +10592,8 @@ lib LibWin32
     create_node_instance : Proc(IKsTopologyInfo*, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IKsTopologyInfo_GUID = LibC::GUID.new("720d4ac0-7533-11d0-a5d6-28db04c10000")
-  CLSID_IKsTopologyInfo = "720d4ac0-7533-11d0-a5d6-28db04c10000"
+  IKsTopologyInfo_GUID = "720d4ac0-7533-11d0-a5d6-28db04c10000"
+  IID_IKsTopologyInfo = LibC::GUID.new(0x720d4ac0_u32, 0x7533_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0xd6_u8, 0x28_u8, 0xdb_u8, 0x4_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
   struct IKsTopologyInfo
     lpVtbl : IKsTopologyInfoVTbl*
   end
@@ -10607,8 +10607,8 @@ lib LibWin32
     put_source_node_id : Proc(ISelector*, UInt32, HRESULT)
   end
 
-  ISelector_GUID = LibC::GUID.new("1abdaeca-68b6-4f83-9371-b413907c7b9f")
-  CLSID_ISelector = "1abdaeca-68b6-4f83-9371-b413907c7b9f"
+  ISelector_GUID = "1abdaeca-68b6-4f83-9371-b413907c7b9f"
+  IID_ISelector = LibC::GUID.new(0x1abdaeca_u32, 0x68b6_u16, 0x4f83_u16, StaticArray[0x93_u8, 0x71_u8, 0xb4_u8, 0x13_u8, 0x90_u8, 0x7c_u8, 0x7b_u8, 0x9f_u8])
   struct ISelector
     lpVtbl : ISelectorVTbl*
   end
@@ -10670,8 +10670,8 @@ lib LibWin32
     put_privacy_mode : Proc(ICameraControl*, Int32, Int32, HRESULT)
   end
 
-  ICameraControl_GUID = LibC::GUID.new("2ba1785d-4d1b-44ef-85e8-c7f1d3f20184")
-  CLSID_ICameraControl = "2ba1785d-4d1b-44ef-85e8-c7f1d3f20184"
+  ICameraControl_GUID = "2ba1785d-4d1b-44ef-85e8-c7f1d3f20184"
+  IID_ICameraControl = LibC::GUID.new(0x2ba1785d_u32, 0x4d1b_u16, 0x44ef_u16, StaticArray[0x85_u8, 0xe8_u8, 0xc7_u8, 0xf1_u8, 0xd3_u8, 0xf2_u8, 0x1_u8, 0x84_u8])
   struct ICameraControl
     lpVtbl : ICameraControlVTbl*
   end
@@ -10721,8 +10721,8 @@ lib LibWin32
     get_range_white_balance_component : Proc(IVideoProcAmp*, Int32*, Int32*, Int32*, Int32*, Int32*, HRESULT)
   end
 
-  IVideoProcAmp_GUID = LibC::GUID.new("4050560e-42a7-413a-85c2-09269a2d0f44")
-  CLSID_IVideoProcAmp = "4050560e-42a7-413a-85c2-09269a2d0f44"
+  IVideoProcAmp_GUID = "4050560e-42a7-413a-85c2-09269a2d0f44"
+  IID_IVideoProcAmp = LibC::GUID.new(0x4050560e_u32, 0x42a7_u16, 0x413a_u16, StaticArray[0x85_u8, 0xc2_u8, 0x9_u8, 0x26_u8, 0x9a_u8, 0x2d_u8, 0xf_u8, 0x44_u8])
   struct IVideoProcAmp
     lpVtbl : IVideoProcAmpVTbl*
   end
@@ -10735,8 +10735,8 @@ lib LibWin32
     put_ks_control : Proc(IKsNodeControl*, Void*, HRESULT)
   end
 
-  IKsNodeControl_GUID = LibC::GUID.new("11737c14-24a7-4bb5-81a0-0d003813b0c4")
-  CLSID_IKsNodeControl = "11737c14-24a7-4bb5-81a0-0d003813b0c4"
+  IKsNodeControl_GUID = "11737c14-24a7-4bb5-81a0-0d003813b0c4"
+  IID_IKsNodeControl = LibC::GUID.new(0x11737c14_u32, 0x24a7_u16, 0x4bb5_u16, StaticArray[0x81_u8, 0xa0_u8, 0xd_u8, 0x0_u8, 0x38_u8, 0x13_u8, 0xb0_u8, 0xc4_u8])
   struct IKsNodeControl
     lpVtbl : IKsNodeControlVTbl*
   end
@@ -10755,8 +10755,8 @@ lib LibWin32
     get_index_mode : Proc(IConfigAsfWriter*, LibC::BOOL*, HRESULT)
   end
 
-  IConfigAsfWriter_GUID = LibC::GUID.new("45086030-f7e4-486a-b504-826bb5792a3b")
-  CLSID_IConfigAsfWriter = "45086030-f7e4-486a-b504-826bb5792a3b"
+  IConfigAsfWriter_GUID = "45086030-f7e4-486a-b504-826bb5792a3b"
+  IID_IConfigAsfWriter = LibC::GUID.new(0x45086030_u32, 0xf7e4_u16, 0x486a_u16, StaticArray[0xb5_u8, 0x4_u8, 0x82_u8, 0x6b_u8, 0xb5_u8, 0x79_u8, 0x2a_u8, 0x3b_u8])
   struct IConfigAsfWriter
     lpVtbl : IConfigAsfWriterVTbl*
   end
@@ -10779,8 +10779,8 @@ lib LibWin32
     reset_multi_pass_state : Proc(IConfigAsfWriter2*, HRESULT)
   end
 
-  IConfigAsfWriter2_GUID = LibC::GUID.new("7989ccaa-53f0-44f0-884a-f3b03f6ae066")
-  CLSID_IConfigAsfWriter2 = "7989ccaa-53f0-44f0-884a-f3b03f6ae066"
+  IConfigAsfWriter2_GUID = "7989ccaa-53f0-44f0-884a-f3b03f6ae066"
+  IID_IConfigAsfWriter2 = LibC::GUID.new(0x7989ccaa_u32, 0x53f0_u16, 0x44f0_u16, StaticArray[0x88_u8, 0x4a_u8, 0xf3_u8, 0xb0_u8, 0x3f_u8, 0x6a_u8, 0xe0_u8, 0x66_u8])
   struct IConfigAsfWriter2
     lpVtbl : IConfigAsfWriter2VTbl*
   end
@@ -10800,8 +10800,8 @@ lib LibWin32
     get_end_of_stream_event_handle : Proc(IMultiMediaStream*, LibC::HANDLE*, HRESULT)
   end
 
-  IMultiMediaStream_GUID = LibC::GUID.new("b502d1bc-9a57-11d0-8fde-00c04fd9189d")
-  CLSID_IMultiMediaStream = "b502d1bc-9a57-11d0-8fde-00c04fd9189d"
+  IMultiMediaStream_GUID = "b502d1bc-9a57-11d0-8fde-00c04fd9189d"
+  IID_IMultiMediaStream = LibC::GUID.new(0xb502d1bc_u32, 0x9a57_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IMultiMediaStream
     lpVtbl : IMultiMediaStreamVTbl*
   end
@@ -10818,8 +10818,8 @@ lib LibWin32
     send_end_of_stream : Proc(IMediaStream*, UInt32, HRESULT)
   end
 
-  IMediaStream_GUID = LibC::GUID.new("b502d1bd-9a57-11d0-8fde-00c04fd9189d")
-  CLSID_IMediaStream = "b502d1bd-9a57-11d0-8fde-00c04fd9189d"
+  IMediaStream_GUID = "b502d1bd-9a57-11d0-8fde-00c04fd9189d"
+  IID_IMediaStream = LibC::GUID.new(0xb502d1bd_u32, 0x9a57_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IMediaStream
     lpVtbl : IMediaStreamVTbl*
   end
@@ -10835,8 +10835,8 @@ lib LibWin32
     completion_status : Proc(IStreamSample*, UInt32, UInt32, HRESULT)
   end
 
-  IStreamSample_GUID = LibC::GUID.new("b502d1be-9a57-11d0-8fde-00c04fd9189d")
-  CLSID_IStreamSample = "b502d1be-9a57-11d0-8fde-00c04fd9189d"
+  IStreamSample_GUID = "b502d1be-9a57-11d0-8fde-00c04fd9189d"
+  IID_IStreamSample = LibC::GUID.new(0xb502d1be_u32, 0x9a57_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IStreamSample
     lpVtbl : IStreamSampleVTbl*
   end
@@ -10859,8 +10859,8 @@ lib LibWin32
     get_time_per_frame : Proc(IDirectDrawMediaStream*, Int64*, HRESULT)
   end
 
-  IDirectDrawMediaStream_GUID = LibC::GUID.new("f4104fce-9a70-11d0-8fde-00c04fd9189d")
-  CLSID_IDirectDrawMediaStream = "f4104fce-9a70-11d0-8fde-00c04fd9189d"
+  IDirectDrawMediaStream_GUID = "f4104fce-9a70-11d0-8fde-00c04fd9189d"
+  IID_IDirectDrawMediaStream = LibC::GUID.new(0xf4104fce_u32, 0x9a70_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IDirectDrawMediaStream
     lpVtbl : IDirectDrawMediaStreamVTbl*
   end
@@ -10878,8 +10878,8 @@ lib LibWin32
     set_rect : Proc(IDirectDrawStreamSample*, RECT*, HRESULT)
   end
 
-  IDirectDrawStreamSample_GUID = LibC::GUID.new("f4104fcf-9a70-11d0-8fde-00c04fd9189d")
-  CLSID_IDirectDrawStreamSample = "f4104fcf-9a70-11d0-8fde-00c04fd9189d"
+  IDirectDrawStreamSample_GUID = "f4104fcf-9a70-11d0-8fde-00c04fd9189d"
+  IID_IDirectDrawStreamSample = LibC::GUID.new(0xf4104fcf_u32, 0x9a70_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IDirectDrawStreamSample
     lpVtbl : IDirectDrawStreamSampleVTbl*
   end
@@ -10899,8 +10899,8 @@ lib LibWin32
     create_sample : Proc(IAudioMediaStream*, IAudioData, UInt32, IAudioStreamSample*, HRESULT)
   end
 
-  IAudioMediaStream_GUID = LibC::GUID.new("f7537560-a3be-11d0-8212-00c04fc32c45")
-  CLSID_IAudioMediaStream = "f7537560-a3be-11d0-8212-00c04fc32c45"
+  IAudioMediaStream_GUID = "f7537560-a3be-11d0-8212-00c04fc32c45"
+  IID_IAudioMediaStream = LibC::GUID.new(0xf7537560_u32, 0xa3be_u16, 0x11d0_u16, StaticArray[0x82_u8, 0x12_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x2c_u8, 0x45_u8])
   struct IAudioMediaStream
     lpVtbl : IAudioMediaStreamVTbl*
   end
@@ -10917,8 +10917,8 @@ lib LibWin32
     get_audio_data : Proc(IAudioStreamSample*, IAudioData*, HRESULT)
   end
 
-  IAudioStreamSample_GUID = LibC::GUID.new("345fee00-aba5-11d0-8212-00c04fc32c45")
-  CLSID_IAudioStreamSample = "345fee00-aba5-11d0-8212-00c04fc32c45"
+  IAudioStreamSample_GUID = "345fee00-aba5-11d0-8212-00c04fc32c45"
+  IID_IAudioStreamSample = LibC::GUID.new(0x345fee00_u32, 0xaba5_u16, 0x11d0_u16, StaticArray[0x82_u8, 0x12_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x2c_u8, 0x45_u8])
   struct IAudioStreamSample
     lpVtbl : IAudioStreamSampleVTbl*
   end
@@ -10932,8 +10932,8 @@ lib LibWin32
     set_actual : Proc(IMemoryData*, UInt32, HRESULT)
   end
 
-  IMemoryData_GUID = LibC::GUID.new("327fc560-af60-11d0-8212-00c04fc32c45")
-  CLSID_IMemoryData = "327fc560-af60-11d0-8212-00c04fc32c45"
+  IMemoryData_GUID = "327fc560-af60-11d0-8212-00c04fc32c45"
+  IID_IMemoryData = LibC::GUID.new(0x327fc560_u32, 0xaf60_u16, 0x11d0_u16, StaticArray[0x82_u8, 0x12_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x2c_u8, 0x45_u8])
   struct IMemoryData
     lpVtbl : IMemoryDataVTbl*
   end
@@ -10949,8 +10949,8 @@ lib LibWin32
     set_format : Proc(IAudioData*, WAVEFORMATEX*, HRESULT)
   end
 
-  IAudioData_GUID = LibC::GUID.new("54c719c0-af60-11d0-8212-00c04fc32c45")
-  CLSID_IAudioData = "54c719c0-af60-11d0-8212-00c04fc32c45"
+  IAudioData_GUID = "54c719c0-af60-11d0-8212-00c04fc32c45"
+  IID_IAudioData = LibC::GUID.new(0x54c719c0_u32, 0xaf60_u16, 0x11d0_u16, StaticArray[0x82_u8, 0x12_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x2c_u8, 0x45_u8])
   struct IAudioData
     lpVtbl : IAudioDataVTbl*
   end
@@ -10977,8 +10977,8 @@ lib LibWin32
     render : Proc(IAMMultiMediaStream*, UInt32, HRESULT)
   end
 
-  IAMMultiMediaStream_GUID = LibC::GUID.new("bebe595c-9a6f-11d0-8fde-00c04fd9189d")
-  CLSID_IAMMultiMediaStream = "bebe595c-9a6f-11d0-8fde-00c04fd9189d"
+  IAMMultiMediaStream_GUID = "bebe595c-9a6f-11d0-8fde-00c04fd9189d"
+  IID_IAMMultiMediaStream = LibC::GUID.new(0xbebe595c_u32, 0x9a6f_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IAMMultiMediaStream
     lpVtbl : IAMMultiMediaStreamVTbl*
   end
@@ -11000,8 +11000,8 @@ lib LibWin32
     join_filter_graph : Proc(IAMMediaStream*, IFilterGraph, HRESULT)
   end
 
-  IAMMediaStream_GUID = LibC::GUID.new("bebe595d-9a6f-11d0-8fde-00c04fd9189d")
-  CLSID_IAMMediaStream = "bebe595d-9a6f-11d0-8fde-00c04fd9189d"
+  IAMMediaStream_GUID = "bebe595d-9a6f-11d0-8fde-00c04fd9189d"
+  IID_IAMMediaStream = LibC::GUID.new(0xbebe595d_u32, 0x9a6f_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IAMMediaStream
     lpVtbl : IAMMediaStreamVTbl*
   end
@@ -11033,8 +11033,8 @@ lib LibWin32
     end_of_stream : Proc(IMediaStreamFilter*, HRESULT)
   end
 
-  IMediaStreamFilter_GUID = LibC::GUID.new("bebe595e-9a6f-11d0-8fde-00c04fd9189d")
-  CLSID_IMediaStreamFilter = "bebe595e-9a6f-11d0-8fde-00c04fd9189d"
+  IMediaStreamFilter_GUID = "bebe595e-9a6f-11d0-8fde-00c04fd9189d"
+  IID_IMediaStreamFilter = LibC::GUID.new(0xbebe595e_u32, 0x9a6f_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IMediaStreamFilter
     lpVtbl : IMediaStreamFilterVTbl*
   end
@@ -11046,8 +11046,8 @@ lib LibWin32
     get_direct_draw : Proc(IDirectDrawMediaSampleAllocator*, IDirectDraw*, HRESULT)
   end
 
-  IDirectDrawMediaSampleAllocator_GUID = LibC::GUID.new("ab6b4afc-f6e4-11d0-900d-00c04fd9189d")
-  CLSID_IDirectDrawMediaSampleAllocator = "ab6b4afc-f6e4-11d0-900d-00c04fd9189d"
+  IDirectDrawMediaSampleAllocator_GUID = "ab6b4afc-f6e4-11d0-900d-00c04fd9189d"
+  IID_IDirectDrawMediaSampleAllocator = LibC::GUID.new(0xab6b4afc_u32, 0xf6e4_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IDirectDrawMediaSampleAllocator
     lpVtbl : IDirectDrawMediaSampleAllocatorVTbl*
   end
@@ -11060,8 +11060,8 @@ lib LibWin32
     lock_media_sample_pointer : Proc(IDirectDrawMediaSample*, HRESULT)
   end
 
-  IDirectDrawMediaSample_GUID = LibC::GUID.new("ab6b4afe-f6e4-11d0-900d-00c04fd9189d")
-  CLSID_IDirectDrawMediaSample = "ab6b4afe-f6e4-11d0-900d-00c04fd9189d"
+  IDirectDrawMediaSample_GUID = "ab6b4afe-f6e4-11d0-900d-00c04fd9189d"
+  IID_IDirectDrawMediaSample = LibC::GUID.new(0xab6b4afe_u32, 0xf6e4_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IDirectDrawMediaSample
     lpVtbl : IDirectDrawMediaSampleVTbl*
   end
@@ -11083,8 +11083,8 @@ lib LibWin32
     set_stream_allocator_requirements : Proc(IAMMediaTypeStream*, ALLOCATOR_PROPERTIES*, HRESULT)
   end
 
-  IAMMediaTypeStream_GUID = LibC::GUID.new("ab6b4afa-f6e4-11d0-900d-00c04fd9189d")
-  CLSID_IAMMediaTypeStream = "ab6b4afa-f6e4-11d0-900d-00c04fd9189d"
+  IAMMediaTypeStream_GUID = "ab6b4afa-f6e4-11d0-900d-00c04fd9189d"
+  IID_IAMMediaTypeStream = LibC::GUID.new(0xab6b4afa_u32, 0xf6e4_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IAMMediaTypeStream
     lpVtbl : IAMMediaTypeStreamVTbl*
   end
@@ -11117,8 +11117,8 @@ lib LibWin32
     set_media_time : Proc(IAMMediaTypeSample*, Int64*, Int64*, HRESULT)
   end
 
-  IAMMediaTypeSample_GUID = LibC::GUID.new("ab6b4afb-f6e4-11d0-900d-00c04fd9189d")
-  CLSID_IAMMediaTypeSample = "ab6b4afb-f6e4-11d0-900d-00c04fd9189d"
+  IAMMediaTypeSample_GUID = "ab6b4afb-f6e4-11d0-900d-00c04fd9189d"
+  IID_IAMMediaTypeSample = LibC::GUID.new(0xab6b4afb_u32, 0xf6e4_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
   struct IAMMediaTypeSample
     lpVtbl : IAMMediaTypeSampleVTbl*
   end
@@ -11247,8 +11247,8 @@ lib LibWin32
     init : Proc(IDMOWrapperFilter*, Guid*, Guid*, HRESULT)
   end
 
-  IDMOWrapperFilter_GUID = LibC::GUID.new("52d6f586-9f0f-4824-8fc8-e32ca04930c2")
-  CLSID_IDMOWrapperFilter = "52d6f586-9f0f-4824-8fc8-e32ca04930c2"
+  IDMOWrapperFilter_GUID = "52d6f586-9f0f-4824-8fc8-e32ca04930c2"
+  IID_IDMOWrapperFilter = LibC::GUID.new(0x52d6f586_u32, 0x9f0f_u16, 0x4824_u16, StaticArray[0x8f_u8, 0xc8_u8, 0xe3_u8, 0x2c_u8, 0xa0_u8, 0x49_u8, 0x30_u8, 0xc2_u8])
   struct IDMOWrapperFilter
     lpVtbl : IDMOWrapperFilterVTbl*
   end
@@ -11262,8 +11262,8 @@ lib LibWin32
     on_data_change : Proc(IMixerOCXNotify*, UInt32, HRESULT)
   end
 
-  IMixerOCXNotify_GUID = LibC::GUID.new("81a3bd31-dee1-11d1-8508-00a0c91f9ca0")
-  CLSID_IMixerOCXNotify = "81a3bd31-dee1-11d1-8508-00a0c91f9ca0"
+  IMixerOCXNotify_GUID = "81a3bd31-dee1-11d1-8508-00a0c91f9ca0"
+  IID_IMixerOCXNotify = LibC::GUID.new(0x81a3bd31_u32, 0xdee1_u16, 0x11d1_u16, StaticArray[0x85_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1f_u8, 0x9c_u8, 0xa0_u8])
   struct IMixerOCXNotify
     lpVtbl : IMixerOCXNotifyVTbl*
   end
@@ -11282,8 +11282,8 @@ lib LibWin32
     un_advise : Proc(IMixerOCX*, HRESULT)
   end
 
-  IMixerOCX_GUID = LibC::GUID.new("81a3bd32-dee1-11d1-8508-00a0c91f9ca0")
-  CLSID_IMixerOCX = "81a3bd32-dee1-11d1-8508-00a0c91f9ca0"
+  IMixerOCX_GUID = "81a3bd32-dee1-11d1-8508-00a0c91f9ca0"
+  IID_IMixerOCX = LibC::GUID.new(0x81a3bd32_u32, 0xdee1_u16, 0x11d1_u16, StaticArray[0x85_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1f_u8, 0x9c_u8, 0xa0_u8])
   struct IMixerOCX
     lpVtbl : IMixerOCXVTbl*
   end
@@ -11366,8 +11366,8 @@ lib LibWin32
     present_image : Proc(IVMRImagePresenter9*, LibC::UINT_PTR, VMR9PresentationInfo*, HRESULT)
   end
 
-  IVMRImagePresenter9_GUID = LibC::GUID.new("69188c61-12a3-40f0-8ffc-342e7b433fd7")
-  CLSID_IVMRImagePresenter9 = "69188c61-12a3-40f0-8ffc-342e7b433fd7"
+  IVMRImagePresenter9_GUID = "69188c61-12a3-40f0-8ffc-342e7b433fd7"
+  IID_IVMRImagePresenter9 = LibC::GUID.new(0x69188c61_u32, 0x12a3_u16, 0x40f0_u16, StaticArray[0x8f_u8, 0xfc_u8, 0x34_u8, 0x2e_u8, 0x7b_u8, 0x43_u8, 0x3f_u8, 0xd7_u8])
   struct IVMRImagePresenter9
     lpVtbl : IVMRImagePresenter9VTbl*
   end
@@ -11382,8 +11382,8 @@ lib LibWin32
     advise_notify : Proc(IVMRSurfaceAllocator9*, IVMRSurfaceAllocatorNotify9, HRESULT)
   end
 
-  IVMRSurfaceAllocator9_GUID = LibC::GUID.new("8d5148ea-3f5d-46cf-9df1-d1b896eedb1f")
-  CLSID_IVMRSurfaceAllocator9 = "8d5148ea-3f5d-46cf-9df1-d1b896eedb1f"
+  IVMRSurfaceAllocator9_GUID = "8d5148ea-3f5d-46cf-9df1-d1b896eedb1f"
+  IID_IVMRSurfaceAllocator9 = LibC::GUID.new(0x8d5148ea_u32, 0x3f5d_u16, 0x46cf_u16, StaticArray[0x9d_u8, 0xf1_u8, 0xd1_u8, 0xb8_u8, 0x96_u8, 0xee_u8, 0xdb_u8, 0x1f_u8])
   struct IVMRSurfaceAllocator9
     lpVtbl : IVMRSurfaceAllocator9VTbl*
   end
@@ -11399,8 +11399,8 @@ lib LibWin32
     get_surface_ex : Proc(IVMRSurfaceAllocatorEx9*, LibC::UINT_PTR, UInt32, UInt32, IDirect3DSurface9*, RECT*, HRESULT)
   end
 
-  IVMRSurfaceAllocatorEx9_GUID = LibC::GUID.new("6de9a68a-a928-4522-bf57-655ae3866456")
-  CLSID_IVMRSurfaceAllocatorEx9 = "6de9a68a-a928-4522-bf57-655ae3866456"
+  IVMRSurfaceAllocatorEx9_GUID = "6de9a68a-a928-4522-bf57-655ae3866456"
+  IID_IVMRSurfaceAllocatorEx9 = LibC::GUID.new(0x6de9a68a_u32, 0xa928_u16, 0x4522_u16, StaticArray[0xbf_u8, 0x57_u8, 0x65_u8, 0x5a_u8, 0xe3_u8, 0x86_u8, 0x64_u8, 0x56_u8])
   struct IVMRSurfaceAllocatorEx9
     lpVtbl : IVMRSurfaceAllocatorEx9VTbl*
   end
@@ -11416,8 +11416,8 @@ lib LibWin32
     notify_event : Proc(IVMRSurfaceAllocatorNotify9*, Int32, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
   end
 
-  IVMRSurfaceAllocatorNotify9_GUID = LibC::GUID.new("dca3f5df-bb3a-4d03-bd81-84614bfbfa0c")
-  CLSID_IVMRSurfaceAllocatorNotify9 = "dca3f5df-bb3a-4d03-bd81-84614bfbfa0c"
+  IVMRSurfaceAllocatorNotify9_GUID = "dca3f5df-bb3a-4d03-bd81-84614bfbfa0c"
+  IID_IVMRSurfaceAllocatorNotify9 = LibC::GUID.new(0xdca3f5df_u32, 0xbb3a_u16, 0x4d03_u16, StaticArray[0xbd_u8, 0x81_u8, 0x84_u8, 0x61_u8, 0x4b_u8, 0xfb_u8, 0xfa_u8, 0xc_u8])
   struct IVMRSurfaceAllocatorNotify9
     lpVtbl : IVMRSurfaceAllocatorNotify9VTbl*
   end
@@ -11441,8 +11441,8 @@ lib LibWin32
     get_border_color : Proc(IVMRWindowlessControl9*, UInt32*, HRESULT)
   end
 
-  IVMRWindowlessControl9_GUID = LibC::GUID.new("8f537d09-f85e-4414-b23b-502e54c79927")
-  CLSID_IVMRWindowlessControl9 = "8f537d09-f85e-4414-b23b-502e54c79927"
+  IVMRWindowlessControl9_GUID = "8f537d09-f85e-4414-b23b-502e54c79927"
+  IID_IVMRWindowlessControl9 = LibC::GUID.new(0x8f537d09_u32, 0xf85e_u16, 0x4414_u16, StaticArray[0xb2_u8, 0x3b_u8, 0x50_u8, 0x2e_u8, 0x54_u8, 0xc7_u8, 0x99_u8, 0x27_u8])
   struct IVMRWindowlessControl9
     lpVtbl : IVMRWindowlessControl9VTbl*
   end
@@ -11466,8 +11466,8 @@ lib LibWin32
     get_proc_amp_control_range : Proc(IVMRMixerControl9*, UInt32, VMR9ProcAmpControlRange*, HRESULT)
   end
 
-  IVMRMixerControl9_GUID = LibC::GUID.new("1a777eaa-47c8-4930-b2c9-8fee1c1b0f3b")
-  CLSID_IVMRMixerControl9 = "1a777eaa-47c8-4930-b2c9-8fee1c1b0f3b"
+  IVMRMixerControl9_GUID = "1a777eaa-47c8-4930-b2c9-8fee1c1b0f3b"
+  IID_IVMRMixerControl9 = LibC::GUID.new(0x1a777eaa_u32, 0x47c8_u16, 0x4930_u16, StaticArray[0xb2_u8, 0xc9_u8, 0x8f_u8, 0xee_u8, 0x1c_u8, 0x1b_u8, 0xf_u8, 0x3b_u8])
   struct IVMRMixerControl9
     lpVtbl : IVMRMixerControl9VTbl*
   end
@@ -11481,8 +11481,8 @@ lib LibWin32
     get_alpha_bitmap_parameters : Proc(IVMRMixerBitmap9*, VMR9AlphaBitmap*, HRESULT)
   end
 
-  IVMRMixerBitmap9_GUID = LibC::GUID.new("ced175e5-1935-4820-81bd-ff6ad00c9108")
-  CLSID_IVMRMixerBitmap9 = "ced175e5-1935-4820-81bd-ff6ad00c9108"
+  IVMRMixerBitmap9_GUID = "ced175e5-1935-4820-81bd-ff6ad00c9108"
+  IID_IVMRMixerBitmap9 = LibC::GUID.new(0xced175e5_u32, 0x1935_u16, 0x4820_u16, StaticArray[0x81_u8, 0xbd_u8, 0xff_u8, 0x6a_u8, 0xd0_u8, 0xc_u8, 0x91_u8, 0x8_u8])
   struct IVMRMixerBitmap9
     lpVtbl : IVMRMixerBitmap9VTbl*
   end
@@ -11497,8 +11497,8 @@ lib LibWin32
     get_surface : Proc(IVMRSurface9*, IDirect3DSurface9*, HRESULT)
   end
 
-  IVMRSurface9_GUID = LibC::GUID.new("dfc581a1-6e1f-4c3a-8d0a-5e9792ea2afc")
-  CLSID_IVMRSurface9 = "dfc581a1-6e1f-4c3a-8d0a-5e9792ea2afc"
+  IVMRSurface9_GUID = "dfc581a1-6e1f-4c3a-8d0a-5e9792ea2afc"
+  IID_IVMRSurface9 = LibC::GUID.new(0xdfc581a1_u32, 0x6e1f_u16, 0x4c3a_u16, StaticArray[0x8d_u8, 0xa_u8, 0x5e_u8, 0x97_u8, 0x92_u8, 0xea_u8, 0x2a_u8, 0xfc_u8])
   struct IVMRSurface9
     lpVtbl : IVMRSurface9VTbl*
   end
@@ -11511,8 +11511,8 @@ lib LibWin32
     get_rendering_prefs : Proc(IVMRImagePresenterConfig9*, UInt32*, HRESULT)
   end
 
-  IVMRImagePresenterConfig9_GUID = LibC::GUID.new("45c15cab-6e22-420a-8043-ae1f0ac02c7d")
-  CLSID_IVMRImagePresenterConfig9 = "45c15cab-6e22-420a-8043-ae1f0ac02c7d"
+  IVMRImagePresenterConfig9_GUID = "45c15cab-6e22-420a-8043-ae1f0ac02c7d"
+  IID_IVMRImagePresenterConfig9 = LibC::GUID.new(0x45c15cab_u32, 0x6e22_u16, 0x420a_u16, StaticArray[0x80_u8, 0x43_u8, 0xae_u8, 0x1f_u8, 0xa_u8, 0xc0_u8, 0x2c_u8, 0x7d_u8])
   struct IVMRImagePresenterConfig9
     lpVtbl : IVMRImagePresenterConfig9VTbl*
   end
@@ -11525,8 +11525,8 @@ lib LibWin32
     get_stream_active_state : Proc(IVMRVideoStreamControl9*, LibC::BOOL*, HRESULT)
   end
 
-  IVMRVideoStreamControl9_GUID = LibC::GUID.new("d0cfe38b-93e7-4772-8957-0400c49a4485")
-  CLSID_IVMRVideoStreamControl9 = "d0cfe38b-93e7-4772-8957-0400c49a4485"
+  IVMRVideoStreamControl9_GUID = "d0cfe38b-93e7-4772-8957-0400c49a4485"
+  IID_IVMRVideoStreamControl9 = LibC::GUID.new(0xd0cfe38b_u32, 0x93e7_u16, 0x4772_u16, StaticArray[0x89_u8, 0x57_u8, 0x4_u8, 0x0_u8, 0xc4_u8, 0x9a_u8, 0x44_u8, 0x85_u8])
   struct IVMRVideoStreamControl9
     lpVtbl : IVMRVideoStreamControl9VTbl*
   end
@@ -11544,8 +11544,8 @@ lib LibWin32
     get_rendering_mode : Proc(IVMRFilterConfig9*, UInt32*, HRESULT)
   end
 
-  IVMRFilterConfig9_GUID = LibC::GUID.new("5a804648-4f66-4867-9c43-4f5c822cf1b8")
-  CLSID_IVMRFilterConfig9 = "5a804648-4f66-4867-9c43-4f5c822cf1b8"
+  IVMRFilterConfig9_GUID = "5a804648-4f66-4867-9c43-4f5c822cf1b8"
+  IID_IVMRFilterConfig9 = LibC::GUID.new(0x5a804648_u32, 0x4f66_u16, 0x4867_u16, StaticArray[0x9c_u8, 0x43_u8, 0x4f_u8, 0x5c_u8, 0x82_u8, 0x2c_u8, 0xf1_u8, 0xb8_u8])
   struct IVMRFilterConfig9
     lpVtbl : IVMRFilterConfig9VTbl*
   end
@@ -11558,8 +11558,8 @@ lib LibWin32
     set_aspect_ratio_mode : Proc(IVMRAspectRatioControl9*, UInt32, HRESULT)
   end
 
-  IVMRAspectRatioControl9_GUID = LibC::GUID.new("00d96c29-bbde-4efc-9901-bb5036392146")
-  CLSID_IVMRAspectRatioControl9 = "00d96c29-bbde-4efc-9901-bb5036392146"
+  IVMRAspectRatioControl9_GUID = "00d96c29-bbde-4efc-9901-bb5036392146"
+  IID_IVMRAspectRatioControl9 = LibC::GUID.new(0xd96c29_u32, 0xbbde_u16, 0x4efc_u16, StaticArray[0x99_u8, 0x1_u8, 0xbb_u8, 0x50_u8, 0x36_u8, 0x39_u8, 0x21_u8, 0x46_u8])
   struct IVMRAspectRatioControl9
     lpVtbl : IVMRAspectRatioControl9VTbl*
   end
@@ -11575,8 +11575,8 @@ lib LibWin32
     get_available_monitors : Proc(IVMRMonitorConfig9*, VMR9MonitorInfo*, UInt32, UInt32*, HRESULT)
   end
 
-  IVMRMonitorConfig9_GUID = LibC::GUID.new("46c2e457-8ba0-4eef-b80b-0680f0978749")
-  CLSID_IVMRMonitorConfig9 = "46c2e457-8ba0-4eef-b80b-0680f0978749"
+  IVMRMonitorConfig9_GUID = "46c2e457-8ba0-4eef-b80b-0680f0978749"
+  IID_IVMRMonitorConfig9 = LibC::GUID.new(0x46c2e457_u32, 0x8ba0_u16, 0x4eef_u16, StaticArray[0xb8_u8, 0xb_u8, 0x6_u8, 0x80_u8, 0xf0_u8, 0x97_u8, 0x87_u8, 0x49_u8])
   struct IVMRMonitorConfig9
     lpVtbl : IVMRMonitorConfig9VTbl*
   end
@@ -11594,8 +11594,8 @@ lib LibWin32
     get_actual_deinterlace_mode : Proc(IVMRDeinterlaceControl9*, UInt32, Guid*, HRESULT)
   end
 
-  IVMRDeinterlaceControl9_GUID = LibC::GUID.new("a215fb8d-13c2-4f7f-993c-003d6271a459")
-  CLSID_IVMRDeinterlaceControl9 = "a215fb8d-13c2-4f7f-993c-003d6271a459"
+  IVMRDeinterlaceControl9_GUID = "a215fb8d-13c2-4f7f-993c-003d6271a459"
+  IID_IVMRDeinterlaceControl9 = LibC::GUID.new(0xa215fb8d_u32, 0x13c2_u16, 0x4f7f_u16, StaticArray[0x99_u8, 0x3c_u8, 0x0_u8, 0x3d_u8, 0x62_u8, 0x71_u8, 0xa4_u8, 0x59_u8])
   struct IVMRDeinterlaceControl9
     lpVtbl : IVMRDeinterlaceControl9VTbl*
   end
@@ -11610,8 +11610,8 @@ lib LibWin32
     composite_image : Proc(IVMRImageCompositor9*, IUnknown, IDirect3DSurface9, AM_MEDIA_TYPE*, Int64, Int64, UInt32, VMR9VideoStreamInfo*, UInt32, HRESULT)
   end
 
-  IVMRImageCompositor9_GUID = LibC::GUID.new("4a5c89eb-df51-4654-ac2a-e48e02bbabf6")
-  CLSID_IVMRImageCompositor9 = "4a5c89eb-df51-4654-ac2a-e48e02bbabf6"
+  IVMRImageCompositor9_GUID = "4a5c89eb-df51-4654-ac2a-e48e02bbabf6"
+  IID_IVMRImageCompositor9 = LibC::GUID.new(0x4a5c89eb_u32, 0xdf51_u16, 0x4654_u16, StaticArray[0xac_u8, 0x2a_u8, 0xe4_u8, 0x8e_u8, 0x2_u8, 0xbb_u8, 0xab_u8, 0xf6_u8])
   struct IVMRImageCompositor9
     lpVtbl : IVMRImageCompositor9VTbl*
   end
@@ -11749,8 +11749,8 @@ lib LibWin32
     get_current_time_format : Proc(IMediaParamInfo*, Guid*, UInt32*, HRESULT)
   end
 
-  IMediaParamInfo_GUID = LibC::GUID.new("6d6cbb60-a223-44aa-842f-a2f06750be6d")
-  CLSID_IMediaParamInfo = "6d6cbb60-a223-44aa-842f-a2f06750be6d"
+  IMediaParamInfo_GUID = "6d6cbb60-a223-44aa-842f-a2f06750be6d"
+  IID_IMediaParamInfo = LibC::GUID.new(0x6d6cbb60_u32, 0xa223_u16, 0x44aa_u16, StaticArray[0x84_u8, 0x2f_u8, 0xa2_u8, 0xf0_u8, 0x67_u8, 0x50_u8, 0xbe_u8, 0x6d_u8])
   struct IMediaParamInfo
     lpVtbl : IMediaParamInfoVTbl*
   end
@@ -11766,8 +11766,8 @@ lib LibWin32
     set_time_format : Proc(IMediaParams*, Guid, UInt32, HRESULT)
   end
 
-  IMediaParams_GUID = LibC::GUID.new("6d6cbb61-a223-44aa-842f-a2f06750be6e")
-  CLSID_IMediaParams = "6d6cbb61-a223-44aa-842f-a2f06750be6e"
+  IMediaParams_GUID = "6d6cbb61-a223-44aa-842f-a2f06750be6e"
+  IID_IMediaParams = LibC::GUID.new(0x6d6cbb61_u32, 0xa223_u16, 0x44aa_u16, StaticArray[0x84_u8, 0x2f_u8, 0xa2_u8, 0xf0_u8, 0x67_u8, 0x50_u8, 0xbe_u8, 0x6e_u8])
   struct IMediaParams
     lpVtbl : IMediaParamsVTbl*
   end
@@ -11789,8 +11789,8 @@ lib LibWin32
     get_scan_duration : Proc(IAMPlayListItem*, UInt32, Int64*, HRESULT)
   end
 
-  IAMPlayListItem_GUID = LibC::GUID.new("56a868ff-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IAMPlayListItem = "56a868ff-0ad4-11ce-b03a-0020af0ba770"
+  IAMPlayListItem_GUID = "56a868ff-0ad4-11ce-b03a-0020af0ba770"
+  IID_IAMPlayListItem = LibC::GUID.new(0x56a868ff_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IAMPlayListItem
     lpVtbl : IAMPlayListItemVTbl*
   end
@@ -11806,8 +11806,8 @@ lib LibWin32
     get_repeat_info : Proc(IAMPlayList*, UInt32*, UInt32*, UInt32*, HRESULT)
   end
 
-  IAMPlayList_GUID = LibC::GUID.new("56a868fe-0ad4-11ce-b03a-0020af0ba770")
-  CLSID_IAMPlayList = "56a868fe-0ad4-11ce-b03a-0020af0ba770"
+  IAMPlayList_GUID = "56a868fe-0ad4-11ce-b03a-0020af0ba770"
+  IID_IAMPlayList = LibC::GUID.new(0x56a868fe_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
   struct IAMPlayList
     lpVtbl : IAMPlayListVTbl*
   end
@@ -11819,8 +11819,8 @@ lib LibWin32
     get_pages : Proc(ISpecifyParticularPages*, Guid*, CAUUID*, HRESULT)
   end
 
-  ISpecifyParticularPages_GUID = LibC::GUID.new("4c437b91-6e9e-11d1-a704-006097c4e476")
-  CLSID_ISpecifyParticularPages = "4c437b91-6e9e-11d1-a704-006097c4e476"
+  ISpecifyParticularPages_GUID = "4c437b91-6e9e-11d1-a704-006097c4e476"
+  IID_ISpecifyParticularPages = LibC::GUID.new(0x4c437b91_u32, 0x6e9e_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc4_u8, 0xe4_u8, 0x76_u8])
   struct ISpecifyParticularPages
     lpVtbl : ISpecifyParticularPagesVTbl*
   end
@@ -11832,8 +11832,8 @@ lib LibWin32
     rebuild_now : Proc(IAMRebuild*, HRESULT)
   end
 
-  IAMRebuild_GUID = LibC::GUID.new("02ef04dd-7580-11d1-bece-00c04fb6e937")
-  CLSID_IAMRebuild = "02ef04dd-7580-11d1-bece-00c04fb6e937"
+  IAMRebuild_GUID = "02ef04dd-7580-11d1-bece-00c04fb6e937"
+  IID_IAMRebuild = LibC::GUID.new(0x2ef04dd_u32, 0x7580_u16, 0x11d1_u16, StaticArray[0xbe_u8, 0xce_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xe9_u8, 0x37_u8])
   struct IAMRebuild
     lpVtbl : IAMRebuildVTbl*
   end
@@ -11846,8 +11846,8 @@ lib LibWin32
     set_buffering_time : Proc(IBufferingTime*, UInt32, HRESULT)
   end
 
-  IBufferingTime_GUID = LibC::GUID.new("1e00486a-78dd-11d2-8dd3-006097c9a2b2")
-  CLSID_IBufferingTime = "1e00486a-78dd-11d2-8dd3-006097c9a2b2"
+  IBufferingTime_GUID = "1e00486a-78dd-11d2-8dd3-006097c9a2b2"
+  IID_IBufferingTime = LibC::GUID.new(0x1e00486a_u32, 0x78dd_u16, 0x11d2_u16, StaticArray[0x8d_u8, 0xd3_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa2_u8, 0xb2_u8])
   struct IBufferingTime
     lpVtbl : IBufferingTimeVTbl*
   end
@@ -11859,8 +11859,8 @@ lib LibWin32
     create : Proc(ICreatePropBagOnRegKey*, HKEY, LibC::LPWSTR, UInt32, UInt32, Guid*, Void**, HRESULT)
   end
 
-  ICreatePropBagOnRegKey_GUID = LibC::GUID.new("8a674b48-1f63-11d3-b64c-00c04f79498e")
-  CLSID_ICreatePropBagOnRegKey = "8a674b48-1f63-11d3-b64c-00c04f79498e"
+  ICreatePropBagOnRegKey_GUID = "8a674b48-1f63-11d3-b64c-00c04f79498e"
+  IID_ICreatePropBagOnRegKey = LibC::GUID.new(0x8a674b48_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct ICreatePropBagOnRegKey
     lpVtbl : ICreatePropBagOnRegKeyVTbl*
   end
@@ -11879,8 +11879,8 @@ lib LibWin32
     get_enum_tuning_spaces : Proc(ITuningSpaces*, IEnumTuningSpaces*, HRESULT)
   end
 
-  ITuningSpaces_GUID = LibC::GUID.new("901284e4-33fe-4b69-8d63-634a596f3756")
-  CLSID_ITuningSpaces = "901284e4-33fe-4b69-8d63-634a596f3756"
+  ITuningSpaces_GUID = "901284e4-33fe-4b69-8d63-634a596f3756"
+  IID_ITuningSpaces = LibC::GUID.new(0x901284e4_u32, 0x33fe_u16, 0x4b69_u16, StaticArray[0x8d_u8, 0x63_u8, 0x63_u8, 0x4a_u8, 0x59_u8, 0x6f_u8, 0x37_u8, 0x56_u8])
   struct ITuningSpaces
     lpVtbl : ITuningSpacesVTbl*
   end
@@ -11908,8 +11908,8 @@ lib LibWin32
     put_max_count : Proc(ITuningSpaceContainer*, Int32, HRESULT)
   end
 
-  ITuningSpaceContainer_GUID = LibC::GUID.new("5b692e84-e2f1-11d2-9493-00c04f72d980")
-  CLSID_ITuningSpaceContainer = "5b692e84-e2f1-11d2-9493-00c04f72d980"
+  ITuningSpaceContainer_GUID = "5b692e84-e2f1-11d2-9493-00c04f72d980"
+  IID_ITuningSpaceContainer = LibC::GUID.new(0x5b692e84_u32, 0xe2f1_u16, 0x11d2_u16, StaticArray[0x94_u8, 0x93_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct ITuningSpaceContainer
     lpVtbl : ITuningSpaceContainerVTbl*
   end
@@ -11943,8 +11943,8 @@ lib LibWin32
     clone : Proc(ITuningSpace*, ITuningSpace*, HRESULT)
   end
 
-  ITuningSpace_GUID = LibC::GUID.new("061c6e30-e622-11d2-9493-00c04f72d980")
-  CLSID_ITuningSpace = "061c6e30-e622-11d2-9493-00c04f72d980"
+  ITuningSpace_GUID = "061c6e30-e622-11d2-9493-00c04f72d980"
+  IID_ITuningSpace = LibC::GUID.new(0x61c6e30_u32, 0xe622_u16, 0x11d2_u16, StaticArray[0x94_u8, 0x93_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct ITuningSpace
     lpVtbl : ITuningSpaceVTbl*
   end
@@ -11959,8 +11959,8 @@ lib LibWin32
     clone : Proc(IEnumTuningSpaces*, IEnumTuningSpaces*, HRESULT)
   end
 
-  IEnumTuningSpaces_GUID = LibC::GUID.new("8b8eb248-fc2b-11d2-9d8c-00c04f72d980")
-  CLSID_IEnumTuningSpaces = "8b8eb248-fc2b-11d2-9d8c-00c04f72d980"
+  IEnumTuningSpaces_GUID = "8b8eb248-fc2b-11d2-9d8c-00c04f72d980"
+  IID_IEnumTuningSpaces = LibC::GUID.new(0x8b8eb248_u32, 0xfc2b_u16, 0x11d2_u16, StaticArray[0x9d_u8, 0x8c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct IEnumTuningSpaces
     lpVtbl : IEnumTuningSpacesVTbl*
   end
@@ -11996,8 +11996,8 @@ lib LibWin32
     put_system_type : Proc(IDVBTuningSpace*, DVBSystemType, HRESULT)
   end
 
-  IDVBTuningSpace_GUID = LibC::GUID.new("ada0b268-3b19-4e5b-acc4-49f852be13ba")
-  CLSID_IDVBTuningSpace = "ada0b268-3b19-4e5b-acc4-49f852be13ba"
+  IDVBTuningSpace_GUID = "ada0b268-3b19-4e5b-acc4-49f852be13ba"
+  IID_IDVBTuningSpace = LibC::GUID.new(0xada0b268_u32, 0x3b19_u16, 0x4e5b_u16, StaticArray[0xac_u8, 0xc4_u8, 0x49_u8, 0xf8_u8, 0x52_u8, 0xbe_u8, 0x13_u8, 0xba_u8])
   struct IDVBTuningSpace
     lpVtbl : IDVBTuningSpaceVTbl*
   end
@@ -12035,8 +12035,8 @@ lib LibWin32
     put_network_id : Proc(IDVBTuningSpace2*, Int32, HRESULT)
   end
 
-  IDVBTuningSpace2_GUID = LibC::GUID.new("843188b4-ce62-43db-966b-8145a094e040")
-  CLSID_IDVBTuningSpace2 = "843188b4-ce62-43db-966b-8145a094e040"
+  IDVBTuningSpace2_GUID = "843188b4-ce62-43db-966b-8145a094e040"
+  IID_IDVBTuningSpace2 = LibC::GUID.new(0x843188b4_u32, 0xce62_u16, 0x43db_u16, StaticArray[0x96_u8, 0x6b_u8, 0x81_u8, 0x45_u8, 0xa0_u8, 0x94_u8, 0xe0_u8, 0x40_u8])
   struct IDVBTuningSpace2
     lpVtbl : IDVBTuningSpace2VTbl*
   end
@@ -12084,8 +12084,8 @@ lib LibWin32
     put_spectral_inversion : Proc(IDVBSTuningSpace*, SpectralInversion, HRESULT)
   end
 
-  IDVBSTuningSpace_GUID = LibC::GUID.new("cdf7be60-d954-42fd-a972-78971958e470")
-  CLSID_IDVBSTuningSpace = "cdf7be60-d954-42fd-a972-78971958e470"
+  IDVBSTuningSpace_GUID = "cdf7be60-d954-42fd-a972-78971958e470"
+  IID_IDVBSTuningSpace = LibC::GUID.new(0xcdf7be60_u32, 0xd954_u16, 0x42fd_u16, StaticArray[0xa9_u8, 0x72_u8, 0x78_u8, 0x97_u8, 0x19_u8, 0x58_u8, 0xe4_u8, 0x70_u8])
   struct IDVBSTuningSpace
     lpVtbl : IDVBSTuningSpaceVTbl*
   end
@@ -12119,8 +12119,8 @@ lib LibWin32
     clone : Proc(IAuxInTuningSpace*, ITuningSpace*, HRESULT)
   end
 
-  IAuxInTuningSpace_GUID = LibC::GUID.new("e48244b8-7e17-4f76-a763-5090ff1e2f30")
-  CLSID_IAuxInTuningSpace = "e48244b8-7e17-4f76-a763-5090ff1e2f30"
+  IAuxInTuningSpace_GUID = "e48244b8-7e17-4f76-a763-5090ff1e2f30"
+  IID_IAuxInTuningSpace = LibC::GUID.new(0xe48244b8_u32, 0x7e17_u16, 0x4f76_u16, StaticArray[0xa7_u8, 0x63_u8, 0x50_u8, 0x90_u8, 0xff_u8, 0x1e_u8, 0x2f_u8, 0x30_u8])
   struct IAuxInTuningSpace
     lpVtbl : IAuxInTuningSpaceVTbl*
   end
@@ -12156,8 +12156,8 @@ lib LibWin32
     put_country_code : Proc(IAuxInTuningSpace2*, Int32, HRESULT)
   end
 
-  IAuxInTuningSpace2_GUID = LibC::GUID.new("b10931ed-8bfe-4ab0-9dce-e469c29a9729")
-  CLSID_IAuxInTuningSpace2 = "b10931ed-8bfe-4ab0-9dce-e469c29a9729"
+  IAuxInTuningSpace2_GUID = "b10931ed-8bfe-4ab0-9dce-e469c29a9729"
+  IID_IAuxInTuningSpace2 = LibC::GUID.new(0xb10931ed_u32, 0x8bfe_u16, 0x4ab0_u16, StaticArray[0x9d_u8, 0xce_u8, 0xe4_u8, 0x69_u8, 0xc2_u8, 0x9a_u8, 0x97_u8, 0x29_u8])
   struct IAuxInTuningSpace2
     lpVtbl : IAuxInTuningSpace2VTbl*
   end
@@ -12199,8 +12199,8 @@ lib LibWin32
     put_country_code : Proc(IAnalogTVTuningSpace*, Int32, HRESULT)
   end
 
-  IAnalogTVTuningSpace_GUID = LibC::GUID.new("2a6e293c-2595-11d3-b64c-00c04f79498e")
-  CLSID_IAnalogTVTuningSpace = "2a6e293c-2595-11d3-b64c-00c04f79498e"
+  IAnalogTVTuningSpace_GUID = "2a6e293c-2595-11d3-b64c-00c04f79498e"
+  IID_IAnalogTVTuningSpace = LibC::GUID.new(0x2a6e293c_u32, 0x2595_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IAnalogTVTuningSpace
     lpVtbl : IAnalogTVTuningSpaceVTbl*
   end
@@ -12250,8 +12250,8 @@ lib LibWin32
     put_max_physical_channel : Proc(IATSCTuningSpace*, Int32, HRESULT)
   end
 
-  IATSCTuningSpace_GUID = LibC::GUID.new("0369b4e2-45b6-11d3-b650-00c04f79498e")
-  CLSID_IATSCTuningSpace = "0369b4e2-45b6-11d3-b650-00c04f79498e"
+  IATSCTuningSpace_GUID = "0369b4e2-45b6-11d3-b650-00c04f79498e"
+  IID_IATSCTuningSpace = LibC::GUID.new(0x369b4e2_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IATSCTuningSpace
     lpVtbl : IATSCTuningSpaceVTbl*
   end
@@ -12309,8 +12309,8 @@ lib LibWin32
     put_max_source_id : Proc(IDigitalCableTuningSpace*, Int32, HRESULT)
   end
 
-  IDigitalCableTuningSpace_GUID = LibC::GUID.new("013f9f9c-b449-4ec7-a6d2-9d4f2fc70ae5")
-  CLSID_IDigitalCableTuningSpace = "013f9f9c-b449-4ec7-a6d2-9d4f2fc70ae5"
+  IDigitalCableTuningSpace_GUID = "013f9f9c-b449-4ec7-a6d2-9d4f2fc70ae5"
+  IID_IDigitalCableTuningSpace = LibC::GUID.new(0x13f9f9c_u32, 0xb449_u16, 0x4ec7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x9d_u8, 0x4f_u8, 0x2f_u8, 0xc7_u8, 0xa_u8, 0xe5_u8])
   struct IDigitalCableTuningSpace
     lpVtbl : IDigitalCableTuningSpaceVTbl*
   end
@@ -12350,8 +12350,8 @@ lib LibWin32
     put_step : Proc(IAnalogRadioTuningSpace*, Int32, HRESULT)
   end
 
-  IAnalogRadioTuningSpace_GUID = LibC::GUID.new("2a6e293b-2595-11d3-b64c-00c04f79498e")
-  CLSID_IAnalogRadioTuningSpace = "2a6e293b-2595-11d3-b64c-00c04f79498e"
+  IAnalogRadioTuningSpace_GUID = "2a6e293b-2595-11d3-b64c-00c04f79498e"
+  IID_IAnalogRadioTuningSpace = LibC::GUID.new(0x2a6e293b_u32, 0x2595_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IAnalogRadioTuningSpace
     lpVtbl : IAnalogRadioTuningSpaceVTbl*
   end
@@ -12393,8 +12393,8 @@ lib LibWin32
     put_country_code : Proc(IAnalogRadioTuningSpace2*, Int32, HRESULT)
   end
 
-  IAnalogRadioTuningSpace2_GUID = LibC::GUID.new("39dd45da-2da8-46ba-8a8a-87e2b73d983a")
-  CLSID_IAnalogRadioTuningSpace2 = "39dd45da-2da8-46ba-8a8a-87e2b73d983a"
+  IAnalogRadioTuningSpace2_GUID = "39dd45da-2da8-46ba-8a8a-87e2b73d983a"
+  IID_IAnalogRadioTuningSpace2 = LibC::GUID.new(0x39dd45da_u32, 0x2da8_u16, 0x46ba_u16, StaticArray[0x8a_u8, 0x8a_u8, 0x87_u8, 0xe2_u8, 0xb7_u8, 0x3d_u8, 0x98_u8, 0x3a_u8])
   struct IAnalogRadioTuningSpace2
     lpVtbl : IAnalogRadioTuningSpace2VTbl*
   end
@@ -12414,8 +12414,8 @@ lib LibWin32
     put_locator : Proc(ITuneRequest*, ILocator, HRESULT)
   end
 
-  ITuneRequest_GUID = LibC::GUID.new("07ddc146-fc3d-11d2-9d8c-00c04f72d980")
-  CLSID_ITuneRequest = "07ddc146-fc3d-11d2-9d8c-00c04f72d980"
+  ITuneRequest_GUID = "07ddc146-fc3d-11d2-9d8c-00c04f72d980"
+  IID_ITuneRequest = LibC::GUID.new(0x7ddc146_u32, 0xfc3d_u16, 0x11d2_u16, StaticArray[0x9d_u8, 0x8c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct ITuneRequest
     lpVtbl : ITuneRequestVTbl*
   end
@@ -12437,8 +12437,8 @@ lib LibWin32
     put_channel_id : Proc(IChannelIDTuneRequest*, UInt8*, HRESULT)
   end
 
-  IChannelIDTuneRequest_GUID = LibC::GUID.new("156eff60-86f4-4e28-89fc-109799fd57ee")
-  CLSID_IChannelIDTuneRequest = "156eff60-86f4-4e28-89fc-109799fd57ee"
+  IChannelIDTuneRequest_GUID = "156eff60-86f4-4e28-89fc-109799fd57ee"
+  IID_IChannelIDTuneRequest = LibC::GUID.new(0x156eff60_u32, 0x86f4_u16, 0x4e28_u16, StaticArray[0x89_u8, 0xfc_u8, 0x10_u8, 0x97_u8, 0x99_u8, 0xfd_u8, 0x57_u8, 0xee_u8])
   struct IChannelIDTuneRequest
     lpVtbl : IChannelIDTuneRequestVTbl*
   end
@@ -12460,8 +12460,8 @@ lib LibWin32
     put_channel : Proc(IChannelTuneRequest*, Int32, HRESULT)
   end
 
-  IChannelTuneRequest_GUID = LibC::GUID.new("0369b4e0-45b6-11d3-b650-00c04f79498e")
-  CLSID_IChannelTuneRequest = "0369b4e0-45b6-11d3-b650-00c04f79498e"
+  IChannelTuneRequest_GUID = "0369b4e0-45b6-11d3-b650-00c04f79498e"
+  IID_IChannelTuneRequest = LibC::GUID.new(0x369b4e0_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IChannelTuneRequest
     lpVtbl : IChannelTuneRequestVTbl*
   end
@@ -12485,8 +12485,8 @@ lib LibWin32
     put_minor_channel : Proc(IATSCChannelTuneRequest*, Int32, HRESULT)
   end
 
-  IATSCChannelTuneRequest_GUID = LibC::GUID.new("0369b4e1-45b6-11d3-b650-00c04f79498e")
-  CLSID_IATSCChannelTuneRequest = "0369b4e1-45b6-11d3-b650-00c04f79498e"
+  IATSCChannelTuneRequest_GUID = "0369b4e1-45b6-11d3-b650-00c04f79498e"
+  IID_IATSCChannelTuneRequest = LibC::GUID.new(0x369b4e1_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IATSCChannelTuneRequest
     lpVtbl : IATSCChannelTuneRequestVTbl*
   end
@@ -12514,8 +12514,8 @@ lib LibWin32
     put_source_id : Proc(IDigitalCableTuneRequest*, Int32, HRESULT)
   end
 
-  IDigitalCableTuneRequest_GUID = LibC::GUID.new("bad7753b-6b37-4810-ae57-3ce0c4a9e6cb")
-  CLSID_IDigitalCableTuneRequest = "bad7753b-6b37-4810-ae57-3ce0c4a9e6cb"
+  IDigitalCableTuneRequest_GUID = "bad7753b-6b37-4810-ae57-3ce0c4a9e6cb"
+  IID_IDigitalCableTuneRequest = LibC::GUID.new(0xbad7753b_u32, 0x6b37_u16, 0x4810_u16, StaticArray[0xae_u8, 0x57_u8, 0x3c_u8, 0xe0_u8, 0xc4_u8, 0xa9_u8, 0xe6_u8, 0xcb_u8])
   struct IDigitalCableTuneRequest
     lpVtbl : IDigitalCableTuneRequestVTbl*
   end
@@ -12541,8 +12541,8 @@ lib LibWin32
     put_sid : Proc(IDVBTuneRequest*, Int32, HRESULT)
   end
 
-  IDVBTuneRequest_GUID = LibC::GUID.new("0d6f567e-a636-42bb-83ba-ce4c1704afa2")
-  CLSID_IDVBTuneRequest = "0d6f567e-a636-42bb-83ba-ce4c1704afa2"
+  IDVBTuneRequest_GUID = "0d6f567e-a636-42bb-83ba-ce4c1704afa2"
+  IID_IDVBTuneRequest = LibC::GUID.new(0xd6f567e_u32, 0xa636_u16, 0x42bb_u16, StaticArray[0x83_u8, 0xba_u8, 0xce_u8, 0x4c_u8, 0x17_u8, 0x4_u8, 0xaf_u8, 0xa2_u8])
   struct IDVBTuneRequest
     lpVtbl : IDVBTuneRequestVTbl*
   end
@@ -12566,8 +12566,8 @@ lib LibWin32
     put_prog_no : Proc(IMPEG2TuneRequest*, Int32, HRESULT)
   end
 
-  IMPEG2TuneRequest_GUID = LibC::GUID.new("eb7d987f-8a01-42ad-b8ae-574deee44d1a")
-  CLSID_IMPEG2TuneRequest = "eb7d987f-8a01-42ad-b8ae-574deee44d1a"
+  IMPEG2TuneRequest_GUID = "eb7d987f-8a01-42ad-b8ae-574deee44d1a"
+  IID_IMPEG2TuneRequest = LibC::GUID.new(0xeb7d987f_u32, 0x8a01_u16, 0x42ad_u16, StaticArray[0xb8_u8, 0xae_u8, 0x57_u8, 0x4d_u8, 0xee_u8, 0xe4_u8, 0x4d_u8, 0x1a_u8])
   struct IMPEG2TuneRequest
     lpVtbl : IMPEG2TuneRequestVTbl*
   end
@@ -12583,8 +12583,8 @@ lib LibWin32
     create_tune_request : Proc(IMPEG2TuneRequestFactory*, ITuningSpace, IMPEG2TuneRequest*, HRESULT)
   end
 
-  IMPEG2TuneRequestFactory_GUID = LibC::GUID.new("14e11abd-ee37-4893-9ea1-6964de933e39")
-  CLSID_IMPEG2TuneRequestFactory = "14e11abd-ee37-4893-9ea1-6964de933e39"
+  IMPEG2TuneRequestFactory_GUID = "14e11abd-ee37-4893-9ea1-6964de933e39"
+  IID_IMPEG2TuneRequestFactory = LibC::GUID.new(0x14e11abd_u32, 0xee37_u16, 0x4893_u16, StaticArray[0x9e_u8, 0xa1_u8, 0x69_u8, 0x64_u8, 0xde_u8, 0x93_u8, 0x3e_u8, 0x39_u8])
   struct IMPEG2TuneRequestFactory
     lpVtbl : IMPEG2TuneRequestFactoryVTbl*
   end
@@ -12595,8 +12595,8 @@ lib LibWin32
     release : Proc(IMPEG2TuneRequestSupport*, UInt32)
   end
 
-  IMPEG2TuneRequestSupport_GUID = LibC::GUID.new("1b9d5fc3-5bbc-4b6c-bb18-b9d10e3eeebf")
-  CLSID_IMPEG2TuneRequestSupport = "1b9d5fc3-5bbc-4b6c-bb18-b9d10e3eeebf"
+  IMPEG2TuneRequestSupport_GUID = "1b9d5fc3-5bbc-4b6c-bb18-b9d10e3eeebf"
+  IID_IMPEG2TuneRequestSupport = LibC::GUID.new(0x1b9d5fc3_u32, 0x5bbc_u16, 0x4b6c_u16, StaticArray[0xbb_u8, 0x18_u8, 0xb9_u8, 0xd1_u8, 0xe_u8, 0x3e_u8, 0xee_u8, 0xbf_u8])
   struct IMPEG2TuneRequestSupport
     lpVtbl : IMPEG2TuneRequestSupportVTbl*
   end
@@ -12610,8 +12610,8 @@ lib LibWin32
     get_aux_input_count : Proc(ITunerCap*, UInt32*, UInt32*, HRESULT)
   end
 
-  ITunerCap_GUID = LibC::GUID.new("e60dfa45-8d56-4e65-a8ab-d6be9412c249")
-  CLSID_ITunerCap = "e60dfa45-8d56-4e65-a8ab-d6be9412c249"
+  ITunerCap_GUID = "e60dfa45-8d56-4e65-a8ab-d6be9412c249"
+  IID_ITunerCap = LibC::GUID.new(0xe60dfa45_u32, 0x8d56_u16, 0x4e65_u16, StaticArray[0xa8_u8, 0xab_u8, 0xd6_u8, 0xbe_u8, 0x94_u8, 0x12_u8, 0xc2_u8, 0x49_u8])
   struct ITunerCap
     lpVtbl : ITunerCapVTbl*
   end
@@ -12623,8 +12623,8 @@ lib LibWin32
     get_has608_708_caption : Proc(ITunerCapEx*, Int16*, HRESULT)
   end
 
-  ITunerCapEx_GUID = LibC::GUID.new("ed3e0c66-18c8-4ea6-9300-f6841fdd35dc")
-  CLSID_ITunerCapEx = "ed3e0c66-18c8-4ea6-9300-f6841fdd35dc"
+  ITunerCapEx_GUID = "ed3e0c66-18c8-4ea6-9300-f6841fdd35dc"
+  IID_ITunerCapEx = LibC::GUID.new(0xed3e0c66_u32, 0x18c8_u16, 0x4ea6_u16, StaticArray[0x93_u8, 0x0_u8, 0xf6_u8, 0x84_u8, 0x1f_u8, 0xdd_u8, 0x35_u8, 0xdc_u8])
   struct ITunerCapEx
     lpVtbl : ITunerCapExVTbl*
   end
@@ -12645,8 +12645,8 @@ lib LibWin32
     trigger_signal_events : Proc(ITuner*, Int32, HRESULT)
   end
 
-  ITuner_GUID = LibC::GUID.new("28c52640-018a-11d3-9d8e-00c04f72d980")
-  CLSID_ITuner = "28c52640-018a-11d3-9d8e-00c04f72d980"
+  ITuner_GUID = "28c52640-018a-11d3-9d8e-00c04f72d980"
+  IID_ITuner = LibC::GUID.new(0x28c52640_u32, 0x18a_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct ITuner
     lpVtbl : ITunerVTbl*
   end
@@ -12672,8 +12672,8 @@ lib LibWin32
     auto_program : Proc(IScanningTuner*, HRESULT)
   end
 
-  IScanningTuner_GUID = LibC::GUID.new("1dfd0a5c-0284-11d3-9d8e-00c04f72d980")
-  CLSID_IScanningTuner = "1dfd0a5c-0284-11d3-9d8e-00c04f72d980"
+  IScanningTuner_GUID = "1dfd0a5c-0284-11d3-9d8e-00c04f72d980"
+  IID_IScanningTuner = LibC::GUID.new(0x1dfd0a5c_u32, 0x284_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct IScanningTuner
     lpVtbl : IScanningTunerVTbl*
   end
@@ -12707,8 +12707,8 @@ lib LibWin32
     set_scan_signal_type_filter : Proc(IScanningTunerEx*, Int32, Int32, HRESULT)
   end
 
-  IScanningTunerEx_GUID = LibC::GUID.new("04bbd195-0e2d-4593-9bd5-4f908bc33cf5")
-  CLSID_IScanningTunerEx = "04bbd195-0e2d-4593-9bd5-4f908bc33cf5"
+  IScanningTunerEx_GUID = "04bbd195-0e2d-4593-9bd5-4f908bc33cf5"
+  IID_IScanningTunerEx = LibC::GUID.new(0x4bbd195_u32, 0xe2d_u16, 0x4593_u16, StaticArray[0x9b_u8, 0xd5_u8, 0x4f_u8, 0x90_u8, 0x8b_u8, 0xc3_u8, 0x3c_u8, 0xf5_u8])
   struct IScanningTunerEx
     lpVtbl : IScanningTunerExVTbl*
   end
@@ -12740,8 +12740,8 @@ lib LibWin32
     clone : Proc(IComponentType*, IComponentType*, HRESULT)
   end
 
-  IComponentType_GUID = LibC::GUID.new("6a340dc0-0311-11d3-9d8e-00c04f72d980")
-  CLSID_IComponentType = "6a340dc0-0311-11d3-9d8e-00c04f72d980"
+  IComponentType_GUID = "6a340dc0-0311-11d3-9d8e-00c04f72d980"
+  IID_IComponentType = LibC::GUID.new(0x6a340dc0_u32, 0x311_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct IComponentType
     lpVtbl : IComponentTypeVTbl*
   end
@@ -12775,8 +12775,8 @@ lib LibWin32
     put_lang_id : Proc(ILanguageComponentType*, Int32, HRESULT)
   end
 
-  ILanguageComponentType_GUID = LibC::GUID.new("b874c8ba-0fa2-11d3-9d8e-00c04f72d980")
-  CLSID_ILanguageComponentType = "b874c8ba-0fa2-11d3-9d8e-00c04f72d980"
+  ILanguageComponentType_GUID = "b874c8ba-0fa2-11d3-9d8e-00c04f72d980"
+  IID_ILanguageComponentType = LibC::GUID.new(0xb874c8ba_u32, 0xfa2_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct ILanguageComponentType
     lpVtbl : ILanguageComponentTypeVTbl*
   end
@@ -12812,8 +12812,8 @@ lib LibWin32
     put_stream_type : Proc(IMPEG2ComponentType*, MPEG2StreamType, HRESULT)
   end
 
-  IMPEG2ComponentType_GUID = LibC::GUID.new("2c073d84-b51c-48c9-aa9f-68971e1f6e38")
-  CLSID_IMPEG2ComponentType = "2c073d84-b51c-48c9-aa9f-68971e1f6e38"
+  IMPEG2ComponentType_GUID = "2c073d84-b51c-48c9-aa9f-68971e1f6e38"
+  IID_IMPEG2ComponentType = LibC::GUID.new(0x2c073d84_u32, 0xb51c_u16, 0x48c9_u16, StaticArray[0xaa_u8, 0x9f_u8, 0x68_u8, 0x97_u8, 0x1e_u8, 0x1f_u8, 0x6e_u8, 0x38_u8])
   struct IMPEG2ComponentType
     lpVtbl : IMPEG2ComponentTypeVTbl*
   end
@@ -12851,8 +12851,8 @@ lib LibWin32
     put_flags : Proc(IATSCComponentType*, Int32, HRESULT)
   end
 
-  IATSCComponentType_GUID = LibC::GUID.new("fc189e4d-7bd4-4125-b3b3-3a76a332cc96")
-  CLSID_IATSCComponentType = "fc189e4d-7bd4-4125-b3b3-3a76a332cc96"
+  IATSCComponentType_GUID = "fc189e4d-7bd4-4125-b3b3-3a76a332cc96"
+  IID_IATSCComponentType = LibC::GUID.new(0xfc189e4d_u32, 0x7bd4_u16, 0x4125_u16, StaticArray[0xb3_u8, 0xb3_u8, 0x3a_u8, 0x76_u8, 0xa3_u8, 0x32_u8, 0xcc_u8, 0x96_u8])
   struct IATSCComponentType
     lpVtbl : IATSCComponentTypeVTbl*
   end
@@ -12867,8 +12867,8 @@ lib LibWin32
     clone : Proc(IEnumComponentTypes*, IEnumComponentTypes*, HRESULT)
   end
 
-  IEnumComponentTypes_GUID = LibC::GUID.new("8a674b4a-1f63-11d3-b64c-00c04f79498e")
-  CLSID_IEnumComponentTypes = "8a674b4a-1f63-11d3-b64c-00c04f79498e"
+  IEnumComponentTypes_GUID = "8a674b4a-1f63-11d3-b64c-00c04f79498e"
+  IID_IEnumComponentTypes = LibC::GUID.new(0x8a674b4a_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IEnumComponentTypes
     lpVtbl : IEnumComponentTypesVTbl*
   end
@@ -12891,8 +12891,8 @@ lib LibWin32
     clone : Proc(IComponentTypes*, IComponentTypes*, HRESULT)
   end
 
-  IComponentTypes_GUID = LibC::GUID.new("0dc13d4a-0313-11d3-9d8e-00c04f72d980")
-  CLSID_IComponentTypes = "0dc13d4a-0313-11d3-9d8e-00c04f72d980"
+  IComponentTypes_GUID = "0dc13d4a-0313-11d3-9d8e-00c04f72d980"
+  IID_IComponentTypes = LibC::GUID.new(0xdc13d4a_u32, 0x313_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct IComponentTypes
     lpVtbl : IComponentTypesVTbl*
   end
@@ -12916,8 +12916,8 @@ lib LibWin32
     clone : Proc(IComponent*, IComponent*, HRESULT)
   end
 
-  IComponent_GUID = LibC::GUID.new("1a5576fc-0e19-11d3-9d8e-00c04f72d980")
-  CLSID_IComponent = "1a5576fc-0e19-11d3-9d8e-00c04f72d980"
+  IComponent_GUID = "1a5576fc-0e19-11d3-9d8e-00c04f72d980"
+  IID_IComponent = LibC::GUID.new(0x1a5576fc_u32, 0xe19_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct IComponent
     lpVtbl : IComponentVTbl*
   end
@@ -12951,8 +12951,8 @@ lib LibWin32
     put_analog_audio_mode : Proc(IAnalogAudioComponentType*, TVAudioMode, HRESULT)
   end
 
-  IAnalogAudioComponentType_GUID = LibC::GUID.new("2cfeb2a8-1787-4a24-a941-c6eaec39c842")
-  CLSID_IAnalogAudioComponentType = "2cfeb2a8-1787-4a24-a941-c6eaec39c842"
+  IAnalogAudioComponentType_GUID = "2cfeb2a8-1787-4a24-a941-c6eaec39c842"
+  IID_IAnalogAudioComponentType = LibC::GUID.new(0x2cfeb2a8_u32, 0x1787_u16, 0x4a24_u16, StaticArray[0xa9_u8, 0x41_u8, 0xc6_u8, 0xea_u8, 0xec_u8, 0x39_u8, 0xc8_u8, 0x42_u8])
   struct IAnalogAudioComponentType
     lpVtbl : IAnalogAudioComponentTypeVTbl*
   end
@@ -12976,8 +12976,8 @@ lib LibWin32
     put_program_number : Proc(IMPEG2Component*, Int32, HRESULT)
   end
 
-  IMPEG2Component_GUID = LibC::GUID.new("1493e353-1eb6-473c-802d-8e6b8ec9d2a9")
-  CLSID_IMPEG2Component = "1493e353-1eb6-473c-802d-8e6b8ec9d2a9"
+  IMPEG2Component_GUID = "1493e353-1eb6-473c-802d-8e6b8ec9d2a9"
+  IID_IMPEG2Component = LibC::GUID.new(0x1493e353_u32, 0x1eb6_u16, 0x473c_u16, StaticArray[0x80_u8, 0x2d_u8, 0x8e_u8, 0x6b_u8, 0x8e_u8, 0xc9_u8, 0xd2_u8, 0xa9_u8])
   struct IMPEG2Component
     lpVtbl : IMPEG2ComponentVTbl*
   end
@@ -12992,8 +12992,8 @@ lib LibWin32
     clone : Proc(IEnumComponents*, IEnumComponents*, HRESULT)
   end
 
-  IEnumComponents_GUID = LibC::GUID.new("2a6e2939-2595-11d3-b64c-00c04f79498e")
-  CLSID_IEnumComponents = "2a6e2939-2595-11d3-b64c-00c04f79498e"
+  IEnumComponents_GUID = "2a6e2939-2595-11d3-b64c-00c04f79498e"
+  IID_IEnumComponents = LibC::GUID.new(0x2a6e2939_u32, 0x2595_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IEnumComponents
     lpVtbl : IEnumComponentsVTbl*
   end
@@ -13016,8 +13016,8 @@ lib LibWin32
     put_item : Proc(IComponents*, VARIANT, IComponent, HRESULT)
   end
 
-  IComponents_GUID = LibC::GUID.new("39a48091-fffe-4182-a161-3ff802640e26")
-  CLSID_IComponents = "39a48091-fffe-4182-a161-3ff802640e26"
+  IComponents_GUID = "39a48091-fffe-4182-a161-3ff802640e26"
+  IID_IComponents = LibC::GUID.new(0x39a48091_u32, 0xfffe_u16, 0x4182_u16, StaticArray[0xa1_u8, 0x61_u8, 0x3f_u8, 0xf8_u8, 0x2_u8, 0x64_u8, 0xe_u8, 0x26_u8])
   struct IComponents
     lpVtbl : IComponentsVTbl*
   end
@@ -13039,8 +13039,8 @@ lib LibWin32
     clone : Proc(IComponentsOld*, IComponents*, HRESULT)
   end
 
-  IComponentsOld_GUID = LibC::GUID.new("fcd01846-0e19-11d3-9d8e-00c04f72d980")
-  CLSID_IComponentsOld = "fcd01846-0e19-11d3-9d8e-00c04f72d980"
+  IComponentsOld_GUID = "fcd01846-0e19-11d3-9d8e-00c04f72d980"
+  IID_IComponentsOld = LibC::GUID.new(0xfcd01846_u32, 0xe19_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
   struct IComponentsOld
     lpVtbl : IComponentsOldVTbl*
   end
@@ -13070,8 +13070,8 @@ lib LibWin32
     clone : Proc(ILocator*, ILocator*, HRESULT)
   end
 
-  ILocator_GUID = LibC::GUID.new("286d7f89-760c-4f89-80c4-66841d2507aa")
-  CLSID_ILocator = "286d7f89-760c-4f89-80c4-66841d2507aa"
+  ILocator_GUID = "286d7f89-760c-4f89-80c4-66841d2507aa"
+  IID_ILocator = LibC::GUID.new(0x286d7f89_u32, 0x760c_u16, 0x4f89_u16, StaticArray[0x80_u8, 0xc4_u8, 0x66_u8, 0x84_u8, 0x1d_u8, 0x25_u8, 0x7_u8, 0xaa_u8])
   struct ILocator
     lpVtbl : ILocatorVTbl*
   end
@@ -13103,8 +13103,8 @@ lib LibWin32
     put_video_standard : Proc(IAnalogLocator*, AnalogVideoStandard, HRESULT)
   end
 
-  IAnalogLocator_GUID = LibC::GUID.new("34d1f26b-e339-430d-abce-738cb48984dc")
-  CLSID_IAnalogLocator = "34d1f26b-e339-430d-abce-738cb48984dc"
+  IAnalogLocator_GUID = "34d1f26b-e339-430d-abce-738cb48984dc"
+  IID_IAnalogLocator = LibC::GUID.new(0x34d1f26b_u32, 0xe339_u16, 0x430d_u16, StaticArray[0xab_u8, 0xce_u8, 0x73_u8, 0x8c_u8, 0xb4_u8, 0x89_u8, 0x84_u8, 0xdc_u8])
   struct IAnalogLocator
     lpVtbl : IAnalogLocatorVTbl*
   end
@@ -13134,8 +13134,8 @@ lib LibWin32
     clone : Proc(IDigitalLocator*, ILocator*, HRESULT)
   end
 
-  IDigitalLocator_GUID = LibC::GUID.new("19b595d8-839a-47f0-96df-4f194f3c768c")
-  CLSID_IDigitalLocator = "19b595d8-839a-47f0-96df-4f194f3c768c"
+  IDigitalLocator_GUID = "19b595d8-839a-47f0-96df-4f194f3c768c"
+  IID_IDigitalLocator = LibC::GUID.new(0x19b595d8_u32, 0x839a_u16, 0x47f0_u16, StaticArray[0x96_u8, 0xdf_u8, 0x4f_u8, 0x19_u8, 0x4f_u8, 0x3c_u8, 0x76_u8, 0x8c_u8])
   struct IDigitalLocator
     lpVtbl : IDigitalLocatorVTbl*
   end
@@ -13169,8 +13169,8 @@ lib LibWin32
     put_tsid : Proc(IATSCLocator*, Int32, HRESULT)
   end
 
-  IATSCLocator_GUID = LibC::GUID.new("bf8d986f-8c2b-4131-94d7-4d3d9fcc21ef")
-  CLSID_IATSCLocator = "bf8d986f-8c2b-4131-94d7-4d3d9fcc21ef"
+  IATSCLocator_GUID = "bf8d986f-8c2b-4131-94d7-4d3d9fcc21ef"
+  IID_IATSCLocator = LibC::GUID.new(0xbf8d986f_u32, 0x8c2b_u16, 0x4131_u16, StaticArray[0x94_u8, 0xd7_u8, 0x4d_u8, 0x3d_u8, 0x9f_u8, 0xcc_u8, 0x21_u8, 0xef_u8])
   struct IATSCLocator
     lpVtbl : IATSCLocatorVTbl*
   end
@@ -13206,8 +13206,8 @@ lib LibWin32
     put_program_number : Proc(IATSCLocator2*, Int32, HRESULT)
   end
 
-  IATSCLocator2_GUID = LibC::GUID.new("612aa885-66cf-4090-ba0a-566f5312e4ca")
-  CLSID_IATSCLocator2 = "612aa885-66cf-4090-ba0a-566f5312e4ca"
+  IATSCLocator2_GUID = "612aa885-66cf-4090-ba0a-566f5312e4ca"
+  IID_IATSCLocator2 = LibC::GUID.new(0x612aa885_u32, 0x66cf_u16, 0x4090_u16, StaticArray[0xba_u8, 0xa_u8, 0x56_u8, 0x6f_u8, 0x53_u8, 0x12_u8, 0xe4_u8, 0xca_u8])
   struct IATSCLocator2
     lpVtbl : IATSCLocator2VTbl*
   end
@@ -13243,8 +13243,8 @@ lib LibWin32
     put_program_number : Proc(IDigitalCableLocator*, Int32, HRESULT)
   end
 
-  IDigitalCableLocator_GUID = LibC::GUID.new("48f66a11-171a-419a-9525-beeecd51584c")
-  CLSID_IDigitalCableLocator = "48f66a11-171a-419a-9525-beeecd51584c"
+  IDigitalCableLocator_GUID = "48f66a11-171a-419a-9525-beeecd51584c"
+  IID_IDigitalCableLocator = LibC::GUID.new(0x48f66a11_u32, 0x171a_u16, 0x419a_u16, StaticArray[0x95_u8, 0x25_u8, 0xbe_u8, 0xee_u8, 0xcd_u8, 0x51_u8, 0x58_u8, 0x4c_u8])
   struct IDigitalCableLocator
     lpVtbl : IDigitalCableLocatorVTbl*
   end
@@ -13288,8 +13288,8 @@ lib LibWin32
     put_other_frequency_in_use : Proc(IDVBTLocator*, Int16, HRESULT)
   end
 
-  IDVBTLocator_GUID = LibC::GUID.new("8664da16-dda2-42ac-926a-c18f9127c302")
-  CLSID_IDVBTLocator = "8664da16-dda2-42ac-926a-c18f9127c302"
+  IDVBTLocator_GUID = "8664da16-dda2-42ac-926a-c18f9127c302"
+  IID_IDVBTLocator = LibC::GUID.new(0x8664da16_u32, 0xdda2_u16, 0x42ac_u16, StaticArray[0x92_u8, 0x6a_u8, 0xc1_u8, 0x8f_u8, 0x91_u8, 0x27_u8, 0xc3_u8, 0x2_u8])
   struct IDVBTLocator
     lpVtbl : IDVBTLocatorVTbl*
   end
@@ -13335,8 +13335,8 @@ lib LibWin32
     put_physical_layer_pipe_id : Proc(IDVBTLocator2*, Int32, HRESULT)
   end
 
-  IDVBTLocator2_GUID = LibC::GUID.new("448a2edf-ae95-4b43-a3cc-747843c453d4")
-  CLSID_IDVBTLocator2 = "448a2edf-ae95-4b43-a3cc-747843c453d4"
+  IDVBTLocator2_GUID = "448a2edf-ae95-4b43-a3cc-747843c453d4"
+  IID_IDVBTLocator2 = LibC::GUID.new(0x448a2edf_u32, 0xae95_u16, 0x4b43_u16, StaticArray[0xa3_u8, 0xcc_u8, 0x74_u8, 0x78_u8, 0x43_u8, 0xc4_u8, 0x53_u8, 0xd4_u8])
   struct IDVBTLocator2
     lpVtbl : IDVBTLocator2VTbl*
   end
@@ -13376,8 +13376,8 @@ lib LibWin32
     put_elevation : Proc(IDVBSLocator*, Int32, HRESULT)
   end
 
-  IDVBSLocator_GUID = LibC::GUID.new("3d7c353c-0d04-45f1-a742-f97cc1188dc8")
-  CLSID_IDVBSLocator = "3d7c353c-0d04-45f1-a742-f97cc1188dc8"
+  IDVBSLocator_GUID = "3d7c353c-0d04-45f1-a742-f97cc1188dc8"
+  IID_IDVBSLocator = LibC::GUID.new(0x3d7c353c_u32, 0xd04_u16, 0x45f1_u16, StaticArray[0xa7_u8, 0x42_u8, 0xf9_u8, 0x7c_u8, 0xc1_u8, 0x18_u8, 0x8d_u8, 0xc8_u8])
   struct IDVBSLocator
     lpVtbl : IDVBSLocatorVTbl*
   end
@@ -13431,8 +13431,8 @@ lib LibWin32
     put_signal_pilot : Proc(IDVBSLocator2*, Pilot, HRESULT)
   end
 
-  IDVBSLocator2_GUID = LibC::GUID.new("6044634a-1733-4f99-b982-5fb12afce4f0")
-  CLSID_IDVBSLocator2 = "6044634a-1733-4f99-b982-5fb12afce4f0"
+  IDVBSLocator2_GUID = "6044634a-1733-4f99-b982-5fb12afce4f0"
+  IID_IDVBSLocator2 = LibC::GUID.new(0x6044634a_u32, 0x1733_u16, 0x4f99_u16, StaticArray[0xb9_u8, 0x82_u8, 0x5f_u8, 0xb1_u8, 0x2a_u8, 0xfc_u8, 0xe4_u8, 0xf0_u8])
   struct IDVBSLocator2
     lpVtbl : IDVBSLocator2VTbl*
   end
@@ -13462,8 +13462,8 @@ lib LibWin32
     clone : Proc(IDVBCLocator*, ILocator*, HRESULT)
   end
 
-  IDVBCLocator_GUID = LibC::GUID.new("6e42f36e-1dd2-43c4-9f78-69d25ae39034")
-  CLSID_IDVBCLocator = "6e42f36e-1dd2-43c4-9f78-69d25ae39034"
+  IDVBCLocator_GUID = "6e42f36e-1dd2-43c4-9f78-69d25ae39034"
+  IID_IDVBCLocator = LibC::GUID.new(0x6e42f36e_u32, 0x1dd2_u16, 0x43c4_u16, StaticArray[0x9f_u8, 0x78_u8, 0x69_u8, 0xd2_u8, 0x5a_u8, 0xe3_u8, 0x90_u8, 0x34_u8])
   struct IDVBCLocator
     lpVtbl : IDVBCLocatorVTbl*
   end
@@ -13503,8 +13503,8 @@ lib LibWin32
     put_elevation : Proc(IISDBSLocator*, Int32, HRESULT)
   end
 
-  IISDBSLocator_GUID = LibC::GUID.new("c9897087-e29c-473f-9e4b-7072123dea14")
-  CLSID_IISDBSLocator = "c9897087-e29c-473f-9e4b-7072123dea14"
+  IISDBSLocator_GUID = "c9897087-e29c-473f-9e4b-7072123dea14"
+  IID_IISDBSLocator = LibC::GUID.new(0xc9897087_u32, 0xe29c_u16, 0x473f_u16, StaticArray[0x9e_u8, 0x4b_u8, 0x70_u8, 0x72_u8, 0x12_u8, 0x3d_u8, 0xea_u8, 0x14_u8])
   struct IISDBSLocator
     lpVtbl : IISDBSLocatorVTbl*
   end
@@ -13524,8 +13524,8 @@ lib LibWin32
     get_dialog_string_data : Proc(IESOpenMmiEvent*, UInt8**, UInt8**, HRESULT)
   end
 
-  IESOpenMmiEvent_GUID = LibC::GUID.new("ba4b6526-1a35-4635-8b56-3ec612746a8c")
-  CLSID_IESOpenMmiEvent = "ba4b6526-1a35-4635-8b56-3ec612746a8c"
+  IESOpenMmiEvent_GUID = "ba4b6526-1a35-4635-8b56-3ec612746a8c"
+  IID_IESOpenMmiEvent = LibC::GUID.new(0xba4b6526_u32, 0x1a35_u16, 0x4635_u16, StaticArray[0x8b_u8, 0x56_u8, 0x3e_u8, 0xc6_u8, 0x12_u8, 0x74_u8, 0x6a_u8, 0x8c_u8])
   struct IESOpenMmiEvent
     lpVtbl : IESOpenMmiEventVTbl*
   end
@@ -13542,8 +13542,8 @@ lib LibWin32
     get_dialog_number : Proc(IESCloseMmiEvent*, UInt32*, HRESULT)
   end
 
-  IESCloseMmiEvent_GUID = LibC::GUID.new("6b80e96f-55e2-45aa-b754-0c23c8e7d5c1")
-  CLSID_IESCloseMmiEvent = "6b80e96f-55e2-45aa-b754-0c23c8e7d5c1"
+  IESCloseMmiEvent_GUID = "6b80e96f-55e2-45aa-b754-0c23c8e7d5c1"
+  IID_IESCloseMmiEvent = LibC::GUID.new(0x6b80e96f_u32, 0x55e2_u16, 0x45aa_u16, StaticArray[0xb7_u8, 0x54_u8, 0xc_u8, 0x23_u8, 0xc8_u8, 0xe7_u8, 0xd5_u8, 0xc1_u8])
   struct IESCloseMmiEvent
     lpVtbl : IESCloseMmiEventVTbl*
   end
@@ -13560,8 +13560,8 @@ lib LibWin32
     get_value_names : Proc(IESValueUpdatedEvent*, SAFEARRAY**, HRESULT)
   end
 
-  IESValueUpdatedEvent_GUID = LibC::GUID.new("8a24c46e-bb63-4664-8602-5d9c718c146d")
-  CLSID_IESValueUpdatedEvent = "8a24c46e-bb63-4664-8602-5d9c718c146d"
+  IESValueUpdatedEvent_GUID = "8a24c46e-bb63-4664-8602-5d9c718c146d"
+  IID_IESValueUpdatedEvent = LibC::GUID.new(0x8a24c46e_u32, 0xbb63_u16, 0x4664_u16, StaticArray[0x86_u8, 0x2_u8, 0x5d_u8, 0x9c_u8, 0x71_u8, 0x8c_u8, 0x14_u8, 0x6d_u8])
   struct IESValueUpdatedEvent
     lpVtbl : IESValueUpdatedEventVTbl*
   end
@@ -13581,8 +13581,8 @@ lib LibWin32
     get_estimated_time : Proc(IESRequestTunerEvent*, UInt32*, HRESULT)
   end
 
-  IESRequestTunerEvent_GUID = LibC::GUID.new("54c7a5e8-c3bb-4f51-af14-e0e2c0e34c6d")
-  CLSID_IESRequestTunerEvent = "54c7a5e8-c3bb-4f51-af14-e0e2c0e34c6d"
+  IESRequestTunerEvent_GUID = "54c7a5e8-c3bb-4f51-af14-e0e2c0e34c6d"
+  IID_IESRequestTunerEvent = LibC::GUID.new(0x54c7a5e8_u32, 0xc3bb_u16, 0x4f51_u16, StaticArray[0xaf_u8, 0x14_u8, 0xe0_u8, 0xe2_u8, 0xc0_u8, 0xe3_u8, 0x4c_u8, 0x6d_u8])
   struct IESRequestTunerEvent
     lpVtbl : IESRequestTunerEventVTbl*
   end
@@ -13602,8 +13602,8 @@ lib LibWin32
     get_response_data : Proc(IESIsdbCasResponseEvent*, SAFEARRAY**, HRESULT)
   end
 
-  IESIsdbCasResponseEvent_GUID = LibC::GUID.new("2017cb03-dc0f-4c24-83ca-36307b2cd19f")
-  CLSID_IESIsdbCasResponseEvent = "2017cb03-dc0f-4c24-83ca-36307b2cd19f"
+  IESIsdbCasResponseEvent_GUID = "2017cb03-dc0f-4c24-83ca-36307b2cd19f"
+  IID_IESIsdbCasResponseEvent = LibC::GUID.new(0x2017cb03_u32, 0xdc0f_u16, 0x4c24_u16, StaticArray[0x83_u8, 0xca_u8, 0x36_u8, 0x30_u8, 0x7b_u8, 0x2c_u8, 0xd1_u8, 0x9f_u8])
   struct IESIsdbCasResponseEvent
     lpVtbl : IESIsdbCasResponseEventVTbl*
   end
@@ -13615,8 +13615,8 @@ lib LibWin32
     get_value_update_name : Proc(IGpnvsCommonBase*, UInt8**, HRESULT)
   end
 
-  IGpnvsCommonBase_GUID = LibC::GUID.new("907e0b5c-e42d-4f04-91f0-26f401f36907")
-  CLSID_IGpnvsCommonBase = "907e0b5c-e42d-4f04-91f0-26f401f36907"
+  IGpnvsCommonBase_GUID = "907e0b5c-e42d-4f04-91f0-26f401f36907"
+  IID_IGpnvsCommonBase = LibC::GUID.new(0x907e0b5c_u32, 0xe42d_u16, 0x4f04_u16, StaticArray[0x91_u8, 0xf0_u8, 0x26_u8, 0xf4_u8, 0x1_u8, 0xf3_u8, 0x69_u8, 0x7_u8])
   struct IGpnvsCommonBase
     lpVtbl : IGpnvsCommonBaseVTbl*
   end
@@ -13628,8 +13628,8 @@ lib LibWin32
     create_es_event : Proc(IESEventFactory*, IUnknown, UInt32, Guid, UInt32, UInt8*, UInt8*, IUnknown, IESEvent*, HRESULT)
   end
 
-  IESEventFactory_GUID = LibC::GUID.new("506a09b8-7f86-4e04-ac05-3303bfe8fc49")
-  CLSID_IESEventFactory = "506a09b8-7f86-4e04-ac05-3303bfe8fc49"
+  IESEventFactory_GUID = "506a09b8-7f86-4e04-ac05-3303bfe8fc49"
+  IID_IESEventFactory = LibC::GUID.new(0x506a09b8_u32, 0x7f86_u16, 0x4e04_u16, StaticArray[0xac_u8, 0x5_u8, 0x33_u8, 0x3_u8, 0xbf_u8, 0xe8_u8, 0xfc_u8, 0x49_u8])
   struct IESEventFactory
     lpVtbl : IESEventFactoryVTbl*
   end
@@ -13656,8 +13656,8 @@ lib LibWin32
     get_expiry_date : Proc(IESLicenseRenewalResultEvent*, UInt64*, HRESULT)
   end
 
-  IESLicenseRenewalResultEvent_GUID = LibC::GUID.new("d5a48ef5-a81b-4df0-acaa-5e35e7ea45d4")
-  CLSID_IESLicenseRenewalResultEvent = "d5a48ef5-a81b-4df0-acaa-5e35e7ea45d4"
+  IESLicenseRenewalResultEvent_GUID = "d5a48ef5-a81b-4df0-acaa-5e35e7ea45d4"
+  IID_IESLicenseRenewalResultEvent = LibC::GUID.new(0xd5a48ef5_u32, 0xa81b_u16, 0x4df0_u16, StaticArray[0xac_u8, 0xaa_u8, 0x5e_u8, 0x35_u8, 0xe7_u8, 0xea_u8, 0x45_u8, 0xd4_u8])
   struct IESLicenseRenewalResultEvent
     lpVtbl : IESLicenseRenewalResultEventVTbl*
   end
@@ -13679,8 +13679,8 @@ lib LibWin32
     does_expire_after_first_use : Proc(IESFileExpiryDateEvent*, LibC::BOOL*, HRESULT)
   end
 
-  IESFileExpiryDateEvent_GUID = LibC::GUID.new("ba9edcb6-4d36-4cfe-8c56-87a6b0ca48e1")
-  CLSID_IESFileExpiryDateEvent = "ba9edcb6-4d36-4cfe-8c56-87a6b0ca48e1"
+  IESFileExpiryDateEvent_GUID = "ba9edcb6-4d36-4cfe-8c56-87a6b0ca48e1"
+  IID_IESFileExpiryDateEvent = LibC::GUID.new(0xba9edcb6_u32, 0x4d36_u16, 0x4cfe_u16, StaticArray[0x8c_u8, 0x56_u8, 0x87_u8, 0xa6_u8, 0xb0_u8, 0xca_u8, 0x48_u8, 0xe1_u8])
   struct IESFileExpiryDateEvent
     lpVtbl : IESFileExpiryDateEventVTbl*
   end
@@ -13692,8 +13692,8 @@ lib LibWin32
     fire_es_event : Proc(IESEventService*, IESEvent, HRESULT)
   end
 
-  IESEventService_GUID = LibC::GUID.new("ed89a619-4c06-4b2f-99eb-c7669b13047c")
-  CLSID_IESEventService = "ed89a619-4c06-4b2f-99eb-c7669b13047c"
+  IESEventService_GUID = "ed89a619-4c06-4b2f-99eb-c7669b13047c"
+  IID_IESEventService = LibC::GUID.new(0xed89a619_u32, 0x4c06_u16, 0x4b2f_u16, StaticArray[0x99_u8, 0xeb_u8, 0xc7_u8, 0x66_u8, 0x9b_u8, 0x13_u8, 0x4_u8, 0x7c_u8])
   struct IESEventService
     lpVtbl : IESEventServiceVTbl*
   end
@@ -13710,8 +13710,8 @@ lib LibWin32
     remove_graph : Proc(IESEventServiceConfiguration*, IFilterGraph, HRESULT)
   end
 
-  IESEventServiceConfiguration_GUID = LibC::GUID.new("33b9daae-9309-491d-a051-bcad2a70cd66")
-  CLSID_IESEventServiceConfiguration = "33b9daae-9309-491d-a051-bcad2a70cd66"
+  IESEventServiceConfiguration_GUID = "33b9daae-9309-491d-a051-bcad2a70cd66"
+  IID_IESEventServiceConfiguration = LibC::GUID.new(0x33b9daae_u32, 0x9309_u16, 0x491d_u16, StaticArray[0xa0_u8, 0x51_u8, 0xbc_u8, 0xad_u8, 0x2a_u8, 0x70_u8, 0xcd_u8, 0x66_u8])
   struct IESEventServiceConfiguration
     lpVtbl : IESEventServiceConfigurationVTbl*
   end
@@ -13724,8 +13724,8 @@ lib LibWin32
     unregister : Proc(IRegisterTuner*, HRESULT)
   end
 
-  IRegisterTuner_GUID = LibC::GUID.new("359b3901-572c-4854-bb49-cdef66606a25")
-  CLSID_IRegisterTuner = "359b3901-572c-4854-bb49-cdef66606a25"
+  IRegisterTuner_GUID = "359b3901-572c-4854-bb49-cdef66606a25"
+  IID_IRegisterTuner = LibC::GUID.new(0x359b3901_u32, 0x572c_u16, 0x4854_u16, StaticArray[0xbb_u8, 0x49_u8, 0xcd_u8, 0xef_u8, 0x66_u8, 0x60_u8, 0x6a_u8, 0x25_u8])
   struct IRegisterTuner
     lpVtbl : IRegisterTunerVTbl*
   end
@@ -13742,8 +13742,8 @@ lib LibWin32
     hash_equivalent_incremental : Proc(IBDAComparable*, Int64, UInt32, Int64*, HRESULT)
   end
 
-  IBDAComparable_GUID = LibC::GUID.new("b34505e0-2f0e-497b-80bc-d43f3b24ed7f")
-  CLSID_IBDAComparable = "b34505e0-2f0e-497b-80bc-d43f3b24ed7f"
+  IBDAComparable_GUID = "b34505e0-2f0e-497b-80bc-d43f3b24ed7f"
+  IID_IBDAComparable = LibC::GUID.new(0xb34505e0_u32, 0x2f0e_u16, 0x497b_u16, StaticArray[0x80_u8, 0xbc_u8, 0xd4_u8, 0x3f_u8, 0x3b_u8, 0x24_u8, 0xed_u8, 0x7f_u8])
   struct IBDAComparable
     lpVtbl : IBDAComparableVTbl*
   end
@@ -13758,8 +13758,8 @@ lib LibWin32
     save : Proc(IPersistTuneXml*, VARIANT*, HRESULT)
   end
 
-  IPersistTuneXml_GUID = LibC::GUID.new("0754cd31-8d15-47a9-8215-d20064157244")
-  CLSID_IPersistTuneXml = "0754cd31-8d15-47a9-8215-d20064157244"
+  IPersistTuneXml_GUID = "0754cd31-8d15-47a9-8215-d20064157244"
+  IID_IPersistTuneXml = LibC::GUID.new(0x754cd31_u32, 0x8d15_u16, 0x47a9_u16, StaticArray[0x82_u8, 0x15_u8, 0xd2_u8, 0x0_u8, 0x64_u8, 0x15_u8, 0x72_u8, 0x44_u8])
   struct IPersistTuneXml
     lpVtbl : IPersistTuneXmlVTbl*
   end
@@ -13771,8 +13771,8 @@ lib LibWin32
     deserialize : Proc(IPersistTuneXmlUtility*, VARIANT, IUnknown*, HRESULT)
   end
 
-  IPersistTuneXmlUtility_GUID = LibC::GUID.new("990237ae-ac11-4614-be8f-dd217a4cb4cb")
-  CLSID_IPersistTuneXmlUtility = "990237ae-ac11-4614-be8f-dd217a4cb4cb"
+  IPersistTuneXmlUtility_GUID = "990237ae-ac11-4614-be8f-dd217a4cb4cb"
+  IID_IPersistTuneXmlUtility = LibC::GUID.new(0x990237ae_u32, 0xac11_u16, 0x4614_u16, StaticArray[0xbe_u8, 0x8f_u8, 0xdd_u8, 0x21_u8, 0x7a_u8, 0x4c_u8, 0xb4_u8, 0xcb_u8])
   struct IPersistTuneXmlUtility
     lpVtbl : IPersistTuneXmlUtilityVTbl*
   end
@@ -13785,8 +13785,8 @@ lib LibWin32
     serialize : Proc(IPersistTuneXmlUtility2*, ITuneRequest, UInt8**, HRESULT)
   end
 
-  IPersistTuneXmlUtility2_GUID = LibC::GUID.new("992e165f-ea24-4b2f-9a1d-009d92120451")
-  CLSID_IPersistTuneXmlUtility2 = "992e165f-ea24-4b2f-9a1d-009d92120451"
+  IPersistTuneXmlUtility2_GUID = "992e165f-ea24-4b2f-9a1d-009d92120451"
+  IID_IPersistTuneXmlUtility2 = LibC::GUID.new(0x992e165f_u32, 0xea24_u16, 0x4b2f_u16, StaticArray[0x9a_u8, 0x1d_u8, 0x0_u8, 0x9d_u8, 0x92_u8, 0x12_u8, 0x4_u8, 0x51_u8])
   struct IPersistTuneXmlUtility2
     lpVtbl : IPersistTuneXmlUtility2VTbl*
   end
@@ -13798,8 +13798,8 @@ lib LibWin32
     create_tune_request_ex : Proc(IBDACreateTuneRequestEx*, Guid*, ITuneRequest*, HRESULT)
   end
 
-  IBDACreateTuneRequestEx_GUID = LibC::GUID.new("c0a4a1d4-2b3c-491a-ba22-499fbadd4d12")
-  CLSID_IBDACreateTuneRequestEx = "c0a4a1d4-2b3c-491a-ba22-499fbadd4d12"
+  IBDACreateTuneRequestEx_GUID = "c0a4a1d4-2b3c-491a-ba22-499fbadd4d12"
+  IID_IBDACreateTuneRequestEx = LibC::GUID.new(0xc0a4a1d4_u32, 0x2b3c_u16, 0x491a_u16, StaticArray[0xba_u8, 0x22_u8, 0x49_u8, 0x9f_u8, 0xba_u8, 0xdd_u8, 0x4d_u8, 0x12_u8])
   struct IBDACreateTuneRequestEx
     lpVtbl : IBDACreateTuneRequestExVTbl*
   end
@@ -13812,8 +13812,8 @@ lib LibWin32
     get_secure_channel_object : Proc(IETFilterConfig*, IUnknown*, HRESULT)
   end
 
-  IETFilterConfig_GUID = LibC::GUID.new("c4c4c4d1-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IETFilterConfig = "c4c4c4d1-0049-4e2b-98fb-9537f6ce516d"
+  IETFilterConfig_GUID = "c4c4c4d1-0049-4e2b-98fb-9537f6ce516d"
+  IID_IETFilterConfig = LibC::GUID.new(0xc4c4c4d1_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IETFilterConfig
     lpVtbl : IETFilterConfigVTbl*
   end
@@ -13825,8 +13825,8 @@ lib LibWin32
     get_secure_channel_object : Proc(IDTFilterConfig*, IUnknown*, HRESULT)
   end
 
-  IDTFilterConfig_GUID = LibC::GUID.new("c4c4c4d2-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IDTFilterConfig = "c4c4c4d2-0049-4e2b-98fb-9537f6ce516d"
+  IDTFilterConfig_GUID = "c4c4c4d2-0049-4e2b-98fb-9537f6ce516d"
+  IID_IDTFilterConfig = LibC::GUID.new(0xc4c4c4d2_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IDTFilterConfig
     lpVtbl : IDTFilterConfigVTbl*
   end
@@ -13839,8 +13839,8 @@ lib LibWin32
     set_pause_buffer_time : Proc(IXDSCodecConfig*, UInt32, HRESULT)
   end
 
-  IXDSCodecConfig_GUID = LibC::GUID.new("c4c4c4d3-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IXDSCodecConfig = "c4c4c4d3-0049-4e2b-98fb-9537f6ce516d"
+  IXDSCodecConfig_GUID = "c4c4c4d3-0049-4e2b-98fb-9537f6ce516d"
+  IID_IXDSCodecConfig = LibC::GUID.new(0xc4c4c4d3_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IXDSCodecConfig
     lpVtbl : IXDSCodecConfigVTbl*
   end
@@ -13852,8 +13852,8 @@ lib LibWin32
     get_license_renewal_data : Proc(IDTFilterLicenseRenewal*, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
   end
 
-  IDTFilterLicenseRenewal_GUID = LibC::GUID.new("8a78b317-e405-4a43-994a-620d8f5ce25e")
-  CLSID_IDTFilterLicenseRenewal = "8a78b317-e405-4a43-994a-620d8f5ce25e"
+  IDTFilterLicenseRenewal_GUID = "8a78b317-e405-4a43-994a-620d8f5ce25e"
+  IID_IDTFilterLicenseRenewal = LibC::GUID.new(0x8a78b317_u32, 0xe405_u16, 0x4a43_u16, StaticArray[0x99_u8, 0x4a_u8, 0x62_u8, 0xd_u8, 0x8f_u8, 0x5c_u8, 0xe2_u8, 0x5e_u8])
   struct IDTFilterLicenseRenewal
     lpVtbl : IDTFilterLicenseRenewalVTbl*
   end
@@ -13866,8 +13866,8 @@ lib LibWin32
     cancel_license_renewal : Proc(IPTFilterLicenseRenewal*, HRESULT)
   end
 
-  IPTFilterLicenseRenewal_GUID = LibC::GUID.new("26d836a5-0c15-44c7-ac59-b0da8728f240")
-  CLSID_IPTFilterLicenseRenewal = "26d836a5-0c15-44c7-ac59-b0da8728f240"
+  IPTFilterLicenseRenewal_GUID = "26d836a5-0c15-44c7-ac59-b0da8728f240"
+  IID_IPTFilterLicenseRenewal = LibC::GUID.new(0x26d836a5_u32, 0xc15_u16, 0x44c7_u16, StaticArray[0xac_u8, 0x59_u8, 0xb0_u8, 0xda_u8, 0x87_u8, 0x28_u8, 0xf2_u8, 0x40_u8])
   struct IPTFilterLicenseRenewal
     lpVtbl : IPTFilterLicenseRenewalVTbl*
   end
@@ -13879,8 +13879,8 @@ lib LibWin32
     get_burner_no_decryption : Proc(IMceBurnerControl*, HRESULT)
   end
 
-  IMceBurnerControl_GUID = LibC::GUID.new("5a86b91a-e71e-46c1-88a9-9bb338710552")
-  CLSID_IMceBurnerControl = "5a86b91a-e71e-46c1-88a9-9bb338710552"
+  IMceBurnerControl_GUID = "5a86b91a-e71e-46c1-88a9-9bb338710552"
+  IID_IMceBurnerControl = LibC::GUID.new(0x5a86b91a_u32, 0xe71e_u16, 0x46c1_u16, StaticArray[0x88_u8, 0xa9_u8, 0x9b_u8, 0xb3_u8, 0x38_u8, 0x71_u8, 0x5_u8, 0x52_u8])
   struct IMceBurnerControl
     lpVtbl : IMceBurnerControlVTbl*
   end
@@ -13896,8 +13896,8 @@ lib LibWin32
     set_recording_on : Proc(IETFilter*, LibC::BOOL, HRESULT)
   end
 
-  IETFilter_GUID = LibC::GUID.new("c4c4c4b1-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IETFilter = "c4c4c4b1-0049-4e2b-98fb-9537f6ce516d"
+  IETFilter_GUID = "c4c4c4b1-0049-4e2b-98fb-9537f6ce516d"
+  IID_IETFilter = LibC::GUID.new(0xc4c4c4b1_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IETFilter
     lpVtbl : IETFilterVTbl*
   end
@@ -13912,8 +13912,8 @@ lib LibWin32
     invoke : Proc(IETFilterEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IETFilterEvents_GUID = LibC::GUID.new("c4c4c4c1-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IETFilterEvents = "c4c4c4c1-0049-4e2b-98fb-9537f6ce516d"
+  IETFilterEvents_GUID = "c4c4c4c1-0049-4e2b-98fb-9537f6ce516d"
+  IID_IETFilterEvents = LibC::GUID.new(0xc4c4c4c1_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IETFilterEvents
     lpVtbl : IETFilterEventsVTbl*
   end
@@ -13932,8 +13932,8 @@ lib LibWin32
     put_block_un_rated_delay : Proc(IDTFilter*, Int32, HRESULT)
   end
 
-  IDTFilter_GUID = LibC::GUID.new("c4c4c4b2-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IDTFilter = "c4c4c4b2-0049-4e2b-98fb-9537f6ce516d"
+  IDTFilter_GUID = "c4c4c4b2-0049-4e2b-98fb-9537f6ce516d"
+  IID_IDTFilter = LibC::GUID.new(0xc4c4c4b2_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IDTFilter
     lpVtbl : IDTFilterVTbl*
   end
@@ -13955,8 +13955,8 @@ lib LibWin32
     get_last_error_code : Proc(IDTFilter2*, HRESULT)
   end
 
-  IDTFilter2_GUID = LibC::GUID.new("c4c4c4b4-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IDTFilter2 = "c4c4c4b4-0049-4e2b-98fb-9537f6ce516d"
+  IDTFilter2_GUID = "c4c4c4b4-0049-4e2b-98fb-9537f6ce516d"
+  IID_IDTFilter2 = LibC::GUID.new(0xc4c4c4b4_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IDTFilter2
     lpVtbl : IDTFilter2VTbl*
   end
@@ -13981,8 +13981,8 @@ lib LibWin32
     set_rights : Proc(IDTFilter3*, UInt8*, HRESULT)
   end
 
-  IDTFilter3_GUID = LibC::GUID.new("513998cc-e929-4cdf-9fbd-bad1e0314866")
-  CLSID_IDTFilter3 = "513998cc-e929-4cdf-9fbd-bad1e0314866"
+  IDTFilter3_GUID = "513998cc-e929-4cdf-9fbd-bad1e0314866"
+  IID_IDTFilter3 = LibC::GUID.new(0x513998cc_u32, 0xe929_u16, 0x4cdf_u16, StaticArray[0x9f_u8, 0xbd_u8, 0xba_u8, 0xd1_u8, 0xe0_u8, 0x31_u8, 0x48_u8, 0x66_u8])
   struct IDTFilter3
     lpVtbl : IDTFilter3VTbl*
   end
@@ -13997,8 +13997,8 @@ lib LibWin32
     invoke : Proc(IDTFilterEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IDTFilterEvents_GUID = LibC::GUID.new("c4c4c4c2-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IDTFilterEvents = "c4c4c4c2-0049-4e2b-98fb-9537f6ce516d"
+  IDTFilterEvents_GUID = "c4c4c4c2-0049-4e2b-98fb-9537f6ce516d"
+  IID_IDTFilterEvents = LibC::GUID.new(0xc4c4c4c2_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IDTFilterEvents
     lpVtbl : IDTFilterEventsVTbl*
   end
@@ -14016,8 +14016,8 @@ lib LibWin32
     get_last_error_code : Proc(IXDSCodec*, HRESULT)
   end
 
-  IXDSCodec_GUID = LibC::GUID.new("c4c4c4b3-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IXDSCodec = "c4c4c4b3-0049-4e2b-98fb-9537f6ce516d"
+  IXDSCodec_GUID = "c4c4c4b3-0049-4e2b-98fb-9537f6ce516d"
+  IID_IXDSCodec = LibC::GUID.new(0xc4c4c4b3_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IXDSCodec
     lpVtbl : IXDSCodecVTbl*
   end
@@ -14032,8 +14032,8 @@ lib LibWin32
     invoke : Proc(IXDSCodecEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IXDSCodecEvents_GUID = LibC::GUID.new("c4c4c4c3-0049-4e2b-98fb-9537f6ce516d")
-  CLSID_IXDSCodecEvents = "c4c4c4c3-0049-4e2b-98fb-9537f6ce516d"
+  IXDSCodecEvents_GUID = "c4c4c4c3-0049-4e2b-98fb-9537f6ce516d"
+  IID_IXDSCodecEvents = LibC::GUID.new(0xc4c4c4c3_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
   struct IXDSCodecEvents
     lpVtbl : IXDSCodecEventsVTbl*
   end
@@ -14050,8 +14050,8 @@ lib LibWin32
     parse_xds_byte_pair : Proc(IXDSToRat*, UInt8, UInt8, EnTvRat_System*, EnTvRat_GenericLevel*, Int32*, HRESULT)
   end
 
-  IXDSToRat_GUID = LibC::GUID.new("c5c5c5b0-3abc-11d6-b25b-00c04fa0c026")
-  CLSID_IXDSToRat = "c5c5c5b0-3abc-11d6-b25b-00c04fa0c026"
+  IXDSToRat_GUID = "c5c5c5b0-3abc-11d6-b25b-00c04fa0c026"
+  IID_IXDSToRat = LibC::GUID.new(0xc5c5c5b0_u32, 0x3abc_u16, 0x11d6_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa0_u8, 0xc0_u8, 0x26_u8])
   struct IXDSToRat
     lpVtbl : IXDSToRatVTbl*
   end
@@ -14072,8 +14072,8 @@ lib LibWin32
     test_rating : Proc(IEvalRat*, EnTvRat_System, EnTvRat_GenericLevel, Int32, HRESULT)
   end
 
-  IEvalRat_GUID = LibC::GUID.new("c5c5c5b1-3abc-11d6-b25b-00c04fa0c026")
-  CLSID_IEvalRat = "c5c5c5b1-3abc-11d6-b25b-00c04fa0c026"
+  IEvalRat_GUID = "c5c5c5b1-3abc-11d6-b25b-00c04fa0c026"
+  IID_IEvalRat = LibC::GUID.new(0xc5c5c5b1_u32, 0x3abc_u16, 0x11d6_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa0_u8, 0xc0_u8, 0x26_u8])
   struct IEvalRat
     lpVtbl : IEvalRatVTbl*
   end
@@ -14099,8 +14099,8 @@ lib LibWin32
     put_rect : Proc(IMSVidRect*, IMSVidRect, HRESULT)
   end
 
-  IMSVidRect_GUID = LibC::GUID.new("7f5000a6-a440-47ca-8acc-c0e75531a2c2")
-  CLSID_IMSVidRect = "7f5000a6-a440-47ca-8acc-c0e75531a2c2"
+  IMSVidRect_GUID = "7f5000a6-a440-47ca-8acc-c0e75531a2c2"
+  IID_IMSVidRect = LibC::GUID.new(0x7f5000a6_u32, 0xa440_u16, 0x47ca_u16, StaticArray[0x8a_u8, 0xcc_u8, 0xc0_u8, 0xe7_u8, 0x55_u8, 0x31_u8, 0xa2_u8, 0xc2_u8])
   struct IMSVidRect
     lpVtbl : IMSVidRectVTbl*
   end
@@ -14122,8 +14122,8 @@ lib LibWin32
     get_focus : Proc(IMSVidGraphSegmentContainer*, HRESULT)
   end
 
-  IMSVidGraphSegmentContainer_GUID = LibC::GUID.new("3dd2903d-e0aa-11d2-b63a-00c04f79498e")
-  CLSID_IMSVidGraphSegmentContainer = "3dd2903d-e0aa-11d2-b63a-00c04f79498e"
+  IMSVidGraphSegmentContainer_GUID = "3dd2903d-e0aa-11d2-b63a-00c04f79498e"
+  IID_IMSVidGraphSegmentContainer = LibC::GUID.new(0x3dd2903d_u32, 0xe0aa_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidGraphSegmentContainer
     lpVtbl : IMSVidGraphSegmentContainerVTbl*
   end
@@ -14150,8 +14150,8 @@ lib LibWin32
     decompose : Proc(IMSVidGraphSegment*, HRESULT)
   end
 
-  IMSVidGraphSegment_GUID = LibC::GUID.new("238dec54-adeb-4005-a349-f772b9afebc4")
-  CLSID_IMSVidGraphSegment = "238dec54-adeb-4005-a349-f772b9afebc4"
+  IMSVidGraphSegment_GUID = "238dec54-adeb-4005-a349-f772b9afebc4"
+  IID_IMSVidGraphSegment = LibC::GUID.new(0x238dec54_u32, 0xadeb_u16, 0x4005_u16, StaticArray[0xa3_u8, 0x49_u8, 0xf7_u8, 0x72_u8, 0xb9_u8, 0xaf_u8, 0xeb_u8, 0xc4_u8])
   struct IMSVidGraphSegment
     lpVtbl : IMSVidGraphSegmentVTbl*
   end
@@ -14170,8 +14170,8 @@ lib LibWin32
     mouse_up : Proc(IMSVidGraphSegmentUserInput*, Int16, Int16, Int32, Int32, HRESULT)
   end
 
-  IMSVidGraphSegmentUserInput_GUID = LibC::GUID.new("301c060e-20d9-4587-9b03-f82ed9a9943c")
-  CLSID_IMSVidGraphSegmentUserInput = "301c060e-20d9-4587-9b03-f82ed9a9943c"
+  IMSVidGraphSegmentUserInput_GUID = "301c060e-20d9-4587-9b03-f82ed9a9943c"
+  IID_IMSVidGraphSegmentUserInput = LibC::GUID.new(0x301c060e_u32, 0x20d9_u16, 0x4587_u16, StaticArray[0x9b_u8, 0x3_u8, 0xf8_u8, 0x2e_u8, 0xd9_u8, 0xa9_u8, 0x94_u8, 0x3c_u8])
   struct IMSVidGraphSegmentUserInput
     lpVtbl : IMSVidGraphSegmentUserInputVTbl*
   end
@@ -14201,8 +14201,8 @@ lib LibWin32
     get_down : Proc(IMSVidCompositionSegment*, IMSVidGraphSegment*, HRESULT)
   end
 
-  IMSVidCompositionSegment_GUID = LibC::GUID.new("1c15d483-911d-11d2-b632-00c04f79498e")
-  CLSID_IMSVidCompositionSegment = "1c15d483-911d-11d2-b632-00c04f79498e"
+  IMSVidCompositionSegment_GUID = "1c15d483-911d-11d2-b632-00c04f79498e"
+  IID_IMSVidCompositionSegment = LibC::GUID.new(0x1c15d483_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidCompositionSegment
     lpVtbl : IMSVidCompositionSegmentVTbl*
   end
@@ -14217,8 +14217,8 @@ lib LibWin32
     clone : Proc(IEnumMSVidGraphSegment*, IEnumMSVidGraphSegment*, HRESULT)
   end
 
-  IEnumMSVidGraphSegment_GUID = LibC::GUID.new("3dd2903e-e0aa-11d2-b63a-00c04f79498e")
-  CLSID_IEnumMSVidGraphSegment = "3dd2903e-e0aa-11d2-b63a-00c04f79498e"
+  IEnumMSVidGraphSegment_GUID = "3dd2903e-e0aa-11d2-b63a-00c04f79498e"
+  IID_IEnumMSVidGraphSegment = LibC::GUID.new(0x3dd2903e_u32, 0xe0aa_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IEnumMSVidGraphSegment
     lpVtbl : IEnumMSVidGraphSegmentVTbl*
   end
@@ -14266,8 +14266,8 @@ lib LibWin32
     re_paint : Proc(IMSVidVRGraphSegment*, HDC, HRESULT)
   end
 
-  IMSVidVRGraphSegment_GUID = LibC::GUID.new("dd47de3f-9874-4f7b-8b22-7cb2688461e7")
-  CLSID_IMSVidVRGraphSegment = "dd47de3f-9874-4f7b-8b22-7cb2688461e7"
+  IMSVidVRGraphSegment_GUID = "dd47de3f-9874-4f7b-8b22-7cb2688461e7"
+  IID_IMSVidVRGraphSegment = LibC::GUID.new(0xdd47de3f_u32, 0x9874_u16, 0x4f7b_u16, StaticArray[0x8b_u8, 0x22_u8, 0x7c_u8, 0xb2_u8, 0x68_u8, 0x84_u8, 0x61_u8, 0xe7_u8])
   struct IMSVidVRGraphSegment
     lpVtbl : IMSVidVRGraphSegmentVTbl*
   end
@@ -14291,8 +14291,8 @@ lib LibWin32
     is_equal_device : Proc(IMSVidDevice*, IMSVidDevice, Int16*, HRESULT)
   end
 
-  IMSVidDevice_GUID = LibC::GUID.new("1c15d47c-911d-11d2-b632-00c04f79498e")
-  CLSID_IMSVidDevice = "1c15d47c-911d-11d2-b632-00c04f79498e"
+  IMSVidDevice_GUID = "1c15d47c-911d-11d2-b632-00c04f79498e"
+  IID_IMSVidDevice = LibC::GUID.new(0x1c15d47c_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidDevice
     lpVtbl : IMSVidDeviceVTbl*
   end
@@ -14304,8 +14304,8 @@ lib LibWin32
     get_device_path : Proc(IMSVidDevice2*, UInt8**, HRESULT)
   end
 
-  IMSVidDevice2_GUID = LibC::GUID.new("87bd2783-ebc0-478c-b4a0-e8e7f43ab78e")
-  CLSID_IMSVidDevice2 = "87bd2783-ebc0-478c-b4a0-e8e7f43ab78e"
+  IMSVidDevice2_GUID = "87bd2783-ebc0-478c-b4a0-e8e7f43ab78e"
+  IID_IMSVidDevice2 = LibC::GUID.new(0x87bd2783_u32, 0xebc0_u16, 0x478c_u16, StaticArray[0xb4_u8, 0xa0_u8, 0xe8_u8, 0xe7_u8, 0xf4_u8, 0x3a_u8, 0xb7_u8, 0x8e_u8])
   struct IMSVidDevice2
     lpVtbl : IMSVidDevice2VTbl*
   end
@@ -14331,8 +14331,8 @@ lib LibWin32
     view : Proc(IMSVidInputDevice*, VARIANT*, HRESULT)
   end
 
-  IMSVidInputDevice_GUID = LibC::GUID.new("37b0353d-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidInputDevice = "37b0353d-a4c8-11d2-b634-00c04f79498e"
+  IMSVidInputDevice_GUID = "37b0353d-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidInputDevice = LibC::GUID.new(0x37b0353d_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidInputDevice
     lpVtbl : IMSVidInputDeviceVTbl*
   end
@@ -14348,8 +14348,8 @@ lib LibWin32
     state_change : Proc(IMSVidDeviceEvent*, IMSVidDevice, Int32, Int32, HRESULT)
   end
 
-  IMSVidDeviceEvent_GUID = LibC::GUID.new("1c15d480-911d-11d2-b632-00c04f79498e")
-  CLSID_IMSVidDeviceEvent = "1c15d480-911d-11d2-b632-00c04f79498e"
+  IMSVidDeviceEvent_GUID = "1c15d480-911d-11d2-b632-00c04f79498e"
+  IID_IMSVidDeviceEvent = LibC::GUID.new(0x1c15d480_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidDeviceEvent
     lpVtbl : IMSVidDeviceEventVTbl*
   end
@@ -14364,8 +14364,8 @@ lib LibWin32
     invoke : Proc(IMSVidInputDeviceEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IMSVidInputDeviceEvent_GUID = LibC::GUID.new("37b0353e-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidInputDeviceEvent = "37b0353e-a4c8-11d2-b634-00c04f79498e"
+  IMSVidInputDeviceEvent_GUID = "37b0353e-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidInputDeviceEvent = LibC::GUID.new(0x37b0353e_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidInputDeviceEvent
     lpVtbl : IMSVidInputDeviceEventVTbl*
   end
@@ -14391,8 +14391,8 @@ lib LibWin32
     view : Proc(IMSVidVideoInputDevice*, VARIANT*, HRESULT)
   end
 
-  IMSVidVideoInputDevice_GUID = LibC::GUID.new("1c15d47f-911d-11d2-b632-00c04f79498e")
-  CLSID_IMSVidVideoInputDevice = "1c15d47f-911d-11d2-b632-00c04f79498e"
+  IMSVidVideoInputDevice_GUID = "1c15d47f-911d-11d2-b632-00c04f79498e"
+  IID_IMSVidVideoInputDevice = LibC::GUID.new(0x1c15d47f_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidVideoInputDevice
     lpVtbl : IMSVidVideoInputDeviceVTbl*
   end
@@ -14432,8 +14432,8 @@ lib LibWin32
     get_length : Proc(IMSVidPlayback*, Int32*, HRESULT)
   end
 
-  IMSVidPlayback_GUID = LibC::GUID.new("37b03538-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidPlayback = "37b03538-a4c8-11d2-b634-00c04f79498e"
+  IMSVidPlayback_GUID = "37b03538-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidPlayback = LibC::GUID.new(0x37b03538_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidPlayback
     lpVtbl : IMSVidPlaybackVTbl*
   end
@@ -14449,8 +14449,8 @@ lib LibWin32
     end_of_media : Proc(IMSVidPlaybackEvent*, IMSVidPlayback, HRESULT)
   end
 
-  IMSVidPlaybackEvent_GUID = LibC::GUID.new("37b0353b-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidPlaybackEvent = "37b0353b-a4c8-11d2-b634-00c04f79498e"
+  IMSVidPlaybackEvent_GUID = "37b0353b-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidPlaybackEvent = LibC::GUID.new(0x37b0353b_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidPlaybackEvent
     lpVtbl : IMSVidPlaybackEventVTbl*
   end
@@ -14480,8 +14480,8 @@ lib LibWin32
     put_tuning_space : Proc(IMSVidTuner*, ITuningSpace, HRESULT)
   end
 
-  IMSVidTuner_GUID = LibC::GUID.new("1c15d47d-911d-11d2-b632-00c04f79498e")
-  CLSID_IMSVidTuner = "1c15d47d-911d-11d2-b632-00c04f79498e"
+  IMSVidTuner_GUID = "1c15d47d-911d-11d2-b632-00c04f79498e"
+  IID_IMSVidTuner = LibC::GUID.new(0x1c15d47d_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidTuner
     lpVtbl : IMSVidTunerVTbl*
   end
@@ -14497,8 +14497,8 @@ lib LibWin32
     tune_changed : Proc(IMSVidTunerEvent*, IMSVidTuner, HRESULT)
   end
 
-  IMSVidTunerEvent_GUID = LibC::GUID.new("1c15d485-911d-11d2-b632-00c04f79498e")
-  CLSID_IMSVidTunerEvent = "1c15d485-911d-11d2-b632-00c04f79498e"
+  IMSVidTunerEvent_GUID = "1c15d485-911d-11d2-b632-00c04f79498e"
+  IID_IMSVidTunerEvent = LibC::GUID.new(0x1c15d485_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidTunerEvent
     lpVtbl : IMSVidTunerEventVTbl*
   end
@@ -14537,8 +14537,8 @@ lib LibWin32
     channel_available : Proc(IMSVidAnalogTuner*, Int32, Int32*, Int16*, HRESULT)
   end
 
-  IMSVidAnalogTuner_GUID = LibC::GUID.new("1c15d47e-911d-11d2-b632-00c04f79498e")
-  CLSID_IMSVidAnalogTuner = "1c15d47e-911d-11d2-b632-00c04f79498e"
+  IMSVidAnalogTuner_GUID = "1c15d47e-911d-11d2-b632-00c04f79498e"
+  IID_IMSVidAnalogTuner = LibC::GUID.new(0x1c15d47e_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidAnalogTuner
     lpVtbl : IMSVidAnalogTunerVTbl*
   end
@@ -14580,8 +14580,8 @@ lib LibWin32
     get_num_aux_inputs : Proc(IMSVidAnalogTuner2*, Int32*, HRESULT)
   end
 
-  IMSVidAnalogTuner2_GUID = LibC::GUID.new("37647bf7-3dde-4cc8-a4dc-0d534d3d0037")
-  CLSID_IMSVidAnalogTuner2 = "37647bf7-3dde-4cc8-a4dc-0d534d3d0037"
+  IMSVidAnalogTuner2_GUID = "37647bf7-3dde-4cc8-a4dc-0d534d3d0037"
+  IID_IMSVidAnalogTuner2 = LibC::GUID.new(0x37647bf7_u32, 0x3dde_u16, 0x4cc8_u16, StaticArray[0xa4_u8, 0xdc_u8, 0xd_u8, 0x53_u8, 0x4d_u8, 0x3d_u8, 0x0_u8, 0x37_u8])
   struct IMSVidAnalogTuner2
     lpVtbl : IMSVidAnalogTuner2VTbl*
   end
@@ -14597,8 +14597,8 @@ lib LibWin32
     tune_changed : Proc(IMSVidAnalogTunerEvent*, IMSVidTuner, HRESULT)
   end
 
-  IMSVidAnalogTunerEvent_GUID = LibC::GUID.new("1c15d486-911d-11d2-b632-00c04f79498e")
-  CLSID_IMSVidAnalogTunerEvent = "1c15d486-911d-11d2-b632-00c04f79498e"
+  IMSVidAnalogTunerEvent_GUID = "1c15d486-911d-11d2-b632-00c04f79498e"
+  IID_IMSVidAnalogTunerEvent = LibC::GUID.new(0x1c15d486_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidAnalogTunerEvent
     lpVtbl : IMSVidAnalogTunerEventVTbl*
   end
@@ -14640,8 +14640,8 @@ lib LibWin32
     put_file_name : Proc(IMSVidFilePlayback*, UInt8*, HRESULT)
   end
 
-  IMSVidFilePlayback_GUID = LibC::GUID.new("37b03539-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidFilePlayback = "37b03539-a4c8-11d2-b634-00c04f79498e"
+  IMSVidFilePlayback_GUID = "37b03539-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidFilePlayback = LibC::GUID.new(0x37b03539_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidFilePlayback
     lpVtbl : IMSVidFilePlaybackVTbl*
   end
@@ -14685,8 +14685,8 @@ lib LibWin32
     put___source_filter : Proc(IMSVidFilePlayback2*, Guid, HRESULT)
   end
 
-  IMSVidFilePlayback2_GUID = LibC::GUID.new("2f7e44af-6e52-4660-bc08-d8d542587d72")
-  CLSID_IMSVidFilePlayback2 = "2f7e44af-6e52-4660-bc08-d8d542587d72"
+  IMSVidFilePlayback2_GUID = "2f7e44af-6e52-4660-bc08-d8d542587d72"
+  IID_IMSVidFilePlayback2 = LibC::GUID.new(0x2f7e44af_u32, 0x6e52_u16, 0x4660_u16, StaticArray[0xbc_u8, 0x8_u8, 0xd8_u8, 0xd5_u8, 0x42_u8, 0x58_u8, 0x7d_u8, 0x72_u8])
   struct IMSVidFilePlayback2
     lpVtbl : IMSVidFilePlayback2VTbl*
   end
@@ -14702,8 +14702,8 @@ lib LibWin32
     end_of_media : Proc(IMSVidFilePlaybackEvent*, IMSVidPlayback, HRESULT)
   end
 
-  IMSVidFilePlaybackEvent_GUID = LibC::GUID.new("37b0353a-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidFilePlaybackEvent = "37b0353a-a4c8-11d2-b634-00c04f79498e"
+  IMSVidFilePlaybackEvent_GUID = "37b0353a-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidFilePlaybackEvent = LibC::GUID.new(0x37b0353a_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidFilePlaybackEvent
     lpVtbl : IMSVidFilePlaybackEventVTbl*
   end
@@ -14838,8 +14838,8 @@ lib LibWin32
     put_dvd_screen_in_mouse_coordinates : Proc(IMSVidWebDVD*, IMSVidRect, HRESULT)
   end
 
-  IMSVidWebDVD_GUID = LibC::GUID.new("cf45f88b-ac56-4ee2-a73a-ed04e2885d3c")
-  CLSID_IMSVidWebDVD = "cf45f88b-ac56-4ee2-a73a-ed04e2885d3c"
+  IMSVidWebDVD_GUID = "cf45f88b-ac56-4ee2-a73a-ed04e2885d3c"
+  IID_IMSVidWebDVD = LibC::GUID.new(0xcf45f88b_u32, 0xac56_u16, 0x4ee2_u16, StaticArray[0xa7_u8, 0x3a_u8, 0xed_u8, 0x4_u8, 0xe2_u8, 0x88_u8, 0x5d_u8, 0x3c_u8])
   struct IMSVidWebDVD
     lpVtbl : IMSVidWebDVDVTbl*
   end
@@ -14976,8 +14976,8 @@ lib LibWin32
     put_bookmark : Proc(IMSVidWebDVD2*, UInt8*, UInt32, HRESULT)
   end
 
-  IMSVidWebDVD2_GUID = LibC::GUID.new("7027212f-ee9a-4a7c-8b67-f023714cdaff")
-  CLSID_IMSVidWebDVD2 = "7027212f-ee9a-4a7c-8b67-f023714cdaff"
+  IMSVidWebDVD2_GUID = "7027212f-ee9a-4a7c-8b67-f023714cdaff"
+  IID_IMSVidWebDVD2 = LibC::GUID.new(0x7027212f_u32, 0xee9a_u16, 0x4a7c_u16, StaticArray[0x8b_u8, 0x67_u8, 0xf0_u8, 0x23_u8, 0x71_u8, 0x4c_u8, 0xda_u8, 0xff_u8])
   struct IMSVidWebDVD2
     lpVtbl : IMSVidWebDVD2VTbl*
   end
@@ -15016,8 +15016,8 @@ lib LibWin32
     change_video_pres_mode : Proc(IMSVidWebDVDEvent*, Int16, HRESULT)
   end
 
-  IMSVidWebDVDEvent_GUID = LibC::GUID.new("b4f7a674-9b83-49cb-a357-c63b871be958")
-  CLSID_IMSVidWebDVDEvent = "b4f7a674-9b83-49cb-a357-c63b871be958"
+  IMSVidWebDVDEvent_GUID = "b4f7a674-9b83-49cb-a357-c63b871be958"
+  IID_IMSVidWebDVDEvent = LibC::GUID.new(0xb4f7a674_u32, 0x9b83_u16, 0x49cb_u16, StaticArray[0xa3_u8, 0x57_u8, 0xc6_u8, 0x3b_u8, 0x87_u8, 0x1b_u8, 0xe9_u8, 0x58_u8])
   struct IMSVidWebDVDEvent
     lpVtbl : IMSVidWebDVDEventVTbl*
   end
@@ -15046,8 +15046,8 @@ lib LibWin32
     put_bookmark_on_stop : Proc(IMSVidWebDVDAdm*, Int16, HRESULT)
   end
 
-  IMSVidWebDVDAdm_GUID = LibC::GUID.new("b8be681a-eb2c-47f0-b415-94d5452f0e05")
-  CLSID_IMSVidWebDVDAdm = "b8be681a-eb2c-47f0-b415-94d5452f0e05"
+  IMSVidWebDVDAdm_GUID = "b8be681a-eb2c-47f0-b415-94d5452f0e05"
+  IID_IMSVidWebDVDAdm = LibC::GUID.new(0xb8be681a_u32, 0xeb2c_u16, 0x47f0_u16, StaticArray[0xb4_u8, 0x15_u8, 0x94_u8, 0xd5_u8, 0x45_u8, 0x2f_u8, 0xe_u8, 0x5_u8])
   struct IMSVidWebDVDAdm
     lpVtbl : IMSVidWebDVDAdmVTbl*
   end
@@ -15071,8 +15071,8 @@ lib LibWin32
     is_equal_device : Proc(IMSVidOutputDevice*, IMSVidDevice, Int16*, HRESULT)
   end
 
-  IMSVidOutputDevice_GUID = LibC::GUID.new("37b03546-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidOutputDevice = "37b03546-a4c8-11d2-b634-00c04f79498e"
+  IMSVidOutputDevice_GUID = "37b03546-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidOutputDevice = LibC::GUID.new(0x37b03546_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidOutputDevice
     lpVtbl : IMSVidOutputDeviceVTbl*
   end
@@ -15088,8 +15088,8 @@ lib LibWin32
     state_change : Proc(IMSVidOutputDeviceEvent*, IMSVidDevice, Int32, Int32, HRESULT)
   end
 
-  IMSVidOutputDeviceEvent_GUID = LibC::GUID.new("2e6a14e2-571c-11d3-b652-00c04f79498e")
-  CLSID_IMSVidOutputDeviceEvent = "2e6a14e2-571c-11d3-b652-00c04f79498e"
+  IMSVidOutputDeviceEvent_GUID = "2e6a14e2-571c-11d3-b652-00c04f79498e"
+  IID_IMSVidOutputDeviceEvent = LibC::GUID.new(0x2e6a14e2_u32, 0x571c_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x52_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidOutputDeviceEvent
     lpVtbl : IMSVidOutputDeviceEventVTbl*
   end
@@ -15113,8 +15113,8 @@ lib LibWin32
     is_equal_device : Proc(IMSVidFeature*, IMSVidDevice, Int16*, HRESULT)
   end
 
-  IMSVidFeature_GUID = LibC::GUID.new("37b03547-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidFeature = "37b03547-a4c8-11d2-b634-00c04f79498e"
+  IMSVidFeature_GUID = "37b03547-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidFeature = LibC::GUID.new(0x37b03547_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidFeature
     lpVtbl : IMSVidFeatureVTbl*
   end
@@ -15130,8 +15130,8 @@ lib LibWin32
     state_change : Proc(IMSVidFeatureEvent*, IMSVidDevice, Int32, Int32, HRESULT)
   end
 
-  IMSVidFeatureEvent_GUID = LibC::GUID.new("3dd2903c-e0aa-11d2-b63a-00c04f79498e")
-  CLSID_IMSVidFeatureEvent = "3dd2903c-e0aa-11d2-b63a-00c04f79498e"
+  IMSVidFeatureEvent_GUID = "3dd2903c-e0aa-11d2-b63a-00c04f79498e"
+  IID_IMSVidFeatureEvent = LibC::GUID.new(0x3dd2903c_u32, 0xe0aa_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidFeatureEvent
     lpVtbl : IMSVidFeatureEventVTbl*
   end
@@ -15157,8 +15157,8 @@ lib LibWin32
     get_audio_encoder_interface : Proc(IMSVidEncoder*, IUnknown*, HRESULT)
   end
 
-  IMSVidEncoder_GUID = LibC::GUID.new("c0020fd4-bee7-43d9-a495-9f213117103d")
-  CLSID_IMSVidEncoder = "c0020fd4-bee7-43d9-a495-9f213117103d"
+  IMSVidEncoder_GUID = "c0020fd4-bee7-43d9-a495-9f213117103d"
+  IID_IMSVidEncoder = LibC::GUID.new(0xc0020fd4_u32, 0xbee7_u16, 0x43d9_u16, StaticArray[0xa4_u8, 0x95_u8, 0x9f_u8, 0x21_u8, 0x31_u8, 0x17_u8, 0x10_u8, 0x3d_u8])
   struct IMSVidEncoder
     lpVtbl : IMSVidEncoderVTbl*
   end
@@ -15184,8 +15184,8 @@ lib LibWin32
     put_enable : Proc(IMSVidClosedCaptioning*, Int16, HRESULT)
   end
 
-  IMSVidClosedCaptioning_GUID = LibC::GUID.new("99652ea1-c1f7-414f-bb7b-1c967de75983")
-  CLSID_IMSVidClosedCaptioning = "99652ea1-c1f7-414f-bb7b-1c967de75983"
+  IMSVidClosedCaptioning_GUID = "99652ea1-c1f7-414f-bb7b-1c967de75983"
+  IID_IMSVidClosedCaptioning = LibC::GUID.new(0x99652ea1_u32, 0xc1f7_u16, 0x414f_u16, StaticArray[0xbb_u8, 0x7b_u8, 0x1c_u8, 0x96_u8, 0x7d_u8, 0xe7_u8, 0x59_u8, 0x83_u8])
   struct IMSVidClosedCaptioning
     lpVtbl : IMSVidClosedCaptioningVTbl*
   end
@@ -15213,8 +15213,8 @@ lib LibWin32
     put_service : Proc(IMSVidClosedCaptioning2*, MSVidCCService, HRESULT)
   end
 
-  IMSVidClosedCaptioning2_GUID = LibC::GUID.new("e00cb864-a029-4310-9987-a873f5887d97")
-  CLSID_IMSVidClosedCaptioning2 = "e00cb864-a029-4310-9987-a873f5887d97"
+  IMSVidClosedCaptioning2_GUID = "e00cb864-a029-4310-9987-a873f5887d97"
+  IID_IMSVidClosedCaptioning2 = LibC::GUID.new(0xe00cb864_u32, 0xa029_u16, 0x4310_u16, StaticArray[0x99_u8, 0x87_u8, 0xa8_u8, 0x73_u8, 0xf5_u8, 0x88_u8, 0x7d_u8, 0x97_u8])
   struct IMSVidClosedCaptioning2
     lpVtbl : IMSVidClosedCaptioning2VTbl*
   end
@@ -15243,8 +15243,8 @@ lib LibWin32
     get_tele_text_filter : Proc(IMSVidClosedCaptioning3*, IUnknown*, HRESULT)
   end
 
-  IMSVidClosedCaptioning3_GUID = LibC::GUID.new("c8638e8a-7625-4c51-9366-2f40a9831fc0")
-  CLSID_IMSVidClosedCaptioning3 = "c8638e8a-7625-4c51-9366-2f40a9831fc0"
+  IMSVidClosedCaptioning3_GUID = "c8638e8a-7625-4c51-9366-2f40a9831fc0"
+  IID_IMSVidClosedCaptioning3 = LibC::GUID.new(0xc8638e8a_u32, 0x7625_u16, 0x4c51_u16, StaticArray[0x93_u8, 0x66_u8, 0x2f_u8, 0x40_u8, 0xa9_u8, 0x83_u8, 0x1f_u8, 0xc0_u8])
   struct IMSVidClosedCaptioning3
     lpVtbl : IMSVidClosedCaptioning3VTbl*
   end
@@ -15269,8 +15269,8 @@ lib LibWin32
     get_channel_change_interface : Proc(IMSVidXDS*, IUnknown*, HRESULT)
   end
 
-  IMSVidXDS_GUID = LibC::GUID.new("11ebc158-e712-4d1f-8bb3-01ed5274c4ce")
-  CLSID_IMSVidXDS = "11ebc158-e712-4d1f-8bb3-01ed5274c4ce"
+  IMSVidXDS_GUID = "11ebc158-e712-4d1f-8bb3-01ed5274c4ce"
+  IID_IMSVidXDS = LibC::GUID.new(0x11ebc158_u32, 0xe712_u16, 0x4d1f_u16, StaticArray[0x8b_u8, 0xb3_u8, 0x1_u8, 0xed_u8, 0x52_u8, 0x74_u8, 0xc4_u8, 0xce_u8])
   struct IMSVidXDS
     lpVtbl : IMSVidXDSVTbl*
   end
@@ -15287,8 +15287,8 @@ lib LibWin32
     rating_change : Proc(IMSVidXDSEvent*, EnTvRat_System, EnTvRat_GenericLevel, BfEnTvRat_GenericAttributes, EnTvRat_System, EnTvRat_GenericLevel, BfEnTvRat_GenericAttributes, HRESULT)
   end
 
-  IMSVidXDSEvent_GUID = LibC::GUID.new("6db2317d-3b23-41ec-ba4b-701f407eaf3a")
-  CLSID_IMSVidXDSEvent = "6db2317d-3b23-41ec-ba4b-701f407eaf3a"
+  IMSVidXDSEvent_GUID = "6db2317d-3b23-41ec-ba4b-701f407eaf3a"
+  IID_IMSVidXDSEvent = LibC::GUID.new(0x6db2317d_u32, 0x3b23_u16, 0x41ec_u16, StaticArray[0xba_u8, 0x4b_u8, 0x70_u8, 0x1f_u8, 0x40_u8, 0x7e_u8, 0xaf_u8, 0x3a_u8])
   struct IMSVidXDSEvent
     lpVtbl : IMSVidXDSEventVTbl*
   end
@@ -15312,8 +15312,8 @@ lib LibWin32
     is_equal_device : Proc(IMSVidDataServices*, IMSVidDevice, Int16*, HRESULT)
   end
 
-  IMSVidDataServices_GUID = LibC::GUID.new("334125c1-77e5-11d3-b653-00c04f79498e")
-  CLSID_IMSVidDataServices = "334125c1-77e5-11d3-b653-00c04f79498e"
+  IMSVidDataServices_GUID = "334125c1-77e5-11d3-b653-00c04f79498e"
+  IID_IMSVidDataServices = LibC::GUID.new(0x334125c1_u32, 0x77e5_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidDataServices
     lpVtbl : IMSVidDataServicesVTbl*
   end
@@ -15329,8 +15329,8 @@ lib LibWin32
     state_change : Proc(IMSVidDataServicesEvent*, IMSVidDevice, Int32, Int32, HRESULT)
   end
 
-  IMSVidDataServicesEvent_GUID = LibC::GUID.new("334125c2-77e5-11d3-b653-00c04f79498e")
-  CLSID_IMSVidDataServicesEvent = "334125c2-77e5-11d3-b653-00c04f79498e"
+  IMSVidDataServicesEvent_GUID = "334125c2-77e5-11d3-b653-00c04f79498e"
+  IID_IMSVidDataServicesEvent = LibC::GUID.new(0x334125c2_u32, 0x77e5_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidDataServicesEvent
     lpVtbl : IMSVidDataServicesEventVTbl*
   end
@@ -15384,8 +15384,8 @@ lib LibWin32
     put_decimate_input : Proc(IMSVidVideoRenderer*, Int16, HRESULT)
   end
 
-  IMSVidVideoRenderer_GUID = LibC::GUID.new("37b03540-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidVideoRenderer = "37b03540-a4c8-11d2-b634-00c04f79498e"
+  IMSVidVideoRenderer_GUID = "37b03540-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidVideoRenderer = LibC::GUID.new(0x37b03540_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidVideoRenderer
     lpVtbl : IMSVidVideoRendererVTbl*
   end
@@ -15402,8 +15402,8 @@ lib LibWin32
     overlay_unavailable : Proc(IMSVidVideoRendererEvent*, HRESULT)
   end
 
-  IMSVidVideoRendererEvent_GUID = LibC::GUID.new("37b03545-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidVideoRendererEvent = "37b03545-a4c8-11d2-b634-00c04f79498e"
+  IMSVidVideoRendererEvent_GUID = "37b03545-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidVideoRendererEvent = LibC::GUID.new(0x37b03545_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidVideoRendererEvent
     lpVtbl : IMSVidVideoRendererEventVTbl*
   end
@@ -15430,8 +15430,8 @@ lib LibWin32
     put_sink_streams : Proc(IMSVidGenericSink*, MSVidSinkStreams, HRESULT)
   end
 
-  IMSVidGenericSink_GUID = LibC::GUID.new("6c29b41d-455b-4c33-963a-0d28e5e555ea")
-  CLSID_IMSVidGenericSink = "6c29b41d-455b-4c33-963a-0d28e5e555ea"
+  IMSVidGenericSink_GUID = "6c29b41d-455b-4c33-963a-0d28e5e555ea"
+  IID_IMSVidGenericSink = LibC::GUID.new(0x6c29b41d_u32, 0x455b_u16, 0x4c33_u16, StaticArray[0x96_u8, 0x3a_u8, 0xd_u8, 0x28_u8, 0xe5_u8, 0xe5_u8, 0x55_u8, 0xea_u8])
   struct IMSVidGenericSink
     lpVtbl : IMSVidGenericSinkVTbl*
   end
@@ -15460,8 +15460,8 @@ lib LibWin32
     reset_filter_list : Proc(IMSVidGenericSink2*, HRESULT)
   end
 
-  IMSVidGenericSink2_GUID = LibC::GUID.new("6b5a28f3-47f1-4092-b168-60cabec08f1c")
-  CLSID_IMSVidGenericSink2 = "6b5a28f3-47f1-4092-b168-60cabec08f1c"
+  IMSVidGenericSink2_GUID = "6b5a28f3-47f1-4092-b168-60cabec08f1c"
+  IID_IMSVidGenericSink2 = LibC::GUID.new(0x6b5a28f3_u32, 0x47f1_u16, 0x4092_u16, StaticArray[0xb1_u8, 0x68_u8, 0x60_u8, 0xca_u8, 0xbe_u8, 0xc0_u8, 0x8f_u8, 0x1c_u8])
   struct IMSVidGenericSink2
     lpVtbl : IMSVidGenericSink2VTbl*
   end
@@ -15484,8 +15484,8 @@ lib LibWin32
     get_recording_attribute : Proc(IMSVidStreamBufferRecordingControl*, IUnknown*, HRESULT)
   end
 
-  IMSVidStreamBufferRecordingControl_GUID = LibC::GUID.new("160621aa-bbbc-4326-a824-c395aebc6e74")
-  CLSID_IMSVidStreamBufferRecordingControl = "160621aa-bbbc-4326-a824-c395aebc6e74"
+  IMSVidStreamBufferRecordingControl_GUID = "160621aa-bbbc-4326-a824-c395aebc6e74"
+  IID_IMSVidStreamBufferRecordingControl = LibC::GUID.new(0x160621aa_u32, 0xbbbc_u16, 0x4326_u16, StaticArray[0xa8_u8, 0x24_u8, 0xc3_u8, 0x95_u8, 0xae_u8, 0xbc_u8, 0x6e_u8, 0x74_u8])
   struct IMSVidStreamBufferRecordingControl
     lpVtbl : IMSVidStreamBufferRecordingControlVTbl*
   end
@@ -15515,8 +15515,8 @@ lib LibWin32
     get_sbe_sink : Proc(IMSVidStreamBufferSink*, IUnknown*, HRESULT)
   end
 
-  IMSVidStreamBufferSink_GUID = LibC::GUID.new("159dbb45-cd1b-4dab-83ea-5cb1f4f21d07")
-  CLSID_IMSVidStreamBufferSink = "159dbb45-cd1b-4dab-83ea-5cb1f4f21d07"
+  IMSVidStreamBufferSink_GUID = "159dbb45-cd1b-4dab-83ea-5cb1f4f21d07"
+  IID_IMSVidStreamBufferSink = LibC::GUID.new(0x159dbb45_u32, 0xcd1b_u16, 0x4dab_u16, StaticArray[0x83_u8, 0xea_u8, 0x5c_u8, 0xb1_u8, 0xf4_u8, 0xf2_u8, 0x1d_u8, 0x7_u8])
   struct IMSVidStreamBufferSink
     lpVtbl : IMSVidStreamBufferSinkVTbl*
   end
@@ -15547,8 +15547,8 @@ lib LibWin32
     unlock_profile : Proc(IMSVidStreamBufferSink2*, HRESULT)
   end
 
-  IMSVidStreamBufferSink2_GUID = LibC::GUID.new("2ca9fc63-c131-4e5a-955a-544a47c67146")
-  CLSID_IMSVidStreamBufferSink2 = "2ca9fc63-c131-4e5a-955a-544a47c67146"
+  IMSVidStreamBufferSink2_GUID = "2ca9fc63-c131-4e5a-955a-544a47c67146"
+  IID_IMSVidStreamBufferSink2 = LibC::GUID.new(0x2ca9fc63_u32, 0xc131_u16, 0x4e5a_u16, StaticArray[0x95_u8, 0x5a_u8, 0x54_u8, 0x4a_u8, 0x47_u8, 0xc6_u8, 0x71_u8, 0x46_u8])
   struct IMSVidStreamBufferSink2
     lpVtbl : IMSVidStreamBufferSink2VTbl*
   end
@@ -15597,8 +15597,8 @@ lib LibWin32
     get_license_error_code : Proc(IMSVidStreamBufferSink3*, HRESULT*, HRESULT)
   end
 
-  IMSVidStreamBufferSink3_GUID = LibC::GUID.new("4f8721d7-7d59-4d8b-99f5-a77775586bd5")
-  CLSID_IMSVidStreamBufferSink3 = "4f8721d7-7d59-4d8b-99f5-a77775586bd5"
+  IMSVidStreamBufferSink3_GUID = "4f8721d7-7d59-4d8b-99f5-a77775586bd5"
+  IID_IMSVidStreamBufferSink3 = LibC::GUID.new(0x4f8721d7_u32, 0x7d59_u16, 0x4d8b_u16, StaticArray[0x99_u8, 0xf5_u8, 0xa7_u8, 0x77_u8, 0x75_u8, 0x58_u8, 0x6b_u8, 0xd5_u8])
   struct IMSVidStreamBufferSink3
     lpVtbl : IMSVidStreamBufferSink3VTbl*
   end
@@ -15617,8 +15617,8 @@ lib LibWin32
     write_failure : Proc(IMSVidStreamBufferSinkEvent*, HRESULT)
   end
 
-  IMSVidStreamBufferSinkEvent_GUID = LibC::GUID.new("f798a36b-b05b-4bbe-9703-eaea7d61cd51")
-  CLSID_IMSVidStreamBufferSinkEvent = "f798a36b-b05b-4bbe-9703-eaea7d61cd51"
+  IMSVidStreamBufferSinkEvent_GUID = "f798a36b-b05b-4bbe-9703-eaea7d61cd51"
+  IID_IMSVidStreamBufferSinkEvent = LibC::GUID.new(0xf798a36b_u32, 0xb05b_u16, 0x4bbe_u16, StaticArray[0x97_u8, 0x3_u8, 0xea_u8, 0xea_u8, 0x7d_u8, 0x61_u8, 0xcd_u8, 0x51_u8])
   struct IMSVidStreamBufferSinkEvent
     lpVtbl : IMSVidStreamBufferSinkEventVTbl*
   end
@@ -15639,8 +15639,8 @@ lib LibWin32
     encryption_off : Proc(IMSVidStreamBufferSinkEvent2*, HRESULT)
   end
 
-  IMSVidStreamBufferSinkEvent2_GUID = LibC::GUID.new("3d7a5166-72d7-484b-a06f-286187b80ca1")
-  CLSID_IMSVidStreamBufferSinkEvent2 = "3d7a5166-72d7-484b-a06f-286187b80ca1"
+  IMSVidStreamBufferSinkEvent2_GUID = "3d7a5166-72d7-484b-a06f-286187b80ca1"
+  IID_IMSVidStreamBufferSinkEvent2 = LibC::GUID.new(0x3d7a5166_u32, 0x72d7_u16, 0x484b_u16, StaticArray[0xa0_u8, 0x6f_u8, 0x28_u8, 0x61_u8, 0x87_u8, 0xb8_u8, 0xc_u8, 0xa1_u8])
   struct IMSVidStreamBufferSinkEvent2
     lpVtbl : IMSVidStreamBufferSinkEvent2VTbl*
   end
@@ -15662,8 +15662,8 @@ lib LibWin32
     license_change : Proc(IMSVidStreamBufferSinkEvent3*, Int32, HRESULT)
   end
 
-  IMSVidStreamBufferSinkEvent3_GUID = LibC::GUID.new("735ad8d5-c259-48e9-81e7-d27953665b23")
-  CLSID_IMSVidStreamBufferSinkEvent3 = "735ad8d5-c259-48e9-81e7-d27953665b23"
+  IMSVidStreamBufferSinkEvent3_GUID = "735ad8d5-c259-48e9-81e7-d27953665b23"
+  IID_IMSVidStreamBufferSinkEvent3 = LibC::GUID.new(0x735ad8d5_u32, 0xc259_u16, 0x48e9_u16, StaticArray[0x81_u8, 0xe7_u8, 0xd2_u8, 0x79_u8, 0x53_u8, 0x66_u8, 0x5b_u8, 0x23_u8])
   struct IMSVidStreamBufferSinkEvent3
     lpVtbl : IMSVidStreamBufferSinkEvent3VTbl*
   end
@@ -15686,8 +15686,8 @@ lib LibWin32
     write_failure_clear : Proc(IMSVidStreamBufferSinkEvent4*, HRESULT)
   end
 
-  IMSVidStreamBufferSinkEvent4_GUID = LibC::GUID.new("1b01dcb0-daf0-412c-a5d1-590c7f62e2b8")
-  CLSID_IMSVidStreamBufferSinkEvent4 = "1b01dcb0-daf0-412c-a5d1-590c7f62e2b8"
+  IMSVidStreamBufferSinkEvent4_GUID = "1b01dcb0-daf0-412c-a5d1-590c7f62e2b8"
+  IID_IMSVidStreamBufferSinkEvent4 = LibC::GUID.new(0x1b01dcb0_u32, 0xdaf0_u16, 0x412c_u16, StaticArray[0xa5_u8, 0xd1_u8, 0x59_u8, 0xc_u8, 0x7f_u8, 0x62_u8, 0xe2_u8, 0xb8_u8])
   struct IMSVidStreamBufferSinkEvent4
     lpVtbl : IMSVidStreamBufferSinkEvent4VTbl*
   end
@@ -15736,8 +15736,8 @@ lib LibWin32
     get_sbe_source : Proc(IMSVidStreamBufferSource*, IUnknown*, HRESULT)
   end
 
-  IMSVidStreamBufferSource_GUID = LibC::GUID.new("eb0c8cf9-6950-4772-87b1-47d11cf3a02f")
-  CLSID_IMSVidStreamBufferSource = "eb0c8cf9-6950-4772-87b1-47d11cf3a02f"
+  IMSVidStreamBufferSource_GUID = "eb0c8cf9-6950-4772-87b1-47d11cf3a02f"
+  IID_IMSVidStreamBufferSource = LibC::GUID.new(0xeb0c8cf9_u32, 0x6950_u16, 0x4772_u16, StaticArray[0x87_u8, 0xb1_u8, 0x47_u8, 0xd1_u8, 0x1c_u8, 0xf3_u8, 0xa0_u8, 0x2f_u8])
   struct IMSVidStreamBufferSource
     lpVtbl : IMSVidStreamBufferSourceVTbl*
   end
@@ -15791,8 +15791,8 @@ lib LibWin32
     get_wst_counter : Proc(IMSVidStreamBufferSource2*, IUnknown*, HRESULT)
   end
 
-  IMSVidStreamBufferSource2_GUID = LibC::GUID.new("e4ba9059-b1ce-40d8-b9a0-d4ea4a9989d3")
-  CLSID_IMSVidStreamBufferSource2 = "e4ba9059-b1ce-40d8-b9a0-d4ea4a9989d3"
+  IMSVidStreamBufferSource2_GUID = "e4ba9059-b1ce-40d8-b9a0-d4ea4a9989d3"
+  IID_IMSVidStreamBufferSource2 = LibC::GUID.new(0xe4ba9059_u32, 0xb1ce_u16, 0x40d8_u16, StaticArray[0xb9_u8, 0xa0_u8, 0xd4_u8, 0xea_u8, 0x4a_u8, 0x99_u8, 0x89_u8, 0xd3_u8])
   struct IMSVidStreamBufferSource2
     lpVtbl : IMSVidStreamBufferSource2VTbl*
   end
@@ -15817,8 +15817,8 @@ lib LibWin32
     stale_file_deleted : Proc(IMSVidStreamBufferSourceEvent*, HRESULT)
   end
 
-  IMSVidStreamBufferSourceEvent_GUID = LibC::GUID.new("50ce8a7d-9c28-4da8-9042-cdfa7116f979")
-  CLSID_IMSVidStreamBufferSourceEvent = "50ce8a7d-9c28-4da8-9042-cdfa7116f979"
+  IMSVidStreamBufferSourceEvent_GUID = "50ce8a7d-9c28-4da8-9042-cdfa7116f979"
+  IID_IMSVidStreamBufferSourceEvent = LibC::GUID.new(0x50ce8a7d_u32, 0x9c28_u16, 0x4da8_u16, StaticArray[0x90_u8, 0x42_u8, 0xcd_u8, 0xfa_u8, 0x71_u8, 0x16_u8, 0xf9_u8, 0x79_u8])
   struct IMSVidStreamBufferSourceEvent
     lpVtbl : IMSVidStreamBufferSourceEventVTbl*
   end
@@ -15844,8 +15844,8 @@ lib LibWin32
     rate_change : Proc(IMSVidStreamBufferSourceEvent2*, Float64, Float64, HRESULT)
   end
 
-  IMSVidStreamBufferSourceEvent2_GUID = LibC::GUID.new("7aef50ce-8e22-4ba8-bc06-a92a458b4ef2")
-  CLSID_IMSVidStreamBufferSourceEvent2 = "7aef50ce-8e22-4ba8-bc06-a92a458b4ef2"
+  IMSVidStreamBufferSourceEvent2_GUID = "7aef50ce-8e22-4ba8-bc06-a92a458b4ef2"
+  IID_IMSVidStreamBufferSourceEvent2 = LibC::GUID.new(0x7aef50ce_u32, 0x8e22_u16, 0x4ba8_u16, StaticArray[0xbc_u8, 0x6_u8, 0xa9_u8, 0x2a_u8, 0x45_u8, 0x8b_u8, 0x4e_u8, 0xf2_u8])
   struct IMSVidStreamBufferSourceEvent2
     lpVtbl : IMSVidStreamBufferSourceEvent2VTbl*
   end
@@ -15876,8 +15876,8 @@ lib LibWin32
     content_primarily_audio : Proc(IMSVidStreamBufferSourceEvent3*, HRESULT)
   end
 
-  IMSVidStreamBufferSourceEvent3_GUID = LibC::GUID.new("ceabd6ab-9b90-4570-adf1-3ce76e00a763")
-  CLSID_IMSVidStreamBufferSourceEvent3 = "ceabd6ab-9b90-4570-adf1-3ce76e00a763"
+  IMSVidStreamBufferSourceEvent3_GUID = "ceabd6ab-9b90-4570-adf1-3ce76e00a763"
+  IID_IMSVidStreamBufferSourceEvent3 = LibC::GUID.new(0xceabd6ab_u32, 0x9b90_u16, 0x4570_u16, StaticArray[0xad_u8, 0xf1_u8, 0x3c_u8, 0xe7_u8, 0x6e_u8, 0x0_u8, 0xa7_u8, 0x63_u8])
   struct IMSVidStreamBufferSourceEvent3
     lpVtbl : IMSVidStreamBufferSourceEvent3VTbl*
   end
@@ -15902,8 +15902,8 @@ lib LibWin32
     content_primarily_audio : Proc(IMSVidStreamBufferV2SourceEvent*, HRESULT)
   end
 
-  IMSVidStreamBufferV2SourceEvent_GUID = LibC::GUID.new("49c771f9-41b2-4cf7-9f9a-a313a8f6027e")
-  CLSID_IMSVidStreamBufferV2SourceEvent = "49c771f9-41b2-4cf7-9f9a-a313a8f6027e"
+  IMSVidStreamBufferV2SourceEvent_GUID = "49c771f9-41b2-4cf7-9f9a-a313a8f6027e"
+  IID_IMSVidStreamBufferV2SourceEvent = LibC::GUID.new(0x49c771f9_u32, 0x41b2_u16, 0x4cf7_u16, StaticArray[0x9f_u8, 0x9a_u8, 0xa3_u8, 0x13_u8, 0xa8_u8, 0xf6_u8, 0x2_u8, 0x7e_u8])
   struct IMSVidStreamBufferV2SourceEvent
     lpVtbl : IMSVidStreamBufferV2SourceEventVTbl*
   end
@@ -15964,8 +15964,8 @@ lib LibWin32
     get_suppress_effects : Proc(IMSVidVideoRenderer2*, Int16*, HRESULT)
   end
 
-  IMSVidVideoRenderer2_GUID = LibC::GUID.new("6bdd5c1e-2810-4159-94bc-05511ae8549b")
-  CLSID_IMSVidVideoRenderer2 = "6bdd5c1e-2810-4159-94bc-05511ae8549b"
+  IMSVidVideoRenderer2_GUID = "6bdd5c1e-2810-4159-94bc-05511ae8549b"
+  IID_IMSVidVideoRenderer2 = LibC::GUID.new(0x6bdd5c1e_u32, 0x2810_u16, 0x4159_u16, StaticArray[0x94_u8, 0xbc_u8, 0x5_u8, 0x51_u8, 0x1a_u8, 0xe8_u8, 0x54_u8, 0x9b_u8])
   struct IMSVidVideoRenderer2
     lpVtbl : IMSVidVideoRenderer2VTbl*
   end
@@ -15982,8 +15982,8 @@ lib LibWin32
     overlay_unavailable : Proc(IMSVidVideoRendererEvent2*, HRESULT)
   end
 
-  IMSVidVideoRendererEvent2_GUID = LibC::GUID.new("7145ed66-4730-4fdb-8a53-fde7508d3e5e")
-  CLSID_IMSVidVideoRendererEvent2 = "7145ed66-4730-4fdb-8a53-fde7508d3e5e"
+  IMSVidVideoRendererEvent2_GUID = "7145ed66-4730-4fdb-8a53-fde7508d3e5e"
+  IID_IMSVidVideoRendererEvent2 = LibC::GUID.new(0x7145ed66_u32, 0x4730_u16, 0x4fdb_u16, StaticArray[0x8a_u8, 0x53_u8, 0xfd_u8, 0xe7_u8, 0x50_u8, 0x8d_u8, 0x3e_u8, 0x5e_u8])
   struct IMSVidVideoRendererEvent2
     lpVtbl : IMSVidVideoRendererEvent2VTbl*
   end
@@ -16042,8 +16042,8 @@ lib LibWin32
     get_allocator : Proc(IMSVidVMR9*, IUnknown*, HRESULT)
   end
 
-  IMSVidVMR9_GUID = LibC::GUID.new("d58b0015-ebef-44bb-bbdd-3f3699d76ea1")
-  CLSID_IMSVidVMR9 = "d58b0015-ebef-44bb-bbdd-3f3699d76ea1"
+  IMSVidVMR9_GUID = "d58b0015-ebef-44bb-bbdd-3f3699d76ea1"
+  IID_IMSVidVMR9 = LibC::GUID.new(0xd58b0015_u32, 0xebef_u16, 0x44bb_u16, StaticArray[0xbb_u8, 0xdd_u8, 0x3f_u8, 0x36_u8, 0x99_u8, 0xd7_u8, 0x6e_u8, 0xa1_u8])
   struct IMSVidVMR9
     lpVtbl : IMSVidVMR9VTbl*
   end
@@ -16101,8 +16101,8 @@ lib LibWin32
     get_suppress_effects : Proc(IMSVidEVR*, Int16*, HRESULT)
   end
 
-  IMSVidEVR_GUID = LibC::GUID.new("15e496ae-82a8-4cf9-a6b6-c561dc60398f")
-  CLSID_IMSVidEVR = "15e496ae-82a8-4cf9-a6b6-c561dc60398f"
+  IMSVidEVR_GUID = "15e496ae-82a8-4cf9-a6b6-c561dc60398f"
+  IID_IMSVidEVR = LibC::GUID.new(0x15e496ae_u32, 0x82a8_u16, 0x4cf9_u16, StaticArray[0xa6_u8, 0xb6_u8, 0xc5_u8, 0x61_u8, 0xdc_u8, 0x60_u8, 0x39_u8, 0x8f_u8])
   struct IMSVidEVR
     lpVtbl : IMSVidEVRVTbl*
   end
@@ -16119,8 +16119,8 @@ lib LibWin32
     on_user_event : Proc(IMSVidEVREvent*, Int32, HRESULT)
   end
 
-  IMSVidEVREvent_GUID = LibC::GUID.new("349abb10-883c-4f22-8714-cecaeee45d62")
-  CLSID_IMSVidEVREvent = "349abb10-883c-4f22-8714-cecaeee45d62"
+  IMSVidEVREvent_GUID = "349abb10-883c-4f22-8714-cecaeee45d62"
+  IID_IMSVidEVREvent = LibC::GUID.new(0x349abb10_u32, 0x883c_u16, 0x4f22_u16, StaticArray[0x87_u8, 0x14_u8, 0xce_u8, 0xca_u8, 0xee_u8, 0xe4_u8, 0x5d_u8, 0x62_u8])
   struct IMSVidEVREvent
     lpVtbl : IMSVidEVREventVTbl*
   end
@@ -16148,8 +16148,8 @@ lib LibWin32
     get_balance : Proc(IMSVidAudioRenderer*, Int32*, HRESULT)
   end
 
-  IMSVidAudioRenderer_GUID = LibC::GUID.new("37b0353f-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidAudioRenderer = "37b0353f-a4c8-11d2-b634-00c04f79498e"
+  IMSVidAudioRenderer_GUID = "37b0353f-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidAudioRenderer = LibC::GUID.new(0x37b0353f_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidAudioRenderer
     lpVtbl : IMSVidAudioRendererVTbl*
   end
@@ -16165,8 +16165,8 @@ lib LibWin32
     state_change : Proc(IMSVidAudioRendererEvent*, IMSVidDevice, Int32, Int32, HRESULT)
   end
 
-  IMSVidAudioRendererEvent_GUID = LibC::GUID.new("37b03541-a4c8-11d2-b634-00c04f79498e")
-  CLSID_IMSVidAudioRendererEvent = "37b03541-a4c8-11d2-b634-00c04f79498e"
+  IMSVidAudioRendererEvent_GUID = "37b03541-a4c8-11d2-b634-00c04f79498e"
+  IID_IMSVidAudioRendererEvent = LibC::GUID.new(0x37b03541_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidAudioRendererEvent
     lpVtbl : IMSVidAudioRendererEventVTbl*
   end
@@ -16190,8 +16190,8 @@ lib LibWin32
     av_dec_common_output_format : Proc(IMSVidAudioRendererEvent2*, HRESULT)
   end
 
-  IMSVidAudioRendererEvent2_GUID = LibC::GUID.new("e3f55729-353b-4c43-a028-50f79aa9a907")
-  CLSID_IMSVidAudioRendererEvent2 = "e3f55729-353b-4c43-a028-50f79aa9a907"
+  IMSVidAudioRendererEvent2_GUID = "e3f55729-353b-4c43-a028-50f79aa9a907"
+  IID_IMSVidAudioRendererEvent2 = LibC::GUID.new(0xe3f55729_u32, 0x353b_u16, 0x4c43_u16, StaticArray[0xa0_u8, 0x28_u8, 0x50_u8, 0xf7_u8, 0x9a_u8, 0xa9_u8, 0xa9_u8, 0x7_u8])
   struct IMSVidAudioRendererEvent2
     lpVtbl : IMSVidAudioRendererEvent2VTbl*
   end
@@ -16211,8 +16211,8 @@ lib LibWin32
     remove : Proc(IMSVidInputDevices*, VARIANT, HRESULT)
   end
 
-  IMSVidInputDevices_GUID = LibC::GUID.new("c5702cd1-9b79-11d3-b654-00c04f79498e")
-  CLSID_IMSVidInputDevices = "c5702cd1-9b79-11d3-b654-00c04f79498e"
+  IMSVidInputDevices_GUID = "c5702cd1-9b79-11d3-b654-00c04f79498e"
+  IID_IMSVidInputDevices = LibC::GUID.new(0xc5702cd1_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidInputDevices
     lpVtbl : IMSVidInputDevicesVTbl*
   end
@@ -16232,8 +16232,8 @@ lib LibWin32
     remove : Proc(IMSVidOutputDevices*, VARIANT, HRESULT)
   end
 
-  IMSVidOutputDevices_GUID = LibC::GUID.new("c5702cd2-9b79-11d3-b654-00c04f79498e")
-  CLSID_IMSVidOutputDevices = "c5702cd2-9b79-11d3-b654-00c04f79498e"
+  IMSVidOutputDevices_GUID = "c5702cd2-9b79-11d3-b654-00c04f79498e"
+  IID_IMSVidOutputDevices = LibC::GUID.new(0xc5702cd2_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidOutputDevices
     lpVtbl : IMSVidOutputDevicesVTbl*
   end
@@ -16253,8 +16253,8 @@ lib LibWin32
     remove : Proc(IMSVidVideoRendererDevices*, VARIANT, HRESULT)
   end
 
-  IMSVidVideoRendererDevices_GUID = LibC::GUID.new("c5702cd3-9b79-11d3-b654-00c04f79498e")
-  CLSID_IMSVidVideoRendererDevices = "c5702cd3-9b79-11d3-b654-00c04f79498e"
+  IMSVidVideoRendererDevices_GUID = "c5702cd3-9b79-11d3-b654-00c04f79498e"
+  IID_IMSVidVideoRendererDevices = LibC::GUID.new(0xc5702cd3_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidVideoRendererDevices
     lpVtbl : IMSVidVideoRendererDevicesVTbl*
   end
@@ -16274,8 +16274,8 @@ lib LibWin32
     remove : Proc(IMSVidAudioRendererDevices*, VARIANT, HRESULT)
   end
 
-  IMSVidAudioRendererDevices_GUID = LibC::GUID.new("c5702cd4-9b79-11d3-b654-00c04f79498e")
-  CLSID_IMSVidAudioRendererDevices = "c5702cd4-9b79-11d3-b654-00c04f79498e"
+  IMSVidAudioRendererDevices_GUID = "c5702cd4-9b79-11d3-b654-00c04f79498e"
+  IID_IMSVidAudioRendererDevices = LibC::GUID.new(0xc5702cd4_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidAudioRendererDevices
     lpVtbl : IMSVidAudioRendererDevicesVTbl*
   end
@@ -16295,8 +16295,8 @@ lib LibWin32
     remove : Proc(IMSVidFeatures*, VARIANT, HRESULT)
   end
 
-  IMSVidFeatures_GUID = LibC::GUID.new("c5702cd5-9b79-11d3-b654-00c04f79498e")
-  CLSID_IMSVidFeatures = "c5702cd5-9b79-11d3-b654-00c04f79498e"
+  IMSVidFeatures_GUID = "c5702cd5-9b79-11d3-b654-00c04f79498e"
+  IID_IMSVidFeatures = LibC::GUID.new(0xc5702cd5_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidFeatures
     lpVtbl : IMSVidFeaturesVTbl*
   end
@@ -16354,8 +16354,8 @@ lib LibWin32
     view_next : Proc(IMSVidCtl*, VARIANT*, HRESULT)
   end
 
-  IMSVidCtl_GUID = LibC::GUID.new("b0edf162-910a-11d2-b632-00c04f79498e")
-  CLSID_IMSVidCtl = "b0edf162-910a-11d2-b632-00c04f79498e"
+  IMSVidCtl_GUID = "b0edf162-910a-11d2-b632-00c04f79498e"
+  IID_IMSVidCtl = LibC::GUID.new(0xb0edf162_u32, 0x910a_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IMSVidCtl
     lpVtbl : IMSVidCtlVTbl*
   end
@@ -16372,8 +16372,8 @@ lib LibWin32
     unbind : Proc(IMSEventBinder*, UInt32, HRESULT)
   end
 
-  IMSEventBinder_GUID = LibC::GUID.new("c3a9f406-2222-436d-86d5-ba3229279efb")
-  CLSID_IMSEventBinder = "c3a9f406-2222-436d-86d5-ba3229279efb"
+  IMSEventBinder_GUID = "c3a9f406-2222-436d-86d5-ba3229279efb"
+  IID_IMSEventBinder = LibC::GUID.new(0xc3a9f406_u32, 0x2222_u16, 0x436d_u16, StaticArray[0x86_u8, 0xd5_u8, 0xba_u8, 0x32_u8, 0x29_u8, 0x27_u8, 0x9e_u8, 0xfb_u8])
   struct IMSEventBinder
     lpVtbl : IMSEventBinderVTbl*
   end
@@ -16388,8 +16388,8 @@ lib LibWin32
     invoke : Proc(IIMSVidCtlEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
   end
 
-  IIMSVidCtlEvents_GUID = LibC::GUID.new("b0edf164-910a-11d2-b632-00c04f79498e")
-  CLSID_IIMSVidCtlEvents = "b0edf164-910a-11d2-b632-00c04f79498e"
+  IIMSVidCtlEvents_GUID = "b0edf164-910a-11d2-b632-00c04f79498e"
+  IID_IIMSVidCtlEvents = LibC::GUID.new(0xb0edf164_u32, 0x910a_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
   struct IIMSVidCtlEvents
     lpVtbl : IIMSVidCtlEventsVTbl*
   end
@@ -16402,8 +16402,8 @@ lib LibWin32
     set_si_ds : Proc(IStreamBufferInitialize*, UInt32, PSID*, HRESULT)
   end
 
-  IStreamBufferInitialize_GUID = LibC::GUID.new("9ce50f2d-6ba7-40fb-a034-50b1a674ec78")
-  CLSID_IStreamBufferInitialize = "9ce50f2d-6ba7-40fb-a034-50b1a674ec78"
+  IStreamBufferInitialize_GUID = "9ce50f2d-6ba7-40fb-a034-50b1a674ec78"
+  IID_IStreamBufferInitialize = LibC::GUID.new(0x9ce50f2d_u32, 0x6ba7_u16, 0x40fb_u16, StaticArray[0xa0_u8, 0x34_u8, 0x50_u8, 0xb1_u8, 0xa6_u8, 0x74_u8, 0xec_u8, 0x78_u8])
   struct IStreamBufferInitialize
     lpVtbl : IStreamBufferInitializeVTbl*
   end
@@ -16417,8 +16417,8 @@ lib LibWin32
     is_profile_locked : Proc(IStreamBufferSink*, HRESULT)
   end
 
-  IStreamBufferSink_GUID = LibC::GUID.new("afd1f242-7efd-45ee-ba4e-407a25c9a77a")
-  CLSID_IStreamBufferSink = "afd1f242-7efd-45ee-ba4e-407a25c9a77a"
+  IStreamBufferSink_GUID = "afd1f242-7efd-45ee-ba4e-407a25c9a77a"
+  IID_IStreamBufferSink = LibC::GUID.new(0xafd1f242_u32, 0x7efd_u16, 0x45ee_u16, StaticArray[0xba_u8, 0x4e_u8, 0x40_u8, 0x7a_u8, 0x25_u8, 0xc9_u8, 0xa7_u8, 0x7a_u8])
   struct IStreamBufferSink
     lpVtbl : IStreamBufferSinkVTbl*
   end
@@ -16433,8 +16433,8 @@ lib LibWin32
     unlock_profile : Proc(IStreamBufferSink2*, HRESULT)
   end
 
-  IStreamBufferSink2_GUID = LibC::GUID.new("db94a660-f4fb-4bfa-bcc6-fe159a4eea93")
-  CLSID_IStreamBufferSink2 = "db94a660-f4fb-4bfa-bcc6-fe159a4eea93"
+  IStreamBufferSink2_GUID = "db94a660-f4fb-4bfa-bcc6-fe159a4eea93"
+  IID_IStreamBufferSink2 = LibC::GUID.new(0xdb94a660_u32, 0xf4fb_u16, 0x4bfa_u16, StaticArray[0xbc_u8, 0xc6_u8, 0xfe_u8, 0x15_u8, 0x9a_u8, 0x4e_u8, 0xea_u8, 0x93_u8])
   struct IStreamBufferSink2
     lpVtbl : IStreamBufferSink2VTbl*
   end
@@ -16450,8 +16450,8 @@ lib LibWin32
     set_available_filter : Proc(IStreamBufferSink3*, Int64*, HRESULT)
   end
 
-  IStreamBufferSink3_GUID = LibC::GUID.new("974723f2-887a-4452-9366-2cff3057bc8f")
-  CLSID_IStreamBufferSink3 = "974723f2-887a-4452-9366-2cff3057bc8f"
+  IStreamBufferSink3_GUID = "974723f2-887a-4452-9366-2cff3057bc8f"
+  IID_IStreamBufferSink3 = LibC::GUID.new(0x974723f2_u32, 0x887a_u16, 0x4452_u16, StaticArray[0x93_u8, 0x66_u8, 0x2c_u8, 0xff_u8, 0x30_u8, 0x57_u8, 0xbc_u8, 0x8f_u8])
   struct IStreamBufferSink3
     lpVtbl : IStreamBufferSink3VTbl*
   end
@@ -16463,8 +16463,8 @@ lib LibWin32
     set_stream_sink : Proc(IStreamBufferSource*, IStreamBufferSink, HRESULT)
   end
 
-  IStreamBufferSource_GUID = LibC::GUID.new("1c5bd776-6ced-4f44-8164-5eab0e98db12")
-  CLSID_IStreamBufferSource = "1c5bd776-6ced-4f44-8164-5eab0e98db12"
+  IStreamBufferSource_GUID = "1c5bd776-6ced-4f44-8164-5eab0e98db12"
+  IID_IStreamBufferSource = LibC::GUID.new(0x1c5bd776_u32, 0x6ced_u16, 0x4f44_u16, StaticArray[0x81_u8, 0x64_u8, 0x5e_u8, 0xab_u8, 0xe_u8, 0x98_u8, 0xdb_u8, 0x12_u8])
   struct IStreamBufferSource
     lpVtbl : IStreamBufferSourceVTbl*
   end
@@ -16478,8 +16478,8 @@ lib LibWin32
     get_recording_status : Proc(IStreamBufferRecordControl*, HRESULT*, LibC::BOOL*, LibC::BOOL*, HRESULT)
   end
 
-  IStreamBufferRecordControl_GUID = LibC::GUID.new("ba9b6c99-f3c7-4ff2-92db-cfdd4851bf31")
-  CLSID_IStreamBufferRecordControl = "ba9b6c99-f3c7-4ff2-92db-cfdd4851bf31"
+  IStreamBufferRecordControl_GUID = "ba9b6c99-f3c7-4ff2-92db-cfdd4851bf31"
+  IID_IStreamBufferRecordControl = LibC::GUID.new(0xba9b6c99_u32, 0xf3c7_u16, 0x4ff2_u16, StaticArray[0x92_u8, 0xdb_u8, 0xcf_u8, 0xdd_u8, 0x48_u8, 0x51_u8, 0xbf_u8, 0x31_u8])
   struct IStreamBufferRecordControl
     lpVtbl : IStreamBufferRecordControlVTbl*
   end
@@ -16496,8 +16496,8 @@ lib LibWin32
     cancel : Proc(IStreamBufferRecComp*, HRESULT)
   end
 
-  IStreamBufferRecComp_GUID = LibC::GUID.new("9e259a9b-8815-42ae-b09f-221970b154fd")
-  CLSID_IStreamBufferRecComp = "9e259a9b-8815-42ae-b09f-221970b154fd"
+  IStreamBufferRecComp_GUID = "9e259a9b-8815-42ae-b09f-221970b154fd"
+  IID_IStreamBufferRecComp = LibC::GUID.new(0x9e259a9b_u32, 0x8815_u16, 0x42ae_u16, StaticArray[0xb0_u8, 0x9f_u8, 0x22_u8, 0x19_u8, 0x70_u8, 0xb1_u8, 0x54_u8, 0xfd_u8])
   struct IStreamBufferRecComp
     lpVtbl : IStreamBufferRecCompVTbl*
   end
@@ -16513,8 +16513,8 @@ lib LibWin32
     enum_attributes : Proc(IStreamBufferRecordingAttribute*, IEnumStreamBufferRecordingAttrib*, HRESULT)
   end
 
-  IStreamBufferRecordingAttribute_GUID = LibC::GUID.new("16ca4e03-fe69-4705-bd41-5b7dfc0c95f3")
-  CLSID_IStreamBufferRecordingAttribute = "16ca4e03-fe69-4705-bd41-5b7dfc0c95f3"
+  IStreamBufferRecordingAttribute_GUID = "16ca4e03-fe69-4705-bd41-5b7dfc0c95f3"
+  IID_IStreamBufferRecordingAttribute = LibC::GUID.new(0x16ca4e03_u32, 0xfe69_u16, 0x4705_u16, StaticArray[0xbd_u8, 0x41_u8, 0x5b_u8, 0x7d_u8, 0xfc_u8, 0xc_u8, 0x95_u8, 0xf3_u8])
   struct IStreamBufferRecordingAttribute
     lpVtbl : IStreamBufferRecordingAttributeVTbl*
   end
@@ -16529,8 +16529,8 @@ lib LibWin32
     clone : Proc(IEnumStreamBufferRecordingAttrib*, IEnumStreamBufferRecordingAttrib*, HRESULT)
   end
 
-  IEnumStreamBufferRecordingAttrib_GUID = LibC::GUID.new("c18a9162-1e82-4142-8c73-5690fa62fe33")
-  CLSID_IEnumStreamBufferRecordingAttrib = "c18a9162-1e82-4142-8c73-5690fa62fe33"
+  IEnumStreamBufferRecordingAttrib_GUID = "c18a9162-1e82-4142-8c73-5690fa62fe33"
+  IID_IEnumStreamBufferRecordingAttrib = LibC::GUID.new(0xc18a9162_u32, 0x1e82_u16, 0x4142_u16, StaticArray[0x8c_u8, 0x73_u8, 0x56_u8, 0x90_u8, 0xfa_u8, 0x62_u8, 0xfe_u8, 0x33_u8])
   struct IEnumStreamBufferRecordingAttrib
     lpVtbl : IEnumStreamBufferRecordingAttribVTbl*
   end
@@ -16547,8 +16547,8 @@ lib LibWin32
     get_backing_file_duration : Proc(IStreamBufferConfigure*, UInt32*, HRESULT)
   end
 
-  IStreamBufferConfigure_GUID = LibC::GUID.new("ce14dfae-4098-4af7-bbf7-d6511f835414")
-  CLSID_IStreamBufferConfigure = "ce14dfae-4098-4af7-bbf7-d6511f835414"
+  IStreamBufferConfigure_GUID = "ce14dfae-4098-4af7-bbf7-d6511f835414"
+  IID_IStreamBufferConfigure = LibC::GUID.new(0xce14dfae_u32, 0x4098_u16, 0x4af7_u16, StaticArray[0xbb_u8, 0xf7_u8, 0xd6_u8, 0x51_u8, 0x1f_u8, 0x83_u8, 0x54_u8, 0x14_u8])
   struct IStreamBufferConfigure
     lpVtbl : IStreamBufferConfigureVTbl*
   end
@@ -16569,8 +16569,8 @@ lib LibWin32
     get_ff_transition_rates : Proc(IStreamBufferConfigure2*, UInt32*, UInt32*, HRESULT)
   end
 
-  IStreamBufferConfigure2_GUID = LibC::GUID.new("53e037bf-3992-4282-ae34-2487b4dae06b")
-  CLSID_IStreamBufferConfigure2 = "53e037bf-3992-4282-ae34-2487b4dae06b"
+  IStreamBufferConfigure2_GUID = "53e037bf-3992-4282-ae34-2487b4dae06b"
+  IID_IStreamBufferConfigure2 = LibC::GUID.new(0x53e037bf_u32, 0x3992_u16, 0x4282_u16, StaticArray[0xae_u8, 0x34_u8, 0x24_u8, 0x87_u8, 0xb4_u8, 0xda_u8, 0xe0_u8, 0x6b_u8])
   struct IStreamBufferConfigure2
     lpVtbl : IStreamBufferConfigure2VTbl*
   end
@@ -16595,8 +16595,8 @@ lib LibWin32
     get_namespace : Proc(IStreamBufferConfigure3*, LibC::LPWSTR*, HRESULT)
   end
 
-  IStreamBufferConfigure3_GUID = LibC::GUID.new("7e2d2a1e-7192-4bd7-80c1-061fd1d10402")
-  CLSID_IStreamBufferConfigure3 = "7e2d2a1e-7192-4bd7-80c1-061fd1d10402"
+  IStreamBufferConfigure3_GUID = "7e2d2a1e-7192-4bd7-80c1-061fd1d10402"
+  IID_IStreamBufferConfigure3 = LibC::GUID.new(0x7e2d2a1e_u32, 0x7192_u16, 0x4bd7_u16, StaticArray[0x80_u8, 0xc1_u8, 0x6_u8, 0x1f_u8, 0xd1_u8, 0xd1_u8, 0x4_u8, 0x2_u8])
   struct IStreamBufferConfigure3
     lpVtbl : IStreamBufferConfigure3VTbl*
   end
@@ -16624,8 +16624,8 @@ lib LibWin32
     get_preroll : Proc(IStreamBufferMediaSeeking*, Int64*, HRESULT)
   end
 
-  IStreamBufferMediaSeeking_GUID = LibC::GUID.new("f61f5c26-863d-4afa-b0ba-2f81dc978596")
-  CLSID_IStreamBufferMediaSeeking = "f61f5c26-863d-4afa-b0ba-2f81dc978596"
+  IStreamBufferMediaSeeking_GUID = "f61f5c26-863d-4afa-b0ba-2f81dc978596"
+  IID_IStreamBufferMediaSeeking = LibC::GUID.new(0xf61f5c26_u32, 0x863d_u16, 0x4afa_u16, StaticArray[0xb0_u8, 0xba_u8, 0x2f_u8, 0x81_u8, 0xdc_u8, 0x97_u8, 0x85_u8, 0x96_u8])
   struct IStreamBufferMediaSeeking
     lpVtbl : IStreamBufferMediaSeekingVTbl*
   end
@@ -16654,8 +16654,8 @@ lib LibWin32
     set_rate_ex : Proc(IStreamBufferMediaSeeking2*, Float64, UInt32, HRESULT)
   end
 
-  IStreamBufferMediaSeeking2_GUID = LibC::GUID.new("3a439ab0-155f-470a-86a6-9ea54afd6eaf")
-  CLSID_IStreamBufferMediaSeeking2 = "3a439ab0-155f-470a-86a6-9ea54afd6eaf"
+  IStreamBufferMediaSeeking2_GUID = "3a439ab0-155f-470a-86a6-9ea54afd6eaf"
+  IID_IStreamBufferMediaSeeking2 = LibC::GUID.new(0x3a439ab0_u32, 0x155f_u16, 0x470a_u16, StaticArray[0x86_u8, 0xa6_u8, 0x9e_u8, 0xa5_u8, 0x4a_u8, 0xfd_u8, 0x6e_u8, 0xaf_u8])
   struct IStreamBufferMediaSeeking2
     lpVtbl : IStreamBufferMediaSeeking2VTbl*
   end
@@ -16668,8 +16668,8 @@ lib LibWin32
     reset_data : Proc(IStreamBufferDataCounters*, HRESULT)
   end
 
-  IStreamBufferDataCounters_GUID = LibC::GUID.new("9d2a2563-31ab-402e-9a6b-adb903489440")
-  CLSID_IStreamBufferDataCounters = "9d2a2563-31ab-402e-9a6b-adb903489440"
+  IStreamBufferDataCounters_GUID = "9d2a2563-31ab-402e-9a6b-adb903489440"
+  IID_IStreamBufferDataCounters = LibC::GUID.new(0x9d2a2563_u32, 0x31ab_u16, 0x402e_u16, StaticArray[0x9a_u8, 0x6b_u8, 0xad_u8, 0xb9_u8, 0x3_u8, 0x48_u8, 0x94_u8, 0x40_u8])
   struct IStreamBufferDataCounters
     lpVtbl : IStreamBufferDataCountersVTbl*
   end
@@ -16681,8 +16681,8 @@ lib LibWin32
     get_event : Proc(ISBE2GlobalEvent*, Guid*, UInt32, UInt32, UInt32, UInt32, LibC::BOOL*, UInt32*, UInt8*, HRESULT)
   end
 
-  ISBE2GlobalEvent_GUID = LibC::GUID.new("caede759-b6b1-11db-a578-0018f3fa24c6")
-  CLSID_ISBE2GlobalEvent = "caede759-b6b1-11db-a578-0018f3fa24c6"
+  ISBE2GlobalEvent_GUID = "caede759-b6b1-11db-a578-0018f3fa24c6"
+  IID_ISBE2GlobalEvent = LibC::GUID.new(0xcaede759_u32, 0xb6b1_u16, 0x11db_u16, StaticArray[0xa5_u8, 0x78_u8, 0x0_u8, 0x18_u8, 0xf3_u8, 0xfa_u8, 0x24_u8, 0xc6_u8])
   struct ISBE2GlobalEvent
     lpVtbl : ISBE2GlobalEventVTbl*
   end
@@ -16695,8 +16695,8 @@ lib LibWin32
     get_event_ex : Proc(ISBE2GlobalEvent2*, Guid*, UInt32, UInt32, UInt32, UInt32, LibC::BOOL*, UInt32*, UInt8*, Int64*, HRESULT)
   end
 
-  ISBE2GlobalEvent2_GUID = LibC::GUID.new("6d8309bf-00fe-4506-8b03-f8c65b5c9b39")
-  CLSID_ISBE2GlobalEvent2 = "6d8309bf-00fe-4506-8b03-f8c65b5c9b39"
+  ISBE2GlobalEvent2_GUID = "6d8309bf-00fe-4506-8b03-f8c65b5c9b39"
+  IID_ISBE2GlobalEvent2 = LibC::GUID.new(0x6d8309bf_u32, 0xfe_u16, 0x4506_u16, StaticArray[0x8b_u8, 0x3_u8, 0xf8_u8, 0xc6_u8, 0x5b_u8, 0x5c_u8, 0x9b_u8, 0x39_u8])
   struct ISBE2GlobalEvent2
     lpVtbl : ISBE2GlobalEvent2VTbl*
   end
@@ -16708,8 +16708,8 @@ lib LibWin32
     get_event : Proc(ISBE2SpanningEvent*, Guid*, UInt32, UInt32*, UInt8*, HRESULT)
   end
 
-  ISBE2SpanningEvent_GUID = LibC::GUID.new("caede760-b6b1-11db-a578-0018f3fa24c6")
-  CLSID_ISBE2SpanningEvent = "caede760-b6b1-11db-a578-0018f3fa24c6"
+  ISBE2SpanningEvent_GUID = "caede760-b6b1-11db-a578-0018f3fa24c6"
+  IID_ISBE2SpanningEvent = LibC::GUID.new(0xcaede760_u32, 0xb6b1_u16, 0x11db_u16, StaticArray[0xa5_u8, 0x78_u8, 0x0_u8, 0x18_u8, 0xf3_u8, 0xfa_u8, 0x24_u8, 0xc6_u8])
   struct ISBE2SpanningEvent
     lpVtbl : ISBE2SpanningEventVTbl*
   end
@@ -16724,8 +16724,8 @@ lib LibWin32
     enum_streams : Proc(ISBE2Crossbar*, ISBE2EnumStream*, HRESULT)
   end
 
-  ISBE2Crossbar_GUID = LibC::GUID.new("547b6d26-3226-487e-8253-8aa168749434")
-  CLSID_ISBE2Crossbar = "547b6d26-3226-487e-8253-8aa168749434"
+  ISBE2Crossbar_GUID = "547b6d26-3226-487e-8253-8aa168749434"
+  IID_ISBE2Crossbar = LibC::GUID.new(0x547b6d26_u32, 0x3226_u16, 0x487e_u16, StaticArray[0x82_u8, 0x53_u8, 0x8a_u8, 0xa1_u8, 0x68_u8, 0x74_u8, 0x94_u8, 0x34_u8])
   struct ISBE2Crossbar
     lpVtbl : ISBE2CrossbarVTbl*
   end
@@ -16739,8 +16739,8 @@ lib LibWin32
     enum_mapped_streams : Proc(ISBE2StreamMap*, ISBE2EnumStream*, HRESULT)
   end
 
-  ISBE2StreamMap_GUID = LibC::GUID.new("667c7745-85b1-4c55-ae55-4e25056159fc")
-  CLSID_ISBE2StreamMap = "667c7745-85b1-4c55-ae55-4e25056159fc"
+  ISBE2StreamMap_GUID = "667c7745-85b1-4c55-ae55-4e25056159fc"
+  IID_ISBE2StreamMap = LibC::GUID.new(0x667c7745_u32, 0x85b1_u16, 0x4c55_u16, StaticArray[0xae_u8, 0x55_u8, 0x4e_u8, 0x25_u8, 0x5_u8, 0x61_u8, 0x59_u8, 0xfc_u8])
   struct ISBE2StreamMap
     lpVtbl : ISBE2StreamMapVTbl*
   end
@@ -16755,8 +16755,8 @@ lib LibWin32
     clone : Proc(ISBE2EnumStream*, ISBE2EnumStream*, HRESULT)
   end
 
-  ISBE2EnumStream_GUID = LibC::GUID.new("f7611092-9fbc-46ec-a7c7-548ea78b71a4")
-  CLSID_ISBE2EnumStream = "f7611092-9fbc-46ec-a7c7-548ea78b71a4"
+  ISBE2EnumStream_GUID = "f7611092-9fbc-46ec-a7c7-548ea78b71a4"
+  IID_ISBE2EnumStream = LibC::GUID.new(0xf7611092_u32, 0x9fbc_u16, 0x46ec_u16, StaticArray[0xa7_u8, 0xc7_u8, 0x54_u8, 0x8e_u8, 0xa7_u8, 0x8b_u8, 0x71_u8, 0xa4_u8])
   struct ISBE2EnumStream
     lpVtbl : ISBE2EnumStreamVTbl*
   end
@@ -16771,8 +16771,8 @@ lib LibWin32
     delete_stream : Proc(ISBE2MediaTypeProfile*, UInt32, HRESULT)
   end
 
-  ISBE2MediaTypeProfile_GUID = LibC::GUID.new("f238267d-4671-40d7-997e-25dc32cfed2a")
-  CLSID_ISBE2MediaTypeProfile = "f238267d-4671-40d7-997e-25dc32cfed2a"
+  ISBE2MediaTypeProfile_GUID = "f238267d-4671-40d7-997e-25dc32cfed2a"
+  IID_ISBE2MediaTypeProfile = LibC::GUID.new(0xf238267d_u32, 0x4671_u16, 0x40d7_u16, StaticArray[0x99_u8, 0x7e_u8, 0x25_u8, 0xdc_u8, 0x32_u8, 0xcf_u8, 0xed_u8, 0x2a_u8])
   struct ISBE2MediaTypeProfile
     lpVtbl : ISBE2MediaTypeProfileVTbl*
   end
@@ -16784,8 +16784,8 @@ lib LibWin32
     repair_file : Proc(ISBE2FileScan*, LibC::LPWSTR, HRESULT)
   end
 
-  ISBE2FileScan_GUID = LibC::GUID.new("3e2bf5a5-4f96-4899-a1a3-75e8be9a5ac0")
-  CLSID_ISBE2FileScan = "3e2bf5a5-4f96-4899-a1a3-75e8be9a5ac0"
+  ISBE2FileScan_GUID = "3e2bf5a5-4f96-4899-a1a3-75e8be9a5ac0"
+  IID_ISBE2FileScan = LibC::GUID.new(0x3e2bf5a5_u32, 0x4f96_u16, 0x4899_u16, StaticArray[0xa1_u8, 0xa3_u8, 0x75_u8, 0xe8_u8, 0xbe_u8, 0x9a_u8, 0x5a_u8, 0xc0_u8])
   struct ISBE2FileScan
     lpVtbl : ISBE2FileScanVTbl*
   end
@@ -16802,8 +16802,8 @@ lib LibWin32
     remove_extension : Proc(IMpeg2TableFilter*, UInt16, UInt8, UInt16, HRESULT)
   end
 
-  IMpeg2TableFilter_GUID = LibC::GUID.new("bdcdd913-9ecd-4fb2-81ae-adf747ea75a5")
-  CLSID_IMpeg2TableFilter = "bdcdd913-9ecd-4fb2-81ae-adf747ea75a5"
+  IMpeg2TableFilter_GUID = "bdcdd913-9ecd-4fb2-81ae-adf747ea75a5"
+  IID_IMpeg2TableFilter = LibC::GUID.new(0xbdcdd913_u32, 0x9ecd_u16, 0x4fb2_u16, StaticArray[0x81_u8, 0xae_u8, 0xad_u8, 0xf7_u8, 0x47_u8, 0xea_u8, 0x75_u8, 0xa5_u8])
   struct IMpeg2TableFilter
     lpVtbl : IMpeg2TableFilterVTbl*
   end
@@ -16817,8 +16817,8 @@ lib LibWin32
     get_stream_of_sections : Proc(IMpeg2Data*, UInt16, UInt8, MPEG2_FILTER*, LibC::HANDLE, IMpeg2Stream*, HRESULT)
   end
 
-  IMpeg2Data_GUID = LibC::GUID.new("9b396d40-f380-4e3c-a514-1a82bf6ebfe6")
-  CLSID_IMpeg2Data = "9b396d40-f380-4e3c-a514-1a82bf6ebfe6"
+  IMpeg2Data_GUID = "9b396d40-f380-4e3c-a514-1a82bf6ebfe6"
+  IID_IMpeg2Data = LibC::GUID.new(0x9b396d40_u32, 0xf380_u16, 0x4e3c_u16, StaticArray[0xa5_u8, 0x14_u8, 0x1a_u8, 0x82_u8, 0xbf_u8, 0x6e_u8, 0xbf_u8, 0xe6_u8])
   struct IMpeg2Data
     lpVtbl : IMpeg2DataVTbl*
   end
@@ -16836,8 +16836,8 @@ lib LibWin32
     get_table_identifier : Proc(ISectionList*, UInt8*, HRESULT)
   end
 
-  ISectionList_GUID = LibC::GUID.new("afec1eb5-2a64-46c6-bf4b-ae3ccb6afdb0")
-  CLSID_ISectionList = "afec1eb5-2a64-46c6-bf4b-ae3ccb6afdb0"
+  ISectionList_GUID = "afec1eb5-2a64-46c6-bf4b-ae3ccb6afdb0"
+  IID_ISectionList = LibC::GUID.new(0xafec1eb5_u32, 0x2a64_u16, 0x46c6_u16, StaticArray[0xbf_u8, 0x4b_u8, 0xae_u8, 0x3c_u8, 0xcb_u8, 0x6a_u8, 0xfd_u8, 0xb0_u8])
   struct ISectionList
     lpVtbl : ISectionListVTbl*
   end
@@ -16850,8 +16850,8 @@ lib LibWin32
     supply_data_buffer : Proc(IMpeg2Stream*, MPEG_STREAM_BUFFER*, HRESULT)
   end
 
-  IMpeg2Stream_GUID = LibC::GUID.new("400cc286-32a0-4ce4-9041-39571125a635")
-  CLSID_IMpeg2Stream = "400cc286-32a0-4ce4-9041-39571125a635"
+  IMpeg2Stream_GUID = "400cc286-32a0-4ce4-9041-39571125a635"
+  IID_IMpeg2Stream = LibC::GUID.new(0x400cc286_u32, 0x32a0_u16, 0x4ce4_u16, StaticArray[0x90_u8, 0x41_u8, 0x39_u8, 0x57_u8, 0x11_u8, 0x25_u8, 0xa6_u8, 0x35_u8])
   struct IMpeg2Stream
     lpVtbl : IMpeg2StreamVTbl*
   end
@@ -16866,8 +16866,8 @@ lib LibWin32
     get_body : Proc(IGenericDescriptor*, UInt8**, HRESULT)
   end
 
-  IGenericDescriptor_GUID = LibC::GUID.new("6a5918f8-a77a-4f61-aed0-5702bdcda3e6")
-  CLSID_IGenericDescriptor = "6a5918f8-a77a-4f61-aed0-5702bdcda3e6"
+  IGenericDescriptor_GUID = "6a5918f8-a77a-4f61-aed0-5702bdcda3e6"
+  IID_IGenericDescriptor = LibC::GUID.new(0x6a5918f8_u32, 0xa77a_u16, 0x4f61_u16, StaticArray[0xae_u8, 0xd0_u8, 0x57_u8, 0x2_u8, 0xbd_u8, 0xcd_u8, 0xa3_u8, 0xe6_u8])
   struct IGenericDescriptor
     lpVtbl : IGenericDescriptorVTbl*
   end
@@ -16884,8 +16884,8 @@ lib LibWin32
     get_length2 : Proc(IGenericDescriptor2*, UInt16*, HRESULT)
   end
 
-  IGenericDescriptor2_GUID = LibC::GUID.new("bf02fb7e-9792-4e10-a68d-033a2cc246a5")
-  CLSID_IGenericDescriptor2 = "bf02fb7e-9792-4e10-a68d-033a2cc246a5"
+  IGenericDescriptor2_GUID = "bf02fb7e-9792-4e10-a68d-033a2cc246a5"
+  IID_IGenericDescriptor2 = LibC::GUID.new(0xbf02fb7e_u32, 0x9792_u16, 0x4e10_u16, StaticArray[0xa6_u8, 0x8d_u8, 0x3_u8, 0x3a_u8, 0x2c_u8, 0xc2_u8, 0x46_u8, 0xa5_u8])
   struct IGenericDescriptor2
     lpVtbl : IGenericDescriptor2VTbl*
   end
@@ -16907,8 +16907,8 @@ lib LibWin32
     convert_next_to_current : Proc(IPAT*, HRESULT)
   end
 
-  IPAT_GUID = LibC::GUID.new("6623b511-4b5f-43c3-9a01-e8ff84188060")
-  CLSID_IPAT = "6623b511-4b5f-43c3-9a01-e8ff84188060"
+  IPAT_GUID = "6623b511-4b5f-43c3-9a01-e8ff84188060"
+  IID_IPAT = LibC::GUID.new(0x6623b511_u32, 0x4b5f_u16, 0x43c3_u16, StaticArray[0x9a_u8, 0x1_u8, 0xe8_u8, 0xff_u8, 0x84_u8, 0x18_u8, 0x80_u8, 0x60_u8])
   struct IPAT
     lpVtbl : IPATVTbl*
   end
@@ -16928,8 +16928,8 @@ lib LibWin32
     convert_next_to_current : Proc(ICAT*, HRESULT)
   end
 
-  ICAT_GUID = LibC::GUID.new("7c6995fb-2a31-4bd7-953e-b1ad7fb7d31c")
-  CLSID_ICAT = "7c6995fb-2a31-4bd7-953e-b1ad7fb7d31c"
+  ICAT_GUID = "7c6995fb-2a31-4bd7-953e-b1ad7fb7d31c"
+  IID_ICAT = LibC::GUID.new(0x7c6995fb_u32, 0x2a31_u16, 0x4bd7_u16, StaticArray[0x95_u8, 0x3e_u8, 0xb1_u8, 0xad_u8, 0x7f_u8, 0xb7_u8, 0xd3_u8, 0x1c_u8])
   struct ICAT
     lpVtbl : ICATVTbl*
   end
@@ -16959,8 +16959,8 @@ lib LibWin32
     convert_next_to_current : Proc(IPMT*, HRESULT)
   end
 
-  IPMT_GUID = LibC::GUID.new("01f3b398-9527-4736-94db-5195878e97a8")
-  CLSID_IPMT = "01f3b398-9527-4736-94db-5195878e97a8"
+  IPMT_GUID = "01f3b398-9527-4736-94db-5195878e97a8"
+  IID_IPMT = LibC::GUID.new(0x1f3b398_u32, 0x9527_u16, 0x4736_u16, StaticArray[0x94_u8, 0xdb_u8, 0x51_u8, 0x95_u8, 0x87_u8, 0x8e_u8, 0x97_u8, 0xa8_u8])
   struct IPMT
     lpVtbl : IPMTVTbl*
   end
@@ -16980,8 +16980,8 @@ lib LibWin32
     convert_next_to_current : Proc(ITSDT*, HRESULT)
   end
 
-  ITSDT_GUID = LibC::GUID.new("d19bdb43-405b-4a7c-a791-c89110c33165")
-  CLSID_ITSDT = "d19bdb43-405b-4a7c-a791-c89110c33165"
+  ITSDT_GUID = "d19bdb43-405b-4a7c-a791-c89110c33165"
+  IID_ITSDT = LibC::GUID.new(0xd19bdb43_u32, 0x405b_u16, 0x4a7c_u16, StaticArray[0xa7_u8, 0x91_u8, 0xc8_u8, 0x91_u8, 0x10_u8, 0xc3_u8, 0x31_u8, 0x65_u8])
   struct ITSDT
     lpVtbl : ITSDTVTbl*
   end
@@ -16993,8 +16993,8 @@ lib LibWin32
     get_table : Proc(IPSITables*, UInt32, UInt32, UInt32, UInt32, IUnknown*, HRESULT)
   end
 
-  IPSITables_GUID = LibC::GUID.new("919f24c5-7b14-42ac-a4b0-2ae08daf00ac")
-  CLSID_IPSITables = "919f24c5-7b14-42ac-a4b0-2ae08daf00ac"
+  IPSITables_GUID = "919f24c5-7b14-42ac-a4b0-2ae08daf00ac"
+  IID_IPSITables = LibC::GUID.new(0x919f24c5_u32, 0x7b14_u16, 0x42ac_u16, StaticArray[0xa4_u8, 0xb0_u8, 0x2a_u8, 0xe0_u8, 0x8d_u8, 0xaf_u8, 0x0_u8, 0xac_u8])
   struct IPSITables
     lpVtbl : IPSITablesVTbl*
   end
@@ -17016,8 +17016,8 @@ lib LibWin32
     get_eas : Proc(IAtscPsipParser*, UInt16, ISCTE_EAS*, HRESULT)
   end
 
-  IAtscPsipParser_GUID = LibC::GUID.new("b2c98995-5eb2-4fb1-b406-f3e8e2026a9a")
-  CLSID_IAtscPsipParser = "b2c98995-5eb2-4fb1-b406-f3e8e2026a9a"
+  IAtscPsipParser_GUID = "b2c98995-5eb2-4fb1-b406-f3e8e2026a9a"
+  IID_IAtscPsipParser = LibC::GUID.new(0xb2c98995_u32, 0x5eb2_u16, 0x4fb1_u16, StaticArray[0xb4_u8, 0x6_u8, 0xf3_u8, 0xe8_u8, 0xe2_u8, 0x2_u8, 0x6a_u8, 0x9a_u8])
   struct IAtscPsipParser
     lpVtbl : IAtscPsipParserVTbl*
   end
@@ -17041,8 +17041,8 @@ lib LibWin32
     get_table_descriptor_by_tag : Proc(IATSC_MGT*, UInt8, UInt32*, IGenericDescriptor*, HRESULT)
   end
 
-  IATSC_MGT_GUID = LibC::GUID.new("8877dabd-c137-4073-97e3-779407a5d87a")
-  CLSID_IATSC_MGT = "8877dabd-c137-4073-97e3-779407a5d87a"
+  IATSC_MGT_GUID = "8877dabd-c137-4073-97e3-779407a5d87a"
+  IID_IATSC_MGT = LibC::GUID.new(0x8877dabd_u32, 0xc137_u16, 0x4073_u16, StaticArray[0x97_u8, 0xe3_u8, 0x77_u8, 0x94_u8, 0x7_u8, 0xa5_u8, 0xd8_u8, 0x7a_u8])
   struct IATSC_MGT
     lpVtbl : IATSC_MGTVTbl*
   end
@@ -17079,8 +17079,8 @@ lib LibWin32
     get_table_descriptor_by_tag : Proc(IATSC_VCT*, UInt8, UInt32*, IGenericDescriptor*, HRESULT)
   end
 
-  IATSC_VCT_GUID = LibC::GUID.new("26879a18-32f9-46c6-91f0-fb6479270e8c")
-  CLSID_IATSC_VCT = "26879a18-32f9-46c6-91f0-fb6479270e8c"
+  IATSC_VCT_GUID = "26879a18-32f9-46c6-91f0-fb6479270e8c"
+  IID_IATSC_VCT = LibC::GUID.new(0x26879a18_u32, 0x32f9_u16, 0x46c6_u16, StaticArray[0x91_u8, 0xf0_u8, 0xfb_u8, 0x64_u8, 0x79_u8, 0x27_u8, 0xe_u8, 0x8c_u8])
   struct IATSC_VCT
     lpVtbl : IATSC_VCTVTbl*
   end
@@ -17104,8 +17104,8 @@ lib LibWin32
     get_record_descriptor_by_tag : Proc(IATSC_EIT*, UInt32, UInt8, UInt32*, IGenericDescriptor*, HRESULT)
   end
 
-  IATSC_EIT_GUID = LibC::GUID.new("d7c212d7-76a2-4b4b-aa56-846879a80096")
-  CLSID_IATSC_EIT = "d7c212d7-76a2-4b4b-aa56-846879a80096"
+  IATSC_EIT_GUID = "d7c212d7-76a2-4b4b-aa56-846879a80096"
+  IID_IATSC_EIT = LibC::GUID.new(0xd7c212d7_u32, 0x76a2_u16, 0x4b4b_u16, StaticArray[0xaa_u8, 0x56_u8, 0x84_u8, 0x68_u8, 0x79_u8, 0xa8_u8, 0x0_u8, 0x96_u8])
   struct IATSC_EIT
     lpVtbl : IATSC_EITVTbl*
   end
@@ -17121,8 +17121,8 @@ lib LibWin32
     get_extended_message_text : Proc(IATSC_ETT*, UInt32*, UInt8**, HRESULT)
   end
 
-  IATSC_ETT_GUID = LibC::GUID.new("5a142cc9-b8cf-4a86-a040-e9cadf3ef3e7")
-  CLSID_IATSC_ETT = "5a142cc9-b8cf-4a86-a040-e9cadf3ef3e7"
+  IATSC_ETT_GUID = "5a142cc9-b8cf-4a86-a040-e9cadf3ef3e7"
+  IID_IATSC_ETT = LibC::GUID.new(0x5a142cc9_u32, 0xb8cf_u16, 0x4a86_u16, StaticArray[0xa0_u8, 0x40_u8, 0xe9_u8, 0xca_u8, 0xdf_u8, 0x3e_u8, 0xf3_u8, 0xe7_u8])
   struct IATSC_ETT
     lpVtbl : IATSC_ETTVTbl*
   end
@@ -17141,8 +17141,8 @@ lib LibWin32
     get_table_descriptor_by_tag : Proc(IATSC_STT*, UInt8, UInt32*, IGenericDescriptor*, HRESULT)
   end
 
-  IATSC_STT_GUID = LibC::GUID.new("6bf42423-217d-4d6f-81e1-3a7b360ec896")
-  CLSID_IATSC_STT = "6bf42423-217d-4d6f-81e1-3a7b360ec896"
+  IATSC_STT_GUID = "6bf42423-217d-4d6f-81e1-3a7b360ec896"
+  IID_IATSC_STT = LibC::GUID.new(0x6bf42423_u32, 0x217d_u16, 0x4d6f_u16, StaticArray[0x81_u8, 0xe1_u8, 0x3a_u8, 0x7b_u8, 0x36_u8, 0xe_u8, 0xc8_u8, 0x96_u8])
   struct IATSC_STT
     lpVtbl : IATSC_STTVTbl*
   end
@@ -17182,8 +17182,8 @@ lib LibWin32
     get_table_descriptor_by_tag : Proc(ISCTE_EAS*, UInt8, UInt32*, IGenericDescriptor*, HRESULT)
   end
 
-  ISCTE_EAS_GUID = LibC::GUID.new("1ff544d6-161d-4fae-9faa-4f9f492ae999")
-  CLSID_ISCTE_EAS = "1ff544d6-161d-4fae-9faa-4f9f492ae999"
+  ISCTE_EAS_GUID = "1ff544d6-161d-4fae-9faa-4f9f492ae999"
+  IID_ISCTE_EAS = LibC::GUID.new(0x1ff544d6_u32, 0x161d_u16, 0x4fae_u16, StaticArray[0x9f_u8, 0xaa_u8, 0x4f_u8, 0x9f_u8, 0x49_u8, 0x2a_u8, 0xe9_u8, 0x99_u8])
   struct ISCTE_EAS
     lpVtbl : ISCTE_EASVTbl*
   end
@@ -17202,8 +17202,8 @@ lib LibWin32
     get_record_rating_description_text : Proc(IAtscContentAdvisoryDescriptor*, UInt8, UInt8*, UInt8**, HRESULT)
   end
 
-  IAtscContentAdvisoryDescriptor_GUID = LibC::GUID.new("ff76e60c-0283-43ea-ba32-b422238547ee")
-  CLSID_IAtscContentAdvisoryDescriptor = "ff76e60c-0283-43ea-ba32-b422238547ee"
+  IAtscContentAdvisoryDescriptor_GUID = "ff76e60c-0283-43ea-ba32-b422238547ee"
+  IID_IAtscContentAdvisoryDescriptor = LibC::GUID.new(0xff76e60c_u32, 0x283_u16, 0x43ea_u16, StaticArray[0xba_u8, 0x32_u8, 0xb4_u8, 0x22_u8, 0x23_u8, 0x85_u8, 0x47_u8, 0xee_u8])
   struct IAtscContentAdvisoryDescriptor
     lpVtbl : IAtscContentAdvisoryDescriptorVTbl*
   end
@@ -17220,8 +17220,8 @@ lib LibWin32
     get_wide_aspect_ratio : Proc(ICaptionServiceDescriptor*, UInt8, UInt8*, HRESULT)
   end
 
-  ICaptionServiceDescriptor_GUID = LibC::GUID.new("40834007-6834-46f0-bd45-d5f6a6be258c")
-  CLSID_ICaptionServiceDescriptor = "40834007-6834-46f0-bd45-d5f6a6be258c"
+  ICaptionServiceDescriptor_GUID = "40834007-6834-46f0-bd45-d5f6a6be258c"
+  IID_ICaptionServiceDescriptor = LibC::GUID.new(0x40834007_u32, 0x6834_u16, 0x46f0_u16, StaticArray[0xbd_u8, 0x45_u8, 0xd5_u8, 0xf6_u8, 0xa6_u8, 0xbe_u8, 0x25_u8, 0x8c_u8])
   struct ICaptionServiceDescriptor
     lpVtbl : ICaptionServiceDescriptorVTbl*
   end
@@ -17237,8 +17237,8 @@ lib LibWin32
     get_element_language_code : Proc(IServiceLocationDescriptor*, UInt8, UInt8*, HRESULT)
   end
 
-  IServiceLocationDescriptor_GUID = LibC::GUID.new("58c3c827-9d91-4215-bff3-820a49f0904c")
-  CLSID_IServiceLocationDescriptor = "58c3c827-9d91-4215-bff3-820a49f0904c"
+  IServiceLocationDescriptor_GUID = "58c3c827-9d91-4215-bff3-820a49f0904c"
+  IID_IServiceLocationDescriptor = LibC::GUID.new(0x58c3c827_u32, 0x9d91_u16, 0x4215_u16, StaticArray[0xbf_u8, 0xf3_u8, 0x82_u8, 0xa_u8, 0x49_u8, 0xf0_u8, 0x90_u8, 0x4c_u8])
   struct IServiceLocationDescriptor
     lpVtbl : IServiceLocationDescriptorVTbl*
   end
@@ -17250,8 +17250,8 @@ lib LibWin32
     set_attrib : Proc(IAttributeSet*, Guid, UInt8*, UInt32, HRESULT)
   end
 
-  IAttributeSet_GUID = LibC::GUID.new("583ec3cc-4960-4857-982b-41a33ea0a006")
-  CLSID_IAttributeSet = "583ec3cc-4960-4857-982b-41a33ea0a006"
+  IAttributeSet_GUID = "583ec3cc-4960-4857-982b-41a33ea0a006"
+  IID_IAttributeSet = LibC::GUID.new(0x583ec3cc_u32, 0x4960_u16, 0x4857_u16, StaticArray[0x98_u8, 0x2b_u8, 0x41_u8, 0xa3_u8, 0x3e_u8, 0xa0_u8, 0xa0_u8, 0x6_u8])
   struct IAttributeSet
     lpVtbl : IAttributeSetVTbl*
   end
@@ -17265,8 +17265,8 @@ lib LibWin32
     get_attrib : Proc(IAttributeGet*, Guid, UInt8*, UInt32*, HRESULT)
   end
 
-  IAttributeGet_GUID = LibC::GUID.new("52dbd1ec-e48f-4528-9232-f442a68f0ae1")
-  CLSID_IAttributeGet = "52dbd1ec-e48f-4528-9232-f442a68f0ae1"
+  IAttributeGet_GUID = "52dbd1ec-e48f-4528-9232-f442a68f0ae1"
+  IID_IAttributeGet = LibC::GUID.new(0x52dbd1ec_u32, 0xe48f_u16, 0x4528_u16, StaticArray[0x92_u8, 0x32_u8, 0xf4_u8, 0x42_u8, 0xa6_u8, 0x8f_u8, 0xa_u8, 0xe1_u8])
   struct IAttributeGet
     lpVtbl : IAttributeGetVTbl*
   end
@@ -17292,8 +17292,8 @@ lib LibWin32
     get_sit : Proc(IDvbSiParser*, UInt32, IDVB_SIT*, HRESULT)
   end
 
-  IDvbSiParser_GUID = LibC::GUID.new("b758a7bd-14dc-449d-b828-35909acb3b1e")
-  CLSID_IDvbSiParser = "b758a7bd-14dc-449d-b828-35909acb3b1e"
+  IDvbSiParser_GUID = "b758a7bd-14dc-449d-b828-35909acb3b1e"
+  IID_IDvbSiParser = LibC::GUID.new(0xb758a7bd_u32, 0x14dc_u16, 0x449d_u16, StaticArray[0xb8_u8, 0x28_u8, 0x35_u8, 0x90_u8, 0x9a_u8, 0xcb_u8, 0x3b_u8, 0x1e_u8])
   struct IDvbSiParser
     lpVtbl : IDvbSiParserVTbl*
   end
@@ -17320,8 +17320,8 @@ lib LibWin32
     get_eit2 : Proc(IDvbSiParser2*, UInt8, UInt16*, UInt8*, IDVB_EIT2*, HRESULT)
   end
 
-  IDvbSiParser2_GUID = LibC::GUID.new("0ac5525f-f816-42f4-93ba-4c0f32f46e54")
-  CLSID_IDvbSiParser2 = "0ac5525f-f816-42f4-93ba-4c0f32f46e54"
+  IDvbSiParser2_GUID = "0ac5525f-f816-42f4-93ba-4c0f32f46e54"
+  IID_IDvbSiParser2 = LibC::GUID.new(0xac5525f_u32, 0xf816_u16, 0x42f4_u16, StaticArray[0x93_u8, 0xba_u8, 0x4c_u8, 0xf_u8, 0x32_u8, 0xf4_u8, 0x6e_u8, 0x54_u8])
   struct IDvbSiParser2
     lpVtbl : IDvbSiParser2VTbl*
   end
@@ -17355,8 +17355,8 @@ lib LibWin32
     get_emm : Proc(IIsdbSiParser2*, UInt16, UInt16, IISDB_EMM*, HRESULT)
   end
 
-  IIsdbSiParser2_GUID = LibC::GUID.new("900e4bb7-18cd-453f-98be-3be6aa211772")
-  CLSID_IIsdbSiParser2 = "900e4bb7-18cd-453f-98be-3be6aa211772"
+  IIsdbSiParser2_GUID = "900e4bb7-18cd-453f-98be-3be6aa211772"
+  IID_IIsdbSiParser2 = LibC::GUID.new(0x900e4bb7_u32, 0x18cd_u16, 0x453f_u16, StaticArray[0x98_u8, 0xbe_u8, 0x3b_u8, 0xe6_u8, 0xaa_u8, 0x21_u8, 0x17_u8, 0x72_u8])
   struct IIsdbSiParser2
     lpVtbl : IIsdbSiParser2VTbl*
   end
@@ -17384,8 +17384,8 @@ lib LibWin32
     get_version_hash : Proc(IDVB_NIT*, UInt32*, HRESULT)
   end
 
-  IDVB_NIT_GUID = LibC::GUID.new("c64935f4-29e4-4e22-911a-63f7f55cb097")
-  CLSID_IDVB_NIT = "c64935f4-29e4-4e22-911a-63f7f55cb097"
+  IDVB_NIT_GUID = "c64935f4-29e4-4e22-911a-63f7f55cb097"
+  IID_IDVB_NIT = LibC::GUID.new(0xc64935f4_u32, 0x29e4_u16, 0x4e22_u16, StaticArray[0x91_u8, 0x1a_u8, 0x63_u8, 0xf7_u8, 0xf5_u8, 0x5c_u8, 0xb0_u8, 0x97_u8])
   struct IDVB_NIT
     lpVtbl : IDVB_NITVTbl*
   end
@@ -17414,8 +17414,8 @@ lib LibWin32
     get_version_hash : Proc(IDVB_SDT*, UInt32*, HRESULT)
   end
 
-  IDVB_SDT_GUID = LibC::GUID.new("02cad8d3-fe43-48e2-90bd-450ed9a8a5fd")
-  CLSID_IDVB_SDT = "02cad8d3-fe43-48e2-90bd-450ed9a8a5fd"
+  IDVB_SDT_GUID = "02cad8d3-fe43-48e2-90bd-450ed9a8a5fd"
+  IID_IDVB_SDT = LibC::GUID.new(0x2cad8d3_u32, 0xfe43_u16, 0x48e2_u16, StaticArray[0x90_u8, 0xbd_u8, 0x45_u8, 0xe_u8, 0xd9_u8, 0xa8_u8, 0xa5_u8, 0xfd_u8])
   struct IDVB_SDT
     lpVtbl : IDVB_SDTVTbl*
   end
@@ -17445,8 +17445,8 @@ lib LibWin32
     get_record_eit_user_defined_flags : Proc(IISDB_SDT*, UInt32, UInt8*, HRESULT)
   end
 
-  IISDB_SDT_GUID = LibC::GUID.new("3f3dc9a2-bb32-4fb9-ae9e-d856848927a3")
-  CLSID_IISDB_SDT = "3f3dc9a2-bb32-4fb9-ae9e-d856848927a3"
+  IISDB_SDT_GUID = "3f3dc9a2-bb32-4fb9-ae9e-d856848927a3"
+  IID_IISDB_SDT = LibC::GUID.new(0x3f3dc9a2_u32, 0xbb32_u16, 0x4fb9_u16, StaticArray[0xae_u8, 0x9e_u8, 0xd8_u8, 0x56_u8, 0x84_u8, 0x89_u8, 0x27_u8, 0xa3_u8])
   struct IISDB_SDT
     lpVtbl : IISDB_SDTVTbl*
   end
@@ -17478,8 +17478,8 @@ lib LibWin32
     get_version_hash : Proc(IDVB_EIT*, UInt32*, HRESULT)
   end
 
-  IDVB_EIT_GUID = LibC::GUID.new("442db029-02cb-4495-8b92-1c13375bce99")
-  CLSID_IDVB_EIT = "442db029-02cb-4495-8b92-1c13375bce99"
+  IDVB_EIT_GUID = "442db029-02cb-4495-8b92-1c13375bce99"
+  IID_IDVB_EIT = LibC::GUID.new(0x442db029_u32, 0x2cb_u16, 0x4495_u16, StaticArray[0x8b_u8, 0x92_u8, 0x1c_u8, 0x13_u8, 0x37_u8, 0x5b_u8, 0xce_u8, 0x99_u8])
   struct IDVB_EIT
     lpVtbl : IDVB_EITVTbl*
   end
@@ -17513,8 +17513,8 @@ lib LibWin32
     get_record_section : Proc(IDVB_EIT2*, UInt32, UInt8*, HRESULT)
   end
 
-  IDVB_EIT2_GUID = LibC::GUID.new("61a389e0-9b9e-4ba0-aeea-5ddd159820ea")
-  CLSID_IDVB_EIT2 = "61a389e0-9b9e-4ba0-aeea-5ddd159820ea"
+  IDVB_EIT2_GUID = "61a389e0-9b9e-4ba0-aeea-5ddd159820ea"
+  IID_IDVB_EIT2 = LibC::GUID.new(0x61a389e0_u32, 0x9b9e_u16, 0x4ba0_u16, StaticArray[0xae_u8, 0xea_u8, 0x5d_u8, 0xdd_u8, 0x15_u8, 0x98_u8, 0x20_u8, 0xea_u8])
   struct IDVB_EIT2
     lpVtbl : IDVB_EIT2VTbl*
   end
@@ -17541,8 +17541,8 @@ lib LibWin32
     convert_next_to_current : Proc(IDVB_BAT*, HRESULT)
   end
 
-  IDVB_BAT_GUID = LibC::GUID.new("ece9bb0c-43b6-4558-a0ec-1812c34cd6ca")
-  CLSID_IDVB_BAT = "ece9bb0c-43b6-4558-a0ec-1812c34cd6ca"
+  IDVB_BAT_GUID = "ece9bb0c-43b6-4558-a0ec-1812c34cd6ca"
+  IID_IDVB_BAT = LibC::GUID.new(0xece9bb0c_u32, 0x43b6_u16, 0x4558_u16, StaticArray[0xa0_u8, 0xec_u8, 0x18_u8, 0x12_u8, 0xc3_u8, 0x4c_u8, 0xd6_u8, 0xca_u8])
   struct IDVB_BAT
     lpVtbl : IDVB_BATVTbl*
   end
@@ -17560,8 +17560,8 @@ lib LibWin32
     get_record_running_status : Proc(IDVB_RST*, UInt32, UInt8*, HRESULT)
   end
 
-  IDVB_RST_GUID = LibC::GUID.new("f47dcd04-1e23-4fb7-9f96-b40eead10b2b")
-  CLSID_IDVB_RST = "f47dcd04-1e23-4fb7-9f96-b40eead10b2b"
+  IDVB_RST_GUID = "f47dcd04-1e23-4fb7-9f96-b40eead10b2b"
+  IID_IDVB_RST = LibC::GUID.new(0xf47dcd04_u32, 0x1e23_u16, 0x4fb7_u16, StaticArray[0x9f_u8, 0x96_u8, 0xb4_u8, 0xe_u8, 0xea_u8, 0xd1_u8, 0xb_u8, 0x2b_u8])
   struct IDVB_RST
     lpVtbl : IDVB_RSTVTbl*
   end
@@ -17575,8 +17575,8 @@ lib LibWin32
     get_data : Proc(IDVB_ST*, UInt8**, HRESULT)
   end
 
-  IDVB_ST_GUID = LibC::GUID.new("4d5b9f23-2a02-45de-bcda-5d5dbfbfbe62")
-  CLSID_IDVB_ST = "4d5b9f23-2a02-45de-bcda-5d5dbfbfbe62"
+  IDVB_ST_GUID = "4d5b9f23-2a02-45de-bcda-5d5dbfbfbe62"
+  IID_IDVB_ST = LibC::GUID.new(0x4d5b9f23_u32, 0x2a02_u16, 0x45de_u16, StaticArray[0xbc_u8, 0xda_u8, 0x5d_u8, 0x5d_u8, 0xbf_u8, 0xbf_u8, 0xbe_u8, 0x62_u8])
   struct IDVB_ST
     lpVtbl : IDVB_STVTbl*
   end
@@ -17589,8 +17589,8 @@ lib LibWin32
     get_utc_time : Proc(IDVB_TDT*, MPEG_DATE_AND_TIME*, HRESULT)
   end
 
-  IDVB_TDT_GUID = LibC::GUID.new("0780dc7d-d55c-4aef-97e6-6b75906e2796")
-  CLSID_IDVB_TDT = "0780dc7d-d55c-4aef-97e6-6b75906e2796"
+  IDVB_TDT_GUID = "0780dc7d-d55c-4aef-97e6-6b75906e2796"
+  IID_IDVB_TDT = LibC::GUID.new(0x780dc7d_u32, 0xd55c_u16, 0x4aef_u16, StaticArray[0x97_u8, 0xe6_u8, 0x6b_u8, 0x75_u8, 0x90_u8, 0x6e_u8, 0x27_u8, 0x96_u8])
   struct IDVB_TDT
     lpVtbl : IDVB_TDTVTbl*
   end
@@ -17606,8 +17606,8 @@ lib LibWin32
     get_table_descriptor_by_tag : Proc(IDVB_TOT*, UInt8, UInt32*, IGenericDescriptor*, HRESULT)
   end
 
-  IDVB_TOT_GUID = LibC::GUID.new("83295d6a-faba-4ee1-9b15-8067696910ae")
-  CLSID_IDVB_TOT = "83295d6a-faba-4ee1-9b15-8067696910ae"
+  IDVB_TOT_GUID = "83295d6a-faba-4ee1-9b15-8067696910ae"
+  IID_IDVB_TOT = LibC::GUID.new(0x83295d6a_u32, 0xfaba_u16, 0x4ee1_u16, StaticArray[0x9b_u8, 0x15_u8, 0x80_u8, 0x67_u8, 0x69_u8, 0x69_u8, 0x10_u8, 0xae_u8])
   struct IDVB_TOT
     lpVtbl : IDVB_TOTVTbl*
   end
@@ -17620,8 +17620,8 @@ lib LibWin32
     get_transition_flag : Proc(IDVB_DIT*, LibC::BOOL*, HRESULT)
   end
 
-  IDVB_DIT_GUID = LibC::GUID.new("91bffdf9-9432-410f-86ef-1c228ed0ad70")
-  CLSID_IDVB_DIT = "91bffdf9-9432-410f-86ef-1c228ed0ad70"
+  IDVB_DIT_GUID = "91bffdf9-9432-410f-86ef-1c228ed0ad70"
+  IID_IDVB_DIT = LibC::GUID.new(0x91bffdf9_u32, 0x9432_u16, 0x410f_u16, StaticArray[0x86_u8, 0xef_u8, 0x1c_u8, 0x22_u8, 0x8e_u8, 0xd0_u8, 0xad_u8, 0x70_u8])
   struct IDVB_DIT
     lpVtbl : IDVB_DITVTbl*
   end
@@ -17647,8 +17647,8 @@ lib LibWin32
     convert_next_to_current : Proc(IDVB_SIT*, HRESULT)
   end
 
-  IDVB_SIT_GUID = LibC::GUID.new("68cdce53-8bea-45c2-9d9d-acf575a089b5")
-  CLSID_IDVB_SIT = "68cdce53-8bea-45c2-9d9d-acf575a089b5"
+  IDVB_SIT_GUID = "68cdce53-8bea-45c2-9d9d-acf575a089b5"
+  IID_IDVB_SIT = LibC::GUID.new(0x68cdce53_u32, 0x8bea_u16, 0x45c2_u16, StaticArray[0x9d_u8, 0x9d_u8, 0xac_u8, 0xf5_u8, 0x75_u8, 0xa0_u8, 0x89_u8, 0xb5_u8])
   struct IDVB_SIT
     lpVtbl : IDVB_SITVTbl*
   end
@@ -17672,8 +17672,8 @@ lib LibWin32
     get_version_hash : Proc(IISDB_BIT*, UInt32*, HRESULT)
   end
 
-  IISDB_BIT_GUID = LibC::GUID.new("537cd71e-0e46-4173-9001-ba043f3e49e2")
-  CLSID_IISDB_BIT = "537cd71e-0e46-4173-9001-ba043f3e49e2"
+  IISDB_BIT_GUID = "537cd71e-0e46-4173-9001-ba043f3e49e2"
+  IID_IISDB_BIT = LibC::GUID.new(0x537cd71e_u32, 0xe46_u16, 0x4173_u16, StaticArray[0x90_u8, 0x1_u8, 0xba_u8, 0x4_u8, 0x3f_u8, 0x3e_u8, 0x49_u8, 0xe2_u8])
   struct IISDB_BIT
     lpVtbl : IISDB_BITVTbl*
   end
@@ -17699,8 +17699,8 @@ lib LibWin32
     get_version_hash : Proc(IISDB_NBIT*, UInt32*, HRESULT)
   end
 
-  IISDB_NBIT_GUID = LibC::GUID.new("1b1863ef-08f1-40b7-a559-3b1eff8cafa6")
-  CLSID_IISDB_NBIT = "1b1863ef-08f1-40b7-a559-3b1eff8cafa6"
+  IISDB_NBIT_GUID = "1b1863ef-08f1-40b7-a559-3b1eff8cafa6"
+  IID_IISDB_NBIT = LibC::GUID.new(0x1b1863ef_u32, 0x8f1_u16, 0x40b7_u16, StaticArray[0xa5_u8, 0x59_u8, 0x3b_u8, 0x1e_u8, 0xff_u8, 0x8c_u8, 0xaf_u8, 0xa6_u8])
   struct IISDB_NBIT
     lpVtbl : IISDB_NBITVTbl*
   end
@@ -17722,8 +17722,8 @@ lib LibWin32
     get_version_hash : Proc(IISDB_LDT*, UInt32*, HRESULT)
   end
 
-  IISDB_LDT_GUID = LibC::GUID.new("141a546b-02ff-4fb9-a3a3-2f074b74a9a9")
-  CLSID_IISDB_LDT = "141a546b-02ff-4fb9-a3a3-2f074b74a9a9"
+  IISDB_LDT_GUID = "141a546b-02ff-4fb9-a3a3-2f074b74a9a9"
+  IID_IISDB_LDT = LibC::GUID.new(0x141a546b_u32, 0x2ff_u16, 0x4fb9_u16, StaticArray[0xa3_u8, 0xa3_u8, 0x2f_u8, 0x7_u8, 0x4b_u8, 0x74_u8, 0xa9_u8, 0xa9_u8])
   struct IISDB_LDT
     lpVtbl : IISDB_LDTVTbl*
   end
@@ -17754,8 +17754,8 @@ lib LibWin32
     get_version_hash : Proc(IISDB_SDTT*, UInt32*, HRESULT)
   end
 
-  IISDB_SDTT_GUID = LibC::GUID.new("ee60ef2d-813a-4dc7-bf92-ea13dac85313")
-  CLSID_IISDB_SDTT = "ee60ef2d-813a-4dc7-bf92-ea13dac85313"
+  IISDB_SDTT_GUID = "ee60ef2d-813a-4dc7-bf92-ea13dac85313"
+  IID_IISDB_SDTT = LibC::GUID.new(0xee60ef2d_u32, 0x813a_u16, 0x4dc7_u16, StaticArray[0xbf_u8, 0x92_u8, 0xea_u8, 0x13_u8, 0xda_u8, 0xc8_u8, 0x53_u8, 0x13_u8])
   struct IISDB_SDTT
     lpVtbl : IISDB_SDTTVTbl*
   end
@@ -17778,8 +17778,8 @@ lib LibWin32
     get_version_hash : Proc(IISDB_CDT*, UInt32*, HRESULT)
   end
 
-  IISDB_CDT_GUID = LibC::GUID.new("25fa92c2-8b80-4787-a841-3a0e8f17984b")
-  CLSID_IISDB_CDT = "25fa92c2-8b80-4787-a841-3a0e8f17984b"
+  IISDB_CDT_GUID = "25fa92c2-8b80-4787-a841-3a0e8f17984b"
+  IID_IISDB_CDT = LibC::GUID.new(0x25fa92c2_u32, 0x8b80_u16, 0x4787_u16, StaticArray[0xa8_u8, 0x41_u8, 0x3a_u8, 0xe_u8, 0x8f_u8, 0x17_u8, 0x98_u8, 0x4b_u8])
   struct IISDB_CDT
     lpVtbl : IISDB_CDTVTbl*
   end
@@ -17797,8 +17797,8 @@ lib LibWin32
     get_version_hash : Proc(IISDB_EMM*, UInt32*, HRESULT)
   end
 
-  IISDB_EMM_GUID = LibC::GUID.new("0edb556d-43ad-4938-9668-321b2ffecfd3")
-  CLSID_IISDB_EMM = "0edb556d-43ad-4938-9668-321b2ffecfd3"
+  IISDB_EMM_GUID = "0edb556d-43ad-4938-9668-321b2ffecfd3"
+  IID_IISDB_EMM = LibC::GUID.new(0xedb556d_u32, 0x43ad_u16, 0x4938_u16, StaticArray[0x96_u8, 0x68_u8, 0x32_u8, 0x1b_u8, 0x2f_u8, 0xfe_u8, 0xcf_u8, 0xd3_u8])
   struct IISDB_EMM
     lpVtbl : IISDB_EMMVTbl*
   end
@@ -17815,8 +17815,8 @@ lib LibWin32
     get_record_visible_service_flag : Proc(IDvbServiceAttributeDescriptor*, UInt8, LibC::BOOL*, HRESULT)
   end
 
-  IDvbServiceAttributeDescriptor_GUID = LibC::GUID.new("0f37bd92-d6a1-4854-b950-3a969d27f30e")
-  CLSID_IDvbServiceAttributeDescriptor = "0f37bd92-d6a1-4854-b950-3a969d27f30e"
+  IDvbServiceAttributeDescriptor_GUID = "0f37bd92-d6a1-4854-b950-3a969d27f30e"
+  IID_IDvbServiceAttributeDescriptor = LibC::GUID.new(0xf37bd92_u32, 0xd6a1_u16, 0x4854_u16, StaticArray[0xb9_u8, 0x50_u8, 0x3a_u8, 0x96_u8, 0x9d_u8, 0x27_u8, 0xf3_u8, 0xe_u8])
   struct IDvbServiceAttributeDescriptor
     lpVtbl : IDvbServiceAttributeDescriptorVTbl*
   end
@@ -17831,8 +17831,8 @@ lib LibWin32
     get_record_crid : Proc(IDvbContentIdentifierDescriptor*, UInt8, UInt8*, UInt8*, UInt8*, UInt8**, HRESULT)
   end
 
-  IDvbContentIdentifierDescriptor_GUID = LibC::GUID.new("05e0c1ea-f661-4053-9fbf-d93b28359838")
-  CLSID_IDvbContentIdentifierDescriptor = "05e0c1ea-f661-4053-9fbf-d93b28359838"
+  IDvbContentIdentifierDescriptor_GUID = "05e0c1ea-f661-4053-9fbf-d93b28359838"
+  IID_IDvbContentIdentifierDescriptor = LibC::GUID.new(0x5e0c1ea_u32, 0xf661_u16, 0x4053_u16, StaticArray[0x9f_u8, 0xbf_u8, 0xd9_u8, 0x3b_u8, 0x28_u8, 0x35_u8, 0x98_u8, 0x38_u8])
   struct IDvbContentIdentifierDescriptor
     lpVtbl : IDvbContentIdentifierDescriptorVTbl*
   end
@@ -17846,8 +17846,8 @@ lib LibWin32
     get_default_authority : Proc(IDvbDefaultAuthorityDescriptor*, UInt8*, UInt8**, HRESULT)
   end
 
-  IDvbDefaultAuthorityDescriptor_GUID = LibC::GUID.new("05ec24d1-3a31-44e7-b408-67c60a352276")
-  CLSID_IDvbDefaultAuthorityDescriptor = "05ec24d1-3a31-44e7-b408-67c60a352276"
+  IDvbDefaultAuthorityDescriptor_GUID = "05ec24d1-3a31-44e7-b408-67c60a352276"
+  IID_IDvbDefaultAuthorityDescriptor = LibC::GUID.new(0x5ec24d1_u32, 0x3a31_u16, 0x44e7_u16, StaticArray[0xb4_u8, 0x8_u8, 0x67_u8, 0xc6_u8, 0xa_u8, 0x35_u8, 0x22_u8, 0x76_u8])
   struct IDvbDefaultAuthorityDescriptor
     lpVtbl : IDvbDefaultAuthorityDescriptorVTbl*
   end
@@ -17867,8 +17867,8 @@ lib LibWin32
     get_fec_inner : Proc(IDvbSatelliteDeliverySystemDescriptor*, UInt8*, HRESULT)
   end
 
-  IDvbSatelliteDeliverySystemDescriptor_GUID = LibC::GUID.new("02f2225a-805b-4ec5-a9a6-f9b5913cd470")
-  CLSID_IDvbSatelliteDeliverySystemDescriptor = "02f2225a-805b-4ec5-a9a6-f9b5913cd470"
+  IDvbSatelliteDeliverySystemDescriptor_GUID = "02f2225a-805b-4ec5-a9a6-f9b5913cd470"
+  IID_IDvbSatelliteDeliverySystemDescriptor = LibC::GUID.new(0x2f2225a_u32, 0x805b_u16, 0x4ec5_u16, StaticArray[0xa9_u8, 0xa6_u8, 0xf9_u8, 0xb5_u8, 0x91_u8, 0x3c_u8, 0xd4_u8, 0x70_u8])
   struct IDvbSatelliteDeliverySystemDescriptor
     lpVtbl : IDvbSatelliteDeliverySystemDescriptorVTbl*
   end
@@ -17886,8 +17886,8 @@ lib LibWin32
     get_fec_inner : Proc(IDvbCableDeliverySystemDescriptor*, UInt8*, HRESULT)
   end
 
-  IDvbCableDeliverySystemDescriptor_GUID = LibC::GUID.new("dfb98e36-9e1a-4862-9946-993a4e59017b")
-  CLSID_IDvbCableDeliverySystemDescriptor = "dfb98e36-9e1a-4862-9946-993a4e59017b"
+  IDvbCableDeliverySystemDescriptor_GUID = "dfb98e36-9e1a-4862-9946-993a4e59017b"
+  IID_IDvbCableDeliverySystemDescriptor = LibC::GUID.new(0xdfb98e36_u32, 0x9e1a_u16, 0x4862_u16, StaticArray[0x99_u8, 0x46_u8, 0x99_u8, 0x3a_u8, 0x4e_u8, 0x59_u8, 0x1_u8, 0x7b_u8])
   struct IDvbCableDeliverySystemDescriptor
     lpVtbl : IDvbCableDeliverySystemDescriptorVTbl*
   end
@@ -17909,8 +17909,8 @@ lib LibWin32
     get_other_frequency_flag : Proc(IDvbTerrestrialDeliverySystemDescriptor*, UInt8*, HRESULT)
   end
 
-  IDvbTerrestrialDeliverySystemDescriptor_GUID = LibC::GUID.new("ed7e1b91-d12e-420c-b41d-a49d84fe1823")
-  CLSID_IDvbTerrestrialDeliverySystemDescriptor = "ed7e1b91-d12e-420c-b41d-a49d84fe1823"
+  IDvbTerrestrialDeliverySystemDescriptor_GUID = "ed7e1b91-d12e-420c-b41d-a49d84fe1823"
+  IID_IDvbTerrestrialDeliverySystemDescriptor = LibC::GUID.new(0xed7e1b91_u32, 0xd12e_u16, 0x420c_u16, StaticArray[0xb4_u8, 0x1d_u8, 0xa4_u8, 0x9d_u8, 0x84_u8, 0xfe_u8, 0x18_u8, 0x23_u8])
   struct IDvbTerrestrialDeliverySystemDescriptor
     lpVtbl : IDvbTerrestrialDeliverySystemDescriptorVTbl*
   end
@@ -17934,8 +17934,8 @@ lib LibWin32
     get_tfs_flag : Proc(IDvbTerrestrial2DeliverySystemDescriptor*, UInt8*, HRESULT)
   end
 
-  IDvbTerrestrial2DeliverySystemDescriptor_GUID = LibC::GUID.new("20ee9be9-cd57-49ab-8f6e-1d07aeb8e482")
-  CLSID_IDvbTerrestrial2DeliverySystemDescriptor = "20ee9be9-cd57-49ab-8f6e-1d07aeb8e482"
+  IDvbTerrestrial2DeliverySystemDescriptor_GUID = "20ee9be9-cd57-49ab-8f6e-1d07aeb8e482"
+  IID_IDvbTerrestrial2DeliverySystemDescriptor = LibC::GUID.new(0x20ee9be9_u32, 0xcd57_u16, 0x49ab_u16, StaticArray[0x8f_u8, 0x6e_u8, 0x1d_u8, 0x7_u8, 0xae_u8, 0xb8_u8, 0xe4_u8, 0x82_u8])
   struct IDvbTerrestrial2DeliverySystemDescriptor
     lpVtbl : IDvbTerrestrial2DeliverySystemDescriptorVTbl*
   end
@@ -17951,8 +17951,8 @@ lib LibWin32
     get_record_centre_frequency : Proc(IDvbFrequencyListDescriptor*, UInt8, UInt32*, HRESULT)
   end
 
-  IDvbFrequencyListDescriptor_GUID = LibC::GUID.new("1cadb613-e1dd-4512-afa8-bb7a007ef8b1")
-  CLSID_IDvbFrequencyListDescriptor = "1cadb613-e1dd-4512-afa8-bb7a007ef8b1"
+  IDvbFrequencyListDescriptor_GUID = "1cadb613-e1dd-4512-afa8-bb7a007ef8b1"
+  IID_IDvbFrequencyListDescriptor = LibC::GUID.new(0x1cadb613_u32, 0xe1dd_u16, 0x4512_u16, StaticArray[0xaf_u8, 0xa8_u8, 0xbb_u8, 0x7a_u8, 0x0_u8, 0x7e_u8, 0xf8_u8, 0xb1_u8])
   struct IDvbFrequencyListDescriptor
     lpVtbl : IDvbFrequencyListDescriptorVTbl*
   end
@@ -17966,8 +17966,8 @@ lib LibWin32
     get_private_data_specifier : Proc(IDvbPrivateDataSpecifierDescriptor*, UInt32*, HRESULT)
   end
 
-  IDvbPrivateDataSpecifierDescriptor_GUID = LibC::GUID.new("5660a019-e75a-4b82-9b4c-ed2256d165a2")
-  CLSID_IDvbPrivateDataSpecifierDescriptor = "5660a019-e75a-4b82-9b4c-ed2256d165a2"
+  IDvbPrivateDataSpecifierDescriptor_GUID = "5660a019-e75a-4b82-9b4c-ed2256d165a2"
+  IID_IDvbPrivateDataSpecifierDescriptor = LibC::GUID.new(0x5660a019_u32, 0xe75a_u16, 0x4b82_u16, StaticArray[0x9b_u8, 0x4c_u8, 0xed_u8, 0x22_u8, 0x56_u8, 0xd1_u8, 0x65_u8, 0xa2_u8])
   struct IDvbPrivateDataSpecifierDescriptor
     lpVtbl : IDvbPrivateDataSpecifierDescriptorVTbl*
   end
@@ -17983,8 +17983,8 @@ lib LibWin32
     get_record_logical_channel_number : Proc(IDvbLogicalChannelDescriptor*, UInt8, UInt16*, HRESULT)
   end
 
-  IDvbLogicalChannelDescriptor_GUID = LibC::GUID.new("cf1edaff-3ffd-4cf7-8201-35756acbf85f")
-  CLSID_IDvbLogicalChannelDescriptor = "cf1edaff-3ffd-4cf7-8201-35756acbf85f"
+  IDvbLogicalChannelDescriptor_GUID = "cf1edaff-3ffd-4cf7-8201-35756acbf85f"
+  IID_IDvbLogicalChannelDescriptor = LibC::GUID.new(0xcf1edaff_u32, 0x3ffd_u16, 0x4cf7_u16, StaticArray[0x82_u8, 0x1_u8, 0x35_u8, 0x75_u8, 0x6a_u8, 0xcb_u8, 0xf8_u8, 0x5f_u8])
   struct IDvbLogicalChannelDescriptor
     lpVtbl : IDvbLogicalChannelDescriptorVTbl*
   end
@@ -18001,8 +18001,8 @@ lib LibWin32
     get_record_logical_channel_and_visibility : Proc(IDvbLogicalChannelDescriptor2*, UInt8, UInt16*, HRESULT)
   end
 
-  IDvbLogicalChannelDescriptor2_GUID = LibC::GUID.new("43aca974-4be8-4b98-bc17-9eafd788b1d7")
-  CLSID_IDvbLogicalChannelDescriptor2 = "43aca974-4be8-4b98-bc17-9eafd788b1d7"
+  IDvbLogicalChannelDescriptor2_GUID = "43aca974-4be8-4b98-bc17-9eafd788b1d7"
+  IID_IDvbLogicalChannelDescriptor2 = LibC::GUID.new(0x43aca974_u32, 0x4be8_u16, 0x4b98_u16, StaticArray[0xbc_u8, 0x17_u8, 0x9e_u8, 0xaf_u8, 0xd7_u8, 0x88_u8, 0xb1_u8, 0xd7_u8])
   struct IDvbLogicalChannelDescriptor2
     lpVtbl : IDvbLogicalChannelDescriptor2VTbl*
   end
@@ -18027,8 +18027,8 @@ lib LibWin32
     get_list_record_logical_channel_and_visibility : Proc(IDvbLogicalChannel2Descriptor*, UInt8, UInt8, UInt16*, HRESULT)
   end
 
-  IDvbLogicalChannel2Descriptor_GUID = LibC::GUID.new("f69c3747-8a30-4980-998c-01fe7f0ba35a")
-  CLSID_IDvbLogicalChannel2Descriptor = "f69c3747-8a30-4980-998c-01fe7f0ba35a"
+  IDvbLogicalChannel2Descriptor_GUID = "f69c3747-8a30-4980-998c-01fe7f0ba35a"
+  IID_IDvbLogicalChannel2Descriptor = LibC::GUID.new(0xf69c3747_u32, 0x8a30_u16, 0x4980_u16, StaticArray[0x99_u8, 0x8c_u8, 0x1_u8, 0xfe_u8, 0x7f_u8, 0xb_u8, 0xa3_u8, 0x5a_u8])
   struct IDvbLogicalChannel2Descriptor
     lpVtbl : IDvbLogicalChannel2DescriptorVTbl*
   end
@@ -18045,8 +18045,8 @@ lib LibWin32
     get_record_logical_channel_and_visibility : Proc(IDvbHDSimulcastLogicalChannelDescriptor*, UInt8, UInt16*, HRESULT)
   end
 
-  IDvbHDSimulcastLogicalChannelDescriptor_GUID = LibC::GUID.new("1ea8b738-a307-4680-9e26-d0a908c824f4")
-  CLSID_IDvbHDSimulcastLogicalChannelDescriptor = "1ea8b738-a307-4680-9e26-d0a908c824f4"
+  IDvbHDSimulcastLogicalChannelDescriptor_GUID = "1ea8b738-a307-4680-9e26-d0a908c824f4"
+  IID_IDvbHDSimulcastLogicalChannelDescriptor = LibC::GUID.new(0x1ea8b738_u32, 0xa307_u16, 0x4680_u16, StaticArray[0x9e_u8, 0x26_u8, 0xd0_u8, 0xa9_u8, 0x8_u8, 0xc8_u8, 0x24_u8, 0xf4_u8])
   struct IDvbHDSimulcastLogicalChannelDescriptor
     lpVtbl : IDvbHDSimulcastLogicalChannelDescriptorVTbl*
   end
@@ -18061,8 +18061,8 @@ lib LibWin32
     get_id_selector_bytes : Proc(IDvbDataBroadcastIDDescriptor*, UInt8*, UInt8*, HRESULT)
   end
 
-  IDvbDataBroadcastIDDescriptor_GUID = LibC::GUID.new("5f26f518-65c8-4048-91f2-9290f59f7b90")
-  CLSID_IDvbDataBroadcastIDDescriptor = "5f26f518-65c8-4048-91f2-9290f59f7b90"
+  IDvbDataBroadcastIDDescriptor_GUID = "5f26f518-65c8-4048-91f2-9290f59f7b90"
+  IID_IDvbDataBroadcastIDDescriptor = LibC::GUID.new(0x5f26f518_u32, 0x65c8_u16, 0x4048_u16, StaticArray[0x91_u8, 0xf2_u8, 0x92_u8, 0x90_u8, 0xf5_u8, 0x9f_u8, 0x7b_u8, 0x90_u8])
   struct IDvbDataBroadcastIDDescriptor
     lpVtbl : IDvbDataBroadcastIDDescriptorVTbl*
   end
@@ -18082,8 +18082,8 @@ lib LibWin32
     get_text : Proc(IDvbDataBroadcastDescriptor*, UInt8*, UInt8*, HRESULT)
   end
 
-  IDvbDataBroadcastDescriptor_GUID = LibC::GUID.new("d1ebc1d6-8b60-4c20-9caf-e59382e7c400")
-  CLSID_IDvbDataBroadcastDescriptor = "d1ebc1d6-8b60-4c20-9caf-e59382e7c400"
+  IDvbDataBroadcastDescriptor_GUID = "d1ebc1d6-8b60-4c20-9caf-e59382e7c400"
+  IID_IDvbDataBroadcastDescriptor = LibC::GUID.new(0xd1ebc1d6_u32, 0x8b60_u16, 0x4c20_u16, StaticArray[0x9c_u8, 0xaf_u8, 0xe5_u8, 0x93_u8, 0x82_u8, 0xe7_u8, 0xc4_u8, 0x0_u8])
   struct IDvbDataBroadcastDescriptor
     lpVtbl : IDvbDataBroadcastDescriptorVTbl*
   end
@@ -18102,8 +18102,8 @@ lib LibWin32
     get_private_data : Proc(IDvbLinkageDescriptor*, UInt8*, UInt8*, HRESULT)
   end
 
-  IDvbLinkageDescriptor_GUID = LibC::GUID.new("1cdf8b31-994a-46fc-acfd-6a6be8934dd5")
-  CLSID_IDvbLinkageDescriptor = "1cdf8b31-994a-46fc-acfd-6a6be8934dd5"
+  IDvbLinkageDescriptor_GUID = "1cdf8b31-994a-46fc-acfd-6a6be8934dd5"
+  IID_IDvbLinkageDescriptor = LibC::GUID.new(0x1cdf8b31_u32, 0x994a_u16, 0x46fc_u16, StaticArray[0xac_u8, 0xfd_u8, 0x6a_u8, 0x6b_u8, 0xe8_u8, 0x93_u8, 0x4d_u8, 0xd5_u8])
   struct IDvbLinkageDescriptor
     lpVtbl : IDvbLinkageDescriptorVTbl*
   end
@@ -18121,8 +18121,8 @@ lib LibWin32
     get_record_page_number : Proc(IDvbTeletextDescriptor*, UInt8, UInt8*, HRESULT)
   end
 
-  IDvbTeletextDescriptor_GUID = LibC::GUID.new("9cd29d47-69c6-4f92-98a9-210af1b7303a")
-  CLSID_IDvbTeletextDescriptor = "9cd29d47-69c6-4f92-98a9-210af1b7303a"
+  IDvbTeletextDescriptor_GUID = "9cd29d47-69c6-4f92-98a9-210af1b7303a"
+  IID_IDvbTeletextDescriptor = LibC::GUID.new(0x9cd29d47_u32, 0x69c6_u16, 0x4f92_u16, StaticArray[0x98_u8, 0xa9_u8, 0x21_u8, 0xa_u8, 0xf1_u8, 0xb7_u8, 0x30_u8, 0x3a_u8])
   struct IDvbTeletextDescriptor
     lpVtbl : IDvbTeletextDescriptorVTbl*
   end
@@ -18140,8 +18140,8 @@ lib LibWin32
     get_record_ancillary_page_id : Proc(IDvbSubtitlingDescriptor*, UInt8, UInt16*, HRESULT)
   end
 
-  IDvbSubtitlingDescriptor_GUID = LibC::GUID.new("9b25fe1d-fa23-4e50-9784-6df8b26f8a49")
-  CLSID_IDvbSubtitlingDescriptor = "9b25fe1d-fa23-4e50-9784-6df8b26f8a49"
+  IDvbSubtitlingDescriptor_GUID = "9b25fe1d-fa23-4e50-9784-6df8b26f8a49"
+  IID_IDvbSubtitlingDescriptor = LibC::GUID.new(0x9b25fe1d_u32, 0xfa23_u16, 0x4e50_u16, StaticArray[0x97_u8, 0x84_u8, 0x6d_u8, 0xf8_u8, 0xb2_u8, 0x6f_u8, 0x8a_u8, 0x49_u8])
   struct IDvbSubtitlingDescriptor
     lpVtbl : IDvbSubtitlingDescriptorVTbl*
   end
@@ -18160,8 +18160,8 @@ lib LibWin32
     get_service_name_emphasized : Proc(IDvbServiceDescriptor*, UInt8**, HRESULT)
   end
 
-  IDvbServiceDescriptor_GUID = LibC::GUID.new("f9c7fbcf-e2d6-464d-b32d-2ef526e49290")
-  CLSID_IDvbServiceDescriptor = "f9c7fbcf-e2d6-464d-b32d-2ef526e49290"
+  IDvbServiceDescriptor_GUID = "f9c7fbcf-e2d6-464d-b32d-2ef526e49290"
+  IID_IDvbServiceDescriptor = LibC::GUID.new(0xf9c7fbcf_u32, 0xe2d6_u16, 0x464d_u16, StaticArray[0xb3_u8, 0x2d_u8, 0x2e_u8, 0xf5_u8, 0x26_u8, 0xe4_u8, 0x92_u8, 0x90_u8])
   struct IDvbServiceDescriptor
     lpVtbl : IDvbServiceDescriptorVTbl*
   end
@@ -18182,8 +18182,8 @@ lib LibWin32
     get_service_name_w : Proc(IDvbServiceDescriptor2*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IDvbServiceDescriptor2_GUID = LibC::GUID.new("d6c76506-85ab-487c-9b2b-36416511e4a2")
-  CLSID_IDvbServiceDescriptor2 = "d6c76506-85ab-487c-9b2b-36416511e4a2"
+  IDvbServiceDescriptor2_GUID = "d6c76506-85ab-487c-9b2b-36416511e4a2"
+  IID_IDvbServiceDescriptor2 = LibC::GUID.new(0xd6c76506_u32, 0x85ab_u16, 0x487c_u16, StaticArray[0x9b_u8, 0x2b_u8, 0x36_u8, 0x41_u8, 0x65_u8, 0x11_u8, 0xe4_u8, 0xa2_u8])
   struct IDvbServiceDescriptor2
     lpVtbl : IDvbServiceDescriptor2VTbl*
   end
@@ -18199,8 +18199,8 @@ lib LibWin32
     get_record_service_type : Proc(IDvbServiceListDescriptor*, UInt8, UInt8*, HRESULT)
   end
 
-  IDvbServiceListDescriptor_GUID = LibC::GUID.new("05db0d8f-6008-491a-acd3-7090952707d0")
-  CLSID_IDvbServiceListDescriptor = "05db0d8f-6008-491a-acd3-7090952707d0"
+  IDvbServiceListDescriptor_GUID = "05db0d8f-6008-491a-acd3-7090952707d0"
+  IID_IDvbServiceListDescriptor = LibC::GUID.new(0x5db0d8f_u32, 0x6008_u16, 0x491a_u16, StaticArray[0xac_u8, 0xd3_u8, 0x70_u8, 0x90_u8, 0x95_u8, 0x27_u8, 0x7_u8, 0xd0_u8])
   struct IDvbServiceListDescriptor
     lpVtbl : IDvbServiceListDescriptorVTbl*
   end
@@ -18217,8 +18217,8 @@ lib LibWin32
     get_record_service_name_w : Proc(IDvbMultilingualServiceNameDescriptor*, UInt8, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IDvbMultilingualServiceNameDescriptor_GUID = LibC::GUID.new("2d80433b-b32c-47ef-987f-e78ebb773e34")
-  CLSID_IDvbMultilingualServiceNameDescriptor = "2d80433b-b32c-47ef-987f-e78ebb773e34"
+  IDvbMultilingualServiceNameDescriptor_GUID = "2d80433b-b32c-47ef-987f-e78ebb773e34"
+  IID_IDvbMultilingualServiceNameDescriptor = LibC::GUID.new(0x2d80433b_u32, 0xb32c_u16, 0x47ef_u16, StaticArray[0x98_u8, 0x7f_u8, 0xe7_u8, 0x8e_u8, 0xbb_u8, 0x77_u8, 0x3e_u8, 0x34_u8])
   struct IDvbMultilingualServiceNameDescriptor
     lpVtbl : IDvbMultilingualServiceNameDescriptorVTbl*
   end
@@ -18233,8 +18233,8 @@ lib LibWin32
     get_network_name_w : Proc(IDvbNetworkNameDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IDvbNetworkNameDescriptor_GUID = LibC::GUID.new("5b2a80cf-35b9-446c-b3e4-048b761dbc51")
-  CLSID_IDvbNetworkNameDescriptor = "5b2a80cf-35b9-446c-b3e4-048b761dbc51"
+  IDvbNetworkNameDescriptor_GUID = "5b2a80cf-35b9-446c-b3e4-048b761dbc51"
+  IID_IDvbNetworkNameDescriptor = LibC::GUID.new(0x5b2a80cf_u32, 0x35b9_u16, 0x446c_u16, StaticArray[0xb3_u8, 0xe4_u8, 0x4_u8, 0x8b_u8, 0x76_u8, 0x1d_u8, 0xbc_u8, 0x51_u8])
   struct IDvbNetworkNameDescriptor
     lpVtbl : IDvbNetworkNameDescriptorVTbl*
   end
@@ -18250,8 +18250,8 @@ lib LibWin32
     get_text_w : Proc(IDvbShortEventDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IDvbShortEventDescriptor_GUID = LibC::GUID.new("b170be92-5b75-458e-9c6e-b0008231491a")
-  CLSID_IDvbShortEventDescriptor = "b170be92-5b75-458e-9c6e-b0008231491a"
+  IDvbShortEventDescriptor_GUID = "b170be92-5b75-458e-9c6e-b0008231491a"
+  IID_IDvbShortEventDescriptor = LibC::GUID.new(0xb170be92_u32, 0x5b75_u16, 0x458e_u16, StaticArray[0x9c_u8, 0x6e_u8, 0xb0_u8, 0x0_u8, 0x82_u8, 0x31_u8, 0x49_u8, 0x1a_u8])
   struct IDvbShortEventDescriptor
     lpVtbl : IDvbShortEventDescriptorVTbl*
   end
@@ -18273,8 +18273,8 @@ lib LibWin32
     get_record_item_raw_bytes : Proc(IDvbExtendedEventDescriptor*, UInt8, UInt8**, UInt8*, HRESULT)
   end
 
-  IDvbExtendedEventDescriptor_GUID = LibC::GUID.new("c9b22eca-85f4-499f-b1db-efa93a91ee57")
-  CLSID_IDvbExtendedEventDescriptor = "c9b22eca-85f4-499f-b1db-efa93a91ee57"
+  IDvbExtendedEventDescriptor_GUID = "c9b22eca-85f4-499f-b1db-efa93a91ee57"
+  IID_IDvbExtendedEventDescriptor = LibC::GUID.new(0xc9b22eca_u32, 0x85f4_u16, 0x499f_u16, StaticArray[0xb1_u8, 0xdb_u8, 0xef_u8, 0xa9_u8, 0x3a_u8, 0x91_u8, 0xee_u8, 0x57_u8])
   struct IDvbExtendedEventDescriptor
     lpVtbl : IDvbExtendedEventDescriptorVTbl*
   end
@@ -18292,8 +18292,8 @@ lib LibWin32
     get_text_w : Proc(IDvbComponentDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IDvbComponentDescriptor_GUID = LibC::GUID.new("91e405cf-80e7-457f-9096-1b9d1ce32141")
-  CLSID_IDvbComponentDescriptor = "91e405cf-80e7-457f-9096-1b9d1ce32141"
+  IDvbComponentDescriptor_GUID = "91e405cf-80e7-457f-9096-1b9d1ce32141"
+  IID_IDvbComponentDescriptor = LibC::GUID.new(0x91e405cf_u32, 0x80e7_u16, 0x457f_u16, StaticArray[0x90_u8, 0x96_u8, 0x1b_u8, 0x9d_u8, 0x1c_u8, 0xe3_u8, 0x21_u8, 0x41_u8])
   struct IDvbComponentDescriptor
     lpVtbl : IDvbComponentDescriptorVTbl*
   end
@@ -18309,8 +18309,8 @@ lib LibWin32
     get_record_user_nibbles : Proc(IDvbContentDescriptor*, UInt8, UInt8*, UInt8*, HRESULT)
   end
 
-  IDvbContentDescriptor_GUID = LibC::GUID.new("2e883881-a467-412a-9d63-6f2b6da05bf0")
-  CLSID_IDvbContentDescriptor = "2e883881-a467-412a-9d63-6f2b6da05bf0"
+  IDvbContentDescriptor_GUID = "2e883881-a467-412a-9d63-6f2b6da05bf0"
+  IID_IDvbContentDescriptor = LibC::GUID.new(0x2e883881_u32, 0xa467_u16, 0x412a_u16, StaticArray[0x9d_u8, 0x63_u8, 0x6f_u8, 0x2b_u8, 0x6d_u8, 0xa0_u8, 0x5b_u8, 0xf0_u8])
   struct IDvbContentDescriptor
     lpVtbl : IDvbContentDescriptorVTbl*
   end
@@ -18325,8 +18325,8 @@ lib LibWin32
     get_record_rating : Proc(IDvbParentalRatingDescriptor*, UInt8, UInt8*, UInt8*, HRESULT)
   end
 
-  IDvbParentalRatingDescriptor_GUID = LibC::GUID.new("3ad9dde1-fb1b-4186-937f-22e6b5a72a10")
-  CLSID_IDvbParentalRatingDescriptor = "3ad9dde1-fb1b-4186-937f-22e6b5a72a10"
+  IDvbParentalRatingDescriptor_GUID = "3ad9dde1-fb1b-4186-937f-22e6b5a72a10"
+  IID_IDvbParentalRatingDescriptor = LibC::GUID.new(0x3ad9dde1_u32, 0xfb1b_u16, 0x4186_u16, StaticArray[0x93_u8, 0x7f_u8, 0x22_u8, 0xe6_u8, 0xb5_u8, 0xa7_u8, 0x2a_u8, 0x10_u8])
   struct IDvbParentalRatingDescriptor
     lpVtbl : IDvbParentalRatingDescriptorVTbl*
   end
@@ -18344,8 +18344,8 @@ lib LibWin32
     get_record_frequency : Proc(IIsdbTerrestrialDeliverySystemDescriptor*, UInt8, UInt32*, HRESULT)
   end
 
-  IIsdbTerrestrialDeliverySystemDescriptor_GUID = LibC::GUID.new("39fae0a6-d151-44dd-a28a-765de5991670")
-  CLSID_IIsdbTerrestrialDeliverySystemDescriptor = "39fae0a6-d151-44dd-a28a-765de5991670"
+  IIsdbTerrestrialDeliverySystemDescriptor_GUID = "39fae0a6-d151-44dd-a28a-765de5991670"
+  IID_IIsdbTerrestrialDeliverySystemDescriptor = LibC::GUID.new(0x39fae0a6_u32, 0xd151_u16, 0x44dd_u16, StaticArray[0xa2_u8, 0x8a_u8, 0x76_u8, 0x5d_u8, 0xe5_u8, 0x99_u8, 0x16_u8, 0x70_u8])
   struct IIsdbTerrestrialDeliverySystemDescriptor
     lpVtbl : IIsdbTerrestrialDeliverySystemDescriptorVTbl*
   end
@@ -18364,8 +18364,8 @@ lib LibWin32
     get_record_service_id_by_index : Proc(IIsdbTSInformationDescriptor*, UInt8, UInt8, UInt16*, HRESULT)
   end
 
-  IIsdbTSInformationDescriptor_GUID = LibC::GUID.new("d7ad183e-38f5-4210-b55f-ec8d601bbd47")
-  CLSID_IIsdbTSInformationDescriptor = "d7ad183e-38f5-4210-b55f-ec8d601bbd47"
+  IIsdbTSInformationDescriptor_GUID = "d7ad183e-38f5-4210-b55f-ec8d601bbd47"
+  IID_IIsdbTSInformationDescriptor = LibC::GUID.new(0xd7ad183e_u32, 0x38f5_u16, 0x4210_u16, StaticArray[0xb5_u8, 0x5f_u8, 0xec_u8, 0x8d_u8, 0x60_u8, 0x1b_u8, 0xbd_u8, 0x47_u8])
   struct IIsdbTSInformationDescriptor
     lpVtbl : IIsdbTSInformationDescriptorVTbl*
   end
@@ -18381,8 +18381,8 @@ lib LibWin32
     get_record_copy_control : Proc(IIsdbDigitalCopyControlDescriptor*, UInt8, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
   end
 
-  IIsdbDigitalCopyControlDescriptor_GUID = LibC::GUID.new("1a28417e-266a-4bb8-a4bd-d782bcfb8161")
-  CLSID_IIsdbDigitalCopyControlDescriptor = "1a28417e-266a-4bb8-a4bd-d782bcfb8161"
+  IIsdbDigitalCopyControlDescriptor_GUID = "1a28417e-266a-4bb8-a4bd-d782bcfb8161"
+  IID_IIsdbDigitalCopyControlDescriptor = LibC::GUID.new(0x1a28417e_u32, 0x266a_u16, 0x4bb8_u16, StaticArray[0xa4_u8, 0xbd_u8, 0xd7_u8, 0x82_u8, 0xbc_u8, 0xfb_u8, 0x81_u8, 0x61_u8])
   struct IIsdbDigitalCopyControlDescriptor
     lpVtbl : IIsdbDigitalCopyControlDescriptorVTbl*
   end
@@ -18407,8 +18407,8 @@ lib LibWin32
     get_text_w : Proc(IIsdbAudioComponentDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IIsdbAudioComponentDescriptor_GUID = LibC::GUID.new("679d2002-2425-4be4-a4c7-d6632a574f4d")
-  CLSID_IIsdbAudioComponentDescriptor = "679d2002-2425-4be4-a4c7-d6632a574f4d"
+  IIsdbAudioComponentDescriptor_GUID = "679d2002-2425-4be4-a4c7-d6632a574f4d"
+  IID_IIsdbAudioComponentDescriptor = LibC::GUID.new(0x679d2002_u32, 0x2425_u16, 0x4be4_u16, StaticArray[0xa4_u8, 0xc7_u8, 0xd6_u8, 0x63_u8, 0x2a_u8, 0x57_u8, 0x4f_u8, 0x4d_u8])
   struct IIsdbAudioComponentDescriptor
     lpVtbl : IIsdbAudioComponentDescriptorVTbl*
   end
@@ -18429,8 +18429,8 @@ lib LibWin32
     get_text_w : Proc(IIsdbDataContentDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IIsdbDataContentDescriptor_GUID = LibC::GUID.new("a428100a-e646-4bd6-aa14-6087bdc08cd5")
-  CLSID_IIsdbDataContentDescriptor = "a428100a-e646-4bd6-aa14-6087bdc08cd5"
+  IIsdbDataContentDescriptor_GUID = "a428100a-e646-4bd6-aa14-6087bdc08cd5"
+  IID_IIsdbDataContentDescriptor = LibC::GUID.new(0xa428100a_u32, 0xe646_u16, 0x4bd6_u16, StaticArray[0xaa_u8, 0x14_u8, 0x60_u8, 0x87_u8, 0xbd_u8, 0xc0_u8, 0x8c_u8, 0xd5_u8])
   struct IIsdbDataContentDescriptor
     lpVtbl : IIsdbDataContentDescriptorVTbl*
   end
@@ -18450,8 +18450,8 @@ lib LibWin32
     get_fee_name_w : Proc(IIsdbCAContractInformationDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IIsdbCAContractInformationDescriptor_GUID = LibC::GUID.new("08e18b25-a28f-4e92-821e-4fced5cc2291")
-  CLSID_IIsdbCAContractInformationDescriptor = "08e18b25-a28f-4e92-821e-4fced5cc2291"
+  IIsdbCAContractInformationDescriptor_GUID = "08e18b25-a28f-4e92-821e-4fced5cc2291"
+  IID_IIsdbCAContractInformationDescriptor = LibC::GUID.new(0x8e18b25_u32, 0xa28f_u16, 0x4e92_u16, StaticArray[0x82_u8, 0x1e_u8, 0x4f_u8, 0xce_u8, 0xd5_u8, 0xcc_u8, 0x22_u8, 0x91_u8])
   struct IIsdbCAContractInformationDescriptor
     lpVtbl : IIsdbCAContractInformationDescriptorVTbl*
   end
@@ -18469,8 +18469,8 @@ lib LibWin32
     get_ref_record_event : Proc(IIsdbEventGroupDescriptor*, UInt8, UInt16*, UInt16*, UInt16*, UInt16*, HRESULT)
   end
 
-  IIsdbEventGroupDescriptor_GUID = LibC::GUID.new("94b06780-2e2a-44dc-a966-cc56fdabc6c2")
-  CLSID_IIsdbEventGroupDescriptor = "94b06780-2e2a-44dc-a966-cc56fdabc6c2"
+  IIsdbEventGroupDescriptor_GUID = "94b06780-2e2a-44dc-a966-cc56fdabc6c2"
+  IID_IIsdbEventGroupDescriptor = LibC::GUID.new(0x94b06780_u32, 0x2e2a_u16, 0x44dc_u16, StaticArray[0xa9_u8, 0x66_u8, 0xcc_u8, 0x56_u8, 0xfd_u8, 0xab_u8, 0xc6_u8, 0xc2_u8])
   struct IIsdbEventGroupDescriptor
     lpVtbl : IIsdbEventGroupDescriptorVTbl*
   end
@@ -18492,8 +18492,8 @@ lib LibWin32
     get_record_text_w : Proc(IIsdbComponentGroupDescriptor*, UInt8, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IIsdbComponentGroupDescriptor_GUID = LibC::GUID.new("a494f17f-c592-47d8-8943-64c9a34be7b9")
-  CLSID_IIsdbComponentGroupDescriptor = "a494f17f-c592-47d8-8943-64c9a34be7b9"
+  IIsdbComponentGroupDescriptor_GUID = "a494f17f-c592-47d8-8943-64c9a34be7b9"
+  IID_IIsdbComponentGroupDescriptor = LibC::GUID.new(0xa494f17f_u32, 0xc592_u16, 0x47d8_u16, StaticArray[0x89_u8, 0x43_u8, 0x64_u8, 0xc9_u8, 0xa3_u8, 0x4b_u8, 0xe7_u8, 0xb9_u8])
   struct IIsdbComponentGroupDescriptor
     lpVtbl : IIsdbComponentGroupDescriptorVTbl*
   end
@@ -18513,8 +18513,8 @@ lib LibWin32
     get_series_name_w : Proc(IIsdbSeriesDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IIsdbSeriesDescriptor_GUID = LibC::GUID.new("07ef6370-1660-4f26-87fc-614adab24b11")
-  CLSID_IIsdbSeriesDescriptor = "07ef6370-1660-4f26-87fc-614adab24b11"
+  IIsdbSeriesDescriptor_GUID = "07ef6370-1660-4f26-87fc-614adab24b11"
+  IID_IIsdbSeriesDescriptor = LibC::GUID.new(0x7ef6370_u32, 0x1660_u16, 0x4f26_u16, StaticArray[0x87_u8, 0xfc_u8, 0x61_u8, 0x4a_u8, 0xda_u8, 0xb2_u8, 0x4b_u8, 0x11_u8])
   struct IIsdbSeriesDescriptor
     lpVtbl : IIsdbSeriesDescriptorVTbl*
   end
@@ -18542,8 +18542,8 @@ lib LibWin32
     get_text_w : Proc(IIsdbDownloadContentDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IIsdbDownloadContentDescriptor_GUID = LibC::GUID.new("5298661e-cb88-4f5f-a1de-5f440c185b92")
-  CLSID_IIsdbDownloadContentDescriptor = "5298661e-cb88-4f5f-a1de-5f440c185b92"
+  IIsdbDownloadContentDescriptor_GUID = "5298661e-cb88-4f5f-a1de-5f440c185b92"
+  IID_IIsdbDownloadContentDescriptor = LibC::GUID.new(0x5298661e_u32, 0xcb88_u16, 0x4f5f_u16, StaticArray[0xa1_u8, 0xde_u8, 0x5f_u8, 0x44_u8, 0xc_u8, 0x18_u8, 0x5b_u8, 0x92_u8])
   struct IIsdbDownloadContentDescriptor
     lpVtbl : IIsdbDownloadContentDescriptorVTbl*
   end
@@ -18561,8 +18561,8 @@ lib LibWin32
     get_logo_char_w : Proc(IIsdbLogoTransmissionDescriptor*, DVB_STRCONV_MODE, UInt8**, HRESULT)
   end
 
-  IIsdbLogoTransmissionDescriptor_GUID = LibC::GUID.new("e0103f49-4ae1-4f07-9098-756db1fa88cd")
-  CLSID_IIsdbLogoTransmissionDescriptor = "e0103f49-4ae1-4f07-9098-756db1fa88cd"
+  IIsdbLogoTransmissionDescriptor_GUID = "e0103f49-4ae1-4f07-9098-756db1fa88cd"
+  IID_IIsdbLogoTransmissionDescriptor = LibC::GUID.new(0xe0103f49_u32, 0x4ae1_u16, 0x4f07_u16, StaticArray[0x90_u8, 0x98_u8, 0x75_u8, 0x6d_u8, 0xb1_u8, 0xfa_u8, 0x88_u8, 0xcd_u8])
   struct IIsdbLogoTransmissionDescriptor
     lpVtbl : IIsdbLogoTransmissionDescriptorVTbl*
   end
@@ -18581,8 +18581,8 @@ lib LibWin32
     get_table_description_bytes : Proc(IIsdbSIParameterDescriptor*, UInt8, UInt8*, UInt8*, HRESULT)
   end
 
-  IIsdbSIParameterDescriptor_GUID = LibC::GUID.new("f837dc36-867c-426a-9111-f62093951a45")
-  CLSID_IIsdbSIParameterDescriptor = "f837dc36-867c-426a-9111-f62093951a45"
+  IIsdbSIParameterDescriptor_GUID = "f837dc36-867c-426a-9111-f62093951a45"
+  IID_IIsdbSIParameterDescriptor = LibC::GUID.new(0xf837dc36_u32, 0x867c_u16, 0x426a_u16, StaticArray[0x91_u8, 0x11_u8, 0xf6_u8, 0x20_u8, 0x93_u8, 0x95_u8, 0x1a_u8, 0x45_u8])
   struct IIsdbSIParameterDescriptor
     lpVtbl : IIsdbSIParameterDescriptorVTbl*
   end
@@ -18600,8 +18600,8 @@ lib LibWin32
     get_area_code : Proc(IIsdbEmergencyInformationDescriptor*, UInt8, UInt16**, UInt8*, HRESULT)
   end
 
-  IIsdbEmergencyInformationDescriptor_GUID = LibC::GUID.new("ba6fa681-b973-4da1-9207-ac3e7f0341eb")
-  CLSID_IIsdbEmergencyInformationDescriptor = "ba6fa681-b973-4da1-9207-ac3e7f0341eb"
+  IIsdbEmergencyInformationDescriptor_GUID = "ba6fa681-b973-4da1-9207-ac3e7f0341eb"
+  IID_IIsdbEmergencyInformationDescriptor = LibC::GUID.new(0xba6fa681_u32, 0xb973_u16, 0x4da1_u16, StaticArray[0x92_u8, 0x7_u8, 0xac_u8, 0x3e_u8, 0x7f_u8, 0x3_u8, 0x41_u8, 0xeb_u8])
   struct IIsdbEmergencyInformationDescriptor
     lpVtbl : IIsdbEmergencyInformationDescriptorVTbl*
   end
@@ -18618,8 +18618,8 @@ lib LibWin32
     get_private_data_bytes : Proc(IIsdbCADescriptor*, UInt8*, UInt8*, HRESULT)
   end
 
-  IIsdbCADescriptor_GUID = LibC::GUID.new("0570aa47-52bc-42ae-8ca5-969f41e81aea")
-  CLSID_IIsdbCADescriptor = "0570aa47-52bc-42ae-8ca5-969f41e81aea"
+  IIsdbCADescriptor_GUID = "0570aa47-52bc-42ae-8ca5-969f41e81aea"
+  IID_IIsdbCADescriptor = LibC::GUID.new(0x570aa47_u32, 0x52bc_u16, 0x42ae_u16, StaticArray[0x8c_u8, 0xa5_u8, 0x96_u8, 0x9f_u8, 0x41_u8, 0xe8_u8, 0x1a_u8, 0xea_u8])
   struct IIsdbCADescriptor
     lpVtbl : IIsdbCADescriptorVTbl*
   end
@@ -18636,8 +18636,8 @@ lib LibWin32
     get_service_ids : Proc(IIsdbCAServiceDescriptor*, UInt8*, UInt16*, HRESULT)
   end
 
-  IIsdbCAServiceDescriptor_GUID = LibC::GUID.new("39cbeb97-ff0b-42a7-9ab9-7b9cfe70a77a")
-  CLSID_IIsdbCAServiceDescriptor = "39cbeb97-ff0b-42a7-9ab9-7b9cfe70a77a"
+  IIsdbCAServiceDescriptor_GUID = "39cbeb97-ff0b-42a7-9ab9-7b9cfe70a77a"
+  IID_IIsdbCAServiceDescriptor = LibC::GUID.new(0x39cbeb97_u32, 0xff0b_u16, 0x42a7_u16, StaticArray[0x9a_u8, 0xb9_u8, 0x7b_u8, 0x9c_u8, 0xfe_u8, 0x70_u8, 0xa7_u8, 0x7a_u8])
   struct IIsdbCAServiceDescriptor
     lpVtbl : IIsdbCAServiceDescriptorVTbl*
   end
@@ -18654,8 +18654,8 @@ lib LibWin32
     get_reference_pid : Proc(IIsdbHierarchicalTransmissionDescriptor*, UInt16*, HRESULT)
   end
 
-  IIsdbHierarchicalTransmissionDescriptor_GUID = LibC::GUID.new("b7b3ae90-ee0b-446d-8769-f7e2aa266aa6")
-  CLSID_IIsdbHierarchicalTransmissionDescriptor = "b7b3ae90-ee0b-446d-8769-f7e2aa266aa6"
+  IIsdbHierarchicalTransmissionDescriptor_GUID = "b7b3ae90-ee0b-446d-8769-f7e2aa266aa6"
+  IID_IIsdbHierarchicalTransmissionDescriptor = LibC::GUID.new(0xb7b3ae90_u32, 0xee0b_u16, 0x446d_u16, StaticArray[0x87_u8, 0x69_u8, 0xf7_u8, 0xe2_u8, 0xaa_u8, 0x26_u8, 0x6a_u8, 0xa6_u8])
   struct IIsdbHierarchicalTransmissionDescriptor
     lpVtbl : IIsdbHierarchicalTransmissionDescriptorVTbl*
   end
@@ -18669,8 +18669,8 @@ lib LibWin32
     get_services : Proc(IPBDASiParser*, UInt32, UInt8*, IPBDA_Services*, HRESULT)
   end
 
-  IPBDASiParser_GUID = LibC::GUID.new("9de49a74-aba2-4a18-93e1-21f17f95c3c3")
-  CLSID_IPBDASiParser = "9de49a74-aba2-4a18-93e1-21f17f95c3c3"
+  IPBDASiParser_GUID = "9de49a74-aba2-4a18-93e1-21f17f95c3c3"
+  IID_IPBDASiParser = LibC::GUID.new(0x9de49a74_u32, 0xaba2_u16, 0x4a18_u16, StaticArray[0x93_u8, 0xe1_u8, 0x21_u8, 0xf1_u8, 0x7f_u8, 0x95_u8, 0xc3_u8, 0xc3_u8])
   struct IPBDASiParser
     lpVtbl : IPBDASiParserVTbl*
   end
@@ -18692,8 +18692,8 @@ lib LibWin32
     get_record_descriptor_by_tag : Proc(IPBDA_EIT*, UInt32, UInt8, UInt32*, IGenericDescriptor*, HRESULT)
   end
 
-  IPBDA_EIT_GUID = LibC::GUID.new("a35f2dea-098f-4ebd-984c-2bd4c3c8ce0a")
-  CLSID_IPBDA_EIT = "a35f2dea-098f-4ebd-984c-2bd4c3c8ce0a"
+  IPBDA_EIT_GUID = "a35f2dea-098f-4ebd-984c-2bd4c3c8ce0a"
+  IID_IPBDA_EIT = LibC::GUID.new(0xa35f2dea_u32, 0x98f_u16, 0x4ebd_u16, StaticArray[0x98_u8, 0x4c_u8, 0x2b_u8, 0xd4_u8, 0xc3_u8, 0xc8_u8, 0xce_u8, 0xa_u8])
   struct IPBDA_EIT
     lpVtbl : IPBDA_EITVTbl*
   end
@@ -18707,8 +18707,8 @@ lib LibWin32
     get_record_by_index : Proc(IPBDA_Services*, UInt32, UInt64*, HRESULT)
   end
 
-  IPBDA_Services_GUID = LibC::GUID.new("944eab37-eed4-4850-afd2-77e7efeb4427")
-  CLSID_IPBDA_Services = "944eab37-eed4-4850-afd2-77e7efeb4427"
+  IPBDA_Services_GUID = "944eab37-eed4-4850-afd2-77e7efeb4427"
+  IID_IPBDA_Services = LibC::GUID.new(0x944eab37_u32, 0xeed4_u16, 0x4850_u16, StaticArray[0xaf_u8, 0xd2_u8, 0x77_u8, 0xe7_u8, 0xef_u8, 0xeb_u8, 0x44_u8, 0x27_u8])
   struct IPBDA_Services
     lpVtbl : IPBDA_ServicesVTbl*
   end
@@ -18722,8 +18722,8 @@ lib LibWin32
     get_token : Proc(IPBDAEntitlementDescriptor*, UInt8**, UInt32*, HRESULT)
   end
 
-  IPBDAEntitlementDescriptor_GUID = LibC::GUID.new("22632497-0de3-4587-aadc-d8d99017e760")
-  CLSID_IPBDAEntitlementDescriptor = "22632497-0de3-4587-aadc-d8d99017e760"
+  IPBDAEntitlementDescriptor_GUID = "22632497-0de3-4587-aadc-d8d99017e760"
+  IID_IPBDAEntitlementDescriptor = LibC::GUID.new(0x22632497_u32, 0xde3_u16, 0x4587_u16, StaticArray[0xaa_u8, 0xdc_u8, 0xd8_u8, 0xd9_u8, 0x90_u8, 0x17_u8, 0xe7_u8, 0x60_u8])
   struct IPBDAEntitlementDescriptor
     lpVtbl : IPBDAEntitlementDescriptorVTbl*
   end
@@ -18737,8 +18737,8 @@ lib LibWin32
     get_attribute_payload : Proc(IPBDAAttributesDescriptor*, UInt8**, UInt32*, HRESULT)
   end
 
-  IPBDAAttributesDescriptor_GUID = LibC::GUID.new("313b3620-3263-45a6-9533-968befbeac03")
-  CLSID_IPBDAAttributesDescriptor = "313b3620-3263-45a6-9533-968befbeac03"
+  IPBDAAttributesDescriptor_GUID = "313b3620-3263-45a6-9533-968befbeac03"
+  IID_IPBDAAttributesDescriptor = LibC::GUID.new(0x313b3620_u32, 0x3263_u16, 0x45a6_u16, StaticArray[0x95_u8, 0x33_u8, 0x96_u8, 0x8b_u8, 0xef_u8, 0xbe_u8, 0xac_u8, 0x3_u8])
   struct IPBDAAttributesDescriptor
     lpVtbl : IPBDAAttributesDescriptorVTbl*
   end
@@ -18751,8 +18751,8 @@ lib LibWin32
     unregister_tif : Proc(IBDA_TIF_REGISTRATION*, UInt32, HRESULT)
   end
 
-  IBDA_TIF_REGISTRATION_GUID = LibC::GUID.new("dfef4a68-ee61-415f-9ccb-cd95f2f98a3a")
-  CLSID_IBDA_TIF_REGISTRATION = "dfef4a68-ee61-415f-9ccb-cd95f2f98a3a"
+  IBDA_TIF_REGISTRATION_GUID = "dfef4a68-ee61-415f-9ccb-cd95f2f98a3a"
+  IID_IBDA_TIF_REGISTRATION = LibC::GUID.new(0xdfef4a68_u32, 0xee61_u16, 0x415f_u16, StaticArray[0x9c_u8, 0xcb_u8, 0xcd_u8, 0x95_u8, 0xf2_u8, 0xf9_u8, 0x8a_u8, 0x3a_u8])
   struct IBDA_TIF_REGISTRATION
     lpVtbl : IBDA_TIF_REGISTRATIONVTbl*
   end
@@ -18769,8 +18769,8 @@ lib LibWin32
     get_pi_ds : Proc(IMPEG2_TIF_CONTROL*, UInt32*, UInt32*, HRESULT)
   end
 
-  IMPEG2_TIF_CONTROL_GUID = LibC::GUID.new("f9bac2f9-4149-4916-b2ef-faa202326862")
-  CLSID_IMPEG2_TIF_CONTROL = "f9bac2f9-4149-4916-b2ef-faa202326862"
+  IMPEG2_TIF_CONTROL_GUID = "f9bac2f9-4149-4916-b2ef-faa202326862"
+  IID_IMPEG2_TIF_CONTROL = LibC::GUID.new(0xf9bac2f9_u32, 0x4149_u16, 0x4916_u16, StaticArray[0xb2_u8, 0xef_u8, 0xfa_u8, 0xa2_u8, 0x2_u8, 0x32_u8, 0x68_u8, 0x62_u8])
   struct IMPEG2_TIF_CONTROL
     lpVtbl : IMPEG2_TIF_CONTROLVTbl*
   end
@@ -18788,8 +18788,8 @@ lib LibWin32
     get_previous_locator : Proc(ITuneRequestInfo*, ITuneRequest, ITuneRequest*, HRESULT)
   end
 
-  ITuneRequestInfo_GUID = LibC::GUID.new("a3b152df-7a90-4218-ac54-9830bee8c0b6")
-  CLSID_ITuneRequestInfo = "a3b152df-7a90-4218-ac54-9830bee8c0b6"
+  ITuneRequestInfo_GUID = "a3b152df-7a90-4218-ac54-9830bee8c0b6"
+  IID_ITuneRequestInfo = LibC::GUID.new(0xa3b152df_u32, 0x7a90_u16, 0x4218_u16, StaticArray[0xac_u8, 0x54_u8, 0x98_u8, 0x30_u8, 0xbe_u8, 0xe8_u8, 0xc0_u8, 0xb6_u8])
   struct ITuneRequestInfo
     lpVtbl : ITuneRequestInfoVTbl*
   end
@@ -18808,8 +18808,8 @@ lib LibWin32
     create_component_list_ex : Proc(ITuneRequestInfoEx*, ITuneRequest, IUnknown*, HRESULT)
   end
 
-  ITuneRequestInfoEx_GUID = LibC::GUID.new("ee957c52-b0d0-4e78-8dd1-b87a08bfd893")
-  CLSID_ITuneRequestInfoEx = "ee957c52-b0d0-4e78-8dd1-b87a08bfd893"
+  ITuneRequestInfoEx_GUID = "ee957c52-b0d0-4e78-8dd1-b87a08bfd893"
+  IID_ITuneRequestInfoEx = LibC::GUID.new(0xee957c52_u32, 0xb0d0_u16, 0x4e78_u16, StaticArray[0x8d_u8, 0xd1_u8, 0xb8_u8, 0x7a_u8, 0x8_u8, 0xbf_u8, 0xd8_u8, 0x93_u8])
   struct ITuneRequestInfoEx
     lpVtbl : ITuneRequestInfoExVTbl*
   end
@@ -18821,8 +18821,8 @@ lib LibWin32
     si_object_event : Proc(ISIInbandEPGEvent*, IDVB_EIT2, UInt32, UInt32, HRESULT)
   end
 
-  ISIInbandEPGEvent_GUID = LibC::GUID.new("7e47913a-5a89-423d-9a2b-e15168858934")
-  CLSID_ISIInbandEPGEvent = "7e47913a-5a89-423d-9a2b-e15168858934"
+  ISIInbandEPGEvent_GUID = "7e47913a-5a89-423d-9a2b-e15168858934"
+  IID_ISIInbandEPGEvent = LibC::GUID.new(0x7e47913a_u32, 0x5a89_u16, 0x423d_u16, StaticArray[0x9a_u8, 0x2b_u8, 0xe1_u8, 0x51_u8, 0x68_u8, 0x85_u8, 0x89_u8, 0x34_u8])
   struct ISIInbandEPGEvent
     lpVtbl : ISIInbandEPGEventVTbl*
   end
@@ -18836,8 +18836,8 @@ lib LibWin32
     is_siepg_scan_running : Proc(ISIInbandEPG*, LibC::BOOL*, HRESULT)
   end
 
-  ISIInbandEPG_GUID = LibC::GUID.new("f90ad9d0-b854-4b68-9cc1-b2cc96119d85")
-  CLSID_ISIInbandEPG = "f90ad9d0-b854-4b68-9cc1-b2cc96119d85"
+  ISIInbandEPG_GUID = "f90ad9d0-b854-4b68-9cc1-b2cc96119d85"
+  IID_ISIInbandEPG = LibC::GUID.new(0xf90ad9d0_u32, 0xb854_u16, 0x4b68_u16, StaticArray[0x9c_u8, 0xc1_u8, 0xb2_u8, 0xcc_u8, 0x96_u8, 0x11_u8, 0x9d_u8, 0x85_u8])
   struct ISIInbandEPG
     lpVtbl : ISIInbandEPGVTbl*
   end
@@ -18855,8 +18855,8 @@ lib LibWin32
     schedule_deleted : Proc(IGuideDataEvent*, VARIANT, HRESULT)
   end
 
-  IGuideDataEvent_GUID = LibC::GUID.new("efda0c80-f395-42c3-9b3c-56b37dec7bb7")
-  CLSID_IGuideDataEvent = "efda0c80-f395-42c3-9b3c-56b37dec7bb7"
+  IGuideDataEvent_GUID = "efda0c80-f395-42c3-9b3c-56b37dec7bb7"
+  IID_IGuideDataEvent = LibC::GUID.new(0xefda0c80_u32, 0xf395_u16, 0x42c3_u16, StaticArray[0x9b_u8, 0x3c_u8, 0x56_u8, 0xb3_u8, 0x7d_u8, 0xec_u8, 0x7b_u8, 0xb7_u8])
   struct IGuideDataEvent
     lpVtbl : IGuideDataEventVTbl*
   end
@@ -18870,8 +18870,8 @@ lib LibWin32
     get_value : Proc(IGuideDataProperty*, VARIANT*, HRESULT)
   end
 
-  IGuideDataProperty_GUID = LibC::GUID.new("88ec5e58-bb73-41d6-99ce-66c524b8b591")
-  CLSID_IGuideDataProperty = "88ec5e58-bb73-41d6-99ce-66c524b8b591"
+  IGuideDataProperty_GUID = "88ec5e58-bb73-41d6-99ce-66c524b8b591"
+  IID_IGuideDataProperty = LibC::GUID.new(0x88ec5e58_u32, 0xbb73_u16, 0x41d6_u16, StaticArray[0x99_u8, 0xce_u8, 0x66_u8, 0xc5_u8, 0x24_u8, 0xb8_u8, 0xb5_u8, 0x91_u8])
   struct IGuideDataProperty
     lpVtbl : IGuideDataPropertyVTbl*
   end
@@ -18886,8 +18886,8 @@ lib LibWin32
     clone : Proc(IEnumGuideDataProperties*, IEnumGuideDataProperties*, HRESULT)
   end
 
-  IEnumGuideDataProperties_GUID = LibC::GUID.new("ae44423b-4571-475c-ad2c-f40a771d80ef")
-  CLSID_IEnumGuideDataProperties = "ae44423b-4571-475c-ad2c-f40a771d80ef"
+  IEnumGuideDataProperties_GUID = "ae44423b-4571-475c-ad2c-f40a771d80ef"
+  IID_IEnumGuideDataProperties = LibC::GUID.new(0xae44423b_u32, 0x4571_u16, 0x475c_u16, StaticArray[0xad_u8, 0x2c_u8, 0xf4_u8, 0xa_u8, 0x77_u8, 0x1d_u8, 0x80_u8, 0xef_u8])
   struct IEnumGuideDataProperties
     lpVtbl : IEnumGuideDataPropertiesVTbl*
   end
@@ -18902,8 +18902,8 @@ lib LibWin32
     clone : Proc(IEnumTuneRequests*, IEnumTuneRequests*, HRESULT)
   end
 
-  IEnumTuneRequests_GUID = LibC::GUID.new("1993299c-ced6-4788-87a3-420067dce0c7")
-  CLSID_IEnumTuneRequests = "1993299c-ced6-4788-87a3-420067dce0c7"
+  IEnumTuneRequests_GUID = "1993299c-ced6-4788-87a3-420067dce0c7"
+  IID_IEnumTuneRequests = LibC::GUID.new(0x1993299c_u32, 0xced6_u16, 0x4788_u16, StaticArray[0x87_u8, 0xa3_u8, 0x42_u8, 0x0_u8, 0x67_u8, 0xdc_u8, 0xe0_u8, 0xc7_u8])
   struct IEnumTuneRequests
     lpVtbl : IEnumTuneRequestsVTbl*
   end
@@ -18920,8 +18920,8 @@ lib LibWin32
     get_schedule_entry_properties : Proc(IGuideData*, VARIANT, IEnumGuideDataProperties*, HRESULT)
   end
 
-  IGuideData_GUID = LibC::GUID.new("61571138-5b01-43cd-aeaf-60b784a0bf93")
-  CLSID_IGuideData = "61571138-5b01-43cd-aeaf-60b784a0bf93"
+  IGuideData_GUID = "61571138-5b01-43cd-aeaf-60b784a0bf93"
+  IID_IGuideData = LibC::GUID.new(0x61571138_u32, 0x5b01_u16, 0x43cd_u16, StaticArray[0xae_u8, 0xaf_u8, 0x60_u8, 0xb7_u8, 0x84_u8, 0xa0_u8, 0xbf_u8, 0x93_u8])
   struct IGuideData
     lpVtbl : IGuideDataVTbl*
   end
@@ -18934,8 +18934,8 @@ lib LibWin32
     terminate : Proc(IGuideDataLoader*, HRESULT)
   end
 
-  IGuideDataLoader_GUID = LibC::GUID.new("4764ff7c-fa95-4525-af4d-d32236db9e38")
-  CLSID_IGuideDataLoader = "4764ff7c-fa95-4525-af4d-d32236db9e38"
+  IGuideDataLoader_GUID = "4764ff7c-fa95-4525-af4d-d32236db9e38"
+  IID_IGuideDataLoader = LibC::GUID.new(0x4764ff7c_u32, 0xfa95_u16, 0x4525_u16, StaticArray[0xaf_u8, 0x4d_u8, 0xd3_u8, 0x22_u8, 0x36_u8, 0xdb_u8, 0x9e_u8, 0x38_u8])
   struct IGuideDataLoader
     lpVtbl : IGuideDataLoaderVTbl*
   end

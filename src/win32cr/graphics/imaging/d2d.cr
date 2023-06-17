@@ -24,8 +24,8 @@ lib LibWin32
     write_thumbnail : Proc(IWICImageEncoder*, ID2D1Image, IWICBitmapEncoder, WICImageParameters*, HRESULT)
   end
 
-  IWICImageEncoder_GUID = LibC::GUID.new("04c75bf8-3ce1-473b-acc5-3cc4f5e94999")
-  CLSID_IWICImageEncoder = "04c75bf8-3ce1-473b-acc5-3cc4f5e94999"
+  IWICImageEncoder_GUID = "04c75bf8-3ce1-473b-acc5-3cc4f5e94999"
+  IID_IWICImageEncoder = LibC::GUID.new(0x4c75bf8_u32, 0x3ce1_u16, 0x473b_u16, StaticArray[0xac_u8, 0xc5_u8, 0x3c_u8, 0xc4_u8, 0xf5_u8, 0xe9_u8, 0x49_u8, 0x99_u8])
   struct IWICImageEncoder
     lpVtbl : IWICImageEncoderVTbl*
   end
@@ -62,8 +62,8 @@ lib LibWin32
     create_image_encoder : Proc(IWICImagingFactory2*, ID2D1Device, IWICImageEncoder*, HRESULT)
   end
 
-  IWICImagingFactory2_GUID = LibC::GUID.new("7b816b45-1996-4476-b132-de9e247c8af0")
-  CLSID_IWICImagingFactory2 = "7b816b45-1996-4476-b132-de9e247c8af0"
+  IWICImagingFactory2_GUID = "7b816b45-1996-4476-b132-de9e247c8af0"
+  IID_IWICImagingFactory2 = LibC::GUID.new(0x7b816b45_u32, 0x1996_u16, 0x4476_u16, StaticArray[0xb1_u8, 0x32_u8, 0xde_u8, 0x9e_u8, 0x24_u8, 0x7c_u8, 0x8a_u8, 0xf0_u8])
   struct IWICImagingFactory2
     lpVtbl : IWICImagingFactory2VTbl*
   end

@@ -87,8 +87,8 @@ lib LibWin32
     get_buffer_size : Proc(IDxcBlob*, LibC::UINT_PTR)
   end
 
-  IDxcBlob_GUID = LibC::GUID.new("8ba5fb08-5195-40e2-ac58-0d989c3a0102")
-  CLSID_IDxcBlob = "8ba5fb08-5195-40e2-ac58-0d989c3a0102"
+  IDxcBlob_GUID = "8ba5fb08-5195-40e2-ac58-0d989c3a0102"
+  IID_IDxcBlob = LibC::GUID.new(0x8ba5fb08_u32, 0x5195_u16, 0x40e2_u16, StaticArray[0xac_u8, 0x58_u8, 0xd_u8, 0x98_u8, 0x9c_u8, 0x3a_u8, 0x1_u8, 0x2_u8])
   struct IDxcBlob
     lpVtbl : IDxcBlobVTbl*
   end
@@ -102,8 +102,8 @@ lib LibWin32
     get_encoding : Proc(IDxcBlobEncoding*, LibC::BOOL*, DXC_CP*, HRESULT)
   end
 
-  IDxcBlobEncoding_GUID = LibC::GUID.new("7241d424-2646-4191-97c0-98e96e42fc68")
-  CLSID_IDxcBlobEncoding = "7241d424-2646-4191-97c0-98e96e42fc68"
+  IDxcBlobEncoding_GUID = "7241d424-2646-4191-97c0-98e96e42fc68"
+  IID_IDxcBlobEncoding = LibC::GUID.new(0x7241d424_u32, 0x2646_u16, 0x4191_u16, StaticArray[0x97_u8, 0xc0_u8, 0x98_u8, 0xe9_u8, 0x6e_u8, 0x42_u8, 0xfc_u8, 0x68_u8])
   struct IDxcBlobEncoding
     lpVtbl : IDxcBlobEncodingVTbl*
   end
@@ -119,8 +119,8 @@ lib LibWin32
     get_string_length : Proc(IDxcBlobUtf16*, LibC::UINT_PTR)
   end
 
-  IDxcBlobUtf16_GUID = LibC::GUID.new("a3f84eab-0faa-497e-a39c-ee6ed60b2d84")
-  CLSID_IDxcBlobUtf16 = "a3f84eab-0faa-497e-a39c-ee6ed60b2d84"
+  IDxcBlobUtf16_GUID = "a3f84eab-0faa-497e-a39c-ee6ed60b2d84"
+  IID_IDxcBlobUtf16 = LibC::GUID.new(0xa3f84eab_u32, 0xfaa_u16, 0x497e_u16, StaticArray[0xa3_u8, 0x9c_u8, 0xee_u8, 0x6e_u8, 0xd6_u8, 0xb_u8, 0x2d_u8, 0x84_u8])
   struct IDxcBlobUtf16
     lpVtbl : IDxcBlobUtf16VTbl*
   end
@@ -136,8 +136,8 @@ lib LibWin32
     get_string_length : Proc(IDxcBlobUtf8*, LibC::UINT_PTR)
   end
 
-  IDxcBlobUtf8_GUID = LibC::GUID.new("3da636c9-ba71-4024-a301-30cbf125305b")
-  CLSID_IDxcBlobUtf8 = "3da636c9-ba71-4024-a301-30cbf125305b"
+  IDxcBlobUtf8_GUID = "3da636c9-ba71-4024-a301-30cbf125305b"
+  IID_IDxcBlobUtf8 = LibC::GUID.new(0x3da636c9_u32, 0xba71_u16, 0x4024_u16, StaticArray[0xa3_u8, 0x1_u8, 0x30_u8, 0xcb_u8, 0xf1_u8, 0x25_u8, 0x30_u8, 0x5b_u8])
   struct IDxcBlobUtf8
     lpVtbl : IDxcBlobUtf8VTbl*
   end
@@ -149,8 +149,8 @@ lib LibWin32
     load_source : Proc(IDxcIncludeHandler*, LibC::LPWSTR, IDxcBlob*, HRESULT)
   end
 
-  IDxcIncludeHandler_GUID = LibC::GUID.new("7f61fc7d-950d-467f-b3e3-3c02fb49187c")
-  CLSID_IDxcIncludeHandler = "7f61fc7d-950d-467f-b3e3-3c02fb49187c"
+  IDxcIncludeHandler_GUID = "7f61fc7d-950d-467f-b3e3-3c02fb49187c"
+  IID_IDxcIncludeHandler = LibC::GUID.new(0x7f61fc7d_u32, 0x950d_u16, 0x467f_u16, StaticArray[0xb3_u8, 0xe3_u8, 0x3c_u8, 0x2_u8, 0xfb_u8, 0x49_u8, 0x18_u8, 0x7c_u8])
   struct IDxcIncludeHandler
     lpVtbl : IDxcIncludeHandlerVTbl*
   end
@@ -166,8 +166,8 @@ lib LibWin32
     add_defines : Proc(IDxcCompilerArgs*, DxcDefine*, UInt32, HRESULT)
   end
 
-  IDxcCompilerArgs_GUID = LibC::GUID.new("73effe2a-70dc-45f8-9690-eff64c02429d")
-  CLSID_IDxcCompilerArgs = "73effe2a-70dc-45f8-9690-eff64c02429d"
+  IDxcCompilerArgs_GUID = "73effe2a-70dc-45f8-9690-eff64c02429d"
+  IID_IDxcCompilerArgs = LibC::GUID.new(0x73effe2a_u32, 0x70dc_u16, 0x45f8_u16, StaticArray[0x96_u8, 0x90_u8, 0xef_u8, 0xf6_u8, 0x4c_u8, 0x2_u8, 0x42_u8, 0x9d_u8])
   struct IDxcCompilerArgs
     lpVtbl : IDxcCompilerArgsVTbl*
   end
@@ -188,8 +188,8 @@ lib LibWin32
     get_blob_as_utf16 : Proc(IDxcLibrary*, IDxcBlob, IDxcBlobEncoding*, HRESULT)
   end
 
-  IDxcLibrary_GUID = LibC::GUID.new("e5204dc7-d18c-4c3c-bdfb-851673980fe7")
-  CLSID_IDxcLibrary = "e5204dc7-d18c-4c3c-bdfb-851673980fe7"
+  IDxcLibrary_GUID = "e5204dc7-d18c-4c3c-bdfb-851673980fe7"
+  IID_IDxcLibrary = LibC::GUID.new(0xe5204dc7_u32, 0xd18c_u16, 0x4c3c_u16, StaticArray[0xbd_u8, 0xfb_u8, 0x85_u8, 0x16_u8, 0x73_u8, 0x98_u8, 0xf_u8, 0xe7_u8])
   struct IDxcLibrary
     lpVtbl : IDxcLibraryVTbl*
   end
@@ -203,8 +203,8 @@ lib LibWin32
     get_error_buffer : Proc(IDxcOperationResult*, IDxcBlobEncoding*, HRESULT)
   end
 
-  IDxcOperationResult_GUID = LibC::GUID.new("cedb484a-d4e9-445a-b991-ca21ca157dc2")
-  CLSID_IDxcOperationResult = "cedb484a-d4e9-445a-b991-ca21ca157dc2"
+  IDxcOperationResult_GUID = "cedb484a-d4e9-445a-b991-ca21ca157dc2"
+  IID_IDxcOperationResult = LibC::GUID.new(0xcedb484a_u32, 0xd4e9_u16, 0x445a_u16, StaticArray[0xb9_u8, 0x91_u8, 0xca_u8, 0x21_u8, 0xca_u8, 0x15_u8, 0x7d_u8, 0xc2_u8])
   struct IDxcOperationResult
     lpVtbl : IDxcOperationResultVTbl*
   end
@@ -218,8 +218,8 @@ lib LibWin32
     disassemble : Proc(IDxcCompiler*, IDxcBlob, IDxcBlobEncoding*, HRESULT)
   end
 
-  IDxcCompiler_GUID = LibC::GUID.new("8c210bf3-011f-4422-8d70-6f9acb8db617")
-  CLSID_IDxcCompiler = "8c210bf3-011f-4422-8d70-6f9acb8db617"
+  IDxcCompiler_GUID = "8c210bf3-011f-4422-8d70-6f9acb8db617"
+  IID_IDxcCompiler = LibC::GUID.new(0x8c210bf3_u32, 0x11f_u16, 0x4422_u16, StaticArray[0x8d_u8, 0x70_u8, 0x6f_u8, 0x9a_u8, 0xcb_u8, 0x8d_u8, 0xb6_u8, 0x17_u8])
   struct IDxcCompiler
     lpVtbl : IDxcCompilerVTbl*
   end
@@ -234,8 +234,8 @@ lib LibWin32
     compile_with_debug : Proc(IDxcCompiler2*, IDxcBlob, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, LibC::LPWSTR*, IDxcBlob*, HRESULT)
   end
 
-  IDxcCompiler2_GUID = LibC::GUID.new("a005a9d9-b8bb-4594-b5c9-0e633bec4d37")
-  CLSID_IDxcCompiler2 = "a005a9d9-b8bb-4594-b5c9-0e633bec4d37"
+  IDxcCompiler2_GUID = "a005a9d9-b8bb-4594-b5c9-0e633bec4d37"
+  IID_IDxcCompiler2 = LibC::GUID.new(0xa005a9d9_u32, 0xb8bb_u16, 0x4594_u16, StaticArray[0xb5_u8, 0xc9_u8, 0xe_u8, 0x63_u8, 0x3b_u8, 0xec_u8, 0x4d_u8, 0x37_u8])
   struct IDxcCompiler2
     lpVtbl : IDxcCompiler2VTbl*
   end
@@ -248,8 +248,8 @@ lib LibWin32
     link : Proc(IDxcLinker*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::LPWSTR*, UInt32, IDxcOperationResult*, HRESULT)
   end
 
-  IDxcLinker_GUID = LibC::GUID.new("f1b5be2a-62dd-4327-a1c2-42ac1e1e78e6")
-  CLSID_IDxcLinker = "f1b5be2a-62dd-4327-a1c2-42ac1e1e78e6"
+  IDxcLinker_GUID = "f1b5be2a-62dd-4327-a1c2-42ac1e1e78e6"
+  IID_IDxcLinker = LibC::GUID.new(0xf1b5be2a_u32, 0x62dd_u16, 0x4327_u16, StaticArray[0xa1_u8, 0xc2_u8, 0x42_u8, 0xac_u8, 0x1e_u8, 0x1e_u8, 0x78_u8, 0xe6_u8])
   struct IDxcLinker
     lpVtbl : IDxcLinkerVTbl*
   end
@@ -273,8 +273,8 @@ lib LibWin32
     get_pdb_contents : Proc(IDxcUtils*, IDxcBlob, IDxcBlob*, IDxcBlob*, HRESULT)
   end
 
-  IDxcUtils_GUID = LibC::GUID.new("4605c4cb-2019-492a-ada4-65f20bb7d67f")
-  CLSID_IDxcUtils = "4605c4cb-2019-492a-ada4-65f20bb7d67f"
+  IDxcUtils_GUID = "4605c4cb-2019-492a-ada4-65f20bb7d67f"
+  IID_IDxcUtils = LibC::GUID.new(0x4605c4cb_u32, 0x2019_u16, 0x492a_u16, StaticArray[0xad_u8, 0xa4_u8, 0x65_u8, 0xf2_u8, 0xb_u8, 0xb7_u8, 0xd6_u8, 0x7f_u8])
   struct IDxcUtils
     lpVtbl : IDxcUtilsVTbl*
   end
@@ -293,8 +293,8 @@ lib LibWin32
     primary_output : Proc(IDxcResult*, DXC_OUT_KIND)
   end
 
-  IDxcResult_GUID = LibC::GUID.new("58346cda-dde7-4497-9461-6f87af5e0659")
-  CLSID_IDxcResult = "58346cda-dde7-4497-9461-6f87af5e0659"
+  IDxcResult_GUID = "58346cda-dde7-4497-9461-6f87af5e0659"
+  IID_IDxcResult = LibC::GUID.new(0x58346cda_u32, 0xdde7_u16, 0x4497_u16, StaticArray[0x94_u8, 0x61_u8, 0x6f_u8, 0x87_u8, 0xaf_u8, 0x5e_u8, 0x6_u8, 0x59_u8])
   struct IDxcResult
     lpVtbl : IDxcResultVTbl*
   end
@@ -307,8 +307,8 @@ lib LibWin32
     get_output : Proc(IDxcExtraOutputs*, UInt32, Guid*, Void**, IDxcBlobUtf16*, IDxcBlobUtf16*, HRESULT)
   end
 
-  IDxcExtraOutputs_GUID = LibC::GUID.new("319b37a2-a5c2-494a-a5de-4801b2faf989")
-  CLSID_IDxcExtraOutputs = "319b37a2-a5c2-494a-a5de-4801b2faf989"
+  IDxcExtraOutputs_GUID = "319b37a2-a5c2-494a-a5de-4801b2faf989"
+  IID_IDxcExtraOutputs = LibC::GUID.new(0x319b37a2_u32, 0xa5c2_u16, 0x494a_u16, StaticArray[0xa5_u8, 0xde_u8, 0x48_u8, 0x1_u8, 0xb2_u8, 0xfa_u8, 0xf9_u8, 0x89_u8])
   struct IDxcExtraOutputs
     lpVtbl : IDxcExtraOutputsVTbl*
   end
@@ -321,8 +321,8 @@ lib LibWin32
     disassemble : Proc(IDxcCompiler3*, DxcBuffer*, Guid*, Void**, HRESULT)
   end
 
-  IDxcCompiler3_GUID = LibC::GUID.new("228b4687-5a6a-4730-900c-9702b2203f54")
-  CLSID_IDxcCompiler3 = "228b4687-5a6a-4730-900c-9702b2203f54"
+  IDxcCompiler3_GUID = "228b4687-5a6a-4730-900c-9702b2203f54"
+  IID_IDxcCompiler3 = LibC::GUID.new(0x228b4687_u32, 0x5a6a_u16, 0x4730_u16, StaticArray[0x90_u8, 0xc_u8, 0x97_u8, 0x2_u8, 0xb2_u8, 0x20_u8, 0x3f_u8, 0x54_u8])
   struct IDxcCompiler3
     lpVtbl : IDxcCompiler3VTbl*
   end
@@ -334,8 +334,8 @@ lib LibWin32
     validate : Proc(IDxcValidator*, IDxcBlob, UInt32, IDxcOperationResult*, HRESULT)
   end
 
-  IDxcValidator_GUID = LibC::GUID.new("a6e82bd2-1fd7-4826-9811-2857e797f49a")
-  CLSID_IDxcValidator = "a6e82bd2-1fd7-4826-9811-2857e797f49a"
+  IDxcValidator_GUID = "a6e82bd2-1fd7-4826-9811-2857e797f49a"
+  IID_IDxcValidator = LibC::GUID.new(0xa6e82bd2_u32, 0x1fd7_u16, 0x4826_u16, StaticArray[0x98_u8, 0x11_u8, 0x28_u8, 0x57_u8, 0xe7_u8, 0x97_u8, 0xf4_u8, 0x9a_u8])
   struct IDxcValidator
     lpVtbl : IDxcValidatorVTbl*
   end
@@ -348,8 +348,8 @@ lib LibWin32
     validate_with_debug : Proc(IDxcValidator2*, IDxcBlob, UInt32, DxcBuffer*, IDxcOperationResult*, HRESULT)
   end
 
-  IDxcValidator2_GUID = LibC::GUID.new("458e1fd1-b1b2-4750-a6e1-9c10f03bed92")
-  CLSID_IDxcValidator2 = "458e1fd1-b1b2-4750-a6e1-9c10f03bed92"
+  IDxcValidator2_GUID = "458e1fd1-b1b2-4750-a6e1-9c10f03bed92"
+  IID_IDxcValidator2 = LibC::GUID.new(0x458e1fd1_u32, 0xb1b2_u16, 0x4750_u16, StaticArray[0xa6_u8, 0xe1_u8, 0x9c_u8, 0x10_u8, 0xf0_u8, 0x3b_u8, 0xed_u8, 0x92_u8])
   struct IDxcValidator2
     lpVtbl : IDxcValidator2VTbl*
   end
@@ -364,8 +364,8 @@ lib LibWin32
     serialize_container : Proc(IDxcContainerBuilder*, IDxcOperationResult*, HRESULT)
   end
 
-  IDxcContainerBuilder_GUID = LibC::GUID.new("334b1f50-2292-4b35-99a1-25588d8c17fe")
-  CLSID_IDxcContainerBuilder = "334b1f50-2292-4b35-99a1-25588d8c17fe"
+  IDxcContainerBuilder_GUID = "334b1f50-2292-4b35-99a1-25588d8c17fe"
+  IID_IDxcContainerBuilder = LibC::GUID.new(0x334b1f50_u32, 0x2292_u16, 0x4b35_u16, StaticArray[0x99_u8, 0xa1_u8, 0x25_u8, 0x58_u8, 0x8d_u8, 0x8c_u8, 0x17_u8, 0xfe_u8])
   struct IDxcContainerBuilder
     lpVtbl : IDxcContainerBuilderVTbl*
   end
@@ -377,8 +377,8 @@ lib LibWin32
     assemble_to_container : Proc(IDxcAssembler*, IDxcBlob, IDxcOperationResult*, HRESULT)
   end
 
-  IDxcAssembler_GUID = LibC::GUID.new("091f7a26-1c1f-4948-904b-e6e3a8a771d5")
-  CLSID_IDxcAssembler = "091f7a26-1c1f-4948-904b-e6e3a8a771d5"
+  IDxcAssembler_GUID = "091f7a26-1c1f-4948-904b-e6e3a8a771d5"
+  IID_IDxcAssembler = LibC::GUID.new(0x91f7a26_u32, 0x1c1f_u16, 0x4948_u16, StaticArray[0x90_u8, 0x4b_u8, 0xe6_u8, 0xe3_u8, 0xa8_u8, 0xa7_u8, 0x71_u8, 0xd5_u8])
   struct IDxcAssembler
     lpVtbl : IDxcAssemblerVTbl*
   end
@@ -395,8 +395,8 @@ lib LibWin32
     get_part_reflection : Proc(IDxcContainerReflection*, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IDxcContainerReflection_GUID = LibC::GUID.new("d2c21b26-8350-4bdc-976a-331ce6f4c54c")
-  CLSID_IDxcContainerReflection = "d2c21b26-8350-4bdc-976a-331ce6f4c54c"
+  IDxcContainerReflection_GUID = "d2c21b26-8350-4bdc-976a-331ce6f4c54c"
+  IID_IDxcContainerReflection = LibC::GUID.new(0xd2c21b26_u32, 0x8350_u16, 0x4bdc_u16, StaticArray[0x97_u8, 0x6a_u8, 0x33_u8, 0x1c_u8, 0xe6_u8, 0xf4_u8, 0xc5_u8, 0x4c_u8])
   struct IDxcContainerReflection
     lpVtbl : IDxcContainerReflectionVTbl*
   end
@@ -412,8 +412,8 @@ lib LibWin32
     get_option_arg_description : Proc(IDxcOptimizerPass*, UInt32, LibC::LPWSTR*, HRESULT)
   end
 
-  IDxcOptimizerPass_GUID = LibC::GUID.new("ae2cd79f-cc22-453f-9b6b-b124e7a5204c")
-  CLSID_IDxcOptimizerPass = "ae2cd79f-cc22-453f-9b6b-b124e7a5204c"
+  IDxcOptimizerPass_GUID = "ae2cd79f-cc22-453f-9b6b-b124e7a5204c"
+  IID_IDxcOptimizerPass = LibC::GUID.new(0xae2cd79f_u32, 0xcc22_u16, 0x453f_u16, StaticArray[0x9b_u8, 0x6b_u8, 0xb1_u8, 0x24_u8, 0xe7_u8, 0xa5_u8, 0x20_u8, 0x4c_u8])
   struct IDxcOptimizerPass
     lpVtbl : IDxcOptimizerPassVTbl*
   end
@@ -427,8 +427,8 @@ lib LibWin32
     run_optimizer : Proc(IDxcOptimizer*, IDxcBlob, LibC::LPWSTR*, UInt32, IDxcBlob*, IDxcBlobEncoding*, HRESULT)
   end
 
-  IDxcOptimizer_GUID = LibC::GUID.new("25740e2e-9cba-401b-9119-4fb42f39f270")
-  CLSID_IDxcOptimizer = "25740e2e-9cba-401b-9119-4fb42f39f270"
+  IDxcOptimizer_GUID = "25740e2e-9cba-401b-9119-4fb42f39f270"
+  IID_IDxcOptimizer = LibC::GUID.new(0x25740e2e_u32, 0x9cba_u16, 0x401b_u16, StaticArray[0x91_u8, 0x19_u8, 0x4f_u8, 0xb4_u8, 0x2f_u8, 0x39_u8, 0xf2_u8, 0x70_u8])
   struct IDxcOptimizer
     lpVtbl : IDxcOptimizerVTbl*
   end
@@ -441,8 +441,8 @@ lib LibWin32
     get_flags : Proc(IDxcVersionInfo*, UInt32*, HRESULT)
   end
 
-  IDxcVersionInfo_GUID = LibC::GUID.new("b04f5b50-2059-4f12-a8ff-a1e0cde1cc7e")
-  CLSID_IDxcVersionInfo = "b04f5b50-2059-4f12-a8ff-a1e0cde1cc7e"
+  IDxcVersionInfo_GUID = "b04f5b50-2059-4f12-a8ff-a1e0cde1cc7e"
+  IID_IDxcVersionInfo = LibC::GUID.new(0xb04f5b50_u32, 0x2059_u16, 0x4f12_u16, StaticArray[0xa8_u8, 0xff_u8, 0xa1_u8, 0xe0_u8, 0xcd_u8, 0xe1_u8, 0xcc_u8, 0x7e_u8])
   struct IDxcVersionInfo
     lpVtbl : IDxcVersionInfoVTbl*
   end
@@ -456,8 +456,8 @@ lib LibWin32
     get_commit_info : Proc(IDxcVersionInfo2*, UInt32*, Int8**, HRESULT)
   end
 
-  IDxcVersionInfo2_GUID = LibC::GUID.new("fb6904c4-42f0-4b62-9c46-983af7da7c83")
-  CLSID_IDxcVersionInfo2 = "fb6904c4-42f0-4b62-9c46-983af7da7c83"
+  IDxcVersionInfo2_GUID = "fb6904c4-42f0-4b62-9c46-983af7da7c83"
+  IID_IDxcVersionInfo2 = LibC::GUID.new(0xfb6904c4_u32, 0x42f0_u16, 0x4b62_u16, StaticArray[0x9c_u8, 0x46_u8, 0x98_u8, 0x3a_u8, 0xf7_u8, 0xda_u8, 0x7c_u8, 0x83_u8])
   struct IDxcVersionInfo2
     lpVtbl : IDxcVersionInfo2VTbl*
   end
@@ -469,8 +469,8 @@ lib LibWin32
     get_custom_version_string : Proc(IDxcVersionInfo3*, Int8**, HRESULT)
   end
 
-  IDxcVersionInfo3_GUID = LibC::GUID.new("5e13e843-9d25-473c-9ad2-03b2d0b44b1e")
-  CLSID_IDxcVersionInfo3 = "5e13e843-9d25-473c-9ad2-03b2d0b44b1e"
+  IDxcVersionInfo3_GUID = "5e13e843-9d25-473c-9ad2-03b2d0b44b1e"
+  IID_IDxcVersionInfo3 = LibC::GUID.new(0x5e13e843_u32, 0x9d25_u16, 0x473c_u16, StaticArray[0x9a_u8, 0xd2_u8, 0x3_u8, 0xb2_u8, 0xd0_u8, 0xb4_u8, 0x4b_u8, 0x1e_u8])
   struct IDxcVersionInfo3
     lpVtbl : IDxcVersionInfo3VTbl*
   end
@@ -505,8 +505,8 @@ lib LibWin32
     override_root_signature : Proc(IDxcPdbUtils*, LibC::LPWSTR, HRESULT)
   end
 
-  IDxcPdbUtils_GUID = LibC::GUID.new("e6c9647e-9d6a-4c3b-b94c-524b5a6c343d")
-  CLSID_IDxcPdbUtils = "e6c9647e-9d6a-4c3b-b94c-524b5a6c343d"
+  IDxcPdbUtils_GUID = "e6c9647e-9d6a-4c3b-b94c-524b5a6c343d"
+  IID_IDxcPdbUtils = LibC::GUID.new(0xe6c9647e_u32, 0x9d6a_u16, 0x4c3b_u16, StaticArray[0xb9_u8, 0x4c_u8, 0x52_u8, 0x4b_u8, 0x5a_u8, 0x6c_u8, 0x34_u8, 0x3d_u8])
   struct IDxcPdbUtils
     lpVtbl : IDxcPdbUtilsVTbl*
   end

@@ -18,8 +18,8 @@ lib LibWin32
   ID_DOCUMENTPACKAGETARGET_MSXPS = "9cae40a8-ded1-41c9-a9fd-d735ef33aeda"
   ID_DOCUMENTPACKAGETARGET_OPENXPS = "0056bb72-8c9c-4612-bd0f-93012a87099d"
   ID_DOCUMENTPACKAGETARGET_OPENXPS_WITH_3D = "63dbd720-8b14-4577-b074-7bb11b596d28"
-  PrintDocumentPackageTarget = LibC::GUID.new(0x4842669e_u32, 0x9947_u16, 0x46ea_u16, StaticArray[0x8b_u8, 0xa2_u8, 0xd8_u8, 0xcc_u8, 0xe4_u8, 0x32_u8, 0xc2_u8, 0xca_u8])
-  PrintDocumentPackageTargetFactory = LibC::GUID.new(0x348ef17d_u32, 0x6c81_u16, 0x4982_u16, StaticArray[0x92_u8, 0xb4_u8, 0xee_u8, 0x18_u8, 0x8a_u8, 0x43_u8, 0x86_u8, 0x7a_u8])
+  CLSID_PrintDocumentPackageTarget = LibC::GUID.new(0x4842669e_u32, 0x9947_u16, 0x46ea_u16, StaticArray[0x8b_u8, 0xa2_u8, 0xd8_u8, 0xcc_u8, 0xe4_u8, 0x32_u8, 0xc2_u8, 0xca_u8])
+  CLSID_PrintDocumentPackageTargetFactory = LibC::GUID.new(0x348ef17d_u32, 0x6c81_u16, 0x4982_u16, StaticArray[0x92_u8, 0xb4_u8, 0xee_u8, 0x18_u8, 0x8a_u8, 0x43_u8, 0x86_u8, 0x7a_u8])
 
 
   enum XPS_JOB_COMPLETION : Int32
@@ -63,8 +63,8 @@ lib LibWin32
     close : Proc(IXpsPrintJobStream*, HRESULT)
   end
 
-  IXpsPrintJobStream_GUID = LibC::GUID.new("7a77dc5f-45d6-4dff-9307-d8cb846347ca")
-  CLSID_IXpsPrintJobStream = "7a77dc5f-45d6-4dff-9307-d8cb846347ca"
+  IXpsPrintJobStream_GUID = "7a77dc5f-45d6-4dff-9307-d8cb846347ca"
+  IID_IXpsPrintJobStream = LibC::GUID.new(0x7a77dc5f_u32, 0x45d6_u16, 0x4dff_u16, StaticArray[0x93_u8, 0x7_u8, 0xd8_u8, 0xcb_u8, 0x84_u8, 0x63_u8, 0x47_u8, 0xca_u8])
   struct IXpsPrintJobStream
     lpVtbl : IXpsPrintJobStreamVTbl*
   end
@@ -77,8 +77,8 @@ lib LibWin32
     get_job_status : Proc(IXpsPrintJob*, XPS_JOB_STATUS*, HRESULT)
   end
 
-  IXpsPrintJob_GUID = LibC::GUID.new("5ab89b06-8194-425f-ab3b-d7a96e350161")
-  CLSID_IXpsPrintJob = "5ab89b06-8194-425f-ab3b-d7a96e350161"
+  IXpsPrintJob_GUID = "5ab89b06-8194-425f-ab3b-d7a96e350161"
+  IID_IXpsPrintJob = LibC::GUID.new(0x5ab89b06_u32, 0x8194_u16, 0x425f_u16, StaticArray[0xab_u8, 0x3b_u8, 0xd7_u8, 0xa9_u8, 0x6e_u8, 0x35_u8, 0x1_u8, 0x61_u8])
   struct IXpsPrintJob
     lpVtbl : IXpsPrintJobVTbl*
   end
@@ -92,8 +92,8 @@ lib LibWin32
     cancel : Proc(IPrintDocumentPackageTarget*, HRESULT)
   end
 
-  IPrintDocumentPackageTarget_GUID = LibC::GUID.new("1b8efec4-3019-4c27-964e-367202156906")
-  CLSID_IPrintDocumentPackageTarget = "1b8efec4-3019-4c27-964e-367202156906"
+  IPrintDocumentPackageTarget_GUID = "1b8efec4-3019-4c27-964e-367202156906"
+  IID_IPrintDocumentPackageTarget = LibC::GUID.new(0x1b8efec4_u32, 0x3019_u16, 0x4c27_u16, StaticArray[0x96_u8, 0x4e_u8, 0x36_u8, 0x72_u8, 0x2_u8, 0x15_u8, 0x69_u8, 0x6_u8])
   struct IPrintDocumentPackageTarget
     lpVtbl : IPrintDocumentPackageTargetVTbl*
   end
@@ -109,8 +109,8 @@ lib LibWin32
     package_status_updated : Proc(IPrintDocumentPackageStatusEvent*, PrintDocumentPackageStatus*, HRESULT)
   end
 
-  IPrintDocumentPackageStatusEvent_GUID = LibC::GUID.new("ed90c8ad-5c34-4d05-a1ec-0e8a9b3ad7af")
-  CLSID_IPrintDocumentPackageStatusEvent = "ed90c8ad-5c34-4d05-a1ec-0e8a9b3ad7af"
+  IPrintDocumentPackageStatusEvent_GUID = "ed90c8ad-5c34-4d05-a1ec-0e8a9b3ad7af"
+  IID_IPrintDocumentPackageStatusEvent = LibC::GUID.new(0xed90c8ad_u32, 0x5c34_u16, 0x4d05_u16, StaticArray[0xa1_u8, 0xec_u8, 0xe_u8, 0x8a_u8, 0x9b_u8, 0x3a_u8, 0xd7_u8, 0xaf_u8])
   struct IPrintDocumentPackageStatusEvent
     lpVtbl : IPrintDocumentPackageStatusEventVTbl*
   end
@@ -122,8 +122,8 @@ lib LibWin32
     create_document_package_target_for_print_job : Proc(IPrintDocumentPackageTargetFactory*, LibC::LPWSTR, LibC::LPWSTR, IStream, IStream, IPrintDocumentPackageTarget*, HRESULT)
   end
 
-  IPrintDocumentPackageTargetFactory_GUID = LibC::GUID.new("d2959bf7-b31b-4a3d-9600-712eb1335ba4")
-  CLSID_IPrintDocumentPackageTargetFactory = "d2959bf7-b31b-4a3d-9600-712eb1335ba4"
+  IPrintDocumentPackageTargetFactory_GUID = "d2959bf7-b31b-4a3d-9600-712eb1335ba4"
+  IID_IPrintDocumentPackageTargetFactory = LibC::GUID.new(0xd2959bf7_u32, 0xb31b_u16, 0x4a3d_u16, StaticArray[0x96_u8, 0x0_u8, 0x71_u8, 0x2e_u8, 0xb1_u8, 0x33_u8, 0x5b_u8, 0xa4_u8])
   struct IPrintDocumentPackageTargetFactory
     lpVtbl : IPrintDocumentPackageTargetFactoryVTbl*
   end

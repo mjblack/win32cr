@@ -27,8 +27,8 @@ lib LibWin32
     suspend_draw : Proc(ICompositionDrawingSurfaceInterop*, HRESULT)
   end
 
-  ICompositionDrawingSurfaceInterop_GUID = LibC::GUID.new("fd04e6e3-fe0c-4c3c-ab19-a07601a576ee")
-  CLSID_ICompositionDrawingSurfaceInterop = "fd04e6e3-fe0c-4c3c-ab19-a07601a576ee"
+  ICompositionDrawingSurfaceInterop_GUID = "fd04e6e3-fe0c-4c3c-ab19-a07601a576ee"
+  IID_ICompositionDrawingSurfaceInterop = LibC::GUID.new(0xfd04e6e3_u32, 0xfe0c_u16, 0x4c3c_u16, StaticArray[0xab_u8, 0x19_u8, 0xa0_u8, 0x76_u8, 0x1_u8, 0xa5_u8, 0x76_u8, 0xee_u8])
   struct ICompositionDrawingSurfaceInterop
     lpVtbl : ICompositionDrawingSurfaceInteropVTbl*
   end
@@ -46,8 +46,8 @@ lib LibWin32
     copy_surface : Proc(ICompositionDrawingSurfaceInterop2*, IUnknown, Int32, Int32, RECT*, HRESULT)
   end
 
-  ICompositionDrawingSurfaceInterop2_GUID = LibC::GUID.new("41e64aae-98c0-4239-8e95-a330dd6aa18b")
-  CLSID_ICompositionDrawingSurfaceInterop2 = "41e64aae-98c0-4239-8e95-a330dd6aa18b"
+  ICompositionDrawingSurfaceInterop2_GUID = "41e64aae-98c0-4239-8e95-a330dd6aa18b"
+  IID_ICompositionDrawingSurfaceInterop2 = LibC::GUID.new(0x41e64aae_u32, 0x98c0_u16, 0x4239_u16, StaticArray[0x8e_u8, 0x95_u8, 0xa3_u8, 0x30_u8, 0xdd_u8, 0x6a_u8, 0xa1_u8, 0x8b_u8])
   struct ICompositionDrawingSurfaceInterop2
     lpVtbl : ICompositionDrawingSurfaceInterop2VTbl*
   end
@@ -60,8 +60,8 @@ lib LibWin32
     set_rendering_device : Proc(ICompositionGraphicsDeviceInterop*, IUnknown, HRESULT)
   end
 
-  ICompositionGraphicsDeviceInterop_GUID = LibC::GUID.new("a116ff71-f8bf-4c8a-9c98-70779a32a9c8")
-  CLSID_ICompositionGraphicsDeviceInterop = "a116ff71-f8bf-4c8a-9c98-70779a32a9c8"
+  ICompositionGraphicsDeviceInterop_GUID = "a116ff71-f8bf-4c8a-9c98-70779a32a9c8"
+  IID_ICompositionGraphicsDeviceInterop = LibC::GUID.new(0xa116ff71_u32, 0xf8bf_u16, 0x4c8a_u16, StaticArray[0x9c_u8, 0x98_u8, 0x70_u8, 0x77_u8, 0x9a_u8, 0x32_u8, 0xa9_u8, 0xc8_u8])
   struct ICompositionGraphicsDeviceInterop
     lpVtbl : ICompositionGraphicsDeviceInteropVTbl*
   end
@@ -75,8 +75,8 @@ lib LibWin32
     create_graphics_device : Proc(ICompositorInterop*, IUnknown, CompositionGraphicsDevice*, HRESULT)
   end
 
-  ICompositorInterop_GUID = LibC::GUID.new("25297d5c-3ad4-4c9c-b5cf-e36a38512330")
-  CLSID_ICompositorInterop = "25297d5c-3ad4-4c9c-b5cf-e36a38512330"
+  ICompositorInterop_GUID = "25297d5c-3ad4-4c9c-b5cf-e36a38512330"
+  IID_ICompositorInterop = LibC::GUID.new(0x25297d5c_u32, 0x3ad4_u16, 0x4c9c_u16, StaticArray[0xb5_u8, 0xcf_u8, 0xe3_u8, 0x6a_u8, 0x38_u8, 0x51_u8, 0x23_u8, 0x30_u8])
   struct ICompositorInterop
     lpVtbl : ICompositorInteropVTbl*
   end
@@ -88,8 +88,8 @@ lib LibWin32
     set_swap_chain : Proc(ISwapChainInterop*, IUnknown, HRESULT)
   end
 
-  ISwapChainInterop_GUID = LibC::GUID.new("26f496a0-7f38-45fb-88f7-faaabe67dd59")
-  CLSID_ISwapChainInterop = "26f496a0-7f38-45fb-88f7-faaabe67dd59"
+  ISwapChainInterop_GUID = "26f496a0-7f38-45fb-88f7-faaabe67dd59"
+  IID_ISwapChainInterop = LibC::GUID.new(0x26f496a0_u32, 0x7f38_u16, 0x45fb_u16, StaticArray[0x88_u8, 0xf7_u8, 0xfa_u8, 0xaa_u8, 0xbe_u8, 0x67_u8, 0xdd_u8, 0x59_u8])
   struct ISwapChainInterop
     lpVtbl : ISwapChainInteropVTbl*
   end
@@ -101,8 +101,8 @@ lib LibWin32
     try_redirect_for_manipulation : Proc(IVisualInteractionSourceInterop*, POINTER_INFO*, HRESULT)
   end
 
-  IVisualInteractionSourceInterop_GUID = LibC::GUID.new("11f62cd1-2f9d-42d3-b05f-d6790d9e9f8e")
-  CLSID_IVisualInteractionSourceInterop = "11f62cd1-2f9d-42d3-b05f-d6790d9e9f8e"
+  IVisualInteractionSourceInterop_GUID = "11f62cd1-2f9d-42d3-b05f-d6790d9e9f8e"
+  IID_IVisualInteractionSourceInterop = LibC::GUID.new(0x11f62cd1_u32, 0x2f9d_u16, 0x42d3_u16, StaticArray[0xb0_u8, 0x5f_u8, 0xd6_u8, 0x79_u8, 0xd_u8, 0x9e_u8, 0x9f_u8, 0x8e_u8])
   struct IVisualInteractionSourceInterop
     lpVtbl : IVisualInteractionSourceInteropVTbl*
   end
@@ -117,8 +117,8 @@ lib LibWin32
     get_for_window : Proc(ICompositionCapabilitiesInteropFactory*, LibC::HANDLE, CompositionCapabilities*, HRESULT)
   end
 
-  ICompositionCapabilitiesInteropFactory_GUID = LibC::GUID.new("2c9db356-e70d-4642-8298-bc4aa5b4865c")
-  CLSID_ICompositionCapabilitiesInteropFactory = "2c9db356-e70d-4642-8298-bc4aa5b4865c"
+  ICompositionCapabilitiesInteropFactory_GUID = "2c9db356-e70d-4642-8298-bc4aa5b4865c"
+  IID_ICompositionCapabilitiesInteropFactory = LibC::GUID.new(0x2c9db356_u32, 0xe70d_u16, 0x4642_u16, StaticArray[0x82_u8, 0x98_u8, 0xbc_u8, 0x4a_u8, 0xa5_u8, 0xb4_u8, 0x86_u8, 0x5c_u8])
   struct ICompositionCapabilitiesInteropFactory
     lpVtbl : ICompositionCapabilitiesInteropFactoryVTbl*
   end
@@ -131,8 +131,8 @@ lib LibWin32
     ensure_on_thread : Proc(ICompositorDesktopInterop*, UInt32, HRESULT)
   end
 
-  ICompositorDesktopInterop_GUID = LibC::GUID.new("29e691fa-4567-4dca-b319-d0f207eb6807")
-  CLSID_ICompositorDesktopInterop = "29e691fa-4567-4dca-b319-d0f207eb6807"
+  ICompositorDesktopInterop_GUID = "29e691fa-4567-4dca-b319-d0f207eb6807"
+  IID_ICompositorDesktopInterop = LibC::GUID.new(0x29e691fa_u32, 0x4567_u16, 0x4dca_u16, StaticArray[0xb3_u8, 0x19_u8, 0xd0_u8, 0xf2_u8, 0x7_u8, 0xeb_u8, 0x68_u8, 0x7_u8])
   struct ICompositorDesktopInterop
     lpVtbl : ICompositorDesktopInteropVTbl*
   end
@@ -144,8 +144,8 @@ lib LibWin32
     get_hwnd : Proc(IDesktopWindowTargetInterop*, HANDLE*, HRESULT)
   end
 
-  IDesktopWindowTargetInterop_GUID = LibC::GUID.new("35dbf59e-e3f9-45b0-81e7-fe75f4145dc9")
-  CLSID_IDesktopWindowTargetInterop = "35dbf59e-e3f9-45b0-81e7-fe75f4145dc9"
+  IDesktopWindowTargetInterop_GUID = "35dbf59e-e3f9-45b0-81e7-fe75f4145dc9"
+  IID_IDesktopWindowTargetInterop = LibC::GUID.new(0x35dbf59e_u32, 0xe3f9_u16, 0x45b0_u16, StaticArray[0x81_u8, 0xe7_u8, 0xfe_u8, 0x75_u8, 0xf4_u8, 0x14_u8, 0x5d_u8, 0xc9_u8])
   struct IDesktopWindowTargetInterop
     lpVtbl : IDesktopWindowTargetInteropVTbl*
   end

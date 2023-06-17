@@ -56,8 +56,8 @@ lib LibWin32
     purge_progress : Proc(IEmptyVolumeCacheCallBack*, UInt64, UInt64, UInt32, LibC::LPWSTR, HRESULT)
   end
 
-  IEmptyVolumeCacheCallBack_GUID = LibC::GUID.new("6e793361-73c6-11d0-8469-00aa00442901")
-  CLSID_IEmptyVolumeCacheCallBack = "6e793361-73c6-11d0-8469-00aa00442901"
+  IEmptyVolumeCacheCallBack_GUID = "6e793361-73c6-11d0-8469-00aa00442901"
+  IID_IEmptyVolumeCacheCallBack = LibC::GUID.new(0x6e793361_u32, 0x73c6_u16, 0x11d0_u16, StaticArray[0x84_u8, 0x69_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x29_u8, 0x1_u8])
   struct IEmptyVolumeCacheCallBack
     lpVtbl : IEmptyVolumeCacheCallBackVTbl*
   end
@@ -73,8 +73,8 @@ lib LibWin32
     deactivate : Proc(IEmptyVolumeCache*, UInt32*, HRESULT)
   end
 
-  IEmptyVolumeCache_GUID = LibC::GUID.new("8fce5227-04da-11d1-a004-00805f8abe06")
-  CLSID_IEmptyVolumeCache = "8fce5227-04da-11d1-a004-00805f8abe06"
+  IEmptyVolumeCache_GUID = "8fce5227-04da-11d1-a004-00805f8abe06"
+  IID_IEmptyVolumeCache = LibC::GUID.new(0x8fce5227_u32, 0x4da_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x8a_u8, 0xbe_u8, 0x6_u8])
   struct IEmptyVolumeCache
     lpVtbl : IEmptyVolumeCacheVTbl*
   end
@@ -91,8 +91,8 @@ lib LibWin32
     initialize_ex : Proc(IEmptyVolumeCache2*, HKEY, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR*, UInt32*, HRESULT)
   end
 
-  IEmptyVolumeCache2_GUID = LibC::GUID.new("02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c")
-  CLSID_IEmptyVolumeCache2 = "02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c"
+  IEmptyVolumeCache2_GUID = "02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c"
+  IID_IEmptyVolumeCache2 = LibC::GUID.new(0x2b7e3ba_u32, 0x4db3_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xd9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xec_u8, 0x8c_u8])
   struct IEmptyVolumeCache2
     lpVtbl : IEmptyVolumeCache2VTbl*
   end
@@ -105,8 +105,8 @@ lib LibWin32
     set_progress_feedback : Proc(IReconcileInitiator*, UInt32, UInt32, HRESULT)
   end
 
-  IReconcileInitiator_GUID = LibC::GUID.new("99180161-da16-101a-935c-444553540000")
-  CLSID_IReconcileInitiator = "99180161-da16-101a-935c-444553540000"
+  IReconcileInitiator_GUID = "99180161-da16-101a-935c-444553540000"
+  IID_IReconcileInitiator = LibC::GUID.new(0x99180161_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct IReconcileInitiator
     lpVtbl : IReconcileInitiatorVTbl*
   end
@@ -119,8 +119,8 @@ lib LibWin32
     get_progress_feedback_max_estimate : Proc(IReconcilableObject*, UInt32*, HRESULT)
   end
 
-  IReconcilableObject_GUID = LibC::GUID.new("99180162-da16-101a-935c-444553540000")
-  CLSID_IReconcilableObject = "99180162-da16-101a-935c-444553540000"
+  IReconcilableObject_GUID = "99180162-da16-101a-935c-444553540000"
+  IID_IReconcilableObject = LibC::GUID.new(0x99180162_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct IReconcilableObject
     lpVtbl : IReconcilableObjectVTbl*
   end
@@ -132,8 +132,8 @@ lib LibWin32
     is_moniker_in_briefcase : Proc(IBriefcaseInitiator*, IMoniker, HRESULT)
   end
 
-  IBriefcaseInitiator_GUID = LibC::GUID.new("99180164-da16-101a-935c-444553540000")
-  CLSID_IBriefcaseInitiator = "99180164-da16-101a-935c-444553540000"
+  IBriefcaseInitiator_GUID = "99180164-da16-101a-935c-444553540000"
+  IID_IBriefcaseInitiator = LibC::GUID.new(0x99180164_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
   struct IBriefcaseInitiator
     lpVtbl : IBriefcaseInitiatorVTbl*
   end
@@ -148,8 +148,8 @@ lib LibWin32
     get_scheme : Proc(IActiveDesktopP*, Char*, UInt32*, UInt32, HRESULT)
   end
 
-  IActiveDesktopP_GUID = LibC::GUID.new("52502ee0-ec80-11d0-89ab-00c04fc2972d")
-  CLSID_IActiveDesktopP = "52502ee0-ec80-11d0-89ab-00c04fc2972d"
+  IActiveDesktopP_GUID = "52502ee0-ec80-11d0-89ab-00c04fc2972d"
+  IID_IActiveDesktopP = LibC::GUID.new(0x52502ee0_u32, 0xec80_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xab_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x97_u8, 0x2d_u8])
   struct IActiveDesktopP
     lpVtbl : IActiveDesktopPVTbl*
   end
@@ -164,8 +164,8 @@ lib LibWin32
     make_dynamic_changes : Proc(IADesktopP2*, IOleObject, HRESULT)
   end
 
-  IADesktopP2_GUID = LibC::GUID.new("b22754e2-4574-11d1-9888-006097deacf9")
-  CLSID_IADesktopP2 = "b22754e2-4574-11d1-9888-006097deacf9"
+  IADesktopP2_GUID = "b22754e2-4574-11d1-9888-006097deacf9"
+  IID_IADesktopP2 = LibC::GUID.new(0xb22754e2_u32, 0x4574_u16, 0x11d1_u16, StaticArray[0x98_u8, 0x88_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xde_u8, 0xac_u8, 0xf9_u8])
   struct IADesktopP2
     lpVtbl : IADesktopP2VTbl*
   end

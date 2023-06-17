@@ -1323,13 +1323,13 @@ lib LibWin32
   GUID_DEVINTERFACE_USBPRINT = "28d78fad-5a12-11d1-ae5b-0000f803a8c2"
   GUID_DEVINTERFACE_IPPUSB_PRINT = "f2f40381-f46d-4e51-bce7-62de6cf2d098"
   CLSID_XPSRASTERIZER_FACTORY = "503e79bf-1d09-4764-9d72-1eb0c65967c6"
-  BidiRequest = LibC::GUID.new(0xb9162a23_u32, 0x45f9_u16, 0x47cc_u16, StaticArray[0x80_u8, 0xf5_u8, 0xfe_u8, 0xf_u8, 0xe9_u8, 0xb9_u8, 0xe1_u8, 0xa2_u8])
-  BidiRequestContainer = LibC::GUID.new(0xfc5b8a24_u32, 0xdb05_u16, 0x4a01_u16, StaticArray[0x83_u8, 0x88_u8, 0x22_u8, 0xed_u8, 0xf6_u8, 0xc2_u8, 0xbb_u8, 0xba_u8])
-  BidiSpl = LibC::GUID.new(0x2a614240_u32, 0xa4c5_u16, 0x4c33_u16, StaticArray[0xbd_u8, 0x87_u8, 0x1b_u8, 0xc7_u8, 0x9_u8, 0x33_u8, 0x16_u8, 0x39_u8])
-  PrinterQueue = LibC::GUID.new(0xeb54c230_u32, 0x798c_u16, 0x4c9e_u16, StaticArray[0xb4_u8, 0x61_u8, 0x29_u8, 0xfa_u8, 0xd0_u8, 0x40_u8, 0x39_u8, 0xb1_u8])
-  PrinterQueueView = LibC::GUID.new(0xeb54c231_u32, 0x798c_u16, 0x4c9e_u16, StaticArray[0xb4_u8, 0x61_u8, 0x29_u8, 0xfa_u8, 0xd0_u8, 0x40_u8, 0x39_u8, 0xb1_u8])
-  PrintSchemaAsyncOperation = LibC::GUID.new(0x43b2f83d_u32, 0x10f2_u16, 0x48ab_u16, StaticArray[0x83_u8, 0x1b_u8, 0x55_u8, 0xfd_u8, 0xbd_u8, 0xbd_u8, 0x34_u8, 0xa4_u8])
-  PrinterExtensionManager = LibC::GUID.new(0x331b60da_u32, 0x9e90_u16, 0x4dd0_u16, StaticArray[0x9c_u8, 0x84_u8, 0xea_u8, 0xc4_u8, 0xe6_u8, 0x59_u8, 0xb6_u8, 0x1f_u8])
+  CLSID_BidiRequest = LibC::GUID.new(0xb9162a23_u32, 0x45f9_u16, 0x47cc_u16, StaticArray[0x80_u8, 0xf5_u8, 0xfe_u8, 0xf_u8, 0xe9_u8, 0xb9_u8, 0xe1_u8, 0xa2_u8])
+  CLSID_BidiRequestContainer = LibC::GUID.new(0xfc5b8a24_u32, 0xdb05_u16, 0x4a01_u16, StaticArray[0x83_u8, 0x88_u8, 0x22_u8, 0xed_u8, 0xf6_u8, 0xc2_u8, 0xbb_u8, 0xba_u8])
+  CLSID_BidiSpl = LibC::GUID.new(0x2a614240_u32, 0xa4c5_u16, 0x4c33_u16, StaticArray[0xbd_u8, 0x87_u8, 0x1b_u8, 0xc7_u8, 0x9_u8, 0x33_u8, 0x16_u8, 0x39_u8])
+  CLSID_PrinterQueue = LibC::GUID.new(0xeb54c230_u32, 0x798c_u16, 0x4c9e_u16, StaticArray[0xb4_u8, 0x61_u8, 0x29_u8, 0xfa_u8, 0xd0_u8, 0x40_u8, 0x39_u8, 0xb1_u8])
+  CLSID_PrinterQueueView = LibC::GUID.new(0xeb54c231_u32, 0x798c_u16, 0x4c9e_u16, StaticArray[0xb4_u8, 0x61_u8, 0x29_u8, 0xfa_u8, 0xd0_u8, 0x40_u8, 0x39_u8, 0xb1_u8])
+  CLSID_PrintSchemaAsyncOperation = LibC::GUID.new(0x43b2f83d_u32, 0x10f2_u16, 0x48ab_u16, StaticArray[0x83_u8, 0x1b_u8, 0x55_u8, 0xfd_u8, 0xbd_u8, 0xbd_u8, 0x34_u8, 0xa4_u8])
+  CLSID_PrinterExtensionManager = LibC::GUID.new(0x331b60da_u32, 0x9e90_u16, 0x4dd0_u16, StaticArray[0x9c_u8, 0x84_u8, 0xea_u8, 0xc4_u8, 0xe6_u8, 0x59_u8, 0xb6_u8, 0x1f_u8])
 
   alias CPSUICALLBACK = Proc(CPSUICBPARAM*, Int32)
   alias PFNCOMPROPSHEET = Proc(LibC::HANDLE, UInt32, LPARAM, LPARAM, LibC::IntPtrT)
@@ -3744,8 +3744,8 @@ lib LibWin32
     create_instance_of_msxml_object : Proc(IPrintCoreHelper*, Guid*, IUnknown, UInt32, Guid*, Void**, HRESULT)
   end
 
-  IPrintCoreHelper_GUID = LibC::GUID.new("a89ec53e-3905-49c6-9c1a-c0a88117fdb6")
-  CLSID_IPrintCoreHelper = "a89ec53e-3905-49c6-9c1a-c0a88117fdb6"
+  IPrintCoreHelper_GUID = "a89ec53e-3905-49c6-9c1a-c0a88117fdb6"
+  IID_IPrintCoreHelper = LibC::GUID.new(0xa89ec53e_u32, 0x3905_u16, 0x49c6_u16, StaticArray[0x9c_u8, 0x1a_u8, 0xc0_u8, 0xa8_u8, 0x81_u8, 0x17_u8, 0xfd_u8, 0xb6_u8])
   struct IPrintCoreHelper
     lpVtbl : IPrintCoreHelperVTbl*
   end
@@ -3767,8 +3767,8 @@ lib LibWin32
     create_default_gdl_snapshot : Proc(IPrintCoreHelperUni*, UInt32, IStream*, HRESULT)
   end
 
-  IPrintCoreHelperUni_GUID = LibC::GUID.new("7e8e51d6-e5ee-4426-817b-958b9444eb79")
-  CLSID_IPrintCoreHelperUni = "7e8e51d6-e5ee-4426-817b-958b9444eb79"
+  IPrintCoreHelperUni_GUID = "7e8e51d6-e5ee-4426-817b-958b9444eb79"
+  IID_IPrintCoreHelperUni = LibC::GUID.new(0x7e8e51d6_u32, 0xe5ee_u16, 0x4426_u16, StaticArray[0x81_u8, 0x7b_u8, 0x95_u8, 0x8b_u8, 0x94_u8, 0x44_u8, 0xeb_u8, 0x79_u8])
   struct IPrintCoreHelperUni
     lpVtbl : IPrintCoreHelperUniVTbl*
   end
@@ -3791,8 +3791,8 @@ lib LibWin32
     get_named_command : Proc(IPrintCoreHelperUni2*, DEVMODEA*, UInt32, LibC::LPWSTR, UInt8**, UInt32*, HRESULT)
   end
 
-  IPrintCoreHelperUni2_GUID = LibC::GUID.new("6c8afdfc-ead0-4d2d-8071-9bf0175a6c3a")
-  CLSID_IPrintCoreHelperUni2 = "6c8afdfc-ead0-4d2d-8071-9bf0175a6c3a"
+  IPrintCoreHelperUni2_GUID = "6c8afdfc-ead0-4d2d-8071-9bf0175a6c3a"
+  IID_IPrintCoreHelperUni2 = LibC::GUID.new(0x6c8afdfc_u32, 0xead0_u16, 0x4d2d_u16, StaticArray[0x80_u8, 0x71_u8, 0x9b_u8, 0xf0_u8, 0x17_u8, 0x5a_u8, 0x6c_u8, 0x3a_u8])
   struct IPrintCoreHelperUni2
     lpVtbl : IPrintCoreHelperUni2VTbl*
   end
@@ -3815,8 +3815,8 @@ lib LibWin32
     get_option_attribute : Proc(IPrintCoreHelperPS*, PSTR, PSTR, PSTR, UInt32*, UInt8**, UInt32*, HRESULT)
   end
 
-  IPrintCoreHelperPS_GUID = LibC::GUID.new("c2c14f6f-95d3-4d63-96cf-6bd9e6c907c2")
-  CLSID_IPrintCoreHelperPS = "c2c14f6f-95d3-4d63-96cf-6bd9e6c907c2"
+  IPrintCoreHelperPS_GUID = "c2c14f6f-95d3-4d63-96cf-6bd9e6c907c2"
+  IID_IPrintCoreHelperPS = LibC::GUID.new(0xc2c14f6f_u32, 0x95d3_u16, 0x4d63_u16, StaticArray[0x96_u8, 0xcf_u8, 0x6b_u8, 0xd9_u8, 0xe6_u8, 0xc9_u8, 0x7_u8, 0xc2_u8])
   struct IPrintCoreHelperPS
     lpVtbl : IPrintCoreHelperPSVTbl*
   end
@@ -3829,8 +3829,8 @@ lib LibWin32
     dev_mode : Proc(IPrintOemCommon*, UInt32, OEMDMPARAM*, HRESULT)
   end
 
-  IPrintOemCommon_GUID = LibC::GUID.new("7f42285e-91d5-11d1-8820-00c04fb961ec")
-  CLSID_IPrintOemCommon = "7f42285e-91d5-11d1-8820-00c04fb961ec"
+  IPrintOemCommon_GUID = "7f42285e-91d5-11d1-8820-00c04fb961ec"
+  IID_IPrintOemCommon = LibC::GUID.new(0x7f42285e_u32, 0x91d5_u16, 0x11d1_u16, StaticArray[0x88_u8, 0x20_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0xec_u8])
   struct IPrintOemCommon
     lpVtbl : IPrintOemCommonVTbl*
   end
@@ -3855,8 +3855,8 @@ lib LibWin32
     update_external_fonts : Proc(IPrintOemUI*, LibC::HANDLE, LibC::HANDLE, LibC::LPWSTR, HRESULT)
   end
 
-  IPrintOemUI_GUID = LibC::GUID.new("c6a7a9d0-774c-11d1-947f-00a0c90640b8")
-  CLSID_IPrintOemUI = "c6a7a9d0-774c-11d1-947f-00a0c90640b8"
+  IPrintOemUI_GUID = "c6a7a9d0-774c-11d1-947f-00a0c90640b8"
+  IID_IPrintOemUI = LibC::GUID.new(0xc6a7a9d0_u32, 0x774c_u16, 0x11d1_u16, StaticArray[0x94_u8, 0x7f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x40_u8, 0xb8_u8])
   struct IPrintOemUI
     lpVtbl : IPrintOemUIVTbl*
   end
@@ -3884,8 +3884,8 @@ lib LibWin32
     document_event : Proc(IPrintOemUI2*, LibC::HANDLE, HDC, Int32, UInt32, Void*, UInt32, Void*, Int32*, HRESULT)
   end
 
-  IPrintOemUI2_GUID = LibC::GUID.new("292515f9-b54b-489b-9275-bab56821395e")
-  CLSID_IPrintOemUI2 = "292515f9-b54b-489b-9275-bab56821395e"
+  IPrintOemUI2_GUID = "292515f9-b54b-489b-9275-bab56821395e"
+  IID_IPrintOemUI2 = LibC::GUID.new(0x292515f9_u32, 0xb54b_u16, 0x489b_u16, StaticArray[0x92_u8, 0x75_u8, 0xba_u8, 0xb5_u8, 0x68_u8, 0x21_u8, 0x39_u8, 0x5e_u8])
   struct IPrintOemUI2
     lpVtbl : IPrintOemUI2VTbl*
   end
@@ -3899,8 +3899,8 @@ lib LibWin32
     adjust_dpi : Proc(IPrintOemUIMXDC*, LibC::HANDLE, UInt32, DEVMODEA*, UInt32, Void*, Int32*, HRESULT)
   end
 
-  IPrintOemUIMXDC_GUID = LibC::GUID.new("7349d725-e2c1-4dca-afb5-c13e91bc9306")
-  CLSID_IPrintOemUIMXDC = "7349d725-e2c1-4dca-afb5-c13e91bc9306"
+  IPrintOemUIMXDC_GUID = "7349d725-e2c1-4dca-afb5-c13e91bc9306"
+  IID_IPrintOemUIMXDC = LibC::GUID.new(0x7349d725_u32, 0xe2c1_u16, 0x4dca_u16, StaticArray[0xaf_u8, 0xb5_u8, 0xc1_u8, 0x3e_u8, 0x91_u8, 0xbc_u8, 0x93_u8, 0x6_u8])
   struct IPrintOemUIMXDC
     lpVtbl : IPrintOemUIMXDCVTbl*
   end
@@ -3914,8 +3914,8 @@ lib LibWin32
     drv_update_ui_setting : Proc(IPrintOemDriverUI*, Void*, Void*, UInt32, UInt32, HRESULT)
   end
 
-  IPrintOemDriverUI_GUID = LibC::GUID.new("92b05d50-78bc-11d1-9480-00a0c90640b8")
-  CLSID_IPrintOemDriverUI = "92b05d50-78bc-11d1-9480-00a0c90640b8"
+  IPrintOemDriverUI_GUID = "92b05d50-78bc-11d1-9480-00a0c90640b8"
+  IID_IPrintOemDriverUI = LibC::GUID.new(0x92b05d50_u32, 0x78bc_u16, 0x11d1_u16, StaticArray[0x94_u8, 0x80_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x40_u8, 0xb8_u8])
   struct IPrintOemDriverUI
     lpVtbl : IPrintOemDriverUIVTbl*
   end
@@ -3939,8 +3939,8 @@ lib LibWin32
     query_simulation_support : Proc(IPrintCoreUI2*, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
   end
 
-  IPrintCoreUI2_GUID = LibC::GUID.new("085ccfca-3adf-4c9e-b491-d851a6edc997")
-  CLSID_IPrintCoreUI2 = "085ccfca-3adf-4c9e-b491-d851a6edc997"
+  IPrintCoreUI2_GUID = "085ccfca-3adf-4c9e-b491-d851a6edc997"
+  IID_IPrintCoreUI2 = LibC::GUID.new(0x85ccfca_u32, 0x3adf_u16, 0x4c9e_u16, StaticArray[0xb4_u8, 0x91_u8, 0xd8_u8, 0x51_u8, 0xa6_u8, 0xed_u8, 0xc9_u8, 0x97_u8])
   struct IPrintCoreUI2
     lpVtbl : IPrintCoreUI2VTbl*
   end
@@ -3958,8 +3958,8 @@ lib LibWin32
     validate_print_ticket : Proc(IPrintTicketProvider*, IXMLDOMDocument2, HRESULT)
   end
 
-  IPrintTicketProvider_GUID = LibC::GUID.new("bb5116db-0a23-4c3a-a6b6-89e5558dfb5d")
-  CLSID_IPrintTicketProvider = "bb5116db-0a23-4c3a-a6b6-89e5558dfb5d"
+  IPrintTicketProvider_GUID = "bb5116db-0a23-4c3a-a6b6-89e5558dfb5d"
+  IID_IPrintTicketProvider = LibC::GUID.new(0xbb5116db_u32, 0xa23_u16, 0x4c3a_u16, StaticArray[0xa6_u8, 0xb6_u8, 0x89_u8, 0xe5_u8, 0x55_u8, 0x8d_u8, 0xfb_u8, 0x5d_u8])
   struct IPrintTicketProvider
     lpVtbl : IPrintTicketProviderVTbl*
   end
@@ -3979,8 +3979,8 @@ lib LibWin32
     get_print_device_resources : Proc(IPrintTicketProvider2*, LibC::LPWSTR, IXMLDOMDocument2, IXMLDOMDocument2*, HRESULT)
   end
 
-  IPrintTicketProvider2_GUID = LibC::GUID.new("b8a70ab2-3dfc-4fec-a074-511b13c651cb")
-  CLSID_IPrintTicketProvider2 = "b8a70ab2-3dfc-4fec-a074-511b13c651cb"
+  IPrintTicketProvider2_GUID = "b8a70ab2-3dfc-4fec-a074-511b13c651cb"
+  IID_IPrintTicketProvider2 = LibC::GUID.new(0xb8a70ab2_u32, 0x3dfc_u16, 0x4fec_u16, StaticArray[0xa0_u8, 0x74_u8, 0x51_u8, 0x1b_u8, 0x13_u8, 0xc6_u8, 0x51_u8, 0xcb_u8])
   struct IPrintTicketProvider2
     lpVtbl : IPrintTicketProvider2VTbl*
   end
@@ -3998,8 +3998,8 @@ lib LibWin32
     get_namespace_uri : Proc(IPrintSchemaElement*, UInt8**, HRESULT)
   end
 
-  IPrintSchemaElement_GUID = LibC::GUID.new("724c1646-e64b-4bbf-8eb4-d45e4fd580da")
-  CLSID_IPrintSchemaElement = "724c1646-e64b-4bbf-8eb4-d45e4fd580da"
+  IPrintSchemaElement_GUID = "724c1646-e64b-4bbf-8eb4-d45e4fd580da"
+  IID_IPrintSchemaElement = LibC::GUID.new(0x724c1646_u32, 0xe64b_u16, 0x4bbf_u16, StaticArray[0x8e_u8, 0xb4_u8, 0xd4_u8, 0x5e_u8, 0x4f_u8, 0xd5_u8, 0x80_u8, 0xda_u8])
   struct IPrintSchemaElement
     lpVtbl : IPrintSchemaElementVTbl*
   end
@@ -4018,8 +4018,8 @@ lib LibWin32
     get_display_name : Proc(IPrintSchemaDisplayableElement*, UInt8**, HRESULT)
   end
 
-  IPrintSchemaDisplayableElement_GUID = LibC::GUID.new("af45af49-d6aa-407d-bf87-3912236e9d94")
-  CLSID_IPrintSchemaDisplayableElement = "af45af49-d6aa-407d-bf87-3912236e9d94"
+  IPrintSchemaDisplayableElement_GUID = "af45af49-d6aa-407d-bf87-3912236e9d94"
+  IID_IPrintSchemaDisplayableElement = LibC::GUID.new(0xaf45af49_u32, 0xd6aa_u16, 0x407d_u16, StaticArray[0xbf_u8, 0x87_u8, 0x39_u8, 0x12_u8, 0x23_u8, 0x6e_u8, 0x9d_u8, 0x94_u8])
   struct IPrintSchemaDisplayableElement
     lpVtbl : IPrintSchemaDisplayableElementVTbl*
   end
@@ -4041,8 +4041,8 @@ lib LibWin32
     get_property_value : Proc(IPrintSchemaOption*, UInt8*, UInt8*, IUnknown*, HRESULT)
   end
 
-  IPrintSchemaOption_GUID = LibC::GUID.new("66bb2f51-5844-4997-8d70-4b7cc221cf92")
-  CLSID_IPrintSchemaOption = "66bb2f51-5844-4997-8d70-4b7cc221cf92"
+  IPrintSchemaOption_GUID = "66bb2f51-5844-4997-8d70-4b7cc221cf92"
+  IID_IPrintSchemaOption = LibC::GUID.new(0x66bb2f51_u32, 0x5844_u16, 0x4997_u16, StaticArray[0x8d_u8, 0x70_u8, 0x4b_u8, 0x7c_u8, 0xc2_u8, 0x21_u8, 0xcf_u8, 0x92_u8])
   struct IPrintSchemaOption
     lpVtbl : IPrintSchemaOptionVTbl*
   end
@@ -4066,8 +4066,8 @@ lib LibWin32
     get_height_in_microns : Proc(IPrintSchemaPageMediaSizeOption*, UInt32*, HRESULT)
   end
 
-  IPrintSchemaPageMediaSizeOption_GUID = LibC::GUID.new("68746729-f493-4830-a10f-69028774605d")
-  CLSID_IPrintSchemaPageMediaSizeOption = "68746729-f493-4830-a10f-69028774605d"
+  IPrintSchemaPageMediaSizeOption_GUID = "68746729-f493-4830-a10f-69028774605d"
+  IID_IPrintSchemaPageMediaSizeOption = LibC::GUID.new(0x68746729_u32, 0xf493_u16, 0x4830_u16, StaticArray[0xa1_u8, 0xf_u8, 0x69_u8, 0x2_u8, 0x87_u8, 0x74_u8, 0x60_u8, 0x5d_u8])
   struct IPrintSchemaPageMediaSizeOption
     lpVtbl : IPrintSchemaPageMediaSizeOptionVTbl*
   end
@@ -4090,8 +4090,8 @@ lib LibWin32
     get_pages_per_sheet : Proc(IPrintSchemaNUpOption*, UInt32*, HRESULT)
   end
 
-  IPrintSchemaNUpOption_GUID = LibC::GUID.new("1f6342f2-d848-42e3-8995-c10a9ef9a3ba")
-  CLSID_IPrintSchemaNUpOption = "1f6342f2-d848-42e3-8995-c10a9ef9a3ba"
+  IPrintSchemaNUpOption_GUID = "1f6342f2-d848-42e3-8995-c10a9ef9a3ba"
+  IID_IPrintSchemaNUpOption = LibC::GUID.new(0x1f6342f2_u32, 0xd848_u16, 0x42e3_u16, StaticArray[0x89_u8, 0x95_u8, 0xc1_u8, 0xa_u8, 0x9e_u8, 0xf9_u8, 0xa3_u8, 0xba_u8])
   struct IPrintSchemaNUpOption
     lpVtbl : IPrintSchemaNUpOptionVTbl*
   end
@@ -4109,8 +4109,8 @@ lib LibWin32
     get__new_enum : Proc(IPrintSchemaOptionCollection*, IUnknown*, HRESULT)
   end
 
-  IPrintSchemaOptionCollection_GUID = LibC::GUID.new("baecb0bd-a946-4771-bc30-e8b24f8d45c1")
-  CLSID_IPrintSchemaOptionCollection = "baecb0bd-a946-4771-bc30-e8b24f8d45c1"
+  IPrintSchemaOptionCollection_GUID = "baecb0bd-a946-4771-bc30-e8b24f8d45c1"
+  IID_IPrintSchemaOptionCollection = LibC::GUID.new(0xbaecb0bd_u32, 0xa946_u16, 0x4771_u16, StaticArray[0xbc_u8, 0x30_u8, 0xe8_u8, 0xb2_u8, 0x4f_u8, 0x8d_u8, 0x45_u8, 0xc1_u8])
   struct IPrintSchemaOptionCollection
     lpVtbl : IPrintSchemaOptionCollectionVTbl*
   end
@@ -4134,8 +4134,8 @@ lib LibWin32
     get_display_ui : Proc(IPrintSchemaFeature*, LibC::BOOL*, HRESULT)
   end
 
-  IPrintSchemaFeature_GUID = LibC::GUID.new("ef189461-5d62-4626-8e57-ff83583c4826")
-  CLSID_IPrintSchemaFeature = "ef189461-5d62-4626-8e57-ff83583c4826"
+  IPrintSchemaFeature_GUID = "ef189461-5d62-4626-8e57-ff83583c4826"
+  IID_IPrintSchemaFeature = LibC::GUID.new(0xef189461_u32, 0x5d62_u16, 0x4626_u16, StaticArray[0x8e_u8, 0x57_u8, 0xff_u8, 0x83_u8, 0x58_u8, 0x3c_u8, 0x48_u8, 0x26_u8])
   struct IPrintSchemaFeature
     lpVtbl : IPrintSchemaFeatureVTbl*
   end
@@ -4159,8 +4159,8 @@ lib LibWin32
     get_extent_height_in_microns : Proc(IPrintSchemaPageImageableSize*, UInt32*, HRESULT)
   end
 
-  IPrintSchemaPageImageableSize_GUID = LibC::GUID.new("7c85bf5e-dc7c-4f61-839b-4107e1c9b68e")
-  CLSID_IPrintSchemaPageImageableSize = "7c85bf5e-dc7c-4f61-839b-4107e1c9b68e"
+  IPrintSchemaPageImageableSize_GUID = "7c85bf5e-dc7c-4f61-839b-4107e1c9b68e"
+  IID_IPrintSchemaPageImageableSize = LibC::GUID.new(0x7c85bf5e_u32, 0xdc7c_u16, 0x4f61_u16, StaticArray[0x83_u8, 0x9b_u8, 0x41_u8, 0x7_u8, 0xe1_u8, 0xc9_u8, 0xb6_u8, 0x8e_u8])
   struct IPrintSchemaPageImageableSize
     lpVtbl : IPrintSchemaPageImageableSizeVTbl*
   end
@@ -4184,8 +4184,8 @@ lib LibWin32
     get_range_max : Proc(IPrintSchemaParameterDefinition*, Int32*, HRESULT)
   end
 
-  IPrintSchemaParameterDefinition_GUID = LibC::GUID.new("b5ade81e-0e61-4fe1-81c6-c333e4ffe0f1")
-  CLSID_IPrintSchemaParameterDefinition = "b5ade81e-0e61-4fe1-81c6-c333e4ffe0f1"
+  IPrintSchemaParameterDefinition_GUID = "b5ade81e-0e61-4fe1-81c6-c333e4ffe0f1"
+  IID_IPrintSchemaParameterDefinition = LibC::GUID.new(0xb5ade81e_u32, 0xe61_u16, 0x4fe1_u16, StaticArray[0x81_u8, 0xc6_u8, 0xc3_u8, 0x33_u8, 0xe4_u8, 0xff_u8, 0xe0_u8, 0xf1_u8])
   struct IPrintSchemaParameterDefinition
     lpVtbl : IPrintSchemaParameterDefinitionVTbl*
   end
@@ -4205,8 +4205,8 @@ lib LibWin32
     put_value : Proc(IPrintSchemaParameterInitializer*, VARIANT*, HRESULT)
   end
 
-  IPrintSchemaParameterInitializer_GUID = LibC::GUID.new("52027082-0b74-4648-9564-828cc6cb656c")
-  CLSID_IPrintSchemaParameterInitializer = "52027082-0b74-4648-9564-828cc6cb656c"
+  IPrintSchemaParameterInitializer_GUID = "52027082-0b74-4648-9564-828cc6cb656c"
+  IID_IPrintSchemaParameterInitializer = LibC::GUID.new(0x52027082_u32, 0xb74_u16, 0x4648_u16, StaticArray[0x95_u8, 0x64_u8, 0x82_u8, 0x8c_u8, 0xc6_u8, 0xcb_u8, 0x65_u8, 0x6c_u8])
   struct IPrintSchemaParameterInitializer
     lpVtbl : IPrintSchemaParameterInitializerVTbl*
   end
@@ -4231,8 +4231,8 @@ lib LibWin32
     get_options : Proc(IPrintSchemaCapabilities*, IPrintSchemaFeature, IPrintSchemaOptionCollection*, HRESULT)
   end
 
-  IPrintSchemaCapabilities_GUID = LibC::GUID.new("5a577640-501d-4927-bcd0-5ef57a7ed175")
-  CLSID_IPrintSchemaCapabilities = "5a577640-501d-4927-bcd0-5ef57a7ed175"
+  IPrintSchemaCapabilities_GUID = "5a577640-501d-4927-bcd0-5ef57a7ed175"
+  IID_IPrintSchemaCapabilities = LibC::GUID.new(0x5a577640_u32, 0x501d_u16, 0x4927_u16, StaticArray[0xbc_u8, 0xd0_u8, 0x5e_u8, 0xf5_u8, 0x7a_u8, 0x7e_u8, 0xd1_u8, 0x75_u8])
   struct IPrintSchemaCapabilities
     lpVtbl : IPrintSchemaCapabilitiesVTbl*
   end
@@ -4258,8 +4258,8 @@ lib LibWin32
     get_parameter_definition : Proc(IPrintSchemaCapabilities2*, UInt8*, UInt8*, IPrintSchemaParameterDefinition*, HRESULT)
   end
 
-  IPrintSchemaCapabilities2_GUID = LibC::GUID.new("b58845f4-9970-4d87-a636-169fb82ed642")
-  CLSID_IPrintSchemaCapabilities2 = "b58845f4-9970-4d87-a636-169fb82ed642"
+  IPrintSchemaCapabilities2_GUID = "b58845f4-9970-4d87-a636-169fb82ed642"
+  IID_IPrintSchemaCapabilities2 = LibC::GUID.new(0xb58845f4_u32, 0x9970_u16, 0x4d87_u16, StaticArray[0xa6_u8, 0x36_u8, 0x16_u8, 0x9f_u8, 0xb8_u8, 0x2e_u8, 0xd6_u8, 0x42_u8])
   struct IPrintSchemaCapabilities2
     lpVtbl : IPrintSchemaCapabilities2VTbl*
   end
@@ -4276,8 +4276,8 @@ lib LibWin32
     cancel : Proc(IPrintSchemaAsyncOperation*, HRESULT)
   end
 
-  IPrintSchemaAsyncOperation_GUID = LibC::GUID.new("143c8dcb-d37f-47f7-88e8-6b1d21f2c5f7")
-  CLSID_IPrintSchemaAsyncOperation = "143c8dcb-d37f-47f7-88e8-6b1d21f2c5f7"
+  IPrintSchemaAsyncOperation_GUID = "143c8dcb-d37f-47f7-88e8-6b1d21f2c5f7"
+  IID_IPrintSchemaAsyncOperation = LibC::GUID.new(0x143c8dcb_u32, 0xd37f_u16, 0x47f7_u16, StaticArray[0x88_u8, 0xe8_u8, 0x6b_u8, 0x1d_u8, 0x21_u8, 0xf2_u8, 0xc5_u8, 0xf7_u8])
   struct IPrintSchemaAsyncOperation
     lpVtbl : IPrintSchemaAsyncOperationVTbl*
   end
@@ -4303,8 +4303,8 @@ lib LibWin32
     put_job_copies_all_documents : Proc(IPrintSchemaTicket*, UInt32, HRESULT)
   end
 
-  IPrintSchemaTicket_GUID = LibC::GUID.new("e480b861-4708-4e6d-a5b4-a2b4eeb9baa4")
-  CLSID_IPrintSchemaTicket = "e480b861-4708-4e6d-a5b4-a2b4eeb9baa4"
+  IPrintSchemaTicket_GUID = "e480b861-4708-4e6d-a5b4-a2b4eeb9baa4"
+  IID_IPrintSchemaTicket = LibC::GUID.new(0xe480b861_u32, 0x4708_u16, 0x4e6d_u16, StaticArray[0xa5_u8, 0xb4_u8, 0xa2_u8, 0xb4_u8, 0xee_u8, 0xb9_u8, 0xba_u8, 0xa4_u8])
   struct IPrintSchemaTicket
     lpVtbl : IPrintSchemaTicketVTbl*
   end
@@ -4331,8 +4331,8 @@ lib LibWin32
     get_parameter_initializer : Proc(IPrintSchemaTicket2*, UInt8*, UInt8*, IPrintSchemaParameterInitializer*, HRESULT)
   end
 
-  IPrintSchemaTicket2_GUID = LibC::GUID.new("2ec1f844-766a-47a1-91f4-2eeb6190f80c")
-  CLSID_IPrintSchemaTicket2 = "2ec1f844-766a-47a1-91f4-2eeb6190f80c"
+  IPrintSchemaTicket2_GUID = "2ec1f844-766a-47a1-91f4-2eeb6190f80c"
+  IID_IPrintSchemaTicket2 = LibC::GUID.new(0x2ec1f844_u32, 0x766a_u16, 0x47a1_u16, StaticArray[0x91_u8, 0xf4_u8, 0x2e_u8, 0xeb_u8, 0x61_u8, 0x90_u8, 0xf8_u8, 0xc_u8])
   struct IPrintSchemaTicket2
     lpVtbl : IPrintSchemaTicket2VTbl*
   end
@@ -4348,8 +4348,8 @@ lib LibWin32
     completed : Proc(IPrintSchemaAsyncOperationEvent*, IPrintSchemaTicket, HRESULT, HRESULT)
   end
 
-  IPrintSchemaAsyncOperationEvent_GUID = LibC::GUID.new("23adbb16-0133-4906-b29a-1dce1d026379")
-  CLSID_IPrintSchemaAsyncOperationEvent = "23adbb16-0133-4906-b29a-1dce1d026379"
+  IPrintSchemaAsyncOperationEvent_GUID = "23adbb16-0133-4906-b29a-1dce1d026379"
+  IID_IPrintSchemaAsyncOperationEvent = LibC::GUID.new(0x23adbb16_u32, 0x133_u16, 0x4906_u16, StaticArray[0xb2_u8, 0x9a_u8, 0x1d_u8, 0xce_u8, 0x1d_u8, 0x2_u8, 0x63_u8, 0x79_u8])
   struct IPrintSchemaAsyncOperationEvent
     lpVtbl : IPrintSchemaAsyncOperationEventVTbl*
   end
@@ -4366,8 +4366,8 @@ lib LibWin32
     write : Proc(IPrinterScriptableSequentialStream*, IDispatch, Int32*, HRESULT)
   end
 
-  IPrinterScriptableSequentialStream_GUID = LibC::GUID.new("2072838a-316f-467a-a949-27f68c44a854")
-  CLSID_IPrinterScriptableSequentialStream = "2072838a-316f-467a-a949-27f68c44a854"
+  IPrinterScriptableSequentialStream_GUID = "2072838a-316f-467a-a949-27f68c44a854"
+  IID_IPrinterScriptableSequentialStream = LibC::GUID.new(0x2072838a_u32, 0x316f_u16, 0x467a_u16, StaticArray[0xa9_u8, 0x49_u8, 0x27_u8, 0xf6_u8, 0x8c_u8, 0x44_u8, 0xa8_u8, 0x54_u8])
   struct IPrinterScriptableSequentialStream
     lpVtbl : IPrinterScriptableSequentialStreamVTbl*
   end
@@ -4387,8 +4387,8 @@ lib LibWin32
     set_size : Proc(IPrinterScriptableStream*, Int32, HRESULT)
   end
 
-  IPrinterScriptableStream_GUID = LibC::GUID.new("7edf9a92-4750-41a5-a17f-879a6f4f7dcb")
-  CLSID_IPrinterScriptableStream = "7edf9a92-4750-41a5-a17f-879a6f4f7dcb"
+  IPrinterScriptableStream_GUID = "7edf9a92-4750-41a5-a17f-879a6f4f7dcb"
+  IID_IPrinterScriptableStream = LibC::GUID.new(0x7edf9a92_u32, 0x4750_u16, 0x41a5_u16, StaticArray[0xa1_u8, 0x7f_u8, 0x87_u8, 0x9a_u8, 0x6f_u8, 0x4f_u8, 0x7d_u8, 0xcb_u8])
   struct IPrinterScriptableStream
     lpVtbl : IPrinterScriptableStreamVTbl*
   end
@@ -4413,8 +4413,8 @@ lib LibWin32
     get_write_stream : Proc(IPrinterPropertyBag*, UInt8*, IStream*, HRESULT)
   end
 
-  IPrinterPropertyBag_GUID = LibC::GUID.new("fea77364-df95-4a23-a905-019b79a8e481")
-  CLSID_IPrinterPropertyBag = "fea77364-df95-4a23-a905-019b79a8e481"
+  IPrinterPropertyBag_GUID = "fea77364-df95-4a23-a905-019b79a8e481"
+  IID_IPrinterPropertyBag = LibC::GUID.new(0xfea77364_u32, 0xdf95_u16, 0x4a23_u16, StaticArray[0xa9_u8, 0x5_u8, 0x1_u8, 0x9b_u8, 0x79_u8, 0xa8_u8, 0xe4_u8, 0x81_u8])
   struct IPrinterPropertyBag
     lpVtbl : IPrinterPropertyBagVTbl*
   end
@@ -4439,8 +4439,8 @@ lib LibWin32
     get_write_stream : Proc(IPrinterScriptablePropertyBag*, UInt8*, IPrinterScriptableStream*, HRESULT)
   end
 
-  IPrinterScriptablePropertyBag_GUID = LibC::GUID.new("91c7765f-ed57-49ad-8b01-dc24816a5294")
-  CLSID_IPrinterScriptablePropertyBag = "91c7765f-ed57-49ad-8b01-dc24816a5294"
+  IPrinterScriptablePropertyBag_GUID = "91c7765f-ed57-49ad-8b01-dc24816a5294"
+  IID_IPrinterScriptablePropertyBag = LibC::GUID.new(0x91c7765f_u32, 0xed57_u16, 0x49ad_u16, StaticArray[0x8b_u8, 0x1_u8, 0xdc_u8, 0x24_u8, 0x81_u8, 0x6a_u8, 0x52_u8, 0x94_u8])
   struct IPrinterScriptablePropertyBag
     lpVtbl : IPrinterScriptablePropertyBagVTbl*
   end
@@ -4466,8 +4466,8 @@ lib LibWin32
     get_read_stream_as_xml : Proc(IPrinterScriptablePropertyBag2*, UInt8*, IUnknown*, HRESULT)
   end
 
-  IPrinterScriptablePropertyBag2_GUID = LibC::GUID.new("2a1c53c4-8638-4b3e-b518-2773c94556a3")
-  CLSID_IPrinterScriptablePropertyBag2 = "2a1c53c4-8638-4b3e-b518-2773c94556a3"
+  IPrinterScriptablePropertyBag2_GUID = "2a1c53c4-8638-4b3e-b518-2773c94556a3"
+  IID_IPrinterScriptablePropertyBag2 = LibC::GUID.new(0x2a1c53c4_u32, 0x8638_u16, 0x4b3e_u16, StaticArray[0xb5_u8, 0x18_u8, 0x27_u8, 0x73_u8, 0xc9_u8, 0x45_u8, 0x56_u8, 0xa3_u8])
   struct IPrinterScriptablePropertyBag2
     lpVtbl : IPrinterScriptablePropertyBag2VTbl*
   end
@@ -4486,8 +4486,8 @@ lib LibWin32
     get_properties : Proc(IPrinterQueue*, IPrinterPropertyBag*, HRESULT)
   end
 
-  IPrinterQueue_GUID = LibC::GUID.new("3580a828-07fe-4b94-ac1a-757d9d2d3056")
-  CLSID_IPrinterQueue = "3580a828-07fe-4b94-ac1a-757d9d2d3056"
+  IPrinterQueue_GUID = "3580a828-07fe-4b94-ac1a-757d9d2d3056"
+  IID_IPrinterQueue = LibC::GUID.new(0x3580a828_u32, 0x7fe_u16, 0x4b94_u16, StaticArray[0xac_u8, 0x1a_u8, 0x75_u8, 0x7d_u8, 0x9d_u8, 0x2d_u8, 0x30_u8, 0x56_u8])
   struct IPrinterQueue
     lpVtbl : IPrinterQueueVTbl*
   end
@@ -4505,8 +4505,8 @@ lib LibWin32
     request_cancel : Proc(IPrintJob*, HRESULT)
   end
 
-  IPrintJob_GUID = LibC::GUID.new("b771dab8-1282-41b7-858c-f206e4d20577")
-  CLSID_IPrintJob = "b771dab8-1282-41b7-858c-f206e4d20577"
+  IPrintJob_GUID = "b771dab8-1282-41b7-858c-f206e4d20577"
+  IID_IPrintJob = LibC::GUID.new(0xb771dab8_u32, 0x1282_u16, 0x41b7_u16, StaticArray[0x85_u8, 0x8c_u8, 0xf2_u8, 0x6_u8, 0xe4_u8, 0xd2_u8, 0x5_u8, 0x77_u8])
   struct IPrintJob
     lpVtbl : IPrintJobVTbl*
   end
@@ -4524,8 +4524,8 @@ lib LibWin32
     get__new_enum : Proc(IPrintJobCollection*, IUnknown*, HRESULT)
   end
 
-  IPrintJobCollection_GUID = LibC::GUID.new("72b82a24-a598-4e87-895f-cdb23a49e9dc")
-  CLSID_IPrintJobCollection = "72b82a24-a598-4e87-895f-cdb23a49e9dc"
+  IPrintJobCollection_GUID = "72b82a24-a598-4e87-895f-cdb23a49e9dc"
+  IID_IPrintJobCollection = LibC::GUID.new(0x72b82a24_u32, 0xa598_u16, 0x4e87_u16, StaticArray[0x89_u8, 0x5f_u8, 0xcd_u8, 0xb2_u8, 0x3a_u8, 0x49_u8, 0xe9_u8, 0xdc_u8])
   struct IPrintJobCollection
     lpVtbl : IPrintJobCollectionVTbl*
   end
@@ -4541,8 +4541,8 @@ lib LibWin32
     on_changed : Proc(IPrinterQueueViewEvent*, IPrintJobCollection, UInt32, UInt32, UInt32, HRESULT)
   end
 
-  IPrinterQueueViewEvent_GUID = LibC::GUID.new("c5b6042b-fd21-404a-a0ef-e2fbb52b9080")
-  CLSID_IPrinterQueueViewEvent = "c5b6042b-fd21-404a-a0ef-e2fbb52b9080"
+  IPrinterQueueViewEvent_GUID = "c5b6042b-fd21-404a-a0ef-e2fbb52b9080"
+  IID_IPrinterQueueViewEvent = LibC::GUID.new(0xc5b6042b_u32, 0xfd21_u16, 0x404a_u16, StaticArray[0xa0_u8, 0xef_u8, 0xe2_u8, 0xfb_u8, 0xb5_u8, 0x2b_u8, 0x90_u8, 0x80_u8])
   struct IPrinterQueueViewEvent
     lpVtbl : IPrinterQueueViewEventVTbl*
   end
@@ -4558,8 +4558,8 @@ lib LibWin32
     set_view_range : Proc(IPrinterQueueView*, UInt32, UInt32, HRESULT)
   end
 
-  IPrinterQueueView_GUID = LibC::GUID.new("476e2969-3b2b-4b3f-8277-cff6056042aa")
-  CLSID_IPrinterQueueView = "476e2969-3b2b-4b3f-8277-cff6056042aa"
+  IPrinterQueueView_GUID = "476e2969-3b2b-4b3f-8277-cff6056042aa"
+  IID_IPrinterQueueView = LibC::GUID.new(0x476e2969_u32, 0x3b2b_u16, 0x4b3f_u16, StaticArray[0x82_u8, 0x77_u8, 0xcf_u8, 0xf6_u8, 0x5_u8, 0x60_u8, 0x42_u8, 0xaa_u8])
   struct IPrinterQueueView
     lpVtbl : IPrinterQueueViewVTbl*
   end
@@ -4575,8 +4575,8 @@ lib LibWin32
     on_bidi_response_received : Proc(IPrinterQueueEvent*, UInt8*, HRESULT, HRESULT)
   end
 
-  IPrinterQueueEvent_GUID = LibC::GUID.new("214685f6-7b78-4681-87e0-495f739273d1")
-  CLSID_IPrinterQueueEvent = "214685f6-7b78-4681-87e0-495f739273d1"
+  IPrinterQueueEvent_GUID = "214685f6-7b78-4681-87e0-495f739273d1"
+  IID_IPrinterQueueEvent = LibC::GUID.new(0x214685f6_u32, 0x7b78_u16, 0x4681_u16, StaticArray[0x87_u8, 0xe0_u8, 0x49_u8, 0x5f_u8, 0x73_u8, 0x92_u8, 0x73_u8, 0xd1_u8])
   struct IPrinterQueueEvent
     lpVtbl : IPrinterQueueEventVTbl*
   end
@@ -4588,8 +4588,8 @@ lib LibWin32
     completed : Proc(IPrinterBidiSetRequestCallback*, UInt8*, HRESULT, HRESULT)
   end
 
-  IPrinterBidiSetRequestCallback_GUID = LibC::GUID.new("c52d32dd-f2b4-4052-8502-ec4305ecb71f")
-  CLSID_IPrinterBidiSetRequestCallback = "c52d32dd-f2b4-4052-8502-ec4305ecb71f"
+  IPrinterBidiSetRequestCallback_GUID = "c52d32dd-f2b4-4052-8502-ec4305ecb71f"
+  IID_IPrinterBidiSetRequestCallback = LibC::GUID.new(0xc52d32dd_u32, 0xf2b4_u16, 0x4052_u16, StaticArray[0x85_u8, 0x2_u8, 0xec_u8, 0x43_u8, 0x5_u8, 0xec_u8, 0xb7_u8, 0x1f_u8])
   struct IPrinterBidiSetRequestCallback
     lpVtbl : IPrinterBidiSetRequestCallbackVTbl*
   end
@@ -4601,8 +4601,8 @@ lib LibWin32
     cancel : Proc(IPrinterExtensionAsyncOperation*, HRESULT)
   end
 
-  IPrinterExtensionAsyncOperation_GUID = LibC::GUID.new("108d6a23-6a4b-4552-9448-68b427186acd")
-  CLSID_IPrinterExtensionAsyncOperation = "108d6a23-6a4b-4552-9448-68b427186acd"
+  IPrinterExtensionAsyncOperation_GUID = "108d6a23-6a4b-4552-9448-68b427186acd"
+  IID_IPrinterExtensionAsyncOperation = LibC::GUID.new(0x108d6a23_u32, 0x6a4b_u16, 0x4552_u16, StaticArray[0x94_u8, 0x48_u8, 0x68_u8, 0xb4_u8, 0x27_u8, 0x18_u8, 0x6a_u8, 0xcd_u8])
   struct IPrinterExtensionAsyncOperation
     lpVtbl : IPrinterExtensionAsyncOperationVTbl*
   end
@@ -4623,8 +4623,8 @@ lib LibWin32
     get_printer_queue_view : Proc(IPrinterQueue2*, UInt32, UInt32, IPrinterQueueView*, HRESULT)
   end
 
-  IPrinterQueue2_GUID = LibC::GUID.new("8cd444e8-c9bb-49b3-8e38-e03209416131")
-  CLSID_IPrinterQueue2 = "8cd444e8-c9bb-49b3-8e38-e03209416131"
+  IPrinterQueue2_GUID = "8cd444e8-c9bb-49b3-8e38-e03209416131"
+  IID_IPrinterQueue2 = LibC::GUID.new(0x8cd444e8_u32, 0xc9bb_u16, 0x49b3_u16, StaticArray[0x8e_u8, 0x38_u8, 0xe0_u8, 0x32_u8, 0x9_u8, 0x41_u8, 0x61_u8, 0x31_u8])
   struct IPrinterQueue2
     lpVtbl : IPrinterQueue2VTbl*
   end
@@ -4643,8 +4643,8 @@ lib LibWin32
     get_user_properties : Proc(IPrinterExtensionContext*, IPrinterPropertyBag*, HRESULT)
   end
 
-  IPrinterExtensionContext_GUID = LibC::GUID.new("39843bf2-c4d2-41fd-b4b2-aedbee5e1900")
-  CLSID_IPrinterExtensionContext = "39843bf2-c4d2-41fd-b4b2-aedbee5e1900"
+  IPrinterExtensionContext_GUID = "39843bf2-c4d2-41fd-b4b2-aedbee5e1900"
+  IID_IPrinterExtensionContext = LibC::GUID.new(0x39843bf2_u32, 0xc4d2_u16, 0x41fd_u16, StaticArray[0xb4_u8, 0xb2_u8, 0xae_u8, 0xdb_u8, 0xee_u8, 0x5e_u8, 0x19_u8, 0x0_u8])
   struct IPrinterExtensionContext
     lpVtbl : IPrinterExtensionContextVTbl*
   end
@@ -4661,8 +4661,8 @@ lib LibWin32
     complete : Proc(IPrinterExtensionRequest*, HRESULT)
   end
 
-  IPrinterExtensionRequest_GUID = LibC::GUID.new("39843bf3-c4d2-41fd-b4b2-aedbee5e1900")
-  CLSID_IPrinterExtensionRequest = "39843bf3-c4d2-41fd-b4b2-aedbee5e1900"
+  IPrinterExtensionRequest_GUID = "39843bf3-c4d2-41fd-b4b2-aedbee5e1900"
+  IID_IPrinterExtensionRequest = LibC::GUID.new(0x39843bf3_u32, 0xc4d2_u16, 0x41fd_u16, StaticArray[0xb4_u8, 0xb2_u8, 0xae_u8, 0xdb_u8, 0xee_u8, 0x5e_u8, 0x19_u8, 0x0_u8])
   struct IPrinterExtensionRequest
     lpVtbl : IPrinterExtensionRequestVTbl*
   end
@@ -4688,8 +4688,8 @@ lib LibWin32
     get_window_parent : Proc(IPrinterExtensionEventArgs*, LibC::HANDLE*, HRESULT)
   end
 
-  IPrinterExtensionEventArgs_GUID = LibC::GUID.new("39843bf4-c4d2-41fd-b4b2-aedbee5e1900")
-  CLSID_IPrinterExtensionEventArgs = "39843bf4-c4d2-41fd-b4b2-aedbee5e1900"
+  IPrinterExtensionEventArgs_GUID = "39843bf4-c4d2-41fd-b4b2-aedbee5e1900"
+  IID_IPrinterExtensionEventArgs = LibC::GUID.new(0x39843bf4_u32, 0xc4d2_u16, 0x41fd_u16, StaticArray[0xb4_u8, 0xb2_u8, 0xae_u8, 0xdb_u8, 0xee_u8, 0x5e_u8, 0x19_u8, 0x0_u8])
   struct IPrinterExtensionEventArgs
     lpVtbl : IPrinterExtensionEventArgsVTbl*
   end
@@ -4707,8 +4707,8 @@ lib LibWin32
     get__new_enum : Proc(IPrinterExtensionContextCollection*, IUnknown*, HRESULT)
   end
 
-  IPrinterExtensionContextCollection_GUID = LibC::GUID.new("fb476970-9bab-4861-811e-3e98b0c5addf")
-  CLSID_IPrinterExtensionContextCollection = "fb476970-9bab-4861-811e-3e98b0c5addf"
+  IPrinterExtensionContextCollection_GUID = "fb476970-9bab-4861-811e-3e98b0c5addf"
+  IID_IPrinterExtensionContextCollection = LibC::GUID.new(0xfb476970_u32, 0x9bab_u16, 0x4861_u16, StaticArray[0x81_u8, 0x1e_u8, 0x3e_u8, 0x98_u8, 0xb0_u8, 0xc5_u8, 0xad_u8, 0xdf_u8])
   struct IPrinterExtensionContextCollection
     lpVtbl : IPrinterExtensionContextCollectionVTbl*
   end
@@ -4725,8 +4725,8 @@ lib LibWin32
     on_printer_queues_enumerated : Proc(IPrinterExtensionEvent*, IPrinterExtensionContextCollection, HRESULT)
   end
 
-  IPrinterExtensionEvent_GUID = LibC::GUID.new("c093cb63-5ef5-4585-af8e-4d5637487b57")
-  CLSID_IPrinterExtensionEvent = "c093cb63-5ef5-4585-af8e-4d5637487b57"
+  IPrinterExtensionEvent_GUID = "c093cb63-5ef5-4585-af8e-4d5637487b57"
+  IID_IPrinterExtensionEvent = LibC::GUID.new(0xc093cb63_u32, 0x5ef5_u16, 0x4585_u16, StaticArray[0xaf_u8, 0x8e_u8, 0x4d_u8, 0x56_u8, 0x37_u8, 0x48_u8, 0x7b_u8, 0x57_u8])
   struct IPrinterExtensionEvent
     lpVtbl : IPrinterExtensionEventVTbl*
   end
@@ -4739,8 +4739,8 @@ lib LibWin32
     disable_events : Proc(IPrinterExtensionManager*, HRESULT)
   end
 
-  IPrinterExtensionManager_GUID = LibC::GUID.new("93c6eb8c-b001-4355-9629-8e8a1b3f8e77")
-  CLSID_IPrinterExtensionManager = "93c6eb8c-b001-4355-9629-8e8a1b3f8e77"
+  IPrinterExtensionManager_GUID = "93c6eb8c-b001-4355-9629-8e8a1b3f8e77"
+  IID_IPrinterExtensionManager = LibC::GUID.new(0x93c6eb8c_u32, 0xb001_u16, 0x4355_u16, StaticArray[0x96_u8, 0x29_u8, 0x8e_u8, 0x8a_u8, 0x1b_u8, 0x3f_u8, 0x8e_u8, 0x77_u8])
   struct IPrinterExtensionManager
     lpVtbl : IPrinterExtensionManagerVTbl*
   end
@@ -4758,8 +4758,8 @@ lib LibWin32
     get_user_properties : Proc(IPrinterScriptContext*, IPrinterScriptablePropertyBag*, HRESULT)
   end
 
-  IPrinterScriptContext_GUID = LibC::GUID.new("066acbca-8881-49c9-bb98-fae16b4889e1")
-  CLSID_IPrinterScriptContext = "066acbca-8881-49c9-bb98-fae16b4889e1"
+  IPrinterScriptContext_GUID = "066acbca-8881-49c9-bb98-fae16b4889e1"
+  IID_IPrinterScriptContext = LibC::GUID.new(0x66acbca_u32, 0x8881_u16, 0x49c9_u16, StaticArray[0xbb_u8, 0x98_u8, 0xfa_u8, 0xe1_u8, 0x6b_u8, 0x48_u8, 0x89_u8, 0xe1_u8])
   struct IPrinterScriptContext
     lpVtbl : IPrinterScriptContextVTbl*
   end
@@ -4772,8 +4772,8 @@ lib LibWin32
     release_data : Proc(IPrintAsyncNotifyDataObject*, HRESULT)
   end
 
-  IPrintAsyncNotifyDataObject_GUID = LibC::GUID.new("77cf513e-5d49-4789-9f30-d0822b335c0d")
-  CLSID_IPrintAsyncNotifyDataObject = "77cf513e-5d49-4789-9f30-d0822b335c0d"
+  IPrintAsyncNotifyDataObject_GUID = "77cf513e-5d49-4789-9f30-d0822b335c0d"
+  IID_IPrintAsyncNotifyDataObject = LibC::GUID.new(0x77cf513e_u32, 0x5d49_u16, 0x4789_u16, StaticArray[0x9f_u8, 0x30_u8, 0xd0_u8, 0x82_u8, 0x2b_u8, 0x33_u8, 0x5c_u8, 0xd_u8])
   struct IPrintAsyncNotifyDataObject
     lpVtbl : IPrintAsyncNotifyDataObjectVTbl*
   end
@@ -4786,8 +4786,8 @@ lib LibWin32
     close_channel : Proc(IPrintAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, HRESULT)
   end
 
-  IPrintAsyncNotifyChannel_GUID = LibC::GUID.new("4a5031b1-1f3f-4db0-a462-4530ed8b0451")
-  CLSID_IPrintAsyncNotifyChannel = "4a5031b1-1f3f-4db0-a462-4530ed8b0451"
+  IPrintAsyncNotifyChannel_GUID = "4a5031b1-1f3f-4db0-a462-4530ed8b0451"
+  IID_IPrintAsyncNotifyChannel = LibC::GUID.new(0x4a5031b1_u32, 0x1f3f_u16, 0x4db0_u16, StaticArray[0xa4_u8, 0x62_u8, 0x45_u8, 0x30_u8, 0xed_u8, 0x8b_u8, 0x4_u8, 0x51_u8])
   struct IPrintAsyncNotifyChannel
     lpVtbl : IPrintAsyncNotifyChannelVTbl*
   end
@@ -4800,8 +4800,8 @@ lib LibWin32
     channel_closed : Proc(IPrintAsyncNotifyCallback*, IPrintAsyncNotifyChannel, IPrintAsyncNotifyDataObject, HRESULT)
   end
 
-  IPrintAsyncNotifyCallback_GUID = LibC::GUID.new("7def34c1-9d92-4c99-b3b3-db94a9d4191b")
-  CLSID_IPrintAsyncNotifyCallback = "7def34c1-9d92-4c99-b3b3-db94a9d4191b"
+  IPrintAsyncNotifyCallback_GUID = "7def34c1-9d92-4c99-b3b3-db94a9d4191b"
+  IID_IPrintAsyncNotifyCallback = LibC::GUID.new(0x7def34c1_u32, 0x9d92_u16, 0x4c99_u16, StaticArray[0xb3_u8, 0xb3_u8, 0xdb_u8, 0x94_u8, 0xa9_u8, 0xd4_u8, 0x19_u8, 0x1b_u8])
   struct IPrintAsyncNotifyCallback
     lpVtbl : IPrintAsyncNotifyCallbackVTbl*
   end
@@ -4814,8 +4814,8 @@ lib LibWin32
     unregister_for_notifications : Proc(IPrintAsyncNotifyRegistration*, HRESULT)
   end
 
-  IPrintAsyncNotifyRegistration_GUID = LibC::GUID.new("0f6f27b6-6f86-4591-9203-64c3bfadedfe")
-  CLSID_IPrintAsyncNotifyRegistration = "0f6f27b6-6f86-4591-9203-64c3bfadedfe"
+  IPrintAsyncNotifyRegistration_GUID = "0f6f27b6-6f86-4591-9203-64c3bfadedfe"
+  IID_IPrintAsyncNotifyRegistration = LibC::GUID.new(0xf6f27b6_u32, 0x6f86_u16, 0x4591_u16, StaticArray[0x92_u8, 0x3_u8, 0x64_u8, 0xc3_u8, 0xbf_u8, 0xad_u8, 0xed_u8, 0xfe_u8])
   struct IPrintAsyncNotifyRegistration
     lpVtbl : IPrintAsyncNotifyRegistrationVTbl*
   end
@@ -4828,8 +4828,8 @@ lib LibWin32
     create_print_async_notify_registration : Proc(IPrintAsyncNotify*, Guid*, PrintAsyncNotifyUserFilter, PrintAsyncNotifyConversationStyle, IPrintAsyncNotifyCallback, IPrintAsyncNotifyRegistration*, HRESULT)
   end
 
-  IPrintAsyncNotify_GUID = LibC::GUID.new("532818f7-921b-4fb2-bff8-2f4fd52ebebf")
-  CLSID_IPrintAsyncNotify = "532818f7-921b-4fb2-bff8-2f4fd52ebebf"
+  IPrintAsyncNotify_GUID = "532818f7-921b-4fb2-bff8-2f4fd52ebebf"
+  IID_IPrintAsyncNotify = LibC::GUID.new(0x532818f7_u32, 0x921b_u16, 0x4fb2_u16, StaticArray[0xbf_u8, 0xf8_u8, 0x2f_u8, 0x4f_u8, 0xd5_u8, 0x2e_u8, 0xbe_u8, 0xbf_u8])
   struct IPrintAsyncNotify
     lpVtbl : IPrintAsyncNotifyVTbl*
   end
@@ -4937,8 +4937,8 @@ lib LibWin32
     async_close_channel : Proc(IBidiAsyncNotifyChannel*, IPrintAsyncNotifyDataObject, IPrintAsyncCookie, HRESULT)
   end
 
-  IBidiAsyncNotifyChannel_GUID = LibC::GUID.new("532818f7-921b-4fb2-bff8-2f4fd52ebebf")
-  CLSID_IBidiAsyncNotifyChannel = "532818f7-921b-4fb2-bff8-2f4fd52ebebf"
+  IBidiAsyncNotifyChannel_GUID = "532818f7-921b-4fb2-bff8-2f4fd52ebebf"
+  IID_IBidiAsyncNotifyChannel = LibC::GUID.new(0x532818f7_u32, 0x921b_u16, 0x4fb2_u16, StaticArray[0xbf_u8, 0xf8_u8, 0x2f_u8, 0x4f_u8, 0xd5_u8, 0x2e_u8, 0xbe_u8, 0xbf_u8])
   struct IBidiAsyncNotifyChannel
     lpVtbl : IBidiAsyncNotifyChannelVTbl*
   end
@@ -4950,8 +4950,8 @@ lib LibWin32
     continue : Proc(IXpsRasterizerNotificationCallback*, HRESULT)
   end
 
-  IXpsRasterizerNotificationCallback_GUID = LibC::GUID.new("9ab8fd0d-cb94-49c2-9cb0-97ec1d5469d2")
-  CLSID_IXpsRasterizerNotificationCallback = "9ab8fd0d-cb94-49c2-9cb0-97ec1d5469d2"
+  IXpsRasterizerNotificationCallback_GUID = "9ab8fd0d-cb94-49c2-9cb0-97ec1d5469d2"
+  IID_IXpsRasterizerNotificationCallback = LibC::GUID.new(0x9ab8fd0d_u32, 0xcb94_u16, 0x49c2_u16, StaticArray[0x9c_u8, 0xb0_u8, 0x97_u8, 0xec_u8, 0x1d_u8, 0x54_u8, 0x69_u8, 0xd2_u8])
   struct IXpsRasterizerNotificationCallback
     lpVtbl : IXpsRasterizerNotificationCallbackVTbl*
   end
@@ -4964,8 +4964,8 @@ lib LibWin32
     set_minimal_line_width : Proc(IXpsRasterizer*, Int32, HRESULT)
   end
 
-  IXpsRasterizer_GUID = LibC::GUID.new("7567cfc8-c156-47a8-9dac-11a2ae5bdd6b")
-  CLSID_IXpsRasterizer = "7567cfc8-c156-47a8-9dac-11a2ae5bdd6b"
+  IXpsRasterizer_GUID = "7567cfc8-c156-47a8-9dac-11a2ae5bdd6b"
+  IID_IXpsRasterizer = LibC::GUID.new(0x7567cfc8_u32, 0xc156_u16, 0x47a8_u16, StaticArray[0x9d_u8, 0xac_u8, 0x11_u8, 0xa2_u8, 0xae_u8, 0x5b_u8, 0xdd_u8, 0x6b_u8])
   struct IXpsRasterizer
     lpVtbl : IXpsRasterizerVTbl*
   end
@@ -4977,8 +4977,8 @@ lib LibWin32
     create_rasterizer : Proc(IXpsRasterizationFactory*, IXpsOMPage, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, IXpsRasterizer*, HRESULT)
   end
 
-  IXpsRasterizationFactory_GUID = LibC::GUID.new("e094808a-24c6-482b-a3a7-c21ac9b55f17")
-  CLSID_IXpsRasterizationFactory = "e094808a-24c6-482b-a3a7-c21ac9b55f17"
+  IXpsRasterizationFactory_GUID = "e094808a-24c6-482b-a3a7-c21ac9b55f17"
+  IID_IXpsRasterizationFactory = LibC::GUID.new(0xe094808a_u32, 0x24c6_u16, 0x482b_u16, StaticArray[0xa3_u8, 0xa7_u8, 0xc2_u8, 0x1a_u8, 0xc9_u8, 0xb5_u8, 0x5f_u8, 0x17_u8])
   struct IXpsRasterizationFactory
     lpVtbl : IXpsRasterizationFactoryVTbl*
   end
@@ -4990,8 +4990,8 @@ lib LibWin32
     create_rasterizer : Proc(IXpsRasterizationFactory1*, IXpsOMPage, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, XPSRAS_PIXEL_FORMAT, IXpsRasterizer*, HRESULT)
   end
 
-  IXpsRasterizationFactory1_GUID = LibC::GUID.new("2d6e5f77-6414-4a1e-a8e0-d4194ce6a26f")
-  CLSID_IXpsRasterizationFactory1 = "2d6e5f77-6414-4a1e-a8e0-d4194ce6a26f"
+  IXpsRasterizationFactory1_GUID = "2d6e5f77-6414-4a1e-a8e0-d4194ce6a26f"
+  IID_IXpsRasterizationFactory1 = LibC::GUID.new(0x2d6e5f77_u32, 0x6414_u16, 0x4a1e_u16, StaticArray[0xa8_u8, 0xe0_u8, 0xd4_u8, 0x19_u8, 0x4c_u8, 0xe6_u8, 0xa2_u8, 0x6f_u8])
   struct IXpsRasterizationFactory1
     lpVtbl : IXpsRasterizationFactory1VTbl*
   end
@@ -5003,8 +5003,8 @@ lib LibWin32
     create_rasterizer : Proc(IXpsRasterizationFactory2*, IXpsOMPage, Float32, Float32, XPSRAS_RENDERING_MODE, XPSRAS_RENDERING_MODE, XPSRAS_PIXEL_FORMAT, XPSRAS_BACKGROUND_COLOR, IXpsRasterizer*, HRESULT)
   end
 
-  IXpsRasterizationFactory2_GUID = LibC::GUID.new("9c16ce3e-10f5-41fd-9ddc-6826669c2ff6")
-  CLSID_IXpsRasterizationFactory2 = "9c16ce3e-10f5-41fd-9ddc-6826669c2ff6"
+  IXpsRasterizationFactory2_GUID = "9c16ce3e-10f5-41fd-9ddc-6826669c2ff6"
+  IID_IXpsRasterizationFactory2 = LibC::GUID.new(0x9c16ce3e_u32, 0x10f5_u16, 0x41fd_u16, StaticArray[0x9d_u8, 0xdc_u8, 0x68_u8, 0x26_u8, 0x66_u8, 0x9c_u8, 0x2f_u8, 0xf6_u8])
   struct IXpsRasterizationFactory2
     lpVtbl : IXpsRasterizationFactory2VTbl*
   end
@@ -5018,8 +5018,8 @@ lib LibWin32
     invalidate_preview : Proc(IPrintPreviewDxgiPackageTarget*, HRESULT)
   end
 
-  IPrintPreviewDxgiPackageTarget_GUID = LibC::GUID.new("1a6dd0ad-1e2a-4e99-a5ba-91f17818290e")
-  CLSID_IPrintPreviewDxgiPackageTarget = "1a6dd0ad-1e2a-4e99-a5ba-91f17818290e"
+  IPrintPreviewDxgiPackageTarget_GUID = "1a6dd0ad-1e2a-4e99-a5ba-91f17818290e"
+  IID_IPrintPreviewDxgiPackageTarget = LibC::GUID.new(0x1a6dd0ad_u32, 0x1e2a_u16, 0x4e99_u16, StaticArray[0xa5_u8, 0xba_u8, 0x91_u8, 0xf1_u8, 0x78_u8, 0x18_u8, 0x29_u8, 0xe_u8])
   struct IPrintPreviewDxgiPackageTarget
     lpVtbl : IPrintPreviewDxgiPackageTargetVTbl*
   end

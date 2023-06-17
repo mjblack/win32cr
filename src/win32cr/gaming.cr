@@ -15,10 +15,10 @@ require "./system/winrt.cr"
 @[Link("onecore")]
 {% end %}
 lib LibWin32
-  GameExplorer = LibC::GUID.new(0x9a5ea990_u32, 0x3034_u16, 0x4d6f_u16, StaticArray[0x91_u8, 0x28_u8, 0x1_u8, 0xf3_u8, 0xc6_u8, 0x10_u8, 0x22_u8, 0xbc_u8])
-  GameStatistics = LibC::GUID.new(0xdbc85a2c_u32, 0xc0dc_u16, 0x4961_u16, StaticArray[0xb6_u8, 0xe2_u8, 0xd2_u8, 0x8b_u8, 0x62_u8, 0xc1_u8, 0x1a_u8, 0xd4_u8])
-  XblIdpAuthManager = LibC::GUID.new(0xce23534b_u32, 0x56d8_u16, 0x4978_u16, StaticArray[0x86_u8, 0xa2_u8, 0x7e_u8, 0xe5_u8, 0x70_u8, 0x64_u8, 0x4_u8, 0x68_u8])
-  XblIdpAuthTokenResult = LibC::GUID.new(0x9f493441_u32, 0x744a_u16, 0x410c_u16, StaticArray[0xae_u8, 0x2b_u8, 0x9a_u8, 0x22_u8, 0xf7_u8, 0xc7_u8, 0x73_u8, 0x1f_u8])
+  CLSID_GameExplorer = LibC::GUID.new(0x9a5ea990_u32, 0x3034_u16, 0x4d6f_u16, StaticArray[0x91_u8, 0x28_u8, 0x1_u8, 0xf3_u8, 0xc6_u8, 0x10_u8, 0x22_u8, 0xbc_u8])
+  CLSID_GameStatistics = LibC::GUID.new(0xdbc85a2c_u32, 0xc0dc_u16, 0x4961_u16, StaticArray[0xb6_u8, 0xe2_u8, 0xd2_u8, 0x8b_u8, 0x62_u8, 0xc1_u8, 0x1a_u8, 0xd4_u8])
+  CLSID_XblIdpAuthManager = LibC::GUID.new(0xce23534b_u32, 0x56d8_u16, 0x4978_u16, StaticArray[0x86_u8, 0xa2_u8, 0x7e_u8, 0xe5_u8, 0x70_u8, 0x64_u8, 0x4_u8, 0x68_u8])
+  CLSID_XblIdpAuthTokenResult = LibC::GUID.new(0x9f493441_u32, 0x744a_u16, 0x410c_u16, StaticArray[0xae_u8, 0x2b_u8, 0x9a_u8, 0x22_u8, 0xf7_u8, 0xc7_u8, 0x73_u8, 0x1f_u8])
 
   alias GameUICompletionRoutine = Proc(HRESULT, Void*, Void)
   alias PlayerPickerUICompletionRoutine = Proc(HRESULT, Void*, HSTRING*, LibC::UINT_PTR, Void)
@@ -106,8 +106,8 @@ lib LibWin32
     verify_access : Proc(IGameExplorer*, UInt8*, LibC::BOOL*, HRESULT)
   end
 
-  IGameExplorer_GUID = LibC::GUID.new("e7b2fb72-d728-49b3-a5f2-18ebf5f1349e")
-  CLSID_IGameExplorer = "e7b2fb72-d728-49b3-a5f2-18ebf5f1349e"
+  IGameExplorer_GUID = "e7b2fb72-d728-49b3-a5f2-18ebf5f1349e"
+  IID_IGameExplorer = LibC::GUID.new(0xe7b2fb72_u32, 0xd728_u16, 0x49b3_u16, StaticArray[0xa5_u8, 0xf2_u8, 0x18_u8, 0xeb_u8, 0xf5_u8, 0xf1_u8, 0x34_u8, 0x9e_u8])
   struct IGameExplorer
     lpVtbl : IGameExplorerVTbl*
   end
@@ -130,8 +130,8 @@ lib LibWin32
     get_last_played_category : Proc(IGameStatistics*, UInt32*, HRESULT)
   end
 
-  IGameStatistics_GUID = LibC::GUID.new("3887c9ca-04a0-42ae-bc4c-5fa6c7721145")
-  CLSID_IGameStatistics = "3887c9ca-04a0-42ae-bc4c-5fa6c7721145"
+  IGameStatistics_GUID = "3887c9ca-04a0-42ae-bc4c-5fa6c7721145"
+  IID_IGameStatistics = LibC::GUID.new(0x3887c9ca_u32, 0x4a0_u16, 0x42ae_u16, StaticArray[0xbc_u8, 0x4c_u8, 0x5f_u8, 0xa6_u8, 0xc7_u8, 0x72_u8, 0x11_u8, 0x45_u8])
   struct IGameStatistics
     lpVtbl : IGameStatisticsVTbl*
   end
@@ -144,8 +144,8 @@ lib LibWin32
     remove_game_statistics : Proc(IGameStatisticsMgr*, LibC::LPWSTR, HRESULT)
   end
 
-  IGameStatisticsMgr_GUID = LibC::GUID.new("aff3ea11-e70e-407d-95dd-35e612c41ce2")
-  CLSID_IGameStatisticsMgr = "aff3ea11-e70e-407d-95dd-35e612c41ce2"
+  IGameStatisticsMgr_GUID = "aff3ea11-e70e-407d-95dd-35e612c41ce2"
+  IID_IGameStatisticsMgr = LibC::GUID.new(0xaff3ea11_u32, 0xe70e_u16, 0x407d_u16, StaticArray[0x95_u8, 0xdd_u8, 0x35_u8, 0xe6_u8, 0x12_u8, 0xc4_u8, 0x1c_u8, 0xe2_u8])
   struct IGameStatisticsMgr
     lpVtbl : IGameStatisticsMgrVTbl*
   end
@@ -159,8 +159,8 @@ lib LibWin32
     check_access : Proc(IGameExplorer2*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
-  IGameExplorer2_GUID = LibC::GUID.new("86874aa7-a1ed-450d-a7eb-b89e20b2fff3")
-  CLSID_IGameExplorer2 = "86874aa7-a1ed-450d-a7eb-b89e20b2fff3"
+  IGameExplorer2_GUID = "86874aa7-a1ed-450d-a7eb-b89e20b2fff3"
+  IID_IGameExplorer2 = LibC::GUID.new(0x86874aa7_u32, 0xa1ed_u16, 0x450d_u16, StaticArray[0xa7_u8, 0xeb_u8, 0xb8_u8, 0x9e_u8, 0x20_u8, 0xb2_u8, 0xff_u8, 0xf3_u8])
   struct IGameExplorer2
     lpVtbl : IGameExplorer2VTbl*
   end
@@ -177,8 +177,8 @@ lib LibWin32
     get_token_and_signature_with_token_result : Proc(IXblIdpAuthManager*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, LibC::BOOL, IXblIdpAuthTokenResult*, HRESULT)
   end
 
-  IXblIdpAuthManager_GUID = LibC::GUID.new("eb5ddb08-8bbf-449b-ac21-b02ddeb3b136")
-  CLSID_IXblIdpAuthManager = "eb5ddb08-8bbf-449b-ac21-b02ddeb3b136"
+  IXblIdpAuthManager_GUID = "eb5ddb08-8bbf-449b-ac21-b02ddeb3b136"
+  IID_IXblIdpAuthManager = LibC::GUID.new(0xeb5ddb08_u32, 0x8bbf_u16, 0x449b_u16, StaticArray[0xac_u8, 0x21_u8, 0xb0_u8, 0x2d_u8, 0xde_u8, 0xb3_u8, 0xb1_u8, 0x36_u8])
   struct IXblIdpAuthManager
     lpVtbl : IXblIdpAuthManagerVTbl*
   end
@@ -209,8 +209,8 @@ lib LibWin32
     get_title_restrictions : Proc(IXblIdpAuthTokenResult*, LibC::LPWSTR*, HRESULT)
   end
 
-  IXblIdpAuthTokenResult_GUID = LibC::GUID.new("46ce0225-f267-4d68-b299-b2762552dec1")
-  CLSID_IXblIdpAuthTokenResult = "46ce0225-f267-4d68-b299-b2762552dec1"
+  IXblIdpAuthTokenResult_GUID = "46ce0225-f267-4d68-b299-b2762552dec1"
+  IID_IXblIdpAuthTokenResult = LibC::GUID.new(0x46ce0225_u32, 0xf267_u16, 0x4d68_u16, StaticArray[0xb2_u8, 0x99_u8, 0xb2_u8, 0x76_u8, 0x25_u8, 0x52_u8, 0xde_u8, 0xc1_u8])
   struct IXblIdpAuthTokenResult
     lpVtbl : IXblIdpAuthTokenResultVTbl*
   end
@@ -224,8 +224,8 @@ lib LibWin32
     get_unique_modern_gamertag : Proc(IXblIdpAuthTokenResult2*, LibC::LPWSTR*, HRESULT)
   end
 
-  IXblIdpAuthTokenResult2_GUID = LibC::GUID.new("75d760b0-60b9-412d-994f-26b2cd5f7812")
-  CLSID_IXblIdpAuthTokenResult2 = "75d760b0-60b9-412d-994f-26b2cd5f7812"
+  IXblIdpAuthTokenResult2_GUID = "75d760b0-60b9-412d-994f-26b2cd5f7812"
+  IID_IXblIdpAuthTokenResult2 = LibC::GUID.new(0x75d760b0_u32, 0x60b9_u16, 0x412d_u16, StaticArray[0x99_u8, 0x4f_u8, 0x26_u8, 0xb2_u8, 0xcd_u8, 0x5f_u8, 0x78_u8, 0x12_u8])
   struct IXblIdpAuthTokenResult2
     lpVtbl : IXblIdpAuthTokenResult2VTbl*
   end

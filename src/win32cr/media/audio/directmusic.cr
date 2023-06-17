@@ -577,7 +577,7 @@ lib LibWin32
     data_flow : DIRECTSOUNDDEVICE_DATAFLOW
     device_id : Guid
     description : PSTR
-    module : PSTR
+    mmodule : PSTR
     interface : PSTR
     wave_device_id : UInt32
   end
@@ -586,7 +586,7 @@ lib LibWin32
     data_flow : DIRECTSOUNDDEVICE_DATAFLOW
     device_id : Guid
     description : LibC::LPWSTR
-    module : LibC::LPWSTR
+    mmodule : LibC::LPWSTR
     interface : LibC::LPWSTR
     wave_device_id : UInt32
   end
@@ -640,8 +640,8 @@ lib LibWin32
     set_direct_sound : Proc(IDirectMusic*, IDirectSound, LibC::HANDLE, HRESULT)
   end
 
-  IDirectMusic_GUID = LibC::GUID.new("6536115a-7b2d-11d2-ba18-0000f875ac12")
-  CLSID_IDirectMusic = "6536115a-7b2d-11d2-ba18-0000f875ac12"
+  IDirectMusic_GUID = "6536115a-7b2d-11d2-ba18-0000f875ac12"
+  IID_IDirectMusic = LibC::GUID.new(0x6536115a_u32, 0x7b2d_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x18_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
   struct IDirectMusic
     lpVtbl : IDirectMusicVTbl*
   end
@@ -662,8 +662,8 @@ lib LibWin32
     set_external_master_clock : Proc(IDirectMusic8*, IReferenceClock, HRESULT)
   end
 
-  IDirectMusic8_GUID = LibC::GUID.new("2d3629f7-813d-4939-8508-f05c6b75fd97")
-  CLSID_IDirectMusic8 = "2d3629f7-813d-4939-8508-f05c6b75fd97"
+  IDirectMusic8_GUID = "2d3629f7-813d-4939-8508-f05c6b75fd97"
+  IID_IDirectMusic8 = LibC::GUID.new(0x2d3629f7_u32, 0x813d_u16, 0x4939_u16, StaticArray[0x85_u8, 0x8_u8, 0xf0_u8, 0x5c_u8, 0x6b_u8, 0x75_u8, 0xfd_u8, 0x97_u8])
   struct IDirectMusic8
     lpVtbl : IDirectMusic8VTbl*
   end
@@ -687,8 +687,8 @@ lib LibWin32
     set_used_bytes : Proc(IDirectMusicBuffer*, UInt32, HRESULT)
   end
 
-  IDirectMusicBuffer_GUID = LibC::GUID.new("d2ac2878-b39b-11d1-8704-00600893b1bd")
-  CLSID_IDirectMusicBuffer = "d2ac2878-b39b-11d1-8704-00600893b1bd"
+  IDirectMusicBuffer_GUID = "d2ac2878-b39b-11d1-8704-00600893b1bd"
+  IID_IDirectMusicBuffer = LibC::GUID.new(0xd2ac2878_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
   struct IDirectMusicBuffer
     lpVtbl : IDirectMusicBufferVTbl*
   end
@@ -701,8 +701,8 @@ lib LibWin32
     set_patch : Proc(IDirectMusicInstrument*, UInt32, HRESULT)
   end
 
-  IDirectMusicInstrument_GUID = LibC::GUID.new("d2ac287d-b39b-11d1-8704-00600893b1bd")
-  CLSID_IDirectMusicInstrument = "d2ac287d-b39b-11d1-8704-00600893b1bd"
+  IDirectMusicInstrument_GUID = "d2ac287d-b39b-11d1-8704-00600893b1bd"
+  IID_IDirectMusicInstrument = LibC::GUID.new(0xd2ac287d_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
   struct IDirectMusicInstrument
     lpVtbl : IDirectMusicInstrumentVTbl*
   end
@@ -713,8 +713,8 @@ lib LibWin32
     release : Proc(IDirectMusicDownloadedInstrument*, UInt32)
   end
 
-  IDirectMusicDownloadedInstrument_GUID = LibC::GUID.new("d2ac287e-b39b-11d1-8704-00600893b1bd")
-  CLSID_IDirectMusicDownloadedInstrument = "d2ac287e-b39b-11d1-8704-00600893b1bd"
+  IDirectMusicDownloadedInstrument_GUID = "d2ac287e-b39b-11d1-8704-00600893b1bd"
+  IID_IDirectMusicDownloadedInstrument = LibC::GUID.new(0xd2ac287e_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
   struct IDirectMusicDownloadedInstrument
     lpVtbl : IDirectMusicDownloadedInstrumentVTbl*
   end
@@ -727,8 +727,8 @@ lib LibWin32
     enum_instrument : Proc(IDirectMusicCollection*, UInt32, UInt32*, LibC::LPWSTR, UInt32, HRESULT)
   end
 
-  IDirectMusicCollection_GUID = LibC::GUID.new("d2ac287c-b39b-11d1-8704-00600893b1bd")
-  CLSID_IDirectMusicCollection = "d2ac287c-b39b-11d1-8704-00600893b1bd"
+  IDirectMusicCollection_GUID = "d2ac287c-b39b-11d1-8704-00600893b1bd"
+  IID_IDirectMusicCollection = LibC::GUID.new(0xd2ac287c_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
   struct IDirectMusicCollection
     lpVtbl : IDirectMusicCollectionVTbl*
   end
@@ -740,8 +740,8 @@ lib LibWin32
     get_buffer : Proc(IDirectMusicDownload*, Void**, UInt32*, HRESULT)
   end
 
-  IDirectMusicDownload_GUID = LibC::GUID.new("d2ac287b-b39b-11d1-8704-00600893b1bd")
-  CLSID_IDirectMusicDownload = "d2ac287b-b39b-11d1-8704-00600893b1bd"
+  IDirectMusicDownload_GUID = "d2ac287b-b39b-11d1-8704-00600893b1bd"
+  IID_IDirectMusicDownload = LibC::GUID.new(0xd2ac287b_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
   struct IDirectMusicDownload
     lpVtbl : IDirectMusicDownloadVTbl*
   end
@@ -758,8 +758,8 @@ lib LibWin32
     unload : Proc(IDirectMusicPortDownload*, IDirectMusicDownload, HRESULT)
   end
 
-  IDirectMusicPortDownload_GUID = LibC::GUID.new("d2ac287a-b39b-11d1-8704-00600893b1bd")
-  CLSID_IDirectMusicPortDownload = "d2ac287a-b39b-11d1-8704-00600893b1bd"
+  IDirectMusicPortDownload_GUID = "d2ac287a-b39b-11d1-8704-00600893b1bd"
+  IID_IDirectMusicPortDownload = LibC::GUID.new(0xd2ac287a_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
   struct IDirectMusicPortDownload
     lpVtbl : IDirectMusicPortDownloadVTbl*
   end
@@ -787,8 +787,8 @@ lib LibWin32
     get_format : Proc(IDirectMusicPort*, WAVEFORMATEX*, UInt32*, UInt32*, HRESULT)
   end
 
-  IDirectMusicPort_GUID = LibC::GUID.new("08f2d8c9-37c2-11d2-b9f9-0000f875ac12")
-  CLSID_IDirectMusicPort = "08f2d8c9-37c2-11d2-b9f9-0000f875ac12"
+  IDirectMusicPort_GUID = "08f2d8c9-37c2-11d2-b9f9-0000f875ac12"
+  IID_IDirectMusicPort = LibC::GUID.new(0x8f2d8c9_u32, 0x37c2_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xf9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
   struct IDirectMusicPort
     lpVtbl : IDirectMusicPortVTbl*
   end
@@ -800,8 +800,8 @@ lib LibWin32
     thru_channel : Proc(IDirectMusicThru*, UInt32, UInt32, UInt32, UInt32, IDirectMusicPort, HRESULT)
   end
 
-  IDirectMusicThru_GUID = LibC::GUID.new("ced153e7-3606-11d2-b9f9-0000f875ac12")
-  CLSID_IDirectMusicThru = "ced153e7-3606-11d2-b9f9-0000f875ac12"
+  IDirectMusicThru_GUID = "ced153e7-3606-11d2-b9f9-0000f875ac12"
+  IID_IDirectMusicThru = LibC::GUID.new(0xced153e7_u32, 0x3606_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xf9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
   struct IDirectMusicThru
     lpVtbl : IDirectMusicThruVTbl*
   end
@@ -829,8 +829,8 @@ lib LibWin32
     get_append : Proc(IDirectMusicSynth*, UInt32*, HRESULT)
   end
 
-  IDirectMusicSynth_GUID = LibC::GUID.new("09823661-5c85-11d2-afa6-00aa0024d8b6")
-  CLSID_IDirectMusicSynth = "09823661-5c85-11d2-afa6-00aa0024d8b6"
+  IDirectMusicSynth_GUID = "09823661-5c85-11d2-afa6-00aa0024d8b6"
+  IID_IDirectMusicSynth = LibC::GUID.new(0x9823661_u32, 0x5c85_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xa6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x24_u8, 0xd8_u8, 0xb6_u8])
   struct IDirectMusicSynth
     lpVtbl : IDirectMusicSynthVTbl*
   end
@@ -863,8 +863,8 @@ lib LibWin32
     assign_channel_to_buses : Proc(IDirectMusicSynth8*, UInt32, UInt32, UInt32*, UInt32, HRESULT)
   end
 
-  IDirectMusicSynth8_GUID = LibC::GUID.new("53cab625-2711-4c9f-9de7-1b7f925f6fc8")
-  CLSID_IDirectMusicSynth8 = "53cab625-2711-4c9f-9de7-1b7f925f6fc8"
+  IDirectMusicSynth8_GUID = "53cab625-2711-4c9f-9de7-1b7f925f6fc8"
+  IID_IDirectMusicSynth8 = LibC::GUID.new(0x53cab625_u32, 0x2711_u16, 0x4c9f_u16, StaticArray[0x9d_u8, 0xe7_u8, 0x1b_u8, 0x7f_u8, 0x92_u8, 0x5f_u8, 0x6f_u8, 0xc8_u8])
   struct IDirectMusicSynth8
     lpVtbl : IDirectMusicSynth8VTbl*
   end
@@ -883,8 +883,8 @@ lib LibWin32
     get_desired_buffer_size : Proc(IDirectMusicSynthSink*, UInt32*, HRESULT)
   end
 
-  IDirectMusicSynthSink_GUID = LibC::GUID.new("09823663-5c85-11d2-afa6-00aa0024d8b6")
-  CLSID_IDirectMusicSynthSink = "09823663-5c85-11d2-afa6-00aa0024d8b6"
+  IDirectMusicSynthSink_GUID = "09823663-5c85-11d2-afa6-00aa0024d8b6"
+  IID_IDirectMusicSynthSink = LibC::GUID.new(0x9823663_u32, 0x5c85_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xa6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x24_u8, 0xd8_u8, 0xb6_u8])
   struct IDirectMusicSynthSink
     lpVtbl : IDirectMusicSynthSinkVTbl*
   end

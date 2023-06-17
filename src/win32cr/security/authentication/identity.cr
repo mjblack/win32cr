@@ -4496,8 +4496,8 @@ lib LibWin32
     get_password_credentials : Proc(ICcgDomainAuthCredentials*, LibC::LPWSTR, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
   end
 
-  ICcgDomainAuthCredentials_GUID = LibC::GUID.new("6ecda518-2010-4437-8bc3-46e752b7b172")
-  CLSID_ICcgDomainAuthCredentials = "6ecda518-2010-4437-8bc3-46e752b7b172"
+  ICcgDomainAuthCredentials_GUID = "6ecda518-2010-4437-8bc3-46e752b7b172"
+  IID_ICcgDomainAuthCredentials = LibC::GUID.new(0x6ecda518_u32, 0x2010_u16, 0x4437_u16, StaticArray[0x8b_u8, 0xc3_u8, 0x46_u8, 0xe7_u8, 0x52_u8, 0xb7_u8, 0xb1_u8, 0x72_u8])
   struct ICcgDomainAuthCredentials
     lpVtbl : ICcgDomainAuthCredentialsVTbl*
   end

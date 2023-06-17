@@ -517,8 +517,8 @@ lib LibWin32
     deserialize : Proc(IWSDAddress*, LibC::LPWSTR, HRESULT)
   end
 
-  IWSDAddress_GUID = LibC::GUID.new("b9574c6c-12a6-4f74-93a1-3318ff605759")
-  CLSID_IWSDAddress = "b9574c6c-12a6-4f74-93a1-3318ff605759"
+  IWSDAddress_GUID = "b9574c6c-12a6-4f74-93a1-3318ff605759"
+  IID_IWSDAddress = LibC::GUID.new(0xb9574c6c_u32, 0x12a6_u16, 0x4f74_u16, StaticArray[0x93_u8, 0xa1_u8, 0x33_u8, 0x18_u8, 0xff_u8, 0x60_u8, 0x57_u8, 0x59_u8])
   struct IWSDAddress
     lpVtbl : IWSDAddressVTbl*
   end
@@ -536,8 +536,8 @@ lib LibWin32
     set_transport_address : Proc(IWSDTransportAddress*, LibC::LPWSTR, HRESULT)
   end
 
-  IWSDTransportAddress_GUID = LibC::GUID.new("70d23498-4ee6-4340-a3df-d845d2235467")
-  CLSID_IWSDTransportAddress = "70d23498-4ee6-4340-a3df-d845d2235467"
+  IWSDTransportAddress_GUID = "70d23498-4ee6-4340-a3df-d845d2235467"
+  IID_IWSDTransportAddress = LibC::GUID.new(0x70d23498_u32, 0x4ee6_u16, 0x4340_u16, StaticArray[0xa3_u8, 0xdf_u8, 0xd8_u8, 0x45_u8, 0xd2_u8, 0x23_u8, 0x54_u8, 0x67_u8])
   struct IWSDTransportAddress
     lpVtbl : IWSDTransportAddressVTbl*
   end
@@ -553,8 +553,8 @@ lib LibWin32
     get_lower_parameters : Proc(IWSDMessageParameters*, IWSDMessageParameters*, HRESULT)
   end
 
-  IWSDMessageParameters_GUID = LibC::GUID.new("1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c")
-  CLSID_IWSDMessageParameters = "1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c"
+  IWSDMessageParameters_GUID = "1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c"
+  IID_IWSDMessageParameters = LibC::GUID.new(0x1fafe8a2_u32, 0xe6fc_u16, 0x4b80_u16, StaticArray[0xb6_u8, 0xcf_u8, 0xb7_u8, 0xd4_u8, 0x5c_u8, 0x41_u8, 0x6d_u8, 0x7c_u8])
   struct IWSDMessageParameters
     lpVtbl : IWSDMessageParametersVTbl*
   end
@@ -572,8 +572,8 @@ lib LibWin32
     get_retransmit_params : Proc(IWSDUdpMessageParameters*, WSDUdpRetransmitParams*, HRESULT)
   end
 
-  IWSDUdpMessageParameters_GUID = LibC::GUID.new("9934149f-8f0c-447b-aa0b-73124b0ca7f0")
-  CLSID_IWSDUdpMessageParameters = "9934149f-8f0c-447b-aa0b-73124b0ca7f0"
+  IWSDUdpMessageParameters_GUID = "9934149f-8f0c-447b-aa0b-73124b0ca7f0"
+  IID_IWSDUdpMessageParameters = LibC::GUID.new(0x9934149f_u32, 0x8f0c_u16, 0x447b_u16, StaticArray[0xaa_u8, 0xb_u8, 0x73_u8, 0x12_u8, 0x4b_u8, 0xc_u8, 0xa7_u8, 0xf0_u8])
   struct IWSDUdpMessageParameters
     lpVtbl : IWSDUdpMessageParametersVTbl*
   end
@@ -601,8 +601,8 @@ lib LibWin32
     get_alias : Proc(IWSDUdpAddress*, Guid*, HRESULT)
   end
 
-  IWSDUdpAddress_GUID = LibC::GUID.new("74d6124a-a441-4f78-a1eb-97a8d1996893")
-  CLSID_IWSDUdpAddress = "74d6124a-a441-4f78-a1eb-97a8d1996893"
+  IWSDUdpAddress_GUID = "74d6124a-a441-4f78-a1eb-97a8d1996893"
+  IID_IWSDUdpAddress = LibC::GUID.new(0x74d6124a_u32, 0xa441_u16, 0x4f78_u16, StaticArray[0xa1_u8, 0xeb_u8, 0x97_u8, 0xa8_u8, 0xd1_u8, 0x99_u8, 0x68_u8, 0x93_u8])
   struct IWSDUdpAddress
     lpVtbl : IWSDUdpAddressVTbl*
   end
@@ -627,8 +627,8 @@ lib LibWin32
     clear : Proc(IWSDHttpMessageParameters*, HRESULT)
   end
 
-  IWSDHttpMessageParameters_GUID = LibC::GUID.new("540bd122-5c83-4dec-b396-ea62a2697fdf")
-  CLSID_IWSDHttpMessageParameters = "540bd122-5c83-4dec-b396-ea62a2697fdf"
+  IWSDHttpMessageParameters_GUID = "540bd122-5c83-4dec-b396-ea62a2697fdf"
+  IID_IWSDHttpMessageParameters = LibC::GUID.new(0x540bd122_u32, 0x5c83_u16, 0x4dec_u16, StaticArray[0xb3_u8, 0x96_u8, 0xea_u8, 0x62_u8, 0xa2_u8, 0x69_u8, 0x7f_u8, 0xdf_u8])
   struct IWSDHttpMessageParameters
     lpVtbl : IWSDHttpMessageParametersVTbl*
   end
@@ -650,8 +650,8 @@ lib LibWin32
     set_path : Proc(IWSDHttpAddress*, LibC::LPWSTR, HRESULT)
   end
 
-  IWSDHttpAddress_GUID = LibC::GUID.new("d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0")
-  CLSID_IWSDHttpAddress = "d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0"
+  IWSDHttpAddress_GUID = "d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0"
+  IID_IWSDHttpAddress = LibC::GUID.new(0xd09ac7bd_u32, 0x2a3e_u16, 0x4b85_u16, StaticArray[0x86_u8, 0x5_u8, 0x27_u8, 0x37_u8, 0xff_u8, 0x3e_u8, 0x4e_u8, 0xa0_u8])
   struct IWSDHttpAddress
     lpVtbl : IWSDHttpAddressVTbl*
   end
@@ -664,8 +664,8 @@ lib LibWin32
     get_mapped_access_token : Proc(IWSDSSLClientCertificate*, LibC::HANDLE*, HRESULT)
   end
 
-  IWSDSSLClientCertificate_GUID = LibC::GUID.new("de105e87-a0da-418e-98ad-27b9eed87bdc")
-  CLSID_IWSDSSLClientCertificate = "de105e87-a0da-418e-98ad-27b9eed87bdc"
+  IWSDSSLClientCertificate_GUID = "de105e87-a0da-418e-98ad-27b9eed87bdc"
+  IID_IWSDSSLClientCertificate = LibC::GUID.new(0xde105e87_u32, 0xa0da_u16, 0x418e_u16, StaticArray[0x98_u8, 0xad_u8, 0x27_u8, 0xb9_u8, 0xee_u8, 0xd8_u8, 0x7b_u8, 0xdc_u8])
   struct IWSDSSLClientCertificate
     lpVtbl : IWSDSSLClientCertificateVTbl*
   end
@@ -678,8 +678,8 @@ lib LibWin32
     get_auth_type : Proc(IWSDHttpAuthParameters*, UInt32*, HRESULT)
   end
 
-  IWSDHttpAuthParameters_GUID = LibC::GUID.new("0b476df0-8dac-480d-b05c-99781a5884aa")
-  CLSID_IWSDHttpAuthParameters = "0b476df0-8dac-480d-b05c-99781a5884aa"
+  IWSDHttpAuthParameters_GUID = "0b476df0-8dac-480d-b05c-99781a5884aa"
+  IID_IWSDHttpAuthParameters = LibC::GUID.new(0xb476df0_u32, 0x8dac_u16, 0x480d_u16, StaticArray[0xb0_u8, 0x5c_u8, 0x99_u8, 0x78_u8, 0x1a_u8, 0x58_u8, 0x84_u8, 0xaa_u8])
   struct IWSDHttpAuthParameters
     lpVtbl : IWSDHttpAuthParametersVTbl*
   end
@@ -695,8 +695,8 @@ lib LibWin32
     get_signed_info_hash : Proc(IWSDSignatureProperty*, UInt8*, UInt32*, HRESULT)
   end
 
-  IWSDSignatureProperty_GUID = LibC::GUID.new("03ce20aa-71c4-45e2-b32e-3766c61c790f")
-  CLSID_IWSDSignatureProperty = "03ce20aa-71c4-45e2-b32e-3766c61c790f"
+  IWSDSignatureProperty_GUID = "03ce20aa-71c4-45e2-b32e-3766c61c790f"
+  IID_IWSDSignatureProperty = LibC::GUID.new(0x3ce20aa_u32, 0x71c4_u16, 0x45e2_u16, StaticArray[0xb3_u8, 0x2e_u8, 0x37_u8, 0x66_u8, 0xc6_u8, 0x1c_u8, 0x79_u8, 0xf_u8])
   struct IWSDSignatureProperty
     lpVtbl : IWSDSignaturePropertyVTbl*
   end
@@ -707,8 +707,8 @@ lib LibWin32
     release : Proc(IWSDAttachment*, UInt32)
   end
 
-  IWSDAttachment_GUID = LibC::GUID.new("5d55a616-9df8-4b09-b156-9ba351a48b76")
-  CLSID_IWSDAttachment = "5d55a616-9df8-4b09-b156-9ba351a48b76"
+  IWSDAttachment_GUID = "5d55a616-9df8-4b09-b156-9ba351a48b76"
+  IID_IWSDAttachment = LibC::GUID.new(0x5d55a616_u32, 0x9df8_u16, 0x4b09_u16, StaticArray[0xb1_u8, 0x56_u8, 0x9b_u8, 0xa3_u8, 0x51_u8, 0xa4_u8, 0x8b_u8, 0x76_u8])
   struct IWSDAttachment
     lpVtbl : IWSDAttachmentVTbl*
   end
@@ -722,8 +722,8 @@ lib LibWin32
     abort : Proc(IWSDOutboundAttachment*, HRESULT)
   end
 
-  IWSDOutboundAttachment_GUID = LibC::GUID.new("aa302f8d-5a22-4ba5-b392-aa8486f4c15d")
-  CLSID_IWSDOutboundAttachment = "aa302f8d-5a22-4ba5-b392-aa8486f4c15d"
+  IWSDOutboundAttachment_GUID = "aa302f8d-5a22-4ba5-b392-aa8486f4c15d"
+  IID_IWSDOutboundAttachment = LibC::GUID.new(0xaa302f8d_u32, 0x5a22_u16, 0x4ba5_u16, StaticArray[0xb3_u8, 0x92_u8, 0xaa_u8, 0x84_u8, 0x86_u8, 0xf4_u8, 0xc1_u8, 0x5d_u8])
   struct IWSDOutboundAttachment
     lpVtbl : IWSDOutboundAttachmentVTbl*
   end
@@ -736,8 +736,8 @@ lib LibWin32
     close : Proc(IWSDInboundAttachment*, HRESULT)
   end
 
-  IWSDInboundAttachment_GUID = LibC::GUID.new("5bd6ca65-233c-4fb8-9f7a-2641619655c9")
-  CLSID_IWSDInboundAttachment = "5bd6ca65-233c-4fb8-9f7a-2641619655c9"
+  IWSDInboundAttachment_GUID = "5bd6ca65-233c-4fb8-9f7a-2641619655c9"
+  IID_IWSDInboundAttachment = LibC::GUID.new(0x5bd6ca65_u32, 0x233c_u16, 0x4fb8_u16, StaticArray[0x9f_u8, 0x7a_u8, 0x26_u8, 0x41_u8, 0x61_u8, 0x96_u8, 0x55_u8, 0xc9_u8])
   struct IWSDInboundAttachment
     lpVtbl : IWSDInboundAttachmentVTbl*
   end
@@ -752,8 +752,8 @@ lib LibWin32
     set_types : Proc(IWSDXMLContext*, WSDXML_TYPE**, UInt32, UInt8, HRESULT)
   end
 
-  IWSDXMLContext_GUID = LibC::GUID.new("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0")
-  CLSID_IWSDXMLContext = "75d8f3ee-3e5a-43b4-a15a-bcf6887460c0"
+  IWSDXMLContext_GUID = "75d8f3ee-3e5a-43b4-a15a-bcf6887460c0"
+  IID_IWSDXMLContext = LibC::GUID.new(0x75d8f3ee_u32, 0x3e5a_u16, 0x43b4_u16, StaticArray[0xa1_u8, 0x5a_u8, 0xbc_u8, 0xf6_u8, 0x88_u8, 0x74_u8, 0x60_u8, 0xc0_u8])
   struct IWSDXMLContext
     lpVtbl : IWSDXMLContextVTbl*
   end
@@ -771,8 +771,8 @@ lib LibWin32
     get_xml_context : Proc(IWSDiscoveryProvider*, IWSDXMLContext*, HRESULT)
   end
 
-  IWSDiscoveryProvider_GUID = LibC::GUID.new("8ffc8e55-f0eb-480f-88b7-b435dd281d45")
-  CLSID_IWSDiscoveryProvider = "8ffc8e55-f0eb-480f-88b7-b435dd281d45"
+  IWSDiscoveryProvider_GUID = "8ffc8e55-f0eb-480f-88b7-b435dd281d45"
+  IID_IWSDiscoveryProvider = LibC::GUID.new(0x8ffc8e55_u32, 0xf0eb_u16, 0x480f_u16, StaticArray[0x88_u8, 0xb7_u8, 0xb4_u8, 0x35_u8, 0xdd_u8, 0x28_u8, 0x1d_u8, 0x45_u8])
   struct IWSDiscoveryProvider
     lpVtbl : IWSDiscoveryProviderVTbl*
   end
@@ -787,8 +787,8 @@ lib LibWin32
     search_complete : Proc(IWSDiscoveryProviderNotify*, LibC::LPWSTR, HRESULT)
   end
 
-  IWSDiscoveryProviderNotify_GUID = LibC::GUID.new("73ee3ced-b6e6-4329-a546-3e8ad46563d2")
-  CLSID_IWSDiscoveryProviderNotify = "73ee3ced-b6e6-4329-a546-3e8ad46563d2"
+  IWSDiscoveryProviderNotify_GUID = "73ee3ced-b6e6-4329-a546-3e8ad46563d2"
+  IID_IWSDiscoveryProviderNotify = LibC::GUID.new(0x73ee3ced_u32, 0xb6e6_u16, 0x4329_u16, StaticArray[0xa5_u8, 0x46_u8, 0x3e_u8, 0x8a_u8, 0xd4_u8, 0x65_u8, 0x63_u8, 0xd2_u8])
   struct IWSDiscoveryProviderNotify
     lpVtbl : IWSDiscoveryProviderNotifyVTbl*
   end
@@ -810,8 +810,8 @@ lib LibWin32
     get_instance_id : Proc(IWSDiscoveredService*, UInt64*, HRESULT)
   end
 
-  IWSDiscoveredService_GUID = LibC::GUID.new("4bad8a3b-b374-4420-9632-aac945b374aa")
-  CLSID_IWSDiscoveredService = "4bad8a3b-b374-4420-9632-aac945b374aa"
+  IWSDiscoveredService_GUID = "4bad8a3b-b374-4420-9632-aac945b374aa"
+  IID_IWSDiscoveredService = LibC::GUID.new(0x4bad8a3b_u32, 0xb374_u16, 0x4420_u16, StaticArray[0x96_u8, 0x32_u8, 0xaa_u8, 0xc9_u8, 0x45_u8, 0xb3_u8, 0x74_u8, 0xaa_u8])
   struct IWSDiscoveredService
     lpVtbl : IWSDiscoveredServiceVTbl*
   end
@@ -835,8 +835,8 @@ lib LibWin32
     get_xml_context : Proc(IWSDiscoveryPublisher*, IWSDXMLContext*, HRESULT)
   end
 
-  IWSDiscoveryPublisher_GUID = LibC::GUID.new("ae01e1a8-3ff9-4148-8116-057cc616fe13")
-  CLSID_IWSDiscoveryPublisher = "ae01e1a8-3ff9-4148-8116-057cc616fe13"
+  IWSDiscoveryPublisher_GUID = "ae01e1a8-3ff9-4148-8116-057cc616fe13"
+  IID_IWSDiscoveryPublisher = LibC::GUID.new(0xae01e1a8_u32, 0x3ff9_u16, 0x4148_u16, StaticArray[0x81_u8, 0x16_u8, 0x5_u8, 0x7c_u8, 0xc6_u8, 0x16_u8, 0xfe_u8, 0x13_u8])
   struct IWSDiscoveryPublisher
     lpVtbl : IWSDiscoveryPublisherVTbl*
   end
@@ -849,8 +849,8 @@ lib LibWin32
     resolve_handler : Proc(IWSDiscoveryPublisherNotify*, WSD_SOAP_MESSAGE*, IWSDMessageParameters, HRESULT)
   end
 
-  IWSDiscoveryPublisherNotify_GUID = LibC::GUID.new("e67651b0-337a-4b3c-9758-733388568251")
-  CLSID_IWSDiscoveryPublisherNotify = "e67651b0-337a-4b3c-9758-733388568251"
+  IWSDiscoveryPublisherNotify_GUID = "e67651b0-337a-4b3c-9758-733388568251"
+  IID_IWSDiscoveryPublisherNotify = LibC::GUID.new(0xe67651b0_u32, 0x337a_u16, 0x4b3c_u16, StaticArray[0x97_u8, 0x58_u8, 0x73_u8, 0x33_u8, 0x88_u8, 0x56_u8, 0x82_u8, 0x51_u8])
   struct IWSDiscoveryPublisherNotify
     lpVtbl : IWSDiscoveryPublisherNotifyVTbl*
   end
@@ -863,8 +863,8 @@ lib LibWin32
     match_scopes : Proc(IWSDScopeMatchingRule*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL*, HRESULT)
   end
 
-  IWSDScopeMatchingRule_GUID = LibC::GUID.new("fcafe424-fef5-481a-bd9f-33ce0574256f")
-  CLSID_IWSDScopeMatchingRule = "fcafe424-fef5-481a-bd9f-33ce0574256f"
+  IWSDScopeMatchingRule_GUID = "fcafe424-fef5-481a-bd9f-33ce0574256f"
+  IID_IWSDScopeMatchingRule = LibC::GUID.new(0xfcafe424_u32, 0xfef5_u16, 0x481a_u16, StaticArray[0xbd_u8, 0x9f_u8, 0x33_u8, 0xce_u8, 0x5_u8, 0x74_u8, 0x25_u8, 0x6f_u8])
   struct IWSDScopeMatchingRule
     lpVtbl : IWSDScopeMatchingRuleVTbl*
   end
@@ -882,8 +882,8 @@ lib LibWin32
     get_fault_info : Proc(IWSDEndpointProxy*, WSD_SOAP_FAULT**, HRESULT)
   end
 
-  IWSDEndpointProxy_GUID = LibC::GUID.new("1860d430-b24c-4975-9f90-dbb39baa24ec")
-  CLSID_IWSDEndpointProxy = "1860d430-b24c-4975-9f90-dbb39baa24ec"
+  IWSDEndpointProxy_GUID = "1860d430-b24c-4975-9f90-dbb39baa24ec"
+  IID_IWSDEndpointProxy = LibC::GUID.new(0x1860d430_u32, 0xb24c_u16, 0x4975_u16, StaticArray[0x9f_u8, 0x90_u8, 0xdb_u8, 0xb3_u8, 0x9b_u8, 0xaa_u8, 0x24_u8, 0xec_u8])
   struct IWSDEndpointProxy
     lpVtbl : IWSDEndpointProxyVTbl*
   end
@@ -895,8 +895,8 @@ lib LibWin32
     get_metadata : Proc(IWSDMetadataExchange*, WSD_METADATA_SECTION_LIST**, HRESULT)
   end
 
-  IWSDMetadataExchange_GUID = LibC::GUID.new("06996d57-1d67-4928-9307-3d7833fdb846")
-  CLSID_IWSDMetadataExchange = "06996d57-1d67-4928-9307-3d7833fdb846"
+  IWSDMetadataExchange_GUID = "06996d57-1d67-4928-9307-3d7833fdb846"
+  IID_IWSDMetadataExchange = LibC::GUID.new(0x6996d57_u32, 0x1d67_u16, 0x4928_u16, StaticArray[0x93_u8, 0x7_u8, 0x3d_u8, 0x78_u8, 0x33_u8, 0xfd_u8, 0xb8_u8, 0x46_u8])
   struct IWSDMetadataExchange
     lpVtbl : IWSDMetadataExchangeVTbl*
   end
@@ -915,8 +915,8 @@ lib LibWin32
     get_endpoint_proxy : Proc(IWSDServiceProxy*, IWSDEndpointProxy*, HRESULT)
   end
 
-  IWSDServiceProxy_GUID = LibC::GUID.new("d4c7fb9c-03ab-4175-9d67-094fafebf487")
-  CLSID_IWSDServiceProxy = "d4c7fb9c-03ab-4175-9d67-094fafebf487"
+  IWSDServiceProxy_GUID = "d4c7fb9c-03ab-4175-9d67-094fafebf487"
+  IID_IWSDServiceProxy = LibC::GUID.new(0xd4c7fb9c_u32, 0x3ab_u16, 0x4175_u16, StaticArray[0x9d_u8, 0x67_u8, 0x9_u8, 0x4f_u8, 0xaf_u8, 0xeb_u8, 0xf4_u8, 0x87_u8])
   struct IWSDServiceProxy
     lpVtbl : IWSDServiceProxyVTbl*
   end
@@ -947,8 +947,8 @@ lib LibWin32
     end_get_status_for_multiple_operations : Proc(IWSDServiceProxyEventing*, WSD_OPERATION*, UInt32, IWSDAsyncResult, WSD_EVENTING_EXPIRES**, WSDXML_ELEMENT**, HRESULT)
   end
 
-  IWSDServiceProxyEventing_GUID = LibC::GUID.new("f9279d6d-1012-4a94-b8cc-fd35d2202bfe")
-  CLSID_IWSDServiceProxyEventing = "f9279d6d-1012-4a94-b8cc-fd35d2202bfe"
+  IWSDServiceProxyEventing_GUID = "f9279d6d-1012-4a94-b8cc-fd35d2202bfe"
+  IID_IWSDServiceProxyEventing = LibC::GUID.new(0xf9279d6d_u32, 0x1012_u16, 0x4a94_u16, StaticArray[0xb8_u8, 0xcc_u8, 0xfd_u8, 0x35_u8, 0xd2_u8, 0x20_u8, 0x2b_u8, 0xfe_u8])
   struct IWSDServiceProxyEventing
     lpVtbl : IWSDServiceProxyEventingVTbl*
   end
@@ -969,8 +969,8 @@ lib LibWin32
     get_endpoint_proxy : Proc(IWSDDeviceProxy*, IWSDEndpointProxy*, HRESULT)
   end
 
-  IWSDDeviceProxy_GUID = LibC::GUID.new("eee0c031-c578-4c0e-9a3b-973c35f409db")
-  CLSID_IWSDDeviceProxy = "eee0c031-c578-4c0e-9a3b-973c35f409db"
+  IWSDDeviceProxy_GUID = "eee0c031-c578-4c0e-9a3b-973c35f409db"
+  IID_IWSDDeviceProxy = LibC::GUID.new(0xeee0c031_u32, 0xc578_u16, 0x4c0e_u16, StaticArray[0x9a_u8, 0x3b_u8, 0x97_u8, 0x3c_u8, 0x35_u8, 0xf4_u8, 0x9_u8, 0xdb_u8])
   struct IWSDDeviceProxy
     lpVtbl : IWSDDeviceProxyVTbl*
   end
@@ -988,8 +988,8 @@ lib LibWin32
     get_endpoint_proxy : Proc(IWSDAsyncResult*, IWSDEndpointProxy*, HRESULT)
   end
 
-  IWSDAsyncResult_GUID = LibC::GUID.new("11a9852a-8dd8-423e-b537-9356db4fbfb8")
-  CLSID_IWSDAsyncResult = "11a9852a-8dd8-423e-b537-9356db4fbfb8"
+  IWSDAsyncResult_GUID = "11a9852a-8dd8-423e-b537-9356db4fbfb8"
+  IID_IWSDAsyncResult = LibC::GUID.new(0x11a9852a_u32, 0x8dd8_u16, 0x423e_u16, StaticArray[0xb5_u8, 0x37_u8, 0x93_u8, 0x56_u8, 0xdb_u8, 0x4f_u8, 0xbf_u8, 0xb8_u8])
   struct IWSDAsyncResult
     lpVtbl : IWSDAsyncResultVTbl*
   end
@@ -1001,8 +1001,8 @@ lib LibWin32
     async_operation_complete : Proc(IWSDAsyncCallback*, IWSDAsyncResult, IUnknown, HRESULT)
   end
 
-  IWSDAsyncCallback_GUID = LibC::GUID.new("a63e109d-ce72-49e2-ba98-e845f5ee1666")
-  CLSID_IWSDAsyncCallback = "a63e109d-ce72-49e2-ba98-e845f5ee1666"
+  IWSDAsyncCallback_GUID = "a63e109d-ce72-49e2-ba98-e845f5ee1666"
+  IID_IWSDAsyncCallback = LibC::GUID.new(0xa63e109d_u32, 0xce72_u16, 0x49e2_u16, StaticArray[0xba_u8, 0x98_u8, 0xe8_u8, 0x45_u8, 0xf5_u8, 0xee_u8, 0x16_u8, 0x66_u8])
   struct IWSDAsyncCallback
     lpVtbl : IWSDAsyncCallbackVTbl*
   end
@@ -1016,8 +1016,8 @@ lib LibWin32
     subscription_ended : Proc(IWSDEventingStatus*, LibC::LPWSTR, Void)
   end
 
-  IWSDEventingStatus_GUID = LibC::GUID.new("49b17f52-637a-407a-ae99-fbe82a4d38c0")
-  CLSID_IWSDEventingStatus = "49b17f52-637a-407a-ae99-fbe82a4d38c0"
+  IWSDEventingStatus_GUID = "49b17f52-637a-407a-ae99-fbe82a4d38c0"
+  IID_IWSDEventingStatus = LibC::GUID.new(0x49b17f52_u32, 0x637a_u16, 0x407a_u16, StaticArray[0xae_u8, 0x99_u8, 0xfb_u8, 0xe8_u8, 0x2a_u8, 0x4d_u8, 0x38_u8, 0xc0_u8])
   struct IWSDEventingStatus
     lpVtbl : IWSDEventingStatusVTbl*
   end
@@ -1040,8 +1040,8 @@ lib LibWin32
     signal_event : Proc(IWSDDeviceHost*, LibC::LPWSTR, Void*, WSD_OPERATION*, HRESULT)
   end
 
-  IWSDDeviceHost_GUID = LibC::GUID.new("917fe891-3d13-4138-9809-934c8abeb12c")
-  CLSID_IWSDDeviceHost = "917fe891-3d13-4138-9809-934c8abeb12c"
+  IWSDDeviceHost_GUID = "917fe891-3d13-4138-9809-934c8abeb12c"
+  IID_IWSDDeviceHost = LibC::GUID.new(0x917fe891_u32, 0x3d13_u16, 0x4138_u16, StaticArray[0x98_u8, 0x9_u8, 0x93_u8, 0x4c_u8, 0x8a_u8, 0xbe_u8, 0xb1_u8, 0x2c_u8])
   struct IWSDDeviceHost
     lpVtbl : IWSDDeviceHostVTbl*
   end
@@ -1053,8 +1053,8 @@ lib LibWin32
     get_service : Proc(IWSDDeviceHostNotify*, LibC::LPWSTR, IUnknown*, HRESULT)
   end
 
-  IWSDDeviceHostNotify_GUID = LibC::GUID.new("b5bee9f9-eeda-41fe-96f7-f45e14990fb0")
-  CLSID_IWSDDeviceHostNotify = "b5bee9f9-eeda-41fe-96f7-f45e14990fb0"
+  IWSDDeviceHostNotify_GUID = "b5bee9f9-eeda-41fe-96f7-f45e14990fb0"
+  IID_IWSDDeviceHostNotify = LibC::GUID.new(0xb5bee9f9_u32, 0xeeda_u16, 0x41fe_u16, StaticArray[0x96_u8, 0xf7_u8, 0xf4_u8, 0x5e_u8, 0x14_u8, 0x99_u8, 0xf_u8, 0xb0_u8])
   struct IWSDDeviceHostNotify
     lpVtbl : IWSDDeviceHostNotifyVTbl*
   end
@@ -1067,8 +1067,8 @@ lib LibWin32
     fault_request : Proc(IWSDServiceMessaging*, WSD_SOAP_HEADER*, IWSDMessageParameters, WSD_SOAP_FAULT*, HRESULT)
   end
 
-  IWSDServiceMessaging_GUID = LibC::GUID.new("94974cf4-0cab-460d-a3f6-7a0ad623c0e6")
-  CLSID_IWSDServiceMessaging = "94974cf4-0cab-460d-a3f6-7a0ad623c0e6"
+  IWSDServiceMessaging_GUID = "94974cf4-0cab-460d-a3f6-7a0ad623c0e6"
+  IID_IWSDServiceMessaging = LibC::GUID.new(0x94974cf4_u32, 0xcab_u16, 0x460d_u16, StaticArray[0xa3_u8, 0xf6_u8, 0x7a_u8, 0xa_u8, 0xd6_u8, 0x23_u8, 0xc0_u8, 0xe6_u8])
   struct IWSDServiceMessaging
     lpVtbl : IWSDServiceMessagingVTbl*
   end

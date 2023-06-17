@@ -110,8 +110,8 @@ lib LibWin32
     flush_output_stream : Proc(IMFDeviceTransform*, UInt32, UInt32, HRESULT)
   end
 
-  IMFDeviceTransform_GUID = LibC::GUID.new("d818fbd8-fc46-42f2-87ac-1ea2d1f9bf32")
-  CLSID_IMFDeviceTransform = "d818fbd8-fc46-42f2-87ac-1ea2d1f9bf32"
+  IMFDeviceTransform_GUID = "d818fbd8-fc46-42f2-87ac-1ea2d1f9bf32"
+  IID_IMFDeviceTransform = LibC::GUID.new(0xd818fbd8_u32, 0xfc46_u16, 0x42f2_u16, StaticArray[0x87_u8, 0xac_u8, 0x1e_u8, 0xa2_u8, 0xd1_u8, 0xf9_u8, 0xbf_u8, 0x32_u8])
   struct IMFDeviceTransform
     lpVtbl : IMFDeviceTransformVTbl*
   end
@@ -123,8 +123,8 @@ lib LibWin32
     on_buffer_sent : Proc(IMFDeviceTransformCallback*, IMFAttributes, UInt32, HRESULT)
   end
 
-  IMFDeviceTransformCallback_GUID = LibC::GUID.new("6d5cb646-29ec-41fb-8179-8c4c6d750811")
-  CLSID_IMFDeviceTransformCallback = "6d5cb646-29ec-41fb-8179-8c4c6d750811"
+  IMFDeviceTransformCallback_GUID = "6d5cb646-29ec-41fb-8179-8c4c6d750811"
+  IID_IMFDeviceTransformCallback = LibC::GUID.new(0x6d5cb646_u32, 0x29ec_u16, 0x41fb_u16, StaticArray[0x81_u8, 0x79_u8, 0x8c_u8, 0x4c_u8, 0x6d_u8, 0x75_u8, 0x8_u8, 0x11_u8])
   struct IMFDeviceTransformCallback
     lpVtbl : IMFDeviceTransformCallbackVTbl*
   end

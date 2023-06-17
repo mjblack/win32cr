@@ -27,8 +27,8 @@ lib LibWin32
     get_data : Proc(ISoftwareBitmapNative*, Guid*, Void**, HRESULT)
   end
 
-  ISoftwareBitmapNative_GUID = LibC::GUID.new("94bc8415-04ea-4b2e-af13-4de95aa898eb")
-  CLSID_ISoftwareBitmapNative = "94bc8415-04ea-4b2e-af13-4de95aa898eb"
+  ISoftwareBitmapNative_GUID = "94bc8415-04ea-4b2e-af13-4de95aa898eb"
+  IID_ISoftwareBitmapNative = LibC::GUID.new(0x94bc8415_u32, 0x4ea_u16, 0x4b2e_u16, StaticArray[0xaf_u8, 0x13_u8, 0x4d_u8, 0xe9_u8, 0x5a_u8, 0xa8_u8, 0x98_u8, 0xeb_u8])
   struct ISoftwareBitmapNative
     lpVtbl : ISoftwareBitmapNativeVTbl*
   end
@@ -44,8 +44,8 @@ lib LibWin32
     create_from_mf2_d_buffer2 : Proc(ISoftwareBitmapNativeFactory*, IMF2DBuffer2, Guid*, UInt32, UInt32, LibC::BOOL, MFVideoArea*, Guid*, Void**, HRESULT)
   end
 
-  ISoftwareBitmapNativeFactory_GUID = LibC::GUID.new("c3c181ec-2914-4791-af02-02d224a10b43")
-  CLSID_ISoftwareBitmapNativeFactory = "c3c181ec-2914-4791-af02-02d224a10b43"
+  ISoftwareBitmapNativeFactory_GUID = "c3c181ec-2914-4791-af02-02d224a10b43"
+  IID_ISoftwareBitmapNativeFactory = LibC::GUID.new(0xc3c181ec_u32, 0x2914_u16, 0x4791_u16, StaticArray[0xaf_u8, 0x2_u8, 0x2_u8, 0xd2_u8, 0x24_u8, 0xa1_u8, 0xb_u8, 0x43_u8])
   struct ISoftwareBitmapNativeFactory
     lpVtbl : ISoftwareBitmapNativeFactoryVTbl*
   end
