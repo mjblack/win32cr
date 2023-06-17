@@ -9,9 +9,6 @@ require "../../../graphics/direct2d.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
 
   enum GRAPHICS_EFFECT_PROPERTY_MAPPING : Int32

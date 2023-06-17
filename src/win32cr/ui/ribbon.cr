@@ -11,9 +11,6 @@ require "../graphics/gdi.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   UI_ALL_COMMANDS = 0_u32
   UI_COLLECTION_INVALIDINDEX = 4294967295_u32

@@ -7,9 +7,6 @@ require "../foundation.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   FIND_RESOURCE_DIRECTORY_TYPES = 256_u32
   FIND_RESOURCE_DIRECTORY_NAMES = 512_u32

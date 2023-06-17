@@ -10,9 +10,6 @@ require "../system/com/structuredstorage.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   FD_EVENTID_PRIVATE = 100_u32
   FD_EVENTID = 1000_u32

@@ -10,9 +10,6 @@ require "../../graphics/direct3d12.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
 
   struct ILearningModelOperatorProviderNativeVTbl

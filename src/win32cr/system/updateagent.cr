@@ -8,9 +8,6 @@ require "../foundation.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   LIBID_WUApiLib = "b596cc9f-56e5-419e-a622-e01bb457431e"
   UPDATE_LOCKDOWN_WEBSITE_ACCESS = 1_u32

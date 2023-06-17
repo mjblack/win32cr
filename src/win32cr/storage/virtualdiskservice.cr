@@ -8,9 +8,6 @@ require "../system/com.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   VDS_NF_VOLUME_ARRIVE = 4_u32
   VDS_NF_VOLUME_DEPART = 5_u32

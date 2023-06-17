@@ -11,9 +11,6 @@ require "../devices/sensors.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   GNSS_DRIVER_VERSION_1 = 1_u32
   GNSS_DRIVER_VERSION_2 = 2_u32

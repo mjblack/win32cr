@@ -9,9 +9,6 @@ require "../ui/controls.cr"
 {% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
 @[Link(ldflags: "/IGNORE:4199")]
 {% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-{% else %}
-{% end %}
 lib LibWin32
   TASK_SUNDAY = 1_u32
   TASK_MONDAY = 2_u32
